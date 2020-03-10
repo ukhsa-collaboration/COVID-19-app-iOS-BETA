@@ -23,52 +23,64 @@
                                 </constraints>
                             </imageView>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" showsScale="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ie3-TD-I1x">
-                                <rect key="frame" x="0.0" y="77" width="414" height="311"/>
+                                <rect key="frame" x="0.0" y="77" width="414" height="200"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="311" id="Z1g-9C-mcm"/>
+                                    <constraint firstAttribute="height" constant="200" id="Z1g-9C-mcm"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="yZk-6O-zp7"/>
                                 </connections>
                             </mapView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location Status: Checking..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bni-wj-qMz">
-                                <rect key="frame" x="16" y="425" width="214" height="21"/>
+                                <rect key="frame" x="16" y="314" width="214" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bluetooth Status: Checking..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yal-cR-oCg">
-                                <rect key="frame" x="16" y="454" width="222.66666666666666" height="21"/>
+                                <rect key="frame" x="16" y="343" width="222.66666666666666" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nearby NHS Co-Locate users: Checking..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bci-Jt-lp0">
-                                <rect key="frame" x="16" y="483" width="321" height="21"/>
+                                <rect key="frame" x="16" y="372" width="321" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bluetooth beacon ID: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hdB-Ko-o4F">
-                                <rect key="frame" x="16" y="541" width="164.66666666666666" height="21"/>
+                                <rect key="frame" x="16" y="430" width="164.66666666666666" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My phone's beacon ID: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ugz-Q4-LH6">
-                                <rect key="frame" x="16" y="512" width="179" height="21"/>
+                                <rect key="frame" x="16" y="401" width="179" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bluetooth beacon proximity: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a9w-oS-9ZR">
-                                <rect key="frame" x="16" y="570" width="219" height="21"/>
+                                <rect key="frame" x="16" y="459" width="219" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bluetooth proximity accuracy: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bGG-JP-nQH">
-                                <rect key="frame" x="16" y="599" width="232" height="21"/>
+                                <rect key="frame" x="16" y="488" width="232" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Beacon Records Saved: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YqN-ZT-eD9">
+                                <rect key="frame" x="16" y="517" width="186" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last Accuracy: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="COa-h4-Qgl">
+                                <rect key="frame" x="16" y="546" width="118" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -91,17 +103,22 @@
                             <constraint firstItem="pgH-Ih-sYP" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Vow-nb-xCB"/>
                             <constraint firstItem="pgH-Ih-sYP" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="XrH-ff-DOl"/>
                             <constraint firstItem="ie3-TD-I1x" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="aSY-6P-EjK"/>
+                            <constraint firstItem="YqN-ZT-eD9" firstAttribute="top" secondItem="bGG-JP-nQH" secondAttribute="bottom" constant="8" id="cqx-PE-Vkw"/>
                             <constraint firstItem="hdB-Ko-o4F" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="e7U-Y8-rXM"/>
                             <constraint firstItem="ie3-TD-I1x" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="k4t-DP-8rd"/>
                             <constraint firstItem="a9w-oS-9ZR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="kjr-Zz-Eh1"/>
+                            <constraint firstItem="COa-h4-Qgl" firstAttribute="top" secondItem="YqN-ZT-eD9" secondAttribute="bottom" constant="8" id="nPa-ba-PRC"/>
                             <constraint firstItem="hdB-Ko-o4F" firstAttribute="top" secondItem="ugz-Q4-LH6" secondAttribute="bottom" constant="8" id="sOA-yS-Hs1"/>
                             <constraint firstItem="bni-wj-qMz" firstAttribute="top" secondItem="ie3-TD-I1x" secondAttribute="bottom" constant="37" id="tnf-vb-xXd"/>
+                            <constraint firstItem="COa-h4-Qgl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="uX4-hL-6sk"/>
                             <constraint firstItem="ie3-TD-I1x" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="yJp-ap-fhS"/>
+                            <constraint firstItem="YqN-ZT-eD9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="yQb-F1-cv7"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="bluetoothStatus" destination="yal-cR-oCg" id="ZoS-bY-Qhi"/>
+                        <outlet property="lastAccuracy" destination="COa-h4-Qgl" id="oeM-Wt-l29"/>
                         <outlet property="locationStatus" destination="bni-wj-qMz" id="0aH-Hu-os4"/>
                         <outlet property="mapView" destination="ie3-TD-I1x" id="HVh-sy-eax"/>
                         <outlet property="myBeaconID" destination="ugz-Q4-LH6" id="bka-hV-ai6"/>
@@ -109,6 +126,7 @@
                         <outlet property="nearBeaconID" destination="hdB-Ko-o4F" id="eVh-51-td3"/>
                         <outlet property="nearBeaconProximity" destination="a9w-oS-9ZR" id="hzu-sl-Xoh"/>
                         <outlet property="nearbyBeacons" destination="Bci-Jt-lp0" id="6ia-me-nej"/>
+                        <outlet property="recordsSaved" destination="YqN-ZT-eD9" id="zwf-9p-eWS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

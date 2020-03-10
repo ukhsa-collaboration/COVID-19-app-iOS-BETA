@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -42,5 +43,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 
+    var persistentContainer: NSPersistentContainer = {
+      let container = NSPersistentContainer(name: "BeaconModel")
+      container.loadPersistentStores(completionHandler: {
+       (storeDescription, error) in
+        print(storeDescription)
+      
+        if let error = error as NSError? {
+          fatalError("Unresolved error \(error), \(error.userInfo)")
+        }
+      })
+      return container
+    }()
+    func saveContext() {
+      let context = persistentContainer.viewContext
+      if context.hasChanges {
+        do {
+          try context.save()
+        } catch {
+          let err = error as NSError
+          fatalError("Unresolved error \(err), \(err.userInfo)")
+        }
+      }
+    }
 }
 

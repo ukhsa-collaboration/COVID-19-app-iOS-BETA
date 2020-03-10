@@ -10,12 +10,15 @@ import UIKit
 import MapKit
 import CoreLocation
 import CoreBluetooth
+import CoreData
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        print("Initialising device ID")
+        initDeviceID()
         print("Initialising location services")
         checkLocationServices()
         print("Initialising bluetooth services")
@@ -32,14 +35,77 @@ class ViewController: UIViewController {
     @IBOutlet weak var nearBeaconProximity: UILabel!
     @IBOutlet weak var myBeaconID: UILabel!
     @IBOutlet weak var nearBeaconAccuracy: UILabel!
+    @IBOutlet weak var recordsSaved: UILabel!
+    @IBOutlet weak var lastAccuracy: UILabel!
     
+    // Combination or MAJOR and MINOR gives many million ID options for a user on a given device
+    var major:UInt16?
+    var minor:UInt16?
+    
+    private var fetchedBeaconRC: NSFetchedResultsController<BeaconPing>!
+    private var appDelegate = UIApplication.shared.delegate as! AppDelegate
+    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     let locationManager = CLLocationManager()
     let regionInMeters:Double = 1000
     
     var peripheralManager:CBPeripheralManager?
     var transmitRegion:CLBeaconRegion?
+    var queryRegion:CLBeaconRegion?
     
+    //let coreDataManager = CoreDataManager(modelName: "BeaconModel")
+    
+    func initDeviceID() {
+        // TODO generate major and minor or check for JSON
+        //let path = Bundle.main.path(forResource: "locatedata.json", ofType: "json")
+        let path = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true)[0] as String
+        let url = NSURL(fileURLWithPath: path)
+        if let pathComponent = url.appendingPathComponent("locatedata.json") {
+            let filePath = pathComponent.path
+            let fileManager = FileManager.default
+            if fileManager.fileExists(atPath: filePath) {
+                print("FILE AVAILABLE")
+                // load major and minor
+                do {
+                    let fileUrl = URL(fileURLWithPath: filePath)
+                    let data = try Data(contentsOf: fileUrl, options: .mappedIfSafe)
+                    if let json = try JSONSerialization.jsonObject(with: data) as? [String: Any] {
+                        if let major = json["major"] as? UInt16 {
+                            self.major = major
+                        }
+                        if let minor = json["minor"] as? UInt16 {
+                            self.minor = minor
+                        }
+                    }
+                } catch {
+                    // Handle error here
+                }
+                print("READ USER JSON FILE")
+            } else {
+                print("FILE NOT AVAILABLE")
+                // generate uint16 at random
+                self.major = UInt16.random(in:UInt16.min...UInt16.max)
+                self.minor = UInt16.random(in:UInt16.min...UInt16.max)
+                // save to json file
+                var dictonary : [String : Any] = ["major": self.major,"minor": self.minor]
+                do {
+                    if let jsonData = try JSONSerialization.data(withJSONObject: dictonary, options: .init(rawValue: 0)) as? Data
+                    {
+                        // Check if everything went well
+                        print(NSString(data: jsonData, encoding: 1)!)
+
+                        try jsonData.write(to: pathComponent, options: [.atomicWrite])
+                    }
+                } catch {
+                    // TODO handle write errors
+                }
+                // TODO initialise registration of user
+                print("WRITTEN USER JSON FILE")
+            }
+        } else {
+            print("FILE PATH NOT AVAILABLE")
+        }
+    }
     func setupLocationManager() {
         locationManager.delegate = self;
         locationManager.desiredAccuracy = kCLLocationAccuracyBest;
@@ -57,12 +123,15 @@ class ViewController: UIViewController {
     }
     
     func initBluetooth() {
+        //let major = UInt16(1234)
+        //let minor = UInt16(4567)
         let uuid = UUID(uuidString: "c1f5983c-fa94-4ac8-8e2e-bb86d6de9b21")! //UUID()
         let identifier = "uk.nhs.colocate.beacon"
-        let region = CLBeaconRegion(proximityUUID: uuid, major: 1, minor: 0, identifier: identifier)
+        let region = CLBeaconRegion(proximityUUID: uuid, major: major!, minor: minor!, identifier: identifier) // TODO CHECK NO LOSS OF DATA ON UUID CONVERSION
         transmitRegion = region
-        myBeaconID.text = "My phone's beacon ID: " + uuid.uuidString
-        
+        queryRegion = CLBeaconRegion(proximityUUID: uuid, identifier: identifier)
+        myBeaconID.text = "My phone's beacon ID: " + String(major!) + "." + String(minor!)
+                                                                                                                                                                              
         self.peripheralManager = CBPeripheralManager(delegate: self, queue: nil)
     }
     
@@ -71,7 +140,7 @@ class ViewController: UIViewController {
         checkBluetoothAuth()
         checkBluetoothState()
         
-        rangeBeacons(region:transmitRegion!) // TODO make these unique
+        rangeBeacons(region:queryRegion!) // TODO make these unique
         //advertiseDevice(region:region)
     }
     
@@ -210,8 +279,9 @@ extension ViewController:CLLocationManagerDelegate {
         // unknown, immediate (<3 feet), near (3-5 feet), far (beyond 5 ft but in range)
         // updates every second or so
         print("UUID: " + (beacons.first?.proximityUUID.uuidString)! + " accuracy: " + "\(String(describing: beacons.first?.accuracy))")
-        nearBeaconID.text = "Bluetooth beacon ID: " + (beacons.first?.proximityUUID.uuidString)!
+        nearBeaconID.text = "Bluetooth beacon ID: " + String(describing: beacons.first!.major) + "." + String(describing: beacons.first!.minor)
         nearBeaconAccuracy.text = "Bluetooth proximity accuracy: " + (String(describing: beacons.first!.accuracy))
+        /*
         switch discoveredBeaconProximity {
         case .immediate:
             print("immediately - < 1 metre")
@@ -230,6 +300,103 @@ extension ViewController:CLLocationManagerDelegate {
             nearBeaconProximity.text = "Bluetooth beacon proximity: unknown"
             break
         }
+        */
+        
+        // Loop over all contacts
+        // get NOW
+        let now = Date()
+        for beacon in beacons {
+            let ping = BeaconPing(context: context)
+            //ping.remoteID = beacon.proximityUUID
+            ping.major = Int16(beacon.major)
+            ping.minor = Int16(beacon.minor)
+            ping.when = now
+            switch beacon.proximity {
+            case .immediate:
+                print("immediately - < 1 metre")
+                nearBeaconProximity.text = "Bluetooth beacon proximity: < 1 metre"
+                ping.proximity = "immediate"
+                break
+            case .near:
+                print("near - 1-3 metres")
+                nearBeaconProximity.text = "Bluetooth beacon proximity: 1-3 metres"
+                ping.proximity = "near"
+                break
+            case .far:
+                print("far - > 3 metres")
+                nearBeaconProximity.text = "Bluetooth beacon proximity: > 3 metres"
+                ping.proximity = "far"
+                break
+            case .unknown:
+                print("unknown range")
+                nearBeaconProximity.text = "Bluetooth beacon proximity: unknown"
+                ping.proximity = "unknown"
+                break
+            }
+            ping.accuracy = beacon.accuracy
+            appDelegate.saveContext()
+            print("Saved beacon ping")
+            
+        }
+        
+        // load saved count
+        //let fetch: NSFetchRequest = BeaconPing.fetchRequest()
+        let keypathExp = NSExpression(forKeyPath: "when") // can be any column
+        let expression = NSExpression(forFunction: "count:", arguments: [keypathExp])
+
+        let countDesc = NSExpressionDescription()
+        countDesc.expression = expression
+        countDesc.name = "count"
+        countDesc.expressionResultType = .integer64AttributeType
+        //let fetch = BeaconPing.fetchRequest() as NSFetchRequest<BeaconPing>
+        let fetch:NSFetchRequest<NSDictionary> = NSFetchRequest<NSDictionary>(entityName: "BeaconPing")
+        //let fetch = NSFetchRequest(entityName: "BeaconPing")
+        //let fetch = NSManagedObject.fetchRequest()
+        //fetch.entity = NSEntityDescription.entity(forEntityName: "BeaconPing",in: context)
+        fetch.returnsObjectsAsFaults = false
+        fetch.propertiesToFetch = [countDesc]
+        fetch.resultType = .dictionaryResultType
+        do {
+            //let frc = NSFetchedResultsController(fetchRequest: fetch, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+            let results = try context.fetch(fetch)
+            // results is now an array: [Record]
+            recordsSaved.text = "Beacon Records Saved: " + String(describing: results.first!["count"]!)
+            
+        } catch {
+            NSLog("Error fetching entity: %@", String(describing: error))
+        }
+            
+        // load last accuracy too
+        let request = BeaconPing.fetchRequest() as NSFetchRequest<BeaconPing>
+        let sort = NSSortDescriptor(key: #keyPath(BeaconPing.when), ascending: false)
+        request.sortDescriptors = [sort]
+        do {
+            self.fetchedBeaconRC = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+            self.fetchedBeaconRC.delegate = self
+            try self.fetchedBeaconRC.performFetch()
+        } catch let error as NSError {
+          print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        
+        
+        
     }
 
+}
+
+extension ViewController: NSFetchedResultsControllerDelegate {
+  func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?,
+                  for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+    print("CoreData beacon load done")
+    let index = (newIndexPath ?? nil)
+    guard let cellIndex = index else { return }
+    switch type {
+      case .insert:
+        //todoTableView.insertRows(at: [cellIndex], with: .fade)
+        let ping = fetchedBeaconRC.object(at: newIndexPath!)
+        lastAccuracy.text = "Last Accuracy: " + String(describing: ping.accuracy)
+      default:
+        break
+    }
+  }
 }
