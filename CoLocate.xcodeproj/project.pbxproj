@@ -12,6 +12,7 @@
 		6FC63C36241641B8007C8BF3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FC63C34241641B8007C8BF3 /* Main.storyboard */; };
 		6FC63C38241641BA007C8BF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FC63C37241641BA007C8BF3 /* Assets.xcassets */; };
 		6FC63C3B241641BA007C8BF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FC63C39241641BA007C8BF3 /* LaunchScreen.storyboard */; };
+		6FC63C432416D95C007C8BF3 /* nhs-logo-app.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FC63C422416D95C007C8BF3 /* nhs-logo-app.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		6FC63C37241641BA007C8BF3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6FC63C3A241641BA007C8BF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6FC63C3C241641BA007C8BF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6FC63C422416D95C007C8BF3 /* nhs-logo-app.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nhs-logo-app.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 				6FC63C32241641B8007C8BF3 /* ViewController.swift */,
 				6FC63C34241641B8007C8BF3 /* Main.storyboard */,
 				6FC63C37241641BA007C8BF3 /* Assets.xcassets */,
+				6FC63C422416D95C007C8BF3 /* nhs-logo-app.png */,
 				6FC63C39241641BA007C8BF3 /* LaunchScreen.storyboard */,
 				6FC63C3C241641BA007C8BF3 /* Info.plist */,
 			);
@@ -122,6 +125,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FC63C432416D95C007C8BF3 /* nhs-logo-app.png in Resources */,
 				6FC63C3B241641BA007C8BF3 /* LaunchScreen.storyboard in Resources */,
 				6FC63C38241641BA007C8BF3 /* Assets.xcassets in Resources */,
 				6FC63C36241641B8007C8BF3 /* Main.storyboard in Resources */,
