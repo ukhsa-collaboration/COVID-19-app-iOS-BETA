@@ -12,7 +12,8 @@ import CoreBluetooth
 class BTLEBroadcaster: NSObject, CBPeripheralManagerDelegate {
     
     let primaryServiceUUID = CBUUID(nsuuid: UUID(uuidString: "c1f5983c-fa94-4ac8-8e2e-bb86d6de9b21")!)
-    
+//    let primaryServiceUUID = CBUUID(nsuuid: UUID(uuidString: "1F059CDA-9E0F-4FF6-978F-5AEC283657BF")!)
+
     var primaryService: CBService?
     
     let restoreIdentifier: String = "restoreIdentifier"
@@ -25,8 +26,7 @@ class BTLEBroadcaster: NSObject, CBPeripheralManagerDelegate {
         peripheralManager = CBPeripheralManager(
             delegate: self,
             queue: nil,
-        //    options: [CBPeripheralManagerOptionRestoreIdentifierKey: restoreIdentifier])
-            options: [:])
+            options: [CBPeripheralManagerOptionRestoreIdentifierKey: restoreIdentifier])
     }
     
     // MARK: CBPeripheralManagerDelegate
@@ -73,15 +73,15 @@ class BTLEBroadcaster: NSObject, CBPeripheralManagerDelegate {
         ])
     }
     
-//    func peripheralManager(_ peripheral: CBPeripheralManager, willRestoreState dict: [String : Any]) {
-//        print("\(#file).\(#function)")
-//
-//        self.peripheralManager = peripheral
-//        if let services = dict[CBPeripheralManagerRestoredStateServicesKey] as? [CBMutableService] {
-//            self.primaryService = services.first
-//        } else {
-//            print("\(#file).\(#function) No services to restore!")
-//        }
-//    }
+    func peripheralManager(_ peripheral: CBPeripheralManager, willRestoreState dict: [String : Any]) {
+        print("\(#file).\(#function)")
+
+        self.peripheralManager = peripheral
+        if let services = dict[CBPeripheralManagerRestoredStateServicesKey] as? [CBMutableService] {
+            self.primaryService = services.first
+        } else {
+            print("\(#file).\(#function) No services to restore!")
+        }
+    }
     
 }
