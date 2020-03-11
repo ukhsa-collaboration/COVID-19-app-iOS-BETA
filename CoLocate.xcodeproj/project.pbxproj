@@ -15,6 +15,7 @@
 		6FC63C432416D95C007C8BF3 /* nhs-logo-app.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FC63C422416D95C007C8BF3 /* nhs-logo-app.png */; };
 		AE128D832417EBC900FC34FD /* BeaconModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AE128D812417EBC900FC34FD /* BeaconModel.xcdatamodeld */; };
 		AE128D852417ECBF00FC34FD /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE128D842417ECBF00FC34FD /* CoreDataManager.swift */; };
+		AE2DCAA0241920B600A940FC /* BTLEBroadcaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2DCA9F241920B600A940FC /* BTLEBroadcaster.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		6FC63C422416D95C007C8BF3 /* nhs-logo-app.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nhs-logo-app.png"; sourceTree = "<group>"; };
 		AE128D822417EBC900FC34FD /* BeaconModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BeaconModel.xcdatamodel; sourceTree = "<group>"; };
 		AE128D842417ECBF00FC34FD /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		AE2DCA9F241920B600A940FC /* BTLEBroadcaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTLEBroadcaster.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				6FC63C422416D95C007C8BF3 /* nhs-logo-app.png */,
 				6FC63C39241641BA007C8BF3 /* LaunchScreen.storyboard */,
 				6FC63C3C241641BA007C8BF3 /* Info.plist */,
+				AE2DCA9F241920B600A940FC /* BTLEBroadcaster.swift */,
 			);
 			path = CoLocate;
 			sourceTree = "<group>";
@@ -156,6 +159,7 @@
 				AE128D832417EBC900FC34FD /* BeaconModel.xcdatamodeld in Sources */,
 				6FC63C33241641B8007C8BF3 /* ViewController.swift in Sources */,
 				AE128D852417ECBF00FC34FD /* CoreDataManager.swift in Sources */,
+				AE2DCAA0241920B600A940FC /* BTLEBroadcaster.swift in Sources */,
 				6FC63C31241641B8007C8BF3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

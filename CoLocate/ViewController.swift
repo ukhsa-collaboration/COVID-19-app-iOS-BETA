@@ -13,6 +13,8 @@ import CoreBluetooth
 import CoreData
 
 class ViewController: UIViewController {
+    
+    var broadcaster: BTLEBroadcaster!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,8 +24,10 @@ class ViewController: UIViewController {
         print("Initialising location services")
         checkLocationServices()
         print("Initialising bluetooth services")
-        initBluetooth()
-        checkBluetooth()
+        
+        broadcaster = BTLEBroadcaster()
+        broadcaster.doStuff()
+        
         print("Initialisation complete")
     }
 
@@ -123,75 +127,8 @@ class ViewController: UIViewController {
     }
     
     func initBluetooth() {
-        //let major = UInt16(1234)
-        //let minor = UInt16(4567)
-        let uuid = UUID(uuidString: "c1f5983c-fa94-4ac8-8e2e-bb86d6de9b21")! //UUID()
-        let identifier = "uk.nhs.colocate.beacon"
-        let region = CLBeaconRegion(proximityUUID: uuid, major: major!, minor: minor!, identifier: identifier) // TODO CHECK NO LOSS OF DATA ON UUID CONVERSION
-        transmitRegion = region
-        queryRegion = CLBeaconRegion(proximityUUID: uuid, identifier: identifier)
-        myBeaconID.text = "My phone's beacon ID: " + String(major!) + "." + String(minor!)
-                                                                                                                                                                              
-        self.peripheralManager = CBPeripheralManager(delegate: self, queue: nil)
     }
-    
-    func checkBluetooth() {
         
-        checkBluetoothAuth()
-        checkBluetoothState()
-        
-        rangeBeacons(region:queryRegion!) // TODO make these unique
-        //advertiseDevice(region:region)
-    }
-    
-    func checkBluetoothAuth() {
-        print(" - Checking bluetooth auth")
-        switch CBPeripheralManager.authorizationStatus() {
-        case .authorized:
-            // ok
-            break
-        case .denied:
-            print("Bluetooth use not authorised")
-            break
-        case .notDetermined:
-            print("Bluetooth use auth not determined")
-            break
-        case .restricted:
-            print("Bluetooth use restricted")
-            break
-        }
-    }
-    
-    func checkBluetoothState() {
-        print(" - Checking bluetooth enabled")
-        switch peripheralManager!.state {
-        case .poweredOn:
-            print("Bluetooth is On.")
-            bluetoothStatus.text = "Bluetooth Status: On"
-            break
-        case .poweredOff:
-            print("Bluetooth is Off.")
-            bluetoothStatus.text = "Bluetooth Status: Off"
-            // TODO show enable link button
-            break
-        case .resetting:
-            bluetoothStatus.text = "Bluetooth Status: Resetting"
-            break
-        case .unauthorized:
-            bluetoothStatus.text = "Bluetooth Status: Unauthorised"
-            break
-        case .unsupported:
-            bluetoothStatus.text = "Bluetooth Status: Unsupported"
-            break
-        case .unknown:
-            bluetoothStatus.text = "Bluetooth Status: Unknown"
-            break
-        default:
-            bluetoothStatus.text = "Bluetooth Status: Other"
-            break
-        }
-    }
-    
     func centerViewOnUserLocation() {
         if let location = locationManager.location?.coordinate {
             let region = MKCoordinateRegion.init(center:location, latitudinalMeters: regionInMeters, longitudinalMeters: regionInMeters)
@@ -233,29 +170,6 @@ class ViewController: UIViewController {
         }
     }
     
-    func advertiseDevice(region : CLBeaconRegion) {
-        print(" - Advertising this device as a beacon")
-        //let peripheral = CBPeripheralManager(delegate: self, queue: nil)
-        let peripheralData = region.peripheralData(withMeasuredPower: nil)
-        
-        peripheralManager?.startAdvertising(((peripheralData as NSDictionary) as! [String : Any]))
-    }
-    
-    func rangeBeacons(region: CLBeaconRegion) {
-        print(" - Ranging other nearby beacons")
-        
-        locationManager.startRangingBeacons(in: region)
-    }
-}
-
-extension ViewController:CBPeripheralManagerDelegate {
-    func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
-        if peripheral.state == .poweredOn {
-            checkBluetooth()
-            let peripheralData = transmitRegion!.peripheralData(withMeasuredPower: nil)
-            peripheral.startAdvertising(((peripheralData as NSDictionary) as! [String : Any]))
-        }
-    }
 }
 
 extension ViewController:CLLocationManagerDelegate {
