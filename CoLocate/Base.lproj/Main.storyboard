@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina5_5" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Pfu-L3-5i0">
+    <device id="retina3_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
@@ -9,132 +9,91 @@
     </dependencies>
     <scenes>
         <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <scene sceneID="Gy0-uD-WNE">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="CoLocate" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                <viewController id="Pfu-L3-5i0" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ryL-5Y-VbY">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nhs-logo-app.png" translatesAutoresizingMaskIntoConstraints="NO" id="pgH-Ih-sYP">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="77"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bcw-QX-W9L">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gDX-JJ-6gF" userLabel="Content View">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="761.5"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S7N-Z2-YHu">
+                                                <rect key="frame" x="20" y="20" width="280" height="64"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NHSLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Vay-U7-VJW">
+                                                        <rect key="frame" x="20" y="22.5" width="48" height="19"/>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dg7-Ti-1P7">
+                                                        <rect key="frame" x="76" y="21.5" width="184" height="21"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="dg7-Ti-1P7" secondAttribute="trailing" constant="20" symbolic="YES" id="Huy-3Y-b1z"/>
+                                                    <constraint firstItem="Vay-U7-VJW" firstAttribute="centerY" secondItem="dg7-Ti-1P7" secondAttribute="centerY" id="OTY-nG-hgt"/>
+                                                    <constraint firstAttribute="height" constant="64" id="Zvo-Cx-nFT"/>
+                                                    <constraint firstItem="Vay-U7-VJW" firstAttribute="leading" secondItem="S7N-Z2-YHu" secondAttribute="leading" constant="20" symbolic="YES" id="b12-dL-RBm"/>
+                                                    <constraint firstItem="dg7-Ti-1P7" firstAttribute="leading" secondItem="Vay-U7-VJW" secondAttribute="trailing" constant="8" symbolic="YES" id="cy1-UQ-6AN"/>
+                                                    <constraint firstItem="Vay-U7-VJW" firstAttribute="centerY" secondItem="S7N-Z2-YHu" secondAttribute="centerY" id="qa4-aY-VjO"/>
+                                                </constraints>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FAq-jW-bZW">
+                                                <rect key="frame" x="20" y="92" width="280" height="649.5"/>
+                                                <mutableString key="text">Bacon ipsum dolor amet chuck cupim ground round pig, swine pastrami rump strip steak bresaola jowl. Ball tip corned beef pastrami ribeye pork loin sausage capicola shankle brisket alcatra. Cupim ham short loin meatloaf pastrami. Pork beef boudin cow chislic short ribs pork belly jerky chicken chuck meatloaf prosciutto. Swine corned beef bresaola, strip steak salami sirloin kevin shank burgdoggen biltong prosciutto. Jowl hamburger prosciutto flank ribeye bacon frankfurter fatback kevin brisket corned beef porchetta short loin.
+
+Strip steak cow chicken bresaola jowl kevin pork belly pork biltong. Tongue bresaola cupim biltong prosciutto shank ribeye kielbasa pork belly ground round t-bone. Ham hock chislic leberkas boudin shank chuck doner kevin tenderloin pork loin beef tongue ground round. Frankfurter pig bresaola beef, shoulder sirloin burgdoggen. Jowl short loin pastrami pork chop meatball. Alcatra pastrami chicken beef ribs swine venison doner turkey fatback picanha short loin strip steak buffalo cupim leberkas.</mutableString>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstItem="FAq-jW-bZW" firstAttribute="leading" secondItem="gDX-JJ-6gF" secondAttribute="leading" constant="20" symbolic="YES" id="47t-1P-BUh"/>
+                                            <constraint firstAttribute="bottom" secondItem="FAq-jW-bZW" secondAttribute="bottom" constant="20" symbolic="YES" id="CxP-bS-4Rd"/>
+                                            <constraint firstAttribute="trailing" secondItem="FAq-jW-bZW" secondAttribute="trailing" constant="20" symbolic="YES" id="MEa-0s-0Vt"/>
+                                            <constraint firstAttribute="trailing" secondItem="S7N-Z2-YHu" secondAttribute="trailing" constant="20" symbolic="YES" id="POf-bo-LWA"/>
+                                            <constraint firstItem="S7N-Z2-YHu" firstAttribute="top" secondItem="gDX-JJ-6gF" secondAttribute="top" constant="20" symbolic="YES" id="Rws-pS-qyx"/>
+                                            <constraint firstItem="FAq-jW-bZW" firstAttribute="top" secondItem="S7N-Z2-YHu" secondAttribute="bottom" constant="8" symbolic="YES" id="lHr-AG-6xU"/>
+                                            <constraint firstItem="S7N-Z2-YHu" firstAttribute="leading" secondItem="gDX-JJ-6gF" secondAttribute="leading" constant="20" symbolic="YES" id="oA4-qz-DpS"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="77" id="Rdr-Wu-lFk"/>
+                                    <constraint firstItem="gDX-JJ-6gF" firstAttribute="leading" secondItem="bcw-QX-W9L" secondAttribute="leading" id="3Y2-Qg-z5t"/>
+                                    <constraint firstAttribute="trailing" secondItem="gDX-JJ-6gF" secondAttribute="trailing" id="8Me-2c-6a2"/>
+                                    <constraint firstAttribute="bottom" secondItem="gDX-JJ-6gF" secondAttribute="bottom" id="CGW-md-5O4"/>
+                                    <constraint firstItem="gDX-JJ-6gF" firstAttribute="top" secondItem="bcw-QX-W9L" secondAttribute="top" id="srv-tu-ucD"/>
+                                    <constraint firstItem="gDX-JJ-6gF" firstAttribute="width" secondItem="bcw-QX-W9L" secondAttribute="width" id="trO-lv-Tyb"/>
                                 </constraints>
-                            </imageView>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" showsScale="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ie3-TD-I1x">
-                                <rect key="frame" x="0.0" y="77" width="414" height="200"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="Z1g-9C-mcm"/>
-                                </constraints>
-                                <connections>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="yZk-6O-zp7"/>
-                                </connections>
-                            </mapView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location Status: Checking..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bni-wj-qMz">
-                                <rect key="frame" x="16" y="314" width="214" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bluetooth Status: Checking..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yal-cR-oCg">
-                                <rect key="frame" x="16" y="343" width="222.66666666666666" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nearby NHS Co-Locate users: Checking..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bci-Jt-lp0">
-                                <rect key="frame" x="16" y="372" width="321" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bluetooth beacon ID: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hdB-Ko-o4F">
-                                <rect key="frame" x="16" y="430" width="164.66666666666666" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My phone's beacon ID: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ugz-Q4-LH6">
-                                <rect key="frame" x="16" y="401" width="179" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bluetooth beacon proximity: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a9w-oS-9ZR">
-                                <rect key="frame" x="16" y="459" width="219" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bluetooth proximity accuracy: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bGG-JP-nQH">
-                                <rect key="frame" x="16" y="488" width="232" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Beacon Records Saved: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YqN-ZT-eD9">
-                                <rect key="frame" x="16" y="517" width="186" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last Accuracy: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="COa-h4-Qgl">
-                                <rect key="frame" x="16" y="546" width="118" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <viewLayoutGuide key="contentLayoutGuide" id="Duw-Yb-PTq"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="fNf-zL-wC5"/>
+                            </scrollView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="pgH-Ih-sYP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="1Pm-pV-hvZ"/>
-                            <constraint firstItem="ie3-TD-I1x" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="77" id="2TD-dB-1cX"/>
-                            <constraint firstItem="Bci-Jt-lp0" firstAttribute="top" secondItem="yal-cR-oCg" secondAttribute="bottom" constant="8" id="3oS-8m-OUZ"/>
-                            <constraint firstItem="bGG-JP-nQH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="5bh-jo-pG6"/>
-                            <constraint firstItem="ugz-Q4-LH6" firstAttribute="top" secondItem="Bci-Jt-lp0" secondAttribute="bottom" constant="8" id="5pm-L3-NOs"/>
-                            <constraint firstItem="bni-wj-qMz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="8eR-Xw-I7B"/>
-                            <constraint firstItem="yal-cR-oCg" firstAttribute="top" secondItem="bni-wj-qMz" secondAttribute="bottom" constant="8" id="Pcv-Rz-31X"/>
-                            <constraint firstItem="Bci-Jt-lp0" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="R5u-ca-zXy"/>
-                            <constraint firstItem="a9w-oS-9ZR" firstAttribute="top" secondItem="hdB-Ko-o4F" secondAttribute="bottom" constant="8" id="STa-Ac-JZL"/>
-                            <constraint firstItem="bGG-JP-nQH" firstAttribute="top" secondItem="a9w-oS-9ZR" secondAttribute="bottom" constant="8" id="Uh2-Ox-9Sw"/>
-                            <constraint firstItem="yal-cR-oCg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="VEO-df-Jlt"/>
-                            <constraint firstItem="ugz-Q4-LH6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="VdL-kP-2ws"/>
-                            <constraint firstItem="pgH-Ih-sYP" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Vow-nb-xCB"/>
-                            <constraint firstItem="pgH-Ih-sYP" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="XrH-ff-DOl"/>
-                            <constraint firstItem="ie3-TD-I1x" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="aSY-6P-EjK"/>
-                            <constraint firstItem="YqN-ZT-eD9" firstAttribute="top" secondItem="bGG-JP-nQH" secondAttribute="bottom" constant="8" id="cqx-PE-Vkw"/>
-                            <constraint firstItem="hdB-Ko-o4F" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="e7U-Y8-rXM"/>
-                            <constraint firstItem="ie3-TD-I1x" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="k4t-DP-8rd"/>
-                            <constraint firstItem="a9w-oS-9ZR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="kjr-Zz-Eh1"/>
-                            <constraint firstItem="COa-h4-Qgl" firstAttribute="top" secondItem="YqN-ZT-eD9" secondAttribute="bottom" constant="8" id="nPa-ba-PRC"/>
-                            <constraint firstItem="hdB-Ko-o4F" firstAttribute="top" secondItem="ugz-Q4-LH6" secondAttribute="bottom" constant="8" id="sOA-yS-Hs1"/>
-                            <constraint firstItem="bni-wj-qMz" firstAttribute="top" secondItem="ie3-TD-I1x" secondAttribute="bottom" constant="37" id="tnf-vb-xXd"/>
-                            <constraint firstItem="COa-h4-Qgl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="uX4-hL-6sk"/>
-                            <constraint firstItem="ie3-TD-I1x" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="yJp-ap-fhS"/>
-                            <constraint firstItem="YqN-ZT-eD9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="yQb-F1-cv7"/>
+                            <constraint firstItem="RSb-sL-JA8" firstAttribute="bottom" secondItem="bcw-QX-W9L" secondAttribute="bottom" id="10c-qM-lKx"/>
+                            <constraint firstItem="RSb-sL-JA8" firstAttribute="trailing" secondItem="bcw-QX-W9L" secondAttribute="trailing" id="P1M-f4-dce"/>
+                            <constraint firstItem="bcw-QX-W9L" firstAttribute="top" secondItem="RSb-sL-JA8" secondAttribute="top" id="eiU-Ge-Czu"/>
+                            <constraint firstItem="bcw-QX-W9L" firstAttribute="leading" secondItem="RSb-sL-JA8" secondAttribute="leading" id="t4T-JM-3ZE"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <viewLayoutGuide key="safeArea" id="RSb-sL-JA8"/>
                     </view>
-                    <connections>
-                        <outlet property="bluetoothStatus" destination="yal-cR-oCg" id="ZoS-bY-Qhi"/>
-                        <outlet property="lastAccuracy" destination="COa-h4-Qgl" id="oeM-Wt-l29"/>
-                        <outlet property="locationStatus" destination="bni-wj-qMz" id="0aH-Hu-os4"/>
-                        <outlet property="mapView" destination="ie3-TD-I1x" id="HVh-sy-eax"/>
-                        <outlet property="myBeaconID" destination="ugz-Q4-LH6" id="bka-hV-ai6"/>
-                        <outlet property="nearBeaconAccuracy" destination="bGG-JP-nQH" id="uXo-Xr-Z1F"/>
-                        <outlet property="nearBeaconID" destination="hdB-Ko-o4F" id="eVh-51-td3"/>
-                        <outlet property="nearBeaconProximity" destination="a9w-oS-9ZR" id="hzu-sl-Xoh"/>
-                        <outlet property="nearbyBeacons" destination="Bci-Jt-lp0" id="6ia-me-nej"/>
-                        <outlet property="recordsSaved" destination="YqN-ZT-eD9" id="zwf-9p-eWS"/>
-                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GaQ-c3-k1q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="133.59999999999999" y="133.5832083958021"/>
+            <point key="canvasLocation" x="453.75" y="110"/>
         </scene>
     </scenes>
     <resources>
-        <image name="nhs-logo-app.png" width="250" height="38.5"/>
+        <image name="NHSLogo" width="48" height="19"/>
     </resources>
 </document>
