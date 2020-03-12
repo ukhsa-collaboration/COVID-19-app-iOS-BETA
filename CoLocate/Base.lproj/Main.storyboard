@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Permissions Prompt View Controller-->
         <scene sceneID="Gy0-uD-WNE">
             <objects>
-                <viewController id="Pfu-L3-5i0" sceneMemberID="viewController">
+                <viewController id="Pfu-L3-5i0" customClass="PermissionsPromptViewController" customModule="CoLocate" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ryL-5Y-VbY">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -52,8 +52,8 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="95z-vR-2bH">
-                                                <rect key="frame" x="15" y="310" width="280" height="30"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="95z-vR-2bH">
+                                                <rect key="frame" x="20" y="301.5" width="280" height="30"/>
                                                 <state key="normal" title="Button"/>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hZ4-I9-3SE">
@@ -101,6 +101,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="RSb-sL-JA8"/>
                     </view>
+                    <connections>
+                        <outlet property="bodyCopy" destination="FAq-jW-bZW" id="ZfN-ib-RpJ"/>
+                        <outlet property="bodyHeadline" destination="hZ4-I9-3SE" id="Z79-2H-XoG"/>
+                        <outlet property="continueButton" destination="95z-vR-2bH" id="9xn-3y-MhN"/>
+                        <outlet property="logoStrapline" destination="S7N-Z2-YHu" id="H7K-Yr-ONy"/>
+                        <outlet property="logoStraplineLabel" destination="dg7-Ti-1P7" id="D1W-2Q-pRT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GaQ-c3-k1q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
