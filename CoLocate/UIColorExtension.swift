@@ -12,6 +12,8 @@ import UIKit
 extension UIColor {
     
     public static let nhsBlue = UIColor(hexString: "#005eb8")
+    
+    public static let nhsButton = UIColor(hexString: "#007f3b")
 
     convenience init(hexString: String, alpha: CGFloat = 1.0) {
         let hexString: String = hexString.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
