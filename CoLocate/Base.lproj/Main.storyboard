@@ -59,6 +59,9 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                 <state key="normal" title="Button"/>
+                                                <connections>
+                                                    <action selector="didTapContinue:" destination="Pfu-L3-5i0" eventType="touchUpInside" id="6pJ-Br-7RM"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hZ4-I9-3SE">
                                                 <rect key="frame" x="20" y="96" width="280" height="41"/>

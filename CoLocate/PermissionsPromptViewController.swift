@@ -35,7 +35,11 @@ class PermissionsPromptViewController: UIViewController {
         continueButton.setTitle("I understand", for: .normal)
     }
     
-
+    @IBAction func didTapContinue(_ sender: UIButton) {
+        (UIApplication.shared.delegate as! AppDelegate).broadcaster = BTLEBroadcaster()
+        (UIApplication.shared.delegate as! AppDelegate).broadcaster?.doStuff()
+    }
+    
     /*
     // MARK: - Navigation
 
