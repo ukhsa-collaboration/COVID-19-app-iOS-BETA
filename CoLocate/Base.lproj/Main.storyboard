@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Pfu-L3-5i0">
-    <device id="retina3_5" orientation="portrait" appearance="light"/>
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
@@ -13,23 +13,23 @@
             <objects>
                 <viewController id="Pfu-L3-5i0" customClass="PermissionsPromptViewController" customModule="CoLocate" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ryL-5Y-VbY">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bcw-QX-W9L">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="734"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gDX-JJ-6gF" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="411.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="349.66666666666669"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S7N-Z2-YHu">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NHSLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Vay-U7-VJW">
-                                                        <rect key="frame" x="20" y="22.5" width="48" height="19"/>
+                                                        <rect key="frame" x="20" y="22.666666666666671" width="48" height="19"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dg7-Ti-1P7">
-                                                        <rect key="frame" x="76" y="21.5" width="224" height="21"/>
+                                                        <rect key="frame" x="76" y="21.666666666666671" width="279" height="21"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -46,14 +46,14 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FAq-jW-bZW">
-                                                <rect key="frame" x="20" y="153" width="280" height="152.5"/>
+                                                <rect key="frame" x="20" y="113.33333333333333" width="335" height="130.33333333333337"/>
                                                 <string key="text">Bacon ipsum dolor amet chuck cupim ground round pig, swine pastrami rump strip steak bresaola jowl. Ball tip corned beef pastrami ribeye pork loin sausage capicola shankle brisket alcatra. Cupim ham short loin meatloaf pastrami.</string>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="95z-vR-2bH">
-                                                <rect key="frame" x="20" y="337.5" width="280" height="54"/>
+                                                <rect key="frame" x="20" y="275.66666666666669" width="335" height="54"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="54" id="yGf-cm-bDA"/>
                                                 </constraints>
@@ -64,8 +64,8 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hZ4-I9-3SE">
-                                                <rect key="frame" x="20" y="96" width="280" height="41"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                                <rect key="frame" x="20" y="96" width="335" height="1.3333333333333286"/>
+                                                <fontDescription key="fontDescription" pointSize="1"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -114,11 +114,43 @@
                         <outlet property="continueButton" destination="95z-vR-2bH" id="9xn-3y-MhN"/>
                         <outlet property="logoStrapline" destination="S7N-Z2-YHu" id="H7K-Yr-ONy"/>
                         <outlet property="logoStraplineLabel" destination="dg7-Ti-1P7" id="D1W-2Q-pRT"/>
+                        <segue destination="5lA-a2-EIq" kind="presentation" identifier="showAreYouInfected" modalPresentationStyle="fullScreen" id="f1S-jq-xWd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GaQ-c3-k1q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="453.75" y="110"/>
+        </scene>
+        <!--Self Reporting View Controller-->
+        <scene sceneID="dRr-cj-EC7">
+            <objects>
+                <viewController id="5lA-a2-EIq" customClass="SelfReportingViewController" customModule="CoLocate" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8Zk-yp-Q8W">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Big Question" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wpn-vI-MFX">
+                                <rect key="frame" x="62" y="390.66666666666669" width="251" height="40.666666666666686"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="wpn-vI-MFX" firstAttribute="centerX" secondItem="IiD-YJ-wCz" secondAttribute="centerX" id="ST2-76-p0x"/>
+                            <constraint firstItem="wpn-vI-MFX" firstAttribute="centerY" secondItem="IiD-YJ-wCz" secondAttribute="centerY" id="rbb-5d-990"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="IiD-YJ-wCz"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="R7a-3j-Qew"/>
+                    <connections>
+                        <outlet property="titleLabel" destination="wpn-vI-MFX" id="aB7-Du-1ge"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IdS-yR-jdF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1471" y="109"/>
         </scene>
     </scenes>
     <resources>

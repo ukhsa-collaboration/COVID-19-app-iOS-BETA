@@ -19,6 +19,8 @@
 		AE128D832417EBC900FC34FD /* BeaconModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AE128D812417EBC900FC34FD /* BeaconModel.xcdatamodeld */; };
 		AE128D852417ECBF00FC34FD /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE128D842417ECBF00FC34FD /* CoreDataManager.swift */; };
 		AE2DCAA0241920B600A940FC /* BTLEBroadcaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2DCA9F241920B600A940FC /* BTLEBroadcaster.swift */; };
+		AEA90A09241AC32900DAF2B6 /* SelfReportingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA90A08241AC32900DAF2B6 /* SelfReportingViewController.swift */; };
+		AEC6A7B6241AFF1C00B0237A /* DistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC6A7B5241AFF1C00B0237A /* DistanceManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		AE128D822417EBC900FC34FD /* BeaconModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BeaconModel.xcdatamodel; sourceTree = "<group>"; };
 		AE128D842417ECBF00FC34FD /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		AE2DCA9F241920B600A940FC /* BTLEBroadcaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTLEBroadcaster.swift; sourceTree = "<group>"; };
+		AEA90A08241AC32900DAF2B6 /* SelfReportingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfReportingViewController.swift; sourceTree = "<group>"; };
+		AEC6A7B5241AFF1C00B0237A /* DistanceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistanceManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,19 +72,21 @@
 		6FC63C2F241641B8007C8BF3 /* CoLocate */ = {
 			isa = PBXGroup;
 			children = (
+				6FC63C37241641BA007C8BF3 /* Assets.xcassets */,
 				AE128D8A2417EFCC00FC34FD /* Model */,
 				6FC63C30241641B8007C8BF3 /* AppDelegate.swift */,
-				AE128D842417ECBF00FC34FD /* CoreDataManager.swift */,
-				6FC63C32241641B8007C8BF3 /* ViewController.swift */,
-				6FC63C34241641B8007C8BF3 /* Main.storyboard */,
-				6FC63C37241641BA007C8BF3 /* Assets.xcassets */,
-				6FC63C422416D95C007C8BF3 /* nhs-logo-app.png */,
-				6FC63C39241641BA007C8BF3 /* LaunchScreen.storyboard */,
-				6FC63C3C241641BA007C8BF3 /* Info.plist */,
 				AE2DCA9F241920B600A940FC /* BTLEBroadcaster.swift */,
 				21AF36AA241A8E50001A4910 /* BTLEListener.swift */,
+				AE128D842417ECBF00FC34FD /* CoreDataManager.swift */,
+				AEC6A7B5241AFF1C00B0237A /* DistanceManager.swift */,
+				6FC63C3C241641BA007C8BF3 /* Info.plist */,
+				6FC63C39241641BA007C8BF3 /* LaunchScreen.storyboard */,
+				6FC63C34241641B8007C8BF3 /* Main.storyboard */,
+				6FC63C422416D95C007C8BF3 /* nhs-logo-app.png */,
 				213C806B241A56430020EFA5 /* PermissionsPromptViewController.swift */,
+				AEA90A08241AC32900DAF2B6 /* SelfReportingViewController.swift */,
 				213C806D241A5CDD0020EFA5 /* UIColorExtension.swift */,
+				6FC63C32241641B8007C8BF3 /* ViewController.swift */,
 			);
 			path = CoLocate;
 			sourceTree = "<group>";
@@ -168,6 +174,8 @@
 				AE128D832417EBC900FC34FD /* BeaconModel.xcdatamodeld in Sources */,
 				213C806E241A5CDD0020EFA5 /* UIColorExtension.swift in Sources */,
 				21AF36AB241A8E50001A4910 /* BTLEListener.swift in Sources */,
+				AEA90A09241AC32900DAF2B6 /* SelfReportingViewController.swift in Sources */,
+				AEC6A7B6241AFF1C00B0237A /* DistanceManager.swift in Sources */,
 				6FC63C33241641B8007C8BF3 /* ViewController.swift in Sources */,
 				AE128D852417ECBF00FC34FD /* CoreDataManager.swift in Sources */,
 				AE2DCAA0241920B600A940FC /* BTLEBroadcaster.swift in Sources */,

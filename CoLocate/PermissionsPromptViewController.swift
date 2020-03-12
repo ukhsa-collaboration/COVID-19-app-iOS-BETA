@@ -36,12 +36,17 @@ class PermissionsPromptViewController: UIViewController {
     }
     
     @IBAction func didTapContinue(_ sender: UIButton) {
+      #if targetEnvironment(simulator)
+      #else
         let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
         appDelegate.broadcaster = BTLEBroadcaster()
         appDelegate.broadcaster?.start()
         
         appDelegate.listener = BTLEListener()
         appDelegate.listener?.start()
+      #endif
+
+      self.performSegue(withIdentifier: "showAreYouInfected", sender: nil)
     }
     
     /*
