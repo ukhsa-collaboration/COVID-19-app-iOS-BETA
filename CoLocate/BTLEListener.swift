@@ -49,7 +49,7 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         case .poweredOn:
             print("\(#file).\(#function) .poweredOn")
             
-            central.scanForPeripherals(withServices: [BTLEBroadcaster.primaryServiceUUID])
+            central.scanForPeripherals(withServices: [BTLEBroadcaster.primaryServiceUUID], options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
         }
     }
     
