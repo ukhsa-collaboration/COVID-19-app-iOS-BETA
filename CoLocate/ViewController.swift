@@ -26,7 +26,7 @@ class ViewController: UIViewController {
         print("Initialising bluetooth services")
         
         broadcaster = BTLEBroadcaster()
-        broadcaster.doStuff()
+        broadcaster.start()
         
         print("Initialisation complete")
     }

@@ -34,6 +34,7 @@
 	<string>In order to determine your risk of infection we need to trace your location even when you're not actively looking at the app.</string>
 	<key>UIBackgroundModes</key>
 	<array>
+		<string>bluetooth-central</string>
 		<string>bluetooth-peripheral</string>
 	</array>
 	<key>UILaunchStoryboardName</key>

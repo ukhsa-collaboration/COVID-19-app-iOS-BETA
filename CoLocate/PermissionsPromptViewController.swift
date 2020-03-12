@@ -36,8 +36,12 @@ class PermissionsPromptViewController: UIViewController {
     }
     
     @IBAction func didTapContinue(_ sender: UIButton) {
-        (UIApplication.shared.delegate as! AppDelegate).broadcaster = BTLEBroadcaster()
-        (UIApplication.shared.delegate as! AppDelegate).broadcaster?.doStuff()
+        let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
+        appDelegate.broadcaster = BTLEBroadcaster()
+        appDelegate.broadcaster?.start()
+        
+        appDelegate.listener = BTLEListener()
+        appDelegate.listener?.start()
     }
     
     /*

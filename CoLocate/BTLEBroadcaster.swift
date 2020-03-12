@@ -22,7 +22,7 @@ class BTLEBroadcaster: NSObject, CBPeripheralManagerDelegate {
     
     var peripheral: CBPeripheral?
     
-    func doStuff() {
+    func start() {
         peripheralManager = CBPeripheralManager(
             delegate: self,
             queue: nil,

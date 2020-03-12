@@ -15,7 +15,9 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     
     let restoreIdentifier: String = "CoLocateCentralRestoreIdentifier"
     
-    func doStuff() {
+    let inRangeperipherals: [CBPeripheral] = []
+    
+    func start() {
         centralManager = CBCentralManager(
             delegate: self,
             queue: nil,
@@ -53,8 +55,9 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         print("\(#file).\(#function) discovered peripheral: \(String(describing: peripheral.name))")
+        print("\(#file).\(#function) discovered peripheral: \(advertisementData)")
         
-        central.connect(peripheral)
+//        central.connect(peripheral)
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
@@ -63,6 +66,12 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         peripheral.delegate = self
         peripheral.discoverServices([BTLEBroadcaster.primaryServiceUUID])
     }
+    
+    func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
+        print("\(#file).\(#function) got centralManager: \(central)")
+        self.centralManager = central
+    }
+    
     
     // MARK: CBPeripheralDelegate
     
