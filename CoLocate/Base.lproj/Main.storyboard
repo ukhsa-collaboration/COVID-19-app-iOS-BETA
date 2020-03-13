@@ -22,27 +22,10 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gDX-JJ-6gF" userLabel="Content View">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="389"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S7N-Z2-YHu">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S7N-Z2-YHu" customClass="LogoStrapline" customModule="CoLocate" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
-                                                <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NHSLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Vay-U7-VJW">
-                                                        <rect key="frame" x="20" y="22.666666666666671" width="48" height="19"/>
-                                                    </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dg7-Ti-1P7">
-                                                        <rect key="frame" x="76" y="21.666666666666671" width="279" height="21"/>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                                <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="dg7-Ti-1P7" secondAttribute="trailing" constant="20" symbolic="YES" id="Huy-3Y-b1z"/>
-                                                    <constraint firstItem="Vay-U7-VJW" firstAttribute="centerY" secondItem="dg7-Ti-1P7" secondAttribute="centerY" id="OTY-nG-hgt"/>
                                                     <constraint firstAttribute="height" constant="64" id="Zvo-Cx-nFT"/>
-                                                    <constraint firstItem="Vay-U7-VJW" firstAttribute="leading" secondItem="S7N-Z2-YHu" secondAttribute="leading" constant="20" symbolic="YES" id="b12-dL-RBm"/>
-                                                    <constraint firstItem="dg7-Ti-1P7" firstAttribute="leading" secondItem="Vay-U7-VJW" secondAttribute="trailing" constant="8" symbolic="YES" id="cy1-UQ-6AN"/>
-                                                    <constraint firstItem="Vay-U7-VJW" firstAttribute="centerY" secondItem="S7N-Z2-YHu" secondAttribute="centerY" id="qa4-aY-VjO"/>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Headline" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hZ4-I9-3SE">
@@ -83,6 +66,7 @@
                                             <constraint firstItem="S7N-Z2-YHu" firstAttribute="top" secondItem="gDX-JJ-6gF" secondAttribute="top" id="Rws-pS-qyx"/>
                                             <constraint firstItem="hZ4-I9-3SE" firstAttribute="top" secondItem="S7N-Z2-YHu" secondAttribute="bottom" constant="32" id="Ub1-Sy-165"/>
                                             <constraint firstAttribute="bottom" secondItem="95z-vR-2bH" secondAttribute="bottom" constant="20" symbolic="YES" id="VOC-Od-508"/>
+                                            <constraint firstItem="S7N-Z2-YHu" firstAttribute="width" secondItem="gDX-JJ-6gF" secondAttribute="width" id="cIS-kv-4L0"/>
                                             <constraint firstItem="95z-vR-2bH" firstAttribute="leading" secondItem="gDX-JJ-6gF" secondAttribute="leading" constant="20" symbolic="YES" id="kKZ-j7-gKL"/>
                                             <constraint firstItem="S7N-Z2-YHu" firstAttribute="leading" secondItem="gDX-JJ-6gF" secondAttribute="leading" id="oA4-qz-DpS"/>
                                         </constraints>
@@ -112,8 +96,6 @@
                         <outlet property="bodyCopy" destination="FAq-jW-bZW" id="ZfN-ib-RpJ"/>
                         <outlet property="bodyHeadline" destination="hZ4-I9-3SE" id="Z79-2H-XoG"/>
                         <outlet property="continueButton" destination="95z-vR-2bH" id="9xn-3y-MhN"/>
-                        <outlet property="logoStrapline" destination="S7N-Z2-YHu" id="H7K-Yr-ONy"/>
-                        <outlet property="logoStraplineLabel" destination="dg7-Ti-1P7" id="D1W-2Q-pRT"/>
                         <segue destination="hVl-M3-CDw" kind="presentation" identifier="areYouInfectedSegue" animates="NO" modalPresentationStyle="fullScreen" id="D5O-tD-JUr"/>
                     </connections>
                 </viewController>
@@ -255,10 +237,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gZR-MB-Dba" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3430" y="542"/>
+            <point key="canvasLocation" x="3429.5999999999999" y="541.62561576354688"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="NHSLogo" width="48" height="19"/>
-    </resources>
 </document>

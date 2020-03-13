@@ -20,6 +20,8 @@
 		AE128D852417ECBF00FC34FD /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE128D842417ECBF00FC34FD /* CoreDataManager.swift */; };
 		AE2DCAA0241920B600A940FC /* BTLEBroadcaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2DCA9F241920B600A940FC /* BTLEBroadcaster.swift */; };
 		AEC6A7B6241AFF1C00B0237A /* DistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC6A7B5241AFF1C00B0237A /* DistanceManager.swift */; };
+		AEC6A7BC241BD81A00B0237A /* LogoStrapline.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC6A7BB241BD81A00B0237A /* LogoStrapline.swift */; };
+		AEC6A7BE241BD82900B0237A /* LogoStrapline.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEC6A7BD241BD82900B0237A /* LogoStrapline.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,8 @@
 		AE128D842417ECBF00FC34FD /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		AE2DCA9F241920B600A940FC /* BTLEBroadcaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTLEBroadcaster.swift; sourceTree = "<group>"; };
 		AEC6A7B5241AFF1C00B0237A /* DistanceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistanceManager.swift; sourceTree = "<group>"; };
+		AEC6A7BB241BD81A00B0237A /* LogoStrapline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoStrapline.swift; sourceTree = "<group>"; };
+		AEC6A7BD241BD82900B0237A /* LogoStrapline.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogoStrapline.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +88,8 @@
 				213C806B241A56430020EFA5 /* PermissionsPromptViewController.swift */,
 				213C806D241A5CDD0020EFA5 /* UIColorExtension.swift */,
 				6FC63C32241641B8007C8BF3 /* ViewController.swift */,
+				AEC6A7BB241BD81A00B0237A /* LogoStrapline.swift */,
+				AEC6A7BD241BD82900B0237A /* LogoStrapline.xib */,
 			);
 			path = CoLocate;
 			sourceTree = "<group>";
@@ -156,6 +162,7 @@
 			files = (
 				6FC63C432416D95C007C8BF3 /* nhs-logo-app.png in Resources */,
 				6FC63C3B241641BA007C8BF3 /* LaunchScreen.storyboard in Resources */,
+				AEC6A7BE241BD82900B0237A /* LogoStrapline.xib in Resources */,
 				6FC63C38241641BA007C8BF3 /* Assets.xcassets in Resources */,
 				6FC63C36241641B8007C8BF3 /* Main.storyboard in Resources */,
 			);
@@ -177,6 +184,7 @@
 				AE2DCAA0241920B600A940FC /* BTLEBroadcaster.swift in Sources */,
 				6FC63C31241641B8007C8BF3 /* AppDelegate.swift in Sources */,
 				213C806C241A56430020EFA5 /* PermissionsPromptViewController.swift in Sources */,
+				AEC6A7BC241BD81A00B0237A /* LogoStrapline.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

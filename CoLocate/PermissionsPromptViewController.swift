@@ -10,8 +10,6 @@ import UIKit
 
 class PermissionsPromptViewController: UIViewController {
 
-    @IBOutlet weak var logoStrapline: UIView!
-    @IBOutlet weak var logoStraplineLabel: UILabel!
     @IBOutlet weak var bodyHeadline: UILabel!
     @IBOutlet weak var bodyCopy: UILabel!
     @IBOutlet weak var continueButton: UIButton!
@@ -19,9 +17,6 @@ class PermissionsPromptViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        logoStrapline.backgroundColor = .nhsBlue
-        logoStraplineLabel.textColor = .white
-        logoStraplineLabel.text = "Coronavirus tracing"
         bodyHeadline.text = "Permissions we need"
         bodyCopy.text = """
         To trace people you come in contact with, this app will automatically access:
