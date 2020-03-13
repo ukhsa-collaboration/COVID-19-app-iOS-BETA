@@ -92,26 +92,43 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         print("\(#file).\(#function) services = \(String(describing: peripheral.services))")
         
-        // TODO: we're coalescing a bunch of error cases into one here, this might be confusing
-        guard error == nil, peripheral.services?.count == 1, let primaryService = peripheral.services?.first else {
-            print("\(#file).\(#function) no primary service found (error: \(String(describing: error))")
+        guard error == nil else {
+            print("Error discovering services: \(error!)")
             return
         }
-        peripheralList.append(peripheral)
         
-        peripheral.discoverCharacteristics([BTLEBroadcaster.identityCharacteristicUUID], for: primaryService)
+        guard let services = peripheral.services, services.count > 0 else {
+            print("No services discovered for peripheral \(peripheral)")
+            return
+        }
+
+        if let coLocateService = services.first(where: {$0.uuid == BTLEBroadcaster.coLocateServiceUUID}) {
+            peripheral.discoverCharacteristics([BTLEBroadcaster.deviceIdentifierCharacteristicUUID], for: coLocateService)
+        } else {
+            print("CoLocate service not discovered for peripheral \(peripheral)")
+        }
+        
+        // TODO: Do we really need to save this peripheral here? It gets passed to us on every delegate callback
+        //peripheralList.append(peripheral)
     }
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
-        //print("\(#file).\(#function) characteristics = \(String(describing: service.characteristics))")
+        print("\(#file).\(#function)")
         
-        guard error == nil, let chars = service.characteristics else {return}
-
-        // find our identity characteristic in the list—there'll be a continuity characteristic in the mix too
-        for theChar in chars {
-            if theChar.uuid == BTLEBroadcaster.identityCharacteristicUUID {
-                peripheral.readValue(for: theChar)
-            }
+        guard error == nil else {
+            print("Error discovering characteristics: \(error!)")
+            return
+        }
+        
+        guard let characteristics = service.characteristics, characteristics.count > 0 else {
+            print("No characteristics discovered for service \(service)")
+            return
+        }
+        
+        if let deviceIdCharacteristic = characteristics.first(where: {$0.uuid == BTLEBroadcaster.deviceIdentifierCharacteristicUUID}) {
+            peripheral.readValue(for: deviceIdCharacteristic)
+        } else {
+            print("Device identity characteristic not discovered for peripheral \(peripheral)")
         }
     }
 
@@ -139,8 +156,7 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
 
     // TODO: Indirect me through a "save the data service" protocol with a stub implementation which just does this log
     func doSomethingWithIdentityWeFound(data: Data) {
-        let string = String(data: data, encoding: .utf8)!
-        print("*** Contact event at \(Date()) with identity \(string)")
+        print("Contact event at \(Date()) with identity \(CBUUID(data: data))")
     }
     
 }

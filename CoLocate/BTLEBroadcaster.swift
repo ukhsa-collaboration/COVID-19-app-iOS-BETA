@@ -16,9 +16,9 @@ class BTLEBroadcaster: NSObject, CBPeripheralManagerDelegate {
     
     // This is safe to force-unwrap, according to the docs this will only be nil if we're running before the device
     // has been unlocked
-    var citizenUUID: CBUUID = CBUUID(nsuuid: UIDevice.current.identifierForVendor!)
+    var deviceIdentifier = CBUUID(nsuuid: UIDevice.current.identifierForVendor!)
     
-    static let identityCharacteristicUUID = CBUUID(nsuuid: UUID(uuidString: "85BF337C-5B64-48EB-A5F7-A9FED135C972")!)
+    static let deviceIdentifierCharacteristicUUID = CBUUID(nsuuid: UUID(uuidString: "85BF337C-5B64-48EB-A5F7-A9FED135C972")!)
 
     var primaryService: CBService?
     
@@ -27,10 +27,6 @@ class BTLEBroadcaster: NSObject, CBPeripheralManagerDelegate {
     var peripheralManager: CBPeripheralManager?
     
     var peripheral: CBPeripheral?
-    
-    init(deviceID: UUID) {
-        citizenUUID = CBUUID(nsuuid: deviceID)
-    }
     
     func start() {
         peripheralManager = CBPeripheralManager(
@@ -66,9 +62,7 @@ class BTLEBroadcaster: NSObject, CBPeripheralManagerDelegate {
          
             let service = CBMutableService(type: BTLEBroadcaster.coLocateServiceUUID, primary: true)
             
-            // TODO: It seems like only the first 36 bits of the citizenUUID value get through—is this a hard limit?
-            // doesn't seem to be documented anywhere
-            let identityCharacteristic = CBMutableCharacteristic(type: BTLEBroadcaster.identityCharacteristicUUID, properties: CBCharacteristicProperties([.read]), value: citizenUUID.data, permissions: .readable)
+            let identityCharacteristic = CBMutableCharacteristic(type: BTLEBroadcaster.deviceIdentifierCharacteristicUUID, properties: CBCharacteristicProperties([.read]), value: deviceIdentifier.data, permissions: .readable)
             
             service.characteristics = [identityCharacteristic]
             peripheralManager?.add(service)
@@ -83,6 +77,8 @@ class BTLEBroadcaster: NSObject, CBPeripheralManagerDelegate {
         }
         
         self.primaryService = service
+        
+        print("\(#file).\(#function) advertising device identifier \(deviceIdentifier.uuidString)")
         peripheralManager?.startAdvertising([
             CBAdvertisementDataLocalNameKey: "CoLocate",
             CBAdvertisementDataServiceUUIDsKey: [service.uuid]
