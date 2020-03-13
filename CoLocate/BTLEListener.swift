@@ -70,22 +70,30 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         //var gotValidID = false
         var gotBeacon = false;
         var deviceID:String?
-        print("HW IDENTIFIER: " + peripheral.identifier.uuidString)
+        //print("HW IDENTIFIER: " + peripheral.identifier.uuidString)
         //print("Num services: \(advertisementData.count)")
         if (advertisementData.keys.contains("kCBAdvDataLocalName") && advertisementData.keys.contains("kCBAdvDataServiceUUIDs")) {
             //print("  META MATCHES")
-            print(String(describing: advertisementData["kCBAdvDataLocalName"]!))
+            //print(String(describing: advertisementData["kCBAdvDataLocalName"]!))
             if (String(describing: advertisementData["kCBAdvDataLocalName"]!) == "CoLocate") {
                 //print("  BEACON INFO")
                 let id = String(describing: (advertisementData["kCBAdvDataServiceUUIDs"] as? NSMutableArray)![0])
-                print("   BEACON ID " + id)
+                print("   FOREGROUND BEACON ID " + id + " with rssi: \(RSSI)")
                 distanceManager.addDistance(remoteID: id, rssi: Int(truncating: RSSI))
             }
+        } else {
+            // Could be running in the background - introspect GATT metadata
+            
+            lastRssi[peripheral.identifier.uuidString] = RSSI
+            peripheralList.append(peripheral)
+            centralManager?.connect(peripheral, options: nil)
         }
+        /*
         for svc in advertisementData {
             print("  field data: " + svc.key + " = " + String(describing: svc.value))
         }
         print("END HW")
+ */
         /*
         for svckey in advertisementData.keys {
             print("KEY: " + svckey)
@@ -130,8 +138,6 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         */
         //if (gotValidID) {
             //print("Valid service ID. Connecting to peripheral")
-            peripheralList.append(peripheral)
-            centralManager?.connect(peripheral, options: nil)
         //}
     }
     
@@ -159,8 +165,10 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
             return
         }
         peripheralList.append(peripheral)
-        for svc in peripheral.services! {
-            peripheral.discoverCharacteristics([BTLEBroadcaster.primaryServiceUUID], for: svc)
+        if let svcs = peripheral.services {
+            for svc in svcs {
+                peripheral.discoverCharacteristics([BTLEBroadcaster.primaryServiceUUID], for: svc)
+            }
         }
     }
     
@@ -172,19 +180,20 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         for theChar in chars {
             //print("GOT CHAR!")
             if String(describing: theChar.uuid) != "Continuity" {
-                print("    peripheral ID: " + peripheral.identifier.uuidString + " characteristic uuid: " + String(describing: theChar.uuid) + " char value: " + String(describing: theChar.value))
+                //print("    peripheral ID: " + peripheral.identifier.uuidString + " service UUID: " + service.uuid.uuidString + " characteristic uuid: " + String(describing: theChar.uuid) + " char value: " + String(describing: theChar.value))
                 // read char
-                peripheral.readValue(for: theChar);
+                //peripheral.readValue(for: theChar);
                 
                 if theChar.uuid.uuidString == BTLEBroadcaster.primaryServiceUUID.uuidString {
+                    print("**************** BACKGROUND BEACON!!! ********************")
                     // characteristic ID is the device ID
                     //print("    CONTACT!!! " + theChar.uuid.uuidString)
-                    let svcid = service.uuid.uuidString
-                    if (lastRssi.keys.contains(svcid)) {
-                        let rssi = Int(truncating: lastRssi[service.uuid.uuidString]!)
-                        print("    Adding distance for remoteDeviceID: " + service.uuid.uuidString + " rssi: \(rssi)")
+                    let pid = peripheral.identifier.uuidString
+                    if (lastRssi.keys.contains(pid)) {
+                        let rssi = Int(truncating: lastRssi[pid]!)
+                        print("    Adding distance for deviceID: " + service.uuid.uuidString + " rssi: \(rssi)")
                         distanceManager.addDistance(remoteID: service.uuid.uuidString,rssi: rssi)
-                        lastRssi.removeValue(forKey: service.uuid.uuidString)
+                        //lastRssi.removeValue(forKey: pid)
                         rangedDeviceIDs.append(service.uuid.uuidString)
                     }
                 }
@@ -239,9 +248,13 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     }
     
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
-        print("    peripheral id: " + peripheral.identifier + " characteristic: " + String(describing: characteristic.uuid) + " value: " + String(describing: characteristic.value))
+        let uid = String(describing: characteristic.uuid)
+        if let val = characteristic.value {
+            let fval = String(describing: val)
+            print("    CHAR VALUE: peripheral id: " + peripheral.identifier.uuidString + " characteristic: " + uid + " value: " + fval)
+        }
     }
-    
+    /*
     func didReadValueForCharacteristic(_ characteristic: CBCharacteristic) {
         
     //if characteristic.uuid == BleDeviceProfile.MAC_ADDRESS, let mac_address = characteristic.value?.hexEncodedString().uppercased(){
@@ -249,8 +262,9 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
                // print("MAC_ADDRESS: \(macAddress)")
           //  }
     }
+ */
     
-}
+}/*
 extension String {
     func separate(every stride: Int = 4, with separator: Character = " ") -> String {
         return String(enumerated().map { $0 > 0 && $0 % stride == 0 ? [separator, $1] : [$1]}.joined())
@@ -270,3 +284,4 @@ func hexEncodedString() -> String {
         return String(utf16CodeUnits: hexChars, count: hexChars.count)
     }
 }
+*/
