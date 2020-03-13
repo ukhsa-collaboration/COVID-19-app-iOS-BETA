@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -17,29 +18,38 @@
         <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qbe-vc-ddA">
             <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NHSLogo" translatesAutoresizingMaskIntoConstraints="NO" id="f8U-YR-5Ae">
-                    <rect key="frame" x="20" y="22.5" width="48" height="19"/>
-                </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k3q-if-bTc">
-                    <rect key="frame" x="76" y="21.5" width="318" height="21"/>
-                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="4EH-7d-PWf">
+                    <rect key="frame" x="20" y="0.0" width="374" height="64"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NHSLogo" translatesAutoresizingMaskIntoConstraints="NO" id="f8U-YR-5Ae">
+                            <rect key="frame" x="0.0" y="22.5" width="48" height="19"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k3q-if-bTc">
+                            <rect key="frame" x="56" y="22" width="318" height="20.5"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="f8U-YR-5Ae" firstAttribute="leading" secondItem="4EH-7d-PWf" secondAttribute="leading" id="9lC-K2-7bW"/>
+                        <constraint firstAttribute="trailing" secondItem="k3q-if-bTc" secondAttribute="trailing" id="icx-Gn-U8B"/>
+                    </constraints>
+                </stackView>
             </subviews>
             <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="f8U-YR-5Ae" firstAttribute="leading" secondItem="qbe-vc-ddA" secondAttribute="leading" constant="20" symbolic="YES" id="FEC-tO-XeJ"/>
-                <constraint firstItem="k3q-if-bTc" firstAttribute="leading" secondItem="f8U-YR-5Ae" secondAttribute="trailing" constant="8" symbolic="YES" id="Mxi-72-E3q"/>
-                <constraint firstItem="f8U-YR-5Ae" firstAttribute="centerY" secondItem="k3q-if-bTc" secondAttribute="centerY" id="Vf0-Hl-v4U"/>
-                <constraint firstAttribute="trailing" secondItem="k3q-if-bTc" secondAttribute="trailing" constant="20" symbolic="YES" id="cnX-nr-whN"/>
+                <constraint firstAttribute="trailing" secondItem="4EH-7d-PWf" secondAttribute="trailing" constant="20" symbolic="YES" id="1Da-s1-ewW"/>
+                <constraint firstItem="4EH-7d-PWf" firstAttribute="top" secondItem="qbe-vc-ddA" secondAttribute="top" id="C0U-XV-aap"/>
+                <constraint firstItem="4EH-7d-PWf" firstAttribute="leading" secondItem="qbe-vc-ddA" secondAttribute="leading" constant="20" symbolic="YES" id="HUf-9i-Rvt"/>
+                <constraint firstAttribute="width" constant="414" id="Pko-wu-R4I"/>
+                <constraint firstAttribute="bottom" secondItem="4EH-7d-PWf" secondAttribute="bottom" id="bif-6O-z03"/>
                 <constraint firstAttribute="height" constant="64" id="ffT-DZ-Crg"/>
-                <constraint firstItem="f8U-YR-5Ae" firstAttribute="centerY" secondItem="qbe-vc-ddA" secondAttribute="centerY" id="sOp-68-Vsm"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="132" y="154"/>
+            <point key="canvasLocation" x="131.8840579710145" y="153.34821428571428"/>
         </view>
     </objects>
     <resources>
