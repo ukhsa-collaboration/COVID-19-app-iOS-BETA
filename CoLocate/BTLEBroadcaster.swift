@@ -8,11 +8,16 @@
 
 import Foundation
 import CoreBluetooth
+import UIKit
 
 class BTLEBroadcaster: NSObject, CBPeripheralManagerDelegate {
     
-    static let primaryServiceUUID = CBUUID(nsuuid: UUID(uuidString: "c1f5983c-fa94-4ac8-8e2e-bb86d6de9b21")!)
-    var deviceUUID:CBUUID? // TODO REPLACE THIS WITH A UNIQUE ID FROM SOMEWHERE UNIQUE TO THIS DEVICE (SERVER GENERATED)
+    static let coLocateServiceUUID = CBUUID(nsuuid: UUID(uuidString: "c1f5983c-fa94-4ac8-8e2e-bb86d6de9b21")!)
+    
+    // This is safe to force-unwrap, according to the docs this will only be nil if we're running before the device
+    // has been unlocked
+    var citizenUUID: CBUUID = CBUUID(nsuuid: UIDevice.current.identifierForVendor!)
+    
     static let identityCharacteristicUUID = CBUUID(nsuuid: UUID(uuidString: "85BF337C-5B64-48EB-A5F7-A9FED135C972")!)
 
     var primaryService: CBService?
@@ -24,7 +29,7 @@ class BTLEBroadcaster: NSObject, CBPeripheralManagerDelegate {
     var peripheral: CBPeripheral?
     
     init(deviceID: UUID) {
-        deviceUUID = CBUUID(nsuuid: deviceID)
+        citizenUUID = CBUUID(nsuuid: deviceID)
     }
     
     func start() {
@@ -59,22 +64,14 @@ class BTLEBroadcaster: NSObject, CBPeripheralManagerDelegate {
         case .poweredOn:
             print("\(#file).\(#function) .poweredOn")
          
-            print("DEVICE ID: " + self.deviceUUID!.uuidString)
-            let service = CBMutableService(type: deviceUUID!, primary: true)
-            var idChar = CBMutableCharacteristic(type: deviceUUID!, properties: CBCharacteristicProperties([CBCharacteristicProperties.read]), value: UUID().uuidString.data(using: .utf8), permissions: .readable)
-            //idChar.descriptors = [
-            //    CBMutableDescriptor(type: BTLEBroadcaster.identityCharacteristicUUID,value:"uk.nhs.colocate.deviceID".data(using: .utf8))
-            //]
-            //var idValueChar = CBMutableCharacteristic(type: BTLEBroadcaster.primaryServiceUUID, properties: CBCharacteristicProperties([CBCharacteristicProperties.read]), value: BTLEBroadcaster.primaryServiceUUID.uuidString.data(using: .utf8), permissions: .readable)
-            //idValueChar.descriptors = [
-            //    CBMutableDescriptor(type: BTLEBroadcaster.primaryServiceUUID, value:"uk.nhs.colocate.deviceID".data(using: .utf8))
-            //]
-            service.characteristics = [idChar]
-            print("CHARAC LENGTH: \(service.characteristics?.count)")
+            let service = CBMutableService(type: BTLEBroadcaster.coLocateServiceUUID, primary: true)
+            
+            // TODO: It seems like only the first 36 bits of the citizenUUID value get through—is this a hard limit?
+            // doesn't seem to be documented anywhere
+            let identityCharacteristic = CBMutableCharacteristic(type: BTLEBroadcaster.identityCharacteristicUUID, properties: CBCharacteristicProperties([.read]), value: citizenUUID.data, permissions: .readable)
+            
+            service.characteristics = [identityCharacteristic]
             peripheralManager?.add(service)
-            //let service2 = CBMutableService(type: BTLEBroadcaster.primaryServiceUUID, primary: true)
-            //peripheralManager?.add(service2)
-            // cannot add two services, even primary - only apple devices can do that
         }
     }
     

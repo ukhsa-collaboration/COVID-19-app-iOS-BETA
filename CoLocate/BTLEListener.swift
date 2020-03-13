@@ -17,20 +17,19 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     
     var peripheralManager: CBPeripheralManager?
     
-    var peripheralList = Array<CBPeripheral>()
+    var peripheralList: [CBPeripheral] = []
     
     let inRangeperipherals: [CBPeripheral] = []
     
     var distanceManager = DistanceManager()
-    var lastRssi = Dictionary<String,NSNumber>()
-    var rangedDeviceIDs = Array<String>()
+    var lastRssi: [String: NSNumber] = [:]
+    var rangedDeviceIDs: [String] = []
     
     func start() {
         centralManager = CBCentralManager(
             delegate: self,
-            queue: DispatchQueue.global(),
+            queue: nil,
             options: [CBCentralManagerOptionRestoreIdentifierKey: restoreIdentifier])
-        //peripheralManager = CBPeripheralManager(delegate: self as? CBPeripheralManagerDelegate, queue: DispatchQueue.global())
     }
     
     // MARK: CBCentralManagerDelegate
@@ -58,230 +57,90 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         case .poweredOn:
             print("\(#file).\(#function) .poweredOn")
             
-            central.scanForPeripherals(withServices: [], options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
+//            Comment this back in for testing if necessary, but be aware AllowDuplicates is ignored
+//            ignored while running in the background, so we can't count on this behaviour
+//            central.scanForPeripherals(withServices: [BTLEBroadcaster.primaryServiceUUID], options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
+            central.scanForPeripherals(withServices: [BTLEBroadcaster.coLocateServiceUUID])
         }
     }
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        //print("\(#file).\(#function) discovered peripheral: \(String(describing: peripheral.name))")
-        //print("\(#file).\(#function) discovered peripheral: \(advertisementData)")
+        print("\(#file).\(#function) discovered peripheral: \(String(describing: peripheral.name))")
+        print("\(#file).\(#function) discovered peripheral: \(advertisementData)")
         
-        //if let svc = advertisementData.first {
-        //var gotValidID = false
-        var gotBeacon = false;
-        var deviceID:String?
-        //print("HW IDENTIFIER: " + peripheral.identifier.uuidString)
-        //print("Num services: \(advertisementData.count)")
-        if (advertisementData.keys.contains("kCBAdvDataLocalName") && advertisementData.keys.contains("kCBAdvDataServiceUUIDs")) {
-            //print("  META MATCHES")
-            //print(String(describing: advertisementData["kCBAdvDataLocalName"]!))
-            if (String(describing: advertisementData["kCBAdvDataLocalName"]!) == "CoLocate") {
-                //print("  BEACON INFO")
-                let id = String(describing: (advertisementData["kCBAdvDataServiceUUIDs"] as? NSMutableArray)![0])
-                print("   FOREGROUND BEACON ID " + id + " with rssi: \(RSSI)")
-                distanceManager.addDistance(remoteID: id, rssi: Int(truncating: RSSI))
-            }
-        } else {
-            // Could be running in the background - introspect GATT metadata
-            
-            lastRssi[peripheral.identifier.uuidString] = RSSI
-            peripheralList.append(peripheral)
-            centralManager?.connect(peripheral, options: nil)
-        }
-        /*
-        for svc in advertisementData {
-            print("  field data: " + svc.key + " = " + String(describing: svc.value))
-        }
-        print("END HW")
- */
-        /*
-        for svckey in advertisementData.keys {
-            print("KEY: " + svckey)
-        }
-        if (advertisementData.keys.contains("kCBAdvDataServiceUUIDs")) {
-            print("  service data: " + String(describing: advertisementData["kCBAdvDataServiceUUIDs"]))
-        }
-        for svc in advertisementData {
-            print("  field data: " + svc.key + " = " + String(describing: svc.value))
-            //print("GOT FIRST ADVERT")
-            //print("ADVERTISED SERVICE INSTANCE: " + String(describing: svc.value) + " of type: " + String(describing: type(of: svc.value)))
-            if let idArray = svc.value as? NSMutableArray {
-                // either a mutable array of UUIDs (E.g. custom app) or a single number (E.g. heart monitor)
-                //print("GOT NSMUTABLEARRAY")
-                //if let firstId = idArray.firstObject {
-                    //print(idArray)
-                    //print("ADVERTISED SVC ID: " + String(describing: firstId) + " of type: " + String(describing: type(of:firstId)))
-                    // ONLY THE PRIMARY IS SHOWN AT THIS POINT
-                    for id in idArray {
-                        print("   SVC ID: " + String(describing: id))
-                        if (BTLEBroadcaster.primaryServiceUUID.uuidString == String(describing: id)) {
-                            gotBeacon = true
-                        } else {
-                            deviceID = String(describing: id)
-                            print("  device ID??? " + deviceID!)
-                        }
-                        //lastRssi[String(describing: id)] = RSSI
-                        //gotValidID = true
-                    }
-                    //if (String(describing: firstId) == BTLEBroadcaster.primaryServiceUUID.uuidString) {
-                    //}
-
-                    //peripheral.discoverCharacteristics(nil, for: UUID(uuidString: String(describing: firstId)))
-                //}
-            }
-        }
-        print("END NUM SERVICES")
-        if (gotBeacon && deviceID != nil) {
-            print("   GOT SONAR BEACON!")
-            distanceManager.addDistance(remoteID: deviceID!, rssi: Int(truncating: RSSI))
-        }
-        */
-        //if (gotValidID) {
-            //print("Valid service ID. Connecting to peripheral")
-        //}
+        lastRssi[peripheral.identifier.uuidString] = RSSI
+        peripheralList.append(peripheral)
+        centralManager?.connect(peripheral)
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        //print("\(#file).\(#function) discovered peripheral: \(String(describing: peripheral.name))")
+        print("\(#file).\(#function) discovered peripheral: \(String(describing: peripheral.name))")
         
         peripheral.delegate = self
-        //peripheral.discoverServices(nil)
         peripheralList.append(peripheral)
-        peripheral.discoverServices(nil)
+        peripheral.discoverServices([BTLEBroadcaster.coLocateServiceUUID])
     }
     
     func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
         print("\(#file).\(#function) got centralManager: \(central)")
+        
         self.centralManager = central
     }
     
-    
     // MARK: CBPeripheralDelegate
+    
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
-        //print("\(#file).\(#function) services = \(String(describing: peripheral.services))")
+        print("\(#file).\(#function) services = \(String(describing: peripheral.services))")
         
-        guard error == nil, let primaryService = peripheral.services?.first else {
+        // TODO: we're coalescing a bunch of error cases into one here, this might be confusing
+        guard error == nil, peripheral.services?.count == 1, let primaryService = peripheral.services?.first else {
             print("\(#file).\(#function) no primary service found (error: \(String(describing: error))")
             return
         }
         peripheralList.append(peripheral)
-        if let svcs = peripheral.services {
-            for svc in svcs {
-                peripheral.discoverCharacteristics([BTLEBroadcaster.primaryServiceUUID], for: svc)
-            }
-        }
+        
+        peripheral.discoverCharacteristics([BTLEBroadcaster.identityCharacteristicUUID], for: primaryService)
     }
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         //print("\(#file).\(#function) characteristics = \(String(describing: service.characteristics))")
         
         guard error == nil, let chars = service.characteristics else {return}
-        
+
+        // find our identity characteristic in the list—there'll be a continuity characteristic in the mix too
         for theChar in chars {
-            //print("GOT CHAR!")
-            if String(describing: theChar.uuid) != "Continuity" {
-                //print("    peripheral ID: " + peripheral.identifier.uuidString + " service UUID: " + service.uuid.uuidString + " characteristic uuid: " + String(describing: theChar.uuid) + " char value: " + String(describing: theChar.value))
-                // read char
-                //peripheral.readValue(for: theChar);
-                
-                if theChar.uuid.uuidString == BTLEBroadcaster.primaryServiceUUID.uuidString {
-                    print("**************** BACKGROUND BEACON!!! ********************")
-                    // characteristic ID is the device ID
-                    //print("    CONTACT!!! " + theChar.uuid.uuidString)
-                    let pid = peripheral.identifier.uuidString
-                    if (lastRssi.keys.contains(pid)) {
-                        let rssi = Int(truncating: lastRssi[pid]!)
-                        print("    Adding distance for deviceID: " + service.uuid.uuidString + " rssi: \(rssi)")
-                        distanceManager.addDistance(remoteID: service.uuid.uuidString,rssi: rssi)
-                        //lastRssi.removeValue(forKey: pid)
-                        rangedDeviceIDs.append(service.uuid.uuidString)
-                    }
-                }
+            if theChar.uuid == BTLEBroadcaster.identityCharacteristicUUID {
+                peripheral.readValue(for: theChar)
             }
-            //print(String(describing: theChar.value))
-            //if theChar.uuid.uuidString == BTLEBroadcaster.identityCharacteristicUUID.uuidString {
-                // must be a uuid
-            //    if let value = theChar.value {
-            //        doSomethingWithIdentityWeFound(data: value)
-            //    }
-            //}
-            /*
-            if let descs = theChar.descriptors {
-                for desc in descs {
-                    if let data = desc.value {
-                        print("DESCRIPTOR DATA:-")
-                        print(data)
-                        if let dat = data as? Data {
-                            if (String(data: dat, encoding: .utf8) == "uk.nhs.colocate.deviceID") {
-                                // value is a deviceID
-                                if let value = theChar.value {
-                                    doSomethingWithIdentityWeFound(data: value)
-                                }
-                            }
-                        }
-                    }
-                }
-            }
- */
         }
-        // Now release the connection???
-        
-        /*
-        guard error == nil, let identityCharacteristic = service.characteristics?.first else {
-            print("\(#file).\(#function) no identity characteristic found (error: \(String(describing: error))")
-            return
-        }
-        
-        
-        if let value = identityCharacteristic.value {
-            doSomethingWithIdentityWeFound(data: value)
-        } else {
-            print("\(#file).\(#function) no value found for identity characteristic")
-        }
- */
     }
-    
+
+    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+        if let data = characteristic.value {
+//            let pid = peripheral.identifier.uuidString
+//            if (lastRssi.keys.contains(pid)) {
+//                let rssi = Int(truncating: lastRssi[pid]!)
+//                print("    Adding distance for deviceID: " + value + " rssi: \(rssi)")
+//                distanceManager.addDistance(remoteID: service.uuid.uuidString, rssi: rssi)
+//                //lastRssi.removeValue(forKey: pid)
+//                rangedDeviceIDs.append(service.uuid.uuidString)
+//
+//
+//            let uid = String(describing: characteristic.uuid)
+//            if let val = characteristic.value {
+//                let fval = String(describing: val)
+//                print("    CHAR VALUE: peripheral id: " + peripheral.identifier.uuidString + " characteristic: " + uid + " value: " + fval)
+//            }
+
+            doSomethingWithIdentityWeFound(data: data)
+        }
+            
+    }
+
     // TODO: Indirect me through a "save the data service" protocol with a stub implementation which just does this log
     func doSomethingWithIdentityWeFound(data: Data) {
         let string = String(data: data, encoding: .utf8)!
         print("*** Contact event at \(Date()) with identity \(string)")
     }
     
-    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
-        let uid = String(describing: characteristic.uuid)
-        if let val = characteristic.value {
-            let fval = String(describing: val)
-            print("    CHAR VALUE: peripheral id: " + peripheral.identifier.uuidString + " characteristic: " + uid + " value: " + fval)
-        }
-    }
-    /*
-    func didReadValueForCharacteristic(_ characteristic: CBCharacteristic) {
-        
-    //if characteristic.uuid == BleDeviceProfile.MAC_ADDRESS, let mac_address = characteristic.value?.hexEncodedString().uppercased(){
-    //            let macAddress = mac_address.separate(every: 2, with: ":")
-               // print("MAC_ADDRESS: \(macAddress)")
-          //  }
-    }
- */
-    
-}/*
-extension String {
-    func separate(every stride: Int = 4, with separator: Character = " ") -> String {
-        return String(enumerated().map { $0 > 0 && $0 % stride == 0 ? [separator, $1] : [$1]}.joined())
-    }
 }
-extension Data{
-func hexEncodedString() -> String {
-        let hexDigits = Array("0123456789abcdef".utf16)
-        var hexChars = [UTF16.CodeUnit]()
-        hexChars.reserveCapacity(count * 2)
-
-        for byte in self {
-            let (index1, index2) = Int(byte).quotientAndRemainder(dividingBy: 16)
-            hexChars.insert(hexDigits[index2], at: 0)
-            hexChars.insert(hexDigits[index1], at: 0)
-        }
-        return String(utf16CodeUnits: hexChars, count: hexChars.count)
-    }
-}
-*/
