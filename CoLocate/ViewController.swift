@@ -25,8 +25,8 @@ class ViewController: UIViewController {
         checkLocationServices()
         print("Initialising bluetooth services")
         
-        broadcaster = BTLEBroadcaster()
-        broadcaster.start()
+        //broadcaster = BTLEBroadcaster(deviceID: self.deviceID!)
+        //broadcaster.start()
         
         print("Initialisation complete")
     }
@@ -43,8 +43,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var lastAccuracy: UILabel!
     
     // Combination or MAJOR and MINOR gives many million ID options for a user on a given device
-    var major:UInt16?
-    var minor:UInt16?
+    //var major:UInt16?
+    //var minor:UInt16?
+    var deviceID:UUID?
     
     private var fetchedBeaconRC: NSFetchedResultsController<BeaconPing>!
     private var appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -74,11 +75,16 @@ class ViewController: UIViewController {
                     let fileUrl = URL(fileURLWithPath: filePath)
                     let data = try Data(contentsOf: fileUrl, options: .mappedIfSafe)
                     if let json = try JSONSerialization.jsonObject(with: data) as? [String: Any] {
+                        /*
                         if let major = json["major"] as? UInt16 {
                             self.major = major
                         }
                         if let minor = json["minor"] as? UInt16 {
                             self.minor = minor
+                        }
+ */
+                        if let uuid = json["deviceID"] as? String {
+                            self.deviceID = UUID(uuidString: uuid)!
                         }
                     }
                 } catch {
@@ -88,10 +94,11 @@ class ViewController: UIViewController {
             } else {
                 print("FILE NOT AVAILABLE")
                 // generate uint16 at random
-                self.major = UInt16.random(in:UInt16.min...UInt16.max)
-                self.minor = UInt16.random(in:UInt16.min...UInt16.max)
+                //self.major = UInt16.random(in:UInt16.min...UInt16.max)
+                //self.minor = UInt16.random(in:UInt16.min...UInt16.max)
+                self.deviceID = UUID() // TODO GET THIS FROM THE REMOTE SERVER TO PREVENT CLASHES
                 // save to json file
-                var dictonary : [String : Any] = ["major": self.major,"minor": self.minor]
+                var dictonary : [String : Any] = ["deviceID": self.deviceID!.uuidString]//major": self.major,"minor": self.minor]
                 do {
                     if let jsonData = try JSONSerialization.data(withJSONObject: dictonary, options: .init(rawValue: 0)) as? Data
                     {

@@ -39,7 +39,7 @@ class PermissionsPromptViewController: UIViewController {
       #if targetEnvironment(simulator)
       #else
         let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
-        appDelegate.broadcaster = BTLEBroadcaster()
+        appDelegate.broadcaster = BTLEBroadcaster() // TODO DO THIS HERE, BUT USE A GLOBAL SINGLETON OR SIMILAR FOR DEVICE ID AND CROSS_CONTROLLER DATA
         appDelegate.broadcaster?.start()
         
         appDelegate.listener = BTLEListener()

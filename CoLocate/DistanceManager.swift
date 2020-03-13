@@ -14,9 +14,9 @@ class DistanceManager {
     // values from testing in the lab
     let rssi1m:Int = -46 // "immediate"
     let rssi3m:Int = -60 // "near"
+    let rssi5m:Int = -65 // "semi-near"
     // lower = "far"
     let rssiUnknown = 0 // "unknown"
-    //let rssi5m:Int = -65 // unused
     
     let maxReadings = 5
     
@@ -46,16 +46,18 @@ class DistanceManager {
             var runningTotal = 0
             for value in values {
                 runningTotal += value
-                print("value: \(value)")
+                //print("value: \(value)")
             }
             let avg = runningTotal / values.count
-            print("avg: \(avg)")
+            //print("avg: \(avg)")
             if (rssiUnknown == avg) {
                 ranges[remoteID] = "unknown"
             } else if avg >= rssi1m {
                 ranges[remoteID] = "immediate"
             } else if avg >= rssi3m {
                 ranges[remoteID] = "near"
+            } else if avg >= rssi5m {
+                ranges[remoteID] = "semi-near"
             } else {
                 ranges[remoteID] = "far"
             }
