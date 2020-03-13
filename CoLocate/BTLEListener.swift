@@ -67,8 +67,34 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         //print("\(#file).\(#function) discovered peripheral: \(advertisementData)")
         
         //if let svc = advertisementData.first {
-        var gotValidID = false
+        //var gotValidID = false
+        var gotBeacon = false;
+        var deviceID:String?
+        print("HW IDENTIFIER: " + peripheral.identifier.uuidString)
+        //print("Num services: \(advertisementData.count)")
+        if (advertisementData.keys.contains("kCBAdvDataLocalName") && advertisementData.keys.contains("kCBAdvDataServiceUUIDs")) {
+            //print("  META MATCHES")
+            print(String(describing: advertisementData["kCBAdvDataLocalName"]!))
+            if (String(describing: advertisementData["kCBAdvDataLocalName"]!) == "CoLocate") {
+                //print("  BEACON INFO")
+                let id = String(describing: (advertisementData["kCBAdvDataServiceUUIDs"] as? NSMutableArray)![0])
+                print("   BEACON ID " + id)
+                distanceManager.addDistance(remoteID: id, rssi: Int(truncating: RSSI))
+            }
+        }
         for svc in advertisementData {
+            print("  field data: " + svc.key + " = " + String(describing: svc.value))
+        }
+        print("END HW")
+        /*
+        for svckey in advertisementData.keys {
+            print("KEY: " + svckey)
+        }
+        if (advertisementData.keys.contains("kCBAdvDataServiceUUIDs")) {
+            print("  service data: " + String(describing: advertisementData["kCBAdvDataServiceUUIDs"]))
+        }
+        for svc in advertisementData {
+            print("  field data: " + svc.key + " = " + String(describing: svc.value))
             //print("GOT FIRST ADVERT")
             //print("ADVERTISED SERVICE INSTANCE: " + String(describing: svc.value) + " of type: " + String(describing: type(of: svc.value)))
             if let idArray = svc.value as? NSMutableArray {
@@ -80,8 +106,14 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
                     // ONLY THE PRIMARY IS SHOWN AT THIS POINT
                     for id in idArray {
                         print("   SVC ID: " + String(describing: id))
-                        lastRssi[String(describing: id)] = RSSI
-                        gotValidID = true
+                        if (BTLEBroadcaster.primaryServiceUUID.uuidString == String(describing: id)) {
+                            gotBeacon = true
+                        } else {
+                            deviceID = String(describing: id)
+                            print("  device ID??? " + deviceID!)
+                        }
+                        //lastRssi[String(describing: id)] = RSSI
+                        //gotValidID = true
                     }
                     //if (String(describing: firstId) == BTLEBroadcaster.primaryServiceUUID.uuidString) {
                     //}
@@ -90,11 +122,17 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
                 //}
             }
         }
-        if (gotValidID) {
+        print("END NUM SERVICES")
+        if (gotBeacon && deviceID != nil) {
+            print("   GOT SONAR BEACON!")
+            distanceManager.addDistance(remoteID: deviceID!, rssi: Int(truncating: RSSI))
+        }
+        */
+        //if (gotValidID) {
             //print("Valid service ID. Connecting to peripheral")
             peripheralList.append(peripheral)
             centralManager?.connect(peripheral, options: nil)
-        }
+        //}
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
@@ -134,7 +172,10 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         for theChar in chars {
             //print("GOT CHAR!")
             if String(describing: theChar.uuid) != "Continuity" {
-                //print("    characteristic uuid: " + String(describing: theChar.uuid))
+                print("    peripheral ID: " + peripheral.identifier.uuidString + " characteristic uuid: " + String(describing: theChar.uuid) + " char value: " + String(describing: theChar.value))
+                // read char
+                peripheral.readValue(for: theChar);
+                
                 if theChar.uuid.uuidString == BTLEBroadcaster.primaryServiceUUID.uuidString {
                     // characteristic ID is the device ID
                     //print("    CONTACT!!! " + theChar.uuid.uuidString)
@@ -197,4 +238,35 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         print("*** Contact event at \(Date()) with identity \(string)")
     }
     
+    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+        print("    peripheral id: " + peripheral.identifier + " characteristic: " + String(describing: characteristic.uuid) + " value: " + String(describing: characteristic.value))
+    }
+    
+    func didReadValueForCharacteristic(_ characteristic: CBCharacteristic) {
+        
+    //if characteristic.uuid == BleDeviceProfile.MAC_ADDRESS, let mac_address = characteristic.value?.hexEncodedString().uppercased(){
+    //            let macAddress = mac_address.separate(every: 2, with: ":")
+               // print("MAC_ADDRESS: \(macAddress)")
+          //  }
+    }
+    
+}
+extension String {
+    func separate(every stride: Int = 4, with separator: Character = " ") -> String {
+        return String(enumerated().map { $0 > 0 && $0 % stride == 0 ? [separator, $1] : [$1]}.joined())
+    }
+}
+extension Data{
+func hexEncodedString() -> String {
+        let hexDigits = Array("0123456789abcdef".utf16)
+        var hexChars = [UTF16.CodeUnit]()
+        hexChars.reserveCapacity(count * 2)
+
+        for byte in self {
+            let (index1, index2) = Int(byte).quotientAndRemainder(dividingBy: 16)
+            hexChars.insert(hexDigits[index2], at: 0)
+            hexChars.insert(hexDigits[index1], at: 0)
+        }
+        return String(utf16CodeUnits: hexChars, count: hexChars.count)
+    }
 }

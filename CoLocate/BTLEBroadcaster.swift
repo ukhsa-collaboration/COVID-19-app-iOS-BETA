@@ -59,8 +59,8 @@ class BTLEBroadcaster: NSObject, CBPeripheralManagerDelegate {
         case .poweredOn:
             print("\(#file).\(#function) .poweredOn")
          
-            print("DEVICE ID: " + BTLEBroadcaster.deviceUUID!.uuidString)
-            let service = CBMutableService(type: BTLEBroadcaster.deviceUUID!, primary: true)
+            print("DEVICE ID: " + self.deviceUUID!.uuidString)
+            let service = CBMutableService(type: deviceUUID!, primary: true)
             //var idChar = CBMutableCharacteristic(type: BTLEBroadcaster.identityCharacteristicUUID, properties: CBCharacteristicProperties([CBCharacteristicProperties.read]), value: BTLEBroadcaster.randomUUID.uuidString.data(using: .utf8), permissions: .readable)
             //idChar.descriptors = [
             //    CBMutableDescriptor(type: BTLEBroadcaster.identityCharacteristicUUID,value:"uk.nhs.colocate.deviceID".data(using: .utf8))
@@ -72,6 +72,8 @@ class BTLEBroadcaster: NSObject, CBPeripheralManagerDelegate {
             service.characteristics = [idValueChar]
             print("CHARAC LENGTH: \(service.characteristics?.count)")
             peripheralManager?.add(service)
+            //let service2 = CBMutableService(type: BTLEBroadcaster.primaryServiceUUID, primary: true)
+            //peripheralManager?.add(service2)
             // cannot add two services, even primary - only apple devices can do that
         }
     }
