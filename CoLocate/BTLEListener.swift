@@ -89,6 +89,13 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     
     // MARK: CBPeripheralDelegate
     
+    func peripheral(_ peripheral: CBPeripheral, didModifyServices invalidatedServices: [CBService]) {
+        print("\(#file).\(#function) peripheral \(peripheral) invalidating services:\n")
+        for service in invalidatedServices {
+            print("\(#file).\(#function)     \(service):\n")
+        }
+    }
+    
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         print("\(#file).\(#function) services = \(String(describing: peripheral.services))")
         
@@ -149,7 +156,9 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
 //                print("    CHAR VALUE: peripheral id: " + peripheral.identifier.uuidString + " characteristic: " + uid + " value: " + fval)
 //            }
 
-            doSomethingWithIdentityWeFound(data: data)
+            if characteristic.uuid == BTLEBroadcaster.deviceIdentifierCharacteristicUUID {
+                doSomethingWithIdentityWeFound(data: data)                
+            }
         }
             
     }
