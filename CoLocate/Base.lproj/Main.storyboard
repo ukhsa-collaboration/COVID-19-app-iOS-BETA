@@ -20,7 +20,7 @@
                                 <rect key="frame" x="0.0" y="44" width="375" height="734"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gDX-JJ-6gF" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="349.66666666666669"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="389"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S7N-Z2-YHu">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
@@ -45,15 +45,21 @@
                                                     <constraint firstItem="Vay-U7-VJW" firstAttribute="centerY" secondItem="S7N-Z2-YHu" secondAttribute="centerY" id="qa4-aY-VjO"/>
                                                 </constraints>
                                             </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Headline" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hZ4-I9-3SE">
+                                                <rect key="frame" x="20" y="96" width="335" height="40.666666666666657"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FAq-jW-bZW">
-                                                <rect key="frame" x="20" y="113.33333333333333" width="335" height="130.33333333333337"/>
+                                                <rect key="frame" x="20" y="152.66666666666663" width="335" height="130.33333333333337"/>
                                                 <string key="text">Bacon ipsum dolor amet chuck cupim ground round pig, swine pastrami rump strip steak bresaola jowl. Ball tip corned beef pastrami ribeye pork loin sausage capicola shankle brisket alcatra. Cupim ham short loin meatloaf pastrami.</string>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="95z-vR-2bH">
-                                                <rect key="frame" x="20" y="275.66666666666669" width="335" height="54"/>
+                                                <rect key="frame" x="20" y="315" width="335" height="54"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="54" id="yGf-cm-bDA"/>
                                                 </constraints>
@@ -63,19 +69,13 @@
                                                     <action selector="didTapContinue:" destination="Pfu-L3-5i0" eventType="touchUpInside" id="6pJ-Br-7RM"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hZ4-I9-3SE">
-                                                <rect key="frame" x="20" y="96" width="335" height="1.3333333333333286"/>
-                                                <fontDescription key="fontDescription" pointSize="1"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
                                             <constraint firstItem="hZ4-I9-3SE" firstAttribute="leading" secondItem="gDX-JJ-6gF" secondAttribute="leading" constant="20" symbolic="YES" id="15A-f7-kSS"/>
                                             <constraint firstAttribute="trailing" secondItem="hZ4-I9-3SE" secondAttribute="trailing" constant="20" symbolic="YES" id="32a-Y7-5LT"/>
                                             <constraint firstItem="FAq-jW-bZW" firstAttribute="leading" secondItem="gDX-JJ-6gF" secondAttribute="leading" constant="20" symbolic="YES" id="47t-1P-BUh"/>
-                                            <constraint firstItem="95z-vR-2bH" firstAttribute="top" secondItem="FAq-jW-bZW" secondAttribute="bottom" constant="32" id="FHN-Js-4CV"/>
+                                            <constraint firstItem="95z-vR-2bH" firstAttribute="top" secondItem="FAq-jW-bZW" secondAttribute="bottom" priority="750" constant="32" id="FHN-Js-4CV"/>
                                             <constraint firstAttribute="trailing" secondItem="95z-vR-2bH" secondAttribute="trailing" constant="20" symbolic="YES" id="GAl-rB-MEK"/>
                                             <constraint firstItem="FAq-jW-bZW" firstAttribute="top" secondItem="hZ4-I9-3SE" secondAttribute="bottom" constant="16" id="KWO-3a-sLq"/>
                                             <constraint firstAttribute="trailing" secondItem="FAq-jW-bZW" secondAttribute="trailing" constant="20" symbolic="YES" id="MEa-0s-0Vt"/>
