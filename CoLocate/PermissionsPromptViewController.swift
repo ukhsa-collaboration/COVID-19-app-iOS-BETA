@@ -46,7 +46,7 @@ class PermissionsPromptViewController: UIViewController {
         appDelegate.listener?.start()
       #endif
 
-      self.performSegue(withIdentifier: "showAreYouInfected", sender: nil)
+      self.performSegue(withIdentifier: "areYouInfectedSegue", sender: nil)
     }
     
     /*
