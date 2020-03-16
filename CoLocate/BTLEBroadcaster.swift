@@ -10,9 +10,15 @@ import Foundation
 import CoreBluetooth
 import UIKit
 
+protocol BTLEBroadcasterDelegate {
+    func btleBroadcaster(_ broadcaster: BTLEBroadcaster, didUpdateState state: CBManagerState)
+}
+
 class BTLEBroadcaster: NSObject, CBPeripheralManagerDelegate {
     
     static let coLocateServiceUUID = CBUUID(nsuuid: UUID(uuidString: "c1f5983c-fa94-4ac8-8e2e-bb86d6de9b21")!)
+    
+    var delegate: BTLEBroadcasterDelegate?
     
     // This is safe to force-unwrap, according to the docs this will only be nil if we're running before the device
     // has been unlocked
@@ -28,7 +34,9 @@ class BTLEBroadcaster: NSObject, CBPeripheralManagerDelegate {
     
     var peripheral: CBPeripheral?
     
-    func start() {
+    func start(delegate: BTLEBroadcasterDelegate?) {
+        self.delegate = delegate
+        
         peripheralManager = CBPeripheralManager(
             delegate: self,
             queue: nil,
@@ -38,6 +46,8 @@ class BTLEBroadcaster: NSObject, CBPeripheralManagerDelegate {
     // MARK: CBPeripheralManagerDelegate
     
     func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
+        delegate?.btleBroadcaster(self, didUpdateState: peripheral.state)
+        
         switch (peripheral.state) {
             
         case .unknown:

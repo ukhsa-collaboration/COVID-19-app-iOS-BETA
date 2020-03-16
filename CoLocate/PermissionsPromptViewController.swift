@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import CoreBluetooth
 
-class PermissionsPromptViewController: UIViewController {
+class PermissionsPromptViewController: UIViewController, BTLEBroadcasterDelegate, BTLEListenerDelegate {
 
     @IBOutlet weak var bodyHeadline: UILabel!
     @IBOutlet weak var bodyCopy: UILabel!
     @IBOutlet weak var continueButton: UIButton!
+    
+    private var btleReady: (listenerReady: Bool, broadcasterReady: Bool) = (false, false)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,16 +35,39 @@ class PermissionsPromptViewController: UIViewController {
     
     @IBAction func didTapContinue(_ sender: UIButton) {
       #if targetEnvironment(simulator)
+        btleReady.broadcasterReady = true
+        btleReady.listenerReady = true
+        segueIfBTLEReady()
       #else
         let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
         appDelegate.broadcaster = BTLEBroadcaster()
-        appDelegate.broadcaster?.start()
+        appDelegate.broadcaster?.start(self)
         
         appDelegate.listener = BTLEListener()
-        appDelegate.listener?.start()
+        appDelegate.listener?.start(self)
       #endif
-
-      self.performSegue(withIdentifier: "areYouInfectedSegue", sender: nil)
+    }
+    
+    private func segueIfBTLEReady() {
+        if btleReady.broadcasterReady && btleReady.listenerReady {
+            self.performSegue(withIdentifier: "enterDiagnosisSegue", sender: nil)
+        }
+    }
+    
+    // MARK: BTLEBroadcasterDelegate / BTLEListenerDelegate
+    
+    func btleBroadcaster(_ broadcaster: BTLEBroadcaster, didUpdateState state: CBManagerState) {
+        if state == .poweredOn {
+            btleReady.broadcasterReady = true
+        }
+        segueIfBTLEReady()
+    }
+    
+    func btleListener(_ listener: BTLEListener, didUpdateState state: CBManagerState) {
+        if state == .poweredOn {
+            btleReady.listenerReady = true
+        }
+        segueIfBTLEReady()
     }
     
     /*
