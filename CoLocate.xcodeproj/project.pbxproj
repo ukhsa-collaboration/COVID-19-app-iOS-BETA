@@ -16,6 +16,7 @@
 		6FC63C38241641BA007C8BF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FC63C37241641BA007C8BF3 /* Assets.xcassets */; };
 		6FC63C3B241641BA007C8BF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FC63C39241641BA007C8BF3 /* LaunchScreen.storyboard */; };
 		6FC63C432416D95C007C8BF3 /* nhs-logo-app.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FC63C422416D95C007C8BF3 /* nhs-logo-app.png */; };
+		A1E7A0592420028B0078174D /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1E7A0582420028B0078174D /* Colors.xcassets */; };
 		AE128D832417EBC900FC34FD /* BeaconModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AE128D812417EBC900FC34FD /* BeaconModel.xcdatamodeld */; };
 		AE2DCAA0241920B600A940FC /* BTLEBroadcaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2DCA9F241920B600A940FC /* BTLEBroadcaster.swift */; };
 		AEC6A7B6241AFF1C00B0237A /* DistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC6A7B5241AFF1C00B0237A /* DistanceManager.swift */; };
@@ -35,6 +36,7 @@
 		6FC63C3A241641BA007C8BF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6FC63C3C241641BA007C8BF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6FC63C422416D95C007C8BF3 /* nhs-logo-app.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nhs-logo-app.png"; sourceTree = "<group>"; };
+		A1E7A0582420028B0078174D /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		AE128D822417EBC900FC34FD /* BeaconModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BeaconModel.xcdatamodel; sourceTree = "<group>"; };
 		AE2DCA9F241920B600A940FC /* BTLEBroadcaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTLEBroadcaster.swift; sourceTree = "<group>"; };
 		AEC6A7B5241AFF1C00B0237A /* DistanceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistanceManager.swift; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				6FC63C37241641BA007C8BF3 /* Assets.xcassets */,
+				A1E7A0582420028B0078174D /* Colors.xcassets */,
 				AE128D8A2417EFCC00FC34FD /* Model */,
 				6FC63C30241641B8007C8BF3 /* AppDelegate.swift */,
 				AE2DCA9F241920B600A940FC /* BTLEBroadcaster.swift */,
@@ -160,6 +163,7 @@
 				6FC63C432416D95C007C8BF3 /* nhs-logo-app.png in Resources */,
 				6FC63C3B241641BA007C8BF3 /* LaunchScreen.storyboard in Resources */,
 				AEC6A7BE241BD82900B0237A /* LogoStrapline.xib in Resources */,
+				A1E7A0592420028B0078174D /* Colors.xcassets in Resources */,
 				6FC63C38241641BA007C8BF3 /* Assets.xcassets in Resources */,
 				6FC63C36241641B8007C8BF3 /* Main.storyboard in Resources */,
 			);

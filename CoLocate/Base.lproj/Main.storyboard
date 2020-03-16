@@ -4,7 +4,9 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -213,45 +215,81 @@
                                 <rect key="frame" x="0.0" y="88" width="375" height="690"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="gil-BB-Yfl">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="549.33333333333337"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="837"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CMf-AV-lEX" customClass="LogoStrapline" customModule="CoLocate" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You need to isolate yourself" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C5l-E0-nRg" userLabel="Warning Label">
-                                                <rect key="frame" x="0.0" y="64" width="375" height="20.333333333333329"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eyn-i4-1Ys" userLabel="Body Label">
-                                                <rect key="frame" x="0.0" y="84.333333333333329" width="375" height="152.33333333333337"/>
-                                                <string key="text">Bacon ipsum dolor amet venison short loin burgdoggen rump hamburger kevin. Ham sausage brisket filet mignon tail spare ribs chicken. Porchetta kielbasa chicken, burgdoggen boudin salami jerky. Alcatra corned beef hamburger, pork chop ground round ham hock brisket.</string>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share your data headline" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nzf-6q-HXe">
-                                                <rect key="frame" x="0.0" y="236.66666666666669" width="375" height="20.333333333333314"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HhS-Y3-rxA">
-                                                <rect key="frame" x="0.0" y="257" width="375" height="262.33333333333326"/>
-                                                <mutableString key="text">Leberkas bresaola fatback turducken venison, bacon chislic sausage tongue. T-bone capicola filet mignon doner salami pastrami andouille shankle frankfurter sirloin ham sausage. Chicken tongue prosciutto, chuck ribeye brisket biltong venison pork loin alcatra beef ribs turkey sirloin. Swine pork belly turducken beef ribs shoulder kevin. Turkey kevin venison, meatball pork loin chislic shank landjaeger. Chuck shankle shoulder, cupim pork chop landjaeger turkey ham frankfurter strip steak turducken spare ribs bresaola porchetta.</mutableString>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FCX-o5-BSb">
-                                                <rect key="frame" x="0.0" y="519.33333333333337" width="375" height="30"/>
-                                                <state key="normal" title="Button"/>
-                                            </button>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="e2o-M9-ueA">
+                                                <rect key="frame" x="0.0" y="64" width="375" height="773"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="HLf-EX-jmZ">
+                                                        <rect key="frame" x="16" y="8" width="343" height="491"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g5L-3d-qmI">
+                                                                <rect key="frame" x="0.0" y="0.0" width="343" height="162.66666666666666"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You need to isolate yourself and stay at home" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C5l-E0-nRg" userLabel="Warning Label">
+                                                                        <rect key="frame" x="20" y="20.000000000000007" width="303" height="122.66666666666669"/>
+                                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                                <color key="backgroundColor" name="CoLocate - Red"/>
+                                                                <constraints>
+                                                                    <constraint firstItem="C5l-E0-nRg" firstAttribute="top" secondItem="g5L-3d-qmI" secondAttribute="top" constant="20" symbolic="YES" id="9MR-4j-219"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="C5l-E0-nRg" secondAttribute="bottom" constant="20" symbolic="YES" id="KK1-Af-tQH"/>
+                                                                    <constraint firstItem="C5l-E0-nRg" firstAttribute="leading" secondItem="g5L-3d-qmI" secondAttribute="leading" constant="20" symbolic="YES" id="Kr7-Vv-uvV"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="C5l-E0-nRg" secondAttribute="trailing" constant="20" symbolic="YES" id="W18-6y-Uep"/>
+                                                                </constraints>
+                                                            </view>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eyn-i4-1Ys" userLabel="Body Label">
+                                                                <rect key="frame" x="0.0" y="162.66666666666671" width="343" height="328.33333333333326"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <string key="text">Based on people you’ve been in contact with, you may have been exposed to coronavirus.
+If you’re on public transport, go home by the most direct route. Stay at least 2 metres away from people if you can.
+If you’re away from home:
+
+find a room where you can close the door
+avoid touching people, surfaces and objects
+
+To keep other people safe, don’t visit your GP, pharmacy or hospital.
+
+Where to go for help</string>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </stackView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Help us keep others safe" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nzf-6q-HXe">
+                                                        <rect key="frame" x="16" y="507.00000000000006" width="343" height="81.666666666666686"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HhS-Y3-rxA">
+                                                        <rect key="frame" x="16" y="596.66666666666663" width="343" height="130.33333333333337"/>
+                                                        <string key="text">This app has recorded all contact you’ve had with other people using this app over the past 14 days.
+Sharing this information with the NHS means we can notify these people to take steps to keep themselves safe.</string>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FCX-o5-BSb">
+                                                        <rect key="frame" x="16" y="735" width="343" height="30"/>
+                                                        <state key="normal" title="Button"/>
+                                                    </button>
+                                                </subviews>
+                                                <directionalEdgeInsets key="directionalLayoutMargins" top="8" leading="16" bottom="8" trailing="16"/>
+                                            </stackView>
                                         </subviews>
                                     </stackView>
                                 </subviews>
+                                <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="top" secondItem="gil-BB-Yfl" secondAttribute="top" id="7So-uJ-zY1"/>
                                     <constraint firstItem="gil-BB-Yfl" firstAttribute="leading" secondItem="rxn-qA-Wva" secondAttribute="leading" id="BrZ-dL-7Ft"/>
@@ -262,7 +300,7 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="B8C-hk-Now"/>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="jEr-r0-3O7" firstAttribute="bottom" secondItem="rxn-qA-Wva" secondAttribute="bottom" id="16j-IZ-T6u"/>
                             <constraint firstItem="rxn-qA-Wva" firstAttribute="leading" secondItem="jEr-r0-3O7" secondAttribute="leading" id="78c-8r-54x"/>
@@ -307,4 +345,9 @@
             <point key="canvasLocation" x="3429.5999999999999" y="541.62561576354688"/>
         </scene>
     </scenes>
+    <resources>
+        <namedColor name="CoLocate - Red">
+            <color red="0.83529411764705885" green="0.15686274509803921" blue="0.10588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>
