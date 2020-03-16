@@ -209,17 +209,66 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I'm healthy, all good" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CZ8-nf-Z2K">
-                                <rect key="frame" x="112" y="395.66666666666669" width="151" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rxn-qA-Wva">
+                                <rect key="frame" x="0.0" y="88" width="375" height="690"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="gil-BB-Yfl">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="549.33333333333337"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CMf-AV-lEX" customClass="LogoStrapline" customModule="CoLocate" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You need to isolate yourself" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C5l-E0-nRg" userLabel="Warning Label">
+                                                <rect key="frame" x="0.0" y="64" width="375" height="20.333333333333329"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eyn-i4-1Ys" userLabel="Body Label">
+                                                <rect key="frame" x="0.0" y="84.333333333333329" width="375" height="152.33333333333337"/>
+                                                <string key="text">Bacon ipsum dolor amet venison short loin burgdoggen rump hamburger kevin. Ham sausage brisket filet mignon tail spare ribs chicken. Porchetta kielbasa chicken, burgdoggen boudin salami jerky. Alcatra corned beef hamburger, pork chop ground round ham hock brisket.</string>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share your data headline" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nzf-6q-HXe">
+                                                <rect key="frame" x="0.0" y="236.66666666666669" width="375" height="20.333333333333314"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HhS-Y3-rxA">
+                                                <rect key="frame" x="0.0" y="257" width="375" height="262.33333333333326"/>
+                                                <mutableString key="text">Leberkas bresaola fatback turducken venison, bacon chislic sausage tongue. T-bone capicola filet mignon doner salami pastrami andouille shankle frankfurter sirloin ham sausage. Chicken tongue prosciutto, chuck ribeye brisket biltong venison pork loin alcatra beef ribs turkey sirloin. Swine pork belly turducken beef ribs shoulder kevin. Turkey kevin venison, meatball pork loin chislic shank landjaeger. Chuck shankle shoulder, cupim pork chop landjaeger turkey ham frankfurter strip steak turducken spare ribs bresaola porchetta.</mutableString>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FCX-o5-BSb">
+                                                <rect key="frame" x="0.0" y="519.33333333333337" width="375" height="30"/>
+                                                <state key="normal" title="Button"/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="top" secondItem="gil-BB-Yfl" secondAttribute="top" id="7So-uJ-zY1"/>
+                                    <constraint firstItem="gil-BB-Yfl" firstAttribute="leading" secondItem="rxn-qA-Wva" secondAttribute="leading" id="BrZ-dL-7Ft"/>
+                                    <constraint firstAttribute="trailing" secondItem="gil-BB-Yfl" secondAttribute="trailing" id="Ic7-lE-76d"/>
+                                    <constraint firstAttribute="bottom" secondItem="gil-BB-Yfl" secondAttribute="bottom" id="ugM-ac-pp3"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="1FD-Tp-Net"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="B8C-hk-Now"/>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="CZ8-nf-Z2K" firstAttribute="centerX" secondItem="Jal-6O-N1m" secondAttribute="centerX" id="POo-WI-noq"/>
-                            <constraint firstItem="CZ8-nf-Z2K" firstAttribute="centerY" secondItem="Jal-6O-N1m" secondAttribute="centerY" id="hk6-Ii-gus"/>
+                            <constraint firstItem="jEr-r0-3O7" firstAttribute="bottom" secondItem="rxn-qA-Wva" secondAttribute="bottom" id="16j-IZ-T6u"/>
+                            <constraint firstItem="rxn-qA-Wva" firstAttribute="leading" secondItem="jEr-r0-3O7" secondAttribute="leading" id="78c-8r-54x"/>
+                            <constraint firstItem="gil-BB-Yfl" firstAttribute="width" secondItem="Jal-6O-N1m" secondAttribute="width" id="LCs-aX-jTW"/>
+                            <constraint firstItem="rxn-qA-Wva" firstAttribute="top" secondItem="jEr-r0-3O7" secondAttribute="top" id="bo3-jQ-hxo"/>
+                            <constraint firstItem="jEr-r0-3O7" firstAttribute="trailing" secondItem="rxn-qA-Wva" secondAttribute="trailing" id="uXv-LO-PFG"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jEr-r0-3O7"/>
                     </view>
@@ -227,7 +276,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zea-9Y-rKv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3430" y="-249"/>
+            <point key="canvasLocation" x="3429.5999999999999" y="-249.01477832512316"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="kUD-Px-rip">
