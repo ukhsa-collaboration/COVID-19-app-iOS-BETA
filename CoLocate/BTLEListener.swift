@@ -35,8 +35,6 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     // MARK: CBCentralManagerDelegate
     
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
-        print("\(#file).\(#function)")
-            
         switch (central.state) {
                 
         case .unknown:
@@ -57,7 +55,7 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         case .poweredOn:
             print("\(#file).\(#function) .poweredOn")
             
-//            Comment this back in for testing if necessary, but be aware AllowDuplicates is ignored
+//            Comment this back in for testing if necessary, but be aware AllowDuplicates is
 //            ignored while running in the background, so we can't count on this behaviour
 //            central.scanForPeripherals(withServices: [BTLEBroadcaster.primaryServiceUUID], options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
             central.scanForPeripherals(withServices: [BTLEBroadcaster.coLocateServiceUUID])
@@ -65,7 +63,6 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     }
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        print("\(#file).\(#function) discovered peripheral: \(String(describing: peripheral.name))")
         print("\(#file).\(#function) discovered peripheral: \(advertisementData)")
         
         lastRssi[peripheral.identifier.uuidString] = RSSI
@@ -97,8 +94,6 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     }
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
-        print("\(#file).\(#function) services = \(String(describing: peripheral.services))")
-        
         guard error == nil else {
             print("Error discovering services: \(error!)")
             return
@@ -110,6 +105,7 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         }
 
         if let coLocateService = services.first(where: {$0.uuid == BTLEBroadcaster.coLocateServiceUUID}) {
+            print("\(#file).\(#function) found coLocateService: \(coLocateService)")
             peripheral.discoverCharacteristics([BTLEBroadcaster.deviceIdentifierCharacteristicUUID], for: coLocateService)
         } else {
             print("CoLocate service not discovered for peripheral \(peripheral)")
@@ -120,8 +116,6 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     }
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
-        print("\(#file).\(#function)")
-        
         guard error == nil else {
             print("Error discovering characteristics: \(error!)")
             return
@@ -133,6 +127,7 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         }
         
         if let deviceIdCharacteristic = characteristics.first(where: {$0.uuid == BTLEBroadcaster.deviceIdentifierCharacteristicUUID}) {
+            print("\(#file).\(#function) found deviceIdCharacteristic: \(deviceIdCharacteristic)")
             peripheral.readValue(for: deviceIdCharacteristic)
         } else {
             print("Device identity characteristic not discovered for peripheral \(peripheral)")
@@ -140,6 +135,8 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     }
 
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+        print("\(#file).\(#function) characteristic: \(characteristic)")
+
         if let data = characteristic.value {
 //            let pid = peripheral.identifier.uuidString
 //            if (lastRssi.keys.contains(pid)) {

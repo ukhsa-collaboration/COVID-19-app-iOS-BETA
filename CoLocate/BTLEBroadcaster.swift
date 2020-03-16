@@ -38,8 +38,6 @@ class BTLEBroadcaster: NSObject, CBPeripheralManagerDelegate {
     // MARK: CBPeripheralManagerDelegate
     
     func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
-        print("\(#file).\(#function)")
-        
         switch (peripheral.state) {
             
         case .unknown:
@@ -70,12 +68,12 @@ class BTLEBroadcaster: NSObject, CBPeripheralManagerDelegate {
     }
     
     func peripheralManager(_ peripheral: CBPeripheralManager, didAdd service: CBService, error: Error?) {
-        print("\(#file).\(#function)")
         guard error == nil else {
             print("\(#file).\(#function) error: \(String(describing: error))")
             return
         }
         
+        print("\(#file).\(#function) service: \(service)")
         self.primaryService = service
         
         print("\(#file).\(#function) advertising device identifier \(deviceIdentifier.uuidString)")
