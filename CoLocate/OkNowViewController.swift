@@ -22,6 +22,8 @@ class OkNowViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        view.backgroundColor = .nhsGrey5
+    
         warningView.backgroundColor = .nhsWarmYellow
         
         warningViewTitle.text = "You're ok right now"

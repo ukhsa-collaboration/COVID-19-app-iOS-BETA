@@ -212,7 +212,7 @@
                                 <rect key="frame" x="0.0" y="88" width="375" height="690"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="gil-BB-Yfl">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="902.66666666666663"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="960.66666666666663"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CMf-AV-lEX" customClass="LogoStrapline" customModule="CoLocate" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
@@ -221,7 +221,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g5L-3d-qmI">
                                                 <rect key="frame" x="0.0" y="63.999999999999986" width="375" height="162.66666666666663"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You need to isolate yourself and stay at home" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C5l-E0-nRg" userLabel="Warning Label">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pork chop pig tongue tail venison sirloin chicken" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C5l-E0-nRg" userLabel="Warning Label">
                                                         <rect key="frame" x="20" y="20.000000000000007" width="335" height="122.66666666666669"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -237,7 +237,7 @@
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="e2o-M9-ueA">
-                                                <rect key="frame" x="0.0" y="226.66666666666674" width="375" height="676"/>
+                                                <rect key="frame" x="0.0" y="226.66666666666674" width="375" height="734"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JYW-Mn-biH" userLabel="Spacer View">
                                                         <rect key="frame" x="16" y="16" width="343" height="8"/>
@@ -246,57 +246,47 @@
                                                             <constraint firstAttribute="height" constant="8" id="J2D-iz-Gh7"/>
                                                         </constraints>
                                                     </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Help us keep others safe" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nzf-6q-HXe">
-                                                        <rect key="frame" x="16" y="31.999999999999996" width="343" height="33.666666666666657"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alcatra chuck beef prosciutto" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nzf-6q-HXe">
+                                                        <rect key="frame" x="16" y="32.000000000000007" width="343" height="67.666666666666686"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HhS-Y3-rxA">
-                                                        <rect key="frame" x="16" y="73.666666666666643" width="343" height="130.33333333333337"/>
-                                                        <string key="text">This app has recorded all contact you’ve had with other people using this app over the past 14 days.
-Sharing this information with the NHS means we can notify these people to take steps to keep themselves safe.</string>
+                                                        <rect key="frame" x="16" y="107.66666666666664" width="343" height="152.33333333333337"/>
+                                                        <string key="text">Biltong bacon sausage short loin tenderloin porchetta ham buffalo salami. Pancetta beef pork belly meatloaf shoulder turkey swine.  Jowl chislic short loin pastrami shank filet mignon tenderloin tongue drumstick bresaola ham hock biltong kielbasa.</string>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dgr-2E-dK0" userLabel="Spacer View">
-                                                        <rect key="frame" x="16" y="211.99999999999994" width="343" height="8"/>
+                                                        <rect key="frame" x="16" y="267.99999999999994" width="343" height="8"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="8" id="RHi-fg-OQJ"/>
                                                         </constraints>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FCX-o5-BSb" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
-                                                        <rect key="frame" x="16" y="227.99999999999994" width="343" height="30"/>
-                                                        <state key="normal" title="Notify"/>
+                                                        <rect key="frame" x="16" y="283.99999999999994" width="343" height="54"/>
+                                                        <state key="normal" title="Turkey tail jowl"/>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HQf-H4-GWp" userLabel="Spacer View">
-                                                        <rect key="frame" x="16" y="265.99999999999994" width="343" height="16"/>
+                                                        <rect key="frame" x="16" y="345.99999999999994" width="343" height="16"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="16" id="LLd-0w-sEv"/>
                                                         </constraints>
                                                     </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Steps you can take" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hYr-47-fnv" userLabel="Detail Label">
-                                                        <rect key="frame" x="16" y="289.99999999999994" width="343" height="33.666666666666686"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Picanha meatloaf swine" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hYr-47-fnv" userLabel="Detail Label">
+                                                        <rect key="frame" x="16" y="369.99999999999994" width="343" height="33.666666666666686"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eyn-i4-1Ys" userLabel="Detail Body Label">
-                                                        <rect key="frame" x="16" y="331.66666666666674" width="343" height="328.33333333333326"/>
+                                                        <rect key="frame" x="16" y="411.66666666666674" width="343" height="306.33333333333326"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <string key="text">Based on people you’ve been in contact with, you may have been exposed to coronavirus.
-If you’re on public transport, go home by the most direct route. Stay at least 2 metres away from people if you can.
-If you’re away from home:
-
-find a room where you can close the door
-avoid touching people, surfaces and objects
-
-To keep other people safe, don’t visit your GP, pharmacy or hospital.
-
-Where to go for help</string>
+                                                        <mutableString key="text">Pork chop pig tongue tail venison sirloin chicken filet mignon bresaola pork belly shoulder. Alcatra chuck beef prosciutto drumstick.  Biltong bacon sausage short loin tenderloin porchetta ham buffalo salami. Pancetta beef pork belly meatloaf shoulder turkey swine. Jowl chislic short loin pastrami shank filet mignon tenderloin tongue drumstick bresaola ham hock biltong kielbasa.  Tri-tip pork kevin, drumstick shankle pork belly andouille short ribs sausage leberkas.</mutableString>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -329,10 +319,13 @@ Where to go for help</string>
                     </view>
                     <navigationItem key="navigationItem" id="Rid-St-6hh"/>
                     <connections>
-                        <outlet property="contentStackView" destination="gil-BB-Yfl" id="Wfi-SB-sDa"/>
-                        <outlet property="textStackView" destination="e2o-M9-ueA" id="egc-qy-hiw"/>
-                        <outlet property="warningLabel" destination="C5l-E0-nRg" id="3Bl-YS-NZa"/>
-                        <outlet property="warningView" destination="g5L-3d-qmI" id="dGL-YA-c10"/>
+                        <outlet property="moreInformationBody" destination="eyn-i4-1Ys" id="X9S-kV-fsm"/>
+                        <outlet property="moreInformationTitle" destination="hYr-47-fnv" id="TF1-ES-9HK"/>
+                        <outlet property="shareDiagnosisBody" destination="HhS-Y3-rxA" id="zZL-lN-0pS"/>
+                        <outlet property="shareDiagnosisButton" destination="FCX-o5-BSb" id="i2x-97-JLa"/>
+                        <outlet property="shareDiagnosisTitle" destination="nzf-6q-HXe" id="Oea-YB-zxZ"/>
+                        <outlet property="warningView" destination="g5L-3d-qmI" id="SPs-GF-CSs"/>
+                        <outlet property="warningViewTitle" destination="C5l-E0-nRg" id="AA0-zg-XTx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zea-9Y-rKv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -389,7 +382,7 @@ Where to go for help</string>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zAW-RL-Dz6" userLabel="Spacer View">
                                                         <rect key="frame" x="16" y="16" width="343" height="8"/>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="8" id="jbA-ee-O8B"/>
                                                         </constraints>
@@ -408,7 +401,7 @@ Where to go for help</string>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aTL-8W-ztq" userLabel="Spacer View">
                                                         <rect key="frame" x="16" y="102" width="343" height="8"/>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="8" id="tO2-l8-LUq"/>
                                                         </constraints>
@@ -419,7 +412,7 @@ Where to go for help</string>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="451-GQ-uK1" userLabel="Spacer View">
                                                         <rect key="frame" x="16" y="180" width="343" height="16"/>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="16" id="lRL-kB-aEy"/>
                                                         </constraints>
