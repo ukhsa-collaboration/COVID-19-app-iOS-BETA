@@ -22,7 +22,7 @@
                                 <rect key="frame" x="0.0" y="44" width="375" height="734"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gDX-JJ-6gF" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="389.33333333333331"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="368.33333333333331"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S7N-Z2-YHu" customClass="LogoStrapline" customModule="CoLocate" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
@@ -44,7 +44,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="95z-vR-2bH" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="315.33333333333331" width="335" height="54"/>
+                                                <rect key="frame" x="20" y="315.33333333333331" width="335" height="33"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <state key="normal" title="Button"/>
                                                 <connections>
@@ -351,24 +351,24 @@ Where to go for help</string>
                                 <rect key="frame" x="0.0" y="88" width="375" height="690"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="6fL-b6-aHe" userLabel="Content Stack View">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="394"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="621"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f9o-4R-pua" customClass="LogoStrapline" customModule="CoLocate" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Av-eU-UGB" userLabel="Warning View">
-                                                <rect key="frame" x="0.0" y="64" width="375" height="128"/>
+                                                <rect key="frame" x="0.0" y="64" width="375" height="131"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F5J-eA-871">
-                                                        <rect key="frame" x="20" y="87.666666666666657" width="335" height="20.333333333333329"/>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pastrami" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eoi-co-wiI">
+                                                        <rect key="frame" x="20" y="19.999999999999996" width="335" height="40.666666666666657"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eoi-co-wiI">
-                                                        <rect key="frame" x="20" y="19.999999999999996" width="335" height="59.666666666666657"/>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meatball drumstick ball tip, landjaeger ham cupim pig jerky short ribs." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F5J-eA-871">
+                                                        <rect key="frame" x="20" y="68.666666666666657" width="335" height="42.333333333333343"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -384,8 +384,8 @@ Where to go for help</string>
                                                     <constraint firstAttribute="trailing" secondItem="F5J-eA-871" secondAttribute="trailing" constant="20" symbolic="YES" id="oyS-cd-6yZ"/>
                                                 </constraints>
                                             </view>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="raq-rY-5Hu" userLabel="Text Stack View">
-                                                <rect key="frame" x="0.0" y="192" width="375" height="202"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="raq-rY-5Hu" userLabel="Text Stack View">
+                                                <rect key="frame" x="0.0" y="195" width="375" height="426"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zAW-RL-Dz6" userLabel="Spacer View">
                                                         <rect key="frame" x="16" y="16" width="343" height="8"/>
@@ -394,44 +394,45 @@ Where to go for help</string>
                                                             <constraint firstAttribute="height" constant="8" id="jbA-ee-O8B"/>
                                                         </constraints>
                                                     </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you develop symptoms" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZIl-GY-uwq">
-                                                        <rect key="frame" x="16" y="23.999999999999996" width="343" height="33.666666666666657"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pancetta" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZIl-GY-uwq">
+                                                        <rect key="frame" x="16" y="31.999999999999996" width="343" height="33.666666666666657"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use our online tool to check your symptoms" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g46-aG-O3d">
-                                                        <rect key="frame" x="16" y="57.666666666666693" width="343" height="20.333333333333336"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tail doner chuck corned beef beef pastrami." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g46-aG-O3d">
+                                                        <rect key="frame" x="16" y="73.666666666666686" width="343" height="20.333333333333329"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aTL-8W-ztq" userLabel="Spacer View">
-                                                        <rect key="frame" x="16" y="78" width="343" height="8"/>
+                                                        <rect key="frame" x="16" y="102" width="343" height="8"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="8" id="tO2-l8-LUq"/>
                                                         </constraints>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2nn-Id-UHE" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
-                                                        <rect key="frame" x="16" y="86" width="343" height="30"/>
-                                                        <state key="normal" title="Check my symptoms"/>
+                                                        <rect key="frame" x="16" y="118" width="343" height="54"/>
+                                                        <state key="normal" title="Capicola jerky sausage"/>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="451-GQ-uK1" userLabel="Spacer View">
-                                                        <rect key="frame" x="16" y="116" width="343" height="16"/>
+                                                        <rect key="frame" x="16" y="180" width="343" height="16"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="16" id="lRL-kB-aEy"/>
                                                         </constraints>
                                                     </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8CV-n6-8PC" userLabel="Detail Label">
-                                                        <rect key="frame" x="16" y="132" width="343" height="33.666666666666657"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Landjaeger bresaola chuck shankle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8CV-n6-8PC" userLabel="Detail Label">
+                                                        <rect key="frame" x="16" y="204" width="343" height="67.666666666666686"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IKX-6p-C3x" userLabel="Detail Body Label">
-                                                        <rect key="frame" x="16" y="165.66666666666669" width="343" height="20.333333333333343"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IKX-6p-C3x" userLabel="Detail Body Label">
+                                                        <rect key="frame" x="16" y="279.66666666666663" width="343" height="130.33333333333337"/>
+                                                        <string key="text">Hamburger andouille capicola, sausage ham brisket beef rump meatball pork loin swine frankfurter ham hock. Prosciutto jowl bresaola, doner landjaeger tenderloin frankfurter chicken ribeye pancetta sausage beef pork kevin hamburger.</string>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -446,7 +447,7 @@ Where to go for help</string>
                                     <constraint firstAttribute="bottom" secondItem="6fL-b6-aHe" secondAttribute="bottom" id="21g-5Q-nL8"/>
                                     <constraint firstItem="6fL-b6-aHe" firstAttribute="top" secondItem="mmc-Yz-FgM" secondAttribute="top" id="4QH-yB-34v"/>
                                     <constraint firstItem="6fL-b6-aHe" firstAttribute="leading" secondItem="mmc-Yz-FgM" secondAttribute="leading" id="WZP-SG-Dsl"/>
-                                    <constraint firstAttribute="trailing" secondItem="6fL-b6-aHe" secondAttribute="trailing" constant="20" symbolic="YES" id="XYg-ba-n81"/>
+                                    <constraint firstAttribute="trailing" secondItem="6fL-b6-aHe" secondAttribute="trailing" id="XYg-ba-n81"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="7sl-hU-lxk"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="Evt-EZ-Be8"/>
@@ -464,9 +465,14 @@ Where to go for help</string>
                     </view>
                     <navigationItem key="navigationItem" id="9A4-LT-pFV"/>
                     <connections>
+                        <outlet property="checkSymptomsBody" destination="g46-aG-O3d" id="8iQ-NR-cfU"/>
+                        <outlet property="checkSymptomsButton" destination="2nn-Id-UHE" id="jtz-Xv-7Vb"/>
+                        <outlet property="checkSymptomsTitle" destination="ZIl-GY-uwq" id="W97-sD-WEH"/>
+                        <outlet property="moreInformationBody" destination="IKX-6p-C3x" id="Ovo-wW-SQ7"/>
+                        <outlet property="moreInformationTitle" destination="8CV-n6-8PC" id="VTh-RG-7yj"/>
                         <outlet property="warningView" destination="2Av-eU-UGB" id="F59-Zl-5CT"/>
-                        <outlet property="warningViewBody" destination="eoi-co-wiI" id="mze-9q-bRo"/>
-                        <outlet property="warningViewTitle" destination="F5J-eA-871" id="AXV-kX-bdx"/>
+                        <outlet property="warningViewBody" destination="F5J-eA-871" id="fsr-Ig-tFC"/>
+                        <outlet property="warningViewTitle" destination="eoi-co-wiI" id="akf-ok-eKl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gZR-MB-Dba" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
