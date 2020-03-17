@@ -38,10 +38,10 @@ class PermissionsPromptViewController: UIViewController, BTLEBroadcasterDelegate
       #else
         let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
         appDelegate.broadcaster = BTLEBroadcaster()
-        appDelegate.broadcaster?.start(self)
+        appDelegate.broadcaster?.start(delegate: self)
         
         appDelegate.listener = BTLEListener()
-        appDelegate.listener?.start(self)
+        appDelegate.listener?.start(delegate: self)
       #endif
     }
     
