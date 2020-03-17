@@ -139,7 +139,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1010;
 				LastUpgradeCheck = 1010;
-				ORGANIZATIONNAME = Pivotal;
+				ORGANIZATIONNAME = NHSX;
 				TargetAttributes = {
 					6FC63C2C241641B8007C8BF3 = {
 						CreatedOnToolsVersion = 10.1;
