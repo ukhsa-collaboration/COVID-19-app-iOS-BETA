@@ -15,6 +15,12 @@ extension UIColor {
     
     public static let nhsButton = UIColor(hexString: "#007f3b")
 
+    public static let nhsRed = UIColor(hexString: "#d5281b")
+
+    public static let nhsWarmYellow = UIColor(hexString: "#ffb81C")
+
+    public static let nhsGrey5 = UIColor(hexString: "#f0f4f5")
+
     convenience init(hexString: String, alpha: CGFloat = 1.0) {
         let hexString: String = hexString.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         let scanner = Scanner(string: hexString)
