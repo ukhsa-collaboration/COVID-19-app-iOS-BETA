@@ -26,10 +26,7 @@ class PermissionsPromptViewController: UIViewController, BTLEBroadcasterDelegate
         
         • Bluetooth, to record when your device is near others who are using this app
         """
-        continueButton.layer.cornerRadius = 4
-        continueButton.clipsToBounds = true
-        continueButton.backgroundColor = .nhsButton
-        continueButton.setTitleColor(.white, for: .normal)
+
         continueButton.setTitle("I understand", for: .normal)
     }
     

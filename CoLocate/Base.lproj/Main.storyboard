@@ -43,12 +43,9 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="95z-vR-2bH">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="95z-vR-2bH" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
                                                 <rect key="frame" x="20" y="315.33333333333331" width="335" height="54"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="54" id="yGf-cm-bDA"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <state key="normal" title="Button"/>
                                                 <connections>
                                                     <action selector="didTapContinue:" destination="Pfu-L3-5i0" eventType="touchUpInside" id="6pJ-Br-7RM"/>
@@ -60,7 +57,7 @@
                                             <constraint firstItem="hZ4-I9-3SE" firstAttribute="leading" secondItem="gDX-JJ-6gF" secondAttribute="leading" constant="20" symbolic="YES" id="15A-f7-kSS"/>
                                             <constraint firstAttribute="trailing" secondItem="hZ4-I9-3SE" secondAttribute="trailing" constant="20" symbolic="YES" id="32a-Y7-5LT"/>
                                             <constraint firstItem="FAq-jW-bZW" firstAttribute="leading" secondItem="gDX-JJ-6gF" secondAttribute="leading" constant="20" symbolic="YES" id="47t-1P-BUh"/>
-                                            <constraint firstItem="95z-vR-2bH" firstAttribute="top" secondItem="FAq-jW-bZW" secondAttribute="bottom" priority="750" constant="32" id="FHN-Js-4CV"/>
+                                            <constraint firstItem="95z-vR-2bH" firstAttribute="top" secondItem="FAq-jW-bZW" secondAttribute="bottom" constant="32" id="FHN-Js-4CV"/>
                                             <constraint firstAttribute="trailing" secondItem="95z-vR-2bH" secondAttribute="trailing" constant="20" symbolic="YES" id="GAl-rB-MEK"/>
                                             <constraint firstItem="FAq-jW-bZW" firstAttribute="top" secondItem="hZ4-I9-3SE" secondAttribute="bottom" constant="16" id="KWO-3a-sLq"/>
                                             <constraint firstAttribute="trailing" secondItem="FAq-jW-bZW" secondAttribute="trailing" constant="20" symbolic="YES" id="MEa-0s-0Vt"/>
@@ -215,14 +212,14 @@
                                 <rect key="frame" x="0.0" y="88" width="375" height="690"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="gil-BB-Yfl">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="837"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="861"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CMf-AV-lEX" customClass="LogoStrapline" customModule="CoLocate" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="e2o-M9-ueA">
-                                                <rect key="frame" x="0.0" y="64" width="375" height="773"/>
+                                                <rect key="frame" x="0.0" y="64" width="375" height="797"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="HLf-EX-jmZ">
                                                         <rect key="frame" x="16" y="8" width="343" height="491"/>
@@ -279,8 +276,8 @@ Sharing this information with the NHS means we can notify these people to take s
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FCX-o5-BSb">
-                                                        <rect key="frame" x="16" y="735" width="343" height="30"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FCX-o5-BSb" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
+                                                        <rect key="frame" x="16" y="735" width="343" height="54"/>
                                                         <state key="normal" title="Button"/>
                                                     </button>
                                                 </subviews>
@@ -347,7 +344,7 @@ Sharing this information with the NHS means we can notify these people to take s
     </scenes>
     <resources>
         <namedColor name="CoLocate - Red">
-            <color red="0.83529411764705885" green="0.15686274509803921" blue="0.10588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.83499997854232788" green="0.15700000524520874" blue="0.10599999874830246" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
