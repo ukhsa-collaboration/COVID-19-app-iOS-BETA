@@ -59,6 +59,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		214209B72422155200C7BFF3 /* Appearance */ = {
+			isa = PBXGroup;
+			children = (
+				213C806D241A5CDD0020EFA5 /* UIColorExtension.swift */,
+				AEC6A7BB241BD81A00B0237A /* LogoStrapline.swift */,
+				21D93C2F2420C26900C1FA9B /* PrimaryButton.swift */,
+				AEC6A7BD241BD82900B0237A /* LogoStrapline.xib */,
+			);
+			path = Appearance;
+			sourceTree = "<group>";
+		};
+		214209B82422157300C7BFF3 /* Bluetooth */ = {
+			isa = PBXGroup;
+			children = (
+				AE2DCA9F241920B600A940FC /* BTLEBroadcaster.swift */,
+				21AF36AA241A8E50001A4910 /* BTLEListener.swift */,
+				AEC6A7B5241AFF1C00B0237A /* DistanceManager.swift */,
+			);
+			path = Bluetooth;
+			sourceTree = "<group>";
+		};
 		6FC63C24241641B8007C8BF3 = {
 			isa = PBXGroup;
 			children = (
@@ -82,9 +103,6 @@
 				A1E7A0582420028B0078174D /* Colors.xcassets */,
 				AE128D8A2417EFCC00FC34FD /* Model */,
 				6FC63C30241641B8007C8BF3 /* AppDelegate.swift */,
-				AE2DCA9F241920B600A940FC /* BTLEBroadcaster.swift */,
-				21AF36AA241A8E50001A4910 /* BTLEListener.swift */,
-				AEC6A7B5241AFF1C00B0237A /* DistanceManager.swift */,
 				6FC63C3C241641BA007C8BF3 /* Info.plist */,
 				6FC63C39241641BA007C8BF3 /* LaunchScreen.storyboard */,
 				6FC63C34241641B8007C8BF3 /* Main.storyboard */,
@@ -92,10 +110,8 @@
 				21D93C2D241FB0A300C1FA9B /* EnterDiagnosisTableViewController.swift */,
 				214209B32420DBE100C7BFF3 /* PleaseSelfIsolateViewController.swift */,
 				214209B52421072C00C7BFF3 /* OkNowViewController.swift */,
-				213C806D241A5CDD0020EFA5 /* UIColorExtension.swift */,
-				AEC6A7BB241BD81A00B0237A /* LogoStrapline.swift */,
-				21D93C2F2420C26900C1FA9B /* PrimaryButton.swift */,
-				AEC6A7BD241BD82900B0237A /* LogoStrapline.xib */,
+				214209B82422157300C7BFF3 /* Bluetooth */,
+				214209B72422155200C7BFF3 /* Appearance */,
 			);
 			path = CoLocate;
 			sourceTree = "<group>";
