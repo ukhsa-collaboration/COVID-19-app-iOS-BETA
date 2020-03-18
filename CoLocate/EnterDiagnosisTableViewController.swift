@@ -19,9 +19,9 @@ class EnterDiagnosisTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = "Self-diagnosis"
+        self.title = "Diagnosis"
     }
-
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -39,15 +39,12 @@ class EnterDiagnosisTableViewController: UITableViewController {
             
         case Rows.yes.rawValue:
             diagnosisService.recordDiagnosis(.infected)
-            break
             
         case Rows.no.rawValue:
             diagnosisService.recordDiagnosis(.notInfected)
-            break
             
         default:
             print("\(#file).\(#function) unknown indexPath selected: \(indexPath)")
-            break
         }
     }
     
