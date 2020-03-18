@@ -18,7 +18,6 @@
 		6FC63C36241641B8007C8BF3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FC63C34241641B8007C8BF3 /* Main.storyboard */; };
 		6FC63C38241641BA007C8BF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FC63C37241641BA007C8BF3 /* Assets.xcassets */; };
 		6FC63C3B241641BA007C8BF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FC63C39241641BA007C8BF3 /* LaunchScreen.storyboard */; };
-		6FC63C432416D95C007C8BF3 /* nhs-logo-app.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FC63C422416D95C007C8BF3 /* nhs-logo-app.png */; };
 		A1E7A0592420028B0078174D /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1E7A0582420028B0078174D /* Colors.xcassets */; };
 		AE128D832417EBC900FC34FD /* BeaconModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AE128D812417EBC900FC34FD /* BeaconModel.xcdatamodeld */; };
 		AE2DCAA0241920B600A940FC /* BTLEBroadcaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2DCA9F241920B600A940FC /* BTLEBroadcaster.swift */; };
@@ -41,7 +40,6 @@
 		6FC63C37241641BA007C8BF3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6FC63C3A241641BA007C8BF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6FC63C3C241641BA007C8BF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6FC63C422416D95C007C8BF3 /* nhs-logo-app.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nhs-logo-app.png"; sourceTree = "<group>"; };
 		A1E7A0582420028B0078174D /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		AE128D822417EBC900FC34FD /* BeaconModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BeaconModel.xcdatamodel; sourceTree = "<group>"; };
 		AE2DCA9F241920B600A940FC /* BTLEBroadcaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTLEBroadcaster.swift; sourceTree = "<group>"; };
@@ -90,7 +88,6 @@
 				6FC63C3C241641BA007C8BF3 /* Info.plist */,
 				6FC63C39241641BA007C8BF3 /* LaunchScreen.storyboard */,
 				6FC63C34241641B8007C8BF3 /* Main.storyboard */,
-				6FC63C422416D95C007C8BF3 /* nhs-logo-app.png */,
 				213C806B241A56430020EFA5 /* PermissionsPromptViewController.swift */,
 				21D93C2D241FB0A300C1FA9B /* EnterDiagnosisTableViewController.swift */,
 				214209B32420DBE100C7BFF3 /* PleaseSelfIsolateViewController.swift */,
@@ -169,7 +166,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6FC63C432416D95C007C8BF3 /* nhs-logo-app.png in Resources */,
 				6FC63C3B241641BA007C8BF3 /* LaunchScreen.storyboard in Resources */,
 				AEC6A7BE241BD82900B0237A /* LogoStrapline.xib in Resources */,
 				A1E7A0592420028B0078174D /* Colors.xcassets in Resources */,
