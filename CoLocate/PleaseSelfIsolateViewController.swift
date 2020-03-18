@@ -23,8 +23,8 @@ class PleaseSelfIsolateViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .nhsGrey5
-        warningView.backgroundColor = .nhsRed
+        view.backgroundColor = UIColor(named: "NHS Grey 5")
+        warningView.backgroundColor = UIColor(named: "NHS Red")
         
         warningViewTitle.text = "You need to isolate yourself and stay at home"
         shareDiagnosisTitle.text = "Help us keep others safe"

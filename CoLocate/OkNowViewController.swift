@@ -22,9 +22,9 @@ class OkNowViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .nhsGrey5
+        view.backgroundColor = UIColor(named: "NHS Grey 5")
     
-        warningView.backgroundColor = .nhsPurple
+        warningView.backgroundColor = UIColor(named: "NHS Purple")
         
         warningViewTitle.text = "You're ok right now"
         warningViewBody.text = "This is a real time status, based on who you've been in contact with.\n\nYou'll get an alert if your status changes.\n\nIt is important to tell us if you develop any new symptoms."

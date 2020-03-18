@@ -36,7 +36,7 @@ class PrimaryButton: UIButton {
     private func setUp() {
         layer.cornerRadius = 4
         clipsToBounds = true
-        backgroundColor = .nhsButton
+        backgroundColor = UIColor(named: "NHS Button")
         setTitleColor(.white, for: .normal)
         titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
     }

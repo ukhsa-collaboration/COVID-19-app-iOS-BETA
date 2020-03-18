@@ -41,8 +41,8 @@ class LogoStrapline: UIView {
             return
         }
         
-        view.backgroundColor = .nhsBlue
-        titleLabel.textColor = .white
+        view.backgroundColor = UIColor(named: "NHS Blue")
+        titleLabel.textColor = UIColor(named: "NHS White")
         titleLabel.text = "Coronavirus tracing"
         
         view.frame = self.bounds

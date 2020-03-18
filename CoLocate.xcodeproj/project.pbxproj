@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		213C806C241A56430020EFA5 /* PermissionsPromptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213C806B241A56430020EFA5 /* PermissionsPromptViewController.swift */; };
-		213C806E241A5CDD0020EFA5 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213C806D241A5CDD0020EFA5 /* UIColorExtension.swift */; };
 		214209B42420DBE100C7BFF3 /* PleaseSelfIsolateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209B32420DBE100C7BFF3 /* PleaseSelfIsolateViewController.swift */; };
 		214209B62421072C00C7BFF3 /* OkNowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209B52421072C00C7BFF3 /* OkNowViewController.swift */; };
 		214209BA242216B700C7BFF3 /* DiagnosisService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209B9242216B700C7BFF3 /* DiagnosisService.swift */; };
@@ -20,7 +19,7 @@
 		6FC63C36241641B8007C8BF3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FC63C34241641B8007C8BF3 /* Main.storyboard */; };
 		6FC63C38241641BA007C8BF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FC63C37241641BA007C8BF3 /* Assets.xcassets */; };
 		6FC63C3B241641BA007C8BF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FC63C39241641BA007C8BF3 /* LaunchScreen.storyboard */; };
-		A1E7A0592420028B0078174D /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1E7A0582420028B0078174D /* Colors.xcassets */; };
+		A1E7A0592420028B0078174D /* NHS Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1E7A0582420028B0078174D /* NHS Colors.xcassets */; };
 		AE2DCAA0241920B600A940FC /* BTLEBroadcaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2DCA9F241920B600A940FC /* BTLEBroadcaster.swift */; };
 		AEC6A7B6241AFF1C00B0237A /* DistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC6A7B5241AFF1C00B0237A /* DistanceManager.swift */; };
 		AEC6A7BC241BD81A00B0237A /* LogoStrapline.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC6A7BB241BD81A00B0237A /* LogoStrapline.swift */; };
@@ -39,7 +38,6 @@
 
 /* Begin PBXFileReference section */
 		213C806B241A56430020EFA5 /* PermissionsPromptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsPromptViewController.swift; sourceTree = "<group>"; };
-		213C806D241A5CDD0020EFA5 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		214209B32420DBE100C7BFF3 /* PleaseSelfIsolateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PleaseSelfIsolateViewController.swift; sourceTree = "<group>"; };
 		214209B52421072C00C7BFF3 /* OkNowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OkNowViewController.swift; sourceTree = "<group>"; };
 		214209B9242216B700C7BFF3 /* DiagnosisService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosisService.swift; sourceTree = "<group>"; };
@@ -55,7 +53,7 @@
 		6FC63C37241641BA007C8BF3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6FC63C3A241641BA007C8BF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6FC63C3C241641BA007C8BF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A1E7A0582420028B0078174D /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		A1E7A0582420028B0078174D /* NHS Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "NHS Colors.xcassets"; sourceTree = "<group>"; };
 		AE2DCA9F241920B600A940FC /* BTLEBroadcaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTLEBroadcaster.swift; sourceTree = "<group>"; };
 		AEC6A7B5241AFF1C00B0237A /* DistanceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistanceManager.swift; sourceTree = "<group>"; };
 		AEC6A7BB241BD81A00B0237A /* LogoStrapline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoStrapline.swift; sourceTree = "<group>"; };
@@ -83,7 +81,6 @@
 		214209B72422155200C7BFF3 /* Appearance */ = {
 			isa = PBXGroup;
 			children = (
-				213C806D241A5CDD0020EFA5 /* UIColorExtension.swift */,
 				AEC6A7BB241BD81A00B0237A /* LogoStrapline.swift */,
 				21D93C2F2420C26900C1FA9B /* PrimaryButton.swift */,
 				AEC6A7BD241BD82900B0237A /* LogoStrapline.xib */,
@@ -132,7 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				6FC63C37241641BA007C8BF3 /* Assets.xcassets */,
-				A1E7A0582420028B0078174D /* Colors.xcassets */,
+				A1E7A0582420028B0078174D /* NHS Colors.xcassets */,
 				6FC63C30241641B8007C8BF3 /* AppDelegate.swift */,
 				214209B9242216B700C7BFF3 /* DiagnosisService.swift */,
 				6FC63C3C241641BA007C8BF3 /* Info.plist */,
@@ -238,7 +235,7 @@
 			files = (
 				6FC63C3B241641BA007C8BF3 /* LaunchScreen.storyboard in Resources */,
 				AEC6A7BE241BD82900B0237A /* LogoStrapline.xib in Resources */,
-				A1E7A0592420028B0078174D /* Colors.xcassets in Resources */,
+				A1E7A0592420028B0078174D /* NHS Colors.xcassets in Resources */,
 				6FC63C38241641BA007C8BF3 /* Assets.xcassets in Resources */,
 				6FC63C36241641B8007C8BF3 /* Main.storyboard in Resources */,
 			);
@@ -259,7 +256,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				213C806E241A5CDD0020EFA5 /* UIColorExtension.swift in Sources */,
 				21D93C302420C26900C1FA9B /* PrimaryButton.swift in Sources */,
 				21AF36AB241A8E50001A4910 /* BTLEListener.swift in Sources */,
 				AEC6A7B6241AFF1C00B0237A /* DistanceManager.swift in Sources */,
