@@ -16,6 +16,7 @@ protocol BTLEListenerDelegate {
 class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     
     var delegate: BTLEListenerDelegate?
+    let contactEventService: ContactEventService
     
     var centralManager: CBCentralManager?
     
@@ -31,8 +32,9 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     var lastRssi: [String: NSNumber] = [:]
     var rangedDeviceIDs: [String] = []
     
-    func start(delegate: BTLEListenerDelegate?) {
+    func start(delegate: BTLEListenerDelegate?, contactEventService: ContactEventService = ContactEventService()) {
         self.delegate = delegate
+        self.contactEventService = ContactEventService
         
         centralManager = CBCentralManager(
             delegate: self,
@@ -170,9 +172,11 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
             
     }
 
-    // TODO: Indirect me through a "save the data service" protocol with a stub implementation which just does this log
     func doSomethingWithIdentityWeFound(data: Data) {
-        print("Contact event at \(Date()) with identity \(CBUUID(data: data))")
+        let uuidString = CBUUID(data: data).uuidString
+        let uuid = UUID(uuidString: uuidString)!
+        let contactEvent = ContactEvent(uuid: uuid)
+        contactEventService.record(contactEvent)
     }
     
 }
