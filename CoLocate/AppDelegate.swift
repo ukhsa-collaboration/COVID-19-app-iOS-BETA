@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var broadcaster: BTLEBroadcaster?
     var listener: BTLEListener?
+    var diagnosisService: DiagnosisService = DiagnosisService()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
