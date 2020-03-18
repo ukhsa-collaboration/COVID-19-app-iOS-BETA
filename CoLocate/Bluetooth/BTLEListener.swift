@@ -16,7 +16,7 @@ protocol BTLEListenerDelegate {
 class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     
     var delegate: BTLEListenerDelegate?
-    let contactEventService: ContactEventService
+    var contactEventService: ContactEventService! // Should this be in the init instead of start?
     
     var centralManager: CBCentralManager?
     
@@ -34,7 +34,7 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     
     func start(delegate: BTLEListenerDelegate?, contactEventService: ContactEventService = ContactEventService()) {
         self.delegate = delegate
-        self.contactEventService = ContactEventService
+        self.contactEventService = contactEventService
         
         centralManager = CBCentralManager(
             delegate: self,
