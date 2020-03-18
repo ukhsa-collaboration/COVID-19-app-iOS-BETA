@@ -18,6 +18,8 @@ extension UIColor {
     public static let nhsRed = UIColor(hexString: "#d5281b")
 
     public static let nhsWarmYellow = UIColor(hexString: "#ffb81C")
+    
+    public static let nhsPurple = UIColor(hexString: "#330072")
 
     public static let nhsGrey5 = UIColor(hexString: "#f0f4f5")
 
