@@ -14,17 +14,26 @@ struct ContactEvent: Equatable, Codable {
 
 class ContactEventService {
     
+    static let shared: ContactEventService = ContactEventService()
+    
     let fileURL: URL
 
     public private(set) var contactEvents: [ContactEvent] = []
 
-    init() {
+    private init() {
         if let dirUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
             fileURL = dirUrl.appendingPathComponent("contactEvents.plist")
         } else {
             preconditionFailure("\(#file).\(#function) couldn't open file for writing contactEvents.plist")
         }
         readContactEvents()
+    }
+
+    func record(_ contactEvent: ContactEvent) { // probably also timestamp and distance
+        print("\(#file).\(#function) recording contactEvent with UUID: \(contactEvent.uuid)")
+        
+        contactEvents.append(contactEvent)
+        writeContactEvents()
     }
     
     private func readContactEvents() {
@@ -40,13 +49,6 @@ class ContactEventService {
         } catch {
             assertionFailure("\(#file).\(#function) error reading contact events from disk: \(error)")
         }
-    }
-    
-    func record(_ contactEvent: ContactEvent) { // probably also timestamp and distance
-        print("\(#file).\(#function) recording contactEvent with UUID: \(contactEvent.uuid)")
-        
-        contactEvents.append(contactEvent)
-        writeContactEvents()
     }
     
     private func writeContactEvents() {
