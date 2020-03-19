@@ -71,6 +71,8 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
 //            ignored while running in the background, so we can't count on this behaviour
 //            central.scanForPeripherals(withServices: [BTLEBroadcaster.primaryServiceUUID], options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
             central.scanForPeripherals(withServices: [BTLEBroadcaster.coLocateServiceUUID])
+        @unknown default:
+            fatalError()
         }
     }
     

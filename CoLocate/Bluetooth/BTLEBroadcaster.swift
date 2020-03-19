@@ -74,6 +74,8 @@ class BTLEBroadcaster: NSObject, CBPeripheralManagerDelegate {
             
             service.characteristics = [identityCharacteristic]
             peripheralManager?.add(service)
+        @unknown default:
+            fatalError()
         }
     }
     
