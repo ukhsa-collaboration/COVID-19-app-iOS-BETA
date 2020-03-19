@@ -12,7 +12,7 @@
 		214209B62421072C00C7BFF3 /* OkNowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209B52421072C00C7BFF3 /* OkNowViewController.swift */; };
 		214209BA242216B700C7BFF3 /* DiagnosisService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209B9242216B700C7BFF3 /* DiagnosisService.swift */; };
 		214209CA242227B300C7BFF3 /* DiagnosisServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209C9242227B300C7BFF3 /* DiagnosisServiceTests.swift */; };
-		214209CC2422755B00C7BFF3 /* ContactEventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209CB2422755B00C7BFF3 /* ContactEventService.swift */; };
+		214209CC2422755B00C7BFF3 /* PlistContactEventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209CB2422755B00C7BFF3 /* PlistContactEventService.swift */; };
 		214209CE24237A6300C7BFF3 /* ContactEventServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209CD24237A6300C7BFF3 /* ContactEventServiceTests.swift */; };
 		214209D0242396DA00C7BFF3 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209CF242396DA00C7BFF3 /* Session.swift */; };
 		214209D2242399CF00C7BFF3 /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209D1242399CF00C7BFF3 /* URLSession.swift */; };
@@ -24,6 +24,9 @@
 		6FC63C38241641BA007C8BF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FC63C37241641BA007C8BF3 /* Assets.xcassets */; };
 		6FC63C3B241641BA007C8BF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FC63C39241641BA007C8BF3 /* LaunchScreen.storyboard */; };
 		A1E7A0592420028B0078174D /* NHS Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1E7A0582420028B0078174D /* NHS Colors.xcassets */; };
+		AE2A5E4C2423AF49007A4771 /* CodableContactEventRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2A5E4B2423AF49007A4771 /* CodableContactEventRecorder.swift */; };
+		AE2A5E4E2423C345007A4771 /* ContactEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2A5E4D2423C345007A4771 /* ContactEvent.swift */; };
+		AE2A5E502423C473007A4771 /* ContactEventRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2A5E4F2423C473007A4771 /* ContactEventRecorder.swift */; };
 		AE2DCAA0241920B600A940FC /* BTLEBroadcaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2DCA9F241920B600A940FC /* BTLEBroadcaster.swift */; };
 		AEC6A7B6241AFF1C00B0237A /* DistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC6A7B5241AFF1C00B0237A /* DistanceManager.swift */; };
 		AEC6A7BC241BD81A00B0237A /* LogoStrapline.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC6A7BB241BD81A00B0237A /* LogoStrapline.swift */; };
@@ -48,7 +51,7 @@
 		214209BF2422276800C7BFF3 /* CoLocateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoLocateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		214209C32422276800C7BFF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		214209C9242227B300C7BFF3 /* DiagnosisServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosisServiceTests.swift; sourceTree = "<group>"; };
-		214209CB2422755B00C7BFF3 /* ContactEventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventService.swift; sourceTree = "<group>"; };
+		214209CB2422755B00C7BFF3 /* PlistContactEventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlistContactEventService.swift; sourceTree = "<group>"; };
 		214209CD24237A6300C7BFF3 /* ContactEventServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventServiceTests.swift; sourceTree = "<group>"; };
 		214209CF242396DA00C7BFF3 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		214209D1242399CF00C7BFF3 /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
@@ -62,6 +65,9 @@
 		6FC63C3A241641BA007C8BF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6FC63C3C241641BA007C8BF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A1E7A0582420028B0078174D /* NHS Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "NHS Colors.xcassets"; sourceTree = "<group>"; };
+		AE2A5E4B2423AF49007A4771 /* CodableContactEventRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableContactEventRecorder.swift; sourceTree = "<group>"; };
+		AE2A5E4D2423C345007A4771 /* ContactEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEvent.swift; sourceTree = "<group>"; };
+		AE2A5E4F2423C473007A4771 /* ContactEventRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventRecorder.swift; sourceTree = "<group>"; };
 		AE2DCA9F241920B600A940FC /* BTLEBroadcaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTLEBroadcaster.swift; sourceTree = "<group>"; };
 		AEC6A7B5241AFF1C00B0237A /* DistanceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistanceManager.swift; sourceTree = "<group>"; };
 		AEC6A7BB241BD81A00B0237A /* LogoStrapline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoStrapline.swift; sourceTree = "<group>"; };
@@ -146,21 +152,24 @@
 		6FC63C2F241641B8007C8BF3 /* CoLocate */ = {
 			isa = PBXGroup;
 			children = (
+				6FC63C3C241641BA007C8BF3 /* Info.plist */,
+				6FC63C30241641B8007C8BF3 /* AppDelegate.swift */,
+				AE2A5E4B2423AF49007A4771 /* CodableContactEventRecorder.swift */,
+				AE2A5E4D2423C345007A4771 /* ContactEvent.swift */,
+				AE2A5E4F2423C473007A4771 /* ContactEventRecorder.swift */,
+				214209B9242216B700C7BFF3 /* DiagnosisService.swift */,
+				21D93C2D241FB0A300C1FA9B /* EnterDiagnosisTableViewController.swift */,
+				214209B52421072C00C7BFF3 /* OkNowViewController.swift */,
+				213C806B241A56430020EFA5 /* PermissionsPromptViewController.swift */,
+				214209B32420DBE100C7BFF3 /* PleaseSelfIsolateViewController.swift */,
+				214209CB2422755B00C7BFF3 /* PlistContactEventService.swift */,
 				6FC63C37241641BA007C8BF3 /* Assets.xcassets */,
 				A1E7A0582420028B0078174D /* NHS Colors.xcassets */,
-				6FC63C30241641B8007C8BF3 /* AppDelegate.swift */,
-				214209B9242216B700C7BFF3 /* DiagnosisService.swift */,
-				6FC63C3C241641BA007C8BF3 /* Info.plist */,
+				214209B72422155200C7BFF3 /* Appearance */,
+				214209B82422157300C7BFF3 /* Bluetooth */,
 				6FC63C39241641BA007C8BF3 /* LaunchScreen.storyboard */,
 				6FC63C34241641B8007C8BF3 /* Main.storyboard */,
-				213C806B241A56430020EFA5 /* PermissionsPromptViewController.swift */,
-				21D93C2D241FB0A300C1FA9B /* EnterDiagnosisTableViewController.swift */,
-				214209B32420DBE100C7BFF3 /* PleaseSelfIsolateViewController.swift */,
-				214209B52421072C00C7BFF3 /* OkNowViewController.swift */,
-				214209CB2422755B00C7BFF3 /* ContactEventService.swift */,
 				214209D3242399DD00C7BFF3 /* Session */,
-				214209B82422157300C7BFF3 /* Bluetooth */,
-				214209B72422155200C7BFF3 /* Appearance */,
 			);
 			path = CoLocate;
 			sourceTree = "<group>";
@@ -281,13 +290,16 @@
 				21D93C302420C26900C1FA9B /* PrimaryButton.swift in Sources */,
 				21AF36AB241A8E50001A4910 /* BTLEListener.swift in Sources */,
 				AEC6A7B6241AFF1C00B0237A /* DistanceManager.swift in Sources */,
-				214209CC2422755B00C7BFF3 /* ContactEventService.swift in Sources */,
+				AE2A5E502423C473007A4771 /* ContactEventRecorder.swift in Sources */,
+				214209CC2422755B00C7BFF3 /* PlistContactEventService.swift in Sources */,
 				214209B62421072C00C7BFF3 /* OkNowViewController.swift in Sources */,
 				214209B42420DBE100C7BFF3 /* PleaseSelfIsolateViewController.swift in Sources */,
 				AE2DCAA0241920B600A940FC /* BTLEBroadcaster.swift in Sources */,
 				6FC63C31241641B8007C8BF3 /* AppDelegate.swift in Sources */,
 				214209D2242399CF00C7BFF3 /* URLSession.swift in Sources */,
 				214209BA242216B700C7BFF3 /* DiagnosisService.swift in Sources */,
+				AE2A5E4C2423AF49007A4771 /* CodableContactEventRecorder.swift in Sources */,
+				AE2A5E4E2423C345007A4771 /* ContactEvent.swift in Sources */,
 				213C806C241A56430020EFA5 /* PermissionsPromptViewController.swift in Sources */,
 				21D93C2E241FB0A300C1FA9B /* EnterDiagnosisTableViewController.swift in Sources */,
 				AEC6A7BC241BD81A00B0237A /* LogoStrapline.swift in Sources */,

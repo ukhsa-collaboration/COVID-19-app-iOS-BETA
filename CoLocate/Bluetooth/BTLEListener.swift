@@ -14,9 +14,9 @@ protocol BTLEListenerDelegate {
 }
 
 class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
-    
+
     var delegate: BTLEListenerDelegate?
-    var contactEventService: ContactEventService! // Should this be in the init instead of start?
+    var contactEventService: ContactEventRecorder! // Should this be in the init instead of start?
     
     var centralManager: CBCentralManager?
     
@@ -31,8 +31,8 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     var distanceManager = DistanceManager()
     var lastRssi: [String: NSNumber] = [:]
     var rangedDeviceIDs: [String] = []
-    
-    func start(delegate: BTLEListenerDelegate?, contactEventService: ContactEventService = ContactEventService.shared) {
+
+    func start(delegate: BTLEListenerDelegate?, contactEventService: ContactEventRecorder = CodableContactEventRecorder.shared) {
         self.delegate = delegate
         self.contactEventService = contactEventService
         

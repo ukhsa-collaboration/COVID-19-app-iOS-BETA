@@ -8,13 +8,9 @@
 
 import Foundation
 
-struct ContactEvent: Equatable, Codable {
-    let uuid: UUID
-}
-
-class ContactEventService {
+class PlistContactEventService {
     
-    static let shared: ContactEventService = ContactEventService()
+    static let shared: PlistContactEventService = PlistContactEventService()
     
     let fileURL: URL
 
