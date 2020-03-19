@@ -25,7 +25,7 @@ class ContactEventServiceTests: XCTestCase {
         service.reset()
     }
 
-    func testContactEventServiceRecordsContactEvents() {
+    func testRecordsContactEvents() {
         XCTAssertEqual(service.contactEvents, [])
         
         service.record(contactEvent1)
@@ -38,7 +38,7 @@ class ContactEventServiceTests: XCTestCase {
         XCTAssertEqual(service.contactEvents[2], contactEvent3)
     }
     
-    func testContactEventServicePersistsContactEvents() {
+    func testPersistsContactEvents() {
         let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("contactEvents.plist")
         
         XCTAssertFalse(FileManager.default.fileExists(atPath: url!.path))
@@ -49,6 +49,17 @@ class ContactEventServiceTests: XCTestCase {
 
         let attrs = try! FileManager.default.attributesOfItem(atPath: url!.path)
         XCTAssertNotEqual(attrs[.size] as! NSNumber, 0)
+    }
+
+    func testLoadsContactEventsFromDiskOnInit() {
+        service.record(contactEvent1)
+        service.record(contactEvent2)
+        service.record(contactEvent3)
+
+        service = nil
+        
+        service = ContactEventService()
+        XCTAssertEqual(service.contactEvents.count, 3)
     }
 
 }

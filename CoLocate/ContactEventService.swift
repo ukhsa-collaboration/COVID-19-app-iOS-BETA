@@ -21,15 +21,25 @@ class ContactEventService {
     init() {
         if let dirUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
             fileURL = dirUrl.appendingPathComponent("contactEvents.plist")
-            
         } else {
-            fileURL = URL(string: "")!
-            assertionFailure("\(#file).\(#function) couldn't open file for writing contactEvents.plist")
+            preconditionFailure("\(#file).\(#function) couldn't open file for writing contactEvents.plist")
         }
+        readContactEvents()
     }
     
-    private func loadContactEvents() {
+    private func readContactEvents() {
+        guard FileManager.default.isReadableFile(atPath: fileURL.path) else {
+            contactEvents = []
+            return
+        }
         
+        let decoder = PropertyListDecoder()
+        do {
+            let data = try Data(contentsOf: fileURL)
+            contactEvents = try decoder.decode([ContactEvent].self, from: data)
+        } catch {
+            assertionFailure("\(#file).\(#function) error reading contact events from disk: \(error)")
+        }
     }
     
     func record(_ contactEvent: ContactEvent) { // probably also timestamp and distance
@@ -49,9 +59,8 @@ class ContactEventService {
             let data = try encoder.encode(contactEvents)
             try data.write(to: fileURL, options: [.completeFileProtectionUntilFirstUserAuthentication])
         } catch {
-            print("\(#file).\(#function) error writing contact events to disk: \(error)")
+            assertionFailure("\(#file).\(#function) error writing contact events to disk: \(error)")
         }
-//        FileManager.default.createFile(atPath: fileURL.path, contents: data, attributes: [.protectionKey: URLFileProtection.completeUntilFirstUserAuthentication])
     }
     
     func reset() {
@@ -59,7 +68,7 @@ class ContactEventService {
         do {
             try FileManager.default.removeItem(at: fileURL)
         } catch {
-            print("\(#file).\(#function) error removing file at '\(fileURL)': \(error)")
+            assertionFailure("\(#file).\(#function) error removing file at '\(fileURL)': \(error)")
         }
     }
     
