@@ -13,6 +13,7 @@
 		214209BA242216B700C7BFF3 /* DiagnosisService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209B9242216B700C7BFF3 /* DiagnosisService.swift */; };
 		214209CA242227B300C7BFF3 /* DiagnosisServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209C9242227B300C7BFF3 /* DiagnosisServiceTests.swift */; };
 		214209CC2422755B00C7BFF3 /* ContactEventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209CB2422755B00C7BFF3 /* ContactEventService.swift */; };
+		214209CE24237A6300C7BFF3 /* ContactEventServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209CD24237A6300C7BFF3 /* ContactEventServiceTests.swift */; };
 		21AF36AB241A8E50001A4910 /* BTLEListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AF36AA241A8E50001A4910 /* BTLEListener.swift */; };
 		21D93C2E241FB0A300C1FA9B /* EnterDiagnosisTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D93C2D241FB0A300C1FA9B /* EnterDiagnosisTableViewController.swift */; };
 		21D93C302420C26900C1FA9B /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D93C2F2420C26900C1FA9B /* PrimaryButton.swift */; };
@@ -46,6 +47,7 @@
 		214209C32422276800C7BFF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		214209C9242227B300C7BFF3 /* DiagnosisServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosisServiceTests.swift; sourceTree = "<group>"; };
 		214209CB2422755B00C7BFF3 /* ContactEventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventService.swift; sourceTree = "<group>"; };
+		214209CD24237A6300C7BFF3 /* ContactEventServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventServiceTests.swift; sourceTree = "<group>"; };
 		21AF36AA241A8E50001A4910 /* BTLEListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTLEListener.swift; sourceTree = "<group>"; };
 		21D93C2D241FB0A300C1FA9B /* EnterDiagnosisTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterDiagnosisTableViewController.swift; sourceTree = "<group>"; };
 		21D93C2F2420C26900C1FA9B /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 			children = (
 				214209C32422276800C7BFF3 /* Info.plist */,
 				214209C9242227B300C7BFF3 /* DiagnosisServiceTests.swift */,
+				214209CD24237A6300C7BFF3 /* ContactEventServiceTests.swift */,
 			);
 			path = CoLocateTests;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				214209CA242227B300C7BFF3 /* DiagnosisServiceTests.swift in Sources */,
+				214209CE24237A6300C7BFF3 /* ContactEventServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
