@@ -32,7 +32,7 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     var lastRssi: [String: NSNumber] = [:]
     var rangedDeviceIDs: [String] = []
     
-    func start(delegate: BTLEListenerDelegate?, contactEventService: ContactEventService = ContactEventService()) {
+    func start(delegate: BTLEListenerDelegate?, contactEventService: ContactEventService = ContactEventService.shared) {
         self.delegate = delegate
         self.contactEventService = contactEventService
         
