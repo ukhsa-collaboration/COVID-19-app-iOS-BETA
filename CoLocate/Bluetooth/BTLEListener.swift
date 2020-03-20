@@ -168,13 +168,13 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
 //            }
 
             if characteristic.uuid == BTLEBroadcaster.deviceIdentifierCharacteristicUUID {
-                doSomethingWithIdentityWeFound(data: data)                
+                recordContactWithIdentity(data: data)                
             }
         }
             
     }
 
-    func doSomethingWithIdentityWeFound(data: Data) {
+    func recordContactWithIdentity(data: Data) {
         let uuidString = CBUUID(data: data).uuidString
         let uuid = UUID(uuidString: uuidString)!
         let contactEvent = ContactEvent(uuid: uuid)
