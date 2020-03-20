@@ -38,11 +38,20 @@ class CodableContactEventRecorder: ContactEventRecorder {
     init() {
         contactEvents = loadEvents()
     }
+    
 
     private func loadEvents() -> [ContactEvent] {
         do {
             let data = try Data(contentsOf: Self.archiveURL)
             return (try decoder.decode([ContactEvent].self, from: data) )
+        }
+        catch let error as CocoaError {
+            if error.code == CocoaError.fileNoSuchFile {
+                print("No such file: \(error)")
+                let path = Self.archiveURL.path
+                print("Creating file: \(path)")
+                FileManager.default.createFile(atPath: path, contents: nil)
+            }
         }
         catch {
             assertionFailure("Error reading file from disk: \(error)")
