@@ -16,25 +16,24 @@ protocol BTLEListenerDelegate {
 class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
 
     var delegate: BTLEListenerDelegate?
-    var contactEventRecorder: ContactEventRecorder! // Should this be in the init instead of start?
+    var contactEventRecorder: ContactEventRecorder
     
     var centralManager: CBCentralManager?
-    
-    let restoreIdentifier: String = "CoLocateCentralRestoreIdentifier"
-    
     var peripheralManager: CBPeripheralManager?
     
-    var peripheralList: [CBPeripheral] = []
-    
-    let inRangeperipherals: [CBPeripheral] = []
-    
-    var distanceManager = DistanceManager()
-    var lastRssi: [String: NSNumber] = [:]
-    var rangedDeviceIDs: [String] = []
+    let restoreIdentifier: String = "CoLocateCentralRestoreIdentifier"
 
-    func start(delegate: BTLEListenerDelegate?, contactEventRecorder: ContactEventRecorder = PlistContactEventRecorder.shared) {
-        self.delegate = delegate
+    var peripheralList: [CBPeripheral] = []
+    let inRangeperipherals: [CBPeripheral] = []
+
+    var lastRssi: [String: NSNumber] = [:]
+
+    init(contactEventRecorder: ContactEventRecorder = PlistContactEventRecorder.shared) {
         self.contactEventRecorder = contactEventRecorder
+    }
+
+    func start(delegate: BTLEListenerDelegate?) {
+        self.delegate = delegate
         
         centralManager = CBCentralManager(
             delegate: self,
@@ -149,13 +148,23 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     }
 
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
-        print("\(#file).\(#function) characteristic: \(characteristic)")
-
-        if let data = characteristic.value {
-            if characteristic.uuid == BTLEBroadcaster.deviceIdentifierCharacteristicUUID {
-                recordContactWithIdentity(data: data)                
-            }
+        guard error == nil else {
+            print("Error updatingValueFor characteristic \(characteristic) : \(error!)")
+            return
         }
+
+        print("\(#file).\(#function) didUpdateValueFor characteristic: \(characteristic)")
+
+        guard let data = characteristic.value else {
+            print("\(#file).\(#function) No data found in characteristic.")
+            return
+        }
+
+        guard characteristic.uuid == BTLEBroadcaster.deviceIdentifierCharacteristicUUID else {
+            return
+        }
+
+        recordContactWithIdentity(data: data)
     }
 
     func recordContactWithIdentity(data: Data) {

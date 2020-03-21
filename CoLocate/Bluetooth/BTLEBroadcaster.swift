@@ -17,24 +17,19 @@ protocol BTLEBroadcasterDelegate {
 class BTLEBroadcaster: NSObject, CBPeripheralManagerDelegate {
     
     static let coLocateServiceUUID = CBUUID(nsuuid: UUID(uuidString: "c1f5983c-fa94-4ac8-8e2e-bb86d6de9b21")!)
-    
-    var delegate: BTLEBroadcasterDelegate?
-    
+    static let deviceIdentifierCharacteristicUUID = CBUUID(nsuuid: UUID(uuidString: "85BF337C-5B64-48EB-A5F7-A9FED135C972")!)
+
     // This is safe to force-unwrap in the vast majority of cases
     // according to the docs this will only be nil
     //     after a device has been rebooted
     //     and the app is running before the device has been unlocked
     var deviceIdentifier = CBUUID(nsuuid: UIDevice.current.identifierForVendor!)
-    
-    static let deviceIdentifierCharacteristicUUID = CBUUID(nsuuid: UUID(uuidString: "85BF337C-5B64-48EB-A5F7-A9FED135C972")!)
 
     var primaryService: CBService?
-    
-    let restoreIdentifier: String = "CoLocatePeripheralRestoreIdentifier"
-    
+    var delegate: BTLEBroadcasterDelegate?
     var peripheralManager: CBPeripheralManager?
-    
-    var peripheral: CBPeripheral?
+
+    let restoreIdentifier: String = "CoLocatePeripheralRestoreIdentifier"
     
     func start(delegate: BTLEBroadcasterDelegate?) {
         self.delegate = delegate
