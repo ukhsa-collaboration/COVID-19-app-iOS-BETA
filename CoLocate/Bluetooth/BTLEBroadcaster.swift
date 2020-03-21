@@ -97,10 +97,22 @@ class BTLEBroadcaster: NSObject, CBPeripheralManagerDelegate {
 
         self.peripheralManager = peripheral
         if let services = dict[CBPeripheralManagerRestoredStateServicesKey] as? [CBMutableService] {
-            self.primaryService = services.first
+            self.primaryService = serviceMatchingOurUUID(services)
         } else {
             print("\(#file).\(#function) No services to restore!")
         }
     }
-    
+
+    private func serviceMatchingOurUUID(_ services: [CBMutableService]) -> CBMutableService? {
+        if let matching = services.first(where: {
+                $0.characteristics?
+                    .map({ (characteristic) -> CBUUID  in characteristic.uuid })
+                    .contains(BTLEBroadcaster.deviceIdentifierCharacteristicUUID) ?? false
+        }) {
+            return matching
+        } else {
+            print("\(#file).\(#function) No service matching our characteristic uuid to restore!")
+            return nil
+        }
+    }
 }
