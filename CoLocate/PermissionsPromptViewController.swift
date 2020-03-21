@@ -44,37 +44,26 @@ class PermissionsPromptViewController: UIViewController, BTLEBroadcasterDelegate
         appDelegate.listener?.start(delegate: self)
       #endif
     }
-    
-    private func segueIfBTLEReady() {
-        if btleReady.broadcasterReady && btleReady.listenerReady {
-            self.performSegue(withIdentifier: "enterDiagnosisSegue", sender: nil)
-        }
-    }
-    
+
     // MARK: BTLEBroadcasterDelegate / BTLEListenerDelegate
-    
+
     func btleBroadcaster(_ broadcaster: BTLEBroadcaster, didUpdateState state: CBManagerState) {
         if state == .poweredOn {
             btleReady.broadcasterReady = true
         }
         segueIfBTLEReady()
     }
-    
+
     func btleListener(_ listener: BTLEListener, didUpdateState state: CBManagerState) {
         if state == .poweredOn {
             btleReady.listenerReady = true
         }
         segueIfBTLEReady()
     }
-    
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func segueIfBTLEReady() {
+        if btleReady.broadcasterReady && btleReady.listenerReady {
+            self.performSegue(withIdentifier: "enterDiagnosisSegue", sender: nil)
+        }
     }
-    */
-
 }

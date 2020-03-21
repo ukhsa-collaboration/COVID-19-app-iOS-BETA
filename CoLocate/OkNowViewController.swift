@@ -34,15 +34,4 @@ class OkNowViewController: UIViewController {
         moreInformationTitle.text = "How you can protect yourself and others"
         moreInformationBody.text = "You can stay safe by washing your hands more regularly and avoiding large groups of people.\n\nVisit NHS 111 for more advice on protecting yourself and people you care about.\n\nThank you for helping us slow the spread of coronavirus"
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
