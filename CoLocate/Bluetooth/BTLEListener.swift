@@ -152,33 +152,17 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         print("\(#file).\(#function) characteristic: \(characteristic)")
 
         if let data = characteristic.value {
-//            let pid = peripheral.identifier.uuidString
-//            if (lastRssi.keys.contains(pid)) {
-//                let rssi = Int(truncating: lastRssi[pid]!)
-//                print("    Adding distance for deviceID: " + value + " rssi: \(rssi)")
-//                distanceManager.addDistance(remoteID: service.uuid.uuidString, rssi: rssi)
-//                //lastRssi.removeValue(forKey: pid)
-//                rangedDeviceIDs.append(service.uuid.uuidString)
-//
-//
-//            let uid = String(describing: characteristic.uuid)
-//            if let val = characteristic.value {
-//                let fval = String(describing: val)
-//                print("    CHAR VALUE: peripheral id: " + peripheral.identifier.uuidString + " characteristic: " + uid + " value: " + fval)
-//            }
-
             if characteristic.uuid == BTLEBroadcaster.deviceIdentifierCharacteristicUUID {
                 recordContactWithIdentity(data: data)                
             }
         }
-            
     }
 
     func recordContactWithIdentity(data: Data) {
         let uuidString = CBUUID(data: data).uuidString
         let uuid = UUID(uuidString: uuidString)!
         let contactEvent = ContactEvent(uuid: uuid)
+
         contactEventRecorder.record(contactEvent)
     }
-    
 }
