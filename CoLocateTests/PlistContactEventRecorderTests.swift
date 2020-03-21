@@ -9,16 +9,16 @@
 import XCTest
 @testable import CoLocate
 
-class ContactEventServiceTests: XCTestCase {
+class PlistContactEventRecorderTests: XCTestCase {
 
     let contactEvent1 = ContactEvent(uuid: UUID())
     let contactEvent2 = ContactEvent(uuid: UUID())
     let contactEvent3 = ContactEvent(uuid: UUID())
     
-    var service: ContactEventRecorder!
+    var service: PlistContactEventRecorder!
 
     override func setUp() {
-        service = CodableContactEventRecorder.shared
+        service = PlistContactEventRecorder()
     }
 
     override func tearDown() {
@@ -39,15 +39,13 @@ class ContactEventServiceTests: XCTestCase {
     }
 
     func testPersistsContactEvents() {
-        let url = CodableContactEventRecorder.archiveURL
-    
-        XCTAssertFalse(FileManager.default.fileExists(atPath: url.path))
+        XCTAssertFalse(FileManager.default.fileExists(atPath: service.fileURL.path))
 
         service.record(contactEvent1)
         service.record(contactEvent2)
         service.record(contactEvent3)
 
-        let attrs = try! FileManager.default.attributesOfItem(atPath: url.path)
+        let attrs = try! FileManager.default.attributesOfItem(atPath: service.fileURL.path)
         XCTAssertNotEqual(attrs[.size] as! NSNumber, 0)
     }
 
@@ -58,7 +56,8 @@ class ContactEventServiceTests: XCTestCase {
 
         service = nil
 
-        service = CodableContactEventRecorder()
+        service = PlistContactEventRecorder()
         XCTAssertEqual(service.contactEvents.count, 3)
     }
+
 }

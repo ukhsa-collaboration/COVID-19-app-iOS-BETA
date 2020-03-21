@@ -7,10 +7,12 @@
 
 import Foundation
 
+struct ContactEvent: Equatable, Codable {
+    let uuid: UUID
+}
+
 protocol ContactEventRecorder {
     func record(_ contactEvent: ContactEvent)
     func reset()
     var contactEvents: [ContactEvent] { get }
 }
-
-extension PlistContactEventService: ContactEventRecorder {}

@@ -8,11 +8,11 @@
 
 import Foundation
 
-class PlistContactEventService {
+class PlistContactEventRecorder: ContactEventRecorder {
     
-    static let shared: PlistContactEventService = PlistContactEventService()
+    static let shared: PlistContactEventRecorder = PlistContactEventRecorder()
     
-    let fileURL: URL
+    internal let fileURL: URL
 
     public private(set) var contactEvents: [ContactEvent] = []
 

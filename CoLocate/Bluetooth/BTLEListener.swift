@@ -16,7 +16,7 @@ protocol BTLEListenerDelegate {
 class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
 
     var delegate: BTLEListenerDelegate?
-    var contactEventService: ContactEventRecorder! // Should this be in the init instead of start?
+    var contactEventRecorder: ContactEventRecorder! // Should this be in the init instead of start?
     
     var centralManager: CBCentralManager?
     
@@ -32,9 +32,9 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     var lastRssi: [String: NSNumber] = [:]
     var rangedDeviceIDs: [String] = []
 
-    func start(delegate: BTLEListenerDelegate?, contactEventService: ContactEventRecorder = CodableContactEventRecorder.shared) {
+    func start(delegate: BTLEListenerDelegate?, contactEventRecorder: ContactEventRecorder = PlistContactEventRecorder.shared) {
         self.delegate = delegate
-        self.contactEventService = contactEventService
+        self.contactEventRecorder = contactEventRecorder
         
         centralManager = CBCentralManager(
             delegate: self,
@@ -178,7 +178,7 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         let uuidString = CBUUID(data: data).uuidString
         let uuid = UUID(uuidString: uuidString)!
         let contactEvent = ContactEvent(uuid: uuid)
-        contactEventService.record(contactEvent)
+        contactEventRecorder.record(contactEvent)
     }
     
 }
