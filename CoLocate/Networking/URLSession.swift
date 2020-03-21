@@ -28,6 +28,10 @@ extension URLSession: Session {
         case .post(let data):
             urlRequest.httpMethod = "POST"
             urlRequest.httpBody = data
+            
+        case .patch(let data):
+            urlRequest.httpMethod = "PATCH"
+            urlRequest.httpBody = data
         }
         
         let task = dataTask(with: urlRequest) { data, response, error in

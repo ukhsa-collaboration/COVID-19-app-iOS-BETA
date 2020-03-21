@@ -16,7 +16,7 @@ class PlistContactEventService {
 
     public private(set) var contactEvents: [ContactEvent] = []
 
-    private init() {
+    internal init() {
         if let dirUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
             fileURL = dirUrl.appendingPathComponent("contactEvents.plist")
         } else {

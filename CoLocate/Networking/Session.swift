@@ -11,6 +11,7 @@ import Foundation
 enum HTTPMethod {
     case get
     case post(data: Data)
+    case patch(data: Data)
 }
 
 protocol Request {

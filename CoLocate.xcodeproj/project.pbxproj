@@ -16,6 +16,9 @@
 		214209CE24237A6300C7BFF3 /* ContactEventServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209CD24237A6300C7BFF3 /* ContactEventServiceTests.swift */; };
 		214209D0242396DA00C7BFF3 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209CF242396DA00C7BFF3 /* Session.swift */; };
 		214209D2242399CF00C7BFF3 /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209D1242399CF00C7BFF3 /* URLSession.swift */; };
+		214209D52423C83C00C7BFF3 /* PatchContactEventsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209D42423C83C00C7BFF3 /* PatchContactEventsRequest.swift */; };
+		214209D72423C9B600C7BFF3 /* PatchContactEventsRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209D62423C9B600C7BFF3 /* PatchContactEventsRequestTests.swift */; };
+		214209D924262B7500C7BFF3 /* SessionHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209D824262B7500C7BFF3 /* SessionHelpers.swift */; };
 		21AF36AB241A8E50001A4910 /* BTLEListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AF36AA241A8E50001A4910 /* BTLEListener.swift */; };
 		21D93C2E241FB0A300C1FA9B /* EnterDiagnosisTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D93C2D241FB0A300C1FA9B /* EnterDiagnosisTableViewController.swift */; };
 		21D93C302420C26900C1FA9B /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D93C2F2420C26900C1FA9B /* PrimaryButton.swift */; };
@@ -55,6 +58,9 @@
 		214209CD24237A6300C7BFF3 /* ContactEventServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventServiceTests.swift; sourceTree = "<group>"; };
 		214209CF242396DA00C7BFF3 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		214209D1242399CF00C7BFF3 /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
+		214209D42423C83C00C7BFF3 /* PatchContactEventsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchContactEventsRequest.swift; sourceTree = "<group>"; };
+		214209D62423C9B600C7BFF3 /* PatchContactEventsRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchContactEventsRequestTests.swift; sourceTree = "<group>"; };
+		214209D824262B7500C7BFF3 /* SessionHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionHelpers.swift; sourceTree = "<group>"; };
 		21AF36AA241A8E50001A4910 /* BTLEListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTLEListener.swift; sourceTree = "<group>"; };
 		21D93C2D241FB0A300C1FA9B /* EnterDiagnosisTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterDiagnosisTableViewController.swift; sourceTree = "<group>"; };
 		21D93C2F2420C26900C1FA9B /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
@@ -118,17 +124,28 @@
 				214209C32422276800C7BFF3 /* Info.plist */,
 				214209C9242227B300C7BFF3 /* DiagnosisServiceTests.swift */,
 				214209CD24237A6300C7BFF3 /* ContactEventServiceTests.swift */,
+				214209DA242630CF00C7BFF3 /* Networking */,
 			);
 			path = CoLocateTests;
 			sourceTree = "<group>";
 		};
-		214209D3242399DD00C7BFF3 /* Session */ = {
+		214209D3242399DD00C7BFF3 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
 				214209CF242396DA00C7BFF3 /* Session.swift */,
 				214209D1242399CF00C7BFF3 /* URLSession.swift */,
+				214209D42423C83C00C7BFF3 /* PatchContactEventsRequest.swift */,
 			);
-			path = Session;
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		214209DA242630CF00C7BFF3 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				214209D62423C9B600C7BFF3 /* PatchContactEventsRequestTests.swift */,
+				214209D824262B7500C7BFF3 /* SessionHelpers.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 		6FC63C24241641B8007C8BF3 = {
@@ -165,6 +182,8 @@
 				214209CB2422755B00C7BFF3 /* PlistContactEventService.swift */,
 				6FC63C37241641BA007C8BF3 /* Assets.xcassets */,
 				A1E7A0582420028B0078174D /* NHS Colors.xcassets */,
+				214209CB2422755B00C7BFF3 /* ContactEventService.swift */,
+				214209D3242399DD00C7BFF3 /* Networking */,
 				214209B72422155200C7BFF3 /* Appearance */,
 				214209B82422157300C7BFF3 /* Bluetooth */,
 				6FC63C39241641BA007C8BF3 /* LaunchScreen.storyboard */,
@@ -280,6 +299,8 @@
 			files = (
 				214209CA242227B300C7BFF3 /* DiagnosisServiceTests.swift in Sources */,
 				214209CE24237A6300C7BFF3 /* ContactEventServiceTests.swift in Sources */,
+				214209D924262B7500C7BFF3 /* SessionHelpers.swift in Sources */,
+				214209D72423C9B600C7BFF3 /* PatchContactEventsRequestTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,6 +324,7 @@
 				213C806C241A56430020EFA5 /* PermissionsPromptViewController.swift in Sources */,
 				21D93C2E241FB0A300C1FA9B /* EnterDiagnosisTableViewController.swift in Sources */,
 				AEC6A7BC241BD81A00B0237A /* LogoStrapline.swift in Sources */,
+				214209D52423C83C00C7BFF3 /* PatchContactEventsRequest.swift in Sources */,
 				214209D0242396DA00C7BFF3 /* Session.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
