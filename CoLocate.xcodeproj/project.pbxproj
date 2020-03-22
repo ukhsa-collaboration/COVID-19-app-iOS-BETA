@@ -149,6 +149,7 @@
 			children = (
 				AE2A5E4F2423C473007A4771 /* ContactEventRecorder.swift */,
 				214209CB2422755B00C7BFF3 /* PlistContactEventRecorder.swift */,
+				F75476902426C3BF00B4C928 /* iso8601Extensions.swift */,
 			);
 			path = "Contact Events";
 			sourceTree = "<group>";
@@ -318,6 +319,7 @@
 				AE2DCAA0241920B600A940FC /* BTLEBroadcaster.swift in Sources */,
 				6FC63C31241641B8007C8BF3 /* AppDelegate.swift in Sources */,
 				214209D2242399CF00C7BFF3 /* URLSession.swift in Sources */,
+				F75476912426C3BF00B4C928 /* iso8601Extensions.swift in Sources */,
 				214209BA242216B700C7BFF3 /* DiagnosisService.swift in Sources */,
 				213C806C241A56430020EFA5 /* PermissionsPromptViewController.swift in Sources */,
 				21D93C2E241FB0A300C1FA9B /* EnterDiagnosisTableViewController.swift in Sources */,

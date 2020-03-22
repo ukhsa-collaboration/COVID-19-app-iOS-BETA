@@ -11,14 +11,19 @@ import XCTest
 
 class PlistContactEventRecorderTests: XCTestCase {
 
-    let contactEvent1 = ContactEvent(uuid: UUID())
-    let contactEvent2 = ContactEvent(uuid: UUID())
-    let contactEvent3 = ContactEvent(uuid: UUID())
+    let epoch = Date(timeIntervalSince1970: 0).iso8601withFractionalSeconds
+    var contactEvent1: ContactEvent!
+    var contactEvent2: ContactEvent!
+    var contactEvent3: ContactEvent!
     
     var service: PlistContactEventRecorder!
 
     override func setUp() {
         service = PlistContactEventRecorder()
+
+        contactEvent1 = ContactEvent(uuid: UUID(), timestamp: epoch, rssi: 1)
+        contactEvent2 = ContactEvent(uuid: UUID(), timestamp: epoch, rssi: 1)
+        contactEvent3 = ContactEvent(uuid: UUID(), timestamp: epoch, rssi: 1)
     }
 
     override func tearDown() {
