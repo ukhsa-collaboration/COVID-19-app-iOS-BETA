@@ -16,9 +16,9 @@ class PatchContactEventsRequestTests: XCTestCase {
     let deviceId2 = UUID()
     let deviceId3 = UUID()
 
-    let timestamp1 = Date(timeIntervalSince1970: 0).iso8601withFractionalSeconds
-    let timestamp2 = Date(timeIntervalSince1970: 10).iso8601withFractionalSeconds
-    let timestamp3 = Date(timeIntervalSince1970: 100).iso8601withFractionalSeconds
+    let timestamp1 = URLSession.formatter.string(from: Date(timeIntervalSince1970: 0))
+    let timestamp2 = URLSession.formatter.string(from: Date(timeIntervalSince1970: 10))
+    let timestamp3 = URLSession.formatter.string(from: Date(timeIntervalSince1970: 100))
 
     let rssi1 = 1
     let rssi2 = 11
