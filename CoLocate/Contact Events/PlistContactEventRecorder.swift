@@ -25,9 +25,7 @@ class PlistContactEventRecorder: ContactEventRecorder {
         readContactEvents()
     }
 
-    func record(_ contactEvent: ContactEvent) { // probably also timestamp and distance
-        print("\(#file).\(#function) recording contactEvent with UUID: \(contactEvent.uuid)")
-        
+    func record(_ contactEvent: ContactEvent) {
         contactEvents.append(contactEvent)
         writeContactEvents()
     }
