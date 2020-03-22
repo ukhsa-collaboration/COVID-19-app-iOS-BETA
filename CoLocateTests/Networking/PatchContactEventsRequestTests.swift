@@ -15,14 +15,22 @@ class PatchContactEventsRequestTests: XCTestCase {
     let deviceId1 = UUID()
     let deviceId2 = UUID()
     let deviceId3 = UUID()
+
+    let timestamp1 = Date(timeIntervalSince1970: 0).iso8601withFractionalSeconds
+    let timestamp2 = Date(timeIntervalSince1970: 10).iso8601withFractionalSeconds
+    let timestamp3 = Date(timeIntervalSince1970: 100).iso8601withFractionalSeconds
+
+    let rssi1 = 1
+    let rssi2 = 11
+    let rssi3 = 21
     
     var request: PatchContactEventsRequest!
     
     override func setUp() {
         let contactEvents = [
-            ContactEvent(uuid: deviceId1),
-            ContactEvent(uuid: deviceId2),
-            ContactEvent(uuid: deviceId3)
+            ContactEvent(uuid: deviceId1, timestamp: timestamp1, rssi: rssi1),
+            ContactEvent(uuid: deviceId2, timestamp: timestamp2, rssi: rssi2),
+            ContactEvent(uuid: deviceId3, timestamp: timestamp3, rssi: rssi3)
         ]
         
         request = PatchContactEventsRequest(deviceId: deviceId, contactEvents: contactEvents)
@@ -46,8 +54,16 @@ class PatchContactEventsRequestTests: XCTestCase {
         
         XCTAssertEqual(contactEvents.count, 3)
         XCTAssertEqual(contactEvents[0].uuid, deviceId1)
+        XCTAssertEqual(contactEvents[0].timestamp, timestamp1)
+        XCTAssertEqual(contactEvents[0].rssi, rssi1)
+
         XCTAssertEqual(contactEvents[1].uuid, deviceId2)
+        XCTAssertEqual(contactEvents[1].timestamp, timestamp2)
+        XCTAssertEqual(contactEvents[1].rssi, rssi2)
+
         XCTAssertEqual(contactEvents[2].uuid, deviceId3)
+        XCTAssertEqual(contactEvents[2].timestamp, timestamp3)
+        XCTAssertEqual(contactEvents[2].rssi, rssi3)
     }
 
 }

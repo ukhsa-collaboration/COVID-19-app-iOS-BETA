@@ -9,6 +9,8 @@ import Foundation
 
 struct ContactEvent: Equatable, Codable {
     let uuid: UUID
+    let timestamp: String
+    let rssi: Int
 }
 
 protocol ContactEventRecorder {

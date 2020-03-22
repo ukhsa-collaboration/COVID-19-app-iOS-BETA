@@ -26,7 +26,7 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     var peripheralList: [CBPeripheral] = []
     let inRangeperipherals: [CBPeripheral] = []
 
-    var lastRssi: [String: NSNumber] = [:]
+    var lastRssi: [String: Int] = [:]
 
     init(contactEventRecorder: ContactEventRecorder = PlistContactEventRecorder.shared) {
         self.contactEventRecorder = contactEventRecorder
@@ -78,7 +78,7 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         print("\(#file).\(#function) discovered peripheral: \(advertisementData)")
         
-        lastRssi[peripheral.identifier.uuidString] = RSSI
+        lastRssi[peripheral.identifier.uuidString] = Int(truncating: RSSI)
         peripheralList.append(peripheral)
         centralManager?.connect(peripheral)
     }
@@ -164,13 +164,18 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
             return
         }
 
-        recordContactWithIdentity(data: data)
+        recordContactWithIdentity(peripheral: peripheral, data: data)
     }
 
-    func recordContactWithIdentity(data: Data) {
+    func recordContactWithIdentity(peripheral: CBPeripheral, data: Data) {
         let uuidString = CBUUID(data: data).uuidString
         let uuid = UUID(uuidString: uuidString)!
-        let contactEvent = ContactEvent(uuid: uuid)
+        guard let rssi = lastRssi[peripheral.identifier.uuidString] else {
+            print("Tried to record contact with \(peripheral.identifier.uuid) but there were no rssi values")
+            return
+        }
+
+        let contactEvent = ContactEvent(uuid: uuid, timestamp: Date().iso8601withFractionalSeconds, rssi: rssi)
 
         contactEventRecorder.record(contactEvent)
     }
