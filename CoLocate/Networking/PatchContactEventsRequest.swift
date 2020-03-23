@@ -20,7 +20,7 @@ struct PatchContactEventsRequest: Request {
     
     let data: Data
     
-    var headers: [String : String]? = [
+    var headers: [String : String] = [
         "Accept": "application/json",
         "Content-Type": "application/json"
     ]

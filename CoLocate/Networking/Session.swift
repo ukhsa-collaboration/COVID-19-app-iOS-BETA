@@ -20,7 +20,7 @@ protocol Request {
     
     var method: HTTPMethod { get }
     var path: String { get }
-    var headers: [String: String]? { get }
+    var headers: [String: String] { get }
     
     func parse(_ data: Data) throws -> ResponseType
 }

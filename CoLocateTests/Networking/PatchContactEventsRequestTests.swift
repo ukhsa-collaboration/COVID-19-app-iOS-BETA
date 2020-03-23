@@ -47,8 +47,8 @@ class PatchContactEventsRequestTests: XCTestCase {
     }
     
     func testHeaders() {
-        XCTAssertEqual(request.headers!["Accept"], "application/json")
-        XCTAssertEqual(request.headers!["Content-Type"], "application/json")
+        XCTAssertEqual(request.headers["Accept"], "application/json")
+        XCTAssertEqual(request.headers["Content-Type"], "application/json")
     }
 
     func testData() {
