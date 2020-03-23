@@ -14,29 +14,15 @@ enum HTTPMethod {
     case patch(data: Data)
 }
 
-struct SonarHeaders {
-    static let Signature = "Sonar-Message-Signature"
-    static let Timestamp = "Sonar-Message-Timestamp"
-}
-
 protocol Request {
     
     associatedtype ResponseType
     
     var method: HTTPMethod { get }
     var path: String { get }
-    var headers: [String: String]? { get set }
-    var signed: Bool { get }
-    var data: Data { get } // required for signing
+    var headers: [String: String]? { get }
     
     func parse(_ data: Data) throws -> ResponseType
-}
-
-enum RequestErrors: Error {
-    case timestampTooOld
-    case invalidSignature
-    case missingSignature
-    case missingTimestamp
 }
 
 protocol Session {
