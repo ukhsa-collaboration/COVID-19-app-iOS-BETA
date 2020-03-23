@@ -54,7 +54,7 @@ class PatchContactEventsRequestTests: XCTestCase {
     func testData() {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
-        let contactEvents = try! decoder.decode(PatchContactEventsRequest.JSONWrapper.self, from: request.data).contactEvents
+        let contactEvents = try! decoder.decode(PatchContactEventsRequest.JSONWrapper.self, from: request.body!).contactEvents
 
         XCTAssertEqual(contactEvents.count, 3)
         XCTAssertEqual(contactEvents[0].remoteContactId, deviceId1)
@@ -75,7 +75,7 @@ class PatchContactEventsRequestTests: XCTestCase {
 """
 {"contactEvents":[{"rssi":-11,"remoteContactId":"62D583B3-052C-4CF9-808C-0B96080F0DB8","timestamp":"1970-01-01T00:00:00Z"},{"rssi":-1,"remoteContactId":"AA94DF14-4077-4D6B-9712-D90861D8BDE7","timestamp":"1970-01-01T00:00:10Z"},{"rssi":-21,"remoteContactId":"2F13DB8A-7A5E-47C9-91D0-04F6AE19D869","timestamp":"1970-01-01T00:01:40Z"}]}
 """
-        XCTAssertEqual(String(data: request.data, encoding: .utf8)!, expectedJsonString)
+        XCTAssertEqual(String(data: request.body!, encoding: .utf8)!, expectedJsonString)
     }
 
 }

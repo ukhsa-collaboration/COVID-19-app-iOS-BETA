@@ -16,15 +16,11 @@ struct PatchContactEventsRequest: Request {
 
     typealias ResponseType = Void
     
-    var method: HTTPMethod {
-        return .patch(data: data)
-    }
+    let method: HTTPMethod
     
     let path: String
     
-    let data: Data
-    
-    var headers: [String : String] = [
+    let headers: [String : String] = [
         "Accept": "application/json",
         "Content-Type": "application/json"
     ]
@@ -34,7 +30,7 @@ struct PatchContactEventsRequest: Request {
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
         let contactEvents = JSONWrapper(contactEvents: contactEvents)
-        data = try! encoder.encode(contactEvents)
+        method = .patch(data: try! encoder.encode(contactEvents))
     }
     
     func parse(_ data: Data) throws -> Void {
