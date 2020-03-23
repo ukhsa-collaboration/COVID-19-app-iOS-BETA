@@ -20,6 +20,9 @@
 		214209D72423C9B600C7BFF3 /* PatchContactEventsRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209D62423C9B600C7BFF3 /* PatchContactEventsRequestTests.swift */; };
 		214209D924262B7500C7BFF3 /* SessionHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209D824262B7500C7BFF3 /* SessionHelpers.swift */; };
 		21AF36AB241A8E50001A4910 /* BTLEListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AF36AA241A8E50001A4910 /* BTLEListener.swift */; };
+		21B3D2E3242906AE00573061 /* SignedRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B3D2E2242906AE00573061 /* SignedRequestTests.swift */; };
+		21B3D2E52429112B00573061 /* SecureRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B3D2E42429112B00573061 /* SecureRequest.swift */; };
+		21B3D2E82429115600573061 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21B3D2E72429115600573061 /* CoreBluetooth.framework */; };
 		21D93C2E241FB0A300C1FA9B /* EnterDiagnosisTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D93C2D241FB0A300C1FA9B /* EnterDiagnosisTableViewController.swift */; };
 		21D93C302420C26900C1FA9B /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D93C2F2420C26900C1FA9B /* PrimaryButton.swift */; };
 		6FC63C31241641B8007C8BF3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC63C30241641B8007C8BF3 /* AppDelegate.swift */; };
@@ -60,6 +63,10 @@
 		214209D62423C9B600C7BFF3 /* PatchContactEventsRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchContactEventsRequestTests.swift; sourceTree = "<group>"; };
 		214209D824262B7500C7BFF3 /* SessionHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionHelpers.swift; sourceTree = "<group>"; };
 		21AF36AA241A8E50001A4910 /* BTLEListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTLEListener.swift; sourceTree = "<group>"; };
+		21B3D2E2242906AE00573061 /* SignedRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignedRequestTests.swift; sourceTree = "<group>"; };
+		21B3D2E42429112B00573061 /* SecureRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRequest.swift; sourceTree = "<group>"; };
+		21B3D2E72429115600573061 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		21B3D2E92429115E00573061 /* CryptoTokenKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoTokenKit.framework; path = System/Library/Frameworks/CryptoTokenKit.framework; sourceTree = SDKROOT; };
 		21D93C2D241FB0A300C1FA9B /* EnterDiagnosisTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterDiagnosisTableViewController.swift; sourceTree = "<group>"; };
 		21D93C2F2420C26900C1FA9B /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		6FC63C2D241641B8007C8BF3 /* CoLocate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoLocate.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,6 +95,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21B3D2E82429115600573061 /* CoreBluetooth.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,6 +139,7 @@
 				214209CF242396DA00C7BFF3 /* Session.swift */,
 				214209D1242399CF00C7BFF3 /* URLSession.swift */,
 				214209D42423C83C00C7BFF3 /* PatchContactEventsRequest.swift */,
+				21B3D2E42429112B00573061 /* SecureRequest.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -140,6 +149,7 @@
 			children = (
 				214209D62423C9B600C7BFF3 /* PatchContactEventsRequestTests.swift */,
 				214209D824262B7500C7BFF3 /* SessionHelpers.swift */,
+				21B3D2E2242906AE00573061 /* SignedRequestTests.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -153,12 +163,22 @@
 			path = "Contact Events";
 			sourceTree = "<group>";
 		};
+		21B3D2E62429115600573061 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				21B3D2E92429115E00573061 /* CryptoTokenKit.framework */,
+				21B3D2E72429115600573061 /* CoreBluetooth.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		6FC63C24241641B8007C8BF3 = {
 			isa = PBXGroup;
 			children = (
 				6FC63C2F241641B8007C8BF3 /* CoLocate */,
 				214209C02422276800C7BFF3 /* CoLocateTests */,
 				6FC63C2E241641B8007C8BF3 /* Products */,
+				21B3D2E62429115600573061 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -297,6 +317,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21B3D2E3242906AE00573061 /* SignedRequestTests.swift in Sources */,
 				214209CA242227B300C7BFF3 /* DiagnosisServiceTests.swift in Sources */,
 				214209CE24237A6300C7BFF3 /* PlistContactEventRecorderTests.swift in Sources */,
 				214209D924262B7500C7BFF3 /* SessionHelpers.swift in Sources */,
@@ -312,6 +333,7 @@
 				21AF36AB241A8E50001A4910 /* BTLEListener.swift in Sources */,
 				AEC6A7B6241AFF1C00B0237A /* DistanceManager.swift in Sources */,
 				AE2A5E502423C473007A4771 /* ContactEventRecorder.swift in Sources */,
+				21B3D2E52429112B00573061 /* SecureRequest.swift in Sources */,
 				214209CC2422755B00C7BFF3 /* PlistContactEventRecorder.swift in Sources */,
 				214209B62421072C00C7BFF3 /* OkNowViewController.swift in Sources */,
 				214209B42420DBE100C7BFF3 /* PleaseSelfIsolateViewController.swift in Sources */,
@@ -522,6 +544,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7JDTZAMF6R;
 				INFOPLIST_FILE = CoLocate/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -540,6 +563,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7JDTZAMF6R;
 				INFOPLIST_FILE = CoLocate/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
