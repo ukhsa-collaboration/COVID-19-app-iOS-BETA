@@ -11,23 +11,25 @@ import XCTest
 
 class PatchContactEventsRequestTests: XCTestCase {
 
-    let deviceId = UUID()
-    let deviceId1 = UUID()
-    let deviceId2 = UUID()
-    let deviceId3 = UUID()
+    let deviceId = UUID(uuidString: "E9D7F53C-DE9C-46A2-961E-8302DC39558A")!
+    let deviceId1 = UUID(uuidString: "62D583B3-052C-4CF9-808C-0B96080F0DB8")!
+    let deviceId2 = UUID(uuidString: "AA94DF14-4077-4D6B-9712-D90861D8BDE7")!
+    let deviceId3 = UUID(uuidString: "2F13DB8A-7A5E-47C9-91D0-04F6AE19D869")!
 
     let timestamp1 = URLSession.formatter.string(from: Date(timeIntervalSince1970: 0))
     let timestamp2 = URLSession.formatter.string(from: Date(timeIntervalSince1970: 10))
     let timestamp3 = URLSession.formatter.string(from: Date(timeIntervalSince1970: 100))
 
-    let rssi1 = 1
-    let rssi2 = 11
-    let rssi3 = 21
+    let rssi1 = -11
+    let rssi2 = -1
+    let rssi3 = -21
+
+    var contactEvents: [ContactEvent]!
     
     var request: PatchContactEventsRequest!
     
     override func setUp() {
-        let contactEvents = [
+        contactEvents = [
             ContactEvent(uuid: deviceId1, timestamp: timestamp1, rssi: rssi1),
             ContactEvent(uuid: deviceId2, timestamp: timestamp2, rssi: rssi2),
             ContactEvent(uuid: deviceId3, timestamp: timestamp3, rssi: rssi3)
@@ -64,6 +66,16 @@ class PatchContactEventsRequestTests: XCTestCase {
         XCTAssertEqual(contactEvents[2].uuid, deviceId3)
         XCTAssertEqual(contactEvents[2].timestamp, timestamp3)
         XCTAssertEqual(contactEvents[2].rssi, rssi3)
+    }
+
+    func testJsonSerialisedContactEvent() {
+        let jsonString = String(data: try! JSONEncoder().encode(contactEvents[0]), encoding: .utf8)!
+        
+        let expectedJsonString =
+"""
+{"timestamp":"1970-01-01T00:00:00Z","rssi":-11,"uuid":"62D583B3-052C-4CF9-808C-0B96080F0DB8"}
+"""
+        XCTAssertEqual(jsonString, expectedJsonString)
     }
 
 }
