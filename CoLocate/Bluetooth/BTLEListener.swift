@@ -175,7 +175,7 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
             return
         }
 
-        let contactEvent = ContactEvent(uuid: uuid, timestamp: URLSession.formatter.string(from:Date()), rssi: rssi)
+        let contactEvent = ContactEvent(uuid: uuid, rssi: rssi)
 
         contactEventRecorder.record(contactEvent)
     }

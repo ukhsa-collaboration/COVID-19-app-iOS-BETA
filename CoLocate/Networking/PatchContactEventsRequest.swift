@@ -28,7 +28,9 @@ struct PatchContactEventsRequest: Request {
     init(deviceId: UUID, contactEvents: [ContactEvent]) {
         print("INIT")
         path = "/api/residents/\(deviceId.uuidString)"
-        data = try! JSONEncoder().encode(contactEvents)
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .iso8601
+        data = try! encoder.encode(contactEvents)
         headers = [
                "Accept": "application/json",
                "Content-Type": "application/json"

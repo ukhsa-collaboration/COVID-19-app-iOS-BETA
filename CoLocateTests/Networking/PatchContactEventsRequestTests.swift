@@ -16,9 +16,9 @@ class PatchContactEventsRequestTests: XCTestCase {
     let deviceId2 = UUID(uuidString: "AA94DF14-4077-4D6B-9712-D90861D8BDE7")!
     let deviceId3 = UUID(uuidString: "2F13DB8A-7A5E-47C9-91D0-04F6AE19D869")!
 
-    let timestamp1 = URLSession.formatter.string(from: Date(timeIntervalSince1970: 0))
-    let timestamp2 = URLSession.formatter.string(from: Date(timeIntervalSince1970: 10))
-    let timestamp3 = URLSession.formatter.string(from: Date(timeIntervalSince1970: 100))
+    let timestamp1 = Date(timeIntervalSince1970: 0)
+    let timestamp2 = Date(timeIntervalSince1970: 10)
+    let timestamp3 = Date(timeIntervalSince1970: 100)
 
     let rssi1 = -11
     let rssi2 = -1
@@ -52,7 +52,9 @@ class PatchContactEventsRequestTests: XCTestCase {
     }
 
     func testData() {
-        let contactEvents = try! JSONDecoder().decode([ContactEvent].self, from: request.data)
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        let contactEvents = try! decoder.decode([ContactEvent].self, from: request.data)
         
         XCTAssertEqual(contactEvents.count, 3)
         XCTAssertEqual(contactEvents[0].uuid, deviceId1)
@@ -69,13 +71,11 @@ class PatchContactEventsRequestTests: XCTestCase {
     }
 
     func testJsonSerialisedContactEvent() {
-        let jsonString = String(data: try! JSONEncoder().encode(contactEvents[0]), encoding: .utf8)!
-        
         let expectedJsonString =
 """
-{"timestamp":"1970-01-01T00:00:00Z","rssi":-11,"uuid":"62D583B3-052C-4CF9-808C-0B96080F0DB8"}
+[{"timestamp":"1970-01-01T00:00:00Z","rssi":-11,"uuid":"62D583B3-052C-4CF9-808C-0B96080F0DB8"},{"timestamp":"1970-01-01T00:00:10Z","rssi":-1,"uuid":"AA94DF14-4077-4D6B-9712-D90861D8BDE7"},{"timestamp":"1970-01-01T00:01:40Z","rssi":-21,"uuid":"2F13DB8A-7A5E-47C9-91D0-04F6AE19D869"}]
 """
-        XCTAssertEqual(jsonString, expectedJsonString)
+        XCTAssertEqual(String(data: request.data, encoding: .utf8)!, expectedJsonString)
     }
 
 }

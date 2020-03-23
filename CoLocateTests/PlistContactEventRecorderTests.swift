@@ -11,7 +11,8 @@ import XCTest
 
 class PlistContactEventRecorderTests: XCTestCase {
 
-    let epoch = URLSession.formatter.string(from: Date(timeIntervalSince1970: 0))
+    let epoch = Date(timeIntervalSince1970: 0)
+    
     var contactEvent1: ContactEvent!
     var contactEvent2: ContactEvent!
     var contactEvent3: ContactEvent!
