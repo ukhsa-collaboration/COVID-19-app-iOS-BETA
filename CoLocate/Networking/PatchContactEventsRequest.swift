@@ -10,6 +10,10 @@ import Foundation
 
 struct PatchContactEventsRequest: Request {
 
+    struct JSONWrapper: Codable {
+        let contactEvents: [ContactEvent]
+    }
+
     typealias ResponseType = Void
     
     var method: HTTPMethod {
@@ -29,6 +33,7 @@ struct PatchContactEventsRequest: Request {
         path = "/api/residents/\(deviceId.uuidString)"
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
+        let contactEvents = JSONWrapper(contactEvents: contactEvents)
         data = try! encoder.encode(contactEvents)
     }
     

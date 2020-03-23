@@ -30,9 +30,9 @@ class PatchContactEventsRequestTests: XCTestCase {
     
     override func setUp() {
         contactEvents = [
-            ContactEvent(uuid: deviceId1, timestamp: timestamp1, rssi: rssi1),
-            ContactEvent(uuid: deviceId2, timestamp: timestamp2, rssi: rssi2),
-            ContactEvent(uuid: deviceId3, timestamp: timestamp3, rssi: rssi3)
+            ContactEvent(remoteContactId: deviceId1, timestamp: timestamp1, rssi: rssi1),
+            ContactEvent(remoteContactId: deviceId2, timestamp: timestamp2, rssi: rssi2),
+            ContactEvent(remoteContactId: deviceId3, timestamp: timestamp3, rssi: rssi3)
         ]
         
         request = PatchContactEventsRequest(deviceId: deviceId, contactEvents: contactEvents)
@@ -54,18 +54,18 @@ class PatchContactEventsRequestTests: XCTestCase {
     func testData() {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
-        let contactEvents = try! decoder.decode([ContactEvent].self, from: request.data)
-        
+        let contactEvents = try! decoder.decode(PatchContactEventsRequest.JSONWrapper.self, from: request.data).contactEvents
+
         XCTAssertEqual(contactEvents.count, 3)
-        XCTAssertEqual(contactEvents[0].uuid, deviceId1)
+        XCTAssertEqual(contactEvents[0].remoteContactId, deviceId1)
         XCTAssertEqual(contactEvents[0].timestamp, timestamp1)
         XCTAssertEqual(contactEvents[0].rssi, rssi1)
 
-        XCTAssertEqual(contactEvents[1].uuid, deviceId2)
+        XCTAssertEqual(contactEvents[1].remoteContactId, deviceId2)
         XCTAssertEqual(contactEvents[1].timestamp, timestamp2)
         XCTAssertEqual(contactEvents[1].rssi, rssi2)
 
-        XCTAssertEqual(contactEvents[2].uuid, deviceId3)
+        XCTAssertEqual(contactEvents[2].remoteContactId, deviceId3)
         XCTAssertEqual(contactEvents[2].timestamp, timestamp3)
         XCTAssertEqual(contactEvents[2].rssi, rssi3)
     }
@@ -73,7 +73,7 @@ class PatchContactEventsRequestTests: XCTestCase {
     func testJsonSerialisedContactEvent() {
         let expectedJsonString =
 """
-[{"timestamp":"1970-01-01T00:00:00Z","rssi":-11,"uuid":"62D583B3-052C-4CF9-808C-0B96080F0DB8"},{"timestamp":"1970-01-01T00:00:10Z","rssi":-1,"uuid":"AA94DF14-4077-4D6B-9712-D90861D8BDE7"},{"timestamp":"1970-01-01T00:01:40Z","rssi":-21,"uuid":"2F13DB8A-7A5E-47C9-91D0-04F6AE19D869"}]
+{"contactEvents":[{"rssi":-11,"remoteContactId":"62D583B3-052C-4CF9-808C-0B96080F0DB8","timestamp":"1970-01-01T00:00:00Z"},{"rssi":-1,"remoteContactId":"AA94DF14-4077-4D6B-9712-D90861D8BDE7","timestamp":"1970-01-01T00:00:10Z"},{"rssi":-21,"remoteContactId":"2F13DB8A-7A5E-47C9-91D0-04F6AE19D869","timestamp":"1970-01-01T00:01:40Z"}]}
 """
         XCTAssertEqual(String(data: request.data, encoding: .utf8)!, expectedJsonString)
     }

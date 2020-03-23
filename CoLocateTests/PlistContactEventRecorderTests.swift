@@ -22,9 +22,9 @@ class PlistContactEventRecorderTests: XCTestCase {
     override func setUp() {
         service = PlistContactEventRecorder()
 
-        contactEvent1 = ContactEvent(uuid: UUID(), timestamp: epoch, rssi: 1)
-        contactEvent2 = ContactEvent(uuid: UUID(), timestamp: epoch, rssi: 1)
-        contactEvent3 = ContactEvent(uuid: UUID(), timestamp: epoch, rssi: 1)
+        contactEvent1 = ContactEvent(remoteContactId: UUID(), timestamp: epoch, rssi: 1)
+        contactEvent2 = ContactEvent(remoteContactId: UUID(), timestamp: epoch, rssi: 1)
+        contactEvent3 = ContactEvent(remoteContactId: UUID(), timestamp: epoch, rssi: 1)
     }
 
     override func tearDown() {

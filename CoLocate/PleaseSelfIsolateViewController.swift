@@ -19,6 +19,7 @@ class PleaseSelfIsolateViewController: UIViewController {
     @IBOutlet weak var moreInformationBody: UILabel!
 
     let contactEventRecorder: ContactEventRecorder = PlistContactEventRecorder.shared
+    let session: Session = URLSession.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,15 +36,16 @@ class PleaseSelfIsolateViewController: UIViewController {
     }
 
     @IBAction func didTapNotify(_ sender: Any) {
-        let deviceId = UIDevice.current.identifierForVendor!
+        // This uuid is pre-seeded on the database (for now)
+        // this won't work if the database is dropped and recreated
+        // will change this once we handle registration
+        let deviceId = UUID(uuidString: "1c8d305e-db93-4ba0-81f4-94c33fd35c7c")!
         let contactEvents = contactEventRecorder.contactEvents
         let request = PatchContactEventsRequest(deviceId: deviceId, contactEvents: contactEvents)
 
-        URLSession.shared.execute(request) { (result) in
+        session.execute(request) { (result) in
             switch result {
             case .success(_):
-                print("\(#file).\(#function) SUCCESS !")
-
                 DispatchQueue.main.async {
                     self.present(self.successfulAlert(), animated: true, completion: nil)
                 }

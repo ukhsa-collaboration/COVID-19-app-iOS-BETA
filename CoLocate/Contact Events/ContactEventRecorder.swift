@@ -8,12 +8,12 @@
 import Foundation
 
 struct ContactEvent: Equatable, Codable {
-    let uuid: UUID
+    let remoteContactId: UUID
     let timestamp: Date
     let rssi: Int
     
-    init(uuid: UUID, timestamp: Date = Date(), rssi: Int) {
-        self.uuid = uuid
+    init(remoteContactId: UUID, timestamp: Date = Date(), rssi: Int) {
+        self.remoteContactId = remoteContactId
         self.timestamp = timestamp
         self.rssi = rssi
     }

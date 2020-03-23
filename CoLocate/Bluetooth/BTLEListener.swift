@@ -175,7 +175,7 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
             return
         }
 
-        let contactEvent = ContactEvent(uuid: uuid, rssi: rssi)
+        let contactEvent = ContactEvent(remoteContactId: uuid, rssi: rssi)
 
         contactEventRecorder.record(contactEvent)
     }
