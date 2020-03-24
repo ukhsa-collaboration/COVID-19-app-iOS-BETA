@@ -10,7 +10,7 @@ import XCTest
 import CryptoKit
 @testable import CoLocate
 
-class SignedRequestTests: XCTestCase {
+class SecureRequestTests: XCTestCase {
 
     var request: SampleSecureRequest!
     
@@ -20,6 +20,9 @@ class SignedRequestTests: XCTestCase {
         request = SampleSecureRequest(key: SymmetricKey(data: keyData), text: "Hello, nurse!", date: Date(timeIntervalSince1970: 1))
     }
 
+    // This doesn't quite work for generating a matching base64 output to our code
+    // echo -n '1970-01-01T00:00:00ZHello, nurse!' | openssl dgst -sha256 -hmac $(echo -n "Gqacz+VE6uuZy1uc4oTG/A+LAS291mXN+J5opDSNYys=" | base64 -d) | xxd -r -p | base64
+    // However we get a matching base64 string by using "1970-01-01T00:00:00ZHello, nurse!" as input on https://www.liavaag.org/English/SHA-Generator/HMAC/ so I guess it's right?
     func testRequestHasSignatureHeader() {
         XCTAssertEqual(request.headers["X-Sonar-Message-Signature"], "bbDadktBVp2+GOpKisETJISycO+C0FqwMl2wuAUZU+o=")
     }
