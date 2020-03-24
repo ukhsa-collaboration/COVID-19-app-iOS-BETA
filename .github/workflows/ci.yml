@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-      - wip/171953830/ci
 
 jobs:
   test:
