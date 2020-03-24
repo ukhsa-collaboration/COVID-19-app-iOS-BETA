@@ -15,12 +15,16 @@ class RegistrationServiceTests: XCTestCase {
     let secretKey = "Ik6M9N2CqLv3BDT6lKlhR9X+cLf1MCyuU3ExnrUBlY4="
 
     override func setUp() {
+        // Reset the keychain to a known empty state.
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccount as String: id.uuidString,
             kSecValueData as String: secretKey.data(using: .utf8)!,
         ]
         let status = SecItemDelete(query as CFDictionary)
+
+        // If the test succeeds, the delete will be successful. If the test
+        // fails, then we expect the item to not be found.
         XCTAssert(status == errSecSuccess || status == errSecItemNotFound)
 
         super.tearDown()
