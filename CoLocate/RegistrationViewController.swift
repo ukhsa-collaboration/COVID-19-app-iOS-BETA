@@ -39,7 +39,7 @@ class RegistrationViewController: UIViewController {
         }
     }
     
-    private func handleRegistration(result: Result<RegistrationResponse, Error>) {
+    private func handleRegistration(result: Result<Registration, Error>) {
         self.activityIndicator.stopAnimating()
 
         switch result {
