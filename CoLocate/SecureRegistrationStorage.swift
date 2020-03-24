@@ -1,5 +1,5 @@
 //
-//  Registration.swift
+//  SecureRegistrationStorage.swift
 //  CoLocate
 //
 //  Created by NHSX.
@@ -19,7 +19,7 @@ struct Registration: Codable {
     }
 }
 
-class RegistrationService {
+class SecureRegistrationStorage {
 
     enum Error: Swift.Error {
         case invalidSecretKey
@@ -58,6 +58,8 @@ class RegistrationService {
             throw Error.invalidSecretKey
         }
 
+        try clear()
+
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccount as String: registration.id.uuidString,
@@ -66,6 +68,17 @@ class RegistrationService {
         let status = SecItemAdd(query as CFDictionary, nil)
 
         guard status == errSecSuccess || status == errSecDuplicateItem else {
+            throw Error.keychain(status)
+        }
+    }
+
+    private func clear() throws {
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+        ]
+        let status = SecItemDelete(query as CFDictionary)
+
+        guard status == errSecSuccess || status == errSecItemNotFound else {
             throw Error.keychain(status)
         }
     }
