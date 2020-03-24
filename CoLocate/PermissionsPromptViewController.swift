@@ -32,39 +32,39 @@ class PermissionsPromptViewController: UIViewController, BTLEBroadcasterDelegate
     
     @IBAction func didTapContinue(_ sender: UIButton) {
         segueIfBTLEReady()
-//      #if targetEnvironment(simulator)
-//        btleReady.broadcasterReady = true
-//        btleReady.listenerReady = true
-//        segueIfBTLEReady()
-//      #else
-//        let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
-//        appDelegate.broadcaster = BTLEBroadcaster()
-//        appDelegate.broadcaster?.start(delegate: self)
-//
-//        appDelegate.listener = BTLEListener()
-//        appDelegate.listener?.start(delegate: self)
-//      #endif
+      #if targetEnvironment(simulator)
+        btleReady.broadcasterReady = true
+        btleReady.listenerReady = true
+        segueIfBTLEReady()
+      #else
+        let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
+        appDelegate.broadcaster = BTLEBroadcaster()
+        appDelegate.broadcaster?.start(delegate: self)
+
+        appDelegate.listener = BTLEListener()
+        appDelegate.listener?.start(delegate: self)
+      #endif
     }
 
     // MARK: BTLEBroadcasterDelegate / BTLEListenerDelegate
 
     func btleBroadcaster(_ broadcaster: BTLEBroadcaster, didUpdateState state: CBManagerState) {
-//        if state == .poweredOn {
-//            btleReady.broadcasterReady = true
-//        }
-//        segueIfBTLEReady()
+        if state == .poweredOn {
+            btleReady.broadcasterReady = true
+        }
+        segueIfBTLEReady()
     }
 
     func btleListener(_ listener: BTLEListener, didUpdateState state: CBManagerState) {
-//        if state == .poweredOn {
-//            btleReady.listenerReady = true
-//        }
-//        segueIfBTLEReady()
+        if state == .poweredOn {
+            btleReady.listenerReady = true
+        }
+        segueIfBTLEReady()
     }
 
     private func segueIfBTLEReady() {
-//        if btleReady.broadcasterReady && btleReady.listenerReady {
+        if btleReady.broadcasterReady && btleReady.listenerReady {
             self.performSegue(withIdentifier: "enterRegistrationSegue", sender: nil)
-//        }
+        }
     }
 }
