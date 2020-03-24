@@ -53,7 +53,7 @@ jobs:
 
       - name: Merge master into test-flight
         run: |
-          git fetch origin master
+          git fetch origin test-flight
           git checkout test-flight
           git merge ${{ github.sha }}
 
