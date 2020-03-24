@@ -10,7 +10,7 @@ jobs:
     runs-on: macOS-latest
     steps:
       - name: Checkout Project
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
 
       - name: Switch to Xcode 11
         run: sudo xcode-select -s /Applications/Xcode_11.app
