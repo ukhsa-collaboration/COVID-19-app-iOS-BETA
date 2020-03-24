@@ -1,0 +1,38 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - master
+      - wip/171953830/ci
+
+jobs:
+  test:
+    runs-on: macOS-latest
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@v1
+
+      - name: Switch to Xcode 11
+        run: sudo xcode-select -s /Applications/Xcode_11.app
+
+      - name: Show Build Version
+        run: xcodebuild -version
+
+      - name: Show Build Settings
+        run: xcodebuild -showBuildSettings
+        
+      - name: Show Build SDK
+        run: xcodebuild -showsdks
+      
+      - name: Show Available Destinations
+        run: xcodebuild -scheme CoLocate -showdestinations
+      
+      - name: Run Test
+        run: >
+          xcodebuild
+          -scheme CoLocate
+          test
+          -destination "platform=iOS Simulator,OS=13.0,name=iPhone 11"
+          -showBuildTimingSummary
+          -allowProvisioningUpdates
