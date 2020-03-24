@@ -53,7 +53,7 @@ jobs:
         run: |
           git fetch origin
           git checkout test-flight
-          git merge ${{ GITHUB_SHA }}
+          git merge ${{ github.sha }}
 
       - name: Bump Version
         run: ./bin/bump-build-version
