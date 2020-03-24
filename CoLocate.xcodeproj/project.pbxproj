@@ -39,6 +39,7 @@
 		F600A60424297C010038DF57 /* RegistrationRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F600A60324297C010038DF57 /* RegistrationRequestTests.swift */; };
 		F67A2291242AA35C002254B6 /* SecureRegistrationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A2290242AA35B002254B6 /* SecureRegistrationStorage.swift */; };
 		F67A2293242AA370002254B6 /* SecureRegistrationStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */; };
+		F67A2295242AC188002254B6 /* RegistrationViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A2294242AC188002254B6 /* RegistrationViewControllerTests.swift */; };
 		F6A309D124298A5800865942 /* Development.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F6A309D024298A5800865942 /* Development.xcconfig */; };
 		F758553A24294C8D00CBE1ED /* RequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F758553924294C8C00CBE1ED /* RequestFactory.swift */; };
 /* End PBXBuildFile section */
@@ -91,6 +92,7 @@
 		F600A60324297C010038DF57 /* RegistrationRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationRequestTests.swift; sourceTree = "<group>"; };
 		F67A2290242AA35B002254B6 /* SecureRegistrationStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRegistrationStorage.swift; sourceTree = "<group>"; };
 		F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRegistrationStorageTests.swift; sourceTree = "<group>"; };
+		F67A2294242AC188002254B6 /* RegistrationViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewControllerTests.swift; sourceTree = "<group>"; };
 		F6A309D024298A5800865942 /* Development.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
 		F758553924294C8C00CBE1ED /* RequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -139,6 +141,7 @@
 				214209C32422276800C7BFF3 /* Info.plist */,
 				214209C9242227B300C7BFF3 /* DiagnosisServiceTests.swift */,
 				214209CD24237A6300C7BFF3 /* PlistContactEventRecorderTests.swift */,
+				F67A2294242AC188002254B6 /* RegistrationViewControllerTests.swift */,
 				F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */,
 				214209DA242630CF00C7BFF3 /* Networking */,
 			);
@@ -341,6 +344,7 @@
 				214209CE24237A6300C7BFF3 /* PlistContactEventRecorderTests.swift in Sources */,
 				214209D924262B7500C7BFF3 /* SessionHelpers.swift in Sources */,
 				F600A60424297C010038DF57 /* RegistrationRequestTests.swift in Sources */,
+				F67A2295242AC188002254B6 /* RegistrationViewControllerTests.swift in Sources */,
 				F67A2293242AA370002254B6 /* SecureRegistrationStorageTests.swift in Sources */,
 				214209D72423C9B600C7BFF3 /* PatchContactEventsRequestTests.swift in Sources */,
 			);

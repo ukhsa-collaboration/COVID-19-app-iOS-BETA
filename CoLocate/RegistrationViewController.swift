@@ -13,7 +13,15 @@ class RegistrationViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var retryButton: UIButton!
     
-    let urlSession: Session = URLSession.shared
+    var urlSession: Session!
+
+    func inject(urlSession: Session) {
+        self.urlSession = urlSession
+    }
+
+    func inject() {
+        inject(urlSession: URLSession.shared)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,10 +49,13 @@ class RegistrationViewController: UIViewController {
         self.activityIndicator.stopAnimating()
 
         switch result {
-        case .success(let response) :
-            print("registered with id \(response.id) and key \(response.secretKey)")
+        case .success(let registration):
+            // TODO What do when fail?
+            try! SecureRegistrationStorage.shared.set(registration: registration)
+
             self.performSegue(withIdentifier: "enterDiagnosisSegue", sender: self)
         case .failure(let error):
+            // TODO Log failure
             print("error during registration: \(error)")
             self.retryButton.isHidden = false
         }

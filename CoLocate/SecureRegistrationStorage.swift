@@ -26,6 +26,10 @@ class SecureRegistrationStorage {
         case keychain(OSStatus)
     }
 
+    // There's no need for this to be a singleton,
+    // but this feels more idiomatic.
+    static var shared = SecureRegistrationStorage()
+
     func get() throws -> Registration? {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
@@ -72,7 +76,7 @@ class SecureRegistrationStorage {
         }
     }
 
-    private func clear() throws {
+    func clear() throws {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
         ]

@@ -104,7 +104,7 @@
         <!--Registration ViewController-->
         <scene sceneID="TV9-KT-A1P">
             <objects>
-                <viewController title="Registration ViewController" id="9ND-nW-PT8" customClass="RegistrationViewController" customModule="CoLocate" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RegistrationViewController" title="Registration ViewController" id="9ND-nW-PT8" customClass="RegistrationViewController" customModule="CoLocate" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3Oz-N9-dSL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -18,19 +18,11 @@ class SecureRegistrationStorageTests: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        // Reset the keychain to a known empty state.
-        let query: [String: Any] = [
-            kSecClass as String: kSecClassGenericPassword,
-        ]
-        let status = SecItemDelete(query as CFDictionary)
-
-        // If the test succeeds, the delete will be successful. If the test
-        // fails, then we expect the item to not be found.
-        XCTAssert(status == errSecSuccess || status == errSecItemNotFound)
+        try! SecureRegistrationStorage.shared.clear()
     }
 
     func testRoundTrip() {
-        let registrationService = SecureRegistrationStorage()
+        let registrationService = SecureRegistrationStorage.shared
 
         XCTAssertNil(try! registrationService.get())
 
@@ -42,7 +34,7 @@ class SecureRegistrationStorageTests: XCTestCase {
     }
 
     func testOverwritesExistingRegistration() {
-        let registrationService = SecureRegistrationStorage()
+        let registrationService = SecureRegistrationStorage.shared
         try! registrationService.set(registration: Registration(id: UUID(), secretKey: "a secret key"))
 
         try! registrationService.set(registration: Registration(id: id, secretKey: secretKey))
