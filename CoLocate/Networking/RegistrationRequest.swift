@@ -18,7 +18,7 @@ struct RegistrationResponse: Codable {
     }
 }
 
-class RegistrationRequest: Request {
+struct RegistrationRequest: Request {
     typealias ResponseType = RegistrationResponse
     
     let method = HTTPMethod.post(data: "{}".data(using: .utf8)!)
