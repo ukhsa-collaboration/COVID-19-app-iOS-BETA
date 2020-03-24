@@ -26,6 +26,12 @@ jobs:
       
       - name: Show Available Destinations
         run: xcodebuild -scheme CoLocate -showdestinations
+
+      - name: Create Test Collateral
+        run: |
+          echo <<XCCONFIG
+          API_ENDPOINT = purposefully-invalid-url
+          XCCONFIG
       
       - name: Run Test
         run: >
