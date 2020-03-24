@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="44" width="375" height="734"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gDX-JJ-6gF" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="389.33333333333331"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="368.33333333333331"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S7N-Z2-YHu" customClass="LogoStrapline" customModule="CoLocate" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
@@ -43,7 +43,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="95z-vR-2bH" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="315.33333333333331" width="335" height="54"/>
+                                                <rect key="frame" x="20" y="315.33333333333331" width="335" height="33"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <state key="normal" title="Button"/>
                                                 <connections>
@@ -112,8 +112,48 @@
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Uko-5F-R0U">
                                 <rect key="frame" x="177.66666666666666" y="396" width="20" height="20"/>
                             </activityIndicatorView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hAi-pT-ZX7" userLabel="Content View">
+                                <rect key="frame" x="0.0" y="44" width="375" height="672"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xii-Sl-F6x" customClass="LogoStrapline" customModule="CoLocate" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="1800.3333333333333" height="64"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="64" id="OgT-O1-4Qz"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Security" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W7T-3l-YqG">
+                                        <rect key="frame" x="20" y="96" width="120" height="41"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mlr-Jj-yZL">
+                                        <rect key="frame" x="20" y="153" width="355" height="240.33333333333337"/>
+                                        <string key="text">Before you start using the app, we would like to tell you about security.
+
+All data the application tracks is submitted to the NHS only when you choose to send data. 
+
+To begin using the app, we need to prepare a unique key for you. This will be generated on NHS servers. In the future we will protect all communication with our servers using this key.</string>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="W7T-3l-YqG" firstAttribute="leading" secondItem="hAi-pT-ZX7" secondAttribute="leading" constant="20" id="6wI-wk-6hp"/>
+                                    <constraint firstItem="xii-Sl-F6x" firstAttribute="leading" secondItem="hAi-pT-ZX7" secondAttribute="leading" id="B6o-WS-bYh"/>
+                                    <constraint firstItem="Mlr-Jj-yZL" firstAttribute="leading" secondItem="hAi-pT-ZX7" secondAttribute="leading" constant="20" id="BoX-i8-XJi"/>
+                                    <constraint firstAttribute="trailing" secondItem="xii-Sl-F6x" secondAttribute="trailing" constant="-1425.3333333333333" id="KFL-gj-gBY"/>
+                                    <constraint firstItem="Mlr-Jj-yZL" firstAttribute="top" secondItem="W7T-3l-YqG" secondAttribute="bottom" constant="16" id="Ygc-LE-vR2"/>
+                                    <constraint firstAttribute="trailing" secondItem="Mlr-Jj-yZL" secondAttribute="trailing" id="aql-D4-hqA"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="W7T-3l-YqG" secondAttribute="trailing" constant="20" symbolic="YES" id="dhL-uQ-F9a"/>
+                                    <constraint firstItem="xii-Sl-F6x" firstAttribute="top" secondItem="hAi-pT-ZX7" secondAttribute="top" id="rJ3-Va-woC"/>
+                                    <constraint firstItem="W7T-3l-YqG" firstAttribute="top" secondItem="xii-Sl-F6x" secondAttribute="bottom" constant="32" id="wBm-5q-wHf"/>
+                                </constraints>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nwx-fJ-0UT">
-                                <rect key="frame" x="164.66666666666666" y="391" width="46" height="30"/>
+                                <rect key="frame" x="164.66666666666666" y="732" width="46" height="30"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="didTapRegister:" destination="9ND-nW-PT8" eventType="touchUpInside" id="hwU-61-6RQ"/>
@@ -123,9 +163,13 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="Uko-5F-R0U" firstAttribute="centerX" secondItem="3Oz-N9-dSL" secondAttribute="centerX" id="49e-xf-1aG"/>
-                            <constraint firstItem="nwx-fJ-0UT" firstAttribute="centerX" secondItem="3Oz-N9-dSL" secondAttribute="centerX" id="cEi-2E-A3b"/>
-                            <constraint firstItem="nwx-fJ-0UT" firstAttribute="centerY" secondItem="3Oz-N9-dSL" secondAttribute="centerY" id="t2d-UV-Cbm"/>
+                            <constraint firstItem="4Ln-9m-RNP" firstAttribute="bottom" secondItem="nwx-fJ-0UT" secondAttribute="bottom" constant="16" id="F2v-1I-ehE"/>
+                            <constraint firstItem="hAi-pT-ZX7" firstAttribute="leading" secondItem="4Ln-9m-RNP" secondAttribute="leading" id="S7c-mg-p0O"/>
+                            <constraint firstItem="hAi-pT-ZX7" firstAttribute="top" secondItem="4Ln-9m-RNP" secondAttribute="top" id="SnH-Qb-CQI"/>
+                            <constraint firstItem="nwx-fJ-0UT" firstAttribute="top" secondItem="hAi-pT-ZX7" secondAttribute="bottom" constant="16" id="YGi-ik-cCD"/>
                             <constraint firstItem="Uko-5F-R0U" firstAttribute="centerY" secondItem="3Oz-N9-dSL" secondAttribute="centerY" id="xE1-PB-Fee"/>
+                            <constraint firstItem="nwx-fJ-0UT" firstAttribute="centerX" secondItem="4Ln-9m-RNP" secondAttribute="centerX" id="yXt-HW-g5M"/>
+                            <constraint firstItem="hAi-pT-ZX7" firstAttribute="trailing" secondItem="4Ln-9m-RNP" secondAttribute="trailing" id="zEe-je-nMG"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4Ln-9m-RNP"/>
                     </view>
@@ -249,7 +293,7 @@
                                 <rect key="frame" x="0.0" y="88" width="375" height="690"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="gil-BB-Yfl">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="960.66666666666663"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="936.66666666666663"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CMf-AV-lEX" customClass="LogoStrapline" customModule="CoLocate" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
@@ -274,7 +318,7 @@
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="e2o-M9-ueA">
-                                                <rect key="frame" x="0.0" y="226.66666666666674" width="375" height="734"/>
+                                                <rect key="frame" x="0.0" y="226.66666666666674" width="375" height="710"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JYW-Mn-biH" userLabel="Spacer View">
                                                         <rect key="frame" x="16" y="16" width="343" height="8"/>
@@ -304,27 +348,27 @@
                                                         </constraints>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FCX-o5-BSb" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
-                                                        <rect key="frame" x="16" y="283.99999999999994" width="343" height="54"/>
+                                                        <rect key="frame" x="16" y="283.99999999999994" width="343" height="30"/>
                                                         <state key="normal" title="Turkey tail jowl"/>
                                                         <connections>
                                                             <action selector="didTapNotify:" destination="WPy-33-NhS" eventType="touchUpInside" id="lIF-ae-Go0"/>
                                                         </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HQf-H4-GWp" userLabel="Spacer View">
-                                                        <rect key="frame" x="16" y="345.99999999999994" width="343" height="16"/>
+                                                        <rect key="frame" x="16" y="321.99999999999994" width="343" height="16"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="16" id="LLd-0w-sEv"/>
                                                         </constraints>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Picanha meatloaf swine" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hYr-47-fnv" userLabel="Detail Label">
-                                                        <rect key="frame" x="16" y="369.99999999999994" width="343" height="33.666666666666686"/>
+                                                        <rect key="frame" x="16" y="345.99999999999994" width="343" height="33.666666666666686"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eyn-i4-1Ys" userLabel="Detail Body Label">
-                                                        <rect key="frame" x="16" y="411.66666666666674" width="343" height="306.33333333333326"/>
+                                                        <rect key="frame" x="16" y="387.66666666666674" width="343" height="306.33333333333326"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <string key="text">Pork chop pig tongue tail venison sirloin chicken filet mignon bresaola pork belly shoulder. Alcatra chuck beef prosciutto drumstick.  Biltong bacon sausage short loin tenderloin porchetta ham buffalo salami. Pancetta beef pork belly meatloaf shoulder turkey swine. Jowl chislic short loin pastrami shank filet mignon tenderloin tongue drumstick bresaola ham hock biltong kielbasa.  Tri-tip pork kevin, drumstick shankle pork belly andouille short ribs sausage leberkas.</string>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -384,7 +428,7 @@
                                 <rect key="frame" x="0.0" y="88" width="375" height="690"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="6fL-b6-aHe" userLabel="Content Stack View">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="621"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="597"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f9o-4R-pua" customClass="LogoStrapline" customModule="CoLocate" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
@@ -418,7 +462,7 @@
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="raq-rY-5Hu" userLabel="Text Stack View">
-                                                <rect key="frame" x="0.0" y="195" width="375" height="426"/>
+                                                <rect key="frame" x="0.0" y="195" width="375" height="402"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zAW-RL-Dz6" userLabel="Spacer View">
                                                         <rect key="frame" x="16" y="16" width="343" height="8"/>
@@ -447,24 +491,24 @@
                                                         </constraints>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2nn-Id-UHE" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
-                                                        <rect key="frame" x="16" y="118" width="343" height="54"/>
+                                                        <rect key="frame" x="16" y="118" width="343" height="30"/>
                                                         <state key="normal" title="Capicola jerky sausage"/>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="451-GQ-uK1" userLabel="Spacer View">
-                                                        <rect key="frame" x="16" y="180" width="343" height="16"/>
+                                                        <rect key="frame" x="16" y="156" width="343" height="16"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="16" id="lRL-kB-aEy"/>
                                                         </constraints>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Landjaeger bresaola chuck shankle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8CV-n6-8PC" userLabel="Detail Label">
-                                                        <rect key="frame" x="16" y="204" width="343" height="67.666666666666686"/>
+                                                        <rect key="frame" x="16" y="180" width="343" height="67.666666666666686"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IKX-6p-C3x" userLabel="Detail Body Label">
-                                                        <rect key="frame" x="16" y="279.66666666666663" width="343" height="130.33333333333337"/>
+                                                        <rect key="frame" x="16" y="255.66666666666663" width="343" height="130.33333333333337"/>
                                                         <string key="text">Hamburger andouille capicola, sausage ham brisket beef rump meatball pork loin swine frankfurter ham hock. Prosciutto jowl bresaola, doner landjaeger tenderloin frankfurter chicken ribeye pancetta sausage beef pork kevin hamburger.</string>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                         <nil key="textColor"/>
