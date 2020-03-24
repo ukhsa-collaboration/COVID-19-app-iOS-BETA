@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>API_ENDPOINT</key>
-	<string>obviously-incorrect-api-endpoint</string>
+	<string>$(API_ENDPOINT)</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>

@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Pfu-L3-5i0">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -22,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="44" width="375" height="734"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gDX-JJ-6gF" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="368.33333333333331"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="389.33333333333331"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S7N-Z2-YHu" customClass="LogoStrapline" customModule="CoLocate" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
@@ -44,7 +43,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="95z-vR-2bH" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="315.33333333333331" width="335" height="33"/>
+                                                <rect key="frame" x="20" y="315.33333333333331" width="335" height="54"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <state key="normal" title="Button"/>
                                                 <connections>
@@ -95,12 +94,50 @@
                         <outlet property="bodyCopy" destination="FAq-jW-bZW" id="ZfN-ib-RpJ"/>
                         <outlet property="bodyHeadline" destination="hZ4-I9-3SE" id="Z79-2H-XoG"/>
                         <outlet property="continueButton" destination="95z-vR-2bH" id="9xn-3y-MhN"/>
-                        <segue destination="hVl-M3-CDw" kind="presentation" identifier="enterDiagnosisSegue" animates="NO" modalPresentationStyle="fullScreen" id="D5O-tD-JUr"/>
+                        <segue destination="9ND-nW-PT8" kind="presentation" identifier="enterRegistrationSegue" modalPresentationStyle="fullScreen" id="Vum-gy-Y47"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GaQ-c3-k1q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="453.75" y="110"/>
+            <point key="canvasLocation" x="-510" y="109"/>
+        </scene>
+        <!--Registration ViewController-->
+        <scene sceneID="TV9-KT-A1P">
+            <objects>
+                <viewController title="Registration ViewController" id="9ND-nW-PT8" customClass="RegistrationViewController" customModule="CoLocate" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3Oz-N9-dSL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Uko-5F-R0U">
+                                <rect key="frame" x="177.66666666666666" y="396" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nwx-fJ-0UT">
+                                <rect key="frame" x="164.66666666666666" y="391" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="didTapRegister:" destination="9ND-nW-PT8" eventType="touchUpInside" id="hwU-61-6RQ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Uko-5F-R0U" firstAttribute="centerX" secondItem="3Oz-N9-dSL" secondAttribute="centerX" id="49e-xf-1aG"/>
+                            <constraint firstItem="nwx-fJ-0UT" firstAttribute="centerX" secondItem="3Oz-N9-dSL" secondAttribute="centerX" id="cEi-2E-A3b"/>
+                            <constraint firstItem="nwx-fJ-0UT" firstAttribute="centerY" secondItem="3Oz-N9-dSL" secondAttribute="centerY" id="t2d-UV-Cbm"/>
+                            <constraint firstItem="Uko-5F-R0U" firstAttribute="centerY" secondItem="3Oz-N9-dSL" secondAttribute="centerY" id="xE1-PB-Fee"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="4Ln-9m-RNP"/>
+                    </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="Uko-5F-R0U" id="Bib-yR-FGk"/>
+                        <outlet property="retryButton" destination="nwx-fJ-0UT" id="DKo-Lj-yRG"/>
+                        <segue destination="hVl-M3-CDw" kind="presentation" identifier="enterDiagnosisSegue" modalPresentationStyle="fullScreen" id="yq9-lh-fIS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1DY-Ky-AHF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="454" y="109"/>
         </scene>
         <!--Enter Diagnosis Table View Controller-->
         <scene sceneID="nbi-Og-fvT">

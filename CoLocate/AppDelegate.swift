@@ -23,19 +23,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
         let rootViewController: UIViewController?
         
-        switch diagnosisService.currentDiagnosis {
-            
-        case .unknown:
-            rootViewController = storyboard.instantiateInitialViewController()
-            
-        case .infected:
-            rootViewController = storyboard.instantiateViewController(withIdentifier: "navigationController")
-            (rootViewController as? UINavigationController)?.pushViewController(storyboard.instantiateViewController(withIdentifier: "pleaseSelfIsolate"), animated: false)
-            
-        case .notInfected:
-            rootViewController = storyboard.instantiateViewController(withIdentifier: "navigationController")
-            (rootViewController as? UINavigationController)?.pushViewController(storyboard.instantiateViewController(withIdentifier: "okNowViewController"), animated: false)
-        }
+        rootViewController = storyboard.instantiateInitialViewController()
+//
+//        switch diagnosisService.currentDiagnosis {
+//
+//        case .unknown:
+//            rootViewController = storyboard.instantiateInitialViewController()
+//
+//        case .infected:
+//            rootViewController = storyboard.instantiateViewController(withIdentifier: "navigationController")
+//            (rootViewController as? UINavigationController)?.pushViewController(storyboard.instantiateViewController(withIdentifier: "pleaseSelfIsolate"), animated: false)
+//
+//        case .notInfected:
+//            rootViewController = storyboard.instantiateViewController(withIdentifier: "navigationController")
+//            (rootViewController as? UINavigationController)?.pushViewController(storyboard.instantiateViewController(withIdentifier: "okNowViewController"), animated: false)
+//        }
+        
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()

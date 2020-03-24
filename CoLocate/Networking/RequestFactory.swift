@@ -20,6 +20,10 @@ struct RequestFactory {
     let dummyKey: SymmetricKey = SymmetricKey(data: Data(base64Encoded: "Gqacz+VE6uuZy1uc4oTG/A+LAS291mXN+J5opDSNYys=")!)
 
     let deviceId: UUID
+    
+    static func registrationRequest() -> RegistrationRequest {
+        return RegistrationRequest()
+    }
 
     init(deviceId: UUID) {
         self.deviceId = deviceId
