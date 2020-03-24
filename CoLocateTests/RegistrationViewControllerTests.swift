@@ -35,6 +35,23 @@ class RegistrationViewControllerTests: XCTestCase {
         XCTAssertEqual(actualRegistration?.secretKey, "super secret")
     }
 
+    func testAlreadyRegistered() {
+        let registration = Registration(id: UUID(), secretKey: "super secret")
+        try! SecureRegistrationStorage.shared.set(registration: registration)
+
+        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(identifier: "RegistrationViewController") as! RegistrationViewController
+        XCTAssertNotNil(vc.view)
+
+        let urlSession = SessionDouble()
+        vc.inject(urlSession: urlSession)
+
+        inWindowHierarchy(viewController: vc) {
+            vc.viewWillAppear(false)
+            XCTAssertNotNil(vc.presentedViewController)
+        }
+    }
+
 }
 
 class SessionDouble: Session {

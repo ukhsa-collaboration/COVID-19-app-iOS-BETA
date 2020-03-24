@@ -31,6 +31,11 @@ class RegistrationViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
+        // TODO Error handling?
+        if try! SecureRegistrationStorage.shared.get() != nil {
+            performSegue(withIdentifier: "enterDiagnosisSegue", sender: self)
+        }
     }
     
     @IBAction func didTapRegister(_ sender: Any) {
