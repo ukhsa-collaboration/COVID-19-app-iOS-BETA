@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CryptoKit
 
 struct RequestFactory {
 
@@ -15,6 +16,9 @@ struct RequestFactory {
     // this will change once we can store and read the deviceId we receive during registration
     static let shared = RequestFactory(deviceId: UUID(uuidString: "1c8d305e-db93-4ba0-81f4-94c33fd35c7c")!)
 
+    // TODO: this needs to be read from the keychain
+    let dummyKey: SymmetricKey = SymmetricKey(data: Data(base64Encoded: "Gqacz+VE6uuZy1uc4oTG/A+LAS291mXN+J5opDSNYys=")!)
+
     let deviceId: UUID
 
     init(deviceId: UUID) {
@@ -22,6 +26,6 @@ struct RequestFactory {
     }
 
     func patchContactsRequest(contactEvents: [ContactEvent]) -> PatchContactEventsRequest {
-        return PatchContactEventsRequest(deviceId: deviceId, contactEvents: contactEvents)
+        return PatchContactEventsRequest(key: dummyKey, deviceId: deviceId, contactEvents: contactEvents)
     }
 }

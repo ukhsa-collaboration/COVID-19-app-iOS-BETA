@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import CryptoKit
 
-struct PatchContactEventsRequest: Request {
+class PatchContactEventsRequest: SecureRequest, Request {
 
     struct JSONWrapper: Codable {
         let contactEvents: [ContactEvent]
@@ -20,17 +21,20 @@ struct PatchContactEventsRequest: Request {
     
     let path: String
     
-    let headers: [String : String] = [
-        "Accept": "application/json",
-        "Content-Type": "application/json"
-    ]
-    
-    init(deviceId: UUID, contactEvents: [ContactEvent]) {
+    init(key: SymmetricKey, deviceId: UUID, contactEvents: [ContactEvent]) {
         path = "/api/residents/\(deviceId.uuidString)"
+
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
+
         let contactEvents = JSONWrapper(contactEvents: contactEvents)
-        method = .patch(data: try! encoder.encode(contactEvents))
+        let contactEventsData = try! encoder.encode(contactEvents)
+        method = .patch(data: contactEventsData)
+
+        super.init(key, contactEventsData, [
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        ])
     }
     
     func parse(_ data: Data) throws -> Void {

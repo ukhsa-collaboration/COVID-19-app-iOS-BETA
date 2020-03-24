@@ -16,17 +16,14 @@ class SecureRequest {
     
     var headers: [String : String]
     
-    var key: SymmetricKey
-    
     init(_ key: SymmetricKey, _ data: Data, _ headers: [String: String], _ timestamp: Date = Date()) {
-        self.key = key
-
         let timestampString = ISO8601DateFormatter().string(from: timestamp)
         
         var hmac = HMAC<SHA256>(key: key);
         hmac.update(data: timestampString.data(using: .utf8)!)
         hmac.update(data: data)
         let authenticationCode = hmac.finalize()
+
         self.headers = headers
         self.headers[SecureRequest.timestampHeader] = timestampString
         self.headers[SecureRequest.signatureHeader] = authenticationCode.withUnsafeBytes() { ptr -> String in
