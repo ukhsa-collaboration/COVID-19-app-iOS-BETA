@@ -29,10 +29,12 @@ class SecureRegistrationStorage {
     // There's no need for this to be a singleton,
     // but this feels more idiomatic.
     static var shared = SecureRegistrationStorage()
+    static let secService = "registration"
 
     func get() throws -> Registration? {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
+            kSecAttrService as String: SecureRegistrationStorage.secService,
             kSecReturnAttributes as String: true,
             kSecReturnData as String: true
         ]
@@ -66,6 +68,7 @@ class SecureRegistrationStorage {
 
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
+            kSecAttrService as String: SecureRegistrationStorage.secService,
             kSecAttrAccount as String: registration.id.uuidString,
             kSecValueData as String: secretKey,
         ]
@@ -79,6 +82,7 @@ class SecureRegistrationStorage {
     func clear() throws {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
+            kSecAttrService as String: SecureRegistrationStorage.secService,
         ]
         let status = SecItemDelete(query as CFDictionary)
 
