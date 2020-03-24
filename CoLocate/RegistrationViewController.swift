@@ -32,10 +32,8 @@ class RegistrationViewController: UIViewController {
     private func createRegistration() {
         let request = RequestFactory.registrationRequest()
 
-        urlSession.execute(request) { result in
-            DispatchQueue.main.async {
-                self.handleRegistration(result: result)
-            }
+        urlSession.execute(request, queue: .main) { result in
+            self.handleRegistration(result: result)
         }
     }
     

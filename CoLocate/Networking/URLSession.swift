@@ -15,7 +15,9 @@ extension URLSession: Session {
         return URL(string: endpoint)!
     }
     
-    func execute<R: Request>(_ request: R, completion: @escaping (Result<R.ResponseType, Error>) -> Void) {
+    func execute<R: Request>(_ request: R, queue: OperationQueue, completion: @escaping (Result<R.ResponseType, Error>) -> Void) {
+        let completion = { result in queue.addOperation { completion(result) } }
+
         let url = URL(string: request.path, relativeTo: baseURL)!
         var urlRequest = URLRequest(url: url)
         

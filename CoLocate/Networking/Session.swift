@@ -26,7 +26,17 @@ protocol Request {
 }
 
 protocol Session {
+
+    var delegateQueue: OperationQueue { get }
     
-    func execute<R: Request>(_ request: R, completion: @escaping (Result<R.ResponseType, Error>) -> Void)
+    func execute<R: Request>(_ request: R, queue: OperationQueue, completion: @escaping (Result<R.ResponseType, Error>) -> Void)
     
+}
+
+extension Session {
+
+    func execute<R: Request>(_ request: R, completion: @escaping (Result<R.ResponseType, Error>) -> Void) {
+        execute(request, queue: delegateQueue, completion: completion)
+    }
+
 }

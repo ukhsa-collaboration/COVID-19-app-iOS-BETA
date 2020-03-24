@@ -40,18 +40,14 @@ class PleaseSelfIsolateViewController: UIViewController {
         let contactEvents = contactEventRecorder.contactEvents
         let request = requestFactory.patchContactsRequest(contactEvents: contactEvents)
 
-        session.execute(request) { (result) in
+        session.execute(request, queue: .main) { (result) in
             switch result {
             case .success(_):
-                DispatchQueue.main.async {
-                    self.present(self.successfulAlert(), animated: true, completion: nil)
-                }
+                self.present(self.successfulAlert(), animated: true, completion: nil)
             case .failure(let error):
                 print("\(#file).\(#function) failure submitting contact events (\(error)) !")
 
-                DispatchQueue.main.async {
-                    self.present(self.errorAlert(), animated: true, completion: nil)
-                }
+                self.present(self.errorAlert(), animated: true, completion: nil)
             }
         }
     }
