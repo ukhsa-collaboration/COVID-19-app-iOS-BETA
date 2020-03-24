@@ -35,3 +35,28 @@ jobs:
           -destination "platform=iOS Simulator,OS=13.0,name=iPhone 11"
           -showBuildTimingSummary
           -allowProvisioningUpdates
+
+  deploy:
+    needs: test
+    runs-on: macOS-latest
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@v2
+        with:
+          ref: test-flight
+
+      - name: Merge master
+        run: git merge master
+
+      - name: Bump Version
+        run: ./bin/bump-build-version
+
+      - name: Commit Version Bump
+        run: ./bin/commit-version-bump
+
+        # - name: Push test-flight Branch
+        #   env:
+        #     GITHUB_TOKEN: ${{ secrets.github_token }}
+        #   run: |
+        #     git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+        #     git push origin test-flight
