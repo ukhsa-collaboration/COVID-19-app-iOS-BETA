@@ -48,11 +48,12 @@ jobs:
     steps:
       - name: Checkout Project
         uses: actions/checkout@v2
-        with:
-          ref: test-flight
 
-      - name: Merge master
-        run: git merge master
+      - name: Merge master into test-flight
+        run: |
+          git fetch origin
+          git checkout test-flight
+          git merge ${{ GITHUB_SHA }}
 
       - name: Bump Version
         run: ./bin/bump-build-version
