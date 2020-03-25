@@ -85,9 +85,6 @@ jobs:
         run: ./bin/commit-version-bump
 
       - name: Push test-flight Branch
-        # env:
-        #   GITHUB_TOKEN: ${{ secrets.github_token }}
         run: |
           git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
           git push origin test-flight
-        continue-on-error: true
