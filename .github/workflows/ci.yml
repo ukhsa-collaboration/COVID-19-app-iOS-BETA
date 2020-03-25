@@ -6,8 +6,13 @@ on:
       - master
 
 jobs:
-  test:
+  build:
     runs-on: macOS-latest
+    strategy:
+      matrix:
+        run-config:
+          - { sdk: "iphoneos13.0" }
+          - { sdk: "iphonesimulator13.0" }
     steps:
       - name: Checkout Project
         uses: actions/checkout@v2
@@ -23,6 +28,22 @@ jobs:
         
       - name: Show Build SDK
         run: xcodebuild -showsdks
+
+      - name: Run Build
+        env:
+          SDK: ${{ matrix.run-config["sdk"] }}
+        run: xcodebuild -scheme CoLocate -sdk ${SDK}
+
+  test:
+    needs: build
+    runs-on: macOS-latest
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@v2
+
+      - name: Switch to Xcode 11
+        run: sudo xcode-select -s /Applications/Xcode_11.app
+
       
       - name: Show Available Destinations
         run: xcodebuild -scheme CoLocate -showdestinations
