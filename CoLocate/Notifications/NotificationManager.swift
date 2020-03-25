@@ -15,32 +15,36 @@ class NotificationManager: NSObject {
 
     let uiQueue: DispatchQueue
     let firebase: TestableFirebaseApp.Type
+    let messagingFactory: () -> TestableMessaging
     let userNotificationCenter: UserNotificationCenter
 
     init(
         uiQueue: DispatchQueue,
         firebase: TestableFirebaseApp.Type,
+        messagingFactory: @escaping () -> TestableMessaging,
         userNotificationCenter: UserNotificationCenter
     ) {
         self.uiQueue = uiQueue
         self.firebase = firebase
+        self.messagingFactory = messagingFactory
         self.userNotificationCenter = userNotificationCenter
 
         super.init()
-
-        userNotificationCenter.delegate = self
     }
 
     convenience override init() {
         self.init(
             uiQueue: DispatchQueue.main,
             firebase: FirebaseApp.self,
+            messagingFactory: { Messaging.messaging() },
             userNotificationCenter: UNUserNotificationCenter.current()
         )
     }
 
     func configure() {
         firebase.configure()
+        messagingFactory().delegate = self
+        userNotificationCenter.delegate = self
     }
 
     func requestAuthorization(
@@ -82,6 +86,12 @@ extension NotificationManager: UNUserNotificationCenterDelegate {
     }
 }
 
+extension NotificationManager: MessagingDelegate {
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+        print("Remote instance ID token: \(fcmToken)")
+    }
+}
+
 // MARK: - Testable
 
 protocol Application {
@@ -96,6 +106,13 @@ protocol TestableFirebaseApp {
 }
 
 extension FirebaseApp: TestableFirebaseApp {
+}
+
+protocol TestableMessaging: class {
+    var delegate: MessagingDelegate? { get set }
+}
+
+extension Messaging: TestableMessaging {
 }
 
 protocol UserNotificationCenter: class {

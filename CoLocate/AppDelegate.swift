@@ -39,14 +39,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             if case .failure(let error) = result {
                 print(error)
             }
-
-            InstanceID.instanceID().instanceID { (result, error) in
-                if let error = error {
-                    print("Error fetching remote instance ID: \(error)")
-                } else if let result = result {
-                    print("Remote instance ID token: \(result.token)")
-                }
-            }
         }
     }
 

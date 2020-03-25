@@ -22,6 +22,7 @@ class NotificationManagerTests: XCTestCase {
         let notificationManager = NotificationManager(
             uiQueue: .main,
             firebase: FirebaseAppDouble.self,
+            messagingFactory: { MessagingDouble() },
             userNotificationCenter: NotificationCenterDouble()
         )
 
@@ -35,6 +36,7 @@ class NotificationManagerTests: XCTestCase {
         let notificationManager = NotificationManager(
             uiQueue: DispatchQueue.test,
             firebase: FirebaseAppDouble.self,
+            messagingFactory: { MessagingDouble() },
             userNotificationCenter: notificationCenterDouble
         )
 
@@ -71,9 +73,13 @@ class FirebaseAppDouble: TestableFirebaseApp {
     }
 }
 
+class MessagingDouble: TestableMessaging {
+    weak var delegate: MessagingDelegate?
+}
+
 class NotificationCenterDouble: UserNotificationCenter {
 
-    var delegate: UNUserNotificationCenterDelegate?
+    weak var delegate: UNUserNotificationCenterDelegate?
 
     var options: UNAuthorizationOptions?
     var completionHandler: ((Bool, Error?) -> Void)?
