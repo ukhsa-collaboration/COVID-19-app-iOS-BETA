@@ -55,8 +55,8 @@ class PleaseSelfIsolateViewController: UIViewController {
     // MARK: - Alert Controllers
 
     func successfulAlert() -> UIAlertController {
-        let alert = UIAlertController(title: "Thank you".localized, message: "Thank you for sharing your anonymized contact information with us. We will use this information to help inform anyone that may have been in close contact with you recently.".localized, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK".localized, style: .default, handler: { _ in
+        let alert = UIAlertController(title: NSLocalizedString("Thank you", comment: ""), message: NSLocalizedString("Thank you for sharing your anonymized contact information with us. We will use this information to help inform anyone that may have been in close contact with you recently.", comment: ""), preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: { _ in
             alert.dismiss(animated: true)
         }))
 
@@ -64,8 +64,8 @@ class PleaseSelfIsolateViewController: UIViewController {
     }
 
     func errorAlert() -> UIAlertController {
-        let alert = UIAlertController(title: "Error".localized, message: "We're sorry, your request could not be handled at this time. Please try again later, so that we can help alert and protect people that you have been in close contact recently".localized, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK".localized, style: .default, handler: { _ in
+        let alert = UIAlertController(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("We're sorry, your request could not be handled at this time. Please try again later, so that we can help alert and protect people that you have been in close contact recently", comment: ""), preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: { _ in
             alert.dismiss(animated: true)
         }))
 

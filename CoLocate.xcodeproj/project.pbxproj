@@ -41,9 +41,8 @@
 		F67A2293242AA370002254B6 /* SecureRegistrationStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */; };
 		F67A2295242AC188002254B6 /* RegistrationViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A2294242AC188002254B6 /* RegistrationViewControllerTests.swift */; };
 		F68BFBF7242ACD17008EE68F /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68BFBF6242ACD17008EE68F /* TestHelpers.swift */; };
+		F6A309D124298A5800865942 /* Development.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F6A309D024298A5800865942 /* Development.xcconfig */; };
 		F758553A24294C8D00CBE1ED /* RequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F758553924294C8C00CBE1ED /* RequestFactory.swift */; };
-		F7FDC79D242B6779000F03C3 /* String+localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FDC79C242B6779000F03C3 /* String+localized.swift */; };
-		F7FDC79F242B68C0000F03C3 /* Development.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F7FDC79E242B68C0000F03C3 /* Development.xcconfig */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,9 +95,8 @@
 		F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRegistrationStorageTests.swift; sourceTree = "<group>"; };
 		F67A2294242AC188002254B6 /* RegistrationViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewControllerTests.swift; sourceTree = "<group>"; };
 		F68BFBF6242ACD17008EE68F /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
+		F6A309D024298A5800865942 /* Development.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
 		F758553924294C8C00CBE1ED /* RequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFactory.swift; sourceTree = "<group>"; };
-		F7FDC79C242B6779000F03C3 /* String+localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+localized.swift"; sourceTree = "<group>"; };
-		F7FDC79E242B68C0000F03C3 /* Development.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,7 +196,7 @@
 		6FC63C24241641B8007C8BF3 = {
 			isa = PBXGroup;
 			children = (
-				F7FDC79E242B68C0000F03C3 /* Development.xcconfig */,
+				F6A309D024298A5800865942 /* Development.xcconfig */,
 				6FC63C2F241641B8007C8BF3 /* CoLocate */,
 				214209C02422276800C7BFF3 /* CoLocateTests */,
 				6FC63C2E241641B8007C8BF3 /* Products */,
@@ -218,7 +216,6 @@
 		6FC63C2F241641B8007C8BF3 /* CoLocate */ = {
 			isa = PBXGroup;
 			children = (
-				F7FDC79B242B66A2000F03C3 /* Extensions */,
 				6FC63C3C241641BA007C8BF3 /* Info.plist */,
 				6FC63C30241641B8007C8BF3 /* AppDelegate.swift */,
 				6FC63C39241641BA007C8BF3 /* LaunchScreen.storyboard */,
@@ -238,14 +235,6 @@
 				214209D3242399DD00C7BFF3 /* Networking */,
 			);
 			path = CoLocate;
-			sourceTree = "<group>";
-		};
-		F7FDC79B242B66A2000F03C3 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				F7FDC79C242B6779000F03C3 /* String+localized.swift */,
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -337,7 +326,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F7FDC79F242B68C0000F03C3 /* Development.xcconfig in Resources */,
+				F6A309D124298A5800865942 /* Development.xcconfig in Resources */,
 				6FC63C3B241641BA007C8BF3 /* LaunchScreen.storyboard in Resources */,
 				AEC6A7BE241BD82900B0237A /* LogoStrapline.xib in Resources */,
 				A1E7A0592420028B0078174D /* NHS Colors.xcassets in Resources */,
@@ -370,7 +359,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				21D93C302420C26900C1FA9B /* PrimaryButton.swift in Sources */,
-				F7FDC79D242B6779000F03C3 /* String+localized.swift in Sources */,
 				21AF36AB241A8E50001A4910 /* BTLEListener.swift in Sources */,
 				F600A600242977D50038DF57 /* RegistrationViewController.swift in Sources */,
 				AE2A5E502423C473007A4771 /* ContactEventRecorder.swift in Sources */,
@@ -583,6 +571,7 @@
 		};
 		6FC63C40241641BA007C8BF3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F6A309D024298A5800865942 /* Development.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
