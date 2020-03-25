@@ -20,19 +20,18 @@ class SecureRequestTests: XCTestCase {
         request = SampleSecureRequest(key: SymmetricKey(data: keyData), text: "Hello, nurse!", date: Date(timeIntervalSince1970: 1))
     }
 
-    // This doesn't quite work for generating a matching base64 output to our code
-    // echo -n '1970-01-01T00:00:00ZHello, nurse!' | openssl dgst -sha256 -hmac $(echo -n "Gqacz+VE6uuZy1uc4oTG/A+LAS291mXN+J5opDSNYys=" | base64 -d) | xxd -r -p | base64
-    // However we get a matching base64 string by using "1970-01-01T00:00:00ZHello, nurse!" as input on https://www.liavaag.org/English/SHA-Generator/HMAC/ so I guess it's right?
+    // To double-check this HMAC from the command line...
+    // echo -n '1970-01-01T00:00:01ZHello, nurse!' | openssl dgst -sha256 -hmac $(echo -n "Gqacz+VE6uuZy1uc4oTG/A+LAS291mXN+J5opDSNYys=" | base64 -d) | xxd -r -p | base64
     func testRequestHasSignatureHeader() {
-        XCTAssertEqual(request.headers["X-Sonar-Message-Signature"], "bbDadktBVp2+GOpKisETJISycO+C0FqwMl2wuAUZU+o=")
+        XCTAssertEqual(request.headers["Sonar-Message-Signature"], "bbDadktBVp2+GOpKisETJISycO+C0FqwMl2wuAUZU+o=")
     }
     
     func testRequestHasTimestampHeader() {
-        XCTAssertEqual(request.headers["X-Sonar-Message-Timestamp"], "1970-01-01T00:00:01Z")
+        XCTAssertEqual(request.headers["Sonar-Message-Timestamp"]!, "1970-01-01T00:00:01Z")
     }
     
     func testRequestHasOriginalHeaders() {
-        XCTAssertEqual(request.headers["X-Favourite-Colour"], "Puce")
+        XCTAssertEqual(request.headers["Favourite-Colour"], "Puce")
     }
     
     func testHttpMethod() {
@@ -56,7 +55,7 @@ class SampleSecureRequest: SecureRequest, Request {
         let data = text.data(using: .utf8)!
         method = HTTPMethod.post(data: data)
         path = "/api/sample"
-        let headers = ["X-Favourite-Colour": "Puce"]
+        let headers = ["Favourite-Colour": "Puce"]
         
         super.init(key, data, headers, date)
     }
