@@ -27,7 +27,7 @@ class SecureRequestTests: XCTestCase {
     }
     
     func testRequestHasTimestampHeader() {
-        XCTAssertEqual(request.headers["Sonar-Message-Timestamp"]!, "1970-01-01T00:00:01Z")
+        XCTAssertEqual(request.headers["Sonar-Request-Timestamp"]!, "1970-01-01T00:00:01Z")
     }
     
     func testRequestHasOriginalHeaders() {

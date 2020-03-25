@@ -11,7 +11,7 @@ import CryptoKit
 
 class SecureRequest {
     
-    static let timestampHeader = "Sonar-Message-Timestamp"
+    static let timestampHeader = "Sonar-Request-Timestamp"
     static let signatureHeader = "Sonar-Message-Signature"
     
     var headers: [String : String]
