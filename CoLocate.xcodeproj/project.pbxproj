@@ -655,7 +655,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 				);
-				HEADER_SEARCH_PATHS = "$PROJECT_DIR/Frameworks/**";
+				HEADER_SEARCH_PATHS = $PROJECT_DIR/Frameworks;
 				INFOPLIST_FILE = CoLocate/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -686,7 +686,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 				);
-				HEADER_SEARCH_PATHS = "$PROJECT_DIR/Frameworks/**";
+				HEADER_SEARCH_PATHS = $PROJECT_DIR/Frameworks;
 				INFOPLIST_FILE = CoLocate/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
