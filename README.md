@@ -27,9 +27,8 @@ Functionality
 
 Running the app on your own device
 ----------------------------------
-* Create a file called Development.xcconfig at the root of the repository
-* Add a line for the API_ENDPOINT (you will need to ask someone for this info)
-* e.g.: API_ENDPOINT = https:/$()/the-server-url;
+Copy `Development.xcconfig.sample` to `Development.xcconfig` and replace the
+example values with real ones (you will need to ask someone for this info).
 
 There are no dependencies at this time. To compile the app, download a recent
 build of xcode (11.3.1 or newer) and compile the app.
