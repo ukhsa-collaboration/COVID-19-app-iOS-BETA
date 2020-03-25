@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - ci
 
 jobs:
   build:
@@ -11,7 +12,7 @@ jobs:
     strategy:
       matrix:
         run-config:
-          - { sdk: "iphoneos13.0" }
+          # - { sdk: "iphoneos13.0" }
           - { sdk: "iphonesimulator13.0" }
     steps:
       - name: Checkout Project
