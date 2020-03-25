@@ -31,7 +31,7 @@ jobs:
 
       - name: Run Build
         env:
-          SDK: ${{ matrix.run-config["sdk"] }}
+          SDK: ${{ matrix.run-config['sdk'] }}
         run: xcodebuild -scheme CoLocate -sdk ${SDK}
 
   test:
