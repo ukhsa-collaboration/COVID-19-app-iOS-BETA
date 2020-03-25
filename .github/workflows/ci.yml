@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         run-config:
-          # - { sdk: "iphoneos13.0" }
+          - { sdk: "iphoneos13.0" }
           - { sdk: "iphonesimulator13.0" }
     steps:
       - name: Checkout Project
@@ -39,7 +39,7 @@ jobs:
       - name: Run Build
         env:
           SDK: ${{ matrix.run-config['sdk'] }}
-        run: xcodebuild -scheme CoLocate -sdk ${SDK} CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+        run: xcodebuild -scheme CoLocate -sdk ${SDK} CODE_SIGNING_ALLOWED=NO
 
   test:
     needs: build
