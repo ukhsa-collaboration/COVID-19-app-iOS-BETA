@@ -29,6 +29,12 @@ jobs:
       - name: Show Build SDK
         run: xcodebuild -showsdks
 
+      - name: Create Test Collateral
+        run: |
+          cat <<XCCONFIG > Development.xcconfig
+          API_ENDPOINT = purposefully-invalid-url
+          XCCONFIG
+
       - name: Run Build
         env:
           SDK: ${{ matrix.run-config['sdk'] }}
