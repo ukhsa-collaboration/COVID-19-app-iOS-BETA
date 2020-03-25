@@ -74,7 +74,7 @@ extension NotificationManager: UNUserNotificationCenterDelegate {
         willPresent notification: UNNotification,
         withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
     ) {
-        print("will present a notification \(notification)")
+        // This only happens when we are in the foregrond?
 
         let userInfo = notification.request.content.userInfo
         guard let diagnosis = userInfo["diagnosis"] else {
@@ -83,6 +83,9 @@ extension NotificationManager: UNUserNotificationCenterDelegate {
         }
 
         print("the diagnosis is bad :: \(diagnosis)")
+
+        // How to re-present notification?
+//        completionHandler([.alert, .badge, .sound])
     }
 }
 

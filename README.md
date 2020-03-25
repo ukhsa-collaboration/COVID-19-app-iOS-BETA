@@ -33,3 +33,7 @@ example values with real ones (you will need to ask someone for this info).
 There are no dependencies at this time. To compile the app, download a recent
 build of xcode (11.3.1 or newer) and compile the app.
 
+Testing notifications in the simulator
+-------------------------------------
+To test push notifications in the simulator, simply launch the app and drag
+a file from the `Example Notifications` directory onto the simulator window.
