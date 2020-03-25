@@ -14,10 +14,10 @@ struct RequestFactory {
     // This uuid is pre-seeded on the database (for now)
     // this won't work if the database is dropped and recreated
     // this will change once we can store and read the deviceId we receive during registration
-    static let shared = RequestFactory(deviceId: UUID(uuidString: "1c8d305e-db93-4ba0-81f4-94c33fd35c7c")!)
+    static let shared = RequestFactory(deviceId: UUID(uuidString: "ba64976f-e2f8-4841-b505-e3a3c1dd820d")!)
 
     // TODO: this needs to be read from the keychain
-    let dummyKey: SymmetricKey = SymmetricKey(data: Data(base64Encoded: "Gqacz+VE6uuZy1uc4oTG/A+LAS291mXN+J5opDSNYys=")!)
+    let dummyKey: SymmetricKey = SymmetricKey(data: Data(base64Encoded: "3bLIKs9B9UqVfqGatyJbiRGNW8zTBr2tgxYJh/el7pc=")!)
 
     let deviceId: UUID
     
