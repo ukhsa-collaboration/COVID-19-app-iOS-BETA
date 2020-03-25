@@ -9,20 +9,48 @@
 import UIKit
 import CoreData
 import Firebase
+import FirebaseInstanceID
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
 
     var broadcaster: BTLEBroadcaster?
     var listener: BTLEListener?
-    var diagnosisService: DiagnosisService = DiagnosisService()
+
+    let notificationManager = NotificationManager()
+    let diagnosisService = DiagnosisService()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-        FirebaseApp.configure()
-        
+        initNotifications()
+        initUi()
+
+        return true
+    }
+
+    // MARK: - Private
+
+    private func initNotifications() {
+        notificationManager.configure()
+        notificationManager.requestAuthorization(application: UIApplication.shared) { (result) in
+            // TODO
+            if case .failure(let error) = result {
+                print(error)
+            }
+
+            InstanceID.instanceID().instanceID { (result, error) in
+                if let error = error {
+                    print("Error fetching remote instance ID: \(error)")
+                } else if let result = result {
+                    print("Remote instance ID token: \(result.token)")
+                }
+            }
+        }
+    }
+
+    private func initUi() {
         let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
         let rootViewController: UIViewController?
 
@@ -38,12 +66,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         case .notInfected:
             rootViewController = storyboard.instantiateViewController(withIdentifier: "navigationController")
             (rootViewController as? UINavigationController)?.pushViewController(storyboard.instantiateViewController(withIdentifier: "okNowViewController"), animated: false)
+        case.potential:
+            rootViewController = storyboard.instantiateInitialViewController()
         }
-        
+
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()
-        return true
     }
 }
-

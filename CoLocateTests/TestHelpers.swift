@@ -17,3 +17,11 @@ func inWindowHierarchy(viewController: UIViewController, closure: (() -> Void)) 
 
     appDelegate.window?.rootViewController = nil
 }
+
+extension DispatchQueue {
+    static let test = DispatchQueue(label: "test")
+
+    func flush() {
+        sync {}
+    }
+}

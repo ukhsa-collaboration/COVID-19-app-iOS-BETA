@@ -9,7 +9,7 @@
 import Foundation
 
 enum Diagnosis: Int {
-    case unknown, notInfected, infected
+    case unknown, notInfected, infected, potential
 }
 
 class DiagnosisService {
