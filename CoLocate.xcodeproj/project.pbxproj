@@ -49,7 +49,6 @@
 		F78CEB5C242B7EC0002254AD /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB57242B7EBF002254AD /* FirebaseCore.framework */; };
 		F78CEB5D242B7EC0002254AD /* PromisesObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB58242B7EC0002254AD /* PromisesObjC.framework */; };
 		F78CEB5E242B7EC0002254AD /* Protobuf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB59242B7EC0002254AD /* Protobuf.framework */; };
-		F78CEB60242B7F01002254AD /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB5F242B7F01002254AD /* Firebase.framework */; };
 		F78CEB68242B8C2C002254AD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F78CEB67242B8C2B002254AD /* GoogleService-Info.plist */; };
 		F78CEB6A242B8D3F002254AD /* FirebaseInstanceID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB69242B8D3E002254AD /* FirebaseInstanceID.framework */; };
 		F78CEB6C242B8D84002254AD /* FirebaseInstallations.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB6B242B8D84002254AD /* FirebaseInstallations.framework */; };
@@ -117,7 +116,6 @@
 		F78CEB57242B7EBF002254AD /* FirebaseCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCore.framework; path = Frameworks/FirebaseCore.framework; sourceTree = "<group>"; };
 		F78CEB58242B7EC0002254AD /* PromisesObjC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromisesObjC.framework; path = Frameworks/PromisesObjC.framework; sourceTree = "<group>"; };
 		F78CEB59242B7EC0002254AD /* Protobuf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Protobuf.framework; path = Frameworks/Protobuf.framework; sourceTree = "<group>"; };
-		F78CEB5F242B7F01002254AD /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Firebase.framework; path = Frameworks/Firebase.framework; sourceTree = "<group>"; };
 		F78CEB64242B8137002254AD /* Firebase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Firebase.h; path = Frameworks/Firebase.framework/Headers/Firebase.h; sourceTree = SOURCE_ROOT; };
 		F78CEB66242B819E002254AD /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; name = module.modulemap; path = Frameworks/Firebase.framework/Modules/module.modulemap; sourceTree = SOURCE_ROOT; };
 		F78CEB67242B8C2B002254AD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -145,7 +143,6 @@
 				F78CEB71242B9305002254AD /* GoogleDataTransport.framework in Frameworks */,
 				F78CEB5B242B7EC0002254AD /* FirebaseCoreDiagnostics.framework in Frameworks */,
 				F78CEB6A242B8D3F002254AD /* FirebaseInstanceID.framework in Frameworks */,
-				F78CEB60242B7F01002254AD /* Firebase.framework in Frameworks */,
 				F78CEB6C242B8D84002254AD /* FirebaseInstallations.framework in Frameworks */,
 				F78CEB5A242B7EC0002254AD /* FirebaseMessaging.framework in Frameworks */,
 				21B3D2E82429115600573061 /* CoreBluetooth.framework in Frameworks */,
@@ -232,7 +229,6 @@
 				F78CEB6E242B92CF002254AD /* GoogleUtilities.framework */,
 				F78CEB6B242B8D84002254AD /* FirebaseInstallations.framework */,
 				F78CEB69242B8D3E002254AD /* FirebaseInstanceID.framework */,
-				F78CEB5F242B7F01002254AD /* Firebase.framework */,
 				F78CEB57242B7EBF002254AD /* FirebaseCore.framework */,
 				F78CEB56242B7EBF002254AD /* FirebaseCoreDiagnostics.framework */,
 				F78CEB55242B7EBF002254AD /* FirebaseMessaging.framework */,
