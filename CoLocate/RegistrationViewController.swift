@@ -33,7 +33,8 @@ class RegistrationViewController: UIViewController {
         super.viewWillAppear(animated)
 
         // TODO Error handling?
-        if try! SecureRegistrationStorage.shared.get() != nil {
+        let maybeRegistration = try? SecureRegistrationStorage.shared.get()
+        if maybeRegistration != nil {
             performSegue(withIdentifier: "enterDiagnosisSegue", sender: self)
         }
     }
