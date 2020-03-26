@@ -12,7 +12,7 @@ import Firebase
 import FirebaseInstanceID
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, DiagnosisServiceDelegate {
 
     var window: UIWindow?
 
@@ -20,7 +20,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     var listener: BTLEListener?
 
     let notificationManager = NotificationManager()
-    let diagnosisService = DiagnosisService()
+    let diagnosisService = DiagnosisService.shared
+    
+    override init() {
+        super.init()
+        diagnosisService.delegate = self
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
@@ -38,6 +43,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // This fires when we tap on the notification
 
         notificationManager.handleNotification(userInfo: userInfo)
+    }
+    
+    func diagnosisService(_ diagnosisService: DiagnosisService, didRecordDiagnosis diagnosis: Diagnosis) {
+        if diagnosis == .potential {
+            window?.rootViewController = potentialController()
+        }
     }
 
     // MARK: - Private
@@ -70,11 +81,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             (rootViewController as? UINavigationController)?.pushViewController(mainStoryboard.instantiateViewController(withIdentifier: "okNowViewController"), animated: false)
             
         case.potential:
-            rootViewController = UIStoryboard.init(name: "Potential", bundle: nil).instantiateInitialViewController()
+            rootViewController = potentialController()
         }
 
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()
+    }
+    
+    private func potentialController() -> UIViewController {
+        return UIStoryboard.init(name: "Potential", bundle: nil).instantiateInitialViewController()!
     }
 }

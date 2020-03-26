@@ -41,7 +41,7 @@ class NotificationManager: NSObject {
             firebase: FirebaseApp.self,
             messagingFactory: { Messaging.messaging() },
             userNotificationCenter: UNUserNotificationCenter.current(),
-            diagnosisService: DiagnosisService()
+            diagnosisService: DiagnosisService.shared
         )
     }
 

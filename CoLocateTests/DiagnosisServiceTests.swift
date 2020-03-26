@@ -38,4 +38,22 @@ class DiagnosisServiceTests: XCTestCase {
         let diagnosis = service.currentDiagnosis
         XCTAssertEqual(diagnosis, Diagnosis.unknown)
     }
+    
+    func testDiagnosisIsPassedToDelegate() {
+        let delegate = DiagnosisServiceDelegateDouble()
+        let service = DiagnosisService()
+        service.delegate = delegate
+        
+        service.recordDiagnosis(.notInfected)
+        
+        XCTAssertEqual(delegate.recordedDiagnosis, .notInfected)
+    }
+}
+
+class DiagnosisServiceDelegateDouble: NSObject, DiagnosisServiceDelegate {
+    var recordedDiagnosis: Diagnosis?
+    
+    func diagnosisService(_ diagnosisService: DiagnosisService, didRecordDiagnosis diagnosis: Diagnosis) {
+        recordedDiagnosis = diagnosis
+    }
 }

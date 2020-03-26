@@ -10,7 +10,7 @@ import UIKit
 
 class EnterDiagnosisTableViewController: UITableViewController {
     
-    var diagnosisService: DiagnosisService = DiagnosisService()
+    var diagnosisService: DiagnosisService = DiagnosisService.shared
     
     enum Rows: Int {
         case title, yes, no
