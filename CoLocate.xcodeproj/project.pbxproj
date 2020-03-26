@@ -47,6 +47,7 @@
 		F6CC2CA9242BC7FC0079432B /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CC2CA8242BC7FC0079432B /* NotificationManager.swift */; };
 		F6CC2CAC242BCD0D0079432B /* NotificationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CC2CAB242BCD0D0079432B /* NotificationManagerTests.swift */; };
 		F758553A24294C8D00CBE1ED /* RequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F758553924294C8C00CBE1ED /* RequestFactory.swift */; };
+		F758B8BE242CB856003AE16D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F758B8BD242CB856003AE16D /* Localizable.strings */; };
 		F78CEB47242B7752002254AD /* String+localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78CEB46242B7752002254AD /* String+localized.swift */; };
 		F78CEB5A242B7EC0002254AD /* FirebaseMessaging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB55242B7EBF002254AD /* FirebaseMessaging.framework */; };
 		F78CEB5B242B7EC0002254AD /* FirebaseCoreDiagnostics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB56242B7EBF002254AD /* FirebaseCoreDiagnostics.framework */; };
@@ -117,6 +118,7 @@
 		F6CC2CA8242BC7FC0079432B /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		F6CC2CAB242BCD0D0079432B /* NotificationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManagerTests.swift; sourceTree = "<group>"; };
 		F758553924294C8C00CBE1ED /* RequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFactory.swift; sourceTree = "<group>"; };
+		F758B8BD242CB856003AE16D /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		F78CEB46242B7752002254AD /* String+localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+localized.swift"; sourceTree = "<group>"; };
 		F78CEB53242B7E18002254AD /* CoLocate-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoLocate-Bridging-Header.h"; sourceTree = "<group>"; };
 		F78CEB55242B7EBF002254AD /* FirebaseMessaging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseMessaging.framework; path = Frameworks/FirebaseMessaging.framework; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 				F78CEB74242BAC83002254AD /* CoLocate.entitlements */,
 				F78CEB45242B7741002254AD /* Extensions */,
 				6FC63C3C241641BA007C8BF3 /* Info.plist */,
+				F758B8BC242CB83B003AE16D /* Resources */,
 				F78CEB67242B8C2B002254AD /* GoogleService-Info.plist */,
 				6FC63C30241641B8007C8BF3 /* AppDelegate.swift */,
 				6FC63C39241641BA007C8BF3 /* LaunchScreen.storyboard */,
@@ -316,6 +319,14 @@
 				F6CC2CAB242BCD0D0079432B /* NotificationManagerTests.swift */,
 			);
 			path = Notifications;
+			sourceTree = "<group>";
+		};
+		F758B8BC242CB83B003AE16D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F758B8BD242CB856003AE16D /* Localizable.strings */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		F78CEB45242B7741002254AD /* Extensions */ = {
@@ -428,6 +439,7 @@
 				6FC63C3B241641BA007C8BF3 /* LaunchScreen.storyboard in Resources */,
 				AEC6A7BE241BD82900B0237A /* LogoStrapline.xib in Resources */,
 				A1E7A0592420028B0078174D /* NHS Colors.xcassets in Resources */,
+				F758B8BE242CB856003AE16D /* Localizable.strings in Resources */,
 				6FC63C38241641BA007C8BF3 /* Assets.xcassets in Resources */,
 				6FC63C36241641B8007C8BF3 /* Main.storyboard in Resources */,
 				09D1CD50242C3A9300B1A167 /* Potential.storyboard in Resources */,
