@@ -1,0 +1,68 @@
+//
+//  AppCoordinator.swift
+//  CoLocate
+//
+//  Created by NHSX.
+//  Copyright © 2020 NHSX. All rights reserved.
+//
+
+import UIKit
+
+//protocol Coordinator {
+//    var navigationController: UINavigationController { get set }
+//    func start()
+//}
+
+class AppCoordinator { //Coordinator {
+    
+    private let diagnosisService: DiagnosisService
+    
+    var navigationController: UINavigationController
+    private let okVC = OkNowViewController.instantiate(storyboard: .okNow)
+    private let isolateVC = PleaseSelfIsolateViewController.instantiate(storyboard: .pleaseSelfIsolate)
+    private let enterDiagnosisVC = EnterDiagnosisTableViewController.instantiate(storyboard: .enterDiagnosis)
+    private let potentialVC = PotentialViewController.instantiate(storyboard: .potential)
+    
+    init(diagnosisService: DiagnosisService) {
+        self.diagnosisService = diagnosisService
+        navigationController = UINavigationController()
+    }
+    
+    func start() {
+        var rootViewController: Storyboarded?
+            switch diagnosisService.currentDiagnosis {
+            
+            case .unknown:
+                rootViewController = RegistrationViewController.instantiate(storyboard: .permissions)
+                
+                if let vc = (rootViewController as? RegistrationViewController) {
+                    vc.inject()
+                }
+
+            case .infected:
+                rootViewController = isolateVC
+
+            case .notInfected:
+                rootViewController = okVC
+            case .potential:
+                rootViewController = potentialVC
+            }
+        if let vc = rootViewController as? UIViewController & Storyboarded {
+//            vc.coordinator = self
+            navigationController = UINavigationController(rootViewController: vc)
+        }
+    }
+    
+    func launchEnterDiagnosis() {
+//        enterDiagnosisVC.coordinator = self
+        navigationController.pushViewController(enterDiagnosisVC, animated: true)
+    }
+    
+    func launchOkNowVC() {
+        navigationController.pushViewController(okVC, animated: true)
+    }
+    
+    func launchPleaseIsolateVC() {
+        navigationController.pushViewController(isolateVC, animated: true)
+    }
+}

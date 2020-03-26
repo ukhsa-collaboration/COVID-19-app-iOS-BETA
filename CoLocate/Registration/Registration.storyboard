@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Registration ViewController-->
+        <scene sceneID="UJb-xp-fe5">
+            <objects>
+                <viewController storyboardIdentifier="RegistrationViewController" title="Registration ViewController" id="Jfw-Ex-QBB" customClass="RegistrationViewController" customModule="CoLocate" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="wR8-Eh-rb0">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="SjM-mR-XNC">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gFK-L3-niD" userLabel="Content View">
+                                <rect key="frame" x="0.0" y="44" width="414" height="756"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sh3-95-XBv" customClass="LogoStrapline" customModule="CoLocate" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="1839.5" height="64"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="64" id="rGn-fc-zzK"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Security" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mu1-Cp-wpd">
+                                        <rect key="frame" x="20" y="96" width="120" height="41"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJK-Ke-e19">
+                                        <rect key="frame" x="20" y="153" width="394" height="218.5"/>
+                                        <string key="text">Before you start using the app, we would like to tell you about security.
+
+All data the application tracks is submitted to the NHS only when you choose to send data. 
+
+To begin using the app, we need to prepare a unique key for you. This will be generated on NHS servers. In the future we will protect all communication with our servers using this key.</string>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="sh3-95-XBv" firstAttribute="leading" secondItem="gFK-L3-niD" secondAttribute="leading" id="9gU-5F-OgN"/>
+                                    <constraint firstItem="Mu1-Cp-wpd" firstAttribute="top" secondItem="sh3-95-XBv" secondAttribute="bottom" constant="32" id="Dkr-WX-McL"/>
+                                    <constraint firstItem="Mu1-Cp-wpd" firstAttribute="leading" secondItem="gFK-L3-niD" secondAttribute="leading" constant="20" id="Ez1-Ww-pIE"/>
+                                    <constraint firstAttribute="trailing" secondItem="sh3-95-XBv" secondAttribute="trailing" constant="-1425.3333333333333" id="GpS-Jz-rf1"/>
+                                    <constraint firstAttribute="trailing" secondItem="gJK-Ke-e19" secondAttribute="trailing" id="Jvd-HE-3ps"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Mu1-Cp-wpd" secondAttribute="trailing" constant="20" symbolic="YES" id="Lj0-AA-aMe"/>
+                                    <constraint firstItem="gJK-Ke-e19" firstAttribute="top" secondItem="Mu1-Cp-wpd" secondAttribute="bottom" constant="16" id="Tvb-Gx-M0Y"/>
+                                    <constraint firstItem="sh3-95-XBv" firstAttribute="top" secondItem="gFK-L3-niD" secondAttribute="top" id="WPQ-yE-s5R"/>
+                                    <constraint firstItem="gJK-Ke-e19" firstAttribute="leading" secondItem="gFK-L3-niD" secondAttribute="leading" constant="20" id="rLT-40-ILo"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6BR-Fy-Tcr">
+                                <rect key="frame" x="184" y="816" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="didTapRegister:" destination="Jfw-Ex-QBB" eventType="touchUpInside" id="QXc-ih-K3H"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="gFK-L3-niD" firstAttribute="trailing" secondItem="MjN-sS-s5i" secondAttribute="trailing" id="SA8-05-x12"/>
+                            <constraint firstItem="6BR-Fy-Tcr" firstAttribute="top" secondItem="gFK-L3-niD" secondAttribute="bottom" constant="16" id="Vmv-2I-Z33"/>
+                            <constraint firstItem="6BR-Fy-Tcr" firstAttribute="centerX" secondItem="MjN-sS-s5i" secondAttribute="centerX" id="XQY-nr-LMH"/>
+                            <constraint firstItem="SjM-mR-XNC" firstAttribute="centerX" secondItem="wR8-Eh-rb0" secondAttribute="centerX" id="bkh-Gn-8KD"/>
+                            <constraint firstItem="MjN-sS-s5i" firstAttribute="bottom" secondItem="6BR-Fy-Tcr" secondAttribute="bottom" constant="16" id="frd-6I-faF"/>
+                            <constraint firstItem="gFK-L3-niD" firstAttribute="leading" secondItem="MjN-sS-s5i" secondAttribute="leading" id="gmD-BI-mYI"/>
+                            <constraint firstItem="SjM-mR-XNC" firstAttribute="centerY" secondItem="wR8-Eh-rb0" secondAttribute="centerY" id="wqb-tp-3LL"/>
+                            <constraint firstItem="gFK-L3-niD" firstAttribute="top" secondItem="MjN-sS-s5i" secondAttribute="top" id="xUb-mq-nhZ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="MjN-sS-s5i"/>
+                    </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="SjM-mR-XNC" id="WxU-PJ-YrL"/>
+                        <outlet property="retryButton" destination="6BR-Fy-Tcr" id="Azn-Xf-fkR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AkI-6O-rJW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="454" y="109"/>
+        </scene>
+    </scenes>
+</document>

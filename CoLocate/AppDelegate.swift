@@ -64,28 +64,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     private func initUi() {
-        let mainStoryboard = UIStoryboard.init(name: "Main", bundle: nil)
-        let rootViewController: UIViewController?
-
-        switch diagnosisService.currentDiagnosis {
-
-        case .unknown:
-            rootViewController = mainStoryboard.instantiateInitialViewController()
-
-        case .infected:
-            rootViewController = mainStoryboard.instantiateViewController(withIdentifier: "navigationController")
-            (rootViewController as? UINavigationController)?.pushViewController(mainStoryboard.instantiateViewController(withIdentifier: "pleaseSelfIsolate"), animated: false)
-
-        case .notInfected:
-            rootViewController = mainStoryboard.instantiateViewController(withIdentifier: "navigationController")
-            (rootViewController as? UINavigationController)?.pushViewController(mainStoryboard.instantiateViewController(withIdentifier: "okNowViewController"), animated: false)
-            
-        case.potential:
-            rootViewController = potentialController()
-        }
+        let appCoordinator = AppCoordinator(diagnosisService: diagnosisService)
+        appCoordinator.start()
 
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = rootViewController
+        window?.rootViewController = appCoordinator.navigationController
         window?.makeKeyAndVisible()
     }
     

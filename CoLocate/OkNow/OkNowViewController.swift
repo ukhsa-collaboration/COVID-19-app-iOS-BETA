@@ -10,7 +10,7 @@ import UIKit
 
 import UIKit
 
-class OkNowViewController: UIViewController {
+class OkNowViewController: UIViewController, Storyboarded {
     
     @IBOutlet private var warningView: UIView!
     @IBOutlet private var warningViewTitle: UILabel!

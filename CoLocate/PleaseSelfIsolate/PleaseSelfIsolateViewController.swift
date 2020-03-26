@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PleaseSelfIsolateViewController: UIViewController {
+class PleaseSelfIsolateViewController: UIViewController, Storyboarded {
 
     @IBOutlet weak var warningView: UIView!
     @IBOutlet weak var warningViewTitle: UILabel!

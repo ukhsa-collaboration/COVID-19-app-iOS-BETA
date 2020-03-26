@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EnterDiagnosisTableViewController: UITableViewController {
+class EnterDiagnosisTableViewController: UITableViewController, Storyboarded {
     
     var diagnosisService: DiagnosisService = DiagnosisService.shared
     
