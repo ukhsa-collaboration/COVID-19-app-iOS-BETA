@@ -63,9 +63,10 @@ jobs:
           -showBuildTimingSummary
           -allowProvisioningUpdates
 
-  deploy:
+  bump-build-version:
     needs: test
     runs-on: macOS-latest
+    if: github.ref == 'master'
     steps:
       - name: Checkout Project
         uses: actions/checkout@v2
