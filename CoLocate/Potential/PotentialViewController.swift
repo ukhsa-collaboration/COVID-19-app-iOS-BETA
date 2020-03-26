@@ -9,6 +9,8 @@
 import UIKit
 
 class PotentialViewController: UIViewController, Storyboarded {
+    var coordinator: AppCoordinator?
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()

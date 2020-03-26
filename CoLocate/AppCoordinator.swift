@@ -48,13 +48,13 @@ class AppCoordinator { //Coordinator {
                 rootViewController = potentialVC
             }
         if let vc = rootViewController as? UIViewController & Storyboarded {
-//            vc.coordinator = self
+            vc.coordinator = self
             navigationController = UINavigationController(rootViewController: vc)
         }
     }
     
     func launchEnterDiagnosis() {
-//        enterDiagnosisVC.coordinator = self
+        enterDiagnosisVC.coordinator = self
         navigationController.pushViewController(enterDiagnosisVC, animated: true)
     }
     
@@ -64,5 +64,9 @@ class AppCoordinator { //Coordinator {
     
     func launchPleaseIsolateVC() {
         navigationController.pushViewController(isolateVC, animated: true)
+    }
+    
+    func launchPotentialVC() {
+        navigationController.show(potentialVC, sender: self)
     }
 }

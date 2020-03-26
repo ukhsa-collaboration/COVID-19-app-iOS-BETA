@@ -9,6 +9,7 @@
 import UIKit
 
 class RegistrationViewController: UIViewController, Storyboarded {
+    var coordinator: AppCoordinator?
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var retryButton: UIButton!

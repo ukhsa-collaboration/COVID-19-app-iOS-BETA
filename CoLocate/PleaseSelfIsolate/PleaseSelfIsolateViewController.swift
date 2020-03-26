@@ -9,6 +9,7 @@
 import UIKit
 
 class PleaseSelfIsolateViewController: UIViewController, Storyboarded {
+    var coordinator: AppCoordinator?
 
     @IBOutlet weak var warningView: UIView!
     @IBOutlet weak var warningViewTitle: UILabel!

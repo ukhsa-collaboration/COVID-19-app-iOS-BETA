@@ -17,6 +17,7 @@ enum Storyboard: String {
 }
 
 protocol Storyboarded: class {
+    var coordinator: AppCoordinator? { get set }
     static func instantiate(storyboard: Storyboard) -> Self
 }
 
