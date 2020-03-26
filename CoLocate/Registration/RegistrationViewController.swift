@@ -19,7 +19,7 @@ class RegistrationViewController: UIViewController, Storyboarded {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        title = ""
         retryButton.setTitle("Register", for: .normal)
     }
     
