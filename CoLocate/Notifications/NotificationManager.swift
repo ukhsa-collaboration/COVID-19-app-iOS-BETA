@@ -124,7 +124,7 @@ extension ConcreteNotificationManager: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
         print("Remote instance ID token: \(fcmToken)")
         pushToken = fcmToken
-        delegate?.notificationManager(self, didReceiveNotificationWithInfo: ["pushToken": pushToken])
+        delegate?.notificationManager(self, didReceiveNotificationWithInfo: ["pushToken": pushToken as Any])
     }
 }
 

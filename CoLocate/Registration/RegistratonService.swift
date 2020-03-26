@@ -70,18 +70,25 @@ class ConcreteRegistrationService: RegistrationService {
 
 
 extension ConcreteRegistrationService: NotificationManagerDelegate {
-    func notificationManager(_ notificationManager: NotificationManager, didObtainPushToken token: String) {
+
+    func notificationManager(_ notificationManager: NotificationManager, didReceiveNotificationWithInfo userInfo: [AnyHashable : Any]) {
+        
+        // I can't remember how to spell the switch to do this --RA
+        if let activationCode = userInfo["activationCode"] as? String {
+            doShitWithActivationCode(activationCode: activationCode)
+        } else if let pushToken = userInfo["pushToken"] as? String {
+            doShitWithPushToken(pushToken: pushToken)
+        }
+        
+    }
+    
+    func doShitWithPushToken(pushToken: String) {
         if registerWhenTokenReceived {
             beginRegistration()
         }
     }
     
-    func notificationManager(
-        _ notificationManager: NotificationManager,
-        didReceiveNotificationWithInfo userInfo: [AnyHashable : Any]
-    ) {
-        guard let activationCode = userInfo["activationCode"] as? String else { return }
-        
+    func doShitWithActivationCode(activationCode: String) {
         let request = RequestFactory.confirmRegistrationRequest(activationCode: activationCode, pushToken: notificationManager.pushToken!)
         session.execute(request, queue: .main) { [weak self] result in
             guard let self = self else { return }

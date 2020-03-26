@@ -51,7 +51,7 @@ class NotificationManagerTests: XCTestCase {
         // Ugh, can't find a way to not pass a real Messaging here. Should be ok as long as the actual delegate method doesn't use it.
         messaging.delegate!.messaging?(Messaging.messaging(), didReceiveRegistrationToken: "12345")
         XCTAssertEqual("12345", notificationManager.pushToken)
-        XCTAssertEqual("12345", delegate.pushToken)
+        XCTAssertEqual("12345", delegate.userInfo?["pushToken"] as! String)
     }
 
     func testRequestAuthorization_success() {
@@ -161,12 +161,7 @@ class NotificationCenterDouble: UserNotificationCenter {
 }
 
 class NotificationManagerDelegateDouble: NotificationManagerDelegate {
-    var pushToken: String?
     var userInfo: [AnyHashable : Any]?
-    
-    func notificationManager(_ notificationManager: NotificationManager, didObtainPushToken token: String) {
-        self.pushToken = token
-    }
     
     func notificationManager(_ notificationManager: NotificationManager, didReceiveNotificationWithInfo userInfo: [AnyHashable : Any]) {
         self.userInfo = userInfo

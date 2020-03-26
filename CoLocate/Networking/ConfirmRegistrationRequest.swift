@@ -64,4 +64,5 @@ struct ConfirmRegistrationResponse: Decodable {
         self.id = id
         self.secretKey = secretKey
     }
+
 }
