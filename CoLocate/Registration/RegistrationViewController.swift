@@ -30,7 +30,7 @@ class RegistrationViewController: UIViewController, Storyboarded {
         // TODO (tj) inject these fields
         let maybeRegistration = try? registrationStorage.get()
         if maybeRegistration != nil {
-            coordinator?.launchEnterDiagnosis()
+            coordinator?.launchOkNowVC()
         }
     }
     

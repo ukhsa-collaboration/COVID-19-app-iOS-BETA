@@ -36,6 +36,12 @@ class OkNowViewController: UIViewController, Storyboarded {
         checkSymptomsButton.setTitle("OK_NOW_SYMPTOMS_BUTTON".localized, for: .normal)
         moreInformationTitle.text = "OK_NOW_MORE_INFO_TITLE".localized
         moreInformationBody.text = "OK_NOW_MORE_INFO_MESSAGE".localized
+        
+        checkSymptomsButton.addTarget(self, action: #selector(tapCheckMySymptomsButton), for: .touchUpInside)
+    }
+    
+    @objc func tapCheckMySymptomsButton() {
+        coordinator?.launchEnterDiagnosis()
     }
 }
 

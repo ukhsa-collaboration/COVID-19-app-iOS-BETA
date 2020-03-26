@@ -43,7 +43,7 @@ class EnterDiagnosisTableViewController: UITableViewController, Storyboarded {
             coordinator?.launchPleaseIsolateVC()
         case Rows.no.rawValue:
             diagnosisService.recordDiagnosis(.notInfected)
-            coordinator?.launchOkNowVC()
+            coordinator?.goBack()
         default:
             print("\(#file).\(#function) unknown indexPath selected: \(indexPath)")
         }

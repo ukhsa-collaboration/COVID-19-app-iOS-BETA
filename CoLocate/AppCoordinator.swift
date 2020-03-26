@@ -8,12 +8,7 @@
 
 import UIKit
 
-//protocol Coordinator {
-//    var navigationController: UINavigationController { get set }
-//    func start()
-//}
-
-class AppCoordinator { //Coordinator {
+class AppCoordinator {
     
     private let diagnosisService: DiagnosisService
     
@@ -60,6 +55,10 @@ class AppCoordinator { //Coordinator {
     func launchOkNowVC() {
         okVC.coordinator = self
         navigationController.pushViewController(okVC, animated: true)
+    }
+    
+    func goBack() {
+        navigationController.popViewController(animated: true)
     }
     
     func launchPleaseIsolateVC() {
