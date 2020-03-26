@@ -13,6 +13,7 @@ import Firebase
 
 protocol NotificationManagerDelegate: class {
     func notificationManager(_ notificationManager: NotificationManager, didObtainPushToken token: String)
+    func notificationManager(_ notificationManager: NotificationManager, didReceiveNotificationWithInfo userInfo: [AnyHashable : Any])
 }
 
 protocol NotificationManager {

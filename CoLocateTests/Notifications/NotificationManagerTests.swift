@@ -150,4 +150,7 @@ class NotificationManagerDelegateDouble: NotificationManagerDelegate {
     func notificationManager(_ notificationManager: NotificationManager, didObtainPushToken token: String) {
         self.pushToken = token
     }
+    
+    func notificationManager(_ notificationManager: NotificationManager, didReceiveNotificationWithInfo userInfo: [AnyHashable : Any]) {
+    }
 }

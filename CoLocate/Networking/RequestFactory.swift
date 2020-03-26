@@ -24,6 +24,10 @@ struct RequestFactory {
     static func registrationRequest(pushToken: String) -> RegistrationRequest {
         return RegistrationRequest(pushToken: pushToken)
     }
+    
+    static func confirmRegistrationRequest(activationCode: String, pushToken: String) -> ConfirmRegistrationRequest {
+        return ConfirmRegistrationRequest(activationCode: activationCode, pushToken: pushToken)
+    }
 
     init(deviceId: UUID) {
         self.deviceId = deviceId

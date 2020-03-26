@@ -30,6 +30,8 @@ class RegistrationViewController: UIViewController, Storyboarded {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.notificationManager.delegate = self
 
         // TODO Error handling?
         let maybeRegistration = try? registrationStorage.get()
@@ -61,5 +63,23 @@ class RegistrationViewController: UIViewController, Storyboarded {
             self.retryButton.isHidden = false
         }
     }
+}
+
+extension RegistrationViewController : NotificationManagerDelegate {
+    func notificationManager(_ notificationManager: NotificationManager, didObtainPushToken token: String) {
+    }
     
+    func notificationManager(
+        _ notificationManager: NotificationManager,
+        didReceiveNotificationWithInfo userInfo: [AnyHashable : Any]
+    ) {
+        guard let activationCode = userInfo["activationCode"] as? String else { return }
+        
+        let request = RequestFactory.confirmRegistrationRequest(activationCode: activationCode, pushToken: notificationManager.pushToken!)
+        session.execute(request, queue: .main) { [weak self] result in
+            // TODO: Probably need to save the registration somewhere
+            self?.coordinator?.launchEnterDiagnosis()
+        }
+    }
+
 }

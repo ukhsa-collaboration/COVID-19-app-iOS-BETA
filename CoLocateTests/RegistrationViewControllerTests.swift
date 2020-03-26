@@ -8,6 +8,8 @@
 
 import XCTest
 @testable import CoLocate
+import CryptoKit
+
 
 class RegistrationViewControllerTests: XCTestCase {
 
@@ -20,10 +22,14 @@ class RegistrationViewControllerTests: XCTestCase {
     func testRegistration_withPreExistingPushToken() throws {
         let storyboard = UIStoryboard.init(name: "Registration", bundle: nil)
         let vc = storyboard.instantiateViewController(identifier: "RegistrationViewController") as! RegistrationViewController
+        let appCoordinator = AppCoordinatorDouble()
+        vc.coordinator = appCoordinator
         let notificationManager = NotificationManagerDouble()
         notificationManager.pushToken = "the current push token"
         vc.inject(notificationManager: notificationManager)
         XCTAssertNotNil(vc.view)
+        vc.viewDidLoad()
+        vc.viewWillAppear(false)
 
         let session = SessionDouble()
         vc.session = session
@@ -38,6 +44,37 @@ class RegistrationViewControllerTests: XCTestCase {
         default:
             XCTFail("Expected a POST request")
         }
+        
+        // Respond to the first request
+        session.requestSent = nil
+        session.executeCompletion!(Result<(), Error>.success(()))
+        
+        // Simulate the notification containing the authorizationCode.
+        // This should trigger the second request.
+        let activationCode = "a3d2c477-45f5-4609-8676-c24558094600"
+        notificationManager.delegate!.notificationManager(notificationManager, didReceiveNotificationWithInfo: ["activationCode": activationCode])
+        
+        // Verify the second request
+        switch (session.requestSent as! ConfirmRegistrationRequest).method {
+        case .post(let data):
+            let payload = try JSONDecoder().decode(ExpectedConfirmRegistrationRequestBody.self, from: data)
+            XCTAssertEqual(payload.activationCode, UUID(uuidString: activationCode))
+            XCTAssertEqual(payload.pushToken, "the current push token")
+            default:
+                XCTFail("Expected a POST request")
+        }
+        
+        XCTAssertFalse(appCoordinator.enterDiagnosisWasCalled)
+        
+        // Respond to the second request
+        let confirmationResponse = ConfirmRegistrationResponse(id: UUID(), secretKey: SymmetricKey(size: SymmetricKeySize.bits128))
+        session.executeCompletion!(Result<ConfirmRegistrationResponse, Error>.success(confirmationResponse))
+        
+        XCTAssertTrue(appCoordinator.enterDiagnosisWasCalled)
+    }
+
+    func testRegistration_withoutPreExistingPushToken() {
+        XCTFail("write this test")
     }
 }
 
@@ -58,11 +95,13 @@ class SessionDouble: Session {
     let delegateQueue = OperationQueue.current!
     
     var requestSent: Any?
-    var executeCompletion: ((Result<(), Error>) -> Void)?
+    var executeCompletion: ((Any) -> Void)?
     
     func execute<R: Request>(_ request: R, queue: OperationQueue, completion: @escaping (Result<R.ResponseType, Error>) -> Void) {
         requestSent = request
-        executeCompletion = ({ completion($0) } as! ((Result<(), Error>) -> Void))
+        executeCompletion = { result in
+            completion(result as! Result<R.ResponseType, Error>)
+        }
     }
 }
 
