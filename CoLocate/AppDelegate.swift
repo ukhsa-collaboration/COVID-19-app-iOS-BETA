@@ -42,10 +42,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         didReceiveRemoteNotification userInfo: [AnyHashable : Any],
         fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void
     ) {
-        // This fires when we tap on the notification
+        print("didReceiveRemoteNotification")
 
         notificationManager.handleNotification(userInfo: userInfo)
-        completionHandler(.newData)
+        completionHandler(UIBackgroundFetchResult.newData)
     }
     
     func diagnosisService(_ diagnosisService: DiagnosisService, didRecordDiagnosis diagnosis: Diagnosis) {
