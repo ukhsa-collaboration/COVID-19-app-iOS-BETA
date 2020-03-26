@@ -14,18 +14,22 @@ enum Diagnosis: Int {
 
 class DiagnosisService {
     
-    let diagnosisKey = "diagnosisKey"
+    static func clear() {
+        UserDefaults.standard.removeObject(forKey: diagnosisKey)
+    }
+
+    static let diagnosisKey = "diagnosisKey"
     
     var currentDiagnosis: Diagnosis {
         
         // This force unwrap is deliberate, we should never store an unknown rawValue
         // and I want to fail fast if we somehow do. Note integer(forKey:) returns 0
         // if the key does not exist, which will inflate to .unknown
-        return Diagnosis(rawValue: UserDefaults.standard.integer(forKey: diagnosisKey))!
+        return Diagnosis(rawValue: UserDefaults.standard.integer(forKey: DiagnosisService.diagnosisKey))!
     }
     
     func recordDiagnosis(_ diagnosis: Diagnosis) {
-        UserDefaults.standard.set(diagnosis.rawValue, forKey: diagnosisKey)
+        UserDefaults.standard.set(diagnosis.rawValue, forKey: DiagnosisService.diagnosisKey)
     }
-
+    
 }

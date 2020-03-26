@@ -17,17 +17,20 @@ class NotificationManager: NSObject {
     let firebase: TestableFirebaseApp.Type
     let messagingFactory: () -> TestableMessaging
     let userNotificationCenter: UserNotificationCenter
+    let diagnosisService: DiagnosisService
 
     init(
         uiQueue: DispatchQueue,
         firebase: TestableFirebaseApp.Type,
         messagingFactory: @escaping () -> TestableMessaging,
-        userNotificationCenter: UserNotificationCenter
+        userNotificationCenter: UserNotificationCenter,
+        diagnosisService: DiagnosisService
     ) {
         self.uiQueue = uiQueue
         self.firebase = firebase
         self.messagingFactory = messagingFactory
         self.userNotificationCenter = userNotificationCenter
+        self.diagnosisService = diagnosisService
 
         super.init()
     }
@@ -37,7 +40,8 @@ class NotificationManager: NSObject {
             uiQueue: DispatchQueue.main,
             firebase: FirebaseApp.self,
             messagingFactory: { Messaging.messaging() },
-            userNotificationCenter: UNUserNotificationCenter.current()
+            userNotificationCenter: UNUserNotificationCenter.current(),
+            diagnosisService: DiagnosisService()
         )
     }
 
@@ -65,6 +69,19 @@ class NotificationManager: NSObject {
             completion(.success(granted))
         }
     }
+    
+    func handleNotification(userInfo: [AnyHashable : Any]) {
+        guard let diagnosis = userInfo["diagnosis"] else {
+            print("no diagnosis in user info \(userInfo)")
+            return
+        }
+        
+        print("Got notification with diagnosis \(diagnosis))")
+        
+        if diagnosis as? String == "potential" {
+            diagnosisService.recordDiagnosis(.potential)
+        }
+    }
 
 }
 
@@ -76,13 +93,7 @@ extension NotificationManager: UNUserNotificationCenterDelegate {
     ) {
         // This only happens when we are in the foregrond?
 
-        let userInfo = notification.request.content.userInfo
-        guard let diagnosis = userInfo["diagnosis"] else {
-            print("no diagnosis in user info \(userInfo)")
-            return
-        }
-
-        print("the diagnosis is bad :: \(diagnosis)")
+        handleNotification(userInfo: notification.request.content.userInfo)
 
         // How to re-present notification?
 //        completionHandler([.alert, .badge, .sound])

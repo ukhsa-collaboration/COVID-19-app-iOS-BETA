@@ -10,6 +10,10 @@ import XCTest
 @testable import CoLocate
 
 class DiagnosisServiceTests: XCTestCase {
+    
+    override func setUp() {
+        DiagnosisService.clear()
+    }
 
     // Ensure when UserDefaults.integer(forKey: ) doesn't find anything, it translates to .unknown
     func testDiagnosisRawValueZeroIsUnknown() {

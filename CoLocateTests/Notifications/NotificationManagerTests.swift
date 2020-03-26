@@ -16,6 +16,7 @@ class NotificationManagerTests: XCTestCase {
         super.setUp()
 
         FirebaseAppDouble.configureCalled = false
+        DiagnosisService.clear()
     }
 
     func testConfigure() {
@@ -23,7 +24,8 @@ class NotificationManagerTests: XCTestCase {
             uiQueue: .main,
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
-            userNotificationCenter: NotificationCenterDouble()
+            userNotificationCenter: NotificationCenterDouble(),
+            diagnosisService: DiagnosisService()
         )
 
         notificationManager.configure()
@@ -37,7 +39,8 @@ class NotificationManagerTests: XCTestCase {
             uiQueue: DispatchQueue.test,
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
-            userNotificationCenter: notificationCenterDouble
+            userNotificationCenter: notificationCenterDouble,
+            diagnosisService: DiagnosisService()
         )
 
         let applicationDouble = ApplicationDouble()
@@ -56,6 +59,36 @@ class NotificationManagerTests: XCTestCase {
         XCTAssertTrue(applicationDouble.registeredForRemoteNotifications)
         XCTAssertTrue(granted!)
         XCTAssertNil(error)
+    }
+    
+    func testHandleNotification_savesPotentialDiagnosis() {
+        let diagnosisService = DiagnosisService()
+        let notificationManager = NotificationManager(
+            uiQueue: DispatchQueue.test,
+            firebase: FirebaseAppDouble.self,
+            messagingFactory: { MessagingDouble() },
+            userNotificationCenter: NotificationCenterDouble(),
+            diagnosisService: diagnosisService
+        )
+        
+        notificationManager.handleNotification(userInfo: ["diagnosis" : "potential"])
+        
+        XCTAssertEqual(diagnosisService.currentDiagnosis, .potential)
+    }
+    
+    func testHandleNotification_doesNotSaveOtherDiagnosis() {
+        let diagnosisService = DiagnosisService()
+        let notificationManager = NotificationManager(
+            uiQueue: DispatchQueue.test,
+            firebase: FirebaseAppDouble.self,
+            messagingFactory: { MessagingDouble() },
+            userNotificationCenter: NotificationCenterDouble(),
+            diagnosisService: diagnosisService
+        )
+        
+        notificationManager.handleNotification(userInfo: ["diagnosis" : "infected"])
+        
+        XCTAssertEqual(diagnosisService.currentDiagnosis, .unknown)
     }
 }
 

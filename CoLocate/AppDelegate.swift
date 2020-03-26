@@ -30,15 +30,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         return true
     }
 
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+    func application(
+        _ application: UIApplication,
+        didReceiveRemoteNotification userInfo: [AnyHashable : Any],
+        fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void
+    ) {
         // This fires when we tap on the notification
-
-        guard let diagnosis = userInfo["diagnosis"] else {
-            print("Got a notification with no diagnosis in user info \(userInfo)")
-            return
-        }
-
-        print("Got a notification with diagnosis: \(diagnosis)")
+        notificationManager.handleNotification(userInfo: userInfo)
     }
 
     // MARK: - Private
