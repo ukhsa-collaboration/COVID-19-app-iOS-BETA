@@ -35,11 +35,7 @@ class AppCoordinator { //Coordinator {
             switch diagnosisService.currentDiagnosis {
             
             case .unknown:
-                rootViewController = registrationVC
-                
-                if let vc = (rootViewController as? RegistrationViewController) {
-                    vc.inject()
-                }
+                rootViewController = permissionsVC
 
             case .infected:
                 rootViewController = isolateVC
