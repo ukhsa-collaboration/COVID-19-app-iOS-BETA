@@ -14,7 +14,7 @@ struct RegistrationRequest: Request {
         let pushToken: String
     }
     
-    typealias ResponseType = Registration
+    typealias ResponseType = Void
     
     let method: HTTPMethod
     let path = "/api/devices/registrations"
@@ -25,10 +25,7 @@ struct RegistrationRequest: Request {
         method = HTTPMethod.post(data: try! JSONEncoder().encode(requestJSON))
     }
     
-    func parse(_ data: Data) throws -> Registration {
-        let decoder = JSONDecoder()
-        let response = try decoder.decode(Registration.self, from: data)
-        return response
+    func parse(_ data: Data) throws -> Void {
     }
 
 }

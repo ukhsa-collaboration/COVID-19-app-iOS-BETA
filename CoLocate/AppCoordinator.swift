@@ -11,6 +11,7 @@ import UIKit
 class AppCoordinator {
     
     private let diagnosisService: DiagnosisService
+    private let notificationManager: NotificationManager
     
     var navigationController: UINavigationController
     private let okVC = OkNowViewController.instantiate(storyboard: .okNow)
@@ -20,8 +21,9 @@ class AppCoordinator {
     private let permissionsVC = PermissionsPromptViewController.instantiate(storyboard: .permissions)
     private let registrationVC = RegistrationViewController.instantiate(storyboard: .registration)
     
-    init(diagnosisService: DiagnosisService) {
+    init(diagnosisService: DiagnosisService, notificationManager: NotificationManager) {
         self.diagnosisService = diagnosisService
+        self.notificationManager = notificationManager
         navigationController = UINavigationController()
     }
     
@@ -72,7 +74,9 @@ class AppCoordinator {
     }
     
     func launchRegistrationVC() {
+        
         registrationVC.coordinator = self
+        registrationVC.inject(notificationManager: notificationManager)
         navigationController.pushViewController(registrationVC, animated: true)
     }
     

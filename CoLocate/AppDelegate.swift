@@ -19,11 +19,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     var broadcaster: BTLEBroadcaster?
     var listener: BTLEListener?
 
-    let notificationManager = NotificationManager()
+    let notificationManager = ConcreteNotificationManager()
     let diagnosisService = DiagnosisService.shared
-    let appCoordinator = AppCoordinator(diagnosisService: DiagnosisService.shared)
+    let appCoordinator: AppCoordinator
     
     override init() {
+        appCoordinator = AppCoordinator(diagnosisService: diagnosisService, notificationManager: notificationManager)
         super.init()
         diagnosisService.delegate = self
     }

@@ -11,13 +11,35 @@ import UIKit
 
 import Firebase
 
-class NotificationManager: NSObject {
+protocol NotificationManagerDelegate: class {
+    func notificationManager(_ notificationManager: NotificationManager, didObtainPushToken token: String)
+}
+
+protocol NotificationManager {
+    var pushToken: String? { get }
+    
+    var delegate: NotificationManagerDelegate? { get set }
+    
+    func requestAuthorization(
+        application: Application,
+        completion: @escaping (Result<Bool, Error>) -> Void
+    )
+    
+    func handleNotification(userInfo: [AnyHashable : Any])
+}
+
+
+class ConcreteNotificationManager: NSObject, NotificationManager {
 
     let uiQueue: DispatchQueue
     let firebase: TestableFirebaseApp.Type
     let messagingFactory: () -> TestableMessaging
     let userNotificationCenter: UserNotificationCenter
     let diagnosisService: DiagnosisService
+    
+    var pushToken: String?
+    
+    weak var delegate: NotificationManagerDelegate?
 
     init(
         uiQueue: DispatchQueue,
@@ -82,10 +104,9 @@ class NotificationManager: NSObject {
             diagnosisService.recordDiagnosis(.potential)
         }
     }
-
 }
 
-extension NotificationManager: UNUserNotificationCenterDelegate {
+extension ConcreteNotificationManager: UNUserNotificationCenterDelegate {
     func userNotificationCenter(
         _ center: UNUserNotificationCenter,
         willPresent notification: UNNotification,
@@ -100,9 +121,11 @@ extension NotificationManager: UNUserNotificationCenterDelegate {
     }
 }
 
-extension NotificationManager: MessagingDelegate {
+extension ConcreteNotificationManager: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
         print("Remote instance ID token: \(fcmToken)")
+        pushToken = fcmToken
+        delegate?.notificationManager(self, didObtainPushToken: fcmToken)
     }
 }
 

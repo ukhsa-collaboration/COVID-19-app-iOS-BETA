@@ -16,6 +16,11 @@ class RegistrationViewController: UIViewController, Storyboarded {
     var coordinator: AppCoordinator?
     var session: Session = URLSession.shared
     var registrationStorage: SecureRegistrationStorage = SecureRegistrationStorage.shared
+    var notificationManager: NotificationManager!
+    
+    func inject(notificationManager: NotificationManager) {
+        self.notificationManager = notificationManager
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,24 +39,20 @@ class RegistrationViewController: UIViewController, Storyboarded {
     }
     
     @IBAction func didTapRegister(_ sender: Any) {
-        createRegistration()
-    }
-    
-    private func createRegistration() {
-        let request = RequestFactory.registrationRequest()
+        let request = RequestFactory.registrationRequest(pushToken: notificationManager.pushToken!)
 
         session.execute(request, queue: .main) { result in
             self.handleRegistration(result: result)
         }
     }
     
-    private func handleRegistration(result: Result<Registration, Error>) {
+    private func handleRegistration(result: Result<(), Error>) {
         self.activityIndicator.stopAnimating()
 
         switch result {
-        case .success(let registration):
+        case .success(_):
             // TODO What do when fail?
-            try! registrationStorage.set(registration: registration)
+            print("First registration request succeeded")
 
             coordinator?.launchOkNowVC()
         case .failure(let error):
