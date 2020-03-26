@@ -43,7 +43,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     ) {
         // This fires when we tap on the notification
 
+        print("didReceiveRemoteNotification")
+
         notificationManager.handleNotification(userInfo: userInfo)
+
+        // TODO make this correct
+        completionHandler(UIBackgroundFetchResult.noData)
     }
     
     func diagnosisService(_ diagnosisService: DiagnosisService, didRecordDiagnosis diagnosis: Diagnosis) {
