@@ -22,6 +22,8 @@ class AppCoordinator { //Coordinator {
     private let isolateVC = PleaseSelfIsolateViewController.instantiate(storyboard: .pleaseSelfIsolate)
     private let enterDiagnosisVC = EnterDiagnosisTableViewController.instantiate(storyboard: .enterDiagnosis)
     private let potentialVC = PotentialViewController.instantiate(storyboard: .potential)
+    private let permissionsVC = PermissionsPromptViewController.instantiate(storyboard: .permissions)
+    private let registrationVC = RegistrationViewController.instantiate(storyboard: .registration)
     
     init(diagnosisService: DiagnosisService) {
         self.diagnosisService = diagnosisService
@@ -33,7 +35,7 @@ class AppCoordinator { //Coordinator {
             switch diagnosisService.currentDiagnosis {
             
             case .unknown:
-                rootViewController = RegistrationViewController.instantiate(storyboard: .permissions)
+                rootViewController = registrationVC
                 
                 if let vc = (rootViewController as? RegistrationViewController) {
                     vc.inject()
@@ -68,5 +70,13 @@ class AppCoordinator { //Coordinator {
     
     func launchPotentialVC() {
         navigationController.show(potentialVC, sender: self)
+    }
+    
+    func launchRegistrationVC() {
+        navigationController.pushViewController(registrationVC, animated: true)
+    }
+    
+    func launchPermissionsVC() {
+        navigationController.pushViewController(permissionsVC, animated: true)
     }
 }

@@ -14,6 +14,7 @@ enum Storyboard: String {
     case enterDiagnosis = "EnterDiagnosis"
     case pleaseSelfIsolate = "PleaseSelfIsolate"
     case potential = "Potential"
+    case registration = "Registration"
 }
 
 protocol Storyboarded: class {
