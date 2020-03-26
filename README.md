@@ -21,9 +21,10 @@ infected with the novel coronavirus.
 
 Functionality
 -------------
-* Passively collect information of who the user has been in proximity with
+* Passively collect anonymized ids of other users of the app that the device has been in proximity with
   (stored locally on the device)
-* Allow the user to submit their "contact events" to NHS servers 
+* Allow the user to submit their "contact events" to NHS servers
+* Receive push notifications from NHS and inform the user of their exposure status
 
 Running the app on your own device
 ----------------------------------
