@@ -35,27 +35,6 @@ class RegistrationViewControllerTests: XCTestCase {
         XCTAssertEqual(actualRegistration?.secretKey, "super secret")
     }
 
-    func testAlreadyRegistered() {
-        let registration = Registration(id: UUID(), secretKey: "super secret")
-        try! SecureRegistrationStorage.shared.set(registration: registration)
-
-        let storyboard = UIStoryboard.init(name: "Registration", bundle: nil)
-        let vc = storyboard.instantiateViewController(identifier: "RegistrationViewController") as! RegistrationViewController
-        XCTAssertNotNil(vc.view)
-
-        let session = SessionDouble()
-        let coordinator = AppCoordinatorDouble()
-
-        vc.session = session
-        vc.coordinator = coordinator
-
-        inWindowHierarchy(viewController: vc) {
-            vc.viewWillAppear(false)
-
-            XCTAssertTrue(coordinator.enterDiagnosisWasCalled)
-        }
-    }
-
 }
 
 class SessionDouble: Session {
@@ -76,5 +55,11 @@ class AppCoordinatorDouble: AppCoordinator {
 
     override func launchEnterDiagnosis() {
         enterDiagnosisWasCalled = true
+    }
+    
+    var okNowWasCalled = false
+    
+    override func launchOkNowVC() {
+        okNowWasCalled = true
     }
 }
