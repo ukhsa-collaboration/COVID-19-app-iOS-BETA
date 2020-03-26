@@ -48,9 +48,12 @@ class RegistrationViewController: UIViewController, Storyboarded {
         }
     }
     
-    private func handleRegistration(result: Result<(), Error>) {
+    private func enableRetry() {
+        self.retryButton.isHidden = false
         self.activityIndicator.stopAnimating()
-
+    }
+    
+    private func handleRegistration(result: Result<(), Error>) {
         switch result {
         case .success(_):
             // TODO What do when fail?
@@ -58,9 +61,9 @@ class RegistrationViewController: UIViewController, Storyboarded {
 
             coordinator?.launchOkNowVC()
         case .failure(let error):
-            // TODO Log failure
+            // TODO How do we handle this failure?
             print("error during registration: \(error)")
-            self.retryButton.isHidden = false
+            self.enableRetry()
         }
     }
 }
@@ -77,8 +80,26 @@ extension RegistrationViewController : NotificationManagerDelegate {
         
         let request = RequestFactory.confirmRegistrationRequest(activationCode: activationCode, pushToken: notificationManager.pushToken!)
         session.execute(request, queue: .main) { [weak self] result in
-            // TODO: Probably need to save the registration somewhere
-            self?.coordinator?.launchEnterDiagnosis()
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let response):
+                let registration = Registration(id: response.id, secretKey: response.secretKey)
+                
+                do {
+                    try self.registrationStorage.set(registration: registration)
+                } catch {
+                    print("Error saving registration: \(error)")
+                    self.enableRetry()
+                }
+                
+                self.coordinator?.launchEnterDiagnosis()
+                
+            case .failure(let error):
+                // TODO How do we handle this failure?
+                print("error during registration: \(error)")
+                self.enableRetry()
+            }
         }
     }
 

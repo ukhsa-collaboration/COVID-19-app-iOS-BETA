@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import CryptoKit
 
 class ConfirmRegistrationRequest: Request {
     
@@ -46,7 +45,7 @@ struct ConfirmRegistrationResponse: Decodable {
     }
     
     let id: UUID
-    let secretKey: SymmetricKey
+    let secretKey: Data
 
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
@@ -54,15 +53,14 @@ struct ConfirmRegistrationResponse: Decodable {
         let id = try values.decode(UUID.self, forKey: .id)
 
         let base64SymmetricKey = try values.decode(String.self, forKey: .secretKey)
-        guard let data = Data(base64Encoded: base64SymmetricKey) else {
+        guard let secretKey = Data(base64Encoded: base64SymmetricKey) else {
             throw DecodingError.dataCorruptedError(forKey: .secretKey, in: values, debugDescription: "Invalid base64 value")
         }
         
-        let secretKey = SymmetricKey(data: data)
         self.init(id: id, secretKey: secretKey)
     }
     
-    init(id: UUID, secretKey: SymmetricKey) {
+    init(id: UUID, secretKey: Data) {
         self.id = id
         self.secretKey = secretKey
     }

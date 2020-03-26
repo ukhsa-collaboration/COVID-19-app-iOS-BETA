@@ -14,7 +14,7 @@ class ConfirmRegistrationRequestTests: XCTestCase {
     
     let activationCode = "an activation code"
     let serverGeneratedId = UUID()
-    let symmetricKey = SymmetricKey(data: Data(base64Encoded: "3bLIKs9B9UqVfqGatyJbiRGNW8zTBr2tgxYJh/el7pc=")!)
+    let symmetricKey = Data(base64Encoded: "3bLIKs9B9UqVfqGatyJbiRGNW8zTBr2tgxYJh/el7pc=")!
     let pushToken: String = "someBase64StringWeGotFromFirebase=="
 
     var request: ConfirmRegistrationRequest!

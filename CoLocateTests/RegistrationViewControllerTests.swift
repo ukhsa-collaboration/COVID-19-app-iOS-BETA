@@ -8,8 +8,6 @@
 
 import XCTest
 @testable import CoLocate
-import CryptoKit
-
 
 class RegistrationViewControllerTests: XCTestCase {
 
@@ -67,14 +65,16 @@ class RegistrationViewControllerTests: XCTestCase {
         XCTAssertFalse(appCoordinator.enterDiagnosisWasCalled)
         
         // Respond to the second request
-        let confirmationResponse = ConfirmRegistrationResponse(id: UUID(), secretKey: SymmetricKey(size: SymmetricKeySize.bits128))
+        let id = UUID()
+        let secretKey = "a secret key".data(using: .utf8)!
+        let confirmationResponse = ConfirmRegistrationResponse(id: id, secretKey: secretKey)
         session.executeCompletion!(Result<ConfirmRegistrationResponse, Error>.success(confirmationResponse))
         
         XCTAssertTrue(appCoordinator.enterDiagnosisWasCalled)
-    }
-
-    func testRegistration_withoutPreExistingPushToken() {
-        XCTFail("write this test")
+        let registration = try SecureRegistrationStorage.shared.get()
+        XCTAssertNotNil(registration)
+        XCTAssertEqual(id, registration!.id)
+        XCTAssertEqual(registration!.secretKey, secretKey)
     }
 }
 
