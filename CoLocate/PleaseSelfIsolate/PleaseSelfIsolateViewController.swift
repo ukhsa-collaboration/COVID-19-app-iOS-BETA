@@ -11,13 +11,13 @@ import UIKit
 class PleaseSelfIsolateViewController: UIViewController, Storyboarded {
     var coordinator: AppCoordinator?
 
-    @IBOutlet weak var warningView: UIView!
-    @IBOutlet weak var warningViewTitle: UILabel!
-    @IBOutlet weak var shareDiagnosisTitle: UILabel!
-    @IBOutlet weak var shareDiagnosisBody: UILabel!
-    @IBOutlet weak var shareDiagnosisButton: PrimaryButton!
-    @IBOutlet weak var moreInformationTitle: UILabel!
-    @IBOutlet weak var moreInformationBody: UILabel!
+    @IBOutlet private var warningView: UIView!
+    @IBOutlet private var warningViewTitle: UILabel!
+    @IBOutlet private var shareDiagnosisTitle: UILabel!
+    @IBOutlet private var shareDiagnosisBody: UILabel!
+    @IBOutlet private var shareDiagnosisButton: PrimaryButton!
+    @IBOutlet private var moreInformationTitle: UILabel!
+    @IBOutlet private var moreInformationBody: UILabel!
 
     let session: Session = URLSession.shared
     let requestFactory: RequestFactory = RequestFactory.shared

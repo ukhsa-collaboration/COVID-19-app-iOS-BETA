@@ -12,9 +12,9 @@ import CoreBluetooth
 class PermissionsPromptViewController: UIViewController, BTLEBroadcasterDelegate, BTLEListenerDelegate, Storyboarded {
     var coordinator: AppCoordinator?
 
-    @IBOutlet weak var bodyHeadline: UILabel!
-    @IBOutlet weak var bodyCopy: UILabel!
-    @IBOutlet weak var continueButton: UIButton!
+    @IBOutlet private var bodyHeadline: UILabel!
+    @IBOutlet private var bodyCopy: UILabel!
+    @IBOutlet private var continueButton: UIButton!
     
     private var btleReady: (listenerReady: Bool, broadcasterReady: Bool) = (false, false)
     
