@@ -36,7 +36,7 @@ class RegistrationViewController: UIViewController, Storyboarded {
         // TODO Error handling?
         let maybeRegistration = try? SecureRegistrationStorage.shared.get()
         if maybeRegistration != nil {
-            performSegue(withIdentifier: "enterDiagnosisSegue", sender: self)
+            coordinator?.launchEnterDiagnosis()
         }
     }
     
@@ -60,7 +60,7 @@ class RegistrationViewController: UIViewController, Storyboarded {
             // TODO What do when fail?
             try! SecureRegistrationStorage.shared.set(registration: registration)
 
-            self.performSegue(withIdentifier: "enterDiagnosisSegue", sender: self)
+            coordinator?.launchEnterDiagnosis()
         case .failure(let error):
             // TODO Log failure
             print("error during registration: \(error)")
