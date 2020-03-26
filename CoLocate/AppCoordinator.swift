@@ -74,10 +74,7 @@ class AppCoordinator {
     }
     
     func launchRegistrationVC() {
-        
         registrationVC.coordinator = self
-        let registrationService = ConcreteRegistrationService(session: URLSession.shared, notificationManager: notificationManager)
-        registrationVC.inject(registrationService: registrationService)
         navigationController.pushViewController(registrationVC, animated: true)
     }
     

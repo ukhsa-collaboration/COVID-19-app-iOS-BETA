@@ -12,7 +12,6 @@ import UIKit
 import Firebase
 
 protocol NotificationManagerDelegate: class {
-    func notificationManager(_ notificationManager: NotificationManager, didObtainPushToken token: String)
     func notificationManager(_ notificationManager: NotificationManager, didReceiveNotificationWithInfo userInfo: [AnyHashable : Any])
 }
 
@@ -125,7 +124,7 @@ extension ConcreteNotificationManager: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
         print("Remote instance ID token: \(fcmToken)")
         pushToken = fcmToken
-        delegate?.notificationManager(self, didObtainPushToken: fcmToken)
+        delegate?.notificationManager(self, didReceiveNotificationWithInfo: ["pushToken": pushToken])
     }
 }
 

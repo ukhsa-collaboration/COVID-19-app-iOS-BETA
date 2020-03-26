@@ -23,7 +23,7 @@ class RegistrationViewControllerTests: XCTestCase {
         let appCoordinator = AppCoordinatorDouble()
         vc.coordinator = appCoordinator
         let registrationService = RegistrationServiceDouble()
-        vc.inject(registrationService: registrationService)
+        vc.registrationService = registrationService
         XCTAssertNotNil(vc.view)
 
         vc.didTapRegister(vc.retryButton!)
@@ -39,7 +39,7 @@ class RegistrationViewControllerTests: XCTestCase {
         let appCoordinator = AppCoordinatorDouble()
         vc.coordinator = appCoordinator
         let registrationService = RegistrationServiceDouble()
-        vc.inject(registrationService: registrationService)
+        vc.registrationService = registrationService
         XCTAssertNotNil(vc.view)
 
         vc.didTapRegister(vc.retryButton!)

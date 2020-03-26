@@ -92,8 +92,7 @@ class RegistrationServiceTests: XCTestCase {
 
         // Simulate receiving the push token
         notificationManager.pushToken = "a push token"
-        notificationManager.delegate!.notificationManager(notificationManager, didObtainPushToken: "a push token")
-        
+        notificationManager.delegate?.notificationManager(notificationManager, didReceiveNotificationWithInfo: ["pushToken": "a push token"])
         // Verify the first request
         let registrationBody = (session.requestSent as! RegistrationRequest).body!
         let registrationPayload = try JSONDecoder().decode(ExpectedRegistrationRequestBody.self, from: registrationBody)

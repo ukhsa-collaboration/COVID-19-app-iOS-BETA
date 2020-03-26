@@ -16,11 +16,8 @@ class RegistrationViewController: UIViewController, Storyboarded {
     var coordinator: AppCoordinator?
     var registrationService: RegistrationService!
     var registrationStorage: SecureRegistrationStorage = SecureRegistrationStorage.shared
+    var notificationManager: NotificationManager! = ConcreteNotificationManager()
     
-    func inject(registrationService: RegistrationService) {
-        self.registrationService = registrationService
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         title = ""
@@ -54,4 +51,5 @@ class RegistrationViewController: UIViewController, Storyboarded {
         self.retryButton.isHidden = false
         self.activityIndicator.stopAnimating()
     }
+
 }

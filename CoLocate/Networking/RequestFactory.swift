@@ -12,9 +12,8 @@ import CryptoKit
 struct RequestFactory {
 
     static let shared = RequestFactory(registrationStorage: SecureRegistrationStorage.shared)
-    static let pushToken = "this should be the base64-encoded push token we get from firebase=="
 
-    static func registrationRequest() -> RegistrationRequest {
+    static func registrationRequest(pushToken: String) -> RegistrationRequest {
         return RegistrationRequest(pushToken: pushToken)
     }
     
