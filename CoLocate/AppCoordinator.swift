@@ -58,22 +58,27 @@ class AppCoordinator { //Coordinator {
     }
     
     func launchOkNowVC() {
+        okVC.coordinator = self
         navigationController.pushViewController(okVC, animated: true)
     }
     
     func launchPleaseIsolateVC() {
+        isolateVC.coordinator = self
         navigationController.pushViewController(isolateVC, animated: true)
     }
     
     func launchPotentialVC() {
+        potentialVC.coordinator = self
         navigationController.show(potentialVC, sender: self)
     }
     
     func launchRegistrationVC() {
+        registrationVC.coordinator = self
         navigationController.pushViewController(registrationVC, animated: true)
     }
     
     func launchPermissionsVC() {
+        permissionsVC.coordinator = self
         navigationController.pushViewController(permissionsVC, animated: true)
     }
 }
