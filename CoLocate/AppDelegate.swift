@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     let notificationManager = NotificationManager()
     let diagnosisService = DiagnosisService.shared
+    let appCoordinator = AppCoordinator(diagnosisService: DiagnosisService.shared)
     
     override init() {
         super.init()
@@ -47,8 +48,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func diagnosisService(_ diagnosisService: DiagnosisService, didRecordDiagnosis diagnosis: Diagnosis) {
         if diagnosis == .potential {
-            window?.rootViewController = potentialController()
+            window?.rootViewController = appCoordinator.potentialVC
         }
+        
     }
 
     // MARK: - Private
@@ -64,15 +66,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     private func initUi() {
-        let appCoordinator = AppCoordinator(diagnosisService: diagnosisService)
         appCoordinator.start()
-
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = appCoordinator.navigationController
         window?.makeKeyAndVisible()
     }
     
-    private func potentialController() -> UIViewController {
-        return UIStoryboard.init(name: "Potential", bundle: nil).instantiateInitialViewController()!
-    }
 }

@@ -21,7 +21,7 @@ class AppCoordinator { //Coordinator {
     private let okVC = OkNowViewController.instantiate(storyboard: .okNow)
     private let isolateVC = PleaseSelfIsolateViewController.instantiate(storyboard: .pleaseSelfIsolate)
     private let enterDiagnosisVC = EnterDiagnosisTableViewController.instantiate(storyboard: .enterDiagnosis)
-    private let potentialVC = PotentialViewController.instantiate(storyboard: .potential)
+    let potentialVC = PotentialViewController.instantiate(storyboard: .potential)
     private let permissionsVC = PermissionsPromptViewController.instantiate(storyboard: .permissions)
     private let registrationVC = RegistrationViewController.instantiate(storyboard: .registration)
     
