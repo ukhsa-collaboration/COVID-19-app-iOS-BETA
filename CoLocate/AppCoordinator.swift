@@ -73,6 +73,7 @@ class AppCoordinator { //Coordinator {
     }
     
     func launchRegistrationVC() {
+        registrationVC.inject()
         navigationController.pushViewController(registrationVC, animated: true)
     }
     

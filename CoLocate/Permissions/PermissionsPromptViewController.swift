@@ -30,16 +30,6 @@ class PermissionsPromptViewController: UIViewController, BTLEBroadcasterDelegate
 
         continueButton.setTitle("I understand", for: .normal)
     }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.identifier {
-        case "enterRegistrationSegue":
-            let vc = segue.destination as! RegistrationViewController
-            vc.inject()
-        default:
-            break
-        }
-    }
     
     @IBAction func didTapContinue(_ sender: UIButton) {
         segueIfBTLEReady()
@@ -75,7 +65,7 @@ class PermissionsPromptViewController: UIViewController, BTLEBroadcasterDelegate
 
     private func segueIfBTLEReady() {
         if btleReady.broadcasterReady && btleReady.listenerReady {
-            self.performSegue(withIdentifier: "enterRegistrationSegue", sender: nil)
+            coordinator?.launchRegistrationVC()
         }
     }
 }
