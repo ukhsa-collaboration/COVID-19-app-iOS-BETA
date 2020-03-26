@@ -9,21 +9,14 @@
 import UIKit
 
 class RegistrationViewController: UIViewController, Storyboarded {
-    var coordinator: AppCoordinator?
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var retryButton: UIButton!
-    
-    var urlSession: Session!
 
-    func inject(urlSession: Session) {
-        self.urlSession = urlSession
-    }
+    var coordinator: AppCoordinator?
+    var session: Session = URLSession.shared
+    var registrationStorage: SecureRegistrationStorage = SecureRegistrationStorage.shared
 
-    func inject() {
-        inject(urlSession: URLSession.shared)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,7 +27,8 @@ class RegistrationViewController: UIViewController, Storyboarded {
         super.viewWillAppear(animated)
 
         // TODO Error handling?
-        let maybeRegistration = try? SecureRegistrationStorage.shared.get()
+        // TODO (tj) inject these fields
+        let maybeRegistration = try? registrationStorage.get()
         if maybeRegistration != nil {
             coordinator?.launchEnterDiagnosis()
         }
@@ -47,7 +41,7 @@ class RegistrationViewController: UIViewController, Storyboarded {
     private func createRegistration() {
         let request = RequestFactory.registrationRequest()
 
-        urlSession.execute(request, queue: .main) { result in
+        session.execute(request, queue: .main) { result in
             self.handleRegistration(result: result)
         }
     }
@@ -58,7 +52,7 @@ class RegistrationViewController: UIViewController, Storyboarded {
         switch result {
         case .success(let registration):
             // TODO What do when fail?
-            try! SecureRegistrationStorage.shared.set(registration: registration)
+            try! registrationStorage.set(registration: registration)
 
             coordinator?.launchEnterDiagnosis()
         case .failure(let error):

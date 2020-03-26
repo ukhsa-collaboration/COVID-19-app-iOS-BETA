@@ -13,7 +13,7 @@ import CryptoKit
 class ConfirmRegistrationRequestTests: XCTestCase {
     
     let activationCode = UUID()
-    let deviceId = UUID()
+    let serverGeneratedId = UUID()
     let symmetricKey = SymmetricKey(data: Data(base64Encoded: "3bLIKs9B9UqVfqGatyJbiRGNW8zTBr2tgxYJh/el7pc=")!)
     let pushToken: String = "someBase64StringWeGotFromFirebase=="
 
@@ -44,38 +44,38 @@ class ConfirmRegistrationRequestTests: XCTestCase {
 """)
     }
 
-    // These commented tests are valid! I just wanted to check in before lunch --RA
-//    func testParseValidResponse() {
-//        let responseData =
-//        """
-//            "id": "\(deviceId.uuidString)", "secretKey": "3bLIKs9B9UqVfqGatyJbiRGNW8zTBr2tgxYJh/el7pc="
-//        """.data(using: .utf8)!
-//        let response = try? request.parse(responseData)
-//
-//        XCTAssertEqual(response?.id, deviceId)
-//        XCTAssertEqual(response?.secretKey, symmetricKey)
-//    }
-//
-//    func testParseInvalidUUID() {
-//        let responseData =
-//        """
-//        "id": "uuid-blabalabla", "secretKey": "3bLIKs9B9UqVfqGatyJbiRGNW8zTBr2tgxYJh/el7pc="
-//        """.data(using: .utf8)!
-//        let response = try? request.parse(responseData)
-//
-//        XCTAssertEqual(response?.id, deviceId)
-//        XCTAssertEqual(response?.secretKey, symmetricKey)
-//    }
-//
-//    func testParseInvalidSymmetricKey() {
-//        let responseData =
-//        """
-//        "id": "\(deviceId.uuidString)", "secretKey": "random non-base64 nonsense"
-//        """.data(using: .utf8)!
-//        let response = try? request.parse(responseData)
-//
-//        XCTAssertEqual(response?.id, deviceId)
-//        XCTAssertEqual(response?.secretKey, symmetricKey)
-//    }
+    func testParseValidResponse() {
+        let responseData =
+        """
+        {
+            "id": "\(serverGeneratedId.uuidString)", "secretKey": "3bLIKs9B9UqVfqGatyJbiRGNW8zTBr2tgxYJh/el7pc="
+        }
+        """.data(using: .utf8)!
+        let response = try? request.parse(responseData)
 
+        XCTAssertEqual(response?.id, serverGeneratedId)
+        XCTAssertEqual(response?.secretKey, symmetricKey)
+    }
+
+    func testParseInvalidUUID() {
+        let responseData =
+        """
+        {
+            "id": "uuid-blabalabla", "secretKey": "3bLIKs9B9UqVfqGatyJbiRGNW8zTBr2tgxYJh/el7pc="
+        }
+        """.data(using: .utf8)!
+
+        XCTAssertThrowsError(try request.parse(responseData))
+    }
+
+    func testParseInvalidSymmetricKey() {
+        let responseData =
+        """
+        {
+            "id": "\(serverGeneratedId.uuidString)", "secretKey": "random non-base64 nonsense"
+        }
+        """.data(using: .utf8)!
+
+        XCTAssertThrowsError(try request.parse(responseData))
+    }
  }

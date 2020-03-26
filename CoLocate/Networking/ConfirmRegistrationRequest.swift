@@ -21,10 +21,12 @@ class ConfirmRegistrationRequest: Request {
         
         let id: UUID
         let secretKey: SymmetricKey
-        
+
         init(from decoder: Decoder) throws {
             let values = try decoder.container(keyedBy: CodingKeys.self)
+
             id = try values.decode(UUID.self, forKey: .id)
+
             let base64SymmetricKey = try values.decode(String.self, forKey: .secretKey)
             if let data = Data(base64Encoded: base64SymmetricKey) {
                 secretKey = SymmetricKey(data: data)
