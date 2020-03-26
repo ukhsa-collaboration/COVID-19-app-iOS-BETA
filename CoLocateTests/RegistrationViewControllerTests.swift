@@ -22,13 +22,13 @@ class RegistrationViewControllerTests: XCTestCase {
         let vc = storyboard.instantiateViewController(identifier: "RegistrationViewController") as! RegistrationViewController
         XCTAssertNotNil(vc.view)
 
-        let urlSession = SessionDouble()
-        vc.inject(urlSession: urlSession)
+        let session = SessionDouble()
+        vc.session = session
 
         vc.didTapRegister(vc.retryButton!)
 
         let registration = Registration(id: UUID(), secretKey: "super secret")
-        urlSession.executeCompletion!(.success(registration))
+        session.executeCompletion!(.success(registration))
 
         let actualRegistration = try! SecureRegistrationStorage.shared.get()
         XCTAssertEqual(actualRegistration?.id, registration.id)
@@ -43,10 +43,10 @@ class RegistrationViewControllerTests: XCTestCase {
         let vc = storyboard.instantiateViewController(identifier: "RegistrationViewController") as! RegistrationViewController
         XCTAssertNotNil(vc.view)
 
-        let urlSession = SessionDouble()
-        vc.inject(urlSession: urlSession)
-
+        let session = SessionDouble()
         let coordinator = AppCoordinatorDouble()
+
+        vc.session = session
         vc.coordinator = coordinator
 
         inWindowHierarchy(viewController: vc) {

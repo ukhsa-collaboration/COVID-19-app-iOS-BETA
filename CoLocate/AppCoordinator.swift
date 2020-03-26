@@ -36,16 +36,13 @@ class AppCoordinator { //Coordinator {
             
             case .unknown:
                 rootViewController = registrationVC
-                
-                if let vc = (rootViewController as? RegistrationViewController) {
-                    vc.inject()
-                }
 
             case .infected:
                 rootViewController = isolateVC
 
             case .notInfected:
                 rootViewController = okVC
+
             case .potential:
                 rootViewController = potentialVC
             }
@@ -73,7 +70,6 @@ class AppCoordinator { //Coordinator {
     }
     
     func launchRegistrationVC() {
-        registrationVC.inject()
         navigationController.pushViewController(registrationVC, animated: true)
     }
     
