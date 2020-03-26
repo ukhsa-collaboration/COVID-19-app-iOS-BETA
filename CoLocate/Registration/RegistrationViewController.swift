@@ -54,7 +54,7 @@ class RegistrationViewController: UIViewController, Storyboarded {
             // TODO What do when fail?
             try! registrationStorage.set(registration: registration)
 
-            coordinator?.launchEnterDiagnosis()
+            coordinator?.launchOkNowVC()
         case .failure(let error):
             // TODO Log failure
             print("error during registration: \(error)")
