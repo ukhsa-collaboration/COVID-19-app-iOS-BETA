@@ -47,8 +47,8 @@ class ConfirmRegistrationRequestTests: XCTestCase {
     func testParseValidResponse() {
         let responseData =
         """
-            {
-                "id": "\(serverGeneratedId.uuidString)", "secretKey": "3bLIKs9B9UqVfqGatyJbiRGNW8zTBr2tgxYJh/el7pc="
+        {
+            "id": "\(serverGeneratedId.uuidString)", "secretKey": "3bLIKs9B9UqVfqGatyJbiRGNW8zTBr2tgxYJh/el7pc="
         }
         """.data(using: .utf8)!
         let response = try? request.parse(responseData)
@@ -64,9 +64,8 @@ class ConfirmRegistrationRequestTests: XCTestCase {
             "id": "uuid-blabalabla", "secretKey": "3bLIKs9B9UqVfqGatyJbiRGNW8zTBr2tgxYJh/el7pc="
         }
         """.data(using: .utf8)!
-        let response = try? request.parse(responseData)
 
-        XCTAssertNil(response)
+        XCTAssertThrowsError(try request.parse(responseData))
     }
 
     func testParseInvalidSymmetricKey() {
@@ -76,8 +75,7 @@ class ConfirmRegistrationRequestTests: XCTestCase {
             "id": "\(serverGeneratedId.uuidString)", "secretKey": "random non-base64 nonsense"
         }
         """.data(using: .utf8)!
-        let response = try? request.parse(responseData)
 
-        XCTAssertNil(response)
+        XCTAssertThrowsError(try request.parse(responseData))
     }
  }
