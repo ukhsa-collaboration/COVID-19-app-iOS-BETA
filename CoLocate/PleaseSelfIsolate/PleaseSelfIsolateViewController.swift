@@ -39,6 +39,7 @@ class PleaseSelfIsolateViewController: UIViewController, Storyboarded {
 
     @IBAction func didTapNotify(_ sender: Any) {
         let contactEvents = contactEventRecorder.contactEvents
+
         let request = requestFactory.patchContactsRequest(contactEvents: contactEvents)
 
         session.execute(request, queue: .main) { (result) in

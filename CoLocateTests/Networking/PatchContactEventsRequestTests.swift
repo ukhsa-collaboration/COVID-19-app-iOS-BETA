@@ -11,7 +11,8 @@ import XCTest
 
 class PatchContactEventsRequestTests: XCTestCase {
 
-    let deviceId = UUID(uuidString: "E9D7F53C-DE9C-46A2-961E-8302DC39558A")!
+    let anonymousId = UUID(uuidString: "E9D7F53C-DE9C-46A2-961E-8302DC39558A")!
+    let dummyKey = "this-is-a-symmetric-key-trust-me"
 
     let removeDeviceId1 = UUID(uuidString: "62D583B3-052C-4CF9-808C-0B96080F0DB8")!
     let removeDeviceId2 = UUID(uuidString: "AA94DF14-4077-4D6B-9712-D90861D8BDE7")!
@@ -26,6 +27,8 @@ class PatchContactEventsRequestTests: XCTestCase {
     let rssi3 = -21
 
     var contactEvents: [ContactEvent]!
+
+    var storage: SecureRegistrationStorage!
     
     var request: PatchContactEventsRequest!
     
@@ -36,7 +39,8 @@ class PatchContactEventsRequestTests: XCTestCase {
             ContactEvent(remoteContactId: removeDeviceId3, timestamp: timestamp3, rssi: rssi3)
         ]
 
-        request = RequestFactory(deviceId: deviceId).patchContactsRequest(contactEvents: contactEvents)
+        storage = RegistrationStorageDouble(id: anonymousId, key: dummyKey)
+        request = RequestFactory(registrationStorage: storage).patchContactsRequest(contactEvents: contactEvents)
     }
 
     func testMethod() {
@@ -44,7 +48,7 @@ class PatchContactEventsRequestTests: XCTestCase {
     }
 
     func testPath() {
-        XCTAssertEqual(request.path, "/api/residents/\(deviceId.uuidString)")
+        XCTAssertEqual(request.path, "/api/residents/\(anonymousId.uuidString)")
     }
     
     func testHeaders() {
@@ -79,4 +83,18 @@ class PatchContactEventsRequestTests: XCTestCase {
         XCTAssertEqual(String(data: request.body!, encoding: .utf8)!, expectedJsonString)
     }
 
+}
+
+class RegistrationStorageDouble: SecureRegistrationStorage {
+    let id: UUID
+    let key: String
+
+    init(id: UUID, key: String) {
+        self.id = id
+        self.key = key
+    }
+
+    override func get() throws -> Registration? {
+        return Registration(id: id, secretKey: key)
+    }
 }
