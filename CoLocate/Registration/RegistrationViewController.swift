@@ -10,8 +10,8 @@ import UIKit
 
 class RegistrationViewController: UIViewController, Storyboarded {
     
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var retryButton: UIButton!
+    @IBOutlet private var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet var retryButton: UIButton!
 
     var coordinator: AppCoordinator?
     var session: Session = URLSession.shared
@@ -29,7 +29,7 @@ class RegistrationViewController: UIViewController, Storyboarded {
         // TODO Error handling?
         let maybeRegistration = try? registrationStorage.get()
         if maybeRegistration != nil {
-            coordinator?.launchEnterDiagnosis()
+            coordinator?.launchOkNowVC()
         }
     }
     
