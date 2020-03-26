@@ -68,6 +68,7 @@
 		F78CEB6F242B92CF002254AD /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB6E242B92CF002254AD /* GoogleUtilities.framework */; };
 		F78CEB71242B9305002254AD /* GoogleDataTransport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB70242B9305002254AD /* GoogleDataTransport.framework */; };
 		F78CEB73242B937F002254AD /* nanopb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB72242B937F002254AD /* nanopb.framework */; };
+		F78CEBED242D0836002254AD /* SecureRequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78CEBEC242D0836002254AD /* SecureRequestFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -151,6 +152,7 @@
 		F78CEB70242B9305002254AD /* GoogleDataTransport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleDataTransport.framework; path = Frameworks/GoogleDataTransport.framework; sourceTree = "<group>"; };
 		F78CEB72242B937F002254AD /* nanopb.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = nanopb.framework; path = Frameworks/nanopb.framework; sourceTree = "<group>"; };
 		F78CEB74242BAC83002254AD /* CoLocate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CoLocate.entitlements; sourceTree = "<group>"; };
+		F78CEBEC242D0836002254AD /* SecureRequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRequestFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -226,6 +228,7 @@
 				214209CF242396DA00C7BFF3 /* Session.swift */,
 				214209D1242399CF00C7BFF3 /* URLSession.swift */,
 				21C417CB242CB15D00DEF3E2 /* ConfirmRegistrationRequest.swift */,
+				F78CEBEC242D0836002254AD /* SecureRequestFactory.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -552,6 +555,7 @@
 				F78CEB47242B7752002254AD /* String+localized.swift in Sources */,
 				F758B8C2242CBAF5003AE16D /* AppCoordinator.swift in Sources */,
 				21AF36AB241A8E50001A4910 /* BTLEListener.swift in Sources */,
+				F78CEBED242D0836002254AD /* SecureRequestFactory.swift in Sources */,
 				F600A600242977D50038DF57 /* RegistrationViewController.swift in Sources */,
 				F6CC2CA9242BC7FC0079432B /* NotificationManager.swift in Sources */,
 				AE2A5E502423C473007A4771 /* ContactEventRecorder.swift in Sources */,
