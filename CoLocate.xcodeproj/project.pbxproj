@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		09D1CD4B242C284000B1A167 /* PotentialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D1CD49242C284000B1A167 /* PotentialViewController.swift */; };
+		09D1CD50242C3A9300B1A167 /* Potential.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09D1CD4F242C3A9300B1A167 /* Potential.storyboard */; };
 		213C806C241A56430020EFA5 /* PermissionsPromptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213C806B241A56430020EFA5 /* PermissionsPromptViewController.swift */; };
 		214209B42420DBE100C7BFF3 /* PleaseSelfIsolateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209B32420DBE100C7BFF3 /* PleaseSelfIsolateViewController.swift */; };
 		214209B62421072C00C7BFF3 /* OkNowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209B52421072C00C7BFF3 /* OkNowViewController.swift */; };
@@ -70,6 +72,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		09D1CD49242C284000B1A167 /* PotentialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotentialViewController.swift; sourceTree = "<group>"; };
+		09D1CD4F242C3A9300B1A167 /* Potential.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Potential.storyboard; sourceTree = "<group>"; };
 		213C806B241A56430020EFA5 /* PermissionsPromptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsPromptViewController.swift; sourceTree = "<group>"; };
 		214209B32420DBE100C7BFF3 /* PleaseSelfIsolateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PleaseSelfIsolateViewController.swift; sourceTree = "<group>"; };
 		214209B52421072C00C7BFF3 /* OkNowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OkNowViewController.swift; sourceTree = "<group>"; };
@@ -284,6 +288,8 @@
 				214209B32420DBE100C7BFF3 /* PleaseSelfIsolateViewController.swift */,
 				F600A5FF242977D50038DF57 /* RegistrationViewController.swift */,
 				F67A2290242AA35B002254B6 /* SecureRegistrationStorage.swift */,
+				09D1CD49242C284000B1A167 /* PotentialViewController.swift */,
+				09D1CD4F242C3A9300B1A167 /* Potential.storyboard */,
 				6FC63C37241641BA007C8BF3 /* Assets.xcassets */,
 				A1E7A0582420028B0078174D /* NHS Colors.xcassets */,
 				21B3D2DF24263A1100573061 /* Contact Events */,
@@ -424,6 +430,7 @@
 				A1E7A0592420028B0078174D /* NHS Colors.xcassets in Resources */,
 				6FC63C38241641BA007C8BF3 /* Assets.xcassets in Resources */,
 				6FC63C36241641B8007C8BF3 /* Main.storyboard in Resources */,
+				09D1CD50242C3A9300B1A167 /* Potential.storyboard in Resources */,
 				F78CEB68242B8C2C002254AD /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -470,6 +477,7 @@
 				214209D2242399CF00C7BFF3 /* URLSession.swift in Sources */,
 				214209BA242216B700C7BFF3 /* DiagnosisService.swift in Sources */,
 				213C806C241A56430020EFA5 /* PermissionsPromptViewController.swift in Sources */,
+				09D1CD4B242C284000B1A167 /* PotentialViewController.swift in Sources */,
 				21D93C2E241FB0A300C1FA9B /* EnterDiagnosisTableViewController.swift in Sources */,
 				AEC6A7BC241BD81A00B0237A /* LogoStrapline.swift in Sources */,
 				214209D52423C83C00C7BFF3 /* PatchContactEventsRequest.swift in Sources */,

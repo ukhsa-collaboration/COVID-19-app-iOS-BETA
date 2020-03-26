@@ -36,6 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void
     ) {
         // This fires when we tap on the notification
+
         notificationManager.handleNotification(userInfo: userInfo)
     }
 
@@ -52,23 +53,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     private func initUi() {
-        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        let mainStoryboard = UIStoryboard.init(name: "Main", bundle: nil)
         let rootViewController: UIViewController?
 
         switch diagnosisService.currentDiagnosis {
 
         case .unknown:
-            rootViewController = storyboard.instantiateInitialViewController()
+            rootViewController = mainStoryboard.instantiateInitialViewController()
 
         case .infected:
-            rootViewController = storyboard.instantiateViewController(withIdentifier: "navigationController")
-            (rootViewController as? UINavigationController)?.pushViewController(storyboard.instantiateViewController(withIdentifier: "pleaseSelfIsolate"), animated: false)
+            rootViewController = mainStoryboard.instantiateViewController(withIdentifier: "navigationController")
+            (rootViewController as? UINavigationController)?.pushViewController(mainStoryboard.instantiateViewController(withIdentifier: "pleaseSelfIsolate"), animated: false)
 
         case .notInfected:
-            rootViewController = storyboard.instantiateViewController(withIdentifier: "navigationController")
-            (rootViewController as? UINavigationController)?.pushViewController(storyboard.instantiateViewController(withIdentifier: "okNowViewController"), animated: false)
+            rootViewController = mainStoryboard.instantiateViewController(withIdentifier: "navigationController")
+            (rootViewController as? UINavigationController)?.pushViewController(mainStoryboard.instantiateViewController(withIdentifier: "okNowViewController"), animated: false)
+            
         case.potential:
-            rootViewController = storyboard.instantiateInitialViewController()
+            rootViewController = UIStoryboard.init(name: "Potential", bundle: nil).instantiateInitialViewController()
         }
 
         window = UIWindow(frame: UIScreen.main.bounds)
