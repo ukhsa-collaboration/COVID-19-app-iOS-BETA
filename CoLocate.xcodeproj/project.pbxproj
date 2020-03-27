@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		098ED478242D7D050029B729 /* RegistratonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED477242D7D050029B729 /* RegistratonService.swift */; };
+		098ED47C242D801C0029B729 /* RegistrationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED47A242D7E460029B729 /* RegistrationServiceTests.swift */; };
 		09D1CD4B242C284000B1A167 /* PotentialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D1CD49242C284000B1A167 /* PotentialViewController.swift */; };
 		09D1CD50242C3A9300B1A167 /* Potential.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09D1CD4F242C3A9300B1A167 /* Potential.storyboard */; };
 		213C806C241A56430020EFA5 /* PermissionsPromptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213C806B241A56430020EFA5 /* PermissionsPromptViewController.swift */; };
@@ -81,6 +83,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		098ED477242D7D050029B729 /* RegistratonService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistratonService.swift; sourceTree = "<group>"; };
+		098ED47A242D7E460029B729 /* RegistrationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationServiceTests.swift; sourceTree = "<group>"; };
 		09D1CD49242C284000B1A167 /* PotentialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotentialViewController.swift; sourceTree = "<group>"; };
 		09D1CD4F242C3A9300B1A167 /* Potential.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Potential.storyboard; sourceTree = "<group>"; };
 		213C806B241A56430020EFA5 /* PermissionsPromptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsPromptViewController.swift; sourceTree = "<group>"; };
@@ -182,6 +186,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		098ED479242D7E340029B729 /* Registration */ = {
+			isa = PBXGroup;
+			children = (
+				F67A2294242AC188002254B6 /* RegistrationViewControllerTests.swift */,
+				098ED47A242D7E460029B729 /* RegistrationServiceTests.swift */,
+			);
+			path = Registration;
+			sourceTree = "<group>";
+		};
 		214209B72422155200C7BFF3 /* Appearance */ = {
 			isa = PBXGroup;
 			children = (
@@ -204,11 +217,11 @@
 		214209C02422276800C7BFF3 /* CoLocateTests */ = {
 			isa = PBXGroup;
 			children = (
+				098ED479242D7E340029B729 /* Registration */,
 				F6CC2CAA242BCCE90079432B /* Notifications */,
 				214209C32422276800C7BFF3 /* Info.plist */,
 				214209C9242227B300C7BFF3 /* DiagnosisServiceTests.swift */,
 				214209CD24237A6300C7BFF3 /* PlistContactEventRecorderTests.swift */,
-				F67A2294242AC188002254B6 /* RegistrationViewControllerTests.swift */,
 				F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */,
 				F68BFBF6242ACD17008EE68F /* TestHelpers.swift */,
 				214209DA242630CF00C7BFF3 /* Networking */,
@@ -396,6 +409,7 @@
 			children = (
 				F600A5FF242977D50038DF57 /* RegistrationViewController.swift */,
 				F758B8D1242CC67D003AE16D /* Registration.storyboard */,
+				098ED477242D7D050029B729 /* RegistratonService.swift */,
 			);
 			path = Registration;
 			sourceTree = "<group>";
@@ -530,6 +544,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				098ED47C242D801C0029B729 /* RegistrationServiceTests.swift in Sources */,
 				21B3D2E3242906AE00573061 /* SecureRequestTests.swift in Sources */,
 				214209CA242227B300C7BFF3 /* DiagnosisServiceTests.swift in Sources */,
 				214209CE24237A6300C7BFF3 /* PlistContactEventRecorderTests.swift in Sources */,
@@ -564,6 +579,7 @@
 				F67A2291242AA35C002254B6 /* SecureRegistrationStorage.swift in Sources */,
 				214209B42420DBE100C7BFF3 /* PleaseSelfIsolateViewController.swift in Sources */,
 				AE2DCAA0241920B600A940FC /* BTLEBroadcaster.swift in Sources */,
+				098ED478242D7D050029B729 /* RegistratonService.swift in Sources */,
 				6FC63C31241641B8007C8BF3 /* AppDelegate.swift in Sources */,
 				F600A60224297A8E0038DF57 /* RegistrationRequest.swift in Sources */,
 				214209D2242399CF00C7BFF3 /* URLSession.swift in Sources */,

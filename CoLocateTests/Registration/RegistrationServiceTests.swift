@@ -1,5 +1,5 @@
 //
-//  RegistrationViewControllerTests.swift
+//  RegistrationServiceTests.swift
 //  CoLocateTests
 //
 //  Created by NHSX.
@@ -9,7 +9,7 @@
 import XCTest
 @testable import CoLocate
 
-class RegistrationViewControllerTests: XCTestCase {
+class RegistrationServiceTests: XCTestCase {
 
     override class func setUp() {
         super.setUp()
@@ -18,21 +18,22 @@ class RegistrationViewControllerTests: XCTestCase {
     }
 
     func testRegistration_withPreExistingPushToken() throws {
-        let storyboard = UIStoryboard.init(name: "Registration", bundle: nil)
-        let vc = storyboard.instantiateViewController(identifier: "RegistrationViewController") as! RegistrationViewController
-        let appCoordinator = AppCoordinatorDouble()
-        vc.coordinator = appCoordinator
-        let notificationManager = NotificationManagerDouble()
-        notificationManager.pushToken = "the current push token"
-        vc.inject(notificationManager: notificationManager)
-        XCTAssertNotNil(vc.view)
-        vc.viewDidLoad()
-        vc.viewWillAppear(false)
-
         let session = SessionDouble()
-        vc.session = session
-
-        vc.didTapRegister(vc.retryButton!)
+        let notificationManager = NotificationManagerDouble()
+        let registrationService = ConcreteRegistrationService(session: session, notificationManager: notificationManager)
+    
+        notificationManager.pushToken = "the current push token"
+        var finished = false
+        var error: Error? = nil
+        registrationService.register(completionHandler: { r in
+            switch r {
+            case .success(_):
+                finished = true
+            case .failure(let e):
+                finished = true
+                error = e
+            }
+        })
         
         // Verify the first request
         switch (session.requestSent as! RegistrationRequest).method {
@@ -62,7 +63,7 @@ class RegistrationViewControllerTests: XCTestCase {
                 XCTFail("Expected a POST request")
         }
         
-        XCTAssertFalse(appCoordinator.enterDiagnosisWasCalled)
+        XCTAssertFalse(finished)
         
         // Respond to the second request
         let id = UUID()
@@ -70,31 +71,34 @@ class RegistrationViewControllerTests: XCTestCase {
         let confirmationResponse = ConfirmRegistrationResponse(id: id, secretKey: secretKey)
         session.executeCompletion!(Result<ConfirmRegistrationResponse, Error>.success(confirmationResponse))
         
-        XCTAssertTrue(appCoordinator.enterDiagnosisWasCalled)
+        XCTAssertTrue(finished)
+        XCTAssertNil(error)
         let registration = try SecureRegistrationStorage.shared.get()
         XCTAssertNotNil(registration)
         XCTAssertEqual(id, registration!.id)
         XCTAssertEqual(registration!.secretKey, secretKey)
     }
-
+    
+    
     func testRegistration_withoutPreExistingPushToken() throws {
-        let storyboard = UIStoryboard.init(name: "Registration", bundle: nil)
-        let vc = storyboard.instantiateViewController(identifier: "RegistrationViewController") as! RegistrationViewController
-        let appCoordinator = AppCoordinatorDouble()
-        vc.coordinator = appCoordinator
-        let notificationManager = NotificationManagerDouble()
-        vc.inject(notificationManager: notificationManager)
-        XCTAssertNotNil(vc.view)
-        vc.viewDidLoad()
-        vc.viewWillAppear(false)
-
         let session = SessionDouble()
-        vc.session = session
-
-        vc.didTapRegister(vc.retryButton!)
+        let notificationManager = NotificationManagerDouble()
+        let registrationService = ConcreteRegistrationService(session: session, notificationManager: notificationManager)
+    
+        var finished = false
+        var error: Error? = nil
+        registrationService.register(completionHandler: { r in
+            switch r {
+            case .success(_):
+                finished = true
+            case .failure(let e):
+                finished = true
+                error = e
+            }
+        })
         
         XCTAssertNil(session.requestSent)
-        
+
         // Simulate receiving the push token
         notificationManager.pushToken = "a push token"
         notificationManager.delegate!.notificationManager(notificationManager, didObtainPushToken: "a push token")
@@ -111,7 +115,7 @@ class RegistrationViewControllerTests: XCTestCase {
         // Respond to the first request
         session.requestSent = nil
         session.executeCompletion!(Result<(), Error>.success(()))
-                
+        
         // Simulate the notification containing the authorizationCode.
         // This should trigger the second request.
         let activationCode = "a3d2c477-45f5-4609-8676-c24558094600"
@@ -127,7 +131,7 @@ class RegistrationViewControllerTests: XCTestCase {
                 XCTFail("Expected a POST request")
         }
         
-        XCTAssertFalse(appCoordinator.enterDiagnosisWasCalled)
+        XCTAssertFalse(finished)
         
         // Respond to the second request
         let id = UUID()
@@ -135,7 +139,8 @@ class RegistrationViewControllerTests: XCTestCase {
         let confirmationResponse = ConfirmRegistrationResponse(id: id, secretKey: secretKey)
         session.executeCompletion!(Result<ConfirmRegistrationResponse, Error>.success(confirmationResponse))
         
-        XCTAssertTrue(appCoordinator.enterDiagnosisWasCalled)
+        XCTAssertTrue(finished)
+        XCTAssertNil(error)
         let registration = try SecureRegistrationStorage.shared.get()
         XCTAssertNotNil(registration)
         XCTAssertEqual(id, registration!.id)
@@ -143,49 +148,18 @@ class RegistrationViewControllerTests: XCTestCase {
     }
 }
 
-class NotificationManagerDouble: NotificationManager {
-    var pushToken: String?
-    
-    var delegate: NotificationManagerDelegate?
-    
-    func requestAuthorization(application: Application, completion: @escaping (Result<Bool, Error>) -> Void) {
-    }
-    
-    func handleNotification(userInfo: [AnyHashable : Any]) {
-    }
-    
-}
-
 class SessionDouble: Session {
-    let delegateQueue = OperationQueue.current!
-    
-    var requestSent: Any?
-    var executeCompletion: ((Any) -> Void)?
-    
+   let delegateQueue = OperationQueue.current!
+
+   var requestSent: Any?
+   var executeCompletion: ((Any) -> Void)?
+
     func execute<R: Request>(_ request: R, queue: OperationQueue, completion: @escaping (Result<R.ResponseType, Error>) -> Void) {
-        requestSent = request
-        executeCompletion = { result in
-            completion(result as! Result<R.ResponseType, Error>)
-        }
-    }
-}
-
-class AppCoordinatorDouble: AppCoordinator {
-    var enterDiagnosisWasCalled = false
-
-    init() {
-        super.init(diagnosisService: DiagnosisService(), notificationManager: NotificationManagerDouble())
-    }
-
-    override func launchEnterDiagnosis() {
-        enterDiagnosisWasCalled = true
-    }
-    
-    var okNowWasCalled = false
-    
-    override func launchOkNowVC() {
-        okNowWasCalled = true
-    }
+       requestSent = request
+       executeCompletion = { result in
+           completion(result as! Result<R.ResponseType, Error>)
+       }
+   }
 }
 
 private struct ExpectedRegistrationRequestBody: Codable {
