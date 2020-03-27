@@ -11,6 +11,7 @@ import UIKit
 import UIKit
 
 class OkNowViewController: UIViewController, Storyboarded {
+    static let storyboardName = "OkNow"
     var coordinator: AppCoordinator?
     
     @IBOutlet private var warningView: UIView!

@@ -10,6 +10,7 @@ import UIKit
 import CoreBluetooth
 
 class PermissionsPromptViewController: UIViewController, BTLEBroadcasterDelegate, BTLEListenerDelegate, Storyboarded {
+    static let storyboardName = "Permissions"
     var coordinator: AppCoordinator?
 
     @IBOutlet private var bodyHeadline: UILabel!

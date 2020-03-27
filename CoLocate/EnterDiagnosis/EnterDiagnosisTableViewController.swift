@@ -9,6 +9,7 @@
 import UIKit
 
 class EnterDiagnosisTableViewController: UITableViewController, Storyboarded {
+    static let storyboardName = "EnterDiagnosis"
     var coordinator: AppCoordinator?
     
     var diagnosisService: DiagnosisService = DiagnosisService.shared
