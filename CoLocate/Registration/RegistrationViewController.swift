@@ -14,9 +14,11 @@ class RegistrationViewController: UIViewController, Storyboarded {
     @IBOutlet var retryButton: UIButton!
 
     var coordinator: AppCoordinator?
-    var registrationService: RegistrationService!
     var registrationStorage: SecureRegistrationStorage = SecureRegistrationStorage.shared
+
+    var registrationService: RegistrationService!
     var notificationManager: NotificationManager!
+
     var registerWhenTokenReceived = false
 
     override func viewDidLoad() {

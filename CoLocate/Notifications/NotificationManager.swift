@@ -19,7 +19,9 @@ protocol NotificationManager {
     var pushToken: String? { get }
     
     var delegate: NotificationManagerDelegate? { get set }
-    
+
+    func configure()
+
     func requestAuthorization(
         application: Application,
         completion: @escaping (Result<Bool, Error>) -> Void

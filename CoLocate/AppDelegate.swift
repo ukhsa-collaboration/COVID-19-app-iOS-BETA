@@ -19,12 +19,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     var broadcaster: BTLEBroadcaster?
     var listener: BTLEListener?
 
-    let notificationManager = ConcreteNotificationManager()
-    let diagnosisService = DiagnosisService.shared
+    let notificationManager: NotificationManager = ConcreteNotificationManager()
+    let diagnosisService: DiagnosisService = DiagnosisService.shared
+    let registrationService: RegistrationService
+
     let appCoordinator: AppCoordinator
     
     override init() {
-        appCoordinator = AppCoordinator(diagnosisService: diagnosisService, notificationManager: notificationManager)
+        registrationService = ConcreteRegistrationService(session: URLSession.shared, notificationManager: notificationManager)
+
+        appCoordinator = AppCoordinator(diagnosisService: diagnosisService,
+                                        notificationManager: notificationManager,
+                                        registrationService: registrationService)
         super.init()
         diagnosisService.delegate = self
     }
@@ -52,7 +58,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         if diagnosis == .potential {
             window?.rootViewController = appCoordinator.potentialVC
         }
-        
     }
 
     // MARK: - Private

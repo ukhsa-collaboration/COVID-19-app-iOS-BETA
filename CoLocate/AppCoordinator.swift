@@ -12,6 +12,7 @@ class AppCoordinator {
     
     private let diagnosisService: DiagnosisService
     private let notificationManager: NotificationManager
+    private let registrationService: RegistrationService
     
     var navigationController: UINavigationController
     private let okVC = OkNowViewController.instantiate(storyboard: .okNow)
@@ -21,9 +22,11 @@ class AppCoordinator {
     private let permissionsVC = PermissionsPromptViewController.instantiate(storyboard: .permissions)
     private let registrationVC = RegistrationViewController.instantiate(storyboard: .registration)
     
-    init(diagnosisService: DiagnosisService, notificationManager: NotificationManager) {
+    init(diagnosisService: DiagnosisService, notificationManager: NotificationManager, registrationService: RegistrationService) {
         self.diagnosisService = diagnosisService
         self.notificationManager = notificationManager
+        self.registrationService = registrationService
+
         navigationController = UINavigationController()
     }
     
@@ -75,6 +78,9 @@ class AppCoordinator {
     
     func launchRegistrationVC() {
         registrationVC.coordinator = self
+        registrationVC.registrationService = registrationService
+        registrationVC.notificationManager = notificationManager
+
         navigationController.pushViewController(registrationVC, animated: true)
     }
     

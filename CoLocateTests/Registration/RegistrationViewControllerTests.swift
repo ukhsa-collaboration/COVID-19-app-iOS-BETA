@@ -59,7 +59,9 @@ class AppCoordinatorDouble: AppCoordinator {
     var enterDiagnosisWasCalled = false
 
     init() {
-        super.init(diagnosisService: DiagnosisService(), notificationManager: NotificationManagerDouble())
+        super.init(diagnosisService: DiagnosisService(),
+                   notificationManager: NotificationManagerDouble(),
+                   registrationService: RegistrationServiceDouble())
     }
 
     override func launchEnterDiagnosis() {
@@ -77,6 +79,8 @@ class NotificationManagerDouble: NotificationManager {
     var pushToken: String?
 
     var delegate: NotificationManagerDelegate?
+
+    func configure() { }
 
     func requestAuthorization(application: Application, completion: @escaping (Result<Bool, Error>) -> Void) {
     }
