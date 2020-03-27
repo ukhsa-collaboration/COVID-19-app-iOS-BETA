@@ -65,7 +65,7 @@ class PermissionsPromptViewController: UIViewController, BTLEBroadcasterDelegate
 
     private func segueIfBTLEReady() {
         if btleReady.broadcasterReady && btleReady.listenerReady {
-            coordinator?.launchRegistrationVC()
+            coordinator?.showViewAfterPermissions()
         }
     }
 }

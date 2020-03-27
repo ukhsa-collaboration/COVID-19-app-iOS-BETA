@@ -14,7 +14,7 @@ class AppCoordinator {
     private let notificationManager: NotificationManager
     private let registrationService: RegistrationService
     
-    var navigationController: UINavigationController
+    var navigationController: RootViewController
     private let okVC = OkNowViewController.instantiate(storyboard: .okNow)
     private let isolateVC = PleaseSelfIsolateViewController.instantiate(storyboard: .pleaseSelfIsolate)
     private let enterDiagnosisVC = EnterDiagnosisTableViewController.instantiate(storyboard: .enterDiagnosis)
@@ -27,13 +27,13 @@ class AppCoordinator {
         self.notificationManager = notificationManager
         self.registrationService = registrationService
 
-        navigationController = UINavigationController()
+        navigationController = RootViewController()
     }
     
     func start() {
         let vc = initialViewController()
         vc.coordinator = self
-        navigationController = UINavigationController(rootViewController: vc)
+        navigationController.viewControllers = [vc]
     }
     
     func initialViewController() -> UIViewController & Storyboarded {
@@ -76,16 +76,36 @@ class AppCoordinator {
         navigationController.show(potentialVC, sender: self)
     }
     
-    func launchRegistrationVC() {
-        registrationVC.coordinator = self
-        registrationVC.registrationService = registrationService
-        registrationVC.notificationManager = notificationManager
+    func showViewAfterPermissions() {
+        if try! SecureRegistrationStorage.shared.get() == nil {
+            launchRegistrationVC()
+        } else {
+            switch diagnosisService.currentDiagnosis {
+            case .unknown:
+                launchEnterDiagnosis()
 
-        navigationController.pushViewController(registrationVC, animated: true)
+            case .infected:
+                launchPleaseIsolateVC()
+
+            case .notInfected:
+                launchOkNowVC()
+
+            case .potential:
+                launchPotentialVC()
+            }
+        }
     }
     
     func launchPermissionsVC() {
         permissionsVC.coordinator = self
         navigationController.pushViewController(permissionsVC, animated: true)
+    }
+    
+    private func launchRegistrationVC() {
+        registrationVC.coordinator = self
+        registrationVC.registrationService = registrationService
+        registrationVC.notificationManager = notificationManager
+
+        navigationController.pushViewController(registrationVC, animated: true)
     }
 }
