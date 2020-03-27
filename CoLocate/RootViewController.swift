@@ -24,18 +24,18 @@ class RootViewController: UINavigationController {
             showDebugView()
         }
     }
-    
-        
+
     private func showDebugView() {
         let storyboard = UIStoryboard(name: "Debug", bundle: nil)
-        let debugVC = storyboard.instantiateInitialViewController() as! DebugViewController
-        debugVC.delegate = self
+        guard let debugVC = storyboard.instantiateInitialViewController() else { return }
         self.present(debugVC, animated: true)
     }
-}
 
-extension RootViewController: DebugViewControllerDelegate {
-    func debugViewControllerWantsToExit(_ sender: DebugViewController) -> Void {
-        dismiss(animated: true)
+    override func canPerformUnwindSegueAction(_ action: Selector, from fromViewController: UIViewController, sender: Any?) -> Bool {
+        return type(of: fromViewController) == DebugViewController.self
     }
+
+    @IBAction func unwindFromDebugViewController(unwindSegue: UIStoryboardSegue) {
+    }
+
 }
