@@ -8,27 +8,22 @@
 
 import UIKit
 
-protocol DebugViewControllerDelegate: class {
-    func debugViewControllerWantsToExit(_ sender: DebugViewController) -> Void
-}
+class DebugViewController: UITableViewController {
 
-class DebugViewController: UIViewController {
-    
-    weak var delegate: DebugViewControllerDelegate?
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
 
-    @IBAction func clearRegistrationTapped() {
-        try! SecureRegistrationStorage.shared.clear()
-        DiagnosisService.shared.recordDiagnosis(.unknown)
-        show(message: "Registration and diagnosis data has been cleared. Please stop and re-start the application.")
-    }
-    
-    @IBAction func clearDiagnosisTapped() {
-        DiagnosisService.shared.recordDiagnosis(.unknown)
-        show(message: "Diagnosis data has been cleared. Please stop and re-start the application.")
-    }
-    
-    @IBAction func exitTapped() {
-        delegate?.debugViewControllerWantsToExit(self)
+        switch indexPath.row {
+        case 0:
+            try! SecureRegistrationStorage.shared.clear()
+            DiagnosisService.shared.recordDiagnosis(.unknown)
+            show(message: "Registration and diagnosis data has been cleared. Please stop and re-start the application.")
+        case 1:
+            DiagnosisService.shared.recordDiagnosis(.unknown)
+            show(message: "Diagnosis data has been cleared. Please stop and re-start the application.")
+        default:
+            fatalError()
+        }
     }
     
     private func show(message: String) {
@@ -36,4 +31,5 @@ class DebugViewController: UIViewController {
         alertController.addAction(UIAlertAction(title: "Ok", style: .default))
         present(alertController, animated: true, completion: nil)
     }
+
 }
