@@ -76,16 +76,36 @@ class AppCoordinator {
         navigationController.show(potentialVC, sender: self)
     }
     
-    func launchRegistrationVC() {
-        registrationVC.coordinator = self
-        registrationVC.registrationService = registrationService
-        registrationVC.notificationManager = notificationManager
+    func showViewAfterPermissions() {
+        if try! SecureRegistrationStorage.shared.get() == nil {
+            launchRegistrationVC()
+        } else {
+            switch diagnosisService.currentDiagnosis {
+            case .unknown:
+                launchEnterDiagnosis()
 
-        navigationController.pushViewController(registrationVC, animated: true)
+            case .infected:
+                launchPleaseIsolateVC()
+
+            case .notInfected:
+                launchOkNowVC()
+
+            case .potential:
+                launchPotentialVC()
+            }
+        }
     }
     
     func launchPermissionsVC() {
         permissionsVC.coordinator = self
         navigationController.pushViewController(permissionsVC, animated: true)
+    }
+    
+    private func launchRegistrationVC() {
+        registrationVC.coordinator = self
+        registrationVC.registrationService = registrationService
+        registrationVC.notificationManager = notificationManager
+
+        navigationController.pushViewController(registrationVC, animated: true)
     }
 }

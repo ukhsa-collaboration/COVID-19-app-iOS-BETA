@@ -74,25 +74,3 @@ class AppCoordinatorDouble: AppCoordinator {
         okNowWasCalled = true
     }
 }
-
-class NotificationManagerDouble: NotificationManager {
-    var pushToken: String?
-
-    var delegate: NotificationManagerDelegate?
-
-    func configure() { }
-
-    func requestAuthorization(application: Application, completion: @escaping (Result<Bool, Error>) -> Void) {
-    }
-
-    func handleNotification(userInfo: [AnyHashable : Any]) {
-    }
-}
-
-class RegistrationServiceDouble: RegistrationService {
-    var completionHandler: ((Result<(), Error>) -> Void)?
-    
-    func register(completionHandler: @escaping ((Result<(), Error>) -> Void)) {
-        self.completionHandler = completionHandler
-    }
-}
