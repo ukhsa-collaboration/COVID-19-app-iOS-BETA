@@ -9,23 +9,20 @@
 import UIKit
 
 class AppCoordinator {
-    
+    private let navController: UINavigationController
     private let diagnosisService: DiagnosisService
     private let notificationManager: NotificationManager
     private let registrationService: RegistrationService
-    
-    var navigationController: RootViewController
-    
-    init(diagnosisService: DiagnosisService, notificationManager: NotificationManager, registrationService: RegistrationService) {
+        
+    init(navController: UINavigationController, diagnosisService: DiagnosisService, notificationManager: NotificationManager, registrationService: RegistrationService) {
+        self.navController = navController
         self.diagnosisService = diagnosisService
         self.notificationManager = notificationManager
         self.registrationService = registrationService
-
-        navigationController = RootViewController()
     }
     
     func start() {
-        navigationController.viewControllers = [initialViewController()]
+        navController.viewControllers = [initialViewController()]
     }
     
     func initialViewController() -> UIViewController & Storyboarded {
@@ -44,53 +41,27 @@ class AppCoordinator {
         }
     }
     
-    func launchEnterDiagnosis() {
-        navigationController.pushViewController(enterDiagnosisVC(), animated: true)
-    }
-    
-    func launchOkNowVC() {
-        navigationController.pushViewController(okVC(), animated: true)
-    }
-    
-    func goBack() {
-        navigationController.popViewController(animated: true)
-    }
-    
-    func launchPleaseIsolateVC() {
-        navigationController.pushViewController(isolateVC(), animated: true)
-    }
-    
-    func launchPotentialVC() {
-        navigationController.show(potentialVC(), sender: self)
-    }
-    
     func showViewAfterPermissions() {
-        if try! SecureRegistrationStorage.shared.get() == nil {
-            launchRegistrationVC()
-        } else {
-            switch diagnosisService.currentDiagnosis {
-            case .unknown:
-                launchEnterDiagnosis()
-
-            case .infected:
-                launchPleaseIsolateVC()
-
-            case .notInfected:
-                launchOkNowVC()
-
-            case .potential:
-                launchPotentialVC()
-            }
+        navController.pushViewController(vcAfterPermissions(), animated: true)
+    }
+    
+    func showViewAfterRegistration() {
+        navController.pushViewController(enterDiagnosisVC(), animated: true)
+    }
+    
+    private func vcAfterPermissions() -> UIViewController {
+        let registered = try! SecureRegistrationStorage.shared.get() != nil
+        let currentDiagnosis = diagnosisService.currentDiagnosis
+        
+        switch (registered, currentDiagnosis) {
+        case (false, _): return registrationVC()
+        case (_, .unknown): return enterDiagnosisVC()
+        case (_, .infected): return isolateVC()
+        case (_, .notInfected): return okVC()
+        case (_, .potential): return potentialVC()
         }
     }
-    
-    func launchPermissionsVC() {
-        navigationController.pushViewController(permissionsVC(), animated: true)
-    }
-    
-    private func launchRegistrationVC() {
-        navigationController.pushViewController(registrationVC(), animated: true)
-    }
+
     
     private func okVC() -> OkNowViewController {
         let vc = OkNowViewController.instantiate()

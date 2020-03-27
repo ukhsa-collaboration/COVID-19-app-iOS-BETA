@@ -17,44 +17,48 @@ class AppCoordinatorTests: XCTestCase {
     }
     
     func testShowViewAfterPermissions_notRegistered() {
-        let coordinator = AppCoordinator(diagnosisService: DiagnosisService(), notificationManager: NotificationManagerDouble(), registrationService: RegistrationServiceDouble())
+        let navController = UINavigationController()
+        let coordinator = AppCoordinator(navController: navController, diagnosisService: DiagnosisService(), notificationManager: NotificationManagerDouble(), registrationService: RegistrationServiceDouble())
         
         coordinator.showViewAfterPermissions()
         
-        XCTAssertNotNil(coordinator.navigationController.topViewController as? RegistrationViewController)
+        XCTAssertNotNil(navController.topViewController as? RegistrationViewController)
     }
     
     func testShowViewAfterPermissions_registered_diagnosisUnknown() {
         register()
         let diagnosisService = DiagnosisServiceDouble()
         diagnosisService.currentDiagnosis = .unknown
-        let coordinator = AppCoordinator(diagnosisService: diagnosisService, notificationManager: NotificationManagerDouble(), registrationService: RegistrationServiceDouble())
+        let navController = UINavigationController()
+        let coordinator = AppCoordinator(navController: navController, diagnosisService: diagnosisService, notificationManager: NotificationManagerDouble(), registrationService: RegistrationServiceDouble())
         
         coordinator.showViewAfterPermissions()
         
-        XCTAssertNotNil(coordinator.navigationController.topViewController as? EnterDiagnosisTableViewController)
+        XCTAssertNotNil(navController.topViewController as? EnterDiagnosisTableViewController)
     }
     
     func testShowViewAfterPermissions_registered_diagnosisInfected() {
         register()
         let diagnosisService = DiagnosisServiceDouble()
         diagnosisService.currentDiagnosis = .infected
-        let coordinator = AppCoordinator(diagnosisService: diagnosisService, notificationManager: NotificationManagerDouble(), registrationService: RegistrationServiceDouble())
+        let navController = UINavigationController()
+        let coordinator = AppCoordinator(navController: navController, diagnosisService: diagnosisService, notificationManager: NotificationManagerDouble(), registrationService: RegistrationServiceDouble())
 
         coordinator.showViewAfterPermissions()
         
-        XCTAssertNotNil(coordinator.navigationController.topViewController as? PleaseSelfIsolateViewController)
+        XCTAssertNotNil(navController.topViewController as? PleaseSelfIsolateViewController)
     }
     
     func testShowViewAfterPermissions_registered_diagnosisNotInfected() {
         register()
         let diagnosisService = DiagnosisServiceDouble()
         diagnosisService.currentDiagnosis = .notInfected
-        let coordinator = AppCoordinator(diagnosisService: diagnosisService, notificationManager: NotificationManagerDouble(), registrationService: RegistrationServiceDouble())
+        let navController = UINavigationController()
+        let coordinator = AppCoordinator(navController: navController, diagnosisService: diagnosisService, notificationManager: NotificationManagerDouble(), registrationService: RegistrationServiceDouble())
 
         coordinator.showViewAfterPermissions()
         
-        XCTAssertNotNil(coordinator.navigationController.topViewController as? OkNowViewController)
+        XCTAssertNotNil(navController.topViewController as? OkNowViewController)
     }
 
     
@@ -62,11 +66,12 @@ class AppCoordinatorTests: XCTestCase {
         register()
         let diagnosisService = DiagnosisServiceDouble()
         diagnosisService.currentDiagnosis = .potential
-        let coordinator = AppCoordinator(diagnosisService: diagnosisService, notificationManager: NotificationManagerDouble(), registrationService: RegistrationServiceDouble())
+        let navController = UINavigationController()
+        let coordinator = AppCoordinator(navController: navController, diagnosisService: diagnosisService, notificationManager: NotificationManagerDouble(), registrationService: RegistrationServiceDouble())
 
         coordinator.showViewAfterPermissions()
         
-        XCTAssertNotNil(coordinator.navigationController.topViewController as? PotentialViewController)
+        XCTAssertNotNil(navController.topViewController as? PotentialViewController)
     }
 
     private func register() {

@@ -34,7 +34,7 @@ class RegistrationViewController: UIViewController, Storyboarded {
             
             switch result {
             case .success(_):
-                self.coordinator?.launchEnterDiagnosis()
+                self.coordinator?.showViewAfterPermissions()
             case .failure(_):
                 self.enableRetry()
             }

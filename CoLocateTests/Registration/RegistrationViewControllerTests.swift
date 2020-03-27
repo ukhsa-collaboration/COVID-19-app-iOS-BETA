@@ -27,10 +27,10 @@ class RegistrationViewControllerTests: XCTestCase {
         XCTAssertNotNil(vc.view)
 
         vc.didTapRegister(vc.retryButton!)
-        XCTAssertFalse(appCoordinator.enterDiagnosisWasCalled)
+        XCTAssertFalse(appCoordinator.showViewAfterPermissionsWasCalled)
         
         registrationService.completionHandler!(.success(()))
-        XCTAssertTrue(appCoordinator.enterDiagnosisWasCalled)
+        XCTAssertTrue(appCoordinator.showViewAfterPermissionsWasCalled)
     }
     
     func testRegistration_failure() {
@@ -45,7 +45,7 @@ class RegistrationViewControllerTests: XCTestCase {
         vc.didTapRegister(vc.retryButton!)
         
         registrationService.completionHandler!(.failure(ErrorForTest()))
-        XCTAssertFalse(appCoordinator.enterDiagnosisWasCalled)
+        XCTAssertFalse(appCoordinator.showViewAfterPermissionsWasCalled)
         XCTAssertFalse(vc.retryButton.isHidden)
     }
 
@@ -56,21 +56,16 @@ class ErrorForTest: Error {
 }
 
 class AppCoordinatorDouble: AppCoordinator {
-    var enterDiagnosisWasCalled = false
+    var showViewAfterPermissionsWasCalled = false
 
     init() {
-        super.init(diagnosisService: DiagnosisService(),
+        super.init(navController: UINavigationController(),
+                   diagnosisService: DiagnosisService(),
                    notificationManager: NotificationManagerDouble(),
                    registrationService: RegistrationServiceDouble())
     }
 
-    override func launchEnterDiagnosis() {
-        enterDiagnosisWasCalled = true
-    }
-    
-    var okNowWasCalled = false
-    
-    override func launchOkNowVC() {
-        okNowWasCalled = true
+    override func showViewAfterPermissions() {
+        showViewAfterPermissionsWasCalled = true
     }
 }

@@ -42,7 +42,9 @@ class OkNowViewController: UIViewController, Storyboarded {
     }
     
     @objc func tapCheckMySymptomsButton() {
-        coordinator?.launchEnterDiagnosis()
+        let enterDiagnosisVC = EnterDiagnosisTableViewController.instantiate()
+        enterDiagnosisVC.coordinator = coordinator
+        navigationController?.pushViewController(enterDiagnosisVC, animated: true)
     }
 }
 
