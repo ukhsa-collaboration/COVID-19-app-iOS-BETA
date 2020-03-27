@@ -16,17 +16,29 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9FX-aK-QIA">
-                                <rect key="frame" x="187.5" y="433" width="39" height="30"/>
+                                <rect key="frame" x="187.5" y="819" width="39" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="elh-Eu-Qss"/>
+                                </constraints>
                                 <state key="normal" title="Close"/>
                                 <connections>
                                     <action selector="exitTapped" destination="Om5-2G-0nj" eventType="touchUpInside" id="QJ1-Qj-Jbu"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6wG-Y5-AZ5">
+                                <rect key="frame" x="130.5" y="433" width="153" height="30"/>
+                                <state key="normal" title="Clear registration data"/>
+                                <connections>
+                                    <action selector="clearRegistrationTapped" destination="Om5-2G-0nj" eventType="touchUpInside" id="DIz-Ic-sBs"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="9FX-aK-QIA" firstAttribute="centerX" secondItem="Qt8-9h-hpI" secondAttribute="centerX" id="DNy-hW-7B9"/>
-                            <constraint firstItem="9FX-aK-QIA" firstAttribute="centerY" secondItem="Qt8-9h-hpI" secondAttribute="centerY" id="nS0-oW-PKm"/>
+                            <constraint firstItem="vqa-sT-Bfm" firstAttribute="bottom" secondItem="9FX-aK-QIA" secondAttribute="bottom" constant="13" id="Agv-yn-2Xh"/>
+                            <constraint firstItem="6wG-Y5-AZ5" firstAttribute="centerX" secondItem="Qt8-9h-hpI" secondAttribute="centerX" id="YrW-8c-6no"/>
+                            <constraint firstItem="6wG-Y5-AZ5" firstAttribute="centerY" secondItem="Qt8-9h-hpI" secondAttribute="centerY" id="elU-Y2-B5z"/>
+                            <constraint firstItem="9FX-aK-QIA" firstAttribute="centerX" secondItem="Qt8-9h-hpI" secondAttribute="centerX" id="fJr-FO-6w0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vqa-sT-Bfm"/>
                     </view>
