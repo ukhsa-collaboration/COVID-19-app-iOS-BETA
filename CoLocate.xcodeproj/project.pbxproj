@@ -47,6 +47,7 @@
 		F67A2295242AC188002254B6 /* RegistrationViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A2294242AC188002254B6 /* RegistrationViewControllerTests.swift */; };
 		F68BFBF7242ACD17008EE68F /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68BFBF6242ACD17008EE68F /* TestHelpers.swift */; };
 		F6A309D124298A5800865942 /* Development.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F6A309D024298A5800865942 /* Development.xcconfig */; };
+		F6CA2817242E416C00F8DC55 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F6CA2816242E416C00F8DC55 /* Release.xcconfig */; };
 		F6CC2CA9242BC7FC0079432B /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CC2CA8242BC7FC0079432B /* NotificationManager.swift */; };
 		F6CC2CAC242BCD0D0079432B /* NotificationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CC2CAB242BCD0D0079432B /* NotificationManagerTests.swift */; };
 		F758553A24294C8D00CBE1ED /* RequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F758553924294C8C00CBE1ED /* RequestFactory.swift */; };
@@ -129,6 +130,7 @@
 		F67A2294242AC188002254B6 /* RegistrationViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewControllerTests.swift; sourceTree = "<group>"; };
 		F68BFBF6242ACD17008EE68F /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		F6A309D024298A5800865942 /* Development.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
+		F6CA2816242E416C00F8DC55 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		F6CC2CA8242BC7FC0079432B /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		F6CC2CAB242BCD0D0079432B /* NotificationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManagerTests.swift; sourceTree = "<group>"; };
 		F758553924294C8C00CBE1ED /* RequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFactory.swift; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 			children = (
 				F78CEB63242B809B002254AD /* Firebase */,
 				F6A309D024298A5800865942 /* Development.xcconfig */,
+				F6CA2816242E416C00F8DC55 /* Release.xcconfig */,
 				6FC63C2F241641B8007C8BF3 /* CoLocate */,
 				214209C02422276800C7BFF3 /* CoLocateTests */,
 				6FC63C2E241641B8007C8BF3 /* Products */,
@@ -536,6 +539,7 @@
 				F758B8CC242CC1F7003AE16D /* EnterDiagnosis.storyboard in Resources */,
 				6FC63C38241641BA007C8BF3 /* Assets.xcassets in Resources */,
 				09D1CD50242C3A9300B1A167 /* Potential.storyboard in Resources */,
+				F6CA2817242E416C00F8DC55 /* Release.xcconfig in Resources */,
 				F78CEB68242B8C2C002254AD /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -812,6 +816,7 @@
 		};
 		6FC63C41241641BA007C8BF3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F6CA2816242E416C00F8DC55 /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
