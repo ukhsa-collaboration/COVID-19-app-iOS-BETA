@@ -32,7 +32,8 @@ Functionality
 ### Setup
 
 - `cp Development.xcconfig.sample Development.xcconfig`
-- Replace the values in `Development.xcconfig` with the correct ones - you will
+- `cp Development.xcconfig.sample Release.xcconfig`
+- Replace the values in `Development.xcconfig` and `Release.xcconfig` with the correct ones - you will
   need to get these from another developer.
 
 ### Notifications
