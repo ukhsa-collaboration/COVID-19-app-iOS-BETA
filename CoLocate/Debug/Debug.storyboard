@@ -26,8 +26,8 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6wG-Y5-AZ5">
-                                <rect key="frame" x="130.5" y="433" width="153" height="30"/>
-                                <state key="normal" title="Clear registration data"/>
+                                <rect key="frame" x="98.5" y="433" width="217" height="30"/>
+                                <state key="normal" title="Clear registration and diagnosis"/>
                                 <connections>
                                     <action selector="clearRegistrationTapped" destination="Om5-2G-0nj" eventType="touchUpInside" id="DIz-Ic-sBs"/>
                                 </connections>

@@ -18,7 +18,8 @@ class DebugViewController: UIViewController {
 
     @IBAction func clearRegistrationTapped() {
         try! SecureRegistrationStorage.shared.clear()
-        let alertController = UIAlertController(title: "Cleared", message: "Registration data has been cleared. Please kill and re-start the application.", preferredStyle: .alert)
+        DiagnosisService.shared.recordDiagnosis(.unknown)
+        let alertController = UIAlertController(title: "Cleared", message: "Registration and diagnosis data has been cleared. Please kill and re-start the application.", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Ok", style: .default))
         present(alertController, animated: true, completion: nil)
     }
