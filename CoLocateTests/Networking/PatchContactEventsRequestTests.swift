@@ -12,7 +12,7 @@ import XCTest
 class PatchContactEventsRequestTests: XCTestCase {
 
     let anonymousId = UUID(uuidString: "E9D7F53C-DE9C-46A2-961E-8302DC39558A")!
-    let dummyKey = "this-is-a-symmetric-key-trust-me"
+    let dummyKey = "this-is-a-symmetric-key-trust-me".data(using: .utf8)!
 
     let removeDeviceId1 = UUID(uuidString: "62D583B3-052C-4CF9-808C-0B96080F0DB8")!
     let removeDeviceId2 = UUID(uuidString: "AA94DF14-4077-4D6B-9712-D90861D8BDE7")!
@@ -87,9 +87,9 @@ class PatchContactEventsRequestTests: XCTestCase {
 
 class RegistrationStorageDouble: SecureRegistrationStorage {
     let id: UUID
-    let key: String
+    let key: Data
 
-    init(id: UUID, key: String) {
+    init(id: UUID, key: Data) {
         self.id = id
         self.key = key
     }

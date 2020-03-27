@@ -11,9 +11,9 @@ import Security
 
 struct Registration: Codable {
     let id: UUID
-    let secretKey: String
+    let secretKey: Data
 
-    init(id: UUID, secretKey: String) {
+    init(id: UUID, secretKey: Data) {
         self.id = id
         self.secretKey = secretKey
     }
@@ -49,28 +49,23 @@ class SecureRegistrationStorage {
 
         guard let item = result as? [String : Any],
             let data = item[kSecValueData as String] as? Data,
-            let secretKey = String(data: data, encoding: String.Encoding.utf8),
             let idString = item[kSecAttrAccount as String] as? String,
             let id = UUID(uuidString: idString) else {
                 // TODO log this error?
                 return nil
         }
 
-        return Registration(id: id, secretKey: secretKey)
+        return Registration(id: id, secretKey: data)
     }
 
     func set(registration: Registration) throws {
-        guard let secretKey = registration.secretKey.data(using: .utf8) else {
-            throw Error.invalidSecretKey
-        }
-
         try clear()
 
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: SecureRegistrationStorage.secService,
             kSecAttrAccount as String: registration.id.uuidString,
-            kSecValueData as String: secretKey,
+            kSecValueData as String: registration.secretKey,
         ]
         let status = SecItemAdd(query as CFDictionary, nil)
 

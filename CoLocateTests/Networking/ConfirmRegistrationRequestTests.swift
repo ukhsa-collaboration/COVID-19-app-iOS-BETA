@@ -12,9 +12,9 @@ import CryptoKit
 
 class ConfirmRegistrationRequestTests: XCTestCase {
     
-    let activationCode = UUID()
+    let activationCode = "an activation code"
     let serverGeneratedId = UUID()
-    let symmetricKey = SymmetricKey(data: Data(base64Encoded: "3bLIKs9B9UqVfqGatyJbiRGNW8zTBr2tgxYJh/el7pc=")!)
+    let symmetricKey = Data(base64Encoded: "3bLIKs9B9UqVfqGatyJbiRGNW8zTBr2tgxYJh/el7pc=")!
     let pushToken: String = "someBase64StringWeGotFromFirebase=="
 
     var request: ConfirmRegistrationRequest!
@@ -40,7 +40,7 @@ class ConfirmRegistrationRequestTests: XCTestCase {
     func testBody() {
         XCTAssertEqual(String(data: request.body!, encoding: .utf8)!,
 """
-{"pushToken":"someBase64StringWeGotFromFirebase==","activationCode":"\(activationCode.uuidString)"}
+{"pushToken":"someBase64StringWeGotFromFirebase==","activationCode":"\(activationCode)"}
 """)
     }
 

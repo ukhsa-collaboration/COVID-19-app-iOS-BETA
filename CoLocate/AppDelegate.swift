@@ -19,11 +19,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     var broadcaster: BTLEBroadcaster?
     var listener: BTLEListener?
 
-    let notificationManager = NotificationManager()
+    let notificationManager = ConcreteNotificationManager()
     let diagnosisService = DiagnosisService.shared
-    let appCoordinator = AppCoordinator(diagnosisService: DiagnosisService.shared)
+    let appCoordinator: AppCoordinator
     
     override init() {
+        appCoordinator = AppCoordinator(diagnosisService: diagnosisService, notificationManager: notificationManager)
         super.init()
         diagnosisService.delegate = self
     }
@@ -41,14 +42,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         didReceiveRemoteNotification userInfo: [AnyHashable : Any],
         fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void
     ) {
-        // This fires when we tap on the notification
-
         print("didReceiveRemoteNotification")
 
         notificationManager.handleNotification(userInfo: userInfo)
-
-        // TODO make this correct
-        completionHandler(UIBackgroundFetchResult.noData)
+        completionHandler(UIBackgroundFetchResult.newData)
     }
     
     func diagnosisService(_ diagnosisService: DiagnosisService, didRecordDiagnosis diagnosis: Diagnosis) {

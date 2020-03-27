@@ -9,6 +9,7 @@
 import Foundation
 
 import XCTest
+import Firebase
 @testable import CoLocate
 
 class NotificationManagerTests: XCTestCase {
@@ -20,10 +21,11 @@ class NotificationManagerTests: XCTestCase {
     }
 
     func testConfigure() {
-        let notificationManager = NotificationManager(
+        let messaging = MessagingDouble()
+        let notificationManager = ConcreteNotificationManager(
             uiQueue: .main,
             firebase: FirebaseAppDouble.self,
-            messagingFactory: { MessagingDouble() },
+            messagingFactory: { messaging },
             userNotificationCenter: NotificationCenterDouble(),
             diagnosisService: DiagnosisService()
         )
@@ -32,10 +34,29 @@ class NotificationManagerTests: XCTestCase {
 
         XCTAssertTrue(FirebaseAppDouble.configureCalled)
     }
+    
+    func testPushTokenHandling() {
+        let messaging = MessagingDouble()
+        let notificationManager = ConcreteNotificationManager(
+            uiQueue: .main,
+            firebase: FirebaseAppDouble.self,
+            messagingFactory: { messaging },
+            userNotificationCenter: NotificationCenterDouble(),
+            diagnosisService: DiagnosisService()
+        )
+        let delegate = NotificationManagerDelegateDouble()
+        notificationManager.delegate = delegate
+
+        notificationManager.configure()
+        // Ugh, can't find a way to not pass a real Messaging here. Should be ok as long as the actual delegate method doesn't use it.
+        messaging.delegate!.messaging?(Messaging.messaging(), didReceiveRegistrationToken: "12345")
+        XCTAssertEqual("12345", notificationManager.pushToken)
+        XCTAssertEqual("12345", delegate.userInfo?["pushToken"] as! String)
+    }
 
     func testRequestAuthorization_success() {
         let notificationCenterDouble = NotificationCenterDouble()
-        let notificationManager = NotificationManager(
+        let notificationManager = ConcreteNotificationManager(
             uiQueue: DispatchQueue.test,
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
@@ -63,7 +84,7 @@ class NotificationManagerTests: XCTestCase {
     
     func testHandleNotification_savesPotentialDiagnosis() {
         let diagnosisService = DiagnosisService()
-        let notificationManager = NotificationManager(
+        let notificationManager = ConcreteNotificationManager(
             uiQueue: DispatchQueue.test,
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
@@ -78,7 +99,7 @@ class NotificationManagerTests: XCTestCase {
     
     func testHandleNotification_doesNotSaveOtherDiagnosis() {
         let diagnosisService = DiagnosisService()
-        let notificationManager = NotificationManager(
+        let notificationManager = ConcreteNotificationManager(
             uiQueue: DispatchQueue.test,
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
@@ -89,6 +110,22 @@ class NotificationManagerTests: XCTestCase {
         notificationManager.handleNotification(userInfo: ["diagnosis" : "infected"])
         
         XCTAssertEqual(diagnosisService.currentDiagnosis, .unknown)
+    }
+    
+    func testHandleNotification_forwardsNonDiagnosisNotificationsToDelegate() {
+        let notificationManager = ConcreteNotificationManager(
+            uiQueue: DispatchQueue.test,
+            firebase: FirebaseAppDouble.self,
+            messagingFactory: { MessagingDouble() },
+            userNotificationCenter: NotificationCenterDouble(),
+            diagnosisService: DiagnosisService()
+        )
+        let delegate = NotificationManagerDelegateDouble()
+        notificationManager.delegate = delegate
+        let userInfo = ["something" : "else"]
+        
+        notificationManager.handleNotification(userInfo: userInfo)
+        XCTAssertEqual(delegate.userInfo?["something"] as? String, "else")
     }
 }
 
@@ -119,6 +156,16 @@ class NotificationCenterDouble: UserNotificationCenter {
     func requestAuthorization(options: UNAuthorizationOptions, completionHandler: @escaping (Bool, Error?) -> Void) {
         self.options = options
         self.completionHandler = completionHandler
+    }
+
+}
+
+class NotificationManagerDelegateDouble: NotificationManagerDelegate {
+
+    var userInfo: [AnyHashable : Any]?
+
+    func notificationManager(_ notificationManager: NotificationManager, didReceiveNotificationWithInfo userInfo: [AnyHashable : Any]) {
+        self.userInfo = userInfo
     }
 
 }

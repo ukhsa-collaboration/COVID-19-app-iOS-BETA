@@ -12,10 +12,13 @@ import CryptoKit
 struct RequestFactory {
 
     static let shared = RequestFactory(registrationStorage: SecureRegistrationStorage.shared)
-    static let pushToken = "this should be the base64-encoded push token we get from firebase=="
 
-    static func registrationRequest() -> RegistrationRequest {
+    static func registrationRequest(pushToken: String) -> RegistrationRequest {
         return RegistrationRequest(pushToken: pushToken)
+    }
+    
+    static func confirmRegistrationRequest(activationCode: String, pushToken: String) -> ConfirmRegistrationRequest {
+        return ConfirmRegistrationRequest(activationCode: activationCode, pushToken: pushToken)
     }
 
     private let registrationStorage: SecureRegistrationStorage
@@ -28,7 +31,7 @@ struct RequestFactory {
         let registration = try! registrationStorage.get()!
 
         let deviceId = registration.id
-        let symmetricKey = SymmetricKey(data: registration.secretKey.data(using: .utf8)!)
+        let symmetricKey = SymmetricKey(data: registration.secretKey)
 
         return PatchContactEventsRequest(key: symmetricKey, deviceId: deviceId, contactEvents: contactEvents)
     }

@@ -14,8 +14,10 @@ class RegistrationViewController: UIViewController, Storyboarded {
     @IBOutlet var retryButton: UIButton!
 
     var coordinator: AppCoordinator?
-    var session: Session = URLSession.shared
+    var registrationService: RegistrationService!
     var registrationStorage: SecureRegistrationStorage = SecureRegistrationStorage.shared
+    var notificationManager: NotificationManager!
+    var registerWhenTokenReceived = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +27,7 @@ class RegistrationViewController: UIViewController, Storyboarded {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         // TODO Error handling?
         let maybeRegistration = try? registrationStorage.get()
         if maybeRegistration != nil {
@@ -34,31 +36,21 @@ class RegistrationViewController: UIViewController, Storyboarded {
     }
     
     @IBAction func didTapRegister(_ sender: Any) {
-        createRegistration()
-    }
-    
-    private func createRegistration() {
-        let request = RequestFactory.registrationRequest()
-
-        session.execute(request, queue: .main) { result in
-            self.handleRegistration(result: result)
+        registrationService.register { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(_):
+                self.coordinator?.launchEnterDiagnosis()
+            case .failure(_):
+                self.enableRetry()
+            }
         }
     }
-    
-    private func handleRegistration(result: Result<Registration, Error>) {
+        
+    private func enableRetry() {
+        self.retryButton.isHidden = false
         self.activityIndicator.stopAnimating()
-
-        switch result {
-        case .success(let registration):
-            // TODO What do when fail?
-            try! registrationStorage.set(registration: registration)
-
-            coordinator?.launchOkNowVC()
-        case .failure(let error):
-            // TODO Log failure
-            print("error during registration: \(error)")
-            self.retryButton.isHidden = false
-        }
     }
-    
 }
+

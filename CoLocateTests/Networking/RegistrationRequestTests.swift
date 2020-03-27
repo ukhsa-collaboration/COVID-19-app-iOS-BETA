@@ -40,19 +40,5 @@ class RegistrationRequestTests: XCTestCase {
         XCTAssertEqual(request.headers.count, 1)
         XCTAssertEqual(request.headers["Content-Type"], "application/json")
     }
-    
-    func testParse() {
-        let encodedResponse = try! JSONEncoder().encode(
-            Registration(
-                id: UUID(uuidString: "1c8d305e-db93-4ba0-81f4-94c33fd35c7c")!,
-                secretKey: "Ik6M9N2CqLv3BDT6lKlhR9X+cLf1MCyuU3ExnrUBlY4="
-            )
-        )
-        
-        let actualResponse = try? request.parse(encodedResponse)
-        
-        XCTAssertEqual(actualResponse?.id, UUID(uuidString: "1c8d305e-db93-4ba0-81f4-94c33fd35c7c")!)
-        XCTAssertEqual(actualResponse?.secretKey, "Ik6M9N2CqLv3BDT6lKlhR9X+cLf1MCyuU3ExnrUBlY4=")
-    }
 
 }

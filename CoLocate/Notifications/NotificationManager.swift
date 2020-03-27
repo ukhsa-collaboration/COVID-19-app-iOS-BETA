@@ -11,13 +11,35 @@ import UIKit
 
 import Firebase
 
-class NotificationManager: NSObject {
+protocol NotificationManagerDelegate: class {
+    func notificationManager(_ notificationManager: NotificationManager, didReceiveNotificationWithInfo userInfo: [AnyHashable : Any])
+}
+
+protocol NotificationManager {
+    var pushToken: String? { get }
+    
+    var delegate: NotificationManagerDelegate? { get set }
+    
+    func requestAuthorization(
+        application: Application,
+        completion: @escaping (Result<Bool, Error>) -> Void
+    )
+    
+    func handleNotification(userInfo: [AnyHashable : Any])
+}
+
+
+class ConcreteNotificationManager: NSObject, NotificationManager {
 
     let uiQueue: DispatchQueue
     let firebase: TestableFirebaseApp.Type
     let messagingFactory: () -> TestableMessaging
     let userNotificationCenter: UserNotificationCenter
     let diagnosisService: DiagnosisService
+    
+    var pushToken: String?
+    
+    weak var delegate: NotificationManagerDelegate?
 
     init(
         uiQueue: DispatchQueue,
@@ -71,21 +93,19 @@ class NotificationManager: NSObject {
     }
     
     func handleNotification(userInfo: [AnyHashable : Any]) {
-        guard let diagnosis = userInfo["diagnosis"] else {
-            print("no diagnosis in user info \(userInfo)")
-            return
-        }
-        
-        print("Got notification with diagnosis \(diagnosis))")
-        
-        if diagnosis as? String == "potential" {
-            diagnosisService.recordDiagnosis(.potential)
+        if let diagnosis = userInfo["diagnosis"] {
+            if diagnosis as? String == "potential" {
+                diagnosisService.recordDiagnosis(.potential)
+            } else {
+                print("Unexpected diagnosis \(diagnosis)")
+            }
+        } else {
+            self.delegate?.notificationManager(self, didReceiveNotificationWithInfo: userInfo)
         }
     }
-
 }
 
-extension NotificationManager: UNUserNotificationCenterDelegate {
+extension ConcreteNotificationManager: UNUserNotificationCenterDelegate {
     func userNotificationCenter(
         _ center: UNUserNotificationCenter,
         willPresent notification: UNNotification,
@@ -100,9 +120,11 @@ extension NotificationManager: UNUserNotificationCenterDelegate {
     }
 }
 
-extension NotificationManager: MessagingDelegate {
+extension ConcreteNotificationManager: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
         print("Remote instance ID token: \(fcmToken)")
+        pushToken = fcmToken
+        delegate?.notificationManager(self, didReceiveNotificationWithInfo: ["pushToken": pushToken as Any])
     }
 }
 
