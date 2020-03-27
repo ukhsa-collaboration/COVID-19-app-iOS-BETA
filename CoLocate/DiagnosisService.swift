@@ -36,6 +36,10 @@ class DiagnosisService {
         UserDefaults.standard.set(diagnosis.rawValue, forKey: DiagnosisService.diagnosisKey)
         delegate?.diagnosisService(self, didRecordDiagnosis: diagnosis)
     }
+
+    func clear() {
+        UserDefaults.standard.set(Diagnosis.unknown.rawValue, forKey: DiagnosisService.diagnosisKey)
+    }
     
 }
 
