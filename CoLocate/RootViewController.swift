@@ -20,8 +20,7 @@ class RootViewController: UINavigationController {
     }
     
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-        if presentedViewController == nil && motion == UIEvent.EventSubtype.motionShake {
-            print("showing")
+        if presentedViewController == nil && motion == UIEvent.EventSubtype.motionShake && DebugSetting.enabled {
             showDebugView()
         }
     }
