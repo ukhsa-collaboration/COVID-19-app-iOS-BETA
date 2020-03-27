@@ -73,6 +73,42 @@ class AppCoordinatorTests: XCTestCase {
         
         XCTAssertNotNil(navController.topViewController as? PotentialViewController)
     }
+    
+    func testShowsPotentialWhenReceivingPotentialDiagnosis() {
+        register()
+        let diagnosisService = DiagnosisServiceDouble()
+        diagnosisService.currentDiagnosis = .unknown
+        let navController = UINavigationController()
+        let coordinator = AppCoordinator(navController: navController, diagnosisService: diagnosisService, notificationManager: NotificationManagerDouble(), registrationService: RegistrationServiceDouble())
+
+        coordinator.diagnosisService(diagnosisService, didRecordDiagnosis: .potential)
+
+        XCTAssertNotNil(navController.topViewController as? PotentialViewController)
+    }
+    
+    func testShowsOkWhenReceivingNotInfectedDiagnosis() {
+        register()
+        let diagnosisService = DiagnosisServiceDouble()
+        diagnosisService.currentDiagnosis = .unknown
+        let navController = UINavigationController()
+        let coordinator = AppCoordinator(navController: navController, diagnosisService: diagnosisService, notificationManager: NotificationManagerDouble(), registrationService: RegistrationServiceDouble())
+
+        coordinator.diagnosisService(diagnosisService, didRecordDiagnosis: .notInfected)
+
+        XCTAssertNotNil(navController.topViewController as? OkNowViewController)
+    }
+
+    func testShowsPleaseIsolateWhenReceivingInfectedDiagnosis() {
+        register()
+        let diagnosisService = DiagnosisServiceDouble()
+        diagnosisService.currentDiagnosis = .unknown
+        let navController = UINavigationController()
+        let coordinator = AppCoordinator(navController: navController, diagnosisService: diagnosisService, notificationManager: NotificationManagerDouble(), registrationService: RegistrationServiceDouble())
+
+        coordinator.diagnosisService(diagnosisService, didRecordDiagnosis: .infected)
+
+        XCTAssertNotNil(navController.topViewController as? PleaseSelfIsolateViewController)
+    }
 
     private func register() {
         try! SecureRegistrationStorage.shared.set(registration: Registration(id: UUID(), secretKey: Data()))

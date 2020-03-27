@@ -12,7 +12,7 @@ import Firebase
 import FirebaseInstanceID
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, DiagnosisServiceDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
 
@@ -28,7 +28,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     override init() {
         registrationService = ConcreteRegistrationService(session: URLSession.shared, notificationManager: notificationManager)
         super.init()
-        diagnosisService.delegate = self
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -46,13 +45,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         completionHandler(UIBackgroundFetchResult.newData)
     }
     
-    func diagnosisService(_ diagnosisService: DiagnosisService, didRecordDiagnosis diagnosis: Diagnosis) {
-        if diagnosis == .potential {
-            // TODO move this logic into the app coordinator
-            window?.rootViewController = appCoordinator.potentialVC()
-        }
-    }
-
     // MARK: - Private
 
     private func initNotifications() {

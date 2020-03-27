@@ -41,17 +41,9 @@ class EnterDiagnosisTableViewController: UITableViewController, Storyboarded {
             
         case Rows.yes.rawValue:
             diagnosisService.recordDiagnosis(.infected)
-            // TODO: move this into the AppCoordinator?
-            let vc = PleaseSelfIsolateViewController.instantiate()
-            vc.coordinator = coordinator
-            navigationController?.pushViewController(vc, animated: true)
             
         case Rows.no.rawValue:
             diagnosisService.recordDiagnosis(.notInfected)
-            // TODO: move this into the AppCoordinator?
-            let vc = OkNowViewController.instantiate()
-            vc.coordinator = coordinator
-            navigationController?.pushViewController(vc, animated: true)
 
         default:
             print("\(#file).\(#function) unknown indexPath selected: \(indexPath)")

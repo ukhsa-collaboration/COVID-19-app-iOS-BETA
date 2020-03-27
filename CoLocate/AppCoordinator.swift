@@ -19,6 +19,8 @@ class AppCoordinator {
         self.diagnosisService = diagnosisService
         self.notificationManager = notificationManager
         self.registrationService = registrationService
+                
+        diagnosisService.delegate = self
     }
     
     func start() {
@@ -99,5 +101,20 @@ class AppCoordinator {
         vc.registrationService = registrationService
         vc.notificationManager = notificationManager
         return vc
+    }
+}
+
+extension AppCoordinator: DiagnosisServiceDelegate {
+    func diagnosisService(_ diagnosisService: DiagnosisService, didRecordDiagnosis diagnosis: Diagnosis) {
+        let vc: UIViewController
+        
+        switch diagnosis {
+        case .unknown: return
+        case .potential: vc = potentialVC()
+        case .infected: vc = isolateVC()
+        case .notInfected: vc = okVC()
+        }
+        
+        navController.pushViewController(vc, animated: true)
     }
 }
