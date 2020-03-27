@@ -55,8 +55,6 @@
 		F67A2293242AA370002254B6 /* SecureRegistrationStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */; };
 		F67A2295242AC188002254B6 /* RegistrationViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A2294242AC188002254B6 /* RegistrationViewControllerTests.swift */; };
 		F68BFBF7242ACD17008EE68F /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68BFBF6242ACD17008EE68F /* TestHelpers.swift */; };
-		F6A309D124298A5800865942 /* Development.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F6A309D024298A5800865942 /* Development.xcconfig */; };
-		F6CA2817242E416C00F8DC55 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F6CA2816242E416C00F8DC55 /* Release.xcconfig */; };
 		F6CA2819242E41F700F8DC55 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = F6CA2818242E41F700F8DC55 /* README.md */; };
 		F6CC2CA9242BC7FC0079432B /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CC2CA8242BC7FC0079432B /* NotificationManager.swift */; };
 		F6CC2CAC242BCD0D0079432B /* NotificationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CC2CAB242BCD0D0079432B /* NotificationManagerTests.swift */; };
@@ -529,7 +527,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 1010;
+				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = NHSX;
 				TargetAttributes = {
 					214209BE2422276800C7BFF3 = {
@@ -575,7 +573,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				098ED48E242E9AF00029B729 /* Settings.bundle in Resources */,
-				F6A309D124298A5800865942 /* Development.xcconfig in Resources */,
 				F758B8C4242CC0EE003AE16D /* OkNow.storyboard in Resources */,
 				F758B8C9242CC183003AE16D /* PleaseSelfIsolate.storyboard in Resources */,
 				F758B8D2242CC67D003AE16D /* Registration.storyboard in Resources */,
@@ -588,7 +585,6 @@
 				6FC63C38241641BA007C8BF3 /* Assets.xcassets in Resources */,
 				09D1CD50242C3A9300B1A167 /* Potential.storyboard in Resources */,
 				F6CA2819242E41F700F8DC55 /* README.md in Resources */,
-				F6CA2817242E416C00F8DC55 /* Release.xcconfig in Resources */,
 				098ED481242E745F0029B729 /* Debug.storyboard in Resources */,
 				F78CEB68242B8C2C002254AD /* GoogleService-Info.plist in Resources */,
 			);
