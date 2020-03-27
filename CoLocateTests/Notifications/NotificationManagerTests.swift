@@ -161,9 +161,11 @@ class NotificationCenterDouble: UserNotificationCenter {
 }
 
 class NotificationManagerDelegateDouble: NotificationManagerDelegate {
+
     var userInfo: [AnyHashable : Any]?
-    
+
     func notificationManager(_ notificationManager: NotificationManager, didReceiveNotificationWithInfo userInfo: [AnyHashable : Any]) {
         self.userInfo = userInfo
     }
+
 }

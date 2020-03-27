@@ -16,10 +16,8 @@ class RegistrationViewController: UIViewController, Storyboarded {
     var coordinator: AppCoordinator?
     var registrationService: RegistrationService!
     var registrationStorage: SecureRegistrationStorage = SecureRegistrationStorage.shared
-    
-    func inject(registrationService: RegistrationService) {
-        self.registrationService = registrationService
-    }
+    var notificationManager: NotificationManager!
+    var registerWhenTokenReceived = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
