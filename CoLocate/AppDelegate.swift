@@ -12,7 +12,7 @@ import Firebase
 import FirebaseInstanceID
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, DiagnosisServiceDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
 
@@ -23,16 +23,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     let diagnosisService: DiagnosisService = DiagnosisService.shared
     let registrationService: RegistrationService
 
-    let appCoordinator: AppCoordinator
+    var appCoordinator: AppCoordinator!
     
     override init() {
         registrationService = ConcreteRegistrationService(session: URLSession.shared, notificationManager: notificationManager)
-
-        appCoordinator = AppCoordinator(diagnosisService: diagnosisService,
-                                        notificationManager: notificationManager,
-                                        registrationService: registrationService)
         super.init()
-        diagnosisService.delegate = self
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -50,13 +45,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         completionHandler(UIBackgroundFetchResult.newData)
     }
     
-    func diagnosisService(_ diagnosisService: DiagnosisService, didRecordDiagnosis diagnosis: Diagnosis) {
-        if diagnosis == .potential {
-            // TODO move this logic into the app coordinator
-            window?.rootViewController = appCoordinator.potentialVC()
-        }
-    }
-
     // MARK: - Private
 
     private func initNotifications() {
@@ -70,9 +58,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     private func initUi() {
+        let rootViewController = RootViewController()
+        appCoordinator = AppCoordinator(navController: rootViewController,
+                                        diagnosisService: diagnosisService,
+                                        notificationManager: notificationManager,
+                                        registrationService: registrationService)
+
         appCoordinator.start()
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = appCoordinator.navigationController
+        window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()
     }
     

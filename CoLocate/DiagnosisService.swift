@@ -39,6 +39,6 @@ class DiagnosisService {
     
 }
 
-protocol DiagnosisServiceDelegate: NSObject {
+protocol DiagnosisServiceDelegate: class {
     func diagnosisService(_ diagnosisService: DiagnosisService, didRecordDiagnosis diagnosis: Diagnosis)
 }
