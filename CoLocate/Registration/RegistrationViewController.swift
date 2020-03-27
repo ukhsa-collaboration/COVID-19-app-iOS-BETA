@@ -9,6 +9,7 @@
 import UIKit
 
 class RegistrationViewController: UIViewController, Storyboarded {
+    static let storyboardName = "Registration"
     
     @IBOutlet private var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var retryButton: UIButton!

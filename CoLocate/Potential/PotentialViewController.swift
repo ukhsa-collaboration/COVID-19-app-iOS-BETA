@@ -9,13 +9,7 @@
 import UIKit
 
 class PotentialViewController: UIViewController, Storyboarded {
-    var coordinator: AppCoordinator?
+    static let storyboardName = "Potential"
     
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
+    var coordinator: AppCoordinator?
 }

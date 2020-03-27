@@ -52,7 +52,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func diagnosisService(_ diagnosisService: DiagnosisService, didRecordDiagnosis diagnosis: Diagnosis) {
         if diagnosis == .potential {
-            window?.rootViewController = appCoordinator.potentialVC
+            // TODO move this logic into the app coordinator
+            window?.rootViewController = appCoordinator.potentialVC()
         }
     }
 

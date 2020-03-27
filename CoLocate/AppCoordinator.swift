@@ -15,12 +15,6 @@ class AppCoordinator {
     private let registrationService: RegistrationService
     
     var navigationController: RootViewController
-    private let okVC = OkNowViewController.instantiate(storyboard: .okNow)
-    private let isolateVC = PleaseSelfIsolateViewController.instantiate(storyboard: .pleaseSelfIsolate)
-    private let enterDiagnosisVC = EnterDiagnosisTableViewController.instantiate(storyboard: .enterDiagnosis)
-    let potentialVC = PotentialViewController.instantiate(storyboard: .potential)
-    private let permissionsVC = PermissionsPromptViewController.instantiate(storyboard: .permissions)
-    private let registrationVC = RegistrationViewController.instantiate(storyboard: .registration)
     
     init(diagnosisService: DiagnosisService, notificationManager: NotificationManager, registrationService: RegistrationService) {
         self.diagnosisService = diagnosisService
@@ -31,35 +25,31 @@ class AppCoordinator {
     }
     
     func start() {
-        let vc = initialViewController()
-        vc.coordinator = self
-        navigationController.viewControllers = [vc]
+        navigationController.viewControllers = [initialViewController()]
     }
     
     func initialViewController() -> UIViewController & Storyboarded {
         switch diagnosisService.currentDiagnosis {
         case .unknown:
-            return permissionsVC
+            return permissionsVC()
 
         case .infected:
-            return isolateVC
+            return isolateVC()
 
         case .notInfected:
-            return okVC
+            return okVC()
 
         case .potential:
-            return potentialVC
+            return potentialVC()
         }
     }
     
     func launchEnterDiagnosis() {
-        enterDiagnosisVC.coordinator = self
-        navigationController.pushViewController(enterDiagnosisVC, animated: true)
+        navigationController.pushViewController(enterDiagnosisVC(), animated: true)
     }
     
     func launchOkNowVC() {
-        okVC.coordinator = self
-        navigationController.pushViewController(okVC, animated: true)
+        navigationController.pushViewController(okVC(), animated: true)
     }
     
     func goBack() {
@@ -67,13 +57,11 @@ class AppCoordinator {
     }
     
     func launchPleaseIsolateVC() {
-        isolateVC.coordinator = self
-        navigationController.pushViewController(isolateVC, animated: true)
+        navigationController.pushViewController(isolateVC(), animated: true)
     }
     
     func launchPotentialVC() {
-        potentialVC.coordinator = self
-        navigationController.show(potentialVC, sender: self)
+        navigationController.show(potentialVC(), sender: self)
     }
     
     func showViewAfterPermissions() {
@@ -97,15 +85,48 @@ class AppCoordinator {
     }
     
     func launchPermissionsVC() {
-        permissionsVC.coordinator = self
-        navigationController.pushViewController(permissionsVC, animated: true)
+        navigationController.pushViewController(permissionsVC(), animated: true)
     }
     
     private func launchRegistrationVC() {
-        registrationVC.coordinator = self
-        registrationVC.registrationService = registrationService
-        registrationVC.notificationManager = notificationManager
-
-        navigationController.pushViewController(registrationVC, animated: true)
+        navigationController.pushViewController(registrationVC(), animated: true)
+    }
+    
+    private func okVC() -> OkNowViewController {
+        let vc = OkNowViewController.instantiate()
+        vc.coordinator = self
+        return vc
+    }
+    
+    private func isolateVC() -> PleaseSelfIsolateViewController {
+        let vc = PleaseSelfIsolateViewController.instantiate()
+        vc.coordinator = self
+        return vc
+    }
+    
+    private func enterDiagnosisVC() -> EnterDiagnosisTableViewController {
+        let vc = EnterDiagnosisTableViewController.instantiate()
+        vc.coordinator = self
+        return vc
+    }
+    
+    func potentialVC() -> PotentialViewController {
+        let vc = PotentialViewController.instantiate()
+        vc.coordinator = self
+        return vc
+    }
+    
+    private func permissionsVC() -> PermissionsPromptViewController {
+        let vc = PermissionsPromptViewController.instantiate()
+        vc.coordinator = self
+        return vc
+    }
+    
+    private func registrationVC() -> RegistrationViewController {
+        let vc = RegistrationViewController.instantiate()
+        vc.coordinator = self
+        vc.registrationService = registrationService
+        vc.notificationManager = notificationManager
+        return vc
     }
 }
