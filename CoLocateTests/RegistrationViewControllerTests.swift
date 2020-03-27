@@ -76,6 +76,71 @@ class RegistrationViewControllerTests: XCTestCase {
         XCTAssertEqual(id, registration!.id)
         XCTAssertEqual(registration!.secretKey, secretKey)
     }
+
+    func testRegistration_withoutPreExistingPushToken() throws {
+        let storyboard = UIStoryboard.init(name: "Registration", bundle: nil)
+        let vc = storyboard.instantiateViewController(identifier: "RegistrationViewController") as! RegistrationViewController
+        let appCoordinator = AppCoordinatorDouble()
+        vc.coordinator = appCoordinator
+        let notificationManager = NotificationManagerDouble()
+        vc.inject(notificationManager: notificationManager)
+        XCTAssertNotNil(vc.view)
+        vc.viewDidLoad()
+        vc.viewWillAppear(false)
+
+        let session = SessionDouble()
+        vc.session = session
+
+        vc.didTapRegister(vc.retryButton!)
+        
+        XCTAssertNil(session.requestSent)
+        
+        // Simulate receiving the push token
+        notificationManager.pushToken = "a push token"
+        notificationManager.delegate!.notificationManager(notificationManager, didObtainPushToken: "a push token")
+        
+        // Verify the first request
+        switch (session.requestSent as! RegistrationRequest).method {
+        case .post(let data):
+            let payload = try JSONDecoder().decode(ExpectedRegistrationRequestBody.self, from: data)
+            XCTAssertEqual(payload.pushToken, "a push token")
+        default:
+            XCTFail("Expected a POST request")
+        }
+        
+        // Respond to the first request
+        session.requestSent = nil
+        session.executeCompletion!(Result<(), Error>.success(()))
+                
+        // Simulate the notification containing the authorizationCode.
+        // This should trigger the second request.
+        let activationCode = "a3d2c477-45f5-4609-8676-c24558094600"
+        notificationManager.delegate!.notificationManager(notificationManager, didReceiveNotificationWithInfo: ["activationCode": activationCode])
+        
+        // Verify the second request
+        switch (session.requestSent as! ConfirmRegistrationRequest).method {
+        case .post(let data):
+            let payload = try JSONDecoder().decode(ExpectedConfirmRegistrationRequestBody.self, from: data)
+            XCTAssertEqual(payload.activationCode, UUID(uuidString: activationCode))
+            XCTAssertEqual(payload.pushToken, "a push token")
+            default:
+                XCTFail("Expected a POST request")
+        }
+        
+        XCTAssertFalse(appCoordinator.enterDiagnosisWasCalled)
+        
+        // Respond to the second request
+        let id = UUID()
+        let secretKey = "a secret key".data(using: .utf8)!
+        let confirmationResponse = ConfirmRegistrationResponse(id: id, secretKey: secretKey)
+        session.executeCompletion!(Result<ConfirmRegistrationResponse, Error>.success(confirmationResponse))
+        
+        XCTAssertTrue(appCoordinator.enterDiagnosisWasCalled)
+        let registration = try SecureRegistrationStorage.shared.get()
+        XCTAssertNotNil(registration)
+        XCTAssertEqual(id, registration!.id)
+        XCTAssertEqual(registration!.secretKey, secretKey)
+    }
 }
 
 class NotificationManagerDouble: NotificationManager {

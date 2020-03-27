@@ -111,6 +111,22 @@ class NotificationManagerTests: XCTestCase {
         
         XCTAssertEqual(diagnosisService.currentDiagnosis, .unknown)
     }
+    
+    func testHandleNotification_forwardsNonDiagnosisNotificationsToDelegate() {
+        let notificationManager = ConcreteNotificationManager(
+            uiQueue: DispatchQueue.test,
+            firebase: FirebaseAppDouble.self,
+            messagingFactory: { MessagingDouble() },
+            userNotificationCenter: NotificationCenterDouble(),
+            diagnosisService: DiagnosisService()
+        )
+        let delegate = NotificationManagerDelegateDouble()
+        notificationManager.delegate = delegate
+        let userInfo = ["something" : "else"]
+        
+        notificationManager.handleNotification(userInfo: userInfo)
+        XCTAssertEqual(delegate.userInfo?["something"] as? String, "else")
+    }
 }
 
 class ApplicationDouble: Application {
@@ -146,11 +162,13 @@ class NotificationCenterDouble: UserNotificationCenter {
 
 class NotificationManagerDelegateDouble: NotificationManagerDelegate {
     var pushToken: String?
+    var userInfo: [AnyHashable : Any]?
     
     func notificationManager(_ notificationManager: NotificationManager, didObtainPushToken token: String) {
         self.pushToken = token
     }
     
     func notificationManager(_ notificationManager: NotificationManager, didReceiveNotificationWithInfo userInfo: [AnyHashable : Any]) {
+        self.userInfo = userInfo
     }
 }

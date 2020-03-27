@@ -17,6 +17,7 @@ class RegistrationViewController: UIViewController, Storyboarded {
     var session: Session = URLSession.shared
     var registrationStorage: SecureRegistrationStorage = SecureRegistrationStorage.shared
     var notificationManager: NotificationManager!
+    var registerWhenTokenReceived = false
     
     func inject(notificationManager: NotificationManager) {
         self.notificationManager = notificationManager
@@ -41,11 +42,21 @@ class RegistrationViewController: UIViewController, Storyboarded {
     }
     
     @IBAction func didTapRegister(_ sender: Any) {
+        if notificationManager.pushToken == nil {
+            registerWhenTokenReceived = true
+            return
+        } else {
+            beginRegistration()
+        }
+    }
+    
+    private func beginRegistration() {
         let request = RequestFactory.registrationRequest(pushToken: notificationManager.pushToken!)
 
         session.execute(request, queue: .main) { result in
             self.handleRegistration(result: result)
         }
+
     }
     
     private func enableRetry() {
@@ -59,7 +70,6 @@ class RegistrationViewController: UIViewController, Storyboarded {
             // TODO What do when fail?
             print("First registration request succeeded")
 
-            coordinator?.launchOkNowVC()
         case .failure(let error):
             // TODO How do we handle this failure?
             print("error during registration: \(error)")
@@ -70,6 +80,9 @@ class RegistrationViewController: UIViewController, Storyboarded {
 
 extension RegistrationViewController : NotificationManagerDelegate {
     func notificationManager(_ notificationManager: NotificationManager, didObtainPushToken token: String) {
+        if registerWhenTokenReceived {
+            beginRegistration()
+        }
     }
     
     func notificationManager(

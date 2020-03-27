@@ -45,6 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // This fires when we tap on the notification
 
         notificationManager.handleNotification(userInfo: userInfo)
+        completionHandler(.newData)
     }
     
     func diagnosisService(_ diagnosisService: DiagnosisService, didRecordDiagnosis diagnosis: Diagnosis) {

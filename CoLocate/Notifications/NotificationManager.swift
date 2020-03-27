@@ -94,15 +94,14 @@ class ConcreteNotificationManager: NSObject, NotificationManager {
     }
     
     func handleNotification(userInfo: [AnyHashable : Any]) {
-        guard let diagnosis = userInfo["diagnosis"] else {
-            print("no diagnosis in user info \(userInfo)")
-            return
-        }
-        
-        print("Got notification with diagnosis \(diagnosis))")
-        
-        if diagnosis as? String == "potential" {
-            diagnosisService.recordDiagnosis(.potential)
+        if let diagnosis = userInfo["diagnosis"] {
+            if diagnosis as? String == "potential" {
+                diagnosisService.recordDiagnosis(.potential)
+            } else {
+                print("Unexpected diagnosis \(diagnosis)")
+            }
+        } else {
+            self.delegate?.notificationManager(self, didReceiveNotificationWithInfo: userInfo)
         }
     }
 }
