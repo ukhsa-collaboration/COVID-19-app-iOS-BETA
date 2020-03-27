@@ -1,5 +1,3 @@
-Development.xcconfig
-
 # Xcode
 #
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
@@ -93,3 +91,6 @@ iOSInjectionProject/
 
 # Mac OS X
 .DS_Store
+
+# Don't check in configurations for any environment
+*.xcconfig
