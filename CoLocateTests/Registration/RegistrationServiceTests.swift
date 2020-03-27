@@ -36,13 +36,9 @@ class RegistrationServiceTests: XCTestCase {
         })
         
         // Verify the first request
-        switch (session.requestSent as! RegistrationRequest).method {
-        case .post(let data):
-            let payload = try JSONDecoder().decode(ExpectedRegistrationRequestBody.self, from: data)
-            XCTAssertEqual(payload.pushToken, "the current push token")
-        default:
-            XCTFail("Expected a POST request")
-        }
+        let registrationRequestData = (session.requestSent as! RegistrationRequest).body!
+        let registrationResponse = try JSONDecoder().decode(ExpectedRegistrationRequestBody.self, from: registrationRequestData)
+        XCTAssertEqual(registrationResponse.pushToken, "the current push token")
         
         // Respond to the first request
         session.requestSent = nil
@@ -54,14 +50,10 @@ class RegistrationServiceTests: XCTestCase {
         notificationManager.delegate!.notificationManager(notificationManager, didReceiveNotificationWithInfo: ["activationCode": activationCode])
         
         // Verify the second request
-        switch (session.requestSent as! ConfirmRegistrationRequest).method {
-        case .post(let data):
-            let payload = try JSONDecoder().decode(ExpectedConfirmRegistrationRequestBody.self, from: data)
-            XCTAssertEqual(payload.activationCode, UUID(uuidString: activationCode))
-            XCTAssertEqual(payload.pushToken, "the current push token")
-            default:
-                XCTFail("Expected a POST request")
-        }
+        let confirmRegistrationRequest = (session.requestSent as! ConfirmRegistrationRequest).body!
+        let confirmResponse = try JSONDecoder().decode(ExpectedConfirmRegistrationRequestBody.self, from: confirmRegistrationRequest)
+        XCTAssertEqual(confirmResponse.activationCode, UUID(uuidString: activationCode))
+        XCTAssertEqual(confirmResponse.pushToken, "the current push token")
         
         XCTAssertFalse(finished)
         
@@ -78,7 +70,6 @@ class RegistrationServiceTests: XCTestCase {
         XCTAssertEqual(id, registration!.id)
         XCTAssertEqual(registration!.secretKey, secretKey)
     }
-    
     
     func testRegistration_withoutPreExistingPushToken() throws {
         let session = SessionDouble()
@@ -104,13 +95,9 @@ class RegistrationServiceTests: XCTestCase {
         notificationManager.delegate!.notificationManager(notificationManager, didObtainPushToken: "a push token")
         
         // Verify the first request
-        switch (session.requestSent as! RegistrationRequest).method {
-        case .post(let data):
-            let payload = try JSONDecoder().decode(ExpectedRegistrationRequestBody.self, from: data)
-            XCTAssertEqual(payload.pushToken, "a push token")
-        default:
-            XCTFail("Expected a POST request")
-        }
+        let registrationBody = (session.requestSent as! RegistrationRequest).body!
+        let registrationPayload = try JSONDecoder().decode(ExpectedRegistrationRequestBody.self, from: registrationBody)
+        XCTAssertEqual(registrationPayload.pushToken, "a push token")
         
         // Respond to the first request
         session.requestSent = nil
@@ -122,14 +109,10 @@ class RegistrationServiceTests: XCTestCase {
         notificationManager.delegate!.notificationManager(notificationManager, didReceiveNotificationWithInfo: ["activationCode": activationCode])
         
         // Verify the second request
-        switch (session.requestSent as! ConfirmRegistrationRequest).method {
-        case .post(let data):
-            let payload = try JSONDecoder().decode(ExpectedConfirmRegistrationRequestBody.self, from: data)
-            XCTAssertEqual(payload.activationCode, UUID(uuidString: activationCode))
-            XCTAssertEqual(payload.pushToken, "a push token")
-            default:
-                XCTFail("Expected a POST request")
-        }
+        let confirmRegistrationBody = (session.requestSent as! ConfirmRegistrationRequest).body!
+        let confirmRegistrationPayload = try JSONDecoder().decode(ExpectedConfirmRegistrationRequestBody.self, from: confirmRegistrationBody)
+        XCTAssertEqual(confirmRegistrationPayload.activationCode, UUID(uuidString: activationCode))
+        XCTAssertEqual(confirmRegistrationPayload.pushToken, "a push token")
         
         XCTAssertFalse(finished)
         
