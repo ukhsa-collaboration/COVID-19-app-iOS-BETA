@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+mkdir -p ci/match/certs/distribution
+echo "$DISTRIBUTION_CER" > ci/match/certs/distribution/HY6T24QXC9.cer
+echo "$DISTRIBUTION_P12" > ci/match/certs/distribution/HY6T24QXC9.p12
+
+mkdir -p ci/match/profiles/appstore
+echo "$PROVISIONING_PROFILE" > ci/match/profiles/appstore/AppStore_uk.nhs.nhsx.beta.CoLocate.mobileprovision
+
+(
+  cd ci/match;
+  git init;
+  git add certs profiles;
+  git commit --message="[fastlane] Updated appstore and platform ios" --author="GitHub Actions <github.actions@example.com>"
+)

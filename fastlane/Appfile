@@ -1,0 +1,7 @@
+app_identifier("uk.nhs.nhsx.beta.CoLocate") # The bundle identifier of your app
+
+itc_team_id("121237496") # App Store Connect Team ID
+team_id("877YMUFLMF") # Developer Portal Team ID
+
+# For more information about the Appfile, see:
+#     https://docs.fastlane.tools/advanced/#appfile

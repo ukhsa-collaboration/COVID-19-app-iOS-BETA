@@ -1,0 +1,35 @@
+default_platform(:ios)
+
+platform :ios do
+  desc "Push a new beta build to TestFlight"
+  lane :beta do
+    setup_ci()
+
+    # This was a bear to get working and I'm not entirely convinced that we
+    # won't need this command again in the future, so I'm leaving this command
+    # here for posterity.
+    #
+    #   security set-key-partition-list -S apple-tool:,apple: -s -k "" \
+    #     ~/Library/Keychains/fastlane_tmp_keychain-db
+    sync_code_signing(
+      type: "appstore",
+      readonly: true,
+      git_url: "./ci/match",
+    )
+
+    update_code_signing_settings(
+      use_automatic_signing: false,
+      path: "CoLocate.xcodeproj",
+      code_sign_identity: "iPhone Distribution",
+      profile_name: "match AppStore uk.nhs.nhsx.beta.CoLocate",
+    )
+
+    build_app(scheme: "CoLocate")
+
+    upload_to_testflight(
+      username: ENV.fetch("APPLE_USERNAME"),
+      apple_id: "1504244021",
+      skip_waiting_for_build_processing: true,
+    )
+  end
+end
