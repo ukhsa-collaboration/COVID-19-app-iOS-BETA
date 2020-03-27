@@ -31,24 +31,24 @@ class AppCoordinator {
     }
     
     func start() {
-        var rootViewController: Storyboarded?
-            switch diagnosisService.currentDiagnosis {
-            
-            case .unknown:
-                rootViewController = permissionsVC
+        let vc = initialViewController()
+        vc.coordinator = self
+        navigationController = UINavigationController(rootViewController: vc)
+    }
+    
+    func initialViewController() -> UIViewController & Storyboarded {
+        switch diagnosisService.currentDiagnosis {
+        case .unknown:
+            return permissionsVC
 
-            case .infected:
-                rootViewController = isolateVC
+        case .infected:
+            return isolateVC
 
-            case .notInfected:
-                rootViewController = okVC
+        case .notInfected:
+            return okVC
 
-            case .potential:
-                rootViewController = potentialVC
-            }
-        if let vc = rootViewController as? UIViewController & Storyboarded {
-            vc.coordinator = self
-            navigationController = UINavigationController(rootViewController: vc)
+        case .potential:
+            return potentialVC
         }
     }
     
