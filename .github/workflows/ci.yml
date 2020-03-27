@@ -30,8 +30,8 @@ jobs:
       - name: Show Build SDK
         run: xcodebuild -showsdks
 
-      - name: Create Test Collateral
-        run: cp Development.xcconfig.sample Development.xcconfig
+      - name: Setup Build Configuration
+        run: cp Development.xcconfig.sample Release.xcconfig
 
       - name: Run Build
         env:
