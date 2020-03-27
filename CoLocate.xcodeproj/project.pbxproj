@@ -16,6 +16,8 @@
 		098ED488242E89930029B729 /* NotificationServiceDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED487242E89930029B729 /* NotificationServiceDouble.swift */; };
 		098ED48A242E89D80029B729 /* RegistrationServiceDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED489242E89D80029B729 /* RegistrationServiceDouble.swift */; };
 		098ED48C242E8B290029B729 /* DiagnosisServiceDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED48B242E8B290029B729 /* DiagnosisServiceDouble.swift */; };
+		098ED48E242E9AF00029B729 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 098ED48D242E9AF00029B729 /* Settings.bundle */; };
+		098ED490242E9BE20029B729 /* DebugSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED48F242E9BE20029B729 /* DebugSetting.swift */; };
 		09D1CD4B242C284000B1A167 /* PotentialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D1CD49242C284000B1A167 /* PotentialViewController.swift */; };
 		09D1CD50242C3A9300B1A167 /* Potential.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09D1CD4F242C3A9300B1A167 /* Potential.storyboard */; };
 		213C806C241A56430020EFA5 /* PermissionsPromptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213C806B241A56430020EFA5 /* PermissionsPromptViewController.swift */; };
@@ -102,6 +104,8 @@
 		098ED487242E89930029B729 /* NotificationServiceDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationServiceDouble.swift; sourceTree = "<group>"; };
 		098ED489242E89D80029B729 /* RegistrationServiceDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationServiceDouble.swift; sourceTree = "<group>"; };
 		098ED48B242E8B290029B729 /* DiagnosisServiceDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosisServiceDouble.swift; sourceTree = "<group>"; };
+		098ED48D242E9AF00029B729 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		098ED48F242E9BE20029B729 /* DebugSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugSetting.swift; sourceTree = "<group>"; };
 		09D1CD49242C284000B1A167 /* PotentialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotentialViewController.swift; sourceTree = "<group>"; };
 		09D1CD4F242C3A9300B1A167 /* Potential.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Potential.storyboard; sourceTree = "<group>"; };
 		213C806B241A56430020EFA5 /* PermissionsPromptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsPromptViewController.swift; sourceTree = "<group>"; };
@@ -220,6 +224,7 @@
 			children = (
 				098ED480242E745F0029B729 /* Debug.storyboard */,
 				098ED482242E746E0029B729 /* DebugViewController.swift */,
+				098ED48F242E9BE20029B729 /* DebugSetting.swift */,
 			);
 			path = Debug;
 			sourceTree = "<group>";
@@ -377,6 +382,7 @@
 				214209D3242399DD00C7BFF3 /* Networking */,
 				F6CC2CA7242BC7D90079432B /* Notifications */,
 				F78CEB53242B7E18002254AD /* CoLocate-Bridging-Header.h */,
+				098ED48D242E9AF00029B729 /* Settings.bundle */,
 			);
 			path = CoLocate;
 			sourceTree = "<group>";
@@ -568,6 +574,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				098ED48E242E9AF00029B729 /* Settings.bundle in Resources */,
 				F6A309D124298A5800865942 /* Development.xcconfig in Resources */,
 				F758B8C4242CC0EE003AE16D /* OkNow.storyboard in Resources */,
 				F758B8C9242CC183003AE16D /* PleaseSelfIsolate.storyboard in Resources */,
@@ -632,6 +639,7 @@
 				214209B62421072C00C7BFF3 /* OkNowViewController.swift in Sources */,
 				F758553A24294C8D00CBE1ED /* RequestFactory.swift in Sources */,
 				21C417CC242CB15D00DEF3E2 /* ConfirmRegistrationRequest.swift in Sources */,
+				098ED490242E9BE20029B729 /* DebugSetting.swift in Sources */,
 				F67A2291242AA35C002254B6 /* SecureRegistrationStorage.swift in Sources */,
 				214209B42420DBE100C7BFF3 /* PleaseSelfIsolateViewController.swift in Sources */,
 				AE2DCAA0241920B600A940FC /* BTLEBroadcaster.swift in Sources */,
