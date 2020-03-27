@@ -1,4 +1,4 @@
-CoLocate
+# CoLocate
 ========
 
 This application runs in the background and identifies other people running the
@@ -21,20 +21,26 @@ infected with the novel coronavirus.
 
 Functionality
 -------------
-* Passively collect anonymized ids of other users of the app that the device has been in proximity with
-  (stored locally on the device)
+* Passively collect anonymized ids of other users of the app that the device
+  has been in proximity with (stored locally on the device)
 * Allow the user to submit their "contact events" to NHS servers
-* Receive push notifications from NHS and inform the user of their exposure status
+* Receive push notifications from NHS and inform the user of their exposure
+  status
 
-Running the app on your own device
-----------------------------------
-Copy `Development.xcconfig.sample` to `Development.xcconfig` and replace the
-example values with real ones (you will need to ask someone for this info).
+## Development
 
-There are no dependencies at this time. To compile the app, download a recent
-build of xcode (11.3.1 or newer) and compile the app.
+### Setup
 
-Testing notifications in the simulator
--------------------------------------
-To test push notifications in the simulator, simply launch the app and drag
-a file from the `Example Notifications` directory onto the simulator window.
+- `cp Development.xcconfig.sample Development.xcconfig`
+- Replace the values in `Development.xcconfig` with the correct ones - you will
+  need to get these from another developer.
+
+### Notifications
+
+To test push notifications in the simulator, simply launch the app and drag a
+file from the `Example Notifications` directory onto the simulator window.
+
+## Releasing
+
+- Create the `Release.xcconfig` file (like the `Development.xcconfig` one)
+- Do the normal archive and release stuff
