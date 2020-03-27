@@ -26,19 +26,28 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6wG-Y5-AZ5">
-                                <rect key="frame" x="98.5" y="433" width="217" height="30"/>
+                                <rect key="frame" x="98.5" y="395" width="217" height="30"/>
                                 <state key="normal" title="Clear registration and diagnosis"/>
                                 <connections>
                                     <action selector="clearRegistrationTapped" destination="Om5-2G-0nj" eventType="touchUpInside" id="DIz-Ic-sBs"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGs-ae-RJf">
+                                <rect key="frame" x="154" y="433" width="106" height="30"/>
+                                <state key="normal" title="Clear diagnosis"/>
+                                <connections>
+                                    <action selector="clearDiagnosisTapped" destination="Om5-2G-0nj" eventType="touchUpInside" id="T8F-z0-N0n"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="vqa-sT-Bfm" firstAttribute="bottom" secondItem="9FX-aK-QIA" secondAttribute="bottom" constant="13" id="Agv-yn-2Xh"/>
+                            <constraint firstItem="bGs-ae-RJf" firstAttribute="centerY" secondItem="Qt8-9h-hpI" secondAttribute="centerY" id="J9e-xn-u0v"/>
                             <constraint firstItem="6wG-Y5-AZ5" firstAttribute="centerX" secondItem="Qt8-9h-hpI" secondAttribute="centerX" id="YrW-8c-6no"/>
-                            <constraint firstItem="6wG-Y5-AZ5" firstAttribute="centerY" secondItem="Qt8-9h-hpI" secondAttribute="centerY" id="elU-Y2-B5z"/>
                             <constraint firstItem="9FX-aK-QIA" firstAttribute="centerX" secondItem="Qt8-9h-hpI" secondAttribute="centerX" id="fJr-FO-6w0"/>
+                            <constraint firstItem="bGs-ae-RJf" firstAttribute="top" secondItem="6wG-Y5-AZ5" secondAttribute="bottom" constant="8" symbolic="YES" id="fws-ln-O6O"/>
+                            <constraint firstItem="bGs-ae-RJf" firstAttribute="centerX" secondItem="Qt8-9h-hpI" secondAttribute="centerX" id="g3Q-m0-pvK"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vqa-sT-Bfm"/>
                     </view>

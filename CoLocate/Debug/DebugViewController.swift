@@ -19,13 +19,21 @@ class DebugViewController: UIViewController {
     @IBAction func clearRegistrationTapped() {
         try! SecureRegistrationStorage.shared.clear()
         DiagnosisService.shared.recordDiagnosis(.unknown)
-        let alertController = UIAlertController(title: "Cleared", message: "Registration and diagnosis data has been cleared. Please kill and re-start the application.", preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "Ok", style: .default))
-        present(alertController, animated: true, completion: nil)
+        show(message: "Registration and diagnosis data has been cleared. Please stop and re-start the application.")
+    }
+    
+    @IBAction func clearDiagnosisTapped() {
+        DiagnosisService.shared.recordDiagnosis(.unknown)
+        show(message: "Diagnosis data has been cleared. Please stop and re-start the application.")
     }
     
     @IBAction func exitTapped() {
         delegate?.debugViewControllerWantsToExit(self)
     }
     
+    private func show(message: String) {
+        let alertController = UIAlertController(title: "Cleared", message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Ok", style: .default))
+        present(alertController, animated: true, completion: nil)
+    }
 }
