@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-      - ci
 
 jobs:
   build:
@@ -66,7 +65,6 @@ jobs:
   bump-build-version:
     needs: test
     runs-on: macOS-latest
-    if: github.ref == 'ref/heads/master'
     steps:
       - name: Checkout Project
         uses: actions/checkout@v2
