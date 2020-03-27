@@ -31,7 +31,7 @@ jobs:
         run: xcodebuild -showsdks
 
       - name: Setup Build Configuration
-        run: cp Development.xcconfig.sample Release.xcconfig
+        run: ./bin/setup-build-config
 
       - name: Run Build
         env:
@@ -51,8 +51,8 @@ jobs:
       - name: Show Available Destinations
         run: xcodebuild -scheme CoLocate -showdestinations
 
-      - name: Create Test Collateral
-        run: cp Development.xcconfig.sample Development.xcconfig
+      - name: Setup Build Configuration
+        run: ./bin/setup-build-config
 
       - name: Run Test
         run: >
