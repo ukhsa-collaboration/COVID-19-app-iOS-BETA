@@ -66,7 +66,7 @@ jobs:
   bump-build-version:
     needs: test
     runs-on: macOS-latest
-    if: github.ref == 'master'
+    if: github.ref == 'ref/heads/master'
     steps:
       - name: Checkout Project
         uses: actions/checkout@v2
