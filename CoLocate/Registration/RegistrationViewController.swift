@@ -27,16 +27,6 @@ class RegistrationViewController: UIViewController, Storyboarded {
         retryButton.setTitle("Register", for: .normal)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        // TODO Error handling?
-        let maybeRegistration = try? registrationStorage.get()
-        if maybeRegistration != nil {
-            coordinator?.launchOkNowVC()
-        }
-    }
-    
     @IBAction func didTapRegister(_ sender: Any) {
         registrationService.register { [weak self] result in
             guard let self = self else { return }
