@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		098ED478242D7D050029B729 /* RegistratonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED477242D7D050029B729 /* RegistratonService.swift */; };
 		098ED47C242D801C0029B729 /* RegistrationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED47A242D7E460029B729 /* RegistrationServiceTests.swift */; };
+		098ED47E242E6B950029B729 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED47D242E6B950029B729 /* RootViewController.swift */; };
+		098ED481242E745F0029B729 /* Debug.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 098ED480242E745F0029B729 /* Debug.storyboard */; };
+		098ED483242E746E0029B729 /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED482242E746E0029B729 /* DebugViewController.swift */; };
 		09D1CD4B242C284000B1A167 /* PotentialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D1CD49242C284000B1A167 /* PotentialViewController.swift */; };
 		09D1CD50242C3A9300B1A167 /* Potential.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09D1CD4F242C3A9300B1A167 /* Potential.storyboard */; };
 		213C806C241A56430020EFA5 /* PermissionsPromptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213C806B241A56430020EFA5 /* PermissionsPromptViewController.swift */; };
@@ -88,6 +91,9 @@
 /* Begin PBXFileReference section */
 		098ED477242D7D050029B729 /* RegistratonService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistratonService.swift; sourceTree = "<group>"; };
 		098ED47A242D7E460029B729 /* RegistrationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationServiceTests.swift; sourceTree = "<group>"; };
+		098ED47D242E6B950029B729 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		098ED480242E745F0029B729 /* Debug.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Debug.storyboard; sourceTree = "<group>"; };
+		098ED482242E746E0029B729 /* DebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
 		09D1CD49242C284000B1A167 /* PotentialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotentialViewController.swift; sourceTree = "<group>"; };
 		09D1CD4F242C3A9300B1A167 /* Potential.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Potential.storyboard; sourceTree = "<group>"; };
 		213C806B241A56430020EFA5 /* PermissionsPromptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsPromptViewController.swift; sourceTree = "<group>"; };
@@ -199,6 +205,15 @@
 				098ED47A242D7E460029B729 /* RegistrationServiceTests.swift */,
 			);
 			path = Registration;
+			sourceTree = "<group>";
+		};
+		098ED47F242E744F0029B729 /* Debug */ = {
+			isa = PBXGroup;
+			children = (
+				098ED480242E745F0029B729 /* Debug.storyboard */,
+				098ED482242E746E0029B729 /* DebugViewController.swift */,
+			);
+			path = Debug;
 			sourceTree = "<group>";
 		};
 		214209B72422155200C7BFF3 /* Appearance */ = {
@@ -318,6 +333,7 @@
 			children = (
 				F78CEB74242BAC83002254AD /* CoLocate.entitlements */,
 				F758B8C1242CBAF5003AE16D /* AppCoordinator.swift */,
+				098ED47D242E6B950029B729 /* RootViewController.swift */,
 				F78CEB45242B7741002254AD /* Extensions */,
 				6FC63C3C241641BA007C8BF3 /* Info.plist */,
 				F758B8BC242CB83B003AE16D /* Resources */,
@@ -325,6 +341,7 @@
 				6FC63C30241641B8007C8BF3 /* AppDelegate.swift */,
 				6FC63C39241641BA007C8BF3 /* LaunchScreen.storyboard */,
 				214209B9242216B700C7BFF3 /* DiagnosisService.swift */,
+				098ED47F242E744F0029B729 /* Debug */,
 				F758B8CD242CC242003AE16D /* Permissions */,
 				F758B8CA242CC1DC003AE16D /* EnterDiagnosis */,
 				F758B8C6242CC129003AE16D /* OkNow */,
@@ -545,6 +562,7 @@
 				09D1CD50242C3A9300B1A167 /* Potential.storyboard in Resources */,
 				F6CA2819242E41F700F8DC55 /* README.md in Resources */,
 				F6CA2817242E416C00F8DC55 /* Release.xcconfig in Resources */,
+				098ED481242E745F0029B729 /* Debug.storyboard in Resources */,
 				F78CEB68242B8C2C002254AD /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -580,6 +598,7 @@
 				F758B8C2242CBAF5003AE16D /* AppCoordinator.swift in Sources */,
 				21AF36AB241A8E50001A4910 /* BTLEListener.swift in Sources */,
 				F78CEBED242D0836002254AD /* SecureRequestFactory.swift in Sources */,
+				098ED47E242E6B950029B729 /* RootViewController.swift in Sources */,
 				F600A600242977D50038DF57 /* RegistrationViewController.swift in Sources */,
 				F6CC2CA9242BC7FC0079432B /* NotificationManager.swift in Sources */,
 				AE2A5E502423C473007A4771 /* ContactEventRecorder.swift in Sources */,
@@ -598,6 +617,7 @@
 				214209D2242399CF00C7BFF3 /* URLSession.swift in Sources */,
 				214209BA242216B700C7BFF3 /* DiagnosisService.swift in Sources */,
 				213C806C241A56430020EFA5 /* PermissionsPromptViewController.swift in Sources */,
+				098ED483242E746E0029B729 /* DebugViewController.swift in Sources */,
 				09D1CD4B242C284000B1A167 /* PotentialViewController.swift in Sources */,
 				21D93C2E241FB0A300C1FA9B /* EnterDiagnosisTableViewController.swift in Sources */,
 				AEC6A7BC241BD81A00B0237A /* LogoStrapline.swift in Sources */,

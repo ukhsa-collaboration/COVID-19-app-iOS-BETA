@@ -14,7 +14,7 @@ class AppCoordinator {
     private let notificationManager: NotificationManager
     private let registrationService: RegistrationService
     
-    var navigationController: UINavigationController
+    var navigationController: RootViewController
     private let okVC = OkNowViewController.instantiate(storyboard: .okNow)
     private let isolateVC = PleaseSelfIsolateViewController.instantiate(storyboard: .pleaseSelfIsolate)
     private let enterDiagnosisVC = EnterDiagnosisTableViewController.instantiate(storyboard: .enterDiagnosis)
@@ -27,13 +27,13 @@ class AppCoordinator {
         self.notificationManager = notificationManager
         self.registrationService = registrationService
 
-        navigationController = UINavigationController()
+        navigationController = RootViewController()
     }
     
     func start() {
         let vc = initialViewController()
         vc.coordinator = self
-        navigationController = UINavigationController(rootViewController: vc)
+        navigationController.viewControllers = [vc]
     }
     
     func initialViewController() -> UIViewController & Storyboarded {
