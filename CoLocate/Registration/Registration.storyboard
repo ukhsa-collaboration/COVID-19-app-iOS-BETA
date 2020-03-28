@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,7 +19,7 @@
                                 <rect key="frame" x="197" y="438" width="20" height="20"/>
                             </activityIndicatorView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gFK-L3-niD" userLabel="Content View">
-                                <rect key="frame" x="0.0" y="44" width="414" height="756"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="732"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sh3-95-XBv" customClass="LogoStrapline" customModule="CoLocate" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="1839.5" height="64"/>
@@ -58,8 +58,8 @@ To begin using the app, we need to prepare a unique key for you. This will be ge
                                     <constraint firstItem="gJK-Ke-e19" firstAttribute="leading" secondItem="gFK-L3-niD" secondAttribute="leading" constant="20" id="rLT-40-ILo"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6BR-Fy-Tcr">
-                                <rect key="frame" x="184" y="816" width="46" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6BR-Fy-Tcr" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
+                                <rect key="frame" x="16" y="792" width="382" height="54"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="didTapRegister:" destination="Jfw-Ex-QBB" eventType="touchUpInside" id="QXc-ih-K3H"/>
@@ -68,12 +68,14 @@ To begin using the app, we need to prepare a unique key for you. This will be ge
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="6BR-Fy-Tcr" firstAttribute="leading" secondItem="MjN-sS-s5i" secondAttribute="leading" constant="16" id="9V9-3I-5wm"/>
                             <constraint firstItem="gFK-L3-niD" firstAttribute="trailing" secondItem="MjN-sS-s5i" secondAttribute="trailing" id="SA8-05-x12"/>
                             <constraint firstItem="6BR-Fy-Tcr" firstAttribute="top" secondItem="gFK-L3-niD" secondAttribute="bottom" constant="16" id="Vmv-2I-Z33"/>
                             <constraint firstItem="6BR-Fy-Tcr" firstAttribute="centerX" secondItem="MjN-sS-s5i" secondAttribute="centerX" id="XQY-nr-LMH"/>
                             <constraint firstItem="SjM-mR-XNC" firstAttribute="centerX" secondItem="wR8-Eh-rb0" secondAttribute="centerX" id="bkh-Gn-8KD"/>
                             <constraint firstItem="MjN-sS-s5i" firstAttribute="bottom" secondItem="6BR-Fy-Tcr" secondAttribute="bottom" constant="16" id="frd-6I-faF"/>
                             <constraint firstItem="gFK-L3-niD" firstAttribute="leading" secondItem="MjN-sS-s5i" secondAttribute="leading" id="gmD-BI-mYI"/>
+                            <constraint firstItem="MjN-sS-s5i" firstAttribute="trailing" secondItem="6BR-Fy-Tcr" secondAttribute="trailing" constant="16" id="r78-Pm-zBC"/>
                             <constraint firstItem="SjM-mR-XNC" firstAttribute="centerY" secondItem="wR8-Eh-rb0" secondAttribute="centerY" id="wqb-tp-3LL"/>
                             <constraint firstItem="gFK-L3-niD" firstAttribute="top" secondItem="MjN-sS-s5i" secondAttribute="top" id="xUb-mq-nhZ"/>
                         </constraints>
