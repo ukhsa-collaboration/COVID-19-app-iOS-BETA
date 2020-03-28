@@ -45,3 +45,4 @@ file from the `Example Notifications` directory onto the simulator window.
 
 - Create the `Release.xcconfig` file (like the `Development.xcconfig` one)
 - Do the normal archive and release stuff
+

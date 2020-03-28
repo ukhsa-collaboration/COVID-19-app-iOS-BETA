@@ -1,1 +1,1 @@
-API_ENDPOINT = purposefully-invalid-url
+API_ENDPOINT = https:/$()/purposefully-invalid-url
