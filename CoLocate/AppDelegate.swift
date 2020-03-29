@@ -33,6 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         let rootViewController = RootViewController()
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = rootViewController
 
         registrationCoordinator = RegistrationCoordinator(application: application,
                                                           navController: rootViewController,
@@ -41,9 +43,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                                                           registrationStorage: SecureRegistrationStorage.shared,
                                                           delegate: self)
         registrationCoordinator.start()
-
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()
 
         return true

@@ -70,10 +70,6 @@ class RegistrationCoordinator {
     private func hasRegistration() -> Registration? {
         do {
             if let registration = try registrationStorage.get() {
-                if currentState != .completed {
-                    print("Error : Unexpected app state. Registration is saved but state is \(currentState)")
-                }
-
                 return registration
             } else {
                 return nil
