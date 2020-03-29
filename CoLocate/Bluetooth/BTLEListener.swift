@@ -123,9 +123,6 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         } else {
             print("CoLocate service not discovered for peripheral \(peripheral)")
         }
-        
-        // TODO: Do we really need to save this peripheral here? It gets passed to us on every delegate callback
-        //peripheralList.append(peripheral)
     }
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
