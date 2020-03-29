@@ -11,7 +11,7 @@ import CoreBluetooth
 
 class PermissionsPromptViewController: UIViewController, BTLEBroadcasterDelegate, BTLEListenerDelegate, Storyboarded {
     static let storyboardName = "Permissions"
-    var coordinator: AppCoordinator?
+    var bluetoothReadyDelegate: BluetoothAvailableDelegate?
 
     @IBOutlet private var bodyHeadline: UILabel!
     @IBOutlet private var bodyCopy: UILabel!
@@ -65,8 +65,8 @@ class PermissionsPromptViewController: UIViewController, BTLEBroadcasterDelegate
     }
 
     private func segueIfBTLEReady() {
-        if btleReady.broadcasterReady && btleReady.listenerReady {
-            coordinator?.showViewAfterPermissions()
-        }
+        guard btleReady.broadcasterReady && btleReady.listenerReady else { return }
+
+        bluetoothReadyDelegate?.bluetoothIsAvailable()
     }
 }

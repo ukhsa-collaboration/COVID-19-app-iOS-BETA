@@ -10,7 +10,6 @@ import UIKit
 
 class PleaseSelfIsolateViewController: UIViewController, Storyboarded {
     static let storyboardName = "PleaseSelfIsolate"
-    var coordinator: AppCoordinator?
 
     @IBOutlet private var warningView: UIView!
     @IBOutlet private var warningViewTitle: UILabel!
@@ -20,10 +19,11 @@ class PleaseSelfIsolateViewController: UIViewController, Storyboarded {
     @IBOutlet private var moreInformationTitle: UILabel!
     @IBOutlet private var moreInformationBody: UILabel!
 
+    var requestFactory: SecureRequestFactory?
+
     let session: Session = URLSession.shared
-    let requestFactory: RequestFactory = RequestFactory.shared
     let contactEventRecorder: ContactEventRecorder = PlistContactEventRecorder.shared
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -41,7 +41,9 @@ class PleaseSelfIsolateViewController: UIViewController, Storyboarded {
     @IBAction func didTapNotify(_ sender: Any) {
         let contactEvents = contactEventRecorder.contactEvents
 
-        let request = requestFactory.patchContactsRequest(contactEvents: contactEvents)
+        guard let request = requestFactory?.patchContactsRequest(contactEvents: contactEvents) else {
+            return
+        }
 
         session.execute(request, queue: .main) { (result) in
             switch result {

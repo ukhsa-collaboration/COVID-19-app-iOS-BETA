@@ -20,6 +20,8 @@ class PlistContactEventRecorderTests: XCTestCase {
     var service: PlistContactEventRecorder!
 
     override func setUp() {
+        super.setUp()
+
         service = PlistContactEventRecorder()
 
         contactEvent1 = ContactEvent(remoteContactId: UUID(), timestamp: epoch, rssi: 1)

@@ -18,7 +18,7 @@ class SecureRegistrationStorageTests: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        try! SecureRegistrationStorage.shared.clear()
+        try! SecureRegistrationStorage.clear()
     }
 
     func testRoundTrip() {

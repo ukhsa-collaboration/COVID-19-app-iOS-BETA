@@ -10,7 +10,6 @@ import UIKit
 
 protocol Storyboarded: class {
     static var storyboardName: String { get }
-    var coordinator: AppCoordinator? { get set }
     static func instantiate() -> Self
 }
 

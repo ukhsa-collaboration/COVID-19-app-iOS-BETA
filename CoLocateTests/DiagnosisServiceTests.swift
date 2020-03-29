@@ -12,6 +12,8 @@ import XCTest
 class DiagnosisServiceTests: XCTestCase {
     
     override func setUp() {
+        super.setUp()
+
         DiagnosisService.clear()
     }
 

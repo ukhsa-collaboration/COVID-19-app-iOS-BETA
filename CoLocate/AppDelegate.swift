@@ -12,8 +12,7 @@ import Firebase
 import FirebaseInstanceID
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
-
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, RegistrationCoordinatorDelegate {
     var window: UIWindow?
 
     var broadcaster: BTLEBroadcaster?
@@ -24,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     let registrationService: RegistrationService
 
     var appCoordinator: AppCoordinator!
+    var registrationCoordinator: RegistrationCoordinator!
     
     override init() {
         registrationService = ConcreteRegistrationService(session: URLSession.shared, notificationManager: notificationManager)
@@ -32,8 +32,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-        initNotifications()
-        initUi()
+        let rootViewController = RootViewController()
+
+        registrationCoordinator = RegistrationCoordinator(application: application,
+                                                          navController: rootViewController,
+                                                          notificationManager: notificationManager,
+                                                          registrationService: registrationService,
+                                                          registrationStorage: SecureRegistrationStorage.shared,
+                                                          delegate: self)
+        registrationCoordinator.start()
+
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = rootViewController
+        window?.makeKeyAndVisible()
 
         return true
     }
@@ -44,30 +55,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         notificationManager.handleNotification(userInfo: userInfo)
         completionHandler(UIBackgroundFetchResult.newData)
     }
-    
+
     // MARK: - Private
 
-    private func initNotifications() {
-        notificationManager.configure()
-        notificationManager.requestAuthorization(application: UIApplication.shared) { (result) in
-            // TODO
-            if case .failure(let error) = result {
-                print(error)
-            }
+    func registrationDidFinish(with registration: Registration) {
+        guard let rootViewController = window?.rootViewController as? RootViewController else {
+            return
         }
-    }
 
-    private func initUi() {
-        let rootViewController = RootViewController()
         appCoordinator = AppCoordinator(navController: rootViewController,
                                         diagnosisService: diagnosisService,
-                                        notificationManager: notificationManager,
-                                        registrationService: registrationService)
-
+                                        secureRequestFactory: ConcreteSecureRequestFactory(registration: registration))
         appCoordinator.start()
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = rootViewController
-        window?.makeKeyAndVisible()
     }
-    
 }

@@ -11,18 +11,18 @@ import UIKit
 class AppCoordinator {
     private let navController: UINavigationController
     private let diagnosisService: DiagnosisService
-    private let notificationManager: NotificationManager
-    private let registrationService: RegistrationService
+    private let secureRequestFactory: SecureRequestFactory
         
-    init(navController: UINavigationController, diagnosisService: DiagnosisService, notificationManager: NotificationManager, registrationService: RegistrationService) {
+    init(navController: UINavigationController,
+         diagnosisService: DiagnosisService,
+         secureRequestFactory: SecureRequestFactory) {
         self.navController = navController
         self.diagnosisService = diagnosisService
-        self.notificationManager = notificationManager
-        self.registrationService = registrationService
+        self.secureRequestFactory = secureRequestFactory
                 
         diagnosisService.delegate = self
     }
-    
+
     func start() {
         navController.viewControllers = [initialViewController()]
     }
@@ -30,7 +30,7 @@ class AppCoordinator {
     func initialViewController() -> UIViewController & Storyboarded {
         switch diagnosisService.currentDiagnosis {
         case .unknown:
-            return permissionsVC()
+            return enterDiagnosisVC()
 
         case .infected:
             return isolateVC()
@@ -43,63 +43,39 @@ class AppCoordinator {
         }
     }
     
-    func showViewAfterPermissions() {
-        navController.pushViewController(vcAfterPermissions(), animated: true)
+    func showAppropriateViewController() {
+        navController.pushViewController(viewControllerForDiagnosis(), animated: true)
     }
-    
-    func showViewAfterRegistration() {
-        navController.pushViewController(enterDiagnosisVC(), animated: true)
-    }
-    
-    private func vcAfterPermissions() -> UIViewController {
-        let registered = try! SecureRegistrationStorage.shared.get() != nil
+
+    private func viewControllerForDiagnosis() -> UIViewController {
         let currentDiagnosis = diagnosisService.currentDiagnosis
         
-        switch (registered, currentDiagnosis) {
-        case (false, _): return registrationVC()
-        case (_, .unknown): return enterDiagnosisVC()
-        case (_, .infected): return isolateVC()
-        case (_, .notInfected): return okVC()
-        case (_, .potential): return potentialVC()
+        switch currentDiagnosis {
+        case .unknown: return enterDiagnosisVC()
+        case .infected: return isolateVC()
+        case .notInfected: return okVC()
+        case .potential: return potentialVC()
         }
     }
 
-    
+    private func enterDiagnosisVC() -> EnterDiagnosisTableViewController {
+        let vc = EnterDiagnosisTableViewController.instantiate()
+        return vc
+    }
+
     private func okVC() -> OkNowViewController {
         let vc = OkNowViewController.instantiate()
-        vc.coordinator = self
         return vc
     }
     
     private func isolateVC() -> PleaseSelfIsolateViewController {
         let vc = PleaseSelfIsolateViewController.instantiate()
-        vc.coordinator = self
-        return vc
-    }
-    
-    private func enterDiagnosisVC() -> EnterDiagnosisTableViewController {
-        let vc = EnterDiagnosisTableViewController.instantiate()
-        vc.coordinator = self
+        vc.requestFactory = secureRequestFactory
         return vc
     }
     
     func potentialVC() -> PotentialViewController {
         let vc = PotentialViewController.instantiate()
-        vc.coordinator = self
-        return vc
-    }
-    
-    private func permissionsVC() -> PermissionsPromptViewController {
-        let vc = PermissionsPromptViewController.instantiate()
-        vc.coordinator = self
-        return vc
-    }
-    
-    private func registrationVC() -> RegistrationViewController {
-        let vc = RegistrationViewController.instantiate()
-        vc.coordinator = self
-        vc.registrationService = registrationService
-        vc.notificationManager = notificationManager
         return vc
     }
 }
@@ -114,7 +90,7 @@ extension AppCoordinator: DiagnosisServiceDelegate {
         case .infected: vc = isolateVC()
         case .notInfected: vc = okVC()
         }
-        
+
         navController.pushViewController(vc, animated: true)
     }
 }

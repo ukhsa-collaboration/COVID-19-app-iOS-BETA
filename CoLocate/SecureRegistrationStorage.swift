@@ -59,7 +59,7 @@ class SecureRegistrationStorage {
     }
 
     func set(registration: Registration) throws {
-        try clear()
+        try SecureRegistrationStorage.clear()
 
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
@@ -74,7 +74,7 @@ class SecureRegistrationStorage {
         }
     }
 
-    func clear() throws {
+    static func clear() throws {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: SecureRegistrationStorage.secService,

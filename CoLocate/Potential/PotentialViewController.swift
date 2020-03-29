@@ -10,6 +10,4 @@ import UIKit
 
 class PotentialViewController: UIViewController, Storyboarded {
     static let storyboardName = "Potential"
-    
-    var coordinator: AppCoordinator?
 }

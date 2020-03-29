@@ -11,10 +11,13 @@ import XCTest
 
 class RegistrationServiceTests: XCTestCase {
 
+    let id = UUID()
+    let secretKey = "a secret key".data(using: .utf8)!
+
     override class func setUp() {
         super.setUp()
 
-        try! SecureRegistrationStorage.shared.clear()
+        try! SecureRegistrationStorage.clear()
     }
 
     func testRegistration_withPreExistingPushToken() throws {
@@ -27,7 +30,9 @@ class RegistrationServiceTests: XCTestCase {
         var error: Error? = nil
         registrationService.register(completionHandler: { r in
             switch r {
-            case .success(_):
+            case .success(let registration):
+                XCTAssertEqual(registration.id, self.id)
+                XCTAssertEqual(registration.secretKey, self.secretKey)
                 finished = true
             case .failure(let e):
                 finished = true
@@ -58,8 +63,6 @@ class RegistrationServiceTests: XCTestCase {
         XCTAssertFalse(finished)
         
         // Respond to the second request
-        let id = UUID()
-        let secretKey = "a secret key".data(using: .utf8)!
         let confirmationResponse = ConfirmRegistrationResponse(id: id, secretKey: secretKey)
         session.executeCompletion!(Result<ConfirmRegistrationResponse, Error>.success(confirmationResponse))
         
@@ -80,7 +83,9 @@ class RegistrationServiceTests: XCTestCase {
         var error: Error? = nil
         registrationService.register(completionHandler: { r in
             switch r {
-            case .success(_):
+            case .success(let registration):
+                XCTAssertEqual(registration.id, self.id)
+                XCTAssertEqual(registration.secretKey, self.secretKey)
                 finished = true
             case .failure(let e):
                 finished = true
@@ -116,8 +121,6 @@ class RegistrationServiceTests: XCTestCase {
         XCTAssertFalse(finished)
         
         // Respond to the second request
-        let id = UUID()
-        let secretKey = "a secret key".data(using: .utf8)!
         let confirmationResponse = ConfirmRegistrationResponse(id: id, secretKey: secretKey)
         session.executeCompletion!(Result<ConfirmRegistrationResponse, Error>.success(confirmationResponse))
         

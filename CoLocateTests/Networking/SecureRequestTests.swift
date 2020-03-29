@@ -18,6 +18,7 @@ class SecureRequestTests: XCTestCase {
         let keyData = Data(base64Encoded: "Gqacz+VE6uuZy1uc4oTG/A+LAS291mXN+J5opDSNYys=")!
 
         request = SampleSecureRequest(key: SymmetricKey(data: keyData), text: "Hello, nurse!", date: Date(timeIntervalSince1970: 1))
+        super.setUp()
     }
 
     // To double-check this HMAC from the command line...

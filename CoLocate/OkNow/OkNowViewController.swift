@@ -12,7 +12,6 @@ import UIKit
 
 class OkNowViewController: UIViewController, Storyboarded {
     static let storyboardName = "OkNow"
-    var coordinator: AppCoordinator?
     
     @IBOutlet private var warningView: UIView!
     @IBOutlet private var warningViewTitle: UILabel!
@@ -43,7 +42,6 @@ class OkNowViewController: UIViewController, Storyboarded {
     
     @objc func tapCheckMySymptomsButton() {
         let enterDiagnosisVC = EnterDiagnosisTableViewController.instantiate()
-        enterDiagnosisVC.coordinator = coordinator
         navigationController?.pushViewController(enterDiagnosisVC, animated: true)
     }
 }

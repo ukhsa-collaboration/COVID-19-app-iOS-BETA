@@ -7,3 +7,23 @@
 //
 
 import Foundation
+import CryptoKit
+
+protocol SecureRequestFactory {
+    func patchContactsRequest(contactEvents: [ContactEvent]) -> PatchContactEventsRequest
+}
+
+struct ConcreteSecureRequestFactory: SecureRequestFactory {
+    private let registration: Registration
+
+    init(registration: Registration) {
+        self.registration = registration
+    }
+
+    func patchContactsRequest(contactEvents: [ContactEvent]) -> PatchContactEventsRequest {
+        let deviceId = registration.id
+        let symmetricKey = SymmetricKey(data: registration.secretKey)
+
+        return PatchContactEventsRequest(key: symmetricKey, deviceId: deviceId, contactEvents: contactEvents)
+    }
+}
