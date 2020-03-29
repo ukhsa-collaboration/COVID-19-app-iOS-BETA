@@ -9,7 +9,7 @@
 import Foundation
 
 protocol RegistrationService {
-    func register(completionHandler: @escaping ((Result<(), Error>) -> Void))
+    func register(completionHandler: @escaping ((Result<Registration, Error>) -> Void))
 }
 
 class ConcreteRegistrationService: RegistrationService {
@@ -17,14 +17,14 @@ class ConcreteRegistrationService: RegistrationService {
     var registrationStorage: SecureRegistrationStorage = SecureRegistrationStorage.shared
     var notificationManager: NotificationManager
     var registerWhenTokenReceived = false
-    var completionHandler: ((Result<(), Error>) -> Void)?
+    var completionHandler: ((Result<Registration, Error>) -> Void)?
     
     init(session: Session, notificationManager: NotificationManager) {
         self.session = session
         self.notificationManager = notificationManager
     }
     
-    func register(completionHandler: @escaping ((Result<(), Error>) -> Void)) {
+    func register(completionHandler: @escaping ((Result<Registration, Error>) -> Void)) {
         self.completionHandler = completionHandler
         notificationManager.delegate = self
 
@@ -47,7 +47,6 @@ class ConcreteRegistrationService: RegistrationService {
     private func handleRegistration(result: Result<(), Error>) {
         switch result {
         case .success(_):
-            // TODO What do when fail?
             print("First registration request succeeded")
 
         case .failure(let error):
@@ -56,10 +55,10 @@ class ConcreteRegistrationService: RegistrationService {
             completionHandler!(.failure(error))
         }
     }
-    
-    private func succeed() {
+
+    private func succeed(registration: Registration) {
         notificationManager.delegate = nil
-        completionHandler?(.success(()))
+        completionHandler?(.success((registration)))
     }
     
     private func fail(withError error: Error) {
@@ -71,24 +70,23 @@ class ConcreteRegistrationService: RegistrationService {
 
 extension ConcreteRegistrationService: NotificationManagerDelegate {
 
-    func notificationManager(_ notificationManager: NotificationManager, didReceiveNotificationWithInfo userInfo: [AnyHashable : Any]) {
-        
+    func notificationManager(_ notificationManager: NotificationManager,
+                             didReceiveNotificationWithInfo userInfo: [AnyHashable : Any]) {
         // I can't remember how to spell the switch to do this --RA
         if let activationCode = userInfo["activationCode"] as? String {
-            doShitWithActivationCode(activationCode: activationCode)
+            didReceiveActivationCode(activationCode: activationCode)
         } else if let pushToken = userInfo["pushToken"] as? String {
-            doShitWithPushToken(pushToken: pushToken)
+            didReceivePushToken(pushToken: pushToken)
         }
-        
     }
     
-    func doShitWithPushToken(pushToken: String) {
+    private func didReceivePushToken(pushToken: String) {
         if registerWhenTokenReceived {
             beginRegistration()
         }
     }
     
-    func doShitWithActivationCode(activationCode: String) {
+    private func didReceiveActivationCode(activationCode: String) {
         let request = RequestFactory.confirmRegistrationRequest(activationCode: activationCode, pushToken: notificationManager.pushToken!)
         session.execute(request, queue: .main) { [weak self] result in
             guard let self = self else { return }
@@ -104,7 +102,7 @@ extension ConcreteRegistrationService: NotificationManagerDelegate {
                     self.fail(withError: error)
                 }
                  
-                self.succeed()
+                self.succeed(registration: registration)
                 
             case .failure(let error):
                 // TODO How do we handle this failure?

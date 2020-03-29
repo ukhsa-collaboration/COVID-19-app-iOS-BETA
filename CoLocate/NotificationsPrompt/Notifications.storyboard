@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Notifications Prompt View Controller-->
+        <scene sceneID="Z5y-NX-8A1">
+            <objects>
+                <viewController storyboardIdentifier="NotificationsPromptViewController" id="feo-uu-Bmg" customClass="NotificationsPromptViewController" customModule="CoLocate" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8mU-bJ-E8r">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jwq-wh-pRa">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7EH-zc-7Lw" userLabel="Content View">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="367.5"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Cu-o3-tCX" customClass="LogoStrapline" customModule="CoLocate" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="64" id="lHF-nK-3ww"/>
+                                                </constraints>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Headline" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJB-VH-X6N">
+                                                <rect key="frame" x="20" y="96" width="374" height="41"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r75-d5-TbQ">
+                                                <rect key="frame" x="20" y="153" width="374" height="108.5"/>
+                                                <string key="text">Bacon ipsum dolor amet chuck cupim ground round pig, swine pastrami rump strip steak bresaola jowl. Ball tip corned beef pastrami ribeye pork loin sausage capicola shankle brisket alcatra. Cupim ham short loin meatloaf pastrami.</string>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7If-MU-XXx" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
+                                                <rect key="frame" x="20" y="293.5" width="374" height="54"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <state key="normal" title="Button"/>
+                                                <connections>
+                                                    <action selector="didTapContinue:" destination="feo-uu-Bmg" eventType="touchUpInside" id="Q8P-pc-Apd"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstItem="r75-d5-TbQ" firstAttribute="top" secondItem="gJB-VH-X6N" secondAttribute="bottom" constant="16" id="DeN-1X-KUr"/>
+                                            <constraint firstItem="3Cu-o3-tCX" firstAttribute="top" secondItem="7EH-zc-7Lw" secondAttribute="top" id="EgL-XH-Iuw"/>
+                                            <constraint firstItem="3Cu-o3-tCX" firstAttribute="width" secondItem="7EH-zc-7Lw" secondAttribute="width" id="GTO-jn-u9c"/>
+                                            <constraint firstItem="7If-MU-XXx" firstAttribute="top" secondItem="r75-d5-TbQ" secondAttribute="bottom" constant="32" id="OKV-nf-KoI"/>
+                                            <constraint firstAttribute="trailing" secondItem="7If-MU-XXx" secondAttribute="trailing" constant="20" symbolic="YES" id="OVg-Gx-Ahi"/>
+                                            <constraint firstItem="7If-MU-XXx" firstAttribute="leading" secondItem="7EH-zc-7Lw" secondAttribute="leading" constant="20" symbolic="YES" id="Og7-sU-YGw"/>
+                                            <constraint firstItem="r75-d5-TbQ" firstAttribute="leading" secondItem="7EH-zc-7Lw" secondAttribute="leading" constant="20" symbolic="YES" id="SLZ-Qy-PA3"/>
+                                            <constraint firstItem="gJB-VH-X6N" firstAttribute="top" secondItem="3Cu-o3-tCX" secondAttribute="bottom" constant="32" id="UzD-cZ-K7B"/>
+                                            <constraint firstAttribute="bottom" secondItem="7If-MU-XXx" secondAttribute="bottom" constant="20" symbolic="YES" id="acg-oY-xFb"/>
+                                            <constraint firstAttribute="trailing" secondItem="3Cu-o3-tCX" secondAttribute="trailing" id="dx5-Jx-QKh"/>
+                                            <constraint firstAttribute="trailing" secondItem="r75-d5-TbQ" secondAttribute="trailing" constant="20" symbolic="YES" id="gbK-iM-utY"/>
+                                            <constraint firstItem="gJB-VH-X6N" firstAttribute="leading" secondItem="7EH-zc-7Lw" secondAttribute="leading" constant="20" symbolic="YES" id="ocN-nu-fl5"/>
+                                            <constraint firstAttribute="trailing" secondItem="gJB-VH-X6N" secondAttribute="trailing" constant="20" symbolic="YES" id="qh1-iS-Gxd"/>
+                                            <constraint firstItem="3Cu-o3-tCX" firstAttribute="leading" secondItem="7EH-zc-7Lw" secondAttribute="leading" id="rmS-L6-Peu"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="7EH-zc-7Lw" firstAttribute="width" secondItem="jwq-wh-pRa" secondAttribute="width" id="K2f-GY-cOp"/>
+                                    <constraint firstAttribute="trailing" secondItem="7EH-zc-7Lw" secondAttribute="trailing" id="Zmr-y4-vX9"/>
+                                    <constraint firstItem="7EH-zc-7Lw" firstAttribute="top" secondItem="jwq-wh-pRa" secondAttribute="top" id="bsi-cW-xFN"/>
+                                    <constraint firstItem="7EH-zc-7Lw" firstAttribute="leading" secondItem="jwq-wh-pRa" secondAttribute="leading" id="fld-6N-778"/>
+                                    <constraint firstAttribute="bottom" secondItem="7EH-zc-7Lw" secondAttribute="bottom" id="uBT-Vw-xYt"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="18B-Sw-ej1"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="RNG-6T-a61"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="C3U-0c-1ip" firstAttribute="bottom" secondItem="jwq-wh-pRa" secondAttribute="bottom" id="6S8-Ic-ttL"/>
+                            <constraint firstItem="jwq-wh-pRa" firstAttribute="leading" secondItem="C3U-0c-1ip" secondAttribute="leading" id="8tN-x8-FsC"/>
+                            <constraint firstItem="jwq-wh-pRa" firstAttribute="top" secondItem="C3U-0c-1ip" secondAttribute="top" id="DI7-Yh-Kof"/>
+                            <constraint firstItem="C3U-0c-1ip" firstAttribute="trailing" secondItem="jwq-wh-pRa" secondAttribute="trailing" id="cLK-nw-saO"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="C3U-0c-1ip"/>
+                    </view>
+                    <connections>
+                        <outlet property="bodyCopy" destination="r75-d5-TbQ" id="orE-hP-lpq"/>
+                        <outlet property="continueButton" destination="7If-MU-XXx" id="Ybe-ZV-Ukm"/>
+                        <outlet property="headlineLabel" destination="gJB-VH-X6N" id="1cU-lt-HY2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5gE-tb-NCo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-510" y="109"/>
+        </scene>
+    </scenes>
+</document>

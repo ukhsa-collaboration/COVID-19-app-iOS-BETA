@@ -21,6 +21,8 @@ class ConfirmRegistrationRequestTests: XCTestCase {
     
     override func setUp() {
         request = ConfirmRegistrationRequest(activationCode: activationCode, pushToken: pushToken)
+
+        super.setUp()
     }
 
     func testHttpMethod() {

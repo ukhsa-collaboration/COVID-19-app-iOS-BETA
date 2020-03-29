@@ -28,8 +28,6 @@ class PatchContactEventsRequestTests: XCTestCase {
 
     var contactEvents: [ContactEvent]!
 
-    var storage: SecureRegistrationStorage!
-    
     var request: PatchContactEventsRequest!
     
     override func setUp() {
@@ -39,8 +37,10 @@ class PatchContactEventsRequestTests: XCTestCase {
             ContactEvent(remoteContactId: removeDeviceId3, timestamp: timestamp3, rssi: rssi3)
         ]
 
-        storage = RegistrationStorageDouble(id: anonymousId, key: dummyKey)
-        request = RequestFactory(registrationStorage: storage).patchContactsRequest(contactEvents: contactEvents)
+        let registration = Registration(id: anonymousId, secretKey: dummyKey)
+        request = ConcreteSecureRequestFactory(registration: registration).patchContactsRequest(contactEvents: contactEvents)
+
+        super.setUp()
     }
 
     func testMethod() {
@@ -86,8 +86,13 @@ class PatchContactEventsRequestTests: XCTestCase {
 }
 
 class RegistrationStorageDouble: SecureRegistrationStorage {
-    let id: UUID
-    let key: Data
+    let id: UUID?
+    let key: Data?
+
+    override init() {
+        id = nil
+        key = nil
+    }
 
     init(id: UUID, key: Data) {
         self.id = id
@@ -95,6 +100,8 @@ class RegistrationStorageDouble: SecureRegistrationStorage {
     }
 
     override func get() throws -> Registration? {
+        guard let id = id, let key = key else { return nil }
+
         return Registration(id: id, secretKey: key)
     }
 }

@@ -67,6 +67,9 @@
 		F758B8CC242CC1F7003AE16D /* EnterDiagnosis.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F758B8CB242CC1F7003AE16D /* EnterDiagnosis.storyboard */; };
 		F758B8CF242CC26C003AE16D /* Permissions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F758B8CE242CC26C003AE16D /* Permissions.storyboard */; };
 		F758B8D2242CC67D003AE16D /* Registration.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F758B8D1242CC67D003AE16D /* Registration.storyboard */; };
+		F770A453242FEC8A002FDED1 /* NotificationsPromptViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F770A452242FEC8A002FDED1 /* NotificationsPromptViewControllerTests.swift */; };
+		F770A455242FEE7C002FDED1 /* SecureRequestFactoryDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = F770A454242FEE7C002FDED1 /* SecureRequestFactoryDouble.swift */; };
+		F770A4572430F76B002FDED1 /* AppCoordinatorDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = F770A4562430F76B002FDED1 /* AppCoordinatorDouble.swift */; };
 		F78CEB47242B7752002254AD /* String+localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78CEB46242B7752002254AD /* String+localized.swift */; };
 		F78CEB5A242B7EC0002254AD /* FirebaseMessaging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB55242B7EBF002254AD /* FirebaseMessaging.framework */; };
 		F78CEB5B242B7EC0002254AD /* FirebaseCoreDiagnostics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB56242B7EBF002254AD /* FirebaseCoreDiagnostics.framework */; };
@@ -80,6 +83,10 @@
 		F78CEB71242B9305002254AD /* GoogleDataTransport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB70242B9305002254AD /* GoogleDataTransport.framework */; };
 		F78CEB73242B937F002254AD /* nanopb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB72242B937F002254AD /* nanopb.framework */; };
 		F78CEBED242D0836002254AD /* SecureRequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78CEBEC242D0836002254AD /* SecureRequestFactory.swift */; };
+		F7EAE5A0242FACCB0090F8A2 /* RegistrationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EAE59F242FACCB0090F8A2 /* RegistrationCoordinator.swift */; };
+		F7EAE5A2242FAD0E0090F8A2 /* RegistrationCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EAE5A1242FAD0E0090F8A2 /* RegistrationCoordinatorTests.swift */; };
+		F7EAE5A6242FB0150090F8A2 /* NotificationsPromptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EAE5A5242FB0150090F8A2 /* NotificationsPromptViewController.swift */; };
+		F7EAE5A8242FB0F30090F8A2 /* Notifications.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7EAE5A7242FB0F30090F8A2 /* Notifications.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -160,6 +167,9 @@
 		F758B8CB242CC1F7003AE16D /* EnterDiagnosis.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EnterDiagnosis.storyboard; sourceTree = "<group>"; };
 		F758B8CE242CC26C003AE16D /* Permissions.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Permissions.storyboard; sourceTree = "<group>"; };
 		F758B8D1242CC67D003AE16D /* Registration.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Registration.storyboard; sourceTree = "<group>"; };
+		F770A452242FEC8A002FDED1 /* NotificationsPromptViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsPromptViewControllerTests.swift; sourceTree = "<group>"; };
+		F770A454242FEE7C002FDED1 /* SecureRequestFactoryDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRequestFactoryDouble.swift; sourceTree = "<group>"; };
+		F770A4562430F76B002FDED1 /* AppCoordinatorDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinatorDouble.swift; sourceTree = "<group>"; };
 		F78CEB46242B7752002254AD /* String+localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+localized.swift"; sourceTree = "<group>"; };
 		F78CEB53242B7E18002254AD /* CoLocate-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoLocate-Bridging-Header.h"; sourceTree = "<group>"; };
 		F78CEB55242B7EBF002254AD /* FirebaseMessaging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseMessaging.framework; path = Frameworks/FirebaseMessaging.framework; sourceTree = "<group>"; };
@@ -177,6 +187,10 @@
 		F78CEB72242B937F002254AD /* nanopb.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = nanopb.framework; path = Frameworks/nanopb.framework; sourceTree = "<group>"; };
 		F78CEB74242BAC83002254AD /* CoLocate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CoLocate.entitlements; sourceTree = "<group>"; };
 		F78CEBEC242D0836002254AD /* SecureRequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRequestFactory.swift; sourceTree = "<group>"; };
+		F7EAE59F242FACCB0090F8A2 /* RegistrationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationCoordinator.swift; sourceTree = "<group>"; };
+		F7EAE5A1242FAD0E0090F8A2 /* RegistrationCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationCoordinatorTests.swift; sourceTree = "<group>"; };
+		F7EAE5A5242FB0150090F8A2 /* NotificationsPromptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsPromptViewController.swift; sourceTree = "<group>"; };
+		F7EAE5A7242FB0F30090F8A2 /* Notifications.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Notifications.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,6 +247,8 @@
 				098ED487242E89930029B729 /* NotificationServiceDouble.swift */,
 				098ED489242E89D80029B729 /* RegistrationServiceDouble.swift */,
 				098ED48B242E8B290029B729 /* DiagnosisServiceDouble.swift */,
+				F770A454242FEE7C002FDED1 /* SecureRequestFactoryDouble.swift */,
+				F770A4562430F76B002FDED1 /* AppCoordinatorDouble.swift */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -263,12 +279,13 @@
 				098ED479242D7E340029B729 /* Registration */,
 				F6CC2CAA242BCCE90079432B /* Notifications */,
 				214209C32422276800C7BFF3 /* Info.plist */,
+				098ED484242E88D80029B729 /* AppCoordinatorTests.swift */,
 				214209C9242227B300C7BFF3 /* DiagnosisServiceTests.swift */,
 				214209CD24237A6300C7BFF3 /* PlistContactEventRecorderTests.swift */,
 				F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */,
+				F7EAE5A1242FAD0E0090F8A2 /* RegistrationCoordinatorTests.swift */,
 				F68BFBF6242ACD17008EE68F /* TestHelpers.swift */,
 				214209DA242630CF00C7BFF3 /* Networking */,
-				098ED484242E88D80029B729 /* AppCoordinatorTests.swift */,
 			);
 			path = CoLocateTests;
 			sourceTree = "<group>";
@@ -291,11 +308,11 @@
 		214209DA242630CF00C7BFF3 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				21C417C9242CB0A200DEF3E2 /* ConfirmRegistrationRequestTests.swift */,
 				214209D62423C9B600C7BFF3 /* PatchContactEventsRequestTests.swift */,
 				F600A60324297C010038DF57 /* RegistrationRequestTests.swift */,
-				214209D824262B7500C7BFF3 /* SessionHelpers.swift */,
 				21B3D2E2242906AE00573061 /* SecureRequestTests.swift */,
-				21C417C9242CB0A200DEF3E2 /* ConfirmRegistrationRequestTests.swift */,
+				214209D824262B7500C7BFF3 /* SessionHelpers.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -354,33 +371,35 @@
 		6FC63C2F241641B8007C8BF3 /* CoLocate */ = {
 			isa = PBXGroup;
 			children = (
+				6FC63C3C241641BA007C8BF3 /* Info.plist */,
+				F78CEB67242B8C2B002254AD /* GoogleService-Info.plist */,
 				F78CEB74242BAC83002254AD /* CoLocate.entitlements */,
+				F78CEB53242B7E18002254AD /* CoLocate-Bridging-Header.h */,
+				098ED48D242E9AF00029B729 /* Settings.bundle */,
+				6FC63C37241641BA007C8BF3 /* Assets.xcassets */,
+				A1E7A0582420028B0078174D /* NHS Colors.xcassets */,
+				F78CEB45242B7741002254AD /* Extensions */,
+				F758B8BC242CB83B003AE16D /* Resources */,
+				6FC63C30241641B8007C8BF3 /* AppDelegate.swift */,
 				F758B8C1242CBAF5003AE16D /* AppCoordinator.swift */,
 				098ED47D242E6B950029B729 /* RootViewController.swift */,
-				F78CEB45242B7741002254AD /* Extensions */,
-				6FC63C3C241641BA007C8BF3 /* Info.plist */,
-				F758B8BC242CB83B003AE16D /* Resources */,
-				F78CEB67242B8C2B002254AD /* GoogleService-Info.plist */,
-				6FC63C30241641B8007C8BF3 /* AppDelegate.swift */,
 				6FC63C39241641BA007C8BF3 /* LaunchScreen.storyboard */,
 				214209B9242216B700C7BFF3 /* DiagnosisService.swift */,
+				F67A2290242AA35B002254B6 /* SecureRegistrationStorage.swift */,
+				F7EAE59F242FACCB0090F8A2 /* RegistrationCoordinator.swift */,
 				098ED47F242E744F0029B729 /* Debug */,
 				F758B8CD242CC242003AE16D /* Permissions */,
 				F758B8CA242CC1DC003AE16D /* EnterDiagnosis */,
+				F7EAE5A4242FAFFA0090F8A2 /* NotificationsPrompt */,
 				F758B8C6242CC129003AE16D /* OkNow */,
 				F758B8C7242CC164003AE16D /* PleaseSelfIsolate */,
 				F758B8D0242CC661003AE16D /* Registration */,
-				F67A2290242AA35B002254B6 /* SecureRegistrationStorage.swift */,
 				F758B8C5242CC117003AE16D /* Potential */,
-				6FC63C37241641BA007C8BF3 /* Assets.xcassets */,
-				A1E7A0582420028B0078174D /* NHS Colors.xcassets */,
 				21B3D2DF24263A1100573061 /* Contact Events */,
 				214209B72422155200C7BFF3 /* Appearance */,
 				214209B82422157300C7BFF3 /* Bluetooth */,
 				214209D3242399DD00C7BFF3 /* Networking */,
 				F6CC2CA7242BC7D90079432B /* Notifications */,
-				F78CEB53242B7E18002254AD /* CoLocate-Bridging-Header.h */,
-				098ED48D242E9AF00029B729 /* Settings.bundle */,
 			);
 			path = CoLocate;
 			sourceTree = "<group>";
@@ -397,6 +416,7 @@
 			isa = PBXGroup;
 			children = (
 				F6CC2CAB242BCD0D0079432B /* NotificationManagerTests.swift */,
+				F770A452242FEC8A002FDED1 /* NotificationsPromptViewControllerTests.swift */,
 			);
 			path = Notifications;
 			sourceTree = "<group>";
@@ -480,6 +500,15 @@
 				F78CEB64242B8137002254AD /* Firebase.h */,
 			);
 			path = Firebase;
+			sourceTree = "<group>";
+		};
+		F7EAE5A4242FAFFA0090F8A2 /* NotificationsPrompt */ = {
+			isa = PBXGroup;
+			children = (
+				F7EAE5A5242FB0150090F8A2 /* NotificationsPromptViewController.swift */,
+				F7EAE5A7242FB0F30090F8A2 /* Notifications.storyboard */,
+			);
+			path = NotificationsPrompt;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -581,6 +610,7 @@
 				A1E7A0592420028B0078174D /* NHS Colors.xcassets in Resources */,
 				F758B8BE242CB856003AE16D /* Localizable.strings in Resources */,
 				F758B8CF242CC26C003AE16D /* Permissions.storyboard in Resources */,
+				F7EAE5A8242FB0F30090F8A2 /* Notifications.storyboard in Resources */,
 				F758B8CC242CC1F7003AE16D /* EnterDiagnosis.storyboard in Resources */,
 				6FC63C38241641BA007C8BF3 /* Assets.xcassets in Resources */,
 				09D1CD50242C3A9300B1A167 /* Potential.storyboard in Resources */,
@@ -600,16 +630,20 @@
 				098ED47C242D801C0029B729 /* RegistrationServiceTests.swift in Sources */,
 				21B3D2E3242906AE00573061 /* SecureRequestTests.swift in Sources */,
 				214209CA242227B300C7BFF3 /* DiagnosisServiceTests.swift in Sources */,
+				F7EAE5A2242FAD0E0090F8A2 /* RegistrationCoordinatorTests.swift in Sources */,
 				214209CE24237A6300C7BFF3 /* PlistContactEventRecorderTests.swift in Sources */,
+				F770A4572430F76B002FDED1 /* AppCoordinatorDouble.swift in Sources */,
 				098ED48C242E8B290029B729 /* DiagnosisServiceDouble.swift in Sources */,
 				098ED485242E88D80029B729 /* AppCoordinatorTests.swift in Sources */,
 				214209D924262B7500C7BFF3 /* SessionHelpers.swift in Sources */,
 				F600A60424297C010038DF57 /* RegistrationRequestTests.swift in Sources */,
 				098ED488242E89930029B729 /* NotificationServiceDouble.swift in Sources */,
 				F67A2295242AC188002254B6 /* RegistrationViewControllerTests.swift in Sources */,
+				F770A453242FEC8A002FDED1 /* NotificationsPromptViewControllerTests.swift in Sources */,
 				F67A2293242AA370002254B6 /* SecureRegistrationStorageTests.swift in Sources */,
 				214209D72423C9B600C7BFF3 /* PatchContactEventsRequestTests.swift in Sources */,
 				21C417CA242CB0A200DEF3E2 /* ConfirmRegistrationRequestTests.swift in Sources */,
+				F770A455242FEE7C002FDED1 /* SecureRequestFactoryDouble.swift in Sources */,
 				098ED48A242E89D80029B729 /* RegistrationServiceDouble.swift in Sources */,
 				F6CC2CAC242BCD0D0079432B /* NotificationManagerTests.swift in Sources */,
 				F68BFBF7242ACD17008EE68F /* TestHelpers.swift in Sources */,
@@ -625,7 +659,9 @@
 				F758B8C2242CBAF5003AE16D /* AppCoordinator.swift in Sources */,
 				21AF36AB241A8E50001A4910 /* BTLEListener.swift in Sources */,
 				F78CEBED242D0836002254AD /* SecureRequestFactory.swift in Sources */,
+				F7EAE5A0242FACCB0090F8A2 /* RegistrationCoordinator.swift in Sources */,
 				098ED47E242E6B950029B729 /* RootViewController.swift in Sources */,
+				F7EAE5A6242FB0150090F8A2 /* NotificationsPromptViewController.swift in Sources */,
 				F600A600242977D50038DF57 /* RegistrationViewController.swift in Sources */,
 				F6CC2CA9242BC7FC0079432B /* NotificationManager.swift in Sources */,
 				AE2A5E502423C473007A4771 /* ContactEventRecorder.swift in Sources */,

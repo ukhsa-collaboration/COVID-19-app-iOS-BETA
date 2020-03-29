@@ -16,7 +16,9 @@ class NotificationManagerDouble: NotificationManager {
 
     func configure() { }
 
+    var completion: ((Result<Bool, Error>) -> Void)?
     func requestAuthorization(application: Application, completion: @escaping (Result<Bool, Error>) -> Void) {
+        self.completion = completion
     }
 
     func handleNotification(userInfo: [AnyHashable : Any]) {
