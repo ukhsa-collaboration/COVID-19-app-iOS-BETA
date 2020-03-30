@@ -16,6 +16,17 @@ class AppCoordinatorTests: XCTestCase {
         try! SecureRegistrationStorage.clear()
     }
 
+    func test_shows_you_are_okay_screen_when_diagnosis_is_unknown() {
+        let diagnosisService = DiagnosisServiceDouble()
+        diagnosisService.currentDiagnosis = .unknown
+        let navController = UINavigationController()
+        let coordinator = AppCoordinator(navController: navController, diagnosisService: diagnosisService, secureRequestFactory: SecureRequestFactoryDouble())
+
+        let vc = coordinator.initialViewController()
+
+        XCTAssertNotNil(vc as? OkNowViewController)
+    }
+
     func testShowView_diagnosisUnknown() {
         let diagnosisService = DiagnosisServiceDouble()
         diagnosisService.currentDiagnosis = .unknown
