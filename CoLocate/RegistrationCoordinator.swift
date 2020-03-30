@@ -58,30 +58,11 @@ class RegistrationCoordinator {
     }
 
     func start() {
-        if let registration = hasRegistration() {
+        if let registration = try? registrationStorage.get() {
             delegate.didCompleteRegistration(registration)
-
-            return
+        } else {
+            navController.viewControllers = [nextViewController()]
         }
-
-        navController.viewControllers = [nextViewController()]
-    }
-
-    private func hasRegistration() -> Registration? {
-        do {
-            if let registration = try registrationStorage.get() {
-                return registration
-            } else {
-                return nil
-            }
-        }
-        catch {
-            return nil
-        }
-    }
-
-    func isRegistered() -> Bool {
-        return hasRegistration() != nil
     }
 
     func nextViewController() -> UIViewController {
