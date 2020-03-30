@@ -23,14 +23,11 @@ class PlistContactEventRecorderTests: XCTestCase {
         super.setUp()
 
         service = PlistContactEventRecorder()
-
+        service.reset()
+        
         contactEvent1 = ContactEvent(remoteContactId: UUID(), timestamp: epoch, rssi: 1)
         contactEvent2 = ContactEvent(remoteContactId: UUID(), timestamp: epoch, rssi: 1)
         contactEvent3 = ContactEvent(remoteContactId: UUID(), timestamp: epoch, rssi: 1)
-    }
-
-    override func tearDown() {
-        service.reset()
     }
 
     func testRecordsContactEvents() {
