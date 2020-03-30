@@ -69,7 +69,7 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
 //            Comment this back in for testing if necessary, but be aware AllowDuplicates is
 //            ignored while running in the background, so we can't count on this behaviour
 //            central.scanForPeripherals(withServices: [BTLEBroadcaster.primaryServiceUUID], options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
-            central.scanForPeripherals(withServices: [BTLEBroadcaster.coLocateServiceUUID])
+            central.scanForPeripherals(withServices: [BTLEBroadcaster.sonarServiceUUID])
         @unknown default:
             fatalError()
         }
@@ -88,7 +88,7 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         
         peripheral.delegate = self
         peripheralList.append(peripheral)
-        peripheral.discoverServices([BTLEBroadcaster.coLocateServiceUUID])
+        peripheral.discoverServices([BTLEBroadcaster.sonarServiceUUID])
     }
     
     func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
@@ -117,11 +117,11 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
             return
         }
 
-        if let coLocateService = services.first(where: {$0.uuid == BTLEBroadcaster.coLocateServiceUUID}) {
-            print("\(#file).\(#function) found coLocateService: \(coLocateService)")
-            peripheral.discoverCharacteristics([BTLEBroadcaster.deviceIdentifierCharacteristicUUID], for: coLocateService)
+        if let sonarService = services.first(where: {$0.uuid == BTLEBroadcaster.sonarServiceUUID}) {
+            print("\(#file).\(#function) found sonarService: \(sonarService)")
+            peripheral.discoverCharacteristics([BTLEBroadcaster.sonarIdCharacteristicUUID], for: sonarService)
         } else {
-            print("CoLocate service not discovered for peripheral \(peripheral)")
+            print("Sonar service not discovered for peripheral \(peripheral)")
         }
     }
     
@@ -136,11 +136,11 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
             return
         }
         
-        if let deviceIdCharacteristic = characteristics.first(where: {$0.uuid == BTLEBroadcaster.deviceIdentifierCharacteristicUUID}) {
-            print("\(#file).\(#function) found deviceIdCharacteristic: \(deviceIdCharacteristic)")
-            peripheral.readValue(for: deviceIdCharacteristic)
+        if let sonarIdCharacteristic = characteristics.first(where: {$0.uuid == BTLEBroadcaster.sonarIdCharacteristicUUID}) {
+            print("\(#file).\(#function) found sonarIdCharacteristic: \(sonarIdCharacteristic)")
+            peripheral.readValue(for: sonarIdCharacteristic)
         } else {
-            print("Device identity characteristic not discovered for peripheral \(peripheral)")
+            print("Sonar Id characteristic not discovered for peripheral \(peripheral)")
         }
     }
 
@@ -157,7 +157,7 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
             return
         }
 
-        guard characteristic.uuid == BTLEBroadcaster.deviceIdentifierCharacteristicUUID else {
+        guard characteristic.uuid == BTLEBroadcaster.sonarIdCharacteristicUUID else {
             return
         }
 

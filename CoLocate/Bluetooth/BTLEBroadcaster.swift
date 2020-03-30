@@ -16,14 +16,14 @@ protocol BTLEBroadcasterDelegate {
 
 class BTLEBroadcaster: NSObject, CBPeripheralManagerDelegate {
     
-    static let coLocateServiceUUID = CBUUID(nsuuid: UUID(uuidString: "c1f5983c-fa94-4ac8-8e2e-bb86d6de9b21")!)
-    static let deviceIdentifierCharacteristicUUID = CBUUID(nsuuid: UUID(uuidString: "85BF337C-5B64-48EB-A5F7-A9FED135C972")!)
+    static let sonarServiceUUID = CBUUID(nsuuid: UUID(uuidString: "c1f5983c-fa94-4ac8-8e2e-bb86d6de9b21")!)
+    static let sonarIdCharacteristicUUID = CBUUID(nsuuid: UUID(uuidString: "85BF337C-5B64-48EB-A5F7-A9FED135C972")!)
 
     // This is safe to force-unwrap in the vast majority of cases
     // according to the docs this will only be nil
     //     after a device has been rebooted
     //     and the app is running before the device has been unlocked
-    var deviceIdentifier = CBUUID(nsuuid: UIDevice.current.identifierForVendor!)
+    var sonarId = CBUUID(nsuuid: UIDevice.current.identifierForVendor!)
 
     var primaryService: CBService?
     var delegate: BTLEBroadcasterDelegate?
@@ -65,12 +65,13 @@ class BTLEBroadcaster: NSObject, CBPeripheralManagerDelegate {
         case .poweredOn:
             print("\(#file).\(#function) .poweredOn")
          
-            let service = CBMutableService(type: BTLEBroadcaster.coLocateServiceUUID, primary: true)
+            let service = CBMutableService(type: BTLEBroadcaster.sonarServiceUUID, primary: true)
             
-            let identityCharacteristic = CBMutableCharacteristic(type: BTLEBroadcaster.deviceIdentifierCharacteristicUUID, properties: CBCharacteristicProperties([.read]), value: deviceIdentifier.data, permissions: .readable)
+            let identityCharacteristic = CBMutableCharacteristic(type: BTLEBroadcaster.sonarIdCharacteristicUUID, properties: CBCharacteristicProperties([.read]), value: sonarId.data, permissions: .readable)
             
             service.characteristics = [identityCharacteristic]
             peripheralManager?.add(service)
+            
         @unknown default:
             fatalError()
         }
@@ -78,14 +79,14 @@ class BTLEBroadcaster: NSObject, CBPeripheralManagerDelegate {
     
     func peripheralManager(_ peripheral: CBPeripheralManager, didAdd service: CBService, error: Error?) {
         guard error == nil else {
-            print("\(#file).\(#function) error: \(String(describing: error))")
+            print("\(#file).\(#function) error: \(error!))")
             return
         }
         
         print("\(#file).\(#function) service: \(service)")
         self.primaryService = service
         
-        print("\(#file).\(#function) advertising device identifier \(deviceIdentifier.uuidString)")
+        print("\(#file).\(#function) advertising device identifier \(sonarId.uuidString)")
         peripheralManager?.startAdvertising([
             CBAdvertisementDataLocalNameKey: "CoLocate",
             CBAdvertisementDataServiceUUIDsKey: [service.uuid]
