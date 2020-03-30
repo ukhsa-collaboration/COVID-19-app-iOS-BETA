@@ -19,10 +19,17 @@ class DebugViewController: UITableViewController {
             try! SecureRegistrationStorage.clear()
             DiagnosisService.shared.recordDiagnosis(.unknown)
             show(title: "Cleared", message: "Registration and diagnosis data has been cleared. Please stop and re-start the application.")
+
         case (0, 1):
-            DiagnosisService.shared.recordDiagnosis(.unknown)
-            show(title: "Cleared", message: "Diagnosis data has been cleared. Please stop and re-start the application.")
-            
+            let alertController = UIAlertController(title: "Set diagnosis", message: nil, preferredStyle: .actionSheet)
+            for diagnosis in Diagnosis.allCases {
+                alertController.addAction(UIAlertAction(title: "\(diagnosis)", style: .default) { _ in
+                    DiagnosisService.shared.recordDiagnosis(diagnosis)
+                    self.show(title: "Cleared", message: "Diagnosis data has been set. Please stop and re-start the application.")
+                })
+            }
+            present(alertController, animated: true, completion: nil)
+
         case (1, 0):
             PlistContactEventRecorder.shared.record(ContactEvent(remoteContactId: UUID(), rssi: 42))
             PlistContactEventRecorder.shared.record(ContactEvent(remoteContactId: UUID(), rssi: 17))
@@ -56,7 +63,7 @@ class DebugViewController: UITableViewController {
             fatalError()
         }
     }
-    
+
     private func show(title: String, message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Ok", style: .default))
