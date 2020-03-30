@@ -1,10 +1,9 @@
 {
     "Simulator Target Bundle": "uk.nhs.nhsx.beta.CoLocate",
+
     "aps": {
-        "alert": {
-            "body": "you have a diagnosis!",
-            "title": "hello world"
-        }
+      "content-available": 1
     },
-    "diagnosis": "potential"
+
+    "status": "Potential"
 }

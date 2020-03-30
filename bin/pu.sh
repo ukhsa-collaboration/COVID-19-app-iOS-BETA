@@ -2,7 +2,7 @@
 
 # Original implementation: https://github.com/tsif/pu.sh
 
-set -euo pipefail
+set -eo pipefail
 
 # Required environment variables:
 #
@@ -18,7 +18,7 @@ if [ -z "$1" ]
   then
     PAYLOAD="{\"aps\":{\"content-available\" : 1, \"foo\":\"bar\"}}"
   else 
-    PAYLOAD=$(<$1)
+    PAYLOAD=$(<"$1")
 fi
 
 function base64URLSafe {

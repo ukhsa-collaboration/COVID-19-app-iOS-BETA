@@ -131,6 +131,7 @@ extension ConcreteNotificationManager: MessagingDelegate {
         let apnsToken = Messaging.messaging().apnsToken?.map { String(format: "%02hhx", $0) }.joined()
         print("apnsToken: \(String(describing: apnsToken))")
     }
+
 }
 
 // MARK: - Testable

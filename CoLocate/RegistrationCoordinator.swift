@@ -94,7 +94,6 @@ class RegistrationCoordinator {
 
 extension RegistrationCoordinator: PushNotificationRequester {
     func requestPushNotifications(completion: @escaping (Result<Bool, Error>) -> Void) {
-        notificationManager.configure()
         notificationManager.requestAuthorization(application: application) { (result) in
             switch result {
             case .success(let granted):
