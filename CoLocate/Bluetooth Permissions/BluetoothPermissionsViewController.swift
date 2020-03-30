@@ -40,11 +40,9 @@ class BluetoothPermissionsViewController: UIViewController, BTLEBroadcasterDeleg
         segueIfBTLEReady()
       #else
         let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
-        appDelegate.broadcaster = BTLEBroadcaster()
-        appDelegate.broadcaster?.start(delegate: self)
 
-        appDelegate.listener = BTLEListener()
-        appDelegate.listener?.start(delegate: self)
+        appDelegate.broadcaster.start(delegate: self)
+        appDelegate.listener.start(delegate: self)
       #endif
     }
 

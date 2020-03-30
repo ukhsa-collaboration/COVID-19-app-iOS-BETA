@@ -29,6 +29,8 @@ class BTLEBroadcaster: NSObject, CBPeripheralManagerDelegate {
     
     func start(delegate: BTLEBroadcasterDelegate?) {
         self.delegate = delegate
+
+        guard peripheralManager == nil else { return }
         
         peripheralManager = CBPeripheralManager(
             delegate: self,
@@ -37,14 +39,13 @@ class BTLEBroadcaster: NSObject, CBPeripheralManagerDelegate {
     }
     
     func setSonarUUID(_ uuid: UUID) {
-        guard state == .poweredOn else { return }
-
         sonarId = CBUUID(nsuuid: uuid)
+
         startBroadcasting()
     }
 
     fileprivate func startBroadcasting() {
-        guard let sonarId = sonarId else { return }
+        guard state == .poweredOn, let sonarId = sonarId else { return }
 
         let service = CBMutableService(type: BTLEBroadcaster.sonarServiceUUID, primary: true)
 
@@ -58,7 +59,6 @@ class BTLEBroadcaster: NSObject, CBPeripheralManagerDelegate {
 
     func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
         delegate?.btleBroadcaster(self, didUpdateState: peripheral.state)
-
 
         state = peripheral.state
 
@@ -82,9 +82,7 @@ class BTLEBroadcaster: NSObject, CBPeripheralManagerDelegate {
         case .poweredOn:
             print("\(#file).\(#function) .poweredOn")
 
-            if (sonarId != nil) {
-                startBroadcasting();
-            }
+            startBroadcasting();
             
         @unknown default:
             fatalError()
