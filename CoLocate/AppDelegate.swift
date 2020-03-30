@@ -62,6 +62,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             return
         }
 
+        // FIXME: on second launch this is nil
+        broadcaster?.setSonarUUID(registration.id)
+
         appCoordinator = AppCoordinator(navController: rootViewController,
                                         diagnosisService: diagnosisService,
                                         secureRequestFactory: ConcreteSecureRequestFactory(registration: registration))

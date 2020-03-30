@@ -19,13 +19,9 @@ class BTLEBroadcaster: NSObject, CBPeripheralManagerDelegate {
     static let sonarServiceUUID = CBUUID(nsuuid: UUID(uuidString: "c1f5983c-fa94-4ac8-8e2e-bb86d6de9b21")!)
     static let sonarIdCharacteristicUUID = CBUUID(nsuuid: UUID(uuidString: "85BF337C-5B64-48EB-A5F7-A9FED135C972")!)
 
-    // This is safe to force-unwrap in the vast majority of cases
-    // according to the docs this will only be nil
-    //     after a device has been rebooted
-    //     and the app is running before the device has been unlocked
-    var sonarId = CBUUID(nsuuid: UIDevice.current.identifierForVendor!)
-
+    var sonarId: CBUUID?
     var primaryService: CBService?
+    var state: CBManagerState = .unknown
     var delegate: BTLEBroadcasterDelegate?
     var peripheralManager: CBPeripheralManager?
 
@@ -40,11 +36,32 @@ class BTLEBroadcaster: NSObject, CBPeripheralManagerDelegate {
             options: [CBPeripheralManagerOptionRestoreIdentifierKey: restoreIdentifier])
     }
     
+    func setSonarUUID(_ uuid: UUID) {
+        guard state == .poweredOn else { return }
+
+        sonarId = CBUUID(nsuuid: uuid)
+        startBroadcasting()
+    }
+
+    fileprivate func startBroadcasting() {
+        guard let sonarId = sonarId else { return }
+
+        let service = CBMutableService(type: BTLEBroadcaster.sonarServiceUUID, primary: true)
+
+        let identityCharacteristic = CBMutableCharacteristic(type: BTLEBroadcaster.sonarIdCharacteristicUUID, properties: CBCharacteristicProperties([.read]), value: sonarId.data, permissions: .readable)
+
+        service.characteristics = [identityCharacteristic]
+        peripheralManager?.add(service)
+    }
+
     // MARK: CBPeripheralManagerDelegate
-    
+
     func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
         delegate?.btleBroadcaster(self, didUpdateState: peripheral.state)
-        
+
+
+        state = peripheral.state
+
         switch (peripheral.state) {
             
         case .unknown:
@@ -64,13 +81,10 @@ class BTLEBroadcaster: NSObject, CBPeripheralManagerDelegate {
             
         case .poweredOn:
             print("\(#file).\(#function) .poweredOn")
-         
-            let service = CBMutableService(type: BTLEBroadcaster.sonarServiceUUID, primary: true)
-            
-            let identityCharacteristic = CBMutableCharacteristic(type: BTLEBroadcaster.sonarIdCharacteristicUUID, properties: CBCharacteristicProperties([.read]), value: sonarId.data, permissions: .readable)
-            
-            service.characteristics = [identityCharacteristic]
-            peripheralManager?.add(service)
+
+            if (sonarId != nil) {
+                startBroadcasting();
+            }
             
         @unknown default:
             fatalError()
@@ -86,7 +100,7 @@ class BTLEBroadcaster: NSObject, CBPeripheralManagerDelegate {
         print("\(#file).\(#function) service: \(service)")
         self.primaryService = service
         
-        print("\(#file).\(#function) advertising device identifier \(sonarId.uuidString)")
+        print("\(#file).\(#function) advertising device identifier \(String(describing: sonarId?.uuidString))")
         peripheralManager?.startAdvertising([
             CBAdvertisementDataLocalNameKey: "CoLocate",
             CBAdvertisementDataServiceUUIDsKey: [service.uuid]
