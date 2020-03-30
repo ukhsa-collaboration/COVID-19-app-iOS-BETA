@@ -37,11 +37,10 @@ class RegistrationCoordinatorTests: XCTestCase, RegistrationCoordinatorDelegate 
                                           registrationService: registrationService,
                                           registrationStorage: registrationStorage,
                                           delegate: self)
+        delegateRegistration = nil
     }
 
     func test_first_screen_requests_push_notifications() {
-        XCTAssertFalse(coordinator.isRegistered())
-
         coordinator.start()
 
         let vc = navController.topViewController as? NotificationsPromptViewController
@@ -71,12 +70,10 @@ class RegistrationCoordinatorTests: XCTestCase, RegistrationCoordinatorDelegate 
         notificationManager.completion?(.success(true))
         coordinator.advanceAfterPushNotifications()
 
-        let vc = navController.topViewController as? PermissionsPromptViewController
+        let vc = navController.topViewController as? BluetoothPermissionsViewController
 
         XCTAssertNotNil(vc)
         XCTAssertNotNil(vc?.bluetoothReadyDelegate)
-
-        XCTAssertFalse(coordinator.isRegistered())
     }
 
     func test_shows_registration_after_bluetooth() {
@@ -87,8 +84,6 @@ class RegistrationCoordinatorTests: XCTestCase, RegistrationCoordinatorDelegate 
         XCTAssertNotNil(vc?.notificationManager)
         XCTAssertNotNil(vc?.registrationService)
         XCTAssertNotNil(vc?.delegate)
-
-        XCTAssertFalse(coordinator.isRegistered())
     }
 
     func test_alerts_delegate_when_registration_is_complete() {
@@ -104,7 +99,6 @@ class RegistrationCoordinatorTests: XCTestCase, RegistrationCoordinatorDelegate 
         coordinator.bluetoothIsAvailable()
         coordinator.registrationDidFinish(with: registration)
 
-        XCTAssertTrue(coordinator.isRegistered())
         XCTAssertEqual(delegateRegistration?.id, registration.id)
         XCTAssertEqual(delegateRegistration?.secretKey, registration.secretKey)
     }
@@ -116,12 +110,8 @@ class RegistrationCoordinatorTests: XCTestCase, RegistrationCoordinatorDelegate 
                                           registrationService: registrationService,
                                           registrationStorage: storageWithSavedRegistration,
                                           delegate: self)
-
-        XCTAssertTrue(coordinator.isRegistered())
-        XCTAssertNil(delegateRegistration?.id)
-        XCTAssertNil(delegateRegistration?.secretKey)
-
         coordinator.start()
+        
         XCTAssertEqual(delegateRegistration?.id, registration.id)
         XCTAssertEqual(delegateRegistration?.secretKey, registration.secretKey)
     }
@@ -132,5 +122,4 @@ class RegistrationCoordinatorTests: XCTestCase, RegistrationCoordinatorDelegate 
         self.delegateRegistration = registration
     }
 
-    
 }
