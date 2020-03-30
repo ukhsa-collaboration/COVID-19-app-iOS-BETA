@@ -21,8 +21,8 @@ class PatchContactEventsRequest: SecureRequest, Request {
     
     let path: String
     
-    init(key: SymmetricKey, deviceId: UUID, contactEvents: [ContactEvent]) {
-        path = "/api/residents/\(deviceId.uuidString)"
+    init(key: SymmetricKey, sonarId: UUID, contactEvents: [ContactEvent]) {
+        path = "/api/residents/\(sonarId.uuidString)"
 
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601

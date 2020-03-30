@@ -21,9 +21,8 @@ struct ConcreteSecureRequestFactory: SecureRequestFactory {
     }
 
     func patchContactsRequest(contactEvents: [ContactEvent]) -> PatchContactEventsRequest {
-        let deviceId = registration.id
         let symmetricKey = SymmetricKey(data: registration.secretKey)
 
-        return PatchContactEventsRequest(key: symmetricKey, deviceId: deviceId, contactEvents: contactEvents)
+        return PatchContactEventsRequest(key: symmetricKey, sonarId: registration.id, contactEvents: contactEvents)
     }
 }
