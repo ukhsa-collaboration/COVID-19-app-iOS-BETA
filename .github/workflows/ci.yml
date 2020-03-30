@@ -118,9 +118,9 @@ jobs:
         env:
           API_ENDPOINT: ${{ secrets.api_endpoint }}
         run: |
-          echo <<XCCONFIG > Release.xcconfig
+          tee "Release.xcconfig" > /dev/null <<EOF
           API_ENDPOINT = $API_ENDPOINT
-          XCCONFIG
+          EOF
 
       - name: Setup Fastlane Match
         env:
