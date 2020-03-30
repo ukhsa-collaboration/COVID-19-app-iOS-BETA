@@ -63,6 +63,8 @@ class PlistContactEventRecorder: ContactEventRecorder {
         contactEvents = []
         do {
             try FileManager.default.removeItem(at: fileURL)
+        } catch (let error as NSError) where error.code == NSFileNoSuchFileError {
+            // ignore this, job already done
         } catch {
             assertionFailure("\(#file).\(#function) error removing file at '\(fileURL)': \(error)")
         }
