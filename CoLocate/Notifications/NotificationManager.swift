@@ -95,8 +95,8 @@ class ConcreteNotificationManager: NSObject, NotificationManager {
     }
     
     func handleNotification(userInfo: [AnyHashable : Any]) {
-        if let diagnosis = userInfo["diagnosis"] {
-            if diagnosis as? String == "potential" {
+        if let diagnosis = userInfo["status"] {
+            if diagnosis as? String == "Potential" {
                 diagnosisService.recordDiagnosis(.potential)
             } else {
                 print("Unexpected diagnosis \(diagnosis)")

@@ -92,7 +92,7 @@ class NotificationManagerTests: XCTestCase {
             diagnosisService: diagnosisService
         )
         
-        notificationManager.handleNotification(userInfo: ["diagnosis" : "potential"])
+        notificationManager.handleNotification(userInfo: ["status" : "Potential"])
         
         XCTAssertEqual(diagnosisService.currentDiagnosis, .potential)
     }
@@ -107,7 +107,7 @@ class NotificationManagerTests: XCTestCase {
             diagnosisService: diagnosisService
         )
         
-        notificationManager.handleNotification(userInfo: ["diagnosis" : "infected"])
+        notificationManager.handleNotification(userInfo: ["status" : "infected"])
         
         XCTAssertEqual(diagnosisService.currentDiagnosis, .unknown)
     }
