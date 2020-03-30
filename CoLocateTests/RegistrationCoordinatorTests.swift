@@ -9,37 +9,40 @@
 import XCTest
 @testable import CoLocate
 
-class RegistrationCoordinatorTests: XCTestCase {
+class RegistrationCoordinatorTests: XCTestCase, RegistrationCoordinatorDelegate {
 
-    var subject: RegistrationCoordinator!
+    var coordinator: RegistrationCoordinator!
 
     let application = ApplicationDouble()
-    let delegate = RegistrationCooordinatorDelegateDouble()
     let notificationManager = NotificationManagerDouble()
     let registrationService = RegistrationServiceDouble()
     let registrationStorage = RegistrationStorageDouble()
 
     var navController: UINavigationController!
+    var delegateRegistration: Registration?
 
-    let registration = Registration(id: UUID(uuidString: "39B84598-3AD8-4900-B4E0-EE868773181D")!, secretKey: Data())
-
+    var registration: Registration!
+    var storageWithSavedRegistration: RegistrationStorageDouble!
+    
     override func setUp() {
         super.setUp()
 
         navController = UINavigationController()
+        registration = Registration(id: UUID(uuidString: "39B84598-3AD8-4900-B4E0-EE868773181D")!, secretKey: Data())
+        storageWithSavedRegistration = RegistrationStorageDouble(id: registration.id, key: registration.secretKey)
 
-        subject = RegistrationCoordinator(application: application,
+        coordinator = RegistrationCoordinator(application: application,
                                           navController: navController,
                                           notificationManager: notificationManager,
                                           registrationService: registrationService,
                                           registrationStorage: registrationStorage,
-                                          delegate: delegate)
+                                          delegate: self)
     }
 
     func test_first_screen_requests_push_notifications() {
-        XCTAssertFalse(subject.isRegistered())
+        XCTAssertFalse(coordinator.isRegistered())
 
-        subject.start()
+        coordinator.start()
 
         let vc = navController.topViewController as? NotificationsPromptViewController
         XCTAssertNotNil(vc)
@@ -48,7 +51,7 @@ class RegistrationCoordinatorTests: XCTestCase {
 
     func test_notifies_caller_when_notificatons_are_allowed() {
         var didAllowNotifications = false
-        subject.requestPushNotifications() { result in
+        coordinator.requestPushNotifications() { result in
             switch result {
             case .success(let granted):
                 didAllowNotifications = granted
@@ -62,22 +65,22 @@ class RegistrationCoordinatorTests: XCTestCase {
     }
 
     func test_shows_bluetooth_after_push_notifications() {
-        subject.requestPushNotifications() { _ in }
+        coordinator.requestPushNotifications() { _ in }
         XCTAssertNotNil(notificationManager.completion)
 
         notificationManager.completion?(.success(true))
-        subject.advanceAfterPushNotifications()
+        coordinator.advanceAfterPushNotifications()
 
         let vc = navController.topViewController as? PermissionsPromptViewController
 
         XCTAssertNotNil(vc)
         XCTAssertNotNil(vc?.bluetoothReadyDelegate)
 
-        XCTAssertFalse(subject.isRegistered())
+        XCTAssertFalse(coordinator.isRegistered())
     }
 
     func test_shows_registration_after_bluetooth() {
-        subject.bluetoothIsAvailable()
+        coordinator.bluetoothIsAvailable()
 
         let vc = navController.topViewController as? RegistrationViewController
         XCTAssertNotNil(vc)
@@ -85,51 +88,49 @@ class RegistrationCoordinatorTests: XCTestCase {
         XCTAssertNotNil(vc?.registrationService)
         XCTAssertNotNil(vc?.delegate)
 
-        XCTAssertFalse(subject.isRegistered())
+        XCTAssertFalse(coordinator.isRegistered())
     }
 
     func test_alerts_delegate_when_registration_is_complete() {
-        subject = RegistrationCoordinator(application: application,
-                                          navController: navController,
-                                          notificationManager: notificationManager,
-                                          registrationService: registrationService,
-                                          registrationStorage: RegistrationStorageDouble(id: registration.id, key: registration.secretKey),
-                                          delegate: delegate)
-
-        subject.requestPushNotifications() { _ in }
-        notificationManager.completion?(.success(true))
-        subject.bluetoothIsAvailable()
-        subject.registrationDidFinish(with: registration)
-
-        XCTAssertTrue(subject.isRegistered())
-        XCTAssertEqual(delegate.registration?.id, registration.id)
-        XCTAssertEqual(delegate.registration?.secretKey, registration.secretKey)
-    }
-
-    func test_when_already_registered_calls_delegate_immediately() {
-        let storageWithSavedRegistration = RegistrationStorageDouble(id: registration.id, key: registration.secretKey)
-
-        subject = RegistrationCoordinator(application: application,
+        coordinator = RegistrationCoordinator(application: application,
                                           navController: navController,
                                           notificationManager: notificationManager,
                                           registrationService: registrationService,
                                           registrationStorage: storageWithSavedRegistration,
-                                          delegate: delegate)
+                                          delegate: self)
 
-        XCTAssertTrue(subject.isRegistered())
-        XCTAssertNil(delegate.registration?.id)
-        XCTAssertNil(delegate.registration?.secretKey)
+        coordinator.requestPushNotifications() { _ in }
+        notificationManager.completion?(.success(true))
+        coordinator.bluetoothIsAvailable()
+        coordinator.registrationDidFinish(with: registration)
 
-        subject.start()
-        XCTAssertEqual(delegate.registration?.id, registration.id)
-        XCTAssertEqual(delegate.registration?.secretKey, registration.secretKey)
+        XCTAssertTrue(coordinator.isRegistered())
+        XCTAssertEqual(delegateRegistration?.id, registration.id)
+        XCTAssertEqual(delegateRegistration?.secretKey, registration.secretKey)
     }
-}
 
-class RegistrationCooordinatorDelegateDouble: RegistrationCoordinatorDelegate {
-    var registration: Registration?
+    func test_when_already_registered_calls_delegate_immediately() {
+        coordinator = RegistrationCoordinator(application: application,
+                                          navController: navController,
+                                          notificationManager: notificationManager,
+                                          registrationService: registrationService,
+                                          registrationStorage: storageWithSavedRegistration,
+                                          delegate: self)
 
-    func registrationDidFinish(with registration: Registration) {
-        self.registration = registration
+        XCTAssertTrue(coordinator.isRegistered())
+        XCTAssertNil(delegateRegistration?.id)
+        XCTAssertNil(delegateRegistration?.secretKey)
+
+        coordinator.start()
+        XCTAssertEqual(delegateRegistration?.id, registration.id)
+        XCTAssertEqual(delegateRegistration?.secretKey, registration.secretKey)
     }
+    
+    // MARK: -- RegistrationCoordinatorDelegate
+    
+    func didCompleteRegistration(_ registration: Registration) {
+        self.delegateRegistration = registration
+    }
+
+    
 }

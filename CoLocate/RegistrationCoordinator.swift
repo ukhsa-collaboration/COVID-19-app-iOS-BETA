@@ -22,7 +22,7 @@ protocol RegistrationSavedDelegate {
 }
 
 protocol RegistrationCoordinatorDelegate {
-    func registrationDidFinish(with registration: Registration)
+    func didCompleteRegistration(_ registration: Registration)
 }
 
 fileprivate enum RegisteredState : Int {
@@ -59,7 +59,7 @@ class RegistrationCoordinator {
 
     func start() {
         if let registration = hasRegistration() {
-            delegate.registrationDidFinish(with: registration)
+            delegate.didCompleteRegistration(registration)
 
             return
         }
@@ -150,9 +150,11 @@ extension RegistrationCoordinator: BluetoothAvailableDelegate {
 }
 
 extension RegistrationCoordinator: RegistrationSavedDelegate {
+    
     func registrationDidFinish(with registration: Registration) {
         self.currentState = .completed
 
-        delegate.registrationDidFinish(with: registration)
+        delegate.didCompleteRegistration(registration)
     }
+
 }
