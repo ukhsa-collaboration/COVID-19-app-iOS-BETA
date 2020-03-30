@@ -57,7 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     // MARK: - Private
 
-    func registrationDidFinish(with registration: Registration) {
+    func didCompleteRegistration(_ registration: Registration) {
         guard let rootViewController = window?.rootViewController as? RootViewController else {
             return
         }
@@ -67,4 +67,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                                         secureRequestFactory: ConcreteSecureRequestFactory(registration: registration))
         appCoordinator.start()
     }
+
 }
