@@ -51,6 +51,7 @@
 		F600A600242977D50038DF57 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F600A5FF242977D50038DF57 /* RegistrationViewController.swift */; };
 		F600A60224297A8E0038DF57 /* RegistrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F600A60124297A8E0038DF57 /* RegistrationRequest.swift */; };
 		F600A60424297C010038DF57 /* RegistrationRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F600A60324297C010038DF57 /* RegistrationRequestTests.swift */; };
+		F65AE53C2432B842006544D4 /* Potential.rtf in Resources */ = {isa = PBXBuildFile; fileRef = F65AE53E2432B842006544D4 /* Potential.rtf */; };
 		F67A2291242AA35C002254B6 /* SecureRegistrationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A2290242AA35B002254B6 /* SecureRegistrationStorage.swift */; };
 		F67A2293242AA370002254B6 /* SecureRegistrationStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */; };
 		F67A2295242AC188002254B6 /* RegistrationViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A2294242AC188002254B6 /* RegistrationViewControllerTests.swift */; };
@@ -148,6 +149,7 @@
 		F600A5FF242977D50038DF57 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		F600A60124297A8E0038DF57 /* RegistrationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationRequest.swift; sourceTree = "<group>"; };
 		F600A60324297C010038DF57 /* RegistrationRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationRequestTests.swift; sourceTree = "<group>"; };
+		F65AE53D2432B842006544D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = Base; path = Base.lproj/Potential.rtf; sourceTree = "<group>"; };
 		F67A2290242AA35B002254B6 /* SecureRegistrationStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRegistrationStorage.swift; sourceTree = "<group>"; };
 		F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRegistrationStorageTests.swift; sourceTree = "<group>"; };
 		F67A2294242AC188002254B6 /* RegistrationViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewControllerTests.swift; sourceTree = "<group>"; };
@@ -422,6 +424,7 @@
 		F758B8BC242CB83B003AE16D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F65AE53E2432B842006544D4 /* Potential.rtf */,
 				F758B8BD242CB856003AE16D /* Localizable.strings */,
 			);
 			path = Resources;
@@ -611,6 +614,7 @@
 				F7EAE5A8242FB0F30090F8A2 /* Notifications.storyboard in Resources */,
 				F758B8CC242CC1F7003AE16D /* EnterDiagnosis.storyboard in Resources */,
 				6FC63C38241641BA007C8BF3 /* Assets.xcassets in Resources */,
+				F65AE53C2432B842006544D4 /* Potential.rtf in Resources */,
 				09D1CD50242C3A9300B1A167 /* Potential.storyboard in Resources */,
 				F6CA2819242E41F700F8DC55 /* README.md in Resources */,
 				098ED481242E745F0029B729 /* Debug.storyboard in Resources */,
@@ -705,6 +709,14 @@
 				6FC63C3A241641BA007C8BF3 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		F65AE53E2432B842006544D4 /* Potential.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F65AE53D2432B842006544D4 /* Base */,
+			);
+			name = Potential.rtf;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
