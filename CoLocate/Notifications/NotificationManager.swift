@@ -124,9 +124,12 @@ extension ConcreteNotificationManager: UNUserNotificationCenterDelegate {
 
 extension ConcreteNotificationManager: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
-        print("Remote instance ID token: \(fcmToken)")
+        print("fcmToken: \(fcmToken)")
         pushToken = fcmToken
         delegate?.notificationManager(self, didReceiveNotificationWithInfo: ["pushToken": pushToken as Any])
+
+        let apnsToken = Messaging.messaging().apnsToken?.map { String(format: "%02hhx", $0) }.joined()
+        print("apnsToken: \(String(describing: apnsToken))")
     }
 }
 
