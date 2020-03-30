@@ -34,6 +34,8 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
 
     func start(delegate: BTLEListenerDelegate?) {
         self.delegate = delegate
+
+        guard centralManager == nil else { return }
         
         centralManager = CBCentralManager(
             delegate: self,

@@ -15,8 +15,8 @@ import FirebaseInstanceID
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, RegistrationCoordinatorDelegate {
     var window: UIWindow?
 
-    var broadcaster: BTLEBroadcaster?
-    var listener: BTLEListener?
+    var broadcaster = BTLEBroadcaster()
+    var listener = BTLEListener()
 
     let notificationManager: NotificationManager = ConcreteNotificationManager()
     let diagnosisService: DiagnosisService = DiagnosisService.shared
@@ -62,8 +62,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             return
         }
 
-        // FIXME: on second launch this is nil
-        broadcaster?.setSonarUUID(registration.id)
+        broadcaster.setSonarUUID(registration.id)
+        broadcaster.start(delegate: nil)
+        listener.start(delegate: nil)
 
         appCoordinator = AppCoordinator(navController: rootViewController,
                                         diagnosisService: diagnosisService,
