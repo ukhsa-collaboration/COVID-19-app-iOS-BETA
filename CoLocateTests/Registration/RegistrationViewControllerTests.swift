@@ -28,7 +28,7 @@ class RegistrationViewControllerTests: XCTestCase {
 
         XCTAssertNotNil(vc.view)
 
-        vc.didTapRegister(vc.retryButton!)
+        vc.didTapRegister(vc.registerButton!)
 
         let registration = Registration(id: UUID(uuidString: "39B84598-3AD8-4900-B4E0-EE868773181D")!, secretKey: Data())
         registrationService.completionHandler!(.success((registration)))
@@ -43,10 +43,10 @@ class RegistrationViewControllerTests: XCTestCase {
         vc.registrationService = registrationService
         XCTAssertNotNil(vc.view)
 
-        vc.didTapRegister(vc.retryButton!)
+        vc.didTapRegister(vc.registerButton!)
         
         registrationService.completionHandler!(.failure(ErrorForTest()))
-        XCTAssertFalse(vc.retryButton.isHidden)
+        XCTAssertFalse(vc.registerButton.isHidden)
     }
 
 }
