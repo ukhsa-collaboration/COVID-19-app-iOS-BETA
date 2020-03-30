@@ -13,6 +13,6 @@ import CryptoKit
 
 class SecureRequestFactoryDouble: SecureRequestFactory {
     func patchContactsRequest(contactEvents: [ContactEvent]) -> PatchContactEventsRequest {
-        return PatchContactEventsRequest(key: SymmetricKey(size: SymmetricKeySize.bits128), deviceId: UUID(), contactEvents: [])
+        return PatchContactEventsRequest(key: SymmetricKey(size: SymmetricKeySize.bits128), sonarId: UUID(), contactEvents: [])
     }
 }

@@ -30,9 +30,8 @@ struct RequestFactory {
     func patchContactsRequest(contactEvents: [ContactEvent]) -> PatchContactEventsRequest {
         let registration = try! registrationStorage.get()!
 
-        let deviceId = registration.id
         let symmetricKey = SymmetricKey(data: registration.secretKey)
 
-        return PatchContactEventsRequest(key: symmetricKey, deviceId: deviceId, contactEvents: contactEvents)
+        return PatchContactEventsRequest(key: symmetricKey, sonarId: registration.id, contactEvents: contactEvents)
     }
 }
