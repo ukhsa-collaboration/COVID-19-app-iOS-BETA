@@ -131,7 +131,6 @@
 		21B3D2E2242906AE00573061 /* SecureRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRequestTests.swift; sourceTree = "<group>"; };
 		21B3D2E42429112B00573061 /* SecureRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRequest.swift; sourceTree = "<group>"; };
 		21B3D2E72429115600573061 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
-		21B3D2E92429115E00573061 /* CryptoTokenKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoTokenKit.framework; path = System/Library/Frameworks/CryptoTokenKit.framework; sourceTree = SDKROOT; };
 		21C417C9242CB0A200DEF3E2 /* ConfirmRegistrationRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmRegistrationRequestTests.swift; sourceTree = "<group>"; };
 		21C417CB242CB15D00DEF3E2 /* ConfirmRegistrationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmRegistrationRequest.swift; sourceTree = "<group>"; };
 		21D93C2D241FB0A300C1FA9B /* EnterDiagnosisTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterDiagnosisTableViewController.swift; sourceTree = "<group>"; };
@@ -339,7 +338,6 @@
 				F78CEB55242B7EBF002254AD /* FirebaseMessaging.framework */,
 				F78CEB58242B7EC0002254AD /* PromisesObjC.framework */,
 				F78CEB59242B7EC0002254AD /* Protobuf.framework */,
-				21B3D2E92429115E00573061 /* CryptoTokenKit.framework */,
 				21B3D2E72429115600573061 /* CoreBluetooth.framework */,
 			);
 			name = Frameworks;
@@ -886,7 +884,7 @@
 				);
 				HEADER_SEARCH_PATHS = $PROJECT_DIR/Frameworks;
 				INFOPLIST_FILE = CoLocate/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -921,7 +919,7 @@
 				);
 				HEADER_SEARCH_PATHS = $PROJECT_DIR/Frameworks;
 				INFOPLIST_FILE = CoLocate/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

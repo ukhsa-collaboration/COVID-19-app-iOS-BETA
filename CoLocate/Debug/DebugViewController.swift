@@ -39,8 +39,7 @@ class DebugViewController: UITableViewController {
                     throw NSError()
                 }
                 let delay = 15
-                let secretKey = SymmetricKey(data: registration.secretKey)
-                let request = TestPushRequest(key: secretKey, sonarId: registration.id, delay: delay)
+                let request = TestPushRequest(key: registration.secretKey, sonarId: registration.id, delay: delay)
                 URLSession.shared.execute(request, queue: .main) { result in
                     switch result {
                     case .success:
@@ -74,7 +73,7 @@ class TestPushRequest: SecureRequest, Request {
     
     let path: String
     
-    init(key: SymmetricKey, sonarId: UUID, delay: Int = 0) {
+    init(key: Data, sonarId: UUID, delay: Int = 0) {
         let data = Data()
         method = .post(data: data)
         path = "/api/debug/notification/residents/\(sonarId.uuidString)?delay=\(delay)"
