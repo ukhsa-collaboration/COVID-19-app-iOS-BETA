@@ -30,7 +30,7 @@ class AppCoordinator {
     func initialViewController() -> UIViewController & Storyboarded {
         switch diagnosisService.currentDiagnosis {
         case .unknown:
-            return enterDiagnosisVC()
+            return okVC()
 
         case .infected:
             return isolateVC()
