@@ -5,3 +5,6 @@
 "OK_NOW_SYMPTOMS_BUTTON" = "Check my symptoms";
 "OK_NOW_MORE_INFO_TITLE" = "How you can protect yourself and others";
 "OK_NOW_MORE_INFO_MESSAGE" = "You can stay safe by washing your hands more regularly and avoiding large groups of people.\n\nVisit NHS 111 for more advice on protecting yourself and people you care about.\n\nThank you for helping us slow the spread of coronavirus";
+
+"POTENTIAL_STATUS_TITLE" = "NHS Coronavirus";
+"POTENTIAL_STATUS_BODY" = "Someone you've been nearby recently was diagnosed with coronavirus.\n\nYou should isolate yourself and get tested.";

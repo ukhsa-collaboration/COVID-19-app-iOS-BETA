@@ -74,7 +74,7 @@ class NotificationManagerTests: XCTestCase {
             }
         }
 
-        notificationCenterDouble.completionHandler!(true, nil)
+        notificationCenterDouble.requestAuthCompletionHandler!(true, nil)
         DispatchQueue.test.flush()
 
         XCTAssertTrue(applicationDouble.registeredForRemoteNotifications)
@@ -96,6 +96,22 @@ class NotificationManagerTests: XCTestCase {
         
         XCTAssertEqual(diagnosisService.currentDiagnosis, .potential)
     }
+
+    func testHandleNotification_sendsLocalNotificationWithPotentialStatus() {
+        let diagnosisService = DiagnosisService()
+        let notificationCenterDouble = NotificationCenterDouble()
+        let notificationManager = ConcreteNotificationManager(
+            uiQueue: DispatchQueue.test,
+            firebase: FirebaseAppDouble.self,
+            messagingFactory: { MessagingDouble() },
+            userNotificationCenter: notificationCenterDouble,
+            diagnosisService: diagnosisService
+        )
+
+        notificationManager.handleNotification(userInfo: ["status" : "Potential"])
+
+        XCTAssertNotNil(notificationCenterDouble.request)
+    }
     
     func testHandleNotification_doesNotSaveOtherDiagnosis() {
         let diagnosisService = DiagnosisService()
@@ -110,6 +126,22 @@ class NotificationManagerTests: XCTestCase {
         notificationManager.handleNotification(userInfo: ["status" : "infected"])
         
         XCTAssertEqual(diagnosisService.currentDiagnosis, .unknown)
+    }
+
+    func testHandleNotification_doesNotSendLocalNotificationWhenStatusIsNotPotential() {
+        let diagnosisService = DiagnosisService()
+        let notificationCenterDouble = NotificationCenterDouble()
+        let notificationManager = ConcreteNotificationManager(
+            uiQueue: DispatchQueue.test,
+            firebase: FirebaseAppDouble.self,
+            messagingFactory: { MessagingDouble() },
+            userNotificationCenter: notificationCenterDouble,
+            diagnosisService: diagnosisService
+        )
+
+        notificationManager.handleNotification(userInfo: ["status" : "infected"])
+
+        XCTAssertNil(notificationCenterDouble.request)
     }
     
     func testHandleNotification_forwardsNonDiagnosisNotificationsToDelegate() {
@@ -126,6 +158,22 @@ class NotificationManagerTests: XCTestCase {
         
         notificationManager.handleNotification(userInfo: userInfo)
         XCTAssertEqual(delegate.userInfo?["something"] as? String, "else")
+    }
+
+    func testHandleNotification_foreGroundedLocalNotification() {
+        let diagnosisService = DiagnosisService()
+        let notificationCenterDouble = NotificationCenterDouble()
+        let notificationManager = ConcreteNotificationManager(
+            uiQueue: DispatchQueue.test,
+            firebase: FirebaseAppDouble.self,
+            messagingFactory: { MessagingDouble() },
+            userNotificationCenter: notificationCenterDouble,
+            diagnosisService: diagnosisService
+        )
+
+        notificationManager.handleNotification(userInfo: [:])
+
+        XCTAssertNil(notificationCenterDouble.request)
     }
 }
 
@@ -152,10 +200,17 @@ class NotificationCenterDouble: UserNotificationCenter {
     weak var delegate: UNUserNotificationCenterDelegate?
 
     var options: UNAuthorizationOptions?
-    var completionHandler: ((Bool, Error?) -> Void)?
+    var requestAuthCompletionHandler: ((Bool, Error?) -> Void)?
     func requestAuthorization(options: UNAuthorizationOptions, completionHandler: @escaping (Bool, Error?) -> Void) {
         self.options = options
-        self.completionHandler = completionHandler
+        self.requestAuthCompletionHandler = completionHandler
+    }
+
+    var request: UNNotificationRequest?
+    var addCompletionHandler: ((Error?) -> Void)?
+    func add(_ request: UNNotificationRequest, withCompletionHandler completionHandler: ((Error?) -> Void)?) {
+        self.request = request
+        self.addCompletionHandler = completionHandler
     }
 
 }
