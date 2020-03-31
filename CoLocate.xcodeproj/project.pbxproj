@@ -251,8 +251,8 @@
 			isa = PBXGroup;
 			children = (
 				098ED480242E745F0029B729 /* Debug.storyboard */,
-				098ED482242E746E0029B729 /* DebugViewController.swift */,
 				098ED48F242E9BE20029B729 /* DebugSetting.swift */,
+				098ED482242E746E0029B729 /* DebugViewController.swift */,
 			);
 			path = Debug;
 			sourceTree = "<group>";
@@ -260,7 +260,6 @@
 		098ED486242E89760029B729 /* Doubles */ = {
 			isa = PBXGroup;
 			children = (
-				F770A4562430F76B002FDED1 /* AppCoordinatorDouble.swift */,
 				098ED487242E89930029B729 /* NotificationServiceDouble.swift */,
 				098ED48B242E8B290029B729 /* PersistanceDouble.swift */,
 				098ED489242E89D80029B729 /* RegistrationServiceDouble.swift */,

@@ -12,6 +12,17 @@ class DebugViewController: UITableViewController {
 
     let persistance = Persistance.shared
     @IBOutlet weak var interceptRequestsSwitch: UISwitch!
+    @IBOutlet weak var newOnboardingSwitch: UISwitch!
+
+    override func viewDidLoad() {
+        newOnboardingSwitch.isOn = persistance.newOnboarding
+
+        #if DEBUG
+            newOnboardingSwitch.isEnabled = true
+        #else
+            newOnboardingSwitch.isEnabled = false
+        #endif
+    }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
@@ -62,6 +73,9 @@ class DebugViewController: UITableViewController {
                 show(title: "Failed", message: "Couldn't get sonarId, has this device completed registration?")
             }
 
+        case (3, 0), (4, 0):
+            break
+
         default:
             fatalError()
         }
@@ -75,6 +89,11 @@ class DebugViewController: UITableViewController {
 
     @IBAction func interceptRegistrationRequestsChanged(_ sender: UISwitch) {
     }
+
+    @IBAction func newOnboardingChanged(_ sender: UISwitch) {
+        persistance.newOnboarding = sender.isOn
+    }
+
 }
 
 class TestPushRequest: SecureRequest, Request {

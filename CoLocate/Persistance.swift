@@ -19,8 +19,8 @@ protocol PersistanceDelegate: class {
 class Persistance {
 
     enum Keys: String, CaseIterable {
-        case diagnosis
         case allowedDataSharing
+        case diagnosis
     }
 
     static var shared = Persistance()
@@ -56,6 +56,11 @@ class Persistance {
             UserDefaults.standard.set(newValue.rawValue, forKey: Keys.diagnosis.rawValue)
             delegate?.persistance(self, didRecordDiagnosis: diagnosis)
         }
+    }
+
+    var newOnboarding: Bool {
+        get { UserDefaults.standard.bool(forKey: #function) }
+        set { UserDefaults.standard.set(newValue, forKey: #function) }
     }
 
     init(secureRegistrationStorage: SecureRegistrationStorage) {
