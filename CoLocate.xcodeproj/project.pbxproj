@@ -226,6 +226,7 @@
 		098ED479242D7E340029B729 /* Registration */ = {
 			isa = PBXGroup;
 			children = (
+				F7EAE5A1242FAD0E0090F8A2 /* RegistrationCoordinatorTests.swift */,
 				F67A2294242AC188002254B6 /* RegistrationViewControllerTests.swift */,
 				098ED47A242D7E460029B729 /* RegistrationServiceTests.swift */,
 			);
@@ -284,7 +285,6 @@
 				214209C9242227B300C7BFF3 /* DiagnosisServiceTests.swift */,
 				214209CD24237A6300C7BFF3 /* PlistContactEventRecorderTests.swift */,
 				F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */,
-				F7EAE5A1242FAD0E0090F8A2 /* RegistrationCoordinatorTests.swift */,
 				F68BFBF6242ACD17008EE68F /* TestHelpers.swift */,
 				214209DA242630CF00C7BFF3 /* Networking */,
 			);
@@ -386,7 +386,6 @@
 				6FC63C39241641BA007C8BF3 /* LaunchScreen.storyboard */,
 				214209B9242216B700C7BFF3 /* DiagnosisService.swift */,
 				F67A2290242AA35B002254B6 /* SecureRegistrationStorage.swift */,
-				F7EAE59F242FACCB0090F8A2 /* RegistrationCoordinator.swift */,
 				098ED47F242E744F0029B729 /* Debug */,
 				F758B8CD242CC242003AE16D /* Bluetooth Permissions */,
 				F758B8CA242CC1DC003AE16D /* EnterDiagnosis */,
@@ -478,6 +477,7 @@
 		F758B8D0242CC661003AE16D /* Registration */ = {
 			isa = PBXGroup;
 			children = (
+				F7EAE59F242FACCB0090F8A2 /* RegistrationCoordinator.swift */,
 				F600A5FF242977D50038DF57 /* RegistrationViewController.swift */,
 				F758B8D1242CC67D003AE16D /* Registration.storyboard */,
 				098ED477242D7D050029B729 /* RegistratonService.swift */,
