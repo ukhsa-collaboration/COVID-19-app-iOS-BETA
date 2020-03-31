@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     var listener = BTLEListener()
 
     let notificationManager: NotificationManager = ConcreteNotificationManager()
-    let diagnosisService: DiagnosisService = DiagnosisService.shared
+    let persistance = Persistance.shared
     let registrationService: RegistrationService
 
     var appCoordinator: AppCoordinator!
@@ -69,7 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         listener.start(stateDelegate: nil)
 
         appCoordinator = AppCoordinator(navController: rootViewController,
-                                        diagnosisService: diagnosisService,
+                                        persistance: persistance,
                                         secureRequestFactory: ConcreteSecureRequestFactory(registration: registration))
         appCoordinator.start()
     }

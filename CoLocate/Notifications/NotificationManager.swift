@@ -37,7 +37,7 @@ class ConcreteNotificationManager: NSObject, NotificationManager {
     let firebase: TestableFirebaseApp.Type
     let messagingFactory: () -> TestableMessaging
     let userNotificationCenter: UserNotificationCenter
-    let diagnosisService: DiagnosisService
+    let persistance: Persistance
     
     var pushToken: String?
     
@@ -48,13 +48,13 @@ class ConcreteNotificationManager: NSObject, NotificationManager {
         firebase: TestableFirebaseApp.Type,
         messagingFactory: @escaping () -> TestableMessaging,
         userNotificationCenter: UserNotificationCenter,
-        diagnosisService: DiagnosisService
+        persistance: Persistance
     ) {
         self.uiQueue = uiQueue
         self.firebase = firebase
         self.messagingFactory = messagingFactory
         self.userNotificationCenter = userNotificationCenter
-        self.diagnosisService = diagnosisService
+        self.persistance = persistance
 
         super.init()
     }
@@ -65,7 +65,7 @@ class ConcreteNotificationManager: NSObject, NotificationManager {
             firebase: FirebaseApp.self,
             messagingFactory: { Messaging.messaging() },
             userNotificationCenter: UNUserNotificationCenter.current(),
-            diagnosisService: DiagnosisService.shared
+            persistance: Persistance.shared
         )
     }
 
@@ -118,7 +118,7 @@ class ConcreteNotificationManager: NSObject, NotificationManager {
                 }
             }
 
-            diagnosisService.recordDiagnosis(.potential)
+            persistance.diagnosis = .potential
         } else {
             print("Received unexpected status from remote notification: '\(status)'")
         }

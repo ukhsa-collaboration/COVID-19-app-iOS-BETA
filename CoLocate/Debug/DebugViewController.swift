@@ -16,14 +16,14 @@ class DebugViewController: UITableViewController {
         switch (indexPath.section, indexPath.row) {
         case (0, 0):
             try! SecureRegistrationStorage.clear()
-            DiagnosisService.shared.recordDiagnosis(.unknown)
+            Persistance.shared.diagnosis = .unknown
             show(title: "Cleared", message: "Registration and diagnosis data has been cleared. Please stop and re-start the application.")
 
         case (0, 1):
             let alertController = UIAlertController(title: "Set diagnosis", message: nil, preferredStyle: .actionSheet)
             for diagnosis in Diagnosis.allCases {
                 alertController.addAction(UIAlertAction(title: "\(diagnosis)", style: .default) { _ in
-                    DiagnosisService.shared.recordDiagnosis(diagnosis)
+                    Persistance.shared.diagnosis = diagnosis
                     self.show(title: "Cleared", message: "Diagnosis data has been set. Please stop and re-start the application.")
                 })
             }

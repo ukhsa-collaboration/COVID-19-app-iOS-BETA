@@ -1,5 +1,5 @@
 //
-//  DiagnosisServiceTests.swift
+//  PersistanceTests.swift
 //  CoLocateTests
 //
 //  Created by NHSX.
@@ -9,12 +9,14 @@
 import XCTest
 @testable import CoLocate
 
-class DiagnosisServiceTests: XCTestCase {
+class PersistanceTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
 
-        DiagnosisService.clear()
+        for key in Persistance.Keys.allCases {
+            UserDefaults.standard.removeObject(forKey: key.rawValue)
+        }
     }
 
     // Ensure when UserDefaults.integer(forKey: ) doesn't find anything, it translates to .unknown
@@ -23,39 +25,39 @@ class DiagnosisServiceTests: XCTestCase {
     }
 
     func testDiagnosisIsPersisted() {
-        let service = DiagnosisService()
-        service.recordDiagnosis(Diagnosis.notInfected)
+        let service = Persistance()
+        service.diagnosis = .notInfected
 
-        let diagnosis = DiagnosisService().currentDiagnosis
+        let diagnosis = Persistance().diagnosis
         XCTAssertEqual(diagnosis, Diagnosis.notInfected)
     }
 
     func testDiagnosisIsUnknownWhenDefaultsReset() {
-        let service = DiagnosisService()
-        service.recordDiagnosis(Diagnosis.infected)
+        let service = Persistance()
+        service.diagnosis = .infected
 
         let appDomain = Bundle.main.bundleIdentifier
         UserDefaults.standard.removePersistentDomain(forName: appDomain!)
 
-        let diagnosis = service.currentDiagnosis
+        let diagnosis = service.diagnosis
         XCTAssertEqual(diagnosis, Diagnosis.unknown)
     }
     
     func testDiagnosisIsPassedToDelegate() {
-        let delegate = DiagnosisServiceDelegateDouble()
-        let service = DiagnosisService()
+        let delegate = PersistanceDelegateDouble()
+        let service = Persistance()
         service.delegate = delegate
         
-        service.recordDiagnosis(.notInfected)
+        service.diagnosis = .notInfected
         
         XCTAssertEqual(delegate.recordedDiagnosis, .notInfected)
     }
 }
 
-class DiagnosisServiceDelegateDouble: NSObject, DiagnosisServiceDelegate {
+class PersistanceDelegateDouble: NSObject, PersistanceDelegate {
     var recordedDiagnosis: Diagnosis?
     
-    func diagnosisService(_ diagnosisService: DiagnosisService, didRecordDiagnosis diagnosis: Diagnosis) {
+    func persistance(_ persistance: Persistance, didRecordDiagnosis diagnosis: Diagnosis) {
         recordedDiagnosis = diagnosis
     }
 }
