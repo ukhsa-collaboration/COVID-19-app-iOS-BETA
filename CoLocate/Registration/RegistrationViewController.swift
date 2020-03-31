@@ -41,11 +41,17 @@ class RegistrationViewController: UIViewController, Storyboarded {
             self.activityIndicator.stopAnimating()
 
             switch result {
+                
             case .success(let registration):
                 self.delegate.registrationDidFinish(with: registration)
+                
             case .failure(let error):
-                print("Unable to register, got error: \(error)")
-                self.registerButton.isEnabled = false
+                print("\(#file) \(#function) Unable to register: \(error)")
+                let alert = UIAlertController(title: "Registration failed", message: "\(error)", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default))
+                self.present(alert, animated: true)
+                
+                self.registerButton.isEnabled = true
             }
         }
     }
