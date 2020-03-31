@@ -13,47 +13,71 @@ class OnboardingCoordinatorTests: TestCase {
 
     func testInitialState() {
         let persistanceDouble = PersistanceDouble(allowedDataSharing: false)
-        let authManagerDouble = AuthorizationManagerDouble(bluetooth: .notDetermined, notifications: .notDetermined)
+        let authManagerDouble = AuthorizationManagerDouble(bluetooth: .notDetermined)
         let onboardingCoordinator = OnboardingCoordinator(
             persistance: persistanceDouble,
             authorizationManager: authManagerDouble
         )
 
-        XCTAssertEqual(onboardingCoordinator.state, .initial)
+        var state: OnboardingCoordinator.State?
+        onboardingCoordinator.state { state = $0 }
+        XCTAssertEqual(state, .initial)
     }
 
-    func testPermissions() {
+    func testBluetoothPermissions() {
         let persistanceDouble = PersistanceDouble(allowedDataSharing: true)
-        let authManagerDouble = AuthorizationManagerDouble(bluetooth: .notDetermined, notifications: .notDetermined)
+        let authManagerDouble = AuthorizationManagerDouble(bluetooth: .notDetermined)
         let onboardingCoordinator = OnboardingCoordinator(
             persistance: persistanceDouble,
             authorizationManager: authManagerDouble
         )
 
-        XCTAssertEqual(onboardingCoordinator.state, .permissions)
+        var state: OnboardingCoordinator.State?
+        onboardingCoordinator.state { state = $0 }
+        XCTAssertEqual(state, .permissions)
+    }
+
+    func testNotificationPermissions() {
+        let persistanceDouble = PersistanceDouble(allowedDataSharing: true)
+        let authManagerDouble = AuthorizationManagerDouble(bluetooth: .allowed)
+        let onboardingCoordinator = OnboardingCoordinator(
+            persistance: persistanceDouble,
+            authorizationManager: authManagerDouble
+        )
+
+        var state: OnboardingCoordinator.State?
+        onboardingCoordinator.state { state = $0 }
+        authManagerDouble.notificationsCompletion!(.notDetermined)
+        XCTAssertEqual(state, .permissions)
     }
 
     func testRegistration() {
         let persistanceDouble = PersistanceDouble(allowedDataSharing: true)
-        let authManagerDouble = AuthorizationManagerDouble(bluetooth: .notDetermined, notifications: .notDetermined)
+        let authManagerDouble = AuthorizationManagerDouble(bluetooth: .allowed)
         let onboardingCoordinator = OnboardingCoordinator(
             persistance: persistanceDouble,
             authorizationManager: authManagerDouble
         )
 
-        XCTAssertEqual(onboardingCoordinator.state, .permissions)
+        var state: OnboardingCoordinator.State?
+        onboardingCoordinator.state { state = $0 }
+        authManagerDouble.notificationsCompletion!(.allowed)
+        XCTAssertEqual(state, .registration)
     }
 
     func testDoneOnboarding() {
         let registration = Registration(id: UUID(), secretKey: Data())
         let persistanceDouble = PersistanceDouble(allowedDataSharing: true, registration: registration)
-        let authManagerDouble = AuthorizationManagerDouble(bluetooth: .allowed, notifications: .allowed)
+        let authManagerDouble = AuthorizationManagerDouble(bluetooth: .allowed)
         let onboardingCoordinator = OnboardingCoordinator(
             persistance: persistanceDouble,
             authorizationManager: authManagerDouble
         )
 
-        XCTAssertEqual(onboardingCoordinator.state, nil)
+        var state: OnboardingCoordinator.State?
+        onboardingCoordinator.state { state = $0 }
+        authManagerDouble.notificationsCompletion!(.allowed)
+        XCTAssertEqual(state, nil)
     }
 
 }

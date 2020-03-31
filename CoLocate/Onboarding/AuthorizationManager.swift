@@ -18,8 +18,8 @@ class AuthorizationManager {
         .notDetermined
     }
 
-    var notifications: Status {
-        .notDetermined
+    func notifications(completion: @escaping (Status) -> Void) {
+        completion(.notDetermined)
     }
 
 }

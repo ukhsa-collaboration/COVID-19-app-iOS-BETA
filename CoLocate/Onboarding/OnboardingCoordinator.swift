@@ -18,20 +18,6 @@ class OnboardingCoordinator {
     let persistance: Persistance
     let authorizationManager: AuthorizationManager
 
-    var state: State? {
-        let allowedDataSharing = persistance.allowedDataSharing
-        let allowedBluetooth = authorizationManager.bluetooth == .allowed
-        let allowedNotifications = authorizationManager.notifications == .allowed
-        let isRegistered = persistance.registration != nil
-
-        switch (allowedDataSharing, allowedBluetooth, allowedNotifications, isRegistered) {
-        case (false, _, _, _): return .initial
-        case (true, false, _, _), (true, _, false, _): return .permissions
-        case (true, true, true, false): return .registration
-        case (true, true, true, true): return nil
-        }
-    }
-
     init(persistance: Persistance, authorizationManager: AuthorizationManager) {
         self.persistance = persistance
         self.authorizationManager = authorizationManager
@@ -39,6 +25,38 @@ class OnboardingCoordinator {
 
     convenience init() {
         self.init(persistance: Persistance.shared, authorizationManager: AuthorizationManager())
+    }
+
+    func state(completion: @escaping (State?) -> Void) {
+        let allowedDataSharing = self.persistance.allowedDataSharing
+        guard allowedDataSharing else {
+            completion(.initial)
+            return
+        }
+
+        let allowedBluetooth = self.authorizationManager.bluetooth == .allowed
+        guard allowedBluetooth else {
+            completion(.permissions)
+            return
+        }
+
+        authorizationManager.notifications { [weak self] notificationStatus in
+            guard let self = self else { return }
+
+            let allowedNotifications = notificationStatus == .allowed
+            guard allowedNotifications else {
+                completion(.permissions)
+                return
+            }
+
+            let isRegistered = self.persistance.registration != nil
+            guard isRegistered else {
+                completion(.registration)
+                return
+            }
+
+            completion(nil)
+        }
     }
 
 }

@@ -12,11 +12,9 @@ import Foundation
 class AuthorizationManagerDouble: AuthorizationManager {
 
     init(
-        bluetooth: AuthorizationManager.Status = .notDetermined,
-        notifications: AuthorizationManager.Status = .notDetermined
+        bluetooth: AuthorizationManager.Status = .notDetermined
     ) {
         _bluetooth = bluetooth
-        _notifications = notifications
     }
 
     var _bluetooth: AuthorizationManager.Status
@@ -24,9 +22,9 @@ class AuthorizationManagerDouble: AuthorizationManager {
         _bluetooth
     }
 
-    var _notifications: AuthorizationManager.Status
-    override var notifications: AuthorizationManager.Status {
-        _notifications
+    var notificationsCompletion: ((AuthorizationManager.Status) -> Void)?
+    override func notifications(completion: @escaping (AuthorizationManager.Status) -> Void) {
+        notificationsCompletion = completion
     }
 
 }
