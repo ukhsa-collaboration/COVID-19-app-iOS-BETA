@@ -14,8 +14,6 @@ class RegistrationViewController: UIViewController, Storyboarded {
     @IBOutlet private var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var registerButton: UIButton!
 
-    var registrationStorage: SecureRegistrationStorage = SecureRegistrationStorage.shared
-
     var registrationService: RegistrationService!
     var notificationManager: NotificationManager!
 
