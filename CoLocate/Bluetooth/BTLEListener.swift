@@ -139,12 +139,13 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
             return
         }
         
-        if let sonarIdCharacteristic = characteristics.first(where: {$0.uuid == BTLEBroadcaster.sonarIdCharacteristicUUID}) {
-            print("\(#file).\(#function) found sonarIdCharacteristic: \(sonarIdCharacteristic)")
-            peripheral.readValue(for: sonarIdCharacteristic)
-        } else {
+        guard let sonarIdCharacteristic = characteristics.first(where: {$0.uuid == BTLEBroadcaster.sonarIdCharacteristicUUID}) else {
             print("Sonar Id characteristic not discovered for peripheral \(peripheral)")
+            return
         }
+
+        print("\(#file).\(#function) found sonarIdCharacteristic: \(sonarIdCharacteristic)")
+        peripheral.readValue(for: sonarIdCharacteristic)
     }
 
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
