@@ -62,6 +62,10 @@
 		F6CA2819242E41F700F8DC55 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = F6CA2818242E41F700F8DC55 /* README.md */; };
 		F6CC2CA9242BC7FC0079432B /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CC2CA8242BC7FC0079432B /* NotificationManager.swift */; };
 		F6CC2CAC242BCD0D0079432B /* NotificationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CC2CAB242BCD0D0079432B /* NotificationManagerTests.swift */; };
+		F6F05A242433BEC000FF4B72 /* OnboardingCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F05A232433BEC000FF4B72 /* OnboardingCoordinatorTests.swift */; };
+		F6F05A262433C09200FF4B72 /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F05A252433C09200FF4B72 /* OnboardingCoordinator.swift */; };
+		F6F05A282433C55300FF4B72 /* AuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F05A272433C55300FF4B72 /* AuthorizationManager.swift */; };
+		F6F05A2A2433C6CC00FF4B72 /* AuthManagerDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F05A292433C6CC00FF4B72 /* AuthManagerDouble.swift */; };
 		F758553A24294C8D00CBE1ED /* RequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F758553924294C8C00CBE1ED /* RequestFactory.swift */; };
 		F758B8BE242CB856003AE16D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F758B8BD242CB856003AE16D /* Localizable.strings */; };
 		F758B8C0242CB98C003AE16D /* UIViewController+Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = F758B8BF242CB98C003AE16D /* UIViewController+Storyboarded.swift */; };
@@ -165,6 +169,10 @@
 		F6CA2818242E41F700F8DC55 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F6CC2CA8242BC7FC0079432B /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		F6CC2CAB242BCD0D0079432B /* NotificationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManagerTests.swift; sourceTree = "<group>"; };
+		F6F05A232433BEC000FF4B72 /* OnboardingCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinatorTests.swift; sourceTree = "<group>"; };
+		F6F05A252433C09200FF4B72 /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
+		F6F05A272433C55300FF4B72 /* AuthorizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationManager.swift; sourceTree = "<group>"; };
+		F6F05A292433C6CC00FF4B72 /* AuthManagerDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManagerDouble.swift; sourceTree = "<group>"; };
 		F758553924294C8C00CBE1ED /* RequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFactory.swift; sourceTree = "<group>"; };
 		F758B8BD242CB856003AE16D /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		F758B8BF242CB98C003AE16D /* UIViewController+Storyboarded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Storyboarded.swift"; sourceTree = "<group>"; };
@@ -252,12 +260,14 @@
 		098ED486242E89760029B729 /* Doubles */ = {
 			isa = PBXGroup;
 			children = (
+				F770A4562430F76B002FDED1 /* AppCoordinatorDouble.swift */,
 				098ED487242E89930029B729 /* NotificationServiceDouble.swift */,
-				098ED489242E89D80029B729 /* RegistrationServiceDouble.swift */,
 				098ED48B242E8B290029B729 /* PersistanceDouble.swift */,
+				098ED489242E89D80029B729 /* RegistrationServiceDouble.swift */,
 				F770A454242FEE7C002FDED1 /* SecureRequestFactoryDouble.swift */,
 				F770A4562430F76B002FDED1 /* AppCoordinatorDouble.swift */,
 				0958E4B02433BFE5008C1E37 /* NotificationObserverDouble.swift */,
+				F6F05A292433C6CC00FF4B72 /* AuthManagerDouble.swift */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -287,6 +297,7 @@
 				F68BFBF6242ACD17008EE68F /* TestHelpers.swift */,
 				21F374002433845600926FB8 /* Contact Events */,
 				098ED486242E89760029B729 /* Doubles */,
+				F6F05A222433BEAC00FF4B72 /* Onboarding */,
 				098ED479242D7E340029B729 /* Registration */,
 				F6CC2CAA242BCCE90079432B /* Notifications */,
 				214209C32422276800C7BFF3 /* Info.plist */,
@@ -408,6 +419,7 @@
 				F758B8CA242CC1DC003AE16D /* EnterDiagnosis */,
 				F7EAE5A4242FAFFA0090F8A2 /* NotificationsPrompt */,
 				F758B8C6242CC129003AE16D /* OkNow */,
+				F6F05A212433BE9600FF4B72 /* Onboarding */,
 				F758B8C7242CC164003AE16D /* PleaseSelfIsolate */,
 				F758B8D0242CC661003AE16D /* Registration */,
 				F758B8C5242CC117003AE16D /* Potential */,
@@ -435,6 +447,23 @@
 				F770A452242FEC8A002FDED1 /* NotificationsPromptViewControllerTests.swift */,
 			);
 			path = Notifications;
+			sourceTree = "<group>";
+		};
+		F6F05A212433BE9600FF4B72 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				F6F05A272433C55300FF4B72 /* AuthorizationManager.swift */,
+				F6F05A252433C09200FF4B72 /* OnboardingCoordinator.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		F6F05A222433BEAC00FF4B72 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				F6F05A232433BEC000FF4B72 /* OnboardingCoordinatorTests.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		F758B8BC242CB83B003AE16D /* Resources */ = {
@@ -655,6 +684,8 @@
 				F770A4572430F76B002FDED1 /* AppCoordinatorDouble.swift in Sources */,
 				098ED48C242E8B290029B729 /* PersistanceDouble.swift in Sources */,
 				098ED485242E88D80029B729 /* AppCoordinatorTests.swift in Sources */,
+				F6F05A2A2433C6CC00FF4B72 /* AuthManagerDouble.swift in Sources */,
+				F6F05A242433BEC000FF4B72 /* OnboardingCoordinatorTests.swift in Sources */,
 				214209D924262B7500C7BFF3 /* SessionHelpers.swift in Sources */,
 				F600A60424297C010038DF57 /* RegistrationRequestTests.swift in Sources */,
 				098ED488242E89930029B729 /* NotificationServiceDouble.swift in Sources */,
@@ -677,6 +708,7 @@
 			files = (
 				21D93C302420C26900C1FA9B /* PrimaryButton.swift in Sources */,
 				F78CEB47242B7752002254AD /* String+localized.swift in Sources */,
+				F6F05A282433C55300FF4B72 /* AuthorizationManager.swift in Sources */,
 				F758B8C2242CBAF5003AE16D /* AppCoordinator.swift in Sources */,
 				21AF36AB241A8E50001A4910 /* BTLEListener.swift in Sources */,
 				F78CEBED242D0836002254AD /* SecureRequestFactory.swift in Sources */,
@@ -709,6 +741,7 @@
 				AEC6A7BC241BD81A00B0237A /* LogoStrapline.swift in Sources */,
 				214209D52423C83C00C7BFF3 /* PatchContactEventsRequest.swift in Sources */,
 				214209D0242396DA00C7BFF3 /* Session.swift in Sources */,
+				F6F05A262433C09200FF4B72 /* OnboardingCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

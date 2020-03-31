@@ -12,25 +12,33 @@ import UIKit
 class PersistanceDouble: Persistance {
 
     init(
+        allowedDataSharing: Bool = false,
         diagnosis: Diagnosis = .unknown,
         registration: Registration? = nil
     ) {
-        super.init(secureRegistrationStorage: SecureRegistrationStorage.shared)
+        self._allowedDataSharing = allowedDataSharing
+        self._registration = registration
+        self._diagnosis = diagnosis
 
-        self.diagnosis = diagnosis
-        self.registration = registration
+        super.init(secureRegistrationStorage: SecureRegistrationStorage.shared)
     }
 
-    private var _diagnosis = Diagnosis.unknown
-    override var diagnosis: Diagnosis {
-        get { _diagnosis }
-        set { _diagnosis = newValue }
+    private var _allowedDataSharing: Bool
+    override var allowedDataSharing: Bool {
+        get { _allowedDataSharing }
+        set { _allowedDataSharing = newValue }
     }
 
     private var _registration: Registration?
     override var registration: Registration? {
         get { _registration }
         set { _registration = newValue }
+    }
+
+    private var _diagnosis: Diagnosis
+    override var diagnosis: Diagnosis {
+        get { _diagnosis }
+        set { _diagnosis = newValue }
     }
 
 }
