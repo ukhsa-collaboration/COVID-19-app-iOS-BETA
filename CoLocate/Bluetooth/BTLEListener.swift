@@ -9,13 +9,13 @@
 import Foundation
 import CoreBluetooth
 
-protocol BTLEListenerDelegate {
+protocol BTLEListenerStateDelegate {
     func btleListener(_ listener: BTLEListener, didUpdateState state: CBManagerState)
 }
 
 class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
 
-    var delegate: BTLEListenerDelegate?
+    var stateDelegate: BTLEListenerStateDelegate?
     var contactEventRecorder: ContactEventRecorder
     
     var centralManager: CBCentralManager?
@@ -32,8 +32,8 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         self.contactEventRecorder = contactEventRecorder
     }
 
-    func start(delegate: BTLEListenerDelegate?) {
-        self.delegate = delegate
+    func start(stateDelegate: BTLEListenerStateDelegate?) {
+        self.stateDelegate = stateDelegate
 
         guard centralManager == nil else { return }
         
@@ -46,7 +46,7 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     // MARK: CBCentralManagerDelegate
     
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
-        delegate?.btleListener(self, didUpdateState: central.state)
+        stateDelegate?.btleListener(self, didUpdateState: central.state)
         
         switch (central.state) {
                 

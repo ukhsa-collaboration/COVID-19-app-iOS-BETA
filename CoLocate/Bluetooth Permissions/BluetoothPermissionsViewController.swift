@@ -9,7 +9,7 @@
 import UIKit
 import CoreBluetooth
 
-class BluetoothPermissionsViewController: UIViewController, BTLEBroadcasterDelegate, BTLEListenerDelegate, Storyboarded {
+class BluetoothPermissionsViewController: UIViewController, BTLEBroadcasterStateDelegate, BTLEListenerStateDelegate, Storyboarded {
     static let storyboardName = "BluetoothPermissions"
     var bluetoothReadyDelegate: BluetoothAvailableDelegate?
 
@@ -41,8 +41,8 @@ class BluetoothPermissionsViewController: UIViewController, BTLEBroadcasterDeleg
       #else
         let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
 
-        appDelegate.broadcaster.start(delegate: self)
-        appDelegate.listener.start(delegate: self)
+        appDelegate.broadcaster.start(stateDelegate: self)
+        appDelegate.listener.start(stateDelegate: self)
       #endif
     }
 

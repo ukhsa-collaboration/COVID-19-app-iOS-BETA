@@ -65,8 +65,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
 
         broadcaster.setSonarUUID(registration.id)
-        broadcaster.start(delegate: nil)
-        listener.start(delegate: nil)
+        broadcaster.start(stateDelegate: nil)
+        listener.start(stateDelegate: nil)
 
         appCoordinator = AppCoordinator(navController: rootViewController,
                                         diagnosisService: diagnosisService,
