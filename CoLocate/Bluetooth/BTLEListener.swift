@@ -18,7 +18,7 @@ extension CBPeripheral: BTLEPeripheral {
 
 protocol BTLEListenerDelegate {
     func btleListener(_ listener: BTLEListener, didConnect peripheral: BTLEPeripheral)
-    func btleListener(_ listener: BTLEListener, didDisconnectPeripheral peripheral: BTLEPeripheral, error: Error?) // TODO rename me -Peripheral
+    func btleListener(_ listener: BTLEListener, didDisconnect peripheral: BTLEPeripheral, error: Error?)
     func btleListener(_ listener: BTLEListener, didFindSonarId sonarId: UUID, forPeripheral peripheral: BTLEPeripheral)
     func btleListener(_ listener: BTLEListener, didReadRSSI RSSI: Int, forPeripheral peripheral: BTLEPeripheral)
     func btleListener(_ listener: BTLEListener, shouldReadRSSIFor peripheral: BTLEPeripheral) -> Bool

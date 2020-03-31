@@ -32,7 +32,7 @@ class ContactEventCollectorTests: XCTestCase {
     func testRecordsContactEventOnDisconnect() {
         collector.btleListener(listener, didConnect: peripheral1)
         collector.btleListener(listener, didFindSonarId: sonarId1, forPeripheral: peripheral1)
-        collector.btleListener(listener, didDisconnectPeripheral: peripheral1, error: nil)
+        collector.btleListener(listener, didDisconnect: peripheral1, error: nil)
         
         XCTAssertEqual(recorder.contactEvents.count, 1)
         XCTAssertEqual(recorder.contactEvents.first?.remoteContactId, sonarId1)
@@ -40,7 +40,7 @@ class ContactEventCollectorTests: XCTestCase {
     
     func testDoesNotRecordContactEventForIncompleteRecord() {
         collector.btleListener(listener, didConnect: peripheral1)
-        collector.btleListener(listener, didDisconnectPeripheral: peripheral1, error: nil)
+        collector.btleListener(listener, didDisconnect: peripheral1, error: nil)
         
         XCTAssertEqual(recorder.contactEvents.count, 0)
     }
@@ -53,7 +53,7 @@ class ContactEventCollectorTests: XCTestCase {
     
     func testRecorderDoesNotRequestRSSIForDisconnectedPeripheral() {
         collector.btleListener(listener, didConnect: peripheral1)
-        collector.btleListener(listener, didDisconnectPeripheral: peripheral1, error: nil)
+        collector.btleListener(listener, didDisconnect: peripheral1, error: nil)
 
         XCTAssertFalse(collector.btleListener(listener, shouldReadRSSIFor: peripheral1))
     }
