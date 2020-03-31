@@ -28,6 +28,8 @@ class DebugViewController: UITableViewController {
                     self.show(title: "Cleared", message: "Diagnosis data has been set. Please stop and re-start the application.")
                 })
             }
+            alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+
             present(alertController, animated: true, completion: nil)
 
         case (1, 0):
