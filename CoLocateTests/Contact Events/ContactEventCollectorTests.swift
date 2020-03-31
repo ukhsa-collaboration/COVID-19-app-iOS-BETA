@@ -29,13 +29,39 @@ class ContactEventCollectorTests: XCTestCase {
         collector = ContactEventCollector(contactEventRecorder: recorder)
     }
 
-    func testRecorderRecordsContactEventOnDisconnect() throws {
+    func testRecordsContactEventOnDisconnect() {
         collector.btleListener(listener, didConnect: peripheral1)
         collector.btleListener(listener, didFindSonarId: sonarId1, forPeripheral: peripheral1)
         collector.btleListener(listener, didDisconnectPeripheral: peripheral1, error: nil)
         
         XCTAssertEqual(recorder.contactEvents.count, 1)
         XCTAssertEqual(recorder.contactEvents.first?.remoteContactId, sonarId1)
+    }
+    
+    func testDoesNotRecordContactEventForIncompleteRecord() {
+        collector.btleListener(listener, didConnect: peripheral1)
+        collector.btleListener(listener, didDisconnectPeripheral: peripheral1, error: nil)
+        
+        XCTAssertEqual(recorder.contactEvents.count, 0)
+    }
+    
+    func testRecorderRequestsRSSIForConnectedPeripheral() {
+        collector.btleListener(listener, didConnect: peripheral1)
+        
+        XCTAssertTrue(collector.btleListener(listener, shouldReadRSSIFor: peripheral1))
+    }
+    
+    func testRecorderDoesNotRequestRSSIForDisconnectedPeripheral() {
+        collector.btleListener(listener, didConnect: peripheral1)
+        collector.btleListener(listener, didDisconnectPeripheral: peripheral1, error: nil)
+
+        XCTAssertFalse(collector.btleListener(listener, shouldReadRSSIFor: peripheral1))
+    }
+    
+    func testRecorderDoesNotRequestRSSIForUnknownPeripheral() {
+        collector.btleListener(listener, didConnect: peripheral1)
+        
+        XCTAssertFalse(collector.btleListener(listener, shouldReadRSSIFor: peripheral2))
     }
 
 }

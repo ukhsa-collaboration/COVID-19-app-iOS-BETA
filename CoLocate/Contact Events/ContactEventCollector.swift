@@ -46,14 +46,22 @@ class ContactEventCollector: BTLEListenerDelegate {
     
     func btleListener(_ listener: BTLEListener, didDisconnectPeripheral peripheral: BTLEPeripheral, error: Error?) {
         connectedPeripherals[peripheral.identifier]?.disconnect()
-        let connectedPeripheral = connectedPeripherals.removeValue(forKey: peripheral.identifier)!
-        
-        let contactEvent = ContactEvent(remoteContactId: connectedPeripheral.sonarId!, timestamp: connectedPeripheral.timestamp, rssi: 0)
-        contactEventRecorder.record(contactEvent)
+        if let connectedPeripheral = connectedPeripherals.removeValue(forKey: peripheral.identifier), let sonarId = connectedPeripheral.sonarId {
+            let contactEvent = ContactEvent(remoteContactId: sonarId, timestamp: connectedPeripheral.timestamp, rssi: 0)
+            contactEventRecorder.record(contactEvent)
+        }
     }
 
     func btleListener(_ listener: BTLEListener, didFindSonarId sonarId: UUID, forPeripheral peripheral: BTLEPeripheral) {
         connectedPeripherals[peripheral.identifier]?.sonarId = sonarId
+    }
+    
+    func btleListener(_ listener: BTLEListener, shouldReadRSSIFor peripheral: BTLEPeripheral) -> Bool {
+        return connectedPeripherals[peripheral.identifier] != nil
+    }
+    
+    func btleListener(_ listener: BTLEListener, didReadRSSI RSSI: Int, forPeripheral peripheral: BTLEPeripheral) {
+        connectedPeripherals[peripheral.identifier]?.rssiSamples.append(RSSI)
     }
     
 }
