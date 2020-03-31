@@ -9,7 +9,7 @@
 import XCTest
 @testable import CoLocate
 
-class RegistrationCoordinatorTests: XCTestCase, RegistrationCoordinatorDelegate {
+class RegistrationCoordinatorTests: TestCase, RegistrationCoordinatorDelegate {
 
     var coordinator: RegistrationCoordinator!
 
@@ -22,20 +22,20 @@ class RegistrationCoordinatorTests: XCTestCase, RegistrationCoordinatorDelegate 
     var delegateRegistration: Registration?
 
     var registration: Registration!
-    var storageWithSavedRegistration: RegistrationStorageDouble!
+    var persistance: PersistanceDouble!
     
     override func setUp() {
         super.setUp()
 
         navController = UINavigationController()
         registration = Registration(id: UUID(uuidString: "39B84598-3AD8-4900-B4E0-EE868773181D")!, secretKey: Data())
-        storageWithSavedRegistration = RegistrationStorageDouble(id: registration.id, key: registration.secretKey)
+        persistance = PersistanceDouble()
 
         coordinator = RegistrationCoordinator(application: application,
                                           navController: navController,
                                           notificationManager: notificationManager,
                                           registrationService: registrationService,
-                                          registrationStorage: registrationStorage,
+                                          persistance: persistance,
                                           delegate: self)
         delegateRegistration = nil
     }
@@ -91,7 +91,7 @@ class RegistrationCoordinatorTests: XCTestCase, RegistrationCoordinatorDelegate 
                                           navController: navController,
                                           notificationManager: notificationManager,
                                           registrationService: registrationService,
-                                          registrationStorage: storageWithSavedRegistration,
+                                          persistance: persistance,
                                           delegate: self)
 
         coordinator.requestPushNotifications() { _ in }
@@ -104,11 +104,12 @@ class RegistrationCoordinatorTests: XCTestCase, RegistrationCoordinatorDelegate 
     }
 
     func test_when_already_registered_calls_delegate_immediately() {
+        persistance.registration = registration
         coordinator = RegistrationCoordinator(application: application,
                                           navController: navController,
                                           notificationManager: notificationManager,
                                           registrationService: registrationService,
-                                          registrationStorage: storageWithSavedRegistration,
+                                          persistance: persistance,
                                           delegate: self)
         coordinator.start()
         

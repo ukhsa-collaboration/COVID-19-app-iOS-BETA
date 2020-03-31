@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                                                           navController: rootViewController,
                                                           notificationManager: notificationManager,
                                                           registrationService: registrationService,
-                                                          registrationStorage: SecureRegistrationStorage.shared,
+                                                          persistance: persistance,
                                                           delegate: self)
         registrationCoordinator.start()
         window?.makeKeyAndVisible()

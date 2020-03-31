@@ -10,13 +10,14 @@ import UIKit
 
 class DebugViewController: UITableViewController {
 
+    let persistance = Persistance.shared
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
 
         switch (indexPath.section, indexPath.row) {
         case (0, 0):
-            try! SecureRegistrationStorage.shared.clear()
-            Persistance.shared.diagnosis = .unknown
+            persistance.clear()
             show(title: "Cleared", message: "Registration and diagnosis data has been cleared. Please stop and re-start the application.")
 
         case (0, 1):
@@ -43,7 +44,7 @@ class DebugViewController: UITableViewController {
             
         case (2, 0):
             do {
-                guard let registration = try SecureRegistrationStorage.shared.get() else {
+                guard let registration = persistance.registration else {
                     throw NSError()
                 }
                 let delay = 15

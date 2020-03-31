@@ -38,7 +38,7 @@ class RegistrationCoordinator {
     let navController: UINavigationController
     let notificationManager: NotificationManager
     let registrationService: RegistrationService
-    let registrationStorage: SecureRegistrationStorage
+    let persistance: Persistance
     let delegate: RegistrationCoordinatorDelegate
 
     fileprivate var currentState: RegisteredState = .unregistered
@@ -47,18 +47,18 @@ class RegistrationCoordinator {
          navController: UINavigationController,
          notificationManager: NotificationManager,
          registrationService: RegistrationService,
-         registrationStorage: SecureRegistrationStorage,
+         persistance: Persistance,
          delegate: RegistrationCoordinatorDelegate) {
         self.delegate = delegate
         self.application = application
         self.navController = navController
         self.notificationManager = notificationManager
         self.registrationService = registrationService
-        self.registrationStorage = registrationStorage
+        self.persistance = persistance
     }
 
     func start() {
-        if let registration = try? registrationStorage.get() {
+        if let registration = persistance.registration {
             delegate.didCompleteRegistration(registration)
         } else {
             navController.viewControllers = [nextViewController()]
