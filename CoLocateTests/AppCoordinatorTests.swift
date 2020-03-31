@@ -13,7 +13,7 @@ class AppCoordinatorTests: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        try! SecureRegistrationStorage.clear()
+        try! SecureRegistrationStorage.shared.clear()
     }
 
     func test_shows_you_are_okay_screen_when_diagnosis_is_unknown() {

@@ -17,6 +17,8 @@ class PersistanceTests: XCTestCase {
         for key in Persistance.Keys.allCases {
             UserDefaults.standard.removeObject(forKey: key.rawValue)
         }
+
+        try! SecureRegistrationStorage.shared.clear()
     }
 
     // Ensure when UserDefaults.integer(forKey: ) doesn't find anything, it translates to .unknown
@@ -51,6 +53,21 @@ class PersistanceTests: XCTestCase {
         service.diagnosis = .notInfected
         
         XCTAssertEqual(delegate.recordedDiagnosis, .notInfected)
+    }
+
+    func testRegistrationIsPassedToSecureRegistrationStorage() {
+        let secureRegistrationStorage = SecureRegistrationStorage.shared
+        let persistance = Persistance(secureRegistrationStorage: secureRegistrationStorage)
+
+        XCTAssertNil(persistance.registration)
+
+        let id = UUID()
+        let secretKey = "secret key".data(using: .utf8)!
+        let registration = Registration(id: id, secretKey: secretKey)
+        persistance.registration = registration
+
+        XCTAssertEqual(try! secureRegistrationStorage.get(), registration)
+        XCTAssertEqual(persistance.registration, registration)
     }
 }
 

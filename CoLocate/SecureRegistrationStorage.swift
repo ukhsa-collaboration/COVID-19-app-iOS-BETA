@@ -9,7 +9,7 @@
 import Foundation
 import Security
 
-struct Registration: Codable {
+struct Registration: Codable, Equatable {
     let id: UUID
     let secretKey: Data
 
@@ -59,7 +59,7 @@ class SecureRegistrationStorage {
     }
 
     func set(registration: Registration) throws {
-        try SecureRegistrationStorage.clear()
+        try clear()
 
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
@@ -74,7 +74,7 @@ class SecureRegistrationStorage {
         }
     }
 
-    static func clear() throws {
+    func clear() throws {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: SecureRegistrationStorage.secService,

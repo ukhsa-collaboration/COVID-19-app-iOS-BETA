@@ -23,9 +23,10 @@ class Persistance {
     }
 
     static var shared = Persistance()
-    
+
+    let secureRegistrationStorage: SecureRegistrationStorage
     weak var delegate: PersistanceDelegate?
-    
+
     var diagnosis: Diagnosis {
         get {
             // This force unwrap is deliberate, we should never store an unknown rawValue
@@ -39,6 +40,24 @@ class Persistance {
         }
     }
 
+    var registration: Registration? {
+        get { try! secureRegistrationStorage.get() }
+        set {
+            guard let registration = newValue else {
+                try! secureRegistrationStorage.clear()
+                return
+            }
+
+            try! secureRegistrationStorage.set(registration: registration)
+        }
+    }
+
+    init(secureRegistrationStorage: SecureRegistrationStorage) {
+        self.secureRegistrationStorage = secureRegistrationStorage
+    }
+
+    convenience init() {
+        self.init(secureRegistrationStorage: SecureRegistrationStorage.shared)
+    }
+
 }
-
-

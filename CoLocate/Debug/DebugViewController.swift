@@ -15,7 +15,7 @@ class DebugViewController: UITableViewController {
 
         switch (indexPath.section, indexPath.row) {
         case (0, 0):
-            try! SecureRegistrationStorage.clear()
+            try! SecureRegistrationStorage.shared.clear()
             Persistance.shared.diagnosis = .unknown
             show(title: "Cleared", message: "Registration and diagnosis data has been cleared. Please stop and re-start the application.")
 

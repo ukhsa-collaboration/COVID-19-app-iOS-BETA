@@ -17,7 +17,7 @@ class RegistrationServiceTests: XCTestCase {
     override class func setUp() {
         super.setUp()
 
-        try! SecureRegistrationStorage.clear()
+        try! SecureRegistrationStorage.shared.clear()
     }
 
     func testRegistration_withPreExistingPushToken() throws {
