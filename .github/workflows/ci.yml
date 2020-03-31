@@ -10,7 +10,9 @@ on:
 
 jobs:
   build:
-    runs-on: macOS-latest
+    runs-on:
+      - self-hosted
+      - macos
     strategy:
       matrix:
         run-config:
@@ -42,7 +44,9 @@ jobs:
 
   test:
     needs: build
-    runs-on: macOS-latest
+    runs-on:
+      - self-hosted
+      - macos
     steps:
       - name: Checkout Project
         uses: actions/checkout@v2
@@ -67,7 +71,9 @@ jobs:
 
   bump-build-version:
     needs: test
-    runs-on: macOS-latest
+    runs-on:
+      - self-hosted
+      - macos
     steps:
       - name: Checkout Project
         uses: actions/checkout@v2
@@ -98,7 +104,9 @@ jobs:
   # https://help.github.com/en/actions/reference/events-that-trigger-workflows#about-workflow-events
   release:
     needs: bump-build-version
-    runs-on: macOS-latest
+    runs-on:
+      - self-hosted
+      - macos
     steps:
       - name: Checkout Project
         uses: actions/checkout@v2
