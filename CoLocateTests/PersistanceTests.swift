@@ -9,17 +9,7 @@
 import XCTest
 @testable import CoLocate
 
-class PersistanceTests: XCTestCase {
-    
-    override func setUp() {
-        super.setUp()
-
-        for key in Persistance.Keys.allCases {
-            UserDefaults.standard.removeObject(forKey: key.rawValue)
-        }
-
-        try! SecureRegistrationStorage.shared.clear()
-    }
+class PersistanceTests: TestCase {
 
     // Ensure when UserDefaults.integer(forKey: ) doesn't find anything, it translates to .unknown
     func testDiagnosisRawValueZeroIsUnknown() {

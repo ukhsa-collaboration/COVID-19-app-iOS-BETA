@@ -9,16 +9,10 @@
 import XCTest
 @testable import CoLocate
 
-class RegistrationServiceTests: XCTestCase {
+class RegistrationServiceTests: TestCase {
 
     let id = UUID()
     let secretKey = "a secret key".data(using: .utf8)!
-
-    override class func setUp() {
-        super.setUp()
-
-        try! SecureRegistrationStorage.shared.clear()
-    }
 
     func testRegistration_withPreExistingPushToken() throws {
         let session = SessionDouble()

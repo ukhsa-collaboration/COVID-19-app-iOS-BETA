@@ -9,12 +9,7 @@
 import XCTest
 @testable import CoLocate
 
-class AppCoordinatorTests: XCTestCase {
-    override func setUp() {
-        super.setUp()
-
-        try! SecureRegistrationStorage.shared.clear()
-    }
+class AppCoordinatorTests: TestCase {
 
     func test_shows_you_are_okay_screen_when_diagnosis_is_unknown() {
         let persistance = PersistanceDouble()

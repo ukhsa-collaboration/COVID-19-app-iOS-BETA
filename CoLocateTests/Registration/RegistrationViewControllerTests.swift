@@ -9,13 +9,7 @@
 import XCTest
 @testable import CoLocate
 
-class RegistrationViewControllerTests: XCTestCase {
-
-    override class func setUp() {
-        super.setUp()
-
-        try! SecureRegistrationStorage.shared.clear()
-    }
+class RegistrationViewControllerTests: TestCase {
     
     func testRegistration_success() {
         let storyboard = UIStoryboard.init(name: "Registration", bundle: nil)

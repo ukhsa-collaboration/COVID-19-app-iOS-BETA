@@ -60,4 +60,12 @@ class Persistance {
         self.init(secureRegistrationStorage: SecureRegistrationStorage.shared)
     }
 
+    func clear() {
+        for key in Keys.allCases {
+            UserDefaults.standard.removeObject(forKey: key.rawValue)
+        }
+
+        try! secureRegistrationStorage.clear()
+    }
+
 }

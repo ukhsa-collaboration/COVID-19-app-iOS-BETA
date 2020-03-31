@@ -12,14 +12,12 @@ import XCTest
 import Firebase
 @testable import CoLocate
 
-class NotificationManagerTests: XCTestCase {
+class NotificationManagerTests: TestCase {
+
     override func setUp() {
         super.setUp()
 
         FirebaseAppDouble.configureCalled = false
-        for key in Persistance.Keys.allCases {
-            UserDefaults.standard.removeObject(forKey: key.rawValue)
-        }
     }
 
     func testConfigure() {

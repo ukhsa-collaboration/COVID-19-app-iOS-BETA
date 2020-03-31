@@ -277,6 +277,7 @@
 		214209C02422276800C7BFF3 /* CoLocateTests */ = {
 			isa = PBXGroup;
 			children = (
+				F68BFBF6242ACD17008EE68F /* TestHelpers.swift */,
 				098ED486242E89760029B729 /* Doubles */,
 				098ED479242D7E340029B729 /* Registration */,
 				F6CC2CAA242BCCE90079432B /* Notifications */,
@@ -285,7 +286,6 @@
 				214209C9242227B300C7BFF3 /* PersistanceTests.swift */,
 				214209CD24237A6300C7BFF3 /* PlistContactEventRecorderTests.swift */,
 				F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */,
-				F68BFBF6242ACD17008EE68F /* TestHelpers.swift */,
 				214209DA242630CF00C7BFF3 /* Networking */,
 			);
 			path = CoLocateTests;
