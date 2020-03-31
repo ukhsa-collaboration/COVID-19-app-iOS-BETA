@@ -11,6 +11,7 @@ import UIKit
 class DebugViewController: UITableViewController {
 
     let persistance = Persistance.shared
+    @IBOutlet weak var interceptRequestsSwitch: UISwitch!
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
@@ -72,6 +73,8 @@ class DebugViewController: UITableViewController {
         present(alertController, animated: true, completion: nil)
     }
 
+    @IBAction func interceptRegistrationRequestsChanged(_ sender: UISwitch) {
+    }
 }
 
 class TestPushRequest: SecureRequest, Request {
