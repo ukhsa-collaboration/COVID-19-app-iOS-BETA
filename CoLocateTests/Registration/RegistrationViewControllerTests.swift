@@ -11,25 +11,6 @@ import XCTest
 
 class RegistrationViewControllerTests: TestCase {
     
-    func testRegistration_success() {
-        let storyboard = UIStoryboard.init(name: "Registration", bundle: nil)
-        let vc = storyboard.instantiateViewController(identifier: "RegistrationViewController") as! RegistrationViewController
-        let delegate = RegistrationSavedDelegateDouble()
-        let registrationService = RegistrationServiceDouble()
-
-        vc.delegate = delegate
-        vc.registrationService = registrationService
-
-        XCTAssertNotNil(vc.view)
-
-        vc.didTapRegister(vc.registerButton!)
-
-        let registration = Registration(id: UUID(uuidString: "39B84598-3AD8-4900-B4E0-EE868773181D")!, secretKey: Data())
-        registrationService.completionHandler!(.success((registration)))
-        XCTAssertEqual(delegate.registration?.id, registration.id)
-        XCTAssertEqual(delegate.registration?.secretKey, registration.secretKey)
-    }
-    
     func testRegistration_failure() {
         let storyboard = UIStoryboard.init(name: "Registration", bundle: nil)
         let vc = storyboard.instantiateViewController(identifier: "RegistrationViewController") as! RegistrationViewController
@@ -47,12 +28,4 @@ class RegistrationViewControllerTests: TestCase {
 
 class ErrorForTest: Error {
     
-}
-
-class RegistrationSavedDelegateDouble: RegistrationSavedDelegate {
-    var registration: Registration?
-
-    func registrationDidFinish(with registration: Registration) {
-        self.registration = registration
-    }
 }

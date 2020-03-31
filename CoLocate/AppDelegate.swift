@@ -12,7 +12,7 @@ import Firebase
 import FirebaseInstanceID
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, RegistrationCoordinatorDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     var window: UIWindow?
 
     var broadcaster = BTLEBroadcaster()
@@ -23,11 +23,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     let registrationService: RegistrationService
 
     var appCoordinator: AppCoordinator!
-    var registrationCoordinator: RegistrationCoordinator!
     
     override init() {
-        registrationService = ConcreteRegistrationService(session: URLSession.shared, notificationManager: notificationManager)
+        registrationService = ConcreteRegistrationService(session: URLSession.shared, notificationManager: notificationManager, notificationCenter: NotificationCenter.default)
         super.init()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -39,14 +42,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let rootViewController = RootViewController()
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = rootViewController
-
-        registrationCoordinator = RegistrationCoordinator(application: application,
-                                                          navController: rootViewController,
-                                                          notificationManager: notificationManager,
-                                                          registrationService: registrationService,
-                                                          persistance: persistance,
-                                                          delegate: self)
-        registrationCoordinator.start()
+        
+        if let registration = persistance.registration {
+            continueWithRegistration(registration)
+        } else {
+            let registrationCoordinator = RegistrationCoordinator(application: application,
+                                                              navController: rootViewController,
+                                                              notificationManager: notificationManager,
+                                                              registrationService: registrationService,
+                                                              persistance: persistance,
+                                                              notificationCenter: NotificationCenter.default)
+            NotificationCenter.default.addObserver(self, selector: #selector(didCompleteRegistration(notification:)), name: RegistrationCompleteNotification, object: nil)
+            registrationCoordinator.start()
+        }
+    
         window?.makeKeyAndVisible()
 
         return true
@@ -59,7 +68,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     // MARK: - Private
 
-    func didCompleteRegistration(_ registration: Registration) {
+    @objc func didCompleteRegistration(notification: NSNotification) {
+        guard let registration = notification.userInfo?[RegistrationCompleteNotificationRegistrationKey] as? Registration else {
+            print("Registration NSNotification did not contain a registration")
+            return
+        }
+        
+        continueWithRegistration(registration)
+    }
+    
+    func continueWithRegistration(_ registration: Registration) {
         guard let rootViewController = window?.rootViewController as? RootViewController else {
             return
         }

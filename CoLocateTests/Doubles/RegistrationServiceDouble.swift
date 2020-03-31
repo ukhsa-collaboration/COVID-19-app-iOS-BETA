@@ -10,9 +10,9 @@ import Foundation
 @testable import CoLocate
 
 class RegistrationServiceDouble: RegistrationService {
-    var completionHandler: ((Result<Registration, Error>) -> Void)?
+    var completionHandler: ((Result<(), Error>) -> Void)?
     
-    func register(completionHandler: @escaping ((Result<Registration, Error>) -> Void)) {
+    func register(completionHandler: @escaping ((Result<(), Error>) -> Void)) {
         self.completionHandler = completionHandler
     }
 }

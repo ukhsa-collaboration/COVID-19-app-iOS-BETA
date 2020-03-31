@@ -17,14 +17,6 @@ protocol BluetoothAvailableDelegate {
     func bluetoothIsAvailable()
 }
 
-protocol RegistrationSavedDelegate {
-    func registrationDidFinish(with registration: Registration)
-}
-
-protocol RegistrationCoordinatorDelegate {
-    func didCompleteRegistration(_ registration: Registration)
-}
-
 fileprivate enum RegisteredState : Int {
     case unregistered
     case notificationsAccepted
@@ -39,7 +31,7 @@ class RegistrationCoordinator {
     let notificationManager: NotificationManager
     let registrationService: RegistrationService
     let persistance: Persistance
-    let delegate: RegistrationCoordinatorDelegate
+    let notificationCenter: NotificationCenter
 
     fileprivate var currentState: RegisteredState = .unregistered
 
@@ -48,21 +40,24 @@ class RegistrationCoordinator {
          notificationManager: NotificationManager,
          registrationService: RegistrationService,
          persistance: Persistance,
-         delegate: RegistrationCoordinatorDelegate) {
-        self.delegate = delegate
+         notificationCenter: NotificationCenter) {
+        
         self.application = application
         self.navController = navController
         self.notificationManager = notificationManager
         self.registrationService = registrationService
         self.persistance = persistance
+        self.notificationCenter = notificationCenter
+        
+        notificationCenter.addObserver(self, selector: #selector(didReceiveNsNotification(notification:)), name: RegistrationCompleteNotification, object: nil)
+    }
+    
+    deinit {
+        notificationCenter.removeObserver(self)
     }
 
     func start() {
-        if let registration = persistance.registration {
-            delegate.didCompleteRegistration(registration)
-        } else {
-            navController.viewControllers = [nextViewController()]
-        }
+        navController.viewControllers = [nextViewController()]
     }
 
     func nextViewController() -> UIViewController {
@@ -83,12 +78,15 @@ class RegistrationCoordinator {
         default:
             let registrationViewController = RegistrationViewController.instantiate()
 
-            registrationViewController.delegate = self
             registrationViewController.registrationService = registrationService
             registrationViewController.notificationManager = notificationManager
 
             return registrationViewController
         }
+    }
+    
+    @objc private func didReceiveNsNotification(notification: NSNotification) {
+        self.currentState = .completed
     }
 }
 
@@ -127,14 +125,4 @@ extension RegistrationCoordinator: BluetoothAvailableDelegate {
 
         self.navController.pushViewController(self.nextViewController(), animated: true)
     }
-}
-
-extension RegistrationCoordinator: RegistrationSavedDelegate {
-    
-    func registrationDidFinish(with registration: Registration) {
-        self.currentState = .completed
-
-        delegate.didCompleteRegistration(registration)
-    }
-
 }

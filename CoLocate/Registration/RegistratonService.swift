@@ -9,22 +9,27 @@
 import Foundation
 
 protocol RegistrationService {
-    func register(completionHandler: @escaping ((Result<Registration, Error>) -> Void))
+    func register(completionHandler: @escaping ((Result<Void, Error>) -> Void))
 }
 
+let RegistrationCompleteNotification = NSNotification.Name("RegistrationCompleteNotification")
+let RegistrationCompleteNotificationRegistrationKey = "registration"
+
 class ConcreteRegistrationService: RegistrationService {
-    var session: Session
-    var registrationStorage: SecureRegistrationStorage = SecureRegistrationStorage.shared
+    let session: Session
+    let registrationStorage: SecureRegistrationStorage = SecureRegistrationStorage.shared
     var notificationManager: NotificationManager
+    let notificationCenter: NotificationCenter
     var registerWhenTokenReceived = false
-    var completionHandler: ((Result<Registration, Error>) -> Void)?
+    var completionHandler: ((Result<Void, Error>) -> Void)?
     
-    init(session: Session, notificationManager: NotificationManager) {
+    init(session: Session, notificationManager: NotificationManager, notificationCenter: NotificationCenter) {
         self.session = session
         self.notificationManager = notificationManager
+        self.notificationCenter = notificationCenter
     }
     
-    func register(completionHandler: @escaping ((Result<Registration, Error>) -> Void)) {
+    func register(completionHandler: @escaping ((Result<Void, Error>) -> Void)) {
         self.completionHandler = completionHandler
         notificationManager.delegate = self
 
@@ -58,7 +63,9 @@ class ConcreteRegistrationService: RegistrationService {
 
     private func succeed(registration: Registration) {
         notificationManager.delegate = nil
-        completionHandler?(.success((registration)))
+        let userInfo = [RegistrationCompleteNotificationRegistrationKey : registration]
+        notificationCenter.post(name: RegistrationCompleteNotification, object: nil, userInfo: userInfo)
+        completionHandler?(.success(()))
     }
     
     private func fail(withError error: Error) {

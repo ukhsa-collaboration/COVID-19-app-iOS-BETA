@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0958E4B12433BFE5008C1E37 /* NotificationObserverDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0958E4B02433BFE5008C1E37 /* NotificationObserverDouble.swift */; };
 		098ED478242D7D050029B729 /* RegistratonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED477242D7D050029B729 /* RegistratonService.swift */; };
 		098ED47C242D801C0029B729 /* RegistrationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED47A242D7E460029B729 /* RegistrationServiceTests.swift */; };
 		098ED47E242E6B950029B729 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED47D242E6B950029B729 /* RootViewController.swift */; };
@@ -101,6 +102,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0958E4B02433BFE5008C1E37 /* NotificationObserverDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationObserverDouble.swift; sourceTree = "<group>"; };
 		098ED477242D7D050029B729 /* RegistratonService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistratonService.swift; sourceTree = "<group>"; };
 		098ED47A242D7E460029B729 /* RegistrationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationServiceTests.swift; sourceTree = "<group>"; };
 		098ED47D242E6B950029B729 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 				098ED48B242E8B290029B729 /* PersistanceDouble.swift */,
 				F770A454242FEE7C002FDED1 /* SecureRequestFactoryDouble.swift */,
 				F770A4562430F76B002FDED1 /* AppCoordinatorDouble.swift */,
+				0958E4B02433BFE5008C1E37 /* NotificationObserverDouble.swift */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -648,6 +651,7 @@
 				F770A455242FEE7C002FDED1 /* SecureRequestFactoryDouble.swift in Sources */,
 				098ED48A242E89D80029B729 /* RegistrationServiceDouble.swift in Sources */,
 				F6CC2CAC242BCD0D0079432B /* NotificationManagerTests.swift in Sources */,
+				0958E4B12433BFE5008C1E37 /* NotificationObserverDouble.swift in Sources */,
 				F68BFBF7242ACD17008EE68F /* TestHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

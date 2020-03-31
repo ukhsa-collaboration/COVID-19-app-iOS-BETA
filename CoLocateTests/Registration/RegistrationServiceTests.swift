@@ -17,19 +17,16 @@ class RegistrationServiceTests: TestCase {
     func testRegistration_withPreExistingPushToken() throws {
         let session = SessionDouble()
         let notificationManager = NotificationManagerDouble()
-        let registrationService = ConcreteRegistrationService(session: session, notificationManager: notificationManager)
+        let notificationCenter = NotificationCenter()
+        let observer = NotificationObserverDouble(notificationCenter: notificationCenter, notificationName: RegistrationCompleteNotification)
+        let registrationService = ConcreteRegistrationService(session: session, notificationManager: notificationManager, notificationCenter: notificationCenter)
     
         notificationManager.pushToken = "the current push token"
         var finished = false
         var error: Error? = nil
         registrationService.register(completionHandler: { r in
-            switch r {
-            case .success(let registration):
-                XCTAssertEqual(registration.id, self.id)
-                XCTAssertEqual(registration.secretKey, self.secretKey)
-                finished = true
-            case .failure(let e):
-                finished = true
+            finished = true
+            if case .failure(let e) = r {
                 error = e
             }
         })
@@ -62,27 +59,31 @@ class RegistrationServiceTests: TestCase {
         
         XCTAssertTrue(finished)
         XCTAssertNil(error)
-        let registration = try SecureRegistrationStorage.shared.get()
-        XCTAssertNotNil(registration)
-        XCTAssertEqual(id, registration!.id)
-        XCTAssertEqual(registration!.secretKey, secretKey)
+        let storedRegistration = try SecureRegistrationStorage.shared.get()
+        XCTAssertNotNil(storedRegistration)
+        XCTAssertEqual(id, storedRegistration!.id)
+        XCTAssertEqual(storedRegistration!.secretKey, secretKey)
+        
+        XCTAssertEqual(storedRegistration?.id, self.id)
+        XCTAssertEqual(storedRegistration?.secretKey, self.secretKey)
+
+        XCTAssertNotNil(observer.lastNotification)
+        let notifiedRegistration = observer.lastNotification?.userInfo?[RegistrationCompleteNotificationRegistrationKey] as? Registration
+        XCTAssertEqual(notifiedRegistration, storedRegistration)
     }
     
     func testRegistration_withoutPreExistingPushToken() throws {
         let session = SessionDouble()
         let notificationManager = NotificationManagerDouble()
-        let registrationService = ConcreteRegistrationService(session: session, notificationManager: notificationManager)
-    
+        let notificationCenter = NotificationCenter()
+        let observer = NotificationObserverDouble(notificationCenter: notificationCenter, notificationName: RegistrationCompleteNotification)
+        let registrationService = ConcreteRegistrationService(session: session, notificationManager: notificationManager, notificationCenter: notificationCenter)
+
         var finished = false
         var error: Error? = nil
         registrationService.register(completionHandler: { r in
-            switch r {
-            case .success(let registration):
-                XCTAssertEqual(registration.id, self.id)
-                XCTAssertEqual(registration.secretKey, self.secretKey)
-                finished = true
-            case .failure(let e):
-                finished = true
+            finished = true
+            if case .failure(let e) = r {
                 error = e
             }
         })
@@ -120,10 +121,17 @@ class RegistrationServiceTests: TestCase {
         
         XCTAssertTrue(finished)
         XCTAssertNil(error)
-        let registration = try SecureRegistrationStorage.shared.get()
-        XCTAssertNotNil(registration)
-        XCTAssertEqual(id, registration!.id)
-        XCTAssertEqual(registration!.secretKey, secretKey)
+        let storedRegistration = try SecureRegistrationStorage.shared.get()
+        XCTAssertNotNil(storedRegistration)
+        XCTAssertEqual(id, storedRegistration!.id)
+        XCTAssertEqual(storedRegistration!.secretKey, secretKey)
+        
+        XCTAssertEqual(storedRegistration?.id, self.id)
+        XCTAssertEqual(storedRegistration?.secretKey, self.secretKey)
+
+        XCTAssertNotNil(observer.lastNotification)
+        let notifiedRegistration = observer.lastNotification?.userInfo?[RegistrationCompleteNotificationRegistrationKey] as? Registration
+        XCTAssertEqual(notifiedRegistration, storedRegistration)
     }
 }
 

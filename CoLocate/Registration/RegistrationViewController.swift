@@ -18,7 +18,6 @@ class RegistrationViewController: UIViewController, Storyboarded {
 
     var registrationService: RegistrationService!
     var notificationManager: NotificationManager!
-    var delegate: RegistrationSavedDelegate!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,12 +39,7 @@ class RegistrationViewController: UIViewController, Storyboarded {
 
             self.activityIndicator.stopAnimating()
 
-            switch result {
-                
-            case .success(let registration):
-                self.delegate.registrationDidFinish(with: registration)
-                
-            case .failure(let error):
+            if case .failure(let error) = result {
                 print("\(#file) \(#function) Unable to register: \(error)")
                 let alert = UIAlertController(title: "Registration failed", message: "\(error)", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .default))
@@ -55,6 +49,5 @@ class RegistrationViewController: UIViewController, Storyboarded {
             }
         }
     }
-
 }
 
