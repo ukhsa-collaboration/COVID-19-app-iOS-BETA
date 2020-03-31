@@ -5,7 +5,7 @@ name: self-hosted-runner-test
 on:
   push:
     branches:
-    - master
+    - "this branch does not exist"
   repository_dispatch:
     types:
     - "sone event type"
