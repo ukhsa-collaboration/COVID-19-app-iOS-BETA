@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CryptoKit
 
 class DebugViewController: UITableViewController {
 
@@ -19,10 +18,19 @@ class DebugViewController: UITableViewController {
             try! SecureRegistrationStorage.clear()
             DiagnosisService.shared.recordDiagnosis(.unknown)
             show(title: "Cleared", message: "Registration and diagnosis data has been cleared. Please stop and re-start the application.")
+
         case (0, 1):
-            DiagnosisService.shared.recordDiagnosis(.unknown)
-            show(title: "Cleared", message: "Diagnosis data has been cleared. Please stop and re-start the application.")
-            
+            let alertController = UIAlertController(title: "Set diagnosis", message: nil, preferredStyle: .actionSheet)
+            for diagnosis in Diagnosis.allCases {
+                alertController.addAction(UIAlertAction(title: "\(diagnosis)", style: .default) { _ in
+                    DiagnosisService.shared.recordDiagnosis(diagnosis)
+                    self.show(title: "Cleared", message: "Diagnosis data has been set. Please stop and re-start the application.")
+                })
+            }
+            alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+
+            present(alertController, animated: true, completion: nil)
+
         case (1, 0):
             PlistContactEventRecorder.shared.record(ContactEvent(remoteContactId: UUID(), rssi: 42))
             PlistContactEventRecorder.shared.record(ContactEvent(remoteContactId: UUID(), rssi: 17))
@@ -39,8 +47,7 @@ class DebugViewController: UITableViewController {
                     throw NSError()
                 }
                 let delay = 15
-                let secretKey = SymmetricKey(data: registration.secretKey)
-                let request = TestPushRequest(key: secretKey, sonarId: registration.id, delay: delay)
+                let request = TestPushRequest(key: registration.secretKey, sonarId: registration.id, delay: delay)
                 URLSession.shared.execute(request, queue: .main) { result in
                     switch result {
                     case .success:
@@ -57,7 +64,7 @@ class DebugViewController: UITableViewController {
             fatalError()
         }
     }
-    
+
     private func show(title: String, message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Ok", style: .default))
@@ -74,7 +81,7 @@ class TestPushRequest: SecureRequest, Request {
     
     let path: String
     
-    init(key: SymmetricKey, sonarId: UUID, delay: Int = 0) {
+    init(key: Data, sonarId: UUID, delay: Int = 0) {
         let data = Data()
         method = .post(data: data)
         path = "/api/debug/notification/residents/\(sonarId.uuidString)?delay=\(delay)"

@@ -95,14 +95,32 @@ class ConcreteNotificationManager: NSObject, NotificationManager {
     }
     
     func handleNotification(userInfo: [AnyHashable : Any]) {
-        if let diagnosis = userInfo["diagnosis"] {
-            if diagnosis as? String == "potential" {
-                diagnosisService.recordDiagnosis(.potential)
-            } else {
-                print("Unexpected diagnosis \(diagnosis)")
+        if let status = userInfo["status"] {
+            handleStatusUpdated(status: status)
+            return
+        }
+
+        self.delegate?.notificationManager(self, didReceiveNotificationWithInfo: userInfo)
+    }
+
+    private func handleStatusUpdated(status: Any) {
+        if status as? String == "Potential" {
+            let content = UNMutableNotificationContent()
+            content.title = "POTENTIAL_STATUS_TITLE".localized
+            content.body = "POTENTIAL_STATUS_BODY".localized
+
+            let uuidString = UUID().uuidString
+            let request = UNNotificationRequest(identifier: uuidString, content: content, trigger: nil)
+
+            userNotificationCenter.add(request) { error in
+                if error != nil {
+                    print("Unable to add local notification: \(String(describing: error))")
+                }
             }
+
+            diagnosisService.recordDiagnosis(.potential)
         } else {
-            self.delegate?.notificationManager(self, didReceiveNotificationWithInfo: userInfo)
+            print("Received unexpected status from remote notification: '\(status)'")
         }
     }
 }
@@ -124,10 +142,14 @@ extension ConcreteNotificationManager: UNUserNotificationCenterDelegate {
 
 extension ConcreteNotificationManager: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
-        print("Remote instance ID token: \(fcmToken)")
+        print("fcmToken: \(fcmToken)")
         pushToken = fcmToken
         delegate?.notificationManager(self, didReceiveNotificationWithInfo: ["pushToken": pushToken as Any])
+
+        let apnsToken = Messaging.messaging().apnsToken?.map { String(format: "%02hhx", $0) }.joined()
+        print("apnsToken: \(String(describing: apnsToken))")
     }
+
 }
 
 // MARK: - Testable
@@ -159,6 +181,11 @@ protocol UserNotificationCenter: class {
     func requestAuthorization(
         options: UNAuthorizationOptions,
         completionHandler: @escaping (Bool, Error?) -> Void
+    )
+
+    func add(
+        _ request: UNNotificationRequest,
+        withCompletionHandler completionHandler: ((Error?) -> Void)?
     )
 }
 

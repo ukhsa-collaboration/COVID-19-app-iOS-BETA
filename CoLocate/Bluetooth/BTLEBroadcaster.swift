@@ -10,7 +10,7 @@ import Foundation
 import CoreBluetooth
 import UIKit
 
-protocol BTLEBroadcasterDelegate {
+protocol BTLEBroadcasterStateDelegate {
     func btleBroadcaster(_ broadcaster: BTLEBroadcaster, didUpdateState state: CBManagerState)
 }
 
@@ -22,13 +22,13 @@ class BTLEBroadcaster: NSObject, CBPeripheralManagerDelegate {
     var sonarId: CBUUID?
     var primaryService: CBService?
     var state: CBManagerState = .unknown
-    var delegate: BTLEBroadcasterDelegate?
+    var stateDelegate: BTLEBroadcasterStateDelegate?
     var peripheralManager: CBPeripheralManager?
 
     let restoreIdentifier: String = "CoLocatePeripheralRestoreIdentifier"
     
-    func start(delegate: BTLEBroadcasterDelegate?) {
-        self.delegate = delegate
+    func start(stateDelegate: BTLEBroadcasterStateDelegate?) {
+        self.stateDelegate = stateDelegate
 
         guard peripheralManager == nil else { return }
         
@@ -58,7 +58,7 @@ class BTLEBroadcaster: NSObject, CBPeripheralManagerDelegate {
     // MARK: CBPeripheralManagerDelegate
 
     func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
-        delegate?.btleBroadcaster(self, didUpdateState: peripheral.state)
+        stateDelegate?.btleBroadcaster(self, didUpdateState: peripheral.state)
 
         state = peripheral.state
 

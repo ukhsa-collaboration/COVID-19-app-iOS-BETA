@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,34 +12,74 @@
         <scene sceneID="Xlz-au-gnb">
             <objects>
                 <viewController storyboardIdentifier="PotentialViewController" id="B7a-uI-Q07" customClass="PotentialViewController" customModule="CoLocate" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="br2-jl-jaS">
+                    <scrollView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" id="cyg-0z-VHC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AfK-Qh-cp7">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B3i-f2-EhB">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zEc-GL-6aZ" customClass="LogoStrapline" customModule="CoLocate" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yUj-Nf-CSs">
+                                        <rect key="frame" x="20" y="96" width="374" height="20.5"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="Label">
+                                                <attributes>
+                                                    <font key="NSFont" metaFont="system" size="17"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="604-o0-Uu2" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="148.5" width="374" height="54"/>
+                                        <state key="normal" title="I have a result code"/>
+                                        <connections>
+                                            <action selector="resultCodeTapped:" destination="B7a-uI-Q07" eventType="touchUpInside" id="udp-FX-9uA"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <string key="text">Someone you've been nearby recently was just diagnosed with coronavirus.
-
- You should isolate yourself and get tested.</string>
-                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="604-o0-Uu2" secondAttribute="trailing" constant="20" symbolic="YES" id="COY-XY-aPn"/>
+                                    <constraint firstItem="zEc-GL-6aZ" firstAttribute="top" secondItem="B3i-f2-EhB" secondAttribute="top" id="EYe-LE-RYk"/>
+                                    <constraint firstItem="yUj-Nf-CSs" firstAttribute="leading" secondItem="B3i-f2-EhB" secondAttribute="leading" constant="20" symbolic="YES" id="cf4-d4-79m"/>
+                                    <constraint firstItem="yUj-Nf-CSs" firstAttribute="top" secondItem="zEc-GL-6aZ" secondAttribute="bottom" constant="32" id="fRb-PY-YAk"/>
+                                    <constraint firstItem="604-o0-Uu2" firstAttribute="leading" secondItem="B3i-f2-EhB" secondAttribute="leading" constant="20" symbolic="YES" id="sLu-WU-f7F"/>
+                                    <constraint firstItem="604-o0-Uu2" firstAttribute="top" secondItem="yUj-Nf-CSs" secondAttribute="bottom" constant="32" id="tjX-bQ-5cJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="zEc-GL-6aZ" secondAttribute="trailing" id="tlZ-1n-zUv"/>
+                                    <constraint firstAttribute="trailing" secondItem="yUj-Nf-CSs" secondAttribute="trailing" constant="20" symbolic="YES" id="v8m-5x-ZN4"/>
+                                    <constraint firstItem="zEc-GL-6aZ" firstAttribute="leading" secondItem="B3i-f2-EhB" secondAttribute="leading" id="yuN-vD-KtW"/>
+                                </constraints>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" name="NHS Grey 5"/>
                         <constraints>
-                            <constraint firstItem="AfK-Qh-cp7" firstAttribute="top" secondItem="cQ3-t3-6O0" secondAttribute="top" id="1Wq-U5-c3g"/>
-                            <constraint firstItem="AfK-Qh-cp7" firstAttribute="leading" secondItem="cQ3-t3-6O0" secondAttribute="leading" id="jAo-1a-xbW"/>
-                            <constraint firstItem="cQ3-t3-6O0" firstAttribute="bottom" secondItem="AfK-Qh-cp7" secondAttribute="bottom" id="toH-ef-h1F"/>
-                            <constraint firstItem="cQ3-t3-6O0" firstAttribute="trailing" secondItem="AfK-Qh-cp7" secondAttribute="trailing" id="zvS-Pi-11l"/>
+                            <constraint firstItem="B3i-f2-EhB" firstAttribute="leading" secondItem="6oU-Nj-wcE" secondAttribute="leading" id="3bp-Jc-0T6"/>
+                            <constraint firstItem="6oU-Nj-wcE" firstAttribute="bottom" secondItem="B3i-f2-EhB" secondAttribute="bottom" id="9eZ-Ie-j4h"/>
+                            <constraint firstItem="B3i-f2-EhB" firstAttribute="top" secondItem="6oU-Nj-wcE" secondAttribute="top" id="KDd-0G-hYJ"/>
+                            <constraint firstItem="B3i-f2-EhB" firstAttribute="width" secondItem="cyg-0z-VHC" secondAttribute="width" id="cLR-Kx-QhQ"/>
+                            <constraint firstItem="6oU-Nj-wcE" firstAttribute="trailing" secondItem="B3i-f2-EhB" secondAttribute="trailing" id="pre-Af-XYL"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="cQ3-t3-6O0"/>
-                    </view>
+                        <viewLayoutGuide key="safeArea" id="6oU-Nj-wcE"/>
+                        <viewLayoutGuide key="contentLayoutGuide" id="Ia5-N1-Ufe"/>
+                        <viewLayoutGuide key="frameLayoutGuide" id="y0y-Rs-LUT"/>
+                    </scrollView>
+                    <connections>
+                        <outlet property="label" destination="yUj-Nf-CSs" id="fWq-OM-xg7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mdh-Ru-93M" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1" y="-12"/>
+            <point key="canvasLocation" x="-1.4492753623188408" y="-12.053571428571429"/>
         </scene>
     </scenes>
+    <resources>
+        <namedColor name="NHS Grey 5">
+            <color red="0.94117647058823528" green="0.95686274509803926" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

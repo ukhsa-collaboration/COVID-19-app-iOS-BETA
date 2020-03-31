@@ -7,12 +7,13 @@
 //
 
 import Foundation
-import CryptoKit
+import CommonCrypto
 
 @testable import CoLocate
 
 class SecureRequestFactoryDouble: SecureRequestFactory {
     func patchContactsRequest(contactEvents: [ContactEvent]) -> PatchContactEventsRequest {
-        return PatchContactEventsRequest(key: SymmetricKey(size: SymmetricKeySize.bits128), sonarId: UUID(), contactEvents: [])
+        let key = Data(count: Int(CC_SHA256_DIGEST_LENGTH))
+        return PatchContactEventsRequest(key: key, sonarId: UUID(), contactEvents: [])
     }
 }

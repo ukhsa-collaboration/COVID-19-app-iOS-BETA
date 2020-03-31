@@ -47,12 +47,12 @@ class ConcreteRegistrationService: RegistrationService {
     private func handleRegistration(result: Result<(), Error>) {
         switch result {
         case .success(_):
-            print("First registration request succeeded")
+            print("\(#file) \(#function) First registration request succeeded")
 
         case .failure(let error):
             // TODO How do we handle this failure?
-            print("error during registration: \(error)")
-            completionHandler!(.failure(error))
+            print("\(#file) \(#function) Error making first registration request: \(error)")
+            completionHandler?(.failure(error))
         }
     }
 
@@ -107,7 +107,7 @@ extension ConcreteRegistrationService: NotificationManagerDelegate {
             case .failure(let error):
                 // TODO How do we handle this failure?
                 print("error during registration: \(error)")
-                    self.fail(withError: error)
+                self.fail(withError: error)
             }
         }
     }

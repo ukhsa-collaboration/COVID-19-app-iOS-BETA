@@ -32,6 +32,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
+        application.registerForRemoteNotifications()
+
+        notificationManager.configure()
+
         let rootViewController = RootViewController()
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = rootViewController
@@ -49,8 +53,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        print("\(#file) \(#function)")
-
         notificationManager.handleNotification(userInfo: userInfo)
         completionHandler(UIBackgroundFetchResult.newData)
     }
@@ -63,8 +65,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
 
         broadcaster.setSonarUUID(registration.id)
-        broadcaster.start(delegate: nil)
-        listener.start(delegate: nil)
+        broadcaster.start(stateDelegate: nil)
+        listener.start(stateDelegate: nil)
 
         appCoordinator = AppCoordinator(navController: rootViewController,
                                         diagnosisService: diagnosisService,

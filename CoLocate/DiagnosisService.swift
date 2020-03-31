@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum Diagnosis: Int {
+enum Diagnosis: Int, CaseIterable {
     case unknown, notInfected, infected, potential
 }
 

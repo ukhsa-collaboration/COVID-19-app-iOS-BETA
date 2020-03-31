@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import CryptoKit
 
 protocol SecureRequestFactory {
     func patchContactsRequest(contactEvents: [ContactEvent]) -> PatchContactEventsRequest
@@ -21,8 +20,6 @@ struct ConcreteSecureRequestFactory: SecureRequestFactory {
     }
 
     func patchContactsRequest(contactEvents: [ContactEvent]) -> PatchContactEventsRequest {
-        let symmetricKey = SymmetricKey(data: registration.secretKey)
-
-        return PatchContactEventsRequest(key: symmetricKey, sonarId: registration.id, contactEvents: contactEvents)
+        return PatchContactEventsRequest(key: registration.secretKey, sonarId: registration.id, contactEvents: contactEvents)
     }
 }

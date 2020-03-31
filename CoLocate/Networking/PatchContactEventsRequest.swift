@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import CryptoKit
 
 class PatchContactEventsRequest: SecureRequest, Request {
 
@@ -21,7 +20,7 @@ class PatchContactEventsRequest: SecureRequest, Request {
     
     let path: String
     
-    init(key: SymmetricKey, sonarId: UUID, contactEvents: [ContactEvent]) {
+    init(key: Data, sonarId: UUID, contactEvents: [ContactEvent]) {
         path = "/api/residents/\(sonarId.uuidString)"
 
         let encoder = JSONEncoder()

@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import CryptoKit
 @testable import CoLocate
 
 class SecureRequestTests: XCTestCase {
@@ -17,7 +16,7 @@ class SecureRequestTests: XCTestCase {
     override func setUp() {
         let keyData = Data(base64Encoded: "Gqacz+VE6uuZy1uc4oTG/A+LAS291mXN+J5opDSNYys=")!
 
-        request = SampleSecureRequest(key: SymmetricKey(data: keyData), text: "Hello, nurse!", date: Date(timeIntervalSince1970: 1))
+        request = SampleSecureRequest(key: keyData, text: "Hello, nurse!", date: Date(timeIntervalSince1970: 1))
         super.setUp()
     }
 
@@ -52,7 +51,7 @@ class SampleSecureRequest: SecureRequest, Request {
     let method: HTTPMethod
     let path: String
     
-    init(key: SymmetricKey, text: String, date: Date = Date()) {
+    init(key: Data, text: String, date: Date = Date()) {
         let data = text.data(using: .utf8)!
         method = HTTPMethod.post(data: data)
         path = "/api/sample"

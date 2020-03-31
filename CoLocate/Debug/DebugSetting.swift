@@ -12,8 +12,10 @@ class DebugSetting {
     static let key = "debug_view_enabled_preference"
     
     static var enabled: Bool {
-        get {
+        #if DEBUG
+            return true
+        #else
             return UserDefaults.standard.bool(forKey: key)
-        }
+        #endif
     }
 }

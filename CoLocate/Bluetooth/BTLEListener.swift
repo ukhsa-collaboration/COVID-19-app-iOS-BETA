@@ -9,13 +9,13 @@
 import Foundation
 import CoreBluetooth
 
-protocol BTLEListenerDelegate {
+protocol BTLEListenerStateDelegate {
     func btleListener(_ listener: BTLEListener, didUpdateState state: CBManagerState)
 }
 
 class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
 
-    var delegate: BTLEListenerDelegate?
+    var stateDelegate: BTLEListenerStateDelegate?
     var contactEventRecorder: ContactEventRecorder
     
     var centralManager: CBCentralManager?
@@ -32,8 +32,8 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         self.contactEventRecorder = contactEventRecorder
     }
 
-    func start(delegate: BTLEListenerDelegate?) {
-        self.delegate = delegate
+    func start(stateDelegate: BTLEListenerStateDelegate?) {
+        self.stateDelegate = stateDelegate
 
         guard centralManager == nil else { return }
         
@@ -46,7 +46,7 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     // MARK: CBCentralManagerDelegate
     
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
-        delegate?.btleListener(self, didUpdateState: central.state)
+        stateDelegate?.btleListener(self, didUpdateState: central.state)
         
         switch (central.state) {
                 
@@ -118,13 +118,14 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
             print("No services discovered for peripheral \(peripheral)")
             return
         }
-
-        if let sonarService = services.first(where: {$0.uuid == BTLEBroadcaster.sonarServiceUUID}) {
-            print("\(#file).\(#function) found sonarService: \(sonarService)")
-            peripheral.discoverCharacteristics([BTLEBroadcaster.sonarIdCharacteristicUUID], for: sonarService)
-        } else {
+        
+        guard let sonarService = services.first(where: {$0.uuid == BTLEBroadcaster.sonarServiceUUID}) else {
             print("Sonar service not discovered for peripheral \(peripheral)")
+            return
         }
+
+        print("\(#file).\(#function) found sonarService: \(sonarService)")
+        peripheral.discoverCharacteristics([BTLEBroadcaster.sonarIdCharacteristicUUID], for: sonarService)
     }
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
@@ -138,12 +139,13 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
             return
         }
         
-        if let sonarIdCharacteristic = characteristics.first(where: {$0.uuid == BTLEBroadcaster.sonarIdCharacteristicUUID}) {
-            print("\(#file).\(#function) found sonarIdCharacteristic: \(sonarIdCharacteristic)")
-            peripheral.readValue(for: sonarIdCharacteristic)
-        } else {
+        guard let sonarIdCharacteristic = characteristics.first(where: {$0.uuid == BTLEBroadcaster.sonarIdCharacteristicUUID}) else {
             print("Sonar Id characteristic not discovered for peripheral \(peripheral)")
+            return
         }
+
+        print("\(#file).\(#function) found sonarIdCharacteristic: \(sonarIdCharacteristic)")
+        peripheral.readValue(for: sonarIdCharacteristic)
     }
 
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
@@ -174,8 +176,10 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
             return
         }
 
-        let contactEvent = ContactEvent(remoteContactId: uuid, rssi: rssi)
+        print("recording a contact event at \(Date()) with rssi \(rssi)")
 
+        let contactEvent = ContactEvent(remoteContactId: uuid, rssi: rssi)
         contactEventRecorder.record(contactEvent)
     }
+
 }

@@ -12,7 +12,7 @@ class RegistrationViewController: UIViewController, Storyboarded {
     static let storyboardName = "Registration"
     
     @IBOutlet private var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet var retryButton: UIButton!
+    @IBOutlet var registerButton: UIButton!
 
     var registrationStorage: SecureRegistrationStorage = SecureRegistrationStorage.shared
 
@@ -23,25 +23,38 @@ class RegistrationViewController: UIViewController, Storyboarded {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = ""
-        retryButton.setTitle("Register", for: .normal)
+        registerButton.setTitle("Register", for: .normal)
+
+        if #available(iOS 13, *) {
+            activityIndicator.style = .medium
+        }
     }
 
     @IBAction func didTapRegister(_ sender: Any) {
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
+        registerButton.isEnabled = false
+
         registrationService.register { [weak self] result in
             guard let self = self else { return }
-            
+
+            self.activityIndicator.stopAnimating()
+
             switch result {
+                
             case .success(let registration):
                 self.delegate.registrationDidFinish(with: registration)
-            case .failure(_):
-                self.enableRetry()
+                
+            case .failure(let error):
+                print("\(#file) \(#function) Unable to register: \(error)")
+                let alert = UIAlertController(title: "Registration failed", message: "\(error)", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default))
+                self.present(alert, animated: true)
+                
+                self.registerButton.isEnabled = true
             }
         }
     }
-        
-    private func enableRetry() {
-        self.retryButton.isHidden = false
-        self.activityIndicator.stopAnimating()
-    }
+
 }
 
