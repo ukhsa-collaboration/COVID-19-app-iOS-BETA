@@ -3,9 +3,13 @@
 name: self-hosted-runner-test
 
 on:
+  push:
+    branches:
+    - master
   repository_dispatch:
-     type: blupp  
-
+    types:
+    - "sone event type"
+  
 jobs:
   test_local:
     runs-on:
@@ -19,7 +23,7 @@ jobs:
 
     # can we run a command on the host?
     - name: script
-      run: echo 'hello from ${USER}@${HOSTNAME}'
+      run: echo "hello from ${USER}@${HOSTNAME}"
       
   test_container:
     runs-on:
@@ -30,4 +34,4 @@ jobs:
     steps:
     # can we run a container?
     - name: container
-      run: echo 'hello from ${USER}@${HOSTNAME}'
+      run: echo "hello from ${USER}@${HOSTNAME}"
