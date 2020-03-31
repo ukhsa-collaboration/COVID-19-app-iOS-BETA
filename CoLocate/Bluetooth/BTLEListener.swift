@@ -9,6 +9,19 @@
 import Foundation
 import CoreBluetooth
 
+protocol BTLEPeripheral {
+    var identifier: UUID { get }
+}
+
+extension CBPeripheral: BTLEPeripheral {
+}
+
+protocol BTLEListenerDelegate {
+    func btleListener(_ listener: BTLEListener, didConnect peripheral: BTLEPeripheral)
+    func btleListener(_ listener: BTLEListener, didDisconnectPeripheral peripheral: BTLEPeripheral, error: Error?)
+    func btleListener(_ listener: BTLEListener, didFindSonarId sonarId: UUID, forPeripheral peripheral: BTLEPeripheral)
+}
+
 protocol BTLEListenerStateDelegate {
     func btleListener(_ listener: BTLEListener, didUpdateState state: CBManagerState)
 }

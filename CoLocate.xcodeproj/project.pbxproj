@@ -41,6 +41,8 @@
 		21C417CC242CB15D00DEF3E2 /* ConfirmRegistrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C417CB242CB15D00DEF3E2 /* ConfirmRegistrationRequest.swift */; };
 		21D93C2E241FB0A300C1FA9B /* EnterDiagnosisTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D93C2D241FB0A300C1FA9B /* EnterDiagnosisTableViewController.swift */; };
 		21D93C302420C26900C1FA9B /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D93C2F2420C26900C1FA9B /* PrimaryButton.swift */; };
+		21F373FF2433844D00926FB8 /* ContactEventCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F373FE2433844D00926FB8 /* ContactEventCollector.swift */; };
+		21F37402243384D400926FB8 /* ContactEventCollectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F37401243384D400926FB8 /* ContactEventCollectorTests.swift */; };
 		6FC63C31241641B8007C8BF3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC63C30241641B8007C8BF3 /* AppDelegate.swift */; };
 		6FC63C38241641BA007C8BF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FC63C37241641BA007C8BF3 /* Assets.xcassets */; };
 		6FC63C3B241641BA007C8BF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FC63C39241641BA007C8BF3 /* LaunchScreen.storyboard */; };
@@ -138,6 +140,8 @@
 		21C417CB242CB15D00DEF3E2 /* ConfirmRegistrationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmRegistrationRequest.swift; sourceTree = "<group>"; };
 		21D93C2D241FB0A300C1FA9B /* EnterDiagnosisTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterDiagnosisTableViewController.swift; sourceTree = "<group>"; };
 		21D93C2F2420C26900C1FA9B /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
+		21F373FE2433844D00926FB8 /* ContactEventCollector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactEventCollector.swift; sourceTree = "<group>"; };
+		21F37401243384D400926FB8 /* ContactEventCollectorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactEventCollectorTests.swift; sourceTree = "<group>"; };
 		6FC63C2D241641B8007C8BF3 /* CoLocate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoLocate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FC63C30241641B8007C8BF3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6FC63C37241641BA007C8BF3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -281,6 +285,7 @@
 			isa = PBXGroup;
 			children = (
 				F68BFBF6242ACD17008EE68F /* TestHelpers.swift */,
+				21F374002433845600926FB8 /* Contact Events */,
 				098ED486242E89760029B729 /* Doubles */,
 				098ED479242D7E340029B729 /* Registration */,
 				F6CC2CAA242BCCE90079432B /* Notifications */,
@@ -324,6 +329,7 @@
 		21B3D2DF24263A1100573061 /* Contact Events */ = {
 			isa = PBXGroup;
 			children = (
+				21F373FE2433844D00926FB8 /* ContactEventCollector.swift */,
 				AE2A5E4F2423C473007A4771 /* ContactEventRecorder.swift */,
 				214209CB2422755B00C7BFF3 /* PlistContactEventRecorder.swift */,
 			);
@@ -346,6 +352,14 @@
 				21B3D2E72429115600573061 /* CoreBluetooth.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		21F374002433845600926FB8 /* Contact Events */ = {
+			isa = PBXGroup;
+			children = (
+				21F37401243384D400926FB8 /* ContactEventCollectorTests.swift */,
+			);
+			path = "Contact Events";
 			sourceTree = "<group>";
 		};
 		6FC63C24241641B8007C8BF3 = {
@@ -637,6 +651,7 @@
 				214209CA242227B300C7BFF3 /* PersistanceTests.swift in Sources */,
 				F7EAE5A2242FAD0E0090F8A2 /* RegistrationCoordinatorTests.swift in Sources */,
 				214209CE24237A6300C7BFF3 /* PlistContactEventRecorderTests.swift in Sources */,
+				21F37402243384D400926FB8 /* ContactEventCollectorTests.swift in Sources */,
 				F770A4572430F76B002FDED1 /* AppCoordinatorDouble.swift in Sources */,
 				098ED48C242E8B290029B729 /* PersistanceDouble.swift in Sources */,
 				098ED485242E88D80029B729 /* AppCoordinatorTests.swift in Sources */,
@@ -667,6 +682,7 @@
 				F78CEBED242D0836002254AD /* SecureRequestFactory.swift in Sources */,
 				F7EAE5A0242FACCB0090F8A2 /* RegistrationCoordinator.swift in Sources */,
 				098ED47E242E6B950029B729 /* RootViewController.swift in Sources */,
+				21F373FF2433844D00926FB8 /* ContactEventCollector.swift in Sources */,
 				F7EAE5A6242FB0150090F8A2 /* NotificationsPromptViewController.swift in Sources */,
 				F600A600242977D50038DF57 /* RegistrationViewController.swift in Sources */,
 				F6CC2CA9242BC7FC0079432B /* NotificationManager.swift in Sources */,
