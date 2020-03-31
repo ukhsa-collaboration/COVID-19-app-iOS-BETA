@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import CryptoKit
 
 class PatchContactEventsRequest: SecureRequest, Request {
 

@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import CryptoKit
 @testable import CoLocate
 
 class SecureRequestTests: XCTestCase {

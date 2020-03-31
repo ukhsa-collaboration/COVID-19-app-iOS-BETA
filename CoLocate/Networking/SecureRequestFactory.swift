@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import CryptoKit
 
 protocol SecureRequestFactory {
     func patchContactsRequest(contactEvents: [ContactEvent]) -> PatchContactEventsRequest
