@@ -26,15 +26,15 @@ class PatchContactEventsRequestTests: XCTestCase {
     let rssi2 = -1
     let rssi3 = -21
 
-    var contactEvents: [ContactEvent]!
+    var contactEvents: [OldContactEvent]!
 
     var request: PatchContactEventsRequest!
     
     override func setUp() {
         contactEvents = [
-            ContactEvent(remoteContactId: remoteSonarId1, timestamp: timestamp1, rssi: rssi1),
-            ContactEvent(remoteContactId: remoteSonarId2, timestamp: timestamp2, rssi: rssi2),
-            ContactEvent(remoteContactId: remoteSonarId3, timestamp: timestamp3, rssi: rssi3)
+            OldContactEvent(remoteContactId: remoteSonarId1, timestamp: timestamp1, rssi: rssi1),
+            OldContactEvent(remoteContactId: remoteSonarId2, timestamp: timestamp2, rssi: rssi2),
+            OldContactEvent(remoteContactId: remoteSonarId3, timestamp: timestamp3, rssi: rssi3)
         ]
 
         let registration = Registration(id: anonymousId, secretKey: dummyKey)

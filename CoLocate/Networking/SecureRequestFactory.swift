@@ -9,7 +9,7 @@
 import Foundation
 
 protocol SecureRequestFactory {
-    func patchContactsRequest(contactEvents: [ContactEvent]) -> PatchContactEventsRequest
+    func patchContactsRequest(contactEvents: [OldContactEvent]) -> PatchContactEventsRequest
 }
 
 struct ConcreteSecureRequestFactory: SecureRequestFactory {
@@ -19,7 +19,7 @@ struct ConcreteSecureRequestFactory: SecureRequestFactory {
         self.registration = registration
     }
 
-    func patchContactsRequest(contactEvents: [ContactEvent]) -> PatchContactEventsRequest {
+    func patchContactsRequest(contactEvents: [OldContactEvent]) -> PatchContactEventsRequest {
         return PatchContactEventsRequest(key: registration.secretKey, sonarId: registration.id, contactEvents: contactEvents)
     }
 }

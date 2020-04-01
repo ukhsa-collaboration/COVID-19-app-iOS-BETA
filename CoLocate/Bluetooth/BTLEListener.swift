@@ -213,7 +213,7 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
 
         print("recording a contact event at \(Date()) with rssi \(rssi)")
 
-        let contactEvent = ContactEvent(remoteContactId: uuid, rssi: rssi)
+        let contactEvent = OldContactEvent(remoteContactId: uuid, rssi: rssi)
         contactEventRecorder.record(contactEvent)
     }
 

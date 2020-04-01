@@ -34,15 +34,15 @@ class ContactEventCollectorTests: XCTestCase {
         collector.btleListener(listener, didFindSonarId: sonarId1, forPeripheral: peripheral1)
         collector.btleListener(listener, didDisconnect: peripheral1, error: nil)
         
-        XCTAssertEqual(recorder.contactEvents.count, 1)
-        XCTAssertEqual(recorder.contactEvents.first?.remoteContactId, sonarId1)
+        XCTAssertEqual(recorder.oldContactEvents.count, 1)
+        XCTAssertEqual(recorder.oldContactEvents.first?.remoteContactId, sonarId1)
     }
     
     func testDoesNotRecordContactEventForIncompleteRecordMissingSonarId() {
         collector.btleListener(listener, didConnect: peripheral1)
         collector.btleListener(listener, didDisconnect: peripheral1, error: nil)
         
-        XCTAssertEqual(recorder.contactEvents.count, 0)
+        XCTAssertEqual(recorder.oldContactEvents.count, 0)
     }
     
     func testRequestsRSSIForConnectedPeripheral() {
@@ -94,15 +94,21 @@ struct TestPeripheral: BTLEPeripheral {
 }
 
 class TestContactEventRecorder: ContactEventRecorder {
-    
     var contactEvents: [ContactEvent] = []
     
+    
+    var oldContactEvents: [OldContactEvent] = []
+    
     func record(_ contactEvent: ContactEvent) {
-        contactEvents.append(contactEvent)
+    }
+    
+    func record(_ contactEvent: OldContactEvent) {
+        oldContactEvents.append(contactEvent)
     }
     
     func reset() {
         contactEvents = []
+        oldContactEvents = []
     }
     
 }

@@ -47,7 +47,7 @@ class ContactEventCollector: BTLEListenerDelegate {
     func btleListener(_ listener: BTLEListener, didDisconnect peripheral: BTLEPeripheral, error: Error?) {
         connectedPeripherals[peripheral.identifier]?.disconnect()
         if let connectedPeripheral = connectedPeripherals.removeValue(forKey: peripheral.identifier), let sonarId = connectedPeripheral.sonarId {
-            let contactEvent = ContactEvent(remoteContactId: sonarId, timestamp: connectedPeripheral.timestamp, rssi: 0)
+            let contactEvent = OldContactEvent(remoteContactId: sonarId, timestamp: connectedPeripheral.timestamp, rssi: 0)
             contactEventRecorder.record(contactEvent)
         }
     }

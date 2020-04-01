@@ -11,7 +11,7 @@ import Foundation
 class PatchContactEventsRequest: SecureRequest, Request {
 
     struct JSONWrapper: Codable {
-        let contactEvents: [ContactEvent]
+        let contactEvents: [OldContactEvent]
     }
 
     typealias ResponseType = Void
@@ -20,7 +20,7 @@ class PatchContactEventsRequest: SecureRequest, Request {
     
     let path: String
     
-    init(key: Data, sonarId: UUID, contactEvents: [ContactEvent]) {
+    init(key: Data, sonarId: UUID, contactEvents: [OldContactEvent]) {
         path = "/api/residents/\(sonarId.uuidString)"
 
         let encoder = JSONEncoder()

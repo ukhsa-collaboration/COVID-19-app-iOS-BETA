@@ -52,9 +52,9 @@ class DebugViewController: UITableViewController {
             break
 
         case (1, 0):
-            PlistContactEventRecorder.shared.record(ContactEvent(remoteContactId: UUID(), rssi: 42))
-            PlistContactEventRecorder.shared.record(ContactEvent(remoteContactId: UUID(), rssi: 17))
-            PlistContactEventRecorder.shared.record(ContactEvent(remoteContactId: UUID(), rssi: -2))
+            PlistContactEventRecorder.shared.record(OldContactEvent(remoteContactId: UUID(), rssi: 42))
+            PlistContactEventRecorder.shared.record(OldContactEvent(remoteContactId: UUID(), rssi: 17))
+            PlistContactEventRecorder.shared.record(OldContactEvent(remoteContactId: UUID(), rssi: -2))
             show(title: "Events Recorded", message: "Dummy contact events have been recorded locally (but not sent to the server.)")
             
         case (1, 1):
