@@ -19,10 +19,24 @@ class LoggingManager {
         _ = shared
     }
     
+    // TODO: Use this to drive logging UI
+    private(set) var events = [LogEvent]()
+    
     private init() {
         if Self.isEnabled {
-            // TODO: replace with our new log handlers.
-            LoggingSystem.bootstrap(StreamLogHandler.standardOutput)
+            LoggingSystem.bootstrap { label in
+                MultiplexLogHandler([
+                    // For console:
+                    StreamLogHandler.standardOutput(label: label),
+                    
+                    // For UI:
+                    ForwardingLogHandler(label: label) { event in
+                        DispatchQueue.main.async {
+                            self.events.append(event)
+                        }
+                    }
+                ])
+            }
         } else {
             LoggingSystem.bootstrap { _ in NoOpLogHandler() }
         }
