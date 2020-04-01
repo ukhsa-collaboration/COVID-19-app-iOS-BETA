@@ -79,10 +79,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        logger.info("Received notification", metadata: Logger.Metadata(dictionary: userInfo))
         
-        print("didReceiveRemoteNotification")
         notificationManager.handleNotification(userInfo: userInfo)
         completionHandler(UIBackgroundFetchResult.newData)
+    }
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        logger.info("Terminating")
+    }
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        logger.info("Did Enter Background")
+    }
+
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        logger.info("Will Enter Foreground")
     }
 
     // MARK: - Private
