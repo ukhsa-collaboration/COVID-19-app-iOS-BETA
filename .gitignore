@@ -94,3 +94,5 @@ iOSInjectionProject/
 
 # Don't check in configurations for any environment
 *.xcconfig
+
+.envrc
