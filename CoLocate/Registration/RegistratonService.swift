@@ -18,24 +18,24 @@ let RegistrationCompleteNotificationRegistrationKey = "registration"
 class ConcreteRegistrationService: RegistrationService {
     let session: Session
     let registrationStorage: SecureRegistrationStorage = SecureRegistrationStorage.shared
-    var pushNotificationManager: PushNotificationManager
+    var pushNotificationDispatcher: PushNotificationDispatcher
     let notificationCenter: NotificationCenter
     var completionHandler: ((Result<Void, Error>) -> Void)?
     
-    init(session: Session, pushNotificationManager: PushNotificationManager, notificationCenter: NotificationCenter) {
+    init(session: Session, pushNotificationDispatcher: PushNotificationDispatcher, notificationCenter: NotificationCenter) {
         #if DEBUG
         self.session = InterceptingSession(underlyingSession: session)
         #else
         self.session = session
         #endif
-        self.pushNotificationManager = pushNotificationManager
+        self.pushNotificationDispatcher = pushNotificationDispatcher
         self.notificationCenter = notificationCenter
     }
 
     convenience init() {
         self.init(
             session: URLSession.shared,
-            pushNotificationManager: ConcretePushNotificationManager.shared,
+            pushNotificationDispatcher: PushNotificationDispatcher.shared,
             notificationCenter: NotificationCenter.default
         )
     }
@@ -47,12 +47,11 @@ class ConcreteRegistrationService: RegistrationService {
     func register(completionHandler: @escaping ((Result<Void, Error>) -> Void)) {
         self.completionHandler = completionHandler
         
-        pushNotificationManager.registerHandler(forType: .registrationActivationCode) { userInfo, completionHandler in
+        pushNotificationDispatcher.registerHandler(forType: .registrationActivationCode) { userInfo, completionHandler in
             self.didReceiveActivationCode(activationCode: userInfo["activationCode"] as! String)
-            self.pushNotificationManager.removeHandler(forType: .registrationActivationCode)
         }
 
-        if pushNotificationManager.pushToken != nil {
+        if pushNotificationDispatcher.pushToken != nil {
             beginRegistration()
         } else {
             notificationCenter.addObserver(forName: PushTokenReceivedNotification, object: nil, queue: nil) { _ in
@@ -63,7 +62,7 @@ class ConcreteRegistrationService: RegistrationService {
     }
     
     private func beginRegistration() {
-        let request = RequestFactory.registrationRequest(pushToken: pushNotificationManager.pushToken!)
+        let request = RequestFactory.registrationRequest(pushToken: pushNotificationDispatcher.pushToken!)
 
         session.execute(request, queue: .main) { result in
             switch result {
@@ -74,13 +73,13 @@ class ConcreteRegistrationService: RegistrationService {
 
             case .failure(let error):
                 print("\(#file) \(#function) Error making first registration request: \(error)")
-                self.completionHandler?(.failure(error))
+                self.fail(withError: error)
             }
         }
     }
     
     private func didReceiveActivationCode(activationCode: String) {
-        let request = RequestFactory.confirmRegistrationRequest(activationCode: activationCode, pushToken: pushNotificationManager.pushToken!)
+        let request = RequestFactory.confirmRegistrationRequest(activationCode: activationCode, pushToken: pushNotificationDispatcher.pushToken!)
         session.execute(request, queue: .main) { [weak self] result in
             guard let self = self else { return }
 
@@ -106,15 +105,20 @@ class ConcreteRegistrationService: RegistrationService {
 
     
     private func succeed(registration: Registration) {
+        cleanup()
         let userInfo = [RegistrationCompleteNotificationRegistrationKey : registration]
         notificationCenter.post(name: RegistrationCompleteNotification, object: nil, userInfo: userInfo)
         completionHandler?(.success(()))
     }
     
     private func fail(withError error: Error) {
+        cleanup()
         completionHandler?(.failure(error))
     }
 
+    private func cleanup() {
+        self.pushNotificationDispatcher.removeHandler(forType: .registrationActivationCode)
+    }
 }
 
 

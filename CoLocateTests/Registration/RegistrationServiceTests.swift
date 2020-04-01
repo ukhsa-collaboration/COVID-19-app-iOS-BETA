@@ -16,12 +16,19 @@ class RegistrationServiceTests: TestCase {
 
     func testRegistration_withPreExistingPushToken() throws {
         let session = SessionDouble()
-        let pushNotificationManager = PushNotificationManagerDouble()
         let notificationCenter = NotificationCenter()
-        let observer = NotificationObserverDouble(notificationCenter: notificationCenter, notificationName: RegistrationCompleteNotification)
-        let registrationService = ConcreteRegistrationService(session: session, pushNotificationManager: pushNotificationManager, notificationCenter: notificationCenter)
+        let pushNotificationDispatcher = PushNotificationDispatcher(
+            notificationCenter: notificationCenter,
+            userNotificationCenter: UserNotificationCenterDouble(),
+            persistence: PersistenceDouble()
+        )
+        let observer = NotificationObserverDouble(
+            notificationCenter: notificationCenter,
+            notificationName: RegistrationCompleteNotification
+        )
+        let registrationService = ConcreteRegistrationService(session: session, pushNotificationDispatcher: pushNotificationDispatcher, notificationCenter: notificationCenter)
     
-        pushNotificationManager.pushToken = "the current push token"
+        pushNotificationDispatcher.pushToken = "the current push token"
         var finished = false
         var error: Error? = nil
         registrationService.register(completionHandler: { r in
@@ -42,10 +49,8 @@ class RegistrationServiceTests: TestCase {
         
         // Simulate the notification containing the activationCode.
         // This should trigger the second request.
-        // TODO: Ideally we would test this in integration with the code that actually parses &
-        // dispatches the notification.
         let activationCode = "a3d2c477-45f5-4609-8676-c24558094600"
-        pushNotificationManager.handlers[.registrationActivationCode]?(["activationCode": activationCode]) { _ in }
+        pushNotificationDispatcher.handleNotification(userInfo: ["activationCode": activationCode]) { _ in }
         
         // Verify the second request
         let confirmRegistrationRequest = (session.requestSent as! ConfirmRegistrationRequest).body!
@@ -72,14 +77,21 @@ class RegistrationServiceTests: TestCase {
         XCTAssertNotNil(observer.lastNotification)
         let notifiedRegistration = observer.lastNotification?.userInfo?[RegistrationCompleteNotificationRegistrationKey] as? Registration
         XCTAssertEqual(notifiedRegistration, storedRegistration)
+        
+        // Make sure we cleaned up after ourselves
+        XCTAssertFalse(pushNotificationDispatcher.hasHandler(forType: .registrationActivationCode))
     }
     
     func testRegistration_withoutPreExistingPushToken() throws {
         let session = SessionDouble()
-        let pushNotificationMananger = PushNotificationManagerDouble()
         let notificationCenter = NotificationCenter()
+        let pushNotificationDispatcher = PushNotificationDispatcher(
+            notificationCenter: notificationCenter,
+            userNotificationCenter: UserNotificationCenterDouble(),
+            persistence: PersistenceDouble()
+        )
         let observer = NotificationObserverDouble(notificationCenter: notificationCenter, notificationName: RegistrationCompleteNotification)
-        let registrationService = ConcreteRegistrationService(session: session, pushNotificationManager: pushNotificationMananger, notificationCenter: notificationCenter)
+        let registrationService = ConcreteRegistrationService(session: session, pushNotificationDispatcher: pushNotificationDispatcher, notificationCenter: notificationCenter)
 
         var finished = false
         var error: Error? = nil
@@ -93,10 +105,7 @@ class RegistrationServiceTests: TestCase {
         XCTAssertNil(session.requestSent)
 
         // Simulate receiving the push token
-        // TODO: Ideally we would test this in integration with the code that actually parses &
-        // dispatches the notification.
-        pushNotificationMananger.pushToken = "a push token"
-        notificationCenter.post(name: PushTokenReceivedNotification, object: nil, userInfo: nil)
+        pushNotificationDispatcher.receiveRegistrationToken(fcmToken: "a push token")
         // Verify the first request
         let registrationBody = (session.requestSent as! RegistrationRequest).body!
         let registrationPayload = try JSONDecoder().decode(ExpectedRegistrationRequestBody.self, from: registrationBody)
@@ -111,7 +120,7 @@ class RegistrationServiceTests: TestCase {
         // TODO: Ideally we would test this in integration with the code that actually parses &
         // dispatches the notification.
         let activationCode = "a3d2c477-45f5-4609-8676-c24558094600"
-        pushNotificationMananger.handlers[.registrationActivationCode]?(["activationCode": activationCode]) { _ in }
+        pushNotificationDispatcher.handleNotification(userInfo: ["activationCode": activationCode]) { _ in }
 
         // Verify the second request
         let confirmRegistrationBody = (session.requestSent as! ConfirmRegistrationRequest).body!
@@ -138,6 +147,33 @@ class RegistrationServiceTests: TestCase {
         XCTAssertNotNil(observer.lastNotification)
         let notifiedRegistration = observer.lastNotification?.userInfo?[RegistrationCompleteNotificationRegistrationKey] as? Registration
         XCTAssertEqual(notifiedRegistration, storedRegistration)
+        
+        // Make sure we cleaned up after ourselves
+        XCTAssertFalse(pushNotificationDispatcher.hasHandler(forType: .registrationActivationCode))
+    }
+    
+    func testRegistration_cleansUpAfterInitialRequestFailure() throws {
+        let session = SessionDouble()
+        let notificationCenter = NotificationCenter()
+        let pushNotificationDispatcher = PushNotificationDispatcher(
+            notificationCenter: notificationCenter,
+            userNotificationCenter: UserNotificationCenterDouble(),
+            persistence: PersistenceDouble()
+        )
+        pushNotificationDispatcher.pushToken = "the current push token"
+        let registrationService = ConcreteRegistrationService(session: session, pushNotificationDispatcher: pushNotificationDispatcher, notificationCenter: notificationCenter)
+
+        registrationService.register(completionHandler: { _ in })
+        
+        session.requestSent = nil
+        session.executeCompletion!(Result<(), Error>.failure(ErrorForTest()))
+
+        // We should have unsusbscribed from push notifications.
+        XCTAssertFalse(pushNotificationDispatcher.hasHandler(forType: .registrationActivationCode))
+        
+        // We should also have unsubscribe from the PushTokenReceivedNotification. We can't test that directly but we can observe its effects.
+        notificationCenter.post(name: PushTokenReceivedNotification, object: nil, userInfo: nil)
+        XCTAssertNil(session.requestSent)
     }
 }
 
