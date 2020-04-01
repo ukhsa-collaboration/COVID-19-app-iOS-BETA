@@ -31,6 +31,8 @@ protocol PushNotificationManager {
 
 class ConcretePushNotificationManager: NSObject, PushNotificationManager {
 
+    static let shared = ConcretePushNotificationManager()
+
     let firebase: TestableFirebaseApp.Type
     let messagingFactory: () -> TestableMessaging
     let userNotificationCenter: UserNotificationCenter

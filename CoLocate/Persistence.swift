@@ -14,6 +14,7 @@ enum Diagnosis: Int, CaseIterable {
 
 protocol PersistenceDelegate: class {
     func persistence(_ persistence: Persistence, didRecordDiagnosis diagnosis: Diagnosis)
+    func persistence(_ persistence: Persistence, didUpdateRegistration registration: Registration)
 }
 
 class Persistence {
@@ -42,6 +43,8 @@ class Persistence {
             }
 
             try! secureRegistrationStorage.set(registration: registration)
+
+            delegate?.persistence(self, didUpdateRegistration: registration)
         }
     }
 

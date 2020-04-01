@@ -21,21 +21,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     let broadcaster: BTLEBroadcaster
     let listener: BTLEListener
 
-    let pushNotificationManager: PushNotificationManager = ConcretePushNotificationManager()
+    let pushNotificationManager = ConcretePushNotificationManager.shared
     let persistence = Persistence.shared
-    let registrationService: RegistrationService
+    let registrationService = ConcreteRegistrationService()
 
     var appCoordinator: AppCoordinator!
+    var onboardingViewController: OnboardingViewController!
     
     override init() {
         LoggingManager.bootstrap()
         
         broadcaster = BTLEBroadcaster()
         listener = BTLEListener()
-        
-        registrationService = ConcreteRegistrationService(session: URLSession.shared, pushNotificationManager: pushNotificationManager, notificationCenter: NotificationCenter.default)
 
         super.init()
+
+        persistence.delegate = self
     }
     
     deinit {
@@ -54,24 +55,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = rootViewController
 
-        if !persistence.newOnboarding {
-            if let registration = persistence.registration {
-                continueWithRegistration(registration)
-            } else {
-                let registrationCoordinator = RegistrationCoordinator(navController: rootViewController,
-                                                                      pushNotificationManager: pushNotificationManager,
-                                                                      registrationService: registrationService,
-                                                                      persistence: persistence,
-                                                                      notificationCenter: NotificationCenter.default)
-                NotificationCenter.default.addObserver(self, selector: #selector(didCompleteRegistration(notification:)), name: RegistrationCompleteNotification, object: nil)
-                registrationCoordinator.start()
-            }
+        if let registration = persistence.registration {
+            continueWithRegistration(registration)
+        } else if !persistence.newOnboarding {
+            let registrationCoordinator = RegistrationCoordinator(
+                navController: rootViewController,
+                pushNotificationManager: pushNotificationManager,
+                registrationService: registrationService,
+                persistence: persistence,
+                notificationCenter: NotificationCenter.default
+            )
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(didCompleteRegistration(notification:)),
+                name: RegistrationCompleteNotification,
+                object: nil
+            )
+            registrationCoordinator.start()
         }
 
         window?.makeKeyAndVisible()
 
         if persistence.newOnboarding {
-            let onboardingViewController = OnboardingViewController.instantiate()
+            onboardingViewController = OnboardingViewController.instantiate()
             onboardingViewController.rootViewController = rootViewController
         }
 
@@ -123,4 +129,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         appCoordinator.start()
     }
 
+}
+
+extension AppDelegate: PersistenceDelegate {
+    func persistence(_ persistence: Persistence, didRecordDiagnosis diagnosis: Diagnosis) {
+        appCoordinator.showAppropriateViewController()
+    }
+
+    func persistence(_ persistence: Persistence, didUpdateRegistration registration: Registration) {
+        guard persistence.newOnboarding else { return }
+
+        onboardingViewController.updateState()
+
+        // TODO: This is probably not the right place to put this,
+        // but it'll do until we remove the old onboarding flow.
+        continueWithRegistration(registration)
+    }
 }

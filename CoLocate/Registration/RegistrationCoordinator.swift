@@ -75,9 +75,6 @@ class RegistrationCoordinator {
         default:
             let registrationViewController = RegistrationViewController.instantiate()
 
-            registrationViewController.registrationService = registrationService
-            registrationViewController.pushNotificationManager = pushNotificationManager
-
             return registrationViewController
         }
     }

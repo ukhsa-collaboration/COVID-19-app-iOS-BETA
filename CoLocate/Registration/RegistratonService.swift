@@ -32,6 +32,14 @@ class ConcreteRegistrationService: RegistrationService {
         self.pushNotificationManager = pushNotificationManager
         self.notificationCenter = notificationCenter
     }
+
+    convenience init() {
+        self.init(
+            session: URLSession.shared,
+            pushNotificationManager: ConcretePushNotificationManager.shared,
+            notificationCenter: NotificationCenter.default
+        )
+    }
     
     func register(completionHandler: @escaping ((Result<Void, Error>) -> Void)) {
         self.completionHandler = completionHandler

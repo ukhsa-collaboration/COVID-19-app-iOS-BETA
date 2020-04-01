@@ -18,6 +18,7 @@ class OnboardingViewController: UINavigationController, Storyboarded {
 
     override func viewDidLoad() {
         if #available(iOS 13.0, *) {
+            // Disallow pulling to dismiss the card modal
             isModalInPresentation = true
         } else {
             // Fallback on earlier versions
@@ -28,12 +29,7 @@ class OnboardingViewController: UINavigationController, Storyboarded {
         onboardingCoordinator.state { [weak self] state in
             guard let self = self else { return }
 
-            guard let state = state else {
-                self.performSegue(withIdentifier: "unwindFromOnboarding", sender: self)
-                return
-            }
-
-            DispatchQueue.main.async { self.present(given: state) }
+            DispatchQueue.main.async { self.handle(state: state) }
         }
     }
 
@@ -45,7 +41,12 @@ class OnboardingViewController: UINavigationController, Storyboarded {
         updateState()
     }
 
-    private func present(given state: OnboardingCoordinator.State) {
+    private func handle(state: OnboardingCoordinator.State?) {
+        guard let state = state else {
+            performSegue(withIdentifier: "unwindFromOnboarding", sender: self)
+            return
+        }
+
         let vc: UIViewController
         switch state {
         case .initial:
@@ -56,9 +57,9 @@ class OnboardingViewController: UINavigationController, Storyboarded {
             vc = RegistrationViewController.instantiate()
         }
 
-        self.viewControllers = [vc]
-        if self.presentingViewController == nil {
-            self.rootViewController.present(self, animated: true)
+        viewControllers = [vc]
+        if presentingViewController == nil {
+            rootViewController.present(self, animated: true)
         }
     }
 }

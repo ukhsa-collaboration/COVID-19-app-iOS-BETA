@@ -13,10 +13,15 @@ class PrivacyViewController: UIViewController, Storyboarded {
 
     let persistence = Persistence.shared
 
+    @IBOutlet weak var allowDataSharingSwitch: UISwitch!
     @IBOutlet weak var continueButton: PrimaryButton!
 
-    @IBAction func dataSharingAllowedChanged(_ sender: UISwitch) {
-        persistence.allowedDataSharing = sender.isOn
+    @IBAction func allowDataSharingChanged(_ sender: UISwitch) {
         continueButton.isEnabled = sender.isOn
+    }
+
+    @IBAction func continueTapped(_ sender: PrimaryButton) {
+        persistence.allowedDataSharing = allowDataSharingSwitch.isOn
+        performSegue(withIdentifier: "unwindFromPrivacy", sender: self)
     }
 }

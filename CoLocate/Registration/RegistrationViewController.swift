@@ -14,8 +14,7 @@ class RegistrationViewController: UIViewController, Storyboarded {
     @IBOutlet private var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var registerButton: UIButton!
 
-    var registrationService: RegistrationService!
-    var pushNotificationManager: PushNotificationManager!
+    var registrationService: RegistrationService = ConcreteRegistrationService()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,4 +47,3 @@ class RegistrationViewController: UIViewController, Storyboarded {
         }
     }
 }
-
