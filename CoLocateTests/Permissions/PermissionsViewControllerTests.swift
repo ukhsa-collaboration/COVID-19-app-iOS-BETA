@@ -70,7 +70,6 @@ private class BTLEListenerDouble: BTLEListener {
 class PermissionsUnwinder: UIViewController {
     var didUnwindFromPermissions = false
     @IBAction func unwindFromPermissions(unwindSegue: UIStoryboardSegue) {
-        print(#function)
         didUnwindFromPermissions = true
     }
 }
