@@ -63,8 +63,12 @@ class PersistenceTests: TestCase {
 
 class PersistenceDelegateDouble: NSObject, PersistenceDelegate {
     var recordedDiagnosis: Diagnosis?
-    
     func persistence(_ persistence: Persistence, didRecordDiagnosis diagnosis: Diagnosis) {
         recordedDiagnosis = diagnosis
+    }
+
+    var recordedRegistration: Registration?
+    func persistence(_ persistence: Persistence, didUpdateRegistration registration: Registration) {
+        recordedRegistration = registration
     }
 }

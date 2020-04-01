@@ -66,39 +66,4 @@ class AppCoordinatorTests: TestCase {
         
         XCTAssertNotNil(navController.topViewController as? PotentialViewController)
     }
-    
-    func testShowsPotentialWhenReceivingPotentialDiagnosis() {
-        let persistence = PersistenceDouble()
-        persistence.diagnosis = .unknown
-        let navController = UINavigationController()
-        let coordinator = AppCoordinator(navController: navController, persistence: persistence, secureRequestFactory: SecureRequestFactoryDouble())
-
-        coordinator.persistence(persistence, didRecordDiagnosis: .potential)
-
-        XCTAssertNotNil(navController.topViewController as? PotentialViewController)
-    }
-    
-    func testShowsOkWhenReceivingNotInfectedDiagnosis() {
-        let persistence = PersistenceDouble()
-        persistence.diagnosis = .unknown
-        let navController = UINavigationController()
-        let coordinator = AppCoordinator(navController: navController, persistence: persistence, secureRequestFactory: SecureRequestFactoryDouble())
-
-        coordinator.persistence(persistence, didRecordDiagnosis: .notInfected)
-
-        XCTAssertNotNil(navController.topViewController as? OkNowViewController)
-    }
-
-    func testShowsPleaseIsolateWhenReceivingInfectedDiagnosis() {
-        let persistence = PersistenceDouble()
-        persistence.diagnosis = .unknown
-        let navController = UINavigationController()
-        let coordinator = AppCoordinator(navController: navController, persistence: persistence, secureRequestFactory: SecureRequestFactoryDouble())
-
-        coordinator.persistence(persistence, didRecordDiagnosis: .infected)
-
-        let viewController = navController.topViewController as? PleaseSelfIsolateViewController
-        XCTAssertNotNil(viewController)
-        XCTAssertNotNil(viewController?.requestFactory)
-    }
 }

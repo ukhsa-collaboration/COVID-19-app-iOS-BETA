@@ -72,7 +72,6 @@ class RegistrationCoordinatorTests: TestCase {
 
         let vc = navController.topViewController as? RegistrationViewController
         XCTAssertNotNil(vc)
-        XCTAssertNotNil(vc?.pushNotificationManager)
         XCTAssertNotNil(vc?.registrationService)
     }
 }

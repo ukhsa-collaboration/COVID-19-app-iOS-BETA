@@ -14,7 +14,7 @@ class RegistrationViewController: UIViewController, Storyboarded {
     @IBOutlet private var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var registerButton: UIButton!
 
-    let registrationService = ConcreteRegistrationService()
+    var registrationService: RegistrationService = ConcreteRegistrationService()
 
     override func viewDidLoad() {
         super.viewDidLoad()
