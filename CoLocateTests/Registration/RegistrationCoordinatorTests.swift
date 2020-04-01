@@ -27,7 +27,7 @@ class RegistrationCoordinatorTests: TestCase {
         coordinator = RegistrationCoordinator(navController: navController,
                                               pushNotificationManager: pushNotificationManager,
                                               registrationService: registrationService,
-                                              persistance: PersistanceDouble(),
+                                              persistence: PersistenceDouble(),
                                               notificationCenter: NotificationCenter())
     }
 

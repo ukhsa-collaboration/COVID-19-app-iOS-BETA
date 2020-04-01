@@ -1,5 +1,5 @@
 //
-//  Persistance.swift
+//  Persistence.swift
 //  CoLocate
 //
 //  Created by NHSX.
@@ -12,21 +12,21 @@ enum Diagnosis: Int, CaseIterable {
     case unknown, notInfected, infected, potential
 }
 
-protocol PersistanceDelegate: class {
-    func persistance(_ persistance: Persistance, didRecordDiagnosis diagnosis: Diagnosis)
+protocol PersistenceDelegate: class {
+    func persistence(_ persistence: Persistence, didRecordDiagnosis diagnosis: Diagnosis)
 }
 
-class Persistance {
+class Persistence {
 
     enum Keys: String, CaseIterable {
         case allowedDataSharing
         case diagnosis
     }
 
-    static var shared = Persistance()
+    static var shared = Persistence()
 
     let secureRegistrationStorage: SecureRegistrationStorage
-    weak var delegate: PersistanceDelegate?
+    weak var delegate: PersistenceDelegate?
 
     var allowedDataSharing: Bool {
         get { UserDefaults.standard.bool(forKey: Keys.allowedDataSharing.rawValue) }
@@ -54,7 +54,7 @@ class Persistance {
         }
         set {
             UserDefaults.standard.set(newValue.rawValue, forKey: Keys.diagnosis.rawValue)
-            delegate?.persistance(self, didRecordDiagnosis: diagnosis)
+            delegate?.persistence(self, didRecordDiagnosis: diagnosis)
         }
     }
 

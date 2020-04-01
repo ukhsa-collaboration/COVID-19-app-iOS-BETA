@@ -17,7 +17,7 @@
 		098ED485242E88D80029B729 /* AppCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED484242E88D80029B729 /* AppCoordinatorTests.swift */; };
 		098ED488242E89930029B729 /* PushNotificationManagerDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED487242E89930029B729 /* PushNotificationManagerDouble.swift */; };
 		098ED48A242E89D80029B729 /* RegistrationServiceDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED489242E89D80029B729 /* RegistrationServiceDouble.swift */; };
-		098ED48C242E8B290029B729 /* PersistanceDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED48B242E8B290029B729 /* PersistanceDouble.swift */; };
+		098ED48C242E8B290029B729 /* PersistenceDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED48B242E8B290029B729 /* PersistenceDouble.swift */; };
 		098ED48E242E9AF00029B729 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 098ED48D242E9AF00029B729 /* Settings.bundle */; };
 		098ED490242E9BE20029B729 /* DebugSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED48F242E9BE20029B729 /* DebugSetting.swift */; };
 		09D1CD4B242C284000B1A167 /* PotentialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D1CD49242C284000B1A167 /* PotentialViewController.swift */; };
@@ -25,8 +25,8 @@
 		213C806C241A56430020EFA5 /* PermissionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213C806B241A56430020EFA5 /* PermissionsViewController.swift */; };
 		214209B42420DBE100C7BFF3 /* PleaseSelfIsolateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209B32420DBE100C7BFF3 /* PleaseSelfIsolateViewController.swift */; };
 		214209B62421072C00C7BFF3 /* OkNowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209B52421072C00C7BFF3 /* OkNowViewController.swift */; };
-		214209BA242216B700C7BFF3 /* Persistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209B9242216B700C7BFF3 /* Persistance.swift */; };
-		214209CA242227B300C7BFF3 /* PersistanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209C9242227B300C7BFF3 /* PersistanceTests.swift */; };
+		214209BA242216B700C7BFF3 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209B9242216B700C7BFF3 /* Persistence.swift */; };
+		214209CA242227B300C7BFF3 /* PersistenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209C9242227B300C7BFF3 /* PersistenceTests.swift */; };
 		214209CC2422755B00C7BFF3 /* PlistContactEventRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209CB2422755B00C7BFF3 /* PlistContactEventRecorder.swift */; };
 		214209CE24237A6300C7BFF3 /* PlistContactEventRecorderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209CD24237A6300C7BFF3 /* PlistContactEventRecorderTests.swift */; };
 		214209D0242396DA00C7BFF3 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209CF242396DA00C7BFF3 /* Session.swift */; };
@@ -131,7 +131,7 @@
 		098ED484242E88D80029B729 /* AppCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinatorTests.swift; sourceTree = "<group>"; };
 		098ED487242E89930029B729 /* PushNotificationManagerDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationManagerDouble.swift; sourceTree = "<group>"; };
 		098ED489242E89D80029B729 /* RegistrationServiceDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationServiceDouble.swift; sourceTree = "<group>"; };
-		098ED48B242E8B290029B729 /* PersistanceDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceDouble.swift; sourceTree = "<group>"; };
+		098ED48B242E8B290029B729 /* PersistenceDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceDouble.swift; sourceTree = "<group>"; };
 		098ED48D242E9AF00029B729 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		098ED48F242E9BE20029B729 /* DebugSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugSetting.swift; sourceTree = "<group>"; };
 		09D1CD49242C284000B1A167 /* PotentialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotentialViewController.swift; sourceTree = "<group>"; };
@@ -139,10 +139,10 @@
 		213C806B241A56430020EFA5 /* PermissionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsViewController.swift; sourceTree = "<group>"; };
 		214209B32420DBE100C7BFF3 /* PleaseSelfIsolateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PleaseSelfIsolateViewController.swift; sourceTree = "<group>"; };
 		214209B52421072C00C7BFF3 /* OkNowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OkNowViewController.swift; sourceTree = "<group>"; };
-		214209B9242216B700C7BFF3 /* Persistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistance.swift; sourceTree = "<group>"; };
+		214209B9242216B700C7BFF3 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		214209BF2422276800C7BFF3 /* CoLocateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoLocateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		214209C32422276800C7BFF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		214209C9242227B300C7BFF3 /* PersistanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceTests.swift; sourceTree = "<group>"; };
+		214209C9242227B300C7BFF3 /* PersistenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceTests.swift; sourceTree = "<group>"; };
 		214209CB2422755B00C7BFF3 /* PlistContactEventRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlistContactEventRecorder.swift; sourceTree = "<group>"; };
 		214209CD24237A6300C7BFF3 /* PlistContactEventRecorderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlistContactEventRecorderTests.swift; sourceTree = "<group>"; };
 		214209CF242396DA00C7BFF3 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
@@ -297,7 +297,7 @@
 			isa = PBXGroup;
 			children = (
 				098ED487242E89930029B729 /* PushNotificationManagerDouble.swift */,
-				098ED48B242E8B290029B729 /* PersistanceDouble.swift */,
+				098ED48B242E8B290029B729 /* PersistenceDouble.swift */,
 				098ED489242E89D80029B729 /* RegistrationServiceDouble.swift */,
 				F770A454242FEE7C002FDED1 /* SecureRequestFactoryDouble.swift */,
 				F770A4562430F76B002FDED1 /* AppCoordinatorDouble.swift */,
@@ -339,7 +339,7 @@
 				095A91162434FE4300ED6369 /* NotificationsPrompt */,
 				214209C32422276800C7BFF3 /* Info.plist */,
 				098ED484242E88D80029B729 /* AppCoordinatorTests.swift */,
-				214209C9242227B300C7BFF3 /* PersistanceTests.swift */,
+				214209C9242227B300C7BFF3 /* PersistenceTests.swift */,
 				214209CD24237A6300C7BFF3 /* PlistContactEventRecorderTests.swift */,
 				F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */,
 				214209DA242630CF00C7BFF3 /* Networking */,
@@ -449,7 +449,7 @@
 				F758B8C1242CBAF5003AE16D /* AppCoordinator.swift */,
 				098ED47D242E6B950029B729 /* RootViewController.swift */,
 				6FC63C39241641BA007C8BF3 /* LaunchScreen.storyboard */,
-				214209B9242216B700C7BFF3 /* Persistance.swift */,
+				214209B9242216B700C7BFF3 /* Persistence.swift */,
 				F67A2290242AA35B002254B6 /* SecureRegistrationStorage.swift */,
 				89F06B2D2434A5A50074C612 /* Logging */,
 				098ED47F242E744F0029B729 /* Debug */,
@@ -737,13 +737,13 @@
 			files = (
 				098ED47C242D801C0029B729 /* RegistrationServiceTests.swift in Sources */,
 				21B3D2E3242906AE00573061 /* SecureRequestTests.swift in Sources */,
-				214209CA242227B300C7BFF3 /* PersistanceTests.swift in Sources */,
+				214209CA242227B300C7BFF3 /* PersistenceTests.swift in Sources */,
 				F7EAE5A2242FAD0E0090F8A2 /* RegistrationCoordinatorTests.swift in Sources */,
 				214209CE24237A6300C7BFF3 /* PlistContactEventRecorderTests.swift in Sources */,
 				095A91182434FF1500ED6369 /* ApplicationDouble.swift in Sources */,
 				21F37402243384D400926FB8 /* ContactEventCollectorTests.swift in Sources */,
 				F770A4572430F76B002FDED1 /* AppCoordinatorDouble.swift in Sources */,
-				098ED48C242E8B290029B729 /* PersistanceDouble.swift in Sources */,
+				098ED48C242E8B290029B729 /* PersistenceDouble.swift in Sources */,
 				098ED485242E88D80029B729 /* AppCoordinatorTests.swift in Sources */,
 				F6F05A2A2433C6CC00FF4B72 /* AuthManagerDouble.swift in Sources */,
 				F6F05A242433BEC000FF4B72 /* OnboardingCoordinatorTests.swift in Sources */,
@@ -800,7 +800,7 @@
 				6FC63C31241641B8007C8BF3 /* AppDelegate.swift in Sources */,
 				F600A60224297A8E0038DF57 /* RegistrationRequest.swift in Sources */,
 				214209D2242399CF00C7BFF3 /* URLSession.swift in Sources */,
-				214209BA242216B700C7BFF3 /* Persistance.swift in Sources */,
+				214209BA242216B700C7BFF3 /* Persistence.swift in Sources */,
 				213C806C241A56430020EFA5 /* PermissionsViewController.swift in Sources */,
 				89F06B2F2434A62C0074C612 /* LoggingManager.swift in Sources */,
 				098ED483242E746E0029B729 /* DebugViewController.swift in Sources */,

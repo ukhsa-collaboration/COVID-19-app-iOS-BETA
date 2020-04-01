@@ -12,10 +12,10 @@ import XCTest
 class OnboardingCoordinatorTests: TestCase {
 
     func testInitialState() {
-        let persistanceDouble = PersistanceDouble(allowedDataSharing: false)
+        let persistenceDouble = PersistenceDouble(allowedDataSharing: false)
         let authManagerDouble = AuthorizationManagerDouble(bluetooth: .notDetermined)
         let onboardingCoordinator = OnboardingCoordinator(
-            persistance: persistanceDouble,
+            persistence: persistenceDouble,
             authorizationManager: authManagerDouble
         )
 
@@ -25,10 +25,10 @@ class OnboardingCoordinatorTests: TestCase {
     }
 
     func testPermissions() {
-        let persistanceDouble = PersistanceDouble(allowedDataSharing: true)
+        let persistenceDouble = PersistenceDouble(allowedDataSharing: true)
         let authManagerDouble = AuthorizationManagerDouble(bluetooth: .notDetermined)
         let onboardingCoordinator = OnboardingCoordinator(
-            persistance: persistanceDouble,
+            persistence: persistenceDouble,
             authorizationManager: authManagerDouble
         )
 
@@ -38,10 +38,10 @@ class OnboardingCoordinatorTests: TestCase {
     }
 
     func testNotificationPermissions() {
-        let persistanceDouble = PersistanceDouble(allowedDataSharing: true)
+        let persistenceDouble = PersistenceDouble(allowedDataSharing: true)
         let authManagerDouble = AuthorizationManagerDouble(bluetooth: .allowed)
         let onboardingCoordinator = OnboardingCoordinator(
-            persistance: persistanceDouble,
+            persistence: persistenceDouble,
             authorizationManager: authManagerDouble
         )
 
@@ -52,10 +52,10 @@ class OnboardingCoordinatorTests: TestCase {
     }
 
     func testRegistration() {
-        let persistanceDouble = PersistanceDouble(allowedDataSharing: true)
+        let persistenceDouble = PersistenceDouble(allowedDataSharing: true)
         let authManagerDouble = AuthorizationManagerDouble(bluetooth: .allowed)
         let onboardingCoordinator = OnboardingCoordinator(
-            persistance: persistanceDouble,
+            persistence: persistenceDouble,
             authorizationManager: authManagerDouble
         )
 
@@ -67,10 +67,10 @@ class OnboardingCoordinatorTests: TestCase {
 
     func testDoneOnboarding() {
         let registration = Registration(id: UUID(), secretKey: Data())
-        let persistanceDouble = PersistanceDouble(allowedDataSharing: true, registration: registration)
+        let persistenceDouble = PersistenceDouble(allowedDataSharing: true, registration: registration)
         let authManagerDouble = AuthorizationManagerDouble(bluetooth: .allowed)
         let onboardingCoordinator = OnboardingCoordinator(
-            persistance: persistanceDouble,
+            persistence: persistenceDouble,
             authorizationManager: authManagerDouble
         )
 

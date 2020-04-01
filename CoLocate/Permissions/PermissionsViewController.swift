@@ -14,7 +14,7 @@ class PermissionsViewController: UIViewController, Storyboarded {
 
     let authManager = AuthorizationManager()
     let notificationManager: PushNotificationManager = ConcretePushNotificationManager()
-    let persistance = Persistance.shared
+    let persistence = Persistence.shared
 
     weak var bluetoothReadyDelegate: BluetoothAvailableDelegate?
     
@@ -36,7 +36,7 @@ class PermissionsViewController: UIViewController, Storyboarded {
     private func checkBluetoothAuth() {
         guard authManager.bluetooth == .allowed else { return }
 
-        if persistance.newOnboarding {
+        if persistence.newOnboarding {
             requestNotificationPermissions()
         } else {
             bluetoothReadyDelegate?.bluetoothIsAvailable()

@@ -1,5 +1,5 @@
 //
-//  PersistanceTests.swift
+//  PersistenceTests.swift
 //  CoLocateTests
 //
 //  Created by NHSX.
@@ -9,7 +9,7 @@
 import XCTest
 @testable import CoLocate
 
-class PersistanceTests: TestCase {
+class PersistenceTests: TestCase {
 
     // Ensure when UserDefaults.integer(forKey: ) doesn't find anything, it translates to .unknown
     func testDiagnosisRawValueZeroIsUnknown() {
@@ -17,15 +17,15 @@ class PersistanceTests: TestCase {
     }
 
     func testDiagnosisIsPersisted() {
-        let service = Persistance()
+        let service = Persistence()
         service.diagnosis = .notInfected
 
-        let diagnosis = Persistance().diagnosis
+        let diagnosis = Persistence().diagnosis
         XCTAssertEqual(diagnosis, Diagnosis.notInfected)
     }
 
     func testDiagnosisIsUnknownWhenDefaultsReset() {
-        let service = Persistance()
+        let service = Persistence()
         service.diagnosis = .infected
 
         let appDomain = Bundle.main.bundleIdentifier
@@ -36,8 +36,8 @@ class PersistanceTests: TestCase {
     }
     
     func testDiagnosisIsPassedToDelegate() {
-        let delegate = PersistanceDelegateDouble()
-        let service = Persistance()
+        let delegate = PersistenceDelegateDouble()
+        let service = Persistence()
         service.delegate = delegate
         
         service.diagnosis = .notInfected
@@ -47,24 +47,24 @@ class PersistanceTests: TestCase {
 
     func testRegistrationIsPassedToSecureRegistrationStorage() {
         let secureRegistrationStorage = SecureRegistrationStorage.shared
-        let persistance = Persistance(secureRegistrationStorage: secureRegistrationStorage)
+        let persistence = Persistence(secureRegistrationStorage: secureRegistrationStorage)
 
-        XCTAssertNil(persistance.registration)
+        XCTAssertNil(persistence.registration)
 
         let id = UUID()
         let secretKey = "secret key".data(using: .utf8)!
         let registration = Registration(id: id, secretKey: secretKey)
-        persistance.registration = registration
+        persistence.registration = registration
 
         XCTAssertEqual(try! secureRegistrationStorage.get(), registration)
-        XCTAssertEqual(persistance.registration, registration)
+        XCTAssertEqual(persistence.registration, registration)
     }
 }
 
-class PersistanceDelegateDouble: NSObject, PersistanceDelegate {
+class PersistenceDelegateDouble: NSObject, PersistenceDelegate {
     var recordedDiagnosis: Diagnosis?
     
-    func persistance(_ persistance: Persistance, didRecordDiagnosis diagnosis: Diagnosis) {
+    func persistence(_ persistence: Persistence, didRecordDiagnosis diagnosis: Diagnosis) {
         recordedDiagnosis = diagnosis
     }
 }

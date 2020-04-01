@@ -10,17 +10,17 @@ import UIKit
 
 class AppCoordinator {
     private let navController: UINavigationController
-    private let persistance: Persistance
+    private let persistence: Persistence
     private let secureRequestFactory: SecureRequestFactory
         
     init(navController: UINavigationController,
-         persistance: Persistance,
+         persistence: Persistence,
          secureRequestFactory: SecureRequestFactory) {
         self.navController = navController
-        self.persistance = persistance
+        self.persistence = persistence
         self.secureRequestFactory = secureRequestFactory
                 
-        persistance.delegate = self
+        persistence.delegate = self
     }
 
     func start() {
@@ -28,7 +28,7 @@ class AppCoordinator {
     }
     
     func initialViewController() -> UIViewController & Storyboarded {
-        switch persistance.diagnosis {
+        switch persistence.diagnosis {
         case .unknown:
             return okVC()
 
@@ -48,7 +48,7 @@ class AppCoordinator {
     }
 
     private func viewControllerForDiagnosis() -> UIViewController {
-        let currentDiagnosis = persistance.diagnosis
+        let currentDiagnosis = persistence.diagnosis
         
         switch currentDiagnosis {
         case .unknown: return enterDiagnosisVC()
@@ -80,8 +80,8 @@ class AppCoordinator {
     }
 }
 
-extension AppCoordinator: PersistanceDelegate {
-    func persistance(_ persistance: Persistance, didRecordDiagnosis diagnosis: Diagnosis) {
+extension AppCoordinator: PersistenceDelegate {
+    func persistence(_ persistence: Persistence, didRecordDiagnosis diagnosis: Diagnosis) {
         let vc: UIViewController
         
         switch diagnosis {

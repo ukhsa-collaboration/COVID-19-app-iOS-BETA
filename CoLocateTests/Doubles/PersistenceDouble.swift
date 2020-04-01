@@ -1,5 +1,5 @@
 //
-//  PersistanceDouble.swift
+//  PersistenceDouble.swift
 //  CoLocateTests
 //
 //  Created by NHSX.
@@ -9,7 +9,7 @@
 import UIKit
 @testable import CoLocate
 
-class PersistanceDouble: Persistance {
+class PersistenceDouble: Persistence {
 
     init(
         allowedDataSharing: Bool = false,
