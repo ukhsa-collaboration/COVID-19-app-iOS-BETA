@@ -1,5 +1,5 @@
 //
-//  BluetoothPermissionsViewController.swift
+//  PermissionsViewController.swift
 //  CoLocate
 //
 //  Created by NHSX.
@@ -9,8 +9,8 @@
 import UIKit
 import CoreBluetooth
 
-class BluetoothPermissionsViewController: UIViewController, BTLEBroadcasterStateDelegate, BTLEListenerStateDelegate, Storyboarded {
-    static let storyboardName = "BluetoothPermissions"
+class PermissionsViewController: UIViewController, BTLEBroadcasterStateDelegate, BTLEListenerStateDelegate, Storyboarded {
+    static let storyboardName = "Permissions"
     var bluetoothReadyDelegate: BluetoothAvailableDelegate?
 
     @IBOutlet private var bodyHeadline: UILabel!
