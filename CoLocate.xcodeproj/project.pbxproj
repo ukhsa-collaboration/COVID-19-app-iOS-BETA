@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -46,6 +46,7 @@
 		6FC63C31241641B8007C8BF3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC63C30241641B8007C8BF3 /* AppDelegate.swift */; };
 		6FC63C38241641BA007C8BF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FC63C37241641BA007C8BF3 /* Assets.xcassets */; };
 		6FC63C3B241641BA007C8BF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FC63C39241641BA007C8BF3 /* LaunchScreen.storyboard */; };
+		89F06B2C2434A2C00074C612 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 89F06B2B2434A2C00074C612 /* Logging */; };
 		A1E7A0592420028B0078174D /* NHS Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1E7A0582420028B0078174D /* NHS Colors.xcassets */; };
 		AE2A5E502423C473007A4771 /* ContactEventRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2A5E4F2423C473007A4771 /* ContactEventRecorder.swift */; };
 		AE2DCAA0241920B600A940FC /* BTLEBroadcaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2DCA9F241920B600A940FC /* BTLEBroadcaster.swift */; };
@@ -234,6 +235,7 @@
 				F78CEB5B242B7EC0002254AD /* FirebaseCoreDiagnostics.framework in Frameworks */,
 				F78CEB6A242B8D3F002254AD /* FirebaseInstanceID.framework in Frameworks */,
 				F78CEB6C242B8D84002254AD /* FirebaseInstallations.framework in Frameworks */,
+				89F06B2C2434A2C00074C612 /* Logging in Frameworks */,
 				F78CEB5A242B7EC0002254AD /* FirebaseMessaging.framework in Frameworks */,
 				21B3D2E82429115600573061 /* CoreBluetooth.framework in Frameworks */,
 				F78CEB6F242B92CF002254AD /* GoogleUtilities.framework in Frameworks */,
@@ -603,6 +605,9 @@
 			dependencies = (
 			);
 			name = CoLocate;
+			packageProductDependencies = (
+				89F06B2B2434A2C00074C612 /* Logging */,
+			);
 			productName = CoLocate;
 			productReference = 6FC63C2D241641B8007C8BF3 /* CoLocate.app */;
 			productType = "com.apple.product-type.application";
@@ -637,6 +642,9 @@
 				Base,
 			);
 			mainGroup = 6FC63C24241641B8007C8BF3;
+			packageReferences = (
+				89F06B2A2434A2C00074C612 /* XCRemoteSwiftPackageReference "swift-log" */,
+			);
 			productRefGroup = 6FC63C2E241641B8007C8BF3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1048,6 +1056,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		89F06B2A2434A2C00074C612 /* XCRemoteSwiftPackageReference "swift-log" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-log.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		89F06B2B2434A2C00074C612 /* Logging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 89F06B2A2434A2C00074C612 /* XCRemoteSwiftPackageReference "swift-log" */;
+			productName = Logging;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 6FC63C25241641B8007C8BF3 /* Project object */;
 }
