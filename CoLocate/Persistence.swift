@@ -59,7 +59,7 @@ class Persistence {
     }
 
     var newOnboarding: Bool {
-        get { true } // UserDefaults.standard.bool(forKey: #function) }
+        get { UserDefaults.standard.bool(forKey: #function) }
         set { UserDefaults.standard.set(newValue, forKey: #function) }
     }
 
