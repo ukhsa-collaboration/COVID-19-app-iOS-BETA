@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     override init() {
         registrationService = ConcreteRegistrationService(session: URLSession.shared, notificationManager: notificationManager, notificationCenter: NotificationCenter.default)
+
         super.init()
     }
     
@@ -42,21 +43,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let rootViewController = RootViewController()
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = rootViewController
-        
-        if let registration = persistance.registration {
-            continueWithRegistration(registration)
-        } else {
-            let registrationCoordinator = RegistrationCoordinator(application: application,
-                                                              navController: rootViewController,
-                                                              notificationManager: notificationManager,
-                                                              registrationService: registrationService,
-                                                              persistance: persistance,
-                                                              notificationCenter: NotificationCenter.default)
-            NotificationCenter.default.addObserver(self, selector: #selector(didCompleteRegistration(notification:)), name: RegistrationCompleteNotification, object: nil)
-            registrationCoordinator.start()
+
+        if !persistance.newOnboarding {
+            if let registration = persistance.registration {
+                continueWithRegistration(registration)
+            } else {
+                let registrationCoordinator = RegistrationCoordinator(application: application,
+                                                                      navController: rootViewController,
+                                                                      notificationManager: notificationManager,
+                                                                      registrationService: registrationService,
+                                                                      persistance: persistance,
+                                                                      notificationCenter: NotificationCenter.default)
+                NotificationCenter.default.addObserver(self, selector: #selector(didCompleteRegistration(notification:)), name: RegistrationCompleteNotification, object: nil)
+                registrationCoordinator.start()
+            }
         }
-    
+
         window?.makeKeyAndVisible()
+
+        if persistance.newOnboarding {
+            let onboardingViewController = OnboardingViewController.instantiate()
+            onboardingViewController.rootViewController = rootViewController
+        }
 
         return true
     }

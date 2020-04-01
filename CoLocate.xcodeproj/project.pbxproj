@@ -66,6 +66,10 @@
 		F6F05A262433C09200FF4B72 /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F05A252433C09200FF4B72 /* OnboardingCoordinator.swift */; };
 		F6F05A282433C55300FF4B72 /* AuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F05A272433C55300FF4B72 /* AuthorizationManager.swift */; };
 		F6F05A2A2433C6CC00FF4B72 /* AuthManagerDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F05A292433C6CC00FF4B72 /* AuthManagerDouble.swift */; };
+		F6F05A3024340E5400FF4B72 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F05A2F24340E5400FF4B72 /* OnboardingViewController.swift */; };
+		F6F05A322434310200FF4B72 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6F05A312434310200FF4B72 /* Onboarding.storyboard */; };
+		F6F05A342434344200FF4B72 /* StartNowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F05A332434344200FF4B72 /* StartNowViewController.swift */; };
+		F6F05A36243436D200FF4B72 /* PrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F05A35243436D200FF4B72 /* PrivacyViewController.swift */; };
 		F758553A24294C8D00CBE1ED /* RequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F758553924294C8C00CBE1ED /* RequestFactory.swift */; };
 		F758B8BE242CB856003AE16D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F758B8BD242CB856003AE16D /* Localizable.strings */; };
 		F758B8C0242CB98C003AE16D /* UIViewController+Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = F758B8BF242CB98C003AE16D /* UIViewController+Storyboarded.swift */; };
@@ -173,6 +177,10 @@
 		F6F05A252433C09200FF4B72 /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
 		F6F05A272433C55300FF4B72 /* AuthorizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationManager.swift; sourceTree = "<group>"; };
 		F6F05A292433C6CC00FF4B72 /* AuthManagerDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManagerDouble.swift; sourceTree = "<group>"; };
+		F6F05A2F24340E5400FF4B72 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		F6F05A312434310200FF4B72 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
+		F6F05A332434344200FF4B72 /* StartNowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartNowViewController.swift; sourceTree = "<group>"; };
+		F6F05A35243436D200FF4B72 /* PrivacyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyViewController.swift; sourceTree = "<group>"; };
 		F758553924294C8C00CBE1ED /* RequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFactory.swift; sourceTree = "<group>"; };
 		F758B8BD242CB856003AE16D /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		F758B8BF242CB98C003AE16D /* UIViewController+Storyboarded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Storyboarded.swift"; sourceTree = "<group>"; };
@@ -451,8 +459,12 @@
 		F6F05A212433BE9600FF4B72 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				F6F05A312434310200FF4B72 /* Onboarding.storyboard */,
 				F6F05A272433C55300FF4B72 /* AuthorizationManager.swift */,
 				F6F05A252433C09200FF4B72 /* OnboardingCoordinator.swift */,
+				F6F05A2F24340E5400FF4B72 /* OnboardingViewController.swift */,
+				F6F05A35243436D200FF4B72 /* PrivacyViewController.swift */,
+				F6F05A332434344200FF4B72 /* StartNowViewController.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -662,6 +674,7 @@
 				F65AE53C2432B842006544D4 /* Potential.rtf in Resources */,
 				09D1CD50242C3A9300B1A167 /* Potential.storyboard in Resources */,
 				F6CA2819242E41F700F8DC55 /* README.md in Resources */,
+				F6F05A322434310200FF4B72 /* Onboarding.storyboard in Resources */,
 				098ED481242E745F0029B729 /* Debug.storyboard in Resources */,
 				F78CEB68242B8C2C002254AD /* GoogleService-Info.plist in Resources */,
 			);
@@ -707,8 +720,10 @@
 			files = (
 				21D93C302420C26900C1FA9B /* PrimaryButton.swift in Sources */,
 				F78CEB47242B7752002254AD /* String+localized.swift in Sources */,
+				F6F05A36243436D200FF4B72 /* PrivacyViewController.swift in Sources */,
 				F6F05A282433C55300FF4B72 /* AuthorizationManager.swift in Sources */,
 				F758B8C2242CBAF5003AE16D /* AppCoordinator.swift in Sources */,
+				F6F05A342434344200FF4B72 /* StartNowViewController.swift in Sources */,
 				21AF36AB241A8E50001A4910 /* BTLEListener.swift in Sources */,
 				F78CEBED242D0836002254AD /* SecureRequestFactory.swift in Sources */,
 				F7EAE5A0242FACCB0090F8A2 /* RegistrationCoordinator.swift in Sources */,
@@ -736,6 +751,7 @@
 				213C806C241A56430020EFA5 /* BluetoothPermissionsViewController.swift in Sources */,
 				098ED483242E746E0029B729 /* DebugViewController.swift in Sources */,
 				09D1CD4B242C284000B1A167 /* PotentialViewController.swift in Sources */,
+				F6F05A3024340E5400FF4B72 /* OnboardingViewController.swift in Sources */,
 				21D93C2E241FB0A300C1FA9B /* EnterDiagnosisTableViewController.swift in Sources */,
 				AEC6A7BC241BD81A00B0237A /* LogoStrapline.swift in Sources */,
 				214209D52423C83C00C7BFF3 /* PatchContactEventsRequest.swift in Sources */,

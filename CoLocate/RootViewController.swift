@@ -35,7 +35,8 @@ class RootViewController: UINavigationController {
         return type(of: fromViewController) == DebugViewController.self
     }
 
-    @IBAction func unwindFromDebugViewController(unwindSegue: UIStoryboardSegue) {
-    }
+    @IBAction func unwindFromOnboarding(unwindSegue: UIStoryboardSegue) {}
+
+    @IBAction func unwindFromDebugViewController(unwindSegue: UIStoryboardSegue) {}
 
 }

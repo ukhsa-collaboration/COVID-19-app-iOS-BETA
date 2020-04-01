@@ -12,10 +12,12 @@ import UIKit
 class DebugViewController: UITableViewController {
 
     let persistance = Persistance.shared
+    @IBOutlet weak var allowedDataSharingSwitch: UISwitch!
     @IBOutlet weak var interceptRequestsSwitch: UISwitch!
     @IBOutlet weak var newOnboardingSwitch: UISwitch!
 
     override func viewDidLoad() {
+        allowedDataSharingSwitch.isOn = persistance.allowedDataSharing
         newOnboardingSwitch.isOn = persistance.newOnboarding
 
         #if DEBUG
@@ -45,6 +47,9 @@ class DebugViewController: UITableViewController {
             alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 
             present(alertController, animated: true, completion: nil)
+
+        case (0, 2):
+            break
 
         case (1, 0):
             PlistContactEventRecorder.shared.record(ContactEvent(remoteContactId: UUID(), rssi: 42))
@@ -87,6 +92,10 @@ class DebugViewController: UITableViewController {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Ok", style: .default))
         present(alertController, animated: true, completion: nil)
+    }
+
+    @IBAction func allowedDataSharingChanged(_ sender: UISwitch) {
+        persistance.allowedDataSharing = sender.isOn
     }
 
     @IBAction func interceptRegistrationRequestsChanged(_ sender: UISwitch) {
