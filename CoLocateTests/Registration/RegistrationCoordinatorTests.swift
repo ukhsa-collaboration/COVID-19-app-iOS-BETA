@@ -24,12 +24,11 @@ class RegistrationCoordinatorTests: TestCase {
         super.setUp()
 
         navController = UINavigationController()
-        coordinator = RegistrationCoordinator(application: application,
-                                          navController: navController,
-                                          notificationManager: notificationManager,
-                                          registrationService: registrationService,
-                                          persistance: PersistanceDouble(),
-                                          notificationCenter: NotificationCenter())
+        coordinator = RegistrationCoordinator(navController: navController,
+                                              notificationManager: notificationManager,
+                                              registrationService: registrationService,
+                                              persistance: PersistanceDouble(),
+                                              notificationCenter: NotificationCenter())
     }
 
     func test_first_screen_requests_push_notifications() {

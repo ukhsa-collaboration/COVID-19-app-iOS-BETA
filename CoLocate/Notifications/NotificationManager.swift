@@ -22,10 +22,7 @@ protocol NotificationManager {
 
     func configure()
 
-    func requestAuthorization(
-        application: Application,
-        completion: @escaping (Result<Bool, Error>) -> Void
-    )
+    func requestAuthorization(completion: @escaping (Result<Bool, Error>) -> Void)
     
     func handleNotification(userInfo: [AnyHashable : Any])
 }
@@ -33,7 +30,6 @@ protocol NotificationManager {
 
 class ConcreteNotificationManager: NSObject, NotificationManager {
 
-    let uiQueue: DispatchQueue
     let firebase: TestableFirebaseApp.Type
     let messagingFactory: () -> TestableMessaging
     let userNotificationCenter: UserNotificationCenter
@@ -44,13 +40,11 @@ class ConcreteNotificationManager: NSObject, NotificationManager {
     weak var delegate: NotificationManagerDelegate?
 
     init(
-        uiQueue: DispatchQueue,
         firebase: TestableFirebaseApp.Type,
         messagingFactory: @escaping () -> TestableMessaging,
         userNotificationCenter: UserNotificationCenter,
         persistance: Persistance
     ) {
-        self.uiQueue = uiQueue
         self.firebase = firebase
         self.messagingFactory = messagingFactory
         self.userNotificationCenter = userNotificationCenter
@@ -61,7 +55,6 @@ class ConcreteNotificationManager: NSObject, NotificationManager {
 
     convenience override init() {
         self.init(
-            uiQueue: DispatchQueue.main,
             firebase: FirebaseApp.self,
             messagingFactory: { Messaging.messaging() },
             userNotificationCenter: UNUserNotificationCenter.current(),
@@ -75,10 +68,7 @@ class ConcreteNotificationManager: NSObject, NotificationManager {
         userNotificationCenter.delegate = self
     }
 
-    func requestAuthorization(
-        application: Application,
-        completion: @escaping (Result<Bool, Error>) -> Void
-    ) {
+    func requestAuthorization(completion: @escaping (Result<Bool, Error>) -> Void) {
         userNotificationCenter.requestAuthorization(
             options: [.alert, .badge, .sound]
         ) { granted, error in
@@ -87,9 +77,6 @@ class ConcreteNotificationManager: NSObject, NotificationManager {
                 return
             }
 
-            self.uiQueue.sync {
-                application.registerForRemoteNotifications()
-            }
             completion(.success(granted))
         }
     }

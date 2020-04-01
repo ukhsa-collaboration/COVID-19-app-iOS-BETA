@@ -48,8 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             if let registration = persistance.registration {
                 continueWithRegistration(registration)
             } else {
-                let registrationCoordinator = RegistrationCoordinator(application: application,
-                                                                      navController: rootViewController,
+                let registrationCoordinator = RegistrationCoordinator(navController: rootViewController,
                                                                       notificationManager: notificationManager,
                                                                       registrationService: registrationService,
                                                                       persistance: persistance,

@@ -23,7 +23,6 @@ class NotificationManagerTests: TestCase {
     func testConfigure() {
         let messaging = MessagingDouble()
         let notificationManager = ConcreteNotificationManager(
-            uiQueue: .main,
             firebase: FirebaseAppDouble.self,
             messagingFactory: { messaging },
             userNotificationCenter: NotificationCenterDouble(),
@@ -38,7 +37,6 @@ class NotificationManagerTests: TestCase {
     func testPushTokenHandling() {
         let messaging = MessagingDouble()
         let notificationManager = ConcreteNotificationManager(
-            uiQueue: .main,
             firebase: FirebaseAppDouble.self,
             messagingFactory: { messaging },
             userNotificationCenter: NotificationCenterDouble(),
@@ -57,17 +55,15 @@ class NotificationManagerTests: TestCase {
     func testRequestAuthorization_success() {
         let notificationCenterDouble = NotificationCenterDouble()
         let notificationManager = ConcreteNotificationManager(
-            uiQueue: DispatchQueue.test,
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
             userNotificationCenter: notificationCenterDouble,
             persistance: Persistance()
         )
 
-        let applicationDouble = ApplicationDouble()
         var granted: Bool?
         var error: Error?
-        notificationManager.requestAuthorization(application: applicationDouble) { result in
+        notificationManager.requestAuthorization { result in
             switch result {
             case .success(let g): granted = g
             case .failure(let e): error = e
@@ -77,7 +73,6 @@ class NotificationManagerTests: TestCase {
         notificationCenterDouble.requestAuthCompletionHandler!(true, nil)
         DispatchQueue.test.flush()
 
-        XCTAssertTrue(applicationDouble.registeredForRemoteNotifications)
         XCTAssertTrue(granted!)
         XCTAssertNil(error)
     }
@@ -85,7 +80,6 @@ class NotificationManagerTests: TestCase {
     func testHandleNotification_savesPotentialDiagnosis() {
         let persistance = Persistance()
         let notificationManager = ConcreteNotificationManager(
-            uiQueue: DispatchQueue.test,
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
             userNotificationCenter: NotificationCenterDouble(),
@@ -101,7 +95,6 @@ class NotificationManagerTests: TestCase {
         let persistance = Persistance()
         let notificationCenterDouble = NotificationCenterDouble()
         let notificationManager = ConcreteNotificationManager(
-            uiQueue: DispatchQueue.test,
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
             userNotificationCenter: notificationCenterDouble,
@@ -116,7 +109,6 @@ class NotificationManagerTests: TestCase {
     func testHandleNotification_doesNotSaveOtherDiagnosis() {
         let persistance = Persistance()
         let notificationManager = ConcreteNotificationManager(
-            uiQueue: DispatchQueue.test,
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
             userNotificationCenter: NotificationCenterDouble(),
@@ -132,7 +124,6 @@ class NotificationManagerTests: TestCase {
         let persistance = Persistance()
         let notificationCenterDouble = NotificationCenterDouble()
         let notificationManager = ConcreteNotificationManager(
-            uiQueue: DispatchQueue.test,
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
             userNotificationCenter: notificationCenterDouble,
@@ -146,7 +137,6 @@ class NotificationManagerTests: TestCase {
     
     func testHandleNotification_forwardsNonDiagnosisNotificationsToDelegate() {
         let notificationManager = ConcreteNotificationManager(
-            uiQueue: DispatchQueue.test,
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
             userNotificationCenter: NotificationCenterDouble(),
@@ -164,7 +154,6 @@ class NotificationManagerTests: TestCase {
         let persistance = Persistance()
         let notificationCenterDouble = NotificationCenterDouble()
         let notificationManager = ConcreteNotificationManager(
-            uiQueue: DispatchQueue.test,
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
             userNotificationCenter: notificationCenterDouble,
