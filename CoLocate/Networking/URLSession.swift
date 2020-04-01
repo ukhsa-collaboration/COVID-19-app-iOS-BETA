@@ -37,6 +37,11 @@ extension URLSession: Session {
         }
         
         let task = dataTask(with: urlRequest) { data, response, error in
+            if let error = error {
+                print("Request to \(request.path) failed with error: \(error)")
+                completion(.failure(error))
+            }
+            
             let statusCode = (response as? HTTPURLResponse)?.statusCode
             do {
                 switch (data, statusCode, error) {

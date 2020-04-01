@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class DebugViewController: UITableViewController {
 
     let persistance = Persistance.shared
@@ -18,12 +19,13 @@ class DebugViewController: UITableViewController {
         newOnboardingSwitch.isOn = persistance.newOnboarding
 
         #if DEBUG
+            interceptRequestsSwitch.isOn = InterceptingSession.interceptNextRequest
             newOnboardingSwitch.isEnabled = true
         #else
             newOnboardingSwitch.isEnabled = false
         #endif
     }
-
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
 
@@ -88,6 +90,14 @@ class DebugViewController: UITableViewController {
     }
 
     @IBAction func interceptRegistrationRequestsChanged(_ sender: UISwitch) {
+        #if DEBUG
+        InterceptingSession.interceptNextRequest = sender.isOn
+        #else
+        let alert = UIAlertController(title: "Unavailable", message: "This dangerous action is only available in debug builds.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
+        sender.isOn = false
+        #endif
     }
 
     @IBAction func newOnboardingChanged(_ sender: UISwitch) {
