@@ -13,9 +13,9 @@ class PlistContactEventRecorderTests: XCTestCase {
 
     let epoch = Date(timeIntervalSince1970: 0)
     
-    var contactEvent1: OldContactEvent!
-    var contactEvent2: OldContactEvent!
-    var contactEvent3: OldContactEvent!
+    var contactEvent1: ContactEvent!
+    var contactEvent2: ContactEvent!
+    var contactEvent3: ContactEvent!
     
     var service: PlistContactEventRecorder!
 
@@ -25,22 +25,22 @@ class PlistContactEventRecorderTests: XCTestCase {
         service = PlistContactEventRecorder()
         service.reset()
         
-        contactEvent1 = OldContactEvent(remoteContactId: UUID(), timestamp: epoch, rssi: 1)
-        contactEvent2 = OldContactEvent(remoteContactId: UUID(), timestamp: epoch, rssi: 1)
-        contactEvent3 = OldContactEvent(remoteContactId: UUID(), timestamp: epoch, rssi: 1)
+        contactEvent1 = ContactEvent(sonarId: UUID(), timestamp: epoch, rssiValues: [1], duration: 0)
+        contactEvent2 = ContactEvent(sonarId: UUID(), timestamp: epoch, rssiValues: [1], duration: 0)
+        contactEvent3 = ContactEvent(sonarId: UUID(), timestamp: epoch, rssiValues: [1], duration: 0)
     }
 
     func testRecordsContactEvents() {
-        XCTAssertEqual(service.oldContactEvents, [])
+        XCTAssertEqual(service.contactEvents, [])
 
         service.record(contactEvent1)
         service.record(contactEvent2)
         service.record(contactEvent3)
 
-        XCTAssertEqual(service.oldContactEvents.count, 3)
-        XCTAssertEqual(service.oldContactEvents[0], contactEvent1)
-        XCTAssertEqual(service.oldContactEvents[1], contactEvent2)
-        XCTAssertEqual(service.oldContactEvents[2], contactEvent3)
+        XCTAssertEqual(service.contactEvents.count, 3)
+        XCTAssertEqual(service.contactEvents[0], contactEvent1)
+        XCTAssertEqual(service.contactEvents[1], contactEvent2)
+        XCTAssertEqual(service.contactEvents[2], contactEvent3)
     }
 
     func testPersistsContactEvents() {
@@ -62,7 +62,7 @@ class PlistContactEventRecorderTests: XCTestCase {
         service = nil
 
         service = PlistContactEventRecorder()
-        XCTAssertEqual(service.oldContactEvents.count, 3)
+        XCTAssertEqual(service.contactEvents.count, 3)
     }
 
 }

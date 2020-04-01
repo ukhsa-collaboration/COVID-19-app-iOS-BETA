@@ -39,7 +39,7 @@ class PleaseSelfIsolateViewController: UIViewController, Storyboarded {
     }
 
     @IBAction func didTapNotify(_ sender: Any) {
-        let contactEvents = contactEventRecorder.oldContactEvents
+        let contactEvents = contactEventRecorder.contactEvents
 
         guard let request = requestFactory?.patchContactsRequest(contactEvents: contactEvents) else {
             return

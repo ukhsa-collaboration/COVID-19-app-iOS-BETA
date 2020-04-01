@@ -12,16 +12,11 @@ class PlistContactEventRecorder: ContactEventRecorder {
     
     // MARK - New contact events
     
-    func record(_ contactEvent: ContactEvent) {
-    }
-    
-    var contactEvents: [ContactEvent] = []
-    
     static let shared: PlistContactEventRecorder = PlistContactEventRecorder()
     
     internal let fileURL: URL
 
-    public private(set) var oldContactEvents: [OldContactEvent] = []
+    public private(set) var contactEvents: [ContactEvent] = []
 
     internal init() {
         if let dirUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
@@ -32,23 +27,25 @@ class PlistContactEventRecorder: ContactEventRecorder {
         readContactEvents()
     }
 
-    func record(_ contactEvent: OldContactEvent) {
-        oldContactEvents.append(contactEvent)
+    func record(_ contactEvent: ContactEvent) {
+        contactEvents.append(contactEvent)
         writeContactEvents()
     }
     
     private func readContactEvents() {
         guard FileManager.default.isReadableFile(atPath: fileURL.path) else {
-            oldContactEvents = []
+            contactEvents = []
             return
         }
         
         let decoder = PropertyListDecoder()
         do {
             let data = try Data(contentsOf: fileURL)
-            oldContactEvents = try decoder.decode([OldContactEvent].self, from: data)
+            contactEvents = try decoder.decode([ContactEvent].self, from: data)
         } catch {
-            assertionFailure("\(#file).\(#function) error reading contact events from disk: \(error)")
+            // TODO: This gets tripped when we ought to have done a migration of our persisted data
+            // we're not in prod, so ignore for now
+            // assertionFailure("\(#file).\(#function) error reading contact events from disk: \(error)")
         }
     }
     
@@ -59,7 +56,7 @@ class PlistContactEventRecorder: ContactEventRecorder {
             // TODO: These writing options mean if we reboot and are woken from background by a
             // BTLE event before the user unlocks their phone, we won't be able to record any data.
             // Can this happen in practice? Does it matter?
-            let data = try encoder.encode(oldContactEvents)
+            let data = try encoder.encode(contactEvents)
             try data.write(to: fileURL, options: [.completeFileProtectionUntilFirstUserAuthentication])
         } catch {
             assertionFailure("\(#file).\(#function) error writing contact events to disk: \(error)")
@@ -67,7 +64,7 @@ class PlistContactEventRecorder: ContactEventRecorder {
     }
     
     func reset() {
-        oldContactEvents = []
+        contactEvents = []
         do {
             try FileManager.default.removeItem(at: fileURL)
         } catch (let error as NSError) where error.code == NSFileNoSuchFileError {

@@ -11,11 +11,13 @@ import UIKit
 
 class DebugViewController: UITableViewController {
 
-    let persistance = Persistance.shared
     @IBOutlet weak var allowedDataSharingSwitch: UISwitch!
     @IBOutlet weak var interceptRequestsSwitch: UISwitch!
     @IBOutlet weak var newOnboardingSwitch: UISwitch!
 
+    let persistance = Persistance.shared
+    let contactEventRecorder = PlistContactEventRecorder.shared
+    
     override func viewDidLoad() {
         allowedDataSharingSwitch.isOn = persistance.allowedDataSharing
         newOnboardingSwitch.isOn = persistance.newOnboarding
@@ -52,13 +54,13 @@ class DebugViewController: UITableViewController {
             break
 
         case (1, 0):
-            PlistContactEventRecorder.shared.record(OldContactEvent(remoteContactId: UUID(), rssi: 42))
-            PlistContactEventRecorder.shared.record(OldContactEvent(remoteContactId: UUID(), rssi: 17))
-            PlistContactEventRecorder.shared.record(OldContactEvent(remoteContactId: UUID(), rssi: -2))
+            contactEventRecorder.record(ContactEvent(sonarId: UUID(), timestamp: Date(), rssiValues: [42, 17, -2], duration: 42))
+            contactEventRecorder.record(ContactEvent(sonarId: UUID(), timestamp: Date(), rssiValues: [17, -2, 42], duration: 17))
+            contactEventRecorder.record(ContactEvent(sonarId: UUID(), timestamp: Date(), rssiValues: [-2, 42, 17], duration: 2))
             show(title: "Events Recorded", message: "Dummy contact events have been recorded locally (but not sent to the server.)")
             
         case (1, 1):
-            PlistContactEventRecorder.shared.reset()
+            contactEventRecorder.reset()
             show(title: "Cleared", message: "All contact events cleared.")
             
         case (2, 0):

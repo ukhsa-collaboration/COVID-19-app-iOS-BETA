@@ -94,21 +94,15 @@ struct TestPeripheral: BTLEPeripheral {
 }
 
 class TestContactEventRecorder: ContactEventRecorder {
+
     var contactEvents: [ContactEvent] = []
-    
-    var oldContactEvents: [OldContactEvent] = []
     
     func record(_ contactEvent: ContactEvent) {
         contactEvents.append(contactEvent)
     }
     
-    func record(_ contactEvent: OldContactEvent) {
-        oldContactEvents.append(contactEvent)
-    }
-    
     func reset() {
         contactEvents = []
-        oldContactEvents = []
     }
     
 }
