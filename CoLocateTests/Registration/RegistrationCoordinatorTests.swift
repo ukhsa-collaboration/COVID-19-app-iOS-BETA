@@ -61,7 +61,7 @@ class RegistrationCoordinatorTests: TestCase {
         notificationManager.completion?(.success(true))
         coordinator.advanceAfterPushNotifications()
 
-        let vc = navController.topViewController as? BluetoothPermissionsViewController
+        let vc = navController.topViewController as? PermissionsViewController
 
         XCTAssertNotNil(vc)
         XCTAssertNotNil(vc?.bluetoothReadyDelegate)

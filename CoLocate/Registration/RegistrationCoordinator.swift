@@ -67,10 +67,10 @@ class RegistrationCoordinator {
             return notificationsViewController
 
         case .notificationsAccepted:
-            let bluetoothPermissionsViewController = BluetoothPermissionsViewController.instantiate()
-            bluetoothPermissionsViewController.bluetoothReadyDelegate = self
+            let permissionsViewController = PermissionsViewController.instantiate()
+            permissionsViewController.bluetoothReadyDelegate = self
 
-            return bluetoothPermissionsViewController
+            return permissionsViewController
 
         default:
             let registrationViewController = RegistrationViewController.instantiate()

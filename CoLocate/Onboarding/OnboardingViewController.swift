@@ -47,7 +47,7 @@ class OnboardingViewController: UINavigationController, Storyboarded {
         case .initial:
             vc = StartNowViewController.instantiate()
         case .permissions:
-            vc = BluetoothPermissionsViewController.instantiate()
+            vc = PermissionsViewController.instantiate()
         case .registration:
             vc = RegistrationViewController.instantiate()
         }

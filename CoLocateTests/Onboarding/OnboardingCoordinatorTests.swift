@@ -24,7 +24,7 @@ class OnboardingCoordinatorTests: TestCase {
         XCTAssertEqual(state, .initial)
     }
 
-    func testBluetoothPermissions() {
+    func testPermissions() {
         let persistanceDouble = PersistanceDouble(allowedDataSharing: true)
         let authManagerDouble = AuthorizationManagerDouble(bluetooth: .notDetermined)
         let onboardingCoordinator = OnboardingCoordinator(
