@@ -15,8 +15,8 @@ import FirebaseInstanceID
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     var window: UIWindow?
 
-    var broadcaster = BTLEBroadcaster()
-    var listener = BTLEListener()
+    let broadcaster: BTLEBroadcaster
+    let listener: BTLEListener
 
     let notificationManager: NotificationManager = ConcreteNotificationManager()
     let persistance = Persistance.shared
@@ -25,6 +25,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     var appCoordinator: AppCoordinator!
     
     override init() {
+        LoggingManager.bootstrap()
+        
+        broadcaster = BTLEBroadcaster()
+        listener = BTLEListener()
+        
         registrationService = ConcreteRegistrationService(session: URLSession.shared, notificationManager: notificationManager, notificationCenter: NotificationCenter.default)
 
         super.init()
