@@ -117,8 +117,6 @@ class RegistrationServiceTests: TestCase {
 
         // Simulate the notification containing the activationCode.
         // This should trigger the second request.
-        // TODO: Ideally we would test this in integration with the code that actually parses &
-        // dispatches the notification.
         let activationCode = "a3d2c477-45f5-4609-8676-c24558094600"
         pushNotificationDispatcher.handleNotification(userInfo: ["activationCode": activationCode]) { _ in }
 
