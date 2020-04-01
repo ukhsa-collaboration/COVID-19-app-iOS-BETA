@@ -13,7 +13,7 @@ protocol PushNotificationRequester {
     func advanceAfterPushNotifications()
 }
 
-protocol BluetoothAvailableDelegate {
+protocol BluetoothAvailableDelegate: class {
     func bluetoothIsAvailable()
 }
 

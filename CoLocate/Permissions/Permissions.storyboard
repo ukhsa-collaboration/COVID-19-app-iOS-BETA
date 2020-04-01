@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,88 +17,86 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jwq-wh-pRa">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="jkc-qW-fiJ">
+                                <rect key="frame" x="20" y="64" width="374" height="778"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7EH-zc-7Lw" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="346.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set up app permissions" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8tA-eG-2zG">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="41"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ix1-dU-Cbu">
+                                        <rect key="frame" x="0.0" y="51" width="374" height="142.5"/>
+                                        <string key="text">NHS AppName only works if Bluetooth is turned on and you agree to notifications from the app.  We need your permission to:  Use your phone's Bluetooth, to determine when you're near other people using this app.</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nyb-oH-K2Y">
+                                        <rect key="frame" x="0.0" y="203.5" width="374" height="101.5"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Cu-o3-tCX" customClass="LogoStrapline" customModule="CoLocate" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="64" id="lHF-nK-3ww"/>
-                                                </constraints>
-                                            </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Headline" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJB-VH-X6N">
-                                                <rect key="frame" x="20" y="96" width="374" height="41"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r75-d5-TbQ">
-                                                <rect key="frame" x="20" y="153" width="374" height="108.5"/>
-                                                <string key="text">Bacon ipsum dolor amet chuck cupim ground round pig, swine pastrami rump strip steak bresaola jowl. Ball tip corned beef pastrami ribeye pork loin sausage capicola shankle brisket alcatra. Cupim ham short loin meatloaf pastrami.</string>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7If-MU-XXx" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="293.5" width="374" height="33"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ov-A6-5HU">
+                                                <rect key="frame" x="8" y="8" width="358" height="86"/>
+                                                <string key="text">Will Bluetooth affect my phone's battery life?  This app uses low energy Bluetooth which will have minimal effect on your battery life.</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <state key="normal" title="Button"/>
-                                                <connections>
-                                                    <action selector="didTapContinue:" destination="feo-uu-Bmg" eventType="touchUpInside" id="cOY-po-85T"/>
-                                                </connections>
-                                            </button>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="backgroundColor" name="NHS Grey 4"/>
                                         <constraints>
-                                            <constraint firstItem="r75-d5-TbQ" firstAttribute="top" secondItem="gJB-VH-X6N" secondAttribute="bottom" constant="16" id="DeN-1X-KUr"/>
-                                            <constraint firstItem="3Cu-o3-tCX" firstAttribute="top" secondItem="7EH-zc-7Lw" secondAttribute="top" id="EgL-XH-Iuw"/>
-                                            <constraint firstItem="3Cu-o3-tCX" firstAttribute="width" secondItem="7EH-zc-7Lw" secondAttribute="width" id="GTO-jn-u9c"/>
-                                            <constraint firstItem="7If-MU-XXx" firstAttribute="top" secondItem="r75-d5-TbQ" secondAttribute="bottom" constant="32" id="OKV-nf-KoI"/>
-                                            <constraint firstAttribute="trailing" secondItem="7If-MU-XXx" secondAttribute="trailing" constant="20" symbolic="YES" id="OVg-Gx-Ahi"/>
-                                            <constraint firstItem="7If-MU-XXx" firstAttribute="leading" secondItem="7EH-zc-7Lw" secondAttribute="leading" constant="20" symbolic="YES" id="Og7-sU-YGw"/>
-                                            <constraint firstItem="r75-d5-TbQ" firstAttribute="leading" secondItem="7EH-zc-7Lw" secondAttribute="leading" constant="20" symbolic="YES" id="SLZ-Qy-PA3"/>
-                                            <constraint firstItem="gJB-VH-X6N" firstAttribute="top" secondItem="3Cu-o3-tCX" secondAttribute="bottom" constant="32" id="UzD-cZ-K7B"/>
-                                            <constraint firstAttribute="bottom" secondItem="7If-MU-XXx" secondAttribute="bottom" constant="20" symbolic="YES" id="acg-oY-xFb"/>
-                                            <constraint firstAttribute="trailing" secondItem="3Cu-o3-tCX" secondAttribute="trailing" id="dx5-Jx-QKh"/>
-                                            <constraint firstAttribute="trailing" secondItem="r75-d5-TbQ" secondAttribute="trailing" constant="20" symbolic="YES" id="gbK-iM-utY"/>
-                                            <constraint firstItem="gJB-VH-X6N" firstAttribute="leading" secondItem="7EH-zc-7Lw" secondAttribute="leading" constant="20" symbolic="YES" id="ocN-nu-fl5"/>
-                                            <constraint firstAttribute="trailing" secondItem="gJB-VH-X6N" secondAttribute="trailing" constant="20" symbolic="YES" id="qh1-iS-Gxd"/>
-                                            <constraint firstItem="3Cu-o3-tCX" firstAttribute="leading" secondItem="7EH-zc-7Lw" secondAttribute="leading" id="rmS-L6-Peu"/>
+                                            <constraint firstItem="6ov-A6-5HU" firstAttribute="leading" secondItem="nyb-oH-K2Y" secondAttribute="leading" constant="10" id="9zb-s5-Wda"/>
+                                            <constraint firstAttribute="trailing" secondItem="6ov-A6-5HU" secondAttribute="trailing" constant="10" id="A3f-vz-sED"/>
+                                            <constraint firstItem="6ov-A6-5HU" firstAttribute="top" secondItem="nyb-oH-K2Y" secondAttribute="top" constant="10" id="Ak5-a2-QuB"/>
+                                            <constraint firstAttribute="bottom" secondItem="6ov-A6-5HU" secondAttribute="bottom" constant="10" id="sWE-cZ-oZS"/>
                                         </constraints>
                                     </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send you push notifications, to let you know if you've been near someone with coronavirus symptoms." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3HM-8E-hDU">
+                                        <rect key="frame" x="0.0" y="315" width="374" height="61"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H13-U1-dnH" userLabel="Spacer">
+                                        <rect key="frame" x="0.0" y="386" width="374" height="352"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="qQq-dN-D3E"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ukx-6p-efz" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="748" width="374" height="30"/>
+                                        <state key="normal" title="Continue"/>
+                                        <connections>
+                                            <action selector="didTapContinue:" destination="feo-uu-Bmg" eventType="touchUpInside" id="SxA-oZ-9aH"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstItem="7EH-zc-7Lw" firstAttribute="width" secondItem="jwq-wh-pRa" secondAttribute="width" id="K2f-GY-cOp"/>
-                                    <constraint firstAttribute="trailing" secondItem="7EH-zc-7Lw" secondAttribute="trailing" id="Zmr-y4-vX9"/>
-                                    <constraint firstItem="7EH-zc-7Lw" firstAttribute="top" secondItem="jwq-wh-pRa" secondAttribute="top" id="bsi-cW-xFN"/>
-                                    <constraint firstItem="7EH-zc-7Lw" firstAttribute="leading" secondItem="jwq-wh-pRa" secondAttribute="leading" id="fld-6N-778"/>
-                                    <constraint firstAttribute="bottom" secondItem="7EH-zc-7Lw" secondAttribute="bottom" id="uBT-Vw-xYt"/>
-                                </constraints>
-                                <viewLayoutGuide key="contentLayoutGuide" id="18B-Sw-ej1"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="RNG-6T-a61"/>
-                            </scrollView>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="C3U-0c-1ip" firstAttribute="bottom" secondItem="jwq-wh-pRa" secondAttribute="bottom" id="6S8-Ic-ttL"/>
-                            <constraint firstItem="jwq-wh-pRa" firstAttribute="leading" secondItem="C3U-0c-1ip" secondAttribute="leading" id="8tN-x8-FsC"/>
-                            <constraint firstItem="jwq-wh-pRa" firstAttribute="top" secondItem="C3U-0c-1ip" secondAttribute="top" id="DI7-Yh-Kof"/>
-                            <constraint firstItem="C3U-0c-1ip" firstAttribute="trailing" secondItem="jwq-wh-pRa" secondAttribute="trailing" id="cLK-nw-saO"/>
+                            <constraint firstItem="jkc-qW-fiJ" firstAttribute="leading" secondItem="C3U-0c-1ip" secondAttribute="leading" constant="20" id="TgY-jk-K8u"/>
+                            <constraint firstItem="C3U-0c-1ip" firstAttribute="bottom" secondItem="jkc-qW-fiJ" secondAttribute="bottom" constant="20" id="VlH-mQ-lsU"/>
+                            <constraint firstItem="jkc-qW-fiJ" firstAttribute="top" secondItem="C3U-0c-1ip" secondAttribute="top" constant="20" id="bYt-dH-Snj"/>
+                            <constraint firstItem="C3U-0c-1ip" firstAttribute="trailing" secondItem="jkc-qW-fiJ" secondAttribute="trailing" constant="20" id="kdY-0c-HGh"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="C3U-0c-1ip"/>
                     </view>
                     <connections>
-                        <outlet property="bodyCopy" destination="r75-d5-TbQ" id="vq0-ux-Agd"/>
-                        <outlet property="bodyHeadline" destination="gJB-VH-X6N" id="eDA-PT-GPU"/>
-                        <outlet property="continueButton" destination="7If-MU-XXx" id="LQ8-Wu-ACk"/>
+                        <segue destination="0uw-Yh-qMh" kind="unwind" identifier="unwindFromPermissions" unwindAction="unwindFromPermissionsWithUnwindSegue:" id="9GD-iI-cjt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5gE-tb-NCo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="0uw-Yh-qMh" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-510" y="109"/>
+            <point key="canvasLocation" x="-510.14492753623193" y="108.48214285714285"/>
         </scene>
     </scenes>
+    <resources>
+        <namedColor name="NHS Grey 4">
+            <color red="0.84705882352941175" green="0.8666666666666667" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>
