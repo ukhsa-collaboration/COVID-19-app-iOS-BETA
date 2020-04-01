@@ -10,13 +10,16 @@ import UIKit
 import CoreData
 import Firebase
 import FirebaseInstanceID
+import Logging
+
+private let logger = Logger(label: "Application")
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     var window: UIWindow?
 
-    var broadcaster = BTLEBroadcaster()
-    var listener = BTLEListener()
+    let broadcaster: BTLEBroadcaster
+    let listener: BTLEListener
 
     let notificationManager: NotificationManager = ConcreteNotificationManager()
     let persistance = Persistance.shared
@@ -25,6 +28,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     var appCoordinator: AppCoordinator!
     
     override init() {
+        LoggingManager.bootstrap()
+        
+        broadcaster = BTLEBroadcaster()
+        listener = BTLEListener()
+        
         registrationService = ConcreteRegistrationService(session: URLSession.shared, notificationManager: notificationManager, notificationCenter: NotificationCenter.default)
 
         super.init()
@@ -35,7 +43,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-
+        
+        logger.info("Launched", metadata: Logger.Metadata(launchOptions: launchOptions))
+        
         application.registerForRemoteNotifications()
 
         notificationManager.configure()
@@ -69,10 +79,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        logger.info("Received notification", metadata: Logger.Metadata(dictionary: userInfo))
         
-        print("didReceiveRemoteNotification")
         notificationManager.handleNotification(userInfo: userInfo)
         completionHandler(UIBackgroundFetchResult.newData)
+    }
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        logger.info("Terminating")
+    }
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        logger.info("Did Enter Background")
+    }
+
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        logger.info("Will Enter Foreground")
     }
 
     // MARK: - Private
