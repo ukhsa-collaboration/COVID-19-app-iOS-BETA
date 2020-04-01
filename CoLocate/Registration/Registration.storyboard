@@ -17,25 +17,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="CBz-Dh-PrL">
-                                <rect key="frame" x="-10" y="338" width="434" height="548"/>
+                                <rect key="frame" x="20" y="64" width="374" height="778"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your app is set up and ready to go" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mu1-Cp-wpd">
-                                        <rect key="frame" x="157" y="109" width="120" height="41"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your app is set up and ready to go" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mu1-Cp-wpd">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="82"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" fixedFrame="YES" text="Thank you for playing your part in helping the NHS to stop the spread of coronavirus." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJK-Ke-e19">
-                                        <rect key="frame" x="20" y="20" width="394" height="218.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thank you for playing your part in helping the NHS to stop the spread of coronavirus." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJK-Ke-e19">
+                                        <rect key="frame" x="0.0" y="92" width="374" height="508"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="THs-gc-VA3" userLabel="Spacer">
-                                        <rect key="frame" x="97" y="210" width="240" height="128"/>
+                                        <rect key="frame" x="0.0" y="610" width="374" height="128"/>
                                         <subviews>
                                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="SjM-mR-XNC">
-                                                <rect key="frame" x="110" y="54" width="20" height="20"/>
+                                                <rect key="frame" x="177" y="54" width="20" height="20"/>
                                             </activityIndicatorView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -44,8 +44,8 @@
                                             <constraint firstItem="SjM-mR-XNC" firstAttribute="centerY" secondItem="THs-gc-VA3" secondAttribute="centerY" id="cbk-Je-IaM"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6BR-Fy-Tcr" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
-                                        <rect key="frame" x="26" y="498" width="382" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6BR-Fy-Tcr" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="748" width="374" height="30"/>
                                         <state key="normal" title="Start using the app"/>
                                         <connections>
                                             <action selector="didTapRegister:" destination="Jfw-Ex-QBB" eventType="touchUpInside" id="QXc-ih-K3H"/>

@@ -52,11 +52,11 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HUU-ko-6pU" userLabel="Spacer">
-                                        <rect key="frame" x="0.0" y="325.5" width="374" height="50"/>
+                                        <rect key="frame" x="0.0" y="325.5" width="374" height="402.5"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Mb-zt-2Ty" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="395.5" width="374" height="382.5"/>
+                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Mb-zt-2Ty" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="748" width="374" height="30"/>
                                         <state key="normal" title="Start now"/>
                                         <connections>
                                             <segue destination="asv-dx-knf" kind="show" id="m8S-mF-wxJ"/>
@@ -110,17 +110,17 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fgi-oe-et5">
-                                        <rect key="frame" x="0.0" y="385.5" width="374" height="128"/>
+                                    <view contentMode="scaleToFill" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Fgi-oe-et5">
+                                        <rect key="frame" x="0.0" y="385.5" width="374" height="56"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="I agree to share my app data with the NHS" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L8x-F3-ShS">
-                                                <rect key="frame" x="0.0" y="0.0" width="305" height="128"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="305" height="56"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Vtg-pY-JBT">
-                                                <rect key="frame" x="325" y="48.5" width="51" height="31"/>
+                                                <rect key="frame" x="325" y="12.5" width="51" height="31"/>
                                                 <connections>
                                                     <action selector="allowDataSharingChanged:" destination="asv-dx-knf" eventType="valueChanged" id="rQn-b2-czn"/>
                                                 </connections>
@@ -137,11 +137,11 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aKQ-5R-IDW" userLabel="Spacer">
-                                        <rect key="frame" x="0.0" y="533.5" width="374" height="50"/>
+                                        <rect key="frame" x="0.0" y="461.5" width="374" height="266.5"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="png-1j-34C" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="603.5" width="374" height="174.5"/>
+                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="png-1j-34C" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="748" width="374" height="30"/>
                                         <state key="normal" title="Continue"/>
                                         <connections>
                                             <action selector="continueTapped:" destination="asv-dx-knf" eventType="touchUpInside" id="aZ4-FY-C5b"/>
