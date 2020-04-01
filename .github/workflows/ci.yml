@@ -65,7 +65,7 @@ jobs:
           xcodebuild
           -scheme CoLocate
           test
-          -destination "platform=iOS Simulator,OS=13.0,name=iPhone 11"
+          -destination "platform=iOS Simulator,OS=13.4,name=iPhone 11"
           -showBuildTimingSummary
           -allowProvisioningUpdates
 
