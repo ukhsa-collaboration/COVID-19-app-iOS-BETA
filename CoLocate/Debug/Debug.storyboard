@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -290,6 +291,60 @@
             </objects>
             <point key="canvasLocation" x="274" y="-188"/>
         </scene>
+        <!--Logs-->
+        <scene sceneID="3g0-Xu-8xX">
+            <objects>
+                <navigationController id="zrE-Ty-mWo" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Logs" id="OJK-hn-NC8"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="kW2-uR-bBh">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Gaa-s4-fPm" kind="relationship" relationship="rootViewController" id="qcc-al-MrM"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bjb-14-sGg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="274" y="479"/>
+        </scene>
+        <!--Logs-->
+        <scene sceneID="sB0-Xf-fTQ">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="j7Q-mx-cph" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewController title="Logs" id="Gaa-s4-fPm" customClass="LogsViewController" customModule="CoLocate" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="IbZ-5w-x2I">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="kO6-Fz-tiP">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="kO6-Fz-tiP" firstAttribute="bottom" secondItem="IbZ-5w-x2I" secondAttribute="bottom" id="8ns-xg-YFc"/>
+                            <constraint firstItem="kO6-Fz-tiP" firstAttribute="leading" secondItem="IbZ-5w-x2I" secondAttribute="leading" id="Ipm-X8-MAT"/>
+                            <constraint firstItem="kO6-Fz-tiP" firstAttribute="trailing" secondItem="IbZ-5w-x2I" secondAttribute="trailing" id="Q8B-zr-wtO"/>
+                            <constraint firstItem="kO6-Fz-tiP" firstAttribute="top" secondItem="IbZ-5w-x2I" secondAttribute="top" id="dbX-v5-Udd"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="nMx-i8-4hL"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Logs" id="wmT-P1-5fK"/>
+                    <navigationItem key="navigationItem" title="Logs" id="RXG-Dy-a9P"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="textView" destination="kO6-Fz-tiP" id="BMI-Lr-tWS"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1195.6521739130435" y="478.79464285714283"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="rDY-T2-mnh">
             <objects>
@@ -302,6 +357,7 @@
                     <connections>
                         <segue destination="0E2-qN-oH1" kind="relationship" relationship="viewControllers" id="VGj-lc-d4r"/>
                         <segue destination="DR4-RC-K5h" kind="relationship" relationship="viewControllers" id="X9t-9O-9pu"/>
+                        <segue destination="zrE-Ty-mWo" kind="relationship" relationship="viewControllers" id="g3s-NN-sKF"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J9e-5y-jif" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

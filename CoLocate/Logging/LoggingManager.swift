@@ -9,7 +9,7 @@
 import Foundation
 import Logging
 
-class LoggingManager {
+class LoggingManager: NSObject {
     
     // `LoggingSystem` must be bootstrapped at most once.
     static let shared = LoggingManager()
@@ -22,12 +22,14 @@ class LoggingManager {
     private let io = DispatchQueue(label: "Logging IO")
     private let stream: OutputStream
     
-    // TODO: Use this to drive logging UI
-    private(set) var log = ""
+    @objc dynamic private(set) var log = ""
     
-    private init() {
+    private override init() {
+        stream = Self.isEnabled ? .makeForLogs() : OutputStream(toMemory: ())
+        
+        super.init()
+        
         if Self.isEnabled {
-            stream = .makeForLogs()
             LoggingSystem.bootstrap { label in
                 MultiplexLogHandler([
                     StreamLogHandler.standardOutput(label: label),
@@ -35,7 +37,6 @@ class LoggingManager {
                 ])
             }
         } else {
-            stream = OutputStream(toMemory: ())
             LoggingSystem.bootstrap { _ in NoOpLogHandler() }
         }
         
