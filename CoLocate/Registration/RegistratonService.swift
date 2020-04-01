@@ -49,7 +49,6 @@ class ConcreteRegistrationService: RegistrationService {
         
         pushNotificationDispatcher.registerHandler(forType: .registrationActivationCode) { userInfo, completionHandler in
             self.didReceiveActivationCode(activationCode: userInfo["activationCode"] as! String)
-            self.pushNotificationDispatcher.removeHandler(forType: .registrationActivationCode)
         }
 
         if pushNotificationDispatcher.pushToken != nil {
@@ -74,7 +73,7 @@ class ConcreteRegistrationService: RegistrationService {
 
             case .failure(let error):
                 print("\(#file) \(#function) Error making first registration request: \(error)")
-                self.completionHandler?(.failure(error))
+                self.fail(withError: error)
             }
         }
     }
@@ -106,15 +105,20 @@ class ConcreteRegistrationService: RegistrationService {
 
     
     private func succeed(registration: Registration) {
+        cleanup()
         let userInfo = [RegistrationCompleteNotificationRegistrationKey : registration]
         notificationCenter.post(name: RegistrationCompleteNotification, object: nil, userInfo: userInfo)
         completionHandler?(.success(()))
     }
     
     private func fail(withError error: Error) {
+        cleanup()
         completionHandler?(.failure(error))
     }
 
+    private func cleanup() {
+        self.pushNotificationDispatcher.removeHandler(forType: .registrationActivationCode)
+    }
 }
 
 

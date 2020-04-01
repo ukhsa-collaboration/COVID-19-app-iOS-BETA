@@ -58,6 +58,10 @@ class PushNotificationDispatcher {
         handlers[type] = nil
     }
     
+    func hasHandler(forType type: PushNotificationType) -> Bool {
+        return handlers.hasHandler(forType: type)
+    }
+    
     func handleNotification(userInfo: [AnyHashable : Any], completionHandler: @escaping PushNotificationCompletionHandler) {
         // TODO: Move this out of the push notification dispatcher?
         if let status = userInfo["status"] {
@@ -144,6 +148,10 @@ private class HandlerDictionary {
             
             handlers[index] = newValue
         }
+    }
+    
+    func hasHandler(forType type: PushNotificationType) -> Bool {
+        return handlers[type] != nil
     }
     
     private func complainAboutMissingHandler(type: PushNotificationType) {

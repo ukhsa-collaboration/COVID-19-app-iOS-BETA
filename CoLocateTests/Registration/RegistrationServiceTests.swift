@@ -77,6 +77,9 @@ class RegistrationServiceTests: TestCase {
         XCTAssertNotNil(observer.lastNotification)
         let notifiedRegistration = observer.lastNotification?.userInfo?[RegistrationCompleteNotificationRegistrationKey] as? Registration
         XCTAssertEqual(notifiedRegistration, storedRegistration)
+        
+        // Make sure we cleaned up after ourselves
+        XCTAssertFalse(pushNotificationDispatcher.hasHandler(forType: .registrationActivationCode))
     }
     
     func testRegistration_withoutPreExistingPushToken() throws {
@@ -144,6 +147,33 @@ class RegistrationServiceTests: TestCase {
         XCTAssertNotNil(observer.lastNotification)
         let notifiedRegistration = observer.lastNotification?.userInfo?[RegistrationCompleteNotificationRegistrationKey] as? Registration
         XCTAssertEqual(notifiedRegistration, storedRegistration)
+        
+        // Make sure we cleaned up after ourselves
+        XCTAssertFalse(pushNotificationDispatcher.hasHandler(forType: .registrationActivationCode))
+    }
+    
+    func testRegistration_cleansUpAfterInitialRequestFailure() throws {
+        let session = SessionDouble()
+        let notificationCenter = NotificationCenter()
+        let pushNotificationDispatcher = PushNotificationDispatcher(
+            notificationCenter: notificationCenter,
+            userNotificationCenter: UserNotificationCenterDouble(),
+            persistence: PersistenceDouble()
+        )
+        pushNotificationDispatcher.pushToken = "the current push token"
+        let registrationService = ConcreteRegistrationService(session: session, pushNotificationDispatcher: pushNotificationDispatcher, notificationCenter: notificationCenter)
+
+        registrationService.register(completionHandler: { _ in })
+        
+        session.requestSent = nil
+        session.executeCompletion!(Result<(), Error>.failure(ErrorForTest()))
+
+        // We should have unsusbscribed from push notifications.
+        XCTAssertFalse(pushNotificationDispatcher.hasHandler(forType: .registrationActivationCode))
+        
+        // We should also have unsubscribe from the PushTokenReceivedNotification. We can't test that directly but we can observe its effects.
+        notificationCenter.post(name: PushTokenReceivedNotification, object: nil, userInfo: nil)
+        XCTAssertNil(session.requestSent)
     }
 }
 
