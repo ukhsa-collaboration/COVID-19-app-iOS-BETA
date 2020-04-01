@@ -37,7 +37,7 @@ class AuthorizationManager {
             let manager = CBCentralManager()
             switch manager.state {
             case .unknown:
-                fatalError()
+                return .notDetermined
             case .resetting:
                 fatalError()
             case .unsupported:
