@@ -11,7 +11,9 @@ import UIKit
 class OnboardingViewController: UINavigationController, Storyboarded {
     static let storyboardName = "Onboarding"
 
-    let onboardingCoordinator = OnboardingCoordinator()
+    var onboardingCoordinator = OnboardingCoordinator()
+    var uiQueue: TestableQueue = DispatchQueue.main
+
     var rootViewController: UIViewController! {
         didSet { updateState() }
     }
@@ -29,7 +31,7 @@ class OnboardingViewController: UINavigationController, Storyboarded {
         onboardingCoordinator.state { [weak self] state in
             guard let self = self else { return }
 
-            DispatchQueue.main.async { self.handle(state: state) }
+            self.uiQueue.async { self.handle(state: state) }
         }
     }
 
