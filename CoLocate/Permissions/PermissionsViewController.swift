@@ -13,7 +13,7 @@ class PermissionsViewController: UIViewController, Storyboarded {
     static let storyboardName = "Permissions"
 
     var authManager = AuthorizationManager()
-    var notificationManager: PushNotificationManager = ConcretePushNotificationManager()
+    var pushNotificationManager: PushNotificationManager = ConcretePushNotificationManager()
     var persistence = Persistence.shared
     var uiQueue: TestableQueue = DispatchQueue.main
     var broadcaster: BTLEBroadcaster = (UIApplication.shared.delegate as! AppDelegate).broadcaster
@@ -47,7 +47,7 @@ class PermissionsViewController: UIViewController, Storyboarded {
     }
 
     private func requestNotificationPermissions() {
-        notificationManager.requestAuthorization { [weak self] result in
+        pushNotificationManager.requestAuthorization { [weak self] result in
             guard let self = self else { return }
 
             switch result {
