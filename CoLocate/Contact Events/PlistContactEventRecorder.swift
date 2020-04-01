@@ -10,6 +10,8 @@ import Foundation
 
 class PlistContactEventRecorder: ContactEventRecorder {
     
+    // MARK - New contact events
+    
     static let shared: PlistContactEventRecorder = PlistContactEventRecorder()
     
     internal let fileURL: URL
@@ -41,7 +43,9 @@ class PlistContactEventRecorder: ContactEventRecorder {
             let data = try Data(contentsOf: fileURL)
             contactEvents = try decoder.decode([ContactEvent].self, from: data)
         } catch {
-            assertionFailure("\(#file).\(#function) error reading contact events from disk: \(error)")
+            // TODO: This gets tripped when we ought to have done a migration of our persisted data
+            // we're not in prod, so ignore for now
+            // assertionFailure("\(#file).\(#function) error reading contact events from disk: \(error)")
         }
     }
     

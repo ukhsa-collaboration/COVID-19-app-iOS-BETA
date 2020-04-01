@@ -8,22 +8,41 @@
 
 import UIKit
 
+
 class DebugViewController: UITableViewController {
 
+    @IBOutlet weak var allowedDataSharingSwitch: UISwitch!
+    @IBOutlet weak var interceptRequestsSwitch: UISwitch!
+    @IBOutlet weak var newOnboardingSwitch: UISwitch!
+
+    let persistance = Persistance.shared
+    let contactEventRecorder = PlistContactEventRecorder.shared
+    
+    override func viewDidLoad() {
+        allowedDataSharingSwitch.isOn = persistance.allowedDataSharing
+        newOnboardingSwitch.isOn = persistance.newOnboarding
+
+        #if DEBUG
+            interceptRequestsSwitch.isOn = InterceptingSession.interceptNextRequest
+            newOnboardingSwitch.isEnabled = true
+        #else
+            newOnboardingSwitch.isEnabled = false
+        #endif
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
 
         switch (indexPath.section, indexPath.row) {
         case (0, 0):
-            try! SecureRegistrationStorage.clear()
-            DiagnosisService.shared.recordDiagnosis(.unknown)
+            persistance.clear()
             show(title: "Cleared", message: "Registration and diagnosis data has been cleared. Please stop and re-start the application.")
 
         case (0, 1):
             let alertController = UIAlertController(title: "Set diagnosis", message: nil, preferredStyle: .actionSheet)
             for diagnosis in Diagnosis.allCases {
                 alertController.addAction(UIAlertAction(title: "\(diagnosis)", style: .default) { _ in
-                    DiagnosisService.shared.recordDiagnosis(diagnosis)
+                    Persistance.shared.diagnosis = diagnosis
                     self.show(title: "Cleared", message: "Diagnosis data has been set. Please stop and re-start the application.")
                 })
             }
@@ -31,19 +50,22 @@ class DebugViewController: UITableViewController {
 
             present(alertController, animated: true, completion: nil)
 
+        case (0, 2):
+            break
+
         case (1, 0):
-            PlistContactEventRecorder.shared.record(ContactEvent(remoteContactId: UUID(), rssi: 42))
-            PlistContactEventRecorder.shared.record(ContactEvent(remoteContactId: UUID(), rssi: 17))
-            PlistContactEventRecorder.shared.record(ContactEvent(remoteContactId: UUID(), rssi: -2))
+            contactEventRecorder.record(ContactEvent(sonarId: UUID(), timestamp: Date(), rssiValues: [42, 17, -2], duration: 42))
+            contactEventRecorder.record(ContactEvent(sonarId: UUID(), timestamp: Date(), rssiValues: [17, -2, 42], duration: 17))
+            contactEventRecorder.record(ContactEvent(sonarId: UUID(), timestamp: Date(), rssiValues: [-2, 42, 17], duration: 2))
             show(title: "Events Recorded", message: "Dummy contact events have been recorded locally (but not sent to the server.)")
             
         case (1, 1):
-            PlistContactEventRecorder.shared.reset()
+            contactEventRecorder.reset()
             show(title: "Cleared", message: "All contact events cleared.")
             
         case (2, 0):
             do {
-                guard let registration = try SecureRegistrationStorage.shared.get() else {
+                guard let registration = persistance.registration else {
                     throw NSError()
                 }
                 let delay = 15
@@ -60,6 +82,9 @@ class DebugViewController: UITableViewController {
                 show(title: "Failed", message: "Couldn't get sonarId, has this device completed registration?")
             }
 
+        case (3, 0), (4, 0):
+            break
+
         default:
             fatalError()
         }
@@ -69,6 +94,25 @@ class DebugViewController: UITableViewController {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Ok", style: .default))
         present(alertController, animated: true, completion: nil)
+    }
+
+    @IBAction func allowedDataSharingChanged(_ sender: UISwitch) {
+        persistance.allowedDataSharing = sender.isOn
+    }
+
+    @IBAction func interceptRegistrationRequestsChanged(_ sender: UISwitch) {
+        #if DEBUG
+        InterceptingSession.interceptNextRequest = sender.isOn
+        #else
+        let alert = UIAlertController(title: "Unavailable", message: "This dangerous action is only available in debug builds.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
+        sender.isOn = false
+        #endif
+    }
+
+    @IBAction func newOnboardingChanged(_ sender: UISwitch) {
+        persistance.newOnboarding = sender.isOn
     }
 
 }

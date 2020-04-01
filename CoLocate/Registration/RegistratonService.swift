@@ -9,22 +9,31 @@
 import Foundation
 
 protocol RegistrationService {
-    func register(completionHandler: @escaping ((Result<Registration, Error>) -> Void))
+    func register(completionHandler: @escaping ((Result<Void, Error>) -> Void))
 }
 
+let RegistrationCompleteNotification = NSNotification.Name("RegistrationCompleteNotification")
+let RegistrationCompleteNotificationRegistrationKey = "registration"
+
 class ConcreteRegistrationService: RegistrationService {
-    var session: Session
-    var registrationStorage: SecureRegistrationStorage = SecureRegistrationStorage.shared
+    let session: Session
+    let registrationStorage: SecureRegistrationStorage = SecureRegistrationStorage.shared
     var notificationManager: NotificationManager
+    let notificationCenter: NotificationCenter
     var registerWhenTokenReceived = false
-    var completionHandler: ((Result<Registration, Error>) -> Void)?
+    var completionHandler: ((Result<Void, Error>) -> Void)?
     
-    init(session: Session, notificationManager: NotificationManager) {
+    init(session: Session, notificationManager: NotificationManager, notificationCenter: NotificationCenter) {
+        #if DEBUG
+        self.session = InterceptingSession(underlyingSession: session)
+        #else
         self.session = session
+        #endif
         self.notificationManager = notificationManager
+        self.notificationCenter = notificationCenter
     }
     
-    func register(completionHandler: @escaping ((Result<Registration, Error>) -> Void)) {
+    func register(completionHandler: @escaping ((Result<Void, Error>) -> Void)) {
         self.completionHandler = completionHandler
         notificationManager.delegate = self
 
@@ -58,7 +67,9 @@ class ConcreteRegistrationService: RegistrationService {
 
     private func succeed(registration: Registration) {
         notificationManager.delegate = nil
-        completionHandler?(.success((registration)))
+        let userInfo = [RegistrationCompleteNotificationRegistrationKey : registration]
+        notificationCenter.post(name: RegistrationCompleteNotification, object: nil, userInfo: userInfo)
+        completionHandler?(.success(()))
     }
     
     private func fail(withError error: Error) {
@@ -113,3 +124,50 @@ extension ConcreteRegistrationService: NotificationManagerDelegate {
     }
 
 }
+
+
+#if DEBUG
+class InterceptingSession: Session {
+    static var interceptNextRequest: Bool  = false
+    
+    var delegateQueue: OperationQueue {
+        get {
+            return underlyingSession.delegateQueue
+        }
+    }
+    
+    private let underlyingSession: Session
+    
+    init(underlyingSession: Session) {
+        self.underlyingSession = underlyingSession
+    }
+    
+    func execute<R>(_ request: R, queue: OperationQueue, completion: @escaping (Result<R.ResponseType, Error>) -> Void) where R : Request {
+        
+        if InterceptingSession.interceptNextRequest {
+            interceptRequest(request)
+        } else {
+            underlyingSession.execute(request, queue: queue, completion: completion)
+        }
+    }
+    
+    func execute<R>(_ request: R, completion: @escaping (Result<R.ResponseType, Error>) -> Void) where R : Request {
+        
+        if InterceptingSession.interceptNextRequest {
+            interceptRequest(request)
+        } else {
+            underlyingSession.execute(request, completion: completion)
+        }
+    }
+    
+    private func interceptRequest<R: Request>(_ request: R) {
+        InterceptingSession.interceptNextRequest = false
+        print("Intercepted an HTTP request. This request will not be sent:\n\(request)")
+        if case .post(let data) = request.method {
+            if let s = String(data: data, encoding: .utf8) {
+                print("Request body as string: \(s)")
+            }
+        }
+    }
+}
+#endif

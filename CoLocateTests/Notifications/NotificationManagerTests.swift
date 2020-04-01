@@ -12,22 +12,21 @@ import XCTest
 import Firebase
 @testable import CoLocate
 
-class NotificationManagerTests: XCTestCase {
+class NotificationManagerTests: TestCase {
+
     override func setUp() {
         super.setUp()
 
         FirebaseAppDouble.configureCalled = false
-        DiagnosisService.clear()
     }
 
     func testConfigure() {
         let messaging = MessagingDouble()
         let notificationManager = ConcreteNotificationManager(
-            uiQueue: .main,
             firebase: FirebaseAppDouble.self,
             messagingFactory: { messaging },
             userNotificationCenter: NotificationCenterDouble(),
-            diagnosisService: DiagnosisService()
+            persistance: Persistance()
         )
 
         notificationManager.configure()
@@ -38,11 +37,10 @@ class NotificationManagerTests: XCTestCase {
     func testPushTokenHandling() {
         let messaging = MessagingDouble()
         let notificationManager = ConcreteNotificationManager(
-            uiQueue: .main,
             firebase: FirebaseAppDouble.self,
             messagingFactory: { messaging },
             userNotificationCenter: NotificationCenterDouble(),
-            diagnosisService: DiagnosisService()
+            persistance: Persistance()
         )
         let delegate = NotificationManagerDelegateDouble()
         notificationManager.delegate = delegate
@@ -57,17 +55,15 @@ class NotificationManagerTests: XCTestCase {
     func testRequestAuthorization_success() {
         let notificationCenterDouble = NotificationCenterDouble()
         let notificationManager = ConcreteNotificationManager(
-            uiQueue: DispatchQueue.test,
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
             userNotificationCenter: notificationCenterDouble,
-            diagnosisService: DiagnosisService()
+            persistance: Persistance()
         )
 
-        let applicationDouble = ApplicationDouble()
         var granted: Bool?
         var error: Error?
-        notificationManager.requestAuthorization(application: applicationDouble) { result in
+        notificationManager.requestAuthorization { result in
             switch result {
             case .success(let g): granted = g
             case .failure(let e): error = e
@@ -77,35 +73,32 @@ class NotificationManagerTests: XCTestCase {
         notificationCenterDouble.requestAuthCompletionHandler!(true, nil)
         DispatchQueue.test.flush()
 
-        XCTAssertTrue(applicationDouble.registeredForRemoteNotifications)
         XCTAssertTrue(granted!)
         XCTAssertNil(error)
     }
     
     func testHandleNotification_savesPotentialDiagnosis() {
-        let diagnosisService = DiagnosisService()
+        let persistance = Persistance()
         let notificationManager = ConcreteNotificationManager(
-            uiQueue: DispatchQueue.test,
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
             userNotificationCenter: NotificationCenterDouble(),
-            diagnosisService: diagnosisService
+            persistance: persistance
         )
         
         notificationManager.handleNotification(userInfo: ["status" : "Potential"])
         
-        XCTAssertEqual(diagnosisService.currentDiagnosis, .potential)
+        XCTAssertEqual(persistance.diagnosis, .potential)
     }
 
     func testHandleNotification_sendsLocalNotificationWithPotentialStatus() {
-        let diagnosisService = DiagnosisService()
+        let persistance = Persistance()
         let notificationCenterDouble = NotificationCenterDouble()
         let notificationManager = ConcreteNotificationManager(
-            uiQueue: DispatchQueue.test,
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
             userNotificationCenter: notificationCenterDouble,
-            diagnosisService: diagnosisService
+            persistance: persistance
         )
 
         notificationManager.handleNotification(userInfo: ["status" : "Potential"])
@@ -114,29 +107,27 @@ class NotificationManagerTests: XCTestCase {
     }
     
     func testHandleNotification_doesNotSaveOtherDiagnosis() {
-        let diagnosisService = DiagnosisService()
+        let persistance = Persistance()
         let notificationManager = ConcreteNotificationManager(
-            uiQueue: DispatchQueue.test,
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
             userNotificationCenter: NotificationCenterDouble(),
-            diagnosisService: diagnosisService
+            persistance: persistance
         )
         
         notificationManager.handleNotification(userInfo: ["status" : "infected"])
         
-        XCTAssertEqual(diagnosisService.currentDiagnosis, .unknown)
+        XCTAssertEqual(persistance.diagnosis, .unknown)
     }
 
     func testHandleNotification_doesNotSendLocalNotificationWhenStatusIsNotPotential() {
-        let diagnosisService = DiagnosisService()
+        let persistance = Persistance()
         let notificationCenterDouble = NotificationCenterDouble()
         let notificationManager = ConcreteNotificationManager(
-            uiQueue: DispatchQueue.test,
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
             userNotificationCenter: notificationCenterDouble,
-            diagnosisService: diagnosisService
+            persistance: persistance
         )
 
         notificationManager.handleNotification(userInfo: ["status" : "infected"])
@@ -146,11 +137,10 @@ class NotificationManagerTests: XCTestCase {
     
     func testHandleNotification_forwardsNonDiagnosisNotificationsToDelegate() {
         let notificationManager = ConcreteNotificationManager(
-            uiQueue: DispatchQueue.test,
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
             userNotificationCenter: NotificationCenterDouble(),
-            diagnosisService: DiagnosisService()
+            persistance: Persistance()
         )
         let delegate = NotificationManagerDelegateDouble()
         notificationManager.delegate = delegate
@@ -161,14 +151,13 @@ class NotificationManagerTests: XCTestCase {
     }
 
     func testHandleNotification_foreGroundedLocalNotification() {
-        let diagnosisService = DiagnosisService()
+        let persistance = Persistance()
         let notificationCenterDouble = NotificationCenterDouble()
         let notificationManager = ConcreteNotificationManager(
-            uiQueue: DispatchQueue.test,
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
             userNotificationCenter: notificationCenterDouble,
-            diagnosisService: diagnosisService
+            persistance: persistance
         )
 
         notificationManager.handleNotification(userInfo: [:])

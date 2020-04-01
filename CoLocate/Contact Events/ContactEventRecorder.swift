@@ -8,19 +8,18 @@
 import Foundation
 
 struct ContactEvent: Equatable, Codable {
-    let remoteContactId: UUID
+    let sonarId: UUID
     let timestamp: Date
-    let rssi: Int
-    
-    init(remoteContactId: UUID, timestamp: Date = Date(), rssi: Int) {
-        self.remoteContactId = remoteContactId
-        self.timestamp = timestamp
-        self.rssi = rssi
-    }
+    let rssiValues: [Int]
+    let duration: TimeInterval
 }
 
 protocol ContactEventRecorder {
-    func record(_ contactEvent: ContactEvent)
-    func reset()
+    
     var contactEvents: [ContactEvent] { get }
+    
+    func record(_ contactEvent: ContactEvent)
+    
+    func reset()
+
 }

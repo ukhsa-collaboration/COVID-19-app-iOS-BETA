@@ -9,6 +9,21 @@
 import Foundation
 import CoreBluetooth
 
+protocol BTLEPeripheral {
+    var identifier: UUID { get }
+}
+
+extension CBPeripheral: BTLEPeripheral {
+}
+
+protocol BTLEListenerDelegate {
+    func btleListener(_ listener: BTLEListener, didConnect peripheral: BTLEPeripheral)
+    func btleListener(_ listener: BTLEListener, didDisconnect peripheral: BTLEPeripheral, error: Error?)
+    func btleListener(_ listener: BTLEListener, didFindSonarId sonarId: UUID, forPeripheral peripheral: BTLEPeripheral)
+    func btleListener(_ listener: BTLEListener, didReadRSSI RSSI: Int, forPeripheral peripheral: BTLEPeripheral)
+    func btleListener(_ listener: BTLEListener, shouldReadRSSIFor peripheral: BTLEPeripheral) -> Bool
+}
+
 protocol BTLEListenerStateDelegate {
     func btleListener(_ listener: BTLEListener, didUpdateState state: CBManagerState)
 }
@@ -16,6 +31,7 @@ protocol BTLEListenerStateDelegate {
 class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
 
     var stateDelegate: BTLEListenerStateDelegate?
+    var delegate: BTLEListenerDelegate?
     var contactEventRecorder: ContactEventRecorder
     
     var centralManager: CBCentralManager?
@@ -91,6 +107,25 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         peripheral.delegate = self
         peripheralList.append(peripheral)
         peripheral.discoverServices([BTLEBroadcaster.sonarServiceUUID])
+        
+//        peripheral.readRSSI()
+    }
+    
+    func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?) {
+        guard error == nil else {
+            print("\(#file).\(#function) error reading RSSI: \(error!)")
+            return
+        }
+        print("\(#file).\(#function) didReadRSSI for peripheral: \(peripheral.identifier): \(RSSI)")
+
+//        delegate?.btleListener(self, didReadRSSI: RSSI.intValue, forPeripheral: peripheral)
+//        
+//        if delegate?.btleListener(self, shouldReadRSSIFor: peripheral) ?? false {
+//            Timer.scheduledTimer(withTimeInterval: 20, repeats: false) { timer in
+//                peripheral.readRSSI()
+//            }
+//        }
+        
     }
     
     func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
@@ -178,7 +213,7 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
 
         print("recording a contact event at \(Date()) with rssi \(rssi)")
 
-        let contactEvent = ContactEvent(remoteContactId: uuid, rssi: rssi)
+        let contactEvent = ContactEvent(sonarId: uuid, timestamp: Date(), rssiValues: [rssi], duration: 0)
         contactEventRecorder.record(contactEvent)
     }
 

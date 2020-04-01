@@ -32,9 +32,9 @@ class PatchContactEventsRequestTests: XCTestCase {
     
     override func setUp() {
         contactEvents = [
-            ContactEvent(remoteContactId: remoteSonarId1, timestamp: timestamp1, rssi: rssi1),
-            ContactEvent(remoteContactId: remoteSonarId2, timestamp: timestamp2, rssi: rssi2),
-            ContactEvent(remoteContactId: remoteSonarId3, timestamp: timestamp3, rssi: rssi3)
+            ContactEvent(sonarId: remoteSonarId1, timestamp: timestamp1, rssiValues: [rssi1], duration: 0),
+            ContactEvent(sonarId: remoteSonarId2, timestamp: timestamp2, rssiValues: [rssi2], duration: 0),
+            ContactEvent(sonarId: remoteSonarId3, timestamp: timestamp3, rssiValues: [rssi3], duration: 0)
         ]
 
         let registration = Registration(id: anonymousId, secretKey: dummyKey)
@@ -62,23 +62,23 @@ class PatchContactEventsRequestTests: XCTestCase {
         let contactEvents = try! decoder.decode(PatchContactEventsRequest.JSONWrapper.self, from: request.body!).contactEvents
 
         XCTAssertEqual(contactEvents.count, 3)
-        XCTAssertEqual(contactEvents[0].remoteContactId, remoteSonarId1)
+        XCTAssertEqual(contactEvents[0].sonarId, remoteSonarId1)
         XCTAssertEqual(contactEvents[0].timestamp, timestamp1)
-        XCTAssertEqual(contactEvents[0].rssi, rssi1)
+        XCTAssertEqual(contactEvents[0].rssiValues.first, rssi1)
 
-        XCTAssertEqual(contactEvents[1].remoteContactId, remoteSonarId2)
+        XCTAssertEqual(contactEvents[1].sonarId, remoteSonarId2)
         XCTAssertEqual(contactEvents[1].timestamp, timestamp2)
-        XCTAssertEqual(contactEvents[1].rssi, rssi2)
+        XCTAssertEqual(contactEvents[1].rssiValues.first, rssi2)
 
-        XCTAssertEqual(contactEvents[2].remoteContactId, remoteSonarId3)
+        XCTAssertEqual(contactEvents[2].sonarId, remoteSonarId3)
         XCTAssertEqual(contactEvents[2].timestamp, timestamp3)
-        XCTAssertEqual(contactEvents[2].rssi, rssi3)
+        XCTAssertEqual(contactEvents[2].rssiValues.first, rssi3)
     }
 
     func testJsonSerialisedContactEvent() {
         let expectedJsonString =
 """
-{"contactEvents":[{"rssi":-11,"remoteContactId":"62D583B3-052C-4CF9-808C-0B96080F0DB8","timestamp":"1970-01-01T00:00:00Z"},{"rssi":-1,"remoteContactId":"AA94DF14-4077-4D6B-9712-D90861D8BDE7","timestamp":"1970-01-01T00:00:10Z"},{"rssi":-21,"remoteContactId":"2F13DB8A-7A5E-47C9-91D0-04F6AE19D869","timestamp":"1970-01-01T00:01:40Z"}]}
+{"contactEvents":[{"rssiValues":[-11],"timestamp":"1970-01-01T00:00:00Z","sonarId":"62D583B3-052C-4CF9-808C-0B96080F0DB8","duration":0},{"rssiValues":[-1],"timestamp":"1970-01-01T00:00:10Z","sonarId":"AA94DF14-4077-4D6B-9712-D90861D8BDE7","duration":0},{"rssiValues":[-21],"timestamp":"1970-01-01T00:01:40Z","sonarId":"2F13DB8A-7A5E-47C9-91D0-04F6AE19D869","duration":0}]}
 """
         XCTAssertEqual(String(data: request.body!, encoding: .utf8)!, expectedJsonString)
     }

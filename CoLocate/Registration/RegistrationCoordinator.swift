@@ -17,14 +17,6 @@ protocol BluetoothAvailableDelegate {
     func bluetoothIsAvailable()
 }
 
-protocol RegistrationSavedDelegate {
-    func registrationDidFinish(with registration: Registration)
-}
-
-protocol RegistrationCoordinatorDelegate {
-    func didCompleteRegistration(_ registration: Registration)
-}
-
 fileprivate enum RegisteredState : Int {
     case unregistered
     case notificationsAccepted
@@ -34,35 +26,35 @@ fileprivate enum RegisteredState : Int {
 
 class RegistrationCoordinator {
 
-    let application: Application
     let navController: UINavigationController
     let notificationManager: NotificationManager
     let registrationService: RegistrationService
-    let registrationStorage: SecureRegistrationStorage
-    let delegate: RegistrationCoordinatorDelegate
+    let persistance: Persistance
+    let notificationCenter: NotificationCenter
 
     fileprivate var currentState: RegisteredState = .unregistered
 
-    init(application: Application,
-         navController: UINavigationController,
+    init(navController: UINavigationController,
          notificationManager: NotificationManager,
          registrationService: RegistrationService,
-         registrationStorage: SecureRegistrationStorage,
-         delegate: RegistrationCoordinatorDelegate) {
-        self.delegate = delegate
-        self.application = application
+         persistance: Persistance,
+         notificationCenter: NotificationCenter) {
+        
         self.navController = navController
         self.notificationManager = notificationManager
         self.registrationService = registrationService
-        self.registrationStorage = registrationStorage
+        self.persistance = persistance
+        self.notificationCenter = notificationCenter
+        
+        notificationCenter.addObserver(self, selector: #selector(didReceiveNsNotification(notification:)), name: RegistrationCompleteNotification, object: nil)
+    }
+    
+    deinit {
+        notificationCenter.removeObserver(self)
     }
 
     func start() {
-        if let registration = try? registrationStorage.get() {
-            delegate.didCompleteRegistration(registration)
-        } else {
-            navController.viewControllers = [nextViewController()]
-        }
+        navController.viewControllers = [nextViewController()]
     }
 
     func nextViewController() -> UIViewController {
@@ -83,18 +75,21 @@ class RegistrationCoordinator {
         default:
             let registrationViewController = RegistrationViewController.instantiate()
 
-            registrationViewController.delegate = self
             registrationViewController.registrationService = registrationService
             registrationViewController.notificationManager = notificationManager
 
             return registrationViewController
         }
     }
+    
+    @objc private func didReceiveNsNotification(notification: NSNotification) {
+        self.currentState = .completed
+    }
 }
 
 extension RegistrationCoordinator: PushNotificationRequester {
     func requestPushNotifications(completion: @escaping (Result<Bool, Error>) -> Void) {
-        notificationManager.requestAuthorization(application: application) { (result) in
+        notificationManager.requestAuthorization { (result) in
             switch result {
             case .success(let granted):
                 guard granted else {
@@ -127,14 +122,4 @@ extension RegistrationCoordinator: BluetoothAvailableDelegate {
 
         self.navController.pushViewController(self.nextViewController(), animated: true)
     }
-}
-
-extension RegistrationCoordinator: RegistrationSavedDelegate {
-    
-    func registrationDidFinish(with registration: Registration) {
-        self.currentState = .completed
-
-        delegate.didCompleteRegistration(registration)
-    }
-
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import XCTest
 @testable import CoLocate
 
 func inWindowHierarchy(viewController: UIViewController, closure: (() -> Void)) {
@@ -16,6 +17,14 @@ func inWindowHierarchy(viewController: UIViewController, closure: (() -> Void)) 
     closure()
 
     appDelegate.window?.rootViewController = nil
+}
+
+class TestCase: XCTestCase {
+    override func setUp() {
+        super.setUp()
+
+        Persistance.shared.clear()
+    }
 }
 
 extension DispatchQueue {
