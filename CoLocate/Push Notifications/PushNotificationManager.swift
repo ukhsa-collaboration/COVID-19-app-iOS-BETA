@@ -42,31 +42,31 @@ protocol PushNotificationManager {
 
 
 class ConcretePushNotificationManager: NSObject, PushNotificationManager {
+    var pushToken: String? {
+        get { dispatcher.pushToken }
+    }
 
     static let shared = ConcretePushNotificationManager()
 
-    let firebase: TestableFirebaseApp.Type
-    let messagingFactory: () -> TestableMessaging
-    let userNotificationCenter: UserNotificationCenter
-    let notificationCenter: NotificationCenter
-    let persistence: Persistence
-    private var handlers = HandlerDictionary()
-    
-    var pushToken: String?
+    private let firebase: TestableFirebaseApp.Type
+    private let messagingFactory: () -> TestableMessaging
+    private let userNotificationCenter: UserNotificationCenter
+    private let notificationCenter: NotificationCenter
+    private let dispatcher: PushNotificationDispatcher
 
     init(
         firebase: TestableFirebaseApp.Type,
         messagingFactory: @escaping () -> TestableMessaging,
         userNotificationCenter: UserNotificationCenter,
         notificationCenter: NotificationCenter,
-        persistence: Persistence
+        dispatcher: PushNotificationDispatcher
     ) {
         self.firebase = firebase
         self.messagingFactory = messagingFactory
         self.userNotificationCenter = userNotificationCenter
         self.notificationCenter = notificationCenter
-        self.persistence = persistence
-
+        self.dispatcher = dispatcher
+        
         super.init()
     }
 
@@ -76,7 +76,27 @@ class ConcretePushNotificationManager: NSObject, PushNotificationManager {
             messagingFactory: { Messaging.messaging() },
             userNotificationCenter: UNUserNotificationCenter.current(),
             notificationCenter: NotificationCenter.default,
-            persistence: Persistence.shared
+            dispatcher: PushNotificationDispatcher.shared
+        )
+    }
+    
+    convenience init(
+        firebase: TestableFirebaseApp.Type,
+        messagingFactory: @escaping () -> TestableMessaging,
+        userNotificationCenter: UserNotificationCenter,
+        notificationCenter: NotificationCenter,
+        persistence: Persistence
+    ) {
+        self.init(
+            firebase: firebase,
+            messagingFactory: messagingFactory,
+            userNotificationCenter: userNotificationCenter,
+            notificationCenter: notificationCenter,
+            dispatcher: PushNotificationDispatcher(
+                notificationCenter: notificationCenter,
+                userNotificationCenter: userNotificationCenter,
+                persistence: persistence
+            )
         )
     }
 
@@ -87,11 +107,11 @@ class ConcretePushNotificationManager: NSObject, PushNotificationManager {
     }
     
     func registerHandler(forType type: PushNotificationType, handler: @escaping PushNotificationHandler) {
-        handlers[type] = handler
+        dispatcher.registerHandler(forType: type, handler: handler)
     }
     
     func removeHandler(forType type: PushNotificationType) {
-        handlers[type] = nil
+        dispatcher.removeHandler(forType: type)
     }
 
     func requestAuthorization(completion: @escaping (Result<Bool, Error>) -> Void) {
@@ -108,60 +128,7 @@ class ConcretePushNotificationManager: NSObject, PushNotificationManager {
     }
     
     func handleNotification(userInfo: [AnyHashable : Any], completionHandler: @escaping PushNotificationCompletionHandler) {
-        
-        // TODO: Move this out of the push notification manager?
-        if let status = userInfo["status"] {
-            handleStatusUpdated(status: status)
-            return
-        }
-        
-        guard let type = notificationType(userInfo: userInfo) else {
-            print("Warning: unrecognized notification with user info: \(userInfo)")
-            completionHandler(.failed)
-            return
-        }
-        
-        print("Push notification is a \(type)")
-        
-        guard let handler = handlers[type] else {
-            completionHandler(.failed)
-            return
-        }
-        
-        print("Got a handler")
-        
-        handler(userInfo, completionHandler)
-    }
-
-    private func handleStatusUpdated(status: Any) {
-        if status as? String == "Potential" {
-            let content = UNMutableNotificationContent()
-            content.title = "POTENTIAL_STATUS_TITLE".localized
-            content.body = "POTENTIAL_STATUS_BODY".localized
-
-            let uuidString = UUID().uuidString
-            let request = UNNotificationRequest(identifier: uuidString, content: content, trigger: nil)
-
-            userNotificationCenter.add(request) { error in
-                if error != nil {
-                    print("Unable to add local notification: \(String(describing: error))")
-                }
-            }
-
-            persistence.diagnosis = .potential
-        } else {
-            print("Received unexpected status from remote notification: '\(status)'")
-        }
-    }
-    
-    private func notificationType(userInfo: [AnyHashable : Any]) -> PushNotificationType? {
-        if userInfo["activationCode"] as? String != nil {
-            return .registrationActivationCode
-        } else if userInfo["status"] as? String != nil {
-            return .statusChange
-        } else {
-            return nil
-        }
+        dispatcher.handleNotification(userInfo: userInfo, completionHandler: completionHandler)
     }
 }
 
@@ -172,7 +139,7 @@ extension ConcretePushNotificationManager: UNUserNotificationCenterDelegate {
         withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
     ) {
         // This only happens when we are in the foregrond?
-
+        
         handleNotification(userInfo: notification.request.content.userInfo) {_ in }
 
         // How to re-present notification?
@@ -183,54 +150,11 @@ extension ConcretePushNotificationManager: UNUserNotificationCenterDelegate {
 extension ConcretePushNotificationManager: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
         print("fcmToken: \(fcmToken)")
-        pushToken = fcmToken
-        notificationCenter.post(name: PushTokenReceivedNotification, object: nil, userInfo: nil)
-
         let apnsToken = Messaging.messaging().apnsToken?.map { String(format: "%02hhx", $0) }.joined()
         print("apnsToken: \(String(describing: apnsToken))")
-    }
-
-}
-
-private class HandlerDictionary {
-    private var handlers: [PushNotificationType : PushNotificationHandler] = [:]
-    
-    subscript(index: PushNotificationType) -> PushNotificationHandler? {
-        get {
-            let handler = handlers[index]
-            
-            if handler == nil {
-                complainAboutMissingHandler(type: index)
-            }
-            
-            return handler
-        }
-        set {
-            if newValue != nil && handlers[index] != nil {
-                complainAboutHandlerReplacement(type: index)
-            }
-            
-            handlers[index] = newValue
-        }
-    }
-    
-    private func complainAboutMissingHandler(type: PushNotificationType) {
-        #if DEBUG
-        fatalError("PushNotificationHandlerDictionary: no handler for notification type \(type)")
-        #else
-        print("Warning: PushNotificationHandlerDictionary: no handler for notification type \(type)")
-        #endif
-    }
-    
-    private func complainAboutHandlerReplacement(type: PushNotificationType) {
-        #if DEBUG
-        fatalError("PushNotificationHandlerDictionary: attempted to replace handler for \(type)")
-        #else
-        print("Warning: PushNotificationHandlerDictionary replacing existing handler for \(type)")
-        #endif
+        dispatcher.receiveRegistrationToken(fcmToken: fcmToken)
     }
 }
-
 
 // MARK: - Testable
 
@@ -253,21 +177,4 @@ protocol TestableMessaging: class {
 }
 
 extension Messaging: TestableMessaging {
-}
-
-protocol UserNotificationCenter: class {
-    var delegate: UNUserNotificationCenterDelegate? { get set }
-
-    func requestAuthorization(
-        options: UNAuthorizationOptions,
-        completionHandler: @escaping (Bool, Error?) -> Void
-    )
-
-    func add(
-        _ request: UNNotificationRequest,
-        withCompletionHandler completionHandler: ((Error?) -> Void)?
-    )
-}
-
-extension UNUserNotificationCenter: UserNotificationCenter {
 }
