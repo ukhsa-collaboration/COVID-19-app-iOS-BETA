@@ -8,6 +8,7 @@
 
 import Foundation
 
+// TODO: Should maybe be a MutableContactEvent?
 struct ConnectedPeripheral {
     
     let identifier: UUID
@@ -26,6 +27,14 @@ struct ConnectedPeripheral {
     
     mutating func disconnect() {
         duration = timestamp.timeIntervalSince(timestamp)
+    }
+    
+    func asContactEvent() -> ContactEvent? {
+        if let sonarId  = self.sonarId {
+            return ContactEvent(sonarId: sonarId, timestamp: timestamp, rssiValues: rssiSamples, duration: duration)
+        } else {
+            return nil
+        }
     }
 
 }
@@ -46,8 +55,7 @@ class ContactEventCollector: BTLEListenerDelegate {
     
     func btleListener(_ listener: BTLEListener, didDisconnect peripheral: BTLEPeripheral, error: Error?) {
         connectedPeripherals[peripheral.identifier]?.disconnect()
-        if let connectedPeripheral = connectedPeripherals.removeValue(forKey: peripheral.identifier), let sonarId = connectedPeripheral.sonarId {
-            let contactEvent = OldContactEvent(remoteContactId: sonarId, timestamp: connectedPeripheral.timestamp, rssi: 0)
+        if let connectedPeripheral = connectedPeripherals.removeValue(forKey: peripheral.identifier), let contactEvent = connectedPeripheral.asContactEvent() {
             contactEventRecorder.record(contactEvent)
         }
     }

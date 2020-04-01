@@ -26,7 +26,6 @@ struct ContactEvent: Equatable, Codable {
     let duration: TimeInterval
 }
 
-
 protocol ContactEventRecorder {
     func record(_ contactEvent: OldContactEvent)
     func record(_ contactEvent: ContactEvent)
