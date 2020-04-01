@@ -16,8 +16,8 @@ jobs:
     strategy:
       matrix:
         run-config:
-          - { sdk: "iphoneos13.0" }
-          - { sdk: "iphonesimulator13.0" }
+          - { sdk: "iphoneos13.4" }
+          - { sdk: "iphonesimulator13.4" }
     steps:
       - name: Checkout Project
         uses: actions/checkout@v2
@@ -30,7 +30,7 @@ jobs:
 
       - name: Show Build Settings
         run: xcodebuild -showBuildSettings
-        
+
       - name: Show Build SDK
         run: xcodebuild -showsdks
 
