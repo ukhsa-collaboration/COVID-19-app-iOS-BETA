@@ -18,6 +18,7 @@ class PermissionsViewController: UIViewController, Storyboarded {
     var uiQueue: TestableQueue = DispatchQueue.main
     var broadcaster: BTLEBroadcaster = (UIApplication.shared.delegate as! AppDelegate).broadcaster
     var listener: BTLEListener = (UIApplication.shared.delegate as! AppDelegate).listener
+    private var allowedBluetooth = false
 
     weak var bluetoothReadyDelegate: BluetoothAvailableDelegate?
     
@@ -35,7 +36,8 @@ class PermissionsViewController: UIViewController, Storyboarded {
     }
 
     private func checkBluetoothAuth() {
-        guard authManager.bluetooth == .allowed else { return }
+        guard authManager.bluetooth == .allowed, !allowedBluetooth else { return }
+        allowedBluetooth = true
 
         if persistence.newOnboarding {
             requestNotificationPermissions()
