@@ -12,9 +12,10 @@ import CoreBluetooth
 class PermissionsViewController: UIViewController, Storyboarded {
     static let storyboardName = "Permissions"
 
-    let authManager = AuthorizationManager()
-    let notificationManager: PushNotificationManager = ConcretePushNotificationManager()
-    let persistence = Persistence.shared
+    var authManager = AuthorizationManager()
+    var notificationManager: PushNotificationManager = ConcretePushNotificationManager()
+    var persistence = Persistence.shared
+    var uiQueue: TestableQueue = DispatchQueue.main
 
     weak var bluetoothReadyDelegate: BluetoothAvailableDelegate?
     
@@ -50,7 +51,7 @@ class PermissionsViewController: UIViewController, Storyboarded {
             switch result {
             case .success(let granted):
                 if granted {
-                    DispatchQueue.main.async {
+                    self.uiQueue.async {
                         self.performSegue(withIdentifier: "unwindFromPermissions", sender: self)
                     }
                 } else {

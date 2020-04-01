@@ -67,6 +67,7 @@
 		F632792324351C8400CF7A42 /* OnboardingCoordinatorDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = F632792224351C8400CF7A42 /* OnboardingCoordinatorDouble.swift */; };
 		F63279252435203600CF7A42 /* DispatchQueue+Testable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63279242435203600CF7A42 /* DispatchQueue+Testable.swift */; };
 		F63279272435219A00CF7A42 /* QueueDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63279262435219A00CF7A42 /* QueueDouble.swift */; };
+		F632792A2435323200CF7A42 /* PermissionsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63279292435323200CF7A42 /* PermissionsViewControllerTests.swift */; };
 		F65AE53C2432B842006544D4 /* Potential.rtf in Resources */ = {isa = PBXBuildFile; fileRef = F65AE53E2432B842006544D4 /* Potential.rtf */; };
 		F67A2291242AA35C002254B6 /* SecureRegistrationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A2290242AA35B002254B6 /* SecureRegistrationStorage.swift */; };
 		F67A2293242AA370002254B6 /* SecureRegistrationStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */; };
@@ -188,6 +189,7 @@
 		F632792224351C8400CF7A42 /* OnboardingCoordinatorDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinatorDouble.swift; sourceTree = "<group>"; };
 		F63279242435203600CF7A42 /* DispatchQueue+Testable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Testable.swift"; sourceTree = "<group>"; };
 		F63279262435219A00CF7A42 /* QueueDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueDouble.swift; sourceTree = "<group>"; };
+		F63279292435323200CF7A42 /* PermissionsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsViewControllerTests.swift; sourceTree = "<group>"; };
 		F65AE53D2432B842006544D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = Base; path = Base.lproj/Potential.rtf; sourceTree = "<group>"; };
 		F67A2290242AA35B002254B6 /* SecureRegistrationStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRegistrationStorage.swift; sourceTree = "<group>"; };
 		F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRegistrationStorageTests.swift; sourceTree = "<group>"; };
@@ -340,19 +342,20 @@
 		214209C02422276800C7BFF3 /* CoLocateTests */ = {
 			isa = PBXGroup;
 			children = (
-				F68BFBF6242ACD17008EE68F /* TestHelpers.swift */,
-				21F374002433845600926FB8 /* Contact Events */,
-				098ED486242E89760029B729 /* Doubles */,
-				F6F05A222433BEAC00FF4B72 /* Onboarding */,
-				098ED479242D7E340029B729 /* Registration */,
-				F6CC2CAA242BCCE90079432B /* Push Notifications */,
-				095A91162434FE4300ED6369 /* NotificationsPrompt */,
 				214209C32422276800C7BFF3 /* Info.plist */,
 				098ED484242E88D80029B729 /* AppCoordinatorTests.swift */,
 				214209C9242227B300C7BFF3 /* PersistenceTests.swift */,
 				214209CD24237A6300C7BFF3 /* PlistContactEventRecorderTests.swift */,
 				F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */,
+				F68BFBF6242ACD17008EE68F /* TestHelpers.swift */,
+				21F374002433845600926FB8 /* Contact Events */,
+				098ED486242E89760029B729 /* Doubles */,
 				214209DA242630CF00C7BFF3 /* Networking */,
+				095A91162434FE4300ED6369 /* NotificationsPrompt */,
+				F6F05A222433BEAC00FF4B72 /* Onboarding */,
+				F63279282435320E00CF7A42 /* Permissions */,
+				F6CC2CAA242BCCE90079432B /* Push Notifications */,
+				098ED479242D7E340029B729 /* Registration */,
 			);
 			path = CoLocateTests;
 			sourceTree = "<group>";
@@ -490,6 +493,14 @@
 				89F06B362434C35A0074C612 /* LoggerMetadata.swift */,
 			);
 			path = Logging;
+			sourceTree = "<group>";
+		};
+		F63279282435320E00CF7A42 /* Permissions */ = {
+			isa = PBXGroup;
+			children = (
+				F63279292435323200CF7A42 /* PermissionsViewControllerTests.swift */,
+			);
+			path = Permissions;
 			sourceTree = "<group>";
 		};
 		F6CC2CA7242BC7D90079432B /* Push Notifications */ = {
@@ -769,6 +780,7 @@
 				F67A2293242AA370002254B6 /* SecureRegistrationStorageTests.swift in Sources */,
 				214209D72423C9B600C7BFF3 /* PatchContactEventsRequestTests.swift in Sources */,
 				21C417CA242CB0A200DEF3E2 /* ConfirmRegistrationRequestTests.swift in Sources */,
+				F632792A2435323200CF7A42 /* PermissionsViewControllerTests.swift in Sources */,
 				F770A455242FEE7C002FDED1 /* SecureRequestFactoryDouble.swift in Sources */,
 				098ED48A242E89D80029B729 /* RegistrationServiceDouble.swift in Sources */,
 				F63279272435219A00CF7A42 /* QueueDouble.swift in Sources */,
