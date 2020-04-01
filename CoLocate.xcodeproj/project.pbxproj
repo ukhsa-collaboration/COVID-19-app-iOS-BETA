@@ -63,6 +63,10 @@
 		F600A600242977D50038DF57 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F600A5FF242977D50038DF57 /* RegistrationViewController.swift */; };
 		F600A60224297A8E0038DF57 /* RegistrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F600A60124297A8E0038DF57 /* RegistrationRequest.swift */; };
 		F600A60424297C010038DF57 /* RegistrationRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F600A60324297C010038DF57 /* RegistrationRequestTests.swift */; };
+		F632792124351C1900CF7A42 /* OnboardingViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F632792024351C1900CF7A42 /* OnboardingViewControllerTests.swift */; };
+		F632792324351C8400CF7A42 /* OnboardingCoordinatorDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = F632792224351C8400CF7A42 /* OnboardingCoordinatorDouble.swift */; };
+		F63279252435203600CF7A42 /* DispatchQueue+Testable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63279242435203600CF7A42 /* DispatchQueue+Testable.swift */; };
+		F63279272435219A00CF7A42 /* QueueDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63279262435219A00CF7A42 /* QueueDouble.swift */; };
 		F65AE53C2432B842006544D4 /* Potential.rtf in Resources */ = {isa = PBXBuildFile; fileRef = F65AE53E2432B842006544D4 /* Potential.rtf */; };
 		F67A2291242AA35C002254B6 /* SecureRegistrationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A2290242AA35B002254B6 /* SecureRegistrationStorage.swift */; };
 		F67A2293242AA370002254B6 /* SecureRegistrationStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */; };
@@ -180,6 +184,10 @@
 		F600A5FF242977D50038DF57 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		F600A60124297A8E0038DF57 /* RegistrationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationRequest.swift; sourceTree = "<group>"; };
 		F600A60324297C010038DF57 /* RegistrationRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationRequestTests.swift; sourceTree = "<group>"; };
+		F632792024351C1900CF7A42 /* OnboardingViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewControllerTests.swift; sourceTree = "<group>"; };
+		F632792224351C8400CF7A42 /* OnboardingCoordinatorDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinatorDouble.swift; sourceTree = "<group>"; };
+		F63279242435203600CF7A42 /* DispatchQueue+Testable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Testable.swift"; sourceTree = "<group>"; };
+		F63279262435219A00CF7A42 /* QueueDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueDouble.swift; sourceTree = "<group>"; };
 		F65AE53D2432B842006544D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = Base; path = Base.lproj/Potential.rtf; sourceTree = "<group>"; };
 		F67A2290242AA35B002254B6 /* SecureRegistrationStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRegistrationStorage.swift; sourceTree = "<group>"; };
 		F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRegistrationStorageTests.swift; sourceTree = "<group>"; };
@@ -296,14 +304,16 @@
 		098ED486242E89760029B729 /* Doubles */ = {
 			isa = PBXGroup;
 			children = (
-				098ED487242E89930029B729 /* PushNotificationManagerDouble.swift */,
+				F770A4562430F76B002FDED1 /* AppCoordinatorDouble.swift */,
+				095A91172434FF1500ED6369 /* ApplicationDouble.swift */,
+				F6F05A292433C6CC00FF4B72 /* AuthManagerDouble.swift */,
+				0958E4B02433BFE5008C1E37 /* NotificationObserverDouble.swift */,
 				098ED48B242E8B290029B729 /* PersistenceDouble.swift */,
+				098ED487242E89930029B729 /* PushNotificationManagerDouble.swift */,
 				098ED489242E89D80029B729 /* RegistrationServiceDouble.swift */,
 				F770A454242FEE7C002FDED1 /* SecureRequestFactoryDouble.swift */,
-				F770A4562430F76B002FDED1 /* AppCoordinatorDouble.swift */,
-				0958E4B02433BFE5008C1E37 /* NotificationObserverDouble.swift */,
-				F6F05A292433C6CC00FF4B72 /* AuthManagerDouble.swift */,
-				095A91172434FF1500ED6369 /* ApplicationDouble.swift */,
+				F632792224351C8400CF7A42 /* OnboardingCoordinatorDouble.swift */,
+				F63279262435219A00CF7A42 /* QueueDouble.swift */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -515,6 +525,7 @@
 			isa = PBXGroup;
 			children = (
 				F6F05A232433BEC000FF4B72 /* OnboardingCoordinatorTests.swift */,
+				F632792024351C1900CF7A42 /* OnboardingViewControllerTests.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -589,6 +600,7 @@
 			children = (
 				F78CEB46242B7752002254AD /* String+localized.swift */,
 				F758B8BF242CB98C003AE16D /* UIViewController+Storyboarded.swift */,
+				F63279242435203600CF7A42 /* DispatchQueue+Testable.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -740,7 +752,9 @@
 				214209CA242227B300C7BFF3 /* PersistenceTests.swift in Sources */,
 				F7EAE5A2242FAD0E0090F8A2 /* RegistrationCoordinatorTests.swift in Sources */,
 				214209CE24237A6300C7BFF3 /* PlistContactEventRecorderTests.swift in Sources */,
+				F632792124351C1900CF7A42 /* OnboardingViewControllerTests.swift in Sources */,
 				095A91182434FF1500ED6369 /* ApplicationDouble.swift in Sources */,
+				F632792324351C8400CF7A42 /* OnboardingCoordinatorDouble.swift in Sources */,
 				21F37402243384D400926FB8 /* ContactEventCollectorTests.swift in Sources */,
 				F770A4572430F76B002FDED1 /* AppCoordinatorDouble.swift in Sources */,
 				098ED48C242E8B290029B729 /* PersistenceDouble.swift in Sources */,
@@ -757,6 +771,7 @@
 				21C417CA242CB0A200DEF3E2 /* ConfirmRegistrationRequestTests.swift in Sources */,
 				F770A455242FEE7C002FDED1 /* SecureRequestFactoryDouble.swift in Sources */,
 				098ED48A242E89D80029B729 /* RegistrationServiceDouble.swift in Sources */,
+				F63279272435219A00CF7A42 /* QueueDouble.swift in Sources */,
 				F6CC2CAC242BCD0D0079432B /* PushNotificationManagerTests.swift in Sources */,
 				0958E4B12433BFE5008C1E37 /* NotificationObserverDouble.swift in Sources */,
 				F68BFBF7242ACD17008EE68F /* TestHelpers.swift in Sources */,
@@ -800,6 +815,7 @@
 				6FC63C31241641B8007C8BF3 /* AppDelegate.swift in Sources */,
 				F600A60224297A8E0038DF57 /* RegistrationRequest.swift in Sources */,
 				214209D2242399CF00C7BFF3 /* URLSession.swift in Sources */,
+				F63279252435203600CF7A42 /* DispatchQueue+Testable.swift in Sources */,
 				214209BA242216B700C7BFF3 /* Persistence.swift in Sources */,
 				213C806C241A56430020EFA5 /* PermissionsViewController.swift in Sources */,
 				89F06B2F2434A62C0074C612 /* LoggingManager.swift in Sources */,
