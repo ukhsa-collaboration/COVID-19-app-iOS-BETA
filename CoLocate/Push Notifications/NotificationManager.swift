@@ -12,10 +12,10 @@ import UIKit
 import Firebase
 
 protocol NotificationManagerDelegate: class {
-    func notificationManager(_ notificationManager: NotificationManager, didReceiveNotificationWithInfo userInfo: [AnyHashable : Any])
+    func notificationManager(_ notificationManager: PushNotificationManager, didReceiveNotificationWithInfo userInfo: [AnyHashable : Any])
 }
 
-protocol NotificationManager {
+protocol PushNotificationManager {
     var pushToken: String? { get }
     
     var delegate: NotificationManagerDelegate? { get set }
@@ -28,7 +28,7 @@ protocol NotificationManager {
 }
 
 
-class ConcreteNotificationManager: NSObject, NotificationManager {
+class ConcreteNotificationManager: NSObject, PushNotificationManager {
 
     let firebase: TestableFirebaseApp.Type
     let messagingFactory: () -> TestableMessaging

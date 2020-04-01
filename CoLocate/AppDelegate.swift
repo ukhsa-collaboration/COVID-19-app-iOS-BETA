@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     let broadcaster: BTLEBroadcaster
     let listener: BTLEListener
 
-    let notificationManager: NotificationManager = ConcreteNotificationManager()
+    let pushNotificationManager: PushNotificationManager = ConcretePushNotificationManager()
     let persistance = Persistance.shared
     let registrationService: RegistrationService
 
@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         broadcaster = BTLEBroadcaster()
         listener = BTLEListener()
         
-        registrationService = ConcreteRegistrationService(session: URLSession.shared, notificationManager: notificationManager, notificationCenter: NotificationCenter.default)
+        registrationService = ConcreteRegistrationService(session: URLSession.shared, pushNotificationManager: pushNotificationManager, notificationCenter: NotificationCenter.default)
 
         super.init()
     }
@@ -48,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         application.registerForRemoteNotifications()
 
-        notificationManager.configure()
+        pushNotificationManager.configure()
 
         let rootViewController = RootViewController()
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -59,7 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 continueWithRegistration(registration)
             } else {
                 let registrationCoordinator = RegistrationCoordinator(navController: rootViewController,
-                                                                      notificationManager: notificationManager,
+                                                                      pushNotificationManager: pushNotificationManager,
                                                                       registrationService: registrationService,
                                                                       persistance: persistance,
                                                                       notificationCenter: NotificationCenter.default)
@@ -81,7 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         logger.info("Received notification", metadata: Logger.Metadata(dictionary: userInfo))
         
-        notificationManager.handleNotification(userInfo: userInfo)
+        pushNotificationManager.handleNotification(userInfo: userInfo)
         completionHandler(UIBackgroundFetchResult.newData)
     }
     

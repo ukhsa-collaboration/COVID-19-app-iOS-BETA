@@ -27,7 +27,7 @@ fileprivate enum RegisteredState : Int {
 class RegistrationCoordinator {
 
     let navController: UINavigationController
-    let notificationManager: NotificationManager
+    let pushNotificationManager: PushNotificationManager
     let registrationService: RegistrationService
     let persistance: Persistance
     let notificationCenter: NotificationCenter
@@ -35,13 +35,13 @@ class RegistrationCoordinator {
     fileprivate var currentState: RegisteredState = .unregistered
 
     init(navController: UINavigationController,
-         notificationManager: NotificationManager,
+         pushNotificationManager: PushNotificationManager,
          registrationService: RegistrationService,
          persistance: Persistance,
          notificationCenter: NotificationCenter) {
         
         self.navController = navController
-        self.notificationManager = notificationManager
+        self.pushNotificationManager = pushNotificationManager
         self.registrationService = registrationService
         self.persistance = persistance
         self.notificationCenter = notificationCenter
@@ -76,7 +76,7 @@ class RegistrationCoordinator {
             let registrationViewController = RegistrationViewController.instantiate()
 
             registrationViewController.registrationService = registrationService
-            registrationViewController.notificationManager = notificationManager
+            registrationViewController.pushNotificationManager = pushNotificationManager
 
             return registrationViewController
         }
@@ -89,7 +89,7 @@ class RegistrationCoordinator {
 
 extension RegistrationCoordinator: PushNotificationRequester {
     func requestPushNotifications(completion: @escaping (Result<Bool, Error>) -> Void) {
-        notificationManager.requestAuthorization { (result) in
+        pushNotificationManager.requestAuthorization { (result) in
             switch result {
             case .success(let granted):
                 guard granted else {

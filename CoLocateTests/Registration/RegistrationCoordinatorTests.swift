@@ -14,7 +14,7 @@ class RegistrationCoordinatorTests: TestCase {
     var coordinator: RegistrationCoordinator!
 
     let application = ApplicationDouble()
-    let notificationManager = NotificationManagerDouble()
+    let pushNotificationManager = PushNotificationManagerDouble()
     let registrationService = RegistrationServiceDouble()
     let registrationStorage = RegistrationStorageDouble()
 
@@ -25,7 +25,7 @@ class RegistrationCoordinatorTests: TestCase {
 
         navController = UINavigationController()
         coordinator = RegistrationCoordinator(navController: navController,
-                                              notificationManager: notificationManager,
+                                              pushNotificationManager: pushNotificationManager,
                                               registrationService: registrationService,
                                               persistance: PersistanceDouble(),
                                               notificationCenter: NotificationCenter())
@@ -50,15 +50,15 @@ class RegistrationCoordinatorTests: TestCase {
             }
         }
 
-        notificationManager.completion?(.success(true))
+        pushNotificationManager.completion?(.success(true))
         XCTAssertTrue(didAllowNotifications)
     }
 
     func test_shows_bluetooth_after_push_notifications() {
         coordinator.requestPushNotifications() { _ in }
-        XCTAssertNotNil(notificationManager.completion)
+        XCTAssertNotNil(pushNotificationManager.completion)
 
-        notificationManager.completion?(.success(true))
+        pushNotificationManager.completion?(.success(true))
         coordinator.advanceAfterPushNotifications()
 
         let vc = navController.topViewController as? PermissionsViewController
@@ -72,7 +72,7 @@ class RegistrationCoordinatorTests: TestCase {
 
         let vc = navController.topViewController as? RegistrationViewController
         XCTAssertNotNil(vc)
-        XCTAssertNotNil(vc?.notificationManager)
+        XCTAssertNotNil(vc?.pushNotificationManager)
         XCTAssertNotNil(vc?.registrationService)
     }
 }
