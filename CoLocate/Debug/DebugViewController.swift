@@ -85,6 +85,18 @@ class DebugViewController: UITableViewController {
         case (3, 0), (4, 0):
             break
 
+        case (5, 0):
+            do {
+                let fileManager = FileManager()
+                let documentsFolder = try fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+                let viewController = UIActivityViewController(activityItems: [documentsFolder], applicationActivities: nil)
+                present(viewController, animated: true, completion: nil)
+            } catch {
+                let viewController = UIAlertController(title: "No data to share yet", message: nil, preferredStyle: .alert)
+                viewController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                present(viewController, animated: true, completion: nil)
+            }
+
         default:
             fatalError()
         }
