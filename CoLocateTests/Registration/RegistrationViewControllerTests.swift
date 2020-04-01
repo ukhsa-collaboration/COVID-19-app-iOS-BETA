@@ -18,10 +18,11 @@ class RegistrationViewControllerTests: TestCase {
         vc.registrationService = registrationService
         XCTAssertNotNil(vc.view)
 
-        vc.didTapRegister(vc.registerButton!)
+        let button = PrimaryButton()
+        vc.didTapRegister(button)
         
         registrationService.completionHandler!(.failure(ErrorForTest()))
-        XCTAssertFalse(vc.registerButton.isHidden)
+        XCTAssertFalse(button.isHidden)
     }
 
 }

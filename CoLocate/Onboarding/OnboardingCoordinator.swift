@@ -28,13 +28,13 @@ class OnboardingCoordinator {
     }
 
     func state(completion: @escaping (State?) -> Void) {
-        let allowedDataSharing = self.persistence.allowedDataSharing
+        let allowedDataSharing = persistence.allowedDataSharing
         guard allowedDataSharing else {
             completion(.initial)
             return
         }
 
-        let allowedBluetooth = self.authorizationManager.bluetooth == .allowed
+        let allowedBluetooth = authorizationManager.bluetooth == .allowed
         guard allowedBluetooth else {
             completion(.permissions)
             return
