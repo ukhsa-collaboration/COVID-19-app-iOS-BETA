@@ -59,6 +59,20 @@ class PersistenceTests: TestCase {
         XCTAssertEqual(try! secureRegistrationStorage.get(), registration)
         XCTAssertEqual(persistence.registration, registration)
     }
+
+    func testRegistrationUpdatesTheDelegate() {
+        let delegate = PersistenceDelegateDouble()
+        let persistence = Persistence()
+        persistence.delegate = delegate
+
+        let id = UUID()
+        let secretKey = "secret key".data(using: .utf8)!
+        let registration = Registration(id: id, secretKey: secretKey)
+        persistence.registration = registration
+
+        XCTAssertEqual(delegate.recordedRegistration, registration)
+    }
+
 }
 
 class PersistenceDelegateDouble: NSObject, PersistenceDelegate {
