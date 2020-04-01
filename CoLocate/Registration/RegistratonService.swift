@@ -18,26 +18,26 @@ let RegistrationCompleteNotificationRegistrationKey = "registration"
 class ConcreteRegistrationService: RegistrationService {
     let session: Session
     let registrationStorage: SecureRegistrationStorage = SecureRegistrationStorage.shared
-    var notificationManager: NotificationManager
+    var pushNotificationManager: PushNotificationManager
     let notificationCenter: NotificationCenter
     var registerWhenTokenReceived = false
     var completionHandler: ((Result<Void, Error>) -> Void)?
     
-    init(session: Session, notificationManager: NotificationManager, notificationCenter: NotificationCenter) {
+    init(session: Session, pushNotificationManager: PushNotificationManager, notificationCenter: NotificationCenter) {
         #if DEBUG
         self.session = InterceptingSession(underlyingSession: session)
         #else
         self.session = session
         #endif
-        self.notificationManager = notificationManager
+        self.pushNotificationManager = pushNotificationManager
         self.notificationCenter = notificationCenter
     }
     
     func register(completionHandler: @escaping ((Result<Void, Error>) -> Void)) {
         self.completionHandler = completionHandler
-        notificationManager.delegate = self
+        pushNotificationManager.delegate = self
 
-        if notificationManager.pushToken == nil {
+        if pushNotificationManager.pushToken == nil {
             registerWhenTokenReceived = true
             return
         } else {
@@ -46,7 +46,7 @@ class ConcreteRegistrationService: RegistrationService {
     }
     
     private func beginRegistration() {
-        let request = RequestFactory.registrationRequest(pushToken: notificationManager.pushToken!)
+        let request = RequestFactory.registrationRequest(pushToken: pushNotificationManager.pushToken!)
 
         session.execute(request, queue: .main) { result in
             self.handleRegistration(result: result)
@@ -66,22 +66,22 @@ class ConcreteRegistrationService: RegistrationService {
     }
 
     private func succeed(registration: Registration) {
-        notificationManager.delegate = nil
+        pushNotificationManager.delegate = nil
         let userInfo = [RegistrationCompleteNotificationRegistrationKey : registration]
         notificationCenter.post(name: RegistrationCompleteNotification, object: nil, userInfo: userInfo)
         completionHandler?(.success(()))
     }
     
     private func fail(withError error: Error) {
-        notificationManager.delegate = nil
+        pushNotificationManager.delegate = nil
         completionHandler?(.failure(error))
     }
 }
 
 
-extension ConcreteRegistrationService: NotificationManagerDelegate {
+extension ConcreteRegistrationService: PushNotificationManagerDelegate {
 
-    func notificationManager(_ notificationManager: NotificationManager,
+    func pushNotificationManager(_ pushNotificationManager: PushNotificationManager,
                              didReceiveNotificationWithInfo userInfo: [AnyHashable : Any]) {
         // I can't remember how to spell the switch to do this --RA
         if let activationCode = userInfo["activationCode"] as? String {
@@ -98,7 +98,7 @@ extension ConcreteRegistrationService: NotificationManagerDelegate {
     }
     
     private func didReceiveActivationCode(activationCode: String) {
-        let request = RequestFactory.confirmRegistrationRequest(activationCode: activationCode, pushToken: notificationManager.pushToken!)
+        let request = RequestFactory.confirmRegistrationRequest(activationCode: activationCode, pushToken: pushNotificationManager.pushToken!)
         session.execute(request, queue: .main) { [weak self] result in
             guard let self = self else { return }
             

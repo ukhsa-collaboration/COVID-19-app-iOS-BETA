@@ -16,12 +16,12 @@ class RegistrationServiceTests: TestCase {
 
     func testRegistration_withPreExistingPushToken() throws {
         let session = SessionDouble()
-        let notificationManager = NotificationManagerDouble()
+        let pushNotificationManager = PushNotificationManagerDouble()
         let notificationCenter = NotificationCenter()
         let observer = NotificationObserverDouble(notificationCenter: notificationCenter, notificationName: RegistrationCompleteNotification)
-        let registrationService = ConcreteRegistrationService(session: session, notificationManager: notificationManager, notificationCenter: notificationCenter)
+        let registrationService = ConcreteRegistrationService(session: session, pushNotificationManager: pushNotificationManager, notificationCenter: notificationCenter)
     
-        notificationManager.pushToken = "the current push token"
+        pushNotificationManager.pushToken = "the current push token"
         var finished = false
         var error: Error? = nil
         registrationService.register(completionHandler: { r in
@@ -43,7 +43,7 @@ class RegistrationServiceTests: TestCase {
         // Simulate the notification containing the authorizationCode.
         // This should trigger the second request.
         let activationCode = "a3d2c477-45f5-4609-8676-c24558094600"
-        notificationManager.delegate!.notificationManager(notificationManager, didReceiveNotificationWithInfo: ["activationCode": activationCode])
+        pushNotificationManager.delegate!.pushNotificationManager(pushNotificationManager, didReceiveNotificationWithInfo: ["activationCode": activationCode])
         
         // Verify the second request
         let confirmRegistrationRequest = (session.requestSent as! ConfirmRegistrationRequest).body!
@@ -74,10 +74,10 @@ class RegistrationServiceTests: TestCase {
     
     func testRegistration_withoutPreExistingPushToken() throws {
         let session = SessionDouble()
-        let notificationManager = NotificationManagerDouble()
+        let pushNotificationMananger = PushNotificationManagerDouble()
         let notificationCenter = NotificationCenter()
         let observer = NotificationObserverDouble(notificationCenter: notificationCenter, notificationName: RegistrationCompleteNotification)
-        let registrationService = ConcreteRegistrationService(session: session, notificationManager: notificationManager, notificationCenter: notificationCenter)
+        let registrationService = ConcreteRegistrationService(session: session, pushNotificationManager: pushNotificationMananger, notificationCenter: notificationCenter)
 
         var finished = false
         var error: Error? = nil
@@ -91,8 +91,8 @@ class RegistrationServiceTests: TestCase {
         XCTAssertNil(session.requestSent)
 
         // Simulate receiving the push token
-        notificationManager.pushToken = "a push token"
-        notificationManager.delegate?.notificationManager(notificationManager, didReceiveNotificationWithInfo: ["pushToken": "a push token"])
+        pushNotificationMananger.pushToken = "a push token"
+        pushNotificationMananger.delegate?.pushNotificationManager(pushNotificationMananger, didReceiveNotificationWithInfo: ["pushToken": "a push token"])
         // Verify the first request
         let registrationBody = (session.requestSent as! RegistrationRequest).body!
         let registrationPayload = try JSONDecoder().decode(ExpectedRegistrationRequestBody.self, from: registrationBody)
@@ -105,7 +105,7 @@ class RegistrationServiceTests: TestCase {
         // Simulate the notification containing the authorizationCode.
         // This should trigger the second request.
         let activationCode = "a3d2c477-45f5-4609-8676-c24558094600"
-        notificationManager.delegate!.notificationManager(notificationManager, didReceiveNotificationWithInfo: ["activationCode": activationCode])
+        pushNotificationMananger.delegate!.pushNotificationManager(pushNotificationMananger, didReceiveNotificationWithInfo: ["activationCode": activationCode])
         
         // Verify the second request
         let confirmRegistrationBody = (session.requestSent as! ConfirmRegistrationRequest).body!

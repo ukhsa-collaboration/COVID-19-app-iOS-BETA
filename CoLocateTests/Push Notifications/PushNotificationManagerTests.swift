@@ -22,7 +22,7 @@ class NotificationManagerTests: TestCase {
 
     func testConfigure() {
         let messaging = MessagingDouble()
-        let notificationManager = ConcreteNotificationManager(
+        let notificationManager = ConcretePushNotificationManager(
             firebase: FirebaseAppDouble.self,
             messagingFactory: { messaging },
             userNotificationCenter: NotificationCenterDouble(),
@@ -36,13 +36,13 @@ class NotificationManagerTests: TestCase {
     
     func testPushTokenHandling() {
         let messaging = MessagingDouble()
-        let notificationManager = ConcreteNotificationManager(
+        let notificationManager = ConcretePushNotificationManager(
             firebase: FirebaseAppDouble.self,
             messagingFactory: { messaging },
             userNotificationCenter: NotificationCenterDouble(),
             persistance: Persistance()
         )
-        let delegate = NotificationManagerDelegateDouble()
+        let delegate = PushNotificationManagerDelegateDouble()
         notificationManager.delegate = delegate
 
         notificationManager.configure()
@@ -54,7 +54,7 @@ class NotificationManagerTests: TestCase {
 
     func testRequestAuthorization_success() {
         let notificationCenterDouble = NotificationCenterDouble()
-        let notificationManager = ConcreteNotificationManager(
+        let notificationManager = ConcretePushNotificationManager(
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
             userNotificationCenter: notificationCenterDouble,
@@ -79,7 +79,7 @@ class NotificationManagerTests: TestCase {
     
     func testHandleNotification_savesPotentialDiagnosis() {
         let persistance = Persistance()
-        let notificationManager = ConcreteNotificationManager(
+        let notificationManager = ConcretePushNotificationManager(
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
             userNotificationCenter: NotificationCenterDouble(),
@@ -94,7 +94,7 @@ class NotificationManagerTests: TestCase {
     func testHandleNotification_sendsLocalNotificationWithPotentialStatus() {
         let persistance = Persistance()
         let notificationCenterDouble = NotificationCenterDouble()
-        let notificationManager = ConcreteNotificationManager(
+        let notificationManager = ConcretePushNotificationManager(
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
             userNotificationCenter: notificationCenterDouble,
@@ -108,7 +108,7 @@ class NotificationManagerTests: TestCase {
     
     func testHandleNotification_doesNotSaveOtherDiagnosis() {
         let persistance = Persistance()
-        let notificationManager = ConcreteNotificationManager(
+        let notificationManager = ConcretePushNotificationManager(
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
             userNotificationCenter: NotificationCenterDouble(),
@@ -123,7 +123,7 @@ class NotificationManagerTests: TestCase {
     func testHandleNotification_doesNotSendLocalNotificationWhenStatusIsNotPotential() {
         let persistance = Persistance()
         let notificationCenterDouble = NotificationCenterDouble()
-        let notificationManager = ConcreteNotificationManager(
+        let notificationManager = ConcretePushNotificationManager(
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
             userNotificationCenter: notificationCenterDouble,
@@ -136,13 +136,13 @@ class NotificationManagerTests: TestCase {
     }
     
     func testHandleNotification_forwardsNonDiagnosisNotificationsToDelegate() {
-        let notificationManager = ConcreteNotificationManager(
+        let notificationManager = ConcretePushNotificationManager(
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
             userNotificationCenter: NotificationCenterDouble(),
             persistance: Persistance()
         )
-        let delegate = NotificationManagerDelegateDouble()
+        let delegate = PushNotificationManagerDelegateDouble()
         notificationManager.delegate = delegate
         let userInfo = ["something" : "else"]
         
@@ -153,7 +153,7 @@ class NotificationManagerTests: TestCase {
     func testHandleNotification_foreGroundedLocalNotification() {
         let persistance = Persistance()
         let notificationCenterDouble = NotificationCenterDouble()
-        let notificationManager = ConcreteNotificationManager(
+        let notificationManager = ConcretePushNotificationManager(
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
             userNotificationCenter: notificationCenterDouble,
@@ -166,25 +166,18 @@ class NotificationManagerTests: TestCase {
     }
 }
 
-class ApplicationDouble: Application {
-    var registeredForRemoteNotifications = false
-    func registerForRemoteNotifications() {
-        registeredForRemoteNotifications = true
-    }
-}
-
-class FirebaseAppDouble: TestableFirebaseApp {
+private class FirebaseAppDouble: TestableFirebaseApp {
     static var configureCalled = false
     static func configure() {
         configureCalled = true
     }
 }
 
-class MessagingDouble: TestableMessaging {
+private class MessagingDouble: TestableMessaging {
     weak var delegate: MessagingDelegate?
 }
 
-class NotificationCenterDouble: UserNotificationCenter {
+private class NotificationCenterDouble: UserNotificationCenter {
 
     weak var delegate: UNUserNotificationCenterDelegate?
 
@@ -204,11 +197,11 @@ class NotificationCenterDouble: UserNotificationCenter {
 
 }
 
-class NotificationManagerDelegateDouble: NotificationManagerDelegate {
+private class PushNotificationManagerDelegateDouble: PushNotificationManagerDelegate {
 
     var userInfo: [AnyHashable : Any]?
 
-    func notificationManager(_ notificationManager: NotificationManager, didReceiveNotificationWithInfo userInfo: [AnyHashable : Any]) {
+    func pushNotificationManager(_ pushNotificationManager: PushNotificationManager, didReceiveNotificationWithInfo userInfo: [AnyHashable : Any]) {
         self.userInfo = userInfo
     }
 

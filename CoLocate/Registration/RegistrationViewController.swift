@@ -15,7 +15,7 @@ class RegistrationViewController: UIViewController, Storyboarded {
     @IBOutlet var registerButton: UIButton!
 
     var registrationService: RegistrationService!
-    var notificationManager: NotificationManager!
+    var pushNotificationManager: PushNotificationManager!
 
     override func viewDidLoad() {
         super.viewDidLoad()

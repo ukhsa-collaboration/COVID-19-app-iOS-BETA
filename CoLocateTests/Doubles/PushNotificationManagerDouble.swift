@@ -1,5 +1,5 @@
 //
-//  NotificationServiceDouble.swift
+//  PushNotificationManagerDouble.swift
 //  CoLocateTests
 //
 //  Created by NHSX.
@@ -9,10 +9,10 @@
 import Foundation
 @testable import CoLocate
 
-class NotificationManagerDouble: NotificationManager {
+class PushNotificationManagerDouble: PushNotificationManager {
     var pushToken: String?
 
-    var delegate: NotificationManagerDelegate?
+    var delegate: PushNotificationManagerDelegate?
 
     func configure() { }
 
