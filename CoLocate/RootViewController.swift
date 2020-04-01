@@ -9,7 +9,9 @@
 import UIKit
 
 class RootViewController: UINavigationController {
-        
+
+    var previouslyPresentedViewController: UIViewController?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         becomeFirstResponder()
@@ -20,7 +22,12 @@ class RootViewController: UINavigationController {
     }
     
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-        if presentedViewController == nil && motion == UIEvent.EventSubtype.motionShake && DebugSetting.enabled {
+        if let vc = presentedViewController {
+            previouslyPresentedViewController = vc
+            dismiss(animated: true)
+        }
+
+        if motion == UIEvent.EventSubtype.motionShake && DebugSetting.enabled {
             showDebugView()
         }
     }
@@ -28,17 +35,19 @@ class RootViewController: UINavigationController {
     private func showDebugView() {
         let storyboard = UIStoryboard(name: "Debug", bundle: nil)
         guard let debugVC = storyboard.instantiateInitialViewController() else { return }
-        self.present(debugVC, animated: true)
-    }
-
-    override func canPerformUnwindSegueAction(_ action: Selector, from fromViewController: UIViewController, sender: Any?) -> Bool {
-        return type(of: fromViewController) == DebugViewController.self
+        present(debugVC, animated: true)
     }
 
     @IBAction func unwindFromOnboarding(unwindSegue: UIStoryboardSegue) {
         dismiss(animated: true)
     }
 
-    @IBAction func unwindFromDebugViewController(unwindSegue: UIStoryboardSegue) {}
+    @IBAction func unwindFromDebugViewController(unwindSegue: UIStoryboardSegue) {
+        dismiss(animated: true)
+
+        if let vc = previouslyPresentedViewController {
+            present(vc, animated: true)
+        }
+    }
 
 }
