@@ -1,3 +1,11 @@
+//
+//  LogginManager.swift
+//  CoLocate
+//
+//  Created by NHSX.
+//  Copyright © 2020 NHSX. All rights reserved.
+//
+
 import Foundation
 import Logging
 
@@ -12,8 +20,17 @@ class LoggingManager {
     }
     
     private init() {
-        // TODO: replace with our new log handlers.
-        LoggingSystem.bootstrap(StreamLogHandler.standardOutput)
+        if Self.isEnabled {
+            // TODO: replace with our new log handlers.
+            LoggingSystem.bootstrap(StreamLogHandler.standardOutput)
+        } else {
+            LoggingSystem.bootstrap { _ in NoOpLogHandler() }
+        }
+    }
+    
+    private static var isEnabled: Bool {
+        // TODO: When should we log?
+        return true
     }
     
 }
