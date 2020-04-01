@@ -28,7 +28,11 @@ protocol BTLEListenerStateDelegate {
     func btleListener(_ listener: BTLEListener, didUpdateState state: CBManagerState)
 }
 
-class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
+protocol BTLEListener {
+    func start(stateDelegate: BTLEListenerStateDelegate?)
+}
+
+class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CBPeripheralDelegate {
 
     var stateDelegate: BTLEListenerStateDelegate?
     var delegate: BTLEListenerDelegate?
@@ -87,7 +91,7 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
 //            Comment this back in for testing if necessary, but be aware AllowDuplicates is
 //            ignored while running in the background, so we can't count on this behaviour
 //            central.scanForPeripherals(withServices: [BTLEBroadcaster.primaryServiceUUID], options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
-            central.scanForPeripherals(withServices: [BTLEBroadcaster.sonarServiceUUID])
+            central.scanForPeripherals(withServices: [ConcreteBTLEBroadcaster.sonarServiceUUID])
         @unknown default:
             fatalError()
         }
@@ -106,7 +110,7 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         
         peripheral.delegate = self
         peripheralList.append(peripheral)
-        peripheral.discoverServices([BTLEBroadcaster.sonarServiceUUID])
+        peripheral.discoverServices([ConcreteBTLEBroadcaster.sonarServiceUUID])
         
 //        peripheral.readRSSI()
     }
@@ -154,13 +158,13 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
             return
         }
         
-        guard let sonarService = services.first(where: {$0.uuid == BTLEBroadcaster.sonarServiceUUID}) else {
+        guard let sonarService = services.first(where: {$0.uuid == ConcreteBTLEBroadcaster.sonarServiceUUID}) else {
             print("Sonar service not discovered for peripheral \(peripheral)")
             return
         }
 
         print("\(#file).\(#function) found sonarService: \(sonarService)")
-        peripheral.discoverCharacteristics([BTLEBroadcaster.sonarIdCharacteristicUUID], for: sonarService)
+        peripheral.discoverCharacteristics([ConcreteBTLEBroadcaster.sonarIdCharacteristicUUID], for: sonarService)
     }
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
@@ -174,7 +178,7 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
             return
         }
         
-        guard let sonarIdCharacteristic = characteristics.first(where: {$0.uuid == BTLEBroadcaster.sonarIdCharacteristicUUID}) else {
+        guard let sonarIdCharacteristic = characteristics.first(where: {$0.uuid == ConcreteBTLEBroadcaster.sonarIdCharacteristicUUID}) else {
             print("Sonar Id characteristic not discovered for peripheral \(peripheral)")
             return
         }
@@ -196,7 +200,7 @@ class BTLEListener: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
             return
         }
 
-        guard characteristic.uuid == BTLEBroadcaster.sonarIdCharacteristicUUID else {
+        guard characteristic.uuid == ConcreteBTLEBroadcaster.sonarIdCharacteristicUUID else {
             return
         }
 

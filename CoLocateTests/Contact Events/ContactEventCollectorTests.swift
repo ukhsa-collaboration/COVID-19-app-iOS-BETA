@@ -24,7 +24,7 @@ class ContactEventCollectorTests: XCTestCase {
     var collector: ContactEventCollector!
 
     override func setUp() {
-        listener = BTLEListener()
+        listener = ConcreteBTLEListener()
         recorder = TestContactEventRecorder()
         collector = ContactEventCollector(contactEventRecorder: recorder)
     }

@@ -14,11 +14,13 @@ class PersistenceDouble: Persistence {
     init(
         allowedDataSharing: Bool = false,
         diagnosis: Diagnosis = .unknown,
-        registration: Registration? = nil
+        registration: Registration? = nil,
+        newOnboarding: Bool = false
     ) {
         self._allowedDataSharing = allowedDataSharing
         self._registration = registration
         self._diagnosis = diagnosis
+        self._newOnboarding = newOnboarding
 
         super.init(secureRegistrationStorage: SecureRegistrationStorage.shared)
     }
@@ -40,5 +42,10 @@ class PersistenceDouble: Persistence {
         get { _diagnosis }
         set { _diagnosis = newValue }
     }
-
+    
+    private var _newOnboarding: Bool
+    override var newOnboarding: Bool {
+        get { _newOnboarding }
+        set { _newOnboarding = newValue }
+    }
 }

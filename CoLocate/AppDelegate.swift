@@ -31,8 +31,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     override init() {
         LoggingManager.bootstrap()
         
-        broadcaster = BTLEBroadcaster()
-        listener = BTLEListener()
+        broadcaster = ConcreteBTLEBroadcaster()
+        listener = ConcreteBTLEListener()
 
         super.init()
 
