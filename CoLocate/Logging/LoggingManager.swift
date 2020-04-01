@@ -67,9 +67,61 @@ class LoggingManager {
 extension LogEvent {
     
     var description: String {
-        "\(formatter.string(from: date)) – \(label): \(message)"
+        if let metadata = self.metadata, !metadata.isEmpty {
+            return "\(headline)\n\(metadata.description)"
+        } else {
+            return headline
+        }
     }
     
+    private var headline: String {
+        "\(formatter.string(from: date)) \(level): \(label) – \(message)"
+    }
+    
+}
+
+private extension Logger.Metadata {
+    
+    var description: String {
+        var string = ""
+        appendDescription(into: &string)
+        return string
+    }
+    
+    func appendDescription(into description: inout String, depth: Int = 0) {
+        let whitespace = repeatElement("  ", count: depth).joined()
+        self.sorted { $0.key < $1.key }
+            .forEach { (key, value) in
+                description.append("\(whitespace)\(key): ")
+                value.appendDescription(into: &description, depth: depth + 1)
+        }
+    }
+    
+}
+
+private extension Logger.MetadataValue {
+    
+    func appendDescription(into description: inout String, depth: Int) {
+        switch self {
+        case .string(let string):
+            description.append(string)
+            description.append("\n")
+        case .stringConvertible(let convertible):
+            description.append(convertible.description)
+            description.append("\n")
+        case .dictionary(let dictionary):
+            description.append("\n")
+            dictionary.appendDescription(into: &description, depth: depth)
+        case .array(let array):
+            description.append("\n")
+            array.forEach { value in
+                let whitespace = repeatElement("  ", count: depth).joined()
+                description.append("\(whitespace)- ")
+                value.appendDescription(into: &description, depth: depth + 1)
+            }
+        }
+    }
+
 }
 
 private let formatter: DateFormatter = {
