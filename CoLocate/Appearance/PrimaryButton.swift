@@ -8,7 +8,7 @@
 
 import UIKit
 
-@IBDesignable
+//@IBDesignable
 class PrimaryButton: UIButton {
 
     private let disabledColorImage: UIImage? = {
