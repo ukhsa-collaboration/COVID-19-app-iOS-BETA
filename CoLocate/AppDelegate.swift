@@ -10,6 +10,9 @@ import UIKit
 import CoreData
 import Firebase
 import FirebaseInstanceID
+import Logging
+
+private let logger = Logger(label: "Application")
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
@@ -40,7 +43,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-
+        
+        logger.info("Launched", metadata: Logger.Metadata(launchOptions: launchOptions))
+        
         application.registerForRemoteNotifications()
 
         notificationManager.configure()
