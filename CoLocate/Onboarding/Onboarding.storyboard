@@ -19,9 +19,11 @@
                     <nil name="viewControllers"/>
                     <connections>
                         <segue destination="b5f-7Q-Z4Y" kind="relationship" relationship="rootViewController" id="hQL-bD-Y1l"/>
+                        <segue destination="mbt-ie-wOZ" kind="unwind" identifier="unwindFromOnboarding" unwindAction="unwindFromOnboardingWithUnwindSegue:" id="jfn-0y-1Cf"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x70-iy-LOr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="mbt-ie-wOZ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="991.304347826087" y="137.94642857142856"/>
         </scene>
@@ -120,7 +122,7 @@
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Vtg-pY-JBT">
                                                 <rect key="frame" x="325" y="48.5" width="51" height="31"/>
                                                 <connections>
-                                                    <action selector="dataSharingAllowedChanged:" destination="asv-dx-knf" eventType="valueChanged" id="U7A-TY-PpR"/>
+                                                    <action selector="allowDataSharingChanged:" destination="asv-dx-knf" eventType="valueChanged" id="rQn-b2-czn"/>
                                                 </connections>
                                             </switch>
                                         </subviews>
@@ -142,7 +144,7 @@
                                         <rect key="frame" x="0.0" y="603.5" width="374" height="174.5"/>
                                         <state key="normal" title="Continue"/>
                                         <connections>
-                                            <action selector="continueTapped:" destination="asv-dx-knf" eventType="touchUpInside" id="x3l-jJ-OPm"/>
+                                            <action selector="continueTapped:" destination="asv-dx-knf" eventType="touchUpInside" id="aZ4-FY-C5b"/>
                                         </connections>
                                     </button>
                                 </subviews>

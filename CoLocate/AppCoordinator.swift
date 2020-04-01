@@ -19,8 +19,6 @@ class AppCoordinator {
         self.navController = navController
         self.persistence = persistence
         self.secureRequestFactory = secureRequestFactory
-                
-        persistence.delegate = self
     }
 
     func start() {
@@ -77,20 +75,5 @@ class AppCoordinator {
     func potentialVC() -> PotentialViewController {
         let vc = PotentialViewController.instantiate()
         return vc
-    }
-}
-
-extension AppCoordinator: PersistenceDelegate {
-    func persistence(_ persistence: Persistence, didRecordDiagnosis diagnosis: Diagnosis) {
-        let vc: UIViewController
-        
-        switch diagnosis {
-        case .unknown: return
-        case .potential: vc = potentialVC()
-        case .infected: vc = isolateVC()
-        case .notInfected: vc = okVC()
-        }
-
-        navController.pushViewController(vc, animated: true)
     }
 }
