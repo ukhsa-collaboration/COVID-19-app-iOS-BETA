@@ -17,6 +17,8 @@ class RegistrationViewController: UIViewController, Storyboarded {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = ""
 
         if #available(iOS 13, *) {
             activityIndicator.style = .medium
