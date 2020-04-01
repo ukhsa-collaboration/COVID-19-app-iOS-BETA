@@ -41,6 +41,10 @@ class OnboardingViewController: UINavigationController, Storyboarded {
         updateState()
     }
 
+    @IBAction func unwindFromPermissions(unwindSegue: UIStoryboardSegue) {
+        updateState()
+    }
+
     private func present(given state: OnboardingCoordinator.State) {
         let vc: UIViewController
         switch state {

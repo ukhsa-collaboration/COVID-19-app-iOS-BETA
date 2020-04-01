@@ -9,62 +9,78 @@
 import UIKit
 import CoreBluetooth
 
-class PermissionsViewController: UIViewController, BTLEBroadcasterStateDelegate, BTLEListenerStateDelegate, Storyboarded {
+class PermissionsViewController: UIViewController, Storyboarded {
     static let storyboardName = "Permissions"
-    var bluetoothReadyDelegate: BluetoothAvailableDelegate?
 
-    @IBOutlet private var bodyHeadline: UILabel!
-    @IBOutlet private var bodyCopy: UILabel!
-    @IBOutlet private var continueButton: UIButton!
-    
-    private var btleReady: (listenerReady: Bool, broadcasterReady: Bool) = (false, false)
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    let authManager = AuthorizationManager()
+    let notificationManager: PushNotificationManager = ConcretePushNotificationManager()
+    let persistence = Persistence.shared
 
-        bodyHeadline.text = "Permissions we need"
-        bodyCopy.text = """
-        To trace people you come in contact with, this app will automatically access:
-        
-        • Bluetooth, to record when your device is near others who are using this app
-        """
-
-        continueButton.setTitle("I understand", for: .normal)
-    }
+    weak var bluetoothReadyDelegate: BluetoothAvailableDelegate?
     
     @IBAction func didTapContinue(_ sender: UIButton) {
-        segueIfBTLEReady()
-      #if targetEnvironment(simulator)
-        btleReady.broadcasterReady = true
-        btleReady.listenerReady = true
-        segueIfBTLEReady()
-      #else
-        let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
-
-        appDelegate.broadcaster.start(stateDelegate: self)
-        appDelegate.listener.start(stateDelegate: self)
-      #endif
+        requestBluetoothPermissions()
     }
 
-    // MARK: BTLEBroadcasterDelegate / BTLEListenerDelegate
+    private func requestBluetoothPermissions() {
+        #if targetEnvironment(simulator)
+            requestNotificationPermissions()
+        #else
+            // TODO: Inject these?
+            let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
+            appDelegate.broadcaster.start(stateDelegate: self)
+            appDelegate.listener.start(stateDelegate: self)
+        #endif
+    }
 
+    private func checkBluetoothAuth() {
+        guard authManager.bluetooth == .allowed else { return }
+
+        if persistence.newOnboarding {
+            requestNotificationPermissions()
+        } else {
+            bluetoothReadyDelegate?.bluetoothIsAvailable()
+        }
+    }
+
+    private func requestNotificationPermissions() {
+        notificationManager.requestAuthorization { [weak self] result in
+            guard let self = self else { return }
+
+            switch result {
+            case .success(let granted):
+                if granted {
+                    DispatchQueue.main.async {
+                        self.performSegue(withIdentifier: "unwindFromPermissions", sender: self)
+                    }
+                } else {
+                    // We get here sometimes even after tapping "Allow", so maybe
+                    // we should re-check permissions here after a short delay to
+                    // see if it's a spurious false result?
+                    fatalError()
+                }
+            case .failure(let error):
+                print("Error requesting notification permissions: \(error)")
+                fatalError()
+            }
+        }
+    }
+}
+
+// MARK: - BTLEBroadcasterDelegate
+extension PermissionsViewController: BTLEBroadcasterStateDelegate {
     func btleBroadcaster(_ broadcaster: BTLEBroadcaster, didUpdateState state: CBManagerState) {
-        if state == .poweredOn {
-            btleReady.broadcasterReady = true
-        }
-        segueIfBTLEReady()
-    }
+        // Do we also need to wait for Bluetooth to be powered on here?
 
+        checkBluetoothAuth()
+    }
+}
+
+// MARK: - BTLEListenerDelegate
+extension PermissionsViewController: BTLEListenerStateDelegate {
     func btleListener(_ listener: BTLEListener, didUpdateState state: CBManagerState) {
-        if state == .poweredOn {
-            btleReady.listenerReady = true
-        }
-        segueIfBTLEReady()
-    }
+        // Do we also need to wait for Bluetooth to be powered on here?
 
-    private func segueIfBTLEReady() {
-        guard btleReady.broadcasterReady && btleReady.listenerReady else { return }
-
-        bluetoothReadyDelegate?.bluetoothIsAvailable()
+        checkBluetoothAuth()
     }
 }

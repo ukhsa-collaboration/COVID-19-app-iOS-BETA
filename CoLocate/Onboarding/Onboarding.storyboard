@@ -97,7 +97,7 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="61U-61-fII">
                                         <rect key="frame" x="0.0" y="61" width="374" height="243.5"/>
-                                        <mutableString key="text">NHS Stop the Spread uses your phone's low energy Bluetooth to detect if you've been near someone else with this app.  If you have coronavirus symptoms, the NHS will ask for the proximity information collected on your phone so that we can alert others that they may be at risk.  This information will be encrypted, and is only shared with ths NHS. Your location history and personal identity will be protected.</mutableString>
+                                        <string key="text">NHS Stop the Spread uses your phone's low energy Bluetooth to detect if you've been near someone else with this app.  If you have coronavirus symptoms, the NHS will ask for the proximity information collected on your phone so that we can alert others that they may be at risk.  This information will be encrypted, and is only shared with ths NHS. Your location history and personal identity will be protected.</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -142,7 +142,7 @@
                                         <rect key="frame" x="0.0" y="603.5" width="374" height="174.5"/>
                                         <state key="normal" title="Continue"/>
                                         <connections>
-                                            <segue destination="gIc-wZ-TP0" kind="unwind" unwindAction="unwindFromPrivacyWithUnwindSegue:" id="Dp4-at-ZnK"/>
+                                            <action selector="continueTapped:" destination="asv-dx-knf" eventType="touchUpInside" id="x3l-jJ-OPm"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -159,7 +159,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="2kT-fD-hac"/>
                     <connections>
+                        <outlet property="allowDataSharingSwitch" destination="Vtg-pY-JBT" id="8r9-c9-L1D"/>
                         <outlet property="continueButton" destination="png-1j-34C" id="cu0-UQ-3l8"/>
+                        <segue destination="gIc-wZ-TP0" kind="unwind" identifier="unwindFromPrivacy" unwindAction="unwindFromPrivacyWithUnwindSegue:" id="EAs-Kf-vTX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LmF-ZM-p1m" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

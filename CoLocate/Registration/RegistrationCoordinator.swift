@@ -13,7 +13,7 @@ protocol PushNotificationRequester {
     func advanceAfterPushNotifications()
 }
 
-protocol BluetoothAvailableDelegate {
+protocol BluetoothAvailableDelegate: class {
     func bluetoothIsAvailable()
 }
 
@@ -29,7 +29,7 @@ class RegistrationCoordinator {
     let navController: UINavigationController
     let pushNotificationManager: PushNotificationManager
     let registrationService: RegistrationService
-    let persistance: Persistance
+    let persistence: Persistence
     let notificationCenter: NotificationCenter
 
     fileprivate var currentState: RegisteredState = .unregistered
@@ -37,13 +37,13 @@ class RegistrationCoordinator {
     init(navController: UINavigationController,
          pushNotificationManager: PushNotificationManager,
          registrationService: RegistrationService,
-         persistance: Persistance,
+         persistence: Persistence,
          notificationCenter: NotificationCenter) {
         
         self.navController = navController
         self.pushNotificationManager = pushNotificationManager
         self.registrationService = registrationService
-        self.persistance = persistance
+        self.persistence = persistence
         self.notificationCenter = notificationCenter
         
         notificationCenter.addObserver(self, selector: #selector(didReceiveNsNotification(notification:)), name: RegistrationCompleteNotification, object: nil)

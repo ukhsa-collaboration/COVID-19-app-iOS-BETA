@@ -34,20 +34,15 @@ class AuthorizationManager {
                 fatalError()
             }
         } else {
-            let manager = CBCentralManager()
-            switch manager.state {
-            case .unknown:
+            switch CBPeripheralManager.authorizationStatus() {
+            case .notDetermined:
                 return .notDetermined
-            case .resetting:
+            case .restricted:
                 fatalError()
-            case .unsupported:
+            case .denied:
                 fatalError()
-            case .unauthorized:
-                fatalError()
-            case .poweredOff:
-                fatalError()
-            case .poweredOn:
-                fatalError()
+            case .authorized:
+                return .allowed
             @unknown default:
                 fatalError()
             }

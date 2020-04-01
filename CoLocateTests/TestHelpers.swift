@@ -23,7 +23,7 @@ class TestCase: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        Persistance.shared.clear()
+        Persistence.shared.clear()
     }
 }
 

@@ -12,10 +12,10 @@ import XCTest
 class AppCoordinatorTests: TestCase {
 
     func test_shows_you_are_okay_screen_when_diagnosis_is_unknown() {
-        let persistance = PersistanceDouble()
-        persistance.diagnosis = .unknown
+        let persistence = PersistenceDouble()
+        persistence.diagnosis = .unknown
         let navController = UINavigationController()
-        let coordinator = AppCoordinator(navController: navController, persistance: persistance, secureRequestFactory: SecureRequestFactoryDouble())
+        let coordinator = AppCoordinator(navController: navController, persistence: persistence, secureRequestFactory: SecureRequestFactoryDouble())
 
         let vc = coordinator.initialViewController()
 
@@ -23,10 +23,10 @@ class AppCoordinatorTests: TestCase {
     }
 
     func testShowView_diagnosisUnknown() {
-        let persistance = PersistanceDouble()
-        persistance.diagnosis = .unknown
+        let persistence = PersistenceDouble()
+        persistence.diagnosis = .unknown
         let navController = UINavigationController()
-        let coordinator = AppCoordinator(navController: navController, persistance: persistance, secureRequestFactory: SecureRequestFactoryDouble())
+        let coordinator = AppCoordinator(navController: navController, persistence: persistence, secureRequestFactory: SecureRequestFactoryDouble())
         
         coordinator.showAppropriateViewController()
         
@@ -34,10 +34,10 @@ class AppCoordinatorTests: TestCase {
     }
     
     func testShowView_diagnosisInfected() {
-        let persistance = PersistanceDouble()
-        persistance.diagnosis = .infected
+        let persistence = PersistenceDouble()
+        persistence.diagnosis = .infected
         let navController = UINavigationController()
-        let coordinator = AppCoordinator(navController: navController, persistance: persistance, secureRequestFactory: SecureRequestFactoryDouble())
+        let coordinator = AppCoordinator(navController: navController, persistence: persistence, secureRequestFactory: SecureRequestFactoryDouble())
 
         coordinator.showAppropriateViewController()
         
@@ -45,10 +45,10 @@ class AppCoordinatorTests: TestCase {
     }
     
     func testShowView_diagnosisNotInfected() {
-        let persistance = PersistanceDouble()
-        persistance.diagnosis = .notInfected
+        let persistence = PersistenceDouble()
+        persistence.diagnosis = .notInfected
         let navController = UINavigationController()
-        let coordinator = AppCoordinator(navController: navController, persistance: persistance, secureRequestFactory: SecureRequestFactoryDouble())
+        let coordinator = AppCoordinator(navController: navController, persistence: persistence, secureRequestFactory: SecureRequestFactoryDouble())
 
         coordinator.showAppropriateViewController()
         
@@ -57,10 +57,10 @@ class AppCoordinatorTests: TestCase {
 
     
     func testShowView_diagnosisPotential() {
-        let persistance = PersistanceDouble()
-        persistance.diagnosis = .potential
+        let persistence = PersistenceDouble()
+        persistence.diagnosis = .potential
         let navController = UINavigationController()
-        let coordinator = AppCoordinator(navController: navController, persistance: persistance, secureRequestFactory: SecureRequestFactoryDouble())
+        let coordinator = AppCoordinator(navController: navController, persistence: persistence, secureRequestFactory: SecureRequestFactoryDouble())
 
         coordinator.showAppropriateViewController()
         
@@ -68,34 +68,34 @@ class AppCoordinatorTests: TestCase {
     }
     
     func testShowsPotentialWhenReceivingPotentialDiagnosis() {
-        let persistance = PersistanceDouble()
-        persistance.diagnosis = .unknown
+        let persistence = PersistenceDouble()
+        persistence.diagnosis = .unknown
         let navController = UINavigationController()
-        let coordinator = AppCoordinator(navController: navController, persistance: persistance, secureRequestFactory: SecureRequestFactoryDouble())
+        let coordinator = AppCoordinator(navController: navController, persistence: persistence, secureRequestFactory: SecureRequestFactoryDouble())
 
-        coordinator.persistance(persistance, didRecordDiagnosis: .potential)
+        coordinator.persistence(persistence, didRecordDiagnosis: .potential)
 
         XCTAssertNotNil(navController.topViewController as? PotentialViewController)
     }
     
     func testShowsOkWhenReceivingNotInfectedDiagnosis() {
-        let persistance = PersistanceDouble()
-        persistance.diagnosis = .unknown
+        let persistence = PersistenceDouble()
+        persistence.diagnosis = .unknown
         let navController = UINavigationController()
-        let coordinator = AppCoordinator(navController: navController, persistance: persistance, secureRequestFactory: SecureRequestFactoryDouble())
+        let coordinator = AppCoordinator(navController: navController, persistence: persistence, secureRequestFactory: SecureRequestFactoryDouble())
 
-        coordinator.persistance(persistance, didRecordDiagnosis: .notInfected)
+        coordinator.persistence(persistence, didRecordDiagnosis: .notInfected)
 
         XCTAssertNotNil(navController.topViewController as? OkNowViewController)
     }
 
     func testShowsPleaseIsolateWhenReceivingInfectedDiagnosis() {
-        let persistance = PersistanceDouble()
-        persistance.diagnosis = .unknown
+        let persistence = PersistenceDouble()
+        persistence.diagnosis = .unknown
         let navController = UINavigationController()
-        let coordinator = AppCoordinator(navController: navController, persistance: persistance, secureRequestFactory: SecureRequestFactoryDouble())
+        let coordinator = AppCoordinator(navController: navController, persistence: persistence, secureRequestFactory: SecureRequestFactoryDouble())
 
-        coordinator.persistance(persistance, didRecordDiagnosis: .infected)
+        coordinator.persistence(persistence, didRecordDiagnosis: .infected)
 
         let viewController = navController.topViewController as? PleaseSelfIsolateViewController
         XCTAssertNotNil(viewController)

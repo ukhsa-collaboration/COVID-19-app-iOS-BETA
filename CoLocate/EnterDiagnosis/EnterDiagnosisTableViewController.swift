@@ -11,7 +11,7 @@ import UIKit
 class EnterDiagnosisTableViewController: UITableViewController, Storyboarded {
     static let storyboardName = "EnterDiagnosis"
     
-    let persistance = Persistance.shared
+    let persistence = Persistence.shared
     
     enum Rows: Int {
         case title, yes, no
@@ -39,10 +39,10 @@ class EnterDiagnosisTableViewController: UITableViewController, Storyboarded {
             break
             
         case Rows.yes.rawValue:
-            persistance.diagnosis = .infected
+            persistence.diagnosis = .infected
             
         case Rows.no.rawValue:
-            persistance.diagnosis = .notInfected
+            persistence.diagnosis = .notInfected
 
         default:
             print("\(#file).\(#function) unknown indexPath selected: \(indexPath)")

@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     let listener: BTLEListener
 
     let pushNotificationManager: PushNotificationManager = ConcretePushNotificationManager()
-    let persistance = Persistance.shared
+    let persistence = Persistence.shared
     let registrationService: RegistrationService
 
     var appCoordinator: AppCoordinator!
@@ -54,14 +54,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = rootViewController
 
-        if !persistance.newOnboarding {
-            if let registration = persistance.registration {
+        if !persistence.newOnboarding {
+            if let registration = persistence.registration {
                 continueWithRegistration(registration)
             } else {
                 let registrationCoordinator = RegistrationCoordinator(navController: rootViewController,
                                                                       pushNotificationManager: pushNotificationManager,
                                                                       registrationService: registrationService,
-                                                                      persistance: persistance,
+                                                                      persistence: persistence,
                                                                       notificationCenter: NotificationCenter.default)
                 NotificationCenter.default.addObserver(self, selector: #selector(didCompleteRegistration(notification:)), name: RegistrationCompleteNotification, object: nil)
                 registrationCoordinator.start()
@@ -70,7 +70,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
         window?.makeKeyAndVisible()
 
-        if persistance.newOnboarding {
+        if persistence.newOnboarding {
             let onboardingViewController = OnboardingViewController.instantiate()
             onboardingViewController.rootViewController = rootViewController
         }
@@ -118,7 +118,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         listener.start(stateDelegate: nil)
 
         appCoordinator = AppCoordinator(navController: rootViewController,
-                                        persistance: persistance,
+                                        persistence: persistence,
                                         secureRequestFactory: ConcreteSecureRequestFactory(registration: registration))
         appCoordinator.start()
     }

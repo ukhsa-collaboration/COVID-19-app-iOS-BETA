@@ -15,20 +15,20 @@ class OnboardingCoordinator {
         case initial, permissions, registration
     }
 
-    let persistance: Persistance
+    let persistence: Persistence
     let authorizationManager: AuthorizationManager
 
-    init(persistance: Persistance, authorizationManager: AuthorizationManager) {
-        self.persistance = persistance
+    init(persistence: Persistence, authorizationManager: AuthorizationManager) {
+        self.persistence = persistence
         self.authorizationManager = authorizationManager
     }
 
     convenience init() {
-        self.init(persistance: Persistance.shared, authorizationManager: AuthorizationManager())
+        self.init(persistence: Persistence.shared, authorizationManager: AuthorizationManager())
     }
 
     func state(completion: @escaping (State?) -> Void) {
-        let allowedDataSharing = self.persistance.allowedDataSharing
+        let allowedDataSharing = self.persistence.allowedDataSharing
         guard allowedDataSharing else {
             completion(.initial)
             return
@@ -49,7 +49,7 @@ class OnboardingCoordinator {
                 return
             }
 
-            let isRegistered = self.persistance.registration != nil
+            let isRegistered = self.persistence.registration != nil
             guard isRegistered else {
                 completion(.registration)
                 return

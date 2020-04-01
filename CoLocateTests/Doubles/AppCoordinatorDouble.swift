@@ -14,7 +14,7 @@ class AppCoordinatorDouble: AppCoordinator {
 
     init() {
         super.init(navController: UINavigationController(),
-                   persistance: Persistance(),
+                   persistence: Persistence(),
                    secureRequestFactory: SecureRequestFactoryDouble())
     }
 

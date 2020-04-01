@@ -15,12 +15,12 @@ class DebugViewController: UITableViewController {
     @IBOutlet weak var interceptRequestsSwitch: UISwitch!
     @IBOutlet weak var newOnboardingSwitch: UISwitch!
 
-    let persistance = Persistance.shared
+    let persistence = Persistence.shared
     let contactEventRecorder = PlistContactEventRecorder.shared
     
     override func viewDidLoad() {
-        allowedDataSharingSwitch.isOn = persistance.allowedDataSharing
-        newOnboardingSwitch.isOn = persistance.newOnboarding
+        allowedDataSharingSwitch.isOn = persistence.allowedDataSharing
+        newOnboardingSwitch.isOn = persistence.newOnboarding
 
         #if DEBUG
             interceptRequestsSwitch.isOn = InterceptingSession.interceptNextRequest
@@ -35,14 +35,14 @@ class DebugViewController: UITableViewController {
 
         switch (indexPath.section, indexPath.row) {
         case (0, 0):
-            persistance.clear()
+            persistence.clear()
             show(title: "Cleared", message: "Registration and diagnosis data has been cleared. Please stop and re-start the application.")
 
         case (0, 1):
             let alertController = UIAlertController(title: "Set diagnosis", message: nil, preferredStyle: .actionSheet)
             for diagnosis in Diagnosis.allCases {
                 alertController.addAction(UIAlertAction(title: "\(diagnosis)", style: .default) { _ in
-                    Persistance.shared.diagnosis = diagnosis
+                    Persistence.shared.diagnosis = diagnosis
                     self.show(title: "Cleared", message: "Diagnosis data has been set. Please stop and re-start the application.")
                 })
             }
@@ -65,7 +65,7 @@ class DebugViewController: UITableViewController {
             
         case (2, 0):
             do {
-                guard let registration = persistance.registration else {
+                guard let registration = persistence.registration else {
                     throw NSError()
                 }
                 let delay = 15
@@ -109,7 +109,7 @@ class DebugViewController: UITableViewController {
     }
 
     @IBAction func allowedDataSharingChanged(_ sender: UISwitch) {
-        persistance.allowedDataSharing = sender.isOn
+        persistence.allowedDataSharing = sender.isOn
     }
 
     @IBAction func interceptRegistrationRequestsChanged(_ sender: UISwitch) {
@@ -124,7 +124,7 @@ class DebugViewController: UITableViewController {
     }
 
     @IBAction func newOnboardingChanged(_ sender: UISwitch) {
-        persistance.newOnboarding = sender.isOn
+        persistence.newOnboarding = sender.isOn
     }
 
 }

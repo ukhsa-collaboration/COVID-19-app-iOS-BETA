@@ -10,7 +10,7 @@ import UIKit
 
 class LiveBTLEDebuggerTableViewController: UITableViewController {
 
-    var persistence: Persistance = Persistance.shared
+    var persistence: Persistence = Persistence.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
