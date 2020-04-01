@@ -12,24 +12,21 @@ class RegistrationViewController: UIViewController, Storyboarded {
     static let storyboardName = "Registration"
     
     @IBOutlet private var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet var registerButton: UIButton!
 
     var registrationService: RegistrationService = ConcreteRegistrationService()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = ""
-        registerButton.setTitle("Register", for: .normal)
 
         if #available(iOS 13, *) {
             activityIndicator.style = .medium
         }
     }
 
-    @IBAction func didTapRegister(_ sender: Any) {
+    @IBAction func didTapRegister(_ sender: UIButton) {
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
-        registerButton.isEnabled = false
+        sender.isEnabled = false
 
         registrationService.register { [weak self] result in
             guard let self = self else { return }
@@ -42,7 +39,7 @@ class RegistrationViewController: UIViewController, Storyboarded {
                 alert.addAction(UIAlertAction(title: "OK", style: .default))
                 self.present(alert, animated: true)
                 
-                self.registerButton.isEnabled = true
+                sender.isEnabled = true
             }
         }
     }

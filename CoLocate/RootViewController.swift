@@ -35,7 +35,9 @@ class RootViewController: UINavigationController {
         return type(of: fromViewController) == DebugViewController.self
     }
 
-    @IBAction func unwindFromOnboarding(unwindSegue: UIStoryboardSegue) {}
+    @IBAction func unwindFromOnboarding(unwindSegue: UIStoryboardSegue) {
+        dismiss(animated: true)
+    }
 
     @IBAction func unwindFromDebugViewController(unwindSegue: UIStoryboardSegue) {}
 
