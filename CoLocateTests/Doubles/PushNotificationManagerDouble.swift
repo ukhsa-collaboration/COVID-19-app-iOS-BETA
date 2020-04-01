@@ -11,16 +11,23 @@ import Foundation
 
 class PushNotificationManagerDouble: PushNotificationManager {
     var pushToken: String?
-
-    var delegate: PushNotificationManagerDelegate?
+    var handlers: [PushNotificationType : PushNotificationHandler] = [:]
 
     func configure() { }
-
-    var completion: ((Result<Bool, Error>) -> Void)?
-    func requestAuthorization(completion: @escaping (Result<Bool, Error>) -> Void) {
-        self.completion = completion
+    
+    func registerHandler(forType type: PushNotificationType, handler: @escaping PushNotificationHandler) {
+        handlers[type] = handler
+    }
+    
+    func removeHandler(forType type: PushNotificationType) {
+        handlers[type] = nil
     }
 
-    func handleNotification(userInfo: [AnyHashable : Any]) {
+    var requestAuthorizationCompletion: ((Result<Bool, Error>) -> Void)?
+    func requestAuthorization(completion: @escaping (Result<Bool, Error>) -> Void) {
+        self.requestAuthorizationCompletion = completion
+    }
+    
+    func handleNotification(userInfo: [AnyHashable : Any], completionHandler: @escaping PushNotificationCompletionHandler) {
     }
 }

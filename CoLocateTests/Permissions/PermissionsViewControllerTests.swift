@@ -39,9 +39,8 @@ class PermissionsViewControllerTests: TestCase {
         broadcasterDouble.delegate?.btleBroadcaster(broadcasterDouble, didUpdateState: .poweredOn)
         #endif
 
-        XCTAssertNotNil(notificationManagerDouble.completion)
-
-        notificationManagerDouble.completion!(.success(true))
+        XCTAssertNotNil(notificationManagerDouble.requestAuthorizationCompletion)
+        notificationManagerDouble.requestAuthorizationCompletion?(.success(true))
 
         XCTAssert(permissionsUnwinder.didUnwindFromPermissions)
     }

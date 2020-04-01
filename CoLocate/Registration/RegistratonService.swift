@@ -20,7 +20,6 @@ class ConcreteRegistrationService: RegistrationService {
     let registrationStorage: SecureRegistrationStorage = SecureRegistrationStorage.shared
     var pushNotificationManager: PushNotificationManager
     let notificationCenter: NotificationCenter
-    var registerWhenTokenReceived = false
     var completionHandler: ((Result<Void, Error>) -> Void)?
     
     init(session: Session, pushNotificationManager: PushNotificationManager, notificationCenter: NotificationCenter) {
@@ -41,15 +40,25 @@ class ConcreteRegistrationService: RegistrationService {
         )
     }
     
+    deinit {
+        notificationCenter.removeObserver(self)
+    }
+    
     func register(completionHandler: @escaping ((Result<Void, Error>) -> Void)) {
         self.completionHandler = completionHandler
-        pushNotificationManager.delegate = self
+        
+        pushNotificationManager.registerHandler(forType: .registrationActivationCode) { userInfo, completionHandler in
+            self.didReceiveActivationCode(activationCode: userInfo["activationCode"] as! String)
+            self.pushNotificationManager.removeHandler(forType: .registrationActivationCode)
+        }
 
-        if pushNotificationManager.pushToken == nil {
-            registerWhenTokenReceived = true
-            return
-        } else {
+        if pushNotificationManager.pushToken != nil {
             beginRegistration()
+        } else {
+            notificationCenter.addObserver(forName: PushTokenReceivedNotification, object: nil, queue: nil) { _ in
+                self.notificationCenter.removeObserver(self, name: PushTokenReceivedNotification, object: nil)
+                self.beginRegistration()
+            }
         }
     }
     
@@ -57,51 +66,16 @@ class ConcreteRegistrationService: RegistrationService {
         let request = RequestFactory.registrationRequest(pushToken: pushNotificationManager.pushToken!)
 
         session.execute(request, queue: .main) { result in
-            self.handleRegistration(result: result)
-        }
-    }
-    
-    private func handleRegistration(result: Result<(), Error>) {
-        switch result {
-        case .success(_):
-            print("\(#file) \(#function) First registration request succeeded")
+            switch result {
+            case .success(_):
+                print("\(#file) \(#function) First registration request succeeded")
+                // If everything worked, we'll receive a notification with the access token
+                // See didReceiveActivationCode().
 
-        case .failure(let error):
-            // TODO How do we handle this failure?
-            print("\(#file) \(#function) Error making first registration request: \(error)")
-            completionHandler?(.failure(error))
-        }
-    }
-
-    private func succeed(registration: Registration) {
-        pushNotificationManager.delegate = nil
-        let userInfo = [RegistrationCompleteNotificationRegistrationKey : registration]
-        notificationCenter.post(name: RegistrationCompleteNotification, object: nil, userInfo: userInfo)
-        completionHandler?(.success(()))
-    }
-    
-    private func fail(withError error: Error) {
-        pushNotificationManager.delegate = nil
-        completionHandler?(.failure(error))
-    }
-}
-
-
-extension ConcreteRegistrationService: PushNotificationManagerDelegate {
-
-    func pushNotificationManager(_ pushNotificationManager: PushNotificationManager,
-                             didReceiveNotificationWithInfo userInfo: [AnyHashable : Any]) {
-        // I can't remember how to spell the switch to do this --RA
-        if let activationCode = userInfo["activationCode"] as? String {
-            didReceiveActivationCode(activationCode: activationCode)
-        } else if let pushToken = userInfo["pushToken"] as? String {
-            didReceivePushToken(pushToken: pushToken)
-        }
-    }
-    
-    private func didReceivePushToken(pushToken: String) {
-        if registerWhenTokenReceived {
-            beginRegistration()
+            case .failure(let error):
+                print("\(#file) \(#function) Error making first registration request: \(error)")
+                self.completionHandler?(.failure(error))
+            }
         }
     }
     
@@ -109,26 +83,36 @@ extension ConcreteRegistrationService: PushNotificationManagerDelegate {
         let request = RequestFactory.confirmRegistrationRequest(activationCode: activationCode, pushToken: pushNotificationManager.pushToken!)
         session.execute(request, queue: .main) { [weak self] result in
             guard let self = self else { return }
-            
+
             switch result {
             case .success(let response):
                 let registration = Registration(id: response.id, secretKey: response.secretKey)
-                
+
                 do {
                     try self.registrationStorage.set(registration: registration)
                 } catch {
                     print("Error saving registration: \(error)")
                     self.fail(withError: error)
                 }
-                 
+
                 self.succeed(registration: registration)
-                
+
             case .failure(let error):
-                // TODO How do we handle this failure?
                 print("error during registration: \(error)")
                 self.fail(withError: error)
             }
         }
+    }
+
+    
+    private func succeed(registration: Registration) {
+        let userInfo = [RegistrationCompleteNotificationRegistrationKey : registration]
+        notificationCenter.post(name: RegistrationCompleteNotification, object: nil, userInfo: userInfo)
+        completionHandler?(.success(()))
+    }
+    
+    private func fail(withError error: Error) {
+        completionHandler?(.failure(error))
     }
 
 }

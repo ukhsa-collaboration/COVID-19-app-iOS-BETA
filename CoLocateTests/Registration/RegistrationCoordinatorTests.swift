@@ -50,15 +50,15 @@ class RegistrationCoordinatorTests: TestCase {
             }
         }
 
-        pushNotificationManager.completion?(.success(true))
+        pushNotificationManager.requestAuthorizationCompletion?(.success(true))
         XCTAssertTrue(didAllowNotifications)
     }
 
     func test_shows_bluetooth_after_push_notifications() {
         coordinator.requestPushNotifications() { _ in }
-        XCTAssertNotNil(pushNotificationManager.completion)
+        XCTAssertNotNil(pushNotificationManager.requestAuthorizationCompletion)
 
-        pushNotificationManager.completion?(.success(true))
+        pushNotificationManager.requestAuthorizationCompletion?(.success(true))
         coordinator.advanceAfterPushNotifications()
 
         let vc = navController.topViewController as? PermissionsViewController

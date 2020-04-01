@@ -1,5 +1,5 @@
 //
-//  NotificationManagerTests.swift
+//  PushNotificationManagerTests.swift
 //  CoLocateTests
 //
 //  Created by NHSX.
@@ -12,7 +12,7 @@ import XCTest
 import Firebase
 @testable import CoLocate
 
-class NotificationManagerTests: TestCase {
+class PushNotificationManagerTests: TestCase {
 
     override func setUp() {
         super.setUp()
@@ -25,7 +25,8 @@ class NotificationManagerTests: TestCase {
         let notificationManager = ConcretePushNotificationManager(
             firebase: FirebaseAppDouble.self,
             messagingFactory: { messaging },
-            userNotificationCenter: NotificationCenterDouble(),
+            userNotificationCenter: UserNotificationCenterDouble(),
+            notificationCenter: NotificationCenter(),
             persistence: Persistence()
         )
 
@@ -36,28 +37,28 @@ class NotificationManagerTests: TestCase {
     
     func testPushTokenHandling() {
         let messaging = MessagingDouble()
+        let notificationCenter = NotificationCenter()
         let notificationManager = ConcretePushNotificationManager(
             firebase: FirebaseAppDouble.self,
             messagingFactory: { messaging },
-            userNotificationCenter: NotificationCenterDouble(),
+            userNotificationCenter: UserNotificationCenterDouble(),
+            notificationCenter: notificationCenter,
             persistence: Persistence()
         )
-        let delegate = PushNotificationManagerDelegateDouble()
-        notificationManager.delegate = delegate
 
         notificationManager.configure()
         // Ugh, can't find a way to not pass a real Messaging here. Should be ok as long as the actual delegate method doesn't use it.
         messaging.delegate!.messaging?(Messaging.messaging(), didReceiveRegistrationToken: "12345")
         XCTAssertEqual("12345", notificationManager.pushToken)
-        XCTAssertEqual("12345", delegate.userInfo?["pushToken"] as! String)
     }
 
     func testRequestAuthorization_success() {
-        let notificationCenterDouble = NotificationCenterDouble()
+        let notificationCenterDouble = UserNotificationCenterDouble()
         let notificationManager = ConcretePushNotificationManager(
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
             userNotificationCenter: notificationCenterDouble,
+            notificationCenter: NotificationCenter(),
             persistence: Persistence()
         )
 
@@ -76,32 +77,34 @@ class NotificationManagerTests: TestCase {
         XCTAssertTrue(granted!)
         XCTAssertNil(error)
     }
-    
+        
     func testHandleNotification_savesPotentialDiagnosis() {
         let persistence = Persistence()
         let notificationManager = ConcretePushNotificationManager(
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
-            userNotificationCenter: NotificationCenterDouble(),
+            userNotificationCenter: UserNotificationCenterDouble(),
+            notificationCenter: NotificationCenter(),
             persistence: persistence
         )
         
-        notificationManager.handleNotification(userInfo: ["status" : "Potential"])
+        notificationManager.handleNotification(userInfo: ["status" : "Potential"], completionHandler: { _ in })
         
         XCTAssertEqual(persistence.diagnosis, .potential)
     }
 
     func testHandleNotification_sendsLocalNotificationWithPotentialStatus() {
         let persistence = Persistence()
-        let notificationCenterDouble = NotificationCenterDouble()
+        let notificationCenterDouble = UserNotificationCenterDouble()
         let notificationManager = ConcretePushNotificationManager(
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
             userNotificationCenter: notificationCenterDouble,
+            notificationCenter: NotificationCenter(),
             persistence: persistence
         )
 
-        notificationManager.handleNotification(userInfo: ["status" : "Potential"])
+        notificationManager.handleNotification(userInfo: ["status" : "Potential"]) {_ in }
 
         XCTAssertNotNil(notificationCenterDouble.request)
     }
@@ -111,56 +114,86 @@ class NotificationManagerTests: TestCase {
         let notificationManager = ConcretePushNotificationManager(
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
-            userNotificationCenter: NotificationCenterDouble(),
+            userNotificationCenter: UserNotificationCenterDouble(),
+            notificationCenter: NotificationCenter(),
             persistence: persistence
         )
         
-        notificationManager.handleNotification(userInfo: ["status" : "infected"])
+        notificationManager.handleNotification(userInfo: ["status" : "infected"]) {_ in }
         
         XCTAssertEqual(persistence.diagnosis, .unknown)
     }
 
     func testHandleNotification_doesNotSendLocalNotificationWhenStatusIsNotPotential() {
         let persistence = Persistence()
-        let notificationCenterDouble = NotificationCenterDouble()
+        let notificationCenterDouble = UserNotificationCenterDouble()
         let notificationManager = ConcretePushNotificationManager(
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
             userNotificationCenter: notificationCenterDouble,
+            notificationCenter: NotificationCenter(),
             persistence: persistence
         )
 
-        notificationManager.handleNotification(userInfo: ["status" : "infected"])
+        notificationManager.handleNotification(userInfo: ["status" : "infected"]) {_ in }
 
         XCTAssertNil(notificationCenterDouble.request)
     }
     
-    func testHandleNotification_forwardsNonDiagnosisNotificationsToDelegate() {
+    func testHandleNotificaton_routesRegistrationAccessTokenNotifications() {
         let notificationManager = ConcretePushNotificationManager(
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
-            userNotificationCenter: NotificationCenterDouble(),
+            userNotificationCenter: UserNotificationCenterDouble(),
+            notificationCenter: NotificationCenter(),
             persistence: Persistence()
         )
-        let delegate = PushNotificationManagerDelegateDouble()
-        notificationManager.delegate = delegate
-        let userInfo = ["something" : "else"]
+        var callersCompletionCalled = false
+        var statusChangeHandlerCalled = false
+        var receivedUserInfo: [AnyHashable : Any]? = nil
         
-        notificationManager.handleNotification(userInfo: userInfo)
-        XCTAssertEqual(delegate.userInfo?["something"] as? String, "else")
+        notificationManager.registerHandler(forType: PushNotificationType.registrationActivationCode) { userInfo, completionHandler in
+            receivedUserInfo = userInfo
+            completionHandler(.newData)
+        }
+        
+        notificationManager.registerHandler(forType: PushNotificationType.statusChange) { userInfo, completionHandler in
+            statusChangeHandlerCalled = true
+        }
+
+        notificationManager.handleNotification(userInfo: ["activationCode" : "foo"]) { fetchResult in
+            callersCompletionCalled = true
+        }
+        
+        XCTAssertEqual(receivedUserInfo?["activationCode"] as? String, "foo")
+        XCTAssertTrue(callersCompletionCalled)
+        XCTAssertFalse(statusChangeHandlerCalled)
+    }
+    
+    func testHandlesNotification_doesNotCrashOnUnknownNotification() {
+        let notificationManager = ConcretePushNotificationManager(
+            firebase: FirebaseAppDouble.self,
+            messagingFactory: { MessagingDouble() },
+            userNotificationCenter: UserNotificationCenterDouble(),
+            notificationCenter: NotificationCenter(),
+            persistence: Persistence()
+        )
+        
+        notificationManager.handleNotification(userInfo: ["something": "unexpected"]) { fetchResult in }
     }
 
     func testHandleNotification_foreGroundedLocalNotification() {
         let persistence = Persistence()
-        let notificationCenterDouble = NotificationCenterDouble()
+        let notificationCenterDouble = UserNotificationCenterDouble()
         let notificationManager = ConcretePushNotificationManager(
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
             userNotificationCenter: notificationCenterDouble,
+            notificationCenter: NotificationCenter(),
             persistence: persistence
         )
 
-        notificationManager.handleNotification(userInfo: [:])
+        notificationManager.handleNotification(userInfo: [:]) {_ in }
 
         XCTAssertNil(notificationCenterDouble.request)
     }
@@ -177,7 +210,7 @@ private class MessagingDouble: TestableMessaging {
     weak var delegate: MessagingDelegate?
 }
 
-private class NotificationCenterDouble: UserNotificationCenter {
+private class UserNotificationCenterDouble: UserNotificationCenter {
 
     weak var delegate: UNUserNotificationCenterDelegate?
 
@@ -193,16 +226,6 @@ private class NotificationCenterDouble: UserNotificationCenter {
     func add(_ request: UNNotificationRequest, withCompletionHandler completionHandler: ((Error?) -> Void)?) {
         self.request = request
         self.addCompletionHandler = completionHandler
-    }
-
-}
-
-private class PushNotificationManagerDelegateDouble: PushNotificationManagerDelegate {
-
-    var userInfo: [AnyHashable : Any]?
-
-    func pushNotificationManager(_ pushNotificationManager: PushNotificationManager, didReceiveNotificationWithInfo userInfo: [AnyHashable : Any]) {
-        self.userInfo = userInfo
     }
 
 }

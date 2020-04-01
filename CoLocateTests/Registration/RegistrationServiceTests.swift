@@ -40,10 +40,12 @@ class RegistrationServiceTests: TestCase {
         session.requestSent = nil
         session.executeCompletion!(Result<(), Error>.success(()))
         
-        // Simulate the notification containing the authorizationCode.
+        // Simulate the notification containing the activationCode.
         // This should trigger the second request.
+        // TODO: Ideally we would test this in integration with the code that actually parses &
+        // dispatches the notification.
         let activationCode = "a3d2c477-45f5-4609-8676-c24558094600"
-        pushNotificationManager.delegate!.pushNotificationManager(pushNotificationManager, didReceiveNotificationWithInfo: ["activationCode": activationCode])
+        pushNotificationManager.handlers[.registrationActivationCode]?(["activationCode": activationCode]) { _ in }
         
         // Verify the second request
         let confirmRegistrationRequest = (session.requestSent as! ConfirmRegistrationRequest).body!
@@ -91,41 +93,45 @@ class RegistrationServiceTests: TestCase {
         XCTAssertNil(session.requestSent)
 
         // Simulate receiving the push token
+        // TODO: Ideally we would test this in integration with the code that actually parses &
+        // dispatches the notification.
         pushNotificationMananger.pushToken = "a push token"
-        pushNotificationMananger.delegate?.pushNotificationManager(pushNotificationMananger, didReceiveNotificationWithInfo: ["pushToken": "a push token"])
+        notificationCenter.post(name: PushTokenReceivedNotification, object: nil, userInfo: nil)
         // Verify the first request
         let registrationBody = (session.requestSent as! RegistrationRequest).body!
         let registrationPayload = try JSONDecoder().decode(ExpectedRegistrationRequestBody.self, from: registrationBody)
         XCTAssertEqual(registrationPayload.pushToken, "a push token")
-        
+
         // Respond to the first request
         session.requestSent = nil
         session.executeCompletion!(Result<(), Error>.success(()))
-        
-        // Simulate the notification containing the authorizationCode.
+
+        // Simulate the notification containing the activationCode.
         // This should trigger the second request.
+        // TODO: Ideally we would test this in integration with the code that actually parses &
+        // dispatches the notification.
         let activationCode = "a3d2c477-45f5-4609-8676-c24558094600"
-        pushNotificationMananger.delegate!.pushNotificationManager(pushNotificationMananger, didReceiveNotificationWithInfo: ["activationCode": activationCode])
-        
+        pushNotificationMananger.handlers[.registrationActivationCode]?(["activationCode": activationCode]) { _ in }
+
         // Verify the second request
         let confirmRegistrationBody = (session.requestSent as! ConfirmRegistrationRequest).body!
         let confirmRegistrationPayload = try JSONDecoder().decode(ExpectedConfirmRegistrationRequestBody.self, from: confirmRegistrationBody)
         XCTAssertEqual(confirmRegistrationPayload.activationCode, UUID(uuidString: activationCode))
         XCTAssertEqual(confirmRegistrationPayload.pushToken, "a push token")
-        
+
         XCTAssertFalse(finished)
-        
+
         // Respond to the second request
         let confirmationResponse = ConfirmRegistrationResponse(id: id, secretKey: secretKey)
         session.executeCompletion!(Result<ConfirmRegistrationResponse, Error>.success(confirmationResponse))
-        
+
         XCTAssertTrue(finished)
         XCTAssertNil(error)
         let storedRegistration = try SecureRegistrationStorage.shared.get()
         XCTAssertNotNil(storedRegistration)
         XCTAssertEqual(id, storedRegistration!.id)
         XCTAssertEqual(storedRegistration!.secretKey, secretKey)
-        
+
         XCTAssertEqual(storedRegistration?.id, self.id)
         XCTAssertEqual(storedRegistration?.secretKey, self.secretKey)
 
