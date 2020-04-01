@@ -1,5 +1,5 @@
-# CoLocate
-========
+# CoLocate 
+![ci](https://github.com/nhsx/sonar-colocate-ios/workflows/ci/badge.svg)
 
 This application runs in the background and identifies other people running the
 app within the local area by using low energy bluetooth. While the app is running
