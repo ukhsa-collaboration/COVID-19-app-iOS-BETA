@@ -14,7 +14,12 @@ protocol BTLEBroadcasterStateDelegate {
     func btleBroadcaster(_ broadcaster: BTLEBroadcaster, didUpdateState state: CBManagerState)
 }
 
-class BTLEBroadcaster: NSObject, CBPeripheralManagerDelegate {
+protocol BTLEBroadcaster {
+    func start(stateDelegate: BTLEBroadcasterStateDelegate?)
+    func setSonarUUID(_ uuid: UUID)
+}
+
+class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDelegate {
     
     static let sonarServiceUUID = CBUUID(nsuuid: UUID(uuidString: "c1f5983c-fa94-4ac8-8e2e-bb86d6de9b21")!)
     static let sonarIdCharacteristicUUID = CBUUID(nsuuid: UUID(uuidString: "85BF337C-5B64-48EB-A5F7-A9FED135C972")!)
@@ -47,9 +52,9 @@ class BTLEBroadcaster: NSObject, CBPeripheralManagerDelegate {
     fileprivate func startBroadcasting() {
         guard state == .poweredOn, let sonarId = sonarId else { return }
 
-        let service = CBMutableService(type: BTLEBroadcaster.sonarServiceUUID, primary: true)
+        let service = CBMutableService(type: ConcreteBTLEBroadcaster.sonarServiceUUID, primary: true)
 
-        let identityCharacteristic = CBMutableCharacteristic(type: BTLEBroadcaster.sonarIdCharacteristicUUID, properties: CBCharacteristicProperties([.read]), value: sonarId.data, permissions: .readable)
+        let identityCharacteristic = CBMutableCharacteristic(type: ConcreteBTLEBroadcaster.sonarIdCharacteristicUUID, properties: CBCharacteristicProperties([.read]), value: sonarId.data, permissions: .readable)
 
         service.characteristics = [identityCharacteristic]
         peripheralManager?.add(service)

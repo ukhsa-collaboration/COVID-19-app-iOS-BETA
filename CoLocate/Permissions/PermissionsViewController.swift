@@ -16,6 +16,8 @@ class PermissionsViewController: UIViewController, Storyboarded {
     var notificationManager: PushNotificationManager = ConcretePushNotificationManager()
     var persistence = Persistence.shared
     var uiQueue: TestableQueue = DispatchQueue.main
+    var broadcaster: BTLEBroadcaster = (UIApplication.shared.delegate as! AppDelegate).broadcaster
+    var listener: BTLEListener = (UIApplication.shared.delegate as! AppDelegate).listener
 
     weak var bluetoothReadyDelegate: BluetoothAvailableDelegate?
     
@@ -27,10 +29,8 @@ class PermissionsViewController: UIViewController, Storyboarded {
         #if targetEnvironment(simulator)
             requestNotificationPermissions()
         #else
-            // TODO: Inject these?
-            let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
-            appDelegate.broadcaster.start(stateDelegate: self)
-            appDelegate.listener.start(stateDelegate: self)
+            broadcaster.start(stateDelegate: self)
+            listener.start(stateDelegate: self)
         #endif
     }
 
