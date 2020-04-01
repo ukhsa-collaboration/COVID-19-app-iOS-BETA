@@ -13,13 +13,13 @@ class PermissionsViewControllerTests: TestCase {
 
     func testPermissionsFlow() {
         let authManagerDouble = AuthorizationManagerDouble()
-        let notificationManagerDouble = PushNotificationManagerDouble()
+        let pushNotificationManagerDouble = PushNotificationManagerDouble()
         let persistence = PersistenceDouble(newOnboarding: true)
         let listenerDouble = BTLEListenerDouble()
         let broadcasterDouble = BTLEBroadcasterDouble()
         let vc = PermissionsViewController.instantiate()
         vc.authManager = authManagerDouble
-        vc.notificationManager = notificationManagerDouble
+        vc.pushNotificationManager = pushNotificationManagerDouble
         vc.persistence = persistence
         vc.broadcaster = broadcasterDouble
         vc.listener = listenerDouble
@@ -39,8 +39,8 @@ class PermissionsViewControllerTests: TestCase {
         broadcasterDouble.delegate?.btleBroadcaster(broadcasterDouble, didUpdateState: .poweredOn)
         #endif
 
-        XCTAssertNotNil(notificationManagerDouble.requestAuthorizationCompletion)
-        notificationManagerDouble.requestAuthorizationCompletion?(.success(true))
+        XCTAssertNotNil(pushNotificationManagerDouble.requestAuthorizationCompletion)
+        pushNotificationManagerDouble.requestAuthorizationCompletion?(.success(true))
 
         XCTAssert(permissionsUnwinder.didUnwindFromPermissions)
     }
