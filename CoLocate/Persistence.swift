@@ -35,8 +35,8 @@ class Persistence {
     }
 
     var registration: Registration? {
-        get { try! secureRegistrationStorage.get() }
-        set {
+        get { try? secureRegistrationStorage.get() }
+        set throws {
             guard let registration = newValue else {
                 try! secureRegistrationStorage.clear()
                 return

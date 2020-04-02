@@ -45,7 +45,7 @@ class PersistenceTests: TestCase {
         XCTAssertEqual(delegate.recordedDiagnosis, .notInfected)
     }
 
-    func testRegistrationIsPassedToSecureRegistrationStorage() {
+    func testRegistrationIsPassedToSecureRegistrationStorage() throws {
         let secureRegistrationStorage = SecureRegistrationStorage.shared
         let persistence = Persistence(secureRegistrationStorage: secureRegistrationStorage)
 
@@ -56,7 +56,7 @@ class PersistenceTests: TestCase {
         let registration = Registration(id: id, secretKey: secretKey)
         persistence.registration = registration
 
-        XCTAssertEqual(try! secureRegistrationStorage.get(), registration)
+        XCTAssertEqual(try secureRegistrationStorage.get(), registration)
         XCTAssertEqual(persistence.registration, registration)
     }
 

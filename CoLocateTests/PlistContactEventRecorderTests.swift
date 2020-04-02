@@ -43,14 +43,14 @@ class PlistContactEventRecorderTests: XCTestCase {
         XCTAssertEqual(service.contactEvents[2], contactEvent3)
     }
 
-    func testPersistsContactEvents() {
+    func testPersistsContactEvents() throws {
         XCTAssertFalse(FileManager.default.fileExists(atPath: service.fileURL.path))
 
         service.record(contactEvent1)
         service.record(contactEvent2)
         service.record(contactEvent3)
 
-        let attrs = try! FileManager.default.attributesOfItem(atPath: service.fileURL.path)
+        let attrs = try FileManager.default.attributesOfItem(atPath: service.fileURL.path)
         XCTAssertNotEqual(attrs[.size] as! NSNumber, 0)
     }
 

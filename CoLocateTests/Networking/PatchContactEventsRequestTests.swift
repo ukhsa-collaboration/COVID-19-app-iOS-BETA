@@ -56,10 +56,10 @@ class PatchContactEventsRequestTests: XCTestCase {
         XCTAssertEqual(request.headers["Content-Type"], "application/json")
     }
 
-    func testData() {
+    func testData() throws {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
-        let contactEvents = try! decoder.decode(PatchContactEventsRequest.JSONWrapper.self, from: request.body!).contactEvents
+        let contactEvents = try decoder.decode(PatchContactEventsRequest.JSONWrapper.self, from: request.body!).contactEvents
 
         XCTAssertEqual(contactEvents.count, 3)
         XCTAssertEqual(contactEvents[0].sonarId, remoteSonarId1)

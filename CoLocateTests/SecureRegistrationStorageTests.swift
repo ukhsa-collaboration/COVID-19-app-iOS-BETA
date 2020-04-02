@@ -15,25 +15,25 @@ class SecureRegistrationStorageTests: TestCase {
     let id = UUID(uuidString: "1c8d305e-db93-4ba0-81f4-94c33fd35c7c")!
     let secretKey = "Ik6M9N2CqLv3BDT6lKlhR9X+cLf1MCyuU3ExnrUBlY4=".data(using: .utf8)!
 
-    func testRoundTrip() {
+    func testRoundTrip() throws {
         let registrationService = SecureRegistrationStorage.shared
 
-        XCTAssertNil(try! registrationService.get())
+        XCTAssertNil(try registrationService.get())
 
-        try! registrationService.set(registration: Registration(id: id, secretKey: secretKey))
+        try registrationService.set(registration: Registration(id: id, secretKey: secretKey))
 
         let registration = try? registrationService.get()
         XCTAssertEqual(registration?.id, id)
         XCTAssertEqual(registration?.secretKey, secretKey)
     }
 
-    func testOverwritesExistingRegistration() {
+    func testOverwritesExistingRegistration() throws {
         // Add a registration
         let registrationService = SecureRegistrationStorage.shared
-        try! registrationService.set(registration: Registration(id: UUID(), secretKey: secretKey))
+        try registrationService.set(registration: Registration(id: UUID(), secretKey: secretKey))
 
         // Add another registration
-        try! registrationService.set(registration: Registration(id: id, secretKey: secretKey))
+        try registrationService.set(registration: Registration(id: id, secretKey: secretKey))
 
         // We should have the new registration
         let registration = try? registrationService.get()
@@ -41,7 +41,7 @@ class SecureRegistrationStorageTests: TestCase {
         XCTAssertEqual(registration?.secretKey, secretKey)
     }
 
-    func testDoesNotAffectOtherGenericPasswords() {
+    func testDoesNotAffectOtherGenericPasswords() throws {
         // Insert a generic password
         let addQuery: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
@@ -52,7 +52,7 @@ class SecureRegistrationStorageTests: TestCase {
 
         // Set a registration
         let registrationService = SecureRegistrationStorage.shared
-        try! registrationService.set(registration: Registration(id: UUID(), secretKey: secretKey))
+        try registrationService.set(registration: Registration(id: UUID(), secretKey: secretKey))
 
         // The original generic password should still be there
         let getQuery: [String: Any] = [
