@@ -18,8 +18,10 @@ platform :ios do
     )
 
     update_code_signing_settings(
-      use_automatic_signing: true,
-      path: "CoLocate.xcodeproj"
+      use_automatic_signing: false,
+      path: "CoLocate.xcodeproj",
+      code_sign_identity: "iPhone Distribution",
+      profile_name: "match AppStore uk.nhs.nhsx.beta.CoLocate",
     )
 
     build_app(scheme: "CoLocate")
