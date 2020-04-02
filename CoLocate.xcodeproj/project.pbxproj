@@ -170,6 +170,7 @@
 		6FC63C3C241641BA007C8BF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		89388B8C2435E370009D60CF /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		89388B8E2435E673009D60CF /* ReleaseConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ReleaseConfig.xcconfig; sourceTree = "<group>"; };
+		89896E5E2435EB6500F949EA /* CoLocateTests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CoLocateTests.xcconfig; sourceTree = "<group>"; };
 		898BA15B2435E28E00EBD35D /* Project.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Project.xcconfig; sourceTree = "<group>"; };
 		89BC79EA2434E047002050F8 /* LogsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogsViewController.swift; sourceTree = "<group>"; };
 		89F06B2E2434A62C0074C612 /* LoggingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingManager.swift; sourceTree = "<group>"; };
@@ -329,6 +330,7 @@
 			isa = PBXGroup;
 			children = (
 				214209C32422276800C7BFF3 /* Info.plist */,
+				89896E5E2435EB6500F949EA /* CoLocateTests.xcconfig */,
 				098ED484242E88D80029B729 /* AppCoordinatorTests.swift */,
 				214209C9242227B300C7BFF3 /* PersistenceTests.swift */,
 				214209CD24237A6300C7BFF3 /* PlistContactEventRecorderTests.swift */,
@@ -858,43 +860,15 @@
 /* Begin XCBuildConfiguration section */
 		214209C72422276800C7BFF3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 89896E5E2435EB6500F949EA /* CoLocateTests.xcconfig */;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 877YMUFLMF;
-				INFOPLIST_FILE = CoLocateTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = uk.nhs.nhsx.CoLocateTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CoLocate.app/CoLocate";
 			};
 			name = Debug;
 		};
 		214209C82422276800C7BFF3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 89896E5E2435EB6500F949EA /* CoLocateTests.xcconfig */;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 877YMUFLMF;
-				INFOPLIST_FILE = CoLocateTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = uk.nhs.nhsx.CoLocateTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CoLocate.app/CoLocate";
 			};
 			name = Release;
 		};
