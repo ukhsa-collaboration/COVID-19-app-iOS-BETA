@@ -102,26 +102,6 @@ class PermissionsViewControllerTests: TestCase {
 
 }
 
-private class BTLEBroadcasterDouble: BTLEBroadcaster {
-    var delegate: BTLEBroadcasterStateDelegate?
-    
-    func start(stateDelegate: BTLEBroadcasterStateDelegate?) {
-        delegate = stateDelegate
-    }
-    
-    func setSonarUUID(_ uuid: UUID) {
-    }
-}
-
-private class BTLEListenerDouble: BTLEListener {
-    var stateDelegate: BTLEListenerStateDelegate?
-    var delegate: BTLEListenerDelegate?
-    
-    func start(stateDelegate: BTLEListenerStateDelegate?, delegate: BTLEListenerDelegate?) {
-        self.stateDelegate = stateDelegate
-    }
-}
-
 class PermissionsUnwinder: UIViewController {
     var didUnwindFromPermissions = false
     @IBAction func unwindFromPermissions(unwindSegue: UIStoryboardSegue) {
