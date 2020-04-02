@@ -12,7 +12,7 @@
         <!--Onboarding View Controller-->
         <scene sceneID="lCV-sx-Vvu">
             <objects>
-                <navigationController storyboardIdentifier="OnboardingViewController" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="HOX-Ku-4pG" customClass="OnboardingViewController" customModule="CoLocate" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="OnboardingViewController" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" navigationBarHidden="YES" id="HOX-Ku-4pG" customClass="OnboardingViewController" customModule="CoLocate" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Ytd-vt-Uof">
                         <autoresizingMask key="autoresizingMask"/>
