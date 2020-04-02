@@ -14,11 +14,8 @@ protocol RegistrationService {
 
 class ConcreteRegistrationService: RegistrationService {
     let session: Session
-    let persistence = Persistence.shared
-    var remoteNotificationDispatcher: RemoteNotificationDispatcher
+    let remoteNotificationDispatcher: RemoteNotificationDispatcher
     let notificationCenter: NotificationCenter
-    var registrationCompletionHandler: ((Result<Void, Error>) -> Void)?
-    var remoteNotificationCompletionHandler: RemoteNotificationCompletionHandler?
     
     init(session: Session, remoteNotificationDispatcher: RemoteNotificationDispatcher, notificationCenter: NotificationCenter) {
         #if DEBUG
@@ -38,29 +35,59 @@ class ConcreteRegistrationService: RegistrationService {
         )
     }
     
+    func register(completionHandler: @escaping ((Result<Void, Error>) -> Void)) {
+        let attempt = RegistrationAttempt(
+            session: session,
+            remoteNotificationDispatcher: remoteNotificationDispatcher,
+            notificationCenter: notificationCenter,
+            completionHandler: completionHandler
+        )
+        attempt.start()
+    }
+    
     deinit {
         notificationCenter.removeObserver(self)
     }
     
-    func register(completionHandler: @escaping ((Result<Void, Error>) -> Void)) {
+}
+
+class RegistrationAttempt {
+    let session: Session
+    let persistence = Persistence.shared
+    let remoteNotificationDispatcher: RemoteNotificationDispatcher
+    let notificationCenter: NotificationCenter
+    var registrationCompletionHandler: ((Result<Void, Error>) -> Void)?
+    var remoteNotificationCompletionHandler: RemoteNotificationCompletionHandler?
+
+    init(
+        session: Session,
+        remoteNotificationDispatcher: RemoteNotificationDispatcher,
+        notificationCenter: NotificationCenter,
+        completionHandler: @escaping ((Result<Void, Error>) -> Void)
+    ) {
+        self.session = session
+        self.remoteNotificationDispatcher = remoteNotificationDispatcher
+        self.notificationCenter = notificationCenter
         self.registrationCompletionHandler = completionHandler
-        
+    }
+    
+    func start() {
         remoteNotificationDispatcher.registerHandler(forType: .registrationActivationCode) { userInfo, completion in
             self.remoteNotificationCompletionHandler = completion
-            self.didReceiveActivationCode(activationCode: userInfo["activationCode"] as! String)
+            self.confirmRegistration(activationCode: userInfo["activationCode"] as! String)
         }
 
         if remoteNotificationDispatcher.pushToken != nil {
-            beginRegistration()
+            requestRegistration()
         } else {
             notificationCenter.addObserver(forName: PushTokenReceivedNotification, object: nil, queue: nil) { _ in
                 self.notificationCenter.removeObserver(self, name: PushTokenReceivedNotification, object: nil)
-                self.beginRegistration()
+                self.requestRegistration()
             }
         }
     }
     
-    private func beginRegistration() {
+    private func requestRegistration() {
         let request = RequestFactory.registrationRequest(pushToken: remoteNotificationDispatcher.pushToken!)
 
         session.execute(request, queue: .main) { result in
@@ -68,7 +95,7 @@ class ConcreteRegistrationService: RegistrationService {
             case .success(_):
                 print("\(#file) \(#function) First registration request succeeded")
                 // If everything worked, we'll receive a notification with the access token
-                // See didReceiveActivationCode().
+                // See confirmRegistration().
 
             case .failure(let error):
                 print("\(#file) \(#function) Error making first registration request: \(error)")
@@ -77,7 +104,7 @@ class ConcreteRegistrationService: RegistrationService {
         }
     }
     
-    private func didReceiveActivationCode(activationCode: String) {
+    private func confirmRegistration(activationCode: String) {
         let request = RequestFactory.confirmRegistrationRequest(activationCode: activationCode, pushToken: remoteNotificationDispatcher.pushToken!)
         session.execute(request, queue: .main) { [weak self] result in
             guard let self = self else { return }
