@@ -9,13 +9,33 @@
 import UIKit
 
 class LiveBTLEDebuggerTableViewController: UITableViewController {
+    
+    let defaultUUID = UUID(uuidString: "FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF")!
 
     var persistence: Persistence = Persistence.shared
+    
+    @objc var collector: ContactEventCollector = ContactEventCollector.shared
+    
+    var observation: NSKeyValueObservation?
+    
+    var sonarIds: [UUID] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        observation = observe(\.collector._connectedPeripheralCount) { object, change in
+            self.sonarIds = Array(self.collector.connectedPeripherals.keys)
+            self.tableView.reloadData()
+        }
+        
+        sonarIds = Array(collector.connectedPeripherals.keys)
+        tableView.reloadData()
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -25,7 +45,7 @@ class LiveBTLEDebuggerTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0: return 1
-        case 1: return 0
+        case 1: return sonarIds.count
             
         default:
             preconditionFailure("No section \(section)")
@@ -36,17 +56,14 @@ class LiveBTLEDebuggerTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 
         switch (indexPath.section, indexPath.row) {
+            
         case (0, _):
             cell.textLabel?.text = persistence.registration?.id.uuidString
-            let layer = CAGradientLayer()
-            layer.frame = cell.bounds
-            layer.startPoint = CGPoint(x: 0, y: 0)
-            layer.endPoint = CGPoint(x: 1, y: 0)
-            layer.colors = [
-                persistence.registration?.id.asCGColor(alpha: 0) as Any,
-                persistence.registration?.id.asCGColor(alpha: 1) as Any
-            ]
-            cell.contentView.layer.insertSublayer(layer, at: 0)
+            setGradientLayer(cell: cell, uuid: persistence.registration?.id ?? defaultUUID)
+            
+        case (1, let row):
+            cell.textLabel?.text = sonarIds[row].uuidString
+            setGradientLayer(cell: cell, uuid: sonarIds[row])
             
         default:
             preconditionFailure("No cell at indexPath \(indexPath)")
@@ -55,6 +72,18 @@ class LiveBTLEDebuggerTableViewController: UITableViewController {
         return cell
     }
 
+    private func setGradientLayer(cell: UITableViewCell, uuid: UUID) {
+        let layer = CAGradientLayer()
+        layer.frame = cell.bounds
+        layer.startPoint = CGPoint(x: 0, y: 0)
+        layer.endPoint = CGPoint(x: 1, y: 0)
+        layer.colors = [
+            uuid.asCGColor(alpha: 0) as Any,
+            uuid.asCGColor(alpha: 1) as Any
+        ]
+        cell.contentView.layer.insertSublayer(layer, at: 0)
+    }
+    
     /*
     // MARK: - Navigation
 

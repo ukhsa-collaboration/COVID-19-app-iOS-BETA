@@ -39,13 +39,21 @@ struct ConnectedPeripheral {
 
 }
 
-class ContactEventCollector: BTLEListenerDelegate {
+@objc class ContactEventCollector: NSObject, BTLEListenerDelegate {
     
-    var connectedPeripherals: [UUID: ConnectedPeripheral] = [:]
+    static let shared = ContactEventCollector()
+    
+    @objc dynamic var _connectedPeripheralCount: Int = 0
+    
+    var connectedPeripherals: [UUID: ConnectedPeripheral] = [:] {
+        didSet {
+            _connectedPeripheralCount = connectedPeripherals.count
+        }
+    }
     
     let contactEventRecorder: ContactEventRecorder
     
-    init(contactEventRecorder: ContactEventRecorder) {
+    private init(contactEventRecorder: ContactEventRecorder = PlistContactEventRecorder.shared) {
         self.contactEventRecorder = contactEventRecorder
     }
     
