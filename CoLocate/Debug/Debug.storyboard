@@ -8,11 +8,11 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Item-->
+        <!--Navigation Controller-->
         <scene sceneID="1CS-fw-5PI">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0E2-qN-oH1" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="new-d9-HA6"/>
+                    <tabBarItem key="tabBarItem" systemItem="more" id="new-d9-HA6"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Md4-9X-Z02">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -25,7 +25,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uXw-oy-ODh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="274" y="-846"/>
+            <point key="canvasLocation" x="690" y="-1361"/>
         </scene>
         <!--Debug View Controller-->
         <scene sceneID="T53-6O-red">
@@ -238,9 +238,9 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rGx-hb-5hq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="FeH-ld-Ids" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1197" y="-846"/>
+            <point key="canvasLocation" x="1761" y="-1361"/>
         </scene>
-        <!--Item-->
+        <!--LiveBTLE Debugger Table View Controller-->
         <scene sceneID="IcR-O2-mxp">
             <objects>
                 <tableViewController id="DR4-RC-K5h" customClass="LiveBTLEDebuggerTableViewController" customModule="CoLocate" customModuleProvider="target" sceneMemberID="viewController">
@@ -249,21 +249,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="reuseIdentifier" textLabel="7AY-ej-qoH" style="IBUITableViewCellStyleDefault" id="DE8-Vp-hNc">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="reuseIdentifier" id="DE8-Vp-hNc" customClass="DebuggerTableViewCell" customModule="CoLocate" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DE8-Vp-hNc" id="r6y-b2-LI3">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7AY-ej-qoH">
-                                            <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -272,17 +263,17 @@
                             <outlet property="delegate" destination="DR4-RC-K5h" id="nfa-bw-bSd"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Item" id="qo9-li-P9v"/>
+                    <tabBarItem key="tabBarItem" systemItem="contacts" id="qo9-li-P9v"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B2x-h6-OTK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="274" y="-188"/>
+            <point key="canvasLocation" x="690" y="-548"/>
         </scene>
-        <!--Logs-->
+        <!--Navigation Controller-->
         <scene sceneID="3g0-Xu-8xX">
             <objects>
                 <navigationController id="zrE-Ty-mWo" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Logs" id="OJK-hn-NC8"/>
+                    <tabBarItem key="tabBarItem" systemItem="bookmarks" id="OJK-hn-NC8"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="kW2-uR-bBh">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -293,7 +284,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bjb-14-sGg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="274" y="479"/>
+            <point key="canvasLocation" x="690" y="295"/>
         </scene>
         <!--Logs-->
         <scene sceneID="sB0-Xf-fTQ">
@@ -330,7 +321,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j7Q-mx-cph" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1195.6521739130435" y="478.79464285714283"/>
+            <point key="canvasLocation" x="1961" y="295"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="rDY-T2-mnh">
