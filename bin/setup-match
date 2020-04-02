@@ -9,9 +9,11 @@ echo "$DISTRIBUTION_P12" > ci/match/certs/distribution/HY6T24QXC9.p12
 mkdir -p ci/match/profiles/appstore
 echo "$PROVISIONING_PROFILE" > ci/match/profiles/appstore/AppStore_uk.nhs.nhsx.beta.CoLocate.mobileprovision
 
+uuidgen > ci/match/gen # A file that is guaranteed to exist, so commit is not empty if repo exists.
+
 (
   cd ci/match;
   git init;
-  git add certs profiles;
+  git add certs profiles gen;
   git commit --message="[fastlane] Updated appstore and platform ios" --author="GitHub Actions <github.actions@example.com>"
 )

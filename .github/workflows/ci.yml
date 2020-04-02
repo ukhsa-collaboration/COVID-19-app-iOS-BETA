@@ -134,6 +134,13 @@ jobs:
           API_ENDPOINT = $API_ENDPOINT
           EOF
 
+      - name: Setup Fastlane Match
+        env:
+          DISTRIBUTION_CER: ${{ secrets.distribution_cer }}
+          DISTRIBUTION_P12: ${{ secrets.distribution_p12 }}
+          PROVISIONING_PROFILE: ${{ secrets.provisioning_profile }}
+        run: ./bin/setup-match
+
       - name: Upload to Test Flight
         env:
           APPLE_USERNAME: ${{ secrets.apple_username }}
