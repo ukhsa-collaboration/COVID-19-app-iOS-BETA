@@ -59,10 +59,11 @@ private class BTLEBroadcasterDouble: BTLEBroadcaster {
 }
 
 private class BTLEListenerDouble: BTLEListener {
-    var delegate: BTLEListenerStateDelegate?
+    var stateDelegate: BTLEListenerStateDelegate?
+    var delegate: BTLEListenerDelegate?
     
-    func start(stateDelegate: BTLEListenerStateDelegate?) {
-        delegate = stateDelegate
+    func start(stateDelegate: BTLEListenerStateDelegate?, delegate: BTLEListenerDelegate?) {
+        self.stateDelegate = stateDelegate
     }
 }
 

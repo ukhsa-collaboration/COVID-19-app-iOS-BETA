@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     let broadcaster: BTLEBroadcaster
     let listener: BTLEListener
+    let collector: ContactEventCollector = ContactEventCollector.shared
 
     let pushNotificationManager = ConcretePushNotificationManager.shared
     let persistence = Persistence.shared
@@ -90,7 +91,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
         broadcaster.setSonarUUID(registration.id)
         broadcaster.start(stateDelegate: nil)
-        listener.start(stateDelegate: nil)
+        listener.start(stateDelegate: nil, delegate: collector)
 
         appCoordinator = AppCoordinator(navController: rootViewController,
                                         persistence: persistence,

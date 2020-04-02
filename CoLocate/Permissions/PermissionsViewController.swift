@@ -18,6 +18,8 @@ class PermissionsViewController: UIViewController, Storyboarded {
     var uiQueue: TestableQueue = DispatchQueue.main
     var broadcaster: BTLEBroadcaster = (UIApplication.shared.delegate as! AppDelegate).broadcaster
     var listener: BTLEListener = (UIApplication.shared.delegate as! AppDelegate).listener
+    var collector: ContactEventCollector = (UIApplication.shared.delegate as! AppDelegate).collector
+    
     private var allowedBluetooth = false
     
     @IBAction func didTapContinue(_ sender: UIButton) {
@@ -29,7 +31,7 @@ class PermissionsViewController: UIViewController, Storyboarded {
             requestNotificationPermissions()
         #else
             broadcaster.start(stateDelegate: self)
-            listener.start(stateDelegate: self)
+            listener.start(stateDelegate: self, delegate: collector)
         #endif
     }
 
