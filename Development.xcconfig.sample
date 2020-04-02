@@ -1,1 +1,3 @@
+#include "CoLocate/CoLocate.xcconfig"
+
 API_ENDPOINT = https:/$()/purposefully-invalid-url
