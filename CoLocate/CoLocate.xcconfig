@@ -1,0 +1,16 @@
+
+PRODUCT_BUNDLE_IDENTIFIER = uk.nhs.nhsx.beta.CoLocate
+INFOPLIST_FILE = CoLocate/Info.plist
+CODE_SIGN_ENTITLEMENTS = CoLocate/CoLocate.entitlements
+ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon
+SWIFT_OBJC_BRIDGING_HEADER = CoLocate/CoLocate-Bridging-Header.h
+
+CODE_SIGN_IDENTITY = Apple Development
+CODE_SIGN_STYLE = Automatic
+
+OTHER_LDFLAGS = -ObjC -all_load
+LD_RUNPATH_SEARCH_PATHS = $(inherited) @executable_path/Frameworks
+PRODUCT_NAME = $(TARGET_NAME)
+FRAMEWORK_SEARCH_PATHS = $(inherited) $(PROJECT_DIR)/Frameworks
+HEADER_SEARCH_PATHS = $PROJECT_DIR/Frameworks
+CLANG_ENABLE_MODULES = YES
