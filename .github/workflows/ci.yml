@@ -3,10 +3,8 @@ name: ci
 on:
   push:
     branches:
-      # I'd like to enable running CI from multiple branches, but we currently
-      # bump the build number on all CI runs and I haven't figured out how to
-      # correctly gate that specific job to only run on a trigger from master.
       - master
+      - ci
 
 jobs:
   build:
