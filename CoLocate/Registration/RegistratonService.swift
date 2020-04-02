@@ -17,7 +17,7 @@ let RegistrationCompleteNotificationRegistrationKey = "registration"
 
 class ConcreteRegistrationService: RegistrationService {
     let session: Session
-    let registrationStorage: SecureRegistrationStorage = SecureRegistrationStorage.shared
+    let persistence = Persistence.shared
     var pushNotificationDispatcher: PushNotificationDispatcher
     let notificationCenter: NotificationCenter
     var completionHandler: ((Result<Void, Error>) -> Void)?
@@ -87,22 +87,15 @@ class ConcreteRegistrationService: RegistrationService {
             case .success(let response):
                 let registration = Registration(id: response.id, secretKey: response.secretKey)
 
-                do {
-                    try self.registrationStorage.set(registration: registration)
-                } catch {
-                    print("Error saving registration: \(error)")
-                    self.fail(withError: error)
-                }
+                self.persistence.registration = registration
 
                 self.succeed(registration: registration)
-
             case .failure(let error):
                 print("error during registration: \(error)")
                 self.fail(withError: error)
             }
         }
     }
-
     
     private func succeed(registration: Registration) {
         cleanup()
