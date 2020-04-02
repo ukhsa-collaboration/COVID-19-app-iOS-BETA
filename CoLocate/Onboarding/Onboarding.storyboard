@@ -32,11 +32,11 @@
             <objects>
                 <viewController storyboardIdentifier="StartNowViewController" id="b5f-7Q-Z4Y" customClass="StartNowViewController" customModule="CoLocate" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Uem-sl-iTh">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="0Kn-59-wim">
-                                <rect key="frame" x="20" y="64" width="374" height="778"/>
+                                <rect key="frame" x="20" y="20" width="374" height="768"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Help the NHS stop the spread of coronavirus in the UK" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NZC-MM-nb8">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="123"/>
@@ -52,11 +52,11 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HUU-ko-6pU" userLabel="Spacer">
-                                        <rect key="frame" x="0.0" y="325.5" width="374" height="402.5"/>
+                                        <rect key="frame" x="0.0" y="325.5" width="374" height="392.5"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Mb-zt-2Ty" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="748" width="374" height="30"/>
+                                        <rect key="frame" x="0.0" y="738" width="374" height="30"/>
                                         <state key="normal" title="Start now"/>
                                         <connections>
                                             <segue destination="asv-dx-knf" kind="show" id="m8S-mF-wxJ"/>
@@ -75,6 +75,7 @@
                         <viewLayoutGuide key="safeArea" id="rkg-uP-lGN"/>
                     </view>
                     <navigationItem key="navigationItem" id="0zK-Z8-XYb"/>
+                    <modalPageSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HbU-Qf-wLX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -85,81 +86,112 @@
             <objects>
                 <viewController storyboardIdentifier="PrivacyViewController" id="asv-dx-knf" customClass="PrivacyViewController" customModule="CoLocate" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Fjr-8t-RO6">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="7HO-8c-Q84">
-                                <rect key="frame" x="20" y="64" width="374" height="778"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TUo-oc-PGD">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How this app works" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hxN-EA-ySp">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="41"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="61U-61-fII">
-                                        <rect key="frame" x="0.0" y="61" width="374" height="243.5"/>
-                                        <string key="text">NHS Stop the Spread uses your phone's low energy Bluetooth to detect if you've been near someone else with this app.  If you have coronavirus symptoms, the NHS will ask for the proximity information collected on your phone so that we can alert others that they may be at risk.  This information will be encrypted, and is only shared with ths NHS. Your location history and personal identity will be protected.</string>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To find out more, read our privacy policy and terms and conditions." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vl2-cQ-SpM">
-                                        <rect key="frame" x="0.0" y="324.5" width="374" height="41"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <view contentMode="scaleToFill" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Fgi-oe-et5">
-                                        <rect key="frame" x="0.0" y="385.5" width="374" height="56"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="31h-8a-dJ8">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="817"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="I agree to share my app data with the NHS" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L8x-F3-ShS">
-                                                <rect key="frame" x="0.0" y="0.0" width="305" height="56"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Vtg-pY-JBT">
-                                                <rect key="frame" x="325" y="12.5" width="51" height="31"/>
-                                                <connections>
-                                                    <action selector="allowDataSharingChanged:" destination="asv-dx-knf" eventType="valueChanged" id="rQn-b2-czn"/>
-                                                </connections>
-                                            </switch>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="7HO-8c-Q84">
+                                                <rect key="frame" x="20" y="20" width="374" height="777"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How this app works" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hxN-EA-ySp">
+                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="41"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="61U-61-fII">
+                                                        <rect key="frame" x="0.0" y="61" width="374" height="243.5"/>
+                                                        <string key="text">NHS Stop the Spread uses your phone's low energy Bluetooth to detect if you've been near someone else with this app.  If you have coronavirus symptoms, the NHS will ask for the proximity information collected on your phone so that we can alert others that they may be at risk.  This information will be encrypted, and is only shared with ths NHS. Your location history and personal identity will be protected.</string>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To find out more, read our privacy policy and terms and conditions." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vl2-cQ-SpM">
+                                                        <rect key="frame" x="0.0" y="324.5" width="374" height="41"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <view contentMode="scaleToFill" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Fgi-oe-et5">
+                                                        <rect key="frame" x="0.0" y="385.5" width="374" height="50"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="I agree to share my app data with the NHS" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L8x-F3-ShS">
+                                                                <rect key="frame" x="0.0" y="0.0" width="305" height="50"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Vtg-pY-JBT">
+                                                                <rect key="frame" x="325" y="9.5" width="51" height="31"/>
+                                                                <connections>
+                                                                    <action selector="allowDataSharingChanged:" destination="asv-dx-knf" eventType="valueChanged" id="rQn-b2-czn"/>
+                                                                </connections>
+                                                            </switch>
+                                                        </subviews>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <constraints>
+                                                            <constraint firstItem="Vtg-pY-JBT" firstAttribute="leading" secondItem="L8x-F3-ShS" secondAttribute="trailing" constant="20" id="3yn-S3-yEQ"/>
+                                                            <constraint firstItem="L8x-F3-ShS" firstAttribute="leading" secondItem="Fgi-oe-et5" secondAttribute="leading" id="UTI-Ta-7vS"/>
+                                                            <constraint firstAttribute="bottom" secondItem="L8x-F3-ShS" secondAttribute="bottom" id="VTH-xt-t4g"/>
+                                                            <constraint firstItem="L8x-F3-ShS" firstAttribute="top" secondItem="Fgi-oe-et5" secondAttribute="top" id="cmr-e2-Yss"/>
+                                                            <constraint firstAttribute="trailing" secondItem="Vtg-pY-JBT" secondAttribute="trailing" id="jyy-u0-SnC"/>
+                                                            <constraint firstItem="Vtg-pY-JBT" firstAttribute="centerY" secondItem="L8x-F3-ShS" secondAttribute="centerY" id="v9I-B5-th7"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aKQ-5R-IDW" userLabel="Spacer">
+                                                        <rect key="frame" x="0.0" y="455.5" width="374" height="271.5"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" id="D6a-H8-R0p"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="png-1j-34C" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="747" width="374" height="30"/>
+                                                        <state key="normal" title="Continue"/>
+                                                        <connections>
+                                                            <action selector="continueTapped:" destination="asv-dx-knf" eventType="touchUpInside" id="aZ4-FY-C5b"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
-                                            <constraint firstItem="Vtg-pY-JBT" firstAttribute="leading" secondItem="L8x-F3-ShS" secondAttribute="trailing" constant="20" id="3yn-S3-yEQ"/>
-                                            <constraint firstItem="L8x-F3-ShS" firstAttribute="leading" secondItem="Fgi-oe-et5" secondAttribute="leading" id="UTI-Ta-7vS"/>
-                                            <constraint firstAttribute="bottom" secondItem="L8x-F3-ShS" secondAttribute="bottom" id="VTH-xt-t4g"/>
-                                            <constraint firstItem="L8x-F3-ShS" firstAttribute="top" secondItem="Fgi-oe-et5" secondAttribute="top" id="cmr-e2-Yss"/>
-                                            <constraint firstAttribute="trailing" secondItem="Vtg-pY-JBT" secondAttribute="trailing" id="jyy-u0-SnC"/>
-                                            <constraint firstItem="Vtg-pY-JBT" firstAttribute="centerY" secondItem="L8x-F3-ShS" secondAttribute="centerY" id="v9I-B5-th7"/>
+                                            <constraint firstItem="7HO-8c-Q84" firstAttribute="leading" secondItem="31h-8a-dJ8" secondAttribute="leading" constant="20" id="4PI-pe-MnS"/>
+                                            <constraint firstItem="7HO-8c-Q84" firstAttribute="top" secondItem="31h-8a-dJ8" secondAttribute="top" constant="20" id="IEQ-b0-5NM"/>
+                                            <constraint firstAttribute="trailing" secondItem="7HO-8c-Q84" secondAttribute="trailing" constant="20" id="J0L-rs-xfK"/>
+                                            <constraint firstAttribute="bottom" secondItem="7HO-8c-Q84" secondAttribute="bottom" constant="20" id="dkv-Xr-svk"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aKQ-5R-IDW" userLabel="Spacer">
-                                        <rect key="frame" x="0.0" y="461.5" width="374" height="266.5"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                    </view>
-                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="png-1j-34C" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="748" width="374" height="30"/>
-                                        <state key="normal" title="Continue"/>
-                                        <connections>
-                                            <action selector="continueTapped:" destination="asv-dx-knf" eventType="touchUpInside" id="aZ4-FY-C5b"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
-                            </stackView>
+                                <constraints>
+                                    <constraint firstItem="31h-8a-dJ8" firstAttribute="bottom" secondItem="czv-2j-r86" secondAttribute="bottom" id="29V-6D-V9U"/>
+                                    <constraint firstItem="31h-8a-dJ8" firstAttribute="width" secondItem="5KV-cZ-2xj" secondAttribute="width" id="2ZJ-3w-McN"/>
+                                    <constraint firstItem="31h-8a-dJ8" firstAttribute="leading" secondItem="czv-2j-r86" secondAttribute="leading" id="DzK-F0-o7a"/>
+                                    <constraint firstItem="31h-8a-dJ8" firstAttribute="height" secondItem="9Bs-o1-O6z" secondAttribute="height" priority="1" id="Jit-MP-3q5"/>
+                                    <constraint firstItem="31h-8a-dJ8" firstAttribute="trailing" secondItem="czv-2j-r86" secondAttribute="trailing" id="rv1-3Q-LRm"/>
+                                    <constraint firstItem="czv-2j-r86" firstAttribute="top" secondItem="31h-8a-dJ8" secondAttribute="top" id="wQ0-kW-rfR"/>
+                                </constraints>
+                                <viewLayoutGuide key="safeArea" id="9Bs-o1-O6z"/>
+                                <viewLayoutGuide key="contentLayoutGuide" id="czv-2j-r86"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="5KV-cZ-2xj"/>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="7ap-PK-OTG" firstAttribute="trailing" secondItem="7HO-8c-Q84" secondAttribute="trailing" constant="20" id="DC4-Vg-Snu"/>
-                            <constraint firstItem="7HO-8c-Q84" firstAttribute="top" secondItem="7ap-PK-OTG" secondAttribute="top" constant="20" id="Pti-eo-fJ2"/>
-                            <constraint firstItem="7HO-8c-Q84" firstAttribute="leading" secondItem="7ap-PK-OTG" secondAttribute="leading" constant="20" id="h0b-nR-qfv"/>
-                            <constraint firstItem="7ap-PK-OTG" firstAttribute="bottom" secondItem="7HO-8c-Q84" secondAttribute="bottom" constant="20" id="hv3-S0-c0u"/>
+                            <constraint firstItem="TUo-oc-PGD" firstAttribute="leading" secondItem="Fjr-8t-RO6" secondAttribute="leading" id="Boq-Jp-nLT"/>
+                            <constraint firstItem="TUo-oc-PGD" firstAttribute="bottom" secondItem="Fjr-8t-RO6" secondAttribute="bottom" id="gYR-8h-EiT"/>
+                            <constraint firstItem="TUo-oc-PGD" firstAttribute="trailing" secondItem="Fjr-8t-RO6" secondAttribute="trailing" id="pMX-mA-fpx"/>
+                            <constraint firstItem="TUo-oc-PGD" firstAttribute="top" secondItem="Fjr-8t-RO6" secondAttribute="top" id="v72-XY-uUE"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="7ap-PK-OTG"/>
                     </view>
                     <navigationItem key="navigationItem" id="2kT-fD-hac"/>
+                    <modalPageSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="allowDataSharingSwitch" destination="Vtg-pY-JBT" id="8r9-c9-L1D"/>
                         <outlet property="continueButton" destination="png-1j-34C" id="cu0-UQ-3l8"/>
