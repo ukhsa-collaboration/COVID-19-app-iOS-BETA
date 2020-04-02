@@ -33,7 +33,7 @@ class RootViewController: UINavigationController {
     }
 
     private func showDebugView() {
-        let storyboard = UIStoryboard(name: "Debug", bundle: nil)
+        let storyboard = UIStoryboard(name: "Debug", bundle: Bundle(for: Self.self))
         guard let debugVC = storyboard.instantiateInitialViewController() else { return }
         present(debugVC, animated: true)
     }
