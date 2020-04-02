@@ -29,31 +29,30 @@ protocol BTLEListenerStateDelegate {
 }
 
 protocol BTLEListener {
-    func start(stateDelegate: BTLEListenerStateDelegate?)
+    func start(stateDelegate: BTLEListenerStateDelegate?, delegate: BTLEListenerDelegate?)
 }
 
 class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CBPeripheralDelegate {
 
+    let rssiSamplingInterval: TimeInterval = 20.0
+    let restoreIdentifier: String = "CoLocateCentralRestoreIdentifier"
+    
     var stateDelegate: BTLEListenerStateDelegate?
     var delegate: BTLEListenerDelegate?
     var contactEventRecorder: ContactEventRecorder
     
     var centralManager: CBCentralManager?
     var peripheralManager: CBPeripheralManager?
-    
-    let restoreIdentifier: String = "CoLocateCentralRestoreIdentifier"
 
-    var peripheralList: [CBPeripheral] = []
-    let inRangeperipherals: [CBPeripheral] = []
-
-    var lastRssi: [String: Int] = [:]
+    var discoveredPeripherals: [UUID: CBPeripheral] = [:]
 
     init(contactEventRecorder: ContactEventRecorder = PlistContactEventRecorder.shared) {
         self.contactEventRecorder = contactEventRecorder
     }
 
-    func start(stateDelegate: BTLEListenerStateDelegate?) {
+    func start(stateDelegate: BTLEListenerStateDelegate?, delegate: BTLEListenerDelegate?) {
         self.stateDelegate = stateDelegate
+        self.delegate = delegate
 
         guard centralManager == nil else { return }
         
@@ -100,19 +99,27 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         print("\(#file).\(#function) discovered peripheral: \(advertisementData)")
         
-        lastRssi[peripheral.identifier.uuidString] = Int(truncating: RSSI)
-        peripheralList.append(peripheral)
+        // TODO: We do not ever delete from this list. Is that a problem?
+        if discoveredPeripherals[peripheral.identifier] == nil {
+            discoveredPeripherals[peripheral.identifier] = peripheral
+        }
         centralManager?.connect(peripheral)
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("\(#file).\(#function) discovered peripheral: \(String(describing: peripheral.name))")
         
-        peripheral.delegate = self
-        peripheralList.append(peripheral)
-        peripheral.discoverServices([ConcreteBTLEBroadcaster.sonarServiceUUID])
+        delegate?.btleListener(self, didConnect: peripheral)
         
-//        peripheral.readRSSI()
+        peripheral.delegate = self
+        peripheral.readRSSI()
+        peripheral.discoverServices([ConcreteBTLEBroadcaster.sonarServiceUUID])
+    }
+    
+    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
+        print("\(#file).\(#function) disconnected peripheral: \(String(describing: peripheral.name))")
+        
+        delegate?.btleListener(self, didDisconnect: peripheral, error: error)
     }
     
     func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?) {
@@ -122,14 +129,13 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
         }
         print("\(#file).\(#function) didReadRSSI for peripheral: \(peripheral.identifier): \(RSSI)")
 
-//        delegate?.btleListener(self, didReadRSSI: RSSI.intValue, forPeripheral: peripheral)
-//        
-//        if delegate?.btleListener(self, shouldReadRSSIFor: peripheral) ?? false {
-//            Timer.scheduledTimer(withTimeInterval: 20, repeats: false) { timer in
-//                peripheral.readRSSI()
-//            }
-//        }
+        delegate?.btleListener(self, didReadRSSI: RSSI.intValue, forPeripheral: peripheral)
         
+        if delegate?.btleListener(self, shouldReadRSSIFor: peripheral) ?? false {
+            Timer.scheduledTimer(withTimeInterval: rssiSamplingInterval, repeats: false) { timer in
+                peripheral.readRSSI()
+            }
+        }
     }
     
     func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
@@ -204,21 +210,8 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
             return
         }
 
-        recordContactWithIdentity(peripheral: peripheral, data: data)
-    }
-
-    func recordContactWithIdentity(peripheral: CBPeripheral, data: Data) {
-        let uuidString = CBUUID(data: data).uuidString
-        let uuid = UUID(uuidString: uuidString)!
-        guard let rssi = lastRssi[peripheral.identifier.uuidString] else {
-            print("Tried to record contact with \(peripheral.identifier.uuid) but there were no rssi values")
-            return
-        }
-
-        print("recording a contact event at \(Date()) with rssi \(rssi)")
-
-        let contactEvent = ContactEvent(sonarId: uuid, timestamp: Date(), rssiValues: [rssi], duration: 0)
-        contactEventRecorder.record(contactEvent)
+        let sonarId = UUID(uuidString: CBUUID(data: data).uuidString)!
+        delegate?.btleListener(self, didFindSonarId: sonarId, forPeripheral: peripheral)
     }
 
 }

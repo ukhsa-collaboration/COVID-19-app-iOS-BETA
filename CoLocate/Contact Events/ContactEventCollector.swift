@@ -53,6 +53,7 @@ struct ConnectedPeripheral {
     
     let contactEventRecorder: ContactEventRecorder
     
+    // TODO: Should be private, but have to open it for tests. How do we do DI?
     init(contactEventRecorder: ContactEventRecorder = PlistContactEventRecorder.shared) {
         self.contactEventRecorder = contactEventRecorder
     }
