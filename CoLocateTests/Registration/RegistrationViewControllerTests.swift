@@ -13,7 +13,7 @@ class RegistrationViewControllerTests: TestCase {
     
     func testRegistration_failure() {
         let storyboard = UIStoryboard.init(name: "Registration", bundle: nil)
-        let vc = storyboard.instantiateViewController(identifier: "RegistrationViewController") as! RegistrationViewController
+        let vc = storyboard.instantiateViewController(withIdentifier: "RegistrationViewController") as! RegistrationViewController
         let registrationService = RegistrationServiceDouble()
         vc.registrationService = registrationService
         XCTAssertNotNil(vc.view)
