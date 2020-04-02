@@ -17,7 +17,8 @@ class ConcreteRegistrationService: RegistrationService {
     let persistence = Persistence.shared
     var pushNotificationDispatcher: PushNotificationDispatcher
     let notificationCenter: NotificationCenter
-    var completionHandler: ((Result<Void, Error>) -> Void)?
+    var registrationCompletionHandler: ((Result<Void, Error>) -> Void)?
+    var pushNotificationCompletionHandler: PushNotificationCompletionHandler?
     
     init(session: Session, pushNotificationDispatcher: PushNotificationDispatcher, notificationCenter: NotificationCenter) {
         #if DEBUG
@@ -42,9 +43,10 @@ class ConcreteRegistrationService: RegistrationService {
     }
     
     func register(completionHandler: @escaping ((Result<Void, Error>) -> Void)) {
-        self.completionHandler = completionHandler
+        self.registrationCompletionHandler = completionHandler
         
-        pushNotificationDispatcher.registerHandler(forType: .registrationActivationCode) { userInfo, completionHandler in
+        pushNotificationDispatcher.registerHandler(forType: .registrationActivationCode) { userInfo, completion in
+            self.pushNotificationCompletionHandler = completion
             self.didReceiveActivationCode(activationCode: userInfo["activationCode"] as! String)
         }
 
@@ -96,12 +98,14 @@ class ConcreteRegistrationService: RegistrationService {
     
     private func succeed(registration: Registration) {
         cleanup()
-        completionHandler?(.success(()))
+        self.pushNotificationCompletionHandler?(.newData)
+        registrationCompletionHandler?(.success(()))
     }
     
     private func fail(withError error: Error) {
         cleanup()
-        completionHandler?(.failure(error))
+        self.pushNotificationCompletionHandler?(.failed)
+        registrationCompletionHandler?(.failure(error))
     }
 
     private func cleanup() {

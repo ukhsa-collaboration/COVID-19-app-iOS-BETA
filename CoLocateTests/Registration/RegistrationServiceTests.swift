@@ -46,7 +46,11 @@ class RegistrationServiceTests: TestCase {
         // Simulate the notification containing the activationCode.
         // This should trigger the second request.
         let activationCode = "a3d2c477-45f5-4609-8676-c24558094600"
-        pushNotificationDispatcher.handleNotification(userInfo: ["activationCode": activationCode]) { _ in }
+        
+        var pushNotificatonCallbackCalled = false
+        pushNotificationDispatcher.handleNotification(userInfo: ["activationCode": activationCode]) { _ in
+            pushNotificatonCallbackCalled = true
+        }
         
         // Verify the second request
         let confirmRegistrationRequest = (session.requestSent as! ConfirmRegistrationRequest).body!
@@ -71,6 +75,7 @@ class RegistrationServiceTests: TestCase {
         XCTAssertEqual(storedRegistration?.secretKey, self.secretKey)
 
         // Make sure we cleaned up after ourselves
+        XCTAssertTrue(pushNotificatonCallbackCalled)
         XCTAssertFalse(pushNotificationDispatcher.hasHandler(forType: .registrationActivationCode))
     }
     
@@ -109,7 +114,10 @@ class RegistrationServiceTests: TestCase {
         // Simulate the notification containing the activationCode.
         // This should trigger the second request.
         let activationCode = "a3d2c477-45f5-4609-8676-c24558094600"
-        pushNotificationDispatcher.handleNotification(userInfo: ["activationCode": activationCode]) { _ in }
+        var pushNotificatonCallbackCalled = false
+        pushNotificationDispatcher.handleNotification(userInfo: ["activationCode": activationCode]) { _ in
+            pushNotificatonCallbackCalled = true
+        }
 
         // Verify the second request
         let confirmRegistrationBody = (session.requestSent as! ConfirmRegistrationRequest).body!
@@ -134,6 +142,7 @@ class RegistrationServiceTests: TestCase {
         XCTAssertEqual(storedRegistration?.secretKey, self.secretKey)
 
         // Make sure we cleaned up after ourselves
+        XCTAssertTrue(pushNotificatonCallbackCalled)
         XCTAssertFalse(pushNotificationDispatcher.hasHandler(forType: .registrationActivationCode))
     }
     

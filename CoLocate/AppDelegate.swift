@@ -67,7 +67,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         logger.info("Received notification", metadata: Logger.Metadata(dictionary: userInfo))
         
-        pushNotificationManager.handleNotification(userInfo: userInfo, completionHandler: completionHandler)
+        pushNotificationManager.handleNotification(userInfo: userInfo, completionHandler: { result in
+             completionHandler(result)
+        })
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
