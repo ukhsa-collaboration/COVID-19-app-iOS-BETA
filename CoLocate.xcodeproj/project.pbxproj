@@ -51,9 +51,6 @@
 		6FC63C38241641BA007C8BF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FC63C37241641BA007C8BF3 /* Assets.xcassets */; };
 		6FC63C3B241641BA007C8BF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FC63C39241641BA007C8BF3 /* LaunchScreen.storyboard */; };
 		89896E622435F37300F949EA /* ProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89896E612435F37300F949EA /* ProjectTests.swift */; };
-		899B802424360BEF00C93A86 /* CoLocateCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 899B801D24360BEF00C93A86 /* CoLocateCore.framework */; };
-		899B802524360BEF00C93A86 /* CoLocateCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 899B801D24360BEF00C93A86 /* CoLocateCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		899B802C24360D0F00C93A86 /* Dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899B802B24360D0F00C93A86 /* Dummy.swift */; };
 		89BC79EB2434E047002050F8 /* LogsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BC79EA2434E047002050F8 /* LogsViewController.swift */; };
 		89F06B2C2434A2C00074C612 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 89F06B2B2434A2C00074C612 /* Logging */; };
 		89F06B2F2434A62C0074C612 /* LoggingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F06B2E2434A62C0074C612 /* LoggingManager.swift */; };
@@ -124,28 +121,7 @@
 			remoteGlobalIDString = 6FC63C2C241641B8007C8BF3;
 			remoteInfo = CoLocate;
 		};
-		899B802224360BEF00C93A86 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6FC63C25241641B8007C8BF3 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 899B801C24360BEF00C93A86;
-			remoteInfo = CoLocateCore;
-		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		899B802624360BEF00C93A86 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				899B802524360BEF00C93A86 /* CoLocateCore.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		090B186E24354D0100870B5D /* PushNotificationDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationDispatcher.swift; sourceTree = "<group>"; };
@@ -201,10 +177,6 @@
 		89896E5F2435F15C00F949EA /* CoLocate.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CoLocate.xcconfig; sourceTree = "<group>"; };
 		89896E612435F37300F949EA /* ProjectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectTests.swift; sourceTree = "<group>"; };
 		898BA15B2435E28E00EBD35D /* Project.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Project.xcconfig; sourceTree = "<group>"; };
-		899B801D24360BEF00C93A86 /* CoLocateCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoLocateCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		899B802024360BEF00C93A86 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		899B802A24360C4E00C93A86 /* CoLocateCore.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CoLocateCore.xcconfig; sourceTree = "<group>"; };
-		899B802B24360D0F00C93A86 /* Dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dummy.swift; sourceTree = "<group>"; };
 		89BC79EA2434E047002050F8 /* LogsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogsViewController.swift; sourceTree = "<group>"; };
 		89F06B2E2434A62C0074C612 /* LoggingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingManager.swift; sourceTree = "<group>"; };
 		89F06B302434AABE0074C612 /* NoOpLogHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoOpLogHandler.swift; sourceTree = "<group>"; };
@@ -292,18 +264,10 @@
 				F78CEB6C242B8D84002254AD /* FirebaseInstallations.framework in Frameworks */,
 				89F06B2C2434A2C00074C612 /* Logging in Frameworks */,
 				F78CEB5A242B7EC0002254AD /* FirebaseMessaging.framework in Frameworks */,
-				899B802424360BEF00C93A86 /* CoLocateCore.framework in Frameworks */,
 				21B3D2E82429115600573061 /* CoreBluetooth.framework in Frameworks */,
 				F78CEB6F242B92CF002254AD /* GoogleUtilities.framework in Frameworks */,
 				F78CEB73242B937F002254AD /* nanopb.framework in Frameworks */,
 				F78CEB5E242B7EC0002254AD /* Protobuf.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		899B801A24360BEF00C93A86 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -460,7 +424,6 @@
 				F78CEB63242B809B002254AD /* Firebase */,
 				F6A309D024298A5800865942 /* Development.xcconfig */,
 				F6CA2816242E416C00F8DC55 /* Release.xcconfig */,
-				899B801E24360BEF00C93A86 /* CoLocateCore */,
 				6FC63C2F241641B8007C8BF3 /* CoLocate */,
 				214209C02422276800C7BFF3 /* CoLocateTests */,
 				898BA15A2435E26C00EBD35D /* Configurations */,
@@ -474,7 +437,6 @@
 			children = (
 				6FC63C2D241641B8007C8BF3 /* CoLocate.app */,
 				214209BF2422276800C7BFF3 /* CoLocateTests.xctest */,
-				899B801D24360BEF00C93A86 /* CoLocateCore.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -524,16 +486,6 @@
 				898BA15B2435E28E00EBD35D /* Project.xcconfig */,
 			);
 			path = Configurations;
-			sourceTree = "<group>";
-		};
-		899B801E24360BEF00C93A86 /* CoLocateCore */ = {
-			isa = PBXGroup;
-			children = (
-				899B802024360BEF00C93A86 /* Info.plist */,
-				899B802A24360C4E00C93A86 /* CoLocateCore.xcconfig */,
-				899B802B24360D0F00C93A86 /* Dummy.swift */,
-			);
-			path = CoLocateCore;
 			sourceTree = "<group>";
 		};
 		89F06B2D2434A5A50074C612 /* Logging */ = {
@@ -680,16 +632,6 @@
 		};
 /* End PBXGroup section */
 
-/* Begin PBXHeadersBuildPhase section */
-		899B801824360BEF00C93A86 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
 /* Begin PBXNativeTarget section */
 		214209BE2422276800C7BFF3 /* CoLocateTests */ = {
 			isa = PBXNativeTarget;
@@ -716,12 +658,10 @@
 				6FC63C29241641B8007C8BF3 /* Sources */,
 				6FC63C2A241641B8007C8BF3 /* Frameworks */,
 				6FC63C2B241641B8007C8BF3 /* Resources */,
-				899B802624360BEF00C93A86 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				899B802324360BEF00C93A86 /* PBXTargetDependency */,
 			);
 			name = CoLocate;
 			packageProductDependencies = (
@@ -730,24 +670,6 @@
 			productName = CoLocate;
 			productReference = 6FC63C2D241641B8007C8BF3 /* CoLocate.app */;
 			productType = "com.apple.product-type.application";
-		};
-		899B801C24360BEF00C93A86 /* CoLocateCore */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 899B802924360BEF00C93A86 /* Build configuration list for PBXNativeTarget "CoLocateCore" */;
-			buildPhases = (
-				899B801824360BEF00C93A86 /* Headers */,
-				899B801924360BEF00C93A86 /* Sources */,
-				899B801A24360BEF00C93A86 /* Frameworks */,
-				899B801B24360BEF00C93A86 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = CoLocateCore;
-			productName = CoLocateCore;
-			productReference = 899B801D24360BEF00C93A86 /* CoLocateCore.framework */;
-			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
@@ -767,10 +689,6 @@
 					6FC63C2C241641B8007C8BF3 = {
 						CreatedOnToolsVersion = 10.1;
 						LastSwiftMigration = 1130;
-					};
-					899B801C24360BEF00C93A86 = {
-						CreatedOnToolsVersion = 11.4;
-						LastSwiftMigration = 1140;
 					};
 				};
 			};
@@ -792,7 +710,6 @@
 			targets = (
 				6FC63C2C241641B8007C8BF3 /* CoLocate */,
 				214209BE2422276800C7BFF3 /* CoLocateTests */,
-				899B801C24360BEF00C93A86 /* CoLocateCore */,
 			);
 		};
 /* End PBXProject section */
@@ -826,13 +743,6 @@
 				F6F05A322434310200FF4B72 /* Onboarding.storyboard in Resources */,
 				098ED481242E745F0029B729 /* Debug.storyboard in Resources */,
 				F78CEB68242B8C2C002254AD /* GoogleService-Info.plist in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		899B801B24360BEF00C93A86 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -928,14 +838,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		899B801924360BEF00C93A86 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				899B802C24360D0F00C93A86 /* Dummy.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -943,11 +845,6 @@
 			isa = PBXTargetDependency;
 			target = 6FC63C2C241641B8007C8BF3 /* CoLocate */;
 			targetProxy = 214209C42422276800C7BFF3 /* PBXContainerItemProxy */;
-		};
-		899B802324360BEF00C93A86 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 899B801C24360BEF00C93A86 /* CoLocateCore */;
-			targetProxy = 899B802224360BEF00C93A86 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1013,20 +910,6 @@
 			};
 			name = Release;
 		};
-		899B802724360BEF00C93A86 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 899B802A24360C4E00C93A86 /* CoLocateCore.xcconfig */;
-			buildSettings = {
-			};
-			name = Debug;
-		};
-		899B802824360BEF00C93A86 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 899B802A24360C4E00C93A86 /* CoLocateCore.xcconfig */;
-			buildSettings = {
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1053,15 +936,6 @@
 			buildConfigurations = (
 				6FC63C40241641BA007C8BF3 /* Debug */,
 				6FC63C41241641BA007C8BF3 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		899B802924360BEF00C93A86 /* Build configuration list for PBXNativeTarget "CoLocateCore" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				899B802724360BEF00C93A86 /* Debug */,
-				899B802824360BEF00C93A86 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
