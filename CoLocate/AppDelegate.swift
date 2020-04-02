@@ -39,10 +39,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         persistence.delegate = self
     }
     
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         logger.info("Launched", metadata: Logger.Metadata(launchOptions: launchOptions))
