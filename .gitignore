@@ -93,6 +93,6 @@ iOSInjectionProject/
 .DS_Store
 
 # Don't check in configurations for any environment
-*.xcconfig
+/*.xcconfig
 
 .envrc
