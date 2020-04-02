@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Logging
 
 class RegistrationViewController: UIViewController, Storyboarded {
     static let storyboardName = "Registration"
@@ -36,8 +37,9 @@ class RegistrationViewController: UIViewController, Storyboarded {
             self.activityIndicator.stopAnimating()
 
             if case .failure(let error) = result {
-                print("\(#file) \(#function) Unable to register: \(error)")
-                let alert = UIAlertController(title: "Registration failed", message: "\(error)", preferredStyle: .alert)
+                logger.error("Unable to register: \(error)")
+                let alert = UIAlertController(title: "Something unexpected happened".localized, message: "Sorry, we could not enroll you in CoLocate at this time. Please try again in a minute.".localized, preferredStyle: .alert)
+
                 alert.addAction(UIAlertAction(title: "OK", style: .default))
                 self.present(alert, animated: true)
                 
@@ -46,3 +48,5 @@ class RegistrationViewController: UIViewController, Storyboarded {
         }
     }
 }
+
+fileprivate let logger = Logger(label: "RegistrationViewController")
