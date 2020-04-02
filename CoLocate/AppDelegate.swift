@@ -57,29 +57,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
         if let registration = persistence.registration {
             continueWithRegistration(registration)
-        } else if !persistence.newOnboarding {
-            let registrationCoordinator = RegistrationCoordinator(
-                navController: rootViewController,
-                pushNotificationManager: pushNotificationManager,
-                registrationService: registrationService,
-                persistence: persistence,
-                notificationCenter: NotificationCenter.default
-            )
-            NotificationCenter.default.addObserver(
-                self,
-                selector: #selector(didCompleteRegistration(notification:)),
-                name: RegistrationCompleteNotification,
-                object: nil
-            )
-            registrationCoordinator.start()
         }
 
         window?.makeKeyAndVisible()
 
-        if persistence.newOnboarding {
-            onboardingViewController = OnboardingViewController.instantiate()
-            onboardingViewController.rootViewController = rootViewController
-        }
+        onboardingViewController = OnboardingViewController.instantiate()
+        onboardingViewController.rootViewController = rootViewController
 
         return true
     }
@@ -103,15 +86,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     // MARK: - Private
-
-    @objc func didCompleteRegistration(notification: NSNotification) {
-        guard let registration = notification.userInfo?[RegistrationCompleteNotificationRegistrationKey] as? Registration else {
-            print("Registration NSNotification did not contain a registration")
-            return
-        }
-        
-        continueWithRegistration(registration)
-    }
     
     func continueWithRegistration(_ registration: Registration) {
         guard let rootViewController = window?.rootViewController as? RootViewController else {
@@ -136,8 +110,6 @@ extension AppDelegate: PersistenceDelegate {
     }
 
     func persistence(_ persistence: Persistence, didUpdateRegistration registration: Registration) {
-        guard persistence.newOnboarding else { return }
-
         onboardingViewController.updateState()
 
         // TODO: This is probably not the right place to put this,

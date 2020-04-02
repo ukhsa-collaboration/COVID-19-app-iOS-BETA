@@ -14,7 +14,7 @@ class PermissionsViewControllerTests: TestCase {
     func testPermissionsFlow() {
         let authManagerDouble = AuthorizationManagerDouble()
         let pushNotificationManagerDouble = PushNotificationManagerDouble()
-        let persistence = PersistenceDouble(newOnboarding: true)
+        let persistence = PersistenceDouble()
         let listenerDouble = BTLEListenerDouble()
         let broadcasterDouble = BTLEBroadcasterDouble()
         let vc = PermissionsViewController.instantiate()

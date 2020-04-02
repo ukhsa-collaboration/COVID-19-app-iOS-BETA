@@ -22,10 +22,6 @@ class RegistrationServiceTests: TestCase {
             userNotificationCenter: UserNotificationCenterDouble(),
             persistence: PersistenceDouble()
         )
-        let observer = NotificationObserverDouble(
-            notificationCenter: notificationCenter,
-            notificationName: RegistrationCompleteNotification
-        )
         let registrationService = ConcreteRegistrationService(session: session, pushNotificationDispatcher: pushNotificationDispatcher, notificationCenter: notificationCenter)
     
         pushNotificationDispatcher.pushToken = "the current push token"
@@ -74,10 +70,6 @@ class RegistrationServiceTests: TestCase {
         XCTAssertEqual(storedRegistration?.id, self.id)
         XCTAssertEqual(storedRegistration?.secretKey, self.secretKey)
 
-        XCTAssertNotNil(observer.lastNotification)
-        let notifiedRegistration = observer.lastNotification?.userInfo?[RegistrationCompleteNotificationRegistrationKey] as? Registration
-        XCTAssertEqual(notifiedRegistration, storedRegistration)
-        
         // Make sure we cleaned up after ourselves
         XCTAssertFalse(pushNotificationDispatcher.hasHandler(forType: .registrationActivationCode))
     }
@@ -90,7 +82,6 @@ class RegistrationServiceTests: TestCase {
             userNotificationCenter: UserNotificationCenterDouble(),
             persistence: PersistenceDouble()
         )
-        let observer = NotificationObserverDouble(notificationCenter: notificationCenter, notificationName: RegistrationCompleteNotification)
         let registrationService = ConcreteRegistrationService(session: session, pushNotificationDispatcher: pushNotificationDispatcher, notificationCenter: notificationCenter)
 
         var finished = false
@@ -142,10 +133,6 @@ class RegistrationServiceTests: TestCase {
         XCTAssertEqual(storedRegistration?.id, self.id)
         XCTAssertEqual(storedRegistration?.secretKey, self.secretKey)
 
-        XCTAssertNotNil(observer.lastNotification)
-        let notifiedRegistration = observer.lastNotification?.userInfo?[RegistrationCompleteNotificationRegistrationKey] as? Registration
-        XCTAssertEqual(notifiedRegistration, storedRegistration)
-        
         // Make sure we cleaned up after ourselves
         XCTAssertFalse(pushNotificationDispatcher.hasHandler(forType: .registrationActivationCode))
     }

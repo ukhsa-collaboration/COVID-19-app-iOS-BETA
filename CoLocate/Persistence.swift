@@ -61,11 +61,6 @@ class Persistence {
         }
     }
 
-    var newOnboarding: Bool {
-        get { UserDefaults.standard.bool(forKey: #function) }
-        set { UserDefaults.standard.set(newValue, forKey: #function) }
-    }
-
     init(secureRegistrationStorage: SecureRegistrationStorage) {
         self.secureRegistrationStorage = secureRegistrationStorage
     }

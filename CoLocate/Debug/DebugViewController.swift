@@ -13,20 +13,16 @@ class DebugViewController: UITableViewController {
 
     @IBOutlet weak var allowedDataSharingSwitch: UISwitch!
     @IBOutlet weak var interceptRequestsSwitch: UISwitch!
-    @IBOutlet weak var newOnboardingSwitch: UISwitch!
 
     let persistence = Persistence.shared
     let contactEventRecorder = PlistContactEventRecorder.shared
     
     override func viewDidLoad() {
         allowedDataSharingSwitch.isOn = persistence.allowedDataSharing
-        newOnboardingSwitch.isOn = persistence.newOnboarding
 
         #if DEBUG
             interceptRequestsSwitch.isOn = InterceptingSession.interceptNextRequest
-            newOnboardingSwitch.isEnabled = true
         #else
-            newOnboardingSwitch.isEnabled = false
         #endif
     }
     
@@ -82,10 +78,10 @@ class DebugViewController: UITableViewController {
                 show(title: "Failed", message: "Couldn't get sonarId, has this device completed registration?")
             }
 
-        case (3, 0), (4, 0):
+        case (3, 0):
             break
 
-        case (5, 0):
+        case (4, 0):
             do {
                 let fileManager = FileManager()
                 let documentsFolder = try fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
@@ -121,10 +117,6 @@ class DebugViewController: UITableViewController {
         present(alert, animated: true, completion: nil)
         sender.isOn = false
         #endif
-    }
-
-    @IBAction func newOnboardingChanged(_ sender: UISwitch) {
-        persistence.newOnboarding = sender.isOn
     }
 
 }

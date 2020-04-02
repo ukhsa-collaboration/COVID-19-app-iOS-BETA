@@ -12,9 +12,6 @@ protocol RegistrationService {
     func register(completionHandler: @escaping ((Result<Void, Error>) -> Void))
 }
 
-let RegistrationCompleteNotification = NSNotification.Name("RegistrationCompleteNotification")
-let RegistrationCompleteNotificationRegistrationKey = "registration"
-
 class ConcreteRegistrationService: RegistrationService {
     let session: Session
     let persistence = Persistence.shared
@@ -99,8 +96,6 @@ class ConcreteRegistrationService: RegistrationService {
     
     private func succeed(registration: Registration) {
         cleanup()
-        let userInfo = [RegistrationCompleteNotificationRegistrationKey : registration]
-        notificationCenter.post(name: RegistrationCompleteNotification, object: nil, userInfo: userInfo)
         completionHandler?(.success(()))
     }
     
