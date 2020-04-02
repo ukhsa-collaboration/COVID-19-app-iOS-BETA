@@ -21,10 +21,10 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QWJ-SA-cUT">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="828"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="jkc-qW-fiJ">
-                                                <rect key="frame" x="20" y="20" width="374" height="778"/>
+                                                <rect key="frame" x="20" y="20" width="374" height="788"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set up app permissions" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8tA-eG-2zG">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="41"/>
@@ -39,11 +39,18 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nyb-oH-K2Y">
-                                                        <rect key="frame" x="0.0" y="203.5" width="374" height="101.5"/>
+                                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nyb-oH-K2Y">
+                                                        <rect key="frame" x="0.0" y="203.5" width="374" height="111.5"/>
                                                         <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e89-Rw-eg2" userLabel="Shadow">
+                                                                <rect key="frame" x="0.0" y="0.0" width="374" height="8"/>
+                                                                <color key="backgroundColor" name="NHS Grey 3"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="8" id="vyy-Gt-1RM"/>
+                                                                </constraints>
+                                                            </view>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ov-A6-5HU">
-                                                                <rect key="frame" x="10" y="10" width="354" height="81.5"/>
+                                                                <rect key="frame" x="10" y="8" width="354" height="93.5"/>
                                                                 <string key="text">Will Bluetooth affect my phone's battery life?  This app uses low energy Bluetooth which will have minimal effect on your battery life.</string>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
@@ -54,25 +61,33 @@
                                                         <constraints>
                                                             <constraint firstItem="6ov-A6-5HU" firstAttribute="leading" secondItem="nyb-oH-K2Y" secondAttribute="leading" constant="10" id="9zb-s5-Wda"/>
                                                             <constraint firstAttribute="trailing" secondItem="6ov-A6-5HU" secondAttribute="trailing" constant="10" id="A3f-vz-sED"/>
-                                                            <constraint firstItem="6ov-A6-5HU" firstAttribute="top" secondItem="nyb-oH-K2Y" secondAttribute="top" constant="10" id="Ak5-a2-QuB"/>
+                                                            <constraint firstItem="e89-Rw-eg2" firstAttribute="leading" secondItem="nyb-oH-K2Y" secondAttribute="leading" id="M9p-xT-EQ3"/>
+                                                            <constraint firstItem="e89-Rw-eg2" firstAttribute="top" secondItem="nyb-oH-K2Y" secondAttribute="top" id="RQ6-Ci-eqO"/>
+                                                            <constraint firstAttribute="trailing" secondItem="e89-Rw-eg2" secondAttribute="trailing" id="SOa-v5-Erc"/>
+                                                            <constraint firstItem="6ov-A6-5HU" firstAttribute="top" secondItem="e89-Rw-eg2" secondAttribute="bottom" id="oZ1-OR-FYS"/>
                                                             <constraint firstAttribute="bottom" secondItem="6ov-A6-5HU" secondAttribute="bottom" constant="10" id="sWE-cZ-oZS"/>
                                                         </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="8"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send you push notifications, to let you know if you've been near someone with coronavirus symptoms." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3HM-8E-hDU">
-                                                        <rect key="frame" x="0.0" y="315" width="374" height="61"/>
+                                                        <rect key="frame" x="0.0" y="325" width="374" height="61"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H13-U1-dnH" userLabel="Spacer">
-                                                        <rect key="frame" x="0.0" y="386" width="374" height="352"/>
+                                                        <rect key="frame" x="0.0" y="396" width="374" height="352"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="qQq-dN-D3E"/>
                                                         </constraints>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ukx-6p-efz" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="748" width="374" height="30"/>
+                                                        <rect key="frame" x="0.0" y="758" width="374" height="30"/>
                                                         <state key="normal" title="Continue"/>
                                                         <connections>
                                                             <action selector="didTapContinue:" destination="feo-uu-Bmg" eventType="touchUpInside" id="SxA-oZ-9aH"/>
@@ -123,6 +138,9 @@
         </scene>
     </scenes>
     <resources>
+        <namedColor name="NHS Grey 3">
+            <color red="0.68235294117647061" green="0.71764705882352942" blue="0.74117647058823533" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="NHS Grey 4">
             <color red="0.84705882352941175" green="0.8666666666666667" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
