@@ -7,7 +7,6 @@ on:
       # bump the build number on all CI runs and I haven't figured out how to
       # correctly gate that specific job to only run on a trigger from master.
       - master
-      - wip/framework
 
 jobs:
   build:
@@ -134,13 +133,6 @@ jobs:
           #include "CoLocate/CoLocate.xcconfig"
           API_ENDPOINT = $API_ENDPOINT
           EOF
-
-      - name: Setup Fastlane Match
-        env:
-          DISTRIBUTION_CER: ${{ secrets.distribution_cer }}
-          DISTRIBUTION_P12: ${{ secrets.distribution_p12 }}
-          PROVISIONING_PROFILE: ${{ secrets.provisioning_profile }}
-        run: ./bin/setup-match
 
       - name: Upload to Test Flight
         env:
