@@ -53,7 +53,7 @@ struct ConnectedPeripheral {
     
     let contactEventRecorder: ContactEventRecorder
     
-    private init(contactEventRecorder: ContactEventRecorder = PlistContactEventRecorder.shared) {
+    init(contactEventRecorder: ContactEventRecorder = PlistContactEventRecorder.shared) {
         self.contactEventRecorder = contactEventRecorder
     }
     
