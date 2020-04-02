@@ -1,5 +1,5 @@
 //
-//  PushNotificationDispatcher.swift
+//  RemoteNotificationDispatcher.swift
 //  CoLocate
 //
 //  Created by NHSX.
@@ -26,8 +26,8 @@ extension UNUserNotificationCenter: UserNotificationCenter {
 }
 
 
-class PushNotificationDispatcher {
-    static let shared = PushNotificationDispatcher()
+class RemoteNotificationDispatcher {
+    static let shared = RemoteNotificationDispatcher()
     
     var pushToken: String?
     
@@ -50,20 +50,20 @@ class PushNotificationDispatcher {
         )
     }
 
-    func registerHandler(forType type: PushNotificationType, handler: @escaping PushNotificationHandler) {
+    func registerHandler(forType type: RemoteNotificationType, handler: @escaping RemoteNotificationHandler) {
         handlers[type] = handler
     }
     
-    func removeHandler(forType type: PushNotificationType) {
+    func removeHandler(forType type: RemoteNotificationType) {
         handlers[type] = nil
     }
     
-    func hasHandler(forType type: PushNotificationType) -> Bool {
+    func hasHandler(forType type: RemoteNotificationType) -> Bool {
         return handlers.hasHandler(forType: type)
     }
     
-    func handleNotification(userInfo: [AnyHashable : Any], completionHandler: @escaping PushNotificationCompletionHandler) {
-        // TODO: Move this out of the push notification dispatcher?
+    func handleNotification(userInfo: [AnyHashable : Any], completionHandler: @escaping RemoteNotificationCompletionHandler) {
+        // TODO: Move this out of the dispatcher?
         if let status = userInfo["status"] {
             handleStatusUpdated(status: status)
             return
@@ -75,7 +75,7 @@ class PushNotificationDispatcher {
             return
         }
         
-        print("Push notification is a \(type)")
+        print("Remote notification is a \(type)")
         
         guard let handler = handlers[type] else {
             completionHandler(.failed)
@@ -95,7 +95,7 @@ class PushNotificationDispatcher {
         print("apnsToken: \(String(describing: apnsToken))")
     }
     
-    private func notificationType(userInfo: [AnyHashable : Any]) -> PushNotificationType? {
+    private func notificationType(userInfo: [AnyHashable : Any]) -> RemoteNotificationType? {
         if userInfo["activationCode"] as? String != nil {
             return .registrationActivationCode
         } else if userInfo["status"] as? String != nil {
@@ -129,9 +129,9 @@ class PushNotificationDispatcher {
 }
 
 private class HandlerDictionary {
-    private var handlers: [PushNotificationType : PushNotificationHandler] = [:]
+    private var handlers: [RemoteNotificationType : RemoteNotificationHandler] = [:]
     
-    subscript(index: PushNotificationType) -> PushNotificationHandler? {
+    subscript(index: RemoteNotificationType) -> RemoteNotificationHandler? {
         get {
             let handler = handlers[index]
             
@@ -150,23 +150,23 @@ private class HandlerDictionary {
         }
     }
     
-    func hasHandler(forType type: PushNotificationType) -> Bool {
+    func hasHandler(forType type: RemoteNotificationType) -> Bool {
         return handlers[type] != nil
     }
     
-    private func complainAboutMissingHandler(type: PushNotificationType) {
+    private func complainAboutMissingHandler(type: RemoteNotificationType) {
         #if DEBUG
-        fatalError("PushNotificationHandlerDictionary: no handler for notification type \(type)")
+        fatalError("Remote notification HandlerDictionary: no handler for notification type \(type)")
         #else
-        print("Warning: PushNotificationHandlerDictionary: no handler for notification type \(type)")
+        print("Warning: Remote notification HandlerDictionary: no handler for notification type \(type)")
         #endif
     }
     
-    private func complainAboutHandlerReplacement(type: PushNotificationType) {
+    private func complainAboutHandlerReplacement(type: RemoteNotificationType) {
         #if DEBUG
-        fatalError("PushNotificationHandlerDictionary: attempted to replace handler for \(type)")
+        fatalError("Remote notification HandlerDictionary: attempted to replace handler for \(type)")
         #else
-        print("Warning: PushNotificationHandlerDictionary replacing existing handler for \(type)")
+        print("Warning: Remote notification HandlerDictionary replacing existing handler for \(type)")
         #endif
     }
 }

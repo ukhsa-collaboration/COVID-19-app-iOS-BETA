@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		090B186F24354D0100870B5D /* PushNotificationDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090B186E24354D0100870B5D /* PushNotificationDispatcher.swift */; };
+		090B186F24354D0100870B5D /* RemoteNotificationDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090B186E24354D0100870B5D /* RemoteNotificationDispatcher.swift */; };
 		090B1871243552C300870B5D /* UserNotificationCenterDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090B1870243552C300870B5D /* UserNotificationCenterDouble.swift */; };
 		095A91182434FF1500ED6369 /* ApplicationDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095A91172434FF1500ED6369 /* ApplicationDouble.swift */; };
 		098ED478242D7D050029B729 /* RegistratonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED477242D7D050029B729 /* RegistratonService.swift */; };
@@ -77,8 +77,8 @@
 		F67A2295242AC188002254B6 /* RegistrationViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A2294242AC188002254B6 /* RegistrationViewControllerTests.swift */; };
 		F68BFBF7242ACD17008EE68F /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68BFBF6242ACD17008EE68F /* TestHelpers.swift */; };
 		F6CA2819242E41F700F8DC55 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = F6CA2818242E41F700F8DC55 /* README.md */; };
-		F6CC2CA9242BC7FC0079432B /* PushNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CC2CA8242BC7FC0079432B /* PushNotificationManager.swift */; };
-		F6CC2CAC242BCD0D0079432B /* PushNotificationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CC2CAB242BCD0D0079432B /* PushNotificationManagerTests.swift */; };
+		F6CC2CA9242BC7FC0079432B /* RemoteNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CC2CA8242BC7FC0079432B /* RemoteNotificationManager.swift */; };
+		F6CC2CAC242BCD0D0079432B /* RemoteNotificationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CC2CAB242BCD0D0079432B /* RemoteNotificationManagerTests.swift */; };
 		F6F05A242433BEC000FF4B72 /* OnboardingCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F05A232433BEC000FF4B72 /* OnboardingCoordinatorTests.swift */; };
 		F6F05A262433C09200FF4B72 /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F05A252433C09200FF4B72 /* OnboardingCoordinator.swift */; };
 		F6F05A282433C55300FF4B72 /* AuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F05A272433C55300FF4B72 /* AuthorizationManager.swift */; };
@@ -124,7 +124,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		090B186E24354D0100870B5D /* PushNotificationDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationDispatcher.swift; sourceTree = "<group>"; };
+		090B186E24354D0100870B5D /* RemoteNotificationDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteNotificationDispatcher.swift; sourceTree = "<group>"; };
 		090B1870243552C300870B5D /* UserNotificationCenterDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationCenterDouble.swift; sourceTree = "<group>"; };
 		095A91172434FF1500ED6369 /* ApplicationDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationDouble.swift; sourceTree = "<group>"; };
 		098ED477242D7D050029B729 /* RegistratonService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistratonService.swift; sourceTree = "<group>"; };
@@ -204,8 +204,8 @@
 		F6A309D024298A5800865942 /* Development.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
 		F6CA2816242E416C00F8DC55 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		F6CA2818242E41F700F8DC55 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		F6CC2CA8242BC7FC0079432B /* PushNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationManager.swift; sourceTree = "<group>"; };
-		F6CC2CAB242BCD0D0079432B /* PushNotificationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationManagerTests.swift; sourceTree = "<group>"; };
+		F6CC2CA8242BC7FC0079432B /* RemoteNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteNotificationManager.swift; sourceTree = "<group>"; };
+		F6CC2CAB242BCD0D0079432B /* RemoteNotificationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteNotificationManagerTests.swift; sourceTree = "<group>"; };
 		F6F05A232433BEC000FF4B72 /* OnboardingCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinatorTests.swift; sourceTree = "<group>"; };
 		F6F05A252433C09200FF4B72 /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
 		F6F05A272433C55300FF4B72 /* AuthorizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationManager.swift; sourceTree = "<group>"; };
@@ -348,7 +348,7 @@
 				214209DA242630CF00C7BFF3 /* Networking */,
 				F6F05A222433BEAC00FF4B72 /* Onboarding */,
 				F63279282435320E00CF7A42 /* Permissions */,
-				F6CC2CAA242BCCE90079432B /* Push Notifications */,
+				F6CC2CAA242BCCE90079432B /* Remote Notifications */,
 				098ED479242D7E340029B729 /* Registration */,
 			);
 			path = CoLocateTests;
@@ -473,7 +473,7 @@
 				214209B72422155200C7BFF3 /* Appearance */,
 				214209B82422157300C7BFF3 /* Bluetooth */,
 				214209D3242399DD00C7BFF3 /* Networking */,
-				F6CC2CA7242BC7D90079432B /* Push Notifications */,
+				F6CC2CA7242BC7D90079432B /* Remote Notifications */,
 			);
 			path = CoLocate;
 			sourceTree = "<group>";
@@ -508,21 +508,21 @@
 			path = Permissions;
 			sourceTree = "<group>";
 		};
-		F6CC2CA7242BC7D90079432B /* Push Notifications */ = {
+		F6CC2CA7242BC7D90079432B /* Remote Notifications */ = {
 			isa = PBXGroup;
 			children = (
-				F6CC2CA8242BC7FC0079432B /* PushNotificationManager.swift */,
-				090B186E24354D0100870B5D /* PushNotificationDispatcher.swift */,
+				F6CC2CA8242BC7FC0079432B /* RemoteNotificationManager.swift */,
+				090B186E24354D0100870B5D /* RemoteNotificationDispatcher.swift */,
 			);
-			path = "Push Notifications";
+			path = "Remote Notifications";
 			sourceTree = "<group>";
 		};
-		F6CC2CAA242BCCE90079432B /* Push Notifications */ = {
+		F6CC2CAA242BCCE90079432B /* Remote Notifications */ = {
 			isa = PBXGroup;
 			children = (
-				F6CC2CAB242BCD0D0079432B /* PushNotificationManagerTests.swift */,
+				F6CC2CAB242BCD0D0079432B /* RemoteNotificationManagerTests.swift */,
 			);
-			path = "Push Notifications";
+			path = "Remote Notifications";
 			sourceTree = "<group>";
 		};
 		F6F05A212433BE9600FF4B72 /* Onboarding */ = {
@@ -770,7 +770,7 @@
 				F770A455242FEE7C002FDED1 /* SecureRequestFactoryDouble.swift in Sources */,
 				098ED48A242E89D80029B729 /* RegistrationServiceDouble.swift in Sources */,
 				F63279272435219A00CF7A42 /* QueueDouble.swift in Sources */,
-				F6CC2CAC242BCD0D0079432B /* PushNotificationManagerTests.swift in Sources */,
+				F6CC2CAC242BCD0D0079432B /* RemoteNotificationManagerTests.swift in Sources */,
 				F72EBD4F24361E99009F9328 /* URLSessionTests.swift in Sources */,
 				F68BFBF7242ACD17008EE68F /* TestHelpers.swift in Sources */,
 			);
@@ -792,11 +792,11 @@
 				098ED47E242E6B950029B729 /* RootViewController.swift in Sources */,
 				21F373FF2433844D00926FB8 /* ContactEventCollector.swift in Sources */,
 				F600A600242977D50038DF57 /* RegistrationViewController.swift in Sources */,
-				F6CC2CA9242BC7FC0079432B /* PushNotificationManager.swift in Sources */,
+				F6CC2CA9242BC7FC0079432B /* RemoteNotificationManager.swift in Sources */,
 				AE2A5E502423C473007A4771 /* ContactEventRecorder.swift in Sources */,
 				89F06B332434AF130074C612 /* ForwardingLogHandler.swift in Sources */,
 				21B3D2E52429112B00573061 /* SecureRequest.swift in Sources */,
-				090B186F24354D0100870B5D /* PushNotificationDispatcher.swift in Sources */,
+				090B186F24354D0100870B5D /* RemoteNotificationDispatcher.swift in Sources */,
 				214209CC2422755B00C7BFF3 /* PlistContactEventRecorder.swift in Sources */,
 				F758B8C0242CB98C003AE16D /* UIViewController+Storyboarded.swift in Sources */,
 				2115C3E624360427009C0F5B /* DebuggerTableViewCell.swift in Sources */,

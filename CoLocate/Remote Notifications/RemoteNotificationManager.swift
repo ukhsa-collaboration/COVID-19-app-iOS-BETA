@@ -1,5 +1,5 @@
 //
-//  PushNotificationManager.swift
+//  RemoteNotificationManager.swift
 //  CoLocate
 //
 //  Created by NHSX.
@@ -15,51 +15,51 @@ import Firebase
 // interested parties and we don't care what (if anything) they do.
 let PushTokenReceivedNotification = NSNotification.Name("PushTokenReceivedNotification")
 
-enum PushNotificationType {
+enum RemoteNotificationType {
     case registrationActivationCode
     case statusChange
 }
 
 // Actual push/remote notifications are done via callback becasue we (or rather, AppDelegate)
 // needs to know when all (potentially async) processing is done.
-typealias PushNotificationCompletionHandler = (UIBackgroundFetchResult) -> Void;
-typealias PushNotificationHandler = (_ userInfo: [AnyHashable : Any], _ completionHandler: @escaping PushNotificationCompletionHandler) -> Void
+typealias RemoteNotificationCompletionHandler = (UIBackgroundFetchResult) -> Void;
+typealias RemoteNotificationHandler = (_ userInfo: [AnyHashable : Any], _ completionHandler: @escaping RemoteNotificationCompletionHandler) -> Void
 
 
 // Handles both push and remote notifiations.
-protocol PushNotificationManager {
+protocol RemoteNotificationManager {
     var pushToken: String? { get }
     
     func configure()
     
-    func registerHandler(forType: PushNotificationType, handler: @escaping PushNotificationHandler)
-    func removeHandler(forType type: PushNotificationType)
+    func registerHandler(forType: RemoteNotificationType, handler: @escaping RemoteNotificationHandler)
+    func removeHandler(forType type: RemoteNotificationType)
 
     func requestAuthorization(completion: @escaping (Result<Bool, Error>) -> Void)
     
-    func handleNotification(userInfo: [AnyHashable : Any], completionHandler: @escaping PushNotificationCompletionHandler)
+    func handleNotification(userInfo: [AnyHashable : Any], completionHandler: @escaping RemoteNotificationCompletionHandler)
 }
 
 
-class ConcretePushNotificationManager: NSObject, PushNotificationManager {
+class ConcreteRemoteNotificationManager: NSObject, RemoteNotificationManager {
     var pushToken: String? {
         get { dispatcher.pushToken }
     }
 
-    static let shared = ConcretePushNotificationManager()
+    static let shared = ConcreteRemoteNotificationManager()
 
     private let firebase: TestableFirebaseApp.Type
     private let messagingFactory: () -> TestableMessaging
     private let userNotificationCenter: UserNotificationCenter
     private let notificationCenter: NotificationCenter
-    private let dispatcher: PushNotificationDispatcher
+    private let dispatcher: RemoteNotificationDispatcher
 
     init(
         firebase: TestableFirebaseApp.Type,
         messagingFactory: @escaping () -> TestableMessaging,
         userNotificationCenter: UserNotificationCenter,
         notificationCenter: NotificationCenter,
-        dispatcher: PushNotificationDispatcher
+        dispatcher: RemoteNotificationDispatcher
     ) {
         self.firebase = firebase
         self.messagingFactory = messagingFactory
@@ -76,7 +76,7 @@ class ConcretePushNotificationManager: NSObject, PushNotificationManager {
             messagingFactory: { Messaging.messaging() },
             userNotificationCenter: UNUserNotificationCenter.current(),
             notificationCenter: NotificationCenter.default,
-            dispatcher: PushNotificationDispatcher.shared
+            dispatcher: RemoteNotificationDispatcher.shared
         )
     }
     
@@ -92,7 +92,7 @@ class ConcretePushNotificationManager: NSObject, PushNotificationManager {
             messagingFactory: messagingFactory,
             userNotificationCenter: userNotificationCenter,
             notificationCenter: notificationCenter,
-            dispatcher: PushNotificationDispatcher(
+            dispatcher: RemoteNotificationDispatcher(
                 notificationCenter: notificationCenter,
                 userNotificationCenter: userNotificationCenter,
                 persistence: persistence
@@ -106,11 +106,11 @@ class ConcretePushNotificationManager: NSObject, PushNotificationManager {
         userNotificationCenter.delegate = self
     }
     
-    func registerHandler(forType type: PushNotificationType, handler: @escaping PushNotificationHandler) {
+    func registerHandler(forType type: RemoteNotificationType, handler: @escaping RemoteNotificationHandler) {
         dispatcher.registerHandler(forType: type, handler: handler)
     }
     
-    func removeHandler(forType type: PushNotificationType) {
+    func removeHandler(forType type: RemoteNotificationType) {
         dispatcher.removeHandler(forType: type)
     }
 
@@ -127,12 +127,12 @@ class ConcretePushNotificationManager: NSObject, PushNotificationManager {
         }
     }
     
-    func handleNotification(userInfo: [AnyHashable : Any], completionHandler: @escaping PushNotificationCompletionHandler) {
+    func handleNotification(userInfo: [AnyHashable : Any], completionHandler: @escaping RemoteNotificationCompletionHandler) {
         dispatcher.handleNotification(userInfo: userInfo, completionHandler: completionHandler)
     }
 }
 
-extension ConcretePushNotificationManager: UNUserNotificationCenterDelegate {
+extension ConcreteRemoteNotificationManager: UNUserNotificationCenterDelegate {
     func userNotificationCenter(
         _ center: UNUserNotificationCenter,
         willPresent notification: UNNotification,
@@ -147,7 +147,7 @@ extension ConcretePushNotificationManager: UNUserNotificationCenterDelegate {
     }
 }
 
-extension ConcretePushNotificationManager: MessagingDelegate {
+extension ConcreteRemoteNotificationManager: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
         print("fcmToken: \(fcmToken)")
         let apnsToken = Messaging.messaging().apnsToken?.map { String(format: "%02hhx", $0) }.joined()

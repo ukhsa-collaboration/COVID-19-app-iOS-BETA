@@ -1,5 +1,5 @@
 //
-//  PushNotificationManagerDouble.swift
+//  RemoteNotificationManagerDouble.swift
 //  CoLocateTests
 //
 //  Created by NHSX.
@@ -9,17 +9,17 @@
 import Foundation
 @testable import CoLocate
 
-class PushNotificationManagerDouble: PushNotificationManager {
+class RemoteNotificationManagerDouble: RemoteNotificationManager {
     var pushToken: String?
-    var handlers: [PushNotificationType : PushNotificationHandler] = [:]
+    var handlers: [RemoteNotificationType : RemoteNotificationHandler] = [:]
 
     func configure() { }
     
-    func registerHandler(forType type: PushNotificationType, handler: @escaping PushNotificationHandler) {
+    func registerHandler(forType type: RemoteNotificationType, handler: @escaping RemoteNotificationHandler) {
         handlers[type] = handler
     }
     
-    func removeHandler(forType type: PushNotificationType) {
+    func removeHandler(forType type: RemoteNotificationType) {
         handlers[type] = nil
     }
 
@@ -28,6 +28,6 @@ class PushNotificationManagerDouble: PushNotificationManager {
         self.requestAuthorizationCompletion = completion
     }
     
-    func handleNotification(userInfo: [AnyHashable : Any], completionHandler: @escaping PushNotificationCompletionHandler) {
+    func handleNotification(userInfo: [AnyHashable : Any], completionHandler: @escaping RemoteNotificationCompletionHandler) {
     }
 }

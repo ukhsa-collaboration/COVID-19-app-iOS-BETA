@@ -13,7 +13,7 @@ class PermissionsViewController: UIViewController, Storyboarded {
     static let storyboardName = "Onboarding"
 
     var authManager = AuthorizationManager()
-    var pushNotificationManager: PushNotificationManager = ConcretePushNotificationManager()
+    var remoteNotificationManager: RemoteNotificationManager = ConcreteRemoteNotificationManager()
     var persistence = Persistence.shared
     var uiQueue: TestableQueue = DispatchQueue.main
 
@@ -47,7 +47,7 @@ class PermissionsViewController: UIViewController, Storyboarded {
     }
 
     private func requestNotificationPermissions() {
-        pushNotificationManager.requestAuthorization { [weak self] result in
+        remoteNotificationManager.requestAuthorization { [weak self] result in
             guard let self = self else { return }
 
             switch result {

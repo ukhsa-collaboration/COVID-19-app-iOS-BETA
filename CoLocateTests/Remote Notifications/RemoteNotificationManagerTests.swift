@@ -1,5 +1,5 @@
 //
-//  PushNotificationManagerTests.swift
+//  RemoteNotificationManagerTests.swift
 //  CoLocateTests
 //
 //  Created by NHSX.
@@ -12,7 +12,7 @@ import XCTest
 import Firebase
 @testable import CoLocate
 
-class PushNotificationManagerTests: TestCase {
+class RemoteNotificationManagerTests: TestCase {
 
     override func setUp() {
         super.setUp()
@@ -22,7 +22,7 @@ class PushNotificationManagerTests: TestCase {
 
     func testConfigure() {
         let messaging = MessagingDouble()
-        let notificationManager = ConcretePushNotificationManager(
+        let notificationManager = ConcreteRemoteNotificationManager(
             firebase: FirebaseAppDouble.self,
             messagingFactory: { messaging },
             userNotificationCenter: UserNotificationCenterDouble(),
@@ -38,7 +38,7 @@ class PushNotificationManagerTests: TestCase {
     func testPushTokenHandling() {
         let messaging = MessagingDouble()
         let notificationCenter = NotificationCenter()
-        let notificationManager = ConcretePushNotificationManager(
+        let notificationManager = ConcreteRemoteNotificationManager(
             firebase: FirebaseAppDouble.self,
             messagingFactory: { messaging },
             userNotificationCenter: UserNotificationCenterDouble(),
@@ -54,7 +54,7 @@ class PushNotificationManagerTests: TestCase {
 
     func testRequestAuthorization_success() {
         let notificationCenterDouble = UserNotificationCenterDouble()
-        let notificationManager = ConcretePushNotificationManager(
+        let notificationManager = ConcreteRemoteNotificationManager(
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
             userNotificationCenter: notificationCenterDouble,
@@ -80,7 +80,7 @@ class PushNotificationManagerTests: TestCase {
         
     func testHandleNotification_savesPotentialDiagnosis() {
         let persistence = Persistence()
-        let notificationManager = ConcretePushNotificationManager(
+        let notificationManager = ConcreteRemoteNotificationManager(
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
             userNotificationCenter: UserNotificationCenterDouble(),
@@ -96,7 +96,7 @@ class PushNotificationManagerTests: TestCase {
     func testHandleNotification_sendsLocalNotificationWithPotentialStatus() {
         let persistence = Persistence()
         let notificationCenterDouble = UserNotificationCenterDouble()
-        let notificationManager = ConcretePushNotificationManager(
+        let notificationManager = ConcreteRemoteNotificationManager(
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
             userNotificationCenter: notificationCenterDouble,
@@ -111,7 +111,7 @@ class PushNotificationManagerTests: TestCase {
     
     func testHandleNotification_doesNotSaveOtherDiagnosis() {
         let persistence = Persistence()
-        let notificationManager = ConcretePushNotificationManager(
+        let notificationManager = ConcreteRemoteNotificationManager(
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
             userNotificationCenter: UserNotificationCenterDouble(),
@@ -127,7 +127,7 @@ class PushNotificationManagerTests: TestCase {
     func testHandleNotification_doesNotSendLocalNotificationWhenStatusIsNotPotential() {
         let persistence = Persistence()
         let notificationCenterDouble = UserNotificationCenterDouble()
-        let notificationManager = ConcretePushNotificationManager(
+        let notificationManager = ConcreteRemoteNotificationManager(
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
             userNotificationCenter: notificationCenterDouble,
@@ -141,7 +141,7 @@ class PushNotificationManagerTests: TestCase {
     }
     
     func testHandleNotificaton_routesRegistrationAccessTokenNotifications() {
-        let notificationManager = ConcretePushNotificationManager(
+        let notificationManager = ConcreteRemoteNotificationManager(
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
             userNotificationCenter: UserNotificationCenterDouble(),
@@ -152,12 +152,12 @@ class PushNotificationManagerTests: TestCase {
         var statusChangeHandlerCalled = false
         var receivedUserInfo: [AnyHashable : Any]? = nil
         
-        notificationManager.registerHandler(forType: PushNotificationType.registrationActivationCode) { userInfo, completionHandler in
+        notificationManager.registerHandler(forType: RemoteNotificationType.registrationActivationCode) { userInfo, completionHandler in
             receivedUserInfo = userInfo
             completionHandler(.newData)
         }
         
-        notificationManager.registerHandler(forType: PushNotificationType.statusChange) { userInfo, completionHandler in
+        notificationManager.registerHandler(forType: RemoteNotificationType.statusChange) { userInfo, completionHandler in
             statusChangeHandlerCalled = true
         }
 
@@ -171,7 +171,7 @@ class PushNotificationManagerTests: TestCase {
     }
     
     func testHandlesNotification_doesNotCrashOnUnknownNotification() {
-        let notificationManager = ConcretePushNotificationManager(
+        let notificationManager = ConcreteRemoteNotificationManager(
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
             userNotificationCenter: UserNotificationCenterDouble(),
@@ -185,7 +185,7 @@ class PushNotificationManagerTests: TestCase {
     func testHandleNotification_foreGroundedLocalNotification() {
         let persistence = Persistence()
         let notificationCenterDouble = UserNotificationCenterDouble()
-        let notificationManager = ConcretePushNotificationManager(
+        let notificationManager = ConcreteRemoteNotificationManager(
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
             userNotificationCenter: notificationCenterDouble,

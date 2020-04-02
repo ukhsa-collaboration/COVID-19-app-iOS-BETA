@@ -17,14 +17,14 @@ class RegistrationServiceTests: TestCase {
     func testRegistration_withPreExistingPushToken() throws {
         let session = SessionDouble()
         let notificationCenter = NotificationCenter()
-        let pushNotificationDispatcher = PushNotificationDispatcher(
+        let remoteNotificationDispatcher = RemoteNotificationDispatcher(
             notificationCenter: notificationCenter,
             userNotificationCenter: UserNotificationCenterDouble(),
             persistence: PersistenceDouble()
         )
-        let registrationService = ConcreteRegistrationService(session: session, pushNotificationDispatcher: pushNotificationDispatcher, notificationCenter: notificationCenter)
+        let registrationService = ConcreteRegistrationService(session: session, remoteNotificationDispatcher: remoteNotificationDispatcher, notificationCenter: notificationCenter)
     
-        pushNotificationDispatcher.pushToken = "the current push token"
+        remoteNotificationDispatcher.pushToken = "the current push token"
         var finished = false
         var error: Error? = nil
         registrationService.register(completionHandler: { r in
@@ -47,9 +47,9 @@ class RegistrationServiceTests: TestCase {
         // This should trigger the second request.
         let activationCode = "a3d2c477-45f5-4609-8676-c24558094600"
         
-        var pushNotificatonCallbackCalled = false
-        pushNotificationDispatcher.handleNotification(userInfo: ["activationCode": activationCode]) { _ in
-            pushNotificatonCallbackCalled = true
+        var remoteNotificatonCallbackCalled = false
+        remoteNotificationDispatcher.handleNotification(userInfo: ["activationCode": activationCode]) { _ in
+            remoteNotificatonCallbackCalled = true
         }
         
         // Verify the second request
@@ -75,19 +75,19 @@ class RegistrationServiceTests: TestCase {
         XCTAssertEqual(storedRegistration?.secretKey, self.secretKey)
 
         // Make sure we cleaned up after ourselves
-        XCTAssertTrue(pushNotificatonCallbackCalled)
-        XCTAssertFalse(pushNotificationDispatcher.hasHandler(forType: .registrationActivationCode))
+        XCTAssertTrue(remoteNotificatonCallbackCalled)
+        XCTAssertFalse(remoteNotificationDispatcher.hasHandler(forType: .registrationActivationCode))
     }
     
     func testRegistration_withoutPreExistingPushToken() throws {
         let session = SessionDouble()
         let notificationCenter = NotificationCenter()
-        let pushNotificationDispatcher = PushNotificationDispatcher(
+        let remoteNotificationDispatcher = RemoteNotificationDispatcher(
             notificationCenter: notificationCenter,
             userNotificationCenter: UserNotificationCenterDouble(),
             persistence: PersistenceDouble()
         )
-        let registrationService = ConcreteRegistrationService(session: session, pushNotificationDispatcher: pushNotificationDispatcher, notificationCenter: notificationCenter)
+        let registrationService = ConcreteRegistrationService(session: session, remoteNotificationDispatcher: remoteNotificationDispatcher, notificationCenter: notificationCenter)
 
         var finished = false
         var error: Error? = nil
@@ -101,7 +101,7 @@ class RegistrationServiceTests: TestCase {
         XCTAssertNil(session.requestSent)
 
         // Simulate receiving the push token
-        pushNotificationDispatcher.receiveRegistrationToken(fcmToken: "a push token")
+        remoteNotificationDispatcher.receiveRegistrationToken(fcmToken: "a push token")
         // Verify the first request
         let registrationBody = (session.requestSent as! RegistrationRequest).body!
         let registrationPayload = try JSONDecoder().decode(ExpectedRegistrationRequestBody.self, from: registrationBody)
@@ -114,9 +114,9 @@ class RegistrationServiceTests: TestCase {
         // Simulate the notification containing the activationCode.
         // This should trigger the second request.
         let activationCode = "a3d2c477-45f5-4609-8676-c24558094600"
-        var pushNotificatonCallbackCalled = false
-        pushNotificationDispatcher.handleNotification(userInfo: ["activationCode": activationCode]) { _ in
-            pushNotificatonCallbackCalled = true
+        var remoteNotificatonCallbackCalled = false
+        remoteNotificationDispatcher.handleNotification(userInfo: ["activationCode": activationCode]) { _ in
+            remoteNotificatonCallbackCalled = true
         }
 
         // Verify the second request
@@ -142,20 +142,20 @@ class RegistrationServiceTests: TestCase {
         XCTAssertEqual(storedRegistration?.secretKey, self.secretKey)
 
         // Make sure we cleaned up after ourselves
-        XCTAssertTrue(pushNotificatonCallbackCalled)
-        XCTAssertFalse(pushNotificationDispatcher.hasHandler(forType: .registrationActivationCode))
+        XCTAssertTrue(remoteNotificatonCallbackCalled)
+        XCTAssertFalse(remoteNotificationDispatcher.hasHandler(forType: .registrationActivationCode))
     }
     
     func testRegistration_cleansUpAfterInitialRequestFailure() throws {
         let session = SessionDouble()
         let notificationCenter = NotificationCenter()
-        let pushNotificationDispatcher = PushNotificationDispatcher(
+        let remoteNotificationDispatcher = RemoteNotificationDispatcher(
             notificationCenter: notificationCenter,
             userNotificationCenter: UserNotificationCenterDouble(),
             persistence: PersistenceDouble()
         )
-        pushNotificationDispatcher.pushToken = "the current push token"
-        let registrationService = ConcreteRegistrationService(session: session, pushNotificationDispatcher: pushNotificationDispatcher, notificationCenter: notificationCenter)
+        remoteNotificationDispatcher.pushToken = "the current push token"
+        let registrationService = ConcreteRegistrationService(session: session, remoteNotificationDispatcher: remoteNotificationDispatcher, notificationCenter: notificationCenter)
 
         registrationService.register(completionHandler: { _ in })
         
@@ -163,7 +163,7 @@ class RegistrationServiceTests: TestCase {
         session.executeCompletion!(Result<(), Error>.failure(ErrorForTest()))
 
         // We should have unsusbscribed from push notifications.
-        XCTAssertFalse(pushNotificationDispatcher.hasHandler(forType: .registrationActivationCode))
+        XCTAssertFalse(remoteNotificationDispatcher.hasHandler(forType: .registrationActivationCode))
         
         // We should also have unsubscribe from the PushTokenReceivedNotification. We can't test that directly but we can observe its effects.
         notificationCenter.post(name: PushTokenReceivedNotification, object: nil, userInfo: nil)

@@ -14,11 +14,11 @@ class PermissionsViewControllerTests: TestCase {
 
     func testPermissionsFlow() {
         let authManagerDouble = AuthorizationManagerDouble()
-        let pushNotificationManagerDouble = PushNotificationManagerDouble()
+        let remoteNotificationManagerDouble = RemoteNotificationManagerDouble()
         let persistence = PersistenceDouble()
         let vc = PermissionsViewController.instantiate()
         vc.authManager = authManagerDouble
-        vc.pushNotificationManager = pushNotificationManagerDouble
+        vc.remoteNotificationManager = remoteNotificationManagerDouble
         vc.persistence = persistence
         vc.uiQueue = QueueDouble()
 
@@ -36,8 +36,8 @@ class PermissionsViewControllerTests: TestCase {
         vc.peripheralManagerDidUpdateState(CBPeripheralManager())
         #endif
 
-        XCTAssertNotNil(pushNotificationManagerDouble.requestAuthorizationCompletion)
-        pushNotificationManagerDouble.requestAuthorizationCompletion?(.success(true))
+        XCTAssertNotNil(remoteNotificationManagerDouble.requestAuthorizationCompletion)
+        remoteNotificationManagerDouble.requestAuthorizationCompletion?(.success(true))
 
         XCTAssert(permissionsUnwinder.didUnwindFromPermissions)
     }

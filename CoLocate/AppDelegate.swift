@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     let listener: BTLEListener
     let collector: ContactEventCollector = ContactEventCollector.shared
 
-    let pushNotificationManager = ConcretePushNotificationManager.shared
+    let remoteNotificationManager = ConcreteRemoteNotificationManager.shared
     let persistence = Persistence.shared
     let registrationService = ConcreteRegistrationService()
 
@@ -46,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         application.registerForRemoteNotifications()
 
-        pushNotificationManager.configure()
+        remoteNotificationManager.configure()
 
         let rootViewController = RootViewController()
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -67,7 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         logger.info("Received notification", metadata: Logger.Metadata(dictionary: userInfo))
         
-        pushNotificationManager.handleNotification(userInfo: userInfo, completionHandler: { result in
+        remoteNotificationManager.handleNotification(userInfo: userInfo, completionHandler: { result in
              completionHandler(result)
         })
     }
