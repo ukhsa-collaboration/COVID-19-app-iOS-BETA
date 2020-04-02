@@ -12,7 +12,7 @@ import Foundation
 class OnboardingCoordinator {
 
     enum State: Equatable {
-        case initial, permissions, registration
+        case initial, permissions, permissionsDenied, registration
     }
 
     let persistence: Persistence
@@ -34,19 +34,18 @@ class OnboardingCoordinator {
             return
         }
 
-        let allowedBluetooth = authorizationManager.bluetooth == .allowed
-        guard allowedBluetooth else {
-            completion(.permissions)
-            return
-        }
-
         authorizationManager.notifications { [weak self] notificationStatus in
             guard let self = self else { return }
 
-            let allowedNotifications = notificationStatus == .allowed
-            guard allowedNotifications else {
+            switch (self.authorizationManager.bluetooth, notificationStatus) {
+            case (.notDetermined, _), (_, .notDetermined):
                 completion(.permissions)
                 return
+            case (.denied, _), (_, .denied):
+                completion(.permissionsDenied)
+                return
+            case (.allowed, .allowed):
+                break
             }
 
             let isRegistered = self.persistence.registration != nil

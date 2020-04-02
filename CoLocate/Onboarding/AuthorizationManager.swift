@@ -16,7 +16,7 @@ class AuthorizationManager {
         // since we don't have any UI for handling when a user
         // disables bluetooth/notifications after allowing it
         // initially.
-        case notDetermined, allowed //, denied
+        case notDetermined, allowed, denied
     }
 
     var bluetooth: Status {
@@ -27,7 +27,7 @@ class AuthorizationManager {
             case .restricted:
                 fatalError()
             case .denied:
-                fatalError()
+                return .denied
             case .allowedAlways:
                 return .allowed
             @unknown default:
@@ -40,7 +40,7 @@ class AuthorizationManager {
             case .restricted:
                 fatalError()
             case .denied:
-                fatalError()
+                return .denied
             case .authorized:
                 return .allowed
             @unknown default:
@@ -56,10 +56,12 @@ class AuthorizationManager {
             case .notDetermined:
                 completion(.notDetermined)
             case .denied:
-                fatalError()
+                completion(.denied)
             case .authorized:
                 completion(.allowed)
             case .provisional:
+                // We should only ever get these if we request .provisional notification
+                // authorization, and since we don't, this should never happen.
                 fatalError()
             @unknown default:
                 fatalError()

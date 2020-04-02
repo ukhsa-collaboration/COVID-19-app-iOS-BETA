@@ -20,18 +20,32 @@ class PermissionsViewController: UIViewController, Storyboarded {
     // Hold onto the Bluetooth manager for the sole
     // purpose of retaining it in memory for the
     // lifespan of this view controller.
-    var bluetoothManager: BluetoothManager?
+    private var bluetoothManager: BluetoothManager?
 
-    private var allowedBluetooth = false
+    private var bluetoothDetermined = false // sentinel so we only request notification permissions once
     
     @IBAction func didTapContinue(_ sender: UIButton) {
+        sender.isEnabled = false
         requestBluetoothPermissions()
     }
 
     private func requestBluetoothPermissions() {
         #if targetEnvironment(simulator)
+
+        // There's no Bluetooth on the Simulator, so skip
+        // directly to asking for notification permissions.
         requestNotificationPermissions()
+
         #else
+
+        // Only ask for Bluetooth permissions if we haven't
+        // already asked. If we have, we can skip to asking
+        // for notification permissions.
+        guard authManager.bluetooth == .notDetermined else {
+            requestNotificationPermissions()
+            return
+        }
+
         bluetoothManager = CBPeripheralManager(
             delegate: self,
             queue: nil,
@@ -39,32 +53,31 @@ class PermissionsViewController: UIViewController, Storyboarded {
         #endif
     }
 
-    private func checkBluetoothAuth() {
-        guard authManager.bluetooth == .allowed, !allowedBluetooth else { return }
-        allowedBluetooth = true
-
-        requestNotificationPermissions()
-    }
-
     private func requestNotificationPermissions() {
-        remoteNotificationManager.requestAuthorization { [weak self] result in
+        authManager.notifications { [weak self] status in
             guard let self = self else { return }
 
-            switch result {
-            case .success(let granted):
-                if granted {
+            // If we've already asked for notification permissions, bail
+            // out to let the OnboardingViewController figure out how to
+            // deal with it.
+            guard status == .notDetermined else {
+                self.uiQueue.async {
+                    self.performSegue(withIdentifier: "unwindFromPermissions", sender: self)
+                }
+                return
+            }
+
+            self.remoteNotificationManager.requestAuthorization { result in
+                switch result {
+                case .success:
                     self.uiQueue.async {
                         self.performSegue(withIdentifier: "unwindFromPermissions", sender: self)
                     }
-                } else {
-                    // We get here sometimes even after tapping "Allow", so maybe
-                    // we should re-check permissions here after a short delay to
-                    // see if it's a spurious false result?
+                case .failure(let error):
+                    // We have no idea what would cause an error here.
+                    print("Error requesting notification permissions: \(error)")
                     fatalError()
                 }
-            case .failure(let error):
-                print("Error requesting notification permissions: \(error)")
-                fatalError()
             }
         }
     }
@@ -73,7 +86,13 @@ class PermissionsViewController: UIViewController, Storyboarded {
 // MARK: - CBCentralManagerDelegate
 extension PermissionsViewController: CBPeripheralManagerDelegate {
     func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
-        checkBluetoothAuth()
+        switch authManager.bluetooth {
+        case .notDetermined:
+            return
+        case .allowed, .denied:
+            bluetoothDetermined = true
+            requestNotificationPermissions()
+        }
     }
 }
 

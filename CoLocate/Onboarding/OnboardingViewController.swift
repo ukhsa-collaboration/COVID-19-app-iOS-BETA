@@ -43,6 +43,10 @@ class OnboardingViewController: UINavigationController, Storyboarded {
         updateState()
     }
 
+    @IBAction func unwindFromPermissionsDenied(unwindSegue: UIStoryboardSegue) {
+        updateState()
+    }
+
     private func handle(state: OnboardingCoordinator.State?) {
         guard let state = state else {
             performSegue(withIdentifier: "unwindFromOnboarding", sender: self)
@@ -55,6 +59,8 @@ class OnboardingViewController: UINavigationController, Storyboarded {
             vc = StartNowViewController.instantiate()
         case .permissions:
             vc = PermissionsViewController.instantiate()
+        case .permissionsDenied:
+            vc = PermissionsDeniedViewController.instantiate()
         case .registration:
             vc = RegistrationViewController.instantiate()
         }
