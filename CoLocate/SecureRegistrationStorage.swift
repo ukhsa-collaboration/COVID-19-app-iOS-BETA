@@ -8,6 +8,7 @@
 
 import Foundation
 import Security
+import Logging
 
 struct Registration: Codable, Equatable {
     let id: UUID
@@ -44,14 +45,16 @@ class SecureRegistrationStorage {
         switch status {
         case errSecSuccess: break
         case errSecItemNotFound: return nil
-        default: throw Error.keychain(status)
+        default:
+            logger.critical("Unhandled status from SecItemCopy: \(status)")
+            throw Error.keychain(status)
         }
 
         guard let item = result as? [String : Any],
             let data = item[kSecValueData as String] as? Data,
             let idString = item[kSecAttrAccount as String] as? String,
             let id = UUID(uuidString: idString) else {
-                // TODO log this error?
+                logger.error("Read idString from keychain")
                 return nil
         }
 
@@ -70,6 +73,7 @@ class SecureRegistrationStorage {
         let status = SecItemAdd(query as CFDictionary, nil)
 
         guard status == errSecSuccess || status == errSecDuplicateItem else {
+            logger.error("Failed to add registration to keychain: \(status)")
             throw Error.keychain(status)
         }
     }
@@ -82,8 +86,11 @@ class SecureRegistrationStorage {
         let status = SecItemDelete(query as CFDictionary)
 
         guard status == errSecSuccess || status == errSecItemNotFound else {
+            logger.error("Failed to add clear registration from keychain : \(status)")
             throw Error.keychain(status)
         }
     }
 
 }
+
+fileprivate let logger = Logger(label: "RegistrationStorage")
