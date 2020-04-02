@@ -10,7 +10,7 @@ import UIKit
 
 class LiveBTLEDebuggerTableViewController: UITableViewController {
     
-    let defaultUUID = UUID(uuidString: "FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF")!
+
 
     var persistence: Persistence = Persistence.shared
     
@@ -41,6 +41,14 @@ class LiveBTLEDebuggerTableViewController: UITableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 0: return "My Device"
+        case 1: return "Visible Devices"
+        default: preconditionFailure("No section \(section)")
+        }
+    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
@@ -53,17 +61,17 @@ class LiveBTLEDebuggerTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! DebuggerTableViewCell
 
         switch (indexPath.section, indexPath.row) {
             
         case (0, _):
             cell.textLabel?.text = persistence.registration?.id.uuidString
-            setGradientLayer(cell: cell, uuid: persistence.registration?.id ?? defaultUUID)
+            cell.uuid = persistence.registration?.id
             
         case (1, let row):
             cell.textLabel?.text = sonarIds[row].uuidString
-            setGradientLayer(cell: cell, uuid: sonarIds[row])
+            cell.uuid = sonarIds[row]
             
         default:
             preconditionFailure("No cell at indexPath \(indexPath)")
