@@ -6,6 +6,7 @@
 //  Copyright © 2020 NHSX. All rights reserved.
 //
 
+import CoreBluetooth
 import XCTest
 @testable import CoLocate
 
@@ -15,14 +16,10 @@ class PermissionsViewControllerTests: TestCase {
         let authManagerDouble = AuthorizationManagerDouble()
         let pushNotificationManagerDouble = PushNotificationManagerDouble()
         let persistence = PersistenceDouble()
-        let listenerDouble = BTLEListenerDouble()
-        let broadcasterDouble = BTLEBroadcasterDouble()
         let vc = PermissionsViewController.instantiate()
         vc.authManager = authManagerDouble
         vc.pushNotificationManager = pushNotificationManagerDouble
         vc.persistence = persistence
-        vc.broadcaster = broadcasterDouble
-        vc.listener = listenerDouble
         vc.uiQueue = QueueDouble()
 
         let permissionsUnwinder = PermissionsUnwinder()
@@ -36,7 +33,7 @@ class PermissionsViewControllerTests: TestCase {
         // to requesting notification authorization.
         #else
         authManagerDouble._bluetooth = .allowed
-        broadcasterDouble.delegate?.btleBroadcaster(broadcasterDouble, didUpdateState: .poweredOn)
+        vc.peripheralManagerDidUpdateState(CBPeripheralManager())
         #endif
 
         XCTAssertNotNil(pushNotificationManagerDouble.requestAuthorizationCompletion)

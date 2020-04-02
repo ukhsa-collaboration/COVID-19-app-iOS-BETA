@@ -42,7 +42,6 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
     var contactEventRecorder: ContactEventRecorder
     
     var centralManager: CBCentralManager?
-    var peripheralManager: CBPeripheralManager?
 
     var discoveredPeripherals: [UUID: CBPeripheral] = [:]
 

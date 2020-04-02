@@ -16,10 +16,12 @@ class PermissionsViewController: UIViewController, Storyboarded {
     var pushNotificationManager: PushNotificationManager = ConcretePushNotificationManager()
     var persistence = Persistence.shared
     var uiQueue: TestableQueue = DispatchQueue.main
-    var broadcaster: BTLEBroadcaster = (UIApplication.shared.delegate as! AppDelegate).broadcaster
-    var listener: BTLEListener = (UIApplication.shared.delegate as! AppDelegate).listener
-    var collector: ContactEventCollector = (UIApplication.shared.delegate as! AppDelegate).collector
-    
+
+    // Hold onto the Bluetooth manager for the sole
+    // purpose of retaining it in memory for the
+    // lifespan of this view controller.
+    var bluetoothManager: BluetoothManager?
+
     private var allowedBluetooth = false
     
     @IBAction func didTapContinue(_ sender: UIButton) {
@@ -28,10 +30,12 @@ class PermissionsViewController: UIViewController, Storyboarded {
 
     private func requestBluetoothPermissions() {
         #if targetEnvironment(simulator)
-            requestNotificationPermissions()
+        requestNotificationPermissions()
         #else
-            broadcaster.start(stateDelegate: self)
-            listener.start(stateDelegate: self, delegate: collector)
+        bluetoothManager = CBPeripheralManager(
+            delegate: self,
+            queue: nil,
+            options: [CBCentralManagerOptionShowPowerAlertKey: true])
         #endif
     }
 
@@ -66,20 +70,14 @@ class PermissionsViewController: UIViewController, Storyboarded {
     }
 }
 
-// MARK: - BTLEBroadcasterDelegate
-extension PermissionsViewController: BTLEBroadcasterStateDelegate {
-    func btleBroadcaster(_ broadcaster: BTLEBroadcaster, didUpdateState state: CBManagerState) {
-        // Do we also need to wait for Bluetooth to be powered on here?
-
+// MARK: - CBCentralManagerDelegate
+extension PermissionsViewController: CBPeripheralManagerDelegate {
+    func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
         checkBluetoothAuth()
     }
 }
 
-// MARK: - BTLEListenerDelegate
-extension PermissionsViewController: BTLEListenerStateDelegate {
-    func btleListener(_ listener: BTLEListener, didUpdateState state: CBManagerState) {
-        // Do we also need to wait for Bluetooth to be powered on here?
+// MARK: - Testable
 
-        checkBluetoothAuth()
-    }
-}
+protocol BluetoothManager {}
+extension CBManager: BluetoothManager {}
