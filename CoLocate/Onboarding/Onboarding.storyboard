@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,18 +26,18 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x70-iy-LOr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="mbt-ie-wOZ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="991.304347826087" y="137.94642857142856"/>
+            <point key="canvasLocation" x="-150" y="151"/>
         </scene>
         <!--Start Now View Controller-->
         <scene sceneID="0ZS-qJ-EKM">
             <objects>
                 <viewController storyboardIdentifier="StartNowViewController" id="b5f-7Q-Z4Y" customClass="StartNowViewController" customModule="CoLocate" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Uem-sl-iTh">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="0Kn-59-wim">
-                                <rect key="frame" x="20" y="20" width="280" height="508"/>
+                                <rect key="frame" x="20" y="20" width="280" height="528"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Help the NHS stop the spread of coronavirus in the UK" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NZC-MM-nb8">
                                         <rect key="frame" x="0.0" y="0.0" width="280" height="110"/>
@@ -52,11 +53,11 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HUU-ko-6pU" userLabel="Spacer">
-                                        <rect key="frame" x="0.0" y="333" width="280" height="125"/>
+                                        <rect key="frame" x="0.0" y="333" width="280" height="145"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Mb-zt-2Ty" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="478" width="280" height="30"/>
+                                        <rect key="frame" x="0.0" y="498" width="280" height="30"/>
                                         <state key="normal" title="Start now"/>
                                         <connections>
                                             <segue destination="asv-dx-knf" kind="show" id="m8S-mF-wxJ"/>
@@ -75,22 +76,21 @@
                         <viewLayoutGuide key="safeArea" id="rkg-uP-lGN"/>
                     </view>
                     <navigationItem key="navigationItem" id="0zK-Z8-XYb"/>
-                    <modalPageSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HbU-Qf-wLX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1797" y="138"/>
+            <point key="canvasLocation" x="656" y="151"/>
         </scene>
         <!--Privacy View Controller-->
         <scene sceneID="xFW-4v-gtU">
             <objects>
                 <viewController storyboardIdentifier="PrivacyViewController" id="asv-dx-knf" customClass="PrivacyViewController" customModule="CoLocate" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Fjr-8t-RO6">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TUo-oc-PGD">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="478"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="498"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="31h-8a-dJ8">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="823"/>
@@ -175,7 +175,7 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="5KV-cZ-2xj"/>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="png-1j-34C" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
-                                <rect key="frame" x="20" y="498" width="280" height="30"/>
+                                <rect key="frame" x="20" y="518" width="280" height="30"/>
                                 <state key="normal" title="Continue"/>
                                 <connections>
                                     <action selector="continueTapped:" destination="asv-dx-knf" eventType="touchUpInside" id="aZ4-FY-C5b"/>
@@ -195,7 +195,6 @@
                         <viewLayoutGuide key="safeArea" id="eUj-KO-ebd"/>
                     </view>
                     <navigationItem key="navigationItem" id="2kT-fD-hac"/>
-                    <modalPageSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="allowDataSharingSwitch" destination="Vtg-pY-JBT" id="8r9-c9-L1D"/>
                         <outlet property="continueButton" destination="png-1j-34C" id="cu0-UQ-3l8"/>
@@ -205,7 +204,142 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LmF-ZM-p1m" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="gIc-wZ-TP0" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2621.739130434783" y="137.94642857142856"/>
+            <point key="canvasLocation" x="1481" y="151"/>
+        </scene>
+        <!--Permissions View Controller-->
+        <scene sceneID="P4q-TP-FDU">
+            <objects>
+                <viewController storyboardIdentifier="PermissionsViewController" id="AuE-Ey-MBo" customClass="PermissionsViewController" customModule="CoLocate" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LjF-qG-E8R">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Wg-Du-yFB">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ctd-7G-OHq">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="959.5"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="FK8-Le-0p1">
+                                                <rect key="frame" x="20" y="20" width="280" height="919.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set up app permissions" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bLK-VT-lux">
+                                                        <rect key="frame" x="0.0" y="0.0" width="280" height="73"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V9b-ag-tOx">
+                                                        <rect key="frame" x="0.0" y="83" width="280" height="183"/>
+                                                        <string key="text">NHS AppName only works if Bluetooth is turned on and you agree to notifications from the app.  We need your permission to:  Use your phone's Bluetooth, to determine when you're near other people using this app.</string>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ITh-rG-f8Q">
+                                                        <rect key="frame" x="0.0" y="276" width="280" height="150"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KIr-uT-ZnL" userLabel="Shadow">
+                                                                <rect key="frame" x="0.0" y="0.0" width="280" height="8"/>
+                                                                <color key="backgroundColor" name="NHS Grey 3"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="8" id="nu3-aF-yxI"/>
+                                                                </constraints>
+                                                            </view>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0rH-yc-JST">
+                                                                <rect key="frame" x="10" y="18" width="260" height="122"/>
+                                                                <string key="text">Will Bluetooth affect my phone's battery life?  This app uses low energy Bluetooth which will have minimal effect on your battery life.</string>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                        <color key="backgroundColor" name="NHS Grey 4"/>
+                                                        <constraints>
+                                                            <constraint firstItem="KIr-uT-ZnL" firstAttribute="top" secondItem="ITh-rG-f8Q" secondAttribute="top" id="6iF-fZ-Thy"/>
+                                                            <constraint firstItem="0rH-yc-JST" firstAttribute="top" secondItem="KIr-uT-ZnL" secondAttribute="bottom" constant="10" id="L3s-dS-oer"/>
+                                                            <constraint firstAttribute="bottom" secondItem="0rH-yc-JST" secondAttribute="bottom" constant="10" id="R7Y-C6-ngB"/>
+                                                            <constraint firstItem="KIr-uT-ZnL" firstAttribute="leading" secondItem="ITh-rG-f8Q" secondAttribute="leading" id="TgN-Qa-4Ol"/>
+                                                            <constraint firstItem="0rH-yc-JST" firstAttribute="leading" secondItem="ITh-rG-f8Q" secondAttribute="leading" constant="10" id="deu-0b-WHq"/>
+                                                            <constraint firstAttribute="trailing" secondItem="0rH-yc-JST" secondAttribute="trailing" constant="10" id="upk-px-TKn"/>
+                                                            <constraint firstAttribute="trailing" secondItem="KIr-uT-ZnL" secondAttribute="trailing" id="zUy-oH-a9p"/>
+                                                        </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="8"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </view>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send you push notifications, to let you know if you've been near someone with coronavirus symptoms." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O3Q-AD-NYY">
+                                                        <rect key="frame" x="0.0" y="436" width="280" height="81.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o8z-9c-mCH" userLabel="Spacer">
+                                                        <rect key="frame" x="0.0" y="527.5" width="280" height="352"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="hgg-Uz-yn3"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="58S-0g-vQY" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="889.5" width="280" height="30"/>
+                                                        <state key="normal" title="Continue"/>
+                                                        <connections>
+                                                            <action selector="didTapContinue:" destination="AuE-Ey-MBo" eventType="touchUpInside" id="Knf-YF-3Wt"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="FK8-Le-0p1" secondAttribute="bottom" constant="20" id="GBX-XA-roc"/>
+                                            <constraint firstItem="FK8-Le-0p1" firstAttribute="leading" secondItem="ctd-7G-OHq" secondAttribute="leading" constant="20" id="K6i-ha-Xeq"/>
+                                            <constraint firstAttribute="trailing" secondItem="FK8-Le-0p1" secondAttribute="trailing" constant="20" id="dml-Xq-pN8"/>
+                                            <constraint firstItem="FK8-Le-0p1" firstAttribute="top" secondItem="ctd-7G-OHq" secondAttribute="top" constant="20" id="iLn-yu-qSs"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="ctd-7G-OHq" firstAttribute="leading" secondItem="KdC-0t-1sS" secondAttribute="leading" id="K9N-Rl-Y0F"/>
+                                    <constraint firstItem="KdC-0t-1sS" firstAttribute="top" secondItem="ctd-7G-OHq" secondAttribute="top" id="LQ5-S0-stf"/>
+                                    <constraint firstItem="ctd-7G-OHq" firstAttribute="bottom" secondItem="KdC-0t-1sS" secondAttribute="bottom" id="ccP-kA-dOm"/>
+                                    <constraint firstItem="ctd-7G-OHq" firstAttribute="trailing" secondItem="KdC-0t-1sS" secondAttribute="trailing" id="lme-ie-V1P"/>
+                                </constraints>
+                                <edgeInsets key="layoutMargins" top="20" left="20" bottom="20" right="20"/>
+                                <viewLayoutGuide key="contentLayoutGuide" id="KdC-0t-1sS"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="3zR-lS-lAF"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="ctd-7G-OHq" firstAttribute="height" secondItem="3DF-cw-4Dm" secondAttribute="height" priority="1" id="1b7-Rv-G5a"/>
+                            <constraint firstItem="3Wg-Du-yFB" firstAttribute="leading" secondItem="3DF-cw-4Dm" secondAttribute="leading" id="8GY-iv-WKU"/>
+                            <constraint firstItem="3DF-cw-4Dm" firstAttribute="trailing" secondItem="3Wg-Du-yFB" secondAttribute="trailing" id="EAd-eC-0Rj"/>
+                            <constraint firstItem="3DF-cw-4Dm" firstAttribute="bottom" secondItem="3Wg-Du-yFB" secondAttribute="bottom" id="Tp3-Jo-tYy"/>
+                            <constraint firstItem="ctd-7G-OHq" firstAttribute="width" secondItem="3DF-cw-4Dm" secondAttribute="width" id="kcX-xT-Tdt"/>
+                            <constraint firstItem="3Wg-Du-yFB" firstAttribute="top" secondItem="3DF-cw-4Dm" secondAttribute="top" id="vp5-hU-wqC"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="3DF-cw-4Dm"/>
+                    </view>
+                    <connections>
+                        <segue destination="wWL-nv-f7K" kind="unwind" identifier="unwindFromPermissions" unwindAction="unwindFromPermissionsWithUnwindSegue:" id="lf0-W7-HrW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6yL-Lb-PKh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="wWL-nv-f7K" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2333" y="150"/>
         </scene>
     </scenes>
+    <resources>
+        <namedColor name="NHS Grey 3">
+            <color red="0.68235294117647061" green="0.71764705882352942" blue="0.74117647058823533" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="NHS Grey 4">
+            <color red="0.84705882352941175" green="0.8666666666666667" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

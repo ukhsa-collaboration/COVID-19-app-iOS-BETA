@@ -95,7 +95,6 @@
 		F758B8C4242CC0EE003AE16D /* OkNow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F758B8C3242CC0EE003AE16D /* OkNow.storyboard */; };
 		F758B8C9242CC183003AE16D /* PleaseSelfIsolate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F758B8C8242CC183003AE16D /* PleaseSelfIsolate.storyboard */; };
 		F758B8CC242CC1F7003AE16D /* EnterDiagnosis.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F758B8CB242CC1F7003AE16D /* EnterDiagnosis.storyboard */; };
-		F758B8CF242CC26C003AE16D /* Permissions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F758B8CE242CC26C003AE16D /* Permissions.storyboard */; };
 		F758B8D2242CC67D003AE16D /* Registration.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F758B8D1242CC67D003AE16D /* Registration.storyboard */; };
 		F770A455242FEE7C002FDED1 /* SecureRequestFactoryDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = F770A454242FEE7C002FDED1 /* SecureRequestFactoryDouble.swift */; };
 		F770A4572430F76B002FDED1 /* AppCoordinatorDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = F770A4562430F76B002FDED1 /* AppCoordinatorDouble.swift */; };
@@ -223,7 +222,6 @@
 		F758B8C3242CC0EE003AE16D /* OkNow.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OkNow.storyboard; sourceTree = "<group>"; };
 		F758B8C8242CC183003AE16D /* PleaseSelfIsolate.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PleaseSelfIsolate.storyboard; sourceTree = "<group>"; };
 		F758B8CB242CC1F7003AE16D /* EnterDiagnosis.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EnterDiagnosis.storyboard; sourceTree = "<group>"; };
-		F758B8CE242CC26C003AE16D /* Permissions.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Permissions.storyboard; sourceTree = "<group>"; };
 		F758B8D1242CC67D003AE16D /* Registration.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Registration.storyboard; sourceTree = "<group>"; };
 		F770A454242FEE7C002FDED1 /* SecureRequestFactoryDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRequestFactoryDouble.swift; sourceTree = "<group>"; };
 		F770A4562430F76B002FDED1 /* AppCoordinatorDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinatorDouble.swift; sourceTree = "<group>"; };
@@ -465,7 +463,6 @@
 				F67A2290242AA35B002254B6 /* SecureRegistrationStorage.swift */,
 				89F06B2D2434A5A50074C612 /* Logging */,
 				098ED47F242E744F0029B729 /* Debug */,
-				F758B8CD242CC242003AE16D /* Permissions */,
 				F758B8CA242CC1DC003AE16D /* EnterDiagnosis */,
 				F758B8C6242CC129003AE16D /* OkNow */,
 				F6F05A212433BE9600FF4B72 /* Onboarding */,
@@ -535,6 +532,7 @@
 				F6F05A272433C55300FF4B72 /* AuthorizationManager.swift */,
 				F6F05A252433C09200FF4B72 /* OnboardingCoordinator.swift */,
 				F6F05A2F24340E5400FF4B72 /* OnboardingViewController.swift */,
+				213C806B241A56430020EFA5 /* PermissionsViewController.swift */,
 				F6F05A35243436D200FF4B72 /* PrivacyViewController.swift */,
 				F6F05A332434344200FF4B72 /* StartNowViewController.swift */,
 			);
@@ -593,15 +591,6 @@
 				F758B8CB242CC1F7003AE16D /* EnterDiagnosis.storyboard */,
 			);
 			path = EnterDiagnosis;
-			sourceTree = "<group>";
-		};
-		F758B8CD242CC242003AE16D /* Permissions */ = {
-			isa = PBXGroup;
-			children = (
-				213C806B241A56430020EFA5 /* PermissionsViewController.swift */,
-				F758B8CE242CC26C003AE16D /* Permissions.storyboard */,
-			);
-			path = Permissions;
 			sourceTree = "<group>";
 		};
 		F758B8D0242CC661003AE16D /* Registration */ = {
@@ -737,7 +726,6 @@
 				AEC6A7BE241BD82900B0237A /* LogoStrapline.xib in Resources */,
 				A1E7A0592420028B0078174D /* NHS Colors.xcassets in Resources */,
 				F758B8BE242CB856003AE16D /* Localizable.strings in Resources */,
-				F758B8CF242CC26C003AE16D /* Permissions.storyboard in Resources */,
 				F758B8CC242CC1F7003AE16D /* EnterDiagnosis.storyboard in Resources */,
 				6FC63C38241641BA007C8BF3 /* Assets.xcassets in Resources */,
 				F65AE53C2432B842006544D4 /* Potential.rtf in Resources */,

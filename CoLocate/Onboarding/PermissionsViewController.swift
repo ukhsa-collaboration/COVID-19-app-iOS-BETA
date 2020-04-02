@@ -10,7 +10,7 @@ import UIKit
 import CoreBluetooth
 
 class PermissionsViewController: UIViewController, Storyboarded {
-    static let storyboardName = "Permissions"
+    static let storyboardName = "Onboarding"
 
     var authManager = AuthorizationManager()
     var pushNotificationManager: PushNotificationManager = ConcretePushNotificationManager()
