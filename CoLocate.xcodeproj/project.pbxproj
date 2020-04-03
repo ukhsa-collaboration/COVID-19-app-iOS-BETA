@@ -52,6 +52,10 @@
 		6FC63C3B241641BA007C8BF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FC63C39241641BA007C8BF3 /* LaunchScreen.storyboard */; };
 		89074B822437882100D67777 /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895D9E4A24374EC900573D4D /* Screen.swift */; };
 		89074B83243788AE00D67777 /* UITestResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891E16A3243782D000281821 /* UITestResponder.swift */; };
+		89074B8524378A0D00D67777 /* UITestPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89074B8424378A0D00D67777 /* UITestPayload.swift */; };
+		89074B8624378A0D00D67777 /* UITestPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89074B8424378A0D00D67777 /* UITestPayload.swift */; };
+		89074B8724378A0D00D67777 /* UITestPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89074B8424378A0D00D67777 /* UITestPayload.swift */; };
+		89074B8A24378B6E00D67777 /* ScreenTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89074B8924378B6E00D67777 /* ScreenTestCase.swift */; };
 		891E16A4243782D000281821 /* UITestResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891E16A3243782D000281821 /* UITestResponder.swift */; };
 		895D9DE12437383300573D4D /* CoLocateUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895D9DE02437383300573D4D /* CoLocateUITests.swift */; };
 		895D9DF02437425600573D4D /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D93C2F2420C26900C1FA9B /* PrimaryButton.swift */; };
@@ -267,6 +271,8 @@
 		6FC63C37241641BA007C8BF3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6FC63C3A241641BA007C8BF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6FC63C3C241641BA007C8BF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		89074B8424378A0D00D67777 /* UITestPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestPayload.swift; sourceTree = "<group>"; };
+		89074B8924378B6E00D67777 /* ScreenTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenTestCase.swift; sourceTree = "<group>"; };
 		890B41CE2437775700C02A2E /* InternalDevelopment.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = InternalDevelopment.xcconfig; sourceTree = "<group>"; };
 		890B41CF2437775F00C02A2E /* InternalRelease.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = InternalRelease.xcconfig; sourceTree = "<group>"; };
 		890B41D12437777C00C02A2E /* CoLocateInternal.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CoLocateInternal.xcconfig; sourceTree = "<group>"; };
@@ -621,9 +627,18 @@
 			path = CoLocate;
 			sourceTree = "<group>";
 		};
+		89074B8824378B5C00D67777 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				89074B8924378B6E00D67777 /* ScreenTestCase.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		895D9DDF2437383300573D4D /* CoLocateUITests */ = {
 			isa = PBXGroup;
 			children = (
+				89074B8824378B5C00D67777 /* Utilities */,
 				895D9E50243750DB00573D4D /* Screens */,
 				895D9DE22437383300573D4D /* Info.plist */,
 				895D9DE82437384C00573D4D /* CoLocateUITests.xcconfig */,
@@ -658,6 +673,7 @@
 				895D9E4A24374EC900573D4D /* Screen.swift */,
 				895D9E4D24374EFA00573D4D /* AppRouter.swift */,
 				891E16A3243782D000281821 /* UITestResponder.swift */,
+				89074B8424378A0D00D67777 /* UITestPayload.swift */,
 			);
 			path = Routing;
 			sourceTree = "<group>";
@@ -1094,6 +1110,7 @@
 				89F06B312434AABF0074C612 /* NoOpLogHandler.swift in Sources */,
 				09D1CD4B242C284000B1A167 /* PotentialViewController.swift in Sources */,
 				F6F05A3024340E5400FF4B72 /* OnboardingViewController.swift in Sources */,
+				89074B8524378A0D00D67777 /* UITestPayload.swift in Sources */,
 				21D93C2E241FB0A300C1FA9B /* EnterDiagnosisTableViewController.swift in Sources */,
 				21F374042434C4BF00926FB8 /* LiveBTLEDebuggerTableViewController.swift in Sources */,
 				AEC6A7BC241BD81A00B0237A /* LogoStrapline.swift in Sources */,
@@ -1107,8 +1124,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89074B8A24378B6E00D67777 /* ScreenTestCase.swift in Sources */,
 				895D9E52243750EE00573D4D /* PotentialScreenTests.swift in Sources */,
 				895D9DE12437383300573D4D /* CoLocateUITests.swift in Sources */,
+				89074B8724378A0D00D67777 /* UITestPayload.swift in Sources */,
 				89074B822437882100D67777 /* Screen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1143,6 +1162,7 @@
 				895D9E062437425600573D4D /* RequestFactory.swift in Sources */,
 				895D9E072437425600573D4D /* ConfirmRegistrationRequest.swift in Sources */,
 				895D9E082437425600573D4D /* DebugSetting.swift in Sources */,
+				89074B8624378A0D00D67777 /* UITestPayload.swift in Sources */,
 				895D9E092437425600573D4D /* SecureRegistrationStorage.swift in Sources */,
 				895D9E0A2437425600573D4D /* PleaseSelfIsolateViewController.swift in Sources */,
 				895D9E0B2437425600573D4D /* BTLEBroadcaster.swift in Sources */,

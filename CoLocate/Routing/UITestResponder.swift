@@ -13,13 +13,17 @@ import UIKit
 enum UITestResponder {
     
     static func makeWindowForTesting() -> UIWindow? {
-        guard ProcessInfo.processInfo.environment["UI_TEST"] != nil else { return nil }
+        guard
+            let string = ProcessInfo.processInfo.environment[UITestPayload.environmentVariableName],
+            let data = Data(base64Encoded: string),
+            let payload = try? JSONDecoder().decode(UITestPayload.self, from: data)
+            else { return nil }
         
         UIView.setAnimationsEnabled(false)
         
         let window = UIWindow(frame: UIScreen.main.bounds)
         let router = AppRouter(window: window)
-        router.route(to: .potential)
+        router.route(to: payload.screen)
         window.makeKeyAndVisible()
         return window
     }

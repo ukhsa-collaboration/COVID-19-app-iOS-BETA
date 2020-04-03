@@ -8,6 +8,6 @@
 
 import Foundation
 
-enum Screen {
+enum Screen: String, Codable {
     case potential
 }
