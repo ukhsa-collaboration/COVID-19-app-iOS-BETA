@@ -35,7 +35,7 @@ protocol BTLEListener {
 
 class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CBPeripheralDelegate {
 
-    let logger = Logger(label: "BTLEListener")
+    let logger = Logger(label: "BTLE")
     
     let rssiSamplingInterval: TimeInterval = 20.0
     
