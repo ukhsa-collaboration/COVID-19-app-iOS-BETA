@@ -34,6 +34,10 @@ jobs:
           echo "::set-output name=upload::$?"
         continue-on-error: true
 
+      - run: |
+          echo ${{ steps.check-upload-tag.outputs }}
+          echo ${{ steps.check-upload-tag.outputs.upload }}
+
       - name: Trigger deployment
         if: steps.check-upload-tag.outputs.upload == '1'
         run: >
