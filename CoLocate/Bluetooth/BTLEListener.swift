@@ -43,7 +43,7 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
     
     var centralManager: CBCentralManager?
 
-    var discoveredPeripherals: [UUID: CBPeripheral] = [:]
+    var peripherals: [UUID: CBPeripheral] = [:]
 
     init(contactEventRecorder: ContactEventRecorder = PlistContactEventRecorder.shared) {
         self.contactEventRecorder = contactEventRecorder
@@ -95,19 +95,29 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
         }
     }
     
+    func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
+        print("\(#file).\(#function) got centralManager: \(central)")
+        
+        self.centralManager = central
+        
+        for peripheral in (dict[CBCentralManagerRestoredStatePeripheralsKey] as? [CBPeripheral] ?? []) {
+            peripherals[peripheral.identifier] = peripheral
+            peripheral.delegate = self
+        }
+    }
+        
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         print("\(#file).\(#function) discovered peripheral: \(advertisementData)")
-        
-        // TODO: We do not ever delete from this list. Is that a problem?
-        if discoveredPeripherals[peripheral.identifier] == nil {
-            discoveredPeripherals[peripheral.identifier] = peripheral
+
+        if peripherals[peripheral.identifier] == nil {
+            peripherals[peripheral.identifier] = peripheral
         }
         centralManager?.connect(peripheral)
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("\(#file).\(#function) discovered peripheral: \(String(describing: peripheral.name))")
-        
+
         delegate?.btleListener(self, didConnect: peripheral)
         
         peripheral.delegate = self
@@ -117,6 +127,8 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
     
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         print("\(#file).\(#function) disconnected peripheral: \(String(describing: peripheral.name))")
+        
+        peripherals[peripheral.identifier] = nil
         
         delegate?.btleListener(self, didDisconnect: peripheral, error: error)
     }
@@ -135,12 +147,6 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
                 peripheral.readRSSI()
             }
         }
-    }
-    
-    func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
-        print("\(#file).\(#function) got centralManager: \(central)")
-        
-        self.centralManager = central
     }
     
     // MARK: CBPeripheralDelegate
