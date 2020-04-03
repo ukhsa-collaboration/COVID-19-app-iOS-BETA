@@ -42,6 +42,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        window.makeKeyAndVisible()
+        defer { self.window = window }
+        
+        if ProcessInfo.processInfo.environment["UI_TEST"] != nil {
+            let router = AppRouter(window: window)
+            router.route(to: .potential)
+            return true
+        }
+        
         logger.info("Launched", metadata: Logger.Metadata(launchOptions: launchOptions))
         
         application.registerForRemoteNotifications()
@@ -49,14 +59,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         remoteNotificationManager.configure()
 
         let rootViewController = RootViewController()
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = rootViewController
+        window.rootViewController = rootViewController
 
         if let registration = persistence.registration {
             continueWithRegistration(registration)
         }
 
-        window?.makeKeyAndVisible()
 
         onboardingViewController = OnboardingViewController.instantiate()
         onboardingViewController.rootViewController = rootViewController
