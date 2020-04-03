@@ -74,6 +74,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func applicationWillTerminate(_ application: UIApplication) {
         logger.info("Terminating")
+
+        let content = UNMutableNotificationContent()
+        content.body = "Scanning for other devices has ended. To keep yourself secure, please relaunch the app."
+
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
+        let request = UNNotificationRequest(identifier: "willTerminate.relaunch.immediate", content: content, trigger: trigger)
+
+        UNUserNotificationCenter.current().add(request)
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
