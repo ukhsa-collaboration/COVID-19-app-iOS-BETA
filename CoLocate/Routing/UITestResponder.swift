@@ -12,6 +12,9 @@ enum UITestResponder {
     
     static func makeWindowForTesting() -> UIWindow? {
         guard ProcessInfo.processInfo.environment["UI_TEST"] != nil else { return nil }
+        
+        UIView.setAnimationsEnabled(false)
+        
         let window = UIWindow(frame: UIScreen.main.bounds)
         let router = AppRouter(window: window)
         router.route(to: .potential)
