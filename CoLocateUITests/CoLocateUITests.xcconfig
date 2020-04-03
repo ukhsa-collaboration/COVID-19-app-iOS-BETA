@@ -1,0 +1,10 @@
+
+PRODUCT_BUNDLE_IDENTIFIER = uk.nhs.nhsx.CoLocate.CoLocateUITests
+INFOPLIST_FILE = CoLocateUITests/Info.plist
+
+CODE_SIGN_STYLE = Automatic
+
+TEST_TARGET_NAME = CoLocate
+
+LD_RUNPATH_SEARCH_PATHS = $(inherited) @executable_path/Frameworks @loader_path/Frameworks
+PRODUCT_NAME = $(TARGET_NAME)

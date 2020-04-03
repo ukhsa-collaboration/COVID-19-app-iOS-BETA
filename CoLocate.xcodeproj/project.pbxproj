@@ -50,6 +50,7 @@
 		6FC63C31241641B8007C8BF3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC63C30241641B8007C8BF3 /* AppDelegate.swift */; };
 		6FC63C38241641BA007C8BF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FC63C37241641BA007C8BF3 /* Assets.xcassets */; };
 		6FC63C3B241641BA007C8BF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FC63C39241641BA007C8BF3 /* LaunchScreen.storyboard */; };
+		895D9DE12437383300573D4D /* CoLocateUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895D9DE02437383300573D4D /* CoLocateUITests.swift */; };
 		89896E622435F37300F949EA /* ProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89896E612435F37300F949EA /* ProjectTests.swift */; };
 		89BC79EB2434E047002050F8 /* LogsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BC79EA2434E047002050F8 /* LogsViewController.swift */; };
 		89F06B2C2434A2C00074C612 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 89F06B2B2434A2C00074C612 /* Logging */; };
@@ -122,6 +123,13 @@
 			remoteGlobalIDString = 6FC63C2C241641B8007C8BF3;
 			remoteInfo = CoLocate;
 		};
+		895D9DE32437383300573D4D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6FC63C25241641B8007C8BF3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6FC63C2C241641B8007C8BF3;
+			remoteInfo = CoLocate;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -174,6 +182,10 @@
 		6FC63C3C241641BA007C8BF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		89388B8C2435E370009D60CF /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		89388B8E2435E673009D60CF /* ReleaseConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ReleaseConfig.xcconfig; sourceTree = "<group>"; };
+		895D9DDE2437383300573D4D /* CoLocateUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoLocateUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		895D9DE02437383300573D4D /* CoLocateUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoLocateUITests.swift; sourceTree = "<group>"; };
+		895D9DE22437383300573D4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		895D9DE82437384C00573D4D /* CoLocateUITests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CoLocateUITests.xcconfig; sourceTree = "<group>"; };
 		89896E5E2435EB6500F949EA /* CoLocateTests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CoLocateTests.xcconfig; sourceTree = "<group>"; };
 		89896E5F2435F15C00F949EA /* CoLocate.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CoLocate.xcconfig; sourceTree = "<group>"; };
 		89896E612435F37300F949EA /* ProjectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectTests.swift; sourceTree = "<group>"; };
@@ -270,6 +282,13 @@
 				F78CEB6F242B92CF002254AD /* GoogleUtilities.framework in Frameworks */,
 				F78CEB73242B937F002254AD /* nanopb.framework in Frameworks */,
 				F78CEB5E242B7EC0002254AD /* Protobuf.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		895D9DDB2437383300573D4D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,6 +448,7 @@
 				F6CA2816242E416C00F8DC55 /* Release.xcconfig */,
 				6FC63C2F241641B8007C8BF3 /* CoLocate */,
 				214209C02422276800C7BFF3 /* CoLocateTests */,
+				895D9DDF2437383300573D4D /* CoLocateUITests */,
 				898BA15A2435E26C00EBD35D /* Configurations */,
 				6FC63C2E241641B8007C8BF3 /* Products */,
 				21B3D2E62429115600573061 /* Frameworks */,
@@ -440,6 +460,7 @@
 			children = (
 				6FC63C2D241641B8007C8BF3 /* CoLocate.app */,
 				214209BF2422276800C7BFF3 /* CoLocateTests.xctest */,
+				895D9DDE2437383300573D4D /* CoLocateUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -478,6 +499,16 @@
 				F758B8BC242CB83B003AE16D /* Resources */,
 			);
 			path = CoLocate;
+			sourceTree = "<group>";
+		};
+		895D9DDF2437383300573D4D /* CoLocateUITests */ = {
+			isa = PBXGroup;
+			children = (
+				895D9DE22437383300573D4D /* Info.plist */,
+				895D9DE82437384C00573D4D /* CoLocateUITests.xcconfig */,
+				895D9DE02437383300573D4D /* CoLocateUITests.swift */,
+			);
+			path = CoLocateUITests;
 			sourceTree = "<group>";
 		};
 		898BA15A2435E26C00EBD35D /* Configurations */ = {
@@ -666,13 +697,31 @@
 			productReference = 6FC63C2D241641B8007C8BF3 /* CoLocate.app */;
 			productType = "com.apple.product-type.application";
 		};
+		895D9DDD2437383300573D4D /* CoLocateUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 895D9DE72437383300573D4D /* Build configuration list for PBXNativeTarget "CoLocateUITests" */;
+			buildPhases = (
+				895D9DDA2437383300573D4D /* Sources */,
+				895D9DDB2437383300573D4D /* Frameworks */,
+				895D9DDC2437383300573D4D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				895D9DE42437383300573D4D /* PBXTargetDependency */,
+			);
+			name = CoLocateUITests;
+			productName = CoLocateUITests;
+			productReference = 895D9DDE2437383300573D4D /* CoLocateUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		6FC63C25241641B8007C8BF3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1130;
+				LastSwiftUpdateCheck = 1140;
 				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = NHSX;
 				TargetAttributes = {
@@ -684,6 +733,10 @@
 					6FC63C2C241641B8007C8BF3 = {
 						CreatedOnToolsVersion = 10.1;
 						LastSwiftMigration = 1130;
+					};
+					895D9DDD2437383300573D4D = {
+						CreatedOnToolsVersion = 11.4;
+						TestTargetID = 6FC63C2C241641B8007C8BF3;
 					};
 				};
 			};
@@ -705,6 +758,7 @@
 			targets = (
 				6FC63C2C241641B8007C8BF3 /* CoLocate */,
 				214209BE2422276800C7BFF3 /* CoLocateTests */,
+				895D9DDD2437383300573D4D /* CoLocateUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -737,6 +791,13 @@
 				F6F05A322434310200FF4B72 /* Onboarding.storyboard in Resources */,
 				098ED481242E745F0029B729 /* Debug.storyboard in Resources */,
 				F78CEB68242B8C2C002254AD /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		895D9DDC2437383300573D4D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -834,6 +895,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		895D9DDA2437383300573D4D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				895D9DE12437383300573D4D /* CoLocateUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -841,6 +910,11 @@
 			isa = PBXTargetDependency;
 			target = 6FC63C2C241641B8007C8BF3 /* CoLocate */;
 			targetProxy = 214209C42422276800C7BFF3 /* PBXContainerItemProxy */;
+		};
+		895D9DE42437383300573D4D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6FC63C2C241641B8007C8BF3 /* CoLocate */;
+			targetProxy = 895D9DE32437383300573D4D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -906,6 +980,20 @@
 			};
 			name = Release;
 		};
+		895D9DE52437383300573D4D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 895D9DE82437384C00573D4D /* CoLocateUITests.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		895D9DE62437383300573D4D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 895D9DE82437384C00573D4D /* CoLocateUITests.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -932,6 +1020,15 @@
 			buildConfigurations = (
 				6FC63C40241641BA007C8BF3 /* Debug */,
 				6FC63C41241641BA007C8BF3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		895D9DE72437383300573D4D /* Build configuration list for PBXNativeTarget "CoLocateUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				895D9DE52437383300573D4D /* Debug */,
+				895D9DE62437383300573D4D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
