@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+import Logging
 import Firebase
 
 // Send a notification when we receive a push token, since there might be mulltiple
@@ -149,9 +150,11 @@ extension ConcreteRemoteNotificationManager: UNUserNotificationCenterDelegate {
 
 extension ConcreteRemoteNotificationManager: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
-        print("fcmToken: \(fcmToken)")
+
         let apnsToken = Messaging.messaging().apnsToken?.map { String(format: "%02hhx", $0) }.joined()
-        print("apnsToken: \(String(describing: apnsToken))")
+        logger.debug("fcmToken: \(fcmToken)")
+        logger.debug("apnsToken: \(String(describing: apnsToken))")
+
         dispatcher.receiveRegistrationToken(fcmToken: fcmToken)
     }
 }
@@ -178,3 +181,6 @@ protocol TestableMessaging: class {
 
 extension Messaging: TestableMessaging {
 }
+
+// MARK: - Logging
+private let logger = Logger(label: "NotificationManager")

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Logging
 import CoreBluetooth
 
 class PermissionsViewController: UIViewController, Storyboarded {
@@ -75,7 +76,7 @@ class PermissionsViewController: UIViewController, Storyboarded {
                     }
                 case .failure(let error):
                     // We have no idea what would cause an error here.
-                    print("Error requesting notification permissions: \(error)")
+                    logger.critical("Error requesting notification permissions: \(error)")
                     fatalError()
                 }
             }
@@ -100,3 +101,6 @@ extension PermissionsViewController: CBPeripheralManagerDelegate {
 
 protocol BluetoothManager {}
 extension CBManager: BluetoothManager {}
+
+// MARK: - Logger
+private let logger = Logger(label: "PermissionsViewController")

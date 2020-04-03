@@ -8,6 +8,8 @@
 
 import Foundation
 
+import Logging
+
 protocol UserNotificationCenter: class {
     var delegate: UNUserNotificationCenterDelegate? { get set }
 
@@ -70,19 +72,18 @@ class RemoteNotificationDispatcher {
         }
         
         guard let type = notificationType(userInfo: userInfo) else {
-            print("Warning: unrecognized notification with user info: \(userInfo)")
+            logger.warning("unrecognized notification with user info: \(userInfo)")
             completionHandler(.failed)
             return
         }
         
-        print("Remote notification is a \(type)")
+        logger.debug("Remote notification is a \(type)")
         
         guard let handler = handlers[type] else {
+            logger.warning("No registered handler for type \(type)")
             completionHandler(.failed)
             return
         }
-        
-        print("Got a handler")
         
         handler(userInfo, completionHandler)
     }
@@ -90,9 +91,6 @@ class RemoteNotificationDispatcher {
     func receiveRegistrationToken(fcmToken: String) {
         pushToken = fcmToken
         notificationCenter.post(name: PushTokenReceivedNotification, object: nil, userInfo: nil)
-
-        let apnsToken = Messaging.messaging().apnsToken?.map { String(format: "%02hhx", $0) }.joined()
-        print("apnsToken: \(String(describing: apnsToken))")
     }
     
     private func notificationType(userInfo: [AnyHashable : Any]) -> RemoteNotificationType? {
@@ -106,26 +104,26 @@ class RemoteNotificationDispatcher {
     }
     
     private func handleStatusUpdated(status: Any) {
-        if status as? String == "Potential" {
-            let content = UNMutableNotificationContent()
-            content.title = "POTENTIAL_STATUS_TITLE".localized
-            content.body = "POTENTIAL_STATUS_BODY".localized
-
-            let uuidString = UUID().uuidString
-            let request = UNNotificationRequest(identifier: uuidString, content: content, trigger: nil)
-
-            userNotificationCenter.add(request) { error in
-                if error != nil {
-                    print("Unable to add local notification: \(String(describing: error))")
-                }
-            }
-
-            persistence.diagnosis = .potential
-        } else {
-            print("Received unexpected status from remote notification: '\(status)'")
+        guard status as? String == "Potential" else {
+            logger.warning("Received unexpected status from remote notification: '\(status)'")
+            return
         }
-    }
 
+        let content = UNMutableNotificationContent()
+        content.title = "POTENTIAL_STATUS_TITLE".localized
+        content.body = "POTENTIAL_STATUS_BODY".localized
+
+        let uuidString = UUID().uuidString
+        let request = UNNotificationRequest(identifier: uuidString, content: content, trigger: nil)
+
+        userNotificationCenter.add(request) { error in
+            if error != nil {
+                logger.critical("Unable to add local notification: \(String(describing: error))")
+            }
+        }
+
+        persistence.diagnosis = .potential
+    }
 }
 
 private class HandlerDictionary {
@@ -158,7 +156,7 @@ private class HandlerDictionary {
         #if DEBUG
         fatalError("Remote notification HandlerDictionary: no handler for notification type \(type)")
         #else
-        print("Warning: Remote notification HandlerDictionary: no handler for notification type \(type)")
+        logger.warning("Remote notification HandlerDictionary: no handler for notification type \(type)")
         #endif
     }
     
@@ -166,7 +164,9 @@ private class HandlerDictionary {
         #if DEBUG
         fatalError("Remote notification HandlerDictionary: attempted to replace handler for \(type)")
         #else
-        print("Warning: Remote notification HandlerDictionary replacing existing handler for \(type)")
+        logger.warning("Remote notification HandlerDictionary replacing existing handler for \(type)")
         #endif
     }
 }
+
+private let logger = Logger(label: "NotificationDispatcher")

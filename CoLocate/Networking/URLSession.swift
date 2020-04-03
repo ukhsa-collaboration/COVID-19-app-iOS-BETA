@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Logging
 
 extension URLSession: Session {
 
@@ -38,7 +39,7 @@ extension URLSession: Session {
         
         let task = dataTask(with: urlRequest) { data, response, error in
             if let error = error {
-                print("Request to \(request.path) failed with error: \(error)")
+                logger.error("Request to \(request.path) failed with error: \(error)")
                 completion(.failure(error))
             }
             
@@ -67,3 +68,5 @@ extension URLSession: Session {
     }
 
 }
+
+private let logger = Logger(label: "URLSession")

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Logging
 
 class PleaseSelfIsolateViewController: UIViewController, Storyboarded {
     static let storyboardName = "PleaseSelfIsolate"
@@ -50,7 +51,7 @@ class PleaseSelfIsolateViewController: UIViewController, Storyboarded {
             case .success(_):
                 self.present(self.successfulAlert(), animated: true, completion: nil)
             case .failure(let error):
-                print("\(#file).\(#function) failure submitting contact events (\(error)) !")
+                logger.error("failure submitting contact events (\(error)) !")
 
                 self.present(self.errorAlert(), animated: true, completion: nil)
             }
@@ -77,3 +78,5 @@ class PleaseSelfIsolateViewController: UIViewController, Storyboarded {
         return alert
     }
 }
+
+private let logger = Logger(label: "PleaseSelfIsolate")

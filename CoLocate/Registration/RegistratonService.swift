@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Logging
 
 protocol RegistrationService {
     func register(completionHandler: @escaping ((Result<Void, Error>) -> Void))
@@ -93,12 +94,12 @@ class RegistrationAttempt {
         session.execute(request, queue: .main) { result in
             switch result {
             case .success(_):
-                print("\(#file) \(#function) First registration request succeeded")
+                logger.debug("First registration request succeeded")
                 // If everything worked, we'll receive a notification with the access token
                 // See confirmRegistration().
 
             case .failure(let error):
-                print("\(#file) \(#function) Error making first registration request: \(error)")
+                logger.error("Error making first registration request: \(error)")
                 self.fail(withError: error)
             }
         }
@@ -117,7 +118,7 @@ class RegistrationAttempt {
 
                 self.succeed(registration: registration)
             case .failure(let error):
-                print("error during registration: \(error)")
+                logger.error("error during registration: \(error)")
                 self.fail(withError: error)
             }
         }
@@ -177,12 +178,15 @@ class InterceptingSession: Session {
     
     private func interceptRequest<R: Request>(_ request: R) {
         InterceptingSession.interceptNextRequest = false
-        print("Intercepted an HTTP request. This request will not be sent:\n\(request)")
+        logger.debug("Intercepted an HTTP request. This request will not be sent:\n\(request)")
+
         if case .post(let data) = request.method {
             if let s = String(data: data, encoding: .utf8) {
-                print("Request body as string: \(s)")
+                logger.debug("Request body as string: \(s)")
             }
         }
     }
 }
 #endif
+
+private let logger = Logger(label: "RegistrationService")

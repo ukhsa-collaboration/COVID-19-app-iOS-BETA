@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Logging
 
 class EnterDiagnosisTableViewController: UITableViewController, Storyboarded {
     static let storyboardName = "EnterDiagnosis"
@@ -45,7 +46,9 @@ class EnterDiagnosisTableViewController: UITableViewController, Storyboarded {
             persistence.diagnosis = .notInfected
 
         default:
-            print("\(#file).\(#function) unknown indexPath selected: \(indexPath)")
+            logger.error("unknown indexPath selected: \(indexPath)")
         }
     }
 }
+
+private let logger = Logger(label: "DiagnosisTableViewController")
