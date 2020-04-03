@@ -1,4 +1,4 @@
-name: ci
+name: upload
 
 on:
   deployment
@@ -11,14 +11,12 @@ jobs:
     steps:
       - name: Checkout Project
         uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
 
       - name: Merge master into test-flight
         run: |
           git fetch origin test-flight
           git checkout test-flight
-          git merge ready-for-release
+          git merge ${{ github.sha }}
 
       - name: Bump Version
         run: ./bin/bump-build-version
