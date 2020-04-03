@@ -45,11 +45,6 @@ class ConcreteRegistrationService: RegistrationService {
         )
         attempt.start()
     }
-    
-    deinit {
-        notificationCenter.removeObserver(self)
-    }
-    
 }
 
 class RegistrationAttempt {
@@ -70,6 +65,10 @@ class RegistrationAttempt {
         self.remoteNotificationDispatcher = remoteNotificationDispatcher
         self.notificationCenter = notificationCenter
         self.registrationCompletionHandler = completionHandler
+    }
+
+    deinit {
+        notificationCenter.removeObserver(self)
     }
     
     func start() {
