@@ -1,3 +1,4 @@
+DISPLAY_NAME = CoLocate
 PRODUCT_BUNDLE_IDENTIFIER = uk.nhs.nhsx.beta.CoLocate
 INFOPLIST_FILE = CoLocate/Info.plist
 CODE_SIGN_ENTITLEMENTS = CoLocate/CoLocate.entitlements
