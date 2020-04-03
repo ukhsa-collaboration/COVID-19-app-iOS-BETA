@@ -83,5 +83,5 @@ jobs:
       - name: Set ready-to-upload tag
         run: |
           git push origin --delete ready-for-upload || true
-          git tag ready-for-upload
+          git tag --force ready-for-upload
           git push origin ready-for-upload
