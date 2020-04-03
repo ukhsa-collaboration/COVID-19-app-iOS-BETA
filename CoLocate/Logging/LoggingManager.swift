@@ -19,25 +19,20 @@ class LoggingManager: NSObject {
         _ = shared
     }
     
-    private let io = DispatchQueue(label: "Logging IO")
-    private let stream: OutputStream
-    
     @objc dynamic private(set) var log = ""
     
+    #if INTERNAL || DEBUG
+    private let io = DispatchQueue(label: "Logging IO")
+    private let stream = OutputStream.makeForLogs()
+    
     private override init() {
-        stream = Self.isEnabled ? .makeForLogs() : OutputStream(toMemory: ())
-        
         super.init()
         
-        if Self.isEnabled {
-            LoggingSystem.bootstrap { label in
-                MultiplexLogHandler([
-                    StreamLogHandler.standardOutput(label: label),
-                    ForwardingLogHandler(label: label, send: self.log),
-                ])
-            }
-        } else {
-            LoggingSystem.bootstrap { _ in NoOpLogHandler() }
+        LoggingSystem.bootstrap { label in
+            MultiplexLogHandler([
+                StreamLogHandler.standardOutput(label: label),
+                ForwardingLogHandler(label: label, send: self.log),
+            ])
         }
         
         stream.open()
@@ -56,14 +51,15 @@ class LoggingManager: NSObject {
             }
         }
     }
-    
-    private static var isEnabled: Bool {
-        #warning("Address this before public release")
-        // TODO: When should we log?
-        return true
+    #else
+    private override init() {
+        LoggingSystem.bootstrap { _ in NoOpLogHandler() }
     }
-    
+    #endif
+
 }
+
+#if INTERNAL || DEBUG
 
 extension LogEvent {
     
@@ -154,3 +150,5 @@ private extension OutputStream {
     }
     
 }
+
+#endif
