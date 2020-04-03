@@ -28,7 +28,7 @@ class LiveBTLEDebuggerTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         observation = observe(\.collector._connectedPeripheralCount) { object, change in
-            self.sonarIds = Array(self.collector.connectedPeripherals.keys)
+            self.sonarIds = self.collector.connectedPeripherals.compactMap({ $0.value.sonarId })
             self.tableView.reloadData()
         }
         
