@@ -38,30 +38,20 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
     let logger = Logger(label: "BTLEListener")
     
     let rssiSamplingInterval: TimeInterval = 20.0
-    let restoreIdentifier: String = "SonarCentralRestoreIdentifier"
     
     var stateDelegate: BTLEListenerStateDelegate?
     var delegate: BTLEListenerDelegate?
     var contactEventRecorder: ContactEventRecorder
     
-    var centralManager: CBCentralManager?
-
     var peripherals: [UUID: CBPeripheral] = [:]
 
-    init(contactEventRecorder: ContactEventRecorder = PlistContactEventRecorder.shared) {
+    init(contactEventRecorder: ContactEventRecorder) {
         self.contactEventRecorder = contactEventRecorder
     }
 
     func start(stateDelegate: BTLEListenerStateDelegate?, delegate: BTLEListenerDelegate?) {
         self.stateDelegate = stateDelegate
         self.delegate = delegate
-
-        guard centralManager == nil else { return }
-        
-        centralManager = CBCentralManager(
-            delegate: self,
-            queue: nil,
-            options: [CBCentralManagerOptionRestoreIdentifierKey: restoreIdentifier])
     }
     
     // MARK: CBCentralManagerDelegate
@@ -84,8 +74,6 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
     func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
         logger.info("willRestoreState for central \(central)")
         
-        self.centralManager = central
-        
         for peripheral in (dict[CBCentralManagerRestoredStatePeripheralsKey] as? [CBPeripheral] ?? []) {
             peripherals[peripheral.identifier] = peripheral
             peripheral.delegate = self
@@ -98,7 +86,7 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
         if peripherals[peripheral.identifier] == nil {
             peripherals[peripheral.identifier] = peripheral
         }
-        centralManager?.connect(peripheral)
+        central.connect(peripheral)
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {

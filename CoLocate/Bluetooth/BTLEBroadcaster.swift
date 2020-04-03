@@ -16,8 +16,6 @@ protocol BTLEBroadcasterStateDelegate {
 }
 
 protocol BTLEBroadcaster {
-    func start(stateDelegate: BTLEBroadcasterStateDelegate?)
-    func setSonarUUID(_ uuid: UUID)
 }
 
 class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDelegate {
@@ -27,42 +25,16 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
 
     let logger = Logger(label: "BTLEBroadcaster")
     
-    var sonarId: CBUUID?
+    let sonarId: CBUUID
+    
     var primaryService: CBService? // TODO: should be sonarIdService
     var state: CBManagerState = .unknown
     var stateDelegate: BTLEBroadcasterStateDelegate?
-    var peripheralManager: CBPeripheralManager?
-
-    let restoreIdentifier: String = "SonarPeripheralRestoreIdentifier"
     
-    func start(stateDelegate: BTLEBroadcasterStateDelegate?) {
-        self.stateDelegate = stateDelegate
-
-        guard peripheralManager == nil else { return }
-        
-        peripheralManager = CBPeripheralManager(
-            delegate: self,
-            queue: nil,
-            options: [CBPeripheralManagerOptionRestoreIdentifierKey: restoreIdentifier])
+    init(sonarId: UUID) {
+        self.sonarId = CBUUID(nsuuid: sonarId)
     }
     
-    func setSonarUUID(_ uuid: UUID) {
-        sonarId = CBUUID(nsuuid: uuid)
-
-        startBroadcasting()
-    }
-
-    fileprivate func startBroadcasting() {
-        guard state == .poweredOn, let sonarId = sonarId else { return }
-
-        let service = CBMutableService(type: ConcreteBTLEBroadcaster.sonarServiceUUID, primary: true)
-
-        let identityCharacteristic = CBMutableCharacteristic(type: ConcreteBTLEBroadcaster.sonarIdCharacteristicUUID, properties: CBCharacteristicProperties([.read]), value: sonarId.data, permissions: .readable)
-
-        service.characteristics = [identityCharacteristic]
-        peripheralManager?.add(service)
-    }
-
     // MARK: CBPeripheralManagerDelegate
 
     func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
@@ -75,7 +47,12 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
         switch (peripheral.state) {
             
         case .poweredOn:
-            startBroadcasting();
+            let service = CBMutableService(type: ConcreteBTLEBroadcaster.sonarServiceUUID, primary: true)
+
+            let identityCharacteristic = CBMutableCharacteristic(type: ConcreteBTLEBroadcaster.sonarIdCharacteristicUUID, properties: CBCharacteristicProperties([.read]), value: sonarId.data, permissions: .readable)
+
+            service.characteristics = [identityCharacteristic]
+            peripheral.add(service)
             
         default:
             break
@@ -91,16 +68,15 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
         logger.info("\(service)")
         self.primaryService = service
         
-        logger.info("now advertising sonarId \(sonarId?.uuidString ?? "nil")")
+        logger.info("now advertising sonarId \(sonarId.uuidString)")
         
-        peripheralManager?.startAdvertising([
+        peripheral.startAdvertising([
             CBAdvertisementDataLocalNameKey: "CoLocate",
             CBAdvertisementDataServiceUUIDsKey: [service.uuid]
         ])
     }
     
     func peripheralManager(_ peripheral: CBPeripheralManager, willRestoreState dict: [String : Any]) {
-        self.peripheralManager = peripheral
         if let services = dict[CBPeripheralManagerRestoredStateServicesKey] as? [CBMutableService], let primaryService = services.first {
             self.primaryService = primaryService
         } else {

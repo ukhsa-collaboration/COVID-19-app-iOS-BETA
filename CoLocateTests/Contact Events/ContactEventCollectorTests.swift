@@ -9,6 +9,7 @@
 import XCTest
 @testable import CoLocate
 
+
 class ContactEventCollectorTests: XCTestCase {
     
     let peripheral1 = TestPeripheral(identifier: UUID())
@@ -24,7 +25,7 @@ class ContactEventCollectorTests: XCTestCase {
     var collector: ContactEventCollector!
 
     override func setUp() {
-        listener = ConcreteBTLEListener()
+        listener = DummyBTLEListener()
         recorder = TestContactEventRecorder()
         collector = ContactEventCollector(contactEventRecorder: recorder)
     }
@@ -105,4 +106,11 @@ class TestContactEventRecorder: ContactEventRecorder {
         contactEvents = []
     }
     
+}
+
+class DummyBTLEListener: BTLEListener {
+    
+    func start(stateDelegate: BTLEListenerStateDelegate?, delegate: BTLEListenerDelegate?) {
+    }
+
 }

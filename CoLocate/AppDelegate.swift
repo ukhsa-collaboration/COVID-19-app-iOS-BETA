@@ -18,23 +18,19 @@ private let logger = Logger(label: "Application")
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     var window: UIWindow?
 
-    let broadcaster: BTLEBroadcaster
-    let listener: BTLEListener
-    let collector: ContactEventCollector = ContactEventCollector.shared
-
     let remoteNotificationManager = ConcreteRemoteNotificationManager.shared
     let persistence = Persistence.shared
     let registrationService = ConcreteRegistrationService()
+    let bluetoothNursery: BluetoothNursery
 
     var appCoordinator: AppCoordinator!
     var onboardingViewController: OnboardingViewController!
     
+    
     override init() {
         LoggingManager.bootstrap()
+        bluetoothNursery = BluetoothNursery()
         
-        broadcaster = ConcreteBTLEBroadcaster()
-        listener = ConcreteBTLEListener()
-
         super.init()
 
         persistence.delegate = self
@@ -106,10 +102,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             return
         }
 
-        broadcaster.setSonarUUID(registration.id)
-        broadcaster.start(stateDelegate: nil)
-        listener.start(stateDelegate: nil, delegate: collector)
-
+        bluetoothNursery.startBroadcaster(stateDelegate: nil, sonarId: registration.id)
+        bluetoothNursery.startListener(stateDelegate: nil)
+        
         appCoordinator = AppCoordinator(navController: rootViewController,
                                         persistence: persistence,
                                         secureRequestFactory: ConcreteSecureRequestFactory(registration: registration))
