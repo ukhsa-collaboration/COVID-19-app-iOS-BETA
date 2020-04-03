@@ -19,10 +19,16 @@ jobs:
           ref: test-flight
           fetch-depth: 0
 
+      - name: Checkout Project
+        uses: actions/checkout@v2
+        with:
+          ref: ready-to-upload
+          clean: false
+          fetch-depth: 0
+
       - name: Check if we have commits to upload
         id: check-ready-for-upload
         run: |
-          git fetch origin ready-for-upload
           git branch --contains tags/ready-for-upload | grep test-flight
           echo "::set-output name=ready-for-upload::$?"
 
