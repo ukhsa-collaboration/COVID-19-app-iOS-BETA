@@ -9,7 +9,6 @@ on:
 
 jobs:
   trigger-deployment:
-    needs: test
     runs-on:
       - self-hosted
       - macos
