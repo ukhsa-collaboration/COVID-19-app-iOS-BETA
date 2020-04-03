@@ -29,17 +29,15 @@ class LoggingManager: NSObject {
         super.init()
         
         LoggingSystem.bootstrap { label in
-            MultiplexLogHandler([
-                StreamLogHandler.standardOutput(label: label),
-                ForwardingLogHandler(label: label, send: self.log),
-            ])
+            ForwardingLogHandler(label: label, send: self.log)
         }
         
         stream.open()
     }
     
     private func log(_ event: LogEvent) {
-        let entry = "\(event.description)\n"
+        print(event.description(verbosity: .detailed))
+        let entry = "\(event.description())\n"
         DispatchQueue.main.async {
             self.log.append(entry)
         }
@@ -63,7 +61,13 @@ class LoggingManager: NSObject {
 
 extension LogEvent {
     
-    var description: String {
+    enum Verbosity {
+        case standard
+        case detailed
+    }
+        
+    func description(verbosity: Verbosity = .standard) -> String {
+        let headline = self.headline(verbosity: verbosity)
         if let metadata = self.metadata, !metadata.isEmpty {
             return "\(headline)\n\(metadata.description)"
         } else {
@@ -71,8 +75,17 @@ extension LogEvent {
         }
     }
     
-    private var headline: String {
-        "\(formatter.string(from: date)) \(level): \(label) – \(message)"
+    private func headline(verbosity: Verbosity) -> String {
+        switch verbosity {
+        case .standard:
+            return "\(formatter.string(from: date)) \(level): \(label) – \(message)"
+        case .detailed:
+            return "\(fileName):\(line):\(function) – \(formatter.string(from: date)) \(level): \(label) – \(message)"
+        }
+    }
+    
+    private var fileName: String {
+        return file.components(separatedBy: "/").last!
     }
     
 }
