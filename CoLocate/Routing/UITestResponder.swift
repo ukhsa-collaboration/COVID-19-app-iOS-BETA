@@ -8,6 +8,8 @@
 
 import UIKit
 
+#if INTERNAL || DEBUG
+
 enum UITestResponder {
     
     static func makeWindowForTesting() -> UIWindow? {
@@ -23,3 +25,5 @@ enum UITestResponder {
     }
     
 }
+
+#endif

@@ -50,6 +50,8 @@
 		6FC63C31241641B8007C8BF3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC63C30241641B8007C8BF3 /* AppDelegate.swift */; };
 		6FC63C38241641BA007C8BF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FC63C37241641BA007C8BF3 /* Assets.xcassets */; };
 		6FC63C3B241641BA007C8BF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FC63C39241641BA007C8BF3 /* LaunchScreen.storyboard */; };
+		89074B822437882100D67777 /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895D9E4A24374EC900573D4D /* Screen.swift */; };
+		89074B83243788AE00D67777 /* UITestResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891E16A3243782D000281821 /* UITestResponder.swift */; };
 		891E16A4243782D000281821 /* UITestResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891E16A3243782D000281821 /* UITestResponder.swift */; };
 		895D9DE12437383300573D4D /* CoLocateUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895D9DE02437383300573D4D /* CoLocateUITests.swift */; };
 		895D9DF02437425600573D4D /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D93C2F2420C26900C1FA9B /* PrimaryButton.swift */; };
@@ -1082,6 +1084,7 @@
 				6FC63C31241641B8007C8BF3 /* AppDelegate.swift in Sources */,
 				F600A60224297A8E0038DF57 /* RegistrationRequest.swift in Sources */,
 				214209D2242399CF00C7BFF3 /* URLSession.swift in Sources */,
+				89074B83243788AE00D67777 /* UITestResponder.swift in Sources */,
 				F63279252435203600CF7A42 /* DispatchQueue+Testable.swift in Sources */,
 				214209BA242216B700C7BFF3 /* Persistence.swift in Sources */,
 				213C806C241A56430020EFA5 /* PermissionsViewController.swift in Sources */,
@@ -1106,6 +1109,7 @@
 			files = (
 				895D9E52243750EE00573D4D /* PotentialScreenTests.swift in Sources */,
 				895D9DE12437383300573D4D /* CoLocateUITests.swift in Sources */,
+				89074B822437882100D67777 /* Screen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
