@@ -75,9 +75,7 @@ jobs:
     runs-on:
       - self-hosted
       - macos
-    # Disable release for now, we know it would be allowed.
-    # if: github.ref == 'refs/heads/master'
-    if: false
+    if: github.ref == 'refs/heads/master'
     steps:
       - name: Checkout Project
         uses: actions/checkout@v2
@@ -111,9 +109,7 @@ jobs:
     runs-on:
       - self-hosted
       - macos
-    # Disable release for now, we know it would be allowed.
-    # if: github.ref == 'refs/heads/master'
-    if: false
+    if: github.ref == 'refs/heads/master'
     steps:
       - name: Checkout Project
         uses: actions/checkout@v2
