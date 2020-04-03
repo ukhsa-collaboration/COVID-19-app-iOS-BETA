@@ -58,7 +58,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
         remoteNotificationManager.configure()
 
-        let rootViewController = RootViewController()
+        let rootViewController: UINavigationController
+        let isInternalBuild = true // TODO: Will refactor this soon
+        if isInternalBuild {
+            rootViewController = RootViewController()
+        } else {
+            rootViewController = UINavigationController()
+        }
+        
         window.rootViewController = rootViewController
 
         if let registration = persistence.registration {
@@ -103,7 +110,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     // MARK: - Private
     
     func continueWithRegistration(_ registration: Registration) {
-        guard let rootViewController = window?.rootViewController as? RootViewController else {
+        guard let rootViewController = window?.rootViewController as? UINavigationController else {
             return
         }
 
