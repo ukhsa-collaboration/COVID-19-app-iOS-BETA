@@ -51,6 +51,82 @@
 		6FC63C38241641BA007C8BF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FC63C37241641BA007C8BF3 /* Assets.xcassets */; };
 		6FC63C3B241641BA007C8BF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FC63C39241641BA007C8BF3 /* LaunchScreen.storyboard */; };
 		895D9DE12437383300573D4D /* CoLocateUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895D9DE02437383300573D4D /* CoLocateUITests.swift */; };
+		895D9DF02437425600573D4D /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D93C2F2420C26900C1FA9B /* PrimaryButton.swift */; };
+		895D9DF12437425600573D4D /* String+localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78CEB46242B7752002254AD /* String+localized.swift */; };
+		895D9DF22437425600573D4D /* PrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F05A35243436D200FF4B72 /* PrivacyViewController.swift */; };
+		895D9DF32437425600573D4D /* AuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F05A272433C55300FF4B72 /* AuthorizationManager.swift */; };
+		895D9DF42437425600573D4D /* LogEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F06B342434AF9D0074C612 /* LogEvent.swift */; };
+		895D9DF52437425600573D4D /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F758B8C1242CBAF5003AE16D /* AppCoordinator.swift */; };
+		895D9DF62437425600573D4D /* StartNowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F05A332434344200FF4B72 /* StartNowViewController.swift */; };
+		895D9DF72437425600573D4D /* BTLEListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AF36AA241A8E50001A4910 /* BTLEListener.swift */; };
+		895D9DF82437425600573D4D /* SecureRequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78CEBEC242D0836002254AD /* SecureRequestFactory.swift */; };
+		895D9DF92437425600573D4D /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED47D242E6B950029B729 /* RootViewController.swift */; };
+		895D9DFA2437425600573D4D /* ContactEventCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F373FE2433844D00926FB8 /* ContactEventCollector.swift */; };
+		895D9DFB2437425600573D4D /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F600A5FF242977D50038DF57 /* RegistrationViewController.swift */; };
+		895D9DFC2437425600573D4D /* RemoteNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CC2CA8242BC7FC0079432B /* RemoteNotificationManager.swift */; };
+		895D9DFD2437425600573D4D /* ContactEventRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2A5E4F2423C473007A4771 /* ContactEventRecorder.swift */; };
+		895D9DFE2437425600573D4D /* ForwardingLogHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F06B322434AF130074C612 /* ForwardingLogHandler.swift */; };
+		895D9DFF2437425600573D4D /* SecureRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B3D2E42429112B00573061 /* SecureRequest.swift */; };
+		895D9E002437425600573D4D /* RemoteNotificationDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090B186E24354D0100870B5D /* RemoteNotificationDispatcher.swift */; };
+		895D9E012437425600573D4D /* PlistContactEventRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209CB2422755B00C7BFF3 /* PlistContactEventRecorder.swift */; };
+		895D9E022437425600573D4D /* UIViewController+Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = F758B8BF242CB98C003AE16D /* UIViewController+Storyboarded.swift */; };
+		895D9E032437425600573D4D /* DebuggerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2115C3E524360427009C0F5B /* DebuggerTableViewCell.swift */; };
+		895D9E042437425600573D4D /* LogsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BC79EA2434E047002050F8 /* LogsViewController.swift */; };
+		895D9E052437425600573D4D /* OkNowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209B52421072C00C7BFF3 /* OkNowViewController.swift */; };
+		895D9E062437425600573D4D /* RequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F758553924294C8C00CBE1ED /* RequestFactory.swift */; };
+		895D9E072437425600573D4D /* ConfirmRegistrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C417CB242CB15D00DEF3E2 /* ConfirmRegistrationRequest.swift */; };
+		895D9E082437425600573D4D /* DebugSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED48F242E9BE20029B729 /* DebugSetting.swift */; };
+		895D9E092437425600573D4D /* SecureRegistrationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A2290242AA35B002254B6 /* SecureRegistrationStorage.swift */; };
+		895D9E0A2437425600573D4D /* PleaseSelfIsolateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209B32420DBE100C7BFF3 /* PleaseSelfIsolateViewController.swift */; };
+		895D9E0B2437425600573D4D /* BTLEBroadcaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2DCA9F241920B600A940FC /* BTLEBroadcaster.swift */; };
+		895D9E0C2437425600573D4D /* RegistratonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED477242D7D050029B729 /* RegistratonService.swift */; };
+		895D9E0D2437425600573D4D /* LoggerMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F06B362434C35A0074C612 /* LoggerMetadata.swift */; };
+		895D9E0E2437425600573D4D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC63C30241641B8007C8BF3 /* AppDelegate.swift */; };
+		895D9E0F2437425600573D4D /* RegistrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F600A60124297A8E0038DF57 /* RegistrationRequest.swift */; };
+		895D9E102437425600573D4D /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209D1242399CF00C7BFF3 /* URLSession.swift */; };
+		895D9E112437425600573D4D /* DispatchQueue+Testable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63279242435203600CF7A42 /* DispatchQueue+Testable.swift */; };
+		895D9E122437425600573D4D /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209B9242216B700C7BFF3 /* Persistence.swift */; };
+		895D9E132437425600573D4D /* PermissionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213C806B241A56430020EFA5 /* PermissionsViewController.swift */; };
+		895D9E142437425600573D4D /* PermissionsDeniedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F636453A243687DE0014FD54 /* PermissionsDeniedViewController.swift */; };
+		895D9E152437425600573D4D /* LoggingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F06B2E2434A62C0074C612 /* LoggingManager.swift */; };
+		895D9E162437425600573D4D /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED482242E746E0029B729 /* DebugViewController.swift */; };
+		895D9E172437425600573D4D /* NoOpLogHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F06B302434AABE0074C612 /* NoOpLogHandler.swift */; };
+		895D9E182437425600573D4D /* PotentialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D1CD49242C284000B1A167 /* PotentialViewController.swift */; };
+		895D9E192437425600573D4D /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F05A2F24340E5400FF4B72 /* OnboardingViewController.swift */; };
+		895D9E1A2437425600573D4D /* EnterDiagnosisTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D93C2D241FB0A300C1FA9B /* EnterDiagnosisTableViewController.swift */; };
+		895D9E1B2437425600573D4D /* LiveBTLEDebuggerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F374032434C4BF00926FB8 /* LiveBTLEDebuggerTableViewController.swift */; };
+		895D9E1C2437425600573D4D /* LogoStrapline.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC6A7BB241BD81A00B0237A /* LogoStrapline.swift */; };
+		895D9E1D2437425600573D4D /* PatchContactEventsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209D42423C83C00C7BFF3 /* PatchContactEventsRequest.swift */; };
+		895D9E1E2437425600573D4D /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209CF242396DA00C7BFF3 /* Session.swift */; };
+		895D9E1F2437425600573D4D /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F05A252433C09200FF4B72 /* OnboardingCoordinator.swift */; };
+		895D9E212437425600573D4D /* PromisesObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB58242B7EC0002254AD /* PromisesObjC.framework */; };
+		895D9E222437425600573D4D /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB57242B7EBF002254AD /* FirebaseCore.framework */; };
+		895D9E232437425600573D4D /* GoogleDataTransport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB70242B9305002254AD /* GoogleDataTransport.framework */; };
+		895D9E242437425600573D4D /* FirebaseCoreDiagnostics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB56242B7EBF002254AD /* FirebaseCoreDiagnostics.framework */; };
+		895D9E252437425600573D4D /* FirebaseInstanceID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB69242B8D3E002254AD /* FirebaseInstanceID.framework */; };
+		895D9E262437425600573D4D /* FirebaseInstallations.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB6B242B8D84002254AD /* FirebaseInstallations.framework */; };
+		895D9E272437425600573D4D /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 895D9DED2437425600573D4D /* Logging */; };
+		895D9E282437425600573D4D /* FirebaseMessaging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB55242B7EBF002254AD /* FirebaseMessaging.framework */; };
+		895D9E292437425600573D4D /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21B3D2E72429115600573061 /* CoreBluetooth.framework */; };
+		895D9E2A2437425600573D4D /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB6E242B92CF002254AD /* GoogleUtilities.framework */; };
+		895D9E2B2437425600573D4D /* nanopb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB72242B937F002254AD /* nanopb.framework */; };
+		895D9E2C2437425600573D4D /* Protobuf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB59242B7EC0002254AD /* Protobuf.framework */; };
+		895D9E2E2437425600573D4D /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 098ED48D242E9AF00029B729 /* Settings.bundle */; };
+		895D9E2F2437425600573D4D /* OkNow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F758B8C3242CC0EE003AE16D /* OkNow.storyboard */; };
+		895D9E302437425600573D4D /* PleaseSelfIsolate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F758B8C8242CC183003AE16D /* PleaseSelfIsolate.storyboard */; };
+		895D9E312437425600573D4D /* Registration.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F758B8D1242CC67D003AE16D /* Registration.storyboard */; };
+		895D9E322437425600573D4D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FC63C39241641BA007C8BF3 /* LaunchScreen.storyboard */; };
+		895D9E332437425600573D4D /* LogoStrapline.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEC6A7BD241BD82900B0237A /* LogoStrapline.xib */; };
+		895D9E342437425600573D4D /* NHS Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1E7A0582420028B0078174D /* NHS Colors.xcassets */; };
+		895D9E352437425600573D4D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F758B8BD242CB856003AE16D /* Localizable.strings */; };
+		895D9E362437425600573D4D /* EnterDiagnosis.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F758B8CB242CC1F7003AE16D /* EnterDiagnosis.storyboard */; };
+		895D9E372437425600573D4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FC63C37241641BA007C8BF3 /* Assets.xcassets */; };
+		895D9E382437425600573D4D /* Potential.rtf in Resources */ = {isa = PBXBuildFile; fileRef = F65AE53E2432B842006544D4 /* Potential.rtf */; };
+		895D9E392437425600573D4D /* Potential.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09D1CD4F242C3A9300B1A167 /* Potential.storyboard */; };
+		895D9E3A2437425600573D4D /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = F6CA2818242E41F700F8DC55 /* README.md */; };
+		895D9E3B2437425600573D4D /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6F05A312434310200FF4B72 /* Onboarding.storyboard */; };
+		895D9E3C2437425600573D4D /* Debug.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 098ED480242E745F0029B729 /* Debug.storyboard */; };
+		895D9E3D2437425600573D4D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F78CEB67242B8C2B002254AD /* GoogleService-Info.plist */; };
 		89896E622435F37300F949EA /* ProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89896E612435F37300F949EA /* ProjectTests.swift */; };
 		89BC79EB2434E047002050F8 /* LogsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BC79EA2434E047002050F8 /* LogsViewController.swift */; };
 		89F06B2C2434A2C00074C612 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 89F06B2B2434A2C00074C612 /* Logging */; };
@@ -186,6 +262,7 @@
 		895D9DE02437383300573D4D /* CoLocateUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoLocateUITests.swift; sourceTree = "<group>"; };
 		895D9DE22437383300573D4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		895D9DE82437384C00573D4D /* CoLocateUITests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CoLocateUITests.xcconfig; sourceTree = "<group>"; };
+		895D9E412437425600573D4D /* CoLocateInternal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoLocateInternal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89896E5E2435EB6500F949EA /* CoLocateTests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CoLocateTests.xcconfig; sourceTree = "<group>"; };
 		89896E5F2435F15C00F949EA /* CoLocate.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CoLocate.xcconfig; sourceTree = "<group>"; };
 		89896E612435F37300F949EA /* ProjectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectTests.swift; sourceTree = "<group>"; };
@@ -289,6 +366,25 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		895D9E202437425600573D4D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				895D9E212437425600573D4D /* PromisesObjC.framework in Frameworks */,
+				895D9E222437425600573D4D /* FirebaseCore.framework in Frameworks */,
+				895D9E232437425600573D4D /* GoogleDataTransport.framework in Frameworks */,
+				895D9E242437425600573D4D /* FirebaseCoreDiagnostics.framework in Frameworks */,
+				895D9E252437425600573D4D /* FirebaseInstanceID.framework in Frameworks */,
+				895D9E262437425600573D4D /* FirebaseInstallations.framework in Frameworks */,
+				895D9E272437425600573D4D /* Logging in Frameworks */,
+				895D9E282437425600573D4D /* FirebaseMessaging.framework in Frameworks */,
+				895D9E292437425600573D4D /* CoreBluetooth.framework in Frameworks */,
+				895D9E2A2437425600573D4D /* GoogleUtilities.framework in Frameworks */,
+				895D9E2B2437425600573D4D /* nanopb.framework in Frameworks */,
+				895D9E2C2437425600573D4D /* Protobuf.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -461,6 +557,7 @@
 				6FC63C2D241641B8007C8BF3 /* CoLocate.app */,
 				214209BF2422276800C7BFF3 /* CoLocateTests.xctest */,
 				895D9DDE2437383300573D4D /* CoLocateUITests.xctest */,
+				895D9E412437425600573D4D /* CoLocateInternal.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -715,6 +812,26 @@
 			productReference = 895D9DDE2437383300573D4D /* CoLocateUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		895D9DEC2437425600573D4D /* CoLocateInternal */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 895D9E3E2437425600573D4D /* Build configuration list for PBXNativeTarget "CoLocateInternal" */;
+			buildPhases = (
+				895D9DEF2437425600573D4D /* Sources */,
+				895D9E202437425600573D4D /* Frameworks */,
+				895D9E2D2437425600573D4D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CoLocateInternal;
+			packageProductDependencies = (
+				895D9DED2437425600573D4D /* Logging */,
+			);
+			productName = CoLocate;
+			productReference = 895D9E412437425600573D4D /* CoLocateInternal.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -757,6 +874,7 @@
 			projectRoot = "";
 			targets = (
 				6FC63C2C241641B8007C8BF3 /* CoLocate */,
+				895D9DEC2437425600573D4D /* CoLocateInternal */,
 				214209BE2422276800C7BFF3 /* CoLocateTests */,
 				895D9DDD2437383300573D4D /* CoLocateUITests */,
 			);
@@ -798,6 +916,29 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		895D9E2D2437425600573D4D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				895D9E2E2437425600573D4D /* Settings.bundle in Resources */,
+				895D9E2F2437425600573D4D /* OkNow.storyboard in Resources */,
+				895D9E302437425600573D4D /* PleaseSelfIsolate.storyboard in Resources */,
+				895D9E312437425600573D4D /* Registration.storyboard in Resources */,
+				895D9E322437425600573D4D /* LaunchScreen.storyboard in Resources */,
+				895D9E332437425600573D4D /* LogoStrapline.xib in Resources */,
+				895D9E342437425600573D4D /* NHS Colors.xcassets in Resources */,
+				895D9E352437425600573D4D /* Localizable.strings in Resources */,
+				895D9E362437425600573D4D /* EnterDiagnosis.storyboard in Resources */,
+				895D9E372437425600573D4D /* Assets.xcassets in Resources */,
+				895D9E382437425600573D4D /* Potential.rtf in Resources */,
+				895D9E392437425600573D4D /* Potential.storyboard in Resources */,
+				895D9E3A2437425600573D4D /* README.md in Resources */,
+				895D9E3B2437425600573D4D /* Onboarding.storyboard in Resources */,
+				895D9E3C2437425600573D4D /* Debug.storyboard in Resources */,
+				895D9E3D2437425600573D4D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -903,6 +1044,61 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		895D9DEF2437425600573D4D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				895D9DF02437425600573D4D /* PrimaryButton.swift in Sources */,
+				895D9DF12437425600573D4D /* String+localized.swift in Sources */,
+				895D9DF22437425600573D4D /* PrivacyViewController.swift in Sources */,
+				895D9DF32437425600573D4D /* AuthorizationManager.swift in Sources */,
+				895D9DF42437425600573D4D /* LogEvent.swift in Sources */,
+				895D9DF52437425600573D4D /* AppCoordinator.swift in Sources */,
+				895D9DF62437425600573D4D /* StartNowViewController.swift in Sources */,
+				895D9DF72437425600573D4D /* BTLEListener.swift in Sources */,
+				895D9DF82437425600573D4D /* SecureRequestFactory.swift in Sources */,
+				895D9DF92437425600573D4D /* RootViewController.swift in Sources */,
+				895D9DFA2437425600573D4D /* ContactEventCollector.swift in Sources */,
+				895D9DFB2437425600573D4D /* RegistrationViewController.swift in Sources */,
+				895D9DFC2437425600573D4D /* RemoteNotificationManager.swift in Sources */,
+				895D9DFD2437425600573D4D /* ContactEventRecorder.swift in Sources */,
+				895D9DFE2437425600573D4D /* ForwardingLogHandler.swift in Sources */,
+				895D9DFF2437425600573D4D /* SecureRequest.swift in Sources */,
+				895D9E002437425600573D4D /* RemoteNotificationDispatcher.swift in Sources */,
+				895D9E012437425600573D4D /* PlistContactEventRecorder.swift in Sources */,
+				895D9E022437425600573D4D /* UIViewController+Storyboarded.swift in Sources */,
+				895D9E032437425600573D4D /* DebuggerTableViewCell.swift in Sources */,
+				895D9E042437425600573D4D /* LogsViewController.swift in Sources */,
+				895D9E052437425600573D4D /* OkNowViewController.swift in Sources */,
+				895D9E062437425600573D4D /* RequestFactory.swift in Sources */,
+				895D9E072437425600573D4D /* ConfirmRegistrationRequest.swift in Sources */,
+				895D9E082437425600573D4D /* DebugSetting.swift in Sources */,
+				895D9E092437425600573D4D /* SecureRegistrationStorage.swift in Sources */,
+				895D9E0A2437425600573D4D /* PleaseSelfIsolateViewController.swift in Sources */,
+				895D9E0B2437425600573D4D /* BTLEBroadcaster.swift in Sources */,
+				895D9E0C2437425600573D4D /* RegistratonService.swift in Sources */,
+				895D9E0D2437425600573D4D /* LoggerMetadata.swift in Sources */,
+				895D9E0E2437425600573D4D /* AppDelegate.swift in Sources */,
+				895D9E0F2437425600573D4D /* RegistrationRequest.swift in Sources */,
+				895D9E102437425600573D4D /* URLSession.swift in Sources */,
+				895D9E112437425600573D4D /* DispatchQueue+Testable.swift in Sources */,
+				895D9E122437425600573D4D /* Persistence.swift in Sources */,
+				895D9E132437425600573D4D /* PermissionsViewController.swift in Sources */,
+				895D9E142437425600573D4D /* PermissionsDeniedViewController.swift in Sources */,
+				895D9E152437425600573D4D /* LoggingManager.swift in Sources */,
+				895D9E162437425600573D4D /* DebugViewController.swift in Sources */,
+				895D9E172437425600573D4D /* NoOpLogHandler.swift in Sources */,
+				895D9E182437425600573D4D /* PotentialViewController.swift in Sources */,
+				895D9E192437425600573D4D /* OnboardingViewController.swift in Sources */,
+				895D9E1A2437425600573D4D /* EnterDiagnosisTableViewController.swift in Sources */,
+				895D9E1B2437425600573D4D /* LiveBTLEDebuggerTableViewController.swift in Sources */,
+				895D9E1C2437425600573D4D /* LogoStrapline.swift in Sources */,
+				895D9E1D2437425600573D4D /* PatchContactEventsRequest.swift in Sources */,
+				895D9E1E2437425600573D4D /* Session.swift in Sources */,
+				895D9E1F2437425600573D4D /* OnboardingCoordinator.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -994,6 +1190,20 @@
 			};
 			name = Release;
 		};
+		895D9E3F2437425600573D4D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F6A309D024298A5800865942 /* Development.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		895D9E402437425600573D4D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F6CA2816242E416C00F8DC55 /* Release.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1033,9 +1243,26 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		895D9E3E2437425600573D4D /* Build configuration list for PBXNativeTarget "CoLocateInternal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				895D9E3F2437425600573D4D /* Debug */,
+				895D9E402437425600573D4D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		895D9DEE2437425600573D4D /* XCRemoteSwiftPackageReference "swift-log" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-log.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.0;
+			};
+		};
 		89F06B2A2434A2C00074C612 /* XCRemoteSwiftPackageReference "swift-log" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-log.git";
@@ -1047,6 +1274,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		895D9DED2437425600573D4D /* Logging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 895D9DEE2437425600573D4D /* XCRemoteSwiftPackageReference "swift-log" */;
+			productName = Logging;
+		};
 		89F06B2B2434A2C00074C612 /* Logging */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 89F06B2A2434A2C00074C612 /* XCRemoteSwiftPackageReference "swift-log" */;
