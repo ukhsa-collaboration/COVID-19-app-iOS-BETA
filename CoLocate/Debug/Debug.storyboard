@@ -25,7 +25,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uXw-oy-ODh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="690" y="-1361"/>
+            <point key="canvasLocation" x="-1461" y="-402"/>
         </scene>
         <!--Debug View Controller-->
         <scene sceneID="T53-6O-red">
@@ -238,7 +238,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rGx-hb-5hq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="FeH-ld-Ids" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1761" y="-1361"/>
+            <point key="canvasLocation" x="-1462" y="373"/>
         </scene>
         <!--LiveBTLE Debugger Table View Controller-->
         <scene sceneID="IcR-O2-mxp">
@@ -263,11 +263,18 @@
                             <outlet property="delegate" destination="DR4-RC-K5h" id="nfa-bw-bSd"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" systemItem="contacts" id="qo9-li-P9v"/>
+                    <navigationItem key="navigationItem" id="BoL-Uc-hO3">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="aEo-xQ-JUe">
+                            <connections>
+                                <segue destination="RHF-RY-7wR" kind="unwind" unwindAction="unwindFromDebugViewControllerWithUnwindSegue:" id="qRY-Ge-uB5"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B2x-h6-OTK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="RHF-RY-7wR" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="690" y="-548"/>
+            <point key="canvasLocation" x="-349" y="373"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="3g0-Xu-8xX">
@@ -284,7 +291,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bjb-14-sGg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="690" y="295"/>
+            <point key="canvasLocation" x="807" y="-402"/>
         </scene>
         <!--Logs-->
         <scene sceneID="sB0-Xf-fTQ">
@@ -313,15 +320,22 @@
                         <viewLayoutGuide key="safeArea" id="nMx-i8-4hL"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Logs" id="wmT-P1-5fK"/>
-                    <navigationItem key="navigationItem" title="Logs" id="RXG-Dy-a9P"/>
+                    <navigationItem key="navigationItem" title="Logs" id="RXG-Dy-a9P">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="u2u-m5-e3n">
+                            <connections>
+                                <segue destination="ige-7D-w7s" kind="unwind" unwindAction="unwindFromDebugViewControllerWithUnwindSegue:" id="ezu-nm-nJy"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="textView" destination="kO6-Fz-tiP" id="BMI-Lr-tWS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j7Q-mx-cph" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="ige-7D-w7s" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1961" y="295"/>
+            <point key="canvasLocation" x="806" y="373"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="rDY-T2-mnh">
@@ -334,13 +348,32 @@
                     </tabBar>
                     <connections>
                         <segue destination="0E2-qN-oH1" kind="relationship" relationship="viewControllers" id="VGj-lc-d4r"/>
-                        <segue destination="DR4-RC-K5h" kind="relationship" relationship="viewControllers" id="X9t-9O-9pu"/>
+                        <segue destination="Prs-Ze-4CP" kind="relationship" relationship="viewControllers" id="X9t-9O-9pu"/>
                         <segue destination="zrE-Ty-mWo" kind="relationship" relationship="viewControllers" id="g3s-NN-sKF"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J9e-5y-jif" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-742" y="-548"/>
+            <point key="canvasLocation" x="-349" y="-1219"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="bfa-cE-SfF">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Prs-Ze-4CP" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="contacts" id="qo9-li-P9v"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Iyc-fq-SUm">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="DR4-RC-K5h" kind="relationship" relationship="rootViewController" id="Exf-wF-N4e"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="azn-uc-IVy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-349" y="-402"/>
         </scene>
     </scenes>
 </document>
