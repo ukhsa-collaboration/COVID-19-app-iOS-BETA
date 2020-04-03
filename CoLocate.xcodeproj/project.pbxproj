@@ -19,7 +19,6 @@
 		098ED488242E89930029B729 /* PushNotificationManagerDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED487242E89930029B729 /* PushNotificationManagerDouble.swift */; };
 		098ED48A242E89D80029B729 /* RegistrationServiceDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED489242E89D80029B729 /* RegistrationServiceDouble.swift */; };
 		098ED48C242E8B290029B729 /* PersistenceDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED48B242E8B290029B729 /* PersistenceDouble.swift */; };
-		098ED48E242E9AF00029B729 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 098ED48D242E9AF00029B729 /* Settings.bundle */; };
 		098ED490242E9BE20029B729 /* DebugSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED48F242E9BE20029B729 /* DebugSetting.swift */; };
 		09D1CD4B242C284000B1A167 /* PotentialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D1CD49242C284000B1A167 /* PotentialViewController.swift */; };
 		09D1CD50242C3A9300B1A167 /* Potential.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09D1CD4F242C3A9300B1A167 /* Potential.storyboard */; };
@@ -579,7 +578,6 @@
 			children = (
 				895D9E432437456D00573D4D /* Production */,
 				895D9E442437457200573D4D /* Internal */,
-				098ED48D242E9AF00029B729 /* Settings.bundle */,
 				F78CEB74242BAC83002254AD /* CoLocate.entitlements */,
 				F78CEB53242B7E18002254AD /* CoLocate-Bridging-Header.h */,
 				F78CEB67242B8C2B002254AD /* GoogleService-Info.plist */,
@@ -635,6 +633,7 @@
 		895D9E442437457200573D4D /* Internal */ = {
 			isa = PBXGroup;
 			children = (
+				098ED48D242E9AF00029B729 /* Settings.bundle */,
 				895D9E472437459500573D4D /* AppIcon.xcassets */,
 			);
 			path = Internal;
@@ -942,7 +941,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				098ED48E242E9AF00029B729 /* Settings.bundle in Resources */,
 				F758B8C4242CC0EE003AE16D /* OkNow.storyboard in Resources */,
 				F758B8C9242CC183003AE16D /* PleaseSelfIsolate.storyboard in Resources */,
 				F758B8D2242CC67D003AE16D /* Registration.storyboard in Resources */,
