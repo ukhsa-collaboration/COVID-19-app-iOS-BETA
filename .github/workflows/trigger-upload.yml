@@ -22,7 +22,7 @@ jobs:
       - name: Check if we have commits to upload
         id: check-ready-for-upload
         run: |
-          git fetch ready-for-upload
+          git fetch origin ready-for-upload
           git branch --contains tags/ready-for-upload | grep test-flight
           echo "::set-output name=ready-for-upload::$?"
 
