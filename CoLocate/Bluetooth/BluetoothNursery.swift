@@ -33,8 +33,8 @@ class BluetoothNursery {
         central = CBCentralManager(delegate: listener as! ConcreteBTLEListener, queue: nil, options: [
             CBCentralManagerOptionRestoreIdentifierKey: BluetoothNursery.centralRestoreIdentifier
         ])
-        (listener as! ConcreteBTLEListener).stateDelegate = stateDelegate
-        (listener as! ConcreteBTLEListener).delegate = contactEventCollector
+        (listener as? ConcreteBTLEListener)?.stateDelegate = stateDelegate
+        (listener as? ConcreteBTLEListener)?.delegate = contactEventCollector
     }
     
     func startBroadcaster(stateDelegate: BTLEBroadcasterStateDelegate?, sonarId: UUID) {
@@ -42,7 +42,7 @@ class BluetoothNursery {
         peripheral = CBPeripheralManager(delegate: broadcaster as! ConcreteBTLEBroadcaster, queue: nil, options: [
             CBPeripheralManagerOptionRestoreIdentifierKey: BluetoothNursery.peripheralRestoreIdentifier
         ])
-        (broadcaster as! ConcreteBTLEBroadcaster).stateDelegate = stateDelegate
+        (broadcaster as? ConcreteBTLEBroadcaster)?.stateDelegate = stateDelegate
     }
     
 }
