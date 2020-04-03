@@ -80,7 +80,7 @@ extension LogEvent {
         case .standard:
             return "\(formatter.string(from: date)) \(level): \(label) – \(message)"
         case .detailed:
-            return "\(fileName):\(line):\(function) – \(formatter.string(from: date)) \(level): \(label) – \(message)"
+            return "\(formatter.string(from: date)) \(level): \(label) \(fileName):\(line):\(function) – \(message)"
         }
     }
     
