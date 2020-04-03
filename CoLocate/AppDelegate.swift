@@ -41,15 +41,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        if ProcessInfo.processInfo.environment["UI_TEST"] != nil {
-            let window = UIWindow(frame: UIScreen.main.bounds)
-            let router = AppRouter(window: window)
-            router.route(to: .potential)
-            window.makeKeyAndVisible()
+        #if INTERNAL
+        if let window = UITestResponder.makeWindowForTesting() {
             self.window = window
             return true
         }
-
+        #endif
+        
         logger.info("Launched", metadata: Logger.Metadata(launchOptions: launchOptions))
         
         application.registerForRemoteNotifications()

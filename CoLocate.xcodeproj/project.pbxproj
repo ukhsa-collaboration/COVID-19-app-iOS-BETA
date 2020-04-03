@@ -50,6 +50,7 @@
 		6FC63C31241641B8007C8BF3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC63C30241641B8007C8BF3 /* AppDelegate.swift */; };
 		6FC63C38241641BA007C8BF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FC63C37241641BA007C8BF3 /* Assets.xcassets */; };
 		6FC63C3B241641BA007C8BF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FC63C39241641BA007C8BF3 /* LaunchScreen.storyboard */; };
+		891E16A4243782D000281821 /* UITestResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891E16A3243782D000281821 /* UITestResponder.swift */; };
 		895D9DE12437383300573D4D /* CoLocateUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895D9DE02437383300573D4D /* CoLocateUITests.swift */; };
 		895D9DF02437425600573D4D /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D93C2F2420C26900C1FA9B /* PrimaryButton.swift */; };
 		895D9DF12437425600573D4D /* String+localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78CEB46242B7752002254AD /* String+localized.swift */; };
@@ -267,6 +268,7 @@
 		890B41CE2437775700C02A2E /* InternalDevelopment.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = InternalDevelopment.xcconfig; sourceTree = "<group>"; };
 		890B41CF2437775F00C02A2E /* InternalRelease.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = InternalRelease.xcconfig; sourceTree = "<group>"; };
 		890B41D12437777C00C02A2E /* CoLocateInternal.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CoLocateInternal.xcconfig; sourceTree = "<group>"; };
+		891E16A3243782D000281821 /* UITestResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestResponder.swift; sourceTree = "<group>"; };
 		89388B8C2435E370009D60CF /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		89388B8E2435E673009D60CF /* ReleaseConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ReleaseConfig.xcconfig; sourceTree = "<group>"; };
 		895D9DDE2437383300573D4D /* CoLocateUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoLocateUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -653,6 +655,7 @@
 			children = (
 				895D9E4A24374EC900573D4D /* Screen.swift */,
 				895D9E4D24374EFA00573D4D /* AppRouter.swift */,
+				891E16A3243782D000281821 /* UITestResponder.swift */,
 			);
 			path = Routing;
 			sourceTree = "<group>";
@@ -1160,6 +1163,7 @@
 				895D9E1D2437425600573D4D /* PatchContactEventsRequest.swift in Sources */,
 				895D9E1E2437425600573D4D /* Session.swift in Sources */,
 				895D9E1F2437425600573D4D /* OnboardingCoordinator.swift in Sources */,
+				891E16A4243782D000281821 /* UITestResponder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
