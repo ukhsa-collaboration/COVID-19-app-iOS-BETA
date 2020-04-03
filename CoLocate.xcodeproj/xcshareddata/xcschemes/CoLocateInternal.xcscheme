@@ -20,6 +20,20 @@
                ReferencedContainer = "container:CoLocate.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "6FC63C2C241641B8007C8BF3"
+               BuildableName = "CoLocate.app"
+               BlueprintName = "CoLocate"
+               ReferencedContainer = "container:CoLocate.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
