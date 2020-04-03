@@ -82,5 +82,6 @@ jobs:
 
       - name: Set upload tag
         run: |
+          git push origin --delete upload-to-test-flight || true
           git tag --force upload-to-test-flight
           git push origin upload-to-test-flight
