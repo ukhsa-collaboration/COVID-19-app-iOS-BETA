@@ -19,12 +19,20 @@ jobs:
           ref: test-flight
           fetch-depth: 0
 
+      - name: Checkout Project
+        uses: actions/checkout@v2
+        with:
+          ref: upload-to-test-flight
+          clean: false
+          fetch-depth: 0
+
       - name: Check if we have commits to upload
         id: check-upload-tag
         run: |
-          git fetch origin upload-to-test-flight
+          # git fetch origin upload-to-test-flight
           git branch --contains tags/upload-to-test-flight | grep test-flight
           echo "::set-output name=upload::$?"
+        continue-on-error: true
 
       - name: Trigger deployment
         if: steps.check-upload-tag.outputs.upload == '1'
