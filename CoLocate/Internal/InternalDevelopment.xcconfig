@@ -1,0 +1,4 @@
+
+#include "../../Development.xcconfig"
+
+#include "CoLocateInternal.xcconfig"

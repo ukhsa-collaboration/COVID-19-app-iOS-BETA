@@ -262,6 +262,9 @@
 		6FC63C37241641BA007C8BF3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6FC63C3A241641BA007C8BF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6FC63C3C241641BA007C8BF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		890B41CE2437775700C02A2E /* InternalDevelopment.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = InternalDevelopment.xcconfig; sourceTree = "<group>"; };
+		890B41CF2437775F00C02A2E /* InternalRelease.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = InternalRelease.xcconfig; sourceTree = "<group>"; };
+		890B41D12437777C00C02A2E /* CoLocateInternal.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CoLocateInternal.xcconfig; sourceTree = "<group>"; };
 		89388B8C2435E370009D60CF /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		89388B8E2435E673009D60CF /* ReleaseConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ReleaseConfig.xcconfig; sourceTree = "<group>"; };
 		895D9DDE2437383300573D4D /* CoLocateUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoLocateUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -633,6 +636,9 @@
 		895D9E442437457200573D4D /* Internal */ = {
 			isa = PBXGroup;
 			children = (
+				890B41D12437777C00C02A2E /* CoLocateInternal.xcconfig */,
+				890B41CE2437775700C02A2E /* InternalDevelopment.xcconfig */,
+				890B41CF2437775F00C02A2E /* InternalRelease.xcconfig */,
 				098ED48D242E9AF00029B729 /* Settings.bundle */,
 				895D9E472437459500573D4D /* AppIcon.xcassets */,
 			);
@@ -1246,14 +1252,14 @@
 		};
 		895D9E3F2437425600573D4D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F6A309D024298A5800865942 /* Development.xcconfig */;
+			baseConfigurationReference = 890B41CE2437775700C02A2E /* InternalDevelopment.xcconfig */;
 			buildSettings = {
 			};
 			name = Debug;
 		};
 		895D9E402437425600573D4D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F6CA2816242E416C00F8DC55 /* Release.xcconfig */;
+			baseConfigurationReference = 890B41CF2437775F00C02A2E /* InternalRelease.xcconfig */;
 			buildSettings = {
 			};
 			name = Release;
