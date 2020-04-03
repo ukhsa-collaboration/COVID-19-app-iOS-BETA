@@ -58,6 +58,7 @@
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Mb-zt-2Ty" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="498" width="280" height="30"/>
+                                        <accessibility key="accessibilityConfiguration" label="Start now"/>
                                         <state key="normal" title="Start now"/>
                                         <connections>
                                             <segue destination="asv-dx-knf" kind="show" id="m8S-mF-wxJ"/>
@@ -176,6 +177,7 @@
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="png-1j-34C" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
                                 <rect key="frame" x="20" y="518" width="280" height="30"/>
+                                <accessibility key="accessibilityConfiguration" label="Continue"/>
                                 <state key="normal" title="Continue"/>
                                 <connections>
                                     <action selector="continueTapped:" destination="asv-dx-knf" eventType="touchUpInside" id="aZ4-FY-C5b"/>
@@ -307,6 +309,7 @@
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="58S-0g-vQY" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
                                 <rect key="frame" x="20" y="518" width="280" height="30"/>
+                                <accessibility key="accessibilityConfiguration" label="Continue"/>
                                 <state key="normal" title="Continue"/>
                                 <connections>
                                     <action selector="didTapContinue:" destination="AuE-Ey-MBo" eventType="touchUpInside" id="Knf-YF-3Wt"/>
