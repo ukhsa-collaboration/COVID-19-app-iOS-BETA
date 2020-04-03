@@ -41,37 +41,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
-        let window = UIWindow(frame: UIScreen.main.bounds)
-        window.makeKeyAndVisible()
-        defer { self.window = window }
-        
         if ProcessInfo.processInfo.environment["UI_TEST"] != nil {
+            let window = UIWindow(frame: UIScreen.main.bounds)
             let router = AppRouter(window: window)
             router.route(to: .potential)
+            window.makeKeyAndVisible()
+            self.window = window
             return true
         }
-        
+
         logger.info("Launched", metadata: Logger.Metadata(launchOptions: launchOptions))
         
         application.registerForRemoteNotifications()
 
         remoteNotificationManager.configure()
 
-        let rootViewController: UINavigationController
-        let isInternalBuild = true // TODO: Will refactor this soon
-        if isInternalBuild {
-            rootViewController = RootViewController()
-        } else {
-            rootViewController = UINavigationController()
-        }
-        
-        window.rootViewController = rootViewController
+        let rootViewController = RootViewController()
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = rootViewController
 
         if let registration = persistence.registration {
             continueWithRegistration(registration)
         }
 
+        window?.makeKeyAndVisible()
 
         onboardingViewController = OnboardingViewController.instantiate()
         onboardingViewController.rootViewController = rootViewController
@@ -110,7 +103,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     // MARK: - Private
     
     func continueWithRegistration(_ registration: Registration) {
-        guard let rootViewController = window?.rootViewController as? UINavigationController else {
+        guard let rootViewController = window?.rootViewController as? RootViewController else {
             return
         }
 
