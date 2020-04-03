@@ -27,8 +27,7 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
     
     let sonarId: CBUUID
     
-    var primaryService: CBService? // TODO: should be sonarIdService
-    var state: CBManagerState = .unknown
+    var sonarIdService: CBService?
     var stateDelegate: BTLEBroadcasterStateDelegate?
     
     init(sonarId: UUID) {
@@ -41,8 +40,6 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
         logger.info("state: \(peripheral.state)")
         
         stateDelegate?.btleBroadcaster(self, didUpdateState: peripheral.state)
-
-        state = peripheral.state
 
         switch (peripheral.state) {
             
@@ -66,7 +63,7 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
         }
         
         logger.info("\(service)")
-        self.primaryService = service
+        self.sonarIdService = service
         
         logger.info("now advertising sonarId \(sonarId.uuidString)")
         
@@ -77,11 +74,11 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
     }
     
     func peripheralManager(_ peripheral: CBPeripheralManager, willRestoreState dict: [String : Any]) {
-        if let services = dict[CBPeripheralManagerRestoredStateServicesKey] as? [CBMutableService], let primaryService = services.first {
-            self.primaryService = primaryService
-        } else {
+        guard let services = dict[CBPeripheralManagerRestoredStateServicesKey] as? [CBMutableService], let sonarIdService = services.first else {
             logger.info("No services to restore!")
+            return
         }
+        self.sonarIdService = sonarIdService
     }
 
 }
