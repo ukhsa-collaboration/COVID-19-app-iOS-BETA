@@ -19,21 +19,15 @@ jobs:
           ref: test-flight
           fetch-depth: 0
 
-      - name: Checkout Project
-        uses: actions/checkout@v2
-        with:
-          ref: ready-to-upload
-          clean: false
-          fetch-depth: 0
-
       - name: Check if we have commits to upload
-        id: check-ready-for-upload
+        id: check-upload-tag
         run: |
-          git branch --contains tags/ready-for-upload | grep test-flight
-          echo "::set-output name=ready-for-upload::$?"
+          git fetch origin upload-to-test-flight
+          git branch --contains tags/upload-to-test-flight | grep test-flight
+          echo "::set-output name=upload::$?"
 
       - name: Trigger deployment
-        if: steps.check-ready-for-upload.outputs.ready-for-upload == '1'
+        if: steps.check-upload-tag.outputs.upload == '1'
         run: >
           curl
           --request POST

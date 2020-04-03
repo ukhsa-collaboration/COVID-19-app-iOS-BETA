@@ -70,7 +70,7 @@ jobs:
           -showBuildTimingSummary
           -allowProvisioningUpdates
 
-  update-ready-to-upload:
+  update-upload-tag:
     needs: test
     runs-on:
       - self-hosted
@@ -80,8 +80,7 @@ jobs:
       - name: Checkout Project
         uses: actions/checkout@v2
 
-      - name: Set ready-to-upload tag
+      - name: Set upload tag
         run: |
-          git push origin --delete ready-for-upload || true
-          git tag --force ready-for-upload
-          git push origin ready-for-upload
+          git tag --force upload-to-test-flight
+          git push origin upload-to-test-flight
