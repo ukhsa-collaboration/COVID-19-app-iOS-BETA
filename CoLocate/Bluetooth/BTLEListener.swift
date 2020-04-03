@@ -35,7 +35,7 @@ protocol BTLEListener {
 class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CBPeripheralDelegate {
 
     let rssiSamplingInterval: TimeInterval = 20.0
-    let restoreIdentifier: String = "CoLocateCentralRestoreIdentifier"
+    let restoreIdentifier: String = "SonarCentralRestoreIdentifier"
     
     var stateDelegate: BTLEListenerStateDelegate?
     var delegate: BTLEListenerDelegate?

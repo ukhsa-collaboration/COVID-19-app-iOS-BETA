@@ -30,7 +30,7 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
     var stateDelegate: BTLEBroadcasterStateDelegate?
     var peripheralManager: CBPeripheralManager?
 
-    let restoreIdentifier: String = "CoLocatePeripheralRestoreIdentifier"
+    let restoreIdentifier: String = "SonarPeripheralRestoreIdentifier"
     
     func start(stateDelegate: BTLEBroadcasterStateDelegate?) {
         self.stateDelegate = stateDelegate
