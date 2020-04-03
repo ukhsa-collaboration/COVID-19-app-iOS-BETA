@@ -36,45 +36,70 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="0Kn-59-wim">
-                                <rect key="frame" x="20" y="20" width="280" height="528"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QJe-c9-kRc">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="498"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Help the NHS stop the spread of coronavirus in the UK" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NZC-MM-nb8">
-                                        <rect key="frame" x="0.0" y="0.0" width="280" height="110"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="grS-67-bKX">
-                                        <rect key="frame" x="0.0" y="130" width="280" height="196.5"/>
-                                        <string key="text">This app can let you know if you may have been near someone with coronavirus symptoms (COVID-19).  Knowing if you have been exposed to someone with coronavirus symptoms can help you to protect your family, your loved ones, and the community.</string>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HUU-ko-6pU" userLabel="Spacer">
-                                        <rect key="frame" x="0.0" y="346.5" width="280" height="131.5"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="La6-dl-0T5">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="366.5"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="0Kn-59-wim">
+                                                <rect key="frame" x="20" y="20" width="280" height="326.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Help the NHS stop the spread of coronavirus in the UK" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NZC-MM-nb8">
+                                                        <rect key="frame" x="0.0" y="0.0" width="280" height="110"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="grS-67-bKX">
+                                                        <rect key="frame" x="0.0" y="130" width="280" height="196.5"/>
+                                                        <string key="text">This app can let you know if you may have been near someone with coronavirus symptoms (COVID-19).  Knowing if you have been exposed to someone with coronavirus symptoms can help you to protect your family, your loved ones, and the community.</string>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstItem="0Kn-59-wim" firstAttribute="top" secondItem="La6-dl-0T5" secondAttribute="top" constant="20" id="1zE-Uv-BsM"/>
+                                            <constraint firstItem="0Kn-59-wim" firstAttribute="leading" secondItem="La6-dl-0T5" secondAttribute="leading" constant="20" id="9Jd-s3-Wm5"/>
+                                            <constraint firstAttribute="trailing" secondItem="0Kn-59-wim" secondAttribute="trailing" constant="20" id="Wth-SA-TbV"/>
+                                            <constraint firstAttribute="bottom" secondItem="0Kn-59-wim" secondAttribute="bottom" constant="20" id="mJU-jN-w2l"/>
+                                        </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Mb-zt-2Ty" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="498" width="280" height="30"/>
-                                        <accessibility key="accessibilityConfiguration" label="Start now"/>
-                                        <state key="normal" title="Start now"/>
-                                        <connections>
-                                            <segue destination="asv-dx-knf" kind="show" id="m8S-mF-wxJ"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
-                            </stackView>
+                                <constraints>
+                                    <constraint firstItem="La6-dl-0T5" firstAttribute="top" secondItem="TB6-B7-PDV" secondAttribute="top" id="IZA-TN-Mq4"/>
+                                    <constraint firstItem="La6-dl-0T5" firstAttribute="bottom" secondItem="TB6-B7-PDV" secondAttribute="bottom" id="dab-cZ-SAN"/>
+                                    <constraint firstItem="La6-dl-0T5" firstAttribute="width" secondItem="jyM-cd-AeK" secondAttribute="width" id="gce-J2-npz"/>
+                                    <constraint firstItem="TB6-B7-PDV" firstAttribute="leading" secondItem="La6-dl-0T5" secondAttribute="leading" id="nG3-bQ-gsI"/>
+                                    <constraint firstItem="La6-dl-0T5" firstAttribute="trailing" secondItem="TB6-B7-PDV" secondAttribute="trailing" id="t4e-1a-LH5"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="TB6-B7-PDV"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="jyM-cd-AeK"/>
+                            </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Mb-zt-2Ty" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
+                                <rect key="frame" x="36" y="518" width="248" height="30"/>
+                                <accessibility key="accessibilityConfiguration" label="Start now"/>
+                                <state key="normal" title="Start now"/>
+                                <connections>
+                                    <segue destination="asv-dx-knf" kind="show" id="m8S-mF-wxJ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="0Kn-59-wim" firstAttribute="top" secondItem="rkg-uP-lGN" secondAttribute="top" constant="20" id="14o-L1-prL"/>
-                            <constraint firstItem="rkg-uP-lGN" firstAttribute="bottom" secondItem="0Kn-59-wim" secondAttribute="bottom" constant="20" id="5OT-OC-JT3"/>
-                            <constraint firstItem="0Kn-59-wim" firstAttribute="leading" secondItem="rkg-uP-lGN" secondAttribute="leading" constant="20" id="80b-SB-qAC"/>
-                            <constraint firstItem="rkg-uP-lGN" firstAttribute="trailing" secondItem="0Kn-59-wim" secondAttribute="trailing" constant="20" id="b9u-xi-qDK"/>
+                            <constraint firstItem="QJe-c9-kRc" firstAttribute="top" secondItem="Uem-sl-iTh" secondAttribute="top" id="4k7-HD-rn6"/>
+                            <constraint firstItem="8Mb-zt-2Ty" firstAttribute="top" secondItem="QJe-c9-kRc" secondAttribute="bottom" constant="20" id="CqE-NI-lFl"/>
+                            <constraint firstItem="uey-GI-3f6" firstAttribute="bottom" secondItem="8Mb-zt-2Ty" secondAttribute="bottom" constant="20" id="QZO-93-TBR"/>
+                            <constraint firstItem="QJe-c9-kRc" firstAttribute="leading" secondItem="Uem-sl-iTh" secondAttribute="leading" id="RYo-r9-5bP"/>
+                            <constraint firstItem="8Mb-zt-2Ty" firstAttribute="leading" secondItem="uey-GI-3f6" secondAttribute="leading" constant="36" id="ejQ-RS-elp"/>
+                            <constraint firstAttribute="trailing" secondItem="QJe-c9-kRc" secondAttribute="trailing" id="njg-Jd-XGn"/>
+                            <constraint firstItem="uey-GI-3f6" firstAttribute="trailing" secondItem="8Mb-zt-2Ty" secondAttribute="trailing" constant="36" id="zzg-SO-r6A"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="rkg-uP-lGN"/>
+                        <viewLayoutGuide key="safeArea" id="uey-GI-3f6"/>
                     </view>
                     <navigationItem key="navigationItem" id="0zK-Z8-XYb"/>
                 </viewController>
@@ -188,13 +213,13 @@
                         <constraints>
                             <constraint firstItem="TUo-oc-PGD" firstAttribute="leading" secondItem="Fjr-8t-RO6" secondAttribute="leading" id="Boq-Jp-nLT"/>
                             <constraint firstItem="png-1j-34C" firstAttribute="top" secondItem="TUo-oc-PGD" secondAttribute="bottom" constant="20" id="EXe-gS-spH"/>
-                            <constraint firstItem="eUj-KO-ebd" firstAttribute="bottom" secondItem="png-1j-34C" secondAttribute="bottom" constant="20" id="F2k-5J-Mn3"/>
-                            <constraint firstItem="eUj-KO-ebd" firstAttribute="trailing" secondItem="png-1j-34C" secondAttribute="trailing" constant="20" id="JfY-kx-46t"/>
-                            <constraint firstItem="png-1j-34C" firstAttribute="leading" secondItem="eUj-KO-ebd" secondAttribute="leading" constant="20" id="ay5-Mx-rhX"/>
+                            <constraint firstItem="0ia-KQ-0k0" firstAttribute="bottom" secondItem="png-1j-34C" secondAttribute="bottom" constant="20" id="F2k-5J-Mn3"/>
+                            <constraint firstItem="0ia-KQ-0k0" firstAttribute="trailing" secondItem="png-1j-34C" secondAttribute="trailing" constant="20" id="JfY-kx-46t"/>
+                            <constraint firstItem="png-1j-34C" firstAttribute="leading" secondItem="0ia-KQ-0k0" secondAttribute="leading" constant="20" id="ay5-Mx-rhX"/>
                             <constraint firstItem="TUo-oc-PGD" firstAttribute="trailing" secondItem="Fjr-8t-RO6" secondAttribute="trailing" id="pMX-mA-fpx"/>
                             <constraint firstItem="TUo-oc-PGD" firstAttribute="top" secondItem="Fjr-8t-RO6" secondAttribute="top" id="v72-XY-uUE"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="eUj-KO-ebd"/>
+                        <viewLayoutGuide key="safeArea" id="0ia-KQ-0k0"/>
                     </view>
                     <navigationItem key="navigationItem" id="2kT-fD-hac"/>
                     <connections>
@@ -347,32 +372,84 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0QV-vn-qRG">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kig-Cn-71F">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="498"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tea-ay-yuS">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="287"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="VTg-dg-hdL">
+                                                <rect key="frame" x="20" y="20" width="280" height="247"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🙅" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tfu-fg-3Ew">
+                                                        <rect key="frame" x="0.0" y="0.0" width="280" height="36"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Go to Settings to enable Bluetooth/notifications." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g7j-DE-APu">
+                                                        <rect key="frame" x="0.0" y="56" width="280" height="110"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bluetooth" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Rx-7q-ZY0">
+                                                        <rect key="frame" x="0.0" y="186" width="280" height="20.5"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notifications" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xbo-Oe-xMi">
+                                                        <rect key="frame" x="0.0" y="226.5" width="280" height="20.5"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstItem="VTg-dg-hdL" firstAttribute="leading" secondItem="tea-ay-yuS" secondAttribute="leading" constant="20" id="Cxf-wO-KKo"/>
+                                            <constraint firstAttribute="bottom" secondItem="VTg-dg-hdL" secondAttribute="bottom" constant="20" id="KlX-96-vdO"/>
+                                            <constraint firstItem="VTg-dg-hdL" firstAttribute="top" secondItem="tea-ay-yuS" secondAttribute="top" constant="20" id="OGe-Ds-bEU"/>
+                                            <constraint firstAttribute="trailing" secondItem="VTg-dg-hdL" secondAttribute="trailing" constant="20" id="Swc-Mu-OcP"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="tea-ay-yuS" firstAttribute="width" secondItem="FwR-Fe-E8J" secondAttribute="width" id="2hV-nB-NlR"/>
+                                    <constraint firstItem="tea-ay-yuS" firstAttribute="trailing" secondItem="Y7f-4G-w2O" secondAttribute="trailing" id="b2T-gN-ukP"/>
+                                    <constraint firstItem="tea-ay-yuS" firstAttribute="bottom" secondItem="Y7f-4G-w2O" secondAttribute="bottom" id="b9R-JC-RMV"/>
+                                    <constraint firstItem="tea-ay-yuS" firstAttribute="leading" secondItem="Y7f-4G-w2O" secondAttribute="leading" id="tnZ-9G-6ax"/>
+                                    <constraint firstItem="tea-ay-yuS" firstAttribute="top" secondItem="Y7f-4G-w2O" secondAttribute="top" id="yxz-qg-i9l"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="Y7f-4G-w2O"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="FwR-Fe-E8J"/>
+                            </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0QV-vn-qRG" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
                                 <rect key="frame" x="20" y="518" width="280" height="30"/>
                                 <state key="normal" title="Settings"/>
                                 <connections>
                                     <action selector="settingsTapped:" destination="XMC-51-Zcm" eventType="touchUpInside" id="4UK-wT-2hh"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🙅  Permissions denied!  Go to Settings to enable Bluetooth/notifications." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tfu-fg-3Ew">
-                                <rect key="frame" x="20" y="20" width="280" height="258"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="tTu-vA-Irt" firstAttribute="trailing" secondItem="0QV-vn-qRG" secondAttribute="trailing" constant="20" id="5O5-03-ji4"/>
-                            <constraint firstItem="Tfu-fg-3Ew" firstAttribute="leading" secondItem="tTu-vA-Irt" secondAttribute="leading" constant="20" id="CHh-vr-Wp1"/>
-                            <constraint firstItem="tTu-vA-Irt" firstAttribute="trailing" secondItem="Tfu-fg-3Ew" secondAttribute="trailing" constant="20" id="Ey9-6B-5bT"/>
+                            <constraint firstAttribute="trailing" secondItem="kig-Cn-71F" secondAttribute="trailing" id="LZ0-oa-Duh"/>
                             <constraint firstItem="0QV-vn-qRG" firstAttribute="leading" secondItem="tTu-vA-Irt" secondAttribute="leading" constant="20" id="NTL-ta-TTz"/>
+                            <constraint firstItem="kig-Cn-71F" firstAttribute="leading" secondItem="wtg-RU-FIM" secondAttribute="leading" id="WVF-xZ-O7J"/>
                             <constraint firstItem="tTu-vA-Irt" firstAttribute="bottom" secondItem="0QV-vn-qRG" secondAttribute="bottom" constant="20" id="gWi-DH-bgA"/>
-                            <constraint firstItem="Tfu-fg-3Ew" firstAttribute="top" secondItem="tTu-vA-Irt" secondAttribute="top" constant="20" id="lMW-2B-EWI"/>
+                            <constraint firstItem="0QV-vn-qRG" firstAttribute="top" secondItem="kig-Cn-71F" secondAttribute="bottom" constant="20" id="jUR-v0-min"/>
+                            <constraint firstItem="kig-Cn-71F" firstAttribute="top" secondItem="wtg-RU-FIM" secondAttribute="top" id="weQ-WH-7A7"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tTu-vA-Irt"/>
                     </view>
                     <connections>
+                        <outlet property="bluetoothLabel" destination="3Rx-7q-ZY0" id="mIw-ai-oQ7"/>
+                        <outlet property="notificationsLabel" destination="xbo-Oe-xMi" id="oOC-Nn-Vrk"/>
                         <segue destination="F4o-kS-Gj0" kind="unwind" identifier="unwindFromPermissionsDenied" unwindAction="unwindFromPermissionsDeniedWithUnwindSegue:" id="VIH-eQ-k3U"/>
                     </connections>
                 </viewController>

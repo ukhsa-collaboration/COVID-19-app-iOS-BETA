@@ -741,10 +741,10 @@
 				F6F05A272433C55300FF4B72 /* AuthorizationManager.swift */,
 				F6F05A252433C09200FF4B72 /* OnboardingCoordinator.swift */,
 				F6F05A2F24340E5400FF4B72 /* OnboardingViewController.swift */,
+				F636453A243687DE0014FD54 /* PermissionsDeniedViewController.swift */,
 				213C806B241A56430020EFA5 /* PermissionsViewController.swift */,
 				F6F05A35243436D200FF4B72 /* PrivacyViewController.swift */,
 				F6F05A332434344200FF4B72 /* StartNowViewController.swift */,
-				F636453A243687DE0014FD54 /* PermissionsDeniedViewController.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";

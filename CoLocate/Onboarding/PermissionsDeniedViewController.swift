@@ -11,6 +11,22 @@ import UIKit
 class PermissionsDeniedViewController: UIViewController, Storyboarded {
     static let storyboardName = "Onboarding"
 
+    let authManager = AuthorizationManager()
+
+    @IBOutlet weak var bluetoothLabel: UILabel!
+    @IBOutlet weak var notificationsLabel: UILabel!
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        bluetoothLabel.text = "Bluetooth: \(authManager.bluetooth)"
+        authManager.notifications { status in
+            DispatchQueue.main.async {
+                self.notificationsLabel.text = "Notifications: \(status)"
+            }
+        }
+    }
+
     @IBAction func settingsTapped(_ sender: UIButton) {
         let app = UIApplication.shared
         app.open(
