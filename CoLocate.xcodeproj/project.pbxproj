@@ -127,6 +127,8 @@
 		895D9E3B2437425600573D4D /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6F05A312434310200FF4B72 /* Onboarding.storyboard */; };
 		895D9E3C2437425600573D4D /* Debug.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 098ED480242E745F0029B729 /* Debug.storyboard */; };
 		895D9E3D2437425600573D4D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F78CEB67242B8C2B002254AD /* GoogleService-Info.plist */; };
+		895D9E462437458700573D4D /* AppIcon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 895D9E452437458700573D4D /* AppIcon.xcassets */; };
+		895D9E482437459500573D4D /* AppIcon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 895D9E472437459500573D4D /* AppIcon.xcassets */; };
 		89896E622435F37300F949EA /* ProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89896E612435F37300F949EA /* ProjectTests.swift */; };
 		89BC79EB2434E047002050F8 /* LogsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BC79EA2434E047002050F8 /* LogsViewController.swift */; };
 		89F06B2C2434A2C00074C612 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 89F06B2B2434A2C00074C612 /* Logging */; };
@@ -263,6 +265,8 @@
 		895D9DE22437383300573D4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		895D9DE82437384C00573D4D /* CoLocateUITests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CoLocateUITests.xcconfig; sourceTree = "<group>"; };
 		895D9E412437425600573D4D /* CoLocateInternal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoLocateInternal.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		895D9E452437458700573D4D /* AppIcon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppIcon.xcassets; sourceTree = "<group>"; };
+		895D9E472437459500573D4D /* AppIcon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppIcon.xcassets; sourceTree = "<group>"; };
 		89896E5E2435EB6500F949EA /* CoLocateTests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CoLocateTests.xcconfig; sourceTree = "<group>"; };
 		89896E5F2435F15C00F949EA /* CoLocate.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CoLocate.xcconfig; sourceTree = "<group>"; };
 		89896E612435F37300F949EA /* ProjectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectTests.swift; sourceTree = "<group>"; };
@@ -565,6 +569,8 @@
 		6FC63C2F241641B8007C8BF3 /* CoLocate */ = {
 			isa = PBXGroup;
 			children = (
+				895D9E432437456D00573D4D /* Production */,
+				895D9E442437457200573D4D /* Internal */,
 				098ED48D242E9AF00029B729 /* Settings.bundle */,
 				F78CEB74242BAC83002254AD /* CoLocate.entitlements */,
 				F78CEB53242B7E18002254AD /* CoLocate-Bridging-Header.h */,
@@ -606,6 +612,22 @@
 				895D9DE02437383300573D4D /* CoLocateUITests.swift */,
 			);
 			path = CoLocateUITests;
+			sourceTree = "<group>";
+		};
+		895D9E432437456D00573D4D /* Production */ = {
+			isa = PBXGroup;
+			children = (
+				895D9E452437458700573D4D /* AppIcon.xcassets */,
+			);
+			path = Production;
+			sourceTree = "<group>";
+		};
+		895D9E442437457200573D4D /* Internal */ = {
+			isa = PBXGroup;
+			children = (
+				895D9E472437459500573D4D /* AppIcon.xcassets */,
+			);
+			path = Internal;
 			sourceTree = "<group>";
 		};
 		898BA15A2435E26C00EBD35D /* Configurations */ = {
@@ -906,6 +928,7 @@
 				F65AE53C2432B842006544D4 /* Potential.rtf in Resources */,
 				09D1CD50242C3A9300B1A167 /* Potential.storyboard in Resources */,
 				F6CA2819242E41F700F8DC55 /* README.md in Resources */,
+				895D9E462437458700573D4D /* AppIcon.xcassets in Resources */,
 				F6F05A322434310200FF4B72 /* Onboarding.storyboard in Resources */,
 				098ED481242E745F0029B729 /* Debug.storyboard in Resources */,
 				F78CEB68242B8C2C002254AD /* GoogleService-Info.plist in Resources */,
@@ -936,6 +959,7 @@
 				895D9E382437425600573D4D /* Potential.rtf in Resources */,
 				895D9E392437425600573D4D /* Potential.storyboard in Resources */,
 				895D9E3A2437425600573D4D /* README.md in Resources */,
+				895D9E482437459500573D4D /* AppIcon.xcassets in Resources */,
 				895D9E3B2437425600573D4D /* Onboarding.storyboard in Resources */,
 				895D9E3C2437425600573D4D /* Debug.storyboard in Resources */,
 				895D9E3D2437425600573D4D /* GoogleService-Info.plist in Resources */,
