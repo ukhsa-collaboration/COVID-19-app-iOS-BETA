@@ -111,13 +111,14 @@ class RegistrationAttempt {
 
             switch result {
             case .success(let response):
-                let registration = Registration(id: response.id, secretKey: response.secretKey)
+                logger.debug("Second registration request succeeded")
 
+                let registration = Registration(id: response.id, secretKey: response.secretKey)
                 self.persistence.registration = registration
 
                 self.succeed(registration: registration)
             case .failure(let error):
-                logger.error("error during registration: \(error)")
+                logger.error("Error making second registration request: \(error)")
                 self.fail(withError: error)
             }
         }
