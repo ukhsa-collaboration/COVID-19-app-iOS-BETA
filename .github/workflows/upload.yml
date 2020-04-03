@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: Checkout Project
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       - name: Merge master into test-flight
         run: |
