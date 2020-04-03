@@ -35,6 +35,7 @@
 		214209D52423C83C00C7BFF3 /* PatchContactEventsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209D42423C83C00C7BFF3 /* PatchContactEventsRequest.swift */; };
 		214209D72423C9B600C7BFF3 /* PatchContactEventsRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209D62423C9B600C7BFF3 /* PatchContactEventsRequestTests.swift */; };
 		214209D924262B7500C7BFF3 /* SessionHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209D824262B7500C7BFF3 /* SessionHelpers.swift */; };
+		217A23BA2437D402001B8236 /* BluetoothNursery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C09A8E2437B99F00368203 /* BluetoothNursery.swift */; };
 		21AF36AB241A8E50001A4910 /* BTLEListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AF36AA241A8E50001A4910 /* BTLEListener.swift */; };
 		21B3D2E3242906AE00573061 /* SecureRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B3D2E2242906AE00573061 /* SecureRequestTests.swift */; };
 		21B3D2E52429112B00573061 /* SecureRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B3D2E42429112B00573061 /* SecureRequest.swift */; };
@@ -1165,6 +1166,7 @@
 				895D9E052437425600573D4D /* OkNowViewController.swift in Sources */,
 				895D9E062437425600573D4D /* RequestFactory.swift in Sources */,
 				895D9E072437425600573D4D /* ConfirmRegistrationRequest.swift in Sources */,
+				217A23BA2437D402001B8236 /* BluetoothNursery.swift in Sources */,
 				895D9E082437425600573D4D /* DebugSetting.swift in Sources */,
 				89074B8624378A0D00D67777 /* UITestPayload.swift in Sources */,
 				895D9E092437425600573D4D /* SecureRegistrationStorage.swift in Sources */,
