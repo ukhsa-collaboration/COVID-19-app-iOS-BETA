@@ -1,5 +1,5 @@
 //
-//  OkNowViewController.swift
+//  MainViewController.swift
 //  CoLocate
 //
 //  Created by NHSX.
@@ -10,8 +10,8 @@ import UIKit
 
 import UIKit
 
-class OkNowViewController: UIViewController, Storyboarded {
-    static let storyboardName = "OkNow"
+class MainViewController: UIViewController, Storyboarded {
+    static let storyboardName = "Main"
     
     @IBOutlet private var warningView: UIView!
     @IBOutlet private var warningViewTitle: UILabel!
@@ -21,7 +21,9 @@ class OkNowViewController: UIViewController, Storyboarded {
     @IBOutlet private var moreInformationTitle: UILabel!
     @IBOutlet private var moreInformationBody: UILabel!
     @IBOutlet private var checkSymptomsButton: PrimaryButton!
-    
+
+    var previouslyPresentedViewController: UIViewController?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -36,13 +38,40 @@ class OkNowViewController: UIViewController, Storyboarded {
         checkSymptomsButton.setTitle("OK_NOW_SYMPTOMS_BUTTON".localized, for: .normal)
         moreInformationTitle.text = "OK_NOW_MORE_INFO_TITLE".localized
         moreInformationBody.text = "OK_NOW_MORE_INFO_MESSAGE".localized
-        
-        checkSymptomsButton.addTarget(self, action: #selector(tapCheckMySymptomsButton), for: .touchUpInside)
+    }
+
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        if let vc = presentedViewController {
+            previouslyPresentedViewController = vc
+            dismiss(animated: true)
+        }
+
+        if motion == UIEvent.EventSubtype.motionShake && DebugSetting.enabled {
+            showDebugView()
+        }
     }
     
-    @objc func tapCheckMySymptomsButton() {
+    @IBAction func checkSymptomsTapped(_ sender: PrimaryButton) {
         let enterDiagnosisVC = EnterDiagnosisTableViewController.instantiate()
         navigationController?.pushViewController(enterDiagnosisVC, animated: true)
+    }
+
+    @IBAction func unwindFromOnboarding(unwindSegue: UIStoryboardSegue) {
+        dismiss(animated: true)
+    }
+
+    @IBAction func unwindFromDebugViewController(unwindSegue: UIStoryboardSegue) {
+        dismiss(animated: true)
+
+        if let vc = previouslyPresentedViewController {
+            present(vc, animated: true)
+        }
+    }
+
+    private func showDebugView() {
+        let storyboard = UIStoryboard(name: "Debug", bundle: Bundle(for: Self.self))
+        guard let debugVC = storyboard.instantiateInitialViewController() else { return }
+        present(debugVC, animated: true)
     }
 }
 

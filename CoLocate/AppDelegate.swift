@@ -51,9 +51,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
         remoteNotificationManager.configure()
 
-        let rootViewController = RootViewController()
+        let initialViewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = rootViewController
+        window?.rootViewController = initialViewController
 
         if let registration = persistence.registration {
             continueWithRegistration(registration)
@@ -62,7 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         window?.makeKeyAndVisible()
 
         onboardingViewController = OnboardingViewController.instantiate()
-        onboardingViewController.rootViewController = rootViewController
+        onboardingViewController.rootViewController = initialViewController
 
         return true
     }
@@ -98,16 +98,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     // MARK: - Private
     
     func continueWithRegistration(_ registration: Registration) {
-        guard let rootViewController = window?.rootViewController as? RootViewController else {
+        guard let navController = window?.rootViewController as? UINavigationController else {
             return
         }
 
         bluetoothNursery.startBroadcaster(stateDelegate: nil, sonarId: registration.id)
         bluetoothNursery.startListener(stateDelegate: nil)
         
-        appCoordinator = AppCoordinator(navController: rootViewController,
-                                        persistence: persistence,
-                                        secureRequestFactory: ConcreteSecureRequestFactory(registration: registration))
+        appCoordinator = AppCoordinator(
+            navController: navController,
+            persistence: persistence,
+            secureRequestFactory: ConcreteSecureRequestFactory(registration: registration)
+        )
         appCoordinator.start()
     }
 

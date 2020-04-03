@@ -9,7 +9,8 @@
 import UIKit
 
 
-class DebugViewController: UITableViewController {
+class DebugViewController: UITableViewController, Storyboarded {
+    static let storyboardName = "Debug"
 
     @IBOutlet weak var allowedDataSharingSwitch: UISwitch!
     @IBOutlet weak var interceptRequestsSwitch: UISwitch!
