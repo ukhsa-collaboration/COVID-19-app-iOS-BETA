@@ -9,6 +9,7 @@
 import Foundation
 import CoreBluetooth
 import UIKit
+import Logging
 
 protocol BTLEBroadcasterStateDelegate {
     func btleBroadcaster(_ broadcaster: BTLEBroadcaster, didUpdateState state: CBManagerState)
@@ -24,8 +25,10 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
     static let sonarServiceUUID = CBUUID(nsuuid: UUID(uuidString: "c1f5983c-fa94-4ac8-8e2e-bb86d6de9b21")!)
     static let sonarIdCharacteristicUUID = CBUUID(nsuuid: UUID(uuidString: "85BF337C-5B64-48EB-A5F7-A9FED135C972")!)
 
+    let logger = Logger(label: "BTLEBroadcaster")
+    
     var sonarId: CBUUID?
-    var primaryService: CBService?
+    var primaryService: CBService? // TODO: should be sonarIdService
     var state: CBManagerState = .unknown
     var stateDelegate: BTLEBroadcasterStateDelegate?
     var peripheralManager: CBPeripheralManager?
@@ -63,47 +66,33 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
     // MARK: CBPeripheralManagerDelegate
 
     func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
+        logger.info("state: \(peripheral.state)")
+        
         stateDelegate?.btleBroadcaster(self, didUpdateState: peripheral.state)
 
         state = peripheral.state
 
         switch (peripheral.state) {
             
-        case .unknown:
-            print("\(#file).\(#function) .unknown")
-            
-        case .resetting:
-            print("\(#file).\(#function) .resetting")
-            
-        case .unsupported:
-            print("\(#file).\(#function) .unsupported")
-            
-        case .unauthorized:
-            print("\(#file).\(#function) .unauthorized")
-            
-        case .poweredOff:
-            print("\(#file).\(#function) .poweredOff")
-            
         case .poweredOn:
-            print("\(#file).\(#function) .poweredOn")
-
             startBroadcasting();
             
-        @unknown default:
-            fatalError()
+        default:
+            break
         }
     }
     
     func peripheralManager(_ peripheral: CBPeripheralManager, didAdd service: CBService, error: Error?) {
         guard error == nil else {
-            print("\(#file).\(#function) error: \(error!))")
+            logger.info("error: \(error!))")
             return
         }
         
-        print("\(#file).\(#function) service: \(service)")
+        logger.info("\(service)")
         self.primaryService = service
         
-        print("\(#file).\(#function) advertising device identifier \(String(describing: sonarId?.uuidString))")
+        logger.info("now advertising sonarId \(sonarId?.uuidString ?? "nil")")
+        
         peripheralManager?.startAdvertising([
             CBAdvertisementDataLocalNameKey: "CoLocate",
             CBAdvertisementDataServiceUUIDsKey: [service.uuid]
@@ -111,13 +100,11 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
     }
     
     func peripheralManager(_ peripheral: CBPeripheralManager, willRestoreState dict: [String : Any]) {
-        print("\(#file).\(#function)")
-
         self.peripheralManager = peripheral
         if let services = dict[CBPeripheralManagerRestoredStateServicesKey] as? [CBMutableService], let primaryService = services.first {
             self.primaryService = primaryService
         } else {
-            print("\(#file).\(#function) No services to restore!")
+            logger.info("No services to restore!")
         }
     }
 

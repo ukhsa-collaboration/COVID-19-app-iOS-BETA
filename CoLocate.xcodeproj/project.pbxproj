@@ -39,6 +39,7 @@
 		21B3D2E3242906AE00573061 /* SecureRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B3D2E2242906AE00573061 /* SecureRequestTests.swift */; };
 		21B3D2E52429112B00573061 /* SecureRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B3D2E42429112B00573061 /* SecureRequest.swift */; };
 		21B3D2E82429115600573061 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21B3D2E72429115600573061 /* CoreBluetooth.framework */; };
+		21C09A8D24377F5100368203 /* CBManagerState+CustomStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C09A8C24377F5100368203 /* CBManagerState+CustomStringConvertible.swift */; };
 		21C417CA242CB0A200DEF3E2 /* ConfirmRegistrationRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C417C9242CB0A200DEF3E2 /* ConfirmRegistrationRequestTests.swift */; };
 		21C417CC242CB15D00DEF3E2 /* ConfirmRegistrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C417CB242CB15D00DEF3E2 /* ConfirmRegistrationRequest.swift */; };
 		21D93C2E241FB0A300C1FA9B /* EnterDiagnosisTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D93C2D241FB0A300C1FA9B /* EnterDiagnosisTableViewController.swift */; };
@@ -250,6 +251,7 @@
 		21B3D2E2242906AE00573061 /* SecureRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRequestTests.swift; sourceTree = "<group>"; };
 		21B3D2E42429112B00573061 /* SecureRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRequest.swift; sourceTree = "<group>"; };
 		21B3D2E72429115600573061 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		21C09A8C24377F5100368203 /* CBManagerState+CustomStringConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CBManagerState+CustomStringConvertible.swift"; sourceTree = "<group>"; };
 		21C417C9242CB0A200DEF3E2 /* ConfirmRegistrationRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmRegistrationRequestTests.swift; sourceTree = "<group>"; };
 		21C417CB242CB15D00DEF3E2 /* ConfirmRegistrationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmRegistrationRequest.swift; sourceTree = "<group>"; };
 		21D93C2D241FB0A300C1FA9B /* EnterDiagnosisTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterDiagnosisTableViewController.swift; sourceTree = "<group>"; };
@@ -459,6 +461,7 @@
 			children = (
 				AE2DCA9F241920B600A940FC /* BTLEBroadcaster.swift */,
 				21AF36AA241A8E50001A4910 /* BTLEListener.swift */,
+				21C09A8C24377F5100368203 /* CBManagerState+CustomStringConvertible.swift */,
 			);
 			path = Bluetooth;
 			sourceTree = "<group>";
@@ -1048,6 +1051,7 @@
 				F758B8C2242CBAF5003AE16D /* AppCoordinator.swift in Sources */,
 				F6F05A342434344200FF4B72 /* StartNowViewController.swift in Sources */,
 				21AF36AB241A8E50001A4910 /* BTLEListener.swift in Sources */,
+				21C09A8D24377F5100368203 /* CBManagerState+CustomStringConvertible.swift in Sources */,
 				F78CEBED242D0836002254AD /* SecureRequestFactory.swift in Sources */,
 				098ED47E242E6B950029B729 /* RootViewController.swift in Sources */,
 				21F373FF2433844D00926FB8 /* ContactEventCollector.swift in Sources */,

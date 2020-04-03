@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreBluetooth
+import Logging
 
 protocol BTLEPeripheral {
     var identifier: UUID { get }
@@ -34,6 +35,8 @@ protocol BTLEListener {
 
 class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CBPeripheralDelegate {
 
+    let logger = Logger(label: "BTLEListener")
+    
     let rssiSamplingInterval: TimeInterval = 20.0
     let restoreIdentifier: String = "SonarCentralRestoreIdentifier"
     
@@ -64,39 +67,22 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
     // MARK: CBCentralManagerDelegate
     
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
+        logger.info("state: \(central.state)")
+        
         stateDelegate?.btleListener(self, didUpdateState: central.state)
         
         switch (central.state) {
                 
-        case .unknown:
-            print("\(#file).\(#function) .unknown")
-            
-        case .resetting:
-            print("\(#file).\(#function) .resetting")
-            
-        case .unsupported:
-            print("\(#file).\(#function) .unsupported")
-            
-        case .unauthorized:
-            print("\(#file).\(#function) .unauthorized")
-            
-        case .poweredOff:
-            print("\(#file).\(#function) .poweredOff")
-            
         case .poweredOn:
-            print("\(#file).\(#function) .poweredOn")
-            
-//            Comment this back in for testing if necessary, but be aware AllowDuplicates is
-//            ignored while running in the background, so we can't count on this behaviour
-//            central.scanForPeripherals(withServices: [BTLEBroadcaster.primaryServiceUUID], options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
             central.scanForPeripherals(withServices: [ConcreteBTLEBroadcaster.sonarServiceUUID])
-        @unknown default:
-            fatalError()
+
+        default:
+            break
         }
     }
     
     func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
-        print("\(#file).\(#function) got centralManager: \(central)")
+        logger.info("willRestoreState for central \(central)")
         
         self.centralManager = central
         
@@ -107,7 +93,7 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
     }
         
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        print("\(#file).\(#function) discovered peripheral: \(advertisementData)")
+        logger.info("\(peripheral.identifier) (\(peripheral.name ?? "unknown")), advertismentData: \(advertisementData)")
 
         if peripherals[peripheral.identifier] == nil {
             peripherals[peripheral.identifier] = peripheral
@@ -116,7 +102,7 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        print("\(#file).\(#function) discovered peripheral: \(String(describing: peripheral.name))")
+        logger.info("\(peripheral.identifier) (\(peripheral.name ?? "unknown"))")
 
         delegate?.btleListener(self, didConnect: peripheral)
         
@@ -126,19 +112,21 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
     }
     
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-        print("\(#file).\(#function) disconnected peripheral: \(String(describing: peripheral.name))")
-        
-        peripherals[peripheral.identifier] = nil
-        
+        logger.info("\(peripheral.identifier) (\(peripheral.name ?? "unknown"))")
+        if let error = error {
+            logger.info("didDisconnectPeripheral error: \(error)")
+        }
         delegate?.btleListener(self, didDisconnect: peripheral, error: error)
+                
+        peripherals[peripheral.identifier] = nil
     }
     
     func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?) {
         guard error == nil else {
-            print("\(#file).\(#function) error reading RSSI: \(error!)")
+            logger.info("didReadRSSI error: \(error!)")
             return
         }
-        print("\(#file).\(#function) didReadRSSI for peripheral: \(peripheral.identifier): \(RSSI)")
+        logger.info("\(peripheral.identifier) (\(peripheral.name ?? "unknown")), RSSI: \(RSSI)")
 
         delegate?.btleListener(self, didReadRSSI: RSSI.intValue, forPeripheral: peripheral)
         
@@ -152,62 +140,62 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
     // MARK: CBPeripheralDelegate
     
     func peripheral(_ peripheral: CBPeripheral, didModifyServices invalidatedServices: [CBService]) {
-        print("\(#file).\(#function) peripheral \(peripheral) invalidating services:\n")
+        logger.info("\(peripheral.identifier) (\(peripheral.name ?? "unknown") invalidatedServices:")
         for service in invalidatedServices {
-            print("\(#file).\(#function)     \(service):\n")
+            logger.info("\t\(service)\n")
         }
     }
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         guard error == nil else {
-            print("Error discovering services: \(error!)")
+            logger.info("didDiscoverServices error: \(error!)")
             return
         }
         
         guard let services = peripheral.services, services.count > 0 else {
-            print("No services discovered for peripheral \(peripheral)")
+            logger.info("No services discovered for peripheral \(peripheral.identifier) (\(peripheral.name ?? "unknown")")
             return
         }
         
         guard let sonarService = services.first(where: {$0.uuid == ConcreteBTLEBroadcaster.sonarServiceUUID}) else {
-            print("Sonar service not discovered for peripheral \(peripheral)")
+            logger.info("Sonar service not discovered for \(peripheral.identifier) (\(peripheral.name ?? "unknown")")
             return
         }
 
-        print("\(#file).\(#function) found sonarService: \(sonarService)")
+        logger.info("Sonar service found: \(sonarService)")
         peripheral.discoverCharacteristics([ConcreteBTLEBroadcaster.sonarIdCharacteristicUUID], for: sonarService)
     }
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         guard error == nil else {
-            print("Error discovering characteristics: \(error!)")
+            logger.info("didDiscoverCharacteristics error: \(error!)")
             return
         }
         
         guard let characteristics = service.characteristics, characteristics.count > 0 else {
-            print("No characteristics discovered for service \(service)")
+            logger.info("No characteristics discovered for service \(service)")
             return
         }
         
         guard let sonarIdCharacteristic = characteristics.first(where: {$0.uuid == ConcreteBTLEBroadcaster.sonarIdCharacteristicUUID}) else {
-            print("Sonar Id characteristic not discovered for peripheral \(peripheral)")
+            logger.info("sonarId characteristic not discovered for peripheral \(peripheral)")
             return
         }
 
-        print("\(#file).\(#function) found sonarIdCharacteristic: \(sonarIdCharacteristic)")
+        logger.info("found sonarId characteristic: \(sonarIdCharacteristic)")
         peripheral.readValue(for: sonarIdCharacteristic)
     }
 
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         guard error == nil else {
-            print("Error updatingValueFor characteristic \(characteristic) : \(error!)")
+            logger.info("updatingValueFor characteristic \(characteristic): \(error!)")
             return
         }
 
-        print("\(#file).\(#function) didUpdateValueFor characteristic: \(characteristic)")
+        logger.info("didUpdateValueFor characteristic: \(characteristic)")
 
         guard let data = characteristic.value else {
-            print("\(#file).\(#function) No data found in characteristic.")
+            logger.info("No data found in characteristic.")
             return
         }
 
