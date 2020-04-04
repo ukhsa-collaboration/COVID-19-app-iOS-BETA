@@ -12,8 +12,6 @@ import Firebase
 import FirebaseInstanceID
 import Logging
 
-private let logger = Logger(label: "Application")
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     var window: UIWindow?
@@ -136,3 +134,5 @@ extension AppDelegate: PersistenceDelegate {
         continueWithRegistration(registration)
     }
 }
+
+private let logger = Logger(label: "Application")

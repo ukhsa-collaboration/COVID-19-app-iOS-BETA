@@ -23,7 +23,8 @@ class PlistContactEventRecorder: ContactEventRecorder {
         if let dirUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
             fileURL = dirUrl.appendingPathComponent("contactEvents.plist")
         } else {
-            preconditionFailure("\(#file).\(#function) couldn't open file for writing contactEvents.plist")
+            logger.critical("couldn't open file for writing contactEvents.plist")
+            fatalError()
         }
         readContactEvents()
     }
@@ -44,9 +45,8 @@ class PlistContactEventRecorder: ContactEventRecorder {
             let data = try Data(contentsOf: fileURL)
             contactEvents = try decoder.decode([ContactEvent].self, from: data)
         } catch {
-            // TODO: This gets tripped when we ought to have done a migration of our persisted data
-            // we're not in prod, so ignore for now
-            // assertionFailure("\(#file).\(#function) error reading contact events from disk: \(error)")
+            logger.critical("error reading contact events from disk: \(error)")
+            fatalError()
         }
     }
     
@@ -60,7 +60,8 @@ class PlistContactEventRecorder: ContactEventRecorder {
             let data = try encoder.encode(contactEvents)
             try data.write(to: fileURL, options: [.completeFileProtectionUntilFirstUserAuthentication])
         } catch {
-            assertionFailure("\(#file).\(#function) error writing contact events to disk: \(error)")
+            logger.critical("error writing contact events to disk: \(error)")
+            fatalError()
         }
     }
     
@@ -71,8 +72,11 @@ class PlistContactEventRecorder: ContactEventRecorder {
         } catch (let error as NSError) where error.code == NSFileNoSuchFileError {
             // ignore this, job already done
         } catch {
-            assertionFailure("\(#file).\(#function) error removing file at '\(fileURL)': \(error)")
+            logger.critical("error removing file at '\(fileURL)': \(error)")
+            fatalError()
         }
     }
     
 }
+
+private let logger = Logger(label: "PlistContactEventsRecorder")
