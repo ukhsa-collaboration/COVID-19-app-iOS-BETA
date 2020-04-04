@@ -80,5 +80,12 @@ struct ConnectedPeripheral {
     func btleListener(_ listener: BTLEListener, didReadRSSI RSSI: Int, forPeripheral peripheral: BTLEPeripheral) {
         connectedPeripherals[peripheral.identifier]?.rssiSamples.append(RSSI)
     }
-    
+
+    func flush() {
+        for (_, peripheral) in connectedPeripherals {
+            if let contactEvent = peripheral.asContactEvent() {
+                contactEventRecorder.record(contactEvent)
+            }
+        }
+    }
 }

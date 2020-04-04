@@ -88,6 +88,15 @@ class ContactEventCollectorTests: XCTestCase {
         XCTAssertEqual(collector.connectedPeripherals[peripheral3.identifier]?.rssiSamples, [31, 32, 33])
     }
 
+    func test_writes_any_remaining_events_when_flush_is_called() {
+        collector.btleListener(listener, didConnect: peripheral1)
+        collector.btleListener(listener, didFindSonarId: sonarId1, forPeripheral: peripheral1)
+
+        collector.flush()
+
+        XCTAssertEqual(recorder.contactEvents.count, 1)
+        XCTAssertEqual(recorder.contactEvents.first?.sonarId, sonarId1)
+    }
 }
 
 struct TestPeripheral: BTLEPeripheral {
