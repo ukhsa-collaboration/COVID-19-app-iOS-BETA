@@ -54,7 +54,7 @@ class SecureRegistrationStorage {
             let data = item[kSecValueData as String] as? Data,
             let idString = item[kSecAttrAccount as String] as? String,
             let id = UUID(uuidString: idString) else {
-                logger.error("Read idString from keychain")
+                logger.error("Could not read registration data from keychain")
                 return nil
         }
 
@@ -69,6 +69,7 @@ class SecureRegistrationStorage {
             kSecAttrService as String: SecureRegistrationStorage.secService,
             kSecAttrAccount as String: registration.id.uuidString,
             kSecValueData as String: registration.secretKey,
+            kSecAttrAccessible as String: kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly,
         ]
         let status = SecItemAdd(query as CFDictionary, nil)
 
