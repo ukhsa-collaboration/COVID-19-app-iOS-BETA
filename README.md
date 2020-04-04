@@ -62,6 +62,9 @@ There are currently a couple ways to do development with remote notificcations:
 
 ## Releases
 
-Builds are automatically generated from CI. Each hour, we merge any changes
+Builds are automatically generated from CI. Each two hours, we merge any changes
 from `master` into `test-flight`, bump the version, and cut a build that gets
 uploaded to Test Flight.
+
+Please do not merge the test-flight branch or CI branch into master.
+
