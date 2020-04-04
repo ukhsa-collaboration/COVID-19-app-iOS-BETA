@@ -19,15 +19,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     let remoteNotificationManager = ConcreteRemoteNotificationManager.shared
     let persistence = Persistence.shared
     let registrationService = ConcreteRegistrationService()
-    let bluetoothNursery: BluetoothNursery
+    let bluetoothNursery = BluetoothNursery()
+    let authorizationManager = AuthorizationManager.init()
 
     var appCoordinator: AppCoordinator!
     var onboardingViewController: OnboardingViewController!
-    
-    
+
     override init() {
         LoggingManager.bootstrap()
-        bluetoothNursery = BluetoothNursery()
         
         super.init()
 

@@ -24,7 +24,7 @@ class BluetoothNursery {
     var broadcaster: BTLEBroadcaster?
     
     init() {
-        contactEventRecorder = PlistContactEventRecorder()
+        contactEventRecorder = PlistContactEventRecorder.shared
         contactEventCollector = ContactEventCollector(contactEventRecorder: contactEventRecorder)
     }
     
