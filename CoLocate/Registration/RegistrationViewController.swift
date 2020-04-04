@@ -49,4 +49,4 @@ class RegistrationViewController: UIViewController, Storyboarded {
     }
 }
 
-fileprivate let logger = Logger(label: "RegistrationViewController")
+fileprivate let logger = Logger(label: "ViewController")

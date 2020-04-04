@@ -169,4 +169,4 @@ private class HandlerDictionary {
     }
 }
 
-private let logger = Logger(label: "NotificationDispatcher")
+private let logger = Logger(label: "Notifications")

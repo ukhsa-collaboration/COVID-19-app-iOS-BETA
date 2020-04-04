@@ -183,4 +183,4 @@ extension Messaging: TestableMessaging {
 }
 
 // MARK: - Logging
-private let logger = Logger(label: "NotificationManager")
+private let logger = Logger(label: "Notifications")

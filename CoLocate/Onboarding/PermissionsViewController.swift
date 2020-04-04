@@ -103,4 +103,4 @@ protocol BluetoothManager {}
 extension CBManager: BluetoothManager {}
 
 // MARK: - Logger
-private let logger = Logger(label: "PermissionsViewController")
+private let logger = Logger(label: "ViewController")

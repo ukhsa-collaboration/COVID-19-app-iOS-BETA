@@ -79,4 +79,4 @@ class PleaseSelfIsolateViewController: UIViewController, Storyboarded {
     }
 }
 
-private let logger = Logger(label: "PleaseSelfIsolate")
+private let logger = Logger(label: "ViewController")

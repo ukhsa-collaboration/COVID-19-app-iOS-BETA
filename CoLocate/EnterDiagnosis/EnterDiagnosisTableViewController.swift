@@ -51,4 +51,4 @@ class EnterDiagnosisTableViewController: UITableViewController, Storyboarded {
     }
 }
 
-private let logger = Logger(label: "DiagnosisTableViewController")
+private let logger = Logger(label: "ViewController")
