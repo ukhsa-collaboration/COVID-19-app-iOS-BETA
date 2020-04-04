@@ -16,6 +16,14 @@ class PermissionsDeniedViewController: UIViewController, Storyboarded {
     @IBOutlet weak var bluetoothLabel: UILabel!
     @IBOutlet weak var notificationsLabel: UILabel!
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        if #available(iOS 13.0, *) {
+            isModalInPresentation = true
+        }
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 

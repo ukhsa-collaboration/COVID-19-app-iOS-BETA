@@ -78,7 +78,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         flushContactEvents()
         scheduleLocalNotification()
     }
-    
+
+    func applicationWillResignActive(_ application: UIApplication) {
+        logger.info("Will Resign Active")
+    }
+
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        logger.info("Did Become Active")
+
+        guard self.persistence.registration != nil else {
+            // TODO : is this true ? What about the last onboarding screen ?
+            logger.debug("Became active with nil registration. Assuming onboarding will handle this case")
+            return
+        }
+
+        authorizationManager.notifications { [weak self] notificationStatus in
+            guard let self = self else { return }
+
+            DispatchQueue.main.sync {
+                guard let navController = self.window?.rootViewController as? UINavigationController else {
+                    return
+                }
+
+                switch (self.authorizationManager.bluetooth, notificationStatus) {
+                case (.denied, _), (_, .denied):
+                    let permissionsDeniedViewController = PermissionsDeniedViewController.instantiate()
+                    navController.present(permissionsDeniedViewController, animated: true)
+                default:
+                    guard navController.presentedViewController as? PermissionsDeniedViewController != nil else {
+                        return
+                    }
+
+                    navController.dismiss(animated: true)
+                }
+            }
+        }
+    }
+
     func applicationDidEnterBackground(_ application: UIApplication) {
         logger.info("Did Enter Background")
     }
