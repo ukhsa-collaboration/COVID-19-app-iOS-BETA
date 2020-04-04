@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Logging
 
 // TODO: Should maybe be a MutableContactEvent?
 struct ConnectedPeripheral {
@@ -82,6 +83,8 @@ struct ConnectedPeripheral {
     }
 
     func flush() {
+        logger.info("flushing contact events for \(connectedPeripherals.count) peripherals")
+
         for (_, peripheral) in connectedPeripherals {
             if let contactEvent = peripheral.asContactEvent() {
                 contactEventRecorder.record(contactEvent)
@@ -89,3 +92,5 @@ struct ConnectedPeripheral {
         }
     }
 }
+
+private let logger = Logger(label: "ContactEventCollector")
