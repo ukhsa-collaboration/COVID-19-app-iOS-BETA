@@ -52,15 +52,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = initialViewController
 
-        if let registration = persistence.registration {
-            continueWithRegistration(registration)
+        if let savedRegistration = persistence.registration {
+            startMainApp(with: savedRegistration)
+        } else {
+            onboardingViewController = OnboardingViewController.instantiate()
+            onboardingViewController.rootViewController = initialViewController
         }
 
         window?.makeKeyAndVisible()
-
-        onboardingViewController = OnboardingViewController.instantiate()
-        onboardingViewController.rootViewController = initialViewController
-
         return true
     }
 
@@ -125,7 +124,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     // MARK: - Private
     
-    func continueWithRegistration(_ registration: Registration) {
+    func startMainApp(with registration: Registration) {
         guard let navController = window?.rootViewController as? UINavigationController else {
             return
         }
@@ -156,6 +155,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 }
 
+// MARK: - PersistenceDelegate
+
 extension AppDelegate: PersistenceDelegate {
     func persistence(_ persistence: Persistence, didRecordDiagnosis diagnosis: Diagnosis) {
         appCoordinator.showAppropriateViewController()
@@ -166,8 +167,9 @@ extension AppDelegate: PersistenceDelegate {
 
         // TODO: This is probably not the right place to put this,
         // but it'll do until we remove the old onboarding flow.
-        continueWithRegistration(registration)
+        startMainApp(with: registration)
     }
 }
 
+// MARK: - Logging
 private let logger = Logger(label: "Application")
