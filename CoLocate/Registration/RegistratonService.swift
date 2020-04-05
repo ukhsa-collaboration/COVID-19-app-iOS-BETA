@@ -15,22 +15,29 @@ protocol RegistrationService {
 
 class ConcreteRegistrationService: RegistrationService {
     let session: Session
+    let persistence: Persistence
     let remoteNotificationDispatcher: RemoteNotificationDispatcher
     let notificationCenter: NotificationCenter
     
-    init(session: Session, remoteNotificationDispatcher: RemoteNotificationDispatcher, notificationCenter: NotificationCenter) {
+    init(session: Session,
+         persistence: Persistence,
+         remoteNotificationDispatcher: RemoteNotificationDispatcher,
+         notificationCenter: NotificationCenter) {
         #if DEBUG
         self.session = InterceptingSession(underlyingSession: session)
         #else
         self.session = session
         #endif
-        self.remoteNotificationDispatcher = remoteNotificationDispatcher
+
+        self.persistence = persistence
         self.notificationCenter = notificationCenter
+        self.remoteNotificationDispatcher = remoteNotificationDispatcher
     }
 
     convenience init() {
         self.init(
             session: URLSession.shared,
+            persistence: Persistence.shared,
             remoteNotificationDispatcher: RemoteNotificationDispatcher.shared,
             notificationCenter: NotificationCenter.default
         )
@@ -39,6 +46,7 @@ class ConcreteRegistrationService: RegistrationService {
     func register(completionHandler: @escaping ((Result<Void, Error>) -> Void)) {
         let attempt = RegistrationAttempt(
             session: session,
+            persistence: persistence,
             remoteNotificationDispatcher: remoteNotificationDispatcher,
             notificationCenter: notificationCenter,
             completionHandler: completionHandler
@@ -47,9 +55,9 @@ class ConcreteRegistrationService: RegistrationService {
     }
 }
 
-class RegistrationAttempt {
+fileprivate class RegistrationAttempt {
     let session: Session
-    let persistence = Persistence.shared
+    let persistence: Persistence
     let remoteNotificationDispatcher: RemoteNotificationDispatcher
     let notificationCenter: NotificationCenter
     var registrationCompletionHandler: ((Result<Void, Error>) -> Void)?
@@ -57,14 +65,16 @@ class RegistrationAttempt {
 
     init(
         session: Session,
+        persistence: Persistence,
         remoteNotificationDispatcher: RemoteNotificationDispatcher,
         notificationCenter: NotificationCenter,
         completionHandler: @escaping ((Result<Void, Error>) -> Void)
     ) {
         self.session = session
-        self.remoteNotificationDispatcher = remoteNotificationDispatcher
+        self.persistence = persistence
         self.notificationCenter = notificationCenter
         self.registrationCompletionHandler = completionHandler
+        self.remoteNotificationDispatcher = remoteNotificationDispatcher
     }
 
     deinit {

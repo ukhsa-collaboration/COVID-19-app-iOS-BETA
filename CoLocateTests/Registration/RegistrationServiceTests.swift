@@ -16,13 +16,17 @@ class RegistrationServiceTests: TestCase {
 
     func testRegistration_withPreExistingPushToken() throws {
         let session = SessionDouble()
+        let persistence = PersistenceDouble()
         let notificationCenter = NotificationCenter()
         let remoteNotificationDispatcher = RemoteNotificationDispatcher(
             notificationCenter: notificationCenter,
             userNotificationCenter: UserNotificationCenterDouble(),
-            persistence: PersistenceDouble()
+            persistence: persistence
         )
-        let registrationService = ConcreteRegistrationService(session: session, remoteNotificationDispatcher: remoteNotificationDispatcher, notificationCenter: notificationCenter)
+        let registrationService = ConcreteRegistrationService(session: session,
+                                                              persistence: persistence,
+                                                              remoteNotificationDispatcher: remoteNotificationDispatcher,
+                                                              notificationCenter: notificationCenter)
     
         remoteNotificationDispatcher.pushToken = "the current push token"
         var finished = false
@@ -66,14 +70,12 @@ class RegistrationServiceTests: TestCase {
         
         XCTAssertTrue(finished)
         XCTAssertNil(error)
-        let storedRegistration = try SecureRegistrationStorage.shared.get()
-        XCTAssertNotNil(storedRegistration)
-        XCTAssertEqual(id, storedRegistration!.id)
-        XCTAssertEqual(storedRegistration!.secretKey, secretKey)
-        
-        XCTAssertEqual(storedRegistration?.id, self.id)
-        XCTAssertEqual(storedRegistration?.secretKey, self.secretKey)
 
+        let storedRegistration = persistence.registration
+        XCTAssertNotNil(storedRegistration)
+        XCTAssertEqual(id, storedRegistration?.id)
+        XCTAssertEqual(secretKey, storedRegistration?.secretKey)
+        
         // Make sure we cleaned up after ourselves
         XCTAssertTrue(remoteNotificatonCallbackCalled)
         XCTAssertFalse(remoteNotificationDispatcher.hasHandler(forType: .registrationActivationCode))
@@ -81,13 +83,17 @@ class RegistrationServiceTests: TestCase {
     
     func testRegistration_withoutPreExistingPushToken() throws {
         let session = SessionDouble()
+        let persistence = PersistenceDouble()
         let notificationCenter = NotificationCenter()
         let remoteNotificationDispatcher = RemoteNotificationDispatcher(
             notificationCenter: notificationCenter,
             userNotificationCenter: UserNotificationCenterDouble(),
-            persistence: PersistenceDouble()
+            persistence: persistence
         )
-        let registrationService = ConcreteRegistrationService(session: session, remoteNotificationDispatcher: remoteNotificationDispatcher, notificationCenter: notificationCenter)
+        let registrationService = ConcreteRegistrationService(session: session,
+                                                              persistence: persistence,
+                                                              remoteNotificationDispatcher: remoteNotificationDispatcher,
+                                                              notificationCenter: notificationCenter)
 
         var finished = false
         var error: Error? = nil
@@ -133,13 +139,11 @@ class RegistrationServiceTests: TestCase {
 
         XCTAssertTrue(finished)
         XCTAssertNil(error)
-        let storedRegistration = try SecureRegistrationStorage.shared.get()
-        XCTAssertNotNil(storedRegistration)
-        XCTAssertEqual(id, storedRegistration!.id)
-        XCTAssertEqual(storedRegistration!.secretKey, secretKey)
 
-        XCTAssertEqual(storedRegistration?.id, self.id)
-        XCTAssertEqual(storedRegistration?.secretKey, self.secretKey)
+        let storedRegistration = persistence.registration
+        XCTAssertNotNil(storedRegistration)
+        XCTAssertEqual(id, storedRegistration?.id)
+        XCTAssertEqual(secretKey, storedRegistration?.secretKey)
 
         // Make sure we cleaned up after ourselves
         XCTAssertTrue(remoteNotificatonCallbackCalled)
@@ -148,14 +152,18 @@ class RegistrationServiceTests: TestCase {
     
     func testRegistration_cleansUpAfterInitialRequestFailure() throws {
         let session = SessionDouble()
+        let persistence = PersistenceDouble()
         let notificationCenter = NotificationCenter()
         let remoteNotificationDispatcher = RemoteNotificationDispatcher(
             notificationCenter: notificationCenter,
             userNotificationCenter: UserNotificationCenterDouble(),
-            persistence: PersistenceDouble()
+            persistence: persistence
         )
         remoteNotificationDispatcher.pushToken = "the current push token"
-        let registrationService = ConcreteRegistrationService(session: session, remoteNotificationDispatcher: remoteNotificationDispatcher, notificationCenter: notificationCenter)
+        let registrationService = ConcreteRegistrationService(session: session,
+                                                              persistence: persistence,
+                                                              remoteNotificationDispatcher: remoteNotificationDispatcher,
+                                                              notificationCenter: notificationCenter)
 
         registrationService.register(completionHandler: { _ in })
         
