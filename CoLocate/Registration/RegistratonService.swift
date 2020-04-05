@@ -82,23 +82,29 @@ fileprivate class RegistrationAttempt {
     }
     
     func start() {
+        // when our backend sends us the activation code in a push notification
+        // we will want to make a second request to complete the registration process
         remoteNotificationDispatcher.registerHandler(forType: .registrationActivationCode) { userInfo, completion in
             self.remoteNotificationCompletionHandler = completion
             self.confirmRegistration(activationCode: userInfo["activationCode"] as! String)
         }
 
-        if remoteNotificationDispatcher.pushToken != nil {
-            requestRegistration()
+        if let pushToken = remoteNotificationDispatcher.pushToken {
+            // if somehow we have already received our fcm push token, perform the first registration request
+            requestRegistration(pushToken)
         } else {
-            notificationCenter.addObserver(forName: PushTokenReceivedNotification, object: nil, queue: nil) { _ in
+            // otherwise when it later appears, we can perform the first of two registration requests
+            notificationCenter.addObserver(forName: PushTokenReceivedNotification, object: nil, queue: nil) { notification in
+                guard let pushToken = notification.object as? String else { return }
+
                 self.notificationCenter.removeObserver(self, name: PushTokenReceivedNotification, object: nil)
-                self.requestRegistration()
+                self.requestRegistration(pushToken)
             }
         }
     }
     
-    private func requestRegistration() {
-        let request = RequestFactory.registrationRequest(pushToken: remoteNotificationDispatcher.pushToken!)
+    private func requestRegistration(_ pushToken: String) {
+        let request = RequestFactory.registrationRequest(pushToken: pushToken)
 
         session.execute(request, queue: .main) { result in
             switch result {
@@ -199,4 +205,5 @@ class InterceptingSession: Session {
 }
 #endif
 
+// MARK: - Logging
 private let logger = Logger(label: "RegistrationService")

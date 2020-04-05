@@ -46,10 +46,16 @@ class RemoteNotificationManagerTests: TestCase {
             persistence: Persistence()
         )
 
+        var receivedPushToken: String?
+        notificationCenter.addObserver(forName: PushTokenReceivedNotification, object: nil, queue: nil) { notification in
+            receivedPushToken = notification.object as? String
+        }
+
         notificationManager.configure()
         // Ugh, can't find a way to not pass a real Messaging here. Should be ok as long as the actual delegate method doesn't use it.
         messaging.delegate!.messaging?(Messaging.messaging(), didReceiveRegistrationToken: "12345")
         XCTAssertEqual("12345", notificationManager.pushToken)
+        XCTAssertEqual("12345", receivedPushToken)
     }
 
     func testRequestAuthorization_success() {

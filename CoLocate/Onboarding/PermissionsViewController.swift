@@ -30,6 +30,8 @@ class PermissionsViewController: UIViewController, Storyboarded {
         requestBluetoothPermissions()
     }
 
+    // MARK: - Private
+
     private func requestBluetoothPermissions() {
         #if targetEnvironment(simulator)
 

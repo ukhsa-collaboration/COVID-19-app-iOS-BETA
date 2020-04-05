@@ -149,7 +149,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         content.body = "To keep yourself secure, please relaunch the app."
 
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
-        let request = UNNotificationRequest(identifier: "willTerminate.relaunch.immediate", content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: "willTerminate.relaunch.please", content: content, trigger: trigger)
 
         UNUserNotificationCenter.current().add(request)
     }

@@ -90,7 +90,7 @@ class RemoteNotificationDispatcher {
     
     func receiveRegistrationToken(fcmToken: String) {
         pushToken = fcmToken
-        notificationCenter.post(name: PushTokenReceivedNotification, object: nil, userInfo: nil)
+        notificationCenter.post(name: PushTokenReceivedNotification, object: fcmToken, userInfo: nil)
     }
     
     private func notificationType(userInfo: [AnyHashable : Any]) -> RemoteNotificationType? {
