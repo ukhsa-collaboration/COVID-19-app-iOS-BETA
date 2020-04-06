@@ -83,9 +83,9 @@ class ContactEventCollectorTests: XCTestCase {
         collector.btleListener(listener, didReadRSSI: 13, forPeripheral: peripheral1)
         collector.btleListener(listener, didReadRSSI: 33, forPeripheral: peripheral3)
         
-        XCTAssertEqual(collector.connectedPeripherals[peripheral1.identifier]?.rssiSamples, [11, 12, 13])
-        XCTAssertEqual(collector.connectedPeripherals[peripheral2.identifier]?.rssiSamples, [21, 22, 23])
-        XCTAssertEqual(collector.connectedPeripherals[peripheral3.identifier]?.rssiSamples, [31, 32, 33])
+        XCTAssertEqual(collector.connectedPeripherals[peripheral1.identifier]?.rssiValues, [11, 12, 13])
+        XCTAssertEqual(collector.connectedPeripherals[peripheral2.identifier]?.rssiValues, [21, 22, 23])
+        XCTAssertEqual(collector.connectedPeripherals[peripheral3.identifier]?.rssiValues, [31, 32, 33])
     }
 
     func test_writes_any_remaining_events_when_flush_is_called() {

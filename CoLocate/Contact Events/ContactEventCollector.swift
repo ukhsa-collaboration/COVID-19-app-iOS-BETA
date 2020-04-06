@@ -9,17 +9,16 @@
 import Foundation
 import Logging
 
-// TODO: Should maybe be a MutableContactEvent?
-struct ConnectedPeripheral {
+struct MutableContactEvent {
     
-    let timestamp: Date
-    var rssiSamples: [Int]
     var sonarId: UUID?
+    let timestamp: Date
+    var rssiValues: [Int]
     var duration: TimeInterval
 
     init(timestamp: Date = Date()) {
         self.timestamp = timestamp
-        self.rssiSamples = []
+        self.rssiValues = []
         self.sonarId = nil
         self.duration = 0
     }
@@ -30,7 +29,7 @@ struct ConnectedPeripheral {
     
     func asContactEvent() -> ContactEvent? {
         if let sonarId  = self.sonarId {
-            return ContactEvent(sonarId: sonarId, timestamp: timestamp, rssiValues: rssiSamples, duration: duration)
+            return ContactEvent(sonarId: sonarId, timestamp: timestamp, rssiValues: rssiValues, duration: duration)
         } else {
             return nil
         }
@@ -44,7 +43,7 @@ struct ConnectedPeripheral {
     
     @objc dynamic var _connectedPeripheralCount: Int = 0
     
-    var connectedPeripherals: [UUID: ConnectedPeripheral] = [:] {
+    var connectedPeripherals: [UUID: MutableContactEvent] = [:] {
         didSet {
             _connectedPeripheralCount = connectedPeripherals.count
         }
@@ -58,7 +57,7 @@ struct ConnectedPeripheral {
     }
     
     func btleListener(_ listener: BTLEListener, didConnect peripheral: BTLEPeripheral) {
-        connectedPeripherals[peripheral.identifier] = ConnectedPeripheral()
+        connectedPeripherals[peripheral.identifier] = MutableContactEvent()
     }
     
     func btleListener(_ listener: BTLEListener, didDisconnect peripheral: BTLEPeripheral, error: Error?) {
@@ -77,7 +76,7 @@ struct ConnectedPeripheral {
     }
     
     func btleListener(_ listener: BTLEListener, didReadRSSI RSSI: Int, forPeripheral peripheral: BTLEPeripheral) {
-        connectedPeripherals[peripheral.identifier]?.rssiSamples.append(RSSI)
+        connectedPeripherals[peripheral.identifier]?.rssiValues.append(RSSI)
     }
 
     func flush() {
