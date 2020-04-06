@@ -52,7 +52,7 @@ jobs:
         env:
           API_ENDPOINT: ${{ secrets.api_endpoint }}
         run: |
-          tee "Development.xcconfig" > /dev/null <<EOF
+          tee "CoLocate.xcconfig" > /dev/null <<EOF
           #include "CoLocate/CoLocate.xcconfig"
           API_ENDPOINT = $API_ENDPOINT
           EOF

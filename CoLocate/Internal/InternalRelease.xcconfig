@@ -1,4 +1,3 @@
-
-#include "../../Development.xcconfig"
+#include "../../CoLocate.xcconfig"
 
 #include "CoLocateInternal.xcconfig"

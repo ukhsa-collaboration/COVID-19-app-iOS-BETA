@@ -30,7 +30,7 @@ index c6de0a8..44cca88 100755
   <key>NSBluetoothPeripheralUsageDescription</key>
 ```
 
-Then replace the hostname in `Development.xcconfig` with the local
-network IP address of your computer. Set the UPSTREAM_SONAR_URL envrionment
-variable to the actual Sonar server URL, and run `node slow-confirmation.js`.
-Finally, run the iOS app.
+Then replace the hostname in `CoLocate.xcconfig` with the local network IP
+address of your computer. Set the `UPSTREAM_SONAR_URL` envrionment variable to
+the actual Sonar server URL, and run `node slow-confirmation.js`.  Finally, run
+the iOS app.
