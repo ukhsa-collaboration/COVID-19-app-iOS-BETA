@@ -51,6 +51,7 @@ class PrimaryButton: UIButton {
         clipsToBounds = true
         backgroundColor = UIColor(named: "NHS Button")
         setTitleColor(.white, for: .normal)
+        titleLabel?.adjustsFontForContentSizeCategory = true
         titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
         setBackgroundImage(disabledColorImage, for: .disabled)
     }
