@@ -11,7 +11,7 @@ import Logging
 
 class PlistContactEventRecorder: ContactEventRecorder {
     
-    // MARK - New contact events
+    // MARK: - New contact events
     
     static let shared: PlistContactEventRecorder = PlistContactEventRecorder()
     
@@ -33,6 +33,20 @@ class PlistContactEventRecorder: ContactEventRecorder {
         contactEvents.append(contactEvent)
         writeContactEvents()
     }
+
+    func reset() {
+        contactEvents = []
+        do {
+            try FileManager.default.removeItem(at: fileURL)
+        } catch (let error as NSError) where error.code == NSFileNoSuchFileError {
+            // ignore this, job already done
+        } catch {
+            logger.critical("error removing file at '\(fileURL)': \(error)")
+            fatalError()
+        }
+    }
+
+    // MARK: - Private
     
     private func readContactEvents() {
         guard FileManager.default.isReadableFile(atPath: fileURL.path) else {
@@ -64,19 +78,6 @@ class PlistContactEventRecorder: ContactEventRecorder {
             fatalError()
         }
     }
-    
-    func reset() {
-        contactEvents = []
-        do {
-            try FileManager.default.removeItem(at: fileURL)
-        } catch (let error as NSError) where error.code == NSFileNoSuchFileError {
-            // ignore this, job already done
-        } catch {
-            logger.critical("error removing file at '\(fileURL)': \(error)")
-            fatalError()
-        }
-    }
-    
 }
 
 private let logger = Logger(label: "PlistContactEventsRecorder")
