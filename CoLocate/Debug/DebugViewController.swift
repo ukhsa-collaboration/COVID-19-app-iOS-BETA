@@ -25,6 +25,10 @@ class DebugViewController: UITableViewController, Storyboarded {
             interceptRequestsSwitch.isOn = InterceptingSession.interceptNextRequest
         #else
         #endif
+        
+        let build = Bundle.main.infoDictionary?["CFBundleVersion"] ?? "unknown"
+        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] ?? "unknown"
+        (tableView.tableFooterView as! UILabel).text = "Version \(version) (build \(build))"
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
