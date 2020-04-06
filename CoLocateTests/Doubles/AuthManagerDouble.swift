@@ -9,21 +9,18 @@
 import Foundation
 @testable import CoLocate
 
-class AuthorizationManagerDouble: AuthorizationManager {
+class AuthorizationManagerDouble: AuthorizationManaging {
 
     init(
-        bluetooth: AuthorizationManager.Status = .notDetermined
+        bluetooth: AuthorizationStatus = .notDetermined
     ) {
-        _bluetooth = bluetooth
+        self.bluetooth = bluetooth
     }
 
-    var _bluetooth: AuthorizationManager.Status
-    override var bluetooth: AuthorizationManager.Status {
-        _bluetooth
-    }
+    var bluetooth: AuthorizationStatus = .notDetermined
 
-    var notificationsCompletion: ((AuthorizationManager.Status) -> Void)?
-    override func notifications(completion: @escaping (AuthorizationManager.Status) -> Void) {
+    var notificationsCompletion: ((AuthorizationStatus) -> Void)?
+    func notifications(completion: @escaping (AuthorizationStatus) -> Void) {
         notificationsCompletion = completion
     }
 

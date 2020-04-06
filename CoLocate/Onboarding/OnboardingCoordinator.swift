@@ -16,9 +16,9 @@ class OnboardingCoordinator {
     }
 
     private let persistence: Persistence
-    private let authorizationManager: AuthorizationManager
+    private let authorizationManager: AuthorizationManaging
 
-    init(persistence: Persistence, authorizationManager: AuthorizationManager) {
+    init(persistence: Persistence, authorizationManager: AuthorizationManaging) {
         self.persistence = persistence
         self.authorizationManager = authorizationManager
     }

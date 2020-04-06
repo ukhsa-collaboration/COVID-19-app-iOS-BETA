@@ -13,7 +13,7 @@ import CoreBluetooth
 class PermissionsViewController: UIViewController, Storyboarded {
     static let storyboardName = "Onboarding"
 
-    var authManager = AuthorizationManager()
+    var authManager: AuthorizationManaging = AuthorizationManager()
     var remoteNotificationManager: RemoteNotificationManager = ConcreteRemoteNotificationManager()
     var persistence = Persistence.shared
     var uiQueue: TestableQueue = DispatchQueue.main
