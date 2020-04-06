@@ -44,8 +44,13 @@ class LogoStrapline: UIView {
         titleLabel.textColor = UIColor(named: "NHS White")
         titleLabel.text = "Coronavirus tracing"
 
-        view.frame = self.bounds
-        self.addSubview(view)
+        addSubview(view)
+        NSLayoutConstraint.activate([
+            view.leadingAnchor.constraint(equalTo: leadingAnchor),
+            view.topAnchor.constraint(equalTo: topAnchor),
+            view.trailingAnchor.constraint(equalTo: trailingAnchor),
+            view.bottomAnchor.constraint(equalTo: bottomAnchor),
+        ])
 
         let element = UIAccessibilityElement(accessibilityContainer: self)
         element.accessibilityLabel = "NHS Coronavirus tracing"
