@@ -12,14 +12,12 @@ import Logging
 // TODO: Should maybe be a MutableContactEvent?
 struct ConnectedPeripheral {
     
-    let identifier: UUID
     let timestamp: Date
     var rssiSamples: [Int]
     var sonarId: UUID?
     var duration: TimeInterval
 
-    init(identifier: UUID, timestamp: Date = Date()) {
-        self.identifier = identifier
+    init(timestamp: Date = Date()) {
         self.timestamp = timestamp
         self.rssiSamples = []
         self.sonarId = nil
@@ -60,7 +58,7 @@ struct ConnectedPeripheral {
     }
     
     func btleListener(_ listener: BTLEListener, didConnect peripheral: BTLEPeripheral) {
-        connectedPeripherals[peripheral.identifier] = ConnectedPeripheral(identifier: peripheral.identifier)
+        connectedPeripherals[peripheral.identifier] = ConnectedPeripheral()
     }
     
     func btleListener(_ listener: BTLEListener, didDisconnect peripheral: BTLEPeripheral, error: Error?) {
