@@ -19,7 +19,7 @@ class AppCoordinatorTests: TestCase {
 
         let vc = coordinator.initialViewController()
 
-        XCTAssertNotNil(vc as? MainViewController)
+        XCTAssertNotNil(vc as? OkViewController)
     }
 
     func testShowView_diagnosisUnknown() {
@@ -52,7 +52,7 @@ class AppCoordinatorTests: TestCase {
 
         coordinator.showAppropriateViewController()
         
-        XCTAssertNotNil(navController.topViewController as? MainViewController)
+        XCTAssertNotNil(navController.topViewController as? OkViewController)
     }
 
     

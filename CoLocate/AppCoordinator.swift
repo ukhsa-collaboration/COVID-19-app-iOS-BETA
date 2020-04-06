@@ -61,8 +61,8 @@ class AppCoordinator {
         return vc
     }
 
-    private func okVC() -> MainViewController {
-        let vc = MainViewController.instantiate()
+    private func okVC() -> OkViewController {
+        let vc = OkViewController.instantiate()
         return vc
     }
     
