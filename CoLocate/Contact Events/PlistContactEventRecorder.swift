@@ -30,6 +30,7 @@ class PlistContactEventRecorder: ContactEventRecorder {
     }
 
     func record(_ contactEvent: ContactEvent) {
+        logger.info("recording \(contactEvent)")
         contactEvents.append(contactEvent)
         writeContactEvents()
     }
@@ -80,4 +81,4 @@ class PlistContactEventRecorder: ContactEventRecorder {
     }
 }
 
-private let logger = Logger(label: "PlistContactEventsRecorder")
+private let logger = Logger(label: "ContactEvents")

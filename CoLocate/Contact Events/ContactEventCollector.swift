@@ -87,4 +87,4 @@ struct MutableContactEvent {
     }
 }
 
-private let logger = Logger(label: "ContactEventCollector")
+private let logger = Logger(label: "ContactEvents")
