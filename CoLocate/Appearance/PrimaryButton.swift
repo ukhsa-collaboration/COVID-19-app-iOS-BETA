@@ -11,18 +11,11 @@ import UIKit
 //@IBDesignable
 class PrimaryButton: UIButton {
 
-    private let disabledColorImage: UIImage? = {
-        let rect = CGRect(x: 0.0, y: 0.0, width: 1, height: 1)
-        UIGraphicsBeginImageContext(rect.size)
-
-        let context = UIGraphicsGetCurrentContext()
-        context?.setFillColor(UIColor(named: "NHS Grey 2")!.cgColor)
-        context?.fill(rect)
-
-        let image: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return image
-    }()
+    override var isEnabled: Bool {
+        didSet {
+            alpha = isEnabled ? 1.0 : 0.3
+        }
+    }
 
     override var intrinsicContentSize: CGSize {
         return CGSize(width: UIView.noIntrinsicMetric, height: 54.0)
@@ -53,7 +46,9 @@ class PrimaryButton: UIButton {
         setTitleColor(.white, for: .normal)
         titleLabel?.adjustsFontForContentSizeCategory = true
         titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
-        setBackgroundImage(disabledColorImage, for: .disabled)
+        titleLabel?.textAlignment = .center
+
+        alpha = isEnabled ? 1.0 : 0.3
     }
 
 }
