@@ -17,14 +17,8 @@ class PermissionsViewController: UIViewController, Storyboarded {
     var remoteNotificationManager: RemoteNotificationManager = ConcreteRemoteNotificationManager()
     var persistence = Persistence.shared
     var uiQueue: TestableQueue = DispatchQueue.main
+    var bluetoothNursery: BluetoothNursery = (UIApplication.shared.delegate as! AppDelegate).bluetoothNursery
 
-    // Hold onto the Bluetooth manager for the sole
-    // purpose of retaining it in memory for the
-    // lifespan of this view controller.
-    private var bluetoothManager: BluetoothManager?
-
-    private var bluetoothDetermined = false // sentinel so we only request notification permissions once
-    
     @IBAction func didTapContinue(_ sender: UIButton) {
         sender.isEnabled = false
         requestBluetoothPermissions()
@@ -49,10 +43,7 @@ class PermissionsViewController: UIViewController, Storyboarded {
             return
         }
 
-        bluetoothManager = CBPeripheralManager(
-            delegate: self,
-            queue: nil,
-            options: [CBCentralManagerOptionShowPowerAlertKey: true])
+        bluetoothNursery.startListener(stateDelegate: self)
         #endif
     }
 
@@ -86,23 +77,19 @@ class PermissionsViewController: UIViewController, Storyboarded {
     }
 }
 
-// MARK: - CBCentralManagerDelegate
-extension PermissionsViewController: CBPeripheralManagerDelegate {
-    func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
+// MARK: - BTLEListenerStateDelegate
+extension PermissionsViewController: BTLEListenerStateDelegate {
+    
+    func btleListener(_ listener: BTLEListener, didUpdateState state: CBManagerState) {
         switch authManager.bluetooth {
         case .notDetermined:
             return
         case .allowed, .denied:
-            bluetoothDetermined = true
             requestNotificationPermissions()
         }
     }
+    
 }
-
-// MARK: - Testable
-
-protocol BluetoothManager {}
-extension CBManager: BluetoothManager {}
 
 // MARK: - Logger
 private let logger = Logger(label: "ViewController")

@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     let persistence = Persistence.shared
     let registrationService = ConcreteRegistrationService()
     let bluetoothNursery = BluetoothNursery()
-    let authorizationManager = AuthorizationManager.init()
+    let authorizationManager = AuthorizationManager()
 
     var appCoordinator: AppCoordinator!
     var onboardingViewController: OnboardingViewController!
@@ -52,8 +52,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = initialViewController
 
-        if let savedRegistration = persistence.registration {
-            startMainApp(with: savedRegistration)
+        if let registration = persistence.registration {
+            bluetoothNursery.startBroadcaster(stateDelegate: nil, sonarId: registration.id)
+            bluetoothNursery.startListener(stateDelegate: nil)
+            startMainApp(with: registration)
         } else {
             onboardingViewController = OnboardingViewController.instantiate()
             onboardingViewController.rootViewController = initialViewController
@@ -129,9 +131,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             return
         }
 
-        bluetoothNursery.startBroadcaster(stateDelegate: nil, sonarId: registration.id)
-        bluetoothNursery.startListener(stateDelegate: nil)
-        
         appCoordinator = AppCoordinator(
             navController: navController,
             persistence: persistence,
@@ -164,6 +163,7 @@ extension AppDelegate: PersistenceDelegate {
 
     func persistence(_ persistence: Persistence, didUpdateRegistration registration: Registration) {
         onboardingViewController.updateState()
+        bluetoothNursery.startBroadcaster(stateDelegate: nil, sonarId: registration.id)
 
         // TODO: This is probably not the right place to put this,
         // but it'll do until we remove the old onboarding flow.

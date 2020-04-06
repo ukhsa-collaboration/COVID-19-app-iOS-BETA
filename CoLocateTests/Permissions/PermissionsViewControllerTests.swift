@@ -33,7 +33,7 @@ class PermissionsViewControllerTests: TestCase {
         // to requesting notification authorization.
         #else
         authManagerDouble._bluetooth = .allowed
-        vc.peripheralManagerDidUpdateState(CBPeripheralManager())
+        vc.btleListener(DummyBTLEListener(), didUpdateState: .poweredOn)
         #endif
 
         XCTAssertNotNil(authManagerDouble.notificationsCompletion)
@@ -91,7 +91,7 @@ class PermissionsViewControllerTests: TestCase {
         // to requesting notification authorization.
         #else
         authManagerDouble._bluetooth = .allowed
-        vc.peripheralManagerDidUpdateState(CBPeripheralManager())
+        vc.btleListener(DummyBTLEListener(), didUpdateState: .poweredOn)
         #endif
 
         XCTAssertNotNil(authManagerDouble.notificationsCompletion)
