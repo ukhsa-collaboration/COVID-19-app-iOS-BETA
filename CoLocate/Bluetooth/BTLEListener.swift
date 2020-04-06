@@ -100,9 +100,10 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
     }
     
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-        logger.info("\(peripheral.identifier) (\(peripheral.name ?? "unknown"))")
         if let error = error {
-            logger.info("didDisconnectPeripheral error: \(error)")
+            logger.info("\(peripheral.identifier) (\(peripheral.name ?? "unknown")) error: \(error)")
+        } else {
+            logger.info("\(peripheral.identifier) (\(peripheral.name ?? "unknown"))")
         }
         delegate?.btleListener(self, didDisconnect: peripheral, error: error)
                 
@@ -136,7 +137,7 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         guard error == nil else {
-            logger.info("didDiscoverServices error: \(error!)")
+            logger.info("error: \(error!)")
             return
         }
         
@@ -156,7 +157,7 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         guard error == nil else {
-            logger.info("didDiscoverCharacteristics error: \(error!)")
+            logger.info("error: \(error!)")
             return
         }
         
@@ -176,21 +177,22 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
 
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         guard error == nil else {
-            logger.info("updatingValueFor characteristic \(characteristic): \(error!)")
+            logger.info("characteristic \(characteristic) error: \(error!)")
             return
         }
 
-        logger.info("didUpdateValueFor characteristic: \(characteristic)")
-
         guard let data = characteristic.value else {
-            logger.info("No data found in characteristic.")
+            logger.info("no data found in characteristic \(characteristic)")
             return
         }
 
         guard characteristic.uuid == ConcreteBTLEBroadcaster.sonarIdCharacteristicUUID else {
+            logger.info("characteristic \(characteristic) does not have correct UUID")
             return
         }
 
+        logger.info("characteristic: \(characteristic)")
+        
         let sonarId = UUID(uuidString: CBUUID(data: data).uuidString)!
         delegate?.btleListener(self, didFindSonarId: sonarId, forPeripheral: peripheral)
     }
