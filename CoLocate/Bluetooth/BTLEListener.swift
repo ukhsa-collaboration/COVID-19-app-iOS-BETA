@@ -85,8 +85,8 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
 
         if peripherals[peripheral.identifier] == nil {
             peripherals[peripheral.identifier] = peripheral
+            central.connect(peripheral)
         }
-        central.connect(peripheral)
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
