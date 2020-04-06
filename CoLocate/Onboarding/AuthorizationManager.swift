@@ -9,16 +9,10 @@
 import CoreBluetooth
 import Foundation
 
-class AuthorizationManager {
-
-    enum Status {
-        // Purposefully not handling the denied case for now
-        // since we don't have any UI for handling when a user
-        // disables bluetooth/notifications after allowing it
-        // initially.
-        case notDetermined, allowed, denied
-    }
-
+class AuthorizationManager: AuthorizationManaging {
+    
+    typealias Status = AuthorizationStatus
+    
     var bluetooth: Status {
         if #available(iOS 13.1, *) {
             switch CBManager.authorization {
