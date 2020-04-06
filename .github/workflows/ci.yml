@@ -36,7 +36,7 @@ jobs:
         run: xcodebuild -showsdks
 
       - name: Setup Build Configuration
-        run: ./bin/setup-build-config
+        run: cp Development.xcconfig.sample Development.xcconfig
 
       - name: Run Build
         env:
@@ -59,7 +59,7 @@ jobs:
         run: xcodebuild -scheme CoLocateInternal -showdestinations
 
       - name: Setup Build Configuration
-        run: ./bin/setup-build-config
+        run: cp Development.xcconfig.sample Development.xcconfig
 
       - name: Run Test
         run: >

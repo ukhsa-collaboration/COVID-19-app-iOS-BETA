@@ -334,7 +334,6 @@
 		F67A2294242AC188002254B6 /* RegistrationViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewControllerTests.swift; sourceTree = "<group>"; };
 		F68BFBF6242ACD17008EE68F /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		F6A309D024298A5800865942 /* Development.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
-		F6CA2816242E416C00F8DC55 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		F6CA2818242E41F700F8DC55 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F6CC2CA8242BC7FC0079432B /* RemoteNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteNotificationManager.swift; sourceTree = "<group>"; };
 		F6CC2CAB242BCD0D0079432B /* RemoteNotificationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteNotificationManagerTests.swift; sourceTree = "<group>"; };
@@ -585,7 +584,6 @@
 				F6CA2818242E41F700F8DC55 /* README.md */,
 				F78CEB63242B809B002254AD /* Firebase */,
 				F6A309D024298A5800865942 /* Development.xcconfig */,
-				F6CA2816242E416C00F8DC55 /* Release.xcconfig */,
 				6FC63C2F241641B8007C8BF3 /* CoLocate */,
 				214209C02422276800C7BFF3 /* CoLocateTests */,
 				895D9DDF2437383300573D4D /* CoLocateUITests */,
@@ -1301,7 +1299,7 @@
 		};
 		6FC63C41241641BA007C8BF3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F6CA2816242E416C00F8DC55 /* Release.xcconfig */;
+			baseConfigurationReference = F6A309D024298A5800865942 /* Development.xcconfig */;
 			buildSettings = {
 			};
 			name = Release;
