@@ -121,7 +121,9 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
         
         if delegate?.btleListener(self, shouldReadRSSIFor: peripheral) ?? false {
             Timer.scheduledTimer(withTimeInterval: rssiSamplingInterval, repeats: false) { timer in
-                peripheral.readRSSI()
+                if peripheral.state == .connected {
+                    peripheral.readRSSI()
+                }
             }
         }
     }
