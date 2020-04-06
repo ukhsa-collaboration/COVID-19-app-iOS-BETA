@@ -149,6 +149,8 @@
 		898FE859243B4FE300210775 /* AuthorizationManaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898FE858243B4FE300210775 /* AuthorizationManaging.swift */; };
 		898FE85A243B4FE300210775 /* AuthorizationManaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898FE858243B4FE300210775 /* AuthorizationManaging.swift */; };
 		898FE85E243B586E00210775 /* PrivacyViewControllerInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898FE85D243B586E00210775 /* PrivacyViewControllerInteractorTests.swift */; };
+		898FE860243B5AF700210775 /* UITestScreenMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898FE85F243B5AF700210775 /* UITestScreenMaker.swift */; };
+		898FE861243B5AF700210775 /* UITestScreenMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898FE85F243B5AF700210775 /* UITestScreenMaker.swift */; };
 		89BC79EB2434E047002050F8 /* LogsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BC79EA2434E047002050F8 /* LogsViewController.swift */; };
 		89F06B2C2434A2C00074C612 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 89F06B2B2434A2C00074C612 /* Logging */; };
 		89F06B2F2434A62C0074C612 /* LoggingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F06B2E2434A62C0074C612 /* LoggingManager.swift */; };
@@ -305,6 +307,7 @@
 		898FE856243B4D7A00210775 /* XCUIElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCUIElement.swift; sourceTree = "<group>"; };
 		898FE858243B4FE300210775 /* AuthorizationManaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationManaging.swift; sourceTree = "<group>"; };
 		898FE85D243B586E00210775 /* PrivacyViewControllerInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyViewControllerInteractorTests.swift; sourceTree = "<group>"; };
+		898FE85F243B5AF700210775 /* UITestScreenMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestScreenMaker.swift; sourceTree = "<group>"; };
 		89BC79EA2434E047002050F8 /* LogsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogsViewController.swift; sourceTree = "<group>"; };
 		89F06B2E2434A62C0074C612 /* LoggingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingManager.swift; sourceTree = "<group>"; };
 		89F06B302434AABE0074C612 /* NoOpLogHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoOpLogHandler.swift; sourceTree = "<group>"; };
@@ -690,6 +693,7 @@
 				895D9E4D24374EFA00573D4D /* AppRouter.swift */,
 				891E16A3243782D000281821 /* UITestResponder.swift */,
 				89074B8424378A0D00D67777 /* UITestPayload.swift */,
+				898FE85F243B5AF700210775 /* UITestScreenMaker.swift */,
 			);
 			path = Routing;
 			sourceTree = "<group>";
@@ -1130,6 +1134,7 @@
 				214209D2242399CF00C7BFF3 /* URLSession.swift in Sources */,
 				89074B83243788AE00D67777 /* UITestResponder.swift in Sources */,
 				F63279252435203600CF7A42 /* DispatchQueue+Testable.swift in Sources */,
+				898FE860243B5AF700210775 /* UITestScreenMaker.swift in Sources */,
 				214209BA242216B700C7BFF3 /* Persistence.swift in Sources */,
 				213C806C241A56430020EFA5 /* PermissionsViewController.swift in Sources */,
 				F636453B243687DE0014FD54 /* PermissionsDeniedViewController.swift in Sources */,
@@ -1207,6 +1212,7 @@
 				895D9E122437425600573D4D /* Persistence.swift in Sources */,
 				895D9E132437425600573D4D /* PermissionsViewController.swift in Sources */,
 				895D9E142437425600573D4D /* PermissionsDeniedViewController.swift in Sources */,
+				898FE861243B5AF700210775 /* UITestScreenMaker.swift in Sources */,
 				898FE85A243B4FE300210775 /* AuthorizationManaging.swift in Sources */,
 				895D9E152437425600573D4D /* LoggingManager.swift in Sources */,
 				895D9E162437425600573D4D /* DebugViewController.swift in Sources */,

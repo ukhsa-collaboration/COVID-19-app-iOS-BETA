@@ -22,7 +22,7 @@ enum UITestResponder {
         UIView.setAnimationsEnabled(false)
         
         let window = UIWindow(frame: UIScreen.main.bounds)
-        let router = AppRouter(window: window)
+        let router = AppRouter(window: window, screenMaker: UITestScreenMaker())
         router.route(to: payload.screen)
         window.makeKeyAndVisible()
         return window

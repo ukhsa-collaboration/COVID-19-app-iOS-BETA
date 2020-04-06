@@ -9,27 +9,22 @@
 import Foundation
 import UIKit
 
+protocol ScreenMaking {
+    func makeViewController(for screen: Screen) -> UIViewController
+}
+
 class AppRouter {
     
     private let window: UIWindow
+    private let screenMaker: ScreenMaking
     
-    init(window: UIWindow) {
+    init(window: UIWindow, screenMaker: ScreenMaking) {
         self.window = window
+        self.screenMaker = screenMaker
     }
     
     func route(to screen: Screen) {
-        window.rootViewController = viewController(for: screen)
+        window.rootViewController = screenMaker.makeViewController(for: screen)
     }
-    
-    private func viewController(for screen: Screen) -> UIViewController {
-        switch screen {
-        case .potential:
-            let viewController = UIViewController()
-            viewController.title = "Potential"
-            return UINavigationController(rootViewController: viewController)
-        case .onboarding:
-            return OnboardingViewController.instantiate()
-        }
-    }
-    
+        
 }
