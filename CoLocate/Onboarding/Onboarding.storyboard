@@ -154,6 +154,7 @@
                                                             </label>
                                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Vtg-pY-JBT">
                                                                 <rect key="frame" x="231" y="9.5" width="51" height="31"/>
+                                                                <accessibility key="accessibilityConfiguration" label="Allow Data Sharing"/>
                                                                 <connections>
                                                                     <action selector="allowDataSharingChanged:" destination="asv-dx-knf" eventType="valueChanged" id="rQn-b2-czn"/>
                                                                 </connections>
