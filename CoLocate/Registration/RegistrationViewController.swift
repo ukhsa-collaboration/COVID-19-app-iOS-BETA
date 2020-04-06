@@ -36,6 +36,8 @@ class RegistrationViewController: UIViewController, Storyboarded {
 
         attempt = registrationService.register { [weak self] result in
             guard let self = self else { return }
+            
+            self.attempt = nil
 
             if case .failure(let error) = result {
                 logger.error("Unable to register: \(error)")
@@ -45,9 +47,11 @@ class RegistrationViewController: UIViewController, Storyboarded {
         }
         
         mainQueue.asyncAfter(deadline: .now() + maxRegistrationSecs) { [weak self] in
+            guard let self = self, let attempt = self.attempt else { return }
+
             logger.error("Registration attempt timed out after \(maxRegistrationSecs) seconds")
-            guard let self = self else { return }
-            self.attempt?.cancel()
+            attempt.cancel()
+            self.attempt = nil
             self.showFailureAlert()
             self.enableRetry()
         }
