@@ -141,7 +141,7 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
         }
         
         guard let services = peripheral.services, services.count > 0 else {
-            logger.info("No services discovered for peripheral \(peripheral.identifier) (\(peripheral.name ?? "unknown")")
+            logger.info("No services discovered for peripheral \(peripheral.identifier) (\(peripheral.name ?? "unknown"))")
             return
         }
         
