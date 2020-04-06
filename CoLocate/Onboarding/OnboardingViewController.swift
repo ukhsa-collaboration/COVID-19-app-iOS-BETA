@@ -11,7 +11,7 @@ import UIKit
 class OnboardingViewController: UINavigationController, Storyboarded {
     static let storyboardName = "Onboarding"
 
-    var onboardingCoordinator = OnboardingCoordinator()
+    lazy var onboardingCoordinator = OnboardingCoordinator()
     var uiQueue: TestableQueue = DispatchQueue.main
 
     var rootViewController: UIViewController! {
