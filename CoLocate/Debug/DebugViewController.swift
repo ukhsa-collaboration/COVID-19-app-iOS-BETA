@@ -14,6 +14,7 @@ class DebugViewController: UITableViewController, Storyboarded {
 
     @IBOutlet weak var allowedDataSharingSwitch: UISwitch!
     @IBOutlet weak var interceptRequestsSwitch: UISwitch!
+    @IBOutlet weak var versionBuildLabel: UILabel!
 
     let persistence = Persistence.shared
     let contactEventRecorder = PlistContactEventRecorder.shared
@@ -28,7 +29,7 @@ class DebugViewController: UITableViewController, Storyboarded {
         
         let build = Bundle.main.infoDictionary?["CFBundleVersion"] ?? "unknown"
         let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] ?? "unknown"
-        (tableView.tableFooterView as! UILabel).text = "Version \(version) (build \(build))"
+        versionBuildLabel.text = "Version \(version) (build \(build))"
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -85,6 +86,18 @@ class DebugViewController: UITableViewController, Storyboarded {
 
         case (3, 0):
             break
+
+        case (3, 1):
+            #if DEBUG
+            let info = Bundle(for: AppDelegate.self).infoDictionary!
+            let id = info["DEBUG_REGISTRATION_ID"] as! String
+            let secretKey = info["DEBUG_REGISTRATION_SECRET_KEY"] as! String
+            persistence.registration = Registration(id: UUID(uuidString: id)!, secretKey: secretKey.data(using: .utf8)!)
+            #else
+            let alert = UIAlertController(title: "Unavailable", message: "This dangerous action is only available in debug builds.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+            present(alert, animated: true, completion: nil)
+            #endif
 
         case (4, 0):
             do {

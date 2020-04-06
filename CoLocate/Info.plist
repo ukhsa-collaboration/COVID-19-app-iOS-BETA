@@ -4,6 +4,10 @@
 <dict>
 	<key>API_ENDPOINT</key>
 	<string>$(API_ENDPOINT)</string>
+	<key>DEBUG_REGISTRATION_ID</key>
+	<string>$(DEBUG_REGISTRATION_ID)</string>
+	<key>DEBUG_REGISTRATION_SECRET_KEY</key>
+	<string>$(DEBUG_REGISTRATION_SECRET_KEY)</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>

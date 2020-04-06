@@ -51,6 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let initialViewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = initialViewController
+        window?.makeKeyAndVisible()
 
         if let registration = persistence.registration {
             bluetoothNursery.startBroadcaster(stateDelegate: nil, sonarId: registration.id)
@@ -61,7 +62,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             onboardingViewController.rootViewController = initialViewController
         }
 
-        window?.makeKeyAndVisible()
         return true
     }
 

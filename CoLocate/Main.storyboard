@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -133,6 +134,7 @@
                             <constraint firstItem="eJi-tL-WhS" firstAttribute="top" secondItem="Oo2-Pv-CiL" secondAttribute="top" id="pSD-PM-yA8"/>
                             <constraint firstItem="c9q-u4-AqG" firstAttribute="width" secondItem="Oo2-Pv-CiL" secondAttribute="width" id="qhg-yv-fjk"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="KDy-H3-Z6H"/>
                     </view>
                     <navigationItem key="navigationItem" id="k8f-bF-CaC"/>
                     <connections>
@@ -150,10 +152,10 @@
             </objects>
             <point key="canvasLocation" x="4339.130434782609" y="541.07142857142856"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Main Navigation Controller-->
         <scene sceneID="tdf-Fg-Zgv">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="91c-Ea-EHn" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MainNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="91c-Ea-EHn" customClass="MainNavigationController" customModule="CoLocate" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="huP-ek-aOl">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
