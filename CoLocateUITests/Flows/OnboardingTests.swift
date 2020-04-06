@@ -12,10 +12,6 @@ class OnboardingTests: ScreenTestCase {
     
     override var screen: Screen { .onboarding }
     
-    func testBasics() {
-        XCTAssert(startButton.exists)
-    }
-    
     func testAuthorizingEverything() {
         startButton.tap()
         XCTAssert(permissionsScreenTitle.exists)
