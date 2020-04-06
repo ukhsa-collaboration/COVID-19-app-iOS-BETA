@@ -10,8 +10,7 @@ import UIKit
 @IBDesignable
 class LogoStrapline: UIView {
     
-    @IBOutlet var containerView: UIView!
-    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet private var titleLabel: UILabel!
     
     override var intrinsicContentSize: CGSize {
         return CGSize(width: UIView.noIntrinsicMetric, height: 64.0)
@@ -44,9 +43,14 @@ class LogoStrapline: UIView {
         view.backgroundColor = UIColor(named: "NHS Blue")
         titleLabel.textColor = UIColor(named: "NHS White")
         titleLabel.text = "Coronavirus tracing"
-        
+
         view.frame = self.bounds
         self.addSubview(view)
+
+        let element = UIAccessibilityElement(accessibilityContainer: self)
+        element.accessibilityLabel = "NHS Coronavirus tracing"
+        element.accessibilityFrameInContainerSpace = frame
+        accessibilityElements = [element]
     }
     
     func loadViewFromNib() -> UIView? {

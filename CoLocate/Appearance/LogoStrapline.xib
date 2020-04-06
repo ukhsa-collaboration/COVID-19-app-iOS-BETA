@@ -10,7 +10,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LogoStrapline" customModule="CoLocate" customModuleProvider="target">
             <connections>
-                <outlet property="containerView" destination="qbe-vc-ddA" id="d6f-H7-SgF"/>
                 <outlet property="titleLabel" destination="k3q-if-bTc" id="prg-7Z-7RP"/>
             </connections>
         </placeholder>

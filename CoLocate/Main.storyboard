@@ -117,10 +117,11 @@
                                     </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="c9q-u4-AqG" secondAttribute="bottom" id="0ce-r8-kFM"/>
-                                    <constraint firstItem="c9q-u4-AqG" firstAttribute="leading" secondItem="eJi-tL-WhS" secondAttribute="leading" id="4ic-OV-C1b"/>
-                                    <constraint firstAttribute="trailing" secondItem="c9q-u4-AqG" secondAttribute="trailing" id="89g-NT-oL8"/>
-                                    <constraint firstItem="c9q-u4-AqG" firstAttribute="top" secondItem="eJi-tL-WhS" secondAttribute="top" id="zej-vE-hhi"/>
+                                    <constraint firstItem="LbS-UG-cPb" firstAttribute="bottom" secondItem="c9q-u4-AqG" secondAttribute="bottom" id="0ce-r8-kFM"/>
+                                    <constraint firstItem="c9q-u4-AqG" firstAttribute="leading" secondItem="LbS-UG-cPb" secondAttribute="leading" id="4ic-OV-C1b"/>
+                                    <constraint firstItem="LbS-UG-cPb" firstAttribute="trailing" secondItem="c9q-u4-AqG" secondAttribute="trailing" id="89g-NT-oL8"/>
+                                    <constraint firstItem="c9q-u4-AqG" firstAttribute="width" secondItem="gx0-NI-olA" secondAttribute="width" id="xuE-rP-pnj"/>
+                                    <constraint firstItem="c9q-u4-AqG" firstAttribute="top" secondItem="LbS-UG-cPb" secondAttribute="top" id="zej-vE-hhi"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="LbS-UG-cPb"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="gx0-NI-olA"/>
@@ -132,7 +133,6 @@
                             <constraint firstAttribute="trailing" secondItem="eJi-tL-WhS" secondAttribute="trailing" id="ABU-fd-w4Y"/>
                             <constraint firstAttribute="bottom" secondItem="eJi-tL-WhS" secondAttribute="bottom" id="Mar-fN-Zpk"/>
                             <constraint firstItem="eJi-tL-WhS" firstAttribute="top" secondItem="Oo2-Pv-CiL" secondAttribute="top" id="pSD-PM-yA8"/>
-                            <constraint firstItem="c9q-u4-AqG" firstAttribute="width" secondItem="Oo2-Pv-CiL" secondAttribute="width" id="qhg-yv-fjk"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="KDy-H3-Z6H"/>
                     </view>
