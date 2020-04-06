@@ -39,8 +39,6 @@ struct MutableContactEvent {
 
 @objc class ContactEventCollector: NSObject, BTLEListenerDelegate {
     
-    static let shared = ContactEventCollector()
-    
     @objc dynamic var _connectedPeripheralCount: Int = 0
     
     var connectedPeripherals: [UUID: MutableContactEvent] = [:] {
@@ -51,8 +49,7 @@ struct MutableContactEvent {
     
     let contactEventRecorder: ContactEventRecorder
     
-    // TODO: Should be private, but have to open it for tests. How do we do DI?
-    init(contactEventRecorder: ContactEventRecorder = PlistContactEventRecorder.shared) {
+    init(contactEventRecorder: ContactEventRecorder) {
         self.contactEventRecorder = contactEventRecorder
     }
     

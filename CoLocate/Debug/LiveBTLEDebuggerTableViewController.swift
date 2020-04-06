@@ -9,12 +9,10 @@
 import UIKit
 
 class LiveBTLEDebuggerTableViewController: UITableViewController {
-    
-
 
     var persistence: Persistence = Persistence.shared
     
-    @objc var collector: ContactEventCollector = ContactEventCollector.shared
+    @objc var collector: ContactEventCollector = (UIApplication.shared.delegate as! AppDelegate).bluetoothNursery.contactEventCollector
     
     var observation: NSKeyValueObservation?
     
