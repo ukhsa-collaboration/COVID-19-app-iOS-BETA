@@ -22,3 +22,12 @@ extension Storyboarded where Self: UIViewController {
     }
 }
 
+extension Storyboarded {
+    
+    static func instantiate(prepare: (Self) -> Void) -> Self {
+        let instance = self.instantiate()
+        prepare(instance)
+        return instance
+    }
+    
+}
