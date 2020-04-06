@@ -6,7 +6,7 @@
 //  Copyright © 2020 NHSX. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct RequestFactory {
 
@@ -15,6 +15,8 @@ struct RequestFactory {
     }
     
     static func confirmRegistrationRequest(activationCode: String, pushToken: String) -> ConfirmRegistrationRequest {
-        return ConfirmRegistrationRequest(activationCode: activationCode, pushToken: pushToken)
+        let deviceModel = UIDevice.current.modelName
+        let deviceOSVersion = UIDevice.current.systemVersion
+        return ConfirmRegistrationRequest(activationCode: activationCode, pushToken: pushToken, deviceModel: deviceModel, deviceOSVersion: deviceOSVersion)
     }
 }
