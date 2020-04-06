@@ -12,9 +12,12 @@ import Logging
 class RegistrationViewController: UIViewController, Storyboarded {
     static let storyboardName = "Registration"
     
-    @IBOutlet private var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet var registerButton: PrimaryButton!
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
 
     var registrationService: RegistrationService = ConcreteRegistrationService()
+    var mainQueue: AsyncAfterable = DispatchQueue.main
+    private var attempt: Cancelable?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,24 +32,39 @@ class RegistrationViewController: UIViewController, Storyboarded {
     @IBAction func didTapRegister(_ sender: UIButton) {
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
-        sender.isEnabled = false
+        registerButton.isEnabled = false
 
-        registrationService.register { [weak self] result in
+        attempt = registrationService.register { [weak self] result in
             guard let self = self else { return }
-
-            self.activityIndicator.stopAnimating()
 
             if case .failure(let error) = result {
                 logger.error("Unable to register: \(error)")
-                let alert = UIAlertController(title: "Something unexpected happened".localized, message: "Sorry, we could not enroll you in CoLocate at this time. Please try again in a minute.".localized, preferredStyle: .alert)
-
-                alert.addAction(UIAlertAction(title: "OK", style: .default))
-                self.present(alert, animated: true)
-                
-                sender.isEnabled = true
+                self.showFailureAlert()
+                self.enableRetry()
             }
         }
+        
+        mainQueue.asyncAfter(deadline: .now() + maxRegistrationSecs) { [weak self] in
+            logger.error("Registration attempt timed out after \(maxRegistrationSecs) seconds")
+            guard let self = self else { return }
+            self.attempt?.cancel()
+            self.showFailureAlert()
+            self.enableRetry()
+        }
+    }
+    
+    private func showFailureAlert() {
+        let alert = UIAlertController(title: "Something unexpected happened".localized, message: "Sorry, we could not enroll you in CoLocate at this time. Please try again in a minute.".localized, preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        self.present(alert, animated: true)
+    }
+    
+    private func enableRetry() {
+        activityIndicator.stopAnimating()
+        registerButton.isEnabled = true
     }
 }
 
+fileprivate let maxRegistrationSecs = 30.0
 fileprivate let logger = Logger(label: "ViewController")

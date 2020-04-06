@@ -12,7 +12,13 @@ import Foundation
 class RegistrationServiceDouble: RegistrationService {
     var completionHandler: ((Result<(), Error>) -> Void)?
     
-    func register(completionHandler: @escaping ((Result<(), Error>) -> Void)) {
+    func register(completionHandler: @escaping ((Result<(), Error>) -> Void)) -> Cancelable {
         self.completionHandler = completionHandler
+        return CancelableDouble()
+    }
+}
+
+class CancelableDouble: Cancelable {
+    func cancel() {
     }
 }

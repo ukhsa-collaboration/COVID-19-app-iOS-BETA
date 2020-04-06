@@ -19,6 +19,9 @@
 		098ED48A242E89D80029B729 /* RegistrationServiceDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED489242E89D80029B729 /* RegistrationServiceDouble.swift */; };
 		098ED48C242E8B290029B729 /* PersistenceDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED48B242E8B290029B729 /* PersistenceDouble.swift */; };
 		098ED490242E9BE20029B729 /* DebugSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED48F242E9BE20029B729 /* DebugSetting.swift */; };
+		09B27BD8243BA3F200DAEA02 /* DispatchQueue+AsyncAfterable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B27BD7243BA3F200DAEA02 /* DispatchQueue+AsyncAfterable.swift */; };
+		09B27BD9243BA52400DAEA02 /* DispatchQueue+AsyncAfterable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B27BD7243BA3F200DAEA02 /* DispatchQueue+AsyncAfterable.swift */; };
+		09B27BDB243BA5C800DAEA02 /* AsyncAfterableDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B27BDA243BA5C800DAEA02 /* AsyncAfterableDouble.swift */; };
 		09D1CD4B242C284000B1A167 /* PotentialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D1CD49242C284000B1A167 /* PotentialViewController.swift */; };
 		09D1CD50242C3A9300B1A167 /* Potential.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09D1CD4F242C3A9300B1A167 /* Potential.storyboard */; };
 		2115C3E624360427009C0F5B /* DebuggerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2115C3E524360427009C0F5B /* DebuggerTableViewCell.swift */; };
@@ -246,6 +249,8 @@
 		098ED48B242E8B290029B729 /* PersistenceDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceDouble.swift; sourceTree = "<group>"; };
 		098ED48D242E9AF00029B729 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		098ED48F242E9BE20029B729 /* DebugSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugSetting.swift; sourceTree = "<group>"; };
+		09B27BD7243BA3F200DAEA02 /* DispatchQueue+AsyncAfterable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+AsyncAfterable.swift"; sourceTree = "<group>"; };
+		09B27BDA243BA5C800DAEA02 /* AsyncAfterableDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncAfterableDouble.swift; sourceTree = "<group>"; };
 		09D1CD49242C284000B1A167 /* PotentialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotentialViewController.swift; sourceTree = "<group>"; };
 		09D1CD4F242C3A9300B1A167 /* Potential.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Potential.storyboard; sourceTree = "<group>"; };
 		2115C3E524360427009C0F5B /* DebuggerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebuggerTableViewCell.swift; sourceTree = "<group>"; };
@@ -465,6 +470,7 @@
 				F632792224351C8400CF7A42 /* OnboardingCoordinatorDouble.swift */,
 				F63279262435219A00CF7A42 /* QueueDouble.swift */,
 				090B1870243552C300870B5D /* UserNotificationCenterDouble.swift */,
+				09B27BDA243BA5C800DAEA02 /* AsyncAfterableDouble.swift */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -842,6 +848,7 @@
 				F758B8BF242CB98C003AE16D /* UIViewController+Storyboarded.swift */,
 				F63279242435203600CF7A42 /* DispatchQueue+Testable.swift */,
 				217A23BD243B34E8001B8236 /* UIDevice+ModelName.swift */,
+				09B27BD7243BA3F200DAEA02 /* DispatchQueue+AsyncAfterable.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1068,6 +1075,7 @@
 				89896E622435F37300F949EA /* ProjectTests.swift in Sources */,
 				F6F05A2A2433C6CC00FF4B72 /* AuthManagerDouble.swift in Sources */,
 				F6F05A242433BEC000FF4B72 /* OnboardingCoordinatorTests.swift in Sources */,
+				09B27BDB243BA5C800DAEA02 /* AsyncAfterableDouble.swift in Sources */,
 				214209D924262B7500C7BFF3 /* SessionHelpers.swift in Sources */,
 				F600A60424297C010038DF57 /* RegistrationRequestTests.swift in Sources */,
 				098ED488242E89930029B729 /* PushNotificationManagerDouble.swift in Sources */,
@@ -1092,6 +1100,7 @@
 			files = (
 				21D93C302420C26900C1FA9B /* PrimaryButton.swift in Sources */,
 				F78CEB47242B7752002254AD /* String+localized.swift in Sources */,
+				09B27BD8243BA3F200DAEA02 /* DispatchQueue+AsyncAfterable.swift in Sources */,
 				F6F05A36243436D200FF4B72 /* PrivacyViewController.swift in Sources */,
 				F6F05A282433C55300FF4B72 /* AuthorizationManager.swift in Sources */,
 				89F06B352434AF9D0074C612 /* LogEvent.swift in Sources */,
@@ -1212,6 +1221,7 @@
 				898FE85A243B4FE300210775 /* AuthorizationManaging.swift in Sources */,
 				895D9E152437425600573D4D /* LoggingManager.swift in Sources */,
 				895D9E162437425600573D4D /* DebugViewController.swift in Sources */,
+				09B27BD9243BA52400DAEA02 /* DispatchQueue+AsyncAfterable.swift in Sources */,
 				895D9E172437425600573D4D /* NoOpLogHandler.swift in Sources */,
 				895D9E182437425600573D4D /* PotentialViewController.swift in Sources */,
 				895D9E192437425600573D4D /* OnboardingViewController.swift in Sources */,

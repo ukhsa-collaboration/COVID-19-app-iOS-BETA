@@ -86,6 +86,7 @@
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="SjM-mR-XNC" id="WxU-PJ-YrL"/>
+                        <outlet property="registerButton" destination="6BR-Fy-Tcr" id="Xio-9G-ocw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AkI-6O-rJW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

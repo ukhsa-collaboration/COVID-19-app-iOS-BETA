@@ -10,7 +10,11 @@ import Foundation
 import Logging
 
 protocol RegistrationService {
-    func register(completionHandler: @escaping ((Result<Void, Error>) -> Void))
+    func register(completionHandler: @escaping ((Result<Void, Error>) -> Void)) -> Cancelable
+}
+
+protocol Cancelable {
+    func cancel()
 }
 
 class ConcreteRegistrationService: RegistrationService {
@@ -43,7 +47,7 @@ class ConcreteRegistrationService: RegistrationService {
         )
     }
     
-    func register(completionHandler: @escaping ((Result<Void, Error>) -> Void)) {
+    func register(completionHandler: @escaping ((Result<Void, Error>) -> Void)) -> Cancelable {
         let attempt = RegistrationAttempt(
             session: session,
             persistence: persistence,
@@ -52,16 +56,18 @@ class ConcreteRegistrationService: RegistrationService {
             completionHandler: completionHandler
         )
         attempt.start()
+        return attempt
     }
 }
 
-fileprivate class RegistrationAttempt {
-    let session: Session
-    let persistence: Persistence
-    let remoteNotificationDispatcher: RemoteNotificationDispatcher
-    let notificationCenter: NotificationCenter
-    var registrationCompletionHandler: ((Result<Void, Error>) -> Void)?
-    var remoteNotificationCompletionHandler: RemoteNotificationCompletionHandler?
+fileprivate class RegistrationAttempt: Cancelable {
+    private let session: Session
+    private let persistence: Persistence
+    private let remoteNotificationDispatcher: RemoteNotificationDispatcher
+    private let notificationCenter: NotificationCenter
+    private var registrationCompletionHandler: ((Result<Void, Error>) -> Void)?
+    private var remoteNotificationCompletionHandler: RemoteNotificationCompletionHandler?
+    private var canceled = false
 
     init(
         session: Session,
@@ -79,6 +85,11 @@ fileprivate class RegistrationAttempt {
 
     deinit {
         notificationCenter.removeObserver(self)
+    }
+    
+    func cancel() {
+        canceled = true
+        cleanup()
     }
     
     func start() {
@@ -104,6 +115,10 @@ fileprivate class RegistrationAttempt {
     }
     
     private func requestRegistration(_ pushToken: String) {
+        if canceled {
+            return
+        }
+        
         let request = RequestFactory.registrationRequest(pushToken: pushToken)
 
         session.execute(request, queue: .main) { result in
@@ -122,8 +137,9 @@ fileprivate class RegistrationAttempt {
     
     private func confirmRegistration(activationCode: String) {
         let request = RequestFactory.confirmRegistrationRequest(activationCode: activationCode, pushToken: remoteNotificationDispatcher.pushToken!)
+        
         session.execute(request, queue: .main) { [weak self] result in
-            guard let self = self else { return }
+            guard let self = self, !self.canceled else { return }
 
             switch result {
             case .success(let response):
