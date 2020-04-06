@@ -54,7 +54,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         window?.makeKeyAndVisible()
 
         if let registration = persistence.registration {
-            bluetoothNursery.startBroadcaster(stateDelegate: nil, sonarId: registration.id)
+            bluetoothNursery.startBroadcaster(stateDelegate: nil)
+            bluetoothNursery.broadcaster?.sonarId = registration.id
             bluetoothNursery.startListener(stateDelegate: nil)
             startMainApp(with: registration)
         } else {
@@ -163,7 +164,8 @@ extension AppDelegate: PersistenceDelegate {
 
     func persistence(_ persistence: Persistence, didUpdateRegistration registration: Registration) {
         onboardingViewController.updateState()
-        bluetoothNursery.startBroadcaster(stateDelegate: nil, sonarId: registration.id)
+        bluetoothNursery.startBroadcaster(stateDelegate: nil)
+        bluetoothNursery.broadcaster?.sonarId = registration.id
 
         // TODO: This is probably not the right place to put this,
         // but it'll do until we remove the old onboarding flow.

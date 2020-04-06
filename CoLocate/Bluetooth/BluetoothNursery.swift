@@ -37,8 +37,8 @@ class BluetoothNursery {
         (listener as? ConcreteBTLEListener)?.delegate = contactEventCollector
     }
     
-    func startBroadcaster(stateDelegate: BTLEBroadcasterStateDelegate?, sonarId: UUID) {
-        broadcaster = ConcreteBTLEBroadcaster(sonarId: sonarId)
+    func startBroadcaster(stateDelegate: BTLEBroadcasterStateDelegate?) {
+        broadcaster = ConcreteBTLEBroadcaster()
         peripheral = CBPeripheralManager(delegate: broadcaster as! ConcreteBTLEBroadcaster, queue: nil, options: [
             CBPeripheralManagerOptionRestoreIdentifierKey: BluetoothNursery.peripheralRestoreIdentifier
         ])

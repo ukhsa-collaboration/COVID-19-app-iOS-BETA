@@ -16,6 +16,7 @@ protocol BTLEBroadcasterStateDelegate {
 }
 
 protocol BTLEBroadcaster {
+    var sonarId: UUID? { get set }
 }
 
 class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDelegate {
@@ -25,14 +26,14 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
 
     let logger = Logger(label: "BTLE")
     
-    let sonarId: CBUUID
-    
+    var peripheral: CBPeripheralManager?
+    var sonarId: UUID? {
+        didSet {
+            startAdvertising(peripheral: peripheral, sonarId: sonarId)
+        }
+    }
     var sonarIdService: CBService?
     var stateDelegate: BTLEBroadcasterStateDelegate?
-    
-    init(sonarId: UUID) {
-        self.sonarId = CBUUID(nsuuid: sonarId)
-    }
     
     // MARK: CBPeripheralManagerDelegate
 
@@ -44,16 +45,24 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
         switch (peripheral.state) {
             
         case .poweredOn:
-            let service = CBMutableService(type: ConcreteBTLEBroadcaster.sonarServiceUUID, primary: true)
-
-            let identityCharacteristic = CBMutableCharacteristic(type: ConcreteBTLEBroadcaster.sonarIdCharacteristicUUID, properties: CBCharacteristicProperties([.read]), value: sonarId.data, permissions: .readable)
-
-            service.characteristics = [identityCharacteristic]
-            peripheral.add(service)
+            startAdvertising(peripheral: peripheral, sonarId: sonarId)
             
         default:
             break
         }
+    }
+    
+    private func startAdvertising(peripheral: CBPeripheralManager?, sonarId: UUID?) {
+        guard let peripheral = peripheral, let sonarId = sonarId else {
+            return
+        }
+        
+        let service = CBMutableService(type: ConcreteBTLEBroadcaster.sonarServiceUUID, primary: true)
+
+        let identityCharacteristic = CBMutableCharacteristic(type: ConcreteBTLEBroadcaster.sonarIdCharacteristicUUID, properties: CBCharacteristicProperties([.read]), value: CBUUID(nsuuid: sonarId).data, permissions: .readable)
+
+        service.characteristics = [identityCharacteristic]
+        peripheral.add(service)
     }
     
     func peripheralManager(_ peripheral: CBPeripheralManager, didAdd service: CBService, error: Error?) {
@@ -65,7 +74,7 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
         logger.info("\(service)")
         self.sonarIdService = service
         
-        logger.info("now advertising sonarId \(sonarId.uuidString)")
+        logger.info("now advertising sonarId \(sonarId?.uuidString ?? "unknown"))")
         
         peripheral.startAdvertising([
             CBAdvertisementDataLocalNameKey: "CoLocate",

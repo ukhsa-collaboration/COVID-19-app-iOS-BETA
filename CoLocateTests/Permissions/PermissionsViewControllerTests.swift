@@ -33,7 +33,7 @@ class PermissionsViewControllerTests: TestCase {
         // to requesting notification authorization.
         #else
         authManagerDouble.bluetooth = .allowed
-        vc.btleListener(DummyBTLEListener(), didUpdateState: .poweredOn)
+        vc.btleBroadcaster(DummyBTLEBroadcaster(), didUpdateState: .poweredOn)
         #endif
 
         XCTAssertNotNil(authManagerDouble.notificationsCompletion)
@@ -91,7 +91,7 @@ class PermissionsViewControllerTests: TestCase {
         // to requesting notification authorization.
         #else
         authManagerDouble.bluetooth = .allowed
-        vc.btleListener(DummyBTLEListener(), didUpdateState: .poweredOn)
+        vc.btleBroadcaster(DummyBTLEBroadcaster(), didUpdateState: .poweredOn)
         #endif
 
         XCTAssertNotNil(authManagerDouble.notificationsCompletion)
@@ -100,6 +100,10 @@ class PermissionsViewControllerTests: TestCase {
         XCTAssert(permissionsUnwinder.didUnwindFromPermissions)
     }
 
+}
+
+struct DummyBTLEBroadcaster: BTLEBroadcaster {
+    var sonarId: UUID?
 }
 
 class PermissionsUnwinder: UIViewController {
