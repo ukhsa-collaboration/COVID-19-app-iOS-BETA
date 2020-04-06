@@ -27,6 +27,8 @@ class AppRouter {
             let viewController = UIViewController()
             viewController.title = "Potential"
             return UINavigationController(rootViewController: viewController)
+        case .onboarding:
+            return OnboardingViewController.instantiate()
         }
     }
     

@@ -144,6 +144,7 @@
 		895D9E4F24374EFA00573D4D /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895D9E4D24374EFA00573D4D /* AppRouter.swift */; };
 		895D9E52243750EE00573D4D /* PotentialScreenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895D9E51243750EE00573D4D /* PotentialScreenTests.swift */; };
 		89896E622435F37300F949EA /* ProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89896E612435F37300F949EA /* ProjectTests.swift */; };
+		898FE854243B42E800210775 /* OnboardingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898FE853243B42E700210775 /* OnboardingTests.swift */; };
 		89BC79EB2434E047002050F8 /* LogsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BC79EA2434E047002050F8 /* LogsViewController.swift */; };
 		89F06B2C2434A2C00074C612 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 89F06B2B2434A2C00074C612 /* Logging */; };
 		89F06B2F2434A62C0074C612 /* LoggingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F06B2E2434A62C0074C612 /* LoggingManager.swift */; };
@@ -296,6 +297,7 @@
 		89896E5F2435F15C00F949EA /* CoLocate.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CoLocate.xcconfig; sourceTree = "<group>"; };
 		89896E612435F37300F949EA /* ProjectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectTests.swift; sourceTree = "<group>"; };
 		898BA15B2435E28E00EBD35D /* Project.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Project.xcconfig; sourceTree = "<group>"; };
+		898FE853243B42E700210775 /* OnboardingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingTests.swift; sourceTree = "<group>"; };
 		89BC79EA2434E047002050F8 /* LogsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogsViewController.swift; sourceTree = "<group>"; };
 		89F06B2E2434A62C0074C612 /* LoggingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingManager.swift; sourceTree = "<group>"; };
 		89F06B302434AABE0074C612 /* NoOpLogHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoOpLogHandler.swift; sourceTree = "<group>"; };
@@ -644,6 +646,7 @@
 			children = (
 				89074B8824378B5C00D67777 /* Utilities */,
 				895D9E50243750DB00573D4D /* Screens */,
+				898FE855243B42F400210775 /* Flows */,
 				895D9DE22437383300573D4D /* Info.plist */,
 				895D9DE82437384C00573D4D /* CoLocateUITests.xcconfig */,
 				895D9DE02437383300573D4D /* CoLocateUITests.swift */,
@@ -698,6 +701,14 @@
 				898BA15B2435E28E00EBD35D /* Project.xcconfig */,
 			);
 			path = Configurations;
+			sourceTree = "<group>";
+		};
+		898FE855243B42F400210775 /* Flows */ = {
+			isa = PBXGroup;
+			children = (
+				898FE853243B42E700210775 /* OnboardingTests.swift */,
+			);
+			path = Flows;
 			sourceTree = "<group>";
 		};
 		89F06B2D2434A5A50074C612 /* Logging */ = {
@@ -1121,6 +1132,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				898FE854243B42E800210775 /* OnboardingTests.swift in Sources */,
 				89074B8A24378B6E00D67777 /* ScreenTestCase.swift in Sources */,
 				895D9E52243750EE00573D4D /* PotentialScreenTests.swift in Sources */,
 				895D9DE12437383300573D4D /* CoLocateUITests.swift in Sources */,

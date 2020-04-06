@@ -10,4 +10,7 @@ import Foundation
 
 enum Screen: String, Codable {
     case potential
+    
+    // Flows
+    case onboarding
 }

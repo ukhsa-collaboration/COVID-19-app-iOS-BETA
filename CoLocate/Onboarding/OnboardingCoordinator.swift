@@ -15,8 +15,8 @@ class OnboardingCoordinator {
         case initial, permissions, permissionsDenied, registration
     }
 
-    let persistence: Persistence
-    let authorizationManager: AuthorizationManager
+    private let persistence: Persistence
+    private let authorizationManager: AuthorizationManager
 
     init(persistence: Persistence, authorizationManager: AuthorizationManager) {
         self.persistence = persistence
