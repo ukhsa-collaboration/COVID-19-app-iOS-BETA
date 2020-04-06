@@ -1,3 +1,0 @@
-#include "../../CoLocate.xcconfig"
-
-#include "CoLocateInternal.xcconfig"

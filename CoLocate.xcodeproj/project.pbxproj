@@ -284,12 +284,10 @@
 		6FC63C3C241641BA007C8BF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		89074B8424378A0D00D67777 /* UITestPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestPayload.swift; sourceTree = "<group>"; };
 		89074B8924378B6E00D67777 /* ScreenTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenTestCase.swift; sourceTree = "<group>"; };
-		890B41CE2437775700C02A2E /* InternalDevelopment.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = InternalDevelopment.xcconfig; sourceTree = "<group>"; };
-		890B41CF2437775F00C02A2E /* InternalRelease.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = InternalRelease.xcconfig; sourceTree = "<group>"; };
 		890B41D12437777C00C02A2E /* CoLocateInternal.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CoLocateInternal.xcconfig; sourceTree = "<group>"; };
 		891E16A3243782D000281821 /* UITestResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestResponder.swift; sourceTree = "<group>"; };
 		89388B8C2435E370009D60CF /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
-		89388B8E2435E673009D60CF /* ReleaseConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ReleaseConfig.xcconfig; sourceTree = "<group>"; };
+		89388B8E2435E673009D60CF /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		895D9DDE2437383300573D4D /* CoLocateUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoLocateUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		895D9DE02437383300573D4D /* CoLocateUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoLocateUITests.swift; sourceTree = "<group>"; };
 		895D9DE22437383300573D4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -677,8 +675,6 @@
 			isa = PBXGroup;
 			children = (
 				890B41D12437777C00C02A2E /* CoLocateInternal.xcconfig */,
-				890B41CE2437775700C02A2E /* InternalDevelopment.xcconfig */,
-				890B41CF2437775F00C02A2E /* InternalRelease.xcconfig */,
 				098ED48D242E9AF00029B729 /* Settings.bundle */,
 				895D9E472437459500573D4D /* AppIcon.xcassets */,
 			);
@@ -709,7 +705,7 @@
 			isa = PBXGroup;
 			children = (
 				89388B8C2435E370009D60CF /* Debug.xcconfig */,
-				89388B8E2435E673009D60CF /* ReleaseConfig.xcconfig */,
+				89388B8E2435E673009D60CF /* Release.xcconfig */,
 				898BA15B2435E28E00EBD35D /* Project.xcconfig */,
 			);
 			path = Configurations;
@@ -1287,7 +1283,7 @@
 		};
 		6FC63C3E241641BA007C8BF3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 89388B8E2435E673009D60CF /* ReleaseConfig.xcconfig */;
+			baseConfigurationReference = 89388B8E2435E673009D60CF /* Release.xcconfig */;
 			buildSettings = {
 			};
 			name = Release;
@@ -1322,14 +1318,14 @@
 		};
 		895D9E3F2437425600573D4D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 890B41CE2437775700C02A2E /* InternalDevelopment.xcconfig */;
+			baseConfigurationReference = 890B41D12437777C00C02A2E /* CoLocateInternal.xcconfig */;
 			buildSettings = {
 			};
 			name = Debug;
 		};
 		895D9E402437425600573D4D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 890B41CF2437775F00C02A2E /* InternalRelease.xcconfig */;
+			baseConfigurationReference = 890B41D12437777C00C02A2E /* CoLocateInternal.xcconfig */;
 			buildSettings = {
 			};
 			name = Release;
