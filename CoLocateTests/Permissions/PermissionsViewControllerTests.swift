@@ -32,7 +32,7 @@ class PermissionsViewControllerTests: TestCase {
         // We skip Bluetooth on the simulator and jump straight
         // to requesting notification authorization.
         #else
-        authManagerDouble._bluetooth = .allowed
+        authManagerDouble.bluetooth = .allowed
         vc.btleListener(DummyBTLEListener(), didUpdateState: .poweredOn)
         #endif
 
@@ -90,7 +90,7 @@ class PermissionsViewControllerTests: TestCase {
         // We skip Bluetooth on the simulator and jump straight
         // to requesting notification authorization.
         #else
-        authManagerDouble._bluetooth = .allowed
+        authManagerDouble.bluetooth = .allowed
         vc.btleListener(DummyBTLEListener(), didUpdateState: .poweredOn)
         #endif
 
