@@ -148,6 +148,7 @@
 		898FE857243B4D7A00210775 /* XCUIElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898FE856243B4D7A00210775 /* XCUIElement.swift */; };
 		898FE859243B4FE300210775 /* AuthorizationManaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898FE858243B4FE300210775 /* AuthorizationManaging.swift */; };
 		898FE85A243B4FE300210775 /* AuthorizationManaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898FE858243B4FE300210775 /* AuthorizationManaging.swift */; };
+		898FE85E243B586E00210775 /* PrivacyViewControllerInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898FE85D243B586E00210775 /* PrivacyViewControllerInteractorTests.swift */; };
 		89BC79EB2434E047002050F8 /* LogsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BC79EA2434E047002050F8 /* LogsViewController.swift */; };
 		89F06B2C2434A2C00074C612 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 89F06B2B2434A2C00074C612 /* Logging */; };
 		89F06B2F2434A62C0074C612 /* LoggingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F06B2E2434A62C0074C612 /* LoggingManager.swift */; };
@@ -303,6 +304,7 @@
 		898FE853243B42E700210775 /* OnboardingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingTests.swift; sourceTree = "<group>"; };
 		898FE856243B4D7A00210775 /* XCUIElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCUIElement.swift; sourceTree = "<group>"; };
 		898FE858243B4FE300210775 /* AuthorizationManaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationManaging.swift; sourceTree = "<group>"; };
+		898FE85D243B586E00210775 /* PrivacyViewControllerInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyViewControllerInteractorTests.swift; sourceTree = "<group>"; };
 		89BC79EA2434E047002050F8 /* LogsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogsViewController.swift; sourceTree = "<group>"; };
 		89F06B2E2434A62C0074C612 /* LoggingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingManager.swift; sourceTree = "<group>"; };
 		89F06B302434AABE0074C612 /* NoOpLogHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoOpLogHandler.swift; sourceTree = "<group>"; };
@@ -503,6 +505,7 @@
 				214209DA242630CF00C7BFF3 /* Networking */,
 				F6F05A222433BEAC00FF4B72 /* Onboarding */,
 				F63279282435320E00CF7A42 /* Permissions */,
+				898FE85B243B585700210775 /* Privacy */,
 				F6CC2CAA242BCCE90079432B /* Remote Notifications */,
 				098ED479242D7E340029B729 /* Registration */,
 			);
@@ -715,6 +718,14 @@
 				898FE853243B42E700210775 /* OnboardingTests.swift */,
 			);
 			path = Flows;
+			sourceTree = "<group>";
+		};
+		898FE85B243B585700210775 /* Privacy */ = {
+			isa = PBXGroup;
+			children = (
+				898FE85D243B586E00210775 /* PrivacyViewControllerInteractorTests.swift */,
+			);
+			path = Privacy;
 			sourceTree = "<group>";
 		};
 		89F06B2D2434A5A50074C612 /* Logging */ = {
@@ -1044,6 +1055,7 @@
 			files = (
 				098ED47C242D801C0029B729 /* RegistrationServiceTests.swift in Sources */,
 				21B3D2E3242906AE00573061 /* SecureRequestTests.swift in Sources */,
+				898FE85E243B586E00210775 /* PrivacyViewControllerInteractorTests.swift in Sources */,
 				214209CA242227B300C7BFF3 /* PersistenceTests.swift in Sources */,
 				214209CE24237A6300C7BFF3 /* PlistContactEventRecorderTests.swift in Sources */,
 				F632792124351C1900CF7A42 /* OnboardingViewControllerTests.swift in Sources */,

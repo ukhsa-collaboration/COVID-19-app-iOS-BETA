@@ -11,8 +11,8 @@ import UIKit
 class PrivacyViewController: UIViewController, Storyboarded {
     static let storyboardName = "Onboarding"
 
-    let persistence = Persistence.shared
-
+    var interactor: PrivacyViewControllerInteracting = PrivacyViewControllerInteractor()
+    
     @IBOutlet weak var allowDataSharingSwitch: UISwitch!
     @IBOutlet weak var continueButton: PrimaryButton!
 
@@ -21,7 +21,27 @@ class PrivacyViewController: UIViewController, Storyboarded {
     }
 
     @IBAction func continueTapped(_ sender: PrimaryButton) {
-        persistence.allowedDataSharing = allowDataSharingSwitch.isOn
-        performSegue(withIdentifier: "unwindFromPrivacy", sender: self)
+        interactor.allowDataSharing {
+            self.performSegue(withIdentifier: "unwindFromPrivacy", sender: self)
+        }
     }
+}
+
+protocol PrivacyViewControllerInteracting {
+    func allowDataSharing(completion: @escaping () -> Void)
+}
+
+class PrivacyViewControllerInteractor: PrivacyViewControllerInteracting {
+    
+    private let persistence: Persistence
+    
+    init(persistence: Persistence = Persistence.shared) {
+        self.persistence = persistence
+    }
+    
+    func allowDataSharing(completion: @escaping () -> Void) {
+        persistence.allowedDataSharing = true
+        completion()
+    }
+    
 }
