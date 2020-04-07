@@ -15,12 +15,14 @@ class DebugViewController: UITableViewController, Storyboarded {
     @IBOutlet weak var allowedDataSharingSwitch: UISwitch!
     @IBOutlet weak var interceptRequestsSwitch: UISwitch!
     @IBOutlet weak var versionBuildLabel: UILabel!
+    @IBOutlet weak var enableNewSelfDiagnosis: UISwitch!
 
     let persistence = Persistence.shared
     let contactEventRecorder = PlistContactEventRecorder.shared
     
     override func viewDidLoad() {
         allowedDataSharingSwitch.isOn = persistence.allowedDataSharing
+        enableNewSelfDiagnosis.isOn = persistence.enableNewSelfDiagnosis
 
         #if DEBUG
             interceptRequestsSwitch.isOn = InterceptingSession.interceptNextRequest
@@ -111,6 +113,9 @@ class DebugViewController: UITableViewController, Storyboarded {
                 present(viewController, animated: true, completion: nil)
             }
 
+        case (5, 0):
+            break
+
         default:
             fatalError()
         }
@@ -137,6 +142,9 @@ class DebugViewController: UITableViewController, Storyboarded {
         #endif
     }
 
+    @IBAction func enableNewSelfDiagnosisChanged(_ sender: UISwitch) {
+        persistence.enableNewSelfDiagnosis = sender.isOn
+    }
 }
 
 class TestPushRequest: SecureRequest, Request {

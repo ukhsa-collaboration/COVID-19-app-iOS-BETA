@@ -22,6 +22,9 @@ class Persistence {
     enum Keys: String, CaseIterable {
         case allowedDataSharing
         case diagnosis
+
+        // Feature flags
+        case enableNewSelfDiagnosis
     }
 
     static var shared = Persistence()
@@ -59,6 +62,11 @@ class Persistence {
             UserDefaults.standard.set(newValue.rawValue, forKey: Keys.diagnosis.rawValue)
             delegate?.persistence(self, didRecordDiagnosis: diagnosis)
         }
+    }
+
+    var enableNewSelfDiagnosis: Bool {
+        get { UserDefaults.standard.bool(forKey: Keys.enableNewSelfDiagnosis.rawValue) }
+        set { UserDefaults.standard.set(newValue, forKey: Keys.enableNewSelfDiagnosis.rawValue) }
     }
 
     init(secureRegistrationStorage: SecureRegistrationStorage) {

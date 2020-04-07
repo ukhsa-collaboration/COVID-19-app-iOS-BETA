@@ -8,8 +8,6 @@
 	<string>$(DEBUG_REGISTRATION_ID)</string>
 	<key>DEBUG_REGISTRATION_SECRET_KEY</key>
 	<string>$(DEBUG_REGISTRATION_SECRET_KEY)</string>
-	<key>ENABLE_NEW_SELF_DIAGNOSIS</key>
-	<string>$(ENABLE_NEW_SELF_DIAGNOSIS)</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>

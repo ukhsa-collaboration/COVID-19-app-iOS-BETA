@@ -10,6 +10,8 @@ import UIKit
 
 class OkViewController: UIViewController, Storyboarded {
     static let storyboardName = "Ok"
+
+    var persistence = Persistence.shared
     
     @IBOutlet private var warningView: UIView!
     @IBOutlet private var warningViewTitle: UILabel!
@@ -37,10 +39,7 @@ class OkViewController: UIViewController, Storyboarded {
     }
     
     @IBAction func checkSymptomsTapped(_ sender: PrimaryButton) {
-        if let infoDict = Bundle(for: AppDelegate.self).infoDictionary,
-            let enableNewSelfDiagnosis = infoDict["ENABLE_NEW_SELF_DIAGNOSIS"] as? String,
-            enableNewSelfDiagnosis == "true" {
-
+        if persistence.enableNewSelfDiagnosis {
             let selfDiagnosis = SelfDiagnosisNavigationController.instantiate()
             present(selfDiagnosis, animated: true)
         } else {
