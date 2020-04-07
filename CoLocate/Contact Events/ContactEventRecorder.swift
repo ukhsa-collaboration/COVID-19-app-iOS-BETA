@@ -8,10 +8,16 @@
 import Foundation
 
 struct ContactEvent: Equatable, Codable {
+
     let sonarId: UUID
-    let timestamp: Date
-    let rssiValues: [Int]
-    let duration: TimeInterval
+    var timestamp: Date = Date()
+    var rssiValues: [Int] = []
+    var duration: TimeInterval = 0
+
+    mutating func disconnect() {
+        duration = Date().timeIntervalSince(timestamp)
+    }
+
 }
 
 protocol ContactEventRecorder {

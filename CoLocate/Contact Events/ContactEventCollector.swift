@@ -9,41 +9,13 @@
 import Foundation
 import Logging
 
-struct MutableContactEvent {
-    
-    var sonarId: UUID? // TODO: can I make this non-optional and compulsory in the constructor?
-    let timestamp: Date
-    var rssiValues: [Int]
-    var duration: TimeInterval
-
-    init(timestamp: Date = Date()) {
-        self.timestamp = timestamp
-        self.rssiValues = []
-        self.sonarId = nil
-        self.duration = 0
-    }
-    
-    mutating func disconnect() {
-        duration = timestamp.timeIntervalSince(timestamp)
-    }
-    
-    func asContactEvent() -> ContactEvent? {
-        if let sonarId  = self.sonarId {
-            return ContactEvent(sonarId: sonarId, timestamp: timestamp, rssiValues: rssiValues, duration: duration)
-        } else {
-            return nil
-        }
-    }
-
-}
-
 @objc class ContactEventCollector: NSObject, BTLEListenerDelegate {
     
-    @objc dynamic var _connectedPeripheralCount: Int = 0
+    @objc dynamic var _contactEventCount: Int = 0
     
-    var connectedPeripherals: [UUID: MutableContactEvent] = [:] {
+    var contactEvents: [UUID: ContactEvent] = [:] {
         didSet {
-            _connectedPeripheralCount = connectedPeripherals.count
+            _contactEventCount = contactEvents.count
         }
     }
     
@@ -54,34 +26,32 @@ struct MutableContactEvent {
     }
     
     func btleListener(_ listener: BTLEListener, didFindSonarId sonarId: UUID, forPeripheral peripheral: BTLEPeripheral) {
-        connectedPeripherals[peripheral.identifier] = MutableContactEvent()
-        connectedPeripherals[peripheral.identifier]?.sonarId = sonarId
+        contactEvents[peripheral.identifier] = ContactEvent(sonarId: sonarId)
     }
     
     func btleListener(_ listener: BTLEListener, didDisconnect peripheral: BTLEPeripheral, error: Error?) {
-        connectedPeripherals[peripheral.identifier]?.disconnect()
-        if let connectedPeripheral = connectedPeripherals.removeValue(forKey: peripheral.identifier), let contactEvent = connectedPeripheral.asContactEvent() {
-            contactEventRecorder.record(contactEvent)
+        contactEvents[peripheral.identifier]?.disconnect()
+        if let connectedPeripheral = contactEvents.removeValue(forKey: peripheral.identifier) {
+            contactEventRecorder.record(connectedPeripheral)
         }
     }
 
     func btleListener(_ listener: BTLEListener, shouldReadRSSIFor peripheral: BTLEPeripheral) -> Bool {
-        return connectedPeripherals[peripheral.identifier] != nil
+        return contactEvents[peripheral.identifier] != nil
     }
     
     func btleListener(_ listener: BTLEListener, didReadRSSI RSSI: Int, forPeripheral peripheral: BTLEPeripheral) {
-        connectedPeripherals[peripheral.identifier]?.rssiValues.append(RSSI)
+        contactEvents[peripheral.identifier]?.rssiValues.append(RSSI)
     }
 
     func flush() {
-        logger.info("flushing contact events for \(connectedPeripherals.count) peripherals")
+        logger.info("flushing \(contactEvents.count) contact events")
 
-        for (_, peripheral) in connectedPeripherals {
-            if let contactEvent = peripheral.asContactEvent() {
-                contactEventRecorder.record(contactEvent)
-            }
+        for (_, event) in contactEvents {
+            contactEventRecorder.record(event)
         }
     }
+
 }
 
 private let logger = Logger(label: "ContactEvents")
