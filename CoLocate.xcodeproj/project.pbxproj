@@ -95,6 +95,13 @@
 		F67A2293242AA370002254B6 /* SecureRegistrationStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */; };
 		F67A2295242AC188002254B6 /* RegistrationViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A2294242AC188002254B6 /* RegistrationViewControllerTests.swift */; };
 		F68B89EA243B9FDC00F369A9 /* CoLocate.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F68B89E9243B9FDB00F369A9 /* CoLocate.xcconfig */; };
+		F68B89ED243CFF2600F369A9 /* SelfDiagnosis.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F68B89EC243CFF2600F369A9 /* SelfDiagnosis.storyboard */; };
+		F68B89EF243D01FA00F369A9 /* SelfDiagnosisNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68B89EE243D01FA00F369A9 /* SelfDiagnosisNavigationController.swift */; };
+		F68B89F4243D050700F369A9 /* HighTemperatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68B89F3243D050700F369A9 /* HighTemperatureViewController.swift */; };
+		F68B89F6243D219E00F369A9 /* SymptomQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68B89F5243D219E00F369A9 /* SymptomQuestionView.swift */; };
+		F68B89F8243D21D100F369A9 /* SymptomQuestionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F68B89F7243D21D100F369A9 /* SymptomQuestionView.xib */; };
+		F68B89FA243D261500F369A9 /* ButtonFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F68B89F9243D261500F369A9 /* ButtonFooterView.xib */; };
+		F68B89FC243D262100F369A9 /* ButtonFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68B89FB243D262100F369A9 /* ButtonFooterView.swift */; };
 		F68BFBF7242ACD17008EE68F /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68BFBF6242ACD17008EE68F /* TestHelpers.swift */; };
 		F6CA2819242E41F700F8DC55 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = F6CA2818242E41F700F8DC55 /* README.md */; };
 		F6CC2CA9242BC7FC0079432B /* RemoteNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CC2CA8242BC7FC0079432B /* RemoteNotificationManager.swift */; };
@@ -255,6 +262,13 @@
 		F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRegistrationStorageTests.swift; sourceTree = "<group>"; };
 		F67A2294242AC188002254B6 /* RegistrationViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewControllerTests.swift; sourceTree = "<group>"; };
 		F68B89E9243B9FDB00F369A9 /* CoLocate.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = CoLocate.xcconfig; sourceTree = "<group>"; };
+		F68B89EC243CFF2600F369A9 /* SelfDiagnosis.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SelfDiagnosis.storyboard; sourceTree = "<group>"; };
+		F68B89EE243D01FA00F369A9 /* SelfDiagnosisNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfDiagnosisNavigationController.swift; sourceTree = "<group>"; };
+		F68B89F3243D050700F369A9 /* HighTemperatureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighTemperatureViewController.swift; sourceTree = "<group>"; };
+		F68B89F5243D219E00F369A9 /* SymptomQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomQuestionView.swift; sourceTree = "<group>"; };
+		F68B89F7243D21D100F369A9 /* SymptomQuestionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SymptomQuestionView.xib; sourceTree = "<group>"; };
+		F68B89F9243D261500F369A9 /* ButtonFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ButtonFooterView.xib; sourceTree = "<group>"; };
+		F68B89FB243D262100F369A9 /* ButtonFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonFooterView.swift; sourceTree = "<group>"; };
 		F68BFBF6242ACD17008EE68F /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		F6CA2818242E41F700F8DC55 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F6CC2CA8242BC7FC0079432B /* RemoteNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteNotificationManager.swift; sourceTree = "<group>"; };
@@ -554,6 +568,7 @@
 				F758B8D0242CC661003AE16D /* Registration */,
 				F758B8BC242CB83B003AE16D /* Resources */,
 				895D9E4924374EB800573D4D /* Routing */,
+				F68B89EB243CFEEE00F369A9 /* SelfDiagnosis */,
 			);
 			path = CoLocate;
 			sourceTree = "<group>";
@@ -663,6 +678,28 @@
 				F63279292435323200CF7A42 /* PermissionsViewControllerTests.swift */,
 			);
 			path = Permissions;
+			sourceTree = "<group>";
+		};
+		F68B89EB243CFEEE00F369A9 /* SelfDiagnosis */ = {
+			isa = PBXGroup;
+			children = (
+				F68B89EC243CFF2600F369A9 /* SelfDiagnosis.storyboard */,
+				F68B89FB243D262100F369A9 /* ButtonFooterView.swift */,
+				F68B89EE243D01FA00F369A9 /* SelfDiagnosisNavigationController.swift */,
+				F68B89F5243D219E00F369A9 /* SymptomQuestionView.swift */,
+				F68B89F9243D261500F369A9 /* ButtonFooterView.xib */,
+				F68B89F7243D21D100F369A9 /* SymptomQuestionView.xib */,
+				F68B89F2243D04EF00F369A9 /* AddSymptoms */,
+			);
+			path = SelfDiagnosis;
+			sourceTree = "<group>";
+		};
+		F68B89F2243D04EF00F369A9 /* AddSymptoms */ = {
+			isa = PBXGroup;
+			children = (
+				F68B89F3243D050700F369A9 /* HighTemperatureViewController.swift */,
+			);
+			path = AddSymptoms;
 			sourceTree = "<group>";
 		};
 		F6CC2CA7242BC7D90079432B /* Notifications */ = {
@@ -913,12 +950,15 @@
 				F758B8CC242CC1F7003AE16D /* EnterDiagnosis.storyboard in Resources */,
 				6FC63C38241641BA007C8BF3 /* Assets.xcassets in Resources */,
 				F65AE53C2432B842006544D4 /* Potential.rtf in Resources */,
+				F68B89FA243D261500F369A9 /* ButtonFooterView.xib in Resources */,
 				09D1CD50242C3A9300B1A167 /* Potential.storyboard in Resources */,
 				F6CA2819242E41F700F8DC55 /* README.md in Resources */,
 				895D9E462437458700573D4D /* AppIcon.xcassets in Resources */,
+				F68B89ED243CFF2600F369A9 /* SelfDiagnosis.storyboard in Resources */,
 				F6F05A322434310200FF4B72 /* Onboarding.storyboard in Resources */,
 				098ED481242E745F0029B729 /* Debug.storyboard in Resources */,
 				F78CEB68242B8C2C002254AD /* GoogleService-Info.plist in Resources */,
+				F68B89F8243D21D100F369A9 /* SymptomQuestionView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1011,7 +1051,9 @@
 				AE2DCAA0241920B600A940FC /* BTLEBroadcaster.swift in Sources */,
 				895D9E4B24374EC900573D4D /* Screen.swift in Sources */,
 				098ED478242D7D050029B729 /* RegistratonService.swift in Sources */,
+				F68B89F4243D050700F369A9 /* HighTemperatureViewController.swift in Sources */,
 				89F06B372434C35A0074C612 /* LoggerMetadata.swift in Sources */,
+				F68B89EF243D01FA00F369A9 /* SelfDiagnosisNavigationController.swift in Sources */,
 				898FE859243B4FE300210775 /* AuthorizationManaging.swift in Sources */,
 				6FC63C31241641B8007C8BF3 /* AppDelegate.swift in Sources */,
 				F600A60224297A8E0038DF57 /* RegistrationRequest.swift in Sources */,
@@ -1031,8 +1073,10 @@
 				21D93C2E241FB0A300C1FA9B /* EnterDiagnosisTableViewController.swift in Sources */,
 				21F374042434C4BF00926FB8 /* LiveBTLEDebuggerTableViewController.swift in Sources */,
 				AEC6A7BC241BD81A00B0237A /* LogoStrapline.swift in Sources */,
+				F68B89FC243D262100F369A9 /* ButtonFooterView.swift in Sources */,
 				214209D52423C83C00C7BFF3 /* PatchContactEventsRequest.swift in Sources */,
 				214209D0242396DA00C7BFF3 /* Session.swift in Sources */,
+				F68B89F6243D219E00F369A9 /* SymptomQuestionView.swift in Sources */,
 				F6F05A262433C09200FF4B72 /* OnboardingCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

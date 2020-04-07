@@ -44,5 +44,9 @@ class OkViewController: UIViewController, Storyboarded {
     @IBAction func unwindFromOnboarding(unwindSegue: UIStoryboardSegue) {
         dismiss(animated: true)
     }
+
+    @IBAction func unwindFromSelfDiagnosis(unwindSegue: UIStoryboardSegue) {
+        dismiss(animated: true)
+    }
 }
 
