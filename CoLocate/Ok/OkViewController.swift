@@ -37,8 +37,16 @@ class OkViewController: UIViewController, Storyboarded {
     }
     
     @IBAction func checkSymptomsTapped(_ sender: PrimaryButton) {
-        let enterDiagnosisVC = EnterDiagnosisTableViewController.instantiate()
-        (parent as! RootViewController).show(viewController: enterDiagnosisVC)
+        if let infoDict = Bundle(for: AppDelegate.self).infoDictionary,
+            let enableNewSelfDiagnosis = infoDict["ENABLE_NEW_SELF_DIAGNOSIS"] as? String,
+            enableNewSelfDiagnosis == "true" {
+
+            let selfDiagnosis = SelfDiagnosisNavigationController.instantiate()
+            present(selfDiagnosis, animated: true)
+        } else {
+            let enterDiagnosisVC = EnterDiagnosisTableViewController.instantiate()
+            (parent as! RootViewController).show(viewController: enterDiagnosisVC)
+        }
     }
 
     @IBAction func unwindFromOnboarding(unwindSegue: UIStoryboardSegue) {
