@@ -21,19 +21,15 @@ jobs:
         run: |
           git fetch origin upload-to-test-flight
           git branch --contains tags/upload-to-test-flight | grep test-flight || echo "::set-output name=upload::true"
-        continue-on-error: true
 
       - name: Trigger deployment
         if: steps.check-upload-tag.outputs.upload == 'true'
-        run: >
-          curl
-          --request POST
-          --url https://api.github.com/repos/${{ github.repository }}/deployments
-          --header 'authorization: Bearer ${{ secrets.deployment_token }}'
-          --header 'content-type: application/json'
-          --data '{
-            "ref":"${{ github.sha }}",
-            "required_contexts": [],
-            "payload":"This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}**. \n\n The commit hash was: _${{ github.sha }}_.",
-            "environment":"staging"
-          }'
+        env:
+          GITHUB_RESPOSITORY: ${{ github.repository }}
+          GITHUB_ACCESS_TOKEN: ${{ secrets.deployment_token }}
+          GITHUB_SHA: ${{ github.sha }}
+          DEPLOYMENT_PAYLOAD: |
+            This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}**.
+
+            The commit hash was: _${{ github.sha }}_.
+        run: ./bin/create-deployment
