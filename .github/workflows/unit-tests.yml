@@ -64,7 +64,7 @@ jobs:
       - name: Run Test
         run: >
           xcodebuild
-          -scheme CoLocate beta release
+          -scheme "CoLocate beta release"
           test
           -destination "platform=iOS Simulator,OS=13.4,name=iPhone 11"
           -showBuildTimingSummary
