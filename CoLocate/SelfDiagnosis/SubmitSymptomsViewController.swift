@@ -70,6 +70,8 @@ class SubmitSymptomsViewController: UITableViewController {
     @objc private func submitTapped(_ sender: PrimaryButton) {
         sender.isEnabled = false
 
+        performSegue(withIdentifier: "unwindFromSelfDiagnosis", sender: self)
+
 //        let contactEvents = contactEventRecorder.contactEvents
 //
 //        guard let request = requestFactory?.patchContactsRequest(contactEvents: contactEvents) else {

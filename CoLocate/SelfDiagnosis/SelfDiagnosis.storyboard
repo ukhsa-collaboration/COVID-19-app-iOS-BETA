@@ -228,9 +228,11 @@
                     <connections>
                         <outlet property="hasCoughLabel" destination="GYb-pP-l7w" id="cMS-cg-xLV"/>
                         <outlet property="hasTemperatureLabel" destination="uPg-pT-zEM" id="eta-nr-zvt"/>
+                        <segue destination="UW2-8V-8kX" kind="unwind" identifier="unwindFromSelfDiagnosis" unwindAction="unwindFromSelfDiagnosisWithUnwindSegue:" id="LX4-DI-ZA7"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J4X-GH-kZS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="UW2-8V-8kX" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2619" y="173"/>
         </scene>
