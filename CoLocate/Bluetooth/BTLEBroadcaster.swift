@@ -32,7 +32,6 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
             startAdvertising(peripheral: peripheral, sonarId: sonarId)
         }
     }
-    var sonarIdService: CBService?
     var stateDelegate: BTLEBroadcasterStateDelegate?
     
     // MARK: CBPeripheralManagerDelegate
@@ -56,6 +55,9 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
         guard let peripheral = peripheral, let sonarId = sonarId else {
             return
         }
+        guard !peripheral.isAdvertising else {
+            return
+        }
         
         let service = CBMutableService(type: ConcreteBTLEBroadcaster.sonarServiceUUID, primary: true)
 
@@ -72,7 +74,6 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
         }
         
         logger.info("\(service)")
-        self.sonarIdService = service
         
         logger.info("now advertising sonarId \(sonarId?.uuidString ?? "unknown")")
         
@@ -87,7 +88,7 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
             logger.info("No services to restore!")
             return
         }
-        self.sonarIdService = sonarIdService
+        logger.info("restoring \(sonarIdService)")
     }
 
 }
