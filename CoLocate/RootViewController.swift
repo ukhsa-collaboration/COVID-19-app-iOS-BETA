@@ -1,5 +1,5 @@
 //
-//  MainNavigationController.swift
+//  RootViewController.swift
 //  CoLocate
 //
 //  Created by NHSX.
@@ -8,11 +8,21 @@
 
 import UIKit
 
-class MainNavigationController: UINavigationController {
-    var previouslyPresentedViewController: UIViewController?
+class RootViewController: UIViewController {
+    func show(viewController newChild: UIViewController) {
+        children.first?.willMove(toParent: nil)
+        children.first?.viewIfLoaded?.removeFromSuperview()
+        children.first?.removeFromParent()
+        addChild(newChild)
+        newChild.view.frame = view.bounds
+        view.addSubview(newChild.view)
+        newChild.didMove(toParent: self)
+    }
 
     
     #if DEBUG || INTERNAL
+    var previouslyPresentedViewController: UIViewController?
+
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if let vc = presentedViewController {
             previouslyPresentedViewController = vc

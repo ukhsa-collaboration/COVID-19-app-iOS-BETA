@@ -48,9 +48,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
         remoteNotificationManager.configure()
 
-        let initialViewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
+        let rootVC = RootViewController()
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = initialViewController
+        window?.rootViewController = rootVC
         window?.makeKeyAndVisible()
 
         if let registration = persistence.registration {
@@ -60,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             startMainApp(with: registration)
         } else {
             onboardingViewController = OnboardingViewController.instantiate()
-            onboardingViewController.rootViewController = initialViewController
+            onboardingViewController.rootViewController = rootVC
         }
 
         return true
@@ -98,20 +98,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             guard let self = self else { return }
 
             DispatchQueue.main.sync {
-                guard let navController = self.window?.rootViewController as? UINavigationController else {
+                guard let rootViewController = self.window?.rootViewController as? RootViewController else {
                     return
                 }
 
                 switch (self.authorizationManager.bluetooth, notificationStatus) {
                 case (.denied, _), (_, .denied):
                     let permissionsDeniedViewController = PermissionsDeniedViewController.instantiate()
-                    navController.present(permissionsDeniedViewController, animated: true)
+                    rootViewController.present(permissionsDeniedViewController, animated: true)
                 default:
-                    guard navController.presentedViewController as? PermissionsDeniedViewController != nil else {
+                    guard rootViewController.presentedViewController as? PermissionsDeniedViewController != nil else {
                         return
                     }
 
-                    navController.dismiss(animated: true)
+                    rootViewController.dismiss(animated: true)
                 }
             }
         }
@@ -128,12 +128,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     // MARK: - Private
     
     func startMainApp(with registration: Registration) {
-        guard let navController = window?.rootViewController as? UINavigationController else {
+        guard let rootViewController = window?.rootViewController as? RootViewController else {
             return
         }
 
         appCoordinator = AppCoordinator(
-            navController: navController,
+            rootViewController: rootViewController,
             persistence: persistence,
             secureRequestFactory: ConcreteSecureRequestFactory(registration: registration)
         )

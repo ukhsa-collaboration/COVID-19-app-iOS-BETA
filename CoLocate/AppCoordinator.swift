@@ -9,20 +9,20 @@
 import UIKit
 
 class AppCoordinator {
-    private let navController: UINavigationController
+    private let rootViewController: RootViewController
     private let persistence: Persistence
     private let secureRequestFactory: SecureRequestFactory
         
-    init(navController: UINavigationController,
+    init(rootViewController: RootViewController,
          persistence: Persistence,
          secureRequestFactory: SecureRequestFactory) {
-        self.navController = navController
+        self.rootViewController = rootViewController
         self.persistence = persistence
         self.secureRequestFactory = secureRequestFactory
     }
 
     func start() {
-        navController.viewControllers = [initialViewController()]
+        rootViewController.show(viewController: initialViewController())
     }
     
     func initialViewController() -> UIViewController & Storyboarded {
@@ -42,7 +42,7 @@ class AppCoordinator {
     }
     
     func showAppropriateViewController() {
-        navController.pushViewController(viewControllerForDiagnosis(), animated: true)
+        rootViewController.show(viewController: viewControllerForDiagnosis())
     }
 
     private func viewControllerForDiagnosis() -> UIViewController {

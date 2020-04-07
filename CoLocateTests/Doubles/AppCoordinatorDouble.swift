@@ -13,7 +13,7 @@ class AppCoordinatorDouble: AppCoordinator {
     var showAppropriateViewControllerWasCalled = false
 
     init() {
-        super.init(navController: UINavigationController(),
+        super.init(rootViewController: RootViewController(),
                    persistence: Persistence(),
                    secureRequestFactory: SecureRequestFactoryDouble())
     }

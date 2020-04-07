@@ -18,7 +18,7 @@
 		098ED488242E89930029B729 /* PushNotificationManagerDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED487242E89930029B729 /* PushNotificationManagerDouble.swift */; };
 		098ED48A242E89D80029B729 /* RegistrationServiceDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED489242E89D80029B729 /* RegistrationServiceDouble.swift */; };
 		098ED48C242E8B290029B729 /* PersistenceDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED48B242E8B290029B729 /* PersistenceDouble.swift */; };
-		0997D056243BDEEC0067346C /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0997D055243BDEEC0067346C /* MainNavigationController.swift */; };
+		0997D056243BDEEC0067346C /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0997D055243BDEEC0067346C /* RootViewController.swift */; };
 		09B27BD8243BA3F200DAEA02 /* DispatchQueue+AsyncAfterable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B27BD7243BA3F200DAEA02 /* DispatchQueue+AsyncAfterable.swift */; };
 		09B27BDB243BA5C800DAEA02 /* AsyncAfterableDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B27BDA243BA5C800DAEA02 /* AsyncAfterableDouble.swift */; };
 		09D1CD4B242C284000B1A167 /* PotentialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D1CD49242C284000B1A167 /* PotentialViewController.swift */; };
@@ -115,7 +115,7 @@
 		F758B8BE242CB856003AE16D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F758B8BD242CB856003AE16D /* Localizable.strings */; };
 		F758B8C0242CB98C003AE16D /* UIViewController+Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = F758B8BF242CB98C003AE16D /* UIViewController+Storyboarded.swift */; };
 		F758B8C2242CBAF5003AE16D /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F758B8C1242CBAF5003AE16D /* AppCoordinator.swift */; };
-		F758B8C4242CC0EE003AE16D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F758B8C3242CC0EE003AE16D /* Main.storyboard */; };
+		F758B8C4242CC0EE003AE16D /* Ok.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F758B8C3242CC0EE003AE16D /* Ok.storyboard */; };
 		F758B8C9242CC183003AE16D /* PleaseSelfIsolate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F758B8C8242CC183003AE16D /* PleaseSelfIsolate.storyboard */; };
 		F758B8CC242CC1F7003AE16D /* EnterDiagnosis.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F758B8CB242CC1F7003AE16D /* EnterDiagnosis.storyboard */; };
 		F758B8D2242CC67D003AE16D /* Registration.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F758B8D1242CC67D003AE16D /* Registration.storyboard */; };
@@ -167,7 +167,7 @@
 		098ED48B242E8B290029B729 /* PersistenceDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceDouble.swift; sourceTree = "<group>"; };
 		098ED48D242E9AF00029B729 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		0995ABAC243CE3D10057C0D7 /* ReleaseBeta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ReleaseBeta.xcconfig; sourceTree = "<group>"; };
-		0997D055243BDEEC0067346C /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
+		0997D055243BDEEC0067346C /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		09B27BD7243BA3F200DAEA02 /* DispatchQueue+AsyncAfterable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+AsyncAfterable.swift"; sourceTree = "<group>"; };
 		09B27BDA243BA5C800DAEA02 /* AsyncAfterableDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncAfterableDouble.swift; sourceTree = "<group>"; };
 		09D1CD49242C284000B1A167 /* PotentialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotentialViewController.swift; sourceTree = "<group>"; };
@@ -275,7 +275,7 @@
 		F758B8BD242CB856003AE16D /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		F758B8BF242CB98C003AE16D /* UIViewController+Storyboarded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Storyboarded.swift"; sourceTree = "<group>"; };
 		F758B8C1242CBAF5003AE16D /* AppCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
-		F758B8C3242CC0EE003AE16D /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		F758B8C3242CC0EE003AE16D /* Ok.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Ok.storyboard; sourceTree = "<group>"; };
 		F758B8C8242CC183003AE16D /* PleaseSelfIsolate.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PleaseSelfIsolate.storyboard; sourceTree = "<group>"; };
 		F758B8CB242CC1F7003AE16D /* EnterDiagnosis.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EnterDiagnosis.storyboard; sourceTree = "<group>"; };
 		F758B8D1242CC67D003AE16D /* Registration.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Registration.storyboard; sourceTree = "<group>"; };
@@ -374,6 +374,15 @@
 				09B27BDA243BA5C800DAEA02 /* AsyncAfterableDouble.swift */,
 			);
 			path = Doubles;
+			sourceTree = "<group>";
+		};
+		0995ABCD243D034E0057C0D7 /* Ok */ = {
+			isa = PBXGroup;
+			children = (
+				214209B52421072C00C7BFF3 /* OkViewController.swift */,
+				F758B8C3242CC0EE003AE16D /* Ok.storyboard */,
+			);
+			path = Ok;
 			sourceTree = "<group>";
 		};
 		214209B72422155200C7BFF3 /* Appearance */ = {
@@ -522,14 +531,13 @@
 				6FC63C3C241641BA007C8BF3 /* Info.plist */,
 				F758B8C1242CBAF5003AE16D /* AppCoordinator.swift */,
 				6FC63C30241641B8007C8BF3 /* AppDelegate.swift */,
-				214209B52421072C00C7BFF3 /* OkViewController.swift */,
+				0997D055243BDEEC0067346C /* RootViewController.swift */,
 				214209B9242216B700C7BFF3 /* Persistence.swift */,
 				F67A2290242AA35B002254B6 /* SecureRegistrationStorage.swift */,
 				6FC63C37241641BA007C8BF3 /* Assets.xcassets */,
 				A1E7A0582420028B0078174D /* NHS Colors.xcassets */,
 				89896E5F2435F15C00F949EA /* Base.xcconfig */,
 				6FC63C39241641BA007C8BF3 /* LaunchScreen.storyboard */,
-				F758B8C3242CC0EE003AE16D /* Main.storyboard */,
 				214209B72422155200C7BFF3 /* Appearance */,
 				214209B82422157300C7BFF3 /* Bluetooth */,
 				21B3D2DF24263A1100573061 /* Contact Events */,
@@ -539,13 +547,13 @@
 				89F06B2D2434A5A50074C612 /* Logging */,
 				214209D3242399DD00C7BFF3 /* Networking */,
 				F6CC2CA7242BC7D90079432B /* Notifications */,
+				0995ABCD243D034E0057C0D7 /* Ok */,
 				F6F05A212433BE9600FF4B72 /* Onboarding */,
 				F758B8C7242CC164003AE16D /* PleaseSelfIsolate */,
 				F758B8C5242CC117003AE16D /* Potential */,
 				F758B8D0242CC661003AE16D /* Registration */,
 				F758B8BC242CB83B003AE16D /* Resources */,
 				895D9E4924374EB800573D4D /* Routing */,
-				0997D055243BDEEC0067346C /* MainNavigationController.swift */,
 			);
 			path = CoLocate;
 			sourceTree = "<group>";
@@ -894,7 +902,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F758B8C4242CC0EE003AE16D /* Main.storyboard in Resources */,
+				F758B8C4242CC0EE003AE16D /* Ok.storyboard in Resources */,
 				F758B8C9242CC183003AE16D /* PleaseSelfIsolate.storyboard in Resources */,
 				F758B8D2242CC67D003AE16D /* Registration.storyboard in Resources */,
 				6FC63C3B241641BA007C8BF3 /* LaunchScreen.storyboard in Resources */,
@@ -975,7 +983,7 @@
 				89F06B352434AF9D0074C612 /* LogEvent.swift in Sources */,
 				F758B8C2242CBAF5003AE16D /* AppCoordinator.swift in Sources */,
 				F6F05A342434344200FF4B72 /* StartNowViewController.swift in Sources */,
-				0997D056243BDEEC0067346C /* MainNavigationController.swift in Sources */,
+				0997D056243BDEEC0067346C /* RootViewController.swift in Sources */,
 				21AF36AB241A8E50001A4910 /* BTLEListener.swift in Sources */,
 				21C09A8D24377F5100368203 /* CBManagerState+CustomStringConvertible.swift in Sources */,
 				F72EBD9E243C90E6009F9328 /* HumbleLocalNotificationScheduler.swift in Sources */,

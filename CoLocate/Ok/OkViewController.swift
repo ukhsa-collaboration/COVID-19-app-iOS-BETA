@@ -9,7 +9,7 @@
 import UIKit
 
 class OkViewController: UIViewController, Storyboarded {
-    static let storyboardName = "Main"
+    static let storyboardName = "Ok"
     
     @IBOutlet private var warningView: UIView!
     @IBOutlet private var warningViewTitle: UILabel!
@@ -38,7 +38,7 @@ class OkViewController: UIViewController, Storyboarded {
     
     @IBAction func checkSymptomsTapped(_ sender: PrimaryButton) {
         let enterDiagnosisVC = EnterDiagnosisTableViewController.instantiate()
-        navigationController?.pushViewController(enterDiagnosisVC, animated: true)
+        (parent as! RootViewController).show(viewController: enterDiagnosisVC)
     }
 
     @IBAction func unwindFromOnboarding(unwindSegue: UIStoryboardSegue) {

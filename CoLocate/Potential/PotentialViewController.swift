@@ -17,8 +17,6 @@ class PotentialViewController: UIViewController, Storyboarded {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationController?.isNavigationBarHidden = true
-
         let url = Bundle.main.url(forResource: "Potential", withExtension: "rtf")!
         label.attributedText = try! NSAttributedString(
             url: url,
