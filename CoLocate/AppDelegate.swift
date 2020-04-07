@@ -166,6 +166,7 @@ extension AppDelegate: PersistenceDelegate {
         onboardingViewController.updateState()
         bluetoothNursery.startBroadcaster(stateDelegate: nil)
         bluetoothNursery.broadcaster?.sonarId = registration.id
+        bluetoothNursery.startListener(stateDelegate: nil)
 
         // TODO: This is probably not the right place to put this,
         // but it'll do until we remove the old onboarding flow.
