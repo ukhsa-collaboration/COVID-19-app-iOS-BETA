@@ -15,7 +15,7 @@ class ButtonFooterView: UITableViewHeaderFooterView {
         return UINib(nibName: String(describing: ButtonFooterView.self), bundle: nil)
     }
 
-    @IBOutlet weak var continueButton: PrimaryButton!
+    @IBOutlet weak var button: PrimaryButton!
 
 }
 

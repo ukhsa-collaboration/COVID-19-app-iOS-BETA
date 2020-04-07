@@ -15,7 +15,7 @@
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Rg-3j-msf" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
                     <rect key="frame" x="20" y="20" width="309" height="162"/>
-                    <state key="normal" title="Continue"/>
+                    <state key="normal" title="Button"/>
                 </button>
             </subviews>
             <constraints>
@@ -26,7 +26,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="continueButton" destination="3Rg-3j-msf" id="hbk-DY-dAp"/>
+                <outlet property="button" destination="3Rg-3j-msf" id="7Mb-Yq-dpt"/>
             </connections>
             <point key="canvasLocation" x="90.579710144927546" y="381.02678571428572"/>
         </view>

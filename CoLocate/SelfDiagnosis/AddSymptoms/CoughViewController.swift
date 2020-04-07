@@ -1,5 +1,5 @@
 //
-//  HighTemperatureViewController.swift
+//  CoughViewController.swift
 //  CoLocate
 //
 //  Created by NHSX.
@@ -8,18 +8,19 @@
 
 import UIKit
 
-class HighTemperatureViewController: UITableViewController {
+class CoughViewController: UITableViewController {
     @IBOutlet weak var yesCell: UITableViewCell!
     @IBOutlet weak var noCell: UITableViewCell!
 
     var continueButton: PrimaryButton?
 
-    var hasHighTemperature: Bool? {
+    var hasHighTemperature: Bool!
+    var hasNewCough: Bool? {
         didSet {
             yesCell.accessoryType = .none
             noCell.accessoryType = .none
 
-            switch hasHighTemperature {
+            switch hasNewCough {
             case .some(true):
                 yesCell.accessoryType = .checkmark
             case .some(false):
@@ -28,7 +29,7 @@ class HighTemperatureViewController: UITableViewController {
                 break
             }
 
-            continueButton?.isEnabled = hasHighTemperature != nil
+            continueButton?.isEnabled = hasNewCough != nil
         }
     }
 
@@ -56,8 +57,8 @@ class HighTemperatureViewController: UITableViewController {
                 return nil
         }
 
-        symptomQuestionView.titleLabel?.text = "Do you have a high temperature?"
-        symptomQuestionView.detailLabel?.text = "I have a high temperature (I feel hot to touch on my chest or back)"
+        symptomQuestionView.titleLabel?.text = "Do you have a new continuous cough?"
+        symptomQuestionView.detailLabel?.text = "I have a new continuous cough (I am coughing a lot for more than an hour, or have had 3 or more coughing episodes in 24 hours)"
 
         return symptomQuestionView
     }
@@ -67,9 +68,9 @@ class HighTemperatureViewController: UITableViewController {
 
         switch tableView.cellForRow(at: indexPath) {
         case yesCell:
-            hasHighTemperature = true
+            hasNewCough = true
         case noCell:
-            hasHighTemperature = false
+            hasNewCough = false
         default:
             fatalError()
         }
@@ -81,14 +82,24 @@ class HighTemperatureViewController: UITableViewController {
                 return nil
         }
 
-        continueButton = buttonFooterView.continueButton
+        continueButton = buttonFooterView.button
         continueButton?.isEnabled = false
+        continueButton?.setTitle("Continue", for: .normal)
         continueButton?.addTarget(self, action: #selector(continueTapped(_:)), for: .touchUpInside)
 
         return buttonFooterView
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? SubmitSymptomsViewController {
+            vc.hasHighTemperature = hasHighTemperature
+            vc.hasNewCough = hasNewCough
+        }
+    }
+
     @objc private func continueTapped(_ sender: PrimaryButton) {
         sender.isEnabled = false
+
+        performSegue(withIdentifier: "segueToSubmitSymptoms", sender: self)
     }
 }
