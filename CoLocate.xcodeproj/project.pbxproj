@@ -194,6 +194,11 @@
 		F6F05A342434344200FF4B72 /* StartNowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F05A332434344200FF4B72 /* StartNowViewController.swift */; };
 		F6F05A36243436D200FF4B72 /* PrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F05A35243436D200FF4B72 /* PrivacyViewController.swift */; };
 		F72EBD4F24361E99009F9328 /* URLSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72EBD4E24361E99009F9328 /* URLSessionTests.swift */; };
+		F72EBD97243C8490009F9328 /* BluetoothStateObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72EBD96243C8490009F9328 /* BluetoothStateObserver.swift */; };
+		F72EBD98243C8490009F9328 /* BluetoothStateObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72EBD96243C8490009F9328 /* BluetoothStateObserver.swift */; };
+		F72EBD9B243C8750009F9328 /* BluetoothStateObserverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72EBD9A243C8750009F9328 /* BluetoothStateObserverTests.swift */; };
+		F72EBD9E243C90E6009F9328 /* HumbleLocalNotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72EBD9D243C90E6009F9328 /* HumbleLocalNotificationScheduler.swift */; };
+		F72EBD9F243C90E6009F9328 /* HumbleLocalNotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72EBD9D243C90E6009F9328 /* HumbleLocalNotificationScheduler.swift */; };
 		F758553A24294C8D00CBE1ED /* RequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F758553924294C8C00CBE1ED /* RequestFactory.swift */; };
 		F758B8BE242CB856003AE16D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F758B8BD242CB856003AE16D /* Localizable.strings */; };
 		F758B8C0242CB98C003AE16D /* UIViewController+Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = F758B8BF242CB98C003AE16D /* UIViewController+Storyboarded.swift */; };
@@ -352,6 +357,9 @@
 		F6F05A332434344200FF4B72 /* StartNowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartNowViewController.swift; sourceTree = "<group>"; };
 		F6F05A35243436D200FF4B72 /* PrivacyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyViewController.swift; sourceTree = "<group>"; };
 		F72EBD4E24361E99009F9328 /* URLSessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionTests.swift; sourceTree = "<group>"; };
+		F72EBD96243C8490009F9328 /* BluetoothStateObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothStateObserver.swift; sourceTree = "<group>"; };
+		F72EBD9A243C8750009F9328 /* BluetoothStateObserverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothStateObserverTests.swift; sourceTree = "<group>"; };
+		F72EBD9D243C90E6009F9328 /* HumbleLocalNotificationScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HumbleLocalNotificationScheduler.swift; sourceTree = "<group>"; };
 		F758553924294C8C00CBE1ED /* RequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFactory.swift; sourceTree = "<group>"; };
 		F758B8BD242CB856003AE16D /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		F758B8BF242CB98C003AE16D /* UIViewController+Storyboarded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Storyboarded.swift"; sourceTree = "<group>"; };
@@ -494,6 +502,7 @@
 				21AF36AA241A8E50001A4910 /* BTLEListener.swift */,
 				21C09A8C24377F5100368203 /* CBManagerState+CustomStringConvertible.swift */,
 				21C09A8E2437B99F00368203 /* BluetoothNursery.swift */,
+				F72EBD96243C8490009F9328 /* BluetoothStateObserver.swift */,
 			);
 			path = Bluetooth;
 			sourceTree = "<group>";
@@ -509,6 +518,7 @@
 				214209CD24237A6300C7BFF3 /* PlistContactEventRecorderTests.swift */,
 				F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */,
 				F68BFBF6242ACD17008EE68F /* TestHelpers.swift */,
+				F72EBD99243C8738009F9328 /* Bluetooth */,
 				21F374002433845600926FB8 /* Contact Events */,
 				098ED486242E89760029B729 /* Doubles */,
 				214209DA242630CF00C7BFF3 /* Networking */,
@@ -630,7 +640,6 @@
 				89896E5F2435F15C00F949EA /* Base.xcconfig */,
 				6FC63C39241641BA007C8BF3 /* LaunchScreen.storyboard */,
 				F758B8C3242CC0EE003AE16D /* Main.storyboard */,
-				895D9E4924374EB800573D4D /* Routing */,
 				214209B72422155200C7BFF3 /* Appearance */,
 				214209B82422157300C7BFF3 /* Bluetooth */,
 				21B3D2DF24263A1100573061 /* Contact Events */,
@@ -639,12 +648,13 @@
 				F78CEB45242B7741002254AD /* Extensions */,
 				89F06B2D2434A5A50074C612 /* Logging */,
 				214209D3242399DD00C7BFF3 /* Networking */,
+				F6CC2CA7242BC7D90079432B /* Notifications */,
 				F6F05A212433BE9600FF4B72 /* Onboarding */,
 				F758B8C7242CC164003AE16D /* PleaseSelfIsolate */,
 				F758B8C5242CC117003AE16D /* Potential */,
 				F758B8D0242CC661003AE16D /* Registration */,
-				F6CC2CA7242BC7D90079432B /* Remote Notifications */,
 				F758B8BC242CB83B003AE16D /* Resources */,
+				895D9E4924374EB800573D4D /* Routing */,
 				0997D055243BDEEC0067346C /* MainNavigationController.swift */,
 			);
 			path = CoLocate;
@@ -756,13 +766,14 @@
 			path = Permissions;
 			sourceTree = "<group>";
 		};
-		F6CC2CA7242BC7D90079432B /* Remote Notifications */ = {
+		F6CC2CA7242BC7D90079432B /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
 				F6CC2CA8242BC7FC0079432B /* RemoteNotificationManager.swift */,
 				090B186E24354D0100870B5D /* RemoteNotificationDispatcher.swift */,
+				F72EBD9D243C90E6009F9328 /* HumbleLocalNotificationScheduler.swift */,
 			);
-			path = "Remote Notifications";
+			path = Notifications;
 			sourceTree = "<group>";
 		};
 		F6CC2CAA242BCCE90079432B /* Remote Notifications */ = {
@@ -796,6 +807,14 @@
 				F632792024351C1900CF7A42 /* OnboardingViewControllerTests.swift */,
 			);
 			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		F72EBD99243C8738009F9328 /* Bluetooth */ = {
+			isa = PBXGroup;
+			children = (
+				F72EBD9A243C8750009F9328 /* BluetoothStateObserverTests.swift */,
+			);
+			path = Bluetooth;
 			sourceTree = "<group>";
 		};
 		F758B8BC242CB83B003AE16D /* Resources */ = {
@@ -1085,6 +1104,7 @@
 				F67A2295242AC188002254B6 /* RegistrationViewControllerTests.swift in Sources */,
 				F67A2293242AA370002254B6 /* SecureRegistrationStorageTests.swift in Sources */,
 				214209D72423C9B600C7BFF3 /* PatchContactEventsRequestTests.swift in Sources */,
+				F72EBD9B243C8750009F9328 /* BluetoothStateObserverTests.swift in Sources */,
 				090B1871243552C300870B5D /* UserNotificationCenterDouble.swift in Sources */,
 				21C417CA242CB0A200DEF3E2 /* ConfirmRegistrationRequestTests.swift in Sources */,
 				F632792A2435323200CF7A42 /* PermissionsViewControllerTests.swift in Sources */,
@@ -1112,6 +1132,7 @@
 				0997D056243BDEEC0067346C /* MainNavigationController.swift in Sources */,
 				21AF36AB241A8E50001A4910 /* BTLEListener.swift in Sources */,
 				21C09A8D24377F5100368203 /* CBManagerState+CustomStringConvertible.swift in Sources */,
+				F72EBD9E243C90E6009F9328 /* HumbleLocalNotificationScheduler.swift in Sources */,
 				217A23BE243B34E8001B8236 /* UIDevice+ModelName.swift in Sources */,
 				F78CEBED242D0836002254AD /* SecureRequestFactory.swift in Sources */,
 				21F373FF2433844D00926FB8 /* ContactEventCollector.swift in Sources */,
@@ -1127,6 +1148,7 @@
 				F758B8C0242CB98C003AE16D /* UIViewController+Storyboarded.swift in Sources */,
 				2115C3E624360427009C0F5B /* DebuggerTableViewCell.swift in Sources */,
 				89BC79EB2434E047002050F8 /* LogsViewController.swift in Sources */,
+				F72EBD97243C8490009F9328 /* BluetoothStateObserver.swift in Sources */,
 				214209B62421072C00C7BFF3 /* OkViewController.swift in Sources */,
 				F758553A24294C8D00CBE1ED /* RequestFactory.swift in Sources */,
 				21C417CC242CB15D00DEF3E2 /* ConfirmRegistrationRequest.swift in Sources */,
@@ -1216,6 +1238,7 @@
 				895D9E0D2437425600573D4D /* LoggerMetadata.swift in Sources */,
 				895D9E0E2437425600573D4D /* AppDelegate.swift in Sources */,
 				895D9E0F2437425600573D4D /* RegistrationRequest.swift in Sources */,
+				F72EBD98243C8490009F9328 /* BluetoothStateObserver.swift in Sources */,
 				895D9E102437425600573D4D /* URLSession.swift in Sources */,
 				895D9E112437425600573D4D /* DispatchQueue+Testable.swift in Sources */,
 				895D9E122437425600573D4D /* Persistence.swift in Sources */,
@@ -1232,6 +1255,7 @@
 				895D9E1A2437425600573D4D /* EnterDiagnosisTableViewController.swift in Sources */,
 				895D9E1B2437425600573D4D /* LiveBTLEDebuggerTableViewController.swift in Sources */,
 				895D9E1C2437425600573D4D /* LogoStrapline.swift in Sources */,
+				F72EBD9F243C90E6009F9328 /* HumbleLocalNotificationScheduler.swift in Sources */,
 				895D9E1D2437425600573D4D /* PatchContactEventsRequest.swift in Sources */,
 				895D9E1E2437425600573D4D /* Session.swift in Sources */,
 				895D9E1F2437425600573D4D /* OnboardingCoordinator.swift in Sources */,
