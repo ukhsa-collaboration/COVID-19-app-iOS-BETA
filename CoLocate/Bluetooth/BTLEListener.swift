@@ -131,7 +131,7 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
             return
         }
 
-        logger.info("Sonar service found: \(sonarService)")
+        logger.info("sonarId service found: \(sonarService)")
         peripheral.discoverCharacteristics([ConcreteBTLEBroadcaster.sonarIdCharacteristicUUID], for: sonarService)
     }
     
@@ -151,7 +151,7 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
             return
         }
 
-        logger.info("found sonarId characteristic: \(sonarIdCharacteristic)")
+        logger.info("sonarId characteristic found: \(sonarIdCharacteristic)")
         peripheral.readValue(for: sonarIdCharacteristic)
     }
 
@@ -171,11 +171,13 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
             return
         }
 
-        logger.info("characteristic: \(characteristic)")
-        
-        let sonarId = UUID(uuidString: CBUUID(data: data).uuidString)!
-        delegate?.btleListener(self, didFindSonarId: sonarId, forPeripheral: peripheral)
-        peripheral.readRSSI()
+        if let sonarId = UUID(uuidString: CBUUID(data: data).uuidString) {
+            logger.info("sonarId read: \(sonarId)")
+            delegate?.btleListener(self, didFindSonarId: sonarId, forPeripheral: peripheral)
+            peripheral.readRSSI()
+        } else {
+            logger.info("characteristic value is not a valid sonarId: \(data)")
+        }
     }
 
     func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?) {
