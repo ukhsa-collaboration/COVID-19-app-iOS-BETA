@@ -74,7 +74,7 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
         logger.info("\(service)")
         self.sonarIdService = service
         
-        logger.info("now advertising sonarId \(sonarId?.uuidString ?? "unknown"))")
+        logger.info("now advertising sonarId \(sonarId?.uuidString ?? "unknown")")
         
         peripheral.startAdvertising([
             CBAdvertisementDataLocalNameKey: "CoLocate",

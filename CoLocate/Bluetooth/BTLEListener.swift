@@ -131,7 +131,7 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
     // MARK: CBPeripheralDelegate
     
     func peripheral(_ peripheral: CBPeripheral, didModifyServices invalidatedServices: [CBService]) {
-        logger.info("\(peripheral.identifier) (\(peripheral.name ?? "unknown") invalidatedServices:")
+        logger.info("\(peripheral.identifier) (\(peripheral.name ?? "unknown")) invalidatedServices:")
         for service in invalidatedServices {
             logger.info("\t\(service)\n")
         }
