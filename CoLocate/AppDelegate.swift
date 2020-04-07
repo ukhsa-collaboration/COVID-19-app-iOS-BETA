@@ -164,7 +164,6 @@ extension AppDelegate: PersistenceDelegate {
 
     func persistence(_ persistence: Persistence, didUpdateRegistration registration: Registration) {
         onboardingViewController.updateState()
-        bluetoothNursery.startBroadcaster(stateDelegate: nil)
         bluetoothNursery.broadcaster?.sonarId = registration.id
         bluetoothNursery.startListener(stateDelegate: BluetoothStateObserver.shared)
 

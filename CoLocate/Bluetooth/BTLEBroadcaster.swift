@@ -44,6 +44,7 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
         switch (peripheral.state) {
             
         case .poweredOn:
+            self.peripheral = peripheral
             startAdvertising(peripheral: peripheral, sonarId: sonarId)
             
         default:
