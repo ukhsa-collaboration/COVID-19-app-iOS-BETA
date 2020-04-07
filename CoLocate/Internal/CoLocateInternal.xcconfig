@@ -1,3 +1,0 @@
-#include "../../CoLocate.xcconfig"
-
-SWIFT_ACTIVE_COMPILATION_CONDITIONS = INTERNAL $(inherited)

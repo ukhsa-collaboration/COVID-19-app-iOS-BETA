@@ -14,20 +14,6 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "895D9DEC2437425600573D4D"
-               BuildableName = "CoLocateInternal.app"
-               BlueprintName = "CoLocateInternal"
-               ReferencedContainer = "container:CoLocate.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "NO"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "6FC63C2C241641B8007C8BF3"
                BuildableName = "CoLocate.app"
                BlueprintName = "CoLocate"
@@ -65,7 +51,7 @@
       </Testables>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release beta"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
@@ -78,15 +64,15 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "895D9DEC2437425600573D4D"
-            BuildableName = "CoLocateInternal.app"
-            BlueprintName = "CoLocateInternal"
+            BlueprintIdentifier = "6FC63C2C241641B8007C8BF3"
+            BuildableName = "CoLocate.app"
+            BlueprintName = "CoLocate"
             ReferencedContainer = "container:CoLocate.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Release beta"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
@@ -95,18 +81,18 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "895D9DEC2437425600573D4D"
-            BuildableName = "CoLocateInternal.app"
-            BlueprintName = "CoLocateInternal"
+            BlueprintIdentifier = "6FC63C2C241641B8007C8BF3"
+            BuildableName = "CoLocate.app"
+            BlueprintName = "CoLocate"
             ReferencedContainer = "container:CoLocate.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
-      buildConfiguration = "Debug">
+      buildConfiguration = "Release beta">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Release beta"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

@@ -20,12 +20,12 @@ platform :ios do
     update_code_signing_settings(
       use_automatic_signing: false,
       path: "CoLocate.xcodeproj",
-      targets: ["CoLocateInternal"],
+      targets: ["CoLocate"],
       code_sign_identity: "iPhone Distribution",
       profile_name: "match AppStore uk.nhs.nhsx.beta.CoLocate",
     )
 
-    build_app(scheme: "CoLocateInternal")
+    build_app(scheme: "CoLocate beta release")
 
     upload_to_testflight(
       username: ENV.fetch("APPLE_USERNAME"),

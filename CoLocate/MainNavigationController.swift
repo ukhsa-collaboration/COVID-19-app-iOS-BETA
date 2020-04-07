@@ -11,13 +11,15 @@ import UIKit
 class MainNavigationController: UINavigationController {
     var previouslyPresentedViewController: UIViewController?
 
+    
+    #if DEBUG || INTERNAL
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if let vc = presentedViewController {
             previouslyPresentedViewController = vc
             dismiss(animated: true)
         }
 
-        if motion == UIEvent.EventSubtype.motionShake && DebugSetting.enabled {
+        if motion == UIEvent.EventSubtype.motionShake {
             showDebugView()
         }
     }
@@ -35,4 +37,5 @@ class MainNavigationController: UINavigationController {
         guard let debugVC = storyboard.instantiateInitialViewController() else { return }
         present(debugVC, animated: true)
     }
+    #endif
 }

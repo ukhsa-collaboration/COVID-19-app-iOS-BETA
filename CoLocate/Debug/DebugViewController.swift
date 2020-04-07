@@ -8,7 +8,7 @@
 
 import UIKit
 
-
+#if DEBUG || INTERNAL
 class DebugViewController: UITableViewController, Storyboarded {
     static let storyboardName = "Debug"
 
@@ -158,3 +158,4 @@ class TestPushRequest: SecureRequest, Request {
     func parse(_ data: Data) throws -> Void {
     }
 }
+#endif

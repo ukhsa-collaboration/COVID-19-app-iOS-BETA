@@ -1,0 +1,15 @@
+
+// TODO: Rename file to `Release.xcconfig` when build configurations are decoupled from product “flavours”
+
+#include "Project.xcconfig"
+
+DEBUG_INFORMATION_FORMAT = dwarf-with-dsym
+SWIFT_COMPILATION_MODE = wholemodule
+SWIFT_OPTIMIZATION_LEVEL = -O
+VALIDATE_PRODUCT = YES
+SWIFT_ACTIVE_COMPILATION_CONDITIONS = INTERNAL
+
+// Other configs:
+
+ENABLE_NS_ASSERTIONS = NO
+MTL_ENABLE_DEBUG_INFO = NO
