@@ -18,7 +18,6 @@ extension CBPeripheral: BTLEPeripheral {
 }
 
 protocol BTLEListenerDelegate {
-    func btleListener(_ listener: BTLEListener, didConnect peripheral: BTLEPeripheral)
     func btleListener(_ listener: BTLEListener, didDisconnect peripheral: BTLEPeripheral, error: Error?)
     func btleListener(_ listener: BTLEListener, didFindSonarId sonarId: UUID, forPeripheral peripheral: BTLEPeripheral)
     func btleListener(_ listener: BTLEListener, didReadRSSI RSSI: Int, forPeripheral peripheral: BTLEPeripheral)
@@ -92,10 +91,7 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         logger.info("\(peripheral.identifier) (\(peripheral.name ?? "unknown"))")
 
-        delegate?.btleListener(self, didConnect: peripheral)
-        
         peripheral.delegate = self
-        peripheral.readRSSI()
         peripheral.discoverServices([ConcreteBTLEBroadcaster.sonarServiceUUID])
     }
     
@@ -108,24 +104,6 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
         delegate?.btleListener(self, didDisconnect: peripheral, error: error)
                 
         peripherals[peripheral.identifier] = nil
-    }
-    
-    func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?) {
-        guard error == nil else {
-            logger.info("didReadRSSI error: \(error!)")
-            return
-        }
-        logger.info("\(peripheral.identifier) (\(peripheral.name ?? "unknown")), RSSI: \(RSSI)")
-
-        delegate?.btleListener(self, didReadRSSI: RSSI.intValue, forPeripheral: peripheral)
-        
-        if delegate?.btleListener(self, shouldReadRSSIFor: peripheral) ?? false {
-            Timer.scheduledTimer(withTimeInterval: rssiSamplingInterval, repeats: false) { timer in
-                if peripheral.state == .connected {
-                    peripheral.readRSSI()
-                }
-            }
-        }
     }
     
     // MARK: CBPeripheralDelegate
@@ -197,6 +175,25 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
         
         let sonarId = UUID(uuidString: CBUUID(data: data).uuidString)!
         delegate?.btleListener(self, didFindSonarId: sonarId, forPeripheral: peripheral)
+        peripheral.readRSSI()
+    }
+
+    func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?) {
+        guard error == nil else {
+            logger.info("error: \(error!)")
+            return
+        }
+        logger.info("\(peripheral.identifier) (\(peripheral.name ?? "unknown")), RSSI: \(RSSI)")
+
+        delegate?.btleListener(self, didReadRSSI: RSSI.intValue, forPeripheral: peripheral)
+        
+        if delegate?.btleListener(self, shouldReadRSSIFor: peripheral) ?? false {
+            Timer.scheduledTimer(withTimeInterval: rssiSamplingInterval, repeats: false) { timer in
+                if peripheral.state == .connected {
+                    peripheral.readRSSI()
+                }
+            }
+        }
     }
 
 }

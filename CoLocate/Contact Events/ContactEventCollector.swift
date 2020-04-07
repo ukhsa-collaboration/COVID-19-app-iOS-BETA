@@ -11,7 +11,7 @@ import Logging
 
 struct MutableContactEvent {
     
-    var sonarId: UUID?
+    var sonarId: UUID? // TODO: can I make this non-optional and compulsory in the constructor?
     let timestamp: Date
     var rssiValues: [Int]
     var duration: TimeInterval
@@ -53,8 +53,9 @@ struct MutableContactEvent {
         self.contactEventRecorder = contactEventRecorder
     }
     
-    func btleListener(_ listener: BTLEListener, didConnect peripheral: BTLEPeripheral) {
+    func btleListener(_ listener: BTLEListener, didFindSonarId sonarId: UUID, forPeripheral peripheral: BTLEPeripheral) {
         connectedPeripherals[peripheral.identifier] = MutableContactEvent()
+        connectedPeripherals[peripheral.identifier]?.sonarId = sonarId
     }
     
     func btleListener(_ listener: BTLEListener, didDisconnect peripheral: BTLEPeripheral, error: Error?) {
@@ -64,10 +65,6 @@ struct MutableContactEvent {
         }
     }
 
-    func btleListener(_ listener: BTLEListener, didFindSonarId sonarId: UUID, forPeripheral peripheral: BTLEPeripheral) {
-        connectedPeripherals[peripheral.identifier]?.sonarId = sonarId
-    }
-    
     func btleListener(_ listener: BTLEListener, shouldReadRSSIFor peripheral: BTLEPeripheral) -> Bool {
         return connectedPeripherals[peripheral.identifier] != nil
     }
