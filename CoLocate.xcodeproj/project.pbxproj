@@ -174,7 +174,6 @@
 		098ED487242E89930029B729 /* PushNotificationManagerDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationManagerDouble.swift; sourceTree = "<group>"; };
 		098ED489242E89D80029B729 /* RegistrationServiceDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationServiceDouble.swift; sourceTree = "<group>"; };
 		098ED48B242E8B290029B729 /* PersistenceDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceDouble.swift; sourceTree = "<group>"; };
-		098ED48D242E9AF00029B729 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		0995ABAC243CE3D10057C0D7 /* ReleaseBeta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ReleaseBeta.xcconfig; sourceTree = "<group>"; };
 		0997D055243BDEEC0067346C /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		09B27BD7243BA3F200DAEA02 /* DispatchQueue+AsyncAfterable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+AsyncAfterable.swift"; sourceTree = "<group>"; };
@@ -217,7 +216,6 @@
 		6FC63C3C241641BA007C8BF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		89074B8424378A0D00D67777 /* UITestPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestPayload.swift; sourceTree = "<group>"; };
 		89074B8924378B6E00D67777 /* ScreenTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenTestCase.swift; sourceTree = "<group>"; };
-		890B41D12437777C00C02A2E /* CoLocateInternal.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CoLocateInternal.xcconfig; sourceTree = "<group>"; };
 		891E16A3243782D000281821 /* UITestResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestResponder.swift; sourceTree = "<group>"; };
 		89388B8C2435E370009D60CF /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		89388B8E2435E673009D60CF /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
@@ -226,7 +224,6 @@
 		895D9DE22437383300573D4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		895D9DE82437384C00573D4D /* CoLocateUITests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CoLocateUITests.xcconfig; sourceTree = "<group>"; };
 		895D9E452437458700573D4D /* AppIcon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppIcon.xcassets; sourceTree = "<group>"; };
-		895D9E472437459500573D4D /* AppIcon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppIcon.xcassets; sourceTree = "<group>"; };
 		895D9E4A24374EC900573D4D /* Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
 		895D9E4D24374EFA00573D4D /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		895D9E51243750EE00573D4D /* PotentialScreenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotentialScreenTests.swift; sourceTree = "<group>"; };
@@ -542,7 +539,6 @@
 			isa = PBXGroup;
 			children = (
 				895D9E432437456D00573D4D /* Production */,
-				895D9E442437457200573D4D /* Internal */,
 				F78CEB74242BAC83002254AD /* CoLocate.entitlements */,
 				F78CEB53242B7E18002254AD /* CoLocate-Bridging-Header.h */,
 				F78CEB67242B8C2B002254AD /* GoogleService-Info.plist */,
@@ -605,16 +601,6 @@
 				895D9E452437458700573D4D /* AppIcon.xcassets */,
 			);
 			path = Production;
-			sourceTree = "<group>";
-		};
-		895D9E442437457200573D4D /* Internal */ = {
-			isa = PBXGroup;
-			children = (
-				890B41D12437777C00C02A2E /* CoLocateInternal.xcconfig */,
-				098ED48D242E9AF00029B729 /* Settings.bundle */,
-				895D9E472437459500573D4D /* AppIcon.xcassets */,
-			);
-			path = Internal;
 			sourceTree = "<group>";
 		};
 		895D9E4924374EB800573D4D /* Routing */ = {
