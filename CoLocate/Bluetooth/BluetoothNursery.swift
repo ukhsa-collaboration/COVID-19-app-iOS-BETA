@@ -23,12 +23,18 @@ class BluetoothNursery {
     var peripheral: CBPeripheralManager?
     var broadcaster: BTLEBroadcaster?
     
+    var startListenerCalled: Bool = false
+    var startBroadcasterCalled: Bool = false
+    
     init() {
         contactEventRecorder = PlistContactEventRecorder.shared
         contactEventCollector = ContactEventCollector(contactEventRecorder: contactEventRecorder)
     }
     
     func startListener(stateDelegate: BTLEListenerStateDelegate?) {
+        assert(!startListenerCalled, "startListener called a second time")
+        
+        startListenerCalled = true
         listener = ConcreteBTLEListener(contactEventRecorder: contactEventRecorder)
         central = CBCentralManager(delegate: listener as! ConcreteBTLEListener, queue: nil, options: [
             CBCentralManagerOptionRestoreIdentifierKey: BluetoothNursery.centralRestoreIdentifier
@@ -38,6 +44,9 @@ class BluetoothNursery {
     }
     
     func startBroadcaster(stateDelegate: BTLEBroadcasterStateDelegate?) {
+        assert(!startBroadcasterCalled, "startBroadcaster called a second time")
+        
+        startBroadcasterCalled = true
         broadcaster = ConcreteBTLEBroadcaster()
         peripheral = CBPeripheralManager(delegate: broadcaster as! ConcreteBTLEBroadcaster, queue: nil, options: [
             CBPeripheralManagerOptionRestoreIdentifierKey: BluetoothNursery.peripheralRestoreIdentifier
