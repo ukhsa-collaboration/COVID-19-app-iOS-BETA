@@ -31,9 +31,9 @@ class ContactEventCollectorTests: XCTestCase {
     }
 
     func testKeepsTrackOfHowManyConnectedProperties() {
-        collector.btleListener(listener, didConnect: peripheral1)
+        collector.btleListener(listener, didFindSonarId:sonarId1, forPeripheral: peripheral1)
 
-        XCTAssertEqual(1, collector._connectedPeripheralCount)
+        XCTAssertEqual(1, collector._contactEventCount)
     }
 
     func testRecordsContactEventOnDisconnect() {
