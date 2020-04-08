@@ -31,6 +31,7 @@ class OnboardingTests: ScreenTestCase {
         continueButton.tap()
         
         XCTAssertEqual(allowedDataSharing.stringValue, "Yes")
+        XCTAssertEqual(bluetoothState.stringValue, "Allowed")
     }
 }
 
@@ -64,6 +65,10 @@ private extension OnboardingTests {
     
     var allowedDataSharing: XCUIElement {
         app.cells["Allowed Data Sharing"]
+    }
+    
+    var bluetoothState: XCUIElement {
+        app.cells["Bluetooth State"]
     }
     
 }

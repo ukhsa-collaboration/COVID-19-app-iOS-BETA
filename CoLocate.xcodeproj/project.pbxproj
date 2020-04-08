@@ -69,6 +69,7 @@
 		898FE859243B4FE300210775 /* AuthorizationManaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898FE858243B4FE300210775 /* AuthorizationManaging.swift */; };
 		898FE85E243B586E00210775 /* PrivacyViewControllerInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898FE85D243B586E00210775 /* PrivacyViewControllerInteractorTests.swift */; };
 		898FE860243B5AF700210775 /* UITestScreenMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898FE85F243B5AF700210775 /* UITestScreenMaker.swift */; };
+		899E46D4243E1B0E00EDB5BC /* OnboardingStateSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899E46D3243E1B0E00EDB5BC /* OnboardingStateSummaryViewController.swift */; };
 		89AEE89D243DF24900BF3861 /* Persisting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AEE89C243DF24900BF3861 /* Persisting.swift */; };
 		89BC79EB2434E047002050F8 /* LogsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BC79EA2434E047002050F8 /* LogsViewController.swift */; };
 		89F06B2C2434A2C00074C612 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 89F06B2B2434A2C00074C612 /* Logging */; };
@@ -237,6 +238,7 @@
 		898FE858243B4FE300210775 /* AuthorizationManaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationManaging.swift; sourceTree = "<group>"; };
 		898FE85D243B586E00210775 /* PrivacyViewControllerInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyViewControllerInteractorTests.swift; sourceTree = "<group>"; };
 		898FE85F243B5AF700210775 /* UITestScreenMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestScreenMaker.swift; sourceTree = "<group>"; };
+		899E46D3243E1B0E00EDB5BC /* OnboardingStateSummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingStateSummaryViewController.swift; sourceTree = "<group>"; };
 		89AEE89C243DF24900BF3861 /* Persisting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persisting.swift; sourceTree = "<group>"; };
 		89BC79EA2434E047002050F8 /* LogsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogsViewController.swift; sourceTree = "<group>"; };
 		89F06B2E2434A62C0074C612 /* LoggingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingManager.swift; sourceTree = "<group>"; };
@@ -613,6 +615,7 @@
 				891E16A3243782D000281821 /* UITestResponder.swift */,
 				89074B8424378A0D00D67777 /* UITestPayload.swift */,
 				898FE85F243B5AF700210775 /* UITestScreenMaker.swift */,
+				899E46D3243E1B0E00EDB5BC /* OnboardingStateSummaryViewController.swift */,
 			);
 			path = Routing;
 			sourceTree = "<group>";
@@ -1050,6 +1053,7 @@
 				89F06B372434C35A0074C612 /* LoggerMetadata.swift in Sources */,
 				F68B89EF243D01FA00F369A9 /* SelfDiagnosisNavigationController.swift in Sources */,
 				898FE859243B4FE300210775 /* AuthorizationManaging.swift in Sources */,
+				899E46D4243E1B0E00EDB5BC /* OnboardingStateSummaryViewController.swift in Sources */,
 				6FC63C31241641B8007C8BF3 /* AppDelegate.swift in Sources */,
 				F6AB2F1E243D324400386D6B /* CoughViewController.swift in Sources */,
 				F600A60224297A8E0038DF57 /* RegistrationRequest.swift in Sources */,
