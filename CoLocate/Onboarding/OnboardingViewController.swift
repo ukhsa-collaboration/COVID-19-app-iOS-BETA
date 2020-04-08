@@ -66,7 +66,9 @@ class OnboardingViewController: UINavigationController, Storyboarded {
         }
 
         viewControllers = [vc]
-        if presentingViewController == nil {
+        
+        // TODO: This seems to be an artefact of the code’s history. Verify if we need this.
+        if let rootViewController = rootViewController, presentingViewController == nil {
             rootViewController.present(self, animated: true)
         }
     }
