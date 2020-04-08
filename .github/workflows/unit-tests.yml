@@ -43,6 +43,16 @@ jobs:
           SDK: ${{ matrix.run-config['sdk'] }}
         run: xcodebuild -scheme CoLocate -sdk ${SDK} CODE_SIGNING_ALLOWED=NO
 
+      - name: Notify Slack on Failure
+        if: failure()
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.slack_bot_token }}
+        uses: voxmedia/github-action-slack-notify-build@v1
+        with:
+          channel: sonar-ios
+          status: FAILED
+          color: danger
+
   test:
     needs: build
     runs-on:
@@ -69,6 +79,16 @@ jobs:
           -destination "platform=iOS Simulator,OS=13.4,name=iPhone 11"
           -showBuildTimingSummary
           -allowProvisioningUpdates
+
+      - name: Notify Slack on Failure
+        if: failure()
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.slack_bot_token }}
+        uses: voxmedia/github-action-slack-notify-build@v1
+        with:
+          channel: sonar-ios
+          status: FAILED
+          color: danger
 
   update-upload-tag:
     needs: test
