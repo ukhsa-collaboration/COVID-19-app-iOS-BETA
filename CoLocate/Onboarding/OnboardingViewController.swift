@@ -17,9 +17,11 @@ class OnboardingViewController: UINavigationController, Storyboarded {
     lazy var environment = OnboardingEnvironment()
     lazy var onboardingCoordinator = OnboardingCoordinator(
         persistence: self.environment.persistence,
-        authorizationManager: AuthorizationManager()
+        authorizationManager: self.environment.authorizationManager
     )
     var uiQueue: TestableQueue = DispatchQueue.main
+    
+    var didComplete: () -> Void = {}
 
     var rootViewController: UIViewController! {
         didSet { updateState() }
@@ -57,6 +59,7 @@ class OnboardingViewController: UINavigationController, Storyboarded {
     private func handle(state: OnboardingCoordinator.State?) {
         guard let state = state else {
             performSegue(withIdentifier: "unwindFromOnboarding", sender: self)
+            didComplete()
             return
         }
 

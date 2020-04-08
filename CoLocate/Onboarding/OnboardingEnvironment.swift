@@ -11,10 +11,13 @@ import Foundation
 class OnboardingEnvironment {
     
     let persistence: Persisting
+    let authorizationManager: AuthorizationManaging
     
     init(
-        persistence: Persisting = Persistence.shared
+        persistence: Persisting = Persistence.shared,
+        authorizationManager: AuthorizationManaging = AuthorizationManager()
     ) {
         self.persistence = persistence
+        self.authorizationManager = authorizationManager
     }
 }

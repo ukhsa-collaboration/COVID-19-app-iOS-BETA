@@ -9,6 +9,9 @@
 @testable import CoLocate
 
 class OnboardingCoordinatorDouble: OnboardingCoordinator {
+    convenience init() {
+        self.init(persistence: Persistence.shared, authorizationManager: AuthorizationManager())
+    }
     var stateCompletion: ((OnboardingCoordinator.State?) -> Void)?
     override func state(completion: @escaping (OnboardingCoordinator.State?) -> Void) {
         stateCompletion = completion

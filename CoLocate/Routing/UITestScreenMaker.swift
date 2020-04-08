@@ -19,10 +19,16 @@ struct UITestScreenMaker: ScreenMaking {
             viewController.title = "Potential"
             return UINavigationController(rootViewController: viewController)
         case .onboarding:
-            return OnboardingViewController.instantiate {
-                $0.environment = OnboardingEnvironment(mockWithHost: $0)
+            return OnboardingViewController.instantiate { viewController in
+                let environment = OnboardingEnvironment(mockWithHost: viewController)
+                viewController.environment = environment
+                viewController.didComplete = { [weak viewController] in
+                    let summary = StateSummaryViewController(environment: environment)
+                    viewController?.present(summary, animated: false, completion: nil)
+                }
+                
                 // TODO: Remove this – currently needed to kick `updateState()`
-                $0.rootViewController = nil
+                viewController.rootViewController = nil
             }
         }
     }
@@ -32,8 +38,12 @@ struct UITestScreenMaker: ScreenMaking {
 private extension OnboardingEnvironment {
     
     convenience init(mockWithHost host: UIViewController) {
+        // TODO: Fix initial state of mocks.
+        // Currently it’s set so that onboarding is “done” as soon as we allow data sharing – so we can have a minimal
+        // UI test.
         self.init(
-            persistence: InMemoryPersistence(host: host)
+            persistence: InMemoryPersistence(),
+            authorizationManager: EphemeralAuthorizationManager()
         )
     }
     
@@ -41,29 +51,64 @@ private extension OnboardingEnvironment {
 
 private class InMemoryPersistence: Persisting {
     
-    weak var host: UIViewController?
-    init(host: UIViewController) {
-        self.host = host
-    }
-    
-    var allowedDataSharing = false {
-        didSet {
-            if allowedDataSharing {
-                didAllowDataSharing()
-            }
-        }
-    }
-    var registration: Registration? = nil
+    var allowedDataSharing = false
+    var registration: Registration? = Registration(id: UUID(), secretKey: Data())
     var diagnosis = Diagnosis.unknown
-    
-    func didAllowDataSharing() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
-            let alert = UIAlertController(title: "Recorded data sharing consent", message: "", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.host?.present(alert, animated: false, completion: nil)
-        }
-    }
 
+}
+
+private class EphemeralAuthorizationManager: AuthorizationManaging {
+    var bluetooth: AuthorizationStatus = .allowed
+    func notifications(completion: @escaping (AuthorizationStatus) -> Void) {
+        completion(.allowed)
+    }
+}
+
+private class StateSummaryViewController: UITableViewController {
+    private let cellID = UUID().uuidString
+    private let environment: OnboardingEnvironment
+    
+    init(environment: OnboardingEnvironment) {
+        self.environment = environment
+        super.init(style: .grouped)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        tableView.register(InfoTableViewCell.self, forCellReuseIdentifier: cellID)
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        1
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        1
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
+        cell.textLabel?.text = "Allowed Data Sharing"
+        cell.detailTextLabel?.text = environment.persistence.allowedDataSharing ? "Yes" : "No"
+        cell.accessibilityLabel = cell.textLabel?.text
+        cell.accessibilityValue = cell.detailTextLabel?.text
+        return cell
+    }
+}
+
+private class InfoTableViewCell: UITableViewCell {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: .value1, reuseIdentifier: reuseIdentifier)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
 
 #endif

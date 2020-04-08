@@ -30,8 +30,7 @@ class OnboardingTests: ScreenTestCase {
         
         continueButton.tap()
         
-        // TODO: Fix this. This is currently inherently hacky as we’re forcing a UI update from model layer.
-        XCTAssert(recodedConsentTitle.waitForExistence(timeout: 0.2))
+        XCTAssertEqual(allowedDataSharing.stringValue, "Yes")
     }
 }
 
@@ -63,8 +62,8 @@ private extension OnboardingTests {
 
 private extension OnboardingTests {
     
-    var recodedConsentTitle: XCUIElement {
-        app.staticTexts["Recorded data sharing consent"]
+    var allowedDataSharing: XCUIElement {
+        app.cells["Allowed Data Sharing"]
     }
     
 }

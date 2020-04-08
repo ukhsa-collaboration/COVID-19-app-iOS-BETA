@@ -56,4 +56,22 @@ class OnboardingViewControllerTests: TestCase {
         XCTAssertNotNil(vc.children.first as? RegistrationViewController)
     }
 
+    func testCompletionState() {
+        let coordinatorDouble = OnboardingCoordinatorDouble()
+        let queue = QueueDouble()
+        let vc = OnboardingViewController.instantiate()
+        vc.rootViewController = rootViewController
+        vc.onboardingCoordinator = coordinatorDouble
+        vc.uiQueue = queue
+
+        var callbackCount = 0
+        vc.didComplete = {
+            callbackCount += 1
+        }
+        vc.updateState()
+        coordinatorDouble.stateCompletion!(nil)
+
+        XCTAssertEqual(callbackCount, 1)
+    }
+
 }
