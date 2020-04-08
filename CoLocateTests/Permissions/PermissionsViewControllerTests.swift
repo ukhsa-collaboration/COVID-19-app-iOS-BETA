@@ -15,11 +15,9 @@ class PermissionsViewControllerTests: TestCase {
     func testPermissionsFlow() {
         let authManagerDouble = AuthorizationManagerDouble()
         let remoteNotificationManagerDouble = RemoteNotificationManagerDouble()
-        let persistence = PersistenceDouble()
         let vc = PermissionsViewController.instantiate()
         vc.authManager = authManagerDouble
         vc.remoteNotificationManager = remoteNotificationManagerDouble
-        vc.persistence = persistence
         vc.uiQueue = QueueDouble()
 
         let permissionsUnwinder = PermissionsUnwinder()
@@ -48,11 +46,9 @@ class PermissionsViewControllerTests: TestCase {
     func testBluetoothAlreadyDetermined() {
         let authManagerDouble = AuthorizationManagerDouble(bluetooth: .allowed)
         let remoteNotificationManagerDouble = RemoteNotificationManagerDouble()
-        let persistence = PersistenceDouble()
         let vc = PermissionsViewController.instantiate()
         vc.authManager = authManagerDouble
         vc.remoteNotificationManager = remoteNotificationManagerDouble
-        vc.persistence = persistence
         vc.uiQueue = QueueDouble()
 
         let permissionsUnwinder = PermissionsUnwinder()
@@ -73,11 +69,9 @@ class PermissionsViewControllerTests: TestCase {
     func testNotificationsAlreadyDetermined() {
         let authManagerDouble = AuthorizationManagerDouble()
         let remoteNotificationManagerDouble = RemoteNotificationManagerDouble()
-        let persistence = PersistenceDouble()
         let vc = PermissionsViewController.instantiate()
         vc.authManager = authManagerDouble
         vc.remoteNotificationManager = remoteNotificationManagerDouble
-        vc.persistence = persistence
         vc.uiQueue = QueueDouble()
 
         let permissionsUnwinder = PermissionsUnwinder()

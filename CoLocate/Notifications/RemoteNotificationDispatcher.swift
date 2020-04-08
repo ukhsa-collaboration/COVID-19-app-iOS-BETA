@@ -36,9 +36,9 @@ class RemoteNotificationDispatcher {
     private var handlers = HandlerDictionary()
     private let notificationCenter: NotificationCenter
     private let userNotificationCenter: UserNotificationCenter
-    private let persistence: Persistence
+    private let persistence: Persisting
     
-    init(notificationCenter: NotificationCenter, userNotificationCenter: UserNotificationCenter, persistence: Persistence) {
+    init(notificationCenter: NotificationCenter, userNotificationCenter: UserNotificationCenter, persistence: Persisting) {
         self.notificationCenter = notificationCenter
         self.userNotificationCenter = userNotificationCenter
         self.persistence = persistence

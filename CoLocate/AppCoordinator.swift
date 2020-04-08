@@ -10,11 +10,11 @@ import UIKit
 
 class AppCoordinator {
     private let rootViewController: RootViewController
-    private let persistence: Persistence
+    private let persistence: Persisting
     private let secureRequestFactory: SecureRequestFactory
         
     init(rootViewController: RootViewController,
-         persistence: Persistence,
+         persistence: Persisting,
          secureRequestFactory: SecureRequestFactory) {
         self.rootViewController = rootViewController
         self.persistence = persistence

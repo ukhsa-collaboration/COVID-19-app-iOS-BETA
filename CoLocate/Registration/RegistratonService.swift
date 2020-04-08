@@ -19,12 +19,12 @@ protocol Cancelable {
 
 class ConcreteRegistrationService: RegistrationService {
     let session: Session
-    let persistence: Persistence
+    let persistence: Persisting
     let remoteNotificationDispatcher: RemoteNotificationDispatcher
     let notificationCenter: NotificationCenter
     
     init(session: Session,
-         persistence: Persistence,
+         persistence: Persisting,
          remoteNotificationDispatcher: RemoteNotificationDispatcher,
          notificationCenter: NotificationCenter) {
         #if DEBUG
@@ -62,7 +62,7 @@ class ConcreteRegistrationService: RegistrationService {
 
 fileprivate class RegistrationAttempt: Cancelable {
     private let session: Session
-    private let persistence: Persistence
+    private let persistence: Persisting
     private let remoteNotificationDispatcher: RemoteNotificationDispatcher
     private let notificationCenter: NotificationCenter
     private var registrationCompletionHandler: ((Result<Void, Error>) -> Void)?
@@ -71,7 +71,7 @@ fileprivate class RegistrationAttempt: Cancelable {
 
     init(
         session: Session,
-        persistence: Persistence,
+        persistence: Persisting,
         remoteNotificationDispatcher: RemoteNotificationDispatcher,
         notificationCenter: NotificationCenter,
         completionHandler: @escaping ((Result<Void, Error>) -> Void)

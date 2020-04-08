@@ -12,7 +12,7 @@ import XCTest
 
 class PrivacyViewControllerInteractorTests: XCTestCase {
     
-    private var persistence: Persistence!
+    private var persistence: Persisting!
     private var interactor: PrivacyViewControllerInteractor!
     
     override func setUp() {

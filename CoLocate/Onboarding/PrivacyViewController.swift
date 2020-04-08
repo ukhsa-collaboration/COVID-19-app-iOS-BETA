@@ -33,9 +33,9 @@ protocol PrivacyViewControllerInteracting {
 
 class PrivacyViewControllerInteractor: PrivacyViewControllerInteracting {
     
-    private let persistence: Persistence
+    private let persistence: Persisting
     
-    init(persistence: Persistence = Persistence.shared) {
+    init(persistence: Persisting = Persistence.shared) {
         self.persistence = persistence
     }
     

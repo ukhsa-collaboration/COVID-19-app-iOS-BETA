@@ -15,7 +15,6 @@ class PermissionsViewController: UIViewController, Storyboarded {
 
     var authManager: AuthorizationManaging = AuthorizationManager()
     var remoteNotificationManager: RemoteNotificationManager = ConcreteRemoteNotificationManager()
-    var persistence = Persistence.shared
     var uiQueue: TestableQueue = DispatchQueue.main
     var bluetoothNursery: BluetoothNursery = (UIApplication.shared.delegate as! AppDelegate).bluetoothNursery
 

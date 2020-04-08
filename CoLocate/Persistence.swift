@@ -8,16 +8,12 @@
 
 import Foundation
 
-enum Diagnosis: Int, CaseIterable {
-    case unknown, notInfected, infected, potential
-}
-
 protocol PersistenceDelegate: class {
     func persistence(_ persistence: Persistence, didRecordDiagnosis diagnosis: Diagnosis)
     func persistence(_ persistence: Persistence, didUpdateRegistration registration: Registration)
 }
 
-class Persistence {
+class Persistence: Persisting {
 
     enum Keys: String, CaseIterable {
         case allowedDataSharing
