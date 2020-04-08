@@ -28,13 +28,13 @@ class AppCoordinator {
     func initialViewController() -> UIViewController & Storyboarded {
         switch persistence.diagnosis {
         case .unknown:
-            return okVC()
+            return statusVC()
 
         case .infected:
             return isolateVC()
 
         case .notInfected:
-            return okVC()
+            return statusVC()
 
         case .potential:
             return potentialVC()
@@ -51,7 +51,7 @@ class AppCoordinator {
         switch currentDiagnosis {
         case .unknown: return enterDiagnosisVC()
         case .infected: return isolateVC()
-        case .notInfected: return okVC()
+        case .notInfected: return statusVC()
         case .potential: return potentialVC()
         }
     }
@@ -61,9 +61,8 @@ class AppCoordinator {
         return vc
     }
 
-    private func okVC() -> OkViewController {
-        let vc = OkViewController.instantiate()
-        return vc
+    private func statusVC() -> StatusViewController {
+        return StatusViewController.instantiate()
     }
     
     private func isolateVC() -> PleaseSelfIsolateViewController {

@@ -1,5 +1,5 @@
 //
-//  MainViewController.swift
+//  StatusViewController.swift
 //  CoLocate
 //
 //  Created by NHSX.
@@ -8,8 +8,8 @@
 
 import UIKit
 
-class OkViewController: UIViewController, Storyboarded {
-    static let storyboardName = "Ok"
+class StatusViewController: UIViewController, Storyboarded {
+    static let storyboardName = "Status"
 
     var persistence = Persistence.shared
     
