@@ -10,7 +10,7 @@ import UIKit
 import Logging
 
 class RegistrationViewController: UIViewController, Storyboarded {
-    static let storyboardName = "Registration"
+    static let storyboardName = "Onboarding"
     
     @IBOutlet var registerButton: PrimaryButton!
     @IBOutlet var activityIndicator: UIActivityIndicatorView!

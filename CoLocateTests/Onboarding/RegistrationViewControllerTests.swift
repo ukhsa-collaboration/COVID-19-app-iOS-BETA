@@ -12,7 +12,7 @@ import XCTest
 class RegistrationViewControllerTests: TestCase {
     
     func testRegistration_failure() {
-        let storyboard = UIStoryboard(name: "Registration", bundle: Bundle(for: RegistrationViewController.self))
+        let storyboard = UIStoryboard(name: "Onboarding", bundle: Bundle(for: RegistrationViewController.self))
         let vc = storyboard.instantiateViewController(withIdentifier: "RegistrationViewController") as! RegistrationViewController
         let registrationService = RegistrationServiceDouble()
         vc.registrationService = registrationService
@@ -26,7 +26,7 @@ class RegistrationViewControllerTests: TestCase {
     }
     
     func testRegistration_timeout() {
-        let storyboard = UIStoryboard(name: "Registration", bundle: Bundle(for: RegistrationViewController.self))
+        let storyboard = UIStoryboard(name: "Onboarding", bundle: Bundle(for: RegistrationViewController.self))
         let vc = storyboard.instantiateViewController(withIdentifier: "RegistrationViewController") as! RegistrationViewController
         let registrationService = RegistrationServiceDouble()
         vc.registrationService = registrationService
