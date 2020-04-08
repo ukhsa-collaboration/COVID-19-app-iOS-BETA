@@ -30,7 +30,8 @@ class OnboardingTests: ScreenTestCase {
         
         continueButton.tap()
         
-        XCTAssert(recodedConsentTitle.exists)
+        // TODO: Fix this. This is currently inherently hacky as we’re forcing a UI update from model layer.
+        XCTAssert(recodedConsentTitle.waitForExistence(timeout: 0.2))
     }
 }
 

@@ -17,7 +17,7 @@ class StartNowViewController: UIViewController, Storyboarded {
         super.prepare(for: segue, sender: sender)
         
         if let destination = segue.destination as? PrivacyViewController {
-            destination.interactor = environment.privacyViewControllerInteractor
+            destination.interactor = PrivacyViewControllerInteractor(persistence: environment.persistence)
         }
     }
 }

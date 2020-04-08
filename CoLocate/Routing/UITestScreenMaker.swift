@@ -33,8 +33,7 @@ private extension OnboardingEnvironment {
     
     convenience init(mockWithHost host: UIViewController) {
         self.init(
-            persistence: InMemoryPersistence(),
-            privacyViewControllerInteractor: MockPrivacyViewControllerInteractor(host: host)
+            persistence: InMemoryPersistence(host: host)
         )
     }
     
@@ -42,22 +41,27 @@ private extension OnboardingEnvironment {
 
 private class InMemoryPersistence: Persisting {
     
-    var allowedDataSharing = false
-    var registration: Registration? = nil
-    var diagnosis = Diagnosis.unknown
-    
-}
-
-private class MockPrivacyViewControllerInteractor: PrivacyViewControllerInteracting {
     weak var host: UIViewController?
     init(host: UIViewController) {
         self.host = host
     }
     
-    func allowDataSharing(completion: @escaping () -> Void) {
-        let alert = UIAlertController(title: "Recorded data sharing consent", message: "", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in completion() }))
-        host?.present(alert, animated: false, completion: nil)
+    var allowedDataSharing = false {
+        didSet {
+            if allowedDataSharing {
+                didAllowDataSharing()
+            }
+        }
+    }
+    var registration: Registration? = nil
+    var diagnosis = Diagnosis.unknown
+    
+    func didAllowDataSharing() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
+            let alert = UIAlertController(title: "Recorded data sharing consent", message: "", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.host?.present(alert, animated: false, completion: nil)
+        }
     }
 
 }
