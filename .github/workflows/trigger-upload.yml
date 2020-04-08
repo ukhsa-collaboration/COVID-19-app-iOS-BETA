@@ -3,9 +3,12 @@ name: trigger-upload
 on:
   schedule:
     - cron: '0 */2 * * *'
+  # push:
+  #   branches:
+  #     - ci
 
 jobs:
-  trigger-deployment:
+  trigger-upload:
     runs-on:
       - self-hosted
       - macos
@@ -13,12 +16,12 @@ jobs:
       - name: Checkout Project
         uses: actions/checkout@v2
         with:
-          ref: test-flight
           fetch-depth: 0
 
       - name: Check if we have commits to upload
         id: check-upload-tag
         run: |
+          git fetch origin test-flight
           git fetch origin upload-to-test-flight
           git branch --contains tags/upload-to-test-flight | grep test-flight || echo "::set-output name=upload::true"
 
@@ -28,8 +31,6 @@ jobs:
           GITHUB_RESPOSITORY: ${{ github.repository }}
           GITHUB_ACCESS_TOKEN: ${{ secrets.deployment_token }}
           GITHUB_SHA: ${{ github.sha }}
-          DEPLOYMENT_PAYLOAD: |
-            This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}**.
-
-            The commit hash was: _${{ github.sha }}_.
+          DEPLOYMENT_PAYLOAD: 'This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}**.\n\nThe commit hash was: _${{ github.sha }}_.'
         run: ./bin/create-deployment
+        continue-on-error: true
