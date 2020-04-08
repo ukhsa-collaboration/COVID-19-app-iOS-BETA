@@ -12,12 +12,15 @@ class OnboardingEnvironment {
     
     let persistence: Persisting
     let authorizationManager: AuthorizationManaging
+    let remoteNotificationManager: RemoteNotificationManager
     
     init(
         persistence: Persisting = Persistence.shared,
-        authorizationManager: AuthorizationManaging = AuthorizationManager()
+        authorizationManager: AuthorizationManaging = AuthorizationManager(),
+        remoteNotificationManager: RemoteNotificationManager = ConcreteRemoteNotificationManager()
     ) {
         self.persistence = persistence
         self.authorizationManager = authorizationManager
+        self.remoteNotificationManager = remoteNotificationManager
     }
 }
