@@ -17,6 +17,10 @@ class BluetoothNursery {
     let contactEventRecorder: ContactEventRecorder
     let contactEventCollector: ContactEventCollector
     
+//    TODO: Figure out all the problems with this
+//    let btleQueue: DispatchQueue? = DispatchQueue(label: "BTLE Queue")
+    let btleQueue: DispatchQueue? = nil
+    
     var central: CBCentralManager?
     var listener: BTLEListener?
     
@@ -32,11 +36,9 @@ class BluetoothNursery {
     }
     
     func startListener(stateDelegate: BTLEListenerStateDelegate?) {
-        assert(!startListenerCalled, "startListener called a second time")
-        
         startListenerCalled = true
         listener = ConcreteBTLEListener(contactEventRecorder: contactEventRecorder)
-        central = CBCentralManager(delegate: listener as! ConcreteBTLEListener, queue: nil, options: [
+        central = CBCentralManager(delegate: listener as! ConcreteBTLEListener, queue: btleQueue, options: [
             CBCentralManagerOptionRestoreIdentifierKey: BluetoothNursery.centralRestoreIdentifier
         ])
         (listener as? ConcreteBTLEListener)?.stateDelegate = stateDelegate
@@ -44,12 +46,9 @@ class BluetoothNursery {
     }
     
     func startBroadcaster(stateDelegate: BTLEBroadcasterStateDelegate?) {
-        // TODO: This crashes the tests
-//        assert(!startBroadcasterCalled, "startBroadcaster called a second time")
-        
         startBroadcasterCalled = true
         broadcaster = ConcreteBTLEBroadcaster()
-        peripheral = CBPeripheralManager(delegate: broadcaster as! ConcreteBTLEBroadcaster, queue: nil, options: [
+        peripheral = CBPeripheralManager(delegate: broadcaster as! ConcreteBTLEBroadcaster, queue: btleQueue, options: [
             CBPeripheralManagerOptionRestoreIdentifierKey: BluetoothNursery.peripheralRestoreIdentifier
         ])
         (broadcaster as? ConcreteBTLEBroadcaster)?.stateDelegate = stateDelegate
