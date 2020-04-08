@@ -59,7 +59,6 @@
 		89074B8724378A0D00D67777 /* UITestPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89074B8424378A0D00D67777 /* UITestPayload.swift */; };
 		89074B8A24378B6E00D67777 /* ScreenTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89074B8924378B6E00D67777 /* ScreenTestCase.swift */; };
 		893C0B7B243DE346000A7DB6 /* OnboardingEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893C0B7A243DE346000A7DB6 /* OnboardingEnvironment.swift */; };
-		895D9DE12437383300573D4D /* CoLocateUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895D9DE02437383300573D4D /* CoLocateUITests.swift */; };
 		895D9E462437458700573D4D /* AppIcon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 895D9E452437458700573D4D /* AppIcon.xcassets */; };
 		895D9E4B24374EC900573D4D /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895D9E4A24374EC900573D4D /* Screen.swift */; };
 		895D9E4E24374EFA00573D4D /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895D9E4D24374EFA00573D4D /* AppRouter.swift */; };
@@ -223,7 +222,6 @@
 		89388B8E2435E673009D60CF /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		893C0B7A243DE346000A7DB6 /* OnboardingEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingEnvironment.swift; sourceTree = "<group>"; };
 		895D9DDE2437383300573D4D /* CoLocateUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoLocateUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		895D9DE02437383300573D4D /* CoLocateUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoLocateUITests.swift; sourceTree = "<group>"; };
 		895D9DE22437383300573D4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		895D9DE82437384C00573D4D /* CoLocateUITests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CoLocateUITests.xcconfig; sourceTree = "<group>"; };
 		895D9E452437458700573D4D /* AppIcon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppIcon.xcassets; sourceTree = "<group>"; };
@@ -595,7 +593,6 @@
 				898FE855243B42F400210775 /* Flows */,
 				895D9DE22437383300573D4D /* Info.plist */,
 				895D9DE82437384C00573D4D /* CoLocateUITests.xcconfig */,
-				895D9DE02437383300573D4D /* CoLocateUITests.swift */,
 			);
 			path = CoLocateUITests;
 			sourceTree = "<group>";
@@ -1091,7 +1088,6 @@
 				898FE854243B42E800210775 /* OnboardingTests.swift in Sources */,
 				89074B8A24378B6E00D67777 /* ScreenTestCase.swift in Sources */,
 				895D9E52243750EE00573D4D /* PotentialScreenTests.swift in Sources */,
-				895D9DE12437383300573D4D /* CoLocateUITests.swift in Sources */,
 				89074B8724378A0D00D67777 /* UITestPayload.swift in Sources */,
 				89074B822437882100D67777 /* Screen.swift in Sources */,
 			);
