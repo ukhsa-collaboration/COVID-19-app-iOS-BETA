@@ -12,6 +12,7 @@ class OnboardingViewController: UINavigationController, Storyboarded {
     static let storyboardName = "Onboarding"
 
     lazy var onboardingCoordinator = OnboardingCoordinator()
+    lazy var environment = OnboardingEnvironment()
     var uiQueue: TestableQueue = DispatchQueue.main
 
     var rootViewController: UIViewController! {
@@ -56,7 +57,9 @@ class OnboardingViewController: UINavigationController, Storyboarded {
         let vc: UIViewController
         switch state {
         case .initial:
-            vc = StartNowViewController.instantiate()
+            vc = StartNowViewController.instantiate {
+                $0.environment = environment
+            }
         case .permissions:
             vc = PermissionsViewController.instantiate()
         case .permissionsDenied:

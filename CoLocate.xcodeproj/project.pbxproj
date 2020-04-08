@@ -58,6 +58,7 @@
 		89074B8524378A0D00D67777 /* UITestPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89074B8424378A0D00D67777 /* UITestPayload.swift */; };
 		89074B8724378A0D00D67777 /* UITestPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89074B8424378A0D00D67777 /* UITestPayload.swift */; };
 		89074B8A24378B6E00D67777 /* ScreenTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89074B8924378B6E00D67777 /* ScreenTestCase.swift */; };
+		893C0B7B243DE346000A7DB6 /* OnboardingEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893C0B7A243DE346000A7DB6 /* OnboardingEnvironment.swift */; };
 		895D9DE12437383300573D4D /* CoLocateUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895D9DE02437383300573D4D /* CoLocateUITests.swift */; };
 		895D9E462437458700573D4D /* AppIcon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 895D9E452437458700573D4D /* AppIcon.xcassets */; };
 		895D9E4B24374EC900573D4D /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895D9E4A24374EC900573D4D /* Screen.swift */; };
@@ -219,6 +220,7 @@
 		891E16A3243782D000281821 /* UITestResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestResponder.swift; sourceTree = "<group>"; };
 		89388B8C2435E370009D60CF /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		89388B8E2435E673009D60CF /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		893C0B7A243DE346000A7DB6 /* OnboardingEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingEnvironment.swift; sourceTree = "<group>"; };
 		895D9DDE2437383300573D4D /* CoLocateUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoLocateUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		895D9DE02437383300573D4D /* CoLocateUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoLocateUITests.swift; sourceTree = "<group>"; };
 		895D9DE22437383300573D4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -716,6 +718,7 @@
 			isa = PBXGroup;
 			children = (
 				F6F05A312434310200FF4B72 /* Onboarding.storyboard */,
+				893C0B7A243DE346000A7DB6 /* OnboardingEnvironment.swift */,
 				F6F05A272433C55300FF4B72 /* AuthorizationManager.swift */,
 				F6F05A252433C09200FF4B72 /* OnboardingCoordinator.swift */,
 				F6F05A2F24340E5400FF4B72 /* OnboardingViewController.swift */,
@@ -1053,6 +1056,7 @@
 				214209D2242399CF00C7BFF3 /* URLSession.swift in Sources */,
 				89074B83243788AE00D67777 /* UITestResponder.swift in Sources */,
 				F63279252435203600CF7A42 /* DispatchQueue+Testable.swift in Sources */,
+				893C0B7B243DE346000A7DB6 /* OnboardingEnvironment.swift in Sources */,
 				898FE860243B5AF700210775 /* UITestScreenMaker.swift in Sources */,
 				214209BA242216B700C7BFF3 /* Persistence.swift in Sources */,
 				213C806C241A56430020EFA5 /* PermissionsViewController.swift in Sources */,

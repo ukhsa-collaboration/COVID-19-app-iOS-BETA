@@ -27,6 +27,10 @@ class OnboardingTests: ScreenTestCase {
         
         XCTAssert(allowDataSharingSwitch.boolValue)
         XCTAssert(continueButton.isEnabled)
+        
+        continueButton.tap()
+        
+        XCTAssert(recodedConsentTitle.exists)
     }
 }
 
@@ -52,6 +56,14 @@ private extension OnboardingTests {
     
     var allowDataSharingSwitch: XCUIElement {
         app.switches["Allow Data Sharing"]
+    }
+    
+}
+
+private extension OnboardingTests {
+    
+    var recodedConsentTitle: XCUIElement {
+        app.staticTexts["Recorded data sharing consent"]
     }
     
 }
