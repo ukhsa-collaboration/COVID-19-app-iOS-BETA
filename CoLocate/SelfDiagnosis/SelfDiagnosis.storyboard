@@ -8,75 +8,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--High Temperature-->
-        <scene sceneID="5pd-5V-nuN">
-            <objects>
-                <tableViewController id="19R-QS-QNE" userLabel="High Temperature" customClass="TemperatureViewController" customModule="CoLocate" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="Eze-Ub-6ZZ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <sections>
-                            <tableViewSection id="eUN-ZT-SET">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="6Rf-l4-WVr" style="IBUITableViewCellStyleDefault" id="6vr-cb-GSU">
-                                        <rect key="frame" x="20" y="18" width="374" height="43.5"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6vr-cb-GSU" id="ykK-t5-zOg">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Yes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" id="6Rf-l4-WVr">
-                                                    <rect key="frame" x="20" y="0.0" width="334" height="43.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="Pmh-rq-8Kn" style="IBUITableViewCellStyleDefault" id="s9K-FE-VXt">
-                                        <rect key="frame" x="20" y="61.5" width="374" height="43.5"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="s9K-FE-VXt" id="8gp-h4-RBc">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="No" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" id="Pmh-rq-8Kn">
-                                                    <rect key="frame" x="20" y="0.0" width="334" height="43.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                        </sections>
-                        <connections>
-                            <outlet property="dataSource" destination="19R-QS-QNE" id="ZCm-mS-KrS"/>
-                            <outlet property="delegate" destination="19R-QS-QNE" id="noM-K7-eOV"/>
-                        </connections>
-                    </tableView>
-                    <connections>
-                        <outlet property="noCell" destination="s9K-FE-VXt" id="HXV-XD-JYt"/>
-                        <outlet property="yesCell" destination="6vr-cb-GSU" id="Pqj-gA-0qe"/>
-                        <segue destination="fEw-qX-ize" kind="show" identifier="segueToCough" id="EUg-1G-LFz"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="p5h-WT-JmF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <exit id="69c-Yj-bNt" userLabel="Exit" sceneMemberID="exit"/>
-                <view contentMode="scaleToFill" id="Eqf-Xk-qro">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="128"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                    <viewLayoutGuide key="safeArea" id="3JG-D3-SWX"/>
-                </view>
-            </objects>
-            <point key="canvasLocation" x="929" y="901"/>
-        </scene>
         <!--Temperature-->
         <scene sceneID="GiX-l8-6q9">
             <objects>
@@ -155,11 +86,7 @@
                         <viewLayoutGuide key="safeArea" id="AWT-34-4RC"/>
                     </view>
                     <navigationItem key="navigationItem" title="Add My Symptoms" id="UwS-VL-ght">
-                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="Jcp-if-8c0">
-                            <connections>
-                                <segue destination="69c-Yj-bNt" kind="unwind" unwindAction="unwindFromSelfDiagnosisWithUnwindSegue:" id="JmX-pN-YoK"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="Jcp-if-8c0"/>
                     </navigationItem>
                     <connections>
                         <outlet property="continueButton" destination="jG0-JS-mYk" id="6tQ-5b-KpY"/>
@@ -245,6 +172,7 @@
                     <connections>
                         <outlet property="noCell" destination="uwb-Ce-naq" id="AHY-HR-H3E"/>
                         <outlet property="yesCell" destination="18u-61-13U" id="qLh-ER-abA"/>
+                        <segue destination="jaR-zo-Jel" kind="show" identifier="segueToSubmitSymptoms" id="J0A-qz-ZAA"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LIa-yB-t5L" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -330,7 +258,4 @@
             <point key="canvasLocation" x="2619" y="173"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="SuZ-XW-fih"/>
-    </inferredMetricsTieBreakers>
 </document>
