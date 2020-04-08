@@ -80,20 +80,4 @@ class OnboardingCoordinatorTests: TestCase {
         authManagerDouble.notificationsCompletion!(.allowed)
         XCTAssertEqual(state, .registration)
     }
-
-    func testDoneOnboarding() {
-        let registration = Registration(id: UUID(), secretKey: Data())
-        let persistenceDouble = PersistenceDouble(allowedDataSharing: true, registration: registration)
-        let authManagerDouble = AuthorizationManagerDouble(bluetooth: .allowed)
-        let onboardingCoordinator = OnboardingCoordinator(
-            persistence: persistenceDouble,
-            authorizationManager: authManagerDouble
-        )
-
-        var state: OnboardingCoordinator.State?
-        onboardingCoordinator.state { state = $0 }
-        authManagerDouble.notificationsCompletion!(.allowed)
-        XCTAssertEqual(state, nil)
-    }
-
 }

@@ -14,8 +14,7 @@ class AppCoordinatorDouble: AppCoordinator {
 
     init() {
         super.init(rootViewController: RootViewController(),
-                   persistence: Persistence(),
-                   secureRequestFactory: SecureRequestFactoryDouble())
+                   persistence: Persistence())
     }
 
     override func showAppropriateViewController() {

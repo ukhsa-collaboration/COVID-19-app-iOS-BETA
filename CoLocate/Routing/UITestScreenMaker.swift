@@ -22,13 +22,7 @@ struct UITestScreenMaker: ScreenMaking {
             return OnboardingViewController.instantiate { viewController in
                 let environment = OnboardingEnvironment(mockWithHost: viewController)
                 viewController.environment = environment
-                viewController.didComplete = { [weak viewController] in
-                    let summary = OnboardingStateSummaryViewController(environment: environment)
-                    viewController?.present(summary, animated: false, completion: nil)
-                }
                 
-                // TODO: Remove this – currently needed to kick `updateState()`
-                viewController.rootViewController = nil
             }
         }
     }

@@ -10,6 +10,8 @@
 		090B186F24354D0100870B5D /* RemoteNotificationDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090B186E24354D0100870B5D /* RemoteNotificationDispatcher.swift */; };
 		090B1871243552C300870B5D /* UserNotificationCenterDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090B1870243552C300870B5D /* UserNotificationCenterDouble.swift */; };
 		095A91182434FF1500ED6369 /* ApplicationDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095A91172434FF1500ED6369 /* ApplicationDouble.swift */; };
+		0983ACCD243E566800DBB336 /* ErrorForTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983ACCC243E566800DBB336 /* ErrorForTest.swift */; };
+		0983ACCF243E6D3800DBB336 /* NotificationObserverDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983ACCE243E6D3800DBB336 /* NotificationObserverDouble.swift */; };
 		098ED478242D7D050029B729 /* RegistratonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED477242D7D050029B729 /* RegistratonService.swift */; };
 		098ED47C242D801C0029B729 /* RegistrationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED47A242D7E460029B729 /* RegistrationServiceTests.swift */; };
 		098ED481242E745F0029B729 /* Debug.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 098ED480242E745F0029B729 /* Debug.storyboard */; };
@@ -95,7 +97,6 @@
 		F65AE53C2432B842006544D4 /* Potential.rtf in Resources */ = {isa = PBXBuildFile; fileRef = F65AE53E2432B842006544D4 /* Potential.rtf */; };
 		F67A2291242AA35C002254B6 /* SecureRegistrationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A2290242AA35B002254B6 /* SecureRegistrationStorage.swift */; };
 		F67A2293242AA370002254B6 /* SecureRegistrationStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */; };
-		F67A2295242AC188002254B6 /* RegistrationViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A2294242AC188002254B6 /* RegistrationViewControllerTests.swift */; };
 		F67C5154243E4D2F008E2945 /* AnswerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67C5153243E4D2F008E2945 /* AnswerButton.swift */; };
 		F67C5159243E7C1E008E2945 /* SubmitSymptomsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67C5158243E7C1E008E2945 /* SubmitSymptomsViewControllerTests.swift */; };
 		F68B89EA243B9FDC00F369A9 /* CoLocate.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F68B89E9243B9FDB00F369A9 /* CoLocate.xcconfig */; };
@@ -131,7 +132,6 @@
 		F758B8C4242CC0EE003AE16D /* Status.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F758B8C3242CC0EE003AE16D /* Status.storyboard */; };
 		F758B8C9242CC183003AE16D /* PleaseSelfIsolate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F758B8C8242CC183003AE16D /* PleaseSelfIsolate.storyboard */; };
 		F758B8CC242CC1F7003AE16D /* EnterDiagnosis.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F758B8CB242CC1F7003AE16D /* EnterDiagnosis.storyboard */; };
-		F770A455242FEE7C002FDED1 /* SecureRequestFactoryDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = F770A454242FEE7C002FDED1 /* SecureRequestFactoryDouble.swift */; };
 		F770A4572430F76B002FDED1 /* AppCoordinatorDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = F770A4562430F76B002FDED1 /* AppCoordinatorDouble.swift */; };
 		F78CEB47242B7752002254AD /* String+localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78CEB46242B7752002254AD /* String+localized.swift */; };
 		F78CEB5A242B7EC0002254AD /* FirebaseMessaging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB55242B7EBF002254AD /* FirebaseMessaging.framework */; };
@@ -169,6 +169,8 @@
 		090B186E24354D0100870B5D /* RemoteNotificationDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteNotificationDispatcher.swift; sourceTree = "<group>"; };
 		090B1870243552C300870B5D /* UserNotificationCenterDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationCenterDouble.swift; sourceTree = "<group>"; };
 		095A91172434FF1500ED6369 /* ApplicationDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationDouble.swift; sourceTree = "<group>"; };
+		0983ACCC243E566800DBB336 /* ErrorForTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorForTest.swift; sourceTree = "<group>"; };
+		0983ACCE243E6D3800DBB336 /* NotificationObserverDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationObserverDouble.swift; sourceTree = "<group>"; };
 		098ED477242D7D050029B729 /* RegistratonService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistratonService.swift; sourceTree = "<group>"; };
 		098ED47A242D7E460029B729 /* RegistrationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationServiceTests.swift; sourceTree = "<group>"; };
 		098ED480242E745F0029B729 /* Debug.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Debug.storyboard; sourceTree = "<group>"; };
@@ -264,7 +266,6 @@
 		F65AE53D2432B842006544D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = Base; path = Base.lproj/Potential.rtf; sourceTree = "<group>"; };
 		F67A2290242AA35B002254B6 /* SecureRegistrationStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRegistrationStorage.swift; sourceTree = "<group>"; };
 		F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRegistrationStorageTests.swift; sourceTree = "<group>"; };
-		F67A2294242AC188002254B6 /* RegistrationViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewControllerTests.swift; sourceTree = "<group>"; };
 		F67C5153243E4D2F008E2945 /* AnswerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerButton.swift; sourceTree = "<group>"; };
 		F67C5158243E7C1E008E2945 /* SubmitSymptomsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitSymptomsViewControllerTests.swift; sourceTree = "<group>"; };
 		F68B89E9243B9FDB00F369A9 /* CoLocate.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = CoLocate.xcconfig; sourceTree = "<group>"; };
@@ -300,7 +301,6 @@
 		F758B8C3242CC0EE003AE16D /* Status.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Status.storyboard; sourceTree = "<group>"; };
 		F758B8C8242CC183003AE16D /* PleaseSelfIsolate.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PleaseSelfIsolate.storyboard; sourceTree = "<group>"; };
 		F758B8CB242CC1F7003AE16D /* EnterDiagnosis.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EnterDiagnosis.storyboard; sourceTree = "<group>"; };
-		F770A454242FEE7C002FDED1 /* SecureRequestFactoryDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRequestFactoryDouble.swift; sourceTree = "<group>"; };
 		F770A4562430F76B002FDED1 /* AppCoordinatorDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinatorDouble.swift; sourceTree = "<group>"; };
 		F78CEB46242B7752002254AD /* String+localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+localized.swift"; sourceTree = "<group>"; };
 		F78CEB53242B7E18002254AD /* CoLocate-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoLocate-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -387,11 +387,12 @@
 				098ED48B242E8B290029B729 /* PersistenceDouble.swift */,
 				098ED487242E89930029B729 /* PushNotificationManagerDouble.swift */,
 				098ED489242E89D80029B729 /* RegistrationServiceDouble.swift */,
-				F770A454242FEE7C002FDED1 /* SecureRequestFactoryDouble.swift */,
 				F632792224351C8400CF7A42 /* OnboardingCoordinatorDouble.swift */,
 				F63279262435219A00CF7A42 /* QueueDouble.swift */,
 				090B1870243552C300870B5D /* UserNotificationCenterDouble.swift */,
 				09B27BDA243BA5C800DAEA02 /* AsyncAfterableDouble.swift */,
+				0983ACCC243E566800DBB336 /* ErrorForTest.swift */,
+				0983ACCE243E6D3800DBB336 /* NotificationObserverDouble.swift */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -741,7 +742,6 @@
 		F6F05A222433BEAC00FF4B72 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				F67A2294242AC188002254B6 /* RegistrationViewControllerTests.swift */,
 				F6F05A232433BEC000FF4B72 /* OnboardingCoordinatorTests.swift */,
 				F632792024351C1900CF7A42 /* OnboardingViewControllerTests.swift */,
 			);
@@ -995,19 +995,19 @@
 				214209D924262B7500C7BFF3 /* SessionHelpers.swift in Sources */,
 				F600A60424297C010038DF57 /* RegistrationRequestTests.swift in Sources */,
 				098ED488242E89930029B729 /* PushNotificationManagerDouble.swift in Sources */,
-				F67A2295242AC188002254B6 /* RegistrationViewControllerTests.swift in Sources */,
+				0983ACCF243E6D3800DBB336 /* NotificationObserverDouble.swift in Sources */,
 				F67A2293242AA370002254B6 /* SecureRegistrationStorageTests.swift in Sources */,
 				214209D72423C9B600C7BFF3 /* PatchContactEventsRequestTests.swift in Sources */,
 				F72EBD9B243C8750009F9328 /* BluetoothStateObserverTests.swift in Sources */,
 				090B1871243552C300870B5D /* UserNotificationCenterDouble.swift in Sources */,
 				21C417CA242CB0A200DEF3E2 /* ConfirmRegistrationRequestTests.swift in Sources */,
 				F632792A2435323200CF7A42 /* PermissionsViewControllerTests.swift in Sources */,
-				F770A455242FEE7C002FDED1 /* SecureRequestFactoryDouble.swift in Sources */,
 				098ED48A242E89D80029B729 /* RegistrationServiceDouble.swift in Sources */,
 				F63279272435219A00CF7A42 /* QueueDouble.swift in Sources */,
 				F6CC2CAC242BCD0D0079432B /* RemoteNotificationManagerTests.swift in Sources */,
 				F67C5159243E7C1E008E2945 /* SubmitSymptomsViewControllerTests.swift in Sources */,
 				F72EBD4F24361E99009F9328 /* URLSessionTests.swift in Sources */,
+				0983ACCD243E566800DBB336 /* ErrorForTest.swift in Sources */,
 				F68BFBF7242ACD17008EE68F /* TestHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

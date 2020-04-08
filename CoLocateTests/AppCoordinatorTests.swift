@@ -14,7 +14,7 @@ class AppCoordinatorTests: TestCase {
     func test_shows_you_are_okay_screen_when_diagnosis_is_unknown() {
         let persistence = PersistenceDouble()
         persistence.diagnosis = .unknown
-        let coordinator = AppCoordinator(rootViewController: RootViewController(), persistence: persistence, secureRequestFactory: SecureRequestFactoryDouble())
+        let coordinator = AppCoordinator(rootViewController: RootViewController(), persistence: persistence)
 
         let vc = coordinator.initialViewController()
 
@@ -25,7 +25,7 @@ class AppCoordinatorTests: TestCase {
         let persistence = PersistenceDouble()
         persistence.diagnosis = .unknown
         let rootViewController = RootViewController()
-        let coordinator = AppCoordinator(rootViewController: rootViewController, persistence: persistence, secureRequestFactory: SecureRequestFactoryDouble())
+        let coordinator = AppCoordinator(rootViewController: rootViewController, persistence: persistence)
         
         coordinator.showAppropriateViewController()
         
@@ -36,7 +36,7 @@ class AppCoordinatorTests: TestCase {
         let persistence = PersistenceDouble()
         persistence.diagnosis = .infected
         let rootViewController = RootViewController()
-        let coordinator = AppCoordinator(rootViewController: rootViewController, persistence: persistence, secureRequestFactory: SecureRequestFactoryDouble())
+        let coordinator = AppCoordinator(rootViewController: rootViewController, persistence: persistence)
 
         coordinator.showAppropriateViewController()
         
@@ -47,7 +47,7 @@ class AppCoordinatorTests: TestCase {
         let persistence = PersistenceDouble()
         persistence.diagnosis = .notInfected
         let rootViewController = RootViewController()
-        let coordinator = AppCoordinator(rootViewController: rootViewController, persistence: persistence, secureRequestFactory: SecureRequestFactoryDouble())
+        let coordinator = AppCoordinator(rootViewController: rootViewController, persistence: persistence)
 
         coordinator.showAppropriateViewController()
         
@@ -59,7 +59,7 @@ class AppCoordinatorTests: TestCase {
         let persistence = PersistenceDouble()
         persistence.diagnosis = .potential
         let rootViewController = RootViewController()
-        let coordinator = AppCoordinator(rootViewController: rootViewController, persistence: persistence, secureRequestFactory: SecureRequestFactoryDouble())
+        let coordinator = AppCoordinator(rootViewController: rootViewController, persistence: persistence)
 
         coordinator.showAppropriateViewController()
         

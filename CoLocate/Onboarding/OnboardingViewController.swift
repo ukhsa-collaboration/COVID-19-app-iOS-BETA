@@ -20,11 +20,10 @@ class OnboardingViewController: UINavigationController, Storyboarded {
         authorizationManager: self.environment.authorizationManager
     )
     var uiQueue: TestableQueue = DispatchQueue.main
-    
-    var didComplete: () -> Void = {}
 
-    var rootViewController: UIViewController! {
-        didSet { updateState() }
+    func showIn(rootViewController: RootViewController) {
+        updateState()
+        rootViewController.show(viewController: self)
     }
 
     override func viewDidLoad() {
@@ -56,13 +55,7 @@ class OnboardingViewController: UINavigationController, Storyboarded {
         updateState()
     }
 
-    private func handle(state: OnboardingCoordinator.State?) {
-        guard let state = state else {
-            performSegue(withIdentifier: "unwindFromOnboarding", sender: self)
-            didComplete()
-            return
-        }
-
+    private func handle(state: OnboardingCoordinator.State) {
         let vc: UIViewController
         switch state {
         case .initial:
@@ -81,10 +74,5 @@ class OnboardingViewController: UINavigationController, Storyboarded {
         }
 
         viewControllers = [vc]
-        
-        // TODO: This seems to be an artefact of the code’s history. Verify if we need this.
-        if let rootViewController = rootViewController, presentingViewController == nil {
-            rootViewController.present(self, animated: true)
-        }
     }
 }

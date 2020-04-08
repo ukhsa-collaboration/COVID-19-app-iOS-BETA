@@ -35,38 +35,8 @@ class RegistrationViewController: UIViewController, Storyboarded {
         registerButton.isEnabled = false
 
         attempt = registrationService.register { [weak self] result in
-            guard let self = self else { return }
-            
-            self.attempt = nil
-
-            if case .failure(let error) = result {
-                logger.error("Unable to register: \(error)")
-                self.showFailureAlert()
-                self.enableRetry()
-            }
         }
-        
-        mainQueue.asyncAfter(deadline: .now() + maxRegistrationSecs) { [weak self] in
-            guard let self = self, let attempt = self.attempt else { return }
-
-            logger.error("Registration attempt timed out after \(maxRegistrationSecs) seconds")
-            attempt.cancel()
-            self.attempt = nil
-            self.showFailureAlert()
-            self.enableRetry()
-        }
-    }
-    
-    private func showFailureAlert() {
-        let alert = UIAlertController(title: "Something unexpected happened".localized, message: "Sorry, we could not enroll you in CoLocate at this time. Please try again in a minute.".localized, preferredStyle: .alert)
-
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        self.present(alert, animated: true)
-    }
-    
-    private func enableRetry() {
-        activityIndicator.stopAnimating()
-        registerButton.isEnabled = true
+        self.performSegue(withIdentifier: "unwindFromRegistration", sender: self)
     }
 }
 

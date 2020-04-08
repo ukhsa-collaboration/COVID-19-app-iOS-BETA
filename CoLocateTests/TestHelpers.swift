@@ -20,14 +20,14 @@ func inWindowHierarchy(viewController: UIViewController, closure: (() -> Void)) 
 }
 
 class TestCase: XCTestCase {
-    let rootViewController = UINavigationController()
+    let parentViewControllerForTests = UINavigationController()
 
     override func setUp() {
         super.setUp()
 
         Persistence.shared.clear()
 
-        UIApplication.shared.windows.first?.rootViewController = rootViewController
+        UIApplication.shared.windows.first?.rootViewController = parentViewControllerForTests
     }
 }
 

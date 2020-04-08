@@ -11,18 +11,15 @@ import UIKit
 class AppCoordinator {
     private let rootViewController: RootViewController
     private let persistence: Persisting
-    private let secureRequestFactory: SecureRequestFactory
         
-    init(rootViewController: RootViewController,
-         persistence: Persisting,
-         secureRequestFactory: SecureRequestFactory) {
+    init(rootViewController: RootViewController, persistence: Persisting) {
         self.rootViewController = rootViewController
         self.persistence = persistence
-        self.secureRequestFactory = secureRequestFactory
     }
 
     func start() {
-        rootViewController.show(viewController: initialViewController())
+        let vc = initialViewController()
+        rootViewController.show(viewController: vc)
     }
     
     func initialViewController() -> UIViewController & Storyboarded {
@@ -67,7 +64,6 @@ class AppCoordinator {
     
     private func isolateVC() -> PleaseSelfIsolateViewController {
         let vc = PleaseSelfIsolateViewController.instantiate()
-        vc.requestFactory = secureRequestFactory
         return vc
     }
     

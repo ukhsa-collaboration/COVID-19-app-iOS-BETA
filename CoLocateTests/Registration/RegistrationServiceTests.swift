@@ -220,6 +220,25 @@ class RegistrationServiceTests: TestCase {
         notificationCenter.post(name: PushTokenReceivedNotification, object: nil, userInfo: nil)
         XCTAssertNil(session.requestSent)
     }
+    
+    func testRegistration_sendsStartNotification() {
+        let persistence = PersistenceDouble()
+        let notificationCenter = NotificationCenter()
+        let remoteNotificationDispatcher = RemoteNotificationDispatcher(
+            notificationCenter: notificationCenter,
+            userNotificationCenter: UserNotificationCenterDouble(),
+            persistence: persistence
+        )
+        let registrationService = ConcreteRegistrationService(session: SessionDouble(),
+                                                              persistence: persistence,
+                                                              remoteNotificationDispatcher: remoteNotificationDispatcher,
+                                                              notificationCenter: notificationCenter)
+        let notificationObserver = NotificationObserverDouble(notificationCenter: notificationCenter, notificationName: RegistrationStartedNotification)
+
+        registrationService.register { _ in }
+        
+        XCTAssertNotNil(notificationObserver.lastNotification)
+    }
 }
 
 class SessionDouble: Session {

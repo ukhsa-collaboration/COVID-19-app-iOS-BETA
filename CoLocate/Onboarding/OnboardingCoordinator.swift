@@ -27,7 +27,7 @@ class OnboardingCoordinator {
         self.init(persistence: Persistence.shared, authorizationManager: AuthorizationManager())
     }
 
-    func state(completion: @escaping (State?) -> Void) {
+    func state(completion: @escaping (State) -> Void) {
         let allowedDataSharing = persistence.allowedDataSharing
         guard allowedDataSharing else {
             completion(.initial)
@@ -45,16 +45,8 @@ class OnboardingCoordinator {
                 completion(.permissionsDenied)
                 return
             case (.allowed, .allowed):
-                break
-            }
-
-            let isRegistered = self.persistence.registration != nil
-            guard isRegistered else {
                 completion(.registration)
-                return
             }
-
-            completion(nil)
         }
     }
 

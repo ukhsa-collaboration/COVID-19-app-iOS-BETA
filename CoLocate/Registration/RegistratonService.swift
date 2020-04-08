@@ -17,6 +17,8 @@ protocol Cancelable {
     func cancel()
 }
 
+let RegistrationStartedNotification = NSNotification.Name("RegistrationStartedNotification")
+
 class ConcreteRegistrationService: RegistrationService {
     let session: Session
     let persistence: Persisting
@@ -56,6 +58,7 @@ class ConcreteRegistrationService: RegistrationService {
             completionHandler: completionHandler
         )
         attempt.start()
+        notificationCenter.post(name: RegistrationStartedNotification, object: nil)
         return attempt
     }
 }

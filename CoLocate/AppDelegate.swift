@@ -23,7 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     let authorizationManager = AuthorizationManager()
 
     var appCoordinator: AppCoordinator!
-    var onboardingViewController: OnboardingViewController!
 
     override init() {
         LoggingManager.bootstrap()
@@ -57,10 +56,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             bluetoothNursery.startBroadcaster(stateDelegate: nil)
             bluetoothNursery.broadcaster?.sonarId = registration.id
             bluetoothNursery.startListener(stateDelegate: BluetoothStateObserver.shared)
-            startMainApp(with: registration)
+            startMainApp()
         } else {
-            onboardingViewController = OnboardingViewController.instantiate()
-            onboardingViewController.rootViewController = rootVC
+            let onboardingViewController = OnboardingViewController.instantiate()
+            onboardingViewController.showIn(rootViewController: rootVC)
+            
+            NotificationCenter.default.addObserver(forName: RegistrationStartedNotification, object: nil, queue: nil) { notification in
+                self.startMainApp()
+            }
         }
 
         return true
@@ -127,15 +130,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     // MARK: - Private
     
-    func startMainApp(with registration: Registration) {
+    func startMainApp() {
         guard let rootViewController = window?.rootViewController as? RootViewController else {
             return
         }
 
         appCoordinator = AppCoordinator(
             rootViewController: rootViewController,
-            persistence: persistence,
-            secureRequestFactory: ConcreteSecureRequestFactory(registration: registration)
+            persistence: persistence
         )
         appCoordinator.start()
     }
@@ -163,13 +165,8 @@ extension AppDelegate: PersistenceDelegate {
     }
 
     func persistence(_ persistence: Persistence, didUpdateRegistration registration: Registration) {
-        onboardingViewController.updateState()
         bluetoothNursery.broadcaster?.sonarId = registration.id
         bluetoothNursery.startListener(stateDelegate: BluetoothStateObserver.shared)
-
-        // TODO: This is probably not the right place to put this,
-        // but it'll do until we remove the old onboarding flow.
-        startMainApp(with: registration)
     }
 }
 

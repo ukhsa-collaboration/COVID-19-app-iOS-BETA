@@ -15,14 +15,16 @@ class OnboardingViewControllerTests: TestCase {
         let coordinatorDouble = OnboardingCoordinatorDouble()
         let queue = QueueDouble()
         let vc = OnboardingViewController.instantiate()
-        vc.rootViewController = rootViewController
+        let rootViewController = RootViewController()
+        parentViewControllerForTests.addChild(rootViewController)
+        vc.showIn(rootViewController: rootViewController)
         vc.onboardingCoordinator = coordinatorDouble
         vc.uiQueue = queue
 
         vc.updateState()
         coordinatorDouble.stateCompletion!(.initial)
 
-        XCTAssertNotNil(rootViewController.presentedViewController)
+        XCTAssertEqual(rootViewController.children.count, 1)
         XCTAssertNotNil(vc.children.first as? StartNowViewController)
     }
 
@@ -30,14 +32,16 @@ class OnboardingViewControllerTests: TestCase {
         let coordinatorDouble = OnboardingCoordinatorDouble()
         let queue = QueueDouble()
         let vc = OnboardingViewController.instantiate()
-        vc.rootViewController = rootViewController
+        let rootViewController = RootViewController()
+        parentViewControllerForTests.addChild(rootViewController)
+        vc.showIn(rootViewController: rootViewController)
         vc.onboardingCoordinator = coordinatorDouble
         vc.uiQueue = queue
 
         vc.updateState()
         coordinatorDouble.stateCompletion!(.permissions)
 
-        XCTAssertNotNil(rootViewController.presentedViewController)
+        XCTAssertEqual(rootViewController.children.count, 1)
         XCTAssertNotNil(vc.children.first as? PermissionsViewController)
     }
 
@@ -45,33 +49,16 @@ class OnboardingViewControllerTests: TestCase {
         let coordinatorDouble = OnboardingCoordinatorDouble()
         let queue = QueueDouble()
         let vc = OnboardingViewController.instantiate()
-        vc.rootViewController = rootViewController
+        let rootViewController = RootViewController()
+        parentViewControllerForTests.addChild(rootViewController)
+        vc.showIn(rootViewController: rootViewController)
         vc.onboardingCoordinator = coordinatorDouble
         vc.uiQueue = queue
 
         vc.updateState()
         coordinatorDouble.stateCompletion!(.registration)
 
-        XCTAssertNotNil(rootViewController.presentedViewController)
+        XCTAssertEqual(rootViewController.children.count, 1)
         XCTAssertNotNil(vc.children.first as? RegistrationViewController)
     }
-
-    func testCompletionState() {
-        let coordinatorDouble = OnboardingCoordinatorDouble()
-        let queue = QueueDouble()
-        let vc = OnboardingViewController.instantiate()
-        vc.rootViewController = rootViewController
-        vc.onboardingCoordinator = coordinatorDouble
-        vc.uiQueue = queue
-
-        var callbackCount = 0
-        vc.didComplete = {
-            callbackCount += 1
-        }
-        vc.updateState()
-        coordinatorDouble.stateCompletion!(nil)
-
-        XCTAssertEqual(callbackCount, 1)
-    }
-
 }

@@ -21,7 +21,7 @@ class PermissionsViewControllerTests: TestCase {
         vc.uiQueue = QueueDouble()
 
         let permissionsUnwinder = PermissionsUnwinder()
-        rootViewController.viewControllers = [permissionsUnwinder]
+        parentViewControllerForTests.viewControllers = [permissionsUnwinder]
         permissionsUnwinder.present(vc, animated: false)
 
         vc.didTapContinue(UIButton())
@@ -52,7 +52,7 @@ class PermissionsViewControllerTests: TestCase {
         vc.uiQueue = QueueDouble()
 
         let permissionsUnwinder = PermissionsUnwinder()
-        rootViewController.viewControllers = [permissionsUnwinder]
+        parentViewControllerForTests.viewControllers = [permissionsUnwinder]
         permissionsUnwinder.present(vc, animated: false)
 
         vc.didTapContinue(UIButton())
@@ -75,7 +75,7 @@ class PermissionsViewControllerTests: TestCase {
         vc.uiQueue = QueueDouble()
 
         let permissionsUnwinder = PermissionsUnwinder()
-        rootViewController.viewControllers = [permissionsUnwinder]
+        parentViewControllerForTests.viewControllers = [permissionsUnwinder]
         permissionsUnwinder.present(vc, animated: false)
 
         vc.didTapContinue(UIButton())
