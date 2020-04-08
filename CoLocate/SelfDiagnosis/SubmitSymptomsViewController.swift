@@ -65,10 +65,20 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
             case .success(_):
                 self.performSegue(withIdentifier: "unwindFromSelfDiagnosis", sender: self)
             case .failure(let error):
-                fatalError("Error sending contact events: \(error)")
+                self.alert(error: error)
             }
         })
+    }
 
+    private func alert(error: Error) {
+        let alert = UIAlertController(
+            title: nil,
+            message: error.localizedDescription,
+            preferredStyle: .alert
+        )
+
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
     }
 
 }
