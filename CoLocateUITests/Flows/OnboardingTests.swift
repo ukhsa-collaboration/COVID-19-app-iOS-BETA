@@ -13,10 +13,15 @@ class OnboardingTests: ScreenTestCase {
     override var screen: Screen { .onboarding }
     
     func testAuthorizingEverything() {
-        startButton.tap()
-        XCTAssert(permissionsScreenTitle.exists)
+        // Start screen
         
-        XCTAssertFalse(continueButton.isEnabled)
+        startButton.tap()
+        
+        // Privacy screen
+        
+        XCTAssert(privacyScreenTitle.exists)
+        
+        XCTAssertFalse(privacyContinueButton.isEnabled)
         XCTAssertFalse(allowDataSharingSwitch.boolValue)
         
         #warning("Fix accessibility of the switch.")
@@ -26,9 +31,19 @@ class OnboardingTests: ScreenTestCase {
         allowDataSharingSwitch.tap()
         
         XCTAssert(allowDataSharingSwitch.boolValue)
-        XCTAssert(continueButton.isEnabled)
+        XCTAssert(privacyContinueButton.isEnabled)
         
-        continueButton.tap()
+        privacyContinueButton.tap()
+        
+        // Permissions screen
+        
+        XCTAssert(permissionsScreenTitle.exists)
+        permissionContinueButton.tap()
+        
+        XCTAssert(notificationPermissionAlertTitle.exists)
+        allowNotificationsButton.tap()
+
+        // Status confirmation
         
         XCTAssertEqual(allowedDataSharing.stringValue, "Yes")
         XCTAssertEqual(bluetoothState.stringValue, "Allowed")
@@ -47,16 +62,40 @@ private extension OnboardingTests {
 
 private extension OnboardingTests {
     
-    var permissionsScreenTitle: XCUIElement {
+    var privacyScreenTitle: XCUIElement {
         app.staticTexts["How this app works"]
     }
     
-    var continueButton: XCUIElement {
+    var privacyContinueButton: XCUIElement {
         app.buttons["Continue"]
     }
     
     var allowDataSharingSwitch: XCUIElement {
         app.switches["Allow Data Sharing"]
+    }
+    
+}
+
+private extension OnboardingTests {
+    
+    var permissionsScreenTitle: XCUIElement {
+        app.staticTexts["Set up app permissions"]
+    }
+    
+    var permissionContinueButton: XCUIElement {
+        app.buttons["Continue"]
+    }
+    
+}
+
+private extension OnboardingTests {
+    
+    var notificationPermissionAlertTitle: XCUIElement {
+        app.staticTexts["“CoLocate” Would Like to Send You Notifications"]
+    }
+    
+    var allowNotificationsButton: XCUIElement {
+        app.buttons["Allow"]
     }
     
 }

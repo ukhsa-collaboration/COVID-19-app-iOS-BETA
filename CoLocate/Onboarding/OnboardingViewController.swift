@@ -70,7 +70,10 @@ class OnboardingViewController: UINavigationController, Storyboarded {
                 $0.environment = environment
             }
         case .permissions:
-            vc = PermissionsViewController.instantiate()
+            vc = PermissionsViewController.instantiate {
+                $0.authManager = environment.authorizationManager
+                $0.remoteNotificationManager = environment.remoteNotificationManager
+            }
         case .permissionsDenied:
             vc = PermissionsDeniedViewController.instantiate()
         case .registration:
