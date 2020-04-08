@@ -44,10 +44,6 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         contactEventRecorder = PlistContactEventRecorder.shared
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
     @IBAction func submitTapped(_ sender: PrimaryButton) {
         guard let registration = persistence.registration else {
             fatalError("What do we do when we aren't registered?")
