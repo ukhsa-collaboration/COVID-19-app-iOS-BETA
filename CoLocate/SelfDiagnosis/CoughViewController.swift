@@ -1,5 +1,5 @@
 //
-//  TemperatureViewController.swift
+//  CoughViewController.swift
 //  CoLocate
 //
 //  Created by NHSX.
@@ -8,18 +8,19 @@
 
 import UIKit
 
-class TemperatureViewController: UIViewController {
+class CoughViewController: UIViewController {
     @IBOutlet weak var yesButton: AnswerButton!
     @IBOutlet weak var noButton: AnswerButton!
 
     @IBOutlet weak var continueButton: PrimaryButton!
 
-    var hasHighTemperature: Bool? {
+    var hasHighTemperature: Bool!
+    var hasNewCough: Bool? {
         didSet {
             yesButton.isSelected = false
             noButton.isSelected = false
 
-            switch hasHighTemperature {
+            switch hasNewCough {
             case .some(true):
                 yesButton.isSelected = true
             case .some(false):
@@ -28,21 +29,22 @@ class TemperatureViewController: UIViewController {
                 break
             }
 
-            continueButton?.isEnabled = hasHighTemperature != nil
+            continueButton?.isEnabled = hasNewCough != nil
         }
     }
 
     @IBAction func yesTapped(_ sender: AnswerButton) {
-        hasHighTemperature = true
+        hasNewCough = true
     }
 
     @IBAction func noTapped(_ sender: AnswerButton) {
-        hasHighTemperature = false
+        hasNewCough = false
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? CoughViewController {
+        if let vc = segue.destination as? SubmitSymptomsViewController {
             vc.hasHighTemperature = hasHighTemperature
+            vc.hasNewCough = hasNewCough
         }
     }
 }

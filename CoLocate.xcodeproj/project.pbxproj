@@ -680,23 +680,15 @@
 				F68B89EC243CFF2600F369A9 /* SelfDiagnosis.storyboard */,
 				F67C5153243E4D2F008E2945 /* AnswerButton.swift */,
 				F68B89FB243D262100F369A9 /* ButtonFooterView.swift */,
+				F6AB2F1D243D324400386D6B /* CoughViewController.swift */,
 				F68B89EE243D01FA00F369A9 /* SelfDiagnosisNavigationController.swift */,
 				F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */,
 				F68B89F5243D219E00F369A9 /* SymptomQuestionView.swift */,
 				F68B89F3243D050700F369A9 /* TemperatureViewController.swift */,
 				F68B89F9243D261500F369A9 /* ButtonFooterView.xib */,
 				F68B89F7243D21D100F369A9 /* SymptomQuestionView.xib */,
-				F68B89F2243D04EF00F369A9 /* AddSymptoms */,
 			);
 			path = SelfDiagnosis;
-			sourceTree = "<group>";
-		};
-		F68B89F2243D04EF00F369A9 /* AddSymptoms */ = {
-			isa = PBXGroup;
-			children = (
-				F6AB2F1D243D324400386D6B /* CoughViewController.swift */,
-			);
-			path = AddSymptoms;
 			sourceTree = "<group>";
 		};
 		F6CC2CA7242BC7D90079432B /* Notifications */ = {
