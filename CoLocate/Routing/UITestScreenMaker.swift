@@ -19,8 +19,6 @@ struct UITestScreenMaker: ScreenMaking {
             viewController.title = "Potential"
             return UINavigationController(rootViewController: viewController)
         case .onboarding:
-            // TODO: Remove this – currently needed as we’re not mocking persistence
-            Persistence.shared.allowedDataSharing = false
             return OnboardingViewController.instantiate {
                 $0.environment = OnboardingEnvironment(mockWithHost: $0)
                 // TODO: Remove this – currently needed to kick `updateState()`
@@ -35,9 +33,18 @@ private extension OnboardingEnvironment {
     
     convenience init(mockWithHost host: UIViewController) {
         self.init(
+            persistence: InMemoryPersistence(),
             privacyViewControllerInteractor: MockPrivacyViewControllerInteractor(host: host)
         )
     }
+    
+}
+
+private class InMemoryPersistence: Persisting {
+    
+    var allowedDataSharing = false
+    var registration: Registration? = nil
+    var diagnosis = Diagnosis.unknown
     
 }
 

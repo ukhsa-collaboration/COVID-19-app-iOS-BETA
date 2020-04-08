@@ -11,8 +11,14 @@ import UIKit
 class OnboardingViewController: UINavigationController, Storyboarded {
     static let storyboardName = "Onboarding"
 
-    lazy var onboardingCoordinator = OnboardingCoordinator()
+    // TODO: find a way of making these types less “mutable”
+    // Currently setting environment after `onboardingCoordinator` is used has undefined behaviour.
+    // Not an issue _yet_ as `environment` is currently only ever changed in tests.
     lazy var environment = OnboardingEnvironment()
+    lazy var onboardingCoordinator = OnboardingCoordinator(
+        persistence: self.environment.persistence,
+        authorizationManager: AuthorizationManager()
+    )
     var uiQueue: TestableQueue = DispatchQueue.main
 
     var rootViewController: UIViewController! {
