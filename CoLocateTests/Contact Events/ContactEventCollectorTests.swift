@@ -101,9 +101,12 @@ struct TestPeripheral: BTLEPeripheral {
 }
 
 class TestContactEventRecorder: ContactEventRecorder {
+    var contactEvents: [ContactEvent]
 
-    var contactEvents: [ContactEvent] = []
-    
+    init(_ contactEvents: [ContactEvent] = []) {
+        self.contactEvents = contactEvents
+    }
+
     func record(_ contactEvent: ContactEvent) {
         contactEvents.append(contactEvent)
     }

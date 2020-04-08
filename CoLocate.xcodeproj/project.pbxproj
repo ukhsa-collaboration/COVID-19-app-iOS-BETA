@@ -97,6 +97,7 @@
 		F67A2293242AA370002254B6 /* SecureRegistrationStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */; };
 		F67A2295242AC188002254B6 /* RegistrationViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A2294242AC188002254B6 /* RegistrationViewControllerTests.swift */; };
 		F67C5154243E4D2F008E2945 /* AnswerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67C5153243E4D2F008E2945 /* AnswerButton.swift */; };
+		F67C5159243E7C1E008E2945 /* SubmitSymptomsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67C5158243E7C1E008E2945 /* SubmitSymptomsViewControllerTests.swift */; };
 		F68B89EA243B9FDC00F369A9 /* CoLocate.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F68B89E9243B9FDB00F369A9 /* CoLocate.xcconfig */; };
 		F68B89ED243CFF2600F369A9 /* SelfDiagnosis.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F68B89EC243CFF2600F369A9 /* SelfDiagnosis.storyboard */; };
 		F68B89EF243D01FA00F369A9 /* SelfDiagnosisNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68B89EE243D01FA00F369A9 /* SelfDiagnosisNavigationController.swift */; };
@@ -265,6 +266,7 @@
 		F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRegistrationStorageTests.swift; sourceTree = "<group>"; };
 		F67A2294242AC188002254B6 /* RegistrationViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewControllerTests.swift; sourceTree = "<group>"; };
 		F67C5153243E4D2F008E2945 /* AnswerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerButton.swift; sourceTree = "<group>"; };
+		F67C5158243E7C1E008E2945 /* SubmitSymptomsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitSymptomsViewControllerTests.swift; sourceTree = "<group>"; };
 		F68B89E9243B9FDB00F369A9 /* CoLocate.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = CoLocate.xcconfig; sourceTree = "<group>"; };
 		F68B89EC243CFF2600F369A9 /* SelfDiagnosis.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SelfDiagnosis.storyboard; sourceTree = "<group>"; };
 		F68B89EE243D01FA00F369A9 /* SelfDiagnosisNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfDiagnosisNavigationController.swift; sourceTree = "<group>"; };
@@ -445,6 +447,7 @@
 				898FE85B243B585700210775 /* Privacy */,
 				F6CC2CAA242BCCE90079432B /* Remote Notifications */,
 				098ED479242D7E340029B729 /* Registration */,
+				F67C5157243E7BD5008E2945 /* SelfDiagnosis */,
 			);
 			path = CoLocateTests;
 			sourceTree = "<group>";
@@ -672,6 +675,14 @@
 				F63279292435323200CF7A42 /* PermissionsViewControllerTests.swift */,
 			);
 			path = Permissions;
+			sourceTree = "<group>";
+		};
+		F67C5157243E7BD5008E2945 /* SelfDiagnosis */ = {
+			isa = PBXGroup;
+			children = (
+				F67C5158243E7C1E008E2945 /* SubmitSymptomsViewControllerTests.swift */,
+			);
+			path = SelfDiagnosis;
 			sourceTree = "<group>";
 		};
 		F68B89EB243CFEEE00F369A9 /* SelfDiagnosis */ = {
@@ -995,6 +1006,7 @@
 				098ED48A242E89D80029B729 /* RegistrationServiceDouble.swift in Sources */,
 				F63279272435219A00CF7A42 /* QueueDouble.swift in Sources */,
 				F6CC2CAC242BCD0D0079432B /* RemoteNotificationManagerTests.swift in Sources */,
+				F67C5159243E7C1E008E2945 /* SubmitSymptomsViewControllerTests.swift in Sources */,
 				F72EBD4F24361E99009F9328 /* URLSessionTests.swift in Sources */,
 				F68BFBF7242ACD17008EE68F /* TestHelpers.swift in Sources */,
 			);

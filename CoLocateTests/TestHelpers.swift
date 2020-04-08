@@ -38,3 +38,15 @@ extension DispatchQueue {
         sync {}
     }
 }
+
+extension Registration {
+    static var fake: Self {
+        Registration(id: UUID(), secretKey: Data())
+    }
+}
+
+class FakeError: Error {
+    static var fake: Error {
+        FakeError()
+    }
+}
