@@ -96,6 +96,7 @@
 		F67A2291242AA35C002254B6 /* SecureRegistrationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A2290242AA35B002254B6 /* SecureRegistrationStorage.swift */; };
 		F67A2293242AA370002254B6 /* SecureRegistrationStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */; };
 		F67A2295242AC188002254B6 /* RegistrationViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A2294242AC188002254B6 /* RegistrationViewControllerTests.swift */; };
+		F67C5154243E4D2F008E2945 /* AnswerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67C5153243E4D2F008E2945 /* AnswerButton.swift */; };
 		F68B89EA243B9FDC00F369A9 /* CoLocate.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F68B89E9243B9FDB00F369A9 /* CoLocate.xcconfig */; };
 		F68B89ED243CFF2600F369A9 /* SelfDiagnosis.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F68B89EC243CFF2600F369A9 /* SelfDiagnosis.storyboard */; };
 		F68B89EF243D01FA00F369A9 /* SelfDiagnosisNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68B89EE243D01FA00F369A9 /* SelfDiagnosisNavigationController.swift */; };
@@ -263,6 +264,7 @@
 		F67A2290242AA35B002254B6 /* SecureRegistrationStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRegistrationStorage.swift; sourceTree = "<group>"; };
 		F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRegistrationStorageTests.swift; sourceTree = "<group>"; };
 		F67A2294242AC188002254B6 /* RegistrationViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewControllerTests.swift; sourceTree = "<group>"; };
+		F67C5153243E4D2F008E2945 /* AnswerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerButton.swift; sourceTree = "<group>"; };
 		F68B89E9243B9FDB00F369A9 /* CoLocate.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = CoLocate.xcconfig; sourceTree = "<group>"; };
 		F68B89EC243CFF2600F369A9 /* SelfDiagnosis.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SelfDiagnosis.storyboard; sourceTree = "<group>"; };
 		F68B89EE243D01FA00F369A9 /* SelfDiagnosisNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfDiagnosisNavigationController.swift; sourceTree = "<group>"; };
@@ -676,10 +678,12 @@
 			isa = PBXGroup;
 			children = (
 				F68B89EC243CFF2600F369A9 /* SelfDiagnosis.storyboard */,
+				F67C5153243E4D2F008E2945 /* AnswerButton.swift */,
 				F68B89FB243D262100F369A9 /* ButtonFooterView.swift */,
 				F68B89EE243D01FA00F369A9 /* SelfDiagnosisNavigationController.swift */,
 				F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */,
 				F68B89F5243D219E00F369A9 /* SymptomQuestionView.swift */,
+				F68B89F3243D050700F369A9 /* TemperatureViewController.swift */,
 				F68B89F9243D261500F369A9 /* ButtonFooterView.xib */,
 				F68B89F7243D21D100F369A9 /* SymptomQuestionView.xib */,
 				F68B89F2243D04EF00F369A9 /* AddSymptoms */,
@@ -691,7 +695,6 @@
 			isa = PBXGroup;
 			children = (
 				F6AB2F1D243D324400386D6B /* CoughViewController.swift */,
-				F68B89F3243D050700F369A9 /* TemperatureViewController.swift */,
 			);
 			path = AddSymptoms;
 			sourceTree = "<group>";
@@ -1050,6 +1053,7 @@
 				F68B89EF243D01FA00F369A9 /* SelfDiagnosisNavigationController.swift in Sources */,
 				898FE859243B4FE300210775 /* AuthorizationManaging.swift in Sources */,
 				899E46D4243E1B0E00EDB5BC /* OnboardingStateSummaryViewController.swift in Sources */,
+				F67C5154243E4D2F008E2945 /* AnswerButton.swift in Sources */,
 				6FC63C31241641B8007C8BF3 /* AppDelegate.swift in Sources */,
 				F6AB2F1E243D324400386D6B /* CoughViewController.swift in Sources */,
 				F600A60224297A8E0038DF57 /* RegistrationRequest.swift in Sources */,

@@ -40,7 +40,7 @@ class PrimaryButton: UIButton {
     }
     
     private func setUp() {
-        layer.cornerRadius = 4
+        layer.cornerRadius = 10
         clipsToBounds = true
         backgroundColor = UIColor(named: "NHS Button")
         setTitleColor(.white, for: .normal)
