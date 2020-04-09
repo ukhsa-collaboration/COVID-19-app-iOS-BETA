@@ -37,7 +37,9 @@ class StatusViewController: UIViewController, Storyboarded {
         view.backgroundColor = UIColor(named: "NHS Grey 5")
     
         warningView.backgroundColor = UIColor(named: "NHS Purple")
-        
+        warningViewTitle.textColor = UIColor(named: "NHS White")
+        warningViewBody.textColor = UIColor(named: "NHS White")
+
         warningViewTitle.text = "OK_NOW_TITLE".localized
         warningViewBody.text = "OK_NOW_MESSAGE".localized
         checkSymptomsTitle.text = "OK_NOW_SYMPTOMS_TITLE".localized

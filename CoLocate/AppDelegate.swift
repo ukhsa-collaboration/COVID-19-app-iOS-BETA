@@ -47,6 +47,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
         remoteNotificationManager.configure()
 
+        Appearance.setup()
+
         let rootVC = RootViewController()
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = rootVC
