@@ -45,10 +45,20 @@ class StatusViewController: UIViewController, Storyboarded {
         moreInformationBody.text = "OK_NOW_MORE_INFO_MESSAGE".localized
         
         if persistence.registration != nil {
-            registrationStatusText.text = "REGISTRATION_OK".localized
+            showRegisteredStatus()
         } else {
-            registrationStatusText.text = "REGISTRATION_IN_PROGRESS".localized
-            registrationService.register() { _ in }
+            showRegisteringStatus()
+            
+            registrationService.register() { [weak self] result in
+                guard let self = self else { return }
+                
+                switch (result) {
+                case .success():
+                    self.showRegisteredStatus()
+                case .failure(_):
+                    self.showRegistrationFailedStatus()
+                }
+            }
         }
     }
     
@@ -63,6 +73,18 @@ class StatusViewController: UIViewController, Storyboarded {
 
     @IBAction func unwindFromSelfDiagnosis(unwindSegue: UIStoryboardSegue) {
         dismiss(animated: true)
+    }
+    
+    private func showRegisteredStatus() {
+        registrationStatusText.text = "REGISTRATION_OK".localized
+    }
+    
+    private func showRegistrationFailedStatus() {
+        registrationStatusText.text = "REGISTRATION_FAILED".localized
+    }
+    
+    private func showRegisteringStatus() {
+        registrationStatusText.text = "REGISTRATION_IN_PROGRESS".localized
     }
 }
 

@@ -36,6 +36,28 @@ class StatusViewControllerTests: XCTestCase {
         XCTAssertNotNil(registrationService.lastAttempt)
     }
     
+    func testUpdatesAfterRegistrationCompletes() {
+        let vc = StatusViewController.instantiate()
+        let registrationService = RegistrationServiceDouble()
+        vc.inject(persistence: PersistenceDouble(registration: nil), registrationService: registrationService)
+        XCTAssertNotNil(vc.view)
+        
+        registrationService.completionHandler?(Result<(), Error>.success(()))
+        
+        XCTAssertEqual(vc.registrationStatusText?.text, "Everything is working OK")
+    }
+    
+    func testUpdatesAfterRegistrationFails() {
+        let vc = StatusViewController.instantiate()
+        let registrationService = RegistrationServiceDouble()
+        vc.inject(persistence: PersistenceDouble(registration: nil), registrationService: registrationService)
+        XCTAssertNotNil(vc.view)
+        
+        registrationService.completionHandler?(Result<(), Error>.failure(ErrorForTest()))
+        
+        XCTAssertEqual(vc.registrationStatusText?.text, "App setup failed")
+    }
+
     func arbitraryRegistration() -> Registration {
         return Registration(id: UUID(), secretKey: Data())
     }
