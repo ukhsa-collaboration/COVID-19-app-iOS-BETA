@@ -11,9 +11,9 @@ import XCTest
 
 class PersistenceTests: TestCase {
 
-    // Ensure when UserDefaults.integer(forKey: ) doesn't find anything, it translates to .unknown
     func testDiagnosisRawValueZeroIsUnknown() {
-        XCTAssertEqual(Diagnosis(rawValue: 0), Diagnosis.unknown)
+        let persistence = Persistence()
+        XCTAssertNil(persistence.diagnosis)
     }
 
     func testDiagnosisIsPersisted() {
@@ -32,7 +32,7 @@ class PersistenceTests: TestCase {
         UserDefaults.standard.removePersistentDomain(forName: appDomain!)
 
         let diagnosis = service.diagnosis
-        XCTAssertEqual(diagnosis, Diagnosis.unknown)
+        XCTAssertNil(diagnosis)
     }
     
     func testDiagnosisIsPassedToDelegate() {

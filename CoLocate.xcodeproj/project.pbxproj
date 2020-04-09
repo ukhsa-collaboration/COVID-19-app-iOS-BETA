@@ -47,7 +47,6 @@
 		21C09A8F2437B99F00368203 /* BluetoothNursery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C09A8E2437B99F00368203 /* BluetoothNursery.swift */; };
 		21C417CA242CB0A200DEF3E2 /* ConfirmRegistrationRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C417C9242CB0A200DEF3E2 /* ConfirmRegistrationRequestTests.swift */; };
 		21C417CC242CB15D00DEF3E2 /* ConfirmRegistrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C417CB242CB15D00DEF3E2 /* ConfirmRegistrationRequest.swift */; };
-		21D93C2E241FB0A300C1FA9B /* EnterDiagnosisTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D93C2D241FB0A300C1FA9B /* EnterDiagnosisTableViewController.swift */; };
 		21D93C302420C26900C1FA9B /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D93C2F2420C26900C1FA9B /* PrimaryButton.swift */; };
 		21F373FF2433844D00926FB8 /* ContactEventCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F373FE2433844D00926FB8 /* ContactEventCollector.swift */; };
 		21F37402243384D400926FB8 /* ContactEventCollectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F37401243384D400926FB8 /* ContactEventCollectorTests.swift */; };
@@ -129,7 +128,6 @@
 		F758B8C2242CBAF5003AE16D /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F758B8C1242CBAF5003AE16D /* AppCoordinator.swift */; };
 		F758B8C4242CC0EE003AE16D /* Status.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F758B8C3242CC0EE003AE16D /* Status.storyboard */; };
 		F758B8C9242CC183003AE16D /* PleaseSelfIsolate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F758B8C8242CC183003AE16D /* PleaseSelfIsolate.storyboard */; };
-		F758B8CC242CC1F7003AE16D /* EnterDiagnosis.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F758B8CB242CC1F7003AE16D /* EnterDiagnosis.storyboard */; };
 		F770A4572430F76B002FDED1 /* AppCoordinatorDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = F770A4562430F76B002FDED1 /* AppCoordinatorDouble.swift */; };
 		F78CEB47242B7752002254AD /* String+localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78CEB46242B7752002254AD /* String+localized.swift */; };
 		F78CEB5A242B7EC0002254AD /* FirebaseMessaging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB55242B7EBF002254AD /* FirebaseMessaging.framework */; };
@@ -207,7 +205,6 @@
 		21C09A8E2437B99F00368203 /* BluetoothNursery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothNursery.swift; sourceTree = "<group>"; };
 		21C417C9242CB0A200DEF3E2 /* ConfirmRegistrationRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmRegistrationRequestTests.swift; sourceTree = "<group>"; };
 		21C417CB242CB15D00DEF3E2 /* ConfirmRegistrationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmRegistrationRequest.swift; sourceTree = "<group>"; };
-		21D93C2D241FB0A300C1FA9B /* EnterDiagnosisTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterDiagnosisTableViewController.swift; sourceTree = "<group>"; };
 		21D93C2F2420C26900C1FA9B /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		21F373FE2433844D00926FB8 /* ContactEventCollector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactEventCollector.swift; sourceTree = "<group>"; };
 		21F37401243384D400926FB8 /* ContactEventCollectorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactEventCollectorTests.swift; sourceTree = "<group>"; };
@@ -296,7 +293,6 @@
 		F758B8C1242CBAF5003AE16D /* AppCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		F758B8C3242CC0EE003AE16D /* Status.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Status.storyboard; sourceTree = "<group>"; };
 		F758B8C8242CC183003AE16D /* PleaseSelfIsolate.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PleaseSelfIsolate.storyboard; sourceTree = "<group>"; };
-		F758B8CB242CC1F7003AE16D /* EnterDiagnosis.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EnterDiagnosis.storyboard; sourceTree = "<group>"; };
 		F770A4562430F76B002FDED1 /* AppCoordinatorDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinatorDouble.swift; sourceTree = "<group>"; };
 		F78CEB46242B7752002254AD /* String+localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+localized.swift"; sourceTree = "<group>"; };
 		F78CEB53242B7E18002254AD /* CoLocate-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoLocate-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -559,7 +555,6 @@
 				214209B82422157300C7BFF3 /* Bluetooth */,
 				21B3D2DF24263A1100573061 /* Contact Events */,
 				098ED47F242E744F0029B729 /* Debug */,
-				F758B8CA242CC1DC003AE16D /* EnterDiagnosis */,
 				F78CEB45242B7741002254AD /* Extensions */,
 				89F06B2D2434A5A50074C612 /* Logging */,
 				214209D3242399DD00C7BFF3 /* Networking */,
@@ -769,15 +764,6 @@
 			path = PleaseSelfIsolate;
 			sourceTree = "<group>";
 		};
-		F758B8CA242CC1DC003AE16D /* EnterDiagnosis */ = {
-			isa = PBXGroup;
-			children = (
-				21D93C2D241FB0A300C1FA9B /* EnterDiagnosisTableViewController.swift */,
-				F758B8CB242CC1F7003AE16D /* EnterDiagnosis.storyboard */,
-			);
-			path = EnterDiagnosis;
-			sourceTree = "<group>";
-		};
 		F758B8D0242CC661003AE16D /* Registration */ = {
 			isa = PBXGroup;
 			children = (
@@ -933,7 +919,6 @@
 				A1E7A0592420028B0078174D /* NHS Colors.xcassets in Resources */,
 				F758B8BE242CB856003AE16D /* Localizable.strings in Resources */,
 				F68B89EA243B9FDC00F369A9 /* CoLocate.xcconfig in Resources */,
-				F758B8CC242CC1F7003AE16D /* EnterDiagnosis.storyboard in Resources */,
 				6FC63C38241641BA007C8BF3 /* Assets.xcassets in Resources */,
 				F65AE53C2432B842006544D4 /* Potential.rtf in Resources */,
 				F68B89FA243D261500F369A9 /* ButtonFooterView.xib in Resources */,
@@ -1060,7 +1045,6 @@
 				09D1CD4B242C284000B1A167 /* PotentialViewController.swift in Sources */,
 				F6F05A3024340E5400FF4B72 /* OnboardingViewController.swift in Sources */,
 				89074B8524378A0D00D67777 /* UITestPayload.swift in Sources */,
-				21D93C2E241FB0A300C1FA9B /* EnterDiagnosisTableViewController.swift in Sources */,
 				F6AB2F20243D359F00386D6B /* SubmitSymptomsViewController.swift in Sources */,
 				21F374042434C4BF00926FB8 /* LiveBTLEDebuggerTableViewController.swift in Sources */,
 				AEC6A7BC241BD81A00B0237A /* LogoStrapline.swift in Sources */,

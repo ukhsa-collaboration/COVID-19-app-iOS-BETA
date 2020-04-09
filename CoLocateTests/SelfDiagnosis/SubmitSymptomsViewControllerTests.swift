@@ -36,7 +36,7 @@ class SubmitSymptomsViewControllerTests: TestCase {
         )
 
         let unwinder = SelfDiagnosisUnwinder()
-        parentViewControllerForTests.viewControllers = [unwinder]
+        parentViewControllerForTests.show(viewController: unwinder)
         unwinder.present(vc, animated: false)
 
         let button = PrimaryButton()
@@ -61,7 +61,7 @@ class SubmitSymptomsViewControllerTests: TestCase {
         )
 
         let unwinder = SelfDiagnosisUnwinder()
-        parentViewControllerForTests.viewControllers = [unwinder]
+        parentViewControllerForTests.show(viewController: unwinder)
         unwinder.present(vc, animated: false)
 
         let button = PrimaryButton()
@@ -89,7 +89,7 @@ class SubmitSymptomsViewControllerTests: TestCase {
         )
 
         let unwinder = SelfDiagnosisUnwinder()
-        parentViewControllerForTests.viewControllers = [unwinder]
+        parentViewControllerForTests.show(viewController: unwinder)
         unwinder.present(vc, animated: false)
 
         let button = PrimaryButton()

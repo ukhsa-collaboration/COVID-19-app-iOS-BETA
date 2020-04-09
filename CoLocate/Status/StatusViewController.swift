@@ -39,13 +39,8 @@ class StatusViewController: UIViewController, Storyboarded {
     }
     
     @IBAction func checkSymptomsTapped(_ sender: PrimaryButton) {
-        if persistence.enableNewSelfDiagnosis {
-            let selfDiagnosis = SelfDiagnosisNavigationController.instantiate()
-            present(selfDiagnosis, animated: true)
-        } else {
-            let enterDiagnosisVC = EnterDiagnosisTableViewController.instantiate()
-            (parent as! RootViewController).show(viewController: enterDiagnosisVC)
-        }
+        let selfDiagnosis = SelfDiagnosisNavigationController.instantiate()
+        present(selfDiagnosis, animated: true)
     }
 
     @IBAction func unwindFromOnboarding(unwindSegue: UIStoryboardSegue) {

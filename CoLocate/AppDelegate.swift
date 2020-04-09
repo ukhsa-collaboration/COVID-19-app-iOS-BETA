@@ -146,7 +146,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             rootViewController: rootViewController,
             persistence: persistence
         )
-        appCoordinator.start()
+        appCoordinator.update()
     }
 
     func flushContactEvents() {
@@ -168,7 +168,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
 extension AppDelegate: PersistenceDelegate {
     func persistence(_ persistence: Persistence, didRecordDiagnosis diagnosis: Diagnosis) {
-        appCoordinator.showAppropriateViewController()
+        appCoordinator.update()
     }
 
     func persistence(_ persistence: Persistence, didUpdateRegistration registration: Registration) {

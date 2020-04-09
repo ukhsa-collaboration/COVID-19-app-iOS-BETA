@@ -19,7 +19,6 @@ class RootViewController: UIViewController {
         newChild.didMove(toParent: self)
     }
 
-    
     #if DEBUG || INTERNAL
     var previouslyPresentedViewController: UIViewController?
 

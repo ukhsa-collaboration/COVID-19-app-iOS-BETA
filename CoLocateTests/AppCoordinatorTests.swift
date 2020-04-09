@@ -11,58 +11,39 @@ import XCTest
 
 class AppCoordinatorTests: TestCase {
 
-    func test_shows_you_are_okay_screen_when_diagnosis_is_unknown() {
-        let persistence = PersistenceDouble()
-        persistence.diagnosis = .unknown
-        let coordinator = AppCoordinator(rootViewController: RootViewController(), persistence: persistence)
+    func test_shows_you_are_okay_screen_when_diagnosis_is_nil() {
+        let persistence = PersistenceDouble(diagnosis: nil)
+        let coordinator = AppCoordinator(rootViewController: parentViewControllerForTests, persistence: persistence)
 
-        let vc = coordinator.initialViewController()
+        coordinator.update()
 
-        XCTAssertNotNil(vc as? StatusViewController)
+        XCTAssertNotNil(parentViewControllerForTests.children[0] as? StatusViewController)
     }
 
-    func testShowView_diagnosisUnknown() {
-        let persistence = PersistenceDouble()
-        persistence.diagnosis = .unknown
-        let rootViewController = RootViewController()
-        let coordinator = AppCoordinator(rootViewController: rootViewController, persistence: persistence)
-        
-        coordinator.showAppropriateViewController()
-        
-        XCTAssertNotNil(rootViewController.children.first as? EnterDiagnosisTableViewController)
-    }
-    
     func testShowView_diagnosisInfected() {
-        let persistence = PersistenceDouble()
-        persistence.diagnosis = .infected
-        let rootViewController = RootViewController()
-        let coordinator = AppCoordinator(rootViewController: rootViewController, persistence: persistence)
+        let persistence = PersistenceDouble(diagnosis: .infected)
+        let coordinator = AppCoordinator(rootViewController: parentViewControllerForTests, persistence: persistence)
 
-        coordinator.showAppropriateViewController()
-        
-        XCTAssertNotNil(rootViewController.children.first as? PleaseSelfIsolateViewController)
+        coordinator.update()
+
+        XCTAssertNotNil(parentViewControllerForTests.children[0] as? PleaseSelfIsolateViewController)
     }
     
     func testShowView_diagnosisNotInfected() {
-        let persistence = PersistenceDouble()
-        persistence.diagnosis = .notInfected
-        let rootViewController = RootViewController()
-        let coordinator = AppCoordinator(rootViewController: rootViewController, persistence: persistence)
+        let persistence = PersistenceDouble(diagnosis: .notInfected)
+        let coordinator = AppCoordinator(rootViewController: parentViewControllerForTests, persistence: persistence)
 
-        coordinator.showAppropriateViewController()
-        
-        XCTAssertNotNil(rootViewController.children.first as? StatusViewController)
+        coordinator.update()
+
+        XCTAssertNotNil(parentViewControllerForTests.children[0] as? StatusViewController)
     }
-
     
     func testShowView_diagnosisPotential() {
-        let persistence = PersistenceDouble()
-        persistence.diagnosis = .potential
-        let rootViewController = RootViewController()
-        let coordinator = AppCoordinator(rootViewController: rootViewController, persistence: persistence)
+        let persistence = PersistenceDouble(diagnosis: .potential)
+        let coordinator = AppCoordinator(rootViewController: parentViewControllerForTests, persistence: persistence)
 
-        coordinator.showAppropriateViewController()
+        coordinator.update()
         
-        XCTAssertNotNil(rootViewController.children.first as? PotentialViewController)
+        XCTAssertNotNil(parentViewControllerForTests.children[0] as? PotentialViewController)
     }
 }

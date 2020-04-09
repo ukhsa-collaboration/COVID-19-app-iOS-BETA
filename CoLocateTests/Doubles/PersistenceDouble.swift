@@ -13,11 +13,11 @@ class PersistenceDouble: Persisting {
     
     var allowedDataSharing: Bool
     var registration: Registration?
-    var diagnosis: Diagnosis
+    var diagnosis: Diagnosis?
 
     init(
         allowedDataSharing: Bool = false,
-        diagnosis: Diagnosis = .unknown,
+        diagnosis: Diagnosis? = nil,
         registration: Registration? = nil
     ) {
         self.allowedDataSharing = allowedDataSharing

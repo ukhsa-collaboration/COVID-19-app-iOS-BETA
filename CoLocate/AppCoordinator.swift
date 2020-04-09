@@ -17,45 +17,24 @@ class AppCoordinator {
         self.persistence = persistence
     }
 
-    func start() {
-        let vc = initialViewController()
-        rootViewController.show(viewController: vc)
+    func update() {
+        rootViewController.show(viewController: currentViewController())
     }
     
-    func initialViewController() -> UIViewController & Storyboarded {
-        switch persistence.diagnosis {
-        case .unknown:
+    private func currentViewController() -> UIViewController {
+        if let diagnosis = persistence.diagnosis {
+            return viewController(for: diagnosis)
+        } else {
             return statusVC()
-
-        case .infected:
-            return isolateVC()
-
-        case .notInfected:
-            return statusVC()
-
-        case .potential:
-            return potentialVC()
         }
     }
     
-    func showAppropriateViewController() {
-        rootViewController.show(viewController: viewControllerForDiagnosis())
-    }
-
-    private func viewControllerForDiagnosis() -> UIViewController {
-        let currentDiagnosis = persistence.diagnosis
-        
-        switch currentDiagnosis {
-        case .unknown: return enterDiagnosisVC()
+    private func viewController(for diagnosis: Diagnosis) -> UIViewController {
+        switch diagnosis {
         case .infected: return isolateVC()
         case .notInfected: return statusVC()
         case .potential: return potentialVC()
         }
-    }
-
-    private func enterDiagnosisVC() -> EnterDiagnosisTableViewController {
-        let vc = EnterDiagnosisTableViewController.instantiate()
-        return vc
     }
 
     private func statusVC() -> StatusViewController {

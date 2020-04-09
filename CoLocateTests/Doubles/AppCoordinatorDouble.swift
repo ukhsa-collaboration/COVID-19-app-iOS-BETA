@@ -10,14 +10,13 @@ import UIKit
 @testable import CoLocate
 
 class AppCoordinatorDouble: AppCoordinator {
-    var showAppropriateViewControllerWasCalled = false
-
     init() {
         super.init(rootViewController: RootViewController(),
                    persistence: Persistence())
     }
 
-    override func showAppropriateViewController() {
-        showAppropriateViewControllerWasCalled = true
+    var updateCalled = false
+    override func update() {
+        updateCalled = true
     }
 }

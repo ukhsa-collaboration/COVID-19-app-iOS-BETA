@@ -127,7 +127,7 @@ class RemoteNotificationManagerTests: TestCase {
         
         notificationManager.handleNotification(userInfo: ["status" : "infected"]) {_ in }
         
-        XCTAssertEqual(persistence.diagnosis, .unknown)
+        XCTAssertNil(persistence.diagnosis)
     }
 
     func testHandleNotification_doesNotSendLocalNotificationWhenStatusIsNotPotential() {

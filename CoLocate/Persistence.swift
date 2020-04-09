@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Logging
 
 protocol PersistenceDelegate: class {
     func persistence(_ persistence: Persistence, didRecordDiagnosis diagnosis: Diagnosis)
@@ -26,6 +27,8 @@ class Persistence: Persisting {
     static var shared = Persistence()
 
     let secureRegistrationStorage: SecureRegistrationStorage
+    let logger = Logger(label: "Persistence")
+
     weak var delegate: PersistenceDelegate?
 
     var allowedDataSharing: Bool {
@@ -47,15 +50,28 @@ class Persistence: Persisting {
         }
     }
 
-    var diagnosis: Diagnosis {
+    var diagnosis: Diagnosis? {
         get {
-            // This force unwrap is deliberate, we should never store an unknown rawValue
-            // and I want to fail fast if we somehow do. Note integer(forKey:) returns 0
-            // if the key does not exist, which will inflate to .unknown
-            return Diagnosis(rawValue: UserDefaults.standard.integer(forKey: Keys.diagnosis.rawValue))!
+            let rawDiagnosis = UserDefaults.standard.integer(forKey: Keys.diagnosis.rawValue)
+
+            if rawDiagnosis == 0 {
+                return nil
+            }
+
+            guard let diagnosis = Diagnosis(rawValue: rawDiagnosis) else {
+                logger.critical("Unable to hydrate a diagnosis from raw: \(rawDiagnosis).")
+                return nil
+            }
+
+            return diagnosis
         }
         set {
-            UserDefaults.standard.set(newValue.rawValue, forKey: Keys.diagnosis.rawValue)
+            guard let diagnosis = newValue else {
+                logger.critical("Persisting a nil diagnosis - this should never happen!")
+                return
+            }
+
+            UserDefaults.standard.set(diagnosis.rawValue, forKey: Keys.diagnosis.rawValue)
             delegate?.persistence(self, didRecordDiagnosis: diagnosis)
         }
     }

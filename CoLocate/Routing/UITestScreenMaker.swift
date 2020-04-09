@@ -50,7 +50,7 @@ private class InMemoryPersistence: Persisting {
     
     var allowedDataSharing = false
     var registration: Registration? = Registration(id: UUID(), secretKey: Data())
-    var diagnosis = Diagnosis.unknown
+    var diagnosis: Diagnosis? = nil
 
 }
 
