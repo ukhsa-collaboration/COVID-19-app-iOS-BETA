@@ -27,20 +27,39 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JBT-uP-4FF" userLabel="Registration status view">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oRv-PB-BfB" userLabel="Registration status view">
                                                 <rect key="frame" x="0.0" y="64" width="414" height="60"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jix-nT-UGO" userLabel="Status icon">
-                                                        <rect key="frame" x="20" y="18" width="24" height="24"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wx0-ub-S2x" userLabel="Image or spinner wrapper">
+                                                        <rect key="frame" x="20" y="0.0" width="24" height="60"/>
+                                                        <subviews>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nOs-ix-jLm" userLabel="Registration status image">
+                                                                <rect key="frame" x="0.0" y="18" width="24" height="24"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="24" id="D55-u3-O6B"/>
+                                                                    <constraint firstAttribute="width" constant="24" id="dSH-eG-7UT"/>
+                                                                </constraints>
+                                                            </imageView>
+                                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="eTV-y9-NA3" userLabel="Registration spinner">
+                                                                <rect key="frame" x="0.0" y="18" width="24" height="24"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="24" id="HMc-fH-iFo"/>
+                                                                    <constraint firstAttribute="width" constant="24" id="hPI-1g-82l"/>
+                                                                </constraints>
+                                                            </activityIndicatorView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="24" id="88k-1U-2ap"/>
-                                                            <constraint firstAttribute="height" constant="24" id="BxS-Oa-eSE"/>
-                                                            <constraint firstAttribute="width" constant="24" id="G75-9F-iPZ"/>
-                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="24" id="f3f-Xz-Rp8"/>
+                                                            <constraint firstItem="nOs-ix-jLm" firstAttribute="centerY" secondItem="wx0-ub-S2x" secondAttribute="centerY" id="IFh-ML-ghS"/>
+                                                            <constraint firstAttribute="trailing" secondItem="eTV-y9-NA3" secondAttribute="trailing" id="IWu-Be-lzz"/>
+                                                            <constraint firstItem="nOs-ix-jLm" firstAttribute="leading" secondItem="wx0-ub-S2x" secondAttribute="leading" id="PPL-6z-cak"/>
+                                                            <constraint firstItem="eTV-y9-NA3" firstAttribute="leading" secondItem="wx0-ub-S2x" secondAttribute="leading" id="Tqp-HI-pXZ"/>
+                                                            <constraint firstAttribute="width" constant="24" id="aLr-wb-faW"/>
+                                                            <constraint firstItem="eTV-y9-NA3" firstAttribute="centerY" secondItem="wx0-ub-S2x" secondAttribute="centerY" id="imP-Uj-NbD"/>
                                                         </constraints>
-                                                    </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chorizo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w4C-Yd-5pj">
-                                                        <rect key="frame" x="52" y="20" width="342" height="20.5"/>
+                                                    </view>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ribeye" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="prF-qe-3Zt" userLabel="Registration status text">
+                                                        <rect key="frame" x="52" y="20" width="362" height="20.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -48,12 +67,13 @@
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
-                                                    <constraint firstItem="Jix-nT-UGO" firstAttribute="leading" secondItem="JBT-uP-4FF" secondAttribute="leading" constant="20" symbolic="YES" id="0R8-xq-T6P"/>
-                                                    <constraint firstItem="w4C-Yd-5pj" firstAttribute="centerY" secondItem="JBT-uP-4FF" secondAttribute="centerY" id="6ch-zW-LYy"/>
-                                                    <constraint firstItem="Jix-nT-UGO" firstAttribute="centerY" secondItem="JBT-uP-4FF" secondAttribute="centerY" id="BZ0-2i-Hkt"/>
-                                                    <constraint firstAttribute="trailing" secondItem="w4C-Yd-5pj" secondAttribute="trailing" constant="20" symbolic="YES" id="PIC-se-1ZH"/>
-                                                    <constraint firstAttribute="height" constant="60" id="tbR-yT-O81"/>
-                                                    <constraint firstItem="w4C-Yd-5pj" firstAttribute="leading" secondItem="Jix-nT-UGO" secondAttribute="trailing" constant="8" symbolic="YES" id="vwI-xP-lhj"/>
+                                                    <constraint firstItem="prF-qe-3Zt" firstAttribute="leading" secondItem="wx0-ub-S2x" secondAttribute="trailing" constant="8" symbolic="YES" id="MnT-sm-tDM"/>
+                                                    <constraint firstItem="wx0-ub-S2x" firstAttribute="leading" secondItem="oRv-PB-BfB" secondAttribute="leading" constant="20" symbolic="YES" id="NcK-lS-szv"/>
+                                                    <constraint firstItem="wx0-ub-S2x" firstAttribute="top" secondItem="oRv-PB-BfB" secondAttribute="top" id="Qbk-f6-hDR"/>
+                                                    <constraint firstAttribute="bottom" secondItem="wx0-ub-S2x" secondAttribute="bottom" id="W81-Ns-3va"/>
+                                                    <constraint firstItem="prF-qe-3Zt" firstAttribute="centerY" secondItem="oRv-PB-BfB" secondAttribute="centerY" id="lLi-PX-eiX"/>
+                                                    <constraint firstAttribute="height" constant="60" id="ove-wn-IbQ"/>
+                                                    <constraint firstAttribute="trailing" secondItem="prF-qe-3Zt" secondAttribute="trailing" id="pVN-C5-HjD"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EYf-uP-Puq" userLabel="Warning View">
@@ -172,9 +192,10 @@
                         <outlet property="checkSymptomsTitle" destination="uLC-oV-kJI" id="gN0-wC-v7A"/>
                         <outlet property="moreInformationBody" destination="66y-xR-rUy" id="IOv-us-A1u"/>
                         <outlet property="moreInformationTitle" destination="fGA-f6-UsS" id="deT-jS-Jij"/>
-                        <outlet property="registrationStatusIcon" destination="Jix-nT-UGO" id="D26-vd-5aa"/>
-                        <outlet property="registrationStatusText" destination="w4C-Yd-5pj" id="bSZ-Ix-QJn"/>
-                        <outlet property="registratonStatusView" destination="JBT-uP-4FF" id="gzh-fv-Sba"/>
+                        <outlet property="registrationSpinner" destination="eTV-y9-NA3" id="V2k-Dt-h5Y"/>
+                        <outlet property="registrationStatusIcon" destination="nOs-ix-jLm" id="nTz-62-NB7"/>
+                        <outlet property="registrationStatusText" destination="prF-qe-3Zt" id="JPm-HJ-83G"/>
+                        <outlet property="registratonStatusView" destination="oRv-PB-BfB" id="KVH-zB-VnF"/>
                         <outlet property="warningView" destination="EYf-uP-Puq" id="KAt-ix-bH6"/>
                         <outlet property="warningViewBody" destination="o63-4E-CZu" id="NtL-Wo-Ros"/>
                         <outlet property="warningViewTitle" destination="iem-UH-oWW" id="Lbu-uV-Qzr"/>

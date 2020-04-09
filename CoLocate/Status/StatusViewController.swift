@@ -23,6 +23,7 @@ class StatusViewController: UIViewController, Storyboarded {
     @IBOutlet private var moreInformationBody: UILabel!
     @IBOutlet var registratonStatusView: UIView!
     @IBOutlet var registrationStatusIcon: UIImageView!
+    @IBOutlet var registrationSpinner: UIActivityIndicatorView!
     @IBOutlet var registrationStatusText: UILabel!
     @IBOutlet private var checkSymptomsButton: PrimaryButton!
     
@@ -81,17 +82,23 @@ class StatusViewController: UIViewController, Storyboarded {
     
     private func showRegisteredStatus() {
         registrationStatusIcon.image = UIImage(named: "Registration_status_ok")
+        registrationStatusIcon.isHidden = false
+        registrationSpinner.isHidden = true
         registrationStatusText.text = "REGISTRATION_OK".localized
         registratonStatusView.backgroundColor = nil
     }
     
     private func showRegistrationFailedStatus() {
         registrationStatusText.text = "REGISTRATION_FAILED".localized
+        registrationStatusIcon.isHidden = false
+        registrationSpinner.isHidden = true
         registratonStatusView.backgroundColor = UIColor(named: "Error Grey")
     }
     
     private func showRegisteringStatus() {
         registrationStatusText.text = "REGISTRATION_IN_PROGRESS".localized
+        registrationStatusIcon.isHidden = true
+        registrationSpinner.isHidden = false
         registratonStatusView.backgroundColor = nil
     }
 }

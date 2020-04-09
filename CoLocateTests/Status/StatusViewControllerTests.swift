@@ -18,6 +18,8 @@ class StatusViewControllerTests: XCTestCase {
         
         XCTAssertEqual(vc.registrationStatusText?.text, "Everything is working OK")
         XCTAssertEqual(vc.registrationStatusIcon?.image, UIImage(named: "Registration_status_ok"))
+        XCTAssertFalse(vc.registrationStatusIcon?.isHidden ?? true)
+        XCTAssertTrue(vc.registrationSpinner?.isHidden ?? false)
         XCTAssertNil(vc.registratonStatusView?.backgroundColor)
     }
     
@@ -27,6 +29,8 @@ class StatusViewControllerTests: XCTestCase {
         XCTAssertNotNil(vc.view)
         
         XCTAssertEqual(vc.registrationStatusText?.text, "Finalising setup...")
+        XCTAssertTrue(vc.registrationStatusIcon?.isHidden ?? false)
+        XCTAssertFalse(vc.registrationSpinner?.isHidden ?? true)
         XCTAssertNil(vc.registratonStatusView?.backgroundColor)
     }
     
@@ -49,6 +53,8 @@ class StatusViewControllerTests: XCTestCase {
         
         XCTAssertEqual(vc.registrationStatusText?.text, "Everything is working OK")
         XCTAssertEqual(vc.registrationStatusIcon?.image, UIImage(named: "Registration_status_ok"))
+        XCTAssertFalse(vc.registrationStatusIcon?.isHidden ?? true)
+        XCTAssertTrue(vc.registrationSpinner?.isHidden ?? false)
         XCTAssertNil(vc.registratonStatusView?.backgroundColor)
     }
     
@@ -61,6 +67,8 @@ class StatusViewControllerTests: XCTestCase {
         registrationService.completionHandler?(Result<(), Error>.failure(ErrorForTest()))
         
         XCTAssertEqual(vc.registrationStatusText?.text, "App setup failed")
+        XCTAssertFalse(vc.registrationStatusIcon?.isHidden ?? true)
+        XCTAssertTrue(vc.registrationSpinner?.isHidden ?? false)
         XCTAssertEqual(vc.registratonStatusView?.backgroundColor, UIColor(named: "Error Grey"))
     }
 
