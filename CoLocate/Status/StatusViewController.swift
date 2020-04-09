@@ -85,6 +85,7 @@ class StatusViewController: UIViewController, Storyboarded {
         registrationStatusIcon.isHidden = false
         registrationSpinner.isHidden = true
         registrationStatusText.text = "REGISTRATION_OK".localized
+        registrationStatusText.textColor = UIColor(named: "NHS Text")
         registratonStatusView.backgroundColor = nil
     }
     
@@ -92,6 +93,7 @@ class StatusViewController: UIViewController, Storyboarded {
         registrationStatusText.text = "REGISTRATION_FAILED".localized
         registrationStatusIcon.isHidden = false
         registrationSpinner.isHidden = true
+        registrationStatusText.textColor = UIColor.white
         registratonStatusView.backgroundColor = UIColor(named: "Error Grey")
     }
     
@@ -99,6 +101,7 @@ class StatusViewController: UIViewController, Storyboarded {
         registrationStatusText.text = "REGISTRATION_IN_PROGRESS".localized
         registrationStatusIcon.isHidden = true
         registrationSpinner.isHidden = false
+        registrationStatusText.textColor = UIColor(named: "NHS Text")
         registratonStatusView.backgroundColor = nil
     }
 }

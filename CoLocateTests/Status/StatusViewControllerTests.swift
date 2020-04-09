@@ -21,6 +21,7 @@ class StatusViewControllerTests: XCTestCase {
         XCTAssertFalse(vc.registrationStatusIcon?.isHidden ?? true)
         XCTAssertTrue(vc.registrationSpinner?.isHidden ?? false)
         XCTAssertNil(vc.registratonStatusView?.backgroundColor)
+        XCTAssertEqual(vc.registrationStatusText?.textColor, UIColor(named: "NHS Text"))
     }
     
     func testShowsInitialInProgressStatus() {
@@ -32,6 +33,7 @@ class StatusViewControllerTests: XCTestCase {
         XCTAssertTrue(vc.registrationStatusIcon?.isHidden ?? false)
         XCTAssertFalse(vc.registrationSpinner?.isHidden ?? true)
         XCTAssertNil(vc.registratonStatusView?.backgroundColor)
+        XCTAssertEqual(vc.registrationStatusText?.textColor, UIColor(named: "NHS Text"))
     }
     
     func testStartsRegistrationOnShownWhenNotAlreadyRegistered() {
@@ -56,6 +58,7 @@ class StatusViewControllerTests: XCTestCase {
         XCTAssertFalse(vc.registrationStatusIcon?.isHidden ?? true)
         XCTAssertTrue(vc.registrationSpinner?.isHidden ?? false)
         XCTAssertNil(vc.registratonStatusView?.backgroundColor)
+        XCTAssertEqual(vc.registrationStatusText?.textColor, UIColor(named: "NHS Text"))
     }
     
     func testUpdatesAfterRegistrationFails() {
@@ -70,6 +73,7 @@ class StatusViewControllerTests: XCTestCase {
         XCTAssertFalse(vc.registrationStatusIcon?.isHidden ?? true)
         XCTAssertTrue(vc.registrationSpinner?.isHidden ?? false)
         XCTAssertEqual(vc.registratonStatusView?.backgroundColor, UIColor(named: "Error Grey"))
+        XCTAssertEqual(vc.registrationStatusText?.textColor, UIColor.white)
     }
 
     func arbitraryRegistration() -> Registration {
