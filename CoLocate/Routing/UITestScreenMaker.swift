@@ -51,7 +51,13 @@ private class InMemoryPersistence: Persisting {
     var allowedDataSharing = false
     var registration: Registration? = Registration(id: UUID(), secretKey: Data())
     var diagnosis: Diagnosis? = nil
-
+    var enableNewSelfDiagnosis = false
+    
+    func clear() {
+        allowedDataSharing = false
+        registration = nil
+        diagnosis = nil
+    }
 }
 
 private class EphemeralAuthorizationManager: AuthorizationManaging {

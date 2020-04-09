@@ -12,6 +12,7 @@
 		095A91182434FF1500ED6369 /* ApplicationDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095A91172434FF1500ED6369 /* ApplicationDouble.swift */; };
 		0983ACCD243E566800DBB336 /* ErrorForTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983ACCC243E566800DBB336 /* ErrorForTest.swift */; };
 		0983ACCF243E6D3800DBB336 /* NotificationObserverDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983ACCE243E6D3800DBB336 /* NotificationObserverDouble.swift */; };
+		0983ACD3243EB22200DBB336 /* StatusViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983ACD2243EB22200DBB336 /* StatusViewControllerTests.swift */; };
 		098ED478242D7D050029B729 /* RegistratonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED477242D7D050029B729 /* RegistratonService.swift */; };
 		098ED47C242D801C0029B729 /* RegistrationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED47A242D7E460029B729 /* RegistrationServiceTests.swift */; };
 		098ED481242E745F0029B729 /* Debug.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 098ED480242E745F0029B729 /* Debug.storyboard */; };
@@ -163,6 +164,7 @@
 		095A91172434FF1500ED6369 /* ApplicationDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationDouble.swift; sourceTree = "<group>"; };
 		0983ACCC243E566800DBB336 /* ErrorForTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorForTest.swift; sourceTree = "<group>"; };
 		0983ACCE243E6D3800DBB336 /* NotificationObserverDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationObserverDouble.swift; sourceTree = "<group>"; };
+		0983ACD2243EB22200DBB336 /* StatusViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewControllerTests.swift; sourceTree = "<group>"; };
 		098ED477242D7D050029B729 /* RegistratonService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistratonService.swift; sourceTree = "<group>"; };
 		098ED47A242D7E460029B729 /* RegistrationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationServiceTests.swift; sourceTree = "<group>"; };
 		098ED480242E745F0029B729 /* Debug.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Debug.storyboard; sourceTree = "<group>"; };
@@ -342,6 +344,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0983ACD1243EB20A00DBB336 /* Status */ = {
+			isa = PBXGroup;
+			children = (
+				0983ACD2243EB22200DBB336 /* StatusViewControllerTests.swift */,
+			);
+			path = Status;
+			sourceTree = "<group>";
+		};
 		098ED479242D7E340029B729 /* Registration */ = {
 			isa = PBXGroup;
 			children = (
@@ -415,6 +425,7 @@
 		214209C02422276800C7BFF3 /* CoLocateTests */ = {
 			isa = PBXGroup;
 			children = (
+				0983ACD1243EB20A00DBB336 /* Status */,
 				214209C32422276800C7BFF3 /* Info.plist */,
 				89896E5E2435EB6500F949EA /* CoLocateTests.xcconfig */,
 				89896E612435F37300F949EA /* ProjectTests.swift */,
@@ -949,6 +960,7 @@
 				F6F05A242433BEC000FF4B72 /* OnboardingCoordinatorTests.swift in Sources */,
 				09B27BDB243BA5C800DAEA02 /* AsyncAfterableDouble.swift in Sources */,
 				214209D924262B7500C7BFF3 /* SessionHelpers.swift in Sources */,
+				0983ACD3243EB22200DBB336 /* StatusViewControllerTests.swift in Sources */,
 				F600A60424297C010038DF57 /* RegistrationRequestTests.swift in Sources */,
 				098ED488242E89930029B729 /* PushNotificationManagerDouble.swift in Sources */,
 				0983ACCF243E6D3800DBB336 /* NotificationObserverDouble.swift in Sources */,

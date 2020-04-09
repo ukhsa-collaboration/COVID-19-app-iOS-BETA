@@ -38,7 +38,9 @@ class AppCoordinator {
     }
 
     private func statusVC() -> StatusViewController {
-        return StatusViewController.instantiate()
+        let vc = StatusViewController.instantiate()
+        vc.inject(persistence: persistence)
+        return vc
     }
     
     private func isolateVC() -> PleaseSelfIsolateViewController {

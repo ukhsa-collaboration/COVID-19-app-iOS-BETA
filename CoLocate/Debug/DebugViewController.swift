@@ -13,12 +13,14 @@ class DebugViewController: UITableViewController, Storyboarded {
     static let storyboardName = "Debug"
 
     @IBOutlet weak var allowedDataSharingSwitch: UISwitch!
-    @IBOutlet weak var interceptRequestsSwitch: UISwitch!
     @IBOutlet weak var versionBuildLabel: UILabel!
     @IBOutlet weak var enableNewSelfDiagnosis: UISwitch!
 
-    let persistence = Persistence.shared
-    let contactEventRecorder = PlistContactEventRecorder.shared
+    // Normally we avoid providing default values for services to ensure that they will
+    // actually be injected, so that UI tests can work properly. However, we shouldn't
+    // ever have any UI tests that show the debug view.
+    private let persistence = Persistence.shared
+    private let contactEventRecorder = PlistContactEventRecorder.shared
     
     override func viewDidLoad() {
         allowedDataSharingSwitch.isOn = persistence.allowedDataSharing

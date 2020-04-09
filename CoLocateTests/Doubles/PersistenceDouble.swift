@@ -14,6 +14,7 @@ class PersistenceDouble: Persisting {
     var allowedDataSharing: Bool
     var registration: Registration?
     var diagnosis: Diagnosis?
+    var enableNewSelfDiagnosis = false
 
     init(
         allowedDataSharing: Bool = false,
@@ -25,4 +26,9 @@ class PersistenceDouble: Persisting {
         self.diagnosis = diagnosis
     }
 
+    func clear() {
+        allowedDataSharing = false
+        diagnosis = nil
+        registration = nil
+    }
 }

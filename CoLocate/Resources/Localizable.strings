@@ -8,3 +8,6 @@
 
 "POTENTIAL_STATUS_TITLE" = "NHS Coronavirus";
 "POTENTIAL_STATUS_BODY" = "Someone you've been nearby recently was diagnosed with coronavirus.\n\nYou should isolate yourself and get tested.";
+
+"REGISTRATION_OK" = "Everything is working OK";
+"REGISTRATION_IN_PROGRESS" = "Finalising setup...";

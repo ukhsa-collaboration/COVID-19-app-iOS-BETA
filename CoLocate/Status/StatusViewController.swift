@@ -11,7 +11,7 @@ import UIKit
 class StatusViewController: UIViewController, Storyboarded {
     static let storyboardName = "Status"
 
-    var persistence = Persistence.shared
+    private var persistence: Persisting!
     
     @IBOutlet private var warningView: UIView!
     @IBOutlet private var warningViewTitle: UILabel!
@@ -20,7 +20,12 @@ class StatusViewController: UIViewController, Storyboarded {
     @IBOutlet private var checkSymptomsBody: UILabel!
     @IBOutlet private var moreInformationTitle: UILabel!
     @IBOutlet private var moreInformationBody: UILabel!
+    @IBOutlet var registrationStatusText: UILabel!
     @IBOutlet private var checkSymptomsButton: PrimaryButton!
+    
+    func inject(persistence: Persisting) {
+        self.persistence = persistence
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +41,12 @@ class StatusViewController: UIViewController, Storyboarded {
         checkSymptomsButton.setTitle("OK_NOW_SYMPTOMS_BUTTON".localized, for: .normal)
         moreInformationTitle.text = "OK_NOW_MORE_INFO_TITLE".localized
         moreInformationBody.text = "OK_NOW_MORE_INFO_MESSAGE".localized
+        
+        if persistence.registration != nil {
+            registrationStatusText.text = "REGISTRATION_OK".localized
+        } else {
+            registrationStatusText.text = "REGISTRATION_IN_PROGRESS".localized
+        }
     }
     
     @IBAction func checkSymptomsTapped(_ sender: PrimaryButton) {
