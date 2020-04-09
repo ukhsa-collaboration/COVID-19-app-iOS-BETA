@@ -31,6 +31,16 @@ jobs:
           git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
           git push origin test-flight
 
+      - name: Notify Slack on Failure
+        if: failure()
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.slack_bot_token }}
+        uses: voxmedia/github-action-slack-notify-build@v1
+        with:
+          channel_id: G010M35PZCM
+          status: FAILED
+          color: danger
+
   release:
     needs: bump-build-version
     runs-on:
@@ -84,3 +94,13 @@ jobs:
         with:
           channel_id: G010M35PZCM
           status: UPLOADED (${{ steps.get-build-number.outputs.build-number }})
+
+      - name: Notify Slack on Failure
+        if: failure()
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.slack_bot_token }}
+        uses: voxmedia/github-action-slack-notify-build@v1
+        with:
+          channel_id: G010M35PZCM
+          status: FAILED
+          color: danger
