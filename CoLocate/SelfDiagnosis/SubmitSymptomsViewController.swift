@@ -14,8 +14,6 @@ typealias SendContactEvents = (Registration, [ContactEvent], @escaping (Result<V
 class SubmitSymptomsViewController: UIViewController, Storyboarded {
     static let storyboardName = "SelfDiagnosis"
 
-    let logger = Logger(label: "SelfDiagnosis")
-
     private var persistence: Persisting!
     private var contactEventRecorder: ContactEventRecorder!
     private var sendContactEvents: SendContactEvents!
@@ -79,3 +77,5 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
     }
 
 }
+
+fileprivate let logger = Logger(label: "SelfDiagnosis")
