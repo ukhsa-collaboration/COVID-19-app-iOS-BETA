@@ -12,3 +12,4 @@
 "REGISTRATION_OK" = "Everything is working OK";
 "REGISTRATION_IN_PROGRESS" = "Finalising setup...";
 "REGISTRATION_FAILED" = "App setup failed";
+"RETRY" = "Retry";

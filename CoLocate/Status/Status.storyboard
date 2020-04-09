@@ -59,21 +59,35 @@
                                                         </constraints>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ribeye" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="prF-qe-3Zt" userLabel="Registration status text">
-                                                        <rect key="frame" x="52" y="20" width="362" height="20.5"/>
+                                                        <rect key="frame" x="52" y="20" width="288" height="20.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ki-ul-KTk">
+                                                        <rect key="frame" x="348" y="15" width="46" height="30"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="46" id="39g-E5-6KS"/>
+                                                        </constraints>
+                                                        <state key="normal" title="Veal">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="retryRegistrationTapped" destination="HPa-EI-l5D" eventType="touchUpInside" id="4wV-0w-zBF"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
+                                                    <constraint firstItem="9Ki-ul-KTk" firstAttribute="leading" secondItem="prF-qe-3Zt" secondAttribute="trailing" constant="8" symbolic="YES" id="13u-LA-72H"/>
                                                     <constraint firstItem="prF-qe-3Zt" firstAttribute="leading" secondItem="wx0-ub-S2x" secondAttribute="trailing" constant="8" symbolic="YES" id="MnT-sm-tDM"/>
                                                     <constraint firstItem="wx0-ub-S2x" firstAttribute="leading" secondItem="oRv-PB-BfB" secondAttribute="leading" constant="20" symbolic="YES" id="NcK-lS-szv"/>
                                                     <constraint firstItem="wx0-ub-S2x" firstAttribute="top" secondItem="oRv-PB-BfB" secondAttribute="top" id="Qbk-f6-hDR"/>
                                                     <constraint firstAttribute="bottom" secondItem="wx0-ub-S2x" secondAttribute="bottom" id="W81-Ns-3va"/>
+                                                    <constraint firstItem="9Ki-ul-KTk" firstAttribute="centerY" secondItem="oRv-PB-BfB" secondAttribute="centerY" id="fqG-lC-OqO"/>
                                                     <constraint firstItem="prF-qe-3Zt" firstAttribute="centerY" secondItem="oRv-PB-BfB" secondAttribute="centerY" id="lLi-PX-eiX"/>
                                                     <constraint firstAttribute="height" constant="60" id="ove-wn-IbQ"/>
-                                                    <constraint firstAttribute="trailing" secondItem="prF-qe-3Zt" secondAttribute="trailing" id="pVN-C5-HjD"/>
+                                                    <constraint firstAttribute="trailing" secondItem="9Ki-ul-KTk" secondAttribute="trailing" constant="20" symbolic="YES" id="tl7-Mt-zga"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EYf-uP-Puq" userLabel="Warning View">
@@ -192,6 +206,7 @@
                         <outlet property="checkSymptomsTitle" destination="uLC-oV-kJI" id="gN0-wC-v7A"/>
                         <outlet property="moreInformationBody" destination="66y-xR-rUy" id="IOv-us-A1u"/>
                         <outlet property="moreInformationTitle" destination="fGA-f6-UsS" id="deT-jS-Jij"/>
+                        <outlet property="registrationRetryButton" destination="9Ki-ul-KTk" id="tUy-rx-1qN"/>
                         <outlet property="registrationSpinner" destination="eTV-y9-NA3" id="V2k-Dt-h5Y"/>
                         <outlet property="registrationStatusIcon" destination="nOs-ix-jLm" id="nTz-62-NB7"/>
                         <outlet property="registrationStatusText" destination="prF-qe-3Zt" id="JPm-HJ-83G"/>

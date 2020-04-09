@@ -29,6 +29,7 @@ class StatusViewController: UIViewController, Storyboarded {
     @IBOutlet var registrationStatusIcon: UIImageView!
     @IBOutlet var registrationSpinner: UIActivityIndicatorView!
     @IBOutlet var registrationStatusText: UILabel!
+    @IBOutlet var registrationRetryButton: UIButton!
     @IBOutlet private var checkSymptomsButton: PrimaryButton!
     
     func inject(persistence: Persisting, registrationService: RegistrationService, mainQueue: AsyncAfterable) {
@@ -53,11 +54,11 @@ class StatusViewController: UIViewController, Storyboarded {
         checkSymptomsButton.setTitle("OK_NOW_SYMPTOMS_BUTTON".localized, for: .normal)
         moreInformationTitle.text = "OK_NOW_MORE_INFO_TITLE".localized
         moreInformationBody.text = "OK_NOW_MORE_INFO_MESSAGE".localized
+        registrationRetryButton.setTitle("RETRY".localized, for: .normal)
         
         if persistence.registration != nil {
             showRegisteredStatus()
         } else {
-            showRegisteringStatus()
             register()
         }
     }
@@ -67,6 +68,10 @@ class StatusViewController: UIViewController, Storyboarded {
         present(selfDiagnosis, animated: true)
     }
 
+    @IBAction func retryRegistrationTapped() {
+        register()
+    }
+    
     @IBAction func unwindFromOnboarding(unwindSegue: UIStoryboardSegue) {
         dismiss(animated: true)
     }
@@ -76,6 +81,7 @@ class StatusViewController: UIViewController, Storyboarded {
     }
     
     private func register() {
+        showRegisteringStatus()
         var finished = false
         
         let attempt = registrationService.register() { [weak self] result in
@@ -107,6 +113,7 @@ class StatusViewController: UIViewController, Storyboarded {
         registrationStatusText.text = "REGISTRATION_OK".localized
         registrationStatusText.textColor = UIColor(named: "NHS Text")
         registratonStatusView.backgroundColor = nil
+        registrationRetryButton.isHidden = true
     }
     
     private func showRegistrationFailedStatus() {
@@ -116,6 +123,8 @@ class StatusViewController: UIViewController, Storyboarded {
         registrationSpinner.isHidden = true
         registrationStatusText.textColor = UIColor.white
         registratonStatusView.backgroundColor = UIColor(named: "Error Grey")
+        registrationRetryButton.isHidden = false
+        
     }
     
     private func showRegisteringStatus() {
@@ -124,6 +133,8 @@ class StatusViewController: UIViewController, Storyboarded {
         registrationSpinner.isHidden = false
         registrationStatusText.textColor = UIColor(named: "NHS Text")
         registratonStatusView.backgroundColor = nil
+        registrationRetryButton.isHidden = true
+        
     }
 }
 
