@@ -58,10 +58,6 @@ class OnboardingViewController: UINavigationController, Storyboarded {
         updateState()
     }
     
-    @IBAction func unwindFromRegistration(unwindSegue: UIStoryboardSegue) {
-        completionHandler()
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
     }
@@ -80,8 +76,9 @@ class OnboardingViewController: UINavigationController, Storyboarded {
             }
         case .permissionsDenied:
             vc = PermissionsDeniedViewController.instantiate()
-        case .registration:
-            vc = RegistrationViewController.instantiate()
+        case .done:
+            completionHandler()
+            return
         }
 
         viewControllers = [vc]

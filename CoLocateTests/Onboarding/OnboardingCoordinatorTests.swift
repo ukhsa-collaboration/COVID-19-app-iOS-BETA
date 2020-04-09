@@ -67,7 +67,7 @@ class OnboardingCoordinatorTests: TestCase {
         XCTAssertEqual(state, .permissionsDenied)
     }
 
-    func testRegistration() {
+    func testDone() {
         let persistenceDouble = PersistenceDouble(allowedDataSharing: true)
         let authManagerDouble = AuthorizationManagerDouble(bluetooth: .allowed)
         let onboardingCoordinator = OnboardingCoordinator(
@@ -78,6 +78,6 @@ class OnboardingCoordinatorTests: TestCase {
         var state: OnboardingCoordinator.State?
         onboardingCoordinator.state { state = $0 }
         authManagerDouble.notificationsCompletion!(.allowed)
-        XCTAssertEqual(state, .registration)
+        XCTAssertEqual(state, .done)
     }
 }

@@ -83,7 +83,6 @@
 		AE2DCAA0241920B600A940FC /* BTLEBroadcaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2DCA9F241920B600A940FC /* BTLEBroadcaster.swift */; };
 		AEC6A7BC241BD81A00B0237A /* LogoStrapline.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC6A7BB241BD81A00B0237A /* LogoStrapline.swift */; };
 		AEC6A7BE241BD82900B0237A /* LogoStrapline.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEC6A7BD241BD82900B0237A /* LogoStrapline.xib */; };
-		F600A600242977D50038DF57 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F600A5FF242977D50038DF57 /* RegistrationViewController.swift */; };
 		F600A60224297A8E0038DF57 /* RegistrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F600A60124297A8E0038DF57 /* RegistrationRequest.swift */; };
 		F600A60424297C010038DF57 /* RegistrationRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F600A60324297C010038DF57 /* RegistrationRequestTests.swift */; };
 		F613936E243FA82B003447E8 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = F613936D243FA82B003447E8 /* Appearance.swift */; };
@@ -246,7 +245,6 @@
 		AE2DCA9F241920B600A940FC /* BTLEBroadcaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTLEBroadcaster.swift; sourceTree = "<group>"; };
 		AEC6A7BB241BD81A00B0237A /* LogoStrapline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoStrapline.swift; sourceTree = "<group>"; };
 		AEC6A7BD241BD82900B0237A /* LogoStrapline.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogoStrapline.xib; sourceTree = "<group>"; };
-		F600A5FF242977D50038DF57 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		F600A60124297A8E0038DF57 /* RegistrationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationRequest.swift; sourceTree = "<group>"; };
 		F600A60324297C010038DF57 /* RegistrationRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationRequestTests.swift; sourceTree = "<group>"; };
 		F613936D243FA82B003447E8 /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
@@ -717,7 +715,6 @@
 				F6F05A35243436D200FF4B72 /* PrivacyViewController.swift */,
 				F6F05A332434344200FF4B72 /* StartNowViewController.swift */,
 				898FE858243B4FE300210775 /* AuthorizationManaging.swift */,
-				F600A5FF242977D50038DF57 /* RegistrationViewController.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -1004,7 +1001,6 @@
 				F78CEBED242D0836002254AD /* SecureRequestFactory.swift in Sources */,
 				21F373FF2433844D00926FB8 /* ContactEventCollector.swift in Sources */,
 				21C09A8F2437B99F00368203 /* BluetoothNursery.swift in Sources */,
-				F600A600242977D50038DF57 /* RegistrationViewController.swift in Sources */,
 				F6CC2CA9242BC7FC0079432B /* RemoteNotificationManager.swift in Sources */,
 				AE2A5E502423C473007A4771 /* ContactEventRecorder.swift in Sources */,
 				89F06B332434AF130074C612 /* ForwardingLogHandler.swift in Sources */,

@@ -42,8 +42,6 @@ class OnboardingTests: ScreenTestCase {
         
         XCTAssert(notificationPermissionAlertTitle.exists)
         allowNotificationsButton.tap()
-        
-        XCTAssert(registrationScreenTitle.exists)
     }
 }
 
@@ -55,13 +53,6 @@ private extension OnboardingTests {
         app.buttons["Start now"]
     }
     
-}
-
-private extension OnboardingTests {
-    
-    var registrationScreenTitle: XCUIElement {
-        app.staticTexts["Your app is set up and ready to go"]
-    }
 }
 
 private extension OnboardingTests {

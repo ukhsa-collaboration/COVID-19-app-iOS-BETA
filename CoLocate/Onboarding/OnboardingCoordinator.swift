@@ -12,7 +12,7 @@ import Foundation
 class OnboardingCoordinator {
 
     enum State: Equatable {
-        case initial, permissions, permissionsDenied, registration
+        case initial, permissions, permissionsDenied, done
     }
 
     private let persistence: Persisting
@@ -45,7 +45,7 @@ class OnboardingCoordinator {
                 completion(.permissionsDenied)
                 return
             case (.allowed, .allowed):
-                completion(.registration)
+                completion(.done)
             }
         }
     }
