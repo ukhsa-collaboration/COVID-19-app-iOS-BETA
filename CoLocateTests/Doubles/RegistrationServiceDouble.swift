@@ -21,6 +21,9 @@ class RegistrationServiceDouble: RegistrationService {
 }
 
 class CancelableDouble: Cancelable {
+    var canceled = false
+    
     func cancel() {
+        canceled = true
     }
 }

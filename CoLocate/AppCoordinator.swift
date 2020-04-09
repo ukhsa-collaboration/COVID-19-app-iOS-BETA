@@ -41,7 +41,7 @@ class AppCoordinator {
 
     private func statusVC() -> StatusViewController {
         let vc = StatusViewController.instantiate()
-        vc.inject(persistence: persistence, registrationService: registrationService)
+        vc.inject(persistence: persistence, registrationService: registrationService, mainQueue: DispatchQueue.main)
         return vc
     }
     

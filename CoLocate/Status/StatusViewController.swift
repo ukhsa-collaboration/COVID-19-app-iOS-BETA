@@ -7,12 +7,16 @@
 //
 
 import UIKit
+import Logging
+
+fileprivate let registrationTimeLimitSecs = 20.0
 
 class StatusViewController: UIViewController, Storyboarded {
     static let storyboardName = "Status"
 
     private var persistence: Persisting!
     private var registrationService: RegistrationService!
+    private var mainQueue: AsyncAfterable!
     
     @IBOutlet private var warningView: UIView!
     @IBOutlet private var warningViewTitle: UILabel!
@@ -27,9 +31,10 @@ class StatusViewController: UIViewController, Storyboarded {
     @IBOutlet var registrationStatusText: UILabel!
     @IBOutlet private var checkSymptomsButton: PrimaryButton!
     
-    func inject(persistence: Persisting, registrationService: RegistrationService) {
+    func inject(persistence: Persisting, registrationService: RegistrationService, mainQueue: AsyncAfterable) {
         self.persistence = persistence
         self.registrationService = registrationService
+        self.mainQueue = mainQueue
     }
 
     override func viewDidLoad() {
@@ -53,17 +58,7 @@ class StatusViewController: UIViewController, Storyboarded {
             showRegisteredStatus()
         } else {
             showRegisteringStatus()
-            
-            registrationService.register() { [weak self] result in
-                guard let self = self else { return }
-                
-                switch (result) {
-                case .success():
-                    self.showRegisteredStatus()
-                case .failure(_):
-                    self.showRegistrationFailedStatus()
-                }
-            }
+            register()
         }
     }
     
@@ -78,6 +73,31 @@ class StatusViewController: UIViewController, Storyboarded {
 
     @IBAction func unwindFromSelfDiagnosis(unwindSegue: UIStoryboardSegue) {
         dismiss(animated: true)
+    }
+    
+    private func register() {
+        var finished = false
+        
+        let attempt = registrationService.register() { [weak self] result in
+            guard let self = self else { return }
+            
+            finished = true
+            
+            switch (result) {
+            case .success():
+                self.showRegisteredStatus()
+            case .failure(_):
+                self.showRegistrationFailedStatus()
+            }
+        }
+        
+        mainQueue.asyncAfter(deadline: .now() + registrationTimeLimitSecs) { [weak self] in
+            guard let self = self, !finished else { return }
+            
+            logger.error("Registration did not complete within \(registrationTimeLimitSecs) seconds")
+            attempt.cancel()
+            self.showRegistrationFailedStatus()
+        }
     }
     
     private func showRegisteredStatus() {
@@ -107,3 +127,4 @@ class StatusViewController: UIViewController, Storyboarded {
     }
 }
 
+private let logger = Logger(label: "StatusViewController")
