@@ -100,10 +100,6 @@
 		F68B89ED243CFF2600F369A9 /* SelfDiagnosis.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F68B89EC243CFF2600F369A9 /* SelfDiagnosis.storyboard */; };
 		F68B89EF243D01FA00F369A9 /* SelfDiagnosisNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68B89EE243D01FA00F369A9 /* SelfDiagnosisNavigationController.swift */; };
 		F68B89F4243D050700F369A9 /* TemperatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68B89F3243D050700F369A9 /* TemperatureViewController.swift */; };
-		F68B89F6243D219E00F369A9 /* SymptomQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68B89F5243D219E00F369A9 /* SymptomQuestionView.swift */; };
-		F68B89F8243D21D100F369A9 /* SymptomQuestionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F68B89F7243D21D100F369A9 /* SymptomQuestionView.xib */; };
-		F68B89FA243D261500F369A9 /* ButtonFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F68B89F9243D261500F369A9 /* ButtonFooterView.xib */; };
-		F68B89FC243D262100F369A9 /* ButtonFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68B89FB243D262100F369A9 /* ButtonFooterView.swift */; };
 		F68BFBF7242ACD17008EE68F /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68BFBF6242ACD17008EE68F /* TestHelpers.swift */; };
 		F6AB2F1E243D324400386D6B /* CoughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AB2F1D243D324400386D6B /* CoughViewController.swift */; };
 		F6AB2F20243D359F00386D6B /* SubmitSymptomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */; };
@@ -265,10 +261,6 @@
 		F68B89EC243CFF2600F369A9 /* SelfDiagnosis.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SelfDiagnosis.storyboard; sourceTree = "<group>"; };
 		F68B89EE243D01FA00F369A9 /* SelfDiagnosisNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfDiagnosisNavigationController.swift; sourceTree = "<group>"; };
 		F68B89F3243D050700F369A9 /* TemperatureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureViewController.swift; sourceTree = "<group>"; };
-		F68B89F5243D219E00F369A9 /* SymptomQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomQuestionView.swift; sourceTree = "<group>"; };
-		F68B89F7243D21D100F369A9 /* SymptomQuestionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SymptomQuestionView.xib; sourceTree = "<group>"; };
-		F68B89F9243D261500F369A9 /* ButtonFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ButtonFooterView.xib; sourceTree = "<group>"; };
-		F68B89FB243D262100F369A9 /* ButtonFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonFooterView.swift; sourceTree = "<group>"; };
 		F68BFBF6242ACD17008EE68F /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		F6AB2F1D243D324400386D6B /* CoughViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoughViewController.swift; sourceTree = "<group>"; };
 		F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitSymptomsViewController.swift; sourceTree = "<group>"; };
@@ -672,14 +664,10 @@
 			children = (
 				F68B89EC243CFF2600F369A9 /* SelfDiagnosis.storyboard */,
 				F67C5153243E4D2F008E2945 /* AnswerButton.swift */,
-				F68B89FB243D262100F369A9 /* ButtonFooterView.swift */,
 				F6AB2F1D243D324400386D6B /* CoughViewController.swift */,
 				F68B89EE243D01FA00F369A9 /* SelfDiagnosisNavigationController.swift */,
 				F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */,
-				F68B89F5243D219E00F369A9 /* SymptomQuestionView.swift */,
 				F68B89F3243D050700F369A9 /* TemperatureViewController.swift */,
-				F68B89F9243D261500F369A9 /* ButtonFooterView.xib */,
-				F68B89F7243D21D100F369A9 /* SymptomQuestionView.xib */,
 			);
 			path = SelfDiagnosis;
 			sourceTree = "<group>";
@@ -921,7 +909,6 @@
 				F68B89EA243B9FDC00F369A9 /* CoLocate.xcconfig in Resources */,
 				6FC63C38241641BA007C8BF3 /* Assets.xcassets in Resources */,
 				F65AE53C2432B842006544D4 /* Potential.rtf in Resources */,
-				F68B89FA243D261500F369A9 /* ButtonFooterView.xib in Resources */,
 				09D1CD50242C3A9300B1A167 /* Potential.storyboard in Resources */,
 				F6CA2819242E41F700F8DC55 /* README.md in Resources */,
 				895D9E462437458700573D4D /* AppIcon.xcassets in Resources */,
@@ -929,7 +916,6 @@
 				F6F05A322434310200FF4B72 /* Onboarding.storyboard in Resources */,
 				098ED481242E745F0029B729 /* Debug.storyboard in Resources */,
 				F78CEB68242B8C2C002254AD /* GoogleService-Info.plist in Resources */,
-				F68B89F8243D21D100F369A9 /* SymptomQuestionView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1048,10 +1034,8 @@
 				F6AB2F20243D359F00386D6B /* SubmitSymptomsViewController.swift in Sources */,
 				21F374042434C4BF00926FB8 /* LiveBTLEDebuggerTableViewController.swift in Sources */,
 				AEC6A7BC241BD81A00B0237A /* LogoStrapline.swift in Sources */,
-				F68B89FC243D262100F369A9 /* ButtonFooterView.swift in Sources */,
 				214209D52423C83C00C7BFF3 /* PatchContactEventsRequest.swift in Sources */,
 				214209D0242396DA00C7BFF3 /* Session.swift in Sources */,
-				F68B89F6243D219E00F369A9 /* SymptomQuestionView.swift in Sources */,
 				F6F05A262433C09200FF4B72 /* OnboardingCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
