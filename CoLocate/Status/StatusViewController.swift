@@ -91,6 +91,7 @@ class StatusViewController: UIViewController, Storyboarded {
     
     private func showRegistrationFailedStatus() {
         registrationStatusText.text = "REGISTRATION_FAILED".localized
+        registrationStatusIcon.image = UIImage(named: "Registration_status_failure")
         registrationStatusIcon.isHidden = false
         registrationSpinner.isHidden = true
         registrationStatusText.textColor = UIColor.white
