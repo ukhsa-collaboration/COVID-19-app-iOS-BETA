@@ -10,9 +10,11 @@ import Foundation
 @testable import CoLocate
 
 class RegistrationServiceDouble: RegistrationService {
+    var completionHandler: ((Result<(), Error>) -> Void)?
     var lastAttempt: Cancelable?
     
-    func register() -> Cancelable {
+    func register(completionHandler: @escaping ((Result<(), Error>) -> Void)) -> Cancelable {
+        self.completionHandler = completionHandler
         lastAttempt = CancelableDouble()
         return lastAttempt!
     }

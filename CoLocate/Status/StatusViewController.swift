@@ -48,7 +48,7 @@ class StatusViewController: UIViewController, Storyboarded {
             registrationStatusText.text = "REGISTRATION_OK".localized
         } else {
             registrationStatusText.text = "REGISTRATION_IN_PROGRESS".localized
-            registrationService.register()
+            registrationService.register() { _ in }
         }
     }
     

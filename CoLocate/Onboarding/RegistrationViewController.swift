@@ -26,7 +26,6 @@ class RegistrationViewController: UIViewController, Storyboarded {
     }
 
     @IBAction func didTapRegister(_ sender: UIButton) {
-
         self.performSegue(withIdentifier: "unwindFromRegistration", sender: self)
     }
 }

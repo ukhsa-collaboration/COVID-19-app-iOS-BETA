@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     let authorizationManager = AuthorizationManager()
 
     var appCoordinator: AppCoordinator!
-    
+
     override init() {
         LoggingManager.bootstrap()
         

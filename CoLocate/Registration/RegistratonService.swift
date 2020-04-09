@@ -10,20 +10,14 @@ import Foundation
 import Logging
 
 protocol RegistrationService {
-    func register() -> Cancelable
+    func register(completionHandler: @escaping ((Result<Void, Error>) -> Void)) -> Cancelable
 }
 
 protocol Cancelable {
     func cancel()
 }
 
-enum RegistrationAttemptStatus {
-    case started
-    case succeeded
-    case failed
-}
-
-let RegistrationAttemptNotification = NSNotification.Name("RegistrationAttemptNotification")
+let RegistrationStartedNotification = NSNotification.Name("RegistrationStartedNotification")
 
 class ConcreteRegistrationService: RegistrationService {
     let session: Session
@@ -51,15 +45,16 @@ class ConcreteRegistrationService: RegistrationService {
         )
     }
     
-    func register() -> Cancelable {
+    func register(completionHandler: @escaping ((Result<Void, Error>) -> Void)) -> Cancelable {
         let attempt = RegistrationAttempt(
             session: session,
             persistence: persistence,
             remoteNotificationDispatcher: remoteNotificationDispatcher,
-            notificationCenter: notificationCenter
+            notificationCenter: notificationCenter,
+            completionHandler: completionHandler
         )
         attempt.start()
-        notificationCenter.post(name: RegistrationAttemptNotification, object: nil, userInfo: ["status": RegistrationAttemptStatus.started])
+        notificationCenter.post(name: RegistrationStartedNotification, object: nil)
         return attempt
     }
 }
@@ -69,6 +64,7 @@ fileprivate class RegistrationAttempt: Cancelable {
     private let persistence: Persisting
     private let remoteNotificationDispatcher: RemoteNotificationDispatcher
     private let notificationCenter: NotificationCenter
+    private var registrationCompletionHandler: ((Result<Void, Error>) -> Void)?
     private var remoteNotificationCompletionHandler: RemoteNotificationCompletionHandler?
     private var canceled = false
 
@@ -76,11 +72,13 @@ fileprivate class RegistrationAttempt: Cancelable {
         session: Session,
         persistence: Persisting,
         remoteNotificationDispatcher: RemoteNotificationDispatcher,
-        notificationCenter: NotificationCenter
+        notificationCenter: NotificationCenter,
+        completionHandler: @escaping ((Result<Void, Error>) -> Void)
     ) {
         self.session = session
         self.persistence = persistence
         self.notificationCenter = notificationCenter
+        self.registrationCompletionHandler = completionHandler
         self.remoteNotificationDispatcher = remoteNotificationDispatcher
     }
 
@@ -160,13 +158,13 @@ fileprivate class RegistrationAttempt: Cancelable {
     private func succeed(registration: Registration) {
         cleanup()
         self.remoteNotificationCompletionHandler?(.newData)
-        self.notificationCenter.post(name: RegistrationAttemptNotification, object: nil, userInfo: ["status": RegistrationAttemptStatus.succeeded])
+        registrationCompletionHandler?(.success(()))
     }
     
     private func fail(withError error: Error) {
         cleanup()
         self.remoteNotificationCompletionHandler?(.failed)
-        self.notificationCenter.post(name: RegistrationAttemptNotification, object: nil, userInfo: ["status": RegistrationAttemptStatus.failed])
+        registrationCompletionHandler?(.failure(error))
     }
 
     private func cleanup() {
