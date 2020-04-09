@@ -17,6 +17,7 @@ class StatusViewControllerTests: XCTestCase {
         XCTAssertNotNil(vc.view)
         
         XCTAssertEqual(vc.registrationStatusText?.text, "Everything is working OK")
+        XCTAssertNil(vc.registratonStatusView?.backgroundColor)
     }
     
     func testShowsInitialInProgressStatus() {
@@ -25,6 +26,7 @@ class StatusViewControllerTests: XCTestCase {
         XCTAssertNotNil(vc.view)
         
         XCTAssertEqual(vc.registrationStatusText?.text, "Finalising setup...")
+        XCTAssertNil(vc.registratonStatusView?.backgroundColor)
     }
     
     func testStartsRegistrationOnShownWhenNotAlreadyRegistered() {
@@ -45,6 +47,7 @@ class StatusViewControllerTests: XCTestCase {
         registrationService.completionHandler?(Result<(), Error>.success(()))
         
         XCTAssertEqual(vc.registrationStatusText?.text, "Everything is working OK")
+        XCTAssertNil(vc.registratonStatusView?.backgroundColor)
     }
     
     func testUpdatesAfterRegistrationFails() {
@@ -56,6 +59,7 @@ class StatusViewControllerTests: XCTestCase {
         registrationService.completionHandler?(Result<(), Error>.failure(ErrorForTest()))
         
         XCTAssertEqual(vc.registrationStatusText?.text, "App setup failed")
+        XCTAssertEqual(vc.registratonStatusView?.backgroundColor, UIColor(named: "Error Grey"))
     }
 
     func arbitraryRegistration() -> Registration {

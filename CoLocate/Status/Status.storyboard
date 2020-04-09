@@ -162,6 +162,7 @@
                         <outlet property="moreInformationBody" destination="66y-xR-rUy" id="IOv-us-A1u"/>
                         <outlet property="moreInformationTitle" destination="fGA-f6-UsS" id="deT-jS-Jij"/>
                         <outlet property="registrationStatusText" destination="w4C-Yd-5pj" id="bSZ-Ix-QJn"/>
+                        <outlet property="registratonStatusView" destination="JBT-uP-4FF" id="gzh-fv-Sba"/>
                         <outlet property="warningView" destination="EYf-uP-Puq" id="KAt-ix-bH6"/>
                         <outlet property="warningViewBody" destination="o63-4E-CZu" id="NtL-Wo-Ros"/>
                         <outlet property="warningViewTitle" destination="iem-UH-oWW" id="Lbu-uV-Qzr"/>
