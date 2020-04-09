@@ -22,6 +22,7 @@ class StatusViewController: UIViewController, Storyboarded {
     @IBOutlet private var moreInformationTitle: UILabel!
     @IBOutlet private var moreInformationBody: UILabel!
     @IBOutlet var registratonStatusView: UIView!
+    @IBOutlet var registrationStatusIcon: UIImageView!
     @IBOutlet var registrationStatusText: UILabel!
     @IBOutlet private var checkSymptomsButton: PrimaryButton!
     
@@ -77,6 +78,7 @@ class StatusViewController: UIViewController, Storyboarded {
     }
     
     private func showRegisteredStatus() {
+        registrationStatusIcon.image = UIImage(named: "Registration_status_ok")
         registrationStatusText.text = "REGISTRATION_OK".localized
         registratonStatusView.backgroundColor = nil
     }

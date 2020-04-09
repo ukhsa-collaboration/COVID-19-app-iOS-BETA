@@ -17,6 +17,7 @@ class StatusViewControllerTests: XCTestCase {
         XCTAssertNotNil(vc.view)
         
         XCTAssertEqual(vc.registrationStatusText?.text, "Everything is working OK")
+        XCTAssertEqual(vc.registrationStatusIcon?.image, UIImage(named: "Registration_status_ok"))
         XCTAssertNil(vc.registratonStatusView?.backgroundColor)
     }
     
@@ -47,6 +48,7 @@ class StatusViewControllerTests: XCTestCase {
         registrationService.completionHandler?(Result<(), Error>.success(()))
         
         XCTAssertEqual(vc.registrationStatusText?.text, "Everything is working OK")
+        XCTAssertEqual(vc.registrationStatusIcon?.image, UIImage(named: "Registration_status_ok"))
         XCTAssertNil(vc.registratonStatusView?.backgroundColor)
     }
     
