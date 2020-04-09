@@ -529,7 +529,7 @@
                                 <rect key="frame" x="20" y="518" width="280" height="30"/>
                                 <state key="normal" title="Start using the app"/>
                                 <connections>
-                                    <action selector="didTapRegister:" destination="uVJ-gM-m3V" eventType="touchUpInside" id="jud-Vv-sxt"/>
+                                    <segue destination="RhB-Yo-cNP" kind="unwind" unwindAction="unwindFromRegistrationWithUnwindSegue:" id="4QC-oS-huF"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -551,7 +551,6 @@
                     <connections>
                         <outlet property="activityIndicator" destination="OAX-RC-kmh" id="obT-I1-szX"/>
                         <outlet property="registerButton" destination="KHc-pr-5WQ" id="8kU-no-nhq"/>
-                        <segue destination="RhB-Yo-cNP" kind="unwind" identifier="unwindFromRegistration" unwindAction="unwindFromRegistrationWithUnwindSegue:" id="yBU-xr-Nu3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hbI-bo-is5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

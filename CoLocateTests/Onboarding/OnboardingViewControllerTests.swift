@@ -15,7 +15,7 @@ class OnboardingViewControllerTests: TestCase {
         let coordinatorDouble = OnboardingCoordinatorDouble()
         let queue = QueueDouble()
         let vc = OnboardingViewController.instantiate()
-        vc.inject(env: envDouble(), coordinator: coordinatorDouble)
+        vc.inject(env: envDouble(), coordinator: coordinatorDouble) {}
         let rootViewController = RootViewController()
         parentViewControllerForTests.addChild(rootViewController)
         vc.showIn(rootViewController: rootViewController)
@@ -32,7 +32,7 @@ class OnboardingViewControllerTests: TestCase {
         let coordinatorDouble = OnboardingCoordinatorDouble()
         let queue = QueueDouble()
         let vc = OnboardingViewController.instantiate()
-        vc.inject(env: envDouble(), coordinator: coordinatorDouble)
+        vc.inject(env: envDouble(), coordinator: coordinatorDouble) {}
         let rootViewController = RootViewController()
         parentViewControllerForTests.addChild(rootViewController)
         vc.showIn(rootViewController: rootViewController)
@@ -49,7 +49,7 @@ class OnboardingViewControllerTests: TestCase {
         let coordinatorDouble = OnboardingCoordinatorDouble()
         let queue = QueueDouble()
         let vc = OnboardingViewController.instantiate()
-        vc.inject(env: envDouble(), coordinator: coordinatorDouble)
+        vc.inject(env: envDouble(), coordinator: coordinatorDouble) {}
         let rootViewController = RootViewController()
         parentViewControllerForTests.addChild(rootViewController)
         vc.showIn(rootViewController: rootViewController)

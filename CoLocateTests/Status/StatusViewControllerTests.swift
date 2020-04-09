@@ -13,7 +13,7 @@ class StatusViewControllerTests: XCTestCase {
     
     func testShowsInitialRegisteredStatus() {
         let vc = StatusViewController.instantiate()
-        vc.inject(persistence: PersistenceDouble(registration: arbitraryRegistration()))
+        vc.inject(persistence: PersistenceDouble(registration: arbitraryRegistration()), registrationService: RegistrationServiceDouble())
         XCTAssertNotNil(vc.view)
         
         XCTAssertEqual(vc.registrationStatusText?.text, "Everything is working OK")
@@ -21,10 +21,19 @@ class StatusViewControllerTests: XCTestCase {
     
     func testShowsInitialInProgressStatus() {
         let vc = StatusViewController.instantiate()
-        vc.inject(persistence: PersistenceDouble(registration: nil))
+        vc.inject(persistence: PersistenceDouble(registration: nil), registrationService: RegistrationServiceDouble())
         XCTAssertNotNil(vc.view)
         
         XCTAssertEqual(vc.registrationStatusText?.text, "Finalising setup...")
+    }
+    
+    func testStartsRegistrationOnShownWhenNotAlreadyRegistered() {
+        let vc = StatusViewController.instantiate()
+        let registrationService = RegistrationServiceDouble()
+        vc.inject(persistence: PersistenceDouble(registration: nil), registrationService: registrationService)
+        XCTAssertNotNil(vc.view)
+        
+        XCTAssertNotNil(registrationService.lastAttempt)
     }
     
     func arbitraryRegistration() -> Registration {

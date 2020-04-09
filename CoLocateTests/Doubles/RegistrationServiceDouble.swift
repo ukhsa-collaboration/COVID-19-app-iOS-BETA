@@ -10,8 +10,11 @@ import Foundation
 @testable import CoLocate
 
 class RegistrationServiceDouble: RegistrationService {
+    var lastAttempt: Cancelable?
+    
     func register() -> Cancelable {
-        return CancelableDouble()
+        lastAttempt = CancelableDouble()
+        return lastAttempt!
     }
 }
 

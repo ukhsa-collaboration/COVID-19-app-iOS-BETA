@@ -12,6 +12,7 @@ class StatusViewController: UIViewController, Storyboarded {
     static let storyboardName = "Status"
 
     private var persistence: Persisting!
+    private var registrationService: RegistrationService!
     
     @IBOutlet private var warningView: UIView!
     @IBOutlet private var warningViewTitle: UILabel!
@@ -23,8 +24,9 @@ class StatusViewController: UIViewController, Storyboarded {
     @IBOutlet var registrationStatusText: UILabel!
     @IBOutlet private var checkSymptomsButton: PrimaryButton!
     
-    func inject(persistence: Persisting) {
+    func inject(persistence: Persisting, registrationService: RegistrationService) {
         self.persistence = persistence
+        self.registrationService = registrationService
     }
 
     override func viewDidLoad() {
@@ -46,6 +48,7 @@ class StatusViewController: UIViewController, Storyboarded {
             registrationStatusText.text = "REGISTRATION_OK".localized
         } else {
             registrationStatusText.text = "REGISTRATION_IN_PROGRESS".localized
+            registrationService.register()
         }
     }
     

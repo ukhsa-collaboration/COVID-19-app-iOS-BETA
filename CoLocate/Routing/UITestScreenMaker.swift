@@ -22,7 +22,7 @@ struct UITestScreenMaker: ScreenMaking {
             return OnboardingViewController.instantiate { viewController in
                 let env = OnboardingEnvironment(mockWithHost: viewController)
                 let coordinator = OnboardingCoordinator(persistence: env.persistence, authorizationManager: env.authorizationManager)
-                viewController.inject(env: env, coordinator: coordinator)
+                viewController.inject(env: env, coordinator: coordinator) { }
                 
             }
         }

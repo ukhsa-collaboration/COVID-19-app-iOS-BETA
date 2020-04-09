@@ -11,10 +11,12 @@ import UIKit
 class AppCoordinator {
     private let rootViewController: RootViewController
     private let persistence: Persisting
+    private let registrationService: RegistrationService
         
-    init(rootViewController: RootViewController, persistence: Persisting) {
+    init(rootViewController: RootViewController, persistence: Persisting, registrationService: RegistrationService) {
         self.rootViewController = rootViewController
         self.persistence = persistence
+        self.registrationService = registrationService
     }
 
     func update() {
@@ -39,7 +41,7 @@ class AppCoordinator {
 
     private func statusVC() -> StatusViewController {
         let vc = StatusViewController.instantiate()
-        vc.inject(persistence: persistence)
+        vc.inject(persistence: persistence, registrationService: registrationService)
         return vc
     }
     

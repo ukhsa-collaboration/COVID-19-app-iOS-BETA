@@ -15,10 +15,6 @@ class RegistrationViewController: UIViewController, Storyboarded {
     @IBOutlet var registerButton: PrimaryButton!
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
 
-    var registrationService: RegistrationService = ConcreteRegistrationService()
-    var mainQueue: AsyncAfterable = DispatchQueue.main
-    private var attempt: Cancelable?
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,11 +26,7 @@ class RegistrationViewController: UIViewController, Storyboarded {
     }
 
     @IBAction func didTapRegister(_ sender: UIButton) {
-        activityIndicator.isHidden = false
-        activityIndicator.startAnimating()
-        registerButton.isEnabled = false
 
-        attempt = registrationService.register()
         self.performSegue(withIdentifier: "unwindFromRegistration", sender: self)
     }
 }

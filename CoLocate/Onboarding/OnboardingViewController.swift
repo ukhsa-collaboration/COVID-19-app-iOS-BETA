@@ -13,6 +13,7 @@ class OnboardingViewController: UINavigationController, Storyboarded {
 
     private var environment: OnboardingEnvironment! = nil
     private var onboardingCoordinator: OnboardingCoordinator! = nil
+    private var completionHandler: (() -> Void)! = nil
     var uiQueue: TestableQueue = DispatchQueue.main
 
     func showIn(rootViewController: RootViewController) {
@@ -20,10 +21,10 @@ class OnboardingViewController: UINavigationController, Storyboarded {
         rootViewController.show(viewController: self)
     }
 
-    func inject(env: OnboardingEnvironment, coordinator: OnboardingCoordinator) {
+    func inject(env: OnboardingEnvironment, coordinator: OnboardingCoordinator, completionHandler: @escaping () -> Void) {
         self.environment = env
         self.onboardingCoordinator = coordinator
-        self.onboardingCoordinator = coordinator
+        self.completionHandler = completionHandler
     }
     
     override func viewDidLoad() {
@@ -55,6 +56,10 @@ class OnboardingViewController: UINavigationController, Storyboarded {
 
     @IBAction func unwindFromPermissionsDenied(unwindSegue: UIStoryboardSegue) {
         updateState()
+    }
+    
+    @IBAction func unwindFromRegistration(unwindSegue: UIStoryboardSegue) {
+        completionHandler()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

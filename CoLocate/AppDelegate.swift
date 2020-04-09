@@ -61,16 +61,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             let onboardingViewController = OnboardingViewController.instantiate()
             let env = OnboardingEnvironment(persistence: persistence, authorizationManager: authorizationManager, remoteNotificationManager: remoteNotificationManager)
             let coordinator = OnboardingCoordinator(persistence: persistence, authorizationManager: authorizationManager)
-            onboardingViewController.inject(env: env, coordinator: coordinator)
-            onboardingViewController.showIn(rootViewController: rootVC)
             
-            NotificationCenter.default.addObserver(forName: RegistrationAttemptNotification, object: nil, queue: nil) {
-                notification in
-                
-                if notification.userInfo!["status"] as! RegistrationAttemptStatus == .started {
-                    self.startMainApp()
-                }
+            onboardingViewController.inject(env: env, coordinator: coordinator) {
+                self.startMainApp()
             }
+            
+            onboardingViewController.showIn(rootViewController: rootVC)
         }
 
         return true
@@ -144,7 +140,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
         appCoordinator = AppCoordinator(
             rootViewController: rootViewController,
-            persistence: persistence
+            persistence: persistence,
+            registrationService: registrationService
         )
         appCoordinator.update()
     }

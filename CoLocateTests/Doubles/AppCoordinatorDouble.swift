@@ -11,8 +11,11 @@ import UIKit
 
 class AppCoordinatorDouble: AppCoordinator {
     init() {
-        super.init(rootViewController: RootViewController(),
-                   persistence: Persistence())
+        super.init(
+            rootViewController: RootViewController(),
+            persistence: Persistence(),
+            registrationService: RegistrationServiceDouble()
+        )
     }
 
     var updateCalled = false
