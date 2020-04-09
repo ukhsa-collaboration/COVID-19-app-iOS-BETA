@@ -43,7 +43,7 @@
 		21B3D2E3242906AE00573061 /* SecureRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B3D2E2242906AE00573061 /* SecureRequestTests.swift */; };
 		21B3D2E52429112B00573061 /* SecureRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B3D2E42429112B00573061 /* SecureRequest.swift */; };
 		21B3D2E82429115600573061 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21B3D2E72429115600573061 /* CoreBluetooth.framework */; };
-		21C09A8D24377F5100368203 /* CBManagerState+CustomStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C09A8C24377F5100368203 /* CBManagerState+CustomStringConvertible.swift */; };
+		21C09A8D24377F5100368203 /* CoreBluetoothExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C09A8C24377F5100368203 /* CoreBluetoothExtensions.swift */; };
 		21C09A8F2437B99F00368203 /* BluetoothNursery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C09A8E2437B99F00368203 /* BluetoothNursery.swift */; };
 		21C417CA242CB0A200DEF3E2 /* ConfirmRegistrationRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C417C9242CB0A200DEF3E2 /* ConfirmRegistrationRequestTests.swift */; };
 		21C417CC242CB15D00DEF3E2 /* ConfirmRegistrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C417CB242CB15D00DEF3E2 /* ConfirmRegistrationRequest.swift */; };
@@ -203,7 +203,7 @@
 		21B3D2E2242906AE00573061 /* SecureRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRequestTests.swift; sourceTree = "<group>"; };
 		21B3D2E42429112B00573061 /* SecureRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRequest.swift; sourceTree = "<group>"; };
 		21B3D2E72429115600573061 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
-		21C09A8C24377F5100368203 /* CBManagerState+CustomStringConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CBManagerState+CustomStringConvertible.swift"; sourceTree = "<group>"; };
+		21C09A8C24377F5100368203 /* CoreBluetoothExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreBluetoothExtensions.swift; sourceTree = "<group>"; };
 		21C09A8E2437B99F00368203 /* BluetoothNursery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothNursery.swift; sourceTree = "<group>"; };
 		21C417C9242CB0A200DEF3E2 /* ConfirmRegistrationRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmRegistrationRequestTests.swift; sourceTree = "<group>"; };
 		21C417CB242CB15D00DEF3E2 /* ConfirmRegistrationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmRegistrationRequest.swift; sourceTree = "<group>"; };
@@ -417,7 +417,7 @@
 			children = (
 				AE2DCA9F241920B600A940FC /* BTLEBroadcaster.swift */,
 				21AF36AA241A8E50001A4910 /* BTLEListener.swift */,
-				21C09A8C24377F5100368203 /* CBManagerState+CustomStringConvertible.swift */,
+				21C09A8C24377F5100368203 /* CoreBluetoothExtensions.swift */,
 				21C09A8E2437B99F00368203 /* BluetoothNursery.swift */,
 				F72EBD96243C8490009F9328 /* BluetoothStateObserver.swift */,
 			);
@@ -1011,7 +1011,7 @@
 				F6F05A342434344200FF4B72 /* StartNowViewController.swift in Sources */,
 				0997D056243BDEEC0067346C /* RootViewController.swift in Sources */,
 				21AF36AB241A8E50001A4910 /* BTLEListener.swift in Sources */,
-				21C09A8D24377F5100368203 /* CBManagerState+CustomStringConvertible.swift in Sources */,
+				21C09A8D24377F5100368203 /* CoreBluetoothExtensions.swift in Sources */,
 				F72EBD9E243C90E6009F9328 /* HumbleLocalNotificationScheduler.swift in Sources */,
 				217A23BE243B34E8001B8236 /* UIDevice+ModelName.swift in Sources */,
 				F78CEBED242D0836002254AD /* SecureRequestFactory.swift in Sources */,

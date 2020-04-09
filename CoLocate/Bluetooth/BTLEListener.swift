@@ -52,9 +52,23 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
         self.stateDelegate = stateDelegate
         self.delegate = delegate
     }
+
     
     // MARK: CBCentralManagerDelegate
     
+    func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
+        guard let restoredPeripherals = dict[CBCentralManagerRestoredStatePeripheralsKey] as? [CBPeripheral] else {
+            logger.info("no peripherals to restore for \(central)")
+            return
+        }
+        
+        logger.info("restoring \(restoredPeripherals.count) peripherals for central \(central)")
+        for peripheral in restoredPeripherals {
+            peripherals[peripheral.identifier] = peripheral
+            peripheral.delegate = self
+        }
+    }
+
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         logger.info("state: \(central.state)")
         
@@ -63,6 +77,28 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
         switch (central.state) {
                 
         case .poweredOn:
+            
+            // Ensure all "connected" peripherals are properly connected after state restoration
+            for peripheral in peripherals {
+                guard peripheral.value.state == .connected else {
+                    logger.info("attempting connection to peripheral \(peripheral.value.identifierWithName) in state \(peripheral.value.state)")
+                    central.connect(peripheral.value)
+                    continue
+                }
+                guard let sonarIdService = peripheral.value.services?.first(where: {$0.uuid == ConcreteBTLEBroadcaster.sonarServiceUUID}) else {
+                    logger.info("discovering services for peripheral \(peripheral.value.identifierWithName)")
+                    peripheral.value.discoverServices([ConcreteBTLEBroadcaster.sonarServiceUUID])
+                    continue
+                }
+                guard let sonarIdCharacteristic = sonarIdService.characteristics?.first(where: {$0.uuid == ConcreteBTLEBroadcaster.sonarIdCharacteristicUUID}) else {
+                    logger.info("discovering characteristics for peripheral \(peripheral.value.identifierWithName)")
+                    peripheral.value.discoverCharacteristics([ConcreteBTLEBroadcaster.sonarIdCharacteristicUUID], for: sonarIdService)
+                    continue
+                }
+                logger.info("reading sonarId from fully-connected peripheral \(peripheral.value.identifierWithName)")
+                peripheral.value.readValue(for: sonarIdCharacteristic)
+            }
+            
             central.scanForPeripherals(withServices: [ConcreteBTLEBroadcaster.sonarServiceUUID])
 
         default:
@@ -70,36 +106,29 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
         }
     }
     
-    func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
-        logger.info("willRestoreState for central \(central)")
-        
-        for peripheral in (dict[CBCentralManagerRestoredStatePeripheralsKey] as? [CBPeripheral] ?? []) {
-            peripherals[peripheral.identifier] = peripheral
-            peripheral.delegate = self
-        }
-    }
-        
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        logger.info("\(peripheral.identifier) (\(peripheral.name ?? "unknown")), advertismentData: \(advertisementData)")
-
-        if peripherals[peripheral.identifier] == nil {
-            peripherals[peripheral.identifier] = peripheral
-            central.connect(peripheral)
+        guard peripherals[peripheral.identifier] == nil else {
+            logger.info("ignoring peripheral \(peripheral.identifierWithName) in state \(peripheral.state)")
+            return
         }
+
+        logger.info("attempting connection to peripheral \(peripheral.identifierWithName) in state \(peripheral.state)")
+        peripherals[peripheral.identifier] = peripheral
+        central.connect(peripheral)
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        logger.info("\(peripheral.identifier) (\(peripheral.name ?? "unknown"))")
+        logger.info("\(peripheral.identifierWithName)")
 
         peripheral.delegate = self
         peripheral.discoverServices([ConcreteBTLEBroadcaster.sonarServiceUUID])
     }
-    
+
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         if let error = error {
-            logger.info("\(peripheral.identifier) (\(peripheral.name ?? "unknown")) error: \(error)")
+            logger.info("\(peripheral.identifierWithName) error: \(error)")
         } else {
-            logger.info("\(peripheral.identifier) (\(peripheral.name ?? "unknown"))")
+            logger.info("\(peripheral.identifierWithName)")
         }
         delegate?.btleListener(self, didDisconnect: peripheral, error: error)
                 
@@ -109,7 +138,7 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
     // MARK: CBPeripheralDelegate
     
     func peripheral(_ peripheral: CBPeripheral, didModifyServices invalidatedServices: [CBService]) {
-        logger.info("\(peripheral.identifier) (\(peripheral.name ?? "unknown")) invalidatedServices:")
+        logger.info("\(peripheral.identifierWithName) invalidatedServices:")
         for service in invalidatedServices {
             logger.info("\t\(service)\n")
         }
@@ -122,17 +151,17 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
         }
         
         guard let services = peripheral.services, services.count > 0 else {
-            logger.info("No services discovered for peripheral \(peripheral.identifier) (\(peripheral.name ?? "unknown"))")
+            logger.info("No services discovered for peripheral \(peripheral.identifierWithName)")
             return
         }
         
-        guard let sonarService = services.first(where: {$0.uuid == ConcreteBTLEBroadcaster.sonarServiceUUID}) else {
-            logger.info("Sonar service not discovered for \(peripheral.identifier) (\(peripheral.name ?? "unknown")")
+        guard let sonarIdService = services.first(where: {$0.uuid == ConcreteBTLEBroadcaster.sonarServiceUUID}) else {
+            logger.info("Sonar service not discovered for \(peripheral.identifierWithName)")
             return
         }
 
-        logger.info("sonarId service found: \(sonarService)")
-        peripheral.discoverCharacteristics([ConcreteBTLEBroadcaster.sonarIdCharacteristicUUID], for: sonarService)
+        logger.info("sonarId service found: \(sonarIdService)")
+        peripheral.discoverCharacteristics([ConcreteBTLEBroadcaster.sonarIdCharacteristicUUID], for: sonarIdService)
     }
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
@@ -147,7 +176,7 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
         }
         
         guard let sonarIdCharacteristic = characteristics.first(where: {$0.uuid == ConcreteBTLEBroadcaster.sonarIdCharacteristicUUID}) else {
-            logger.info("sonarId characteristic not discovered for peripheral \(peripheral)")
+            logger.info("sonarId characteristic not discovered for peripheral \(peripheral.identifierWithName)")
             return
         }
 
@@ -172,7 +201,7 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
         }
 
         if let sonarId = UUID(uuidString: CBUUID(data: data).uuidString) {
-            logger.info("sonarId read: \(sonarId)")
+            logger.info("peripheral \(peripheral.identifierWithName) has sonarId: \(sonarId)")
             delegate?.btleListener(self, didFindSonarId: sonarId, forPeripheral: peripheral)
             peripheral.readRSSI()
         } else {
@@ -182,10 +211,10 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
 
     func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?) {
         guard error == nil else {
-            logger.info("error: \(error!)")
+            logger.info("peripheral \(peripheral.identifierWithName) error: \(error!)")
             return
         }
-        logger.info("\(peripheral.identifier) (\(peripheral.name ?? "unknown")), RSSI: \(RSSI)")
+        logger.info("peripheral \(peripheral.identifierWithName), RSSI: \(RSSI)")
 
         delegate?.btleListener(self, didReadRSSI: RSSI.intValue, forPeripheral: peripheral)
         

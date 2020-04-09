@@ -23,3 +23,25 @@ extension CBManagerState: CustomStringConvertible {
     }
     
 }
+
+extension CBPeripheralState: CustomStringConvertible {
+    
+    public var description: String {
+        switch self {
+        case .connected: return ".connected"
+        case .connecting: return ".connecting"
+        case .disconnected: return ".disconnected"
+        case .disconnecting: return ".disconnecting"
+        @unknown default: return "unknown value"
+        }
+    }
+
+}
+
+extension CBPeripheral {
+    
+    public var identifierWithName: String {
+        return "\(identifier) (\(name ?? "unknown"))"
+    }
+    
+}
