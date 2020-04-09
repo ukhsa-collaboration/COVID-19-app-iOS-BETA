@@ -9,6 +9,13 @@
 import UIKit
 
 class AnswerButton: UIButton {
+    override var isSelected: Bool {
+        didSet {
+            layer.borderWidth = isSelected ? 2 : 0
+            layer.borderColor = UIColor(named: "NHS Blue")?.cgColor
+        }
+    }
+
     override var intrinsicContentSize: CGSize {
         CGSize(width: UIView.noIntrinsicMetric, height: 100)
     }
