@@ -9,10 +9,9 @@
 import UIKit
 
 class TemperatureViewController: UIViewController {
+    @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var yesButton: AnswerButton!
     @IBOutlet weak var noButton: AnswerButton!
-
-    @IBOutlet weak var continueButton: PrimaryButton!
 
     var hasHighTemperature: Bool? {
         didSet {
@@ -27,8 +26,6 @@ class TemperatureViewController: UIViewController {
             case .none:
                 break
             }
-
-            continueButton?.isEnabled = hasHighTemperature != nil
         }
     }
 
@@ -38,6 +35,15 @@ class TemperatureViewController: UIViewController {
 
     @IBAction func noTapped(_ sender: AnswerButton) {
         hasHighTemperature = false
+    }
+
+    @IBAction func continueTapped(_ sender: PrimaryButton) {
+        guard hasHighTemperature != nil else {
+            errorLabel.isHidden = false
+            return
+        }
+
+        performSegue(withIdentifier: "coughSegue", sender: self)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
