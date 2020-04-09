@@ -34,12 +34,3 @@ jobs:
           DEPLOYMENT_PAYLOAD: 'This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}**.\n\nThe commit hash was: _${{ github.sha }}_.'
         run: ./bin/create-deployment
         # continue-on-error: true
-
-      - name: Notify Slack on Trigger
-        if: steps.check-upload-tag.outputs.upload == 'true'
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.slack_bot_token }}
-        uses: voxmedia/github-action-slack-notify-build@v1
-        with:
-          channel: sonar-ios
-          status: UPLOAD TRIGGERED
