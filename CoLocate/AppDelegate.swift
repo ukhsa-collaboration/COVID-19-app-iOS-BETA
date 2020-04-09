@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     let authorizationManager = AuthorizationManager()
 
     var appCoordinator: AppCoordinator!
-
+    
     override init() {
         LoggingManager.bootstrap()
         
@@ -64,8 +64,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             onboardingViewController.inject(env: env, coordinator: coordinator)
             onboardingViewController.showIn(rootViewController: rootVC)
             
-            NotificationCenter.default.addObserver(forName: RegistrationStartedNotification, object: nil, queue: nil) { notification in
-                self.startMainApp()
+            NotificationCenter.default.addObserver(forName: RegistrationAttemptNotification, object: nil, queue: nil) {
+                notification in
+                
+                if notification.userInfo!["status"] as! RegistrationAttemptStatus == .started {
+                    self.startMainApp()
+                }
             }
         }
 

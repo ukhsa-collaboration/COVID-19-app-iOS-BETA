@@ -34,8 +34,7 @@ class RegistrationViewController: UIViewController, Storyboarded {
         activityIndicator.startAnimating()
         registerButton.isEnabled = false
 
-        attempt = registrationService.register { [weak self] result in
-        }
+        attempt = registrationService.register()
         self.performSegue(withIdentifier: "unwindFromRegistration", sender: self)
     }
 }
