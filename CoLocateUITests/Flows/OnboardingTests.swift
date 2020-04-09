@@ -42,11 +42,8 @@ class OnboardingTests: ScreenTestCase {
         
         XCTAssert(notificationPermissionAlertTitle.exists)
         allowNotificationsButton.tap()
-
-        // Status confirmation
         
-        XCTAssertEqual(allowedDataSharing.stringValue, "Yes")
-        XCTAssertEqual(bluetoothState.stringValue, "Allowed")
+        XCTAssert(registrationScreenTitle.exists)
     }
 }
 
@@ -58,6 +55,13 @@ private extension OnboardingTests {
         app.buttons["Start now"]
     }
     
+}
+
+private extension OnboardingTests {
+    
+    var registrationScreenTitle: XCUIElement {
+        app.staticTexts["Your app is set up and ready to go"]
+    }
 }
 
 private extension OnboardingTests {
@@ -96,18 +100,6 @@ private extension OnboardingTests {
     
     var allowNotificationsButton: XCUIElement {
         app.buttons["Allow"]
-    }
-    
-}
-
-private extension OnboardingTests {
-    
-    var allowedDataSharing: XCUIElement {
-        app.cells["Allowed Data Sharing"]
-    }
-    
-    var bluetoothState: XCUIElement {
-        app.cells["Bluetooth State"]
     }
     
 }

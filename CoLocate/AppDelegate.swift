@@ -59,6 +59,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             startMainApp()
         } else {
             let onboardingViewController = OnboardingViewController.instantiate()
+            let env = OnboardingEnvironment(persistence: persistence, authorizationManager: authorizationManager, remoteNotificationManager: remoteNotificationManager)
+            let coordinator = OnboardingCoordinator(persistence: persistence, authorizationManager: authorizationManager)
+            onboardingViewController.inject(env: env, coordinator: coordinator)
             onboardingViewController.showIn(rootViewController: rootVC)
             
             NotificationCenter.default.addObserver(forName: RegistrationStartedNotification, object: nil, queue: nil) { notification in

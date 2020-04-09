@@ -15,10 +15,10 @@ class OnboardingViewControllerTests: TestCase {
         let coordinatorDouble = OnboardingCoordinatorDouble()
         let queue = QueueDouble()
         let vc = OnboardingViewController.instantiate()
+        vc.inject(env: envDouble(), coordinator: coordinatorDouble)
         let rootViewController = RootViewController()
         parentViewControllerForTests.addChild(rootViewController)
         vc.showIn(rootViewController: rootViewController)
-        vc.onboardingCoordinator = coordinatorDouble
         vc.uiQueue = queue
 
         vc.updateState()
@@ -32,10 +32,10 @@ class OnboardingViewControllerTests: TestCase {
         let coordinatorDouble = OnboardingCoordinatorDouble()
         let queue = QueueDouble()
         let vc = OnboardingViewController.instantiate()
+        vc.inject(env: envDouble(), coordinator: coordinatorDouble)
         let rootViewController = RootViewController()
         parentViewControllerForTests.addChild(rootViewController)
         vc.showIn(rootViewController: rootViewController)
-        vc.onboardingCoordinator = coordinatorDouble
         vc.uiQueue = queue
 
         vc.updateState()
@@ -49,16 +49,20 @@ class OnboardingViewControllerTests: TestCase {
         let coordinatorDouble = OnboardingCoordinatorDouble()
         let queue = QueueDouble()
         let vc = OnboardingViewController.instantiate()
+        vc.inject(env: envDouble(), coordinator: coordinatorDouble)
         let rootViewController = RootViewController()
         parentViewControllerForTests.addChild(rootViewController)
         vc.showIn(rootViewController: rootViewController)
-        vc.onboardingCoordinator = coordinatorDouble
         vc.uiQueue = queue
 
         vc.updateState()
-        coordinatorDouble.stateCompletion!(.registration)
+        coordinatorDouble.stateCompletion!(.initial)
 
         XCTAssertEqual(rootViewController.children.count, 1)
-        XCTAssertNotNil(vc.children.first as? RegistrationViewController)
+        XCTAssertNotNil(vc.children.first as? StartNowViewController)
+    }
+    
+    func envDouble() -> OnboardingEnvironment {
+        return OnboardingEnvironment(persistence: PersistenceDouble(), authorizationManager: AuthorizationManagerDouble(), remoteNotificationManager: RemoteNotificationManagerDouble())
     }
 }

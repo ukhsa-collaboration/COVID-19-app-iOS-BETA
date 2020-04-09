@@ -20,8 +20,9 @@ struct UITestScreenMaker: ScreenMaking {
             return UINavigationController(rootViewController: viewController)
         case .onboarding:
             return OnboardingViewController.instantiate { viewController in
-                let environment = OnboardingEnvironment(mockWithHost: viewController)
-                viewController.environment = environment
+                let env = OnboardingEnvironment(mockWithHost: viewController)
+                let coordinator = OnboardingCoordinator(persistence: env.persistence, authorizationManager: env.authorizationManager)
+                viewController.inject(env: env, coordinator: coordinator)
                 
             }
         }

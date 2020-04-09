@@ -11,14 +11,8 @@ import UIKit
 class OnboardingViewController: UINavigationController, Storyboarded {
     static let storyboardName = "Onboarding"
 
-    // TODO: find a way of making these types less “mutable”
-    // Currently setting environment after `onboardingCoordinator` is used has undefined behaviour.
-    // Not an issue _yet_ as `environment` is currently only ever changed in tests.
-    lazy var environment = OnboardingEnvironment()
-    lazy var onboardingCoordinator = OnboardingCoordinator(
-        persistence: self.environment.persistence,
-        authorizationManager: self.environment.authorizationManager
-    )
+    private var environment: OnboardingEnvironment! = nil
+    private var onboardingCoordinator: OnboardingCoordinator! = nil
     var uiQueue: TestableQueue = DispatchQueue.main
 
     func showIn(rootViewController: RootViewController) {
@@ -26,6 +20,12 @@ class OnboardingViewController: UINavigationController, Storyboarded {
         rootViewController.show(viewController: self)
     }
 
+    func inject(env: OnboardingEnvironment, coordinator: OnboardingCoordinator) {
+        self.environment = env
+        self.onboardingCoordinator = coordinator
+        self.onboardingCoordinator = coordinator
+    }
+    
     override func viewDidLoad() {
         if #available(iOS 13.0, *) {
             // Disallow pulling to dismiss the card modal
@@ -33,6 +33,8 @@ class OnboardingViewController: UINavigationController, Storyboarded {
         } else {
             // Fallback on earlier versions
         }
+        
+        (viewControllers.first as! StartNowViewController).persistence = environment.persistence
     }
 
     func updateState() {
@@ -54,13 +56,17 @@ class OnboardingViewController: UINavigationController, Storyboarded {
     @IBAction func unwindFromPermissionsDenied(unwindSegue: UIStoryboardSegue) {
         updateState()
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+    }
 
     private func handle(state: OnboardingCoordinator.State) {
         let vc: UIViewController
         switch state {
         case .initial:
             vc = StartNowViewController.instantiate {
-                $0.environment = environment
+                $0.persistence = environment.persistence
             }
         case .permissions:
             vc = PermissionsViewController.instantiate {
