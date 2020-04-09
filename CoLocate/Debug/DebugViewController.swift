@@ -24,11 +24,6 @@ class DebugViewController: UITableViewController, Storyboarded {
         allowedDataSharingSwitch.isOn = persistence.allowedDataSharing
         enableNewSelfDiagnosis.isOn = persistence.enableNewSelfDiagnosis
 
-        #if DEBUG
-            interceptRequestsSwitch.isOn = InterceptingSession.interceptNextRequest
-        #else
-        #endif
-        
         let build = Bundle.main.infoDictionary?["CFBundleVersion"] ?? "unknown"
         let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] ?? "unknown"
         versionBuildLabel.text = "Version \(version) (build \(build))"
@@ -87,9 +82,6 @@ class DebugViewController: UITableViewController, Storyboarded {
             }
 
         case (3, 0):
-            break
-
-        case (3, 1):
             #if DEBUG
             let info = Bundle(for: AppDelegate.self).infoDictionary!
             let id = info["DEBUG_REGISTRATION_ID"] as! String
@@ -129,17 +121,6 @@ class DebugViewController: UITableViewController, Storyboarded {
 
     @IBAction func allowedDataSharingChanged(_ sender: UISwitch) {
         persistence.allowedDataSharing = sender.isOn
-    }
-
-    @IBAction func interceptRegistrationRequestsChanged(_ sender: UISwitch) {
-        #if DEBUG
-        InterceptingSession.interceptNextRequest = sender.isOn
-        #else
-        let alert = UIAlertController(title: "Unavailable", message: "This dangerous action is only available in debug builds.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-        present(alert, animated: true, completion: nil)
-        sender.isOn = false
-        #endif
     }
 
     @IBAction func enableNewSelfDiagnosisChanged(_ sender: UISwitch) {

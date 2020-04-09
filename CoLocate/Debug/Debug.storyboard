@@ -36,7 +36,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <label key="tableFooterView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="u9d-KW-xk7">
-                            <rect key="frame" x="0.0" y="788.5" width="414" height="44"/>
+                            <rect key="frame" x="0.0" y="745" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                             <nil key="textColor"/>
@@ -172,37 +172,8 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Registration" id="pud-EL-3cT" userLabel="Registration">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="MIX-LQ-TfR">
-                                        <rect key="frame" x="0.0" y="484.5" width="414" height="43.5"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MIX-LQ-TfR" id="2uq-D9-v4r">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Intercept next request" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="taZ-aa-ysf">
-                                                    <rect key="frame" x="20" y="11" width="169" height="22"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="zIj-vW-UbM">
-                                                    <rect key="frame" x="357" y="6.5" width="51" height="31"/>
-                                                    <connections>
-                                                        <action selector="interceptRegistrationRequestsChanged:" destination="HkQ-dd-eR1" eventType="valueChanged" id="AGD-fP-Rg6"/>
-                                                    </connections>
-                                                </switch>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="zIj-vW-UbM" secondAttribute="trailing" constant="8" id="4hI-Ze-JX0"/>
-                                                <constraint firstItem="zIj-vW-UbM" firstAttribute="centerY" secondItem="2uq-D9-v4r" secondAttribute="centerY" id="OWF-dY-OUd"/>
-                                                <constraint firstItem="taZ-aa-ysf" firstAttribute="top" secondItem="2uq-D9-v4r" secondAttribute="topMargin" id="aeh-oo-x9O"/>
-                                                <constraint firstItem="taZ-aa-ysf" firstAttribute="leading" secondItem="2uq-D9-v4r" secondAttribute="leadingMargin" id="dl7-82-7FT"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="taZ-aa-ysf" secondAttribute="bottom" id="tpd-fe-w7i"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="odY-Zt-J3Q" style="IBUITableViewCellStyleDefault" id="lsl-tc-3kU">
-                                        <rect key="frame" x="0.0" y="528" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="484.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lsl-tc-3kU" id="Kr6-Ye-37c">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -223,7 +194,7 @@
                             <tableViewSection headerTitle="Export" id="F8h-te-Opp">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="Lnb-MQ-aea" style="IBUITableViewCellStyleDefault" id="7JQ-wi-OVF">
-                                        <rect key="frame" x="0.0" y="627.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="584" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7JQ-wi-OVF" id="74r-s9-pg1">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -244,7 +215,7 @@
                             <tableViewSection headerTitle="Feature Flags" id="dU9-Ft-25P">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="DEA-5A-5Le">
-                                        <rect key="frame" x="0.0" y="727" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="683.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DEA-5A-5Le" id="IL9-Cu-SMs">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -290,7 +261,6 @@
                     <connections>
                         <outlet property="allowedDataSharingSwitch" destination="ZGS-GZ-Qan" id="kAW-LK-aGH"/>
                         <outlet property="enableNewSelfDiagnosis" destination="Afw-fK-gHS" id="Sxe-cd-Mp1"/>
-                        <outlet property="interceptRequestsSwitch" destination="zIj-vW-UbM" id="ooV-mD-aI4"/>
                         <outlet property="versionBuildLabel" destination="u9d-KW-xk7" id="hpS-fN-Piy"/>
                     </connections>
                 </tableViewController>
