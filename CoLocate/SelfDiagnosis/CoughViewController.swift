@@ -30,6 +30,12 @@ class CoughViewController: UIViewController {
         }
     }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        errorLabel.textColor = UIColor(named: "NHS Error")
+    }
+
     @IBAction func yesTapped(_ sender: AnswerButton) {
         hasNewCough = true
     }
