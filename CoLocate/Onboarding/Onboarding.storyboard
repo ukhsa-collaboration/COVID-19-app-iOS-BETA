@@ -334,6 +334,7 @@
                     <connections>
                         <outlet property="continueButton" destination="Ndb-pX-kbA" id="7St-pk-B5e"/>
                         <outlet property="postcodeField" destination="nUw-z7-nkS" id="w92-4f-ymY"/>
+                        <outlet property="scrollView" destination="bga-i9-1yX" id="iaF-lj-w0e"/>
                         <segue destination="3Dc-gv-ltw" kind="unwind" identifier="unwindFromPostcode" unwindAction="unwindFromPostcodeWithUnwindSegue:" id="8zI-lY-Dxu"/>
                     </connections>
                 </viewController>

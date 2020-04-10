@@ -40,7 +40,8 @@ private extension OnboardingEnvironment {
         self.init(
             persistence: InMemoryPersistence(),
             authorizationManager: authorizationManager,
-            remoteNotificationManager: EphemeralRemoteNotificationManager(host: host, authorizationManager: authorizationManager)
+            remoteNotificationManager: EphemeralRemoteNotificationManager(host: host, authorizationManager: authorizationManager),
+            notificationCenter: NotificationCenter()
         )
     }
     

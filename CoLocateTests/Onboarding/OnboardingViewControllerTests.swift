@@ -72,6 +72,6 @@ class OnboardingViewControllerTests: TestCase {
     }
     
     func envDouble() -> OnboardingEnvironment {
-        return OnboardingEnvironment(persistence: PersistenceDouble(), authorizationManager: AuthorizationManagerDouble(), remoteNotificationManager: RemoteNotificationManagerDouble())
+        return OnboardingEnvironment(persistence: PersistenceDouble(), authorizationManager: AuthorizationManagerDouble(), remoteNotificationManager: RemoteNotificationManagerDouble(), notificationCenter: NotificationCenter())
     }
 }

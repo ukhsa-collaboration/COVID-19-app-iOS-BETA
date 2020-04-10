@@ -61,7 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             startMainApp()
         } else {
             let onboardingViewController = OnboardingViewController.instantiate()
-            let env = OnboardingEnvironment(persistence: persistence, authorizationManager: authorizationManager, remoteNotificationManager: remoteNotificationManager)
+            let env = OnboardingEnvironment(persistence: persistence, authorizationManager: authorizationManager, remoteNotificationManager: remoteNotificationManager, notificationCenter: NotificationCenter.default)
             let coordinator = OnboardingCoordinator(persistence: persistence, authorizationManager: authorizationManager)
             
             onboardingViewController.inject(env: env, coordinator: coordinator, uiQueue: DispatchQueue.main) {

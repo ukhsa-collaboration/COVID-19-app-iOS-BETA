@@ -13,7 +13,7 @@ class PostcodeViewControllerTests: TestCase {
     func testContinuesWithValidInput() {
         let persistence = PersistenceDouble()
         let vc = PostcodeViewController.instantiate()
-        vc.inject(persistence: persistence)
+        vc.inject(persistence: persistence, notificationCenter: NotificationCenter())
         let unwinder = Unwinder()
         parentViewControllerForTests.show(viewController: unwinder)
         unwinder.present(vc, animated: false)
@@ -28,7 +28,7 @@ class PostcodeViewControllerTests: TestCase {
     func testDoesNotContinueWithoutInput() {
         let persistence = PersistenceDouble(partialPostcode: nil)
         let vc = PostcodeViewController.instantiate()
-        vc.inject(persistence: persistence)
+        vc.inject(persistence: persistence, notificationCenter: NotificationCenter())
         let unwinder = Unwinder()
         parentViewControllerForTests.show(viewController: unwinder)
         unwinder.present(vc, animated: false)
@@ -41,6 +41,7 @@ class PostcodeViewControllerTests: TestCase {
     
     func testDoesNotAcceptMoreThanFourChars_insertingOne() {
         let vc = PostcodeViewController.instantiate()
+        vc.inject(persistence: PersistenceDouble(), notificationCenter: NotificationCenter())
         XCTAssertNotNil(vc.view)
         
         vc.postcodeField.text = "123"
@@ -52,6 +53,7 @@ class PostcodeViewControllerTests: TestCase {
     
     func testDoesNotAcceptMoreThanFourChars_insertingMany() {
         let vc = PostcodeViewController.instantiate()
+        vc.inject(persistence: PersistenceDouble(), notificationCenter: NotificationCenter())
         XCTAssertNotNil(vc.view)
         
         vc.postcodeField.text = "1"
@@ -62,6 +64,7 @@ class PostcodeViewControllerTests: TestCase {
         
     func testDoesNotAcceptMoreThanFourChars_replacing() {
         let vc = PostcodeViewController.instantiate()
+        vc.inject(persistence: PersistenceDouble(), notificationCenter: NotificationCenter())
         XCTAssertNotNil(vc.view)
         
         vc.postcodeField.text = "123"
@@ -72,6 +75,7 @@ class PostcodeViewControllerTests: TestCase {
     
     func testAcceptsDeletion() {
         let vc = PostcodeViewController.instantiate()
+        vc.inject(persistence: PersistenceDouble(), notificationCenter: NotificationCenter())
         XCTAssertNotNil(vc.view)
         
         vc.postcodeField.text = "1234"
@@ -80,6 +84,7 @@ class PostcodeViewControllerTests: TestCase {
     
     func testEnablesButtonWhenFourCharsEntered() {
         let vc = PostcodeViewController.instantiate()
+        vc.inject(persistence: PersistenceDouble(), notificationCenter: NotificationCenter())
         XCTAssertNotNil(vc.view)
         
         XCTAssertFalse(vc.continueButton?.isEnabled ?? true)

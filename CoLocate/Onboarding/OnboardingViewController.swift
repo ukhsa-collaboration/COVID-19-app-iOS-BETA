@@ -76,7 +76,7 @@ class OnboardingViewController: UINavigationController, Storyboarded {
             }
         case .partialPostcode:
             vc = PostcodeViewController.instantiate {
-                $0.inject(persistence: environment.persistence)
+                $0.inject(persistence: environment.persistence, notificationCenter: environment.notificationCenter)
             }
         case .permissions:
             vc = PermissionsViewController.instantiate {
