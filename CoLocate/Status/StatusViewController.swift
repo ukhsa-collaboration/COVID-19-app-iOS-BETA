@@ -107,10 +107,9 @@ class StatusViewController: UIViewController, Storyboarded {
     }
     
     private func showRegisteredStatus() {
-        registrationStatusIcon.image = UIImage(named: "Registration_status_ok")
-        registrationStatusIcon.isHidden = false
-        registrationSpinner.isHidden = true
         registrationStatusText.text = "REGISTRATION_OK".localized
+        registrationStatusIcon.image = UIImage(named: "Registration_status_ok")
+        hideSpinner()
         registrationStatusText.textColor = UIColor(named: "NHS Text")
         registratonStatusView.backgroundColor = nil
         registrationRetryButton.isHidden = true
@@ -119,22 +118,30 @@ class StatusViewController: UIViewController, Storyboarded {
     private func showRegistrationFailedStatus() {
         registrationStatusText.text = "REGISTRATION_FAILED".localized
         registrationStatusIcon.image = UIImage(named: "Registration_status_failure")
-        registrationStatusIcon.isHidden = false
-        registrationSpinner.isHidden = true
+        hideSpinner()
         registrationStatusText.textColor = UIColor.white
         registratonStatusView.backgroundColor = UIColor(named: "Error Grey")
         registrationRetryButton.isHidden = false
-        
     }
     
     private func showRegisteringStatus() {
         registrationStatusText.text = "REGISTRATION_IN_PROGRESS".localized
-        registrationStatusIcon.isHidden = true
-        registrationSpinner.isHidden = false
+        showSpinner()
         registrationStatusText.textColor = UIColor(named: "NHS Text")
         registratonStatusView.backgroundColor = nil
         registrationRetryButton.isHidden = true
-        
+    }
+    
+    private func showSpinner() {
+        registrationSpinner.startAnimating()
+        registrationSpinner.isHidden = false
+        registrationStatusIcon.isHidden = true
+    }
+    
+    private func hideSpinner() {
+        registrationSpinner.stopAnimating()
+        registrationSpinner.isHidden = true
+        registrationStatusIcon.isHidden = false
     }
 }
 
