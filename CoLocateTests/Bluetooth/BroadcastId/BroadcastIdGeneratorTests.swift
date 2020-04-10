@@ -35,7 +35,16 @@ class BroadcastIdGeneratorTests: XCTestCase {
         generator = BroadcastIdGenerator(key: serverPublicKey, sonarId: cannedId)
     }
 
+    func test_returns_uuid_as_bytes_by_default() throws {
+        BroadcastIdGenerator.useNewBroadcastId = false
+
+        let data = generator.broadcastId(for: knownDate)
+        XCTAssertEqual("E1D160C7-F6E8-48BC-8687-63C696D910CB", asUUIDString(data))
+    }
+
     func test_generates_ciphertext_that_are_the_correct_size() {
+        BroadcastIdGenerator.useNewBroadcastId = true
+
         let encryptedId = generator.broadcastId(for: knownDate, until: laterDate)
 
         // first byte is 0x04 -- indicates this is uncompressed
@@ -49,6 +58,8 @@ class BroadcastIdGeneratorTests: XCTestCase {
     }
 
     func test_ciphertext_contains_expected_data() throws {
+        BroadcastIdGenerator.useNewBroadcastId = true
+
         #if targetEnvironment(simulator)
         throw XCTSkip("Cannot run this test in the simulator")
         #endif
@@ -77,6 +88,8 @@ class BroadcastIdGeneratorTests: XCTestCase {
     }
 
     func test_generates_the_same_result_for_the_same_inputs() {
+        BroadcastIdGenerator.useNewBroadcastId = true
+
         let first = generator.broadcastId(for: knownDate, until: laterDate)
         let second = generator.broadcastId(for: knownDate, until: laterDate)
 

@@ -24,7 +24,7 @@ class SecureBroadcastRotationKeyStorageTests: XCTestCase {
     func test_saves_the_key_and_reads_it_back() throws {
         let testCertificateData = ellipticCurveKeyForTest()
 
-        try! storage.save(keyData: testCertificateData)
+        try storage.save(keyData: testCertificateData)
 
         let otherWrapper = SecureBroadcastRotationKeyStorage()
         let readKey = try? otherWrapper.read()

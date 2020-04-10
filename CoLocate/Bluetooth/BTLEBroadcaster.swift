@@ -24,16 +24,16 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
     static let sonarServiceUUID = CBUUID(nsuuid: UUID(uuidString: "c1f5983c-fa94-4ac8-8e2e-bb86d6de9b21")!)
     static let sonarIdCharacteristicUUID = CBUUID(nsuuid: UUID(uuidString: "85BF337C-5B64-48EB-A5F7-A9FED135C972")!)
 
-    let logger = Logger(label: "BTLE")
-    
-    var peripheral: CBPeripheralManager?
     var sonarId: UUID? {
         didSet {
             startAdvertising(peripheral: peripheral, sonarId: sonarId)
         }
     }
+
+    var peripheral: CBPeripheralManager?
     var stateDelegate: BTLEBroadcasterStateDelegate?
-    
+    var idGenerator: BroadcastIdGenerator?
+
     // MARK: CBPeripheralManagerDelegate
 
     func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
@@ -59,10 +59,16 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
         guard !peripheral.isAdvertising else {
             return
         }
-        
+
+        let serverPublicKey = try! SecureBroadcastRotationKeyStorage.shared.read()!
+        self.idGenerator = BroadcastIdGenerator(key: serverPublicKey, sonarId: sonarId)
+
         let service = CBMutableService(type: ConcreteBTLEBroadcaster.sonarServiceUUID, primary: true)
 
-        let identityCharacteristic = CBMutableCharacteristic(type: ConcreteBTLEBroadcaster.sonarIdCharacteristicUUID, properties: CBCharacteristicProperties([.read]), value: CBUUID(nsuuid: sonarId).data, permissions: .readable)
+        let identityCharacteristic = CBMutableCharacteristic(type: ConcreteBTLEBroadcaster.sonarIdCharacteristicUUID,
+                                                             properties: CBCharacteristicProperties([.read]),
+                                                             value: idGenerator!.broadcastId(),
+                                                             permissions: .readable)
 
         service.characteristics = [identityCharacteristic]
         peripheral.add(service)
@@ -91,5 +97,6 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
         }
         logger.info("restoring \(sonarIdService)")
     }
-
 }
+
+fileprivate let logger = Logger(label: "BTLE")

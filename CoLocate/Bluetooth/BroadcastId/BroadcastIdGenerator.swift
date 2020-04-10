@@ -13,6 +13,8 @@ import Logging
 
 class BroadcastIdGenerator {
 
+    public static var useNewBroadcastId = false
+
     let serverPublicKey: SecKey
     let sonarId: UUID
 
@@ -31,6 +33,10 @@ class BroadcastIdGenerator {
     }
 
     func broadcastId(for startDate: Date = Date(), until maybeDate: Date? = nil) -> Data {
+        if BroadcastIdGenerator.useNewBroadcastId == false {
+            return bytesFromSonarId()
+        }
+
         if cached?.date == startDate {
             return cached!.broadcastId
         }
