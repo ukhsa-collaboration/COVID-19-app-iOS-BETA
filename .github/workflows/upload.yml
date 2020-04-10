@@ -49,6 +49,11 @@ jobs:
     runs-on:
       - self-hosted
       - macos
+    strategy:
+      matrix:
+        fastlane-action:
+          - beta
+          - internal
     steps:
       - name: Checkout Project
         uses: actions/checkout@v2
@@ -80,7 +85,7 @@ jobs:
           APPLE_USERNAME: ${{ secrets.apple_username }}
           FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.apple_password }}
           MATCH_PASSWORD: ${{ secrets.match_password }}
-        run: fastlane beta
+        run: fastlane ${{ fastlane-action }}
 
       - name: Get Build Number
         id: get-build-number
