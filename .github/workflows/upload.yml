@@ -1,7 +1,10 @@
 name: upload
 
-# on:
-#   deployment
+on:
+  deployment
+  # push:
+  #   branches:
+  #     - ci
 
 jobs:
   bump-build-version:
@@ -69,9 +72,7 @@ jobs:
 
       - name: Setup Fastlane Match
         env:
-          DISTRIBUTION_CER: ${{ secrets.distribution_cer }}
-          DISTRIBUTION_P12: ${{ secrets.distribution_p12 }}
-          PROVISIONING_PROFILE: ${{ secrets.provisioning_profile }}
+          MATCH: ${{ secrets.match }}
         run: ./bin/setup-match
 
       - name: Upload to Test Flight

@@ -2,12 +2,7 @@
 
 set -euo pipefail
 
-mkdir -p ci/match/certs/distribution
-echo "$DISTRIBUTION_CER" > ci/match/certs/distribution/HY6T24QXC9.cer
-echo "$DISTRIBUTION_P12" > ci/match/certs/distribution/HY6T24QXC9.p12
-
-mkdir -p ci/match/profiles/appstore
-echo "$PROVISIONING_PROFILE" > ci/match/profiles/appstore/AppStore_uk.nhs.nhsx.beta.CoLocate.mobileprovision
+echo "$MATCH" | base64 -d | tar xvz
 
 uuidgen > ci/match/gen # A file that is guaranteed to exist, so commit is not empty if repo exists.
 
