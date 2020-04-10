@@ -25,9 +25,9 @@ class PlistContactEventRecorderTests: XCTestCase {
         service = PlistContactEventRecorder()
         service.reset()
         
-        contactEvent1 = ContactEvent(sonarId: UUID(), timestamp: epoch, rssiValues: [1], duration: 0)
-        contactEvent2 = ContactEvent(sonarId: UUID(), timestamp: epoch, rssiValues: [1], duration: 0)
-        contactEvent3 = ContactEvent(sonarId: UUID(), timestamp: epoch, rssiValues: [1], duration: 0)
+        contactEvent1 = ContactEvent(sonarId: Data(), timestamp: epoch, rssiValues: [1], duration: 0)
+        contactEvent2 = ContactEvent(sonarId: Data(), timestamp: epoch, rssiValues: [1], duration: 0)
+        contactEvent3 = ContactEvent(sonarId: Data(), timestamp: epoch, rssiValues: [1], duration: 0)
     }
 
     func testRecordsContactEvents() {

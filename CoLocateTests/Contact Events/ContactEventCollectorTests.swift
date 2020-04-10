@@ -16,9 +16,9 @@ class ContactEventCollectorTests: XCTestCase {
     let peripheral2 = TestPeripheral(identifier: UUID())
     let peripheral3 = TestPeripheral(identifier: UUID())
     
-    let sonarId1 = UUID()
-    let sonarId2 = UUID()
-    let sonarId3 = UUID()
+    let sonarId1 = Data(base64Encoded: "aGVsbG8K")!
+    let sonarId2 = Data(base64Encoded: "Z29vZGJ5ZQo=")!
+    let sonarId3 = Data(base64Encoded: "Z29vZGJ5dGUK")!
     
     var listener: BTLEListener!
     var recorder: ContactEventRecorder!
@@ -31,13 +31,13 @@ class ContactEventCollectorTests: XCTestCase {
     }
 
     func testKeepsTrackOfHowManyConnectedProperties() {
-        collector.btleListener(listener, didFindSonarId:sonarId1, forPeripheral: peripheral1)
+        collector.btleListener(listener, didFind:sonarId1, forPeripheral: peripheral1)
 
         XCTAssertEqual(1, collector._contactEventCount)
     }
 
     func testRecordsContactEventOnDisconnect() {
-        collector.btleListener(listener, didFindSonarId: sonarId1, forPeripheral: peripheral1)
+        collector.btleListener(listener, didFind: sonarId1, forPeripheral: peripheral1)
         collector.btleListener(listener, didDisconnect: peripheral1, error: nil)
         
         XCTAssertEqual(recorder.contactEvents.count, 1)
@@ -51,7 +51,7 @@ class ContactEventCollectorTests: XCTestCase {
     }
     
     func testRequestsRSSIForConnectedPeripheral() {
-        collector.btleListener(listener, didFindSonarId: sonarId1, forPeripheral: peripheral1)
+        collector.btleListener(listener, didFind: sonarId1, forPeripheral: peripheral1)
         
         XCTAssertTrue(collector.btleListener(listener, shouldReadRSSIFor: peripheral1))
     }
@@ -67,9 +67,9 @@ class ContactEventCollectorTests: XCTestCase {
     }
     
     func testRecordsRSSIValuesAgainstCorrectPeripheral() {
-        collector.btleListener(listener, didFindSonarId: sonarId1, forPeripheral: peripheral1)
-        collector.btleListener(listener, didFindSonarId: sonarId2, forPeripheral: peripheral2)
-        collector.btleListener(listener, didFindSonarId: sonarId3, forPeripheral: peripheral3)
+        collector.btleListener(listener, didFind: sonarId1, forPeripheral: peripheral1)
+        collector.btleListener(listener, didFind: sonarId2, forPeripheral: peripheral2)
+        collector.btleListener(listener, didFind: sonarId3, forPeripheral: peripheral3)
 
         collector.btleListener(listener, didReadRSSI: 21, forPeripheral: peripheral2)
         collector.btleListener(listener, didReadRSSI: 11, forPeripheral: peripheral1)
@@ -87,7 +87,7 @@ class ContactEventCollectorTests: XCTestCase {
     }
 
     func test_writes_any_remaining_events_when_flush_is_called() {
-        collector.btleListener(listener, didFindSonarId: sonarId1, forPeripheral: peripheral1)
+        collector.btleListener(listener, didFind: sonarId1, forPeripheral: peripheral1)
 
         collector.flush()
 

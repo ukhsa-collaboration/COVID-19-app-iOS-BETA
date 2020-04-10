@@ -19,7 +19,7 @@ class SubmitSymptomsViewControllerTests: TestCase {
         let registration: Registration = Registration.fake
         let persistenceDouble = PersistenceDouble(registration: registration)
 
-        let contactEvents = [ContactEvent(sonarId: UUID())]
+        let contactEvents = [ContactEvent(sonarId: Data())]
         let eventRecorderDouble = TestContactEventRecorder(contactEvents)
 
         var actualRegistration: Registration?
@@ -49,7 +49,7 @@ class SubmitSymptomsViewControllerTests: TestCase {
 
     func testSubmitSuccess() {
         let persistenceDouble = PersistenceDouble(registration: Registration.fake)
-        let testContactEvent = ContactEvent(sonarId: UUID())
+        let testContactEvent = ContactEvent(sonarId: Data())
         let eventRecorderDouble = TestContactEventRecorder([testContactEvent])
 
         var completion: ((Result<Void, Error>) -> Void)?

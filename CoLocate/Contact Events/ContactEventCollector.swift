@@ -25,8 +25,8 @@ import Logging
         self.contactEventRecorder = contactEventRecorder
     }
     
-    func btleListener(_ listener: BTLEListener, didFindSonarId sonarId: UUID, forPeripheral peripheral: BTLEPeripheral) {
-        contactEvents[peripheral.identifier] = ContactEvent(sonarId: sonarId)
+    func btleListener(_ listener: BTLEListener, didFind sonarUser: Data, forPeripheral peripheral: BTLEPeripheral) {
+        contactEvents[peripheral.identifier] = ContactEvent(sonarId: sonarUser)
     }
     
     func btleListener(_ listener: BTLEListener, didDisconnect peripheral: BTLEPeripheral, error: Error?) {

@@ -16,7 +16,7 @@ class LiveBTLEDebuggerTableViewController: UITableViewController {
     
     var observation: NSKeyValueObservation?
     
-    var sonarIds: [UUID] = []
+    var sonarIds: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,12 +27,12 @@ class LiveBTLEDebuggerTableViewController: UITableViewController {
         
         observation = observe(\.collector._contactEventCount) { object, change in
             DispatchQueue.main.async {
-                self.sonarIds = self.collector.contactEvents.compactMap({ $0.value.sonarId })
+                self.sonarIds = self.collector.contactEvents.compactMap({ $0.value.sonarId.base64EncodedString() })
                 self.tableView.reloadData()
             }
         }
         
-        sonarIds = Array(collector.contactEvents.keys)
+        sonarIds = Array(collector.contactEvents.values.compactMap({ $0.sonarId.base64EncodedString() }))
         tableView.reloadData()
     }
     
@@ -67,29 +67,17 @@ class LiveBTLEDebuggerTableViewController: UITableViewController {
             
         case (0, _):
             cell.textLabel?.text = persistence.registration?.id.uuidString
-            cell.uuid = persistence.registration?.id
+            cell.base64Data = persistence.registration!.id.uuidString.data(using: .utf8)
             
         case (1, let row):
-            cell.textLabel?.text = sonarIds[row].uuidString
-            cell.uuid = sonarIds[row]
+            cell.textLabel?.text = sonarIds[row]
+            cell.base64Data = sonarIds[row].data(using: .utf8)
             
         default:
             preconditionFailure("No cell at indexPath \(indexPath)")
         }
 
         return cell
-    }
-
-    private func setGradientLayer(cell: UITableViewCell, uuid: UUID) {
-        let layer = CAGradientLayer()
-        layer.frame = cell.bounds
-        layer.startPoint = CGPoint(x: 0, y: 0)
-        layer.endPoint = CGPoint(x: 1, y: 0)
-        layer.colors = [
-            uuid.asCGColor(alpha: 0) as Any,
-            uuid.asCGColor(alpha: 1) as Any
-        ]
-        cell.contentView.layer.insertSublayer(layer, at: 0)
     }
     
     /*
@@ -104,11 +92,12 @@ class LiveBTLEDebuggerTableViewController: UITableViewController {
 
 }
 
-extension UUID {
+extension Data {
     func asCGColor(alpha: CGFloat) -> CGColor {
         return asUIColor(alpha: alpha).cgColor
     }
+
     func asUIColor(alpha: CGFloat) -> UIColor {
-        return UIColor(red: CGFloat(uuid.0) / 255.0, green: CGFloat(uuid.1) / 255.0, blue: CGFloat(uuid.2) / 255.0, alpha: alpha)
+        return UIColor(red: CGFloat(self[0]) / 255.0, green: CGFloat(self[1]) / 255.0, blue: CGFloat(self[2]) / 255.0, alpha: alpha)
     }
 }

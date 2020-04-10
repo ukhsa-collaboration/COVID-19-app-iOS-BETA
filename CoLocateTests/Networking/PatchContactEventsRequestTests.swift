@@ -14,9 +14,9 @@ class PatchContactEventsRequestTests: XCTestCase {
     let anonymousId = UUID(uuidString: "E9D7F53C-DE9C-46A2-961E-8302DC39558A")!
     let dummyKey = "this-is-a-symmetric-key-trust-me".data(using: .utf8)!
 
-    let remoteSonarId1 = UUID(uuidString: "62D583B3-052C-4CF9-808C-0B96080F0DB8")!
-    let remoteSonarId2 = UUID(uuidString: "AA94DF14-4077-4D6B-9712-D90861D8BDE7")!
-    let remoteSonarId3 = UUID(uuidString: "2F13DB8A-7A5E-47C9-91D0-04F6AE19D869")!
+    let remoteSonarId1 = Data(base64Encoded: "62D583B3052C4CF9808C0B96080F0DB8")!
+    let remoteSonarId2 = Data(base64Encoded: "AA94DF1440774D6B9712D90861D8BDE7")!
+    let remoteSonarId3 = Data(base64Encoded: "2F13DB8A7A5E47C991D004F6AE19D869")!
 
     let timestamp1 = Date(timeIntervalSince1970: 0)
     let timestamp2 = Date(timeIntervalSince1970: 10)
@@ -78,7 +78,7 @@ class PatchContactEventsRequestTests: XCTestCase {
     func testJsonSerialisedContactEvent() {
         let expectedJsonString =
 """
-{"contactEvents":[{"rssiValues":[-11],"timestamp":"1970-01-01T00:00:00Z","sonarId":"62D583B3-052C-4CF9-808C-0B96080F0DB8","duration":0},{"rssiValues":[-1],"timestamp":"1970-01-01T00:00:10Z","sonarId":"AA94DF14-4077-4D6B-9712-D90861D8BDE7","duration":0},{"rssiValues":[-21],"timestamp":"1970-01-01T00:01:40Z","sonarId":"2F13DB8A-7A5E-47C9-91D0-04F6AE19D869","duration":0}]}
+{"contactEvents":[{"rssiValues":[-11],"timestamp":"1970-01-01T00:00:00Z","sonarId":"62D583B3052C4CF9808C0B96080F0DB8","duration":0},{"rssiValues":[-1],"timestamp":"1970-01-01T00:00:10Z","sonarId":"AA94DF1440774D6B9712D90861D8BDE7","duration":0},{"rssiValues":[-21],"timestamp":"1970-01-01T00:01:40Z","sonarId":"2F13DB8A7A5E47C991D004F6AE19D869","duration":0}]}
 """
         XCTAssertEqual(String(data: request.body!, encoding: .utf8)!, expectedJsonString)
     }

@@ -19,7 +19,7 @@ extension CBPeripheral: BTLEPeripheral {
 
 protocol BTLEListenerDelegate {
     func btleListener(_ listener: BTLEListener, didDisconnect peripheral: BTLEPeripheral, error: Error?)
-    func btleListener(_ listener: BTLEListener, didFindSonarId sonarId: UUID, forPeripheral peripheral: BTLEPeripheral)
+    func btleListener(_ listener: BTLEListener, didFind sonarUser: Data, forPeripheral peripheral: BTLEPeripheral)
     func btleListener(_ listener: BTLEListener, didReadRSSI RSSI: Int, forPeripheral peripheral: BTLEPeripheral)
     func btleListener(_ listener: BTLEListener, shouldReadRSSIFor peripheral: BTLEPeripheral) -> Bool
 }
@@ -200,12 +200,12 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
             return
         }
 
-        if let sonarId = UUID(uuidString: CBUUID(data: data).uuidString) {
-            logger.info("peripheral \(peripheral.identifierWithName) has sonarId: \(sonarId)")
-            delegate?.btleListener(self, didFindSonarId: sonarId, forPeripheral: peripheral)
+        if data.count == 105 {
+            logger.info("peripheral \(peripheral.identifierWithName) appears to be a sonar device")
+            delegate?.btleListener(self, didFind: data, forPeripheral: peripheral)
             peripheral.readRSSI()
         } else {
-            logger.info("characteristic value is not a valid sonarId: \(data)")
+            logger.info("characteristic value is not a valid sonarId, because it has length \(data.count)")
         }
     }
 

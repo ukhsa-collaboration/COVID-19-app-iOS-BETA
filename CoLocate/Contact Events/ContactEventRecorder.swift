@@ -9,7 +9,7 @@ import Foundation
 
 struct ContactEvent: Equatable, Codable {
 
-    let sonarId: UUID
+    let sonarId: Data
     var timestamp: Date = Date()
     var rssiValues: [Int] = []
     var duration: TimeInterval = 0

@@ -55,9 +55,9 @@ class DebugViewController: UITableViewController, Storyboarded {
             break
 
         case (1, 0):
-            contactEventRecorder.record(ContactEvent(sonarId: UUID(), timestamp: Date(), rssiValues: [42, 17, -2], duration: 42))
-            contactEventRecorder.record(ContactEvent(sonarId: UUID(), timestamp: Date(), rssiValues: [17, -2, 42], duration: 17))
-            contactEventRecorder.record(ContactEvent(sonarId: UUID(), timestamp: Date(), rssiValues: [-2, 42, 17], duration: 2))
+            contactEventRecorder.record(ContactEvent(sonarId: Data(base64Encoded: "aabbee")!, timestamp: Date(), rssiValues: [42, 17, -2], duration: 42))
+            contactEventRecorder.record(ContactEvent(sonarId: Data(base64Encoded: "dd88cc")!, timestamp: Date(), rssiValues: [17, -2, 42], duration: 17))
+            contactEventRecorder.record(ContactEvent(sonarId: Data(base64Encoded: "88aa33")!, timestamp: Date(), rssiValues: [-2, 42, 17], duration: 2))
             show(title: "Events Recorded", message: "Dummy contact events have been recorded locally (but not sent to the server.)")
             
         case (1, 1):

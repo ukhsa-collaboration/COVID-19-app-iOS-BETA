@@ -11,16 +11,16 @@ import UIKit
 class DebuggerTableViewCell: UITableViewCell {
 
     let gradientLayer = CAGradientLayer()
-    
-    var uuid: UUID? {
+
+    var base64Data: Data? {
         didSet {
             gradientLayer.colors = [
-                uuid?.asCGColor(alpha: 0) as Any,
-                uuid?.asCGColor(alpha: 1) as Any
+                base64Data?.asCGColor(alpha: 0) as Any,
+                base64Data?.asCGColor(alpha: 1) as Any
             ]
         }
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
 
