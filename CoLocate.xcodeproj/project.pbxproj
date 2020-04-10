@@ -123,8 +123,8 @@
 		F72EBD9E243C90E6009F9328 /* HumbleLocalNotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72EBD9D243C90E6009F9328 /* HumbleLocalNotificationScheduler.swift */; };
 		F72EBDA2243D0892009F9328 /* SecureBroadcastRotationKeyStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72EBDA1243D0892009F9328 /* SecureBroadcastRotationKeyStorage.swift */; };
 		F72EBDA5243D094A009F9328 /* SecureBroadcastRotationKeyStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72EBDA4243D094A009F9328 /* SecureBroadcastRotationKeyStorageTests.swift */; };
-		F72EBDA7243D2FD1009F9328 /* BroadcastIdGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72EBDA6243D2FD1009F9328 /* BroadcastIdGenerator.swift */; };
-		F72EBDA9243D2FE6009F9328 /* BroadcastIdGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72EBDA8243D2FE6009F9328 /* BroadcastIdGeneratorTests.swift */; };
+		F72EBDA7243D2FD1009F9328 /* BroadcastIdEncypter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72EBDA6243D2FD1009F9328 /* BroadcastIdEncypter.swift */; };
+		F72EBDA9243D2FE6009F9328 /* BroadcastIdEncypterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72EBDA8243D2FE6009F9328 /* BroadcastIdEncypterTests.swift */; };
 		F758553A24294C8D00CBE1ED /* RequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F758553924294C8C00CBE1ED /* RequestFactory.swift */; };
 		F758B8BE242CB856003AE16D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F758B8BD242CB856003AE16D /* Localizable.strings */; };
 		F758B8C0242CB98C003AE16D /* UIViewController+Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = F758B8BF242CB98C003AE16D /* UIViewController+Storyboarded.swift */; };
@@ -145,6 +145,7 @@
 		F78CEB71242B9305002254AD /* GoogleDataTransport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB70242B9305002254AD /* GoogleDataTransport.framework */; };
 		F78CEB73242B937F002254AD /* nanopb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB72242B937F002254AD /* nanopb.framework */; };
 		F78CEBED242D0836002254AD /* SecureRequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78CEBEC242D0836002254AD /* SecureRequestFactory.swift */; };
+		F7D62F2724406FC8004C32A2 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 89F06B2B2434A2C00074C612 /* Logging */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -292,8 +293,8 @@
 		F72EBD9D243C90E6009F9328 /* HumbleLocalNotificationScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HumbleLocalNotificationScheduler.swift; sourceTree = "<group>"; };
 		F72EBDA1243D0892009F9328 /* SecureBroadcastRotationKeyStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureBroadcastRotationKeyStorage.swift; sourceTree = "<group>"; };
 		F72EBDA4243D094A009F9328 /* SecureBroadcastRotationKeyStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureBroadcastRotationKeyStorageTests.swift; sourceTree = "<group>"; };
-		F72EBDA6243D2FD1009F9328 /* BroadcastIdGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastIdGenerator.swift; sourceTree = "<group>"; };
-		F72EBDA8243D2FE6009F9328 /* BroadcastIdGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastIdGeneratorTests.swift; sourceTree = "<group>"; };
+		F72EBDA6243D2FD1009F9328 /* BroadcastIdEncypter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastIdEncypter.swift; sourceTree = "<group>"; };
+		F72EBDA8243D2FE6009F9328 /* BroadcastIdEncypterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastIdEncypterTests.swift; sourceTree = "<group>"; };
 		F758553924294C8C00CBE1ED /* RequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFactory.swift; sourceTree = "<group>"; };
 		F758B8BD242CB856003AE16D /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		F758B8BF242CB98C003AE16D /* UIViewController+Storyboarded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Storyboarded.swift"; sourceTree = "<group>"; };
@@ -338,6 +339,7 @@
 				F78CEB5B242B7EC0002254AD /* FirebaseCoreDiagnostics.framework in Frameworks */,
 				F78CEB6A242B8D3F002254AD /* FirebaseInstanceID.framework in Frameworks */,
 				F78CEB6C242B8D84002254AD /* FirebaseInstallations.framework in Frameworks */,
+				F7D62F2724406FC8004C32A2 /* Logging in Frameworks */,
 				F78CEB5A242B7EC0002254AD /* FirebaseMessaging.framework in Frameworks */,
 				21B3D2E82429115600573061 /* CoreBluetooth.framework in Frameworks */,
 				F78CEB6F242B92CF002254AD /* GoogleUtilities.framework in Frameworks */,
@@ -749,7 +751,7 @@
 			isa = PBXGroup;
 			children = (
 				F72EBDA1243D0892009F9328 /* SecureBroadcastRotationKeyStorage.swift */,
-				F72EBDA6243D2FD1009F9328 /* BroadcastIdGenerator.swift */,
+				F72EBDA6243D2FD1009F9328 /* BroadcastIdEncypter.swift */,
 			);
 			path = BroadcastId;
 			sourceTree = "<group>";
@@ -758,7 +760,7 @@
 			isa = PBXGroup;
 			children = (
 				F72EBDA4243D094A009F9328 /* SecureBroadcastRotationKeyStorageTests.swift */,
-				F72EBDA8243D2FE6009F9328 /* BroadcastIdGeneratorTests.swift */,
+				F72EBDA8243D2FE6009F9328 /* BroadcastIdEncypterTests.swift */,
 			);
 			path = BroadcastId;
 			sourceTree = "<group>";
@@ -854,7 +856,7 @@
 			);
 			name = CoLocate;
 			packageProductDependencies = (
-				89F06B2B2434A2C00074C612 /* XCSwiftPackageProductDependency */,
+				89F06B2B2434A2C00074C612 /* Logging */,
 			);
 			productName = CoLocate;
 			productReference = 6FC63C2D241641B8007C8BF3 /* CoLocate.app */;
@@ -913,7 +915,7 @@
 			);
 			mainGroup = 6FC63C24241641B8007C8BF3;
 			packageReferences = (
-				89F06B2A2434A2C00074C612 /* XCRemoteSwiftPackageReference */,
+				89F06B2A2434A2C00074C612 /* XCRemoteSwiftPackageReference "swift-log" */,
 			);
 			productRefGroup = 6FC63C2E241641B8007C8BF3 /* Products */;
 			projectDirPath = "";
@@ -994,13 +996,12 @@
 				0983ACCF243E6D3800DBB336 /* NotificationObserverDouble.swift in Sources */,
 				F67A2293242AA370002254B6 /* SecureRegistrationStorageTests.swift in Sources */,
 				214209D72423C9B600C7BFF3 /* PatchContactEventsRequestTests.swift in Sources */,
-				F72EBDA9243D2FE6009F9328 /* BroadcastIdGeneratorTests.swift in Sources */,
+				F72EBDA9243D2FE6009F9328 /* BroadcastIdEncypterTests.swift in Sources */,
 				F72EBD9B243C8750009F9328 /* BluetoothStateObserverTests.swift in Sources */,
 				090B1871243552C300870B5D /* UserNotificationCenterDouble.swift in Sources */,
 				21C417CA242CB0A200DEF3E2 /* ConfirmRegistrationRequestTests.swift in Sources */,
 				F632792A2435323200CF7A42 /* PermissionsViewControllerTests.swift in Sources */,
 				F72EBDA5243D094A009F9328 /* SecureBroadcastRotationKeyStorageTests.swift in Sources */,
-				F770A455242FEE7C002FDED1,
 				098ED48A242E89D80029B729 /* RegistrationServiceDouble.swift in Sources */,
 				F63279272435219A00CF7A42 /* QueueDouble.swift in Sources */,
 				F6CC2CAC242BCD0D0079432B /* RemoteNotificationManagerTests.swift in Sources */,
@@ -1030,7 +1031,7 @@
 				F72EBDA2243D0892009F9328 /* SecureBroadcastRotationKeyStorage.swift in Sources */,
 				21AF36AB241A8E50001A4910 /* BTLEListener.swift in Sources */,
 				21C09A8D24377F5100368203 /* CoreBluetoothExtensions.swift in Sources */,
-				F72EBDA7243D2FD1009F9328 /* BroadcastIdGenerator.swift in Sources */,
+				F72EBDA7243D2FD1009F9328 /* BroadcastIdEncypter.swift in Sources */,
 				21C09A8D24377F5100368203 /* CoreBluetoothExtensions.swift in Sources */,
 				F72EBD9E243C90E6009F9328 /* HumbleLocalNotificationScheduler.swift in Sources */,
 				217A23BE243B34E8001B8236 /* UIDevice+ModelName.swift in Sources */,
@@ -1267,7 +1268,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		89F06B2A2434A2C00074C612 /* XCRemoteSwiftPackageReference */ = {
+		89F06B2A2434A2C00074C612 /* XCRemoteSwiftPackageReference "swift-log" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-log.git";
 			requirement = {
@@ -1278,9 +1279,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		89F06B2B2434A2C00074C612 /* XCSwiftPackageProductDependency */ = {
+		89F06B2B2434A2C00074C612 /* Logging */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 89F06B2A2434A2C00074C612 /* XCRemoteSwiftPackageReference */;
+			package = 89F06B2A2434A2C00074C612 /* XCRemoteSwiftPackageReference "swift-log" */;
 			productName = Logging;
 		};
 /* End XCSwiftPackageProductDependency section */

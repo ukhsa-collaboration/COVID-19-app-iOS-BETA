@@ -1,5 +1,5 @@
 //
-//  BroadcastIdGenerator.swift
+//  BroadcastIdEncypter.swift
 //  CoLocate
 //
 //  Created by NHSX.
@@ -11,7 +11,7 @@ import Security
 
 import Logging
 
-class BroadcastIdGenerator {
+class BroadcastIdEncypter {
 
     public static var useNewBroadcastId = false
 
@@ -33,7 +33,7 @@ class BroadcastIdGenerator {
     }
 
     func broadcastId(for startDate: Date = Date(), until maybeDate: Date? = nil) -> Data {
-        if BroadcastIdGenerator.useNewBroadcastId == false {
+        if BroadcastIdEncypter.useNewBroadcastId == false {
             return bytesFromSonarId()
         }
 

@@ -1,5 +1,5 @@
 //
-//  BroadcastIdGeneratorTests.swift
+//  BroadcastIdEncypterTests.swift
 //  CoLocateTests
 //
 //  Created by NHSX.
@@ -11,7 +11,7 @@ import Security
 
 @testable import CoLocate
 
-class BroadcastIdGeneratorTests: XCTestCase {
+class BroadcastIdEncypterTests: XCTestCase {
 
     let cannedId = UUID(uuidString: "E1D160C7-F6E8-48BC-8687-63C696D910CB")!
 
@@ -21,7 +21,7 @@ class BroadcastIdGeneratorTests: XCTestCase {
     var knownDate: Date!
     var laterDate: Date!
 
-    var generator: BroadcastIdGenerator!
+    var encrypter: BroadcastIdEncypter!
 
     override func setUp() {
         super.setUp()
@@ -32,20 +32,20 @@ class BroadcastIdGeneratorTests: XCTestCase {
 
         let serverPublicKey = knownGoodECPublicKey()
 
-        generator = BroadcastIdGenerator(key: serverPublicKey, sonarId: cannedId)
+        encrypter = BroadcastIdEncypter(key: serverPublicKey, sonarId: cannedId)
     }
 
     func test_returns_uuid_as_bytes_by_default() throws {
-        BroadcastIdGenerator.useNewBroadcastId = false
+        BroadcastIdEncypter.useNewBroadcastId = false
 
-        let data = generator.broadcastId(for: knownDate)
+        let data = encrypter.broadcastId(for: knownDate)
         XCTAssertEqual("E1D160C7-F6E8-48BC-8687-63C696D910CB", asUUIDString(data))
     }
 
     func test_generates_ciphertext_that_are_the_correct_size() {
-        BroadcastIdGenerator.useNewBroadcastId = true
+        BroadcastIdEncypter.useNewBroadcastId = true
 
-        let encryptedId = generator.broadcastId(for: knownDate, until: laterDate)
+        let encryptedId = encrypter.broadcastId(for: knownDate, until: laterDate)
 
         // first byte is 0x04 -- indicates this is uncompressed
         let firstByte = encryptedId[0]
@@ -58,7 +58,7 @@ class BroadcastIdGeneratorTests: XCTestCase {
     }
 
     func test_ciphertext_contains_expected_data() throws {
-        BroadcastIdGenerator.useNewBroadcastId = true
+        BroadcastIdEncypter.useNewBroadcastId = true
 
         #if targetEnvironment(simulator)
         throw XCTSkip("Cannot run this test in the simulator")
@@ -69,8 +69,8 @@ class BroadcastIdGeneratorTests: XCTestCase {
             return
         }
 
-        generator = BroadcastIdGenerator(key: serverPublicKey, sonarId: cannedId)
-        let result = generator.broadcastId(for: knownDate, until: laterDate)
+        encrypter = BroadcastIdEncypter(key: serverPublicKey, sonarId: cannedId)
+        let result = encrypter.broadcastId(for: knownDate, until: laterDate)
 
         let clearText = SecKeyCreateDecryptedData(serverPrivateKey,
                                                   .eciesEncryptionStandardX963SHA256AESGCM,
@@ -88,17 +88,17 @@ class BroadcastIdGeneratorTests: XCTestCase {
     }
 
     func test_generates_the_same_result_for_the_same_inputs() {
-        BroadcastIdGenerator.useNewBroadcastId = true
+        BroadcastIdEncypter.useNewBroadcastId = true
 
-        let first = generator.broadcastId(for: knownDate, until: laterDate)
-        let second = generator.broadcastId(for: knownDate, until: laterDate)
+        let first = encrypter.broadcastId(for: knownDate, until: laterDate)
+        let second = encrypter.broadcastId(for: knownDate, until: laterDate)
 
         XCTAssertEqual(first, second)
     }
 
     func test_generates_a_different_id_for_different_days() {
-        let todaysId = generator.broadcastId(for: knownDate)
-        let tomorrowsId = generator.broadcastId(for: laterDate)
+        let todaysId = encrypter.broadcastId(for: knownDate)
+        let tomorrowsId = encrypter.broadcastId(for: laterDate)
 
         XCTAssertNotEqual(todaysId, tomorrowsId)
     }

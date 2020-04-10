@@ -32,7 +32,7 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
 
     var peripheral: CBPeripheralManager?
     var stateDelegate: BTLEBroadcasterStateDelegate?
-    var idGenerator: BroadcastIdGenerator?
+    var idGenerator: BroadcastIdEncypter?
 
     // MARK: CBPeripheralManagerDelegate
 
@@ -61,7 +61,7 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
         }
 
         let serverPublicKey = try! SecureBroadcastRotationKeyStorage.shared.read()!
-        self.idGenerator = BroadcastIdGenerator(key: serverPublicKey, sonarId: sonarId)
+        self.idGenerator = BroadcastIdEncypter(key: serverPublicKey, sonarId: sonarId)
 
         let service = CBMutableService(type: ConcreteBTLEBroadcaster.sonarServiceUUID, primary: true)
 
