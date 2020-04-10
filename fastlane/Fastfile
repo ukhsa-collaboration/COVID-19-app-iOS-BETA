@@ -33,7 +33,7 @@ platform :ios do
 
     upload_to_testflight(
       username: ENV.fetch("APPLE_USERNAME"),
-      apple_id: "1504244021",
+      apple_id: "1507438009",
       skip_waiting_for_build_processing: true,
     )
   end
