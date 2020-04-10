@@ -1,7 +1,7 @@
 name: upload
 
-on:
-  deployment
+# on:
+#   deployment
 
 jobs:
   bump-build-version:
