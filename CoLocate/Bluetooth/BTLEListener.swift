@@ -219,9 +219,14 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
         delegate?.btleListener(self, didReadRSSI: RSSI.intValue, forPeripheral: peripheral)
         
         if delegate?.btleListener(self, shouldReadRSSIFor: peripheral) ?? false {
-            Timer.scheduledTimer(withTimeInterval: rssiSamplingInterval, repeats: false) { timer in
-                if peripheral.state == .connected {
-                    peripheral.readRSSI()
+            
+            // TODO: Not sure why this seems to block if it's not dispatched onto the main queue
+            // probably not even relevant after we've fixed the background RSSI sampling issue
+            DispatchQueue.main.async {
+                Timer.scheduledTimer(withTimeInterval: self.rssiSamplingInterval, repeats: false) { timer in
+                    if peripheral.state == .connected {
+                        peripheral.readRSSI()
+                    }
                 }
             }
         }

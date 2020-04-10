@@ -17,9 +17,8 @@ class BluetoothNursery {
     let contactEventRecorder: ContactEventRecorder
     let contactEventCollector: ContactEventCollector
     
-//    TODO: Figure out all the problems with this
-//    let btleQueue: DispatchQueue? = DispatchQueue(label: "BTLE Queue")
-    let btleQueue: DispatchQueue? = nil
+    let listenerQueue: DispatchQueue? = DispatchQueue(label: "BTLE Listener Queue")
+    let broadcasterQueue: DispatchQueue? = DispatchQueue(label: "BTLE Broadcaster Queue")
     
     var central: CBCentralManager?
     var listener: BTLEListener?
@@ -38,7 +37,7 @@ class BluetoothNursery {
     func startListener(stateDelegate: BTLEListenerStateDelegate?) {
         startListenerCalled = true
         listener = ConcreteBTLEListener(contactEventRecorder: contactEventRecorder)
-        central = CBCentralManager(delegate: listener as! ConcreteBTLEListener, queue: btleQueue, options: [
+        central = CBCentralManager(delegate: listener as! ConcreteBTLEListener, queue: listenerQueue, options: [
             CBCentralManagerOptionRestoreIdentifierKey: BluetoothNursery.centralRestoreIdentifier
         ])
         (listener as? ConcreteBTLEListener)?.stateDelegate = stateDelegate
@@ -48,7 +47,7 @@ class BluetoothNursery {
     func startBroadcaster(stateDelegate: BTLEBroadcasterStateDelegate?) {
         startBroadcasterCalled = true
         broadcaster = ConcreteBTLEBroadcaster()
-        peripheral = CBPeripheralManager(delegate: broadcaster as! ConcreteBTLEBroadcaster, queue: btleQueue, options: [
+        peripheral = CBPeripheralManager(delegate: broadcaster as! ConcreteBTLEBroadcaster, queue: broadcasterQueue, options: [
             CBPeripheralManagerOptionRestoreIdentifierKey: BluetoothNursery.peripheralRestoreIdentifier
         ])
         (broadcaster as? ConcreteBTLEBroadcaster)?.stateDelegate = stateDelegate

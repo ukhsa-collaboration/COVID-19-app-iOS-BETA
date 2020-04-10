@@ -26,8 +26,10 @@ class LiveBTLEDebuggerTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         observation = observe(\.collector._contactEventCount) { object, change in
-            self.sonarIds = self.collector.contactEvents.compactMap({ $0.value.sonarId })
-            self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.sonarIds = self.collector.contactEvents.compactMap({ $0.value.sonarId })
+                self.tableView.reloadData()
+            }
         }
         
         sonarIds = Array(collector.contactEvents.keys)
