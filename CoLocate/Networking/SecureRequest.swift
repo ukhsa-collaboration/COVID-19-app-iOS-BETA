@@ -16,25 +16,6 @@ class SecureRequest {
     
     var headers: [String : String]
     
-    /*
-     TODO: Convert this to use CryptoKit once we no longer have to support iOS 12:
-     init(_ key: SymmetricKey, _ data: Data, _ headers: [String: String], _ timestamp: Date = Date()) {
-         let timestampString = ISO8601DateFormatter().string(from: timestamp)
-         
-         var hmac = HMAC<SHA256>(key: key)
-         hmac.update(data: timestampString.data(using: .utf8)!)
-         hmac.update(data: data)
-         let authenticationCode = hmac.finalize()
-
-         self.headers = headers
-         self.headers[SecureRequest.timestampHeader] = timestampString
-         self.headers[SecureRequest.signatureHeader] = authenticationCode.withUnsafeBytes() { ptr -> String in
-             let data = Data(bytes: ptr.baseAddress!, count: ptr.count)
-             return data.base64EncodedString(options: [])
-         }
-         
-     }
-     */
     init(_ key: Data, _ data: Data, _ headers: [String: String], _ timestamp: Date = Date()) {
         let timestampString = ISO8601DateFormatter().string(from: timestamp)
         var hmacContext = CCHmacContext()
