@@ -53,7 +53,7 @@ jobs:
       matrix:
         fastlane-action:
           - beta
-          # - internal
+          - internal
     steps:
       - name: Checkout Project
         uses: actions/checkout@v2
