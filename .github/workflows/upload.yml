@@ -94,6 +94,7 @@ jobs:
           echo "::set-output name=build-number::$build_number"
 
       - name: Notify Slack on Upload
+        if: matrix.fastlane-action == 'beta'
         env:
           SLACK_BOT_TOKEN: ${{ secrets.slack_bot_token }}
         uses: voxmedia/github-action-slack-notify-build@v1
@@ -101,12 +102,12 @@ jobs:
           channel_id: G010M35PZCM
           status: UPLOADED (${{ steps.get-build-number.outputs.build-number }})
 
-      # - name: Notify Slack on Failure
-      #   if: failure()
-      #   env:
-      #     SLACK_BOT_TOKEN: ${{ secrets.slack_bot_token }}
-      #   uses: voxmedia/github-action-slack-notify-build@v1
-      #   with:
-      #     channel_id: G010M35PZCM
-      #     status: FAILED
-      #     color: danger
+      - name: Notify Slack on Failure
+        if: failure()
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.slack_bot_token }}
+        uses: voxmedia/github-action-slack-notify-build@v1
+        with:
+          channel_id: G010M35PZCM
+          status: FAILED
+          color: danger
