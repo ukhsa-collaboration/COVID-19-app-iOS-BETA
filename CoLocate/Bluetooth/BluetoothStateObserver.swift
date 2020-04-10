@@ -10,19 +10,22 @@ import UIKit
 import CoreBluetooth
 
 struct BluetoothStateObserver: BTLEListenerStateDelegate {
+    
     static let shared = BluetoothStateObserver(appStateReader: UIApplication.shared,
                                                scheduler: HumbleLocalNotificationScheduler.shared)
 
     let appStateReader: ApplicationStateReading
     let scheduler: LocalNotificationScheduling
+    let uiQueue: TestableQueue
 
-    init(appStateReader: ApplicationStateReading, scheduler: LocalNotificationScheduling) {
+    init(appStateReader: ApplicationStateReading, scheduler: LocalNotificationScheduling, uiQueue: TestableQueue = DispatchQueue.main) {
         self.appStateReader = appStateReader
         self.scheduler = scheduler
+        self.uiQueue = uiQueue
     }
 
     func btleListener(_ listener: BTLEListener, didUpdateState state: CBManagerState) {
-        DispatchQueue.main.async {
+        uiQueue.async {
             guard self.appStateReader.applicationState == .background else { return }
             guard state == .poweredOff else { return }
             

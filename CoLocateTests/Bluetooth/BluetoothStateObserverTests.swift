@@ -31,7 +31,7 @@ class BluetoothStateObserverTests: TestCase {
     }
 
     func test_it_creates_local_notifications_in_the_backgrouund_when_bluetooth_is_powered_off() {
-        stateObserver = BluetoothStateObserver(appStateReader: backgroundApp, scheduler: mockScheduler)
+        stateObserver = BluetoothStateObserver(appStateReader: backgroundApp, scheduler: mockScheduler, uiQueue: QueueDouble())
 
         stateObserver.btleListener(dummyListener, didUpdateState: .poweredOff)
 
