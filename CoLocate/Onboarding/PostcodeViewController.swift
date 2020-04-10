@@ -25,6 +25,9 @@ class PostcodeViewController: UIViewController, Storyboarded {
     override func viewDidLoad() {
         postcodeField.addTarget(self, action:#selector(updateContinueButton), for: .editingChanged)
         updateContinueButton()
+        
+        // Hide the keyboard if the user taps anywhere else
+        self.view .addGestureRecognizer(UITapGestureRecognizer(target: postcodeField, action: #selector(resignFirstResponder)))
     }
     
     @IBAction func didTapContinue() {
