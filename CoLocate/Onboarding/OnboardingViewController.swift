@@ -36,7 +36,7 @@ class OnboardingViewController: UINavigationController, Storyboarded {
             // Fallback on earlier versions
         }
         
-        (viewControllers.first as! StartNowViewController).persistence = environment.persistence
+        (viewControllers.first as! StartNowViewController).inject(persistence: environment.persistence, continueHandler: updateState)
     }
 
     func updateState() {
@@ -45,18 +45,6 @@ class OnboardingViewController: UINavigationController, Storyboarded {
 
             self.uiQueue.async { self.handle(state: state) }
         }
-    }
-
-    @IBAction func unwindFromPrivacy(unwindSegue: UIStoryboardSegue) {
-        updateState()
-    }
-    
-    @IBAction func unwindFromPostcode(unwindSegue: UIStoryboardSegue) {
-        updateState()
-    }
-
-    @IBAction func unwindFromPermissions(unwindSegue: UIStoryboardSegue) {
-        updateState()
     }
 
     @IBAction func unwindFromPermissionsDenied(unwindSegue: UIStoryboardSegue) {
@@ -71,20 +59,23 @@ class OnboardingViewController: UINavigationController, Storyboarded {
         let vc: UIViewController
         switch state {
         case .initial:
-            vc = StartNowViewController.instantiate {
-                $0.persistence = environment.persistence
+            vc = StartNowViewController.instantiate() {
+                $0.inject(persistence: environment.persistence, continueHandler: updateState)
             }
+            
         case .partialPostcode:
-            vc = PostcodeViewController.instantiate {
-                $0.inject(persistence: environment.persistence, notificationCenter: environment.notificationCenter)
+            vc = PostcodeViewController.instantiate() {
+                $0.inject(persistence: environment.persistence, notificationCenter: environment.notificationCenter, continueHandler: updateState)
             }
+            
         case .permissions:
-            vc = PermissionsViewController.instantiate {
-                $0.authManager = environment.authorizationManager
-                $0.remoteNotificationManager = environment.remoteNotificationManager
+            vc = PermissionsViewController.instantiate() {
+                $0.inject(authManager: environment.authorizationManager, remoteNotificationManager: environment.remoteNotificationManager, uiQueue: uiQueue, continueHandler: updateState)
             }
+            
         case .permissionsDenied:
             vc = PermissionsDeniedViewController.instantiate()
+            
         case .done:
             completionHandler()
             return

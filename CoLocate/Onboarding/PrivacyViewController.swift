@@ -11,7 +11,13 @@ import UIKit
 class PrivacyViewController: UIViewController, Storyboarded {
     static let storyboardName = "Onboarding"
 
-    var persistence: Persisting! = nil
+    private var persistence: Persisting! = nil
+    private var continueHandler: (() -> Void)! = nil
+    
+    func inject(persistence: Persisting, continueHandler: @escaping () -> Void) {
+        self.persistence = persistence
+        self.continueHandler = continueHandler
+    }
     
     @IBOutlet weak var allowDataSharingSwitch: UISwitch!
     @IBOutlet weak var continueButton: PrimaryButton!
@@ -22,6 +28,6 @@ class PrivacyViewController: UIViewController, Storyboarded {
 
     @IBAction func continueTapped(_ sender: PrimaryButton) {
         persistence.allowedDataSharing = true
-        self.performSegue(withIdentifier: "unwindFromPrivacy", sender: self)
+        self.continueHandler()
     }
 }

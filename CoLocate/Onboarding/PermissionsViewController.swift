@@ -13,10 +13,18 @@ import CoreBluetooth
 class PermissionsViewController: UIViewController, Storyboarded {
     static let storyboardName = "Onboarding"
 
-    var authManager: AuthorizationManaging = AuthorizationManager()
-    var remoteNotificationManager: RemoteNotificationManager = ConcreteRemoteNotificationManager()
-    var uiQueue: TestableQueue = DispatchQueue.main
+    private var authManager: AuthorizationManaging! = nil
+    private var remoteNotificationManager: RemoteNotificationManager! = nil
+    private var uiQueue: TestableQueue! = nil
+    private var continueHandler: (() -> Void)! = nil
     var bluetoothNursery: BluetoothNursery = (UIApplication.shared.delegate as! AppDelegate).bluetoothNursery
+    
+    func inject(authManager: AuthorizationManaging, remoteNotificationManager: RemoteNotificationManager, uiQueue: TestableQueue, continueHandler: @escaping () -> Void) {
+        self.authManager = authManager
+        self.remoteNotificationManager = remoteNotificationManager
+        self.uiQueue = uiQueue
+        self.continueHandler = continueHandler
+    }
 
     @IBAction func didTapContinue(_ sender: UIButton) {
         sender.isEnabled = false
@@ -55,7 +63,7 @@ class PermissionsViewController: UIViewController, Storyboarded {
             // deal with it.
             guard status == .notDetermined else {
                 self.uiQueue.async {
-                    self.performSegue(withIdentifier: "unwindFromPermissions", sender: self)
+                    self.continueHandler()
                 }
                 return
             }
@@ -64,7 +72,7 @@ class PermissionsViewController: UIViewController, Storyboarded {
                 switch result {
                 case .success:
                     self.uiQueue.async {
-                        self.performSegue(withIdentifier: "unwindFromPermissions", sender: self)
+                        self.continueHandler()
                     }
                 case .failure(let error):
                     // We have no idea what would cause an error here.

@@ -15,7 +15,8 @@ class PostcodeViewController: UIViewController, Storyboarded {
     
     private var persistence: Persisting! = nil
     private var notificationCenter: NotificationCenter! = nil
-    
+    private var continueHandler: (() -> Void)! = nil
+
     @IBOutlet var postcodeField: UITextField!
     @IBOutlet var continueButton: PrimaryButton!
     @IBOutlet private var scrollView: UIScrollView!
@@ -24,9 +25,10 @@ class PostcodeViewController: UIViewController, Storyboarded {
         self.notificationCenter?.removeObserver(self)
     }
 
-    func inject(persistence: Persisting, notificationCenter: NotificationCenter) {
+    func inject(persistence: Persisting, notificationCenter: NotificationCenter, continueHandler: @escaping () -> Void) {
         self.persistence = persistence
         self.notificationCenter = notificationCenter
+        self.continueHandler = continueHandler
     }
     
     override func viewDidLoad() {
@@ -44,7 +46,7 @@ class PostcodeViewController: UIViewController, Storyboarded {
         guard postcodeField.text?.count == 4 else { return }
         
         persistence.partialPostcode = postcodeField.text
-        performSegue(withIdentifier: "unwindFromPostcode", sender: self)
+        continueHandler()
     }
     
     @objc func updateContinueButton() {

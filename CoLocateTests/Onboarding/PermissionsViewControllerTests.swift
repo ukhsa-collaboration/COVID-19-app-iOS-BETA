@@ -16,13 +16,12 @@ class PermissionsViewControllerTests: TestCase {
         let authManagerDouble = AuthorizationManagerDouble()
         let remoteNotificationManagerDouble = RemoteNotificationManagerDouble()
         let vc = PermissionsViewController.instantiate()
-        vc.authManager = authManagerDouble
-        vc.remoteNotificationManager = remoteNotificationManagerDouble
-        vc.uiQueue = QueueDouble()
+        var continued = false
+        vc.inject(authManager: authManagerDouble, remoteNotificationManager: remoteNotificationManagerDouble, uiQueue: QueueDouble()) {
+            continued = true
+        }
 
-        let permissionsUnwinder = PermissionsUnwinder()
-        parentViewControllerForTests.show(viewController: permissionsUnwinder)
-        permissionsUnwinder.present(vc, animated: false)
+        parentViewControllerForTests.show(viewController: vc)
 
         vc.didTapContinue(UIButton())
         
@@ -40,20 +39,19 @@ class PermissionsViewControllerTests: TestCase {
         XCTAssertNotNil(remoteNotificationManagerDouble.requestAuthorizationCompletion)
         remoteNotificationManagerDouble.requestAuthorizationCompletion?(.success(true))
 
-        XCTAssert(permissionsUnwinder.didUnwindFromPermissions)
+        XCTAssert(continued)
     }
 
     func testBluetoothAlreadyDetermined() {
         let authManagerDouble = AuthorizationManagerDouble(bluetooth: .allowed)
         let remoteNotificationManagerDouble = RemoteNotificationManagerDouble()
         let vc = PermissionsViewController.instantiate()
-        vc.authManager = authManagerDouble
-        vc.remoteNotificationManager = remoteNotificationManagerDouble
-        vc.uiQueue = QueueDouble()
+        var continued = false
+        vc.inject(authManager: authManagerDouble, remoteNotificationManager: remoteNotificationManagerDouble, uiQueue: QueueDouble()) {
+            continued = true
+        }
 
-        let permissionsUnwinder = PermissionsUnwinder()
-        parentViewControllerForTests.show(viewController: permissionsUnwinder)
-        permissionsUnwinder.present(vc, animated: false)
+        parentViewControllerForTests.show(viewController: vc)
 
         vc.didTapContinue(UIButton())
 
@@ -63,20 +61,19 @@ class PermissionsViewControllerTests: TestCase {
         XCTAssertNotNil(remoteNotificationManagerDouble.requestAuthorizationCompletion)
         remoteNotificationManagerDouble.requestAuthorizationCompletion?(.success(true))
 
-        XCTAssert(permissionsUnwinder.didUnwindFromPermissions)
+        XCTAssert(continued)
     }
 
     func testNotificationsAlreadyDetermined() {
         let authManagerDouble = AuthorizationManagerDouble()
         let remoteNotificationManagerDouble = RemoteNotificationManagerDouble()
         let vc = PermissionsViewController.instantiate()
-        vc.authManager = authManagerDouble
-        vc.remoteNotificationManager = remoteNotificationManagerDouble
-        vc.uiQueue = QueueDouble()
+        var continued = false
+        vc.inject(authManager: authManagerDouble, remoteNotificationManager: remoteNotificationManagerDouble, uiQueue: QueueDouble()) {
+            continued = true
+        }
 
-        let permissionsUnwinder = PermissionsUnwinder()
-        parentViewControllerForTests.show(viewController: permissionsUnwinder)
-        permissionsUnwinder.present(vc, animated: false)
+        parentViewControllerForTests.show(viewController: vc)
 
         vc.didTapContinue(UIButton())
 
@@ -91,18 +88,11 @@ class PermissionsViewControllerTests: TestCase {
         XCTAssertNotNil(authManagerDouble.notificationsCompletion)
         authManagerDouble.notificationsCompletion!(.allowed)
 
-        XCTAssert(permissionsUnwinder.didUnwindFromPermissions)
+        XCTAssert(continued)
     }
 
 }
 
 fileprivate struct DummyBTLEBroadcaster: BTLEBroadcaster {
     var sonarId: UUID?
-}
-
-fileprivate class PermissionsUnwinder: UIViewController {
-    var didUnwindFromPermissions = false
-    @IBAction func unwindFromPermissions(unwindSegue: UIStoryboardSegue) {
-        didUnwindFromPermissions = true
-    }
 }

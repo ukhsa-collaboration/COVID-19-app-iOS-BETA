@@ -13,35 +13,33 @@ class PostcodeViewControllerTests: TestCase {
     func testContinuesWithValidInput() {
         let persistence = PersistenceDouble()
         let vc = PostcodeViewController.instantiate()
-        vc.inject(persistence: persistence, notificationCenter: NotificationCenter())
-        let unwinder = Unwinder()
-        parentViewControllerForTests.show(viewController: unwinder)
-        unwinder.present(vc, animated: false)
+        var continued = false
+        vc.inject(persistence: persistence, notificationCenter: NotificationCenter()) { continued = true }
+        parentViewControllerForTests.show(viewController: vc)
         
         vc.postcodeField.text = "1234"
         vc.didTapContinue()
         
         XCTAssertEqual(persistence.partialPostcode, "1234")
-        XCTAssertTrue(unwinder.didUnwind)
+        XCTAssertTrue(continued)
     }
     
     func testDoesNotContinueWithoutInput() {
         let persistence = PersistenceDouble(partialPostcode: nil)
         let vc = PostcodeViewController.instantiate()
-        vc.inject(persistence: persistence, notificationCenter: NotificationCenter())
-        let unwinder = Unwinder()
-        parentViewControllerForTests.show(viewController: unwinder)
-        unwinder.present(vc, animated: false)
+        var continued = false
+        vc.inject(persistence: persistence, notificationCenter: NotificationCenter()) { continued = true }
+        parentViewControllerForTests.show(viewController: vc)
         
         vc.didTapContinue()
         
         XCTAssertNil(persistence.partialPostcode)
-        XCTAssertFalse(unwinder.didUnwind)
+        XCTAssertFalse(continued)
     }
     
     func testDoesNotAcceptMoreThanFourChars_insertingOne() {
         let vc = PostcodeViewController.instantiate()
-        vc.inject(persistence: PersistenceDouble(), notificationCenter: NotificationCenter())
+        vc.inject(persistence: PersistenceDouble(), notificationCenter: NotificationCenter()) {}
         XCTAssertNotNil(vc.view)
         
         vc.postcodeField.text = "123"
@@ -53,7 +51,7 @@ class PostcodeViewControllerTests: TestCase {
     
     func testDoesNotAcceptMoreThanFourChars_insertingMany() {
         let vc = PostcodeViewController.instantiate()
-        vc.inject(persistence: PersistenceDouble(), notificationCenter: NotificationCenter())
+        vc.inject(persistence: PersistenceDouble(), notificationCenter: NotificationCenter()) {}
         XCTAssertNotNil(vc.view)
         
         vc.postcodeField.text = "1"
@@ -64,7 +62,7 @@ class PostcodeViewControllerTests: TestCase {
         
     func testDoesNotAcceptMoreThanFourChars_replacing() {
         let vc = PostcodeViewController.instantiate()
-        vc.inject(persistence: PersistenceDouble(), notificationCenter: NotificationCenter())
+        vc.inject(persistence: PersistenceDouble(), notificationCenter: NotificationCenter()) {}
         XCTAssertNotNil(vc.view)
         
         vc.postcodeField.text = "123"
@@ -75,7 +73,7 @@ class PostcodeViewControllerTests: TestCase {
     
     func testAcceptsDeletion() {
         let vc = PostcodeViewController.instantiate()
-        vc.inject(persistence: PersistenceDouble(), notificationCenter: NotificationCenter())
+        vc.inject(persistence: PersistenceDouble(), notificationCenter: NotificationCenter()) {}
         XCTAssertNotNil(vc.view)
         
         vc.postcodeField.text = "1234"
@@ -84,7 +82,7 @@ class PostcodeViewControllerTests: TestCase {
     
     func testEnablesButtonWhenFourCharsEntered() {
         let vc = PostcodeViewController.instantiate()
-        vc.inject(persistence: PersistenceDouble(), notificationCenter: NotificationCenter())
+        vc.inject(persistence: PersistenceDouble(), notificationCenter: NotificationCenter()) {}
         XCTAssertNotNil(vc.view)
         
         XCTAssertFalse(vc.continueButton?.isEnabled ?? true)
@@ -94,12 +92,5 @@ class PostcodeViewControllerTests: TestCase {
         vc.postcodeField.text = "1234"
         vc.postcodeField.sendActions(for: .editingChanged)
         XCTAssertTrue(vc.continueButton?.isEnabled ?? false)
-    }
-}
-
-fileprivate class Unwinder: UIViewController {
-    var didUnwind = false
-    @IBAction func unwindFromPostcode(unwindSegue: UIStoryboardSegue) {
-        didUnwind = true
     }
 }
