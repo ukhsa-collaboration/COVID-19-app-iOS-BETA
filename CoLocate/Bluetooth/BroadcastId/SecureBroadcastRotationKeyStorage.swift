@@ -1,5 +1,5 @@
 //
-//  KeychainWrapper.swift
+//  SecureBroadcastRotationKeyStorage.swift
 //  CoLocate
 //
 //  Created by NHSX.
@@ -11,14 +11,8 @@ import Security
 
 import Logging
 
-protocol KeychainWrapper {
-    func save(keyData: Data) throws
-    func read() throws -> SecKey?
-    func clear() throws
-}
-
-struct BroadcastIdRotationKeychainWrapper: KeychainWrapper {
-    static let shared = BroadcastIdRotationKeychainWrapper()
+struct SecureBroadcastRotationKeyStorage {
+    static let shared = SecureBroadcastRotationKeyStorage()
 
     private let publicKeyTag = "uk.nhs.nhsx.colocate.sonar.public_key"
 

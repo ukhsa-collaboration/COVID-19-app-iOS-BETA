@@ -96,3 +96,7 @@ iOSInjectionProject/
 /*.xcconfig
 
 .envrc
+
+# ignore appcode configuration
+.idea
+
