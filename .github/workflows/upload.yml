@@ -85,7 +85,7 @@ jobs:
           APPLE_USERNAME: ${{ secrets.apple_username }}
           FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.apple_password }}
           MATCH_PASSWORD: ${{ secrets.match_password }}
-        run: fastlane ${{ fastlane-action }}
+        run: fastlane ${{ matrix.fastlane-action }}
 
       - name: Get Build Number
         id: get-build-number
