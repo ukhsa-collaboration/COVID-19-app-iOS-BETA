@@ -27,13 +27,10 @@ platform :ios do
       profile_name: "match AppStore uk.nhs.nhsx.beta.CoLocate",
     )
 
-    update_app_identifier(
-      xcodeproj: "CoLocate.xcodeproj",
-      plist_path: "CoLocate/Info.plist",
-      app_identifier: "uk.nhs.nhsx.beta.CoLocate",
+    build_app(
+      scheme: "CoLocate beta release",
+      xcargs: "PRODUCT_BUNDLE_IDENTIFIER=uk.nhs.nhsx.beta.CoLocate",
     )
-
-    build_app(scheme: "CoLocate beta release")
 
     upload_to_testflight(
       username: ENV.fetch("APPLE_USERNAME"),
