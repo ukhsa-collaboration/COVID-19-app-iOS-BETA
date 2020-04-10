@@ -17,6 +17,7 @@ platform :ios do
     sync_code_signing(
       type: "appstore",
       readonly: true,
+      app_identifier: "uk.nhs.nhsx.sonar",
       git_url: "./ci/match",
     )
 
@@ -44,6 +45,7 @@ platform :ios do
     sync_code_signing(
       type: "appstore",
       readonly: true,
+      app_identifier: "uk.nhs.nhsx.beta.CoLocate",
       git_url: "./ci/match",
     )
 
