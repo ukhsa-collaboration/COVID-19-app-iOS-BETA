@@ -49,7 +49,8 @@ class SubmitSymptomsViewControllerTests: TestCase {
 
     func testSubmitSuccess() {
         let persistenceDouble = PersistenceDouble(registration: Registration.fake)
-        let eventRecorderDouble = TestContactEventRecorder()
+        let testContactEvent = ContactEvent(sonarId: UUID())
+        let eventRecorderDouble = TestContactEventRecorder([testContactEvent])
 
         var completion: ((Result<Void, Error>) -> Void)?
 
@@ -70,7 +71,8 @@ class SubmitSymptomsViewControllerTests: TestCase {
         XCTAssertNotNil(completion)
 
         completion?(.success(()))
-
+        
+        XCTAssertTrue(eventRecorderDouble.hasReset)
         XCTAssertTrue(button.isEnabled)
         XCTAssertTrue(unwinder.didUnwindFromSelfDiagnosis)
     }

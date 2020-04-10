@@ -111,8 +111,10 @@ class TestContactEventRecorder: ContactEventRecorder {
         contactEvents.append(contactEvent)
     }
     
+    var hasReset = false
     func reset() {
         contactEvents = []
+        hasReset = true
     }
     
 }

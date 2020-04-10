@@ -60,6 +60,7 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
             switch result {
             case .success(_):
                 self.performSegue(withIdentifier: "unwindFromSelfDiagnosis", sender: self)
+                self.contactEventRecorder.reset()
             case .failure(let error):
                 self.alert(error: error)
             }
