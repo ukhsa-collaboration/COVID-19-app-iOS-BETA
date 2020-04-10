@@ -3,6 +3,7 @@
 
 #include "Project.xcconfig"
 
+PRODUCT_BUNDLE_IDENTIFIER = uk.nhs.nhsx.beta.CoLocate
 DEBUG_INFORMATION_FORMAT = dwarf-with-dsym
 SWIFT_COMPILATION_MODE = wholemodule
 SWIFT_OPTIMIZATION_LEVEL = -O
