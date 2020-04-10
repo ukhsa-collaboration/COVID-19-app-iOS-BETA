@@ -1,3 +1,5 @@
+# vim: ft=ruby:
+
 default_platform(:ios)
 
 platform :ios do
@@ -23,6 +25,12 @@ platform :ios do
       targets: ["CoLocate"],
       code_sign_identity: "iPhone Distribution",
       profile_name: "match AppStore uk.nhs.nhsx.beta.CoLocate",
+    )
+
+    update_app_identifier(
+      xcodeproj: "CoLocate.xcodeproj",
+      plist_path: "CoLocate/Info.plist",
+      app_identifier: "uk.nhs.nhsx.beta.CoLocate",
     )
 
     build_app(scheme: "CoLocate beta release")
