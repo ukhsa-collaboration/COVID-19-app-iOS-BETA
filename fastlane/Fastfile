@@ -17,7 +17,7 @@ platform :ios do
     sync_code_signing(
       type: "appstore",
       readonly: true,
-      app_identifier: "uk.nhs.nhsx.sonar",
+      app_identifier: "uk.nhs.nhsx.sonar.internal",
       git_url: "./ci/match",
     )
 
@@ -26,7 +26,7 @@ platform :ios do
       path: "CoLocate.xcodeproj",
       targets: ["CoLocate"],
       code_sign_identity: "iPhone Distribution",
-      profile_name: "match AppStore uk.nhs.nhsx.sonar",
+      profile_name: "match AppStore uk.nhs.nhsx.sonar.internal",
     )
 
     build_app(scheme: "CoLocate")

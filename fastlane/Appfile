@@ -1,4 +1,4 @@
-app_identifier("uk.nhs.nhsx.sonar") # The bundle identifier of your app
+app_identifier("uk.nhs.nhsx.sonar.internal") # The bundle identifier of your app
 
 itc_team_id("121237496") # App Store Connect Team ID
 team_id("877YMUFLMF") # Developer Portal Team ID

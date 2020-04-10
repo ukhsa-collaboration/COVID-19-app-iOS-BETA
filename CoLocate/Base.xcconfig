@@ -1,5 +1,5 @@
 DISPLAY_NAME = CoLocate
-PRODUCT_BUNDLE_IDENTIFIER = uk.nhs.nhsx.sonar
+PRODUCT_BUNDLE_IDENTIFIER = uk.nhs.nhsx.sonar.internal
 INFOPLIST_FILE = CoLocate/Info.plist
 CODE_SIGN_ENTITLEMENTS = CoLocate/CoLocate.entitlements
 ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon
