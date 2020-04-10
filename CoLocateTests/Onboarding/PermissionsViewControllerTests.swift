@@ -94,5 +94,5 @@ class PermissionsViewControllerTests: TestCase {
 }
 
 fileprivate struct DummyBTLEBroadcaster: BTLEBroadcaster {
-    var sonarId: UUID?
+    func tryStartAdvertising() { }
 }

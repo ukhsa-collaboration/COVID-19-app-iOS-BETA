@@ -11,7 +11,13 @@ import Security
 
 import Logging
 
-struct SecureBroadcastRotationKeyStorage {
+protocol BroadcastRotationKeyStorage {
+    func save(keyData: Data) throws
+    func read() throws -> SecKey?
+    func clear() throws
+}
+
+struct SecureBroadcastRotationKeyStorage: BroadcastRotationKeyStorage {
     static let shared = SecureBroadcastRotationKeyStorage()
 
     private let publicKeyTag = "uk.nhs.nhsx.colocate.sonar.public_key"

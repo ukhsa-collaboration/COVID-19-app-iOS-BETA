@@ -13,7 +13,6 @@ class RegistrationServiceTests: TestCase {
 
     let id = UUID()
     let secretKey = "a secret key".data(using: .utf8)!
-    let publicKey = "server's public key".data(using: .utf8)!
 
     func testRegistration_withPreExistingPushToken() throws {
         let session = SessionDouble()
@@ -66,7 +65,7 @@ class RegistrationServiceTests: TestCase {
         XCTAssertFalse(finished)
         
         // Respond to the second request
-        let confirmationResponse = ConfirmRegistrationResponse(id: id, secretKey: secretKey, publicKey: publicKey)
+        let confirmationResponse = ConfirmRegistrationResponse(id: id, secretKey: secretKey)
         session.executeCompletion!(Result<ConfirmRegistrationResponse, Error>.success(confirmationResponse))
         
         XCTAssertTrue(finished)
@@ -135,7 +134,7 @@ class RegistrationServiceTests: TestCase {
         XCTAssertFalse(finished)
 
         // Respond to the second request
-        let confirmationResponse = ConfirmRegistrationResponse(id: id, secretKey: secretKey, publicKey: publicKey)
+        let confirmationResponse = ConfirmRegistrationResponse(id: id, secretKey: secretKey)
         session.executeCompletion!(Result<ConfirmRegistrationResponse, Error>.success(confirmationResponse))
 
         XCTAssertTrue(finished)
@@ -207,7 +206,7 @@ class RegistrationServiceTests: TestCase {
         attempt.cancel()
                         
         // Respond to the second request
-        let confirmationResponse = ConfirmRegistrationResponse(id: id, secretKey: secretKey, publicKey: publicKey)
+        let confirmationResponse = ConfirmRegistrationResponse(id: id, secretKey: secretKey)
         session.executeCompletion!(Result<ConfirmRegistrationResponse, Error>.success(confirmationResponse))
         
         XCTAssertFalse(finished)

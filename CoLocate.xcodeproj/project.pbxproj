@@ -146,6 +146,8 @@
 		F78CEB73242B937F002254AD /* nanopb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB72242B937F002254AD /* nanopb.framework */; };
 		F78CEBED242D0836002254AD /* SecureRequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78CEBEC242D0836002254AD /* SecureRequestFactory.swift */; };
 		F7D62F2724406FC8004C32A2 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 89F06B2B2434A2C00074C612 /* Logging */; };
+		F7D62F292440D4CB004C32A2 /* ConcreteBroadcastIdGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D62F282440D4CB004C32A2 /* ConcreteBroadcastIdGeneratorTests.swift */; };
+		F7D62F2B2440D64D004C32A2 /* ConcreteBroadcastIdGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D62F2A2440D64C004C32A2 /* ConcreteBroadcastIdGenerator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -319,6 +321,8 @@
 		F78CEB72242B937F002254AD /* nanopb.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = nanopb.framework; path = Frameworks/nanopb.framework; sourceTree = "<group>"; };
 		F78CEB74242BAC83002254AD /* CoLocate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CoLocate.entitlements; sourceTree = "<group>"; };
 		F78CEBEC242D0836002254AD /* SecureRequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRequestFactory.swift; sourceTree = "<group>"; };
+		F7D62F282440D4CB004C32A2 /* ConcreteBroadcastIdGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcreteBroadcastIdGeneratorTests.swift; sourceTree = "<group>"; };
+		F7D62F2A2440D64C004C32A2 /* ConcreteBroadcastIdGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcreteBroadcastIdGenerator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -752,6 +756,7 @@
 			children = (
 				F72EBDA1243D0892009F9328 /* SecureBroadcastRotationKeyStorage.swift */,
 				F72EBDA6243D2FD1009F9328 /* BroadcastIdEncypter.swift */,
+				F7D62F2A2440D64C004C32A2 /* ConcreteBroadcastIdGenerator.swift */,
 			);
 			path = BroadcastId;
 			sourceTree = "<group>";
@@ -761,6 +766,7 @@
 			children = (
 				F72EBDA4243D094A009F9328 /* SecureBroadcastRotationKeyStorageTests.swift */,
 				F72EBDA8243D2FE6009F9328 /* BroadcastIdEncypterTests.swift */,
+				F7D62F282440D4CB004C32A2 /* ConcreteBroadcastIdGeneratorTests.swift */,
 			);
 			path = BroadcastId;
 			sourceTree = "<group>";
@@ -1001,6 +1007,7 @@
 				090B1871243552C300870B5D /* UserNotificationCenterDouble.swift in Sources */,
 				21C417CA242CB0A200DEF3E2 /* ConfirmRegistrationRequestTests.swift in Sources */,
 				F632792A2435323200CF7A42 /* PermissionsViewControllerTests.swift in Sources */,
+				F7D62F292440D4CB004C32A2 /* ConcreteBroadcastIdGeneratorTests.swift in Sources */,
 				F72EBDA5243D094A009F9328 /* SecureBroadcastRotationKeyStorageTests.swift in Sources */,
 				098ED48A242E89D80029B729 /* RegistrationServiceDouble.swift in Sources */,
 				F63279272435219A00CF7A42 /* QueueDouble.swift in Sources */,
@@ -1077,6 +1084,7 @@
 				09CAA3662440F3B100CE93A6 /* PostcodeViewController.swift in Sources */,
 				098ED483242E746E0029B729 /* DebugViewController.swift in Sources */,
 				89AEE89D243DF24900BF3861 /* Persisting.swift in Sources */,
+				F7D62F2B2440D64D004C32A2 /* ConcreteBroadcastIdGenerator.swift in Sources */,
 				89F06B312434AABF0074C612 /* NoOpLogHandler.swift in Sources */,
 				09D1CD4B242C284000B1A167 /* PotentialViewController.swift in Sources */,
 				F6F05A3024340E5400FF4B72 /* OnboardingViewController.swift in Sources */,
