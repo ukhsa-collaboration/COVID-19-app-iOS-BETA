@@ -240,6 +240,108 @@
             </objects>
             <point key="canvasLocation" x="1481" y="151"/>
         </scene>
+        <!--Postcode View Controller-->
+        <scene sceneID="fJK-98-Qcl">
+            <objects>
+                <viewController storyboardIdentifier="PostcodeViewController" id="lkE-bN-ikk" customClass="PostcodeViewController" customModule="CoLocate" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pPc-VH-vTa">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bga-i9-1yX">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5tN-bW-uWf" userLabel="Scroll content view">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="06r-fk-m9F" customClass="LogoStrapline" customModule="CoLocate" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your post code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C96-Af-5wL">
+                                                <rect key="frame" x="20" y="84" width="280" height="36"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="CE1B" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nUw-z7-nkS">
+                                                <rect key="frame" x="20" y="157" width="280" height="34"/>
+                                                <accessibility key="accessibilityConfiguration" label="Post code"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="lkE-bN-ikk" id="hoE-bE-NAc"/>
+                                                </connections>
+                                            </textField>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your post code will not be used to track your location." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j2y-6b-nX8">
+                                                <rect key="frame" x="20" y="206" width="280" height="34"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ndb-pX-kbA" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
+                                                <rect key="frame" x="20" y="518" width="280" height="30"/>
+                                                <accessibility key="accessibilityConfiguration" label="Continue"/>
+                                                <state key="normal" title="Continue"/>
+                                                <connections>
+                                                    <action selector="didTapContinue" destination="lkE-bN-ikk" eventType="touchUpInside" id="oRt-0u-ito"/>
+                                                    <action selector="didTapContinue:" destination="AuE-Ey-MBo" eventType="touchUpInside" id="nEu-Rg-4L0"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstItem="Ndb-pX-kbA" firstAttribute="leading" secondItem="5tN-bW-uWf" secondAttribute="leading" constant="20" id="1cT-kx-WBK"/>
+                                            <constraint firstItem="j2y-6b-nX8" firstAttribute="top" secondItem="nUw-z7-nkS" secondAttribute="bottom" constant="15" id="9Eu-8f-LvJ"/>
+                                            <constraint firstAttribute="trailing" secondItem="C96-Af-5wL" secondAttribute="trailing" constant="20" id="9O4-Vf-5Cb"/>
+                                            <constraint firstItem="C96-Af-5wL" firstAttribute="leading" secondItem="5tN-bW-uWf" secondAttribute="leading" constant="20" id="EWu-uK-RpC"/>
+                                            <constraint firstItem="j2y-6b-nX8" firstAttribute="leading" secondItem="5tN-bW-uWf" secondAttribute="leading" constant="20" id="Gvs-rD-v5M"/>
+                                            <constraint firstItem="nUw-z7-nkS" firstAttribute="top" secondItem="C96-Af-5wL" secondAttribute="bottom" constant="37" id="LK4-WY-hk0"/>
+                                            <constraint firstAttribute="bottom" secondItem="Ndb-pX-kbA" secondAttribute="bottom" constant="20" id="RCw-c6-kQW"/>
+                                            <constraint firstAttribute="trailing" secondItem="06r-fk-m9F" secondAttribute="trailing" id="TeI-cH-ByM"/>
+                                            <constraint firstAttribute="trailing" secondItem="nUw-z7-nkS" secondAttribute="trailing" constant="20" id="Vx7-if-7tV"/>
+                                            <constraint firstItem="06r-fk-m9F" firstAttribute="leading" secondItem="5tN-bW-uWf" secondAttribute="leading" id="XM6-f7-BmG"/>
+                                            <constraint firstAttribute="trailing" secondItem="Ndb-pX-kbA" secondAttribute="trailing" constant="20" id="YEN-ae-szC"/>
+                                            <constraint firstItem="C96-Af-5wL" firstAttribute="top" secondItem="06r-fk-m9F" secondAttribute="bottom" constant="20" id="eku-jz-kga"/>
+                                            <constraint firstAttribute="trailing" secondItem="j2y-6b-nX8" secondAttribute="trailing" constant="20" id="gWC-ff-QBT"/>
+                                            <constraint firstItem="06r-fk-m9F" firstAttribute="top" secondItem="5tN-bW-uWf" secondAttribute="top" id="loK-Tf-8IH"/>
+                                            <constraint firstItem="nUw-z7-nkS" firstAttribute="leading" secondItem="5tN-bW-uWf" secondAttribute="leading" constant="20" id="pSD-Nu-Gdm"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="5tN-bW-uWf" firstAttribute="height" secondItem="aVO-WC-vyR" secondAttribute="height" priority="1" id="CAF-DX-raW"/>
+                                    <constraint firstItem="5tN-bW-uWf" firstAttribute="trailing" secondItem="usV-v5-uHY" secondAttribute="trailing" id="Cn6-ZV-ZxC"/>
+                                    <constraint firstItem="5tN-bW-uWf" firstAttribute="width" secondItem="aVO-WC-vyR" secondAttribute="width" id="NLI-sH-buq"/>
+                                    <constraint firstItem="5tN-bW-uWf" firstAttribute="leading" secondItem="usV-v5-uHY" secondAttribute="leading" id="NSz-Rp-flO"/>
+                                    <constraint firstItem="5tN-bW-uWf" firstAttribute="bottom" secondItem="usV-v5-uHY" secondAttribute="bottom" id="RfH-Yw-Chy"/>
+                                    <constraint firstItem="5tN-bW-uWf" firstAttribute="top" secondItem="usV-v5-uHY" secondAttribute="top" id="zba-Q0-4Mg"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="usV-v5-uHY"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="aVO-WC-vyR"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="uzw-kj-7Cv" firstAttribute="trailing" secondItem="bga-i9-1yX" secondAttribute="trailing" id="0kA-nw-bXW"/>
+                            <constraint firstItem="bga-i9-1yX" firstAttribute="top" secondItem="uzw-kj-7Cv" secondAttribute="top" id="Mue-vi-W9I"/>
+                            <constraint firstItem="uzw-kj-7Cv" firstAttribute="bottom" secondItem="bga-i9-1yX" secondAttribute="bottom" id="Sdp-Fg-5Uf"/>
+                            <constraint firstItem="bga-i9-1yX" firstAttribute="leading" secondItem="uzw-kj-7Cv" secondAttribute="leading" id="fvA-Ww-sRG"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="uzw-kj-7Cv"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="lGx-0H-c9z"/>
+                    <connections>
+                        <outlet property="continueButton" destination="Ndb-pX-kbA" id="7St-pk-B5e"/>
+                        <outlet property="postcodeField" destination="nUw-z7-nkS" id="w92-4f-ymY"/>
+                        <segue destination="3Dc-gv-ltw" kind="unwind" identifier="unwindFromPostcode" unwindAction="unwindFromPostcodeWithUnwindSegue:" id="8zI-lY-Dxu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ens-LG-iVG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="3Dc-gv-ltw" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2237" y="143"/>
+        </scene>
         <!--Permissions View Controller-->
         <scene sceneID="P4q-TP-FDU">
             <objects>
@@ -376,7 +478,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6yL-Lb-PKh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="wWL-nv-f7K" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2332.5" y="150"/>
+            <point key="canvasLocation" x="2963" y="143"/>
         </scene>
         <!--Permissions Denied View Controller-->
         <scene sceneID="ivz-dA-3eC">

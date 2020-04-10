@@ -14,17 +14,18 @@ class OnboardingViewController: UINavigationController, Storyboarded {
     private var environment: OnboardingEnvironment! = nil
     private var onboardingCoordinator: OnboardingCoordinator! = nil
     private var completionHandler: (() -> Void)! = nil
-    var uiQueue: TestableQueue = DispatchQueue.main
+    private var uiQueue: TestableQueue! = nil
 
     func showIn(rootViewController: RootViewController) {
         updateState()
         rootViewController.show(viewController: self)
     }
 
-    func inject(env: OnboardingEnvironment, coordinator: OnboardingCoordinator, completionHandler: @escaping () -> Void) {
+    func inject(env: OnboardingEnvironment, coordinator: OnboardingCoordinator, uiQueue: TestableQueue, completionHandler: @escaping () -> Void) {
         self.environment = env
         self.onboardingCoordinator = coordinator
         self.completionHandler = completionHandler
+        self.uiQueue = uiQueue
     }
     
     override func viewDidLoad() {
@@ -49,6 +50,10 @@ class OnboardingViewController: UINavigationController, Storyboarded {
     @IBAction func unwindFromPrivacy(unwindSegue: UIStoryboardSegue) {
         updateState()
     }
+    
+    @IBAction func unwindFromPostcode(unwindSegue: UIStoryboardSegue) {
+        updateState()
+    }
 
     @IBAction func unwindFromPermissions(unwindSegue: UIStoryboardSegue) {
         updateState()
@@ -68,6 +73,10 @@ class OnboardingViewController: UINavigationController, Storyboarded {
         case .initial:
             vc = StartNowViewController.instantiate {
                 $0.persistence = environment.persistence
+            }
+        case .partialPostcode:
+            vc = PostcodeViewController.instantiate {
+                $0.inject(persistence: environment.persistence)
             }
         case .permissions:
             vc = PermissionsViewController.instantiate {

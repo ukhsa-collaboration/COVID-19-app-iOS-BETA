@@ -35,6 +35,11 @@ class OnboardingTests: ScreenTestCase {
         
         privacyContinueButton.tap()
         
+        XCTAssert(postcodeScreenTitle.exists)
+        postcodeField.tap()
+        postcodeField.typeText("1234\n")
+        postcodeContinueButton.tap()
+        
         // Permissions screen
         
         XCTAssert(permissionsScreenTitle.exists)
@@ -78,6 +83,22 @@ private extension OnboardingTests {
     }
     
     var permissionContinueButton: XCUIElement {
+        app.buttons["Continue"]
+    }
+    
+}
+
+private extension OnboardingTests {
+    
+    var postcodeScreenTitle: XCUIElement {
+        app.staticTexts["Enter your post code"]
+    }
+    
+    var postcodeField: XCUIElement {
+        app.textFields["Post code"]
+    }
+    
+    var postcodeContinueButton: XCUIElement {
         app.buttons["Continue"]
     }
     

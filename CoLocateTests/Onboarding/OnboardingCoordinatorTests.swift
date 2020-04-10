@@ -23,9 +23,23 @@ class OnboardingCoordinatorTests: TestCase {
         onboardingCoordinator.state { state = $0 }
         XCTAssertEqual(state, .initial)
     }
+    
+    func testPostcode() {
+        let persistenceDouble = PersistenceDouble(allowedDataSharing: true, partialPostcode: nil)
+        let onboardingCoordinator = OnboardingCoordinator(
+            persistence: persistenceDouble,
+            authorizationManager: AuthorizationManagerDouble()
+        )
+
+        var state: OnboardingCoordinator.State?
+        onboardingCoordinator.state { state = $0 }
+
+        XCTAssertEqual(state, .partialPostcode)
+
+    }
 
     func testPermissions() {
-        let persistenceDouble = PersistenceDouble(allowedDataSharing: true)
+        let persistenceDouble = PersistenceDouble(allowedDataSharing: true, partialPostcode: "1234")
         let authManagerDouble = AuthorizationManagerDouble(bluetooth: .notDetermined)
         let onboardingCoordinator = OnboardingCoordinator(
             persistence: persistenceDouble,
@@ -40,7 +54,7 @@ class OnboardingCoordinatorTests: TestCase {
     }
 
     func testNotificationPermissions() {
-        let persistenceDouble = PersistenceDouble(allowedDataSharing: true)
+        let persistenceDouble = PersistenceDouble(allowedDataSharing: true, partialPostcode: "1234")
         let authManagerDouble = AuthorizationManagerDouble(bluetooth: .allowed)
         let onboardingCoordinator = OnboardingCoordinator(
             persistence: persistenceDouble,
@@ -52,9 +66,9 @@ class OnboardingCoordinatorTests: TestCase {
         authManagerDouble.notificationsCompletion!(.notDetermined)
         XCTAssertEqual(state, .permissions)
     }
-
+    
     func testPermissionsDenied() {
-        let persistenceDouble = PersistenceDouble(allowedDataSharing: true)
+        let persistenceDouble = PersistenceDouble(allowedDataSharing: true, partialPostcode: "1234")
         let authManagerDouble = AuthorizationManagerDouble(bluetooth: .allowed)
         let onboardingCoordinator = OnboardingCoordinator(
             persistence: persistenceDouble,
@@ -68,7 +82,7 @@ class OnboardingCoordinatorTests: TestCase {
     }
 
     func testDone() {
-        let persistenceDouble = PersistenceDouble(allowedDataSharing: true)
+        let persistenceDouble = PersistenceDouble(allowedDataSharing: true, partialPostcode: "1234")
         let authManagerDouble = AuthorizationManagerDouble(bluetooth: .allowed)
         let onboardingCoordinator = OnboardingCoordinator(
             persistence: persistenceDouble,

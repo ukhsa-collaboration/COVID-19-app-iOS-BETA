@@ -96,11 +96,11 @@ class PermissionsViewControllerTests: TestCase {
 
 }
 
-struct DummyBTLEBroadcaster: BTLEBroadcaster {
+fileprivate struct DummyBTLEBroadcaster: BTLEBroadcaster {
     var sonarId: UUID?
 }
 
-class PermissionsUnwinder: UIViewController {
+fileprivate class PermissionsUnwinder: UIViewController {
     var didUnwindFromPermissions = false
     @IBAction func unwindFromPermissions(unwindSegue: UIStoryboardSegue) {
         didUnwindFromPermissions = true

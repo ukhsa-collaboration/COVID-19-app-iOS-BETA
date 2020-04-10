@@ -73,6 +73,16 @@ class PersistenceTests: TestCase {
         XCTAssertEqual(delegate.recordedRegistration, registration)
     }
 
+    func testPartialPostcodeIsPersisted() {
+        let p1 = Persistence()
+        let p2 = Persistence()
+        
+        p1.partialPostcode = nil
+        XCTAssertNil(p2.partialPostcode)
+        
+        p1.partialPostcode = "9810"
+        XCTAssertEqual(p2.partialPostcode, "9810")
+    }
 }
 
 class PersistenceDelegateDouble: NSObject, PersistenceDelegate {

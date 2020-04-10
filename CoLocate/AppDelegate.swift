@@ -64,7 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             let env = OnboardingEnvironment(persistence: persistence, authorizationManager: authorizationManager, remoteNotificationManager: remoteNotificationManager)
             let coordinator = OnboardingCoordinator(persistence: persistence, authorizationManager: authorizationManager)
             
-            onboardingViewController.inject(env: env, coordinator: coordinator) {
+            onboardingViewController.inject(env: env, coordinator: coordinator, uiQueue: DispatchQueue.main) {
                 self.startMainApp()
             }
             

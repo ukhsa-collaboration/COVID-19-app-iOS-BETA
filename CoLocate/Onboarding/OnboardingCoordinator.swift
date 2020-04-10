@@ -12,7 +12,7 @@ import Foundation
 class OnboardingCoordinator {
 
     enum State: Equatable {
-        case initial, permissions, permissionsDenied, done
+        case initial, partialPostcode, permissions, permissionsDenied, done
     }
 
     private let persistence: Persisting
@@ -31,6 +31,11 @@ class OnboardingCoordinator {
         let allowedDataSharing = persistence.allowedDataSharing
         guard allowedDataSharing else {
             completion(.initial)
+            return
+        }
+        
+        guard persistence.partialPostcode != nil else {
+            completion(.partialPostcode)
             return
         }
 

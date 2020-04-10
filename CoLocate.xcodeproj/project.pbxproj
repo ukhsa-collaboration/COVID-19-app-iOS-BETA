@@ -24,6 +24,8 @@
 		0997D056243BDEEC0067346C /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0997D055243BDEEC0067346C /* RootViewController.swift */; };
 		09B27BD8243BA3F200DAEA02 /* DispatchQueue+AsyncAfterable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B27BD7243BA3F200DAEA02 /* DispatchQueue+AsyncAfterable.swift */; };
 		09B27BDB243BA5C800DAEA02 /* AsyncAfterableDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B27BDA243BA5C800DAEA02 /* AsyncAfterableDouble.swift */; };
+		09CAA3662440F3B100CE93A6 /* PostcodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CAA3652440F3B100CE93A6 /* PostcodeViewController.swift */; };
+		09CAA36A2440FC4500CE93A6 /* PostcodeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CAA3692440FC4500CE93A6 /* PostcodeViewControllerTests.swift */; };
 		09D1CD4B242C284000B1A167 /* PotentialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D1CD49242C284000B1A167 /* PotentialViewController.swift */; };
 		09D1CD50242C3A9300B1A167 /* Potential.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09D1CD4F242C3A9300B1A167 /* Potential.storyboard */; };
 		2115C3E624360427009C0F5B /* DebuggerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2115C3E524360427009C0F5B /* DebuggerTableViewCell.swift */; };
@@ -177,6 +179,8 @@
 		0997D055243BDEEC0067346C /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		09B27BD7243BA3F200DAEA02 /* DispatchQueue+AsyncAfterable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+AsyncAfterable.swift"; sourceTree = "<group>"; };
 		09B27BDA243BA5C800DAEA02 /* AsyncAfterableDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncAfterableDouble.swift; sourceTree = "<group>"; };
+		09CAA3652440F3B100CE93A6 /* PostcodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostcodeViewController.swift; sourceTree = "<group>"; };
+		09CAA3692440FC4500CE93A6 /* PostcodeViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostcodeViewControllerTests.swift; sourceTree = "<group>"; };
 		09D1CD49242C284000B1A167 /* PotentialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotentialViewController.swift; sourceTree = "<group>"; };
 		09D1CD4F242C3A9300B1A167 /* Potential.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Potential.storyboard; sourceTree = "<group>"; };
 		2115C3E524360427009C0F5B /* DebuggerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebuggerTableViewCell.swift; sourceTree = "<group>"; };
@@ -440,7 +444,6 @@
 				098ED486242E89760029B729 /* Doubles */,
 				214209DA242630CF00C7BFF3 /* Networking */,
 				F6F05A222433BEAC00FF4B72 /* Onboarding */,
-				F63279282435320E00CF7A42 /* Permissions */,
 				F6CC2CAA242BCCE90079432B /* Remote Notifications */,
 				098ED479242D7E340029B729 /* Registration */,
 				F67C5157243E7BD5008E2945 /* SelfDiagnosis */,
@@ -655,14 +658,6 @@
 			path = Logging;
 			sourceTree = "<group>";
 		};
-		F63279282435320E00CF7A42 /* Permissions */ = {
-			isa = PBXGroup;
-			children = (
-				F63279292435323200CF7A42 /* PermissionsViewControllerTests.swift */,
-			);
-			path = Permissions;
-			sourceTree = "<group>";
-		};
 		F67C5157243E7BD5008E2945 /* SelfDiagnosis */ = {
 			isa = PBXGroup;
 			children = (
@@ -715,6 +710,7 @@
 				F6F05A35243436D200FF4B72 /* PrivacyViewController.swift */,
 				F6F05A332434344200FF4B72 /* StartNowViewController.swift */,
 				898FE858243B4FE300210775 /* AuthorizationManaging.swift */,
+				09CAA3652440F3B100CE93A6 /* PostcodeViewController.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -722,8 +718,10 @@
 		F6F05A222433BEAC00FF4B72 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				F63279292435323200CF7A42 /* PermissionsViewControllerTests.swift */,
 				F6F05A232433BEC000FF4B72 /* OnboardingCoordinatorTests.swift */,
 				F632792024351C1900CF7A42 /* OnboardingViewControllerTests.swift */,
+				09CAA3692440FC4500CE93A6 /* PostcodeViewControllerTests.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -973,6 +971,7 @@
 				098ED48A242E89D80029B729 /* RegistrationServiceDouble.swift in Sources */,
 				F63279272435219A00CF7A42 /* QueueDouble.swift in Sources */,
 				F6CC2CAC242BCD0D0079432B /* RemoteNotificationManagerTests.swift in Sources */,
+				09CAA36A2440FC4500CE93A6 /* PostcodeViewControllerTests.swift in Sources */,
 				F67C5159243E7C1E008E2945 /* SubmitSymptomsViewControllerTests.swift in Sources */,
 				F72EBD4F24361E99009F9328 /* URLSessionTests.swift in Sources */,
 				0983ACCD243E566800DBB336 /* ErrorForTest.swift in Sources */,
@@ -1037,6 +1036,7 @@
 				213C806C241A56430020EFA5 /* PermissionsViewController.swift in Sources */,
 				F636453B243687DE0014FD54 /* PermissionsDeniedViewController.swift in Sources */,
 				89F06B2F2434A62C0074C612 /* LoggingManager.swift in Sources */,
+				09CAA3662440F3B100CE93A6 /* PostcodeViewController.swift in Sources */,
 				098ED483242E746E0029B729 /* DebugViewController.swift in Sources */,
 				89AEE89D243DF24900BF3861 /* Persisting.swift in Sources */,
 				89F06B312434AABF0074C612 /* NoOpLogHandler.swift in Sources */,

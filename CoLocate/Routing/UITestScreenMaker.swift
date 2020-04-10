@@ -22,7 +22,7 @@ struct UITestScreenMaker: ScreenMaking {
             return OnboardingViewController.instantiate { viewController in
                 let env = OnboardingEnvironment(mockWithHost: viewController)
                 let coordinator = OnboardingCoordinator(persistence: env.persistence, authorizationManager: env.authorizationManager)
-                viewController.inject(env: env, coordinator: coordinator) { }
+                viewController.inject(env: env, coordinator: coordinator, uiQueue: DispatchQueue.main) { }
                 
             }
         }
@@ -47,16 +47,17 @@ private extension OnboardingEnvironment {
 }
 
 private class InMemoryPersistence: Persisting {
-    
     var allowedDataSharing = false
     var registration: Registration? = Registration(id: UUID(), secretKey: Data())
     var diagnosis: Diagnosis? = nil
     var enableNewSelfDiagnosis = false
+    var partialPostcode: String? = nil
     
     func clear() {
         allowedDataSharing = false
         registration = nil
         diagnosis = nil
+        partialPostcode = nil
     }
 }
 
