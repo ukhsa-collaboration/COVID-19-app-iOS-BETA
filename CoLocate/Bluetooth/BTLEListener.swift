@@ -79,24 +79,24 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
         case .poweredOn:
             
             // Ensure all "connected" peripherals are properly connected after state restoration
-            for peripheral in peripherals {
-                guard peripheral.value.state == .connected else {
-                    logger.info("attempting connection to peripheral \(peripheral.value.identifierWithName) in state \(peripheral.value.state)")
-                    central.connect(peripheral.value)
+            for peripheral in peripherals.values {
+                guard peripheral.state == .connected else {
+                    logger.info("attempting connection to peripheral \(peripheral.identifierWithName) in state \(peripheral.state)")
+                    central.connect(peripheral)
                     continue
                 }
-                guard let sonarIdService = peripheral.value.services?.first(where: {$0.uuid == ConcreteBTLEBroadcaster.sonarServiceUUID}) else {
-                    logger.info("discovering services for peripheral \(peripheral.value.identifierWithName)")
-                    peripheral.value.discoverServices([ConcreteBTLEBroadcaster.sonarServiceUUID])
+                guard let sonarIdService = peripheral.services?.sonarIdService() else {
+                    logger.info("discovering services for peripheral \(peripheral.identifierWithName)")
+                    peripheral.discoverServices([ConcreteBTLEBroadcaster.sonarServiceUUID])
                     continue
                 }
-                guard let sonarIdCharacteristic = sonarIdService.characteristics?.first(where: {$0.uuid == ConcreteBTLEBroadcaster.sonarIdCharacteristicUUID}) else {
-                    logger.info("discovering characteristics for peripheral \(peripheral.value.identifierWithName)")
-                    peripheral.value.discoverCharacteristics([ConcreteBTLEBroadcaster.sonarIdCharacteristicUUID], for: sonarIdService)
+                guard let sonarIdCharacteristic = sonarIdService.characteristics?.sonarIdCharacteristic() else {
+                    logger.info("discovering characteristics for peripheral \(peripheral.identifierWithName)")
+                    peripheral.discoverCharacteristics([ConcreteBTLEBroadcaster.sonarIdCharacteristicUUID], for: sonarIdService)
                     continue
                 }
-                logger.info("reading sonarId from fully-connected peripheral \(peripheral.value.identifierWithName)")
-                peripheral.value.readValue(for: sonarIdCharacteristic)
+                logger.info("reading sonarId from fully-connected peripheral \(peripheral.identifierWithName)")
+                peripheral.readValue(for: sonarIdCharacteristic)
             }
             
             central.scanForPeripherals(withServices: [ConcreteBTLEBroadcaster.sonarServiceUUID])
@@ -155,7 +155,7 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
             return
         }
         
-        guard let sonarIdService = services.first(where: {$0.uuid == ConcreteBTLEBroadcaster.sonarServiceUUID}) else {
+        guard let sonarIdService = services.sonarIdService() else {
             logger.info("Sonar service not discovered for \(peripheral.identifierWithName)")
             return
         }
@@ -175,7 +175,7 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
             return
         }
         
-        guard let sonarIdCharacteristic = characteristics.first(where: {$0.uuid == ConcreteBTLEBroadcaster.sonarIdCharacteristicUUID}) else {
+        guard let sonarIdCharacteristic = characteristics.sonarIdCharacteristic() else {
             logger.info("sonarId characteristic not discovered for peripheral \(peripheral.identifierWithName)")
             return
         }
