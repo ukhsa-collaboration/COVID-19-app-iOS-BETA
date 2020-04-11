@@ -12,7 +12,7 @@ import UIKit
 class AppCoordinatorDouble: AppCoordinator {
     init() {
         super.init(
-            rootViewController: RootViewController(),
+            container: ViewControllerContainerDouble(),
             persistence: Persistence(),
             registrationService: RegistrationServiceDouble()
         )

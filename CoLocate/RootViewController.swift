@@ -8,17 +8,64 @@
 
 import UIKit
 
-class RootViewController: UIViewController {
-    func show(viewController newChild: UIViewController) {
-        children.first?.willMove(toParent: nil)
-        children.first?.viewIfLoaded?.removeFromSuperview()
-        children.first?.removeFromParent()
-        addChild(newChild)
-        newChild.view.frame = view.bounds
-        view.addSubview(newChild.view)
-        newChild.didMove(toParent: self)
-    }
+protocol ViewControllerContainer {
+    func show(viewController: UIViewController)
+}
 
+class RootViewController: UIViewController {
+
+    private var persistence: Persisting! = nil
+    private var authorizationManager: AuthorizationManaging! = nil
+    private var remoteNotificationManager: RemoteNotificationManager! = nil
+    private var notificationCenter: NotificationCenter! = nil
+    private var registrationService: RegistrationService! = nil
+
+    func inject(
+        persistence: Persisting,
+        authorizationManager: AuthorizationManaging,
+        remoteNotificationManager: RemoteNotificationManager,
+        notificationCenter: NotificationCenter,
+        registrationService: RegistrationService
+    ) {
+        self.persistence = persistence
+        self.authorizationManager = authorizationManager
+        self.remoteNotificationManager = remoteNotificationManager
+        self.notificationCenter = notificationCenter
+        self.registrationService = registrationService
+    }
+    
+    override func viewDidLoad() {
+        showFirstView()
+    }
+    
+    // MARK: - Routing
+    func showFirstView() {
+        if persistence.registration != nil {
+            startMainApp()
+        } else {
+            let onboardingViewController = OnboardingViewController.instantiate()
+            let env = OnboardingEnvironment(persistence: persistence, authorizationManager: authorizationManager, remoteNotificationManager: remoteNotificationManager, notificationCenter: NotificationCenter.default)
+            let coordinator = OnboardingCoordinator(persistence: persistence, authorizationManager: authorizationManager)
+            
+            onboardingViewController.inject(env: env, coordinator: coordinator, uiQueue: DispatchQueue.main) {
+                self.startMainApp()
+            }
+            
+            onboardingViewController.showIn(container: self)
+        }
+    }
+    
+    private func startMainApp() {
+        let appCoordinator = AppCoordinator(
+            container: self,
+            persistence: persistence,
+            registrationService: registrationService
+        )
+        appCoordinator.update()
+    }
+    
+    // MARK: - Debug view controller management
+    
     #if DEBUG || INTERNAL
     var previouslyPresentedViewController: UIViewController?
 
@@ -47,4 +94,17 @@ class RootViewController: UIViewController {
         present(debugVC, animated: true)
     }
     #endif
+}
+
+ 
+extension RootViewController: ViewControllerContainer {
+    func show(viewController newChild: UIViewController) {
+        children.first?.willMove(toParent: nil)
+        children.first?.viewIfLoaded?.removeFromSuperview()
+        children.first?.removeFromParent()
+        addChild(newChild)
+        newChild.view.frame = view.bounds
+        view.addSubview(newChild.view)
+        newChild.didMove(toParent: self)
+    }
 }

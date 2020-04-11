@@ -9,18 +9,18 @@
 import UIKit
 
 class AppCoordinator {
-    private let rootViewController: RootViewController
+    private let container: ViewControllerContainer
     private let persistence: Persisting
     private let registrationService: RegistrationService
         
-    init(rootViewController: RootViewController, persistence: Persisting, registrationService: RegistrationService) {
-        self.rootViewController = rootViewController
+    init(container: ViewControllerContainer, persistence: Persisting, registrationService: RegistrationService) {
+        self.container = container
         self.persistence = persistence
         self.registrationService = registrationService
     }
 
     func update() {
-        rootViewController.show(viewController: currentViewController())
+        container.show(viewController: currentViewController())
     }
     
     private func currentViewController() -> UIViewController {

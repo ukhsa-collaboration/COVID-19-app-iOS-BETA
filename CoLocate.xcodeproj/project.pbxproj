@@ -26,6 +26,7 @@
 		09B27BDB243BA5C800DAEA02 /* AsyncAfterableDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B27BDA243BA5C800DAEA02 /* AsyncAfterableDouble.swift */; };
 		09CAA3662440F3B100CE93A6 /* PostcodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CAA3652440F3B100CE93A6 /* PostcodeViewController.swift */; };
 		09CAA36A2440FC4500CE93A6 /* PostcodeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CAA3692440FC4500CE93A6 /* PostcodeViewControllerTests.swift */; };
+		09CAA36C24413E0700CE93A6 /* ViewControllerContainerDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CAA36B24413E0700CE93A6 /* ViewControllerContainerDouble.swift */; };
 		09D1CD4B242C284000B1A167 /* PotentialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D1CD49242C284000B1A167 /* PotentialViewController.swift */; };
 		09D1CD50242C3A9300B1A167 /* Potential.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09D1CD4F242C3A9300B1A167 /* Potential.storyboard */; };
 		2115C3E624360427009C0F5B /* DebuggerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2115C3E524360427009C0F5B /* DebuggerTableViewCell.swift */; };
@@ -181,6 +182,7 @@
 		09B27BDA243BA5C800DAEA02 /* AsyncAfterableDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncAfterableDouble.swift; sourceTree = "<group>"; };
 		09CAA3652440F3B100CE93A6 /* PostcodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostcodeViewController.swift; sourceTree = "<group>"; };
 		09CAA3692440FC4500CE93A6 /* PostcodeViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostcodeViewControllerTests.swift; sourceTree = "<group>"; };
+		09CAA36B24413E0700CE93A6 /* ViewControllerContainerDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerContainerDouble.swift; sourceTree = "<group>"; };
 		09D1CD49242C284000B1A167 /* PotentialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotentialViewController.swift; sourceTree = "<group>"; };
 		09D1CD4F242C3A9300B1A167 /* Potential.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Potential.storyboard; sourceTree = "<group>"; };
 		2115C3E524360427009C0F5B /* DebuggerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebuggerTableViewCell.swift; sourceTree = "<group>"; };
@@ -391,6 +393,7 @@
 				09B27BDA243BA5C800DAEA02 /* AsyncAfterableDouble.swift */,
 				0983ACCC243E566800DBB336 /* ErrorForTest.swift */,
 				0983ACCE243E6D3800DBB336 /* NotificationObserverDouble.swift */,
+				09CAA36B24413E0700CE93A6 /* ViewControllerContainerDouble.swift */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -948,6 +951,7 @@
 				214209CE24237A6300C7BFF3 /* PlistContactEventRecorderTests.swift in Sources */,
 				F632792124351C1900CF7A42 /* OnboardingViewControllerTests.swift in Sources */,
 				095A91182434FF1500ED6369 /* ApplicationDouble.swift in Sources */,
+				09CAA36C24413E0700CE93A6 /* ViewControllerContainerDouble.swift in Sources */,
 				F632792324351C8400CF7A42 /* OnboardingCoordinatorDouble.swift in Sources */,
 				21F37402243384D400926FB8 /* ContactEventCollectorTests.swift in Sources */,
 				F770A4572430F76B002FDED1 /* AppCoordinatorDouble.swift in Sources */,

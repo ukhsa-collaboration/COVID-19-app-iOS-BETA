@@ -21,7 +21,7 @@ class PermissionsViewControllerTests: TestCase {
             continued = true
         }
 
-        parentViewControllerForTests.show(viewController: vc)
+        parentViewControllerForTests.viewControllers = [vc]
 
         vc.didTapContinue(UIButton())
         
@@ -51,7 +51,7 @@ class PermissionsViewControllerTests: TestCase {
             continued = true
         }
 
-        parentViewControllerForTests.show(viewController: vc)
+        parentViewControllerForTests.viewControllers = [vc]
 
         vc.didTapContinue(UIButton())
 
@@ -73,7 +73,7 @@ class PermissionsViewControllerTests: TestCase {
             continued = true
         }
 
-        parentViewControllerForTests.show(viewController: vc)
+        parentViewControllerForTests.viewControllers = [vc]
 
         vc.didTapContinue(UIButton())
 

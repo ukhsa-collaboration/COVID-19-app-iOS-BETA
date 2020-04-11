@@ -15,14 +15,12 @@ class OnboardingViewControllerTests: TestCase {
         let coordinatorDouble = OnboardingCoordinatorDouble()
         let vc = OnboardingViewController.instantiate()
         vc.inject(env: envDouble(), coordinator: coordinatorDouble, uiQueue: QueueDouble()) {}
-        let rootViewController = RootViewController()
-        parentViewControllerForTests.addChild(rootViewController)
-        vc.showIn(rootViewController: rootViewController)
+        let container = ViewControllerContainerDouble()
+        vc.showIn(container: container)
 
         vc.updateState()
         coordinatorDouble.stateCompletion!(.initial)
 
-        XCTAssertEqual(rootViewController.children.count, 1)
         XCTAssertNotNil(vc.children.first as? StartNowViewController)
     }
     
@@ -30,14 +28,12 @@ class OnboardingViewControllerTests: TestCase {
         let coordinatorDouble = OnboardingCoordinatorDouble()
         let vc = OnboardingViewController.instantiate()
         vc.inject(env: envDouble(), coordinator: coordinatorDouble, uiQueue: QueueDouble()) {}
-        let rootViewController = RootViewController()
-        parentViewControllerForTests.addChild(rootViewController)
-        vc.showIn(rootViewController: rootViewController)
+        let container = ViewControllerContainerDouble()
+        vc.showIn(container: container)
 
         vc.updateState()
         coordinatorDouble.stateCompletion!(.partialPostcode)
-        
-        XCTAssertEqual(rootViewController.children.count, 1)
+
         XCTAssertNotNil(vc.children.first as? PostcodeViewController)
     }
 
@@ -45,14 +41,12 @@ class OnboardingViewControllerTests: TestCase {
         let coordinatorDouble = OnboardingCoordinatorDouble()
         let vc = OnboardingViewController.instantiate()
         vc.inject(env: envDouble(), coordinator: coordinatorDouble, uiQueue: QueueDouble()) {}
-        let rootViewController = RootViewController()
-        parentViewControllerForTests.addChild(rootViewController)
-        vc.showIn(rootViewController: rootViewController)
+        let container = ViewControllerContainerDouble()
+        vc.showIn(container: container)
 
         vc.updateState()
         coordinatorDouble.stateCompletion!(.permissions)
 
-        XCTAssertEqual(rootViewController.children.count, 1)
         XCTAssertNotNil(vc.children.first as? PermissionsViewController)
     }
 
@@ -60,14 +54,12 @@ class OnboardingViewControllerTests: TestCase {
         let coordinatorDouble = OnboardingCoordinatorDouble()
         let vc = OnboardingViewController.instantiate()
         vc.inject(env: envDouble(), coordinator: coordinatorDouble, uiQueue: QueueDouble()) {}
-        let rootViewController = RootViewController()
-        parentViewControllerForTests.addChild(rootViewController)
-        vc.showIn(rootViewController: rootViewController)
+        let container = ViewControllerContainerDouble()
+        vc.showIn(container: container)
 
         vc.updateState()
         coordinatorDouble.stateCompletion!(.initial)
 
-        XCTAssertEqual(rootViewController.children.count, 1)
         XCTAssertNotNil(vc.children.first as? StartNowViewController)
     }
     

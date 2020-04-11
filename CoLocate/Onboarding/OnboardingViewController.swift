@@ -16,9 +16,9 @@ class OnboardingViewController: UINavigationController, Storyboarded {
     private var completionHandler: (() -> Void)! = nil
     private var uiQueue: TestableQueue! = nil
 
-    func showIn(rootViewController: RootViewController) {
+    func showIn(container: ViewControllerContainer) {
         updateState()
-        rootViewController.show(viewController: self)
+        container.show(viewController: self)
     }
 
     func inject(env: OnboardingEnvironment, coordinator: OnboardingCoordinator, uiQueue: TestableQueue, completionHandler: @escaping () -> Void) {

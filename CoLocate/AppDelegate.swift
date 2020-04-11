@@ -18,7 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     let remoteNotificationManager = ConcreteRemoteNotificationManager.shared
     let persistence = Persistence.shared
-    let registrationService = ConcreteRegistrationService()
     let bluetoothNursery = BluetoothNursery()
     let authorizationManager = AuthorizationManager()
 
@@ -50,6 +49,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         Appearance.setup()
 
         let rootVC = RootViewController()
+        rootVC.inject(
+            persistence: persistence,
+            authorizationManager: authorizationManager,
+            remoteNotificationManager: remoteNotificationManager,
+            notificationCenter: NotificationCenter.default,
+            registrationService: ConcreteRegistrationService()
+        )
+        
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = rootVC
         window?.makeKeyAndVisible()
@@ -58,17 +65,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             bluetoothNursery.startBroadcaster(stateDelegate: nil)
             bluetoothNursery.broadcaster?.sonarId = registration.id
             bluetoothNursery.startListener(stateDelegate: BluetoothStateObserver.shared)
-            startMainApp()
-        } else {
-            let onboardingViewController = OnboardingViewController.instantiate()
-            let env = OnboardingEnvironment(persistence: persistence, authorizationManager: authorizationManager, remoteNotificationManager: remoteNotificationManager, notificationCenter: NotificationCenter.default)
-            let coordinator = OnboardingCoordinator(persistence: persistence, authorizationManager: authorizationManager)
-            
-            onboardingViewController.inject(env: env, coordinator: coordinator, uiQueue: DispatchQueue.main) {
-                self.startMainApp()
-            }
-            
-            onboardingViewController.showIn(rootViewController: rootVC)
         }
 
         return true
@@ -135,19 +131,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     // MARK: - Private
     
-    func startMainApp() {
-        guard let rootViewController = window?.rootViewController as? RootViewController else {
-            return
-        }
-
-        appCoordinator = AppCoordinator(
-            rootViewController: rootViewController,
-            persistence: persistence,
-            registrationService: registrationService
-        )
-        appCoordinator.update()
-    }
-
     func flushContactEvents() {
         bluetoothNursery.contactEventCollector.flush()
     }

@@ -13,37 +13,41 @@ class AppCoordinatorTests: TestCase {
 
     func test_shows_you_are_okay_screen_when_diagnosis_is_nil() {
         let persistence = PersistenceDouble(diagnosis: nil)
-        let coordinator = AppCoordinator(rootViewController: parentViewControllerForTests, persistence: persistence, registrationService: RegistrationServiceDouble())
+        let container = ViewControllerContainerDouble()
+        let coordinator = AppCoordinator(container: container, persistence: persistence, registrationService: RegistrationServiceDouble())
 
         coordinator.update()
 
-        XCTAssertNotNil(parentViewControllerForTests.children[0] as? StatusViewController)
+        XCTAssertNotNil(container.currentChild as? StatusViewController)
     }
 
     func testShowView_diagnosisInfected() {
         let persistence = PersistenceDouble(diagnosis: .infected)
-        let coordinator = AppCoordinator(rootViewController: parentViewControllerForTests, persistence: persistence, registrationService: RegistrationServiceDouble())
+        let container = ViewControllerContainerDouble()
+        let coordinator = AppCoordinator(container: container, persistence: persistence, registrationService: RegistrationServiceDouble())
 
         coordinator.update()
 
-        XCTAssertNotNil(parentViewControllerForTests.children[0] as? PleaseSelfIsolateViewController)
+        XCTAssertNotNil(container.currentChild as? PleaseSelfIsolateViewController)
     }
     
     func testShowView_diagnosisNotInfected() {
         let persistence = PersistenceDouble(diagnosis: .notInfected)
-        let coordinator = AppCoordinator(rootViewController: parentViewControllerForTests, persistence: persistence, registrationService: RegistrationServiceDouble())
+        let container = ViewControllerContainerDouble()
+        let coordinator = AppCoordinator(container: container, persistence: persistence, registrationService: RegistrationServiceDouble())
 
         coordinator.update()
 
-        XCTAssertNotNil(parentViewControllerForTests.children[0] as? StatusViewController)
+        XCTAssertNotNil(container.currentChild as? StatusViewController)
     }
     
     func testShowView_diagnosisPotential() {
         let persistence = PersistenceDouble(diagnosis: .potential)
-        let coordinator = AppCoordinator(rootViewController: parentViewControllerForTests, persistence: persistence, registrationService: RegistrationServiceDouble())
+        let container = ViewControllerContainerDouble()
+        let coordinator = AppCoordinator(container: container, persistence: persistence, registrationService: RegistrationServiceDouble())
 
         coordinator.update()
         
-        XCTAssertNotNil(parentViewControllerForTests.children[0] as? PotentialViewController)
+        XCTAssertNotNil(container.currentChild as? PotentialViewController)
     }
 }

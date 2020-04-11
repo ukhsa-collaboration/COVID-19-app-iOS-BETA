@@ -15,7 +15,7 @@ class PostcodeViewControllerTests: TestCase {
         let vc = PostcodeViewController.instantiate()
         var continued = false
         vc.inject(persistence: persistence, notificationCenter: NotificationCenter()) { continued = true }
-        parentViewControllerForTests.show(viewController: vc)
+        XCTAssertNotNil(vc.view)
         
         vc.postcodeField.text = "1234"
         vc.didTapContinue()
@@ -29,8 +29,8 @@ class PostcodeViewControllerTests: TestCase {
         let vc = PostcodeViewController.instantiate()
         var continued = false
         vc.inject(persistence: persistence, notificationCenter: NotificationCenter()) { continued = true }
-        parentViewControllerForTests.show(viewController: vc)
-        
+        XCTAssertNotNil(vc.view)
+
         vc.didTapContinue()
         
         XCTAssertNil(persistence.partialPostcode)
