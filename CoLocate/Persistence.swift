@@ -29,7 +29,7 @@ class Persistence: Persisting {
     static var shared = Persistence()
 
     let secureRegistrationStorage: SecureRegistrationStorage
-    let logger = Logger(label: "Persistence")
+    let secureBroadcastRotationKeyStorage: BroadcastRotationKeyStorage
 
     weak var delegate: PersistenceDelegate?
 
@@ -88,12 +88,14 @@ class Persistence: Persisting {
         set { UserDefaults.standard.set(newValue, forKey: Keys.partialPostcode.rawValue) }
     }
 
-    init(secureRegistrationStorage: SecureRegistrationStorage) {
+    init(secureRegistrationStorage: SecureRegistrationStorage, secureBroadcastRotationKeyStorage: BroadcastRotationKeyStorage) {
         self.secureRegistrationStorage = secureRegistrationStorage
+        self.secureBroadcastRotationKeyStorage = secureBroadcastRotationKeyStorage
     }
 
     convenience init() {
-        self.init(secureRegistrationStorage: SecureRegistrationStorage.shared)
+        self.init(secureRegistrationStorage: SecureRegistrationStorage.shared,
+                  secureBroadcastRotationKeyStorage: SecureBroadcastRotationKeyStorage.shared)
     }
 
     func clear() {
@@ -102,6 +104,9 @@ class Persistence: Persisting {
         }
 
         try! secureRegistrationStorage.clear()
+        try! secureBroadcastRotationKeyStorage.clear()
     }
 
 }
+
+fileprivate let logger = Logger(label: "Persistence")
