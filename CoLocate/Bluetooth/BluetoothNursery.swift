@@ -33,6 +33,13 @@ class BluetoothNursery {
         contactEventRecorder = PlistContactEventRecorder.shared
         contactEventCollector = ContactEventCollector(contactEventRecorder: contactEventRecorder)
     }
+
+    func startBroadcastingAndListening(registration: Registration) {
+        ConcreteBroadcastIdGenerator.shared.sonarId = registration.id
+
+        startBroadcaster(stateDelegate: nil)
+        startListener(stateDelegate: BluetoothStateObserver.shared)
+    }
     
     func startListener(stateDelegate: BTLEListenerStateDelegate?) {
         startListenerCalled = true
@@ -51,6 +58,9 @@ class BluetoothNursery {
             CBPeripheralManagerOptionRestoreIdentifierKey: BluetoothNursery.peripheralRestoreIdentifier
         ])
         (broadcaster as? ConcreteBTLEBroadcaster)?.stateDelegate = stateDelegate
+
+        // TODO (tj) : I think this is unnecessary when the permissions view controller calls us
+        broadcaster?.tryStartAdvertising()
     }
     
 }

@@ -70,11 +70,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         window?.makeKeyAndVisible()
 
         if let registration = persistence.registration {
-            ConcreteBroadcastIdGenerator.shared.sonarId = registration.id
-            bluetoothNursery.startBroadcaster(stateDelegate: nil)
-            bluetoothNursery.broadcaster?.tryStartAdvertising()
-
-            bluetoothNursery.startListener(stateDelegate: BluetoothStateObserver.shared)
+            bluetoothNursery.startBroadcastingAndListening(registration: registration)
         }
 
         return true
@@ -158,11 +154,7 @@ extension AppDelegate: PersistenceDelegate {
     }
 
     func persistence(_ persistence: Persistence, didUpdateRegistration registration: Registration) {
-        ConcreteBroadcastIdGenerator.shared.sonarId = registration.id
-        bluetoothNursery.startBroadcaster(stateDelegate: nil)
-        bluetoothNursery.broadcaster?.tryStartAdvertising()
-
-        bluetoothNursery.startListener(stateDelegate: BluetoothStateObserver.shared)
+        bluetoothNursery.startBroadcastingAndListening(registration: registration)
     }
 }
 
