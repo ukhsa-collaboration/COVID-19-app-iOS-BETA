@@ -54,7 +54,8 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
     }
     
     private func startAdvertising(peripheral: CBPeripheralManager) {
-        guard !peripheral.isAdvertising else {
+        guard peripheral.isAdvertising == false else {
+            logger.error("Peripheral is already advertising. Will not advertise twice")
             return
         }
 
