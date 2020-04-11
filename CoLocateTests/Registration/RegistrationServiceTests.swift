@@ -31,7 +31,7 @@ class RegistrationServiceTests: TestCase {
         remoteNotificationDispatcher.pushToken = "the current push token"
         var finished = false
         var error: Error? = nil
-        registrationService.register(completionHandler: { r in
+        _ = registrationService.register(completionHandler: { r in
             finished = true
             if case .failure(let e) = r {
                 error = e
@@ -97,7 +97,7 @@ class RegistrationServiceTests: TestCase {
 
         var finished = false
         var error: Error? = nil
-        registrationService.register(completionHandler: { r in
+        _ = registrationService.register(completionHandler: { r in
             finished = true
             if case .failure(let e) = r {
                 error = e
@@ -165,7 +165,7 @@ class RegistrationServiceTests: TestCase {
                                                               remoteNotificationDispatcher: remoteNotificationDispatcher,
                                                               notificationCenter: notificationCenter)
 
-        registrationService.register(completionHandler: { _ in })
+        _ = registrationService.register(completionHandler: { _ in })
         
         session.requestSent = nil
         session.executeCompletion!(Result<(), Error>.failure(ErrorForTest()))
@@ -235,7 +235,7 @@ class RegistrationServiceTests: TestCase {
                                                               notificationCenter: notificationCenter)
         let notificationObserver = NotificationObserverDouble(notificationCenter: notificationCenter, notificationName: RegistrationStartedNotification)
 
-        registrationService.register { _ in }
+        _ = registrationService.register { _ in }
         
         XCTAssertNotNil(notificationObserver.lastNotification)
     }
