@@ -61,7 +61,6 @@ class PlistContactEventRecorder: ContactEventRecorder {
             contactEvents = try decoder.decode([ContactEvent].self, from: data)
         } catch {
             logger.critical("error reading contact events from disk: \(error)")
-            reset()
             fatalError()
         }
     }
