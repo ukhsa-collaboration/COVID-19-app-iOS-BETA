@@ -1,5 +1,5 @@
 //
-//  BroadcastIdEncypter.swift
+//  BroadcastIdEncrypter.swift
 //  CoLocate
 //
 //  Created by NHSX.
@@ -11,9 +11,7 @@ import Security
 
 import Logging
 
-class BroadcastIdEncypter {
-
-    public static var useNewBroadcastId = false
+class BroadcastIdEncrypter {
 
     let serverPublicKey: SecKey
     let sonarId: UUID
@@ -33,7 +31,7 @@ class BroadcastIdEncypter {
     }
 
     func broadcastId(for startDate: Date = Date(), until maybeDate: Date? = nil) -> Data {
-        if BroadcastIdEncypter.useNewBroadcastId == false {
+        if Persistence.shared.enableNewKeyRotation == false {
             return bytesFromSonarId()
         }
 

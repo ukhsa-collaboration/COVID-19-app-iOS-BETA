@@ -128,6 +128,10 @@ class DebugViewController: UITableViewController, Storyboarded {
     @IBAction func enableNewSelfDiagnosisChanged(_ sender: UISwitch) {
         persistence.enableNewSelfDiagnosis = sender.isOn
     }
+
+    @IBAction func enableNewKeyRotation(_ sender: UISwitch) {
+        persistence.enableNewKeyRotation = sender.isOn
+    }
 }
 
 class TestPushRequest: SecureRequest, Request {

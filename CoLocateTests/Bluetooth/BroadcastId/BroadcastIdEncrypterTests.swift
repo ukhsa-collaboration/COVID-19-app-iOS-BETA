@@ -21,7 +21,7 @@ class BroadcastIdEncypterTests: XCTestCase {
     var knownDate: Date!
     var laterDate: Date!
 
-    var encrypter: BroadcastIdEncypter!
+    var encrypter: BroadcastIdEncrypter!
 
     override func setUp() {
         super.setUp()
@@ -32,18 +32,18 @@ class BroadcastIdEncypterTests: XCTestCase {
 
         let serverPublicKey = knownGoodECPublicKey()
 
-        encrypter = BroadcastIdEncypter(key: serverPublicKey, sonarId: cannedId)
+        encrypter = BroadcastIdEncrypter(key: serverPublicKey, sonarId: cannedId)
     }
 
     func test_returns_uuid_as_bytes_by_default() throws {
-        BroadcastIdEncypter.useNewBroadcastId = false
+        Persistence.shared.enableNewKeyRotation = false
 
         let data = encrypter.broadcastId(for: knownDate)
         XCTAssertEqual("E1D160C7-F6E8-48BC-8687-63C696D910CB", asUUIDString(data))
     }
 
     func test_generates_ciphertext_that_are_the_correct_size() {
-        BroadcastIdEncypter.useNewBroadcastId = true
+        Persistence.shared.enableNewKeyRotation = true
 
         let encryptedId = encrypter.broadcastId(for: knownDate, until: laterDate)
 
@@ -58,7 +58,7 @@ class BroadcastIdEncypterTests: XCTestCase {
     }
 
     func test_ciphertext_contains_expected_data() throws {
-        BroadcastIdEncypter.useNewBroadcastId = true
+        Persistence.shared.enableNewKeyRotation = true
 
         #if targetEnvironment(simulator)
         throw XCTSkip("Cannot run this test in the simulator")
@@ -69,7 +69,7 @@ class BroadcastIdEncypterTests: XCTestCase {
             return
         }
 
-        encrypter = BroadcastIdEncypter(key: serverPublicKey, sonarId: cannedId)
+        encrypter = BroadcastIdEncrypter(key: serverPublicKey, sonarId: cannedId)
         let result = encrypter.broadcastId(for: knownDate, until: laterDate)
 
         let clearText = SecKeyCreateDecryptedData(serverPrivateKey,
@@ -88,7 +88,7 @@ class BroadcastIdEncypterTests: XCTestCase {
     }
 
     func test_generates_the_same_result_for_the_same_inputs() {
-        BroadcastIdEncypter.useNewBroadcastId = true
+        Persistence.shared.enableNewKeyRotation = true
 
         let first = encrypter.broadcastId(for: knownDate, until: laterDate)
         let second = encrypter.broadcastId(for: knownDate, until: laterDate)

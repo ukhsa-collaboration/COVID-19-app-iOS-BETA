@@ -123,8 +123,8 @@
 		F72EBD9E243C90E6009F9328 /* HumbleLocalNotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72EBD9D243C90E6009F9328 /* HumbleLocalNotificationScheduler.swift */; };
 		F72EBDA2243D0892009F9328 /* SecureBroadcastRotationKeyStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72EBDA1243D0892009F9328 /* SecureBroadcastRotationKeyStorage.swift */; };
 		F72EBDA5243D094A009F9328 /* SecureBroadcastRotationKeyStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72EBDA4243D094A009F9328 /* SecureBroadcastRotationKeyStorageTests.swift */; };
-		F72EBDA7243D2FD1009F9328 /* BroadcastIdEncypter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72EBDA6243D2FD1009F9328 /* BroadcastIdEncypter.swift */; };
-		F72EBDA9243D2FE6009F9328 /* BroadcastIdEncypterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72EBDA8243D2FE6009F9328 /* BroadcastIdEncypterTests.swift */; };
+		F72EBDA7243D2FD1009F9328 /* BroadcastIdEncrypter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72EBDA6243D2FD1009F9328 /* BroadcastIdEncrypter.swift */; };
+		F72EBDA9243D2FE6009F9328 /* BroadcastIdEncrypterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72EBDA8243D2FE6009F9328 /* BroadcastIdEncrypterTests.swift */; };
 		F758553A24294C8D00CBE1ED /* RequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F758553924294C8C00CBE1ED /* RequestFactory.swift */; };
 		F758B8BE242CB856003AE16D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F758B8BD242CB856003AE16D /* Localizable.strings */; };
 		F758B8C0242CB98C003AE16D /* UIViewController+Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = F758B8BF242CB98C003AE16D /* UIViewController+Storyboarded.swift */; };
@@ -295,8 +295,8 @@
 		F72EBD9D243C90E6009F9328 /* HumbleLocalNotificationScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HumbleLocalNotificationScheduler.swift; sourceTree = "<group>"; };
 		F72EBDA1243D0892009F9328 /* SecureBroadcastRotationKeyStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureBroadcastRotationKeyStorage.swift; sourceTree = "<group>"; };
 		F72EBDA4243D094A009F9328 /* SecureBroadcastRotationKeyStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureBroadcastRotationKeyStorageTests.swift; sourceTree = "<group>"; };
-		F72EBDA6243D2FD1009F9328 /* BroadcastIdEncypter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastIdEncypter.swift; sourceTree = "<group>"; };
-		F72EBDA8243D2FE6009F9328 /* BroadcastIdEncypterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastIdEncypterTests.swift; sourceTree = "<group>"; };
+		F72EBDA6243D2FD1009F9328 /* BroadcastIdEncrypter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastIdEncrypter.swift; sourceTree = "<group>"; };
+		F72EBDA8243D2FE6009F9328 /* BroadcastIdEncrypterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastIdEncrypterTests.swift; sourceTree = "<group>"; };
 		F758553924294C8C00CBE1ED /* RequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFactory.swift; sourceTree = "<group>"; };
 		F758B8BD242CB856003AE16D /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		F758B8BF242CB98C003AE16D /* UIViewController+Storyboarded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Storyboarded.swift"; sourceTree = "<group>"; };
@@ -755,7 +755,7 @@
 			isa = PBXGroup;
 			children = (
 				F72EBDA1243D0892009F9328 /* SecureBroadcastRotationKeyStorage.swift */,
-				F72EBDA6243D2FD1009F9328 /* BroadcastIdEncypter.swift */,
+				F72EBDA6243D2FD1009F9328 /* BroadcastIdEncrypter.swift */,
 				F7D62F2A2440D64C004C32A2 /* ConcreteBroadcastIdGenerator.swift */,
 			);
 			path = BroadcastId;
@@ -765,7 +765,7 @@
 			isa = PBXGroup;
 			children = (
 				F72EBDA4243D094A009F9328 /* SecureBroadcastRotationKeyStorageTests.swift */,
-				F72EBDA8243D2FE6009F9328 /* BroadcastIdEncypterTests.swift */,
+				F72EBDA8243D2FE6009F9328 /* BroadcastIdEncrypterTests.swift */,
 				F7D62F282440D4CB004C32A2 /* ConcreteBroadcastIdGeneratorTests.swift */,
 			);
 			path = BroadcastId;
@@ -1002,7 +1002,7 @@
 				0983ACCF243E6D3800DBB336 /* NotificationObserverDouble.swift in Sources */,
 				F67A2293242AA370002254B6 /* SecureRegistrationStorageTests.swift in Sources */,
 				214209D72423C9B600C7BFF3 /* PatchContactEventsRequestTests.swift in Sources */,
-				F72EBDA9243D2FE6009F9328 /* BroadcastIdEncypterTests.swift in Sources */,
+				F72EBDA9243D2FE6009F9328 /* BroadcastIdEncrypterTests.swift in Sources */,
 				F72EBD9B243C8750009F9328 /* BluetoothStateObserverTests.swift in Sources */,
 				090B1871243552C300870B5D /* UserNotificationCenterDouble.swift in Sources */,
 				21C417CA242CB0A200DEF3E2 /* ConfirmRegistrationRequestTests.swift in Sources */,
@@ -1038,7 +1038,7 @@
 				F72EBDA2243D0892009F9328 /* SecureBroadcastRotationKeyStorage.swift in Sources */,
 				21AF36AB241A8E50001A4910 /* BTLEListener.swift in Sources */,
 				21C09A8D24377F5100368203 /* CoreBluetoothExtensions.swift in Sources */,
-				F72EBDA7243D2FD1009F9328 /* BroadcastIdEncypter.swift in Sources */,
+				F72EBDA7243D2FD1009F9328 /* BroadcastIdEncrypter.swift in Sources */,
 				21C09A8D24377F5100368203 /* CoreBluetoothExtensions.swift in Sources */,
 				F72EBD9E243C90E6009F9328 /* HumbleLocalNotificationScheduler.swift in Sources */,
 				217A23BE243B34E8001B8236 /* UIDevice+ModelName.swift in Sources */,

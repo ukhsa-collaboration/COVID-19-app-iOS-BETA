@@ -20,7 +20,7 @@ class ConcreteBroadcastIdGenerator: BroadcastIdGenerator {
     var serverPublicKey: SecKey?
 
     let storage: BroadcastRotationKeyStorage
-    var encrypter: BroadcastIdEncypter?
+    var encrypter: BroadcastIdEncrypter?
 
     init(storage: BroadcastRotationKeyStorage) {
         self.storage = storage
@@ -56,9 +56,9 @@ class ConcreteBroadcastIdGenerator: BroadcastIdGenerator {
         }
     }
 
-    private func getEncrypter(key: SecKey, sonarId: UUID) -> BroadcastIdEncypter {
+    private func getEncrypter(key: SecKey, sonarId: UUID) -> BroadcastIdEncrypter {
         if self.encrypter == nil {
-            self.encrypter = BroadcastIdEncypter(key: key, sonarId: sonarId)
+            self.encrypter = BroadcastIdEncrypter(key: key, sonarId: sonarId)
         }
 
         return self.encrypter!
