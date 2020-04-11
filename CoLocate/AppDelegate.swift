@@ -102,19 +102,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func applicationDidBecomeActive(_ application: UIApplication) {
         logger.info("Did Become Active")
 
-        guard self.persistence.registration != nil else {
-            // TODO : is this true ? What about the last onboarding screen ?
-            logger.debug("Became active with nil registration. Assuming onboarding will handle this case")
-            return
-        }
+        guard self.persistence.registration != nil else { return }
 
         authorizationManager.notifications { [weak self] notificationStatus in
             guard let self = self else { return }
 
             DispatchQueue.main.sync {
-                guard let rootViewController = self.window?.rootViewController as? RootViewController else {
-                    return
-                }
+                guard let rootViewController = self.window?.rootViewController as? RootViewController else { return }
 
                 switch (self.authorizationManager.bluetooth, notificationStatus) {
                 case (.denied, _), (_, .denied):
@@ -146,13 +140,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     func scheduleLocalNotification() {
-        let content = UNMutableNotificationContent()
-        content.body = "To keep yourself secure, please relaunch the app."
+        let scheduler = HumbleLocalNotificationScheduler.shared
 
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
-        let request = UNNotificationRequest(identifier: "willTerminate.relaunch.please", content: content, trigger: trigger)
-
-        UNUserNotificationCenter.current().add(request)
+        scheduler.scheduleLocalNotification(
+            body: "To keep yourself secure, please relaunch the app.",
+            interval: 10,
+            identifier: "willTerminate.relaunch.please"
+        )
     }
 }
 

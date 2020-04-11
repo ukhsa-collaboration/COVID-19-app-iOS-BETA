@@ -25,9 +25,10 @@ struct BluetoothStateObserver: BTLEListenerStateDelegate {
     }
 
     func btleListener(_ listener: BTLEListener, didUpdateState state: CBManagerState) {
+        guard state == .poweredOff else { return }
+
         uiQueue.async {
             guard self.appStateReader.applicationState == .background else { return }
-            guard state == .poweredOff else { return }
             
             self.scheduler.scheduleLocalNotification(
                 body: "To keep yourself secure, please re-enable bluetooth",
