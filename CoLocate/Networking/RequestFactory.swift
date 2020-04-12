@@ -14,9 +14,13 @@ struct RequestFactory {
         return RegistrationRequest(pushToken: pushToken)
     }
     
-    static func confirmRegistrationRequest(activationCode: String, pushToken: String) -> ConfirmRegistrationRequest {
+    static func confirmRegistrationRequest(activationCode: String, pushToken: String, postalCode: String) -> ConfirmRegistrationRequest {
         let deviceModel = UIDevice.current.modelName
         let deviceOSVersion = UIDevice.current.systemVersion
-        return ConfirmRegistrationRequest(activationCode: activationCode, pushToken: pushToken, deviceModel: deviceModel, deviceOSVersion: deviceOSVersion)
+
+        return ConfirmRegistrationRequest(activationCode: activationCode,
+                                          pushToken: pushToken,
+                                          deviceModel: deviceModel, deviceOSVersion: deviceOSVersion,
+                                          postalCode: postalCode)
     }
 }

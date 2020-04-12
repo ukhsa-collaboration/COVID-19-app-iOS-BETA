@@ -135,7 +135,18 @@ fileprivate class RegistrationAttempt: Cancelable {
     }
     
     private func confirmRegistration(activationCode: String) {
-        let request = RequestFactory.confirmRegistrationRequest(activationCode: activationCode, pushToken: remoteNotificationDispatcher.pushToken!)
+        guard let pushToken = remoteNotificationDispatcher.pushToken else {
+            logger.critical("Tried to register without push token.")
+            return
+        }
+        guard let partialPostalCode = persistence.partialPostcode else {
+            logger.critical("Tried to register without partial postalCode")
+            return
+        }
+
+        let request = RequestFactory.confirmRegistrationRequest(activationCode: activationCode,
+                                                                pushToken: pushToken,
+                                                                postalCode: partialPostalCode)
         
         session.execute(request, queue: .main) { [weak self] result in
             guard let self = self, !self.canceled else { return }

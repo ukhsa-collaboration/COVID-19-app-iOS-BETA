@@ -16,7 +16,7 @@ class RegistrationServiceTests: TestCase {
 
     func testRegistration_withPreExistingPushToken() throws {
         let session = SessionDouble()
-        let persistence = PersistenceDouble()
+        let persistence = PersistenceDouble(partialPostcode: "AB90")
         let notificationCenter = NotificationCenter()
         let remoteNotificationDispatcher = RemoteNotificationDispatcher(
             notificationCenter: notificationCenter,
@@ -58,9 +58,10 @@ class RegistrationServiceTests: TestCase {
         
         // Verify the second request
         let confirmRegistrationRequest = (session.requestSent as! ConfirmRegistrationRequest).body!
-        let confirmResponse = try JSONDecoder().decode(ExpectedConfirmRegistrationRequestBody.self, from: confirmRegistrationRequest)
-        XCTAssertEqual(confirmResponse.activationCode, UUID(uuidString: activationCode))
-        XCTAssertEqual(confirmResponse.pushToken, "the current push token")
+        let confirmRegistrationPayload = try JSONDecoder().decode(ExpectedConfirmRegistrationRequestBody.self, from: confirmRegistrationRequest)
+        XCTAssertEqual(confirmRegistrationPayload.activationCode, UUID(uuidString: activationCode))
+        XCTAssertEqual(confirmRegistrationPayload.pushToken, "the current push token")
+        XCTAssertEqual(confirmRegistrationPayload.postalCode, "AB90")
         
         XCTAssertFalse(finished)
         
@@ -83,7 +84,7 @@ class RegistrationServiceTests: TestCase {
     
     func testRegistration_withoutPreExistingPushToken() throws {
         let session = SessionDouble()
-        let persistence = PersistenceDouble()
+        let persistence = PersistenceDouble(partialPostcode: "AB90")
         let notificationCenter = NotificationCenter()
         let remoteNotificationDispatcher = RemoteNotificationDispatcher(
             notificationCenter: notificationCenter,
@@ -130,6 +131,7 @@ class RegistrationServiceTests: TestCase {
         let confirmRegistrationPayload = try JSONDecoder().decode(ExpectedConfirmRegistrationRequestBody.self, from: confirmRegistrationBody)
         XCTAssertEqual(confirmRegistrationPayload.activationCode, UUID(uuidString: activationCode))
         XCTAssertEqual(confirmRegistrationPayload.pushToken, "a push token")
+        XCTAssertEqual(confirmRegistrationPayload.postalCode, "AB90")
 
         XCTAssertFalse(finished)
 
@@ -180,7 +182,7 @@ class RegistrationServiceTests: TestCase {
     
     func testRegistration_ignoresResponseAfterCancelation() {
         let session = SessionDouble()
-        let persistence = PersistenceDouble()
+        let persistence = PersistenceDouble(partialPostcode: "AB90")
         let notificationCenter = NotificationCenter()
         let remoteNotificationDispatcher = RemoteNotificationDispatcher(
             notificationCenter: notificationCenter,
@@ -262,4 +264,5 @@ private struct ExpectedRegistrationRequestBody: Codable {
 private struct ExpectedConfirmRegistrationRequestBody: Codable {
     let activationCode: UUID
     let pushToken: String
+    let postalCode: String
 }

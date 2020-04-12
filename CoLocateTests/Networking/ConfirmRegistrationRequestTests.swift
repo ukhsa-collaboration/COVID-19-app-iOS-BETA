@@ -17,11 +17,16 @@ class ConfirmRegistrationRequestTests: XCTestCase {
     let pushToken: String = "someBase64StringWeGotFromFirebase=="
     let deviceModel: String = "iDevice 42,17"
     let deviceOSVersion: String = "666.6"
+    let postalCode: String = "AB90"
 
     var request: ConfirmRegistrationRequest!
     
     override func setUp() {
-        request = ConfirmRegistrationRequest(activationCode: activationCode, pushToken: pushToken, deviceModel: deviceModel, deviceOSVersion: deviceOSVersion)
+        request = ConfirmRegistrationRequest(activationCode: activationCode,
+                                             pushToken: pushToken,
+                                             deviceModel: deviceModel,
+                                             deviceOSVersion: deviceOSVersion,
+                                             postalCode: postalCode)
 
         super.setUp()
     }
@@ -43,7 +48,7 @@ class ConfirmRegistrationRequestTests: XCTestCase {
     func testBody() {
         XCTAssertEqual(String(data: request.body!, encoding: .utf8)!,
 """
-{"activationCode":"an activation code","deviceModel":"iDevice 42,17","deviceOSVersion":"666.6","pushToken":"someBase64StringWeGotFromFirebase=="}
+{"activationCode":"an activation code","deviceModel":"iDevice 42,17","deviceOSVersion":"666.6","pushToken":"someBase64StringWeGotFromFirebase==","postalCode":"AB90"}
 """)
     }
 

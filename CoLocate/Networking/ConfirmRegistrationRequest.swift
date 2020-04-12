@@ -18,7 +18,7 @@ class ConfirmRegistrationRequest: Request {
     
     let headers: [String : String]
     
-    init(activationCode: String, pushToken: String, deviceModel: String, deviceOSVersion: String) {
+    init(activationCode: String, pushToken: String, deviceModel: String, deviceOSVersion: String, postalCode: String) {
         path = "/api/devices"
         headers = [
             "Accept": "application/json",
@@ -29,8 +29,13 @@ class ConfirmRegistrationRequest: Request {
             let pushToken: String
             let deviceModel: String
             let deviceOSVersion: String
+            let postalCode: String
         }
-        let body = Body(activationCode: activationCode, pushToken: pushToken, deviceModel: deviceModel, deviceOSVersion: deviceOSVersion)
+        let body = Body(activationCode: activationCode,
+                        pushToken: pushToken,
+                        deviceModel: deviceModel, deviceOSVersion: deviceOSVersion,
+                        postalCode: postalCode)
+
         let data = try! JSONEncoder().encode(body)
         method = HTTPMethod.post(data: data)
     }
