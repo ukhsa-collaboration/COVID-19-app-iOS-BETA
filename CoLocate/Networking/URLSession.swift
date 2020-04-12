@@ -39,7 +39,6 @@ extension URLSession: Session {
         
         let task = dataTask(with: urlRequest) { data, response, error in
             if let error = error {
-                logger.error("Request to \(request.path) failed with error: \(error)")
                 completion(.failure(error))
             }
             
@@ -50,8 +49,10 @@ extension URLSession: Session {
                     let parsed = try request.parse(data)
                     completion(.success(parsed))
 
-                case (_, let statusCode?, _):
-                    throw NSError(domain: "RequestErrorDomain", code: statusCode, userInfo: [NSLocalizedDescriptionKey: "Received \(statusCode) status code from server"])
+                case (let data?, let statusCode?, _):
+                    logger.error("Request to \(request.path) received \(statusCode). Response body: \(String(bytes: data, encoding: .utf8) ?? "<empty>")")
+                    let userInfo = [NSLocalizedDescriptionKey: "Sorry, your request at this time could not be completed. Please try again later."]
+                    throw NSError(domain: "RequestErrorDomain", code: statusCode, userInfo: userInfo)
 
                 case (_, _, let error?):
                     throw error
@@ -66,7 +67,6 @@ extension URLSession: Session {
 
         task.resume()
     }
-
 }
 
 private let logger = Logger(label: "URLSession")

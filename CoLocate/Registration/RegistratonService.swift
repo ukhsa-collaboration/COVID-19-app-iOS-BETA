@@ -128,7 +128,7 @@ fileprivate class RegistrationAttempt: Cancelable {
                 // See confirmRegistration().
 
             case .failure(let error):
-                logger.error("Error making first registration request: \(error)")
+                logger.error("Error making first registration request: \(error.localizedDescription)")
                 self.fail(withError: error)
             }
         }
