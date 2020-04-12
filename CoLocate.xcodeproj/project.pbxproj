@@ -569,7 +569,6 @@
 				0997D055243BDEEC0067346C /* RootViewController.swift */,
 				214209B9242216B700C7BFF3 /* Persistence.swift */,
 				89AEE89C243DF24900BF3861 /* Persisting.swift */,
-				F67A2290242AA35B002254B6 /* SecureRegistrationStorage.swift */,
 				6FC63C37241641BA007C8BF3 /* Assets.xcassets */,
 				A1E7A0582420028B0078174D /* NHS Colors.xcassets */,
 				89896E5F2435F15C00F949EA /* Base.xcconfig */,
@@ -801,6 +800,7 @@
 		F758B8D0242CC661003AE16D /* Registration */ = {
 			isa = PBXGroup;
 			children = (
+				F67A2290242AA35B002254B6 /* SecureRegistrationStorage.swift */,
 				098ED477242D7D050029B729 /* RegistratonService.swift */,
 			);
 			path = Registration;
