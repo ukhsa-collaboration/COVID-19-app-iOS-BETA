@@ -448,23 +448,23 @@
 		214209C02422276800C7BFF3 /* CoLocateTests */ = {
 			isa = PBXGroup;
 			children = (
-				0983ACD1243EB20A00DBB336 /* Status */,
 				214209C32422276800C7BFF3 /* Info.plist */,
-				89896E5E2435EB6500F949EA /* CoLocateTests.xcconfig */,
-				89896E612435F37300F949EA /* ProjectTests.swift */,
 				098ED484242E88D80029B729 /* AppCoordinatorTests.swift */,
 				214209C9242227B300C7BFF3 /* PersistenceTests.swift */,
+				21E5051224448AE30065C69B /* PlistPersisterTests.swift */,
+				89896E612435F37300F949EA /* ProjectTests.swift */,
 				F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */,
 				F68BFBF6242ACD17008EE68F /* TestHelpers.swift */,
+				89896E5E2435EB6500F949EA /* CoLocateTests.xcconfig */,
 				F72EBD99243C8738009F9328 /* Bluetooth */,
 				21F374002433845600926FB8 /* Contact Events */,
 				098ED486242E89760029B729 /* Doubles */,
 				214209DA242630CF00C7BFF3 /* Networking */,
 				F6F05A222433BEAC00FF4B72 /* Onboarding */,
-				F6CC2CAA242BCCE90079432B /* Remote Notifications */,
 				098ED479242D7E340029B729 /* Registration */,
+				F6CC2CAA242BCCE90079432B /* Remote Notifications */,
 				F67C5157243E7BD5008E2945 /* SelfDiagnosis */,
-				21E5051224448AE30065C69B /* PlistPersisterTests.swift */,
+				0983ACD1243EB20A00DBB336 /* Status */,
 			);
 			path = CoLocateTests;
 			sourceTree = "<group>";
