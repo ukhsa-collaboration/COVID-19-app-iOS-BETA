@@ -19,8 +19,7 @@ class SubmitSymptomsViewControllerTests: TestCase {
         let registration: Registration = Registration.fake
         let persistenceDouble = PersistenceDouble(registration: registration)
 
-        let contactEvents = [ContactEvent(sonarId: Data())]
-        let eventRecorderDouble = TestContactEventRecorder(contactEvents)
+        let contactEventRepository = MockContactEventRepository(contactEvents: [ContactEvent(sonarId: Data())])
 
         var actualRegistration: Registration?
         var actualContactEvents: [ContactEvent]?
@@ -28,7 +27,7 @@ class SubmitSymptomsViewControllerTests: TestCase {
         let vc = SubmitSymptomsViewController.instantiate()
         vc._inject(
             persistence: persistenceDouble,
-            contactEventRecorder: eventRecorderDouble,
+            contactEventRepository: contactEventRepository,
             sendContactEvents: { registration, contactEvents, _ in
                 actualRegistration = registration
                 actualContactEvents = contactEvents
@@ -44,20 +43,19 @@ class SubmitSymptomsViewControllerTests: TestCase {
 
         XCTAssertFalse(button.isEnabled)
         XCTAssertEqual(actualRegistration, registration)
-        XCTAssertEqual(actualContactEvents, contactEvents)
+        XCTAssertEqual(actualContactEvents, contactEventRepository.contactEvents)
     }
 
     func testSubmitSuccess() {
         let persistenceDouble = PersistenceDouble(registration: Registration.fake)
-        let testContactEvent = ContactEvent(sonarId: Data())
-        let eventRecorderDouble = TestContactEventRecorder([testContactEvent])
+        let contactEventRepository = MockContactEventRepository(contactEvents: [ContactEvent(sonarId: Data())])
 
         var completion: ((Result<Void, Error>) -> Void)?
 
         let vc = SubmitSymptomsViewController.instantiate()
         vc._inject(
             persistence: persistenceDouble,
-            contactEventRecorder: eventRecorderDouble,
+            contactEventRepository: contactEventRepository,
             sendContactEvents: { completion = $2 }
         )
 
@@ -72,21 +70,21 @@ class SubmitSymptomsViewControllerTests: TestCase {
 
         completion?(.success(()))
         
-        XCTAssertTrue(eventRecorderDouble.hasReset)
+        XCTAssertTrue(contactEventRepository.hasReset)
         XCTAssertTrue(button.isEnabled)
         XCTAssertTrue(unwinder.didUnwindFromSelfDiagnosis)
     }
 
     func testSubmitFailure() {
         let persistenceDouble = PersistenceDouble(registration: Registration.fake)
-        let eventRecorderDouble = TestContactEventRecorder()
+        let contactEventRepository = MockContactEventRepository(contactEvents: [ContactEvent(sonarId: Data())])
 
         var completion: ((Result<Void, Error>) -> Void)?
 
         let vc = SubmitSymptomsViewController.instantiate()
         vc._inject(
             persistence: persistenceDouble,
-            contactEventRecorder: eventRecorderDouble,
+            contactEventRepository: contactEventRepository,
             sendContactEvents: { completion = $2 }
         )
 
@@ -113,5 +111,18 @@ class SelfDiagnosisUnwinder: UIViewController {
     var didUnwindFromSelfDiagnosis = false
     @IBAction func unwindFromSelfDiagnosis(unwindSegue: UIStoryboardSegue) {
         didUnwindFromSelfDiagnosis = true
+    }
+}
+
+class MockContactEventRepository: ContactEventRepository {
+    var contactEvents: [ContactEvent] = []
+    var hasReset: Bool = false
+    
+    init(contactEvents: [ContactEvent]) {
+        self.contactEvents = contactEvents
+    }
+    
+    func reset() {
+        hasReset = true
     }
 }

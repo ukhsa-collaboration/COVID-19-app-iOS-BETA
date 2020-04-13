@@ -15,12 +15,12 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
     static let storyboardName = "SelfDiagnosis"
 
     private var persistence: Persisting!
-    private var contactEventRecorder: ContactEventRecorder!
+    private var contactEventRepository: ContactEventRepository!
     private var sendContactEvents: SendContactEvents!
 
-    func _inject(persistence: Persisting, contactEventRecorder: ContactEventRecorder, sendContactEvents: @escaping SendContactEvents) {
+    func _inject(persistence: Persisting, contactEventRepository: ContactEventRepository, sendContactEvents: @escaping SendContactEvents) {
         self.persistence = persistence
-        self.contactEventRecorder = contactEventRecorder
+        self.contactEventRepository = contactEventRepository
         self.sendContactEvents = sendContactEvents
     }
 
@@ -39,7 +39,6 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
             let request = requestFactory.patchContactsRequest(contactEvents: contactEvents)
             URLSession.shared.execute(request, queue: .main, completion: completion)
         }
-        contactEventRecorder = PlistContactEventRecorder.shared
     }
 
     @IBAction func submitTapped(_ sender: PrimaryButton) {
@@ -49,8 +48,7 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
 
         sender.isEnabled = false
 
-        let contactEvents = contactEventRecorder.contactEvents
-        sendContactEvents(registration, contactEvents, { [weak self] result in
+        sendContactEvents(registration, contactEventRepository.contactEvents, { [weak self] result in
             guard let self = self else { return }
 
             sender.isEnabled = true
@@ -58,7 +56,7 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
             switch result {
             case .success(_):
                 self.performSegue(withIdentifier: "unwindFromSelfDiagnosis", sender: self)
-                self.contactEventRecorder.reset()
+                self.contactEventRepository.reset()
             case .failure(let error):
                 self.alert(error: error)
             }

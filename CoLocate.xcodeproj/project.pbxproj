@@ -35,8 +35,6 @@
 		214209B62421072C00C7BFF3 /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209B52421072C00C7BFF3 /* StatusViewController.swift */; };
 		214209BA242216B700C7BFF3 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209B9242216B700C7BFF3 /* Persistence.swift */; };
 		214209CA242227B300C7BFF3 /* PersistenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209C9242227B300C7BFF3 /* PersistenceTests.swift */; };
-		214209CC2422755B00C7BFF3 /* PlistContactEventRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209CB2422755B00C7BFF3 /* PlistContactEventRecorder.swift */; };
-		214209CE24237A6300C7BFF3 /* PlistContactEventRecorderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209CD24237A6300C7BFF3 /* PlistContactEventRecorderTests.swift */; };
 		214209D0242396DA00C7BFF3 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209CF242396DA00C7BFF3 /* Session.swift */; };
 		214209D2242399CF00C7BFF3 /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209D1242399CF00C7BFF3 /* URLSession.swift */; };
 		214209D52423C83C00C7BFF3 /* PatchContactEventsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209D42423C83C00C7BFF3 /* PatchContactEventsRequest.swift */; };
@@ -52,8 +50,11 @@
 		21C417CA242CB0A200DEF3E2 /* ConfirmRegistrationRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C417C9242CB0A200DEF3E2 /* ConfirmRegistrationRequestTests.swift */; };
 		21C417CC242CB15D00DEF3E2 /* ConfirmRegistrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C417CB242CB15D00DEF3E2 /* ConfirmRegistrationRequest.swift */; };
 		21D93C302420C26900C1FA9B /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D93C2F2420C26900C1FA9B /* PrimaryButton.swift */; };
-		21F373FF2433844D00926FB8 /* ContactEventCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F373FE2433844D00926FB8 /* ContactEventCollector.swift */; };
-		21F37402243384D400926FB8 /* ContactEventCollectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F37401243384D400926FB8 /* ContactEventCollectorTests.swift */; };
+		21E50511244470590065C69B /* ContactEventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E50510244470590065C69B /* ContactEventTests.swift */; };
+		21E5051324448AE30065C69B /* PlistPersisterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E5051224448AE30065C69B /* PlistPersisterTests.swift */; };
+		21E5051524448D880065C69B /* PlistPersister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E5051424448D880065C69B /* PlistPersister.swift */; };
+		21F373FF2433844D00926FB8 /* ContactEventRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F373FE2433844D00926FB8 /* ContactEventRepository.swift */; };
+		21F37402243384D400926FB8 /* PersistingContactEventRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F37401243384D400926FB8 /* PersistingContactEventRepositoryTests.swift */; };
 		21F374042434C4BF00926FB8 /* LiveBTLEDebuggerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F374032434C4BF00926FB8 /* LiveBTLEDebuggerTableViewController.swift */; };
 		6FC63C31241641B8007C8BF3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC63C30241641B8007C8BF3 /* AppDelegate.swift */; };
 		6FC63C38241641BA007C8BF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FC63C37241641BA007C8BF3 /* Assets.xcassets */; };
@@ -81,7 +82,7 @@
 		89F06B352434AF9D0074C612 /* LogEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F06B342434AF9D0074C612 /* LogEvent.swift */; };
 		89F06B372434C35A0074C612 /* LoggerMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F06B362434C35A0074C612 /* LoggerMetadata.swift */; };
 		A1E7A0592420028B0078174D /* NHS Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1E7A0582420028B0078174D /* NHS Colors.xcassets */; };
-		AE2A5E502423C473007A4771 /* ContactEventRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2A5E4F2423C473007A4771 /* ContactEventRecorder.swift */; };
+		AE2A5E502423C473007A4771 /* ContactEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2A5E4F2423C473007A4771 /* ContactEvent.swift */; };
 		AE2DCAA0241920B600A940FC /* BTLEBroadcaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2DCA9F241920B600A940FC /* BTLEBroadcaster.swift */; };
 		AEC6A7BC241BD81A00B0237A /* LogoStrapline.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC6A7BB241BD81A00B0237A /* LogoStrapline.swift */; };
 		AEC6A7BE241BD82900B0237A /* LogoStrapline.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEC6A7BD241BD82900B0237A /* LogoStrapline.xib */; };
@@ -199,8 +200,6 @@
 		214209BF2422276800C7BFF3 /* CoLocateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoLocateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		214209C32422276800C7BFF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		214209C9242227B300C7BFF3 /* PersistenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceTests.swift; sourceTree = "<group>"; };
-		214209CB2422755B00C7BFF3 /* PlistContactEventRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlistContactEventRecorder.swift; sourceTree = "<group>"; };
-		214209CD24237A6300C7BFF3 /* PlistContactEventRecorderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlistContactEventRecorderTests.swift; sourceTree = "<group>"; };
 		214209CF242396DA00C7BFF3 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		214209D1242399CF00C7BFF3 /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
 		214209D42423C83C00C7BFF3 /* PatchContactEventsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchContactEventsRequest.swift; sourceTree = "<group>"; };
@@ -216,8 +215,11 @@
 		21C417C9242CB0A200DEF3E2 /* ConfirmRegistrationRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmRegistrationRequestTests.swift; sourceTree = "<group>"; };
 		21C417CB242CB15D00DEF3E2 /* ConfirmRegistrationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmRegistrationRequest.swift; sourceTree = "<group>"; };
 		21D93C2F2420C26900C1FA9B /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
-		21F373FE2433844D00926FB8 /* ContactEventCollector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactEventCollector.swift; sourceTree = "<group>"; };
-		21F37401243384D400926FB8 /* ContactEventCollectorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactEventCollectorTests.swift; sourceTree = "<group>"; };
+		21E50510244470590065C69B /* ContactEventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventTests.swift; sourceTree = "<group>"; };
+		21E5051224448AE30065C69B /* PlistPersisterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlistPersisterTests.swift; sourceTree = "<group>"; };
+		21E5051424448D880065C69B /* PlistPersister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlistPersister.swift; sourceTree = "<group>"; };
+		21F373FE2433844D00926FB8 /* ContactEventRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactEventRepository.swift; sourceTree = "<group>"; };
+		21F37401243384D400926FB8 /* PersistingContactEventRepositoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistingContactEventRepositoryTests.swift; sourceTree = "<group>"; };
 		21F374032434C4BF00926FB8 /* LiveBTLEDebuggerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveBTLEDebuggerTableViewController.swift; sourceTree = "<group>"; };
 		6FC63C2D241641B8007C8BF3 /* CoLocate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoLocate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FC63C30241641B8007C8BF3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -253,7 +255,7 @@
 		89F06B342434AF9D0074C612 /* LogEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogEvent.swift; sourceTree = "<group>"; };
 		89F06B362434C35A0074C612 /* LoggerMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerMetadata.swift; sourceTree = "<group>"; };
 		A1E7A0582420028B0078174D /* NHS Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "NHS Colors.xcassets"; sourceTree = "<group>"; };
-		AE2A5E4F2423C473007A4771 /* ContactEventRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventRecorder.swift; sourceTree = "<group>"; };
+		AE2A5E4F2423C473007A4771 /* ContactEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEvent.swift; sourceTree = "<group>"; };
 		AE2DCA9F241920B600A940FC /* BTLEBroadcaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTLEBroadcaster.swift; sourceTree = "<group>"; };
 		AEC6A7BB241BD81A00B0237A /* LogoStrapline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoStrapline.swift; sourceTree = "<group>"; };
 		AEC6A7BD241BD82900B0237A /* LogoStrapline.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogoStrapline.xib; sourceTree = "<group>"; };
@@ -452,7 +454,6 @@
 				89896E612435F37300F949EA /* ProjectTests.swift */,
 				098ED484242E88D80029B729 /* AppCoordinatorTests.swift */,
 				214209C9242227B300C7BFF3 /* PersistenceTests.swift */,
-				214209CD24237A6300C7BFF3 /* PlistContactEventRecorderTests.swift */,
 				F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */,
 				F68BFBF6242ACD17008EE68F /* TestHelpers.swift */,
 				F72EBD99243C8738009F9328 /* Bluetooth */,
@@ -463,6 +464,7 @@
 				F6CC2CAA242BCCE90079432B /* Remote Notifications */,
 				098ED479242D7E340029B729 /* Registration */,
 				F67C5157243E7BD5008E2945 /* SelfDiagnosis */,
+				21E5051224448AE30065C69B /* PlistPersisterTests.swift */,
 			);
 			path = CoLocateTests;
 			sourceTree = "<group>";
@@ -498,9 +500,8 @@
 		21B3D2DF24263A1100573061 /* Contact Events */ = {
 			isa = PBXGroup;
 			children = (
-				21F373FE2433844D00926FB8 /* ContactEventCollector.swift */,
-				AE2A5E4F2423C473007A4771 /* ContactEventRecorder.swift */,
-				214209CB2422755B00C7BFF3 /* PlistContactEventRecorder.swift */,
+				21F373FE2433844D00926FB8 /* ContactEventRepository.swift */,
+				AE2A5E4F2423C473007A4771 /* ContactEvent.swift */,
 			);
 			path = "Contact Events";
 			sourceTree = "<group>";
@@ -526,7 +527,8 @@
 		21F374002433845600926FB8 /* Contact Events */ = {
 			isa = PBXGroup;
 			children = (
-				21F37401243384D400926FB8 /* ContactEventCollectorTests.swift */,
+				21F37401243384D400926FB8 /* PersistingContactEventRepositoryTests.swift */,
+				21E50510244470590065C69B /* ContactEventTests.swift */,
 			);
 			path = "Contact Events";
 			sourceTree = "<group>";
@@ -568,6 +570,7 @@
 				6FC63C30241641B8007C8BF3 /* AppDelegate.swift */,
 				0997D055243BDEEC0067346C /* RootViewController.swift */,
 				214209B9242216B700C7BFF3 /* Persistence.swift */,
+				21E5051424448D880065C69B /* PlistPersister.swift */,
 				89AEE89C243DF24900BF3861 /* Persisting.swift */,
 				6FC63C37241641BA007C8BF3 /* Assets.xcassets */,
 				A1E7A0582420028B0078174D /* NHS Colors.xcassets */,
@@ -982,14 +985,14 @@
 				098ED47C242D801C0029B729 /* RegistrationServiceTests.swift in Sources */,
 				21B3D2E3242906AE00573061 /* SecureRequestTests.swift in Sources */,
 				214209CA242227B300C7BFF3 /* PersistenceTests.swift in Sources */,
-				214209CE24237A6300C7BFF3 /* PlistContactEventRecorderTests.swift in Sources */,
 				F632792124351C1900CF7A42 /* OnboardingViewControllerTests.swift in Sources */,
 				095A91182434FF1500ED6369 /* ApplicationDouble.swift in Sources */,
 				09CAA36C24413E0700CE93A6 /* ViewControllerContainerDouble.swift in Sources */,
 				F632792324351C8400CF7A42 /* OnboardingCoordinatorDouble.swift in Sources */,
-				21F37402243384D400926FB8 /* ContactEventCollectorTests.swift in Sources */,
+				21F37402243384D400926FB8 /* PersistingContactEventRepositoryTests.swift in Sources */,
 				F770A4572430F76B002FDED1 /* AppCoordinatorDouble.swift in Sources */,
 				098ED48C242E8B290029B729 /* PersistenceDouble.swift in Sources */,
+				21E50511244470590065C69B /* ContactEventTests.swift in Sources */,
 				098ED485242E88D80029B729 /* AppCoordinatorTests.swift in Sources */,
 				89896E622435F37300F949EA /* ProjectTests.swift in Sources */,
 				F6F05A2A2433C6CC00FF4B72 /* AuthManagerDouble.swift in Sources */,
@@ -998,6 +1001,7 @@
 				214209D924262B7500C7BFF3 /* SessionHelpers.swift in Sources */,
 				0983ACD3243EB22200DBB336 /* StatusViewControllerTests.swift in Sources */,
 				F600A60424297C010038DF57 /* RegistrationRequestTests.swift in Sources */,
+				21E5051324448AE30065C69B /* PlistPersisterTests.swift in Sources */,
 				098ED488242E89930029B729 /* PushNotificationManagerDouble.swift in Sources */,
 				0983ACCF243E6D3800DBB336 /* NotificationObserverDouble.swift in Sources */,
 				F67A2293242AA370002254B6 /* SecureRegistrationStorageTests.swift in Sources */,
@@ -1041,14 +1045,13 @@
 				F72EBD9E243C90E6009F9328 /* HumbleLocalNotificationScheduler.swift in Sources */,
 				217A23BE243B34E8001B8236 /* UIDevice+ModelName.swift in Sources */,
 				F78CEBED242D0836002254AD /* SecureRequestFactory.swift in Sources */,
-				21F373FF2433844D00926FB8 /* ContactEventCollector.swift in Sources */,
+				21F373FF2433844D00926FB8 /* ContactEventRepository.swift in Sources */,
 				21C09A8F2437B99F00368203 /* BluetoothNursery.swift in Sources */,
 				F6CC2CA9242BC7FC0079432B /* RemoteNotificationManager.swift in Sources */,
-				AE2A5E502423C473007A4771 /* ContactEventRecorder.swift in Sources */,
+				AE2A5E502423C473007A4771 /* ContactEvent.swift in Sources */,
 				89F06B332434AF130074C612 /* ForwardingLogHandler.swift in Sources */,
 				21B3D2E52429112B00573061 /* SecureRequest.swift in Sources */,
 				090B186F24354D0100870B5D /* RemoteNotificationDispatcher.swift in Sources */,
-				214209CC2422755B00C7BFF3 /* PlistContactEventRecorder.swift in Sources */,
 				895D9E4E24374EFA00573D4D /* AppRouter.swift in Sources */,
 				F758B8C0242CB98C003AE16D /* UIViewController+Storyboarded.swift in Sources */,
 				2115C3E624360427009C0F5B /* DebuggerTableViewCell.swift in Sources */,
@@ -1080,6 +1083,7 @@
 				F636453B243687DE0014FD54 /* PermissionsDeniedViewController.swift in Sources */,
 				89F06B2F2434A62C0074C612 /* LoggingManager.swift in Sources */,
 				09CAA3662440F3B100CE93A6 /* PostcodeViewController.swift in Sources */,
+				21E5051524448D880065C69B /* PlistPersister.swift in Sources */,
 				098ED483242E746E0029B729 /* DebugViewController.swift in Sources */,
 				89AEE89D243DF24900BF3861 /* Persisting.swift in Sources */,
 				F7D62F2B2440D64D004C32A2 /* ConcreteBroadcastIdGenerator.swift in Sources */,

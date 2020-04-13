@@ -1,5 +1,5 @@
 //
-//  ContactEventService.swift
+//  PlistPersister.swift
 //  CoLocate
 //
 //  Created by NHSX.
@@ -9,34 +9,32 @@
 import Foundation
 import Logging
 
-class PlistContactEventRecorder: ContactEventRecorder {
+class PlistPersister<T: Codable> {
     
-    // MARK: - New contact events
-    
-    static let shared: PlistContactEventRecorder = PlistContactEventRecorder()
+    var items: [T] = [] {
+        didSet {
+            writeItems()
+        }
+    }
     
     internal let fileURL: URL
+    
+    private let encoder: PropertyListEncoder
 
-    public private(set) var contactEvents: [ContactEvent] = []
-
-    internal init() {
+    internal init(fileName: String) {
         if let dirUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-            fileURL = dirUrl.appendingPathComponent("contactEvents.plist")
+            fileURL = dirUrl.appendingPathComponent(fileName + ".plist")
         } else {
-            logger.critical("couldn't open file for writing contactEvents.plist")
+            logger.critical("couldn't open file for writing \(fileName).plist")
             fatalError()
         }
-        readContactEvents()
+        encoder = PropertyListEncoder()
+        encoder.outputFormat = .binary
+        readItems()
     }
-
-    func record(_ contactEvent: ContactEvent) {
-        logger.info("recording \(contactEvent)")
-        contactEvents.append(contactEvent)
-        writeContactEvents()
-    }
-
+    
     func reset() {
-        contactEvents = []
+        items = []
         do {
             try FileManager.default.removeItem(at: fileURL)
         } catch (let error as NSError) where error.code == NSFileNoSuchFileError {
@@ -47,38 +45,35 @@ class PlistContactEventRecorder: ContactEventRecorder {
         }
     }
 
-    // MARK: - Private
-    
-    private func readContactEvents() {
+    private func readItems() {
         guard FileManager.default.isReadableFile(atPath: fileURL.path) else {
-            contactEvents = []
+            items = []
             return
         }
         
         let decoder = PropertyListDecoder()
         do {
             let data = try Data(contentsOf: fileURL)
-            contactEvents = try decoder.decode([ContactEvent].self, from: data)
+            items = try decoder.decode([T].self, from: data)
         } catch {
-            logger.critical("error reading contact events from disk: \(error)")
+            logger.critical("error reading items from plist: \(error)")
             fatalError()
         }
     }
-    
-    private func writeContactEvents() {
-        let encoder = PropertyListEncoder()
-        encoder.outputFormat = .binary
+
+    private func writeItems() {
         do {
             // TODO: These writing options mean if we reboot and are woken from background by a
             // BTLE event before the user unlocks their phone, we won't be able to record any data.
             // Can this happen in practice? Does it matter?
-            let data = try encoder.encode(contactEvents)
+            let data = try encoder.encode(items)
             try data.write(to: fileURL, options: [.completeFileProtectionUntilFirstUserAuthentication])
         } catch {
-            logger.critical("error writing contact events to disk: \(error)")
+            logger.critical("error writing items to disk: \(error)")
             fatalError()
         }
     }
+
 }
 
-private let logger = Logger(label: "ContactEvents")
+private let logger = Logger(label: "PlistPersister")

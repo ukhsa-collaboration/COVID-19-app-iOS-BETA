@@ -23,7 +23,7 @@ class PleaseSelfIsolateViewController: UIViewController, Storyboarded {
     var requestFactory: SecureRequestFactory?
 
     let session: Session = URLSession.shared
-    let contactEventRecorder: ContactEventRecorder = PlistContactEventRecorder.shared
+    let contactEventRepository: PersistingContactEventRepository = PersistingContactEventRepository.shared
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +40,7 @@ class PleaseSelfIsolateViewController: UIViewController, Storyboarded {
     }
 
     @IBAction func didTapNotify(_ sender: Any) {
-        let contactEvents = contactEventRecorder.contactEvents
+        let contactEvents = contactEventRepository.contactEvents
 
         guard let request = requestFactory?.patchContactsRequest(contactEvents: contactEvents) else {
             return

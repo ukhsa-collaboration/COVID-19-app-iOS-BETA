@@ -18,10 +18,8 @@ extension CBPeripheral: BTLEPeripheral {
 }
 
 protocol BTLEListenerDelegate {
-    func btleListener(_ listener: BTLEListener, didDisconnect peripheral: BTLEPeripheral, error: Error?)
-    func btleListener(_ listener: BTLEListener, didFind sonarUser: Data, forPeripheral peripheral: BTLEPeripheral)
+    func btleListener(_ listener: BTLEListener, didFind sonarId: Data, forPeripheral peripheral: BTLEPeripheral)
     func btleListener(_ listener: BTLEListener, didReadRSSI RSSI: Int, forPeripheral peripheral: BTLEPeripheral)
-    func btleListener(_ listener: BTLEListener, shouldReadRSSIFor peripheral: BTLEPeripheral) -> Bool
 }
 
 protocol BTLEListenerStateDelegate {
@@ -30,6 +28,7 @@ protocol BTLEListenerStateDelegate {
 
 protocol BTLEListener {
     func start(stateDelegate: BTLEListenerStateDelegate?, delegate: BTLEListenerDelegate?)
+    func connect(_ peripheral: BTLEPeripheral)
 }
 
 class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CBPeripheralDelegate {
@@ -40,19 +39,24 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
     
     var stateDelegate: BTLEListenerStateDelegate?
     var delegate: BTLEListenerDelegate?
-    var contactEventRecorder: ContactEventRecorder
+    
+    var central: CBCentralManager?
     
     var peripherals: [UUID: CBPeripheral] = [:]
-
-    init(contactEventRecorder: ContactEventRecorder) {
-        self.contactEventRecorder = contactEventRecorder
-    }
 
     func start(stateDelegate: BTLEListenerStateDelegate?, delegate: BTLEListenerDelegate?) {
         self.stateDelegate = stateDelegate
         self.delegate = delegate
     }
 
+    func connect(_ peripheral: BTLEPeripheral) {
+        guard let coreBluetoothPeripheral = peripherals[peripheral.identifier] else {
+            logger.info("can't connect to unknown peripheral with identifier \(peripheral.identifier)")
+            return
+        }
+        
+        central?.connect(coreBluetoothPeripheral)
+    }
     
     // MARK: CBCentralManagerDelegate
     
@@ -77,6 +81,7 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
         switch (central.state) {
                 
         case .poweredOn:
+            self.central = central
             
             // Ensure all "connected" peripherals are properly connected after state restoration
             for peripheral in peripherals.values {
@@ -107,14 +112,10 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
     }
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        guard peripherals[peripheral.identifier] == nil else {
-            logger.info("ignoring peripheral \(peripheral.identifierWithName) in state \(peripheral.state)")
-            return
-        }
-
-        logger.info("attempting connection to peripheral \(peripheral.identifierWithName) in state \(peripheral.state)")
+        logger.info("peripheral \(peripheral.identifierWithName) discovered at RSSI = \(RSSI)")
+        
         peripherals[peripheral.identifier] = peripheral
-        central.connect(peripheral)
+        delegate?.btleListener(self, didReadRSSI: RSSI.intValue, forPeripheral: peripheral)
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
@@ -130,7 +131,6 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
         } else {
             logger.info("\(peripheral.identifierWithName)")
         }
-        delegate?.btleListener(self, didDisconnect: peripheral, error: error)
                 
         peripherals[peripheral.identifier] = nil
     }
@@ -199,37 +199,15 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
             logger.info("no data found in characteristic \(characteristic)")
             return
         }
-
-        if data.count == 105 {
-            logger.info("peripheral \(peripheral.identifierWithName) appears to be a sonar device")
-            delegate?.btleListener(self, didFind: data, forPeripheral: peripheral)
-            peripheral.readRSSI()
-        } else {
+        
+        guard data.count == 105 else {
             logger.info("characteristic value is not a valid sonarId, because it has length \(data.count)")
-        }
-    }
-
-    func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?) {
-        guard error == nil else {
-            logger.info("peripheral \(peripheral.identifierWithName) error: \(error!)")
             return
         }
-        logger.info("peripheral \(peripheral.identifierWithName), RSSI: \(RSSI)")
 
-        delegate?.btleListener(self, didReadRSSI: RSSI.intValue, forPeripheral: peripheral)
-        
-        if delegate?.btleListener(self, shouldReadRSSIFor: peripheral) ?? false {
-            
-            // TODO: Not sure why this seems to block if it's not dispatched onto the main queue
-            // probably not even relevant after we've fixed the background RSSI sampling issue
-            DispatchQueue.main.async {
-                Timer.scheduledTimer(withTimeInterval: self.rssiSamplingInterval, repeats: false) { timer in
-                    if peripheral.state == .connected {
-                        peripheral.readRSSI()
-                    }
-                }
-            }
-        }
+        logger.info("successfully read sonarId from peripheral \(peripheral.identifierWithName), disconnecting now")
+        delegate?.btleListener(self, didFind: data, forPeripheral: peripheral)
+        central?.cancelPeripheralConnection(peripheral)
     }
 
 }

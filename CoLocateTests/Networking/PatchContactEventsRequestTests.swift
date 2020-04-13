@@ -32,9 +32,9 @@ class PatchContactEventsRequestTests: XCTestCase {
     
     override func setUp() {
         contactEvents = [
-            ContactEvent(sonarId: remoteSonarId1, timestamp: timestamp1, rssiValues: [rssi1], duration: 0),
-            ContactEvent(sonarId: remoteSonarId2, timestamp: timestamp2, rssiValues: [rssi2], duration: 0),
-            ContactEvent(sonarId: remoteSonarId3, timestamp: timestamp3, rssiValues: [rssi3], duration: 0)
+            ContactEvent(sonarId: remoteSonarId1, timestamp: timestamp1, rssiValues: [rssi1], rssiIntervals: [10], duration: 0),
+            ContactEvent(sonarId: remoteSonarId2, timestamp: timestamp2, rssiValues: [rssi2], rssiIntervals: [20], duration: 0),
+            ContactEvent(sonarId: remoteSonarId3, timestamp: timestamp3, rssiValues: [rssi3], rssiIntervals: [30], duration: 0)
         ]
 
         let registration = Registration(id: anonymousId, secretKey: dummyKey)
@@ -78,7 +78,7 @@ class PatchContactEventsRequestTests: XCTestCase {
     func testJsonSerialisedContactEvent() {
         let expectedJsonString =
 """
-{"contactEvents":[{"rssiValues":[-11],"timestamp":"1970-01-01T00:00:00Z","sonarId":"62D583B3052C4CF9808C0B96080F0DB8","duration":0},{"rssiValues":[-1],"timestamp":"1970-01-01T00:00:10Z","sonarId":"AA94DF1440774D6B9712D90861D8BDE7","duration":0},{"rssiValues":[-21],"timestamp":"1970-01-01T00:01:40Z","sonarId":"2F13DB8A7A5E47C991D004F6AE19D869","duration":0}]}
+{"contactEvents":[{"rssiValues":[-11],"timestamp":"1970-01-01T00:00:00Z","sonarId":"62D583B3052C4CF9808C0B96080F0DB8","rssiIntervals":[10],"duration":0},{"rssiValues":[-1],"timestamp":"1970-01-01T00:00:10Z","sonarId":"AA94DF1440774D6B9712D90861D8BDE7","rssiIntervals":[20],"duration":0},{"rssiValues":[-21],"timestamp":"1970-01-01T00:01:40Z","sonarId":"2F13DB8A7A5E47C991D004F6AE19D869","rssiIntervals":[30],"duration":0}]}
 """
         XCTAssertEqual(String(data: request.body!, encoding: .utf8)!, expectedJsonString)
     }

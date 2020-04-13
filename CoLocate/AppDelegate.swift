@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // but since I have JUST migrated the format of these records
         // if we don't do this, the app crashes upon startup
         // so I'm doing this so that everyone's unit tests and apps continue to work
-        PlistContactEventRecorder.shared.reset()
+        PersistingContactEventRepository.shared.reset()
 
         // TODO: If DEBUG is only necessary as long as we have the same bundle ID for both builds.
         #if INTERNAL || DEBUG
@@ -87,7 +87,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func applicationWillTerminate(_ application: UIApplication) {
         logger.info("Terminating")
 
-        flushContactEvents()
         scheduleLocalNotification()
     }
 
@@ -131,10 +130,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     // MARK: - Private
     
-    func flushContactEvents() {
-        bluetoothNursery.contactEventCollector.flush()
-    }
-
     func scheduleLocalNotification() {
         let scheduler = HumbleLocalNotificationScheduler.shared
 

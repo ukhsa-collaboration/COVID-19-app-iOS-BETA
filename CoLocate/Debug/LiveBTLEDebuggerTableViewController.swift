@@ -12,7 +12,7 @@ class LiveBTLEDebuggerTableViewController: UITableViewController {
 
     var persistence: Persistence = Persistence.shared
     
-    @objc var collector: ContactEventCollector = (UIApplication.shared.delegate as! AppDelegate).bluetoothNursery.contactEventCollector
+    @objc var repository: PersistingContactEventRepository = (UIApplication.shared.delegate as! AppDelegate).bluetoothNursery.contactEventRepository
     
     var observation: NSKeyValueObservation?
     
@@ -25,14 +25,14 @@ class LiveBTLEDebuggerTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        observation = observe(\.collector._contactEventCount) { object, change in
+        observation = observe(\.repository._contactEventCount) { object, change in
             DispatchQueue.main.async {
-                self.sonarIds = self.collector.contactEvents.compactMap({ $0.value.sonarId.base64EncodedString() })
+                self.sonarIds = self.repository.contactEvents.compactMap({ $0.sonarId?.base64EncodedString() })
                 self.tableView.reloadData()
             }
         }
         
-        sonarIds = Array(collector.contactEvents.values.compactMap({ $0.sonarId.base64EncodedString() }))
+        sonarIds = repository.contactEvents.compactMap({ $0.sonarId?.base64EncodedString() })
         tableView.reloadData()
     }
     

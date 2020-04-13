@@ -14,8 +14,7 @@ class BluetoothNursery {
     static let centralRestoreIdentifier: String = "SonarCentralRestoreIdentifier"
     static let peripheralRestoreIdentifier: String = "SonarPeripheralRestoreIdentifier"
     
-    let contactEventRecorder: ContactEventRecorder
-    let contactEventCollector: ContactEventCollector
+    let contactEventRepository: PersistingContactEventRepository
     
     let listenerQueue: DispatchQueue? = DispatchQueue(label: "BTLE Listener Queue")
     let broadcasterQueue: DispatchQueue? = DispatchQueue(label: "BTLE Broadcaster Queue")
@@ -30,8 +29,7 @@ class BluetoothNursery {
     var startBroadcasterCalled: Bool = false
     
     init() {
-        contactEventRecorder = PlistContactEventRecorder.shared
-        contactEventCollector = ContactEventCollector(contactEventRecorder: contactEventRecorder)
+        contactEventRepository = PersistingContactEventRepository.shared
     }
 
     func startBroadcastingAndListening(registration: Registration) {
@@ -43,12 +41,12 @@ class BluetoothNursery {
     
     func startListener(stateDelegate: BTLEListenerStateDelegate?) {
         startListenerCalled = true
-        listener = ConcreteBTLEListener(contactEventRecorder: contactEventRecorder)
+        listener = ConcreteBTLEListener()
         central = CBCentralManager(delegate: listener as! ConcreteBTLEListener, queue: listenerQueue, options: [
             CBCentralManagerOptionRestoreIdentifierKey: BluetoothNursery.centralRestoreIdentifier
         ])
         (listener as? ConcreteBTLEListener)?.stateDelegate = stateDelegate
-        (listener as? ConcreteBTLEListener)?.delegate = contactEventCollector
+        (listener as? ConcreteBTLEListener)?.delegate = contactEventRepository
     }
     
     func startBroadcaster(stateDelegate: BTLEBroadcasterStateDelegate?) {
