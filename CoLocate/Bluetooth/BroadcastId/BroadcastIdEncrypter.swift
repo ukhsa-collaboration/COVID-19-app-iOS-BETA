@@ -57,7 +57,7 @@ class BroadcastIdEncrypter {
 
         var error: Unmanaged<CFError>?
         let cipherText = SecKeyCreateEncryptedData(serverPublicKey,
-                                                   SecKeyAlgorithm.eciesEncryptionStandardX963SHA256AESGCM,
+                                                   SecKeyAlgorithm.eciesEncryptionStandardVariableIVX963SHA256AESGCM,
                                                    plainTextData as CFData,
                                                    &error) as Data?
 

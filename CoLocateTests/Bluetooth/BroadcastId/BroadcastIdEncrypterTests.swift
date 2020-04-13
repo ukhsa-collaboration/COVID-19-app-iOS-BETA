@@ -73,7 +73,7 @@ class BroadcastIdEncypterTests: XCTestCase {
         let result = encrypter.broadcastId(for: knownDate, until: laterDate)
 
         let clearText = SecKeyCreateDecryptedData(serverPrivateKey,
-                                                  .eciesEncryptionStandardX963SHA256AESGCM,
+                                                  .eciesEncryptionStandardVariableIVX963SHA256AESGCM,
                                                   result as CFData,
                                                   nil) as Data?
         XCTAssertNotNil(clearText)
