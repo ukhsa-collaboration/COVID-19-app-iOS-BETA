@@ -190,13 +190,13 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
             return
         }
 
-        guard let data = characteristic.value else {
-            logger.info("no data found in characteristic \(characteristic)")
+        guard characteristic.uuid == ConcreteBTLEBroadcaster.sonarIdCharacteristicUUID else {
+            logger.info("characteristic \(characteristic) does not have correct UUID")
             return
         }
 
-        guard characteristic.uuid == ConcreteBTLEBroadcaster.sonarIdCharacteristicUUID else {
-            logger.info("characteristic \(characteristic) does not have correct UUID")
+        guard let data = characteristic.value else {
+            logger.info("no data found in characteristic \(characteristic)")
             return
         }
 
