@@ -74,6 +74,8 @@ class StatusViewController: UIViewController, Storyboarded {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        registrationRetryButton.setTitle("RETRY".localized, for: .normal)
+
         diagnosisStatusView.layer.cornerRadius = 16
         diagnosisStatusView.layer.masksToBounds = true
         readLatestAdviceLabel.textColor = UIColor(named: "NHS Blue")
