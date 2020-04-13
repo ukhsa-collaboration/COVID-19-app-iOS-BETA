@@ -72,7 +72,7 @@ jobs:
         run: cp CoLocate.xcconfig.sample CoLocate.xcconfig
 
       - run: |
-          killall "Simulator"
+          killall "Simulator" || true
           xcrun simctl erase all
 
       - name: Run Test
