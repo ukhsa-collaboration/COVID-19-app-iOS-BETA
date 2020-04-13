@@ -21,8 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     let bluetoothNursery = BluetoothNursery()
     let authorizationManager = AuthorizationManager()
 
-    var appCoordinator: AppCoordinator!
-
     override init() {
         LoggingManager.bootstrap()
         
@@ -145,10 +143,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 // MARK: - PersistenceDelegate
 
 extension AppDelegate: PersistenceDelegate {
-    func persistence(_ persistence: Persistence, didRecordDiagnosis diagnosis: Diagnosis) {
-        appCoordinator.update()
-    }
-
     func persistence(_ persistence: Persistence, didUpdateRegistration registration: Registration) {
         bluetoothNursery.startBroadcastingAndListening(registration: registration)
     }

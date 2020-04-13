@@ -12,11 +12,28 @@ class AppCoordinator {
     private let container: ViewControllerContainer
     private let persistence: Persisting
     private let registrationService: RegistrationService
+    private let remoteNotificationDispatcher: RemoteNotificationDispatcher
         
-    init(container: ViewControllerContainer, persistence: Persisting, registrationService: RegistrationService) {
+    init(
+        container: ViewControllerContainer,
+        persistence: Persisting,
+        registrationService: RegistrationService,
+        remoteNotificationDispatcher: RemoteNotificationDispatcher
+    ) {
         self.container = container
         self.persistence = persistence
         self.registrationService = registrationService
+        self.remoteNotificationDispatcher = remoteNotificationDispatcher
+        
+        remoteNotificationDispatcher.registerHandler(forType: .potentialDisagnosis) { (userInfo, completionHandler) in
+            persistence.diagnosis = .potential
+            self.update()
+            completionHandler(.newData)
+        }
+    }
+    
+    deinit {
+        remoteNotificationDispatcher.removeHandler(forType: .potentialDisagnosis)
     }
 
     func update() {

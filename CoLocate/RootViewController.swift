@@ -59,7 +59,8 @@ class RootViewController: UIViewController {
         let appCoordinator = AppCoordinator(
             container: self,
             persistence: persistence,
-            registrationService: registrationService
+            registrationService: registrationService,
+            remoteNotificationDispatcher: remoteNotificationManager.dispatcher
         )
         appCoordinator.update()
     }

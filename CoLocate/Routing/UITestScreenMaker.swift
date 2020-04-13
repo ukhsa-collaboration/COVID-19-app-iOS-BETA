@@ -40,7 +40,7 @@ private extension OnboardingEnvironment {
         self.init(
             persistence: InMemoryPersistence(),
             authorizationManager: authorizationManager,
-            remoteNotificationManager: EphemeralRemoteNotificationManager(host: host, authorizationManager: authorizationManager),
+            remoteNotificationManager: EphemeralRemoteNotificationManager(host: host, authorizationManager: authorizationManager, dispatcher: RemoteNotificationDispatcher()),
             notificationCenter: NotificationCenter()
         )
     }
@@ -72,14 +72,16 @@ private class EphemeralAuthorizationManager: AuthorizationManaging {
 
 private class EphemeralRemoteNotificationManager: RemoteNotificationManager {
     
+    let dispatcher: RemoteNotificationDispatcher
     private let authorizationManager: EphemeralAuthorizationManager
     private weak var host: UIViewController?
     
     var pushToken: String? = nil
     
-    init(host: UIViewController, authorizationManager: EphemeralAuthorizationManager) {
+    init(host: UIViewController, authorizationManager: EphemeralAuthorizationManager, dispatcher: RemoteNotificationDispatcher) {
         self.host = host
         self.authorizationManager = authorizationManager
+        self.dispatcher = dispatcher
     }
     
     func configure() {

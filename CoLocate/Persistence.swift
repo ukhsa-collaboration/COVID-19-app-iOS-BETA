@@ -9,8 +9,8 @@
 import Foundation
 import Logging
 
+
 protocol PersistenceDelegate: class {
-    func persistence(_ persistence: Persistence, didRecordDiagnosis diagnosis: Diagnosis)
     func persistence(_ persistence: Persistence, didUpdateRegistration registration: Registration)
 }
 
@@ -74,7 +74,6 @@ class Persistence: Persisting {
             }
 
             UserDefaults.standard.set(diagnosis.rawValue, forKey: Keys.diagnosis.rawValue)
-            delegate?.persistence(self, didRecordDiagnosis: diagnosis)
         }
     }
 

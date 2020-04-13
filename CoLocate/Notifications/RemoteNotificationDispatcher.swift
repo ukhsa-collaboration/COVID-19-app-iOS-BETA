@@ -36,19 +36,16 @@ class RemoteNotificationDispatcher {
     private var handlers = HandlerDictionary()
     private let notificationCenter: NotificationCenter
     private let userNotificationCenter: UserNotificationCenter
-    private let persistence: Persisting
     
-    init(notificationCenter: NotificationCenter, userNotificationCenter: UserNotificationCenter, persistence: Persisting) {
+    init(notificationCenter: NotificationCenter, userNotificationCenter: UserNotificationCenter) {
         self.notificationCenter = notificationCenter
         self.userNotificationCenter = userNotificationCenter
-        self.persistence = persistence
     }
     
     convenience init() {
         self.init(
             notificationCenter: NotificationCenter.default,
-            userNotificationCenter: UNUserNotificationCenter.current(),
-            persistence: Persistence.shared
+            userNotificationCenter: UNUserNotificationCenter.current()
         )
     }
 
@@ -67,7 +64,7 @@ class RemoteNotificationDispatcher {
     func handleNotification(userInfo: [AnyHashable : Any], completionHandler: @escaping RemoteNotificationCompletionHandler) {
         // TODO: Move this out of the dispatcher?
         if let status = userInfo["status"] {
-            handleStatusUpdated(status: status)
+            handleStatusUpdated(status: status, completionHandler: completionHandler)
             return
         }
         
@@ -97,13 +94,13 @@ class RemoteNotificationDispatcher {
         if userInfo["activationCode"] as? String != nil {
             return .registrationActivationCode
         } else if userInfo["status"] as? String != nil {
-            return .statusChange
+            return .potentialDisagnosis
         } else {
             return nil
         }
     }
     
-    private func handleStatusUpdated(status: Any) {
+    private func handleStatusUpdated(status: Any, completionHandler: @escaping RemoteNotificationCompletionHandler) {
         guard status as? String == "Potential" else {
             logger.warning("Received unexpected status from remote notification: '\(status)'")
             return
@@ -122,7 +119,13 @@ class RemoteNotificationDispatcher {
             }
         }
 
-        persistence.diagnosis = .potential
+        guard let handler = handlers[.potentialDisagnosis] else {
+            logger.error("No registered handler for type potentialDisagnosis")
+            completionHandler(.failed)
+            return
+        }
+        
+        handler([:], completionHandler)
     }
 }
 

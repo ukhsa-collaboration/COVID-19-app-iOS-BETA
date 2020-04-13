@@ -13,8 +13,9 @@ class AppCoordinatorDouble: AppCoordinator {
     init() {
         super.init(
             container: ViewControllerContainerDouble(),
-            persistence: Persistence(),
-            registrationService: RegistrationServiceDouble()
+            persistence: Persistence(),  // TODO change this to use a double
+            registrationService: RegistrationServiceDouble(),
+            remoteNotificationDispatcher: RemoteNotificationDispatcher()
         )
     }
 

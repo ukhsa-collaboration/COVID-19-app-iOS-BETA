@@ -18,7 +18,7 @@ let PushTokenReceivedNotification = NSNotification.Name("PushTokenReceivedNotifi
 
 enum RemoteNotificationType {
     case registrationActivationCode
-    case statusChange
+    case potentialDisagnosis
 }
 
 // Actual push/remote notifications are done via callback becasue we (or rather, AppDelegate)
@@ -29,6 +29,8 @@ typealias RemoteNotificationHandler = (_ userInfo: [AnyHashable : Any], _ comple
 
 // Handles both push and remote notifiations.
 protocol RemoteNotificationManager {
+    var dispatcher: RemoteNotificationDispatcher { get }
+
     var pushToken: String? { get }
     
     func configure()
@@ -53,7 +55,7 @@ class ConcreteRemoteNotificationManager: NSObject, RemoteNotificationManager {
     private let messagingFactory: () -> TestableMessaging
     private let userNotificationCenter: UserNotificationCenter
     private let notificationCenter: NotificationCenter
-    private let dispatcher: RemoteNotificationDispatcher
+    let dispatcher: RemoteNotificationDispatcher
 
     init(
         firebase: TestableFirebaseApp.Type,
@@ -85,8 +87,7 @@ class ConcreteRemoteNotificationManager: NSObject, RemoteNotificationManager {
         firebase: TestableFirebaseApp.Type,
         messagingFactory: @escaping () -> TestableMessaging,
         userNotificationCenter: UserNotificationCenter,
-        notificationCenter: NotificationCenter,
-        persistence: Persistence
+        notificationCenter: NotificationCenter
     ) {
         self.init(
             firebase: firebase,
@@ -95,8 +96,7 @@ class ConcreteRemoteNotificationManager: NSObject, RemoteNotificationManager {
             notificationCenter: notificationCenter,
             dispatcher: RemoteNotificationDispatcher(
                 notificationCenter: notificationCenter,
-                userNotificationCenter: userNotificationCenter,
-                persistence: persistence
+                userNotificationCenter: userNotificationCenter
             )
         )
     }

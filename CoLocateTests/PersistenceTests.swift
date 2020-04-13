@@ -35,16 +35,7 @@ class PersistenceTests: TestCase {
         XCTAssertNil(diagnosis)
     }
     
-    func testDiagnosisIsPassedToDelegate() {
-        let delegate = PersistenceDelegateDouble()
-        let service = Persistence()
-        service.delegate = delegate
-        
-        service.diagnosis = .notInfected
-        
-        XCTAssertEqual(delegate.recordedDiagnosis, .notInfected)
-    }
-
+    
     func testRegistrationIsPassedToSecureRegistrationStorage() throws {
         let secureRegistrationStorage = SecureRegistrationStorage.shared
         let secureBroadcastRotationKeyStorage = SecureBroadcastRotationKeyStorage.shared
@@ -88,11 +79,6 @@ class PersistenceTests: TestCase {
 }
 
 class PersistenceDelegateDouble: NSObject, PersistenceDelegate {
-    var recordedDiagnosis: Diagnosis?
-    func persistence(_ persistence: Persistence, didRecordDiagnosis diagnosis: Diagnosis) {
-        recordedDiagnosis = diagnosis
-    }
-
     var recordedRegistration: Registration?
     func persistence(_ persistence: Persistence, didUpdateRegistration registration: Registration) {
         recordedRegistration = registration

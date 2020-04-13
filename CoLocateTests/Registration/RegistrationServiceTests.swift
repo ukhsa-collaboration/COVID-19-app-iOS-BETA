@@ -20,8 +20,7 @@ class RegistrationServiceTests: TestCase {
         let notificationCenter = NotificationCenter()
         let remoteNotificationDispatcher = RemoteNotificationDispatcher(
             notificationCenter: notificationCenter,
-            userNotificationCenter: UserNotificationCenterDouble(),
-            persistence: persistence
+            userNotificationCenter: UserNotificationCenterDouble()
         )
         let registrationService = ConcreteRegistrationService(session: session,
                                                               persistence: persistence,
@@ -88,8 +87,7 @@ class RegistrationServiceTests: TestCase {
         let notificationCenter = NotificationCenter()
         let remoteNotificationDispatcher = RemoteNotificationDispatcher(
             notificationCenter: notificationCenter,
-            userNotificationCenter: UserNotificationCenterDouble(),
-            persistence: persistence
+            userNotificationCenter: UserNotificationCenterDouble()
         )
         let registrationService = ConcreteRegistrationService(session: session,
                                                               persistence: persistence,
@@ -158,8 +156,7 @@ class RegistrationServiceTests: TestCase {
         let notificationCenter = NotificationCenter()
         let remoteNotificationDispatcher = RemoteNotificationDispatcher(
             notificationCenter: notificationCenter,
-            userNotificationCenter: UserNotificationCenterDouble(),
-            persistence: persistence
+            userNotificationCenter: UserNotificationCenterDouble()
         )
         remoteNotificationDispatcher.pushToken = "the current push token"
         let registrationService = ConcreteRegistrationService(session: session,
@@ -186,8 +183,7 @@ class RegistrationServiceTests: TestCase {
         let notificationCenter = NotificationCenter()
         let remoteNotificationDispatcher = RemoteNotificationDispatcher(
             notificationCenter: notificationCenter,
-            userNotificationCenter: UserNotificationCenterDouble(),
-            persistence: persistence
+            userNotificationCenter: UserNotificationCenterDouble()
         )
         let registrationService = ConcreteRegistrationService(session: session,
                                                               persistence: persistence,
@@ -228,8 +224,7 @@ class RegistrationServiceTests: TestCase {
         let notificationCenter = NotificationCenter()
         let remoteNotificationDispatcher = RemoteNotificationDispatcher(
             notificationCenter: notificationCenter,
-            userNotificationCenter: UserNotificationCenterDouble(),
-            persistence: persistence
+            userNotificationCenter: UserNotificationCenterDouble()
         )
         let registrationService = ConcreteRegistrationService(session: SessionDouble(),
                                                               persistence: persistence,
