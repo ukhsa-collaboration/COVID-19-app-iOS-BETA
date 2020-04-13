@@ -98,6 +98,6 @@ extension Data {
     }
 
     func asUIColor(alpha: CGFloat) -> UIColor {
-        return UIColor(red: CGFloat(self[0]) / 255.0, green: CGFloat(self[1]) / 255.0, blue: CGFloat(self[2]) / 255.0, alpha: alpha)
+        return UIColor(red: CGFloat(self[1]) / 255.0, green: CGFloat(self[2]) / 255.0, blue: CGFloat(self[3]) / 255.0, alpha: alpha)
     }
 }
