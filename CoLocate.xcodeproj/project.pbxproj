@@ -13,6 +13,7 @@
 		0983ACCD243E566800DBB336 /* ErrorForTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983ACCC243E566800DBB336 /* ErrorForTest.swift */; };
 		0983ACCF243E6D3800DBB336 /* NotificationObserverDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983ACCE243E6D3800DBB336 /* NotificationObserverDouble.swift */; };
 		0983ACD3243EB22200DBB336 /* StatusViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983ACD2243EB22200DBB336 /* StatusViewControllerTests.swift */; };
+		0986EFB5244518FE008D0E1D /* ButtonWithDynamicType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0986EFB4244518FE008D0E1D /* ButtonWithDynamicType.swift */; };
 		098ED478242D7D050029B729 /* RegistratonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED477242D7D050029B729 /* RegistratonService.swift */; };
 		098ED47C242D801C0029B729 /* RegistrationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED47A242D7E460029B729 /* RegistrationServiceTests.swift */; };
 		098ED481242E745F0029B729 /* Debug.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 098ED480242E745F0029B729 /* Debug.storyboard */; };
@@ -171,6 +172,7 @@
 		0983ACCC243E566800DBB336 /* ErrorForTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorForTest.swift; sourceTree = "<group>"; };
 		0983ACCE243E6D3800DBB336 /* NotificationObserverDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationObserverDouble.swift; sourceTree = "<group>"; };
 		0983ACD2243EB22200DBB336 /* StatusViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewControllerTests.swift; sourceTree = "<group>"; };
+		0986EFB4244518FE008D0E1D /* ButtonWithDynamicType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonWithDynamicType.swift; sourceTree = "<group>"; };
 		098ED477242D7D050029B729 /* RegistratonService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistratonService.swift; sourceTree = "<group>"; };
 		098ED47A242D7E460029B729 /* RegistrationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationServiceTests.swift; sourceTree = "<group>"; };
 		098ED480242E745F0029B729 /* Debug.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Debug.storyboard; sourceTree = "<group>"; };
@@ -422,6 +424,7 @@
 				AEC6A7BB241BD81A00B0237A /* LogoStrapline.swift */,
 				21D93C2F2420C26900C1FA9B /* PrimaryButton.swift */,
 				AEC6A7BD241BD82900B0237A /* LogoStrapline.xib */,
+				0986EFB4244518FE008D0E1D /* ButtonWithDynamicType.swift */,
 			);
 			path = Appearance;
 			sourceTree = "<group>";
@@ -1017,6 +1020,7 @@
 				F78CEBED242D0836002254AD /* SecureRequestFactory.swift in Sources */,
 				21F373FF2433844D00926FB8 /* ContactEventRepository.swift in Sources */,
 				21C09A8F2437B99F00368203 /* BluetoothNursery.swift in Sources */,
+				0986EFB5244518FE008D0E1D /* ButtonWithDynamicType.swift in Sources */,
 				F6CC2CA9242BC7FC0079432B /* RemoteNotificationManager.swift in Sources */,
 				AE2A5E502423C473007A4771 /* ContactEvent.swift in Sources */,
 				89F06B332434AF130074C612 /* ForwardingLogHandler.swift in Sources */,
