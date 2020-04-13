@@ -264,7 +264,7 @@
                                                 <rect key="frame" x="20" y="157" width="280" height="34"/>
                                                 <accessibility key="accessibilityConfiguration" label="Post code"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="postal-code"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="lkE-bN-ikk" id="hoE-bE-NAc"/>
                                                 </connections>
