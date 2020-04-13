@@ -22,7 +22,7 @@ jobs:
         id: check-upload-tag
         run: |
           git fetch origin test-flight
-          git fetch origin upload-to-test-flight
+          git fetch --tags
           git branch --contains tags/upload-to-test-flight | grep test-flight || echo "::set-output name=upload::true"
 
       - name: Trigger deployment
