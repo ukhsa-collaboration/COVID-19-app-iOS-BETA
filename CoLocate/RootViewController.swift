@@ -21,6 +21,7 @@ class RootViewController: UIViewController {
     private var registrationService: RegistrationService! = nil
     private var session: Session! = nil
     private var contactEventRepository: PersistingContactEventRepository! = nil
+    private var statusViewController: StatusViewController!
 
     func inject(
         persistence: Persisting,
@@ -39,6 +40,23 @@ class RootViewController: UIViewController {
         self.registrationService = registrationService
         self.session = session
         self.contactEventRepository = contactEventRepository
+
+        statusViewController = StatusViewController.instantiate()
+        statusViewController.inject(
+            persistence: persistence,
+            registrationService: registrationService,
+            mainQueue: DispatchQueue.main
+        )
+
+        remoteNotificationManager.dispatcher.registerHandler(forType: .potentialDisagnosis) { (userInfo, completionHandler) in
+            persistence.diagnosis = .potential
+            self.statusViewController.diagnosis = .potential
+            completionHandler(.newData)
+        }
+    }
+
+    deinit {
+        remoteNotificationManager.dispatcher.removeHandler(forType: .potentialDisagnosis)
     }
     
     override func viewDidLoad() {
@@ -48,30 +66,18 @@ class RootViewController: UIViewController {
     // MARK: - Routing
     func showFirstView() {
         if persistence.registration != nil {
-            startMainApp()
+            show(viewController: statusViewController)
         } else {
             let onboardingViewController = OnboardingViewController.instantiate()
             let env = OnboardingEnvironment(persistence: persistence, authorizationManager: authorizationManager, remoteNotificationManager: remoteNotificationManager, notificationCenter: NotificationCenter.default)
             let coordinator = OnboardingCoordinator(persistence: persistence, authorizationManager: authorizationManager)
             
             onboardingViewController.inject(env: env, coordinator: coordinator, uiQueue: DispatchQueue.main) {
-                self.startMainApp()
+                self.show(viewController: self.statusViewController)
             }
             
             onboardingViewController.showIn(container: self)
         }
-    }
-    
-    private func startMainApp() {
-        let appCoordinator = AppCoordinator(
-            container: self,
-            persistence: persistence,
-            registrationService: registrationService,
-            remoteNotificationDispatcher: remoteNotificationManager.dispatcher,
-            session: session,
-            contactEventRepository: contactEventRepository
-        )
-        appCoordinator.update()
     }
     
     // MARK: - Debug view controller management

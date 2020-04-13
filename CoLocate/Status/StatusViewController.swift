@@ -118,13 +118,9 @@ class StatusViewController: UIViewController, Storyboarded {
     @IBAction func retryRegistrationTapped() {
         register()
     }
-    
-    @IBAction func unwindFromOnboarding(unwindSegue: UIStoryboardSegue) {
-        dismiss(animated: true)
-    }
 
     @IBAction func unwindFromSelfDiagnosis(unwindSegue: UIStoryboardSegue) {
-        dismiss(animated: true)
+        diagnosis = persistence.diagnosis
     }
     
     private func register() {

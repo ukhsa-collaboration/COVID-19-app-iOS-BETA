@@ -34,6 +34,7 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         super.awakeFromNib()
 
         persistence = Persistence.shared
+        contactEventRepository = PersistingContactEventRepository.shared
         sendContactEvents = { registration, contactEvents, completion in
             let requestFactory = ConcreteSecureRequestFactory(registration: registration)
             let request = requestFactory.patchContactsRequest(contactEvents: contactEvents)
@@ -47,6 +48,14 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         }
 
         sender.isEnabled = false
+
+        // NOTE: This is not spec'ed out, and is only here
+        // so we can make sure this flow works through the
+        // app during debugging. This will need to be replaced
+        // with real business logic in the future.
+        if hasHighTemperature && hasNewCough {
+            persistence.diagnosis = .infected
+        }
 
         sendContactEvents(registration, contactEventRepository.contactEvents, { [weak self] result in
             guard let self = self else { return }

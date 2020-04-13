@@ -17,7 +17,6 @@
 		098ED47C242D801C0029B729 /* RegistrationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED47A242D7E460029B729 /* RegistrationServiceTests.swift */; };
 		098ED481242E745F0029B729 /* Debug.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 098ED480242E745F0029B729 /* Debug.storyboard */; };
 		098ED483242E746E0029B729 /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED482242E746E0029B729 /* DebugViewController.swift */; };
-		098ED485242E88D80029B729 /* AppCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED484242E88D80029B729 /* AppCoordinatorTests.swift */; };
 		098ED488242E89930029B729 /* PushNotificationManagerDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED487242E89930029B729 /* PushNotificationManagerDouble.swift */; };
 		098ED48A242E89D80029B729 /* RegistrationServiceDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED489242E89D80029B729 /* RegistrationServiceDouble.swift */; };
 		098ED48C242E8B290029B729 /* PersistenceDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED48B242E8B290029B729 /* PersistenceDouble.swift */; };
@@ -132,7 +131,6 @@
 		F758553A24294C8D00CBE1ED /* RequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F758553924294C8C00CBE1ED /* RequestFactory.swift */; };
 		F758B8BE242CB856003AE16D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F758B8BD242CB856003AE16D /* Localizable.strings */; };
 		F758B8C0242CB98C003AE16D /* UIViewController+Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = F758B8BF242CB98C003AE16D /* UIViewController+Storyboarded.swift */; };
-		F758B8C2242CBAF5003AE16D /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F758B8C1242CBAF5003AE16D /* AppCoordinator.swift */; };
 		F758B8C4242CC0EE003AE16D /* Status.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F758B8C3242CC0EE003AE16D /* Status.storyboard */; };
 		F758B8C9242CC183003AE16D /* PleaseSelfIsolate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F758B8C8242CC183003AE16D /* PleaseSelfIsolate.storyboard */; };
 		F78CEB47242B7752002254AD /* String+localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78CEB46242B7752002254AD /* String+localized.swift */; };
@@ -181,7 +179,6 @@
 		098ED47A242D7E460029B729 /* RegistrationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationServiceTests.swift; sourceTree = "<group>"; };
 		098ED480242E745F0029B729 /* Debug.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Debug.storyboard; sourceTree = "<group>"; };
 		098ED482242E746E0029B729 /* DebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
-		098ED484242E88D80029B729 /* AppCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinatorTests.swift; sourceTree = "<group>"; };
 		098ED487242E89930029B729 /* PushNotificationManagerDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationManagerDouble.swift; sourceTree = "<group>"; };
 		098ED489242E89D80029B729 /* RegistrationServiceDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationServiceDouble.swift; sourceTree = "<group>"; };
 		098ED48B242E8B290029B729 /* PersistenceDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceDouble.swift; sourceTree = "<group>"; };
@@ -307,7 +304,6 @@
 		F758553924294C8C00CBE1ED /* RequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFactory.swift; sourceTree = "<group>"; };
 		F758B8BD242CB856003AE16D /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		F758B8BF242CB98C003AE16D /* UIViewController+Storyboarded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Storyboarded.swift"; sourceTree = "<group>"; };
-		F758B8C1242CBAF5003AE16D /* AppCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		F758B8C3242CC0EE003AE16D /* Status.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Status.storyboard; sourceTree = "<group>"; };
 		F758B8C8242CC183003AE16D /* PleaseSelfIsolate.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PleaseSelfIsolate.storyboard; sourceTree = "<group>"; };
 		F78CEB46242B7752002254AD /* String+localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+localized.swift"; sourceTree = "<group>"; };
@@ -455,7 +451,6 @@
 			isa = PBXGroup;
 			children = (
 				214209C32422276800C7BFF3 /* Info.plist */,
-				098ED484242E88D80029B729 /* AppCoordinatorTests.swift */,
 				214209C9242227B300C7BFF3 /* PersistenceTests.swift */,
 				21E5051224448AE30065C69B /* PlistPersisterTests.swift */,
 				89896E612435F37300F949EA /* ProjectTests.swift */,
@@ -572,7 +567,6 @@
 				F78CEB53242B7E18002254AD /* CoLocate-Bridging-Header.h */,
 				F78CEB67242B8C2B002254AD /* GoogleService-Info.plist */,
 				6FC63C3C241641BA007C8BF3 /* Info.plist */,
-				F758B8C1242CBAF5003AE16D /* AppCoordinator.swift */,
 				6FC63C30241641B8007C8BF3 /* AppDelegate.swift */,
 				0997D055243BDEEC0067346C /* RootViewController.swift */,
 				214209B9242216B700C7BFF3 /* Persistence.swift */,
@@ -1000,7 +994,6 @@
 				09B103622444E9110091834D /* ContactEventPersisterDouble.swift in Sources */,
 				098ED48C242E8B290029B729 /* PersistenceDouble.swift in Sources */,
 				21E50511244470590065C69B /* ContactEventTests.swift in Sources */,
-				098ED485242E88D80029B729 /* AppCoordinatorTests.swift in Sources */,
 				89896E622435F37300F949EA /* ProjectTests.swift in Sources */,
 				F6F05A2A2433C6CC00FF4B72 /* AuthManagerDouble.swift in Sources */,
 				F6F05A242433BEC000FF4B72 /* OnboardingCoordinatorTests.swift in Sources */,
@@ -1042,7 +1035,6 @@
 				F6F05A36243436D200FF4B72 /* PrivacyViewController.swift in Sources */,
 				F6F05A282433C55300FF4B72 /* AuthorizationManager.swift in Sources */,
 				89F06B352434AF9D0074C612 /* LogEvent.swift in Sources */,
-				F758B8C2242CBAF5003AE16D /* AppCoordinator.swift in Sources */,
 				F613936E243FA82B003447E8 /* Appearance.swift in Sources */,
 				F6F05A342434344200FF4B72 /* StartNowViewController.swift in Sources */,
 				0997D056243BDEEC0067346C /* RootViewController.swift in Sources */,

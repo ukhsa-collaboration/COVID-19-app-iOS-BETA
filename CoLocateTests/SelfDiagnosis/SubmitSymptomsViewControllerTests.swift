@@ -33,6 +33,8 @@ class SubmitSymptomsViewControllerTests: TestCase {
                 actualContactEvents = contactEvents
             }
         )
+        vc.hasHighTemperature = false
+        vc.hasNewCough = true
 
         let unwinder = SelfDiagnosisUnwinder()
         parentViewControllerForTests.viewControllers = [unwinder]
@@ -58,6 +60,8 @@ class SubmitSymptomsViewControllerTests: TestCase {
             contactEventRepository: contactEventRepository,
             sendContactEvents: { completion = $2 }
         )
+        vc.hasHighTemperature = false
+        vc.hasNewCough = true
 
         let unwinder = SelfDiagnosisUnwinder()
         parentViewControllerForTests.viewControllers = [unwinder]
@@ -87,6 +91,8 @@ class SubmitSymptomsViewControllerTests: TestCase {
             contactEventRepository: contactEventRepository,
             sendContactEvents: { completion = $2 }
         )
+        vc.hasHighTemperature = false
+        vc.hasNewCough = true
 
         let unwinder = SelfDiagnosisUnwinder()
         parentViewControllerForTests.viewControllers = [unwinder]
