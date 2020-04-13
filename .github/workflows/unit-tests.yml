@@ -71,6 +71,10 @@ jobs:
       - name: Setup Build Configuration
         run: cp CoLocate.xcconfig.sample CoLocate.xcconfig
 
+      - run: |
+          killall "Simulator"
+          xcrun simctl erase all
+
       - name: Run Test
         run: >
           xcodebuild
