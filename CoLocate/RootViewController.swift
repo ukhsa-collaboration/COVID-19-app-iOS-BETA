@@ -19,19 +19,26 @@ class RootViewController: UIViewController {
     private var remoteNotificationManager: RemoteNotificationManager! = nil
     private var notificationCenter: NotificationCenter! = nil
     private var registrationService: RegistrationService! = nil
+    private var session: Session! = nil
+    private var contactEventRepository: PersistingContactEventRepository! = nil
 
     func inject(
         persistence: Persisting,
         authorizationManager: AuthorizationManaging,
         remoteNotificationManager: RemoteNotificationManager,
         notificationCenter: NotificationCenter,
-        registrationService: RegistrationService
+        registrationService: RegistrationService,
+        session: Session,
+        contactEventRepository: PersistingContactEventRepository
+
     ) {
         self.persistence = persistence
         self.authorizationManager = authorizationManager
         self.remoteNotificationManager = remoteNotificationManager
         self.notificationCenter = notificationCenter
         self.registrationService = registrationService
+        self.session = session
+        self.contactEventRepository = contactEventRepository
     }
     
     override func viewDidLoad() {
@@ -60,7 +67,9 @@ class RootViewController: UIViewController {
             container: self,
             persistence: persistence,
             registrationService: registrationService,
-            remoteNotificationDispatcher: remoteNotificationManager.dispatcher
+            remoteNotificationDispatcher: remoteNotificationManager.dispatcher,
+            session: session,
+            contactEventRepository: contactEventRepository
         )
         appCoordinator.update()
     }

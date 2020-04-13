@@ -10,7 +10,7 @@ import Foundation
 @testable import CoLocate
 
 class RemoteNotificationManagerDouble: RemoteNotificationManager {
-    let dispatcher = RemoteNotificationDispatcher()
+    let dispatcher = RemoteNotificationDispatcher(notificationCenter: NotificationCenter(), userNotificationCenter: UserNotificationCenterDouble())
     var pushToken: String?
     var handlers: [RemoteNotificationType : RemoteNotificationHandler] = [:]
 

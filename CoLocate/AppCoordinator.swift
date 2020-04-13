@@ -13,17 +13,23 @@ class AppCoordinator {
     private let persistence: Persisting
     private let registrationService: RegistrationService
     private let remoteNotificationDispatcher: RemoteNotificationDispatcher
+    private let session: Session
+    private let contactEventRepository: ContactEventRepository
         
     init(
         container: ViewControllerContainer,
         persistence: Persisting,
         registrationService: RegistrationService,
-        remoteNotificationDispatcher: RemoteNotificationDispatcher
+        remoteNotificationDispatcher: RemoteNotificationDispatcher,
+        session: Session,
+        contactEventRepository: ContactEventRepository
     ) {
         self.container = container
         self.persistence = persistence
         self.registrationService = registrationService
         self.remoteNotificationDispatcher = remoteNotificationDispatcher
+        self.session = session
+        self.contactEventRepository = contactEventRepository
         
         remoteNotificationDispatcher.registerHandler(forType: .potentialDisagnosis) { (userInfo, completionHandler) in
             persistence.diagnosis = .potential
@@ -64,6 +70,7 @@ class AppCoordinator {
     
     private func isolateVC() -> PleaseSelfIsolateViewController {
         let vc = PleaseSelfIsolateViewController.instantiate()
+        vc.inject(session: session, contactEventRepository: contactEventRepository)
         return vc
     }
     

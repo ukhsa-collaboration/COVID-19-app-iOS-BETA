@@ -16,13 +16,33 @@ import Logging
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     var window: UIWindow?
 
-    let remoteNotificationManager = ConcreteRemoteNotificationManager.shared
+    let notificationCenter = NotificationCenter.default
     let persistence = Persistence.shared
     let bluetoothNursery = BluetoothNursery()
     let authorizationManager = AuthorizationManager()
+    let remoteNotificationManager: RemoteNotificationManager
+    let registrationService: RegistrationService
 
     override init() {
         LoggingManager.bootstrap()
+        
+        let userNotificationCenter = UNUserNotificationCenter.current()
+        let dispatcher = RemoteNotificationDispatcher(
+            notificationCenter: notificationCenter,
+            userNotificationCenter: userNotificationCenter
+        )
+        remoteNotificationManager = ConcreteRemoteNotificationManager(
+            firebase: FirebaseApp.self,
+            messagingFactory: { Messaging.messaging() },
+            userNotificationCenter: userNotificationCenter,
+            dispatcher: dispatcher
+        )
+        registrationService = ConcreteRegistrationService(
+            session: URLSession.shared,
+            persistence: persistence,
+            remoteNotificationDispatcher: dispatcher,
+            notificationCenter: notificationCenter
+        )
         
         super.init()
 
@@ -60,8 +80,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             persistence: persistence,
             authorizationManager: authorizationManager,
             remoteNotificationManager: remoteNotificationManager,
-            notificationCenter: NotificationCenter.default,
-            registrationService: ConcreteRegistrationService()
+            notificationCenter: notificationCenter,
+            registrationService: registrationService,
+            session: URLSession.shared,
+            contactEventRepository: PersistingContactEventRepository.shared
         )
         
         window = UIWindow(frame: UIScreen.main.bounds)

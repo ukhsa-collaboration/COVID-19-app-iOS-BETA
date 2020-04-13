@@ -23,10 +23,6 @@ class OnboardingCoordinator {
         self.authorizationManager = authorizationManager
     }
 
-    convenience init() {
-        self.init(persistence: Persistence.shared, authorizationManager: AuthorizationManager())
-    }
-
     func state(completion: @escaping (State) -> Void) {
         let allowedDataSharing = persistence.allowedDataSharing
         guard allowedDataSharing else {

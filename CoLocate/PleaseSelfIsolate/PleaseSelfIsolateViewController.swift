@@ -22,8 +22,13 @@ class PleaseSelfIsolateViewController: UIViewController, Storyboarded {
 
     var requestFactory: SecureRequestFactory?
 
-    let session: Session = URLSession.shared
-    let contactEventRepository: PersistingContactEventRepository = PersistingContactEventRepository.shared
+    private var session: Session!
+    private var contactEventRepository: ContactEventRepository!
+    
+    func inject(session: Session, contactEventRepository: ContactEventRepository) {
+        self.session = session
+        self.contactEventRepository = contactEventRepository
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

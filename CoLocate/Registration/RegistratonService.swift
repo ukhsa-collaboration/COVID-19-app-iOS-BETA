@@ -35,15 +35,6 @@ class ConcreteRegistrationService: RegistrationService {
         self.notificationCenter = notificationCenter
         self.remoteNotificationDispatcher = remoteNotificationDispatcher
     }
-
-    convenience init() {
-        self.init(
-            session: URLSession.shared,
-            persistence: Persistence.shared,
-            remoteNotificationDispatcher: RemoteNotificationDispatcher.shared,
-            notificationCenter: NotificationCenter.default
-        )
-    }
     
     func register(completionHandler: @escaping ((Result<Void, Error>) -> Void)) -> Cancelable {
         let attempt = RegistrationAttempt(

@@ -26,7 +26,7 @@ class RemoteNotificationManagerTests: TestCase {
             firebase: FirebaseAppDouble.self,
             messagingFactory: { messaging },
             userNotificationCenter: UserNotificationCenterDouble(),
-            notificationCenter: NotificationCenter()
+            dispatcher: RemoteNotificationDispatcher(notificationCenter: NotificationCenter(), userNotificationCenter: UserNotificationCenterDouble())
         )
 
         notificationManager.configure()
@@ -41,7 +41,7 @@ class RemoteNotificationManagerTests: TestCase {
             firebase: FirebaseAppDouble.self,
             messagingFactory: { messaging },
             userNotificationCenter: UserNotificationCenterDouble(),
-            notificationCenter: notificationCenter
+            dispatcher: RemoteNotificationDispatcher(notificationCenter: notificationCenter, userNotificationCenter: UserNotificationCenterDouble())
         )
 
         var receivedPushToken: String?
@@ -62,7 +62,7 @@ class RemoteNotificationManagerTests: TestCase {
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
             userNotificationCenter: notificationCenterDouble,
-            notificationCenter: NotificationCenter()
+            dispatcher: RemoteNotificationDispatcher(notificationCenter: NotificationCenter(), userNotificationCenter: UserNotificationCenterDouble())
         )
 
         var granted: Bool?
@@ -82,12 +82,11 @@ class RemoteNotificationManagerTests: TestCase {
     }
         
     func testHandleNotification_dispatchesPotentialDiagnosis() {
-        let persistence = Persistence()
         let notificationManager = ConcreteRemoteNotificationManager(
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
             userNotificationCenter: UserNotificationCenterDouble(),
-            notificationCenter: NotificationCenter()
+            dispatcher: RemoteNotificationDispatcher(notificationCenter: NotificationCenter(), userNotificationCenter: UserNotificationCenterDouble())
         )
         
         var called = false
@@ -102,12 +101,12 @@ class RemoteNotificationManagerTests: TestCase {
     }
 
     func testHandleNotification_sendsLocalNotificationWithPotentialStatus() {
-        let notificationCenterDouble = UserNotificationCenterDouble()
+        let userNotificationCenter = UserNotificationCenterDouble()
         let notificationManager = ConcreteRemoteNotificationManager(
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
-            userNotificationCenter: notificationCenterDouble,
-            notificationCenter: NotificationCenter()
+            userNotificationCenter: userNotificationCenter,
+            dispatcher: RemoteNotificationDispatcher(notificationCenter: NotificationCenter(), userNotificationCenter: userNotificationCenter)
         )
         
         notificationManager.dispatcher.registerHandler(forType: .potentialDisagnosis) { (userInfo, completionHandler) in
@@ -116,7 +115,7 @@ class RemoteNotificationManagerTests: TestCase {
 
         notificationManager.handleNotification(userInfo: ["status" : "Potential"]) {_ in }
 
-        XCTAssertNotNil(notificationCenterDouble.request)
+        XCTAssertNotNil(userNotificationCenter.request)
     }
     
     func testHandleNotification_doesNotDispatchOtherDiagnosis() {
@@ -124,7 +123,7 @@ class RemoteNotificationManagerTests: TestCase {
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
             userNotificationCenter: UserNotificationCenterDouble(),
-            notificationCenter: NotificationCenter()
+            dispatcher: RemoteNotificationDispatcher(notificationCenter: NotificationCenter(), userNotificationCenter: UserNotificationCenterDouble())
         )
         
         var called = false
@@ -144,7 +143,7 @@ class RemoteNotificationManagerTests: TestCase {
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
             userNotificationCenter: notificationCenterDouble,
-            notificationCenter: NotificationCenter()
+            dispatcher: RemoteNotificationDispatcher(notificationCenter: NotificationCenter(), userNotificationCenter: UserNotificationCenterDouble())
         )
 
         notificationManager.handleNotification(userInfo: ["status" : "infected"]) {_ in }
@@ -157,7 +156,7 @@ class RemoteNotificationManagerTests: TestCase {
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
             userNotificationCenter: UserNotificationCenterDouble(),
-            notificationCenter: NotificationCenter()
+            dispatcher: RemoteNotificationDispatcher(notificationCenter: NotificationCenter(), userNotificationCenter: UserNotificationCenterDouble())
         )
         var callersCompletionCalled = false
         var statusChangeHandlerCalled = false
@@ -186,7 +185,7 @@ class RemoteNotificationManagerTests: TestCase {
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
             userNotificationCenter: UserNotificationCenterDouble(),
-            notificationCenter: NotificationCenter()
+            dispatcher: RemoteNotificationDispatcher(notificationCenter: NotificationCenter(), userNotificationCenter: UserNotificationCenterDouble())
         )
         
         notificationManager.handleNotification(userInfo: ["something": "unexpected"]) { fetchResult in }
@@ -198,7 +197,7 @@ class RemoteNotificationManagerTests: TestCase {
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
             userNotificationCenter: notificationCenterDouble,
-            notificationCenter: NotificationCenter()
+            dispatcher: RemoteNotificationDispatcher(notificationCenter: NotificationCenter(), userNotificationCenter: UserNotificationCenterDouble())
         )
 
         notificationManager.handleNotification(userInfo: [:]) {_ in }

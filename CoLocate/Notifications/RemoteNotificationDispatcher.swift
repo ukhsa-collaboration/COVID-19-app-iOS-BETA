@@ -29,8 +29,6 @@ extension UNUserNotificationCenter: UserNotificationCenter {
 
 
 class RemoteNotificationDispatcher {
-    static let shared = RemoteNotificationDispatcher()
-    
     var pushToken: String?
     
     private var handlers = HandlerDictionary()
@@ -40,13 +38,6 @@ class RemoteNotificationDispatcher {
     init(notificationCenter: NotificationCenter, userNotificationCenter: UserNotificationCenter) {
         self.notificationCenter = notificationCenter
         self.userNotificationCenter = userNotificationCenter
-    }
-    
-    convenience init() {
-        self.init(
-            notificationCenter: NotificationCenter.default,
-            userNotificationCenter: UNUserNotificationCenter.current()
-        )
     }
 
     func registerHandler(forType type: RemoteNotificationType, handler: @escaping RemoteNotificationHandler) {

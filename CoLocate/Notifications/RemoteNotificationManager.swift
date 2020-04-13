@@ -49,56 +49,23 @@ class ConcreteRemoteNotificationManager: NSObject, RemoteNotificationManager {
         get { dispatcher.pushToken }
     }
 
-    static let shared = ConcreteRemoteNotificationManager()
-
     private let firebase: TestableFirebaseApp.Type
     private let messagingFactory: () -> TestableMessaging
     private let userNotificationCenter: UserNotificationCenter
-    private let notificationCenter: NotificationCenter
     let dispatcher: RemoteNotificationDispatcher
 
     init(
         firebase: TestableFirebaseApp.Type,
         messagingFactory: @escaping () -> TestableMessaging,
         userNotificationCenter: UserNotificationCenter,
-        notificationCenter: NotificationCenter,
         dispatcher: RemoteNotificationDispatcher
     ) {
         self.firebase = firebase
         self.messagingFactory = messagingFactory
         self.userNotificationCenter = userNotificationCenter
-        self.notificationCenter = notificationCenter
         self.dispatcher = dispatcher
         
         super.init()
-    }
-
-    convenience override init() {
-        self.init(
-            firebase: FirebaseApp.self,
-            messagingFactory: { Messaging.messaging() },
-            userNotificationCenter: UNUserNotificationCenter.current(),
-            notificationCenter: NotificationCenter.default,
-            dispatcher: RemoteNotificationDispatcher.shared
-        )
-    }
-    
-    convenience init(
-        firebase: TestableFirebaseApp.Type,
-        messagingFactory: @escaping () -> TestableMessaging,
-        userNotificationCenter: UserNotificationCenter,
-        notificationCenter: NotificationCenter
-    ) {
-        self.init(
-            firebase: firebase,
-            messagingFactory: messagingFactory,
-            userNotificationCenter: userNotificationCenter,
-            notificationCenter: notificationCenter,
-            dispatcher: RemoteNotificationDispatcher(
-                notificationCenter: notificationCenter,
-                userNotificationCenter: userNotificationCenter
-            )
-        )
     }
 
     func configure() {

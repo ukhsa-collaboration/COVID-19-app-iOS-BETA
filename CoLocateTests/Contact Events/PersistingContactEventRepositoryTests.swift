@@ -11,21 +11,21 @@ import XCTest
 
 class PersistingContactEventRepositoryTests: XCTestCase {
     
-    let peripheral1 = TestPeripheral(identifier: UUID())
-    let peripheral2 = TestPeripheral(identifier: UUID())
-    let peripheral3 = TestPeripheral(identifier: UUID())
+    private let peripheral1 = TestPeripheral(identifier: UUID())
+    private let peripheral2 = TestPeripheral(identifier: UUID())
+    private let peripheral3 = TestPeripheral(identifier: UUID())
     
     let sonarId1 = Data(base64Encoded: "aGVsbG8K")!
     let sonarId2 = Data(base64Encoded: "Z29vZGJ5ZQo=")!
     let sonarId3 = Data(base64Encoded: "Z29vZGJ5dGUK")!
     
     var listener: TestBTLEListener!
-    var persister: InMemoryPersister!
+    var persister: ContactEventPersisterDouble!
     var collector: PersistingContactEventRepository!
 
     override func setUp() {
         listener = TestBTLEListener()
-        persister = InMemoryPersister()
+        persister = ContactEventPersisterDouble()
         collector = PersistingContactEventRepository(persister: persister)
     }
 
@@ -75,29 +75,6 @@ class PersistingContactEventRepositoryTests: XCTestCase {
 
 }
 
-struct TestPeripheral: BTLEPeripheral {
+fileprivate struct TestPeripheral: BTLEPeripheral {
     let identifier: UUID
-}
-
-class TestBTLEListener: BTLEListener {
-
-    var connectedPeripheral: BTLEPeripheral?
-    
-    func start(stateDelegate: BTLEListenerStateDelegate?, delegate: BTLEListenerDelegate?) {
-    }
-
-    func connect(_ peripheral: BTLEPeripheral) {
-        self.connectedPeripheral = peripheral
-    }
-
-}
-
-class InMemoryPersister: ContactEventPersister {
-    
-    var items: [ContactEvent] = []
-    
-    func reset() {
-        items = []
-    }
-    
 }

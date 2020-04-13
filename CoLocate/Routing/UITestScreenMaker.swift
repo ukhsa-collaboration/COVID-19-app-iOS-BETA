@@ -37,11 +37,14 @@ private extension OnboardingEnvironment {
         // Currently it’s set so that onboarding is “done” as soon as we allow data sharing – so we can have a minimal
         // UI test.
         let authorizationManager = EphemeralAuthorizationManager()
+        let notificationCenter = NotificationCenter()
+        let dispatcher = RemoteNotificationDispatcher(notificationCenter: notificationCenter, userNotificationCenter: UNUserNotificationCenter.current())
+        
         self.init(
             persistence: InMemoryPersistence(),
             authorizationManager: authorizationManager,
-            remoteNotificationManager: EphemeralRemoteNotificationManager(host: host, authorizationManager: authorizationManager, dispatcher: RemoteNotificationDispatcher()),
-            notificationCenter: NotificationCenter()
+            remoteNotificationManager: EphemeralRemoteNotificationManager(host: host, authorizationManager: authorizationManager, dispatcher: dispatcher),
+            notificationCenter: notificationCenter
         )
     }
     

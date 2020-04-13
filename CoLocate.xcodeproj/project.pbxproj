@@ -22,6 +22,9 @@
 		098ED48A242E89D80029B729 /* RegistrationServiceDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED489242E89D80029B729 /* RegistrationServiceDouble.swift */; };
 		098ED48C242E8B290029B729 /* PersistenceDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED48B242E8B290029B729 /* PersistenceDouble.swift */; };
 		0997D056243BDEEC0067346C /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0997D055243BDEEC0067346C /* RootViewController.swift */; };
+		09B103622444E9110091834D /* ContactEventPersisterDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B103612444E9110091834D /* ContactEventPersisterDouble.swift */; };
+		09B103642444EAB80091834D /* ContactEventRepositoryDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B103632444EAB80091834D /* ContactEventRepositoryDouble.swift */; };
+		09B103662444EB7A0091834D /* TestBTLEListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B103652444EB7A0091834D /* TestBTLEListener.swift */; };
 		09B27BD8243BA3F200DAEA02 /* DispatchQueue+AsyncAfterable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B27BD7243BA3F200DAEA02 /* DispatchQueue+AsyncAfterable.swift */; };
 		09B27BDB243BA5C800DAEA02 /* AsyncAfterableDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B27BDA243BA5C800DAEA02 /* AsyncAfterableDouble.swift */; };
 		09CAA3662440F3B100CE93A6 /* PostcodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CAA3652440F3B100CE93A6 /* PostcodeViewController.swift */; };
@@ -132,7 +135,6 @@
 		F758B8C2242CBAF5003AE16D /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F758B8C1242CBAF5003AE16D /* AppCoordinator.swift */; };
 		F758B8C4242CC0EE003AE16D /* Status.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F758B8C3242CC0EE003AE16D /* Status.storyboard */; };
 		F758B8C9242CC183003AE16D /* PleaseSelfIsolate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F758B8C8242CC183003AE16D /* PleaseSelfIsolate.storyboard */; };
-		F770A4572430F76B002FDED1 /* AppCoordinatorDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = F770A4562430F76B002FDED1 /* AppCoordinatorDouble.swift */; };
 		F78CEB47242B7752002254AD /* String+localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78CEB46242B7752002254AD /* String+localized.swift */; };
 		F78CEB5A242B7EC0002254AD /* FirebaseMessaging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB55242B7EBF002254AD /* FirebaseMessaging.framework */; };
 		F78CEB5B242B7EC0002254AD /* FirebaseCoreDiagnostics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB56242B7EBF002254AD /* FirebaseCoreDiagnostics.framework */; };
@@ -185,6 +187,9 @@
 		098ED48B242E8B290029B729 /* PersistenceDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceDouble.swift; sourceTree = "<group>"; };
 		0995ABAC243CE3D10057C0D7 /* ReleaseBeta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ReleaseBeta.xcconfig; sourceTree = "<group>"; };
 		0997D055243BDEEC0067346C /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		09B103612444E9110091834D /* ContactEventPersisterDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventPersisterDouble.swift; sourceTree = "<group>"; };
+		09B103632444EAB80091834D /* ContactEventRepositoryDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventRepositoryDouble.swift; sourceTree = "<group>"; };
+		09B103652444EB7A0091834D /* TestBTLEListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestBTLEListener.swift; sourceTree = "<group>"; };
 		09B27BD7243BA3F200DAEA02 /* DispatchQueue+AsyncAfterable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+AsyncAfterable.swift"; sourceTree = "<group>"; };
 		09B27BDA243BA5C800DAEA02 /* AsyncAfterableDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncAfterableDouble.swift; sourceTree = "<group>"; };
 		09CAA3652440F3B100CE93A6 /* PostcodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostcodeViewController.swift; sourceTree = "<group>"; };
@@ -305,7 +310,6 @@
 		F758B8C1242CBAF5003AE16D /* AppCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		F758B8C3242CC0EE003AE16D /* Status.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Status.storyboard; sourceTree = "<group>"; };
 		F758B8C8242CC183003AE16D /* PleaseSelfIsolate.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PleaseSelfIsolate.storyboard; sourceTree = "<group>"; };
-		F770A4562430F76B002FDED1 /* AppCoordinatorDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinatorDouble.swift; sourceTree = "<group>"; };
 		F78CEB46242B7752002254AD /* String+localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+localized.swift"; sourceTree = "<group>"; };
 		F78CEB53242B7E18002254AD /* CoLocate-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoLocate-Bridging-Header.h"; sourceTree = "<group>"; };
 		F78CEB55242B7EBF002254AD /* FirebaseMessaging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseMessaging.framework; path = Frameworks/FirebaseMessaging.framework; sourceTree = "<group>"; };
@@ -395,7 +399,6 @@
 		098ED486242E89760029B729 /* Doubles */ = {
 			isa = PBXGroup;
 			children = (
-				F770A4562430F76B002FDED1 /* AppCoordinatorDouble.swift */,
 				095A91172434FF1500ED6369 /* ApplicationDouble.swift */,
 				F6F05A292433C6CC00FF4B72 /* AuthManagerDouble.swift */,
 				098ED48B242E8B290029B729 /* PersistenceDouble.swift */,
@@ -408,6 +411,9 @@
 				0983ACCC243E566800DBB336 /* ErrorForTest.swift */,
 				0983ACCE243E6D3800DBB336 /* NotificationObserverDouble.swift */,
 				09CAA36B24413E0700CE93A6 /* ViewControllerContainerDouble.swift */,
+				09B103612444E9110091834D /* ContactEventPersisterDouble.swift */,
+				09B103632444EAB80091834D /* ContactEventRepositoryDouble.swift */,
+				09B103652444EB7A0091834D /* TestBTLEListener.swift */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -985,12 +991,13 @@
 				098ED47C242D801C0029B729 /* RegistrationServiceTests.swift in Sources */,
 				21B3D2E3242906AE00573061 /* SecureRequestTests.swift in Sources */,
 				214209CA242227B300C7BFF3 /* PersistenceTests.swift in Sources */,
+				09B103662444EB7A0091834D /* TestBTLEListener.swift in Sources */,
 				F632792124351C1900CF7A42 /* OnboardingViewControllerTests.swift in Sources */,
 				095A91182434FF1500ED6369 /* ApplicationDouble.swift in Sources */,
 				09CAA36C24413E0700CE93A6 /* ViewControllerContainerDouble.swift in Sources */,
 				F632792324351C8400CF7A42 /* OnboardingCoordinatorDouble.swift in Sources */,
 				21F37402243384D400926FB8 /* PersistingContactEventRepositoryTests.swift in Sources */,
-				F770A4572430F76B002FDED1 /* AppCoordinatorDouble.swift in Sources */,
+				09B103622444E9110091834D /* ContactEventPersisterDouble.swift in Sources */,
 				098ED48C242E8B290029B729 /* PersistenceDouble.swift in Sources */,
 				21E50511244470590065C69B /* ContactEventTests.swift in Sources */,
 				098ED485242E88D80029B729 /* AppCoordinatorTests.swift in Sources */,
@@ -1004,6 +1011,7 @@
 				21E5051324448AE30065C69B /* PlistPersisterTests.swift in Sources */,
 				098ED488242E89930029B729 /* PushNotificationManagerDouble.swift in Sources */,
 				0983ACCF243E6D3800DBB336 /* NotificationObserverDouble.swift in Sources */,
+				09B103642444EAB80091834D /* ContactEventRepositoryDouble.swift in Sources */,
 				F67A2293242AA370002254B6 /* SecureRegistrationStorageTests.swift in Sources */,
 				214209D72423C9B600C7BFF3 /* PatchContactEventsRequestTests.swift in Sources */,
 				F72EBDA9243D2FE6009F9328 /* BroadcastIdEncrypterTests.swift in Sources */,
