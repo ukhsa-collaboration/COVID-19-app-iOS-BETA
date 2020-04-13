@@ -18,19 +18,52 @@ class StatusViewController: UIViewController, Storyboarded {
     private var registrationService: RegistrationService!
     private var mainQueue: AsyncAfterable!
     
-    @IBOutlet private var warningView: UIView!
-    @IBOutlet private var warningViewTitle: UILabel!
-    @IBOutlet private var warningViewBody: UILabel!
-    @IBOutlet private var checkSymptomsTitle: UILabel!
-    @IBOutlet private var checkSymptomsBody: UILabel!
-    @IBOutlet private var moreInformationTitle: UILabel!
-    @IBOutlet private var moreInformationBody: UILabel!
     @IBOutlet var registratonStatusView: UIView!
     @IBOutlet var registrationStatusIcon: UIImageView!
     @IBOutlet var registrationSpinner: UIActivityIndicatorView!
     @IBOutlet var registrationStatusText: UILabel!
     @IBOutlet var registrationRetryButton: UIButton!
-    @IBOutlet private var checkSymptomsButton: PrimaryButton!
+
+    @IBOutlet weak var diagnosisStatusView: UIView!
+    @IBOutlet weak var diagnosisHighlightView: UIView!
+    @IBOutlet weak var diagnosisTitleLabel: UILabel!
+    @IBOutlet weak var readLatestAdviceLabel: UILabel!
+
+    @IBOutlet weak var howAreYouFeelingView: UIView!
+    @IBOutlet weak var feelHealthyView: UIView!
+    @IBOutlet weak var feelHealthyTitleLabel: UILabel!
+    @IBOutlet weak var feelHealthySubtitleLabel: UILabel!
+    @IBOutlet weak var notRightView: UIView!
+    @IBOutlet weak var notRightTitleLabel: UILabel!
+    @IBOutlet weak var notRightSubtitleLabel: UILabel!
+
+    @IBOutlet weak var nextStepsView: UIView!
+
+    var diagnosis: Diagnosis? {
+        didSet {
+            guard view != nil else { return }
+
+            switch diagnosis {
+            case .none, .some(.notInfected):
+                diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Blue")
+                diagnosisTitleLabel.text = "Keep following the current government advice".localized
+                howAreYouFeelingView.isHidden = false
+                nextStepsView.isHidden = true
+            case .some(.potential):
+                diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
+                diagnosisTitleLabel.text = "You have been near someone who has coronavirus symptoms".localized
+                howAreYouFeelingView.isHidden = false
+                nextStepsView.isHidden = true
+            case .some(.infected):
+                diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Error")
+                diagnosisTitleLabel.text = "Your symptoms indicate you may have coronavirus".localized
+                howAreYouFeelingView.isHidden = true
+                nextStepsView.isHidden = false
+            }
+
+            diagnosisStatusView.accessibilityLabel = "\(diagnosisTitleLabel.text!) \(readLatestAdviceLabel.text!)"
+        }
+    }
     
     func inject(persistence: Persisting, registrationService: RegistrationService, mainQueue: AsyncAfterable) {
         self.persistence = persistence
@@ -41,29 +74,43 @@ class StatusViewController: UIViewController, Storyboarded {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor(named: "NHS Grey 5")
-    
-        warningView.backgroundColor = UIColor(named: "NHS Purple")
-        warningViewTitle.textColor = UIColor(named: "NHS White")
-        warningViewBody.textColor = UIColor(named: "NHS White")
+        diagnosisStatusView.layer.cornerRadius = 16
+        diagnosisStatusView.layer.masksToBounds = true
+        readLatestAdviceLabel.textColor = UIColor(named: "NHS Blue")
+        diagnosisStatusView.addGestureRecognizer(
+            UITapGestureRecognizer(target: self, action: #selector(diagnosisStatusTapped))
+        )
 
-        warningViewTitle.text = "OK_NOW_TITLE".localized
-        warningViewBody.text = "OK_NOW_MESSAGE".localized
-        checkSymptomsTitle.text = "OK_NOW_SYMPTOMS_TITLE".localized
-        checkSymptomsBody.text = "OK_NOW_SYMPTOMS_MESSAGE".localized
-        checkSymptomsButton.setTitle("OK_NOW_SYMPTOMS_BUTTON".localized, for: .normal)
-        moreInformationTitle.text = "OK_NOW_MORE_INFO_TITLE".localized
-        moreInformationBody.text = "OK_NOW_MORE_INFO_MESSAGE".localized
-        registrationRetryButton.setTitle("RETRY".localized, for: .normal)
-        
+        feelHealthyView.layer.cornerRadius = 16
+        feelHealthyTitleLabel.textColor = UIColor(named: "NHS Blue")
+        feelHealthySubtitleLabel.textColor = UIColor(named: "NHS Grey 1")
+
+        notRightView.layer.cornerRadius = 16
+        notRightTitleLabel.textColor = UIColor(named: "NHS Blue")
+        notRightSubtitleLabel.textColor = UIColor(named: "NHS Grey 1")
+        notRightView.accessibilityLabel = "\(notRightTitleLabel.text!) \(notRightSubtitleLabel.text!)"
+        notRightView.addGestureRecognizer(
+            UITapGestureRecognizer(target: self, action: #selector(notRightTapped))
+        )
+
+        nextStepsView.isHidden = true
+
         if persistence.registration != nil {
             showRegisteredStatus()
         } else {
             register()
         }
+
+        diagnosis = persistence.diagnosis
     }
-    
-    @IBAction func checkSymptomsTapped(_ sender: PrimaryButton) {
+
+    @objc func diagnosisStatusTapped() {
+        let alert = UIAlertController(title: nil, message: "reading latest advice", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "okay", style: .default))
+        present(alert, animated: true)
+    }
+
+    @objc func notRightTapped() {
         let selfDiagnosis = SelfDiagnosisNavigationController.instantiate()
         present(selfDiagnosis, animated: true)
     }
