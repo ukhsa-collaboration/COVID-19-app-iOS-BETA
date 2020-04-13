@@ -29,11 +29,8 @@
 		09CAA3662440F3B100CE93A6 /* PostcodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CAA3652440F3B100CE93A6 /* PostcodeViewController.swift */; };
 		09CAA36A2440FC4500CE93A6 /* PostcodeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CAA3692440FC4500CE93A6 /* PostcodeViewControllerTests.swift */; };
 		09CAA36C24413E0700CE93A6 /* ViewControllerContainerDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CAA36B24413E0700CE93A6 /* ViewControllerContainerDouble.swift */; };
-		09D1CD4B242C284000B1A167 /* PotentialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D1CD49242C284000B1A167 /* PotentialViewController.swift */; };
-		09D1CD50242C3A9300B1A167 /* Potential.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09D1CD4F242C3A9300B1A167 /* Potential.storyboard */; };
 		2115C3E624360427009C0F5B /* DebuggerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2115C3E524360427009C0F5B /* DebuggerTableViewCell.swift */; };
 		213C806C241A56430020EFA5 /* PermissionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213C806B241A56430020EFA5 /* PermissionsViewController.swift */; };
-		214209B42420DBE100C7BFF3 /* PleaseSelfIsolateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209B32420DBE100C7BFF3 /* PleaseSelfIsolateViewController.swift */; };
 		214209B62421072C00C7BFF3 /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209B52421072C00C7BFF3 /* StatusViewController.swift */; };
 		214209BA242216B700C7BFF3 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209B9242216B700C7BFF3 /* Persistence.swift */; };
 		214209CA242227B300C7BFF3 /* PersistenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209C9242227B300C7BFF3 /* PersistenceTests.swift */; };
@@ -132,7 +129,6 @@
 		F758B8BE242CB856003AE16D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F758B8BD242CB856003AE16D /* Localizable.strings */; };
 		F758B8C0242CB98C003AE16D /* UIViewController+Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = F758B8BF242CB98C003AE16D /* UIViewController+Storyboarded.swift */; };
 		F758B8C4242CC0EE003AE16D /* Status.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F758B8C3242CC0EE003AE16D /* Status.storyboard */; };
-		F758B8C9242CC183003AE16D /* PleaseSelfIsolate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F758B8C8242CC183003AE16D /* PleaseSelfIsolate.storyboard */; };
 		F78CEB47242B7752002254AD /* String+localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78CEB46242B7752002254AD /* String+localized.swift */; };
 		F78CEB5A242B7EC0002254AD /* FirebaseMessaging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB55242B7EBF002254AD /* FirebaseMessaging.framework */; };
 		F78CEB5B242B7EC0002254AD /* FirebaseCoreDiagnostics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB56242B7EBF002254AD /* FirebaseCoreDiagnostics.framework */; };
@@ -192,11 +188,8 @@
 		09CAA3652440F3B100CE93A6 /* PostcodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostcodeViewController.swift; sourceTree = "<group>"; };
 		09CAA3692440FC4500CE93A6 /* PostcodeViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostcodeViewControllerTests.swift; sourceTree = "<group>"; };
 		09CAA36B24413E0700CE93A6 /* ViewControllerContainerDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerContainerDouble.swift; sourceTree = "<group>"; };
-		09D1CD49242C284000B1A167 /* PotentialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotentialViewController.swift; sourceTree = "<group>"; };
-		09D1CD4F242C3A9300B1A167 /* Potential.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Potential.storyboard; sourceTree = "<group>"; };
 		2115C3E524360427009C0F5B /* DebuggerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebuggerTableViewCell.swift; sourceTree = "<group>"; };
 		213C806B241A56430020EFA5 /* PermissionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsViewController.swift; sourceTree = "<group>"; };
-		214209B32420DBE100C7BFF3 /* PleaseSelfIsolateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PleaseSelfIsolateViewController.swift; sourceTree = "<group>"; };
 		214209B52421072C00C7BFF3 /* StatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
 		214209B9242216B700C7BFF3 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		214209BF2422276800C7BFF3 /* CoLocateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoLocateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -305,7 +298,6 @@
 		F758B8BD242CB856003AE16D /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		F758B8BF242CB98C003AE16D /* UIViewController+Storyboarded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Storyboarded.swift"; sourceTree = "<group>"; };
 		F758B8C3242CC0EE003AE16D /* Status.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Status.storyboard; sourceTree = "<group>"; };
-		F758B8C8242CC183003AE16D /* PleaseSelfIsolate.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PleaseSelfIsolate.storyboard; sourceTree = "<group>"; };
 		F78CEB46242B7752002254AD /* String+localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+localized.swift"; sourceTree = "<group>"; };
 		F78CEB53242B7E18002254AD /* CoLocate-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoLocate-Bridging-Header.h"; sourceTree = "<group>"; };
 		F78CEB55242B7EBF002254AD /* FirebaseMessaging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseMessaging.framework; path = Frameworks/FirebaseMessaging.framework; sourceTree = "<group>"; };
@@ -586,8 +578,6 @@
 				F6CC2CA7242BC7D90079432B /* Notifications */,
 				0995ABCD243D034E0057C0D7 /* Status */,
 				F6F05A212433BE9600FF4B72 /* Onboarding */,
-				F758B8C7242CC164003AE16D /* PleaseSelfIsolate */,
-				F758B8C5242CC117003AE16D /* Potential */,
 				F758B8D0242CC661003AE16D /* Registration */,
 				F758B8BC242CB83B003AE16D /* Resources */,
 				895D9E4924374EB800573D4D /* Routing */,
@@ -782,24 +772,6 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		F758B8C5242CC117003AE16D /* Potential */ = {
-			isa = PBXGroup;
-			children = (
-				09D1CD49242C284000B1A167 /* PotentialViewController.swift */,
-				09D1CD4F242C3A9300B1A167 /* Potential.storyboard */,
-			);
-			path = Potential;
-			sourceTree = "<group>";
-		};
-		F758B8C7242CC164003AE16D /* PleaseSelfIsolate */ = {
-			isa = PBXGroup;
-			children = (
-				214209B32420DBE100C7BFF3 /* PleaseSelfIsolateViewController.swift */,
-				F758B8C8242CC183003AE16D /* PleaseSelfIsolate.storyboard */,
-			);
-			path = PleaseSelfIsolate;
-			sourceTree = "<group>";
-		};
 		F758B8D0242CC661003AE16D /* Registration */ = {
 			isa = PBXGroup;
 			children = (
@@ -950,7 +922,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F758B8C4242CC0EE003AE16D /* Status.storyboard in Resources */,
-				F758B8C9242CC183003AE16D /* PleaseSelfIsolate.storyboard in Resources */,
 				6FC63C3B241641BA007C8BF3 /* LaunchScreen.storyboard in Resources */,
 				AEC6A7BE241BD82900B0237A /* LogoStrapline.xib in Resources */,
 				A1E7A0592420028B0078174D /* NHS Colors.xcassets in Resources */,
@@ -958,7 +929,6 @@
 				F68B89EA243B9FDC00F369A9 /* CoLocate.xcconfig in Resources */,
 				6FC63C38241641BA007C8BF3 /* Assets.xcassets in Resources */,
 				F65AE53C2432B842006544D4 /* Potential.rtf in Resources */,
-				09D1CD50242C3A9300B1A167 /* Potential.storyboard in Resources */,
 				F6CA2819242E41F700F8DC55 /* README.md in Resources */,
 				895D9E462437458700573D4D /* AppIcon.xcassets in Resources */,
 				F68B89ED243CFF2600F369A9 /* SelfDiagnosis.storyboard in Resources */,
@@ -1061,7 +1031,6 @@
 				F758553A24294C8D00CBE1ED /* RequestFactory.swift in Sources */,
 				21C417CC242CB15D00DEF3E2 /* ConfirmRegistrationRequest.swift in Sources */,
 				F67A2291242AA35C002254B6 /* SecureRegistrationStorage.swift in Sources */,
-				214209B42420DBE100C7BFF3 /* PleaseSelfIsolateViewController.swift in Sources */,
 				AE2DCAA0241920B600A940FC /* BTLEBroadcaster.swift in Sources */,
 				895D9E4B24374EC900573D4D /* Screen.swift in Sources */,
 				098ED478242D7D050029B729 /* RegistratonService.swift in Sources */,
@@ -1088,7 +1057,6 @@
 				89AEE89D243DF24900BF3861 /* Persisting.swift in Sources */,
 				F7D62F2B2440D64D004C32A2 /* ConcreteBroadcastIdGenerator.swift in Sources */,
 				89F06B312434AABF0074C612 /* NoOpLogHandler.swift in Sources */,
-				09D1CD4B242C284000B1A167 /* PotentialViewController.swift in Sources */,
 				F6F05A3024340E5400FF4B72 /* OnboardingViewController.swift in Sources */,
 				89074B8524378A0D00D67777 /* UITestPayload.swift in Sources */,
 				F6AB2F20243D359F00386D6B /* SubmitSymptomsViewController.swift in Sources */,
