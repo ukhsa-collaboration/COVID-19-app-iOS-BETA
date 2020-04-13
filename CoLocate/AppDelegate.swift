@@ -39,6 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // if we don't do this, the app crashes upon startup
         // so I'm doing this so that everyone's unit tests and apps continue to work
         PersistingContactEventRepository.shared.reset()
+        PlistPersister<ContactEvent>(fileName: "contactEvents").reset()
 
         // TODO: If DEBUG is only necessary as long as we have the same bundle ID for both builds.
         #if INTERNAL || DEBUG
