@@ -29,7 +29,10 @@ platform :ios do
       profile_name: "match AppStore uk.nhs.nhsx.sonar.internal",
     )
 
-    build_app(scheme: "CoLocate")
+    build_app(
+      scheme: "CoLocate release",
+      xcargs: "PRODUCT_BUNDLE_IDENTIFIER=uk.nhs.nhsx.sonar.internal",
+    )
 
     upload_to_testflight(
       username: ENV.fetch("APPLE_USERNAME"),
