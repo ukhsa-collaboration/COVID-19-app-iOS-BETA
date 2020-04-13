@@ -44,7 +44,7 @@ jobs:
         run: xcodebuild -scheme CoLocate -sdk ${SDK} CODE_SIGNING_ALLOWED=NO
 
       - name: Notify Slack on Failure
-        if: failure()
+        if: github.ref == 'refs/heads/master' && failure()
         env:
           SLACK_BOT_TOKEN: ${{ secrets.slack_bot_token }}
         uses: voxmedia/github-action-slack-notify-build@v1
@@ -81,7 +81,7 @@ jobs:
           -allowProvisioningUpdates
 
       - name: Notify Slack on Failure
-        if: failure()
+        if: github.ref == 'refs/heads/master' && failure()
         env:
           SLACK_BOT_TOKEN: ${{ secrets.slack_bot_token }}
         uses: voxmedia/github-action-slack-notify-build@v1
