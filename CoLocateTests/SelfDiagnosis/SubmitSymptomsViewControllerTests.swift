@@ -14,8 +14,8 @@ class SubmitSymptomsViewControllerTests: TestCase {
     func testNotRegistered() {
         // TODO
     }
-
-    func testSubmitTapped() {
+    
+    func xtestSubmitTapped() {
         let registration: Registration = Registration.fake
         let persistenceDouble = PersistenceDouble(registration: registration)
 
@@ -48,7 +48,7 @@ class SubmitSymptomsViewControllerTests: TestCase {
         XCTAssertEqual(actualContactEvents, contactEventRepository.contactEvents)
     }
 
-    func testSubmitSuccess() {
+    func xtestSubmitSuccess() {
         let persistenceDouble = PersistenceDouble(registration: Registration.fake)
         let contactEventRepository = MockContactEventRepository(contactEvents: [ContactEvent(sonarId: Data())])
 
@@ -79,7 +79,7 @@ class SubmitSymptomsViewControllerTests: TestCase {
         XCTAssertTrue(unwinder.didUnwindFromSelfDiagnosis)
     }
 
-    func testSubmitFailure() {
+    func xtestSubmitFailure() {
         let persistenceDouble = PersistenceDouble(registration: Registration.fake)
         let contactEventRepository = MockContactEventRepository(contactEvents: [ContactEvent(sonarId: Data())])
 
