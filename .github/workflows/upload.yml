@@ -66,6 +66,9 @@ jobs:
           MATCH: ${{ secrets.match }}
         run: ./bin/setup-match
 
+      - name: Create an empty CoLocate.xcconfig
+        run: touch CoLocate.xcconfig
+
       - name: Upload to Test Flight
         env:
           API_ENDPOINT: ${{ secrets.api_endpoint }}
