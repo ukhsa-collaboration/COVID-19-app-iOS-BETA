@@ -120,17 +120,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TUo-oc-PGD">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TUo-oc-PGD">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="498"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="31h-8a-dJ8">
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="31h-8a-dJ8">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="621"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P9b-DU-jl5" customClass="LogoStrapline" customModule="CoLocate" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P9b-DU-jl5" customClass="LogoStrapline" customModule="CoLocate" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             </view>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="7HO-8c-Q84">
+                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="7HO-8c-Q84">
                                                 <rect key="frame" x="20" y="84" width="280" height="517"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How this app works" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hxN-EA-ySp">
@@ -250,18 +250,18 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5tN-bW-uWf" userLabel="Scroll content view">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="06r-fk-m9F" customClass="LogoStrapline" customModule="CoLocate" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="06r-fk-m9F" customClass="LogoStrapline" customModule="CoLocate" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Enter your post code" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C96-Af-5wL">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your post code" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C96-Af-5wL">
                                                 <rect key="frame" x="20" y="84" width="280" height="36"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="CE1B" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nUw-z7-nkS">
-                                                <rect key="frame" x="20" y="157" width="280" height="34"/>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nUw-z7-nkS">
+                                                <rect key="frame" x="20" y="181" width="280" height="34"/>
                                                 <accessibility key="accessibilityConfiguration" label="Post code"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="postal-code"/>
@@ -269,8 +269,8 @@
                                                     <outlet property="delegate" destination="lkE-bN-ikk" id="hoE-bE-NAc"/>
                                                 </connections>
                                             </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Your post code will not be used to track your location." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j2y-6b-nX8">
-                                                <rect key="frame" x="20" y="206" width="280" height="34"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your post code will not be used to track your location." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j2y-6b-nX8">
+                                                <rect key="frame" x="20" y="230" width="280" height="34"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -284,6 +284,12 @@
                                                     <action selector="didTapContinue:" destination="AuE-Ey-MBo" eventType="touchUpInside" id="nEu-Rg-4L0"/>
                                                 </connections>
                                             </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Example: CE1B" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qox-hG-VrQ">
+                                                <rect key="frame" x="20" y="157" width="280" height="16"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
@@ -292,7 +298,8 @@
                                             <constraint firstAttribute="trailing" secondItem="C96-Af-5wL" secondAttribute="trailing" constant="20" id="9O4-Vf-5Cb"/>
                                             <constraint firstItem="C96-Af-5wL" firstAttribute="leading" secondItem="5tN-bW-uWf" secondAttribute="leading" constant="20" id="EWu-uK-RpC"/>
                                             <constraint firstItem="j2y-6b-nX8" firstAttribute="leading" secondItem="5tN-bW-uWf" secondAttribute="leading" constant="20" id="Gvs-rD-v5M"/>
-                                            <constraint firstItem="nUw-z7-nkS" firstAttribute="top" secondItem="C96-Af-5wL" secondAttribute="bottom" constant="37" id="LK4-WY-hk0"/>
+                                            <constraint firstItem="nUw-z7-nkS" firstAttribute="top" secondItem="qox-hG-VrQ" secondAttribute="bottom" constant="8" id="Iss-bh-gTe"/>
+                                            <constraint firstItem="qox-hG-VrQ" firstAttribute="leading" secondItem="5tN-bW-uWf" secondAttribute="leading" constant="20" id="PUp-dx-Ik9"/>
                                             <constraint firstAttribute="bottom" secondItem="Ndb-pX-kbA" secondAttribute="bottom" constant="20" id="RCw-c6-kQW"/>
                                             <constraint firstAttribute="trailing" secondItem="06r-fk-m9F" secondAttribute="trailing" id="TeI-cH-ByM"/>
                                             <constraint firstAttribute="trailing" secondItem="nUw-z7-nkS" secondAttribute="trailing" constant="20" id="Vx7-if-7tV"/>
@@ -300,9 +307,11 @@
                                             <constraint firstAttribute="trailing" secondItem="Ndb-pX-kbA" secondAttribute="trailing" constant="20" id="YEN-ae-szC"/>
                                             <constraint firstItem="C96-Af-5wL" firstAttribute="top" secondItem="06r-fk-m9F" secondAttribute="bottom" constant="20" id="eku-jz-kga"/>
                                             <constraint firstAttribute="trailing" secondItem="j2y-6b-nX8" secondAttribute="trailing" constant="20" id="gWC-ff-QBT"/>
+                                            <constraint firstItem="qox-hG-VrQ" firstAttribute="top" secondItem="C96-Af-5wL" secondAttribute="bottom" constant="37" id="j5M-XX-nRG"/>
                                             <constraint firstItem="06r-fk-m9F" firstAttribute="top" secondItem="5tN-bW-uWf" secondAttribute="top" id="loK-Tf-8IH"/>
                                             <constraint firstItem="nUw-z7-nkS" firstAttribute="leading" secondItem="5tN-bW-uWf" secondAttribute="leading" constant="20" id="pSD-Nu-Gdm"/>
                                             <constraint firstItem="Ndb-pX-kbA" firstAttribute="top" relation="greaterThanOrEqual" secondItem="j2y-6b-nX8" secondAttribute="bottom" constant="8" id="uLu-0G-2UV"/>
+                                            <constraint firstAttribute="trailing" secondItem="qox-hG-VrQ" secondAttribute="trailing" constant="20" id="zdg-z0-Zwl"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -350,14 +359,14 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="498"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ctd-7G-OHq">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="1010.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="946.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KNf-hn-Dy4" customClass="LogoStrapline" customModule="CoLocate" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="0.0"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="FK8-Le-0p1">
-                                                <rect key="frame" x="20" y="84" width="280" height="906.5"/>
+                                                <rect key="frame" x="20" y="20" width="280" height="906.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set up app permissions" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bLK-VT-lux">
                                                         <rect key="frame" x="0.0" y="0.0" width="280" height="73"/>
