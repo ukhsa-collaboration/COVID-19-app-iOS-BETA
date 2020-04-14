@@ -13,7 +13,7 @@ class StatusViewControllerTests: XCTestCase {
     
     func testShowsInitialRegisteredStatus() {
         let vc = StatusViewController.instantiate()
-        vc.inject(persistence: PersistenceDouble(registration: arbitraryRegistration()), registrationService: RegistrationServiceDouble(), mainQueue: AsyncAfterableDouble())
+        vc.inject(persistence: PersistenceDouble(registration: arbitraryRegistration()), registrationService: RegistrationServiceDouble(), mainQueue: QueueDouble())
         XCTAssertNotNil(vc.view)
         
         XCTAssertEqual(vc.registrationStatusText?.text, "Everything is working OK")
@@ -27,7 +27,7 @@ class StatusViewControllerTests: XCTestCase {
     
     func testShowsInitialInProgressStatus() {
         let vc = StatusViewController.instantiate()
-        vc.inject(persistence: PersistenceDouble(registration: nil), registrationService: RegistrationServiceDouble(), mainQueue: AsyncAfterableDouble())
+        vc.inject(persistence: PersistenceDouble(registration: nil), registrationService: RegistrationServiceDouble(), mainQueue: QueueDouble())
         XCTAssertNotNil(vc.view)
         
         XCTAssertEqual(vc.registrationStatusText?.text, "Finalising setup...")
@@ -41,7 +41,7 @@ class StatusViewControllerTests: XCTestCase {
     func testStartsRegistrationOnShownWhenNotAlreadyRegistered() {
         let vc = StatusViewController.instantiate()
         let registrationService = RegistrationServiceDouble()
-        vc.inject(persistence: PersistenceDouble(registration: nil), registrationService: registrationService, mainQueue: AsyncAfterableDouble())
+        vc.inject(persistence: PersistenceDouble(registration: nil), registrationService: registrationService, mainQueue: QueueDouble())
         XCTAssertNotNil(vc.view)
         
         XCTAssertNotNil(registrationService.lastAttempt)
@@ -50,7 +50,7 @@ class StatusViewControllerTests: XCTestCase {
     func testUpdatesAfterRegistrationCompletes() {
         let vc = StatusViewController.instantiate()
         let registrationService = RegistrationServiceDouble()
-        vc.inject(persistence: PersistenceDouble(registration: nil), registrationService: registrationService, mainQueue: AsyncAfterableDouble())
+        vc.inject(persistence: PersistenceDouble(registration: nil), registrationService: registrationService, mainQueue: QueueDouble())
         XCTAssertNotNil(vc.view)
         
         registrationService.completionHandler?(Result<(), Error>.success(()))
@@ -67,7 +67,7 @@ class StatusViewControllerTests: XCTestCase {
     func testUpdatesAfterRegistrationFails() {
         let vc = StatusViewController.instantiate()
         let registrationService = RegistrationServiceDouble()
-        vc.inject(persistence: PersistenceDouble(registration: nil), registrationService: registrationService, mainQueue: AsyncAfterableDouble())
+        vc.inject(persistence: PersistenceDouble(registration: nil), registrationService: registrationService, mainQueue: QueueDouble())
         XCTAssertNotNil(vc.view)
         
         registrationService.completionHandler?(Result<(), Error>.failure(ErrorForTest()))
@@ -84,11 +84,11 @@ class StatusViewControllerTests: XCTestCase {
     func testShowsFailureAfter20Seconds() {
         let vc = StatusViewController.instantiate()
         let registrationService = RegistrationServiceDouble()
-        let asyncAfterable = AsyncAfterableDouble()
-        vc.inject(persistence: PersistenceDouble(registration: nil), registrationService: registrationService, mainQueue: asyncAfterable)
+        let queueDouble = QueueDouble()
+        vc.inject(persistence: PersistenceDouble(registration: nil), registrationService: registrationService, mainQueue: queueDouble)
         XCTAssertNotNil(vc.view)
         
-        asyncAfterable.scheduledBlock?()
+        queueDouble.scheduledBlock?()
         
         XCTAssertEqual(vc.registrationStatusText?.text, "App setup failed")
         XCTAssertEqual(vc.registrationStatusIcon?.image, UIImage(named: "Registration_status_failure"))
@@ -102,12 +102,12 @@ class StatusViewControllerTests: XCTestCase {
     func testDoesNotShowFailureAfter20SecondsIfSucceeded() {
         let vc = StatusViewController.instantiate()
         let registrationService = RegistrationServiceDouble()
-        let asyncAfterable = AsyncAfterableDouble()
-        vc.inject(persistence: PersistenceDouble(registration: nil), registrationService: registrationService, mainQueue: asyncAfterable)
+        let queueDouble = QueueDouble()
+        vc.inject(persistence: PersistenceDouble(registration: nil), registrationService: registrationService, mainQueue: queueDouble)
         XCTAssertNotNil(vc.view)
         
         registrationService.completionHandler?(Result<(), Error>.success(()))
-        asyncAfterable.scheduledBlock?()
+        queueDouble.scheduledBlock?()
         
         XCTAssertEqual(vc.registrationStatusText?.text, "Everything is working OK")
         XCTAssertEqual(vc.registrationStatusIcon?.image, UIImage(named: "Registration_status_ok"))
@@ -120,11 +120,11 @@ class StatusViewControllerTests: XCTestCase {
     func testCancelsAfter20Seconds() {
         let vc = StatusViewController.instantiate()
         let registrationService = RegistrationServiceDouble()
-        let asyncAfterable = AsyncAfterableDouble()
-        vc.inject(persistence: PersistenceDouble(registration: nil), registrationService: registrationService, mainQueue: asyncAfterable)
+        let queueDouble = QueueDouble()
+        vc.inject(persistence: PersistenceDouble(registration: nil), registrationService: registrationService, mainQueue: queueDouble)
         XCTAssertNotNil(vc.view)
         
-        asyncAfterable.scheduledBlock?()
+        queueDouble.scheduledBlock?()
 
         XCTAssertTrue((registrationService.lastAttempt as? CancelableDouble)?.canceled ?? false)
     }
@@ -132,11 +132,11 @@ class StatusViewControllerTests: XCTestCase {
     func testRetry() {
         let vc = StatusViewController.instantiate()
         let registrationService = RegistrationServiceDouble()
-        let asyncAfterable = AsyncAfterableDouble()
-        vc.inject(persistence: PersistenceDouble(registration: nil), registrationService: registrationService, mainQueue: asyncAfterable)
+        let queueDouble = QueueDouble()
+        vc.inject(persistence: PersistenceDouble(registration: nil), registrationService: registrationService, mainQueue: queueDouble)
         XCTAssertNotNil(vc.view)
         
-        asyncAfterable.scheduledBlock?()
+        queueDouble.scheduledBlock?()
         
         registrationService.lastAttempt = nil
         vc.retryRegistrationTapped()

@@ -9,7 +9,9 @@
 import Foundation
 
 protocol TestableQueue {
+    func sync(execute block: () -> Void)
     func async(group: DispatchGroup?, qos: DispatchQoS, flags: DispatchWorkItemFlags, execute work: @escaping @convention(block) () -> Void)
+    func asyncAfter(deadline: DispatchTime, execute: @escaping @convention(block) () -> Void)
 }
 
 extension TestableQueue {
@@ -18,4 +20,8 @@ extension TestableQueue {
     }
 }
 
-extension DispatchQueue: TestableQueue {}
+extension DispatchQueue: TestableQueue {
+    func asyncAfter(deadline: DispatchTime, execute: @escaping @convention(block) () -> Void) {
+        asyncAfter(deadline: deadline, qos: .unspecified, flags: [], execute: execute)
+    }
+}

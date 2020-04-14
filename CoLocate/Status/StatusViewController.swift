@@ -16,7 +16,7 @@ class StatusViewController: UIViewController, Storyboarded {
 
     private var persistence: Persisting!
     private var registrationService: RegistrationService!
-    private var mainQueue: AsyncAfterable!
+    private var mainQueue: TestableQueue!
     
     @IBOutlet var registratonStatusView: UIView!
     @IBOutlet var registrationStatusIcon: UIImageView!
@@ -65,7 +65,7 @@ class StatusViewController: UIViewController, Storyboarded {
         }
     }
     
-    func inject(persistence: Persisting, registrationService: RegistrationService, mainQueue: AsyncAfterable) {
+    func inject(persistence: Persisting, registrationService: RegistrationService, mainQueue: TestableQueue) {
         self.persistence = persistence
         self.registrationService = registrationService
         self.mainQueue = mainQueue

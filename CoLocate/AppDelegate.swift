@@ -82,8 +82,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             remoteNotificationManager: remoteNotificationManager,
             notificationCenter: notificationCenter,
             registrationService: registrationService,
+            contactEventRepository: bluetoothNursery.contactEventRepository,
             session: URLSession.shared,
-            contactEventRepository: bluetoothNursery.contactEventRepository
+            uiQueue: DispatchQueue.main
         )
         
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -117,28 +118,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         logger.info("Did Become Active")
-
-        guard self.persistence.registration != nil else { return }
-
-        authorizationManager.notifications { [weak self] notificationStatus in
-            guard let self = self else { return }
-
-            DispatchQueue.main.sync {
-                guard let rootViewController = self.window?.rootViewController as? RootViewController else { return }
-
-                switch (self.authorizationManager.bluetooth, notificationStatus) {
-                case (.denied, _), (_, .denied):
-                    let permissionsDeniedViewController = PermissionsDeniedViewController.instantiate()
-                    rootViewController.present(permissionsDeniedViewController, animated: true)
-                default:
-                    guard rootViewController.presentedViewController as? PermissionsDeniedViewController != nil else {
-                        return
-                    }
-
-                    rootViewController.dismiss(animated: true)
-                }
-            }
-        }
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {

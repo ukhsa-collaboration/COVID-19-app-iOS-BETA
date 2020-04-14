@@ -19,9 +19,10 @@ class RootViewController: UIViewController {
     private var remoteNotificationManager: RemoteNotificationManager! = nil
     private var notificationCenter: NotificationCenter! = nil
     private var registrationService: RegistrationService! = nil
-    private var session: Session! = nil
-    private var contactEventRepository: PersistingContactEventRepository! = nil
+    private var contactEventRepository: ContactEventRepository! = nil
     private var statusViewController: StatusViewController!
+    private var session: Session! = nil
+    private var uiQueue: TestableQueue! = nil
 
     func inject(
         persistence: Persisting,
@@ -29,24 +30,27 @@ class RootViewController: UIViewController {
         remoteNotificationManager: RemoteNotificationManager,
         notificationCenter: NotificationCenter,
         registrationService: RegistrationService,
+        contactEventRepository: ContactEventRepository,
         session: Session,
-        contactEventRepository: PersistingContactEventRepository
-
+        uiQueue: TestableQueue
     ) {
         self.persistence = persistence
         self.authorizationManager = authorizationManager
         self.remoteNotificationManager = remoteNotificationManager
         self.notificationCenter = notificationCenter
         self.registrationService = registrationService
-        self.session = session
         self.contactEventRepository = contactEventRepository
+        self.session = session
+        self.uiQueue = uiQueue
 
         statusViewController = StatusViewController.instantiate()
         statusViewController.inject(
             persistence: persistence,
             registrationService: registrationService,
-            mainQueue: DispatchQueue.main
+            mainQueue: uiQueue
         )
+        
+        notificationCenter.addObserver(self, selector: #selector(applicationDidBecomeActive(_:)), name: UIApplication.didBecomeActiveNotification, object: nil)
 
         remoteNotificationManager.dispatcher.registerHandler(forType: .potentialDisagnosis) { (userInfo, completionHandler) in
             persistence.diagnosis = .potential
@@ -56,6 +60,7 @@ class RootViewController: UIViewController {
     }
 
     deinit {
+        notificationCenter.removeObserver(self)
         remoteNotificationManager.dispatcher.removeHandler(forType: .potentialDisagnosis)
     }
     
@@ -72,12 +77,35 @@ class RootViewController: UIViewController {
             let env = OnboardingEnvironment(persistence: persistence, authorizationManager: authorizationManager, remoteNotificationManager: remoteNotificationManager, notificationCenter: NotificationCenter.default)
             let coordinator = OnboardingCoordinator(persistence: persistence, authorizationManager: authorizationManager)
             
-            onboardingViewController.inject(env: env, coordinator: coordinator, uiQueue: DispatchQueue.main) {
+            onboardingViewController.inject(env: env, coordinator: coordinator, uiQueue: self.uiQueue) {
                 self.show(viewController: self.statusViewController)
             }
             
             onboardingViewController.showIn(container: self)
         }
+    }
+    
+    @objc func applicationDidBecomeActive(_ notification: NSNotification) {
+        guard self.persistence.registration != nil else { return }
+
+        authorizationManager.notifications { [weak self] notificationStatus in
+            guard let self = self else { return }
+
+            self.uiQueue.sync {
+                switch (self.authorizationManager.bluetooth, notificationStatus) {
+                case (.denied, _), (_, .denied):
+                    let permissionsDeniedViewController = PermissionsDeniedViewController.instantiate()
+                self.present(permissionsDeniedViewController, animated: true)
+                default:
+                    guard self.presentedViewController as? PermissionsDeniedViewController != nil else {
+                        return
+                    }
+
+                    self.dismiss(animated: true)
+                }
+            }
+        }
+
     }
     
     // MARK: - Debug view controller management
