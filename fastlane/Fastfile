@@ -15,7 +15,7 @@ platform :ios do
       def xcargs
         args = {
           API_ENDPOINT: ENV.fetch("API_ENDPOINT"),
-          PRODUCT_BUNDLE_IDENTIFIER: sonar_config.bundle_id,
+          PRODUCT_BUNDLE_IDENTIFIER: bundle_id,
         }
         args[:SWIFT_ACTIVE_COMPILATION_CONDITIONS] = "INTERNAL" if internal
         args.map {|k,v| "#{k}='#{v}'" }.join(" ")
