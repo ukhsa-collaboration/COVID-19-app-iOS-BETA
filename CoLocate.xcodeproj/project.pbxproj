@@ -94,6 +94,8 @@
 		F63279272435219A00CF7A42 /* QueueDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63279262435219A00CF7A42 /* QueueDouble.swift */; };
 		F632792A2435323200CF7A42 /* PermissionsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63279292435323200CF7A42 /* PermissionsViewControllerTests.swift */; };
 		F636453B243687DE0014FD54 /* PermissionsDeniedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F636453A243687DE0014FD54 /* PermissionsDeniedViewController.swift */; };
+		F63C7DA52446780100798854 /* AppIcon.beta.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F63C7DA42446780100798854 /* AppIcon.beta.xcassets */; };
+		F63C7DA72446780B00798854 /* AppIcon.internal.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F63C7DA62446780B00798854 /* AppIcon.internal.xcassets */; };
 		F65AE53C2432B842006544D4 /* Potential.rtf in Resources */ = {isa = PBXBuildFile; fileRef = F65AE53E2432B842006544D4 /* Potential.rtf */; };
 		F67A2291242AA35C002254B6 /* SecureRegistrationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A2290242AA35B002254B6 /* SecureRegistrationStorage.swift */; };
 		F67A2293242AA370002254B6 /* SecureRegistrationStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */; };
@@ -262,6 +264,8 @@
 		F63279262435219A00CF7A42 /* QueueDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueDouble.swift; sourceTree = "<group>"; };
 		F63279292435323200CF7A42 /* PermissionsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsViewControllerTests.swift; sourceTree = "<group>"; };
 		F636453A243687DE0014FD54 /* PermissionsDeniedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsDeniedViewController.swift; sourceTree = "<group>"; };
+		F63C7DA42446780100798854 /* AppIcon.beta.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppIcon.beta.xcassets; sourceTree = "<group>"; };
+		F63C7DA62446780B00798854 /* AppIcon.internal.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppIcon.internal.xcassets; sourceTree = "<group>"; };
 		F65AE53D2432B842006544D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = Base; path = Base.lproj/Potential.rtf; sourceTree = "<group>"; };
 		F67A2290242AA35B002254B6 /* SecureRegistrationStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRegistrationStorage.swift; sourceTree = "<group>"; };
 		F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRegistrationStorageTests.swift; sourceTree = "<group>"; };
@@ -554,7 +558,6 @@
 		6FC63C2F241641B8007C8BF3 /* CoLocate */ = {
 			isa = PBXGroup;
 			children = (
-				895D9E432437456D00573D4D /* Production */,
 				F78CEB74242BAC83002254AD /* CoLocate.entitlements */,
 				F78CEB53242B7E18002254AD /* CoLocate-Bridging-Header.h */,
 				F78CEB67242B8C2B002254AD /* GoogleService-Info.plist */,
@@ -605,14 +608,6 @@
 				895D9DE82437384C00573D4D /* CoLocateUITests.xcconfig */,
 			);
 			path = CoLocateUITests;
-			sourceTree = "<group>";
-		};
-		895D9E432437456D00573D4D /* Production */ = {
-			isa = PBXGroup;
-			children = (
-				895D9E452437458700573D4D /* AppIcon.xcassets */,
-			);
-			path = Production;
 			sourceTree = "<group>";
 		};
 		895D9E4924374EB800573D4D /* Routing */ = {
@@ -765,8 +760,11 @@
 		F758B8BC242CB83B003AE16D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				F65AE53E2432B842006544D4 /* Potential.rtf */,
 				F758B8BD242CB856003AE16D /* Localizable.strings */,
+				F63C7DA42446780100798854 /* AppIcon.beta.xcassets */,
+				F63C7DA62446780B00798854 /* AppIcon.internal.xcassets */,
+				895D9E452437458700573D4D /* AppIcon.xcassets */,
+				F65AE53E2432B842006544D4 /* Potential.rtf */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -926,8 +924,10 @@
 				F758B8BE242CB856003AE16D /* Localizable.strings in Resources */,
 				F68B89EA243B9FDC00F369A9 /* CoLocate.xcconfig in Resources */,
 				6FC63C38241641BA007C8BF3 /* Assets.xcassets in Resources */,
+				F63C7DA52446780100798854 /* AppIcon.beta.xcassets in Resources */,
 				F65AE53C2432B842006544D4 /* Potential.rtf in Resources */,
 				F6CA2819242E41F700F8DC55 /* README.md in Resources */,
+				F63C7DA72446780B00798854 /* AppIcon.internal.xcassets in Resources */,
 				895D9E462437458700573D4D /* AppIcon.xcassets in Resources */,
 				F68B89ED243CFF2600F369A9 /* SelfDiagnosis.storyboard in Resources */,
 				F6F05A322434310200FF4B72 /* Onboarding.storyboard in Resources */,
