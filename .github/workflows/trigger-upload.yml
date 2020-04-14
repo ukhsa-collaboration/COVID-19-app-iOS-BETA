@@ -22,6 +22,7 @@ jobs:
         id: check-upload-tag
         run: |
           git fetch origin test-flight
+          git checkout test-flight
           git fetch --tags
           git branch --contains tags/upload-to-test-flight | grep test-flight || echo "::set-output name=upload::true"
 
