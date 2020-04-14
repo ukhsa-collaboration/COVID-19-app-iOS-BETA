@@ -47,7 +47,9 @@ class RootViewController: UIViewController {
         statusViewController.inject(
             persistence: persistence,
             registrationService: registrationService,
-            mainQueue: uiQueue
+            mainQueue: uiQueue,
+            contactEventRepo: contactEventRepository,
+            session: session
         )
         
         notificationCenter.addObserver(self, selector: #selector(applicationDidBecomeActive(_:)), name: UIApplication.didBecomeActiveNotification, object: nil)

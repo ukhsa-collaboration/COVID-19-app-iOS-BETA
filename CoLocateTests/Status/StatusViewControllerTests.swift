@@ -12,9 +12,7 @@ import XCTest
 class StatusViewControllerTests: XCTestCase {
     
     func testShowsInitialRegisteredStatus() {
-        let vc = StatusViewController.instantiate()
-        vc.inject(persistence: PersistenceDouble(registration: arbitraryRegistration()), registrationService: RegistrationServiceDouble(), mainQueue: QueueDouble())
-        XCTAssertNotNil(vc.view)
+        let vc = makeViewController(persistence: PersistenceDouble(registration: arbitraryRegistration()))
         
         XCTAssertEqual(vc.registrationStatusText?.text, "Everything is working OK")
         XCTAssertEqual(vc.registrationStatusIcon?.image, UIImage(named: "Registration_status_ok"))
@@ -26,9 +24,7 @@ class StatusViewControllerTests: XCTestCase {
     }
     
     func testShowsInitialInProgressStatus() {
-        let vc = StatusViewController.instantiate()
-        vc.inject(persistence: PersistenceDouble(registration: nil), registrationService: RegistrationServiceDouble(), mainQueue: QueueDouble())
-        XCTAssertNotNil(vc.view)
+        let vc = makeViewController(persistence: PersistenceDouble(registration: nil))
         
         XCTAssertEqual(vc.registrationStatusText?.text, "Finalising setup...")
         XCTAssertTrue(vc.registrationStatusIcon?.isHidden ?? false)
@@ -39,20 +35,16 @@ class StatusViewControllerTests: XCTestCase {
     }
     
     func testStartsRegistrationOnShownWhenNotAlreadyRegistered() {
-        let vc = StatusViewController.instantiate()
         let registrationService = RegistrationServiceDouble()
-        vc.inject(persistence: PersistenceDouble(registration: nil), registrationService: registrationService, mainQueue: QueueDouble())
-        XCTAssertNotNil(vc.view)
+        _ = makeViewController(persistence: PersistenceDouble(registration: nil), registrationService: registrationService)
         
         XCTAssertNotNil(registrationService.lastAttempt)
     }
     
     func testUpdatesAfterRegistrationCompletes() {
-        let vc = StatusViewController.instantiate()
         let registrationService = RegistrationServiceDouble()
-        vc.inject(persistence: PersistenceDouble(registration: nil), registrationService: registrationService, mainQueue: QueueDouble())
-        XCTAssertNotNil(vc.view)
-        
+        let vc = makeViewController(persistence: PersistenceDouble(registration: nil), registrationService: registrationService)
+
         registrationService.completionHandler?(Result<(), Error>.success(()))
         
         XCTAssertEqual(vc.registrationStatusText?.text, "Everything is working OK")
@@ -65,10 +57,8 @@ class StatusViewControllerTests: XCTestCase {
     }
     
     func testUpdatesAfterRegistrationFails() {
-        let vc = StatusViewController.instantiate()
         let registrationService = RegistrationServiceDouble()
-        vc.inject(persistence: PersistenceDouble(registration: nil), registrationService: registrationService, mainQueue: QueueDouble())
-        XCTAssertNotNil(vc.view)
+        let vc = makeViewController(persistence: PersistenceDouble(registration: nil), registrationService: registrationService)
         
         registrationService.completionHandler?(Result<(), Error>.failure(ErrorForTest()))
         
@@ -82,11 +72,9 @@ class StatusViewControllerTests: XCTestCase {
     }
     
     func testShowsFailureAfter20Seconds() {
-        let vc = StatusViewController.instantiate()
         let registrationService = RegistrationServiceDouble()
         let queueDouble = QueueDouble()
-        vc.inject(persistence: PersistenceDouble(registration: nil), registrationService: registrationService, mainQueue: queueDouble)
-        XCTAssertNotNil(vc.view)
+        let vc = makeViewController(persistence: PersistenceDouble(registration: nil), registrationService: registrationService, mainQueue: queueDouble)
         
         queueDouble.scheduledBlock?()
         
@@ -100,12 +88,10 @@ class StatusViewControllerTests: XCTestCase {
     }
     
     func testDoesNotShowFailureAfter20SecondsIfSucceeded() {
-        let vc = StatusViewController.instantiate()
         let registrationService = RegistrationServiceDouble()
         let queueDouble = QueueDouble()
-        vc.inject(persistence: PersistenceDouble(registration: nil), registrationService: registrationService, mainQueue: queueDouble)
-        XCTAssertNotNil(vc.view)
-        
+        let vc = makeViewController(persistence: PersistenceDouble(registration: nil), registrationService: registrationService, mainQueue: queueDouble)
+
         registrationService.completionHandler?(Result<(), Error>.success(()))
         queueDouble.scheduledBlock?()
         
@@ -118,11 +104,9 @@ class StatusViewControllerTests: XCTestCase {
     }
     
     func testCancelsAfter20Seconds() {
-        let vc = StatusViewController.instantiate()
         let registrationService = RegistrationServiceDouble()
         let queueDouble = QueueDouble()
-        vc.inject(persistence: PersistenceDouble(registration: nil), registrationService: registrationService, mainQueue: queueDouble)
-        XCTAssertNotNil(vc.view)
+        _ = makeViewController(persistence: PersistenceDouble(registration: nil), registrationService: registrationService, mainQueue: queueDouble)
         
         queueDouble.scheduledBlock?()
 
@@ -130,11 +114,9 @@ class StatusViewControllerTests: XCTestCase {
     }
     
     func testRetry() {
-        let vc = StatusViewController.instantiate()
         let registrationService = RegistrationServiceDouble()
         let queueDouble = QueueDouble()
-        vc.inject(persistence: PersistenceDouble(registration: nil), registrationService: registrationService, mainQueue: queueDouble)
-        XCTAssertNotNil(vc.view)
+        let vc = makeViewController(persistence: PersistenceDouble(registration: nil), registrationService: registrationService, mainQueue: queueDouble)
         
         queueDouble.scheduledBlock?()
         
@@ -154,4 +136,15 @@ class StatusViewControllerTests: XCTestCase {
     func arbitraryRegistration() -> Registration {
         return Registration(id: UUID(), secretKey: Data())
     }
+}
+
+fileprivate func makeViewController(
+    persistence: Persisting,
+    registrationService: RegistrationService = RegistrationServiceDouble(),
+    mainQueue: TestableQueue = QueueDouble()
+) -> StatusViewController {
+    let vc = StatusViewController.instantiate()
+    vc.inject(persistence: persistence, registrationService: registrationService, mainQueue: mainQueue, contactEventRepo: ContactEventRepositoryDouble(), session: SessionDouble())
+    XCTAssertNotNil(vc.view)
+    return vc
 }

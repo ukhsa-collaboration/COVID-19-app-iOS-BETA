@@ -14,6 +14,16 @@ class TemperatureViewController: UIViewController {
     @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var yesButton: AnswerButton!
     @IBOutlet weak var noButton: AnswerButton!
+    
+    var persistence: Persisting!
+    var contactEventRepo: ContactEventRepository!
+    var session: Session!
+    
+    func inject(persistence: Persisting, contactEventRepo: ContactEventRepository, session: Session) {
+        self.persistence = persistence
+        self.contactEventRepo = contactEventRepo
+        self.session = session
+    }
 
     var hasHighTemperature: Bool? {
         didSet {
@@ -61,7 +71,7 @@ class TemperatureViewController: UIViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? CoughViewController {
-            vc.hasHighTemperature = hasHighTemperature
+            vc.inject(persistence: persistence, contactEventRepo: contactEventRepo, session: session, hasHighTemperature: hasHighTemperature!)
         }
     }
 }

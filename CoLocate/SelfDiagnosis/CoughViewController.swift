@@ -14,6 +14,17 @@ class CoughViewController: UIViewController {
     @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var yesButton: AnswerButton!
     @IBOutlet weak var noButton: AnswerButton!
+    
+    private var persistence: Persisting!
+    private var contactEventRepo: ContactEventRepository!
+    private var session: Session!
+    
+    func inject(persistence: Persisting, contactEventRepo: ContactEventRepository, session: Session, hasHighTemperature: Bool) {
+        self.persistence = persistence
+        self.contactEventRepo = contactEventRepo
+        self.session = session
+        self.hasHighTemperature = hasHighTemperature
+    }
 
     var hasHighTemperature: Bool!
     var hasNewCough: Bool? {
@@ -62,8 +73,7 @@ class CoughViewController: UIViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? SubmitSymptomsViewController {
-            vc.hasHighTemperature = hasHighTemperature
-            vc.hasNewCough = hasNewCough
+            vc.inject(persistence: persistence, contactEventRepository: contactEventRepo, session: session, hasHighTemperature: hasHighTemperature, hasNewCough: hasNewCough!)
         }
     }
 }

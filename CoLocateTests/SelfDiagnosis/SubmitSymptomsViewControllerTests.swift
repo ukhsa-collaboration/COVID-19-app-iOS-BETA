@@ -11,31 +11,24 @@ import XCTest
 
 class SubmitSymptomsViewControllerTests: TestCase {
 
-    func testNotRegistered() {
-        // TODO
+    func testNotRegistered() throws {
+        throw XCTSkip("TODO: write this test")
     }
     
-    func testSubmitTapped() {
-        let registration: Registration = Registration.fake
-        let persistenceDouble = PersistenceDouble(registration: registration)
-
-        let contactEventRepository = MockContactEventRepository(contactEvents: [ContactEvent(sonarId: Data())])
-
-        var actualRegistration: Registration?
-        var actualContactEvents: [ContactEvent]?
+    func testSubmitTapped() throws {
+        let registration = Registration(id: UUID(uuidString: "FA817D5C-C615-4ABE-83B5-ABDEE8FAB8A6")!, secretKey: Data())
+        let contactEvents = [ContactEvent(sonarId: "a sonar id".data(using: .utf8))]
+        let session = SessionDouble()
 
         let vc = SubmitSymptomsViewController.instantiate()
-        XCTAssertNotNil(vc.view)
-        vc._inject(
-            persistence: persistenceDouble,
-            contactEventRepository: contactEventRepository,
-            sendContactEvents: { registration, contactEvents, _ in
-                actualRegistration = registration
-                actualContactEvents = contactEvents
-            }
+        vc.inject(
+            persistence:  PersistenceDouble(registration: registration),
+            contactEventRepository: MockContactEventRepository(contactEvents: contactEvents),
+            session: session,
+            hasHighTemperature: false,
+            hasNewCough: true
         )
-        vc.hasHighTemperature = false
-        vc.hasNewCough = true
+        XCTAssertNotNil(vc.view)
 
         let unwinder = SelfDiagnosisUnwinder()
         parentViewControllerForTests.viewControllers = [unwinder]
@@ -43,27 +36,42 @@ class SubmitSymptomsViewControllerTests: TestCase {
 
         let button = PrimaryButton()
         vc.submitTapped(button)
-
+        
         XCTAssertFalse(button.isEnabled)
-        XCTAssertEqual(actualRegistration, registration)
-        XCTAssertEqual(actualContactEvents, contactEventRepository.contactEvents)
+
+        guard let request = session.requestSent as? PatchContactEventsRequest else {
+            XCTFail("Expected a PatchContactEventsRequest but got \(String(describing: session.requestSent))")
+            return
+        }
+        
+        XCTAssertEqual(request.path, "/api/residents/FA817D5C-C615-4ABE-83B5-ABDEE8FAB8A6")
+        
+        switch request.method {
+        case .patch(let data):
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .iso8601
+            let decoded = try decoder.decode(PatchContactEventsRequest.JSONWrapper.self, from: data)
+            // Can't compare the entire contact events because the timestamp loses precision
+            // when JSON encoded and decoded.
+            XCTAssertEqual(decoded.contactEvents.first?.sonarId, contactEvents.first?.sonarId)
+        default:
+            XCTFail("Expected a patch request but got \(request.method)")
+        }
     }
 
     func testSubmitSuccess() {
-        let persistenceDouble = PersistenceDouble(registration: Registration.fake)
         let contactEventRepository = MockContactEventRepository(contactEvents: [ContactEvent(sonarId: Data())])
-
-        var completion: ((Result<Void, Error>) -> Void)?
+        let session = SessionDouble()
 
         let vc = SubmitSymptomsViewController.instantiate()
-        XCTAssertNotNil(vc.view)
-        vc._inject(
-            persistence: persistenceDouble,
+        vc.inject(
+            persistence: PersistenceDouble(registration: Registration.fake),
             contactEventRepository: contactEventRepository,
-            sendContactEvents: { completion = $2 }
+            session: session,
+            hasHighTemperature: false,
+            hasNewCough: true
         )
-        vc.hasHighTemperature = false
-        vc.hasNewCough = true
+        XCTAssertNotNil(vc.view)
 
         let unwinder = SelfDiagnosisUnwinder()
         parentViewControllerForTests.viewControllers = [unwinder]
@@ -71,31 +79,33 @@ class SubmitSymptomsViewControllerTests: TestCase {
 
         let button = PrimaryButton()
         vc.submitTapped(button)
-
-        XCTAssertNotNil(completion)
-
-        completion?(.success(()))
         
+        guard let sessionCompletion = session.executeCompletion else {
+            XCTFail("Request was not made")
+            return
+        }
+        
+        sessionCompletion(Result<(), Error>.success(()))
+
         XCTAssertTrue(contactEventRepository.hasReset)
         XCTAssertTrue(button.isEnabled)
         XCTAssertTrue(unwinder.didUnwindFromSelfDiagnosis)
     }
 
     func testSubmitFailure() {
-        let persistenceDouble = PersistenceDouble(registration: Registration.fake)
         let contactEventRepository = MockContactEventRepository(contactEvents: [ContactEvent(sonarId: Data())])
-
-        var completion: ((Result<Void, Error>) -> Void)?
+        let session = SessionDouble()
 
         let vc = SubmitSymptomsViewController.instantiate()
-        XCTAssertNotNil(vc.view)
-        vc._inject(
-            persistence: persistenceDouble,
+        parentViewControllerForTests.viewControllers = [vc]
+        vc.inject(
+            persistence: PersistenceDouble(registration: Registration.fake),
             contactEventRepository: contactEventRepository,
-            sendContactEvents: { completion = $2 }
+            session: session,
+            hasHighTemperature: false,
+            hasNewCough: true
         )
-        vc.hasHighTemperature = false
-        vc.hasNewCough = true
+        XCTAssertNotNil(vc.view)
 
         let unwinder = SelfDiagnosisUnwinder()
         parentViewControllerForTests.viewControllers = [unwinder]
@@ -103,27 +113,41 @@ class SubmitSymptomsViewControllerTests: TestCase {
 
         let button = PrimaryButton()
         vc.submitTapped(button)
-
-        XCTAssertNotNil(completion)
-
-
-        // TODO: Fill in with the expected behavior - this currently panics.
-//        completion?(.failure(FakeError.fake))
-//
-//        XCTAssertTrue(button.isEnabled)
+        
+        guard let sessionCompletion = session.executeCompletion else {
+            XCTFail("Request was not made")
+            return
+        }
+        
+        sessionCompletion(Result<(), Error>.failure(ErrorForTest()))
+        
+        let expectation = XCTestExpectation(description: "Alert was presented")
+        var done = false
+        
+        func pollPresentedVC() {
+            if vc.presentedViewController as? UIAlertController != nil {
+                expectation.fulfill()
+            } else if !done {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.25, execute: { pollPresentedVC() })
+            }
+        }
+        
+        pollPresentedVC()
+        wait(for: [expectation], timeout: 2.0)
+        done = true
     }
 
 }
 
 
-class SelfDiagnosisUnwinder: UIViewController {
+fileprivate class SelfDiagnosisUnwinder: UIViewController {
     var didUnwindFromSelfDiagnosis = false
     @IBAction func unwindFromSelfDiagnosis(unwindSegue: UIStoryboardSegue) {
         didUnwindFromSelfDiagnosis = true
     }
 }
 
-class MockContactEventRepository: ContactEventRepository {
+fileprivate class MockContactEventRepository: ContactEventRepository {
     var contactEvents: [ContactEvent] = []
     var hasReset: Bool = false
     

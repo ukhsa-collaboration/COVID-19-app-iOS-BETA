@@ -9,37 +9,29 @@
 import UIKit
 import Logging
 
-typealias SendContactEvents = (Registration, [ContactEvent], @escaping (Result<Void, Error>) -> Void) -> Void
-
 class SubmitSymptomsViewController: UIViewController, Storyboarded {
     static let storyboardName = "SelfDiagnosis"
 
     private var persistence: Persisting!
     private var contactEventRepository: ContactEventRepository!
-    private var sendContactEvents: SendContactEvents!
+    private var session: Session!
+    private var hasHighTemperature: Bool!
+    private var hasNewCough: Bool!
 
-    func _inject(persistence: Persisting, contactEventRepository: ContactEventRepository, sendContactEvents: @escaping SendContactEvents) {
+    func inject(persistence: Persisting, contactEventRepository: ContactEventRepository, session: Session, hasHighTemperature: Bool, hasNewCough: Bool) {
         self.persistence = persistence
         self.contactEventRepository = contactEventRepository
-        self.sendContactEvents = sendContactEvents
+        self.session = session
+        self.hasHighTemperature = hasHighTemperature
+        self.hasNewCough = hasNewCough
     }
 
-    var hasHighTemperature: Bool!
-    var hasNewCough: Bool!
     
     @IBOutlet weak var summary: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         
         summary.text = "QUESTION_SUMMARY".localized
-        
-        persistence = Persistence.shared
-        contactEventRepository = (UIApplication.shared.delegate as! AppDelegate).bluetoothNursery.contactEventRepository
-        sendContactEvents = { registration, contactEvents, completion in
-            let requestFactory = ConcreteSecureRequestFactory(registration: registration)
-            let request = requestFactory.patchContactsRequest(contactEvents: contactEvents)
-            URLSession.shared.execute(request, queue: .main, completion: completion)
-        }
     }
     
     @IBAction func submitTapped(_ sender: PrimaryButton) {
@@ -56,8 +48,10 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         if hasHighTemperature && hasNewCough {
             persistence.diagnosis = .infected
         }
-
-        sendContactEvents(registration, contactEventRepository.contactEvents, { [weak self] result in
+        
+        let requestFactory = ConcreteSecureRequestFactory(registration: registration)
+        let request = requestFactory.patchContactsRequest(contactEvents: contactEventRepository.contactEvents)
+        session.execute(request, queue: .main) { [weak self] result in
             guard let self = self else { return }
 
             sender.isEnabled = true
@@ -69,7 +63,7 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
             case .failure(let error):
                 self.alert(error: error)
             }
-        })
+        }
     }
 
     private func alert(error: Error) {
