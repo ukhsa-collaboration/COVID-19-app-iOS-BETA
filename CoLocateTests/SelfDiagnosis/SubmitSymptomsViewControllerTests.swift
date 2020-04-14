@@ -15,7 +15,7 @@ class SubmitSymptomsViewControllerTests: TestCase {
         // TODO
     }
     
-    func xtestSubmitTapped() {
+    func testSubmitTapped() {
         let registration: Registration = Registration.fake
         let persistenceDouble = PersistenceDouble(registration: registration)
 
@@ -25,6 +25,7 @@ class SubmitSymptomsViewControllerTests: TestCase {
         var actualContactEvents: [ContactEvent]?
 
         let vc = SubmitSymptomsViewController.instantiate()
+        XCTAssertNotNil(vc.view)
         vc._inject(
             persistence: persistenceDouble,
             contactEventRepository: contactEventRepository,
@@ -48,13 +49,14 @@ class SubmitSymptomsViewControllerTests: TestCase {
         XCTAssertEqual(actualContactEvents, contactEventRepository.contactEvents)
     }
 
-    func xtestSubmitSuccess() {
+    func testSubmitSuccess() {
         let persistenceDouble = PersistenceDouble(registration: Registration.fake)
         let contactEventRepository = MockContactEventRepository(contactEvents: [ContactEvent(sonarId: Data())])
 
         var completion: ((Result<Void, Error>) -> Void)?
 
         let vc = SubmitSymptomsViewController.instantiate()
+        XCTAssertNotNil(vc.view)
         vc._inject(
             persistence: persistenceDouble,
             contactEventRepository: contactEventRepository,
@@ -79,13 +81,14 @@ class SubmitSymptomsViewControllerTests: TestCase {
         XCTAssertTrue(unwinder.didUnwindFromSelfDiagnosis)
     }
 
-    func xtestSubmitFailure() {
+    func testSubmitFailure() {
         let persistenceDouble = PersistenceDouble(registration: Registration.fake)
         let contactEventRepository = MockContactEventRepository(contactEvents: [ContactEvent(sonarId: Data())])
 
         var completion: ((Result<Void, Error>) -> Void)?
 
         let vc = SubmitSymptomsViewController.instantiate()
+        XCTAssertNotNil(vc.view)
         vc._inject(
             persistence: persistenceDouble,
             contactEventRepository: contactEventRepository,
