@@ -10,7 +10,68 @@ platform :ios do
   #   security set-key-partition-list -S apple-tool:,apple: -s -k "" \
   #     ~/Library/Keychains/fastlane_tmp_keychain-db
 
-  desc "Push a new internal build to TestFlight"
+  module Sonar
+    Config = Struct.new(:bundle_id, :apple_id, :internal, keyword_init: true) do
+      def xcargs
+        args = { PRODUCT_BUNDLE_IDENTIFIER: sonar_config.bundle_id }
+        args[:SWIFT_ACTIVE_COMPILATION_CONDITIONS] = "INTERNAL" if internal
+        args.map {|k,v| "#{k}='#{v}'" }.join(" ")
+      end
+    end
+
+    CONFIGS = {
+      beta: Config.new(
+        bundle_id: "uk.nhs.nhsx.beta.CoLocate",
+        apple_id: 1504244021,
+        internal: true,
+      ),
+      internal: Config.new(
+        bundle_id: "uk.nhs.nhsx.sonar.internal",
+        apple_id: 1507438009,
+        internal: true,
+      ),
+      prod: Config.new(
+        bundle_id: "uk.nhs.nhsx.sonar",
+        apple_id: 1507396059,
+        internal: false,
+      ),
+    }
+  end
+
+  desc "Cut a release for Test Flight"
+  lane :release do
+    sonar_config = Sonar::CONFIGS.fetch(options.fetch("sonar_env"))
+
+    setup_ci()
+
+    sync_code_signing(
+      type: "appstore",
+      readonly: true,
+      app_identifier: sonar_config.bundle_id,
+      git_url: "./ci/match",
+    )
+
+    update_code_signing_settings(
+      use_automatic_signing: false,
+      path: "CoLocate.xcodeproj",
+      targets: ["CoLocate"],
+      code_sign_identity: "iPhone Distribution",
+      profile_name: "match AppStore #{sonar_config.bundle_id}",
+    )
+
+    build_app(
+      scheme: "CoLocate",
+      xcargs: sonar_config.xcargs,
+    )
+
+    upload_to_testflight(
+      username: ENV.fetch("APPLE_USERNAME"),
+      apple_id: sonar_config.apple_id,
+      skip_waiting_for_build_processing: true,
+    )
+  end
+
+  desc "Push a new beta build to TestFlight"
   lane :internal do
     setup_ci()
 
