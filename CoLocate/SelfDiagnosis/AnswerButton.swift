@@ -8,11 +8,22 @@
 
 import UIKit
 
-class AnswerButton: UIButton {
+@IBDesignable
+class AnswerButton: UIControl {
+
+    @IBInspectable var text: String? {
+        didSet {
+            textLabel.text = text
+        }
+    }
+
+    let textLabel = UILabel()
+    let imageView = UIImageView()
+
     override var isSelected: Bool {
         didSet {
             layer.borderWidth = isSelected ? 2 : 0
-            layer.borderColor = UIColor(named: "NHS Blue")?.cgColor
+            imageView.isHighlighted = isSelected
         }
     }
 
@@ -21,19 +32,38 @@ class AnswerButton: UIButton {
     }
 
     override func awakeFromNib() {
-        layer.cornerRadius = 10
+        layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+
+        layer.cornerRadius = 16
+        layer.borderColor = UIColor(named: "NHS Blue")!.cgColor
 
         backgroundColor = UIColor(named: "NHS White")
-        setTitleColor(UIColor(named: "NHS Text"), for: .normal)
-        titleLabel?.adjustsFontForContentSizeCategory = true
-        titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
 
-        setImage(UIImage(named: "Controls_RadioButton_Unselected"), for: .normal)
-        setImage(UIImage(named: "Controls_RadioButton_Selected"), for: .selected)
+        textLabel.font = UIFont.preferredFont(forTextStyle: .body)
 
-        contentHorizontalAlignment = .left
-        contentEdgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-        titleEdgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-        titleLabel?.numberOfLines = 0
+        imageView.image = UIImage(named: "Controls_RadioButton_Unselected")
+        imageView.highlightedImage = UIImage(named: "Controls_RadioButton_Selected")
+
+        let stack = UIStackView(arrangedSubviews: [
+            textLabel,
+            imageView,
+        ])
+        stack.axis = .horizontal
+        stack.alignment = .center
+        stack.distribution = .fill
+        stack.spacing = 20
+
+        addSubview(stack)
+        stack.isUserInteractionEnabled = false
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            stack.leftAnchor.constraint(equalTo: layoutMarginsGuide.leftAnchor),
+            stack.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor),
+            stack.rightAnchor.constraint(equalTo: layoutMarginsGuide.rightAnchor),
+            stack.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor),
+        ])
+        textLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        imageView.setContentHuggingPriority(.required, for: .horizontal)
     }
+
 }

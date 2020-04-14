@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="2Z9-2c-Oc6">
-                                        <rect key="frame" x="20" y="32" width="374" height="293"/>
+                                        <rect key="frame" x="20" y="32" width="374" height="425"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1/3" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NfZ-qV-GRo">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="16"/>
@@ -56,7 +56,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hV1-08-Ex4" userLabel="Spacer">
                                                 <rect key="frame" x="0.0" y="87" width="374" height="50"/>
                                                 <subviews>
-                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temperature Error" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EEp-p2-YdY">
+                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temperature Error" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EEp-p2-YdY">
                                                         <rect key="frame" x="0.0" y="18" width="374" height="16"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                         <color key="textColor" name="NHS Error"/>
@@ -67,38 +67,45 @@
                                                     <constraint firstItem="EEp-p2-YdY" firstAttribute="leading" secondItem="hV1-08-Ex4" secondAttribute="leading" id="0NZ-qE-UAJ"/>
                                                     <constraint firstAttribute="trailing" secondItem="EEp-p2-YdY" secondAttribute="trailing" id="AXN-rU-peu"/>
                                                     <constraint firstItem="EEp-p2-YdY" firstAttribute="top" relation="greaterThanOrEqual" secondItem="hV1-08-Ex4" secondAttribute="top" id="V48-QY-IsT"/>
-                                                    <constraint firstAttribute="height" constant="50" id="dXr-lP-qXN"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="dXr-lP-qXN"/>
+                                                    <constraint firstAttribute="height" constant="50" placeholder="YES" id="jdd-GS-Sfq"/>
                                                     <constraint firstAttribute="bottom" secondItem="EEp-p2-YdY" secondAttribute="bottom" constant="16" id="zxd-Ge-Lhe"/>
                                                 </constraints>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w1A-qm-bjB" userLabel="Yes" customClass="AnswerButton" customModule="CoLocate" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="137" width="374" height="34"/>
-                                                <state key="normal" title="Yes (Temperature)"/>
+                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="Vw9-t8-qg5" customClass="AnswerButton" customModule="CoLocate" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="137" width="374" height="100"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="text" value="Yes (Temperature)"/>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="yesTapped:" destination="Jpv-Nm-90l" eventType="touchUpInside" id="ycO-OY-lIX"/>
+                                                    <action selector="yesTapped:" destination="Jpv-Nm-90l" eventType="touchUpInside" id="Z4S-RV-hAg"/>
                                                 </connections>
-                                            </button>
+                                            </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qSZ-MH-T5o" userLabel="Spacer">
-                                                <rect key="frame" x="0.0" y="171" width="374" height="8"/>
+                                                <rect key="frame" x="0.0" y="237" width="374" height="8"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="8" id="OGb-nK-cv3"/>
                                                 </constraints>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SHV-X8-1zF" userLabel="No" customClass="AnswerButton" customModule="CoLocate" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="179" width="374" height="34"/>
-                                                <state key="normal" title="No (Temperature)"/>
+                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="ozZ-4u-kSR" customClass="AnswerButton" customModule="CoLocate" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="245" width="374" height="100"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="text" value="No (Temperature)"/>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="noTapped:" destination="Jpv-Nm-90l" eventType="touchUpInside" id="xXP-fv-mge"/>
+                                                    <action selector="noTapped:" destination="Jpv-Nm-90l" eventType="touchUpInside" id="4Af-RL-gWA"/>
                                                 </connections>
-                                            </button>
+                                            </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pi4-yz-lrD" userLabel="Spacer">
-                                                <rect key="frame" x="0.0" y="213" width="374" height="50"/>
+                                                <rect key="frame" x="0.0" y="345" width="374" height="50"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="1" id="1FD-ut-bKn"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="16" id="1FD-ut-bKn"/>
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jG0-JS-mYk" userLabel="Continue" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="263" width="374" height="30"/>
+                                                <rect key="frame" x="0.0" y="395" width="374" height="30"/>
                                                 <state key="normal" title="Continue"/>
                                                 <connections>
                                                     <action selector="continueTapped:" destination="Jpv-Nm-90l" eventType="touchUpInside" id="Ap7-G3-EFd"/>
@@ -138,9 +145,9 @@
                     <connections>
                         <outlet property="detailLabel" destination="H04-Lf-rLE" id="z1z-hP-XW7"/>
                         <outlet property="errorLabel" destination="EEp-p2-YdY" id="chr-dr-pcg"/>
-                        <outlet property="noButton" destination="SHV-X8-1zF" id="sYV-JX-EHZ"/>
+                        <outlet property="noButton" destination="ozZ-4u-kSR" id="wSo-AC-rvA"/>
                         <outlet property="questionLabel" destination="uOT-OJ-I6V" id="VqT-ab-9aD"/>
-                        <outlet property="yesButton" destination="w1A-qm-bjB" id="xGA-XG-SFf"/>
+                        <outlet property="yesButton" destination="Vw9-t8-qg5" id="ue8-uX-K6k"/>
                         <segue destination="DhY-Gr-smF" kind="show" identifier="coughSegue" id="FUJ-cg-seN"/>
                     </connections>
                 </viewController>
@@ -161,7 +168,7 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="xOc-a4-tAc">
-                                        <rect key="frame" x="20" y="32" width="374" height="293"/>
+                                        <rect key="frame" x="20" y="32" width="374" height="425"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2/3" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jbu-QY-HtH">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="16"/>
@@ -196,7 +203,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G1e-Cu-Omk" userLabel="Spacer">
                                                 <rect key="frame" x="0.0" y="87" width="374" height="50"/>
                                                 <subviews>
-                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cough Error" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gTL-ig-wPS">
+                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cough Error" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gTL-ig-wPS">
                                                         <rect key="frame" x="0.0" y="18" width="374" height="16"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                         <color key="textColor" name="NHS Error"/>
@@ -205,40 +212,47 @@
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstItem="gTL-ig-wPS" firstAttribute="top" relation="greaterThanOrEqual" secondItem="G1e-Cu-Omk" secondAttribute="top" id="0bS-R9-HOQ"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="4DP-3U-DQR"/>
                                                     <constraint firstItem="gTL-ig-wPS" firstAttribute="leading" secondItem="G1e-Cu-Omk" secondAttribute="leading" id="5ZQ-H4-2XT"/>
                                                     <constraint firstAttribute="bottom" secondItem="gTL-ig-wPS" secondAttribute="bottom" constant="16" id="U4e-ru-i37"/>
-                                                    <constraint firstAttribute="height" constant="50" id="XwW-YL-XKW"/>
+                                                    <constraint firstAttribute="height" constant="50" placeholder="YES" id="XwW-YL-XKW"/>
                                                     <constraint firstAttribute="trailing" secondItem="gTL-ig-wPS" secondAttribute="trailing" id="sqV-BR-mfd"/>
                                                 </constraints>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1cr-gz-NVJ" userLabel="Yes" customClass="AnswerButton" customModule="CoLocate" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="137" width="374" height="34"/>
-                                                <state key="normal" title="Yes (Cough)"/>
+                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="jqb-jq-LE5" customClass="AnswerButton" customModule="CoLocate" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="137" width="374" height="100"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="text" value="Yes (Cough)"/>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="yesTapped:" destination="DhY-Gr-smF" eventType="touchUpInside" id="K6s-kL-Tdn"/>
+                                                    <action selector="yesTapped:" destination="DhY-Gr-smF" eventType="touchUpInside" id="RKT-es-e1w"/>
                                                 </connections>
-                                            </button>
+                                            </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="97b-e5-l0B" userLabel="Spacer">
-                                                <rect key="frame" x="0.0" y="171" width="374" height="8"/>
+                                                <rect key="frame" x="0.0" y="237" width="374" height="8"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="8" id="vBG-Be-ImL"/>
                                                 </constraints>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wrg-PU-gkP" userLabel="No" customClass="AnswerButton" customModule="CoLocate" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="179" width="374" height="34"/>
-                                                <state key="normal" title="No (Cough)"/>
+                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="2oq-qV-AhN" customClass="AnswerButton" customModule="CoLocate" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="245" width="374" height="100"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="text" value="No (Cough)"/>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="noTapped:" destination="DhY-Gr-smF" eventType="touchUpInside" id="3BH-Ia-6Zp"/>
+                                                    <action selector="noTapped:" destination="DhY-Gr-smF" eventType="touchUpInside" id="4Uj-5V-HXA"/>
                                                 </connections>
-                                            </button>
+                                            </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mxc-P6-dNX" userLabel="Spacer">
-                                                <rect key="frame" x="0.0" y="213" width="374" height="50"/>
+                                                <rect key="frame" x="0.0" y="345" width="374" height="50"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="1" id="OUL-vh-xbL"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="16" id="OUL-vh-xbL"/>
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kub-if-PMI" userLabel="Continue" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="263" width="374" height="30"/>
+                                                <rect key="frame" x="0.0" y="395" width="374" height="30"/>
                                                 <state key="normal" title="Continue"/>
                                                 <connections>
                                                     <action selector="continueTapped:" destination="DhY-Gr-smF" eventType="touchUpInside" id="feu-KD-Vok"/>
@@ -278,9 +292,9 @@
                     <connections>
                         <outlet property="detailLabel" destination="lfF-B3-ch8" id="XlU-iY-bUb"/>
                         <outlet property="errorLabel" destination="gTL-ig-wPS" id="goP-dC-tQa"/>
-                        <outlet property="noButton" destination="Wrg-PU-gkP" id="E4e-9m-3e7"/>
+                        <outlet property="noButton" destination="2oq-qV-AhN" id="oI1-pf-mXk"/>
                         <outlet property="questionLabel" destination="4Cy-NY-5GO" id="B6J-Ic-ViM"/>
-                        <outlet property="yesButton" destination="1cr-gz-NVJ" id="QVZ-KK-c7q"/>
+                        <outlet property="yesButton" destination="jqb-jq-LE5" id="MLm-uN-B8A"/>
                         <segue destination="ofL-pj-tC8" kind="show" identifier="submitSegue" id="N2W-j3-Ow8"/>
                     </connections>
                 </viewController>

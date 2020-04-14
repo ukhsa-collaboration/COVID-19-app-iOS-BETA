@@ -38,8 +38,8 @@ class CoughViewController: UIViewController {
         questionLabel.text = "COUGH_QUESTION".localized
         detailLabel.text = "COUGH_DETAIL".localized
         errorLabel.text = "COUGH_ERROR".localized
-        yesButton.setTitle("COUGH_YES".localized, for: .normal)
-        noButton.setTitle("COUGH_NO".localized, for: .normal)
+        yesButton.text = "COUGH_YES".localized
+        noButton.text = "COUGH_NO".localized
         errorLabel.textColor = UIColor(named: "NHS Error")
     }
 

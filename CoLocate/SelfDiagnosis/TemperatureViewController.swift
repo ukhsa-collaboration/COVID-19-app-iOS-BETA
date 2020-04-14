@@ -37,8 +37,8 @@ class TemperatureViewController: UIViewController {
         questionLabel.text = "TEMPERATURE_QUESTION".localized
         detailLabel.text = "TEMPERATURE_DETAIL".localized
         errorLabel.text = "TEMPERATURE_ERROR".localized
-        yesButton.setTitle("TEMPERATURE_YES".localized, for: .normal)
-        noButton.setTitle("TEMPERATURE_NO".localized, for: .normal)
+        yesButton.text = "TEMPERATURE_YES".localized
+        noButton.text = "TEMPERATURE_NO".localized
         errorLabel.textColor = UIColor(named: "NHS Error")
     }
 
