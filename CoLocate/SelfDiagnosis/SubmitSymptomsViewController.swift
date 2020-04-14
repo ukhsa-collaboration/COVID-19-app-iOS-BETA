@@ -27,9 +27,12 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
     var hasHighTemperature: Bool!
     var hasNewCough: Bool!
     
+    @IBOutlet weak var summary: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        summary.text = "QUESTION_SUMMARY".localized
+        
         persistence = Persistence.shared
         contactEventRepository = (UIApplication.shared.delegate as! AppDelegate).bluetoothNursery.contactEventRepository
         sendContactEvents = { registration, contactEvents, completion in

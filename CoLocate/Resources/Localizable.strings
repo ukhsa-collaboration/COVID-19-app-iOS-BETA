@@ -26,4 +26,4 @@
 "COUGH_YES" = "Yes, I have a new continuous cough";
 "COUGH_NO" = "No, I do not have a new continuous cough";
 
-"QUESTION_SUMMARY" = "Thank you for sharing this data with the NHS. We will use this information to anonymously inform people they have come into contact with covid symptoms and encourage them to self-isolate.\nThank you for helping us save lives";
+"QUESTION_SUMMARY" = "Thank you for sharing this data with the NHS. We will use this information to anonymously inform people they have come into contact with covid symptoms and encourage them to self-isolate.\n\nThank you for helping us save lives";
