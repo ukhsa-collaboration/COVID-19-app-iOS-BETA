@@ -180,7 +180,6 @@
 		098ED487242E89930029B729 /* PushNotificationManagerDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationManagerDouble.swift; sourceTree = "<group>"; };
 		098ED489242E89D80029B729 /* RegistrationServiceDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationServiceDouble.swift; sourceTree = "<group>"; };
 		098ED48B242E8B290029B729 /* PersistenceDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceDouble.swift; sourceTree = "<group>"; };
-		0995ABAC243CE3D10057C0D7 /* ReleaseBeta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ReleaseBeta.xcconfig; sourceTree = "<group>"; };
 		0997D055243BDEEC0067346C /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		09B103612444E9110091834D /* ContactEventPersisterDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventPersisterDouble.swift; sourceTree = "<group>"; };
 		09B103632444EAB80091834D /* ContactEventRepositoryDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventRepositoryDouble.swift; sourceTree = "<group>"; };
@@ -642,7 +641,6 @@
 				89388B8C2435E370009D60CF /* Debug.xcconfig */,
 				89388B8E2435E673009D60CF /* Release.xcconfig */,
 				898BA15B2435E28E00EBD35D /* Project.xcconfig */,
-				0995ABAC243CE3D10057C0D7 /* ReleaseBeta.xcconfig */,
 			);
 			path = Configurations;
 			sourceTree = "<group>";
@@ -1116,34 +1114,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		0995ABA8243CE3700057C0D7 /* Release beta */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0995ABAC243CE3D10057C0D7 /* ReleaseBeta.xcconfig */;
-			buildSettings = {
-			};
-			name = "Release beta";
-		};
-		0995ABA9243CE3700057C0D7 /* Release beta */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F68B89E9243B9FDB00F369A9 /* CoLocate.xcconfig */;
-			buildSettings = {
-			};
-			name = "Release beta";
-		};
-		0995ABAA243CE3700057C0D7 /* Release beta */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 89896E5E2435EB6500F949EA /* CoLocateTests.xcconfig */;
-			buildSettings = {
-			};
-			name = "Release beta";
-		};
-		0995ABAB243CE3700057C0D7 /* Release beta */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 895D9DE82437384C00573D4D /* CoLocateUITests.xcconfig */;
-			buildSettings = {
-			};
-			name = "Release beta";
-		};
 		214209C72422276800C7BFF3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 89896E5E2435EB6500F949EA /* CoLocateTests.xcconfig */;
@@ -1208,7 +1178,6 @@
 			buildConfigurations = (
 				214209C72422276800C7BFF3 /* Debug */,
 				214209C82422276800C7BFF3 /* Release */,
-				0995ABAA243CE3700057C0D7 /* Release beta */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1218,7 +1187,6 @@
 			buildConfigurations = (
 				6FC63C3D241641BA007C8BF3 /* Debug */,
 				6FC63C3E241641BA007C8BF3 /* Release */,
-				0995ABA8243CE3700057C0D7 /* Release beta */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1228,7 +1196,6 @@
 			buildConfigurations = (
 				6FC63C40241641BA007C8BF3 /* Debug */,
 				6FC63C41241641BA007C8BF3 /* Release */,
-				0995ABA9243CE3700057C0D7 /* Release beta */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1238,7 +1205,6 @@
 			buildConfigurations = (
 				895D9DE52437383300573D4D /* Debug */,
 				895D9DE62437383300573D4D /* Release */,
-				0995ABAB243CE3700057C0D7 /* Release beta */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
