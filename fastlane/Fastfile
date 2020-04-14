@@ -69,7 +69,7 @@ platform :ios do
 
     upload_to_testflight(
       username: ENV.fetch("APPLE_USERNAME"),
-      apple_id: sonar_config.apple_id,
+      apple_id: sonar_config.apple_id.to_s,
       skip_waiting_for_build_processing: true,
     )
   end
