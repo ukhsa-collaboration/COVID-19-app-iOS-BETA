@@ -260,10 +260,10 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="CE1B" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nUw-z7-nkS">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="CE1B" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nUw-z7-nkS">
                                                 <rect key="frame" x="20" y="157" width="280" height="34"/>
                                                 <accessibility key="accessibilityConfiguration" label="Post code"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="postal-code"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="lkE-bN-ikk" id="hoE-bE-NAc"/>
@@ -302,6 +302,7 @@
                                             <constraint firstAttribute="trailing" secondItem="j2y-6b-nX8" secondAttribute="trailing" constant="20" id="gWC-ff-QBT"/>
                                             <constraint firstItem="06r-fk-m9F" firstAttribute="top" secondItem="5tN-bW-uWf" secondAttribute="top" id="loK-Tf-8IH"/>
                                             <constraint firstItem="nUw-z7-nkS" firstAttribute="leading" secondItem="5tN-bW-uWf" secondAttribute="leading" constant="20" id="pSD-Nu-Gdm"/>
+                                            <constraint firstItem="Ndb-pX-kbA" firstAttribute="top" relation="greaterThanOrEqual" secondItem="j2y-6b-nX8" secondAttribute="bottom" constant="8" id="uLu-0G-2UV"/>
                                         </constraints>
                                     </view>
                                 </subviews>
