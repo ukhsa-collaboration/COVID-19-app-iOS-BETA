@@ -9,6 +9,8 @@
 import UIKit
 
 class TemperatureViewController: UIViewController {
+    @IBOutlet weak var questionLabel: UILabel!
+    @IBOutlet weak var detailLabel: UILabel!
     @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var yesButton: AnswerButton!
     @IBOutlet weak var noButton: AnswerButton!
@@ -31,7 +33,12 @@ class TemperatureViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        questionLabel.text = "TEMPERATURE_QUESTION".localized
+        detailLabel.text = "TEMPERATURE_DETAIL".localized
+        errorLabel.text = "TEMPERATURE_ERROR".localized
+        yesButton.setTitle("TEMPERATURE_YES".localized, for: .normal)
+        noButton.setTitle("TEMPERATURE_NO".localized, for: .normal)
         errorLabel.textColor = UIColor(named: "NHS Error")
     }
 

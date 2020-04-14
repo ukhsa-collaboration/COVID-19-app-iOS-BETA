@@ -9,6 +9,8 @@
 import UIKit
 
 class CoughViewController: UIViewController {
+    @IBOutlet weak var questionLabel: UILabel!
+    @IBOutlet weak var detailLabel: UILabel!
     @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var yesButton: AnswerButton!
     @IBOutlet weak var noButton: AnswerButton!
@@ -32,7 +34,12 @@ class CoughViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        questionLabel.text = "COUGH_QUESTION".localized
+        detailLabel.text = "COUGH_DETAIL".localized
+        errorLabel.text = "COUGH_ERROR".localized
+        yesButton.setTitle("COUGH_YES".localized, for: .normal)
+        noButton.setTitle("COUGH_NO".localized, for: .normal)
         errorLabel.textColor = UIColor(named: "NHS Error")
     }
 
