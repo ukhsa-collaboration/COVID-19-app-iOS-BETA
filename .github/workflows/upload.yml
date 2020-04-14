@@ -67,7 +67,7 @@ jobs:
         run: ./bin/setup-match
 
       - name: Create an empty CoLocate.xcconfig
-        run: touch CoLocate.xcconfig
+        run: echo '#include "CoLocate/Base.xcconfig"' > CoLocate.xcconfig
 
       - name: Upload to Test Flight
         env:
