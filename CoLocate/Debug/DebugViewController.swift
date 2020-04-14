@@ -20,7 +20,7 @@ class DebugViewController: UITableViewController, Storyboarded {
     // actually be injected, so that UI tests can work properly. However, we shouldn't
     // ever have any UI tests that show the debug view.
     private let persistence = Persistence.shared
-    private let contactEventRepository = PersistingContactEventRepository.shared
+    private let contactEventRepository = (UIApplication.shared.delegate as! AppDelegate).bluetoothNursery.contactEventRepository
     
     override func viewDidLoad() {
         allowedDataSharingSwitch.isOn = persistence.allowedDataSharing

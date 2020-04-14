@@ -24,8 +24,6 @@ extension PlistPersister: ContactEventPersister where T == ContactEvent {
 
 @objc class PersistingContactEventRepository: NSObject, BTLEListenerDelegate, ContactEventRepository {
     
-    public static let shared = PersistingContactEventRepository(persister: PlistPersister<ContactEvent>(fileName: "contactEvents"))
-    
     @objc dynamic public var _contactEventCount: Int {
         return persister.items.count
     }

@@ -56,8 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // but since I have JUST migrated the format of these records
         // if we don't do this, the app crashes upon startup
         // so I'm doing this so that everyone's unit tests and apps continue to work
-        PersistingContactEventRepository.shared.reset()
-        PlistPersister<ContactEvent>(fileName: "contactEvents").reset()
+        bluetoothNursery.contactEventRepository.reset()
 
         // TODO: If DEBUG is only necessary as long as we have the same bundle ID for both builds.
         #if INTERNAL || DEBUG
@@ -83,7 +82,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             notificationCenter: notificationCenter,
             registrationService: registrationService,
             session: URLSession.shared,
-            contactEventRepository: PersistingContactEventRepository.shared
+            contactEventRepository: bluetoothNursery.contactEventRepository
         )
         
         window = UIWindow(frame: UIScreen.main.bounds)

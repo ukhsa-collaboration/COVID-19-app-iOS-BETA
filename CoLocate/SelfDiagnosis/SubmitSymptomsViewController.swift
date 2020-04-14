@@ -34,7 +34,7 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         super.awakeFromNib()
 
         persistence = Persistence.shared
-        contactEventRepository = PersistingContactEventRepository.shared
+        contactEventRepository = (UIApplication.shared.delegate as! AppDelegate).bluetoothNursery.contactEventRepository
         sendContactEvents = { registration, contactEvents, completion in
             let requestFactory = ConcreteSecureRequestFactory(registration: registration)
             let request = requestFactory.patchContactsRequest(contactEvents: contactEvents)
