@@ -15,48 +15,142 @@ class SubmitSymptomsViewControllerTests: TestCase {
         throw XCTSkip("TODO: write this test")
     }
     
-    func testSubmitTapped() throws {
-        let registration = Registration(id: UUID(uuidString: "FA817D5C-C615-4ABE-83B5-ABDEE8FAB8A6")!, secretKey: Data())
-        let contactEvents = [ContactEvent(sonarId: "a sonar id".data(using: .utf8))]
-        let session = SessionDouble()
+    
+     func testSubmitTapped() throws {
+         let registration = Registration(id: UUID(uuidString: "FA817D5C-C615-4ABE-83B5-ABDEE8FAB8A6")!, secretKey: Data())
+         let contactEvents = [ContactEvent(sonarId: "a sonar id".data(using: .utf8))]
+         let session = SessionDouble()
+     
+         let vc = SubmitSymptomsViewController.instantiate()
+         vc.inject(
+             persistence:  PersistenceDouble(registration: registration),
+             contactEventRepository: MockContactEventRepository(contactEvents: contactEvents),
+             session: session,
+             hasHighTemperature: false,
+             hasNewCough: true
+         )
+         XCTAssertNotNil(vc.view)
+
+         let button = PrimaryButton()
+         vc.submitTapped(button)
+         
+         XCTAssertFalse(button.isEnabled)
+
+         guard let request = session.requestSent as? PatchContactEventsRequest else {
+             XCTFail("Expected a PatchContactEventsRequest but got \(String(describing: session.requestSent))")
+             return
+         }
+         
+         XCTAssertEqual(request.path, "/api/residents/FA817D5C-C615-4ABE-83B5-ABDEE8FAB8A6")
+         
+         switch request.method {
+         case .patch(let data):
+             let decoder = JSONDecoder()
+             decoder.dateDecodingStrategy = .iso8601
+             let decoded = try decoder.decode(PatchContactEventsRequest.JSONWrapper.self, from: data)
+             // Can't compare the entire contact events because the timestamp loses precision
+             // when JSON encoded and decoded.
+             XCTAssertEqual(decoded.contactEvents.first?.sonarId, contactEvents.first?.sonarId)
+         default:
+             XCTFail("Expected a patch request but got \(request.method)")
+         }
+     }
+    
+    func testHasNoSymptoms() {
+        let registration: Registration = Registration.fake
+        let persistenceDouble = PersistenceDouble(registration: registration)
+        let sessionDouble = SessionDouble()
+
+        let contactEventRepository = MockContactEventRepository(contactEvents: [ContactEvent(sonarId: Data())])
 
         let vc = SubmitSymptomsViewController.instantiate()
-        vc.inject(
-            persistence:  PersistenceDouble(registration: registration),
-            contactEventRepository: MockContactEventRepository(contactEvents: contactEvents),
-            session: session,
-            hasHighTemperature: false,
-            hasNewCough: true
-        )
         XCTAssertNotNil(vc.view)
+        vc.inject(
+            persistence: persistenceDouble,
+            contactEventRepository: contactEventRepository,
+            session: sessionDouble,
+            hasHighTemperature: false,
+            hasNewCough: false
+        )
 
         let unwinder = SelfDiagnosisUnwinder()
         parentViewControllerForTests.viewControllers = [unwinder]
         unwinder.present(vc, animated: false)
 
-        let button = PrimaryButton()
-        vc.submitTapped(button)
-        
-        XCTAssertFalse(button.isEnabled)
+        vc.submitTapped(PrimaryButton())
 
-        guard let request = session.requestSent as? PatchContactEventsRequest else {
-            XCTFail("Expected a PatchContactEventsRequest but got \(String(describing: session.requestSent))")
-            return
-        }
+        XCTAssertNil(persistenceDouble.diagnosis)
+        XCTAssertTrue(unwinder.didUnwindFromSelfDiagnosis)
+        XCTAssertNil(sessionDouble.requestSent)
+    }
+
+    func testPersistsDiagnosisAndSubmitsIfOnlyTemperature() {
+        let registration: Registration = Registration.fake
+        let persistenceDouble = PersistenceDouble(registration: registration)
+        let sessionDouble = SessionDouble()
+
+        let contactEventRepository = MockContactEventRepository(contactEvents: [ContactEvent(sonarId: Data())])
+
+        let vc = SubmitSymptomsViewController.instantiate()
+        XCTAssertNotNil(vc.view)
+        vc.inject(
+            persistence: persistenceDouble,
+            contactEventRepository: contactEventRepository,
+            session: sessionDouble,
+            hasHighTemperature: true,
+            hasNewCough: false
+        )
+
+        vc.submitTapped(PrimaryButton())
+
+        XCTAssertEqual(persistenceDouble.diagnosis, .infected)
+        XCTAssertNotNil(sessionDouble.requestSent)
+    }
+
+    func testPersistsDiagnosisAndSubmitsIfOnlyCough() {
+        let registration: Registration = Registration.fake
+        let persistenceDouble = PersistenceDouble(registration: registration)
+        let sessionDouble = SessionDouble()
+
+        let contactEventRepository = MockContactEventRepository(contactEvents: [ContactEvent(sonarId: Data())])
         
-        XCTAssertEqual(request.path, "/api/residents/FA817D5C-C615-4ABE-83B5-ABDEE8FAB8A6")
-        
-        switch request.method {
-        case .patch(let data):
-            let decoder = JSONDecoder()
-            decoder.dateDecodingStrategy = .iso8601
-            let decoded = try decoder.decode(PatchContactEventsRequest.JSONWrapper.self, from: data)
-            // Can't compare the entire contact events because the timestamp loses precision
-            // when JSON encoded and decoded.
-            XCTAssertEqual(decoded.contactEvents.first?.sonarId, contactEvents.first?.sonarId)
-        default:
-            XCTFail("Expected a patch request but got \(request.method)")
-        }
+        let vc = SubmitSymptomsViewController.instantiate()
+        XCTAssertNotNil(vc.view)
+        vc.inject(
+            persistence: persistenceDouble,
+            contactEventRepository: contactEventRepository,
+            session: sessionDouble,
+            hasHighTemperature: false,
+            hasNewCough: true
+        )
+
+        vc.submitTapped(PrimaryButton())
+
+        XCTAssertEqual(persistenceDouble.diagnosis, .infected)
+        XCTAssertNotNil(sessionDouble.requestSent)
+    }
+
+    func testPersistsDiagnosisAndSubmitsIfBoth() {
+        let registration: Registration = Registration.fake
+        let persistenceDouble = PersistenceDouble(registration: registration)
+        let sessionDouble = SessionDouble()
+
+        let contactEventRepository = MockContactEventRepository(contactEvents: [ContactEvent(sonarId: Data())])
+
+        let vc = SubmitSymptomsViewController.instantiate()
+        XCTAssertNotNil(vc.view)
+        vc.inject(
+            persistence: persistenceDouble,
+            contactEventRepository: contactEventRepository,
+            session: sessionDouble,
+            hasHighTemperature: true,
+            hasNewCough: true
+        )
+
+        vc.submitTapped(PrimaryButton())
+
+        XCTAssertEqual(persistenceDouble.diagnosis, .infected)
+        XCTAssertNotNil(sessionDouble.requestSent)
     }
 
     func testSubmitSuccess() {

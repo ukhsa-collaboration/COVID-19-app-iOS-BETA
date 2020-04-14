@@ -49,11 +49,6 @@ jobs:
     runs-on:
       - self-hosted
       - macos
-    strategy:
-      matrix:
-        fastlane-action:
-          - beta
-          - internal
     steps:
       - name: Checkout Project
         uses: actions/checkout@v2
@@ -66,26 +61,21 @@ jobs:
       - name: Install Fastlane
         run: sudo gem install fastlane
 
-      - name: Setup Development Config
-        env:
-          API_ENDPOINT: ${{ secrets.api_endpoint }}
-        run: |
-          tee "CoLocate.xcconfig" > /dev/null <<EOF
-          #include "CoLocate/Base.xcconfig"
-          API_ENDPOINT = $API_ENDPOINT
-          EOF
-
       - name: Setup Fastlane Match
         env:
           MATCH: ${{ secrets.match }}
         run: ./bin/setup-match
 
+      - name: Create an empty CoLocate.xcconfig
+        run: echo '#include "CoLocate/Base.xcconfig"' > CoLocate.xcconfig
+
       - name: Upload to Test Flight
         env:
+          API_ENDPOINT: ${{ secrets.api_endpoint }}
           APPLE_USERNAME: ${{ secrets.apple_username }}
           FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.apple_password }}
           MATCH_PASSWORD: ${{ secrets.match_password }}
-        run: fastlane ${{ matrix.fastlane-action }}
+        run: fastlane release sonar_env:${{ github.event.deployment.environment }}
 
       - name: Get Build Number
         id: get-build-number
@@ -94,13 +84,12 @@ jobs:
           echo "::set-output name=build-number::$build_number"
 
       - name: Notify Slack on Upload
-        if: matrix.fastlane-action == 'beta'
         env:
           SLACK_BOT_TOKEN: ${{ secrets.slack_bot_token }}
         uses: voxmedia/github-action-slack-notify-build@v1
         with:
           channel_id: G010M35PZCM
-          status: UPLOADED (${{ steps.get-build-number.outputs.build-number }})
+          status: UPLOADED [${{ github.event.deployment.environment}} (${{ steps.get-build-number.outputs.build-number }})]
 
       - name: Notify Slack on Failure
         if: failure()

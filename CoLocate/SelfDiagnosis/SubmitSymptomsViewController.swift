@@ -17,6 +17,10 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
     private var session: Session!
     private var hasHighTemperature: Bool!
     private var hasNewCough: Bool!
+    
+    private var hasSymptoms: Bool {
+        hasHighTemperature || hasNewCough
+    }
 
     func inject(persistence: Persisting, contactEventRepository: ContactEventRepository, session: Session, hasHighTemperature: Bool, hasNewCough: Bool) {
         self.persistence = persistence
@@ -25,7 +29,6 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         self.hasHighTemperature = hasHighTemperature
         self.hasNewCough = hasNewCough
     }
-
     
     @IBOutlet weak var summary: UILabel!
     override func viewDidLoad() {
@@ -39,15 +42,18 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
             fatalError("What do we do when we aren't registered?")
         }
 
+        guard hasSymptoms else {
+            self.performSegue(withIdentifier: "unwindFromSelfDiagnosis", sender: self)
+            return
+        }
+        
         sender.isEnabled = false
 
         // NOTE: This is not spec'ed out, and is only here
         // so we can make sure this flow works through the
         // app during debugging. This will need to be replaced
         // with real business logic in the future.
-        if hasHighTemperature && hasNewCough {
-            persistence.diagnosis = .infected
-        }
+        persistence.diagnosis = .infected
         
         let requestFactory = ConcreteSecureRequestFactory(registration: registration)
         let request = requestFactory.patchContactsRequest(contactEvents: contactEventRepository.contactEvents)

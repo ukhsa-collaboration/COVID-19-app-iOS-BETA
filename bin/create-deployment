@@ -7,7 +7,7 @@ DATA=$(cat <<EOF
   "ref":"${GITHUB_SHA:-upload-to-test-flight}",
   "required_contexts": [],
   "payload":"${DEPLOYMENT_PAYLOAD:-Manual deployment.}",
-  "environment":"staging"
+  "environment":"${1}"
 }
 EOF
 )
