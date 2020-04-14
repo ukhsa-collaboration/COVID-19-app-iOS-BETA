@@ -11,10 +11,11 @@ platform :ios do
   #     ~/Library/Keychains/fastlane_tmp_keychain-db
 
   module Sonar
-    Config = Struct.new(:bundle_id, :apple_id, :internal, keyword_init: true) do
+    Config = Struct.new(:bundle_id, :apple_id, :display_name, :internal, keyword_init: true) do
       def xcargs
         args = {
           API_ENDPOINT: ENV.fetch("API_ENDPOINT"),
+          DISPLAY_NAME: display_name,
           PRODUCT_BUNDLE_IDENTIFIER: bundle_id,
         }
         args[:SWIFT_ACTIVE_COMPILATION_CONDITIONS] = "INTERNAL" if internal
@@ -26,16 +27,19 @@ platform :ios do
       beta: Config.new(
         bundle_id: "uk.nhs.nhsx.beta.CoLocate",
         apple_id: 1504244021,
+        display_name: "CoLocate Beta",
         internal: true,
       ),
       internal: Config.new(
         bundle_id: "uk.nhs.nhsx.sonar.internal",
         apple_id: 1507438009,
+        display_name: "CoLocate Internal",
         internal: true,
       ),
       prod: Config.new(
         bundle_id: "uk.nhs.nhsx.sonar",
         apple_id: 1507396059,
+        display_name: "CoLocate",
         internal: false,
       ),
     }
