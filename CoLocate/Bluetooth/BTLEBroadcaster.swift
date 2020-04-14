@@ -55,16 +55,15 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
     
     private func startAdvertising(peripheral: CBPeripheralManager) {
         guard peripheral.isAdvertising == false else {
-            logger.error("Peripheral is already advertising. Will not advertise twice")
+            logger.error("peripheral manager already advertising, won't start again")
             return
         }
 
-        let valueToBroadcast = idGenerator.broadcastIdentifier()
         let service = CBMutableService(type: ConcreteBTLEBroadcaster.sonarServiceUUID, primary: true)
 
         let identityCharacteristic = CBMutableCharacteristic(type: ConcreteBTLEBroadcaster.sonarIdCharacteristicUUID,
                                                              properties: CBCharacteristicProperties([.read]),
-                                                             value: valueToBroadcast,
+                                                             value: idGenerator.broadcastIdentifier(),
                                                              permissions: .readable)
 
         service.characteristics = [identityCharacteristic]
@@ -77,10 +76,11 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
             return
         }
 
-        logger.info("now advertising our sonarId")
+        let identifier = (idGenerator.broadcastIdentifier() ?? Data()).base64EncodedString()
+        logger.info("now advertising sonarId \(identifier)")
         
         peripheral.startAdvertising([
-            CBAdvertisementDataLocalNameKey: "CoLocate",
+            CBAdvertisementDataLocalNameKey: "Sonar",
             CBAdvertisementDataServiceUUIDsKey: [service.uuid]
         ])
     }
