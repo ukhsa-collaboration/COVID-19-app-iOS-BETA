@@ -14,7 +14,105 @@ class SubmitSymptomsViewControllerTests: TestCase {
     func testNotRegistered() {
         // TODO
     }
-    
+
+    func testHasNoSymptoms() {
+        let registration: Registration = Registration.fake
+        let persistenceDouble = PersistenceDouble(registration: registration)
+
+        let contactEventRepository = MockContactEventRepository(contactEvents: [ContactEvent(sonarId: Data())])
+
+        let vc = SubmitSymptomsViewController.instantiate()
+        XCTAssertNotNil(vc.view)
+        vc._inject(
+            persistence: persistenceDouble,
+            contactEventRepository: contactEventRepository,
+            sendContactEvents: { _, _, _ in }
+        )
+        vc.hasHighTemperature = false
+        vc.hasNewCough = false
+
+        let unwinder = SelfDiagnosisUnwinder()
+        parentViewControllerForTests.viewControllers = [unwinder]
+        unwinder.present(vc, animated: false)
+
+        vc.submitTapped(PrimaryButton())
+
+        XCTAssertNil(persistenceDouble.diagnosis)
+        XCTAssertTrue(unwinder.didUnwindFromSelfDiagnosis)
+    }
+
+    func testPersistsDiagnosisAndSubmitsIfOnlyTemperature() {
+        let registration: Registration = Registration.fake
+        let persistenceDouble = PersistenceDouble(registration: registration)
+
+        let contactEventRepository = MockContactEventRepository(contactEvents: [ContactEvent(sonarId: Data())])
+
+        var sentContactEvents = false
+
+        let vc = SubmitSymptomsViewController.instantiate()
+        XCTAssertNotNil(vc.view)
+        vc._inject(
+            persistence: persistenceDouble,
+            contactEventRepository: contactEventRepository,
+            sendContactEvents: { _, _, _ in sentContactEvents = true }
+        )
+        vc.hasHighTemperature = true
+        vc.hasNewCough = false
+
+        vc.submitTapped(PrimaryButton())
+
+        XCTAssertEqual(persistenceDouble.diagnosis, .infected)
+        XCTAssertTrue(sentContactEvents)
+    }
+
+    func testPersistsDiagnosisAndSubmitsIfOnlyCough() {
+        let registration: Registration = Registration.fake
+        let persistenceDouble = PersistenceDouble(registration: registration)
+
+        let contactEventRepository = MockContactEventRepository(contactEvents: [ContactEvent(sonarId: Data())])
+
+        var sentContactEvents = false
+
+        let vc = SubmitSymptomsViewController.instantiate()
+        XCTAssertNotNil(vc.view)
+        vc._inject(
+            persistence: persistenceDouble,
+            contactEventRepository: contactEventRepository,
+            sendContactEvents: { _, _, _ in sentContactEvents = true }
+        )
+        vc.hasHighTemperature = false
+        vc.hasNewCough = true
+
+        vc.submitTapped(PrimaryButton())
+
+        XCTAssertEqual(persistenceDouble.diagnosis, .infected)
+        XCTAssertTrue(sentContactEvents)
+    }
+
+    func testPersistsDiagnosisAndSubmitsIfBoth() {
+        let registration: Registration = Registration.fake
+        let persistenceDouble = PersistenceDouble(registration: registration)
+
+        let contactEventRepository = MockContactEventRepository(contactEvents: [ContactEvent(sonarId: Data())])
+
+        var sentContactEvents = false
+
+        let vc = SubmitSymptomsViewController.instantiate()
+        XCTAssertNotNil(vc.view)
+        vc._inject(
+            persistence: persistenceDouble,
+            contactEventRepository: contactEventRepository,
+            sendContactEvents: { _, _, _ in sentContactEvents = true }
+        )
+        vc.hasHighTemperature = true
+        vc.hasNewCough = true
+
+        vc.submitTapped(PrimaryButton())
+
+        XCTAssertEqual(persistenceDouble.diagnosis, .infected)
+        XCTAssertTrue(sentContactEvents)
+    }
+
     func testSubmitTapped() {
         let registration: Registration = Registration.fake
         let persistenceDouble = PersistenceDouble(registration: registration)
@@ -36,10 +134,6 @@ class SubmitSymptomsViewControllerTests: TestCase {
         )
         vc.hasHighTemperature = false
         vc.hasNewCough = true
-
-        let unwinder = SelfDiagnosisUnwinder()
-        parentViewControllerForTests.viewControllers = [unwinder]
-        unwinder.present(vc, animated: false)
 
         let button = PrimaryButton()
         vc.submitTapped(button)

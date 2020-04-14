@@ -26,6 +26,9 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
 
     var hasHighTemperature: Bool!
     var hasNewCough: Bool!
+    private var hasSymptoms: Bool {
+        hasHighTemperature || hasNewCough
+    }
     
     @IBOutlet weak var summary: UILabel!
     override func viewDidLoad() {
@@ -47,16 +50,18 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
             fatalError("What do we do when we aren't registered?")
         }
 
-        sender.isEnabled = false
+        guard hasSymptoms else {
+            self.performSegue(withIdentifier: "unwindFromSelfDiagnosis", sender: self)
+            return
+        }
 
         // NOTE: This is not spec'ed out, and is only here
         // so we can make sure this flow works through the
         // app during debugging. This will need to be replaced
-        // with real business logic in the future.
-        if hasHighTemperature && hasNewCough {
-            persistence.diagnosis = .infected
-        }
+        // with real business logic in the future
+        persistence.diagnosis = .infected
 
+        sender.isEnabled = false
         sendContactEvents(registration, contactEventRepository.contactEvents, { [weak self] result in
             guard let self = self else { return }
 
