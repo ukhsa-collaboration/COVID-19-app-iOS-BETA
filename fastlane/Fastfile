@@ -42,7 +42,7 @@ platform :ios do
   end
 
   desc "Cut a release for Test Flight"
-  lane :release do
+  lane :release do |options|
     sonar_config = Sonar::CONFIGS.fetch(options.fetch("sonar_env"))
 
     setup_ci()
