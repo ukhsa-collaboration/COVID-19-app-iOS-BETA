@@ -13,7 +13,10 @@ platform :ios do
   module Sonar
     Config = Struct.new(:bundle_id, :apple_id, :internal, keyword_init: true) do
       def xcargs
-        args = { PRODUCT_BUNDLE_IDENTIFIER: sonar_config.bundle_id }
+        args = {
+          API_ENDPOINT: ENV.fetch("API_ENDPOINT"),
+          PRODUCT_BUNDLE_IDENTIFIER: sonar_config.bundle_id,
+        }
         args[:SWIFT_ACTIVE_COMPILATION_CONDITIONS] = "INTERNAL" if internal
         args.map {|k,v| "#{k}='#{v}'" }.join(" ")
       end
