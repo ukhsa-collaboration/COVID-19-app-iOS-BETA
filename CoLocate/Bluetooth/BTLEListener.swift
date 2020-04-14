@@ -37,12 +37,18 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
     
     let rssiSamplingInterval: TimeInterval = 20.0
     
+    let persistence: Persistence
+    
     var stateDelegate: BTLEListenerStateDelegate?
     var delegate: BTLEListenerDelegate?
     
     var central: CBCentralManager?
     
     var peripherals: [UUID: CBPeripheral] = [:]
+    
+    init(persistence: Persistence) {
+        self.persistence = persistence
+    }
 
     func start(stateDelegate: BTLEListenerStateDelegate?, delegate: BTLEListenerDelegate?) {
         self.stateDelegate = stateDelegate
@@ -200,12 +206,14 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
             return
         }
         
-        guard data.count == 105 else {
-            logger.info("characteristic value is not a valid sonarId, because it has length \(data.count)")
-            return
+        if persistence.enableNewKeyRotation {
+            guard data.count == 105 else {
+                logger.info("characteristic value is not a valid sonarId, because it has length \(data.count)")
+                return
+            }
         }
 
-        logger.info("successfully read sonarId from peripheral \(peripheral.identifierWithName), disconnecting now")
+        logger.info("successfully read sonarId from peripheral \(peripheral.identifierWithName), now disconnecting")
         delegate?.btleListener(self, didFind: data, forPeripheral: peripheral)
         central?.cancelPeripheralConnection(peripheral)
     }

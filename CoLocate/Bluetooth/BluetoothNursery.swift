@@ -17,6 +17,7 @@ class BluetoothNursery {
     let listenerQueue: DispatchQueue? = DispatchQueue(label: "BTLE Listener Queue")
     let broadcasterQueue: DispatchQueue? = DispatchQueue(label: "BTLE Broadcaster Queue")
     
+    let persistence: Persistence
     let contactEventPersister: PlistPersister<ContactEvent>
     let contactEventRepository: PersistingContactEventRepository
     
@@ -29,7 +30,8 @@ class BluetoothNursery {
     var startListenerCalled: Bool = false
     var startBroadcasterCalled: Bool = false
     
-    init() {
+    init(persistence: Persistence) {
+        self.persistence = persistence
         contactEventPersister = PlistPersister<ContactEvent>(fileName: "contactEvents")
         contactEventRepository = PersistingContactEventRepository(persister: contactEventPersister)
     }
@@ -43,8 +45,9 @@ class BluetoothNursery {
     
     func startListener(stateDelegate: BTLEListenerStateDelegate?) {
         startListenerCalled = true
-        listener = ConcreteBTLEListener()
+        listener = ConcreteBTLEListener(persistence: persistence)
         central = CBCentralManager(delegate: listener as! ConcreteBTLEListener, queue: listenerQueue, options: [
+            CBCentralManagerScanOptionAllowDuplicatesKey: NSNumber(true),
             CBCentralManagerOptionRestoreIdentifierKey: BluetoothNursery.centralRestoreIdentifier
         ])
         (listener as? ConcreteBTLEListener)?.stateDelegate = stateDelegate

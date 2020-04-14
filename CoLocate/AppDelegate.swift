@@ -18,8 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     let notificationCenter = NotificationCenter.default
     let persistence = Persistence.shared
-    let bluetoothNursery = BluetoothNursery()
     let authorizationManager = AuthorizationManager()
+    let bluetoothNursery: BluetoothNursery
     let remoteNotificationManager: RemoteNotificationManager
     let registrationService: RegistrationService
 
@@ -43,6 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             remoteNotificationDispatcher: dispatcher,
             notificationCenter: notificationCenter
         )
+        bluetoothNursery = BluetoothNursery(persistence: persistence)
         
         super.init()
 
