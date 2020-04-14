@@ -24,14 +24,11 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         self.sendContactEvents = sendContactEvents
     }
 
-    @IBOutlet weak var hasTemperatureLabel: UILabel!
-    @IBOutlet weak var hasCoughLabel: UILabel!
-
     var hasHighTemperature: Bool!
     var hasNewCough: Bool!
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
         persistence = Persistence.shared
         contactEventRepository = (UIApplication.shared.delegate as! AppDelegate).bluetoothNursery.contactEventRepository
@@ -41,7 +38,7 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
             URLSession.shared.execute(request, queue: .main, completion: completion)
         }
     }
-
+    
     @IBAction func submitTapped(_ sender: PrimaryButton) {
         guard let registration = persistence.registration else {
             fatalError("What do we do when we aren't registered?")
