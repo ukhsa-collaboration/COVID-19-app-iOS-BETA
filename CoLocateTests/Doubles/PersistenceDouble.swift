@@ -13,6 +13,7 @@ class PersistenceDouble: Persisting {
     
     var allowedDataSharing: Bool
     var registration: Registration?
+    var potentiallyExposed: Bool
     var selfDiagnosis: SelfDiagnosis?
     var enableNewSelfDiagnosis = false
     var partialPostcode: String?
@@ -20,12 +21,14 @@ class PersistenceDouble: Persisting {
 
     init(
         allowedDataSharing: Bool = false,
+        potentiallyExposed: Bool = false,
         diagnosis: SelfDiagnosis? = nil,
         registration: Registration? = nil,
         partialPostcode: String? = nil
     ) {
         self.allowedDataSharing = allowedDataSharing
         self.registration = registration
+        self.potentiallyExposed = potentiallyExposed
         self.selfDiagnosis = diagnosis
         self.partialPostcode = partialPostcode
     }

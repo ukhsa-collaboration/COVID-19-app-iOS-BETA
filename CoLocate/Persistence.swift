@@ -16,6 +16,7 @@ enum SelfDiagnosis: Int, CaseIterable {
 protocol Persisting {
     var allowedDataSharing: Bool { get nonmutating set }
     var registration: Registration? { get nonmutating set }
+    var potentiallyExposed: Bool { get nonmutating set }
     var selfDiagnosis: SelfDiagnosis? { get nonmutating set }
     var partialPostcode: String? { get nonmutating set }
     var enableNewKeyRotation: Bool { get nonmutating set }
@@ -32,6 +33,7 @@ class Persistence: Persisting {
 
     enum Keys: String, CaseIterable {
         case allowedDataSharing
+        case potentiallyExposed
         case selfDiagnosis
 
         // Feature flags
@@ -62,6 +64,11 @@ class Persistence: Persisting {
 
             delegate?.persistence(self, didUpdateRegistration: registration)
         }
+    }
+
+    var potentiallyExposed: Bool {
+        get { UserDefaults.standard.bool(forKey: Keys.potentiallyExposed.rawValue) }
+        set { UserDefaults.standard.set(newValue, forKey: Keys.potentiallyExposed.rawValue) }
     }
 
     var selfDiagnosis: SelfDiagnosis? {
