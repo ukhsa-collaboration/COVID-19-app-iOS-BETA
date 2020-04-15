@@ -299,6 +299,7 @@
                         <outlet property="feelHealthyTitleLabel" destination="9XS-ai-EVd" id="71H-KT-OCF"/>
                         <outlet property="feelHealthyView" destination="AB6-ge-DnM" id="6vx-Aj-XfX"/>
                         <outlet property="howAreYouFeelingView" destination="LdH-uv-APk" id="uHU-MS-s9l"/>
+                        <outlet property="linkToNHS" destination="2UL-Ea-jl7" id="eGy-lm-mWw"/>
                         <outlet property="nextStepsView" destination="6cH-qi-dN0" id="gOZ-mN-d2F"/>
                         <outlet property="notRightSubtitleLabel" destination="xqf-9x-H9Q" id="oY0-jS-FjH"/>
                         <outlet property="notRightTitleLabel" destination="psh-Wd-l5I" id="jbn-hg-Mpm"/>
@@ -309,6 +310,17 @@
                         <outlet property="registrationStatusIcon" destination="nOs-ix-jLm" id="nTz-62-NB7"/>
                         <outlet property="registrationStatusText" destination="prF-qe-3Zt" id="JPm-HJ-83G"/>
                         <outlet property="registratonStatusView" destination="oRv-PB-BfB" id="KVH-zB-VnF"/>
+                        <outletCollection property="labelsThatShouldBeWhiteInDarkMode" destination="prF-qe-3Zt" collectionClass="NSMutableArray" id="Kmp-dR-5gU"/>
+                        <outletCollection property="labelsThatShouldBeWhiteInDarkMode" destination="Rpg-7v-Vhp" collectionClass="NSMutableArray" id="B9q-oQ-jOH"/>
+                        <outletCollection property="labelsThatShouldBeWhiteInDarkMode" destination="oUM-AI-6LL" collectionClass="NSMutableArray" id="KLQ-tT-Vcs"/>
+                        <outletCollection property="labelsThatShouldBeWhiteInDarkMode" destination="8ZI-fb-8RW" collectionClass="NSMutableArray" id="VbG-PG-izP"/>
+                        <outletCollection property="labelsThatShouldBeWhiteInDarkMode" destination="8ZI-fb-8RW" collectionClass="NSMutableArray" id="rZa-LF-f1K"/>
+                        <outletCollection property="labelsThatShouldBeWhiteInDarkMode" destination="9XS-ai-EVd" collectionClass="NSMutableArray" id="zFb-26-poA"/>
+                        <outletCollection property="labelsThatShouldBeWhiteInDarkMode" destination="JPo-Ee-l5f" collectionClass="NSMutableArray" id="whI-PW-0kY"/>
+                        <outletCollection property="labelsThatShouldBeWhiteInDarkMode" destination="psh-Wd-l5I" collectionClass="NSMutableArray" id="sW7-dv-696"/>
+                        <outletCollection property="labelsThatShouldBeWhiteInDarkMode" destination="xqf-9x-H9Q" collectionClass="NSMutableArray" id="8E4-3B-eft"/>
+                        <outletCollection property="labelsThatShouldBeWhiteInDarkMode" destination="2Xr-JZ-XAw" collectionClass="NSMutableArray" id="fMS-36-AFB"/>
+                        <outletCollection property="labelsThatShouldBeWhiteInDarkMode" destination="zqt-gJ-Jrb" collectionClass="NSMutableArray" id="mLb-MG-ROw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pau-uA-R8C" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -44,6 +44,10 @@ class StatusViewController: UIViewController, Storyboarded {
     @IBOutlet weak var notRightSubtitleLabel: UILabel!
 
     @IBOutlet weak var nextStepsView: UIView!
+    @IBOutlet var labelsThatShouldBeWhiteInDarkMode: [UILabel]!
+    private var initialLabelColors: [UIColor]!
+    @IBOutlet var linkToNHS: UIButton!
+    private var initialLinkToNHSColor: UIColor!
 
     var diagnosis: SelfDiagnosis? {
         didSet {
@@ -79,6 +83,7 @@ class StatusViewController: UIViewController, Storyboarded {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        initColors()
 
         registrationRetryButton.setTitle("RETRY".localized, for: .normal)
 
@@ -111,8 +116,13 @@ class StatusViewController: UIViewController, Storyboarded {
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        updateForCurrentUIStyle()
         diagnosis = persistence.selfDiagnosis
         potentiallyExposed = persistence.potentiallyExposed
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        updateForCurrentUIStyle()
     }
 
     @objc func diagnosisStatusTapped() {
@@ -232,6 +242,41 @@ class StatusViewController: UIViewController, Storyboarded {
         registrationSpinner.isHidden = true
         registrationStatusIcon.isHidden = false
     }
+    
+    private func initColors() {
+        initialLinkToNHSColor = linkToNHS.titleLabel?.textColor
+        initialLabelColors = labelsThatShouldBeWhiteInDarkMode.map({ $0.textColor })
+    }
+    
+    private func updateForCurrentUIStyle() {
+        if inDarkMode() {
+            linkToNHS.setTitleColor(.white, for: .normal)
+            
+            for label in labelsThatShouldBeWhiteInDarkMode {
+                label.textColor = .white
+            }
+        } else {
+            linkToNHS.setTitleColor(initialLinkToNHSColor, for: .normal)
+
+            for i in 0..<labelsThatShouldBeWhiteInDarkMode.count {
+                labelsThatShouldBeWhiteInDarkMode[i].textColor = initialLabelColors[i]
+            }
+        }
+    }
+    
+    private func inDarkMode() -> Bool {
+        if #available(iOS 12.0, *) {
+            switch traitCollection.userInterfaceStyle {
+            case .dark:
+                return true
+            default:
+                return false
+            }
+        } else {
+            return false
+        }
+    }
+
 }
 
 private let logger = Logger(label: "StatusViewController")
