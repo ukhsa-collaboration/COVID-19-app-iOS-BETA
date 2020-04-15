@@ -14,6 +14,7 @@ class AnswerButton: UIControl {
     @IBInspectable var text: String? {
         didSet {
             textLabel.text = text
+            accessibilityLabel = textLabel.accessibilityLabel
         }
     }
 
@@ -22,6 +23,12 @@ class AnswerButton: UIControl {
 
     override var isSelected: Bool {
         didSet {
+            if isSelected {
+                accessibilityTraits.insert(.selected)
+            } else {
+                accessibilityTraits.remove(.selected)
+            }
+
             layer.borderWidth = isSelected ? 2 : 0
             imageView.isHighlighted = isSelected
         }
@@ -32,6 +39,14 @@ class AnswerButton: UIControl {
     }
 
     override func awakeFromNib() {
+        accessibilityTraits = [.button]
+        isAccessibilityElement = true
+        if #available(iOS 13.0, *) {
+            accessibilityRespondsToUserInteraction = true
+        } else {
+            // Fallback on earlier versions
+        }
+
         layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
 
         layer.cornerRadius = 16
