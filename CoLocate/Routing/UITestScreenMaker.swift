@@ -56,6 +56,7 @@ private class InMemoryPersistence: Persisting {
     var diagnosis: Diagnosis? = nil
     var enableNewSelfDiagnosis = false
     var partialPostcode: String? = nil
+    var enableNewKeyRotation = false
     
     func clear() {
         allowedDataSharing = false

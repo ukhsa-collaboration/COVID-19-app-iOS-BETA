@@ -16,6 +16,7 @@ class PersistenceDouble: Persisting {
     var diagnosis: Diagnosis?
     var enableNewSelfDiagnosis = false
     var partialPostcode: String?
+    var enableNewKeyRotation = false
 
     init(
         allowedDataSharing: Bool = false,

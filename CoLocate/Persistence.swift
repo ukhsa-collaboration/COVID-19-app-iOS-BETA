@@ -19,6 +19,7 @@ protocol Persisting {
     var diagnosis: Diagnosis? { get nonmutating set }
     var enableNewSelfDiagnosis: Bool { get nonmutating set }
     var partialPostcode: String? { get nonmutating set }
+    var enableNewKeyRotation: Bool { get nonmutating set }
     
     func clear()
 }

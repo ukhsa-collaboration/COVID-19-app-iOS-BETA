@@ -16,11 +16,13 @@ class DebugViewController: UITableViewController, Storyboarded {
     @IBOutlet weak var versionBuildLabel: UILabel!
     @IBOutlet weak var enableNewSelfDiagnosis: UISwitch!
 
-    // Normally we avoid providing default values for services to ensure that they will
-    // actually be injected, so that UI tests can work properly. However, we shouldn't
-    // ever have any UI tests that show the debug view.
-    private let persistence = Persistence.shared
-    private let contactEventRepository = (UIApplication.shared.delegate as! AppDelegate).bluetoothNursery.contactEventRepository
+    private var persistence: Persisting!
+    private var contactEventRepository: ContactEventRepository!
+    
+    func inject(persistence: Persisting, contactEventRepository: ContactEventRepository) {
+        self.persistence = persistence
+        self.contactEventRepository = contactEventRepository
+    }
     
     override func viewDidLoad() {
         allowedDataSharingSwitch.isOn = persistence.allowedDataSharing

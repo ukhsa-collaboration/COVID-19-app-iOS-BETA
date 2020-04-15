@@ -136,8 +136,13 @@ class RootViewController: UIViewController {
 
     private func showDebugView() {
         let storyboard = UIStoryboard(name: "Debug", bundle: Bundle(for: Self.self))
-        guard let debugVC = storyboard.instantiateInitialViewController() else { return }
-        present(debugVC, animated: true)
+        guard let tabBarVC = storyboard.instantiateInitialViewController() as? UITabBarController,
+            let navVC = tabBarVC.viewControllers?.first as? UINavigationController,
+            let debugVC = navVC.viewControllers.first as? DebugViewController else { return }
+        
+        debugVC.inject(persistence: persistence, contactEventRepository: contactEventRepository)
+        
+        present(tabBarVC, animated: true)
     }
     #endif
 }
