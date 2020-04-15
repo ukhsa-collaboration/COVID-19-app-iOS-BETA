@@ -1,4 +1,4 @@
 import Foundation
 import Reporting
 
-print(Reporting().text)
+Reporting.run()

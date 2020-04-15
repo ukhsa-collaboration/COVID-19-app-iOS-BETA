@@ -19,18 +19,25 @@ let package = Package(
     ),
     ],
     dependencies: [
+        .package(url: "https://github.com/apple/swift-argument-parser", from: "0.0.4")
     ],
     targets: [
         .target(
             name: "Reporting",
-            dependencies: []
+            dependencies: [
+                .product(name: "ArgumentParser", package: "swift-argument-parser"),
+            ]
         ),
         .target(
             name: "Reporter",
-            dependencies: ["Reporting"]
+            dependencies: [
+                "Reporting",
+            ]
             ),
         .testTarget(
             name: "ReportingTests",
-            dependencies: ["Reporting"]),
+            dependencies: [
+                "Reporting",
+        ]),
     ]
 )
