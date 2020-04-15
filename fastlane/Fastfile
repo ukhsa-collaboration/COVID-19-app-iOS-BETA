@@ -57,7 +57,13 @@ platform :ios do
       API_ENDPOINT = #{ENV.fetch("API_ENDPOINT")}
     XCCONFIG
 
-    build_app(scheme: "CoLocate")
+    build_app(
+      scheme: "CoLocate",
+
+      # I'm not sure why this isn't being covered by the xcconfig
+      # file above, but setting this manually for now anyway.
+      xcargs: "PRODUCT_BUNDLE_IDENTIFIER=#{sonar_config.bundle_id}",
+    )
 
     upload_to_testflight(
       username: ENV.fetch("APPLE_USERNAME"),
