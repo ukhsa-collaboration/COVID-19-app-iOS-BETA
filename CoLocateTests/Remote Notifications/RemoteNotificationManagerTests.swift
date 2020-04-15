@@ -208,7 +208,7 @@ class RemoteNotificationManagerTests: TestCase {
 
 private class FirebaseAppDouble: TestableFirebaseApp {
     static var configureCalled = false
-    static func configure() {
+    static func configure(options: FirebaseOptions) {
         configureCalled = true
     }
 }

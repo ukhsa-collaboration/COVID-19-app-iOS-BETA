@@ -1,6 +1,5 @@
-#include "CoLocate/Base.xcconfig"
+#include "CoLocate/Environments/internal.xcconfig"
 
 API_ENDPOINT = https:/$()/purposefully-invalid-url
 DEBUG_REGISTRATION_ID = some-uuid
 DEBUG_REGISTRATION_SECRET_KEY = a-secret-key
-

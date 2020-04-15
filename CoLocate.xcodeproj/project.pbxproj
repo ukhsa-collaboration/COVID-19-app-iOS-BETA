@@ -104,6 +104,9 @@
 		F68B89EF243D01FA00F369A9 /* SelfDiagnosisNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68B89EE243D01FA00F369A9 /* SelfDiagnosisNavigationController.swift */; };
 		F68B89F4243D050700F369A9 /* TemperatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68B89F3243D050700F369A9 /* TemperatureViewController.swift */; };
 		F68BFBF7242ACD17008EE68F /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68BFBF6242ACD17008EE68F /* TestHelpers.swift */; };
+		F68D8FE024476B55008BAAAA /* GoogleService-Info.internal.plist in Resources */ = {isa = PBXBuildFile; fileRef = F68D8FDF24476B55008BAAAA /* GoogleService-Info.internal.plist */; };
+		F68D8FE624477031008BAAAA /* production.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F68D8FE424477031008BAAAA /* production.xcconfig */; };
+		F68D8FE724477031008BAAAA /* internal.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F68D8FE524477031008BAAAA /* internal.xcconfig */; };
 		F6AB2F1E243D324400386D6B /* CoughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AB2F1D243D324400386D6B /* CoughViewController.swift */; };
 		F6AB2F20243D359F00386D6B /* SubmitSymptomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */; };
 		F6CA2819242E41F700F8DC55 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = F6CA2818242E41F700F8DC55 /* README.md */; };
@@ -135,7 +138,7 @@
 		F78CEB5C242B7EC0002254AD /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB57242B7EBF002254AD /* FirebaseCore.framework */; };
 		F78CEB5D242B7EC0002254AD /* PromisesObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB58242B7EC0002254AD /* PromisesObjC.framework */; };
 		F78CEB5E242B7EC0002254AD /* Protobuf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB59242B7EC0002254AD /* Protobuf.framework */; };
-		F78CEB68242B8C2C002254AD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F78CEB67242B8C2B002254AD /* GoogleService-Info.plist */; };
+		F78CEB68242B8C2C002254AD /* GoogleService-Info.beta.plist in Resources */ = {isa = PBXBuildFile; fileRef = F78CEB67242B8C2B002254AD /* GoogleService-Info.beta.plist */; };
 		F78CEB6A242B8D3F002254AD /* FirebaseInstanceID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB69242B8D3E002254AD /* FirebaseInstanceID.framework */; };
 		F78CEB6C242B8D84002254AD /* FirebaseInstallations.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB6B242B8D84002254AD /* FirebaseInstallations.framework */; };
 		F78CEB6F242B92CF002254AD /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB6E242B92CF002254AD /* GoogleUtilities.framework */; };
@@ -272,6 +275,10 @@
 		F68B89EE243D01FA00F369A9 /* SelfDiagnosisNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfDiagnosisNavigationController.swift; sourceTree = "<group>"; };
 		F68B89F3243D050700F369A9 /* TemperatureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureViewController.swift; sourceTree = "<group>"; };
 		F68BFBF6242ACD17008EE68F /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
+		F68D8FDF24476B55008BAAAA /* GoogleService-Info.internal.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.internal.plist"; path = "Internal/GoogleService-Info.internal.plist"; sourceTree = "<group>"; };
+		F68D8FE324476F0B008BAAAA /* beta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = beta.xcconfig; sourceTree = "<group>"; };
+		F68D8FE424477031008BAAAA /* production.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = production.xcconfig; sourceTree = "<group>"; };
+		F68D8FE524477031008BAAAA /* internal.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = internal.xcconfig; sourceTree = "<group>"; };
 		F6AB2F1D243D324400386D6B /* CoughViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoughViewController.swift; sourceTree = "<group>"; };
 		F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitSymptomsViewController.swift; sourceTree = "<group>"; };
 		F6CA2818242E41F700F8DC55 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -306,7 +313,7 @@
 		F78CEB59242B7EC0002254AD /* Protobuf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Protobuf.framework; path = Frameworks/Protobuf.framework; sourceTree = "<group>"; };
 		F78CEB64242B8137002254AD /* Firebase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Firebase.h; path = Frameworks/Firebase.framework/Headers/Firebase.h; sourceTree = SOURCE_ROOT; };
 		F78CEB66242B819E002254AD /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; name = module.modulemap; path = Frameworks/Firebase.framework/Modules/module.modulemap; sourceTree = SOURCE_ROOT; };
-		F78CEB67242B8C2B002254AD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F78CEB67242B8C2B002254AD /* GoogleService-Info.beta.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.beta.plist"; sourceTree = "<group>"; };
 		F78CEB69242B8D3E002254AD /* FirebaseInstanceID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseInstanceID.framework; path = Frameworks/FirebaseInstanceID.framework; sourceTree = "<group>"; };
 		F78CEB6B242B8D84002254AD /* FirebaseInstallations.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseInstallations.framework; path = Frameworks/FirebaseInstallations.framework; sourceTree = "<group>"; };
 		F78CEB6E242B92CF002254AD /* GoogleUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleUtilities.framework; path = Frameworks/GoogleUtilities.framework; sourceTree = "<group>"; };
@@ -557,30 +564,30 @@
 			children = (
 				F78CEB74242BAC83002254AD /* CoLocate.entitlements */,
 				F78CEB53242B7E18002254AD /* CoLocate-Bridging-Header.h */,
-				F78CEB67242B8C2B002254AD /* GoogleService-Info.plist */,
 				6FC63C3C241641BA007C8BF3 /* Info.plist */,
 				6FC63C30241641B8007C8BF3 /* AppDelegate.swift */,
-				0997D055243BDEEC0067346C /* RootViewController.swift */,
 				214209B9242216B700C7BFF3 /* Persistence.swift */,
 				21E5051424448D880065C69B /* PlistPersister.swift */,
+				0997D055243BDEEC0067346C /* RootViewController.swift */,
 				6FC63C37241641BA007C8BF3 /* Assets.xcassets */,
 				A1E7A0582420028B0078174D /* NHS Colors.xcassets */,
 				89896E5F2435F15C00F949EA /* Base.xcconfig */,
-				6FC63C39241641BA007C8BF3 /* LaunchScreen.storyboard */,
 				214209B72422155200C7BFF3 /* Appearance */,
 				214209B82422157300C7BFF3 /* Bluetooth */,
 				21B3D2DF24263A1100573061 /* Contact Events */,
 				098ED47F242E744F0029B729 /* Debug */,
+				F68D8FD424476846008BAAAA /* Environments */,
 				F78CEB45242B7741002254AD /* Extensions */,
+				6FC63C39241641BA007C8BF3 /* LaunchScreen.storyboard */,
 				89F06B2D2434A5A50074C612 /* Logging */,
 				214209D3242399DD00C7BFF3 /* Networking */,
 				F6CC2CA7242BC7D90079432B /* Notifications */,
-				0995ABCD243D034E0057C0D7 /* Status */,
 				F6F05A212433BE9600FF4B72 /* Onboarding */,
 				F758B8D0242CC661003AE16D /* Registration */,
 				F758B8BC242CB83B003AE16D /* Resources */,
 				895D9E4924374EB800573D4D /* Routing */,
 				F68B89EB243CFEEE00F369A9 /* SelfDiagnosis */,
+				0995ABCD243D034E0057C0D7 /* Status */,
 			);
 			path = CoLocate;
 			sourceTree = "<group>";
@@ -675,6 +682,18 @@
 				F68B89F3243D050700F369A9 /* TemperatureViewController.swift */,
 			);
 			path = SelfDiagnosis;
+			sourceTree = "<group>";
+		};
+		F68D8FD424476846008BAAAA /* Environments */ = {
+			isa = PBXGroup;
+			children = (
+				F78CEB67242B8C2B002254AD /* GoogleService-Info.beta.plist */,
+				F68D8FDF24476B55008BAAAA /* GoogleService-Info.internal.plist */,
+				F68D8FE324476F0B008BAAAA /* beta.xcconfig */,
+				F68D8FE524477031008BAAAA /* internal.xcconfig */,
+				F68D8FE424477031008BAAAA /* production.xcconfig */,
+			);
+			path = Environments;
 			sourceTree = "<group>";
 		};
 		F6CC2CA7242BC7D90079432B /* Notifications */ = {
@@ -913,17 +932,20 @@
 			files = (
 				F758B8C4242CC0EE003AE16D /* Status.storyboard in Resources */,
 				6FC63C3B241641BA007C8BF3 /* LaunchScreen.storyboard in Resources */,
+				F68D8FE724477031008BAAAA /* internal.xcconfig in Resources */,
 				AEC6A7BE241BD82900B0237A /* LogoStrapline.xib in Resources */,
 				A1E7A0592420028B0078174D /* NHS Colors.xcassets in Resources */,
 				F758B8BE242CB856003AE16D /* Localizable.strings in Resources */,
 				F68B89EA243B9FDC00F369A9 /* CoLocate.xcconfig in Resources */,
 				6FC63C38241641BA007C8BF3 /* Assets.xcassets in Resources */,
+				F68D8FE024476B55008BAAAA /* GoogleService-Info.internal.plist in Resources */,
 				F6CA2819242E41F700F8DC55 /* README.md in Resources */,
+				F68D8FE624477031008BAAAA /* production.xcconfig in Resources */,
 				895D9E462437458700573D4D /* AppIcon.xcassets in Resources */,
 				F68B89ED243CFF2600F369A9 /* SelfDiagnosis.storyboard in Resources */,
 				F6F05A322434310200FF4B72 /* Onboarding.storyboard in Resources */,
 				098ED481242E745F0029B729 /* Debug.storyboard in Resources */,
-				F78CEB68242B8C2C002254AD /* GoogleService-Info.plist in Resources */,
+				F78CEB68242B8C2C002254AD /* GoogleService-Info.beta.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

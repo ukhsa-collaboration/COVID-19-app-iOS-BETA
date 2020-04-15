@@ -24,6 +24,8 @@
 	<string>$(DEBUG_REGISTRATION_ID)</string>
 	<key>DEBUG_REGISTRATION_SECRET_KEY</key>
 	<string>$(DEBUG_REGISTRATION_SECRET_KEY)</string>
+	<key>GOOGLE_SERVICE_INFO_PLIST</key>
+	<string>$(GOOGLE_SERVICE_INFO_PLIST)</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSRequiresIPhoneOS</key>

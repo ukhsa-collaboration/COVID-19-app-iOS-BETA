@@ -11,44 +11,28 @@ platform :ios do
   #     ~/Library/Keychains/fastlane_tmp_keychain-db
 
   module Sonar
-    Config = Struct.new(:bundle_id, :apple_id, :suffix, :internal, keyword_init: true) do
-      def xcargs
-        args = {
-          API_ENDPOINT: ENV.fetch("API_ENDPOINT"),
-          ASSETCATALOG_COMPILER_APPICON_NAME: "AppIcon#{suffix}",
-          DISPLAY_NAME: "CoLocate#{suffix}",
-          PRODUCT_BUNDLE_IDENTIFIER: bundle_id,
-        }
-        args[:SWIFT_ACTIVE_COMPILATION_CONDITIONS] = "INTERNAL" if internal
-        args.map {|k,v| "#{k}='#{v}'" }.join(" ")
-      end
-    end
+    Config = Struct.new(:bundle_id, :apple_id, keyword_init: true)
 
     CONFIGS = {
       beta: Config.new(
         bundle_id: "uk.nhs.nhsx.beta.CoLocate",
         apple_id: 1504244021,
-        suffix: ".beta",
-        internal: true,
       ),
       internal: Config.new(
         bundle_id: "uk.nhs.nhsx.sonar.internal",
         apple_id: 1507438009,
-        suffix: ".internal",
-        internal: true,
       ),
-      prod: Config.new(
+      production: Config.new(
         bundle_id: "uk.nhs.nhsx.sonar",
         apple_id: 1507396059,
-        suffix: "",
-        internal: false,
       ),
     }
   end
 
   desc "Cut a release for Test Flight"
   lane :release do |options|
-    sonar_config = Sonar::CONFIGS.fetch(options.fetch(:sonar_env).to_sym)
+    sonar_env = options.fetch(:sonar_env).to_sym
+    sonar_config = Sonar::CONFIGS.fetch(sonar_env)
 
     setup_ci()
 
@@ -67,10 +51,13 @@ platform :ios do
       profile_name: "match AppStore #{sonar_config.bundle_id}",
     )
 
-    build_app(
-      scheme: "CoLocate",
-      xcargs: sonar_config.xcargs,
-    )
+    File.write("CoLocate.xcconfig", <<~XCCONFIG)
+      #include "CoLocate/Environments/#{sonar_env}.xcconfig"
+
+      API_ENDPOINT = #{ENV.fetch("API_ENDPOINT")}
+    XCCONFIG
+
+    build_app(scheme: "CoLocate")
 
     upload_to_testflight(
       username: ENV.fetch("APPLE_USERNAME"),

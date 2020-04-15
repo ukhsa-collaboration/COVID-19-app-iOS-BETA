@@ -1,0 +1,7 @@
+#include "CoLocate/Base.xcconfig"
+
+SONAR_ENV = production
+
+ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon
+GOOGLE_SERVICE_INFO_PLIST = GoogleService-Info
+PRODUCT_BUNDLE_IDENTIFIER = uk.nhs.nhsx.sonar
