@@ -97,8 +97,8 @@ class BroadcastIdEncypterTests: XCTestCase {
         let endDate   = clearText!.subdata(in: 4..<8)
         let uuidBytes = clearText!.subdata(in: 8..<24)
 
-        XCTAssertEqual(1585692000, asInt(startDate))
-        XCTAssertEqual(1585778400, asInt(endDate))
+        XCTAssertEqual(1585699200, asInt(startDate))
+        XCTAssertEqual(1585785600, asInt(endDate))
         XCTAssertEqual("E1D160C7-F6E8-48BC-8687-63C696D910CB", asUUIDString(uuidBytes))
     }
 
