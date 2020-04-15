@@ -38,7 +38,6 @@ class PersistenceTests: TestCase {
     
     func testRegistrationIsPassedToSecureRegistrationStorage() throws {
         let secureRegistrationStorage = SecureRegistrationStorage()
-        let secureBroadcastRotationKeyStorage = SecureBroadcastRotationKeyStorage.shared
         let persistence = Persistence(secureRegistrationStorage: secureRegistrationStorage)
 
         XCTAssertNil(persistence.registration)

@@ -9,7 +9,12 @@
 import Foundation
 
 struct HumbleLocalNotificationScheduler: LocalNotificationScheduling {
-    static let shared = HumbleLocalNotificationScheduler()
+    private let userNotificationCenter: UserNotificationCenter
+    
+    init(userNotificationCenter: UserNotificationCenter) {
+        self.userNotificationCenter = userNotificationCenter
+    }
+    
 
     func scheduleLocalNotification(body: String, interval: TimeInterval, identifier: String) {
         let content = UNMutableNotificationContent()
@@ -18,6 +23,6 @@ struct HumbleLocalNotificationScheduler: LocalNotificationScheduling {
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: interval, repeats: false)
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
 
-        UNUserNotificationCenter.current().add(request)
+        userNotificationCenter.add(request, withCompletionHandler: nil)
     }
 }

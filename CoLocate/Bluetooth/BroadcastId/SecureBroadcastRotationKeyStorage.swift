@@ -18,7 +18,6 @@ protocol BroadcastRotationKeyStorage {
 }
 
 struct SecureBroadcastRotationKeyStorage: BroadcastRotationKeyStorage {
-    static let shared = SecureBroadcastRotationKeyStorage()
 
     private let publicKeyTag = "uk.nhs.nhsx.colocate.sonar.public_key"
 

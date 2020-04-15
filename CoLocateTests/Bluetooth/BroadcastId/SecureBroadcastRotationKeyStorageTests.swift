@@ -13,7 +13,7 @@ import Security
 
 class SecureBroadcastRotationKeyStorageTests: XCTestCase {
 
-    let storage = SecureBroadcastRotationKeyStorage.shared
+    let storage = SecureBroadcastRotationKeyStorage()
 
     override func setUp() {
         super.setUp()

@@ -6,7 +6,7 @@
 //  Copyright © 2020 NHSX. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import CoreBluetooth
 
 class BluetoothNursery {
@@ -20,6 +20,8 @@ class BluetoothNursery {
     let persistence: Persistence
     let contactEventPersister: PlistPersister<ContactEvent>
     let contactEventRepository: PersistingContactEventRepository
+    let broadcastIdGenerator: BroadcastIdGenerator
+    let stateObserver: BluetoothStateObserver
     
     var central: CBCentralManager?
     var listener: BTLEListener?
@@ -30,17 +32,22 @@ class BluetoothNursery {
     var startListenerCalled: Bool = false
     var startBroadcasterCalled: Bool = false
     
-    init(persistence: Persistence) {
+    init(persistence: Persistence, userNotificationCenter: UNUserNotificationCenter) {
         self.persistence = persistence
         contactEventPersister = PlistPersister<ContactEvent>(fileName: "contactEvents")
         contactEventRepository = PersistingContactEventRepository(persister: contactEventPersister)
+        broadcastIdGenerator = ConcreteBroadcastIdGenerator(storage: SecureBroadcastRotationKeyStorage())
+        stateObserver = BluetoothStateObserver(
+            appStateReader: UIApplication.shared,
+            scheduler: HumbleLocalNotificationScheduler(userNotificationCenter: userNotificationCenter)
+        )
     }
 
     func startBroadcastingAndListening(registration: Registration) {
-        ConcreteBroadcastIdGenerator.shared.sonarId = registration.id
+        broadcastIdGenerator.sonarId = registration.id
 
         startBroadcaster(stateDelegate: nil)
-        startListener(stateDelegate: BluetoothStateObserver.shared)
+        startListener(stateDelegate: stateObserver)
     }
     
     func startListener(stateDelegate: BTLEListenerStateDelegate?) {
@@ -56,7 +63,7 @@ class BluetoothNursery {
     
     func startBroadcaster(stateDelegate: BTLEBroadcasterStateDelegate?) {
         startBroadcasterCalled = true
-        broadcaster = ConcreteBTLEBroadcaster()
+        broadcaster = ConcreteBTLEBroadcaster(idGenerator: broadcastIdGenerator)
         peripheral = CBPeripheralManager(delegate: broadcaster as! ConcreteBTLEBroadcaster, queue: broadcasterQueue, options: [
             CBPeripheralManagerOptionRestoreIdentifierKey: BluetoothNursery.peripheralRestoreIdentifier
         ])

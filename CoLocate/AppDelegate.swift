@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     var window: UIWindow?
 
     let notificationCenter = NotificationCenter.default
+    let userNotificationCenter = UNUserNotificationCenter.current()
     let persistence = Persistence.shared
     let authorizationManager = AuthorizationManager()
     let bluetoothNursery: BluetoothNursery
@@ -26,7 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     override init() {
         LoggingManager.bootstrap()
         
-        let userNotificationCenter = UNUserNotificationCenter.current()
         let dispatcher = RemoteNotificationDispatcher(
             notificationCenter: notificationCenter,
             userNotificationCenter: userNotificationCenter
@@ -43,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             remoteNotificationDispatcher: dispatcher,
             notificationCenter: notificationCenter
         )
-        bluetoothNursery = BluetoothNursery(persistence: persistence)
+        bluetoothNursery = BluetoothNursery(persistence: persistence, userNotificationCenter: userNotificationCenter)
         
         super.init()
 
@@ -131,7 +131,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     // MARK: - Private
     
     func scheduleLocalNotification() {
-        let scheduler = HumbleLocalNotificationScheduler.shared
+        let scheduler = HumbleLocalNotificationScheduler(userNotificationCenter: userNotificationCenter)
 
         scheduler.scheduleLocalNotification(
             body: "To keep yourself secure, please relaunch the app.",

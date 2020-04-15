@@ -26,7 +26,11 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
 
     var peripheral: CBPeripheralManager?
     var stateDelegate: BTLEBroadcasterStateDelegate?
-    let idGenerator: BroadcastIdGenerator = ConcreteBroadcastIdGenerator.shared
+    let idGenerator: BroadcastIdGenerator
+    
+    init(idGenerator: BroadcastIdGenerator) {
+        self.idGenerator = idGenerator
+    }
 
     func tryStartAdvertising() {
         guard let peripheral = peripheral else { return }

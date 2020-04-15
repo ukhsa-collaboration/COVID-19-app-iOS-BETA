@@ -9,12 +9,12 @@
 import Foundation
 
 protocol BroadcastIdGenerator {
+    var sonarId: UUID? { get nonmutating set }
+
     func broadcastIdentifier() -> Data?
 }
 
 class ConcreteBroadcastIdGenerator: BroadcastIdGenerator {
-
-    static let shared = ConcreteBroadcastIdGenerator(storage: SecureBroadcastRotationKeyStorage.shared)
 
     var sonarId: UUID?
     var serverPublicKey: SecKey?

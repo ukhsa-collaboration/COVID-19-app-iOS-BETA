@@ -11,9 +11,6 @@ import CoreBluetooth
 
 struct BluetoothStateObserver: BTLEListenerStateDelegate {
     
-    static let shared = BluetoothStateObserver(appStateReader: UIApplication.shared,
-                                               scheduler: HumbleLocalNotificationScheduler.shared)
-
     let appStateReader: ApplicationStateReading
     let scheduler: LocalNotificationScheduling
     let uiQueue: TestableQueue
