@@ -21,40 +21,40 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="2Z9-2c-Oc6">
-                                        <rect key="frame" x="20" y="32" width="374" height="425"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="490.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1/3" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NfZ-qV-GRo">
-                                                <rect key="frame" x="0.0" y="0.0" width="374" height="16"/>
+                                                <rect key="frame" x="20" y="32" width="374" height="16"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                 <color key="textColor" name="NHS Secondary Text"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xmm-3h-nIK" userLabel="Spacer">
-                                                <rect key="frame" x="0.0" y="16" width="374" height="8"/>
+                                                <rect key="frame" x="20" y="48" width="374" height="8"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="8" id="NgY-NK-PKr"/>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temperature Question" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uOT-OJ-I6V">
-                                                <rect key="frame" x="0.0" y="24" width="374" height="26.5"/>
+                                                <rect key="frame" x="20" y="56" width="374" height="26.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                 <color key="textColor" name="NHS Text"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E0g-9z-uvL" userLabel="Spacer">
-                                                <rect key="frame" x="0.0" y="50.5" width="374" height="16"/>
+                                                <rect key="frame" x="20" y="82.5" width="374" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="16" id="uzP-SM-vse"/>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temperature detail" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H04-Lf-rLE">
-                                                <rect key="frame" x="0.0" y="66.5" width="374" height="20.5"/>
+                                                <rect key="frame" x="20" y="98.5" width="374" height="20.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                 <color key="textColor" name="NHS Secondary Text"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hV1-08-Ex4" userLabel="Spacer">
-                                                <rect key="frame" x="0.0" y="87" width="374" height="50"/>
+                                                <rect key="frame" x="20" y="119" width="374" height="50"/>
                                                 <subviews>
                                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temperature Error" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EEp-p2-YdY">
                                                         <rect key="frame" x="0.0" y="18" width="374" height="16"/>
@@ -73,7 +73,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="Vw9-t8-qg5" customClass="AnswerButton" customModule="CoLocate" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="137" width="374" height="100"/>
+                                                <rect key="frame" x="20" y="169" width="374" height="100"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="text" value="Yes (Temperature)"/>
@@ -83,13 +83,13 @@
                                                 </connections>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qSZ-MH-T5o" userLabel="Spacer">
-                                                <rect key="frame" x="0.0" y="237" width="374" height="8"/>
+                                                <rect key="frame" x="20" y="269" width="374" height="8"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="8" id="OGb-nK-cv3"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="ozZ-4u-kSR" customClass="AnswerButton" customModule="CoLocate" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="245" width="374" height="100"/>
+                                                <rect key="frame" x="20" y="277" width="374" height="100"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="text" value="No (Temperature)"/>
@@ -99,28 +99,29 @@
                                                 </connections>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pi4-yz-lrD" userLabel="Spacer">
-                                                <rect key="frame" x="0.0" y="345" width="374" height="50"/>
+                                                <rect key="frame" x="20" y="377" width="374" height="63.5"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="16" id="1FD-ut-bKn"/>
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jG0-JS-mYk" userLabel="Continue" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="395" width="374" height="30"/>
+                                                <rect key="frame" x="20" y="440.5" width="374" height="30"/>
                                                 <state key="normal" title="Continue"/>
                                                 <connections>
                                                     <action selector="continueTapped:" destination="Jpv-Nm-90l" eventType="touchUpInside" id="Ap7-G3-EFd"/>
                                                 </connections>
                                             </button>
                                         </subviews>
+                                        <directionalEdgeInsets key="directionalLayoutMargins" top="32" leading="20" bottom="20" trailing="20"/>
                                     </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="2Z9-2c-Oc6" firstAttribute="bottom" secondItem="q6D-9q-b68" secondAttribute="bottom" constant="20" id="6jB-1f-ldt"/>
-                                    <constraint firstItem="2Z9-2c-Oc6" firstAttribute="leading" secondItem="q6D-9q-b68" secondAttribute="leading" constant="20" id="SkR-FN-oxv"/>
-                                    <constraint firstItem="2Z9-2c-Oc6" firstAttribute="trailing" secondItem="q6D-9q-b68" secondAttribute="trailing" constant="20" id="aGe-C2-rPr"/>
-                                    <constraint firstItem="2Z9-2c-Oc6" firstAttribute="width" secondItem="sJn-Oi-dbr" secondAttribute="width" constant="-40" id="ckn-8O-HNn"/>
-                                    <constraint firstItem="2Z9-2c-Oc6" firstAttribute="top" secondItem="q6D-9q-b68" secondAttribute="top" constant="32" id="n3L-bF-zBX"/>
-                                    <constraint firstItem="2Z9-2c-Oc6" firstAttribute="height" secondItem="sJn-Oi-dbr" secondAttribute="height" priority="1" constant="-52" id="xww-t9-7uT"/>
+                                    <constraint firstItem="2Z9-2c-Oc6" firstAttribute="leading" secondItem="q6D-9q-b68" secondAttribute="leading" id="9cd-uG-OAZ"/>
+                                    <constraint firstItem="2Z9-2c-Oc6" firstAttribute="trailing" secondItem="q6D-9q-b68" secondAttribute="trailing" id="erp-bj-SQH"/>
+                                    <constraint firstItem="2Z9-2c-Oc6" firstAttribute="height" secondItem="sJn-Oi-dbr" secondAttribute="height" priority="1" id="k9X-pv-rzg"/>
+                                    <constraint firstItem="2Z9-2c-Oc6" firstAttribute="width" secondItem="sJn-Oi-dbr" secondAttribute="width" id="p8X-2t-5Zi"/>
+                                    <constraint firstItem="2Z9-2c-Oc6" firstAttribute="top" secondItem="q6D-9q-b68" secondAttribute="top" id="tCa-qU-GUT"/>
+                                    <constraint firstItem="2Z9-2c-Oc6" firstAttribute="bottom" secondItem="q6D-9q-b68" secondAttribute="bottom" id="wqB-1K-f2d"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="q6D-9q-b68"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="sJn-Oi-dbr"/>
@@ -168,40 +169,40 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="xOc-a4-tAc">
-                                        <rect key="frame" x="20" y="32" width="374" height="425"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="477"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2/3" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jbu-QY-HtH">
-                                                <rect key="frame" x="0.0" y="0.0" width="374" height="16"/>
+                                                <rect key="frame" x="20" y="32" width="374" height="16"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                 <color key="textColor" name="NHS Secondary Text"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rN2-gL-x4n" userLabel="Spacer">
-                                                <rect key="frame" x="0.0" y="16" width="374" height="8"/>
+                                                <rect key="frame" x="20" y="48" width="374" height="8"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="8" id="cGb-bQ-YuO"/>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cough Question" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Cy-NY-5GO">
-                                                <rect key="frame" x="0.0" y="24" width="374" height="26.5"/>
+                                                <rect key="frame" x="20" y="56" width="374" height="26.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                 <color key="textColor" name="NHS Text"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TUY-iH-UH6" userLabel="Spacer">
-                                                <rect key="frame" x="0.0" y="50.5" width="374" height="16"/>
+                                                <rect key="frame" x="20" y="82.5" width="374" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="16" id="Iow-wU-Fh0"/>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cough Detail" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lfF-B3-ch8">
-                                                <rect key="frame" x="0.0" y="66.5" width="374" height="20.5"/>
+                                                <rect key="frame" x="20" y="98.5" width="374" height="20.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                 <color key="textColor" name="NHS Secondary Text"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G1e-Cu-Omk" userLabel="Spacer">
-                                                <rect key="frame" x="0.0" y="87" width="374" height="50"/>
+                                                <rect key="frame" x="20" y="119" width="374" height="50"/>
                                                 <subviews>
                                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cough Error" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gTL-ig-wPS">
                                                         <rect key="frame" x="0.0" y="18" width="374" height="16"/>
@@ -220,7 +221,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="jqb-jq-LE5" customClass="AnswerButton" customModule="CoLocate" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="137" width="374" height="100"/>
+                                                <rect key="frame" x="20" y="169" width="374" height="100"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="text" value="Yes (Cough)"/>
@@ -230,13 +231,13 @@
                                                 </connections>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="97b-e5-l0B" userLabel="Spacer">
-                                                <rect key="frame" x="0.0" y="237" width="374" height="8"/>
+                                                <rect key="frame" x="20" y="269" width="374" height="8"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="8" id="vBG-Be-ImL"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="2oq-qV-AhN" customClass="AnswerButton" customModule="CoLocate" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="245" width="374" height="100"/>
+                                                <rect key="frame" x="20" y="277" width="374" height="100"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="text" value="No (Cough)"/>
@@ -246,28 +247,29 @@
                                                 </connections>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mxc-P6-dNX" userLabel="Spacer">
-                                                <rect key="frame" x="0.0" y="345" width="374" height="50"/>
+                                                <rect key="frame" x="20" y="377" width="374" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="16" id="OUL-vh-xbL"/>
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kub-if-PMI" userLabel="Continue" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="395" width="374" height="30"/>
+                                                <rect key="frame" x="20" y="427" width="374" height="30"/>
                                                 <state key="normal" title="Continue"/>
                                                 <connections>
                                                     <action selector="continueTapped:" destination="DhY-Gr-smF" eventType="touchUpInside" id="feu-KD-Vok"/>
                                                 </connections>
                                             </button>
                                         </subviews>
+                                        <directionalEdgeInsets key="directionalLayoutMargins" top="32" leading="20" bottom="20" trailing="20"/>
                                     </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="xOc-a4-tAc" firstAttribute="bottom" secondItem="wJi-Gc-Ij5" secondAttribute="bottom" constant="20" id="3ej-mj-sEq"/>
-                                    <constraint firstItem="xOc-a4-tAc" firstAttribute="trailing" secondItem="wJi-Gc-Ij5" secondAttribute="trailing" constant="20" id="8SP-WJ-RMU"/>
-                                    <constraint firstItem="xOc-a4-tAc" firstAttribute="height" secondItem="r2G-mq-XaE" secondAttribute="height" priority="1" constant="-52" id="gzb-qU-oRK"/>
-                                    <constraint firstItem="xOc-a4-tAc" firstAttribute="leading" secondItem="wJi-Gc-Ij5" secondAttribute="leading" constant="20" id="i9G-Qx-bDR"/>
-                                    <constraint firstItem="xOc-a4-tAc" firstAttribute="top" secondItem="wJi-Gc-Ij5" secondAttribute="top" constant="32" id="q6W-I8-WI4"/>
-                                    <constraint firstItem="xOc-a4-tAc" firstAttribute="width" secondItem="r2G-mq-XaE" secondAttribute="width" constant="-40" id="r5z-VT-Cux"/>
+                                    <constraint firstItem="xOc-a4-tAc" firstAttribute="bottom" secondItem="wJi-Gc-Ij5" secondAttribute="bottom" id="3ej-mj-sEq"/>
+                                    <constraint firstItem="xOc-a4-tAc" firstAttribute="trailing" secondItem="wJi-Gc-Ij5" secondAttribute="trailing" id="8SP-WJ-RMU"/>
+                                    <constraint firstItem="xOc-a4-tAc" firstAttribute="height" secondItem="r2G-mq-XaE" secondAttribute="height" priority="1" id="gzb-qU-oRK"/>
+                                    <constraint firstItem="xOc-a4-tAc" firstAttribute="leading" secondItem="wJi-Gc-Ij5" secondAttribute="leading" id="i9G-Qx-bDR"/>
+                                    <constraint firstItem="xOc-a4-tAc" firstAttribute="top" secondItem="wJi-Gc-Ij5" secondAttribute="top" id="q6W-I8-WI4"/>
+                                    <constraint firstItem="xOc-a4-tAc" firstAttribute="width" secondItem="r2G-mq-XaE" secondAttribute="width" id="r5z-VT-Cux"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="wJi-Gc-Ij5"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="r2G-mq-XaE"/>
@@ -333,34 +335,34 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="9Z6-MF-rO6">
-                                        <rect key="frame" x="20" y="32" width="374" height="124.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3/3" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ul2-la-I2I">
-                                                <rect key="frame" x="0.0" y="0.0" width="374" height="16"/>
+                                                <rect key="frame" x="20" y="32" width="374" height="16"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                 <color key="textColor" name="NHS Secondary Text"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gbi-po-Igf" userLabel="Spacer">
-                                                <rect key="frame" x="0.0" y="16" width="374" height="8"/>
+                                                <rect key="frame" x="20" y="48" width="374" height="8"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="8" id="Tc7-Ud-OYW"/>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Summary" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aIR-YM-xXi">
-                                                <rect key="frame" x="0.0" y="24" width="374" height="20.5"/>
+                                                <rect key="frame" x="20" y="56" width="374" height="20.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                 <color key="textColor" name="NHS Text"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A5N-xI-wB0" userLabel="Spacer">
-                                                <rect key="frame" x="0.0" y="44.5" width="374" height="50"/>
+                                                <rect key="frame" x="20" y="76.5" width="374" height="647.5"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="1" id="93s-o0-j3G"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="16" id="93s-o0-j3G"/>
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JYn-nS-TUw" userLabel="Continue" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="94.5" width="374" height="30"/>
+                                                <rect key="frame" x="20" y="724" width="374" height="30"/>
                                                 <state key="normal" title="Submit"/>
                                                 <connections>
                                                     <action selector="submitTapped:" destination="ofL-pj-tC8" eventType="touchUpInside" id="EWR-3W-sAd"/>
@@ -368,15 +370,16 @@
                                                 </connections>
                                             </button>
                                         </subviews>
+                                        <directionalEdgeInsets key="directionalLayoutMargins" top="32" leading="20" bottom="20" trailing="20"/>
                                     </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="9Z6-MF-rO6" firstAttribute="top" secondItem="3Ic-zU-r0w" secondAttribute="top" constant="32" id="8gj-Lk-EhY"/>
-                                    <constraint firstItem="9Z6-MF-rO6" firstAttribute="leading" secondItem="3Ic-zU-r0w" secondAttribute="leading" constant="20" id="9m1-EJ-8sJ"/>
-                                    <constraint firstItem="9Z6-MF-rO6" firstAttribute="height" secondItem="bar-jR-1dZ" secondAttribute="height" priority="1" constant="-52" id="Q3I-5O-X5O"/>
-                                    <constraint firstItem="9Z6-MF-rO6" firstAttribute="width" secondItem="bar-jR-1dZ" secondAttribute="width" constant="-40" id="X8S-H8-67j"/>
-                                    <constraint firstItem="9Z6-MF-rO6" firstAttribute="bottom" secondItem="3Ic-zU-r0w" secondAttribute="bottom" constant="20" id="ggK-O2-fD4"/>
-                                    <constraint firstItem="9Z6-MF-rO6" firstAttribute="trailing" secondItem="3Ic-zU-r0w" secondAttribute="trailing" constant="20" id="tjj-8O-gFC"/>
+                                    <constraint firstItem="9Z6-MF-rO6" firstAttribute="leading" secondItem="3Ic-zU-r0w" secondAttribute="leading" id="0Mb-ds-wYm"/>
+                                    <constraint firstItem="9Z6-MF-rO6" firstAttribute="trailing" secondItem="3Ic-zU-r0w" secondAttribute="trailing" id="5lc-ce-Vc9"/>
+                                    <constraint firstItem="9Z6-MF-rO6" firstAttribute="bottom" secondItem="3Ic-zU-r0w" secondAttribute="bottom" id="R8L-4H-99N"/>
+                                    <constraint firstItem="9Z6-MF-rO6" firstAttribute="height" secondItem="bar-jR-1dZ" secondAttribute="height" priority="1" id="Ufg-ak-vbz"/>
+                                    <constraint firstItem="9Z6-MF-rO6" firstAttribute="width" secondItem="bar-jR-1dZ" secondAttribute="width" id="XNu-jA-mpo"/>
+                                    <constraint firstItem="9Z6-MF-rO6" firstAttribute="top" secondItem="3Ic-zU-r0w" secondAttribute="top" id="gkD-dV-Cmb"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="3Ic-zU-r0w"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="bar-jR-1dZ"/>
