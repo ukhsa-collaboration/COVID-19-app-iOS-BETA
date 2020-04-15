@@ -73,7 +73,6 @@
 		898FE857243B4D7A00210775 /* XCUIElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898FE856243B4D7A00210775 /* XCUIElement.swift */; };
 		898FE859243B4FE300210775 /* AuthorizationManaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898FE858243B4FE300210775 /* AuthorizationManaging.swift */; };
 		898FE860243B5AF700210775 /* UITestScreenMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898FE85F243B5AF700210775 /* UITestScreenMaker.swift */; };
-		89AEE89D243DF24900BF3861 /* Persisting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AEE89C243DF24900BF3861 /* Persisting.swift */; };
 		89BC79EB2434E047002050F8 /* LogsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BC79EA2434E047002050F8 /* LogsViewController.swift */; };
 		89F06B2F2434A62C0074C612 /* LoggingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F06B2E2434A62C0074C612 /* LoggingManager.swift */; };
 		89F06B312434AABF0074C612 /* NoOpLogHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F06B302434AABE0074C612 /* NoOpLogHandler.swift */; };
@@ -240,7 +239,6 @@
 		898FE856243B4D7A00210775 /* XCUIElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCUIElement.swift; sourceTree = "<group>"; };
 		898FE858243B4FE300210775 /* AuthorizationManaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationManaging.swift; sourceTree = "<group>"; };
 		898FE85F243B5AF700210775 /* UITestScreenMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestScreenMaker.swift; sourceTree = "<group>"; };
-		89AEE89C243DF24900BF3861 /* Persisting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persisting.swift; sourceTree = "<group>"; };
 		89BC79EA2434E047002050F8 /* LogsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogsViewController.swift; sourceTree = "<group>"; };
 		89F06B2E2434A62C0074C612 /* LoggingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingManager.swift; sourceTree = "<group>"; };
 		89F06B302434AABE0074C612 /* NoOpLogHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoOpLogHandler.swift; sourceTree = "<group>"; };
@@ -560,7 +558,6 @@
 				0997D055243BDEEC0067346C /* RootViewController.swift */,
 				214209B9242216B700C7BFF3 /* Persistence.swift */,
 				21E5051424448D880065C69B /* PlistPersister.swift */,
-				89AEE89C243DF24900BF3861 /* Persisting.swift */,
 				6FC63C37241641BA007C8BF3 /* Assets.xcassets */,
 				A1E7A0582420028B0078174D /* NHS Colors.xcassets */,
 				89896E5F2435F15C00F949EA /* Base.xcconfig */,
@@ -1040,7 +1037,6 @@
 				09CAA3662440F3B100CE93A6 /* PostcodeViewController.swift in Sources */,
 				21E5051524448D880065C69B /* PlistPersister.swift in Sources */,
 				098ED483242E746E0029B729 /* DebugViewController.swift in Sources */,
-				89AEE89D243DF24900BF3861 /* Persisting.swift in Sources */,
 				F7D62F2B2440D64D004C32A2 /* ConcreteBroadcastIdGenerator.swift in Sources */,
 				89F06B312434AABF0074C612 /* NoOpLogHandler.swift in Sources */,
 				F6F05A3024340E5400FF4B72 /* OnboardingViewController.swift in Sources */,

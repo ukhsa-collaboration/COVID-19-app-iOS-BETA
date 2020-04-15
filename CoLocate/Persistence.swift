@@ -9,6 +9,20 @@
 import Foundation
 import Logging
 
+enum Diagnosis: Int, CaseIterable {
+    case notInfected = 1, infected, potential
+}
+
+protocol Persisting {
+    var allowedDataSharing: Bool { get nonmutating set }
+    var registration: Registration? { get nonmutating set }
+    var diagnosis: Diagnosis? { get nonmutating set }
+    var enableNewSelfDiagnosis: Bool { get nonmutating set }
+    var partialPostcode: String? { get nonmutating set }
+    
+    func clear()
+}
+
 
 protocol PersistenceDelegate: class {
     func persistence(_ persistence: Persistence, didUpdateRegistration registration: Registration)
