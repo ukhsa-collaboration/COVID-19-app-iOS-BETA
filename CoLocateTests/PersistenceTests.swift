@@ -13,25 +13,25 @@ class PersistenceTests: TestCase {
 
     func testDiagnosisRawValueZeroIsUnknown() {
         let persistence = Persistence()
-        XCTAssertNil(persistence.diagnosis)
+        XCTAssertNil(persistence.selfDiagnosis)
     }
 
     func testDiagnosisIsPersisted() {
         let service = Persistence()
-        service.diagnosis = .notInfected
+        service.selfDiagnosis = .notInfected
 
-        let diagnosis = Persistence().diagnosis
-        XCTAssertEqual(diagnosis, Diagnosis.notInfected)
+        let diagnosis = Persistence().selfDiagnosis
+        XCTAssertEqual(diagnosis, SelfDiagnosis.notInfected)
     }
 
     func testDiagnosisIsUnknownWhenDefaultsReset() {
         let service = Persistence()
-        service.diagnosis = .infected
+        service.selfDiagnosis = .infected
 
         let appDomain = Bundle.main.bundleIdentifier
         UserDefaults.standard.removePersistentDomain(forName: appDomain!)
 
-        let diagnosis = service.diagnosis
+        let diagnosis = service.selfDiagnosis
         XCTAssertNil(diagnosis)
     }
     

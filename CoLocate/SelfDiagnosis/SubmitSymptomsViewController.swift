@@ -55,7 +55,7 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         // so we can make sure this flow works through the
         // app during debugging. This will need to be replaced
         // with real business logic in the future.
-        persistence.diagnosis = .infected
+        persistence.selfDiagnosis = .infected
         
         let requestFactory = ConcreteSecureRequestFactory(registration: registration)
         let request = requestFactory.patchContactsRequest(contactEvents: contactEventRepository.contactEvents)

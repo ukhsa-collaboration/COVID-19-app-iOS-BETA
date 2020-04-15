@@ -41,7 +41,7 @@ class StatusViewController: UIViewController, Storyboarded {
 
     @IBOutlet weak var nextStepsView: UIView!
 
-    var diagnosis: Diagnosis? {
+    var diagnosis: SelfDiagnosis? {
         didSet {
             guard view != nil else { return }
 
@@ -108,7 +108,7 @@ class StatusViewController: UIViewController, Storyboarded {
             register()
         }
 
-        diagnosis = persistence.diagnosis
+        diagnosis = persistence.selfDiagnosis
     }
 
     @objc func diagnosisStatusTapped() {
@@ -138,7 +138,7 @@ class StatusViewController: UIViewController, Storyboarded {
     }
 
     @IBAction func unwindFromSelfDiagnosis(unwindSegue: UIStoryboardSegue) {
-        diagnosis = persistence.diagnosis
+        diagnosis = persistence.selfDiagnosis
     }
     
     private func register() {

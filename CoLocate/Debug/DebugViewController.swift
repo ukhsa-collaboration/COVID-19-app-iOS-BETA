@@ -43,9 +43,9 @@ class DebugViewController: UITableViewController, Storyboarded {
 
         case (0, 1):
             let alertController = UIAlertController(title: "Set diagnosis", message: nil, preferredStyle: .actionSheet)
-            for diagnosis in Diagnosis.allCases {
-                alertController.addAction(UIAlertAction(title: "\(diagnosis)", style: .default) { _ in
-                    Persistence.shared.diagnosis = diagnosis
+            for selfDiagnosis in SelfDiagnosis.allCases {
+                alertController.addAction(UIAlertAction(title: "\(selfDiagnosis)", style: .default) { _ in
+                    Persistence.shared.selfDiagnosis = selfDiagnosis
                     self.show(title: "Cleared", message: "Diagnosis data has been set. Please stop and re-start the application.")
                 })
             }

@@ -53,7 +53,7 @@ private extension OnboardingEnvironment {
 private class InMemoryPersistence: Persisting {
     var allowedDataSharing = false
     var registration: Registration? = Registration(id: UUID(), secretKey: Data())
-    var diagnosis: Diagnosis? = nil
+    var selfDiagnosis: SelfDiagnosis? = nil
     var enableNewSelfDiagnosis = false
     var partialPostcode: String? = nil
     var enableNewKeyRotation = false
@@ -61,7 +61,7 @@ private class InMemoryPersistence: Persisting {
     func clear() {
         allowedDataSharing = false
         registration = nil
-        diagnosis = nil
+        selfDiagnosis = nil
         partialPostcode = nil
     }
 }
