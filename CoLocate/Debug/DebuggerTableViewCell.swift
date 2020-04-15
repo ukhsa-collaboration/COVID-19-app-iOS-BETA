@@ -12,11 +12,11 @@ class DebuggerTableViewCell: UITableViewCell {
 
     let gradientLayer = CAGradientLayer()
 
-    var base64Data: Data? {
+    var gradientColorData: Data? {
         didSet {
             gradientLayer.colors = [
-                base64Data?.asCGColor(alpha: 0) as Any,
-                base64Data?.asCGColor(alpha: 1) as Any
+                gradientColorData?.asCGColor(alpha: 0) as Any,
+                gradientColorData?.asCGColor(alpha: 1) as Any
             ]
         }
     }

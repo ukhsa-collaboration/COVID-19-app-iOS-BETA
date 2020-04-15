@@ -40,6 +40,7 @@
 		214209D72423C9B600C7BFF3 /* PatchContactEventsRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209D62423C9B600C7BFF3 /* PatchContactEventsRequestTests.swift */; };
 		214209D924262B7500C7BFF3 /* SessionHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209D824262B7500C7BFF3 /* SessionHelpers.swift */; };
 		217A23BE243B34E8001B8236 /* UIDevice+ModelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217A23BD243B34E8001B8236 /* UIDevice+ModelName.swift */; };
+		219B613524471B9800E2F1A6 /* UUIDExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219B613424471B9800E2F1A6 /* UUIDExtensions.swift */; };
 		21AF36AB241A8E50001A4910 /* BTLEListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AF36AA241A8E50001A4910 /* BTLEListener.swift */; };
 		21B3D2E3242906AE00573061 /* SecureRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B3D2E2242906AE00573061 /* SecureRequestTests.swift */; };
 		21B3D2E52429112B00573061 /* SecureRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B3D2E42429112B00573061 /* SecureRequest.swift */; };
@@ -198,6 +199,7 @@
 		214209D62423C9B600C7BFF3 /* PatchContactEventsRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchContactEventsRequestTests.swift; sourceTree = "<group>"; };
 		214209D824262B7500C7BFF3 /* SessionHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionHelpers.swift; sourceTree = "<group>"; };
 		217A23BD243B34E8001B8236 /* UIDevice+ModelName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+ModelName.swift"; sourceTree = "<group>"; };
+		219B613424471B9800E2F1A6 /* UUIDExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UUIDExtensions.swift; sourceTree = "<group>"; };
 		21AF36AA241A8E50001A4910 /* BTLEListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTLEListener.swift; sourceTree = "<group>"; };
 		21B3D2E2242906AE00573061 /* SecureRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRequestTests.swift; sourceTree = "<group>"; };
 		21B3D2E42429112B00573061 /* SecureRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRequest.swift; sourceTree = "<group>"; };
@@ -773,6 +775,7 @@
 				F758B8BF242CB98C003AE16D /* UIViewController+Storyboarded.swift */,
 				F63279242435203600CF7A42 /* DispatchQueue+Testable.swift */,
 				217A23BD243B34E8001B8236 /* UIDevice+ModelName.swift */,
+				219B613424471B9800E2F1A6 /* UUIDExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1002,6 +1005,7 @@
 				0986EFB5244518FE008D0E1D /* ButtonWithDynamicType.swift in Sources */,
 				F6CC2CA9242BC7FC0079432B /* RemoteNotificationManager.swift in Sources */,
 				AE2A5E502423C473007A4771 /* ContactEvent.swift in Sources */,
+				219B613524471B9800E2F1A6 /* UUIDExtensions.swift in Sources */,
 				89F06B332434AF130074C612 /* ForwardingLogHandler.swift in Sources */,
 				21B3D2E52429112B00573061 /* SecureRequest.swift in Sources */,
 				090B186F24354D0100870B5D /* RemoteNotificationDispatcher.swift in Sources */,

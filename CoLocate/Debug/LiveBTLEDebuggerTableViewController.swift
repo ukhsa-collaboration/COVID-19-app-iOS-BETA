@@ -7,16 +7,18 @@
 //
 
 import UIKit
+import CoreBluetooth
 
 class LiveBTLEDebuggerTableViewController: UITableViewController {
 
     var persistence: Persistence = Persistence.shared
+    var broadcastIdGenerator: BroadcastIdGenerator = (UIApplication.shared.delegate as! AppDelegate).bluetoothNursery.broadcastIdGenerator
     
     @objc var repository: PersistingContactEventRepository = (UIApplication.shared.delegate as! AppDelegate).bluetoothNursery.contactEventRepository
     
     var observation: NSKeyValueObservation?
     
-    var sonarIds: [String] = []
+    var sonarIds: [Data] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,12 +29,12 @@ class LiveBTLEDebuggerTableViewController: UITableViewController {
         
         observation = observe(\.repository._contactEventCount) { object, change in
             DispatchQueue.main.async {
-                self.sonarIds = self.repository.contactEvents.compactMap({ $0.sonarId?.base64EncodedString() })
+                self.sonarIds = self.repository.contactEvents.compactMap({ $0.sonarId })
                 self.tableView.reloadData()
             }
         }
         
-        sonarIds = repository.contactEvents.compactMap({ $0.sonarId?.base64EncodedString() })
+        sonarIds = repository.contactEvents.compactMap({ $0.sonarId })
         tableView.reloadData()
     }
     
@@ -63,15 +65,26 @@ class LiveBTLEDebuggerTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! DebuggerTableViewCell
 
+        cell.textLabel?.numberOfLines = 1
         switch (indexPath.section, indexPath.row) {
             
         case (0, _):
-            cell.textLabel?.text = persistence.registration?.id.uuidString
-            cell.base64Data = persistence.registration!.id.uuidString.data(using: .utf8)
+            if persistence.enableNewKeyRotation {
+                cell.textLabel?.text = broadcastIdGenerator.broadcastIdentifier()?.base64EncodedString()
+                cell.gradientColorData = broadcastIdGenerator.broadcastIdentifier()
+            } else {
+                cell.textLabel?.text = persistence.registration?.id.uuidString
+                cell.gradientColorData = persistence.registration?.id.data
+            }
             
         case (1, let row):
-            cell.textLabel?.text = sonarIds[row]
-            cell.base64Data = sonarIds[row].data(using: .utf8)
+            if persistence.enableNewKeyRotation {
+                cell.textLabel?.text = sonarIds[row].base64EncodedString()
+                cell.gradientColorData = sonarIds[row]
+            } else {
+                cell.textLabel?.text = CBUUID(data: sonarIds[row]).uuidString
+                cell.gradientColorData = sonarIds[row]
+            }
             
         default:
             preconditionFailure("No cell at indexPath \(indexPath)")
