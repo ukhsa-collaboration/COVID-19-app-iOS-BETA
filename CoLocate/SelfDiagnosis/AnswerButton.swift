@@ -50,11 +50,10 @@ class AnswerButton: UIControl {
         layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
 
         layer.cornerRadius = 16
-        layer.borderColor = UIColor(named: "NHS Blue")!.cgColor
-
-        backgroundColor = UIColor(named: "NHS White")
+        layer.borderColor = UIColor(named: "NHS Highlight")!.cgColor
 
         textLabel.font = UIFont.preferredFont(forTextStyle: .body)
+        textLabel.textColor = UIColor(named: "NHS Text")!
 
         imageView.image = UIImage(named: "Controls_RadioButton_Unselected")
         imageView.highlightedImage = UIImage(named: "Controls_RadioButton_Selected")

@@ -44,10 +44,6 @@ class StatusViewController: UIViewController, Storyboarded {
     @IBOutlet weak var notRightSubtitleLabel: UILabel!
 
     @IBOutlet weak var nextStepsView: UIView!
-    @IBOutlet var labelsThatShouldBeWhiteInDarkMode: [UILabel]!
-    private var initialLabelColors: [UIColor]!
-    @IBOutlet var linkToNHS: UIButton!
-    private var initialLinkToNHSColor: UIColor!
 
     var diagnosis: SelfDiagnosis? {
         didSet {
@@ -83,24 +79,23 @@ class StatusViewController: UIViewController, Storyboarded {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        initColors()
 
         registrationRetryButton.setTitle("RETRY".localized, for: .normal)
 
         diagnosisStatusView.layer.cornerRadius = 16
         diagnosisStatusView.layer.masksToBounds = true
-        readLatestAdviceLabel.textColor = UIColor(named: "NHS Blue")
+        readLatestAdviceLabel.textColor = UIColor(named: "NHS Link")
         diagnosisStatusView.addGestureRecognizer(
             UITapGestureRecognizer(target: self, action: #selector(diagnosisStatusTapped))
         )
 
         feelHealthyView.layer.cornerRadius = 16
-        feelHealthyTitleLabel.textColor = UIColor(named: "NHS Blue")
-        feelHealthySubtitleLabel.textColor = UIColor(named: "NHS Grey 1")
+        feelHealthyTitleLabel.textColor = UIColor(named: "NHS Link")
+        feelHealthySubtitleLabel.textColor = UIColor(named: "NHS Secondary Text")
 
         notRightView.layer.cornerRadius = 16
-        notRightTitleLabel.textColor = UIColor(named: "NHS Blue")
-        notRightSubtitleLabel.textColor = UIColor(named: "NHS Grey 1")
+        notRightTitleLabel.textColor = UIColor(named: "NHS Link")
+        notRightSubtitleLabel.textColor = UIColor(named: "NHS Secondary Text")
         notRightView.accessibilityLabel = "\(notRightTitleLabel.text!) \(notRightSubtitleLabel.text!)"
         notRightView.addGestureRecognizer(
             UITapGestureRecognizer(target: self, action: #selector(notRightTapped))
@@ -116,15 +111,11 @@ class StatusViewController: UIViewController, Storyboarded {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        updateForCurrentUIStyle()
+        super.viewWillAppear(animated)
         diagnosis = persistence.selfDiagnosis
         potentiallyExposed = persistence.potentiallyExposed
     }
-    
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        updateForCurrentUIStyle()
-    }
-
+        
     @objc func diagnosisStatusTapped() {
         let path: String
         switch status {
@@ -160,7 +151,7 @@ class StatusViewController: UIViewController, Storyboarded {
 
         switch status {
         case .initial:
-            diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Blue")
+            diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Highlight")
             diagnosisTitleLabel.text = "Keep following the current government advice".localized
             howAreYouFeelingView.isHidden = false
             nextStepsView.isHidden = true
@@ -242,41 +233,7 @@ class StatusViewController: UIViewController, Storyboarded {
         registrationSpinner.isHidden = true
         registrationStatusIcon.isHidden = false
     }
-    
-    private func initColors() {
-        initialLinkToNHSColor = linkToNHS.titleLabel?.textColor
-        initialLabelColors = labelsThatShouldBeWhiteInDarkMode.map({ $0.textColor })
-    }
-    
-    private func updateForCurrentUIStyle() {
-        if inDarkMode() {
-            linkToNHS.setTitleColor(.white, for: .normal)
-            
-            for label in labelsThatShouldBeWhiteInDarkMode {
-                label.textColor = .white
-            }
-        } else {
-            linkToNHS.setTitleColor(initialLinkToNHSColor, for: .normal)
-
-            for i in 0..<labelsThatShouldBeWhiteInDarkMode.count {
-                labelsThatShouldBeWhiteInDarkMode[i].textColor = initialLabelColors[i]
-            }
-        }
-    }
-    
-    private func inDarkMode() -> Bool {
-        if #available(iOS 12.0, *) {
-            switch traitCollection.userInterfaceStyle {
-            case .dark:
-                return true
-            default:
-                return false
-            }
-        } else {
-            return false
-        }
-    }
-
+        
 }
 
 private let logger = Logger(label: "StatusViewController")

@@ -116,7 +116,7 @@
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Read latest advice" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oUM-AI-6LL">
                                                                         <rect key="frame" x="32" y="60.5" width="330" height="41"/>
                                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                                        <nil key="textColor"/>
+                                                                        <color key="textColor" name="NHS Text"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                 </subviews>
@@ -153,13 +153,13 @@
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I feel as healthy as normal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9XS-ai-EVd">
                                                                                 <rect key="frame" x="24" y="24" width="334" height="20.5"/>
                                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                                                <nil key="textColor"/>
+                                                                                <color key="textColor" name="NHS Link"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nothing abnormal or out of the usual is going on with me" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JPo-Ee-l5f">
                                                                                 <rect key="frame" x="24" y="56.5" width="334" height="42.5"/>
                                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                                                <nil key="textColor"/>
+                                                                                <color key="textColor" name="NHS Text"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                         </subviews>
@@ -180,13 +180,13 @@
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I'm not feeling quite right" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="psh-Wd-l5I">
                                                                                 <rect key="frame" x="24" y="24" width="334" height="20.5"/>
                                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                                                <nil key="textColor"/>
+                                                                                <color key="textColor" name="NHS Link"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let us know about your symptoms to find out what you should do next" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xqf-9x-H9Q">
                                                                                 <rect key="frame" x="24" y="56.5" width="334" height="42.5"/>
                                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                                                <nil key="textColor"/>
+                                                                                <color key="textColor" name="NHS Text"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                         </subviews>
@@ -225,19 +225,21 @@
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next steps" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Xr-JZ-XAw">
                                                                         <rect key="frame" x="0.0" y="0.0" width="382" height="20.5"/>
                                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                                        <nil key="textColor"/>
+                                                                        <color key="textColor" name="NHS Text"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you need urgent medical advice about your coronavirus symptoms, visit" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zqt-gJ-Jrb">
                                                                         <rect key="frame" x="0.0" y="36.5" width="382" height="42.5"/>
                                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                                        <nil key="textColor"/>
+                                                                        <color key="textColor" name="NHS Text"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2UL-Ea-jl7" customClass="ButtonWithDynamicType" customModule="CoLocate" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="95" width="382" height="56.5"/>
                                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                                        <state key="normal" title="NHS 111 online coronavirus service"/>
+                                                                        <state key="normal" title="NHS 111 online coronavirus service">
+                                                                            <color key="titleColor" name="NHS Link"/>
+                                                                        </state>
                                                                         <connections>
                                                                             <action selector="nhs111Tapped:" destination="HPa-EI-l5D" eventType="touchUpInside" id="wZS-hy-5cP"/>
                                                                         </connections>
@@ -300,7 +302,6 @@
                         <outlet property="feelHealthyTitleLabel" destination="9XS-ai-EVd" id="71H-KT-OCF"/>
                         <outlet property="feelHealthyView" destination="AB6-ge-DnM" id="6vx-Aj-XfX"/>
                         <outlet property="howAreYouFeelingView" destination="LdH-uv-APk" id="uHU-MS-s9l"/>
-                        <outlet property="linkToNHS" destination="2UL-Ea-jl7" id="eGy-lm-mWw"/>
                         <outlet property="nextStepsView" destination="6cH-qi-dN0" id="gOZ-mN-d2F"/>
                         <outlet property="notRightSubtitleLabel" destination="xqf-9x-H9Q" id="oY0-jS-FjH"/>
                         <outlet property="notRightTitleLabel" destination="psh-Wd-l5I" id="jbn-hg-Mpm"/>
@@ -311,17 +312,6 @@
                         <outlet property="registrationStatusIcon" destination="nOs-ix-jLm" id="nTz-62-NB7"/>
                         <outlet property="registrationStatusText" destination="prF-qe-3Zt" id="JPm-HJ-83G"/>
                         <outlet property="registratonStatusView" destination="oRv-PB-BfB" id="KVH-zB-VnF"/>
-                        <outletCollection property="labelsThatShouldBeWhiteInDarkMode" destination="prF-qe-3Zt" collectionClass="NSMutableArray" id="Kmp-dR-5gU"/>
-                        <outletCollection property="labelsThatShouldBeWhiteInDarkMode" destination="Rpg-7v-Vhp" collectionClass="NSMutableArray" id="B9q-oQ-jOH"/>
-                        <outletCollection property="labelsThatShouldBeWhiteInDarkMode" destination="oUM-AI-6LL" collectionClass="NSMutableArray" id="KLQ-tT-Vcs"/>
-                        <outletCollection property="labelsThatShouldBeWhiteInDarkMode" destination="8ZI-fb-8RW" collectionClass="NSMutableArray" id="VbG-PG-izP"/>
-                        <outletCollection property="labelsThatShouldBeWhiteInDarkMode" destination="8ZI-fb-8RW" collectionClass="NSMutableArray" id="rZa-LF-f1K"/>
-                        <outletCollection property="labelsThatShouldBeWhiteInDarkMode" destination="9XS-ai-EVd" collectionClass="NSMutableArray" id="zFb-26-poA"/>
-                        <outletCollection property="labelsThatShouldBeWhiteInDarkMode" destination="JPo-Ee-l5f" collectionClass="NSMutableArray" id="whI-PW-0kY"/>
-                        <outletCollection property="labelsThatShouldBeWhiteInDarkMode" destination="psh-Wd-l5I" collectionClass="NSMutableArray" id="sW7-dv-696"/>
-                        <outletCollection property="labelsThatShouldBeWhiteInDarkMode" destination="xqf-9x-H9Q" collectionClass="NSMutableArray" id="8E4-3B-eft"/>
-                        <outletCollection property="labelsThatShouldBeWhiteInDarkMode" destination="2Xr-JZ-XAw" collectionClass="NSMutableArray" id="fMS-36-AFB"/>
-                        <outletCollection property="labelsThatShouldBeWhiteInDarkMode" destination="zqt-gJ-Jrb" collectionClass="NSMutableArray" id="mLb-MG-ROw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pau-uA-R8C" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -332,6 +322,12 @@
     <resources>
         <namedColor name="NHS Grey 5">
             <color red="0.94117647058823528" green="0.95686274509803926" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="NHS Link">
+            <color red="0.0" green="0.36862745098039218" blue="0.72156862745098038" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="NHS Text">
+            <color red="0.1289999932050705" green="0.16899999976158142" blue="0.19599999487400055" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
