@@ -39,7 +39,7 @@ class PrimaryButton: ButtonWithDynamicType {
             #if DEBUG
             fatalError(msg)
             #else
-            logger.warning(msg)
+            logger.warning(Logger.Message(stringLiteral: msg))
             #endif
         }
     }
