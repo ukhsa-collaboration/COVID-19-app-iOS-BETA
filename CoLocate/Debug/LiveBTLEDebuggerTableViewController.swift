@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreBluetooth
 
 class LiveBTLEDebuggerTableViewController: UITableViewController {
 
@@ -82,7 +81,7 @@ class LiveBTLEDebuggerTableViewController: UITableViewController {
                 cell.textLabel?.text = sonarIds[row].base64EncodedString()
                 cell.gradientColorData = sonarIds[row]
             } else {
-                cell.textLabel?.text = CBUUID(data: sonarIds[row]).uuidString
+                cell.textLabel?.text = UUID(data: sonarIds[row])?.uuidString
                 cell.gradientColorData = sonarIds[row]
             }
             
