@@ -112,9 +112,15 @@ class StatusViewController: UIViewController, Storyboarded {
     }
 
     @objc func diagnosisStatusTapped() {
-        let alert = UIAlertController(title: nil, message: "reading latest advice", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "okay", style: .default))
-        present(alert, animated: true)
+        let url: URL
+        switch diagnosis {
+        case .none, .some(.notInfected):
+            url = URL(string: "https://www.gov.uk/government/publications/full-guidance-on-staying-at-home-and-away-from-others/full-guidance-on-staying-at-home-and-away-from-others")!
+        case .some(.potential), .some(.infected):
+            url = URL(string: "https://www.gov.uk/government/publications/covid-19-stay-at-home-guidance/stay-at-home-guidance-for-households-with-possible-coronavirus-covid-19-infection")!
+        }
+
+        UIApplication.shared.open(url)
     }
 
     @objc func notRightTapped() {
