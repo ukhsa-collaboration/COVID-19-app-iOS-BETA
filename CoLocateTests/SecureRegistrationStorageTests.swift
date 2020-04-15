@@ -16,27 +16,27 @@ class SecureRegistrationStorageTests: TestCase {
     let secretKey = "Ik6M9N2CqLv3BDT6lKlhR9X+cLf1MCyuU3ExnrUBlY4=".data(using: .utf8)!
 
     func testRoundTrip() throws {
-        let registrationService = SecureRegistrationStorage.shared
+        let storage = SecureRegistrationStorage()
 
-        XCTAssertNil(try registrationService.get())
+        XCTAssertNil(try storage.get())
 
-        try registrationService.set(registration: Registration(id: id, secretKey: secretKey))
+        try storage.set(registration: Registration(id: id, secretKey: secretKey))
 
-        let registration = try? registrationService.get()
+        let registration = try? storage.get()
         XCTAssertEqual(registration?.id, id)
         XCTAssertEqual(registration?.secretKey, secretKey)
     }
 
     func testOverwritesExistingRegistration() throws {
         // Add a registration
-        let registrationService = SecureRegistrationStorage.shared
-        try registrationService.set(registration: Registration(id: UUID(), secretKey: secretKey))
+        let storage = SecureRegistrationStorage()
+        try storage.set(registration: Registration(id: UUID(), secretKey: secretKey))
 
         // Add another registration
-        try registrationService.set(registration: Registration(id: id, secretKey: secretKey))
+        try storage.set(registration: Registration(id: id, secretKey: secretKey))
 
         // We should have the new registration
-        let registration = try? registrationService.get()
+        let registration = try? storage.get()
         XCTAssertEqual(registration?.id, id)
         XCTAssertEqual(registration?.secretKey, secretKey)
     }
@@ -51,8 +51,8 @@ class SecureRegistrationStorageTests: TestCase {
         SecItemAdd(addQuery as CFDictionary, nil)
 
         // Set a registration
-        let registrationService = SecureRegistrationStorage.shared
-        try registrationService.set(registration: Registration(id: UUID(), secretKey: secretKey))
+        let storage = SecureRegistrationStorage()
+        try storage.set(registration: Registration(id: UUID(), secretKey: secretKey))
 
         // The original generic password should still be there
         let getQuery: [String: Any] = [

@@ -98,7 +98,7 @@ class Persistence: Persisting {
     }
 
     convenience init() {
-        self.init(secureRegistrationStorage: SecureRegistrationStorage.shared,
+        self.init(secureRegistrationStorage: SecureRegistrationStorage(),
                   secureBroadcastRotationKeyStorage: SecureBroadcastRotationKeyStorage.shared)
     }
 

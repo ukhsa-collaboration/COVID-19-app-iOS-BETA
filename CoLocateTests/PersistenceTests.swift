@@ -37,7 +37,7 @@ class PersistenceTests: TestCase {
     
     
     func testRegistrationIsPassedToSecureRegistrationStorage() throws {
-        let secureRegistrationStorage = SecureRegistrationStorage.shared
+        let secureRegistrationStorage = SecureRegistrationStorage()
         let secureBroadcastRotationKeyStorage = SecureBroadcastRotationKeyStorage.shared
         let persistence = Persistence(secureRegistrationStorage: secureRegistrationStorage,
                                       secureBroadcastRotationKeyStorage: secureBroadcastRotationKeyStorage)
