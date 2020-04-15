@@ -35,6 +35,10 @@ class BroadcastIdEncypterTests: XCTestCase {
         encrypter = BroadcastIdEncrypter(key: serverPublicKey, sonarId: cannedId)
     }
 
+    override func tearDown() {
+        Persistence.shared.enableNewKeyRotation = false
+    }
+
     func test_returns_uuid_as_bytes_by_default() throws {
         Persistence.shared.enableNewKeyRotation = false
 
@@ -101,6 +105,8 @@ class BroadcastIdEncypterTests: XCTestCase {
     }
 
     func test_generates_a_different_id_for_different_days() throws {
+        Persistence.shared.enableNewKeyRotation = true
+
         let todaysId = encrypter.broadcastId(for: knownDate)
         let tomorrowsId = encrypter.broadcastId(for: laterDate)
 
