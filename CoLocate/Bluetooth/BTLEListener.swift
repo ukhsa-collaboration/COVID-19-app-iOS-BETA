@@ -205,12 +205,10 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
             logger.info("no data found in characteristic \(characteristic)")
             return
         }
-        
-        if persistence.enableNewKeyRotation {
-            guard data.count == 104 else {
-                logger.info("characteristic value is not a valid sonarId, because it has length \(data.count)")
-                return
-            }
+
+        guard data.count == BroadcastIdEncrypter.broadcastIdLength else {
+            logger.info("characteristic value is not a valid sonarId, because it has length \(data.count). Expected \(BroadcastIdEncrypter.broadcastIdLength)")
+            return
         }
 
         logger.info("successfully read sonarId from peripheral \(peripheral.identifierWithName), now disconnecting")

@@ -57,6 +57,13 @@ class BroadcastIdEncypterTests: XCTestCase {
         XCTAssertEqual(104, encryptedId.count)
     }
 
+    func test_generates_uuids_of_correct_size() {
+        Persistence.shared.enableNewKeyRotation = false
+        let uuidAsData = encrypter.broadcastId(for: knownDate, until: laterDate)
+
+        XCTAssertEqual(16, uuidAsData.count)
+    }
+
     func test_ciphertext_contains_expected_data() throws {
         #if targetEnvironment(simulator)
         throw XCTSkip("Cannot run this test in the simulator")

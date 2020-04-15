@@ -18,6 +18,14 @@ class BroadcastIdEncrypter {
 
     let oneDay: TimeInterval = 86400
 
+    static var broadcastIdLength: Int {
+        if Persistence.shared.enableNewKeyRotation {
+            return 104
+        } else {
+            return 16
+        }
+    }
+
     struct CachedResult {
         let date: Date
         let broadcastId: Data
@@ -71,6 +79,7 @@ class BroadcastIdEncrypter {
         }
 
         let withoutFirstByte = result.dropFirst()
+        assert(withoutFirstByte.count == BroadcastIdEncrypter.broadcastIdLength, "unexpected number of bytes: \(withoutFirstByte.count)")
 
         cached = CachedResult(date: startDate, broadcastId: withoutFirstByte)
 
