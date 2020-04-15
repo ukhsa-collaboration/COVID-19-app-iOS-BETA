@@ -17,6 +17,7 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
     private var session: Session!
     private var hasHighTemperature: Bool!
     private var hasNewCough: Bool!
+    private var isSubmitting = false
     
     private var hasSymptoms: Bool {
         hasHighTemperature || hasNewCough
@@ -47,8 +48,9 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
             return
         }
         
-        sender.isEnabled = false
-
+        guard !isSubmitting else { return }
+        isSubmitting = true
+        
         // NOTE: This is not spec'ed out, and is only here
         // so we can make sure this flow works through the
         // app during debugging. This will need to be replaced
@@ -59,8 +61,8 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         let request = requestFactory.patchContactsRequest(contactEvents: contactEventRepository.contactEvents)
         session.execute(request, queue: .main) { [weak self] result in
             guard let self = self else { return }
-
-            sender.isEnabled = true
+            
+            self.isSubmitting = false
 
             switch result {
             case .success(_):

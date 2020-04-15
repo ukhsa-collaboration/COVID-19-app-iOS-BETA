@@ -15,6 +15,7 @@ class PostcodeViewControllerTests: TestCase {
         let vc = PostcodeViewController.instantiate()
         var continued = false
         vc.inject(persistence: persistence, notificationCenter: NotificationCenter()) { continued = true }
+        parentViewControllerForTests.viewControllers = [vc]
         XCTAssertNotNil(vc.view)
         
         vc.postcodeField.text = "1234"
@@ -22,6 +23,7 @@ class PostcodeViewControllerTests: TestCase {
         
         XCTAssertEqual(persistence.partialPostcode, "1234")
         XCTAssertTrue(continued)
+        XCTAssertNil(vc.presentedViewController)
     }
     
     func testDoesNotContinueWithoutInput() {
@@ -29,12 +31,14 @@ class PostcodeViewControllerTests: TestCase {
         let vc = PostcodeViewController.instantiate()
         var continued = false
         vc.inject(persistence: persistence, notificationCenter: NotificationCenter()) { continued = true }
+        parentViewControllerForTests.viewControllers = [vc]
         XCTAssertNotNil(vc.view)
 
         vc.didTapContinue()
         
         XCTAssertNil(persistence.partialPostcode)
         XCTAssertFalse(continued)
+        XCTAssertNotNil(vc.presentedViewController as? UIAlertController)
     }
     
     func testDoesNotAcceptMoreThanFourChars_insertingOne() {
@@ -78,19 +82,5 @@ class PostcodeViewControllerTests: TestCase {
         
         vc.postcodeField.text = "1234"
         XCTAssertTrue(vc.textField(vc.postcodeField, shouldChangeCharactersIn: NSRange(location: 3, length: 1), replacementString: ""))
-    }
-    
-    func testEnablesButtonWhenFourCharsEntered() {
-        let vc = PostcodeViewController.instantiate()
-        vc.inject(persistence: PersistenceDouble(), notificationCenter: NotificationCenter()) {}
-        XCTAssertNotNil(vc.view)
-        
-        XCTAssertFalse(vc.continueButton?.isEnabled ?? true)
-        vc.postcodeField.text = "123"
-        vc.postcodeField.sendActions(for: .editingChanged)
-        XCTAssertFalse(vc.continueButton?.isEnabled ?? true)
-        vc.postcodeField.text = "1234"
-        vc.postcodeField.sendActions(for: .editingChanged)
-        XCTAssertTrue(vc.continueButton?.isEnabled ?? false)
     }
 }

@@ -18,6 +18,8 @@ class PermissionsViewController: UIViewController, Storyboarded {
     private var uiQueue: TestableQueue! = nil
     private var continueHandler: (() -> Void)! = nil
     var bluetoothNursery: BluetoothNursery = (UIApplication.shared.delegate as! AppDelegate).bluetoothNursery
+    @IBOutlet private var continueButton: PrimaryButton!
+    private var isRequestingPermissions = false
     
     func inject(authManager: AuthorizationManaging, remoteNotificationManager: RemoteNotificationManager, uiQueue: TestableQueue, continueHandler: @escaping () -> Void) {
         self.authManager = authManager
@@ -26,8 +28,9 @@ class PermissionsViewController: UIViewController, Storyboarded {
         self.continueHandler = continueHandler
     }
 
-    @IBAction func didTapContinue(_ sender: UIButton) {
-        sender.isEnabled = false
+    @IBAction func didTapContinue() {
+        guard !isRequestingPermissions else { return }
+        isRequestingPermissions = true
         requestBluetoothPermissions()
     }
 

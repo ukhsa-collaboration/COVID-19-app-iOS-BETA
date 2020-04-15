@@ -20,14 +20,20 @@ class PrivacyViewController: UIViewController, Storyboarded {
     }
     
     @IBOutlet weak var allowDataSharingSwitch: UISwitch!
-    @IBOutlet weak var continueButton: PrimaryButton!
 
-    @IBAction func allowDataSharingChanged(_ sender: UISwitch) {
-        continueButton.isEnabled = sender.isOn
-    }
-
-    @IBAction func continueTapped(_ sender: PrimaryButton) {
+    @IBAction func continueTapped() {
+        guard allowDataSharingSwitch.isOn else {
+            showAlert()
+            return
+        }
+        
         persistence.allowedDataSharing = true
         self.continueHandler()
+    }
+    
+    private func showAlert() {
+        let alert = UIAlertController(title: nil, message: "To continue, please agree to share your app data with the NHS.", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
 }

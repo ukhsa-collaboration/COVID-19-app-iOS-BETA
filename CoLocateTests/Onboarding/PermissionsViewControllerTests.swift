@@ -22,8 +22,9 @@ class PermissionsViewControllerTests: TestCase {
         }
 
         parentViewControllerForTests.viewControllers = [vc]
+        XCTAssertNotNil(vc.view)
 
-        vc.didTapContinue(UIButton())
+        vc.didTapContinue()
         
         #if targetEnvironment(simulator)
         // We skip Bluetooth on the simulator and jump straight
@@ -41,6 +42,23 @@ class PermissionsViewControllerTests: TestCase {
 
         XCTAssert(continued)
     }
+    
+    func testPreventsDoubleSubmit() {
+        let authManagerDouble = AuthorizationManagerDouble(bluetooth: .allowed)
+        let remoteNotificationManagerDouble = RemoteNotificationManagerDouble()
+        let vc = PermissionsViewController.instantiate()
+        vc.inject(authManager: authManagerDouble, remoteNotificationManager: remoteNotificationManagerDouble, uiQueue: QueueDouble()) {}
+
+        parentViewControllerForTests.viewControllers = [vc]
+        XCTAssertNotNil(vc.view)
+
+        vc.didTapContinue()
+        
+        XCTAssertNotNil(authManagerDouble.notificationsCompletion)
+        authManagerDouble.notificationsCompletion = nil
+        vc.didTapContinue()
+        XCTAssertNil(authManagerDouble.notificationsCompletion)
+    }
 
     func testBluetoothAlreadyDetermined() {
         let authManagerDouble = AuthorizationManagerDouble(bluetooth: .allowed)
@@ -52,8 +70,9 @@ class PermissionsViewControllerTests: TestCase {
         }
 
         parentViewControllerForTests.viewControllers = [vc]
+        XCTAssertNotNil(vc.view)
 
-        vc.didTapContinue(UIButton())
+        vc.didTapContinue()
 
         XCTAssertNotNil(authManagerDouble.notificationsCompletion)
         authManagerDouble.notificationsCompletion!(.notDetermined)
@@ -74,8 +93,9 @@ class PermissionsViewControllerTests: TestCase {
         }
 
         parentViewControllerForTests.viewControllers = [vc]
+        XCTAssertNotNil(vc.view)
 
-        vc.didTapContinue(UIButton())
+        vc.didTapContinue()
 
         #if targetEnvironment(simulator)
         // We skip Bluetooth on the simulator and jump straight

@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import Logging
 
 //@IBDesignable
 class PrimaryButton: ButtonWithDynamicType {
 
     override var isEnabled: Bool {
         didSet {
-            alpha = isEnabled ? 1.0 : 0.3
+            complainIfDisabled()
         }
     }
 
@@ -27,7 +28,21 @@ class PrimaryButton: ButtonWithDynamicType {
         titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
         titleLabel?.textAlignment = .center
 
-        alpha = isEnabled ? 1.0 : 0.3
+        alpha = 1.0
+        
+        complainIfDisabled()
     }
 
+    private func complainIfDisabled() {
+        if !isEnabled {
+            let msg = "PrimaryButton cannot be disabled. Show an alert instead."
+            #if DEBUG
+            fatalError(msg)
+            #else
+            logger.warning(msg)
+            #endif
+        }
+    }
 }
+
+private let logger = Logger(label: "PrimaryButton")

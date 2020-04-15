@@ -164,9 +164,6 @@
                                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Vtg-pY-JBT">
                                                                 <rect key="frame" x="231" y="9.5" width="51" height="31"/>
                                                                 <accessibility key="accessibilityConfiguration" label="Allow Data Sharing"/>
-                                                                <connections>
-                                                                    <action selector="allowDataSharingChanged:" destination="asv-dx-knf" eventType="valueChanged" id="rQn-b2-czn"/>
-                                                                </connections>
                                                             </switch>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -205,12 +202,12 @@
                                 <viewLayoutGuide key="contentLayoutGuide" id="czv-2j-r86"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="5KV-cZ-2xj"/>
                             </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="png-1j-34C" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="png-1j-34C" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
                                 <rect key="frame" x="20" y="518" width="280" height="30"/>
                                 <accessibility key="accessibilityConfiguration" label="Continue"/>
                                 <state key="normal" title="Continue"/>
                                 <connections>
-                                    <action selector="continueTapped:" destination="asv-dx-knf" eventType="touchUpInside" id="aZ4-FY-C5b"/>
+                                    <action selector="continueTapped" destination="asv-dx-knf" eventType="touchUpInside" id="ddQ-9Z-drb"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -229,7 +226,6 @@
                     <navigationItem key="navigationItem" id="2kT-fD-hac"/>
                     <connections>
                         <outlet property="allowDataSharingSwitch" destination="Vtg-pY-JBT" id="8r9-c9-L1D"/>
-                        <outlet property="continueButton" destination="png-1j-34C" id="cu0-UQ-3l8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LmF-ZM-p1m" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -250,17 +246,17 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5tN-bW-uWf" userLabel="Scroll content view">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="06r-fk-m9F" customClass="LogoStrapline" customModule="CoLocate" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="06r-fk-m9F" customClass="LogoStrapline" customModule="CoLocate" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your post code" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C96-Af-5wL">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Enter your post code" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C96-Af-5wL">
                                                 <rect key="frame" x="20" y="84" width="280" height="36"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nUw-z7-nkS">
+                                            <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nUw-z7-nkS">
                                                 <rect key="frame" x="20" y="181" width="280" height="34"/>
                                                 <accessibility key="accessibilityConfiguration" label="Post code"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -269,7 +265,7 @@
                                                     <outlet property="delegate" destination="lkE-bN-ikk" id="hoE-bE-NAc"/>
                                                 </connections>
                                             </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your post code will not be used to track your location." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j2y-6b-nX8">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Your post code will not be used to track your location." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j2y-6b-nX8">
                                                 <rect key="frame" x="20" y="230" width="280" height="34"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                 <nil key="textColor"/>
@@ -280,11 +276,10 @@
                                                 <accessibility key="accessibilityConfiguration" label="Continue"/>
                                                 <state key="normal" title="Continue"/>
                                                 <connections>
-                                                    <action selector="didTapContinue" destination="lkE-bN-ikk" eventType="touchUpInside" id="oRt-0u-ito"/>
-                                                    <action selector="didTapContinue:" destination="AuE-Ey-MBo" eventType="touchUpInside" id="nEu-Rg-4L0"/>
+                                                    <action selector="didTapContinue" destination="lkE-bN-ikk" eventType="touchUpInside" id="kuH-IU-qSk"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Example: CE1B" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qox-hG-VrQ">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Example: CE1B" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qox-hG-VrQ">
                                                 <rect key="frame" x="20" y="157" width="280" height="16"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                 <nil key="textColor"/>
@@ -338,7 +333,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="lGx-0H-c9z"/>
                     <connections>
-                        <outlet property="continueButton" destination="Ndb-pX-kbA" id="7St-pk-B5e"/>
                         <outlet property="postcodeField" destination="nUw-z7-nkS" id="w92-4f-ymY"/>
                         <outlet property="scrollView" destination="bga-i9-1yX" id="iaF-lj-w0e"/>
                     </connections>
@@ -359,14 +353,14 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="498"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ctd-7G-OHq">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="946.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="1010.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KNf-hn-Dy4" customClass="LogoStrapline" customModule="CoLocate" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="0.0"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="FK8-Le-0p1">
-                                                <rect key="frame" x="20" y="20" width="280" height="906.5"/>
+                                                <rect key="frame" x="20" y="84" width="280" height="906.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set up app permissions" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bLK-VT-lux">
                                                         <rect key="frame" x="0.0" y="0.0" width="280" height="73"/>
@@ -458,7 +452,7 @@
                                 <accessibility key="accessibilityConfiguration" label="Continue"/>
                                 <state key="normal" title="Continue"/>
                                 <connections>
-                                    <action selector="didTapContinue:" destination="AuE-Ey-MBo" eventType="touchUpInside" id="Knf-YF-3Wt"/>
+                                    <action selector="didTapContinue" destination="AuE-Ey-MBo" eventType="touchUpInside" id="vga-TN-GZF"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -476,6 +470,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3DF-cw-4Dm"/>
                     </view>
+                    <connections>
+                        <outlet property="continueButton" destination="58S-0g-vQY" id="tsc-Kt-2S2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6yL-Lb-PKh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

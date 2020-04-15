@@ -34,8 +34,6 @@ class SubmitSymptomsViewControllerTests: TestCase {
          let button = PrimaryButton()
          vc.submitTapped(button)
          
-         XCTAssertFalse(button.isEnabled)
-
          guard let request = session.requestSent as? PatchContactEventsRequest else {
              XCTFail("Expected a PatchContactEventsRequest but got \(String(describing: session.requestSent))")
              return
@@ -55,6 +53,29 @@ class SubmitSymptomsViewControllerTests: TestCase {
              XCTFail("Expected a patch request but got \(request.method)")
          }
      }
+    
+    func testPreventsDoubleSubmission() {
+        let registration = Registration(id: UUID(uuidString: "FA817D5C-C615-4ABE-83B5-ABDEE8FAB8A6")!, secretKey: Data())
+        let session = SessionDouble()
+        
+        let vc = SubmitSymptomsViewController.instantiate()
+        vc.inject(
+            persistence:  PersistenceDouble(registration: registration),
+            contactEventRepository: MockContactEventRepository(contactEvents: []),
+            session: session,
+            hasHighTemperature: false,
+            hasNewCough: true
+        )
+        XCTAssertNotNil(vc.view)
+        
+        let button = PrimaryButton()
+        vc.submitTapped(button)
+        
+        XCTAssertNotNil(session.requestSent)
+        session.requestSent = nil
+        vc.submitTapped(button)
+        XCTAssertNil(session.requestSent)
+    }
     
     func testHasNoSymptoms() {
         let registration: Registration = Registration.fake
@@ -182,7 +203,6 @@ class SubmitSymptomsViewControllerTests: TestCase {
         sessionCompletion(Result<(), Error>.success(()))
 
         XCTAssertTrue(contactEventRepository.hasReset)
-        XCTAssertTrue(button.isEnabled)
         XCTAssertTrue(unwinder.didUnwindFromSelfDiagnosis)
     }
 

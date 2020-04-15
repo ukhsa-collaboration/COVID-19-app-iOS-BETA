@@ -11,6 +11,7 @@
 		090B1871243552C300870B5D /* UserNotificationCenterDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090B1870243552C300870B5D /* UserNotificationCenterDouble.swift */; };
 		092BB5AB244622200036B30E /* RootViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092BB5AA244622200036B30E /* RootViewControllerTests.swift */; };
 		095A91182434FF1500ED6369 /* ApplicationDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095A91172434FF1500ED6369 /* ApplicationDouble.swift */; };
+		097C9385244780C200E985CF /* PrivacyViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097C9384244780C200E985CF /* PrivacyViewControllerTests.swift */; };
 		0983ACCD243E566800DBB336 /* ErrorForTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983ACCC243E566800DBB336 /* ErrorForTest.swift */; };
 		0983ACCF243E6D3800DBB336 /* NotificationObserverDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983ACCE243E6D3800DBB336 /* NotificationObserverDouble.swift */; };
 		0983ACD3243EB22200DBB336 /* StatusViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983ACD2243EB22200DBB336 /* StatusViewControllerTests.swift */; };
@@ -172,6 +173,7 @@
 		090B1870243552C300870B5D /* UserNotificationCenterDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationCenterDouble.swift; sourceTree = "<group>"; };
 		092BB5AA244622200036B30E /* RootViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewControllerTests.swift; sourceTree = "<group>"; };
 		095A91172434FF1500ED6369 /* ApplicationDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationDouble.swift; sourceTree = "<group>"; };
+		097C9384244780C200E985CF /* PrivacyViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyViewControllerTests.swift; sourceTree = "<group>"; };
 		0983ACCC243E566800DBB336 /* ErrorForTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorForTest.swift; sourceTree = "<group>"; };
 		0983ACCE243E6D3800DBB336 /* NotificationObserverDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationObserverDouble.swift; sourceTree = "<group>"; };
 		0983ACD2243EB22200DBB336 /* StatusViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewControllerTests.swift; sourceTree = "<group>"; };
@@ -739,6 +741,7 @@
 				F6F05A232433BEC000FF4B72 /* OnboardingCoordinatorTests.swift */,
 				F632792024351C1900CF7A42 /* OnboardingViewControllerTests.swift */,
 				09CAA3692440FC4500CE93A6 /* PostcodeViewControllerTests.swift */,
+				097C9384244780C200E985CF /* PrivacyViewControllerTests.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -991,6 +994,7 @@
 				214209D72423C9B600C7BFF3 /* PatchContactEventsRequestTests.swift in Sources */,
 				F72EBDA9243D2FE6009F9328 /* BroadcastIdEncrypterTests.swift in Sources */,
 				F72EBD9B243C8750009F9328 /* BluetoothStateObserverTests.swift in Sources */,
+				097C9385244780C200E985CF /* PrivacyViewControllerTests.swift in Sources */,
 				090B1871243552C300870B5D /* UserNotificationCenterDouble.swift in Sources */,
 				21C417CA242CB0A200DEF3E2 /* ConfirmRegistrationRequestTests.swift in Sources */,
 				F632792A2435323200CF7A42 /* PermissionsViewControllerTests.swift in Sources */,

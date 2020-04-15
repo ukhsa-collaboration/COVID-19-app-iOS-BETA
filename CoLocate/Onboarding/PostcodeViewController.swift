@@ -32,9 +32,6 @@ class PostcodeViewController: UIViewController, Storyboarded {
     }
     
     override func viewDidLoad() {
-        postcodeField.addTarget(self, action:#selector(updateContinueButton), for: .editingChanged)
-        updateContinueButton()
-        
         // Hide the keyboard if the user taps anywhere else
         self.view .addGestureRecognizer(UITapGestureRecognizer(target: postcodeField, action: #selector(resignFirstResponder)))
         
@@ -43,14 +40,19 @@ class PostcodeViewController: UIViewController, Storyboarded {
     }
     
     @IBAction func didTapContinue() {
-        guard postcodeField.text?.count == 4 else { return }
+        guard postcodeField.text?.count == 4 else {
+            showAlert()
+            return
+        }
         
         persistence.partialPostcode = postcodeField.text
         continueHandler()
     }
     
-    @objc func updateContinueButton() {
-        continueButton.isEnabled = postcodeField.text?.count == maxLength
+    private func showAlert() {
+        let alert = UIAlertController(title: nil, message: "To continue, enter the first four characters of your postcode.", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
     
     @objc private func keyboardWasShown(_ notification: Notification) {
