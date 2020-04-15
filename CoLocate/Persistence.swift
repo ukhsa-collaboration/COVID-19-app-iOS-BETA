@@ -17,7 +17,6 @@ protocol Persisting {
     var allowedDataSharing: Bool { get nonmutating set }
     var registration: Registration? { get nonmutating set }
     var diagnosis: Diagnosis? { get nonmutating set }
-    var enableNewSelfDiagnosis: Bool { get nonmutating set }
     var partialPostcode: String? { get nonmutating set }
     var enableNewKeyRotation: Bool { get nonmutating set }
     
@@ -36,7 +35,6 @@ class Persistence: Persisting {
         case diagnosis
 
         // Feature flags
-        case enableNewSelfDiagnosis
         case newKeyRotation
         case partialPostcode
     }
@@ -89,11 +87,6 @@ class Persistence: Persisting {
 
             UserDefaults.standard.set(diagnosis.rawValue, forKey: Keys.diagnosis.rawValue)
         }
-    }
-
-    var enableNewSelfDiagnosis: Bool {
-        get { UserDefaults.standard.bool(forKey: Keys.enableNewSelfDiagnosis.rawValue) }
-        set { UserDefaults.standard.set(newValue, forKey: Keys.enableNewSelfDiagnosis.rawValue) }
     }
     
     var partialPostcode: String? {

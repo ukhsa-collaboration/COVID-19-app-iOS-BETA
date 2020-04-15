@@ -26,7 +26,6 @@ class DebugViewController: UITableViewController, Storyboarded {
     
     override func viewDidLoad() {
         allowedDataSharingSwitch.isOn = persistence.allowedDataSharing
-        enableNewSelfDiagnosis.isOn = persistence.enableNewSelfDiagnosis
 
         let build = Bundle.main.infoDictionary?["CFBundleVersion"] ?? "unknown"
         let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] ?? "unknown"
@@ -123,10 +122,6 @@ class DebugViewController: UITableViewController, Storyboarded {
 
     @IBAction func allowedDataSharingChanged(_ sender: UISwitch) {
         persistence.allowedDataSharing = sender.isOn
-    }
-
-    @IBAction func enableNewSelfDiagnosisChanged(_ sender: UISwitch) {
-        persistence.enableNewSelfDiagnosis = sender.isOn
     }
 
     @IBAction func enableNewKeyRotation(_ sender: UISwitch) {
