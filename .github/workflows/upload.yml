@@ -78,11 +78,11 @@ jobs:
         if: always()
         run: >
           curl
-            --verbose
-            --url "https://api.github.com/repos/${{ github.repository }}/deployments/${{ github.event.deployment.id }}/statuses"
-            --header "authorization: Bearer ${{ secrets.deployment_token }}"
-            --header "content-type: application/json"
-            --data '{"state":"${{ job.status }}"}'
+          --verbose
+          --url "${{ github.event.deployment.statuses_url }}"
+          --header "authorization: Bearer ${{ secrets.deployment_token }}"
+          --header "content-type: application/json"
+          --data '{"state":"${{ job.status }}"}'
         continue-on-error: true
 
       - name: Get Build Number
