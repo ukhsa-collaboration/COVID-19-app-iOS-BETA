@@ -47,45 +47,48 @@ class BroadcastIdEncypterTests: XCTestCase {
 
         let encryptedId = encrypter.broadcastId(for: knownDate, until: laterDate)
 
-        // first byte is 0x04 -- indicates this is uncompressed
-        let firstByte = encryptedId[0]
-        XCTAssertEqual(0x04, firstByte)
-
-        // the next 64 bytes are the public key we used to encrypt this
+        // the first 64 bytes are the epheraml public key used for encryption
         // followed by 24 bytes for our ciphertext
         // and finally 16 bytes that is the gcm tag
-        XCTAssertEqual(105, encryptedId.count)
+        XCTAssertEqual(104, encryptedId.count)
     }
 
     func test_ciphertext_contains_expected_data() throws {
-        throw XCTSkip("TODO fix this test")
-//        Persistence.shared.enableNewKeyRotation = true
-//
-//        #if targetEnvironment(simulator)
-//        throw XCTSkip("Cannot run this test in the simulator")
-//        #endif
-//
-//        guard let (serverPublicKey, serverPrivateKey) = generateKeyPair() else {
-//            XCTFail("Expected to generate a keypair for this test but it failed")
-//            return
-//        }
-//
-//        encrypter = BroadcastIdEncrypter(key: serverPublicKey, sonarId: cannedId)
-//        let result = encrypter.broadcastId(for: knownDate, until: laterDate)
-//
-//        let clearText = SecKeyCreateDecryptedData(serverPrivateKey,
-//                                                  .eciesEncryptionStandardVariableIVX963SHA256AESGCM,
-//                                                  result as CFData,
-//                                                  nil) as Data?
-//        XCTAssertNotNil(clearText)
-//
-//        let startDate = clearText!.subdata(in: 0..<4)
-//        let endDate   = clearText!.subdata(in: 4..<8)
-//        let uuidBytes = clearText!.subdata(in: 8..<24)
-//
-//        XCTAssertEqual(1585692000, asInt(startDate))
-//        XCTAssertEqual(1585778400, asInt(endDate))
-//        XCTAssertEqual("E1D160C7-F6E8-48BC-8687-63C696D910CB", asUUIDString(uuidBytes))
+        #if targetEnvironment(simulator)
+        throw XCTSkip("Cannot run this test in the simulator")
+        #endif
+
+        Persistence.shared.enableNewKeyRotation = true
+
+        guard let (serverPublicKey, serverPrivateKey) = generateKeyPair() else {
+            XCTFail("Expected to generate a keypair for this test but it failed")
+            return
+        }
+
+        encrypter = BroadcastIdEncrypter(key: serverPublicKey, sonarId: cannedId)
+        let result = encrypter.broadcastId(for: knownDate, until: laterDate)
+
+        // first byte would be 0x04 -- indicates uncompressed point format
+        // BUT  we do not transmit this, in order to save space
+        var specialByte = 0x04
+        let firstByte = Data(bytes: &specialByte, count: 1)
+        let fullCipherText = NSMutableData()
+        fullCipherText.append(firstByte)
+        fullCipherText.append(result)
+
+        let clearText = SecKeyCreateDecryptedData(serverPrivateKey,
+                                                  .eciesEncryptionStandardVariableIVX963SHA256AESGCM,
+                                                  fullCipherText as CFData,
+                                                  nil) as Data?
+        XCTAssertNotNil(clearText)
+
+        let startDate = clearText!.subdata(in: 0..<4)
+        let endDate   = clearText!.subdata(in: 4..<8)
+        let uuidBytes = clearText!.subdata(in: 8..<24)
+
+        XCTAssertEqual(1585692000, asInt(startDate))
+        XCTAssertEqual(1585778400, asInt(endDate))
+        XCTAssertEqual("E1D160C7-F6E8-48BC-8687-63C696D910CB", asUUIDString(uuidBytes))
     }
 
     func test_generates_the_same_result_for_the_same_inputs() {
@@ -98,11 +101,10 @@ class BroadcastIdEncypterTests: XCTestCase {
     }
 
     func test_generates_a_different_id_for_different_days() throws {
-        throw XCTSkip("TODO fix this test")
-//        let todaysId = encrypter.broadcastId(for: knownDate)
-//        let tomorrowsId = encrypter.broadcastId(for: laterDate)
-//
-//        XCTAssertNotEqual(todaysId, tomorrowsId)
+        let todaysId = encrypter.broadcastId(for: knownDate)
+        let tomorrowsId = encrypter.broadcastId(for: laterDate)
+
+        XCTAssertNotEqual(todaysId, tomorrowsId)
     }
 
     //MARK: - Private

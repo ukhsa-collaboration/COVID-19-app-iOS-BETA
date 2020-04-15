@@ -70,9 +70,11 @@ class BroadcastIdEncrypter {
             fatalError()
         }
 
-        cached = CachedResult(date: startDate, broadcastId: result)
+        let withoutFirstByte = result.dropFirst()
 
-        return result
+        cached = CachedResult(date: startDate, broadcastId: withoutFirstByte)
+
+        return withoutFirstByte
     }
 
     // MARK: - Private

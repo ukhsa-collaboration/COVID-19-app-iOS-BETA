@@ -207,7 +207,7 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
         }
         
         if persistence.enableNewKeyRotation {
-            guard data.count == 105 else {
+            guard data.count == 104 else {
                 logger.info("characteristic value is not a valid sonarId, because it has length \(data.count)")
                 return
             }
