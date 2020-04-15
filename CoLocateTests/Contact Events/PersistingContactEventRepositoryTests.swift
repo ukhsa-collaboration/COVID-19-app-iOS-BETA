@@ -1,5 +1,5 @@
 //
-//  ContactEventCollectorTests.swift
+//  ContactEventRepositoryTests.swift
 //  CoLocateTests
 //
 //  Created by NHSX.
@@ -21,56 +21,56 @@ class PersistingContactEventRepositoryTests: XCTestCase {
     
     var listener: TestBTLEListener!
     var persister: ContactEventPersisterDouble!
-    var collector: PersistingContactEventRepository!
+    var repository: PersistingContactEventRepository!
 
     override func setUp() {
         listener = TestBTLEListener()
         persister = ContactEventPersisterDouble()
-        collector = PersistingContactEventRepository(persister: persister)
+        repository = PersistingContactEventRepository(persister: persister)
     }
 
     func testLiveUpdatePropertyForDebugViewIsMaintained() {
-        collector.btleListener(listener, didFind: sonarId1, forPeripheral: peripheral1)
-        collector.btleListener(listener, didFind: sonarId2, forPeripheral: peripheral2)
-        collector.btleListener(listener, didFind: sonarId3, forPeripheral: peripheral3)
+        repository.btleListener(listener, didFind: sonarId1, forPeripheral: peripheral1)
+        repository.btleListener(listener, didFind: sonarId2, forPeripheral: peripheral2)
+        repository.btleListener(listener, didFind: sonarId3, forPeripheral: peripheral3)
 
-        XCTAssertEqual(3, collector._contactEventCount)
+        XCTAssertEqual(3, repository._contactEventCount)
     }
 
     func testReadsSonarIdForUnknownPeripheral() {
-        collector.btleListener(listener, didReadRSSI: -42, forPeripheral: peripheral1)
+        repository.btleListener(listener, didReadRSSI: -42, forPeripheral: peripheral1)
         
         XCTAssertEqual(listener.connectedPeripheral?.identifier, peripheral1.identifier)
     }
     
     func testRecordsRSSIValuesAgainstCorrectPeripheral() {
-        collector.btleListener(listener, didFind: sonarId1, forPeripheral: peripheral1)
+        repository.btleListener(listener, didFind: sonarId1, forPeripheral: peripheral1)
 
-        collector.btleListener(listener, didReadRSSI: 21, forPeripheral: peripheral2)
-        collector.btleListener(listener, didReadRSSI: 11, forPeripheral: peripheral1)
-        collector.btleListener(listener, didFind: sonarId2, forPeripheral: peripheral2)
-        collector.btleListener(listener, didReadRSSI: 31, forPeripheral: peripheral3)
-        collector.btleListener(listener, didReadRSSI: 22, forPeripheral: peripheral2)
-        collector.btleListener(listener, didReadRSSI: 32, forPeripheral: peripheral3)
-        collector.btleListener(listener, didReadRSSI: 23, forPeripheral: peripheral2)
-        collector.btleListener(listener, didReadRSSI: 12, forPeripheral: peripheral1)
-        collector.btleListener(listener, didReadRSSI: 13, forPeripheral: peripheral1)
-        collector.btleListener(listener, didFind: sonarId3, forPeripheral: peripheral3)
-        collector.btleListener(listener, didReadRSSI: 33, forPeripheral: peripheral3)
+        repository.btleListener(listener, didReadRSSI: 21, forPeripheral: peripheral2)
+        repository.btleListener(listener, didReadRSSI: 11, forPeripheral: peripheral1)
+        repository.btleListener(listener, didFind: sonarId2, forPeripheral: peripheral2)
+        repository.btleListener(listener, didReadRSSI: 31, forPeripheral: peripheral3)
+        repository.btleListener(listener, didReadRSSI: 22, forPeripheral: peripheral2)
+        repository.btleListener(listener, didReadRSSI: 32, forPeripheral: peripheral3)
+        repository.btleListener(listener, didReadRSSI: 23, forPeripheral: peripheral2)
+        repository.btleListener(listener, didReadRSSI: 12, forPeripheral: peripheral1)
+        repository.btleListener(listener, didReadRSSI: 13, forPeripheral: peripheral1)
+        repository.btleListener(listener, didFind: sonarId3, forPeripheral: peripheral3)
+        repository.btleListener(listener, didReadRSSI: 33, forPeripheral: peripheral3)
         
-        XCTAssertEqual(collector.peripheralIdentifierToContactEvent[peripheral1.identifier]?.rssiValues, [11, 12, 13])
-        XCTAssertEqual(collector.peripheralIdentifierToContactEvent[peripheral2.identifier]?.rssiValues, [21, 22, 23])
-        XCTAssertEqual(collector.peripheralIdentifierToContactEvent[peripheral3.identifier]?.rssiValues, [31, 32, 33])
+        XCTAssertEqual(repository.peripheralIdentifierToContactEvent[peripheral1.identifier]?.rssiValues, [11, 12, 13])
+        XCTAssertEqual(repository.peripheralIdentifierToContactEvent[peripheral2.identifier]?.rssiValues, [21, 22, 23])
+        XCTAssertEqual(repository.peripheralIdentifierToContactEvent[peripheral3.identifier]?.rssiValues, [31, 32, 33])
     }
     
     func testResetResetsUnderlyingPersister() {
-        collector.btleListener(listener, didFind: sonarId1, forPeripheral: peripheral1)
-        collector.btleListener(listener, didFind: sonarId2, forPeripheral: peripheral2)
-        collector.btleListener(listener, didFind: sonarId3, forPeripheral: peripheral3)
+        repository.btleListener(listener, didFind: sonarId1, forPeripheral: peripheral1)
+        repository.btleListener(listener, didFind: sonarId2, forPeripheral: peripheral2)
+        repository.btleListener(listener, didFind: sonarId3, forPeripheral: peripheral3)
 
-        collector.reset()
+        repository.reset()
         
-        XCTAssertEqual(collector.contactEvents.count, 0)
+        XCTAssertEqual(repository.contactEvents.count, 0)
     }
 
 }

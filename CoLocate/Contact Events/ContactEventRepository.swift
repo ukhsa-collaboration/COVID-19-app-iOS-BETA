@@ -1,5 +1,5 @@
 //
-//  ContactEventCollector.swift
+//  ContactEventRepository.swift
 //  CoLocate
 //
 //  Created by NHSX.
