@@ -74,15 +74,26 @@ jobs:
           MATCH_PASSWORD: ${{ secrets.match_password }}
         run: fastlane release sonar_env:${{ github.event.deployment.environment }}
 
-      - name: Update Deployment Status
-        if: always()
+      - name: Update Deployment Status on Success
+        if: success()
         run: >
           curl
           --verbose
           --url "${{ github.event.deployment.statuses_url }}"
           --header "authorization: Bearer ${{ secrets.deployment_token }}"
           --header "content-type: application/json"
-          --data '{"state":"${{ job.status }}"}'
+          --data '{"state":"success"}'
+        continue-on-error: true
+
+      - name: Update Deployment Status on Failure
+        if: failure()
+        run: >
+          curl
+          --verbose
+          --url "${{ github.event.deployment.statuses_url }}"
+          --header "authorization: Bearer ${{ secrets.deployment_token }}"
+          --header "content-type: application/json"
+          --data '{"state":"failure"}'
         continue-on-error: true
 
       - name: Get Build Number
