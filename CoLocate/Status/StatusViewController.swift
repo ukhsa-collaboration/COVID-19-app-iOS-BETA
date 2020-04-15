@@ -108,7 +108,9 @@ class StatusViewController: UIViewController, Storyboarded {
         } else {
             register()
         }
+    }
 
+    override func viewWillAppear(_ animated: Bool) {
         diagnosis = persistence.selfDiagnosis
         potentiallyExposed = persistence.potentiallyExposed
     }

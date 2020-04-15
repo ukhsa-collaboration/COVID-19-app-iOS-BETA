@@ -22,6 +22,7 @@ class StatusViewControllerTests: XCTestCase {
         for (diagnosis, potentiallyExposed, expectedStatus) in permutations {
             let persistence = PersistenceDouble(potentiallyExposed: potentiallyExposed, diagnosis: diagnosis)
             let vc = makeViewController(persistence: persistence)
+            vc.viewWillAppear(false)
 
             XCTAssertEqual(vc.status, expectedStatus)
         }

@@ -14,6 +14,7 @@ class DebugViewController: UITableViewController, Storyboarded {
 
     @IBOutlet weak var allowedDataSharingSwitch: UISwitch!
     @IBOutlet weak var versionBuildLabel: UILabel!
+    @IBOutlet weak var potentiallyExposedSwitch: UISwitch!
     @IBOutlet weak var enableNewSelfDiagnosis: UISwitch!
 
     private var persistence: Persisting!
@@ -25,6 +26,7 @@ class DebugViewController: UITableViewController, Storyboarded {
     }
     
     override func viewDidLoad() {
+        potentiallyExposedSwitch.isOn = persistence.potentiallyExposed
         allowedDataSharingSwitch.isOn = persistence.allowedDataSharing
 
         let build = Bundle.main.infoDictionary?["CFBundleVersion"] ?? "unknown"
@@ -45,7 +47,7 @@ class DebugViewController: UITableViewController, Storyboarded {
             let alertController = UIAlertController(title: "Set diagnosis", message: nil, preferredStyle: .actionSheet)
             for selfDiagnosis in SelfDiagnosis.allCases {
                 alertController.addAction(UIAlertAction(title: "\(selfDiagnosis)", style: .default) { _ in
-                    Persistence.shared.selfDiagnosis = selfDiagnosis
+                    self.persistence.selfDiagnosis = selfDiagnosis
                     self.show(title: "Cleared", message: "Diagnosis data has been set. Please stop and re-start the application.")
                 })
             }
@@ -53,7 +55,7 @@ class DebugViewController: UITableViewController, Storyboarded {
 
             present(alertController, animated: true, completion: nil)
 
-        case (0, 2):
+        case (0, 2), (0, 3):
             break
 
         case (1, 0):
@@ -118,6 +120,10 @@ class DebugViewController: UITableViewController, Storyboarded {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Ok", style: .default))
         present(alertController, animated: true, completion: nil)
+    }
+
+    @IBAction func potentiallyExposedChanged(_ sender: UISwitch) {
+        persistence.potentiallyExposed = sender.isOn
     }
 
     @IBAction func allowedDataSharingChanged(_ sender: UISwitch) {

@@ -9,6 +9,9 @@
 import Foundation
 import Logging
 
+// Yeah, this is the same as a boolean, but
+// I have a hunch that we might want to store
+// the actual self-diagnosis in the future...
 enum SelfDiagnosis: Int, CaseIterable {
     case notInfected = 1, infected
 }
@@ -23,7 +26,6 @@ protocol Persisting {
     
     func clear()
 }
-
 
 protocol PersistenceDelegate: class {
     func persistence(_ persistence: Persistence, didUpdateRegistration registration: Registration)
