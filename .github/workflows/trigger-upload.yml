@@ -33,7 +33,7 @@ jobs:
           GITHUB_ACCESS_TOKEN: ${{ secrets.deployment_token }}
           GITHUB_SHA: ${{ github.sha }}
           DEPLOYMENT_PAYLOAD: 'This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}**.\n\nThe commit hash was: _${{ github.sha }}_.'
-        run: ./bin/create-deployment beta
+        run: ./bin/create-deployment internal
         # continue-on-error: true
 
       - name: Notify Slack on Failure
