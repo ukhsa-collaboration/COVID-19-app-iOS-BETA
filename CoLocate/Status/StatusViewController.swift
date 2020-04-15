@@ -129,6 +129,10 @@ class StatusViewController: UIViewController, Storyboarded {
         present(selfDiagnosis, animated: true)
     }
 
+    @IBAction func nhs111Tapped(_ sender: UIButton) {
+        UIApplication.shared.open(URL(string: "https://111.nhs.uk/covid-19/")!)
+    }
+
     @IBAction func retryRegistrationTapped() {
         register()
     }

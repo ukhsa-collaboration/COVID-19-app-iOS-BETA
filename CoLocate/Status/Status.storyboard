@@ -237,6 +237,9 @@
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2UL-Ea-jl7">
                                                                         <rect key="frame" x="0.0" y="93.5" width="382" height="58"/>
                                                                         <state key="normal" title="NHS 111 online coronavirus service"/>
+                                                                        <connections>
+                                                                            <action selector="nhs111Tapped:" destination="HPa-EI-l5D" eventType="touchUpInside" id="wZS-hy-5cP"/>
+                                                                        </connections>
                                                                     </button>
                                                                 </subviews>
                                                                 <constraints>
