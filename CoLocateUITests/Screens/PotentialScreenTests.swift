@@ -20,7 +20,7 @@ class PotentialScreenTests: ScreenTestCase {
 private extension PotentialScreenTests {
     
     var title: XCUIElement {
-        app.staticTexts["Potential"]
+        app.navigationBars["Potential"]
     }
     
 }
