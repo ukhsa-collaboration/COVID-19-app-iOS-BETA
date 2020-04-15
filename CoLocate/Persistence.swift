@@ -10,7 +10,7 @@ import Foundation
 import Logging
 
 enum SelfDiagnosis: Int, CaseIterable {
-    case notInfected = 1, infected, potential
+    case notInfected = 1, infected
 }
 
 protocol Persisting {

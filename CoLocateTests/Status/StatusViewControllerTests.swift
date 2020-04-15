@@ -10,6 +10,22 @@ import XCTest
 @testable import CoLocate
 
 class StatusViewControllerTests: XCTestCase {
+
+    func testStatusPermutations() {
+        let permutations: [(SelfDiagnosis, Bool, StatusViewController.Status)] = [
+            (.notInfected, false, .initial),
+            (.notInfected, true, .amber),
+            (.infected, false, .red),
+            (.infected, true, .red),
+        ]
+
+        for (diagnosis, potentiallyExposed, expectedStatus) in permutations {
+            let persistence = PersistenceDouble(potentiallyExposed: potentiallyExposed, diagnosis: diagnosis)
+            let vc = makeViewController(persistence: persistence)
+
+            XCTAssertEqual(vc.status, expectedStatus)
+        }
+    }
     
     func testShowsInitialRegisteredStatus() {
         let vc = makeViewController(persistence: PersistenceDouble(registration: arbitraryRegistration()))

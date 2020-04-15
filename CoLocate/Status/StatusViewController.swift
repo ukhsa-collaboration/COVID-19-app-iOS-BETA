@@ -14,6 +14,10 @@ fileprivate let registrationTimeLimitSecs = 20.0
 class StatusViewController: UIViewController, Storyboarded {
     static let storyboardName = "Status"
 
+    enum Status {
+        case initial, amber, red
+    }
+
     private var persistence: Persisting!
     private var registrationService: RegistrationService!
     private var mainQueue: TestableQueue!
@@ -43,27 +47,24 @@ class StatusViewController: UIViewController, Storyboarded {
 
     var diagnosis: SelfDiagnosis? {
         didSet {
-            guard view != nil else { return }
-
-            switch diagnosis {
-            case .none, .some(.notInfected):
-                diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Blue")
-                diagnosisTitleLabel.text = "Keep following the current government advice".localized
-                howAreYouFeelingView.isHidden = false
-                nextStepsView.isHidden = true
-            case .some(.potential):
-                diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
-                diagnosisTitleLabel.text = "You have been near someone who has coronavirus symptoms".localized
-                howAreYouFeelingView.isHidden = false
-                nextStepsView.isHidden = true
-            case .some(.infected):
-                diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Error")
-                diagnosisTitleLabel.text = "Your symptoms indicate you may have coronavirus".localized
-                howAreYouFeelingView.isHidden = true
-                nextStepsView.isHidden = false
+            renderStatus()
+        }
+    }
+    var potentiallyExposed: Bool? {
+        didSet {
+            renderStatus()
+        }
+    }
+    var status: Status {
+        get {
+            switch (diagnosis, potentiallyExposed) {
+            case (.some(.infected), _):
+                return .red
+            case (_, .some(true)):
+                return .amber
+            default:
+                return .initial
             }
-
-            diagnosisStatusView.accessibilityLabel = "\(diagnosisTitleLabel.text!) \(readLatestAdviceLabel.text!)"
         }
     }
     
@@ -109,17 +110,18 @@ class StatusViewController: UIViewController, Storyboarded {
         }
 
         diagnosis = persistence.selfDiagnosis
+        potentiallyExposed = persistence.potentiallyExposed
     }
 
     @objc func diagnosisStatusTapped() {
-        let url: URL
-        switch diagnosis {
-        case .none, .some(.notInfected):
-            url = URL(string: "https://www.gov.uk/government/publications/full-guidance-on-staying-at-home-and-away-from-others/full-guidance-on-staying-at-home-and-away-from-others")!
-        case .some(.potential), .some(.infected):
-            url = URL(string: "https://www.gov.uk/government/publications/covid-19-stay-at-home-guidance/stay-at-home-guidance-for-households-with-possible-coronavirus-covid-19-infection")!
+        let path: String
+        switch status {
+        case .initial:
+            path = "full-guidance-on-staying-at-home-and-away-from-others/full-guidance-on-staying-at-home-and-away-from-others"
+        case .amber, .red:
+            path = "covid-19-stay-at-home-guidance/stay-at-home-guidance-for-households-with-possible-coronavirus-covid-19-infection"
         }
-
+        let url = URL(string: "https://www.gov.uk/government/publications/\(path)")!
         UIApplication.shared.open(url)
     }
 
@@ -139,6 +141,30 @@ class StatusViewController: UIViewController, Storyboarded {
 
     @IBAction func unwindFromSelfDiagnosis(unwindSegue: UIStoryboardSegue) {
         diagnosis = persistence.selfDiagnosis
+    }
+
+    private func renderStatus() {
+        guard view != nil else { return }
+
+        switch status {
+        case .initial:
+            diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Blue")
+            diagnosisTitleLabel.text = "Keep following the current government advice".localized
+            howAreYouFeelingView.isHidden = false
+            nextStepsView.isHidden = true
+        case .amber:
+            diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
+            diagnosisTitleLabel.text = "You have been near someone who has coronavirus symptoms".localized
+            howAreYouFeelingView.isHidden = false
+            nextStepsView.isHidden = true
+        case .red:
+            diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Error")
+            diagnosisTitleLabel.text = "Your symptoms indicate you may have coronavirus".localized
+            howAreYouFeelingView.isHidden = true
+            nextStepsView.isHidden = false
+        }
+
+        diagnosisStatusView.accessibilityLabel = "\(diagnosisTitleLabel.text!) \(readLatestAdviceLabel.text!)"
     }
     
     private func register() {

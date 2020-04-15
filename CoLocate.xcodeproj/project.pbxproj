@@ -460,6 +460,7 @@
 				092BB5AA244622200036B30E /* RootViewControllerTests.swift */,
 				F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */,
 				F68BFBF6242ACD17008EE68F /* TestHelpers.swift */,
+				219B61362447371700E2F1A6 /* UUIDExtensionsTests.swift */,
 				89896E5E2435EB6500F949EA /* CoLocateTests.xcconfig */,
 				F72EBD99243C8738009F9328 /* Bluetooth */,
 				21F374002433845600926FB8 /* Contact Events */,
@@ -470,7 +471,6 @@
 				F6CC2CAA242BCCE90079432B /* Remote Notifications */,
 				F67C5157243E7BD5008E2945 /* SelfDiagnosis */,
 				0983ACD1243EB20A00DBB336 /* Status */,
-				219B61362447371700E2F1A6 /* UUIDExtensionsTests.swift */,
 			);
 			path = CoLocateTests;
 			sourceTree = "<group>";
