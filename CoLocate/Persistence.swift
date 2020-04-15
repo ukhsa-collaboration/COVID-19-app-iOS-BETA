@@ -43,7 +43,6 @@ class Persistence: Persisting {
     static var shared = Persistence()
 
     let secureRegistrationStorage: SecureRegistrationStorage
-    let secureBroadcastRotationKeyStorage: BroadcastRotationKeyStorage
 
     weak var delegate: PersistenceDelegate?
 
@@ -106,14 +105,12 @@ class Persistence: Persisting {
         set { UserDefaults.standard.set(newValue, forKey: Keys.newKeyRotation.rawValue) }
     }
 
-    init(secureRegistrationStorage: SecureRegistrationStorage, secureBroadcastRotationKeyStorage: BroadcastRotationKeyStorage) {
+    init(secureRegistrationStorage: SecureRegistrationStorage) {
         self.secureRegistrationStorage = secureRegistrationStorage
-        self.secureBroadcastRotationKeyStorage = secureBroadcastRotationKeyStorage
     }
 
     convenience init() {
-        self.init(secureRegistrationStorage: SecureRegistrationStorage(),
-                  secureBroadcastRotationKeyStorage: SecureBroadcastRotationKeyStorage.shared)
+        self.init(secureRegistrationStorage: SecureRegistrationStorage())
     }
 
     func clear() {
@@ -122,7 +119,6 @@ class Persistence: Persisting {
         }
 
         try! secureRegistrationStorage.clear()
-        try! secureBroadcastRotationKeyStorage.clear()
     }
 
 }

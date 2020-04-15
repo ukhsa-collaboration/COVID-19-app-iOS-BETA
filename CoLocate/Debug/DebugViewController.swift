@@ -37,6 +37,7 @@ class DebugViewController: UITableViewController, Storyboarded {
         switch (indexPath.section, indexPath.row) {
         case (0, 0):
             persistence.clear()
+            try! SecureBroadcastRotationKeyStorage.shared.clear()
             show(title: "Cleared", message: "Registration and diagnosis data has been cleared. Please stop and re-start the application.")
 
         case (0, 1):
