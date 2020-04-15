@@ -9,9 +9,9 @@
 import Foundation
 import Logging
 
-class PlistPersister<T: Codable> {
+class PlistPersister<K: Hashable & Codable, V: Codable> {
     
-    var items: [T] = [] {
+    var items: [K: V] = [:] {
         didSet {
             writeItems()
         }
@@ -34,7 +34,7 @@ class PlistPersister<T: Codable> {
     }
     
     func reset() {
-        items = []
+        items = [:]
         do {
             try FileManager.default.removeItem(at: fileURL)
         } catch (let error as NSError) where error.code == NSFileNoSuchFileError {
@@ -47,17 +47,18 @@ class PlistPersister<T: Codable> {
 
     private func readItems() {
         guard FileManager.default.isReadableFile(atPath: fileURL.path) else {
-            items = []
+            items = [:]
             return
         }
         
         let decoder = PropertyListDecoder()
         do {
             let data = try Data(contentsOf: fileURL)
-            items = try decoder.decode([T].self, from: data)
+            items = try decoder.decode([K: V].self, from: data)
         } catch {
-            logger.critical("error reading items from plist: \(error)")
-            fatalError()
+            logger.critical("error reading items from plist, did the format change? \(error)")
+            items = [:]
+//            fatalError()
         }
     }
 

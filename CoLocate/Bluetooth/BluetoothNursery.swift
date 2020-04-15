@@ -18,7 +18,7 @@ class BluetoothNursery {
     let broadcasterQueue: DispatchQueue? = DispatchQueue(label: "BTLE Broadcaster Queue")
     
     let persistence: Persistence
-    let contactEventPersister: PlistPersister<ContactEvent>
+    let contactEventPersister: PlistPersister<UUID, ContactEvent>
     let contactEventRepository: PersistingContactEventRepository
     let broadcastIdGenerator: BroadcastIdGenerator
     let stateObserver: BluetoothStateObserver
@@ -34,7 +34,7 @@ class BluetoothNursery {
     
     init(persistence: Persistence, userNotificationCenter: UNUserNotificationCenter) {
         self.persistence = persistence
-        contactEventPersister = PlistPersister<ContactEvent>(fileName: "contactEvents")
+        contactEventPersister = PlistPersister<UUID, ContactEvent>(fileName: "contactEvents")
         contactEventRepository = PersistingContactEventRepository(persister: contactEventPersister)
         broadcastIdGenerator = ConcreteBroadcastIdGenerator(storage: SecureBroadcastRotationKeyStorage())
         stateObserver = BluetoothStateObserver(

@@ -58,9 +58,9 @@ class PersistingContactEventRepositoryTests: XCTestCase {
         repository.btleListener(listener, didFind: sonarId3, forPeripheral: peripheral3)
         repository.btleListener(listener, didReadRSSI: 33, forPeripheral: peripheral3)
         
-        XCTAssertEqual(repository.peripheralIdentifierToContactEvent[peripheral1.identifier]?.rssiValues, [11, 12, 13])
-        XCTAssertEqual(repository.peripheralIdentifierToContactEvent[peripheral2.identifier]?.rssiValues, [21, 22, 23])
-        XCTAssertEqual(repository.peripheralIdentifierToContactEvent[peripheral3.identifier]?.rssiValues, [31, 32, 33])
+        XCTAssertEqual(repository.contactEvents.first(where: { $0.sonarId == sonarId1 })?.rssiValues, [11, 12, 13])
+        XCTAssertEqual(repository.contactEvents.first(where: { $0.sonarId == sonarId2 })?.rssiValues, [21, 22, 23])
+        XCTAssertEqual(repository.contactEvents.first(where: { $0.sonarId == sonarId3 })?.rssiValues, [31, 32, 33])
     }
     
     func testResetResetsUnderlyingPersister() {

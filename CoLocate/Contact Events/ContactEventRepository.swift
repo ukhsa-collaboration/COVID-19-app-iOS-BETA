@@ -15,11 +15,11 @@ protocol ContactEventRepository {
 }
 
 protocol ContactEventPersister {
-    var items: [ContactEvent] { get set }
+    var items: [UUID: ContactEvent] { get set }
     func reset()
 }
 
-extension PlistPersister: ContactEventPersister where T == ContactEvent {
+extension PlistPersister: ContactEventPersister where K == UUID, V == ContactEvent {
 }
 
 @objc class PersistingContactEventRepository: NSObject, BTLEListenerDelegate, ContactEventRepository {
@@ -29,13 +29,7 @@ extension PlistPersister: ContactEventPersister where T == ContactEvent {
     }
     
     public var contactEvents: [ContactEvent] {
-        return persister.items
-    }
-    
-    internal var peripheralIdentifierToContactEvent: [UUID: ContactEvent] = [:] {
-        didSet {
-            persister.items = Array(peripheralIdentifierToContactEvent.values)
-        }
+        return Array(persister.items.values)
     }
     
     private var persister: ContactEventPersister
@@ -49,18 +43,18 @@ extension PlistPersister: ContactEventPersister where T == ContactEvent {
     }
     
     func btleListener(_ listener: BTLEListener, didFind sonarId: Data, forPeripheral peripheral: BTLEPeripheral) {
-        if peripheralIdentifierToContactEvent[peripheral.identifier] == nil {
-            peripheralIdentifierToContactEvent[peripheral.identifier] = ContactEvent()
+        if persister.items[peripheral.identifier] == nil {
+            persister.items[peripheral.identifier] = ContactEvent()
         }
-        peripheralIdentifierToContactEvent[peripheral.identifier]?.sonarId = sonarId
+        persister.items[peripheral.identifier]?.sonarId = sonarId
     }
     
     func btleListener(_ listener: BTLEListener, didReadRSSI RSSI: Int, forPeripheral peripheral: BTLEPeripheral) {
-        if peripheralIdentifierToContactEvent[peripheral.identifier] == nil {
-            peripheralIdentifierToContactEvent[peripheral.identifier] = ContactEvent()
+        if persister.items[peripheral.identifier] == nil {
+            persister.items[peripheral.identifier] = ContactEvent()
             listener.connect(peripheral)
         }
-        peripheralIdentifierToContactEvent[peripheral.identifier]?.recordRSSI(RSSI)
+        persister.items[peripheral.identifier]?.recordRSSI(RSSI)
     }
 
 }

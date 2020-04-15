@@ -11,10 +11,10 @@ import Foundation
 
 class ContactEventPersisterDouble: ContactEventPersister {
     
-    var items: [ContactEvent] = []
+    var items: [UUID: ContactEvent] = [:]
     
     func reset() {
-        items = []
+        items = [:]
     }
     
 }

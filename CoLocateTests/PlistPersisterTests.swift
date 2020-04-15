@@ -11,14 +11,14 @@ import XCTest
 
 class PlistPersisterTests: XCTestCase {
 
-    var persister: PlistPersister<Sample>!
+    var persister: PlistPersister<String, Sample>!
     
     var item1: Sample!
     var item2: Sample!
     var item3: Sample!
     
     override func setUp() {
-        persister = PlistPersister<Sample>(fileName: "samples")
+        persister = PlistPersister<String, Sample>(fileName: "samples")
         persister.reset()
         
         item1 = Sample(name: "Hewie", number: 1)
@@ -27,37 +27,37 @@ class PlistPersisterTests: XCTestCase {
     }
 
     func testRecordsItems() {
-        XCTAssertEqual(persister.items, [])
+        XCTAssertEqual(persister.items, [:])
 
-        persister.items.append(item1)
-        persister.items.append(item2)
-        persister.items.append(item3)
+        persister.items["item1"] = item1
+        persister.items["item2"] = item2
+        persister.items["item3"] = item3
 
         XCTAssertEqual(persister.items.count, 3)
-        XCTAssertEqual(persister.items[0], item1)
-        XCTAssertEqual(persister.items[1], item2)
-        XCTAssertEqual(persister.items[2], item3)
+        XCTAssertEqual(persister.items["item0"], item1)
+        XCTAssertEqual(persister.items["item1"], item2)
+        XCTAssertEqual(persister.items["item2"], item3)
     }
 
     func testPersistsItems() throws {
         XCTAssertFalse(FileManager.default.fileExists(atPath: persister.fileURL.path))
 
-        persister.items.append(item1)
-        persister.items.append(item2)
-        persister.items.append(item3)
+        persister.items["item1"] = item1
+        persister.items["item2"] = item2
+        persister.items["item3"] = item3
 
         let attrs = try FileManager.default.attributesOfItem(atPath: persister.fileURL.path)
         XCTAssertNotEqual(attrs[.size] as! NSNumber, 0)
     }
 
     func testLoadsItemsFromDiskOnInit() {
-        persister.items.append(item1)
-        persister.items.append(item2)
-        persister.items.append(item3)
+        persister.items["item1"] = item1
+        persister.items["item2"] = item2
+        persister.items["item3"] = item3
 
         persister = nil
 
-        persister = PlistPersister<Sample>(fileName: "samples")
+        persister = PlistPersister<String, Sample>(fileName: "samples")
         XCTAssertEqual(persister.items.count, 3)
     }
 
