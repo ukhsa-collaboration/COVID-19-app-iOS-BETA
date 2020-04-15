@@ -10,6 +10,18 @@ import XCTest
 
 class ProjectTests: XCTestCase {
     
+    func testWeHaveALaunchStoryboard() {
+        let info = Bundle.app.infoDictionary
+        
+        XCTAssertNotNil(info?["UILaunchStoryboardName"])
+    }
+    
+    func testThereAreNoOverridesForATS() {
+        let info = Bundle.app.infoDictionary
+        
+        XCTAssertNil(info?["NSAppTransportSecurity"], "There should be no overrides for App Transport Security.")
+    }
+    
     #if targetEnvironment(simulator)
     func testThatProjectFileHasNoEmbeddedBuildConfigurations() {
         guard let projectFilePath = Bundle(for: ProjectTests.self).infoDictionary?["projectFilePath"] as? String else {
@@ -31,5 +43,15 @@ class ProjectTests: XCTestCase {
         }
     }
     #endif
+    
+}
+
+private extension Bundle {
+    
+    // An alias to indicate that we should running as part of the main app in order for these tests to function
+    // properly.
+    // Some tests failing (like `testWeHaveAStoryboard`) helps detect if we’ve moved this class to, say, a framework
+    // or swift pacakge tests.
+    static var app: Bundle { Bundle.main }
     
 }
