@@ -1,6 +1,6 @@
 import Foundation
 
-struct ReportError: Error, CustomStringConvertible {
+struct CustomError: Error, CustomStringConvertible {
     var description: String
     
     init(_ description: String) {
