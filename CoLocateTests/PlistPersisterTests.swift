@@ -34,9 +34,9 @@ class PlistPersisterTests: XCTestCase {
         persister.items["item3"] = item3
 
         XCTAssertEqual(persister.items.count, 3)
-        XCTAssertEqual(persister.items["item0"], item1)
-        XCTAssertEqual(persister.items["item1"], item2)
-        XCTAssertEqual(persister.items["item2"], item3)
+        XCTAssertEqual(persister.items["item1"], item1)
+        XCTAssertEqual(persister.items["item2"], item2)
+        XCTAssertEqual(persister.items["item3"], item3)
     }
 
     func testPersistsItems() throws {
