@@ -26,6 +26,7 @@
           "value" : "dark"
         }
       ],
+      "filename" : "Controls_RadioButton_Selected_Dark@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
@@ -41,6 +42,7 @@
           "value" : "dark"
         }
       ],
+      "filename" : "Controls_RadioButton_Selected_Dark@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
