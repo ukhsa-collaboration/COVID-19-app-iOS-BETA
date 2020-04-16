@@ -59,13 +59,15 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         
         let requestFactory = ConcreteSecureRequestFactory(registration: registration)
 
-        let contactEvents = contactEventRepository.contactEvents.filter { contactEvent in
+        let contactEvents = contactEventRepository.contactEvents.compactMap { contactEvent -> ContactEvent in
             let uuid = contactEvent.sonarId.flatMap { UUID(data: $0) }
-            if Persistence.shared.enableNewKeyRotation {
-                return uuid == nil
-            } else {
-                return uuid != nil
+            guard !Persistence.shared.enableNewKeyRotation, uuid != nil else {
+                return contactEvent
             }
+
+            var ce = contactEvent
+            ce.sonarId = uuid?.uuidString.data(using: .utf8)
+            return ce
         }
 
         let request = requestFactory.patchContactsRequest(contactEvents: contactEvents)

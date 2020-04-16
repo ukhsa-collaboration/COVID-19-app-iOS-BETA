@@ -30,4 +30,24 @@ class ContactEventTests: XCTestCase {
         XCTAssertEqual(contactEvent.rssiIntervals[2], 123)
     }
 
+    // Remove this once we're sending encrypted sonar ids is working
+    func testEncodingUUIDs() {
+        let uuid = UUID()
+        let contactEvent = ContactEvent(sonarId: uuid.uuidString.data(using: .utf8))
+
+        guard
+            let encoded = try? JSONEncoder().encode(contactEvent),
+            let decoded = try? JSONDecoder().decode(SonarIdUuid.self, from: encoded)
+        else {
+            XCTFail()
+            return
+        }
+
+        XCTAssertEqual(decoded.sonarId, uuid.uuidString)
+    }
+
+}
+
+fileprivate struct SonarIdUuid: Decodable {
+    let sonarId: String
 }
