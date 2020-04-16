@@ -12,14 +12,15 @@ import XCTest
 class StatusViewControllerTests: XCTestCase {
 
     func testStatusPermutations() {
-        let permutations: [(SelfDiagnosis, Bool, StatusViewController.Status)] = [
-            (.notInfected, false, .initial),
-            (.notInfected, true, .amber),
-            (.infected, false, .red),
-            (.infected, true, .red),
+        let permutations: [(Set<Symptom>, Bool, StatusViewController.Status)] = [
+            ([], false, .initial),
+            ([], true, .amber),
+            ([.cough], false, .red),
+            ([.cough], true, .red),
         ]
 
-        for (diagnosis, potentiallyExposed, expectedStatus) in permutations {
+        for (symptoms, potentiallyExposed, expectedStatus) in permutations {
+            let diagnosis = SelfDiagnosis(symptoms: symptoms, startDate: Date())
             let persistence = PersistenceDouble(potentiallyExposed: potentiallyExposed, diagnosis: diagnosis)
             let vc = makeViewController(persistence: persistence)
             vc.viewWillAppear(false)

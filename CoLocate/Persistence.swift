@@ -9,13 +9,6 @@
 import Foundation
 import Logging
 
-// Yeah, this is the same as a boolean, but
-// I have a hunch that we might want to store
-// the actual self-diagnosis in the future...
-enum SelfDiagnosis: Int, CaseIterable {
-    case notInfected = 1, infected
-}
-
 protocol Persisting {
     var allowedDataSharing: Bool { get nonmutating set }
     var registration: Registration? { get nonmutating set }
@@ -44,6 +37,8 @@ class Persistence: Persisting {
     }
 
     static var shared = Persistence()
+    let encoder = JSONEncoder()
+    let decoder = JSONDecoder()
 
     let secureRegistrationStorage: SecureRegistrationStorage
 
@@ -75,26 +70,22 @@ class Persistence: Persisting {
 
     var selfDiagnosis: SelfDiagnosis? {
         get {
-            let rawDiagnosis = UserDefaults.standard.integer(forKey: Keys.selfDiagnosis.rawValue)
-
-            if rawDiagnosis == 0 {
+            guard
+                let data = UserDefaults.standard.data(forKey: Keys.selfDiagnosis.rawValue),
+                let decoded = try? decoder.decode(SelfDiagnosis.self, from: data)
+            else {
                 return nil
             }
 
-            guard let diagnosis = SelfDiagnosis(rawValue: rawDiagnosis) else {
-                logger.critical("Unable to hydrate a diagnosis from raw: \(rawDiagnosis).")
-                return nil
-            }
-
-            return diagnosis
+            return decoded
         }
         set {
-            guard let diagnosis = newValue else {
-                logger.critical("Persisting a nil diagnosis - this should never happen!")
+            guard let data = try? encoder.encode(newValue) else {
+                logger.critical("Unable to encode a self-diagnosis")
                 return
             }
 
-            UserDefaults.standard.set(diagnosis.rawValue, forKey: Keys.selfDiagnosis.rawValue)
+            UserDefaults.standard.set(data, forKey: Keys.selfDiagnosis.rawValue)
         }
     }
     

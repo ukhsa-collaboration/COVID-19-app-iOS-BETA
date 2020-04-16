@@ -110,6 +110,7 @@
 		F6AB2F20243D359F00386D6B /* SubmitSymptomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */; };
 		F6CC2CA9242BC7FC0079432B /* RemoteNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CC2CA8242BC7FC0079432B /* RemoteNotificationManager.swift */; };
 		F6CC2CAC242BCD0D0079432B /* RemoteNotificationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CC2CAB242BCD0D0079432B /* RemoteNotificationManagerTests.swift */; };
+		F6EEC3B82448DD2400172820 /* SelfDiagnosis.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EEC3B72448DD2400172820 /* SelfDiagnosis.swift */; };
 		F6F05A242433BEC000FF4B72 /* OnboardingCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F05A232433BEC000FF4B72 /* OnboardingCoordinatorTests.swift */; };
 		F6F05A262433C09200FF4B72 /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F05A252433C09200FF4B72 /* OnboardingCoordinator.swift */; };
 		F6F05A282433C55300FF4B72 /* AuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F05A272433C55300FF4B72 /* AuthorizationManager.swift */; };
@@ -284,6 +285,7 @@
 		F6CA2818242E41F700F8DC55 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F6CC2CA8242BC7FC0079432B /* RemoteNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteNotificationManager.swift; sourceTree = "<group>"; };
 		F6CC2CAB242BCD0D0079432B /* RemoteNotificationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteNotificationManagerTests.swift; sourceTree = "<group>"; };
+		F6EEC3B72448DD2400172820 /* SelfDiagnosis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfDiagnosis.swift; sourceTree = "<group>"; };
 		F6F05A232433BEC000FF4B72 /* OnboardingCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinatorTests.swift; sourceTree = "<group>"; };
 		F6F05A252433C09200FF4B72 /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
 		F6F05A272433C55300FF4B72 /* AuthorizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationManager.swift; sourceTree = "<group>"; };
@@ -678,6 +680,7 @@
 				F68B89EC243CFF2600F369A9 /* SelfDiagnosis.storyboard */,
 				F67C5153243E4D2F008E2945 /* AnswerButton.swift */,
 				F6AB2F1D243D324400386D6B /* CoughViewController.swift */,
+				F6EEC3B72448DD2400172820 /* SelfDiagnosis.swift */,
 				F68B89EE243D01FA00F369A9 /* SelfDiagnosisNavigationController.swift */,
 				F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */,
 				F68B89F3243D050700F369A9 /* TemperatureViewController.swift */,
@@ -1052,6 +1055,7 @@
 				F68B89EF243D01FA00F369A9 /* SelfDiagnosisNavigationController.swift in Sources */,
 				898FE859243B4FE300210775 /* AuthorizationManaging.swift in Sources */,
 				F67C5154243E4D2F008E2945 /* AnswerButton.swift in Sources */,
+				F6EEC3B82448DD2400172820 /* SelfDiagnosis.swift in Sources */,
 				6FC63C31241641B8007C8BF3 /* AppDelegate.swift in Sources */,
 				F6AB2F1E243D324400386D6B /* CoughViewController.swift in Sources */,
 				F600A60224297A8E0038DF57 /* RegistrationRequest.swift in Sources */,

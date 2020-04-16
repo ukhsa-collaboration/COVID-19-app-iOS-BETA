@@ -123,7 +123,7 @@ class SubmitSymptomsViewControllerTests: TestCase {
 
         vc.submitTapped(PrimaryButton())
 
-        XCTAssertEqual(persistenceDouble.selfDiagnosis, .infected)
+        XCTAssertEqual(persistenceDouble.selfDiagnosis?.symptoms, [.temperature])
         XCTAssertNotNil(sessionDouble.requestSent)
     }
 
@@ -146,7 +146,7 @@ class SubmitSymptomsViewControllerTests: TestCase {
 
         vc.submitTapped(PrimaryButton())
 
-        XCTAssertEqual(persistenceDouble.selfDiagnosis, .infected)
+        XCTAssertEqual(persistenceDouble.selfDiagnosis?.symptoms, [.cough])
         XCTAssertNotNil(sessionDouble.requestSent)
     }
 
@@ -169,7 +169,7 @@ class SubmitSymptomsViewControllerTests: TestCase {
 
         vc.submitTapped(PrimaryButton())
 
-        XCTAssertEqual(persistenceDouble.selfDiagnosis, .infected)
+        XCTAssertEqual(persistenceDouble.selfDiagnosis?.symptoms, [.temperature, .cough])
         XCTAssertNotNil(sessionDouble.requestSent)
     }
 

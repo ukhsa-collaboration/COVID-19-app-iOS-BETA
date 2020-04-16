@@ -16,17 +16,9 @@ class PersistenceTests: TestCase {
         XCTAssertNil(persistence.selfDiagnosis)
     }
 
-    func testDiagnosisIsPersisted() {
-        let service = Persistence()
-        service.selfDiagnosis = .notInfected
-
-        let diagnosis = Persistence().selfDiagnosis
-        XCTAssertEqual(diagnosis, SelfDiagnosis.notInfected)
-    }
-
     func testDiagnosisIsUnknownWhenDefaultsReset() {
         let service = Persistence()
-        service.selfDiagnosis = .infected
+        service.selfDiagnosis = SelfDiagnosis(symptoms: [.cough], startDate: Date())
 
         let appDomain = Bundle.main.bundleIdentifier
         UserDefaults.standard.removePersistentDomain(forName: appDomain!)

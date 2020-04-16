@@ -44,16 +44,8 @@ class DebugViewController: UITableViewController, Storyboarded {
             show(title: "Cleared", message: "Registration and diagnosis data has been cleared. Please stop and re-start the application.")
 
         case (0, 1):
-            let alertController = UIAlertController(title: "Set diagnosis", message: nil, preferredStyle: .actionSheet)
-            for selfDiagnosis in SelfDiagnosis.allCases {
-                alertController.addAction(UIAlertAction(title: "\(selfDiagnosis)", style: .default) { _ in
-                    self.persistence.selfDiagnosis = selfDiagnosis
-                    self.show(title: "Cleared", message: "Diagnosis data has been set. Please stop and re-start the application.")
-                })
-            }
-            alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-
-            present(alertController, animated: true, completion: nil)
+            // TODO: Add a screen for debugging self-diagnosis
+            break
 
         case (0, 2), (0, 3):
             break

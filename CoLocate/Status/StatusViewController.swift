@@ -57,8 +57,8 @@ class StatusViewController: UIViewController, Storyboarded {
     }
     var status: Status {
         get {
-            switch (diagnosis, potentiallyExposed) {
-            case (.some(.infected), _):
+            switch (diagnosis?.isAffected, potentiallyExposed) {
+            case (.some(true), _):
                 return .red
             case (_, .some(true)):
                 return .amber
