@@ -3,7 +3,7 @@
 A package used for running / reporting automated tests. Currently, this runs integrity checks on the archived app, like so:
 
 ```bash
-swift run Reporter --archive $ARCHIVE_PATH --report $REPORT_PATH
+swift run Reporter --archive $ARCHIVE_PATH --output $REPORT_PATH
 ```
 
 ## Development
