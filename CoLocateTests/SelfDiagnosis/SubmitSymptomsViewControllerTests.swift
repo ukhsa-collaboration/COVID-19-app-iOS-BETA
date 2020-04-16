@@ -44,10 +44,10 @@ class SubmitSymptomsViewControllerTests: TestCase {
         case .patch(let data):
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601
-            let decoded = try decoder.decode(PatchContactEventsRequest.JSONWrapper.self, from: data)
+            let decoded = try decoder.decode([String: [SonarIdUuid]].self, from: data)
             // Can't compare the entire contact events because the timestamp loses precision
             // when JSON encoded and decoded.
-            XCTAssertEqual(decoded.contactEvents.first?.sonarId, contactEvents.first?.sonarId)
+            XCTAssertEqual(decoded["contactEvents"]?.first?.sonarId, contactEvents.first?.sonarId.flatMap { UUID(data: $0) }?.uuidString)
         default:
             XCTFail("Expected a patch request but got \(request.method)")
         }

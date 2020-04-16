@@ -48,6 +48,6 @@ class ContactEventTests: XCTestCase {
 
 }
 
-fileprivate struct SonarIdUuid: Decodable {
+struct SonarIdUuid: Decodable {
     let sonarId: String
 }
