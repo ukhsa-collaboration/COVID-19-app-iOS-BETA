@@ -25,5 +25,9 @@ struct Bash {
         process.waitUntilExit()
         return pipe.fileHandleForReading.readDataToEndOfFile()
     }
+    
+    static func runAndCapture(_ commandParts: String...) throws -> Data {
+        try runAndCapture(commandParts.joined(separator: " "))
+    }
 
 }

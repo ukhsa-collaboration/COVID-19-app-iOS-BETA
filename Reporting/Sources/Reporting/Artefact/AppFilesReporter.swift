@@ -8,9 +8,22 @@ struct AppFilesReporter {
         }
         
         return [
-            embeddedFrameworks(with: &context),
             contentIntegrityChecks(with: &context),
+            linkedLibraries(with: &context),
+            embeddedFrameworks(with: &context),
         ]
+    }
+    
+    private func linkedLibraries(with context: inout FileReporterContext) -> ReportSection {
+        
+        let linkedLibraries = context.findLinkedLibraries()
+        guard !linkedLibraries.isEmpty else {
+            return ReportSection(title: "Linked Libraries", content: "No linked libraries detected.")
+        }
+        
+        let list = ReportList(kind: .unordered, items: linkedLibraries)
+        
+        return ReportSection(title: "Linked Libraries", content: list)
     }
     
     private func embeddedFrameworks(with context: inout FileReporterContext) -> ReportSection {
@@ -19,14 +32,10 @@ struct AppFilesReporter {
         guard !embeddedFrameworks.isEmpty else {
             return ReportSection(title: "Embedded Frameworks", content: "No (non-Apple) frameworks detected.")
         }
-        let table = ReportTable(
-            rows: embeddedFrameworks,
-            columns: [
-                ReportColumnAdapter(title: "Name", makeContent: { $0 }),
-                ]
-        )
         
-        return ReportSection(title: "Embedded Frameworks", content: table)
+        let list = ReportList(kind: .unordered, items: embeddedFrameworks)
+        
+        return ReportSection(title: "Embedded Frameworks", content: list)
     }
     
     private func contentIntegrityChecks(with context: inout FileReporterContext) -> ReportSection {
@@ -76,6 +85,7 @@ private extension CharacterSet {
 
 private struct FileReporterContext {
     var appInfo: AppInfo
+    var appURL: URL
     var filesByPathInBundle: [String: URL]
     
     var unaccountedFilePaths: Set<String>
@@ -87,6 +97,7 @@ private struct FileReporterContext {
         }
         
         self.appInfo = appInfo
+        self.appURL = appURL
         filesByPathInBundle = Dictionary(uniqueKeysWithValues: enumerator
             .lazy
             .map { ($0 as! URL).resolvingSymlinksInPath() }
@@ -221,6 +232,34 @@ extension FileReporterContext {
         }
         
         return frameworkNames.sorted()
+    }
+    
+    mutating func findLinkedLibraries() -> [String] {
+        guard let binaryName = appInfo.value(for: \.bundleExecutable) else {
+            return []
+        }
+        
+        guard
+            let result = try? Bash.runAndCapture("otool", "-L", "'\(appURL.path)/\(binaryName)'"),
+            let string = String(data: result, encoding: .utf8) else {
+            return []
+        }
+        
+        let linkDeclarations = string.components(separatedBy: "\n")
+            .lazy
+            .map { $0.trimmingCharacters(in: .whitespaces) }
+            .filter { !$0.isEmpty }
+            .dropFirst()
+        
+        let pathSpecifiers = linkDeclarations.map { $0.components(separatedBy: " ")[0] }
+        
+        let pathSpecifiersExcludingSwift = pathSpecifiers.filter {
+            !$0.hasPrefix("@rpath/libswift")
+        }
+
+        let libraryNames = pathSpecifiersExcludingSwift.map { $0.components(separatedBy: "/").last! }
+
+        return Array(libraryNames.sorted())
     }
     
     mutating func checkHasNoUnexptectedFilesLeft() -> IntegrityCheck.Result {
