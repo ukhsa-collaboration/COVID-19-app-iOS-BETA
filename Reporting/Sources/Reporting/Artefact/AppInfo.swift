@@ -132,6 +132,7 @@ struct AppInfo: Decodable {
         case sdkName = "DTSDKName"
         case xcode = "DTXcode"
         case xcodeBuild = "DTXcodeBuild"
+        case appStoreToolsBuild = "DTAppStoreToolsBuild"
         case requiresIPhoneOS = "LSRequiresIPhoneOS"
         case launchStoryboardName = "UILaunchStoryboardName"
         case requiredDeviceCapabilities = "UIRequiredDeviceCapabilities"
@@ -165,6 +166,7 @@ struct AppInfo: Decodable {
         static let sdkName = AttributeKey(.sdkName, keyPath: \.sdkName)
         static let xcode = AttributeKey(.xcode, keyPath: \.xcode)
         static let xcodeBuild = AttributeKey(.xcodeBuild, keyPath: \.xcodeBuild)
+        static let appStoreToolsBuild = AttributeKey(.appStoreToolsBuild, keyPath: \.appStoreToolsBuild)
         static let requiresIPhoneOS = AttributeKey(.requiresIPhoneOS, keyPath: \.requiresIPhoneOS)
         static let launchStoryboardName = AttributeKey(.launchStoryboardName, keyPath: \.launchStoryboardName)
         static let requiredBackgroundModes = AttributeKey(.requiredBackgroundModes, keyPath: \.requiredBackgroundModes)
@@ -197,6 +199,7 @@ struct AppInfo: Decodable {
             sdkName,
             xcode,
             xcodeBuild,
+            appStoreToolsBuild,
             requiresIPhoneOS,
             launchStoryboardName,
             requiredDeviceCapabilities,
@@ -258,6 +261,7 @@ struct AppInfo: Decodable {
     var sdkName: Decoded<String>?
     var xcode: Decoded<String>?
     var xcodeBuild: Decoded<String>?
+    var appStoreToolsBuild: Decoded<String>?
     var requiresIPhoneOS: Decoded<Bool>?
     var launchStoryboardName: Decoded<String>?
     var requiredDeviceCapabilities: Decoded<Set<DeviceCapabilities>>?
