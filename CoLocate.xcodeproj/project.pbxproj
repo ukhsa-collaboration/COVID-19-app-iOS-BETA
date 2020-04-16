@@ -251,7 +251,6 @@
 		898FE858243B4FE300210775 /* AuthorizationManaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationManaging.swift; sourceTree = "<group>"; };
 		898FE85F243B5AF700210775 /* UITestScreenMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestScreenMaker.swift; sourceTree = "<group>"; };
 		89BC79EA2434E047002050F8 /* LogsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogsViewController.swift; sourceTree = "<group>"; };
-		89CD851A24475AEB0099774A /* Reporting */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Reporting; path = Reporting; sourceTree = "<group>"; };
 		89F06B2E2434A62C0074C612 /* LoggingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingManager.swift; sourceTree = "<group>"; };
 		89F06B302434AABE0074C612 /* NoOpLogHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoOpLogHandler.swift; sourceTree = "<group>"; };
 		89F06B322434AF130074C612 /* ForwardingLogHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForwardingLogHandler.swift; sourceTree = "<group>"; };
@@ -550,7 +549,6 @@
 				214209C02422276800C7BFF3 /* CoLocateTests */,
 				895D9DDF2437383300573D4D /* CoLocateUITests */,
 				898BA15A2435E26C00EBD35D /* Configurations */,
-				89CD851A24475AEB0099774A /* Reporting */,
 				6FC63C2E241641B8007C8BF3 /* Products */,
 				21B3D2E62429115600573061 /* Frameworks */,
 			);
