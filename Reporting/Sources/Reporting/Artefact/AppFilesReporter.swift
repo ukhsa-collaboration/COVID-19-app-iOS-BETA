@@ -8,16 +8,16 @@ struct AppFilesReporter {
         }
         
         return [
-            frameworks(with: &context),
+            embeddedFrameworks(with: &context),
             contentIntegrityChecks(with: &context),
         ]
     }
     
-    private func frameworks(with context: inout FileReporterContext) -> ReportSection {
+    private func embeddedFrameworks(with context: inout FileReporterContext) -> ReportSection {
         
         let embeddedFrameworks = context.findEmbeddedFrameworks()
         guard !embeddedFrameworks.isEmpty else {
-            return ReportSection(title: "Frameworks", content: "No (non-Apple) frameworks detected.")
+            return ReportSection(title: "Embedded Frameworks", content: "No (non-Apple) frameworks detected.")
         }
         let table = ReportTable(
             rows: embeddedFrameworks,
@@ -26,7 +26,7 @@ struct AppFilesReporter {
                 ]
         )
         
-        return ReportSection(title: "Frameworks", content: table)
+        return ReportSection(title: "Embedded Frameworks", content: table)
     }
     
     private func contentIntegrityChecks(with context: inout FileReporterContext) -> ReportSection {
