@@ -61,7 +61,7 @@ class PlistPersisterTests: XCTestCase {
         XCTAssertEqual(persister.items.count, 3)
     }
     
-    func testRemovesItemsOlderThan28DaysOnUpdate() {
+    func testRemovesItemsSpecifiedInUpdate() {
         persister.items["item1"] = item1
         persister.items["item2"] = item2
         persister.items["item3"] = item3

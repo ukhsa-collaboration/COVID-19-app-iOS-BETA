@@ -72,7 +72,23 @@ class PersistingContactEventRepositoryTests: XCTestCase {
         
         XCTAssertEqual(repository.contactEvents.count, 0)
     }
-
+    
+    func testUpdatesWithItemsMoreRecentThan28Days() {
+        repository.btleListener(listener, didFind: sonarId2, forPeripheral: peripheral2)
+        repository.btleListener(listener, didFind: sonarId3, forPeripheral: peripheral3)
+        
+        persister.items[peripheral1.identifier] = ContactEvent(
+            sonarId: sonarId1,
+            timestamp: Date(timeIntervalSinceNow: -2419300),
+            rssiValues: [],
+            rssiIntervals: [],
+            duration: 0
+        )
+        
+        repository.update()
+        XCTAssertEqual(persister.updateCount, 2)
+    }
+    
 }
 
 fileprivate struct TestPeripheral: BTLEPeripheral {

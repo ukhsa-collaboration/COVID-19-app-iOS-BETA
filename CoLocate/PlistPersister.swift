@@ -50,6 +50,7 @@ class PlistPersister<K: Hashable & Codable, V: Codable> {
     }
     
     func update(items: [K: V]) {
+        clear()
         self.items = items
     }
 

@@ -45,7 +45,16 @@ extension PlistPersister: ContactEventPersister where K == UUID, V == ContactEve
     }
     
     func update() {
+        var copy = persister.items
+        let expiryDate = Date(timeIntervalSinceNow: -2419200)
         
+        persister.items.forEach({uuid, contactEvents in
+            if contactEvents.timestamp < expiryDate {
+                copy.removeValue(forKey: uuid)
+            }
+        })
+        
+        persister.update(items: copy)
     }
     
     func btleListener(_ listener: BTLEListener, didFind sonarId: Data, forPeripheral peripheral: BTLEPeripheral) {
