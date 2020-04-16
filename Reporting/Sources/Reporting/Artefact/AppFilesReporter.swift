@@ -15,8 +15,12 @@ struct AppFilesReporter {
     
     private func frameworks(with context: inout FileReporterContext) -> ReportSection {
         
+        let embeddedFrameworks = context.findEmbeddedFrameworks()
+        guard !embeddedFrameworks.isEmpty else {
+            return ReportSection(title: "Frameworks", content: "No (non-Apple) frameworks detected.")
+        }
         let table = ReportTable(
-            rows: context.findEmbeddedFrameworks(),
+            rows: embeddedFrameworks,
             columns: [
                 ReportColumnAdapter(title: "Name", makeContent: { $0 }),
                 ]
