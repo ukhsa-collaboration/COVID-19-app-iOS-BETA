@@ -52,9 +52,9 @@ class BroadcastIdEncypterTests: XCTestCase {
         let encryptedId = encrypter.broadcastId(for: knownDate, until: laterDate)
 
         // the first 64 bytes are the epheraml public key used for encryption
-        // followed by 24 bytes for our ciphertext
+        // followed by 26 bytes for our ciphertext
         // and finally 16 bytes that is the gcm tag
-        XCTAssertEqual(104, encryptedId.count)
+        XCTAssertEqual(106, encryptedId.count)
     }
 
     func test_generates_uuids_of_correct_size() {
@@ -96,10 +96,12 @@ class BroadcastIdEncypterTests: XCTestCase {
         let startDate = clearText!.subdata(in: 0..<4)
         let endDate   = clearText!.subdata(in: 4..<8)
         let uuidBytes = clearText!.subdata(in: 8..<24)
+        let country   = clearText!.subdata(in: 24..<26)
 
         XCTAssertEqual(1585699200, asInt(startDate))
         XCTAssertEqual(1585785600, asInt(endDate))
         XCTAssertEqual("E1D160C7-F6E8-48BC-8687-63C696D910CB", asUUIDString(uuidBytes))
+        XCTAssertEqual(826, asInt(country)) // iso 3166 country code for UK
     }
 
     func test_generates_the_same_result_for_the_same_inputs() {

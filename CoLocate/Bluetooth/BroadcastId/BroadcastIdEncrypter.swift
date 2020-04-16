@@ -20,7 +20,7 @@ class BroadcastIdEncrypter {
 
     static var broadcastIdLength: Int {
         if Persistence.shared.enableNewKeyRotation {
-            return 104
+            return 106
         } else {
             return 16
         }
@@ -52,16 +52,19 @@ class BroadcastIdEncrypter {
         let firstPart = bytesFrom(startDate)
         let secondPart = bytesFrom(endDate)
         let thirdPart = bytesFromSonarId()
+        let fourthPart = bytesFromCountryCode()
 
         assert(firstPart.count == 4)
         assert(secondPart.count == 4)
         assert(thirdPart.count == 16)
+        assert(fourthPart.count == 2)
 
-        var plainTextData = Data(capacity: 24)
+        var plainTextData = Data(capacity: 26)
 
         plainTextData.append(firstPart)
         plainTextData.append(secondPart)
         plainTextData.append(thirdPart)
+        plainTextData.append(fourthPart)
 
         var error: Unmanaged<CFError>?
         let cipherText = SecKeyCreateEncryptedData(serverPublicKey,
@@ -98,6 +101,13 @@ class BroadcastIdEncrypter {
         var mutableSonarUUUID = sonarId
         return withUnsafePointer(to: &mutableSonarUUUID) {
             Data(bytes: $0, count: MemoryLayout.size(ofValue: sonarId))
+        }
+    }
+
+    func bytesFromCountryCode() -> Data {
+        var mutableCountryCode = 826
+        return withUnsafePointer(to: &mutableCountryCode) {
+            Data(bytes: $0, count: 2)
         }
     }
 }
