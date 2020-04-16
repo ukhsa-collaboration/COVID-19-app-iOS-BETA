@@ -40,7 +40,7 @@ jobs:
           SLACK_BOT_TOKEN: ${{ secrets.slack_bot_token }}
         uses: voxmedia/github-action-slack-notify-build@v1
         with:
-          channel_id: G010M35PZCM
+          channel_id: G011ZPSAD4J
           status: FAILED
           color: danger
 
@@ -107,7 +107,7 @@ jobs:
           SLACK_BOT_TOKEN: ${{ secrets.slack_bot_token }}
         uses: voxmedia/github-action-slack-notify-build@v1
         with:
-          channel_id: G010M35PZCM
+          channel_id: G011ZPSAD4J
           status: UPLOADED [${{ github.event.deployment.environment}} (${{ steps.get-build-number.outputs.build-number }})]
 
       - name: Notify Slack on Failure
@@ -116,6 +116,6 @@ jobs:
           SLACK_BOT_TOKEN: ${{ secrets.slack_bot_token }}
         uses: voxmedia/github-action-slack-notify-build@v1
         with:
-          channel_id: G010M35PZCM
+          channel_id: G011ZPSAD4J
           status: FAILED
           color: danger
