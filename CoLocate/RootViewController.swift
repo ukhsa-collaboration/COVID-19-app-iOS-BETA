@@ -54,6 +54,7 @@ class RootViewController: UIViewController {
         )
         
         notificationCenter.addObserver(self, selector: #selector(applicationDidBecomeActive(_:)), name: UIApplication.didBecomeActiveNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(timeHasSignificantlyChanged(_:)), name: UIApplication.significantTimeChangeNotification, object: nil)
 
         remoteNotificationManager.dispatcher.registerHandler(forType: .potentialDisagnosis) { (userInfo, completionHandler) in
             persistence.potentiallyExposed = true
@@ -109,6 +110,10 @@ class RootViewController: UIViewController {
             }
         }
 
+    }
+    
+    @objc func timeHasSignificantlyChanged(_ notification: NSNotification) {
+        contactEventRepository.update()
     }
     
     // MARK: - Debug view controller management

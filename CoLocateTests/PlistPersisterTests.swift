@@ -60,7 +60,16 @@ class PlistPersisterTests: XCTestCase {
         persister = PlistPersister<String, Sample>(fileName: "samples")
         XCTAssertEqual(persister.items.count, 3)
     }
+    
+    func testRemovesItemsOlderThan28DaysOnUpdate() {
+        persister.items["item1"] = item1
+        persister.items["item2"] = item2
+        persister.items["item3"] = item3
 
+        XCTAssertEqual(persister.items.count, 3)
+        persister.update(items: ["item1": item1, "item2": item2])
+        XCTAssertEqual(persister.items.count, 2)
+    }
 }
 
 struct Sample: Codable, Equatable {

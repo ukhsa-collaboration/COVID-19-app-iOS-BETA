@@ -12,11 +12,13 @@ import Logging
 protocol ContactEventRepository {
     var contactEvents: [ContactEvent] { get }
     func reset()
+    func update()
 }
 
 protocol ContactEventPersister {
     var items: [UUID: ContactEvent] { get set }
     func reset()
+    func update(items: [UUID: ContactEvent])
 }
 
 extension PlistPersister: ContactEventPersister where K == UUID, V == ContactEvent {
@@ -40,6 +42,10 @@ extension PlistPersister: ContactEventPersister where K == UUID, V == ContactEve
     
     func reset() {
         persister.reset()
+    }
+    
+    func update() {
+        
     }
     
     func btleListener(_ listener: BTLEListener, didFind sonarId: Data, forPeripheral peripheral: BTLEPeripheral) {

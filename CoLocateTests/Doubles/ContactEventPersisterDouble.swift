@@ -17,4 +17,7 @@ class ContactEventPersisterDouble: ContactEventPersister {
         items = [:]
     }
     
+    func update(items: [UUID: ContactEvent]) {
+        
+    }
 }

@@ -10,9 +10,14 @@ import Foundation
 @testable import CoLocate
 
 class ContactEventRepositoryDouble: ContactEventRepository {
+    
     var contactEvents: [ContactEvent] = []
     
     func reset() {
         contactEvents = []
+    }
+    
+    func update() {
+        
     }
 }

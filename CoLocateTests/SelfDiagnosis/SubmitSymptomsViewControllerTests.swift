@@ -261,6 +261,7 @@ fileprivate class SelfDiagnosisUnwinder: UIViewController {
 }
 
 fileprivate class MockContactEventRepository: ContactEventRepository {
+    
     var contactEvents: [ContactEvent] = []
     var hasReset: Bool = false
     
@@ -270,5 +271,9 @@ fileprivate class MockContactEventRepository: ContactEventRepository {
     
     func reset() {
         hasReset = true
+    }
+    
+    func update() {
+        
     }
 }

@@ -33,8 +33,7 @@ class PlistPersister<K: Hashable & Codable, V: Codable> {
         readItems()
     }
     
-    func reset() {
-        items = [:]
+    func clear() {
         do {
             try FileManager.default.removeItem(at: fileURL)
         } catch (let error as NSError) where error.code == NSFileNoSuchFileError {
@@ -43,6 +42,15 @@ class PlistPersister<K: Hashable & Codable, V: Codable> {
             logger.critical("error removing file at '\(fileURL)': \(error)")
             fatalError()
         }
+    }
+    
+    func reset() {
+        items = [:]
+        clear()
+    }
+    
+    func update(items: [K: V]) {
+        self.items = items
     }
 
     private func readItems() {
