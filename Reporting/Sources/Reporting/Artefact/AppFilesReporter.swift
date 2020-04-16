@@ -111,6 +111,11 @@ private struct FileReporterContext {
             let isTest = $0.hasPrefix("PlugIns/") && $0.contains(".xctest")
             return !isTest
         }
+        
+        unaccountedFilePaths = unaccountedFilePaths.filter {
+            let isLocalizationFolder = $0.range(of: "^\\w+.lproj$", options: .regularExpression, range: nil, locale: nil) != nil
+            return !isLocalizationFolder
+        }
     }
     
 }
