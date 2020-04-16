@@ -101,17 +101,13 @@
 		F67A2293242AA370002254B6 /* SecureRegistrationStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */; };
 		F67C5154243E4D2F008E2945 /* AnswerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67C5153243E4D2F008E2945 /* AnswerButton.swift */; };
 		F67C5159243E7C1E008E2945 /* SubmitSymptomsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67C5158243E7C1E008E2945 /* SubmitSymptomsViewControllerTests.swift */; };
-		F68B89EA243B9FDC00F369A9 /* CoLocate.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F68B89E9243B9FDB00F369A9 /* CoLocate.xcconfig */; };
 		F68B89ED243CFF2600F369A9 /* SelfDiagnosis.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F68B89EC243CFF2600F369A9 /* SelfDiagnosis.storyboard */; };
 		F68B89EF243D01FA00F369A9 /* SelfDiagnosisNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68B89EE243D01FA00F369A9 /* SelfDiagnosisNavigationController.swift */; };
 		F68B89F4243D050700F369A9 /* TemperatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68B89F3243D050700F369A9 /* TemperatureViewController.swift */; };
 		F68BFBF7242ACD17008EE68F /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68BFBF6242ACD17008EE68F /* TestHelpers.swift */; };
 		F68D8FE024476B55008BAAAA /* GoogleService-Info.internal.plist in Resources */ = {isa = PBXBuildFile; fileRef = F68D8FDF24476B55008BAAAA /* GoogleService-Info.internal.plist */; };
-		F68D8FE624477031008BAAAA /* production.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F68D8FE424477031008BAAAA /* production.xcconfig */; };
-		F68D8FE724477031008BAAAA /* internal.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F68D8FE524477031008BAAAA /* internal.xcconfig */; };
 		F6AB2F1E243D324400386D6B /* CoughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AB2F1D243D324400386D6B /* CoughViewController.swift */; };
 		F6AB2F20243D359F00386D6B /* SubmitSymptomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */; };
-		F6CA2819242E41F700F8DC55 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = F6CA2818242E41F700F8DC55 /* README.md */; };
 		F6CC2CA9242BC7FC0079432B /* RemoteNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CC2CA8242BC7FC0079432B /* RemoteNotificationManager.swift */; };
 		F6CC2CAC242BCD0D0079432B /* RemoteNotificationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CC2CAB242BCD0D0079432B /* RemoteNotificationManagerTests.swift */; };
 		F6F05A242433BEC000FF4B72 /* OnboardingCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F05A232433BEC000FF4B72 /* OnboardingCoordinatorTests.swift */; };
@@ -938,15 +934,11 @@
 			files = (
 				F758B8C4242CC0EE003AE16D /* Status.storyboard in Resources */,
 				6FC63C3B241641BA007C8BF3 /* LaunchScreen.storyboard in Resources */,
-				F68D8FE724477031008BAAAA /* internal.xcconfig in Resources */,
 				AEC6A7BE241BD82900B0237A /* LogoStrapline.xib in Resources */,
 				A1E7A0592420028B0078174D /* NHS Colors.xcassets in Resources */,
 				F758B8BE242CB856003AE16D /* Localizable.strings in Resources */,
-				F68B89EA243B9FDC00F369A9 /* CoLocate.xcconfig in Resources */,
 				6FC63C38241641BA007C8BF3 /* Assets.xcassets in Resources */,
 				F68D8FE024476B55008BAAAA /* GoogleService-Info.internal.plist in Resources */,
-				F6CA2819242E41F700F8DC55 /* README.md in Resources */,
-				F68D8FE624477031008BAAAA /* production.xcconfig in Resources */,
 				895D9E462437458700573D4D /* AppIcon.xcassets in Resources */,
 				F68B89ED243CFF2600F369A9 /* SelfDiagnosis.storyboard in Resources */,
 				F6F05A322434310200FF4B72 /* Onboarding.storyboard in Resources */,
