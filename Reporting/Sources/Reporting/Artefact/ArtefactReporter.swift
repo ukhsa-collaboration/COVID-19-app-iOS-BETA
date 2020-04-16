@@ -1,40 +1,14 @@
 import Foundation
-import ArgumentParser
 
-struct ArtefactReporter: ParsableCommand {
-    @Option(help: "Path to the archive to make a report for.")
-    var archive: String
+struct ArtefactReporter {
     
-    @Option(help: "Path to use for the output.")
-    var output: String
+    var appURL: URL
+    
+    var reportFolder: URL
 
     func run() throws {
-        let fileManager = FileManager()
-        
-        let currentDirectory = URL(fileURLWithPath: fileManager.currentDirectoryPath)
-        let reportFolder = URL(fileURLWithPath: output, relativeTo: currentDirectory)
-        
-        try fileManager.createDirectory(at: reportFolder, withIntermediateDirectories: true, attributes: nil)
-        
-        let report = try self.report(for: findApplication())
+        let report = try self.report(for: appURL)
         try report.save(to: reportFolder)
-    }
-    
-    private func findApplication() throws -> URL {
-        let fileManager = FileManager()
-        
-        let currentDirectory = URL(fileURLWithPath: fileManager.currentDirectoryPath)
-        let archiveFolder = URL(fileURLWithPath: archive, relativeTo: currentDirectory)
-
-        let applicationsFolder = archiveFolder
-            .appendingPathComponent("Products")
-            .appendingPathComponent("Applications")
-        
-        guard let app = try fileManager.contentsOfDirectory(atPath: applicationsFolder.path).first(where: { $0.hasSuffix(".app") }) else {
-            throw CustomError("Could not find an app in archive \(archiveFolder)")
-        }
-        
-        return applicationsFolder.appendingPathComponent(app)
     }
     
     private func report(for appURL: URL) throws -> Report {
