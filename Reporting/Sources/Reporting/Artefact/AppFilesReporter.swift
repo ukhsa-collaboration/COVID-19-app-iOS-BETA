@@ -233,11 +233,28 @@ extension FileReporterContext {
         switch asset {
         case .storyboard(let name):
             return checkForStoryboard(named: name)
+        case .nib(let name):
+            return checkForNib(named: name)
         }
     }
     
     private mutating func checkForStoryboard(named name: String) -> Bool {
         let fileName = "\(name).storyboardc"
+        guard let localizedFileName = localizedFile(named: fileName) else {
+            return false
+        }
+        
+        let localizedFolderName = "\(localizedFileName)/"
+        unaccountedFilePaths.remove(localizedFileName)
+        unaccountedFilePaths = unaccountedFilePaths.filter {
+            !$0.hasPrefix(localizedFolderName)
+        }
+        
+        return true
+    }
+    
+    private mutating func checkForNib(named name: String) -> Bool {
+        let fileName = "\(name).nib"
         guard let localizedFileName = localizedFile(named: fileName) else {
             return false
         }

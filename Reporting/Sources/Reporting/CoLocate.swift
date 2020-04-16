@@ -13,5 +13,6 @@ struct CoLocate {
         .storyboard("Onboarding"),
         .storyboard("SelfDiagnosis"),
         .storyboard("Status"),
+        .nib("LogoStrapline"),
     ]
 }
