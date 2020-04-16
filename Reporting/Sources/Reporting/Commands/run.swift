@@ -11,6 +11,7 @@ struct ReportCommand: ParsableCommand {
         abstract: "A tool for producing reports from iOS app bundles.",
         subcommands: [
             ArchiveReportCommand.self,
+            IPAReportCommand.self,
         ]
     )
     
