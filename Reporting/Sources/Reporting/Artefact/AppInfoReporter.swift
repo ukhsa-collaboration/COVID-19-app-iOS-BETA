@@ -75,6 +75,7 @@ private extension AppInfo {
             DisplayAttribute(displayName: "Required background modes", key: \.requiredBackgroundModes) {
                 $0.lazy.map { $0.rawValue }.sorted().joined(separator: ", ")
             },
+            DisplayAttribute(displayName: "Bluetooth Usage Description", key: \.bluetoothAlwaysUsageDescription)
             ]
 
         let table = ReportTable(

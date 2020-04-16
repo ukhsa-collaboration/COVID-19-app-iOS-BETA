@@ -138,6 +138,8 @@ struct AppInfo: Decodable {
         case requiredBackgroundModes = "UIBackgroundModes"
         case supportedInterfaceOrientations = "UISupportedInterfaceOrientations"
         case supportedInterfaceOrientationsForIpad = "UISupportedInterfaceOrientations~ipad"
+        case bluetoothAlwaysUsageDescription = "NSBluetoothAlwaysUsageDescription"
+        case bluetoothPeripheralUsageDescription = "NSBluetoothPeripheralUsageDescription"
     }
     
     struct Attributes {
@@ -169,7 +171,9 @@ struct AppInfo: Decodable {
         static let requiredDeviceCapabilities = AttributeKey(.requiredDeviceCapabilities, keyPath: \.requiredDeviceCapabilities)
         static let supportedInterfaceOrientations = AttributeKey(.supportedInterfaceOrientations, keyPath: \.supportedInterfaceOrientations)
         static let supportedInterfaceOrientationsForIpad = AttributeKey(.supportedInterfaceOrientationsForIpad, keyPath: \.supportedInterfaceOrientationsForIpad)
-        
+        static let bluetoothAlwaysUsageDescription = AttributeKey(.bluetoothAlwaysUsageDescription, keyPath: \.bluetoothAlwaysUsageDescription)
+        static let bluetoothPeripheralUsageDescription = AttributeKey(.bluetoothPeripheralUsageDescription, keyPath: \.bluetoothPeripheralUsageDescription)
+
         static let allCases: [Key] = [
             bundleName,
             version,
@@ -199,6 +203,8 @@ struct AppInfo: Decodable {
             requiredBackgroundModes,
             supportedInterfaceOrientations,
             supportedInterfaceOrientationsForIpad,
+            bluetoothAlwaysUsageDescription,
+            bluetoothPeripheralUsageDescription,
         ]
         
         fileprivate static let knownKeyRawValues = Set(allCases.map { $0.rawValue })
@@ -258,7 +264,9 @@ struct AppInfo: Decodable {
     var requiredBackgroundModes: Decoded<Set<BackgroundModes>>?
     var supportedInterfaceOrientations: Decoded<Set<InterfaceOrientation>>?
     var supportedInterfaceOrientationsForIpad: Decoded<Set<InterfaceOrientation>>?
-    
+    var bluetoothAlwaysUsageDescription: Decoded<String>?
+    var bluetoothPeripheralUsageDescription: Decoded<String>?
+
     var unknownKeys: Set<String>
     
     init(from decoder: Decoder) throws {
