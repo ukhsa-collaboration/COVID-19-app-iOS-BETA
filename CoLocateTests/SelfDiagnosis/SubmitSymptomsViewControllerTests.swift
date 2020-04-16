@@ -14,45 +14,44 @@ class SubmitSymptomsViewControllerTests: TestCase {
     func testNotRegistered() throws {
         throw XCTSkip("TODO: write this test")
     }
-    
-    
-     func testSubmitTapped() throws {
-         let registration = Registration(id: UUID(uuidString: "FA817D5C-C615-4ABE-83B5-ABDEE8FAB8A6")!, secretKey: Data())
-         let contactEvents = [ContactEvent(sonarId: "a sonar id".data(using: .utf8))]
-         let session = SessionDouble()
-     
-         let vc = SubmitSymptomsViewController.instantiate()
-         vc.inject(
-             persistence:  PersistenceDouble(registration: registration),
-             contactEventRepository: MockContactEventRepository(contactEvents: contactEvents),
-             session: session,
-             hasHighTemperature: false,
-             hasNewCough: true
-         )
-         XCTAssertNotNil(vc.view)
 
-         let button = PrimaryButton()
-         vc.submitTapped(button)
-         
-         guard let request = session.requestSent as? PatchContactEventsRequest else {
-             XCTFail("Expected a PatchContactEventsRequest but got \(String(describing: session.requestSent))")
-             return
-         }
-         
-         XCTAssertEqual(request.path, "/api/residents/FA817D5C-C615-4ABE-83B5-ABDEE8FAB8A6")
-         
-         switch request.method {
-         case .patch(let data):
-             let decoder = JSONDecoder()
-             decoder.dateDecodingStrategy = .iso8601
-             let decoded = try decoder.decode(PatchContactEventsRequest.JSONWrapper.self, from: data)
-             // Can't compare the entire contact events because the timestamp loses precision
-             // when JSON encoded and decoded.
-             XCTAssertEqual(decoded.contactEvents.first?.sonarId, contactEvents.first?.sonarId)
-         default:
-             XCTFail("Expected a patch request but got \(request.method)")
-         }
-     }
+    func testSubmitTapped() throws {
+        let registration = Registration(id: UUID(uuidString: "FA817D5C-C615-4ABE-83B5-ABDEE8FAB8A6")!, secretKey: Data())
+        let contactEvents = [ContactEvent(sonarId: UUID().data)]
+        let session = SessionDouble()
+
+        let vc = SubmitSymptomsViewController.instantiate()
+        vc.inject(
+            persistence:  PersistenceDouble(registration: registration),
+            contactEventRepository: MockContactEventRepository(contactEvents: contactEvents),
+            session: session,
+            hasHighTemperature: false,
+            hasNewCough: true
+        )
+        XCTAssertNotNil(vc.view)
+
+        let button = PrimaryButton()
+        vc.submitTapped(button)
+
+        guard let request = session.requestSent as? PatchContactEventsRequest else {
+            XCTFail("Expected a PatchContactEventsRequest but got \(String(describing: session.requestSent))")
+            return
+        }
+
+        XCTAssertEqual(request.path, "/api/residents/FA817D5C-C615-4ABE-83B5-ABDEE8FAB8A6")
+
+        switch request.method {
+        case .patch(let data):
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .iso8601
+            let decoded = try decoder.decode(PatchContactEventsRequest.JSONWrapper.self, from: data)
+            // Can't compare the entire contact events because the timestamp loses precision
+            // when JSON encoded and decoded.
+            XCTAssertEqual(decoded.contactEvents.first?.sonarId, contactEvents.first?.sonarId)
+        default:
+            XCTFail("Expected a patch request but got \(request.method)")
+        }
+    }
     
     func testPreventsDoubleSubmission() {
         let registration = Registration(id: UUID(uuidString: "FA817D5C-C615-4ABE-83B5-ABDEE8FAB8A6")!, secretKey: Data())

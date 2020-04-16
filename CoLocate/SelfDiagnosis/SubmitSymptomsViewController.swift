@@ -58,7 +58,17 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         persistence.selfDiagnosis = .infected
         
         let requestFactory = ConcreteSecureRequestFactory(registration: registration)
-        let request = requestFactory.patchContactsRequest(contactEvents: contactEventRepository.contactEvents)
+
+        let contactEvents = contactEventRepository.contactEvents.filter { contactEvent in
+            let uuid = contactEvent.sonarId.flatMap { UUID(data: $0) }
+            if Persistence.shared.enableNewKeyRotation {
+                return uuid == nil
+            } else {
+                return uuid != nil
+            }
+        }
+
+        let request = requestFactory.patchContactsRequest(contactEvents: contactEvents)
         session.execute(request, queue: .main) { [weak self] result in
             guard let self = self else { return }
             
