@@ -269,7 +269,7 @@ extension FileReporterContext {
     }
     
     private func localizedFile(named name: String) -> String? {
-        let regex = "\\w+.lproj/\(name)"
+        let regex = "^\\w+.lproj/\(name)$"
         return filesByPathInBundle.keys.first { file in
             if file == name { return true }
             return file.range(of: regex, options: .regularExpression, range: nil, locale: nil) != nil
