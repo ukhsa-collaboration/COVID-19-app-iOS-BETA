@@ -8,4 +8,10 @@ struct CoLocate {
         CompilerCompilationRequirement.clang1,
         PlatformCompilationRequirement.iOSDevice,
     ]
+    
+    static let knownAssets: [Asset] = [
+        .storyboard("Onboarding"),
+        .storyboard("SelfDiagnosis"),
+        .storyboard("Status"),
+    ]
 }

@@ -179,15 +179,8 @@ extension FileReporterContext {
             return .failed(message: "No launch storyboard name specified.")
         }
         
-        let fileName = "\(launchStoryboardName).storyboardc"
-        guard let localizedFileName = localizedFile(named: fileName) else {
+        guard checkForStoryboard(named: launchStoryboardName) else {
             return .failed(message: "Expected app to have launch storyboard named `\(launchStoryboardName)`.")
-        }
-        
-        let localizedFolderName = "\(localizedFileName)/"
-        unaccountedFilePaths.remove(localizedFileName)
-        unaccountedFilePaths = unaccountedFilePaths.filter {
-            !$0.hasPrefix(localizedFolderName)
         }
         
         return .passed
@@ -221,7 +214,11 @@ extension FileReporterContext {
         return frameworkNames.sorted()
     }
     
-    func checkHasNoUnexptectedFilesLeft() -> IntegrityCheck.Result {
+    mutating func checkHasNoUnexptectedFilesLeft() -> IntegrityCheck.Result {
+        for asset in CoLocate.knownAssets {
+            _ = check(for: asset)
+        }
+        
         if unaccountedFilePaths.isEmpty {
             return .passed
         } else {
@@ -230,6 +227,28 @@ extension FileReporterContext {
                 items: unaccountedFilePaths.sorted().map { "`\($0)`" })
             return .failed(message: "Found unexpected files: \(list.markdownBody)")
         }
+    }
+    
+    private mutating func check(for asset: Asset) -> Bool {
+        switch asset {
+        case .storyboard(let name):
+            return checkForStoryboard(named: name)
+        }
+    }
+    
+    private mutating func checkForStoryboard(named name: String) -> Bool {
+        let fileName = "\(name).storyboardc"
+        guard let localizedFileName = localizedFile(named: fileName) else {
+            return false
+        }
+        
+        let localizedFolderName = "\(localizedFileName)/"
+        unaccountedFilePaths.remove(localizedFileName)
+        unaccountedFilePaths = unaccountedFilePaths.filter {
+            !$0.hasPrefix(localizedFolderName)
+        }
+        
+        return true
     }
     
     private func localizedFile(named name: String) -> String? {
