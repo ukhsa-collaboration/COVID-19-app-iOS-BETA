@@ -100,9 +100,6 @@
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pi4-yz-lrD" userLabel="Spacer">
                                                 <rect key="frame" x="20" y="377" width="374" height="63.5"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="16" id="1FD-ut-bKn"/>
-                                                </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jG0-JS-mYk" userLabel="Continue" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
                                                 <rect key="frame" x="20" y="440.5" width="374" height="30"/>
@@ -248,9 +245,6 @@
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mxc-P6-dNX" userLabel="Spacer">
                                                 <rect key="frame" x="20" y="377" width="374" height="50"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="16" id="OUL-vh-xbL"/>
-                                                </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kub-if-PMI" userLabel="Continue" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
                                                 <rect key="frame" x="20" y="427" width="374" height="30"/>
