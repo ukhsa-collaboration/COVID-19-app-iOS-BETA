@@ -72,6 +72,9 @@ private extension AppInfo {
             DisplayAttribute(displayName: "Required device capabilities", key: \.requiredDeviceCapabilities) {
                 $0.lazy.map { $0.rawValue }.sorted().joined(separator: ", ")
             },
+            DisplayAttribute(displayName: "Required background modes", key: \.requiredBackgroundModes) {
+                $0.lazy.map { $0.rawValue }.sorted().joined(separator: ", ")
+            },
             ]
 
         let table = ReportTable(

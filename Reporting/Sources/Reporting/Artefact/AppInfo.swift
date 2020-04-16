@@ -44,6 +44,18 @@ struct AppInfo: Decodable {
         case wifi
     }
     
+    enum BackgroundModes: String, Codable {
+        case audio
+        case location
+        case voip
+        case fetch
+        case remoteNotification = "remote-notification"
+        case newsstandContent = "newsstand-content"
+        case externalAccessory = "external-accessory"
+        case bluetoothCentral = "bluetooth-central"
+        case bluetoothPeripheral = "bluetooth-peripheral"
+    }
+    
     enum InterfaceOrientation: String, Codable, CaseIterable {
         case portrait = "UIInterfaceOrientationPortrait"
         case portraitUpsideDown = "UIInterfaceOrientationPortraitUpsideDown"
@@ -123,6 +135,7 @@ struct AppInfo: Decodable {
         case requiresIPhoneOS = "LSRequiresIPhoneOS"
         case launchStoryboardName = "UILaunchStoryboardName"
         case requiredDeviceCapabilities = "UIRequiredDeviceCapabilities"
+        case requiredBackgroundModes = "UIBackgroundModes"
         case supportedInterfaceOrientations = "UISupportedInterfaceOrientations"
         case supportedInterfaceOrientationsForIpad = "UISupportedInterfaceOrientations~ipad"
     }
@@ -152,6 +165,7 @@ struct AppInfo: Decodable {
         static let xcodeBuild = AttributeKey(.xcodeBuild, keyPath: \.xcodeBuild)
         static let requiresIPhoneOS = AttributeKey(.requiresIPhoneOS, keyPath: \.requiresIPhoneOS)
         static let launchStoryboardName = AttributeKey(.launchStoryboardName, keyPath: \.launchStoryboardName)
+        static let requiredBackgroundModes = AttributeKey(.requiredBackgroundModes, keyPath: \.requiredBackgroundModes)
         static let requiredDeviceCapabilities = AttributeKey(.requiredDeviceCapabilities, keyPath: \.requiredDeviceCapabilities)
         static let supportedInterfaceOrientations = AttributeKey(.supportedInterfaceOrientations, keyPath: \.supportedInterfaceOrientations)
         static let supportedInterfaceOrientationsForIpad = AttributeKey(.supportedInterfaceOrientationsForIpad, keyPath: \.supportedInterfaceOrientationsForIpad)
@@ -182,6 +196,7 @@ struct AppInfo: Decodable {
             requiresIPhoneOS,
             launchStoryboardName,
             requiredDeviceCapabilities,
+            requiredBackgroundModes,
             supportedInterfaceOrientations,
             supportedInterfaceOrientationsForIpad,
         ]
@@ -240,6 +255,7 @@ struct AppInfo: Decodable {
     var requiresIPhoneOS: Decoded<Bool>?
     var launchStoryboardName: Decoded<String>?
     var requiredDeviceCapabilities: Decoded<Set<DeviceCapabilities>>?
+    var requiredBackgroundModes: Decoded<Set<BackgroundModes>>?
     var supportedInterfaceOrientations: Decoded<Set<InterfaceOrientation>>?
     var supportedInterfaceOrientationsForIpad: Decoded<Set<InterfaceOrientation>>?
     
