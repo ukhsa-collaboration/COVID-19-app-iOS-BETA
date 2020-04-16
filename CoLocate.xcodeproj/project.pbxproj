@@ -97,6 +97,7 @@
 		F63279272435219A00CF7A42 /* QueueDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63279262435219A00CF7A42 /* QueueDouble.swift */; };
 		F632792A2435323200CF7A42 /* PermissionsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63279292435323200CF7A42 /* PermissionsViewControllerTests.swift */; };
 		F636453B243687DE0014FD54 /* PermissionsDeniedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F636453A243687DE0014FD54 /* PermissionsDeniedViewController.swift */; };
+		F652F7242449138900D97950 /* SetDiagnosisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652F7232449138900D97950 /* SetDiagnosisViewController.swift */; };
 		F67A2291242AA35C002254B6 /* SecureRegistrationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A2290242AA35B002254B6 /* SecureRegistrationStorage.swift */; };
 		F67A2293242AA370002254B6 /* SecureRegistrationStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */; };
 		F67C5154243E4D2F008E2945 /* AnswerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67C5153243E4D2F008E2945 /* AnswerButton.swift */; };
@@ -267,6 +268,7 @@
 		F63279262435219A00CF7A42 /* QueueDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueDouble.swift; sourceTree = "<group>"; };
 		F63279292435323200CF7A42 /* PermissionsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsViewControllerTests.swift; sourceTree = "<group>"; };
 		F636453A243687DE0014FD54 /* PermissionsDeniedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsDeniedViewController.swift; sourceTree = "<group>"; };
+		F652F7232449138900D97950 /* SetDiagnosisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDiagnosisViewController.swift; sourceTree = "<group>"; };
 		F67A2290242AA35B002254B6 /* SecureRegistrationStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRegistrationStorage.swift; sourceTree = "<group>"; };
 		F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRegistrationStorageTests.swift; sourceTree = "<group>"; };
 		F67C5153243E4D2F008E2945 /* AnswerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerButton.swift; sourceTree = "<group>"; };
@@ -384,10 +386,11 @@
 			isa = PBXGroup;
 			children = (
 				098ED480242E745F0029B729 /* Debug.storyboard */,
+				2115C3E524360427009C0F5B /* DebuggerTableViewCell.swift */,
 				098ED482242E746E0029B729 /* DebugViewController.swift */,
 				21F374032434C4BF00926FB8 /* LiveBTLEDebuggerTableViewController.swift */,
 				89BC79EA2434E047002050F8 /* LogsViewController.swift */,
-				2115C3E524360427009C0F5B /* DebuggerTableViewCell.swift */,
+				F652F7232449138900D97950 /* SetDiagnosisViewController.swift */,
 			);
 			path = Debug;
 			sourceTree = "<group>";
@@ -1018,6 +1021,7 @@
 				F6F05A36243436D200FF4B72 /* PrivacyViewController.swift in Sources */,
 				F6F05A282433C55300FF4B72 /* AuthorizationManager.swift in Sources */,
 				89F06B352434AF9D0074C612 /* LogEvent.swift in Sources */,
+				F652F7242449138900D97950 /* SetDiagnosisViewController.swift in Sources */,
 				F613936E243FA82B003447E8 /* Appearance.swift in Sources */,
 				F6F05A342434344200FF4B72 /* StartNowViewController.swift in Sources */,
 				0997D056243BDEEC0067346C /* RootViewController.swift in Sources */,

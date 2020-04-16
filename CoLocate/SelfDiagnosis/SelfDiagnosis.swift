@@ -10,9 +10,14 @@ import Foundation
 
 struct SelfDiagnosis: Codable, Equatable {
     let symptoms: Set<Symptom>
-    let recordedDate: Date = Date()
-
     let startDate: Date
+    let recordedDate: Date
+
+    init(symptoms: Set<Symptom>, startDate: Date, recordedDate: Date = Date()) {
+        self.symptoms = symptoms
+        self.startDate = startDate
+        self.recordedDate = recordedDate
+    }
 
     var isAffected: Bool { !symptoms.isEmpty }
 }

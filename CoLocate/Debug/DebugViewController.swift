@@ -44,7 +44,6 @@ class DebugViewController: UITableViewController, Storyboarded {
             show(title: "Cleared", message: "Registration and diagnosis data has been cleared. Please stop and re-start the application.")
 
         case (0, 1):
-            // TODO: Add a screen for debugging self-diagnosis
             break
 
         case (0, 2), (0, 3):
@@ -125,6 +124,16 @@ class DebugViewController: UITableViewController, Storyboarded {
     @IBAction func enableNewKeyRotation(_ sender: UISwitch) {
         persistence.enableNewKeyRotation = sender.isOn
     }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.destination {
+        case let vc as SetDiagnosisViewController:
+            vc.inject(persistence: persistence)
+        default:
+            break
+        }
+    }
+
 }
 
 class TestPushRequest: SecureRequest, Request {
