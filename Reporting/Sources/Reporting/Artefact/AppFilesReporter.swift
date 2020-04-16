@@ -180,14 +180,14 @@ extension FileReporterContext {
         }
         
         let fileName = "\(launchStoryboardName).storyboardc"
-        let folderName = "\(fileName)/"
-        guard filesByPathInBundle[fileName] != nil else {
+        guard let localizedFileName = localizedFile(named: fileName) else {
             return .failed(message: "Expected app to have launch storyboard named `\(launchStoryboardName)`.")
         }
         
-        unaccountedFilePaths.remove(fileName)
+        let localizedFolderName = "\(localizedFileName)/"
+        unaccountedFilePaths.remove(localizedFileName)
         unaccountedFilePaths = unaccountedFilePaths.filter {
-            !$0.hasPrefix(folderName)
+            !$0.hasPrefix(localizedFolderName)
         }
         
         return .passed
@@ -229,6 +229,14 @@ extension FileReporterContext {
                 kind: .unordered,
                 items: unaccountedFilePaths.sorted().map { "`\($0)`" })
             return .failed(message: "Found unexpected files: \(list.markdownBody)")
+        }
+    }
+    
+    private func localizedFile(named name: String) -> String? {
+        let regex = "\\w+.lproj/\(name)"
+        return filesByPathInBundle.keys.first { file in
+            if file == name { return true }
+            return file.range(of: regex, options: .regularExpression, range: nil, locale: nil) != nil
         }
     }
     
