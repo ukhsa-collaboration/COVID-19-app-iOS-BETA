@@ -110,16 +110,17 @@ class StatusViewController: UIViewController, Storyboarded {
         )
 
         nextStepsView.isHidden = true
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
 
         if persistence.registration != nil {
             showRegisteredStatus()
         } else {
             register()
         }
-    }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         diagnosis = persistence.selfDiagnosis
         potentiallyExposed = persistence.potentiallyExposed
     }
