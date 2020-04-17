@@ -23,7 +23,6 @@ class RootViewController: UIViewController {
     private var statusViewController: StatusViewController!
     private var session: Session! = nil
     private var uiQueue: TestableQueue! = nil
-    private var showingDebugView = false
 
     func inject(
         persistence: Persisting,
@@ -117,7 +116,7 @@ class RootViewController: UIViewController {
     var previouslyPresentedViewController: UIViewController?
 
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-        guard !showingDebugView else { return }
+        guard type(of: presentedViewController) != DebugViewController.self else { return }
         
         if let vc = presentedViewController {
             previouslyPresentedViewController = vc
@@ -131,7 +130,9 @@ class RootViewController: UIViewController {
 
     @IBAction func unwindFromDebugViewController(unwindSegue: UIStoryboardSegue) {
         dismiss(animated: true)
-        showingDebugView = false
+
+        statusViewController.diagnosis = persistence.selfDiagnosis
+        statusViewController.potentiallyExposed = persistence.potentiallyExposed
 
         if let vc = previouslyPresentedViewController {
             present(vc, animated: true)
@@ -147,7 +148,6 @@ class RootViewController: UIViewController {
         debugVC.inject(persistence: persistence, contactEventRepository: contactEventRepository)
         
         present(tabBarVC, animated: true)
-        showingDebugView = true
     }
     #endif
 }
