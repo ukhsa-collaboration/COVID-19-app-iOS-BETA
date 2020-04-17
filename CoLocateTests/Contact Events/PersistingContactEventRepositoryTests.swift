@@ -85,7 +85,7 @@ class PersistingContactEventRepositoryTests: XCTestCase {
             duration: 0
         )
         
-        repository.update()
+        repository.removeExpiredContactEvents()
         XCTAssertEqual(persister.updateCount, 2)
     }
     

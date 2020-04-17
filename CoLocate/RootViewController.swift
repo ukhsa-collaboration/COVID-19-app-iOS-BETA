@@ -113,7 +113,7 @@ class RootViewController: UIViewController {
     }
     
     @objc func timeHasSignificantlyChanged(_ notification: NSNotification) {
-        contactEventRepository.update()
+        
     }
     
     // MARK: - Debug view controller management

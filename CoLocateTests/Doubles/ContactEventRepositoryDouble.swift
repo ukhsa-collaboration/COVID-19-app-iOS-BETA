@@ -17,7 +17,7 @@ class ContactEventRepositoryDouble: ContactEventRepository {
         contactEvents = []
     }
     
-    func update() {
+    func removeExpiredContactEvents() {
         
     }
 }

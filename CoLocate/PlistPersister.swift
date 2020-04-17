@@ -44,10 +44,6 @@ class PlistPersister<K: Hashable & Codable, V: Codable> {
             fatalError()
         }
     }
-    
-    func update(items: [K: V]) {
-        self.items = items
-    }
 
     private func readItems() {
         guard FileManager.default.isReadableFile(atPath: fileURL.path) else {
