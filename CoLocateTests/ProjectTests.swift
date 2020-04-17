@@ -22,6 +22,13 @@ class ProjectTests: XCTestCase {
         XCTAssertNil(info?["NSAppTransportSecurity"], "There should be no overrides for App Transport Security.")
     }
     
+    func testGoogleAnalyticsIDFVCollectionIsDisabled() throws {
+        let info = Bundle.app.infoDictionary
+        
+        let isEnabeld = try XCTUnwrap(info?["GOOGLE_ANALYTICS_IDFV_COLLECTION_ENABLED"] as? Bool, "This key should be set explicitely")
+        XCTAssertFalse(isEnabeld)
+    }
+    
     #if targetEnvironment(simulator)
     func testThatProjectFileHasNoEmbeddedBuildConfigurations() {
         guard let projectFilePath = Bundle(for: ProjectTests.self).infoDictionary?["projectFilePath"] as? String else {

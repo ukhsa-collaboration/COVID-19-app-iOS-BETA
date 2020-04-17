@@ -26,6 +26,8 @@
 	<string>$(DEBUG_REGISTRATION_SECRET_KEY)</string>
 	<key>GOOGLE_SERVICE_INFO_PLIST</key>
 	<string>$(GOOGLE_SERVICE_INFO_PLIST)</string>
+	<key>GOOGLE_ANALYTICS_IDFV_COLLECTION_ENABLED</key>
+	<false/>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSRequiresIPhoneOS</key>

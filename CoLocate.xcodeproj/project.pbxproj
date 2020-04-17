@@ -78,6 +78,9 @@
 		898FE859243B4FE300210775 /* AuthorizationManaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898FE858243B4FE300210775 /* AuthorizationManaging.swift */; };
 		898FE860243B5AF700210775 /* UITestScreenMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898FE85F243B5AF700210775 /* UITestScreenMaker.swift */; };
 		89BC79EB2434E047002050F8 /* LogsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BC79EA2434E047002050F8 /* LogsViewController.swift */; };
+		89DA61F32449A56F0079A761 /* FIRAnalyticsConnector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89DA61F12449A56F0079A761 /* FIRAnalyticsConnector.framework */; };
+		89DA61F42449A56F0079A761 /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89DA61F22449A56F0079A761 /* FirebaseAnalytics.framework */; };
+		89DA61F62449A5A90079A761 /* GoogleAppMeasurement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89DA61F52449A5A80079A761 /* GoogleAppMeasurement.framework */; };
 		89F06B2F2434A62C0074C612 /* LoggingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F06B2E2434A62C0074C612 /* LoggingManager.swift */; };
 		89F06B312434AABF0074C612 /* NoOpLogHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F06B302434AABE0074C612 /* NoOpLogHandler.swift */; };
 		89F06B332434AF130074C612 /* ForwardingLogHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F06B322434AF130074C612 /* ForwardingLogHandler.swift */; };
@@ -249,6 +252,9 @@
 		898FE858243B4FE300210775 /* AuthorizationManaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationManaging.swift; sourceTree = "<group>"; };
 		898FE85F243B5AF700210775 /* UITestScreenMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestScreenMaker.swift; sourceTree = "<group>"; };
 		89BC79EA2434E047002050F8 /* LogsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogsViewController.swift; sourceTree = "<group>"; };
+		89DA61F12449A56F0079A761 /* FIRAnalyticsConnector.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FIRAnalyticsConnector.framework; path = Frameworks/FIRAnalyticsConnector.framework; sourceTree = "<group>"; };
+		89DA61F22449A56F0079A761 /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseAnalytics.framework; path = Frameworks/FirebaseAnalytics.framework; sourceTree = "<group>"; };
+		89DA61F52449A5A80079A761 /* GoogleAppMeasurement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleAppMeasurement.framework; path = Frameworks/GoogleAppMeasurement.framework; sourceTree = "<group>"; };
 		89F06B2E2434A62C0074C612 /* LoggingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingManager.swift; sourceTree = "<group>"; };
 		89F06B302434AABE0074C612 /* NoOpLogHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoOpLogHandler.swift; sourceTree = "<group>"; };
 		89F06B322434AF130074C612 /* ForwardingLogHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForwardingLogHandler.swift; sourceTree = "<group>"; };
@@ -343,14 +349,17 @@
 			files = (
 				F78CEB5D242B7EC0002254AD /* PromisesObjC.framework in Frameworks */,
 				F78CEB5C242B7EC0002254AD /* FirebaseCore.framework in Frameworks */,
+				89DA61F62449A5A90079A761 /* GoogleAppMeasurement.framework in Frameworks */,
 				F78CEB71242B9305002254AD /* GoogleDataTransport.framework in Frameworks */,
 				F78CEB5B242B7EC0002254AD /* FirebaseCoreDiagnostics.framework in Frameworks */,
+				89DA61F42449A56F0079A761 /* FirebaseAnalytics.framework in Frameworks */,
 				F78CEB6A242B8D3F002254AD /* FirebaseInstanceID.framework in Frameworks */,
 				F78CEB6C242B8D84002254AD /* FirebaseInstallations.framework in Frameworks */,
 				F7D62F2724406FC8004C32A2 /* Logging in Frameworks */,
 				F78CEB5A242B7EC0002254AD /* FirebaseMessaging.framework in Frameworks */,
 				21B3D2E82429115600573061 /* CoreBluetooth.framework in Frameworks */,
 				F78CEB6F242B92CF002254AD /* GoogleUtilities.framework in Frameworks */,
+				89DA61F32449A56F0079A761 /* FIRAnalyticsConnector.framework in Frameworks */,
 				F78CEB73242B937F002254AD /* nanopb.framework in Frameworks */,
 				F78CEB5E242B7EC0002254AD /* Protobuf.framework in Frameworks */,
 			);
@@ -516,6 +525,9 @@
 		21B3D2E62429115600573061 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				89DA61F52449A5A80079A761 /* GoogleAppMeasurement.framework */,
+				89DA61F12449A56F0079A761 /* FIRAnalyticsConnector.framework */,
+				89DA61F22449A56F0079A761 /* FirebaseAnalytics.framework */,
 				F78CEB72242B937F002254AD /* nanopb.framework */,
 				F78CEB70242B9305002254AD /* GoogleDataTransport.framework */,
 				F78CEB6E242B92CF002254AD /* GoogleUtilities.framework */,
