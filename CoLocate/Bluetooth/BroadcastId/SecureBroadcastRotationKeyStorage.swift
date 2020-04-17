@@ -12,7 +12,7 @@ import Security
 import Logging
 
 protocol BroadcastRotationKeyStorage {
-    func save(keyData: Data) throws
+    func save(certificate: Data) throws
     func read() throws -> SecKey?
     func clear() throws
 }
@@ -26,21 +26,35 @@ struct SecureBroadcastRotationKeyStorage: BroadcastRotationKeyStorage {
         case keychain(OSStatus)
     }
 
-    func save(keyData: Data) throws {
-        let keyDict : [NSObject:NSObject] = [
-           kSecAttrKeyType: kSecAttrKeyTypeECSECPrimeRandom,
-           kSecAttrKeyClass: kSecAttrKeyClassPublic,
-           kSecAttrKeySizeInBits: NSNumber(value: 256),
-           kSecReturnPersistentRef: true as NSObject
-        ]
+    // shamelessly stolen from this blog post that explains importing public keys on iOS
+    // https://digitalleaves.com/blog/2015/10/sharing-public-keys-between-ios-and-the-rest-of-the-world/
 
-        var error: Unmanaged<CFError>?
-        let publicKey = SecKeyCreateWithData(keyData as CFData, keyDict as CFDictionary, &error)
-        guard error == nil else {
-            logger.critical("invalid key data \(error.debugDescription)")
-            throw Error.invalidKeyData
+    func save(certificate: Data) throws {
+        // 1
+        guard let certRef = SecCertificateCreateWithData(nil, certificate as CFData) else { return }
+
+        // 2
+        var secTrust: SecTrust?
+        let secTrustStatus = SecTrustCreateWithCertificates(certRef, nil, &secTrust)
+        guard secTrustStatus == errSecSuccess else { return }
+
+        // 3
+        var resultType: SecTrustResultType = .invalid
+        let evaluateStatus = SecTrustEvaluate(secTrust!, &resultType) // FIXME auto unwrapped !
+        guard evaluateStatus == errSecSuccess else { return }
+
+        // 4
+        let publicKey = SecTrustCopyPublicKey(secTrust!)
+
+        let status = saveInKeychain(publicKey!) // FIXME: auto unwrapped !
+        guard status == errSecSuccess else {
+            logger.error("Failed to add BTLE rotation key to keychain: \(status)")
+            throw Error.keychain(status)
         }
+    }
 
+    // MARK: - Private
+    func saveInKeychain(_ publicKey: SecKey) -> OSStatus {
         let query: [String: Any] = [
             kSecClass as String: kSecClassKey,
             kSecAttrApplicationTag as String: publicKeyTag,
@@ -48,12 +62,7 @@ struct SecureBroadcastRotationKeyStorage: BroadcastRotationKeyStorage {
             kSecAttrAccessible as String: kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly,
         ]
 
-        let status = SecItemAdd(query as CFDictionary, nil)
-
-        guard status == errSecSuccess || status == errSecDuplicateItem else {
-            logger.error("Failed to add BTLE rotation key to keychain: \(status)")
-            throw Error.keychain(status)
-        }
+        return SecItemAdd(query as CFDictionary, nil)
     }
 
     func read() throws -> SecKey? {
