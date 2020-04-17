@@ -69,7 +69,6 @@ class BluetoothNursery {
         ])
         (broadcaster as? ConcreteBTLEBroadcaster)?.stateDelegate = stateDelegate
 
-        // TODO (tj) : I think this is unnecessary when the permissions view controller calls us
         broadcaster?.tryStartAdvertising()
     }
     

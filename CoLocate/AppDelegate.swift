@@ -51,14 +51,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // TODO (TJ): temporarily reset contact events upon startup
-        // Justification : we are NOT migrating our storage right now
-        // since we don't anticipate needing to until after launch
-        // but since I have JUST migrated the format of these records
-        // if we don't do this, the app crashes upon startup
-        // so I'm doing this so that everyone's unit tests and apps continue to work
-        bluetoothNursery.contactEventRepository.reset()
-
         // TODO: If DEBUG is only necessary as long as we have the same bundle ID for both builds.
         #if INTERNAL || DEBUG
         if let window = UITestResponder.makeWindowForTesting() {
