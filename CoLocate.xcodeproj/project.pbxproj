@@ -31,6 +31,8 @@
 		09CAA3662440F3B100CE93A6 /* PostcodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CAA3652440F3B100CE93A6 /* PostcodeViewController.swift */; };
 		09CAA36A2440FC4500CE93A6 /* PostcodeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CAA3692440FC4500CE93A6 /* PostcodeViewControllerTests.swift */; };
 		09CAA36C24413E0700CE93A6 /* ViewControllerContainerDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CAA36B24413E0700CE93A6 /* ViewControllerContainerDouble.swift */; };
+		131AB05C2449D85B002136CA /* ContactEventExpiryHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131AB05B2449D85B002136CA /* ContactEventExpiryHandler.swift */; };
+		131AB05E2449D894002136CA /* ContactEventExpiryHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131AB05D2449D894002136CA /* ContactEventExpiryHandlerTests.swift */; };
 		2115C3E624360427009C0F5B /* DebuggerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2115C3E524360427009C0F5B /* DebuggerTableViewCell.swift */; };
 		213C806C241A56430020EFA5 /* PermissionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213C806B241A56430020EFA5 /* PermissionsViewController.swift */; };
 		214209B62421072C00C7BFF3 /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209B52421072C00C7BFF3 /* StatusViewController.swift */; };
@@ -195,6 +197,8 @@
 		09CAA3652440F3B100CE93A6 /* PostcodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostcodeViewController.swift; sourceTree = "<group>"; };
 		09CAA3692440FC4500CE93A6 /* PostcodeViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostcodeViewControllerTests.swift; sourceTree = "<group>"; };
 		09CAA36B24413E0700CE93A6 /* ViewControllerContainerDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerContainerDouble.swift; sourceTree = "<group>"; };
+		131AB05B2449D85B002136CA /* ContactEventExpiryHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventExpiryHandler.swift; sourceTree = "<group>"; };
+		131AB05D2449D894002136CA /* ContactEventExpiryHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventExpiryHandlerTests.swift; sourceTree = "<group>"; };
 		2115C3E524360427009C0F5B /* DebuggerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebuggerTableViewCell.swift; sourceTree = "<group>"; };
 		213C806B241A56430020EFA5 /* PermissionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsViewController.swift; sourceTree = "<group>"; };
 		214209B52421072C00C7BFF3 /* StatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
@@ -481,6 +485,7 @@
 				F6CC2CAA242BCCE90079432B /* Remote Notifications */,
 				F67C5157243E7BD5008E2945 /* SelfDiagnosis */,
 				0983ACD1243EB20A00DBB336 /* Status */,
+				131AB05D2449D894002136CA /* ContactEventExpiryHandlerTests.swift */,
 			);
 			path = CoLocateTests;
 			sourceTree = "<group>";
@@ -606,6 +611,7 @@
 				895D9E4924374EB800573D4D /* Routing */,
 				F68B89EB243CFEEE00F369A9 /* SelfDiagnosis */,
 				0995ABCD243D034E0057C0D7 /* Status */,
+				131AB05B2449D85B002136CA /* ContactEventExpiryHandler.swift */,
 			);
 			path = CoLocate;
 			sourceTree = "<group>";
@@ -981,6 +987,7 @@
 			files = (
 				098ED47C242D801C0029B729 /* RegistrationServiceTests.swift in Sources */,
 				21B3D2E3242906AE00573061 /* SecureRequestTests.swift in Sources */,
+				131AB05E2449D894002136CA /* ContactEventExpiryHandlerTests.swift in Sources */,
 				214209CA242227B300C7BFF3 /* PersistenceTests.swift in Sources */,
 				09B103662444EB7A0091834D /* TestBTLEListener.swift in Sources */,
 				F632792124351C1900CF7A42 /* OnboardingViewControllerTests.swift in Sources */,
@@ -1085,6 +1092,7 @@
 				F636453B243687DE0014FD54 /* PermissionsDeniedViewController.swift in Sources */,
 				89F06B2F2434A62C0074C612 /* LoggingManager.swift in Sources */,
 				09CAA3662440F3B100CE93A6 /* PostcodeViewController.swift in Sources */,
+				131AB05C2449D85B002136CA /* ContactEventExpiryHandler.swift in Sources */,
 				21E5051524448D880065C69B /* PlistPersister.swift in Sources */,
 				098ED483242E746E0029B729 /* DebugViewController.swift in Sources */,
 				F7D62F2B2440D64D004C32A2 /* ConcreteBroadcastIdGenerator.swift in Sources */,
