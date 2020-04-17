@@ -26,7 +26,6 @@ class ConcreteRegistrationService: RegistrationService {
     private let notificationCenter: NotificationCenter
     private let timeoutQueue: TestableQueue
     private var remoteNotificationCompletionHandler: RemoteNotificationCompletionHandler?
-    private var attempting = false
     
     init(session: Session,
          persistence: Persisting,
@@ -66,7 +65,7 @@ class ConcreteRegistrationService: RegistrationService {
         }
         
         self.timeoutQueue.asyncAfter(deadline: .now() + registrationTimeLimitSecs) { [weak self] in
-            guard let self = self, self.attempting else { return }
+            guard let self = self else { return }
             
             logger.error("Registration did not complete within \(registrationTimeLimitSecs) seconds")
             self.fail(withError: RegistrationTimeoutError())
@@ -74,10 +73,6 @@ class ConcreteRegistrationService: RegistrationService {
     }
     
     private func requestRegistration(_ pushToken: String) {
-        if !attempting {
-            return
-        }
-        
         let request = RequestFactory.registrationRequest(pushToken: pushToken)
 
         session.execute(request, queue: .main) { result in
@@ -108,9 +103,7 @@ class ConcreteRegistrationService: RegistrationService {
                                                                 pushToken: pushToken,
                                                                 postalCode: partialPostalCode)
         
-        session.execute(request, queue: .main) { [weak self] result in
-            guard let self = self, self.attempting else { return }
-
+        session.execute(request, queue: .main) { result in
             switch result {
             case .success(let response):
                 logger.debug("Second registration request succeeded")
@@ -127,23 +120,16 @@ class ConcreteRegistrationService: RegistrationService {
     }
     
     private func succeed(registration: Registration) {
-        cleanup()
+        remoteNotificationDispatcher.removeHandler(forType: .registrationActivationCode)
         self.remoteNotificationCompletionHandler?(.newData)
         notificationCenter.post(name: RegistrationCompletedNotification, object: nil)
     }
     
     private func fail(withError error: Error) {
-        cleanup()
         logger.error("Registration failed: \(error)")
         self.remoteNotificationCompletionHandler?(.failed)
         notificationCenter.post(name: RegistrationFailedNotification, object: nil)
     }
-
-    private func cleanup() {
-        self.remoteNotificationDispatcher.removeHandler(forType: .registrationActivationCode)
-        attempting = false
-    }
-
 }
 
 fileprivate class RegistrationTimeoutError: Error {
