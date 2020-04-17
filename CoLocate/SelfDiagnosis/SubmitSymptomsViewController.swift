@@ -13,10 +13,11 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
     static let storyboardName = "SelfDiagnosis"
 
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var summaryLabel: UILabel!
+    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     @IBOutlet weak var startDateView: UIStackView!
     @IBOutlet weak var startDateLabel: UILabel!
     @IBOutlet weak var startDateButton: StartDateButton!
+    @IBOutlet weak var thankYouLabel: UILabel!
     @IBOutlet weak var submitButton: PrimaryButton!
     @IBOutlet var datePickerAccessory: UIToolbar!
     @IBOutlet var datePicker: UIPickerView!
@@ -75,7 +76,6 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        summaryLabel.text = "QUESTION_SUMMARY".localized
         if symptoms.isEmpty {
             startDateView.isHidden = true
         } else {
@@ -99,8 +99,20 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         startDateButton.inputView = datePicker
         startDateButton.inputAccessoryView = datePickerAccessory
 
-        notificationCenter.addObserver(self, selector: #selector(keyboardDidShow(notification:)), name: UIResponder.keyboardDidShowNotification, object: nil)
-        notificationCenter.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        thankYouLabel.text = "SUBMIT_SYMPTOMS_THANK_YOU".localized
+
+        notificationCenter.addObserver(
+            self,
+            selector: #selector(keyboardWillShow(notification:)),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+        notificationCenter.addObserver(
+            self,
+            selector: #selector(keyboardWillHide(notification:)),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
     }
 
     @IBAction func startDateButtonTapped(_ sender: StartDateButton) {
@@ -168,8 +180,12 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         }
     }
 
-    @objc func keyboardDidShow(notification: Notification) {
-        guard let kbFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+    @objc func keyboardWillShow(notification: Notification) {
+        guard
+            let kbFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect
+        else {
+            return
+        }
 
         let insets = UIEdgeInsets(top: 0, left: 0, bottom: kbFrame.size.height, right: 0)
         scrollView.contentInset = insets
@@ -178,13 +194,38 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         var visibleRegion = self.view.frame
         visibleRegion.size.height -= kbFrame.height
 
-        scrollView.scrollRectToVisible(submitButton.frame, animated: true)
+        guard
+            let kbDuration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval,
+            let kbCurve = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt
+        else {
+            return
+        }
+
+        UIView.animate(withDuration: kbDuration, delay: 0, options: UIView.AnimationOptions(rawValue: kbCurve), animations: {
+            self.heightConstraint.constant = visibleRegion.size.height
+            self.heightConstraint.isActive = true
+            self.view.layoutIfNeeded()
+        }, completion: { _ in
+            self.scrollView.scrollRectToVisible(self.startDateButton.frame, animated: true)
+        })
     }
 
     @objc func keyboardWillHide(notification: Notification) {
         let insets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         scrollView.contentInset = insets
         scrollView.scrollIndicatorInsets = insets
+
+        guard
+            let kbDuration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval,
+            let kbCurve = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt
+        else {
+            return
+        }
+
+        UIView.animate(withDuration: kbDuration, delay: 0, options: UIView.AnimationOptions(rawValue: kbCurve), animations: {
+            self.heightConstraint.isActive = false
+            self.view.layoutIfNeeded()
+        })
     }
 
     private func alert(message: String) {

@@ -353,20 +353,8 @@
                                                     <constraint firstAttribute="height" constant="8" id="Tc7-Ud-OYW"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Summary" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aIR-YM-xXi">
-                                                <rect key="frame" x="20" y="56" width="374" height="20.5"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                <color key="textColor" name="NHS Text"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YR8-yi-S77" userLabel="Spacer">
-                                                <rect key="frame" x="20" y="76.5" width="374" height="16"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="16" id="W9P-lv-kmw"/>
-                                                </constraints>
-                                            </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="pee-46-xUh">
-                                                <rect key="frame" x="20" y="92.5" width="374" height="91.5"/>
+                                                <rect key="frame" x="20" y="56" width="374" height="75.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start Date Question" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OFO-L9-lgU">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="26.5"/>
@@ -388,14 +376,26 @@
                                                             <action selector="startDateButtonTapped:" destination="ofL-pj-tC8" eventType="touchUpInside" id="dOn-B1-jMx"/>
                                                         </connections>
                                                     </button>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x4g-G9-ZiU" userLabel="Spacer">
-                                                        <rect key="frame" x="0.0" y="75.5" width="374" height="16"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="16" id="jBB-Zr-QZz"/>
-                                                        </constraints>
-                                                    </view>
                                                 </subviews>
                                             </stackView>
+                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="16" translatesAutoresizingMaskIntoConstraints="NO" id="x4g-G9-ZiU" userLabel="Spacer">
+                                                <rect key="frame" x="20" y="131.5" width="374" height="16"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="16" id="jBB-Zr-QZz"/>
+                                                </constraints>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thank You" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aIR-YM-xXi">
+                                                <rect key="frame" x="20" y="147.5" width="374" height="20.5"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <color key="textColor" name="NHS Text"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YR8-yi-S77" userLabel="Spacer">
+                                                <rect key="frame" x="20" y="168" width="374" height="16"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="16" id="W9P-lv-kmw"/>
+                                                </constraints>
+                                            </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JYn-nS-TUw" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
                                                 <rect key="frame" x="20" y="184" width="374" height="30"/>
                                                 <state key="normal" title="Submit"/>
@@ -405,15 +405,23 @@
                                                 </connections>
                                             </button>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" priority="999" id="iw0-QM-AIq"/>
+                                        </constraints>
                                         <directionalEdgeInsets key="directionalLayoutMargins" top="32" leading="20" bottom="20" trailing="20"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="iw0-QM-AIq"/>
+                                            </mask>
+                                        </variation>
                                     </stackView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="9Z6-MF-rO6" firstAttribute="leading" secondItem="3Ic-zU-r0w" secondAttribute="leading" id="0Mb-ds-wYm"/>
                                     <constraint firstItem="9Z6-MF-rO6" firstAttribute="trailing" secondItem="3Ic-zU-r0w" secondAttribute="trailing" id="5lc-ce-Vc9"/>
                                     <constraint firstItem="9Z6-MF-rO6" firstAttribute="bottom" secondItem="3Ic-zU-r0w" secondAttribute="bottom" id="R8L-4H-99N"/>
-                                    <constraint firstItem="9Z6-MF-rO6" firstAttribute="height" secondItem="bar-jR-1dZ" secondAttribute="height" priority="1" id="Ufg-ak-vbz"/>
                                     <constraint firstItem="9Z6-MF-rO6" firstAttribute="width" secondItem="bar-jR-1dZ" secondAttribute="width" id="XNu-jA-mpo"/>
+                                    <constraint firstItem="9Z6-MF-rO6" firstAttribute="height" secondItem="bar-jR-1dZ" secondAttribute="height" priority="1" id="ZLD-VF-Rhz"/>
                                     <constraint firstItem="9Z6-MF-rO6" firstAttribute="top" secondItem="3Ic-zU-r0w" secondAttribute="top" id="gkD-dV-Cmb"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="3Ic-zU-r0w"/>
@@ -439,12 +447,13 @@
                     <connections>
                         <outlet property="datePicker" destination="ioO-ps-knc" id="og5-On-wTf"/>
                         <outlet property="datePickerAccessory" destination="aek-YN-bXo" id="RNr-Oy-3pq"/>
+                        <outlet property="heightConstraint" destination="iw0-QM-AIq" id="Twc-xH-plE"/>
                         <outlet property="scrollView" destination="xUD-zY-9kW" id="ucw-sm-n5X"/>
                         <outlet property="startDateButton" destination="JUs-Gg-aFs" id="vda-WE-q6E"/>
                         <outlet property="startDateLabel" destination="OFO-L9-lgU" id="oLN-Pl-j8n"/>
                         <outlet property="startDateView" destination="pee-46-xUh" id="dCH-Oz-uNv"/>
                         <outlet property="submitButton" destination="JYn-nS-TUw" id="HcN-Hc-nI4"/>
-                        <outlet property="summaryLabel" destination="aIR-YM-xXi" id="vix-vV-Rrk"/>
+                        <outlet property="thankYouLabel" destination="aIR-YM-xXi" id="vix-vV-Rrk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ISX-4O-Rgm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -470,7 +479,7 @@
                     </connections>
                 </pickerView>
             </objects>
-            <point key="canvasLocation" x="2643" y="173"/>
+            <point key="canvasLocation" x="2688" y="173"/>
         </scene>
     </scenes>
     <resources>
