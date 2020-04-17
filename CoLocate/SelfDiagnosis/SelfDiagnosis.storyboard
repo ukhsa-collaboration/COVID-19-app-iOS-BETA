@@ -144,10 +144,12 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="continueButton" destination="jG0-JS-mYk" id="6j5-8q-5U2"/>
                         <outlet property="detailLabel" destination="H04-Lf-rLE" id="z1z-hP-XW7"/>
                         <outlet property="errorLabel" destination="EEp-p2-YdY" id="chr-dr-pcg"/>
                         <outlet property="noButton" destination="ozZ-4u-kSR" id="wSo-AC-rvA"/>
                         <outlet property="questionLabel" destination="uOT-OJ-I6V" id="VqT-ab-9aD"/>
+                        <outlet property="scrollView" destination="2fb-pN-Q6M" id="lHc-kJ-qKa"/>
                         <outlet property="yesButton" destination="Vw9-t8-qg5" id="ue8-uX-K6k"/>
                         <segue destination="DhY-Gr-smF" kind="show" identifier="coughSegue" id="FUJ-cg-seN"/>
                     </connections>
@@ -292,10 +294,12 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="continueButton" destination="Kub-if-PMI" id="ffo-y5-r8i"/>
                         <outlet property="detailLabel" destination="lfF-B3-ch8" id="XlU-iY-bUb"/>
                         <outlet property="errorLabel" destination="gTL-ig-wPS" id="goP-dC-tQa"/>
                         <outlet property="noButton" destination="2oq-qV-AhN" id="oI1-pf-mXk"/>
                         <outlet property="questionLabel" destination="4Cy-NY-5GO" id="B6J-Ic-ViM"/>
+                        <outlet property="scrollView" destination="mSg-0e-LMJ" id="Qws-Zn-0e2"/>
                         <outlet property="yesButton" destination="jqb-jq-LE5" id="MLm-uN-B8A"/>
                         <segue destination="ofL-pj-tC8" kind="show" identifier="submitSegue" id="N2W-j3-Ow8"/>
                     </connections>

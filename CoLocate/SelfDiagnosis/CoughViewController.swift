@@ -9,12 +9,15 @@
 import UIKit
 
 class CoughViewController: UIViewController {
+
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var detailLabel: UILabel!
     @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var yesButton: AnswerButton!
     @IBOutlet weak var noButton: AnswerButton!
-    
+    @IBOutlet weak var continueButton: PrimaryButton!
+
     private var persistence: Persisting!
     private var contactEventRepo: ContactEventRepository!
     private var session: Session!
@@ -65,10 +68,14 @@ class CoughViewController: UIViewController {
 
     @IBAction func yesTapped(_ sender: AnswerButton) {
         hasNewCough = true
+
+        scrollView.scrollRectToVisible(continueButton.frame, animated: true)
     }
 
     @IBAction func noTapped(_ sender: AnswerButton) {
         hasNewCough = false
+
+        scrollView.scrollRectToVisible(continueButton.frame, animated: true)
     }
 
     @IBAction func continueTapped(_ sender: PrimaryButton) {

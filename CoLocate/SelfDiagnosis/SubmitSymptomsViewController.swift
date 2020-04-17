@@ -178,9 +178,7 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         var visibleRegion = self.view.frame
         visibleRegion.size.height -= kbFrame.height
 
-        if !visibleRegion.contains(submitButton.frame.origin) {
-            scrollView.scrollRectToVisible(submitButton.frame, animated: true)
-        }
+        scrollView.scrollRectToVisible(submitButton.frame, animated: true)
     }
 
     @objc func keyboardWillHide(notification: Notification) {

@@ -9,12 +9,15 @@
 import UIKit
 
 class TemperatureViewController: UIViewController {
+
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var detailLabel: UILabel!
     @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var yesButton: AnswerButton!
     @IBOutlet weak var noButton: AnswerButton!
-    
+    @IBOutlet weak var continueButton: PrimaryButton!
+
     var persistence: Persisting!
     var contactEventRepo: ContactEventRepository!
     var session: Session!
@@ -61,10 +64,14 @@ class TemperatureViewController: UIViewController {
 
     @IBAction func yesTapped(_ sender: AnswerButton) {
         hasHighTemperature = true
+
+        scrollView.scrollRectToVisible(continueButton.frame, animated: true)
     }
 
     @IBAction func noTapped(_ sender: AnswerButton) {
         hasHighTemperature = false
+
+        scrollView.scrollRectToVisible(continueButton.frame, animated: true)
     }
 
     @IBAction func continueTapped(_ sender: PrimaryButton) {
