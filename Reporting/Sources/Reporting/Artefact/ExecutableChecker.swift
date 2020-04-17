@@ -8,13 +8,24 @@
 import Foundation
 
 struct ExecutableChecker {
-    private let quotedPath: String
+    private let appURL: URL
+    private let binaryName: String
+    
     init?(appURL: URL, appInfo: AppInfo) {
         guard let binaryName = appInfo.value(for: \.bundleExecutable) else {
             return nil
         }
         
-        quotedPath = "'\(appURL.path)/\(binaryName)'"
+        self.appURL = appURL
+        self.binaryName = binaryName
+    }
+    
+    private var quotedPath: String {
+        "'\(path)'"
+    }
+    
+    private var path: String {
+        "\(appURL.path)/\(binaryName)"
     }
     
     var linkedLibraries: [String] {
@@ -39,5 +50,29 @@ struct ExecutableChecker {
         let libraryNames = pathSpecifiersExcludingSwift.map { $0.components(separatedBy: "/").last! }
 
         return Array(libraryNames.sorted())
+    }
+    
+    func checkHasNoAbsolutePaths() -> IntegrityCheck.Result {
+        let pattern = "/.*/.*"
+        let count = strings.count { $0.matches(pattern) }
+        switch count {
+        case 0:
+            return .passed
+            
+        default:
+            return .failed(message: "Found \(count) matches for `\(pattern)`")
+        }
+    }
+    
+    private var strings: [String] {
+        // I think `string` waits for its std out to actually read stuff, causing it not to work with current
+        // implementation of `runAndCapture`.
+        let textsPath = "\(path).txt"
+        try? Bash.run("strings", "-a", quotedPath, ">", "'\(textsPath)'")
+        guard let string = try? String(contentsOfFile: textsPath) else {
+            return []
+        }
+        
+        return string.components(separatedBy: "\n")
     }
 }

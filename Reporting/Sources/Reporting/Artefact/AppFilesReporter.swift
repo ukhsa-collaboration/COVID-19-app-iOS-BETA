@@ -9,6 +9,7 @@ struct AppFilesReporter {
         
         return [
             contentIntegrityChecks(with: &context),
+            executableSecurityChecks(with: &context),
             linkedLibraries(with: &context),
             embeddedFrameworks(with: &context),
         ]
@@ -51,6 +52,19 @@ struct AppFilesReporter {
         )
         
         return ReportSection(title: "Contents", content: table)
+    }
+    
+    private func executableSecurityChecks(with context: inout FileReporterContext) -> ReportSection {
+        guard let checker = ExecutableChecker(appURL: context.appURL, appInfo: context.appInfo) else {
+            return ReportSection(title: "Executable", content: "Could not find the executable")
+        }
+            
+        let table = ReportTable(checks: [
+            IntegrityCheck(name: "Does not reference absolute paths", result: checker.checkHasNoAbsolutePaths()),
+            ]
+        )
+        
+        return ReportSection(title: "Executable", content: table)
     }
     
     func attachments(forAppAt appURL: URL, info: AppInfo) -> [ReportAttachment] {

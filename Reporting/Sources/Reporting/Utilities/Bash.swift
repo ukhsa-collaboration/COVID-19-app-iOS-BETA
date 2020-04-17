@@ -2,6 +2,7 @@ import Foundation
 
 struct Bash {
     static func run(_ command: String) throws {
+        print("$", command)
         let process = Process()
         process.launchPath = "/bin/bash"
         process.arguments = ["-c", command]
@@ -15,6 +16,7 @@ struct Bash {
     }
     
     static func runAndCapture(_ command: String) throws -> Data {
+        print("$", command)
         let process = Process()
         process.launchPath = "/bin/bash"
         process.arguments = ["-c", command]
