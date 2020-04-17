@@ -146,7 +146,7 @@ class RootViewController: UIViewController {
             let navVC = tabBarVC.viewControllers?.first as? UINavigationController,
             let debugVC = navVC.viewControllers.first as? DebugViewController else { return }
         
-        debugVC.inject(persistence: persistence, contactEventRepository: contactEventRepository)
+        debugVC.inject(persisting: persistence, contactEventRepository: contactEventRepository)
         
         present(tabBarVC, animated: true)
     }

@@ -17,17 +17,17 @@ class DebugViewController: UITableViewController, Storyboarded {
     @IBOutlet weak var potentiallyExposedSwitch: UISwitch!
     @IBOutlet weak var enableNewSelfDiagnosis: UISwitch!
 
-    private var persistence: Persisting!
+    private var persisting: Persisting!
     private var contactEventRepository: ContactEventRepository!
     
-    func inject(persistence: Persisting, contactEventRepository: ContactEventRepository) {
-        self.persistence = persistence
+    func inject(persisting: Persisting, contactEventRepository: ContactEventRepository) {
+        self.persisting = persisting
         self.contactEventRepository = contactEventRepository
     }
     
     override func viewDidLoad() {
-        potentiallyExposedSwitch.isOn = persistence.potentiallyExposed
-        allowedDataSharingSwitch.isOn = persistence.allowedDataSharing
+        potentiallyExposedSwitch.isOn = persisting.potentiallyExposed
+        allowedDataSharingSwitch.isOn = persisting.allowedDataSharing
 
         let build = Bundle.main.infoDictionary?["CFBundleVersion"] ?? "unknown"
         let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] ?? "unknown"
@@ -39,7 +39,7 @@ class DebugViewController: UITableViewController, Storyboarded {
 
         switch (indexPath.section, indexPath.row) {
         case (0, 0):
-            persistence.clear()
+            persisting.clear()
             try! SecureBroadcastRotationKeyStorage().clear()
             show(title: "Cleared", message: "Registration and diagnosis data has been cleared. Please stop and re-start the application.")
 
@@ -58,7 +58,7 @@ class DebugViewController: UITableViewController, Storyboarded {
             
         case (2, 0):
             do {
-                guard let registration = persistence.registration else {
+                guard let registration = persisting.registration else {
                     throw NSError()
                 }
                 let delay = 15
@@ -80,7 +80,7 @@ class DebugViewController: UITableViewController, Storyboarded {
             let info = Bundle(for: AppDelegate.self).infoDictionary!
             let id = info["DEBUG_REGISTRATION_ID"] as! String
             let secretKey = info["DEBUG_REGISTRATION_SECRET_KEY"] as! String
-            persistence.registration = Registration(id: UUID(uuidString: id)!, secretKey: secretKey.data(using: .utf8)!)
+            persisting.registration = Registration(id: UUID(uuidString: id)!, secretKey: secretKey.data(using: .utf8)!)
             #else
             let alert = UIAlertController(title: "Unavailable", message: "This dangerous action is only available in debug builds.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
@@ -114,21 +114,21 @@ class DebugViewController: UITableViewController, Storyboarded {
     }
 
     @IBAction func potentiallyExposedChanged(_ sender: UISwitch) {
-        persistence.potentiallyExposed = sender.isOn
+        persisting.potentiallyExposed = sender.isOn
     }
 
     @IBAction func allowedDataSharingChanged(_ sender: UISwitch) {
-        persistence.allowedDataSharing = sender.isOn
+        persisting.allowedDataSharing = sender.isOn
     }
 
     @IBAction func enableNewKeyRotation(_ sender: UISwitch) {
-        persistence.enableNewKeyRotation = sender.isOn
+        persisting.enableNewKeyRotation = sender.isOn
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.destination {
         case let vc as SetDiagnosisViewController:
-            vc.inject(persistence: persistence)
+            vc.inject(persistence: persisting)
         default:
             break
         }

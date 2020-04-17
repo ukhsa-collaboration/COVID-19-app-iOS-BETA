@@ -83,7 +83,7 @@ class CoughViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? SubmitSymptomsViewController {
             vc.inject(
-                persistence: persistence,
+                persisting: persistence,
                 contactEventRepository: contactEventRepo,
                 session: session,
                 notificationCenter: notificationCenter,

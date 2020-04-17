@@ -29,7 +29,7 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         return formatter
     }()
 
-    private var persistence: Persisting!
+    private var persisting: Persisting!
     private var contactEventRepository: ContactEventRepository!
     private var session: Session!
     private var notificationCenter: NotificationCenter!
@@ -51,14 +51,14 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
     private var isSubmitting = false
     
     func inject(
-        persistence: Persisting,
+        persisting: Persisting,
         contactEventRepository: ContactEventRepository,
         session: Session,
         notificationCenter: NotificationCenter,
         hasHighTemperature: Bool,
         hasNewCough: Bool
     ) {
-        self.persistence = persistence
+        self.persisting = persisting
         self.contactEventRepository = contactEventRepository
         self.session = session
         self.notificationCenter = notificationCenter
@@ -116,7 +116,7 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
     }
 
     @IBAction func submitTapped(_ sender: PrimaryButton) {
-        guard let registration = persistence.registration else {
+        guard let registration = persisting.registration else {
             fatalError("What do we do when we aren't registered?")
         }
 
@@ -137,7 +137,7 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         // so we can make sure this flow works through the
         // app during debugging. This will need to be replaced
         // with real business logic in the future.
-        persistence.selfDiagnosis = SelfDiagnosis(symptoms: symptoms, startDate: startDate)
+        persisting.selfDiagnosis = SelfDiagnosis(symptoms: symptoms, startDate: startDate)
         
         let requestFactory = ConcreteSecureRequestFactory(registration: registration)
 

@@ -202,7 +202,7 @@ class SubmitSymptomsViewControllerTests: TestCase {
 
         vc = SubmitSymptomsViewController.instantiate()
         vc.inject(
-            persistence: persistence,
+            persisting: persistence,
             contactEventRepository: contactEventRepository,
             session: session,
             notificationCenter: NotificationCenter(),
