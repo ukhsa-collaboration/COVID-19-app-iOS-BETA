@@ -45,12 +45,14 @@ class ConcreteRegistrationService: RegistrationService {
             self.remoteNotificationCompletionHandler = completion
             self.confirmRegistration(activationCode: userInfo["activationCode"] as! String)
         }
-
+    }
+    
+    deinit {
+        remoteNotificationDispatcher.removeHandler(forType: .registrationActivationCode)
+        notificationCenter.removeObserver(self)
     }
     
     func register() -> Void {
-        attempting = true
-        
         if let pushToken = remoteNotificationDispatcher.pushToken {
             // if somehow we have already received our fcm push token, perform the first registration request
             requestRegistration(pushToken)
@@ -107,6 +109,11 @@ class ConcreteRegistrationService: RegistrationService {
             switch result {
             case .success(let response):
                 logger.debug("Second registration request succeeded")
+                
+                guard self.persistence.registration == nil else {
+                    logger.info("Ignoring registration response because we are already registered")
+                    return
+                }
 
                 let registration = Registration(id: response.id, secretKey: response.secretKey)
                 self.persistence.registration = registration

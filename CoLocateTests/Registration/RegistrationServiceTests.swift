@@ -309,6 +309,55 @@ class RegistrationServiceTests: TestCase {
         XCTAssertNil(session.requestSent)
     }
     
+    func testRegistration_ignoresSecondSuccess() {
+        let session = SessionDouble()
+        let persistence = PersistenceDouble(partialPostcode: "AB90")
+        let notificationCenter = NotificationCenter()
+        let remoteNotificationDispatcher = RemoteNotificationDispatcher(
+            notificationCenter: notificationCenter,
+            userNotificationCenter: UserNotificationCenterDouble()
+        )
+        let queueDouble = QueueDouble()
+        let registrationService = ConcreteRegistrationService(
+            session: session,
+            persistence: persistence,
+            remoteNotificationDispatcher: remoteNotificationDispatcher,
+            notificationCenter: notificationCenter,
+            timeoutQueue: queueDouble
+        )
+    
+        remoteNotificationDispatcher.pushToken = "the current push token"
+        let completedObserver = NotificationObserverDouble(notificationCenter: notificationCenter, notificationName: RegistrationCompletedNotification)
+        let failedObserver = NotificationObserverDouble(notificationCenter: notificationCenter, notificationName: RegistrationFailedNotification)
+
+        registrationService.register()
+        
+        // Respond to the first request
+        session.executeCompletion!(Result<(), Error>.success(()))
+                
+        // Simulate the notification containing the activationCode.
+        // This should trigger the second request.
+        remoteNotificationDispatcher.handleNotification(userInfo: ["activationCode": "arbitrary"]) { _ in }
+                        
+        // Respond to the second request twice
+        // This can happen if registration timed out and the user retried, but both attempts eventually succeeded.
+        let id1 = UUID()
+        let confirmationResponse1 = ConfirmRegistrationResponse(id: id1, secretKey: secretKey)
+        session.executeCompletion!(Result<ConfirmRegistrationResponse, Error>.success(confirmationResponse1))
+        XCTAssertNotNil(completedObserver.lastNotification)
+        completedObserver.lastNotification = nil
+        failedObserver.lastNotification = nil
+        let id2 = UUID()
+        let confirmationResponse2 = ConfirmRegistrationResponse(id: id2, secretKey: secretKey)
+        session.executeCompletion!(Result<ConfirmRegistrationResponse, Error>.success(confirmationResponse2))
+        
+        XCTAssertNil(completedObserver.lastNotification)
+        XCTAssertNil(failedObserver.lastNotification)
+        XCTAssertNotNil(persistence.registration)
+        XCTAssertEqual(persistence.registration?.id, id1)
+    }
+
+    
     func testRegistration_canFailAfterTimeout() {
         let session = SessionDouble()
         let persistence = PersistenceDouble(partialPostcode: "AB90")
