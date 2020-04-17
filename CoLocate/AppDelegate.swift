@@ -43,7 +43,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             remoteNotificationDispatcher: dispatcher,
             notificationCenter: notificationCenter
         )
-        bluetoothNursery = BluetoothNursery(persistence: persistence, userNotificationCenter: userNotificationCenter)
+        bluetoothNursery = BluetoothNursery(persistence: persistence, userNotificationCenter: userNotificationCenter, notificationCenter: notificationCenter)
+        
         
         super.init()
 

@@ -16,9 +16,4 @@ class ContactEventPersisterDouble: ContactEventPersister {
     func reset() {
         items = [:]
     }
-    
-    var updateCount = 0
-    func update(items: [UUID: ContactEvent]) {
-        updateCount = items.count
-    }
 }

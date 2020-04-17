@@ -22,6 +22,7 @@ class BluetoothNursery {
     let contactEventRepository: PersistingContactEventRepository
     let broadcastIdGenerator: BroadcastIdGenerator
     let stateObserver: BluetoothStateObserver
+    let contactEventExpiryHandler: ContactEventExpiryHandler
     
     var central: CBCentralManager?
     var listener: BTLEListener?
@@ -32,7 +33,7 @@ class BluetoothNursery {
     var startListenerCalled: Bool = false
     var startBroadcasterCalled: Bool = false
     
-    init(persistence: Persistence, userNotificationCenter: UNUserNotificationCenter) {
+    init(persistence: Persistence, userNotificationCenter: UNUserNotificationCenter, notificationCenter: NotificationCenter) {
         self.persistence = persistence
         contactEventPersister = PlistPersister<UUID, ContactEvent>(fileName: "contactEvents")
         contactEventRepository = PersistingContactEventRepository(persister: contactEventPersister)
@@ -41,6 +42,7 @@ class BluetoothNursery {
             appStateReader: UIApplication.shared,
             scheduler: HumbleLocalNotificationScheduler(userNotificationCenter: userNotificationCenter)
         )
+        contactEventExpiryHandler = ContactEventExpiryHandler(notificationCenter: notificationCenter, contactEventRepository: contactEventRepository)
     }
 
     func startBroadcastingAndListening(registration: Registration) {
