@@ -18,11 +18,18 @@ class TemperatureViewController: UIViewController {
     var persistence: Persisting!
     var contactEventRepo: ContactEventRepository!
     var session: Session!
-    
-    func inject(persistence: Persisting, contactEventRepo: ContactEventRepository, session: Session) {
+    private var notificationCenter: NotificationCenter!
+
+    func inject(
+        persistence: Persisting,
+        contactEventRepo: ContactEventRepository,
+        session: Session,
+        notificationCenter: NotificationCenter
+    ) {
         self.persistence = persistence
         self.contactEventRepo = contactEventRepo
         self.session = session
+        self.notificationCenter = notificationCenter
     }
 
     var hasHighTemperature: Bool? {
@@ -71,7 +78,13 @@ class TemperatureViewController: UIViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? CoughViewController {
-            vc.inject(persistence: persistence, contactEventRepo: contactEventRepo, session: session, hasHighTemperature: hasHighTemperature!)
+            vc.inject(
+                persistence: persistence,
+                contactEventRepo: contactEventRepo,
+                session: session,
+                notificationCenter: notificationCenter,
+                hasHighTemperature: hasHighTemperature!
+            )
         }
     }
 }

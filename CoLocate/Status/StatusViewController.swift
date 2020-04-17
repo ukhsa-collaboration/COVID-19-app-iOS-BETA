@@ -23,6 +23,7 @@ class StatusViewController: UIViewController, Storyboarded {
     private var mainQueue: TestableQueue!
     private var contactEventRepo: ContactEventRepository!
     private var session: Session!
+    private var notificationCenter: NotificationCenter!
     
     @IBOutlet var registratonStatusView: UIView!
     @IBOutlet var registrationStatusIcon: UIImageView!
@@ -68,13 +69,20 @@ class StatusViewController: UIViewController, Storyboarded {
         }
     }
     
-    func inject(persistence: Persisting, registrationService: RegistrationService, mainQueue: TestableQueue, contactEventRepo: ContactEventRepository, session: Session) {
-        
+    func inject(
+        persistence: Persisting,
+        registrationService: RegistrationService,
+        mainQueue: TestableQueue,
+        contactEventRepo: ContactEventRepository,
+        session: Session,
+        notificationCenter: NotificationCenter
+    ) {
         self.persistence = persistence
         self.registrationService = registrationService
         self.mainQueue = mainQueue
         self.contactEventRepo = contactEventRepo
         self.session = session
+        self.notificationCenter = notificationCenter
     }
 
     override func viewDidLoad() {
@@ -130,7 +138,12 @@ class StatusViewController: UIViewController, Storyboarded {
 
     @objc func notRightTapped() {
         let selfDiagnosis = SelfDiagnosisNavigationController.instantiate()
-        selfDiagnosis.inject(persistence: persistence, contactEventRepo: contactEventRepo, session: session)
+        selfDiagnosis.inject(
+            persistence: persistence,
+            contactEventRepo: contactEventRepo,
+            session: session,
+            notificationCenter: notificationCenter
+        )
         present(selfDiagnosis, animated: true)
     }
 

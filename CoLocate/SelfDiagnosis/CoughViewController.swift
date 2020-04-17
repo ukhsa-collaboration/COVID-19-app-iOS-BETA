@@ -18,11 +18,20 @@ class CoughViewController: UIViewController {
     private var persistence: Persisting!
     private var contactEventRepo: ContactEventRepository!
     private var session: Session!
+    private var notificationCenter: NotificationCenter!
     
-    func inject(persistence: Persisting, contactEventRepo: ContactEventRepository, session: Session, hasHighTemperature: Bool) {
+    func inject(
+        persistence: Persisting,
+        contactEventRepo: ContactEventRepository,
+        session: Session,
+        notificationCenter: NotificationCenter,
+        hasHighTemperature: Bool
+    ) {
         self.persistence = persistence
         self.contactEventRepo = contactEventRepo
         self.session = session
+        self.notificationCenter = notificationCenter
+
         self.hasHighTemperature = hasHighTemperature
     }
 
@@ -73,7 +82,13 @@ class CoughViewController: UIViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? SubmitSymptomsViewController {
-            vc.inject(persistence: persistence, contactEventRepository: contactEventRepo, session: session, hasHighTemperature: hasHighTemperature, hasNewCough: hasNewCough!)
+            vc.inject(
+                persistence: persistence,
+                contactEventRepository: contactEventRepo,
+                session: session,
+                notificationCenter: notificationCenter,
+                hasHighTemperature: hasHighTemperature,
+                hasNewCough: hasNewCough!)
         }
     }
 }

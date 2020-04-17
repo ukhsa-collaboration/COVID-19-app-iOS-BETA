@@ -49,7 +49,8 @@ class RootViewController: UIViewController {
             registrationService: registrationService,
             mainQueue: uiQueue,
             contactEventRepo: contactEventRepository,
-            session: session
+            session: session,
+            notificationCenter: notificationCenter
         )
         
         notificationCenter.addObserver(self, selector: #selector(applicationDidBecomeActive(_:)), name: UIApplication.didBecomeActiveNotification, object: nil)

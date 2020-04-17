@@ -15,13 +15,23 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
     private var persistence: Persisting!
     private var contactEventRepository: ContactEventRepository!
     private var session: Session!
+    private var notificationCenter: NotificationCenter!
+
     private var symptoms: Set<Symptom>!
     private var isSubmitting = false
     
-    func inject(persistence: Persisting, contactEventRepository: ContactEventRepository, session: Session, hasHighTemperature: Bool, hasNewCough: Bool) {
+    func inject(
+        persistence: Persisting,
+        contactEventRepository: ContactEventRepository,
+        session: Session,
+        notificationCenter: NotificationCenter,
+        hasHighTemperature: Bool,
+        hasNewCough: Bool
+    ) {
         self.persistence = persistence
         self.contactEventRepository = contactEventRepository
         self.session = session
+        self.notificationCenter = notificationCenter
 
         symptoms = Set()
         if hasHighTemperature {

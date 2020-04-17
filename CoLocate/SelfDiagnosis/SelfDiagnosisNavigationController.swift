@@ -10,9 +10,19 @@ import UIKit
 
 class SelfDiagnosisNavigationController: UINavigationController, Storyboarded {
     static let storyboardName = "SelfDiagnosis"
-    
-    func inject(persistence: Persisting, contactEventRepo: ContactEventRepository, session: Session) {
+
+    func inject(
+        persistence: Persisting,
+        contactEventRepo: ContactEventRepository,
+        session: Session,
+        notificationCenter: NotificationCenter
+    ) {
         let temperatureVC = viewControllers.first as! TemperatureViewController
-        temperatureVC.inject(persistence: persistence, contactEventRepo: contactEventRepo, session: session)
+        temperatureVC.inject(
+            persistence: persistence,
+            contactEventRepo: contactEventRepo,
+            session: session,
+            notificationCenter: notificationCenter
+        )
     }
 }
