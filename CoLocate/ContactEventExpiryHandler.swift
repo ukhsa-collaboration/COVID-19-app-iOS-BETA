@@ -14,6 +14,7 @@ class ContactEventExpiryHandler {
     init(notificationCenter: NotificationCenter, contactEventRepository: ContactEventRepository) {
         self.contactEventRepository = contactEventRepository
         notificationCenter.addObserver(self, selector: #selector(significantTimeDidChange), name: UIApplication.significantTimeChangeNotification, object: nil)
+        significantTimeDidChange()
     }
     
     @objc private func significantTimeDidChange() {
