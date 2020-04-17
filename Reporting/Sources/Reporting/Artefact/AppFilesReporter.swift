@@ -235,31 +235,11 @@ extension FileReporterContext {
     }
     
     mutating func findLinkedLibraries() -> [String] {
-        guard let binaryName = appInfo.value(for: \.bundleExecutable) else {
+        guard let executableChecker = ExecutableChecker(appURL: appURL, appInfo: appInfo) else {
             return []
         }
         
-        guard
-            let result = try? Bash.runAndCapture("otool", "-L", "'\(appURL.path)/\(binaryName)'"),
-            let string = String(data: result, encoding: .utf8) else {
-            return []
-        }
-        
-        let linkDeclarations = string.components(separatedBy: "\n")
-            .lazy
-            .map { $0.trimmingCharacters(in: .whitespaces) }
-            .filter { !$0.isEmpty }
-            .dropFirst()
-        
-        let pathSpecifiers = linkDeclarations.map { $0.components(separatedBy: " ")[0] }
-        
-        let pathSpecifiersExcludingSwift = pathSpecifiers.filter {
-            !$0.hasPrefix("@rpath/libswift")
-        }
-
-        let libraryNames = pathSpecifiersExcludingSwift.map { $0.components(separatedBy: "/").last! }
-
-        return Array(libraryNames.sorted())
+        return executableChecker.linkedLibraries
     }
     
     mutating func checkHasNoUnexptectedFilesLeft() -> IntegrityCheck.Result {
