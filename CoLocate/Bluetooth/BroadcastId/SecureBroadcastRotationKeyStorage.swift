@@ -22,47 +22,21 @@ struct SecureBroadcastRotationKeyStorage: BroadcastRotationKeyStorage {
     private let publicKeyTag = "uk.nhs.nhsx.colocate.sonar.public_key"
 
     enum Error: Swift.Error {
-        case invalidKeyData
+        case invalidCertificate
         case keychain(OSStatus)
     }
 
-    // shamelessly stolen from this blog post that explains importing public keys on iOS
-    // https://digitalleaves.com/blog/2015/10/sharing-public-keys-between-ios-and-the-rest-of-the-world/
-
     func save(certificate: Data) throws {
-        // 1
-        guard let certRef = SecCertificateCreateWithData(nil, certificate as CFData) else { return }
+        guard let publicKey = extractPublicKeyFrom(certificate) else {
+            logger.info("Could not save public key from certificate")
+            throw Error.invalidCertificate
+        }
 
-        // 2
-        var secTrust: SecTrust?
-        let secTrustStatus = SecTrustCreateWithCertificates(certRef, nil, &secTrust)
-        guard secTrustStatus == errSecSuccess else { return }
-
-        // 3
-        var resultType: SecTrustResultType = .invalid
-        let evaluateStatus = SecTrustEvaluate(secTrust!, &resultType) // FIXME auto unwrapped !
-        guard evaluateStatus == errSecSuccess else { return }
-
-        // 4
-        let publicKey = SecTrustCopyPublicKey(secTrust!)
-
-        let status = saveInKeychain(publicKey!) // FIXME: auto unwrapped !
+        let status = saveInKeychain(publicKey)
         guard status == errSecSuccess else {
             logger.error("Failed to add BTLE rotation key to keychain: \(status)")
             throw Error.keychain(status)
         }
-    }
-
-    // MARK: - Private
-    func saveInKeychain(_ publicKey: SecKey) -> OSStatus {
-        let query: [String: Any] = [
-            kSecClass as String: kSecClassKey,
-            kSecAttrApplicationTag as String: publicKeyTag,
-            kSecValueRef as String: publicKey as Any,
-            kSecAttrAccessible as String: kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly,
-        ]
-
-        return SecItemAdd(query as CFDictionary, nil)
     }
 
     func read() throws -> SecKey? {
@@ -99,6 +73,50 @@ struct SecureBroadcastRotationKeyStorage: BroadcastRotationKeyStorage {
             logger.error("Failed to clear saved BTLE rotation key from keychain : \(status)")
             throw Error.keychain(status)
         }
+    }
+
+    // MARK: - Private
+
+    func extractPublicKeyFrom(_ certificate: Data) -> SecKey? {
+        // shamelessly stolen from this blog post that explains importing public keys on iOS
+        // https://digitalleaves.com/blog/2015/10/sharing-public-keys-between-ios-and-the-rest-of-the-world/
+
+        guard let certRef = SecCertificateCreateWithData(nil, certificate as CFData) else {
+            logger.critical("Could not create certificate from data")
+            return nil
+        }
+
+        var secTrustMaybe: SecTrust?
+        let secTrustStatus = SecTrustCreateWithCertificates(certRef, nil, &secTrustMaybe)
+        guard secTrustStatus == errSecSuccess else {
+            logger.critical("Could not create trust from certificate. Status: \(secTrustStatus)")
+            return nil
+        }
+
+        guard let secTrust = secTrustMaybe else {
+            logger.critical("Could not create certificate. secTrust is nil")
+            return nil
+        }
+
+        var resultType: SecTrustResultType = .invalid
+        let evaluateStatus = SecTrustEvaluate(secTrust, &resultType)
+        guard evaluateStatus == errSecSuccess else {
+            logger.critical("Could not evaluate sec trust. Status: \(evaluateStatus)")
+            return nil
+        }
+
+        return SecTrustCopyPublicKey(secTrust)
+    }
+
+    func saveInKeychain(_ publicKey: SecKey) -> OSStatus {
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassKey,
+            kSecAttrApplicationTag as String: publicKeyTag,
+            kSecValueRef as String: publicKey as Any,
+            kSecAttrAccessible as String: kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly,
+        ]
+
+        return SecItemAdd(query as CFDictionary, nil)
     }
 }
 
