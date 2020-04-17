@@ -9,8 +9,6 @@
 import UIKit
 import Logging
 
-fileprivate let registrationTimeLimitSecs = 20.0
-
 class StatusViewController: UIViewController, Storyboarded {
     static let storyboardName = "Status"
 
@@ -20,10 +18,9 @@ class StatusViewController: UIViewController, Storyboarded {
 
     private var persistence: Persisting!
     private var registrationService: RegistrationService!
-    private var mainQueue: TestableQueue!
+    private var notificationCenter: NotificationCenter!
     private var contactEventRepo: ContactEventRepository!
     private var session: Session!
-    private var notificationCenter: NotificationCenter!
     
     @IBOutlet var registratonStatusView: UIView!
     @IBOutlet var registrationStatusIcon: UIImageView!
@@ -72,17 +69,20 @@ class StatusViewController: UIViewController, Storyboarded {
     func inject(
         persistence: Persisting,
         registrationService: RegistrationService,
-        mainQueue: TestableQueue,
         contactEventRepo: ContactEventRepository,
         session: Session,
         notificationCenter: NotificationCenter
     ) {
         self.persistence = persistence
         self.registrationService = registrationService
-        self.mainQueue = mainQueue
+        self.notificationCenter = notificationCenter
         self.contactEventRepo = contactEventRepo
         self.session = session
         self.notificationCenter = notificationCenter
+    }
+    
+    deinit {
+        notificationCenter?.removeObserver(self)
     }
 
     override func viewDidLoad() {
@@ -120,6 +120,9 @@ class StatusViewController: UIViewController, Storyboarded {
         } else {
             register()
         }
+        
+        notificationCenter.addObserver(self, selector: #selector(showRegisteredStatus), name: RegistrationCompletedNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(showRegistrationFailedStatus), name: RegistrationFailedNotification, object: nil)
 
         diagnosis = persistence.selfDiagnosis
         potentiallyExposed = persistence.potentiallyExposed
@@ -186,31 +189,10 @@ class StatusViewController: UIViewController, Storyboarded {
     
     private func register() {
         showRegisteringStatus()
-        var finished = false
-        
-        let attempt = registrationService.register() { [weak self] result in
-            guard let self = self else { return }
-            
-            finished = true
-            
-            switch (result) {
-            case .success():
-                self.showRegisteredStatus()
-            case .failure(_):
-                self.showRegistrationFailedStatus()
-            }
-        }
-        
-        mainQueue.asyncAfter(deadline: .now() + registrationTimeLimitSecs) { [weak self] in
-            guard let self = self, !finished else { return }
-            
-            logger.error("Registration did not complete within \(registrationTimeLimitSecs) seconds")
-            attempt.cancel()
-            self.showRegistrationFailedStatus()
-        }
+        registrationService.register()
     }
     
-    private func showRegisteredStatus() {
+    @objc private func showRegisteredStatus() {
         registrationStatusText.text = "REGISTRATION_OK".localized
         registrationStatusIcon.image = UIImage(named: "Registration_status_ok")
         hideSpinner()
@@ -219,7 +201,7 @@ class StatusViewController: UIViewController, Storyboarded {
         registrationRetryButton.isHidden = true
     }
     
-    private func showRegistrationFailedStatus() {
+    @objc private func showRegistrationFailedStatus() {
         registrationStatusText.text = "REGISTRATION_FAILED".localized
         registrationStatusIcon.image = UIImage(named: "Registration_status_failure")
         hideSpinner()

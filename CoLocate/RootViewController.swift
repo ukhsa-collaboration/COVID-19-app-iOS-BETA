@@ -47,7 +47,6 @@ class RootViewController: UIViewController {
         statusViewController.inject(
             persistence: persistence,
             registrationService: registrationService,
-            mainQueue: uiQueue,
             contactEventRepo: contactEventRepository,
             session: session,
             notificationCenter: notificationCenter

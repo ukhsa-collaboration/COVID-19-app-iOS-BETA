@@ -8,81 +8,38 @@
 
 import Foundation
 import Logging
-
+ 
 protocol RegistrationService {
-    func register(completionHandler: @escaping ((Result<Void, Error>) -> Void)) -> Cancelable
+    func register() -> Void
 }
 
-protocol Cancelable {
-    func cancel()
-}
+let RegistrationCompletedNotification = Notification.Name("RegistrationCompletedNotification")
+let RegistrationFailedNotification = Notification.Name("RegistrationFailedNotification")
 
-let RegistrationStartedNotification = NSNotification.Name("RegistrationStartedNotification")
+fileprivate let registrationTimeLimitSecs = 20.0
+
 
 class ConcreteRegistrationService: RegistrationService {
-    let session: Session
-    let persistence: Persisting
-    let remoteNotificationDispatcher: RemoteNotificationDispatcher
-    let notificationCenter: NotificationCenter
-    
-    init(session: Session,
-         persistence: Persisting,
-         remoteNotificationDispatcher: RemoteNotificationDispatcher,
-         notificationCenter: NotificationCenter) {
-        self.session = session
-
-        self.persistence = persistence
-        self.notificationCenter = notificationCenter
-        self.remoteNotificationDispatcher = remoteNotificationDispatcher
-    }
-    
-    func register(completionHandler: @escaping ((Result<Void, Error>) -> Void)) -> Cancelable {
-        let attempt = RegistrationAttempt(
-            session: session,
-            persistence: persistence,
-            remoteNotificationDispatcher: remoteNotificationDispatcher,
-            notificationCenter: notificationCenter,
-            completionHandler: completionHandler
-        )
-        attempt.start()
-        notificationCenter.post(name: RegistrationStartedNotification, object: nil)
-        return attempt
-    }
-}
-
-fileprivate class RegistrationAttempt: Cancelable {
     private let session: Session
     private let persistence: Persisting
     private let remoteNotificationDispatcher: RemoteNotificationDispatcher
     private let notificationCenter: NotificationCenter
-    private var registrationCompletionHandler: ((Result<Void, Error>) -> Void)?
+    private let timeoutQueue: TestableQueue
     private var remoteNotificationCompletionHandler: RemoteNotificationCompletionHandler?
-    private var canceled = false
-
-    init(
-        session: Session,
-        persistence: Persisting,
-        remoteNotificationDispatcher: RemoteNotificationDispatcher,
-        notificationCenter: NotificationCenter,
-        completionHandler: @escaping ((Result<Void, Error>) -> Void)
-    ) {
+    private var attempting = false
+    
+    init(session: Session,
+         persistence: Persisting,
+         remoteNotificationDispatcher: RemoteNotificationDispatcher,
+         notificationCenter: NotificationCenter,
+         timeoutQueue: TestableQueue) {
         self.session = session
+
         self.persistence = persistence
         self.notificationCenter = notificationCenter
-        self.registrationCompletionHandler = completionHandler
         self.remoteNotificationDispatcher = remoteNotificationDispatcher
-    }
-
-    deinit {
-        notificationCenter.removeObserver(self)
-    }
-    
-    func cancel() {
-        canceled = true
-        cleanup()
-    }
-    
-    func start() {
+        self.timeoutQueue = timeoutQueue
+        
         // when our backend sends us the activation code in a push notification
         // we will want to make a second request to complete the registration process
         remoteNotificationDispatcher.registerHandler(forType: .registrationActivationCode) { userInfo, completion in
@@ -90,6 +47,11 @@ fileprivate class RegistrationAttempt: Cancelable {
             self.confirmRegistration(activationCode: userInfo["activationCode"] as! String)
         }
 
+    }
+    
+    func register() -> Void {
+        attempting = true
+        
         if let pushToken = remoteNotificationDispatcher.pushToken {
             // if somehow we have already received our fcm push token, perform the first registration request
             requestRegistration(pushToken)
@@ -102,10 +64,17 @@ fileprivate class RegistrationAttempt: Cancelable {
                 self.requestRegistration(pushToken)
             }
         }
+        
+        self.timeoutQueue.asyncAfter(deadline: .now() + registrationTimeLimitSecs) { [weak self] in
+            guard let self = self, self.attempting else { return }
+            
+            logger.error("Registration did not complete within \(registrationTimeLimitSecs) seconds")
+            self.fail(withError: RegistrationTimeoutError())
+        }
     }
     
     private func requestRegistration(_ pushToken: String) {
-        if canceled {
+        if !attempting {
             return
         }
         
@@ -140,7 +109,7 @@ fileprivate class RegistrationAttempt: Cancelable {
                                                                 postalCode: partialPostalCode)
         
         session.execute(request, queue: .main) { [weak self] result in
-            guard let self = self, !self.canceled else { return }
+            guard let self = self, self.attempting else { return }
 
             switch result {
             case .success(let response):
@@ -160,18 +129,25 @@ fileprivate class RegistrationAttempt: Cancelable {
     private func succeed(registration: Registration) {
         cleanup()
         self.remoteNotificationCompletionHandler?(.newData)
-        registrationCompletionHandler?(.success(()))
+        notificationCenter.post(name: RegistrationCompletedNotification, object: nil)
     }
     
     private func fail(withError error: Error) {
         cleanup()
+        logger.error("Registration failed: \(error)")
         self.remoteNotificationCompletionHandler?(.failed)
-        registrationCompletionHandler?(.failure(error))
+        notificationCenter.post(name: RegistrationFailedNotification, object: nil)
     }
 
     private func cleanup() {
         self.remoteNotificationDispatcher.removeHandler(forType: .registrationActivationCode)
+        attempting = false
     }
+
+}
+
+fileprivate class RegistrationTimeoutError: Error {
+    let errorDescription = "Registration did not complete within \(registrationTimeLimitSecs) seconds."
 }
 
 // MARK: - Logging

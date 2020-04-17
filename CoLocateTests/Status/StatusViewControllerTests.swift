@@ -56,14 +56,15 @@ class StatusViewControllerTests: XCTestCase {
         let registrationService = RegistrationServiceDouble()
         _ = makeViewController(persistence: PersistenceDouble(registration: nil), registrationService: registrationService)
         
-        XCTAssertNotNil(registrationService.lastAttempt)
+        XCTAssertTrue(registrationService.registerCalled)
     }
     
     func testUpdatesAfterRegistrationCompletes() {
         let registrationService = RegistrationServiceDouble()
-        let vc = makeViewController(persistence: PersistenceDouble(registration: nil), registrationService: registrationService)
+        let notificationCenter = NotificationCenter()
+        let vc = makeViewController(persistence: PersistenceDouble(registration: nil), registrationService: registrationService, notificationCenter: notificationCenter)
 
-        registrationService.completionHandler?(Result<(), Error>.success(()))
+        notificationCenter.post(name: RegistrationCompletedNotification, object: nil)
         
         XCTAssertEqual(vc.registrationStatusText?.text, "Everything is working OK")
         XCTAssertEqual(vc.registrationStatusIcon?.image, UIImage(named: "Registration_status_ok"))
@@ -76,10 +77,11 @@ class StatusViewControllerTests: XCTestCase {
     
     func testUpdatesAfterRegistrationFails() {
         let registrationService = RegistrationServiceDouble()
-        let vc = makeViewController(persistence: PersistenceDouble(registration: nil), registrationService: registrationService)
-        
-        registrationService.completionHandler?(Result<(), Error>.failure(ErrorForTest()))
-        
+        let notificationCenter = NotificationCenter()
+        let vc = makeViewController(persistence: PersistenceDouble(registration: nil), registrationService: registrationService, notificationCenter: notificationCenter)
+
+        notificationCenter.post(name: RegistrationFailedNotification, object: nil)
+
         XCTAssertEqual(vc.registrationStatusText?.text, "App setup failed")
         XCTAssertEqual(vc.registrationStatusIcon?.image, UIImage(named: "Registration_status_failure"))
         XCTAssertFalse(vc.registrationStatusIcon?.isHidden ?? true)
@@ -87,61 +89,19 @@ class StatusViewControllerTests: XCTestCase {
         XCTAssertEqual(vc.registratonStatusView?.backgroundColor, UIColor(named: "Error Grey"))
         XCTAssertEqual(vc.registrationStatusText?.textColor, UIColor.white)
         XCTAssertFalse(vc.registrationRetryButton?.isHidden ?? true)
-    }
-    
-    func testShowsFailureAfter20Seconds() {
-        let registrationService = RegistrationServiceDouble()
-        let queueDouble = QueueDouble()
-        let vc = makeViewController(persistence: PersistenceDouble(registration: nil), registrationService: registrationService, mainQueue: queueDouble)
-        
-        queueDouble.scheduledBlock?()
-        
-        XCTAssertEqual(vc.registrationStatusText?.text, "App setup failed")
-        XCTAssertEqual(vc.registrationStatusIcon?.image, UIImage(named: "Registration_status_failure"))
-        XCTAssertFalse(vc.registrationStatusIcon?.isHidden ?? true)
-        XCTAssertTrue(vc.registrationSpinner?.isHidden ?? false)
-        XCTAssertEqual(vc.registratonStatusView?.backgroundColor, UIColor(named: "Error Grey"))
-        XCTAssertEqual(vc.registrationStatusText?.textColor, UIColor.white)
-        XCTAssertFalse(vc.registrationRetryButton?.isHidden ?? true)
-    }
-    
-    func testDoesNotShowFailureAfter20SecondsIfSucceeded() {
-        let registrationService = RegistrationServiceDouble()
-        let queueDouble = QueueDouble()
-        let vc = makeViewController(persistence: PersistenceDouble(registration: nil), registrationService: registrationService, mainQueue: queueDouble)
-
-        registrationService.completionHandler?(Result<(), Error>.success(()))
-        queueDouble.scheduledBlock?()
-        
-        XCTAssertEqual(vc.registrationStatusText?.text, "Everything is working OK")
-        XCTAssertEqual(vc.registrationStatusIcon?.image, UIImage(named: "Registration_status_ok"))
-        XCTAssertFalse(vc.registrationStatusIcon?.isHidden ?? true)
-        XCTAssertTrue(vc.registrationSpinner?.isHidden ?? false)
-        XCTAssertNil(vc.registratonStatusView?.backgroundColor)
-        XCTAssertEqual(vc.registrationStatusText?.textColor, UIColor(named: "NHS Text"))
-    }
-    
-    func testCancelsAfter20Seconds() {
-        let registrationService = RegistrationServiceDouble()
-        let queueDouble = QueueDouble()
-        _ = makeViewController(persistence: PersistenceDouble(registration: nil), registrationService: registrationService, mainQueue: queueDouble)
-        
-        queueDouble.scheduledBlock?()
-
-        XCTAssertTrue((registrationService.lastAttempt as? CancelableDouble)?.canceled ?? false)
     }
     
     func testRetry() {
         let registrationService = RegistrationServiceDouble()
         let queueDouble = QueueDouble()
-        let vc = makeViewController(persistence: PersistenceDouble(registration: nil), registrationService: registrationService, mainQueue: queueDouble)
+        let vc = makeViewController(persistence: PersistenceDouble(registration: nil), registrationService: registrationService)
         
         queueDouble.scheduledBlock?()
         
-        registrationService.lastAttempt = nil
+        registrationService.registerCalled = false
         vc.retryRegistrationTapped()
         
-        XCTAssertNotNil(registrationService.lastAttempt)
+        XCTAssertTrue(registrationService.registerCalled)
 
         XCTAssertEqual(vc.registrationStatusText?.text, "Finalising setup...")
         XCTAssertTrue(vc.registrationStatusIcon?.isHidden ?? false)
@@ -159,16 +119,15 @@ class StatusViewControllerTests: XCTestCase {
 fileprivate func makeViewController(
     persistence: Persisting,
     registrationService: RegistrationService = RegistrationServiceDouble(),
-    mainQueue: TestableQueue = QueueDouble()
+    notificationCenter: NotificationCenter = NotificationCenter()
 ) -> StatusViewController {
     let vc = StatusViewController.instantiate()
     vc.inject(
         persistence: persistence,
         registrationService: registrationService,
-        mainQueue: mainQueue,
         contactEventRepo: ContactEventRepositoryDouble(),
         session: SessionDouble(),
-        notificationCenter: NotificationCenter()
+        notificationCenter: notificationCenter
     )
     XCTAssertNotNil(vc.view)
     vc.viewWillAppear(false)

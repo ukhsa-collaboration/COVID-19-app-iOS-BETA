@@ -41,7 +41,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             session: URLSession.shared,
             persistence: persistence,
             remoteNotificationDispatcher: dispatcher,
-            notificationCenter: notificationCenter
+            notificationCenter: notificationCenter,
+            timeoutQueue: DispatchQueue.main
         )
         bluetoothNursery = BluetoothNursery(persistence: persistence, userNotificationCenter: userNotificationCenter, notificationCenter: notificationCenter)
         

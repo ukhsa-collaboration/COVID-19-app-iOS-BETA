@@ -22,20 +22,18 @@ class RegistrationServiceTests: TestCase {
             notificationCenter: notificationCenter,
             userNotificationCenter: UserNotificationCenterDouble()
         )
-        let registrationService = ConcreteRegistrationService(session: session,
-                                                              persistence: persistence,
-                                                              remoteNotificationDispatcher: remoteNotificationDispatcher,
-                                                              notificationCenter: notificationCenter)
+        let registrationService = ConcreteRegistrationService(
+            session: session,
+            persistence: persistence,
+            remoteNotificationDispatcher: remoteNotificationDispatcher,
+            notificationCenter: notificationCenter,
+            timeoutQueue: QueueDouble()
+        )
     
         remoteNotificationDispatcher.pushToken = "the current push token"
-        var finished = false
-        var error: Error? = nil
-        _ = registrationService.register(completionHandler: { r in
-            finished = true
-            if case .failure(let e) = r {
-                error = e
-            }
-        })
+        
+        let completedObserver = NotificationObserverDouble(notificationCenter: notificationCenter, notificationName: RegistrationCompletedNotification)
+        _ = registrationService.register()
         
         // Verify the first request
         let registrationRequestData = (session.requestSent as! RegistrationRequest).body!
@@ -62,14 +60,13 @@ class RegistrationServiceTests: TestCase {
         XCTAssertEqual(confirmRegistrationPayload.pushToken, "the current push token")
         XCTAssertEqual(confirmRegistrationPayload.postalCode, "AB90")
         
-        XCTAssertFalse(finished)
+        XCTAssertNil(completedObserver.lastNotification)
         
         // Respond to the second request
         let confirmationResponse = ConfirmRegistrationResponse(id: id, secretKey: secretKey)
         session.executeCompletion!(Result<ConfirmRegistrationResponse, Error>.success(confirmationResponse))
         
-        XCTAssertTrue(finished)
-        XCTAssertNil(error)
+        XCTAssertNotNil(completedObserver.lastNotification)
 
         let storedRegistration = persistence.registration
         XCTAssertNotNil(storedRegistration)
@@ -89,19 +86,17 @@ class RegistrationServiceTests: TestCase {
             notificationCenter: notificationCenter,
             userNotificationCenter: UserNotificationCenterDouble()
         )
-        let registrationService = ConcreteRegistrationService(session: session,
-                                                              persistence: persistence,
-                                                              remoteNotificationDispatcher: remoteNotificationDispatcher,
-                                                              notificationCenter: notificationCenter)
+        let registrationService = ConcreteRegistrationService(
+            session: session,
+            persistence: persistence,
+            remoteNotificationDispatcher: remoteNotificationDispatcher,
+            notificationCenter: notificationCenter,
+            timeoutQueue: QueueDouble()
+        )
 
-        var finished = false
-        var error: Error? = nil
-        _ = registrationService.register(completionHandler: { r in
-            finished = true
-            if case .failure(let e) = r {
-                error = e
-            }
-        })
+        let completedObserver = NotificationObserverDouble(notificationCenter: notificationCenter, notificationName: RegistrationCompletedNotification)
+
+        _ = registrationService.register()
         
         XCTAssertNil(session.requestSent)
 
@@ -131,14 +126,13 @@ class RegistrationServiceTests: TestCase {
         XCTAssertEqual(confirmRegistrationPayload.pushToken, "a push token")
         XCTAssertEqual(confirmRegistrationPayload.postalCode, "AB90")
 
-        XCTAssertFalse(finished)
+        XCTAssertNil(completedObserver.lastNotification)
 
         // Respond to the second request
         let confirmationResponse = ConfirmRegistrationResponse(id: id, secretKey: secretKey)
         session.executeCompletion!(Result<ConfirmRegistrationResponse, Error>.success(confirmationResponse))
 
-        XCTAssertTrue(finished)
-        XCTAssertNil(error)
+        XCTAssertNotNil(completedObserver.lastNotification)
 
         let storedRegistration = persistence.registration
         XCTAssertNotNil(storedRegistration)
@@ -150,6 +144,65 @@ class RegistrationServiceTests: TestCase {
         XCTAssertFalse(remoteNotificationDispatcher.hasHandler(forType: .registrationActivationCode))
     }
     
+    func testRegistration_notifiesOnInitialRequestFailure() throws {
+        let session = SessionDouble()
+        let persistence = PersistenceDouble()
+        let notificationCenter = NotificationCenter()
+        let remoteNotificationDispatcher = RemoteNotificationDispatcher(
+            notificationCenter: notificationCenter,
+            userNotificationCenter: UserNotificationCenterDouble()
+        )
+        remoteNotificationDispatcher.pushToken = "the current push token"
+        let registrationService = ConcreteRegistrationService(
+            session: session,
+            persistence: persistence,
+            remoteNotificationDispatcher: remoteNotificationDispatcher,
+            notificationCenter: notificationCenter, timeoutQueue: QueueDouble()
+        )
+        let failedObserver = NotificationObserverDouble(notificationCenter: notificationCenter, notificationName: RegistrationFailedNotification)
+
+        _ = registrationService.register()
+        
+        session.requestSent = nil
+        session.executeCompletion!(Result<(), Error>.failure(ErrorForTest()))
+
+        XCTAssertNotNil(failedObserver.lastNotification)
+    }
+    
+    func testRegistration_notifiesOnSecondRequestFailure() throws {
+        let session = SessionDouble()
+        let persistence = PersistenceDouble(partialPostcode: "AB90")
+        let notificationCenter = NotificationCenter()
+        let remoteNotificationDispatcher = RemoteNotificationDispatcher(
+            notificationCenter: notificationCenter,
+            userNotificationCenter: UserNotificationCenterDouble()
+        )
+        remoteNotificationDispatcher.pushToken = "the current push token"
+        let registrationService = ConcreteRegistrationService(
+            session: session,
+            persistence: persistence,
+            remoteNotificationDispatcher: remoteNotificationDispatcher,
+            notificationCenter: notificationCenter,
+            timeoutQueue: QueueDouble()
+        )
+        let failedObserver = NotificationObserverDouble(notificationCenter: notificationCenter, notificationName: RegistrationFailedNotification)
+
+        _ = registrationService.register()
+        
+        // Respond to the first request
+        session.executeCompletion!(Result<(), Error>.success(()))
+
+        // Simulate the notification containing the activationCode.
+        // This should trigger the second request.
+        let activationCode = "a3d2c477-45f5-4609-8676-c24558094600"
+        remoteNotificationDispatcher.handleNotification(userInfo: ["activationCode": activationCode]) { _ in }
+
+        // Respond to the second request
+        session.executeCompletion!(Result<ConfirmRegistrationResponse, Error>.failure(ErrorForTest()))
+
+        XCTAssertNotNil(failedObserver.lastNotification)
+    }
+    
     func testRegistration_cleansUpAfterInitialRequestFailure() throws {
         let session = SessionDouble()
         let persistence = PersistenceDouble()
@@ -159,12 +212,15 @@ class RegistrationServiceTests: TestCase {
             userNotificationCenter: UserNotificationCenterDouble()
         )
         remoteNotificationDispatcher.pushToken = "the current push token"
-        let registrationService = ConcreteRegistrationService(session: session,
-                                                              persistence: persistence,
-                                                              remoteNotificationDispatcher: remoteNotificationDispatcher,
-                                                              notificationCenter: notificationCenter)
+        let registrationService = ConcreteRegistrationService(
+            session: session,
+            persistence: persistence,
+            remoteNotificationDispatcher: remoteNotificationDispatcher,
+            notificationCenter: notificationCenter,
+            timeoutQueue: QueueDouble()
+        )
 
-        _ = registrationService.register(completionHandler: { _ in })
+        _ = registrationService.register()
         
         session.requestSent = nil
         session.executeCompletion!(Result<(), Error>.failure(ErrorForTest()))
@@ -177,7 +233,33 @@ class RegistrationServiceTests: TestCase {
         XCTAssertNil(session.requestSent)
     }
     
-    func testRegistration_ignoresResponseAfterCancelation() {
+    func testRegistration_timesOutAfter20Seconds() {
+        let session = SessionDouble()
+        let persistence = PersistenceDouble()
+        let notificationCenter = NotificationCenter()
+        let remoteNotificationDispatcher = RemoteNotificationDispatcher(
+            notificationCenter: notificationCenter,
+            userNotificationCenter: UserNotificationCenterDouble()
+        )
+        remoteNotificationDispatcher.pushToken = "the current push token"
+        let queueDouble = QueueDouble()
+        let failedObserver = NotificationObserverDouble(notificationCenter: notificationCenter, notificationName: RegistrationFailedNotification)
+        let registrationService = ConcreteRegistrationService(
+            session: session,
+            persistence: persistence,
+            remoteNotificationDispatcher: remoteNotificationDispatcher,
+            notificationCenter: notificationCenter,
+            timeoutQueue: queueDouble
+        )
+
+        _ = registrationService.register()
+
+        queueDouble.scheduledBlock?()
+        
+        XCTAssertNotNil(failedObserver.lastNotification)
+    }
+    
+    func testRegistration_ignoresResponseAfterTimeout() {
         let session = SessionDouble()
         let persistence = PersistenceDouble(partialPostcode: "AB90")
         let notificationCenter = NotificationCenter()
@@ -185,14 +267,20 @@ class RegistrationServiceTests: TestCase {
             notificationCenter: notificationCenter,
             userNotificationCenter: UserNotificationCenterDouble()
         )
-        let registrationService = ConcreteRegistrationService(session: session,
-                                                              persistence: persistence,
-                                                              remoteNotificationDispatcher: remoteNotificationDispatcher,
-                                                              notificationCenter: notificationCenter)
+        let queueDouble = QueueDouble()
+        let registrationService = ConcreteRegistrationService(
+            session: session,
+            persistence: persistence,
+            remoteNotificationDispatcher: remoteNotificationDispatcher,
+            notificationCenter: notificationCenter,
+            timeoutQueue: queueDouble
+        )
     
         remoteNotificationDispatcher.pushToken = "the current push token"
-        var finished = false
-        let attempt = registrationService.register(completionHandler: { r in finished = true })
+        let completedObserver = NotificationObserverDouble(notificationCenter: notificationCenter, notificationName: RegistrationCompletedNotification)
+        let failedObserver = NotificationObserverDouble(notificationCenter: notificationCenter, notificationName: RegistrationFailedNotification)
+
+        registrationService.register()
         
         // Respond to the first request
         session.executeCompletion!(Result<(), Error>.success(()))
@@ -201,13 +289,15 @@ class RegistrationServiceTests: TestCase {
         // This should trigger the second request.
         remoteNotificationDispatcher.handleNotification(userInfo: ["activationCode": "arbitrary"]) { _ in }
         
-        attempt.cancel()
+        queueDouble.scheduledBlock?()
+        failedObserver.lastNotification = nil
                         
         // Respond to the second request
         let confirmationResponse = ConfirmRegistrationResponse(id: id, secretKey: secretKey)
         session.executeCompletion!(Result<ConfirmRegistrationResponse, Error>.success(confirmationResponse))
         
-        XCTAssertFalse(finished)
+        XCTAssertNil(completedObserver.lastNotification)
+        XCTAssertNil(failedObserver.lastNotification)
         XCTAssertNil(persistence.registration)
         
         // We should have unsusbscribed from push notifications.
@@ -217,24 +307,6 @@ class RegistrationServiceTests: TestCase {
         session.requestSent = nil
         notificationCenter.post(name: PushTokenReceivedNotification, object: nil, userInfo: nil)
         XCTAssertNil(session.requestSent)
-    }
-    
-    func testRegistration_sendsStartNotification() {
-        let persistence = PersistenceDouble()
-        let notificationCenter = NotificationCenter()
-        let remoteNotificationDispatcher = RemoteNotificationDispatcher(
-            notificationCenter: notificationCenter,
-            userNotificationCenter: UserNotificationCenterDouble()
-        )
-        let registrationService = ConcreteRegistrationService(session: SessionDouble(),
-                                                              persistence: persistence,
-                                                              remoteNotificationDispatcher: remoteNotificationDispatcher,
-                                                              notificationCenter: notificationCenter)
-        let notificationObserver = NotificationObserverDouble(notificationCenter: notificationCenter, notificationName: RegistrationStartedNotification)
-
-        _ = registrationService.register { _ in }
-        
-        XCTAssertNotNil(notificationObserver.lastNotification)
     }
 }
 
