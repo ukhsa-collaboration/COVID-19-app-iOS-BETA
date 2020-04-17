@@ -27,3 +27,7 @@
 "COUGH_NO" = "No, I do not have a new continuous cough";
 
 "QUESTION_SUMMARY" = "Thank you for sharing this data with the NHS. We will use this information to anonymously inform people they have come into contact with covid symptoms and encourage them to self-isolate.\n\nThank you for helping us save lives";
+"SYMPTOMS_START_QUESTION" = "When did you first start showing these symptoms?";
+"TEMPERATURE_START_QUESTION" = "When did your temperature start?";
+"COUGH_START_QUESTION" = "When did your cough start?";
+"SELECT_START_DATE" = "Select start date";

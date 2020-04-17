@@ -11,24 +11,33 @@ import XCTest
 
 class SubmitSymptomsViewControllerTests: TestCase {
 
+    var vc: SubmitSymptomsViewController!
+    var persistence: PersistenceDouble!
+    fileprivate var contactEventRepository: MockContactEventRepository!
+    var session: SessionDouble!
+
+    override func setUp() {
+        super.setUp()
+
+        persistence = PersistenceDouble()
+        contactEventRepository = MockContactEventRepository()
+        session = SessionDouble()
+    }
+
     func testNotRegistered() throws {
         throw XCTSkip("TODO: write this test")
     }
 
     func testSubmitTapped() throws {
-        let registration = Registration(id: UUID(uuidString: "FA817D5C-C615-4ABE-83B5-ABDEE8FAB8A6")!, secretKey: Data())
-        let contactEvents = [ContactEvent(sonarId: UUID().data)]
-        let session = SessionDouble()
+        let contactEvent = ContactEvent(sonarId: UUID().data)
 
-        let vc = SubmitSymptomsViewController.instantiate()
-        vc.inject(
-            persistence:  PersistenceDouble(registration: registration),
-            contactEventRepository: MockContactEventRepository(contactEvents: contactEvents),
-            session: session,
-            hasHighTemperature: false,
-            hasNewCough: true
+        makeSubject(
+            registration: Registration(id: UUID(uuidString: "FA817D5C-C615-4ABE-83B5-ABDEE8FAB8A6")!, secretKey: Data()),
+            contactEvents: [contactEvent],
+            hasHighTemperature: true,
+            hasNewCough: false,
+            startDateIndex: 0
         )
-        XCTAssertNotNil(vc.view)
 
         let button = PrimaryButton()
         vc.submitTapped(button)
@@ -47,26 +56,19 @@ class SubmitSymptomsViewControllerTests: TestCase {
             let decoded = try decoder.decode([String: [SonarIdUuid]].self, from: data)
             // Can't compare the entire contact events because the timestamp loses precision
             // when JSON encoded and decoded.
-            XCTAssertEqual(decoded["contactEvents"]?.first?.sonarId, contactEvents.first?.sonarId.flatMap { UUID(data: $0) }?.uuidString)
+            XCTAssertEqual(decoded["contactEvents"]?.first?.sonarId, contactEvent.sonarId.flatMap { UUID(data: $0) }?.uuidString)
         default:
             XCTFail("Expected a patch request but got \(request.method)")
         }
     }
     
     func testPreventsDoubleSubmission() {
-        let registration = Registration(id: UUID(uuidString: "FA817D5C-C615-4ABE-83B5-ABDEE8FAB8A6")!, secretKey: Data())
-        let session = SessionDouble()
-        
-        let vc = SubmitSymptomsViewController.instantiate()
-        vc.inject(
-            persistence:  PersistenceDouble(registration: registration),
-            contactEventRepository: MockContactEventRepository(contactEvents: []),
-            session: session,
-            hasHighTemperature: false,
-            hasNewCough: true
+        makeSubject(
+            hasHighTemperature: true,
+            hasNewCough: false,
+            startDateIndex: 0
         )
-        XCTAssertNotNil(vc.view)
-        
+
         let button = PrimaryButton()
         vc.submitTapped(button)
         
@@ -77,21 +79,7 @@ class SubmitSymptomsViewControllerTests: TestCase {
     }
     
     func testHasNoSymptoms() {
-        let registration: Registration = Registration.fake
-        let persistenceDouble = PersistenceDouble(registration: registration)
-        let sessionDouble = SessionDouble()
-
-        let contactEventRepository = MockContactEventRepository(contactEvents: [ContactEvent(sonarId: Data())])
-
-        let vc = SubmitSymptomsViewController.instantiate()
-        XCTAssertNotNil(vc.view)
-        vc.inject(
-            persistence: persistenceDouble,
-            contactEventRepository: contactEventRepository,
-            session: sessionDouble,
-            hasHighTemperature: false,
-            hasNewCough: false
-        )
+        makeSubject(hasHighTemperature: false, hasNewCough: false)
 
         let unwinder = SelfDiagnosisUnwinder()
         parentViewControllerForTests.viewControllers = [unwinder]
@@ -99,93 +87,57 @@ class SubmitSymptomsViewControllerTests: TestCase {
 
         vc.submitTapped(PrimaryButton())
 
-        XCTAssertNil(persistenceDouble.selfDiagnosis)
+        XCTAssertNil(persistence.selfDiagnosis)
         XCTAssertTrue(unwinder.didUnwindFromSelfDiagnosis)
-        XCTAssertNil(sessionDouble.requestSent)
+        XCTAssertNil(session.requestSent)
     }
 
     func testPersistsDiagnosisAndSubmitsIfOnlyTemperature() {
-        let registration: Registration = Registration.fake
-        let persistenceDouble = PersistenceDouble(registration: registration)
-        let sessionDouble = SessionDouble()
-
-        let contactEventRepository = MockContactEventRepository(contactEvents: [ContactEvent(sonarId: Data())])
-
-        let vc = SubmitSymptomsViewController.instantiate()
-        XCTAssertNotNil(vc.view)
-        vc.inject(
-            persistence: persistenceDouble,
-            contactEventRepository: contactEventRepository,
-            session: sessionDouble,
-            hasHighTemperature: true,
-            hasNewCough: false
-        )
+        makeSubject(hasHighTemperature: true, hasNewCough: false, startDateIndex: 0)
 
         vc.submitTapped(PrimaryButton())
 
-        XCTAssertEqual(persistenceDouble.selfDiagnosis?.symptoms, [.temperature])
-        XCTAssertNotNil(sessionDouble.requestSent)
+        XCTAssertEqual(persistence.selfDiagnosis?.symptoms, [.temperature])
+        XCTAssertNotNil(session.requestSent)
     }
 
     func testPersistsDiagnosisAndSubmitsIfOnlyCough() {
-        let registration: Registration = Registration.fake
-        let persistenceDouble = PersistenceDouble(registration: registration)
-        let sessionDouble = SessionDouble()
-
-        let contactEventRepository = MockContactEventRepository(contactEvents: [ContactEvent(sonarId: Data())])
-        
-        let vc = SubmitSymptomsViewController.instantiate()
-        XCTAssertNotNil(vc.view)
-        vc.inject(
-            persistence: persistenceDouble,
-            contactEventRepository: contactEventRepository,
-            session: sessionDouble,
-            hasHighTemperature: false,
-            hasNewCough: true
-        )
+        makeSubject(hasHighTemperature: false, hasNewCough: true, startDateIndex: 0)
 
         vc.submitTapped(PrimaryButton())
 
-        XCTAssertEqual(persistenceDouble.selfDiagnosis?.symptoms, [.cough])
-        XCTAssertNotNil(sessionDouble.requestSent)
+        XCTAssertEqual(persistence.selfDiagnosis?.symptoms, [.cough])
+        XCTAssertNotNil(session.requestSent)
     }
 
     func testPersistsDiagnosisAndSubmitsIfBoth() {
-        let registration: Registration = Registration.fake
-        let persistenceDouble = PersistenceDouble(registration: registration)
-        let sessionDouble = SessionDouble()
-
-        let contactEventRepository = MockContactEventRepository(contactEvents: [ContactEvent(sonarId: Data())])
-
-        let vc = SubmitSymptomsViewController.instantiate()
-        XCTAssertNotNil(vc.view)
-        vc.inject(
-            persistence: persistenceDouble,
-            contactEventRepository: contactEventRepository,
-            session: sessionDouble,
-            hasHighTemperature: true,
-            hasNewCough: true
-        )
+        makeSubject(hasHighTemperature: true, hasNewCough: true, startDateIndex: 0)
 
         vc.submitTapped(PrimaryButton())
 
-        XCTAssertEqual(persistenceDouble.selfDiagnosis?.symptoms, [.temperature, .cough])
-        XCTAssertNotNil(sessionDouble.requestSent)
+        XCTAssertEqual(persistence.selfDiagnosis?.symptoms, [.temperature, .cough])
+        XCTAssertNotNil(session.requestSent)
+    }
+
+    func testPersistsStartDate() {
+        makeSubject(hasHighTemperature: true, hasNewCough: true, startDateIndex: 5)
+
+        vc.submitTapped(PrimaryButton())
+
+        XCTAssertEqual(persistence.selfDiagnosis?.startDate, vc.startDateOptions[5])
+    }
+
+    func testRequiresStartDate() {
+        makeSubject(hasHighTemperature: true, hasNewCough: true)
+
+        vc.submitTapped(PrimaryButton())
+
+        XCTAssertNil(persistence.selfDiagnosis?.symptoms)
+        XCTAssertNil(session.requestSent)
     }
 
     func testSubmitSuccess() {
-        let contactEventRepository = MockContactEventRepository(contactEvents: [ContactEvent(sonarId: Data())])
-        let session = SessionDouble()
-
-        let vc = SubmitSymptomsViewController.instantiate()
-        vc.inject(
-            persistence: PersistenceDouble(registration: Registration.fake),
-            contactEventRepository: contactEventRepository,
-            session: session,
-            hasHighTemperature: false,
-            hasNewCough: true
-        )
-        XCTAssertNotNil(vc.view)
+        makeSubject(hasHighTemperature: false, hasNewCough: true, startDateIndex: 0)
 
         let unwinder = SelfDiagnosisUnwinder()
         parentViewControllerForTests.viewControllers = [unwinder]
@@ -206,19 +158,7 @@ class SubmitSymptomsViewControllerTests: TestCase {
     }
 
     func testSubmitFailure() {
-        let contactEventRepository = MockContactEventRepository(contactEvents: [ContactEvent(sonarId: Data())])
-        let session = SessionDouble()
-
-        let vc = SubmitSymptomsViewController.instantiate()
-        parentViewControllerForTests.viewControllers = [vc]
-        vc.inject(
-            persistence: PersistenceDouble(registration: Registration.fake),
-            contactEventRepository: contactEventRepository,
-            session: session,
-            hasHighTemperature: false,
-            hasNewCough: true
-        )
-        XCTAssertNotNil(vc.view)
+        makeSubject(hasHighTemperature: false, hasNewCough: true, startDateIndex: 0)
 
         let unwinder = SelfDiagnosisUnwinder()
         parentViewControllerForTests.viewControllers = [unwinder]
@@ -250,8 +190,33 @@ class SubmitSymptomsViewControllerTests: TestCase {
         done = true
     }
 
-}
+    private func makeSubject(
+        registration: Registration = Registration.fake,
+        contactEvents: [ContactEvent] = [],
+        hasHighTemperature: Bool = false,
+        hasNewCough: Bool = false,
+        startDateIndex: Int? = nil
+    ) {
+        persistence.registration = registration
+        contactEventRepository.contactEvents = contactEvents
 
+        vc = SubmitSymptomsViewController.instantiate()
+        vc.inject(
+            persistence: persistence,
+            contactEventRepository: contactEventRepository,
+            session: session,
+            notificationCenter: NotificationCenter(),
+            hasHighTemperature: hasHighTemperature,
+            hasNewCough: hasNewCough
+        )
+        XCTAssertNotNil(vc.view)
+
+        if let index = startDateIndex {
+            vc.pickerView(vc.datePicker, didSelectRow: index, inComponent: 1)
+        }
+    }
+
+}
 
 fileprivate class SelfDiagnosisUnwinder: UIViewController {
     var didUnwindFromSelfDiagnosis = false
@@ -265,7 +230,7 @@ fileprivate class MockContactEventRepository: ContactEventRepository {
     var contactEvents: [ContactEvent] = []
     var hasReset: Bool = false
     
-    init(contactEvents: [ContactEvent]) {
+    init(contactEvents: [ContactEvent] = []) {
         self.contactEvents = contactEvents
     }
     

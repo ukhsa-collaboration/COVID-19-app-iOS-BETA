@@ -162,7 +162,15 @@ fileprivate func makeViewController(
     mainQueue: TestableQueue = QueueDouble()
 ) -> StatusViewController {
     let vc = StatusViewController.instantiate()
-    vc.inject(persistence: persistence, registrationService: registrationService, mainQueue: mainQueue, contactEventRepo: ContactEventRepositoryDouble(), session: SessionDouble())
+    vc.inject(
+        persistence: persistence,
+        registrationService: registrationService,
+        mainQueue: mainQueue,
+        contactEventRepo: ContactEventRepositoryDouble(),
+        session: SessionDouble(),
+        notificationCenter: NotificationCenter()
+    )
     XCTAssertNotNil(vc.view)
+    vc.viewWillAppear(false)
     return vc
 }

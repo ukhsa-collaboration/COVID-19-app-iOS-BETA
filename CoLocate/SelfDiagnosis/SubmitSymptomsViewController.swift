@@ -12,12 +12,42 @@ import Logging
 class SubmitSymptomsViewController: UIViewController, Storyboarded {
     static let storyboardName = "SelfDiagnosis"
 
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var summaryLabel: UILabel!
+    @IBOutlet weak var startDateView: UIStackView!
+    @IBOutlet weak var startDateLabel: UILabel!
+    @IBOutlet weak var startDateButton: StartDateButton!
+    @IBOutlet weak var submitButton: PrimaryButton!
+    @IBOutlet var datePickerAccessory: UIToolbar!
+    @IBOutlet var datePicker: UIPickerView!
+
+    private let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .full
+        formatter.timeStyle = .none
+        formatter.doesRelativeDateFormatting = true
+        return formatter
+    }()
+
     private var persistence: Persisting!
     private var contactEventRepository: ContactEventRepository!
     private var session: Session!
     private var notificationCenter: NotificationCenter!
 
     private var symptoms: Set<Symptom>!
+    var startDateOptions: [Date] = {
+        let today = Date()
+        return (-6...0).compactMap { Calendar.current.date(byAdding: .day, value: $0, to: today) }.reversed()
+    }()
+    private var startDate: Date? {
+        didSet {
+            guard let date = startDate else {
+                return
+            }
+
+            startDateButton.text = dateFormatter.string(from: date)
+        }
+    }
     private var isSubmitting = false
     
     func inject(
@@ -42,13 +72,49 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         }
     }
     
-    @IBOutlet weak var summary: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        summary.text = "QUESTION_SUMMARY".localized
+
+        summaryLabel.text = "QUESTION_SUMMARY".localized
+        if symptoms.isEmpty {
+            startDateView.isHidden = true
+        } else {
+            startDateView.isHidden = false
+
+            let question: String
+            if symptoms.count > 1 {
+                question = "SYMPTOMS_START_QUESTION"
+            } else if symptoms == [.temperature] {
+                question = "TEMPERATURE_START_QUESTION"
+            } else if symptoms == [.cough] {
+                question = "COUGH_START_QUESTION"
+            } else {
+                logger.critical("Unknown symptoms: \(String(describing: symptoms))")
+                question = "SYMPTOMS_START_QUESTION"
+            }
+            startDateLabel.text = question.localized
+        }
+
+        startDateButton.text = "SELECT_START_DATE".localized
+        startDateButton.inputView = datePicker
+        startDateButton.inputAccessoryView = datePickerAccessory
+
+        notificationCenter.addObserver(self, selector: #selector(keyboardDidShow(notification:)), name: UIResponder.keyboardDidShowNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
-    
+
+    @IBAction func startDateButtonTapped(_ sender: StartDateButton) {
+        startDateButton.becomeFirstResponder()
+    }
+
+    @IBAction func doneTapped(_ sender: UIBarButtonItem) {
+        startDateButton.resignFirstResponder()
+    }
+
+    @IBAction func startDateChanged(_ sender: UIDatePicker) {
+        startDate = sender.date
+    }
+
     @IBAction func submitTapped(_ sender: PrimaryButton) {
         guard let registration = persistence.registration else {
             fatalError("What do we do when we aren't registered?")
@@ -58,7 +124,12 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
             self.performSegue(withIdentifier: "unwindFromSelfDiagnosis", sender: self)
             return
         }
-        
+
+        guard let startDate = startDate else {
+            alert(message: "START_DATE_ERROR".localized)
+            return
+        }
+
         guard !isSubmitting else { return }
         isSubmitting = true
         
@@ -66,7 +137,7 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         // so we can make sure this flow works through the
         // app during debugging. This will need to be replaced
         // with real business logic in the future.
-        persistence.selfDiagnosis = SelfDiagnosis(symptoms: symptoms, startDate: Date())
+        persistence.selfDiagnosis = SelfDiagnosis(symptoms: symptoms, startDate: startDate)
         
         let requestFactory = ConcreteSecureRequestFactory(registration: registration)
 
@@ -92,15 +163,36 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
                 self.performSegue(withIdentifier: "unwindFromSelfDiagnosis", sender: self)
                 self.contactEventRepository.reset()
             case .failure(let error):
-                self.alert(error: error)
+                self.alert(message: error.localizedDescription)
             }
         }
     }
 
-    private func alert(error: Error) {
+    @objc func keyboardDidShow(notification: Notification) {
+        guard let kbFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+
+        let insets = UIEdgeInsets(top: 0, left: 0, bottom: kbFrame.size.height, right: 0)
+        scrollView.contentInset = insets
+        scrollView.scrollIndicatorInsets = insets
+
+        var visibleRegion = self.view.frame
+        visibleRegion.size.height -= kbFrame.height
+
+        if !visibleRegion.contains(submitButton.frame.origin) {
+            scrollView.scrollRectToVisible(submitButton.frame, animated: true)
+        }
+    }
+
+    @objc func keyboardWillHide(notification: Notification) {
+        let insets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        scrollView.contentInset = insets
+        scrollView.scrollIndicatorInsets = insets
+    }
+
+    private func alert(message: String) {
         let alert = UIAlertController(
             title: nil,
-            message: error.localizedDescription,
+            message: message,
             preferredStyle: .alert
         )
 
@@ -108,6 +200,55 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         present(alert, animated: true)
     }
 
+}
+
+extension SubmitSymptomsViewController: UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return startDateOptions.count
+    }
+}
+
+extension SubmitSymptomsViewController: UIPickerViewDelegate {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return dateFormatter.string(from: startDateOptions[row])
+    }
+
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        startDate = startDateOptions[row]
+    }
+}
+
+class StartDateButton: ButtonWithDynamicType {
+    override var canBecomeFirstResponder: Bool {
+        true
+    }
+
+    private var _inputView: UIView?
+    override var inputView: UIView? {
+        get { _inputView }
+        set { _inputView = newValue }
+    }
+
+    private var _inputAccessoryView: UIView?
+    override var inputAccessoryView: UIView? {
+        get { _inputAccessoryView }
+        set { _inputAccessoryView = newValue }
+    }
+
+    var text: String? {
+        get { title(for: .normal) }
+        set { setTitle(newValue, for: .normal) }
+    }
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        layer.cornerRadius = 16
+    }
 }
 
 fileprivate let logger = Logger(label: "SelfDiagnosis")
