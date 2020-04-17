@@ -128,7 +128,7 @@ private struct FileReporterContext {
         }
         
         unaccountedFilePaths = unaccountedFilePaths.filter {
-            let isLocalizationFolder = $0.range(of: "^\\w+.lproj$", options: .regularExpression, range: nil, locale: nil) != nil
+            let isLocalizationFolder = $0.matches("\\w+.lproj")
             return !isLocalizationFolder
         }
     }
@@ -297,10 +297,10 @@ extension FileReporterContext {
     }
     
     private func localizedFile(named name: String) -> String? {
-        let regex = "^\\w+.lproj/\(name)$"
+        let pattern = "\\w+.lproj/\(name)"
         return filesByPathInBundle.keys.first { file in
             if file == name { return true }
-            return file.range(of: regex, options: .regularExpression, range: nil, locale: nil) != nil
+            return file.matches(pattern)
         }
     }
     
