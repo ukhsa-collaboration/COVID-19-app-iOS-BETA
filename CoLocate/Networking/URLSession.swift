@@ -11,7 +11,21 @@ import Logging
 
 extension URLSession {
     static func make() -> URLSession {
-        URLSession(configuration: .default)
+        // Use of `ephemeral` here is a precaution. We are disabling all caching manually anyway, but using this instead
+        // of `default` means if we miss something (especially as new properties are added over time) we’ll inherit the
+        // `ephemeral` value instead of the `default` one.
+        let configuration = URLSessionConfiguration.ephemeral
+        
+        if #available(iOS 13.0, *) {
+            configuration.tlsMinimumSupportedProtocolVersion = .TLSv12
+        }
+        configuration.tlsMinimumSupportedProtocol = .tlsProtocol12
+        configuration.httpCookieAcceptPolicy = .never
+        configuration.httpShouldSetCookies = false
+        configuration.httpCookieStorage = nil
+        configuration.urlCache = nil
+        
+        return URLSession(configuration: configuration)
     }
 }
 

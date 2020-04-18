@@ -12,8 +12,21 @@ import XCTest
 class URLSessionTests: XCTestCase {
 
     func test_is_configured_with_a_proper_URL() throws {
-        let url = URLSession.shared.baseURL
+        let url = URLSession.make().baseURL
 
         XCTAssertNotNil(url)
+    }
+    
+    func test_has_correct_security_configuration() throws {
+        let configuration = URLSession.make().configuration
+        
+        if #available(iOS 13.0, *) {
+            XCTAssertEqual(configuration.tlsMinimumSupportedProtocolVersion, .TLSv12)
+        }
+        XCTAssertEqual(configuration.tlsMinimumSupportedProtocol, .tlsProtocol12)
+        XCTAssertEqual(configuration.httpCookieAcceptPolicy, .never)
+        XCTAssertFalse(configuration.httpShouldSetCookies)
+        XCTAssertNil(configuration.httpCookieStorage)
+        XCTAssertNil(configuration.urlCache)
     }
 }
