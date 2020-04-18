@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     let notificationCenter = NotificationCenter.default
     let userNotificationCenter = UNUserNotificationCenter.current()
+    let urlSession = URLSession.shared
     let persistence = Persistence.shared
     let authorizationManager = AuthorizationManager()
     let bluetoothNursery: BluetoothNursery
@@ -38,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             dispatcher: dispatcher
         )
         registrationService = ConcreteRegistrationService(
-            session: URLSession.shared,
+            session: urlSession,
             persistence: persistence,
             remoteNotificationDispatcher: dispatcher,
             notificationCenter: notificationCenter,
@@ -77,7 +78,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             notificationCenter: notificationCenter,
             registrationService: registrationService,
             contactEventRepository: bluetoothNursery.contactEventRepository,
-            session: URLSession.shared,
+            session: urlSession,
             uiQueue: DispatchQueue.main
         )
         
