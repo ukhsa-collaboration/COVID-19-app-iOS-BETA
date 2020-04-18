@@ -9,6 +9,12 @@
 import Foundation
 import Logging
 
+extension URLSession {
+    static func make() -> URLSession {
+        URLSession(configuration: .default)
+    }
+}
+
 extension URLSession: Session {
 
     var baseURL: URL {

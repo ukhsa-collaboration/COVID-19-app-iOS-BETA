@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     let notificationCenter = NotificationCenter.default
     let userNotificationCenter = UNUserNotificationCenter.current()
-    let urlSession = URLSession.shared
+    let urlSession = URLSession.make()
     let persistence = Persistence.shared
     let authorizationManager = AuthorizationManager()
     let bluetoothNursery: BluetoothNursery
