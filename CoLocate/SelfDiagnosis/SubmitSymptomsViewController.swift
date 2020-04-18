@@ -14,21 +14,10 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var startDateView: UIStackView!
-    @IBOutlet weak var startDateLabel: UILabel!
-    @IBOutlet weak var startDateButton: StartDateButton!
+    @IBOutlet weak var startDateView: UIView!
     @IBOutlet weak var thankYouLabel: UILabel!
     @IBOutlet weak var submitButton: PrimaryButton!
-    @IBOutlet var datePickerAccessory: UIToolbar!
-    @IBOutlet var datePicker: UIPickerView!
-
-    private let dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .full
-        formatter.timeStyle = .none
-        formatter.doesRelativeDateFormatting = true
-        return formatter
-    }()
+    var startDateViewController: StartDateViewController!
 
     private var persisting: Persisting!
     private var contactEventRepository: ContactEventRepository!
@@ -36,19 +25,7 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
     private var notificationCenter: NotificationCenter!
 
     private var symptoms: Set<Symptom>!
-    var startDateOptions: [Date] = {
-        let today = Date()
-        return (-6...0).compactMap { Calendar.current.date(byAdding: .day, value: $0, to: today) }.reversed()
-    }()
-    private var startDate: Date? {
-        didSet {
-            guard let date = startDate else {
-                return
-            }
-
-            startDateButton.text = dateFormatter.string(from: date)
-        }
-    }
+    private var startDate: Date?
     private var isSubmitting = false
     
     func inject(
@@ -76,28 +53,7 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if symptoms.isEmpty {
-            startDateView.isHidden = true
-        } else {
-            startDateView.isHidden = false
-
-            let question: String
-            if symptoms.count > 1 {
-                question = "SYMPTOMS_START_QUESTION"
-            } else if symptoms == [.temperature] {
-                question = "TEMPERATURE_START_QUESTION"
-            } else if symptoms == [.cough] {
-                question = "COUGH_START_QUESTION"
-            } else {
-                logger.critical("Unknown symptoms: \(String(describing: symptoms))")
-                question = "SYMPTOMS_START_QUESTION"
-            }
-            startDateLabel.text = question.localized
-        }
-
-        startDateButton.text = "SELECT_START_DATE".localized
-        startDateButton.inputView = datePicker
-        startDateButton.inputAccessoryView = datePickerAccessory
+        startDateView.isHidden = symptoms.isEmpty
 
         thankYouLabel.text = "SUBMIT_SYMPTOMS_THANK_YOU".localized
 
@@ -113,18 +69,6 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
             name: UIResponder.keyboardWillHideNotification,
             object: nil
         )
-    }
-
-    @IBAction func startDateButtonTapped(_ sender: StartDateButton) {
-        startDateButton.becomeFirstResponder()
-    }
-
-    @IBAction func doneTapped(_ sender: UIBarButtonItem) {
-        startDateButton.resignFirstResponder()
-    }
-
-    @IBAction func startDateChanged(_ sender: UIDatePicker) {
-        startDate = sender.date
     }
 
     @IBAction func submitTapped(_ sender: PrimaryButton) {
@@ -180,6 +124,16 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         }
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.destination {
+        case let vc as StartDateViewController:
+            startDateViewController = vc
+            vc.inject(symptoms: symptoms, delegate: self)
+        default:
+            break
+        }
+    }
+
     @objc func keyboardWillShow(notification: Notification) {
         guard
             let kbFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect
@@ -194,19 +148,13 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         var visibleRegion = self.view.frame
         visibleRegion.size.height -= kbFrame.height
 
-        guard
-            let kbDuration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval,
-            let kbCurve = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt
-        else {
-            return
-        }
-
-        UIView.animate(withDuration: kbDuration, delay: 0, options: UIView.AnimationOptions(rawValue: kbCurve), animations: {
+        animate(withKeyboardNotification: notification, animations: {
             self.heightConstraint.constant = visibleRegion.size.height
             self.heightConstraint.isActive = true
             self.view.layoutIfNeeded()
         }, completion: { _ in
-            self.scrollView.scrollRectToVisible(self.startDateButton.frame, animated: true)
+            guard let startDateButton = self.startDateViewController.button else { return }
+            self.scrollView.scrollRectToVisible(startDateButton.frame, animated: true)
         })
     }
 
@@ -215,14 +163,7 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         scrollView.contentInset = insets
         scrollView.scrollIndicatorInsets = insets
 
-        guard
-            let kbDuration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval,
-            let kbCurve = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt
-        else {
-            return
-        }
-
-        UIView.animate(withDuration: kbDuration, delay: 0, options: UIView.AnimationOptions(rawValue: kbCurve), animations: {
+        animate(withKeyboardNotification: notification, animations: {
             self.heightConstraint.isActive = false
             self.view.layoutIfNeeded()
         })
@@ -239,54 +180,28 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         present(alert, animated: true)
     }
 
+    private func animate(withKeyboardNotification notification: Notification, animations: @escaping () -> (), completion: @escaping (Bool) -> () = { _ in }) {
+        guard
+            let kbDuration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval,
+            let kbCurve = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt
+        else {
+            return
+        }
+
+        UIView.animate(
+            withDuration: kbDuration,
+            delay: 0,
+            options: UIView.AnimationOptions(rawValue: kbCurve),
+            animations: animations,
+            completion: completion
+        )
+    }
+
 }
 
-extension SubmitSymptomsViewController: UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return startDateOptions.count
-    }
-}
-
-extension SubmitSymptomsViewController: UIPickerViewDelegate {
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return dateFormatter.string(from: startDateOptions[row])
-    }
-
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        startDate = startDateOptions[row]
-    }
-}
-
-class StartDateButton: ButtonWithDynamicType {
-    override var canBecomeFirstResponder: Bool {
-        true
-    }
-
-    private var _inputView: UIView?
-    override var inputView: UIView? {
-        get { _inputView }
-        set { _inputView = newValue }
-    }
-
-    private var _inputAccessoryView: UIView?
-    override var inputAccessoryView: UIView? {
-        get { _inputAccessoryView }
-        set { _inputAccessoryView = newValue }
-    }
-
-    var text: String? {
-        get { title(for: .normal) }
-        set { setTitle(newValue, for: .normal) }
-    }
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-
-        layer.cornerRadius = 16
+extension SubmitSymptomsViewController: StartDateViewControllerDelegate {
+    func startDateViewController(_ vc: StartDateViewController, didSelectDate date: Date) {
+        startDate = date
     }
 }
 

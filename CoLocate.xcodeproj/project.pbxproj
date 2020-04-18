@@ -103,6 +103,7 @@
 		F632792A2435323200CF7A42 /* PermissionsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63279292435323200CF7A42 /* PermissionsViewControllerTests.swift */; };
 		F636453B243687DE0014FD54 /* PermissionsDeniedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F636453A243687DE0014FD54 /* PermissionsDeniedViewController.swift */; };
 		F652F7242449138900D97950 /* SetDiagnosisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652F7232449138900D97950 /* SetDiagnosisViewController.swift */; };
+		F652F72C244A74E900D97950 /* StartDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652F72B244A74E900D97950 /* StartDateViewController.swift */; };
 		F67A2291242AA35C002254B6 /* SecureRegistrationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A2290242AA35B002254B6 /* SecureRegistrationStorage.swift */; };
 		F67A2293242AA370002254B6 /* SecureRegistrationStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */; };
 		F67C5154243E4D2F008E2945 /* AnswerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67C5153243E4D2F008E2945 /* AnswerButton.swift */; };
@@ -279,6 +280,7 @@
 		F63279292435323200CF7A42 /* PermissionsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsViewControllerTests.swift; sourceTree = "<group>"; };
 		F636453A243687DE0014FD54 /* PermissionsDeniedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsDeniedViewController.swift; sourceTree = "<group>"; };
 		F652F7232449138900D97950 /* SetDiagnosisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDiagnosisViewController.swift; sourceTree = "<group>"; };
+		F652F72B244A74E900D97950 /* StartDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDateViewController.swift; sourceTree = "<group>"; };
 		F67A2290242AA35B002254B6 /* SecureRegistrationStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRegistrationStorage.swift; sourceTree = "<group>"; };
 		F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRegistrationStorageTests.swift; sourceTree = "<group>"; };
 		F67C5153243E4D2F008E2945 /* AnswerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerButton.swift; sourceTree = "<group>"; };
@@ -703,6 +705,7 @@
 				F6AB2F1D243D324400386D6B /* CoughViewController.swift */,
 				F6EEC3B72448DD2400172820 /* SelfDiagnosis.swift */,
 				F68B89EE243D01FA00F369A9 /* SelfDiagnosisNavigationController.swift */,
+				F652F72B244A74E900D97950 /* StartDateViewController.swift */,
 				F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */,
 				F68B89F3243D050700F369A9 /* TemperatureViewController.swift */,
 			);
@@ -1098,6 +1101,7 @@
 				F7D62F2B2440D64D004C32A2 /* ConcreteBroadcastIdGenerator.swift in Sources */,
 				89F06B312434AABF0074C612 /* NoOpLogHandler.swift in Sources */,
 				F6F05A3024340E5400FF4B72 /* OnboardingViewController.swift in Sources */,
+				F652F72C244A74E900D97950 /* StartDateViewController.swift in Sources */,
 				89074B8524378A0D00D67777 /* UITestPayload.swift in Sources */,
 				F6AB2F20243D359F00386D6B /* SubmitSymptomsViewController.swift in Sources */,
 				21F374042434C4BF00926FB8 /* LiveBTLEDebuggerTableViewController.swift in Sources */,

@@ -339,7 +339,7 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="9Z6-MF-rO6">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="234"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="286.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3/3" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ul2-la-I2I">
                                                 <rect key="frame" x="20" y="32" width="374" height="16"/>
@@ -353,51 +353,32 @@
                                                     <constraint firstAttribute="height" constant="8" id="Tc7-Ud-OYW"/>
                                                 </constraints>
                                             </view>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="pee-46-xUh">
-                                                <rect key="frame" x="20" y="56" width="374" height="75.5"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start Date Question" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OFO-L9-lgU">
-                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="26.5"/>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                                        <color key="textColor" name="NHS Text"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qgs-Ba-zHy" userLabel="Spacer">
-                                                        <rect key="frame" x="0.0" y="26.5" width="374" height="16"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="16" id="q6I-s9-tlk"/>
-                                                        </constraints>
-                                                    </view>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JUs-Gg-aFs" customClass="StartDateButton" customModule="CoLocate" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="42.5" width="374" height="33"/>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <connections>
-                                                            <action selector="startDateButtonTapped:" destination="ofL-pj-tC8" eventType="touchUpInside" id="dOn-B1-jMx"/>
-                                                        </connections>
-                                                    </button>
-                                                </subviews>
-                                            </stackView>
+                                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="frM-yB-tE8">
+                                                <rect key="frame" x="20" y="56" width="374" height="128"/>
+                                                <connections>
+                                                    <segue destination="yb6-3i-qfY" kind="embed" id="FMc-f5-BLe"/>
+                                                </connections>
+                                            </containerView>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="16" translatesAutoresizingMaskIntoConstraints="NO" id="x4g-G9-ZiU" userLabel="Spacer">
-                                                <rect key="frame" x="20" y="131.5" width="374" height="16"/>
+                                                <rect key="frame" x="20" y="184" width="374" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="16" id="jBB-Zr-QZz"/>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thank You" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aIR-YM-xXi">
-                                                <rect key="frame" x="20" y="147.5" width="374" height="20.5"/>
+                                                <rect key="frame" x="20" y="200" width="374" height="20.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                 <color key="textColor" name="NHS Text"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YR8-yi-S77" userLabel="Spacer">
-                                                <rect key="frame" x="20" y="168" width="374" height="16"/>
+                                                <rect key="frame" x="20" y="220.5" width="374" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="16" id="W9P-lv-kmw"/>
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JYn-nS-TUw" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="184" width="374" height="30"/>
+                                                <rect key="frame" x="20" y="236.5" width="374" height="30"/>
                                                 <state key="normal" title="Submit"/>
                                                 <connections>
                                                     <action selector="submitTapped:" destination="ofL-pj-tC8" eventType="touchUpInside" id="EWR-3W-sAd"/>
@@ -406,7 +387,7 @@
                                             </button>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" priority="999" id="iw0-QM-AIq"/>
+                                            <constraint firstAttribute="height" priority="2" id="iw0-QM-AIq"/>
                                         </constraints>
                                         <directionalEdgeInsets key="directionalLayoutMargins" top="32" leading="20" bottom="20" trailing="20"/>
                                         <variation key="default">
@@ -445,19 +426,60 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="datePicker" destination="ioO-ps-knc" id="og5-On-wTf"/>
-                        <outlet property="datePickerAccessory" destination="aek-YN-bXo" id="RNr-Oy-3pq"/>
                         <outlet property="heightConstraint" destination="iw0-QM-AIq" id="Twc-xH-plE"/>
                         <outlet property="scrollView" destination="xUD-zY-9kW" id="ucw-sm-n5X"/>
-                        <outlet property="startDateButton" destination="JUs-Gg-aFs" id="vda-WE-q6E"/>
-                        <outlet property="startDateLabel" destination="OFO-L9-lgU" id="oLN-Pl-j8n"/>
-                        <outlet property="startDateView" destination="pee-46-xUh" id="dCH-Oz-uNv"/>
+                        <outlet property="startDateView" destination="frM-yB-tE8" id="cOp-jS-23c"/>
                         <outlet property="submitButton" destination="JYn-nS-TUw" id="HcN-Hc-nI4"/>
                         <outlet property="thankYouLabel" destination="aIR-YM-xXi" id="vix-vV-Rrk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ISX-4O-Rgm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="hC6-GD-FFV" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2688" y="173"/>
+        </scene>
+        <!--Start Date View Controller-->
+        <scene sceneID="aB9-Fx-OLF">
+            <objects>
+                <viewController id="yb6-3i-qfY" customClass="StartDateViewController" customModule="CoLocate" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HkP-Uv-0kn">
+                        <rect key="frame" x="0.0" y="0.0" width="374" height="128"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="fgB-Ce-B2O">
+                                <rect key="frame" x="0.0" y="0.0" width="374" height="128"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start Date Question" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OFO-L9-lgU">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="26.5"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                        <color key="textColor" name="NHS Text"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JUs-Gg-aFs" customClass="StartDateButton" customModule="CoLocate" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="42.5" width="374" height="85.5"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="buttonTapped:" destination="yb6-3i-qfY" eventType="touchUpInside" id="dKC-fk-nea"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="fgB-Ce-B2O" secondAttribute="bottom" id="IJ9-YV-BGG"/>
+                            <constraint firstItem="fgB-Ce-B2O" firstAttribute="top" secondItem="HkP-Uv-0kn" secondAttribute="top" id="Szp-qc-MQK"/>
+                            <constraint firstAttribute="trailing" secondItem="fgB-Ce-B2O" secondAttribute="trailing" id="nVv-WX-As8"/>
+                            <constraint firstItem="fgB-Ce-B2O" firstAttribute="leading" secondItem="HkP-Uv-0kn" secondAttribute="leading" id="yvX-hy-AKX"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="button" destination="JUs-Gg-aFs" id="BAa-NK-olq"/>
+                        <outlet property="datePicker" destination="ioO-ps-knc" id="6M7-sc-XVZ"/>
+                        <outlet property="datePickerAccessory" destination="aek-YN-bXo" id="vPm-pg-Rcm"/>
+                        <outlet property="label" destination="OFO-L9-lgU" id="rT5-CT-mfN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xbd-dm-1fB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="aek-YN-bXo">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -465,7 +487,7 @@
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="bBL-Cd-yNX"/>
                         <barButtonItem style="done" systemItem="done" id="qkL-BE-G7C">
                             <connections>
-                                <action selector="doneTapped:" destination="ofL-pj-tC8" id="Ina-Dg-Vlx"/>
+                                <action selector="doneTapped:" destination="yb6-3i-qfY" id="Idv-S7-qfE"/>
                             </connections>
                         </barButtonItem>
                     </items>
@@ -474,12 +496,12 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="216"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <connections>
-                        <outlet property="dataSource" destination="ofL-pj-tC8" id="4qQ-N4-9zl"/>
-                        <outlet property="delegate" destination="ofL-pj-tC8" id="04o-Of-f4c"/>
+                        <outlet property="dataSource" destination="yb6-3i-qfY" id="p93-jh-gZm"/>
+                        <outlet property="delegate" destination="yb6-3i-qfY" id="zu1-lh-gt4"/>
                     </connections>
                 </pickerView>
             </objects>
-            <point key="canvasLocation" x="2688" y="173"/>
+            <point key="canvasLocation" x="2687" y="739"/>
         </scene>
     </scenes>
     <resources>

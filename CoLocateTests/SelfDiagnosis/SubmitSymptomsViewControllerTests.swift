@@ -36,7 +36,7 @@ class SubmitSymptomsViewControllerTests: TestCase {
             contactEvents: [contactEvent],
             hasHighTemperature: true,
             hasNewCough: false,
-            startDateIndex: 0
+            startDate: Date()
         )
 
         let button = PrimaryButton()
@@ -66,7 +66,7 @@ class SubmitSymptomsViewControllerTests: TestCase {
         makeSubject(
             hasHighTemperature: true,
             hasNewCough: false,
-            startDateIndex: 0
+            startDate: Date()
         )
 
         let button = PrimaryButton()
@@ -93,7 +93,7 @@ class SubmitSymptomsViewControllerTests: TestCase {
     }
 
     func testPersistsDiagnosisAndSubmitsIfOnlyTemperature() {
-        makeSubject(hasHighTemperature: true, hasNewCough: false, startDateIndex: 0)
+        makeSubject(hasHighTemperature: true, hasNewCough: false, startDate: Date())
 
         vc.submitTapped(PrimaryButton())
 
@@ -102,7 +102,7 @@ class SubmitSymptomsViewControllerTests: TestCase {
     }
 
     func testPersistsDiagnosisAndSubmitsIfOnlyCough() {
-        makeSubject(hasHighTemperature: false, hasNewCough: true, startDateIndex: 0)
+        makeSubject(hasHighTemperature: false, hasNewCough: true, startDate: Date())
 
         vc.submitTapped(PrimaryButton())
 
@@ -111,7 +111,7 @@ class SubmitSymptomsViewControllerTests: TestCase {
     }
 
     func testPersistsDiagnosisAndSubmitsIfBoth() {
-        makeSubject(hasHighTemperature: true, hasNewCough: true, startDateIndex: 0)
+        makeSubject(hasHighTemperature: true, hasNewCough: true, startDate: Date())
 
         vc.submitTapped(PrimaryButton())
 
@@ -120,11 +120,12 @@ class SubmitSymptomsViewControllerTests: TestCase {
     }
 
     func testPersistsStartDate() {
-        makeSubject(hasHighTemperature: true, hasNewCough: true, startDateIndex: 5)
+        let date = Date()
+        makeSubject(hasHighTemperature: true, hasNewCough: true, startDate: date)
 
         vc.submitTapped(PrimaryButton())
 
-        XCTAssertEqual(persistence.selfDiagnosis?.startDate, vc.startDateOptions[5])
+        XCTAssertEqual(persistence.selfDiagnosis?.startDate, date)
     }
 
     func testRequiresStartDate() {
@@ -137,7 +138,7 @@ class SubmitSymptomsViewControllerTests: TestCase {
     }
 
     func testSubmitSuccess() {
-        makeSubject(hasHighTemperature: false, hasNewCough: true, startDateIndex: 0)
+        makeSubject(hasHighTemperature: false, hasNewCough: true, startDate: Date())
 
         let unwinder = SelfDiagnosisUnwinder()
         parentViewControllerForTests.viewControllers = [unwinder]
@@ -158,7 +159,7 @@ class SubmitSymptomsViewControllerTests: TestCase {
     }
 
     func testSubmitFailure() {
-        makeSubject(hasHighTemperature: false, hasNewCough: true, startDateIndex: 0)
+        makeSubject(hasHighTemperature: false, hasNewCough: true, startDate: Date())
 
         let unwinder = SelfDiagnosisUnwinder()
         parentViewControllerForTests.viewControllers = [unwinder]
@@ -195,7 +196,7 @@ class SubmitSymptomsViewControllerTests: TestCase {
         contactEvents: [ContactEvent] = [],
         hasHighTemperature: Bool = false,
         hasNewCough: Bool = false,
-        startDateIndex: Int? = nil
+        startDate: Date? = nil
     ) {
         persistence.registration = registration
         contactEventRepository.contactEvents = contactEvents
@@ -211,8 +212,8 @@ class SubmitSymptomsViewControllerTests: TestCase {
         )
         XCTAssertNotNil(vc.view)
 
-        if let index = startDateIndex {
-            vc.pickerView(vc.datePicker, didSelectRow: index, inComponent: 1)
+        if let date = startDate {
+            vc.startDateViewController(vc.startDateViewController, didSelectDate: date)
         }
     }
 
