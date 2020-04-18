@@ -53,7 +53,7 @@ struct ExecutableChecker {
     }
     
     func checkHasNoAbsolutePaths() -> IntegrityCheck.Result {
-        let pattern = "/.*/.*"
+        let pattern = #"(/Users/.*|/usr/.*|.*\.swift)"#
         let count = strings.count { $0.matches(pattern) }
         switch count {
         case 0:

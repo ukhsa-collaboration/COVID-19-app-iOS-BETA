@@ -60,7 +60,7 @@ struct AppFilesReporter {
         }
             
         let table = ReportTable(checks: [
-            IntegrityCheck(name: "Does not reference absolute paths", result: checker.checkHasNoAbsolutePaths()),
+            IntegrityCheck(name: "Does not include paths on the build machine", result: checker.checkHasNoAbsolutePaths()),
             ]
         )
         
