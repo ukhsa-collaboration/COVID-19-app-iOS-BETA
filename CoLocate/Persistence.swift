@@ -82,6 +82,11 @@ class Persistence: Persisting {
                 return nil
             }
             
+            guard broadcastRotationKey != nil else {
+                logger.error("Ignoring the existing registration because there is no broadcast roation key")
+                return nil
+            }
+            
             return Registration(id: partial.id, secretKey: partial.secretKey, broadcastRotationKey: broadcastRotationKey)
         }
         

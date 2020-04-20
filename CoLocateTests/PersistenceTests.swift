@@ -58,6 +58,17 @@ class PersistenceTests: TestCase {
 
         XCTAssertEqual(delegate.recordedRegistration, registration)
     }
+    
+    func testRegistrationReturnsNilIfNoBroadcastKey() throws {
+        let secureRegistrationStorage = SecureRegistrationStorage()
+        let broadcastKeyStorage = SecureBroadcastRotationKeyStorage()
+        let persistence = Persistence(secureRegistrationStorage: secureRegistrationStorage, broadcastKeyStorage: broadcastKeyStorage)
+        
+        try secureRegistrationStorage.set(registration: PartialRegistration(id: UUID(), secretKey: Data()))
+        try broadcastKeyStorage.clear()
+        
+        XCTAssertNil(persistence.registration)
+    }
 
     func testPartialPostcodeIsPersisted() {
         let p1 = Persistence(secureRegistrationStorage: SecureRegistrationStorage(), broadcastKeyStorage: SecureBroadcastRotationKeyStorage())
