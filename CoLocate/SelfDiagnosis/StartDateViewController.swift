@@ -30,7 +30,7 @@ class StartDateViewController: UIViewController {
                 return
             }
 
-            errorLabel.isHidden = true
+            errorView.isHidden = true
 
             button.text = dateFormatter.string(from: date)
             delegate?.startDateViewController(self, didSelectDate: date)
@@ -40,6 +40,7 @@ class StartDateViewController: UIViewController {
     private let logger = Logger(label: String(describing: self))
 
     @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var errorView: UIView!
     @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var button: StartDateButton!
 
@@ -81,17 +82,12 @@ class StartDateViewController: UIViewController {
         errorLabel.text = "SELECT_START_DATE_ERROR".localized
 
         button.text = "SELECT_START_DATE".localized
-        button.inputView = datePicker
-        button.inputAccessoryView = datePickerAccessory
     }
 
     @IBAction func buttonTapped(_ sender: StartDateButton) {
-        button.becomeFirstResponder()
+        self.datePicker.isHidden = !self.datePicker.isHidden
     }
 
-    @IBAction func doneTapped(_ sender: UIBarButtonItem) {
-        button.resignFirstResponder()
-    }
 }
 
 extension StartDateViewController: UIPickerViewDataSource {

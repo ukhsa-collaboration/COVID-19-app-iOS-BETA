@@ -17,21 +17,18 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
     private var persisting: Persisting!
     private var contactEventRepository: ContactEventRepository!
     private var session: Session!
-    private var notificationCenter: NotificationCenter!
     private var symptoms: Set<Symptom>!
 
     func inject(
         persisting: Persisting,
         contactEventRepository: ContactEventRepository,
         session: Session,
-        notificationCenter: NotificationCenter,
         hasHighTemperature: Bool,
         hasNewCough: Bool
     ) {
         self.persisting = persisting
         self.contactEventRepository = contactEventRepository
         self.session = session
-        self.notificationCenter = notificationCenter
 
         symptoms = Set()
         if hasHighTemperature {
@@ -73,8 +70,6 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         submitErrorLabel.textColor = UIColor(named: "NHS Error")
         submitErrorLabel.text = "SUBMIT_SYMPTOMS_ERROR".localized
         thankYouLabel.text = "SUBMIT_SYMPTOMS_THANK_YOU".localized
-
-        addKeyboardObservers()
     }
 
     private var isSubmitting = false
@@ -89,7 +84,7 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         }
 
         guard let startDate = startDate else {
-            startDateViewController.errorLabel.isHidden = false
+            startDateViewController.errorView.isHidden = false
             scrollView.scrollRectToVisible(startDateViewController.errorLabel.frame, animated: true)
             return
         }
@@ -132,74 +127,6 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         }
     }
 
-    // MARK: - Keyboard
-
-    private func addKeyboardObservers() {
-        notificationCenter.addObserver(
-            self,
-            selector: #selector(keyboardWillShow(notification:)),
-            name: UIResponder.keyboardWillShowNotification,
-            object: nil
-        )
-        notificationCenter.addObserver(
-            self,
-            selector: #selector(keyboardWillHide(notification:)),
-            name: UIResponder.keyboardWillHideNotification,
-            object: nil
-        )
-    }
-
-    @objc func keyboardWillShow(notification: Notification) {
-        guard
-            let kbFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect
-        else {
-            return
-        }
-
-        let insets = UIEdgeInsets(top: 0, left: 0, bottom: kbFrame.size.height, right: 0)
-        scrollView.contentInset = insets
-        scrollView.scrollIndicatorInsets = insets
-
-        var visibleRegion = self.view.frame
-        visibleRegion.size.height -= kbFrame.height
-
-        animate(withKeyboardNotification: notification, animations: {
-            self.heightConstraint.constant = visibleRegion.size.height
-            self.heightConstraint.isActive = true
-            self.view.layoutIfNeeded()
-        }, completion: { _ in
-            guard let startDateButton = self.startDateViewController.button else { return }
-            self.scrollView.scrollRectToVisible(startDateButton.frame, animated: true)
-        })
-    }
-
-    @objc func keyboardWillHide(notification: Notification) {
-        let insets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        scrollView.contentInset = insets
-        scrollView.scrollIndicatorInsets = insets
-
-        animate(withKeyboardNotification: notification, animations: {
-            self.heightConstraint.isActive = false
-            self.view.layoutIfNeeded()
-        })
-    }
-
-    private func animate(withKeyboardNotification notification: Notification, animations: @escaping () -> (), completion: @escaping (Bool) -> () = { _ in }) {
-        guard
-            let kbDuration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval,
-            let kbCurve = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt
-        else {
-            return
-        }
-
-        UIView.animate(
-            withDuration: kbDuration,
-            delay: 0,
-            options: UIView.AnimationOptions(rawValue: kbCurve),
-            animations: animations,
-            completion: completion
-        )
-    }
 }
 
 // MARK: - StartDateViewControllerDelegate

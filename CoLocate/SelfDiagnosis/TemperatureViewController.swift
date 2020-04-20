@@ -21,18 +21,15 @@ class TemperatureViewController: UIViewController {
     var persistence: Persisting!
     var contactEventRepo: ContactEventRepository!
     var session: Session!
-    private var notificationCenter: NotificationCenter!
 
     func inject(
         persistence: Persisting,
         contactEventRepo: ContactEventRepository,
-        session: Session,
-        notificationCenter: NotificationCenter
+        session: Session
     ) {
         self.persistence = persistence
         self.contactEventRepo = contactEventRepo
         self.session = session
-        self.notificationCenter = notificationCenter
     }
 
     var hasHighTemperature: Bool? {
@@ -89,7 +86,6 @@ class TemperatureViewController: UIViewController {
                 persistence: persistence,
                 contactEventRepo: contactEventRepo,
                 session: session,
-                notificationCenter: notificationCenter,
                 hasHighTemperature: hasHighTemperature!
             )
         }

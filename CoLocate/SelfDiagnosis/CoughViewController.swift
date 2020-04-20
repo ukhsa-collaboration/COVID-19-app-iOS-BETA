@@ -21,19 +21,16 @@ class CoughViewController: UIViewController {
     private var persistence: Persisting!
     private var contactEventRepo: ContactEventRepository!
     private var session: Session!
-    private var notificationCenter: NotificationCenter!
-    
+
     func inject(
         persistence: Persisting,
         contactEventRepo: ContactEventRepository,
         session: Session,
-        notificationCenter: NotificationCenter,
         hasHighTemperature: Bool
     ) {
         self.persistence = persistence
         self.contactEventRepo = contactEventRepo
         self.session = session
-        self.notificationCenter = notificationCenter
 
         self.hasHighTemperature = hasHighTemperature
     }
@@ -93,7 +90,6 @@ class CoughViewController: UIViewController {
                 persisting: persistence,
                 contactEventRepository: contactEventRepo,
                 session: session,
-                notificationCenter: notificationCenter,
                 hasHighTemperature: hasHighTemperature,
                 hasNewCough: hasNewCough!)
         }

@@ -75,14 +75,9 @@ class StatusViewController: UIViewController, Storyboarded {
     ) {
         self.persistence = persistence
         self.registrationService = registrationService
-        self.notificationCenter = notificationCenter
         self.contactEventRepo = contactEventRepo
         self.session = session
         self.notificationCenter = notificationCenter
-    }
-    
-    deinit {
-        notificationCenter?.removeObserver(self)
     }
 
     override func viewDidLoad() {
@@ -145,8 +140,7 @@ class StatusViewController: UIViewController, Storyboarded {
         selfDiagnosis.inject(
             persistence: persistence,
             contactEventRepo: contactEventRepo,
-            session: session,
-            notificationCenter: notificationCenter
+            session: session
         )
         present(selfDiagnosis, animated: true)
     }

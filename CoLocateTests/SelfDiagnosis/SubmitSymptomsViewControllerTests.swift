@@ -193,7 +193,6 @@ class SubmitSymptomsViewControllerTests: TestCase {
             persisting: persistence,
             contactEventRepository: contactEventRepository,
             session: session,
-            notificationCenter: NotificationCenter(),
             hasHighTemperature: hasHighTemperature,
             hasNewCough: hasNewCough
         )
