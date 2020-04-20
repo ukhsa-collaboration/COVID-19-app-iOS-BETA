@@ -35,5 +35,8 @@
 "TEMPERATURE_START_QUESTION" = "When did your temperature start?";
 "COUGH_START_QUESTION" = "When did your cough start?";
 "SELECT_START_DATE" = "Select start date";
+"SUBMIT_SYMPTOMS_NO_SYMPTOMS" = "You don’t have the primary coronavirus symptoms at this time";
+"SUBMIT_SYMPTOMS_NO_SYMPTOMS_INFO" = "If you are showing other symptoms, or think you may have coronavirus, please visit";
+"SUBMIT_SYMPTOMS_NO_SYMPTOMS_NHS_111" = "NHS 111 online coronavirus service";
 "SUBMIT_SYMPTOMS_THANK_YOU" = "Thank you for sharing this data with the NHS. We will use this information to anonymously inform people they have come into contact with covid symptoms and encourage them to self-isolate.\n\nThank you for helping us save lives";
 "SUBMIT_SYMPTOMS_ERROR" = "Submission failed. Please try again";

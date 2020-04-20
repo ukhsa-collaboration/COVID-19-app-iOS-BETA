@@ -48,6 +48,11 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
     @IBOutlet weak var temperatureCheckLabel: UILabel!
     @IBOutlet weak var coughCheckLabel: UILabel!
     @IBOutlet weak var thankYouLabel: UILabel!
+    @IBOutlet weak var noSymptomsView: UIStackView!
+    @IBOutlet weak var noSymptomsLabel: UILabel!
+    @IBOutlet weak var noSymptomsInfoLabel: UILabel!
+    @IBOutlet weak var noSymptomsInfoButton: UIButton!
+
     @IBOutlet weak var submitErrorView: UIView!
     @IBOutlet weak var submitErrorLabel: UILabel!
     @IBOutlet weak var submitButton: PrimaryButton!
@@ -72,6 +77,12 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         checkAnswersLabel.text = "SUBMIT_SYMPTOMS_CHECK_ANSWERS".localized
         temperatureCheckLabel.text = "SUBMIT_SYMPTOMS_\(symptoms.contains(.temperature) ? "HAVE" : "NO")_TEMPERATURE".localized
         coughCheckLabel.text = "SUBMIT_SYMPTOMS_\(symptoms.contains(.cough) ? "HAVE" : "NO")_COUGH".localized
+
+        noSymptomsView.isHidden = !symptoms.isEmpty
+        noSymptomsLabel.text = "SUBMIT_SYMPTOMS_NO_SYMPTOMS".localized
+        noSymptomsInfoLabel.text = "SUBMIT_SYMPTOMS_NO_SYMPTOMS_INFO".localized
+        noSymptomsInfoButton.setTitle("SUBMIT_SYMPTOMS_NO_SYMPTOMS_NHS_111".localized, for: .normal)
+        noSymptomsInfoButton.contentHorizontalAlignment = .leading
 
         submitErrorLabel.textColor = UIColor(named: "NHS Error")
         submitErrorLabel.text = "SUBMIT_SYMPTOMS_ERROR".localized
@@ -133,6 +144,9 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         }
     }
 
+    @IBAction func noSymptomsInfoTapped(_ sender: ButtonWithDynamicType) {
+        UIApplication.shared.open(URL(string: "https://111.nhs.uk/covid-19/")!)
+    }
 }
 
 // MARK: - StartDateViewControllerDelegate

@@ -452,6 +452,37 @@
                                                     </view>
                                                 </subviews>
                                             </stackView>
+                                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="rUe-5Z-tIj" userLabel="No Symptoms">
+                                                <rect key="frame" x="20" y="487" width="374" height="32"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qC7-mn-mwr">
+                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="0.0"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xe3-iK-GfZ" userLabel="Spacer">
+                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="32"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="32" id="ORQ-zq-1To"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bbU-Do-7R9">
+                                                        <rect key="frame" x="0.0" y="32" width="374" height="0.0"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8i4-HF-QBb" customClass="ButtonWithDynamicType" customModule="CoLocate" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="32" width="374" height="0.0"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <connections>
+                                                            <action selector="noSymptomsInfoTapped:" destination="ofL-pj-tC8" eventType="touchUpInside" id="qf1-pL-LdD"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
                                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X3T-dj-Khd" userLabel="Submit Error View">
                                                 <rect key="frame" x="20" y="487" width="374" height="16"/>
                                                 <subviews>
@@ -533,6 +564,10 @@
                         <outlet property="coughCheckLabel" destination="mxl-Q4-5aR" id="lVR-eV-VSf"/>
                         <outlet property="haveSymptomsView" destination="a7J-v6-xJ8" id="HUs-o8-K1K"/>
                         <outlet property="heightConstraint" destination="iw0-QM-AIq" id="Twc-xH-plE"/>
+                        <outlet property="noSymptomsInfoButton" destination="8i4-HF-QBb" id="tyG-LS-y92"/>
+                        <outlet property="noSymptomsInfoLabel" destination="bbU-Do-7R9" id="1Rx-dP-qR9"/>
+                        <outlet property="noSymptomsLabel" destination="qC7-mn-mwr" id="U1b-z8-aSp"/>
+                        <outlet property="noSymptomsView" destination="rUe-5Z-tIj" id="R59-4B-9bL"/>
                         <outlet property="scrollView" destination="xUD-zY-9kW" id="ucw-sm-n5X"/>
                         <outlet property="submitButton" destination="JYn-nS-TUw" id="HcN-Hc-nI4"/>
                         <outlet property="submitErrorLabel" destination="gGK-fb-Q9K" id="MxB-QV-0sW"/>
