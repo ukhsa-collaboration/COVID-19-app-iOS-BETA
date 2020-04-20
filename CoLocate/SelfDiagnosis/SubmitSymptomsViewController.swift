@@ -48,6 +48,8 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     @IBOutlet weak var startDateView: UIView!
     @IBOutlet weak var thankYouLabel: UILabel!
+    @IBOutlet weak var submitErrorView: UIView!
+    @IBOutlet weak var submitErrorLabel: UILabel!
     @IBOutlet weak var submitButton: PrimaryButton!
 
     var startDateViewController: StartDateViewController!
@@ -68,6 +70,8 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
 
         startDateView.isHidden = symptoms.isEmpty
 
+        submitErrorLabel.textColor = UIColor(named: "NHS Error")
+        submitErrorLabel.text = "SUBMIT_SYMPTOMS_ERROR".localized
         thankYouLabel.text = "SUBMIT_SYMPTOMS_THANK_YOU".localized
 
         addKeyboardObservers()
@@ -85,7 +89,8 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         }
 
         guard let startDate = startDate else {
-            alert(message: "START_DATE_ERROR".localized)
+            startDateViewController.errorLabel.isHidden = false
+            scrollView.scrollRectToVisible(startDateViewController.errorLabel.frame, animated: true)
             return
         }
 
@@ -118,24 +123,13 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
             self.isSubmitting = false
 
             switch result {
-            case .success(_):
+            case .success:
                 self.performSegue(withIdentifier: "unwindFromSelfDiagnosis", sender: self)
                 self.contactEventRepository.reset()
-            case .failure(let error):
-                self.alert(message: error.localizedDescription)
+            case .failure:
+                self.submitErrorView.isHidden = false
             }
         }
-    }
-
-    private func alert(message: String) {
-        let alert = UIAlertController(
-            title: nil,
-            message: message,
-            preferredStyle: .alert
-        )
-
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
     }
 
     // MARK: - Keyboard

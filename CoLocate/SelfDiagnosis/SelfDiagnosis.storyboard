@@ -339,7 +339,7 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="9Z6-MF-rO6">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="286.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="310.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3/3" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ul2-la-I2I">
                                                 <rect key="frame" x="20" y="32" width="374" height="16"/>
@@ -371,20 +371,42 @@
                                                 <color key="textColor" name="NHS Text"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YR8-yi-S77" userLabel="Spacer">
+                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X3T-dj-Khd" userLabel="Submit Error View">
                                                 <rect key="frame" x="20" y="220.5" width="374" height="16"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Submit Error" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gGK-fb-Q9K">
+                                                        <rect key="frame" x="0.0" y="16" width="374" height="0.0"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                        <color key="textColor" name="NHS Error"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="16" id="W9P-lv-kmw"/>
+                                                    <constraint firstAttribute="trailing" secondItem="gGK-fb-Q9K" secondAttribute="trailing" id="BE9-n8-ACc"/>
+                                                    <constraint firstItem="gGK-fb-Q9K" firstAttribute="leading" secondItem="X3T-dj-Khd" secondAttribute="leading" id="QiU-Sv-sPF"/>
+                                                    <constraint firstAttribute="bottom" secondItem="gGK-fb-Q9K" secondAttribute="bottom" id="lbj-HM-lw7"/>
+                                                    <constraint firstItem="gGK-fb-Q9K" firstAttribute="top" secondItem="X3T-dj-Khd" secondAttribute="top" constant="16" id="oqT-0O-dRg"/>
                                                 </constraints>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JYn-nS-TUw" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="236.5" width="374" height="30"/>
-                                                <state key="normal" title="Submit"/>
-                                                <connections>
-                                                    <action selector="submitTapped:" destination="ofL-pj-tC8" eventType="touchUpInside" id="EWR-3W-sAd"/>
-                                                    <action selector="submitTapped:" destination="hC6-GD-FFV" eventType="touchUpInside" id="T5j-Iy-BOJ"/>
-                                                </connections>
-                                            </button>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sem-eQ-a4a" userLabel="Submit View">
+                                                <rect key="frame" x="20" y="220.5" width="374" height="70"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JYn-nS-TUw" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="16" width="374" height="54"/>
+                                                        <state key="normal" title="Submit"/>
+                                                        <connections>
+                                                            <action selector="submitTapped:" destination="ofL-pj-tC8" eventType="touchUpInside" id="EWR-3W-sAd"/>
+                                                            <action selector="submitTapped:" destination="hC6-GD-FFV" eventType="touchUpInside" id="T5j-Iy-BOJ"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="JYn-nS-TUw" firstAttribute="leading" secondItem="Sem-eQ-a4a" secondAttribute="leading" id="Eaf-te-7GM"/>
+                                                    <constraint firstAttribute="bottom" secondItem="JYn-nS-TUw" secondAttribute="bottom" id="Itn-EU-xRR"/>
+                                                    <constraint firstItem="JYn-nS-TUw" firstAttribute="top" secondItem="Sem-eQ-a4a" secondAttribute="top" constant="16" id="UPw-Uj-cVe"/>
+                                                    <constraint firstAttribute="trailing" secondItem="JYn-nS-TUw" secondAttribute="trailing" id="gOg-op-nRM"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="height" priority="2" id="iw0-QM-AIq"/>
@@ -430,6 +452,8 @@
                         <outlet property="scrollView" destination="xUD-zY-9kW" id="ucw-sm-n5X"/>
                         <outlet property="startDateView" destination="frM-yB-tE8" id="cOp-jS-23c"/>
                         <outlet property="submitButton" destination="JYn-nS-TUw" id="HcN-Hc-nI4"/>
+                        <outlet property="submitErrorLabel" destination="gGK-fb-Q9K" id="MxB-QV-0sW"/>
+                        <outlet property="submitErrorView" destination="X3T-dj-Khd" id="LAE-9f-7j4"/>
                         <outlet property="thankYouLabel" destination="aIR-YM-xXi" id="vix-vV-Rrk"/>
                     </connections>
                 </viewController>
@@ -452,6 +476,12 @@
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="26.5"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                         <color key="textColor" name="NHS Text"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8pm-ea-3bY">
+                                        <rect key="frame" x="0.0" y="34.5" width="374" height="0.0"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                        <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JUs-Gg-aFs" customClass="StartDateButton" customModule="CoLocate" customModuleProvider="target">
@@ -477,6 +507,7 @@
                         <outlet property="button" destination="JUs-Gg-aFs" id="BAa-NK-olq"/>
                         <outlet property="datePicker" destination="ioO-ps-knc" id="6M7-sc-XVZ"/>
                         <outlet property="datePickerAccessory" destination="aek-YN-bXo" id="vPm-pg-Rcm"/>
+                        <outlet property="errorLabel" destination="8pm-ea-3bY" id="HA4-bD-OCu"/>
                         <outlet property="label" destination="OFO-L9-lgU" id="rT5-CT-mfN"/>
                     </connections>
                 </viewController>

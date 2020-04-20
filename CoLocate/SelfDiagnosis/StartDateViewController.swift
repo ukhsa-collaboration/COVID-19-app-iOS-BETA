@@ -30,6 +30,8 @@ class StartDateViewController: UIViewController {
                 return
             }
 
+            errorLabel.isHidden = true
+
             button.text = dateFormatter.string(from: date)
             delegate?.startDateViewController(self, didSelectDate: date)
         }
@@ -38,6 +40,7 @@ class StartDateViewController: UIViewController {
     private let logger = Logger(label: String(describing: self))
 
     @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var button: StartDateButton!
 
     @IBOutlet var datePickerAccessory: UIToolbar!
@@ -73,6 +76,9 @@ class StartDateViewController: UIViewController {
             question = "SYMPTOMS_START_QUESTION"
         }
         label.text = question.localized
+
+        errorLabel.textColor = UIColor(named: "NHS Error")
+        errorLabel.text = "SELECT_START_DATE_ERROR".localized
 
         button.text = "SELECT_START_DATE".localized
         button.inputView = datePicker

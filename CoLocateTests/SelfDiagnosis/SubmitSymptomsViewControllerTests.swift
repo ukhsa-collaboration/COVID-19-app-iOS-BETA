@@ -174,21 +174,8 @@ class SubmitSymptomsViewControllerTests: TestCase {
         }
         
         sessionCompletion(Result<(), Error>.failure(ErrorForTest()))
-        
-        let expectation = XCTestExpectation(description: "Alert was presented")
-        var done = false
-        
-        func pollPresentedVC() {
-            if vc.presentedViewController as? UIAlertController != nil {
-                expectation.fulfill()
-            } else if !done {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.25, execute: { pollPresentedVC() })
-            }
-        }
-        
-        pollPresentedVC()
-        wait(for: [expectation], timeout: 2.0)
-        done = true
+
+        XCTAssertFalse(vc.submitErrorView.isHidden)
     }
 
     private func makeSubject(
