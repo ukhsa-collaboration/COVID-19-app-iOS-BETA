@@ -43,7 +43,10 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var startDateView: UIView!
+    @IBOutlet weak var haveSymptomsView: UIStackView!
+    @IBOutlet weak var checkAnswersLabel: UILabel!
+    @IBOutlet weak var temperatureCheckLabel: UILabel!
+    @IBOutlet weak var coughCheckLabel: UILabel!
     @IBOutlet weak var thankYouLabel: UILabel!
     @IBOutlet weak var submitErrorView: UIView!
     @IBOutlet weak var submitErrorLabel: UILabel!
@@ -65,7 +68,10 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        startDateView.isHidden = symptoms.isEmpty
+        haveSymptomsView.isHidden = symptoms.isEmpty
+        checkAnswersLabel.text = "SUBMIT_SYMPTOMS_CHECK_ANSWERS".localized
+        temperatureCheckLabel.text = "SUBMIT_SYMPTOMS_\(symptoms.contains(.temperature) ? "HAVE" : "NO")_TEMPERATURE".localized
+        coughCheckLabel.text = "SUBMIT_SYMPTOMS_\(symptoms.contains(.cough) ? "HAVE" : "NO")_COUGH".localized
 
         submitErrorLabel.textColor = UIColor(named: "NHS Error")
         submitErrorLabel.text = "SUBMIT_SYMPTOMS_ERROR".localized
