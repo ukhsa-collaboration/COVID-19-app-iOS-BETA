@@ -27,9 +27,6 @@ class SecureRegistrationStorage {
         case keychain(OSStatus)
     }
 
-    // There's no need for this to be a singleton,
-    // but this feels more idiomatic.
-    static var shared = SecureRegistrationStorage()
     static let secService = "registration"
 
     func get() throws -> Registration? {
