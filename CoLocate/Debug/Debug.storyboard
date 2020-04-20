@@ -326,7 +326,7 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="DW7-IA-cwg" userLabel="Enable new key rotation">
                                                     <rect key="frame" x="357" y="6.5" width="51" height="31"/>
                                                     <connections>
-                                                        <action selector="enableNewKeyRotation:" destination="HkQ-dd-eR1" eventType="valueChanged" id="7Ib-o2-FIc"/>
+                                                        <action selector="enableNewKeyRotationChanged:" destination="HkQ-dd-eR1" eventType="valueChanged" id="ZJ8-sk-ucN"/>
                                                     </connections>
                                                 </switch>
                                             </subviews>
@@ -356,6 +356,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="allowedDataSharingSwitch" destination="ZGS-GZ-Qan" id="kAW-LK-aGH"/>
+                        <outlet property="enableNewKeyRotation" destination="DW7-IA-cwg" id="5f2-DM-BDH"/>
                         <outlet property="enableNewSelfDiagnosis" destination="Afw-fK-gHS" id="Sxe-cd-Mp1"/>
                         <outlet property="potentiallyExposedSwitch" destination="pxj-sV-aJn" id="Zdi-c7-YlE"/>
                         <outlet property="versionBuildLabel" destination="u9d-KW-xk7" id="hpS-fN-Piy"/>

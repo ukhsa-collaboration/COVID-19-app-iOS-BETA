@@ -16,7 +16,8 @@ class DebugViewController: UITableViewController, Storyboarded {
     @IBOutlet weak var versionBuildLabel: UILabel!
     @IBOutlet weak var potentiallyExposedSwitch: UISwitch!
     @IBOutlet weak var enableNewSelfDiagnosis: UISwitch!
-
+    @IBOutlet var enableNewKeyRotation: UISwitch!
+    
     private var persisting: Persisting!
     private var contactEventRepository: ContactEventRepository!
     private var contactEventPersister: ContactEventPersister!
@@ -30,6 +31,7 @@ class DebugViewController: UITableViewController, Storyboarded {
     override func viewDidLoad() {
         potentiallyExposedSwitch.isOn = persisting.potentiallyExposed
         allowedDataSharingSwitch.isOn = persisting.allowedDataSharing
+        enableNewKeyRotation.isOn = persisting.enableNewKeyRotation
 
         let build = Bundle.main.infoDictionary?["CFBundleVersion"] ?? "unknown"
         let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] ?? "unknown"
@@ -137,7 +139,7 @@ class DebugViewController: UITableViewController, Storyboarded {
         persisting.allowedDataSharing = sender.isOn
     }
 
-    @IBAction func enableNewKeyRotation(_ sender: UISwitch) {
+    @IBAction func enableNewKeyRotationChanged(_ sender: UISwitch) {
         persisting.enableNewKeyRotation = sender.isOn
     }
 
