@@ -34,9 +34,22 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
 
     func tryStartAdvertising() {
         guard let peripheral = peripheral else { return }
-        guard idGenerator.broadcastIdentifier() != nil else { return }
+        guard peripheral.isAdvertising == false else {
+            logger.error("peripheral manager already advertising, won't start again")
+            return
+        }
+        
+        guard let identifier = idGenerator.broadcastIdentifier() else { return }
 
-        startAdvertising(peripheral: peripheral)
+        let service = CBMutableService(type: ConcreteBTLEBroadcaster.sonarServiceUUID, primary: true)
+
+        let identityCharacteristic = CBMutableCharacteristic(type: ConcreteBTLEBroadcaster.sonarIdCharacteristicUUID,
+                                                             properties: CBCharacteristicProperties([.read]),
+                                                             value: identifier,
+                                                             permissions: .readable)
+
+        service.characteristics = [identityCharacteristic]
+        peripheral.add(service)
     }
 
     // MARK: CBPeripheralManagerDelegate
@@ -57,31 +70,14 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
         }
     }
     
-    private func startAdvertising(peripheral: CBPeripheralManager) {
-        guard peripheral.isAdvertising == false else {
-            logger.error("peripheral manager already advertising, won't start again")
-            return
-        }
-
-        let service = CBMutableService(type: ConcreteBTLEBroadcaster.sonarServiceUUID, primary: true)
-
-        let identityCharacteristic = CBMutableCharacteristic(type: ConcreteBTLEBroadcaster.sonarIdCharacteristicUUID,
-                                                             properties: CBCharacteristicProperties([.read]),
-                                                             value: idGenerator.broadcastIdentifier(),
-                                                             permissions: .readable)
-
-        service.characteristics = [identityCharacteristic]
-        peripheral.add(service)
-    }
-    
     func peripheralManager(_ peripheral: CBPeripheralManager, didAdd service: CBService, error: Error?) {
         guard error == nil else {
             logger.info("error: \(error!))")
             return
         }
-
-        let identifier = (idGenerator.broadcastIdentifier() ?? Data()).base64EncodedString()
-        logger.info("now advertising sonarId \(identifier)")
+        
+        let identifierForLogging = idGenerator.broadcastIdentifier() ?? Data()
+        logger.info("now advertising broadcast identifier \(identifierForLogging.base64EncodedString())")
         
         peripheral.startAdvertising([
             CBAdvertisementDataLocalNameKey: "Sonar",
