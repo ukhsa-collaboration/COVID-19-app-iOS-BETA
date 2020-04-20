@@ -18,7 +18,7 @@ class ContactEventRepositoryDouble: ContactEventRepository {
     }
     
     var removeExpiredEntriesCallbackCount = 0
-    func removeExpiredContactEvents() {
+    func removeExpiredContactEvents(ttl: Double) {
         removeExpiredEntriesCallbackCount += 1
     }
 }

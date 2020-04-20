@@ -12,7 +12,7 @@ import Logging
 protocol ContactEventRepository {
     var contactEvents: [ContactEvent] { get }
     func reset()
-    func removeExpiredContactEvents()
+    func removeExpiredContactEvents(ttl: Double)
 }
 
 protocol ContactEventPersister {
@@ -43,9 +43,9 @@ extension PlistPersister: ContactEventPersister where K == UUID, V == ContactEve
         persister.reset()
     }
     
-    func removeExpiredContactEvents() {
+    func removeExpiredContactEvents(ttl: Double) {
         var copy = persister.items
-        let expiryDate = Date(timeIntervalSinceNow: -2419200)
+        let expiryDate = Date(timeIntervalSinceNow: -ttl)
         
         persister.items.forEach({uuid, contactEvent in
             if contactEvent.timestamp < expiryDate {

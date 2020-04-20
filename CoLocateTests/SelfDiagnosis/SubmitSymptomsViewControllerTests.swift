@@ -239,7 +239,7 @@ fileprivate class MockContactEventRepository: ContactEventRepository {
         hasReset = true
     }
     
-    func removeExpiredContactEvents() {
+    func removeExpiredContactEvents(ttl: Double) {
         
     }
 }

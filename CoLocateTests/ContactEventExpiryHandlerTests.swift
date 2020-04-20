@@ -30,4 +30,11 @@ class ContactEventExpiryHandlerTests: XCTestCase {
             XCTAssertEqual(contactEventRepository.removeExpiredEntriesCallbackCount, 1)
         })
     }
+    
+    func testCanConvertDaysIntoSeconds() {
+        let notificationCenter = NotificationCenter()
+        let contactEventRepository = ContactEventRepositoryDouble()
+        let contactEventExpiryHandler = ContactEventExpiryHandler(notificationCenter: notificationCenter, contactEventRepository: contactEventRepository)
+        XCTAssertEqual(contactEventExpiryHandler.convertDaysIntoSeconds(days: 28), 2419200)
+    }
 }
