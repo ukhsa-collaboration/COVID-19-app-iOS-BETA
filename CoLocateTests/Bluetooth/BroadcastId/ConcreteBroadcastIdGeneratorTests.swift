@@ -76,7 +76,7 @@ class StubbedBroadcastRotationKeyStorage: BroadcastRotationKeyStorage {
         self.shouldThrow = shouldThrow
     }
 
-    func save(certificate: Data) throws {
+    func save(keyData: Data) throws {
 
     }
 
