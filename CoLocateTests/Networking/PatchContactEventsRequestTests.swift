@@ -99,7 +99,7 @@ class RegistrationStorageDouble: SecureRegistrationStorage {
         self.key = key
     }
 
-    override func get() throws -> PartialRegistration? {
+    override func get() -> PartialRegistration? {
         guard let id = id, let key = key else { return nil }
 
         return PartialRegistration(id: id, secretKey: key)

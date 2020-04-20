@@ -18,11 +18,11 @@ class SecureRegistrationStorageTests: TestCase {
     func testRoundTrip() throws {
         let storage = SecureRegistrationStorage()
 
-        XCTAssertNil(try storage.get())
+        XCTAssertNil(storage.get())
 
         try storage.set(registration: PartialRegistration(id: id, secretKey: secretKey))
 
-        let registration = try? storage.get()
+        let registration = storage.get()
         XCTAssertEqual(registration?.id, id)
         XCTAssertEqual(registration?.secretKey, secretKey)
     }
@@ -36,7 +36,7 @@ class SecureRegistrationStorageTests: TestCase {
         try storage.set(registration: PartialRegistration(id: id, secretKey: secretKey))
 
         // We should have the new registration
-        let registration = try? storage.get()
+        let registration = storage.get()
         XCTAssertEqual(registration?.id, id)
         XCTAssertEqual(registration?.secretKey, secretKey)
     }

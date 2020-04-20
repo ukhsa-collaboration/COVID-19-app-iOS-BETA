@@ -29,26 +29,9 @@ class ConcreteBroadcastIdGenerator: BroadcastIdGenerator {
 
     func broadcastIdentifier() -> Data? {
         guard let sonarId = sonarId else { return nil }
-        let maybeKey: SecKey?
-        
-        do {
-            maybeKey = try storage.read()
-        } catch {
-            logger.error("Failed to read rotation key from storage: \(error.localizedDescription)")
-            return nil
-        }
-        
-        guard let key = maybeKey else { return nil }
+        guard let key = storage.read() else { return nil }
 
         return getEncrypter(key: key, sonarId: sonarId).broadcastId()
-    }
-
-    private func readSigningKey() -> SecKey? {
-        do {
-            return try storage.read()
-        } catch {
-            return nil
-        }
     }
 
     private func getEncrypter(key: SecKey, sonarId: UUID) -> BroadcastIdEncrypter {

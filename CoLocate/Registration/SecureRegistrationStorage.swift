@@ -27,7 +27,7 @@ class SecureRegistrationStorage {
         case keychain(OSStatus)
     }
 
-    func get() throws -> PartialRegistration? {
+    func get() -> PartialRegistration? {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: secService,
@@ -41,15 +41,15 @@ class SecureRegistrationStorage {
         case errSecSuccess: break
         case errSecItemNotFound: return nil
         default:
-            logger.critical("Unhandled status from SecItemCopy: \(status)")
-            throw Error.keychain(status)
+            logger.critical("Could not read registraton data from keychain due to unhandled status from SecItemCopy: \(status)")
+            return nil
         }
 
         guard let item = result as? [String : Any],
             let data = item[kSecValueData as String] as? Data,
             let idString = item[kSecAttrAccount as String] as? String,
             let id = UUID(uuidString: idString) else {
-                logger.error("Could not read registration data from keychain")
+                logger.error("No registration data in keychain")
                 return nil
         }
 

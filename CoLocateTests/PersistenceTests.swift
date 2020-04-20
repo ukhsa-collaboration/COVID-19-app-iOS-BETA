@@ -28,7 +28,7 @@ class PersistenceTests: TestCase {
     }
     
     
-    func testRegistrationIsStored() throws {
+    func testRegistrationIsStored() {
         let secureRegistrationStorage = SecureRegistrationStorage()
         let broadcastKeyStorage = SecureBroadcastRotationKeyStorage()
         let persistence = Persistence(secureRegistrationStorage: secureRegistrationStorage, broadcastKeyStorage: broadcastKeyStorage)
@@ -41,8 +41,8 @@ class PersistenceTests: TestCase {
         let registration = Registration(id: id, secretKey: secretKey, broadcastRotationKey: rotationKey)
         persistence.registration = registration
 
-        XCTAssertEqual(try secureRegistrationStorage.get(), PartialRegistration(id: id, secretKey: secretKey))
-        XCTAssertEqual(try broadcastKeyStorage.read(), rotationKey)
+        XCTAssertEqual(secureRegistrationStorage.get(), PartialRegistration(id: id, secretKey: secretKey))
+        XCTAssertEqual(broadcastKeyStorage.read(), rotationKey)
         XCTAssertEqual(persistence.registration, registration)
     }
     

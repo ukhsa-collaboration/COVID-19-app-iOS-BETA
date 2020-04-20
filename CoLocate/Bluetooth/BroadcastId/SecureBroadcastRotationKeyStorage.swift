@@ -14,7 +14,7 @@ import Logging
 
 protocol BroadcastRotationKeyStorage {
     func save(publicKey: SecKey) throws
-    func read() throws -> SecKey?
+    func read() -> SecKey?
     func clear() throws
 }
 
@@ -31,7 +31,7 @@ struct SecureBroadcastRotationKeyStorage: BroadcastRotationKeyStorage {
         }
     }
 
-    func read() throws -> SecKey? {
+    func read() -> SecKey? {
         let query: [String: Any] = [
             kSecClass as String: kSecClassKey,
             kSecAttrApplicationTag as String: publicKeyTag,
@@ -48,8 +48,8 @@ struct SecureBroadcastRotationKeyStorage: BroadcastRotationKeyStorage {
             logger.error("asked to read BTLE rotation key but it was not found")
             return nil
         default:
-            logger.critical("Unhandled status from SecItemCopy: \(status)")
-            throw KeychainErrors.unhandledKeychainError(status)
+            logger.critical("Could not read broadcast rotation key: Unhandled status from SecItemCopy: \(status)")
+            return nil
         }
     }
 

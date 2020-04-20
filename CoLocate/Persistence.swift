@@ -70,22 +70,13 @@ class Persistence: Persisting {
 
     var registration: Registration? {
         get {
-            guard let partial = try? secureRegistrationStorage.get() else { return nil }
-            var broadcastRotationKey: SecKey?
-            
-            do {
-                broadcastRotationKey = try broadcastKeyStorage.read()
-            } catch {
-                logger.error("Error reading broadcast key: \(error.localizedDescription)")
-                return nil
-            }
-            
-            guard let k = broadcastRotationKey else {
+            guard let partial = secureRegistrationStorage.get() else { return nil }
+            guard let broadcastRotationKey = broadcastKeyStorage.read() else {
                 logger.error("Ignoring the existing registration because there is no broadcast roation key")
                 return nil
             }
-            
-            return Registration(id: partial.id, secretKey: partial.secretKey, broadcastRotationKey: k)
+                        
+            return Registration(id: partial.id, secretKey: partial.secretKey, broadcastRotationKey: broadcastRotationKey)
         }
         
         set {

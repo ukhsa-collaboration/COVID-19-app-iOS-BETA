@@ -25,13 +25,13 @@ class SecureBroadcastRotationKeyStorageTests: XCTestCase {
         try storage.save(publicKey: try ellipticCurveKeyForTest())
 
         let otherWrapper = SecureBroadcastRotationKeyStorage()
-        let readKey = try? otherWrapper.read()
+        let readKey = otherWrapper.read()
 
         XCTAssertNotNil(readKey)
     }
 
     func test_returns_nil_if_no_key_was_saved() {
-        let readKey = try? storage.read()
+        let readKey = storage.read()
 
         XCTAssertNil(readKey)
     }

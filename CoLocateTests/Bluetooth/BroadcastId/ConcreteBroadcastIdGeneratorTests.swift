@@ -49,36 +49,20 @@ class ConcreteBroadcastIdGeneratorTests: XCTestCase {
 
         XCTAssertNotNil(identifier)
     }
-
-    func test_it_is_not_ready_if_the_storage_throws_an_error() {
-        storage.shouldThrow = true
-        subject.sonarId = UUID(uuidString: "054DDC35-0287-4247-97BE-D9A3AF012E36")!
-
-        let identifier = subject.broadcastIdentifier()
-
-        XCTAssertNil(identifier)
-    }
 }
 
 fileprivate class StubbedBroadcastRotationKeyStorage: BroadcastRotationKeyStorage {
-
     var stubbedKey: SecKey?
-    var shouldThrow: Bool
 
-    init(stubbedKey: SecKey? = nil, shouldThrow: Bool = false) {
+    init(stubbedKey: SecKey? = nil) {
         self.stubbedKey = stubbedKey
-        self.shouldThrow = shouldThrow
     }
 
     func save(publicKey: SecKey) throws {
 
     }
 
-    func read() throws -> SecKey? {
-        if shouldThrow {
-            throw ErrorForTest()
-        }
-
+    func read() -> SecKey? {
         return stubbedKey
     }
 
