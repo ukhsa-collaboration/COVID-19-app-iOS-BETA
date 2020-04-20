@@ -471,6 +471,7 @@
                             <constraint firstAttribute="trailing" secondItem="fgB-Ce-B2O" secondAttribute="trailing" id="nVv-WX-As8"/>
                             <constraint firstItem="fgB-Ce-B2O" firstAttribute="leading" secondItem="HkP-Uv-0kn" secondAttribute="leading" id="yvX-hy-AKX"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="dQG-3d-AIi"/>
                     </view>
                     <connections>
                         <outlet property="button" destination="JUs-Gg-aFs" id="BAa-NK-olq"/>

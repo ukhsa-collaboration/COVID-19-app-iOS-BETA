@@ -31,6 +31,7 @@ class StartDateViewController: UIViewController {
             }
 
             button.text = dateFormatter.string(from: date)
+            delegate?.startDateViewController(self, didSelectDate: date)
         }
     }
 
