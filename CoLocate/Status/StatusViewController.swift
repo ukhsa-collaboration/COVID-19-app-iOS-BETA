@@ -21,6 +21,8 @@ class StatusViewController: UIViewController, Storyboarded {
     private var notificationCenter: NotificationCenter!
     private var contactEventRepo: ContactEventRepository!
     private var session: Session!
+
+    private lazy var drawerPresentationManager = DrawerPresentation()
     
     @IBOutlet var registratonStatusView: UIView!
     @IBOutlet var registrationStatusIcon: UIImageView!
