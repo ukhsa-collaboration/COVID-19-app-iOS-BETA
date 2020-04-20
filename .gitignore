@@ -101,3 +101,6 @@ iOSInjectionProject/
 # ignore appcode configuration
 .idea
 
+# ignore things related to mock server
+node_modules
+package-lock.json
