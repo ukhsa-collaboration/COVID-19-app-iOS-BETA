@@ -41,7 +41,7 @@ extension DispatchQueue {
 
 extension Registration {
     static var fake: Self {
-        Registration(id: UUID(), secretKey: Data())
+        Registration(id: UUID(), secretKey: Data(), broadcastRotationKey: nil)
     }
 }
 

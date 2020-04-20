@@ -112,7 +112,7 @@ class StatusViewControllerTests: XCTestCase {
     }
 
     func arbitraryRegistration() -> Registration {
-        return Registration(id: UUID(), secretKey: Data())
+        return Registration(id: UUID(), secretKey: Data(), broadcastRotationKey: nil)
     }
 }
 

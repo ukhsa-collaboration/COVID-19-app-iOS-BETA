@@ -37,7 +37,7 @@ class PatchContactEventsRequestTests: XCTestCase {
             ContactEvent(sonarId: remoteSonarId3, timestamp: timestamp3, rssiValues: [rssi3], rssiIntervals: [30], duration: 0)
         ]
 
-        let registration = Registration(id: anonymousId, secretKey: dummyKey)
+        let registration = Registration(id: anonymousId, secretKey: dummyKey, broadcastRotationKey: nil)
         request = ConcreteSecureRequestFactory(registration: registration).patchContactsRequest(contactEvents: contactEvents)
 
         super.setUp()
@@ -99,9 +99,9 @@ class RegistrationStorageDouble: SecureRegistrationStorage {
         self.key = key
     }
 
-    override func get() throws -> Registration? {
+    override func get() throws -> PartialRegistration? {
         guard let id = id, let key = key else { return nil }
 
-        return Registration(id: id, secretKey: key)
+        return PartialRegistration(id: id, secretKey: key)
     }
 }

@@ -32,7 +32,7 @@ class SubmitSymptomsViewControllerTests: TestCase {
         let contactEvent = ContactEvent(sonarId: UUID().data)
 
         makeSubject(
-            registration: Registration(id: UUID(uuidString: "FA817D5C-C615-4ABE-83B5-ABDEE8FAB8A6")!, secretKey: Data()),
+            registration: Registration(id: UUID(uuidString: "FA817D5C-C615-4ABE-83B5-ABDEE8FAB8A6")!, secretKey: Data(), broadcastRotationKey: nil),
             contactEvents: [contactEvent],
             hasHighTemperature: true,
             hasNewCough: false,

@@ -9,6 +9,21 @@
 import Foundation
 import Logging
 
+struct Registration: Equatable {
+    let id: UUID
+    let secretKey: Data
+    // TODO: Make broadcastRotationKey non-optional once the key rotation feature
+    // is no longer hidden behind a feature flag.
+    let broadcastRotationKey: SecKey?
+
+    init(id: UUID, secretKey: Data, broadcastRotationKey: SecKey?) {
+        self.id = id
+        self.secretKey = secretKey
+        self.broadcastRotationKey = broadcastRotationKey
+    }
+}
+
+
 protocol Persisting {
     var allowedDataSharing: Bool { get nonmutating set }
     var registration: Registration? { get nonmutating set }
@@ -36,13 +51,19 @@ class Persistence: Persisting {
         case partialPostcode
     }
 
-    static var shared = Persistence()
-    let encoder = JSONEncoder()
-    let decoder = JSONDecoder()
-
-    let secureRegistrationStorage: SecureRegistrationStorage
+    static var shared = Persistence(secureRegistrationStorage: SecureRegistrationStorage(), broadcastKeyStorage: SecureBroadcastRotationKeyStorage())
+    
+    private let encoder = JSONEncoder()
+    private let decoder = JSONDecoder()
+    private let secureRegistrationStorage: SecureRegistrationStorage
+    private let broadcastKeyStorage: BroadcastRotationKeyStorage
 
     weak var delegate: PersistenceDelegate?
+    
+    init(secureRegistrationStorage: SecureRegistrationStorage, broadcastKeyStorage: BroadcastRotationKeyStorage) {
+        self.secureRegistrationStorage = secureRegistrationStorage
+        self.broadcastKeyStorage = broadcastKeyStorage
+    }
 
     var allowedDataSharing: Bool {
         get { UserDefaults.standard.bool(forKey: Keys.allowedDataSharing.rawValue) }
@@ -50,14 +71,32 @@ class Persistence: Persisting {
     }
 
     var registration: Registration? {
-        get { try? secureRegistrationStorage.get() }
+        get {
+            guard let partial = try? secureRegistrationStorage.get() else { return nil }
+            var broadcastRotationKey: SecKey?
+            
+            do {
+                broadcastRotationKey = try broadcastKeyStorage.read()
+            } catch {
+                logger.error("Error reading broadcast key: \(error.localizedDescription)")
+                return nil
+            }
+            
+            return Registration(id: partial.id, secretKey: partial.secretKey, broadcastRotationKey: broadcastRotationKey)
+        }
+        
         set {
             guard let registration = newValue else {
                 try! secureRegistrationStorage.clear()
                 return
             }
 
-            try! secureRegistrationStorage.set(registration: registration)
+            let partial = PartialRegistration(id: registration.id, secretKey: registration.secretKey)
+            try! secureRegistrationStorage.set(registration: partial)
+            
+            if let k = registration.broadcastRotationKey {
+                try! broadcastKeyStorage.save(publicKey: k)
+            }
 
             delegate?.persistence(self, didUpdateRegistration: registration)
         }
@@ -99,20 +138,13 @@ class Persistence: Persisting {
         set { UserDefaults.standard.set(newValue, forKey: Keys.newKeyRotation.rawValue) }
     }
 
-    init(secureRegistrationStorage: SecureRegistrationStorage) {
-        self.secureRegistrationStorage = secureRegistrationStorage
-    }
-
-    convenience init() {
-        self.init(secureRegistrationStorage: SecureRegistrationStorage())
-    }
-
     func clear() {
         for key in Keys.allCases {
             UserDefaults.standard.removeObject(forKey: key.rawValue)
         }
 
         try! secureRegistrationStorage.clear()
+        try! broadcastKeyStorage.clear()
     }
 
 }

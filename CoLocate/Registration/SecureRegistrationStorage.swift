@@ -10,7 +10,7 @@ import Foundation
 import Security
 import Logging
 
-struct Registration: Codable, Equatable {
+struct PartialRegistration: Codable, Equatable {
     let id: UUID
     let secretKey: Data
 
@@ -27,7 +27,7 @@ class SecureRegistrationStorage {
         case keychain(OSStatus)
     }
 
-    func get() throws -> Registration? {
+    func get() throws -> PartialRegistration? {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: secService,
@@ -53,10 +53,10 @@ class SecureRegistrationStorage {
                 return nil
         }
 
-        return Registration(id: id, secretKey: data)
+        return PartialRegistration(id: id, secretKey: data)
     }
 
-    func set(registration: Registration) throws {
+    func set(registration: PartialRegistration) throws {
         try clear()
 
         let query: [String: Any] = [

@@ -52,7 +52,7 @@ private extension OnboardingEnvironment {
 
 private class InMemoryPersistence: Persisting {
     var allowedDataSharing = false
-    var registration: Registration? = Registration(id: UUID(), secretKey: Data())
+    var registration: Registration? = Registration(id: UUID(), secretKey: Data(), broadcastRotationKey: nil)
     var potentiallyExposed: Bool = false
     var selfDiagnosis: SelfDiagnosis? = nil
     var enableNewSelfDiagnosis = false

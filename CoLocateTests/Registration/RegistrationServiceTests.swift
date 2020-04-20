@@ -63,7 +63,11 @@ class RegistrationServiceTests: TestCase {
         XCTAssertNil(completedObserver.lastNotification)
         
         // Respond to the second request
-        let confirmationResponse = ConfirmRegistrationResponse(id: id, secretKey: secretKey, serverPublicKey: Data())
+        let confirmationResponse = ConfirmRegistrationResponse(
+            id: id,
+            secretKey: secretKey,
+            serverPublicKey: knownGoodRotationKeyData()
+        )
         session.executeCompletion!(Result<ConfirmRegistrationResponse, Error>.success(confirmationResponse))
         
         XCTAssertNotNil(completedObserver.lastNotification)
@@ -72,7 +76,9 @@ class RegistrationServiceTests: TestCase {
         XCTAssertNotNil(storedRegistration)
         XCTAssertEqual(id, storedRegistration?.id)
         XCTAssertEqual(secretKey, storedRegistration?.secretKey)
-        
+        let expectedRotationKey = try BroadcastRotationKeyConverter().fromData(knownGoodRotationKeyData())
+        XCTAssertEqual(expectedRotationKey, storedRegistration?.broadcastRotationKey)
+
         // Make sure we cleaned up after ourselves
         XCTAssertTrue(remoteNotificatonCallbackCalled)
         XCTAssertFalse(remoteNotificationDispatcher.hasHandler(forType: .registrationActivationCode))
@@ -129,7 +135,7 @@ class RegistrationServiceTests: TestCase {
         XCTAssertNil(completedObserver.lastNotification)
 
         // Respond to the second request
-        let confirmationResponse = ConfirmRegistrationResponse(id: id, secretKey: secretKey, serverPublicKey: Data())
+        let confirmationResponse = ConfirmRegistrationResponse(id: id, secretKey: secretKey, serverPublicKey: knownGoodRotationKeyData())
         session.executeCompletion!(Result<ConfirmRegistrationResponse, Error>.success(confirmationResponse))
 
         XCTAssertNotNil(completedObserver.lastNotification)
@@ -138,6 +144,8 @@ class RegistrationServiceTests: TestCase {
         XCTAssertNotNil(storedRegistration)
         XCTAssertEqual(id, storedRegistration?.id)
         XCTAssertEqual(secretKey, storedRegistration?.secretKey)
+        let expectedRotationKey = try BroadcastRotationKeyConverter().fromData(knownGoodRotationKeyData())
+        XCTAssertEqual(expectedRotationKey, storedRegistration?.broadcastRotationKey)
 
         // Make sure we cleaned up after ourselves
         XCTAssertTrue(remoteNotificatonCallbackCalled)
@@ -293,7 +301,7 @@ class RegistrationServiceTests: TestCase {
         remoteNotificationDispatcher.handleNotification(userInfo: ["activationCode": "arbitrary"]) { _ in }
                         
         // Respond to the second request
-        let confirmationResponse = ConfirmRegistrationResponse(id: id, secretKey: secretKey, serverPublicKey: Data())
+        let confirmationResponse = ConfirmRegistrationResponse(id: id, secretKey: secretKey, serverPublicKey: knownGoodRotationKeyData())
         session.executeCompletion!(Result<ConfirmRegistrationResponse, Error>.success(confirmationResponse))
         
         XCTAssertNotNil(completedObserver.lastNotification)
@@ -342,7 +350,7 @@ class RegistrationServiceTests: TestCase {
         // Respond to the second request twice
         // This can happen if registration timed out and the user retried, but both attempts eventually succeeded.
         let id1 = UUID()
-        let confirmationResponse1 = ConfirmRegistrationResponse(id: id1, secretKey: secretKey, serverPublicKey: Data())
+        let confirmationResponse1 = ConfirmRegistrationResponse(id: id1, secretKey: secretKey, serverPublicKey: knownGoodRotationKeyData())
         session.executeCompletion!(Result<ConfirmRegistrationResponse, Error>.success(confirmationResponse1))
         XCTAssertNotNil(completedObserver.lastNotification)
         completedObserver.lastNotification = nil
@@ -397,6 +405,11 @@ class RegistrationServiceTests: TestCase {
         XCTAssertNil(completedObserver.lastNotification)
         XCTAssertNotNil(failedObserver.lastNotification)
         XCTAssertNil(persistence.registration)
+    }
+    
+    private func knownGoodRotationKeyData() -> Data {
+        let data = Data(base64Encoded: "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEu1f68MqDXbKeTqZMTHsOGToO4rKnPClXe/kE+oWqlaWZQv4J1E98cUNdpzF9JIFRPMCNdGOvTr4UB+BhQv9GWg==")!
+        return data
     }
 }
 
