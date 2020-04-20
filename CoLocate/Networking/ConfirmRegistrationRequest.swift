@@ -49,11 +49,12 @@ class ConfirmRegistrationRequest: Request {
 struct ConfirmRegistrationResponse: Decodable {
     
     enum CodingKeys: String, CodingKey {
-        case id, secretKey
+        case id, secretKey, publicKey
     }
     
     let id: UUID
     let secretKey: Data
+    let serverPublicKey: Data
 
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
@@ -64,13 +65,19 @@ struct ConfirmRegistrationResponse: Decodable {
         guard let secretKey = Data(base64Encoded: base64SymmetricKey) else {
             throw DecodingError.dataCorruptedError(forKey: .secretKey, in: values, debugDescription: "Invalid base64 value")
         }
+
+        let base64ServerPublicKey = try values.decode(String.self, forKey: .publicKey)
+        guard let serverPublicKey = Data(base64Encoded: base64ServerPublicKey) else {
+            throw DecodingError.dataCorruptedError(forKey: .publicKey, in: values, debugDescription: "Invalid base64 value")
+        }
         
-        self.init(id: id, secretKey: secretKey)
+        self.init(id: id, secretKey: secretKey, serverPublicKey: serverPublicKey)
     }
     
-    init(id: UUID, secretKey: Data) {
+    init(id: UUID, secretKey: Data, serverPublicKey: Data) {
         self.id = id
         self.secretKey = secretKey
+        self.serverPublicKey = serverPublicKey
     }
 
 }
