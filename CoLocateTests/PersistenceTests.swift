@@ -53,7 +53,7 @@ class PersistenceTests: TestCase {
 
         let id = UUID()
         let secretKey = "secret key".data(using: .utf8)!
-        let registration = Registration(id: id, secretKey: secretKey, broadcastRotationKey: nil)
+        let registration = Registration(id: id, secretKey: secretKey, broadcastRotationKey: knownGoodECPublicKey())
         persistence.registration = registration
 
         XCTAssertEqual(delegate.recordedRegistration, registration)
@@ -79,21 +79,6 @@ class PersistenceTests: TestCase {
         
         p1.partialPostcode = "9810"
         XCTAssertEqual(p2.partialPostcode, "9810")
-    }
-    
-    private func knownGoodECPublicKey() -> SecKey {
-        let base64EncodedKey = "BDSTjw7/yauS6iyMZ9p5yl6i0n3A7qxYI/3v+6RsHt8o+UrFCyULX3fKZuA6ve+lH1CAItezr+Tk2lKsMcCbHMI="
-
-        let data = Data.init(base64Encoded: base64EncodedKey)!
-
-        let keyDict : [NSObject:NSObject] = [
-           kSecAttrKeyType: kSecAttrKeyTypeECSECPrimeRandom,
-           kSecAttrKeyClass: kSecAttrKeyClassPublic,
-           kSecAttrKeySizeInBits: NSNumber(value: 256),
-           kSecReturnPersistentRef: true as NSObject
-        ]
-
-        return SecKeyCreateWithData(data as CFData, keyDict as CFDictionary, nil)!
     }
 }
 

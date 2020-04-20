@@ -37,7 +37,7 @@ class PatchContactEventsRequestTests: XCTestCase {
             ContactEvent(sonarId: remoteSonarId3, timestamp: timestamp3, rssiValues: [rssi3], rssiIntervals: [30], duration: 0)
         ]
 
-        let registration = Registration(id: anonymousId, secretKey: dummyKey, broadcastRotationKey: nil)
+        let registration = Registration(id: anonymousId, secretKey: dummyKey, broadcastRotationKey: knownGoodECPublicKey())
         request = ConcreteSecureRequestFactory(registration: registration).patchContactsRequest(contactEvents: contactEvents)
 
         super.setUp()

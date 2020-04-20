@@ -30,7 +30,7 @@ class StatusViewControllerTests: XCTestCase {
     }
     
     func testShowsInitialRegisteredStatus() {
-        let vc = makeViewController(persistence: PersistenceDouble(registration: arbitraryRegistration()))
+        let vc = makeViewController(persistence: PersistenceDouble(registration: Registration.fake))
         
         XCTAssertEqual(vc.registrationStatusText?.text, "Everything is working OK")
         XCTAssertEqual(vc.registrationStatusIcon?.image, UIImage(named: "Registration_status_ok"))
@@ -109,10 +109,6 @@ class StatusViewControllerTests: XCTestCase {
         XCTAssertNil(vc.registratonStatusView?.backgroundColor)
         XCTAssertEqual(vc.registrationStatusText?.textColor, UIColor(named: "NHS Text"))
         XCTAssertTrue(vc.registrationRetryButton?.isHidden ?? false)
-    }
-
-    func arbitraryRegistration() -> Registration {
-        return Registration(id: UUID(), secretKey: Data(), broadcastRotationKey: nil)
     }
 }
 

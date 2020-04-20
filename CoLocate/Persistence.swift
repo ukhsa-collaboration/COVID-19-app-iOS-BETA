@@ -12,11 +12,9 @@ import Logging
 struct Registration: Equatable {
     let id: UUID
     let secretKey: Data
-    // TODO: Make broadcastRotationKey non-optional once the key rotation feature
-    // is no longer hidden behind a feature flag.
-    let broadcastRotationKey: SecKey?
+    let broadcastRotationKey: SecKey
 
-    init(id: UUID, secretKey: Data, broadcastRotationKey: SecKey?) {
+    init(id: UUID, secretKey: Data, broadcastRotationKey: SecKey) {
         self.id = id
         self.secretKey = secretKey
         self.broadcastRotationKey = broadcastRotationKey
@@ -82,12 +80,12 @@ class Persistence: Persisting {
                 return nil
             }
             
-            guard broadcastRotationKey != nil else {
+            guard let k = broadcastRotationKey else {
                 logger.error("Ignoring the existing registration because there is no broadcast roation key")
                 return nil
             }
             
-            return Registration(id: partial.id, secretKey: partial.secretKey, broadcastRotationKey: broadcastRotationKey)
+            return Registration(id: partial.id, secretKey: partial.secretKey, broadcastRotationKey: k)
         }
         
         set {
@@ -98,10 +96,7 @@ class Persistence: Persisting {
 
             let partial = PartialRegistration(id: registration.id, secretKey: registration.secretKey)
             try! secureRegistrationStorage.set(registration: partial)
-            
-            if let k = registration.broadcastRotationKey {
-                try! broadcastKeyStorage.save(publicKey: k)
-            }
+            try! broadcastKeyStorage.save(publicKey: registration.broadcastRotationKey)
 
             delegate?.persistence(self, didUpdateRegistration: registration)
         }
