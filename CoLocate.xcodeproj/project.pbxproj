@@ -525,6 +525,7 @@
 			children = (
 				21F373FE2433844D00926FB8 /* ContactEventRepository.swift */,
 				AE2A5E4F2423C473007A4771 /* ContactEvent.swift */,
+				131AB05B2449D85B002136CA /* ContactEventExpiryHandler.swift */,
 			);
 			path = "Contact Events";
 			sourceTree = "<group>";
@@ -594,6 +595,7 @@
 				214209B9242216B700C7BFF3 /* Persistence.swift */,
 				21E5051424448D880065C69B /* PlistPersister.swift */,
 				0997D055243BDEEC0067346C /* RootViewController.swift */,
+				6FC63C39241641BA007C8BF3 /* LaunchScreen.storyboard */,
 				6FC63C37241641BA007C8BF3 /* Assets.xcassets */,
 				A1E7A0582420028B0078174D /* NHS Colors.xcassets */,
 				89896E5F2435F15C00F949EA /* Base.xcconfig */,
@@ -603,7 +605,6 @@
 				098ED47F242E744F0029B729 /* Debug */,
 				F68D8FD424476846008BAAAA /* Environments */,
 				F78CEB45242B7741002254AD /* Extensions */,
-				6FC63C39241641BA007C8BF3 /* LaunchScreen.storyboard */,
 				89F06B2D2434A5A50074C612 /* Logging */,
 				214209D3242399DD00C7BFF3 /* Networking */,
 				F6CC2CA7242BC7D90079432B /* Notifications */,
@@ -613,7 +614,6 @@
 				895D9E4924374EB800573D4D /* Routing */,
 				F68B89EB243CFEEE00F369A9 /* SelfDiagnosis */,
 				0995ABCD243D034E0057C0D7 /* Status */,
-				131AB05B2449D85B002136CA /* ContactEventExpiryHandler.swift */,
 			);
 			path = CoLocate;
 			sourceTree = "<group>";

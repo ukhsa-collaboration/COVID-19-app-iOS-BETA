@@ -78,6 +78,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             notificationCenter: notificationCenter,
             registrationService: registrationService,
             contactEventRepository: bluetoothNursery.contactEventRepository,
+            contactEventPersister: bluetoothNursery.contactEventPersister,
             session: urlSession,
             uiQueue: DispatchQueue.main
         )

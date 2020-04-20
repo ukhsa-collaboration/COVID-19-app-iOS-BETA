@@ -19,10 +19,12 @@ class DebugViewController: UITableViewController, Storyboarded {
 
     private var persisting: Persisting!
     private var contactEventRepository: ContactEventRepository!
+    private var contactEventPersister: ContactEventPersister!
     
-    func inject(persisting: Persisting, contactEventRepository: ContactEventRepository) {
+    func inject(persisting: Persisting, contactEventRepository: ContactEventRepository, contactEventPersister: ContactEventPersister) {
         self.persisting = persisting
         self.contactEventRepository = contactEventRepository
+        self.contactEventPersister = contactEventPersister
     }
     
     override func viewDidLoad() {
@@ -50,11 +52,23 @@ class DebugViewController: UITableViewController, Storyboarded {
             break
 
         case (1, 0):
-            show(title: "Whoops!", message: "No dummy events recorded, this functionality temporarily disabled!")
+            let uuid = UUID()
+            contactEventPersister.items[uuid] = ContactEvent(sonarId: uuid.data, timestamp: Date(), rssiValues: [], rssiIntervals: [], duration: 1)
+            show(title: "Conatact", message: "Dummy contact event recorded.")
             
         case (1, 1):
+            let uuid = UUID()
+            contactEventPersister.items[uuid] = ContactEvent(sonarId: uuid.data, timestamp: Date(timeIntervalSinceNow: -2592000), rssiValues: [], rssiIntervals: [], duration: 1)
+            show(title: "Expired Conatact", message: "Expired Dummy contact event recorded.")
+            
+        case (1, 2):
             contactEventRepository.reset()
             show(title: "Cleared", message: "All contact events cleared.")
+            
+        case (1, 3):
+            let notificationCenter = NotificationCenter.default
+            notificationCenter.post(name: UIApplication.significantTimeChangeNotification, object: nil)
+            show(title: "Cleared", message: "All expired contact events cleared.")
             
         case (2, 0):
             do {

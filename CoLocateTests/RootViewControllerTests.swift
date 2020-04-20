@@ -154,6 +154,7 @@ fileprivate func makeRootVC(
         notificationCenter: notificationCenter,
         registrationService: RegistrationServiceDouble(),
         contactEventRepository: ContactEventRepositoryDouble(),
+        contactEventPersister: ContactEventPersisterDouble(),
         session: SessionDouble(),
         uiQueue: QueueDouble()
     )

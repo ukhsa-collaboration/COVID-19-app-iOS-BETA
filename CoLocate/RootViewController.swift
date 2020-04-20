@@ -20,6 +20,7 @@ class RootViewController: UIViewController {
     private var notificationCenter: NotificationCenter! = nil
     private var registrationService: RegistrationService! = nil
     private var contactEventRepository: ContactEventRepository! = nil
+    private var contactEventPersister: ContactEventPersister! = nil
     private var statusViewController: StatusViewController!
     private var session: Session! = nil
     private var uiQueue: TestableQueue! = nil
@@ -31,6 +32,7 @@ class RootViewController: UIViewController {
         notificationCenter: NotificationCenter,
         registrationService: RegistrationService,
         contactEventRepository: ContactEventRepository,
+        contactEventPersister: ContactEventPersister,
         session: Session,
         uiQueue: TestableQueue
     ) {
@@ -40,6 +42,7 @@ class RootViewController: UIViewController {
         self.notificationCenter = notificationCenter
         self.registrationService = registrationService
         self.contactEventRepository = contactEventRepository
+        self.contactEventPersister = contactEventPersister
         self.session = session
         self.uiQueue = uiQueue
 
@@ -145,7 +148,7 @@ class RootViewController: UIViewController {
             let navVC = tabBarVC.viewControllers?.first as? UINavigationController,
             let debugVC = navVC.viewControllers.first as? DebugViewController else { return }
         
-        debugVC.inject(persisting: persistence, contactEventRepository: contactEventRepository)
+        debugVC.inject(persisting: persistence, contactEventRepository: contactEventRepository, contactEventPersister: contactEventPersister)
         
         present(tabBarVC, animated: true)
     }
