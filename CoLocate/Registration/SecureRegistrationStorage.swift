@@ -27,12 +27,10 @@ class SecureRegistrationStorage {
         case keychain(OSStatus)
     }
 
-    static let secService = "registration"
-
     func get() throws -> Registration? {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
-            kSecAttrService as String: SecureRegistrationStorage.secService,
+            kSecAttrService as String: secService,
             kSecReturnAttributes as String: true,
             kSecReturnData as String: true
         ]
@@ -63,7 +61,7 @@ class SecureRegistrationStorage {
 
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
-            kSecAttrService as String: SecureRegistrationStorage.secService,
+            kSecAttrService as String: secService,
             kSecAttrAccount as String: registration.id.uuidString,
             kSecValueData as String: registration.secretKey,
             kSecAttrAccessible as String: kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly,
@@ -79,7 +77,7 @@ class SecureRegistrationStorage {
     func clear() throws {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
-            kSecAttrService as String: SecureRegistrationStorage.secService,
+            kSecAttrService as String: secService,
         ]
         let status = SecItemDelete(query as CFDictionary)
 
@@ -91,4 +89,7 @@ class SecureRegistrationStorage {
 
 }
 
-fileprivate let logger = Logger(label: "RegistrationStorage")
+fileprivate let secService = "registration"
+
+// MARK: - Logging
+fileprivate let logger = Logger(label: "Registration")

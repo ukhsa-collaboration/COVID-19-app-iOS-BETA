@@ -144,4 +144,4 @@ fileprivate class RegistrationTimeoutError: Error {
 }
 
 // MARK: - Logging
-private let logger = Logger(label: "RegistrationService")
+private let logger = Logger(label: "Registration")
