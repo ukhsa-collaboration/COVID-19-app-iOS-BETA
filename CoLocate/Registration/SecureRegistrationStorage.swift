@@ -10,7 +10,7 @@ import Foundation
 import Security
 import Logging
 
-struct Registration: Codable, Equatable {
+struct PartialRegistration: Codable, Equatable {
     let id: UUID
     let secretKey: Data
 
@@ -27,15 +27,10 @@ class SecureRegistrationStorage {
         case keychain(OSStatus)
     }
 
-    // There's no need for this to be a singleton,
-    // but this feels more idiomatic.
-    static var shared = SecureRegistrationStorage()
-    static let secService = "registration"
-
-    func get() throws -> Registration? {
+    func get() throws -> PartialRegistration? {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
-            kSecAttrService as String: SecureRegistrationStorage.secService,
+            kSecAttrService as String: secService,
             kSecReturnAttributes as String: true,
             kSecReturnData as String: true
         ]
@@ -58,15 +53,15 @@ class SecureRegistrationStorage {
                 return nil
         }
 
-        return Registration(id: id, secretKey: data)
+        return PartialRegistration(id: id, secretKey: data)
     }
 
-    func set(registration: Registration) throws {
+    func set(registration: PartialRegistration) throws {
         try clear()
 
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
-            kSecAttrService as String: SecureRegistrationStorage.secService,
+            kSecAttrService as String: secService,
             kSecAttrAccount as String: registration.id.uuidString,
             kSecValueData as String: registration.secretKey,
             kSecAttrAccessible as String: kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly,
@@ -82,7 +77,7 @@ class SecureRegistrationStorage {
     func clear() throws {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
-            kSecAttrService as String: SecureRegistrationStorage.secService,
+            kSecAttrService as String: secService,
         ]
         let status = SecItemDelete(query as CFDictionary)
 
@@ -94,4 +89,7 @@ class SecureRegistrationStorage {
 
 }
 
-fileprivate let logger = Logger(label: "RegistrationStorage")
+fileprivate let secService = "registration"
+
+// MARK: - Logging
+fileprivate let logger = Logger(label: "Registration")

@@ -114,8 +114,21 @@ class ConcreteRegistrationService: RegistrationService {
                     logger.info("Ignoring registration response because we are already registered")
                     return
                 }
-
-                let registration = Registration(id: response.id, secretKey: response.secretKey)
+                
+                var broadcastRotationKey: SecKey!
+                
+                do {
+                    broadcastRotationKey = try BroadcastRotationKeyConverter().fromData(response.serverPublicKey)
+                } catch {
+                    logger.error("Invalid server public key in registration confirmation response: \(error.localizedDescription)")
+                    return
+                }
+                
+                let registration = Registration(
+                    id: response.id,
+                    secretKey: response.secretKey,
+                    broadcastRotationKey: broadcastRotationKey
+                )
                 self.persistence.registration = registration
 
                 self.succeed(registration: registration)
@@ -144,4 +157,4 @@ fileprivate class RegistrationTimeoutError: Error {
 }
 
 // MARK: - Logging
-private let logger = Logger(label: "RegistrationService")
+private let logger = Logger(label: "Registration")

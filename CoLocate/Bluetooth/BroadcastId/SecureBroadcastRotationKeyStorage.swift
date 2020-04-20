@@ -8,11 +8,12 @@
 
 import Foundation
 import Security
+import CommonCrypto
 
 import Logging
 
 protocol BroadcastRotationKeyStorage {
-    func save(certificate: Data) throws
+    func save(publicKey: SecKey) throws
     func read() throws -> SecKey?
     func clear() throws
 }
@@ -21,21 +22,12 @@ struct SecureBroadcastRotationKeyStorage: BroadcastRotationKeyStorage {
 
     private let publicKeyTag = "uk.nhs.nhsx.colocate.sonar.public_key"
 
-    enum Error: Swift.Error {
-        case invalidCertificate
-        case keychain(OSStatus)
-    }
+    func save(publicKey: SecKey) throws {
+        let status = saveToKeychain(publicKey)
 
-    func save(certificate: Data) throws {
-        guard let publicKey = extractPublicKeyFrom(certificate) else {
-            logger.info("Could not save public key from certificate")
-            throw Error.invalidCertificate
-        }
-
-        let status = saveInKeychain(publicKey)
-        guard status == errSecSuccess else {
+        guard status == errSecSuccess || status == errSecDuplicateItem else {
             logger.error("Failed to add BTLE rotation key to keychain: \(status)")
-            throw Error.keychain(status)
+            throw KeychainErrors.couldNotSaveToKeychain(status)
         }
     }
 
@@ -57,7 +49,7 @@ struct SecureBroadcastRotationKeyStorage: BroadcastRotationKeyStorage {
             return nil
         default:
             logger.critical("Unhandled status from SecItemCopy: \(status)")
-            throw Error.keychain(status)
+            throw KeychainErrors.unhandledKeychainError(status)
         }
     }
 
@@ -71,44 +63,13 @@ struct SecureBroadcastRotationKeyStorage: BroadcastRotationKeyStorage {
 
         guard status == errSecSuccess || status == errSecItemNotFound else {
             logger.error("Failed to clear saved BTLE rotation key from keychain : \(status)")
-            throw Error.keychain(status)
+            throw KeychainErrors.unhandledKeychainError(status)
         }
     }
 
     // MARK: - Private
 
-    func extractPublicKeyFrom(_ certificate: Data) -> SecKey? {
-        // shamelessly stolen from this blog post that explains importing public keys on iOS
-        // https://digitalleaves.com/blog/2015/10/sharing-public-keys-between-ios-and-the-rest-of-the-world/
-
-        guard let certRef = SecCertificateCreateWithData(nil, certificate as CFData) else {
-            logger.critical("Could not create certificate from data")
-            return nil
-        }
-
-        var secTrustMaybe: SecTrust?
-        let secTrustStatus = SecTrustCreateWithCertificates(certRef, nil, &secTrustMaybe)
-        guard secTrustStatus == errSecSuccess else {
-            logger.critical("Could not create trust from certificate. Status: \(secTrustStatus)")
-            return nil
-        }
-
-        guard let secTrust = secTrustMaybe else {
-            logger.critical("Could not create certificate. secTrust is nil")
-            return nil
-        }
-
-        var resultType: SecTrustResultType = .invalid
-        let evaluateStatus = SecTrustEvaluate(secTrust, &resultType)
-        guard evaluateStatus == errSecSuccess else {
-            logger.critical("Could not evaluate sec trust. Status: \(evaluateStatus)")
-            return nil
-        }
-
-        return SecTrustCopyPublicKey(secTrust)
-    }
-
-    func saveInKeychain(_ publicKey: SecKey) -> OSStatus {
+    private func saveToKeychain(_ publicKey: SecKey) -> OSStatus {
         let query: [String: Any] = [
             kSecClass as String: kSecClassKey,
             kSecAttrApplicationTag as String: publicKeyTag,
@@ -119,5 +80,11 @@ struct SecureBroadcastRotationKeyStorage: BroadcastRotationKeyStorage {
         return SecItemAdd(query as CFDictionary, nil)
     }
 }
+
+fileprivate enum KeychainErrors: Error {
+    case couldNotSaveToKeychain(_ status: OSStatus)
+    case unhandledKeychainError(_ status: OSStatus)
+}
+
 
 fileprivate let logger = Logger(label: "BTLE")

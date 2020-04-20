@@ -14,6 +14,8 @@ class ConfirmRegistrationRequestTests: XCTestCase {
     let activationCode = "an activation code"
     let serverGeneratedId = UUID()
     let symmetricKey = Data(base64Encoded: "3bLIKs9B9UqVfqGatyJbiRGNW8zTBr2tgxYJh/el7pc=")!
+    let serverPublicKey = Data(base64Encoded: "Y2FzaCBydWxlcyBldmVyeXRoaW5nIGFyb3VuZCBtZQo=")!
+
     let pushToken: String = "someBase64StringWeGotFromFirebase=="
     let deviceModel: String = "iDevice 42,17"
     let deviceOSVersion: String = "666.6"
@@ -56,20 +58,21 @@ class ConfirmRegistrationRequestTests: XCTestCase {
         let responseData =
         """
         {
-            "id": "\(serverGeneratedId.uuidString)", "secretKey": "3bLIKs9B9UqVfqGatyJbiRGNW8zTBr2tgxYJh/el7pc="
+            "id": "\(serverGeneratedId.uuidString)", "secretKey": "3bLIKs9B9UqVfqGatyJbiRGNW8zTBr2tgxYJh/el7pc=", "publicKey": "Y2FzaCBydWxlcyBldmVyeXRoaW5nIGFyb3VuZCBtZQo="
         }
         """.data(using: .utf8)!
         let response = try? request.parse(responseData)
 
         XCTAssertEqual(response?.id, serverGeneratedId)
         XCTAssertEqual(response?.secretKey, symmetricKey)
+        XCTAssertEqual(response?.serverPublicKey, serverPublicKey)
     }
 
     func testParseInvalidUUID() {
         let responseData =
         """
         {
-            "id": "uuid-blabalabla", "secretKey": "3bLIKs9B9UqVfqGatyJbiRGNW8zTBr2tgxYJh/el7pc="
+            "id": "uuid-blabalabla", "secretKey": "3bLIKs9B9UqVfqGatyJbiRGNW8zTBr2tgxYJh/el7pc=", "publicKey": "Y2FzaCBydWxlcyBldmVyeXRoaW5nIGFyb3VuZCBtZQo="
         }
         """.data(using: .utf8)!
 
@@ -80,7 +83,18 @@ class ConfirmRegistrationRequestTests: XCTestCase {
         let responseData =
         """
         {
-            "id": "\(serverGeneratedId.uuidString)", "secretKey": "random non-base64 nonsense"
+            "id": "\(serverGeneratedId.uuidString)", "secretKey": "random non-base64 nonsense", "publicKey": "Y2FzaCBydWxlcyBldmVyeXRoaW5nIGFyb3VuZCBtZQo="
+        }
+        """.data(using: .utf8)!
+
+        XCTAssertThrowsError(try request.parse(responseData))
+    }
+
+    func testParseInvalidPublicKey() {
+        let responseData =
+        """
+        {
+            "id": "\(serverGeneratedId.uuidString)", "secretKey": "3bLIKs9B9UqVfqGatyJbiRGNW8zTBr2tgxYJh/el7pc=", "publicKey": "these are not the bytes you are looking for"
         }
         """.data(using: .utf8)!
 

@@ -94,7 +94,9 @@ class DebugViewController: UITableViewController, Storyboarded {
             let info = Bundle(for: AppDelegate.self).infoDictionary!
             let id = info["DEBUG_REGISTRATION_ID"] as! String
             let secretKey = info["DEBUG_REGISTRATION_SECRET_KEY"] as! String
-            persisting.registration = Registration(id: UUID(uuidString: id)!, secretKey: secretKey.data(using: .utf8)!)
+            let broadcastKeyS = info["DEBUG_REGISTRATION_BROADCAST_ROTATION_KEY"] as! String
+            let broadcastKey = try! BroadcastRotationKeyConverter().fromData(Data(base64Encoded: broadcastKeyS)!)
+            persisting.registration = Registration(id: UUID(uuidString: id)!, secretKey: secretKey.data(using: .utf8)!, broadcastRotationKey: broadcastKey)
             #else
             let alert = UIAlertController(title: "Unavailable", message: "This dangerous action is only available in debug builds.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))

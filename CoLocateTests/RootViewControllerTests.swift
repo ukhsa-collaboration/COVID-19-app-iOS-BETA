@@ -12,7 +12,7 @@ import XCTest
 class RootViewControllerTests: TestCase {
     
     func testInitialVC_registered() {
-        let persistence = PersistenceDouble(registration: Registration(id: UUID(), secretKey: Data()))
+        let persistence = PersistenceDouble(registration: Registration.fake)
         let rootVC = makeRootVC(persistence: persistence)
         XCTAssertNotNil(rootVC.view)
         
@@ -46,7 +46,7 @@ class RootViewControllerTests: TestCase {
     }
     
     func testPotentialNotification() {
-        let persistence = PersistenceDouble(registration: Registration(id: UUID(), secretKey: Data()))
+        let persistence = PersistenceDouble(registration: Registration.fake)
         let dispatcher = makeDispatcher()
         let rootVC = makeRootVC(persistence: persistence, remoteNotificationDispatcher: dispatcher)
         XCTAssertNotNil(rootVC.view)
@@ -73,7 +73,7 @@ class RootViewControllerTests: TestCase {
     }
     
     func testBecomeActiveShowsPermissionDeniedWhenNoBluetoothPermission() {
-        let persistence = PersistenceDouble(registration: Registration(id: UUID(), secretKey: Data()))
+        let persistence = PersistenceDouble(registration: Registration.fake)
         let authMgr = AuthorizationManagerDouble(bluetooth: .allowed)
         let notificationCenter = NotificationCenter()
         let rootVC = makeRootVC(persistence: persistence, authorizationManager: authMgr, notificationCenter: notificationCenter)
@@ -87,7 +87,7 @@ class RootViewControllerTests: TestCase {
     }
     
     func testBecomeActiveShowsPermissionDeniedWhenNoNotificationPermission() {
-        let persistence = PersistenceDouble(registration: Registration(id: UUID(), secretKey: Data()))
+        let persistence = PersistenceDouble(registration: Registration.fake)
         let authMgr = AuthorizationManagerDouble(bluetooth: .allowed)
         let notificationCenter = NotificationCenter()
         let rootVC = makeRootVC(persistence: persistence, authorizationManager: authMgr, notificationCenter: notificationCenter)
@@ -100,7 +100,7 @@ class RootViewControllerTests: TestCase {
     }
     
     func testBecomeActiveDoesNotShowPermissionDeniedWhenAllPermissionsGranted() {
-        let persistence = PersistenceDouble(registration: Registration(id: UUID(), secretKey: Data()))
+        let persistence = PersistenceDouble(registration: Registration.fake)
         let authMgr = AuthorizationManagerDouble(bluetooth: .allowed)
         let notificationCenter = NotificationCenter()
         let rootVC = makeRootVC(persistence: persistence, authorizationManager: authMgr, notificationCenter: notificationCenter)
@@ -113,7 +113,7 @@ class RootViewControllerTests: TestCase {
     }
     
     func testBecomeActiveHidesExistingPermissionDeniedWhenAllPermissionsGranted() {
-        let persistence = PersistenceDouble(registration: Registration(id: UUID(), secretKey: Data()))
+        let persistence = PersistenceDouble(registration: Registration.fake)
         let authMgr = AuthorizationManagerDouble(bluetooth: .allowed)
         let notificationCenter = NotificationCenter()
         let rootVC = makeRootVC(persistence: persistence, authorizationManager: authMgr, notificationCenter: notificationCenter)

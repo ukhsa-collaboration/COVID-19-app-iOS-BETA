@@ -20,7 +20,7 @@ class SecureRegistrationStorageTests: TestCase {
 
         XCTAssertNil(try storage.get())
 
-        try storage.set(registration: Registration(id: id, secretKey: secretKey))
+        try storage.set(registration: PartialRegistration(id: id, secretKey: secretKey))
 
         let registration = try? storage.get()
         XCTAssertEqual(registration?.id, id)
@@ -30,10 +30,10 @@ class SecureRegistrationStorageTests: TestCase {
     func testOverwritesExistingRegistration() throws {
         // Add a registration
         let storage = SecureRegistrationStorage()
-        try storage.set(registration: Registration(id: UUID(), secretKey: secretKey))
+        try storage.set(registration: PartialRegistration(id: UUID(), secretKey: secretKey))
 
         // Add another registration
-        try storage.set(registration: Registration(id: id, secretKey: secretKey))
+        try storage.set(registration: PartialRegistration(id: id, secretKey: secretKey))
 
         // We should have the new registration
         let registration = try? storage.get()
@@ -52,7 +52,7 @@ class SecureRegistrationStorageTests: TestCase {
 
         // Set a registration
         let storage = SecureRegistrationStorage()
-        try storage.set(registration: Registration(id: UUID(), secretKey: secretKey))
+        try storage.set(registration: PartialRegistration(id: UUID(), secretKey: secretKey))
 
         // The original generic password should still be there
         let getQuery: [String: Any] = [

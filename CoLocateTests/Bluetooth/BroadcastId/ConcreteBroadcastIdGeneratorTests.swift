@@ -13,8 +13,8 @@ import XCTest
 
 class ConcreteBroadcastIdGeneratorTests: XCTestCase {
 
-    var subject: ConcreteBroadcastIdGenerator!
-    var storage: StubbedBroadcastRotationKeyStorage!
+    private var subject: ConcreteBroadcastIdGenerator!
+    private var storage: StubbedBroadcastRotationKeyStorage!
 
     override func setUp() {
         subject = ConcreteBroadcastIdGenerator(storage: StubbedBroadcastRotationKeyStorage(stubbedKey: nil))
@@ -66,7 +66,7 @@ class ConcreteBroadcastIdGeneratorTests: XCTestCase {
     }
 }
 
-class StubbedBroadcastRotationKeyStorage: BroadcastRotationKeyStorage {
+fileprivate class StubbedBroadcastRotationKeyStorage: BroadcastRotationKeyStorage {
 
     let stubbedKey: SecKey?
     let shouldThrow: Bool
@@ -76,7 +76,7 @@ class StubbedBroadcastRotationKeyStorage: BroadcastRotationKeyStorage {
         self.shouldThrow = shouldThrow
     }
 
-    func save(certificate: Data) throws {
+    func save(publicKey: SecKey) throws {
 
     }
 
@@ -91,19 +91,4 @@ class StubbedBroadcastRotationKeyStorage: BroadcastRotationKeyStorage {
     func clear() throws {
 
     }
-}
-
-private func knownGoodECPublicKey() -> SecKey {
-    let base64EncodedKey = "BDSTjw7/yauS6iyMZ9p5yl6i0n3A7qxYI/3v+6RsHt8o+UrFCyULX3fKZuA6ve+lH1CAItezr+Tk2lKsMcCbHMI="
-
-    let data = Data.init(base64Encoded: base64EncodedKey)!
-
-    let keyDict : [NSObject:NSObject] = [
-       kSecAttrKeyType: kSecAttrKeyTypeECSECPrimeRandom,
-       kSecAttrKeyClass: kSecAttrKeyClassPublic,
-       kSecAttrKeySizeInBits: NSNumber(value: 256),
-       kSecReturnPersistentRef: true as NSObject
-    ]
-
-    return SecKeyCreateWithData(data as CFData, keyDict as CFDictionary, nil)!
 }

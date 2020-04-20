@@ -41,7 +41,7 @@ extension DispatchQueue {
 
 extension Registration {
     static var fake: Self {
-        Registration(id: UUID(), secretKey: Data())
+        Registration(id: UUID(), secretKey: Data(), broadcastRotationKey: knownGoodECPublicKey())
     }
 }
 
@@ -49,4 +49,20 @@ class FakeError: Error {
     static var fake: Error {
         FakeError()
     }
+}
+
+
+func knownGoodECPublicKey() -> SecKey {
+    let base64EncodedKey = "BDSTjw7/yauS6iyMZ9p5yl6i0n3A7qxYI/3v+6RsHt8o+UrFCyULX3fKZuA6ve+lH1CAItezr+Tk2lKsMcCbHMI="
+
+    let data = Data.init(base64Encoded: base64EncodedKey)!
+
+    let keyDict : [NSObject:NSObject] = [
+       kSecAttrKeyType: kSecAttrKeyTypeECSECPrimeRandom,
+       kSecAttrKeyClass: kSecAttrKeyClassPublic,
+       kSecAttrKeySizeInBits: NSNumber(value: 256),
+       kSecReturnPersistentRef: true as NSObject
+    ]
+
+    return SecKeyCreateWithData(data as CFData, keyDict as CFDictionary, nil)!
 }
