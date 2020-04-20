@@ -13,8 +13,8 @@ import XCTest
 
 class ConcreteBroadcastIdGeneratorTests: XCTestCase {
 
-    var subject: ConcreteBroadcastIdGenerator!
-    var storage: StubbedBroadcastRotationKeyStorage!
+    private var subject: ConcreteBroadcastIdGenerator!
+    private var storage: StubbedBroadcastRotationKeyStorage!
 
     override func setUp() {
         subject = ConcreteBroadcastIdGenerator(storage: StubbedBroadcastRotationKeyStorage(stubbedKey: nil))
@@ -66,7 +66,7 @@ class ConcreteBroadcastIdGeneratorTests: XCTestCase {
     }
 }
 
-class StubbedBroadcastRotationKeyStorage: BroadcastRotationKeyStorage {
+fileprivate class StubbedBroadcastRotationKeyStorage: BroadcastRotationKeyStorage {
 
     let stubbedKey: SecKey?
     let shouldThrow: Bool
@@ -76,7 +76,7 @@ class StubbedBroadcastRotationKeyStorage: BroadcastRotationKeyStorage {
         self.shouldThrow = shouldThrow
     }
 
-    func save(keyData: Data) throws {
+    func save(publicKey: SecKey) throws {
 
     }
 

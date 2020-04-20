@@ -22,9 +22,7 @@ class SecureBroadcastRotationKeyStorageTests: XCTestCase {
     }
 
     func test_saves_the_key_and_reads_it_back() throws {
-        let testKeyData = ellipticCurveKeyForTest()
-
-        try storage.save(keyData: testKeyData)
+        try storage.save(publicKey: try ellipticCurveKeyForTest())
 
         let otherWrapper = SecureBroadcastRotationKeyStorage()
         let readKey = try? otherWrapper.read()
@@ -38,15 +36,10 @@ class SecureBroadcastRotationKeyStorageTests: XCTestCase {
         XCTAssertNil(readKey)
     }
 
-    func test_throws_when_fed_garbage_data() {
-        XCTAssertThrowsError(try storage.save(keyData: Data()))
-    }
-
     //MARK: - Private
 
-    private func ellipticCurveKeyForTest() -> Data {
-        let base64EncodedKey = "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEu1f68MqDXbKeTqZMTHsOGToO4rKnPClXe/kE+oWqlaWZQv4J1E98cUNdpzF9JIFRPMCNdGOvTr4UB+BhQv9GWg=="
-
-        return Data.init(base64Encoded: base64EncodedKey)!
+    private func ellipticCurveKeyForTest() throws -> SecKey {
+        let data = Data.init(base64Encoded: "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEu1f68MqDXbKeTqZMTHsOGToO4rKnPClXe/kE+oWqlaWZQv4J1E98cUNdpzF9JIFRPMCNdGOvTr4UB+BhQv9GWg==")!
+        return try BroadcastRotationKeyConverter().fromData(data)
     }
 }

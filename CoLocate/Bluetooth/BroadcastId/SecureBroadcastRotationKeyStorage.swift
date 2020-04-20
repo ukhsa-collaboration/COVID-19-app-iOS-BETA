@@ -13,7 +13,7 @@ import CommonCrypto
 import Logging
 
 protocol BroadcastRotationKeyStorage {
-    func save(keyData: Data) throws
+    func save(publicKey: SecKey) throws
     func read() throws -> SecKey?
     func clear() throws
 }
@@ -22,11 +22,7 @@ struct SecureBroadcastRotationKeyStorage: BroadcastRotationKeyStorage {
 
     private let publicKeyTag = "uk.nhs.nhsx.colocate.sonar.public_key"
 
-    let converter = BroadcastRotationKeyConverter()
-
-    func save(keyData: Data) throws {
-        let publicKey = try converter.fromData(keyData)
-
+    func save(publicKey: SecKey) throws {
         let status = saveToKeychain(publicKey)
 
         guard status == errSecSuccess || status == errSecDuplicateItem else {
