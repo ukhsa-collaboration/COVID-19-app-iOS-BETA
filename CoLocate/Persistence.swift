@@ -28,7 +28,6 @@ protocol Persisting {
     var potentiallyExposed: Bool { get nonmutating set }
     var selfDiagnosis: SelfDiagnosis? { get nonmutating set }
     var partialPostcode: String? { get nonmutating set }
-    var enableNewKeyRotation: Bool { get nonmutating set }
     
     func clear()
 }
@@ -43,9 +42,6 @@ class Persistence: Persisting {
         case allowedDataSharing
         case potentiallyExposed
         case selfDiagnosis
-
-        // Feature flags
-        case newKeyRotation
         case partialPostcode
     }
 
@@ -122,11 +118,6 @@ class Persistence: Persisting {
     var partialPostcode: String? {
         get { UserDefaults.standard.string(forKey: Keys.partialPostcode.rawValue) }
         set { UserDefaults.standard.set(newValue, forKey: Keys.partialPostcode.rawValue) }
-    }
-
-    var enableNewKeyRotation: Bool {
-        get { UserDefaults.standard.bool(forKey: Keys.newKeyRotation.rawValue) }
-        set { UserDefaults.standard.set(newValue, forKey: Keys.newKeyRotation.rawValue) }
     }
 
     func clear() {

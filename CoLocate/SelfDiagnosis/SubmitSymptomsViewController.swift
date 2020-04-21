@@ -108,26 +108,17 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
 
         guard !isSubmitting else { return }
         isSubmitting = true
-        
+
+        #warning("This needs to be replaced with actual business logic before we ship")
         // NOTE: This is not spec'ed out, and is only here
         // so we can make sure this flow works through the
         // app during debugging. This will need to be replaced
         // with real business logic in the future.
         persisting.selfDiagnosis = SelfDiagnosis(symptoms: symptoms, startDate: startDate)
-        
+
         let requestFactory = ConcreteSecureRequestFactory(registration: registration)
 
-        let contactEvents = contactEventRepository.contactEvents.compactMap { contactEvent -> ContactEvent in
-            let uuid = contactEvent.sonarId.flatMap { UUID(data: $0) }
-            guard !Persistence.shared.enableNewKeyRotation, uuid != nil else {
-                return contactEvent
-            }
-
-            var ce = contactEvent
-            ce.sonarId = uuid?.uuidString.data(using: .utf8)
-            return ce
-        }
-
+        let contactEvents = contactEventRepository.contactEvents
         let request = requestFactory.patchContactsRequest(contactEvents: contactEvents)
         session.execute(request, queue: .main) { [weak self] result in
             guard let self = self else { return }

@@ -19,11 +19,7 @@ class BroadcastIdEncrypter {
     let oneDay: TimeInterval = 86400
 
     static var broadcastIdLength: Int {
-        if Persistence.shared.enableNewKeyRotation {
-            return 106
-        } else {
-            return 16
-        }
+        return 106
     }
 
     struct CachedResult {
@@ -39,10 +35,6 @@ class BroadcastIdEncrypter {
     }
 
     func broadcastId(for startDate: Date = Date(), until maybeDate: Date? = nil) -> Data {
-        if Persistence.shared.enableNewKeyRotation == false {
-            return bytesFromSonarId()
-        }
-
         if cached?.date == startDate {
             return cached!.broadcastId
         }

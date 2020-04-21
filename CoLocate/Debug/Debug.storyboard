@@ -37,7 +37,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <label key="tableFooterView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="u9d-KW-xk7">
-                            <rect key="frame" x="0.0" y="920" width="414" height="44"/>
+                            <rect key="frame" x="0.0" y="876.5" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                             <nil key="textColor"/>
@@ -289,7 +289,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable new self-diagnosis" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZvC-4f-ZSM">
-                                                    <rect key="frame" x="20" y="11" width="200" height="22"/>
+                                                    <rect key="frame" x="8" y="11" width="200" height="22"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -310,35 +310,6 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="1fM-d9-9Xh">
-                                        <rect key="frame" x="0.0" y="858.5" width="414" height="43.5"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1fM-d9-9Xh" id="fqp-YR-SPf">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable new key rotation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ys-ni-UEJ">
-                                                    <rect key="frame" x="20" y="11" width="182" height="22"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="DW7-IA-cwg" userLabel="Enable new key rotation">
-                                                    <rect key="frame" x="357" y="6.5" width="51" height="31"/>
-                                                    <connections>
-                                                        <action selector="enableNewKeyRotationChanged:" destination="HkQ-dd-eR1" eventType="valueChanged" id="ZJ8-sk-ucN"/>
-                                                    </connections>
-                                                </switch>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="1ys-ni-UEJ" firstAttribute="top" secondItem="fqp-YR-SPf" secondAttribute="topMargin" id="0m6-9q-YED"/>
-                                                <constraint firstItem="1ys-ni-UEJ" firstAttribute="leading" secondItem="fqp-YR-SPf" secondAttribute="leadingMargin" id="Ppf-2i-J5Y"/>
-                                                <constraint firstAttribute="trailing" secondItem="DW7-IA-cwg" secondAttribute="trailing" constant="8" id="WQ9-Tc-GPQ"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="1ys-ni-UEJ" secondAttribute="bottom" id="aSz-lE-GFX"/>
-                                                <constraint firstItem="DW7-IA-cwg" firstAttribute="centerY" secondItem="fqp-YR-SPf" secondAttribute="centerY" id="vis-0H-BIU"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -356,7 +327,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="allowedDataSharingSwitch" destination="ZGS-GZ-Qan" id="kAW-LK-aGH"/>
-                        <outlet property="enableNewKeyRotation" destination="DW7-IA-cwg" id="5f2-DM-BDH"/>
                         <outlet property="enableNewSelfDiagnosis" destination="Afw-fK-gHS" id="Sxe-cd-Mp1"/>
                         <outlet property="potentiallyExposedSwitch" destination="pxj-sV-aJn" id="Zdi-c7-YlE"/>
                         <outlet property="versionBuildLabel" destination="u9d-KW-xk7" id="hpS-fN-Piy"/>

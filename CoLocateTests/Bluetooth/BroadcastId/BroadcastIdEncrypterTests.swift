@@ -35,20 +35,7 @@ class BroadcastIdEncypterTests: XCTestCase {
         encrypter = BroadcastIdEncrypter(key: serverPublicKey, sonarId: cannedId)
     }
 
-    override func tearDown() {
-        Persistence.shared.enableNewKeyRotation = false
-    }
-
-    func test_returns_uuid_as_bytes_by_default() throws {
-        Persistence.shared.enableNewKeyRotation = false
-
-        let data = encrypter.broadcastId(for: knownDate)
-        XCTAssertEqual("E1D160C7-F6E8-48BC-8687-63C696D910CB", asUUIDString(data))
-    }
-
     func test_generates_ciphertext_that_are_the_correct_size() {
-        Persistence.shared.enableNewKeyRotation = true
-
         let encryptedId = encrypter.broadcastId(for: knownDate, until: laterDate)
 
         // the first 64 bytes are the epheraml public key used for encryption
@@ -57,19 +44,10 @@ class BroadcastIdEncypterTests: XCTestCase {
         XCTAssertEqual(106, encryptedId.count)
     }
 
-    func test_generates_uuids_of_correct_size() {
-        Persistence.shared.enableNewKeyRotation = false
-        let uuidAsData = encrypter.broadcastId(for: knownDate, until: laterDate)
-
-        XCTAssertEqual(16, uuidAsData.count)
-    }
-
     func test_ciphertext_contains_expected_data() throws {
         #if targetEnvironment(simulator)
         throw XCTSkip("Cannot run this test in the simulator")
         #endif
-
-        Persistence.shared.enableNewKeyRotation = true
 
         guard let (serverPublicKey, serverPrivateKey) = generateKeyPair() else {
             XCTFail("Expected to generate a keypair for this test but it failed")
@@ -105,8 +83,6 @@ class BroadcastIdEncypterTests: XCTestCase {
     }
 
     func test_generates_the_same_result_for_the_same_inputs() {
-        Persistence.shared.enableNewKeyRotation = true
-
         let first = encrypter.broadcastId(for: knownDate, until: laterDate)
         let second = encrypter.broadcastId(for: knownDate, until: laterDate)
 
@@ -114,8 +90,6 @@ class BroadcastIdEncypterTests: XCTestCase {
     }
 
     func test_generates_a_different_id_for_different_days() throws {
-        Persistence.shared.enableNewKeyRotation = true
-
         let todaysId = encrypter.broadcastId(for: knownDate)
         let tomorrowsId = encrypter.broadcastId(for: laterDate)
 

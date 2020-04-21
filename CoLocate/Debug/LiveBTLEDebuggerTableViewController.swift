@@ -68,22 +68,12 @@ class LiveBTLEDebuggerTableViewController: UITableViewController {
         switch (indexPath.section, indexPath.row) {
             
         case (0, _):
-            if persistence.enableNewKeyRotation {
-                cell.textLabel?.text = broadcastIdGenerator.broadcastIdentifier()?.base64EncodedString()
-                cell.gradientColorData = broadcastIdGenerator.broadcastIdentifier()
-            } else {
-                cell.textLabel?.text = persistence.registration?.id.uuidString
-                cell.gradientColorData = persistence.registration?.id.data
-            }
-            
+            cell.textLabel?.text = broadcastIdGenerator.broadcastIdentifier()?.base64EncodedString()
+            cell.gradientColorData = broadcastIdGenerator.broadcastIdentifier()
+
         case (1, let row):
-            if persistence.enableNewKeyRotation {
-                cell.textLabel?.text = sonarIds[row].base64EncodedString()
-                cell.gradientColorData = sonarIds[row]
-            } else {
-                cell.textLabel?.text = UUID(data: sonarIds[row])?.uuidString
-                cell.gradientColorData = sonarIds[row]
-            }
+            cell.textLabel?.text = sonarIds[row].base64EncodedString()
+            cell.gradientColorData = sonarIds[row]
             
         default:
             preconditionFailure("No cell at indexPath \(indexPath)")
