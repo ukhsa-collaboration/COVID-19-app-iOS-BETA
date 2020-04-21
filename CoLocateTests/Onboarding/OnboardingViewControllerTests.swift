@@ -12,45 +12,34 @@ import XCTest
 class OnboardingViewControllerTests: TestCase {
 
     func testPresentsInitialState() {
-        let coordinatorDouble = OnboardingCoordinatorDouble()
-        let vc = OnboardingViewController.instantiate()
-        vc.inject(env: envDouble(), coordinator: coordinatorDouble, uiQueue: QueueDouble()) {}
-        let container = ViewControllerContainerDouble()
-        vc.showIn(container: container)
-
-        vc.updateState()
-        coordinatorDouble.stateCompletion!(.initial)
-
-        XCTAssertNotNil(vc.children.first as? StartNowViewController)
+        XCTAssertNotNil(show(state: .initial) as? StartNowViewController)
     }
     
     func testPresentsPostcodeState() {
-        let coordinatorDouble = OnboardingCoordinatorDouble()
-        let vc = OnboardingViewController.instantiate()
-        vc.inject(env: envDouble(), coordinator: coordinatorDouble, uiQueue: QueueDouble()) {}
-        let container = ViewControllerContainerDouble()
-        vc.showIn(container: container)
-
-        vc.updateState()
-        coordinatorDouble.stateCompletion!(.partialPostcode)
-
-        XCTAssertNotNil(vc.children.first as? PostcodeViewController)
+        XCTAssertNotNil(show(state: .partialPostcode) as? PostcodeViewController)
     }
 
     func testPresentsPermissionsState() {
-        let coordinatorDouble = OnboardingCoordinatorDouble()
-        let vc = OnboardingViewController.instantiate()
-        vc.inject(env: envDouble(), coordinator: coordinatorDouble, uiQueue: QueueDouble()) {}
-        let container = ViewControllerContainerDouble()
-        vc.showIn(container: container)
-
-        vc.updateState()
-        coordinatorDouble.stateCompletion!(.permissions)
-
-        XCTAssertNotNil(vc.children.first as? PermissionsViewController)
+        XCTAssertNotNil(show(state: .permissions) as? PermissionsViewController)
     }
+    
+    func testCallsCompletionInDoneState() {
+        let coordinatorDouble = OnboardingCoordinatorDouble()
+        let vc = OnboardingViewController.instantiate()
+        var called = false
+        vc.inject(env: envDouble(), coordinator: coordinatorDouble, uiQueue: QueueDouble()) {
+            called = true
+        }
+        let container = ViewControllerContainerDouble()
+        vc.showIn(container: container)
 
-    func testPresentsRegistrationState() {
+        vc.updateState()
+        coordinatorDouble.stateCompletion!(.done)
+        
+        XCTAssertTrue(called)
+    }
+    
+    func show(state: OnboardingCoordinator.State) -> UIViewController? {
         let coordinatorDouble = OnboardingCoordinatorDouble()
         let vc = OnboardingViewController.instantiate()
         vc.inject(env: envDouble(), coordinator: coordinatorDouble, uiQueue: QueueDouble()) {}
@@ -58,9 +47,9 @@ class OnboardingViewControllerTests: TestCase {
         vc.showIn(container: container)
 
         vc.updateState()
-        coordinatorDouble.stateCompletion!(.initial)
+        coordinatorDouble.stateCompletion!(state)
 
-        XCTAssertNotNil(vc.children.first as? StartNowViewController)
+        return vc.children.first
     }
     
     func envDouble() -> OnboardingEnvironment {
