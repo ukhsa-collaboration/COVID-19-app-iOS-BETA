@@ -73,6 +73,7 @@ class ConcreteRegistrationService: RegistrationService {
         
         self.timeoutQueue.asyncAfter(deadline: .now() + registrationTimeLimitSecs) { [weak self] in
             guard let self = self else { return }
+            guard self.persistence.registration == nil else { return }
             
             logger.error("Registration did not complete within \(registrationTimeLimitSecs) seconds")
             self.fail(withError: RegistrationTimeoutError())

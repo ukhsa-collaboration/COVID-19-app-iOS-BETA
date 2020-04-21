@@ -290,7 +290,8 @@ class RegistrationServiceTests: TestCase {
         
         // Respond to the first request
         session.executeCompletion!(Result<(), Error>.success(()))
-                
+
+        // More than 20 seconds has elapsed, and we show a failure
         queueDouble.scheduledBlock?()
         failedObserver.lastNotification = nil
         
@@ -310,6 +311,48 @@ class RegistrationServiceTests: TestCase {
         session.requestSent = nil
         notificationCenter.post(name: PushTokenReceivedNotification, object: nil, userInfo: nil)
         XCTAssertNil(session.requestSent)
+    }
+
+    func testRegistration_does_not_timeout_after_success() {
+        let session = SessionDouble()
+        let persistence = PersistenceDouble(partialPostcode: "AB90")
+        let notificationCenter = NotificationCenter()
+        let remoteNotificationDispatcher = RemoteNotificationDispatcher(
+            notificationCenter: notificationCenter,
+            userNotificationCenter: UserNotificationCenterDouble()
+        )
+        let queueDouble = QueueDouble()
+        let registrationService = ConcreteRegistrationService(
+            session: session,
+            persistence: persistence,
+            remoteNotificationDispatcher: remoteNotificationDispatcher,
+            notificationCenter: notificationCenter,
+            timeoutQueue: queueDouble
+        )
+
+        remoteNotificationDispatcher.pushToken = "the current push token"
+        let completedObserver = NotificationObserverDouble(notificationCenter: notificationCenter, notificationName: RegistrationCompletedNotification)
+        let failedObserver = NotificationObserverDouble(notificationCenter: notificationCenter, notificationName: RegistrationFailedNotification)
+
+        registrationService.register()
+
+        // Respond to the first request
+        session.executeCompletion!(Result<(), Error>.success(()))
+
+        // Simulate the notification containing the activationCode.
+        // This should trigger the second request.
+        remoteNotificationDispatcher.handleNotification(userInfo: ["activationCode": "arbitrary"]) { _ in }
+
+        // Respond to the second request
+        let confirmationResponse = ConfirmRegistrationResponse(id: id, secretKey: secretKey, serverPublicKey: knownGoodRotationKeyData())
+        session.executeCompletion!(Result<ConfirmRegistrationResponse, Error>.success(confirmationResponse))
+
+        // More than 20 seconds has elapsed, and we show a failure
+        queueDouble.scheduledBlock?()
+
+        XCTAssertNotNil(completedObserver.lastNotification)
+        XCTAssertNil(failedObserver.lastNotification)
+        XCTAssertNotNil(persistence.registration)
     }
     
     func testRegistration_ignoresSecondSuccess() {
