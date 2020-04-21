@@ -8,15 +8,19 @@
 
 import Foundation
 
-#warning("Need to split this into two types.")
-// Soon, we’ll need to handle all scenarios; but possible cases for notification and bluetooth are not the same.
-enum AuthorizationStatus {
+enum BluetoothAuthorizationStatus {
+    case notDetermined
+    case allowed
+    case denied
+}
+
+enum NotificationAuthorizationStatus {
     case notDetermined
     case allowed
     case denied
 }
 
 protocol AuthorizationManaging {
-    var bluetooth: AuthorizationStatus { get }
-    func notifications(completion: @escaping (AuthorizationStatus) -> Void)
+    var bluetooth: BluetoothAuthorizationStatus { get }
+    func notifications(completion: @escaping (NotificationAuthorizationStatus) -> Void)
 }

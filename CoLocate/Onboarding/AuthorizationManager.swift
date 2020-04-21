@@ -11,7 +11,7 @@ import Foundation
 
 class AuthorizationManager: AuthorizationManaging {
         
-    var bluetooth: AuthorizationStatus {
+    var bluetooth: BluetoothAuthorizationStatus {
         if #available(iOS 13.1, *) {
             switch CBManager.authorization {
             case .notDetermined:
@@ -41,7 +41,7 @@ class AuthorizationManager: AuthorizationManaging {
         }
     }
 
-    func notifications(completion: @escaping (AuthorizationStatus) -> Void) {
+    func notifications(completion: @escaping (NotificationAuthorizationStatus) -> Void) {
         let userNotificationCenter = UNUserNotificationCenter.current()
         userNotificationCenter.getNotificationSettings { notificationSettings in
             switch notificationSettings.authorizationStatus {

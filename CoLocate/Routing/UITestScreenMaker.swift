@@ -64,9 +64,9 @@ private class InMemoryPersistence: Persisting {
 }
 
 private class EphemeralAuthorizationManager: AuthorizationManaging {
-    var bluetooth = AuthorizationStatus.allowed
-    var notificationsStatus = AuthorizationStatus.notDetermined
-    func notifications(completion: @escaping (AuthorizationStatus) -> Void) {
+    var bluetooth = BluetoothAuthorizationStatus.allowed
+    var notificationsStatus = NotificationAuthorizationStatus.notDetermined
+    func notifications(completion: @escaping (NotificationAuthorizationStatus) -> Void) {
         completion(notificationsStatus)
     }
 }
