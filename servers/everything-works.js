@@ -4,12 +4,9 @@ const fetch = require('node-fetch');
 const app = express();
 const port = 8000;
 const upstreamServer = process.env['UPSTREAM_SONAR_URL'];
-const upstreamHost = new URL(upstreamServer).host;
 
-if (!upstreamServer) {
-	console.log('Environment variable UPSTREAM_SONAR_URL must be set');
-	process.exit(1);
-}
+const upstreamHost = hostFrom(upstreamServer);
+
 
 app.use(express.json());
 
@@ -38,4 +35,13 @@ async function forward(req, res) {
 
 	console.log('Upstream succeeded with body', responseBody);
 	res.send(responseBody);
+}
+
+function hostFrom(upstreamServer) {
+  if (!upstreamServer) {
+	  console.log('Environment variable UPSTREAM_SONAR_URL must be set');
+	  process.exit(1);
+  }
+
+	return new URL(upstreamServer).host;
 }
