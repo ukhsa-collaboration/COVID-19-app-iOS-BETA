@@ -38,7 +38,7 @@ class OnboardingCoordinatorTests: TestCase {
 
     }
 
-    func testPermissions() {
+    func testPermissions_bluetoothNotDetermined() {
         let persistenceDouble = PersistenceDouble(allowedDataSharing: true, partialPostcode: "1234")
         let authManagerDouble = AuthorizationManagerDouble(bluetooth: .notDetermined)
         let onboardingCoordinator = OnboardingCoordinator(
@@ -48,12 +48,25 @@ class OnboardingCoordinatorTests: TestCase {
 
         var state: OnboardingCoordinator.State?
         onboardingCoordinator.state { state = $0 }
-        authManagerDouble.notificationsCompletion!(.notDetermined)
 
         XCTAssertEqual(state, .permissions)
     }
+    
+    func testBluetoothDenied() {
+        let persistenceDouble = PersistenceDouble(allowedDataSharing: true, partialPostcode: "1234")
+        let authManagerDouble = AuthorizationManagerDouble(bluetooth: .denied)
+        let onboardingCoordinator = OnboardingCoordinator(
+            persistence: persistenceDouble,
+            authorizationManager: authManagerDouble
+        )
 
-    func testNotificationPermissions() {
+        var state: OnboardingCoordinator.State?
+        onboardingCoordinator.state { state = $0 }
+        
+        XCTAssertEqual(state, .bluetoothDenied)
+    }
+
+    func testPermissions_bluetoothGranted_notficationsNotDetermined() {
         let persistenceDouble = PersistenceDouble(allowedDataSharing: true, partialPostcode: "1234")
         let authManagerDouble = AuthorizationManagerDouble(bluetooth: .allowed)
         let onboardingCoordinator = OnboardingCoordinator(
@@ -64,6 +77,7 @@ class OnboardingCoordinatorTests: TestCase {
         var state: OnboardingCoordinator.State?
         onboardingCoordinator.state { state = $0 }
         authManagerDouble.notificationsCompletion!(.notDetermined)
+        
         XCTAssertEqual(state, .permissions)
     }
     

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		090B186F24354D0100870B5D /* RemoteNotificationDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090B186E24354D0100870B5D /* RemoteNotificationDispatcher.swift */; };
 		090B1871243552C300870B5D /* UserNotificationCenterDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090B1870243552C300870B5D /* UserNotificationCenterDouble.swift */; };
+		090DEE10244F8BF600268170 /* BluetoothPermissionDeniedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090DEE0F244F8BF600268170 /* BluetoothPermissionDeniedViewController.swift */; };
 		092BB5AB244622200036B30E /* RootViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092BB5AA244622200036B30E /* RootViewControllerTests.swift */; };
 		095A91182434FF1500ED6369 /* ApplicationDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095A91172434FF1500ED6369 /* ApplicationDouble.swift */; };
 		097C9385244780C200E985CF /* PrivacyViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097C9384244780C200E985CF /* PrivacyViewControllerTests.swift */; };
@@ -24,6 +25,7 @@
 		098ED488242E89930029B729 /* PushNotificationManagerDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED487242E89930029B729 /* PushNotificationManagerDouble.swift */; };
 		098ED48A242E89D80029B729 /* RegistrationServiceDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED489242E89D80029B729 /* RegistrationServiceDouble.swift */; };
 		098ED48C242E8B290029B729 /* PersistenceDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED48B242E8B290029B729 /* PersistenceDouble.swift */; };
+		0991B8B2244FB03E0076C58B /* BluetoothPermissionDeniedViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0991B8B1244FB03E0076C58B /* BluetoothPermissionDeniedViewControllerTests.swift */; };
 		0997D056243BDEEC0067346C /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0997D055243BDEEC0067346C /* RootViewController.swift */; };
 		09B103622444E9110091834D /* ContactEventPersisterDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B103612444E9110091834D /* ContactEventPersisterDouble.swift */; };
 		09B103642444EAB80091834D /* ContactEventRepositoryDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B103632444EAB80091834D /* ContactEventRepositoryDouble.swift */; };
@@ -184,6 +186,7 @@
 /* Begin PBXFileReference section */
 		090B186E24354D0100870B5D /* RemoteNotificationDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteNotificationDispatcher.swift; sourceTree = "<group>"; };
 		090B1870243552C300870B5D /* UserNotificationCenterDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationCenterDouble.swift; sourceTree = "<group>"; };
+		090DEE0F244F8BF600268170 /* BluetoothPermissionDeniedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothPermissionDeniedViewController.swift; sourceTree = "<group>"; };
 		092BB5AA244622200036B30E /* RootViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewControllerTests.swift; sourceTree = "<group>"; };
 		095A91172434FF1500ED6369 /* ApplicationDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationDouble.swift; sourceTree = "<group>"; };
 		097C9384244780C200E985CF /* PrivacyViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyViewControllerTests.swift; sourceTree = "<group>"; };
@@ -199,6 +202,7 @@
 		098ED487242E89930029B729 /* PushNotificationManagerDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationManagerDouble.swift; sourceTree = "<group>"; };
 		098ED489242E89D80029B729 /* RegistrationServiceDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationServiceDouble.swift; sourceTree = "<group>"; };
 		098ED48B242E8B290029B729 /* PersistenceDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceDouble.swift; sourceTree = "<group>"; };
+		0991B8B1244FB03E0076C58B /* BluetoothPermissionDeniedViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothPermissionDeniedViewControllerTests.swift; sourceTree = "<group>"; };
 		0997D055243BDEEC0067346C /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		09B103612444E9110091834D /* ContactEventPersisterDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventPersisterDouble.swift; sourceTree = "<group>"; };
 		09B103632444EAB80091834D /* ContactEventRepositoryDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventRepositoryDouble.swift; sourceTree = "<group>"; };
@@ -792,6 +796,7 @@
 				F6F05A332434344200FF4B72 /* StartNowViewController.swift */,
 				898FE858243B4FE300210775 /* AuthorizationManaging.swift */,
 				09CAA3652440F3B100CE93A6 /* PostcodeViewController.swift */,
+				090DEE0F244F8BF600268170 /* BluetoothPermissionDeniedViewController.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -804,6 +809,7 @@
 				F632792024351C1900CF7A42 /* OnboardingViewControllerTests.swift */,
 				09CAA3692440FC4500CE93A6 /* PostcodeViewControllerTests.swift */,
 				097C9384244780C200E985CF /* PrivacyViewControllerTests.swift */,
+				0991B8B1244FB03E0076C58B /* BluetoothPermissionDeniedViewControllerTests.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -1040,6 +1046,7 @@
 				09CAA36C24413E0700CE93A6 /* ViewControllerContainerDouble.swift in Sources */,
 				F632792324351C8400CF7A42 /* OnboardingCoordinatorDouble.swift in Sources */,
 				21F37402243384D400926FB8 /* PersistingContactEventRepositoryTests.swift in Sources */,
+				0991B8B2244FB03E0076C58B /* BluetoothPermissionDeniedViewControllerTests.swift in Sources */,
 				09B103622444E9110091834D /* ContactEventPersisterDouble.swift in Sources */,
 				098ED48C242E8B290029B729 /* PersistenceDouble.swift in Sources */,
 				092BB5AB244622200036B30E /* RootViewControllerTests.swift in Sources */,
@@ -1149,6 +1156,7 @@
 				89F06B312434AABF0074C612 /* NoOpLogHandler.swift in Sources */,
 				F6F05A3024340E5400FF4B72 /* OnboardingViewController.swift in Sources */,
 				F652F72C244A74E900D97950 /* StartDateViewController.swift in Sources */,
+				090DEE10244F8BF600268170 /* BluetoothPermissionDeniedViewController.swift in Sources */,
 				89074B8524378A0D00D67777 /* UITestPayload.swift in Sources */,
 				F6AB2F20243D359F00386D6B /* SubmitSymptomsViewController.swift in Sources */,
 				21F374042434C4BF00926FB8 /* LiveBTLEDebuggerTableViewController.swift in Sources */,

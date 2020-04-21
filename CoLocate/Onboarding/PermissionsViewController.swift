@@ -10,6 +10,7 @@ import UIKit
 import Logging
 import CoreBluetooth
 
+
 class PermissionsViewController: UIViewController, Storyboarded {
     static let storyboardName = "Onboarding"
 
@@ -31,7 +32,13 @@ class PermissionsViewController: UIViewController, Storyboarded {
     @IBAction func didTapContinue() {
         guard !isRequestingPermissions else { return }
         isRequestingPermissions = true
-        requestBluetoothPermissions()
+        
+        if authManager.bluetooth == .notDetermined {
+            requestBluetoothPermissions()
+        } else {
+            requestNotificationPermissions()
+        }
+
     }
 
     // MARK: - Private
@@ -41,19 +48,12 @@ class PermissionsViewController: UIViewController, Storyboarded {
 
         // There's no Bluetooth on the Simulator, so skip
         // directly to asking for notification permissions.
-        requestNotificationPermissions()
-
+        continueHandler()
+        
         #else
 
-        // Only ask for Bluetooth permissions if we haven't
-        // already asked. If we have, we can skip to asking
-        // for notification permissions.
-        guard authManager.bluetooth == .notDetermined else {
-            requestNotificationPermissions()
-            return
-        }
-
         bluetoothNursery.startBroadcaster(stateDelegate: self)
+        
         #endif
     }
 
@@ -94,7 +94,7 @@ extension PermissionsViewController: BTLEBroadcasterStateDelegate {
         case .notDetermined:
             return
         case .allowed, .denied:
-            requestNotificationPermissions()
+            continueHandler()
         }
     }
     

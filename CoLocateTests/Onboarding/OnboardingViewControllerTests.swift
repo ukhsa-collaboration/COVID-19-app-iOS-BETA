@@ -23,6 +23,10 @@ class OnboardingViewControllerTests: TestCase {
         XCTAssertNotNil(show(state: .permissions) as? PermissionsViewController)
     }
     
+    func testPresentsBluetoothDeniedState() {
+        XCTAssertNotNil(show(state: .bluetoothDenied) as? BluetoothPermissionDeniedViewController)
+    }
+    
     func testCallsCompletionInDoneState() {
         let coordinatorDouble = OnboardingCoordinatorDouble()
         let vc = OnboardingViewController.instantiate()

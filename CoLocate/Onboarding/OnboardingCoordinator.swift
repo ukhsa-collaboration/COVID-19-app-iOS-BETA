@@ -12,7 +12,7 @@ import Foundation
 class OnboardingCoordinator {
 
     enum State: Equatable {
-        case initial, partialPostcode, permissions, permissionsDenied, done
+        case initial, partialPostcode, permissions, bluetoothDenied, permissionsDenied, done
     }
 
     private let persistence: Persisting
@@ -34,6 +34,18 @@ class OnboardingCoordinator {
             completion(.partialPostcode)
             return
         }
+        
+        switch self.authorizationManager.bluetooth {
+        case .notDetermined:
+            completion(.permissions)
+            return
+        case .denied:
+            completion(.bluetoothDenied)
+            return
+        case .allowed:
+            break
+        }
+
 
         authorizationManager.notifications { [weak self] notificationStatus in
             guard let self = self else { return }

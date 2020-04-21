@@ -11,9 +11,9 @@ import XCTest
 @testable import CoLocate
 
 class PermissionsViewControllerTests: TestCase {
-
-    func testPermissionsFlow() {
-        let authManagerDouble = AuthorizationManagerDouble()
+    
+    func testBluetoothNotDetermined_callsContinueHandlerOnChangeToAllowed() {
+        let authManagerDouble = AuthorizationManagerDouble(bluetooth: .notDetermined)
         let remoteNotificationManagerDouble = RemoteNotificationManagerDouble()
         let vc = PermissionsViewController.instantiate()
         var continued = false
@@ -27,22 +27,39 @@ class PermissionsViewControllerTests: TestCase {
         vc.didTapContinue()
         
         #if targetEnvironment(simulator)
-        // We skip Bluetooth on the simulator and jump straight
-        // to requesting notification authorization.
+        // We skip Bluetooth on the simulator.
         #else
         authManagerDouble.bluetooth = .allowed
         vc.btleBroadcaster(DummyBTLEBroadcaster(), didUpdateState: .poweredOn)
         #endif
 
-        XCTAssertNotNil(authManagerDouble.notificationsCompletion)
-        authManagerDouble.notificationsCompletion!(.notDetermined)
+        XCTAssert(continued)
+    }
 
-        XCTAssertNotNil(remoteNotificationManagerDouble.requestAuthorizationCompletion)
-        remoteNotificationManagerDouble.requestAuthorizationCompletion?(.success(true))
+    func testBluetoothNotDetermined_callsContinueHandlerOnChangeToDenied() {
+        let authManagerDouble = AuthorizationManagerDouble(bluetooth: .notDetermined)
+        let remoteNotificationManagerDouble = RemoteNotificationManagerDouble()
+        let vc = PermissionsViewController.instantiate()
+        var continued = false
+        vc.inject(authManager: authManagerDouble, remoteNotificationManager: remoteNotificationManagerDouble, uiQueue: QueueDouble()) {
+            continued = true
+        }
+
+        parentViewControllerForTests.viewControllers = [vc]
+        XCTAssertNotNil(vc.view)
+
+        vc.didTapContinue()
+        
+        #if targetEnvironment(simulator)
+        // We skip Bluetooth on the simulator.
+        #else
+        authManagerDouble.bluetooth = .denied
+        vc.btleBroadcaster(DummyBTLEBroadcaster(), didUpdateState: .poweredOn)
+        #endif
 
         XCTAssert(continued)
     }
-    
+
     func testPreventsDoubleSubmit() {
         let authManagerDouble = AuthorizationManagerDouble(bluetooth: .allowed)
         let remoteNotificationManagerDouble = RemoteNotificationManagerDouble()
@@ -59,7 +76,7 @@ class PermissionsViewControllerTests: TestCase {
         vc.didTapContinue()
         XCTAssertNil(authManagerDouble.notificationsCompletion)
     }
-
+    
     func testBluetoothAlreadyDetermined() {
         let authManagerDouble = AuthorizationManagerDouble(bluetooth: .allowed)
         let remoteNotificationManagerDouble = RemoteNotificationManagerDouble()
@@ -79,34 +96,6 @@ class PermissionsViewControllerTests: TestCase {
 
         XCTAssertNotNil(remoteNotificationManagerDouble.requestAuthorizationCompletion)
         remoteNotificationManagerDouble.requestAuthorizationCompletion?(.success(true))
-
-        XCTAssert(continued)
-    }
-
-    func testNotificationsAlreadyDetermined() {
-        let authManagerDouble = AuthorizationManagerDouble()
-        let remoteNotificationManagerDouble = RemoteNotificationManagerDouble()
-        let vc = PermissionsViewController.instantiate()
-        var continued = false
-        vc.inject(authManager: authManagerDouble, remoteNotificationManager: remoteNotificationManagerDouble, uiQueue: QueueDouble()) {
-            continued = true
-        }
-
-        parentViewControllerForTests.viewControllers = [vc]
-        XCTAssertNotNil(vc.view)
-
-        vc.didTapContinue()
-
-        #if targetEnvironment(simulator)
-        // We skip Bluetooth on the simulator and jump straight
-        // to requesting notification authorization.
-        #else
-        authManagerDouble.bluetooth = .allowed
-        vc.btleBroadcaster(DummyBTLEBroadcaster(), didUpdateState: .poweredOn)
-        #endif
-
-        XCTAssertNotNil(authManagerDouble.notificationsCompletion)
-        authManagerDouble.notificationsCompletion!(.allowed)
 
         XCTAssert(continued)
     }
