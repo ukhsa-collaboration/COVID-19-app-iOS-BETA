@@ -483,6 +483,12 @@
                                                     </button>
                                                 </subviews>
                                             </stackView>
+                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="Rpb-L4-N7R" userLabel="Spacer">
+                                                <rect key="frame" x="20" y="487" width="374" height="0.0"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" id="VWa-Af-DLc"/>
+                                                </constraints>
+                                            </view>
                                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X3T-dj-Khd" userLabel="Submit Error View">
                                                 <rect key="frame" x="20" y="487" width="374" height="16"/>
                                                 <subviews>
