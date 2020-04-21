@@ -42,6 +42,11 @@ class ConcreteRegistrationService: RegistrationService {
         // when our backend sends us the activation code in a push notification
         // we will want to make a second request to complete the registration process
         remoteNotificationDispatcher.registerHandler(forType: .registrationActivationCode) { userInfo, completion in
+            guard persistence.registration == nil else {
+                logger.warning("Ignoring a registration activation code notification because we are already registered.")
+                return
+            }
+            
             self.remoteNotificationCompletionHandler = completion
             self.confirmRegistration(activationCode: userInfo["activationCode"] as! String)
         }
@@ -140,7 +145,6 @@ class ConcreteRegistrationService: RegistrationService {
     }
     
     private func succeed(registration: Registration) {
-        remoteNotificationDispatcher.removeHandler(forType: .registrationActivationCode)
         self.remoteNotificationCompletionHandler?(.newData)
         notificationCenter.post(name: RegistrationCompletedNotification, object: nil)
     }
