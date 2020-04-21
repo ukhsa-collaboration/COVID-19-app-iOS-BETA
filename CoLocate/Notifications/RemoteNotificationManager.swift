@@ -69,11 +69,7 @@ class ConcreteRemoteNotificationManager: NSObject, RemoteNotificationManager {
     }
 
     func configure() {
-        let plistName = Bundle.main.infoDictionary!["GOOGLE_SERVICE_INFO_PLIST"] as! String
-        let plistPath = Bundle.main.path(forResource: plistName, ofType: "plist")!
-        let options = FirebaseOptions(contentsOfFile: plistPath)!
-        firebase.configure(options: options)
-
+        firebase.configure()
         messagingFactory().delegate = self
         userNotificationCenter.delegate = self
     }
@@ -140,7 +136,7 @@ extension UIApplication: Application {
 }
 
 protocol TestableFirebaseApp {
-    static func configure(options: FirebaseOptions)
+    static func configure()
 }
 
 extension FirebaseApp: TestableFirebaseApp {
