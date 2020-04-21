@@ -1,5 +1,7 @@
 # vim: ft=ruby:
 
+require "fileutils"
+
 default_platform(:ios)
 
 platform :ios do
@@ -51,14 +53,14 @@ platform :ios do
       profile_name: "match AppStore #{sonar_config.bundle_id}",
     )
 
-    chdir ".." do
+    Dir.chdir ".." do
       File.write("CoLocate.xcconfig", <<~XCCONFIG)
         #include "CoLocate/Environments/#{sonar_env}.xcconfig"
 
         API_ENDPOINT = #{ENV.fetch("API_ENDPOINT")}
       XCCONFIG
 
-      cp "CoLocate/Environments/GoogleService-Info.#{sonar_env}.plist", "CoLocate/GoogleService-Info.plist"
+      FileUtils.cp "CoLocate/Environments/GoogleService-Info.#{sonar_env}.plist", "CoLocate/GoogleService-Info.plist"
     end
 
     build_app(scheme: "CoLocate")
