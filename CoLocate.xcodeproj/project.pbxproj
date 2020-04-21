@@ -73,7 +73,6 @@
 		895D9E462437458700573D4D /* AppIcon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 895D9E452437458700573D4D /* AppIcon.xcassets */; };
 		895D9E4B24374EC900573D4D /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895D9E4A24374EC900573D4D /* Screen.swift */; };
 		895D9E4E24374EFA00573D4D /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895D9E4D24374EFA00573D4D /* AppRouter.swift */; };
-		895D9E52243750EE00573D4D /* PotentialScreenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895D9E51243750EE00573D4D /* PotentialScreenTests.swift */; };
 		89896E622435F37300F949EA /* ProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89896E612435F37300F949EA /* ProjectTests.swift */; };
 		898FE854243B42E800210775 /* OnboardingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898FE853243B42E700210775 /* OnboardingTests.swift */; };
 		898FE857243B4D7A00210775 /* XCUIElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898FE856243B4D7A00210775 /* XCUIElement.swift */; };
@@ -251,7 +250,6 @@
 		895D9E452437458700573D4D /* AppIcon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppIcon.xcassets; sourceTree = "<group>"; };
 		895D9E4A24374EC900573D4D /* Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
 		895D9E4D24374EFA00573D4D /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
-		895D9E51243750EE00573D4D /* PotentialScreenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotentialScreenTests.swift; sourceTree = "<group>"; };
 		89896E5E2435EB6500F949EA /* CoLocateTests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CoLocateTests.xcconfig; sourceTree = "<group>"; };
 		89896E5F2435F15C00F949EA /* Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Base.xcconfig; sourceTree = "<group>"; };
 		89896E612435F37300F949EA /* ProjectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectTests.swift; sourceTree = "<group>"; };
@@ -664,7 +662,6 @@
 		895D9E50243750DB00573D4D /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				895D9E51243750EE00573D4D /* PotentialScreenTests.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -1135,7 +1132,6 @@
 				898FE857243B4D7A00210775 /* XCUIElement.swift in Sources */,
 				898FE854243B42E800210775 /* OnboardingTests.swift in Sources */,
 				89074B8A24378B6E00D67777 /* ScreenTestCase.swift in Sources */,
-				895D9E52243750EE00573D4D /* PotentialScreenTests.swift in Sources */,
 				89074B8724378A0D00D67777 /* UITestPayload.swift in Sources */,
 				89074B822437882100D67777 /* Screen.swift in Sources */,
 			);
