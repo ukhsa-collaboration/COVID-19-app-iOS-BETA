@@ -116,6 +116,7 @@
 		F68BFBF7242ACD17008EE68F /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68BFBF6242ACD17008EE68F /* TestHelpers.swift */; };
 		F6AB2F1E243D324400386D6B /* CoughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AB2F1D243D324400386D6B /* CoughViewController.swift */; };
 		F6AB2F20243D359F00386D6B /* SubmitSymptomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */; };
+		F6CBA49A244F6E2C00D20610 /* GoogleService-Info.production.plist in Resources */ = {isa = PBXBuildFile; fileRef = F6CBA499244F6E2C00D20610 /* GoogleService-Info.production.plist */; };
 		F6CC2CA9242BC7FC0079432B /* RemoteNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CC2CA8242BC7FC0079432B /* RemoteNotificationManager.swift */; };
 		F6CC2CAC242BCD0D0079432B /* RemoteNotificationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CC2CAB242BCD0D0079432B /* RemoteNotificationManagerTests.swift */; };
 		F6EEC3B82448DD2400172820 /* SelfDiagnosis.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EEC3B72448DD2400172820 /* SelfDiagnosis.swift */; };
@@ -301,6 +302,7 @@
 		F6AB2F1D243D324400386D6B /* CoughViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoughViewController.swift; sourceTree = "<group>"; };
 		F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitSymptomsViewController.swift; sourceTree = "<group>"; };
 		F6CA2818242E41F700F8DC55 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		F6CBA499244F6E2C00D20610 /* GoogleService-Info.production.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.production.plist"; sourceTree = "<group>"; };
 		F6CC2CA8242BC7FC0079432B /* RemoteNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteNotificationManager.swift; sourceTree = "<group>"; };
 		F6CC2CAB242BCD0D0079432B /* RemoteNotificationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteNotificationManagerTests.swift; sourceTree = "<group>"; };
 		F6EEC3B72448DD2400172820 /* SelfDiagnosis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfDiagnosis.swift; sourceTree = "<group>"; };
@@ -723,8 +725,9 @@
 		F68D8FD424476846008BAAAA /* Environments */ = {
 			isa = PBXGroup;
 			children = (
-				F66CC928244F63F3001399D4 /* GoogleService-Info.internal.plist */,
 				F78CEB67242B8C2B002254AD /* GoogleService-Info.beta.plist */,
+				F66CC928244F63F3001399D4 /* GoogleService-Info.internal.plist */,
+				F6CBA499244F6E2C00D20610 /* GoogleService-Info.production.plist */,
 				F68D8FE324476F0B008BAAAA /* beta.xcconfig */,
 				F68D8FE524477031008BAAAA /* internal.xcconfig */,
 				F68D8FE424477031008BAAAA /* production.xcconfig */,
@@ -970,6 +973,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F66CC927244F6340001399D4 /* GoogleService-Info.plist in Resources */,
+				F6CBA49A244F6E2C00D20610 /* GoogleService-Info.production.plist in Resources */,
 				F758B8C4242CC0EE003AE16D /* Status.storyboard in Resources */,
 				6FC63C3B241641BA007C8BF3 /* LaunchScreen.storyboard in Resources */,
 				AEC6A7BE241BD82900B0237A /* LogoStrapline.xib in Resources */,
