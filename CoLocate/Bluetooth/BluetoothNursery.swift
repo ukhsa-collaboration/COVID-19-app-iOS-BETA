@@ -57,7 +57,8 @@ class BluetoothNursery {
         listener = ConcreteBTLEListener(persistence: persistence)
         central = CBCentralManager(delegate: listener as! ConcreteBTLEListener, queue: listenerQueue, options: [
             CBCentralManagerScanOptionAllowDuplicatesKey: NSNumber(true),
-            CBCentralManagerOptionRestoreIdentifierKey: BluetoothNursery.centralRestoreIdentifier
+            CBCentralManagerOptionRestoreIdentifierKey: BluetoothNursery.centralRestoreIdentifier,
+            CBCentralManagerOptionShowPowerAlertKey: NSNumber(true),
         ])
         (listener as? ConcreteBTLEListener)?.stateDelegate = stateDelegate
         (listener as? ConcreteBTLEListener)?.delegate = contactEventRepository
