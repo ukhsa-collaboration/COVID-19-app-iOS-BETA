@@ -25,6 +25,37 @@ protocol Request {
     func parse(_ data: Data) throws -> ResponseType
 }
 
+extension Request {
+
+    var baseURL: URL {
+        let endpoint = Bundle.main.infoDictionary!["API_ENDPOINT"] as! String
+        return URL(string: endpoint)!
+    }
+
+    func urlRequest() -> URLRequest {
+        let url = URL(string: path, relativeTo: baseURL)!
+        var urlRequest = URLRequest(url: url)
+
+        urlRequest.allHTTPHeaderFields = headers
+
+        switch method {
+        case .get:
+            urlRequest.httpMethod = "GET"
+
+        case .post(let data):
+            urlRequest.httpMethod = "POST"
+            urlRequest.httpBody = data
+
+        case .patch(let data):
+            urlRequest.httpMethod = "PATCH"
+            urlRequest.httpBody = data
+        }
+
+        return urlRequest
+    }
+
+}
+
 protocol Session {
 
     var delegateQueue: OperationQueue { get }

@@ -39,23 +39,7 @@ extension URLSession: Session {
     func execute<R: Request>(_ request: R, queue: OperationQueue, completion: @escaping (Result<R.ResponseType, Error>) -> Void) {
         let completion = { result in queue.addOperation { completion(result) } }
 
-        let url = URL(string: request.path, relativeTo: baseURL)!
-        var urlRequest = URLRequest(url: url)
-        
-        urlRequest.allHTTPHeaderFields = request.headers
-        
-        switch request.method {
-        case .get:
-            urlRequest.httpMethod = "GET"
-            
-        case .post(let data):
-            urlRequest.httpMethod = "POST"
-            urlRequest.httpBody = data
-            
-        case .patch(let data):
-            urlRequest.httpMethod = "PATCH"
-            urlRequest.httpBody = data
-        }
+        let urlRequest = request.urlRequest()
         
         let task = dataTask(with: urlRequest) { data, response, error in
             if let error = error {
