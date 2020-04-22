@@ -24,6 +24,7 @@ class SubmitSymptomsViewControllerTests: TestCase {
         session = SessionDouble()
     }
 
+    #warning("Make sure this case is handled before we ship a public release")
     func testNotRegistered() throws {
         throw XCTSkip("TODO: write this test")
     }
