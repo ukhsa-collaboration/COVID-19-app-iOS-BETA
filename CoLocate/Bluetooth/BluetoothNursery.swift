@@ -23,7 +23,7 @@ class BluetoothNursery {
     let contactEventPersister: PlistPersister<UUID, ContactEvent>
     let contactEventRepository: PersistingContactEventRepository
     let broadcastIdGenerator: BroadcastIdGenerator
-    let stateObserver: BluetoothStateObserver
+    let stateObserver: BluetoothStateUserNotifier
     let contactEventExpiryHandler: ContactEventExpiryHandler
     
     var central: CBCentralManager?
@@ -40,7 +40,7 @@ class BluetoothNursery {
         contactEventPersister = PlistPersister<UUID, ContactEvent>(fileName: "contactEvents")
         contactEventRepository = PersistingContactEventRepository(persister: contactEventPersister)
         broadcastIdGenerator = ConcreteBroadcastIdGenerator(storage: SecureBroadcastRotationKeyStorage())
-        stateObserver = BluetoothStateObserver(
+        stateObserver = BluetoothStateUserNotifier(
             appStateReader: UIApplication.shared,
             scheduler: HumbleLocalNotificationScheduler(userNotificationCenter: userNotificationCenter)
         )

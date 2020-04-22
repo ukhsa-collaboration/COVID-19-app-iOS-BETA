@@ -17,8 +17,7 @@ struct UITestScreenMaker: ScreenMaking {
         case .onboarding:
             let onboardingViewController = OnboardingViewController.instantiate { viewController in
                 let env = OnboardingEnvironment(mockWithHost: viewController)
-                let coordinator = OnboardingCoordinator(persistence: env.persistence, authorizationManager: env.authorizationManager)
-
+                let coordinator = OnboardingCoordinator(persistence: env.persistence, authorizationManager: env.authorizationManager, bluetoothStateObserver: ConcreteBluetoothStateObserver())
                 viewController.inject(env: env, coordinator: coordinator, uiQueue: DispatchQueue.main) { }
             }
 

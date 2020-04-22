@@ -80,6 +80,11 @@ class OnboardingViewController: UINavigationController, Storyboarded {
                 $0.inject(notificationCenter: environment.notificationCenter, uiQueue: uiQueue, continueHandler: updateState)
            }
             
+        case .bluetoothOff:
+            vc = BluetoothOffViewController.instantiate() {
+                $0.inject(notificationCenter: environment.notificationCenter, uiQueue: uiQueue, continueHandler: updateState)
+            }
+            
         case .notificationsDenied:
              vc = NotificationPermissionDeniedViewController.instantiate() {
                  $0.inject(notificationCenter: environment.notificationCenter, uiQueue: uiQueue, continueHandler: updateState)

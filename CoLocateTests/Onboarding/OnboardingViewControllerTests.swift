@@ -27,6 +27,10 @@ class OnboardingViewControllerTests: TestCase {
         XCTAssertNotNil(show(state: .bluetoothDenied) as? BluetoothPermissionDeniedViewController)
     }
     
+    func testPresentsBluetoothOffState() {
+        XCTAssertNotNil(show(state: .bluetoothOff) as? BluetoothOffViewController)
+    }
+    
     func testPresentsNotificationsDeniedState() {
         XCTAssertNotNil(show(state: .notificationsDenied) as? NotificationPermissionDeniedViewController)
     }

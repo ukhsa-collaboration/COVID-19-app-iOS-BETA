@@ -12,7 +12,7 @@ import CoreBluetooth
 
 @testable import CoLocate
 
-class BluetoothStateObserverTests: TestCase {
+class BluetoothStateUserNotifierTests: TestCase {
 
     let listener = TestBTLEListener()
     let mockScheduler = MockNotificationScheduler()
@@ -20,10 +20,10 @@ class BluetoothStateObserverTests: TestCase {
     let foregroundApp = DummyApp(UIApplication.State.active)
     let backgroundApp = DummyApp(UIApplication.State.background)
 
-    var stateObserver: BluetoothStateObserver!
+    var stateObserver: BluetoothStateUserNotifier!
 
     func test_it_does_nothing_in_the_foreground() {
-        stateObserver = BluetoothStateObserver(appStateReader: foregroundApp, scheduler: mockScheduler)
+        stateObserver = BluetoothStateUserNotifier(appStateReader: foregroundApp, scheduler: mockScheduler)
 
         stateObserver.btleListener(listener, didUpdateState: .poweredOff)
 
@@ -31,7 +31,7 @@ class BluetoothStateObserverTests: TestCase {
     }
 
     func test_it_creates_local_notifications_in_the_backgrouund_when_bluetooth_is_powered_off() {
-        stateObserver = BluetoothStateObserver(appStateReader: backgroundApp, scheduler: mockScheduler, uiQueue: QueueDouble())
+        stateObserver = BluetoothStateUserNotifier(appStateReader: backgroundApp, scheduler: mockScheduler, uiQueue: QueueDouble())
 
         stateObserver.btleListener(listener, didUpdateState: .poweredOff)
 
@@ -45,7 +45,7 @@ class BluetoothStateObserverTests: TestCase {
     }
 
     func test_it_does_nothing_when_bluetooth_is_powered_on() {
-        stateObserver = BluetoothStateObserver(appStateReader: backgroundApp, scheduler: mockScheduler)
+        stateObserver = BluetoothStateUserNotifier(appStateReader: backgroundApp, scheduler: mockScheduler)
 
         stateObserver.btleListener(listener, didUpdateState: .poweredOn)
 

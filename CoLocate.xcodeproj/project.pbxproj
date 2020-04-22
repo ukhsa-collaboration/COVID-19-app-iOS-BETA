@@ -16,6 +16,9 @@
 		0983ACCD243E566800DBB336 /* ErrorForTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983ACCC243E566800DBB336 /* ErrorForTest.swift */; };
 		0983ACCF243E6D3800DBB336 /* NotificationObserverDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983ACCE243E6D3800DBB336 /* NotificationObserverDouble.swift */; };
 		0983ACD3243EB22200DBB336 /* StatusViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983ACD2243EB22200DBB336 /* StatusViewControllerTests.swift */; };
+		0984E0B92450D31F009C6374 /* BluetoothStateObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0984E0B82450D31F009C6374 /* BluetoothStateObserver.swift */; };
+		0984E0BB2450F0B1009C6374 /* BluetoothStateObserverDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0984E0BA2450F0B1009C6374 /* BluetoothStateObserverDouble.swift */; };
+		0984E0BD2451014E009C6374 /* BluetoothOffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0984E0BC2451014E009C6374 /* BluetoothOffViewController.swift */; };
 		0986EFB5244518FE008D0E1D /* ButtonWithDynamicType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0986EFB4244518FE008D0E1D /* ButtonWithDynamicType.swift */; };
 		098ED478242D7D050029B729 /* RegistratonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED477242D7D050029B729 /* RegistratonService.swift */; };
 		098ED47C242D801C0029B729 /* RegistrationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED47A242D7E460029B729 /* RegistrationServiceTests.swift */; };
@@ -143,8 +146,8 @@
 		F70CB8192450CAB700ED6E7F /* OnboardingLogoStrapline.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70CB8182450CAB700ED6E7F /* OnboardingLogoStrapline.swift */; };
 		F70CB81B2450CFA900ED6E7F /* OnboardingLogoStrapline.xib in Resources */ = {isa = PBXBuildFile; fileRef = F70CB81A2450CFA900ED6E7F /* OnboardingLogoStrapline.xib */; };
 		F72EBD4F24361E99009F9328 /* URLSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72EBD4E24361E99009F9328 /* URLSessionTests.swift */; };
-		F72EBD97243C8490009F9328 /* BluetoothStateObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72EBD96243C8490009F9328 /* BluetoothStateObserver.swift */; };
-		F72EBD9B243C8750009F9328 /* BluetoothStateObserverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72EBD9A243C8750009F9328 /* BluetoothStateObserverTests.swift */; };
+		F72EBD97243C8490009F9328 /* BluetoothStateUserNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72EBD96243C8490009F9328 /* BluetoothStateUserNotifier.swift */; };
+		F72EBD9B243C8750009F9328 /* BluetoothStateUserNotifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72EBD9A243C8750009F9328 /* BluetoothStateUserNotifierTests.swift */; };
 		F72EBD9E243C90E6009F9328 /* HumbleLocalNotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72EBD9D243C90E6009F9328 /* HumbleLocalNotificationScheduler.swift */; };
 		F72EBDA2243D0892009F9328 /* SecureBroadcastRotationKeyStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72EBDA1243D0892009F9328 /* SecureBroadcastRotationKeyStorage.swift */; };
 		F72EBDA5243D094A009F9328 /* SecureBroadcastRotationKeyStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72EBDA4243D094A009F9328 /* SecureBroadcastRotationKeyStorageTests.swift */; };
@@ -200,6 +203,9 @@
 		0983ACCC243E566800DBB336 /* ErrorForTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorForTest.swift; sourceTree = "<group>"; };
 		0983ACCE243E6D3800DBB336 /* NotificationObserverDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationObserverDouble.swift; sourceTree = "<group>"; };
 		0983ACD2243EB22200DBB336 /* StatusViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewControllerTests.swift; sourceTree = "<group>"; };
+		0984E0B82450D31F009C6374 /* BluetoothStateObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothStateObserver.swift; sourceTree = "<group>"; };
+		0984E0BA2450F0B1009C6374 /* BluetoothStateObserverDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothStateObserverDouble.swift; sourceTree = "<group>"; };
+		0984E0BC2451014E009C6374 /* BluetoothOffViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothOffViewController.swift; sourceTree = "<group>"; };
 		0986EFB4244518FE008D0E1D /* ButtonWithDynamicType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonWithDynamicType.swift; sourceTree = "<group>"; };
 		098ED477242D7D050029B729 /* RegistratonService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistratonService.swift; sourceTree = "<group>"; };
 		098ED47A242D7E460029B729 /* RegistrationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationServiceTests.swift; sourceTree = "<group>"; };
@@ -344,8 +350,8 @@
 		F70CB8182450CAB700ED6E7F /* OnboardingLogoStrapline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingLogoStrapline.swift; sourceTree = "<group>"; };
 		F70CB81A2450CFA900ED6E7F /* OnboardingLogoStrapline.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnboardingLogoStrapline.xib; sourceTree = "<group>"; };
 		F72EBD4E24361E99009F9328 /* URLSessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionTests.swift; sourceTree = "<group>"; };
-		F72EBD96243C8490009F9328 /* BluetoothStateObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothStateObserver.swift; sourceTree = "<group>"; };
-		F72EBD9A243C8750009F9328 /* BluetoothStateObserverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothStateObserverTests.swift; sourceTree = "<group>"; };
+		F72EBD96243C8490009F9328 /* BluetoothStateUserNotifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothStateUserNotifier.swift; sourceTree = "<group>"; };
+		F72EBD9A243C8750009F9328 /* BluetoothStateUserNotifierTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothStateUserNotifierTests.swift; sourceTree = "<group>"; };
 		F72EBD9D243C90E6009F9328 /* HumbleLocalNotificationScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HumbleLocalNotificationScheduler.swift; sourceTree = "<group>"; };
 		F72EBDA1243D0892009F9328 /* SecureBroadcastRotationKeyStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureBroadcastRotationKeyStorage.swift; sourceTree = "<group>"; };
 		F72EBDA4243D094A009F9328 /* SecureBroadcastRotationKeyStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureBroadcastRotationKeyStorageTests.swift; sourceTree = "<group>"; };
@@ -464,6 +470,7 @@
 				09B103612444E9110091834D /* ContactEventPersisterDouble.swift */,
 				09B103632444EAB80091834D /* ContactEventRepositoryDouble.swift */,
 				09B103652444EB7A0091834D /* TestBTLEListener.swift */,
+				0984E0BA2450F0B1009C6374 /* BluetoothStateObserverDouble.swift */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -503,7 +510,8 @@
 				21AF36AA241A8E50001A4910 /* BTLEListener.swift */,
 				21C09A8C24377F5100368203 /* CoreBluetoothExtensions.swift */,
 				21C09A8E2437B99F00368203 /* BluetoothNursery.swift */,
-				F72EBD96243C8490009F9328 /* BluetoothStateObserver.swift */,
+				F72EBD96243C8490009F9328 /* BluetoothStateUserNotifier.swift */,
+				0984E0B82450D31F009C6374 /* BluetoothStateObserver.swift */,
 			);
 			path = Bluetooth;
 			sourceTree = "<group>";
@@ -818,6 +826,7 @@
 				090DEE0F244F8BF600268170 /* BluetoothPermissionDeniedViewController.swift */,
 				0991B8B82450B8360076C58B /* NotificationPermissionDeniedViewController.swift */,
 				0991B8BC2450B9940076C58B /* FixPermissionsViewController.swift */,
+				0984E0BC2451014E009C6374 /* BluetoothOffViewController.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -839,7 +848,7 @@
 			isa = PBXGroup;
 			children = (
 				F72EBDA3243D092A009F9328 /* BroadcastId */,
-				F72EBD9A243C8750009F9328 /* BluetoothStateObserverTests.swift */,
+				F72EBD9A243C8750009F9328 /* BluetoothStateUserNotifierTests.swift */,
 			);
 			path = Bluetooth;
 			sourceTree = "<group>";
@@ -1081,6 +1090,7 @@
 				0983ACD3243EB22200DBB336 /* StatusViewControllerTests.swift in Sources */,
 				896BE912244F11D100B3687C /* PublicKeyValidatorTests.swift in Sources */,
 				F600A60424297C010038DF57 /* RegistrationRequestTests.swift in Sources */,
+				0984E0BB2450F0B1009C6374 /* BluetoothStateObserverDouble.swift in Sources */,
 				21E5051324448AE30065C69B /* PlistPersisterTests.swift in Sources */,
 				098ED488242E89930029B729 /* PushNotificationManagerDouble.swift in Sources */,
 				0983ACCF243E6D3800DBB336 /* NotificationObserverDouble.swift in Sources */,
@@ -1089,7 +1099,8 @@
 				F67A2293242AA370002254B6 /* SecureRegistrationStorageTests.swift in Sources */,
 				214209D72423C9B600C7BFF3 /* PatchContactEventsRequestTests.swift in Sources */,
 				F72EBDA9243D2FE6009F9328 /* BroadcastIdEncrypterTests.swift in Sources */,
-				F72EBD9B243C8750009F9328 /* BluetoothStateObserverTests.swift in Sources */,
+				F72EBD9B243C8750009F9328 /* BluetoothStateUserNotifierTests.swift in Sources */,
+				097C9385244780C200E985CF /* PrivacyViewControllerTests.swift in Sources */,
 				090B1871243552C300870B5D /* UserNotificationCenterDouble.swift in Sources */,
 				21C417CA242CB0A200DEF3E2 /* ConfirmRegistrationRequestTests.swift in Sources */,
 				F632792A2435323200CF7A42 /* PermissionsViewControllerTests.swift in Sources */,
@@ -1144,7 +1155,7 @@
 				F758B8C0242CB98C003AE16D /* UIViewController+Storyboarded.swift in Sources */,
 				2115C3E624360427009C0F5B /* DebuggerTableViewCell.swift in Sources */,
 				89BC79EB2434E047002050F8 /* LogsViewController.swift in Sources */,
-				F72EBD97243C8490009F9328 /* BluetoothStateObserver.swift in Sources */,
+				F72EBD97243C8490009F9328 /* BluetoothStateUserNotifier.swift in Sources */,
 				896BE90F244F07FF00B3687C /* PublicKeyValidator.swift in Sources */,
 				214209B62421072C00C7BFF3 /* StatusViewController.swift in Sources */,
 				F758553A24294C8D00CBE1ED /* RequestFactory.swift in Sources */,
@@ -1154,9 +1165,11 @@
 				895D9E4B24374EC900573D4D /* Screen.swift in Sources */,
 				F652F730244E4AAD00D97950 /* DrawerPresentation.swift in Sources */,
 				098ED478242D7D050029B729 /* RegistratonService.swift in Sources */,
+				0984E0BD2451014E009C6374 /* BluetoothOffViewController.swift in Sources */,
 				F68B89F4243D050700F369A9 /* TemperatureViewController.swift in Sources */,
 				89F06B372434C35A0074C612 /* LoggerMetadata.swift in Sources */,
 				F68B89EF243D01FA00F369A9 /* SelfDiagnosisNavigationController.swift in Sources */,
+				0984E0B92450D31F009C6374 /* BluetoothStateObserver.swift in Sources */,
 				898FE859243B4FE300210775 /* AuthorizationManaging.swift in Sources */,
 				F652F72E244E472E00D97950 /* SymptomsPromptViewController.swift in Sources */,
 				F67C5154243E4D2F008E2945 /* AnswerButton.swift in Sources */,

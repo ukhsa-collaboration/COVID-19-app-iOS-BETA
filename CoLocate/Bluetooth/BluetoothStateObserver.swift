@@ -9,41 +9,34 @@
 import UIKit
 import CoreBluetooth
 
-struct BluetoothStateObserver: BTLEListenerStateDelegate {
+protocol BluetoothStateObserver {
+    func state() -> CBManagerState
+    var delegate: BluetoothStateObserverDelegate? { get set }
+}
+
+protocol BluetoothStateObserverDelegate {
+    func bluetoothStateObserver(_ sender: BluetoothStateObserver, didChangeState state: CBManagerState)
+}
+
+// Wraps CBCentralManager's state discovery functionality, mainly for testability
+class ConcreteBluetoothStateObserver: NSObject, BluetoothStateObserver, CBCentralManagerDelegate {
     
-    let appStateReader: ApplicationStateReading
-    let scheduler: LocalNotificationScheduling
-    let uiQueue: TestableQueue
-
-    init(appStateReader: ApplicationStateReading, scheduler: LocalNotificationScheduling, uiQueue: TestableQueue = DispatchQueue.main) {
-        self.appStateReader = appStateReader
-        self.scheduler = scheduler
-        self.uiQueue = uiQueue
-    }
-
-    func btleListener(_ listener: BTLEListener, didUpdateState state: CBManagerState) {
-        guard state == .poweredOff else { return }
-
-        uiQueue.async {
-            guard self.appStateReader.applicationState == .background else { return }
-            
-            self.scheduler.scheduleLocalNotification(
-                body: "To keep yourself secure, please re-enable bluetooth",
-                interval: 3,
-                identifier: "bluetooth.disabled.please"
-            )
+    private var centralManager: CBCentralManager?
+    var delegate: BluetoothStateObserverDelegate?
+        
+    func state() -> CBManagerState {
+        // Constructing a CBCentralManager triggers a permissions prompt if the user hasn't
+        // already granted permission, so don't create it until we need to. This gives us a
+        // chance to show our own UI first.
+        if centralManager == nil {
+            centralManager = CBCentralManager(delegate: self, queue: nil, options: [CBCentralManagerOptionShowPowerAlertKey: true])
         }
+        
+        return centralManager!.state
     }
-}
+    
+    func centralManagerDidUpdateState(_ central: CBCentralManager) {
+        delegate?.bluetoothStateObserver(self, didChangeState: central.state)
+    }
 
-// MARK: - Testable
-
-protocol ApplicationStateReading {
-    var applicationState: UIApplication.State { get }
-}
-
-extension UIApplication: ApplicationStateReading { }
-
-protocol LocalNotificationScheduling {
-    func scheduleLocalNotification(body: String, interval: TimeInterval, identifier: String)
 }

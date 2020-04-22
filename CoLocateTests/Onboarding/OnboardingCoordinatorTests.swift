@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import CoreBluetooth
 @testable import CoLocate
 
 class OnboardingCoordinatorTests: TestCase {
@@ -16,7 +17,8 @@ class OnboardingCoordinatorTests: TestCase {
         let authManagerDouble = AuthorizationManagerDouble()
         let onboardingCoordinator = OnboardingCoordinator(
             persistence: persistenceDouble,
-            authorizationManager: authManagerDouble
+            authorizationManager: authManagerDouble,
+            bluetoothStateObserver: BluetoothStateObserverDouble()
         )
 
         var state: OnboardingCoordinator.State?
@@ -28,7 +30,8 @@ class OnboardingCoordinatorTests: TestCase {
         let persistenceDouble = PersistenceDouble(partialPostcode: nil)
         let onboardingCoordinator = OnboardingCoordinator(
             persistence: persistenceDouble,
-            authorizationManager: AuthorizationManagerDouble()
+            authorizationManager: AuthorizationManagerDouble(),
+            bluetoothStateObserver: BluetoothStateObserverDouble()
         )
 
         advancePastInitialScreen(onboardingCoordinator)
@@ -45,7 +48,8 @@ class OnboardingCoordinatorTests: TestCase {
         let authManagerDouble = AuthorizationManagerDouble(bluetooth: .notDetermined)
         let onboardingCoordinator = OnboardingCoordinator(
             persistence: persistenceDouble,
-            authorizationManager: authManagerDouble
+            authorizationManager: authManagerDouble,
+            bluetoothStateObserver: BluetoothStateObserverDouble()
         )
 
         var state: OnboardingCoordinator.State?
@@ -59,7 +63,8 @@ class OnboardingCoordinatorTests: TestCase {
         let authManagerDouble = AuthorizationManagerDouble(bluetooth: .denied)
         let onboardingCoordinator = OnboardingCoordinator(
             persistence: persistenceDouble,
-            authorizationManager: authManagerDouble
+            authorizationManager: authManagerDouble,
+            bluetoothStateObserver: BluetoothStateObserverDouble()
         )
 
         var state: OnboardingCoordinator.State?
@@ -67,18 +72,55 @@ class OnboardingCoordinatorTests: TestCase {
         
         XCTAssertEqual(state, .bluetoothDenied)
     }
+    
+    func testBluetoothOff_initially() {
+        let persistenceDouble = PersistenceDouble(allowedDataSharing: true, partialPostcode: "1234")
+        let authManagerDouble = AuthorizationManagerDouble(bluetooth: .allowed)
+        let bluetoothStateObserver = BluetoothStateObserverDouble(initialState: .poweredOff)
+        let onboardingCoordinator = OnboardingCoordinator(
+            persistence: persistenceDouble,
+            authorizationManager: authManagerDouble,
+            bluetoothStateObserver: bluetoothStateObserver
+        )
+
+        var state: OnboardingCoordinator.State?
+        onboardingCoordinator.state { state = $0 }
+        
+        XCTAssertEqual(state, .bluetoothOff)
+    }
+    
+    func testBluetoothOff_afterDelay() {
+        let persistenceDouble = PersistenceDouble(allowedDataSharing: true, partialPostcode: "1234")
+        let authManagerDouble = AuthorizationManagerDouble(bluetooth: .allowed)
+        let bluetoothStateObserver = BluetoothStateObserverDouble(initialState: .unknown)
+        let onboardingCoordinator = OnboardingCoordinator(
+            persistence: persistenceDouble,
+            authorizationManager: authManagerDouble,
+            bluetoothStateObserver: bluetoothStateObserver
+        )
+
+        var state: OnboardingCoordinator.State?
+        onboardingCoordinator.state { state = $0 }
+        
+        XCTAssertNil(state)
+        
+        bluetoothStateObserver.delegate?.bluetoothStateObserver(bluetoothStateObserver, didChangeState: .poweredOff)
+        
+        XCTAssertEqual(state, .bluetoothOff)
+    }
 
     func testPermissions_bluetoothGranted_notficationsNotDetermined() {
         let persistenceDouble = PersistenceDouble(partialPostcode: "1234")
         let authManagerDouble = AuthorizationManagerDouble(bluetooth: .allowed)
         let onboardingCoordinator = OnboardingCoordinator(
             persistence: persistenceDouble,
-            authorizationManager: authManagerDouble
+            authorizationManager: authManagerDouble,
+            bluetoothStateObserver: BluetoothStateObserverDouble(initialState: .poweredOn)
         )
 
         var state: OnboardingCoordinator.State?
         onboardingCoordinator.state { state = $0 }
-        authManagerDouble.notificationsCompletion!(.notDetermined)
+        authManagerDouble.notificationsCompletion?(.notDetermined)
         
         XCTAssertEqual(state, .permissions)
     }
@@ -88,12 +130,13 @@ class OnboardingCoordinatorTests: TestCase {
         let authManagerDouble = AuthorizationManagerDouble(bluetooth: .allowed)
         let onboardingCoordinator = OnboardingCoordinator(
             persistence: persistenceDouble,
-            authorizationManager: authManagerDouble
+            authorizationManager: authManagerDouble,
+            bluetoothStateObserver: BluetoothStateObserverDouble(initialState: .poweredOn)
         )
 
         var state: OnboardingCoordinator.State?
         onboardingCoordinator.state { state = $0 }
-        authManagerDouble.notificationsCompletion!(.denied)
+        authManagerDouble.notificationsCompletion?(.denied)
         XCTAssertEqual(state, .notificationsDenied)
     }
 
@@ -102,12 +145,13 @@ class OnboardingCoordinatorTests: TestCase {
         let authManagerDouble = AuthorizationManagerDouble(bluetooth: .allowed)
         let onboardingCoordinator = OnboardingCoordinator(
             persistence: persistenceDouble,
-            authorizationManager: authManagerDouble
+            authorizationManager: authManagerDouble,
+            bluetoothStateObserver: BluetoothStateObserverDouble(initialState: .poweredOn)
         )
 
         var state: OnboardingCoordinator.State?
         onboardingCoordinator.state { state = $0 }
-        authManagerDouble.notificationsCompletion!(.allowed)
+        authManagerDouble.notificationsCompletion?(.allowed)
         XCTAssertEqual(state, .done)
     }
 

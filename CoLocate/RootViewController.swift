@@ -21,6 +21,7 @@ class RootViewController: UIViewController {
     private var registrationService: RegistrationService! = nil
     private var contactEventRepository: ContactEventRepository! = nil
     private var contactEventPersister: ContactEventPersister! = nil
+    private var bluetoothStateObserver: BluetoothStateObserver!
     private var statusViewController: StatusViewController!
     private var session: Session! = nil
     private var uiQueue: TestableQueue! = nil
@@ -33,6 +34,7 @@ class RootViewController: UIViewController {
         registrationService: RegistrationService,
         contactEventRepository: ContactEventRepository,
         contactEventPersister: ContactEventPersister,
+        bluetoothStateObserver: BluetoothStateObserver,
         session: Session,
         uiQueue: TestableQueue
     ) {
@@ -43,6 +45,7 @@ class RootViewController: UIViewController {
         self.registrationService = registrationService
         self.contactEventRepository = contactEventRepository
         self.contactEventPersister = contactEventPersister
+        self.bluetoothStateObserver = bluetoothStateObserver
         self.session = session
         self.uiQueue = uiQueue
 
@@ -80,7 +83,7 @@ class RootViewController: UIViewController {
         } else {
             let onboardingViewController = OnboardingViewController.instantiate()
             let env = OnboardingEnvironment(persistence: persistence, authorizationManager: authorizationManager, remoteNotificationManager: remoteNotificationManager, notificationCenter: NotificationCenter.default)
-            let coordinator = OnboardingCoordinator(persistence: persistence, authorizationManager: authorizationManager)
+            let coordinator = OnboardingCoordinator(persistence: persistence, authorizationManager: authorizationManager, bluetoothStateObserver: bluetoothStateObserver)
             
             onboardingViewController.inject(env: env, coordinator: coordinator, uiQueue: self.uiQueue) {
                 self.show(viewController: self.statusViewController)

@@ -738,7 +738,86 @@ To enable this app to send you notification you need to go to your Settings, kli
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XR1-5z-KfG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4406.25" y="141.5492957746479"/>
+            <point key="canvasLocation" x="3703" y="829"/>
+        </scene>
+        <!--Bluetooth Off View Controller-->
+        <scene sceneID="RcI-Ac-OTx">
+            <objects>
+                <viewController storyboardIdentifier="BluetoothOffViewController" id="PkD-4d-FDG" customClass="BluetoothOffViewController" customModule="CoLocate" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1ic-te-NmS">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xeA-Dm-BDq">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="23m-Pf-Bbe" userLabel="Scroll content view">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="525.5"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uix-aC-Qvc" customClass="LogoStrapline" customModule="CoLocate" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You need to turn on Bluetooth " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8B8-An-P1B">
+                                                <rect key="frame" x="20" y="84" width="280" height="73"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qch-lc-oMz">
+                                                <rect key="frame" x="20" y="177" width="280" height="328.5"/>
+                                                <string key="text">This app uses battery-saving Bluetooth Low Energy to determine when it is near another phone with this app installed. For this to work, Bluetooth needs to be kept on at all times. 
+
+Using Bluetooth means that the app cannot track your location and your privacy remains protected.
+
+If you have Bluetooth turned off, this app will not work. Please go to Settings and turn on Bluetooth.
+</string>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstItem="uix-aC-Qvc" firstAttribute="leading" secondItem="23m-Pf-Bbe" secondAttribute="leading" id="Fdi-cD-dZh"/>
+                                            <constraint firstAttribute="trailing" secondItem="uix-aC-Qvc" secondAttribute="trailing" id="H8d-li-XLi"/>
+                                            <constraint firstItem="Qch-lc-oMz" firstAttribute="leading" secondItem="23m-Pf-Bbe" secondAttribute="leading" constant="20" id="TKZ-HL-FfY"/>
+                                            <constraint firstItem="Qch-lc-oMz" firstAttribute="top" secondItem="8B8-An-P1B" secondAttribute="bottom" constant="20" id="Yu5-Yw-1xf"/>
+                                            <constraint firstAttribute="trailing" secondItem="Qch-lc-oMz" secondAttribute="trailing" constant="20" id="ggS-BA-Pxo"/>
+                                            <constraint firstItem="8B8-An-P1B" firstAttribute="leading" secondItem="23m-Pf-Bbe" secondAttribute="leading" constant="20" id="jse-0A-06A"/>
+                                            <constraint firstAttribute="trailing" secondItem="8B8-An-P1B" secondAttribute="trailing" constant="20" id="nXO-bs-Tgj"/>
+                                            <constraint firstAttribute="bottom" secondItem="Qch-lc-oMz" secondAttribute="bottom" constant="20" id="oMB-vf-CGf"/>
+                                            <constraint firstItem="8B8-An-P1B" firstAttribute="top" secondItem="uix-aC-Qvc" secondAttribute="bottom" constant="20" id="oac-Q2-cYc"/>
+                                            <constraint firstItem="uix-aC-Qvc" firstAttribute="top" secondItem="23m-Pf-Bbe" secondAttribute="top" id="xXU-CY-gLc"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="23m-Pf-Bbe" firstAttribute="leading" secondItem="fAH-Vg-Laz" secondAttribute="leading" id="AWI-wK-e1C"/>
+                                    <constraint firstItem="23m-Pf-Bbe" firstAttribute="bottom" secondItem="fAH-Vg-Laz" secondAttribute="bottom" id="FVY-yN-fUC"/>
+                                    <constraint firstItem="23m-Pf-Bbe" firstAttribute="trailing" secondItem="fAH-Vg-Laz" secondAttribute="trailing" id="QWQ-Kv-1sF"/>
+                                    <constraint firstItem="23m-Pf-Bbe" firstAttribute="height" secondItem="Vuh-DO-nYC" secondAttribute="height" priority="1" id="bOa-Is-zi6"/>
+                                    <constraint firstItem="23m-Pf-Bbe" firstAttribute="top" secondItem="fAH-Vg-Laz" secondAttribute="top" id="lH6-mT-aSp"/>
+                                    <constraint firstItem="23m-Pf-Bbe" firstAttribute="width" secondItem="Vuh-DO-nYC" secondAttribute="width" id="zPn-fS-TOD"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="fAH-Vg-Laz"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="Vuh-DO-nYC"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="rOJ-7n-KhE" firstAttribute="bottom" secondItem="xeA-Dm-BDq" secondAttribute="bottom" id="0vg-lB-ZKX"/>
+                            <constraint firstItem="rOJ-7n-KhE" firstAttribute="trailing" secondItem="xeA-Dm-BDq" secondAttribute="trailing" id="GLP-qC-tyG"/>
+                            <constraint firstItem="xeA-Dm-BDq" firstAttribute="top" secondItem="rOJ-7n-KhE" secondAttribute="top" id="OUa-mV-CQv"/>
+                            <constraint firstItem="xeA-Dm-BDq" firstAttribute="leading" secondItem="rOJ-7n-KhE" secondAttribute="leading" id="dBM-S5-rOn"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="rOJ-7n-KhE"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ero-hp-ui1"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UX8-bO-10I" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3703" y="-567"/>
         </scene>
     </scenes>
     <resources>

@@ -31,7 +31,8 @@ class RootViewControllerTests: TestCase {
     func testOnboardingFinished() {
         let authMgr = AuthorizationManagerDouble(bluetooth: .allowed)
         let persistence = PersistenceDouble(allowedDataSharing: true, registration: nil, partialPostcode: "1234")
-        let rootVC = makeRootVC(persistence: persistence, authorizationManager: authMgr)
+        let bluetoothStateObserver = BluetoothStateObserverDouble(initialState: .unknown)
+        let rootVC = makeRootVC(persistence: persistence, authorizationManager: authMgr, bluetoothStateObserver: bluetoothStateObserver)
         XCTAssertNotNil(rootVC.view)
         
         guard (rootVC.children.first as? OnboardingViewController) != nil else {
@@ -39,6 +40,8 @@ class RootViewControllerTests: TestCase {
             return
         }
         
+        XCTAssertNotNil(bluetoothStateObserver.delegate)
+        bluetoothStateObserver.delegate?.bluetoothStateObserver(bluetoothStateObserver, didChangeState: .poweredOn)
         XCTAssertNotNil(authMgr.notificationsCompletion)
         authMgr.notificationsCompletion?(.allowed)
 
@@ -144,7 +147,8 @@ fileprivate func makeRootVC(
     persistence: Persisting = PersistenceDouble(),
     authorizationManager: AuthorizationManaging = AuthorizationManagerDouble(),
     remoteNotificationDispatcher: RemoteNotificationDispatcher = makeDispatcher(),
-    notificationCenter: NotificationCenter = NotificationCenter()
+    notificationCenter: NotificationCenter = NotificationCenter(),
+    bluetoothStateObserver: BluetoothStateObserver = BluetoothStateObserverDouble()
 ) -> RootViewController {
     let vc = RootViewController()
     vc.inject(
@@ -155,6 +159,7 @@ fileprivate func makeRootVC(
         registrationService: RegistrationServiceDouble(),
         contactEventRepository: ContactEventRepositoryDouble(),
         contactEventPersister: ContactEventPersisterDouble(),
+        bluetoothStateObserver: bluetoothStateObserver,
         session: SessionDouble(),
         uiQueue: QueueDouble()
     )
