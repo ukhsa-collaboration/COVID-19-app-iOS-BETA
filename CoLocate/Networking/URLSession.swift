@@ -74,6 +74,13 @@ extension URLSession: Session {
 
         task.resume()
     }
+
+    func upload<R: Request>(with request: R, fromFile fileURL: URL) {
+        let urlRequest = request.urlRequest()
+        let task = uploadTask(with: urlRequest, fromFile: fileURL)
+        task.resume()
+    }
+
 }
 
 private let logger = Logger(label: "URLSession")

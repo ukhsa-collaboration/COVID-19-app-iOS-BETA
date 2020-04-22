@@ -496,25 +496,6 @@ class RegistrationServiceTests: TestCase {
     }
 }
 
-class SessionDouble: Session {
-    let delegateQueue = OperationQueue.current!
-    
-    var requestSent: Any?
-    var executeCompletion: ((Any) -> Void)?
-    
-    func execute<R: Request>(_ request: R, queue: OperationQueue, completion: @escaping (Result<R.ResponseType, Error>) -> Void) {
-        requestSent = request
-        executeCompletion = { result in
-            guard let castedResult = result as? Result<R.ResponseType, Error> else {
-                print("SessionDouble: got the wrong result type. Expected \(Result<R.ResponseType, Error>.self) but got \(type(of: result))")
-                return
-            }
-            
-            completion(castedResult)
-        }
-    }
-}
-
 private struct ExpectedRegistrationRequestBody: Codable {
     let pushToken: String
 }

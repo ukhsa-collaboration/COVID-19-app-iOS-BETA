@@ -61,7 +61,8 @@ protocol Session {
     var delegateQueue: OperationQueue { get }
     
     func execute<R: Request>(_ request: R, queue: OperationQueue, completion: @escaping (Result<R.ResponseType, Error>) -> Void)
-    
+
+    func upload<R: Request>(with request: R, fromFile fileURL: URL)
 }
 
 extension Session {

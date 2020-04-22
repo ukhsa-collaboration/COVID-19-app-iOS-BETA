@@ -216,21 +216,3 @@ fileprivate class SelfDiagnosisUnwinder: UIViewController {
         didUnwindFromSelfDiagnosis = true
     }
 }
-
-fileprivate class MockContactEventRepository: ContactEventRepository {
-    
-    var contactEvents: [ContactEvent] = []
-    var hasReset: Bool = false
-    
-    init(contactEvents: [ContactEvent] = []) {
-        self.contactEvents = contactEvents
-    }
-    
-    func reset() {
-        hasReset = true
-    }
-    
-    func removeExpiredContactEvents(ttl: Double) {
-        
-    }
-}

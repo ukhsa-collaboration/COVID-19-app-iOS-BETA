@@ -111,6 +111,10 @@
 		F600A60224297A8E0038DF57 /* RegistrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F600A60124297A8E0038DF57 /* RegistrationRequest.swift */; };
 		F600A60424297C010038DF57 /* RegistrationRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F600A60324297C010038DF57 /* RegistrationRequestTests.swift */; };
 		F613936E243FA82B003447E8 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = F613936D243FA82B003447E8 /* Appearance.swift */; };
+		F62F857F2451051C006580A8 /* ContactEventUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62F857E2451051C006580A8 /* ContactEventUploader.swift */; };
+		F62F858124510716006580A8 /* ContactEventUploaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62F858024510716006580A8 /* ContactEventUploaderTests.swift */; };
+		F62F8583245108B4006580A8 /* MockContactEventRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62F8582245108B4006580A8 /* MockContactEventRepository.swift */; };
+		F62F858524510923006580A8 /* SessionDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62F858424510923006580A8 /* SessionDouble.swift */; };
 		F632792124351C1900CF7A42 /* OnboardingViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F632792024351C1900CF7A42 /* OnboardingViewControllerTests.swift */; };
 		F632792324351C8400CF7A42 /* OnboardingCoordinatorDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = F632792224351C8400CF7A42 /* OnboardingCoordinatorDouble.swift */; };
 		F63279252435203600CF7A42 /* DispatchQueue+Testable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63279242435203600CF7A42 /* DispatchQueue+Testable.swift */; };
@@ -308,6 +312,10 @@
 		F600A60124297A8E0038DF57 /* RegistrationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationRequest.swift; sourceTree = "<group>"; };
 		F600A60324297C010038DF57 /* RegistrationRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationRequestTests.swift; sourceTree = "<group>"; };
 		F613936D243FA82B003447E8 /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
+		F62F857E2451051C006580A8 /* ContactEventUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventUploader.swift; sourceTree = "<group>"; };
+		F62F858024510716006580A8 /* ContactEventUploaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventUploaderTests.swift; sourceTree = "<group>"; };
+		F62F8582245108B4006580A8 /* MockContactEventRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockContactEventRepository.swift; sourceTree = "<group>"; };
+		F62F858424510923006580A8 /* SessionDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDouble.swift; sourceTree = "<group>"; };
 		F632792024351C1900CF7A42 /* OnboardingViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewControllerTests.swift; sourceTree = "<group>"; };
 		F632792224351C8400CF7A42 /* OnboardingCoordinatorDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinatorDouble.swift; sourceTree = "<group>"; };
 		F63279242435203600CF7A42 /* DispatchQueue+Testable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Testable.swift"; sourceTree = "<group>"; };
@@ -458,19 +466,24 @@
 			children = (
 				095A91172434FF1500ED6369 /* ApplicationDouble.swift */,
 				F6F05A292433C6CC00FF4B72 /* AuthManagerDouble.swift */,
+				09B103612444E9110091834D /* ContactEventPersisterDouble.swift */,
+				09B103632444EAB80091834D /* ContactEventRepositoryDouble.swift */,
+				0983ACCC243E566800DBB336 /* ErrorForTest.swift */,
+				F62F8582245108B4006580A8 /* MockContactEventRepository.swift */,
+				0983ACCE243E6D3800DBB336 /* NotificationObserverDouble.swift */,
+				F632792224351C8400CF7A42 /* OnboardingCoordinatorDouble.swift */,
 				098ED48B242E8B290029B729 /* PersistenceDouble.swift */,
 				098ED487242E89930029B729 /* PushNotificationManagerDouble.swift */,
-				098ED489242E89D80029B729 /* RegistrationServiceDouble.swift */,
-				F632792224351C8400CF7A42 /* OnboardingCoordinatorDouble.swift */,
 				F63279262435219A00CF7A42 /* QueueDouble.swift */,
+				098ED489242E89D80029B729 /* RegistrationServiceDouble.swift */,
+				09B103652444EB7A0091834D /* TestBTLEListener.swift */,
 				090B1870243552C300870B5D /* UserNotificationCenterDouble.swift */,
-				0983ACCC243E566800DBB336 /* ErrorForTest.swift */,
-				0983ACCE243E6D3800DBB336 /* NotificationObserverDouble.swift */,
 				09CAA36B24413E0700CE93A6 /* ViewControllerContainerDouble.swift */,
 				09B103612444E9110091834D /* ContactEventPersisterDouble.swift */,
 				09B103632444EAB80091834D /* ContactEventRepositoryDouble.swift */,
 				09B103652444EB7A0091834D /* TestBTLEListener.swift */,
 				0984E0BA2450F0B1009C6374 /* BluetoothStateObserverDouble.swift */,
+				F62F858424510923006580A8 /* SessionDouble.swift */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -578,9 +591,10 @@
 		21B3D2DF24263A1100573061 /* Contact Events */ = {
 			isa = PBXGroup;
 			children = (
-				21F373FE2433844D00926FB8 /* ContactEventRepository.swift */,
 				AE2A5E4F2423C473007A4771 /* ContactEvent.swift */,
 				131AB05B2449D85B002136CA /* ContactEventExpiryHandler.swift */,
+				21F373FE2433844D00926FB8 /* ContactEventRepository.swift */,
+				F62F857E2451051C006580A8 /* ContactEventUploader.swift */,
 			);
 			path = "Contact Events";
 			sourceTree = "<group>";
@@ -609,8 +623,9 @@
 		21F374002433845600926FB8 /* Contact Events */ = {
 			isa = PBXGroup;
 			children = (
-				21F37401243384D400926FB8 /* PersistingContactEventRepositoryTests.swift */,
 				21E50510244470590065C69B /* ContactEventTests.swift */,
+				F62F858024510716006580A8 /* ContactEventUploaderTests.swift */,
+				21F37401243384D400926FB8 /* PersistingContactEventRepositoryTests.swift */,
 			);
 			path = "Contact Events";
 			sourceTree = "<group>";
@@ -1076,8 +1091,10 @@
 				095A91182434FF1500ED6369 /* ApplicationDouble.swift in Sources */,
 				09CAA36C24413E0700CE93A6 /* ViewControllerContainerDouble.swift in Sources */,
 				F632792324351C8400CF7A42 /* OnboardingCoordinatorDouble.swift in Sources */,
+				F62F8583245108B4006580A8 /* MockContactEventRepository.swift in Sources */,
 				21F37402243384D400926FB8 /* PersistingContactEventRepositoryTests.swift in Sources */,
 				0991B8BB2450B8CE0076C58B /* NotificationPermissionDeniedViewControllerTests.swift in Sources */,
+				F62F858524510923006580A8 /* SessionDouble.swift in Sources */,
 				0991B8B2244FB03E0076C58B /* BluetoothPermissionDeniedViewControllerTests.swift in Sources */,
 				09B103622444E9110091834D /* ContactEventPersisterDouble.swift in Sources */,
 				098ED48C242E8B290029B729 /* PersistenceDouble.swift in Sources */,
@@ -1089,6 +1106,7 @@
 				214209D924262B7500C7BFF3 /* SessionHelpers.swift in Sources */,
 				0983ACD3243EB22200DBB336 /* StatusViewControllerTests.swift in Sources */,
 				896BE912244F11D100B3687C /* PublicKeyValidatorTests.swift in Sources */,
+				F62F858124510716006580A8 /* ContactEventUploaderTests.swift in Sources */,
 				F600A60424297C010038DF57 /* RegistrationRequestTests.swift in Sources */,
 				0984E0BB2450F0B1009C6374 /* BluetoothStateObserverDouble.swift in Sources */,
 				21E5051324448AE30065C69B /* PlistPersisterTests.swift in Sources */,
@@ -1166,6 +1184,7 @@
 				F652F730244E4AAD00D97950 /* DrawerPresentation.swift in Sources */,
 				098ED478242D7D050029B729 /* RegistratonService.swift in Sources */,
 				0984E0BD2451014E009C6374 /* BluetoothOffViewController.swift in Sources */,
+				F62F857F2451051C006580A8 /* ContactEventUploader.swift in Sources */,
 				F68B89F4243D050700F369A9 /* TemperatureViewController.swift in Sources */,
 				89F06B372434C35A0074C612 /* LoggerMetadata.swift in Sources */,
 				F68B89EF243D01FA00F369A9 /* SelfDiagnosisNavigationController.swift in Sources */,
