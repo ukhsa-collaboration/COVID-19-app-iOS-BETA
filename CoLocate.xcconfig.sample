@@ -2,4 +2,5 @@
 
 API_ENDPOINT = https:/$()/purposefully-invalid-url
 DEBUG_REGISTRATION_ID = some-uuid
-DEBUG_REGISTRATION_SECRET_KEY = a-secret-key
+DEBUG_REGISTRATION_SECRET_KEY = a-symmetric-key-for-signing-requests-to-the-server
+DEBUG_REGISTRATION_BROADCAST_ROTATION_KEY = base64-encoded-der-formatted-public-key-over-elliptic-curve-prime-random-256-bits
