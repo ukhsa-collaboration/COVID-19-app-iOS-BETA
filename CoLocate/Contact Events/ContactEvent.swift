@@ -9,7 +9,7 @@ import Foundation
 
 struct ContactEvent: Equatable, Codable {
 
-    var sonarId: Data? = nil
+    var encryptedRemoteContactId: Data? = nil
     private (set) var timestamp: Date = Date()
     private (set) var rssiValues: [Int] = []
     private (set) var rssiIntervals: [TimeInterval] = []
@@ -22,7 +22,7 @@ struct ContactEvent: Equatable, Codable {
     }
 
     enum CodingKeys: String, CodingKey {
-        case sonarId
+        case encryptedRemoteContactId
         case timestamp
         case rssiValues
         case rssiIntervals

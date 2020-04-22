@@ -28,12 +28,13 @@ class LiveBTLEDebuggerTableViewController: UITableViewController {
         
         observation = observe(\.repository._contactEventCount) { object, change in
             DispatchQueue.main.async {
-                self.sonarIds = self.repository.contactEvents.compactMap({ $0.sonarId })
+                self.sonarIds = self.repository.contactEvents.compactMap({ $0.encryptedRemoteContactId })
                 self.tableView.reloadData()
             }
         }
-        
-        sonarIds = repository.contactEvents.compactMap({ $0.sonarId })
+
+        #warning("change sonar ids to remote broadcast id here")
+        sonarIds = repository.contactEvents.compactMap({ $0.encryptedRemoteContactId })
         tableView.reloadData()
     }
     

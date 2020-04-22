@@ -30,7 +30,7 @@ class SubmitSymptomsViewControllerTests: TestCase {
 
     func testSubmitTapped() throws {
         let expectedBroadcastId = "opaque bytes that only the server can decrypt".data(using: .utf8)!
-        let contactEvent = ContactEvent(sonarId: expectedBroadcastId)
+        let contactEvent = ContactEvent(encryptedRemoteContactId: expectedBroadcastId)
 
         makeSubject(
             registration: Registration(id: UUID(uuidString: "FA817D5C-C615-4ABE-83B5-ABDEE8FAB8A6")!, secretKey: Data(), broadcastRotationKey: knownGoodECPublicKey()),
@@ -53,14 +53,14 @@ class SubmitSymptomsViewControllerTests: TestCase {
         switch request.method {
         case .patch(let data):
             let decoder = JSONDecoder()
-            let decoded = try decoder.decode([String: [SonarIdUuid]].self, from: data)
+            let decoded = try decoder.decode([String: [DecodableBroadcastId]].self, from: data)
             // Can't compare the entire contact events because the timestamp loses precision
             // when JSON encoded and decoded.
 
             XCTAssertEqual(1, decoded.count)
 
             let firstEvent = decoded["contactEvents"]?.first
-            XCTAssertEqual(expectedBroadcastId, firstEvent?.sonarId)
+            XCTAssertEqual(expectedBroadcastId, firstEvent?.encryptedRemoteContactId)
         default:
             XCTFail("Expected a patch request but got \(request.method)")
         }

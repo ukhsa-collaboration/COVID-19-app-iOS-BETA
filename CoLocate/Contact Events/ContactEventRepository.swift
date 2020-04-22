@@ -56,11 +56,11 @@ extension PlistPersister: ContactEventPersister where K == UUID, V == ContactEve
         persister.items = copy
     }
     
-    func btleListener(_ listener: BTLEListener, didFind sonarId: Data, forPeripheral peripheral: BTLEPeripheral) {
+    func btleListener(_ listener: BTLEListener, didFind remoteEncryptedBroadcastId: Data, forPeripheral peripheral: BTLEPeripheral) {
         if persister.items[peripheral.identifier] == nil {
             persister.items[peripheral.identifier] = ContactEvent()
         }
-        persister.items[peripheral.identifier]?.sonarId = sonarId
+        persister.items[peripheral.identifier]?.encryptedRemoteContactId = remoteEncryptedBroadcastId
     }
     
     func btleListener(_ listener: BTLEListener, didReadRSSI RSSI: Int, forPeripheral peripheral: BTLEPeripheral) {

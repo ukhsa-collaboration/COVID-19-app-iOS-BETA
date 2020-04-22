@@ -31,6 +31,6 @@ class ContactEventTests: XCTestCase {
     }
 }
 
-struct SonarIdUuid: Decodable {
-    let sonarId: Data
+struct DecodableBroadcastId: Decodable {
+    let encryptedRemoteContactId: Data
 }

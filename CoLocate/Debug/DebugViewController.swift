@@ -53,12 +53,12 @@ class DebugViewController: UITableViewController, Storyboarded {
 
         case (1, 0):
             let uuid = UUID()
-            contactEventPersister.items[uuid] = ContactEvent(sonarId: uuid.data, timestamp: Date(), rssiValues: [], rssiIntervals: [], duration: 1)
+            contactEventPersister.items[uuid] = ContactEvent(encryptedRemoteContactId: uuid.data, timestamp: Date(), rssiValues: [], rssiIntervals: [], duration: 1)
             show(title: "Conatact", message: "Dummy contact event recorded.")
             
         case (1, 1):
             let uuid = UUID()
-            contactEventPersister.items[uuid] = ContactEvent(sonarId: uuid.data, timestamp: Date(timeIntervalSinceNow: -2592000), rssiValues: [], rssiIntervals: [], duration: 1)
+            contactEventPersister.items[uuid] = ContactEvent(encryptedRemoteContactId: uuid.data, timestamp: Date(timeIntervalSinceNow: -2592000), rssiValues: [], rssiIntervals: [], duration: 1)
             show(title: "Expired Conatact", message: "Expired Dummy contact event recorded.")
             
         case (1, 2):
@@ -76,7 +76,7 @@ class DebugViewController: UITableViewController, Storyboarded {
                     throw NSError()
                 }
                 let delay = 15
-                let request = TestPushRequest(key: registration.secretKey, sonarId: registration.id, delay: delay)
+                let request = TestPushRequest(key: registration.secretKey, remoteEncryptedBroadcastId: registration.id, delay: delay)
                 URLSession.shared.execute(request, queue: .main) { result in
                     switch result {
                     case .success:
@@ -156,10 +156,10 @@ class TestPushRequest: SecureRequest, Request {
     
     let path: String
     
-    init(key: Data, sonarId: UUID, delay: Int = 0) {
+    init(key: Data, remoteEncryptedBroadcastId: UUID, delay: Int = 0) {
         let data = Data()
         method = .post(data: data)
-        path = "/api/debug/notification/residents/\(sonarId.uuidString)?delay=\(delay)"
+        path = "/api/debug/notification/residents/\(remoteEncryptedBroadcastId.uuidString)?delay=\(delay)"
         
         super.init(key, data, [:])
     }
