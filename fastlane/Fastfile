@@ -38,6 +38,8 @@ platform :ios do
 
     setup_ci()
 
+    sh "security set-key-partition-list -S apple-tool:,apple: -s -k \"\" ~/Library/Keychains/fastlane_tmp_keychain-db"
+
     sync_code_signing(
       type: "appstore",
       readonly: true,
