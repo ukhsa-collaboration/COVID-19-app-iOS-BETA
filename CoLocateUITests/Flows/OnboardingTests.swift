@@ -14,23 +14,24 @@ class OnboardingTests: ScreenTestCase {
     
     func testEntireOnboardingFlow() {
         // Start screen
-        
-        startButton.tap()
-        
-        // Privacy screen
-        
-        XCTAssert(privacyScreenTitle.exists)
+        XCTAssert(startTitle.exists)
+        learnMore.tap()
 
-        #warning("FIXME this will be going away soon")
-        privacyContinueButton.tap()
-        
+        // Privacy policy screen
+        XCTAssert(privacyScreenTitle.exists)
+        privacyCloseButton.tap()
+
+        // returned back to the home screen
+        XCTAssert(startTitle.exists)
+        startButton.tap()
+
+        // partial post code screen
         XCTAssert(postcodeScreenTitle.exists)
         postcodeField.tap()
         postcodeField.typeText("1234\n")
         postcodeContinueButton.tap()
         
-        // Permissions screen
-        
+        // Please allow us Bluetooth and Notifications screen
         XCTAssert(permissionsScreenTitle.exists)
         
         XCTAssert(notificationPermissionAlertTitle.exists)
@@ -49,13 +50,21 @@ private extension OnboardingTests {
 }
 
 private extension OnboardingTests {
+
+    var startTitle: XCUIElement {
+        app.staticTexts["Help the NHS stop the spread of coronavirus in the UK"]
+    }
+
+    var learnMore: XCUIElement {
+        app.buttons["Learn more about how it works"]
+    }
     
     var privacyScreenTitle: XCUIElement {
         app.staticTexts["How this app works"]
     }
     
-    var privacyContinueButton: XCUIElement {
-        app.buttons["Continue"]
+    var privacyCloseButton: XCUIElement {
+        app.buttons["Close"]
     }
 }
 

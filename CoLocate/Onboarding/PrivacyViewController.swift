@@ -17,7 +17,7 @@ class PrivacyViewController: UIViewController, Storyboarded {
         self.continueHandler = continueHandler
     }
 
-    @IBAction func continueTapped() {
-        self.continueHandler()
+    @IBAction func didTapClose(_ sender: Any) {
+        self.presentingViewController?.dismiss(animated: true)
     }
 }
