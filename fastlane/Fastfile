@@ -45,8 +45,6 @@ platform :ios do
       git_url: "./ci/match",
     )
 
-    sh "pwd"
-
     update_code_signing_settings(
       use_automatic_signing: false,
       path: "./CoLocate.xcodeproj",
