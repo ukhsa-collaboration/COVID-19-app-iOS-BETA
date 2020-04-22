@@ -141,6 +141,8 @@
 		F6F05A322434310200FF4B72 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6F05A312434310200FF4B72 /* Onboarding.storyboard */; };
 		F6F05A342434344200FF4B72 /* StartNowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F05A332434344200FF4B72 /* StartNowViewController.swift */; };
 		F6F05A36243436D200FF4B72 /* PrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F05A35243436D200FF4B72 /* PrivacyViewController.swift */; };
+		F70CB8192450CAB700ED6E7F /* OnboardingLogoStrapline.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70CB8182450CAB700ED6E7F /* OnboardingLogoStrapline.swift */; };
+		F70CB81B2450CFA900ED6E7F /* OnboardingLogoStrapline.xib in Resources */ = {isa = PBXBuildFile; fileRef = F70CB81A2450CFA900ED6E7F /* OnboardingLogoStrapline.xib */; };
 		F72EBD4F24361E99009F9328 /* URLSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72EBD4E24361E99009F9328 /* URLSessionTests.swift */; };
 		F72EBD97243C8490009F9328 /* BluetoothStateObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72EBD96243C8490009F9328 /* BluetoothStateObserver.swift */; };
 		F72EBD9B243C8750009F9328 /* BluetoothStateObserverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72EBD9A243C8750009F9328 /* BluetoothStateObserverTests.swift */; };
@@ -341,6 +343,8 @@
 		F6F05A312434310200FF4B72 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		F6F05A332434344200FF4B72 /* StartNowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartNowViewController.swift; sourceTree = "<group>"; };
 		F6F05A35243436D200FF4B72 /* PrivacyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyViewController.swift; sourceTree = "<group>"; };
+		F70CB8182450CAB700ED6E7F /* OnboardingLogoStrapline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingLogoStrapline.swift; sourceTree = "<group>"; };
+		F70CB81A2450CFA900ED6E7F /* OnboardingLogoStrapline.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnboardingLogoStrapline.xib; sourceTree = "<group>"; };
 		F72EBD4E24361E99009F9328 /* URLSessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionTests.swift; sourceTree = "<group>"; };
 		F72EBD96243C8490009F9328 /* BluetoothStateObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothStateObserver.swift; sourceTree = "<group>"; };
 		F72EBD9A243C8750009F9328 /* BluetoothStateObserverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothStateObserverTests.swift; sourceTree = "<group>"; };
@@ -484,9 +488,11 @@
 				0986EFB4244518FE008D0E1D /* ButtonWithDynamicType.swift */,
 				F652F72F244E4AAD00D97950 /* DrawerPresentation.swift */,
 				AEC6A7BB241BD81A00B0237A /* LogoStrapline.swift */,
+				AEC6A7BD241BD82900B0237A /* LogoStrapline.xib */,
+				F70CB8182450CAB700ED6E7F /* OnboardingLogoStrapline.swift */,
+				F70CB81A2450CFA900ED6E7F /* OnboardingLogoStrapline.xib */,
 				21D93C2F2420C26900C1FA9B /* PrimaryButton.swift */,
 				097C93882447986B00E985CF /* TextField.swift */,
-				AEC6A7BD241BD82900B0237A /* LogoStrapline.xib */,
 			);
 			path = Appearance;
 			sourceTree = "<group>";
@@ -1035,6 +1041,7 @@
 				895D9E462437458700573D4D /* AppIcon.xcassets in Resources */,
 				F68B89ED243CFF2600F369A9 /* SelfDiagnosis.storyboard in Resources */,
 				F6F05A322434310200FF4B72 /* Onboarding.storyboard in Resources */,
+				F70CB81B2450CFA900ED6E7F /* OnboardingLogoStrapline.xib in Resources */,
 				098ED481242E745F0029B729 /* Debug.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1129,6 +1136,7 @@
 				21C09A8F2437B99F00368203 /* BluetoothNursery.swift in Sources */,
 				0986EFB5244518FE008D0E1D /* ButtonWithDynamicType.swift in Sources */,
 				F6CC2CA9242BC7FC0079432B /* RemoteNotificationManager.swift in Sources */,
+				F70CB8192450CAB700ED6E7F /* OnboardingLogoStrapline.swift in Sources */,
 				AE2A5E502423C473007A4771 /* ContactEvent.swift in Sources */,
 				219B613524471B9800E2F1A6 /* UUIDExtensions.swift in Sources */,
 				89F06B332434AF130074C612 /* ForwardingLogHandler.swift in Sources */,
