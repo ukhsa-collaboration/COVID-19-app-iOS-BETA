@@ -43,7 +43,6 @@ class OnboardingTests: ScreenTestCase {
         // Permissions screen
         
         XCTAssert(permissionsScreenTitle.exists)
-        permissionContinueButton.tap()
         
         XCTAssert(notificationPermissionAlertTitle.exists)
         allowNotificationsButton.tap()

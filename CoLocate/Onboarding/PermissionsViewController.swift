@@ -28,6 +28,23 @@ class PermissionsViewController: UIViewController, Storyboarded {
         self.uiQueue = uiQueue
         self.continueHandler = continueHandler
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if authManager.bluetooth == .allowed {
+            // If we get here, it most likely means that the user just went through the following flow:
+            // 1. Visited this screen
+            // 2. Denied Bluetooth permission
+            // 3. Was shown the screen explaining why we need permission
+            // 4. Granted permission
+            // 5. Was redirected here.
+            //
+            // Prompt for notification permissions right away, to save taps and not make the user wonder
+            // why they're having to go through this part of the flow a second time.
+            maybeRequestNotificationPermissions()
+        }
+    }
 
     @IBAction func didTapContinue() {
         guard !isRequestingPermissions else { return }
@@ -36,7 +53,7 @@ class PermissionsViewController: UIViewController, Storyboarded {
         if authManager.bluetooth == .notDetermined {
             requestBluetoothPermissions()
         } else {
-            requestNotificationPermissions()
+            maybeRequestNotificationPermissions()
         }
 
     }
@@ -57,7 +74,7 @@ class PermissionsViewController: UIViewController, Storyboarded {
         #endif
     }
 
-    private func requestNotificationPermissions() {
+    private func maybeRequestNotificationPermissions() {
         authManager.notifications { [weak self] status in
             guard let self = self else { return }
 
@@ -93,8 +110,10 @@ extension PermissionsViewController: BTLEBroadcasterStateDelegate {
         switch authManager.bluetooth {
         case .notDetermined:
             return
-        case .allowed, .denied:
-            continueHandler()
+        case .denied:
+            self.continueHandler()
+        case .allowed:
+            maybeRequestNotificationPermissions()
         }
     }
     

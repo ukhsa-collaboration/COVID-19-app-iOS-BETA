@@ -12,7 +12,7 @@ import XCTest
 
 class PermissionsViewControllerTests: TestCase {
     
-    func testBluetoothNotDetermined_callsContinueHandlerOnChangeToAllowed() {
+    func testBluetoothNotDetermined_callsContinueHandlerWhenBothGranted() {
         let authManagerDouble = AuthorizationManagerDouble(bluetooth: .notDetermined)
         let remoteNotificationManagerDouble = RemoteNotificationManagerDouble()
         let vc = PermissionsViewController.instantiate()
@@ -25,15 +25,18 @@ class PermissionsViewControllerTests: TestCase {
         XCTAssertNotNil(vc.view)
 
         vc.didTapContinue()
-        
+
         #if targetEnvironment(simulator)
         // We skip Bluetooth on the simulator.
         #else
         authManagerDouble.bluetooth = .allowed
         vc.btleBroadcaster(DummyBTLEBroadcaster(), didUpdateState: .poweredOn)
         #endif
-
-        XCTAssert(continued)
+        
+        XCTAssertFalse(continued)
+        XCTAssertNotNil(authManagerDouble.notificationsCompletion)
+        authManagerDouble.notificationsCompletion?(.allowed)
+        XCTAssertTrue(continued)
     }
 
     func testBluetoothNotDetermined_callsContinueHandlerOnChangeToDenied() {
@@ -58,6 +61,24 @@ class PermissionsViewControllerTests: TestCase {
         #endif
 
         XCTAssert(continued)
+    }
+    
+    func testBluetoothAllowed_promptsForNotificationWhenShown() {
+        let authManagerDouble = AuthorizationManagerDouble(bluetooth: .allowed)
+        let remoteNotificationManagerDouble = RemoteNotificationManagerDouble()
+        let vc = PermissionsViewController.instantiate()
+        var continued = false
+        vc.inject(authManager: authManagerDouble, remoteNotificationManager: remoteNotificationManagerDouble, uiQueue: QueueDouble()) {
+            continued = true
+        }
+
+        parentViewControllerForTests.viewControllers = [vc]
+        XCTAssertNotNil(vc.view)
+
+        XCTAssertFalse(continued)
+        XCTAssertNotNil(authManagerDouble.notificationsCompletion)
+        authManagerDouble.notificationsCompletion?(.allowed)
+        XCTAssertTrue(continued)
     }
 
     func testPreventsDoubleSubmit() {
