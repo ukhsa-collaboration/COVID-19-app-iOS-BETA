@@ -21,6 +21,7 @@ class RootViewController: UIViewController {
     private var registrationService: RegistrationService! = nil
     private var contactEventRepository: ContactEventRepository! = nil
     private var contactEventPersister: ContactEventPersister! = nil
+    private var bluetoothNursery: StartsBroadcasting!
     private var bluetoothStateObserver: BluetoothStateObserver!
     private var statusViewController: StatusViewController!
     private var session: Session! = nil
@@ -34,6 +35,7 @@ class RootViewController: UIViewController {
         registrationService: RegistrationService,
         contactEventRepository: ContactEventRepository,
         contactEventPersister: ContactEventPersister,
+        bluetoothNursery: StartsBroadcasting,
         bluetoothStateObserver: BluetoothStateObserver,
         session: Session,
         uiQueue: TestableQueue
@@ -45,6 +47,7 @@ class RootViewController: UIViewController {
         self.registrationService = registrationService
         self.contactEventRepository = contactEventRepository
         self.contactEventPersister = contactEventPersister
+        self.bluetoothNursery = bluetoothNursery
         self.bluetoothStateObserver = bluetoothStateObserver
         self.session = session
         self.uiQueue = uiQueue
@@ -85,7 +88,7 @@ class RootViewController: UIViewController {
             let env = OnboardingEnvironment(persistence: persistence, authorizationManager: authorizationManager, remoteNotificationManager: remoteNotificationManager, notificationCenter: NotificationCenter.default)
             let coordinator = OnboardingCoordinator(persistence: persistence, authorizationManager: authorizationManager, bluetoothStateObserver: bluetoothStateObserver)
             
-            onboardingViewController.inject(env: env, coordinator: coordinator, uiQueue: self.uiQueue) {
+            onboardingViewController.inject(env: env, coordinator: coordinator, bluetoothNursery: bluetoothNursery, uiQueue: self.uiQueue) {
                 self.show(viewController: self.statusViewController)
             }
             

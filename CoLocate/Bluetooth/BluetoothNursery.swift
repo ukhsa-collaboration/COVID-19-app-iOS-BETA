@@ -11,7 +11,11 @@ import CoreBluetooth
 
 import Logging
 
-class BluetoothNursery {
+protocol StartsBroadcasting {
+    func startBroadcaster(stateDelegate: BTLEBroadcasterStateDelegate?)
+}
+
+class BluetoothNursery: StartsBroadcasting {
     
     static let centralRestoreIdentifier: String = "SonarCentralRestoreIdentifier"
     static let peripheralRestoreIdentifier: String = "SonarPeripheralRestoreIdentifier"

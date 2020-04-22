@@ -39,7 +39,7 @@ class OnboardingViewControllerTests: TestCase {
         let coordinatorDouble = OnboardingCoordinatorDouble()
         let vc = OnboardingViewController.instantiate()
         var called = false
-        vc.inject(env: envDouble(), coordinator: coordinatorDouble, uiQueue: QueueDouble()) {
+        vc.inject(env: envDouble(), coordinator: coordinatorDouble, bluetoothNursery: BluetoothNurseryDouble(), uiQueue: QueueDouble()) {
             called = true
         }
         let container = ViewControllerContainerDouble()
@@ -54,7 +54,7 @@ class OnboardingViewControllerTests: TestCase {
     func show(state: OnboardingCoordinator.State) -> UIViewController? {
         let coordinatorDouble = OnboardingCoordinatorDouble()
         let vc = OnboardingViewController.instantiate()
-        vc.inject(env: envDouble(), coordinator: coordinatorDouble, uiQueue: QueueDouble()) {}
+        vc.inject(env: envDouble(), coordinator: coordinatorDouble, bluetoothNursery: BluetoothNurseryDouble(), uiQueue: QueueDouble()) {}
         let container = ViewControllerContainerDouble()
         vc.showIn(container: container)
 

@@ -18,7 +18,7 @@ struct UITestScreenMaker: ScreenMaking {
             let onboardingViewController = OnboardingViewController.instantiate { viewController in
                 let env = OnboardingEnvironment(mockWithHost: viewController)
                 let coordinator = OnboardingCoordinator(persistence: env.persistence, authorizationManager: env.authorizationManager, bluetoothStateObserver: ConcreteBluetoothStateObserver())
-                viewController.inject(env: env, coordinator: coordinator, uiQueue: DispatchQueue.main) { }
+                viewController.inject(env: env, coordinator: coordinator, bluetoothNursery: NoOpBluetoothNursery(), uiQueue: DispatchQueue.main) { }
             }
 
             // This cludgey step is ensures that we "show" the onboarding view controller
@@ -131,5 +131,10 @@ private class EphemeralRemoteNotificationManager: RemoteNotificationManager {
 }
 
 private struct MockError: Error {}
+
+private class NoOpBluetoothNursery: StartsBroadcasting {
+    func startBroadcaster(stateDelegate: BTLEBroadcasterStateDelegate?) {
+    }
+}
 
 #endif
