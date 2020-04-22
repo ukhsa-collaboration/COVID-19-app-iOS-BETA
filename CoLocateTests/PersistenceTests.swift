@@ -26,7 +26,15 @@ class PersistenceTests: TestCase {
         let diagnosis = service.selfDiagnosis
         XCTAssertNil(diagnosis)
     }
-    
+
+    func testDeleteSelfDiagnosisWhenNil() {
+        let service = Persistence(secureRegistrationStorage: SecureRegistrationStorage(), broadcastKeyStorage: SecureBroadcastRotationKeyStorage())
+        service.selfDiagnosis = SelfDiagnosis(symptoms: [.cough], startDate: Date())
+        XCTAssertNotNil(service.selfDiagnosis)
+
+        service.selfDiagnosis = nil
+        XCTAssertNil(service.selfDiagnosis)
+    }
     
     func testRegistrationIsStored() {
         let secureRegistrationStorage = SecureRegistrationStorage()

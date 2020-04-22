@@ -99,6 +99,11 @@ class Persistence: Persisting {
             return decoded
         }
         set {
+            guard let newValue = newValue else {
+                UserDefaults.standard.removeObject(forKey: Keys.selfDiagnosis.rawValue)
+                return
+            }
+
             guard let data = try? encoder.encode(newValue) else {
                 logger.critical("Unable to encode a self-diagnosis")
                 return
