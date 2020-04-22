@@ -45,6 +45,8 @@ platform :ios do
       git_url: "./ci/match",
     )
 
+    sh "ls '/Users/pivotal/Library/MobileDevice/Provisioning Profiles'"
+
     update_code_signing_settings(
       use_automatic_signing: false,
       path: "CoLocate.xcodeproj",
@@ -52,6 +54,8 @@ platform :ios do
       code_sign_identity: "iPhone Distribution",
       profile_name: "match AppStore #{sonar_config.bundle_id}",
     )
+
+    sh "git diff"
 
     Dir.chdir ".." do
       File.write("CoLocate.xcconfig", <<~XCCONFIG)
@@ -65,7 +69,6 @@ platform :ios do
 
     build_app(
       scheme: "CoLocate",
-      skip_profile_detection: true,
     )
 
     upload_to_testflight(
