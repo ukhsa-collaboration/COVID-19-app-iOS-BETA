@@ -30,6 +30,7 @@ class StatusViewController: UIViewController, Storyboarded {
     @IBOutlet var registrationStatusText: UILabel!
     @IBOutlet var registrationRetryButton: UIButton!
 
+    @IBOutlet weak var symptomStackView: SymptomStackView!
     @IBOutlet weak var diagnosisStatusView: UIView!
     @IBOutlet weak var diagnosisHighlightView: UIView!
     @IBOutlet weak var diagnosisTitleLabel: UILabel!
@@ -55,6 +56,7 @@ class StatusViewController: UIViewController, Storyboarded {
             renderStatus()
         }
     }
+    
     var status: Status {
         get {
             switch (diagnosis?.isAffected, potentiallyExposed) {
@@ -161,25 +163,26 @@ class StatusViewController: UIViewController, Storyboarded {
 
     private func renderStatus() {
         guard view != nil else { return }
-
+        
         switch status {
-        case .initial:
-            diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Highlight")
-            diagnosisTitleLabel.text = "Keep following the current government advice".localized
-            howAreYouFeelingView.isHidden = false
-            nextStepsView.isHidden = true
-        case .amber:
-            diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
-            diagnosisTitleLabel.text = "You have been near someone who has coronavirus symptoms".localized
-            howAreYouFeelingView.isHidden = false
-            nextStepsView.isHidden = true
-        case .red:
-            diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Error")
-            diagnosisTitleLabel.text = "Your symptoms indicate you may have coronavirus".localized
-            howAreYouFeelingView.isHidden = true
-            nextStepsView.isHidden = false
+            case .initial:
+                diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Highlight")
+                diagnosisTitleLabel.text = "Keep following the current government advice".localized
+                howAreYouFeelingView.isHidden = false
+                nextStepsView.isHidden = true
+            case .amber:
+                diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
+                diagnosisTitleLabel.text = "You have been near someone who has coronavirus symptoms".localized
+                howAreYouFeelingView.isHidden = false
+                nextStepsView.isHidden = true
+            case .red:
+                diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Error")
+                diagnosisTitleLabel.text = "Your symptoms indicate you may have coronavirus".localized
+                howAreYouFeelingView.isHidden = true
+                nextStepsView.isHidden = false
         }
-
+        
+        symptomStackView.symptoms = diagnosis?.symptoms
         diagnosisStatusView.accessibilityLabel = "\(diagnosisTitleLabel.text!) \(readLatestAdviceLabel.text!)"
     }
     
@@ -225,7 +228,6 @@ class StatusViewController: UIViewController, Storyboarded {
         registrationSpinner.isHidden = true
         registrationStatusIcon.isHidden = false
     }
-        
 }
 
 private let logger = Logger(label: "StatusViewController")
