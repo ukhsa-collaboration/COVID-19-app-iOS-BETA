@@ -9,6 +9,8 @@
 import UIKit
 import CoreBluetooth
 
+import Logging
+
 class BluetoothNursery {
     
     static let centralRestoreIdentifier: String = "SonarCentralRestoreIdentifier"
@@ -46,6 +48,7 @@ class BluetoothNursery {
     }
 
     func startBroadcastingAndListening(registration: Registration) {
+        logger.info("starting BLE broadcaster and listener with sonar id (\(registration.id))")
         broadcastIdGenerator.sonarId = registration.id
 
         startBroadcaster(stateDelegate: nil)
@@ -76,3 +79,6 @@ class BluetoothNursery {
     }
     
 }
+
+// MARK: - Logging
+private let logger = Logger(label: "BTLE")
