@@ -9,22 +9,25 @@
 import Foundation
 import Logging
 
-extension URLSession {
-    static func make() -> URLSession {
-        // Use of `ephemeral` here is a precaution. We are disabling all caching manually anyway, but using this instead
-        // of `default` means if we miss something (especially as new properties are added over time) we’ll inherit the
-        // `ephemeral` value instead of the `default` one.
-        let configuration = URLSessionConfiguration.ephemeral
-        
+extension URLSessionConfiguration {
+    func secure() {
         if #available(iOS 13.0, *) {
-            configuration.tlsMinimumSupportedProtocolVersion = .TLSv12
+            tlsMinimumSupportedProtocolVersion = .TLSv12
         }
-        configuration.tlsMinimumSupportedProtocol = .tlsProtocol12
-        configuration.httpCookieAcceptPolicy = .never
-        configuration.httpShouldSetCookies = false
-        configuration.httpCookieStorage = nil
-        configuration.urlCache = nil
-        
+        tlsMinimumSupportedProtocol = .tlsProtocol12
+        httpCookieAcceptPolicy = .never
+        httpShouldSetCookies = false
+        httpCookieStorage = nil
+        urlCache = nil
+    }
+}
+
+extension URLSession {
+    // Use of `ephemeral` here is a precaution. We are disabling all caching manually anyway, but using this instead
+    // of `default` means if we miss something (especially as new properties are added over time) we’ll inherit the
+    // `ephemeral` value instead of the `default` one.
+    static func make(with configuration: URLSessionConfiguration = .ephemeral) -> URLSession {
+        configuration.secure()
         return URLSession(configuration: configuration)
     }
 }
