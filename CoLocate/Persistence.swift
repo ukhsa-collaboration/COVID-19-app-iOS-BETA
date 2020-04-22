@@ -23,7 +23,6 @@ struct Registration: Equatable {
 
 
 protocol Persisting {
-    var allowedDataSharing: Bool { get nonmutating set }
     var registration: Registration? { get nonmutating set }
     var potentiallyExposed: Bool { get nonmutating set }
     var selfDiagnosis: SelfDiagnosis? { get nonmutating set }
@@ -39,7 +38,6 @@ protocol PersistenceDelegate: class {
 class Persistence: Persisting {
 
     enum Keys: String, CaseIterable {
-        case allowedDataSharing
         case potentiallyExposed
         case selfDiagnosis
         case partialPostcode
@@ -57,11 +55,6 @@ class Persistence: Persisting {
     init(secureRegistrationStorage: SecureRegistrationStorage, broadcastKeyStorage: BroadcastRotationKeyStorage) {
         self.secureRegistrationStorage = secureRegistrationStorage
         self.broadcastKeyStorage = broadcastKeyStorage
-    }
-
-    var allowedDataSharing: Bool {
-        get { UserDefaults.standard.bool(forKey: Keys.allowedDataSharing.rawValue) }
-        set { UserDefaults.standard.set(newValue, forKey: Keys.allowedDataSharing.rawValue) }
     }
 
     var registration: Registration? {

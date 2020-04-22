@@ -29,7 +29,6 @@ class DebugViewController: UITableViewController, Storyboarded {
     
     override func viewDidLoad() {
         potentiallyExposedSwitch.isOn = persisting.potentiallyExposed
-        allowedDataSharingSwitch.isOn = persisting.allowedDataSharing
 
         let build = Bundle.main.infoDictionary?["CFBundleVersion"] ?? "unknown"
         let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] ?? "unknown"
@@ -131,10 +130,6 @@ class DebugViewController: UITableViewController, Storyboarded {
 
     @IBAction func potentiallyExposedChanged(_ sender: UISwitch) {
         persisting.potentiallyExposed = sender.isOn
-    }
-
-    @IBAction func allowedDataSharingChanged(_ sender: UISwitch) {
-        persisting.allowedDataSharing = sender.isOn
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
