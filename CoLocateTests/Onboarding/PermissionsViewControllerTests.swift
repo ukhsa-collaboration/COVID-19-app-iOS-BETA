@@ -39,7 +39,11 @@ class PermissionsViewControllerTests: TestCase {
         XCTAssertTrue(continued)
     }
 
-    func testBluetoothNotDetermined_callsContinueHandlerOnChangeToDenied() {
+    func testBluetoothNotDetermined_callsContinueHandlerOnChangeToDenied() throws {
+        #if targetEnvironment(simulator)
+        throw XCTSkip("This test can't run in the simulator.")
+        #else
+        
         let authManagerDouble = AuthorizationManagerDouble(bluetooth: .notDetermined)
         let remoteNotificationManagerDouble = RemoteNotificationManagerDouble()
         let vc = PermissionsViewController.instantiate()
@@ -53,14 +57,12 @@ class PermissionsViewControllerTests: TestCase {
 
         vc.didTapContinue()
         
-        #if targetEnvironment(simulator)
-        // We skip Bluetooth on the simulator.
-        #else
         authManagerDouble.bluetooth = .denied
         vc.btleBroadcaster(DummyBTLEBroadcaster(), didUpdateState: .poweredOn)
-        #endif
 
         XCTAssert(continued)
+        
+        #endif
     }
     
     func testBluetoothAllowed_promptsForNotificationWhenShown() {

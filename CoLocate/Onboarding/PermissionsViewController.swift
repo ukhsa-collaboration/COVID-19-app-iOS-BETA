@@ -50,7 +50,13 @@ class PermissionsViewController: UIViewController, Storyboarded {
         guard !isRequestingPermissions else { return }
         isRequestingPermissions = true
         
-        if authManager.bluetooth == .notDetermined {
+        #if targetEnvironment(simulator)
+        let bluetoothAuth = BluetoothAuthorizationStatus.allowed
+        #else
+        let bluetoothAuth = authManager.bluetooth
+        #endif
+        
+        if bluetoothAuth == .notDetermined {
             requestBluetoothPermissions()
         } else {
             maybeRequestNotificationPermissions()
