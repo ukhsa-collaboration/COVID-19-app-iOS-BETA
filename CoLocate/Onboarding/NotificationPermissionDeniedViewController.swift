@@ -1,5 +1,5 @@
 //
-//  BluetoothPermissionDeniedViewController.swift
+//  NotificationPermissionDeniedViewController.swift
 //  CoLocate
 //
 //  Created by NHSX.
@@ -8,6 +8,6 @@
 
 import UIKit
 
-class BluetoothPermissionDeniedViewController: FixPermissionsViewController, Storyboarded {
+class NotificationPermissionDeniedViewController: FixPermissionsViewController, Storyboarded {
     static let storyboardName = "Onboarding"
 }

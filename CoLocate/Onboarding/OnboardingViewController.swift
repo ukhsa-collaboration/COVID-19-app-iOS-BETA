@@ -78,9 +78,11 @@ class OnboardingViewController: UINavigationController, Storyboarded {
                 $0.inject(notificationCenter: environment.notificationCenter, uiQueue: uiQueue, continueHandler: updateState)
            }
             
-        case .permissionsDenied:
-            vc = PermissionsDeniedViewController.instantiate()
-            
+        case .notificationsDenied:
+             vc = NotificationPermissionDeniedViewController.instantiate() {
+                 $0.inject(notificationCenter: environment.notificationCenter, uiQueue: uiQueue, continueHandler: updateState)
+            }
+
         case .done:
             completionHandler()
             return

@@ -670,6 +670,93 @@ To enable your Bluetooth permissions you need to go to your Settings, select the
             </objects>
             <point key="canvasLocation" x="3704.347826086957" y="141.96428571428569"/>
         </scene>
+        <!--Notification Permission Denied View Controller-->
+        <scene sceneID="sQx-FU-Tnw">
+            <objects>
+                <viewController storyboardIdentifier="NotificationPermissionDeniedViewController" id="ZTI-Ef-bqy" customClass="NotificationPermissionDeniedViewController" customModule="CoLocate" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="j4n-lr-qn6">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wvC-6z-vHV">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uKT-kj-3PH" userLabel="Scroll content view">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HEq-Gi-tbG" customClass="LogoStrapline" customModule="CoLocate" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="0.0"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="You need to turn your notifications on" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gA2-Zt-YdP">
+                                                <rect key="frame" x="20" y="20" width="280" height="110"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q3o-Uk-i69" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
+                                                <rect key="frame" x="20" y="518" width="280" height="30"/>
+                                                <accessibility key="accessibilityConfiguration" label="Continue"/>
+                                                <state key="normal" title="Go to your Settings"/>
+                                                <connections>
+                                                    <action selector="settingsTapped:" destination="ZTI-Ef-bqy" eventType="touchUpInside" id="fEx-V5-PJ0"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="68E-kN-DN8">
+                                                <rect key="frame" x="20" y="150" width="280" height="266"/>
+                                                <string key="text">You will not receive notifications to say if you've been near someone with COVID-19 symptoms unless you allow notifications in your Settings.
+
+To enable this app to send you notification you need to go to your Settings, klick on the app name and allow notifications.</string>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="gA2-Zt-YdP" secondAttribute="trailing" constant="20" id="0tk-dL-dDy"/>
+                                            <constraint firstItem="Q3o-Uk-i69" firstAttribute="leading" secondItem="uKT-kj-3PH" secondAttribute="leading" constant="20" id="46U-5R-59n"/>
+                                            <constraint firstAttribute="trailing" secondItem="HEq-Gi-tbG" secondAttribute="trailing" id="EtH-bH-iyH"/>
+                                            <constraint firstAttribute="bottom" secondItem="Q3o-Uk-i69" secondAttribute="bottom" constant="20" id="G84-Sq-nM8"/>
+                                            <constraint firstItem="68E-kN-DN8" firstAttribute="leading" secondItem="uKT-kj-3PH" secondAttribute="leading" constant="20" id="Hby-ks-itI"/>
+                                            <constraint firstAttribute="trailing" secondItem="Q3o-Uk-i69" secondAttribute="trailing" constant="20" id="JQb-pE-J1n"/>
+                                            <constraint firstItem="HEq-Gi-tbG" firstAttribute="leading" secondItem="uKT-kj-3PH" secondAttribute="leading" id="Mcf-jA-KvA"/>
+                                            <constraint firstItem="gA2-Zt-YdP" firstAttribute="leading" secondItem="uKT-kj-3PH" secondAttribute="leading" constant="20" id="Oxo-kz-Apd"/>
+                                            <constraint firstItem="68E-kN-DN8" firstAttribute="top" secondItem="gA2-Zt-YdP" secondAttribute="bottom" constant="20" id="Sb2-kK-ye1"/>
+                                            <constraint firstItem="gA2-Zt-YdP" firstAttribute="top" secondItem="HEq-Gi-tbG" secondAttribute="bottom" constant="20" id="UY6-0B-73T"/>
+                                            <constraint firstItem="HEq-Gi-tbG" firstAttribute="top" secondItem="uKT-kj-3PH" secondAttribute="top" id="em8-AG-PGV"/>
+                                            <constraint firstAttribute="trailing" secondItem="68E-kN-DN8" secondAttribute="trailing" constant="20" id="ido-gL-Pmp"/>
+                                            <constraint firstItem="Q3o-Uk-i69" firstAttribute="top" relation="greaterThanOrEqual" secondItem="68E-kN-DN8" secondAttribute="bottom" constant="8" id="mdk-ZB-R4e"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="uKT-kj-3PH" firstAttribute="bottom" secondItem="Jes-vm-qZm" secondAttribute="bottom" id="CUX-WE-UVf"/>
+                                    <constraint firstItem="uKT-kj-3PH" firstAttribute="top" secondItem="Jes-vm-qZm" secondAttribute="top" id="Sro-ei-gdG"/>
+                                    <constraint firstItem="uKT-kj-3PH" firstAttribute="width" secondItem="HKK-S2-24O" secondAttribute="width" id="bat-0L-3Es"/>
+                                    <constraint firstItem="uKT-kj-3PH" firstAttribute="height" secondItem="HKK-S2-24O" secondAttribute="height" priority="1" id="hKb-jh-fU3"/>
+                                    <constraint firstItem="uKT-kj-3PH" firstAttribute="trailing" secondItem="Jes-vm-qZm" secondAttribute="trailing" id="qmX-9h-gn1"/>
+                                    <constraint firstItem="uKT-kj-3PH" firstAttribute="leading" secondItem="Jes-vm-qZm" secondAttribute="leading" id="tmk-jY-9lA"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="Jes-vm-qZm"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="HKK-S2-24O"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="wvC-6z-vHV" firstAttribute="top" secondItem="7pT-uX-Isc" secondAttribute="top" id="3ZS-tq-e9Y"/>
+                            <constraint firstItem="7pT-uX-Isc" firstAttribute="trailing" secondItem="wvC-6z-vHV" secondAttribute="trailing" id="fdd-Uc-JbX"/>
+                            <constraint firstItem="wvC-6z-vHV" firstAttribute="leading" secondItem="7pT-uX-Isc" secondAttribute="leading" id="n8l-3E-4M9"/>
+                            <constraint firstItem="7pT-uX-Isc" firstAttribute="bottom" secondItem="wvC-6z-vHV" secondAttribute="bottom" id="src-gW-7i2"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="7pT-uX-Isc"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ZaY-HS-VsJ"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XR1-5z-KfG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4406.25" y="141.5492957746479"/>
+        </scene>
     </scenes>
     <resources>
         <namedColor name="NHS Grey 3">
