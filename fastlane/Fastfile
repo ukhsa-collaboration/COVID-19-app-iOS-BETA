@@ -38,8 +38,6 @@ platform :ios do
 
     setup_ci()
 
-    sh "security set-key-partition-list -S apple-tool:,apple: -s -k \"\" ~/Library/Keychains/fastlane_tmp_keychain-db"
-
     sync_code_signing(
       type: "appstore",
       readonly: true,
@@ -65,7 +63,10 @@ platform :ios do
       FileUtils.cp "CoLocate/Environments/GoogleService-Info.#{sonar_env}.plist", "CoLocate/GoogleService-Info.plist"
     end
 
-    build_app(scheme: "CoLocate")
+    build_app(
+      scheme: "CoLocate",
+      skip_profile_detection: true,
+    )
 
     upload_to_testflight(
       username: ENV.fetch("APPLE_USERNAME"),
