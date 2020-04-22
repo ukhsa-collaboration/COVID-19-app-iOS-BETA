@@ -34,17 +34,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QJe-c9-kRc">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QJe-c9-kRc">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="498"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="La6-dl-0T5">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="La6-dl-0T5">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="430.5"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MNR-DV-nvi" customClass="OnboardingLogoStrapline" customModule="CoLocate" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MNR-DV-nvi" customClass="OnboardingLogoStrapline" customModule="CoLocate" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
-                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="0Kn-59-wim">
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="0Kn-59-wim">
                                                 <rect key="frame" x="20" y="84" width="280" height="326.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Help the NHS stop the spread of coronavirus in the UK" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NZC-MM-nb8">
@@ -66,7 +66,7 @@
                                                 </subviews>
                                             </stackView>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="0Kn-59-wim" firstAttribute="top" secondItem="MNR-DV-nvi" secondAttribute="bottom" constant="20" id="1dY-uy-IiY"/>
                                             <constraint firstItem="MNR-DV-nvi" firstAttribute="leading" secondItem="La6-dl-0T5" secondAttribute="leading" id="5ky-WE-pFv"/>
@@ -97,7 +97,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" name="NHS Grey 5"/>
                         <constraints>
                             <constraint firstItem="QJe-c9-kRc" firstAttribute="top" secondItem="uey-GI-3f6" secondAttribute="top" id="4k7-HD-rn6"/>
                             <constraint firstItem="8Mb-zt-2Ty" firstAttribute="top" secondItem="QJe-c9-kRc" secondAttribute="bottom" constant="20" id="CqE-NI-lFl"/>
@@ -123,21 +123,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TUo-oc-PGD">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TUo-oc-PGD">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="498"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="31h-8a-dJ8">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="621"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="31h-8a-dJ8">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="551"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P9b-DU-jl5" customClass="OnboardingLogoStrapline" customModule="CoLocate" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P9b-DU-jl5" customClass="OnboardingLogoStrapline" customModule="CoLocate" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
-                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="7HO-8c-Q84">
-                                                <rect key="frame" x="20" y="84" width="280" height="517"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="7HO-8c-Q84">
+                                                <rect key="frame" x="20" y="84" width="280" height="447"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How this app works" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hxN-EA-ySp">
                                                         <rect key="frame" x="0.0" y="0.0" width="280" height="36"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <accessibility key="accessibilityConfiguration">
                                                             <accessibilityTraits key="traits" staticText="YES" header="YES"/>
                                                         </accessibility>
@@ -158,34 +159,9 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <view contentMode="scaleToFill" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Fgi-oe-et5">
-                                                        <rect key="frame" x="0.0" y="467" width="280" height="50"/>
-                                                        <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="I agree to share my app data with the NHS" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L8x-F3-ShS">
-                                                                <rect key="frame" x="0.0" y="0.0" width="211" height="50"/>
-                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                                <nil key="textColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Vtg-pY-JBT">
-                                                                <rect key="frame" x="231" y="9.5" width="51" height="31"/>
-                                                                <accessibility key="accessibilityConfiguration" label="Allow Data Sharing"/>
-                                                            </switch>
-                                                        </subviews>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                                        <constraints>
-                                                            <constraint firstItem="Vtg-pY-JBT" firstAttribute="leading" secondItem="L8x-F3-ShS" secondAttribute="trailing" constant="20" id="3yn-S3-yEQ"/>
-                                                            <constraint firstItem="L8x-F3-ShS" firstAttribute="leading" secondItem="Fgi-oe-et5" secondAttribute="leading" id="UTI-Ta-7vS"/>
-                                                            <constraint firstAttribute="bottom" secondItem="L8x-F3-ShS" secondAttribute="bottom" id="VTH-xt-t4g"/>
-                                                            <constraint firstItem="L8x-F3-ShS" firstAttribute="top" secondItem="Fgi-oe-et5" secondAttribute="top" id="cmr-e2-Yss"/>
-                                                            <constraint firstAttribute="trailing" secondItem="Vtg-pY-JBT" secondAttribute="trailing" id="jyy-u0-SnC"/>
-                                                            <constraint firstItem="Vtg-pY-JBT" firstAttribute="centerY" secondItem="L8x-F3-ShS" secondAttribute="centerY" id="v9I-B5-th7"/>
-                                                        </constraints>
-                                                    </view>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
                                             <constraint firstItem="7HO-8c-Q84" firstAttribute="leading" secondItem="31h-8a-dJ8" secondAttribute="leading" constant="20" id="4PI-pe-MnS"/>
                                             <constraint firstItem="P9b-DU-jl5" firstAttribute="top" secondItem="31h-8a-dJ8" secondAttribute="top" id="By7-2B-AL5"/>
@@ -217,7 +193,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" name="NHS Grey 5"/>
                         <constraints>
                             <constraint firstItem="TUo-oc-PGD" firstAttribute="leading" secondItem="0ia-KQ-0k0" secondAttribute="leading" id="Boq-Jp-nLT"/>
                             <constraint firstItem="png-1j-34C" firstAttribute="top" secondItem="TUo-oc-PGD" secondAttribute="bottom" constant="20" id="EXe-gS-spH"/>
@@ -230,9 +206,6 @@
                         <viewLayoutGuide key="safeArea" id="0ia-KQ-0k0"/>
                     </view>
                     <navigationItem key="navigationItem" id="2kT-fD-hac"/>
-                    <connections>
-                        <outlet property="allowDataSharingSwitch" destination="Vtg-pY-JBT" id="8r9-c9-L1D"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LmF-ZM-p1m" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -252,17 +225,17 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5tN-bW-uWf" userLabel="Scroll content view">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="06r-fk-m9F" customClass="OnboardingLogoStrapline" customModule="CoLocate" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="06r-fk-m9F" customClass="OnboardingLogoStrapline" customModule="CoLocate" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Enter your post code" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C96-Af-5wL">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your post code" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C96-Af-5wL">
                                                 <rect key="frame" x="20" y="84" width="280" height="36"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nUw-z7-nkS" customClass="TextField" customModule="CoLocate" customModuleProvider="target">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nUw-z7-nkS" customClass="TextField" customModule="CoLocate" customModuleProvider="target">
                                                 <rect key="frame" x="20" y="181" width="280" height="34"/>
                                                 <accessibility key="accessibilityConfiguration" label="Post code"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -271,7 +244,7 @@
                                                     <outlet property="delegate" destination="lkE-bN-ikk" id="hoE-bE-NAc"/>
                                                 </connections>
                                             </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Your post code will not be used to track your location." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j2y-6b-nX8">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your post code will not be used to track your location." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j2y-6b-nX8">
                                                 <rect key="frame" x="20" y="230" width="280" height="34"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                 <nil key="textColor"/>
@@ -285,14 +258,14 @@
                                                     <action selector="didTapContinue" destination="lkE-bN-ikk" eventType="touchUpInside" id="kuH-IU-qSk"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Example: CE1B" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qox-hG-VrQ">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Example: CE1B" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qox-hG-VrQ">
                                                 <rect key="frame" x="20" y="157" width="280" height="16"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="Ndb-pX-kbA" firstAttribute="leading" secondItem="5tN-bW-uWf" secondAttribute="leading" constant="20" id="1cT-kx-WBK"/>
                                             <constraint firstItem="j2y-6b-nX8" firstAttribute="top" secondItem="nUw-z7-nkS" secondAttribute="bottom" constant="15" id="9Eu-8f-LvJ"/>
@@ -328,7 +301,7 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="aVO-WC-vyR"/>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" name="NHS Grey 5"/>
                         <constraints>
                             <constraint firstItem="uzw-kj-7Cv" firstAttribute="trailing" secondItem="bga-i9-1yX" secondAttribute="trailing" id="0kA-nw-bXW"/>
                             <constraint firstItem="bga-i9-1yX" firstAttribute="top" secondItem="uzw-kj-7Cv" secondAttribute="top" id="Mue-vi-W9I"/>
@@ -363,7 +336,7 @@
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KNf-hn-Dy4" customClass="OnboardingLogoStrapline" customModule="CoLocate" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="FK8-Le-0p1">
                                                 <rect key="frame" x="20" y="84" width="280" height="906.5"/>
@@ -426,7 +399,7 @@
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o8z-9c-mCH" userLabel="Spacer">
                                                         <rect key="frame" x="0.0" y="554.5" width="280" height="352"/>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="hgg-Uz-yn3"/>
                                                         </constraints>
@@ -434,7 +407,7 @@
                                                 </subviews>
                                             </stackView>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="FK8-Le-0p1" firstAttribute="top" secondItem="KNf-hn-Dy4" secondAttribute="bottom" constant="20" id="7kQ-GN-DhA"/>
                                             <constraint firstAttribute="trailing" secondItem="KNf-hn-Dy4" secondAttribute="trailing" id="Cjf-wn-6dG"/>
@@ -465,7 +438,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" name="NHS Grey 5"/>
                         <constraints>
                             <constraint firstItem="ctd-7G-OHq" firstAttribute="height" secondItem="3DF-cw-4Dm" secondAttribute="height" priority="1" id="1b7-Rv-G5a"/>
                             <constraint firstItem="3Wg-Du-yFB" firstAttribute="leading" secondItem="3DF-cw-4Dm" secondAttribute="leading" id="8GY-iv-WKU"/>
@@ -531,7 +504,7 @@
                                                 </subviews>
                                             </stackView>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="VTg-dg-hdL" firstAttribute="leading" secondItem="tea-ay-yuS" secondAttribute="leading" constant="20" id="Cxf-wO-KKo"/>
                                             <constraint firstAttribute="bottom" secondItem="VTg-dg-hdL" secondAttribute="bottom" constant="20" id="KlX-96-vdO"/>
@@ -558,7 +531,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="tTu-vA-Irt" firstAttribute="trailing" secondItem="0QV-vn-qRG" secondAttribute="trailing" constant="20" id="5O5-03-ji4"/>
                             <constraint firstItem="tTu-vA-Irt" firstAttribute="trailing" secondItem="kig-Cn-71F" secondAttribute="trailing" id="LZ0-oa-Duh"/>
@@ -593,20 +566,20 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sjj-F3-IxM" userLabel="Scroll content view">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="580.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="644.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gkH-9X-xIa" customClass="OnboardingLogoStrapline" customModule="CoLocate" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="0.0"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Why you need to allow the app to use your Bluetooth" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MYG-cJ-tJp">
-                                                <rect key="frame" x="20" y="20" width="280" height="110"/>
+                                                <rect key="frame" x="20" y="84" width="280" height="110"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hBt-VR-GUU" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="530.5" width="280" height="30"/>
+                                                <rect key="frame" x="20" y="594.5" width="280" height="30"/>
                                                 <accessibility key="accessibilityConfiguration" label="Continue"/>
                                                 <state key="normal" title="Go to your Settings"/>
                                                 <connections>
@@ -614,7 +587,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pSJ-Zi-FRG">
-                                                <rect key="frame" x="20" y="150" width="280" height="372.5"/>
+                                                <rect key="frame" x="20" y="214" width="280" height="372.5"/>
                                                 <string key="text">This app works only if have Bluetooth on at all times and if you give the app the permission to use it.
 
 NHS Coronavirus works using Bluetooth signals, to determine when you have been near someone else with this app who shows symptoms of Coronavirus. NHS Coronavirus can alert you or others that may be at risk.
@@ -625,7 +598,7 @@ To enable your Bluetooth permissions you need to go to your Settings, select the
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="MYG-cJ-tJp" firstAttribute="leading" secondItem="sjj-F3-IxM" secondAttribute="leading" constant="20" id="0YI-3b-N4i"/>
                                             <constraint firstItem="gkH-9X-xIa" firstAttribute="leading" secondItem="sjj-F3-IxM" secondAttribute="leading" id="5p1-Hu-zEE"/>
@@ -655,7 +628,7 @@ To enable your Bluetooth permissions you need to go to your Settings, select the
                                 <viewLayoutGuide key="frameLayoutGuide" id="Ejj-JC-EKx"/>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" name="NHS Grey 5"/>
                         <constraints>
                             <constraint firstItem="83t-XG-Zkx" firstAttribute="leading" secondItem="72p-jT-Lgd" secondAttribute="leading" id="34C-tF-d7E"/>
                             <constraint firstItem="83t-XG-Zkx" firstAttribute="top" secondItem="72p-jT-Lgd" secondAttribute="top" id="5DN-70-7kT"/>
@@ -684,12 +657,12 @@ To enable your Bluetooth permissions you need to go to your Settings, select the
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uKT-kj-3PH" userLabel="Scroll content view">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HEq-Gi-tbG" customClass="OnboardingLogoStrapline" customModule="CoLocate" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="0.0"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HEq-Gi-tbG" customClass="OnboardingLogoStrapline" customModule="CoLocate" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="You need to turn your notifications on" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gA2-Zt-YdP">
-                                                <rect key="frame" x="20" y="20" width="280" height="110"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You need to turn your notifications on" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gA2-Zt-YdP">
+                                                <rect key="frame" x="20" y="84" width="280" height="73"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -702,8 +675,8 @@ To enable your Bluetooth permissions you need to go to your Settings, select the
                                                     <action selector="settingsTapped:" destination="ZTI-Ef-bqy" eventType="touchUpInside" id="fEx-V5-PJ0"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="68E-kN-DN8">
-                                                <rect key="frame" x="20" y="150" width="280" height="266"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="68E-kN-DN8">
+                                                <rect key="frame" x="20" y="177" width="280" height="218.5"/>
                                                 <string key="text">You will not receive notifications to say if you've been near someone with COVID-19 symptoms unless you allow notifications in your Settings.
 
 To enable this app to send you notification you need to go to your Settings, klick on the app name and allow notifications.</string>
@@ -712,7 +685,7 @@ To enable this app to send you notification you need to go to your Settings, kli
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="gA2-Zt-YdP" secondAttribute="trailing" constant="20" id="0tk-dL-dDy"/>
                                             <constraint firstItem="Q3o-Uk-i69" firstAttribute="leading" secondItem="uKT-kj-3PH" secondAttribute="leading" constant="20" id="46U-5R-59n"/>
@@ -742,7 +715,7 @@ To enable this app to send you notification you need to go to your Settings, kli
                                 <viewLayoutGuide key="frameLayoutGuide" id="HKK-S2-24O"/>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="wvC-6z-vHV" firstAttribute="top" secondItem="7pT-uX-Isc" secondAttribute="top" id="3ZS-tq-e9Y"/>
                             <constraint firstItem="7pT-uX-Isc" firstAttribute="trailing" secondItem="wvC-6z-vHV" secondAttribute="trailing" id="fdd-Uc-JbX"/>
@@ -764,6 +737,9 @@ To enable this app to send you notification you need to go to your Settings, kli
         </namedColor>
         <namedColor name="NHS Grey 4">
             <color red="0.84705882352941175" green="0.8666666666666667" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="NHS Grey 5">
+            <color red="0.94117647058823528" green="0.95686274509803926" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

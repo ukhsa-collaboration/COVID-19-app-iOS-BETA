@@ -15,15 +15,26 @@ struct UITestScreenMaker: ScreenMaking {
     func makeViewController(for screen: Screen) -> UIViewController {
         switch screen {
         case .onboarding:
-            return OnboardingViewController.instantiate { viewController in
+            let onboardingViewController = OnboardingViewController.instantiate { viewController in
                 let env = OnboardingEnvironment(mockWithHost: viewController)
                 let coordinator = OnboardingCoordinator(persistence: env.persistence, authorizationManager: env.authorizationManager)
+
                 viewController.inject(env: env, coordinator: coordinator, uiQueue: DispatchQueue.main) { }
-                
             }
+
+            // This cludgey step is ensures that we "show" the onboarding view controller
+            // which triggers the initial state to be requested from its onboarding coordinator
+            // if we don't do this step then the first two onboarding screens are repeated twice
+            let dummyRootViewController = DummyRootViewController()
+            onboardingViewController.showIn(container: dummyRootViewController)
+
+            return onboardingViewController
         }
     }
-    
+}
+
+class DummyRootViewController: UIViewController, ViewControllerContainer {
+    func show(viewController newChild: UIViewController) { }
 }
 
 private extension OnboardingEnvironment {

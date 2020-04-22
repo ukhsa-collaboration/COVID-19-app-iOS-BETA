@@ -36,7 +36,7 @@ class OnboardingViewController: UINavigationController, Storyboarded {
             // Fallback on earlier versions
         }
         
-        (viewControllers.first as! StartNowViewController).inject(persistence: environment.persistence, continueHandler: updateState)
+        (viewControllers.first as! StartNowViewController).inject(continueHandler: updateState)
     }
 
     func updateState() {
@@ -60,7 +60,7 @@ class OnboardingViewController: UINavigationController, Storyboarded {
         switch state {
         case .initial:
             vc = StartNowViewController.instantiate() {
-                $0.inject(persistence: environment.persistence, continueHandler: updateState)
+                $0.inject(continueHandler: updateState)
             }
             
         case .partialPostcode:

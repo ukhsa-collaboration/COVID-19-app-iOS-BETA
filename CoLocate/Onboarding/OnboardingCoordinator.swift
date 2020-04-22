@@ -17,6 +17,7 @@ class OnboardingCoordinator {
 
     private let persistence: Persisting
     private let authorizationManager: AuthorizationManaging
+    private var hasShownInitialScreen = false
 
     init(persistence: Persisting, authorizationManager: AuthorizationManaging) {
         self.persistence = persistence
@@ -24,12 +25,12 @@ class OnboardingCoordinator {
     }
 
     func state(completion: @escaping (State) -> Void) {
-        let allowedDataSharing = persistence.allowedDataSharing
-        guard allowedDataSharing else {
+        guard hasShownInitialScreen || persistence.partialPostcode != nil else {
+            hasShownInitialScreen = true
             completion(.initial)
             return
         }
-        
+
         guard persistence.partialPostcode != nil else {
             completion(.partialPostcode)
             return
@@ -45,7 +46,6 @@ class OnboardingCoordinator {
         case .allowed:
             break
         }
-
 
         authorizationManager.notifications { [weak self] notificationStatus in
             guard let self = self else { return }

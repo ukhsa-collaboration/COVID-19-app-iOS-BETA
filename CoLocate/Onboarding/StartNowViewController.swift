@@ -10,12 +10,10 @@ import UIKit
 
 class StartNowViewController: UIViewController, Storyboarded {
     static let storyboardName = "Onboarding"
-    
-    private var persistence: Persisting! = nil
+
     private var continueHandler: (() -> Void)! = nil
     
-    func inject(persistence: Persisting, continueHandler: @escaping () -> Void) {
-        self.persistence = persistence
+    func inject(continueHandler: @escaping () -> Void) {
         self.continueHandler = continueHandler
     }
 
@@ -23,7 +21,7 @@ class StartNowViewController: UIViewController, Storyboarded {
         super.prepare(for: segue, sender: sender)
         
         if let destination = segue.destination as? PrivacyViewController {
-            destination.inject(persistence: persistence, continueHandler: continueHandler)
+            destination.inject(continueHandler: continueHandler)
         }
     }
 }

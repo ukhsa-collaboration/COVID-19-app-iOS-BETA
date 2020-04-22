@@ -12,8 +12,8 @@ import XCTest
 class OnboardingCoordinatorTests: TestCase {
 
     func testInitialState() {
-        let persistenceDouble = PersistenceDouble(allowedDataSharing: false)
-        let authManagerDouble = AuthorizationManagerDouble(bluetooth: .notDetermined)
+        let persistenceDouble = PersistenceDouble()
+        let authManagerDouble = AuthorizationManagerDouble()
         let onboardingCoordinator = OnboardingCoordinator(
             persistence: persistenceDouble,
             authorizationManager: authManagerDouble
@@ -23,13 +23,15 @@ class OnboardingCoordinatorTests: TestCase {
         onboardingCoordinator.state { state = $0 }
         XCTAssertEqual(state, .initial)
     }
-    
+
     func testPostcode() {
-        let persistenceDouble = PersistenceDouble(allowedDataSharing: true, partialPostcode: nil)
+        let persistenceDouble = PersistenceDouble(partialPostcode: nil)
         let onboardingCoordinator = OnboardingCoordinator(
             persistence: persistenceDouble,
             authorizationManager: AuthorizationManagerDouble()
         )
+
+        advancePastInitialScreen(onboardingCoordinator)
 
         var state: OnboardingCoordinator.State?
         onboardingCoordinator.state { state = $0 }
@@ -39,7 +41,7 @@ class OnboardingCoordinatorTests: TestCase {
     }
 
     func testPermissions_bluetoothNotDetermined() {
-        let persistenceDouble = PersistenceDouble(allowedDataSharing: true, partialPostcode: "1234")
+        let persistenceDouble = PersistenceDouble(partialPostcode: "1234")
         let authManagerDouble = AuthorizationManagerDouble(bluetooth: .notDetermined)
         let onboardingCoordinator = OnboardingCoordinator(
             persistence: persistenceDouble,
@@ -53,7 +55,7 @@ class OnboardingCoordinatorTests: TestCase {
     }
     
     func testBluetoothDenied() {
-        let persistenceDouble = PersistenceDouble(allowedDataSharing: true, partialPostcode: "1234")
+        let persistenceDouble = PersistenceDouble(partialPostcode: "1234")
         let authManagerDouble = AuthorizationManagerDouble(bluetooth: .denied)
         let onboardingCoordinator = OnboardingCoordinator(
             persistence: persistenceDouble,
@@ -67,7 +69,7 @@ class OnboardingCoordinatorTests: TestCase {
     }
 
     func testPermissions_bluetoothGranted_notficationsNotDetermined() {
-        let persistenceDouble = PersistenceDouble(allowedDataSharing: true, partialPostcode: "1234")
+        let persistenceDouble = PersistenceDouble(partialPostcode: "1234")
         let authManagerDouble = AuthorizationManagerDouble(bluetooth: .allowed)
         let onboardingCoordinator = OnboardingCoordinator(
             persistence: persistenceDouble,
@@ -82,7 +84,7 @@ class OnboardingCoordinatorTests: TestCase {
     }
     
     func testNotificationsDenied() {
-        let persistenceDouble = PersistenceDouble(allowedDataSharing: true, partialPostcode: "1234")
+        let persistenceDouble = PersistenceDouble(partialPostcode: "1234")
         let authManagerDouble = AuthorizationManagerDouble(bluetooth: .allowed)
         let onboardingCoordinator = OnboardingCoordinator(
             persistence: persistenceDouble,
@@ -96,7 +98,7 @@ class OnboardingCoordinatorTests: TestCase {
     }
 
     func testDone() {
-        let persistenceDouble = PersistenceDouble(allowedDataSharing: true, partialPostcode: "1234")
+        let persistenceDouble = PersistenceDouble(partialPostcode: "1234")
         let authManagerDouble = AuthorizationManagerDouble(bluetooth: .allowed)
         let onboardingCoordinator = OnboardingCoordinator(
             persistence: persistenceDouble,
@@ -107,5 +109,12 @@ class OnboardingCoordinatorTests: TestCase {
         onboardingCoordinator.state { state = $0 }
         authManagerDouble.notificationsCompletion!(.allowed)
         XCTAssertEqual(state, .done)
+    }
+
+    private func advancePastInitialScreen(_ onboardingCoordinator: OnboardingCoordinator) {
+        var state: OnboardingCoordinator.State?
+        onboardingCoordinator.state { state = $0 }
+
+        XCTAssertEqual(state, .initial)
     }
 }

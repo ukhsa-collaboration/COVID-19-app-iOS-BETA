@@ -12,7 +12,7 @@ class OnboardingTests: ScreenTestCase {
     
     override var screen: Screen { .onboarding }
     
-    func testAuthorizingEverything() {
+    func testEntireOnboardingFlow() {
         // Start screen
         
         startButton.tap()
@@ -20,19 +20,8 @@ class OnboardingTests: ScreenTestCase {
         // Privacy screen
         
         XCTAssert(privacyScreenTitle.exists)
-        
-        XCTAssertFalse(allowDataSharingSwitch.boolValue)
-        
-        XCTAssert(privacyScreenTitle.exists)
-        
-        #warning("Fix accessibility of the switch.")
-        // There are multiple issues with the current implementation:
-        // * The “element” should encompass both the text and the switch
-        // * Probably additional hinting is required to clarify the behaviour
-        allowDataSharingSwitch.tap()
-        
-        XCTAssert(allowDataSharingSwitch.boolValue)
-        
+
+        #warning("FIXME this will be going away soon")
         privacyContinueButton.tap()
         
         XCTAssert(postcodeScreenTitle.exists)
@@ -68,11 +57,6 @@ private extension OnboardingTests {
     var privacyContinueButton: XCUIElement {
         app.buttons["Continue"]
     }
-    
-    var allowDataSharingSwitch: XCUIElement {
-        app.switches["Allow Data Sharing"]
-    }
-    
 }
 
 private extension OnboardingTests {
