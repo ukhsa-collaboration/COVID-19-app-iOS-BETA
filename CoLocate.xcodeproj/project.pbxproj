@@ -87,6 +87,8 @@
 		898FE859243B4FE300210775 /* AuthorizationManaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898FE858243B4FE300210775 /* AuthorizationManaging.swift */; };
 		898FE860243B5AF700210775 /* UITestScreenMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898FE85F243B5AF700210775 /* UITestScreenMaker.swift */; };
 		89BC79EB2434E047002050F8 /* LogsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BC79EA2434E047002050F8 /* LogsViewController.swift */; };
+		89CE566B24503E93004A74D0 /* TrustValidatingURLSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CE566A24503E93004A74D0 /* TrustValidatingURLSessionDelegate.swift */; };
+		89CE566D24504050004A74D0 /* TrustValidatingURLSessionDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CE566C24504050004A74D0 /* TrustValidatingURLSessionDelegateTests.swift */; };
 		89DA61F32449A56F0079A761 /* FIRAnalyticsConnector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89DA61F12449A56F0079A761 /* FIRAnalyticsConnector.framework */; };
 		89DA61F42449A56F0079A761 /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89DA61F22449A56F0079A761 /* FirebaseAnalytics.framework */; };
 		89DA61F62449A5A90079A761 /* GoogleAppMeasurement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89DA61F52449A5A80079A761 /* GoogleAppMeasurement.framework */; };
@@ -274,6 +276,8 @@
 		898FE858243B4FE300210775 /* AuthorizationManaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationManaging.swift; sourceTree = "<group>"; };
 		898FE85F243B5AF700210775 /* UITestScreenMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestScreenMaker.swift; sourceTree = "<group>"; };
 		89BC79EA2434E047002050F8 /* LogsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogsViewController.swift; sourceTree = "<group>"; };
+		89CE566A24503E93004A74D0 /* TrustValidatingURLSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustValidatingURLSessionDelegate.swift; sourceTree = "<group>"; };
+		89CE566C24504050004A74D0 /* TrustValidatingURLSessionDelegateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustValidatingURLSessionDelegateTests.swift; sourceTree = "<group>"; };
 		89DA61F12449A56F0079A761 /* FIRAnalyticsConnector.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FIRAnalyticsConnector.framework; path = Frameworks/FIRAnalyticsConnector.framework; sourceTree = "<group>"; };
 		89DA61F22449A56F0079A761 /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseAnalytics.framework; path = Frameworks/FirebaseAnalytics.framework; sourceTree = "<group>"; };
 		89DA61F52449A5A80079A761 /* GoogleAppMeasurement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleAppMeasurement.framework; path = Frameworks/GoogleAppMeasurement.framework; sourceTree = "<group>"; };
@@ -529,6 +533,7 @@
 				21C417CB242CB15D00DEF3E2 /* ConfirmRegistrationRequest.swift */,
 				F78CEBEC242D0836002254AD /* SecureRequestFactory.swift */,
 				896BE90E244F07FF00B3687C /* PublicKeyValidator.swift */,
+				89CE566A24503E93004A74D0 /* TrustValidatingURLSessionDelegate.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -544,6 +549,7 @@
 				214209D824262B7500C7BFF3 /* SessionHelpers.swift */,
 				F72EBD4E24361E99009F9328 /* URLSessionTests.swift */,
 				896BE911244F11D100B3687C /* PublicKeyValidatorTests.swift */,
+				89CE566C24504050004A74D0 /* TrustValidatingURLSessionDelegateTests.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -1079,6 +1085,7 @@
 				09CAA36A2440FC4500CE93A6 /* PostcodeViewControllerTests.swift in Sources */,
 				F67C5159243E7C1E008E2945 /* SubmitSymptomsViewControllerTests.swift in Sources */,
 				F72EBD4F24361E99009F9328 /* URLSessionTests.swift in Sources */,
+				89CE566D24504050004A74D0 /* TrustValidatingURLSessionDelegateTests.swift in Sources */,
 				0983ACCD243E566800DBB336 /* ErrorForTest.swift in Sources */,
 				F68BFBF7242ACD17008EE68F /* TestHelpers.swift in Sources */,
 			);
@@ -1159,6 +1166,7 @@
 				090DEE10244F8BF600268170 /* BluetoothPermissionDeniedViewController.swift in Sources */,
 				89074B8524378A0D00D67777 /* UITestPayload.swift in Sources */,
 				F6AB2F20243D359F00386D6B /* SubmitSymptomsViewController.swift in Sources */,
+				89CE566B24503E93004A74D0 /* TrustValidatingURLSessionDelegate.swift in Sources */,
 				21F374042434C4BF00926FB8 /* LiveBTLEDebuggerTableViewController.swift in Sources */,
 				AEC6A7BC241BD81A00B0237A /* LogoStrapline.swift in Sources */,
 				214209D52423C83C00C7BFF3 /* PatchContactEventsRequest.swift in Sources */,

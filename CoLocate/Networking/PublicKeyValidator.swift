@@ -9,7 +9,18 @@
 import Foundation
 import CommonCrypto
 
-class PublicKeyValidator {
+protocol TrustValidating {
+    // It’s unfortunate that this API accepts an optional, but we have to do this due to testing limitations:
+    // There’s no sane way to mock `URLProtectionSpace.serverTrust` property. To be able to have reasonable tests,
+    // we need to decouple where we receive it (in the `URLSessionDelegate`) from where we unwrap it.
+    //
+    // There are other options, like implementing a `URLAuthenticationChallenge`-like protocol that returns a
+    // `URLProtectionSpace`-like protocol, it’s not worth it (we wouldn’t be able to test the correct delegate method
+    // with that anyway).
+    func canAccept(_ trust: SecTrust?) -> Bool
+}
+
+class PublicKeyValidator: TrustValidating {
     
     private let trustedKeyHashes: Set<String>
     
