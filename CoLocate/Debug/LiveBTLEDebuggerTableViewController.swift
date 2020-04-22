@@ -17,7 +17,7 @@ class LiveBTLEDebuggerTableViewController: UITableViewController {
     
     var observation: NSKeyValueObservation?
     
-    var sonarIds: [Data] = []
+    var encryptedRemoteConactIds: [Data] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,26 +28,26 @@ class LiveBTLEDebuggerTableViewController: UITableViewController {
         
         observation = observe(\.repository._contactEventCount) { object, change in
             DispatchQueue.main.async {
-                self.sonarIds = self.repository.contactEvents.compactMap({ $0.encryptedRemoteContactId })
+                self.encryptedRemoteConactIds = self.repository.contactEvents.compactMap({ $0.encryptedRemoteContactId })
                 self.tableView.reloadData()
             }
         }
 
-        #warning("change sonar ids to remote broadcast id here")
-        sonarIds = repository.contactEvents.compactMap({ $0.encryptedRemoteContactId })
+        encryptedRemoteConactIds = repository.contactEvents.compactMap({ $0.encryptedRemoteContactId })
         tableView.reloadData()
     }
     
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
-        case 0: return "My Device"
-        case 1: return "Visible Devices"
+        case 0: return "My Sonar ID"
+        case 1: return "My Encrypted Broadcast ID"
+        case 2: return "Visible Devices"
         default: preconditionFailure("No section \(section)")
         }
     }
@@ -55,7 +55,8 @@ class LiveBTLEDebuggerTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0: return 1
-        case 1: return sonarIds.count
+        case 1: return 1
+        case 2: return encryptedRemoteConactIds.count
             
         default:
             preconditionFailure("No section \(section)")
@@ -67,14 +68,18 @@ class LiveBTLEDebuggerTableViewController: UITableViewController {
 
         cell.textLabel?.numberOfLines = 1
         switch (indexPath.section, indexPath.row) {
-            
+
         case (0, _):
+            let sonarId = persistence.registration?.id.uuidString ?? "<not yet registered>"
+            cell.textLabel?.text = sonarId
+            cell.gradientColorData = sonarId.data(using: .utf8)
+        case (1, _):
             cell.textLabel?.text = broadcastIdGenerator.broadcastIdentifier()?.base64EncodedString()
             cell.gradientColorData = broadcastIdGenerator.broadcastIdentifier()
 
-        case (1, let row):
-            cell.textLabel?.text = sonarIds[row].base64EncodedString()
-            cell.gradientColorData = sonarIds[row]
+        case (2, let row):
+            cell.textLabel?.text = encryptedRemoteConactIds[row].base64EncodedString()
+            cell.gradientColorData = encryptedRemoteConactIds[row]
             
         default:
             preconditionFailure("No cell at indexPath \(indexPath)")

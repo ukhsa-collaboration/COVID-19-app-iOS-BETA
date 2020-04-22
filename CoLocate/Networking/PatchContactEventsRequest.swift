@@ -26,11 +26,11 @@ class PatchContactEventsRequest: SecureRequest, Request {
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
 
-        let contactEvents = JSONWrapper(contactEvents: contactEvents)
-        let contactEventsData = try! encoder.encode(contactEvents)
-        method = .patch(data: contactEventsData)
+        let requestBody = JSONWrapper(contactEvents: contactEvents)
+        let bodyAsData = try! encoder.encode(requestBody)
+        method = .patch(data: bodyAsData)
 
-        super.init(key, contactEventsData, [
+        super.init(key, bodyAsData, [
             "Accept": "application/json",
             "Content-Type": "application/json"
         ])
