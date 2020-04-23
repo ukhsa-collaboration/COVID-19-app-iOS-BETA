@@ -14,7 +14,8 @@ class ContactEventUploaderTests: XCTestCase {
     func testUploadRequest() {
         let expectedBroadcastId = "opaque bytes that only the server can decrypt".data(using: .utf8)!
         let contactEvent = ContactEvent(encryptedRemoteContactId: expectedBroadcastId)
-        let contactEventRepository = MockContactEventRepository(contactEvents: [contactEvent])
+        let contactEventRepository = ContactEventRepositoryDouble()
+        contactEventRepository.contactEvents = [contactEvent]
         let session = SessionDouble()
 
         let uploader = ContactEventUploader(
