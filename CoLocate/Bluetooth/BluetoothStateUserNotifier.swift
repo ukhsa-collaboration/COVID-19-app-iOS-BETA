@@ -1,5 +1,5 @@
 //
-//  BluetoothStateObserver.swift
+//  BluetoothStateUserNotifier.swift
 //  CoLocate
 //
 //  Created by NHSX.
@@ -9,29 +9,36 @@
 import UIKit
 import CoreBluetooth
 
-struct BluetoothStateUserNotifier: BTLEListenerStateDelegate {
+class BluetoothStateUserNotifier {
     
     let appStateReader: ApplicationStateReading
     let scheduler: LocalNotificationScheduling
     let uiQueue: TestableQueue
 
-    init(appStateReader: ApplicationStateReading, scheduler: LocalNotificationScheduling, uiQueue: TestableQueue = DispatchQueue.main) {
+    init(
+        appStateReader: ApplicationStateReading,
+        bluetoothStateObserver: BluetoothStateObserver,
+        scheduler: LocalNotificationScheduling,
+        uiQueue: TestableQueue = DispatchQueue.main
+    ) {
         self.appStateReader = appStateReader
         self.scheduler = scheduler
         self.uiQueue = uiQueue
-    }
+        
+        bluetoothStateObserver.notifyOnStateChanges { state in
+            guard state == .poweredOff else { return .keepObserving }
 
-    func btleListener(_ listener: BTLEListener, didUpdateState state: CBManagerState) {
-        guard state == .poweredOff else { return }
+            uiQueue.async {
+                guard self.appStateReader.applicationState == .background else { return }
 
-        uiQueue.async {
-            guard self.appStateReader.applicationState == .background else { return }
+                self.scheduler.scheduleLocalNotification(
+                    body: "To keep yourself secure, please re-enable bluetooth",
+                    interval: 3,
+                    identifier: "bluetooth.disabled.please"
+                )
+            }
             
-            self.scheduler.scheduleLocalNotification(
-                body: "To keep yourself secure, please re-enable bluetooth",
-                interval: 3,
-                identifier: "bluetooth.disabled.please"
-            )
+            return .keepObserving
         }
     }
 }

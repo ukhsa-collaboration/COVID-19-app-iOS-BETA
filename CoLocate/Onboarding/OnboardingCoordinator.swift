@@ -10,7 +10,7 @@ import CoreBluetooth
 import Foundation
 import Logging
 
-class OnboardingCoordinator: BluetoothStateObserverDelegate {
+class OnboardingCoordinator {
     private typealias BluetoothCompletion = (State?) -> Void
 
     enum State: Equatable {
@@ -20,18 +20,16 @@ class OnboardingCoordinator: BluetoothStateObserverDelegate {
     private let persistence: Persisting
     private let authorizationManager: AuthorizationManaging
     private var hasShownInitialScreen = false
-    private var bluetoothStateObserver: BluetoothStateObserver
-    private var pendingBluetoothCompletions: [BluetoothCompletion] = []
+    private var bluetoothNursery: BluetoothNursery
 
     init(
         persistence: Persisting,
         authorizationManager: AuthorizationManaging,
-        bluetoothStateObserver: BluetoothStateObserver
+        bluetoothNursery: BluetoothNursery
     ) {
         self.persistence = persistence
         self.authorizationManager = authorizationManager
-        self.bluetoothStateObserver = bluetoothStateObserver
-        self.bluetoothStateObserver.delegate = self
+        self.bluetoothNursery = bluetoothNursery
     }
 
     func state(completion: @escaping (State) -> Void) {
@@ -45,18 +43,7 @@ class OnboardingCoordinator: BluetoothStateObserverDelegate {
             completion(.partialPostcode)
             return
         }
-        
-        switch self.authorizationManager.bluetooth {
-        case .notDetermined:
-            completion(.permissions)
-            return
-        case .denied:
-            completion(.bluetoothDenied)
-            return
-        case .allowed:
-            break
-        }
-        
+                
         maybeStateFromBluetooth { [weak self] state in
             if state != nil {
                 completion(state!)
@@ -84,38 +71,28 @@ class OnboardingCoordinator: BluetoothStateObserverDelegate {
         case .denied:
             completion(.bluetoothDenied)
         case .allowed:
-            switch self.bluetoothStateObserver.state() {
-            case .poweredOff:
-                completion(.bluetoothOff)
-            case .unknown:
-                // bluetoothStateObserver(didChangeState) should get called soon with the new state.
-                // Queue up the completion to be called when it comes through.
-                pendingBluetoothCompletions.append(completion)
-            default:
+            guard let btStateObserver = self.bluetoothNursery.stateObserver else {
+                logger.error("bluetoothNursery.stateObserver was nil even after we determined permissions")
+                // Assume that Bluetooth is powered on
                 completion(nil)
+                return
+            }
+            
+            btStateObserver.notifyOnStateChanges { btState in
+                switch btState {
+                case .poweredOff:
+                    completion(.bluetoothOff)
+                    return .stopObserving
+                case .unknown:
+                    return .keepObserving
+                default:
+                    completion(nil)
+                    return .stopObserving
+                }
             }
         }
     }
     
-    private func callPendingBluetoothCompletions(state: State?) {
-        while let c = pendingBluetoothCompletions.popLast() {
-            c(state)
-        }
-    }
-    
-    func bluetoothStateObserver(_ sender: BluetoothStateObserver, didChangeState state: CBManagerState) {
-        switch state {
-        case .poweredOff:
-            callPendingBluetoothCompletions(state: .bluetoothOff)
-        case .unknown:
-            // Keep waiting
-            logger.info("CBManagerState changed to unknown")
-            break;
-        default:
-            callPendingBluetoothCompletions(state: nil)
-        }
-    }
-
 }
 
 

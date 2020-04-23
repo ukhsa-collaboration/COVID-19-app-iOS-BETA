@@ -82,7 +82,23 @@ class PermissionsViewController: UIViewController, Storyboarded {
         
         #else
 
-        bluetoothNursery.createListener(stateDelegate: self)
+        // Trigger the permissions prompt
+        bluetoothNursery.createListener()
+        // Don't query the status until the user has responded
+        bluetoothNursery.stateObserver!.notifyOnStateChanges { [weak self] _ in
+            guard let self = self else { return .stopObserving }
+            
+            switch self.authManager.bluetooth {
+            case .notDetermined:
+                return .keepObserving
+            case .denied:
+                self.continueHandler()
+                return .stopObserving
+            case .allowed:
+                self.maybeRequestNotificationPermissions()
+                return .stopObserving
+            }
+        }
         
         #endif
     }
@@ -115,21 +131,6 @@ class PermissionsViewController: UIViewController, Storyboarded {
             }
         }
     }
-}
-
-// MARK: - BTLEBroadcasterStateDelegate
-extension PermissionsViewController: BTLEListenerStateDelegate {
-    func btleListener(_ listener: BTLEListener, didUpdateState state: CBManagerState) {
-        switch authManager.bluetooth {
-        case .notDetermined:
-            return
-        case .denied:
-            self.continueHandler()
-        case .allowed:
-            maybeRequestNotificationPermissions()
-        }
-    }
-    
 }
 
 // MARK: - Logger

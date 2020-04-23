@@ -9,34 +9,40 @@
 import UIKit
 import CoreBluetooth
 
-protocol BluetoothStateObserver {
-    func state() -> CBManagerState
-    var delegate: BluetoothStateObserverDelegate? { get set }
-}
-
-protocol BluetoothStateObserverDelegate {
-    func bluetoothStateObserver(_ sender: BluetoothStateObserver, didChangeState state: CBManagerState)
-}
-
-// Wraps CBCentralManager's state discovery functionality, mainly for testability
-class ConcreteBluetoothStateObserver: NSObject, BluetoothStateObserver, CBCentralManagerDelegate {
+class BluetoothStateObserver: BTLEListenerStateDelegate {
     
-    private var centralManager: CBCentralManager?
-    var delegate: BluetoothStateObserverDelegate?
+    enum Action {
+        case keepObserving
+        case stopObserving
+    }
         
-    func state() -> CBManagerState {
-        // Constructing a CBCentralManager triggers a permissions prompt if the user hasn't
-        // already granted permission, so don't create it until we need to. This gives us a
-        // chance to show our own UI first.
-        if centralManager == nil {
-            centralManager = CBCentralManager(delegate: self, queue: nil, options: [CBCentralManagerOptionShowPowerAlertKey: true])
+    private var callbacks: [(CBManagerState) -> Action]
+    private var lastKnownState: CBManagerState
+    
+    init(initialState: CBManagerState) {
+        callbacks = []
+        lastKnownState = initialState
+    }
+        
+    // Callback will be called immediately with the last known state and every time the state changes in the future.
+    func notifyOnStateChanges(_ callback: @escaping (CBManagerState) -> Action) {
+        if callback(lastKnownState) == .keepObserving {
+            callbacks.append(callback)
         }
-        
-        return centralManager!.state
     }
     
-    func centralManagerDidUpdateState(_ central: CBCentralManager) {
-        delegate?.bluetoothStateObserver(self, didChangeState: central.state)
+    func btleListener(_ listener: BTLEListener, didUpdateState state: CBManagerState) {
+        lastKnownState = state
+        
+        var callbacksToKeep: [(CBManagerState) -> Action] = []
+        
+        for entry in callbacks {
+            if entry(lastKnownState) == .keepObserving {
+                callbacksToKeep.append(entry)
+            }
+        }
+
+        callbacks = callbacksToKeep
     }
 
 }

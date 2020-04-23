@@ -31,8 +31,9 @@ class RootViewControllerTests: TestCase {
     func testOnboardingFinished() {
         let authMgr = AuthorizationManagerDouble(bluetooth: .allowed)
         let persistence = PersistenceDouble(allowedDataSharing: true, registration: nil, partialPostcode: "1234")
-        let bluetoothStateObserver = BluetoothStateObserverDouble(initialState: .unknown)
-        let rootVC = makeRootVC(persistence: persistence, authorizationManager: authMgr, bluetoothStateObserver: bluetoothStateObserver)
+        let bluetoothNursery = BluetoothNurseryDouble()
+        bluetoothNursery.createListener()
+        let rootVC = makeRootVC(persistence: persistence, authorizationManager: authMgr, bluetoothNursery: bluetoothNursery)
         XCTAssertNotNil(rootVC.view)
         
         guard (rootVC.children.first as? OnboardingViewController) != nil else {
@@ -40,8 +41,7 @@ class RootViewControllerTests: TestCase {
             return
         }
         
-        XCTAssertNotNil(bluetoothStateObserver.delegate)
-        bluetoothStateObserver.delegate?.bluetoothStateObserver(bluetoothStateObserver, didChangeState: .poweredOn)
+        bluetoothNursery.stateObserver?.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
         XCTAssertNotNil(authMgr.notificationsCompletion)
         authMgr.notificationsCompletion?(.allowed)
 
@@ -148,7 +148,7 @@ fileprivate func makeRootVC(
     authorizationManager: AuthorizationManaging = AuthorizationManagerDouble(),
     remoteNotificationDispatcher: RemoteNotificationDispatcher = makeDispatcher(),
     notificationCenter: NotificationCenter = NotificationCenter(),
-    bluetoothStateObserver: BluetoothStateObserver = BluetoothStateObserverDouble()
+    bluetoothNursery: BluetoothNursery = BluetoothNurseryDouble()
 ) -> RootViewController {
     let vc = RootViewController()
     vc.inject(
@@ -157,8 +157,7 @@ fileprivate func makeRootVC(
         remoteNotificationManager: RemoteNotificationManagerDouble(dispatcher: remoteNotificationDispatcher),
         notificationCenter: notificationCenter,
         registrationService: RegistrationServiceDouble(),
-        bluetoothNursery: BluetoothNurseryDouble(),
-        bluetoothStateObserver: bluetoothStateObserver,
+        bluetoothNursery: bluetoothNursery,
         session: SessionDouble(),
         uiQueue: QueueDouble()
     )

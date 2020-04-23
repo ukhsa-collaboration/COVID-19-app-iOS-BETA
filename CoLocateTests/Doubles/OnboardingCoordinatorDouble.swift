@@ -10,7 +10,7 @@
 
 class OnboardingCoordinatorDouble: OnboardingCoordinator {
     convenience init() {
-        self.init(persistence: Persistence.shared, authorizationManager: AuthorizationManager(), bluetoothStateObserver: BluetoothStateObserverDouble())
+        self.init(persistence: Persistence.shared, authorizationManager: AuthorizationManager(), bluetoothNursery: BluetoothNurseryDouble())
     }
     var stateCompletion: ((OnboardingCoordinator.State) -> Void)?
     override func state(completion: @escaping (OnboardingCoordinator.State) -> Void) {

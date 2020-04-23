@@ -70,7 +70,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             notificationCenter: notificationCenter,
             registrationService: registrationService,
             bluetoothNursery: bluetoothNursery,
-            bluetoothStateObserver: ConcreteBluetoothStateObserver(),
             session: urlSession,
             uiQueue: DispatchQueue.main
         )
@@ -80,10 +79,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         window?.makeKeyAndVisible()
         
         if let registration = persistence.registration {
-            bluetoothNursery.createListener(stateDelegate: nil)
+            bluetoothNursery.createListener()
             bluetoothNursery.createBroadcaster(stateDelegate: nil, registration: registration)
         } else if authorizationManager.bluetooth != .notDetermined {
-            bluetoothNursery.createListener(stateDelegate: nil)
+            bluetoothNursery.createListener()
         }
 
         return true

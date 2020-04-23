@@ -18,7 +18,7 @@ class OnboardingCoordinatorTests: TestCase {
         let onboardingCoordinator = OnboardingCoordinator(
             persistence: persistenceDouble,
             authorizationManager: authManagerDouble,
-            bluetoothStateObserver: BluetoothStateObserverDouble()
+            bluetoothNursery: BluetoothNurseryDouble()
         )
 
         var state: OnboardingCoordinator.State?
@@ -31,7 +31,7 @@ class OnboardingCoordinatorTests: TestCase {
         let onboardingCoordinator = OnboardingCoordinator(
             persistence: persistenceDouble,
             authorizationManager: AuthorizationManagerDouble(),
-            bluetoothStateObserver: BluetoothStateObserverDouble()
+            bluetoothNursery: BluetoothNurseryDouble()
         )
 
         advancePastInitialScreen(onboardingCoordinator)
@@ -49,7 +49,7 @@ class OnboardingCoordinatorTests: TestCase {
         let onboardingCoordinator = OnboardingCoordinator(
             persistence: persistenceDouble,
             authorizationManager: authManagerDouble,
-            bluetoothStateObserver: BluetoothStateObserverDouble()
+            bluetoothNursery: BluetoothNurseryDouble()
         )
 
         var state: OnboardingCoordinator.State?
@@ -64,7 +64,7 @@ class OnboardingCoordinatorTests: TestCase {
         let onboardingCoordinator = OnboardingCoordinator(
             persistence: persistenceDouble,
             authorizationManager: authManagerDouble,
-            bluetoothStateObserver: BluetoothStateObserverDouble()
+            bluetoothNursery: BluetoothNurseryDouble()
         )
 
         var state: OnboardingCoordinator.State?
@@ -72,54 +72,42 @@ class OnboardingCoordinatorTests: TestCase {
         
         XCTAssertEqual(state, .bluetoothDenied)
     }
-    
-    func testBluetoothOff_initially() {
+        
+    func testBluetoothOff() {
         let persistenceDouble = PersistenceDouble(allowedDataSharing: true, partialPostcode: "1234")
         let authManagerDouble = AuthorizationManagerDouble(bluetooth: .allowed)
-        let bluetoothStateObserver = BluetoothStateObserverDouble(initialState: .poweredOff)
+        let bluetoothNursery = BluetoothNurseryDouble()
         let onboardingCoordinator = OnboardingCoordinator(
             persistence: persistenceDouble,
             authorizationManager: authManagerDouble,
-            bluetoothStateObserver: bluetoothStateObserver
+            bluetoothNursery: bluetoothNursery
         )
+        
+        bluetoothNursery.createListener()
 
         var state: OnboardingCoordinator.State?
         onboardingCoordinator.state { state = $0 }
-        
-        XCTAssertEqual(state, .bluetoothOff)
-    }
-    
-    func testBluetoothOff_afterDelay() {
-        let persistenceDouble = PersistenceDouble(allowedDataSharing: true, partialPostcode: "1234")
-        let authManagerDouble = AuthorizationManagerDouble(bluetooth: .allowed)
-        let bluetoothStateObserver = BluetoothStateObserverDouble(initialState: .unknown)
-        let onboardingCoordinator = OnboardingCoordinator(
-            persistence: persistenceDouble,
-            authorizationManager: authManagerDouble,
-            bluetoothStateObserver: bluetoothStateObserver
-        )
-
-        var state: OnboardingCoordinator.State?
-        onboardingCoordinator.state { state = $0 }
-        
         XCTAssertNil(state)
         
-        bluetoothStateObserver.delegate?.bluetoothStateObserver(bluetoothStateObserver, didChangeState: .poweredOff)
-        
+        bluetoothNursery.stateObserver?.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOff)
         XCTAssertEqual(state, .bluetoothOff)
     }
 
     func testPermissions_bluetoothGranted_notficationsNotDetermined() {
         let persistenceDouble = PersistenceDouble(partialPostcode: "1234")
         let authManagerDouble = AuthorizationManagerDouble(bluetooth: .allowed)
+        let bluetoothNursery = BluetoothNurseryDouble()
         let onboardingCoordinator = OnboardingCoordinator(
             persistence: persistenceDouble,
             authorizationManager: authManagerDouble,
-            bluetoothStateObserver: BluetoothStateObserverDouble(initialState: .poweredOn)
+            bluetoothNursery: bluetoothNursery
         )
+
+        bluetoothNursery.createListener()
 
         var state: OnboardingCoordinator.State?
         onboardingCoordinator.state { state = $0 }
+        bluetoothNursery.stateObserver?.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
         authManagerDouble.notificationsCompletion?(.notDetermined)
         
         XCTAssertEqual(state, .permissions)
@@ -128,14 +116,18 @@ class OnboardingCoordinatorTests: TestCase {
     func testNotificationsDenied() {
         let persistenceDouble = PersistenceDouble(partialPostcode: "1234")
         let authManagerDouble = AuthorizationManagerDouble(bluetooth: .allowed)
+        let bluetoothNursery = BluetoothNurseryDouble()
         let onboardingCoordinator = OnboardingCoordinator(
             persistence: persistenceDouble,
             authorizationManager: authManagerDouble,
-            bluetoothStateObserver: BluetoothStateObserverDouble(initialState: .poweredOn)
+            bluetoothNursery: bluetoothNursery
         )
+        
+        bluetoothNursery.createListener()
 
         var state: OnboardingCoordinator.State?
         onboardingCoordinator.state { state = $0 }
+        bluetoothNursery.stateObserver?.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
         authManagerDouble.notificationsCompletion?(.denied)
         XCTAssertEqual(state, .notificationsDenied)
     }
@@ -143,14 +135,16 @@ class OnboardingCoordinatorTests: TestCase {
     func testDone() {
         let persistenceDouble = PersistenceDouble(partialPostcode: "1234")
         let authManagerDouble = AuthorizationManagerDouble(bluetooth: .allowed)
+        let bluetoothNursery = BluetoothNurseryDouble()
         let onboardingCoordinator = OnboardingCoordinator(
             persistence: persistenceDouble,
             authorizationManager: authManagerDouble,
-            bluetoothStateObserver: BluetoothStateObserverDouble(initialState: .poweredOn)
+            bluetoothNursery: bluetoothNursery
         )
 
         var state: OnboardingCoordinator.State?
         onboardingCoordinator.state { state = $0 }
+        bluetoothNursery.stateObserver?.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
         authManagerDouble.notificationsCompletion?(.allowed)
         XCTAssertEqual(state, .done)
     }

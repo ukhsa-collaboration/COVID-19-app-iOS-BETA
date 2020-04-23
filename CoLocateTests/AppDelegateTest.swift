@@ -11,17 +11,17 @@ import XCTest
 
 class AppDelegateTest: XCTestCase {
 
-    var appDelegate: AppDelegate!
+    private var appDelegate: AppDelegate!
 
-    var nursery: MockBluetoothNursery!
-    var persistence: PersistenceDouble!
-    var dispatcher: RemoteNotificationDispatcherDouble!
-    var remoteNotificationManager: RemoteNotificationManagerDouble!
-    var registrationService: RegistrationServiceDouble!
-    var authorizationManager: AuthorizationManagerDouble!
+    private var nursery: BluetoothNurseryDouble!
+    private var persistence: PersistenceDouble!
+    private var dispatcher: RemoteNotificationDispatcherDouble!
+    private var remoteNotificationManager: RemoteNotificationManagerDouble!
+    private var registrationService: RegistrationServiceDouble!
+    private var authorizationManager: AuthorizationManagerDouble!
     
     override func setUp() {
-        nursery = MockBluetoothNursery()
+        nursery = BluetoothNurseryDouble()
         persistence = PersistenceDouble()
         dispatcher = RemoteNotificationDispatcherDouble()
         registrationService = RegistrationServiceDouble()
@@ -69,45 +69,8 @@ class AppDelegateTest: XCTestCase {
 
 }
 
-class MockBluetoothNursery: BluetoothNursery {
-    
-    var contactEventRepository: ContactEventRepository = DummyContactEventRepository()
-    
-    var contactEventPersister: ContactEventPersister = DummyContactEventPersister()
-    
-    var createListenerCalled = false
-    var createBroadcasterCalled = false
-    
-    func createListener(stateDelegate: BTLEListenerStateDelegate?) {
-        self.createListenerCalled = true
-    }
-    
-    func createBroadcaster(stateDelegate: BTLEBroadcasterStateDelegate?, registration: Registration) {
-        self.createBroadcasterCalled = true
-    }
-    
-}
 
-class DummyContactEventRepository: ContactEventRepository {
-    var contactEvents: [ContactEvent] = []
-    func reset() {
-    }
-    func removeExpiredContactEvents(ttl: Double) {
-    }
-    
-    func btleListener(_ listener: BTLEListener, didFind sonarId: Data, forPeripheral peripheral: BTLEPeripheral) {
-    }
-    func btleListener(_ listener: BTLEListener, didReadRSSI RSSI: Int, forPeripheral peripheral: BTLEPeripheral) {
-    }
-}
-
-class DummyContactEventPersister: ContactEventPersister {
-    var items: [UUID: ContactEvent] = [:]
-    func reset() {
-    }
-}
-
-class RemoteNotificationDispatcherDouble: RemoteNotificationDispatching {
+fileprivate class RemoteNotificationDispatcherDouble: RemoteNotificationDispatching {
     var pushToken: String?
 
     func registerHandler(forType type: RemoteNotificationType, handler: @escaping RemoteNotificationHandler) {

@@ -15,9 +15,10 @@ class PermissionsViewControllerTests: TestCase {
     func testBluetoothNotDetermined_callsContinueHandlerWhenBothGranted() {
         let authManagerDouble = AuthorizationManagerDouble(bluetooth: .notDetermined)
         let remoteNotificationManagerDouble = RemoteNotificationManagerDouble()
+        let nursery = BluetoothNurseryDouble()
         let vc = PermissionsViewController.instantiate()
         var continued = false
-        vc.inject(authManager: authManagerDouble, remoteNotificationManager: remoteNotificationManagerDouble, bluetoothNursery: BluetoothNurseryDouble(), uiQueue: QueueDouble()) {
+        vc.inject(authManager: authManagerDouble, remoteNotificationManager: remoteNotificationManagerDouble, bluetoothNursery: nursery, uiQueue: QueueDouble()) {
             continued = true
         }
 
@@ -30,7 +31,7 @@ class PermissionsViewControllerTests: TestCase {
         // We skip Bluetooth on the simulator.
         #else
         authManagerDouble.bluetooth = .allowed
-        vc.btleListener(DummyBTLEListener(), didUpdateState: .poweredOn)
+        nursery.stateObserver?.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
         #endif
         
         XCTAssertFalse(continued)
@@ -46,9 +47,10 @@ class PermissionsViewControllerTests: TestCase {
         
         let authManagerDouble = AuthorizationManagerDouble(bluetooth: .notDetermined)
         let remoteNotificationManagerDouble = RemoteNotificationManagerDouble()
+        let nursery = BluetoothNurseryDouble()
         let vc = PermissionsViewController.instantiate()
         var continued = false
-        vc.inject(authManager: authManagerDouble, remoteNotificationManager: remoteNotificationManagerDouble, bluetoothNursery: BluetoothNurseryDouble(), uiQueue: QueueDouble()) {
+        vc.inject(authManager: authManagerDouble, remoteNotificationManager: remoteNotificationManagerDouble, bluetoothNursery: nursery, uiQueue: QueueDouble()) {
             continued = true
         }
 
@@ -58,7 +60,7 @@ class PermissionsViewControllerTests: TestCase {
         vc.didTapContinue()
         
         authManagerDouble.bluetooth = .denied
-        vc.btleListener(DummyBTLEListener(), didUpdateState: .poweredOn)
+        nursery.stateObserver?.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
 
         XCTAssert(continued)
         

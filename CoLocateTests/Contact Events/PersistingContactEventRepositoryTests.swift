@@ -19,12 +19,12 @@ class PersistingContactEventRepositoryTests: XCTestCase {
     let broadcastId2 = Data(base64Encoded: "Z29vZGJ5ZQo=")!
     let broadcastId3 = Data(base64Encoded: "Z29vZGJ5dGUK")!
     
-    var listener: TestBTLEListener!
+    var listener: BTLEListenerDouble!
     var persister: ContactEventPersisterDouble!
     var repository: PersistingContactEventRepository!
 
     override func setUp() {
-        listener = TestBTLEListener()
+        listener = BTLEListenerDouble()
         persister = ContactEventPersisterDouble()
         repository = PersistingContactEventRepository(persister: persister)
     }

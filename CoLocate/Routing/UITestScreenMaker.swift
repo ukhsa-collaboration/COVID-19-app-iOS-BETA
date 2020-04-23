@@ -17,8 +17,9 @@ struct UITestScreenMaker: ScreenMaking {
         case .onboarding:
             let onboardingViewController = OnboardingViewController.instantiate { viewController in
                 let env = OnboardingEnvironment(mockWithHost: viewController)
-                let coordinator = OnboardingCoordinator(persistence: env.persistence, authorizationManager: env.authorizationManager, bluetoothStateObserver: ConcreteBluetoothStateObserver())
-                viewController.inject(env: env, coordinator: coordinator, bluetoothNursery: NoOpBluetoothNursery(), uiQueue: DispatchQueue.main) { }
+                let bluetoothNursery = NoOpBluetoothNursery()
+                let coordinator = OnboardingCoordinator(persistence: env.persistence, authorizationManager: env.authorizationManager, bluetoothNursery: bluetoothNursery)
+                viewController.inject(env: env, coordinator: coordinator, bluetoothNursery: bluetoothNursery, uiQueue: DispatchQueue.main) { }
             }
 
             // This cludgey step is ensures that we "show" the onboarding view controller
@@ -136,12 +137,13 @@ private class EphemeralRemoteNotificationManager: RemoteNotificationManager {
 private struct MockError: Error {}
 
 private class NoOpBluetoothNursery: BluetoothNursery {
+    var stateObserver: BluetoothStateObserver?
     var contactEventRepository: ContactEventRepository = NoOpContactEventRepository()
     var contactEventPersister: ContactEventPersister = NoOpContactEventPersister()
     
     func createBroadcaster(stateDelegate: BTLEBroadcasterStateDelegate?, registration: Registration) {
     }
-    func createListener(stateDelegate: BTLEListenerStateDelegate?) {
+    func createListener() {
     }
 
     func restoreListener(_ restorationIdentifiers: [String]) {
