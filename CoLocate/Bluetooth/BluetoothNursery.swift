@@ -17,6 +17,9 @@ protocol BluetoothNursery {
     
     func startBroadcaster(stateDelegate: BTLEBroadcasterStateDelegate?)
     func startListener(stateDelegate: BTLEListenerStateDelegate?)
+
+    func recreateListener(launchOptions: [UIApplication.LaunchOptionsKey: Any]?)
+    func recreateBroadcaster(launchOptions: [UIApplication.LaunchOptionsKey: Any]?)
 }
 
 
@@ -55,6 +58,8 @@ class ConcreteBluetoothNursery: BluetoothNursery {
         contactEventExpiryHandler = ContactEventExpiryHandler(notificationCenter: notificationCenter, contactEventRepository: contactEventRepository)
     }
 
+    // MARK: - BTLEListener
+
     func startListener(stateDelegate: BTLEListenerStateDelegate?) {
         startListenerCalled = true
         listener = ConcreteBTLEListener(persistence: persistence)
@@ -66,6 +71,12 @@ class ConcreteBluetoothNursery: BluetoothNursery {
         (listener as? ConcreteBTLEListener)?.stateDelegate = stateDelegate
         (listener as? ConcreteBTLEListener)?.delegate = contactEventRepository
     }
+
+    func recreateListener(launchOptions: [UIApplication.LaunchOptionsKey : Any]?) {
+        #warning("needs an implementation here")
+    }
+
+    // MARK: - BTLEBroadaster
     
     func startBroadcaster(stateDelegate: BTLEBroadcasterStateDelegate?) {
         startBroadcasterCalled = true
@@ -77,7 +88,10 @@ class ConcreteBluetoothNursery: BluetoothNursery {
 
         broadcaster?.start()
     }
-    
+
+    func recreateBroadcaster(launchOptions: [UIApplication.LaunchOptionsKey : Any]?) {
+        #warning("needs an implementation here")
+    }
 }
 
 // MARK: - Logging

@@ -79,6 +79,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         window?.makeKeyAndVisible()
 
         if let registration = persistence.registration {
+            bluetoothNursery.startListener(stateDelegate: nil)
+            bluetoothNursery.startBroadcaster(stateDelegate: nil)
 //            bluetoothNursery.startBroadcastingAndListening(registration: registration)
         }
 

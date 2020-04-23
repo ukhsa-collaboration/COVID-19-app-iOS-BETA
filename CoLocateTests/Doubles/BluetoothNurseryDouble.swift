@@ -18,4 +18,10 @@ class BluetoothNurseryDouble: BluetoothNursery {
     }
     func startListener(stateDelegate: BTLEListenerStateDelegate?) {
     }
+
+    func recreateListener(launchOptions: [UIApplication.LaunchOptionsKey : Any]?) {
+    }
+
+    func recreateBroadcaster(launchOptions: [UIApplication.LaunchOptionsKey : Any]?) {
+    }
 }

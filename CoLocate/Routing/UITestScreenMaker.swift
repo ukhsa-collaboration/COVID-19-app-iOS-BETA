@@ -135,7 +135,6 @@ private class EphemeralRemoteNotificationManager: RemoteNotificationManager {
 private struct MockError: Error {}
 
 private class NoOpBluetoothNursery: BluetoothNursery {
-    
     var contactEventRepository: ContactEventRepository = NoOpContactEventRepository()
     var contactEventPersister: ContactEventPersister = NoOpContactEventPersister()
     
@@ -144,6 +143,11 @@ private class NoOpBluetoothNursery: BluetoothNursery {
     func startListener(stateDelegate: BTLEListenerStateDelegate?) {
     }
 
+    func recreateListener(launchOptions: [UIApplication.LaunchOptionsKey : Any]?) {
+    }
+
+    func recreateBroadcaster(launchOptions: [UIApplication.LaunchOptionsKey : Any]?) {
+    }
 }
 
 private class NoOpContactEventRepository: ContactEventRepository {
