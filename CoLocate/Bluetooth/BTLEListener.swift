@@ -37,7 +37,7 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
     
     let rssiSamplingInterval: TimeInterval = 20.0
     
-    let persistence: Persistence
+    let persistence: Persisting
     
     var stateDelegate: BTLEListenerStateDelegate?
     var delegate: BTLEListenerDelegate?
@@ -46,7 +46,7 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
     
     var peripherals: [UUID: CBPeripheral] = [:]
     
-    init(persistence: Persistence) {
+    init(persistence: Persisting) {
         self.persistence = persistence
     }
 

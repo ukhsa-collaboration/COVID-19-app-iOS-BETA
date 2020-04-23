@@ -22,14 +22,14 @@ fileprivate let registrationTimeLimitSecs = 20.0
 class ConcreteRegistrationService: RegistrationService {
     private let session: Session
     private let persistence: Persisting
-    private let remoteNotificationDispatcher: RemoteNotificationDispatcher
+    private let remoteNotificationDispatcher: RemoteNotificationDispatching
     private let notificationCenter: NotificationCenter
     private let timeoutQueue: TestableQueue
     private var remoteNotificationCompletionHandler: RemoteNotificationCompletionHandler?
     
     init(session: Session,
          persistence: Persisting,
-         remoteNotificationDispatcher: RemoteNotificationDispatcher,
+         remoteNotificationDispatcher: RemoteNotificationDispatching,
          notificationCenter: NotificationCenter,
          timeoutQueue: TestableQueue) {
         self.session = session

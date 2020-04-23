@@ -29,7 +29,7 @@ typealias RemoteNotificationHandler = (_ userInfo: [AnyHashable : Any], _ comple
 
 // Handles both push and remote notifiations.
 protocol RemoteNotificationManager {
-    var dispatcher: RemoteNotificationDispatcher { get }
+    var dispatcher: RemoteNotificationDispatching { get }
 
     var pushToken: String? { get }
     
@@ -52,13 +52,13 @@ class ConcreteRemoteNotificationManager: NSObject, RemoteNotificationManager {
     private let firebase: TestableFirebaseApp.Type
     private let messagingFactory: () -> TestableMessaging
     private let userNotificationCenter: UserNotificationCenter
-    let dispatcher: RemoteNotificationDispatcher
+    let dispatcher: RemoteNotificationDispatching
 
     init(
         firebase: TestableFirebaseApp.Type,
         messagingFactory: @escaping () -> TestableMessaging,
         userNotificationCenter: UserNotificationCenter,
-        dispatcher: RemoteNotificationDispatcher
+        dispatcher: RemoteNotificationDispatching
     ) {
         self.firebase = firebase
         self.messagingFactory = messagingFactory

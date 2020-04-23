@@ -15,7 +15,11 @@ protocol BluetoothNursery {
     var contactEventRepository: ContactEventRepository { get }
     var contactEventPersister: ContactEventPersister { get }
     
-    func startBroadcaster(stateDelegate: BTLEBroadcasterStateDelegate?)
+    func createListener(stateDelegate: BTLEListenerStateDelegate?)
+    func createBroadcaster(stateDelegate: BTLEBroadcasterStateDelegate?, registration: Registration)
+
+    func restoreListener(_ restorationIdentifiers: [String])
+    func restoreBroadcaster(_ restorationIdentifiers: [String])
 }
 
 
@@ -26,7 +30,7 @@ class ConcreteBluetoothNursery: BluetoothNursery {
     let listenerQueue: DispatchQueue? = DispatchQueue(label: "BTLE Listener Queue")
     let broadcasterQueue: DispatchQueue? = DispatchQueue(label: "BTLE Broadcaster Queue")
     
-    let persistence: Persistence
+    let persistence: Persisting
     let contactEventPersister: ContactEventPersister
     let contactEventRepository: ContactEventRepository
     let broadcastIdGenerator: BroadcastIdGenerator
@@ -42,7 +46,7 @@ class ConcreteBluetoothNursery: BluetoothNursery {
     var startListenerCalled: Bool = false
     var startBroadcasterCalled: Bool = false
     
-    init(persistence: Persistence, userNotificationCenter: UNUserNotificationCenter, notificationCenter: NotificationCenter) {
+    init(persistence: Persisting, userNotificationCenter: UNUserNotificationCenter, notificationCenter: NotificationCenter) {
         self.persistence = persistence
         contactEventPersister = PlistPersister<UUID, ContactEvent>(fileName: "contactEvents")
         contactEventRepository = PersistingContactEventRepository(persister: contactEventPersister)
@@ -54,15 +58,9 @@ class ConcreteBluetoothNursery: BluetoothNursery {
         contactEventExpiryHandler = ContactEventExpiryHandler(notificationCenter: notificationCenter, contactEventRepository: contactEventRepository)
     }
 
-    func startBroadcastingAndListening(registration: Registration) {
-        logger.info("starting BLE broadcaster and listener with sonar id (\(registration.id))")
-        broadcastIdGenerator.sonarId = registration.id
+    // MARK: - BTLEListener
 
-        startBroadcaster(stateDelegate: nil)
-        startListener(stateDelegate: stateObserver)
-    }
-    
-    func startListener(stateDelegate: BTLEListenerStateDelegate?) {
+    func createListener(stateDelegate: BTLEListenerStateDelegate?) {
         startListenerCalled = true
         listener = ConcreteBTLEListener(persistence: persistence)
         central = CBCentralManager(delegate: listener as! ConcreteBTLEListener, queue: listenerQueue, options: [
@@ -73,8 +71,18 @@ class ConcreteBluetoothNursery: BluetoothNursery {
         (listener as? ConcreteBTLEListener)?.stateDelegate = stateDelegate
         (listener as? ConcreteBTLEListener)?.delegate = contactEventRepository
     }
+
+    func restoreListener(_ restorationIdentifiers: [String]) {
+        #warning("needs an implementation here")
+    }
+
+    // MARK: - BTLEBroadaster
     
-    func startBroadcaster(stateDelegate: BTLEBroadcasterStateDelegate?) {
+    func createBroadcaster(stateDelegate: BTLEBroadcasterStateDelegate?, registration: Registration) {
+        logger.info("starting BLE broadcaster and listener with sonar id (\(registration.id))")
+
+        broadcastIdGenerator.sonarId = registration.id
+
         startBroadcasterCalled = true
         broadcaster = ConcreteBTLEBroadcaster(idGenerator: broadcastIdGenerator)
         peripheral = CBPeripheralManager(delegate: broadcaster as! ConcreteBTLEBroadcaster, queue: broadcasterQueue, options: [
@@ -84,7 +92,12 @@ class ConcreteBluetoothNursery: BluetoothNursery {
 
         broadcaster?.start()
     }
-    
+
+    // TODO: should this take in the registration as well ?
+    // otherwise the id generator won't have it and we never get a chance to broadcast :(
+    func restoreBroadcaster(_ restorationIdentifiers: [String]) {
+        #warning("needs an implementation here")
+    }
 }
 
 // MARK: - Logging

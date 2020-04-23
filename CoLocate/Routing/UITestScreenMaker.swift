@@ -57,6 +57,8 @@ private extension OnboardingEnvironment {
 }
 
 private class InMemoryPersistence: Persisting {
+    var delegate: PersistenceDelegate?
+
     var allowedDataSharing = false
     var registration: Registration? = nil
     var potentiallyExposed: Bool = false
@@ -83,13 +85,13 @@ private class EphemeralAuthorizationManager: AuthorizationManaging {
 
 private class EphemeralRemoteNotificationManager: RemoteNotificationManager {
     
-    let dispatcher: RemoteNotificationDispatcher
+    let dispatcher: RemoteNotificationDispatching
     private let authorizationManager: EphemeralAuthorizationManager
     private weak var host: UIViewController?
     
     var pushToken: String? = nil
     
-    init(host: UIViewController, authorizationManager: EphemeralAuthorizationManager, dispatcher: RemoteNotificationDispatcher) {
+    init(host: UIViewController, authorizationManager: EphemeralAuthorizationManager, dispatcher: RemoteNotificationDispatching) {
         self.host = host
         self.authorizationManager = authorizationManager
         self.dispatcher = dispatcher
@@ -136,7 +138,15 @@ private class NoOpBluetoothNursery: BluetoothNursery {
     var contactEventRepository: ContactEventRepository = NoOpContactEventRepository()
     var contactEventPersister: ContactEventPersister = NoOpContactEventPersister()
     
-    func startBroadcaster(stateDelegate: BTLEBroadcasterStateDelegate?) {
+    func createBroadcaster(stateDelegate: BTLEBroadcasterStateDelegate?, registration: Registration) {
+    }
+    func createListener(stateDelegate: BTLEListenerStateDelegate?) {
+    }
+
+    func restoreListener(_ restorationIdentifiers: [String]) {
+    }
+
+    func restoreBroadcaster(_ restorationIdentifiers: [String]) {
     }
 }
 
