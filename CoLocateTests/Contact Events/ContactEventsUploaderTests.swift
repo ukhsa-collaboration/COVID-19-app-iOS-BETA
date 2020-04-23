@@ -9,7 +9,7 @@
 import XCTest
 @testable import CoLocate
 
-class ContactEventUploaderTests: XCTestCase {
+class ContactEventsUploaderTests: XCTestCase {
 
     func testUploadRequest() {
         let expectedBroadcastId = "opaque bytes that only the server can decrypt".data(using: .utf8)!
@@ -18,7 +18,7 @@ class ContactEventUploaderTests: XCTestCase {
         contactEventRepository.contactEvents = [contactEvent]
         let session = SessionDouble()
 
-        let uploader = ContactEventUploader(
+        let uploader = ContactEventsUploader(
             contactEventRepository: contactEventRepository,
             makeSession: { _, _ in session }
         )

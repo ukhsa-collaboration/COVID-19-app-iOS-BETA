@@ -1,5 +1,5 @@
 //
-//  ContactEventUploader.swift
+//  ContactEventsUploader.swift
 //  CoLocate
 //
 //  Created by NHSX.
@@ -8,17 +8,17 @@
 
 import Foundation
 
-class ContactEventUploader {
+class ContactEventsUploader {
 
     static let backgroundIdentifier = "ContactEventUploader"
 
-    let sessionDelegate: URLSessionTaskDelegate = ContactEventUploaderSessionDelegate()
+    let sessionDelegate: URLSessionTaskDelegate = ContactEventsUploaderSessionDelegate()
     let contactEventRepository: ContactEventRepository
     let session: Session
 
     init(contactEventRepository: ContactEventRepository, makeSession: (String, URLSessionTaskDelegate) -> Session) {
         self.contactEventRepository = contactEventRepository
-        self.session = makeSession(ContactEventUploader.backgroundIdentifier, sessionDelegate)
+        self.session = makeSession(ContactEventsUploader.backgroundIdentifier, sessionDelegate)
     }
 
     //  upload-contact-events-in-background: we can't require registration here
@@ -40,7 +40,7 @@ class ContactEventUploader {
 
 // This exists due to the catch-22 of needing to provide the URLSessionDelegate
 // in the initialization of the URLSession.
-fileprivate class ContactEventUploaderSessionDelegate: NSObject, URLSessionTaskDelegate {
+fileprivate class ContactEventsUploaderSessionDelegate: NSObject, URLSessionTaskDelegate {
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         // upload-contact-events-in-background: delete uploaded contact events
         // upload-contact-events-in-background: handle errors
