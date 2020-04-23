@@ -82,7 +82,7 @@ class PermissionsViewController: UIViewController, Storyboarded {
         
         #else
 
-        bluetoothNursery.startBroadcaster(stateDelegate: self)
+        bluetoothNursery.createListener(stateDelegate: self)
         
         #endif
     }
@@ -118,8 +118,8 @@ class PermissionsViewController: UIViewController, Storyboarded {
 }
 
 // MARK: - BTLEBroadcasterStateDelegate
-extension PermissionsViewController: BTLEBroadcasterStateDelegate {
-    func btleBroadcaster(_ broadcaster: BTLEBroadcaster, didUpdateState state: CBManagerState) {
+extension PermissionsViewController: BTLEListenerStateDelegate {
+    func btleListener(_ listener: BTLEListener, didUpdateState state: CBManagerState) {
         switch authManager.bluetooth {
         case .notDetermined:
             return

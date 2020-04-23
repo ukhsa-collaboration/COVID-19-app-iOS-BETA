@@ -30,7 +30,7 @@ class PermissionsViewControllerTests: TestCase {
         // We skip Bluetooth on the simulator.
         #else
         authManagerDouble.bluetooth = .allowed
-        vc.btleBroadcaster(DummyBTLEBroadcaster(), didUpdateState: .poweredOn)
+        vc.btleListener(DummyBTLEListener(), didUpdateState: .poweredOn)
         #endif
         
         XCTAssertFalse(continued)
@@ -58,7 +58,7 @@ class PermissionsViewControllerTests: TestCase {
         vc.didTapContinue()
         
         authManagerDouble.bluetooth = .denied
-        vc.btleBroadcaster(DummyBTLEBroadcaster(), didUpdateState: .poweredOn)
+        vc.btleListener(DummyBTLEListener(), didUpdateState: .poweredOn)
 
         XCTAssert(continued)
         
@@ -125,6 +125,7 @@ class PermissionsViewControllerTests: TestCase {
 
 }
 
-fileprivate struct DummyBTLEBroadcaster: BTLEBroadcaster {
-    func start() { }
+fileprivate struct DummyBTLEListener: BTLEListener {
+    func start(stateDelegate: BTLEListenerStateDelegate?, delegate: BTLEListenerDelegate?) { }
+    func connect(_ peripheral: BTLEPeripheral) { }
 }

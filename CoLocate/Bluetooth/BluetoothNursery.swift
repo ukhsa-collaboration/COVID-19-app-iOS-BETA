@@ -70,12 +70,14 @@ class ConcreteBluetoothNursery: BluetoothNursery {
     func createBroadcaster(stateDelegate: BTLEBroadcasterStateDelegate?, registration: Registration) {
         broadcastIdGenerator.sonarId = registration.id
 
-        broadcaster = ConcreteBTLEBroadcaster(idGenerator: broadcastIdGenerator)
-        peripheral = CBPeripheralManager(delegate: broadcaster as! ConcreteBTLEBroadcaster, queue: broadcasterQueue, options: [
-            CBPeripheralManagerOptionRestoreIdentifierKey: ConcreteBluetoothNursery.peripheralRestoreIdentifier
-        ])
+        let concreteBroadcaster = ConcreteBTLEBroadcaster(idGenerator: broadcastIdGenerator)
+        peripheral = CBPeripheralManager(delegate: concreteBroadcaster,
+                                         queue: broadcasterQueue,
+                                         options: [CBPeripheralManagerOptionRestoreIdentifierKey: ConcreteBluetoothNursery.peripheralRestoreIdentifier])
+        concreteBroadcaster.peripheral = peripheral
+        concreteBroadcaster.start()
 
-        broadcaster?.start()
+        broadcaster = concreteBroadcaster
     }
 
 }
