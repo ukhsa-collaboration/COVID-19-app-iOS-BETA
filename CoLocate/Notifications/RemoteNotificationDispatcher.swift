@@ -27,8 +27,20 @@ protocol UserNotificationCenter: class {
 extension UNUserNotificationCenter: UserNotificationCenter {
 }
 
+protocol RemoteNotificationDispatching {
+    var pushToken: String? { get }
 
-class RemoteNotificationDispatcher {
+    func registerHandler(forType type: RemoteNotificationType, handler: @escaping RemoteNotificationHandler)
+    func removeHandler(forType type: RemoteNotificationType)
+
+    func hasHandler(forType type: RemoteNotificationType) -> Bool
+    func handleNotification(userInfo: [AnyHashable : Any], completionHandler: @escaping RemoteNotificationCompletionHandler)
+
+    func receiveRegistrationToken(fcmToken: String)
+}
+
+
+class RemoteNotificationDispatcher: RemoteNotificationDispatching {
     var pushToken: String?
     
     private var handlers = HandlerDictionary()

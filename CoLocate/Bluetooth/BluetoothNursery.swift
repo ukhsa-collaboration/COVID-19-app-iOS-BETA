@@ -27,7 +27,7 @@ class ConcreteBluetoothNursery: BluetoothNursery {
     let listenerQueue: DispatchQueue? = DispatchQueue(label: "BTLE Listener Queue")
     let broadcasterQueue: DispatchQueue? = DispatchQueue(label: "BTLE Broadcaster Queue")
     
-    let persistence: Persistence
+    let persistence: Persisting
     let contactEventPersister: ContactEventPersister
     let contactEventRepository: ContactEventRepository
     let broadcastIdGenerator: BroadcastIdGenerator
@@ -43,7 +43,7 @@ class ConcreteBluetoothNursery: BluetoothNursery {
     var startListenerCalled: Bool = false
     var startBroadcasterCalled: Bool = false
     
-    init(persistence: Persistence, userNotificationCenter: UNUserNotificationCenter, notificationCenter: NotificationCenter) {
+    init(persistence: Persisting, userNotificationCenter: UNUserNotificationCenter, notificationCenter: NotificationCenter) {
         self.persistence = persistence
         contactEventPersister = PlistPersister<UUID, ContactEvent>(fileName: "contactEvents")
         contactEventRepository = PersistingContactEventRepository(persister: contactEventPersister)

@@ -10,6 +10,7 @@ import UIKit
 @testable import CoLocate
 
 class PersistenceDouble: Persisting {
+    var delegate: PersistenceDelegate?
     
     var allowedDataSharing: Bool
     var registration: Registration?

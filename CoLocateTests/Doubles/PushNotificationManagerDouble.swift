@@ -10,11 +10,11 @@ import Foundation
 @testable import CoLocate
 
 class RemoteNotificationManagerDouble: RemoteNotificationManager {
-    let dispatcher: RemoteNotificationDispatcher
+    let dispatcher: RemoteNotificationDispatching
     var pushToken: String?
     var handlers: [RemoteNotificationType : RemoteNotificationHandler] = [:]
     
-    init(dispatcher: RemoteNotificationDispatcher) {
+    init(dispatcher: RemoteNotificationDispatching) {
         self.dispatcher = dispatcher
     }
     

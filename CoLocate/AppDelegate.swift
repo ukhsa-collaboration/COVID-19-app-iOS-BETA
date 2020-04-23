@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     let urlSession = URLSession.make()
     let authorizationManager = AuthorizationManager()
 
-    lazy var dispatcher = RemoteNotificationDispatcher(
+    lazy var dispatcher: RemoteNotificationDispatching = RemoteNotificationDispatcher(
         notificationCenter: notificationCenter,
         userNotificationCenter: userNotificationCenter)
 
@@ -38,18 +38,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         notificationCenter: notificationCenter,
         timeoutQueue: DispatchQueue.main)
 
-    lazy var persistence: Persistence = Persistence.shared
+    lazy var persistence: Persisting = Persistence.shared
 
     lazy var bluetoothNursery: BluetoothNursery = ConcreteBluetoothNursery(persistence: persistence, userNotificationCenter: userNotificationCenter, notificationCenter: notificationCenter)
 
-    override init() {
-        LoggingManager.bootstrap()
-        
-        super.init()
-
-        persistence.delegate = self
-    }
-    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // TODO: If DEBUG is only necessary as long as we have the same bundle ID for both builds.
         #if INTERNAL || DEBUG
@@ -59,8 +51,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
         #endif
 
+        LoggingManager.bootstrap()
         logger.info("Launched", metadata: Logger.Metadata(launchOptions: launchOptions))
-        
+
+        persistence.delegate = self
         application.registerForRemoteNotifications()
 
         remoteNotificationManager.configure()

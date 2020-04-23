@@ -11,28 +11,45 @@ import XCTest
 
 class AppDelegateTest: XCTestCase {
 
-    var nursery: MockBluetoothNursery!
-    
     var appDelegate: AppDelegate!
+
+    var nursery: MockBluetoothNursery!
+    var persistence: PersistenceDouble!
+    var dispatcher: RemoteNotificationDispatcherDouble!
+    var remoteNotificationManager: RemoteNotificationManagerDouble!
+    var registrationService: RegistrationServiceDouble!
     
     override func setUp() {
         nursery = MockBluetoothNursery()
+        persistence = PersistenceDouble()
+        dispatcher = RemoteNotificationDispatcherDouble()
+        remoteNotificationManager = RemoteNotificationManagerDouble()
+        registrationService = RegistrationServiceDouble()
         
         appDelegate = AppDelegate()
         appDelegate.bluetoothNursery = nursery
+        appDelegate.persistence = persistence
+        appDelegate.dispatcher = dispatcher
+        appDelegate.remoteNotificationManager = remoteNotificationManager
+        appDelegate.registrationService = registrationService
     }
 
     func testFirstAppLaunchDoesNothing() throws {
         _ = appDelegate.application(UIApplication.shared, didFinishLaunchingWithOptions: nil)
-        
+
+        // THINK : are these tests necessary and sufficient ?
         XCTAssertFalse(nursery.startListenerCalled)
         XCTAssertFalse(nursery.startBroadcasterCalled)
     }
     
     func testStartingWithRegistrationAfterForceQuitStartsListenerAndBroadcaster() {
-//        appDelegate.persistence = PersistenceDouble(registration: Registration())
-//
-//        appDelegate.bluetoothNursery
+        appDelegate.persistence = PersistenceDouble(registration: Registration.fake)
+
+        _ = appDelegate.application(UIApplication.shared, didFinishLaunchingWithOptions: nil)
+
+        // THINK -- does this assert what we want ?
+        XCTAssertTrue(nursery.startListenerCalled)
+        XCTAssertTrue(nursery.startBroadcasterCalled)
     }
 
 }
@@ -72,5 +89,28 @@ class DummyContactEventRepository: ContactEventRepository {
 class DummyContactEventPersister: ContactEventPersister {
     var items: [UUID: ContactEvent] = [:]
     func reset() {
+    }
+}
+
+class RemoteNotificationDispatcherDouble: RemoteNotificationDispatching {
+    var pushToken: String?
+
+    func registerHandler(forType type: RemoteNotificationType, handler: @escaping RemoteNotificationHandler) {
+
+    }
+    func removeHandler(forType type: RemoteNotificationType) {
+
+    }
+
+    func hasHandler(forType type: RemoteNotificationType) -> Bool {
+        return false
+    }
+
+    func handleNotification(userInfo: [AnyHashable : Any], completionHandler: @escaping RemoteNotificationCompletionHandler) {
+
+    }
+
+    func receiveRegistrationToken(fcmToken: String) {
+        
     }
 }
