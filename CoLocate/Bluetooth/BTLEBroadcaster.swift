@@ -88,21 +88,14 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
     
     // MARK: - CBPeripheralManagerDelegate
 
-    func peripheralManagerIsReady(toUpdateSubscribers peripheral: CBPeripheralManager) {
-        guard let keepaliveCharacteristic = self.keepaliveCharacteristic else {
-            assertionFailure("keepaliveCharacteristic shouldn't be nil")
+    func peripheralManager(_ peripheral: CBPeripheralManager, willRestoreState dict: [String : Any]) {
+        guard let services = dict[CBPeripheralManagerRestoredStateServicesKey] as? [CBMutableService],
+              let sonarIdService = services.first else {
+            logger.info("No services to restore!")
             return
         }
-        guard let value = self.keepaliveValue else {
-            assertionFailure("no value to send")
-            return
-        }
-        
-        let success = peripheral.updateValue(value, for: keepaliveCharacteristic, onSubscribedCentrals: nil)
-        if success {
-            logger.info("re-sent keepalive value \(value)")
-            self.keepaliveValue = nil
-        }
+
+        logger.info("restoring \(sonarIdService)")
     }
 
     func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
@@ -135,15 +128,23 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
         ])
     }
     
-    func peripheralManager(_ peripheral: CBPeripheralManager, willRestoreState dict: [String : Any]) {
-        guard let services = dict[CBPeripheralManagerRestoredStateServicesKey] as? [CBMutableService],
-              let sonarIdService = services.first else {
-            logger.info("No services to restore!")
+    func peripheralManagerIsReady(toUpdateSubscribers peripheral: CBPeripheralManager) {
+        guard let keepaliveCharacteristic = self.keepaliveCharacteristic else {
+            assertionFailure("keepaliveCharacteristic shouldn't be nil")
             return
         }
-
-        logger.info("restoring \(sonarIdService)")
+        guard let value = self.keepaliveValue else {
+            assertionFailure("no value to send")
+            return
+        }
+        
+        let success = peripheral.updateValue(value, for: keepaliveCharacteristic, onSubscribedCentrals: nil)
+        if success {
+            logger.info("re-sent keepalive value \(value)")
+            self.keepaliveValue = nil
+        }
     }
+    
 }
 
 fileprivate let logger = Logger(label: "BTLE")
