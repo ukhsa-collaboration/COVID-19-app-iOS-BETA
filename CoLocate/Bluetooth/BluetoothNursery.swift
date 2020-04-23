@@ -15,11 +15,11 @@ protocol BluetoothNursery {
     var contactEventRepository: ContactEventRepository { get }
     var contactEventPersister: ContactEventPersister { get }
     
-    func startBroadcaster(stateDelegate: BTLEBroadcasterStateDelegate?, registration: Registration)
-    func startListener(stateDelegate: BTLEListenerStateDelegate?)
+    func createListener(stateDelegate: BTLEListenerStateDelegate?)
+    func createBroadcaster(stateDelegate: BTLEBroadcasterStateDelegate?, registration: Registration)
 
-    func recreateListener(launchOptions: [UIApplication.LaunchOptionsKey: Any]?)
-    func recreateBroadcaster(launchOptions: [UIApplication.LaunchOptionsKey: Any]?)
+    func restoreListener(_ restorationIdentifiers: [String])
+    func restoreBroadcaster(_ restorationIdentifiers: [String])
 }
 
 
@@ -60,7 +60,7 @@ class ConcreteBluetoothNursery: BluetoothNursery {
 
     // MARK: - BTLEListener
 
-    func startListener(stateDelegate: BTLEListenerStateDelegate?) {
+    func createListener(stateDelegate: BTLEListenerStateDelegate?) {
         startListenerCalled = true
         listener = ConcreteBTLEListener(persistence: persistence)
         central = CBCentralManager(delegate: listener as! ConcreteBTLEListener, queue: listenerQueue, options: [
@@ -72,13 +72,13 @@ class ConcreteBluetoothNursery: BluetoothNursery {
         (listener as? ConcreteBTLEListener)?.delegate = contactEventRepository
     }
 
-    func recreateListener(launchOptions: [UIApplication.LaunchOptionsKey : Any]?) {
+    func restoreListener(_ restorationIdentifiers: [String]) {
         #warning("needs an implementation here")
     }
 
     // MARK: - BTLEBroadaster
     
-    func startBroadcaster(stateDelegate: BTLEBroadcasterStateDelegate?, registration: Registration) {
+    func createBroadcaster(stateDelegate: BTLEBroadcasterStateDelegate?, registration: Registration) {
         logger.info("starting BLE broadcaster and listener with sonar id (\(registration.id))")
 
         broadcastIdGenerator.sonarId = registration.id
@@ -95,7 +95,7 @@ class ConcreteBluetoothNursery: BluetoothNursery {
 
     // TODO: should this take in the registration as well ?
     // otherwise the id generator won't have it and we never get a chance to broadcast :(
-    func recreateBroadcaster(launchOptions: [UIApplication.LaunchOptionsKey : Any]?) {
+    func restoreBroadcaster(_ restorationIdentifiers: [String]) {
         #warning("needs an implementation here")
     }
 }

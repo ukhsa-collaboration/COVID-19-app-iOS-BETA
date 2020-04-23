@@ -10,18 +10,20 @@ import UIKit
 @testable import CoLocate
 
 class BluetoothNurseryDouble: BluetoothNursery {
-    
+
     var contactEventRepository: ContactEventRepository = ContactEventRepositoryDouble()
     var contactEventPersister: ContactEventPersister = ContactEventPersisterDouble()
     
-    func startBroadcaster(stateDelegate: BTLEBroadcasterStateDelegate?, registration: Registration) {
+    func createListener(stateDelegate: BTLEListenerStateDelegate?) {
     }
-    func startListener(stateDelegate: BTLEListenerStateDelegate?) {
+    
+    func createBroadcaster(stateDelegate: BTLEBroadcasterStateDelegate?, registration: Registration) {
+    }
+    
+    func restoreListener(_ restorationIdentifiers: [String]) {
+    }
+    
+    func restoreBroadcaster(_ restorationIdentifiers: [String]) {
     }
 
-    func recreateListener(launchOptions: [UIApplication.LaunchOptionsKey : Any]?) {
-    }
-
-    func recreateBroadcaster(launchOptions: [UIApplication.LaunchOptionsKey : Any]?) {
-    }
 }

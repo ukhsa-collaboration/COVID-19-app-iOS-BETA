@@ -38,55 +38,57 @@ class AppDelegateTest: XCTestCase {
         _ = appDelegate.application(UIApplication.shared, didFinishLaunchingWithOptions: nil)
 
         // Question : are these assertions easy enough to read ?
-        XCTAssertFalse(nursery.startListenerCalled)
-        XCTAssertFalse(nursery.startBroadcasterCalled)
+        XCTAssertFalse(nursery.createListenerCalled)
+        XCTAssertFalse(nursery.createBroadcasterCalled)
 
-        XCTAssertFalse(nursery.recreateListenerWasCalled)
-        XCTAssertFalse(nursery.recreateBroadcasterWasCalled)
+        XCTAssertFalse(nursery.restoreListenerCalled)
+        XCTAssertFalse(nursery.restoreListenerCalled)
     }
     
-    func testStartingWithRegistrationAfterForceQuitStartsListenerAndBroadcaster() {
+    func testStartingWithRegistrationWithNoStateRestorationStartsListenerAndBroadcaster() {
         appDelegate.persistence = PersistenceDouble(registration: Registration.fake)
 
         _ = appDelegate.application(UIApplication.shared, didFinishLaunchingWithOptions: nil)
 
-        // Question : are these assertions easy enough to read ?
-        //            and do they assert ENOUGH ?
-        XCTAssertTrue(nursery.startListenerCalled)
-        XCTAssertTrue(nursery.startBroadcasterCalled)
+        XCTAssertTrue(nursery.createListenerCalled)
+        XCTAssertTrue(nursery.createBroadcasterCalled)
 
-        XCTAssertFalse(nursery.recreateListenerWasCalled)
-        XCTAssertFalse(nursery.recreateBroadcasterWasCalled)
+        XCTAssertFalse(nursery.restoreListenerCalled)
+        XCTAssertFalse(nursery.restoreListenerCalled)
     }
 
     func testStartingWithRegistrationAndStateRestoration_recreatesFromLaunchIdentifiers() {
         appDelegate.persistence = PersistenceDouble(registration: Registration.fake)
 
-        let options: [UIApplication.LaunchOptionsKey: Any]? = [.bluetoothPeripherals: []]
-        _ = appDelegate.application(UIApplication.shared, didFinishLaunchingWithOptions: options)
+        let launchOptions = [
+            UIApplication.LaunchOptionsKey.bluetoothPeripherals: ["restoreA"],
+            UIApplication.LaunchOptionsKey.bluetoothCentrals: ["restoreB"],
+        ]
+        _ = appDelegate.application(UIApplication.shared, didFinishLaunchingWithOptions: launchOptions)
 
         // do not make them from scratch
-        XCTAssertFalse(nursery.startListenerCalled)
-        XCTAssertFalse(nursery.startBroadcasterCalled)
+        XCTAssertFalse(nursery.createListenerCalled)
+        XCTAssertFalse(nursery.createBroadcasterCalled)
 
         // remake them from the launch options
-        XCTAssertTrue(nursery.recreateListenerWasCalled)
-        XCTAssertTrue(nursery.recreateBroadcasterWasCalled)
+        XCTAssertTrue(nursery.restoreListenerCalled)
+        XCTAssertTrue(nursery.restoreBroadcasterCalled)
     }
 
-    func testStartingWithoutRegistrationAfterForceQuittingStartsListener_butNotTheBroadcaster() {
+    func testStartingWithoutRegistrationWithStateRestorationStartsListener_butNotTheBroadcaster() {
         appDelegate.persistence = PersistenceDouble()
 
-        let options: [UIApplication.LaunchOptionsKey: Any]? = [.bluetoothPeripherals: []]
-        _ = appDelegate.application(UIApplication.shared, didFinishLaunchingWithOptions: options)
+        let launchOptions = [
+            UIApplication.LaunchOptionsKey.bluetoothPeripherals: ["restoreA"],
+            UIApplication.LaunchOptionsKey.bluetoothCentrals: ["restoreB"],
+        ]
+        _ = appDelegate.application(UIApplication.shared, didFinishLaunchingWithOptions: launchOptions)
 
-        // do not make them from scratch
-        XCTAssertFalse(nursery.startListenerCalled)
-        XCTAssertFalse(nursery.startBroadcasterCalled)
-
-        // remake only the listener in this case, since we can't broadcast (yet)
-        XCTAssertTrue(nursery.startListenerCalled)
-        XCTAssertFalse(nursery.startBroadcasterCalled)
+        XCTAssertTrue(nursery.restoreListenerCalled)
+        XCTAssertFalse(nursery.restoreBroadcasterCalled)
+        
+        XCTAssertFalse(nursery.createListenerCalled)
+        XCTAssertFalse(nursery.createBroadcasterCalled)
     }
 
 }
@@ -97,25 +99,26 @@ class MockBluetoothNursery: BluetoothNursery {
     
     var contactEventPersister: ContactEventPersister = DummyContactEventPersister()
     
-    var startBroadcasterCalled = false
-    var startListenerCalled = false
-    var recreateListenerWasCalled = false
-    var recreateBroadcasterWasCalled = false
+    var createListenerCalled = false
+    var createBroadcasterCalled = false
     
-    func startBroadcaster(stateDelegate: BTLEBroadcasterStateDelegate?, registration: Registration) {
-        self.startBroadcasterCalled = true
+    var restoreListenerCalled = false
+    var restoreBroadcasterCalled = false
+    
+    func createListener(stateDelegate: BTLEListenerStateDelegate?) {
+        self.createListenerCalled = true
     }
     
-    func startListener(stateDelegate: BTLEListenerStateDelegate?) {
-        self.startListenerCalled = true
+    func createBroadcaster(stateDelegate: BTLEBroadcasterStateDelegate?, registration: Registration) {
+        self.createBroadcasterCalled = true
+    }
+    
+    func restoreListener(_ restorationIdentifiers: [String]) {
+        self.restoreListenerCalled = true
     }
 
-    func recreateListener(launchOptions: [UIApplication.LaunchOptionsKey : Any]?) {
-        self.recreateListenerWasCalled = true
-    }
-
-    func recreateBroadcaster(launchOptions: [UIApplication.LaunchOptionsKey : Any]?) {
-        self.recreateBroadcasterWasCalled = true
+    func restoreBroadcaster(_ restorationIdentifiers: [String]) {
+        self.restoreBroadcasterCalled = true
     }
     
 }
