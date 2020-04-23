@@ -29,8 +29,7 @@ class ContactEventsUploaderTests: XCTestCase {
         try? uploader.upload()
 
         guard
-            let request = session.uploadRequest as? PatchContactEventsRequest,
-            let fileURL = session.uploadFileURL
+            let request = session.uploadRequest as? PatchContactEventsRequest
         else {
             XCTFail("Expected a PatchContactEventsRequest but got \(String(describing: session.requestSent))")
             return
@@ -38,18 +37,20 @@ class ContactEventsUploaderTests: XCTestCase {
 
         XCTAssertEqual(request.path, "/api/residents/\(registration.id.uuidString)")
 
-        var expectedData: Data?
         switch request.method {
         case .patch(let data):
-            expectedData = data
+            let decoder = JSONDecoder()
+            let decoded = try? decoder.decode([String: [DecodableBroadcastId]].self, from: data)
+            // Can't compare the entire contact events because the timestamp loses precision
+            // when JSON encoded and decoded.
+
+            XCTAssertEqual(1, decoded?.count)
+
+            let firstEvent = decoded?["contactEvents"]?.first
+            XCTAssertEqual(expectedBroadcastId, firstEvent?.encryptedRemoteContactId)
         default:
             XCTFail("Expected a patch request but got \(request.method)")
         }
-
-        #warning("Figure out how to test the actual data")
-//        let actualData = try? Data(contentsOf: fileURL)
-//        let actualData = FileManager.default.contents(atPath: fileURL)
-//        XCTAssertEqual(actualData, expectedData)
     }
 
 }

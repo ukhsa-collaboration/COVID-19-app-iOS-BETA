@@ -70,10 +70,19 @@ extension URLSession: Session {
         task.resume()
     }
 
-    func upload<R: Request>(with request: R, fromFile fileURL: URL) {
+    func upload<R: Request>(with request: R) throws {
         let urlRequest = request.urlRequest()
+
+        // According to the Apple docs, the upload task copies the file into its own temporary
+        // location to stream data from, so it should be safe to use the tmpdir for this.
+        let tmpDir = FileManager.default.temporaryDirectory
+        let fileURL = tmpDir.appendingPathComponent("contactEvents.json")
+        try urlRequest.httpBody!.write(to: fileURL)
+
         let task = uploadTask(with: urlRequest, fromFile: fileURL)
         task.resume()
+
+        try? FileManager.default.removeItem(at: fileURL)
     }
 
 }

@@ -37,16 +37,7 @@ class ContactEventsUploader {
         let requestFactory = ConcreteSecureRequestFactory(registration: registration)
         let request = requestFactory.patchContactsRequest(contactEvents: contactEvents)
 
-        // According to the Apple docs, the upload task copies the file into its own temporary
-        // location to stream data from, so it should be safe to use the tmpdir for this.
-        let tmpDir = FileManager.default.temporaryDirectory
-        let fileURL = tmpDir.appendingPathComponent("contactEvents.json")
-
-        try request.urlRequest().httpBody!.write(to: fileURL)
-
-        session.upload(with: request, fromFile: fileURL)
-
-        try FileManager.default.removeItem(at: fileURL)
+        try session.upload(with: request)
     }
 
 }

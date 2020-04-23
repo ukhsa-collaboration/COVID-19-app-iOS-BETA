@@ -569,16 +569,16 @@
 		214209D3242399DD00C7BFF3 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				21C417CB242CB15D00DEF3E2 /* ConfirmRegistrationRequest.swift */,
 				214209D42423C83C00C7BFF3 /* PatchContactEventsRequest.swift */,
+				896BE90E244F07FF00B3687C /* PublicKeyValidator.swift */,
 				F600A60124297A8E0038DF57 /* RegistrationRequest.swift */,
 				F758553924294C8C00CBE1ED /* RequestFactory.swift */,
 				21B3D2E42429112B00573061 /* SecureRequest.swift */,
-				214209CF242396DA00C7BFF3 /* Session.swift */,
-				214209D1242399CF00C7BFF3 /* URLSession.swift */,
-				21C417CB242CB15D00DEF3E2 /* ConfirmRegistrationRequest.swift */,
 				F78CEBEC242D0836002254AD /* SecureRequestFactory.swift */,
-				896BE90E244F07FF00B3687C /* PublicKeyValidator.swift */,
+				214209CF242396DA00C7BFF3 /* Session.swift */,
 				89CE566A24503E93004A74D0 /* TrustValidatingURLSessionDelegate.swift */,
+				214209D1242399CF00C7BFF3 /* URLSession.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";

@@ -29,10 +29,7 @@ class SessionDouble: Session {
     }
 
     var uploadRequest: Any?
-    var uploadFileURL: URL?
-    func upload<R: Request>(with request: R, fromFile fileURL: URL) {
-        uploadRequest = request
-        uploadFileURL = fileURL
-    }
+    func upload<R: Request>(with request: R) {
+        uploadRequest = request    }
 
 }
