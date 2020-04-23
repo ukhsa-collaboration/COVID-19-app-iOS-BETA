@@ -59,6 +59,7 @@
 		21B3D2E3242906AE00573061 /* SecureRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B3D2E2242906AE00573061 /* SecureRequestTests.swift */; };
 		21B3D2E52429112B00573061 /* SecureRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B3D2E42429112B00573061 /* SecureRequest.swift */; };
 		21B3D2E82429115600573061 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21B3D2E72429115600573061 /* CoreBluetooth.framework */; };
+		21B71F782451788800D0DED7 /* OptionalCoalescingString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B71F772451788800D0DED7 /* OptionalCoalescingString.swift */; };
 		21C09A8D24377F5100368203 /* CoreBluetoothExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C09A8C24377F5100368203 /* CoreBluetoothExtensions.swift */; };
 		21C09A8F2437B99F00368203 /* BluetoothNursery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C09A8E2437B99F00368203 /* BluetoothNursery.swift */; };
 		21C417CA242CB0A200DEF3E2 /* ConfirmRegistrationRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C417C9242CB0A200DEF3E2 /* ConfirmRegistrationRequestTests.swift */; };
@@ -252,6 +253,7 @@
 		21B3D2E2242906AE00573061 /* SecureRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRequestTests.swift; sourceTree = "<group>"; };
 		21B3D2E42429112B00573061 /* SecureRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRequest.swift; sourceTree = "<group>"; };
 		21B3D2E72429115600573061 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		21B71F772451788800D0DED7 /* OptionalCoalescingString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalCoalescingString.swift; sourceTree = "<group>"; };
 		21C09A8C24377F5100368203 /* CoreBluetoothExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreBluetoothExtensions.swift; sourceTree = "<group>"; };
 		21C09A8E2437B99F00368203 /* BluetoothNursery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothNursery.swift; sourceTree = "<group>"; };
 		21C417C9242CB0A200DEF3E2 /* ConfirmRegistrationRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmRegistrationRequestTests.swift; sourceTree = "<group>"; };
@@ -913,6 +915,7 @@
 				F63279242435203600CF7A42 /* DispatchQueue+Testable.swift */,
 				217A23BD243B34E8001B8236 /* UIDevice+ModelName.swift */,
 				219B613424471B9800E2F1A6 /* UUIDExtensions.swift */,
+				21B71F772451788800D0DED7 /* OptionalCoalescingString.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1194,6 +1197,7 @@
 				F600A60224297A8E0038DF57 /* RegistrationRequest.swift in Sources */,
 				214209D2242399CF00C7BFF3 /* URLSession.swift in Sources */,
 				89074B83243788AE00D67777 /* UITestResponder.swift in Sources */,
+				21B71F782451788800D0DED7 /* OptionalCoalescingString.swift in Sources */,
 				F63279252435203600CF7A42 /* DispatchQueue+Testable.swift in Sources */,
 				893C0B7B243DE346000A7DB6 /* OnboardingEnvironment.swift in Sources */,
 				898FE860243B5AF700210775 /* UITestScreenMaker.swift in Sources */,
