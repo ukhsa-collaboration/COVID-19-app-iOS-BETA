@@ -19,34 +19,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     let notificationCenter = NotificationCenter.default
     let userNotificationCenter = UNUserNotificationCenter.current()
     let urlSession = URLSession.make()
-    let persistence = Persistence.shared
     let authorizationManager = AuthorizationManager()
-    let bluetoothNursery: ConcreteBluetoothNursery
-    let remoteNotificationManager: RemoteNotificationManager
-    let registrationService: RegistrationService
+
+    lazy var dispatcher = RemoteNotificationDispatcher(
+        notificationCenter: notificationCenter,
+        userNotificationCenter: userNotificationCenter)
+
+    lazy var remoteNotificationManager: RemoteNotificationManager = ConcreteRemoteNotificationManager(
+        firebase: FirebaseApp.self,
+        messagingFactory: { Messaging.messaging() },
+        userNotificationCenter: userNotificationCenter,
+        dispatcher: dispatcher)
+    
+    lazy var registrationService: RegistrationService = ConcreteRegistrationService(
+        session: urlSession,
+        persistence: persistence,
+        remoteNotificationDispatcher: dispatcher,
+        notificationCenter: notificationCenter,
+        timeoutQueue: DispatchQueue.main)
+
+    lazy var persistence: Persistence = Persistence.shared
+
+    lazy var bluetoothNursery: BluetoothNursery = ConcreteBluetoothNursery(persistence: persistence, userNotificationCenter: userNotificationCenter, notificationCenter: notificationCenter)
 
     override init() {
         LoggingManager.bootstrap()
-        
-        let dispatcher = RemoteNotificationDispatcher(
-            notificationCenter: notificationCenter,
-            userNotificationCenter: userNotificationCenter
-        )
-        remoteNotificationManager = ConcreteRemoteNotificationManager(
-            firebase: FirebaseApp.self,
-            messagingFactory: { Messaging.messaging() },
-            userNotificationCenter: userNotificationCenter,
-            dispatcher: dispatcher
-        )
-        registrationService = ConcreteRegistrationService(
-            session: urlSession,
-            persistence: persistence,
-            remoteNotificationDispatcher: dispatcher,
-            notificationCenter: notificationCenter,
-            timeoutQueue: DispatchQueue.main
-        )
-        bluetoothNursery = ConcreteBluetoothNursery(persistence: persistence, userNotificationCenter: userNotificationCenter, notificationCenter: notificationCenter)
-        
         
         super.init()
 
@@ -61,7 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             return true
         }
         #endif
-        
+
         logger.info("Launched", metadata: Logger.Metadata(launchOptions: launchOptions))
         
         application.registerForRemoteNotifications()
@@ -88,7 +85,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         window?.makeKeyAndVisible()
 
         if let registration = persistence.registration {
-            bluetoothNursery.startBroadcastingAndListening(registration: registration)
+//            bluetoothNursery.startBroadcastingAndListening(registration: registration)
         }
 
         return true
@@ -141,7 +138,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
 extension AppDelegate: PersistenceDelegate {
     func persistence(_ persistence: Persistence, didUpdateRegistration registration: Registration) {
-        bluetoothNursery.startBroadcastingAndListening(registration: registration)
+//        bluetoothNursery.startBroadcastingAndListening(registration: registration)
     }
 }
 

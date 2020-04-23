@@ -16,6 +16,7 @@ protocol BluetoothNursery {
     var contactEventPersister: ContactEventPersister { get }
     
     func startBroadcaster(stateDelegate: BTLEBroadcasterStateDelegate?)
+    func startListener(stateDelegate: BTLEListenerStateDelegate?)
 }
 
 
@@ -54,14 +55,6 @@ class ConcreteBluetoothNursery: BluetoothNursery {
         contactEventExpiryHandler = ContactEventExpiryHandler(notificationCenter: notificationCenter, contactEventRepository: contactEventRepository)
     }
 
-    func startBroadcastingAndListening(registration: Registration) {
-        logger.info("starting BLE broadcaster and listener with sonar id (\(registration.id))")
-        broadcastIdGenerator.sonarId = registration.id
-
-        startBroadcaster(stateDelegate: nil)
-        startListener(stateDelegate: stateObserver)
-    }
-    
     func startListener(stateDelegate: BTLEListenerStateDelegate?) {
         startListenerCalled = true
         listener = ConcreteBTLEListener(persistence: persistence)
