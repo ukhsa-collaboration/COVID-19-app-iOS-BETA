@@ -80,8 +80,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
         if let registration = persistence.registration {
             bluetoothNursery.startListener(stateDelegate: nil)
-            bluetoothNursery.startBroadcaster(stateDelegate: nil)
-//            bluetoothNursery.startBroadcastingAndListening(registration: registration)
+            bluetoothNursery.startBroadcaster(stateDelegate: nil, registration: registration)
         }
 
         return true

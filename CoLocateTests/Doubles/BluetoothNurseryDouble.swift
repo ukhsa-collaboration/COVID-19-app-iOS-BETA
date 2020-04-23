@@ -14,7 +14,7 @@ class BluetoothNurseryDouble: BluetoothNursery {
     var contactEventRepository: ContactEventRepository = ContactEventRepositoryDouble()
     var contactEventPersister: ContactEventPersister = ContactEventPersisterDouble()
     
-    func startBroadcaster(stateDelegate: BTLEBroadcasterStateDelegate?) {
+    func startBroadcaster(stateDelegate: BTLEBroadcasterStateDelegate?, registration: Registration) {
     }
     func startListener(stateDelegate: BTLEListenerStateDelegate?) {
     }

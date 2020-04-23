@@ -15,7 +15,7 @@ protocol BluetoothNursery {
     var contactEventRepository: ContactEventRepository { get }
     var contactEventPersister: ContactEventPersister { get }
     
-    func startBroadcaster(stateDelegate: BTLEBroadcasterStateDelegate?)
+    func startBroadcaster(stateDelegate: BTLEBroadcasterStateDelegate?, registration: Registration)
     func startListener(stateDelegate: BTLEListenerStateDelegate?)
 
     func recreateListener(launchOptions: [UIApplication.LaunchOptionsKey: Any]?)
@@ -78,7 +78,11 @@ class ConcreteBluetoothNursery: BluetoothNursery {
 
     // MARK: - BTLEBroadaster
     
-    func startBroadcaster(stateDelegate: BTLEBroadcasterStateDelegate?) {
+    func startBroadcaster(stateDelegate: BTLEBroadcasterStateDelegate?, registration: Registration) {
+        logger.info("starting BLE broadcaster and listener with sonar id (\(registration.id))")
+
+        broadcastIdGenerator.sonarId = registration.id
+
         startBroadcasterCalled = true
         broadcaster = ConcreteBTLEBroadcaster(idGenerator: broadcastIdGenerator)
         peripheral = CBPeripheralManager(delegate: broadcaster as! ConcreteBTLEBroadcaster, queue: broadcasterQueue, options: [
@@ -89,6 +93,8 @@ class ConcreteBluetoothNursery: BluetoothNursery {
         broadcaster?.start()
     }
 
+    // TODO: should this take in the registration as well ?
+    // otherwise the id generator won't have it and we never get a chance to broadcast :(
     func recreateBroadcaster(launchOptions: [UIApplication.LaunchOptionsKey : Any]?) {
         #warning("needs an implementation here")
     }

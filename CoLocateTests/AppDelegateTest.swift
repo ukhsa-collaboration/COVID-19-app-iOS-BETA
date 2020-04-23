@@ -102,7 +102,7 @@ class MockBluetoothNursery: BluetoothNursery {
     var recreateListenerWasCalled = false
     var recreateBroadcasterWasCalled = false
     
-    func startBroadcaster(stateDelegate: BTLEBroadcasterStateDelegate?) {
+    func startBroadcaster(stateDelegate: BTLEBroadcasterStateDelegate?, registration: Registration) {
         self.startBroadcasterCalled = true
     }
     

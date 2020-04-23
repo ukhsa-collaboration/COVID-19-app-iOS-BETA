@@ -138,7 +138,7 @@ private class NoOpBluetoothNursery: BluetoothNursery {
     var contactEventRepository: ContactEventRepository = NoOpContactEventRepository()
     var contactEventPersister: ContactEventPersister = NoOpContactEventPersister()
     
-    func startBroadcaster(stateDelegate: BTLEBroadcasterStateDelegate?) {
+    func startBroadcaster(stateDelegate: BTLEBroadcasterStateDelegate?, registration: Registration) {
     }
     func startListener(stateDelegate: BTLEListenerStateDelegate?) {
     }
