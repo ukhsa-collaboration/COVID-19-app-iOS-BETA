@@ -29,8 +29,7 @@ protocol Persisting {
     var potentiallyExposed: Bool { get nonmutating set }
     var selfDiagnosis: SelfDiagnosis? { get nonmutating set }
     var partialPostcode: String? { get nonmutating set }
-    var bluetoothPermissionRequested: Bool { get nonmutating set }
-    
+
     func clear()
 }
 
@@ -44,7 +43,6 @@ class Persistence: Persisting {
         case potentiallyExposed
         case selfDiagnosis
         case partialPostcode
-        case bluetoothPermissionRequested
     }
 
     static var shared = Persistence(secureRegistrationStorage: SecureRegistrationStorage(), broadcastKeyStorage: SecureBroadcastRotationKeyStorage())
@@ -122,11 +120,6 @@ class Persistence: Persisting {
         set { UserDefaults.standard.set(newValue, forKey: Keys.partialPostcode.rawValue) }
     }
     
-    var bluetoothPermissionRequested: Bool {
-        get { UserDefaults.standard.bool(forKey: Keys.bluetoothPermissionRequested.rawValue) }
-        set { UserDefaults.standard.set(newValue, forKey: Keys.bluetoothPermissionRequested.rawValue) }
-    }
-
     func clear() {
         for key in Keys.allCases {
             UserDefaults.standard.removeObject(forKey: key.rawValue)

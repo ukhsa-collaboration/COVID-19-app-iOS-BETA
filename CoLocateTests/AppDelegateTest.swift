@@ -18,25 +18,27 @@ class AppDelegateTest: XCTestCase {
     var dispatcher: RemoteNotificationDispatcherDouble!
     var remoteNotificationManager: RemoteNotificationManagerDouble!
     var registrationService: RegistrationServiceDouble!
+    var authorizationManager: AuthorizationManagerDouble!
     
     override func setUp() {
         nursery = MockBluetoothNursery()
         persistence = PersistenceDouble()
         dispatcher = RemoteNotificationDispatcherDouble()
-        remoteNotificationManager = RemoteNotificationManagerDouble()
         registrationService = RegistrationServiceDouble()
-        
+        authorizationManager = AuthorizationManagerDouble()
+        authorizationManager.bluetooth = .notDetermined
+        remoteNotificationManager = RemoteNotificationManagerDouble()
+
         appDelegate = AppDelegate()
-        appDelegate.bluetoothNursery = nursery
-        appDelegate.persistence = persistence
         appDelegate.dispatcher = dispatcher
-        appDelegate.remoteNotificationManager = remoteNotificationManager
+        appDelegate.persistence = persistence
+        appDelegate.bluetoothNursery = nursery
         appDelegate.registrationService = registrationService
+        appDelegate.authorizationManager = authorizationManager
+        appDelegate.remoteNotificationManager = remoteNotificationManager
     }
 
     func testFirstAppLaunchDoesNotStartBluetooth() throws {
-        appDelegate.persistence = PersistenceDouble(bluetoothPermissionRequested: false)
-        
         _ = appDelegate.application(UIApplication.shared, didFinishLaunchingWithOptions: nil)
 
         XCTAssertFalse(nursery.createListenerCalled)
@@ -44,7 +46,9 @@ class AppDelegateTest: XCTestCase {
     }
     
     func testLaunchingWithBluetoothPermissionRequested_StartsListener() {
-        appDelegate.persistence = PersistenceDouble(registration: nil, bluetoothPermissionRequested: true)
+        authorizationManager = AuthorizationManagerDouble(bluetooth: .allowed)
+        appDelegate.persistence = PersistenceDouble(registration: nil)
+        appDelegate.authorizationManager = authorizationManager
         
         _ = appDelegate.application(UIApplication.shared, didFinishLaunchingWithOptions: nil)
 

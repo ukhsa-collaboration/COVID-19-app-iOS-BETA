@@ -19,7 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     let notificationCenter = NotificationCenter.default
     let userNotificationCenter = UNUserNotificationCenter.current()
     let urlSession = URLSession.make()
-    let authorizationManager = AuthorizationManager()
+
+    lazy var authorizationManager: AuthorizationManaging = AuthorizationManager()
 
     lazy var dispatcher: RemoteNotificationDispatching = RemoteNotificationDispatcher(
         notificationCenter: notificationCenter,
@@ -81,7 +82,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         if let registration = persistence.registration {
             bluetoothNursery.createListener(stateDelegate: nil)
             bluetoothNursery.createBroadcaster(stateDelegate: nil, registration: registration)
-        } else if persistence.bluetoothPermissionRequested {
+        } else if authorizationManager.bluetooth != .notDetermined {
             bluetoothNursery.createListener(stateDelegate: nil)
         }
 
