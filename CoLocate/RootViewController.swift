@@ -51,8 +51,7 @@ class RootViewController: UIViewController {
         statusViewController.inject(
             persistence: persistence,
             registrationService: registrationService,
-            contactEventRepo: bluetoothNursery.contactEventRepository,
-            session: session,
+            contactEventsUploader: contactEventsUploader,
             notificationCenter: notificationCenter
         )
         

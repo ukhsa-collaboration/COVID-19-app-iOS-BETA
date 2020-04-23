@@ -13,14 +13,12 @@ class SelfDiagnosisNavigationController: UINavigationController, Storyboarded {
 
     func inject(
         persistence: Persisting,
-        contactEventRepo: ContactEventRepository,
-        session: Session
+        contactEventsUploader: ContactEventsUploader
     ) {
         let temperatureVC = viewControllers.first as! TemperatureViewController
         temperatureVC.inject(
             persistence: persistence,
-            contactEventRepo: contactEventRepo,
-            session: session
+            contactEventsUploader: contactEventsUploader
         )
     }
 }

@@ -19,8 +19,7 @@ class StatusViewController: UIViewController, Storyboarded {
     private var persistence: Persisting!
     private var registrationService: RegistrationService!
     private var notificationCenter: NotificationCenter!
-    private var contactEventRepo: ContactEventRepository!
-    private var session: Session!
+    private var contactEventsUploader: ContactEventsUploader!
 
     private lazy var drawerPresentationManager = DrawerPresentation()
     
@@ -73,14 +72,12 @@ class StatusViewController: UIViewController, Storyboarded {
     func inject(
         persistence: Persisting,
         registrationService: RegistrationService,
-        contactEventRepo: ContactEventRepository,
-        session: Session,
+        contactEventsUploader: ContactEventsUploader,
         notificationCenter: NotificationCenter
     ) {
         self.persistence = persistence
         self.registrationService = registrationService
-        self.contactEventRepo = contactEventRepo
-        self.session = session
+        self.contactEventsUploader = contactEventsUploader
         self.notificationCenter = notificationCenter
     }
 
@@ -143,8 +140,7 @@ class StatusViewController: UIViewController, Storyboarded {
         let selfDiagnosis = SelfDiagnosisNavigationController.instantiate()
         selfDiagnosis.inject(
             persistence: persistence,
-            contactEventRepo: contactEventRepo,
-            session: session
+            contactEventsUploader: contactEventsUploader
         )
         present(selfDiagnosis, animated: true)
     }

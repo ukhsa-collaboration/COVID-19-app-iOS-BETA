@@ -19,17 +19,14 @@ class TemperatureViewController: UIViewController {
     @IBOutlet weak var continueButton: PrimaryButton!
 
     var persistence: Persisting!
-    var contactEventRepo: ContactEventRepository!
-    var session: Session!
+    var contactEventsUploader: ContactEventsUploader!
 
     func inject(
         persistence: Persisting,
-        contactEventRepo: ContactEventRepository,
-        session: Session
+        contactEventsUploader: ContactEventsUploader
     ) {
         self.persistence = persistence
-        self.contactEventRepo = contactEventRepo
-        self.session = session
+        self.contactEventsUploader = contactEventsUploader
     }
 
     var hasHighTemperature: Bool? {
@@ -84,8 +81,7 @@ class TemperatureViewController: UIViewController {
         if let vc = segue.destination as? CoughViewController {
             vc.inject(
                 persistence: persistence,
-                contactEventRepo: contactEventRepo,
-                session: session,
+                contactEventsUploader: contactEventsUploader,
                 hasHighTemperature: hasHighTemperature!
             )
         }

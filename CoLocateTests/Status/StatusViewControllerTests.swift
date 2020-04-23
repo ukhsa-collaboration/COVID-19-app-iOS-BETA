@@ -121,8 +121,7 @@ fileprivate func makeViewController(
     vc.inject(
         persistence: persistence,
         registrationService: registrationService,
-        contactEventRepo: ContactEventRepositoryDouble(),
-        session: SessionDouble(),
+        contactEventsUploader: ContactEventsUploaderDouble(),
         notificationCenter: notificationCenter
     )
     XCTAssertNotNil(vc.view)

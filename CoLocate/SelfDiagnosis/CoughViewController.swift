@@ -19,18 +19,15 @@ class CoughViewController: UIViewController {
     @IBOutlet weak var continueButton: PrimaryButton!
 
     private var persistence: Persisting!
-    private var contactEventRepo: ContactEventRepository!
-    private var session: Session!
+    private var contactEventsUploader: ContactEventsUploader!
 
     func inject(
         persistence: Persisting,
-        contactEventRepo: ContactEventRepository,
-        session: Session,
+        contactEventsUploader: ContactEventsUploader,
         hasHighTemperature: Bool
     ) {
         self.persistence = persistence
-        self.contactEventRepo = contactEventRepo
-        self.session = session
+        self.contactEventsUploader = contactEventsUploader
 
         self.hasHighTemperature = hasHighTemperature
     }
@@ -88,8 +85,7 @@ class CoughViewController: UIViewController {
         if let vc = segue.destination as? SubmitSymptomsViewController {
             vc.inject(
                 persisting: persistence,
-                contactEventRepository: contactEventRepo,
-                session: session,
+                contactEventsUploader: contactEventsUploader,
                 hasHighTemperature: hasHighTemperature,
                 hasNewCough: hasNewCough!)
         }

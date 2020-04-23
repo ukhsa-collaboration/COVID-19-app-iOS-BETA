@@ -15,20 +15,17 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
     // MARK: - Dependencies
 
     private var persisting: Persisting!
-    private var contactEventRepository: ContactEventRepository!
-    private var session: Session!
+    private var contactEventsUploader: ContactEventsUploader!
     private var symptoms: Set<Symptom>!
 
     func inject(
         persisting: Persisting,
-        contactEventRepository: ContactEventRepository,
-        session: Session,
+        contactEventsUploader: ContactEventsUploader,
         hasHighTemperature: Bool,
         hasNewCough: Bool
     ) {
         self.persisting = persisting
-        self.contactEventRepository = contactEventRepository
-        self.session = session
+        self.contactEventsUploader = contactEventsUploader
 
         symptoms = Set()
         if hasHighTemperature {
@@ -91,10 +88,6 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
 
     private var isSubmitting = false
     @IBAction func submitTapped(_ sender: PrimaryButton) {
-        guard let registration = persisting.registration else {
-            fatalError("What do we do when we aren't registered?")
-        }
-
         guard !symptoms.isEmpty else {
             self.performSegue(withIdentifier: "unwindFromSelfDiagnosis", sender: self)
             return
@@ -109,34 +102,33 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         guard !isSubmitting else { return }
         isSubmitting = true
 
-        #warning("This needs to be replaced with actual business logic before we ship")
-        // NOTE: This is not spec'ed out, and is only here
-        // so we can make sure this flow works through the
-        // app during debugging. This will need to be replaced
-        // with real business logic in the future.
         persisting.selfDiagnosis = SelfDiagnosis(symptoms: symptoms, startDate: startDate)
 
-        let requestFactory = ConcreteSecureRequestFactory(registration: registration)
-
-        let contactEvents = contactEventRepository.contactEvents
-        let request = requestFactory.patchContactsRequest(contactEvents: contactEvents)
-        session.execute(request, queue: .main) { [weak self] result in
-            guard let self = self else { return }
-            
-            self.isSubmitting = false
-
-            switch result {
-            case .success:
-                self.performSegue(withIdentifier: "unwindFromSelfDiagnosis", sender: self)
-                self.contactEventRepository.reset()
-            case .failure:
-                self.submitErrorView.isHidden = false
-            }
+        do {
+            try contactEventsUploader.upload()
+            self.performSegue(withIdentifier: "unwindFromSelfDiagnosis", sender: self)
+        } catch {
+            // upload-contact-events-in-background: log this error
+            alert(with: Error())
         }
+    }
+
+    struct Error: Swift.Error {
+        var localizedDescription: String { "oh no" }
     }
 
     @IBAction func noSymptomsInfoTapped(_ sender: ButtonWithDynamicType) {
         UIApplication.shared.open(URL(string: "https://111.nhs.uk/covid-19/")!)
+    }
+
+    private func alert(with error: Error) {
+        let alert = UIAlertController(
+            title: "Error uploading contact events",
+            message: error.localizedDescription,
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "Okay", style: .default))
+        present(alert, animated: true)
     }
 }
 

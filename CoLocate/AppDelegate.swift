@@ -46,11 +46,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     lazy var contactEventsUploader: ContactEventsUploader = ContactEventsUploader(
         persisting: persistence,
         contactEventRepository: bluetoothNursery.contactEventRepository,
-        makeSession: { id, delegate in
-            let config = URLSessionConfiguration.background(withIdentifier: id)
-            return URLSession(configuration: config, delegate: delegate, delegateQueue: nil)
-        }
+        makeSession: makeBackgroundSession
     )
+
+    lazy var makeBackgroundSession: (String, URLSessionDelegate) -> Session = { id, delegate in
+        let config = URLSessionConfiguration.background(withIdentifier: id)
+        config.secure()
+        return URLSession(configuration: config, delegate: delegate, delegateQueue: nil)
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // TODO: If DEBUG is only necessary as long as we have the same bundle ID for both builds.
@@ -128,13 +131,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         logger.info("Will Enter Foreground")
     }
 
-    func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Void) {
+    func application(
+        _ application: UIApplication,
+        handleEventsForBackgroundURLSession identifier: String,
+        completionHandler: @escaping () -> Void
+    ) {
         // https://developer.apple.com/documentation/uikit/uiapplicationdelegate/1622941-application
         // https://developer.apple.com/documentation/foundation/url_loading_system/downloading_files_in_the_background
 
-        // upload-contact-events-in-background: delete upload file
-        // upload-contact-events-in-background: delete uploaded contact events
-        // upload-contact-events-in-background: handle errors
+        // This is called even if the app is in the background or suspended and a background
+        // URLSession task finishes. We're supposed to reconstruct the background session and
+        // attach a delegate to it when this gets called, but we already do that as part of
+        // the app launch, so can skip that here. However, we do need to attach the completion
+        // handler to the delegate so that we can notify the system when we're done processing
+        // the task events.
+
+        contactEventsUploader.sessionDelegate.completionHandler = completionHandler
     }
 
     // MARK: - Private

@@ -13,74 +13,32 @@ class SubmitSymptomsViewControllerTests: TestCase {
 
     var vc: SubmitSymptomsViewController!
     var persistence: PersistenceDouble!
-    fileprivate var contactEventRepository: ContactEventRepositoryDouble!
-    var session: SessionDouble!
+    var contactEventsUploader: ContactEventsUploaderDouble!
 
     override func setUp() {
         super.setUp()
 
         persistence = PersistenceDouble()
-        contactEventRepository = ContactEventRepositoryDouble()
-        session = SessionDouble()
-    }
-
-    #warning("Make sure this case is handled before we ship a public release")
-    func testNotRegistered() throws {
-        throw XCTSkip("TODO: write this test")
+        contactEventsUploader = ContactEventsUploaderDouble()
     }
 
     func testSubmitTapped() throws {
-        let expectedBroadcastId = "opaque bytes that only the server can decrypt".data(using: .utf8)!
-        let contactEvent = ContactEvent(encryptedRemoteContactId: expectedBroadcastId)
-
         makeSubject(
             registration: Registration(id: UUID(uuidString: "FA817D5C-C615-4ABE-83B5-ABDEE8FAB8A6")!, secretKey: Data(), broadcastRotationKey: knownGoodECPublicKey()),
-            contactEvents: [contactEvent],
             hasHighTemperature: true,
             hasNewCough: false,
             startDate: Date()
         )
 
-        let button = PrimaryButton()
-        vc.submitTapped(button)
-
-        guard let request = session.requestSent as? PatchContactEventsRequest else {
-            XCTFail("Expected a PatchContactEventsRequest but got \(String(describing: session.requestSent))")
-            return
-        }
-
-        XCTAssertEqual(request.path, "/api/residents/FA817D5C-C615-4ABE-83B5-ABDEE8FAB8A6")
-
-        switch request.method {
-        case .patch(let data):
-            let decoder = JSONDecoder()
-            let decoded = try decoder.decode([String: [DecodableBroadcastId]].self, from: data)
-            // Can't compare the entire contact events because the timestamp loses precision
-            // when JSON encoded and decoded.
-
-            XCTAssertEqual(1, decoded.count)
-
-            let firstEvent = decoded["contactEvents"]?.first
-            XCTAssertEqual(expectedBroadcastId, firstEvent?.encryptedRemoteContactId)
-        default:
-            XCTFail("Expected a patch request but got \(request.method)")
-        }
-    }
-    
-    func testPreventsDoubleSubmission() {
-        makeSubject(
-            hasHighTemperature: true,
-            hasNewCough: false,
-            startDate: Date()
-        )
+        let unwinder = SelfDiagnosisUnwinder()
+        parentViewControllerForTests.viewControllers = [unwinder]
+        unwinder.present(vc, animated: false)
 
         let button = PrimaryButton()
         vc.submitTapped(button)
-        
-        XCTAssertNotNil(session.requestSent)
-        session.requestSent = nil
-        vc.submitTapped(button)
-        XCTAssertNil(session.requestSent)
+
+        XCTAssertTrue(contactEventsUploader.uploadCalled)
+        XCTAssertTrue(unwinder.didUnwindFromSelfDiagnosis)
     }
     
     func testHasNoSymptoms() {
@@ -94,7 +52,7 @@ class SubmitSymptomsViewControllerTests: TestCase {
 
         XCTAssertNil(persistence.selfDiagnosis)
         XCTAssertTrue(unwinder.didUnwindFromSelfDiagnosis)
-        XCTAssertNil(session.requestSent)
+        XCTAssertFalse(contactEventsUploader.uploadCalled)
     }
 
     func testPersistsDiagnosisAndSubmitsIfOnlyTemperature() {
@@ -103,7 +61,7 @@ class SubmitSymptomsViewControllerTests: TestCase {
         vc.submitTapped(PrimaryButton())
 
         XCTAssertEqual(persistence.selfDiagnosis?.symptoms, [.temperature])
-        XCTAssertNotNil(session.requestSent)
+        XCTAssertTrue(contactEventsUploader.uploadCalled)
     }
 
     func testPersistsDiagnosisAndSubmitsIfOnlyCough() {
@@ -112,7 +70,7 @@ class SubmitSymptomsViewControllerTests: TestCase {
         vc.submitTapped(PrimaryButton())
 
         XCTAssertEqual(persistence.selfDiagnosis?.symptoms, [.cough])
-        XCTAssertNotNil(session.requestSent)
+        XCTAssertTrue(contactEventsUploader.uploadCalled)
     }
 
     func testPersistsDiagnosisAndSubmitsIfBoth() {
@@ -121,7 +79,7 @@ class SubmitSymptomsViewControllerTests: TestCase {
         vc.submitTapped(PrimaryButton())
 
         XCTAssertEqual(persistence.selfDiagnosis?.symptoms, [.temperature, .cough])
-        XCTAssertNotNil(session.requestSent)
+        XCTAssertTrue(contactEventsUploader.uploadCalled)
     }
 
     func testPersistsStartDate() {
@@ -139,65 +97,21 @@ class SubmitSymptomsViewControllerTests: TestCase {
         vc.submitTapped(PrimaryButton())
 
         XCTAssertNil(persistence.selfDiagnosis?.symptoms)
-        XCTAssertNil(session.requestSent)
-    }
-
-    func testSubmitSuccess() {
-        makeSubject(hasHighTemperature: false, hasNewCough: true, startDate: Date())
-
-        let unwinder = SelfDiagnosisUnwinder()
-        parentViewControllerForTests.viewControllers = [unwinder]
-        unwinder.present(vc, animated: false)
-
-        let button = PrimaryButton()
-        vc.submitTapped(button)
-        
-        guard let sessionCompletion = session.executeCompletion else {
-            XCTFail("Request was not made")
-            return
-        }
-        
-        sessionCompletion(Result<(), Error>.success(()))
-
-        XCTAssertTrue(contactEventRepository.hasReset)
-        XCTAssertTrue(unwinder.didUnwindFromSelfDiagnosis)
-    }
-
-    func testSubmitFailure() {
-        makeSubject(hasHighTemperature: false, hasNewCough: true, startDate: Date())
-
-        let unwinder = SelfDiagnosisUnwinder()
-        parentViewControllerForTests.viewControllers = [unwinder]
-        unwinder.present(vc, animated: false)
-
-        let button = PrimaryButton()
-        vc.submitTapped(button)
-        
-        guard let sessionCompletion = session.executeCompletion else {
-            XCTFail("Request was not made")
-            return
-        }
-        
-        sessionCompletion(Result<(), Error>.failure(ErrorForTest()))
-
-        XCTAssertFalse(vc.submitErrorView.isHidden)
+        XCTAssertFalse(contactEventsUploader.uploadCalled)
     }
 
     private func makeSubject(
         registration: Registration = Registration.fake,
-        contactEvents: [ContactEvent] = [],
         hasHighTemperature: Bool = false,
         hasNewCough: Bool = false,
         startDate: Date? = nil
     ) {
         persistence.registration = registration
-        contactEventRepository.contactEvents = contactEvents
 
         vc = SubmitSymptomsViewController.instantiate()
         vc.inject(
             persisting: persistence,
-            contactEventRepository: contactEventRepository,
-            session: session,
+            contactEventsUploader: contactEventsUploader,
             hasHighTemperature: hasHighTemperature,
             hasNewCough: hasNewCough
         )

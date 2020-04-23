@@ -11,6 +11,11 @@ import XCTest
 
 class ContactEventsUploaderTests: XCTestCase {
 
+    #warning("Make sure this case is handled before we ship a public release")
+    func testNotRegistered() throws {
+        throw XCTSkip("TODO: write this test")
+    }
+
     func testUploadRequest() {
         let registration = Registration.fake
         let persisting = PersistenceDouble(registration: registration)
