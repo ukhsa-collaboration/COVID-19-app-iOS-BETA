@@ -115,6 +115,8 @@
 		F600A60224297A8E0038DF57 /* RegistrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F600A60124297A8E0038DF57 /* RegistrationRequest.swift */; };
 		F600A60424297C010038DF57 /* RegistrationRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F600A60324297C010038DF57 /* RegistrationRequestTests.swift */; };
 		F604975F2451F9CD002B8503 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F604975E2451F9CD002B8503 /* Environment.swift */; };
+		F604976324521574002B8503 /* CoLocate.xcconfig.sample in Resources */ = {isa = PBXBuildFile; fileRef = F604976224521574002B8503 /* CoLocate.xcconfig.sample */; };
+		F6049765245215A3002B8503 /* environment.json in Resources */ = {isa = PBXBuildFile; fileRef = F6049764245215A3002B8503 /* environment.json */; };
 		F613936E243FA82B003447E8 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = F613936D243FA82B003447E8 /* Appearance.swift */; };
 		F62F857F2451051C006580A8 /* ContactEventsUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62F857E2451051C006580A8 /* ContactEventsUploader.swift */; };
 		F62F858124510716006580A8 /* ContactEventsUploaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62F858024510716006580A8 /* ContactEventsUploaderTests.swift */; };
@@ -321,6 +323,8 @@
 		F600A60324297C010038DF57 /* RegistrationRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationRequestTests.swift; sourceTree = "<group>"; };
 		F604975E2451F9CD002B8503 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		F60497602451FA42002B8503 /* Environment.swift.erb */ = {isa = PBXFileReference; lastKnownFileType = text; path = Environment.swift.erb; sourceTree = "<group>"; };
+		F604976224521574002B8503 /* CoLocate.xcconfig.sample */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CoLocate.xcconfig.sample; sourceTree = "<group>"; };
+		F6049764245215A3002B8503 /* environment.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = environment.json; sourceTree = "<group>"; };
 		F613936D243FA82B003447E8 /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		F62F857E2451051C006580A8 /* ContactEventsUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventsUploader.swift; sourceTree = "<group>"; };
 		F62F858024510716006580A8 /* ContactEventsUploaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventsUploaderTests.swift; sourceTree = "<group>"; };
@@ -805,10 +809,12 @@
 		F68D8FD424476846008BAAAA /* Environments */ = {
 			isa = PBXGroup;
 			children = (
+				F60497602451FA42002B8503 /* Environment.swift.erb */,
+				F6049764245215A3002B8503 /* environment.json */,
 				F78CEB67242B8C2B002254AD /* GoogleService-Info.beta.plist */,
 				F66CC928244F63F3001399D4 /* GoogleService-Info.internal.plist */,
 				F6CBA499244F6E2C00D20610 /* GoogleService-Info.production.plist */,
-				F60497602451FA42002B8503 /* Environment.swift.erb */,
+				F604976224521574002B8503 /* CoLocate.xcconfig.sample */,
 				F68D8FE324476F0B008BAAAA /* beta.xcconfig */,
 				F68D8FE524477031008BAAAA /* internal.xcconfig */,
 				F68D8FE424477031008BAAAA /* production.xcconfig */,
@@ -1068,11 +1074,13 @@
 				6FC63C3B241641BA007C8BF3 /* LaunchScreen.storyboard in Resources */,
 				AEC6A7BE241BD82900B0237A /* LogoStrapline.xib in Resources */,
 				A1E7A0592420028B0078174D /* NHS Colors.xcassets in Resources */,
+				F6049765245215A3002B8503 /* environment.json in Resources */,
 				F758B8BE242CB856003AE16D /* Localizable.strings in Resources */,
 				6FC63C38241641BA007C8BF3 /* Assets.xcassets in Resources */,
 				895D9E462437458700573D4D /* AppIcon.xcassets in Resources */,
 				F68B89ED243CFF2600F369A9 /* SelfDiagnosis.storyboard in Resources */,
 				F6F05A322434310200FF4B72 /* Onboarding.storyboard in Resources */,
+				F604976324521574002B8503 /* CoLocate.xcconfig.sample in Resources */,
 				F70CB81B2450CFA900ED6E7F /* OnboardingLogoStrapline.xib in Resources */,
 				098ED481242E745F0029B729 /* Debug.storyboard in Resources */,
 			);

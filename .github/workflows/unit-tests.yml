@@ -36,7 +36,9 @@ jobs:
         run: xcodebuild -showsdks
 
       - name: Setup Build Configuration
-        run: cp CoLocate.xcconfig.sample CoLocate.xcconfig
+        run: |
+          cp CoLocate/Environments/CoLocate.xcconfig.sample CoLocate.xcconfig
+          cat CoLocate/Environments/envionment.json | ./bin/make-environment > CoLocate/Environment.swift
 
       - name: Run Build
         env:
@@ -69,7 +71,9 @@ jobs:
         run: xcodebuild -scheme CoLocate -showdestinations
 
       - name: Setup Build Configuration
-        run: cp CoLocate.xcconfig.sample CoLocate.xcconfig
+        run: |
+          cp CoLocate/Environments/CoLocate.xcconfig.sample CoLocate.xcconfig
+          cat CoLocate/Environments/envionment.json | ./bin/make-environment > CoLocate/Environment.swift
 
       - run: |
           killall "Simulator" || true

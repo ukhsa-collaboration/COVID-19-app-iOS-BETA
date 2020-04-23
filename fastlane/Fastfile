@@ -57,7 +57,7 @@ platform :ios do
       File.write("CoLocate.xcconfig", <<~XCCONFIG)
         #include "CoLocate/Environments/#{sonar_env}.xcconfig"
       XCCONFIG
-      sh "./bin/make-environment <<< $ENVIRONMENT_JSON_#{sonar_env.upcase}"
+      sh "./bin/make-environment <<< $ENVIRONMENT_JSON_#{sonar_env.upcase} > CoLocate/Environment.swift"
       FileUtils.cp "CoLocate/Environments/GoogleService-Info.#{sonar_env}.plist", "CoLocate/GoogleService-Info.plist"
     end
 
