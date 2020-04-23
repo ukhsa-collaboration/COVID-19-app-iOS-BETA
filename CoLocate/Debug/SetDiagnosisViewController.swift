@@ -79,7 +79,7 @@ class SetDiagnosisViewController: UITableViewController {
 
         case [2, 1]:
             persistence.selfDiagnosis = nil
-            render()
+            performSegue(withIdentifier: "unwindFromSetDiagnosis", sender: self)
 
         default:
             fatalError()

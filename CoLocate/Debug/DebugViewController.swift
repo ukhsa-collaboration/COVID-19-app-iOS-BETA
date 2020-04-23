@@ -140,6 +140,9 @@ class DebugViewController: UITableViewController, Storyboarded {
         }
     }
 
+    @IBAction func unwindFromSetDiagnosis(unwindSegue: UIStoryboardSegue) {
+    }
+
 }
 
 class TestPushRequest: SecureRequest, Request {

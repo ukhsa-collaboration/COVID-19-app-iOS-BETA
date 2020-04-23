@@ -260,7 +260,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable new self-diagnosis" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZvC-4f-ZSM">
-                                                    <rect key="frame" x="8" y="11" width="200" height="22"/>
+                                                    <rect key="frame" x="20" y="11" width="200" height="22"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -497,9 +497,11 @@
                         <outlet property="startDateTextField" destination="P89-TF-mQ0" id="hnk-9w-2aJ"/>
                         <outlet property="temperatureSwitch" destination="qft-3S-ChU" id="7YC-L0-SKa"/>
                         <outlet property="updateLabel" destination="cIF-Z1-Xba" id="HKb-b0-3QV"/>
+                        <segue destination="7MX-xE-Ie1" kind="unwind" identifier="unwindFromSetDiagnosis" unwindAction="unwindFromSetDiagnosisWithUnwindSegue:" id="9ZT-bW-JfC"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x7U-S8-KSV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="7MX-xE-Ie1" userLabel="Exit" sceneMemberID="exit"/>
                 <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="K6c-WO-MAo">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
