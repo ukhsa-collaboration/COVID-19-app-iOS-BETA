@@ -126,5 +126,5 @@ class PermissionsViewControllerTests: TestCase {
 }
 
 fileprivate struct DummyBTLEBroadcaster: BTLEBroadcaster {
-    func tryStartAdvertising() { }
+    func start() { }
 }

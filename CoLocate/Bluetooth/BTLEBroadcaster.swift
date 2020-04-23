@@ -16,7 +16,7 @@ protocol BTLEBroadcasterStateDelegate {
 }
 
 protocol BTLEBroadcaster {
-    func tryStartAdvertising()
+    func start()
 }
 
 class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDelegate {
@@ -35,7 +35,7 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
         self.idGenerator = idGenerator
     }
 
-    func tryStartAdvertising() {
+    func start() {
         guard let peripheral = peripheral else {
             logger.error("peripheral is nil, this shouldn't happen")
             return
@@ -114,7 +114,7 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
             
         case .poweredOn:
             self.peripheral = peripheral
-            tryStartAdvertising()
+            start()
             
         default:
             break

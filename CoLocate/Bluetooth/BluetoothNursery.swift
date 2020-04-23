@@ -82,7 +82,7 @@ class ConcreteBluetoothNursery: BluetoothNursery {
         ])
         (broadcaster as? ConcreteBTLEBroadcaster)?.stateDelegate = stateDelegate
 
-        broadcaster?.tryStartAdvertising()
+        broadcaster?.start()
     }
     
 }
