@@ -422,7 +422,6 @@ class RegistrationServiceTests: TestCase {
     
         remoteNotificationDispatcher.pushToken = "the current push token"
         let completedObserver = NotificationObserverDouble(notificationCenter: notificationCenter, notificationName: RegistrationCompletedNotification)
-        let failedObserver = NotificationObserverDouble(notificationCenter: notificationCenter, notificationName: RegistrationFailedNotification)
 
         registrationService.register()
         
