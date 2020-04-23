@@ -119,9 +119,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         logger.info("Will Enter Foreground")
     }
 
+    func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Void) {
+        // https://developer.apple.com/documentation/uikit/uiapplicationdelegate/1622941-application
+        // https://developer.apple.com/documentation/foundation/url_loading_system/downloading_files_in_the_background
+
+        // upload-contact-events-in-background: delete upload file
+        // upload-contact-events-in-background: delete uploaded contact events
+        // upload-contact-events-in-background: handle errors
+    }
+
     // MARK: - Private
     
-    func scheduleLocalNotification() {
+    private func scheduleLocalNotification() {
         let scheduler = HumbleLocalNotificationScheduler(userNotificationCenter: userNotificationCenter)
 
         scheduler.scheduleLocalNotification(

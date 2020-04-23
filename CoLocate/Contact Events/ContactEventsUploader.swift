@@ -28,7 +28,6 @@ class ContactEventsUploader {
         self.session = makeSession(ContactEventsUploader.backgroundIdentifier, sessionDelegate)
     }
 
-    //  upload-contact-events-in-background: we can't require registration here
     func upload() throws {
         let contactEvents = contactEventRepository.contactEvents
 
@@ -38,21 +37,36 @@ class ContactEventsUploader {
         let requestFactory = ConcreteSecureRequestFactory(registration: registration)
         let request = requestFactory.patchContactsRequest(contactEvents: contactEvents)
 
+        // According to the Apple docs, the upload task copies the file into its own temporary
+        // location to stream data from, so it should be safe to use the tmpdir for this.
         let tmpDir = FileManager.default.temporaryDirectory
         let fileURL = tmpDir.appendingPathComponent("contactEvents.json")
 
         try request.urlRequest().httpBody!.write(to: fileURL)
 
         session.upload(with: request, fromFile: fileURL)
+
+        try FileManager.default.removeItem(at: fileURL)
     }
 
 }
 
-// This exists due to the catch-22 of needing to provide the URLSessionDelegate
-// in the initialization of the URLSession.
+// This class exists due to the catch-22 of needing to provide the
+// URLSessionDelegate in the initialization of the URLSession.
 fileprivate class ContactEventsUploaderSessionDelegate: NSObject, URLSessionTaskDelegate {
+    func urlSession(_ session: URLSession, task: URLSessionTask, didSendBodyData bytesSent: Int64, totalBytesSent: Int64, totalBytesExpectedToSend: Int64) {
+        // upload-contact-events-in-background: might be useful for debugging
+    }
+
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+        // upload-contact-events-in-background: delete upload file
         // upload-contact-events-in-background: delete uploaded contact events
         // upload-contact-events-in-background: handle errors
+    }
+
+    func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {
+        // https://developer.apple.com/documentation/foundation/url_loading_system/downloading_files_in_the_background
+
+        // upload-contact-events-in-background: is this called for upload tasks?
     }
 }
