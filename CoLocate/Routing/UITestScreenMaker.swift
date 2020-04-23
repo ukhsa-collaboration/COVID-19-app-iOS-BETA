@@ -132,9 +132,37 @@ private class EphemeralRemoteNotificationManager: RemoteNotificationManager {
 
 private struct MockError: Error {}
 
-private class NoOpBluetoothNursery: StartsBroadcasting {
+private class NoOpBluetoothNursery: BluetoothNursery {
+    var contactEventRepository: ContactEventRepository = NoOpContactEventRepository()
+    var contactEventPersister: ContactEventPersister = NoOpContactEventPersister()
+    
     func startBroadcaster(stateDelegate: BTLEBroadcasterStateDelegate?) {
     }
+}
+
+private class NoOpContactEventRepository: ContactEventRepository {
+    var contactEvents: [ContactEvent] = []
+
+    func btleListener(_ listener: BTLEListener, didFind sonarId: Data, forPeripheral peripheral: BTLEPeripheral) {
+    }
+    
+    func btleListener(_ listener: BTLEListener, didReadRSSI RSSI: Int, forPeripheral peripheral: BTLEPeripheral) {
+    }
+        
+    func reset() {
+    }
+    
+    func removeExpiredContactEvents(ttl: Double) {
+    }
+    
+}
+
+private class NoOpContactEventPersister: ContactEventPersister {
+    var items: [UUID : ContactEvent] = [:]
+    
+    func reset() {
+    }
+    
 }
 
 #endif

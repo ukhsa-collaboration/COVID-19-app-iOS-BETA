@@ -9,7 +9,10 @@
 import UIKit
 @testable import CoLocate
 
-class BluetoothNurseryDouble: StartsBroadcasting {
+class BluetoothNurseryDouble: BluetoothNursery {
+    var contactEventRepository: ContactEventRepository = ContactEventRepositoryDouble()
+    var contactEventPersister: ContactEventPersister = ContactEventPersisterDouble()
+    
     func startBroadcaster(stateDelegate: BTLEBroadcasterStateDelegate?) {
     }
 }

@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     let urlSession = URLSession.make()
     let persistence = Persistence.shared
     let authorizationManager = AuthorizationManager()
-    let bluetoothNursery: BluetoothNursery
+    let bluetoothNursery: ConcreteBluetoothNursery
     let remoteNotificationManager: RemoteNotificationManager
     let registrationService: RegistrationService
 
@@ -45,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             notificationCenter: notificationCenter,
             timeoutQueue: DispatchQueue.main
         )
-        bluetoothNursery = BluetoothNursery(persistence: persistence, userNotificationCenter: userNotificationCenter, notificationCenter: notificationCenter)
+        bluetoothNursery = ConcreteBluetoothNursery(persistence: persistence, userNotificationCenter: userNotificationCenter, notificationCenter: notificationCenter)
         
         
         super.init()
@@ -77,8 +77,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             remoteNotificationManager: remoteNotificationManager,
             notificationCenter: notificationCenter,
             registrationService: registrationService,
-            contactEventRepository: bluetoothNursery.contactEventRepository,
-            contactEventPersister: bluetoothNursery.contactEventPersister,
             bluetoothNursery: bluetoothNursery,
             bluetoothStateObserver: ConcreteBluetoothStateObserver(),
             session: urlSession,

@@ -13,14 +13,14 @@ class SubmitSymptomsViewControllerTests: TestCase {
 
     var vc: SubmitSymptomsViewController!
     var persistence: PersistenceDouble!
-    fileprivate var contactEventRepository: MockContactEventRepository!
+    fileprivate var contactEventRepository: ContactEventRepositoryDouble!
     var session: SessionDouble!
 
     override func setUp() {
         super.setUp()
 
         persistence = PersistenceDouble()
-        contactEventRepository = MockContactEventRepository()
+        contactEventRepository = ContactEventRepositoryDouble()
         session = SessionDouble()
     }
 

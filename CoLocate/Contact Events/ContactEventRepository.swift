@@ -9,7 +9,7 @@
 import Foundation
 import Logging
 
-protocol ContactEventRepository {
+protocol ContactEventRepository: BTLEListenerDelegate {
     var contactEvents: [ContactEvent] { get }
     func reset()
     func removeExpiredContactEvents(ttl: Double)
@@ -23,7 +23,7 @@ protocol ContactEventPersister {
 extension PlistPersister: ContactEventPersister where K == UUID, V == ContactEvent {
 }
 
-@objc class PersistingContactEventRepository: NSObject, BTLEListenerDelegate, ContactEventRepository {
+@objc class PersistingContactEventRepository: NSObject, ContactEventRepository {
     
     @objc dynamic public var _contactEventCount: Int {
         return persister.items.count

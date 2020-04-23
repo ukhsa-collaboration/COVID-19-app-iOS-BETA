@@ -13,7 +13,7 @@ class OnboardingViewController: UINavigationController, Storyboarded {
 
     private var environment: OnboardingEnvironment! = nil
     private var onboardingCoordinator: OnboardingCoordinator! = nil
-    private var bluetoothNursery: StartsBroadcasting!
+    private var bluetoothNursery: BluetoothNursery!
     private var completionHandler: (() -> Void)! = nil
     private var uiQueue: TestableQueue! = nil
 
@@ -22,7 +22,7 @@ class OnboardingViewController: UINavigationController, Storyboarded {
         container.show(viewController: self)
     }
 
-    func inject(env: OnboardingEnvironment, coordinator: OnboardingCoordinator, bluetoothNursery: StartsBroadcasting, uiQueue: TestableQueue, completionHandler: @escaping () -> Void) {
+    func inject(env: OnboardingEnvironment, coordinator: OnboardingCoordinator, bluetoothNursery: BluetoothNursery, uiQueue: TestableQueue, completionHandler: @escaping () -> Void) {
         self.environment = env
         self.onboardingCoordinator = coordinator
         self.bluetoothNursery = bluetoothNursery

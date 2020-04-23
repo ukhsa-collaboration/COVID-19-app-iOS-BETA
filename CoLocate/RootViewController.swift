@@ -19,9 +19,7 @@ class RootViewController: UIViewController {
     private var remoteNotificationManager: RemoteNotificationManager! = nil
     private var notificationCenter: NotificationCenter! = nil
     private var registrationService: RegistrationService! = nil
-    private var contactEventRepository: ContactEventRepository! = nil
-    private var contactEventPersister: ContactEventPersister! = nil
-    private var bluetoothNursery: StartsBroadcasting!
+    private var bluetoothNursery: BluetoothNursery!
     private var bluetoothStateObserver: BluetoothStateObserver!
     private var statusViewController: StatusViewController!
     private var session: Session! = nil
@@ -33,9 +31,7 @@ class RootViewController: UIViewController {
         remoteNotificationManager: RemoteNotificationManager,
         notificationCenter: NotificationCenter,
         registrationService: RegistrationService,
-        contactEventRepository: ContactEventRepository,
-        contactEventPersister: ContactEventPersister,
-        bluetoothNursery: StartsBroadcasting,
+        bluetoothNursery: BluetoothNursery,
         bluetoothStateObserver: BluetoothStateObserver,
         session: Session,
         uiQueue: TestableQueue
@@ -45,8 +41,6 @@ class RootViewController: UIViewController {
         self.remoteNotificationManager = remoteNotificationManager
         self.notificationCenter = notificationCenter
         self.registrationService = registrationService
-        self.contactEventRepository = contactEventRepository
-        self.contactEventPersister = contactEventPersister
         self.bluetoothNursery = bluetoothNursery
         self.bluetoothStateObserver = bluetoothStateObserver
         self.session = session
@@ -56,7 +50,7 @@ class RootViewController: UIViewController {
         statusViewController.inject(
             persistence: persistence,
             registrationService: registrationService,
-            contactEventRepo: contactEventRepository,
+            contactEventRepo: bluetoothNursery.contactEventRepository,
             session: session,
             notificationCenter: notificationCenter
         )
@@ -154,7 +148,7 @@ class RootViewController: UIViewController {
             let navVC = tabBarVC.viewControllers?.first as? UINavigationController,
             let debugVC = navVC.viewControllers.first as? DebugViewController else { return }
         
-        debugVC.inject(persisting: persistence, contactEventRepository: contactEventRepository, contactEventPersister: contactEventPersister)
+        debugVC.inject(persisting: persistence, contactEventRepository: bluetoothNursery.contactEventRepository, contactEventPersister: bluetoothNursery.contactEventPersister)
         
         present(tabBarVC, animated: true)
     }

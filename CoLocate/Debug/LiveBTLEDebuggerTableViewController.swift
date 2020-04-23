@@ -13,7 +13,7 @@ class LiveBTLEDebuggerTableViewController: UITableViewController {
     var persistence: Persistence = Persistence.shared
     var broadcastIdGenerator: BroadcastIdGenerator = (UIApplication.shared.delegate as! AppDelegate).bluetoothNursery.broadcastIdGenerator
     
-    @objc var repository: PersistingContactEventRepository = (UIApplication.shared.delegate as! AppDelegate).bluetoothNursery.contactEventRepository
+    @objc var repository: PersistingContactEventRepository = (UIApplication.shared.delegate as! AppDelegate).bluetoothNursery.contactEventRepository as! PersistingContactEventRepository
     
     var observation: NSKeyValueObservation?
     

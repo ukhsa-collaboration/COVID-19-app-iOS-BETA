@@ -157,8 +157,6 @@ fileprivate func makeRootVC(
         remoteNotificationManager: RemoteNotificationManagerDouble(dispatcher: remoteNotificationDispatcher),
         notificationCenter: notificationCenter,
         registrationService: RegistrationServiceDouble(),
-        contactEventRepository: ContactEventRepositoryDouble(),
-        contactEventPersister: ContactEventPersisterDouble(),
         bluetoothNursery: BluetoothNurseryDouble(),
         bluetoothStateObserver: bluetoothStateObserver,
         session: SessionDouble(),
