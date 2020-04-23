@@ -78,21 +78,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         window?.rootViewController = rootVC
         window?.makeKeyAndVisible()
         
-        switch (launchOptions, persistence.registration) {
-
-        case (let launchOptions?, .none) where launchOptions[contains: .bluetoothPeripherals] || launchOptions[contains: .bluetoothCentrals]:
-            bluetoothNursery.restoreListener(launchOptions[.bluetoothCentrals] as! [String])
-
-        case (let launchOptions?, .some) where launchOptions[contains: .bluetoothPeripherals] || launchOptions[contains: .bluetoothCentrals]:
-            bluetoothNursery.restoreListener(launchOptions[.bluetoothCentrals] as! [String])
-            bluetoothNursery.restoreBroadcaster(launchOptions[.bluetoothPeripherals] as! [String])
-            
-        case (.none, let registration?):
-            bluetoothNursery.createBroadcaster(stateDelegate: nil, registration: registration)
+        if let registration = persistence.registration {
             bluetoothNursery.createListener(stateDelegate: nil)
-
-        default:
-            break
+            bluetoothNursery.createBroadcaster(stateDelegate: nil, registration: registration)
+        } else if persistence.bluetoothPermissionRequested {
+            bluetoothNursery.createListener(stateDelegate: nil)
         }
 
         return true

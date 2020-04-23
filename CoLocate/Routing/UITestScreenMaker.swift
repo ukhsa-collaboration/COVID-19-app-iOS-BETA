@@ -66,6 +66,7 @@ private class InMemoryPersistence: Persisting {
     var enableNewSelfDiagnosis = false
     var partialPostcode: String? = nil
     var enableNewKeyRotation = false
+    var bluetoothPermissionRequested: Bool = false
     
     func clear() {
         allowedDataSharing = false

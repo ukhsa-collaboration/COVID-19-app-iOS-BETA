@@ -12,26 +12,29 @@ import UIKit
 class PersistenceDouble: Persisting {
     var delegate: PersistenceDelegate?
     
-    var allowedDataSharing: Bool
-    var registration: Registration?
-    var potentiallyExposed: Bool
-    var selfDiagnosis: SelfDiagnosis?
+    var allowedDataSharing: Bool = false
+    var registration: Registration? = nil
+    var potentiallyExposed: Bool = false
+    var selfDiagnosis: SelfDiagnosis? = nil
     var enableNewSelfDiagnosis = false
-    var partialPostcode: String?
+    var partialPostcode: String? = nil
     var enableNewKeyRotation = false
+    var bluetoothPermissionRequested: Bool = false
 
     init(
         allowedDataSharing: Bool = false,
         potentiallyExposed: Bool = false,
         diagnosis: SelfDiagnosis? = nil,
         registration: Registration? = nil,
-        partialPostcode: String? = nil
+        partialPostcode: String? = nil,
+        bluetoothPermissionRequested: Bool = false
     ) {
         self.allowedDataSharing = allowedDataSharing
         self.registration = registration
         self.potentiallyExposed = potentiallyExposed
         self.selfDiagnosis = diagnosis
         self.partialPostcode = partialPostcode
+        self.bluetoothPermissionRequested = bluetoothPermissionRequested
     }
 
     func clear() {
