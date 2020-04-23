@@ -46,7 +46,9 @@
 		09E876BC24510F2C009C2628 /* BluetoothNurseryDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E876BB24510F2C009C2628 /* BluetoothNurseryDouble.swift */; };
 		131AB05C2449D85B002136CA /* ContactEventExpiryHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131AB05B2449D85B002136CA /* ContactEventExpiryHandler.swift */; };
 		131AB05E2449D894002136CA /* ContactEventExpiryHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131AB05D2449D894002136CA /* ContactEventExpiryHandlerTests.swift */; };
+		1347DAF12450915500F2F776 /* LocalNotificationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1347DAF02450915500F2F776 /* LocalNotificationTests.swift */; };
 		138114E42450543600BA46C7 /* SymptomStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138114E32450543600BA46C7 /* SymptomStackView.swift */; };
+		138114E62450796C00BA46C7 /* LocalNotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138114E52450796C00BA46C7 /* LocalNotificationScheduler.swift */; };
 		2115C3E624360427009C0F5B /* DebuggerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2115C3E524360427009C0F5B /* DebuggerTableViewCell.swift */; };
 		213C806C241A56430020EFA5 /* PermissionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213C806B241A56430020EFA5 /* PermissionsViewController.swift */; };
 		214209B62421072C00C7BFF3 /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209B52421072C00C7BFF3 /* StatusViewController.swift */; };
@@ -251,7 +253,9 @@
 		09E876BB24510F2C009C2628 /* BluetoothNurseryDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothNurseryDouble.swift; sourceTree = "<group>"; };
 		131AB05B2449D85B002136CA /* ContactEventExpiryHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventExpiryHandler.swift; sourceTree = "<group>"; };
 		131AB05D2449D894002136CA /* ContactEventExpiryHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventExpiryHandlerTests.swift; sourceTree = "<group>"; };
+		1347DAF02450915500F2F776 /* LocalNotificationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationTests.swift; sourceTree = "<group>"; };
 		138114E32450543600BA46C7 /* SymptomStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomStackView.swift; sourceTree = "<group>"; };
+		138114E52450796C00BA46C7 /* LocalNotificationScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationScheduler.swift; sourceTree = "<group>"; };
 		2115C3E524360427009C0F5B /* DebuggerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebuggerTableViewCell.swift; sourceTree = "<group>"; };
 		213C806B241A56430020EFA5 /* PermissionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsViewController.swift; sourceTree = "<group>"; };
 		214209B52421072C00C7BFF3 /* StatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
@@ -530,6 +534,14 @@
 			path = Status;
 			sourceTree = "<group>";
 		};
+		1347DAEF245090AD00F2F776 /* Local Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				1347DAF02450915500F2F776 /* LocalNotificationTests.swift */,
+			);
+			path = "Local Notifications";
+			sourceTree = "<group>";
+		};
 		214209B72422155200C7BFF3 /* Appearance */ = {
 			isa = PBXGroup;
 			children = (
@@ -575,6 +587,7 @@
 				F68BFBF6242ACD17008EE68F /* TestHelpers.swift */,
 				219B61362447371700E2F1A6 /* UUIDExtensionsTests.swift */,
 				89896E5E2435EB6500F949EA /* CoLocateTests.xcconfig */,
+				1347DAEF245090AD00F2F776 /* Local Notifications */,
 				F72EBD99243C8738009F9328 /* Bluetooth */,
 				21F374002433845600926FB8 /* Contact Events */,
 				098ED486242E89760029B729 /* Doubles */,
@@ -870,6 +883,7 @@
 		F6CC2CA7242BC7D90079432B /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
+				138114E52450796C00BA46C7 /* LocalNotificationScheduler.swift */,
 				F6CC2CA8242BC7FC0079432B /* RemoteNotificationManager.swift */,
 				090B186E24354D0100870B5D /* RemoteNotificationDispatcher.swift */,
 				F72EBD9D243C90E6009F9328 /* HumbleLocalNotificationScheduler.swift */,
@@ -1282,6 +1296,7 @@
 				213C806C241A56430020EFA5 /* PermissionsViewController.swift in Sources */,
 				89F06B2F2434A62C0074C612 /* LoggingManager.swift in Sources */,
 				09CAA3662440F3B100CE93A6 /* PostcodeViewController.swift in Sources */,
+				138114E62450796C00BA46C7 /* LocalNotificationScheduler.swift in Sources */,
 				131AB05C2449D85B002136CA /* ContactEventExpiryHandler.swift in Sources */,
 				09A9254324536FD300C5DBC1 /* RegistrationReminderScheduler.swift in Sources */,
 				F604976F24549729002B8503 /* LinkingIdRequest.swift in Sources */,

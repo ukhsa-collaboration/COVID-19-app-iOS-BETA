@@ -1,0 +1,19 @@
+//
+//  LocalNotificationTests.swift
+//  CoLocateTests
+//
+//  Created by NHSX.
+//  Copyright © 2020 NHSX. All rights reserved.
+//
+
+import XCTest
+@testable import CoLocate
+
+class LocalNotificationTests: XCTestCase {
+    func testCanEstablishCorrectDate() {
+        let localNotificationScheduler = LocalNotifcationScheduler(userNotificationCenter: UserNotificationCenterDouble())
+        let date = Date(timeIntervalSince1970: 0)
+        let components = localNotificationScheduler.getDateAfter(days: 8, from: date)
+        XCTAssertEqual(components, DateComponents(year: 1970, month: 1, day: 9, hour: 7))
+    }
+}
