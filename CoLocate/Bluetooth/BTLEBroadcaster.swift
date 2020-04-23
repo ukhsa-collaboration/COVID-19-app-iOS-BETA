@@ -40,7 +40,7 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
 
     func start() {
         guard let peripheral = peripheral else {
-            logger.error("peripheral is nil, this shouldn't happen")
+            assertionFailure("peripheral shouldn't be nil")
             return
         }
         guard peripheral.isAdvertising == false else {
