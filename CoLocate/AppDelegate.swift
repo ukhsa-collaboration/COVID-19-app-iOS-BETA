@@ -43,6 +43,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     lazy var bluetoothNursery: BluetoothNursery = ConcreteBluetoothNursery(persistence: persistence, userNotificationCenter: userNotificationCenter, notificationCenter: notificationCenter)
 
+    lazy var contactEventsUploader: ContactEventsUploader = ContactEventsUploader(
+        persisting: persistence,
+        contactEventRepository: bluetoothNursery.contactEventRepository,
+        makeSession: { id, delegate in
+            let config = URLSessionConfiguration.background(withIdentifier: id)
+            return URLSession(configuration: config, delegate: delegate, delegateQueue: nil)
+        }
+    )
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // TODO: If DEBUG is only necessary as long as we have the same bundle ID for both builds.
         #if INTERNAL || DEBUG
@@ -71,6 +80,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             registrationService: registrationService,
             bluetoothNursery: bluetoothNursery,
             session: urlSession,
+            contactEventsUploader: contactEventsUploader,
             uiQueue: DispatchQueue.main
         )
         

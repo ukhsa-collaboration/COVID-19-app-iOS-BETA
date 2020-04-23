@@ -20,11 +20,18 @@ class DebugViewController: UITableViewController, Storyboarded {
     private var persisting: Persisting!
     private var contactEventRepository: ContactEventRepository!
     private var contactEventPersister: ContactEventPersister!
+    private var contactEventsUploader: ContactEventsUploader!
     
-    func inject(persisting: Persisting, contactEventRepository: ContactEventRepository, contactEventPersister: ContactEventPersister) {
+    func inject(
+        persisting: Persisting,
+        contactEventRepository: ContactEventRepository,
+        contactEventPersister: ContactEventPersister,
+        contactEventsUploader: ContactEventsUploader
+    ) {
         self.persisting = persisting
         self.contactEventRepository = contactEventRepository
         self.contactEventPersister = contactEventPersister
+        self.contactEventsUploader = contactEventsUploader
     }
     
     override func viewDidLoad() {
@@ -68,7 +75,11 @@ class DebugViewController: UITableViewController, Storyboarded {
             let notificationCenter = NotificationCenter.default
             notificationCenter.post(name: UIApplication.significantTimeChangeNotification, object: nil)
             show(title: "Cleared", message: "All expired contact events cleared.")
-            
+
+        case (1, 4):
+            try! contactEventsUploader.upload()
+            show(title: "Upload Initiated", message: "Contact events uploading.")
+
         case (2, 0):
             do {
                 guard let registration = persisting.registration else {

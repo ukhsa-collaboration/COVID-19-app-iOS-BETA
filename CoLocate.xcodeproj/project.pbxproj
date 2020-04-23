@@ -118,6 +118,7 @@
 		F604975F2451F9CD002B8503 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F604975E2451F9CD002B8503 /* Environment.swift */; };
 		F604976324521574002B8503 /* CoLocate.xcconfig.sample in Resources */ = {isa = PBXBuildFile; fileRef = F604976224521574002B8503 /* CoLocate.xcconfig.sample */; };
 		F6049765245215A3002B8503 /* environment.json in Resources */ = {isa = PBXBuildFile; fileRef = F6049764245215A3002B8503 /* environment.json */; };
+		F60497672452415F002B8503 /* ContactEventsUploaderDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60497662452415F002B8503 /* ContactEventsUploaderDouble.swift */; };
 		F613936E243FA82B003447E8 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = F613936D243FA82B003447E8 /* Appearance.swift */; };
 		F62F857F2451051C006580A8 /* ContactEventsUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62F857E2451051C006580A8 /* ContactEventsUploader.swift */; };
 		F62F858124510716006580A8 /* ContactEventsUploaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62F858024510716006580A8 /* ContactEventsUploaderTests.swift */; };
@@ -327,6 +328,7 @@
 		F60497602451FA42002B8503 /* Environment.swift.erb */ = {isa = PBXFileReference; lastKnownFileType = text; path = Environment.swift.erb; sourceTree = "<group>"; };
 		F604976224521574002B8503 /* CoLocate.xcconfig.sample */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CoLocate.xcconfig.sample; sourceTree = "<group>"; };
 		F6049764245215A3002B8503 /* environment.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = environment.json; sourceTree = "<group>"; };
+		F60497662452415F002B8503 /* ContactEventsUploaderDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventsUploaderDouble.swift; sourceTree = "<group>"; };
 		F613936D243FA82B003447E8 /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		F62F857E2451051C006580A8 /* ContactEventsUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventsUploader.swift; sourceTree = "<group>"; };
 		F62F858024510716006580A8 /* ContactEventsUploaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventsUploaderTests.swift; sourceTree = "<group>"; };
@@ -495,6 +497,7 @@
 				F62F858424510923006580A8 /* SessionDouble.swift */,
 				09E876BB24510F2C009C2628 /* BluetoothNurseryDouble.swift */,
 				09D91A7824522133004825A5 /* BTLEListenerDouble.swift */,
+				F60497662452415F002B8503 /* ContactEventsUploaderDouble.swift */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -1110,6 +1113,7 @@
 				131AB05E2449D894002136CA /* ContactEventExpiryHandlerTests.swift in Sources */,
 				21B71F7A24519B2000D0DED7 /* AppDelegateTest.swift in Sources */,
 				214209CA242227B300C7BFF3 /* PersistenceTests.swift in Sources */,
+				F60497672452415F002B8503 /* ContactEventsUploaderDouble.swift in Sources */,
 				F632792124351C1900CF7A42 /* OnboardingViewControllerTests.swift in Sources */,
 				095A91182434FF1500ED6369 /* ApplicationDouble.swift in Sources */,
 				09CAA36C24413E0700CE93A6 /* ViewControllerContainerDouble.swift in Sources */,

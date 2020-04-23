@@ -20,9 +20,11 @@ class RootViewController: UIViewController {
     private var notificationCenter: NotificationCenter! = nil
     private var registrationService: RegistrationService! = nil
     private var bluetoothNursery: BluetoothNursery!
-    private var statusViewController: StatusViewController!
-    private var session: Session! = nil
+    private var session: Session!
+    private var contactEventsUploader: ContactEventsUploader!
     private var uiQueue: TestableQueue! = nil
+
+    private var statusViewController: StatusViewController!
 
     func inject(
         persistence: Persisting,
@@ -32,6 +34,7 @@ class RootViewController: UIViewController {
         registrationService: RegistrationService,
         bluetoothNursery: BluetoothNursery,
         session: Session,
+        contactEventsUploader: ContactEventsUploader,
         uiQueue: TestableQueue
     ) {
         self.persistence = persistence
@@ -41,6 +44,7 @@ class RootViewController: UIViewController {
         self.registrationService = registrationService
         self.bluetoothNursery = bluetoothNursery
         self.session = session
+        self.contactEventsUploader = contactEventsUploader
         self.uiQueue = uiQueue
 
         statusViewController = StatusViewController.instantiate()
@@ -145,7 +149,7 @@ class RootViewController: UIViewController {
             let navVC = tabBarVC.viewControllers?.first as? UINavigationController,
             let debugVC = navVC.viewControllers.first as? DebugViewController else { return }
         
-        debugVC.inject(persisting: persistence, contactEventRepository: bluetoothNursery.contactEventRepository, contactEventPersister: bluetoothNursery.contactEventPersister)
+        debugVC.inject(persisting: persistence, contactEventRepository: bluetoothNursery.contactEventRepository, contactEventPersister: bluetoothNursery.contactEventPersister, contactEventsUploader: contactEventsUploader)
         
         present(tabBarVC, animated: true)
     }

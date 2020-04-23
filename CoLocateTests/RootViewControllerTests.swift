@@ -159,6 +159,7 @@ fileprivate func makeRootVC(
         registrationService: RegistrationServiceDouble(),
         bluetoothNursery: bluetoothNursery,
         session: SessionDouble(),
+        contactEventsUploader: ContactEventsUploaderDouble(),
         uiQueue: QueueDouble()
     )
     return vc
