@@ -29,15 +29,8 @@ protocol Request {
 
 extension Request {
 
-    var baseURL: URL {
-        let endpoint = Bundle.main.infoDictionary!["API_ENDPOINT"] as! String
-        return URL(string: endpoint)!
-    }
-    
-    var sonarHeaderValue: String {
-        #warning("Provide correct value")
-        return ""
-    }
+    var baseURL: URL { URL(string: Environment.apiEndpoint)! }
+    var sonarHeaderValue: String { Environment.sonarHeaderValue }
 
     func urlRequest() -> URLRequest {
         let url = URL(string: path, relativeTo: baseURL)!

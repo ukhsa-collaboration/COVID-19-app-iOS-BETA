@@ -114,6 +114,7 @@
 		AEC6A7BE241BD82900B0237A /* LogoStrapline.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEC6A7BD241BD82900B0237A /* LogoStrapline.xib */; };
 		F600A60224297A8E0038DF57 /* RegistrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F600A60124297A8E0038DF57 /* RegistrationRequest.swift */; };
 		F600A60424297C010038DF57 /* RegistrationRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F600A60324297C010038DF57 /* RegistrationRequestTests.swift */; };
+		F604975F2451F9CD002B8503 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F604975E2451F9CD002B8503 /* Environment.swift */; };
 		F613936E243FA82B003447E8 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = F613936D243FA82B003447E8 /* Appearance.swift */; };
 		F62F857F2451051C006580A8 /* ContactEventsUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62F857E2451051C006580A8 /* ContactEventsUploader.swift */; };
 		F62F858124510716006580A8 /* ContactEventsUploaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62F858024510716006580A8 /* ContactEventsUploaderTests.swift */; };
@@ -318,6 +319,8 @@
 		AEC6A7BD241BD82900B0237A /* LogoStrapline.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogoStrapline.xib; sourceTree = "<group>"; };
 		F600A60124297A8E0038DF57 /* RegistrationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationRequest.swift; sourceTree = "<group>"; };
 		F600A60324297C010038DF57 /* RegistrationRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationRequestTests.swift; sourceTree = "<group>"; };
+		F604975E2451F9CD002B8503 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		F60497602451FA42002B8503 /* Environment.swift.erb */ = {isa = PBXFileReference; lastKnownFileType = text; path = Environment.swift.erb; sourceTree = "<group>"; };
 		F613936D243FA82B003447E8 /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		F62F857E2451051C006580A8 /* ContactEventsUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventsUploader.swift; sourceTree = "<group>"; };
 		F62F858024510716006580A8 /* ContactEventsUploaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventsUploaderTests.swift; sourceTree = "<group>"; };
@@ -668,6 +671,7 @@
 				F66CC926244F6340001399D4 /* GoogleService-Info.plist */,
 				6FC63C3C241641BA007C8BF3 /* Info.plist */,
 				6FC63C30241641B8007C8BF3 /* AppDelegate.swift */,
+				F604975E2451F9CD002B8503 /* Environment.swift */,
 				214209B9242216B700C7BFF3 /* Persistence.swift */,
 				21E5051424448D880065C69B /* PlistPersister.swift */,
 				0997D055243BDEEC0067346C /* RootViewController.swift */,
@@ -804,6 +808,7 @@
 				F78CEB67242B8C2B002254AD /* GoogleService-Info.beta.plist */,
 				F66CC928244F63F3001399D4 /* GoogleService-Info.internal.plist */,
 				F6CBA499244F6E2C00D20610 /* GoogleService-Info.production.plist */,
+				F60497602451FA42002B8503 /* Environment.swift.erb */,
 				F68D8FE324476F0B008BAAAA /* beta.xcconfig */,
 				F68D8FE524477031008BAAAA /* internal.xcconfig */,
 				F68D8FE424477031008BAAAA /* production.xcconfig */,
@@ -1222,6 +1227,7 @@
 				89F06B312434AABF0074C612 /* NoOpLogHandler.swift in Sources */,
 				F6F05A3024340E5400FF4B72 /* OnboardingViewController.swift in Sources */,
 				F652F72C244A74E900D97950 /* StartDateViewController.swift in Sources */,
+				F604975F2451F9CD002B8503 /* Environment.swift in Sources */,
 				090DEE10244F8BF600268170 /* BluetoothPermissionDeniedViewController.swift in Sources */,
 				89074B8524378A0D00D67777 /* UITestPayload.swift in Sources */,
 				F6AB2F20243D359F00386D6B /* SubmitSymptomsViewController.swift in Sources */,

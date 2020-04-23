@@ -70,6 +70,9 @@ jobs:
         env:
           API_ENDPOINT: ${{ secrets.api_endpoint }}
           APPLE_USERNAME: ${{ secrets.apple_username }}
+          ENVIRONMENT_JSON_BETA: ${{ secrets.environment_json_beta }}
+          ENVIRONMENT_JSON_INTERNAL: ${{ secrets.environment_json_internal }}
+          ENVIRONMENT_JSON_PRODUCTION: ${{ secrets.environment_json_production }}
           FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.apple_password }}
           MATCH_PASSWORD: ${{ secrets.match_password }}
         run: fastlane release sonar_env:${{ github.event.deployment.environment }}

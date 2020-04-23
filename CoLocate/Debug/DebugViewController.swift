@@ -90,10 +90,9 @@ class DebugViewController: UITableViewController, Storyboarded {
 
         case (3, 0):
             #if DEBUG
-            let info = Bundle(for: AppDelegate.self).infoDictionary!
-            let id = info["DEBUG_REGISTRATION_ID"] as! String
-            let secretKey = info["DEBUG_REGISTRATION_SECRET_KEY"] as! String
-            let broadcastKeyS = info["DEBUG_REGISTRATION_BROADCAST_ROTATION_KEY"] as! String
+            let id = Environment.debug!.registrationId
+            let secretKey = Environment.debug!.registrationSecretKey
+            let broadcastKeyS = Environment.debug!.registrationBroadcastRotationKey
             let broadcastKey = try! BroadcastRotationKeyConverter().fromData(Data(base64Encoded: broadcastKeyS)!)
             persisting.registration = Registration(id: UUID(uuidString: id)!, secretKey: secretKey.data(using: .utf8)!, broadcastRotationKey: broadcastKey)
             #else

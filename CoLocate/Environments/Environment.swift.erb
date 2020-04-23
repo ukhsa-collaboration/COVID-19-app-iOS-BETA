@@ -1,0 +1,30 @@
+//
+//  Environment.swift
+//  CoLocate
+//
+//  Created by NHSX.
+//  Copyright © 2020 NHSX. All rights reserved.
+//
+
+import Foundation
+
+struct Environment {
+    struct Debug {
+        let registrationId: String
+        let registrationSecretKey: String
+        let registrationBroadcastRotationKey: String
+    }
+
+    static let apiEndpoint = "<%= api_endpoint %>"
+    static let sonarHeaderValue = "<%= sonar_header_value %>"
+
+    <% if debug %>
+    static let debug: Debug? = Debug(
+        registrationId: "<%= debug.fetch("registration_id") %>",
+        registrationSecretKey: "<%= debug.fetch("registration_secret_key") %>",
+        registrationBroadcastRotationKey: "<%= debug.fetch("registration_broadcast_rotation_key") %>"
+    )
+    <% else %>
+    static let debug: Debug? = nil
+    <% end %>
+}
