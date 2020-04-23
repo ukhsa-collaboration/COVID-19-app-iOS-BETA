@@ -39,6 +39,9 @@ class AppDelegateTest: XCTestCase {
     }
 
     func testFirstAppLaunchDoesNotStartBluetooth() throws {
+        authorizationManager.bluetooth = .notDetermined
+        persistence.registration = nil
+
         _ = appDelegate.application(UIApplication.shared, didFinishLaunchingWithOptions: nil)
 
         XCTAssertFalse(nursery.createListenerCalled)
@@ -46,9 +49,8 @@ class AppDelegateTest: XCTestCase {
     }
     
     func testLaunchingWithBluetoothPermissionRequested_StartsListener() {
-        authorizationManager = AuthorizationManagerDouble(bluetooth: .allowed)
-        appDelegate.persistence = PersistenceDouble(registration: nil)
-        appDelegate.authorizationManager = authorizationManager
+        authorizationManager.bluetooth = .allowed
+        persistence.registration = nil
         
         _ = appDelegate.application(UIApplication.shared, didFinishLaunchingWithOptions: nil)
 
@@ -57,7 +59,7 @@ class AppDelegateTest: XCTestCase {
     }
     
     func testLaunchingWithRegistration_StartsListenerAndBroadcaster() {
-        appDelegate.persistence = PersistenceDouble(registration: Registration.fake)
+        persistence.registration = Registration.fake
 
         _ = appDelegate.application(UIApplication.shared, didFinishLaunchingWithOptions: nil)
 
