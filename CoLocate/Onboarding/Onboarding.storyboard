@@ -65,7 +65,9 @@
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aeB-p4-UQk" customClass="ButtonWithDynamicType" customModule="CoLocate" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="214.5" width="280" height="33"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                        <state key="normal" title="Learn more about how it works"/>
+                                                        <state key="normal" title="Learn more about how it works">
+                                                            <color key="titleColor" name="NHS Link"/>
+                                                        </state>
                                                         <connections>
                                                             <segue destination="asv-dx-knf" kind="presentation" id="6ws-C1-zrY"/>
                                                         </connections>
@@ -829,6 +831,9 @@ If you have Bluetooth turned off, this app will not work. Please go to Settings 
         </namedColor>
         <namedColor name="NHS Grey 5">
             <color red="0.94117647058823528" green="0.95686274509803926" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="NHS Link">
+            <color red="0.0" green="0.36862745098039218" blue="0.72156862745098038" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
