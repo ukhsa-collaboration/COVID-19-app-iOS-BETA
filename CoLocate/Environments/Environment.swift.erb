@@ -18,7 +18,7 @@ struct Environment {
     static let apiEndpoint = "<%= api_endpoint %>"
     static let sonarHeaderValue = "<%= sonar_header_value %>"
 
-    <% if debug %>
+    <% if defined? debug %>
     static let debug: Debug? = Debug(
         registrationId: "<%= debug.fetch("registration_id") %>",
         registrationSecretKey: "<%= debug.fetch("registration_secret_key") %>",
