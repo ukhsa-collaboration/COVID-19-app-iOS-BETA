@@ -49,6 +49,7 @@
 		1347DAF12450915500F2F776 /* LocalNotificationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1347DAF02450915500F2F776 /* LocalNotificationTests.swift */; };
 		138114E42450543600BA46C7 /* SymptomStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138114E32450543600BA46C7 /* SymptomStackView.swift */; };
 		138114E62450796C00BA46C7 /* LocalNotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138114E52450796C00BA46C7 /* LocalNotificationScheduler.swift */; };
+		13F4AE882451EB330082A46D /* QuestionSymptomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F4AE872451EB330082A46D /* QuestionSymptomsViewController.swift */; };
 		2115C3E624360427009C0F5B /* DebuggerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2115C3E524360427009C0F5B /* DebuggerTableViewCell.swift */; };
 		213C806C241A56430020EFA5 /* PermissionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213C806B241A56430020EFA5 /* PermissionsViewController.swift */; };
 		214209B62421072C00C7BFF3 /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209B52421072C00C7BFF3 /* StatusViewController.swift */; };
@@ -256,6 +257,7 @@
 		1347DAF02450915500F2F776 /* LocalNotificationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationTests.swift; sourceTree = "<group>"; };
 		138114E32450543600BA46C7 /* SymptomStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomStackView.swift; sourceTree = "<group>"; };
 		138114E52450796C00BA46C7 /* LocalNotificationScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationScheduler.swift; sourceTree = "<group>"; };
+		13F4AE872451EB330082A46D /* QuestionSymptomsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionSymptomsViewController.swift; sourceTree = "<group>"; };
 		2115C3E524360427009C0F5B /* DebuggerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebuggerTableViewCell.swift; sourceTree = "<group>"; };
 		213C806B241A56430020EFA5 /* PermissionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsViewController.swift; sourceTree = "<group>"; };
 		214209B52421072C00C7BFF3 /* StatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
@@ -540,6 +542,15 @@
 				1347DAF02450915500F2F776 /* LocalNotificationTests.swift */,
 			);
 			path = "Local Notifications";
+			sourceTree = "<group>";
+		};
+		13F4AE862451EACD0082A46D /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				F652F72B244A74E900D97950 /* StartDateViewController.swift */,
+				F67C5153243E4D2F008E2945 /* AnswerButton.swift */,
+			);
+			path = Controls;
 			sourceTree = "<group>";
 		};
 		214209B72422155200C7BFF3 /* Appearance */ = {
@@ -852,14 +863,14 @@
 		F68B89EB243CFEEE00F369A9 /* SelfDiagnosis */ = {
 			isa = PBXGroup;
 			children = (
+				13F4AE862451EACD0082A46D /* Controls */,
 				F68B89EC243CFF2600F369A9 /* SelfDiagnosis.storyboard */,
-				F67C5153243E4D2F008E2945 /* AnswerButton.swift */,
-				F6AB2F1D243D324400386D6B /* CoughViewController.swift */,
 				F6EEC3B72448DD2400172820 /* SelfDiagnosis.swift */,
 				F68B89EE243D01FA00F369A9 /* SelfDiagnosisNavigationController.swift */,
-				F652F72B244A74E900D97950 /* StartDateViewController.swift */,
-				F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */,
+				F6AB2F1D243D324400386D6B /* CoughViewController.swift */,
 				F68B89F3243D050700F369A9 /* TemperatureViewController.swift */,
+				F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */,
+				13F4AE872451EB330082A46D /* QuestionSymptomsViewController.swift */,
 			);
 			path = SelfDiagnosis;
 			sourceTree = "<group>";
@@ -1265,6 +1276,7 @@
 				F72EBD97243C8490009F9328 /* BluetoothStateUserNotifier.swift in Sources */,
 				896BE90F244F07FF00B3687C /* PublicKeyValidator.swift in Sources */,
 				214209B62421072C00C7BFF3 /* StatusViewController.swift in Sources */,
+				13F4AE882451EB330082A46D /* QuestionSymptomsViewController.swift in Sources */,
 				F758553A24294C8D00CBE1ED /* RequestFactory.swift in Sources */,
 				F604976B24539F6C002B8503 /* UploadLogsViewController.swift in Sources */,
 				21C417CC242CB15D00DEF3E2 /* ConfirmRegistrationRequest.swift in Sources */,

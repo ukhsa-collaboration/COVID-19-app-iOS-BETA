@@ -12,12 +12,14 @@ class SymptomStackView: UIStackView {
     var temperatureLabel: UILabel {
         let label = UILabel()
         label.text = "High Temperature"
+        label.font = UIFont.preferredFont(forTextStyle: .footnote)
         return label
     }
     
     var coughLabel: UILabel {
         let label = UILabel()
         label.text = "Continous Cough"
+        label.font = UIFont.preferredFont(forTextStyle: .footnote)
         return label
     }
     
