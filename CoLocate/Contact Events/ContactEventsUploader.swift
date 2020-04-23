@@ -13,18 +13,28 @@ class ContactEventsUploader {
     static let backgroundIdentifier = "ContactEventUploader"
 
     let sessionDelegate: URLSessionTaskDelegate = ContactEventsUploaderSessionDelegate()
+
+    let persisting: Persisting
     let contactEventRepository: ContactEventRepository
     let session: Session
 
-    init(contactEventRepository: ContactEventRepository, makeSession: (String, URLSessionTaskDelegate) -> Session) {
+    init(
+        persisting: Persisting,
+        contactEventRepository: ContactEventRepository,
+        makeSession: (String, URLSessionTaskDelegate) -> Session
+    ) {
+        self.persisting = persisting
         self.contactEventRepository = contactEventRepository
         self.session = makeSession(ContactEventsUploader.backgroundIdentifier, sessionDelegate)
     }
 
     //  upload-contact-events-in-background: we can't require registration here
-    func upload(with registration: Registration) throws {
+    func upload() throws {
         let contactEvents = contactEventRepository.contactEvents
 
+        guard let registration = persisting.registration else {
+            fatalError("upload-contact-events-in-background: handle when we have no registration")
+        }
         let requestFactory = ConcreteSecureRequestFactory(registration: registration)
         let request = requestFactory.patchContactsRequest(contactEvents: contactEvents)
 

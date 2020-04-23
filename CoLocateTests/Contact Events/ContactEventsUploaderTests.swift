@@ -12,6 +12,8 @@ import XCTest
 class ContactEventsUploaderTests: XCTestCase {
 
     func testUploadRequest() {
+        let registration = Registration.fake
+        let persisting = PersistenceDouble(registration: registration)
         let expectedBroadcastId = "opaque bytes that only the server can decrypt".data(using: .utf8)!
         let contactEvent = ContactEvent(encryptedRemoteContactId: expectedBroadcastId)
         let contactEventRepository = ContactEventRepositoryDouble()
@@ -19,12 +21,12 @@ class ContactEventsUploaderTests: XCTestCase {
         let session = SessionDouble()
 
         let uploader = ContactEventsUploader(
+            persisting: persisting,
             contactEventRepository: contactEventRepository,
             makeSession: { _, _ in session }
         )
 
-        let registration = Registration.fake
-        try? uploader.upload(with: registration)
+        try? uploader.upload()
 
         guard
             let request = session.uploadRequest as? PatchContactEventsRequest,
