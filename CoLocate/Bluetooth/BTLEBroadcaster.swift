@@ -172,7 +172,21 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
             self.keepaliveValue = nil
         }
     }
-    
+
+    func peripheralManager(_ peripheral: CBPeripheralManager, didReceiveRead request: CBATTRequest) {
+        guard request.characteristic.uuid == ConcreteBTLEBroadcaster.sonarIdCharacteristicUUID else {
+            logger.debug("received a read for unexpected characteristic \(request.characteristic.uuid.uuidString)")
+            return
+        }
+
+        guard let ephemeralBroadcastId = idGenerator.broadcastIdentifier() else {
+            assertionFailure("asked for our sonar id, but we do not have one")
+            return
+        }
+
+        request.value = ephemeralBroadcastId
+        peripheral.respond(to: request, withResult: .success)
+    }
 }
 
 fileprivate let logger = Logger(label: "BTLE")

@@ -35,7 +35,7 @@ class BroadcastIdEncrypter {
     }
 
     func broadcastId(for startDate: Date = Date(), until maybeDate: Date? = nil) -> Data {
-        if cached?.date == startDate {
+        if sameDay(startDate, cached?.date) {
             return cached!.broadcastId
         }
 
@@ -82,6 +82,18 @@ class BroadcastIdEncrypter {
     }
 
     // MARK: - Private
+
+    private func sameDay(_ first: Date, _ second: Date?) -> Bool {
+        guard let second = second else { return false }
+
+        let calendar = Calendar.current
+
+        let date1 = calendar.startOfDay(for: first)
+        let date2 = calendar.startOfDay(for: second)
+
+        let components = calendar.dateComponents([.day], from: date1, to: date2)
+        return components.day == 0
+    }
 
     func bytesFrom(_ date: Date) -> Data {
         let interval = date.timeIntervalSince1970
