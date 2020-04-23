@@ -8,6 +8,8 @@
 
 import UIKit
 
-class SymptomsPromptViewController: UIViewController {
+class SymptomsPromptViewController: UIViewController, Storyboarded {
+    static var storyboardName = "Status"
+    
     
 }

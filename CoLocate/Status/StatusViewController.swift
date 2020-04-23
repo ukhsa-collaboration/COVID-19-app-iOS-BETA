@@ -85,7 +85,13 @@ class StatusViewController: UIViewController, Storyboarded {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+    
+//        TODO: Requires Business logic to determine when to start controller
+//        let symptomsPromptViewController = SymptomsPromptViewController.instantiate()
+//        symptomsPromptViewController.modalPresentationStyle = .custom
+//        symptomsPromptViewController.transitioningDelegate = drawerPresentationManager
+//        present(symptomsPromptViewController, animated: true)
+        
         registrationRetryButton.setTitle("RETRY".localized, for: .normal)
 
         diagnosisStatusView.layer.cornerRadius = 16
