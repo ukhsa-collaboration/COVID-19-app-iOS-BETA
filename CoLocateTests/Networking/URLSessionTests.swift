@@ -11,12 +11,6 @@ import XCTest
 
 class URLSessionTests: XCTestCase {
 
-    func test_is_configured_with_a_proper_URL() throws {
-        let url = URLSession.make().baseURL
-
-        XCTAssertNotNil(url)
-    }
-    
     func test_has_correct_security_configuration() throws {
         let configuration = URLSession.make().configuration
         

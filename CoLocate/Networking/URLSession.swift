@@ -34,11 +34,6 @@ extension URLSession {
 
 extension URLSession: Session {
 
-    var baseURL: URL {
-        let endpoint = Bundle(for: AppDelegate.self).infoDictionary?["API_ENDPOINT"] as! String
-        return URL(string: endpoint)!
-    }
-    
     func execute<R: Request>(_ request: R, queue: OperationQueue, completion: @escaping (Result<R.ResponseType, Error>) -> Void) {
         let completion = { result in queue.addOperation { completion(result) } }
 
