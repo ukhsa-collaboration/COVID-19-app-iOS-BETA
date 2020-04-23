@@ -21,10 +21,13 @@ protocol BTLEBroadcaster {
 
 class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDelegate {
     
-    static let sonarServiceUUID = CBUUID(nsuuid: UUID(uuidString: "c1f5983c-fa94-4ac8-8e2e-bb86d6de9b21")!)
-    static let sonarIdCharacteristicUUID = CBUUID(nsuuid: UUID(uuidString: "85BF337C-5B64-48EB-A5F7-A9FED135C972")!)
+    static let sonarServiceUUID = CBUUID(string: "c1f5983c-fa94-4ac8-8e2e-bb86d6de9b21")
+    static let sonarIdCharacteristicUUID = CBUUID(string: "85BF337C-5B64-48EB-A5F7-A9FED135C972")
+    static let keepaliveCharacteristicUUID = CBUUID(string: "D802C645-5C7B-40DD-985A-9FBEE05FE85C")
 
     var peripheral: CBPeripheralManager?
+    var keepaliveCharacteristic: CBMutableCharacteristic?
+    var keepaliveValue: Data?
     var stateDelegate: BTLEBroadcasterStateDelegate?
     let idGenerator: BroadcastIdGenerator
     
@@ -33,26 +36,74 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
     }
 
     func tryStartAdvertising() {
-        guard let peripheral = peripheral else { return }
+        guard let peripheral = peripheral else {
+            logger.error("peripheral is nil, this shouldn't happen")
+            return
+        }
         guard peripheral.isAdvertising == false else {
             logger.error("peripheral manager already advertising, won't start again")
             return
         }
-        
-        guard let identifier = idGenerator.broadcastIdentifier() else { return }
+        guard let identifier = idGenerator.broadcastIdentifier() else {
+            logger.error("no broadcastIdentifier available, will not start broadcasting")
+            return
+        }
 
         let service = CBMutableService(type: ConcreteBTLEBroadcaster.sonarServiceUUID, primary: true)
 
-        let identityCharacteristic = CBMutableCharacteristic(type: ConcreteBTLEBroadcaster.sonarIdCharacteristicUUID,
-                                                             properties: CBCharacteristicProperties([.read]),
-                                                             value: identifier,
-                                                             permissions: .readable)
+        let identityCharacteristic = CBMutableCharacteristic(
+            type: ConcreteBTLEBroadcaster.sonarIdCharacteristicUUID,
+            properties: CBCharacteristicProperties([.read]),
+            value: identifier,
+            permissions: .readable)
+        
+        keepaliveCharacteristic = CBMutableCharacteristic(
+            type: ConcreteBTLEBroadcaster.keepaliveCharacteristicUUID,
+            properties: CBCharacteristicProperties([.notify]),
+            value: nil,
+            permissions: .readable)
 
-        service.characteristics = [identityCharacteristic]
+        service.characteristics = [identityCharacteristic, keepaliveCharacteristic!]
         peripheral.add(service)
     }
 
-    // MARK: CBPeripheralManagerDelegate
+    func sendKeepalive(value: Data) {
+        guard let peripheral = self.peripheral else {
+            assertionFailure("peripheral shouldn't be nil")
+            return
+        }
+        guard let keepaliveCharacteristic = self.keepaliveCharacteristic else {
+            assertionFailure("keepaliveCharacteristic shouldn't be nil")
+            return
+        }
+        
+        self.keepaliveValue = value
+        let success = peripheral.updateValue(value, for: keepaliveCharacteristic, onSubscribedCentrals: nil)
+        if success {
+            logger.info("sent keepalive value \(value)")
+            self.keepaliveValue = nil
+        }
+    }
+
+    
+    // MARK: - CBPeripheralManagerDelegate
+
+    func peripheralManagerIsReady(toUpdateSubscribers peripheral: CBPeripheralManager) {
+        guard let keepaliveCharacteristic = self.keepaliveCharacteristic else {
+            assertionFailure("keepaliveCharacteristic shouldn't be nil")
+            return
+        }
+        guard let value = self.keepaliveValue else {
+            assertionFailure("no value to send")
+            return
+        }
+        
+        let success = peripheral.updateValue(value, for: keepaliveCharacteristic, onSubscribedCentrals: nil)
+        if success {
+            logger.info("re-sent keepalive value \(value)")
+            self.keepaliveValue = nil
+        }
+    }
 
     func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
         logger.info("state: \(peripheral.state)")
@@ -76,8 +127,7 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
             return
         }
         
-        let identifierForLogging = idGenerator.broadcastIdentifier() ?? Data()
-        logger.info("now advertising broadcast identifier \(identifierForLogging.base64EncodedString())")
+        logger.info("advertising identifier \(idGenerator.broadcastIdentifier()?.base64EncodedString() ??? "nil")")
         
         peripheral.startAdvertising([
             CBAdvertisementDataLocalNameKey: "Sonar",
