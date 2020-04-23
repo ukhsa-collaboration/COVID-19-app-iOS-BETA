@@ -141,9 +141,3 @@ extension AppDelegate: PersistenceDelegate {
 
 // MARK: - Logging
 private let logger = Logger(label: "Application")
-
-extension Dictionary where Key == UIApplication.LaunchOptionsKey {
-    subscript(contains option: UIApplication.LaunchOptionsKey) -> Bool {
-        return self[option] != nil
-    }
-}
