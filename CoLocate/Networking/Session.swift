@@ -23,6 +23,8 @@ protocol Request {
     var headers: [String: String] { get }
     
     func parse(_ data: Data) throws -> ResponseType
+    
+    var sonarHeaderValue: String { get }
 }
 
 extension Request {
@@ -31,12 +33,18 @@ extension Request {
         let endpoint = Bundle.main.infoDictionary!["API_ENDPOINT"] as! String
         return URL(string: endpoint)!
     }
+    
+    var sonarHeaderValue: String {
+        #warning("Provide correct value")
+        return ""
+    }
 
     func urlRequest() -> URLRequest {
         let url = URL(string: path, relativeTo: baseURL)!
         var urlRequest = URLRequest(url: url)
 
         urlRequest.allHTTPHeaderFields = headers
+        urlRequest.setValue(sonarHeaderValue, forHTTPHeaderField: "X-Sonar-Foundation")
 
         switch method {
         case .get:

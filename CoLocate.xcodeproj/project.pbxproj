@@ -89,6 +89,7 @@
 		896BE90F244F07FF00B3687C /* PublicKeyValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896BE90E244F07FF00B3687C /* PublicKeyValidator.swift */; };
 		896BE912244F11D100B3687C /* PublicKeyValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896BE911244F11D100B3687C /* PublicKeyValidatorTests.swift */; };
 		896BE915244F391F00B3687C /* www.apple.com.cer in Resources */ = {isa = PBXBuildFile; fileRef = 896BE913244F38D900B3687C /* www.apple.com.cer */; };
+		8976B15D2451B62100154ADF /* RequstTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8976B15C2451B62100154ADF /* RequstTests.swift */; };
 		89896E622435F37300F949EA /* ProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89896E612435F37300F949EA /* ProjectTests.swift */; };
 		898FE854243B42E800210775 /* OnboardingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898FE853243B42E700210775 /* OnboardingTests.swift */; };
 		898FE857243B4D7A00210775 /* XCUIElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898FE856243B4D7A00210775 /* XCUIElement.swift */; };
@@ -288,6 +289,7 @@
 		896BE90E244F07FF00B3687C /* PublicKeyValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicKeyValidator.swift; sourceTree = "<group>"; };
 		896BE911244F11D100B3687C /* PublicKeyValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicKeyValidatorTests.swift; sourceTree = "<group>"; };
 		896BE913244F38D900B3687C /* www.apple.com.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = www.apple.com.cer; sourceTree = "<group>"; };
+		8976B15C2451B62100154ADF /* RequstTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequstTests.swift; sourceTree = "<group>"; };
 		89896E5E2435EB6500F949EA /* CoLocateTests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CoLocateTests.xcconfig; sourceTree = "<group>"; };
 		89896E5F2435F15C00F949EA /* Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Base.xcconfig; sourceTree = "<group>"; };
 		89896E612435F37300F949EA /* ProjectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectTests.swift; sourceTree = "<group>"; };
@@ -579,6 +581,7 @@
 				214209D62423C9B600C7BFF3 /* PatchContactEventsRequestTests.swift */,
 				F600A60324297C010038DF57 /* RegistrationRequestTests.swift */,
 				21B3D2E2242906AE00573061 /* SecureRequestTests.swift */,
+				8976B15C2451B62100154ADF /* RequstTests.swift */,
 				214209D824262B7500C7BFF3 /* SessionHelpers.swift */,
 				F72EBD4E24361E99009F9328 /* URLSessionTests.swift */,
 				896BE911244F11D100B3687C /* PublicKeyValidatorTests.swift */,
@@ -1108,6 +1111,7 @@
 				F62F858124510716006580A8 /* ContactEventsUploaderTests.swift in Sources */,
 				F600A60424297C010038DF57 /* RegistrationRequestTests.swift in Sources */,
 				0984E0BB2450F0B1009C6374 /* BluetoothStateObserverDouble.swift in Sources */,
+				8976B15D2451B62100154ADF /* RequstTests.swift in Sources */,
 				21E5051324448AE30065C69B /* PlistPersisterTests.swift in Sources */,
 				098ED488242E89930029B729 /* PushNotificationManagerDouble.swift in Sources */,
 				0983ACCF243E6D3800DBB336 /* NotificationObserverDouble.swift in Sources */,
