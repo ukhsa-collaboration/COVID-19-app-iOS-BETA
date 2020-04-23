@@ -20,7 +20,7 @@ class ContactEventUploaderTests: XCTestCase {
 
         let uploader = ContactEventUploader(
             contactEventRepository: contactEventRepository,
-            session: session
+            makeSession: { _, _ in session }
         )
 
         let registration = Registration.fake
