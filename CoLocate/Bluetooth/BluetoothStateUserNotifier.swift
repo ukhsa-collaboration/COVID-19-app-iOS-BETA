@@ -32,7 +32,8 @@ class BluetoothStateUserNotifier {
                 guard self.appStateReader.applicationState == .background else { return }
 
                 self.scheduler.scheduleLocalNotification(
-                    body: "To keep yourself secure, please re-enable bluetooth",
+                    title: "Please turn Bluetooth on",
+                    body: "This app can only protect you and others if Bluetooth is on all the time.",
                     interval: 3,
                     identifier: "bluetooth.disabled.please",
                     repeats: false

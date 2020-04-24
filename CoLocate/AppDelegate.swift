@@ -155,6 +155,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let scheduler = HumbleLocalNotificationScheduler(userNotificationCenter: userNotificationCenter)
 
         scheduler.scheduleLocalNotification(
+            title: nil,
             body: "To keep yourself secure, please relaunch the app.",
             interval: 10,
             identifier: "willTerminate.relaunch.please",

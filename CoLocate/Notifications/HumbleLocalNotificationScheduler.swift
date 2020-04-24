@@ -9,7 +9,7 @@
 import Foundation
 
 protocol LocalNotificationScheduling {
-    func scheduleLocalNotification(body: String, interval: TimeInterval, identifier: String, repeats: Bool)
+    func scheduleLocalNotification(title: String?, body: String, interval: TimeInterval, identifier: String, repeats: Bool)
 }
 
 struct HumbleLocalNotificationScheduler: LocalNotificationScheduling {
@@ -19,9 +19,13 @@ struct HumbleLocalNotificationScheduler: LocalNotificationScheduling {
         self.userNotificationCenter = userNotificationCenter
     }
 
-    func scheduleLocalNotification(body: String, interval: TimeInterval, identifier: String, repeats: Bool) {
+    func scheduleLocalNotification(title: String?, body: String, interval: TimeInterval, identifier: String, repeats: Bool) {
         let content = UNMutableNotificationContent()
         content.body = body
+        
+        if let title = title {
+            content.title = title
+        }
 
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: interval, repeats: repeats)
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
