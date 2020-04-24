@@ -40,17 +40,33 @@ class PostcodeViewController: UIViewController, Storyboarded {
     }
     
     @IBAction func didTapContinue() {
-        guard postcodeField.text?.count == 4 else {
+        guard hasValidPostcode() else {
             showAlert()
             return
         }
         
-        persistence.partialPostcode = postcodeField.text
+        persistence.partialPostcode = enteredPostcode
         continueHandler()
     }
     
+    private var enteredPostcode: String {
+        get {
+            guard let rawPostcode = postcodeField?.text else { return "" }
+            return rawPostcode.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
+        }
+    }
+    
+    private func hasValidPostcode() -> Bool {
+        let postcode = enteredPostcode
+        return postcode.count >= 2 && postcode.count <= 4 && isAlphanumeric(s: postcode)
+    }
+    
+    private func isAlphanumeric(s: String) -> Bool {
+        return s.range(of: "[^a-zA-Z0-9]", options: .regularExpression) == nil
+    }
+    
     private func showAlert() {
-        let alert = UIAlertController(title: nil, message: "To continue, enter the first four characters of your postcode.", preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: nil, message: "To continue, enter the first part of your postcode.", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
     }

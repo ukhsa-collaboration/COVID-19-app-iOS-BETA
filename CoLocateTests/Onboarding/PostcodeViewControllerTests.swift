@@ -10,7 +10,7 @@ import XCTest
 @testable import CoLocate
 
 class PostcodeViewControllerTests: TestCase {
-    func testContinuesWithValidInput() {
+    func testAcceptsTwoCharacters() {
         let persistence = PersistenceDouble()
         let vc = PostcodeViewController.instantiate()
         var continued = false
@@ -18,10 +18,60 @@ class PostcodeViewControllerTests: TestCase {
         parentViewControllerForTests.viewControllers = [vc]
         XCTAssertNotNil(vc.view)
         
-        vc.postcodeField.text = "1234"
+        vc.postcodeField.text = "1X"
         vc.didTapContinue()
         
-        XCTAssertEqual(persistence.partialPostcode, "1234")
+        XCTAssertEqual(persistence.partialPostcode, "1X")
+        XCTAssertTrue(continued)
+        XCTAssertNil(vc.presentedViewController)
+    }
+    
+    func testAcceptsFourCharacters() {
+        let persistence = PersistenceDouble()
+        let vc = PostcodeViewController.instantiate()
+        var continued = false
+        vc.inject(persistence: persistence, notificationCenter: NotificationCenter()) { continued = true }
+        parentViewControllerForTests.viewControllers = [vc]
+        XCTAssertNotNil(vc.view)
+        
+        vc.postcodeField.text = "1XYZ"
+        vc.didTapContinue()
+        
+        XCTAssertEqual(persistence.partialPostcode, "1XYZ")
+        XCTAssertTrue(continued)
+        XCTAssertNil(vc.presentedViewController)
+    }
+    
+    func testIgnoresTrailingNewline() {
+        let persistence = PersistenceDouble()
+        let vc = PostcodeViewController.instantiate()
+        var continued = false
+        vc.inject(persistence: persistence, notificationCenter: NotificationCenter()) { continued = true }
+        parentViewControllerForTests.viewControllers = [vc]
+        XCTAssertNotNil(vc.view)
+        
+        vc.postcodeField.text = "1XYZ\n"
+        vc.didTapContinue()
+        
+        XCTAssertEqual(persistence.partialPostcode, "1XYZ")
+        XCTAssertTrue(continued)
+        XCTAssertNil(vc.presentedViewController)
+    }
+    
+
+    
+    func testValidationIsCaseInsensitive() {
+        let persistence = PersistenceDouble()
+        let vc = PostcodeViewController.instantiate()
+        var continued = false
+        vc.inject(persistence: persistence, notificationCenter: NotificationCenter()) { continued = true }
+        parentViewControllerForTests.viewControllers = [vc]
+        XCTAssertNotNil(vc.view)
+        
+        vc.postcodeField.text = "aB"
+        vc.didTapContinue()
+        
+        XCTAssertEqual(persistence.partialPostcode, "aB")
         XCTAssertTrue(continued)
         XCTAssertNil(vc.presentedViewController)
     }
@@ -34,6 +84,38 @@ class PostcodeViewControllerTests: TestCase {
         parentViewControllerForTests.viewControllers = [vc]
         XCTAssertNotNil(vc.view)
 
+        vc.didTapContinue()
+        
+        XCTAssertNil(persistence.partialPostcode)
+        XCTAssertFalse(continued)
+        XCTAssertNotNil(vc.presentedViewController as? UIAlertController)
+    }
+    
+    func testDoesNotContinueWithLessThanTwoChars() {
+        let persistence = PersistenceDouble()
+        let vc = PostcodeViewController.instantiate()
+        var continued = false
+        vc.inject(persistence: persistence, notificationCenter: NotificationCenter()) { continued = true }
+        parentViewControllerForTests.viewControllers = [vc]
+        XCTAssertNotNil(vc.view)
+        
+        vc.postcodeField.text = "1"
+        vc.didTapContinue()
+        
+        XCTAssertNil(persistence.partialPostcode)
+        XCTAssertFalse(continued)
+        XCTAssertNotNil(vc.presentedViewController as? UIAlertController)
+    }
+    
+    func testDoesNotContinueWithNonAlphanumerics() {
+        let persistence = PersistenceDouble()
+        let vc = PostcodeViewController.instantiate()
+        var continued = false
+        vc.inject(persistence: persistence, notificationCenter: NotificationCenter()) { continued = true }
+        parentViewControllerForTests.viewControllers = [vc]
+        XCTAssertNotNil(vc.view)
+        
+        vc.postcodeField.text = "1~"
         vc.didTapContinue()
         
         XCTAssertNil(persistence.partialPostcode)
