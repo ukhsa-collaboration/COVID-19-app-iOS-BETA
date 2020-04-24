@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,7 +18,7 @@
         <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PJb-yU-LQ8">
             <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NHSLogo" translatesAutoresizingMaskIntoConstraints="NO" id="ooh-rB-hdS">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NHSLogoAlt" translatesAutoresizingMaskIntoConstraints="NO" id="ooh-rB-hdS">
                     <rect key="frame" x="20" y="22.5" width="48" height="19"/>
                     <accessibility key="accessibilityConfiguration" label="NHS">
                         <accessibilityTraits key="traits" none="YES"/>
@@ -56,7 +56,7 @@
         </view>
     </objects>
     <resources>
-        <image name="NHSLogo" width="48" height="19"/>
+        <image name="NHSLogoAlt" width="60.5" height="24.5"/>
         <namedColor name="NHS Blue">
             <color red="0.0" green="0.36862745098039218" blue="0.72156862745098038" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
