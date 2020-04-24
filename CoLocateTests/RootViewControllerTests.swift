@@ -146,6 +146,7 @@ class RootViewControllerTests: TestCase {
         
         notificationCenter.post(name: UIApplication.didBecomeActiveNotification, object: nil)
         authMgr.notificationsCompletion?(.denied)
+        bluetoothNursery.stateObserver?.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
         XCTAssertNotNil(rootVC.presentedViewController)
         
         bluetoothNursery.stateObserver?.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
