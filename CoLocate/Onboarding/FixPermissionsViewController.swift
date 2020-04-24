@@ -13,9 +13,9 @@ class FixPermissionsViewController: UIViewController {
     
     private var notificationCenter: NotificationCenter!
     private var uiQueue: TestableQueue!
-    private var continueHandler: (() -> Void)!
+    private var continueHandler: (() -> Void)?
     
-    func inject(notificationCenter: NotificationCenter, uiQueue: TestableQueue, continueHandler: @escaping () -> Void) {
+    func inject(notificationCenter: NotificationCenter, uiQueue: TestableQueue, continueHandler: (() -> Void)?) {
         self.notificationCenter = notificationCenter
         self.uiQueue = uiQueue
         self.continueHandler = continueHandler
@@ -28,9 +28,11 @@ class FixPermissionsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        notificationCenter.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { _ in
-            self.uiQueue.async {
-                self.continueHandler()
+        if continueHandler != nil {
+            notificationCenter.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { _ in
+                self.uiQueue.async {
+                    self.continueHandler!()
+                }
             }
         }
     }

@@ -102,6 +102,26 @@ class RootViewControllerTests: TestCase {
         XCTAssertNotNil(rootVC.presentedViewController as? PermissionsDeniedViewController)
     }
     
+    func testBecomesActiveShowsBluetoothOffWhenBluetoothOff() {
+        let bluetoothNursery = BluetoothNurseryDouble()
+        bluetoothNursery.createListener()
+        let notificationCenter = NotificationCenter()
+        let authMgr = AuthorizationManagerDouble(bluetooth: .allowed)
+        let rootVC = makeRootVC(
+            persistence: PersistenceDouble(registration: Registration.fake),
+            authorizationManager: authMgr,
+            notificationCenter: notificationCenter,
+            bluetoothNursery: bluetoothNursery
+        )
+        parentViewControllerForTests.viewControllers = [rootVC]
+
+        bluetoothNursery.stateObserver?.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOff)
+        notificationCenter.post(name: UIApplication.didBecomeActiveNotification, object: nil)
+        authMgr.notificationsCompletion?(.allowed)
+
+        XCTAssertNotNil(rootVC.presentedViewController as? BluetoothOffViewController)
+    }
+    
     func testBecomeActiveDoesNotShowPermissionDeniedWhenAllPermissionsGranted() {
         let persistence = PersistenceDouble(registration: Registration.fake)
         let authMgr = AuthorizationManagerDouble(bluetooth: .allowed)
@@ -119,10 +139,17 @@ class RootViewControllerTests: TestCase {
         let persistence = PersistenceDouble(registration: Registration.fake)
         let authMgr = AuthorizationManagerDouble(bluetooth: .allowed)
         let notificationCenter = NotificationCenter()
-        let rootVC = makeRootVC(persistence: persistence, authorizationManager: authMgr, notificationCenter: notificationCenter)
+        let bluetoothNursery = BluetoothNurseryDouble()
+        bluetoothNursery.createListener()
+        let rootVC = makeRootVC(persistence: persistence, authorizationManager: authMgr, notificationCenter: notificationCenter, bluetoothNursery: bluetoothNursery)
         parentViewControllerForTests.viewControllers = [rootVC]
         
+        notificationCenter.post(name: UIApplication.didBecomeActiveNotification, object: nil)
+        authMgr.notificationsCompletion?(.denied)
+        XCTAssertNotNil(rootVC.presentedViewController)
+        
         rootVC.present(PermissionsDeniedViewController.instantiate(), animated: false, completion: nil)
+        bluetoothNursery.stateObserver?.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
         notificationCenter.post(name: UIApplication.didBecomeActiveNotification, object: nil)
         authMgr.notificationsCompletion?(.allowed)
         

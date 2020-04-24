@@ -23,6 +23,7 @@ class RootViewController: UIViewController {
     private var session: Session!
     private var contactEventsUploader: ContactEventsUploader!
     private var uiQueue: TestableQueue! = nil
+    private weak var presentedSetupErorrViewController: UIViewController? = nil
 
     private var statusViewController: StatusViewController!
 
@@ -92,6 +93,8 @@ class RootViewController: UIViewController {
     
     @objc func applicationDidBecomeActive(_ notification: NSNotification) {
         guard self.persistence.registration != nil else { return }
+        
+        self.dismissSetupErorr()
 
         authorizationManager.notifications { [weak self] notificationStatus in
             guard let self = self else { return }
@@ -100,17 +103,40 @@ class RootViewController: UIViewController {
                 switch (self.authorizationManager.bluetooth, notificationStatus) {
                 case (.denied, _), (_, .denied):
                     let permissionsDeniedViewController = PermissionsDeniedViewController.instantiate()
-                self.present(permissionsDeniedViewController, animated: true)
+                    self.showSetupError(viewController: permissionsDeniedViewController)
+                    return
                 default:
-                    guard self.presentedViewController as? PermissionsDeniedViewController != nil else {
-                        return
-                    }
+                    guard let btObserver = self.bluetoothNursery.stateObserver else { return }
+                    
+                    btObserver.notifyOnStateChanges { [weak self] btState in
+                        guard let self = self else { return .stopObserving }
 
-                    self.dismiss(animated: true)
+                        switch btState {
+                        case .unknown:
+                            return .keepObserving
+                        case .poweredOff:
+                            let vc = BluetoothOffViewController.instantiate()
+                            vc.inject(notificationCenter: self.notificationCenter, uiQueue: self.uiQueue, continueHandler: nil)
+                            self.showSetupError(viewController: vc)
+                            return .stopObserving
+                        default:
+                            return .stopObserving
+                        }
+                    }
                 }
             }
         }
-
+    }
+    
+    private func showSetupError(viewController: UIViewController) {
+        self.presentedSetupErorrViewController = viewController
+        self.present(viewController, animated: true)
+    }
+    
+    private func dismissSetupErorr() {
+        if self.presentedSetupErorrViewController != nil {
+            self.dismiss(animated: true)
+        }
     }
     
     // MARK: - Debug view controller management
