@@ -746,8 +746,8 @@
 				F758B8D0242CC661003AE16D /* Registration */,
 				F758B8BC242CB83B003AE16D /* Resources */,
 				895D9E4924374EB800573D4D /* Routing */,
-				F68B89EB243CFEEE00F369A9 /* SelfDiagnosis */,
 				0995ABCD243D034E0057C0D7 /* Status */,
+				F68B89EB243CFEEE00F369A9 /* SelfDiagnosis */,
 			);
 			path = CoLocate;
 			sourceTree = "<group>";
@@ -865,12 +865,13 @@
 			children = (
 				13F4AE862451EACD0082A46D /* Controls */,
 				F68B89EC243CFF2600F369A9 /* SelfDiagnosis.storyboard */,
-				F6EEC3B72448DD2400172820 /* SelfDiagnosis.swift */,
-				F68B89EE243D01FA00F369A9 /* SelfDiagnosisNavigationController.swift */,
-				F6AB2F1D243D324400386D6B /* CoughViewController.swift */,
-				F68B89F3243D050700F369A9 /* TemperatureViewController.swift */,
-				F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */,
 				13F4AE872451EB330082A46D /* QuestionSymptomsViewController.swift */,
+				F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */,
+				13095A672452F4910072F19A /* SelfDiagnosisCoordinator.swift */,
+				F6EEC3B72448DD2400172820 /* SelfDiagnosis.swift */,
+				F68B89F3243D050700F369A9 /* TemperatureViewController.swift */,
+				F6AB2F1D243D324400386D6B /* CoughViewController.swift */,
+				F68B89EE243D01FA00F369A9 /* SelfDiagnosisNavigationController.swift */,
 			);
 			path = SelfDiagnosis;
 			sourceTree = "<group>";
@@ -1245,6 +1246,7 @@
 				F6F05A282433C55300FF4B72 /* AuthorizationManager.swift in Sources */,
 				89F06B352434AF9D0074C612 /* LogEvent.swift in Sources */,
 				F652F7242449138900D97950 /* SetDiagnosisViewController.swift in Sources */,
+				13095A682452F4910072F19A /* SelfDiagnosisCoordinator.swift in Sources */,
 				F613936E243FA82B003447E8 /* Appearance.swift in Sources */,
 				F6F05A342434344200FF4B72 /* StartNowViewController.swift in Sources */,
 				0997D056243BDEEC0067346C /* RootViewController.swift in Sources */,
