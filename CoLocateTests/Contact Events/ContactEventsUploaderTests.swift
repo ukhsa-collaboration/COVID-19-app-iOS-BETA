@@ -11,9 +11,21 @@ import XCTest
 
 class ContactEventsUploaderTests: XCTestCase {
 
-    #warning("Make sure this case is handled before we ship a public release")
     func testNotRegistered() throws {
-        throw XCTSkip("TODO: write this test")
+        let persisting = PersistenceDouble()
+        let contactEventRepository = ContactEventRepositoryDouble()
+        let session = SessionDouble()
+
+        let uploader = ContactEventsUploader(
+            persisting: persisting,
+            contactEventRepository: contactEventRepository,
+            makeSession: { _, _ in session }
+        )
+
+        try? uploader.upload()
+
+        XCTAssertEqual(persisting.uploadLog.map { $0.event }, [.requested])
+        XCTAssertNil(session.uploadRequest)
     }
 
     func testUploadRequest() {
@@ -75,13 +87,7 @@ class ContactEventsUploaderTests: XCTestCase {
 
         try? uploader.upload()
 
-        let uploadLog = persisting.uploadLog
-        XCTAssertEqual(uploadLog.first?.event, .requested)
-
-        guard case .started = uploadLog.last?.event else {
-            XCTFail("Expected a started event")
-            return
-        }
+        XCTAssertEqual(persisting.uploadLog.map { $0.event.key }, ["requested", "started"])
     }
 
     func testCleanup() {
