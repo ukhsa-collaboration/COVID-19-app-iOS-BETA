@@ -83,6 +83,12 @@ jobs:
           name: CoLocate.ipa
           path: CoLocate.ipa
 
+      - name: Upload App Report
+        uses: actions/upload-artifact@v1
+        with:
+          name: AppReport
+          path: Reporting/AppReport
+
       - name: Update Deployment Status on Success
         if: success()
         run: >

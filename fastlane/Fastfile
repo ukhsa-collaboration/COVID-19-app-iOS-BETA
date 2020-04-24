@@ -65,6 +65,12 @@ platform :ios do
       scheme: "CoLocate",
     )
 
+    Dir.chdir "../Reporting" do
+      sh "swift run Reporter project ../CoLocate.xcodeproj --scheme CoLocate --method build --output AppReport" do
+        # Ignore errors for now
+      end
+    end
+
     upload_to_testflight(
       username: ENV.fetch("APPLE_USERNAME"),
       apple_id: sonar_config.apple_id.to_s,
