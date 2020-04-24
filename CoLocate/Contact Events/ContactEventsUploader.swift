@@ -59,6 +59,14 @@ class ContactEventsUploader {
             .max() ?? Date() // conservatively default to removing everything if we somehow don't have a started log
 
         contactEventRepository.remove(through: lastDate)
+
+        persisting.uploadLog = persisting.uploadLog + [UploadLog(event: .completed(error: nil))]
+    }
+
+    func error(_ error: Error) {
+        // upload-contact-events-in-background: retry?
+
+        persisting.uploadLog = persisting.uploadLog + [UploadLog(event: .completed(error: error.localizedDescription))]
     }
 
 }
@@ -78,8 +86,8 @@ class ContactEventsUploaderSessionDelegate: NSObject, URLSessionTaskDelegate {
 //    }
 
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
-        guard error != nil else {
-            // upload-contact-events-in-background: retry?
+        if let error = error {
+            contactEventsUploader.error(error)
             return
         }
 

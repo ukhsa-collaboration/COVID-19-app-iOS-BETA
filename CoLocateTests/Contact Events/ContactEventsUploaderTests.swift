@@ -78,7 +78,7 @@ class ContactEventsUploaderTests: XCTestCase {
         let uploadLog = persisting.uploadLog
         XCTAssertEqual(uploadLog.first?.event, .requested)
 
-        guard case .started = persisting.uploadLog.last?.event else {
+        guard case .started = uploadLog.last?.event else {
             XCTFail("Expected a started event")
             return
         }
@@ -103,6 +103,11 @@ class ContactEventsUploaderTests: XCTestCase {
         uploader.cleanup()
 
         XCTAssertEqual(contactEventRepository.removedThroughDate, contactEvent.timestamp)
+
+        guard case .completed = persisting.uploadLog.last?.event else {
+            XCTFail("Expected a completed log")
+            return
+        }
     }
 
 }
