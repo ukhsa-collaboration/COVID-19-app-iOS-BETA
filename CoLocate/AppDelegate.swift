@@ -56,8 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // TODO: If DEBUG is only necessary as long as we have the same bundle ID for both builds.
-        #if INTERNAL || DEBUG
+        #if DEBUG
         if let window = UITestResponder.makeWindowForTesting() {
             self.window = window
             return true

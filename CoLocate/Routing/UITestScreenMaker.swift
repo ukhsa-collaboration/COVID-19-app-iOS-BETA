@@ -6,7 +6,7 @@
 //  Copyright © 2020 NHSX. All rights reserved.
 //
 
-#if INTERNAL || DEBUG
+#if DEBUG
 
 import UIKit
 

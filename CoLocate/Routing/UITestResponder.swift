@@ -8,7 +8,7 @@
 
 import UIKit
 
-#if INTERNAL || DEBUG
+#if DEBUG
 
 enum UITestResponder {
     
