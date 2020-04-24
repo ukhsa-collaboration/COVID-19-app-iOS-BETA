@@ -79,6 +79,9 @@ jobs:
           killall "Simulator" || true
           xcrun simctl erase all
 
+      - run: |
+          rm -rf TestResults.xcresult
+
       - name: Run Test
         run: >
           xcodebuild
@@ -87,6 +90,7 @@ jobs:
           -destination "platform=iOS Simulator,OS=13.4,name=iPhone 11"
           -showBuildTimingSummary
           -allowProvisioningUpdates
+          -resultBundlePath TestResults.xcresult
 
       # I expect this to fail since we haven’t imported certs, hence the `|| true`.
       # - name: Create report from archive
@@ -96,13 +100,19 @@ jobs:
       #     cd ..
 
       # I expect this to succeed, but is less accurate than above, still, leave `|| true` in just in case.
-      - name: Create report from release build
+      - name: Create App Report
         run: |
           cd Reporting
           swift run Reporter project ../CoLocate.xcodeproj --scheme CoLocate --method build --output AppReport || true
           cd ..
 
-      - name: Upload App Report Artefact
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v1
+        with:
+          name: TestResults.xcresult
+          path: TestResults.xcresult
+
+      - name: Upload App Report
         uses: actions/upload-artifact@v1
         with:
           name: AppReport
