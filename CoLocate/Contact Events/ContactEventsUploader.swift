@@ -70,6 +70,8 @@ class ContactEventsUploader {
 
     func upload() throws {
         let contactEvents = contactEventRepository.contactEvents
+        let lastDate = contactEvents.map { $0.timestamp }.max() ?? Date()
+        persisting.uploadLog = persisting.uploadLog + [UploadLog(event: .started(lastContactEventDate: lastDate))]
 
         guard let registration = persisting.registration else {
             // upload-contact-events-in-background: handle when we have no registration

@@ -58,4 +58,27 @@ class ContactEventsUploaderTests: XCTestCase {
         }
     }
 
+    func testUploadLogStarted() {
+        let registration = Registration.fake
+        let persisting = PersistenceDouble(registration: registration)
+        let expectedBroadcastId = "opaque bytes that only the server can decrypt".data(using: .utf8)!
+        let contactEvent = ContactEvent(encryptedRemoteContactId: expectedBroadcastId)
+        let contactEventRepository = ContactEventRepositoryDouble()
+        contactEventRepository.contactEvents = [contactEvent]
+        let session = SessionDouble()
+
+        let uploader = ContactEventsUploader(
+            persisting: persisting,
+            contactEventRepository: contactEventRepository,
+            makeSession: { _, _ in session }
+        )
+
+        try? uploader.upload()
+
+        guard case .started(let date) = persisting.uploadLog.first?.event else {
+            XCTFail("Expected an upload log")
+            return
+        }
+    }
+
 }

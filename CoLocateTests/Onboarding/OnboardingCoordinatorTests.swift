@@ -74,7 +74,7 @@ class OnboardingCoordinatorTests: TestCase {
     }
         
     func testBluetoothOff() {
-        let persistenceDouble = PersistenceDouble(allowedDataSharing: true, partialPostcode: "1234")
+        let persistenceDouble = PersistenceDouble(partialPostcode: "1234")
         let authManagerDouble = AuthorizationManagerDouble(bluetooth: .allowed)
         let bluetoothNursery = BluetoothNurseryDouble()
         let onboardingCoordinator = OnboardingCoordinator(

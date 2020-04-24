@@ -30,7 +30,7 @@ class RootViewControllerTests: TestCase {
     
     func testOnboardingFinished() {
         let authMgr = AuthorizationManagerDouble(bluetooth: .allowed)
-        let persistence = PersistenceDouble(allowedDataSharing: true, registration: nil, partialPostcode: "1234")
+        let persistence = PersistenceDouble(registration: nil, partialPostcode: "1234")
         let bluetoothNursery = BluetoothNurseryDouble()
         bluetoothNursery.createListener()
         let rootVC = makeRootVC(persistence: persistence, authorizationManager: authMgr, bluetoothNursery: bluetoothNursery)

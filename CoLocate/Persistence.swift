@@ -29,8 +29,8 @@ protocol Persisting {
     var potentiallyExposed: Bool { get nonmutating set }
     var selfDiagnosis: SelfDiagnosis? { get nonmutating set }
     var partialPostcode: String? { get nonmutating set }
-    
-    // Feature flags
+    var uploadLog: [UploadLog] { get nonmutating set }
+
     var enableRegistrationReminders: Bool { get nonmutating set }
 
     func clear()

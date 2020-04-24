@@ -12,24 +12,26 @@ import UIKit
 class PersistenceDouble: Persisting {
     var delegate: PersistenceDelegate?
 
-    var registration: Registration? = nil
-    var potentiallyExposed: Bool = false
-    var selfDiagnosis: SelfDiagnosis? = nil
-    var partialPostcode: String? = nil
-    
+    var registration: Registration?
+    var potentiallyExposed: Bool
+    var selfDiagnosis: SelfDiagnosis?
+    var partialPostcode: String?
+    var uploadLog: [UploadLog]
+
     var enableRegistrationReminders = false
 
     init(
-        allowedDataSharing: Bool = false,
         potentiallyExposed: Bool = false,
         diagnosis: SelfDiagnosis? = nil,
         registration: Registration? = nil,
-        partialPostcode: String? = nil
+        partialPostcode: String? = nil,
+        uploadLog: [UploadLog] = []
     ) {
         self.registration = registration
         self.selfDiagnosis = diagnosis
         self.partialPostcode = partialPostcode
         self.potentiallyExposed = potentiallyExposed
+        self.uploadLog = uploadLog
     }
 
     func clear() {
@@ -37,5 +39,6 @@ class PersistenceDouble: Persisting {
         selfDiagnosis = nil
         partialPostcode = nil
         potentiallyExposed = false
+        uploadLog = []
     }
 }

@@ -12,7 +12,6 @@ import UIKit
 class DebugViewController: UITableViewController, Storyboarded {
     static let storyboardName = "Debug"
 
-    @IBOutlet weak var allowedDataSharingSwitch: UISwitch!
     @IBOutlet weak var versionBuildLabel: UILabel!
     @IBOutlet weak var potentiallyExposedSwitch: UISwitch!
     @IBOutlet var enableRegistrationRemindersSwitch: UISwitch!

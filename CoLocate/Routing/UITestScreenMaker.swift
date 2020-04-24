@@ -60,20 +60,20 @@ private extension OnboardingEnvironment {
 private class InMemoryPersistence: Persisting {
     var delegate: PersistenceDelegate?
 
-    var allowedDataSharing = false
     var registration: Registration? = nil
     var potentiallyExposed: Bool = false
     var selfDiagnosis: SelfDiagnosis? = nil
     var partialPostcode: String? = nil
     var bluetoothPermissionRequested: Bool = false
+    var uploadLog: [UploadLog] = []
     
     var enableRegistrationReminders = false
     
     func clear() {
-        allowedDataSharing = false
         registration = nil
         selfDiagnosis = nil
         partialPostcode = nil
+        uploadLog = []
     }
 }
 
