@@ -9,8 +9,13 @@
 import Foundation
 
 struct UploadLog: Codable, Equatable {
-    let date = Date()
+    let date: Date
     let event: Event
+
+    init(date: Date = Date(), event: Event) {
+        self.date = date
+        self.event = event
+    }
 
     enum Event: Equatable {
         case requested

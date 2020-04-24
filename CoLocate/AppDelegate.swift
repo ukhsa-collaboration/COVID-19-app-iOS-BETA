@@ -121,6 +121,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         logger.info("Did Become Active")
+
+        try? contactEventsUploader.ensureUploading()
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {

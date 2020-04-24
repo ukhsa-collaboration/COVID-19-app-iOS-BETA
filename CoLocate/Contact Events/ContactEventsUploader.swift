@@ -36,18 +36,10 @@ class ContactEventsUploader {
         persisting.uploadLog = persisting.uploadLog + [UploadLog(event: .requested)]
 
         guard let registration = persisting.registration else {
-            // upload-contact-events-in-background: handle when we have no registration
             return
         }
 
-        let contactEvents = contactEventRepository.contactEvents
-        let lastDate = contactEvents.map { $0.timestamp }.max() ?? Date() // conservatively default to the current time
-        persisting.uploadLog = persisting.uploadLog + [UploadLog(event: .started(lastContactEventDate: lastDate))]
-
-        let requestFactory = ConcreteSecureRequestFactory(registration: registration)
-        let request = requestFactory.patchContactsRequest(contactEvents: contactEvents)
-
-        try session.upload(with: request)
+        try upload(with: registration)
     }
 
     func cleanup() {
@@ -64,11 +56,45 @@ class ContactEventsUploader {
     }
 
     func error(_ error: Error) {
-        // upload-contact-events-in-background: retry?
-
         persisting.uploadLog = persisting.uploadLog + [UploadLog(event: .completed(error: error.localizedDescription))]
     }
 
+    // Keeping it simple - we try and reupload contact events if we need to upload,
+    // aren't currently uploading, and it's been an hour since the last attempt.
+    func ensureUploading() throws {
+        guard
+            let registration = persisting.registration,
+            let lastUploadLog = persisting.uploadLog.last
+            else { return }
+
+        let needsUpload: Bool
+        switch lastUploadLog.event {
+        case .requested:
+            needsUpload = true
+        case .started:
+            needsUpload = false
+        case .completed(let error):
+            needsUpload = error != nil
+        }
+
+        let oneHour: TimeInterval = 60 * 60
+        let hasBeenAnHour = (Date().timeIntervalSince(lastUploadLog.date)) > oneHour
+
+        guard needsUpload && hasBeenAnHour else { return }
+
+        try? upload(with: registration)
+    }
+
+    private func upload(with registration: Registration) throws {
+        let contactEvents = contactEventRepository.contactEvents
+        let lastDate = contactEvents.map { $0.timestamp }.max() ?? Date() // conservatively default to the current time
+        persisting.uploadLog = persisting.uploadLog + [UploadLog(event: .started(lastContactEventDate: lastDate))]
+
+        let requestFactory = ConcreteSecureRequestFactory(registration: registration)
+        let request = requestFactory.patchContactsRequest(contactEvents: contactEvents)
+
+        try session.upload(with: request)
+    }
 }
 
 // We need to pass the URLSession delegate when we create the URLSession, so this

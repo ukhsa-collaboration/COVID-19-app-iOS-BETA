@@ -11,6 +11,14 @@ import XCTest
 
 class ContactEventsUploaderTests: XCTestCase {
 
+    var overAnHourAgo: Date!
+
+    override func setUp() {
+        super.setUp()
+
+        overAnHourAgo = Date() - (60 * 60 + 1)
+    }
+
     func testNotRegistered() throws {
         let persisting = PersistenceDouble()
         let contactEventRepository = ContactEventRepositoryDouble()
@@ -111,6 +119,141 @@ class ContactEventsUploaderTests: XCTestCase {
             XCTFail("Expected a completed log")
             return
         }
+    }
+
+    func testEnsureUploadingWhenRequestedButNoRegistration() {
+        let persisting = PersistenceDouble(uploadLog: [UploadLog(event: .requested)])
+        let contactEventRepository = ContactEventRepositoryDouble()
+        let session = SessionDouble()
+
+        let uploader = ContactEventsUploader(
+            persisting: persisting,
+            contactEventRepository: contactEventRepository,
+            makeSession: { _, _ in session }
+        )
+
+        try? uploader.ensureUploading()
+
+        XCTAssertEqual(persisting.uploadLog.map { $0.event }, [.requested])
+        XCTAssertNil(session.uploadRequest)
+    }
+
+    func testEnsureUploadingWhenRequestedWithRegistration() {
+        let registration = Registration.fake
+        let persisting = PersistenceDouble(
+            registration: registration,
+            uploadLog: [UploadLog(date: overAnHourAgo, event: .requested)]
+        )
+        let contactEventRepository = ContactEventRepositoryDouble()
+        let session = SessionDouble()
+
+        let uploader = ContactEventsUploader(
+            persisting: persisting,
+            contactEventRepository: contactEventRepository,
+            makeSession: { _, _ in session }
+        )
+
+        try? uploader.ensureUploading()
+
+        XCTAssertEqual(persisting.uploadLog.map { $0.event.key }, ["requested", "started"])
+        XCTAssertNotNil(session.uploadRequest)
+    }
+
+    func testEnsureUploadingWhenStarted() {
+        let registration = Registration.fake
+        let persisting = PersistenceDouble(
+            registration: registration,
+            uploadLog: [
+                UploadLog(event: .requested),
+                UploadLog(event: .started(lastContactEventDate: Date())),
+            ]
+        )
+        let contactEventRepository = ContactEventRepositoryDouble()
+        let session = SessionDouble()
+
+        let uploader = ContactEventsUploader(
+            persisting: persisting,
+            contactEventRepository: contactEventRepository,
+            makeSession: { _, _ in session }
+        )
+
+        try? uploader.ensureUploading()
+
+        XCTAssertEqual(persisting.uploadLog.map { $0.event.key }, ["requested", "started"])
+        XCTAssertNil(session.uploadRequest)
+    }
+
+    func testEnsureUploadingWhenCompleted() {
+        let registration = Registration.fake
+        let persisting = PersistenceDouble(
+            registration: registration,
+            uploadLog: [
+                UploadLog(event: .requested),
+                UploadLog(event: .started(lastContactEventDate: Date())),
+                UploadLog(event: .completed(error: nil)),
+            ]
+        )
+        let contactEventRepository = ContactEventRepositoryDouble()
+        let session = SessionDouble()
+
+        let uploader = ContactEventsUploader(
+            persisting: persisting,
+            contactEventRepository: contactEventRepository,
+            makeSession: { _, _ in session }
+        )
+
+        try? uploader.ensureUploading()
+
+        XCTAssertEqual(persisting.uploadLog.map { $0.event.key }, ["requested", "started", "completed"])
+        XCTAssertNil(session.uploadRequest)
+    }
+
+    func testEnsureUploadingWhenError() {
+        let registration = Registration.fake
+        let persisting = PersistenceDouble(
+            registration: registration,
+            uploadLog: [
+                UploadLog(event: .requested),
+                UploadLog(event: .started(lastContactEventDate: Date())),
+                UploadLog(date: overAnHourAgo, event: .completed(error: "oh no")),
+            ]
+        )
+        let contactEventRepository = ContactEventRepositoryDouble()
+        let session = SessionDouble()
+
+        let uploader = ContactEventsUploader(
+            persisting: persisting,
+            contactEventRepository: contactEventRepository,
+            makeSession: { _, _ in session }
+        )
+
+        try? uploader.ensureUploading()
+
+        XCTAssertEqual(persisting.uploadLog.map { $0.event.key }, ["requested", "started", "completed", "started"])
+        XCTAssertNotNil(session.uploadRequest)
+    }
+
+    func testEnsureUploadingBeforeAnHourHasPassed() {
+        let registration = Registration.fake
+        let persisting = PersistenceDouble(
+            registration: registration,
+            uploadLog: [
+                UploadLog(event: .requested),
+            ]
+        )
+        let contactEventRepository = ContactEventRepositoryDouble()
+        let session = SessionDouble()
+
+        let uploader = ContactEventsUploader(
+            persisting: persisting,
+            contactEventRepository: contactEventRepository,
+            makeSession: { _, _ in session }
+        )
+
+        try? uploader.ensureUploading()
+
+        XCTAssertEqual(persisting.uploadLog.map { $0.event.key }, ["requested"])
+        XCTAssertNil(session.uploadRequest)
     }
 
 }
