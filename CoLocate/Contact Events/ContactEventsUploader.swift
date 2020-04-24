@@ -10,6 +10,42 @@ import Foundation
 
 import Logging
 
+struct UploadLog: Codable {
+    let date = Date()
+    let event: Event
+
+    enum Event: Codable {
+        case started(lastContactEventDate: Date)
+        case completed(error: String?)
+
+        enum CodingKeys: CodingKey {
+            case started
+            case completed
+        }
+
+        init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            do {
+                let date = try container.decode(Date.self, forKey: .started)
+                self = .started(lastContactEventDate: date)
+            } catch {
+                let error = try container.decode(String.self, forKey: .completed)
+                self = .completed(error: error)
+            }
+        }
+
+        func encode(to encoder: Encoder) throws {
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            switch self {
+            case .started(let date):
+                try container.encode(date, forKey: .started)
+            case .completed(let error):
+                try container.encode(error, forKey: .completed)
+            }
+        }
+    }
+}
+
 class ContactEventsUploader {
 
     static let backgroundIdentifier = "ContactEventUploader"
@@ -36,8 +72,10 @@ class ContactEventsUploader {
         let contactEvents = contactEventRepository.contactEvents
 
         guard let registration = persisting.registration else {
-            fatalError("upload-contact-events-in-background: handle when we have no registration")
+            // upload-contact-events-in-background: handle when we have no registration
+            return
         }
+
         let requestFactory = ConcreteSecureRequestFactory(registration: registration)
         let request = requestFactory.patchContactsRequest(contactEvents: contactEvents)
 
@@ -45,6 +83,7 @@ class ContactEventsUploader {
     }
 
     fileprivate func cleanup() {
+        // upload-contact-events-in-background: only delete events that we've sent
         contactEventRepository.reset()
     }
 
@@ -60,9 +99,9 @@ class ContactEventsUploaderSessionDelegate: NSObject, URLSessionTaskDelegate {
     fileprivate var contactEventsUploader: ContactEventsUploader!
     var completionHandler: (() -> Void)?
 
-    func urlSession(_ session: URLSession, task: URLSessionTask, didSendBodyData bytesSent: Int64, totalBytesSent: Int64, totalBytesExpectedToSend: Int64) {
-        print(#file, #function, task, "bytesSent: \(bytesSent), totalBytesSent: \(totalBytesSent), totalBytesExpectedToSend: \(totalBytesExpectedToSend)")
-    }
+//    func urlSession(_ session: URLSession, task: URLSessionTask, didSendBodyData bytesSent: Int64, totalBytesSent: Int64, totalBytesExpectedToSend: Int64) {
+//        print(#file, #function, task, "bytesSent: \(bytesSent), totalBytesSent: \(totalBytesSent), totalBytesExpectedToSend: \(totalBytesExpectedToSend)")
+//    }
 
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         guard error != nil else {
@@ -70,7 +109,6 @@ class ContactEventsUploaderSessionDelegate: NSObject, URLSessionTaskDelegate {
             return
         }
 
-        // upload-contact-events-in-background: only delete events that we've sent
         contactEventsUploader.cleanup()
 
         print(#file, #function, task)

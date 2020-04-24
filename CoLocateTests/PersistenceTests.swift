@@ -88,6 +88,14 @@ class PersistenceTests: TestCase {
         p1.partialPostcode = "9810"
         XCTAssertEqual(p2.partialPostcode, "9810")
     }
+
+    func testUploadLog() {
+        let persistence = Persistence(secureRegistrationStorage: SecureRegistrationStorage(), broadcastKeyStorage: SecureBroadcastRotationKeyStorage())
+
+        persistence.uploadLog = [UploadLog(event: .started(lastContactEventDate: Date()))]
+
+        XCTAssertFalse(persistence.uploadLog.isEmpty)
+    }
 }
 
 class PersistenceDelegateDouble: NSObject, PersistenceDelegate {

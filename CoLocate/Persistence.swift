@@ -43,9 +43,13 @@ class Persistence: Persisting {
         case potentiallyExposed
         case selfDiagnosis
         case partialPostcode
+        case uploadLog
     }
 
-    static var shared = Persistence(secureRegistrationStorage: SecureRegistrationStorage(), broadcastKeyStorage: SecureBroadcastRotationKeyStorage())
+    static var shared = Persistence(
+        secureRegistrationStorage: SecureRegistrationStorage(),
+        broadcastKeyStorage: SecureBroadcastRotationKeyStorage()
+    )
     
     private let encoder = JSONEncoder()
     private let decoder = JSONDecoder()
@@ -118,6 +122,27 @@ class Persistence: Persisting {
     var partialPostcode: String? {
         get { UserDefaults.standard.string(forKey: Keys.partialPostcode.rawValue) }
         set { UserDefaults.standard.set(newValue, forKey: Keys.partialPostcode.rawValue) }
+    }
+
+    var uploadLog: [UploadLog] {
+        get {
+            guard
+                let data = UserDefaults.standard.data(forKey: Keys.uploadLog.rawValue),
+                let decoded = try? decoder.decode([UploadLog].self, from: data)
+            else {
+                return []
+            }
+
+            return decoded
+        }
+        set {
+            guard let data = try? encoder.encode(newValue) else {
+                logger.critical("Unable to encode the upload log")
+                return
+            }
+
+            UserDefaults.standard.set(data, forKey: Keys.uploadLog.rawValue)
+        }
     }
     
     func clear() {
