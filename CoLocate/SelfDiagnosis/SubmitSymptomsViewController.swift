@@ -108,7 +108,6 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
             try contactEventsUploader.upload()
             self.performSegue(withIdentifier: "unwindFromSelfDiagnosis", sender: self)
         } catch {
-            // upload-contact-events-in-background: log this error
             alert(with: Error())
         }
     }

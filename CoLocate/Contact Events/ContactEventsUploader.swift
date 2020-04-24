@@ -12,6 +12,18 @@ import Logging
 
 class ContactEventsUploader {
 
+    enum Error: Swift.Error {
+        case rateLimited
+        case server
+
+        var localizedDescription: String {
+            switch self {
+            case .rateLimited: return "Rate Limited"
+            case .server: return "Server Error"
+            }
+        }
+    }
+
     static let backgroundIdentifier = "ContactEventUploader"
 
     let sessionDelegate: ContactEventsUploaderSessionDelegate = ContactEventsUploaderSessionDelegate()
@@ -55,7 +67,7 @@ class ContactEventsUploader {
         persisting.uploadLog = persisting.uploadLog + [UploadLog(event: .completed(error: nil))]
     }
 
-    func error(_ error: Error) {
+    func error(_ error: Swift.Error) {
         persisting.uploadLog = persisting.uploadLog + [UploadLog(event: .completed(error: error.localizedDescription))]
     }
 
@@ -117,7 +129,21 @@ class ContactEventsUploaderSessionDelegate: NSObject, URLSessionTaskDelegate {
             return
         }
 
-        // upload-contact-events-in-background: check server response
+        guard let statusCode = (task.response as? HTTPURLResponse)?.statusCode else {
+            // If we ever get here, things have gone quite wrong, so just clean and bail.
+            contactEventsUploader.cleanup()
+            return
+        }
+
+        switch statusCode {
+        case 429:
+            contactEventsUploader.error(ContactEventsUploader.Error.server)
+        case 500..<600:
+            contactEventsUploader.error(ContactEventsUploader.Error.server)
+        default:
+            contactEventsUploader.cleanup()
+        }
+
         contactEventsUploader.cleanup()
 
         print(#file, #function, task)
