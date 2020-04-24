@@ -88,6 +88,20 @@ jobs:
           -showBuildTimingSummary
           -allowProvisioningUpdates
 
+      # I expect this to fail since we haven’t imported certs, hence the `|| true`.
+      - name: Create report from archive
+        run: >
+          cd Reporting
+          swift run Reporter project ../CoLocate.xcodeproj --scheme CoLocate --method archive --output Report || true
+          cd ..
+
+      # I expect this to succeed, but is less accurate than above, still, leave `|| true` in just in case.
+      - name: Create report from archive
+        run: >
+          cd Reporting
+          swift run Reporter project ../CoLocate.xcodeproj --scheme CoLocate --method build --output Report || true
+          cd ..
+
       - name: Notify Slack on Failure
         if: github.ref == 'refs/heads/master' && failure()
         env:
