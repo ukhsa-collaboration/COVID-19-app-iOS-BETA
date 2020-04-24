@@ -47,11 +47,12 @@ class ContactEventsUploader {
     func upload() throws {
         persisting.uploadLog = persisting.uploadLog + [UploadLog(event: .requested)]
 
-        guard let registration = persisting.registration else {
-            return
-        }
+        guard
+            let diagnosis = persisting.selfDiagnosis, // we should always have one of these, but...
+            let registration = persisting.registration
+            else { return }
 
-        try upload(with: registration)
+        try upload(diagnosis, with: registration)
     }
 
     func cleanup() {
@@ -75,6 +76,7 @@ class ContactEventsUploader {
     // aren't currently uploading, and it's been an hour since the last attempt.
     func ensureUploading() throws {
         guard
+            let diagnosis = persisting.selfDiagnosis, // we should always have one of these, but...
             let registration = persisting.registration,
             let lastUploadLog = persisting.uploadLog.last
             else { return }
@@ -94,16 +96,19 @@ class ContactEventsUploader {
 
         guard needsUpload && hasBeenAnHour else { return }
 
-        try? upload(with: registration)
+        try? upload(diagnosis, with: registration)
     }
 
-    private func upload(with registration: Registration) throws {
+    private func upload(_ diagnosis: SelfDiagnosis, with registration: Registration) throws {
         let contactEvents = contactEventRepository.contactEvents
         let lastDate = contactEvents.map { $0.timestamp }.max() ?? Date() // conservatively default to the current time
         persisting.uploadLog = persisting.uploadLog + [UploadLog(event: .started(lastContactEventDate: lastDate))]
 
         let requestFactory = ConcreteSecureRequestFactory(registration: registration)
-        let request = requestFactory.patchContactsRequest(contactEvents: contactEvents)
+        let request = requestFactory.patchContactsRequest(
+            symptomsTimestamp: diagnosis.startDate,
+            contactEvents: contactEvents
+        )
 
         try session.upload(with: request)
     }

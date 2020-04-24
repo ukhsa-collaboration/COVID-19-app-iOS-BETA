@@ -30,7 +30,3 @@ class ContactEventTests: XCTestCase {
         XCTAssertEqual(contactEvent.rssiIntervals[2], 123)
     }
 }
-
-struct DecodableBroadcastId: Decodable {
-    let encryptedRemoteContactId: Data
-}

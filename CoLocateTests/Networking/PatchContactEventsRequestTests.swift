@@ -38,7 +38,12 @@ class PatchContactEventsRequestTests: XCTestCase {
         ]
 
         let registration = Registration(id: anonymousId, secretKey: dummyKey, broadcastRotationKey: knownGoodECPublicKey())
-        request = ConcreteSecureRequestFactory(registration: registration).patchContactsRequest(contactEvents: contactEvents)
+        request = ConcreteSecureRequestFactory(
+            registration: registration
+        ).patchContactsRequest(
+            symptomsTimestamp: Date(),
+            contactEvents: contactEvents
+        )
 
         super.setUp()
     }
@@ -73,14 +78,6 @@ class PatchContactEventsRequestTests: XCTestCase {
         XCTAssertEqual(contactEvents[2].encryptedRemoteContactId, broadcastId3)
         XCTAssertEqual(contactEvents[2].timestamp, timestamp3)
         XCTAssertEqual(contactEvents[2].rssiValues.first, rssi3)
-    }
-
-    func testJsonSerialisedContactEvent() {
-        let expectedJsonString =
-"""
-{"contactEvents":[{"encryptedRemoteContactId":"62D583B3052C4CF9808C0B96080F0DB8","rssiValues":[-11],"timestamp":"1970-01-01T00:00:00Z","rssiIntervals":[10],"duration":0},{"encryptedRemoteContactId":"AA94DF1440774D6B9712D90861D8BDE7","rssiValues":[-1],"timestamp":"1970-01-01T00:00:10Z","rssiIntervals":[20],"duration":0},{"encryptedRemoteContactId":"2F13DB8A7A5E47C991D004F6AE19D869","rssiValues":[-21],"timestamp":"1970-01-01T00:01:40Z","rssiIntervals":[30],"duration":0}]}
-"""
-        XCTAssertEqual(String(data: request.body!, encoding: .utf8)!, expectedJsonString)
     }
 
 }

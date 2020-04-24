@@ -38,7 +38,10 @@ class ContactEventsUploaderTests: XCTestCase {
 
     func testUploadRequest() {
         let registration = Registration.fake
-        let persisting = PersistenceDouble(registration: registration)
+        let persisting = PersistenceDouble(
+            diagnosis: SelfDiagnosis(symptoms: [], startDate: Date()),
+            registration: registration
+        )
         let expectedBroadcastId = "opaque bytes that only the server can decrypt".data(using: .utf8)!
         let contactEvent = ContactEvent(encryptedRemoteContactId: expectedBroadcastId)
         let contactEventRepository = ContactEventRepositoryDouble(contactEvents: [contactEvent])
@@ -64,13 +67,16 @@ class ContactEventsUploaderTests: XCTestCase {
         switch request.method {
         case .patch(let data):
             let decoder = JSONDecoder()
-            let decoded = try? decoder.decode([String: [DecodableBroadcastId]].self, from: data)
+            decoder.dateDecodingStrategy = .iso8601
+
+            let decoded = try? decoder.decode(PatchContactEventsRequest.JSONWrapper.self, from: data)
+
             // Can't compare the entire contact events because the timestamp loses precision
             // when JSON encoded and decoded.
 
-            XCTAssertEqual(1, decoded?.count)
+            XCTAssertEqual(1, decoded?.contactEvents.count)
 
-            let firstEvent = decoded?["contactEvents"]?.first
+            let firstEvent = decoded?.contactEvents.first
             XCTAssertEqual(expectedBroadcastId, firstEvent?.encryptedRemoteContactId)
         default:
             XCTFail("Expected a patch request but got \(request.method)")
@@ -79,7 +85,10 @@ class ContactEventsUploaderTests: XCTestCase {
 
     func testUploadLogRequestedAndStarted() {
         let registration = Registration.fake
-        let persisting = PersistenceDouble(registration: registration)
+        let persisting = PersistenceDouble(
+            diagnosis: SelfDiagnosis(symptoms: [], startDate: Date()),
+            registration: registration
+        )
         let expectedBroadcastId = "opaque bytes that only the server can decrypt".data(using: .utf8)!
         let contactEvent = ContactEvent(encryptedRemoteContactId: expectedBroadcastId)
         let contactEventRepository = ContactEventRepositoryDouble(contactEvents: [contactEvent])
@@ -98,7 +107,10 @@ class ContactEventsUploaderTests: XCTestCase {
 
     func testCleanup() {
         let registration = Registration.fake
-        let persisting = PersistenceDouble(registration: registration)
+        let persisting = PersistenceDouble(
+            diagnosis: SelfDiagnosis(symptoms: [], startDate: Date()),
+            registration: registration
+        )
         let expectedBroadcastId = "opaque bytes that only the server can decrypt".data(using: .utf8)!
         let contactEvent = ContactEvent(encryptedRemoteContactId: expectedBroadcastId)
         let contactEventRepository = ContactEventRepositoryDouble(contactEvents: [contactEvent])
@@ -122,7 +134,10 @@ class ContactEventsUploaderTests: XCTestCase {
     }
 
     func testEnsureUploadingWhenRequestedButNoRegistration() {
-        let persisting = PersistenceDouble(uploadLog: [UploadLog(event: .requested)])
+        let persisting = PersistenceDouble(
+            diagnosis: SelfDiagnosis(symptoms: [], startDate: Date()),
+            uploadLog: [UploadLog(event: .requested)]
+        )
         let contactEventRepository = ContactEventRepositoryDouble()
         let session = SessionDouble()
 
@@ -141,6 +156,7 @@ class ContactEventsUploaderTests: XCTestCase {
     func testEnsureUploadingWhenRequestedWithRegistration() {
         let registration = Registration.fake
         let persisting = PersistenceDouble(
+            diagnosis: SelfDiagnosis(symptoms: [], startDate: Date()),
             registration: registration,
             uploadLog: [UploadLog(date: overAnHourAgo, event: .requested)]
         )
@@ -162,6 +178,7 @@ class ContactEventsUploaderTests: XCTestCase {
     func testEnsureUploadingWhenStarted() {
         let registration = Registration.fake
         let persisting = PersistenceDouble(
+            diagnosis: SelfDiagnosis(symptoms: [], startDate: Date()),
             registration: registration,
             uploadLog: [
                 UploadLog(event: .requested),
@@ -186,6 +203,7 @@ class ContactEventsUploaderTests: XCTestCase {
     func testEnsureUploadingWhenCompleted() {
         let registration = Registration.fake
         let persisting = PersistenceDouble(
+            diagnosis: SelfDiagnosis(symptoms: [], startDate: Date()),
             registration: registration,
             uploadLog: [
                 UploadLog(event: .requested),
@@ -211,6 +229,7 @@ class ContactEventsUploaderTests: XCTestCase {
     func testEnsureUploadingWhenError() {
         let registration = Registration.fake
         let persisting = PersistenceDouble(
+            diagnosis: SelfDiagnosis(symptoms: [], startDate: Date()),
             registration: registration,
             uploadLog: [
                 UploadLog(event: .requested),
@@ -236,6 +255,7 @@ class ContactEventsUploaderTests: XCTestCase {
     func testEnsureUploadingBeforeAnHourHasPassed() {
         let registration = Registration.fake
         let persisting = PersistenceDouble(
+            diagnosis: SelfDiagnosis(symptoms: [], startDate: Date()),
             registration: registration,
             uploadLog: [
                 UploadLog(event: .requested),

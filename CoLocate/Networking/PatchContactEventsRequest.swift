@@ -11,6 +11,7 @@ import Foundation
 class PatchContactEventsRequest: SecureRequest, Request {
 
     struct JSONWrapper: Codable {
+        let symptomsTimestamp: Date
         let contactEvents: [ContactEvent]
     }
 
@@ -20,13 +21,13 @@ class PatchContactEventsRequest: SecureRequest, Request {
     
     let path: String
     
-    init(key: Data, sonarId: UUID, contactEvents: [ContactEvent]) {
+    init(key: Data, sonarId: UUID, symptomsTimestamp: Date, contactEvents: [ContactEvent]) {
         path = "/api/residents/\(sonarId.uuidString)"
 
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
 
-        let requestBody = JSONWrapper(contactEvents: contactEvents)
+        let requestBody = JSONWrapper(symptomsTimestamp: symptomsTimestamp, contactEvents: contactEvents)
         let bodyAsData = try! encoder.encode(requestBody)
         method = .patch(data: bodyAsData)
 
