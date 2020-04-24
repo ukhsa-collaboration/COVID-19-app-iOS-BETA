@@ -15,6 +15,8 @@ class FixPermissionsViewController: UIViewController {
     private var uiQueue: TestableQueue!
     private var continueHandler: (() -> Void)?
     
+    // Inject is optional in this case. It only needs to be called if the controller should call the
+    // continue handler when the application foregrounds.
     func inject(notificationCenter: NotificationCenter, uiQueue: TestableQueue, continueHandler: (() -> Void)?) {
         self.notificationCenter = notificationCenter
         self.uiQueue = uiQueue
@@ -29,8 +31,8 @@ class FixPermissionsViewController: UIViewController {
         super.viewDidLoad()
         
         if continueHandler != nil {
-            notificationCenter.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { _ in
-                self.uiQueue.async {
+            notificationCenter?.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { _ in
+                self.uiQueue?.async {
                     self.continueHandler!()
                 }
             }

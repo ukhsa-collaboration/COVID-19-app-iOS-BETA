@@ -100,14 +100,13 @@ class RootViewController: UIViewController {
             guard let self = self else { return }
 
             self.uiQueue.sync {
-                switch (self.authorizationManager.bluetooth, notificationStatus) {
-                case (.denied, _), (_, .denied):
-                    let permissionsDeniedViewController = PermissionsDeniedViewController.instantiate()
-                    self.showSetupError(viewController: permissionsDeniedViewController)
-                    return
-                default:
-                    guard let btObserver = self.bluetoothNursery.stateObserver else { return }
-                    
+                if notificationStatus == .denied {
+                    let vc = NotificationPermissionDeniedViewController.instantiate()
+                    self.showSetupError(viewController: vc)
+                } else if self.authorizationManager.bluetooth == .denied {
+                    let vc = BluetoothPermissionDeniedViewController.instantiate()
+                    self.showSetupError(viewController: vc)
+                } else if let btObserver = self.bluetoothNursery.stateObserver {
                     btObserver.notifyOnStateChanges { [weak self] btState in
                         guard let self = self else { return .stopObserving }
 
@@ -123,7 +122,7 @@ class RootViewController: UIViewController {
                             return .stopObserving
                         }
                     }
-                }
+                }                    
             }
         }
     }

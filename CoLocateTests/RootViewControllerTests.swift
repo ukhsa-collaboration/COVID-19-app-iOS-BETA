@@ -86,7 +86,7 @@ class RootViewControllerTests: TestCase {
         notificationCenter.post(name: UIApplication.didBecomeActiveNotification, object: nil)
         authMgr.notificationsCompletion?(.allowed)
         
-        XCTAssertNotNil(rootVC.presentedViewController as? PermissionsDeniedViewController)
+        XCTAssertNotNil(rootVC.presentedViewController as? BluetoothPermissionDeniedViewController)
     }
     
     func testBecomeActiveShowsPermissionDeniedWhenNoNotificationPermission() {
@@ -99,7 +99,7 @@ class RootViewControllerTests: TestCase {
         notificationCenter.post(name: UIApplication.didBecomeActiveNotification, object: nil)
         authMgr.notificationsCompletion?(.denied)
         
-        XCTAssertNotNil(rootVC.presentedViewController as? PermissionsDeniedViewController)
+        XCTAssertNotNil(rootVC.presentedViewController as? NotificationPermissionDeniedViewController)
     }
     
     func testBecomesActiveShowsBluetoothOffWhenBluetoothOff() {
@@ -148,7 +148,6 @@ class RootViewControllerTests: TestCase {
         authMgr.notificationsCompletion?(.denied)
         XCTAssertNotNil(rootVC.presentedViewController)
         
-        rootVC.present(PermissionsDeniedViewController.instantiate(), animated: false, completion: nil)
         bluetoothNursery.stateObserver?.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
         notificationCenter.post(name: UIApplication.didBecomeActiveNotification, object: nil)
         authMgr.notificationsCompletion?(.allowed)
