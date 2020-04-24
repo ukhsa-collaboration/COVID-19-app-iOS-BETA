@@ -58,7 +58,7 @@ class RootViewController: UIViewController {
         
         notificationCenter.addObserver(self, selector: #selector(applicationDidBecomeActive(_:)), name: UIApplication.didBecomeActiveNotification, object: nil)
         
-        remoteNotificationManager.dispatcher.registerHandler(forType: .potentialDisagnosis) { (userInfo, completionHandler) in
+        remoteNotificationManager.dispatcher.registerHandler(forType: .potentialDiagnosis) { (userInfo, completionHandler) in
             persistence.potentiallyExposed = true
             self.statusViewController.potentiallyExposed = true
             completionHandler(.newData)
@@ -67,7 +67,7 @@ class RootViewController: UIViewController {
 
     deinit {
         notificationCenter.removeObserver(self)
-        remoteNotificationManager.dispatcher.removeHandler(forType: .potentialDisagnosis)
+        remoteNotificationManager.dispatcher.removeHandler(forType: .potentialDiagnosis)
     }
     
     override func viewDidLoad() {

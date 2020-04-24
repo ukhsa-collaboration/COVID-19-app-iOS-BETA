@@ -100,7 +100,7 @@ class RemoteNotificationDispatcher: RemoteNotificationDispatching {
         if userInfo["activationCode"] as? String != nil {
             return .registrationActivationCode
         } else if userInfo["status"] as? String != nil {
-            return .potentialDisagnosis
+            return .potentialDiagnosis
         } else {
             return nil
         }
@@ -125,7 +125,7 @@ class RemoteNotificationDispatcher: RemoteNotificationDispatching {
             }
         }
 
-        guard let handler = handlers[.potentialDisagnosis] else {
+        guard let handler = handlers[.potentialDiagnosis] else {
             logger.error("No registered handler for type potentialDisagnosis")
             completionHandler(.failed)
             return

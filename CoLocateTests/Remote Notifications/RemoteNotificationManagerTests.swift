@@ -90,7 +90,7 @@ class RemoteNotificationManagerTests: TestCase {
         )
         
         var called = false
-        notificationManager.dispatcher.registerHandler(forType: .potentialDisagnosis) { (userInfo, completionHandler) in
+        notificationManager.dispatcher.registerHandler(forType: .potentialDiagnosis) { (userInfo, completionHandler) in
             called = true
             completionHandler(.newData)
         }
@@ -109,7 +109,7 @@ class RemoteNotificationManagerTests: TestCase {
             dispatcher: RemoteNotificationDispatcher(notificationCenter: NotificationCenter(), userNotificationCenter: userNotificationCenter)
         )
         
-        notificationManager.dispatcher.registerHandler(forType: .potentialDisagnosis) { (userInfo, completionHandler) in
+        notificationManager.dispatcher.registerHandler(forType: .potentialDiagnosis) { (userInfo, completionHandler) in
             completionHandler(.newData)
         }
 
@@ -127,7 +127,7 @@ class RemoteNotificationManagerTests: TestCase {
         )
         
         var called = false
-        notificationManager.dispatcher.registerHandler(forType: .potentialDisagnosis) { (userInfo, completionHandler) in
+        notificationManager.dispatcher.registerHandler(forType: .potentialDiagnosis) { (userInfo, completionHandler) in
             called = true
             completionHandler(.newData)
         }
@@ -167,7 +167,7 @@ class RemoteNotificationManagerTests: TestCase {
             completionHandler(.newData)
         }
         
-        notificationManager.registerHandler(forType: .potentialDisagnosis) { userInfo, completionHandler in
+        notificationManager.registerHandler(forType: .potentialDiagnosis) { userInfo, completionHandler in
             statusChangeHandlerCalled = true
         }
 
