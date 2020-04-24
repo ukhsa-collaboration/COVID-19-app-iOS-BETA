@@ -92,14 +92,16 @@ jobs:
       - name: Create report from archive
         run: >
           cd Reporting
-          swift run Reporter project ../CoLocate.xcodeproj --scheme CoLocate --method archive --output Report || true
+          swift run Reporter project ../CoLocate.xcodeproj --scheme CoLocate --method archive --output AppReport || true
+          ls AppReport
           cd ..
 
       # I expect this to succeed, but is less accurate than above, still, leave `|| true` in just in case.
-      - name: Create report from archive
+      - name: Create report from release build
         run: >
           cd Reporting
-          swift run Reporter project ../CoLocate.xcodeproj --scheme CoLocate --method build --output Report || true
+          swift run Reporter project ../CoLocate.xcodeproj --scheme CoLocate --method build --output AppReport || true
+          ls AppReport
           cd ..
 
       - name: Notify Slack on Failure
