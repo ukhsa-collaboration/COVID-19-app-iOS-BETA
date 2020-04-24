@@ -123,6 +123,7 @@
 		F60497672452415F002B8503 /* ContactEventsUploaderDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60497662452415F002B8503 /* ContactEventsUploaderDouble.swift */; };
 		F604976924539093002B8503 /* UploadLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = F604976824539093002B8503 /* UploadLog.swift */; };
 		F604976B24539F6C002B8503 /* UploadLogsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F604976A24539F6C002B8503 /* UploadLogsViewController.swift */; };
+		F604976D2453ADF4002B8503 /* scenarios.yml in Resources */ = {isa = PBXBuildFile; fileRef = F604976C2453ADF4002B8503 /* scenarios.yml */; };
 		F613936E243FA82B003447E8 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = F613936D243FA82B003447E8 /* Appearance.swift */; };
 		F62F857F2451051C006580A8 /* ContactEventsUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62F857E2451051C006580A8 /* ContactEventsUploader.swift */; };
 		F62F858124510716006580A8 /* ContactEventsUploaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62F858024510716006580A8 /* ContactEventsUploaderTests.swift */; };
@@ -338,6 +339,7 @@
 		F60497662452415F002B8503 /* ContactEventsUploaderDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventsUploaderDouble.swift; sourceTree = "<group>"; };
 		F604976824539093002B8503 /* UploadLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadLog.swift; sourceTree = "<group>"; };
 		F604976A24539F6C002B8503 /* UploadLogsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadLogsViewController.swift; sourceTree = "<group>"; };
+		F604976C2453ADF4002B8503 /* scenarios.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = scenarios.yml; sourceTree = "<group>"; };
 		F613936D243FA82B003447E8 /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		F62F857E2451051C006580A8 /* ContactEventsUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventsUploader.swift; sourceTree = "<group>"; };
 		F62F858024510716006580A8 /* ContactEventsUploaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventsUploaderTests.swift; sourceTree = "<group>"; };
@@ -519,6 +521,7 @@
 				214209B52421072C00C7BFF3 /* StatusViewController.swift */,
 				F652F72D244E472E00D97950 /* SymptomsPromptViewController.swift */,
 				138114E32450543600BA46C7 /* SymptomStackView.swift */,
+				F604976C2453ADF4002B8503 /* scenarios.yml */,
 			);
 			path = Status;
 			sourceTree = "<group>";
@@ -1099,6 +1102,7 @@
 				F68B89ED243CFF2600F369A9 /* SelfDiagnosis.storyboard in Resources */,
 				F6F05A322434310200FF4B72 /* Onboarding.storyboard in Resources */,
 				F70CB81B2450CFA900ED6E7F /* OnboardingLogoStrapline.xib in Resources */,
+				F604976D2453ADF4002B8503 /* scenarios.yml in Resources */,
 				098ED481242E745F0029B729 /* Debug.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,0 +1,43 @@
+
+# Simple cases
+
+## Default to blue
+- timeline:
+    2020-04-24:
+      status: blue
+
+## Potentially exposed
+- timeline:
+    2020-04-24:
+      status-notification: potential
+    2020-04-25:
+      status: amber
+
+## Self-diagnosis should be red
+- timeline:
+    2020-04-24:
+      self-diagnosis: [temperature, cough]
+    2020-04-25:
+      status: red
+
+## Potentially exposed lasts 14 days
+- timeline:
+    2020-04-01:
+      status-notification: potential
+    2020-04-02:
+      status: amber
+    2020-04-14:
+      status: amber
+    2020-04-15:
+      status: blue
+
+## Red supercedes amber
+- timeline:
+    2020-04-01:
+      status-notification: potential
+    2020-04-02:
+      status: amber
+    2020-04-06:
+      self-diagnosis: [temperature, cough]
+    2020-04-07:
+      status: red
