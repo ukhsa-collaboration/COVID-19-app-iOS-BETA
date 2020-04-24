@@ -90,18 +90,18 @@ jobs:
 
       # I expect this to fail since we haven’t imported certs, hence the `|| true`.
       - name: Create report from archive
-        run: >
+        run: |
           cd Reporting
           swift run Reporter project ../CoLocate.xcodeproj --scheme CoLocate --method archive --output AppReport || true
-          ls AppReport
+          ls
           cd ..
 
       # I expect this to succeed, but is less accurate than above, still, leave `|| true` in just in case.
       - name: Create report from release build
-        run: >
+        run: |
           cd Reporting
           swift run Reporter project ../CoLocate.xcodeproj --scheme CoLocate --method build --output AppReport || true
-          ls AppReport
+          ls
           cd ..
 
       - name: Notify Slack on Failure
