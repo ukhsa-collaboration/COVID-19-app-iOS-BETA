@@ -12,6 +12,7 @@ import Logging
 protocol ContactEventRepository: BTLEListenerDelegate {
     var contactEvents: [ContactEvent] { get }
     func reset()
+    func remove(through date: Date)
     func removeExpiredContactEvents(ttl: Double)
 }
 
@@ -41,6 +42,12 @@ extension PlistPersister: ContactEventPersister where K == UUID, V == ContactEve
     
     func reset() {
         persister.reset()
+    }
+
+    func remove(through date: Date) {
+        // I doubt this is atomic, but the window should be extraordinarily small
+        // so I'm not too worried about dropping contact events here.
+        persister.items = persister.items.filter { _, contactEvent in contactEvent.timestamp > date }
     }
     
     func removeExpiredContactEvents(ttl: Double) {

@@ -167,6 +167,9 @@ private class NoOpContactEventRepository: ContactEventRepository {
     
     func removeExpiredContactEvents(ttl: Double) {
     }
+
+    func remove(through date: Date) {
+    }
     
 }
 

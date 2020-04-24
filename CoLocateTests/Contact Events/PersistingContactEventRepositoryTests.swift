@@ -88,7 +88,22 @@ class PersistingContactEventRepositoryTests: XCTestCase {
         repository.removeExpiredContactEvents(ttl: 2419200)
         XCTAssertEqual(repository.contactEvents.count, 2)
     }
-    
+
+    func testRemoveContactEventsUntil() {
+        repository.btleListener(listener, didFind: broadcastId1, forPeripheral: peripheral1)
+        repository.btleListener(listener, didFind: broadcastId2, forPeripheral: peripheral2)
+        repository.btleListener(listener, didFind: broadcastId3, forPeripheral: peripheral3)
+
+        guard let contactEvent = persister.items[peripheral2.identifier] else {
+            XCTFail("Contact event for \(peripheral2.identifier) not found")
+            return
+        }
+
+        repository.remove(through: contactEvent.timestamp)
+
+        XCTAssertEqual(repository.contactEvents.count, 1)
+    }
+
 }
 
 fileprivate struct TestPeripheral: BTLEPeripheral {
