@@ -62,9 +62,7 @@ class ConcreteRegistrationService: RegistrationService {
     }
     
     func register() -> Void {
-        if persistence.enableRegistrationReminders {
-            reminderScheduler.schedule()
-        }
+        reminderScheduler.schedule()
         
         if let pushToken = remoteNotificationDispatcher.pushToken {
             // if somehow we have already received our fcm push token, perform the first registration request

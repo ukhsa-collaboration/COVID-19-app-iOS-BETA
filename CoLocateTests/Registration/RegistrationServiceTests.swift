@@ -500,14 +500,12 @@ class RegistrationServiceTests: TestCase {
         XCTAssertNil(persistence.registration)
     }
     
-    func testSchedulesRemindersAtStartIfFeatureEnabled() {
+    func testSchedulesRemindersAtStart() {
         let reminderScheduler = RegistrationReminderSchedulerDouble()
-        let persistence = PersistenceDouble()
-        persistence.enableRegistrationReminders = true
         
         let registrationService = ConcreteRegistrationService(
             session: SessionDouble(),
-            persistence: persistence,
+            persistence: PersistenceDouble(),
             reminderScheduler: reminderScheduler,
             remoteNotificationDispatcher: RemoteNotificationDispatcher(
                 notificationCenter: NotificationCenter(),
@@ -521,29 +519,7 @@ class RegistrationServiceTests: TestCase {
         
         XCTAssertTrue(reminderScheduler.scheduleCalled)
     }
-    
-    func testDoesNotScheduleRemindersAtStartIfFeatureDisabled() {
-        let reminderScheduler = RegistrationReminderSchedulerDouble()
-        let persistence = PersistenceDouble()
-        persistence.enableRegistrationReminders = false
         
-        let registrationService = ConcreteRegistrationService(
-            session: SessionDouble(),
-            persistence: persistence,
-            reminderScheduler: reminderScheduler,
-            remoteNotificationDispatcher: RemoteNotificationDispatcher(
-                notificationCenter: NotificationCenter(),
-                userNotificationCenter: UserNotificationCenterDouble()
-            ),
-            notificationCenter: NotificationCenter(),
-            timeoutQueue: QueueDouble()
-        )
-        
-        registrationService.register()
-        
-        XCTAssertFalse(reminderScheduler.scheduleCalled)
-    }
-    
     func testCancelsReminderOnSuccess() {
         let reminderScheduler = RegistrationReminderSchedulerDouble()
         let session = SessionDouble()

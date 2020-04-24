@@ -18,8 +18,6 @@ class PersistenceDouble: Persisting {
     var partialPostcode: String?
     var uploadLog: [UploadLog]
 
-    var enableRegistrationReminders = false
-
     init(
         potentiallyExposed: Bool = false,
         diagnosis: SelfDiagnosis? = nil,

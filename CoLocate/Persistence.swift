@@ -31,8 +31,6 @@ protocol Persisting {
     var partialPostcode: String? { get nonmutating set }
     var uploadLog: [UploadLog] { get nonmutating set }
 
-    var enableRegistrationReminders: Bool { get nonmutating set }
-
     func clear()
 }
 
@@ -47,7 +45,6 @@ class Persistence: Persisting {
         case selfDiagnosis
         case partialPostcode
         case uploadLog
-        case enableRegistrationReminders
     }
 
     static var shared = Persistence(
@@ -147,11 +144,6 @@ class Persistence: Persisting {
 
             UserDefaults.standard.set(data, forKey: Keys.uploadLog.rawValue)
         }
-    }
-    
-    var enableRegistrationReminders: Bool {
-        get { UserDefaults.standard.bool(forKey: Keys.enableRegistrationReminders.rawValue) }
-        set { UserDefaults.standard.set(newValue, forKey: Keys.enableRegistrationReminders.rawValue) }
     }
     
     func clear() {

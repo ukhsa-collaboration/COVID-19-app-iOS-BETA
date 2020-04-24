@@ -268,37 +268,7 @@
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Feature Flags" id="dU9-Ft-25P">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="DEA-5A-5Le">
-                                        <rect key="frame" x="0.0" y="815.5" width="414" height="43.5"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DEA-5A-5Le" id="IL9-Cu-SMs">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable registration reminders" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZvC-4f-ZSM">
-                                                    <rect key="frame" x="8" y="11" width="224" height="22"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Afw-fK-gHS">
-                                                    <rect key="frame" x="357" y="6.5" width="51" height="31"/>
-                                                    <connections>
-                                                        <action selector="enableRegistrationRemindersChanged:" destination="HkQ-dd-eR1" eventType="valueChanged" id="4Pk-t1-4in"/>
-                                                    </connections>
-                                                </switch>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="bottomMargin" secondItem="ZvC-4f-ZSM" secondAttribute="bottom" id="9Us-ug-2Pa"/>
-                                                <constraint firstAttribute="trailing" secondItem="Afw-fK-gHS" secondAttribute="trailing" constant="8" id="Txb-pv-oZ1"/>
-                                                <constraint firstItem="ZvC-4f-ZSM" firstAttribute="leading" secondItem="IL9-Cu-SMs" secondAttribute="leadingMargin" id="Zff-wJ-Q9b"/>
-                                                <constraint firstItem="ZvC-4f-ZSM" firstAttribute="top" secondItem="IL9-Cu-SMs" secondAttribute="topMargin" id="ntW-uf-BmM"/>
-                                                <constraint firstItem="Afw-fK-gHS" firstAttribute="centerY" secondItem="IL9-Cu-SMs" secondAttribute="centerY" id="qas-qb-vgL"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
+                                <cells/>
                             </tableViewSection>
                         </sections>
                         <connections>
@@ -314,7 +284,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="enableRegistrationRemindersSwitch" destination="Afw-fK-gHS" id="RWf-0b-y0H"/>
                         <outlet property="potentiallyExposedSwitch" destination="pxj-sV-aJn" id="Zdi-c7-YlE"/>
                         <outlet property="versionBuildLabel" destination="u9d-KW-xk7" id="hpS-fN-Piy"/>
                     </connections>

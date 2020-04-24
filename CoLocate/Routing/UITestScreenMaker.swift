@@ -66,9 +66,7 @@ private class InMemoryPersistence: Persisting {
     var partialPostcode: String? = nil
     var bluetoothPermissionRequested: Bool = false
     var uploadLog: [UploadLog] = []
-    
-    var enableRegistrationReminders = false
-    
+        
     func clear() {
         registration = nil
         selfDiagnosis = nil
