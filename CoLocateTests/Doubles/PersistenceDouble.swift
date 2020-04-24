@@ -16,6 +16,8 @@ class PersistenceDouble: Persisting {
     var potentiallyExposed: Bool = false
     var selfDiagnosis: SelfDiagnosis? = nil
     var partialPostcode: String? = nil
+    
+    var enableRegistrationReminders = false
 
     init(
         allowedDataSharing: Bool = false,

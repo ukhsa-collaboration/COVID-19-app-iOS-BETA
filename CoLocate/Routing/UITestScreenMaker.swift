@@ -64,10 +64,10 @@ private class InMemoryPersistence: Persisting {
     var registration: Registration? = nil
     var potentiallyExposed: Bool = false
     var selfDiagnosis: SelfDiagnosis? = nil
-    var enableNewSelfDiagnosis = false
     var partialPostcode: String? = nil
-    var enableNewKeyRotation = false
     var bluetoothPermissionRequested: Bool = false
+    
+    var enableRegistrationReminders = false
     
     func clear() {
         allowedDataSharing = false

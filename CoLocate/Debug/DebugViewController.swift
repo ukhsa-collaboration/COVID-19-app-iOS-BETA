@@ -15,7 +15,7 @@ class DebugViewController: UITableViewController, Storyboarded {
     @IBOutlet weak var allowedDataSharingSwitch: UISwitch!
     @IBOutlet weak var versionBuildLabel: UILabel!
     @IBOutlet weak var potentiallyExposedSwitch: UISwitch!
-    @IBOutlet weak var enableNewSelfDiagnosis: UISwitch!
+    @IBOutlet var enableRegistrationRemindersSwitch: UISwitch!
     
     private var persisting: Persisting!
     private var contactEventRepository: ContactEventRepository!
@@ -36,6 +36,8 @@ class DebugViewController: UITableViewController, Storyboarded {
     
     override func viewDidLoad() {
         potentiallyExposedSwitch.isOn = persisting.potentiallyExposed
+        enableRegistrationRemindersSwitch.isOn =  persisting.enableRegistrationReminders
+
 
         let build = Bundle.main.infoDictionary?["CFBundleVersion"] ?? "unknown"
         let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] ?? "unknown"
@@ -128,7 +130,7 @@ class DebugViewController: UITableViewController, Storyboarded {
             break
 
         default:
-            fatalError()
+            break
         }
     }
 
@@ -141,7 +143,11 @@ class DebugViewController: UITableViewController, Storyboarded {
     @IBAction func potentiallyExposedChanged(_ sender: UISwitch) {
         persisting.potentiallyExposed = sender.isOn
     }
-
+    
+    @IBAction func enableRegistrationRemindersChanged(_ sender: UISwitch) {
+        persisting.enableRegistrationReminders = sender.isOn
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.destination {
         case let vc as SetDiagnosisViewController:

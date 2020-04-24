@@ -276,8 +276,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable new self-diagnosis" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZvC-4f-ZSM">
-                                                    <rect key="frame" x="20" y="11" width="200" height="22"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable registration reminders" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZvC-4f-ZSM">
+                                                    <rect key="frame" x="8" y="11" width="224" height="22"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -285,7 +285,7 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Afw-fK-gHS">
                                                     <rect key="frame" x="357" y="6.5" width="51" height="31"/>
                                                     <connections>
-                                                        <action selector="enableNewSelfDiagnosisChanged:" destination="HkQ-dd-eR1" eventType="valueChanged" id="fCV-vd-Fyk"/>
+                                                        <action selector="enableRegistrationRemindersChanged:" destination="HkQ-dd-eR1" eventType="valueChanged" id="4Pk-t1-4in"/>
                                                     </connections>
                                                 </switch>
                                             </subviews>
@@ -314,7 +314,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="enableNewSelfDiagnosis" destination="Afw-fK-gHS" id="Sxe-cd-Mp1"/>
+                        <outlet property="enableRegistrationRemindersSwitch" destination="Afw-fK-gHS" id="RWf-0b-y0H"/>
                         <outlet property="potentiallyExposedSwitch" destination="pxj-sV-aJn" id="Zdi-c7-YlE"/>
                         <outlet property="versionBuildLabel" destination="u9d-KW-xk7" id="hpS-fN-Piy"/>
                     </connections>

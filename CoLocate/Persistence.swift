@@ -29,6 +29,9 @@ protocol Persisting {
     var potentiallyExposed: Bool { get nonmutating set }
     var selfDiagnosis: SelfDiagnosis? { get nonmutating set }
     var partialPostcode: String? { get nonmutating set }
+    
+    // Feature flags
+    var enableRegistrationReminders: Bool { get nonmutating set }
 
     func clear()
 }
@@ -44,6 +47,7 @@ class Persistence: Persisting {
         case selfDiagnosis
         case partialPostcode
         case uploadLog
+        case enableRegistrationReminders
     }
 
     static var shared = Persistence(
@@ -145,6 +149,11 @@ class Persistence: Persisting {
         }
     }
     
+    var enableRegistrationReminders: Bool {
+        get { UserDefaults.standard.bool(forKey: Keys.enableRegistrationReminders.rawValue) }
+        set { UserDefaults.standard.set(newValue, forKey: Keys.enableRegistrationReminders.rawValue) }
+    }
+    
     func clear() {
         for key in Keys.allCases {
             UserDefaults.standard.removeObject(forKey: key.rawValue)
@@ -155,5 +164,6 @@ class Persistence: Persisting {
     }
 
 }
+
 
 fileprivate let logger = Logger(label: "Persistence")
