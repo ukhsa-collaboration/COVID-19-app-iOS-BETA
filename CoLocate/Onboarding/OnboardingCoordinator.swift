@@ -78,7 +78,7 @@ class OnboardingCoordinator {
                 return
             }
             
-            btStateObserver.notifyOnStateChanges { btState in
+            btStateObserver.observe { btState in
                 switch btState {
                 case .poweredOff:
                     completion(.bluetoothOff)

@@ -25,7 +25,7 @@ class BluetoothStateUserNotifier {
         self.scheduler = scheduler
         self.uiQueue = uiQueue
         
-        bluetoothStateObserver.notifyOnStateChanges { state in
+        bluetoothStateObserver.observe { state in
             guard state == .poweredOff else { return .keepObserving }
 
             uiQueue.async {

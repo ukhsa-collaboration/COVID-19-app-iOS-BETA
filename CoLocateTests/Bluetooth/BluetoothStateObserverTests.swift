@@ -15,7 +15,7 @@ class BluetoothStateObserverTests: TestCase {
     func testNotifyOnStateChanges_notifiesWithCurrentState() {
         let observer = BluetoothStateObserver(initialState: .unknown)
         var receivedState: CBManagerState? = nil
-        observer.notifyOnStateChanges { state in
+        observer.observe { state in
             receivedState = state
             return .keepObserving
         }
@@ -26,7 +26,7 @@ class BluetoothStateObserverTests: TestCase {
     func testNotifyOnStateChanges_notifiesOnEveryChange() {
         let observer = BluetoothStateObserver(initialState: .unknown)
         var receivedState: CBManagerState? = nil
-        observer.notifyOnStateChanges { state in
+        observer.observe { state in
             receivedState = state
             return .keepObserving
         }
@@ -45,11 +45,11 @@ class BluetoothStateObserverTests: TestCase {
         let observer = BluetoothStateObserver(initialState: .unknown)
         var removedCallCount = 0
         var otherCallCount = 0
-        observer.notifyOnStateChanges { state in
+        observer.observe { state in
            removedCallCount += 1
            return .stopObserving
         }
-        observer.notifyOnStateChanges { state in
+        observer.observe { state in
             otherCallCount += 1
             return .keepObserving
         }

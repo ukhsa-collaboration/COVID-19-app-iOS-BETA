@@ -107,7 +107,7 @@ class RootViewController: UIViewController {
                     let vc = BluetoothPermissionDeniedViewController.instantiate()
                     self.showSetupError(viewController: vc)
                 } else if let btObserver = self.bluetoothNursery.stateObserver {
-                    btObserver.notifyOnStateChanges { [weak self] btState in
+                    btObserver.observe { [weak self] btState in
                         guard let self = self else { return .stopObserving }
 
                         switch btState {

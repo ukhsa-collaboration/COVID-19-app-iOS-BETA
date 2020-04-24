@@ -85,7 +85,7 @@ class PermissionsViewController: UIViewController, Storyboarded {
         // Trigger the permissions prompt
         bluetoothNursery.createListener()
         // Don't query the status until the user has responded
-        bluetoothNursery.stateObserver!.notifyOnStateChanges { [weak self] _ in
+        bluetoothNursery.stateObserver!.observe { [weak self] _ in
             guard let self = self else { return .stopObserving }
             
             switch self.authManager.bluetooth {

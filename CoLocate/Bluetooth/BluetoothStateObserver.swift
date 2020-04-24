@@ -25,7 +25,7 @@ class BluetoothStateObserver: BTLEListenerStateDelegate {
     }
         
     // Callback will be called immediately with the last known state and every time the state changes in the future.
-    func notifyOnStateChanges(_ callback: @escaping (CBManagerState) -> Action) {
+    func observe(_ callback: @escaping (CBManagerState) -> Action) {
         if callback(lastKnownState) == .keepObserving {
             callbacks.append(callback)
         }
