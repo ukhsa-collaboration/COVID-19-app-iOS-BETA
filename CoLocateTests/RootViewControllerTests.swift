@@ -122,6 +122,22 @@ class RootViewControllerTests: TestCase {
         XCTAssertNotNil(rootVC.presentedViewController as? BluetoothOffViewController)
     }
     
+    func testBecomeActiveDoesNotShowPermissionProblemsDuringOnboarding() {
+        let persistence = PersistenceDouble(registration: nil)
+        let authMgr = AuthorizationManagerDouble()
+        let notificationCenter = NotificationCenter()
+        let rootVC = makeRootVC(persistence: persistence, authorizationManager: authMgr, notificationCenter: notificationCenter)
+        parentViewControllerForTests.viewControllers = [rootVC]
+        XCTAssertNotNil(rootVC.view)
+        
+        authMgr.bluetooth = .denied
+        notificationCenter.post(name: UIApplication.didBecomeActiveNotification, object: nil)
+        authMgr.notificationsCompletion?(.allowed)
+        
+        XCTAssertNil(rootVC.presentedViewController)
+    }
+
+    
     func testBecomeActiveDoesNotShowPermissionDeniedWhenAllPermissionsGranted() {
         let persistence = PersistenceDouble(registration: Registration.fake)
         let authMgr = AuthorizationManagerDouble(bluetooth: .allowed)

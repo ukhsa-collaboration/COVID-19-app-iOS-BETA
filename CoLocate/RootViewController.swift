@@ -94,6 +94,12 @@ class RootViewController: UIViewController {
     }
     
     @objc func applicationDidBecomeActive(_ notification: NSNotification) {
+        guard children.first as? OnboardingViewController == nil else {
+            // The onboarding flow has its own handling for setup problems, and if we present them from here
+            // during onboarding then there will likely be two of them shown at the same time.
+            return
+        }
+        
         let checker = SetupChecker(authorizationManager: authorizationManager, bluetoothNursery: bluetoothNursery)
         checker.check { problem in
             self.uiQueue.sync {
