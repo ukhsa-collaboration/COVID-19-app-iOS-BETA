@@ -39,6 +39,7 @@
 		09D027CE2452157D006EE07E /* BluetoothStateObserverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D027CD2452157D006EE07E /* BluetoothStateObserverTests.swift */; };
 		09D91A7724521C5C004825A5 /* BluetoothNurseryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D91A7624521C5C004825A5 /* BluetoothNurseryTests.swift */; };
 		09D91A7924522133004825A5 /* BTLEListenerDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D91A7824522133004825A5 /* BTLEListenerDouble.swift */; };
+		09E6E7E4245271A00069DFA8 /* SetupChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E6E7E3245271A00069DFA8 /* SetupChecker.swift */; };
 		09E876BC24510F2C009C2628 /* BluetoothNurseryDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E876BB24510F2C009C2628 /* BluetoothNurseryDouble.swift */; };
 		131AB05C2449D85B002136CA /* ContactEventExpiryHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131AB05B2449D85B002136CA /* ContactEventExpiryHandler.swift */; };
 		131AB05E2449D894002136CA /* ContactEventExpiryHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131AB05D2449D894002136CA /* ContactEventExpiryHandlerTests.swift */; };
@@ -237,6 +238,7 @@
 		09D027CD2452157D006EE07E /* BluetoothStateObserverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothStateObserverTests.swift; sourceTree = "<group>"; };
 		09D91A7624521C5C004825A5 /* BluetoothNurseryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothNurseryTests.swift; sourceTree = "<group>"; };
 		09D91A7824522133004825A5 /* BTLEListenerDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTLEListenerDouble.swift; sourceTree = "<group>"; };
+		09E6E7E3245271A00069DFA8 /* SetupChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupChecker.swift; sourceTree = "<group>"; };
 		09E876BB24510F2C009C2628 /* BluetoothNurseryDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothNurseryDouble.swift; sourceTree = "<group>"; };
 		131AB05B2449D85B002136CA /* ContactEventExpiryHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventExpiryHandler.swift; sourceTree = "<group>"; };
 		131AB05D2449D894002136CA /* ContactEventExpiryHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventExpiryHandlerTests.swift; sourceTree = "<group>"; };
@@ -681,6 +683,7 @@
 				214209B9242216B700C7BFF3 /* Persistence.swift */,
 				21E5051424448D880065C69B /* PlistPersister.swift */,
 				0997D055243BDEEC0067346C /* RootViewController.swift */,
+				09E6E7E3245271A00069DFA8 /* SetupChecker.swift */,
 				6FC63C37241641BA007C8BF3 /* Assets.xcassets */,
 				A1E7A0582420028B0078174D /* NHS Colors.xcassets */,
 				89896E5F2435F15C00F949EA /* Base.xcconfig */,
@@ -1212,6 +1215,7 @@
 				0984E0BD2451014E009C6374 /* BluetoothOffViewController.swift in Sources */,
 				F62F857F2451051C006580A8 /* ContactEventsUploader.swift in Sources */,
 				F68B89F4243D050700F369A9 /* TemperatureViewController.swift in Sources */,
+				09E6E7E4245271A00069DFA8 /* SetupChecker.swift in Sources */,
 				89F06B372434C35A0074C612 /* LoggerMetadata.swift in Sources */,
 				F68B89EF243D01FA00F369A9 /* SelfDiagnosisNavigationController.swift in Sources */,
 				898FE859243B4FE300210775 /* AuthorizationManaging.swift in Sources */,

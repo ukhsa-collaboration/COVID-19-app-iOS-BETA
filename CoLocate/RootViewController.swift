@@ -94,29 +94,23 @@ class RootViewController: UIViewController {
     @objc func applicationDidBecomeActive(_ notification: NSNotification) {
         guard self.persistence.registration != nil else { return }
         
-        self.dismissSetupErorr()
-
-        authorizationManager.notifications { [weak self] notificationStatus in
-            guard let self = self else { return }
-
+        let checker = SetupChecker(authorizationManager: authorizationManager, bluetoothNursery: bluetoothNursery)
+        checker.check { problem in
             self.uiQueue.sync {
-                if notificationStatus == .denied {
-                    let vc = NotificationPermissionDeniedViewController.instantiate()
+                self.dismissSetupErorr()
+                guard let problem = problem else { return }
+                
+                switch problem {
+                case .bluetoothOff:
+                    let vc = BluetoothOffViewController.instantiate()
                     self.showSetupError(viewController: vc)
-                } else if self.authorizationManager.bluetooth == .denied {
+                case .bluetoothPermissions:
                     let vc = BluetoothPermissionDeniedViewController.instantiate()
                     self.showSetupError(viewController: vc)
-                } else if let btObserver = self.bluetoothNursery.stateObserver {
-                    btObserver.observeUntilKnown { [weak self] btState in
-                        guard let self = self else { return }
-                        
-                        if btState == .poweredOff {
-                            let vc = BluetoothOffViewController.instantiate()
-                            vc.inject(notificationCenter: self.notificationCenter, uiQueue: self.uiQueue, continueHandler: nil)
-                            self.showSetupError(viewController: vc)
-                        }
-                    }
-                }                    
+                case .notificationPermissions:
+                    let vc = NotificationPermissionDeniedViewController.instantiate()
+                    self.showSetupError(viewController: vc)
+                }
             }
         }
     }
