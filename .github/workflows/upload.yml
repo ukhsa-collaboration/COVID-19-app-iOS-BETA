@@ -77,6 +77,12 @@ jobs:
           MATCH_PASSWORD: ${{ secrets.match_password }}
         run: fastlane release sonar_env:${{ github.event.deployment.environment }}
 
+      - name: Upload IPA
+        uses: actions/upload-artifact@v1
+        with:
+          name: CoLocate.ipa
+          path: CoLocate.ipa
+
       - name: Update Deployment Status on Success
         if: success()
         run: >
