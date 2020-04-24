@@ -67,6 +67,14 @@ class AppDelegateTest: XCTestCase {
         XCTAssertTrue(nursery.createBroadcasterCalled)
     }
 
+    func testStartsBroadcastingOnceRegistrationIsPersisted() {
+        persistence.registration = nil
+        _ = appDelegate.application(UIApplication.shared, didFinishLaunchingWithOptions: nil)
+        persistence.registration = Registration.fake
+        appDelegate.persistence(persistence, didUpdateRegistration: Registration.fake)
+
+        XCTAssertTrue(nursery.createBroadcasterCalled)
+    }
 }
 
 

@@ -164,8 +164,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 // MARK: - PersistenceDelegate
 
 extension AppDelegate: PersistenceDelegate {
-    func persistence(_ persistence: Persistence, didUpdateRegistration registration: Registration) {
-//        bluetoothNursery.startBroadcastingAndListening(registration: registration)
+    func persistence(_ persistence: Persisting, didUpdateRegistration registration: Registration) {
+        bluetoothNursery.createBroadcaster(stateDelegate: nil, registration: registration)
     }
 }
 

@@ -34,7 +34,7 @@ protocol Persisting {
 }
 
 protocol PersistenceDelegate: class {
-    func persistence(_ persistence: Persistence, didUpdateRegistration registration: Registration)
+    func persistence(_ persistence: Persisting, didUpdateRegistration registration: Registration)
 }
 
 class Persistence: Persisting {
