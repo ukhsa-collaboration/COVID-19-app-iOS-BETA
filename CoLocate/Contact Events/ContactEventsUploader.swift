@@ -144,8 +144,6 @@ class ContactEventsUploaderSessionDelegate: NSObject, URLSessionTaskDelegate {
             contactEventsUploader.cleanup()
         }
 
-        contactEventsUploader.cleanup()
-
         print(#file, #function, task)
     }
 

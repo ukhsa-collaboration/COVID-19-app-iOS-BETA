@@ -37,7 +37,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <label key="tableFooterView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="u9d-KW-xk7">
-                            <rect key="frame" x="0.0" y="877" width="414" height="44"/>
+                            <rect key="frame" x="0.0" y="833.5" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                             <nil key="textColor"/>
@@ -570,6 +570,50 @@
             </objects>
             <point key="canvasLocation" x="807" y="-402"/>
         </scene>
+        <!--Upload Logs View Controller-->
+        <scene sceneID="U5X-ok-WpI">
+            <objects>
+                <tableViewController id="QUQ-iM-GbI" customClass="UploadLogsViewController" customModule="CoLocate" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="oMO-8M-X9s">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="xpC-hi-k3E" style="IBUITableViewCellStyleDefault" id="kmP-G8-NRe">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kmP-G8-NRe" id="dlA-BN-iMi">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xpC-hi-k3E">
+                                            <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="QUQ-iM-GbI" id="iDu-64-yo7"/>
+                            <outlet property="delegate" destination="QUQ-iM-GbI" id="hms-uE-emc"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="s4Q-Sj-Go2">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="fHp-50-XoJ">
+                            <connections>
+                                <action selector="refresh:" destination="QUQ-iM-GbI" id="KmT-2a-hmP"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Q5Y-7Q-8fs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1764" y="373"/>
+        </scene>
         <!--Logs-->
         <scene sceneID="sB0-Xf-fTQ">
             <objects>
@@ -627,6 +671,7 @@
                         <segue destination="0E2-qN-oH1" kind="relationship" relationship="viewControllers" id="VGj-lc-d4r"/>
                         <segue destination="Prs-Ze-4CP" kind="relationship" relationship="viewControllers" id="X9t-9O-9pu"/>
                         <segue destination="zrE-Ty-mWo" kind="relationship" relationship="viewControllers" id="g3s-NN-sKF"/>
+                        <segue destination="NQh-Bb-aPp" kind="relationship" relationship="viewControllers" id="nZy-Oq-Tgy"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J9e-5y-jif" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -651,6 +696,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="azn-uc-IVy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-349" y="-402"/>
+        </scene>
+        <!--Upload Logs-->
+        <scene sceneID="Qu4-4v-5yt">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="NQh-Bb-aPp" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Upload Logs" id="HL9-Ju-DNS"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="1du-Mc-jdt">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="QUQ-iM-GbI" kind="relationship" relationship="rootViewController" id="FG2-Eg-9O6"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4Wh-l1-ooS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1763.7681159420292" y="-402.45535714285711"/>
         </scene>
     </scenes>
     <resources>

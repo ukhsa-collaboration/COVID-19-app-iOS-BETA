@@ -137,7 +137,7 @@ class Persistence: Persisting {
             return decoded
         }
         set {
-            guard let data = try? encoder.encode(newValue) else {
+            guard let data = try? encoder.encode(newValue.suffix(100)) else {
                 logger.critical("Unable to encode the upload log")
                 return
             }
