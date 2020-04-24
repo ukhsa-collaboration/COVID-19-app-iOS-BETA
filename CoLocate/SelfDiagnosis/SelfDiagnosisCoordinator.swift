@@ -34,6 +34,7 @@ class SelfDiagnosisCoordinator: Coordinator {
     var hasNewCough: Bool!
     
     func start() {
+        print("Test")
         let vc = QuestionSymptomsViewController.instantiate()
         vc.inject(
             pageNumber: 1,

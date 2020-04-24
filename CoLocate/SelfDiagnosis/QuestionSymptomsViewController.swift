@@ -11,8 +11,8 @@ import UIKit
 class QuestionSymptomsViewController: UIViewController, Storyboarded {
     static var storyboardName = "SelfDiagnosis"
     
-    @IBOutlet weak var pageLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var pageLabel: UILabel!
     @IBOutlet weak var detailLabel: UILabel!
     @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var yesButton: AnswerButton!
@@ -22,6 +22,15 @@ class QuestionSymptomsViewController: UIViewController, Storyboarded {
     
     var buttonAction: ((Bool) -> Void)!
     var questionState: Bool?
+    
+    var pageNumber: Int!
+    var pageCount: Int!
+    var questionTitle: String!
+    var questionDetail: String!
+    var questionError: String!
+    var questionYes: String!
+    var questionNo: String!
+    var buttonText: String!
     
     func inject(
         pageNumber: Int,
@@ -34,15 +43,25 @@ class QuestionSymptomsViewController: UIViewController, Storyboarded {
         buttonText: String,
         buttonAction: @escaping (Bool) -> Void
     ) {        
-        pageLabel.text = "\(pageNumber)/\(pageCount)"
+        self.pageNumber = pageNumber
+        self.pageCount = pageCount
+        self.questionTitle = questionTitle
+        self.questionDetail = questionDetail
+        self.questionError = questionError
+        self.questionYes = questionYes
+        self.questionNo = questionNo
+        self.buttonText = buttonText
+        self.buttonAction = buttonAction
+    }
+    
+    override func viewDidLoad() {
+        pageLabel.text = "\(pageNumber ?? 1)/\(pageCount ?? 1)"
         titleLabel.text = questionTitle
         detailLabel.text = questionDetail
         errorLabel.text = questionError
         yesButton.text = questionYes
         noButton.text = questionNo
-        questionButton.titleLabel?.text = buttonText
-        
-        self.buttonAction = buttonAction
+        questionButton.setTitle(buttonText, for: .normal)
     }
     
     @IBAction func yesTapped(_ sender: Any) {

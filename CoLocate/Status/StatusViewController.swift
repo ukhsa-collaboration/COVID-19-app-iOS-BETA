@@ -147,12 +147,16 @@ class StatusViewController: UIViewController, Storyboarded {
     }
 
     @objc func notRightTapped() {
-        let selfDiagnosis = SelfDiagnosisNavigationController.instantiate()
-        selfDiagnosis.inject(
-            persistence: persistence,
-            contactEventsUploader: contactEventsUploader
+        let navigationController = UINavigationController()
+        let coordinator = SelfDiagnosisCoordinator(
+            navigationController: navigationController,
+            persisting: persistence,
+            contactEventRepository: contactEventRepo,
+            session: session
         )
-        present(selfDiagnosis, animated: true)
+        coordinator.start()
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true)
     }
 
     @IBAction func linkingIdButtonTapped(_ sender: ButtonWithDynamicType) {

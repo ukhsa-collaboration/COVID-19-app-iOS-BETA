@@ -15,10 +15,12 @@ class SelfDiagnosisNavigationController: UINavigationController, Storyboarded {
         persistence: Persisting,
         contactEventsUploader: ContactEventsUploader
     ) {
-        let temperatureVC = viewControllers.first as! TemperatureViewController
-        temperatureVC.inject(
-            persistence: persistence,
-            contactEventsUploader: contactEventsUploader
+        let coordinator = SelfDiagnosisCoordinator(
+            navigationController: self,
+            persisting: persistence,
+            contactEventRepository: contactEventRepo,
+            session: session
         )
+        coordinator.start()
     }
 }
