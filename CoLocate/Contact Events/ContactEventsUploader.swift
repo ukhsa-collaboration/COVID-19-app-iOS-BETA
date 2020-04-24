@@ -10,42 +10,6 @@ import Foundation
 
 import Logging
 
-struct UploadLog: Codable {
-    let date = Date()
-    let event: Event
-
-    enum Event: Codable {
-        case started(lastContactEventDate: Date)
-        case completed(error: String?)
-
-        enum CodingKeys: CodingKey {
-            case started
-            case completed
-        }
-
-        init(from decoder: Decoder) throws {
-            let container = try decoder.container(keyedBy: CodingKeys.self)
-            do {
-                let date = try container.decode(Date.self, forKey: .started)
-                self = .started(lastContactEventDate: date)
-            } catch {
-                let error = try container.decode(String.self, forKey: .completed)
-                self = .completed(error: error)
-            }
-        }
-
-        func encode(to encoder: Encoder) throws {
-            var container = encoder.container(keyedBy: CodingKeys.self)
-            switch self {
-            case .started(let date):
-                try container.encode(date, forKey: .started)
-            case .completed(let error):
-                try container.encode(error, forKey: .completed)
-            }
-        }
-    }
-}
-
 class ContactEventsUploader {
 
     static let backgroundIdentifier = "ContactEventUploader"
@@ -69,14 +33,16 @@ class ContactEventsUploader {
     }
 
     func upload() throws {
-        let contactEvents = contactEventRepository.contactEvents
-        let lastDate = contactEvents.map { $0.timestamp }.max() ?? Date() // conservatively default to the current time
-        persisting.uploadLog = persisting.uploadLog + [UploadLog(event: .started(lastContactEventDate: lastDate))]
+        persisting.uploadLog = persisting.uploadLog + [UploadLog(event: .requested)]
 
         guard let registration = persisting.registration else {
             // upload-contact-events-in-background: handle when we have no registration
             return
         }
+
+        let contactEvents = contactEventRepository.contactEvents
+        let lastDate = contactEvents.map { $0.timestamp }.max() ?? Date() // conservatively default to the current time
+        persisting.uploadLog = persisting.uploadLog + [UploadLog(event: .started(lastContactEventDate: lastDate))]
 
         let requestFactory = ConcreteSecureRequestFactory(registration: registration)
         let request = requestFactory.patchContactsRequest(contactEvents: contactEvents)
@@ -117,6 +83,7 @@ class ContactEventsUploaderSessionDelegate: NSObject, URLSessionTaskDelegate {
             return
         }
 
+        // upload-contact-events-in-background: check server response
         contactEventsUploader.cleanup()
 
         print(#file, #function, task)

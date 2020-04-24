@@ -58,7 +58,7 @@ class ContactEventsUploaderTests: XCTestCase {
         }
     }
 
-    func testUploadLogStarted() {
+    func testUploadLogRequestedAndStarted() {
         let registration = Registration.fake
         let persisting = PersistenceDouble(registration: registration)
         let expectedBroadcastId = "opaque bytes that only the server can decrypt".data(using: .utf8)!
@@ -75,8 +75,11 @@ class ContactEventsUploaderTests: XCTestCase {
 
         try? uploader.upload()
 
-        guard case .started = persisting.uploadLog.first?.event else {
-            XCTFail("Expected an upload log")
+        let uploadLog = persisting.uploadLog
+        XCTAssertEqual(uploadLog.first?.event, .requested)
+
+        guard case .started = persisting.uploadLog.last?.event else {
+            XCTFail("Expected a started event")
             return
         }
     }
