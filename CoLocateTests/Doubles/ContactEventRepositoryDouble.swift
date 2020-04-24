@@ -23,7 +23,9 @@ class ContactEventRepositoryDouble: ContactEventRepository {
         removeExpiredEntriesCallbackCount += 1
     }
 
+    var removedThroughDate: Date?
     func remove(through date: Date) {
+        removedThroughDate = date
     }
     
     func btleListener(_ listener: BTLEListener, didFind sonarId: Data, forPeripheral peripheral: BTLEPeripheral) {

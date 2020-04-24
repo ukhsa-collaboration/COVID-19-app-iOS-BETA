@@ -70,7 +70,7 @@ class ContactEventsUploader {
 
     func upload() throws {
         let contactEvents = contactEventRepository.contactEvents
-        let lastDate = contactEvents.map { $0.timestamp }.max() ?? Date()
+        let lastDate = contactEvents.map { $0.timestamp }.max() ?? Date() // conservatively default to the current time
         persisting.uploadLog = persisting.uploadLog + [UploadLog(event: .started(lastContactEventDate: lastDate))]
 
         guard let registration = persisting.registration else {
@@ -84,9 +84,15 @@ class ContactEventsUploader {
         try session.upload(with: request)
     }
 
-    fileprivate func cleanup() {
-        // upload-contact-events-in-background: only delete events that we've sent
-        contactEventRepository.reset()
+    func cleanup() {
+        let lastDate = persisting.uploadLog
+            .compactMap { log in
+                guard case .started(let date) = log.event else { return nil }
+                return date
+            }
+            .max() ?? Date() // conservatively default to removing everything if we somehow don't have a started log
+
+        contactEventRepository.remove(through: lastDate)
     }
 
 }
