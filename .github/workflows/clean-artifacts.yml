@@ -1,0 +1,17 @@
+name: clean-artifacts
+
+on:
+  schedule:
+    - cron: 0 0 * * *
+
+jobs:
+  clean-artifacts:
+      - self-hosted
+      - macos
+    timeout-minutes: 10
+    steps:
+      - name: Remove old artifacts
+        uses: c-hive/gha-remove-artifacts@v1
+        with:
+          age: 7 days
+          skip-tags: false
