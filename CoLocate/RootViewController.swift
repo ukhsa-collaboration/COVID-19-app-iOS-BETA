@@ -107,19 +107,13 @@ class RootViewController: UIViewController {
                     let vc = BluetoothPermissionDeniedViewController.instantiate()
                     self.showSetupError(viewController: vc)
                 } else if let btObserver = self.bluetoothNursery.stateObserver {
-                    btObserver.observe { [weak self] btState in
-                        guard let self = self else { return .stopObserving }
-
-                        switch btState {
-                        case .unknown:
-                            return .keepObserving
-                        case .poweredOff:
+                    btObserver.observeUntilKnown { [weak self] btState in
+                        guard let self = self else { return }
+                        
+                        if btState == .poweredOff {
                             let vc = BluetoothOffViewController.instantiate()
                             vc.inject(notificationCenter: self.notificationCenter, uiQueue: self.uiQueue, continueHandler: nil)
                             self.showSetupError(viewController: vc)
-                            return .stopObserving
-                        default:
-                            return .stopObserving
                         }
                     }
                 }                    

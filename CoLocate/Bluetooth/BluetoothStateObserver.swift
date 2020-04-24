@@ -31,6 +31,17 @@ class BluetoothStateObserver: BTLEListenerStateDelegate {
         }
     }
     
+    func observeUntilKnown(_ callback: @escaping (CBManagerState) -> Void) {
+        observe { state in
+            if state == .unknown {
+                return .keepObserving
+            } else {
+                callback(state)
+                return .stopObserving
+            }
+        }
+    }
+    
     func btleListener(_ listener: BTLEListener, didUpdateState state: CBManagerState) {
         lastKnownState = state
         

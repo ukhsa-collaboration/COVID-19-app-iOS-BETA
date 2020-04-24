@@ -12,7 +12,45 @@ import XCTest
 
 class BluetoothStateObserverTests: TestCase {
     
-    func testNotifyOnStateChanges_notifiesWithCurrentState() {
+    func testObserveUntilKnown_notifiesImmediatelyIfKnown() {
+        let observer = BluetoothStateObserver(initialState: .unauthorized)
+        var receivedState: CBManagerState? = nil
+        var timesCalled = 0
+        observer.observeUntilKnown { state in
+            receivedState = state
+            timesCalled += 1
+        }
+        
+        XCTAssertEqual(1, timesCalled)
+        XCTAssertEqual(receivedState, .unauthorized)
+        
+        observer.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOff)
+        XCTAssertEqual(1, timesCalled)
+    }
+    
+    func testObserveUntilKnown_notifiesOfFirstKnownState() {
+        let observer = BluetoothStateObserver(initialState: .unknown)
+        var receivedState: CBManagerState? = nil
+        var timesCalled = 0
+        observer.observeUntilKnown { state in
+            receivedState = state
+            timesCalled += 1
+        }
+        
+        XCTAssertEqual(timesCalled, 0)
+        
+        observer.btleListener(BTLEListenerDouble(), didUpdateState: .unknown)
+        XCTAssertEqual(timesCalled, 0)
+
+        observer.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
+        XCTAssertEqual(1, timesCalled)
+        XCTAssertEqual(receivedState, .poweredOn)
+        
+        observer.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOff)
+        XCTAssertEqual(1, timesCalled)
+    }
+    
+    func testObserve_notifiesWithCurrentState() {
         let observer = BluetoothStateObserver(initialState: .unknown)
         var receivedState: CBManagerState? = nil
         observer.observe { state in
@@ -23,7 +61,7 @@ class BluetoothStateObserverTests: TestCase {
         XCTAssertEqual(receivedState, .unknown)
     }
 
-    func testNotifyOnStateChanges_notifiesOnEveryChange() {
+    func testObserve_notifiesOnEveryChange() {
         let observer = BluetoothStateObserver(initialState: .unknown)
         var receivedState: CBManagerState? = nil
         observer.observe { state in

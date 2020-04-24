@@ -78,16 +78,11 @@ class OnboardingCoordinator {
                 return
             }
             
-            btStateObserver.observe { btState in
-                switch btState {
-                case .poweredOff:
+            btStateObserver.observeUntilKnown { btState in
+                if btState == .poweredOff {
                     completion(.bluetoothOff)
-                    return .stopObserving
-                case .unknown:
-                    return .keepObserving
-                default:
+                } else {
                     completion(nil)
-                    return .stopObserving
                 }
             }
         }
