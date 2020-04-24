@@ -12,6 +12,7 @@ struct ReportCommand: ParsableCommand {
         subcommands: [
             ArchiveReportCommand.self,
             IPAReportCommand.self,
+            ProjectReportCommand.self,
         ]
     )
     
