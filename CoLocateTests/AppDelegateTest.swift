@@ -18,30 +18,25 @@ class AppDelegateTest: XCTestCase {
     private var dispatcher: RemoteNotificationDispatcherDouble!
     private var remoteNotificationManager: RemoteNotificationManagerDouble!
     private var registrationService: RegistrationServiceDouble!
-    private var authorizationManager: AuthorizationManagerDouble!
     
     override func setUp() {
         nursery = BluetoothNurseryDouble()
         persistence = PersistenceDouble()
         dispatcher = RemoteNotificationDispatcherDouble()
-        registrationService = RegistrationServiceDouble()
-        authorizationManager = AuthorizationManagerDouble()
-        authorizationManager.bluetooth = .notDetermined
         remoteNotificationManager = RemoteNotificationManagerDouble()
-
+        registrationService = RegistrationServiceDouble()
+        
         appDelegate = AppDelegate()
-        appDelegate.dispatcher = dispatcher
-        appDelegate.persistence = persistence
         appDelegate.bluetoothNursery = nursery
-        appDelegate.registrationService = registrationService
-        appDelegate.authorizationManager = authorizationManager
+        appDelegate.persistence = persistence
+        appDelegate.dispatcher = dispatcher
         appDelegate.remoteNotificationManager = remoteNotificationManager
+        appDelegate.registrationService = registrationService
     }
 
     func testFirstAppLaunchDoesNotStartBluetooth() throws {
-        authorizationManager.bluetooth = .notDetermined
-        persistence.registration = nil
-
+        appDelegate.persistence = PersistenceDouble(registration: nil, bluetoothPermissionRequested: false)
+        
         _ = appDelegate.application(UIApplication.shared, didFinishLaunchingWithOptions: nil)
 
         XCTAssertFalse(nursery.createListenerCalled)
@@ -49,8 +44,7 @@ class AppDelegateTest: XCTestCase {
     }
     
     func testLaunchingWithBluetoothPermissionRequested_StartsListener() {
-        authorizationManager.bluetooth = .allowed
-        persistence.registration = nil
+        appDelegate.persistence = PersistenceDouble(registration: nil, bluetoothPermissionRequested: true)
         
         _ = appDelegate.application(UIApplication.shared, didFinishLaunchingWithOptions: nil)
 
