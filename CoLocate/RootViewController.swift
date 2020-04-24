@@ -95,7 +95,7 @@ class RootViewController: UIViewController {
         let checker = SetupChecker(authorizationManager: authorizationManager, bluetoothNursery: bluetoothNursery)
         checker.check { problem in
             self.uiQueue.sync {
-                self.dismissSetupErorr()
+                self.dismissSetupError()
                 guard let problem = problem else { return }
                 
                 switch problem {
@@ -118,7 +118,7 @@ class RootViewController: UIViewController {
         self.present(viewController, animated: true)
     }
     
-    private func dismissSetupErorr() {
+    private func dismissSetupError() {
         if self.presentedSetupErorrViewController != nil {
             self.dismiss(animated: true)
         }
