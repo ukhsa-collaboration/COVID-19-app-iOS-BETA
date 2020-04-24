@@ -10,7 +10,12 @@ import Foundation
 @testable import CoLocate
 
 class ContactEventRepositoryDouble: ContactEventRepository {
-    var contactEvents: [ContactEvent] = []
+    var contactEvents: [ContactEvent]
+
+    init(contactEvents: [ContactEvent] = []) {
+        self.contactEvents = contactEvents
+    }
+
     var hasReset = false
     
     func reset() {

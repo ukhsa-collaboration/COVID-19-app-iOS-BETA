@@ -33,8 +33,7 @@ class ContactEventsUploaderTests: XCTestCase {
         let persisting = PersistenceDouble(registration: registration)
         let expectedBroadcastId = "opaque bytes that only the server can decrypt".data(using: .utf8)!
         let contactEvent = ContactEvent(encryptedRemoteContactId: expectedBroadcastId)
-        let contactEventRepository = ContactEventRepositoryDouble()
-        contactEventRepository.contactEvents = [contactEvent]
+        let contactEventRepository = ContactEventRepositoryDouble(contactEvents: [contactEvent])
         let session = SessionDouble()
 
         let uploader = ContactEventsUploader(
@@ -75,8 +74,7 @@ class ContactEventsUploaderTests: XCTestCase {
         let persisting = PersistenceDouble(registration: registration)
         let expectedBroadcastId = "opaque bytes that only the server can decrypt".data(using: .utf8)!
         let contactEvent = ContactEvent(encryptedRemoteContactId: expectedBroadcastId)
-        let contactEventRepository = ContactEventRepositoryDouble()
-        contactEventRepository.contactEvents = [contactEvent]
+        let contactEventRepository = ContactEventRepositoryDouble(contactEvents: [contactEvent])
         let session = SessionDouble()
 
         let uploader = ContactEventsUploader(
@@ -95,8 +93,7 @@ class ContactEventsUploaderTests: XCTestCase {
         let persisting = PersistenceDouble(registration: registration)
         let expectedBroadcastId = "opaque bytes that only the server can decrypt".data(using: .utf8)!
         let contactEvent = ContactEvent(encryptedRemoteContactId: expectedBroadcastId)
-        let contactEventRepository = ContactEventRepositoryDouble()
-        contactEventRepository.contactEvents = [contactEvent]
+        let contactEventRepository = ContactEventRepositoryDouble(contactEvents: [contactEvent])
         let session = SessionDouble()
 
         let uploader = ContactEventsUploader(
