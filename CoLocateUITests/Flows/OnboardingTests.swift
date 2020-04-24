@@ -83,7 +83,7 @@ private extension OnboardingTests {
 private extension OnboardingTests {
     
     var postcodeScreenTitle: XCUIElement {
-        app.staticTexts["Enter your post code"]
+        app.staticTexts["Enter the first part of your home postcode"]
     }
     
     var postcodeField: XCUIElement {
