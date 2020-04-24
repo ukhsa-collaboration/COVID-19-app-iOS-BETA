@@ -51,16 +51,8 @@ extension PlistPersister: ContactEventPersister where K == UUID, V == ContactEve
     }
     
     func removeExpiredContactEvents(ttl: Double) {
-        var copy = persister.items
         let expiryDate = Date(timeIntervalSinceNow: -ttl)
-        
-        persister.items.forEach({uuid, contactEvent in
-            if contactEvent.timestamp < expiryDate {
-                copy.removeValue(forKey: uuid)
-            }
-        })
-        
-        persister.items = copy
+        remove(through: expiryDate)
     }
     
     func btleListener(_ listener: BTLEListener, didFind remoteEncryptedBroadcastId: Data, forPeripheral peripheral: BTLEPeripheral) {
