@@ -92,8 +92,6 @@ class RootViewController: UIViewController {
     }
     
     @objc func applicationDidBecomeActive(_ notification: NSNotification) {
-        guard self.persistence.registration != nil else { return }
-        
         let checker = SetupChecker(authorizationManager: authorizationManager, bluetoothNursery: bluetoothNursery)
         checker.check { problem in
             self.uiQueue.sync {
