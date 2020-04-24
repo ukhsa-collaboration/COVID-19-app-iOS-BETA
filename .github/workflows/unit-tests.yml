@@ -92,11 +92,31 @@ jobs:
           -allowProvisioningUpdates
           -resultBundlePath TestResults.xcresult
 
+      # I expect this to fail since we haven’t imported certs, hence the `|| true`.
+      # - name: Create report from archive
+      #   run: |
+      #     cd Reporting
+      #     swift run Reporter project ../CoLocate.xcodeproj --scheme CoLocate --method archive --output AppReport || true
+      #     cd ..
+
+      # I expect this to succeed, but is less accurate than above, still, leave `|| true` in just in case.
+      - name: Create App Report
+        run: |
+          cd Reporting
+          swift run Reporter project ../CoLocate.xcodeproj --scheme CoLocate --method build --output AppReport || true
+          cd ..
+
       - name: Upload Test Results
         uses: actions/upload-artifact@v1
         with:
           name: TestResults.xcresult
           path: TestResults.xcresult
+
+      - name: Upload App Report
+        uses: actions/upload-artifact@v1
+        with:
+          name: AppReport
+          path: Reporting/AppReport
 
       - name: Notify Slack on Failure
         if: github.ref == 'refs/heads/master' && failure()
