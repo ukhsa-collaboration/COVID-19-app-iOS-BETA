@@ -35,6 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     lazy var registrationService: RegistrationService = ConcreteRegistrationService(
         session: urlSession,
         persistence: persistence,
+        reminderScheduler: ConcreteRegistrationReminderScheduler(userNotificationCenter: userNotificationCenter),
         remoteNotificationDispatcher: dispatcher,
         notificationCenter: notificationCenter,
         timeoutQueue: DispatchQueue.main)
@@ -156,7 +157,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         scheduler.scheduleLocalNotification(
             body: "To keep yourself secure, please relaunch the app.",
             interval: 10,
-            identifier: "willTerminate.relaunch.please"
+            identifier: "willTerminate.relaunch.please",
+            repeats: false
         )
     }
 }

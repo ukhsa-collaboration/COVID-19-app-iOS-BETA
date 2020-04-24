@@ -26,4 +26,8 @@ class UserNotificationCenterDouble: UserNotificationCenter {
         self.addCompletionHandler = completionHandler
     }
 
+    var removedIdentifiers: [String]?
+    func removePendingNotificationRequests(withIdentifiers identifiers: [String]) {
+        removedIdentifiers = identifiers
+    }
 }

@@ -22,6 +22,9 @@ protocol UserNotificationCenter: class {
         _ request: UNNotificationRequest,
         withCompletionHandler completionHandler: ((Error?) -> Void)?
     )
+    
+    func removePendingNotificationRequests(withIdentifiers identifiers: [String])
+
 }
 
 extension UNUserNotificationCenter: UserNotificationCenter {

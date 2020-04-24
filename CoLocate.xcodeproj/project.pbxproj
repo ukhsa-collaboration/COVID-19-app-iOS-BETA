@@ -30,6 +30,8 @@
 		0991B8BB2450B8CE0076C58B /* NotificationPermissionDeniedViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0991B8BA2450B8CE0076C58B /* NotificationPermissionDeniedViewControllerTests.swift */; };
 		0991B8BD2450B9940076C58B /* FixPermissionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0991B8BC2450B9940076C58B /* FixPermissionsViewController.swift */; };
 		0997D056243BDEEC0067346C /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0997D055243BDEEC0067346C /* RootViewController.swift */; };
+		09A9254324536FD300C5DBC1 /* RegistrationReminderScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A9254224536FD300C5DBC1 /* RegistrationReminderScheduler.swift */; };
+		09A925452453807000C5DBC1 /* RegistrationReminderSchedulerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A925442453807000C5DBC1 /* RegistrationReminderSchedulerTests.swift */; };
 		09B103622444E9110091834D /* ContactEventPersisterDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B103612444E9110091834D /* ContactEventPersisterDouble.swift */; };
 		09B103642444EAB80091834D /* ContactEventRepositoryDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B103632444EAB80091834D /* ContactEventRepositoryDouble.swift */; };
 		09CAA3662440F3B100CE93A6 /* PostcodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CAA3652440F3B100CE93A6 /* PostcodeViewController.swift */; };
@@ -228,6 +230,8 @@
 		0991B8BA2450B8CE0076C58B /* NotificationPermissionDeniedViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermissionDeniedViewControllerTests.swift; sourceTree = "<group>"; };
 		0991B8BC2450B9940076C58B /* FixPermissionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixPermissionsViewController.swift; sourceTree = "<group>"; };
 		0997D055243BDEEC0067346C /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		09A9254224536FD300C5DBC1 /* RegistrationReminderScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationReminderScheduler.swift; sourceTree = "<group>"; };
+		09A925442453807000C5DBC1 /* RegistrationReminderSchedulerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationReminderSchedulerTests.swift; sourceTree = "<group>"; };
 		09B103612444E9110091834D /* ContactEventPersisterDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventPersisterDouble.swift; sourceTree = "<group>"; };
 		09B103632444EAB80091834D /* ContactEventRepositoryDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventRepositoryDouble.swift; sourceTree = "<group>"; };
 		09CAA3652440F3B100CE93A6 /* PostcodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostcodeViewController.swift; sourceTree = "<group>"; };
@@ -461,6 +465,7 @@
 			isa = PBXGroup;
 			children = (
 				098ED47A242D7E460029B729 /* RegistrationServiceTests.swift */,
+				09A925442453807000C5DBC1 /* RegistrationReminderSchedulerTests.swift */,
 			);
 			path = Registration;
 			sourceTree = "<group>";
@@ -927,6 +932,7 @@
 			children = (
 				F67A2290242AA35B002254B6 /* SecureRegistrationStorage.swift */,
 				098ED477242D7D050029B729 /* RegistratonService.swift */,
+				09A9254224536FD300C5DBC1 /* RegistrationReminderScheduler.swift */,
 			);
 			path = Registration;
 			sourceTree = "<group>";
@@ -1122,6 +1128,7 @@
 				0991B8BB2450B8CE0076C58B /* NotificationPermissionDeniedViewControllerTests.swift in Sources */,
 				F62F858524510923006580A8 /* SessionDouble.swift in Sources */,
 				0991B8B2244FB03E0076C58B /* BluetoothPermissionDeniedViewControllerTests.swift in Sources */,
+				09A925452453807000C5DBC1 /* RegistrationReminderSchedulerTests.swift in Sources */,
 				09B103622444E9110091834D /* ContactEventPersisterDouble.swift in Sources */,
 				098ED48C242E8B290029B729 /* PersistenceDouble.swift in Sources */,
 				092BB5AB244622200036B30E /* RootViewControllerTests.swift in Sources */,
@@ -1236,6 +1243,7 @@
 				89F06B2F2434A62C0074C612 /* LoggingManager.swift in Sources */,
 				09CAA3662440F3B100CE93A6 /* PostcodeViewController.swift in Sources */,
 				131AB05C2449D85B002136CA /* ContactEventExpiryHandler.swift in Sources */,
+				09A9254324536FD300C5DBC1 /* RegistrationReminderScheduler.swift in Sources */,
 				F7E74F8E244DFBDA00273C59 /* BroadcastRotationKeyConverter.swift in Sources */,
 				21E5051524448D880065C69B /* PlistPersister.swift in Sources */,
 				098ED483242E746E0029B729 /* DebugViewController.swift in Sources */,

@@ -34,7 +34,8 @@ class BluetoothStateUserNotifier {
                 self.scheduler.scheduleLocalNotification(
                     body: "To keep yourself secure, please re-enable bluetooth",
                     interval: 3,
-                    identifier: "bluetooth.disabled.please"
+                    identifier: "bluetooth.disabled.please",
+                    repeats: false
                 )
             }
             
@@ -50,7 +51,3 @@ protocol ApplicationStateReading {
 }
 
 extension UIApplication: ApplicationStateReading { }
-
-protocol LocalNotificationScheduling {
-    func scheduleLocalNotification(body: String, interval: TimeInterval, identifier: String)
-}

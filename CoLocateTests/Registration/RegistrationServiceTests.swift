@@ -25,6 +25,7 @@ class RegistrationServiceTests: TestCase {
         let registrationService = ConcreteRegistrationService(
             session: session,
             persistence: persistence,
+            reminderScheduler: RegistrationReminderSchedulerDouble(),
             remoteNotificationDispatcher: remoteNotificationDispatcher,
             notificationCenter: notificationCenter,
             timeoutQueue: QueueDouble()
@@ -94,6 +95,7 @@ class RegistrationServiceTests: TestCase {
         let registrationService = ConcreteRegistrationService(
             session: session,
             persistence: persistence,
+            reminderScheduler: RegistrationReminderSchedulerDouble(),
             remoteNotificationDispatcher: remoteNotificationDispatcher,
             notificationCenter: notificationCenter,
             timeoutQueue: QueueDouble()
@@ -162,6 +164,7 @@ class RegistrationServiceTests: TestCase {
         let registrationService = ConcreteRegistrationService(
             session: session,
             persistence: persistence,
+            reminderScheduler: RegistrationReminderSchedulerDouble(),
             remoteNotificationDispatcher: remoteNotificationDispatcher,
             notificationCenter: notificationCenter, timeoutQueue: QueueDouble()
         )
@@ -187,6 +190,7 @@ class RegistrationServiceTests: TestCase {
         let registrationService = ConcreteRegistrationService(
             session: session,
             persistence: persistence,
+            reminderScheduler: RegistrationReminderSchedulerDouble(),
             remoteNotificationDispatcher: remoteNotificationDispatcher,
             notificationCenter: notificationCenter,
             timeoutQueue: QueueDouble()
@@ -221,6 +225,7 @@ class RegistrationServiceTests: TestCase {
         let registrationService = ConcreteRegistrationService(
             session: session,
             persistence: persistence,
+            reminderScheduler: RegistrationReminderSchedulerDouble(),
             remoteNotificationDispatcher: remoteNotificationDispatcher,
             notificationCenter: notificationCenter,
             timeoutQueue: QueueDouble()
@@ -253,6 +258,7 @@ class RegistrationServiceTests: TestCase {
         let registrationService = ConcreteRegistrationService(
             session: session,
             persistence: persistence,
+            reminderScheduler: RegistrationReminderSchedulerDouble(),
             remoteNotificationDispatcher: remoteNotificationDispatcher,
             notificationCenter: notificationCenter,
             timeoutQueue: queueDouble
@@ -277,6 +283,7 @@ class RegistrationServiceTests: TestCase {
         let registrationService = ConcreteRegistrationService(
             session: session,
             persistence: persistence,
+            reminderScheduler: RegistrationReminderSchedulerDouble(),
             remoteNotificationDispatcher: remoteNotificationDispatcher,
             notificationCenter: notificationCenter,
             timeoutQueue: queueDouble
@@ -325,6 +332,7 @@ class RegistrationServiceTests: TestCase {
         let registrationService = ConcreteRegistrationService(
             session: session,
             persistence: persistence,
+            reminderScheduler: RegistrationReminderSchedulerDouble(),
             remoteNotificationDispatcher: remoteNotificationDispatcher,
             notificationCenter: notificationCenter,
             timeoutQueue: queueDouble
@@ -367,6 +375,7 @@ class RegistrationServiceTests: TestCase {
         let registrationService = ConcreteRegistrationService(
             session: session,
             persistence: persistence,
+            reminderScheduler: RegistrationReminderSchedulerDouble(),
             remoteNotificationDispatcher: remoteNotificationDispatcher,
             notificationCenter: notificationCenter,
             timeoutQueue: queueDouble
@@ -415,6 +424,7 @@ class RegistrationServiceTests: TestCase {
         let registrationService = ConcreteRegistrationService(
             session: session,
             persistence: persistence,
+            reminderScheduler: RegistrationReminderSchedulerDouble(),
             remoteNotificationDispatcher: remoteNotificationDispatcher,
             notificationCenter: notificationCenter,
             timeoutQueue: queueDouble
@@ -460,6 +470,7 @@ class RegistrationServiceTests: TestCase {
         let registrationService = ConcreteRegistrationService(
             session: session,
             persistence: persistence,
+            reminderScheduler: RegistrationReminderSchedulerDouble(),
             remoteNotificationDispatcher: remoteNotificationDispatcher,
             notificationCenter: notificationCenter,
             timeoutQueue: queueDouble
@@ -489,6 +500,84 @@ class RegistrationServiceTests: TestCase {
         XCTAssertNil(persistence.registration)
     }
     
+    func testSchedulesRemindersAtStartIfFeatureEnabled() {
+        let reminderScheduler = RegistrationReminderSchedulerDouble()
+        let persistence = PersistenceDouble()
+        persistence.enableRegistrationReminders = true
+        
+        let registrationService = ConcreteRegistrationService(
+            session: SessionDouble(),
+            persistence: persistence,
+            reminderScheduler: reminderScheduler,
+            remoteNotificationDispatcher: RemoteNotificationDispatcher(
+                notificationCenter: NotificationCenter(),
+                userNotificationCenter: UserNotificationCenterDouble()
+            ),
+            notificationCenter: NotificationCenter(),
+            timeoutQueue: QueueDouble()
+        )
+        
+        registrationService.register()
+        
+        XCTAssertTrue(reminderScheduler.scheduleCalled)
+    }
+    
+    func testDoesNotScheduleRemindersAtStartIfFeatureDisabled() {
+        let reminderScheduler = RegistrationReminderSchedulerDouble()
+        let persistence = PersistenceDouble()
+        persistence.enableRegistrationReminders = false
+        
+        let registrationService = ConcreteRegistrationService(
+            session: SessionDouble(),
+            persistence: persistence,
+            reminderScheduler: reminderScheduler,
+            remoteNotificationDispatcher: RemoteNotificationDispatcher(
+                notificationCenter: NotificationCenter(),
+                userNotificationCenter: UserNotificationCenterDouble()
+            ),
+            notificationCenter: NotificationCenter(),
+            timeoutQueue: QueueDouble()
+        )
+        
+        registrationService.register()
+        
+        XCTAssertFalse(reminderScheduler.scheduleCalled)
+    }
+    
+    func testCancelsReminderOnSuccess() {
+        let reminderScheduler = RegistrationReminderSchedulerDouble()
+        let session = SessionDouble()
+        let persistence = PersistenceDouble(partialPostcode: "AB90")
+        let notificationCenter = NotificationCenter()
+        let remoteNotificationDispatcher = RemoteNotificationDispatcher(
+            notificationCenter: notificationCenter,
+            userNotificationCenter: UserNotificationCenterDouble()
+        )
+        let registrationService = ConcreteRegistrationService(
+            session: session,
+            persistence: persistence,
+            reminderScheduler: reminderScheduler,
+            remoteNotificationDispatcher: remoteNotificationDispatcher,
+            notificationCenter: notificationCenter,
+            timeoutQueue: QueueDouble()
+        )
+        remoteNotificationDispatcher.pushToken = "the current push token"
+        
+        registrationService.register()
+        
+        // Respond to the first request
+        session.executeCompletion!(Result<(), Error>.success(()))
+                
+        // Simulate the notification containing the activationCode.
+        // This should trigger the second request.
+        remoteNotificationDispatcher.handleNotification(userInfo: ["activationCode": "arbitrary"]) { _ in }
+                        
+        let confirmationResponse = ConfirmRegistrationResponse(id: UUID(), secretKey: secretKey, serverPublicKey: knownGoodRotationKeyData())
+        session.executeCompletion!(Result<ConfirmRegistrationResponse, Error>.success(confirmationResponse))
+        
+        XCTAssertTrue(reminderScheduler.cancelCalled)
+    }
+    
     private func knownGoodRotationKeyData() -> Data {
         let data = Data(base64Encoded: "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEu1f68MqDXbKeTqZMTHsOGToO4rKnPClXe/kE+oWqlaWZQv4J1E98cUNdpzF9JIFRPMCNdGOvTr4UB+BhQv9GWg==")!
         return data
@@ -503,4 +592,17 @@ private struct ExpectedConfirmRegistrationRequestBody: Codable {
     let activationCode: UUID
     let pushToken: String
     let postalCode: String
+}
+
+private class RegistrationReminderSchedulerDouble: RegistrationReminderScheduler {
+    var scheduleCalled = false
+    var cancelCalled = false
+    
+    func schedule() {
+        scheduleCalled = true
+    }
+    
+    func cancel() {
+        cancelCalled = true
+    }
 }

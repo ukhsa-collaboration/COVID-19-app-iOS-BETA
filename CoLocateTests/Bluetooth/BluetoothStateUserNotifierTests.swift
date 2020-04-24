@@ -40,7 +40,7 @@ class BluetoothStateUserNotifierTests: TestCase {
             return
         }
 
-        XCTAssertTrue(("To keep yourself secure, please re-enable bluetooth", 3, "bluetooth.disabled.please") == mockScheduler.calls[0])
+        XCTAssertTrue(("To keep yourself secure, please re-enable bluetooth", 3, "bluetooth.disabled.please", false) == mockScheduler.calls[0])
     }
 
     func test_it_does_nothing_when_bluetooth_is_powered_on() {
@@ -55,12 +55,12 @@ class BluetoothStateUserNotifierTests: TestCase {
 }
 
 fileprivate class MockNotificationScheduler: LocalNotificationScheduling {
-    typealias Call = (String, TimeInterval, String)
+    typealias Call = (String, TimeInterval, String, Bool)
 
     var calls: [Call] = []
 
-    func scheduleLocalNotification(body: String, interval: TimeInterval, identifier: String) {
-        calls.append((body, interval, identifier))
+    func scheduleLocalNotification(body: String, interval: TimeInterval, identifier: String, repeats: Bool) {
+        calls.append((body, interval, identifier, repeats))
     }
 }
 

@@ -22,6 +22,7 @@ fileprivate let registrationTimeLimitSecs = 20.0
 class ConcreteRegistrationService: RegistrationService {
     private let session: Session
     private let persistence: Persisting
+    private let reminderScheduler: RegistrationReminderScheduler
     private let remoteNotificationDispatcher: RemoteNotificationDispatching
     private let notificationCenter: NotificationCenter
     private let timeoutQueue: TestableQueue
@@ -29,12 +30,15 @@ class ConcreteRegistrationService: RegistrationService {
     
     init(session: Session,
          persistence: Persisting,
+         reminderScheduler: RegistrationReminderScheduler,
          remoteNotificationDispatcher: RemoteNotificationDispatching,
          notificationCenter: NotificationCenter,
-         timeoutQueue: TestableQueue) {
+         timeoutQueue: TestableQueue
+    ) {
         self.session = session
 
         self.persistence = persistence
+        self.reminderScheduler = reminderScheduler
         self.notificationCenter = notificationCenter
         self.remoteNotificationDispatcher = remoteNotificationDispatcher
         self.timeoutQueue = timeoutQueue
@@ -58,6 +62,10 @@ class ConcreteRegistrationService: RegistrationService {
     }
     
     func register() -> Void {
+        if persistence.enableRegistrationReminders {
+            reminderScheduler.schedule()
+        }
+        
         if let pushToken = remoteNotificationDispatcher.pushToken {
             // if somehow we have already received our fcm push token, perform the first registration request
             requestRegistration(pushToken)
@@ -148,6 +156,7 @@ class ConcreteRegistrationService: RegistrationService {
     private func succeed(registration: Registration) {
         self.remoteNotificationCompletionHandler?(.newData)
         notificationCenter.post(name: RegistrationCompletedNotification, object: nil)
+        reminderScheduler.cancel()
     }
     
     private func fail(withError error: Error) {
