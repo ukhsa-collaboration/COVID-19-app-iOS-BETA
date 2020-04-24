@@ -71,6 +71,8 @@ class RootViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+
         showFirstView()
     }
     
