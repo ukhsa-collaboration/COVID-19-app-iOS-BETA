@@ -27,7 +27,7 @@ struct IPAReportCommand: ParsableCommand {
         }
     }
     
-    private func withApplication(perform work: (URL) throws -> Void ) throws {
+    private func withApplication(perform work: (URL) throws -> Void) throws {
         let fileManager = FileManager()
         
         let currentDirectory = URL(fileURLWithPath: fileManager.currentDirectoryPath)
