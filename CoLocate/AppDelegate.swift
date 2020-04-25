@@ -96,7 +96,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         window?.rootViewController = rootVC
         window?.makeKeyAndVisible()
         
-        if persistence.bluetoothPermissionRequested {
+        // Check registration as well as bluetoothPermissionRequested, because the user may have registered
+        // on an old version of the app that didn't record bluetoothPermissionRequested.
+        if persistence.bluetoothPermissionRequested || persistence.registration != nil {
             bluetoothNursery.startBluetooth(registration: persistence.registration)
         }
 

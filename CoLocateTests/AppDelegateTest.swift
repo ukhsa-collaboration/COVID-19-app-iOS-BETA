@@ -53,7 +53,7 @@ class AppDelegateTest: XCTestCase {
         XCTAssertFalse(nursery.createListenerCalled)
         XCTAssertFalse(nursery.createBroadcasterCalled)
     }
-    
+        
     func testLaunchingWithRegistration_StartsNursery() {
         persistence.registration = Registration.fake
         persistence.bluetoothPermissionRequested = true
@@ -64,6 +64,17 @@ class AppDelegateTest: XCTestCase {
         XCTAssertFalse(nursery.createListenerCalled)
         XCTAssertFalse(nursery.createBroadcasterCalled)
         XCTAssertEqual(nursery.registrationPassedToStartBluetooth, persistence.registration)
+    }
+    
+    func testLaunchingWithRegistration_StartsNursery_evenWithoutBluetoothPermissionRequested() {
+        // Tests the case where the user registered on an old build that didn't record bluetoothPermissionRequested
+        appDelegate.persistence = PersistenceDouble(registration: .fake, bluetoothPermissionRequested: false)
+        
+        _ = appDelegate.application(UIApplication.shared, didFinishLaunchingWithOptions: nil)
+
+        XCTAssertTrue(nursery.startBluetoothCalled)
+        XCTAssertFalse(nursery.createListenerCalled)
+        XCTAssertFalse(nursery.createBroadcasterCalled)
     }
 
 }
