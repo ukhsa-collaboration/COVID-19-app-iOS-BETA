@@ -125,6 +125,8 @@
 		F604976B24539F6C002B8503 /* UploadLogsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F604976A24539F6C002B8503 /* UploadLogsViewController.swift */; };
 		F604976D2453ADF4002B8503 /* scenarios.yml in Resources */ = {isa = PBXBuildFile; fileRef = F604976C2453ADF4002B8503 /* scenarios.yml */; };
 		F604976F24549729002B8503 /* LinkingIdRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F604976E24549729002B8503 /* LinkingIdRequest.swift */; };
+		F604977224549B7B002B8503 /* LinkingIdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F604977124549B7B002B8503 /* LinkingIdManager.swift */; };
+		F604977524549C95002B8503 /* LinkingIdManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F604977424549C95002B8503 /* LinkingIdManagerTests.swift */; };
 		F613936E243FA82B003447E8 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = F613936D243FA82B003447E8 /* Appearance.swift */; };
 		F62F857F2451051C006580A8 /* ContactEventsUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62F857E2451051C006580A8 /* ContactEventsUploader.swift */; };
 		F62F858124510716006580A8 /* ContactEventsUploaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62F858024510716006580A8 /* ContactEventsUploaderTests.swift */; };
@@ -342,6 +344,8 @@
 		F604976A24539F6C002B8503 /* UploadLogsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadLogsViewController.swift; sourceTree = "<group>"; };
 		F604976C2453ADF4002B8503 /* scenarios.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = scenarios.yml; sourceTree = "<group>"; };
 		F604976E24549729002B8503 /* LinkingIdRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkingIdRequest.swift; sourceTree = "<group>"; };
+		F604977124549B7B002B8503 /* LinkingIdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkingIdManager.swift; sourceTree = "<group>"; };
+		F604977424549C95002B8503 /* LinkingIdManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkingIdManagerTests.swift; sourceTree = "<group>"; };
 		F613936D243FA82B003447E8 /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		F62F857E2451051C006580A8 /* ContactEventsUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventsUploader.swift; sourceTree = "<group>"; };
 		F62F858024510716006580A8 /* ContactEventsUploaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventsUploaderTests.swift; sourceTree = "<group>"; };
@@ -562,12 +566,14 @@
 			isa = PBXGroup;
 			children = (
 				214209C32422276800C7BFF3 /* Info.plist */,
+				21B71F7924519B2000D0DED7 /* AppDelegateTest.swift */,
+				131AB05D2449D894002136CA /* ContactEventExpiryHandlerTests.swift */,
 				214209C9242227B300C7BFF3 /* PersistenceTests.swift */,
 				21E5051224448AE30065C69B /* PlistPersisterTests.swift */,
 				89896E612435F37300F949EA /* ProjectTests.swift */,
 				092BB5AA244622200036B30E /* RootViewControllerTests.swift */,
-				09E6E7E52452779B0069DFA8 /* SetupCheckerTests.swift */,
 				F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */,
+				09E6E7E52452779B0069DFA8 /* SetupCheckerTests.swift */,
 				F68BFBF6242ACD17008EE68F /* TestHelpers.swift */,
 				219B61362447371700E2F1A6 /* UUIDExtensionsTests.swift */,
 				89896E5E2435EB6500F949EA /* CoLocateTests.xcconfig */,
@@ -576,12 +582,11 @@
 				098ED486242E89760029B729 /* Doubles */,
 				214209DA242630CF00C7BFF3 /* Networking */,
 				F6F05A222433BEAC00FF4B72 /* Onboarding */,
+				F604977324549C84002B8503 /* Pilot */,
 				098ED479242D7E340029B729 /* Registration */,
 				F6CC2CAA242BCCE90079432B /* Remote Notifications */,
 				F67C5157243E7BD5008E2945 /* SelfDiagnosis */,
 				0983ACD1243EB20A00DBB336 /* Status */,
-				131AB05D2449D894002136CA /* ContactEventExpiryHandlerTests.swift */,
-				21B71F7924519B2000D0DED7 /* AppDelegateTest.swift */,
 			);
 			path = CoLocateTests;
 			sourceTree = "<group>";
@@ -716,6 +721,7 @@
 				214209D3242399DD00C7BFF3 /* Networking */,
 				F6CC2CA7242BC7D90079432B /* Notifications */,
 				F6F05A212433BE9600FF4B72 /* Onboarding */,
+				F604977024549B49002B8503 /* Pilot */,
 				F758B8D0242CC661003AE16D /* Registration */,
 				F758B8BC242CB83B003AE16D /* Resources */,
 				895D9E4924374EB800573D4D /* Routing */,
@@ -804,6 +810,22 @@
 				89F06B362434C35A0074C612 /* LoggerMetadata.swift */,
 			);
 			path = Logging;
+			sourceTree = "<group>";
+		};
+		F604977024549B49002B8503 /* Pilot */ = {
+			isa = PBXGroup;
+			children = (
+				F604977124549B7B002B8503 /* LinkingIdManager.swift */,
+			);
+			path = Pilot;
+			sourceTree = "<group>";
+		};
+		F604977324549C84002B8503 /* Pilot */ = {
+			isa = PBXGroup;
+			children = (
+				F604977424549C95002B8503 /* LinkingIdManagerTests.swift */,
+			);
+			path = Pilot;
 			sourceTree = "<group>";
 		};
 		F67C5157243E7BD5008E2945 /* SelfDiagnosis */ = {
@@ -1147,6 +1169,7 @@
 				092BB5AB244622200036B30E /* RootViewControllerTests.swift in Sources */,
 				21E50511244470590065C69B /* ContactEventTests.swift in Sources */,
 				89896E622435F37300F949EA /* ProjectTests.swift in Sources */,
+				F604977524549C95002B8503 /* LinkingIdManagerTests.swift in Sources */,
 				F6F05A2A2433C6CC00FF4B72 /* AuthManagerDouble.swift in Sources */,
 				F6F05A242433BEC000FF4B72 /* OnboardingCoordinatorTests.swift in Sources */,
 				214209D924262B7500C7BFF3 /* SessionHelpers.swift in Sources */,
@@ -1278,6 +1301,7 @@
 				214209D0242396DA00C7BFF3 /* Session.swift in Sources */,
 				0991B8B92450B8360076C58B /* NotificationPermissionDeniedViewController.swift in Sources */,
 				F6F05A262433C09200FF4B72 /* OnboardingCoordinator.swift in Sources */,
+				F604977224549B7B002B8503 /* LinkingIdManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

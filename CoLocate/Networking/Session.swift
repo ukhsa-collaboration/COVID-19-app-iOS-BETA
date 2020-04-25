@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum HTTPMethod {
+enum HTTPMethod: Equatable {
     case get
     case post(data: Data)
     case patch(data: Data)

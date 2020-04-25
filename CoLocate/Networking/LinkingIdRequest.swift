@@ -18,7 +18,7 @@ class LinkingIdRequest: SecureRequest, Request {
 
     let decoder = JSONDecoder()
 
-    init(registration: Registration, symptomsTimestamp: Date, contactEvents: [ContactEvent]) {
+    init(registration: Registration) {
         path = "/api/residents/\(registration.id.uuidString)/linking-id"
 
         super.init(registration.secretKey, Data(), [
