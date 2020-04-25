@@ -32,12 +32,10 @@ class SymptomStackView: UIStackView {
             if let symptoms = symptoms {
                 if symptoms.contains(.temperature) {
                     addArrangedSubview(temperatureLabel)
-                    return
                 }
                 
                 if symptoms.contains(.cough) {
                     addArrangedSubview(coughLabel)
-                    return
                 }
             }
             addArrangedSubview(UILabel())

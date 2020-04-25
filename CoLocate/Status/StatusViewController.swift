@@ -85,12 +85,6 @@ class StatusViewController: UIViewController, Storyboarded {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-//        TODO: Requires Business logic to determine when to start controller
-//        let symptomsPromptViewController = SymptomsPromptViewController.instantiate()
-//        symptomsPromptViewController.modalPresentationStyle = .custom
-//        symptomsPromptViewController.transitioningDelegate = drawerPresentationManager
-//        present(symptomsPromptViewController, animated: true)
         
         registrationRetryButton.setTitle("RETRY".localized, for: .normal)
 
@@ -202,6 +196,16 @@ class StatusViewController: UIViewController, Storyboarded {
         
         symptomStackView.symptoms = diagnosis?.symptoms
         diagnosisStatusView.accessibilityLabel = "\(diagnosisTitleLabel.text!) \(readLatestAdviceLabel.text!)"
+        
+        if let diagnosis = diagnosis {
+            if diagnosis.hasExpired() {
+                let symptomsPromptViewController = SymptomsPromptViewController.instantiate()
+                symptomsPromptViewController.modalPresentationStyle = .custom
+                symptomsPromptViewController.transitioningDelegate = drawerPresentationManager
+                symptomsPromptViewController.inject(persistence: persistence, session: session)
+                present(symptomsPromptViewController, animated: true)
+            }
+        }
     }
     
     private func register() {

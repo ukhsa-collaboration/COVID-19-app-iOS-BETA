@@ -12,19 +12,16 @@ class UpdateDiagnosisCoordinator: Coordinator {
     let navigationController: UINavigationController
     let persisting: Persisting
     let session: Session
-    let statusViewController: StatusViewController
     let startDate: Date
     
     init(
         navigationController: UINavigationController,
         persisting: Persisting,
-        statusViewController: StatusViewController,
         session: Session
     ) {
         self.navigationController = navigationController
         self.persisting = persisting
         self.session = session
-        self.statusViewController = statusViewController
         startDate = persisting.selfDiagnosis?.startDate ?? Date()
     }
     
@@ -65,7 +62,7 @@ class UpdateDiagnosisCoordinator: Coordinator {
             if hasNewCough {
                 self.symptoms.insert(.cough)
             }
-            self.persisting.selfDiagnosis = SelfDiagnosis(symptoms: self.symptoms, startDate: self.startDate)
+            self.persisting.selfDiagnosis = SelfDiagnosis(symptoms: self.symptoms, startDate: self.startDate, expiryDate: Date(timeIntervalSinceNow: 24 * 60 * 60))
             self.navigationController.dismiss(animated: true, completion: nil)
         }
         navigationController.pushViewController(vc, animated: true)

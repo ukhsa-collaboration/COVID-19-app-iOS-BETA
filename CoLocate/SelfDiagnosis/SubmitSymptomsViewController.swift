@@ -102,7 +102,7 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         guard !isSubmitting else { return }
         isSubmitting = true
 
-        persisting.selfDiagnosis = SelfDiagnosis(symptoms: symptoms, startDate: startDate)
+        persisting.selfDiagnosis = SelfDiagnosis(symptoms: symptoms, startDate: startDate, expiryDate: Date(timeIntervalSinceNow: 7 * 24 * 60 * 60))
 
         do {
             try contactEventsUploader.upload()

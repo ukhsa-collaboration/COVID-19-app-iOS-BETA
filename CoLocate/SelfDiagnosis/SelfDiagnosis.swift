@@ -11,12 +11,16 @@ import Foundation
 struct SelfDiagnosis: Codable, Equatable {
     let symptoms: Set<Symptom>
     let startDate: Date
-    let recordedDate: Date
+    let expiryDate: Date
 
-    init(symptoms: Set<Symptom>, startDate: Date, recordedDate: Date = Date()) {
+    init(symptoms: Set<Symptom>, startDate: Date, expiryDate: Date) {
         self.symptoms = symptoms
         self.startDate = startDate
-        self.recordedDate = recordedDate
+        self.expiryDate = expiryDate
+    }
+    
+    func hasExpired() -> Bool {
+        return Date() > expiryDate
     }
 
     var isAffected: Bool { !symptoms.isEmpty }

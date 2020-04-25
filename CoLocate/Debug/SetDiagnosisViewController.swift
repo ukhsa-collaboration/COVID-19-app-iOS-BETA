@@ -74,7 +74,7 @@ class SetDiagnosisViewController: UITableViewController {
             persistence.selfDiagnosis = SelfDiagnosis(
                 symptoms: symptoms,
                 startDate: startDate ?? Date(),
-                recordedDate: recordedDate ?? Date()
+                expiryDate: recordedDate ?? Date()
             )
             render()
 
@@ -110,7 +110,7 @@ class SetDiagnosisViewController: UITableViewController {
         coughSwitch.isOn = diagnosis.map { $0.symptoms.contains(.cough) } ?? false
 
         startDate = diagnosis?.startDate
-        recordedDate = diagnosis?.recordedDate
+        recordedDate = diagnosis?.expiryDate
     }
 
 }
