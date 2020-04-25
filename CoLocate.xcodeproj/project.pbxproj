@@ -124,6 +124,7 @@
 		F604976924539093002B8503 /* UploadLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = F604976824539093002B8503 /* UploadLog.swift */; };
 		F604976B24539F6C002B8503 /* UploadLogsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F604976A24539F6C002B8503 /* UploadLogsViewController.swift */; };
 		F604976D2453ADF4002B8503 /* scenarios.yml in Resources */ = {isa = PBXBuildFile; fileRef = F604976C2453ADF4002B8503 /* scenarios.yml */; };
+		F604976F24549729002B8503 /* LinkingIdRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F604976E24549729002B8503 /* LinkingIdRequest.swift */; };
 		F613936E243FA82B003447E8 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = F613936D243FA82B003447E8 /* Appearance.swift */; };
 		F62F857F2451051C006580A8 /* ContactEventsUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62F857E2451051C006580A8 /* ContactEventsUploader.swift */; };
 		F62F858124510716006580A8 /* ContactEventsUploaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62F858024510716006580A8 /* ContactEventsUploaderTests.swift */; };
@@ -340,6 +341,7 @@
 		F604976824539093002B8503 /* UploadLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadLog.swift; sourceTree = "<group>"; };
 		F604976A24539F6C002B8503 /* UploadLogsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadLogsViewController.swift; sourceTree = "<group>"; };
 		F604976C2453ADF4002B8503 /* scenarios.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = scenarios.yml; sourceTree = "<group>"; };
+		F604976E24549729002B8503 /* LinkingIdRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkingIdRequest.swift; sourceTree = "<group>"; };
 		F613936D243FA82B003447E8 /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		F62F857E2451051C006580A8 /* ContactEventsUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventsUploader.swift; sourceTree = "<group>"; };
 		F62F858024510716006580A8 /* ContactEventsUploaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventsUploaderTests.swift; sourceTree = "<group>"; };
@@ -588,6 +590,7 @@
 			isa = PBXGroup;
 			children = (
 				21C417CB242CB15D00DEF3E2 /* ConfirmRegistrationRequest.swift */,
+				F604976E24549729002B8503 /* LinkingIdRequest.swift */,
 				214209D42423C83C00C7BFF3 /* PatchContactEventsRequest.swift */,
 				896BE90E244F07FF00B3687C /* PublicKeyValidator.swift */,
 				F600A60124297A8E0038DF57 /* RegistrationRequest.swift */,
@@ -1256,6 +1259,7 @@
 				09CAA3662440F3B100CE93A6 /* PostcodeViewController.swift in Sources */,
 				131AB05C2449D85B002136CA /* ContactEventExpiryHandler.swift in Sources */,
 				09A9254324536FD300C5DBC1 /* RegistrationReminderScheduler.swift in Sources */,
+				F604976F24549729002B8503 /* LinkingIdRequest.swift in Sources */,
 				F7E74F8E244DFBDA00273C59 /* BroadcastRotationKeyConverter.swift in Sources */,
 				21E5051524448D880065C69B /* PlistPersister.swift in Sources */,
 				098ED483242E746E0029B729 /* DebugViewController.swift in Sources */,

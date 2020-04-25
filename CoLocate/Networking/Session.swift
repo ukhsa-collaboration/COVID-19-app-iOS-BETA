@@ -12,6 +12,7 @@ enum HTTPMethod {
     case get
     case post(data: Data)
     case patch(data: Data)
+    case put
 }
 
 protocol Request {
@@ -50,6 +51,9 @@ extension Request {
         case .patch(let data):
             urlRequest.httpMethod = "PATCH"
             urlRequest.httpBody = data
+
+        case .put:
+            urlRequest.httpMethod = "PUT"
         }
 
         return urlRequest

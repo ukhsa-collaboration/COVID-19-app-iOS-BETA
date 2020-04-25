@@ -40,6 +40,7 @@ extension Request {
         case .get: return nil
         case .post(let body): return body
         case .patch(let body): return body
+        case .put: return nil
         }
     }
     
