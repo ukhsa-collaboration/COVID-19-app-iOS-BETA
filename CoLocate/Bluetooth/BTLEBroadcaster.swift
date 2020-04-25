@@ -49,17 +49,13 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
             logger.error("peripheral manager already advertising, won't start again")
             return
         }
-        guard let identifier = idGenerator.broadcastIdentifier() else {
-            logger.error("no broadcastIdentifier available, will not start broadcasting")
-            return
-        }
 
         let service = CBMutableService(type: ConcreteBTLEBroadcaster.sonarServiceUUID, primary: true)
 
         identityCharacteristic = CBMutableCharacteristic(
             type: ConcreteBTLEBroadcaster.sonarIdCharacteristicUUID,
             properties: CBCharacteristicProperties([.read, .notify]),
-            value: identifier,
+            value: nil,
             permissions: .readable)
         
         keepaliveCharacteristic = CBMutableCharacteristic(
