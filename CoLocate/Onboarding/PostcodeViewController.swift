@@ -18,7 +18,6 @@ class PostcodeViewController: UIViewController, Storyboarded {
     private var continueHandler: (() -> Void)! = nil
 
     @IBOutlet var postcodeField: UITextField!
-    @IBOutlet var continueButton: PrimaryButton!
     @IBOutlet private var scrollView: UIScrollView!
     
     deinit {
@@ -66,7 +65,11 @@ class PostcodeViewController: UIViewController, Storyboarded {
     }
     
     private func showAlert() {
-        let alert = UIAlertController(title: nil, message: "To continue, enter the first part of your postcode.", preferredStyle: .actionSheet)
+        let alert = UIAlertController(
+            title: nil,
+            message: "To continue, enter the first part of your postcode.",
+            preferredStyle: .alert
+        )
         alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
     }
@@ -95,7 +98,11 @@ class PostcodeViewController: UIViewController, Storyboarded {
 
 extension PostcodeViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+        guard hasValidPostcode() else {
+            return false
+        }
+
+        didTapContinue()
         return false
     }
         

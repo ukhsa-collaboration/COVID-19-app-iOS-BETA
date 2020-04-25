@@ -864,19 +864,19 @@
 			isa = PBXGroup;
 			children = (
 				F6F05A312434310200FF4B72 /* Onboarding.storyboard */,
-				893C0B7A243DE346000A7DB6 /* OnboardingEnvironment.swift */,
 				F6F05A272433C55300FF4B72 /* AuthorizationManager.swift */,
+				898FE858243B4FE300210775 /* AuthorizationManaging.swift */,
+				0984E0BC2451014E009C6374 /* BluetoothOffViewController.swift */,
+				090DEE0F244F8BF600268170 /* BluetoothPermissionDeniedViewController.swift */,
+				0991B8BC2450B9940076C58B /* FixPermissionsViewController.swift */,
+				0991B8B82450B8360076C58B /* NotificationPermissionDeniedViewController.swift */,
 				F6F05A252433C09200FF4B72 /* OnboardingCoordinator.swift */,
+				893C0B7A243DE346000A7DB6 /* OnboardingEnvironment.swift */,
 				F6F05A2F24340E5400FF4B72 /* OnboardingViewController.swift */,
 				213C806B241A56430020EFA5 /* PermissionsViewController.swift */,
+				09CAA3652440F3B100CE93A6 /* PostcodeViewController.swift */,
 				F6F05A35243436D200FF4B72 /* PrivacyViewController.swift */,
 				F6F05A332434344200FF4B72 /* StartNowViewController.swift */,
-				898FE858243B4FE300210775 /* AuthorizationManaging.swift */,
-				09CAA3652440F3B100CE93A6 /* PostcodeViewController.swift */,
-				090DEE0F244F8BF600268170 /* BluetoothPermissionDeniedViewController.swift */,
-				0991B8B82450B8360076C58B /* NotificationPermissionDeniedViewController.swift */,
-				0991B8BC2450B9940076C58B /* FixPermissionsViewController.swift */,
-				0984E0BC2451014E009C6374 /* BluetoothOffViewController.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
