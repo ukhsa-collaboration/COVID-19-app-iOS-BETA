@@ -87,6 +87,14 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
     }
     
     func updateIdentity() {
+        guard let identityCharacteristic = self.identityCharacteristic else {
+            // This "shouldn't happen" in normal course of the code, but if you start the
+            // app with Bluetooth off and don't turn it on until registration is completed
+            // you can get here.
+            logger.info("identity characteristic not created yet")
+            return
+        }
+        
         guard let ephemeralBroadcastId = idGenerator.broadcastIdentifier() else {
             assertionFailure("attempted to update identity without an identity")
             return
@@ -94,10 +102,6 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
         
         guard let peripheral = self.peripheral else {
             assertionFailure("peripheral shouldn't be nil")
-            return
-        }
-        guard let identityCharacteristic = self.identityCharacteristic else {
-            assertionFailure("identityCharacteristic shouldn't be nil")
             return
         }
         
