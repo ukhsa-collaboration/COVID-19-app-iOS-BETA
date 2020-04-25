@@ -74,11 +74,11 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
 
     func sendKeepalive(value: Data) {
         guard let peripheral = self.peripheral else {
-            assertionFailure("peripheral shouldn't be nil")
+            logger.info("peripheral shouldn't be nil")
             return
         }
         guard let keepaliveCharacteristic = self.keepaliveCharacteristic else {
-            assertionFailure("keepaliveCharacteristic shouldn't be nil")
+            logger.info("keepaliveCharacteristic shouldn't be nil")
             return
         }
         
