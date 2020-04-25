@@ -25,7 +25,8 @@ class SymptomsPromptViewController: UIViewController, Storyboarded {
         let coordinator = UpdateDiagnosisCoordinator(
             navigationController: navigationController,
             persisting: persistence,
-            session: session
+            session: session,
+            statusViewController: statusViewController
         )
         coordinator.start()
         navigationController.modalPresentationStyle = .fullScreen

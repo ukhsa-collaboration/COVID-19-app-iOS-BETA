@@ -86,6 +86,8 @@ class StatusViewController: UIViewController, Storyboarded {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        updatePrompt()
+        
         registrationRetryButton.setTitle("RETRY".localized, for: .normal)
 
         diagnosisStatusView.layer.cornerRadius = 16
@@ -203,6 +205,13 @@ class StatusViewController: UIViewController, Storyboarded {
                 present(symptomsPromptViewController, animated: true)
             }
         }
+    }
+    
+    func updatePrompt() {
+        let coughUpdateViewController = CoughUpdateViewController.instantiate()
+        coughUpdateViewController.modalPresentationStyle = .custom
+        coughUpdateViewController.transitioningDelegate = drawerPresentationManager
+        present(coughUpdateViewController, animated: true)
     }
     
     private func register() {

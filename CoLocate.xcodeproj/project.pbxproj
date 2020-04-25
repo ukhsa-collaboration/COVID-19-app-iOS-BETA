@@ -1290,6 +1290,7 @@
 				F6EEC3B82448DD2400172820 /* SelfDiagnosis.swift in Sources */,
 				6FC63C31241641B8007C8BF3 /* AppDelegate.swift in Sources */,
 				F600A60224297A8E0038DF57 /* RegistrationRequest.swift in Sources */,
+				13095A6E2454AA170072F19A /* CoughUpdateViewController.swift in Sources */,
 				214209D2242399CF00C7BFF3 /* URLSession.swift in Sources */,
 				89074B83243788AE00D67777 /* UITestResponder.swift in Sources */,
 				21B71F782451788800D0DED7 /* OptionalCoalescingString.swift in Sources */,
