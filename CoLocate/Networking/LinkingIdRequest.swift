@@ -18,10 +18,10 @@ class LinkingIdRequest: SecureRequest, Request {
 
     let decoder = JSONDecoder()
 
-    init(key: Data, sonarId: UUID, symptomsTimestamp: Date, contactEvents: [ContactEvent]) {
-        path = "/api/residents/\(sonarId.uuidString)/linking-id"
+    init(registration: Registration, symptomsTimestamp: Date, contactEvents: [ContactEvent]) {
+        path = "/api/residents/\(registration.id.uuidString)/linking-id"
 
-        super.init(key, Data(), [
+        super.init(registration.secretKey, Data(), [
             "Accept": "application/json"
         ])
     }
