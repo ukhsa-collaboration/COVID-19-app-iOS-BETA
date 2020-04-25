@@ -83,7 +83,7 @@ class OnboardingCoordinatorTests: TestCase {
             bluetoothNursery: bluetoothNursery
         )
         
-        bluetoothNursery.createListener()
+        bluetoothNursery.startBluetooth(registration: nil)
 
         var state: OnboardingCoordinator.State?
         onboardingCoordinator.state { state = $0 }
@@ -103,7 +103,7 @@ class OnboardingCoordinatorTests: TestCase {
             bluetoothNursery: bluetoothNursery
         )
 
-        bluetoothNursery.createListener()
+        bluetoothNursery.startBluetooth(registration: nil)
 
         var state: OnboardingCoordinator.State?
         onboardingCoordinator.state { state = $0 }
@@ -123,7 +123,7 @@ class OnboardingCoordinatorTests: TestCase {
             bluetoothNursery: bluetoothNursery
         )
         
-        bluetoothNursery.createListener()
+        bluetoothNursery.startBluetooth(registration: nil)
 
         var state: OnboardingCoordinator.State?
         onboardingCoordinator.state { state = $0 }

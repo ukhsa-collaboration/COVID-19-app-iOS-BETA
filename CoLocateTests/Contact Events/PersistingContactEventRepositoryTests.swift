@@ -36,12 +36,6 @@ class PersistingContactEventRepositoryTests: XCTestCase {
 
         XCTAssertEqual(3, repository._contactEventCount)
     }
-
-    func testReadsSonarIdForUnknownPeripheral() {
-        repository.btleListener(listener, didReadRSSI: -42, forPeripheral: peripheral1)
-        
-        XCTAssertEqual(listener.connectedPeripheral?.identifier, peripheral1.identifier)
-    }
     
     func testRecordsRSSIValuesAgainstCorrectPeripheral() {
         repository.btleListener(listener, didFind: broadcastId1, forPeripheral: peripheral1)

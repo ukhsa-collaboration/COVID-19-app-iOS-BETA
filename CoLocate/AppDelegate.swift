@@ -72,7 +72,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         LoggingManager.bootstrap()
         logger.info("Launched", metadata: Logger.Metadata(launchOptions: launchOptions))
 
-        persistence.delegate = self
         application.registerForRemoteNotifications()
 
         remoteNotificationManager.configure()
@@ -97,11 +96,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         window?.rootViewController = rootVC
         window?.makeKeyAndVisible()
         
-        if let registration = persistence.registration {
-            bluetoothNursery.createListener()
-            bluetoothNursery.createBroadcaster(stateDelegate: nil, registration: registration)
-        } else if persistence.bluetoothPermissionRequested {
-            bluetoothNursery.createListener()
+        if persistence.bluetoothPermissionRequested {
+            bluetoothNursery.startBluetooth(registration: persistence.registration)
         }
 
         return true
@@ -169,14 +165,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             identifier: "willTerminate.relaunch.please",
             repeats: false
         )
-    }
-}
-
-// MARK: - PersistenceDelegate
-
-extension AppDelegate: PersistenceDelegate {
-    func persistence(_ persistence: Persisting, didUpdateRegistration registration: Registration) {
-        bluetoothNursery.createBroadcaster(stateDelegate: nil, registration: registration)
     }
 }
 

@@ -15,33 +15,35 @@ protocol BluetoothNursery {
     var contactEventRepository: ContactEventRepository { get }
     var contactEventPersister: ContactEventPersister { get }
     var stateObserver: BluetoothStateObserver? { get }
-    
-    func createListener()
-    func createBroadcaster(stateDelegate: BTLEBroadcasterStateDelegate?, registration: Registration)
+    var broadcaster: BTLEBroadcaster? { get }
+
+    func startBluetooth(registration: Registration?)
 }
 
-class ConcreteBluetoothNursery: BluetoothNursery {
+class ConcreteBluetoothNursery: BluetoothNursery, PersistenceDelegate {
     
     static let centralRestoreIdentifier: String = "SonarCentralRestoreIdentifier"
     static let peripheralRestoreIdentifier: String = "SonarPeripheralRestoreIdentifier"
     
     let contactEventPersister: ContactEventPersister
     let contactEventRepository: ContactEventRepository
-    let broadcastIdGenerator: BroadcastIdGenerator
-    // Created when createListener() is called, because creating an observer can propmt the user for BT permissions
-    // and we want to control when that happens in the onboarding flow.
-    public private(set) var stateObserver: BluetoothStateObserver? = nil
-    
-    private let listenerQueue: DispatchQueue? = DispatchQueue(label: "BTLE Listener Queue")
-    private let broadcasterQueue: DispatchQueue? = DispatchQueue(label: "BTLE Broadcaster Queue")
+    private var userNotifier: BluetoothStateUserNotifier?
+    private let btleQueue: DispatchQueue = DispatchQueue(label: "BTLE Queue")
     private let persistence: Persisting
     private let userNotificationCenter: UserNotificationCenter
     private let contactEventExpiryHandler: ContactEventExpiryHandler
-    private var central: CBCentralManager?
+
+    // The listener needs to get hold of the broadcaster, to send keepalives
+    var broadcaster: BTLEBroadcaster?
+    let broadcastIdGenerator: BroadcastIdGenerator
+
     private var listener: BTLEListener?
+    // This observer is created along with the listener, because creating an observer
+    // can prompt the user for BT permissions and we want to control when that happens in the onboarding flow.
+    public private(set) var stateObserver: BluetoothStateObserver? = nil
+
+    private var central: CBCentralManager?
     private var peripheral: CBPeripheralManager?
-    private var broadcaster: BTLEBroadcaster?
-    private var userNotifier: BluetoothStateUserNotifier?
 
     init(persistence: Persisting, userNotificationCenter: UserNotificationCenter, notificationCenter: NotificationCenter) {
         self.persistence = persistence
@@ -49,14 +51,25 @@ class ConcreteBluetoothNursery: BluetoothNursery {
         contactEventPersister = PlistPersister<UUID, ContactEvent>(fileName: "contactEvents")
         contactEventRepository = PersistingContactEventRepository(persister: contactEventPersister)
         broadcastIdGenerator = ConcreteBroadcastIdGenerator(storage: SecureBroadcastRotationKeyStorage())
-        contactEventExpiryHandler = ContactEventExpiryHandler(notificationCenter: notificationCenter, contactEventRepository: contactEventRepository)
+
+        contactEventExpiryHandler = ContactEventExpiryHandler(notificationCenter: notificationCenter,
+                                                              contactEventRepository: contactEventRepository)
+        self.persistence.delegate = self
     }
 
     // MARK: - BTLEListener
 
-    func createListener() {
-        let listener = ConcreteBTLEListener(persistence: persistence)
-        central = CBCentralManager(delegate: listener, queue: listenerQueue, options: [
+    func startBluetooth(registration: Registration?) {
+        broadcastIdGenerator.sonarId = registration?.id
+        
+        let broadcaster = ConcreteBTLEBroadcaster(idGenerator: broadcastIdGenerator)
+        peripheral = CBPeripheralManager(delegate: broadcaster, queue: btleQueue, options: [
+            CBPeripheralManagerOptionRestoreIdentifierKey: ConcreteBluetoothNursery.peripheralRestoreIdentifier
+        ])
+        self.broadcaster = broadcaster
+        
+        let listener = ConcreteBTLEListener(broadcaster: broadcaster, queue: btleQueue)
+        central = CBCentralManager(delegate: listener, queue: btleQueue, options: [
             CBCentralManagerScanOptionAllowDuplicatesKey: NSNumber(true),
             CBCentralManagerOptionRestoreIdentifierKey: ConcreteBluetoothNursery.centralRestoreIdentifier,
             CBCentralManagerOptionShowPowerAlertKey: NSNumber(true),
@@ -73,20 +86,12 @@ class ConcreteBluetoothNursery: BluetoothNursery {
         
         self.listener = listener
     }
-
-    // MARK: - BTLEBroadaster
     
-    func createBroadcaster(stateDelegate: BTLEBroadcasterStateDelegate?, registration: Registration) {
+    // MARK: - PersistenceDelegate
+
+    func persistence(_ persistence: Persisting, didUpdateRegistration registration: Registration) {
         broadcastIdGenerator.sonarId = registration.id
-
-        let concreteBroadcaster = ConcreteBTLEBroadcaster(idGenerator: broadcastIdGenerator)
-        peripheral = CBPeripheralManager(delegate: concreteBroadcaster,
-                                         queue: broadcasterQueue,
-                                         options: [CBPeripheralManagerOptionRestoreIdentifierKey: ConcreteBluetoothNursery.peripheralRestoreIdentifier])
-        concreteBroadcaster.peripheral = peripheral
-        concreteBroadcaster.start()
-
-        broadcaster = concreteBroadcaster
+        broadcaster?.updateIdentity()
     }
 
 }

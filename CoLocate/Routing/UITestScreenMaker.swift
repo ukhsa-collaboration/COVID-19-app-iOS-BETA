@@ -137,20 +137,14 @@ private class EphemeralRemoteNotificationManager: RemoteNotificationManager {
 private struct MockError: Error {}
 
 private class NoOpBluetoothNursery: BluetoothNursery {
+    func startBluetooth(registration: Registration?) {
+    }
+    
+    
     var stateObserver: BluetoothStateObserver?
     var contactEventRepository: ContactEventRepository = NoOpContactEventRepository()
     var contactEventPersister: ContactEventPersister = NoOpContactEventPersister()
-    
-    func createBroadcaster(stateDelegate: BTLEBroadcasterStateDelegate?, registration: Registration) {
-    }
-    func createListener() {
-    }
-
-    func restoreListener(_ restorationIdentifiers: [String]) {
-    }
-
-    func restoreBroadcaster(_ restorationIdentifiers: [String]) {
-    }
+    var broadcaster: BTLEBroadcaster? = NoOpBroadcaster()
 }
 
 private class NoOpContactEventRepository: ContactEventRepository {
@@ -179,6 +173,14 @@ private class NoOpContactEventPersister: ContactEventPersister {
     func reset() {
     }
     
+}
+
+private class NoOpBroadcaster: BTLEBroadcaster {
+    func updateIdentity() {
+    }
+    
+    func sendKeepalive(value: Data) {
+    }
 }
 
 #endif

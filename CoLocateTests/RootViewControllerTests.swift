@@ -32,7 +32,7 @@ class RootViewControllerTests: TestCase {
         let authMgr = AuthorizationManagerDouble(bluetooth: .allowed)
         let persistence = PersistenceDouble(registration: nil, partialPostcode: "1234")
         let bluetoothNursery = BluetoothNurseryDouble()
-        bluetoothNursery.createListener()
+        bluetoothNursery.startBluetooth(registration: nil)
         let rootVC = makeRootVC(persistence: persistence, authorizationManager: authMgr, bluetoothNursery: bluetoothNursery)
         XCTAssertNotNil(rootVC.view)
         
@@ -104,7 +104,7 @@ class RootViewControllerTests: TestCase {
     
     func testBecomesActiveShowsBluetoothOffWhenBluetoothOff() {
         let bluetoothNursery = BluetoothNurseryDouble()
-        bluetoothNursery.createListener()
+        bluetoothNursery.startBluetooth(registration: nil)
         let notificationCenter = NotificationCenter()
         let authMgr = AuthorizationManagerDouble(bluetooth: .allowed)
         let rootVC = makeRootVC(
@@ -156,7 +156,7 @@ class RootViewControllerTests: TestCase {
         let authMgr = AuthorizationManagerDouble(bluetooth: .allowed)
         let notificationCenter = NotificationCenter()
         let bluetoothNursery = BluetoothNurseryDouble()
-        bluetoothNursery.createListener()
+        bluetoothNursery.startBluetooth(registration: nil)
         let rootVC = makeRootVC(persistence: persistence, authorizationManager: authMgr, notificationCenter: notificationCenter, bluetoothNursery: bluetoothNursery)
         parentViewControllerForTests.viewControllers = [rootVC]
         

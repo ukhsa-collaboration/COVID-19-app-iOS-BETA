@@ -169,7 +169,10 @@ class RootViewController: UIViewController {
             let navVC = tabBarVC.viewControllers?.first as? UINavigationController,
             let debugVC = navVC.viewControllers.first as? DebugViewController else { return }
         
-        debugVC.inject(persisting: persistence, contactEventRepository: bluetoothNursery.contactEventRepository, contactEventPersister: bluetoothNursery.contactEventPersister, contactEventsUploader: contactEventsUploader)
+        debugVC.inject(persisting: persistence,
+                       contactEventRepository: bluetoothNursery.contactEventRepository,
+                       contactEventPersister: bluetoothNursery.contactEventPersister,
+                       contactEventsUploader: contactEventsUploader)
         
         present(tabBarVC, animated: true)
     }

@@ -1,4 +1,4 @@
 {
-  "api_endpoint": "https://this-is-an-invalid-url",
-  "sonar_header_value": "this-is-not-a-sonar-header-value"
+  "api_endpoint": "https://test.route.cp.data.england.nhs.uk/",
+  "sonar_header_value": "test-header-value"
 }

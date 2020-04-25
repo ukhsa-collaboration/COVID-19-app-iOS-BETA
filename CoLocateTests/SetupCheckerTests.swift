@@ -14,7 +14,7 @@ class SetupCheckerTests: XCTestCase {
         let authMgr = AuthorizationManagerDouble(bluetooth: .allowed)
         let nursery = BluetoothNurseryDouble()
         let checker = SetupChecker(authorizationManager: authMgr, bluetoothNursery: nursery)
-        nursery.createListener()
+        nursery.startBluetooth(registration: nil)
         nursery.stateObserver?.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
 
         var result: SetupProblem? = nil
@@ -33,7 +33,7 @@ class SetupCheckerTests: XCTestCase {
         let authMgr = AuthorizationManagerDouble(bluetooth: .allowed)
         let nursery = BluetoothNurseryDouble()
         let checker = SetupChecker(authorizationManager: authMgr, bluetoothNursery: nursery)
-        nursery.createListener()
+        nursery.startBluetooth(registration: nil)
 
         var result: SetupProblem? = nil
         var called = false
@@ -70,7 +70,7 @@ class SetupCheckerTests: XCTestCase {
         let authMgr = AuthorizationManagerDouble(bluetooth: .denied)
         let nursery = BluetoothNurseryDouble()
         let checker = SetupChecker(authorizationManager: authMgr, bluetoothNursery: nursery)
-        nursery.createListener()
+        nursery.startBluetooth(registration: nil)
         
         var result: SetupProblem? = nil
         checker.check({ problem in result = problem })
@@ -84,7 +84,7 @@ class SetupCheckerTests: XCTestCase {
         let authMgr = AuthorizationManagerDouble(bluetooth: .denied)
         let nursery = BluetoothNurseryDouble()
         let checker = SetupChecker(authorizationManager: authMgr, bluetoothNursery: nursery)
-        nursery.createListener()
+        nursery.startBluetooth(registration: nil)
         nursery.stateObserver?.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
 
         var result: SetupProblem? = nil
@@ -111,7 +111,7 @@ class SetupCheckerTests: XCTestCase {
         let authMgr = AuthorizationManagerDouble(bluetooth: .allowed)
         let nursery = BluetoothNurseryDouble()
         let checker = SetupChecker(authorizationManager: authMgr, bluetoothNursery: nursery)
-        nursery.createListener()
+        nursery.startBluetooth(registration: nil)
         nursery.stateObserver?.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
 
         var result: SetupProblem? = nil

@@ -6,7 +6,7 @@
 //  Copyright © 2020 NHSX. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import CoreBluetooth
 import Logging
 
@@ -28,26 +28,29 @@ protocol BTLEListenerStateDelegate {
 
 protocol BTLEListener {
     func start(stateDelegate: BTLEListenerStateDelegate?, delegate: BTLEListenerDelegate?)
-    func connect(_ peripheral: BTLEPeripheral)
 }
 
 class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CBPeripheralDelegate {
 
     let logger = Logger(label: "BTLE")
     
-    let rssiSamplingInterval: TimeInterval = 20.0
-    
-    let persistence: Persisting
-    
+    var broadcaster: BTLEBroadcaster
     var stateDelegate: BTLEListenerStateDelegate?
     var delegate: BTLEListenerDelegate?
     
-    var central: CBCentralManager?
-    
     var peripherals: [UUID: CBPeripheral] = [:]
     
-    init(persistence: Persisting) {
-        self.persistence = persistence
+    // comfortably less than the ~10s background processing time Core Bluetooth gives us when it wakes us up
+    private let keepaliveInterval: TimeInterval = 8.0
+    
+    private var lastKeepalive: Date = Date.distantPast
+    private var keepaliveTimer: DispatchSourceTimer?
+    private let dateFormatter = ISO8601DateFormatter()
+    private let queue: DispatchQueue
+    
+    init(broadcaster: BTLEBroadcaster, queue: DispatchQueue) {
+        self.broadcaster = broadcaster
+        self.queue = queue
     }
 
     func start(stateDelegate: BTLEListenerStateDelegate?, delegate: BTLEListenerDelegate?) {
@@ -55,28 +58,38 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
         self.delegate = delegate
     }
 
-    func connect(_ peripheral: BTLEPeripheral) {
-        guard let coreBluetoothPeripheral = peripherals[peripheral.identifier] else {
-            logger.info("can't connect to unknown peripheral with identifier \(peripheral.identifier)")
-            return
-        }
-        
-        central?.connect(coreBluetoothPeripheral)
-    }
-    
+
     // MARK: CBCentralManagerDelegate
     
     func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
-        guard let restoredPeripherals = dict[CBCentralManagerRestoredStatePeripheralsKey] as? [CBPeripheral] else {
+        if let restoredPeripherals = dict[CBCentralManagerRestoredStatePeripheralsKey] as? [CBPeripheral] {
+            logger.info("restoring \(restoredPeripherals.count) \(restoredPeripherals.count == 1 ? "peripheral" : "peripherals") for central \(central)")
+            for peripheral in restoredPeripherals {
+                peripherals[peripheral.identifier] = peripheral
+                peripheral.delegate = self
+            }
+        } else {
             logger.info("no peripherals to restore for \(central)")
-            return
         }
         
-        logger.info("restoring \(restoredPeripherals.count) peripherals for central \(central)")
-        for peripheral in restoredPeripherals {
-            peripherals[peripheral.identifier] = peripheral
-            peripheral.delegate = self
+        if let restoredScanningServices = dict[CBCentralManagerRestoredStateScanServicesKey] as? [CBUUID] {
+            logger.info("restoring scanning for \(restoredScanningServices.count) \(restoredScanningServices.count == 1 ? "service" : "services") for central \(central)")
+            for restoredScanningService in restoredScanningServices {
+                logger.info("    service \(restoredScanningService.uuidString)")
+            }
+        } else {
+            logger.info("no scanning restored for \(central)")
         }
+
+        if let scanOptions = dict[CBCentralManagerRestoredStateScanOptionsKey] as? Dictionary<String, Any> {
+            logger.info("restoring \(scanOptions.count) \(scanOptions.count == 1 ? "scanOption" : "scanOptions") for central \(central)")
+            for scanOption in scanOptions {
+                logger.info("    scanOption: \(scanOption.key), value: \(scanOption.value)")
+            }
+        } else {
+            logger.info("no scanOptions restored for \(central)")
+        }
+        logger.info("central \(central.isScanning ? "is" : "is not") scanning")
     }
 
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
@@ -87,27 +100,10 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
         switch (central.state) {
                 
         case .poweredOn:
-            self.central = central
             
-            // Ensure all "connected" peripherals are properly connected after state restoration
+            // Reconnect to all the peripherals we found in willRestoreState (assume calling connect is idempotent)
             for peripheral in peripherals.values {
-                guard peripheral.state == .connected else {
-                    logger.info("attempting connection to peripheral \(peripheral.identifierWithName) in state \(peripheral.state)")
-                    central.connect(peripheral)
-                    continue
-                }
-                guard let sonarIdService = peripheral.services?.sonarIdService() else {
-                    logger.info("discovering services for peripheral \(peripheral.identifierWithName)")
-                    peripheral.discoverServices([ConcreteBTLEBroadcaster.sonarServiceUUID])
-                    continue
-                }
-                guard let sonarIdCharacteristic = sonarIdService.characteristics?.sonarIdCharacteristic() else {
-                    logger.info("discovering characteristics for peripheral \(peripheral.identifierWithName)")
-                    peripheral.discoverCharacteristics([ConcreteBTLEBroadcaster.sonarIdCharacteristicUUID], for: sonarIdService)
-                    continue
-                }
-                logger.info("reading broadcast id from fully-connected peripheral \(peripheral.identifierWithName)")
-                peripheral.readValue(for: sonarIdCharacteristic)
+                central.connect(peripheral)
             }
             
             central.scanForPeripherals(withServices: [ConcreteBTLEBroadcaster.sonarServiceUUID])
@@ -120,25 +116,27 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         logger.info("peripheral \(peripheral.identifierWithName) discovered at RSSI = \(RSSI)")
         
-        peripherals[peripheral.identifier] = peripheral
-        delegate?.btleListener(self, didReadRSSI: RSSI.intValue, forPeripheral: peripheral)
+        if peripherals[peripheral.identifier] == nil || peripherals[peripheral.identifier]!.state != .connected {
+            peripherals[peripheral.identifier] = peripheral
+            central.connect(peripheral)
+        }
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         logger.info("\(peripheral.identifierWithName)")
 
         peripheral.delegate = self
+        peripheral.readRSSI()
         peripheral.discoverServices([ConcreteBTLEBroadcaster.sonarServiceUUID])
     }
 
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         if let error = error {
-            logger.info("\(peripheral.identifierWithName) error: \(error)")
+            logger.info("attempting reconnection to \(peripheral.identifierWithName) after error: \(error)")
         } else {
-            logger.info("\(peripheral.identifierWithName)")
+            logger.info("attempting reconnection to \(peripheral.identifierWithName)")
         }
-                
-        peripherals[peripheral.identifier] = nil
+        central.connect(peripheral)
     }
     
     // MARK: CBPeripheralDelegate
@@ -152,7 +150,7 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         guard error == nil else {
-            logger.info("error: \(error!)")
+            logger.info("periperhal \(peripheral.identifierWithName) error: \(error!)")
             return
         }
         
@@ -162,32 +160,45 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
         }
         
         guard let sonarIdService = services.sonarIdService() else {
-            logger.info("Sonar service not discovered for \(peripheral.identifierWithName)")
+            logger.info("sonarId service not discovered for \(peripheral.identifierWithName)")
             return
         }
 
-        logger.info("sonarId service found: \(sonarIdService)")
-        peripheral.discoverCharacteristics([ConcreteBTLEBroadcaster.sonarIdCharacteristicUUID], for: sonarIdService)
+        logger.info("discovering charactaristics for sonarId service \(sonarIdService)")
+        let characteristics = [
+            ConcreteBTLEBroadcaster.sonarIdCharacteristicUUID,
+            ConcreteBTLEBroadcaster.keepaliveCharacteristicUUID
+        ]
+        peripheral.discoverCharacteristics(characteristics, for: sonarIdService)
     }
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         guard error == nil else {
-            logger.info("error: \(error!)")
+            logger.info("periperhal \(peripheral.identifierWithName) error: \(error!)")
             return
         }
         
         guard let characteristics = service.characteristics, characteristics.count > 0 else {
-            logger.info("No characteristics discovered for service \(service)")
+            logger.info("no characteristics discovered for service \(service)")
             return
+        }
+        logger.info("\(characteristics.count) \(characteristics.count == 1 ? "characteristic" : "characteristics") discovered for service \(service): \(characteristics)")
+        
+        if let sonarIdCharacteristic = characteristics.sonarIdCharacteristic() {
+            logger.info("reading sonarId from sonarId characteristic \(sonarIdCharacteristic)")
+            peripheral.readValue(for: sonarIdCharacteristic)
+            peripheral.setNotifyValue(true, for: sonarIdCharacteristic)
+        } else {
+            // TODO: This shouldn't happen, should it be an assertion?
+            logger.info("sonarId characteristic not discovered for peripheral \(peripheral.identifierWithName)")
         }
         
-        guard let sonarIdCharacteristic = characteristics.sonarIdCharacteristic() else {
-            logger.info("sonarId characteristic not discovered for peripheral \(peripheral.identifierWithName)")
-            return
+        if let keepaliveCharacteristic = characteristics.keepaliveCharacteristic() {
+            logger.info("subscribing to keepalive characteristic \(keepaliveCharacteristic)")
+            peripheral.setNotifyValue(true, for: keepaliveCharacteristic)
+        } else {
+            logger.info("keepalive characteristic not discovered for peripheral \(peripheral.identifierWithName)")
         }
-
-        logger.info("sonarId characteristic found: \(sonarIdCharacteristic)")
-        peripheral.readValue(for: sonarIdCharacteristic)
     }
 
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
@@ -196,24 +207,60 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
             return
         }
 
-        guard characteristic.uuid == ConcreteBTLEBroadcaster.sonarIdCharacteristicUUID else {
-            logger.info("characteristic \(characteristic) does not have correct UUID")
+        switch characteristic.value {
+            
+        case (let data?) where characteristic.uuid == ConcreteBTLEBroadcaster.sonarIdCharacteristicUUID:
+            if data.count == BroadcastIdEncrypter.broadcastIdLength {
+                logger.info("read identity from peripheral \(peripheral.identifierWithName): \(data)")
+                delegate?.btleListener(self, didFind: data, forPeripheral: peripheral)
+            } else {
+                logger.info("no identity ready from peripheral \(peripheral.identifierWithName)")
+            }
+            peripheral.readRSSI()
+            
+        case (let data?) where characteristic.uuid == ConcreteBTLEBroadcaster.keepaliveCharacteristicUUID:
+            logger.info("read keepalive value from peripheral \(peripheral.identifierWithName): \(data)")
+            readRSSIAndSendKeepalive()
+            
+        case .none:
+            logger.info("characteristic \(characteristic) has no data")
+            
+        default:
+            logger.info("characteristic \(characteristic) has unknown uuid \(characteristic.uuid)")
+        }
+    }
+    
+    func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?) {
+        guard error == nil else {
+            logger.info("error: \(error!)")
             return
         }
 
-        guard let data = characteristic.value else {
-            logger.info("no data found in characteristic \(characteristic)")
+        logger.info("read RSSI for \(peripheral.identifierWithName): \(RSSI)")
+        delegate?.btleListener(self, didReadRSSI: RSSI.intValue, forPeripheral: peripheral)
+        readRSSIAndSendKeepalive()
+    }
+
+    private func readRSSIAndSendKeepalive() {
+        guard Date().timeIntervalSince(lastKeepalive) > keepaliveInterval else {
+            logger.info("too soon, won't send keepalive (lastKeepalive = \(dateFormatter.string(from: lastKeepalive)))")
             return
         }
-
-        guard data.count == BroadcastIdEncrypter.broadcastIdLength else {
-            logger.info("characteristic value is not a valid broadcast id, because it has length \(data.count). Expected \(BroadcastIdEncrypter.broadcastIdLength)")
-            return
+        
+        logger.info("scheduling keepalive")
+        lastKeepalive = Date()
+        for peripheral in peripherals.values {
+            peripheral.readRSSI()
         }
-
-        logger.info("successfully read broadcast id from peripheral \(peripheral.identifierWithName), now disconnecting")
-        delegate?.btleListener(self, didFind: data, forPeripheral: peripheral)
-        central?.cancelPeripheralConnection(peripheral)
+        keepaliveTimer = DispatchSource.makeTimerSource(queue: queue)
+        keepaliveTimer?.setEventHandler(handler: { [weak self] in
+            if let value = self?.dateFormatter.string(from: Date()).data(using: .utf8) {
+                print("\(#function) sending keepalive value \(value)")
+                self?.broadcaster.sendKeepalive(value: value)
+            }
+        })
+        keepaliveTimer?.schedule(deadline: DispatchTime.now() + keepaliveInterval)
+        keepaliveTimer?.resume()
     }
 
 }

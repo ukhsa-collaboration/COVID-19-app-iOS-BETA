@@ -10,11 +10,18 @@ import UIKit
 
 class ContactEventExpiryHandler {
     private let contactEventRepository: ContactEventRepository
+    private let notificationCenter: NotificationCenter
     
     init(notificationCenter: NotificationCenter, contactEventRepository: ContactEventRepository) {
         self.contactEventRepository = contactEventRepository
+        self.notificationCenter = notificationCenter
+
         notificationCenter.addObserver(self, selector: #selector(significantTimeDidChange), name: UIApplication.significantTimeChangeNotification, object: nil)
         significantTimeDidChange()
+    }
+
+    deinit {
+        notificationCenter.removeObserver(self)
     }
     
     @objc private func significantTimeDidChange() {

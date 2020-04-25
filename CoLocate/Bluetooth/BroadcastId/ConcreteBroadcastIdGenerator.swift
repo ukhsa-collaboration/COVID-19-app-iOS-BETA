@@ -41,6 +41,7 @@ class ConcreteBroadcastIdGenerator: BroadcastIdGenerator {
 
         return self.encrypter!
     }
+    
 }
 
 fileprivate let logger = Logger(label: "BTLE")

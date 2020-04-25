@@ -34,41 +34,38 @@ class AppDelegateTest: XCTestCase {
         appDelegate.registrationService = registrationService
     }
 
-    func testFirstAppLaunchDoesNotStartBluetooth() throws {
+    func testLaunchingWithoutBluetoothPermissons_DoesNotStartBluetooth() throws {
         appDelegate.persistence = PersistenceDouble(registration: nil, bluetoothPermissionRequested: false)
         
         _ = appDelegate.application(UIApplication.shared, didFinishLaunchingWithOptions: nil)
 
+        XCTAssertFalse(nursery.startBluetoothCalled)
         XCTAssertFalse(nursery.createListenerCalled)
         XCTAssertFalse(nursery.createBroadcasterCalled)
     }
     
-    func testLaunchingWithBluetoothPermissionRequested_StartsListener() {
+    func testLaunchingWithBluetoothPermissionRequested_StartsNursery() {
         appDelegate.persistence = PersistenceDouble(registration: nil, bluetoothPermissionRequested: true)
         
         _ = appDelegate.application(UIApplication.shared, didFinishLaunchingWithOptions: nil)
 
-        XCTAssertTrue(nursery.createListenerCalled)
+        XCTAssertTrue(nursery.startBluetoothCalled)
+        XCTAssertFalse(nursery.createListenerCalled)
         XCTAssertFalse(nursery.createBroadcasterCalled)
     }
     
-    func testLaunchingWithRegistration_StartsListenerAndBroadcaster() {
+    func testLaunchingWithRegistration_StartsNursery() {
         persistence.registration = Registration.fake
+        persistence.bluetoothPermissionRequested = true
 
         _ = appDelegate.application(UIApplication.shared, didFinishLaunchingWithOptions: nil)
 
-        XCTAssertTrue(nursery.createListenerCalled)
-        XCTAssertTrue(nursery.createBroadcasterCalled)
+        XCTAssertTrue(nursery.startBluetoothCalled)
+        XCTAssertFalse(nursery.createListenerCalled)
+        XCTAssertFalse(nursery.createBroadcasterCalled)
+        XCTAssertEqual(nursery.registrationPassedToStartBluetooth, persistence.registration)
     }
 
-    func testStartsBroadcastingOnceRegistrationIsPersisted() {
-        persistence.registration = nil
-        _ = appDelegate.application(UIApplication.shared, didFinishLaunchingWithOptions: nil)
-        persistence.registration = Registration.fake
-        appDelegate.persistence(persistence, didUpdateRegistration: Registration.fake)
-
-        XCTAssertTrue(nursery.createBroadcasterCalled)
-    }
 }
 
 

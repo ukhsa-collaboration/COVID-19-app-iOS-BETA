@@ -65,7 +65,6 @@ extension PlistPersister: ContactEventPersister where K == UUID, V == ContactEve
     func btleListener(_ listener: BTLEListener, didReadRSSI RSSI: Int, forPeripheral peripheral: BTLEPeripheral) {
         if persister.items[peripheral.identifier] == nil {
             persister.items[peripheral.identifier] = ContactEvent()
-            listener.connect(peripheral)
         }
         persister.items[peripheral.identifier]?.recordRSSI(RSSI)
     }

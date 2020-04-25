@@ -23,7 +23,7 @@ struct Registration: Equatable {
 
 
 protocol Persisting {
-    var delegate: PersistenceDelegate? { get set }
+    var delegate: PersistenceDelegate? { get nonmutating set }
 
     var registration: Registration? { get nonmutating set }
     var potentiallyExposed: Bool { get nonmutating set }

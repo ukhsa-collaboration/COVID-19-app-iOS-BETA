@@ -61,3 +61,11 @@ extension Sequence where Iterator.Element == CBCharacteristic {
     }
 
 }
+
+extension Sequence where Iterator.Element == CBCharacteristic {
+    
+    func keepaliveCharacteristic() -> CBCharacteristic? {
+        return first(where: {$0.uuid == ConcreteBTLEBroadcaster.keepaliveCharacteristicUUID})
+    }
+
+}
