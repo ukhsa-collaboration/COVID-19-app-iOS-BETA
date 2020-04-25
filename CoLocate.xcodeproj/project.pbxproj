@@ -127,6 +127,8 @@
 		F604976F24549729002B8503 /* LinkingIdRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F604976E24549729002B8503 /* LinkingIdRequest.swift */; };
 		F604977224549B7B002B8503 /* LinkingIdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F604977124549B7B002B8503 /* LinkingIdManager.swift */; };
 		F604977524549C95002B8503 /* LinkingIdManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F604977424549C95002B8503 /* LinkingIdManagerTests.swift */; };
+		F60497772454A294002B8503 /* LinkingIdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60497762454A294002B8503 /* LinkingIdViewController.swift */; };
+		F60497792454A40B002B8503 /* LinkingId.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F60497782454A40B002B8503 /* LinkingId.storyboard */; };
 		F613936E243FA82B003447E8 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = F613936D243FA82B003447E8 /* Appearance.swift */; };
 		F62F857F2451051C006580A8 /* ContactEventsUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62F857E2451051C006580A8 /* ContactEventsUploader.swift */; };
 		F62F858124510716006580A8 /* ContactEventsUploaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62F858024510716006580A8 /* ContactEventsUploaderTests.swift */; };
@@ -346,6 +348,8 @@
 		F604976E24549729002B8503 /* LinkingIdRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkingIdRequest.swift; sourceTree = "<group>"; };
 		F604977124549B7B002B8503 /* LinkingIdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkingIdManager.swift; sourceTree = "<group>"; };
 		F604977424549C95002B8503 /* LinkingIdManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkingIdManagerTests.swift; sourceTree = "<group>"; };
+		F60497762454A294002B8503 /* LinkingIdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkingIdViewController.swift; sourceTree = "<group>"; };
+		F60497782454A40B002B8503 /* LinkingId.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LinkingId.storyboard; sourceTree = "<group>"; };
 		F613936D243FA82B003447E8 /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		F62F857E2451051C006580A8 /* ContactEventsUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventsUploader.swift; sourceTree = "<group>"; };
 		F62F858024510716006580A8 /* ContactEventsUploaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventsUploaderTests.swift; sourceTree = "<group>"; };
@@ -814,8 +818,10 @@
 		F604977024549B49002B8503 /* Pilot */ = {
 			isa = PBXGroup;
 			children = (
+				F60497782454A40B002B8503 /* LinkingId.storyboard */,
 				F604977124549B7B002B8503 /* LinkingIdManager.swift */,
 				F604976E24549729002B8503 /* LinkingIdRequest.swift */,
+				F60497762454A294002B8503 /* LinkingIdViewController.swift */,
 			);
 			path = Pilot;
 			sourceTree = "<group>";
@@ -1116,6 +1122,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F60497792454A40B002B8503 /* LinkingId.storyboard in Resources */,
 				F66CC927244F6340001399D4 /* GoogleService-Info.plist in Resources */,
 				F758B8C4242CC0EE003AE16D /* Status.storyboard in Resources */,
 				6FC63C3B241641BA007C8BF3 /* LaunchScreen.storyboard in Resources */,
@@ -1223,6 +1230,7 @@
 				F6F05A342434344200FF4B72 /* StartNowViewController.swift in Sources */,
 				0997D056243BDEEC0067346C /* RootViewController.swift in Sources */,
 				F72EBDA2243D0892009F9328 /* SecureBroadcastRotationKeyStorage.swift in Sources */,
+				F60497772454A294002B8503 /* LinkingIdViewController.swift in Sources */,
 				21AF36AB241A8E50001A4910 /* BTLEListener.swift in Sources */,
 				21C09A8D24377F5100368203 /* CoreBluetoothExtensions.swift in Sources */,
 				F72EBDA7243D2FD1009F9328 /* BroadcastIdEncrypter.swift in Sources */,

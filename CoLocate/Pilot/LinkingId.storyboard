@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2DV-fd-FjU">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Linking Id View Controller-->
+        <scene sceneID="Qru-fo-gMt">
+            <objects>
+                <viewController id="2DV-fd-FjU" customClass="LinkingIdViewController" customModule="CoLocate" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1xp-lJ-Mpr">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="Isf-ek-wrS">
+                                <rect key="frame" x="20" y="64" width="374" height="330"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="App ID" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cjQ-x6-Kok">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="20.5"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="da7-iV-mge">
+                                        <rect key="frame" x="0.0" y="52.5" width="374" height="20.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fetching App ID" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JMq-Gh-7Cj">
+                                                <rect key="frame" x="0.0" y="0.0" width="322" height="20.5"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="YNb-EQ-dKb">
+                                                <rect key="frame" x="354" y="0.0" width="20" height="20.5"/>
+                                            </activityIndicatorView>
+                                        </subviews>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ajc-5y-6oC" customClass="ButtonWithDynamicType" customModule="CoLocate" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="105" width="374" height="225"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                        <state key="normal" title="Close"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="L7M-kP-6XK" firstAttribute="trailing" secondItem="Isf-ek-wrS" secondAttribute="trailing" constant="20" id="U4M-us-10O"/>
+                            <constraint firstItem="Isf-ek-wrS" firstAttribute="top" secondItem="L7M-kP-6XK" secondAttribute="top" constant="20" id="acu-EU-y75"/>
+                            <constraint firstItem="Isf-ek-wrS" firstAttribute="leading" secondItem="L7M-kP-6XK" secondAttribute="leading" constant="20" id="bE6-Iv-YHN"/>
+                            <constraint firstItem="L7M-kP-6XK" firstAttribute="bottom" secondItem="Isf-ek-wrS" secondAttribute="bottom" constant="20" id="yw6-Dp-f70"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="L7M-kP-6XK"/>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="414" height="414"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="YNb-EQ-dKb" id="61Q-CF-I1q"/>
+                        <outlet property="linkingIdLabel" destination="JMq-Gh-7Cj" id="P0q-oa-XaA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3rx-BK-2al" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="157" y="98"/>
+        </scene>
+    </scenes>
+</document>
