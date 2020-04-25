@@ -20,7 +20,7 @@ protocol BluetoothNursery {
     func startBluetooth(registration: Registration?)
 }
 
-@objc class ConcreteBluetoothNursery: NSObject, BluetoothNursery, PersistenceDelegate {
+class ConcreteBluetoothNursery: BluetoothNursery, PersistenceDelegate {
     
     static let centralRestoreIdentifier: String = "SonarCentralRestoreIdentifier"
     static let peripheralRestoreIdentifier: String = "SonarPeripheralRestoreIdentifier"
@@ -34,10 +34,10 @@ protocol BluetoothNursery {
     private let contactEventExpiryHandler: ContactEventExpiryHandler
 
     // The listener needs to get hold of the broadcaster, to send keepalives
-    var broadcaster: BTLEBroadcaster?
+    public var broadcaster: BTLEBroadcaster?
     let broadcastIdGenerator: BroadcastIdGenerator
 
-    private var listener: BTLEListener?
+    public var listener: BTLEListener?
     // This observer is created along with the listener, because creating an observer
     // can prompt the user for BT permissions and we want to control when that happens in the onboarding flow.
     public private(set) var stateObserver: BluetoothStateObserver? = nil
@@ -55,7 +55,6 @@ protocol BluetoothNursery {
         contactEventExpiryHandler = ContactEventExpiryHandler(notificationCenter: notificationCenter,
                                                               contactEventRepository: contactEventRepository)
 
-        super.init()
         self.persistence.delegate = self
     }
 
@@ -98,7 +97,7 @@ protocol BluetoothNursery {
 
     // MARK: - Health
 
-    @objc dynamic public var isHealthy: Bool {
+    public var isHealthy: Bool {
         guard listener != nil else { return false }
         guard broadcaster != nil else { return false }
         guard userNotifier != nil else { return false }

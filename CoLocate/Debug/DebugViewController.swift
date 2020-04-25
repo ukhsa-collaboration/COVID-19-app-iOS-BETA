@@ -21,13 +21,16 @@ class DebugViewController: UITableViewController, Storyboarded {
     private var contactEventPersister: ContactEventPersister!
     private var contactEventsUploader: ContactEventsUploader!
 
-    @objc private var bluetoothNursery: ConcreteBluetoothNursery!
+    private var bluetoothNursery: ConcreteBluetoothNursery!
     var observation: NSKeyValueObservation?
 
     @IBOutlet weak var bluetoothStatus: UIView!
     @IBOutlet weak var bluetoothImage: UIImageView!
     var fillLayer: CAShapeLayer!
-    
+
+    @IBOutlet weak var broadcasterStatus: UIImageView!
+    @IBOutlet weak var listenerStatus: UIImageView!
+
     func inject(
         persisting: Persisting,
         bluetoothNursery: BluetoothNursery,
@@ -57,14 +60,17 @@ class DebugViewController: UITableViewController, Storyboarded {
             self.removeAnimation()
         }
 
-        observation = observe(\.bluetoothNursery.isHealthy, options: [.old, .new]) { [weak self] object, _ in
-            guard let self = self else { return }
+        setBluetoothStatus(broadcasterStatus, bluetoothNursery.broadcaster?.isHealthy() ?? false)
+        setBluetoothStatus(listenerStatus, bluetoothNursery.listener?.isHealthy() ?? false)
+    }
 
-            if self.bluetoothNursery.isHealthy {
-                self.setupAnimation()
-            } else {
-                self.removeAnimation()
-            }
+    private func setBluetoothStatus(_ imageView: UIImageView, _ isHealthy: Bool) {
+        guard #available(iOS 13.0, *) else { return }
+
+        if isHealthy {
+            imageView.image = UIImage(systemName: "hand.thumbsup.fill")
+        } else {
+            imageView.image = UIImage(systemName: "hand.thumbsdown.fill")
         }
     }
 
@@ -88,6 +94,12 @@ class DebugViewController: UITableViewController, Storyboarded {
             break
 
         case (0, 1):
+        break
+
+        case (0, 2):
+        break
+
+        case (0, 3):
             persisting.clear()
             try! SecureBroadcastRotationKeyStorage().clear()
             show(title: "Cleared", message: "Registration and diagnosis data has been cleared. Please stop and re-start the application.")
@@ -237,9 +249,9 @@ class DebugViewController: UITableViewController, Storyboarded {
         fillLayer.removeFromSuperlayer()
 
         if #available(iOS 13.0, *) {
-            bluetoothImage.image = UIImage(systemName: "bolt.slash.fill")
+            bluetoothImage.image = UIImage(systemName: "hand.thumbsdown.fill")
         } else {
-            bluetoothImage.image = UIImage(named: "bolt.slash.fill")
+            bluetoothImage.image = UIImage(named: "hand.thumbsdown.fill")
         }
     }
 
