@@ -861,8 +861,9 @@
 				F68B89EC243CFF2600F369A9 /* SelfDiagnosis.storyboard */,
 				13F4AE872451EB330082A46D /* QuestionSymptomsViewController.swift */,
 				F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */,
-				13095A672452F4910072F19A /* SelfDiagnosisCoordinator.swift */,
 				F6EEC3B72448DD2400172820 /* SelfDiagnosis.swift */,
+				13095A672452F4910072F19A /* SelfDiagnosisCoordinator.swift */,
+				13095A6B24532D180072F19A /* UpdateDiagnosisCoordinator.swift */,
 			);
 			path = SelfDiagnosis;
 			sourceTree = "<group>";

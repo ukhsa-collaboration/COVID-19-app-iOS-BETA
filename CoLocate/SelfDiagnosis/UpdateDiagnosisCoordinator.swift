@@ -1,5 +1,5 @@
 //
-//  SelfDiagnosisCoordinator.swift
+//  UpdateDiagnosisCoordinator.swift
 //  CoLocate
 //
 //  Created by NHSX.
@@ -8,36 +8,33 @@
 
 import UIKit
 
-protocol Coordinator {
-    func start()
-}
-
-class SelfDiagnosisCoordinator: Coordinator {
+class UpdateDiagnosisCoordinator: Coordinator {
     let navigationController: UINavigationController
     let persisting: Persisting
-    let contactEventRepository: ContactEventRepository
     let session: Session
+    let statusViewController: StatusViewController
+    let startDate: Date
     
     init(
         navigationController: UINavigationController,
         persisting: Persisting,
-        contactEventRepository: ContactEventRepository,
+        statusViewController: StatusViewController,
         session: Session
     ) {
         self.navigationController = navigationController
         self.persisting = persisting
-        self.contactEventRepository = contactEventRepository
         self.session = session
+        self.statusViewController = statusViewController
+        startDate = persisting.selfDiagnosis?.startDate ?? Date()
     }
     
-    var hasHighTemperature: Bool!
-    var hasNewCough: Bool!
+    var symptoms = Set<Symptom>()
     
     func start() {
         let vc = QuestionSymptomsViewController.instantiate()
         vc.inject(
             pageNumber: 1,
-            pageCount: 3,
+            pageCount: 2,
             questionTitle: "TEMPERATURE_QUESTION".localized,
             questionDetail: "TEMPERATURE_DETAIL".localized,
             questionError: "TEMPERATURE_ERROR".localized,
@@ -45,7 +42,9 @@ class SelfDiagnosisCoordinator: Coordinator {
             questionNo: "TEMPERATURE_NO".localized,
             buttonText: "Continue"
         ) { hasHighTemperature in
-            self.hasHighTemperature = hasHighTemperature
+            if hasHighTemperature {
+                self.symptoms.insert(.temperature)
+            }
             self.openCoughView()
         }
         navigationController.pushViewController(vc, animated: true)
@@ -55,29 +54,20 @@ class SelfDiagnosisCoordinator: Coordinator {
         let vc = QuestionSymptomsViewController.instantiate()
         vc.inject(
             pageNumber: 2,
-            pageCount: 3,
+            pageCount: 2,
             questionTitle: "COUGH_QUESTION".localized,
             questionDetail: "COUGH_DETAIL".localized,
             questionError: "COUGH_ERROR".localized,
             questionYes: "COUGH_YES".localized,
             questionNo: "COUGH_NO".localized,
-            buttonText: "Continue"
+            buttonText: "Submit"
         ) { hasNewCough in
-            self.hasNewCough = hasNewCough
-            self.openSubmissionView()
+            if hasNewCough {
+                self.symptoms.insert(.cough)
+            }
+            self.persisting.selfDiagnosis = SelfDiagnosis(symptoms: self.symptoms, startDate: self.startDate)
+            self.navigationController.dismiss(animated: true, completion: nil)
         }
-        navigationController.pushViewController(vc, animated: true)
-    }
-    
-    func openSubmissionView() {
-        let vc = SubmitSymptomsViewController.instantiate()
-        vc.inject(
-            persisting: persisting,
-            contactEventRepository: contactEventRepository,
-            session: session,
-            hasHighTemperature: hasHighTemperature,
-            hasNewCough: hasNewCough
-        )
         navigationController.pushViewController(vc, animated: true)
     }
 }
