@@ -106,7 +106,7 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
                     peripheral.discoverCharacteristics([ConcreteBTLEBroadcaster.sonarIdCharacteristicUUID], for: sonarIdService)
                     continue
                 }
-                logger.info("reading sonarId from fully-connected peripheral \(peripheral.identifierWithName)")
+                logger.info("reading broadcast id from fully-connected peripheral \(peripheral.identifierWithName)")
                 peripheral.readValue(for: sonarIdCharacteristic)
             }
             
@@ -207,11 +207,11 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
         }
 
         guard data.count == BroadcastIdEncrypter.broadcastIdLength else {
-            logger.info("characteristic value is not a valid sonarId, because it has length \(data.count). Expected \(BroadcastIdEncrypter.broadcastIdLength)")
+            logger.info("characteristic value is not a valid broadcast id, because it has length \(data.count). Expected \(BroadcastIdEncrypter.broadcastIdLength)")
             return
         }
 
-        logger.info("successfully read sonarId from peripheral \(peripheral.identifierWithName), now disconnecting")
+        logger.info("successfully read broadcast id from peripheral \(peripheral.identifierWithName), now disconnecting")
         delegate?.btleListener(self, didFind: data, forPeripheral: peripheral)
         central?.cancelPeripheralConnection(peripheral)
     }
