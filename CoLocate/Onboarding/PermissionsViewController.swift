@@ -18,7 +18,8 @@ class PermissionsViewController: UIViewController, Storyboarded {
     private var remoteNotificationManager: RemoteNotificationManager! = nil
     private var uiQueue: TestableQueue! = nil
     private var continueHandler: (() -> Void)! = nil
-    private var bluetoothNursery: BluetoothNursery!
+    private var bluetoothNursery: BluetoothNursery! = nil
+    private var persistence: Persisting! = nil
     
     @IBOutlet var continueButton: PrimaryButton!
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
@@ -27,12 +28,14 @@ class PermissionsViewController: UIViewController, Storyboarded {
         authManager: AuthorizationManaging,
         remoteNotificationManager: RemoteNotificationManager,
         bluetoothNursery: BluetoothNursery,
+        persistence: Persisting,
         uiQueue: TestableQueue,
         continueHandler: @escaping () -> Void
     ) {
         self.authManager = authManager
         self.remoteNotificationManager = remoteNotificationManager
         self.bluetoothNursery = bluetoothNursery
+        self.persistence = persistence
         self.uiQueue = uiQueue
         self.continueHandler = continueHandler
     }
@@ -59,6 +62,8 @@ class PermissionsViewController: UIViewController, Storyboarded {
         continueButton.isHidden = true
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
+
+        persistence.bluetoothPermissionRequested = true
         
         #if targetEnvironment(simulator)
         let bluetoothAuth = BluetoothAuthorizationStatus.allowed

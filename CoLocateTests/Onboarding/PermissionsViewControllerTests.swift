@@ -16,9 +16,14 @@ class PermissionsViewControllerTests: TestCase {
         let authManagerDouble = AuthorizationManagerDouble(bluetooth: .notDetermined)
         let remoteNotificationManagerDouble = RemoteNotificationManagerDouble()
         let nursery = BluetoothNurseryDouble()
+        let persistence = PersistenceDouble()
         let vc = PermissionsViewController.instantiate()
         var continued = false
-        vc.inject(authManager: authManagerDouble, remoteNotificationManager: remoteNotificationManagerDouble, bluetoothNursery: nursery, uiQueue: QueueDouble()) {
+        vc.inject(authManager: authManagerDouble,
+                  remoteNotificationManager: remoteNotificationManagerDouble,
+                  bluetoothNursery: nursery,
+                  persistence: persistence,
+                  uiQueue: QueueDouble()) {
             continued = true
         }
 
@@ -26,6 +31,8 @@ class PermissionsViewControllerTests: TestCase {
         XCTAssertNotNil(vc.view)
 
         vc.didTapContinue()
+
+        XCTAssertTrue(persistence.bluetoothPermissionRequested)
 
         #if targetEnvironment(simulator)
         // We skip Bluetooth on the simulator.
@@ -48,9 +55,14 @@ class PermissionsViewControllerTests: TestCase {
         let authManagerDouble = AuthorizationManagerDouble(bluetooth: .notDetermined)
         let remoteNotificationManagerDouble = RemoteNotificationManagerDouble()
         let nursery = BluetoothNurseryDouble()
+        let persistence = PersistenceDouble()
         let vc = PermissionsViewController.instantiate()
         var continued = false
-        vc.inject(authManager: authManagerDouble, remoteNotificationManager: remoteNotificationManagerDouble, bluetoothNursery: nursery, uiQueue: QueueDouble()) {
+        vc.inject(authManager: authManagerDouble,
+                  remoteNotificationManager: remoteNotificationManagerDouble,
+                  bluetoothNursery: nursery,
+                  persistence: persistence,
+                  uiQueue: QueueDouble()) {
             continued = true
         }
 
@@ -58,6 +70,8 @@ class PermissionsViewControllerTests: TestCase {
         XCTAssertNotNil(vc.view)
 
         vc.didTapContinue()
+
+        XCTAssertTrue(persistence.bluetoothPermissionRequested)
         
         authManagerDouble.bluetooth = .denied
         nursery.stateObserver?.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
@@ -72,7 +86,11 @@ class PermissionsViewControllerTests: TestCase {
         let remoteNotificationManagerDouble = RemoteNotificationManagerDouble()
         let vc = PermissionsViewController.instantiate()
         var continued = false
-        vc.inject(authManager: authManagerDouble, remoteNotificationManager: remoteNotificationManagerDouble, bluetoothNursery: BluetoothNurseryDouble(), uiQueue: QueueDouble()) {
+        vc.inject(authManager: authManagerDouble,
+                  remoteNotificationManager: remoteNotificationManagerDouble,
+                  bluetoothNursery: BluetoothNurseryDouble(),
+                  persistence: PersistenceDouble(),
+                  uiQueue: QueueDouble()) {
             continued = true
         }
 
@@ -89,7 +107,11 @@ class PermissionsViewControllerTests: TestCase {
         let authManagerDouble = AuthorizationManagerDouble(bluetooth: .allowed)
         let remoteNotificationManagerDouble = RemoteNotificationManagerDouble()
         let vc = PermissionsViewController.instantiate()
-        vc.inject(authManager: authManagerDouble, remoteNotificationManager: remoteNotificationManagerDouble, bluetoothNursery: BluetoothNurseryDouble(), uiQueue: QueueDouble()) {}
+        vc.inject(authManager: authManagerDouble,
+                  remoteNotificationManager: remoteNotificationManagerDouble,
+                  bluetoothNursery: BluetoothNurseryDouble(),
+                  persistence: PersistenceDouble(),
+                  uiQueue: QueueDouble()) {}
 
         parentViewControllerForTests.viewControllers = [vc]
         XCTAssertNotNil(vc.view)
@@ -108,7 +130,11 @@ class PermissionsViewControllerTests: TestCase {
         let remoteNotificationManagerDouble = RemoteNotificationManagerDouble()
         let vc = PermissionsViewController.instantiate()
         var continued = false
-        vc.inject(authManager: authManagerDouble, remoteNotificationManager: remoteNotificationManagerDouble, bluetoothNursery: BluetoothNurseryDouble(), uiQueue: QueueDouble()) {
+        vc.inject(authManager: authManagerDouble,
+                  remoteNotificationManager: remoteNotificationManagerDouble,
+                  bluetoothNursery: BluetoothNurseryDouble(),
+                  persistence: PersistenceDouble(),
+                  uiQueue: QueueDouble()) {
             continued = true
         }
 

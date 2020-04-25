@@ -13,7 +13,7 @@ class OnboardingViewController: UINavigationController, Storyboarded {
 
     private var environment: OnboardingEnvironment! = nil
     private var onboardingCoordinator: OnboardingCoordinator! = nil
-    private var bluetoothNursery: BluetoothNursery!
+    private var bluetoothNursery: BluetoothNursery! = nil
     private var completionHandler: (() -> Void)! = nil
     private var uiQueue: TestableQueue! = nil
 
@@ -74,7 +74,12 @@ class OnboardingViewController: UINavigationController, Storyboarded {
             
         case .permissions:
             vc = PermissionsViewController.instantiate() {
-                $0.inject(authManager: environment.authorizationManager, remoteNotificationManager: environment.remoteNotificationManager, bluetoothNursery: bluetoothNursery, uiQueue: uiQueue, continueHandler: updateState)
+                $0.inject(authManager: environment.authorizationManager,
+                          remoteNotificationManager: environment.remoteNotificationManager,
+                          bluetoothNursery: bluetoothNursery,
+                          persistence: environment.persistence,
+                          uiQueue: uiQueue,
+                          continueHandler: updateState)
             }
             
         case .bluetoothDenied:
