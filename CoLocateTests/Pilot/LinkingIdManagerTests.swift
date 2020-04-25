@@ -23,17 +23,28 @@ class LinkingIdManagerTests: XCTestCase {
         )
 
         notificationCenter.post(name: RegistrationCompletedNotification, object: nil)
+        session.executeCompletion?(Result<LinkingId, Error>.success("linking-id"))
 
-        guard
-            let request = session.requestSent as? LinkingIdRequest
-        else {
-            XCTFail("Expected a LinkingIdRequest but got \(String(describing: session.requestSent))")
-            return
-        }
+        XCTAssertEqual(persisting.linkingId, "linking-id")
+    }
 
-        XCTAssertEqual(request.path, "/api/residents/\(registration.id.uuidString)/linking-id")
-        XCTAssertEqual(request.method, .put)
+    func testFetchLinkingId() {
+        let notificationCenter = NotificationCenter()
+        let registration = Registration.fake
+        let persisting = PersistenceDouble(registration: registration)
+        let session = SessionDouble()
+        let manager = LinkingIdManager(
+            notificationCenter: notificationCenter,
+            persisting: persisting,
+            session: session
+        )
 
+        var fetchedLinkingId: LinkingId?
+        manager.fetchLinkingId { fetchedLinkingId = $0 }
+        session.executeCompletion?(Result<LinkingId, Error>.success("linking-id"))
+
+        XCTAssertEqual(persisting.linkingId, "linking-id")
+        XCTAssertEqual(fetchedLinkingId, "linking-id")
     }
 
 }
