@@ -66,12 +66,14 @@ private class InMemoryPersistence: Persisting {
     var partialPostcode: String? = nil
     var bluetoothPermissionRequested: Bool = false
     var uploadLog: [UploadLog] = []
+    var linkingId: LinkingId?
         
     func clear() {
         registration = nil
         selfDiagnosis = nil
         partialPostcode = nil
         uploadLog = []
+        linkingId = nil
     }
 }
 

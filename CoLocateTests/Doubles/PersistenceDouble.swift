@@ -16,8 +16,9 @@ class PersistenceDouble: Persisting {
     var potentiallyExposed: Bool
     var selfDiagnosis: SelfDiagnosis?
     var partialPostcode: String?
-    var bluetoothPermissionRequested: Bool = false
+    var bluetoothPermissionRequested: Bool
     var uploadLog: [UploadLog]
+    var linkingId: LinkingId?
 
     init(
         potentiallyExposed: Bool = false,
@@ -25,7 +26,8 @@ class PersistenceDouble: Persisting {
         registration: Registration? = nil,
         partialPostcode: String? = nil,
         bluetoothPermissionRequested: Bool = false,
-        uploadLog: [UploadLog] = []
+        uploadLog: [UploadLog] = [],
+        linkingId: LinkingId? = nil
     ) {
         self.registration = registration
         self.potentiallyExposed = potentiallyExposed
@@ -34,6 +36,7 @@ class PersistenceDouble: Persisting {
         self.potentiallyExposed = potentiallyExposed
         self.bluetoothPermissionRequested = bluetoothPermissionRequested
         self.uploadLog = uploadLog
+        self.linkingId = linkingId
     }
 
     func clear() {
@@ -43,5 +46,6 @@ class PersistenceDouble: Persisting {
         potentiallyExposed = false
         bluetoothPermissionRequested = false
         uploadLog = []
+        linkingId = nil
     }
 }

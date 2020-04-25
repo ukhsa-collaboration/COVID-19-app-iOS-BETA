@@ -31,6 +31,7 @@ protocol Persisting {
     var partialPostcode: String? { get nonmutating set }
     var bluetoothPermissionRequested: Bool { get nonmutating set }
     var uploadLog: [UploadLog] { get nonmutating set }
+    var linkingId: LinkingId? { get nonmutating set }
 
     func clear()
 }
@@ -47,6 +48,7 @@ class Persistence: Persisting {
         case partialPostcode
         case bluetoothPermissionRequested
         case uploadLog
+        case linkingId
     }
 
     static var shared = Persistence(
@@ -151,6 +153,11 @@ class Persistence: Persisting {
     var bluetoothPermissionRequested: Bool {
         get { UserDefaults.standard.bool(forKey: Keys.bluetoothPermissionRequested.rawValue) }
         set { UserDefaults.standard.set(newValue, forKey: Keys.bluetoothPermissionRequested.rawValue) }
+    }
+
+    var linkingId: LinkingId? {
+        get { UserDefaults.standard.string(forKey: Keys.linkingId.rawValue) }
+        set { UserDefaults.standard.set(newValue, forKey: Keys.linkingId.rawValue) }
     }
 
     func clear() {
