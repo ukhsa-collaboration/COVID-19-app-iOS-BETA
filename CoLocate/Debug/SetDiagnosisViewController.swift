@@ -8,6 +8,7 @@
 
 import UIKit
 
+#if DEBUG || INTERNAL
 class SetDiagnosisViewController: UITableViewController {
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -113,3 +114,4 @@ class SetDiagnosisViewController: UITableViewController {
     }
 
 }
+#endif
