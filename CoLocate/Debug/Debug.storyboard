@@ -60,11 +60,14 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bluetooth" translatesAutoresizingMaskIntoConstraints="NO" id="wuI-g2-FnU">
-                                                    <rect key="frame" x="203" y="-42" width="240" height="128"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bluetooth" translatesAutoresizingMaskIntoConstraints="NO" id="wuI-g2-FnU">
+                                                    <rect key="frame" x="358.5" y="10" width="15.5" height="24"/>
                                                 </imageView>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="wuI-g2-FnU" firstAttribute="centerY" secondItem="2VL-Qt-Ckh" secondAttribute="centerY" id="NmP-Ug-X50"/>
+                                                <constraint firstAttribute="trailing" secondItem="wuI-g2-FnU" secondAttribute="trailing" constant="40" id="n9U-Nr-VF9"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="SJd-KB-aGi" style="IBUITableViewCellStyleDefault" id="uTb-OC-0Ml">
@@ -314,7 +317,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rGx-hb-5hq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="FeH-ld-Ids" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-1462" y="373"/>
+            <point key="canvasLocation" x="-1462.3188405797102" y="372.99107142857139"/>
         </scene>
         <!--Set Diagnosis View Controller-->
         <scene sceneID="crv-fC-y5A">

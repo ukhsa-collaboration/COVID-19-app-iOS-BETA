@@ -198,6 +198,7 @@ class DebugViewController: UITableViewController, Storyboarded {
     // MARK: - Bluetooth status animation
 
     private func setupAnimation() {
+        fillLayer = CAShapeLayer()
         fillLayer.path = computeProperCGPath()
         fillLayer.fillRule = .evenOdd;
         fillLayer.fillColor = UIColor.green.cgColor
@@ -227,12 +228,19 @@ class DebugViewController: UITableViewController, Storyboarded {
         animationGroup.animations = animations;
 
         fillLayer.add(animationGroup, forKey: "pulse")
+
+        bluetoothImage.image = UIImage(named: "bluetooth")
     }
 
     private func removeAnimation() {
         fillLayer.removeAnimation(forKey: "pulse")
+        fillLayer.removeFromSuperlayer()
 
-        // TODO: replace the image with a ☠️
+        if #available(iOS 13.0, *) {
+            bluetoothImage.image = UIImage(systemName: "bolt.slash.fill")
+        } else {
+            bluetoothImage.image = UIImage(named: "bolt.slash.fill")
+        }
     }
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
