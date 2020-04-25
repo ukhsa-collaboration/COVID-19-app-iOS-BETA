@@ -595,7 +595,6 @@
 			isa = PBXGroup;
 			children = (
 				21C417CB242CB15D00DEF3E2 /* ConfirmRegistrationRequest.swift */,
-				F604976E24549729002B8503 /* LinkingIdRequest.swift */,
 				214209D42423C83C00C7BFF3 /* PatchContactEventsRequest.swift */,
 				896BE90E244F07FF00B3687C /* PublicKeyValidator.swift */,
 				F600A60124297A8E0038DF57 /* RegistrationRequest.swift */,
@@ -816,6 +815,7 @@
 			isa = PBXGroup;
 			children = (
 				F604977124549B7B002B8503 /* LinkingIdManager.swift */,
+				F604976E24549729002B8503 /* LinkingIdRequest.swift */,
 			);
 			path = Pilot;
 			sourceTree = "<group>";
