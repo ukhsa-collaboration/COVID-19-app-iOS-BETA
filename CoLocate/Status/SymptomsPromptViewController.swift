@@ -12,10 +12,12 @@ class SymptomsPromptViewController: UIViewController, Storyboarded {
     static var storyboardName = "Status"
     var persistence: Persisting!
     var session: Session!
+    var statusViewController: StatusViewController!
         
-    func inject(persistence: Persisting, session: Session) {
+    func inject(persistence: Persisting, session: Session, statusViewController: StatusViewController) {
         self.persistence = persistence
         self.session = session
+        self.statusViewController = statusViewController
     }
     
     @IBAction func updateSymptoms(_ sender: Any) {
@@ -28,11 +30,12 @@ class SymptomsPromptViewController: UIViewController, Storyboarded {
         coordinator.start()
         navigationController.modalPresentationStyle = .fullScreen
         dismiss(animated: true, completion: nil)
-        present(navigationController, animated: true)
+        statusViewController.present(navigationController, animated: true)
     }
     
     @IBAction func noSymptoms(_ sender: Any) {
         persistence.selfDiagnosis = nil
+        statusViewController.diagnosis = nil
         dismiss(animated: true, completion: nil)
     }
 }

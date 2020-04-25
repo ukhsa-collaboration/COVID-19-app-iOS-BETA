@@ -173,10 +173,7 @@ class StatusViewController: UIViewController, Storyboarded {
         diagnosis = persistence.selfDiagnosis
     }
 
-    @IBAction func unwindFromLinkingId(unwindSegue: UIStoryboardSegue) {
-    }
-
-    private func renderStatus() {
+    func renderStatus() {
         guard view != nil else { return }
         
         switch status {
@@ -202,7 +199,7 @@ class StatusViewController: UIViewController, Storyboarded {
                 let symptomsPromptViewController = SymptomsPromptViewController.instantiate()
                 symptomsPromptViewController.modalPresentationStyle = .custom
                 symptomsPromptViewController.transitioningDelegate = drawerPresentationManager
-                symptomsPromptViewController.inject(persistence: persistence, session: session)
+                symptomsPromptViewController.inject(persistence: persistence, session: session, statusViewController: self)
                 present(symptomsPromptViewController, animated: true)
             }
         }
