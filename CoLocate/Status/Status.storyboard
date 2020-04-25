@@ -312,7 +312,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pau-uA-R8C" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4339.130434782609" y="541.07142857142856"/>
+            <point key="canvasLocation" x="4339" y="564"/>
         </scene>
         <!--Symptoms Prompt View Controller-->
         <scene sceneID="B7j-z4-vGV">
@@ -340,12 +340,16 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g6Q-bN-qIh" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
                                         <rect key="frame" x="16" y="159" width="382" height="30"/>
                                         <state key="normal" title="Update my symptoms"/>
+                                        <connections>
+                                            <action selector="updateSymptoms:" destination="eQJ-qc-4st" eventType="touchUpInside" id="5R1-cU-1Cg"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jXP-zf-i4X" customClass="ButtonWithDynamicType" customModule="CoLocate" customModuleProvider="target">
                                         <rect key="frame" x="16" y="205" width="382" height="33"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <state key="normal" title="I no longer have symptoms"/>
                                         <connections>
+                                            <action selector="noSymptoms:" destination="eQJ-qc-4st" eventType="touchUpInside" id="6Ly-uP-Itc"/>
                                             <segue destination="xm7-8R-BXr" kind="unwind" unwindAction="unwindFromSymptomsPromptWithUnwindSegue:" id="bKz-7L-gfZ"/>
                                         </connections>
                                     </button>
