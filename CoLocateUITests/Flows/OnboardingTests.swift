@@ -29,7 +29,6 @@ class OnboardingTests: ScreenTestCase {
         XCTAssert(postcodeScreenTitle.exists)
         postcodeField.tap()
         postcodeField.typeText("1234\n")
-        postcodeContinueButton.tap()
         
         // Please allow us Bluetooth and Notifications screen
         XCTAssert(permissionsScreenTitle.exists)
