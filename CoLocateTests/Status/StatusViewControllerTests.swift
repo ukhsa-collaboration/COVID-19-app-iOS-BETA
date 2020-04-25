@@ -20,7 +20,7 @@ class StatusViewControllerTests: XCTestCase {
         ]
 
         for (symptoms, potentiallyExposed, expectedStatus) in permutations {
-            let diagnosis = SelfDiagnosis(symptoms: symptoms, startDate: Date())
+            let diagnosis = SelfDiagnosis(symptoms: symptoms, startDate: Date(), expiryDate: Date())
             let persistence = PersistenceDouble(potentiallyExposed: potentiallyExposed, diagnosis: diagnosis)
             let vc = makeViewController(persistence: persistence)
             vc.viewWillAppear(false)

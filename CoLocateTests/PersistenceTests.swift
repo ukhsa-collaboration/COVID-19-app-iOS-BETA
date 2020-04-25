@@ -18,7 +18,7 @@ class PersistenceTests: TestCase {
 
     func testDiagnosisIsUnknownWhenDefaultsReset() {
         let service = Persistence(secureRegistrationStorage: SecureRegistrationStorage(), broadcastKeyStorage: SecureBroadcastRotationKeyStorage())
-        service.selfDiagnosis = SelfDiagnosis(symptoms: [.cough], startDate: Date())
+        service.selfDiagnosis = SelfDiagnosis(symptoms: [.cough], startDate: Date(), expiryDate: Date())
 
         let appDomain = Bundle.main.bundleIdentifier
         UserDefaults.standard.removePersistentDomain(forName: appDomain!)
@@ -29,7 +29,7 @@ class PersistenceTests: TestCase {
 
     func testDeleteSelfDiagnosisWhenNil() {
         let service = Persistence(secureRegistrationStorage: SecureRegistrationStorage(), broadcastKeyStorage: SecureBroadcastRotationKeyStorage())
-        service.selfDiagnosis = SelfDiagnosis(symptoms: [.cough], startDate: Date())
+        service.selfDiagnosis = SelfDiagnosis(symptoms: [.cough], startDate: Date(), expiryDate: Date())
         XCTAssertNotNil(service.selfDiagnosis)
 
         service.selfDiagnosis = nil

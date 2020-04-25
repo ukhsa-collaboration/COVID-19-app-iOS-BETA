@@ -13,7 +13,7 @@ struct SelfDiagnosis: Codable, Equatable {
     let startDate: Date
     let expiryDate: Date
 
-    init(symptoms: Set<Symptom>, startDate: Date, expiryDate: Date) {
+    init(symptoms: Set<Symptom>, startDate: Date, expiryDate: Date = Date()) {
         self.symptoms = symptoms
         self.startDate = startDate
         self.expiryDate = expiryDate
