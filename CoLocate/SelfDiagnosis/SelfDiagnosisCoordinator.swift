@@ -15,19 +15,16 @@ protocol Coordinator {
 class SelfDiagnosisCoordinator: Coordinator {
     let navigationController: UINavigationController
     let persisting: Persisting
-    let contactEventRepository: ContactEventRepository
-    let session: Session
+    let contactEventsUploader: ContactEventsUploader
     
     init(
         navigationController: UINavigationController,
         persisting: Persisting,
-        contactEventRepository: ContactEventRepository,
-        session: Session
+        contactEventsUploader: ContactEventsUploader
     ) {
         self.navigationController = navigationController
         self.persisting = persisting
-        self.contactEventRepository = contactEventRepository
-        self.session = session
+        self.contactEventsUploader = contactEventsUploader
     }
     
     var hasHighTemperature: Bool!
@@ -73,8 +70,7 @@ class SelfDiagnosisCoordinator: Coordinator {
         let vc = SubmitSymptomsViewController.instantiate()
         vc.inject(
             persisting: persisting,
-            contactEventRepository: contactEventRepository,
-            session: session,
+            contactEventsUploader: contactEventsUploader,
             hasHighTemperature: hasHighTemperature,
             hasNewCough: hasNewCough
         )

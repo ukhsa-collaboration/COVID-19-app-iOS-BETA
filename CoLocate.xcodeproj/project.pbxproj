@@ -46,7 +46,10 @@
 		09E876BC24510F2C009C2628 /* BluetoothNurseryDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E876BB24510F2C009C2628 /* BluetoothNurseryDouble.swift */; };
 		131AB05C2449D85B002136CA /* ContactEventExpiryHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131AB05B2449D85B002136CA /* ContactEventExpiryHandler.swift */; };
 		131AB05E2449D894002136CA /* ContactEventExpiryHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131AB05D2449D894002136CA /* ContactEventExpiryHandlerTests.swift */; };
-		1347DAF12450915500F2F776 /* LocalNotificationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1347DAF02450915500F2F776 /* LocalNotificationTests.swift */; };
+		134470AA2454D38C001A0AD9 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134470A92454D38C001A0AD9 /* Environment.swift */; };
+		134470AD2454D4DA001A0AD9 /* UpdateDiagnosisCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134470AB2454D4DA001A0AD9 /* UpdateDiagnosisCoordinator.swift */; };
+		134470AE2454D4DA001A0AD9 /* SelfDiagnosisCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134470AC2454D4DA001A0AD9 /* SelfDiagnosisCoordinator.swift */; };
+		134470B02454D614001A0AD9 /* CoughUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134470AF2454D614001A0AD9 /* CoughUpdateViewController.swift */; };
 		138114E42450543600BA46C7 /* SymptomStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138114E32450543600BA46C7 /* SymptomStackView.swift */; };
 		138114E62450796C00BA46C7 /* LocalNotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138114E52450796C00BA46C7 /* LocalNotificationScheduler.swift */; };
 		13F4AE882451EB330082A46D /* QuestionSymptomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F4AE872451EB330082A46D /* QuestionSymptomsViewController.swift */; };
@@ -251,6 +254,10 @@
 		09E876BB24510F2C009C2628 /* BluetoothNurseryDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothNurseryDouble.swift; sourceTree = "<group>"; };
 		131AB05B2449D85B002136CA /* ContactEventExpiryHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventExpiryHandler.swift; sourceTree = "<group>"; };
 		131AB05D2449D894002136CA /* ContactEventExpiryHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventExpiryHandlerTests.swift; sourceTree = "<group>"; };
+		134470A92454D38C001A0AD9 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		134470AB2454D4DA001A0AD9 /* UpdateDiagnosisCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateDiagnosisCoordinator.swift; sourceTree = "<group>"; };
+		134470AC2454D4DA001A0AD9 /* SelfDiagnosisCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfDiagnosisCoordinator.swift; sourceTree = "<group>"; };
+		134470AF2454D614001A0AD9 /* CoughUpdateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoughUpdateViewController.swift; sourceTree = "<group>"; };
 		1347DAF02450915500F2F776 /* LocalNotificationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationTests.swift; sourceTree = "<group>"; };
 		138114E32450543600BA46C7 /* SymptomStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomStackView.swift; sourceTree = "<group>"; };
 		138114E52450796C00BA46C7 /* LocalNotificationScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationScheduler.swift; sourceTree = "<group>"; };
@@ -521,6 +528,7 @@
 		0995ABCD243D034E0057C0D7 /* Status */ = {
 			isa = PBXGroup;
 			children = (
+				134470AF2454D614001A0AD9 /* CoughUpdateViewController.swift */,
 				F758B8C3242CC0EE003AE16D /* Status.storyboard */,
 				214209B52421072C00C7BFF3 /* StatusViewController.swift */,
 				F652F72D244E472E00D97950 /* SymptomsPromptViewController.swift */,
@@ -742,6 +750,7 @@
 				895D9E4924374EB800573D4D /* Routing */,
 				0995ABCD243D034E0057C0D7 /* Status */,
 				F68B89EB243CFEEE00F369A9 /* SelfDiagnosis */,
+				134470A92454D38C001A0AD9 /* Environment.swift */,
 			);
 			path = CoLocate;
 			sourceTree = "<group>";
@@ -857,13 +866,13 @@
 		F68B89EB243CFEEE00F369A9 /* SelfDiagnosis */ = {
 			isa = PBXGroup;
 			children = (
+				134470AC2454D4DA001A0AD9 /* SelfDiagnosisCoordinator.swift */,
+				134470AB2454D4DA001A0AD9 /* UpdateDiagnosisCoordinator.swift */,
 				13F4AE862451EACD0082A46D /* Controls */,
 				F68B89EC243CFF2600F369A9 /* SelfDiagnosis.storyboard */,
 				13F4AE872451EB330082A46D /* QuestionSymptomsViewController.swift */,
 				F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */,
 				F6EEC3B72448DD2400172820 /* SelfDiagnosis.swift */,
-				13095A672452F4910072F19A /* SelfDiagnosisCoordinator.swift */,
-				13095A6B24532D180072F19A /* UpdateDiagnosisCoordinator.swift */,
 			);
 			path = SelfDiagnosis;
 			sourceTree = "<group>";
@@ -1238,12 +1247,12 @@
 				F6F05A282433C55300FF4B72 /* AuthorizationManager.swift in Sources */,
 				89F06B352434AF9D0074C612 /* LogEvent.swift in Sources */,
 				F652F7242449138900D97950 /* SetDiagnosisViewController.swift in Sources */,
-				13095A682452F4910072F19A /* SelfDiagnosisCoordinator.swift in Sources */,
 				F613936E243FA82B003447E8 /* Appearance.swift in Sources */,
 				F6F05A342434344200FF4B72 /* StartNowViewController.swift in Sources */,
 				0997D056243BDEEC0067346C /* RootViewController.swift in Sources */,
 				F72EBDA2243D0892009F9328 /* SecureBroadcastRotationKeyStorage.swift in Sources */,
 				F60497772454A294002B8503 /* LinkingIdViewController.swift in Sources */,
+				134470AA2454D38C001A0AD9 /* Environment.swift in Sources */,
 				21AF36AB241A8E50001A4910 /* BTLEListener.swift in Sources */,
 				21C09A8D24377F5100368203 /* CoreBluetoothExtensions.swift in Sources */,
 				F72EBDA7243D2FD1009F9328 /* BroadcastIdEncrypter.swift in Sources */,
@@ -1269,6 +1278,7 @@
 				89BC79EB2434E047002050F8 /* LogsViewController.swift in Sources */,
 				F72EBD97243C8490009F9328 /* BluetoothStateUserNotifier.swift in Sources */,
 				896BE90F244F07FF00B3687C /* PublicKeyValidator.swift in Sources */,
+				134470AD2454D4DA001A0AD9 /* UpdateDiagnosisCoordinator.swift in Sources */,
 				214209B62421072C00C7BFF3 /* StatusViewController.swift in Sources */,
 				13F4AE882451EB330082A46D /* QuestionSymptomsViewController.swift in Sources */,
 				F758553A24294C8D00CBE1ED /* RequestFactory.swift in Sources */,
@@ -1279,9 +1289,10 @@
 				895D9E4B24374EC900573D4D /* Screen.swift in Sources */,
 				F652F730244E4AAD00D97950 /* DrawerPresentation.swift in Sources */,
 				098ED478242D7D050029B729 /* RegistratonService.swift in Sources */,
+				134470B02454D614001A0AD9 /* CoughUpdateViewController.swift in Sources */,
+				134470AE2454D4DA001A0AD9 /* SelfDiagnosisCoordinator.swift in Sources */,
 				0984E0BD2451014E009C6374 /* BluetoothOffViewController.swift in Sources */,
 				F62F857F2451051C006580A8 /* ContactEventsUploader.swift in Sources */,
-				F68B89F4243D050700F369A9 /* TemperatureViewController.swift in Sources */,
 				09E6E7E4245271A00069DFA8 /* SetupChecker.swift in Sources */,
 				89F06B372434C35A0074C612 /* LoggerMetadata.swift in Sources */,
 				898FE859243B4FE300210775 /* AuthorizationManaging.swift in Sources */,
@@ -1290,7 +1301,6 @@
 				F6EEC3B82448DD2400172820 /* SelfDiagnosis.swift in Sources */,
 				6FC63C31241641B8007C8BF3 /* AppDelegate.swift in Sources */,
 				F600A60224297A8E0038DF57 /* RegistrationRequest.swift in Sources */,
-				13095A6E2454AA170072F19A /* CoughUpdateViewController.swift in Sources */,
 				214209D2242399CF00C7BFF3 /* URLSession.swift in Sources */,
 				89074B83243788AE00D67777 /* UITestResponder.swift in Sources */,
 				21B71F782451788800D0DED7 /* OptionalCoalescingString.swift in Sources */,

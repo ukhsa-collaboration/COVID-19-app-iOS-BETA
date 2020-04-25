@@ -145,8 +145,7 @@ class StatusViewController: UIViewController, Storyboarded {
         let coordinator = SelfDiagnosisCoordinator(
             navigationController: navigationController,
             persisting: persistence,
-            contactEventRepository: contactEventRepo,
-            session: session
+            contactEventsUploader: contactEventsUploader
         )
         coordinator.start()
         navigationController.modalPresentationStyle = .fullScreen
@@ -199,7 +198,7 @@ class StatusViewController: UIViewController, Storyboarded {
                 let symptomsPromptViewController = SymptomsPromptViewController.instantiate()
                 symptomsPromptViewController.modalPresentationStyle = .custom
                 symptomsPromptViewController.transitioningDelegate = drawerPresentationManager
-                symptomsPromptViewController.inject(persistence: persistence, session: session, statusViewController: self)
+                symptomsPromptViewController.inject(persistence: persistence, statusViewController: self)
                 present(symptomsPromptViewController, animated: true)
             }
         }

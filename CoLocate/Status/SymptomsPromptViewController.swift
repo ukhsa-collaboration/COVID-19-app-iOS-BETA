@@ -11,12 +11,10 @@ import UIKit
 class SymptomsPromptViewController: UIViewController, Storyboarded {
     static var storyboardName = "Status"
     var persistence: Persisting!
-    var session: Session!
     var statusViewController: StatusViewController!
         
-    func inject(persistence: Persisting, session: Session, statusViewController: StatusViewController) {
+    func inject(persistence: Persisting, statusViewController: StatusViewController) {
         self.persistence = persistence
-        self.session = session
         self.statusViewController = statusViewController
     }
     
@@ -25,7 +23,6 @@ class SymptomsPromptViewController: UIViewController, Storyboarded {
         let coordinator = UpdateDiagnosisCoordinator(
             navigationController: navigationController,
             persisting: persistence,
-            session: session,
             statusViewController: statusViewController
         )
         coordinator.start()

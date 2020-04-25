@@ -317,7 +317,7 @@
         <!--Symptoms Prompt View Controller-->
         <scene sceneID="B7j-z4-vGV">
             <objects>
-                <viewController id="eQJ-qc-4st" customClass="SymptomsPromptViewController" customModule="CoLocate" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SymptomsPromptViewController" id="eQJ-qc-4st" customClass="SymptomsPromptViewController" customModule="CoLocate" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OiX-Ta-QDy">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="400"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -11,19 +11,16 @@ import UIKit
 class UpdateDiagnosisCoordinator: Coordinator {
     let navigationController: UINavigationController
     let persisting: Persisting
-    let session: Session
     let statusViewController: StatusViewController
     let startDate: Date
     
     init(
         navigationController: UINavigationController,
         persisting: Persisting,
-        session: Session,
         statusViewController: StatusViewController
     ) {
         self.navigationController = navigationController
         self.persisting = persisting
-        self.session = session
         self.statusViewController = statusViewController
         startDate = persisting.selfDiagnosis?.startDate ?? Date()
     }
