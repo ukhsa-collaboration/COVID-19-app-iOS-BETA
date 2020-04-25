@@ -19,7 +19,7 @@ class PostcodeViewController: UIViewController, Storyboarded {
 
     @IBOutlet var postcodeField: UITextField!
     @IBOutlet private var scrollView: UIScrollView!
-    
+
     deinit {
         self.notificationCenter?.removeObserver(self)
     }
@@ -32,7 +32,7 @@ class PostcodeViewController: UIViewController, Storyboarded {
     
     override func viewDidLoad() {
         // Hide the keyboard if the user taps anywhere else
-        self.view .addGestureRecognizer(UITapGestureRecognizer(target: postcodeField, action: #selector(resignFirstResponder)))
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: postcodeField, action: #selector(resignFirstResponder)))
         
         notificationCenter.addObserver(self, selector: #selector(keyboardWasShown(_:)), name: UIResponder.keyboardDidShowNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(keyboardWasHidden(_:)), name: UIResponder.keyboardDidHideNotification, object: nil)
@@ -83,7 +83,7 @@ class PostcodeViewController: UIViewController, Storyboarded {
         
         var visibleRegion = self.view.frame
         visibleRegion.size.height -= kbFrame.height
-        
+
         if !visibleRegion.contains(postcodeField.frame.origin) {
             scrollView.scrollRectToVisible(postcodeField.frame, animated: true)
         }
