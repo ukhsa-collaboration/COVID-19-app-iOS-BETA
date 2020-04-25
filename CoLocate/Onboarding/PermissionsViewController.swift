@@ -18,9 +18,10 @@ class PermissionsViewController: UIViewController, Storyboarded {
     private var remoteNotificationManager: RemoteNotificationManager! = nil
     private var uiQueue: TestableQueue! = nil
     private var continueHandler: (() -> Void)! = nil
-    var bluetoothNursery: BluetoothNursery!
-    @IBOutlet private var continueButton: PrimaryButton!
-    private var isRequestingPermissions = false
+    private var bluetoothNursery: BluetoothNursery!
+    
+    @IBOutlet var continueButton: PrimaryButton!
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
     
     func inject(
         authManager: AuthorizationManaging,
@@ -38,6 +39,7 @@ class PermissionsViewController: UIViewController, Storyboarded {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        activityIndicator.isHidden = true
         
         if authManager.bluetooth == .allowed {
             // If we get here, it most likely means that the user just went through the following flow:
@@ -54,8 +56,9 @@ class PermissionsViewController: UIViewController, Storyboarded {
     }
 
     @IBAction func didTapContinue() {
-        guard !isRequestingPermissions else { return }
-        isRequestingPermissions = true
+        continueButton.isHidden = true
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
         
         #if targetEnvironment(simulator)
         let bluetoothAuth = BluetoothAuthorizationStatus.allowed

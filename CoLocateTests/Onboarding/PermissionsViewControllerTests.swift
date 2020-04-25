@@ -93,13 +93,14 @@ class PermissionsViewControllerTests: TestCase {
 
         parentViewControllerForTests.viewControllers = [vc]
         XCTAssertNotNil(vc.view)
+        XCTAssertTrue(vc.activityIndicator.isHidden)
+        XCTAssertFalse(vc.continueButton.isHidden)
 
         vc.didTapContinue()
         
-        XCTAssertNotNil(authManagerDouble.notificationsCompletion)
-        authManagerDouble.notificationsCompletion = nil
-        vc.didTapContinue()
-        XCTAssertNil(authManagerDouble.notificationsCompletion)
+        XCTAssertFalse(vc.activityIndicator.isHidden)
+        XCTAssertTrue(vc.activityIndicator.isAnimating)
+        XCTAssertTrue(vc.continueButton.isHidden)
     }
     
     func testBluetoothAlreadyDetermined() {
