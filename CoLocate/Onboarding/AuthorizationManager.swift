@@ -17,7 +17,7 @@ class AuthorizationManager: AuthorizationManaging {
             case .notDetermined:
                 return .notDetermined
             case .restricted:
-                fatalError()
+                return .denied
             case .denied:
                 return .denied
             case .allowedAlways:
@@ -30,7 +30,7 @@ class AuthorizationManager: AuthorizationManaging {
             case .notDetermined:
                 return .notDetermined
             case .restricted:
-                fatalError()
+                return .denied
             case .denied:
                 return .denied
             case .authorized:
