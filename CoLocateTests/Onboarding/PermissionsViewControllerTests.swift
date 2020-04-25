@@ -157,4 +157,5 @@ class PermissionsViewControllerTests: TestCase {
 fileprivate struct DummyBTLEListener: BTLEListener {
     func start(stateDelegate: BTLEListenerStateDelegate?, delegate: BTLEListenerDelegate?) { }
     func connect(_ peripheral: BTLEPeripheral) { }
+    func isHealthy() -> Bool { return false }
 }

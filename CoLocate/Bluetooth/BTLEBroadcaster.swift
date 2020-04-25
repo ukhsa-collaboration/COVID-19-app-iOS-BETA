@@ -14,6 +14,8 @@ import Logging
 protocol BTLEBroadcaster {
     func sendKeepalive(value: Data)
     func updateIdentity()
+
+    func isHealthy() -> Bool
 }
 
 class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDelegate {
@@ -209,6 +211,18 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
         peripheral.respond(to: request, withResult: .success)
     }
 
+    // MARK: - Healthcheck
+    func isHealthy() -> Bool {
+        guard peripheral != nil else { return false }
+        guard identityCharacteristic != nil else { return false }
+        guard keepaliveCharacteristic != nil else { return false }
+
+        guard idGenerator.broadcastIdentifier() != nil else { return false }
+        guard peripheral!.isAdvertising else { return false }
+        guard peripheral!.state == .poweredOn else { return false }
+
+        return true
+    }
 }
 
 fileprivate let logger = Logger(label: "BTLE")

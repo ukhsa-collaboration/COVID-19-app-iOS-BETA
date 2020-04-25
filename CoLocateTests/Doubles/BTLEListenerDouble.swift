@@ -18,4 +18,8 @@ class BTLEListenerDouble: BTLEListener {
     func connect(_ peripheral: BTLEPeripheral) {
         self.connectedPeripheral = peripheral
     }
+
+    func isHealthy() -> Bool {
+        return false
+    }
 }

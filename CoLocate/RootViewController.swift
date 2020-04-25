@@ -170,6 +170,7 @@ class RootViewController: UIViewController {
             let debugVC = navVC.viewControllers.first as? DebugViewController else { return }
         
         debugVC.inject(persisting: persistence,
+                       bluetoothNursery: bluetoothNursery,
                        contactEventRepository: bluetoothNursery.contactEventRepository,
                        contactEventPersister: bluetoothNursery.contactEventPersister,
                        contactEventsUploader: contactEventsUploader)

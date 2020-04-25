@@ -181,6 +181,10 @@ private class NoOpBroadcaster: BTLEBroadcaster {
     
     func sendKeepalive(value: Data) {
     }
+
+    func isHealthy() -> Bool {
+        return false
+    }
 }
 
 #endif

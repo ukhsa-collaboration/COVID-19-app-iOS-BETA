@@ -20,7 +20,7 @@ protocol BluetoothNursery {
     func startBluetooth(registration: Registration?)
 }
 
-class ConcreteBluetoothNursery: BluetoothNursery, PersistenceDelegate {
+@objc class ConcreteBluetoothNursery: NSObject, BluetoothNursery, PersistenceDelegate {
     
     static let centralRestoreIdentifier: String = "SonarCentralRestoreIdentifier"
     static let peripheralRestoreIdentifier: String = "SonarPeripheralRestoreIdentifier"
@@ -54,6 +54,8 @@ class ConcreteBluetoothNursery: BluetoothNursery, PersistenceDelegate {
 
         contactEventExpiryHandler = ContactEventExpiryHandler(notificationCenter: notificationCenter,
                                                               contactEventRepository: contactEventRepository)
+
+        super.init()
         self.persistence.delegate = self
     }
 
@@ -94,6 +96,22 @@ class ConcreteBluetoothNursery: BluetoothNursery, PersistenceDelegate {
         broadcaster?.updateIdentity()
     }
 
+    // MARK: - Health
+
+    @objc dynamic public var isHealthy: Bool {
+        guard listener != nil else { return false }
+        guard broadcaster != nil else { return false }
+        guard userNotifier != nil else { return false }
+        guard peripheral != nil else { return false }
+        guard central != nil else { return false }
+        guard stateObserver != nil else { return false }
+        guard userNotifier != nil else { return false }
+
+        guard broadcaster!.isHealthy() else { return false }
+        guard listener!.isHealthy() else { return false }
+
+        return true
+    }
 }
 
 // MARK: - Logging

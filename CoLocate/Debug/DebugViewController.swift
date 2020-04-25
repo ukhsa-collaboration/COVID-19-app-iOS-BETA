@@ -9,6 +9,7 @@
 import UIKit
 
 #if DEBUG || INTERNAL
+
 class DebugViewController: UITableViewController, Storyboarded {
     static let storyboardName = "Debug"
 
@@ -19,14 +20,23 @@ class DebugViewController: UITableViewController, Storyboarded {
     private var contactEventRepository: ContactEventRepository!
     private var contactEventPersister: ContactEventPersister!
     private var contactEventsUploader: ContactEventsUploader!
+
+    @objc private var bluetoothNursery: ConcreteBluetoothNursery!
+    var observation: NSKeyValueObservation?
+
+    @IBOutlet weak var bluetoothStatus: UIView!
+    @IBOutlet weak var bluetoothImage: UIImageView!
+    var fillLayer: CAShapeLayer!
     
     func inject(
         persisting: Persisting,
+        bluetoothNursery: BluetoothNursery,
         contactEventRepository: ContactEventRepository,
         contactEventPersister: ContactEventPersister,
         contactEventsUploader: ContactEventsUploader
     ) {
         self.persisting = persisting
+        self.bluetoothNursery = bluetoothNursery as? ConcreteBluetoothNursery
         self.contactEventRepository = contactEventRepository
         self.contactEventPersister = contactEventPersister
         self.contactEventsUploader = contactEventsUploader
@@ -35,25 +45,57 @@ class DebugViewController: UITableViewController, Storyboarded {
     override func viewDidLoad() {
         potentiallyExposedSwitch.isOn = persisting.potentiallyExposed
 
-
         let build = Bundle.main.infoDictionary?["CFBundleVersion"] ?? "unknown"
         let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] ?? "unknown"
         versionBuildLabel.text = "Version \(version) (build \(build))"
+
+        fillLayer = CAShapeLayer()
+
+        if bluetoothNursery.isHealthy {
+            self.setupAnimation()
+        } else {
+            self.removeAnimation()
+        }
+
+        observation = observe(\.bluetoothNursery.isHealthy, options: [.old, .new]) { [weak self] object, _ in
+            guard let self = self else { return }
+
+            if self.bluetoothNursery.isHealthy {
+                self.setupAnimation()
+            } else {
+                self.removeAnimation()
+            }
+        }
     }
-    
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        bluetoothImage.addObserver(self, forKeyPath: #keyPath(UIView.bounds), options: .new, context: nil)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        bluetoothImage.removeObserver(self, forKeyPath: #keyPath(UIView.bounds))
+    }
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
 
         switch (indexPath.section, indexPath.row) {
         case (0, 0):
+            break
+
+        case (0, 1):
             persisting.clear()
             try! SecureBroadcastRotationKeyStorage().clear()
             show(title: "Cleared", message: "Registration and diagnosis data has been cleared. Please stop and re-start the application.")
 
-        case (0, 1):
+        case (0, 2):
             break
 
-        case (0, 2), (0, 3):
+        case (0, 3), (0, 4):
             break
 
         case (1, 0):
@@ -153,7 +195,77 @@ class DebugViewController: UITableViewController, Storyboarded {
     @IBAction func unwindFromSetDiagnosis(unwindSegue: UIStoryboardSegue) {
     }
 
+    // MARK: - Bluetooth status animation
+
+    private func setupAnimation() {
+        fillLayer.path = computeProperCGPath()
+        fillLayer.fillRule = .evenOdd;
+        fillLayer.fillColor = UIColor.green.cgColor
+        fillLayer.opacity = 0.4;
+        bluetoothImage.layer.addSublayer(fillLayer)
+
+        let scaleAnimation = CABasicAnimation(keyPath: "transform")
+        var tr = CATransform3DIdentity;
+        tr = CATransform3DTranslate(tr, bluetoothImage.bounds.size.width / 2, bluetoothImage.bounds.size.height / 2, 0);
+        tr = CATransform3DScale(tr, 3, 3, 1);
+        tr = CATransform3DTranslate(tr, -bluetoothImage.bounds.size.width / 2, -bluetoothImage.bounds.size.height / 2, 0);
+        scaleAnimation.toValue = NSValue(caTransform3D: tr)
+
+        let opacityAnimation = CABasicAnimation(keyPath: "opacity")
+        opacityAnimation.duration = 1.8
+        opacityAnimation.fromValue = 0.4
+        opacityAnimation.toValue = 0
+
+        let animations = [
+            scaleAnimation,
+            opacityAnimation,
+        ]
+
+        let animationGroup = CAAnimationGroup()
+        animationGroup.duration = 1.8
+        animationGroup.repeatCount = .infinity
+        animationGroup.animations = animations;
+
+        fillLayer.add(animationGroup, forKey: "pulse")
+    }
+
+    private func removeAnimation() {
+        fillLayer.removeAnimation(forKey: "pulse")
+
+        // TODO: replace the image with a ☠️
+    }
+
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        guard keyPath == #keyPath(UIView.bounds) else { return }
+
+        fillLayer.path = computeProperCGPath()
+    }
+
+    private func computeProperCGPath() -> CGPath {
+        let size = 30
+        let radius = 25
+
+        let centerX: Int = Int(bluetoothImage.frame.size.width)  / 2 - size / 2
+        let centerY: Int = Int(bluetoothImage.frame.size.height) / 2 - size / 2
+
+        let path = UIBezierPath(roundedRect: CGRect(x: centerX,
+                                                    y: centerY,
+                                                    width: size,
+                                                    height: size),
+                                                    cornerRadius: CGFloat(radius))
+        let circlePath = UIBezierPath(roundedRect: CGRect(x: centerX + size / 2 - radius / 2,
+                                                          y: centerY + size / 2 - radius / 2,
+                                                          width: radius,
+                                                          height: radius),
+                                                          cornerRadius: CGFloat(radius))
+        path.append(circlePath)
+        path.usesEvenOddFillRule = true
+
+        return path.cgPath
+    }
 }
+
+// MARK: - Testing push notifications
 
 class TestPushRequest: SecureRequest, Request {
     
@@ -174,4 +286,5 @@ class TestPushRequest: SecureRequest, Request {
     func parse(_ data: Data) throws -> Void {
     }
 }
+
 #endif

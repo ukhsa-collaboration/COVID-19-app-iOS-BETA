@@ -28,6 +28,7 @@ protocol BTLEListenerStateDelegate {
 
 protocol BTLEListener {
     func start(stateDelegate: BTLEListenerStateDelegate?, delegate: BTLEListenerDelegate?)
+    func isHealthy() -> Bool
 }
 
 class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CBPeripheralDelegate {
@@ -263,4 +264,11 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
         keepaliveTimer?.resume()
     }
 
+    func isHealthy() -> Bool {
+        guard keepaliveTimer != nil else { return false }
+        guard stateDelegate != nil else { return false }
+        guard delegate != nil else { return false }
+
+        return true
+    }
 }
