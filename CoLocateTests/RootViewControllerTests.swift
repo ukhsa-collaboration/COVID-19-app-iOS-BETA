@@ -203,6 +203,7 @@ fileprivate func makeRootVC(
         bluetoothNursery: bluetoothNursery,
         session: SessionDouble(),
         contactEventsUploader: ContactEventsUploaderDouble(),
+        linkingIdManager: LinkingIdManagerDouble.make(),
         uiQueue: QueueDouble()
     )
     return vc

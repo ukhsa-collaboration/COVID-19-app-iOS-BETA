@@ -11,13 +11,16 @@
         <!--Linking Id View Controller-->
         <scene sceneID="Qru-fo-gMt">
             <objects>
-                <viewController id="2DV-fd-FjU" customClass="LinkingIdViewController" customModule="CoLocate" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LinkingIdViewController" id="2DV-fd-FjU" customClass="LinkingIdViewController" customModule="CoLocate" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1xp-lJ-Mpr">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="222"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="YNb-EQ-dKb">
+                                <rect key="frame" x="374" y="117" width="20" height="20"/>
+                            </activityIndicatorView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="Isf-ek-wrS">
-                                <rect key="frame" x="20" y="64" width="374" height="330"/>
+                                <rect key="frame" x="20" y="64" width="374" height="138"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="App ID" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cjQ-x6-Kok">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="20.5"/>
@@ -25,47 +28,52 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="da7-iV-mge">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fetching App ID" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JMq-Gh-7Cj">
                                         <rect key="frame" x="0.0" y="52.5" width="374" height="20.5"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fetching App ID" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JMq-Gh-7Cj">
-                                                <rect key="frame" x="0.0" y="0.0" width="322" height="20.5"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="YNb-EQ-dKb">
-                                                <rect key="frame" x="354" y="0.0" width="20" height="20.5"/>
-                                            </activityIndicatorView>
-                                        </subviews>
-                                    </stackView>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error fetching App ID" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwU-V9-8IW">
+                                        <rect key="frame" x="0.0" y="89" width="374" height="0.0"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ajc-5y-6oC" customClass="ButtonWithDynamicType" customModule="CoLocate" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="105" width="374" height="225"/>
+                                        <rect key="frame" x="0.0" y="105" width="374" height="33"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <state key="normal" title="Close"/>
+                                        <connections>
+                                            <segue destination="IWe-bN-JgZ" kind="unwind" unwindAction="unwindFromLinkingIdWithUnwindSegue:" id="Zhh-Zk-59a"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="YNb-EQ-dKb" firstAttribute="trailing" secondItem="JMq-Gh-7Cj" secondAttribute="trailing" id="PUc-L0-qb3"/>
                             <constraint firstItem="L7M-kP-6XK" firstAttribute="trailing" secondItem="Isf-ek-wrS" secondAttribute="trailing" constant="20" id="U4M-us-10O"/>
                             <constraint firstItem="Isf-ek-wrS" firstAttribute="top" secondItem="L7M-kP-6XK" secondAttribute="top" constant="20" id="acu-EU-y75"/>
                             <constraint firstItem="Isf-ek-wrS" firstAttribute="leading" secondItem="L7M-kP-6XK" secondAttribute="leading" constant="20" id="bE6-Iv-YHN"/>
+                            <constraint firstItem="YNb-EQ-dKb" firstAttribute="centerY" secondItem="JMq-Gh-7Cj" secondAttribute="centerY" id="xO0-3Y-LWF"/>
                             <constraint firstItem="L7M-kP-6XK" firstAttribute="bottom" secondItem="Isf-ek-wrS" secondAttribute="bottom" constant="20" id="yw6-Dp-f70"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="L7M-kP-6XK"/>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="414" height="414"/>
+                    <size key="freeformSize" width="414" height="222"/>
                     <connections>
                         <outlet property="activityIndicator" destination="YNb-EQ-dKb" id="61Q-CF-I1q"/>
+                        <outlet property="errorLabel" destination="hwU-V9-8IW" id="sbD-2I-Hqk"/>
                         <outlet property="linkingIdLabel" destination="JMq-Gh-7Cj" id="P0q-oa-XaA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3rx-BK-2al" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="IWe-bN-JgZ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="157" y="98"/>
+            <point key="canvasLocation" x="156.52173913043478" y="97.767857142857139"/>
         </scene>
     </scenes>
 </document>

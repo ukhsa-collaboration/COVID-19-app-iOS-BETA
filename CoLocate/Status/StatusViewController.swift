@@ -20,6 +20,7 @@ class StatusViewController: UIViewController, Storyboarded {
     private var registrationService: RegistrationService!
     private var notificationCenter: NotificationCenter!
     private var contactEventsUploader: ContactEventsUploader!
+    private var linkingIdManager: LinkingIdManager!
 
     private lazy var drawerPresentationManager = DrawerPresentation()
     
@@ -36,14 +37,13 @@ class StatusViewController: UIViewController, Storyboarded {
     @IBOutlet weak var readLatestAdviceLabel: UILabel!
 
     @IBOutlet weak var howAreYouFeelingView: UIView!
-    @IBOutlet weak var feelHealthyView: UIView!
-    @IBOutlet weak var feelHealthyTitleLabel: UILabel!
-    @IBOutlet weak var feelHealthySubtitleLabel: UILabel!
     @IBOutlet weak var notRightView: UIView!
     @IBOutlet weak var notRightTitleLabel: UILabel!
     @IBOutlet weak var notRightSubtitleLabel: UILabel!
+    @IBOutlet weak var noSymptomsLabel: UILabel!
 
-    @IBOutlet weak var nextStepsView: UIView!
+    @IBOutlet weak var linkingIdView: UIStackView!
+    @IBOutlet weak var linkingIdButton: ButtonWithDynamicType!
 
     var diagnosis: SelfDiagnosis? {
         didSet {
@@ -73,12 +73,14 @@ class StatusViewController: UIViewController, Storyboarded {
         persistence: Persisting,
         registrationService: RegistrationService,
         contactEventsUploader: ContactEventsUploader,
-        notificationCenter: NotificationCenter
+        notificationCenter: NotificationCenter,
+        linkingIdManager: LinkingIdManager
     ) {
         self.persistence = persistence
         self.registrationService = registrationService
         self.contactEventsUploader = contactEventsUploader
         self.notificationCenter = notificationCenter
+        self.linkingIdManager = linkingIdManager
     }
 
     override func viewDidLoad() {
@@ -93,10 +95,6 @@ class StatusViewController: UIViewController, Storyboarded {
             UITapGestureRecognizer(target: self, action: #selector(diagnosisStatusTapped))
         )
 
-        feelHealthyView.layer.cornerRadius = 16
-        feelHealthyTitleLabel.textColor = UIColor(named: "NHS Link")
-        feelHealthySubtitleLabel.textColor = UIColor(named: "NHS Secondary Text")
-
         notRightView.layer.cornerRadius = 16
         notRightTitleLabel.textColor = UIColor(named: "NHS Link")
         notRightSubtitleLabel.textColor = UIColor(named: "NHS Secondary Text")
@@ -105,7 +103,13 @@ class StatusViewController: UIViewController, Storyboarded {
             UITapGestureRecognizer(target: self, action: #selector(notRightTapped))
         )
 
-        nextStepsView.isHidden = true
+        noSymptomsLabel.textColor = UIColor(named: "NHS Secondary Text")
+
+        #if PILOT
+        linkingIdView.isHidden = false
+        #else
+        linkingIdView.isHidden = true
+        #endif
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -145,6 +149,14 @@ class StatusViewController: UIViewController, Storyboarded {
         present(selfDiagnosis, animated: true)
     }
 
+    @IBAction func linkingIdButtonTapped(_ sender: ButtonWithDynamicType) {
+        let vc = LinkingIdViewController.instantiate()
+        vc.inject(persisting: persistence, linkingIdManager: linkingIdManager)
+        vc.modalPresentationStyle = .custom
+        vc.transitioningDelegate = drawerPresentationManager
+        present(vc, animated: true)
+    }
+
     @IBAction func nhs111Tapped(_ sender: UIButton) {
         UIApplication.shared.open(URL(string: "https://111.nhs.uk/covid-19/")!)
     }
@@ -157,6 +169,9 @@ class StatusViewController: UIViewController, Storyboarded {
         diagnosis = persistence.selfDiagnosis
     }
 
+    @IBAction func unwindFromLinkingId(unwindSegue: UIStoryboardSegue) {
+    }
+
     private func renderStatus() {
         guard view != nil else { return }
         
@@ -165,17 +180,14 @@ class StatusViewController: UIViewController, Storyboarded {
                 diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Highlight")
                 diagnosisTitleLabel.text = "Keep following the current government advice".localized
                 howAreYouFeelingView.isHidden = false
-                nextStepsView.isHidden = true
             case .amber:
                 diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
                 diagnosisTitleLabel.text = "You have been near someone who has coronavirus symptoms".localized
                 howAreYouFeelingView.isHidden = false
-                nextStepsView.isHidden = true
             case .red:
                 diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Error")
                 diagnosisTitleLabel.text = "Your symptoms indicate you may have coronavirus".localized
                 howAreYouFeelingView.isHidden = true
-                nextStepsView.isHidden = false
         }
         
         symptomStackView.symptoms = diagnosis?.symptoms

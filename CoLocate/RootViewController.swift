@@ -36,6 +36,7 @@ class RootViewController: UIViewController {
         bluetoothNursery: BluetoothNursery,
         session: Session,
         contactEventsUploader: ContactEventsUploader,
+        linkingIdManager: LinkingIdManager,
         uiQueue: TestableQueue
     ) {
         self.persistence = persistence
@@ -53,7 +54,8 @@ class RootViewController: UIViewController {
             persistence: persistence,
             registrationService: registrationService,
             contactEventsUploader: contactEventsUploader,
-            notificationCenter: notificationCenter
+            notificationCenter: notificationCenter,
+            linkingIdManager: linkingIdManager
         )
         
         notificationCenter.addObserver(self, selector: #selector(applicationDidBecomeActive(_:)), name: UIApplication.didBecomeActiveNotification, object: nil)

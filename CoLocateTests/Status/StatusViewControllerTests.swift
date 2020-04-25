@@ -122,7 +122,8 @@ fileprivate func makeViewController(
         persistence: persistence,
         registrationService: registrationService,
         contactEventsUploader: ContactEventsUploaderDouble(),
-        notificationCenter: notificationCenter
+        notificationCenter: notificationCenter,
+        linkingIdManager: LinkingIdManagerDouble.make()
     )
     XCTAssertNotNil(vc.view)
     vc.viewWillAppear(false)

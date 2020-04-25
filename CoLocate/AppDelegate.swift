@@ -55,6 +55,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         return URLSession(configuration: config, delegate: delegate, delegateQueue: nil)
     }
 
+    lazy var linkingIdManager: LinkingIdManager = LinkingIdManager(
+        notificationCenter: notificationCenter,
+        persisting: persistence,
+        session: urlSession
+    )
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         #if DEBUG
         if let window = UITestResponder.makeWindowForTesting() {
@@ -83,6 +89,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             bluetoothNursery: bluetoothNursery,
             session: urlSession,
             contactEventsUploader: contactEventsUploader,
+            linkingIdManager: linkingIdManager,
             uiQueue: DispatchQueue.main
         )
         
