@@ -17,8 +17,17 @@ class PostcodeViewController: UIViewController, Storyboarded {
     private var notificationCenter: NotificationCenter! = nil
     private var continueHandler: (() -> Void)! = nil
 
-    @IBOutlet var postcodeField: UITextField!
     @IBOutlet private var scrollView: UIScrollView!
+    @IBOutlet var postcodeField: UITextField!
+    @IBOutlet var continueAccessoryView: UIView!
+
+    override var inputAccessoryView: UIView {
+        return continueAccessoryView
+    }
+
+    override var canBecomeFirstResponder: Bool {
+        return true
+    }
 
     deinit {
         self.notificationCenter?.removeObserver(self)
@@ -80,8 +89,8 @@ class PostcodeViewController: UIViewController, Storyboarded {
         let insets = UIEdgeInsets(top: 0, left: 0, bottom: kbFrame.size.height, right: 0)
         scrollView.contentInset = insets
         scrollView.scrollIndicatorInsets = insets
-        
-        var visibleRegion = self.view.frame
+
+        var visibleRegion = view.frame
         visibleRegion.size.height -= kbFrame.height
 
         if !visibleRegion.contains(postcodeField.frame.origin) {
