@@ -90,50 +90,44 @@ class DebugViewController: UITableViewController, Storyboarded {
         tableView.deselectRow(at: indexPath, animated: false)
 
         switch (indexPath.section, indexPath.row) {
-        case (0, 0):
+        case (0, _):
             break
 
-        case (0, 1):
-        break
-
-        case (0, 2):
-        break
-
-        case (0, 3):
+        case (1, 0):
             persisting.clear()
             try! SecureBroadcastRotationKeyStorage().clear()
             show(title: "Cleared", message: "Registration and diagnosis data has been cleared. Please stop and re-start the application.")
 
-        case (0, 2):
+        case (1, 1):
             break
 
-        case (0, 3), (0, 4):
+        case (1, 2), (1, 3):
             break
 
-        case (1, 0):
+        case (2, 0):
             let uuid = UUID()
             contactEventPersister.items[uuid] = ContactEvent(encryptedRemoteContactId: uuid.data, timestamp: Date(), rssiValues: [], rssiIntervals: [], duration: 1)
             show(title: "Conatact", message: "Dummy contact event recorded.")
             
-        case (1, 1):
+        case (2, 1):
             let uuid = UUID()
             contactEventPersister.items[uuid] = ContactEvent(encryptedRemoteContactId: uuid.data, timestamp: Date(timeIntervalSinceNow: -2592000), rssiValues: [], rssiIntervals: [], duration: 1)
             show(title: "Expired Conatact", message: "Expired Dummy contact event recorded.")
             
-        case (1, 2):
+        case (2, 2):
             contactEventRepository.reset()
             show(title: "Cleared", message: "All contact events cleared.")
             
-        case (1, 3):
+        case (2, 3):
             let notificationCenter = NotificationCenter.default
             notificationCenter.post(name: UIApplication.significantTimeChangeNotification, object: nil)
             show(title: "Cleared", message: "All expired contact events cleared.")
 
-        case (1, 4):
+        case (2, 4):
             try! contactEventsUploader.upload()
             show(title: "Upload Initiated", message: "Contact events uploading.")
 
-        case (2, 0):
+        case (3, 0):
             do {
                 guard let registration = persisting.registration else {
                     throw NSError()
@@ -152,20 +146,26 @@ class DebugViewController: UITableViewController, Storyboarded {
                 show(title: "Failed", message: "Couldn't get sonarId, has this device completed registration?")
             }
 
-        case (3, 0):
+        case (4, 0):
             #if DEBUG
-            let id = Environment.debug!.registrationId
-            let secretKey = Environment.debug!.registrationSecretKey
-            let broadcastKeyS = Environment.debug!.registrationBroadcastRotationKey
+            guard let debugInfo = Environment.debug else {
+                show(title: "Failed", message: "Could not find known good registration info. This build was not configured with this feature.")
+                return
+            }
+
+            let id = debugInfo.registrationId
+            let secretKey = debugInfo.registrationSecretKey
+            let broadcastKeyS = debugInfo.registrationBroadcastRotationKey
             let broadcastKey = try! BroadcastRotationKeyConverter().fromData(Data(base64Encoded: broadcastKeyS)!)
             persisting.registration = Registration(id: UUID(uuidString: id)!, secretKey: secretKey.data(using: .utf8)!, broadcastRotationKey: broadcastKey)
+
             #else
-            let alert = UIAlertController(title: "Unavailable", message: "This dangerous action is only available in debug builds.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-            present(alert, animated: true, completion: nil)
+
+            show(title: "Unavailable", "This dangerous action is only available in debug builds.")
+
             #endif
 
-        case (4, 0):
+        case (5, 0):
             do {
                 let fileManager = FileManager()
                 let documentsFolder = try fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
@@ -177,7 +177,7 @@ class DebugViewController: UITableViewController, Storyboarded {
                 present(viewController, animated: true, completion: nil)
             }
 
-        case (5, 0):
+        case (6, 0):
             break
 
         default:
