@@ -47,10 +47,6 @@ class BroadcastIdEncypterTests: XCTestCase {
     }
 
     func test_ciphertext_contains_expected_data() throws {
-        #if targetEnvironment(simulator)
-        throw XCTSkip("Cannot run this test in the simulator")
-        #endif
-
         guard let (serverPublicKey, serverPrivateKey) = generateKeyPair() else {
             XCTFail("Expected to generate a keypair for this test but it failed")
             return
@@ -123,7 +119,6 @@ class BroadcastIdEncypterTests: XCTestCase {
         let attributes: [String: Any] = [
           kSecAttrKeyType as String:            kSecAttrKeyTypeECSECPrimeRandom,
           kSecAttrKeySizeInBits as String:      256,
-          kSecAttrTokenID as String:            kSecAttrTokenIDSecureEnclave,
           kSecPrivateKeyAttrs as String: [
             kSecAttrIsPermanent as String:      true,
             kSecAttrApplicationTag as String:   "this.was.a.good.test",
