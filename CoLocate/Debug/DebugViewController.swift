@@ -161,7 +161,7 @@ class DebugViewController: UITableViewController, Storyboarded {
 
             #else
 
-            show(title: "Unavailable", "This dangerous action is only available in debug builds.")
+            show(title: "Unavailable", message: "This dangerous action is only available in debug builds.")
 
             #endif
 
