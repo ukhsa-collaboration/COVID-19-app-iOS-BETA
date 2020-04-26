@@ -133,6 +133,9 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
                 if characteristic.uuid == ConcreteBTLEBroadcaster.keepaliveCharacteristicUUID {
                     logger.info("    retaining restored keepalive characteristic \(characteristic)")
                     self.keepaliveCharacteristic = (characteristic as! CBMutableCharacteristic)
+                } else if characteristic.uuid == ConcreteBTLEBroadcaster.sonarIdCharacteristicUUID {
+                    logger.info("    retaining restore identity characteristic \(characteristic)")
+                    self.identityCharacteristic = (characteristic as! CBMutableCharacteristic)
                 } else {
                     logger.info("    restored characteristic \(characteristic)")
                 }
