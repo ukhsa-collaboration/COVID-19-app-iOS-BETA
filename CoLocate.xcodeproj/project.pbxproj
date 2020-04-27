@@ -764,8 +764,8 @@
 				F758B8D0242CC661003AE16D /* Registration */,
 				F758B8BC242CB83B003AE16D /* Resources */,
 				895D9E4924374EB800573D4D /* Routing */,
-				0995ABCD243D034E0057C0D7 /* Status */,
 				F68B89EB243CFEEE00F369A9 /* SelfDiagnosis */,
+				0995ABCD243D034E0057C0D7 /* Status */,
 			);
 			path = CoLocate;
 			sourceTree = "<group>";
