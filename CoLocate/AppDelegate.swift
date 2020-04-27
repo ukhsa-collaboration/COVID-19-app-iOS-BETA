@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     let notificationCenter = NotificationCenter.default
     let userNotificationCenter = UNUserNotificationCenter.current()
+    let trustValidator = DefaultTrustValidating()
     let urlSession = URLSession.make()
     let authorizationManager = AuthorizationManager()
 
@@ -46,6 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     lazy var contactEventsUploader: ContactEventsUploader = ContactEventsUploader(
         persisting: persistence,
         contactEventRepository: bluetoothNursery.contactEventRepository,
+        trustValidator: trustValidator,
         makeSession: makeBackgroundSession
     )
 

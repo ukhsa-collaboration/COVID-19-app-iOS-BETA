@@ -13,6 +13,7 @@ class ContactEventsUploaderDouble: ContactEventsUploader {
         super.init(
             persisting: PersistenceDouble(),
             contactEventRepository: ContactEventRepositoryDouble(),
+            trustValidator: DefaultTrustValidating(),
             makeSession: { _, _ in SessionDouble() }
         )
     }

@@ -277,3 +277,20 @@ class ContactEventsUploaderTests: XCTestCase {
     }
 
 }
+
+fileprivate extension ContactEventsUploader {
+    
+    convenience init(
+        persisting: Persisting,
+        contactEventRepository: ContactEventRepository,
+        makeSession: (String, URLSessionTaskDelegate) -> Session
+    ) {
+        self.init(
+            persisting: persisting,
+            contactEventRepository: contactEventRepository,
+            trustValidator: DefaultTrustValidating(),
+            makeSession: makeSession
+        )
+    }
+    
+}

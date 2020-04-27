@@ -26,7 +26,7 @@ class ContactEventsUploader {
 
     static let backgroundIdentifier = "ContactEventUploader"
 
-    let sessionDelegate: ContactEventsUploaderSessionDelegate = ContactEventsUploaderSessionDelegate(validator: DefaultTrustValidating())
+    let sessionDelegate: ContactEventsUploaderSessionDelegate
 
     let persisting: Persisting
     let contactEventRepository: ContactEventRepository
@@ -35,10 +35,12 @@ class ContactEventsUploader {
     init(
         persisting: Persisting,
         contactEventRepository: ContactEventRepository,
+        trustValidator: TrustValidating,
         makeSession: (String, URLSessionTaskDelegate) -> Session
     ) {
         self.persisting = persisting
         self.contactEventRepository = contactEventRepository
+        self.sessionDelegate = ContactEventsUploaderSessionDelegate(validator: trustValidator)
         self.session = makeSession(ContactEventsUploader.backgroundIdentifier, sessionDelegate)
 
         sessionDelegate.contactEventsUploader = self
