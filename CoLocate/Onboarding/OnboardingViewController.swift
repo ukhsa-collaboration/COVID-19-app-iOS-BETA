@@ -43,20 +43,16 @@ class OnboardingViewController: UINavigationController, Storyboarded {
                                                                   continueHandler: updateState)
     }
 
+    @IBAction func unwindFromPermissionsDenied(unwindSegue: UIStoryboardSegue) {
+        updateState()
+    }
+    
     func updateState() {
         onboardingCoordinator.state { [weak self] state in
             guard let self = self else { return }
 
             self.uiQueue.async { self.handle(state: state) }
         }
-    }
-
-    @IBAction func unwindFromPermissionsDenied(unwindSegue: UIStoryboardSegue) {
-        updateState()
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        super.prepare(for: segue, sender: sender)
     }
 
     private func handle(state: OnboardingCoordinator.State) {
