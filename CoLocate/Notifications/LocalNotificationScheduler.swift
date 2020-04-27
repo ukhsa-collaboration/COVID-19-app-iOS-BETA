@@ -8,7 +8,11 @@
 
 import Foundation
 
-class LocalNotifcationScheduler {
+protocol Scheduler {
+    func scheduleDiagnosisNotification(days: Double)
+}
+
+class LocalNotifcationScheduler: Scheduler {
     
     let userNotificationCenter: UserNotificationCenter
     init(userNotificationCenter: UserNotificationCenter) {
