@@ -57,7 +57,7 @@ class StartDateViewController: UIViewController {
 
     var dateOptions: [Date] = {
         let today = Date()
-        return (-6...0).compactMap { Calendar.current.date(byAdding: .day, value: $0, to: today) }.reversed()
+        return (-27...0).compactMap { Calendar.current.date(byAdding: .day, value: $0, to: today) }.reversed()
     }()
 
     override func viewDidLoad() {

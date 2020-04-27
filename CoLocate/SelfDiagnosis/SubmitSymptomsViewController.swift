@@ -18,15 +18,18 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
     private var contactEventsUploader: ContactEventsUploader!
     private var symptoms: Set<Symptom>!
     private var startDate: Date!
+    private var statusViewController: StatusViewController!
 
     func inject(
         persisting: Persisting,
         contactEventsUploader: ContactEventsUploader,
         symptoms: Set<Symptom>,
-        startDate: Date
+        startDate: Date,
+        statusViewController: StatusViewController
     ) {
         self.persisting = persisting
         self.contactEventsUploader = contactEventsUploader
+        self.statusViewController = statusViewController
         self.symptoms = symptoms
         self.startDate = startDate
     }
@@ -48,19 +51,31 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
 
     private var isSubmitting = false
     @IBAction func submitTapped(_ sender: PrimaryButton) {
-        guard !symptoms.isEmpty else {
-            self.performSegue(withIdentifier: "unwindFromSelfDiagnosis", sender: self)
-            return
+        defer {
+            isSubmitting = false
         }
 
         guard !isSubmitting else { return }
         isSubmitting = true
 
-        persisting.selfDiagnosis = SelfDiagnosis(symptoms: symptoms, startDate: startDate, expiryDate: Date(timeIntervalSinceNow: 7 * 24 * 60 * 60))
-
         do {
             try contactEventsUploader.upload()
-            self.performSegue(withIdentifier: "unwindFromSelfDiagnosis", sender: self)
+            navigationController!.dismiss(animated: true, completion: nil)
+            
+            let hasCough = symptoms.contains(.cough)
+            let selfDiagnosis = SelfDiagnosis(symptoms: symptoms, startDate: startDate, expiryDate: Date(timeInterval: 7 * 24 * 60 * 60, since: startDate))
+                    
+            if symptoms.contains(.temperature) || (hasCough && !selfDiagnosis.hasExpired()) {
+                persisting.selfDiagnosis = selfDiagnosis
+                // Add notification here
+                
+            } else {
+                if hasCough {
+                    statusViewController.updatePrompt()
+                }
+                persisting.selfDiagnosis = nil
+            }
+            
         } catch {
             alert(with: Error())
         }

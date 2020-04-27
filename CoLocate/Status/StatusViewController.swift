@@ -44,6 +44,11 @@ class StatusViewController: UIViewController, Storyboarded {
 
     var diagnosis: SelfDiagnosis? {
         didSet {
+            if let diagnosis = diagnosis {
+                if diagnosis.symptoms.contains(.cough) && !diagnosis.symptoms.contains(.temperature) {
+                    
+                }
+            }
             renderStatus()
         }
     }
@@ -137,7 +142,8 @@ class StatusViewController: UIViewController, Storyboarded {
         let coordinator = SelfDiagnosisCoordinator(
             navigationController: navigationController,
             persisting: persistence,
-            contactEventsUploader: contactEventsUploader
+            contactEventsUploader: contactEventsUploader,
+            statusViewController: self
         )
         coordinator.start()
         navigationController.modalPresentationStyle = .fullScreen
