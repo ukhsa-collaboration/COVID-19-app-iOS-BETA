@@ -62,7 +62,7 @@ private class InMemoryPersistence: Persisting {
     var delegate: PersistenceDelegate?
 
     var registration: Registration? = nil
-    var potentiallyExposed: Bool = false
+    var potentiallyExposed: Date?
     var selfDiagnosis: SelfDiagnosis? = nil
     var partialPostcode: String? = nil
     var bluetoothPermissionRequested: Bool = false
@@ -71,6 +71,7 @@ private class InMemoryPersistence: Persisting {
         
     func clear() {
         registration = nil
+        potentiallyExposed = nil
         selfDiagnosis = nil
         partialPostcode = nil
         uploadLog = []

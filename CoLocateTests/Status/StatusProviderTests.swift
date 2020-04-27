@@ -26,7 +26,7 @@ class StatusProviderTests: XCTestCase {
     }
 
     func testPotentiallyExposed() {
-        persisting.potentiallyExposed = true
+        persisting.potentiallyExposed = Date()
 
         XCTAssertEqual(provider.status, .amber)
     }

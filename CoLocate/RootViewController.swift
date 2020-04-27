@@ -63,8 +63,8 @@ class RootViewController: UIViewController {
         notificationCenter.addObserver(self, selector: #selector(applicationDidBecomeActive(_:)), name: UIApplication.didBecomeActiveNotification, object: nil)
         
         remoteNotificationManager.dispatcher.registerHandler(forType: .potentialDiagnosis) { (userInfo, completionHandler) in
-            persistence.potentiallyExposed = true
-            self.statusViewController.potentiallyExposed = true
+            persistence.potentiallyExposed = Date()
+            self.statusViewController.potentiallyExposed = Date()
             completionHandler(.newData)
         }
     }

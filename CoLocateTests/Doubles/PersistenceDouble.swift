@@ -13,7 +13,7 @@ class PersistenceDouble: Persisting {
     var delegate: PersistenceDelegate?
 
     var registration: Registration?
-    var potentiallyExposed: Bool
+    var potentiallyExposed: Date?
     var selfDiagnosis: SelfDiagnosis?
     var partialPostcode: String?
     var bluetoothPermissionRequested: Bool
@@ -21,7 +21,7 @@ class PersistenceDouble: Persisting {
     var linkingId: LinkingId?
 
     init(
-        potentiallyExposed: Bool = false,
+        potentiallyExposed: Date? = nil,
         diagnosis: SelfDiagnosis? = nil,
         registration: Registration? = nil,
         partialPostcode: String? = nil,
@@ -43,7 +43,7 @@ class PersistenceDouble: Persisting {
         selfDiagnosis = nil
         registration = nil
         partialPostcode = nil
-        potentiallyExposed = false
+        potentiallyExposed = nil
         bluetoothPermissionRequested = false
         uploadLog = []
         linkingId = nil

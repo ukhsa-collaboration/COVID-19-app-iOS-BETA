@@ -21,12 +21,11 @@ struct Registration: Equatable {
     }
 }
 
-
 protocol Persisting {
     var delegate: PersistenceDelegate? { get nonmutating set }
 
     var registration: Registration? { get nonmutating set }
-    var potentiallyExposed: Bool { get nonmutating set }
+    var potentiallyExposed: Date? { get nonmutating set }
     var selfDiagnosis: SelfDiagnosis? { get nonmutating set }
     var partialPostcode: String? { get nonmutating set }
     var bluetoothPermissionRequested: Bool { get nonmutating set }
@@ -93,8 +92,10 @@ class Persistence: Persisting {
         }
     }
 
-    var potentiallyExposed: Bool {
-        get { UserDefaults.standard.bool(forKey: Keys.potentiallyExposed.rawValue) }
+    var potentiallyExposed: Date? {
+        get {
+            UserDefaults.standard.object(forKey: Keys.potentiallyExposed.rawValue) as? Date
+        }
         set { UserDefaults.standard.set(newValue, forKey: Keys.potentiallyExposed.rawValue) }
     }
 

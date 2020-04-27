@@ -18,7 +18,7 @@ class StatusProvider {
         switch (persisting.potentiallyExposed, persisting.selfDiagnosis?.isAffected) {
         case (_, .some(true)):
             return .red
-        case (true, _):
+        case (.some, _):
             return .amber
         default:
             return .blue
@@ -26,6 +26,7 @@ class StatusProvider {
     }
 
     let persisting: Persisting
+
 
     init(persisting: Persisting) {
         self.persisting = persisting

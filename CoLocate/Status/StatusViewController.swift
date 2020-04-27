@@ -47,7 +47,7 @@ class StatusViewController: UIViewController, Storyboarded {
             renderStatus()
         }
     }
-    var potentiallyExposed: Bool? {
+    var potentiallyExposed: Date? {
         didSet {
             renderStatus()
         }
