@@ -15,6 +15,26 @@ enum SetupProblem {
     case notificationPermissions
 }
 
+struct SetupProblemDiagnoser {
+    
+    func diagnose(
+        notificationAuthorization: NotificationAuthorizationStatus,
+        bluetoothAuthorization: BluetoothAuthorizationStatus,
+        bluetoothStatus: CBManagerState
+        ) -> SetupProblem? {
+        if bluetoothStatus == .poweredOff {
+            return .bluetoothOff
+        } else if bluetoothAuthorization == .denied {
+            return .bluetoothPermissions
+        } else if notificationAuthorization == .denied {
+            return .notificationPermissions
+        } else {
+            return nil
+        }
+    }
+    
+}
+
 class SetupChecker {
     private let authorizationManager: AuthorizationManaging
     private let bluetoothNursery: BluetoothNursery
@@ -33,18 +53,17 @@ class SetupChecker {
         var notificationStatus: NotificationAuthorizationStatus?
         var btStatus: CBManagerState?
         
+        let diagnoser = SetupProblemDiagnoser()
+        
         func maybeFinish() {
             guard let notificationStatus = notificationStatus, let btStatus = btStatus else { return }
             
-            if btStatus == .poweredOff {
-                callback(.bluetoothOff)
-            } else if authorizationManager.bluetooth == .denied {
-                callback(.bluetoothPermissions)
-            } else if notificationStatus == .denied {
-                callback(.notificationPermissions)
-            } else {
-                callback(nil)
-            }
+            let problem = diagnoser.diagnose(
+                notificationAuthorization: notificationStatus,
+                bluetoothAuthorization: authorizationManager.bluetooth,
+                bluetoothStatus: btStatus
+            )
+            callback(problem)
         }
         
         self.bluetoothNursery.stateObserver.observeUntilKnown { status in

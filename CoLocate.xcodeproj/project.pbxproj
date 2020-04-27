@@ -109,6 +109,7 @@
 		89BC79EB2434E047002050F8 /* LogsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BC79EA2434E047002050F8 /* LogsViewController.swift */; };
 		89CCF65F2456EF7000AC9D91 /* TrustValidatingDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CCF65E2456EF7000AC9D91 /* TrustValidatingDouble.swift */; };
 		89CCF6612456F07400AC9D91 /* URLAuthenticationChallenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CCF6602456F07400AC9D91 /* URLAuthenticationChallenge.swift */; };
+		89CCF66424571EE900AC9D91 /* SetupProblemDiagnoserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CCF66324571EE900AC9D91 /* SetupProblemDiagnoserTests.swift */; };
 		89CE566B24503E93004A74D0 /* TrustValidatingURLSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CE566A24503E93004A74D0 /* TrustValidatingURLSessionDelegate.swift */; };
 		89CE566D24504050004A74D0 /* TrustValidatingURLSessionDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CE566C24504050004A74D0 /* TrustValidatingURLSessionDelegateTests.swift */; };
 		89F06B2F2434A62C0074C612 /* LoggingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F06B2E2434A62C0074C612 /* LoggingManager.swift */; };
@@ -329,6 +330,7 @@
 		89BC79EA2434E047002050F8 /* LogsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogsViewController.swift; sourceTree = "<group>"; };
 		89CCF65E2456EF7000AC9D91 /* TrustValidatingDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustValidatingDouble.swift; sourceTree = "<group>"; };
 		89CCF6602456F07400AC9D91 /* URLAuthenticationChallenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLAuthenticationChallenge.swift; sourceTree = "<group>"; };
+		89CCF66324571EE900AC9D91 /* SetupProblemDiagnoserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupProblemDiagnoserTests.swift; sourceTree = "<group>"; };
 		89CE566A24503E93004A74D0 /* TrustValidatingURLSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustValidatingURLSessionDelegate.swift; sourceTree = "<group>"; };
 		89CE566C24504050004A74D0 /* TrustValidatingURLSessionDelegateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustValidatingURLSessionDelegateTests.swift; sourceTree = "<group>"; };
 		89DA61F12449A56F0079A761 /* FIRAnalyticsConnector.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FIRAnalyticsConnector.framework; path = Frameworks/FIRAnalyticsConnector.framework; sourceTree = "<group>"; };
@@ -600,6 +602,7 @@
 				092BB5AA244622200036B30E /* RootViewControllerTests.swift */,
 				F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */,
 				09E6E7E52452779B0069DFA8 /* SetupCheckerTests.swift */,
+				89CCF66324571EE900AC9D91 /* SetupProblemDiagnoserTests.swift */,
 				F68BFBF6242ACD17008EE68F /* TestHelpers.swift */,
 				219B61362447371700E2F1A6 /* UUIDExtensionsTests.swift */,
 				89896E5E2435EB6500F949EA /* CoLocateTests.xcconfig */,
@@ -1236,6 +1239,7 @@
 				F7D62F292440D4CB004C32A2 /* ConcreteBroadcastIdGeneratorTests.swift in Sources */,
 				F72EBDA5243D094A009F9328 /* SecureBroadcastRotationKeyStorageTests.swift in Sources */,
 				098ED48A242E89D80029B729 /* RegistrationServiceDouble.swift in Sources */,
+				89CCF66424571EE900AC9D91 /* SetupProblemDiagnoserTests.swift in Sources */,
 				F63279272435219A00CF7A42 /* QueueDouble.swift in Sources */,
 				F6CC2CAC242BCD0D0079432B /* RemoteNotificationManagerTests.swift in Sources */,
 				09CAA36A2440FC4500CE93A6 /* PostcodeViewControllerTests.swift in Sources */,

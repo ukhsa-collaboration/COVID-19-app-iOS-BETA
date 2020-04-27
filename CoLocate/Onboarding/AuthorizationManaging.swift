@@ -8,13 +8,13 @@
 
 import Foundation
 
-enum BluetoothAuthorizationStatus {
+enum BluetoothAuthorizationStatus: CaseIterable {
     case notDetermined
     case allowed
     case denied
 }
 
-enum NotificationAuthorizationStatus {
+enum NotificationAuthorizationStatus: CaseIterable {
     case notDetermined
     case allowed
     case denied
