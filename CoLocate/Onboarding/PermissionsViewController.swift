@@ -44,8 +44,8 @@ class PermissionsViewController: UIViewController, Storyboarded {
         
         activityIndicator.isHidden = true
         
-        authManager.waitForDeterminedBluetoothAuthorizationStatus { [weak self] status in
-            guard let self = self, status == .allowed else {
+        authManager.waitForDeterminedBluetoothAuthorizationStatus { [weak self] _ in
+            guard let self = self else {
                 return
             }
 
