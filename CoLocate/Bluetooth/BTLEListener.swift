@@ -191,7 +191,6 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
             peripheral.readValue(for: sonarIdCharacteristic)
             peripheral.setNotifyValue(true, for: sonarIdCharacteristic)
         } else {
-            // TODO: This shouldn't happen, should it be an assertion?
             logger.info("sonarId characteristic not discovered for peripheral \(peripheral.identifierWithName)")
         }
         
