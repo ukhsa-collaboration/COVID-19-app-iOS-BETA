@@ -17,12 +17,23 @@ class AuthorizationManager: AuthorizationManaging {
     func waitForDeterminedBluetoothAuthorizationStatus(
         completion: @escaping (BluetoothAuthorizationStatus) -> Void
     ) {
-        if #available(iOS 13.1, *) {
-            completion(bluetooth)
-        } else {
-            Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) { timer in
+        Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) { timer in
+            if #available(iOS 13.1, *) {
+                switch CBManager.authorization {
+                case .notDetermined:
+                    return
+                    
+                case .allowedAlways:
+                    completion(.allowed)
+                    timer.invalidate()
+                    
+                default:
+                    completion(.denied)
+                    timer.invalidate()
+                }
+            } else {
                 switch CBPeripheralManager.authorizationStatus() {
-
+                    
                 case .notDetermined:
                     return
                     
