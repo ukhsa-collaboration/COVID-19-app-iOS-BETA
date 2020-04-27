@@ -222,6 +222,7 @@ fileprivate func makeRootVC(
         session: SessionDouble(),
         contactEventsUploader: ContactEventsUploaderDouble(),
         linkingIdManager: LinkingIdManagerDouble.make(),
+        statusProvider: StatusProvider(persisting: persistence),
         uiQueue: QueueDouble()
     )
     return vc

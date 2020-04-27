@@ -37,6 +37,7 @@ class RootViewController: UIViewController {
         session: Session,
         contactEventsUploader: ContactEventsUploader,
         linkingIdManager: LinkingIdManager,
+        statusProvider: StatusProvider,
         uiQueue: TestableQueue
     ) {
         self.persistence = persistence
@@ -55,7 +56,8 @@ class RootViewController: UIViewController {
             registrationService: registrationService,
             contactEventsUploader: contactEventsUploader,
             notificationCenter: notificationCenter,
-            linkingIdManager: linkingIdManager
+            linkingIdManager: linkingIdManager,
+            statusProvider: statusProvider
         )
         
         notificationCenter.addObserver(self, selector: #selector(applicationDidBecomeActive(_:)), name: UIApplication.didBecomeActiveNotification, object: nil)

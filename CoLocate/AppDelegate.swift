@@ -66,6 +66,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         session: urlSession
     )
 
+    lazy var statusProvider: StatusProvider = StatusProvider(
+        persisting: persistence
+    )
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         #if DEBUG
         if let window = UITestResponder.makeWindowForTesting() {
@@ -94,6 +98,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             session: urlSession,
             contactEventsUploader: contactEventsUploader,
             linkingIdManager: linkingIdManager,
+            statusProvider: statusProvider,
             uiQueue: DispatchQueue.main
         )
         

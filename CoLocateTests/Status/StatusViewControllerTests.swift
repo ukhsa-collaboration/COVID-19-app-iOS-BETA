@@ -11,24 +11,6 @@ import XCTest
 
 class StatusViewControllerTests: XCTestCase {
 
-    func testStatusPermutations() {
-        let permutations: [(Set<Symptom>, Bool, StatusViewController.Status)] = [
-            ([], false, .initial),
-            ([], true, .amber),
-            ([.cough], false, .red),
-            ([.cough], true, .red),
-        ]
-
-        for (symptoms, potentiallyExposed, expectedStatus) in permutations {
-            let diagnosis = SelfDiagnosis(symptoms: symptoms, startDate: Date(), expiryDate: Date())
-            let persistence = PersistenceDouble(potentiallyExposed: potentiallyExposed, diagnosis: diagnosis)
-            let vc = makeViewController(persistence: persistence)
-            vc.viewWillAppear(false)
-
-            XCTAssertEqual(vc.status, expectedStatus)
-        }
-    }
-    
     func testShowsInitialRegisteredStatus() {
         let vc = makeViewController(persistence: PersistenceDouble(registration: Registration.fake))
         
@@ -123,7 +105,8 @@ fileprivate func makeViewController(
         registrationService: registrationService,
         contactEventsUploader: ContactEventsUploaderDouble(),
         notificationCenter: notificationCenter,
-        linkingIdManager: LinkingIdManagerDouble.make()
+        linkingIdManager: LinkingIdManagerDouble.make(),
+        statusProvider: StatusProviderDouble.double()
     )
     XCTAssertNotNil(vc.view)
     vc.viewWillAppear(false)

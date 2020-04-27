@@ -12,15 +12,12 @@ import Logging
 class StatusViewController: UIViewController, Storyboarded {
     static let storyboardName = "Status"
 
-    enum Status {
-        case initial, amber, red
-    }
-
     private var persistence: Persisting!
     private var registrationService: RegistrationService!
     private var notificationCenter: NotificationCenter!
     private var contactEventsUploader: ContactEventsUploader!
     private var linkingIdManager: LinkingIdManager!
+    private var statusProvider: StatusProvider!
 
     private lazy var drawerPresentationManager = DrawerPresentation()
     
@@ -57,16 +54,7 @@ class StatusViewController: UIViewController, Storyboarded {
     }
     
     var status: Status {
-        get {
-            switch (diagnosis?.isAffected, potentiallyExposed) {
-            case (.some(true), _):
-                return .red
-            case (_, .some(true)):
-                return .amber
-            default:
-                return .initial
-            }
-        }
+        statusProvider.status
     }
     
     func inject(
@@ -74,13 +62,15 @@ class StatusViewController: UIViewController, Storyboarded {
         registrationService: RegistrationService,
         contactEventsUploader: ContactEventsUploader,
         notificationCenter: NotificationCenter,
-        linkingIdManager: LinkingIdManager
+        linkingIdManager: LinkingIdManager,
+        statusProvider: StatusProvider
     ) {
         self.persistence = persistence
         self.registrationService = registrationService
         self.contactEventsUploader = contactEventsUploader
         self.notificationCenter = notificationCenter
         self.linkingIdManager = linkingIdManager
+        self.statusProvider = statusProvider
     }
 
     override func viewDidLoad() {
@@ -133,7 +123,7 @@ class StatusViewController: UIViewController, Storyboarded {
     @objc func diagnosisStatusTapped() {
         let path: String
         switch status {
-        case .initial:
+        case .blue:
             path = "full-guidance-on-staying-at-home-and-away-from-others/full-guidance-on-staying-at-home-and-away-from-others"
         case .amber, .red:
             path = "covid-19-stay-at-home-guidance/stay-at-home-guidance-for-households-with-possible-coronavirus-covid-19-infection"
@@ -181,7 +171,7 @@ class StatusViewController: UIViewController, Storyboarded {
         guard view != nil else { return }
         
         switch status {
-            case .initial:
+            case .blue:
                 diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Highlight")
                 diagnosisTitleLabel.text = "Keep following the current government advice".localized
                 howAreYouFeelingView.isHidden = false

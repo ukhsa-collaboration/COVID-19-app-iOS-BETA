@@ -145,6 +145,7 @@
 		F632792A2435323200CF7A42 /* PermissionsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63279292435323200CF7A42 /* PermissionsViewControllerTests.swift */; };
 		F64D76F724577D9600B1D495 /* StatusProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64D76F624577D9600B1D495 /* StatusProvider.swift */; };
 		F64D76F924577DA700B1D495 /* StatusProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64D76F824577DA700B1D495 /* StatusProviderTests.swift */; };
+		F64D76FB2457827400B1D495 /* StatusProviderDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64D76FA2457827400B1D495 /* StatusProviderDouble.swift */; };
 		F652F7242449138900D97950 /* SetDiagnosisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652F7232449138900D97950 /* SetDiagnosisViewController.swift */; };
 		F652F72C244A74E900D97950 /* StartDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652F72B244A74E900D97950 /* StartDateViewController.swift */; };
 		F652F72E244E472E00D97950 /* SymptomsPromptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652F72D244E472E00D97950 /* SymptomsPromptViewController.swift */; };
@@ -374,6 +375,7 @@
 		F63279292435323200CF7A42 /* PermissionsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsViewControllerTests.swift; sourceTree = "<group>"; };
 		F64D76F624577D9600B1D495 /* StatusProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusProvider.swift; sourceTree = "<group>"; };
 		F64D76F824577DA700B1D495 /* StatusProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusProviderTests.swift; sourceTree = "<group>"; };
+		F64D76FA2457827400B1D495 /* StatusProviderDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusProviderDouble.swift; sourceTree = "<group>"; };
 		F652F7232449138900D97950 /* SetDiagnosisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDiagnosisViewController.swift; sourceTree = "<group>"; };
 		F652F72B244A74E900D97950 /* StartDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDateViewController.swift; sourceTree = "<group>"; };
 		F652F72D244E472E00D97950 /* SymptomsPromptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomsPromptViewController.swift; sourceTree = "<group>"; };
@@ -515,6 +517,11 @@
 			children = (
 				095A91172434FF1500ED6369 /* ApplicationDouble.swift */,
 				F6F05A292433C6CC00FF4B72 /* AuthManagerDouble.swift */,
+				09E876BB24510F2C009C2628 /* BluetoothNurseryDouble.swift */,
+				09D91A7824522133004825A5 /* BTLEListenerDouble.swift */,
+				09B103612444E9110091834D /* ContactEventPersisterDouble.swift */,
+				09B103632444EAB80091834D /* ContactEventRepositoryDouble.swift */,
+				F60497662452415F002B8503 /* ContactEventsUploaderDouble.swift */,
 				0983ACCC243E566800DBB336 /* ErrorForTest.swift */,
 				0983ACCE243E6D3800DBB336 /* NotificationObserverDouble.swift */,
 				F632792224351C8400CF7A42 /* OnboardingCoordinatorDouble.swift */,
@@ -522,15 +529,11 @@
 				098ED487242E89930029B729 /* PushNotificationManagerDouble.swift */,
 				F63279262435219A00CF7A42 /* QueueDouble.swift */,
 				098ED489242E89D80029B729 /* RegistrationServiceDouble.swift */,
+				F62F858424510923006580A8 /* SessionDouble.swift */,
+				F64D76FA2457827400B1D495 /* StatusProviderDouble.swift */,
+				89CCF65E2456EF7000AC9D91 /* TrustValidatingDouble.swift */,
 				090B1870243552C300870B5D /* UserNotificationCenterDouble.swift */,
 				09CAA36B24413E0700CE93A6 /* ViewControllerContainerDouble.swift */,
-				09B103612444E9110091834D /* ContactEventPersisterDouble.swift */,
-				09B103632444EAB80091834D /* ContactEventRepositoryDouble.swift */,
-				F62F858424510923006580A8 /* SessionDouble.swift */,
-				09E876BB24510F2C009C2628 /* BluetoothNurseryDouble.swift */,
-				09D91A7824522133004825A5 /* BTLEListenerDouble.swift */,
-				F60497662452415F002B8503 /* ContactEventsUploaderDouble.swift */,
-				89CCF65E2456EF7000AC9D91 /* TrustValidatingDouble.swift */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -1203,6 +1206,7 @@
 				214209CA242227B300C7BFF3 /* PersistenceTests.swift in Sources */,
 				F60497672452415F002B8503 /* ContactEventsUploaderDouble.swift in Sources */,
 				F632792124351C1900CF7A42 /* OnboardingViewControllerTests.swift in Sources */,
+				F64D76FB2457827400B1D495 /* StatusProviderDouble.swift in Sources */,
 				095A91182434FF1500ED6369 /* ApplicationDouble.swift in Sources */,
 				89CCF6612456F07400AC9D91 /* URLAuthenticationChallenge.swift in Sources */,
 				09CAA36C24413E0700CE93A6 /* ViewControllerContainerDouble.swift in Sources */,
