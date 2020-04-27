@@ -12,13 +12,18 @@ import XCTest
 class StatusProviderTests: XCTestCase {
 
     var persisting: PersistenceDouble!
+    var currentDate: Date!
     var provider: StatusProvider!
 
     override func setUp() {
         super.setUp()
 
         persisting = PersistenceDouble()
-        provider = StatusProvider(persisting: persisting)
+        currentDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 1))!
+        provider = StatusProvider(
+            persisting: persisting,
+            currentDateProvider: { self.currentDate }
+        )
     }
 
     func testDefault() {
@@ -38,6 +43,25 @@ class StatusProviderTests: XCTestCase {
         )
 
         XCTAssertEqual(provider.status, .red)
+    }
+
+    func testPotentiallyExposedLasts14Days() {
+        persisting.potentiallyExposed = currentDate // 04.01
+        XCTAssertEqual(provider.status, .amber)
+
+        advanceCurrentDate(by: 13) // 04.14
+        XCTAssertEqual(provider.status, .amber)
+
+        advanceCurrentDate(by: 1) // 04.15
+        XCTAssertEqual(provider.status, .blue)
+    }
+
+    private func advanceCurrentDate(by days: Int) {
+        currentDate = Calendar.current.date(
+            byAdding: .day,
+            value: days,
+            to: currentDate
+        )
     }
 
 }
