@@ -33,7 +33,8 @@ proximity to individuals infected with the novel coronavirus.
 ### Setup
 
 - `cp CoLocate.xcconfig.sample CoLocate.xcconfig`
-- Replace the values in `CoLocate.xcconfig` with the correct ones - you will
+- `cp CoLocate/Environments/Environment.swift.erb CoLocate/Environment.swift`
+- Replace the values in `CoLocate.xcconfig` and `Environment.swift` with the correct ones - you will
   need to get these from another developer.
 
 ### Notifications
