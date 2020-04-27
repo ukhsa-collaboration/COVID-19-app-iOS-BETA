@@ -15,8 +15,8 @@ enum Status: Equatable {
 class StatusProvider {
 
     var status: Status {
-        switch (persisting.potentiallyExposed, persisting.selfDiagnosis?.symptoms) {
-        case (_, .some(let symptoms)) where !symptoms.isEmpty:
+        switch (persisting.potentiallyExposed, persisting.selfDiagnosis?.isAffected) {
+        case (_, .some(true)):
             return .red
         case (true, _):
             return .amber
