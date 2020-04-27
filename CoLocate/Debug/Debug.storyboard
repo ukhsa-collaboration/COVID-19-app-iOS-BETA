@@ -37,7 +37,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <label key="tableFooterView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="u9d-KW-xk7">
-                            <rect key="frame" x="0.0" y="1065" width="414" height="44"/>
+                            <rect key="frame" x="0.0" y="1044.5" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                             <nil key="textColor"/>
@@ -794,11 +794,11 @@
             </objects>
             <point key="canvasLocation" x="-349" y="-402"/>
         </scene>
-        <!--Upload Logs-->
+        <!--Navigation Controller-->
         <scene sceneID="Qu4-4v-5yt">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="NQh-Bb-aPp" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Upload Logs" id="HL9-Ju-DNS"/>
+                    <tabBarItem key="tabBarItem" systemItem="downloads" id="HL9-Ju-DNS"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="1du-Mc-jdt">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
