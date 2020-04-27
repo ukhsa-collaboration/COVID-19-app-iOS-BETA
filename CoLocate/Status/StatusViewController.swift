@@ -104,7 +104,11 @@ class StatusViewController: UIViewController, Storyboarded {
         )
 
         noSymptomsLabel.textColor = UIColor(named: "NHS Secondary Text")
-
+        
+        notificationCenter.addObserver(self, selector: #selector(showRegisteredStatus), name: RegistrationCompletedNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(showRegistrationFailedStatus), name: RegistrationFailedNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(renderStatus), name: UIApplication.didBecomeActiveNotification, object: nil)
+        
         #if PILOT
         linkingIdView.isHidden = false
         #else
@@ -121,8 +125,6 @@ class StatusViewController: UIViewController, Storyboarded {
             register()
         }
         
-        notificationCenter.addObserver(self, selector: #selector(showRegisteredStatus), name: RegistrationCompletedNotification, object: nil)
-        notificationCenter.addObserver(self, selector: #selector(showRegistrationFailedStatus), name: RegistrationFailedNotification, object: nil)
 
         diagnosis = persistence.selfDiagnosis
         potentiallyExposed = persistence.potentiallyExposed
@@ -175,7 +177,7 @@ class StatusViewController: UIViewController, Storyboarded {
     @IBAction func unwindFromLinkingId(unwindSegue: UIStoryboardSegue) {
     }
 
-    func renderStatus() {
+    @objc func renderStatus() {
         guard view != nil else { return }
         
         switch status {
