@@ -31,4 +31,13 @@ class StatusProviderTests: XCTestCase {
         XCTAssertEqual(provider.status, .amber)
     }
 
+    func testSelfDiagnosedWithSymptoms() {
+        persisting.selfDiagnosis = SelfDiagnosis(
+            symptoms: [.cough],
+            startDate: Date()
+        )
+
+        XCTAssertEqual(provider.status, .red)
+    }
+
 }
