@@ -90,13 +90,11 @@ class PermissionsViewController: UIViewController, Storyboarded {
         
         #else
 
-        // Trigger the permissions prompt
-        bluetoothNursery.startBluetooth(registration: nil)
-
-        // Don't query the status until the user has responded
-        bluetoothNursery.stateObserver!.observe { [weak self] _ in
+        // observe, but don't ask for permissions yet
+        // this will not trigger the prompt
+        bluetoothNursery.stateObserver.observe { [weak self] _ in
             guard let self = self else { return .stopObserving }
-            
+
             switch self.authManager.bluetooth {
             case .notDetermined:
                 return .keepObserving
@@ -108,7 +106,10 @@ class PermissionsViewController: UIViewController, Storyboarded {
                 return .stopObserving
             }
         }
-        
+
+        // Trigger the permissions prompt
+        bluetoothNursery.startBluetooth(registration: nil)
+
         #endif
     }
 

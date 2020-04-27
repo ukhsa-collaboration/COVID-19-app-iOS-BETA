@@ -38,7 +38,7 @@ class PermissionsViewControllerTests: TestCase {
         // We skip Bluetooth on the simulator.
         #else
         authManagerDouble.bluetooth = .allowed
-        nursery.stateObserver?.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
+        nursery.stateObserver.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
         #endif
         
         XCTAssertFalse(continued)
@@ -74,7 +74,7 @@ class PermissionsViewControllerTests: TestCase {
         XCTAssertTrue(persistence.bluetoothPermissionRequested)
         
         authManagerDouble.bluetooth = .denied
-        nursery.stateObserver?.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
+        nursery.stateObserver.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
 
         XCTAssert(continued)
         

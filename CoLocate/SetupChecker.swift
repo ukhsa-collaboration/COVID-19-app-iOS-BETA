@@ -47,17 +47,11 @@ class SetupChecker {
             }
         }
         
-        if let btObserver = self.bluetoothNursery.stateObserver {
-            btObserver.observeUntilKnown { s in
-                btStatus = s
-                maybeFinish()
-            }
-        } else {
-            // Shouldn't happen (we shouldn't be called in a situation where the observer
-            // hasn't yet been created), but just assume Bluetooth is on if it does.
-            btStatus = .poweredOn
+        self.bluetoothNursery.stateObserver.observeUntilKnown { status in
+            btStatus = status
+            maybeFinish()
         }
-        
+
         authorizationManager.notifications { s in
             notificationStatus = s
             maybeFinish()

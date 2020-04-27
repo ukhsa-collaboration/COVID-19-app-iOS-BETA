@@ -9,13 +9,18 @@
 import UIKit
 import CoreBluetooth
 
-class BluetoothStateObserver: BTLEListenerStateDelegate {
+protocol BluetoothStateObserving: BTLEListenerStateDelegate {
+    func observe(_ callback: @escaping (CBManagerState) -> Action)
+    func observeUntilKnown(_ callback: @escaping (CBManagerState) -> Void)
+}
+
+enum Action {
+    case keepObserving
+    case stopObserving
+}
+
+class BluetoothStateObserver: BluetoothStateObserving {
     
-    enum Action {
-        case keepObserving
-        case stopObserving
-    }
-        
     private var callbacks: [(CBManagerState) -> Action]
     private var lastKnownState: CBManagerState
     
@@ -41,7 +46,9 @@ class BluetoothStateObserver: BTLEListenerStateDelegate {
             }
         }
     }
-    
+
+    // MARK: - BTLEListenerStateDelegate
+
     func btleListener(_ listener: BTLEListener, didUpdateState state: CBManagerState) {
         lastKnownState = state
         

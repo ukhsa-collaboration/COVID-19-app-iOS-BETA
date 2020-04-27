@@ -71,13 +71,8 @@ class OnboardingCoordinator {
         case .denied:
             completion(.bluetoothDenied)
         case .allowed:
-            guard let btStateObserver = self.bluetoothNursery.stateObserver else {
-                logger.error("bluetoothNursery.stateObserver was nil even after we determined permissions")
-                // Assume that Bluetooth is powered on
-                completion(nil)
-                return
-            }
-            
+            let btStateObserver = self.bluetoothNursery.stateObserver
+
             btStateObserver.observeUntilKnown { btState in
                 if btState == .poweredOff {
                     completion(.bluetoothOff)

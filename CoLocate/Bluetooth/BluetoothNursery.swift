@@ -14,7 +14,7 @@ import Logging
 protocol BluetoothNursery {
     var contactEventRepository: ContactEventRepository { get }
     var contactEventPersister: ContactEventPersister { get }
-    var stateObserver: BluetoothStateObserver? { get }
+    var stateObserver: BluetoothStateObserving { get }
     var broadcaster: BTLEBroadcaster? { get }
 
     func startBluetooth(registration: Registration?)
@@ -38,9 +38,7 @@ class ConcreteBluetoothNursery: BluetoothNursery, PersistenceDelegate {
     let broadcastIdGenerator: BroadcastIdGenerator
 
     public var listener: BTLEListener?
-    // This observer is created along with the listener, because creating an observer
-    // can prompt the user for BT permissions and we want to control when that happens in the onboarding flow.
-    public private(set) var stateObserver: BluetoothStateObserver? = nil
+    public private(set) var stateObserver: BluetoothStateObserving = BluetoothStateObserver(initialState: .unknown)
 
     private var central: CBCentralManager?
     private var peripheral: CBPeripheralManager?
@@ -76,12 +74,10 @@ class ConcreteBluetoothNursery: BluetoothNursery, PersistenceDelegate {
             CBCentralManagerOptionShowPowerAlertKey: NSNumber(true),
         ])
         listener.delegate = contactEventRepository
-        
-        self.stateObserver = BluetoothStateObserver(initialState: central!.state)
         listener.stateDelegate = self.stateObserver
         userNotifier = BluetoothStateUserNotifier(
             appStateReader: UIApplication.shared,
-            bluetoothStateObserver: self.stateObserver!,
+            bluetoothStateObserver: self.stateObserver,
             scheduler: HumbleLocalNotificationScheduler(userNotificationCenter: userNotificationCenter)
         )
         
@@ -103,7 +99,6 @@ class ConcreteBluetoothNursery: BluetoothNursery, PersistenceDelegate {
         guard userNotifier != nil else { return false }
         guard peripheral != nil else { return false }
         guard central != nil else { return false }
-        guard stateObserver != nil else { return false }
         guard userNotifier != nil else { return false }
 
         guard broadcaster!.isHealthy() else { return false }

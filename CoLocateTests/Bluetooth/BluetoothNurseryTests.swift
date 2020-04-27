@@ -10,16 +10,6 @@ import XCTest
 @testable import CoLocate
 
 class BluetoothNurseryTests: TestCase {
-    func testCreatesStateObserverOnceUserHasBeenPromptedForPermissions() {
-        let nursery = ConcreteBluetoothNursery(persistence: PersistenceDouble(),
-                                               userNotificationCenter: UserNotificationCenterDouble(),
-                                               notificationCenter: NotificationCenter())
-        XCTAssertNil(nursery.stateObserver)
-        
-        nursery.startBluetooth(registration: nil)
-        XCTAssertNotNil(nursery.stateObserver)
-    }
-    
     func testStartsBroadcastingOnceRegistrationIsPersisted() {
         let persistence = PersistenceDouble()
         let nursery = ConcreteBluetoothNursery(persistence: persistence,

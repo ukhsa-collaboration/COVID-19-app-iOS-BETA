@@ -41,7 +41,7 @@ class RootViewControllerTests: TestCase {
             return
         }
         
-        bluetoothNursery.stateObserver?.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
+        bluetoothNursery.stateObserver.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
         XCTAssertNotNil(authMgr.notificationsCompletion)
         authMgr.notificationsCompletion?(.allowed)
 
@@ -79,9 +79,17 @@ class RootViewControllerTests: TestCase {
         let persistence = PersistenceDouble(registration: Registration.fake)
         let authMgr = AuthorizationManagerDouble(bluetooth: .allowed)
         let notificationCenter = NotificationCenter()
-        let rootVC = makeRootVC(persistence: persistence, authorizationManager: authMgr, notificationCenter: notificationCenter)
+        let bluetoothNursery = BluetoothNurseryDouble()
+        bluetoothNursery.stateObserver = BluetoothStateObserver(initialState: .poweredOn)
+
+        let rootVC = makeRootVC(persistence: persistence,
+                                authorizationManager: authMgr,
+                                notificationCenter: notificationCenter,
+                                bluetoothNursery: bluetoothNursery)
         parentViewControllerForTests.viewControllers = [rootVC]
-        
+
+        XCTAssertNil(rootVC.presentedViewController)
+
         authMgr.bluetooth = .denied
         notificationCenter.post(name: UIApplication.didBecomeActiveNotification, object: nil)
         authMgr.notificationsCompletion?(.allowed)
@@ -93,8 +101,16 @@ class RootViewControllerTests: TestCase {
         let persistence = PersistenceDouble(registration: Registration.fake)
         let authMgr = AuthorizationManagerDouble(bluetooth: .allowed)
         let notificationCenter = NotificationCenter()
-        let rootVC = makeRootVC(persistence: persistence, authorizationManager: authMgr, notificationCenter: notificationCenter)
+        let bluetoothNursery = BluetoothNurseryDouble()
+        bluetoothNursery.stateObserver = BluetoothStateObserver(initialState: .poweredOn)
+
+        let rootVC = makeRootVC(persistence: persistence,
+                                authorizationManager: authMgr,
+                                notificationCenter: notificationCenter,
+                                bluetoothNursery: bluetoothNursery)
         parentViewControllerForTests.viewControllers = [rootVC]
+
+        XCTAssertNil(rootVC.presentedViewController)
         
         notificationCenter.post(name: UIApplication.didBecomeActiveNotification, object: nil)
         authMgr.notificationsCompletion?(.denied)
@@ -115,7 +131,9 @@ class RootViewControllerTests: TestCase {
         )
         parentViewControllerForTests.viewControllers = [rootVC]
 
-        bluetoothNursery.stateObserver?.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOff)
+        XCTAssertNil(rootVC.presentedViewController)
+
+        bluetoothNursery.stateObserver.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOff)
         notificationCenter.post(name: UIApplication.didBecomeActiveNotification, object: nil)
         authMgr.notificationsCompletion?(.allowed)
 
@@ -162,10 +180,10 @@ class RootViewControllerTests: TestCase {
         
         notificationCenter.post(name: UIApplication.didBecomeActiveNotification, object: nil)
         authMgr.notificationsCompletion?(.denied)
-        bluetoothNursery.stateObserver?.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
+        bluetoothNursery.stateObserver.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
         XCTAssertNotNil(rootVC.presentedViewController)
         
-        bluetoothNursery.stateObserver?.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
+        bluetoothNursery.stateObserver.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
         notificationCenter.post(name: UIApplication.didBecomeActiveNotification, object: nil)
         authMgr.notificationsCompletion?(.allowed)
         

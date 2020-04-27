@@ -17,7 +17,7 @@ class BluetoothStateUserNotifier {
 
     init(
         appStateReader: ApplicationStateReading,
-        bluetoothStateObserver: BluetoothStateObserver,
+        bluetoothStateObserver: BluetoothStateObserving,
         scheduler: LocalNotificationScheduling,
         uiQueue: TestableQueue = DispatchQueue.main
     ) {

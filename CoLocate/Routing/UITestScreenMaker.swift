@@ -9,6 +9,7 @@
 #if DEBUG
 
 import UIKit
+import CoreBluetooth
 
 struct UITestScreenMaker: ScreenMaking {
     
@@ -139,9 +140,8 @@ private struct MockError: Error {}
 private class NoOpBluetoothNursery: BluetoothNursery {
     func startBluetooth(registration: Registration?) {
     }
-    
-    
-    var stateObserver: BluetoothStateObserver?
+
+    var stateObserver: BluetoothStateObserving = BluetoothStateObserver(initialState: .poweredOn)
     var contactEventRepository: ContactEventRepository = NoOpContactEventRepository()
     var contactEventPersister: ContactEventPersister = NoOpContactEventPersister()
     var broadcaster: BTLEBroadcaster? = NoOpBroadcaster()

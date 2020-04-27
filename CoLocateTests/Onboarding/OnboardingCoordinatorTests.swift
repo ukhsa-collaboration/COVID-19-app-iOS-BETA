@@ -89,7 +89,7 @@ class OnboardingCoordinatorTests: TestCase {
         onboardingCoordinator.state { state = $0 }
         XCTAssertNil(state)
         
-        bluetoothNursery.stateObserver?.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOff)
+        bluetoothNursery.stateObserver.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOff)
         XCTAssertEqual(state, .bluetoothOff)
     }
 
@@ -107,7 +107,7 @@ class OnboardingCoordinatorTests: TestCase {
 
         var state: OnboardingCoordinator.State?
         onboardingCoordinator.state { state = $0 }
-        bluetoothNursery.stateObserver?.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
+        bluetoothNursery.stateObserver.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
         authManagerDouble.notificationsCompletion?(.notDetermined)
         
         XCTAssertEqual(state, .permissions)
@@ -127,7 +127,7 @@ class OnboardingCoordinatorTests: TestCase {
 
         var state: OnboardingCoordinator.State?
         onboardingCoordinator.state { state = $0 }
-        bluetoothNursery.stateObserver?.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
+        bluetoothNursery.stateObserver.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
         authManagerDouble.notificationsCompletion?(.denied)
         XCTAssertEqual(state, .notificationsDenied)
     }
@@ -144,7 +144,7 @@ class OnboardingCoordinatorTests: TestCase {
 
         var state: OnboardingCoordinator.State?
         onboardingCoordinator.state { state = $0 }
-        bluetoothNursery.stateObserver?.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
+        bluetoothNursery.stateObserver.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
         authManagerDouble.notificationsCompletion?(.allowed)
         XCTAssertEqual(state, .done)
     }
