@@ -98,11 +98,12 @@ class DebugViewController: UITableViewController, Storyboarded {
             try! SecureBroadcastRotationKeyStorage().clear()
             show(title: "Cleared", message: "Registration and diagnosis data has been cleared. Please stop and re-start the application.")
 
-        case (1, 1):
+        case (1, 1), (1, 2):
             break
-
-        case (1, 2), (1, 3):
-            break
+            
+        case (1, 3):
+            kill(getpid(), SIGINT)
+            
 
         case (2, 0):
             let uuid = UUID()
@@ -122,7 +123,7 @@ class DebugViewController: UITableViewController, Storyboarded {
             let notificationCenter = NotificationCenter.default
             notificationCenter.post(name: UIApplication.significantTimeChangeNotification, object: nil)
             show(title: "Cleared", message: "All expired contact events cleared.")
-
+            
         case (2, 4):
             try! contactEventsUploader.upload()
             show(title: "Upload Initiated", message: "Contact events uploading.")
@@ -185,10 +186,10 @@ class DebugViewController: UITableViewController, Storyboarded {
         }
     }
 
-    private func show(title: String, message: String) {
+    private func show(title: String, message: String, completion: (() -> Void)? = nil) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Ok", style: .default))
-        present(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: completion)
     }
 
     @IBAction func potentiallyExposedChanged(_ sender: UISwitch) {
