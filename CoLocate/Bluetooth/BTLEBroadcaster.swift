@@ -83,7 +83,7 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
         self.unsentCharacteristicValue = .keepalive(value: value)
         let success = peripheral.updateValue(value, for: keepaliveCharacteristic, onSubscribedCentrals: nil)
         if success {
-            logger.info("sent keepalive value \(value)")
+            logger.info("sent keepalive value: \(value.withUnsafeBytes { $0.load(as: UInt8.self) })")
             self.unsentCharacteristicValue = nil
         }
     }

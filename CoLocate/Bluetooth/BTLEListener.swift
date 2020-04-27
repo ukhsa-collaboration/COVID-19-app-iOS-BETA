@@ -44,7 +44,8 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
     // comfortably less than the ~10s background processing time Core Bluetooth gives us when it wakes us up
     private let keepaliveInterval: TimeInterval = 8.0
     
-    private var lastKeepalive: Date = Date.distantPast
+    private var lastKeepaliveDate: Date = Date.distantPast
+    private var keepaliveValue: UInt8 = 0
     private var keepaliveTimer: DispatchSourceTimer?
     private let dateFormatter = ISO8601DateFormatter()
     private let queue: DispatchQueue
@@ -220,7 +221,13 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
             peripheral.readRSSI()
             
         case (let data?) where characteristic.uuid == ConcreteBTLEBroadcaster.keepaliveCharacteristicUUID:
-            logger.info("read keepalive value from peripheral \(peripheral.identifierWithName): \(data)")
+            guard data.count == 1 else {
+                logger.info("invalid keepalive value \(data)")
+                return
+            }
+            
+            let keepaliveValue = data.withUnsafeBytes { $0.load(as: UInt8.self) }
+            logger.info("read keepalive value from peripheral \(peripheral.identifierWithName): \(keepaliveValue)")
             readRSSIAndSendKeepalive()
             
         case .none:
@@ -243,23 +250,24 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
     }
 
     private func readRSSIAndSendKeepalive() {
-        guard Date().timeIntervalSince(lastKeepalive) > keepaliveInterval else {
-            logger.info("too soon, won't send keepalive (lastKeepalive = \(dateFormatter.string(from: lastKeepalive)))")
+        guard Date().timeIntervalSince(lastKeepaliveDate) > keepaliveInterval else {
+            logger.info("too soon, won't send keepalive (lastKeepalive = \(lastKeepaliveDate))")
             return
         }
-        
-        logger.info("scheduling keepalive")
-        lastKeepalive = Date()
+
+        logger.info("reading RSSI for \(peripherals.values.count) \(peripherals.values.count == 1 ? "peripheral" : "peripherals")")
         for peripheral in peripherals.values {
             peripheral.readRSSI()
         }
+        
+        logger.info("scheduling keepalive")
+        lastKeepaliveDate = Date()
+        keepaliveValue = keepaliveValue &+ 1 // note "&+" overflowing add operator, this is required
+        let value = Data(bytes: &self.keepaliveValue, count: MemoryLayout.size(ofValue: self.keepaliveValue))
         keepaliveTimer = DispatchSource.makeTimerSource(queue: queue)
-        keepaliveTimer?.setEventHandler(handler: { [weak self] in
-            if let value = self?.dateFormatter.string(from: Date()).data(using: .utf8) {
-                print("\(#function) sending keepalive value \(value)")
-                self?.broadcaster.sendKeepalive(value: value)
-            }
-        })
+        keepaliveTimer?.setEventHandler {
+            self.broadcaster.sendKeepalive(value: value)
+        }
         keepaliveTimer?.schedule(deadline: DispatchTime.now() + keepaliveInterval)
         keepaliveTimer?.resume()
     }
