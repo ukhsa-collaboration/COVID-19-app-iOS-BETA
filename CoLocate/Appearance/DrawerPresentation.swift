@@ -24,16 +24,22 @@ class DrawerPresentationController: UIPresentationController {
     }()
 
     override var frameOfPresentedViewInContainerView: CGRect {
-        guard let containerBounds = containerView?.bounds, let presentedView = presentedView else { return .zero }
+        guard
+            let containerView = containerView,
+            let presentedView = presentedView
+            else { return .zero }
 
-        let widthConstraint = presentedView.widthAnchor.constraint(equalToConstant: containerBounds.size.width)
+        let safeBounds = containerView.bounds.inset(by: containerView.safeAreaInsets)
+
+        let widthConstraint = presentedView.widthAnchor.constraint(equalToConstant: safeBounds.size.width)
         widthConstraint.isActive = true
 
-        let size = presentedView.systemLayoutSizeFitting(CGSize(width: containerBounds.size.width, height: 0))
+        var size = presentedView.systemLayoutSizeFitting(CGSize(width: safeBounds.size.width, height: 0))
+        size.height += containerView.safeAreaInsets.bottom
 
         presentedView.removeConstraint(widthConstraint)
 
-        let origin = CGPoint(x: 0, y: containerBounds.size.height - size.height)
+        let origin = CGPoint(x: 0, y: containerView.bounds.size.height - size.height)
         return CGRect(origin: origin, size: size)
     }
 
