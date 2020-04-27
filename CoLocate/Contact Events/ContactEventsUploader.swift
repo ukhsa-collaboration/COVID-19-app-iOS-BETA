@@ -26,7 +26,7 @@ class ContactEventsUploader {
 
     static let backgroundIdentifier = "ContactEventUploader"
 
-    let sessionDelegate: ContactEventsUploaderSessionDelegate = ContactEventsUploaderSessionDelegate()
+    let sessionDelegate: ContactEventsUploaderSessionDelegate = ContactEventsUploaderSessionDelegate(validator: DefaultTrustValidating())
 
     let persisting: Persisting
     let contactEventRepository: ContactEventRepository
@@ -117,7 +117,7 @@ class ContactEventsUploader {
 // We need to pass the URLSession delegate when we create the URLSession, so this
 // creates a catch-22 that we resolve by having this separate delegate object be
 // initialized first.
-class ContactEventsUploaderSessionDelegate: NSObject, URLSessionTaskDelegate {
+class ContactEventsUploaderSessionDelegate: TrustValidatingURLSessionDelegate, URLSessionTaskDelegate {
 
     let logger = Logger(label: "ContactEventsUploaderSessionDelegate")
 
