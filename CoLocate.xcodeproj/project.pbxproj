@@ -533,8 +533,8 @@
 		0995ABCD243D034E0057C0D7 /* Status */ = {
 			isa = PBXGroup;
 			children = (
-				134470AF2454D614001A0AD9 /* CoughUpdateViewController.swift */,
 				F758B8C3242CC0EE003AE16D /* Status.storyboard */,
+				134470AF2454D614001A0AD9 /* CoughUpdateViewController.swift */,
 				214209B52421072C00C7BFF3 /* StatusViewController.swift */,
 				F652F72D244E472E00D97950 /* SymptomsPromptViewController.swift */,
 				138114E32450543600BA46C7 /* SymptomStackView.swift */,
