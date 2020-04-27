@@ -113,6 +113,28 @@ class OnboardingCoordinatorTests: TestCase {
         XCTAssertEqual(state, .permissions)
     }
     
+    func testDoesNotGetStuckOnBluetoothWhenAuthorizedButNotStarted() {
+        let persistenceDouble = PersistenceDouble(partialPostcode: "1234")
+        let authManagerDouble = AuthorizationManagerDouble(bluetooth: .allowed)
+        let bluetoothNursery = BluetoothNurseryDouble()
+        let onboardingCoordinator = OnboardingCoordinator(
+            persistence: persistenceDouble,
+            authorizationManager: authManagerDouble,
+            bluetoothNursery: bluetoothNursery
+        )
+
+        XCTAssertFalse(bluetoothNursery.hasStarted)
+
+        var state: OnboardingCoordinator.State?
+        onboardingCoordinator.state { state = $0 }
+        
+        XCTAssertTrue(bluetoothNursery.hasStarted)
+        bluetoothNursery.stateObserver.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
+        XCTAssertNotNil(authManagerDouble.notificationsCompletion)
+        authManagerDouble.notificationsCompletion?(.allowed)
+        XCTAssertEqual(state, .done)
+    }
+    
     func testNotificationsDenied() {
         let persistenceDouble = PersistenceDouble(partialPostcode: "1234")
         let authManagerDouble = AuthorizationManagerDouble(bluetooth: .allowed)

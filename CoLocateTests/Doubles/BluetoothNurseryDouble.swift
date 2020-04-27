@@ -19,11 +19,11 @@ class BluetoothNurseryDouble: BluetoothNursery {
     var contactEventPersister: ContactEventPersister = ContactEventPersisterDouble()
     var createListenerCalled = false
     var createBroadcasterCalled = false
-    var startBluetoothCalled = false
+    var hasStarted = false
     var registrationPassedToStartBluetooth: Registration?
     
     func startBluetooth(registration: Registration?) {
-        startBluetoothCalled = true
+        hasStarted = true
         registrationPassedToStartBluetooth = registration
     }    
 }

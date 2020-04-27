@@ -39,7 +39,7 @@ class AppDelegateTest: XCTestCase {
         
         _ = appDelegate.application(UIApplication.shared, didFinishLaunchingWithOptions: nil)
 
-        XCTAssertFalse(nursery.startBluetoothCalled)
+        XCTAssertFalse(nursery.hasStarted)
         XCTAssertFalse(nursery.createListenerCalled)
         XCTAssertFalse(nursery.createBroadcasterCalled)
     }
@@ -49,7 +49,7 @@ class AppDelegateTest: XCTestCase {
         
         _ = appDelegate.application(UIApplication.shared, didFinishLaunchingWithOptions: nil)
 
-        XCTAssertTrue(nursery.startBluetoothCalled)
+        XCTAssertTrue(nursery.hasStarted)
         XCTAssertFalse(nursery.createListenerCalled)
         XCTAssertFalse(nursery.createBroadcasterCalled)
     }
@@ -60,7 +60,7 @@ class AppDelegateTest: XCTestCase {
 
         _ = appDelegate.application(UIApplication.shared, didFinishLaunchingWithOptions: nil)
 
-        XCTAssertTrue(nursery.startBluetoothCalled)
+        XCTAssertTrue(nursery.hasStarted)
         XCTAssertFalse(nursery.createListenerCalled)
         XCTAssertFalse(nursery.createBroadcasterCalled)
         XCTAssertEqual(nursery.registrationPassedToStartBluetooth, persistence.registration)
@@ -72,7 +72,7 @@ class AppDelegateTest: XCTestCase {
         
         _ = appDelegate.application(UIApplication.shared, didFinishLaunchingWithOptions: nil)
 
-        XCTAssertTrue(nursery.startBluetoothCalled)
+        XCTAssertTrue(nursery.hasStarted)
         XCTAssertFalse(nursery.createListenerCalled)
         XCTAssertFalse(nursery.createBroadcasterCalled)
     }

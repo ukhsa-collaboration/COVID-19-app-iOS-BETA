@@ -18,6 +18,7 @@ protocol BluetoothNursery {
     var broadcaster: BTLEBroadcaster? { get }
 
     func startBluetooth(registration: Registration?)
+    var hasStarted: Bool { get }
 }
 
 class ConcreteBluetoothNursery: BluetoothNursery, PersistenceDelegate {
@@ -83,6 +84,8 @@ class ConcreteBluetoothNursery: BluetoothNursery, PersistenceDelegate {
         
         self.listener = listener
     }
+    
+    var hasStarted: Bool { return self.listener != nil }
     
     // MARK: - PersistenceDelegate
 

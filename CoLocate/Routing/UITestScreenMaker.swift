@@ -145,7 +145,9 @@ private class EphemeralRemoteNotificationManager: RemoteNotificationManager {
 private struct MockError: Error {}
 
 private class NoOpBluetoothNursery: BluetoothNursery {
+    var hasStarted = false
     func startBluetooth(registration: Registration?) {
+        hasStarted = true
     }
 
     var stateObserver: BluetoothStateObserving = BluetoothStateObserver(initialState: .poweredOn)

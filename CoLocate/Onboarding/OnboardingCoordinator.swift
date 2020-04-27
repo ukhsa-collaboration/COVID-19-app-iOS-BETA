@@ -73,8 +73,12 @@ class OnboardingCoordinator {
         case .allowed:
             let btStateObserver = self.bluetoothNursery.stateObserver
             
-            // TODO: This will never complete if Bluetooth hasn't been started yet.
-            // Can we prevent or at least warn/crash in that case?
+            if !bluetoothNursery.hasStarted {
+                logger.error("Bluetooth is allowed but not started. This should never happen unless the persistence was cleared in a debug build.")
+                // Because BT is allowed, we can safely start listening without any risk of showing
+                // a permissions prompt at the wrong time.
+                bluetoothNursery.startBluetooth(registration: persistence.registration)
+            }
 
             btStateObserver.observeUntilKnown { btState in
                 if btState == .poweredOff {
