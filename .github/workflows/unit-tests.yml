@@ -43,7 +43,7 @@ jobs:
       - name: Run Build
         env:
           SDK: ${{ matrix.run-config['sdk'] }}
-        run: xcodebuild -scheme CoLocate -sdk ${SDK} CODE_SIGNING_ALLOWED=NO
+        run: xcodebuild -scheme CoLocate -configuration release -sdk ${SDK} CODE_SIGNING_ALLOWED=NO
 
       - name: Notify Slack on Failure
         if: github.ref == 'refs/heads/master' && failure()
