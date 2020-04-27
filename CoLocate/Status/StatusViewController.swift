@@ -20,6 +20,7 @@ class StatusViewController: UIViewController, Storyboarded {
     private var statusProvider: StatusProvider!
 
     private lazy var drawerPresentationManager = DrawerPresentation()
+    private let localNotificationScheduler = LocalNotifcationScheduler(userNotificationCenter: UNUserNotificationCenter.current())
     
     @IBOutlet var registratonStatusView: UIView!
     @IBOutlet var registrationStatusIcon: UIImageView!
@@ -143,7 +144,8 @@ class StatusViewController: UIViewController, Storyboarded {
             navigationController: navigationController,
             persisting: persistence,
             contactEventsUploader: contactEventsUploader,
-            statusViewController: self
+            statusViewController: self,
+            localNotificationScheduler: localNotificationScheduler
         )
         coordinator.start()
         navigationController.modalPresentationStyle = .fullScreen

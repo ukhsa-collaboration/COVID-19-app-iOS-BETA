@@ -27,7 +27,7 @@ class LocalNotifcationScheduler {
         userNotificationCenter.add(request, withCompletionHandler: nil)
     }
     
-    func getDateAfter(days: Double, from date: Date) -> DateComponents {
+    private func getDateAfter(days: Double, from date: Date) -> DateComponents {
         var components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: Date(timeInterval: days * 24 * 60 * 60, since: date))
         components.hour = 7
         components.minute = 0

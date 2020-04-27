@@ -17,17 +17,20 @@ class SelfDiagnosisCoordinator: Coordinator {
     let persisting: Persisting
     let contactEventsUploader: ContactEventsUploader
     let statusViewController: StatusViewController
+    let localNotificationScheduler: LocalNotifcationScheduler
     
     init(
         navigationController: UINavigationController,
         persisting: Persisting,
         contactEventsUploader: ContactEventsUploader,
-        statusViewController: StatusViewController
+        statusViewController: StatusViewController,
+        localNotificationScheduler: LocalNotifcationScheduler
     ) {
         self.navigationController = navigationController
         self.persisting = persisting
         self.contactEventsUploader = contactEventsUploader
         self.statusViewController = statusViewController
+        self.localNotificationScheduler = localNotificationScheduler
     }
     
     var hasHighTemperature: Bool!
@@ -76,7 +79,8 @@ class SelfDiagnosisCoordinator: Coordinator {
             contactEventsUploader: contactEventsUploader,
             hasHighTemperature: hasHighTemperature,
             hasNewCough: hasNewCough,
-            statusViewController: statusViewController
+            statusViewController: statusViewController,
+            localNotificationScheduler: localNotificationScheduler
         )
         navigationController.pushViewController(vc, animated: true)
     }

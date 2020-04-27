@@ -19,19 +19,22 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
     private var symptoms: Set<Symptom>!
     private var startDate: Date!
     private var statusViewController: StatusViewController!
+    private var localNotificationScheduler: LocalNotifcationScheduler!
 
     func inject(
         persisting: Persisting,
         contactEventsUploader: ContactEventsUploader,
         symptoms: Set<Symptom>,
         startDate: Date,
-        statusViewController: StatusViewController
+        statusViewController: StatusViewController,
+        localNotificationScheduler: LocalNotifcationScheduler
     ) {
         self.persisting = persisting
         self.contactEventsUploader = contactEventsUploader
         self.statusViewController = statusViewController
         self.symptoms = symptoms
         self.startDate = startDate
+        self.localNotificationScheduler = localNotificationScheduler
     }
 
     // MARK: - UIKit
@@ -67,8 +70,7 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
                     
             if symptoms.contains(.temperature) || (hasCough && !selfDiagnosis.hasExpired()) {
                 persisting.selfDiagnosis = selfDiagnosis
-                // Add notification here
-                
+                localNotificationScheduler.scheduleDiagnosisNotification(days: 8)
             } else {
                 if hasCough {
                     statusViewController.updatePrompt()
