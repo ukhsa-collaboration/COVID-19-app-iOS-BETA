@@ -77,12 +77,24 @@ jobs:
           MATCH_PASSWORD: ${{ secrets.match_password }}
         run: fastlane release sonar_env:${{ github.event.deployment.environment }}
 
+      - name: Create App Report
+        run: |
+          cd Reporting
+          swift run Reporter ipa ../CoLocate.ipa --output AppReport || true
+          cd ..
+
       - name: Upload IPA
         uses: actions/upload-artifact@v1
         with:
           name: CoLocate.ipa
           path: CoLocate.ipa
 
+      - name: Upload App Report
+        uses: actions/upload-artifact@v1
+        with:
+          name: AppReport
+          path: Reporting/AppReport
+  
       - name: Update Deployment Status on Success
         if: success()
         run: >
