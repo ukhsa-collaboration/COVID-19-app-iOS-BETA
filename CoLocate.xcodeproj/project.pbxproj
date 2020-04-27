@@ -46,7 +46,6 @@
 		09E876BC24510F2C009C2628 /* BluetoothNurseryDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E876BB24510F2C009C2628 /* BluetoothNurseryDouble.swift */; };
 		131AB05C2449D85B002136CA /* ContactEventExpiryHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131AB05B2449D85B002136CA /* ContactEventExpiryHandler.swift */; };
 		131AB05E2449D894002136CA /* ContactEventExpiryHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131AB05D2449D894002136CA /* ContactEventExpiryHandlerTests.swift */; };
-		134470AA2454D38C001A0AD9 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134470A92454D38C001A0AD9 /* Environment.swift */; };
 		134470AD2454D4DA001A0AD9 /* UpdateDiagnosisCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134470AB2454D4DA001A0AD9 /* UpdateDiagnosisCoordinator.swift */; };
 		134470AE2454D4DA001A0AD9 /* SelfDiagnosisCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134470AC2454D4DA001A0AD9 /* SelfDiagnosisCoordinator.swift */; };
 		134470B02454D614001A0AD9 /* CoughUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134470AF2454D614001A0AD9 /* CoughUpdateViewController.swift */; };
@@ -256,7 +255,6 @@
 		09E876BB24510F2C009C2628 /* BluetoothNurseryDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothNurseryDouble.swift; sourceTree = "<group>"; };
 		131AB05B2449D85B002136CA /* ContactEventExpiryHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventExpiryHandler.swift; sourceTree = "<group>"; };
 		131AB05D2449D894002136CA /* ContactEventExpiryHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventExpiryHandlerTests.swift; sourceTree = "<group>"; };
-		134470A92454D38C001A0AD9 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		134470AB2454D4DA001A0AD9 /* UpdateDiagnosisCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateDiagnosisCoordinator.swift; sourceTree = "<group>"; };
 		134470AC2454D4DA001A0AD9 /* SelfDiagnosisCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfDiagnosisCoordinator.swift; sourceTree = "<group>"; };
 		134470AF2454D614001A0AD9 /* CoughUpdateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoughUpdateViewController.swift; sourceTree = "<group>"; };
@@ -756,7 +754,6 @@
 				895D9E4924374EB800573D4D /* Routing */,
 				0995ABCD243D034E0057C0D7 /* Status */,
 				F68B89EB243CFEEE00F369A9 /* SelfDiagnosis */,
-				134470A92454D38C001A0AD9 /* Environment.swift */,
 			);
 			path = CoLocate;
 			sourceTree = "<group>";
@@ -1268,7 +1265,6 @@
 				0997D056243BDEEC0067346C /* RootViewController.swift in Sources */,
 				F72EBDA2243D0892009F9328 /* SecureBroadcastRotationKeyStorage.swift in Sources */,
 				F60497772454A294002B8503 /* LinkingIdViewController.swift in Sources */,
-				134470AA2454D38C001A0AD9 /* Environment.swift in Sources */,
 				21AF36AB241A8E50001A4910 /* BTLEListener.swift in Sources */,
 				21C09A8D24377F5100368203 /* CoreBluetoothExtensions.swift in Sources */,
 				F72EBDA7243D2FD1009F9328 /* BroadcastIdEncrypter.swift in Sources */,
