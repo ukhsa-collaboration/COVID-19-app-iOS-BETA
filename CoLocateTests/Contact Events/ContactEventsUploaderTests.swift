@@ -288,7 +288,7 @@ fileprivate extension ContactEventsUploader {
         self.init(
             persisting: persisting,
             contactEventRepository: contactEventRepository,
-            trustValidator: DefaultTrustValidating(),
+            trustValidator: TrustValidatingDouble(),
             makeSession: makeSession
         )
     }

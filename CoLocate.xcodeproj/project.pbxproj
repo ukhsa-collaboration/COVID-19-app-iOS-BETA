@@ -108,6 +108,8 @@
 		898FE859243B4FE300210775 /* AuthorizationManaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898FE858243B4FE300210775 /* AuthorizationManaging.swift */; };
 		898FE860243B5AF700210775 /* UITestScreenMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898FE85F243B5AF700210775 /* UITestScreenMaker.swift */; };
 		89BC79EB2434E047002050F8 /* LogsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BC79EA2434E047002050F8 /* LogsViewController.swift */; };
+		89CCF65F2456EF7000AC9D91 /* TrustValidatingDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CCF65E2456EF7000AC9D91 /* TrustValidatingDouble.swift */; };
+		89CCF6612456F07400AC9D91 /* URLAuthenticationChallenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CCF6602456F07400AC9D91 /* URLAuthenticationChallenge.swift */; };
 		89CE566B24503E93004A74D0 /* TrustValidatingURLSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CE566A24503E93004A74D0 /* TrustValidatingURLSessionDelegate.swift */; };
 		89CE566D24504050004A74D0 /* TrustValidatingURLSessionDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CE566C24504050004A74D0 /* TrustValidatingURLSessionDelegateTests.swift */; };
 		89F06B2F2434A62C0074C612 /* LoggingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F06B2E2434A62C0074C612 /* LoggingManager.swift */; };
@@ -327,6 +329,8 @@
 		898FE858243B4FE300210775 /* AuthorizationManaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationManaging.swift; sourceTree = "<group>"; };
 		898FE85F243B5AF700210775 /* UITestScreenMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestScreenMaker.swift; sourceTree = "<group>"; };
 		89BC79EA2434E047002050F8 /* LogsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogsViewController.swift; sourceTree = "<group>"; };
+		89CCF65E2456EF7000AC9D91 /* TrustValidatingDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustValidatingDouble.swift; sourceTree = "<group>"; };
+		89CCF6602456F07400AC9D91 /* URLAuthenticationChallenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLAuthenticationChallenge.swift; sourceTree = "<group>"; };
 		89CE566A24503E93004A74D0 /* TrustValidatingURLSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustValidatingURLSessionDelegate.swift; sourceTree = "<group>"; };
 		89CE566C24504050004A74D0 /* TrustValidatingURLSessionDelegateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustValidatingURLSessionDelegateTests.swift; sourceTree = "<group>"; };
 		89DA61F12449A56F0079A761 /* FIRAnalyticsConnector.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FIRAnalyticsConnector.framework; path = Frameworks/FIRAnalyticsConnector.framework; sourceTree = "<group>"; };
@@ -521,6 +525,7 @@
 				09E876BB24510F2C009C2628 /* BluetoothNurseryDouble.swift */,
 				09D91A7824522133004825A5 /* BTLEListenerDouble.swift */,
 				F60497662452415F002B8503 /* ContactEventsUploaderDouble.swift */,
+				89CCF65E2456EF7000AC9D91 /* TrustValidatingDouble.swift */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -603,6 +608,7 @@
 				1347DAEF245090AD00F2F776 /* Local Notifications */,
 				F72EBD99243C8738009F9328 /* Bluetooth */,
 				21F374002433845600926FB8 /* Contact Events */,
+				89CCF6622456F07900AC9D91 /* FakeData */,
 				098ED486242E89760029B729 /* Doubles */,
 				214209DA242630CF00C7BFF3 /* Networking */,
 				F6F05A222433BEAC00FF4B72 /* Onboarding */,
@@ -822,6 +828,14 @@
 				898FE853243B42E700210775 /* OnboardingTests.swift */,
 			);
 			path = Flows;
+			sourceTree = "<group>";
+		};
+		89CCF6622456F07900AC9D91 /* FakeData */ = {
+			isa = PBXGroup;
+			children = (
+				89CCF6602456F07400AC9D91 /* URLAuthenticationChallenge.swift */,
+			);
+			path = FakeData;
 			sourceTree = "<group>";
 		};
 		89F06B2D2434A5A50074C612 /* Logging */ = {
@@ -1184,6 +1198,7 @@
 				F60497672452415F002B8503 /* ContactEventsUploaderDouble.swift in Sources */,
 				F632792124351C1900CF7A42 /* OnboardingViewControllerTests.swift in Sources */,
 				095A91182434FF1500ED6369 /* ApplicationDouble.swift in Sources */,
+				89CCF6612456F07400AC9D91 /* URLAuthenticationChallenge.swift in Sources */,
 				09CAA36C24413E0700CE93A6 /* ViewControllerContainerDouble.swift in Sources */,
 				09D91A7924522133004825A5 /* BTLEListenerDouble.swift in Sources */,
 				F632792324351C8400CF7A42 /* OnboardingCoordinatorDouble.swift in Sources */,
@@ -1204,6 +1219,7 @@
 				0983ACD3243EB22200DBB336 /* StatusViewControllerTests.swift in Sources */,
 				896BE912244F11D100B3687C /* PublicKeyValidatorTests.swift in Sources */,
 				F62F858124510716006580A8 /* ContactEventsUploaderTests.swift in Sources */,
+				89CCF65F2456EF7000AC9D91 /* TrustValidatingDouble.swift in Sources */,
 				F600A60424297C010038DF57 /* RegistrationRequestTests.swift in Sources */,
 				8976B15D2451B62100154ADF /* RequstTests.swift in Sources */,
 				21E5051324448AE30065C69B /* PlistPersisterTests.swift in Sources */,

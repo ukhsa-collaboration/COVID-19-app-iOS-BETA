@@ -23,12 +23,16 @@ extension URLSessionConfiguration {
 }
 
 extension URLSession {
-    // Use of `ephemeral` here is a precaution. We are disabling all caching manually anyway, but using this instead
-    // of `default` means if we miss something (especially as new properties are added over time) we’ll inherit the
-    // `ephemeral` value instead of the `default` one.
-    static func make(with configuration: URLSessionConfiguration = .ephemeral) -> URLSession {
+    
+    convenience init(trustValidator: TrustValidating) {
+        // Use of `ephemeral` here is a precaution. We are disabling all caching manually anyway, but using this instead
+        // of `default` means if we miss something (especially as new properties are added over time) we’ll inherit the
+        // `ephemeral` value instead of the `default` one.
+        let configuration: URLSessionConfiguration = .ephemeral
         configuration.secure()
-        return URLSession(configuration: configuration)
+        
+        let delegate = TrustValidatingURLSessionDelegate(validator: trustValidator)
+        self.init(configuration: configuration, delegate: delegate, delegateQueue: nil)
     }
 }
 

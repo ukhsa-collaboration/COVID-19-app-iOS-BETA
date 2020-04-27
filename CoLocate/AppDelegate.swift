@@ -18,9 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     let notificationCenter = NotificationCenter.default
     let userNotificationCenter = UNUserNotificationCenter.current()
-    let trustValidator = DefaultTrustValidating()
-    let urlSession = URLSession.make()
     let authorizationManager = AuthorizationManager()
+    
+    #warning("Replace with a `PublicKeyValidator` configured from the environment.")
+    let trustValidator = DefaultTrustValidating()
+    
+    lazy var urlSession: Session = URLSession(trustValidator: trustValidator)
 
     lazy var dispatcher: RemoteNotificationDispatching = RemoteNotificationDispatcher(
         notificationCenter: notificationCenter,
