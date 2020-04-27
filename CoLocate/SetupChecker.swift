@@ -46,10 +46,6 @@ class SetupChecker {
     }
     
     func check(_ callback: @escaping (SetupProblem?) -> Void) {
-        // We can only show one error at a time. We show them in this order, if possible:
-        // 1. Bluetooth off
-        // 2. No Bluetooth permissions
-        // 3. No notification permsisions
         var notificationStatus: NotificationAuthorizationStatus?
         var btStatus: CBManagerState?
         
