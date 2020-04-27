@@ -172,6 +172,9 @@ class StatusViewController: UIViewController, Storyboarded {
         diagnosis = persistence.selfDiagnosis
     }
 
+    @IBAction func unwindFromLinkingId(unwindSegue: UIStoryboardSegue) {
+    }
+
     func renderStatus() {
         guard view != nil else { return }
         
