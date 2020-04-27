@@ -20,6 +20,7 @@ class DrawerPresentationController: UIPresentationController {
         let view = UIView()
         view.backgroundColor = UIColor(white: 0.0, alpha: 0.4)
         view.alpha = 0.0
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
@@ -31,7 +32,7 @@ class DrawerPresentationController: UIPresentationController {
 
         let safeBounds = containerView.bounds.inset(by: containerView.safeAreaInsets)
 
-        let widthConstraint = presentedView.widthAnchor.constraint(equalToConstant: safeBounds.size.width)
+        let widthConstraint = presentedView.widthAnchor.constraint(equalToConstant: containerView.bounds.size.width)
         widthConstraint.isActive = true
 
         var size = presentedView.systemLayoutSizeFitting(CGSize(width: safeBounds.size.width, height: 0))
@@ -50,15 +51,20 @@ class DrawerPresentationController: UIPresentationController {
     override func presentationTransitionWillBegin() {
         super.presentationTransitionWillBegin()
 
-        guard let containerBounds = containerView?.bounds, let presentedView = presentedView else { return }
+        guard let containerView = containerView, let presentedView = presentedView else { return }
+
+        dimmingView.alpha = 0.0
+        containerView.insertSubview(dimmingView, at: 0)
+        NSLayoutConstraint.activate([
+            dimmingView.leftAnchor.constraint(equalTo: containerView.leftAnchor),
+            dimmingView.topAnchor.constraint(equalTo: containerView.topAnchor),
+            dimmingView.rightAnchor.constraint(equalTo: containerView.rightAnchor),
+            dimmingView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
+        ])
 
         presentedView.layer.masksToBounds = true
         presentedView.layer.cornerRadius = 16
         presentedView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-
-        dimmingView.frame = containerBounds
-        dimmingView.alpha = 0.0
-        containerView?.insertSubview(dimmingView, at: 0)
 
         if let transitionCoordinator = presentedViewController.transitionCoordinator {
             transitionCoordinator.animate(alongsideTransition: { _ in
@@ -73,6 +79,16 @@ class DrawerPresentationController: UIPresentationController {
         if !completed {
             dimmingView.removeFromSuperview()
         }
+    }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+
+        guard let presentedView = presentedView else { return }
+
+        coordinator.animate(alongsideTransition: { _ in
+            presentedView.frame = self.frameOfPresentedViewInContainerView
+        }, completion: nil)
     }
 
     override func dismissalTransitionWillBegin() {
