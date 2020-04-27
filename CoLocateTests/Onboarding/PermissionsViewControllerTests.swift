@@ -12,7 +12,7 @@ import XCTest
 
 class PermissionsViewControllerTests: TestCase {
     
-    func testBluetoothNotDetermined_callsContinueHandlerWhenBothGranted() {
+    func test_ios13_BluetoothNotDetermined_callsContinueHandlerWhenBothGranted() {
         let authManagerDouble = AuthorizationManagerDouble(bluetooth: .notDetermined)
         let remoteNotificationManagerDouble = RemoteNotificationManagerDouble()
         let nursery = BluetoothNurseryDouble()
@@ -46,6 +46,45 @@ class PermissionsViewControllerTests: TestCase {
         authManagerDouble.notificationsCompletion?(.allowed)
         XCTAssertTrue(continued)
     }
+
+    func test_ios12_BluetoothNotDetermined_callsContinueHandlerWhenViewAppearsAfterBothGranted() {
+        let authManagerDouble = AuthorizationManagerDouble(bluetooth: .notDetermined)
+        let remoteNotificationManagerDouble = RemoteNotificationManagerDouble()
+        let nursery = BluetoothNurseryDouble()
+        let persistence = PersistenceDouble()
+        let vc = PermissionsViewController.instantiate()
+        var continued = false
+        vc.inject(authManager: authManagerDouble,
+                  remoteNotificationManager: remoteNotificationManagerDouble,
+                  bluetoothNursery: nursery,
+                  persistence: persistence,
+                  uiQueue: QueueDouble()) {
+            continued = true
+        }
+
+        parentViewControllerForTests.viewControllers = [vc]
+        XCTAssertNotNil(vc.view)
+
+        vc.didTapContinue()
+
+        XCTAssertTrue(persistence.bluetoothPermissionRequested)
+
+        #if targetEnvironment(simulator)
+        // We skip Bluetooth on the simulator.
+        #else
+        nursery.stateObserver.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
+        authManagerDouble.bluetooth = .allowed
+        vc.viewWillAppear(false) // called when the user returns to the app
+        XCTAssertNotNil(authManagerDouble.bluetoothCompletion)
+        authManagerDouble.bluetoothCompletion?(.allowed)
+        #endif
+
+        XCTAssertFalse(continued)
+        XCTAssertNotNil(authManagerDouble.notificationsCompletion)
+        authManagerDouble.notificationsCompletion?(.allowed)
+        XCTAssertTrue(continued)
+    }
+
 
     func testBluetoothNotDetermined_callsContinueHandlerOnChangeToDenied() throws {
         #if targetEnvironment(simulator)
@@ -96,8 +135,11 @@ class PermissionsViewControllerTests: TestCase {
 
         parentViewControllerForTests.viewControllers = [vc]
         XCTAssertNotNil(vc.view)
+        vc.viewWillAppear(false)
 
         XCTAssertFalse(continued)
+        XCTAssertNotNil(authManagerDouble.bluetoothCompletion)
+        authManagerDouble.bluetoothCompletion?(.allowed)
         XCTAssertNotNil(authManagerDouble.notificationsCompletion)
         authManagerDouble.notificationsCompletion?(.allowed)
         XCTAssertTrue(continued)
@@ -115,6 +157,7 @@ class PermissionsViewControllerTests: TestCase {
 
         parentViewControllerForTests.viewControllers = [vc]
         XCTAssertNotNil(vc.view)
+        vc.viewWillAppear(false)
         XCTAssertTrue(vc.activityIndicator.isHidden)
         XCTAssertFalse(vc.continueButton.isHidden)
 

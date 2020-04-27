@@ -72,6 +72,9 @@ class OnboardingCoordinator {
             completion(.bluetoothDenied)
         case .allowed:
             let btStateObserver = self.bluetoothNursery.stateObserver
+            
+            // TODO: This will never complete if Bluetooth hasn't been started yet.
+            // Can we prevent or at least warn/crash in that case?
 
             btStateObserver.observeUntilKnown { btState in
                 if btState == .poweredOff {

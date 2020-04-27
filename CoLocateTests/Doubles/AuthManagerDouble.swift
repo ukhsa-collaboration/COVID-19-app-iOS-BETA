@@ -11,11 +11,17 @@ import Foundation
 
 class AuthorizationManagerDouble: AuthorizationManaging {
 
-    var bluetooth: BluetoothAuthorizationStatus
+    var bluetoothCompletion: ((BluetoothAuthorizationStatus) -> Void)?
     var notificationsCompletion: ((NotificationAuthorizationStatus) -> Void)?
-
+    
+    var bluetooth: BluetoothAuthorizationStatus
+    
     init(bluetooth: BluetoothAuthorizationStatus = .notDetermined) {
         self.bluetooth = bluetooth
+    }
+    
+    func waitForDeterminedBluetoothAuthorizationStatus(completion: @escaping (BluetoothAuthorizationStatus) -> Void) {
+        bluetoothCompletion = completion
     }
 
     func notifications(completion: @escaping (NotificationAuthorizationStatus) -> Void) {

@@ -10,7 +10,34 @@ import CoreBluetooth
 import Foundation
 
 class AuthorizationManager: AuthorizationManaging {
-        
+    
+    // WARNING: Don't call this except in situations where it's certain that the nursery will
+    // have been started already (or at least, very soon). If the nursery is not started, the
+    // completion handler will never be called.
+    func waitForDeterminedBluetoothAuthorizationStatus(
+        completion: @escaping (BluetoothAuthorizationStatus) -> Void
+    ) {
+        if #available(iOS 13.1, *) {
+            completion(bluetooth)
+        } else {
+            Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) { timer in
+                switch CBPeripheralManager.authorizationStatus() {
+
+                case .notDetermined:
+                    return
+                    
+                case .authorized:
+                    completion(.allowed)
+                    timer.invalidate()
+                    
+                default:
+                    completion(.denied)
+                    timer.invalidate()
+                }
+            }
+        }
+    }
+    
     var bluetooth: BluetoothAuthorizationStatus {
         if #available(iOS 13.1, *) {
             switch CBManager.authorization {

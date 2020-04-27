@@ -10,7 +10,6 @@ import UIKit
 import Logging
 import CoreBluetooth
 
-
 class PermissionsViewController: UIViewController, Storyboarded {
     static let storyboardName = "Onboarding"
 
@@ -39,22 +38,29 @@ class PermissionsViewController: UIViewController, Storyboarded {
         self.uiQueue = uiQueue
         self.continueHandler = continueHandler
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+        
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         activityIndicator.isHidden = true
         
-        if authManager.bluetooth == .allowed {
-            // If we get here, it most likely means that the user just went through the following flow:
-            // 1. Visited this screen
-            // 2. Denied Bluetooth permission
-            // 3. Was shown the screen explaining why we need permission
-            // 4. Granted permission
-            // 5. Was redirected here.
-            //
-            // Prompt for notification permissions right away, to save taps and not make the user wonder
-            // why they're having to go through this part of the flow a second time.
-            maybeRequestNotificationPermissions()
+        authManager.waitForDeterminedBluetoothAuthorizationStatus { [weak self] status in
+            guard let self = self, status == .allowed else {
+                return
+            }
+
+            // If we get here, it likely means that one of two things happend:
+            // * This is the "happy path" on iOS 12. We need to prompt for notification permissions.
+            // * The user is on iOS 13 and went through the folloiwng flow:
+            //    1. Visited this screen
+            //    2. Denied Bluetooth permission
+            //    3. Was shown the screen explaining why we need permission
+            //    4. Granted permission
+            //    5. Was redirected here.
+            // In the iOS 13 case, prompting for notification permisisons right now saves taps and
+            // prevents the user from wondering why they have to go through this part of the flow
+            // a second time.
+            self.maybeRequestNotificationPermissions()
         }
     }
 
@@ -66,30 +72,19 @@ class PermissionsViewController: UIViewController, Storyboarded {
         persistence.bluetoothPermissionRequested = true
         
         #if targetEnvironment(simulator)
-        let bluetoothAuth = BluetoothAuthorizationStatus.allowed
-        #else
-        let bluetoothAuth = authManager.bluetooth
-        #endif
-        
-        if bluetoothAuth == .notDetermined {
-            requestBluetoothPermissions()
-        } else {
-            maybeRequestNotificationPermissions()
-        }
 
+            // There's no Bluetooth on the Simulator, so skip
+            // directly to asking for notification permissions.
+            maybeRequestNotificationPermissions()
+        
+        #else
+            requestBluetoothPermissions()
+        #endif
     }
 
     // MARK: - Private
 
     private func requestBluetoothPermissions() {
-        #if targetEnvironment(simulator)
-
-        // There's no Bluetooth on the Simulator, so skip
-        // directly to asking for notification permissions.
-        continueHandler()
-        
-        #else
-
         // observe, but don't ask for permissions yet
         // this will not trigger the prompt
         bluetoothNursery.stateObserver.observe { [weak self] _ in
@@ -109,8 +104,6 @@ class PermissionsViewController: UIViewController, Storyboarded {
 
         // Trigger the permissions prompt
         bluetoothNursery.startBluetooth(registration: nil)
-
-        #endif
     }
 
     private func maybeRequestNotificationPermissions() {

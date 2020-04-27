@@ -22,5 +22,6 @@ enum NotificationAuthorizationStatus: CaseIterable {
 
 protocol AuthorizationManaging {
     var bluetooth: BluetoothAuthorizationStatus { get }
+    func waitForDeterminedBluetoothAuthorizationStatus(completion: @escaping (BluetoothAuthorizationStatus) -> Void)
     func notifications(completion: @escaping (NotificationAuthorizationStatus) -> Void)
 }
