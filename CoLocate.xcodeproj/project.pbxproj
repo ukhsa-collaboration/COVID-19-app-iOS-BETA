@@ -880,13 +880,13 @@
 		F68B89EB243CFEEE00F369A9 /* SelfDiagnosis */ = {
 			isa = PBXGroup;
 			children = (
-				134470AC2454D4DA001A0AD9 /* SelfDiagnosisCoordinator.swift */,
-				134470AB2454D4DA001A0AD9 /* UpdateDiagnosisCoordinator.swift */,
-				13F4AE862451EACD0082A46D /* Controls */,
 				F68B89EC243CFF2600F369A9 /* SelfDiagnosis.storyboard */,
 				13F4AE872451EB330082A46D /* QuestionSymptomsViewController.swift */,
-				F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */,
 				F6EEC3B72448DD2400172820 /* SelfDiagnosis.swift */,
+				134470AC2454D4DA001A0AD9 /* SelfDiagnosisCoordinator.swift */,
+				F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */,
+				134470AB2454D4DA001A0AD9 /* UpdateDiagnosisCoordinator.swift */,
+				13F4AE862451EACD0082A46D /* Controls */,
 			);
 			path = SelfDiagnosis;
 			sourceTree = "<group>";
