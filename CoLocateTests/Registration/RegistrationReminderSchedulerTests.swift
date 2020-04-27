@@ -20,7 +20,7 @@ class RegistrationReminderSchedulerTests: TestCase {
         XCTAssertEqual(userNotificationCenter.request?.identifier, "registration.reminder")
         XCTAssertEqual(userNotificationCenter.request?.content.body, "Your registration has failed. Please open the app and select retry to complete your registration.")
         let trigger = userNotificationCenter.request?.trigger as? UNTimeIntervalNotificationTrigger
-        XCTAssertEqual(trigger?.timeInterval, 60 * 24)
+        XCTAssertEqual(trigger?.timeInterval, 60 * 60 * 24)
         XCTAssertEqual(trigger?.repeats, true)
     }
     

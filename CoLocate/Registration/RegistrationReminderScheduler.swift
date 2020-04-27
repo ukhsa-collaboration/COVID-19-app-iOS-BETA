@@ -23,7 +23,7 @@ class ConcreteRegistrationReminderScheduler: RegistrationReminderScheduler {
     func schedule() {
         let notificationScheduler = HumbleLocalNotificationScheduler(userNotificationCenter: userNotificationCenter)
         let body = "Your registration has failed. Please open the app and select retry to complete your registration."
-        notificationScheduler.scheduleLocalNotification(title: nil, body: body, interval: 24 * 60, identifier: identifier, repeats: true)
+        notificationScheduler.scheduleLocalNotification(title: nil, body: body, interval: 24 * 60 * 60, identifier: identifier, repeats: true)
     }
     
     func cancel() {
