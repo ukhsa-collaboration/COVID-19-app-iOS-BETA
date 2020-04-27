@@ -120,3 +120,12 @@ extension PostcodeViewController: UITextFieldDelegate {
         return existingLength - range.length + replacementString.count <= maxLength
     }
 }
+
+class ContinueButtonAccessoryView: UIView {
+    override var intrinsicContentSize: CGSize {
+        // This needs to be zero or else iOS adds
+        // a height constraint onto the view based
+        // on the frame height from Interface Builder.
+        .zero
+    }
+}
