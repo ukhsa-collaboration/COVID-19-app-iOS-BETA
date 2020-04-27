@@ -116,7 +116,7 @@ class BroadcastIdEncypterTests: XCTestCase {
             return nil
         }
 
-        let attributes: [String: Any] = [
+        var attributes: [String: Any] = [
           kSecAttrKeyType as String:            kSecAttrKeyTypeECSECPrimeRandom,
           kSecAttrKeySizeInBits as String:      256,
           kSecPrivateKeyAttrs as String: [
@@ -125,6 +125,11 @@ class BroadcastIdEncypterTests: XCTestCase {
             kSecAttrAccessControl as String:    access!
           ]
         ]
+
+        #if targetEnvironment(simulator)
+        #else
+            attributes[kSecAttrTokenID as String] = kSecAttrTokenIDSecureEnclave
+        #endif
 
         let privateKey = SecKeyCreateRandomKey(attributes as CFDictionary, &error)
         guard error == nil else {
