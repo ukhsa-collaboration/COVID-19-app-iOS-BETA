@@ -11,16 +11,24 @@ import XCTest
 
 class StatusProviderTests: XCTestCase {
 
+    var persisting: PersistenceDouble!
     var provider: StatusProvider!
 
     override func setUp() {
         super.setUp()
 
-        provider = StatusProvider()
+        persisting = PersistenceDouble()
+        provider = StatusProvider(persisting: persisting)
     }
 
     func testDefault() {
         XCTAssertEqual(provider.status, .blue)
+    }
+
+    func testPotentiallyExposed() {
+        persisting.potentiallyExposed = true
+
+        XCTAssertEqual(provider.status, .amber)
     }
 
 }

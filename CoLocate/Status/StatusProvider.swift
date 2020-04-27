@@ -15,7 +15,13 @@ enum Status: Equatable {
 class StatusProvider {
 
     var status: Status {
-        .blue
+        persisting.potentiallyExposed ? .amber : .blue
+    }
+
+    let persisting: Persisting
+
+    init(persisting: Persisting) {
+        self.persisting = persisting
     }
 
 }
