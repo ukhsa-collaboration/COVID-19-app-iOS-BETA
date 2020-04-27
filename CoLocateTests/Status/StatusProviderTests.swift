@@ -68,6 +68,26 @@ class StatusProviderTests: XCTestCase {
         XCTAssertEqual(provider.status, .red)
     }
 
+    func testAmberThenRedReturnsToBlue() {
+        let startDate: Date = currentDate
+        persisting.potentiallyExposed = currentDate // 04.01
+        XCTAssertEqual(provider.status, .amber)
+
+        advanceCurrentDate(by: 1)
+        persisting.selfDiagnosis = SelfDiagnosis(
+            symptoms: [.cough],
+            startDate: startDate
+        )
+        XCTAssertEqual(provider.status, .red)
+
+        advanceCurrentDate(by: 1)
+        persisting.selfDiagnosis = SelfDiagnosis(
+            symptoms: [],
+            startDate: startDate
+        )
+        XCTAssertEqual(provider.status, .blue)
+    }
+
     private func advanceCurrentDate(by days: Int) {
         currentDate = Calendar.current.date(
             byAdding: .day,
