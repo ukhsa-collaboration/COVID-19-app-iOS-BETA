@@ -12,6 +12,12 @@ import Logging
 
 let PotentiallyExposedNotification = NSNotification.Name("PotentiallyExposedNotification")
 
+// This naming is somewhat confusing, since in this application,
+// "status" means blue/amber/red, but the backend sends us a
+// notification with {"status": "Potential"} to alert us about a
+// potential exposure. This class handles the notification and
+// is where we convert from the server's terminology to ours.
+
 class StatusNotificationHandler {
 
     let logger = Logger(label: "StatusNotificationHandler")
