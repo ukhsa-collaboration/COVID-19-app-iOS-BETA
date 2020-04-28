@@ -80,14 +80,14 @@ jobs:
       - name: Create App Report
         run: |
           cd Reporting
-          swift run Reporter ipa ../CoLocate.ipa --output AppReport || true
+          swift run Reporter ipa ../Sonar.ipa --output AppReport || true
           cd ..
 
       - name: Upload IPA
         uses: actions/upload-artifact@v1
         with:
-          name: CoLocate.ipa
-          path: CoLocate.ipa
+          name: Sonar.ipa
+          path: Sonar.ipa
 
       - name: Upload App Report
         uses: actions/upload-artifact@v1
