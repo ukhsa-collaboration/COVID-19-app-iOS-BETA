@@ -42,26 +42,6 @@ class StatusViewController: UIViewController, Storyboarded {
 
     @IBOutlet weak var linkingIdView: UIStackView!
     @IBOutlet weak var linkingIdButton: ButtonWithDynamicType!
-
-    var diagnosis: SelfDiagnosis? {
-        didSet {
-            if let diagnosis = diagnosis {
-                if diagnosis.symptoms.contains(.cough) && !diagnosis.symptoms.contains(.temperature) {
-                    
-                }
-            }
-            renderStatus()
-        }
-    }
-    var potentiallyExposed: Date? {
-        didSet {
-            renderStatus()
-        }
-    }
-    
-    var status: Status {
-        statusProvider.status
-    }
     
     func inject(
         persistence: Persisting,
@@ -103,8 +83,9 @@ class StatusViewController: UIViewController, Storyboarded {
         
         notificationCenter.addObserver(self, selector: #selector(showRegisteredStatus), name: RegistrationCompletedNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(showRegistrationFailedStatus), name: RegistrationFailedNotification, object: nil)
-        notificationCenter.addObserver(self, selector: #selector(renderStatus), name: UIApplication.didBecomeActiveNotification, object: nil)
-        
+        notificationCenter.addObserver(self, selector: #selector(reload), name: UIApplication.didBecomeActiveNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(reload), name: PotentiallyExposedNotification, object: nil)
+
         #if PILOT
         linkingIdView.isHidden = false
         #else
@@ -120,15 +101,13 @@ class StatusViewController: UIViewController, Storyboarded {
         } else {
             register()
         }
-        
 
-        diagnosis = persistence.selfDiagnosis
-        potentiallyExposed = persistence.potentiallyExposed
+        reload()
     }
         
     @objc func diagnosisStatusTapped() {
         let path: String
-        switch status {
+        switch statusProvider.status {
         case .blue:
             path = "full-guidance-on-staying-at-home-and-away-from-others/full-guidance-on-staying-at-home-and-away-from-others"
         case .amber, .red:
@@ -178,16 +157,16 @@ class StatusViewController: UIViewController, Storyboarded {
     }
 
     @IBAction func unwindFromSelfDiagnosis(unwindSegue: UIStoryboardSegue) {
-        diagnosis = persistence.selfDiagnosis
+        reload()
     }
 
     @IBAction func unwindFromLinkingId(unwindSegue: UIStoryboardSegue) {
     }
 
-    @objc func renderStatus() {
+    @objc func reload() {
         guard view != nil else { return }
         
-        switch status {
+        switch statusProvider.status {
             case .blue:
                 diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Highlight")
                 diagnosisTitleLabel.text = "Keep following the current government advice".localized
@@ -202,17 +181,15 @@ class StatusViewController: UIViewController, Storyboarded {
                 howAreYouFeelingView.isHidden = true
         }
         
-        symptomStackView.symptoms = diagnosis?.symptoms
+        symptomStackView.symptoms = persistence.selfDiagnosis?.symptoms
         diagnosisStatusView.accessibilityLabel = "\(diagnosisTitleLabel.text!) \(readLatestAdviceLabel.text!)"
         
-        if let diagnosis = diagnosis {
-            if diagnosis.hasExpired() {
-                let symptomsPromptViewController = SymptomsPromptViewController.instantiate()
-                symptomsPromptViewController.modalPresentationStyle = .custom
-                symptomsPromptViewController.transitioningDelegate = drawerPresentationManager
-                symptomsPromptViewController.inject(persistence: persistence, statusViewController: self)
-                present(symptomsPromptViewController, animated: true)
-            }
+        if let diagnosis = persistence.selfDiagnosis, diagnosis.hasExpired() {
+            let symptomsPromptViewController = SymptomsPromptViewController.instantiate()
+            symptomsPromptViewController.modalPresentationStyle = .custom
+            symptomsPromptViewController.transitioningDelegate = drawerPresentationManager
+            symptomsPromptViewController.inject(persistence: persistence, statusViewController: self)
+            present(symptomsPromptViewController, animated: true)
         }
     }
     

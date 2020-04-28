@@ -33,7 +33,7 @@ class SymptomsPromptViewController: UIViewController, Storyboarded {
     
     @IBAction func noSymptoms(_ sender: Any) {
         persistence.selfDiagnosis = nil
-        statusViewController.diagnosis = nil
+        statusViewController.reload()
         dismiss(animated: true, completion: nil)
     }
 }

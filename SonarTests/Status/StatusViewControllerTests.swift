@@ -92,12 +92,29 @@ class StatusViewControllerTests: XCTestCase {
         XCTAssertEqual(vc.registrationStatusText?.textColor, UIColor(named: "NHS Text"))
         XCTAssertTrue(vc.registrationRetryButton?.isHidden ?? false)
     }
+
+    func testReloadsOnPotentiallyExposedNotification() {
+        let notificationCenter = NotificationCenter()
+        let statusProvider = StatusProviderDouble.double()
+        let vc = makeViewController(
+            persistence: PersistenceDouble(),
+            notificationCenter: notificationCenter,
+            statusProvider: statusProvider
+        )
+        XCTAssertEqual(vc.diagnosisTitleLabel.text, "Keep following the current government advice".localized)
+
+        statusProvider.status = .amber
+        notificationCenter.post(name: PotentiallyExposedNotification, object: nil)
+
+        XCTAssertEqual(vc.diagnosisTitleLabel.text, "You have been near someone who has coronavirus symptoms".localized)
+    }
 }
 
 fileprivate func makeViewController(
     persistence: Persisting,
     registrationService: RegistrationService = RegistrationServiceDouble(),
-    notificationCenter: NotificationCenter = NotificationCenter()
+    notificationCenter: NotificationCenter = NotificationCenter(),
+    statusProvider: StatusProvider = StatusProviderDouble.double()
 ) -> StatusViewController {
     let vc = StatusViewController.instantiate()
     vc.inject(
@@ -106,7 +123,7 @@ fileprivate func makeViewController(
         contactEventsUploader: ContactEventsUploaderDouble(),
         notificationCenter: notificationCenter,
         linkingIdManager: LinkingIdManagerDouble.make(),
-        statusProvider: StatusProviderDouble.double()
+        statusProvider: statusProvider
     )
     XCTAssertNotNil(vc.view)
     vc.viewWillAppear(false)

@@ -157,8 +157,7 @@ class RootViewController: UIViewController {
     @IBAction func unwindFromDebugViewController(unwindSegue: UIStoryboardSegue) {
         dismiss(animated: true)
 
-        statusViewController.diagnosis = persistence.selfDiagnosis
-        statusViewController.potentiallyExposed = persistence.potentiallyExposed
+        statusViewController.reload()
 
         if let vc = previouslyPresentedViewController {
             present(vc, animated: true)
