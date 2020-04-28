@@ -85,6 +85,7 @@ class StartDateViewController: UIViewController {
 
     @IBAction func buttonTapped(_ sender: StartDateButton) {
         self.datePicker.isHidden = !self.datePicker.isHidden
+        startDate = dateOptions[datePicker.selectedRow(inComponent: 0)]
     }
 
 }
