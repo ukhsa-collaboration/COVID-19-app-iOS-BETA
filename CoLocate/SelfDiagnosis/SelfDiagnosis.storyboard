@@ -12,7 +12,7 @@
         <!--Symptoms Summary-->
         <scene sceneID="f6I-iq-VS4">
             <objects>
-                <viewController storyboardIdentifier="SymptomsSummaryViewController" id="ofL-pj-tC8" userLabel="Symptoms Summary" customClass="SymptomsSummaryViewController" customModule="CoLocate" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SymptomsSummaryViewController" id="ofL-pj-tC8" userLabel="Symptoms Summary" customClass="SymptomsSummaryViewController" customModule="Sonar" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ctU-rB-bvE">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -138,7 +138,7 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8i4-HF-QBb" customClass="ButtonWithDynamicType" customModule="CoLocate" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8i4-HF-QBb" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="32" width="374" height="0.0"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                         <state key="normal" title="Button"/>
@@ -157,12 +157,11 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sem-eQ-a4a" userLabel="Button">
                                                 <rect key="frame" x="20" y="450.5" width="374" height="70"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JYn-nS-TUw" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JYn-nS-TUw" customClass="PrimaryButton" customModule="Sonar" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="16" width="374" height="54"/>
                                                         <state key="normal" title="Continue"/>
                                                         <connections>
                                                             <action selector="buttonTapped:" destination="ofL-pj-tC8" eventType="touchUpInside" id="HeH-fU-DsE"/>
-                                                            <action selector="submitTapped:" destination="hC6-GD-FFV" eventType="touchUpInside" id="T5j-Iy-BOJ"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -236,7 +235,7 @@
         <!--Submit Symptoms-->
         <scene sceneID="5ki-kY-ynp">
             <objects>
-                <viewController storyboardIdentifier="SubmitSymptomsViewController" id="JNI-bm-phl" userLabel="Submit Symptoms" customClass="SubmitSymptomsViewController" customModule="CoLocate" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SubmitSymptomsViewController" id="JNI-bm-phl" userLabel="Submit Symptoms" customClass="SubmitSymptomsViewController" customModule="Sonar" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bVR-T3-RSy">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -268,7 +267,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fdk-RG-sRk" userLabel="Submit View">
                                                 <rect key="frame" x="20" y="70.5" width="374" height="70"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c5D-qw-CwQ" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c5D-qw-CwQ" customClass="PrimaryButton" customModule="Sonar" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="16" width="374" height="54"/>
                                                         <state key="normal" title="Submit"/>
                                                         <connections>
@@ -342,7 +341,7 @@
         <!--Start Date View Controller-->
         <scene sceneID="aB9-Fx-OLF">
             <objects>
-                <viewController id="yb6-3i-qfY" customClass="StartDateViewController" customModule="CoLocate" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="yb6-3i-qfY" customClass="StartDateViewController" customModule="Sonar" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" horizontalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HkP-Uv-0kn">
                         <rect key="frame" x="0.0" y="0.0" width="374" height="167"/>
                         <subviews>
@@ -393,7 +392,7 @@
                                                     <constraint firstAttribute="height" constant="1" id="3BW-a4-z8F"/>
                                                 </constraints>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JUs-Gg-aFs" customClass="StartDateButton" customModule="CoLocate" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JUs-Gg-aFs" customClass="StartDateButton" customModule="Sonar" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="1" width="374" height="74.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                 <state key="normal" title="Button"/>
@@ -444,7 +443,7 @@
         <!--Question-->
         <scene sceneID="jG4-oM-M9U">
             <objects>
-                <viewController storyboardIdentifier="QuestionSymptomsViewController" id="iIR-bG-zmI" userLabel="Question" customClass="QuestionSymptomsViewController" customModule="CoLocate" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="QuestionSymptomsViewController" id="iIR-bG-zmI" userLabel="Question" customClass="QuestionSymptomsViewController" customModule="Sonar" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GfZ-OT-59Z">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -504,7 +503,7 @@
                                                     <constraint firstAttribute="trailing" secondItem="Y0U-Ra-w0i" secondAttribute="trailing" id="yGd-ty-3MM"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="BVo-HW-oXC" customClass="AnswerButton" customModule="CoLocate" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="BVo-HW-oXC" customClass="AnswerButton" customModule="Sonar" customModuleProvider="target">
                                                 <rect key="frame" x="20" y="169" width="374" height="100"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <connections>
@@ -518,7 +517,7 @@
                                                     <constraint firstAttribute="height" constant="8" id="2vJ-1M-4kl"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="zLw-1O-QuZ" customClass="AnswerButton" customModule="CoLocate" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="zLw-1O-QuZ" customClass="AnswerButton" customModule="Sonar" customModuleProvider="target">
                                                 <rect key="frame" x="20" y="277" width="374" height="100"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <connections>
@@ -532,7 +531,7 @@
                                                     <constraint firstAttribute="height" constant="16" id="Sur-TC-0C1"/>
                                                 </constraints>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N2a-2g-6VM" userLabel="Button" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N2a-2g-6VM" userLabel="Button" customClass="PrimaryButton" customModule="Sonar" customModuleProvider="target">
                                                 <rect key="frame" x="20" y="393" width="374" height="30"/>
                                                 <connections>
                                                     <action selector="buttonTapped:" destination="iIR-bG-zmI" eventType="touchUpInside" id="0h0-B2-qbg"/>

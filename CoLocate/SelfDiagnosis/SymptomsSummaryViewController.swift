@@ -102,17 +102,18 @@ class SymptomsSummaryViewController: UIViewController, Storyboarded {
     }
 
     @IBAction func buttonTapped(_ sender: PrimaryButton) {
+        if symptoms.isEmpty {
+            performSegue(withIdentifier: "unwindFromSelfDiagnosis", sender: self)
+            return
+        }
+
         guard startDate != nil else {
             startDateViewController.errorView.isHidden = false
             scrollView.scrollRectToVisible(startDateViewController.errorLabel.frame, animated: true)
             return
         }
 
-        if symptoms.isEmpty {
-            performSegue(withIdentifier: "unwindFromSelfDiagnosis", sender: self)
-        } else {
-            performSegue(withIdentifier: "showSubmitSymptoms", sender: self)
-        }
+        performSegue(withIdentifier: "showSubmitSymptoms", sender: self)
     }
 }
 
