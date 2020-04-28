@@ -432,7 +432,7 @@
 		F758B8BF242CB98C003AE16D /* UIViewController+Storyboarded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Storyboarded.swift"; sourceTree = "<group>"; };
 		F758B8C3242CC0EE003AE16D /* Status.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Status.storyboard; sourceTree = "<group>"; };
 		F78CEB46242B7752002254AD /* String+localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+localized.swift"; sourceTree = "<group>"; };
-		F78CEB53242B7E18002254AD /* CoLocate-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoLocate-Bridging-Header.h"; sourceTree = "<group>"; };
+		F78CEB53242B7E18002254AD /* Sonar-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Sonar-Bridging-Header.h"; sourceTree = "<group>"; };
 		F78CEB55242B7EBF002254AD /* FirebaseMessaging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseMessaging.framework; path = Frameworks/FirebaseMessaging.framework; sourceTree = "<group>"; };
 		F78CEB56242B7EBF002254AD /* FirebaseCoreDiagnostics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCoreDiagnostics.framework; path = Frameworks/FirebaseCoreDiagnostics.framework; sourceTree = "<group>"; };
 		F78CEB57242B7EBF002254AD /* FirebaseCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCore.framework; path = Frameworks/FirebaseCore.framework; sourceTree = "<group>"; };
@@ -446,7 +446,7 @@
 		F78CEB6E242B92CF002254AD /* GoogleUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleUtilities.framework; path = Frameworks/GoogleUtilities.framework; sourceTree = "<group>"; };
 		F78CEB70242B9305002254AD /* GoogleDataTransport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleDataTransport.framework; path = Frameworks/GoogleDataTransport.framework; sourceTree = "<group>"; };
 		F78CEB72242B937F002254AD /* nanopb.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = nanopb.framework; path = Frameworks/nanopb.framework; sourceTree = "<group>"; };
-		F78CEB74242BAC83002254AD /* CoLocate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CoLocate.entitlements; sourceTree = "<group>"; };
+		F78CEB74242BAC83002254AD /* Sonar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Sonar.entitlements; sourceTree = "<group>"; };
 		F78CEBEC242D0836002254AD /* SecureRequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRequestFactory.swift; sourceTree = "<group>"; };
 		F7D62F282440D4CB004C32A2 /* ConcreteBroadcastIdGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcreteBroadcastIdGeneratorTests.swift; sourceTree = "<group>"; };
 		F7D62F2A2440D64C004C32A2 /* ConcreteBroadcastIdGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcreteBroadcastIdGenerator.swift; sourceTree = "<group>"; };
@@ -613,7 +613,7 @@
 			path = Bluetooth;
 			sourceTree = "<group>";
 		};
-		214209C02422276800C7BFF3 /* CoLocateTests */ = {
+		214209C02422276800C7BFF3 /* SonarTests */ = {
 			isa = PBXGroup;
 			children = (
 				214209C32422276800C7BFF3 /* Info.plist */,
@@ -642,7 +642,7 @@
 				F67C5157243E7BD5008E2945 /* SelfDiagnosis */,
 				0983ACD1243EB20A00DBB336 /* Status */,
 			);
-			path = CoLocateTests;
+			path = SonarTests;
 			sourceTree = "<group>";
 		};
 		214209D3242399DD00C7BFF3 /* Networking */ = {
@@ -728,9 +728,9 @@
 				F68B89E9243B9FDB00F369A9 /* CoLocate.xcconfig */,
 				F6CA2818242E41F700F8DC55 /* README.md */,
 				F78CEB63242B809B002254AD /* Firebase */,
-				6FC63C2F241641B8007C8BF3 /* CoLocate */,
-				214209C02422276800C7BFF3 /* CoLocateTests */,
-				895D9DDF2437383300573D4D /* CoLocateUITests */,
+				6FC63C2F241641B8007C8BF3 /* Sonar */,
+				214209C02422276800C7BFF3 /* SonarTests */,
+				895D9DDF2437383300573D4D /* SonarUITests */,
 				898BA15A2435E26C00EBD35D /* Configurations */,
 				6FC63C2E241641B8007C8BF3 /* Products */,
 				21B3D2E62429115600573061 /* Frameworks */,
@@ -747,11 +747,11 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		6FC63C2F241641B8007C8BF3 /* CoLocate */ = {
+		6FC63C2F241641B8007C8BF3 /* Sonar */ = {
 			isa = PBXGroup;
 			children = (
-				F78CEB74242BAC83002254AD /* CoLocate.entitlements */,
-				F78CEB53242B7E18002254AD /* CoLocate-Bridging-Header.h */,
+				F78CEB74242BAC83002254AD /* Sonar.entitlements */,
+				F78CEB53242B7E18002254AD /* Sonar-Bridging-Header.h */,
 				F66CC926244F6340001399D4 /* GoogleService-Info.plist */,
 				6FC63C3C241641BA007C8BF3 /* Info.plist */,
 				6FC63C30241641B8007C8BF3 /* AppDelegate.swift */,
@@ -782,7 +782,7 @@
 				F68B89EB243CFEEE00F369A9 /* SelfDiagnosis */,
 				0995ABCD243D034E0057C0D7 /* Status */,
 			);
-			path = CoLocate;
+			path = Sonar;
 			sourceTree = "<group>";
 		};
 		89074B8824378B5C00D67777 /* Utilities */ = {
@@ -794,7 +794,7 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
-		895D9DDF2437383300573D4D /* CoLocateUITests */ = {
+		895D9DDF2437383300573D4D /* SonarUITests */ = {
 			isa = PBXGroup;
 			children = (
 				89074B8824378B5C00D67777 /* Utilities */,
@@ -803,7 +803,7 @@
 				895D9DE22437383300573D4D /* Info.plist */,
 				895D9DE82437384C00573D4D /* CoLocateUITests.xcconfig */,
 			);
-			path = CoLocateUITests;
+			path = SonarUITests;
 			sourceTree = "<group>";
 		};
 		895D9E4924374EB800573D4D /* Routing */ = {

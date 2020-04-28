@@ -1,4 +1,4 @@
-#include "CoLocate/Base.xcconfig"
+#include "Sonar/Base.xcconfig"
 
 ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.internal
 GOOGLE_SERVICE_INFO_PLIST = GoogleService-Info.internal

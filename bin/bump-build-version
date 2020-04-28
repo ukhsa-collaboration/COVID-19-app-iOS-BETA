@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-PLIST=CoLocate/Info.plist
+PLIST=Sonar/Info.plist
 
 current_version=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" "$PLIST")
 next_version="$((current_version + 1))"

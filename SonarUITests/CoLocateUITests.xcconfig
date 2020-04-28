@@ -1,6 +1,6 @@
 
 PRODUCT_BUNDLE_IDENTIFIER = uk.nhs.nhsx.Sonar.SonarUITests
-INFOPLIST_FILE = CoLocateUITests/Info.plist
+INFOPLIST_FILE = SonarUITests/Info.plist
 
 CODE_SIGN_STYLE = Automatic
 

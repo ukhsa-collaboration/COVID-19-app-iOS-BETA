@@ -1,6 +1,6 @@
 # NHS COVID-19
 
-![ci](https://github.com/nhsx/sonar-colocate-ios/workflows/ci/badge.svg)
+![ci](https://github.com/nhsx/sonar-ios/workflows/ci/badge.svg)
 
 This application runs in the background and identifies other people running the
 app within the local area by using low energy bluetooth. While the app is
@@ -32,9 +32,9 @@ proximity to individuals infected with the novel coronavirus.
 
 ### Setup
 
-- `cp CoLocate.xcconfig.sample CoLocate.xcconfig`
-- `cp CoLocate/Environments/Environment.swift.erb CoLocate/Environment.swift`
-- Replace the values in `CoLocate.xcconfig` and `Environment.swift` with the correct ones - you will
+- `cp Sonar.xcconfig.sample Sonar.xcconfig`
+- `cp Sonar/Environments/Environment.swift.erb Sonar/Environment.swift`
+- Replace the values in `Sonar.xcconfig` and `Environment.swift` with the correct ones - you will
   need to get these from another developer.
 
 ### Notifications

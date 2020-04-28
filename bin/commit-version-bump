@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-PLIST=CoLocate/Info.plist
+PLIST=Sonar/Info.plist
 
 git config user.email "github.actions@example.com"
 git config user.name "GitHub Actions"

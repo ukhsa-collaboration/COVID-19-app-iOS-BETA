@@ -95,7 +95,7 @@ iOSInjectionProject/
 
 # Don't check in configurations for any environment
 /*.xcconfig
-/CoLocate/Environment.swift
+/Sonar/Environment.swift
 
 .envrc
 

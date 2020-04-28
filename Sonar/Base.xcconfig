@@ -1,9 +1,9 @@
 DISPLAY_NAME = NHS COVID-19
 PRODUCT_BUNDLE_IDENTIFIER = uk.nhs.nhsx.beta.Sonar
-INFOPLIST_FILE = CoLocate/Info.plist
-CODE_SIGN_ENTITLEMENTS = CoLocate/CoLocate.entitlements
+INFOPLIST_FILE = Sonar/Info.plist
+CODE_SIGN_ENTITLEMENTS = Sonar/Sonar.entitlements
 ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon
-SWIFT_OBJC_BRIDGING_HEADER = CoLocate/CoLocate-Bridging-Header.h
+SWIFT_OBJC_BRIDGING_HEADER = Sonar/Sonar-Bridging-Header.h
 
 CODE_SIGN_IDENTITY = Apple Development
 CODE_SIGN_STYLE = Automatic
