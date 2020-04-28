@@ -135,6 +135,6 @@ class StartDateButton: ButtonWithDynamicType {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        layer.cornerRadius = 16
+        layer.cornerRadius = 8
     }
 }

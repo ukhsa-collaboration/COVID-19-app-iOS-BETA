@@ -84,14 +84,14 @@ class StatusViewController: UIViewController, Storyboarded {
                 
         registrationRetryButton.setTitle("RETRY".localized, for: .normal)
 
-        diagnosisStatusView.layer.cornerRadius = 16
+        diagnosisStatusView.layer.cornerRadius = 8
         diagnosisStatusView.layer.masksToBounds = true
         readLatestAdviceLabel.textColor = UIColor(named: "NHS Link")
         diagnosisStatusView.addGestureRecognizer(
             UITapGestureRecognizer(target: self, action: #selector(diagnosisStatusTapped))
         )
 
-        notRightView.layer.cornerRadius = 16
+        notRightView.layer.cornerRadius = 8
         notRightTitleLabel.textColor = UIColor(named: "NHS Link")
         notRightSubtitleLabel.textColor = UIColor(named: "NHS Secondary Text")
         notRightView.accessibilityLabel = "\(notRightTitleLabel.text!) \(notRightSubtitleLabel.text!)"

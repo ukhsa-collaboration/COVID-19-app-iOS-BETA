@@ -49,7 +49,7 @@ class AnswerButton: UIControl {
 
         layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
 
-        layer.cornerRadius = 16
+        layer.cornerRadius = 8
         layer.borderColor = UIColor(named: "NHS Highlight")!.cgColor
 
         textLabel.font = UIFont.preferredFont(forTextStyle: .body)

@@ -21,7 +21,7 @@ class PrimaryButton: ButtonWithDynamicType {
     override func setUp() {
         super.setUp()
         
-        layer.cornerRadius = 10
+        layer.cornerRadius = 8
         clipsToBounds = true
         backgroundColor = UIColor(named: "NHS Button")
         setTitleColor(.white, for: .normal)

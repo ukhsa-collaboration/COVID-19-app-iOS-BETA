@@ -63,7 +63,7 @@ class DrawerPresentationController: UIPresentationController {
         ])
 
         presentedView.layer.masksToBounds = true
-        presentedView.layer.cornerRadius = 16
+        presentedView.layer.cornerRadius = 8
         presentedView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
 
         if let transitionCoordinator = presentedViewController.transitionCoordinator {
