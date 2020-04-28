@@ -1,7 +1,7 @@
 {
-  "api_endpoint": "https://sonar.example.com/",
-  "sonar_header_value": "",
-  "sonar_service_uuid": "",
-  "sonar_id_characteristic_uuid": "",
-  "sonar_keepalive_characteristic_uuid": ""
+  "api_endpoint": "https://test.route.cp.data.england.nhs.uk",
+  "sonar_header_value": "test-header-value",
+  "sonar_service_uuid": "c1f5983c-fa94-4ac8-8e2e-bb86d6de9b21",
+  "sonar_id_characteristic_uuid": "85BF337C-5B64-48EB-A5F7-A9FED135C972",
+  "sonar_keepalive_characteristic_uuid": "D802C645-5C7B-40DD-985A-9FBEE05FE85C"
 }

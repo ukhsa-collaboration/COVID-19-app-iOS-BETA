@@ -48,23 +48,6 @@ class RootViewControllerTests: TestCase {
         XCTAssertNotNil(rootVC.children.first as? StatusViewController)
     }
     
-//    func testPotentialNotification() {
-//        let persistence = PersistenceDouble(registration: Registration.fake)
-//        let dispatcher = makeDispatcher()
-//        let rootVC = makeRootVC(persistence: persistence, remoteNotificationDispatcher: dispatcher)
-//        XCTAssertNotNil(rootVC.view)
-//        
-//        guard let statusVC = rootVC.children.first as? StatusViewController else {
-//            XCTFail("Expected a StatusViewController but got something else")
-//            return
-//        }
-//        
-//        dispatcher.handleNotification(userInfo: ["status": "Potential"]) {_ in}
-//        
-//        XCTAssertFalse(statusVC.diagnosisTitleLabel.isHidden)
-//        XCTAssertEqual(statusVC.diagnosisTitleLabel.text, "You have been near someone who has coronavirus symptoms")
-//    }
-
     func testShow() {
         let rootVC = makeRootVC()
         let child = UIViewController()
