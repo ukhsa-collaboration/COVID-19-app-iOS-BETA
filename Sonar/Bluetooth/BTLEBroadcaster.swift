@@ -19,11 +19,7 @@ protocol BTLEBroadcaster {
 }
 
 class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDelegate {
-    
-    static let sonarServiceUUID = CBUUID(string: "c1f5983c-fa94-4ac8-8e2e-bb86d6de9b21")
-    static let sonarIdCharacteristicUUID = CBUUID(string: "85BF337C-5B64-48EB-A5F7-A9FED135C972")
-    static let keepaliveCharacteristicUUID = CBUUID(string: "D802C645-5C7B-40DD-985A-9FBEE05FE85C")
-    
+
     let advertismentDataLocalName = "Sonar"
 
     enum UnsentCharacteristicValue {
@@ -52,16 +48,16 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
             return
         }
 
-        let service = CBMutableService(type: ConcreteBTLEBroadcaster.sonarServiceUUID, primary: true)
+        let service = CBMutableService(type: Environment.sonarServiceUUID, primary: true)
 
         identityCharacteristic = CBMutableCharacteristic(
-            type: ConcreteBTLEBroadcaster.sonarIdCharacteristicUUID,
+            type: Environment.sonarIdCharacteristicUUID,
             properties: CBCharacteristicProperties([.read, .notify]),
             value: nil,
             permissions: .readable)
         
         keepaliveCharacteristic = CBMutableCharacteristic(
-            type: ConcreteBTLEBroadcaster.keepaliveCharacteristicUUID,
+            type: Environment.keepaliveCharacteristicUUID,
             properties: CBCharacteristicProperties([.notify]),
             value: nil,
             permissions: .readable)
@@ -130,10 +126,10 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
                 return
             }
             for characteristic in characteristics {
-                if characteristic.uuid == ConcreteBTLEBroadcaster.keepaliveCharacteristicUUID {
+                if characteristic.uuid == Environment.keepaliveCharacteristicUUID {
                     logger.info("    retaining restored keepalive characteristic \(characteristic)")
                     self.keepaliveCharacteristic = (characteristic as! CBMutableCharacteristic)
-                } else if characteristic.uuid == ConcreteBTLEBroadcaster.sonarIdCharacteristicUUID {
+                } else if characteristic.uuid == Environment.sonarIdCharacteristicUUID {
                     logger.info("    retaining restore identity characteristic \(characteristic)")
                     self.identityCharacteristic = (characteristic as! CBMutableCharacteristic)
                 } else {
@@ -212,7 +208,7 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
     }
 
     func peripheralManager(_ peripheral: CBPeripheralManager, didReceiveRead request: CBATTRequest) {
-        guard request.characteristic.uuid == ConcreteBTLEBroadcaster.sonarIdCharacteristicUUID else {
+        guard request.characteristic.uuid == Environment.sonarIdCharacteristicUUID else {
             logger.debug("received a read for unexpected characteristic \(request.characteristic.uuid.uuidString)")
             return
         }

@@ -1,4 +1,7 @@
 {
-  "api_endpoint": "https://test.route.cp.data.england.nhs.uk/",
-  "sonar_header_value": "test-header-value"
+  "api_endpoint": "https://sonar.example.com/",
+  "sonar_header_value": "",
+  "sonar_service_uuid": "",
+  "sonar_id_characteristic_uuid": "",
+  "sonar_keepalive_characteristic_uuid": ""
 }
