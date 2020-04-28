@@ -37,9 +37,18 @@ class StatusNotificationHandlerTests: XCTestCase {
     }
 
     func testNotPotential() {
-        handler.handle(userInfo: [:])
-        handler.handle(userInfo: ["status": 10])
-        handler.handle(userInfo: ["status": "foo"])
+        var fetchResult: UIBackgroundFetchResult?
+
+        handler.handle(userInfo: [:]) { fetchResult = $0 }
+        XCTAssertEqual(fetchResult, .noData)
+        fetchResult = nil
+
+        handler.handle(userInfo: ["status": 10]) { fetchResult = $0 }
+        XCTAssertEqual(fetchResult, .noData)
+        fetchResult = nil
+
+        handler.handle(userInfo: ["status": "foo"]) { fetchResult = $0 }
+        XCTAssertEqual(fetchResult, .noData)
 
         XCTAssertNil(persisting.potentiallyExposed)
         XCTAssertNil(userNotificationCenter.request)
@@ -47,11 +56,14 @@ class StatusNotificationHandlerTests: XCTestCase {
     }
 
     func testPotentialStatus() {
-        handler.handle(userInfo: ["status": "Potential"])
+        var fetchResult: UIBackgroundFetchResult?
+
+        handler.handle(userInfo: ["status": "Potential"]) { fetchResult = $0 }
 
         XCTAssertEqual(persisting.potentiallyExposed, currentDate)
         XCTAssertNotNil(userNotificationCenter.request)
         XCTAssertTrue(receivedNotification)
+        XCTAssertEqual(fetchResult, .newData)
     }
 
 }

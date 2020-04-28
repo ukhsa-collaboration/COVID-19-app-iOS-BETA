@@ -76,6 +76,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         persisting: persistence
     )
 
+    lazy var statusNotificationHandler: StatusNotificationHandler = StatusNotificationHandler(
+        persisting: persistence,
+        userNotificationCenter: userNotificationCenter,
+        notificationCenter: notificationCenter
+    )
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         #if DEBUG
         if let window = UITestResponder.makeWindowForTesting() {
@@ -90,6 +96,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         application.registerForRemoteNotifications()
 
         remoteNotificationManager.configure()
+        dispatcher.registerHandler(forType: .status) { userInfo, completion in
+            self.statusNotificationHandler.handle(userInfo: userInfo, completion: completion)
+        }
 
         Appearance.setup()
         

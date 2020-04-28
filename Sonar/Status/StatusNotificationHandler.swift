@@ -39,18 +39,20 @@ class StatusNotificationHandler {
         self.currentDateProvider = currentDateProvider
     }
 
-    func handle(userInfo: [AnyHashable: Any]) {
+    func handle(userInfo: [AnyHashable: Any], completion: @escaping RemoteNotificationCompletionHandler) {
         guard
             let status = userInfo["status"] as? String,
             status == "Potential"
         else {
             logger.warning("Received unexpected status from remote notification: '\(String(describing: userInfo["status"]))'")
+            completion(.noData)
             return
         }
 
         persisting.potentiallyExposed = currentDateProvider()
         sendUserNotification()
         notificationCenter.post(name: PotentiallyExposedNotification, object: self)
+        completion(.newData)
     }
 
     private func sendUserNotification() {
