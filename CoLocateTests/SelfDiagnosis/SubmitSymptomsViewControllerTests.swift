@@ -14,12 +14,14 @@ class SubmitSymptomsViewControllerTests: TestCase {
     var vc: SubmitSymptomsViewController!
     var persistence: PersistenceDouble!
     var contactEventsUploader: ContactEventsUploaderDouble!
+    var schedulerDouble: SchedulerDouble!
 
     override func setUp() {
         super.setUp()
 
         persistence = PersistenceDouble()
         contactEventsUploader = ContactEventsUploaderDouble()
+        schedulerDouble = SchedulerDouble()
     }
 
     func testSubmitTapped() throws {
@@ -37,7 +39,6 @@ class SubmitSymptomsViewControllerTests: TestCase {
         vc.submitTapped(button)
 
         XCTAssertTrue(contactEventsUploader.uploadCalled)
-        XCTAssertTrue(unwinder.didUnwindFromSelfDiagnosis)
     }
     
     func testHasNoSymptoms() {
@@ -50,7 +51,6 @@ class SubmitSymptomsViewControllerTests: TestCase {
         vc.submitTapped(PrimaryButton())
 
         XCTAssertNil(persistence.selfDiagnosis)
-        XCTAssertTrue(unwinder.didUnwindFromSelfDiagnosis)
         XCTAssertFalse(contactEventsUploader.uploadCalled)
     }
 
@@ -102,7 +102,9 @@ class SubmitSymptomsViewControllerTests: TestCase {
             persisting: persistence,
             contactEventsUploader: contactEventsUploader,
             symptoms: symptoms,
-            startDate: startDate
+            startDate: startDate,
+            statusViewController: nil,
+            localNotificationScheduler: schedulerDouble
         )
         XCTAssertNotNil(vc.view)
     }

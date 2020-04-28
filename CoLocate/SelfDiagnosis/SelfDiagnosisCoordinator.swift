@@ -17,14 +17,14 @@ class SelfDiagnosisCoordinator: Coordinator {
     let persisting: Persisting
     let contactEventsUploader: ContactEventsUploader
     let statusViewController: StatusViewController
-    let localNotificationScheduler: LocalNotifcationScheduler
+    let localNotificationScheduler: Scheduler
     
     init(
         navigationController: UINavigationController,
         persisting: Persisting,
         contactEventsUploader: ContactEventsUploader,
         statusViewController: StatusViewController,
-        localNotificationScheduler: LocalNotifcationScheduler
+        localNotificationScheduler: Scheduler
     ) {
         self.navigationController = navigationController
         self.persisting = persisting

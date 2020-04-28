@@ -18,16 +18,16 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
     private var contactEventsUploader: ContactEventsUploader!
     private var symptoms: Set<Symptom>!
     private var startDate: Date!
-    private var statusViewController: StatusViewController!
-    private var localNotificationScheduler: LocalNotifcationScheduler!
+    private var statusViewController: StatusViewController?
+    private var localNotificationScheduler: Scheduler!
 
     func inject(
         persisting: Persisting,
         contactEventsUploader: ContactEventsUploader,
         symptoms: Set<Symptom>,
         startDate: Date,
-        statusViewController: StatusViewController,
-        localNotificationScheduler: LocalNotifcationScheduler
+        statusViewController: StatusViewController?,
+        localNotificationScheduler: Scheduler
     ) {
         self.persisting = persisting
         self.contactEventsUploader = contactEventsUploader
@@ -63,7 +63,7 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
 
         do {
             try contactEventsUploader.upload()
-            navigationController!.dismiss(animated: true, completion: nil)
+            navigationController?.dismiss(animated: true, completion: nil)
             
             let hasCough = symptoms.contains(.cough)
             let selfDiagnosis = SelfDiagnosis(symptoms: symptoms, startDate: startDate, expiryDate: Date(timeInterval: 7 * 24 * 60 * 60, since: startDate))
@@ -73,7 +73,7 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
                 localNotificationScheduler.scheduleDiagnosisNotification(days: 8)
             } else {
                 if hasCough {
-                    statusViewController.updatePrompt()
+                    statusViewController?.updatePrompt()
                 }
                 persisting.selfDiagnosis = nil
             }
