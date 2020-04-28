@@ -108,7 +108,7 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
                 central.connect(peripheral)
             }
             
-            central.scanForPeripherals(withServices: [ConcreteBTLEBroadcaster.sonarServiceUUID])
+            central.scanForPeripherals(withServices: [Environment.sonarServiceUUID])
 
         default:
             break
@@ -129,7 +129,7 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
 
         peripheral.delegate = self
         peripheral.readRSSI()
-        peripheral.discoverServices([ConcreteBTLEBroadcaster.sonarServiceUUID])
+        peripheral.discoverServices([Environment.sonarServiceUUID])
     }
 
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
@@ -168,8 +168,8 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
 
         logger.info("discovering charactaristics for sonarId service \(sonarIdService)")
         let characteristics = [
-            ConcreteBTLEBroadcaster.sonarIdCharacteristicUUID,
-            ConcreteBTLEBroadcaster.keepaliveCharacteristicUUID
+            Environment.sonarIdCharacteristicUUID,
+            Environment.keepaliveCharacteristicUUID
         ]
         peripheral.discoverCharacteristics(characteristics, for: sonarIdService)
     }
@@ -210,7 +210,7 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
 
         switch characteristic.value {
             
-        case (let data?) where characteristic.uuid == ConcreteBTLEBroadcaster.sonarIdCharacteristicUUID:
+        case (let data?) where characteristic.uuid == Environment.sonarIdCharacteristicUUID:
             if data.count == BroadcastIdEncrypter.broadcastIdLength {
                 logger.info("read identity from peripheral \(peripheral.identifierWithName): \(data)")
                 delegate?.btleListener(self, didFind: data, forPeripheral: peripheral)
@@ -219,7 +219,7 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
             }
             peripheral.readRSSI()
             
-        case (let data?) where characteristic.uuid == ConcreteBTLEBroadcaster.keepaliveCharacteristicUUID:
+        case (let data?) where characteristic.uuid == Environment.keepaliveCharacteristicUUID:
             guard data.count == 1 else {
                 logger.info("invalid keepalive value \(data)")
                 return

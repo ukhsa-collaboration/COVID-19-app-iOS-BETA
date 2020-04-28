@@ -49,7 +49,7 @@ extension CBPeripheral {
 extension Sequence where Iterator.Element == CBService {
     
     func sonarIdService() -> CBService? {
-        return first(where: {$0.uuid == ConcreteBTLEBroadcaster.sonarServiceUUID})
+        return first(where: {$0.uuid == Environment.sonarServiceUUID})
     }
     
 }
@@ -57,7 +57,7 @@ extension Sequence where Iterator.Element == CBService {
 extension Sequence where Iterator.Element == CBCharacteristic {
     
     func sonarIdCharacteristic() -> CBCharacteristic? {
-        return first(where: {$0.uuid == ConcreteBTLEBroadcaster.sonarIdCharacteristicUUID})
+        return first(where: {$0.uuid == Environment.sonarIdCharacteristicUUID})
     }
 
 }
@@ -65,7 +65,7 @@ extension Sequence where Iterator.Element == CBCharacteristic {
 extension Sequence where Iterator.Element == CBCharacteristic {
     
     func keepaliveCharacteristic() -> CBCharacteristic? {
-        return first(where: {$0.uuid == ConcreteBTLEBroadcaster.keepaliveCharacteristicUUID})
+        return first(where: {$0.uuid == Environment.keepaliveCharacteristicUUID})
     }
 
 }
