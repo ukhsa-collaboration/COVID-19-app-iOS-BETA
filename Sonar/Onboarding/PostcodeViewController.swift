@@ -60,7 +60,9 @@ class PostcodeViewController: UIViewController, Storyboarded {
     private var enteredPostcode: String {
         get {
             guard let rawPostcode = postcodeField?.text else { return "" }
-            return rawPostcode.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
+            return rawPostcode
+                .trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
+                .uppercased()
         }
     }
     
@@ -71,7 +73,7 @@ class PostcodeViewController: UIViewController, Storyboarded {
     private func showAlert() {
         let alert = UIAlertController(
             title: nil,
-            message: "To continue, enter the first part of your postcode.",
+            message: "Please enter the first part of a valid postcode, e.g.: PO30, E2, M1, EH1, L36.",
             preferredStyle: .alert
         )
         alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))

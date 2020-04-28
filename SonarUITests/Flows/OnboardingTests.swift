@@ -28,7 +28,7 @@ class OnboardingTests: ScreenTestCase {
         // partial post code screen
         XCTAssert(postcodeScreenTitle.exists)
         postcodeField.tap()
-        postcodeField.typeText("1234\n")
+        postcodeField.typeText("A1\n")
         
         // Please allow us Bluetooth and Notifications screen
         XCTAssert(permissionsScreenTitle.exists)

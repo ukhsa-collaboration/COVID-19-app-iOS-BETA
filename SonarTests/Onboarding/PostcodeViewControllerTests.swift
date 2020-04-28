@@ -35,16 +35,16 @@ class PostcodeViewControllerTests: TestCase {
         parentViewControllerForTests.viewControllers = [vc]
         XCTAssertNotNil(vc.view)
         
-        vc.postcodeField.text = "1X"
+        vc.postcodeField.text = "X1"
         vc.didTapContinue()
         
-        XCTAssertEqual(persistence.partialPostcode, "1X")
+        XCTAssertEqual(persistence.partialPostcode, "X1")
         XCTAssertTrue(continued)
         XCTAssertNil(vc.presentedViewController)
 
     }
     
-    func testIgnoresTrailingNewline() {
+    func testRemovesTrailingNewline() {
         let persistence = PersistenceDouble()
         let vc = PostcodeViewController.instantiate()
         var continued = false
@@ -52,10 +52,26 @@ class PostcodeViewControllerTests: TestCase {
         parentViewControllerForTests.viewControllers = [vc]
         XCTAssertNotNil(vc.view)
         
-        vc.postcodeField.text = "1XYZ\n"
+        vc.postcodeField.text = "ABR7\n"
         vc.didTapContinue()
         
-        XCTAssertEqual(persistence.partialPostcode, "1XYZ")
+        XCTAssertEqual(persistence.partialPostcode, "ABR7")
+        XCTAssertTrue(continued)
+        XCTAssertNil(vc.presentedViewController)
+    }
+    
+    func testConvertsToUppercase() {
+        let persistence = PersistenceDouble()
+        let vc = PostcodeViewController.instantiate()
+        var continued = false
+        vc.inject(persistence: persistence, notificationCenter: NotificationCenter()) { continued = true }
+        parentViewControllerForTests.viewControllers = [vc]
+        XCTAssertNotNil(vc.view)
+        
+        vc.postcodeField.text = "abr7\n"
+        vc.didTapContinue()
+        
+        XCTAssertEqual(persistence.partialPostcode, "ABR7")
         XCTAssertTrue(continued)
         XCTAssertNil(vc.presentedViewController)
     }

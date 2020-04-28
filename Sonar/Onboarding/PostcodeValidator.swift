@@ -10,11 +10,6 @@ import UIKit
 
 class PostcodeValidator {
     static func isValid(_ postcode: String) -> Bool {
-        return postcode.count >= 2 && postcode.count <= 4 && isAlphanumeric(s: postcode)
+        return postcode.range(of: "^[A-Z]{1,2}[0-9R][0-9A-Z]?$", options: .regularExpression) != nil
     }
-    
-}
-
-private func isAlphanumeric(s: String) -> Bool {
-    return s.range(of: "[^a-zA-Z0-9]", options: .regularExpression) == nil
 }
