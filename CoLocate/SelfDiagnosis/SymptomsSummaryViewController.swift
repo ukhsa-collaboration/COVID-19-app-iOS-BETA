@@ -16,15 +16,21 @@ class SymptomsSummaryViewController: UIViewController, Storyboarded {
     private var persisting: Persisting!
     private var contactEventsUploader: ContactEventsUploader!
     private var symptoms: Set<Symptom>!
+    private var statusViewController: StatusViewController!
+    private var localNotificationScheduler: Scheduler!
 
     func inject(
         persisting: Persisting,
         contactEventsUploader: ContactEventsUploader,
         hasHighTemperature: Bool,
-        hasNewCough: Bool
+        hasNewCough: Bool,
+        statusViewController: StatusViewController,
+        localNotificationScheduler: Scheduler
     ) {
         self.persisting = persisting
         self.contactEventsUploader = contactEventsUploader
+        self.statusViewController = statusViewController
+        self.localNotificationScheduler = localNotificationScheduler
         symptoms = Set()
         if hasHighTemperature {
             symptoms.insert(.temperature)
@@ -64,7 +70,9 @@ class SymptomsSummaryViewController: UIViewController, Storyboarded {
                 persisting: persisting,
                 contactEventsUploader: contactEventsUploader,
                 symptoms: symptoms,
-                startDate: startDate
+                startDate: startDate,
+                statusViewController: statusViewController,
+                localNotificationScheduler: localNotificationScheduler
             )
         default:
             break
