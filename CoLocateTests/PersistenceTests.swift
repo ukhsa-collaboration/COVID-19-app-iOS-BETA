@@ -10,37 +10,46 @@ import XCTest
 @testable import Sonar
 
 class PersistenceTests: TestCase {
-
+    
+    private var secureRegistrationStorage: SecureRegistrationStorage!
+    private var broadcastKeyStorage: SecureBroadcastRotationKeyStorage!
+    private var persistence: Persistence!
+    
+    override func setUp() {
+        super.setUp()
+        
+        secureRegistrationStorage = SecureRegistrationStorage()
+        broadcastKeyStorage = SecureBroadcastRotationKeyStorage()
+        persistence = Persistence(
+            secureRegistrationStorage: secureRegistrationStorage,
+            broadcastKeyStorage: broadcastKeyStorage,
+            monitor: AppMonitoringDouble()
+        )
+    }
+    
     func testDiagnosisRawValueZeroIsUnknown() {
-        let persistence = Persistence(secureRegistrationStorage: SecureRegistrationStorage(), broadcastKeyStorage: SecureBroadcastRotationKeyStorage())
         XCTAssertNil(persistence.selfDiagnosis)
     }
 
     func testDiagnosisIsUnknownWhenDefaultsReset() {
-        let service = Persistence(secureRegistrationStorage: SecureRegistrationStorage(), broadcastKeyStorage: SecureBroadcastRotationKeyStorage())
-        service.selfDiagnosis = SelfDiagnosis(symptoms: [.cough], startDate: Date(), expiryDate: Date())
+        persistence.selfDiagnosis = SelfDiagnosis(symptoms: [.cough], startDate: Date(), expiryDate: Date())
 
         let appDomain = Bundle.main.bundleIdentifier
         UserDefaults.standard.removePersistentDomain(forName: appDomain!)
 
-        let diagnosis = service.selfDiagnosis
+        let diagnosis = persistence.selfDiagnosis
         XCTAssertNil(diagnosis)
     }
 
     func testDeleteSelfDiagnosisWhenNil() {
-        let service = Persistence(secureRegistrationStorage: SecureRegistrationStorage(), broadcastKeyStorage: SecureBroadcastRotationKeyStorage())
-        service.selfDiagnosis = SelfDiagnosis(symptoms: [.cough], startDate: Date(), expiryDate: Date())
-        XCTAssertNotNil(service.selfDiagnosis)
+        persistence.selfDiagnosis = SelfDiagnosis(symptoms: [.cough], startDate: Date(), expiryDate: Date())
+        XCTAssertNotNil(persistence.selfDiagnosis)
 
-        service.selfDiagnosis = nil
-        XCTAssertNil(service.selfDiagnosis)
+        persistence.selfDiagnosis = nil
+        XCTAssertNil(persistence.selfDiagnosis)
     }
     
     func testRegistrationIsStored() {
-        let secureRegistrationStorage = SecureRegistrationStorage()
-        let broadcastKeyStorage = SecureBroadcastRotationKeyStorage()
-        let persistence = Persistence(secureRegistrationStorage: secureRegistrationStorage, broadcastKeyStorage: broadcastKeyStorage)
-
         XCTAssertNil(persistence.registration)
 
         let id = UUID()
@@ -56,7 +65,6 @@ class PersistenceTests: TestCase {
     
     func testRegistrationUpdatesTheDelegate() {
         let delegate = PersistenceDelegateDouble()
-        let persistence = Persistence(secureRegistrationStorage: SecureRegistrationStorage(), broadcastKeyStorage: SecureBroadcastRotationKeyStorage())
         persistence.delegate = delegate
 
         let id = UUID()
@@ -68,10 +76,6 @@ class PersistenceTests: TestCase {
     }
     
     func testRegistrationReturnsNilIfNoBroadcastKey() throws {
-        let secureRegistrationStorage = SecureRegistrationStorage()
-        let broadcastKeyStorage = SecureBroadcastRotationKeyStorage()
-        let persistence = Persistence(secureRegistrationStorage: secureRegistrationStorage, broadcastKeyStorage: broadcastKeyStorage)
-        
         try secureRegistrationStorage.set(registration: PartialRegistration(id: UUID(), secretKey: Data()))
         try broadcastKeyStorage.clear()
         
@@ -79,8 +83,16 @@ class PersistenceTests: TestCase {
     }
 
     func testPartialPostcodeIsPersisted() {
-        let p1 = Persistence(secureRegistrationStorage: SecureRegistrationStorage(), broadcastKeyStorage: SecureBroadcastRotationKeyStorage())
-        let p2 = Persistence(secureRegistrationStorage: SecureRegistrationStorage(), broadcastKeyStorage: SecureBroadcastRotationKeyStorage())
+        let p1 = Persistence(
+            secureRegistrationStorage: secureRegistrationStorage,
+            broadcastKeyStorage: broadcastKeyStorage,
+            monitor: AppMonitoringDouble()
+        )
+        let p2 = Persistence(
+            secureRegistrationStorage: secureRegistrationStorage,
+            broadcastKeyStorage: broadcastKeyStorage,
+            monitor: AppMonitoringDouble()
+        )
         
         p1.partialPostcode = nil
         XCTAssertNil(p2.partialPostcode)
@@ -90,8 +102,6 @@ class PersistenceTests: TestCase {
     }
 
     func testUploadLog() {
-        let persistence = Persistence(secureRegistrationStorage: SecureRegistrationStorage(), broadcastKeyStorage: SecureBroadcastRotationKeyStorage())
-
         persistence.uploadLog = [UploadLog(event: .started(lastContactEventDate: Date()))]
 
         XCTAssertFalse(persistence.uploadLog.isEmpty)

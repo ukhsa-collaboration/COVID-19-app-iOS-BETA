@@ -57,7 +57,11 @@ class Persistence: Persisting {
 
     weak var delegate: PersistenceDelegate?
     
-    init(secureRegistrationStorage: SecureRegistrationStorage, broadcastKeyStorage: BroadcastRotationKeyStorage) {
+    init(
+        secureRegistrationStorage: SecureRegistrationStorage,
+        broadcastKeyStorage: BroadcastRotationKeyStorage,
+        monitor: AppMonitoring
+    ) {
         self.secureRegistrationStorage = secureRegistrationStorage
         self.broadcastKeyStorage = broadcastKeyStorage
     }

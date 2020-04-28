@@ -12,6 +12,7 @@ protocol AppMonitoring {
     func didDetect(_ event: AppEvent)
 }
 
+// Using this whilst we’re not sure how we want to handle events.
 struct NoOpAppMonitoring: AppMonitoring {
     func didDetect(_ event: AppEvent) {
     }

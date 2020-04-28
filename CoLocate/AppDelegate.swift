@@ -23,6 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     #warning("Replace with a `PublicKeyValidator` configured from the environment.")
     let trustValidator = DefaultTrustValidating()
     
+    lazy var monitor: AppMonitoring = NoOpAppMonitoring()
+    
     lazy var urlSession: Session = URLSession(trustValidator: trustValidator)
 
     lazy var dispatcher: RemoteNotificationDispatching = RemoteNotificationDispatcher(
@@ -45,7 +47,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     lazy var persistence: Persisting = Persistence(
         secureRegistrationStorage: SecureRegistrationStorage(),
-        broadcastKeyStorage: SecureBroadcastRotationKeyStorage()
+        broadcastKeyStorage: SecureBroadcastRotationKeyStorage(),
+        monitor: monitor
     )
 
     lazy var bluetoothNursery: BluetoothNursery = ConcreteBluetoothNursery(persistence: persistence, userNotificationCenter: userNotificationCenter, notificationCenter: notificationCenter)
