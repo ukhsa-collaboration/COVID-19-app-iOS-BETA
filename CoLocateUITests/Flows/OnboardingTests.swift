@@ -1,6 +1,6 @@
 //
 //  OnboardingTests.swift
-//  CoLocateUITests
+//  SonarUITests
 //
 //  Created by NHSX.
 //  Copyright © 2020 NHSX. All rights reserved.

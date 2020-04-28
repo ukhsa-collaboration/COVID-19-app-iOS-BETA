@@ -1,6 +1,6 @@
 //
 //  ContactEvent.swift
-//  CoLocate
+//  Sonar
 //
 //  Copyright © 2020 NHSX. All rights reserved.
 //

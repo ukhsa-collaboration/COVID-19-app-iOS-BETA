@@ -1,6 +1,6 @@
 //
 //  OnboardingLogoStrapline.swift
-//  CoLocate
+//  Sonar
 //
 //  Created by NHSX.
 //  Copyright © 2020 NHSX. All rights reserved.
@@ -40,7 +40,7 @@ class OnboardingLogoStrapline: UIView {
             return
         }
 
-        titleLabel.text = "Coronavirus tracing"
+        titleLabel.text = "COVID-19"
 
         addSubview(view)
         NSLayoutConstraint.activate([
@@ -51,7 +51,7 @@ class OnboardingLogoStrapline: UIView {
         ])
 
         let element = UIAccessibilityElement(accessibilityContainer: self)
-        element.accessibilityLabel = "NHS Coronavirus tracing"
+        element.accessibilityLabel = "NHS COVID-19"
         element.accessibilityFrameInContainerSpace = frame
         accessibilityElements = [element]
     }

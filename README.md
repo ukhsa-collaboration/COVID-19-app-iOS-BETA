@@ -1,4 +1,4 @@
-# CoLocate
+# NHS COVID-19
 
 ![ci](https://github.com/nhsx/sonar-colocate-ios/workflows/ci/badge.svg)
 

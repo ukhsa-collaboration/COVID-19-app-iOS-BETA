@@ -1,6 +1,6 @@
 //
 //  LogoStrapline.swift
-//  CoLocate
+//  Sonar
 //
 //  Copyright © 2020 NHSX. All rights reserved.
 //
@@ -41,7 +41,7 @@ class LogoStrapline: UIView {
         }
         
         view.backgroundColor = UIColor(named: "NHS Blue")
-        titleLabel.text = "Coronavirus tracing"
+        titleLabel.text = "COVID-19"
 
         addSubview(view)
         NSLayoutConstraint.activate([
