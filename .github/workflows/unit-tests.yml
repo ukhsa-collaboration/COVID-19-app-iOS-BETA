@@ -37,8 +37,8 @@ jobs:
 
       - name: Setup Build Configuration
         run: |
-          cp CoLocate/Environments/CoLocate.xcconfig.sample CoLocate.xcconfig
-          cat CoLocate/Environments/environment.json | ./bin/make-environment > CoLocate/Environment.swift
+          cp Sonar/Environments/Sonar.xcconfig.sample Sonar.xcconfig
+          cat Sonar/Environments/environment.json | ./bin/make-environment > Sonar/Environment.swift
 
       - name: Run Build
         env:
@@ -72,8 +72,8 @@ jobs:
 
       - name: Setup Build Configuration
         run: |
-          cp CoLocate/Environments/CoLocate.xcconfig.sample CoLocate.xcconfig
-          cat CoLocate/Environments/environment.json | ./bin/make-environment > CoLocate/Environment.swift
+          cp Sonar/Environments/Sonar.xcconfig.sample Sonar.xcconfig
+          cat Sonar/Environments/environment.json | ./bin/make-environment > Sonar/Environment.swift
 
       - run: |
           killall "Simulator" || true
@@ -96,7 +96,7 @@ jobs:
       # - name: Create report from archive
       #   run: |
       #     cd Reporting
-      #     swift run Reporter project ../Sonar.xcodeproj --scheme CoLocate --method archive --output AppReport || true
+      #     swift run Reporter project ../Sonar.xcodeproj --scheme Sonar --method archive --output AppReport || true
       #     cd ..
 
       # I expect this to succeed, but is less accurate than above, still, leave `|| true` in just in case.

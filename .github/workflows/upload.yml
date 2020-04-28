@@ -120,7 +120,7 @@ jobs:
       - name: Get Build Number
         id: get-build-number
         run: |
-          build_number=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" "CoLocate/Info.plist")
+          build_number=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" "Sonar/Info.plist")
           echo "::set-output name=build-number::$build_number"
 
       - name: Notify Slack on Upload
