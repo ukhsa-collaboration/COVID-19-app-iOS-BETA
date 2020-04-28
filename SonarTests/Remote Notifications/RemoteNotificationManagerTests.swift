@@ -81,7 +81,7 @@ class RemoteNotificationManagerTests: TestCase {
         XCTAssertNil(error)
     }
         
-    func testHandleNotification_dispatchesPotentialDiagnosis() {
+    func testHandleNotification_dispatchesStatus() {
         let notificationManager = ConcreteRemoteNotificationManager(
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
@@ -90,7 +90,7 @@ class RemoteNotificationManagerTests: TestCase {
         )
         
         var called = false
-        notificationManager.dispatcher.registerHandler(forType: .potentialDiagnosis) { (userInfo, completionHandler) in
+        notificationManager.dispatcher.registerHandler(forType: .status) { (userInfo, completionHandler) in
             called = true
             completionHandler(.newData)
         }
@@ -100,57 +100,6 @@ class RemoteNotificationManagerTests: TestCase {
         XCTAssertTrue(called)
     }
 
-    func testHandleNotification_sendsLocalNotificationWithPotentialStatus() {
-        let userNotificationCenter = UserNotificationCenterDouble()
-        let notificationManager = ConcreteRemoteNotificationManager(
-            firebase: FirebaseAppDouble.self,
-            messagingFactory: { MessagingDouble() },
-            userNotificationCenter: userNotificationCenter,
-            dispatcher: RemoteNotificationDispatcher(notificationCenter: NotificationCenter(), userNotificationCenter: userNotificationCenter)
-        )
-        
-        notificationManager.dispatcher.registerHandler(forType: .potentialDiagnosis) { (userInfo, completionHandler) in
-            completionHandler(.newData)
-        }
-
-        notificationManager.handleNotification(userInfo: ["status" : "Potential"]) {_ in }
-
-        XCTAssertNotNil(userNotificationCenter.request)
-    }
-    
-    func testHandleNotification_doesNotDispatchOtherDiagnosis() {
-        let notificationManager = ConcreteRemoteNotificationManager(
-            firebase: FirebaseAppDouble.self,
-            messagingFactory: { MessagingDouble() },
-            userNotificationCenter: UserNotificationCenterDouble(),
-            dispatcher: RemoteNotificationDispatcher(notificationCenter: NotificationCenter(), userNotificationCenter: UserNotificationCenterDouble())
-        )
-        
-        var called = false
-        notificationManager.dispatcher.registerHandler(forType: .potentialDiagnosis) { (userInfo, completionHandler) in
-            called = true
-            completionHandler(.newData)
-        }
-        
-        notificationManager.handleNotification(userInfo: ["status" : "infected"]) {_ in }
-        
-        XCTAssertFalse(called)
-    }
-
-    func testHandleNotification_doesNotSendLocalNotificationWhenStatusIsNotPotential() {
-        let notificationCenterDouble = UserNotificationCenterDouble()
-        let notificationManager = ConcreteRemoteNotificationManager(
-            firebase: FirebaseAppDouble.self,
-            messagingFactory: { MessagingDouble() },
-            userNotificationCenter: notificationCenterDouble,
-            dispatcher: RemoteNotificationDispatcher(notificationCenter: NotificationCenter(), userNotificationCenter: UserNotificationCenterDouble())
-        )
-
-        notificationManager.handleNotification(userInfo: ["status" : "infected"]) {_ in }
-
-        XCTAssertNil(notificationCenterDouble.request)
-    }
-    
     func testHandleNotificaton_routesRegistrationAccessTokenNotifications() {
         let notificationManager = ConcreteRemoteNotificationManager(
             firebase: FirebaseAppDouble.self,
@@ -167,7 +116,7 @@ class RemoteNotificationManagerTests: TestCase {
             completionHandler(.newData)
         }
         
-        notificationManager.registerHandler(forType: .potentialDiagnosis) { userInfo, completionHandler in
+        notificationManager.registerHandler(forType: .status) { userInfo, completionHandler in
             statusChangeHandlerCalled = true
         }
 
