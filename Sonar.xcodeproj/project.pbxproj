@@ -103,6 +103,8 @@
 		896BE912244F11D100B3687C /* PublicKeyValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896BE911244F11D100B3687C /* PublicKeyValidatorTests.swift */; };
 		896BE915244F391F00B3687C /* www.apple.com.cer in Resources */ = {isa = PBXBuildFile; fileRef = 896BE913244F38D900B3687C /* www.apple.com.cer */; };
 		8976B15D2451B62100154ADF /* RequstTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8976B15C2451B62100154ADF /* RequstTests.swift */; };
+		8983E618245867CF001F2011 /* AppEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8983E616245867CF001F2011 /* AppEvent.swift */; };
+		8983E619245867CF001F2011 /* AppMonitoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8983E617245867CF001F2011 /* AppMonitoring.swift */; };
 		89896E622435F37300F949EA /* ProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89896E612435F37300F949EA /* ProjectTests.swift */; };
 		898FE854243B42E800210775 /* OnboardingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898FE853243B42E700210775 /* OnboardingTests.swift */; };
 		898FE857243B4D7A00210775 /* XCUIElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898FE856243B4D7A00210775 /* XCUIElement.swift */; };
@@ -327,6 +329,8 @@
 		896BE911244F11D100B3687C /* PublicKeyValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicKeyValidatorTests.swift; sourceTree = "<group>"; };
 		896BE913244F38D900B3687C /* www.apple.com.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = www.apple.com.cer; sourceTree = "<group>"; };
 		8976B15C2451B62100154ADF /* RequstTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequstTests.swift; sourceTree = "<group>"; };
+		8983E616245867CF001F2011 /* AppEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppEvent.swift; sourceTree = "<group>"; };
+		8983E617245867CF001F2011 /* AppMonitoring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppMonitoring.swift; sourceTree = "<group>"; };
 		89896E5E2435EB6500F949EA /* CoLocateTests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CoLocateTests.xcconfig; sourceTree = "<group>"; };
 		89896E5F2435F15C00F949EA /* Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Base.xcconfig; sourceTree = "<group>"; };
 		89896E612435F37300F949EA /* ProjectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectTests.swift; sourceTree = "<group>"; };
@@ -766,6 +770,7 @@
 				6FC63C39241641BA007C8BF3 /* LaunchScreen.storyboard */,
 				89F06B2D2434A5A50074C612 /* Logging */,
 				214209D3242399DD00C7BFF3 /* Networking */,
+				8983E615245867BC001F2011 /* Monitoring */,
 				F6CC2CA7242BC7D90079432B /* Notifications */,
 				F6F05A212433BE9600FF4B72 /* Onboarding */,
 				F604977024549B49002B8503 /* Pilot */,
@@ -827,6 +832,15 @@
 				896BE913244F38D900B3687C /* www.apple.com.cer */,
 			);
 			path = Certificates;
+			sourceTree = "<group>";
+		};
+		8983E615245867BC001F2011 /* Monitoring */ = {
+			isa = PBXGroup;
+			children = (
+				8983E616245867CF001F2011 /* AppEvent.swift */,
+				8983E617245867CF001F2011 /* AppMonitoring.swift */,
+			);
+			path = Monitoring;
 			sourceTree = "<group>";
 		};
 		898BA15A2435E26C00EBD35D /* Configurations */ = {
@@ -1303,6 +1317,7 @@
 				21C09A8F2437B99F00368203 /* BluetoothNursery.swift in Sources */,
 				0986EFB5244518FE008D0E1D /* ButtonWithDynamicType.swift in Sources */,
 				F64D76F724577D9600B1D495 /* StatusProvider.swift in Sources */,
+				8983E619245867CF001F2011 /* AppMonitoring.swift in Sources */,
 				F6CC2CA9242BC7FC0079432B /* RemoteNotificationManager.swift in Sources */,
 				F70CB8192450CAB700ED6E7F /* OnboardingLogoStrapline.swift in Sources */,
 				AE2A5E502423C473007A4771 /* ContactEvent.swift in Sources */,
@@ -1319,6 +1334,7 @@
 				F72EBD97243C8490009F9328 /* BluetoothStateUserNotifier.swift in Sources */,
 				896BE90F244F07FF00B3687C /* PublicKeyValidator.swift in Sources */,
 				134470AD2454D4DA001A0AD9 /* UpdateDiagnosisCoordinator.swift in Sources */,
+				8983E618245867CF001F2011 /* AppEvent.swift in Sources */,
 				214209B62421072C00C7BFF3 /* StatusViewController.swift in Sources */,
 				13F4AE882451EB330082A46D /* QuestionSymptomsViewController.swift in Sources */,
 				F758553A24294C8D00CBE1ED /* RequestFactory.swift in Sources */,
