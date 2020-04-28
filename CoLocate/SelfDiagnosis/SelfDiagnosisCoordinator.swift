@@ -67,7 +67,7 @@ class SelfDiagnosisCoordinator: Coordinator {
     }
     
     func openSubmissionView() {
-        let vc = SubmitSymptomsViewController.instantiate()
+        let vc = SymptomsSummaryViewController.instantiate()
         vc.inject(
             persisting: persisting,
             contactEventsUploader: contactEventsUploader,

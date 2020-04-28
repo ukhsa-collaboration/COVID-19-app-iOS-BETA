@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Submit Symptoms-->
+        <!--Symptoms Summary-->
         <scene sceneID="f6I-iq-VS4">
             <objects>
-                <viewController storyboardIdentifier="SubmitSymptomsViewController" id="ofL-pj-tC8" userLabel="Submit Symptoms" customClass="SubmitSymptomsViewController" customModule="CoLocate" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SymptomsSummaryViewController" id="ofL-pj-tC8" userLabel="Symptoms Summary" customClass="SymptomsSummaryViewController" customModule="CoLocate" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ctU-rB-bvE">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="9Z6-MF-rO6">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="577"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="540.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gMM-dc-Uol">
                                                 <rect key="frame" x="20" y="32" width="374" height="56"/>
@@ -41,7 +41,7 @@
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="a7J-v6-xJ8" userLabel="Have Symptoms">
-                                                <rect key="frame" x="20" y="88" width="374" height="399"/>
+                                                <rect key="frame" x="20" y="88" width="374" height="362.5"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="QuK-po-wsJ" userLabel="Check Answers">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="195.5"/>
@@ -115,27 +115,10 @@
                                                             <segue destination="yb6-3i-qfY" kind="embed" id="FMc-f5-BLe"/>
                                                         </connections>
                                                     </containerView>
-                                                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="16" translatesAutoresizingMaskIntoConstraints="NO" id="x4g-G9-ZiU" userLabel="Spacer">
-                                                        <rect key="frame" x="0.0" y="362.5" width="374" height="36.5"/>
-                                                        <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thank You" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aIR-YM-xXi">
-                                                                <rect key="frame" x="0.0" y="16" width="374" height="20.5"/>
-                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                                <color key="textColor" name="NHS Text"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                        </subviews>
-                                                        <constraints>
-                                                            <constraint firstAttribute="trailing" secondItem="aIR-YM-xXi" secondAttribute="trailing" id="7eb-lf-DZZ"/>
-                                                            <constraint firstAttribute="bottom" secondItem="aIR-YM-xXi" secondAttribute="bottom" id="Cuf-RH-1g1"/>
-                                                            <constraint firstItem="aIR-YM-xXi" firstAttribute="top" relation="greaterThanOrEqual" secondItem="x4g-G9-ZiU" secondAttribute="top" constant="16" id="DY6-Yq-2i0"/>
-                                                            <constraint firstItem="aIR-YM-xXi" firstAttribute="leading" secondItem="x4g-G9-ZiU" secondAttribute="leading" id="OnL-Vl-mel"/>
-                                                        </constraints>
-                                                    </view>
                                                 </subviews>
                                             </stackView>
                                             <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="rUe-5Z-tIj" userLabel="No Symptoms">
-                                                <rect key="frame" x="20" y="487" width="374" height="32"/>
+                                                <rect key="frame" x="20" y="450.5" width="374" height="32"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qC7-mn-mwr">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="0.0"/>
@@ -166,36 +149,19 @@
                                                 </subviews>
                                             </stackView>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="Rpb-L4-N7R" userLabel="Spacer">
-                                                <rect key="frame" x="20" y="487" width="374" height="0.0"/>
+                                                <rect key="frame" x="20" y="450.5" width="374" height="0.0"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" id="VWa-Af-DLc"/>
                                                 </constraints>
                                             </view>
-                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X3T-dj-Khd" userLabel="Submit Error View">
-                                                <rect key="frame" x="20" y="487" width="374" height="16"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Submit Error" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gGK-fb-Q9K">
-                                                        <rect key="frame" x="0.0" y="16" width="374" height="0.0"/>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                        <color key="textColor" name="NHS Error"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                                <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="gGK-fb-Q9K" secondAttribute="trailing" id="BE9-n8-ACc"/>
-                                                    <constraint firstItem="gGK-fb-Q9K" firstAttribute="leading" secondItem="X3T-dj-Khd" secondAttribute="leading" id="QiU-Sv-sPF"/>
-                                                    <constraint firstAttribute="bottom" secondItem="gGK-fb-Q9K" secondAttribute="bottom" id="lbj-HM-lw7"/>
-                                                    <constraint firstItem="gGK-fb-Q9K" firstAttribute="top" secondItem="X3T-dj-Khd" secondAttribute="top" constant="16" id="oqT-0O-dRg"/>
-                                                </constraints>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sem-eQ-a4a" userLabel="Submit View">
-                                                <rect key="frame" x="20" y="487" width="374" height="70"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sem-eQ-a4a" userLabel="Button">
+                                                <rect key="frame" x="20" y="450.5" width="374" height="70"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JYn-nS-TUw" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="16" width="374" height="54"/>
-                                                        <state key="normal" title="Submit"/>
+                                                        <state key="normal" title="Continue"/>
                                                         <connections>
-                                                            <action selector="submitTapped:" destination="ofL-pj-tC8" eventType="touchUpInside" id="EWR-3W-sAd"/>
+                                                            <action selector="buttonTapped:" destination="ofL-pj-tC8" eventType="touchUpInside" id="HeH-fU-DsE"/>
                                                             <action selector="submitTapped:" destination="hC6-GD-FFV" eventType="touchUpInside" id="T5j-Iy-BOJ"/>
                                                         </connections>
                                                     </button>
@@ -240,7 +206,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="KlB-Tu-xdS"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Add Your Symptoms" id="fhp-Za-bUG">
+                    <navigationItem key="navigationItem" title="Add my symptoms" id="fhp-Za-bUG">
                         <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="gne-Ik-Kaf">
                             <connections>
                                 <segue destination="hC6-GD-FFV" kind="unwind" identifier="unwindFromSelfDiagnosis" unwindAction="unwindFromSelfDiagnosisWithUnwindSegue:" id="JrQ-CV-d99"/>
@@ -248,6 +214,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="button" destination="JYn-nS-TUw" id="Uzf-bE-oAb"/>
                         <outlet property="checkAnswersLabel" destination="Jvy-F9-A5d" id="T9S-51-VZE"/>
                         <outlet property="coughCheckLabel" destination="mxl-Q4-5aR" id="lVR-eV-VSf"/>
                         <outlet property="haveSymptomsView" destination="a7J-v6-xJ8" id="HUs-o8-K1K"/>
@@ -257,17 +224,120 @@
                         <outlet property="noSymptomsLabel" destination="qC7-mn-mwr" id="U1b-z8-aSp"/>
                         <outlet property="noSymptomsView" destination="rUe-5Z-tIj" id="R59-4B-9bL"/>
                         <outlet property="scrollView" destination="xUD-zY-9kW" id="ucw-sm-n5X"/>
-                        <outlet property="submitButton" destination="JYn-nS-TUw" id="HcN-Hc-nI4"/>
-                        <outlet property="submitErrorLabel" destination="gGK-fb-Q9K" id="MxB-QV-0sW"/>
-                        <outlet property="submitErrorView" destination="X3T-dj-Khd" id="LAE-9f-7j4"/>
                         <outlet property="temperatureCheckLabel" destination="7JD-I1-TlC" id="dLG-2j-zdv"/>
-                        <outlet property="thankYouLabel" destination="aIR-YM-xXi" id="vix-vV-Rrk"/>
+                        <segue destination="JNI-bm-phl" kind="show" identifier="showSubmitSymptoms" id="P65-cw-F5s"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ISX-4O-Rgm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="hC6-GD-FFV" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2686.9565217391305" y="172.76785714285714"/>
+        </scene>
+        <!--Submit Symptoms-->
+        <scene sceneID="5ki-kY-ynp">
+            <objects>
+                <viewController storyboardIdentifier="SubmitSymptomsViewController" id="JNI-bm-phl" userLabel="Submit Symptoms" customClass="SubmitSymptomsViewController" customModule="CoLocate" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bVR-T3-RSy">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dtX-6D-EoL">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="JYQ-vC-4ZC">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="160.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thank You" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X7L-5P-VlC">
+                                                <rect key="frame" x="20" y="32" width="374" height="20.5"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <color key="textColor" name="NHS Text"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="jvB-6L-aQ6" userLabel="Spacer">
+                                                <rect key="frame" x="20" y="52.5" width="374" height="0.0"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" id="ze3-NR-aKy"/>
+                                                </constraints>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirmation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ib8-Fb-gu6">
+                                                <rect key="frame" x="20" y="52.5" width="374" height="18"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fdk-RG-sRk" userLabel="Submit View">
+                                                <rect key="frame" x="20" y="70.5" width="374" height="70"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c5D-qw-CwQ" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="16" width="374" height="54"/>
+                                                        <state key="normal" title="Submit"/>
+                                                        <connections>
+                                                            <action selector="submitTapped:" destination="Zbs-mh-83R" eventType="touchUpInside" id="16k-sT-tX2"/>
+                                                            <action selector="submitTapped:" destination="hC6-GD-FFV" eventType="touchUpInside" id="cM1-ng-Vmg"/>
+                                                            <action selector="submitTapped:" destination="JNI-bm-phl" eventType="touchUpInside" id="v39-wM-A1v"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="c5D-qw-CwQ" secondAttribute="bottom" id="0mg-Ew-8SR"/>
+                                                    <constraint firstItem="c5D-qw-CwQ" firstAttribute="top" secondItem="Fdk-RG-sRk" secondAttribute="top" constant="16" id="1uM-xC-Xxo"/>
+                                                    <constraint firstItem="c5D-qw-CwQ" firstAttribute="leading" secondItem="Fdk-RG-sRk" secondAttribute="leading" id="ozz-IT-GnE"/>
+                                                    <constraint firstAttribute="trailing" secondItem="c5D-qw-CwQ" secondAttribute="trailing" id="xQe-TS-DdK"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" priority="2" id="gnV-4u-PeW"/>
+                                        </constraints>
+                                        <directionalEdgeInsets key="directionalLayoutMargins" top="32" leading="20" bottom="20" trailing="20"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="gnV-4u-PeW"/>
+                                            </mask>
+                                        </variation>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="JYQ-vC-4ZC" firstAttribute="height" secondItem="W3b-lN-tOk" secondAttribute="height" priority="1" id="Fk7-G9-Sgv"/>
+                                    <constraint firstItem="JYQ-vC-4ZC" firstAttribute="bottom" secondItem="hbs-jz-1jI" secondAttribute="bottom" id="JZY-O8-vo5"/>
+                                    <constraint firstItem="JYQ-vC-4ZC" firstAttribute="top" secondItem="hbs-jz-1jI" secondAttribute="top" id="WHb-SM-Py7"/>
+                                    <constraint firstItem="JYQ-vC-4ZC" firstAttribute="trailing" secondItem="hbs-jz-1jI" secondAttribute="trailing" id="Xof-N1-dpg"/>
+                                    <constraint firstItem="JYQ-vC-4ZC" firstAttribute="leading" secondItem="hbs-jz-1jI" secondAttribute="leading" id="bxO-UX-Iqr"/>
+                                    <constraint firstItem="JYQ-vC-4ZC" firstAttribute="width" secondItem="W3b-lN-tOk" secondAttribute="width" id="oCi-q5-kBf"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="hbs-jz-1jI"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="W3b-lN-tOk"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" name="NHS Grey 5"/>
+                        <constraints>
+                            <constraint firstItem="pif-cO-ndi" firstAttribute="trailing" secondItem="dtX-6D-EoL" secondAttribute="trailing" id="Hs0-o3-G2q"/>
+                            <constraint firstItem="dtX-6D-EoL" firstAttribute="leading" secondItem="pif-cO-ndi" secondAttribute="leading" id="giU-q1-iWj"/>
+                            <constraint firstItem="pif-cO-ndi" firstAttribute="bottom" secondItem="dtX-6D-EoL" secondAttribute="bottom" id="n43-uR-otN"/>
+                            <constraint firstItem="pif-cO-ndi" firstAttribute="top" secondItem="dtX-6D-EoL" secondAttribute="top" id="vrr-NW-CA5"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="pif-cO-ndi"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Add my symptoms" id="cA5-ND-Bwb">
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="Ynz-wt-BRE">
+                            <connections>
+                                <segue destination="Zbs-mh-83R" kind="unwind" identifier="unwindFromSelfDiagnosis" unwindAction="unwindFromSelfDiagnosisWithUnwindSegue:" id="HEP-vQ-j94"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <splitViewMasterSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="confirmLabel" destination="Ib8-Fb-gu6" id="TFf-qR-BZm"/>
+                        <outlet property="heightConstraint" destination="gnV-4u-PeW" id="8gN-oX-7xS"/>
+                        <outlet property="scrollView" destination="dtX-6D-EoL" id="iu2-uv-dCB"/>
+                        <outlet property="submitButton" destination="c5D-qw-CwQ" id="1T1-Tv-WD7"/>
+                        <outlet property="thankYouLabel" destination="X7L-5P-VlC" id="hGN-zg-oGx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CWx-tx-FqG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="Zbs-mh-83R" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="3465" y="173"/>
         </scene>
         <!--Start Date View Controller-->
         <scene sceneID="aB9-Fx-OLF">
@@ -493,7 +563,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="awF-Hi-ytb"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Add Your Symptoms" id="b3B-gw-1zt">
+                    <navigationItem key="navigationItem" title="Add my symptoms" id="b3B-gw-1zt">
                         <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="Zxz-Y5-fAr">
                             <connections>
                                 <segue destination="kb7-dX-YXW" kind="unwind" unwindAction="unwindFromSelfDiagnosisWithUnwindSegue:" id="BxB-OK-ebi"/>

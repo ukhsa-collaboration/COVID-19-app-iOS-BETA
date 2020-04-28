@@ -26,17 +26,23 @@
 "COUGH_YES" = "Yes, I have a new continuous cough";
 "COUGH_NO" = "No, I do not have a new continuous cough";
 
-"SUBMIT_SYMPTOMS_CHECK_ANSWERS" = "Check your answers";
-"SUBMIT_SYMPTOMS_HAVE_TEMPERATURE" = "I have a high temperature";
-"SUBMIT_SYMPTOMS_NO_TEMPERATURE" = "I do not have a high temperature";
-"SUBMIT_SYMPTOMS_HAVE_COUGH" = "I have a new continuous cough";
-"SUBMIT_SYMPTOMS_NO_COUGH" = "I do not have a new continuous cough";
-"SYMPTOMS_START_QUESTION" = "When did you first start showing these symptoms?";
+"SYMPTOMS_SUMMARY_CHECK_ANSWERS" = "Check your answers";
+"SYMPTOMS_SUMMARY_HAVE_TEMPERATURE" = "I have a high temperature";
+"SYMPTOMS_SUMMARY_NO_TEMPERATURE" = "I do not have a high temperature";
+"SYMPTOMS_SUMMARY_HAVE_COUGH" = "I have a new continuous cough";
+"SYMPTOMS_SUMMARY_NO_COUGH" = "I do not have a new continuous cough";
+
+"SELECT_START_DATE" = "Select start date";
+"SELECT_START_DATE_ERROR" = "Select a start date";
 "TEMPERATURE_START_QUESTION" = "When did your temperature start?";
 "COUGH_START_QUESTION" = "When did your cough start?";
-"SELECT_START_DATE" = "Select start date";
-"SUBMIT_SYMPTOMS_NO_SYMPTOMS" = "You don’t have the primary coronavirus symptoms at this time";
-"SUBMIT_SYMPTOMS_NO_SYMPTOMS_INFO" = "If you are showing other symptoms, or think you may have coronavirus, please visit";
-"SUBMIT_SYMPTOMS_NO_SYMPTOMS_NHS_111" = "NHS 111 online coronavirus service";
-"SUBMIT_SYMPTOMS_THANK_YOU" = "Thank you for sharing this data with the NHS. We will use this information to anonymously inform people they have come into contact with covid symptoms and encourage them to self-isolate.\n\nThank you for helping us save lives";
-"SUBMIT_SYMPTOMS_ERROR" = "Submission failed. Please try again";
+"SYMPTOMS_START_QUESTION" = "When did you first start showing these symptoms?";
+
+"SYMPTOMS_SUMMARY_NO_SYMPTOMS" = "You don’t have the primary coronavirus symptoms at this time";
+"SYMPTOMS_SUMMARY_NO_SYMPTOMS_INFO" = "If you are showing other symptoms, or think you may have coronavirus, please visit";
+"SYMPTOMS_SUMMARY_NO_SYMPTOMS_NHS_111" = "NHS 111 online coronavirus service";
+"SYMPTOMS_SUMMARY_CONTINUE" = "Continue";
+"SYMPTOMS_SUMMARY_DONE" = "Done";
+
+"SUBMIT_SYMPTOMS_THANK_YOU" = "This information will be used to help decide if the people you have had contact with will be advised to stay at home. To avoid more social distancing restrictions, the NHS needs accurate data on the number of people with symptoms.\n\nTogether we can help save lives, protect the NHS and stop the spread of coronavirus in the UK.";
+"SUBMIT_SYMPTOMS_CONFIRM" = "I confirm that the information I have entered is accurate";
