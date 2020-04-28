@@ -59,6 +59,7 @@ class QuestionSymptomsViewController: UIViewController, Storyboarded {
         titleLabel.text = questionTitle
         detailLabel.text = questionDetail
         errorLabel.text = questionError
+        errorLabel.textColor = UIColor(named: "NHS Error")
         yesButton.text = questionYes
         noButton.text = questionNo
         questionButton.setTitle(buttonText, for: .normal)
