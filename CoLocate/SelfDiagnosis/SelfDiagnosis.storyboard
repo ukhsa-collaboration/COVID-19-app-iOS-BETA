@@ -244,7 +244,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="JYQ-vC-4ZC">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="160.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="142.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thank You" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X7L-5P-VlC">
                                                 <rect key="frame" x="20" y="32" width="374" height="20.5"/>
@@ -258,14 +258,14 @@
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" id="ze3-NR-aKy"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirmation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ib8-Fb-gu6">
-                                                <rect key="frame" x="20" y="52.5" width="374" height="18"/>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirmation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ib8-Fb-gu6">
+                                                <rect key="frame" x="20" y="52.5" width="374" height="0.0"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fdk-RG-sRk" userLabel="Submit View">
-                                                <rect key="frame" x="20" y="70.5" width="374" height="70"/>
+                                                <rect key="frame" x="20" y="52.5" width="374" height="70"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c5D-qw-CwQ" customClass="PrimaryButton" customModule="Sonar" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="16" width="374" height="54"/>
