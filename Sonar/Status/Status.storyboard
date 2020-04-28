@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,7 +12,7 @@
         <!--Status View Controller-->
         <scene sceneID="s5E-Z8-NGD">
             <objects>
-                <viewController storyboardIdentifier="StatusViewController" id="HPa-EI-l5D" customClass="StatusViewController" customModule="CoLocate" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="StatusViewController" id="HPa-EI-l5D" customClass="StatusViewController" customModule="Sonar" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Oo2-Pv-CiL">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -23,7 +23,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="CLu-79-FDa">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="1001.5"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="64" translatesAutoresizingMaskIntoConstraints="NO" id="2iB-Px-aMY" customClass="LogoStrapline" customModule="CoLocate" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="64" translatesAutoresizingMaskIntoConstraints="NO" id="2iB-Px-aMY" customClass="LogoStrapline" customModule="Sonar" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             </view>
@@ -67,7 +67,7 @@
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="999" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ki-ul-KTk" customClass="ButtonWithDynamicType" customModule="CoLocate" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="999" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ki-ul-KTk" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
                                                                 <rect key="frame" x="309" y="0.0" width="33" height="44"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                 <state key="normal" title="Veal">
@@ -107,7 +107,7 @@
                                                                             <constraint firstAttribute="width" constant="12" id="MS2-lV-12k"/>
                                                                         </constraints>
                                                                     </view>
-                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="sLA-Af-1Gb" customClass="SymptomStackView" customModule="CoLocate" customModuleProvider="target">
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="sLA-Af-1Gb" customClass="SymptomStackView" customModule="Sonar" customModuleProvider="target">
                                                                         <rect key="frame" x="32" y="16" width="330" height="0.0"/>
                                                                     </stackView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Read latest advice" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oUM-AI-6LL">
@@ -218,7 +218,7 @@
                                                                                 <color key="textColor" name="NHS Text"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
-                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2UL-Ea-jl7" customClass="ButtonWithDynamicType" customModule="CoLocate" customModuleProvider="target">
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2UL-Ea-jl7" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="66.5" width="382" height="142"/>
                                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                                 <state key="normal" title="NHS Coronavirus">
@@ -241,7 +241,7 @@
                                                                                 </constraints>
                                                                                 <viewLayoutGuide key="safeArea" id="eKr-cg-obK"/>
                                                                             </view>
-                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Hnc-Fm-gpa" customClass="ButtonWithDynamicType" customModule="CoLocate" customModuleProvider="target">
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Hnc-Fm-gpa" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="8" width="382" height="33"/>
                                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -264,7 +264,7 @@
                                                                                     <constraint firstAttribute="height" constant="1" id="tZt-qe-nPo"/>
                                                                                 </constraints>
                                                                             </view>
-                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jZO-kd-bHg" customClass="ButtonWithDynamicType" customModule="CoLocate" customModuleProvider="target">
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jZO-kd-bHg" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="9" width="382" height="0.0"/>
                                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                                 <state key="normal" title="View App ID">
@@ -341,7 +341,7 @@
         <!--Symptoms Prompt View Controller-->
         <scene sceneID="B7j-z4-vGV">
             <objects>
-                <viewController storyboardIdentifier="SymptomsPromptViewController" id="eQJ-qc-4st" customClass="SymptomsPromptViewController" customModule="CoLocate" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SymptomsPromptViewController" id="eQJ-qc-4st" customClass="SymptomsPromptViewController" customModule="Sonar" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OiX-Ta-QDy">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="400"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -361,14 +361,14 @@
                                         <color key="textColor" name="NHS Text"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g6Q-bN-qIh" customClass="PrimaryButton" customModule="CoLocate" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g6Q-bN-qIh" customClass="PrimaryButton" customModule="Sonar" customModuleProvider="target">
                                         <rect key="frame" x="16" y="159" width="382" height="30"/>
                                         <state key="normal" title="Update my symptoms"/>
                                         <connections>
                                             <action selector="updateSymptoms:" destination="eQJ-qc-4st" eventType="touchUpInside" id="5R1-cU-1Cg"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jXP-zf-i4X" customClass="ButtonWithDynamicType" customModule="CoLocate" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jXP-zf-i4X" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
                                         <rect key="frame" x="16" y="205" width="382" height="33"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <state key="normal" title="I no longer have symptoms"/>
@@ -401,7 +401,7 @@
         <!--Cough Update View Controller-->
         <scene sceneID="phA-bo-rj4">
             <objects>
-                <viewController storyboardIdentifier="CoughUpdateViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="L7z-Q1-VRt" customClass="CoughUpdateViewController" customModule="CoLocate" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CoughUpdateViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="L7z-Q1-VRt" customClass="CoughUpdateViewController" customModule="Sonar" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="X7Y-0c-00A">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="400"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -421,7 +421,7 @@
                                         <color key="textColor" name="NHS Text"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ola-d2-WjC" customClass="ButtonWithDynamicType" customModule="CoLocate" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ola-d2-WjC" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
                                         <rect key="frame" x="16" y="137" width="382" height="33"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <state key="normal" title="Close"/>
@@ -454,7 +454,7 @@
         <!--Medical Worker Instructions View Controller-->
         <scene sceneID="XM5-3o-A6b">
             <objects>
-                <viewController storyboardIdentifier="MedicalWorkerInstructionsViewController" id="xmK-WF-c52" customClass="MedicalWorkerInstructionsViewController" customModule="CoLocate" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MedicalWorkerInstructionsViewController" id="xmK-WF-c52" customClass="MedicalWorkerInstructionsViewController" customModule="Sonar" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BAE-N2-oo1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="222"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -474,7 +474,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZYa-U7-noC" customClass="ButtonWithDynamicType" customModule="CoLocate" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZYa-U7-noC" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="138" width="374" height="0.0"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <state key="normal" title="Close"/>

@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OnboardingLogoStrapline" customModule="CoLocate" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OnboardingLogoStrapline" customModule="Sonar" customModuleProvider="target">
             <connections>
                 <outlet property="titleLabel" destination="0IR-QG-OJP" id="l3g-rx-uDc"/>
             </connections>
