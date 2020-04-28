@@ -56,7 +56,7 @@ extension URLSession: Session {
                     completion(.success(parsed))
 
                 case (let data?, let statusCode?, _):
-                    logger.error("Request to \(request.path) received \(statusCode). Response body: \(String(bytes: data, encoding: .utf8) ?? "<empty>")")
+                    logger.error("Request to \(urlRequest.url?.path ?? "(unknown)") received \(statusCode). Response body: \(String(bytes: data, encoding: .utf8) ?? "<empty>")")
                     let userInfo = [NSLocalizedDescriptionKey: "Sorry, your request at this time could not be completed. Please try again later."]
                     throw NSError(domain: "RequestErrorDomain", code: statusCode, userInfo: userInfo)
 

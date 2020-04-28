@@ -15,12 +15,17 @@ enum HTTPMethod: Equatable {
     case put
 }
 
+enum Urlable: Equatable {
+    case path(String)
+    case url(URL)
+}
+
 protocol Request {
     
     associatedtype ResponseType
     
     var method: HTTPMethod { get }
-    var path: String { get }
+    var urlable: Urlable { get }
     var headers: [String: String] { get }
     
     func parse(_ data: Data) throws -> ResponseType
@@ -34,13 +39,13 @@ extension Request {
     var sonarHeaderValue: String { Environment.sonarHeaderValue }
 
     func urlRequest() -> URLRequest {
-        let url: URL = {
-            if let url = URL(string: path) {
-                return url
-            }
-
-            return URL(string: path, relativeTo: baseURL)!
-        }()
+        let url: URL
+        switch urlable {
+        case .path(let p):
+            url = URL(string: p, relativeTo: baseURL)!
+        case .url(let u):
+            url = u
+        }
 
         var urlRequest = URLRequest(url: url)
 

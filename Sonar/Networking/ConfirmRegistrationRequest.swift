@@ -14,12 +14,12 @@ class ConfirmRegistrationRequest: Request {
         
     let method: HTTPMethod
     
-    let path: String
+    let urlable: Urlable
     
     let headers: [String : String]
     
     init(activationCode: String, pushToken: String, deviceModel: String, deviceOSVersion: String, postalCode: String) {
-        path = "/api/devices"
+        urlable = .path("/api/devices")
         headers = [
             "Accept": "application/json",
             "Content-Type": "application/json"

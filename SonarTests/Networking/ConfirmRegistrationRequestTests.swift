@@ -38,7 +38,7 @@ class ConfirmRegistrationRequestTests: XCTestCase {
     }
     
     func testPath() {
-        XCTAssertEqual(request.path, "/api/devices")
+        XCTAssertEqual(request.urlable, .path("/api/devices"))
     }
     
     func testHeaders() {

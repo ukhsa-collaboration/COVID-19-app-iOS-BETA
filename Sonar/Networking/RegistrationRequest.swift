@@ -17,7 +17,7 @@ struct RegistrationRequest: Request {
     typealias ResponseType = Void
     
     let method: HTTPMethod
-    let path = "/api/devices/registrations"
+    let urlable: Urlable = .path("/api/devices/registrations")
     let headers = ["Content-Type": "application/json"]
     
     init(pushToken: String) {

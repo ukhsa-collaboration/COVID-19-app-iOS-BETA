@@ -49,12 +49,12 @@ class SampleSecureRequest: SecureRequest, Request {
     typealias ResponseType = Void
     
     let method: HTTPMethod
-    let path: String
+    let urlable: Urlable
     
     init(key: Data, text: String, date: Date = Date()) {
         let data = text.data(using: .utf8)!
         method = HTTPMethod.post(data: data)
-        path = "/api/sample"
+        urlable = .path("/api/sample")
         let headers = ["Favourite-Colour": "Puce"]
         
         super.init(key, data, headers, date)

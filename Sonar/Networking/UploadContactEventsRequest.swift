@@ -19,12 +19,12 @@ class UploadContactEventsRequest: SecureRequest, Request {
     
     let method: HTTPMethod
     
-    let path: String
+    let urlable: Urlable
 
     init(registration: Registration, symptomsTimestamp: Date, contactEvents: [ContactEvent]) {
         let key = registration.secretKey
         let sonarId = registration.id
-        path = "/api/residents/\(sonarId.uuidString)"
+        urlable = .path("/api/residents/\(sonarId.uuidString)")
 
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601

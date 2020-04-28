@@ -294,12 +294,12 @@ class TestPushRequest: SecureRequest, Request {
                     
     let method: HTTPMethod
     
-    let path: String
+    let urlable: Urlable
     
     init(key: Data, remoteEncryptedBroadcastId: UUID, delay: Int = 0) {
         let data = Data()
         method = .post(data: data)
-        path = "/api/debug/notification/residents/\(remoteEncryptedBroadcastId.uuidString)?delay=\(delay)"
+        urlable = .path("/api/debug/notification/residents/\(remoteEncryptedBroadcastId.uuidString)?delay=\(delay)")
         
         super.init(key, data, [:])
     }

@@ -52,7 +52,7 @@ class UploadContactEventsRequestTests: XCTestCase {
     }
 
     func testPath() {
-        XCTAssertEqual(request.path, "/api/residents/\(anonymousId.uuidString)")
+        XCTAssertEqual(request.urlable, .path("/api/residents/\(anonymousId.uuidString)"))
     }
     
     func testHeaders() {

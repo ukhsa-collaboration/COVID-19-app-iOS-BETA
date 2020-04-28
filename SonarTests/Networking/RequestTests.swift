@@ -36,7 +36,7 @@ class RequestTests: XCTestCase {
     }
 
     func testRelativePath() {
-        request.path = "/foo/bar/baz"
+        request.urlable = .path("/foo/bar/baz")
 
         let urlRequest = request.urlRequest()
 
@@ -44,7 +44,7 @@ class RequestTests: XCTestCase {
     }
 
     func testAbsolutePath() {
-        request.path = "https://example.com/foo/bar/baz"
+        request.urlable = .url(URL(string: "https://example.com/foo/bar/baz")!)
 
         let urlRequest = request.urlRequest()
 
@@ -57,7 +57,7 @@ private struct MockRequest: Request {
 
     var method = HTTPMethod.get
     var headers = ["Request-Header": "Request-Value"]
-    var path = UUID().uuidString
+    var urlable = Urlable.path(UUID().uuidString)
     var sonarHeaderValue = "sonar-header-value"
 
     func parse(_ data: Data) throws -> Data {

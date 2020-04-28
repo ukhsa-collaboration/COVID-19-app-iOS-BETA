@@ -62,7 +62,7 @@ class ContactEventsUploaderTests: XCTestCase {
             return
         }
 
-        XCTAssertEqual(request.path, "/api/residents/\(registration.id.uuidString)")
+        XCTAssertEqual(request.urlable, .path("/api/residents/\(registration.id.uuidString)"))
 
         switch request.method {
         case .patch(let data):
