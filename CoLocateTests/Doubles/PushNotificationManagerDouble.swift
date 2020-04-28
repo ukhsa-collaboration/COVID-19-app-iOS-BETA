@@ -7,7 +7,7 @@
 //
 
 import Foundation
-@testable import CoLocate
+@testable import Sonar
 
 class RemoteNotificationManagerDouble: RemoteNotificationManager {
     let dispatcher: RemoteNotificationDispatching

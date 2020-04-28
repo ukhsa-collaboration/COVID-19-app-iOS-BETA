@@ -9,7 +9,7 @@
 import UIKit
 import CoreBluetooth
 
-@testable import CoLocate
+@testable import Sonar
 
 class BluetoothNurseryDouble: BluetoothNursery {
     var broadcaster: BTLEBroadcaster?

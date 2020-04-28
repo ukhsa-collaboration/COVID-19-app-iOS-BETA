@@ -10,7 +10,7 @@ import XCTest
 import UIKit
 import CoreBluetooth
 
-@testable import CoLocate
+@testable import Sonar
 
 class BluetoothStateUserNotifierTests: TestCase {
 

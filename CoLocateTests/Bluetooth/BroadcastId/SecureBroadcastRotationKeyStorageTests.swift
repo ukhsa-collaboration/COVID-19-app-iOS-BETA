@@ -9,7 +9,7 @@
 import XCTest
 import Security
 
-@testable import CoLocate
+@testable import Sonar
 
 class SecureBroadcastRotationKeyStorageTests: XCTestCase {
 

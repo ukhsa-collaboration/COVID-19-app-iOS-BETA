@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import CoLocate
+@testable import Sonar
 import CoreBluetooth
 
 class UUIDExtensionsTests: XCTestCase {

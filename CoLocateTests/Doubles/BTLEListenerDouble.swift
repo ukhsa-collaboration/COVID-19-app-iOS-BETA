@@ -7,7 +7,7 @@
 //
 
 import UIKit
-@testable import CoLocate
+@testable import Sonar
 
 class BTLEListenerDouble: BTLEListener {
     var connectedPeripheral: BTLEPeripheral?

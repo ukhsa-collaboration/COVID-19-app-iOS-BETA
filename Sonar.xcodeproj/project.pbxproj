@@ -273,7 +273,7 @@
 		213C806B241A56430020EFA5 /* PermissionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsViewController.swift; sourceTree = "<group>"; };
 		214209B52421072C00C7BFF3 /* StatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
 		214209B9242216B700C7BFF3 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		214209BF2422276800C7BFF3 /* CoLocateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoLocateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		214209BF2422276800C7BFF3 /* SonarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SonarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		214209C32422276800C7BFF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		214209C9242227B300C7BFF3 /* PersistenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceTests.swift; sourceTree = "<group>"; };
 		214209CF242396DA00C7BFF3 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
@@ -301,7 +301,7 @@
 		21F373FE2433844D00926FB8 /* ContactEventRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactEventRepository.swift; sourceTree = "<group>"; };
 		21F37401243384D400926FB8 /* PersistingContactEventRepositoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistingContactEventRepositoryTests.swift; sourceTree = "<group>"; };
 		21F374032434C4BF00926FB8 /* LiveBTLEDebuggerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveBTLEDebuggerTableViewController.swift; sourceTree = "<group>"; };
-		6FC63C2D241641B8007C8BF3 /* CoLocate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoLocate.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6FC63C2D241641B8007C8BF3 /* Sonar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sonar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FC63C30241641B8007C8BF3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6FC63C37241641BA007C8BF3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6FC63C3A241641BA007C8BF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -312,7 +312,7 @@
 		89388B8C2435E370009D60CF /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		89388B8E2435E673009D60CF /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		893C0B7A243DE346000A7DB6 /* OnboardingEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingEnvironment.swift; sourceTree = "<group>"; };
-		895D9DDE2437383300573D4D /* CoLocateUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoLocateUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		895D9DDE2437383300573D4D /* SonarUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SonarUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		895D9DE22437383300573D4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		895D9DE82437384C00573D4D /* CoLocateUITests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CoLocateUITests.xcconfig; sourceTree = "<group>"; };
 		895D9E452437458700573D4D /* AppIcon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppIcon.xcassets; sourceTree = "<group>"; };
@@ -731,9 +731,9 @@
 		6FC63C2E241641B8007C8BF3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6FC63C2D241641B8007C8BF3 /* CoLocate.app */,
-				214209BF2422276800C7BFF3 /* CoLocateTests.xctest */,
-				895D9DDE2437383300573D4D /* CoLocateUITests.xctest */,
+				6FC63C2D241641B8007C8BF3 /* Sonar.app */,
+				214209BF2422276800C7BFF3 /* SonarTests.xctest */,
+				895D9DDE2437383300573D4D /* SonarUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1052,9 +1052,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		214209BE2422276800C7BFF3 /* CoLocateTests */ = {
+		214209BE2422276800C7BFF3 /* SonarTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 214209C62422276800C7BFF3 /* Build configuration list for PBXNativeTarget "CoLocateTests" */;
+			buildConfigurationList = 214209C62422276800C7BFF3 /* Build configuration list for PBXNativeTarget "SonarTests" */;
 			buildPhases = (
 				214209BB2422276800C7BFF3 /* Sources */,
 				214209BC2422276800C7BFF3 /* Frameworks */,
@@ -1065,14 +1065,14 @@
 			dependencies = (
 				214209C52422276800C7BFF3 /* PBXTargetDependency */,
 			);
-			name = CoLocateTests;
+			name = SonarTests;
 			productName = CoLocateTests;
-			productReference = 214209BF2422276800C7BFF3 /* CoLocateTests.xctest */;
+			productReference = 214209BF2422276800C7BFF3 /* SonarTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		6FC63C2C241641B8007C8BF3 /* CoLocate */ = {
+		6FC63C2C241641B8007C8BF3 /* Sonar */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6FC63C3F241641BA007C8BF3 /* Build configuration list for PBXNativeTarget "CoLocate" */;
+			buildConfigurationList = 6FC63C3F241641BA007C8BF3 /* Build configuration list for PBXNativeTarget "Sonar" */;
 			buildPhases = (
 				6FC63C29241641B8007C8BF3 /* Sources */,
 				6FC63C2A241641B8007C8BF3 /* Frameworks */,
@@ -1082,17 +1082,17 @@
 			);
 			dependencies = (
 			);
-			name = CoLocate;
+			name = Sonar;
 			packageProductDependencies = (
 				89F06B2B2434A2C00074C612 /* Logging */,
 			);
 			productName = CoLocate;
-			productReference = 6FC63C2D241641B8007C8BF3 /* CoLocate.app */;
+			productReference = 6FC63C2D241641B8007C8BF3 /* Sonar.app */;
 			productType = "com.apple.product-type.application";
 		};
-		895D9DDD2437383300573D4D /* CoLocateUITests */ = {
+		895D9DDD2437383300573D4D /* SonarUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 895D9DE72437383300573D4D /* Build configuration list for PBXNativeTarget "CoLocateUITests" */;
+			buildConfigurationList = 895D9DE72437383300573D4D /* Build configuration list for PBXNativeTarget "SonarUITests" */;
 			buildPhases = (
 				895D9DDA2437383300573D4D /* Sources */,
 				895D9DDB2437383300573D4D /* Frameworks */,
@@ -1103,9 +1103,9 @@
 			dependencies = (
 				895D9DE42437383300573D4D /* PBXTargetDependency */,
 			);
-			name = CoLocateUITests;
+			name = SonarUITests;
 			productName = CoLocateUITests;
-			productReference = 895D9DDE2437383300573D4D /* CoLocateUITests.xctest */;
+			productReference = 895D9DDE2437383300573D4D /* SonarUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -1133,7 +1133,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 6FC63C28241641B8007C8BF3 /* Build configuration list for PBXProject "CoLocate" */;
+			buildConfigurationList = 6FC63C28241641B8007C8BF3 /* Build configuration list for PBXProject "Sonar" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -1149,9 +1149,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6FC63C2C241641B8007C8BF3 /* CoLocate */,
-				214209BE2422276800C7BFF3 /* CoLocateTests */,
-				895D9DDD2437383300573D4D /* CoLocateUITests */,
+				6FC63C2C241641B8007C8BF3 /* Sonar */,
+				214209BE2422276800C7BFF3 /* SonarTests */,
+				895D9DDD2437383300573D4D /* SonarUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -1390,12 +1390,12 @@
 /* Begin PBXTargetDependency section */
 		214209C52422276800C7BFF3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 6FC63C2C241641B8007C8BF3 /* CoLocate */;
+			target = 6FC63C2C241641B8007C8BF3 /* Sonar */;
 			targetProxy = 214209C42422276800C7BFF3 /* PBXContainerItemProxy */;
 		};
 		895D9DE42437383300573D4D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 6FC63C2C241641B8007C8BF3 /* CoLocate */;
+			target = 6FC63C2C241641B8007C8BF3 /* Sonar */;
 			targetProxy = 895D9DE32437383300573D4D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1471,7 +1471,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		214209C62422276800C7BFF3 /* Build configuration list for PBXNativeTarget "CoLocateTests" */ = {
+		214209C62422276800C7BFF3 /* Build configuration list for PBXNativeTarget "SonarTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				214209C72422276800C7BFF3 /* Debug */,
@@ -1480,7 +1480,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6FC63C28241641B8007C8BF3 /* Build configuration list for PBXProject "CoLocate" */ = {
+		6FC63C28241641B8007C8BF3 /* Build configuration list for PBXProject "Sonar" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6FC63C3D241641BA007C8BF3 /* Debug */,
@@ -1489,7 +1489,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6FC63C3F241641BA007C8BF3 /* Build configuration list for PBXNativeTarget "CoLocate" */ = {
+		6FC63C3F241641BA007C8BF3 /* Build configuration list for PBXNativeTarget "Sonar" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6FC63C40241641BA007C8BF3 /* Debug */,
@@ -1498,7 +1498,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		895D9DE72437383300573D4D /* Build configuration list for PBXNativeTarget "CoLocateUITests" */ = {
+		895D9DE72437383300573D4D /* Build configuration list for PBXNativeTarget "SonarUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				895D9DE52437383300573D4D /* Debug */,

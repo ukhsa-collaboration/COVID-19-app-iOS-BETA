@@ -10,7 +10,7 @@ import Foundation
 
 import XCTest
 import Firebase
-@testable import CoLocate
+@testable import Sonar
 
 class RemoteNotificationManagerTests: TestCase {
 

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-@testable import CoLocate
+@testable import Sonar
 
 class ViewControllerContainerDouble: ViewControllerContainer {
     var currentChild: UIViewController?

@@ -9,13 +9,13 @@
 import XCTest
 import Security
 
-@testable import CoLocate
+@testable import Sonar
 
 class BroadcastIdEncypterTests: XCTestCase {
 
     let cannedId = UUID(uuidString: "E1D160C7-F6E8-48BC-8687-63C696D910CB")!
 
-    let colocateEpoch = "2020-04-01T00:00:00Z"
+    let sonarEpoch = "2020-04-01T00:00:00Z"
     let dateFormatter = DateFormatter()
 
     var knownDate: Date!
@@ -28,7 +28,7 @@ class BroadcastIdEncypterTests: XCTestCase {
         super.setUp()
 
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
-        knownDate = dateFormatter.date(from:colocateEpoch)!
+        knownDate = dateFormatter.date(from:sonarEpoch)!
         slightlyLaterDate = knownDate.addingTimeInterval(1)
         muchLaterDate = knownDate.addingTimeInterval(86400)
 

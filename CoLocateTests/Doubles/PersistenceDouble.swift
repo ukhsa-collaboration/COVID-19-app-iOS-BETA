@@ -7,7 +7,7 @@
 //
 
 import UIKit
-@testable import CoLocate
+@testable import Sonar
 
 class PersistenceDouble: Persisting {
     var delegate: PersistenceDelegate?

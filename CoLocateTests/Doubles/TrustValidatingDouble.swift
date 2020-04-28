@@ -7,7 +7,7 @@
 //
 
 import Foundation
-@testable import CoLocate
+@testable import Sonar
 
 struct TrustValidatingDouble: TrustValidating {
     var shouldAccept = true

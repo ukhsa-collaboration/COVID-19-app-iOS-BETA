@@ -98,7 +98,7 @@ private extension OnboardingTests {
 private extension OnboardingTests {
     
     var notificationPermissionAlertTitle: XCUIElement {
-        app.staticTexts["“CoLocate” Would Like to Send You Notifications"]
+        app.staticTexts["“Sonar” Would Like to Send You Notifications"]
     }
     
     var allowNotificationsButton: XCUIElement {

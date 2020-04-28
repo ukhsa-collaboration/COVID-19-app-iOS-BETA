@@ -6,7 +6,7 @@
 //  Copyright © 2020 NHSX. All rights reserved.
 //
 
-@testable import CoLocate
+@testable import Sonar
 
 class StatusProviderDouble: StatusProvider {
     static func double() -> StatusProviderDouble {

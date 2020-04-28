@@ -121,7 +121,7 @@ private class EphemeralRemoteNotificationManager: RemoteNotificationManager {
     
     func requestAuthorization(completion: @escaping (Result<Bool, Error>) -> Void) {
         let alert = UIAlertController(
-            title: "“CoLocate” Would Like to Send You Notifications",
+            title: "“Sonar” Would Like to Send You Notifications",
             message: "[FAKE] This alert only simulates the system alert.",
             preferredStyle: .alert
         )

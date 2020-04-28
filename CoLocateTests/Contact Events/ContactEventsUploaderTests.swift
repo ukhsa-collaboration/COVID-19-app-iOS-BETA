@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import CoLocate
+@testable import Sonar
 
 class ContactEventsUploaderTests: XCTestCase {
 

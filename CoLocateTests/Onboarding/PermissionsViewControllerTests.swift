@@ -8,7 +8,7 @@
 
 import CoreBluetooth
 import XCTest
-@testable import CoLocate
+@testable import Sonar
 
 class PermissionsViewControllerTests: TestCase {
     

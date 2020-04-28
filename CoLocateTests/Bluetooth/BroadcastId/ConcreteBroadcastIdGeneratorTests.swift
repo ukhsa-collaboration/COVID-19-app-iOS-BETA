@@ -8,7 +8,7 @@
 
 import XCTest
 
-@testable import CoLocate
+@testable import Sonar
 
 
 class ConcreteBroadcastIdGeneratorTests: XCTestCase {

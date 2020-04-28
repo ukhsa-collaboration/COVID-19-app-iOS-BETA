@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import CoLocate
+@testable import Sonar
 
 class BluetoothNurseryTests: TestCase {
     func testStartsBroadcastingOnceRegistrationIsPersisted() {

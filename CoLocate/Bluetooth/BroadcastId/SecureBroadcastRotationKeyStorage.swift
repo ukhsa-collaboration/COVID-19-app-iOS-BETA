@@ -20,7 +20,7 @@ protocol BroadcastRotationKeyStorage {
 
 struct SecureBroadcastRotationKeyStorage: BroadcastRotationKeyStorage {
 
-    private let publicKeyTag = "uk.nhs.nhsx.colocate.sonar.public_key"
+    private let publicKeyTag = "uk.nhs.nhsx.sonar.public_key"
 
     func save(publicKey: SecKey) throws {
         let status = saveToKeychain(publicKey)

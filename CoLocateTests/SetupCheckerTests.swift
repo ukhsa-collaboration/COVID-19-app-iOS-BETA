@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import CoLocate
+@testable import Sonar
 
 class SetupCheckerTests: XCTestCase {
     func testAllOk_withBluetoothObserver_btFinishesFirst() {

@@ -8,7 +8,7 @@
 
 import Foundation
 import XCTest
-@testable import CoLocate
+@testable import Sonar
 
 class ContactEventExpiryHandlerTests: XCTestCase {
     func testInvokesRemoveExpiredContactEventsOnInit() {

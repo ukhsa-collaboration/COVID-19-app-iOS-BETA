@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6FC63C2C241641B8007C8BF3"
-               BuildableName = "CoLocate.app"
-               BlueprintName = "CoLocate"
-               ReferencedContainer = "container:CoLocate.xcodeproj">
+               BuildableName = "NHS COVID-19.app"
+               BlueprintName = "Sonar"
+               ReferencedContainer = "container:Sonar.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -34,9 +34,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "214209BE2422276800C7BFF3"
-               BuildableName = "CoLocateTests.xctest"
-               BlueprintName = "CoLocateTests"
-               ReferencedContainer = "container:CoLocate.xcodeproj">
+               BuildableName = "SonarTests.xctest"
+               BlueprintName = "SonarTests"
+               ReferencedContainer = "container:Sonar.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -44,9 +44,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "895D9DDD2437383300573D4D"
-               BuildableName = "CoLocateUITests.xctest"
-               BlueprintName = "CoLocateUITests"
-               ReferencedContainer = "container:CoLocate.xcodeproj">
+               BuildableName = "SonarUITests.xctest"
+               BlueprintName = "SonarUITests"
+               ReferencedContainer = "container:Sonar.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -66,9 +66,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6FC63C2C241641B8007C8BF3"
-            BuildableName = "CoLocate.app"
-            BlueprintName = "CoLocate"
-            ReferencedContainer = "container:CoLocate.xcodeproj">
+            BuildableName = "NHS COVID-19.app"
+            BlueprintName = "Sonar"
+            ReferencedContainer = "container:Sonar.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -83,9 +83,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6FC63C2C241641B8007C8BF3"
-            BuildableName = "CoLocate.app"
-            BlueprintName = "CoLocate"
-            ReferencedContainer = "container:CoLocate.xcodeproj">
+            BuildableName = "NHS COVID-19.app"
+            BlueprintName = "Sonar"
+            ReferencedContainer = "container:Sonar.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

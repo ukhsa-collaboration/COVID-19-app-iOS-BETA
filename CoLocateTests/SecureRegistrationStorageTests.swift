@@ -8,7 +8,7 @@
 
 import Security
 import XCTest
-@testable import CoLocate
+@testable import Sonar
 
 class SecureRegistrationStorageTests: TestCase {
 

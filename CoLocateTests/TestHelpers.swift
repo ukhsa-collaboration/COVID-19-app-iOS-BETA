@@ -8,7 +8,7 @@
 
 import UIKit
 import XCTest
-@testable import CoLocate
+@testable import Sonar
 
 func inWindowHierarchy(viewController: UIViewController, closure: (() -> Void)) {
     let appDelegate = UIApplication.shared.delegate as! AppDelegate

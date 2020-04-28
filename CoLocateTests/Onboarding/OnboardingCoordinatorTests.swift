@@ -8,7 +8,7 @@
 
 import XCTest
 import CoreBluetooth
-@testable import CoLocate
+@testable import Sonar
 
 class OnboardingCoordinatorTests: TestCase {
 

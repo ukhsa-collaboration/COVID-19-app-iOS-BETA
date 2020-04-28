@@ -10,7 +10,7 @@ import Foundation
 
 import Foundation
 
-@testable import CoLocate
+@testable import Sonar
 
 extension Request {
 
