@@ -43,7 +43,7 @@ jobs:
       - name: Run Build
         env:
           SDK: ${{ matrix.run-config['sdk'] }}
-        run: xcodebuild -scheme CoLocate -configuration release -sdk ${SDK} CODE_SIGNING_ALLOWED=NO
+        run: xcodebuild -scheme Sonar -configuration release -sdk ${SDK} CODE_SIGNING_ALLOWED=NO
 
       - name: Notify Slack on Failure
         if: github.ref == 'refs/heads/master' && failure()
@@ -68,7 +68,7 @@ jobs:
         run: sudo xcode-select -s /Applications/Xcode_11.app
 
       - name: Show Available Destinations
-        run: xcodebuild -scheme CoLocate -showdestinations
+        run: xcodebuild -scheme Sonar -showdestinations
 
       - name: Setup Build Configuration
         run: |
@@ -85,7 +85,7 @@ jobs:
       - name: Run Test
         run: >
           xcodebuild
-          -scheme CoLocate
+          -scheme Sonar
           test
           -destination "platform=iOS Simulator,OS=13.4,name=iPhone 11"
           -showBuildTimingSummary
@@ -103,7 +103,7 @@ jobs:
       - name: Create App Report
         run: |
           cd Reporting
-          swift run Reporter project ../CoLocate.xcodeproj --scheme CoLocate --method build --output AppReport || true
+          swift run Reporter project ../CoLocate.xcodeproj --scheme Sonar --method build --output AppReport || true
           cd ..
 
       - name: Upload Test Results
