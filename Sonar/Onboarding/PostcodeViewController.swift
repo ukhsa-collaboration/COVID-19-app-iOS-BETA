@@ -65,12 +65,7 @@ class PostcodeViewController: UIViewController, Storyboarded {
     }
     
     private func hasValidPostcode() -> Bool {
-        let postcode = enteredPostcode
-        return postcode.count >= 2 && postcode.count <= 4 && isAlphanumeric(s: postcode)
-    }
-    
-    private func isAlphanumeric(s: String) -> Bool {
-        return s.range(of: "[^a-zA-Z0-9]", options: .regularExpression) == nil
+        return PostcodeValidator.isValid(enteredPostcode)
     }
     
     private func showAlert() {

@@ -12,6 +12,8 @@
 		090DEE10244F8BF600268170 /* BluetoothPermissionDeniedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090DEE0F244F8BF600268170 /* BluetoothPermissionDeniedViewController.swift */; };
 		092BB5AB244622200036B30E /* RootViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092BB5AA244622200036B30E /* RootViewControllerTests.swift */; };
 		095A91182434FF1500ED6369 /* ApplicationDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095A91172434FF1500ED6369 /* ApplicationDouble.swift */; };
+		0979FB782458ADE800EB01A8 /* PostcodeValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0979FB772458ADE800EB01A8 /* PostcodeValidatorTests.swift */; };
+		0979FB792458ADF000EB01A8 /* PostcodeValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0979FB752458AD3600EB01A8 /* PostcodeValidator.swift */; };
 		097C93892447986B00E985CF /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097C93882447986B00E985CF /* TextField.swift */; };
 		0983ACCD243E566800DBB336 /* ErrorForTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983ACCC243E566800DBB336 /* ErrorForTest.swift */; };
 		0983ACCF243E6D3800DBB336 /* NotificationObserverDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983ACCE243E6D3800DBB336 /* NotificationObserverDouble.swift */; };
@@ -229,6 +231,8 @@
 		090DEE0F244F8BF600268170 /* BluetoothPermissionDeniedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothPermissionDeniedViewController.swift; sourceTree = "<group>"; };
 		092BB5AA244622200036B30E /* RootViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewControllerTests.swift; sourceTree = "<group>"; };
 		095A91172434FF1500ED6369 /* ApplicationDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationDouble.swift; sourceTree = "<group>"; };
+		0979FB752458AD3600EB01A8 /* PostcodeValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostcodeValidator.swift; sourceTree = "<group>"; };
+		0979FB772458ADE800EB01A8 /* PostcodeValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostcodeValidatorTests.swift; sourceTree = "<group>"; };
 		097C93882447986B00E985CF /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		0983ACCC243E566800DBB336 /* ErrorForTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorForTest.swift; sourceTree = "<group>"; };
 		0983ACCE243E6D3800DBB336 /* NotificationObserverDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationObserverDouble.swift; sourceTree = "<group>"; };
@@ -971,6 +975,7 @@
 				893C0B7A243DE346000A7DB6 /* OnboardingEnvironment.swift */,
 				F6F05A2F24340E5400FF4B72 /* OnboardingViewController.swift */,
 				213C806B241A56430020EFA5 /* PermissionsViewController.swift */,
+				0979FB752458AD3600EB01A8 /* PostcodeValidator.swift */,
 				09CAA3652440F3B100CE93A6 /* PostcodeViewController.swift */,
 				F6F05A35243436D200FF4B72 /* PrivacyViewController.swift */,
 				F6F05A332434344200FF4B72 /* StartNowViewController.swift */,
@@ -984,6 +989,7 @@
 				F63279292435323200CF7A42 /* PermissionsViewControllerTests.swift */,
 				F6F05A232433BEC000FF4B72 /* OnboardingCoordinatorTests.swift */,
 				F632792024351C1900CF7A42 /* OnboardingViewControllerTests.swift */,
+				0979FB772458ADE800EB01A8 /* PostcodeValidatorTests.swift */,
 				09CAA3692440FC4500CE93A6 /* PostcodeViewControllerTests.swift */,
 				0991B8B1244FB03E0076C58B /* BluetoothPermissionDeniedViewControllerTests.swift */,
 				0991B8BA2450B8CE0076C58B /* NotificationPermissionDeniedViewControllerTests.swift */,
@@ -1276,6 +1282,7 @@
 				89CCF66424571EE900AC9D91 /* SetupProblemDiagnoserTests.swift in Sources */,
 				F63279272435219A00CF7A42 /* QueueDouble.swift in Sources */,
 				F6CC2CAC242BCD0D0079432B /* RemoteNotificationManagerTests.swift in Sources */,
+				0979FB782458ADE800EB01A8 /* PostcodeValidatorTests.swift in Sources */,
 				09CAA36A2440FC4500CE93A6 /* PostcodeViewControllerTests.swift in Sources */,
 				F67C5159243E7C1E008E2945 /* SubmitSymptomsViewControllerTests.swift in Sources */,
 				F72EBD4F24361E99009F9328 /* URLSessionTests.swift in Sources */,
@@ -1344,6 +1351,7 @@
 				F652F730244E4AAD00D97950 /* DrawerPresentation.swift in Sources */,
 				098ED478242D7D050029B729 /* RegistratonService.swift in Sources */,
 				134470B02454D614001A0AD9 /* CoughUpdateViewController.swift in Sources */,
+				0979FB792458ADF000EB01A8 /* PostcodeValidator.swift in Sources */,
 				134470AE2454D4DA001A0AD9 /* SelfDiagnosisCoordinator.swift in Sources */,
 				0984E0BD2451014E009C6374 /* BluetoothOffViewController.swift in Sources */,
 				F62F857F2451051C006580A8 /* ContactEventsUploader.swift in Sources */,
