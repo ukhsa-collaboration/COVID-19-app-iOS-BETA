@@ -94,7 +94,7 @@ class Persistence: Persisting {
             try! broadcastKeyStorage.save(publicKey: registration.broadcastRotationKey)
 
             delegate?.persistence(self, didUpdateRegistration: registration)
-            monitor.didDetect(.registrationSucceeded)
+            monitor.report(.registrationSucceeded)
         }
     }
 
@@ -136,7 +136,7 @@ class Persistence: Persisting {
         set {
             UserDefaults.standard.set(newValue, forKey: Keys.partialPostcode.rawValue)
             if newValue != nil {
-                monitor.didDetect(.providedPartialPostcode)
+                monitor.report(.providedPartialPostcode)
             }
         }
     }

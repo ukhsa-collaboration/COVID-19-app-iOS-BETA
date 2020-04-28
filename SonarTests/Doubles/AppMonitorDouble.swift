@@ -13,7 +13,7 @@ class AppMonitoringDouble: AppMonitoring {
     
     var detectedEvents = [AppEvent]()
     
-    func didDetect(_ event: AppEvent) {
+    func report(_ event: AppEvent) {
         detectedEvents.append(event)
     }
 }
