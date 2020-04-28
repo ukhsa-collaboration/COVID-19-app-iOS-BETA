@@ -38,9 +38,8 @@ class PatchContactEventsRequestTests: XCTestCase {
         ]
 
         let registration = Registration(id: anonymousId, secretKey: dummyKey, broadcastRotationKey: knownGoodECPublicKey())
-        request = ConcreteSecureRequestFactory(
-            registration: registration
-        ).patchContactsRequest(
+        request = PatchContactEventsRequest(
+            registration: registration,
             symptomsTimestamp: Date(),
             contactEvents: contactEvents
         )

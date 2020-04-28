@@ -20,8 +20,10 @@ class PatchContactEventsRequest: SecureRequest, Request {
     let method: HTTPMethod
     
     let path: String
-    
-    init(key: Data, sonarId: UUID, symptomsTimestamp: Date, contactEvents: [ContactEvent]) {
+
+    init(registration: Registration, symptomsTimestamp: Date, contactEvents: [ContactEvent]) {
+        let key = registration.secretKey
+        let sonarId = registration.id
         path = "/api/residents/\(sonarId.uuidString)"
 
         let encoder = JSONEncoder()

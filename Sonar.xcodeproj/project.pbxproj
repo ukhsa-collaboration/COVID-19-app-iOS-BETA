@@ -199,7 +199,6 @@
 		F78CEB6F242B92CF002254AD /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB6E242B92CF002254AD /* GoogleUtilities.framework */; };
 		F78CEB71242B9305002254AD /* GoogleDataTransport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB70242B9305002254AD /* GoogleDataTransport.framework */; };
 		F78CEB73242B937F002254AD /* nanopb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB72242B937F002254AD /* nanopb.framework */; };
-		F78CEBED242D0836002254AD /* SecureRequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78CEBEC242D0836002254AD /* SecureRequestFactory.swift */; };
 		F7D62F2724406FC8004C32A2 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 89F06B2B2434A2C00074C612 /* Logging */; };
 		F7D62F292440D4CB004C32A2 /* ConcreteBroadcastIdGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D62F282440D4CB004C32A2 /* ConcreteBroadcastIdGeneratorTests.swift */; };
 		F7D62F2B2440D64D004C32A2 /* ConcreteBroadcastIdGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D62F2A2440D64C004C32A2 /* ConcreteBroadcastIdGenerator.swift */; };
@@ -447,7 +446,6 @@
 		F78CEB70242B9305002254AD /* GoogleDataTransport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleDataTransport.framework; path = Frameworks/GoogleDataTransport.framework; sourceTree = "<group>"; };
 		F78CEB72242B937F002254AD /* nanopb.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = nanopb.framework; path = Frameworks/nanopb.framework; sourceTree = "<group>"; };
 		F78CEB74242BAC83002254AD /* Sonar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Sonar.entitlements; sourceTree = "<group>"; };
-		F78CEBEC242D0836002254AD /* SecureRequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRequestFactory.swift; sourceTree = "<group>"; };
 		F7D62F282440D4CB004C32A2 /* ConcreteBroadcastIdGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcreteBroadcastIdGeneratorTests.swift; sourceTree = "<group>"; };
 		F7D62F2A2440D64C004C32A2 /* ConcreteBroadcastIdGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcreteBroadcastIdGenerator.swift; sourceTree = "<group>"; };
 		F7E74F8D244DFBDA00273C59 /* BroadcastRotationKeyConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastRotationKeyConverter.swift; sourceTree = "<group>"; };
@@ -654,7 +652,6 @@
 				F600A60124297A8E0038DF57 /* RegistrationRequest.swift */,
 				F758553924294C8C00CBE1ED /* RequestFactory.swift */,
 				21B3D2E42429112B00573061 /* SecureRequest.swift */,
-				F78CEBEC242D0836002254AD /* SecureRequestFactory.swift */,
 				214209CF242396DA00C7BFF3 /* Session.swift */,
 				89CE566A24503E93004A74D0 /* TrustValidatingURLSessionDelegate.swift */,
 				214209D1242399CF00C7BFF3 /* URLSession.swift */,
@@ -1314,7 +1311,6 @@
 				F72EBD9E243C90E6009F9328 /* HumbleLocalNotificationScheduler.swift in Sources */,
 				217A23BE243B34E8001B8236 /* UIDevice+ModelName.swift in Sources */,
 				F604976924539093002B8503 /* UploadLog.swift in Sources */,
-				F78CEBED242D0836002254AD /* SecureRequestFactory.swift in Sources */,
 				21F373FF2433844D00926FB8 /* ContactEventRepository.swift in Sources */,
 				21C09A8F2437B99F00368203 /* BluetoothNursery.swift in Sources */,
 				0986EFB5244518FE008D0E1D /* ButtonWithDynamicType.swift in Sources */,
