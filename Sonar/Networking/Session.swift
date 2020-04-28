@@ -34,7 +34,14 @@ extension Request {
     var sonarHeaderValue: String { Environment.sonarHeaderValue }
 
     func urlRequest() -> URLRequest {
-        let url = URL(string: path, relativeTo: baseURL)!
+        let url: URL = {
+            if let url = URL(string: path) {
+                return url
+            }
+
+            return URL(string: path, relativeTo: baseURL)!
+        }()
+
         var urlRequest = URLRequest(url: url)
 
         urlRequest.allHTTPHeaderFields = headers

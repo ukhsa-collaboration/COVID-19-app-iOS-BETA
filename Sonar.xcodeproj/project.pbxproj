@@ -103,7 +103,7 @@
 		896BE90F244F07FF00B3687C /* PublicKeyValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896BE90E244F07FF00B3687C /* PublicKeyValidator.swift */; };
 		896BE912244F11D100B3687C /* PublicKeyValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896BE911244F11D100B3687C /* PublicKeyValidatorTests.swift */; };
 		896BE915244F391F00B3687C /* www.apple.com.cer in Resources */ = {isa = PBXBuildFile; fileRef = 896BE913244F38D900B3687C /* www.apple.com.cer */; };
-		8976B15D2451B62100154ADF /* RequstTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8976B15C2451B62100154ADF /* RequstTests.swift */; };
+		8976B15D2451B62100154ADF /* RequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8976B15C2451B62100154ADF /* RequestTests.swift */; };
 		8983E618245867CF001F2011 /* AppEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8983E616245867CF001F2011 /* AppEvent.swift */; };
 		8983E619245867CF001F2011 /* AppMonitoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8983E617245867CF001F2011 /* AppMonitoring.swift */; };
 		89896E622435F37300F949EA /* ProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89896E612435F37300F949EA /* ProjectTests.swift */; };
@@ -328,7 +328,7 @@
 		896BE911244F11D100B3687C /* PublicKeyValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicKeyValidatorTests.swift; sourceTree = "<group>"; };
 		896BE913244F38D900B3687C /* www.apple.com.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = www.apple.com.cer; sourceTree = "<group>"; };
 		896F8E0E24586D9C00E2CB15 /* AppMonitorDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMonitorDouble.swift; sourceTree = "<group>"; };
-		8976B15C2451B62100154ADF /* RequstTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequstTests.swift; sourceTree = "<group>"; };
+		8976B15C2451B62100154ADF /* RequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestTests.swift; sourceTree = "<group>"; };
 		8983E616245867CF001F2011 /* AppEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppEvent.swift; sourceTree = "<group>"; };
 		8983E617245867CF001F2011 /* AppMonitoring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppMonitoring.swift; sourceTree = "<group>"; };
 		89896E5E2435EB6500F949EA /* CoLocateTests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CoLocateTests.xcconfig; sourceTree = "<group>"; };
@@ -665,7 +665,7 @@
 				21C417C9242CB0A200DEF3E2 /* ConfirmRegistrationRequestTests.swift */,
 				896BE911244F11D100B3687C /* PublicKeyValidatorTests.swift */,
 				F600A60324297C010038DF57 /* RegistrationRequestTests.swift */,
-				8976B15C2451B62100154ADF /* RequstTests.swift */,
+				8976B15C2451B62100154ADF /* RequestTests.swift */,
 				21B3D2E2242906AE00573061 /* SecureRequestTests.swift */,
 				214209D824262B7500C7BFF3 /* SessionHelpers.swift */,
 				89CE566C24504050004A74D0 /* TrustValidatingURLSessionDelegateTests.swift */,
@@ -1253,7 +1253,7 @@
 				F62F858124510716006580A8 /* ContactEventsUploaderTests.swift in Sources */,
 				89CCF65F2456EF7000AC9D91 /* TrustValidatingDouble.swift in Sources */,
 				F600A60424297C010038DF57 /* RegistrationRequestTests.swift in Sources */,
-				8976B15D2451B62100154ADF /* RequstTests.swift in Sources */,
+				8976B15D2451B62100154ADF /* RequestTests.swift in Sources */,
 				21E5051324448AE30065C69B /* PlistPersisterTests.swift in Sources */,
 				098ED488242E89930029B729 /* PushNotificationManagerDouble.swift in Sources */,
 				0983ACCF243E6D3800DBB336 /* NotificationObserverDouble.swift in Sources */,

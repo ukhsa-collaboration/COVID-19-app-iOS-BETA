@@ -1,5 +1,5 @@
 //
-//  RequstTests.swift
+//  RequestTests.swift
 //  SonarTests
 //
 //  Created by NHSX.
@@ -33,6 +33,22 @@ class RequestTests: XCTestCase {
         XCTAssertEqual(headers["Request-Header"], "Request-Value", "Other headers set by request should be preserved")
         
         XCTAssertEqual(headers["X-Sonar-Foundation"], "sonar-header-value")
+    }
+
+    func testRelativePath() {
+        request.path = "/foo/bar/baz"
+
+        let urlRequest = request.urlRequest()
+
+        XCTAssertEqual(urlRequest.url?.path, "/foo/bar/baz")
+    }
+
+    func testAbsolutePath() {
+        request.path = "https://example.com/foo/bar/baz"
+
+        let urlRequest = request.urlRequest()
+
+        XCTAssertEqual(urlRequest.url?.absoluteString, "https://example.com/foo/bar/baz")
     }
 
 }
