@@ -49,11 +49,6 @@ class Persistence: Persisting {
         case uploadLog
         case linkingId
     }
-
-    static var shared = Persistence(
-        secureRegistrationStorage: SecureRegistrationStorage(),
-        broadcastKeyStorage: SecureBroadcastRotationKeyStorage()
-    )
     
     private let encoder = JSONEncoder()
     private let decoder = JSONDecoder()

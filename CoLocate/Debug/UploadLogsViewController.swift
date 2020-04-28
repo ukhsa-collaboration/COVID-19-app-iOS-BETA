@@ -10,7 +10,8 @@ import UIKit
 
 class UploadLogsViewController: UITableViewController {
 
-    let persistence = Persistence.shared
+    let persistence = (UIApplication.shared.delegate as! AppDelegate).persistence
+
 
     var uploadLog: [UploadLog] = [] {
         didSet {

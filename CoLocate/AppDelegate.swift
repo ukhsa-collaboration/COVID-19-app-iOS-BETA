@@ -43,7 +43,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         notificationCenter: notificationCenter,
         timeoutQueue: DispatchQueue.main)
 
-    lazy var persistence: Persisting = Persistence.shared
+    lazy var persistence: Persisting = Persistence(
+        secureRegistrationStorage: SecureRegistrationStorage(),
+        broadcastKeyStorage: SecureBroadcastRotationKeyStorage()
+    )
 
     lazy var bluetoothNursery: BluetoothNursery = ConcreteBluetoothNursery(persistence: persistence, userNotificationCenter: userNotificationCenter, notificationCenter: notificationCenter)
 

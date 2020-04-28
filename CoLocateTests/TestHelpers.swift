@@ -25,7 +25,10 @@ class TestCase: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        Persistence.shared.clear()
+        // TODO: This is quite error prone. Mock out the dependencies so we don’t have to do this.
+        // Tests verifying actual storage must explicitly do so.
+        let persistence = Persistence(secureRegistrationStorage: SecureRegistrationStorage(), broadcastKeyStorage: SecureBroadcastRotationKeyStorage())
+        persistence.clear()
 
         UIApplication.shared.windows.first?.rootViewController = parentViewControllerForTests
     }
