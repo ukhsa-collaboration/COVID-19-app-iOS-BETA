@@ -8,7 +8,7 @@
 
 import Foundation
 
-class PatchContactEventsRequest: SecureRequest, Request {
+class UploadContactEventsRequest: SecureRequest, Request {
 
     struct JSONWrapper: Codable {
         let symptomsTimestamp: Date

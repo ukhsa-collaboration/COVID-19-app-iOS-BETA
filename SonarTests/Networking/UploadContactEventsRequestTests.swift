@@ -9,7 +9,7 @@
 import XCTest
 @testable import Sonar
 
-class PatchContactEventsRequestTests: XCTestCase {
+class UploadContactEventsRequestTests: XCTestCase {
 
     let anonymousId = UUID(uuidString: "E9D7F53C-DE9C-46A2-961E-8302DC39558A")!
     let dummyKey = "this-is-a-symmetric-key-trust-me".data(using: .utf8)!
@@ -28,7 +28,7 @@ class PatchContactEventsRequestTests: XCTestCase {
 
     var contactEvents: [ContactEvent]!
 
-    var request: PatchContactEventsRequest!
+    var request: UploadContactEventsRequest!
     
     override func setUp() {
         contactEvents = [
@@ -38,7 +38,7 @@ class PatchContactEventsRequestTests: XCTestCase {
         ]
 
         let registration = Registration(id: anonymousId, secretKey: dummyKey, broadcastRotationKey: knownGoodECPublicKey())
-        request = PatchContactEventsRequest(
+        request = UploadContactEventsRequest(
             registration: registration,
             symptomsTimestamp: Date(),
             contactEvents: contactEvents
@@ -63,7 +63,7 @@ class PatchContactEventsRequestTests: XCTestCase {
     func testData() throws {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
-        let contactEvents = try decoder.decode(PatchContactEventsRequest.JSONWrapper.self, from: request.body!).contactEvents
+        let contactEvents = try decoder.decode(UploadContactEventsRequest.JSONWrapper.self, from: request.body!).contactEvents
 
         XCTAssertEqual(contactEvents.count, 3)
         XCTAssertEqual(contactEvents[0].encryptedRemoteContactId, broadcastId1)

@@ -106,7 +106,7 @@ class ContactEventsUploader {
         let lastDate = contactEvents.map { $0.timestamp }.max() ?? Date() // conservatively default to the current time
         persisting.uploadLog = persisting.uploadLog + [UploadLog(event: .started(lastContactEventDate: lastDate))]
 
-        let request = PatchContactEventsRequest(
+        let request = UploadContactEventsRequest(
             registration: registration,
             symptomsTimestamp: diagnosis.startDate,
             contactEvents: contactEvents

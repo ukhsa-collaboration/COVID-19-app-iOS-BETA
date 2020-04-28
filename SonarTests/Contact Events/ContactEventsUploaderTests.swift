@@ -56,7 +56,7 @@ class ContactEventsUploaderTests: XCTestCase {
         try? uploader.upload()
 
         guard
-            let request = session.uploadRequest as? PatchContactEventsRequest
+            let request = session.uploadRequest as? UploadContactEventsRequest
         else {
             XCTFail("Expected a PatchContactEventsRequest but got \(String(describing: session.requestSent))")
             return
@@ -69,7 +69,7 @@ class ContactEventsUploaderTests: XCTestCase {
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601
 
-            let decoded = try? decoder.decode(PatchContactEventsRequest.JSONWrapper.self, from: data)
+            let decoded = try? decoder.decode(UploadContactEventsRequest.JSONWrapper.self, from: data)
 
             // Can't compare the entire contact events because the timestamp loses precision
             // when JSON encoded and decoded.

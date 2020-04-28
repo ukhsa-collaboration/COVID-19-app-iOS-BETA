@@ -61,8 +61,8 @@
 		214209CA242227B300C7BFF3 /* PersistenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209C9242227B300C7BFF3 /* PersistenceTests.swift */; };
 		214209D0242396DA00C7BFF3 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209CF242396DA00C7BFF3 /* Session.swift */; };
 		214209D2242399CF00C7BFF3 /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209D1242399CF00C7BFF3 /* URLSession.swift */; };
-		214209D52423C83C00C7BFF3 /* PatchContactEventsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209D42423C83C00C7BFF3 /* PatchContactEventsRequest.swift */; };
-		214209D72423C9B600C7BFF3 /* PatchContactEventsRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209D62423C9B600C7BFF3 /* PatchContactEventsRequestTests.swift */; };
+		214209D52423C83C00C7BFF3 /* UploadContactEventsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209D42423C83C00C7BFF3 /* UploadContactEventsRequest.swift */; };
+		214209D72423C9B600C7BFF3 /* UploadContactEventsRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209D62423C9B600C7BFF3 /* UploadContactEventsRequestTests.swift */; };
 		214209D924262B7500C7BFF3 /* SessionHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209D824262B7500C7BFF3 /* SessionHelpers.swift */; };
 		217A23BE243B34E8001B8236 /* UIDevice+ModelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217A23BD243B34E8001B8236 /* UIDevice+ModelName.swift */; };
 		219B613524471B9800E2F1A6 /* UUIDExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219B613424471B9800E2F1A6 /* UUIDExtensions.swift */; };
@@ -281,8 +281,8 @@
 		214209C9242227B300C7BFF3 /* PersistenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceTests.swift; sourceTree = "<group>"; };
 		214209CF242396DA00C7BFF3 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		214209D1242399CF00C7BFF3 /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
-		214209D42423C83C00C7BFF3 /* PatchContactEventsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchContactEventsRequest.swift; sourceTree = "<group>"; };
-		214209D62423C9B600C7BFF3 /* PatchContactEventsRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchContactEventsRequestTests.swift; sourceTree = "<group>"; };
+		214209D42423C83C00C7BFF3 /* UploadContactEventsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadContactEventsRequest.swift; sourceTree = "<group>"; };
+		214209D62423C9B600C7BFF3 /* UploadContactEventsRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadContactEventsRequestTests.swift; sourceTree = "<group>"; };
 		214209D824262B7500C7BFF3 /* SessionHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionHelpers.swift; sourceTree = "<group>"; };
 		217A23BD243B34E8001B8236 /* UIDevice+ModelName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+ModelName.swift"; sourceTree = "<group>"; };
 		219B613424471B9800E2F1A6 /* UUIDExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UUIDExtensions.swift; sourceTree = "<group>"; };
@@ -647,13 +647,13 @@
 			isa = PBXGroup;
 			children = (
 				21C417CB242CB15D00DEF3E2 /* ConfirmRegistrationRequest.swift */,
-				214209D42423C83C00C7BFF3 /* PatchContactEventsRequest.swift */,
 				896BE90E244F07FF00B3687C /* PublicKeyValidator.swift */,
 				F600A60124297A8E0038DF57 /* RegistrationRequest.swift */,
 				F758553924294C8C00CBE1ED /* RequestFactory.swift */,
 				21B3D2E42429112B00573061 /* SecureRequest.swift */,
 				214209CF242396DA00C7BFF3 /* Session.swift */,
 				89CE566A24503E93004A74D0 /* TrustValidatingURLSessionDelegate.swift */,
+				214209D42423C83C00C7BFF3 /* UploadContactEventsRequest.swift */,
 				214209D1242399CF00C7BFF3 /* URLSession.swift */,
 			);
 			path = Networking;
@@ -662,16 +662,16 @@
 		214209DA242630CF00C7BFF3 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				896BE907244F06AF00B3687C /* Certificates */,
 				21C417C9242CB0A200DEF3E2 /* ConfirmRegistrationRequestTests.swift */,
-				214209D62423C9B600C7BFF3 /* PatchContactEventsRequestTests.swift */,
-				F600A60324297C010038DF57 /* RegistrationRequestTests.swift */,
-				21B3D2E2242906AE00573061 /* SecureRequestTests.swift */,
-				8976B15C2451B62100154ADF /* RequstTests.swift */,
-				214209D824262B7500C7BFF3 /* SessionHelpers.swift */,
-				F72EBD4E24361E99009F9328 /* URLSessionTests.swift */,
 				896BE911244F11D100B3687C /* PublicKeyValidatorTests.swift */,
+				F600A60324297C010038DF57 /* RegistrationRequestTests.swift */,
+				8976B15C2451B62100154ADF /* RequstTests.swift */,
+				21B3D2E2242906AE00573061 /* SecureRequestTests.swift */,
+				214209D824262B7500C7BFF3 /* SessionHelpers.swift */,
 				89CE566C24504050004A74D0 /* TrustValidatingURLSessionDelegateTests.swift */,
+				214209D62423C9B600C7BFF3 /* UploadContactEventsRequestTests.swift */,
+				F72EBD4E24361E99009F9328 /* URLSessionTests.swift */,
+				896BE907244F06AF00B3687C /* Certificates */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -1260,7 +1260,7 @@
 				09B103642444EAB80091834D /* ContactEventRepositoryDouble.swift in Sources */,
 				219B61372447371700E2F1A6 /* UUIDExtensionsTests.swift in Sources */,
 				F67A2293242AA370002254B6 /* SecureRegistrationStorageTests.swift in Sources */,
-				214209D72423C9B600C7BFF3 /* PatchContactEventsRequestTests.swift in Sources */,
+				214209D72423C9B600C7BFF3 /* UploadContactEventsRequestTests.swift in Sources */,
 				1376776F2458488900197F8E /* SchedulerDouble.swift in Sources */,
 				F72EBDA9243D2FE6009F9328 /* BroadcastIdEncrypterTests.swift in Sources */,
 				F72EBD9B243C8750009F9328 /* BluetoothStateUserNotifierTests.swift in Sources */,
@@ -1383,7 +1383,7 @@
 				89CE566B24503E93004A74D0 /* TrustValidatingURLSessionDelegate.swift in Sources */,
 				21F374042434C4BF00926FB8 /* LiveBTLEDebuggerTableViewController.swift in Sources */,
 				AEC6A7BC241BD81A00B0237A /* LogoStrapline.swift in Sources */,
-				214209D52423C83C00C7BFF3 /* PatchContactEventsRequest.swift in Sources */,
+				214209D52423C83C00C7BFF3 /* UploadContactEventsRequest.swift in Sources */,
 				214209D0242396DA00C7BFF3 /* Session.swift in Sources */,
 				0991B8B92450B8360076C58B /* NotificationPermissionDeniedViewController.swift in Sources */,
 				F6F05A262433C09200FF4B72 /* OnboardingCoordinator.swift in Sources */,
