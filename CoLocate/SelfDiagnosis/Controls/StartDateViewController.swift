@@ -44,7 +44,6 @@ class StartDateViewController: UIViewController {
     @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var button: StartDateButton!
 
-    @IBOutlet var datePickerAccessory: UIToolbar!
     @IBOutlet var datePicker: UIPickerView!
 
     private let dateFormatter: DateFormatter = {
