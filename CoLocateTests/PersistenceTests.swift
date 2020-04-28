@@ -13,6 +13,7 @@ class PersistenceTests: TestCase {
     
     private var secureRegistrationStorage: SecureRegistrationStorage!
     private var broadcastKeyStorage: SecureBroadcastRotationKeyStorage!
+    private var monitor: AppMonitoringDouble!
     private var persistence: Persistence!
     
     override func setUp() {
@@ -20,10 +21,11 @@ class PersistenceTests: TestCase {
         
         secureRegistrationStorage = SecureRegistrationStorage()
         broadcastKeyStorage = SecureBroadcastRotationKeyStorage()
+        monitor = AppMonitoringDouble()
         persistence = Persistence(
             secureRegistrationStorage: secureRegistrationStorage,
             broadcastKeyStorage: broadcastKeyStorage,
-            monitor: AppMonitoringDouble()
+            monitor: monitor
         )
     }
     
@@ -86,12 +88,12 @@ class PersistenceTests: TestCase {
         let p1 = Persistence(
             secureRegistrationStorage: secureRegistrationStorage,
             broadcastKeyStorage: broadcastKeyStorage,
-            monitor: AppMonitoringDouble()
+            monitor: monitor
         )
         let p2 = Persistence(
             secureRegistrationStorage: secureRegistrationStorage,
             broadcastKeyStorage: broadcastKeyStorage,
-            monitor: AppMonitoringDouble()
+            monitor: monitor
         )
         
         p1.partialPostcode = nil
@@ -99,6 +101,15 @@ class PersistenceTests: TestCase {
         
         p1.partialPostcode = "9810"
         XCTAssertEqual(p2.partialPostcode, "9810")
+    }
+    
+    func testMonitorIsNotifiedWhenPartialPostcodeIsProvided() {
+        
+        persistence.partialPostcode = nil
+        XCTAssertEqual(monitor.detectedEvents, [])
+        
+        persistence.partialPostcode = "9810"
+        XCTAssertEqual(monitor.detectedEvents, [.providedPartialPostcode])
     }
 
     func testUploadLog() {

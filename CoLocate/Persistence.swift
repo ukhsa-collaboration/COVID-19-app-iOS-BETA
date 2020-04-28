@@ -54,6 +54,7 @@ class Persistence: Persisting {
     private let decoder = JSONDecoder()
     private let secureRegistrationStorage: SecureRegistrationStorage
     private let broadcastKeyStorage: BroadcastRotationKeyStorage
+    private let monitor: AppMonitoring
 
     weak var delegate: PersistenceDelegate?
     
@@ -64,6 +65,7 @@ class Persistence: Persisting {
     ) {
         self.secureRegistrationStorage = secureRegistrationStorage
         self.broadcastKeyStorage = broadcastKeyStorage
+        self.monitor = monitor
     }
 
     var registration: Registration? {
@@ -126,7 +128,12 @@ class Persistence: Persisting {
     
     var partialPostcode: String? {
         get { UserDefaults.standard.string(forKey: Keys.partialPostcode.rawValue) }
-        set { UserDefaults.standard.set(newValue, forKey: Keys.partialPostcode.rawValue) }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Keys.partialPostcode.rawValue)
+            if newValue != nil {
+                monitor.didDetect(.providedPartialPostcode)
+            }
+        }
     }
 
     var uploadLog: [UploadLog] {

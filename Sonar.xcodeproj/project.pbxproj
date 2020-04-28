@@ -96,13 +96,13 @@
 		895D9E462437458700573D4D /* AppIcon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 895D9E452437458700573D4D /* AppIcon.xcassets */; };
 		895D9E4B24374EC900573D4D /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895D9E4A24374EC900573D4D /* Screen.swift */; };
 		895D9E4E24374EFA00573D4D /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895D9E4D24374EFA00573D4D /* AppRouter.swift */; };
+		89618584245871B400F1E2DD /* AppMonitorDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896F8E0E24586D9C00E2CB15 /* AppMonitorDouble.swift */; };
 		896BE909244F06CB00B3687C /* www.google.com.cer in Resources */ = {isa = PBXBuildFile; fileRef = 896BE908244F06CB00B3687C /* www.google.com.cer */; };
 		896BE90B244F06E300B3687C /* GTS CA 1O1.cer in Resources */ = {isa = PBXBuildFile; fileRef = 896BE90A244F06E300B3687C /* GTS CA 1O1.cer */; };
 		896BE90D244F06F600B3687C /* GlobalSign.cer in Resources */ = {isa = PBXBuildFile; fileRef = 896BE90C244F06F600B3687C /* GlobalSign.cer */; };
 		896BE90F244F07FF00B3687C /* PublicKeyValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896BE90E244F07FF00B3687C /* PublicKeyValidator.swift */; };
 		896BE912244F11D100B3687C /* PublicKeyValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896BE911244F11D100B3687C /* PublicKeyValidatorTests.swift */; };
 		896BE915244F391F00B3687C /* www.apple.com.cer in Resources */ = {isa = PBXBuildFile; fileRef = 896BE913244F38D900B3687C /* www.apple.com.cer */; };
-		896F8E0F24586D9C00E2CB15 /* AppMonitorDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896F8E0E24586D9C00E2CB15 /* AppMonitorDouble.swift */; };
 		8976B15D2451B62100154ADF /* RequstTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8976B15C2451B62100154ADF /* RequstTests.swift */; };
 		8983E618245867CF001F2011 /* AppEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8983E616245867CF001F2011 /* AppEvent.swift */; };
 		8983E619245867CF001F2011 /* AppMonitoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8983E617245867CF001F2011 /* AppMonitoring.swift */; };
@@ -1270,6 +1270,7 @@
 				F72EBDA9243D2FE6009F9328 /* BroadcastIdEncrypterTests.swift in Sources */,
 				F72EBD9B243C8750009F9328 /* BluetoothStateUserNotifierTests.swift in Sources */,
 				09D91A7724521C5C004825A5 /* BluetoothNurseryTests.swift in Sources */,
+				89618584245871B400F1E2DD /* AppMonitorDouble.swift in Sources */,
 				090B1871243552C300870B5D /* UserNotificationCenterDouble.swift in Sources */,
 				21C417CA242CB0A200DEF3E2 /* ConfirmRegistrationRequestTests.swift in Sources */,
 				F632792A2435323200CF7A42 /* PermissionsViewControllerTests.swift in Sources */,
@@ -1351,7 +1352,6 @@
 				134470B02454D614001A0AD9 /* CoughUpdateViewController.swift in Sources */,
 				134470AE2454D4DA001A0AD9 /* SelfDiagnosisCoordinator.swift in Sources */,
 				0984E0BD2451014E009C6374 /* BluetoothOffViewController.swift in Sources */,
-				896F8E0F24586D9C00E2CB15 /* AppMonitorDouble.swift in Sources */,
 				F62F857F2451051C006580A8 /* ContactEventsUploader.swift in Sources */,
 				09E6E7E4245271A00069DFA8 /* SetupChecker.swift in Sources */,
 				89F06B372434C35A0074C612 /* LoggerMetadata.swift in Sources */,

@@ -9,7 +9,11 @@
 import Foundation
 @testable import Sonar
 
-struct AppMonitoringDouble: AppMonitoring {
+class AppMonitoringDouble: AppMonitoring {
+    
+    var detectedEvents = [AppEvent]()
+    
     func didDetect(_ event: AppEvent) {
+        detectedEvents.append(event)
     }
 }
