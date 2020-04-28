@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6FC63C2C241641B8007C8BF3"
-               BuildableName = "NHS COVID-19.app"
+               BuildableName = "Sonar.app"
                BlueprintName = "Sonar"
                ReferencedContainer = "container:Sonar.xcodeproj">
             </BuildableReference>
@@ -66,7 +66,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6FC63C2C241641B8007C8BF3"
-            BuildableName = "NHS COVID-19.app"
+            BuildableName = "Sonar.app"
             BlueprintName = "Sonar"
             ReferencedContainer = "container:Sonar.xcodeproj">
          </BuildableReference>
@@ -83,7 +83,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6FC63C2C241641B8007C8BF3"
-            BuildableName = "NHS COVID-19.app"
+            BuildableName = "Sonar.app"
             BlueprintName = "Sonar"
             ReferencedContainer = "container:Sonar.xcodeproj">
          </BuildableReference>
