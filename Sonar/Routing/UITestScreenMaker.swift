@@ -68,6 +68,8 @@ private class InMemoryPersistence: Persisting {
     var bluetoothPermissionRequested: Bool = false
     var uploadLog: [UploadLog] = []
     var linkingId: LinkingId?
+    var lastInstalledVersion: String?
+    var lastInstalledBuildNumber: String?
         
     func clear() {
         registration = nil
@@ -76,6 +78,8 @@ private class InMemoryPersistence: Persisting {
         partialPostcode = nil
         uploadLog = []
         linkingId = nil
+        lastInstalledVersion = nil
+        lastInstalledBuildNumber = nil
     }
 }
 

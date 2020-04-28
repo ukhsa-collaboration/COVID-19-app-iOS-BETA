@@ -33,7 +33,27 @@ class AppDelegateTest: XCTestCase {
         appDelegate.remoteNotificationManager = remoteNotificationManager
         appDelegate.registrationService = registrationService
     }
-
+    
+    func testWritesBuildNumber() {
+        let expected = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
+        XCTAssertNotNil(expected)
+        persistence.lastInstalledBuildNumber = nil
+        
+        _ = appDelegate.application(UIApplication.shared, didFinishLaunchingWithOptions: nil)
+        
+        XCTAssertEqual(persistence.lastInstalledBuildNumber, expected)
+    }
+    
+    func testWritesVersion() {
+        let expected = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+        XCTAssertNotNil(expected)
+        persistence.lastInstalledVersion = nil
+        
+        _ = appDelegate.application(UIApplication.shared, didFinishLaunchingWithOptions: nil)
+        
+        XCTAssertEqual(persistence.lastInstalledVersion, expected)
+    }
+    
     func testLaunchingWithoutBluetoothPermissons_DoesNotStartBluetooth() throws {
         appDelegate.persistence = PersistenceDouble(registration: nil, bluetoothPermissionRequested: false)
         

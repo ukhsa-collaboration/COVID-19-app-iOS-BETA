@@ -31,6 +31,8 @@ protocol Persisting {
     var bluetoothPermissionRequested: Bool { get nonmutating set }
     var uploadLog: [UploadLog] { get nonmutating set }
     var linkingId: LinkingId? { get nonmutating set }
+    var lastInstalledVersion: String? { get nonmutating set }
+    var lastInstalledBuildNumber: String? { get nonmutating set }
 
     func clear()
 }
@@ -48,6 +50,8 @@ class Persistence: Persisting {
         case bluetoothPermissionRequested
         case uploadLog
         case linkingId
+        case lastInstalledBuildNumber
+        case lastInstalledVersion
     }
     
     private let encoder = JSONEncoder()
@@ -166,7 +170,17 @@ class Persistence: Persisting {
         get { UserDefaults.standard.string(forKey: Keys.linkingId.rawValue) }
         set { UserDefaults.standard.set(newValue, forKey: Keys.linkingId.rawValue) }
     }
+    
+    var lastInstalledVersion: String? {
+        get { UserDefaults.standard.string(forKey: Keys.lastInstalledVersion.rawValue) }
+        set { UserDefaults.standard.set(newValue, forKey: Keys.lastInstalledVersion.rawValue) }
+    }
 
+    var lastInstalledBuildNumber: String? {
+        get { UserDefaults.standard.string(forKey: Keys.lastInstalledBuildNumber.rawValue) }
+        set { UserDefaults.standard.set(newValue, forKey: Keys.lastInstalledBuildNumber.rawValue) }
+    }
+    
     func clear() {
         for key in Keys.allCases {
             UserDefaults.standard.removeObject(forKey: key.rawValue)

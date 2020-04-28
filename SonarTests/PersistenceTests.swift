@@ -111,6 +111,44 @@ class PersistenceTests: TestCase {
         persistence.partialPostcode = "9810"
         XCTAssertEqual(monitor.detectedEvents, [.providedPartialPostcode])
     }
+    
+    func testLastInstalledVersionNumberIsPersisted() {
+        let p1 = Persistence(
+            secureRegistrationStorage: secureRegistrationStorage,
+            broadcastKeyStorage: broadcastKeyStorage,
+            monitor: monitor
+        )
+        let p2 = Persistence(
+            secureRegistrationStorage: secureRegistrationStorage,
+            broadcastKeyStorage: broadcastKeyStorage,
+            monitor: monitor
+        )
+        
+        p1.lastInstalledVersion = nil
+        XCTAssertNil(p2.lastInstalledVersion)
+        
+        p1.lastInstalledVersion = "1.2.3"
+        XCTAssertEqual(p2.lastInstalledVersion, "1.2.3")
+    }
+    
+    func testLastInstalledBuildNumberIsPersisted() {
+        let p1 = Persistence(
+            secureRegistrationStorage: secureRegistrationStorage,
+            broadcastKeyStorage: broadcastKeyStorage,
+            monitor: monitor
+        )
+        let p2 = Persistence(
+            secureRegistrationStorage: secureRegistrationStorage,
+            broadcastKeyStorage: broadcastKeyStorage,
+            monitor: monitor
+        )
+        
+        p1.lastInstalledBuildNumber = nil
+        XCTAssertNil(p2.lastInstalledBuildNumber)
+        
+        p1.lastInstalledBuildNumber = "42"
+        XCTAssertEqual(p2.lastInstalledBuildNumber, "42")
+    }
 
     func testUploadLog() {
         persistence.uploadLog = [UploadLog(event: .started(lastContactEventDate: Date()))]

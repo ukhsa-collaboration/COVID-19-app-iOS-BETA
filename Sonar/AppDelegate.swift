@@ -92,6 +92,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         remoteNotificationManager.configure()
 
         Appearance.setup()
+        
+        writeBuildInfo()
 
         let rootVC = RootViewController()
         rootVC.inject(
@@ -183,6 +185,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             identifier: "willTerminate.relaunch.please",
             repeats: false
         )
+    }
+    
+    private func writeBuildInfo() {
+        persistence.lastInstalledBuildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
+        persistence.lastInstalledVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
     }
 }
 
