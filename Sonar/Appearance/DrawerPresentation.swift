@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Logging
 
 class DrawerPresentation: NSObject, UIViewControllerTransitioningDelegate {
     public func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
@@ -32,10 +33,29 @@ class DrawerPresentationController: UIPresentationController {
 
         let safeBounds = containerView.bounds.inset(by: containerView.safeAreaInsets)
 
-        let widthConstraint = presentedView.widthAnchor.constraint(equalToConstant: containerView.bounds.size.width)
+        // If the presented view contains a scroll view, we'll get a 0 back from trying to compute the desired size
+        // of the presented view. Use the scroll view's only child instead.
+        let sizeSource: UIView = {
+            if let scrollView = presentedView.subviews.first as? UIScrollView {
+                // We need to find the "real" child of the scroll view, but the scroll view's subviews also
+                // include scroll indicators whihc we can't detect without using private APIs. So for now we
+                // assume that the single "real" child of a scroll view is a UIStackView, because that's the
+                // case in the one scrolling drawer we currently have (MedicalWorkerInstructionsViewController).
+                if let realChild = scrollView.subviews.first(where: {$0.isKind(of: UIStackView.self)}) {
+                    return realChild
+                } else {
+                    logger.warning("Did not find a stack view inside a scroll view. Falling back to using the outermost view for sizing, which is probably wrong.")
+                }
+            }
+            
+            return presentedView
+        }()
+         
+        let widthConstraint = sizeSource.widthAnchor.constraint(equalToConstant: containerView.bounds.size.width)
         widthConstraint.isActive = true
-
-        var size = presentedView.systemLayoutSizeFitting(CGSize(width: safeBounds.size.width, height: 0))
+        
+        var size = sizeSource.systemLayoutSizeFitting(CGSize(width: safeBounds.size.width, height: 0))
+        size.height = min(size.height, safeBounds.size.height - 32 /* Space down from the top a little */)
         size.height += containerView.safeAreaInsets.bottom
 
         presentedView.removeConstraint(widthConstraint)
@@ -108,3 +128,6 @@ class DrawerPresentationController: UIPresentationController {
     }
 
 }
+
+
+private let logger = Logger(label: "DrawerPresentation")

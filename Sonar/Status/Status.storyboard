@@ -459,38 +459,54 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="nwD-KS-x6o">
-                                <rect key="frame" x="20" y="64" width="374" height="216"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lL3-gp-csh">
+                                <rect key="frame" x="0.0" y="44" width="414" height="256"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Turn off your Bluetooth when you put on your PPE" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CkV-rL-eJ0">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="42.5"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your interactions at work should not be captured when you are wearing personal protective equipment." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tmr-Qo-Hv5">
-                                        <rect key="frame" x="0.0" y="74.5" width="374" height="64.5"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZYa-U7-noC" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="171" width="374" height="45"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                        <state key="normal" title="Close"/>
-                                        <connections>
-                                            <segue destination="hPn-91-Mmf" kind="unwind" unwindAction="unwindFromLinkingIdWithUnwindSegue:" id="Qhj-Zi-qQM"/>
-                                        </connections>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="nwD-KS-x6o">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="240"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Turn off your Bluetooth when you put on your PPE" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CkV-rL-eJ0">
+                                                <rect key="frame" x="16" y="16" width="382" height="42.5"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your interactions at work should not be captured when you are wearing personal protective equipment." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tmr-Qo-Hv5">
+                                                <rect key="frame" x="16" y="78.5" width="382" height="64.5"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZYa-U7-noC" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
+                                                <rect key="frame" x="16" y="163" width="382" height="33"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <state key="normal" title="Close"/>
+                                                <connections>
+                                                    <segue destination="hPn-91-Mmf" kind="unwind" unwindAction="unwindFromLinkingIdWithUnwindSegue:" id="Qhj-Zi-qQM"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <edgeInsets key="layoutMargins" top="16" left="16" bottom="44" right="16"/>
+                                    </stackView>
                                 </subviews>
-                            </stackView>
+                                <constraints>
+                                    <constraint firstItem="qqS-4F-COU" firstAttribute="top" secondItem="nwD-KS-x6o" secondAttribute="top" id="17c-vH-Aar"/>
+                                    <constraint firstItem="qqS-4F-COU" firstAttribute="leading" secondItem="nwD-KS-x6o" secondAttribute="leading" id="GF4-gy-vWb"/>
+                                    <constraint firstItem="nwD-KS-x6o" firstAttribute="bottom" secondItem="qqS-4F-COU" secondAttribute="bottom" id="T5s-X9-zgM"/>
+                                    <constraint firstItem="nwD-KS-x6o" firstAttribute="width" secondItem="G4l-Gm-NxD" secondAttribute="width" id="Zz7-hD-PEu"/>
+                                    <constraint firstItem="nwD-KS-x6o" firstAttribute="trailing" secondItem="qqS-4F-COU" secondAttribute="trailing" id="bY1-0R-U9m"/>
+                                    <constraint firstItem="nwD-KS-x6o" firstAttribute="height" secondItem="G4l-Gm-NxD" secondAttribute="height" priority="1" id="k5O-AB-eND"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="qqS-4F-COU"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="G4l-Gm-NxD"/>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="nwD-KS-x6o" firstAttribute="top" secondItem="vnf-tb-4e5" secondAttribute="top" constant="20" id="0Rv-Hs-T2h"/>
-                            <constraint firstItem="nwD-KS-x6o" firstAttribute="leading" secondItem="vnf-tb-4e5" secondAttribute="leading" constant="20" id="YSw-C9-Ce7"/>
-                            <constraint firstItem="vnf-tb-4e5" firstAttribute="trailing" secondItem="nwD-KS-x6o" secondAttribute="trailing" constant="20" id="uhH-nJ-4Ps"/>
-                            <constraint firstItem="vnf-tb-4e5" firstAttribute="bottom" secondItem="nwD-KS-x6o" secondAttribute="bottom" constant="20" id="wGk-SD-VAQ"/>
+                            <constraint firstItem="vnf-tb-4e5" firstAttribute="trailing" secondItem="lL3-gp-csh" secondAttribute="trailing" id="H6T-1D-Ag6"/>
+                            <constraint firstItem="vnf-tb-4e5" firstAttribute="bottom" secondItem="lL3-gp-csh" secondAttribute="bottom" id="N7c-Ci-NeY"/>
+                            <constraint firstItem="lL3-gp-csh" firstAttribute="top" secondItem="vnf-tb-4e5" secondAttribute="top" id="PDe-OJ-7cJ"/>
+                            <constraint firstItem="lL3-gp-csh" firstAttribute="leading" secondItem="vnf-tb-4e5" secondAttribute="leading" id="c6x-wI-yxW"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vnf-tb-4e5"/>
                     </view>
