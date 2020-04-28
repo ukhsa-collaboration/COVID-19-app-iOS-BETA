@@ -94,6 +94,7 @@ class Persistence: Persisting {
             try! broadcastKeyStorage.save(publicKey: registration.broadcastRotationKey)
 
             delegate?.persistence(self, didUpdateRegistration: registration)
+            monitor.didDetect(.registrationSucceeded)
         }
     }
 

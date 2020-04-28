@@ -103,6 +103,12 @@ class PersistenceTests: TestCase {
         XCTAssertEqual(p2.partialPostcode, "9810")
     }
     
+    func testUploadLog() {
+        persistence.uploadLog = [UploadLog(event: .started(lastContactEventDate: Date()))]
+
+        XCTAssertFalse(persistence.uploadLog.isEmpty)
+    }
+    
     func testMonitorIsNotifiedWhenPartialPostcodeIsProvided() {
         
         persistence.partialPostcode = nil
@@ -150,11 +156,17 @@ class PersistenceTests: TestCase {
         XCTAssertEqual(p2.lastInstalledBuildNumber, "42")
     }
 
-    func testUploadLog() {
-        persistence.uploadLog = [UploadLog(event: .started(lastContactEventDate: Date()))]
-
-        XCTAssertFalse(persistence.uploadLog.isEmpty)
+    func testMonitorIsNotifiedWhenRegistrationSucceeds() {
+        
+        persistence.registration = nil
+        XCTAssertEqual(monitor.detectedEvents, [])
+        
+        let id = UUID()
+        let secretKey = "secret key".data(using: .utf8)!
+        persistence.registration = Registration(id: id, secretKey: secretKey, broadcastRotationKey: knownGoodECPublicKey())
+        XCTAssertEqual(monitor.detectedEvents, [.registrationSucceeded])
     }
+
 }
 
 class PersistenceDelegateDouble: NSObject, PersistenceDelegate {
