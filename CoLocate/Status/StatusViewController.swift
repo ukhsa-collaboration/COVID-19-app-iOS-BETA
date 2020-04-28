@@ -143,10 +143,19 @@ class StatusViewController: UIViewController, Storyboarded {
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true)
     }
+    
+    @IBAction func medicalWorkerButtonTapped() {
+        let vc = MedicalWorkerInstructionsViewController.instantiate()
+        showDrawer(vc)
+    }
 
     @IBAction func linkingIdButtonTapped(_ sender: ButtonWithDynamicType) {
         let vc = LinkingIdViewController.instantiate()
         vc.inject(persisting: persistence, linkingIdManager: linkingIdManager)
+        showDrawer(vc)
+    }
+
+    private func showDrawer(_ vc: UIViewController) {
         vc.modalPresentationStyle = .custom
         vc.transitioningDelegate = drawerPresentationManager
         present(vc, animated: true)

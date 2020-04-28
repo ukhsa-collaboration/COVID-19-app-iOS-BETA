@@ -32,6 +32,7 @@
 		0997D056243BDEEC0067346C /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0997D055243BDEEC0067346C /* RootViewController.swift */; };
 		09A9254324536FD300C5DBC1 /* RegistrationReminderScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A9254224536FD300C5DBC1 /* RegistrationReminderScheduler.swift */; };
 		09A925452453807000C5DBC1 /* RegistrationReminderSchedulerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A925442453807000C5DBC1 /* RegistrationReminderSchedulerTests.swift */; };
+		09A9254B2457B2CA00C5DBC1 /* MedicalWorkerInstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A9254A2457B2CA00C5DBC1 /* MedicalWorkerInstructionsViewController.swift */; };
 		09B103622444E9110091834D /* ContactEventPersisterDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B103612444E9110091834D /* ContactEventPersisterDouble.swift */; };
 		09B103642444EAB80091834D /* ContactEventRepositoryDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B103632444EAB80091834D /* ContactEventRepositoryDouble.swift */; };
 		09CAA3662440F3B100CE93A6 /* PostcodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CAA3652440F3B100CE93A6 /* PostcodeViewController.swift */; };
@@ -246,6 +247,7 @@
 		0997D055243BDEEC0067346C /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		09A9254224536FD300C5DBC1 /* RegistrationReminderScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationReminderScheduler.swift; sourceTree = "<group>"; };
 		09A925442453807000C5DBC1 /* RegistrationReminderSchedulerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationReminderSchedulerTests.swift; sourceTree = "<group>"; };
+		09A9254A2457B2CA00C5DBC1 /* MedicalWorkerInstructionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalWorkerInstructionsViewController.swift; sourceTree = "<group>"; };
 		09B103612444E9110091834D /* ContactEventPersisterDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventPersisterDouble.swift; sourceTree = "<group>"; };
 		09B103632444EAB80091834D /* ContactEventRepositoryDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventRepositoryDouble.swift; sourceTree = "<group>"; };
 		09CAA3652440F3B100CE93A6 /* PostcodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostcodeViewController.swift; sourceTree = "<group>"; };
@@ -550,6 +552,7 @@
 				F652F72D244E472E00D97950 /* SymptomsPromptViewController.swift */,
 				138114E32450543600BA46C7 /* SymptomStackView.swift */,
 				F604976C2453ADF4002B8503 /* scenarios.yml */,
+				09A9254A2457B2CA00C5DBC1 /* MedicalWorkerInstructionsViewController.swift */,
 			);
 			path = Status;
 			sourceTree = "<group>";
@@ -1276,6 +1279,7 @@
 				21D93C302420C26900C1FA9B /* PrimaryButton.swift in Sources */,
 				F78CEB47242B7752002254AD /* String+localized.swift in Sources */,
 				F6F05A36243436D200FF4B72 /* PrivacyViewController.swift in Sources */,
+				09A9254B2457B2CA00C5DBC1 /* MedicalWorkerInstructionsViewController.swift in Sources */,
 				F6F05A282433C55300FF4B72 /* AuthorizationManager.swift in Sources */,
 				89F06B352434AF9D0074C612 /* LogEvent.swift in Sources */,
 				F652F7242449138900D97950 /* SetDiagnosisViewController.swift in Sources */,
