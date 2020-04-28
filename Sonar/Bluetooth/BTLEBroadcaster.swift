@@ -168,11 +168,18 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
         }
         
         logger.info("advertising identifier \(idGenerator.broadcastIdentifier()?.base64EncodedString() ??? "nil")")
-        
+
+        // Per #172564329 we don't want to expose this in release builds
+        #if DEBUG
         peripheral.startAdvertising([
             CBAdvertisementDataLocalNameKey: advertismentDataLocalName,
             CBAdvertisementDataServiceUUIDsKey: [service.uuid]
         ])
+        #else
+        peripheral.startAdvertising([
+            CBAdvertisementDataServiceUUIDsKey: [service.uuid]
+        ])
+        #endif
     }
     
     func peripheralManagerIsReady(toUpdateSubscribers peripheral: CBPeripheralManager) {
