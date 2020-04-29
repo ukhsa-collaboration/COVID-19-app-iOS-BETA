@@ -138,7 +138,7 @@ class Persistence: Persisting {
         set {
             UserDefaults.standard.set(newValue, forKey: Keys.partialPostcode.rawValue)
             if newValue != nil {
-                monitor.report(.providedPartialPostcode)
+                monitor.report(.partialPostcodeProvided)
             }
         }
     }

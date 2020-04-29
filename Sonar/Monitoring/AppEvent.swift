@@ -9,7 +9,7 @@
 import Foundation
 
 enum AppEvent {
-    case providedPartialPostcode
+    case partialPostcodeProvided
     case registrationSucceeded
     case onboardingCompleted
 }

@@ -121,7 +121,7 @@ class PersistenceTests: TestCase {
         XCTAssertEqual(monitor.detectedEvents, [])
         
         persistence.partialPostcode = "9810"
-        XCTAssertEqual(monitor.detectedEvents, [.providedPartialPostcode])
+        XCTAssertEqual(monitor.detectedEvents, [.partialPostcodeProvided])
     }
     
     func testLastInstalledVersionNumberIsPersisted() {
