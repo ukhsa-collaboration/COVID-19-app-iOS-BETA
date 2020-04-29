@@ -8,16 +8,12 @@
 
 import UIKit
 
-class LiveBTLEDebuggerTableViewController: UITableViewController {
+class LiveBTLEDebuggerTableViewController: UITableViewController, ContactEventRepositoryDelegate {
 
     var persistence: Persisting = (UIApplication.shared.delegate as! AppDelegate).persistence
     var broadcastIdGenerator: BroadcastIdGenerator = ((UIApplication.shared.delegate as! AppDelegate).bluetoothNursery as! ConcreteBluetoothNursery).broadcastIdGenerator
     
     @objc var repository: PersistingContactEventRepository = (UIApplication.shared.delegate as! AppDelegate).bluetoothNursery.contactEventRepository as! PersistingContactEventRepository
-    
-    var observation: NSKeyValueObservation?
-    
-    var encryptedRemoteConactIds: [Data] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,16 +22,21 @@ class LiveBTLEDebuggerTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        observation = observe(\.repository._contactEventCount) { object, change in
-            DispatchQueue.main.async {
-                self.encryptedRemoteConactIds = self.repository.contactEvents.compactMap({ $0.encryptedRemoteContactId })
-                self.tableView.reloadData()
-            }
-        }
-
-        encryptedRemoteConactIds = repository.contactEvents.compactMap({ $0.encryptedRemoteContactId })
-        tableView.reloadData()
+        repository.delegate = self
     }
+    
+    // MARK: - ContactEventRepositoryDelegate
+    
+    func repository(_ repository: ContactEventRepository, didRecordBroadcastId broadcastId: Data, forPeripheral peripheral: BTLEPeripheral) {
+        if let row = repository.contactEvents.firstIndex(where: { $0.encryptedRemoteContactId == broadcastId }) {
+            tableView.reloadRows(at: [IndexPath(row: row, section: 2)], with: .fade)
+        }
+    }
+    
+    func repository(_ repository: ContactEventRepository, didRecordRSSI RSSI: Int, forPeripheral peripheral: BTLEPeripheral) {
+        
+    }
+
     
     // MARK: - Table view data source
 
@@ -56,7 +57,7 @@ class LiveBTLEDebuggerTableViewController: UITableViewController {
         switch section {
         case 0: return 1
         case 1: return 1
-        case 2: return encryptedRemoteConactIds.count
+        case 2: return repository.contactEvents.count
             
         default:
             preconditionFailure("No section \(section)")
@@ -73,13 +74,14 @@ class LiveBTLEDebuggerTableViewController: UITableViewController {
             let sonarId = persistence.registration?.id.uuidString ?? "<not yet registered>"
             cell.textLabel?.text = sonarId
             cell.gradientColorData = sonarId.data(using: .utf8)
+            
         case (1, _):
             cell.textLabel?.text = broadcastIdGenerator.broadcastIdentifier()?.base64EncodedString()
             cell.gradientColorData = broadcastIdGenerator.broadcastIdentifier()
 
         case (2, let row):
-            cell.textLabel?.text = encryptedRemoteConactIds[row].base64EncodedString()
-            cell.gradientColorData = encryptedRemoteConactIds[row]
+            cell.textLabel?.text = repository.contactEvents[row].encryptedRemoteContactId?.base64EncodedString()
+            cell.gradientColorData = repository.contactEvents[row].encryptedRemoteContactId
             
         default:
             preconditionFailure("No cell at indexPath \(indexPath)")
