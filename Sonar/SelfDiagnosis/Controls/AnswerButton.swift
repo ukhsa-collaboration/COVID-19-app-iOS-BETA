@@ -30,6 +30,7 @@ class AnswerButton: UIControl {
             }
 
             layer.borderWidth = isSelected ? 2 : 0
+            layer.borderColor = UIColor(named: "NHS Highlight")!.cgColor
             imageView.isHighlighted = isSelected
         }
     }
@@ -50,7 +51,6 @@ class AnswerButton: UIControl {
         layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
 
         layer.cornerRadius = 8
-        layer.borderColor = UIColor(named: "NHS Highlight")!.cgColor
 
         textLabel.font = UIFont.preferredFont(forTextStyle: .body)
         textLabel.textColor = UIColor(named: "NHS Text")!

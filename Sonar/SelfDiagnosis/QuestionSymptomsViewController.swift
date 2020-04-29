@@ -63,6 +63,27 @@ class QuestionSymptomsViewController: UIViewController, Storyboarded {
         yesButton.text = questionYes
         noButton.text = questionNo
         questionButton.setTitle(buttonText, for: .normal)
+        
+        yesButton.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longPressedYes)))
+        noButton.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longPressedNo)))
+    }
+    
+    @objc func longPressedYes(sender: UILongPressGestureRecognizer) {
+        if sender.state != UIGestureRecognizer.State.ended {
+            yesButton.layer.borderWidth = 2
+            yesButton.layer.borderColor = UIColor(named: "NHS Highlight")!.withAlphaComponent(0.96).cgColor
+        } else {
+            yesTapped(self)
+        }
+    }
+    
+    @objc func longPressedNo(sender: UILongPressGestureRecognizer) {
+        if sender.state != UIGestureRecognizer.State.ended {
+            noButton.layer.borderWidth = 2
+            noButton.layer.borderColor = UIColor(named: "NHS Highlight")!.withAlphaComponent(0.96).cgColor
+        } else {
+            noTapped(self)
+        }
     }
     
     @IBAction func yesTapped(_ sender: Any) {

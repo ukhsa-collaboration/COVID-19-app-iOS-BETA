@@ -74,9 +74,7 @@ class StatusViewController: UIViewController, Storyboarded {
         notRightView.layer.cornerRadius = 8
         notRightTitleLabel.textColor = UIColor(named: "NHS Link")
         notRightSubtitleLabel.textColor = UIColor(named: "NHS Secondary Text")
-        
-        let color = UIColor(named: "NHS Highlight")!.withAlphaComponent(0.96)
-        notRightView.layer.borderColor = color.cgColor
+        notRightView.layer.borderColor = UIColor(named: "NHS Highlight")!.withAlphaComponent(0.96).cgColor
         notRightView.accessibilityLabel = "\(notRightTitleLabel.text!) \(notRightSubtitleLabel.text!)"
         notRightView.addGestureRecognizer(
             UITapGestureRecognizer(target: self, action: #selector(notRightTapped))
