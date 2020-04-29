@@ -19,6 +19,7 @@ class RootViewController: UIViewController {
     private var session: Session!
     private var contactEventsUploader: ContactEventsUploader!
     private var uiQueue: TestableQueue! = nil
+    private var setupChecker: SetupChecker!
     private weak var presentedSetupErorrViewController: UIViewController? = nil
 
     private var statusViewController: StatusViewController!
@@ -55,6 +56,8 @@ class RootViewController: UIViewController {
             linkingIdManager: linkingIdManager,
             statusProvider: statusProvider
         )
+        
+        setupChecker = SetupChecker(authorizationManager: authorizationManager, bluetoothNursery: bluetoothNursery)
         
         notificationCenter.addObserver(self, selector: #selector(applicationDidBecomeActive(_:)), name: UIApplication.didBecomeActiveNotification, object: nil)
     }
@@ -94,8 +97,7 @@ class RootViewController: UIViewController {
             return
         }
         
-        let checker = SetupChecker(authorizationManager: authorizationManager, bluetoothNursery: bluetoothNursery)
-        checker.check { problem in
+        setupChecker.check { problem in
             self.uiQueue.sync {
                 self.dismissSetupError()
                 guard let problem = problem else { return }
