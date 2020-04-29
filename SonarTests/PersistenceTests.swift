@@ -108,6 +108,12 @@ class PersistenceTests: TestCase {
 
         XCTAssertFalse(persistence.uploadLog.isEmpty)
     }
+
+    func testUploadLogTruncates() {
+        persistence.uploadLog = (0..<101).map { _ in UploadLog(event: .started(lastContactEventDate: Date())) }
+
+        XCTAssertEqual(persistence.uploadLog.count, 100)
+    }
     
     func testMonitorIsNotifiedWhenPartialPostcodeIsProvided() {
         
@@ -157,7 +163,6 @@ class PersistenceTests: TestCase {
     }
 
     func testMonitorIsNotifiedWhenRegistrationSucceeds() {
-        
         persistence.registration = nil
         XCTAssertEqual(monitor.detectedEvents, [])
         
@@ -165,6 +170,18 @@ class PersistenceTests: TestCase {
         let secretKey = "secret key".data(using: .utf8)!
         persistence.registration = Registration(id: id, secretKey: secretKey, broadcastRotationKey: knownGoodECPublicKey())
         XCTAssertEqual(monitor.detectedEvents, [.registrationSucceeded])
+    }
+
+    func testAcknowledgmentUrls() {
+        persistence.acknowledgmentUrls = [URL(string: "https://example.com/ack")!]
+
+        XCTAssertEqual(persistence.acknowledgmentUrls, [URL(string: "https://example.com/ack")!])
+    }
+
+    func testAcknowledgmentUrlsTruncates() {
+        persistence.acknowledgmentUrls = Set((0..<101).map { URL(string: "https://example.com/ack/\($0)")! })
+
+        XCTAssertEqual(persistence.acknowledgmentUrls.count, 100)
     }
 
 }

@@ -60,7 +60,8 @@ private class InMemoryPersistence: Persisting {
     var linkingId: LinkingId?
     var lastInstalledVersion: String?
     var lastInstalledBuildNumber: String?
-        
+    var acknowledgmentUrls: Set<URL> = []
+
     func clear() {
         registration = nil
         potentiallyExposed = nil
@@ -70,6 +71,7 @@ private class InMemoryPersistence: Persisting {
         linkingId = nil
         lastInstalledVersion = nil
         lastInstalledBuildNumber = nil
+        acknowledgmentUrls = []
     }
 }
 

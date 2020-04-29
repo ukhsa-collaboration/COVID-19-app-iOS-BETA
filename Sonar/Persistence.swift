@@ -33,6 +33,7 @@ protocol Persisting {
     var linkingId: LinkingId? { get nonmutating set }
     var lastInstalledVersion: String? { get nonmutating set }
     var lastInstalledBuildNumber: String? { get nonmutating set }
+    var acknowledgmentUrls: Set<URL> { get nonmutating set }
 
     func clear()
 }
@@ -52,6 +53,7 @@ class Persistence: Persisting {
         case linkingId
         case lastInstalledBuildNumber
         case lastInstalledVersion
+        case acknowledgmentUrls
     }
     
     private let encoder = JSONEncoder()
@@ -180,6 +182,27 @@ class Persistence: Persisting {
     var lastInstalledBuildNumber: String? {
         get { UserDefaults.standard.string(forKey: Keys.lastInstalledBuildNumber.rawValue) }
         set { UserDefaults.standard.set(newValue, forKey: Keys.lastInstalledBuildNumber.rawValue) }
+    }
+
+    var acknowledgmentUrls: Set<URL> {
+        get {
+            guard
+                let data = UserDefaults.standard.data(forKey: Keys.acknowledgmentUrls.rawValue),
+                let decoded = try? decoder.decode(Set<URL>.self, from: data)
+            else {
+                return []
+            }
+
+            return decoded
+        }
+        set {
+            guard let data = try? encoder.encode(newValue.suffix(100)) else {
+                logger.critical("Unable to encode the upload log")
+                return
+            }
+
+            UserDefaults.standard.set(data, forKey: Keys.acknowledgmentUrls.rawValue)
+        }
     }
     
     func clear() {

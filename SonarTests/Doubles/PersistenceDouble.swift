@@ -21,6 +21,7 @@ class PersistenceDouble: Persisting {
     var linkingId: LinkingId?
     var lastInstalledVersion: String?
     var lastInstalledBuildNumber: String?
+    var acknowledgmentUrls: Set<URL>
 
     init(
         potentiallyExposed: Date? = nil,
@@ -31,7 +32,8 @@ class PersistenceDouble: Persisting {
         uploadLog: [UploadLog] = [],
         linkingId: LinkingId? = nil,
         lastInstalledVersion: String? = nil,
-        lastInstalledBuildNumber: String? = nil
+        lastInstalledBuildNumber: String? = nil,
+        acknowledgmentUrls: Set<URL> = []
     ) {
         self.registration = registration
         self.potentiallyExposed = potentiallyExposed
@@ -43,6 +45,7 @@ class PersistenceDouble: Persisting {
         self.linkingId = linkingId
         self.lastInstalledVersion = lastInstalledVersion
         self.lastInstalledBuildNumber = lastInstalledBuildNumber
+        self.acknowledgmentUrls = acknowledgmentUrls
     }
 
     func clear() {
@@ -55,5 +58,6 @@ class PersistenceDouble: Persisting {
         linkingId = nil
         lastInstalledVersion = nil
         lastInstalledBuildNumber = nil
+        acknowledgmentUrls = []
     }
 }
