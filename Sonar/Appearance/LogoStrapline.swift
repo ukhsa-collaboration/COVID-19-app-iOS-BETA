@@ -52,7 +52,7 @@ class LogoStrapline: UIView {
         ])
 
         let element = UIAccessibilityElement(accessibilityContainer: self)
-        element.accessibilityLabel = "NHS Coronavirus tracing"
+        element.accessibilityLabel = "NHS COVID-19"
         element.accessibilityFrameInContainerSpace = frame
         accessibilityElements = [element]
     }
