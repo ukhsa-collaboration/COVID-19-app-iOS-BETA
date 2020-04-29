@@ -10,12 +10,12 @@ import UIKit
 @IBDesignable
 class LogoStrapline: UIView {
     
+    @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet private var titleLabel: UILabel!
-    
-    override var intrinsicContentSize: CGSize {
-        return CGSize(width: UIView.noIntrinsicMetric, height: 64.0)
-    }
-    
+    @IBOutlet weak var infoButton: UIButton!
+
+    var accessibilityElement: UIAccessibilityElement!
+
     static var nibName: String {
         String(describing: self)
     }
@@ -34,7 +34,19 @@ class LogoStrapline: UIView {
         super.prepareForInterfaceBuilder()
         commonInit()
     }
-    
+
+    override func layoutSubviews() {
+        accessibilityElement.accessibilityFrame = UIAccessibility.convertToScreenCoordinates(
+            logoImageView.frame.union(titleLabel.frame),
+            in: self
+        )
+    }
+
+    @IBAction func infoTapped(_ sender: UIButton) {
+        let url = URL(string: "https://covid19.nhs.uk/?utm_source=nhscovid19ios&utm_medium=mobileapp&utm_campaign=nhscovid19app&utm_content=statuspage")!
+        UIApplication.shared.open(url)
+    }
+
     func commonInit() {
         guard let view = loadViewFromNib() else {
             return
@@ -51,10 +63,9 @@ class LogoStrapline: UIView {
             view.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
 
-        let element = UIAccessibilityElement(accessibilityContainer: self)
-        element.accessibilityLabel = "NHS COVID-19"
-        element.accessibilityFrameInContainerSpace = frame
-        accessibilityElements = [element]
+        accessibilityElement = UIAccessibilityElement(accessibilityContainer: self)
+        accessibilityElement.accessibilityLabel = "NHS COVID-19"
+        accessibilityElements = [accessibilityElement!, infoButton!]
     }
     
     func loadViewFromNib() -> UIView? {
