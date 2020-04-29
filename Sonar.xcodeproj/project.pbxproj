@@ -170,6 +170,7 @@
 		F694B1BC2459E9F000C6A5D1 /* NotificationAcknowledger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F694B1BB2459E9F000C6A5D1 /* NotificationAcknowledger.swift */; };
 		F694B1BE2459EB3800C6A5D1 /* NotificationAcknowledgerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F694B1BD2459EB3800C6A5D1 /* NotificationAcknowledgerTests.swift */; };
 		F694B1C02459EEB800C6A5D1 /* NotificationAcknowledgerDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = F694B1BF2459EEB800C6A5D1 /* NotificationAcknowledgerDouble.swift */; };
+		F694B1C2245A4A5600C6A5D1 /* ErrorLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F694B1C1245A4A5600C6A5D1 /* ErrorLabel.swift */; };
 		F6AB2F20243D359F00386D6B /* SubmitSymptomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */; };
 		F6CC2CA9242BC7FC0079432B /* RemoteNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CC2CA8242BC7FC0079432B /* RemoteNotificationManager.swift */; };
 		F6CC2CAC242BCD0D0079432B /* RemoteNotificationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CC2CAB242BCD0D0079432B /* RemoteNotificationManagerTests.swift */; };
@@ -418,6 +419,7 @@
 		F694B1BB2459E9F000C6A5D1 /* NotificationAcknowledger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAcknowledger.swift; sourceTree = "<group>"; };
 		F694B1BD2459EB3800C6A5D1 /* NotificationAcknowledgerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAcknowledgerTests.swift; sourceTree = "<group>"; };
 		F694B1BF2459EEB800C6A5D1 /* NotificationAcknowledgerDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAcknowledgerDouble.swift; sourceTree = "<group>"; };
+		F694B1C1245A4A5600C6A5D1 /* ErrorLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorLabel.swift; sourceTree = "<group>"; };
 		F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitSymptomsViewController.swift; sourceTree = "<group>"; };
 		F6CA2818242E41F700F8DC55 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F6CBA499244F6E2C00D20610 /* GoogleService-Info.production.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.production.plist"; sourceTree = "<group>"; };
@@ -606,12 +608,13 @@
 				F613936D243FA82B003447E8 /* Appearance.swift */,
 				0986EFB4244518FE008D0E1D /* ButtonWithDynamicType.swift */,
 				F652F72F244E4AAD00D97950 /* DrawerPresentation.swift */,
+				F694B1C1245A4A5600C6A5D1 /* ErrorLabel.swift */,
 				AEC6A7BB241BD81A00B0237A /* LogoStrapline.swift */,
-				AEC6A7BD241BD82900B0237A /* LogoStrapline.xib */,
 				F70CB8182450CAB700ED6E7F /* OnboardingLogoStrapline.swift */,
-				F70CB81A2450CFA900ED6E7F /* OnboardingLogoStrapline.xib */,
 				21D93C2F2420C26900C1FA9B /* PrimaryButton.swift */,
 				097C93882447986B00E985CF /* TextField.swift */,
+				AEC6A7BD241BD82900B0237A /* LogoStrapline.xib */,
+				F70CB81A2450CFA900ED6E7F /* OnboardingLogoStrapline.xib */,
 			);
 			path = Appearance;
 			sourceTree = "<group>";
@@ -1400,6 +1403,7 @@
 				138114E62450796C00BA46C7 /* LocalNotificationScheduler.swift in Sources */,
 				131AB05C2449D85B002136CA /* ContactEventExpiryHandler.swift in Sources */,
 				09A9254324536FD300C5DBC1 /* RegistrationReminderScheduler.swift in Sources */,
+				F694B1C2245A4A5600C6A5D1 /* ErrorLabel.swift in Sources */,
 				F604976F24549729002B8503 /* LinkingIdRequest.swift in Sources */,
 				F7E74F8E244DFBDA00273C59 /* BroadcastRotationKeyConverter.swift in Sources */,
 				21E5051524448D880065C69B /* PlistPersister.swift in Sources */,

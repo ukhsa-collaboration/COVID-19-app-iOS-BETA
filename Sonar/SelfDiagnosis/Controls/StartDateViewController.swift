@@ -77,7 +77,6 @@ class StartDateViewController: UIViewController {
         }
         label.text = question.localized
 
-        errorLabel.textColor = UIColor(named: "NHS Error")
         errorLabel.text = "SELECT_START_DATE_ERROR".localized
 
         button.text = "SELECT_START_DATE".localized

@@ -16,5 +16,8 @@ extension Appearance {
         UILabel.appearance().numberOfLines = 0
 
         UILabel.appearance(whenContainedInInstancesOf: [LogoStrapline.self]).textColor = UIColor(named: "NHS White")
+
+        ErrorLabel.appearance().textColor = UIColor(named: "NHS Error")
+        ErrorLabel.appearance().font = UIFont.preferredFont(forTextStyle: .callout)
     }
 }

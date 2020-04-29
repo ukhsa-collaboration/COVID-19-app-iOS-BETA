@@ -23,10 +23,6 @@ class LinkingIdViewController: UIViewController, Storyboarded {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var errorLabel: UILabel!
 
-    override func viewDidLoad() {
-        errorLabel.textColor = UIColor(named: "NHS Error")
-    }
-
     override func viewWillAppear(_ animated: Bool) {
         guard let linkingId = persisting.linkingId else {
             fetchLinkingId()
