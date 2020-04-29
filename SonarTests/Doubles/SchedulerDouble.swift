@@ -9,7 +9,7 @@
 @testable import Sonar
 
 class SchedulerDouble: Scheduler {
-    func scheduleDiagnosisNotification(days: Double) {
+    func scheduleDiagnosisNotification(expiryDate: Date) {
         
     }
 }
