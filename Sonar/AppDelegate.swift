@@ -35,6 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         firebase: FirebaseApp.self,
         messagingFactory: { Messaging.messaging() },
         userNotificationCenter: userNotificationCenter,
+        notificationAcknowledger: notificationAcknowledger,
         dispatcher: dispatcher)
     
     lazy var registrationService: RegistrationService = ConcreteRegistrationService(
@@ -86,6 +87,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         persisting: persistence,
         userNotificationCenter: userNotificationCenter,
         notificationCenter: notificationCenter
+    )
+
+    lazy var notificationAcknowledger: NotificationAcknowledger = NotificationAcknowledger(
+        persisting: persistence,
+        session: urlSession
     )
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {

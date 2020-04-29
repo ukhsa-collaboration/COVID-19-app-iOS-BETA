@@ -52,17 +52,20 @@ class ConcreteRemoteNotificationManager: NSObject, RemoteNotificationManager {
     private let firebase: TestableFirebaseApp.Type
     private let messagingFactory: () -> TestableMessaging
     private let userNotificationCenter: UserNotificationCenter
+    private let notificationAcknowledger: NotificationAcknowledger
     let dispatcher: RemoteNotificationDispatching
 
     init(
         firebase: TestableFirebaseApp.Type,
         messagingFactory: @escaping () -> TestableMessaging,
         userNotificationCenter: UserNotificationCenter,
+        notificationAcknowledger: NotificationAcknowledger,
         dispatcher: RemoteNotificationDispatching
     ) {
         self.firebase = firebase
         self.messagingFactory = messagingFactory
         self.userNotificationCenter = userNotificationCenter
+        self.notificationAcknowledger = notificationAcknowledger
         self.dispatcher = dispatcher
         
         super.init()
@@ -96,7 +99,11 @@ class ConcreteRemoteNotificationManager: NSObject, RemoteNotificationManager {
     }
     
     func handleNotification(userInfo: [AnyHashable : Any], completionHandler: @escaping RemoteNotificationCompletionHandler) {
-        dispatcher.handleNotification(userInfo: userInfo, completionHandler: completionHandler)
+        let alreadyAcked = notificationAcknowledger.ack(userInfo: userInfo)
+
+        if !alreadyAcked {
+            dispatcher.handleNotification(userInfo: userInfo, completionHandler: completionHandler)
+        }
     }
 }
 

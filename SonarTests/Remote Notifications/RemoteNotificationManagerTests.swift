@@ -26,6 +26,7 @@ class RemoteNotificationManagerTests: TestCase {
             firebase: FirebaseAppDouble.self,
             messagingFactory: { messaging },
             userNotificationCenter: UserNotificationCenterDouble(),
+            notificationAcknowledger: NotificationAcknowledgerDouble(),
             dispatcher: RemoteNotificationDispatcher(notificationCenter: NotificationCenter(), userNotificationCenter: UserNotificationCenterDouble())
         )
 
@@ -41,6 +42,7 @@ class RemoteNotificationManagerTests: TestCase {
             firebase: FirebaseAppDouble.self,
             messagingFactory: { messaging },
             userNotificationCenter: UserNotificationCenterDouble(),
+            notificationAcknowledger: NotificationAcknowledgerDouble(),
             dispatcher: RemoteNotificationDispatcher(notificationCenter: notificationCenter, userNotificationCenter: UserNotificationCenterDouble())
         )
 
@@ -62,6 +64,7 @@ class RemoteNotificationManagerTests: TestCase {
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
             userNotificationCenter: notificationCenterDouble,
+            notificationAcknowledger: NotificationAcknowledgerDouble(),
             dispatcher: RemoteNotificationDispatcher(notificationCenter: NotificationCenter(), userNotificationCenter: UserNotificationCenterDouble())
         )
 
@@ -86,6 +89,7 @@ class RemoteNotificationManagerTests: TestCase {
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
             userNotificationCenter: UserNotificationCenterDouble(),
+            notificationAcknowledger: NotificationAcknowledgerDouble(),
             dispatcher: RemoteNotificationDispatcher(notificationCenter: NotificationCenter(), userNotificationCenter: UserNotificationCenterDouble())
         )
         
@@ -105,6 +109,7 @@ class RemoteNotificationManagerTests: TestCase {
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
             userNotificationCenter: UserNotificationCenterDouble(),
+            notificationAcknowledger: NotificationAcknowledgerDouble(),
             dispatcher: RemoteNotificationDispatcher(notificationCenter: NotificationCenter(), userNotificationCenter: UserNotificationCenterDouble())
         )
         var callersCompletionCalled = false
@@ -134,6 +139,7 @@ class RemoteNotificationManagerTests: TestCase {
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
             userNotificationCenter: UserNotificationCenterDouble(),
+            notificationAcknowledger: NotificationAcknowledgerDouble(),
             dispatcher: RemoteNotificationDispatcher(notificationCenter: NotificationCenter(), userNotificationCenter: UserNotificationCenterDouble())
         )
         
@@ -146,6 +152,7 @@ class RemoteNotificationManagerTests: TestCase {
             firebase: FirebaseAppDouble.self,
             messagingFactory: { MessagingDouble() },
             userNotificationCenter: notificationCenterDouble,
+            notificationAcknowledger: NotificationAcknowledgerDouble(),
             dispatcher: RemoteNotificationDispatcher(notificationCenter: NotificationCenter(), userNotificationCenter: UserNotificationCenterDouble())
         )
 
@@ -153,6 +160,43 @@ class RemoteNotificationManagerTests: TestCase {
 
         XCTAssertNil(notificationCenterDouble.request)
     }
+
+    func testAcknowledgingANewNotification() throws {
+        let ackerDouble = NotificationAcknowledgerDouble()
+        let dispatcherDouble = RemoteNotificationDispatchingDouble()
+        let notificationManager = ConcreteRemoteNotificationManager(
+            firebase: FirebaseAppDouble.self,
+            messagingFactory: { MessagingDouble() },
+            userNotificationCenter: UserNotificationCenterDouble(),
+            notificationAcknowledger: ackerDouble,
+            dispatcher: dispatcherDouble
+        )
+
+        ackerDouble.ackResult = false
+        notificationManager.handleNotification(userInfo: ["acknowledgmentUrl": "https://example.com/ack"]) { _ in }
+
+        XCTAssertEqual(ackerDouble.userInfo?["acknowledgmentUrl"] as? String, "https://example.com/ack")
+        XCTAssertTrue(dispatcherDouble.handledNotification)
+    }
+
+    func testAcknowledgingAnAlreadySeenNotification() throws {
+        let ackerDouble = NotificationAcknowledgerDouble()
+        let dispatcherDouble = RemoteNotificationDispatchingDouble()
+        let notificationManager = ConcreteRemoteNotificationManager(
+            firebase: FirebaseAppDouble.self,
+            messagingFactory: { MessagingDouble() },
+            userNotificationCenter: UserNotificationCenterDouble(),
+            notificationAcknowledger: ackerDouble,
+            dispatcher: dispatcherDouble
+        )
+
+        ackerDouble.ackResult = true
+        notificationManager.handleNotification(userInfo: ["acknowledgmentUrl": "https://example.com/ack"]) { _ in }
+
+        XCTAssertEqual(ackerDouble.userInfo?["acknowledgmentUrl"] as? String, "https://example.com/ack")
+        XCTAssertFalse(dispatcherDouble.handledNotification)
+    }
+
 }
 
 private class FirebaseAppDouble: TestableFirebaseApp {
