@@ -128,7 +128,7 @@
                                                                 </subviews>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                 <accessibility key="accessibilityConfiguration">
-                                                                    <accessibilityTraits key="traits" button="YES"/>
+                                                                    <accessibilityTraits key="traits" link="YES"/>
                                                                     <bool key="isElement" value="YES"/>
                                                                 </accessibility>
                                                                 <constraints>
@@ -226,6 +226,9 @@
                                                                             </label>
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2UL-Ea-jl7" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="66.5" width="382" height="130"/>
+                                                                                <accessibility key="accessibilityConfiguration">
+                                                                                    <accessibilityTraits key="traits" link="YES"/>
+                                                                                </accessibility>
                                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                                 <state key="normal" title="NHS Coronavirus">
                                                                                     <color key="titleColor" name="NHS Link"/>

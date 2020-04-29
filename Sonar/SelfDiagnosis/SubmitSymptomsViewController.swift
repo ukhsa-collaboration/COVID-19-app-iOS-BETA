@@ -96,10 +96,6 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         var localizedDescription: String { "oh no" }
     }
 
-    @IBAction func noSymptomsInfoTapped(_ sender: ButtonWithDynamicType) {
-        UIApplication.shared.open(URL(string: "https://111.nhs.uk/covid-19/")!)
-    }
-
     private func alert(with error: Error) {
         let alert = UIAlertController(
             title: "Error uploading contact events",
