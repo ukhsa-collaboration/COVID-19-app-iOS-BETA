@@ -16,6 +16,7 @@ class RootViewControllerTests: TestCase {
     private var remoteNotificationDispatcher: RemoteNotificationDispatcher!
     private var notificationCenter: NotificationCenter!
     private var bluetoothNursery: BluetoothNurseryDouble!
+    private var onboardingCoordinator: OnboardingCoordinatorDouble!
     private var rootVC: RootViewController!
     
     override func setUp() {
@@ -26,13 +27,9 @@ class RootViewControllerTests: TestCase {
         remoteNotificationDispatcher = makeDispatcher()
         notificationCenter = NotificationCenter()
         bluetoothNursery = BluetoothNurseryDouble()
+        onboardingCoordinator = OnboardingCoordinatorDouble()
         
         rootVC = RootViewController()
-        let onboardingCoordinator = OnboardingCoordinator(
-            persistence: persistence,
-            authorizationManager: authorizationManager,
-            bluetoothNursery: bluetoothNursery
-        )
         rootVC.inject(
             persistence: persistence,
             authorizationManager: authorizationManager,
@@ -49,38 +46,30 @@ class RootViewControllerTests: TestCase {
         )
     }
     
-    func testInitialVC_registered() {
-        persistence.registration = .fake
-        XCTAssertNotNil(rootVC.view)
-        
-        XCTAssertEqual(rootVC.children.count, 1)
-        XCTAssertNotNil(rootVC.children.first as? StatusViewController)
-    }
-    
-    func testInitialVC_notRegistered() {
-        persistence.registration = nil
+    func testInitialVC_OnboardingRequired() {
+        onboardingCoordinator.isOnboardingRequired = true
         XCTAssertNotNil(rootVC.view)
         
         XCTAssertEqual(rootVC.children.count, 1)
         XCTAssertNotNil(rootVC.children.first as? OnboardingViewController)
     }
     
-    func testOnboardingFinished() {
-        persistence.partialPostcode = "1234"
-        authorizationManager.bluetooth = .allowed
-        bluetoothNursery.startBluetooth(registration: nil)
-        
+    func testInitialVC_OnboardingNotRequired() {
+        onboardingCoordinator.isOnboardingRequired = false
         XCTAssertNotNil(rootVC.view)
         
-        guard (rootVC.children.first as? OnboardingViewController) != nil else {
-            XCTFail("Expected an OnboardingViewController but got something else")
-            return
-        }
+        XCTAssertEqual(rootVC.children.count, 1)
+        XCTAssertNotNil(rootVC.children.first as? StatusViewController)
+    }
+    
+    func testOnboardingFinished() {
+        onboardingCoordinator.isOnboardingRequired = true
         
-        bluetoothNursery.stateObserver.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
-        XCTAssertNotNil(authorizationManager.notificationsCompletion)
-        authorizationManager.notificationsCompletion?(.allowed)
+        XCTAssertNotNil(rootVC.view)
+                
+        onboardingCoordinator.stateCompletion?(.done)
 
+        XCTAssertEqual(rootVC.children.count, 1)
         XCTAssertNotNil(rootVC.children.first as? StatusViewController)
     }
     
@@ -94,6 +83,7 @@ class RootViewControllerTests: TestCase {
     }
     
     func testBecomeActiveShowsPermissionDeniedWhenNoBluetoothPermission() {
+        onboardingCoordinator.isOnboardingRequired = false
         persistence.registration = .fake
         authorizationManager.bluetooth = .allowed
         bluetoothNursery.stateObserver = BluetoothStateObserver(initialState: .poweredOn)
@@ -110,6 +100,7 @@ class RootViewControllerTests: TestCase {
     }
     
     func testBecomeActiveShowsPermissionDeniedWhenNoNotificationPermission() {
+        onboardingCoordinator.isOnboardingRequired = false
         persistence.registration = .fake
         authorizationManager.bluetooth = .allowed
         bluetoothNursery.stateObserver = BluetoothStateObserver(initialState: .poweredOn)
@@ -125,6 +116,7 @@ class RootViewControllerTests: TestCase {
     }
     
     func testBecomesActiveShowsBluetoothOffWhenBluetoothOff() {
+        onboardingCoordinator.isOnboardingRequired = false
         bluetoothNursery.startBluetooth(registration: nil)
         authorizationManager.bluetooth = .allowed
         parentViewControllerForTests.viewControllers = [rootVC]
@@ -139,6 +131,7 @@ class RootViewControllerTests: TestCase {
     }
     
     func testBecomeActiveDoesNotShowPermissionProblemsDuringOnboarding() {
+        onboardingCoordinator.isOnboardingRequired = false
         parentViewControllerForTests.viewControllers = [rootVC]
         XCTAssertNotNil(rootVC.view)
         
@@ -151,6 +144,7 @@ class RootViewControllerTests: TestCase {
 
     
     func testBecomeActiveDoesNotShowPermissionDeniedWhenAllPermissionsGranted() {
+        onboardingCoordinator.isOnboardingRequired = false
         persistence.registration = .fake
         authorizationManager.bluetooth = .allowed
         parentViewControllerForTests.viewControllers = [rootVC]
@@ -162,6 +156,7 @@ class RootViewControllerTests: TestCase {
     }
     
     func testBecomeActiveHidesExistingPermissionDeniedWhenAllPermissionsGranted() {
+        onboardingCoordinator.isOnboardingRequired = false
         persistence.registration = .fake
         authorizationManager.bluetooth = .allowed
         bluetoothNursery.startBluetooth(registration: nil)
