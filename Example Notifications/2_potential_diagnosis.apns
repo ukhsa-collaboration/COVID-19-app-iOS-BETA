@@ -5,5 +5,6 @@
       "content-available": 1
     },
 
-    "status": "Potential"
+    "status": "Potential",
+    "acknowledgmentUrl": "https://example.com/ack"
 }
