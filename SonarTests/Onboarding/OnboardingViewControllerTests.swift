@@ -42,10 +42,8 @@ class OnboardingViewControllerTests: TestCase {
         vc.inject(env: envDouble(), coordinator: coordinatorDouble, bluetoothNursery: BluetoothNurseryDouble(), uiQueue: QueueDouble()) {
             called = true
         }
-        let container = ViewControllerContainerDouble()
-        vc.showIn(container: container)
 
-        vc.updateState()
+        vc.loadViewIfNeeded()
         coordinatorDouble.stateCompletion!(.done)
         
         XCTAssertTrue(called)
@@ -55,10 +53,8 @@ class OnboardingViewControllerTests: TestCase {
         let coordinatorDouble = OnboardingCoordinatorDouble()
         let vc = OnboardingViewController.instantiate()
         vc.inject(env: envDouble(), coordinator: coordinatorDouble, bluetoothNursery: BluetoothNurseryDouble(), uiQueue: QueueDouble()) {}
-        let container = ViewControllerContainerDouble()
-        vc.showIn(container: container)
 
-        vc.updateState()
+        vc.loadViewIfNeeded()
         coordinatorDouble.stateCompletion!(state)
 
         return vc.children.first

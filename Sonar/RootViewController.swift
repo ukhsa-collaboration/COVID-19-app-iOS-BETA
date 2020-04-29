@@ -87,7 +87,7 @@ class RootViewController: UIViewController {
                 self.show(viewController: self.statusViewController)
             }
             
-            onboardingViewController.showIn(container: self)
+            show(viewController: onboardingViewController)
         }
     }
     

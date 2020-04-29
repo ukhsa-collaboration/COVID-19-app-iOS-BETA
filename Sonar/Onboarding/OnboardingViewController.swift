@@ -17,10 +17,6 @@ class OnboardingViewController: UINavigationController, Storyboarded {
     private var completionHandler: (() -> Void)! = nil
     private var uiQueue: TestableQueue! = nil
 
-    func showIn(container: ViewControllerContainer) {
-        container.show(viewController: self)
-    }
-
     func inject(env: OnboardingEnvironment, coordinator: OnboardingCoordinator, bluetoothNursery: BluetoothNursery, uiQueue: TestableQueue, completionHandler: @escaping () -> Void) {
         self.environment = env
         self.onboardingCoordinator = coordinator
@@ -47,7 +43,7 @@ class OnboardingViewController: UINavigationController, Storyboarded {
         updateState()
     }
     
-    func updateState() {
+    private func updateState() {
         onboardingCoordinator.state { [weak self] state in
             guard let self = self else { return }
 
