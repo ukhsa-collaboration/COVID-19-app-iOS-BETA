@@ -11,9 +11,46 @@ import XCTest
 
 class RootViewControllerTests: TestCase {
     
+    private var persistence: PersistenceDouble!
+    private var authorizationManager: AuthorizationManagerDouble!
+    private var remoteNotificationDispatcher: RemoteNotificationDispatcher!
+    private var notificationCenter: NotificationCenter!
+    private var bluetoothNursery: BluetoothNurseryDouble!
+    private var rootVC: RootViewController!
+    
+    override func setUp() {
+        super.setUp()
+        
+        persistence = PersistenceDouble()
+        authorizationManager = AuthorizationManagerDouble()
+        remoteNotificationDispatcher = makeDispatcher()
+        notificationCenter = NotificationCenter()
+        bluetoothNursery = BluetoothNurseryDouble()
+        
+        rootVC = RootViewController()
+        let onboardingCoordinator = OnboardingCoordinator(
+            persistence: persistence,
+            authorizationManager: authorizationManager,
+            bluetoothNursery: bluetoothNursery
+        )
+        rootVC.inject(
+            persistence: persistence,
+            authorizationManager: authorizationManager,
+            remoteNotificationManager: RemoteNotificationManagerDouble(dispatcher: remoteNotificationDispatcher),
+            notificationCenter: notificationCenter,
+            registrationService: RegistrationServiceDouble(),
+            bluetoothNursery: bluetoothNursery,
+            onboardingCoordinator: onboardingCoordinator,
+            session: SessionDouble(),
+            contactEventsUploader: ContactEventsUploaderDouble(),
+            linkingIdManager: LinkingIdManagerDouble.make(),
+            statusProvider: StatusProvider(persisting: persistence),
+            uiQueue: QueueDouble()
+        )
+    }
+    
     func testInitialVC_registered() {
-        let persistence = PersistenceDouble(registration: Registration.fake)
-        let rootVC = makeRootVC(persistence: persistence)
+        persistence.registration = .fake
         XCTAssertNotNil(rootVC.view)
         
         XCTAssertEqual(rootVC.children.count, 1)
@@ -21,7 +58,7 @@ class RootViewControllerTests: TestCase {
     }
     
     func testInitialVC_notRegistered() {
-        let rootVC = makeRootVC(persistence: PersistenceDouble(registration: nil))
+        persistence.registration = nil
         XCTAssertNotNil(rootVC.view)
         
         XCTAssertEqual(rootVC.children.count, 1)
@@ -29,11 +66,10 @@ class RootViewControllerTests: TestCase {
     }
     
     func testOnboardingFinished() {
-        let authMgr = AuthorizationManagerDouble(bluetooth: .allowed)
-        let persistence = PersistenceDouble(registration: nil, partialPostcode: "1234")
-        let bluetoothNursery = BluetoothNurseryDouble()
+        persistence.partialPostcode = "1234"
+        authorizationManager.bluetooth = .allowed
         bluetoothNursery.startBluetooth(registration: nil)
-        let rootVC = makeRootVC(persistence: persistence, authorizationManager: authMgr, bluetoothNursery: bluetoothNursery)
+        
         XCTAssertNotNil(rootVC.view)
         
         guard (rootVC.children.first as? OnboardingViewController) != nil else {
@@ -42,14 +78,13 @@ class RootViewControllerTests: TestCase {
         }
         
         bluetoothNursery.stateObserver.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
-        XCTAssertNotNil(authMgr.notificationsCompletion)
-        authMgr.notificationsCompletion?(.allowed)
+        XCTAssertNotNil(authorizationManager.notificationsCompletion)
+        authorizationManager.notificationsCompletion?(.allowed)
 
         XCTAssertNotNil(rootVC.children.first as? StatusViewController)
     }
     
     func testShow() {
-        let rootVC = makeRootVC()
         let child = UIViewController()
         XCTAssertNotNil(rootVC.view) // trigger viewDidLoad before we call show
         
@@ -59,116 +94,88 @@ class RootViewControllerTests: TestCase {
     }
     
     func testBecomeActiveShowsPermissionDeniedWhenNoBluetoothPermission() {
-        let persistence = PersistenceDouble(registration: Registration.fake)
-        let authMgr = AuthorizationManagerDouble(bluetooth: .allowed)
-        let notificationCenter = NotificationCenter()
-        let bluetoothNursery = BluetoothNurseryDouble()
+        persistence.registration = .fake
+        authorizationManager.bluetooth = .allowed
         bluetoothNursery.stateObserver = BluetoothStateObserver(initialState: .poweredOn)
 
-        let rootVC = makeRootVC(persistence: persistence,
-                                authorizationManager: authMgr,
-                                notificationCenter: notificationCenter,
-                                bluetoothNursery: bluetoothNursery)
         parentViewControllerForTests.viewControllers = [rootVC]
 
         XCTAssertNil(rootVC.presentedViewController)
 
-        authMgr.bluetooth = .denied
+        authorizationManager.bluetooth = .denied
         notificationCenter.post(name: UIApplication.didBecomeActiveNotification, object: nil)
-        authMgr.notificationsCompletion?(.allowed)
+        authorizationManager.notificationsCompletion?(.allowed)
         
         XCTAssertNotNil(rootVC.presentedViewController as? BluetoothPermissionDeniedViewController)
     }
     
     func testBecomeActiveShowsPermissionDeniedWhenNoNotificationPermission() {
-        let persistence = PersistenceDouble(registration: Registration.fake)
-        let authMgr = AuthorizationManagerDouble(bluetooth: .allowed)
-        let notificationCenter = NotificationCenter()
-        let bluetoothNursery = BluetoothNurseryDouble()
+        persistence.registration = .fake
+        authorizationManager.bluetooth = .allowed
         bluetoothNursery.stateObserver = BluetoothStateObserver(initialState: .poweredOn)
 
-        let rootVC = makeRootVC(persistence: persistence,
-                                authorizationManager: authMgr,
-                                notificationCenter: notificationCenter,
-                                bluetoothNursery: bluetoothNursery)
         parentViewControllerForTests.viewControllers = [rootVC]
 
         XCTAssertNil(rootVC.presentedViewController)
         
         notificationCenter.post(name: UIApplication.didBecomeActiveNotification, object: nil)
-        authMgr.notificationsCompletion?(.denied)
+        authorizationManager.notificationsCompletion?(.denied)
         
         XCTAssertNotNil(rootVC.presentedViewController as? NotificationPermissionDeniedViewController)
     }
     
     func testBecomesActiveShowsBluetoothOffWhenBluetoothOff() {
-        let bluetoothNursery = BluetoothNurseryDouble()
         bluetoothNursery.startBluetooth(registration: nil)
-        let notificationCenter = NotificationCenter()
-        let authMgr = AuthorizationManagerDouble(bluetooth: .allowed)
-        let rootVC = makeRootVC(
-            persistence: PersistenceDouble(registration: Registration.fake),
-            authorizationManager: authMgr,
-            notificationCenter: notificationCenter,
-            bluetoothNursery: bluetoothNursery
-        )
+        authorizationManager.bluetooth = .allowed
         parentViewControllerForTests.viewControllers = [rootVC]
 
         XCTAssertNil(rootVC.presentedViewController)
 
         bluetoothNursery.stateObserver.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOff)
         notificationCenter.post(name: UIApplication.didBecomeActiveNotification, object: nil)
-        authMgr.notificationsCompletion?(.allowed)
+        authorizationManager.notificationsCompletion?(.allowed)
 
         XCTAssertNotNil(rootVC.presentedViewController as? BluetoothOffViewController)
     }
     
     func testBecomeActiveDoesNotShowPermissionProblemsDuringOnboarding() {
-        let persistence = PersistenceDouble(registration: nil)
-        let authMgr = AuthorizationManagerDouble()
-        let notificationCenter = NotificationCenter()
-        let rootVC = makeRootVC(persistence: persistence, authorizationManager: authMgr, notificationCenter: notificationCenter)
         parentViewControllerForTests.viewControllers = [rootVC]
         XCTAssertNotNil(rootVC.view)
         
-        authMgr.bluetooth = .denied
+        authorizationManager.bluetooth = .denied
         notificationCenter.post(name: UIApplication.didBecomeActiveNotification, object: nil)
-        authMgr.notificationsCompletion?(.allowed)
+        authorizationManager.notificationsCompletion?(.allowed)
         
         XCTAssertNil(rootVC.presentedViewController)
     }
 
     
     func testBecomeActiveDoesNotShowPermissionDeniedWhenAllPermissionsGranted() {
-        let persistence = PersistenceDouble(registration: Registration.fake)
-        let authMgr = AuthorizationManagerDouble(bluetooth: .allowed)
-        let notificationCenter = NotificationCenter()
-        let rootVC = makeRootVC(persistence: persistence, authorizationManager: authMgr, notificationCenter: notificationCenter)
+        persistence.registration = .fake
+        authorizationManager.bluetooth = .allowed
         parentViewControllerForTests.viewControllers = [rootVC]
         
         notificationCenter.post(name: UIApplication.didBecomeActiveNotification, object: nil)
-        authMgr.notificationsCompletion?(.allowed)
+        authorizationManager.notificationsCompletion?(.allowed)
         
         XCTAssertNil(rootVC.presentedViewController)
     }
     
     func testBecomeActiveHidesExistingPermissionDeniedWhenAllPermissionsGranted() {
-        let persistence = PersistenceDouble(registration: Registration.fake)
-        let authMgr = AuthorizationManagerDouble(bluetooth: .allowed)
-        let notificationCenter = NotificationCenter()
-        let bluetoothNursery = BluetoothNurseryDouble()
+        persistence.registration = .fake
+        authorizationManager.bluetooth = .allowed
         bluetoothNursery.startBluetooth(registration: nil)
-        let rootVC = makeRootVC(persistence: persistence, authorizationManager: authMgr, notificationCenter: notificationCenter, bluetoothNursery: bluetoothNursery)
+        
         parentViewControllerForTests.viewControllers = [rootVC]
         
         notificationCenter.post(name: UIApplication.didBecomeActiveNotification, object: nil)
-        authMgr.notificationsCompletion?(.denied)
+        authorizationManager.notificationsCompletion?(.denied)
         bluetoothNursery.stateObserver.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
         XCTAssertNotNil(rootVC.presentedViewController)
         
         bluetoothNursery.stateObserver.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
         notificationCenter.post(name: UIApplication.didBecomeActiveNotification, object: nil)
-        authMgr.notificationsCompletion?(.allowed)
+        authorizationManager.notificationsCompletion?(.allowed)
         
         let expectation = XCTestExpectation(description: "Presented view controller became nil")
         var done = false
@@ -185,36 +192,6 @@ class RootViewControllerTests: TestCase {
         wait(for: [expectation], timeout: 2.0)
         done = true
     }
-}
-
-fileprivate func makeRootVC(
-    persistence: Persisting = PersistenceDouble(),
-    authorizationManager: AuthorizationManaging = AuthorizationManagerDouble(),
-    remoteNotificationDispatcher: RemoteNotificationDispatcher = makeDispatcher(),
-    notificationCenter: NotificationCenter = NotificationCenter(),
-    bluetoothNursery: BluetoothNursery = BluetoothNurseryDouble()
-) -> RootViewController {
-    let vc = RootViewController()
-    let onboardingCoordinator = OnboardingCoordinator(
-        persistence: persistence,
-        authorizationManager: authorizationManager,
-        bluetoothNursery: bluetoothNursery
-    )
-    vc.inject(
-        persistence: persistence,
-        authorizationManager: authorizationManager,
-        remoteNotificationManager: RemoteNotificationManagerDouble(dispatcher: remoteNotificationDispatcher),
-        notificationCenter: notificationCenter,
-        registrationService: RegistrationServiceDouble(),
-        bluetoothNursery: bluetoothNursery,
-        onboardingCoordinator: onboardingCoordinator,
-        session: SessionDouble(),
-        contactEventsUploader: ContactEventsUploaderDouble(),
-        linkingIdManager: LinkingIdManagerDouble.make(),
-        statusProvider: StatusProvider(persisting: persistence),
-        uiQueue: QueueDouble()
-    )
-    return vc
 }
 
 fileprivate func makeDispatcher() -> RemoteNotificationDispatcher {
