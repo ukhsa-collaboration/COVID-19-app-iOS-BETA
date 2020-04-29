@@ -21,11 +21,11 @@ jobs:
       - name: Check if we have commits to upload
         id: check-upload-tag
         run: |
-          git fetch origin test-flight
-          git checkout test-flight
-          git tag -d upload-to-test-flight || true
+          git fetch origin internal
+          git checkout internal
+          git tag -d upload-to-internal || true
           git fetch --tags
-          git branch --contains tags/upload-to-test-flight | grep test-flight || echo "::set-output name=upload::true"
+          git branch --contains tags/upload-to-internal | grep internal || echo "::set-output name=upload::true"
 
       - name: Trigger deployment
         if: steps.check-upload-tag.outputs.upload == 'true'

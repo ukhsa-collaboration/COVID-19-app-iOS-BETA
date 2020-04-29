@@ -17,10 +17,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Merge master into test-flight
+      - name: Merge master into deployment branch
         run: |
-          git fetch origin test-flight
-          git checkout test-flight
+          git fetch origin ${{ github.event.deployment.environment }}
+          git checkout ${{ github.event.deployment.environment }}
           git merge ${{ github.sha }}
 
       - name: Bump Version
@@ -29,10 +29,10 @@ jobs:
       - name: Commit Version Bump
         run: ./bin/commit-version-bump
 
-      - name: Push test-flight Branch
+      - name: Push deployment Branch
         run: |
           git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-          git push origin test-flight
+          git push origin ${{ github.event.deployment.environment }}
 
       - name: Notify Slack on Failure
         if: failure()
@@ -53,7 +53,7 @@ jobs:
       - name: Checkout Project
         uses: actions/checkout@v2
         with:
-          ref: test-flight
+          ref: ${{ github.event.deployment.environment }}
 
       - name: Switch to Xcode 11
         run: sudo xcode-select -s /Applications/Xcode_11.app
