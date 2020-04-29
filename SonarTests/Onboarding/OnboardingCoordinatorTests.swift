@@ -11,47 +11,45 @@ import CoreBluetooth
 @testable import Sonar
 
 class OnboardingCoordinatorTests: TestCase {
-
-    func testInitialState() {
-        let persistenceDouble = PersistenceDouble()
-        let authManagerDouble = AuthorizationManagerDouble()
-        let onboardingCoordinator = OnboardingCoordinator(
+    
+    private var persistenceDouble: PersistenceDouble!
+    private var authManagerDouble: AuthorizationManagerDouble!
+    private var bluetoothNursery: BluetoothNurseryDouble!
+    private var onboardingCoordinator: OnboardingCoordinator!
+    
+    override func setUp() {
+        super.setUp()
+        
+        persistenceDouble = PersistenceDouble()
+        authManagerDouble = AuthorizationManagerDouble()
+        bluetoothNursery = BluetoothNurseryDouble()
+        
+        onboardingCoordinator = OnboardingCoordinator(
             persistence: persistenceDouble,
             authorizationManager: authManagerDouble,
-            bluetoothNursery: BluetoothNurseryDouble()
+            bluetoothNursery: bluetoothNursery
         )
+    }
 
+    func testInitialState() {
         var state: OnboardingCoordinator.State?
         onboardingCoordinator.state { state = $0 }
         XCTAssertEqual(state, .initial)
     }
 
     func testPostcode() {
-        let persistenceDouble = PersistenceDouble(partialPostcode: nil)
-        let onboardingCoordinator = OnboardingCoordinator(
-            persistence: persistenceDouble,
-            authorizationManager: AuthorizationManagerDouble(),
-            bluetoothNursery: BluetoothNurseryDouble()
-        )
-
         advancePastInitialScreen(onboardingCoordinator)
 
         var state: OnboardingCoordinator.State?
         onboardingCoordinator.state { state = $0 }
 
         XCTAssertEqual(state, .partialPostcode)
-
     }
 
     func testPermissions_bluetoothNotDetermined() {
-        let persistenceDouble = PersistenceDouble(partialPostcode: "1234")
-        let authManagerDouble = AuthorizationManagerDouble(bluetooth: .notDetermined)
-        let onboardingCoordinator = OnboardingCoordinator(
-            persistence: persistenceDouble,
-            authorizationManager: authManagerDouble,
-            bluetoothNursery: BluetoothNurseryDouble()
-        )
-
+        persistenceDouble.partialPostcode = "1234"
+        authManagerDouble.bluetooth = .notDetermined
+        
         var state: OnboardingCoordinator.State?
         onboardingCoordinator.state { state = $0 }
 
@@ -59,13 +57,8 @@ class OnboardingCoordinatorTests: TestCase {
     }
     
     func testBluetoothDenied() {
-        let persistenceDouble = PersistenceDouble(partialPostcode: "1234")
-        let authManagerDouble = AuthorizationManagerDouble(bluetooth: .denied)
-        let onboardingCoordinator = OnboardingCoordinator(
-            persistence: persistenceDouble,
-            authorizationManager: authManagerDouble,
-            bluetoothNursery: BluetoothNurseryDouble()
-        )
+        persistenceDouble.partialPostcode = "1234"
+        authManagerDouble.bluetooth = .denied
 
         var state: OnboardingCoordinator.State?
         onboardingCoordinator.state { state = $0 }
@@ -74,14 +67,8 @@ class OnboardingCoordinatorTests: TestCase {
     }
         
     func testBluetoothOff() {
-        let persistenceDouble = PersistenceDouble(partialPostcode: "1234")
-        let authManagerDouble = AuthorizationManagerDouble(bluetooth: .allowed)
-        let bluetoothNursery = BluetoothNurseryDouble()
-        let onboardingCoordinator = OnboardingCoordinator(
-            persistence: persistenceDouble,
-            authorizationManager: authManagerDouble,
-            bluetoothNursery: bluetoothNursery
-        )
+        persistenceDouble.partialPostcode = "1234"
+        authManagerDouble.bluetooth = .allowed
         
         bluetoothNursery.startBluetooth(registration: nil)
 
@@ -94,14 +81,8 @@ class OnboardingCoordinatorTests: TestCase {
     }
 
     func testPermissions_bluetoothGranted_notficationsNotDetermined() {
-        let persistenceDouble = PersistenceDouble(partialPostcode: "1234")
-        let authManagerDouble = AuthorizationManagerDouble(bluetooth: .allowed)
-        let bluetoothNursery = BluetoothNurseryDouble()
-        let onboardingCoordinator = OnboardingCoordinator(
-            persistence: persistenceDouble,
-            authorizationManager: authManagerDouble,
-            bluetoothNursery: bluetoothNursery
-        )
+        persistenceDouble.partialPostcode = "1234"
+        authManagerDouble.bluetooth = .allowed
 
         bluetoothNursery.startBluetooth(registration: nil)
 
@@ -114,14 +95,8 @@ class OnboardingCoordinatorTests: TestCase {
     }
     
     func testDoesNotGetStuckOnBluetoothWhenAuthorizedButNotStarted() {
-        let persistenceDouble = PersistenceDouble(partialPostcode: "1234")
-        let authManagerDouble = AuthorizationManagerDouble(bluetooth: .allowed)
-        let bluetoothNursery = BluetoothNurseryDouble()
-        let onboardingCoordinator = OnboardingCoordinator(
-            persistence: persistenceDouble,
-            authorizationManager: authManagerDouble,
-            bluetoothNursery: bluetoothNursery
-        )
+        persistenceDouble.partialPostcode = "1234"
+        authManagerDouble.bluetooth = .allowed
 
         XCTAssertFalse(bluetoothNursery.hasStarted)
 
@@ -136,15 +111,9 @@ class OnboardingCoordinatorTests: TestCase {
     }
     
     func testNotificationsDenied() {
-        let persistenceDouble = PersistenceDouble(partialPostcode: "1234")
-        let authManagerDouble = AuthorizationManagerDouble(bluetooth: .allowed)
-        let bluetoothNursery = BluetoothNurseryDouble()
-        let onboardingCoordinator = OnboardingCoordinator(
-            persistence: persistenceDouble,
-            authorizationManager: authManagerDouble,
-            bluetoothNursery: bluetoothNursery
-        )
-        
+        persistenceDouble.partialPostcode = "1234"
+        authManagerDouble.bluetooth = .allowed
+
         bluetoothNursery.startBluetooth(registration: nil)
 
         var state: OnboardingCoordinator.State?
@@ -155,14 +124,8 @@ class OnboardingCoordinatorTests: TestCase {
     }
 
     func testDone() {
-        let persistenceDouble = PersistenceDouble(partialPostcode: "1234")
-        let authManagerDouble = AuthorizationManagerDouble(bluetooth: .allowed)
-        let bluetoothNursery = BluetoothNurseryDouble()
-        let onboardingCoordinator = OnboardingCoordinator(
-            persistence: persistenceDouble,
-            authorizationManager: authManagerDouble,
-            bluetoothNursery: bluetoothNursery
-        )
+        persistenceDouble.partialPostcode = "1234"
+        authManagerDouble.bluetooth = .allowed
 
         var state: OnboardingCoordinator.State?
         onboardingCoordinator.state { state = $0 }
