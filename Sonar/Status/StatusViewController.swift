@@ -226,6 +226,8 @@ class StatusViewController: UIViewController, Storyboarded {
         registrationStatusText.textColor = UIColor(named: "NHS Text")
         registratonStatusView.backgroundColor = nil
         registrationRetryButton.isHidden = true
+
+        UIAccessibility.post(notification: .layoutChanged, argument: registratonStatusView)
     }
     
     @objc private func showRegistrationFailedStatus() {
@@ -235,6 +237,8 @@ class StatusViewController: UIViewController, Storyboarded {
         registrationStatusText.textColor = UIColor.white
         registratonStatusView.backgroundColor = UIColor(named: "Error Grey")
         registrationRetryButton.isHidden = false
+
+        UIAccessibility.post(notification: .layoutChanged, argument: registratonStatusView)
     }
     
     private func showRegisteringStatus() {
