@@ -10,7 +10,14 @@ import CoreBluetooth
 import Foundation
 import Logging
 
-class OnboardingCoordinator {
+protocol OnboardingCoordinating {
+    typealias State = OnboardingCoordinator.State
+    
+    var isOnboardingRequired: Bool { get }
+    func state(completion: @escaping (State) -> Void)
+}
+
+class OnboardingCoordinator: OnboardingCoordinating {
     private typealias BluetoothCompletion = (State?) -> Void
 
     enum State: Equatable {

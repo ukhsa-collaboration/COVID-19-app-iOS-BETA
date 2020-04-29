@@ -12,12 +12,12 @@ class OnboardingViewController: UINavigationController, Storyboarded {
     static let storyboardName = "Onboarding"
 
     private var environment: OnboardingEnvironment! = nil
-    private var onboardingCoordinator: OnboardingCoordinator! = nil
+    private var onboardingCoordinator: OnboardingCoordinating! = nil
     private var bluetoothNursery: BluetoothNursery! = nil
     private var completionHandler: (() -> Void)! = nil
     private var uiQueue: TestableQueue! = nil
 
-    func inject(env: OnboardingEnvironment, coordinator: OnboardingCoordinator, bluetoothNursery: BluetoothNursery, uiQueue: TestableQueue, completionHandler: @escaping () -> Void) {
+    func inject(env: OnboardingEnvironment, coordinator: OnboardingCoordinating, bluetoothNursery: BluetoothNursery, uiQueue: TestableQueue, completionHandler: @escaping () -> Void) {
         self.environment = env
         self.onboardingCoordinator = coordinator
         self.bluetoothNursery = bluetoothNursery
@@ -51,7 +51,7 @@ class OnboardingViewController: UINavigationController, Storyboarded {
         }
     }
 
-    private func handle(state: OnboardingCoordinator.State) {
+    private func handle(state: OnboardingCoordinating.State) {
         let vc: UIViewController
         switch state {
         case .initial:

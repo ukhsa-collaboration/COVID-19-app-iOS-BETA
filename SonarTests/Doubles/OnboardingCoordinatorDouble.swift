@@ -8,12 +8,10 @@
 
 @testable import Sonar
 
-class OnboardingCoordinatorDouble: OnboardingCoordinator {
-    convenience init() {
-        self.init(persistence: PersistenceDouble(), authorizationManager: AuthorizationManager(), bluetoothNursery: BluetoothNurseryDouble())
-    }
+class OnboardingCoordinatorDouble: OnboardingCoordinating {
+    var isOnboardingRequired = true
     var stateCompletion: ((OnboardingCoordinator.State) -> Void)?
-    override func state(completion: @escaping (OnboardingCoordinator.State) -> Void) {
+    func state(completion: @escaping (OnboardingCoordinator.State) -> Void) {
         stateCompletion = completion
     }
 }
