@@ -31,6 +31,10 @@ class OnboardingCoordinator {
         self.authorizationManager = authorizationManager
         self.bluetoothNursery = bluetoothNursery
     }
+    
+    var isOnboardingRequired: Bool {
+        persistence.registration == nil
+    }
 
     func state(completion: @escaping (State) -> Void) {
         guard hasShownInitialScreen || persistence.partialPostcode != nil else {

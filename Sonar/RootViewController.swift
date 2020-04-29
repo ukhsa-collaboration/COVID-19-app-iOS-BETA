@@ -75,12 +75,17 @@ class RootViewController: UIViewController {
     
     // MARK: - Routing
     func showFirstView() {
-        if persistence.registration != nil {
+        let coordinator = OnboardingCoordinator(
+            persistence: persistence,
+            authorizationManager: authorizationManager,
+            bluetoothNursery: bluetoothNursery
+        )
+        
+        if !coordinator.isOnboardingRequired {
             show(viewController: statusViewController)
         } else {
             let onboardingViewController = OnboardingViewController.instantiate()
             let env = OnboardingEnvironment(persistence: persistence, authorizationManager: authorizationManager, remoteNotificationManager: remoteNotificationManager, notificationCenter: NotificationCenter.default)
-            let coordinator = OnboardingCoordinator(persistence: persistence, authorizationManager: authorizationManager, bluetoothNursery: bluetoothNursery)
             
             onboardingViewController.inject(env: env, coordinator: coordinator, bluetoothNursery: bluetoothNursery, uiQueue: self.uiQueue) {
                 self.show(viewController: self.statusViewController)

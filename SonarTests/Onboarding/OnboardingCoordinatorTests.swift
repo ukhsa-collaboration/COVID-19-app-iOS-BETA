@@ -30,6 +30,15 @@ class OnboardingCoordinatorTests: TestCase {
             bluetoothNursery: bluetoothNursery
         )
     }
+    
+    func testOnboardingIsRequiredWithoutRegistration() {
+        XCTAssert(onboardingCoordinator.isOnboardingRequired)
+    }
+
+    func testOnboardingIsNotRequiredWhenWeHaveRegistration() {
+        persistenceDouble.registration = .fake
+        XCTAssertFalse(onboardingCoordinator.isOnboardingRequired)
+    }
 
     func testInitialState() {
         var state: OnboardingCoordinator.State?
