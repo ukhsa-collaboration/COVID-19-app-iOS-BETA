@@ -28,10 +28,6 @@ struct UITestScreenMaker: ScreenMaking {
     }
 }
 
-class DummyRootViewController: UIViewController, ViewControllerContainer {
-    func show(viewController newChild: UIViewController) { }
-}
-
 private extension OnboardingEnvironment {
     
     convenience init(mockWithHost host: UIViewController) {

@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol ViewControllerContainer {
-    func show(viewController: UIViewController)
-}
-
 class RootViewController: UIViewController {
 
     private var persistence: Persisting! = nil
@@ -176,7 +172,7 @@ class RootViewController: UIViewController {
 }
 
  
-extension RootViewController: ViewControllerContainer {
+extension RootViewController {
     func show(viewController newChild: UIViewController) {
         children.first?.willMove(toParent: nil)
         children.first?.viewIfLoaded?.removeFromSuperview()

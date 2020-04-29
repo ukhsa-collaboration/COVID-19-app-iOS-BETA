@@ -39,7 +39,6 @@
 		09B103642444EAB80091834D /* ContactEventRepositoryDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B103632444EAB80091834D /* ContactEventRepositoryDouble.swift */; };
 		09CAA3662440F3B100CE93A6 /* PostcodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CAA3652440F3B100CE93A6 /* PostcodeViewController.swift */; };
 		09CAA36A2440FC4500CE93A6 /* PostcodeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CAA3692440FC4500CE93A6 /* PostcodeViewControllerTests.swift */; };
-		09CAA36C24413E0700CE93A6 /* ViewControllerContainerDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CAA36B24413E0700CE93A6 /* ViewControllerContainerDouble.swift */; };
 		09D027CC24521542006EE07E /* BluetoothStateObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D027CB24521542006EE07E /* BluetoothStateObserver.swift */; };
 		09D027CE2452157D006EE07E /* BluetoothStateObserverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D027CD2452157D006EE07E /* BluetoothStateObserverTests.swift */; };
 		09D91A7724521C5C004825A5 /* BluetoothNurseryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D91A7624521C5C004825A5 /* BluetoothNurseryTests.swift */; };
@@ -260,7 +259,6 @@
 		09B103632444EAB80091834D /* ContactEventRepositoryDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventRepositoryDouble.swift; sourceTree = "<group>"; };
 		09CAA3652440F3B100CE93A6 /* PostcodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostcodeViewController.swift; sourceTree = "<group>"; };
 		09CAA3692440FC4500CE93A6 /* PostcodeViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostcodeViewControllerTests.swift; sourceTree = "<group>"; };
-		09CAA36B24413E0700CE93A6 /* ViewControllerContainerDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerContainerDouble.swift; sourceTree = "<group>"; };
 		09D027CB24521542006EE07E /* BluetoothStateObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothStateObserver.swift; sourceTree = "<group>"; };
 		09D027CD2452157D006EE07E /* BluetoothStateObserverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothStateObserverTests.swift; sourceTree = "<group>"; };
 		09D91A7624521C5C004825A5 /* BluetoothNurseryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothNurseryTests.swift; sourceTree = "<group>"; };
@@ -552,7 +550,6 @@
 				F64D76FA2457827400B1D495 /* StatusProviderDouble.swift */,
 				89CCF65E2456EF7000AC9D91 /* TrustValidatingDouble.swift */,
 				090B1870243552C300870B5D /* UserNotificationCenterDouble.swift */,
-				09CAA36B24413E0700CE93A6 /* ViewControllerContainerDouble.swift */,
 				1376776E2458488900197F8E /* SchedulerDouble.swift */,
 			);
 			path = Doubles;
@@ -1242,7 +1239,6 @@
 				F64D76FB2457827400B1D495 /* StatusProviderDouble.swift in Sources */,
 				095A91182434FF1500ED6369 /* ApplicationDouble.swift in Sources */,
 				89CCF6612456F07400AC9D91 /* URLAuthenticationChallenge.swift in Sources */,
-				09CAA36C24413E0700CE93A6 /* ViewControllerContainerDouble.swift in Sources */,
 				09D91A7924522133004825A5 /* BTLEListenerDouble.swift in Sources */,
 				F632792324351C8400CF7A42 /* OnboardingCoordinatorDouble.swift in Sources */,
 				21F37402243384D400926FB8 /* PersistingContactEventRepositoryTests.swift in Sources */,
