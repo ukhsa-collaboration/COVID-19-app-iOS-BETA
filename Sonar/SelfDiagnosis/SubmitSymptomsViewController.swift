@@ -70,6 +70,11 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
                     
             if symptoms.contains(.temperature) || (hasCough && !selfDiagnosis.hasExpired()) {
                 try contactEventsUploader.upload()
+                if selfDiagnosis.hasExpired() {
+                    selfDiagnosis = SelfDiagnosis(symptoms: symptoms, startDate: Date())
+                    selfDiagnosis.expiresIn(days: 1)
+                }
+                print(selfDiagnosis)
                 persisting.selfDiagnosis = selfDiagnosis
                 localNotificationScheduler.scheduleDiagnosisNotification(expiryDate: selfDiagnosis.expiryDate)
             } else {
