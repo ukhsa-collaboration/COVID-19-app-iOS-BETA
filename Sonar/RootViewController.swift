@@ -16,6 +16,7 @@ class RootViewController: UIViewController {
     private var notificationCenter: NotificationCenter! = nil
     private var registrationService: RegistrationService! = nil
     private var bluetoothNursery: BluetoothNursery!
+    private var onboardingCoordinator: OnboardingCoordinating!
     private var session: Session!
     private var contactEventsUploader: ContactEventsUploader!
     private var uiQueue: TestableQueue! = nil
@@ -31,6 +32,7 @@ class RootViewController: UIViewController {
         notificationCenter: NotificationCenter,
         registrationService: RegistrationService,
         bluetoothNursery: BluetoothNursery,
+        onboardingCoordinator: OnboardingCoordinating,
         session: Session,
         contactEventsUploader: ContactEventsUploader,
         linkingIdManager: LinkingIdManager,
@@ -43,6 +45,7 @@ class RootViewController: UIViewController {
         self.notificationCenter = notificationCenter
         self.registrationService = registrationService
         self.bluetoothNursery = bluetoothNursery
+        self.onboardingCoordinator = onboardingCoordinator
         self.session = session
         self.contactEventsUploader = contactEventsUploader
         self.uiQueue = uiQueue
@@ -75,19 +78,13 @@ class RootViewController: UIViewController {
     
     // MARK: - Routing
     func showFirstView() {
-        let coordinator = OnboardingCoordinator(
-            persistence: persistence,
-            authorizationManager: authorizationManager,
-            bluetoothNursery: bluetoothNursery
-        )
-        
-        if !coordinator.isOnboardingRequired {
+        if !onboardingCoordinator.isOnboardingRequired {
             show(viewController: statusViewController)
         } else {
             let onboardingViewController = OnboardingViewController.instantiate()
             let env = OnboardingEnvironment(persistence: persistence, authorizationManager: authorizationManager, remoteNotificationManager: remoteNotificationManager, notificationCenter: NotificationCenter.default)
             
-            onboardingViewController.inject(env: env, coordinator: coordinator, bluetoothNursery: bluetoothNursery, uiQueue: self.uiQueue) {
+            onboardingViewController.inject(env: env, coordinator: onboardingCoordinator, bluetoothNursery: bluetoothNursery, uiQueue: self.uiQueue) {
                 self.show(viewController: self.statusViewController)
             }
             

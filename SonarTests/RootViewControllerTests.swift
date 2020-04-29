@@ -195,6 +195,11 @@ fileprivate func makeRootVC(
     bluetoothNursery: BluetoothNursery = BluetoothNurseryDouble()
 ) -> RootViewController {
     let vc = RootViewController()
+    let onboardingCoordinator = OnboardingCoordinator(
+        persistence: persistence,
+        authorizationManager: authorizationManager,
+        bluetoothNursery: bluetoothNursery
+    )
     vc.inject(
         persistence: persistence,
         authorizationManager: authorizationManager,
@@ -202,6 +207,7 @@ fileprivate func makeRootVC(
         notificationCenter: notificationCenter,
         registrationService: RegistrationServiceDouble(),
         bluetoothNursery: bluetoothNursery,
+        onboardingCoordinator: onboardingCoordinator,
         session: SessionDouble(),
         contactEventsUploader: ContactEventsUploaderDouble(),
         linkingIdManager: LinkingIdManagerDouble.make(),

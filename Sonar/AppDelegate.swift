@@ -52,7 +52,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     )
 
     lazy var bluetoothNursery: BluetoothNursery = ConcreteBluetoothNursery(persistence: persistence, userNotificationCenter: userNotificationCenter, notificationCenter: notificationCenter)
-
+    
+    lazy var onboardingCoordinator: OnboardingCoordinating = OnboardingCoordinator(
+        persistence: persistence,
+        authorizationManager: authorizationManager,
+        bluetoothNursery: bluetoothNursery
+    )
+    
     lazy var contactEventsUploader: ContactEventsUploader = ContactEventsUploader(
         persisting: persistence,
         contactEventRepository: bluetoothNursery.contactEventRepository,
@@ -112,6 +118,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             notificationCenter: notificationCenter,
             registrationService: registrationService,
             bluetoothNursery: bluetoothNursery,
+            onboardingCoordinator: onboardingCoordinator,
             session: urlSession,
             contactEventsUploader: contactEventsUploader,
             linkingIdManager: linkingIdManager,
