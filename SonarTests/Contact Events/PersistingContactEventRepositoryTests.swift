@@ -21,22 +21,17 @@ class PersistingContactEventRepositoryTests: XCTestCase {
     
     var listener: BTLEListenerDouble!
     var persister: ContactEventPersisterDouble!
+    var delegate: MockContactEventRepositoryDelegate!
     var repository: PersistingContactEventRepository!
 
     override func setUp() {
         listener = BTLEListenerDouble()
         persister = ContactEventPersisterDouble()
+        delegate = MockContactEventRepositoryDelegate()
         repository = PersistingContactEventRepository(persister: persister)
+        repository.delegate = delegate
     }
 
-    func testLiveUpdatePropertyForDebugViewIsMaintained() {
-        repository.btleListener(listener, didFind: broadcastId1, forPeripheral: peripheral1)
-        repository.btleListener(listener, didFind: broadcastId2, forPeripheral: peripheral2)
-        repository.btleListener(listener, didFind: broadcastId3, forPeripheral: peripheral3)
-
-        XCTAssertEqual(3, repository._contactEventCount)
-    }
-    
     func testRecordsRSSIValuesAgainstCorrectPeripheral() {
         repository.btleListener(listener, didFind: broadcastId1, forPeripheral: peripheral1)
 
@@ -55,6 +50,13 @@ class PersistingContactEventRepositoryTests: XCTestCase {
         XCTAssertEqual(repository.contactEvents.first(where: { $0.encryptedRemoteContactId == broadcastId1 })?.rssiValues, [11, 12, 13])
         XCTAssertEqual(repository.contactEvents.first(where: { $0.encryptedRemoteContactId == broadcastId2 })?.rssiValues, [21, 22, 23])
         XCTAssertEqual(repository.contactEvents.first(where: { $0.encryptedRemoteContactId == broadcastId3 })?.rssiValues, [31, 32, 33])
+        
+        XCTAssertEqual(delegate.broadcastIds[peripheral1.identifier], broadcastId1)
+        XCTAssertEqual(delegate.broadcastIds[peripheral2.identifier], broadcastId2)
+        XCTAssertEqual(delegate.broadcastIds[peripheral3.identifier], broadcastId3)
+        XCTAssertEqual(delegate.rssiValues[peripheral1.identifier], [11, 12, 13])
+        XCTAssertEqual(delegate.rssiValues[peripheral2.identifier], [21, 22, 23])
+        XCTAssertEqual(delegate.rssiValues[peripheral3.identifier], [31, 32, 33])
     }
     
     func testResetResetsUnderlyingPersister() {
@@ -102,4 +104,22 @@ class PersistingContactEventRepositoryTests: XCTestCase {
 
 fileprivate struct TestPeripheral: BTLEPeripheral {
     let identifier: UUID
+}
+
+class MockContactEventRepositoryDelegate: ContactEventRepositoryDelegate {
+    
+    var broadcastIds: [UUID: Data] = [:]
+    var rssiValues: [UUID: [Int]] = [:]
+    
+    func repository(_ repository: ContactEventRepository, didRecordBroadcastId broadcastId: Data, forPeripheral peripheral: BTLEPeripheral) {
+        broadcastIds[peripheral.identifier] = broadcastId
+    }
+    
+    func repository(_ repository: ContactEventRepository, didRecordRSSI RSSI: Int, forPeripheral peripheral: BTLEPeripheral) {
+        if rssiValues[peripheral.identifier] == nil {
+            rssiValues[peripheral.identifier] = []
+        }
+        rssiValues[peripheral.identifier]?.append(RSSI)
+    }
+    
 }

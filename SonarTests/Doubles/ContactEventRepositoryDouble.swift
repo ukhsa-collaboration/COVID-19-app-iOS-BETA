@@ -11,6 +11,8 @@ import Foundation
 
 class ContactEventRepositoryDouble: ContactEventRepository {
     var contactEvents: [ContactEvent]
+    
+    var delegate: ContactEventRepositoryDelegate?
 
     init(contactEvents: [ContactEvent] = []) {
         self.contactEvents = contactEvents

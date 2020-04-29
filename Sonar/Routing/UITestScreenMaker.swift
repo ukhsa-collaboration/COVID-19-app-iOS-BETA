@@ -154,6 +154,8 @@ private class NoOpBluetoothNursery: BluetoothNursery {
 
 private class NoOpContactEventRepository: ContactEventRepository {
     var contactEvents: [ContactEvent] = []
+    
+    var delegate: ContactEventRepositoryDelegate?
 
     func btleListener(_ listener: BTLEListener, didFind sonarId: Data, forPeripheral peripheral: BTLEPeripheral) {
     }

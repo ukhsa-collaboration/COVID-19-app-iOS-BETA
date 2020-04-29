@@ -9,8 +9,17 @@
 import Foundation
 import Logging
 
+protocol ContactEventRepositoryDelegate {
+    
+    func repository(_ repository: ContactEventRepository, didRecordBroadcastId broadcastId: Data, forPeripheral peripheral: BTLEPeripheral)
+    
+    func repository(_ repository: ContactEventRepository, didRecordRSSI RSSI: Int, forPeripheral peripheral: BTLEPeripheral)
+
+}
+
 protocol ContactEventRepository: BTLEListenerDelegate {
     var contactEvents: [ContactEvent] { get }
+    var delegate: ContactEventRepositoryDelegate? { get set }
     func reset()
     func remove(through date: Date)
     func removeExpiredContactEvents(ttl: Double)
@@ -26,13 +35,11 @@ extension PlistPersister: ContactEventPersister where K == UUID, V == ContactEve
 
 @objc class PersistingContactEventRepository: NSObject, ContactEventRepository {
     
-    @objc dynamic public var _contactEventCount: Int {
-        return persister.items.count
-    }
-    
     public var contactEvents: [ContactEvent] {
         return Array(persister.items.values)
     }
+
+    public var delegate: ContactEventRepositoryDelegate?
     
     private var persister: ContactEventPersister
     
@@ -60,6 +67,7 @@ extension PlistPersister: ContactEventPersister where K == UUID, V == ContactEve
             persister.items[peripheral.identifier] = ContactEvent()
         }
         persister.items[peripheral.identifier]?.encryptedRemoteContactId = remoteEncryptedBroadcastId
+        delegate?.repository(self, didRecordBroadcastId: remoteEncryptedBroadcastId, forPeripheral: peripheral)
     }
     
     func btleListener(_ listener: BTLEListener, didReadRSSI RSSI: Int, forPeripheral peripheral: BTLEPeripheral) {
@@ -67,6 +75,7 @@ extension PlistPersister: ContactEventPersister where K == UUID, V == ContactEve
             persister.items[peripheral.identifier] = ContactEvent()
         }
         persister.items[peripheral.identifier]?.recordRSSI(RSSI)
+        delegate?.repository(self, didRecordRSSI: RSSI, forPeripheral: peripheral)
     }
 
 }
