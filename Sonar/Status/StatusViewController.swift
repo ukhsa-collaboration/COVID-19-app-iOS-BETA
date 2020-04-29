@@ -198,6 +198,7 @@ class StatusViewController: UIViewController, Storyboarded {
         diagnosisStatusView.accessibilityLabel = "\(diagnosisTitleLabel.text!) \(readLatestAdviceLabel.text!)"
         
         if let diagnosis = persistence.selfDiagnosis, diagnosis.hasExpired() {
+            localNotificationScheduler.removePendingDiagnosisNotification()
             let symptomsPromptViewController = SymptomsPromptViewController.instantiate()
             symptomsPromptViewController.modalPresentationStyle = .custom
             symptomsPromptViewController.transitioningDelegate = drawerPresentationManager

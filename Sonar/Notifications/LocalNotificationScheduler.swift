@@ -26,7 +26,8 @@ class LocalNotifcationScheduler: Scheduler {
         content.title = "How are you feeling today?"
         content.body = "Open the app to update your symptoms and view the latest advice."
         
-        let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.current.dateComponents(in: .current, from: expiryDate), repeats: false)
+        let components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: expiryDate)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
         userNotificationCenter.add(request, withCompletionHandler: nil)
     }
