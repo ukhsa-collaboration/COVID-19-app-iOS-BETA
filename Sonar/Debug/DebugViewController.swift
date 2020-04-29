@@ -100,8 +100,12 @@ class DebugViewController: UITableViewController, Storyboarded {
 
         case (1, 1), (1, 2):
             break
-            
+
         case (1, 3):
+            persisting.acknowledgmentUrls = []
+            show(title: "Cleared", message: "Notification ACKs cleared")
+
+        case (1, 4):
             kill(getpid(), SIGINT)
             
 
