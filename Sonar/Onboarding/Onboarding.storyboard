@@ -647,7 +647,7 @@
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pSJ-Zi-FRG">
                                                 <rect key="frame" x="20" y="226.66666666666671" width="374" height="284.33333333333326"/>
-                                                <string key="text">This app works only if have Bluetooth on at all times and if you give the app the permission to use it.
+                                                <string key="text">This app works only if you have Bluetooth on at all times and if you give the app the permission to use it.
 
 NHS Coronavirus works using Bluetooth signals, to determine when you have been near someone else with this app who shows symptoms of Coronavirus. NHS Coronavirus can alert you or others that may be at risk.
 
@@ -820,7 +820,7 @@ To enable this app to send you notification you need to go to your Settings, tap
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qch-lc-oMz">
                                                 <rect key="frame" x="20" y="185.66666666666666" width="374" height="262.33333333333337"/>
-                                                <string key="text">This app works only if have your Bluetooth on at all times.
+                                                <string key="text">This app works only if you have your Bluetooth on at all times.
 
 NHS Coronavirus works using Bluetooth signals, to determine when you have been near someone else with this app who shows symptoms of Coronavirus. NHS Coronavirus can alert you or others that may be at risk.
 
