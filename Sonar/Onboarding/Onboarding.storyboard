@@ -639,7 +639,6 @@
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hBt-VR-GUU" customClass="PrimaryButton" customModule="Sonar" customModuleProvider="target">
                                                 <rect key="frame" x="20" y="768" width="374" height="30"/>
-                                                <accessibility key="accessibilityConfiguration" label="Continue"/>
                                                 <state key="normal" title="Go to your Settings"/>
                                                 <connections>
                                                     <action selector="settingsTapped:" destination="zi2-er-oJ5" eventType="touchUpInside" id="xCF-Iw-IPa"/>
