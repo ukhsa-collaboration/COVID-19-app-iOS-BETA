@@ -18,7 +18,6 @@ class OnboardingViewController: UINavigationController, Storyboarded {
     private var uiQueue: TestableQueue! = nil
 
     func showIn(container: ViewControllerContainer) {
-        updateState()
         container.show(viewController: self)
     }
 
@@ -41,6 +40,7 @@ class OnboardingViewController: UINavigationController, Storyboarded {
         (viewControllers.first as! StartNowViewController).inject(persistence: environment.persistence,
                                                                   notificationCenter: environment.notificationCenter,
                                                                   continueHandler: updateState)
+        updateState()
     }
 
     @IBAction func unwindFromPermissionsDenied(unwindSegue: UIStoryboardSegue) {

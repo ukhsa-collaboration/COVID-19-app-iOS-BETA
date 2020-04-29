@@ -23,12 +23,6 @@ struct UITestScreenMaker: ScreenMaking {
                 viewController.inject(env: env, coordinator: coordinator, bluetoothNursery: bluetoothNursery, uiQueue: DispatchQueue.main) { }
             }
 
-            // This cludgey step is ensures that we "show" the onboarding view controller
-            // which triggers the initial state to be requested from its onboarding coordinator
-            // if we don't do this step then the first two onboarding screens are repeated twice
-            let dummyRootViewController = DummyRootViewController()
-            onboardingViewController.showIn(container: dummyRootViewController)
-
             return onboardingViewController
         }
     }
