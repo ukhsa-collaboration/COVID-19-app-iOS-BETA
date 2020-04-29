@@ -11,4 +11,5 @@ import Foundation
 enum AppEvent {
     case providedPartialPostcode
     case registrationSucceeded
+    case onboardingCompleted
 }

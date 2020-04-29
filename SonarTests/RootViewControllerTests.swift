@@ -17,6 +17,7 @@ class RootViewControllerTests: TestCase {
     private var notificationCenter: NotificationCenter!
     private var bluetoothNursery: BluetoothNurseryDouble!
     private var onboardingCoordinator: OnboardingCoordinatorDouble!
+    private var monitor: AppMonitoringDouble!
     private var rootVC: RootViewController!
     
     override func setUp() {
@@ -28,6 +29,7 @@ class RootViewControllerTests: TestCase {
         notificationCenter = NotificationCenter()
         bluetoothNursery = BluetoothNurseryDouble()
         onboardingCoordinator = OnboardingCoordinatorDouble()
+        monitor = AppMonitoringDouble()
         
         rootVC = RootViewController()
         rootVC.inject(
@@ -38,6 +40,7 @@ class RootViewControllerTests: TestCase {
             registrationService: RegistrationServiceDouble(),
             bluetoothNursery: bluetoothNursery,
             onboardingCoordinator: onboardingCoordinator,
+            monitor: monitor,
             session: SessionDouble(),
             contactEventsUploader: ContactEventsUploaderDouble(),
             linkingIdManager: LinkingIdManagerDouble.make(),
@@ -52,6 +55,7 @@ class RootViewControllerTests: TestCase {
         
         XCTAssertEqual(rootVC.children.count, 1)
         XCTAssertNotNil(rootVC.children.first as? OnboardingViewController)
+        XCTAssertTrue(monitor.detectedEvents.isEmpty)
     }
     
     func testInitialVC_OnboardingNotRequired() {
@@ -60,6 +64,7 @@ class RootViewControllerTests: TestCase {
         
         XCTAssertEqual(rootVC.children.count, 1)
         XCTAssertNotNil(rootVC.children.first as? StatusViewController)
+        XCTAssertTrue(monitor.detectedEvents.isEmpty)
     }
     
     func testOnboardingFinished() {
@@ -71,6 +76,7 @@ class RootViewControllerTests: TestCase {
 
         XCTAssertEqual(rootVC.children.count, 1)
         XCTAssertNotNil(rootVC.children.first as? StatusViewController)
+        XCTAssertEqual(monitor.detectedEvents, [.onboardingCompleted])
     }
     
     func testShow() {

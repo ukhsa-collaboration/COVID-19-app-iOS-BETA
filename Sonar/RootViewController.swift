@@ -17,6 +17,7 @@ class RootViewController: UIViewController {
     private var registrationService: RegistrationService! = nil
     private var bluetoothNursery: BluetoothNursery!
     private var onboardingCoordinator: OnboardingCoordinating!
+    private var monitor: AppMonitoring!
     private var session: Session!
     private var contactEventsUploader: ContactEventsUploader!
     private var uiQueue: TestableQueue! = nil
@@ -33,6 +34,7 @@ class RootViewController: UIViewController {
         registrationService: RegistrationService,
         bluetoothNursery: BluetoothNursery,
         onboardingCoordinator: OnboardingCoordinating,
+        monitor: AppMonitoring,
         session: Session,
         contactEventsUploader: ContactEventsUploader,
         linkingIdManager: LinkingIdManager,
@@ -46,6 +48,7 @@ class RootViewController: UIViewController {
         self.registrationService = registrationService
         self.bluetoothNursery = bluetoothNursery
         self.onboardingCoordinator = onboardingCoordinator
+        self.monitor = monitor
         self.session = session
         self.contactEventsUploader = contactEventsUploader
         self.uiQueue = uiQueue
@@ -81,26 +84,31 @@ class RootViewController: UIViewController {
         show(viewController: UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateInitialViewController()!)
         
         onboardingCoordinator.determineIsOnboardingRequired { onboardingIsRequired in
-            if onboardingIsRequired {
-                let onboardingViewController = OnboardingViewController.instantiate()
-                let env = OnboardingEnvironment(
-                    persistence: self.persistence,
-                    authorizationManager: self.authorizationManager,
-                    remoteNotificationManager: self.remoteNotificationManager,
-                    notificationCenter: self.notificationCenter
-                )
-                
-                onboardingViewController.inject(
-                env: env,
-                coordinator: self.onboardingCoordinator,
-                bluetoothNursery: self.bluetoothNursery,
-                uiQueue: self.uiQueue) {
+            self.uiQueue.async {
+                if onboardingIsRequired {
+                    let onboardingViewController = OnboardingViewController.instantiate()
+                    let env = OnboardingEnvironment(
+                        persistence: self.persistence,
+                        authorizationManager: self.authorizationManager,
+                        remoteNotificationManager: self.remoteNotificationManager,
+                        notificationCenter: self.notificationCenter
+                    )
+                    
+                    onboardingViewController.inject(
+                        env: env,
+                        coordinator: self.onboardingCoordinator,
+                        bluetoothNursery: self.bluetoothNursery,
+                        uiQueue: self.uiQueue
+                    ) { [weak self] in
+                        guard let self = self else { return }
+                        self.monitor.report(.onboardingCompleted)
+                        self.show(viewController: self.statusViewController)
+                    }
+                    
+                    self.show(viewController: onboardingViewController)
+                } else {
                     self.show(viewController: self.statusViewController)
                 }
-                
-                self.show(viewController: onboardingViewController)
-            } else {
-                self.show(viewController: self.statusViewController)
             }
         }
     }

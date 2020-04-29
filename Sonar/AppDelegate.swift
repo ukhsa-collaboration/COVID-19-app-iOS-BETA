@@ -125,6 +125,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             registrationService: registrationService,
             bluetoothNursery: bluetoothNursery,
             onboardingCoordinator: onboardingCoordinator,
+            monitor: monitor,
             session: urlSession,
             contactEventsUploader: contactEventsUploader,
             linkingIdManager: linkingIdManager,
