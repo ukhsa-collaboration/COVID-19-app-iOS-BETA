@@ -65,12 +65,13 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
             navigationController?.dismiss(animated: true, completion: nil)
             
             let hasCough = symptoms.contains(.cough)
-            let selfDiagnosis = SelfDiagnosis(symptoms: symptoms, startDate: startDate, expiryDate: Date(timeInterval: 7 * 24 * 60 * 60, since: startDate))
+            var selfDiagnosis = SelfDiagnosis(symptoms: symptoms, startDate: startDate)
+            selfDiagnosis.expiresIn(days: 7)
                     
             if symptoms.contains(.temperature) || (hasCough && !selfDiagnosis.hasExpired()) {
                 try contactEventsUploader.upload()
                 persisting.selfDiagnosis = selfDiagnosis
-                localNotificationScheduler.scheduleDiagnosisNotification(days: 8)
+                localNotificationScheduler.scheduleDiagnosisNotification(expiryDate: selfDiagnosis.expiryDate)
             } else {
                 if hasCough {
                     statusViewController?.updatePrompt()

@@ -39,7 +39,7 @@ class ContactEventsUploaderTests: XCTestCase {
     func testUploadRequest() {
         let registration = Registration.fake
         let persisting = PersistenceDouble(
-            diagnosis: SelfDiagnosis(symptoms: [], startDate: Date(), expiryDate: Date()),
+            diagnosis: SelfDiagnosis(symptoms: [], startDate: Date()),
             registration: registration
         )
         let expectedBroadcastId = "opaque bytes that only the server can decrypt".data(using: .utf8)!
