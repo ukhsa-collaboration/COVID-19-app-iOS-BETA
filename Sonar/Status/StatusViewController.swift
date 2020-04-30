@@ -266,3 +266,10 @@ class StatusViewController: UIViewController, Storyboarded {
 }
 
 private let logger = Logger(label: "StatusViewController")
+
+class TouchCancellingScrollView: UIScrollView {
+    override func touchesShouldCancel(in view: UIView) -> Bool {
+        true
+    }
+}
+
