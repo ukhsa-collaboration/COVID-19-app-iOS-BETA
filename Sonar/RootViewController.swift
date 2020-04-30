@@ -60,7 +60,8 @@ class RootViewController: UIViewController {
             contactEventsUploader: contactEventsUploader,
             notificationCenter: notificationCenter,
             linkingIdManager: linkingIdManager,
-            statusProvider: statusProvider
+            statusProvider: statusProvider,
+            localeProvider: AutoupdatingCurrentLocaleProvider()
         )
         
         setupChecker = SetupChecker(authorizationManager: authorizationManager, bluetoothNursery: bluetoothNursery)

@@ -18,6 +18,7 @@ class StatusViewController: UIViewController, Storyboarded {
     private var contactEventsUploader: ContactEventsUploader!
     private var linkingIdManager: LinkingIdManager!
     private var statusProvider: StatusProvider!
+    private var localeProvider: LocaleProvider!
 
     private lazy var drawerPresentationManager = DrawerPresentation()
     private let localNotificationScheduler = LocalNotifcationScheduler(userNotificationCenter: UNUserNotificationCenter.current())
@@ -33,6 +34,7 @@ class StatusViewController: UIViewController, Storyboarded {
     @IBOutlet weak var diagnosisHighlightView: UIView!
     @IBOutlet weak var diagnosisTitleLabel: UILabel!
     @IBOutlet weak var readLatestAdviceLabel: UILabel!
+    @IBOutlet weak var diagnosisDetailLabel: UILabel!
     @IBOutlet weak var disclosureIndicator: UIImageView!
     
     @IBOutlet weak var howAreYouFeelingView: UIView!
@@ -53,7 +55,8 @@ class StatusViewController: UIViewController, Storyboarded {
         contactEventsUploader: ContactEventsUploader,
         notificationCenter: NotificationCenter,
         linkingIdManager: LinkingIdManager,
-        statusProvider: StatusProvider
+        statusProvider: StatusProvider,
+        localeProvider: LocaleProvider
     ) {
         self.persistence = persistence
         self.registrationService = registrationService
@@ -61,6 +64,7 @@ class StatusViewController: UIViewController, Storyboarded {
         self.notificationCenter = notificationCenter
         self.linkingIdManager = linkingIdManager
         self.statusProvider = statusProvider
+        self.localeProvider = localeProvider
     }
         
     override func viewDidLoad() {
@@ -195,18 +199,33 @@ class StatusViewController: UIViewController, Storyboarded {
             case .blue:
                 diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Highlight")
                 diagnosisTitleLabel.text = "Follow the current advice to stop the spread of coronavirus".localized
+                diagnosisDetailLabel.isHidden = true
                 howAreYouFeelingView.isHidden = false
                 redStatusView.isHidden = true
                 healthcareWorkersInstructionsView.isHidden = false
             case .amber:
                 diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
                 diagnosisTitleLabel.text = "You have been near someone who has coronavirus symptoms".localized
+                diagnosisDetailLabel.isHidden = true
                 howAreYouFeelingView.isHidden = false
                 redStatusView.isHidden = true
                 healthcareWorkersInstructionsView.isHidden = false
             case .red:
                 diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
                 diagnosisTitleLabel.text = "Your symptoms indicate you may have coronavirus".localized
+                diagnosisDetailLabel.isHidden = false
+                
+                if let expiryDate = persistence.selfDiagnosis?.expiryDate {
+                    let detailFmt = "Follow this advice until %@, at which point this app will notify you to update your symptoms.".localized
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.locale = localeProvider.locale
+                    dateFormatter.setLocalizedDateFormatFromTemplate("MMMMd")
+                    diagnosisDetailLabel.text = String(format: detailFmt, dateFormatter.string(from: expiryDate))
+                } else {
+                    // Can't happen, but don't show the placeholder text if it does.
+                    diagnosisDetailLabel.isHidden = true
+                }
+                
                 howAreYouFeelingView.isHidden = true
                 redStatusView.isHidden = false
                 healthcareWorkersInstructionsView.isHidden = true

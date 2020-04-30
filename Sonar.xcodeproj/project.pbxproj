@@ -15,6 +15,8 @@
 		0979FB782458ADE800EB01A8 /* PostcodeValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0979FB772458ADE800EB01A8 /* PostcodeValidatorTests.swift */; };
 		0979FB792458ADF000EB01A8 /* PostcodeValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0979FB752458AD3600EB01A8 /* PostcodeValidator.swift */; };
 		097C93892447986B00E985CF /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097C93882447986B00E985CF /* TextField.swift */; };
+		097C94C9245B8146008A9695 /* LocaleProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097C94C8245B8146008A9695 /* LocaleProvider.swift */; };
+		097C94CB245B81E8008A9695 /* EnGbLocaleProviderDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097C94CA245B81E8008A9695 /* EnGbLocaleProviderDouble.swift */; };
 		0983ACCD243E566800DBB336 /* ErrorForTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983ACCC243E566800DBB336 /* ErrorForTest.swift */; };
 		0983ACCF243E6D3800DBB336 /* NotificationObserverDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983ACCE243E6D3800DBB336 /* NotificationObserverDouble.swift */; };
 		0983ACD3243EB22200DBB336 /* StatusViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983ACD2243EB22200DBB336 /* StatusViewControllerTests.swift */; };
@@ -249,6 +251,8 @@
 		0979FB752458AD3600EB01A8 /* PostcodeValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostcodeValidator.swift; sourceTree = "<group>"; };
 		0979FB772458ADE800EB01A8 /* PostcodeValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostcodeValidatorTests.swift; sourceTree = "<group>"; };
 		097C93882447986B00E985CF /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		097C94C8245B8146008A9695 /* LocaleProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocaleProvider.swift; sourceTree = "<group>"; };
+		097C94CA245B81E8008A9695 /* EnGbLocaleProviderDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnGbLocaleProviderDouble.swift; sourceTree = "<group>"; };
 		0983ACCC243E566800DBB336 /* ErrorForTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorForTest.swift; sourceTree = "<group>"; };
 		0983ACCE243E6D3800DBB336 /* NotificationObserverDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationObserverDouble.swift; sourceTree = "<group>"; };
 		0983ACD2243EB22200DBB336 /* StatusViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewControllerTests.swift; sourceTree = "<group>"; };
@@ -523,6 +527,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		097C94C7245B8086008A9695 /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				097C94C8245B8146008A9695 /* LocaleProvider.swift */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
 		0983ACD1243EB20A00DBB336 /* Status */ = {
 			isa = PBXGroup;
 			children = (
@@ -581,6 +593,7 @@
 				F64D76FA2457827400B1D495 /* StatusProviderDouble.swift */,
 				89CCF65E2456EF7000AC9D91 /* TrustValidatingDouble.swift */,
 				090B1870243552C300870B5D /* UserNotificationCenterDouble.swift */,
+				097C94CA245B81E8008A9695 /* EnGbLocaleProviderDouble.swift */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -807,6 +820,7 @@
 				F68D8FD424476846008BAAAA /* Environments */,
 				F78CEB45242B7741002254AD /* Extensions */,
 				6FC63C39241641BA007C8BF3 /* LaunchScreen.storyboard */,
+				097C94C7245B8086008A9695 /* Localization */,
 				89F06B2D2434A5A50074C612 /* Logging */,
 				214209D3242399DD00C7BFF3 /* Networking */,
 				8983E615245867BC001F2011 /* Monitoring */,
@@ -1320,6 +1334,7 @@
 				092BB5AB244622200036B30E /* RootViewControllerTests.swift in Sources */,
 				219C7B78245AD4B700952B4D /* TestHelpersTests.swift in Sources */,
 				21E50511244470590065C69B /* ContactEventTests.swift in Sources */,
+				097C94CB245B81E8008A9695 /* EnGbLocaleProviderDouble.swift in Sources */,
 				89896E622435F37300F949EA /* ProjectTests.swift in Sources */,
 				F604977524549C95002B8503 /* LinkingIdManagerTests.swift in Sources */,
 				F6F05A2A2433C6CC00FF4B72 /* AuthManagerDouble.swift in Sources */,
@@ -1402,6 +1417,7 @@
 				0986EFB5244518FE008D0E1D /* ButtonWithDynamicType.swift in Sources */,
 				F64D76F724577D9600B1D495 /* StatusProvider.swift in Sources */,
 				8983E619245867CF001F2011 /* AppMonitoring.swift in Sources */,
+				097C94C9245B8146008A9695 /* LocaleProvider.swift in Sources */,
 				F6CC2CA9242BC7FC0079432B /* RemoteNotificationManager.swift in Sources */,
 				F70CB8192450CAB700ED6E7F /* OnboardingLogoStrapline.swift in Sources */,
 				AE2A5E502423C473007A4771 /* ContactEvent.swift in Sources */,

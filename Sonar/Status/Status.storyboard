@@ -110,12 +110,23 @@
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="sLA-Af-1Gb" customClass="SymptomStackView" customModule="Sonar" customModuleProvider="target">
                                                                         <rect key="frame" x="24" y="24" width="338" height="157.5"/>
                                                                     </stackView>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Read current advice" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oUM-AI-6LL">
-                                                                        <rect key="frame" x="24" y="291" width="338" height="20.5"/>
-                                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                                        <color key="textColor" name="NHS Text"/>
-                                                                        <nil key="highlightedColor"/>
-                                                                    </label>
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Kcg-6z-FYa">
+                                                                        <rect key="frame" x="24" y="266.5" width="338" height="45"/>
+                                                                        <subviews>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Read current advice" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oUM-AI-6LL">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="338" height="20.5"/>
+                                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                                                <color key="textColor" name="NHS Text"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detail text, often hidden" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h1p-vA-xU7">
+                                                                                <rect key="frame" x="0.0" y="24.5" width="338" height="20.5"/>
+                                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                                <nil key="textColor"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                        </subviews>
+                                                                    </stackView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rpg-7v-Vhp">
                                                                         <rect key="frame" x="24" y="209.5" width="338" height="33.5"/>
                                                                         <accessibility key="accessibilityConfiguration">
@@ -133,16 +144,16 @@
                                                                 </accessibility>
                                                                 <constraints>
                                                                     <constraint firstAttribute="trailing" secondItem="Rpg-7v-Vhp" secondAttribute="trailing" constant="20" id="1Pt-DG-JPj"/>
-                                                                    <constraint firstItem="oUM-AI-6LL" firstAttribute="leading" secondItem="uA1-0d-OYq" secondAttribute="trailing" constant="12" id="2ah-wd-rMp"/>
+                                                                    <constraint firstItem="Kcg-6z-FYa" firstAttribute="top" secondItem="Rpg-7v-Vhp" secondAttribute="bottom" constant="48" id="2Q0-kM-vIG"/>
+                                                                    <constraint firstItem="Kcg-6z-FYa" firstAttribute="leading" secondItem="uA1-0d-OYq" secondAttribute="trailing" constant="12" id="43l-fH-TqQ"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="Kcg-6z-FYa" secondAttribute="bottom" constant="54" id="BKe-wF-y2I"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="Kcg-6z-FYa" secondAttribute="trailing" constant="20" id="Jyr-lw-Rfs"/>
                                                                     <constraint firstItem="uA1-0d-OYq" firstAttribute="leading" secondItem="JWK-re-qjH" secondAttribute="leading" id="KQw-UZ-Vhc"/>
                                                                     <constraint firstAttribute="trailing" secondItem="sLA-Af-1Gb" secondAttribute="trailing" constant="20" id="Kfy-wu-Fap"/>
                                                                     <constraint firstItem="uA1-0d-OYq" firstAttribute="top" secondItem="JWK-re-qjH" secondAttribute="top" id="Rvb-q4-vIb"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="oUM-AI-6LL" secondAttribute="bottom" constant="54" id="d7i-TB-Apl"/>
                                                                     <constraint firstItem="Rpg-7v-Vhp" firstAttribute="top" secondItem="sLA-Af-1Gb" secondAttribute="bottom" constant="28" id="dt1-dU-AJC"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="oUM-AI-6LL" secondAttribute="trailing" constant="20" id="evk-Ga-elp"/>
                                                                     <constraint firstAttribute="bottom" secondItem="uA1-0d-OYq" secondAttribute="bottom" id="ipP-KR-MZr"/>
                                                                     <constraint firstItem="sLA-Af-1Gb" firstAttribute="top" secondItem="JWK-re-qjH" secondAttribute="top" constant="24" id="kz1-xd-mgg"/>
-                                                                    <constraint firstItem="oUM-AI-6LL" firstAttribute="top" secondItem="Rpg-7v-Vhp" secondAttribute="bottom" constant="48" id="l8M-ID-YOa"/>
                                                                     <constraint firstItem="Rpg-7v-Vhp" firstAttribute="leading" secondItem="uA1-0d-OYq" secondAttribute="trailing" constant="12" id="oJe-uO-zP7"/>
                                                                     <constraint firstItem="sLA-Af-1Gb" firstAttribute="leading" secondItem="uA1-0d-OYq" secondAttribute="trailing" constant="12" id="pyW-Fy-SGL"/>
                                                                 </constraints>
@@ -392,6 +403,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="k8f-bF-CaC"/>
                     <connections>
+                        <outlet property="diagnosisDetailLabel" destination="h1p-vA-xU7" id="WFZ-RF-fJn"/>
                         <outlet property="diagnosisHighlightView" destination="uA1-0d-OYq" id="g8S-eV-fpJ"/>
                         <outlet property="diagnosisStatusView" destination="JWK-re-qjH" id="byU-x3-cXA"/>
                         <outlet property="diagnosisTitleLabel" destination="Rpg-7v-Vhp" id="6bk-Da-3iT"/>

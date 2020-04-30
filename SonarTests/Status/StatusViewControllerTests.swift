@@ -108,6 +108,43 @@ class StatusViewControllerTests: XCTestCase {
 
         XCTAssertEqual(vc.diagnosisTitleLabel.text, "You have been near someone who has coronavirus symptoms".localized)
     }
+    
+    func testShowsBlueStatus() {
+        let statusProvider = StatusProviderDouble.double()
+        statusProvider.status = .blue
+        let vc = makeViewController(persistence: PersistenceDouble(), statusProvider: statusProvider)
+        
+        XCTAssertTrue(vc.diagnosisDetailLabel.isHidden)
+        XCTAssertEqual(vc.diagnosisTitleLabel.text, "Follow the current advice to stop the spread of coronavirus")
+        XCTAssertTrue(vc.redStatusView.isHidden)
+    }
+    
+    func testShowsAmberStatus() {
+        let statusProvider = StatusProviderDouble.double()
+        statusProvider.status = .amber
+        let vc = makeViewController(persistence: PersistenceDouble(), statusProvider: statusProvider)
+        
+        XCTAssertTrue(vc.diagnosisDetailLabel.isHidden)
+        XCTAssertEqual(vc.diagnosisTitleLabel.text, "You have been near someone who has coronavirus symptoms")
+        XCTAssertTrue(vc.redStatusView.isHidden)
+    }
+    
+    func testShowsRedStatus() {
+        let statusProvider = StatusProviderDouble.double()
+        statusProvider.status = .red
+        let persistence = PersistenceDouble()
+        // Shenanigans to make the test pass in any time zone
+        let midnightUTC = 1589414400
+        let midnightLocal = midnightUTC - TimeZone.current.secondsFromGMT()
+        let expiryDate = Date(timeIntervalSince1970: TimeInterval(midnightLocal))
+        persistence.selfDiagnosis = SelfDiagnosis(symptoms: Set(), startDate: Date(), expiryDate: expiryDate)
+        let vc = makeViewController(persistence: persistence, statusProvider: statusProvider)
+        
+        XCTAssertEqual(vc.diagnosisTitleLabel.text, "Your symptoms indicate you may have coronavirus")
+        XCTAssertFalse(vc.diagnosisDetailLabel.isHidden)
+        XCTAssertEqual(vc.diagnosisDetailLabel.text, "Follow this advice until 14 May, at which point this app will notify you to update your symptoms.")
+        XCTAssertFalse(vc.redStatusView.isHidden)
+    }
 }
 
 fileprivate func makeViewController(
@@ -123,7 +160,8 @@ fileprivate func makeViewController(
         contactEventsUploader: ContactEventsUploaderDouble(),
         notificationCenter: notificationCenter,
         linkingIdManager: LinkingIdManagerDouble.make(),
-        statusProvider: statusProvider
+        statusProvider: statusProvider,
+        localeProvider: EnGbLocaleProviderDouble()
     )
     XCTAssertNotNil(vc.view)
     vc.viewWillAppear(false)
