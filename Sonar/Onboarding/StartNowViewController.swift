@@ -15,6 +15,14 @@ class StartNowViewController: UIViewController, Storyboarded {
     private var notificationCenter: NotificationCenter! = nil
     private var continueHandler: (() -> Void)! = nil
     
+    @IBOutlet weak var howItWorks: ButtonWithDynamicType!
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        howItWorks.setAttributedTitle(NSAttributedString(string: "Learn more about how it works".localized, attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue, .foregroundColor: UIColor(named: "NHS Link")]), for: .normal)
+    }
+
     func inject(persistence: Persisting, notificationCenter: NotificationCenter, continueHandler: @escaping () -> Void) {
         self.persistence = persistence
         self.notificationCenter = notificationCenter

@@ -121,6 +121,9 @@
                         <viewLayoutGuide key="safeArea" id="uey-GI-3f6"/>
                     </view>
                     <navigationItem key="navigationItem" id="0zK-Z8-XYb"/>
+                    <connections>
+                        <outlet property="howItWorks" destination="aeB-p4-UQk" id="4Vt-wd-sM4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HbU-Qf-wLX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -806,7 +809,7 @@ To enable this app to send you notification you need to go to your Settings, tap
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="63.666666666666664"/>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Why you need to turn your Bluetooth on" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8B8-An-P1B">
-                                                <rect key="frame" x="20" y="83.666666666666657" width="374" height="81.666666666666657"/>
+                                                <rect key="frame" x="20" y="83.666666666666629" width="374" height="81.666666666666657"/>
                                                 <accessibility key="accessibilityConfiguration">
                                                     <accessibilityTraits key="traits" staticText="YES" header="YES"/>
                                                 </accessibility>
@@ -815,7 +818,7 @@ To enable this app to send you notification you need to go to your Settings, tap
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qch-lc-oMz">
-                                                <rect key="frame" x="20" y="185.33333333333334" width="374" height="262.33333333333326"/>
+                                                <rect key="frame" x="20" y="185.33333333333337" width="374" height="262.33333333333326"/>
                                                 <string key="text">This app works only if you have your Bluetooth on at all times.
 
 NHS Coronavirus works using Bluetooth signals, to determine when you have been near someone else with this app who shows symptoms of Coronavirus. NHS Coronavirus can alert you or others that may be at risk.
