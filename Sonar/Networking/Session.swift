@@ -12,7 +12,7 @@ enum HTTPMethod: Equatable {
     case get
     case post(data: Data)
     case patch(data: Data)
-    case put
+    case put(data: Data?)
 }
 
 enum Urlable: Equatable {
@@ -64,8 +64,11 @@ extension Request {
             urlRequest.httpMethod = "PATCH"
             urlRequest.httpBody = data
 
-        case .put:
+        case .put(let data):
             urlRequest.httpMethod = "PUT"
+            if let data = data {
+                urlRequest.httpBody = data
+            }
         }
 
         return urlRequest

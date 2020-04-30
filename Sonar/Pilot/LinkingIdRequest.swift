@@ -13,7 +13,7 @@ typealias LinkingId = String
 class LinkingIdRequest: SecureRequest, Request {
     typealias ResponseType = LinkingId
 
-    let method: HTTPMethod = .put
+    let method: HTTPMethod
     let urlable: Urlable
 
     let decoder = JSONDecoder()
@@ -21,7 +21,10 @@ class LinkingIdRequest: SecureRequest, Request {
     init(registration: Registration) {
         urlable = .path("/api/residents/\(registration.id.uuidString)/linking-id")
 
-        super.init(registration.secretKey, Data(), [
+        let bodyData = "{}".data(using: .utf8)!
+        method = .put(data: bodyData)
+
+        super.init(registration.secretKey, bodyData, [
             "Accept": "application/json"
         ])
     }

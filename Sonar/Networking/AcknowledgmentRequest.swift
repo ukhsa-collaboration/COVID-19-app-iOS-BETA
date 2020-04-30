@@ -12,7 +12,7 @@ class AcknowledgmentRequest: Request {
 
     typealias ResponseType = Void
 
-    let method: HTTPMethod = .put
+    let method: HTTPMethod = .put(data: nil)
     let urlable: Urlable
     let headers: [String: String] = [:]
 
