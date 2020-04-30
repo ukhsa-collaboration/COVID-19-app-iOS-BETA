@@ -18,8 +18,6 @@
 	<string>1.0.1</string>
 	<key>CFBundleVersion</key>
 	<string>133</string>
-	<key>GOOGLE_ANALYTICS_IDFV_COLLECTION_ENABLED</key>
-	<false/>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSRequiresIPhoneOS</key>
