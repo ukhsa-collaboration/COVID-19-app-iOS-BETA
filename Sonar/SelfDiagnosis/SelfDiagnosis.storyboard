@@ -28,6 +28,7 @@
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3/3" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ul2-la-I2I">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="48"/>
+                                                        <accessibility key="accessibilityConfiguration" label="Step 3 of 3"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                         <color key="textColor" name="NHS Secondary Text"/>
                                                         <nil key="highlightedColor"/>

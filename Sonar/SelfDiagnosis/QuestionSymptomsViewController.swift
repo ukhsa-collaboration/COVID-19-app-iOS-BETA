@@ -55,7 +55,8 @@ class QuestionSymptomsViewController: UIViewController, Storyboarded {
     }
     
     override func viewDidLoad() {
-        pageLabel.text = "\(pageNumber ?? 1)/\(pageCount ?? 1)"
+        pageLabel.text = "\(pageNumber!)/\(pageCount!)"
+        pageLabel.accessibilityLabel = "Step \(pageNumber!) of \(pageCount!)"
         titleLabel.text = questionTitle
         detailLabel.text = questionDetail
         errorLabel.text = questionError
