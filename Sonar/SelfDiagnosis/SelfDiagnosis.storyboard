@@ -254,28 +254,68 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="JYQ-vC-4ZC">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="142.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="304.5"/>
                                         <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jSh-67-2Za">
+                                                <rect key="frame" x="20" y="0.0" width="374" height="158"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rI0-o4-KWc" userLabel="Background View">
+                                                        <rect key="frame" x="-20" y="0.0" width="414" height="158"/>
+                                                        <color key="backgroundColor" name="NHS Grey 4"/>
+                                                    </view>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="4th-aG-iwN">
+                                                        <rect key="frame" x="0.0" y="16" width="374" height="126"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This app currently only works on the Isle of Wight" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jsD-xX-SRs">
+                                                                <rect key="frame" x="0.0" y="0.0" width="374" height="49"/>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you live elsewhere in the UK, please keep the app installed and we will let you know when it is ready for you to use." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Ce-N9-x6A">
+                                                                <rect key="frame" x="0.0" y="65" width="374" height="61"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="rI0-o4-KWc" firstAttribute="top" secondItem="jSh-67-2Za" secondAttribute="top" id="UVJ-VX-Arh"/>
+                                                    <constraint firstItem="rI0-o4-KWc" firstAttribute="bottom" secondItem="4th-aG-iwN" secondAttribute="bottom" constant="16" id="XRx-XR-eDL"/>
+                                                    <constraint firstItem="4th-aG-iwN" firstAttribute="top" secondItem="jSh-67-2Za" secondAttribute="top" constant="16" id="ZOr-z4-if7"/>
+                                                    <constraint firstAttribute="trailing" secondItem="4th-aG-iwN" secondAttribute="trailing" id="aBZ-PH-qHa"/>
+                                                    <constraint firstAttribute="bottom" secondItem="4th-aG-iwN" secondAttribute="bottom" constant="16" id="aUS-8R-1WI"/>
+                                                    <constraint firstItem="4th-aG-iwN" firstAttribute="leading" secondItem="jSh-67-2Za" secondAttribute="leading" id="oHg-ts-3J8"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="AuA-fc-f3Q" userLabel="Spacer">
+                                                <rect key="frame" x="20" y="158" width="374" height="36"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="36" id="2d3-FI-BDy"/>
+                                                </constraints>
+                                            </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thank You" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X7L-5P-VlC">
-                                                <rect key="frame" x="20" y="32" width="374" height="20.5"/>
+                                                <rect key="frame" x="20" y="194" width="374" height="20.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                 <color key="textColor" name="NHS Text"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="jvB-6L-aQ6" userLabel="Spacer">
-                                                <rect key="frame" x="20" y="52.5" width="374" height="0.0"/>
+                                                <rect key="frame" x="20" y="214.5" width="374" height="0.0"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" id="ze3-NR-aKy"/>
                                                 </constraints>
                                             </view>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirmation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ib8-Fb-gu6">
-                                                <rect key="frame" x="20" y="52.5" width="374" height="0.0"/>
+                                                <rect key="frame" x="20" y="214.5" width="374" height="0.0"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fdk-RG-sRk" userLabel="Submit View">
-                                                <rect key="frame" x="20" y="52.5" width="374" height="70"/>
+                                                <rect key="frame" x="20" y="214.5" width="374" height="70"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c5D-qw-CwQ" customClass="PrimaryButton" customModule="Sonar" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="16" width="374" height="54"/>
@@ -296,9 +336,11 @@
                                             </view>
                                         </subviews>
                                         <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="rI0-o4-KWc" secondAttribute="trailing" id="Anw-BC-cMb"/>
                                             <constraint firstAttribute="height" priority="2" id="gnV-4u-PeW"/>
+                                            <constraint firstItem="rI0-o4-KWc" firstAttribute="leading" secondItem="JYQ-vC-4ZC" secondAttribute="leading" id="lXi-Os-Wxy"/>
                                         </constraints>
-                                        <directionalEdgeInsets key="directionalLayoutMargins" top="32" leading="20" bottom="20" trailing="20"/>
+                                        <directionalEdgeInsets key="directionalLayoutMargins" top="0.0" leading="20" bottom="20" trailing="20"/>
                                         <variation key="default">
                                             <mask key="constraints">
                                                 <exclude reference="gnV-4u-PeW"/>
@@ -611,6 +653,9 @@
         </namedColor>
         <namedColor name="NHS Grey 3">
             <color red="0.68235294117647061" green="0.71764705882352942" blue="0.74117647058823533" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="NHS Grey 4">
+            <color red="0.84705882352941175" green="0.8666666666666667" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="NHS Grey 5">
             <color red="0.94117647058823528" green="0.95686274509803926" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
