@@ -23,6 +23,7 @@ jobs:
         run: |
           git fetch origin internal
           git checkout internal
+          git tag -d upload-to-test-flight || true # temporary shim for moving to the internal branch
           git tag -d upload-to-internal || true
           git fetch --tags
           git branch --contains tags/upload-to-internal | grep internal || echo "::set-output name=upload::true"
