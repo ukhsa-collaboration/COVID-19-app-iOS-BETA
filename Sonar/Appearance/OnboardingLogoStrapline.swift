@@ -35,12 +35,17 @@ class OnboardingLogoStrapline: UIView {
         commonInit()
     }
 
+    override func awakeFromNib() {
+        commonInit()
+    }
+
     func commonInit() {
         guard let view = loadViewFromNib() else {
             return
         }
 
         titleLabel.text = "COVID-19"
+        titleLabel.textColor = UIColor(named: "NHS Blue")
 
         addSubview(view)
         NSLayoutConstraint.activate([
