@@ -282,7 +282,7 @@
                                                                             <constraint firstItem="bxy-UB-mQx" firstAttribute="top" secondItem="66c-tO-6TF" secondAttribute="top" id="rL5-Wj-Prj"/>
                                                                         </constraints>
                                                                         <connections>
-                                                                            <action selector="linkingIdButtonTapped" destination="HPa-EI-l5D" eventType="valueChanged" id="Tgb-Oc-E4K"/>
+                                                                            <action selector="linkingIdButtonTapped" destination="HPa-EI-l5D" eventType="touchUpInside" id="cDV-HO-xiD"/>
                                                                         </connections>
                                                                     </view>
                                                                 </subviews>
