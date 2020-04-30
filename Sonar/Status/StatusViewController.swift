@@ -33,7 +33,8 @@ class StatusViewController: UIViewController, Storyboarded {
     @IBOutlet weak var diagnosisHighlightView: UIView!
     @IBOutlet weak var diagnosisTitleLabel: UILabel!
     @IBOutlet weak var readLatestAdviceLabel: UILabel!
-
+    @IBOutlet weak var disclosureIndicator: UIImageView!
+    
     @IBOutlet weak var howAreYouFeelingView: UIView!
     @IBOutlet weak var notRightView: UIView!
     @IBOutlet weak var notRightTitleLabel: UILabel!
@@ -86,19 +87,13 @@ class StatusViewController: UIViewController, Storyboarded {
         )
         
         nhs111label.setAttributedTitle(NSAttributedString(string: "NHS Coronavirus", attributes:
-            [.underlineStyle: NSUnderlineStyle.single.rawValue, .foregroundColor: UIColor(named: "NHS Link")]), for: .normal)
+            [.underlineStyle: NSUnderlineStyle.single.rawValue, .foregroundColor: UIColor(named: "NHS Link"), NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .body)]), for: .normal)
 
         notRightView.layer.cornerRadius = 8
         notRightSubtitleLabel.textColor = UIColor(named: "NHS Secondary Text")
         notRightTitleLabel.textColor = UIColor(named: "NHS Text")
         notRightView.layer.borderColor = UIColor(named: "NHS Highlight")!.withAlphaComponent(0.96).cgColor
         notRightView.accessibilityLabel = "\(notRightTitleLabel.text!) \(notRightSubtitleLabel.text!)"
-        notRightView.addGestureRecognizer(
-            UITapGestureRecognizer(target: self, action: #selector(notRightTapped))
-        )
-        notRightView.addGestureRecognizer(
-            UILongPressGestureRecognizer(target: self, action: #selector(notRightLongPressed))
-        )
 
         noSymptomsLabel.textColor = UIColor(named: "NHS Secondary Text")
         
@@ -138,7 +133,7 @@ class StatusViewController: UIViewController, Storyboarded {
         UIApplication.shared.open(url)
     }
 
-    @objc func notRightTapped() {
+    @IBAction func notRightTapped() {
         let navigationController = UINavigationController()
         let coordinator = SelfDiagnosisCoordinator(
             navigationController: navigationController,
@@ -150,15 +145,6 @@ class StatusViewController: UIViewController, Storyboarded {
         coordinator.start()
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true)
-    }
-    
-    @objc func notRightLongPressed(sender: UILongPressGestureRecognizer) {
-        if sender.state != UIGestureRecognizer.State.ended {
-            notRightView.layer.borderWidth = 2
-        } else {
-            notRightView.layer.borderWidth = 0
-            notRightTapped()
-        }
     }
     
     @IBAction func medicalWorkerButtonTapped() {
