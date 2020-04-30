@@ -66,7 +66,7 @@ private extension SecCertificate {
     
 }
 
-private extension SecKey {
+extension SecKey {
     
     var hash: String? {
         // The hashed data is the DER representation of the key. This includes:
@@ -84,7 +84,7 @@ private extension SecKey {
         return derData.sha256Hash.base64EncodedString()
     }
     
-    private var externalRepresentation: Data? {
+    var externalRepresentation: Data? {
         SecKeyCopyExternalRepresentation(self, nil) as Data?
     }
     

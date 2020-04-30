@@ -8,7 +8,7 @@
 
 import Foundation
 import Security
-
+import CommonCrypto
 import Logging
 
 protocol BroadcastIdEncrypter {
@@ -17,6 +17,9 @@ protocol BroadcastIdEncrypter {
 
 class ConcreteBroadcastIdEncrypter: BroadcastIdEncrypter {
 
+    private let ukISO3166CountryCode: UInt16 = 826
+    private let txPower: Int8 = 0
+    
     let serverPublicKey: SecKey
     let sonarId: UUID
 
@@ -27,7 +30,7 @@ class ConcreteBroadcastIdEncrypter: BroadcastIdEncrypter {
         self.serverPublicKey = key
         self.sonarId = sonarId
     }
-
+    
     func broadcastId(from startDate: Date, until endDate: Date) -> Data {
         let firstPart = bytesFrom(startDate)
         let secondPart = bytesFrom(endDate)
@@ -68,19 +71,7 @@ class ConcreteBroadcastIdEncrypter: BroadcastIdEncrypter {
     }
 
     // MARK: - Private
-
-    private func sameDay(_ first: Date, _ second: Date?) -> Bool {
-        guard let second = second else { return false }
-
-        let calendar = Calendar.current
-
-        let date1 = calendar.startOfDay(for: first)
-        let date2 = calendar.startOfDay(for: second)
-
-        let components = calendar.dateComponents([.day], from: date1, to: date2)
-        return components.day == 0
-    }
-
+    
     func bytesFrom(_ date: Date) -> Data {
         let interval = date.timeIntervalSince1970
         var int = Int32(interval)

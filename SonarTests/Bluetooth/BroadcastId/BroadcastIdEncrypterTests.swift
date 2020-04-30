@@ -8,18 +8,24 @@
 
 import XCTest
 import Security
+import CommonCrypto
 
 @testable import Sonar
 
 class BroadcastIdEncypterTests: XCTestCase {
 
     let cannedId = UUID(uuidString: "E1D160C7-F6E8-48BC-8687-63C696D910CB")!
+    
 
     let sonarEpoch = "2020-04-01T00:00:00Z"
     let dateFormatter = DateFormatter()
+    let ukISO3166CountryCode: UInt16 = 826
+    let txPower: Int8 = 0
+    let serverPublicKey = SecKey.sampleEllipticCurveKey
 
     var knownDate: Date!
     var slightlyLaterDate: Date!
+    var txDate: Date!
     var muchLaterDate: Date!
 
     var encrypter: ConcreteBroadcastIdEncrypter!
@@ -30,13 +36,12 @@ class BroadcastIdEncypterTests: XCTestCase {
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
         knownDate = dateFormatter.date(from:sonarEpoch)!
         slightlyLaterDate = knownDate.addingTimeInterval(1)
+        txDate = knownDate.addingTimeInterval(5 * 60)
         muchLaterDate = knownDate.addingTimeInterval(86400)
-
-        let serverPublicKey = SecKey.sampleEllipticCurveKey
 
         encrypter = ConcreteBroadcastIdEncrypter(key: serverPublicKey, sonarId: cannedId)
     }
-
+    
     func test_generates_ciphertext_that_are_the_correct_size() {
         let encryptedId = encrypter.broadcastId(from: knownDate, until: muchLaterDate)
 
@@ -46,7 +51,7 @@ class BroadcastIdEncypterTests: XCTestCase {
         XCTAssertEqual(106, encryptedId.count)
     }
 
-    func test_ciphertext_contains_expected_data() throws {
+    func test_ciphertext_contains_expected_cryptogram() throws {
         guard let (serverPublicKey, serverPrivateKey) = generateKeyPair() else {
             XCTFail("Expected to generate a keypair for this test but it failed")
             return
@@ -59,13 +64,13 @@ class BroadcastIdEncypterTests: XCTestCase {
         // BUT  we do not transmit this, in order to save space
         var specialByte = 0x04
         let firstByte = Data(bytes: &specialByte, count: 1)
-        let fullCipherText = NSMutableData()
-        fullCipherText.append(firstByte)
-        fullCipherText.append(result)
+        var cryptogram = Data()
+        cryptogram.append(firstByte)
+        cryptogram.append(result)
 
         let clearText = SecKeyCreateDecryptedData(serverPrivateKey,
                                                   .eciesEncryptionStandardVariableIVX963SHA256AESGCM,
-                                                  fullCipherText as CFData,
+                                                  cryptogram as CFData,
                                                   nil) as Data?
         XCTAssertNotNil(clearText)
 
@@ -133,4 +138,5 @@ class BroadcastIdEncypterTests: XCTestCase {
 
         return uuid.uuidString
     }
+
 }

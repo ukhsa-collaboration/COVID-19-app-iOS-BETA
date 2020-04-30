@@ -71,6 +71,9 @@
 		219C7B74245AB88100952B4D /* BroadcastEncrypterProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219C7B73245AB88100952B4D /* BroadcastEncrypterProvider.swift */; };
 		219C7B76245AB8E500952B4D /* ConcreteBroadcastIdEncrypterProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219C7B75245AB8E500952B4D /* ConcreteBroadcastIdEncrypterProviderTests.swift */; };
 		219C7B78245AD4B700952B4D /* TestHelpersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219C7B77245AD4B700952B4D /* TestHelpersTests.swift */; };
+		219C7B7A245AE83700952B4D /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219C7B79245AE83700952B4D /* DataExtensions.swift */; };
+		219C7B7C245B093000952B4D /* BluetoothPayloadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219C7B7B245B093000952B4D /* BluetoothPayloadTests.swift */; };
+		219C7B7F245B0BBB00952B4D /* BroadcastPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219C7B7D245B0B1500952B4D /* BroadcastPayload.swift */; };
 		21AF36AB241A8E50001A4910 /* BTLEListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AF36AA241A8E50001A4910 /* BTLEListener.swift */; };
 		21B3D2E3242906AE00573061 /* SecureRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B3D2E2242906AE00573061 /* SecureRequestTests.swift */; };
 		21B3D2E52429112B00573061 /* SecureRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B3D2E42429112B00573061 /* SecureRequest.swift */; };
@@ -305,6 +308,9 @@
 		219C7B73245AB88100952B4D /* BroadcastEncrypterProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastEncrypterProvider.swift; sourceTree = "<group>"; };
 		219C7B75245AB8E500952B4D /* ConcreteBroadcastIdEncrypterProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcreteBroadcastIdEncrypterProviderTests.swift; sourceTree = "<group>"; };
 		219C7B77245AD4B700952B4D /* TestHelpersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpersTests.swift; sourceTree = "<group>"; };
+		219C7B79245AE83700952B4D /* DataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtensions.swift; sourceTree = "<group>"; };
+		219C7B7B245B093000952B4D /* BluetoothPayloadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothPayloadTests.swift; sourceTree = "<group>"; };
+		219C7B7D245B0B1500952B4D /* BroadcastPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastPayload.swift; sourceTree = "<group>"; };
 		21AF36AA241A8E50001A4910 /* BTLEListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTLEListener.swift; sourceTree = "<group>"; };
 		21B3D2E2242906AE00573061 /* SecureRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRequestTests.swift; sourceTree = "<group>"; };
 		21B3D2E42429112B00573061 /* SecureRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRequest.swift; sourceTree = "<group>"; };
@@ -1044,6 +1050,7 @@
 		F72EBDA0243D086C009F9328 /* BroadcastId */ = {
 			isa = PBXGroup;
 			children = (
+				219C7B7D245B0B1500952B4D /* BroadcastPayload.swift */,
 				F72EBDA1243D0892009F9328 /* SecureBroadcastRotationKeyStorage.swift */,
 				F72EBDA6243D2FD1009F9328 /* ConcreteBroadcastIdEncrypter.swift */,
 				F7D62F2A2440D64C004C32A2 /* ConcreteBroadcastIdGenerator.swift */,
@@ -1061,6 +1068,7 @@
 				F7D62F282440D4CB004C32A2 /* ConcreteBroadcastIdGeneratorTests.swift */,
 				F7E74F8F244DFC1400273C59 /* BroadcastRotationKeyConverterTests.swift */,
 				219C7B75245AB8E500952B4D /* ConcreteBroadcastIdEncrypterProviderTests.swift */,
+				219C7B7B245B093000952B4D /* BluetoothPayloadTests.swift */,
 			);
 			path = BroadcastId;
 			sourceTree = "<group>";
@@ -1094,6 +1102,7 @@
 				217A23BD243B34E8001B8236 /* UIDevice+ModelName.swift */,
 				219B613424471B9800E2F1A6 /* UUIDExtensions.swift */,
 				21B71F772451788800D0DED7 /* OptionalCoalescingString.swift */,
+				219C7B79245AE83700952B4D /* DataExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1317,6 +1326,7 @@
 				F6F05A242433BEC000FF4B72 /* OnboardingCoordinatorTests.swift in Sources */,
 				214209D924262B7500C7BFF3 /* SessionHelpers.swift in Sources */,
 				0983ACD3243EB22200DBB336 /* StatusViewControllerTests.swift in Sources */,
+				219C7B7C245B093000952B4D /* BluetoothPayloadTests.swift in Sources */,
 				896BE912244F11D100B3687C /* PublicKeyValidatorTests.swift in Sources */,
 				F62F858124510716006580A8 /* ContactEventsUploaderTests.swift in Sources */,
 				89CCF65F2456EF7000AC9D91 /* TrustValidatingDouble.swift in Sources */,
@@ -1387,6 +1397,7 @@
 				217A23BE243B34E8001B8236 /* UIDevice+ModelName.swift in Sources */,
 				F604976924539093002B8503 /* UploadLog.swift in Sources */,
 				21F373FF2433844D00926FB8 /* ContactEventRepository.swift in Sources */,
+				219C7B7F245B0BBB00952B4D /* BroadcastPayload.swift in Sources */,
 				21C09A8F2437B99F00368203 /* BluetoothNursery.swift in Sources */,
 				0986EFB5244518FE008D0E1D /* ButtonWithDynamicType.swift in Sources */,
 				F64D76F724577D9600B1D495 /* StatusProvider.swift in Sources */,
@@ -1416,6 +1427,7 @@
 				F67A2291242AA35C002254B6 /* SecureRegistrationStorage.swift in Sources */,
 				AE2DCAA0241920B600A940FC /* BTLEBroadcaster.swift in Sources */,
 				895D9E4B24374EC900573D4D /* Screen.swift in Sources */,
+				219C7B7A245AE83700952B4D /* DataExtensions.swift in Sources */,
 				F652F730244E4AAD00D97950 /* DrawerPresentation.swift in Sources */,
 				098ED478242D7D050029B729 /* RegistratonService.swift in Sources */,
 				134470B02454D614001A0AD9 /* CoughUpdateViewController.swift in Sources */,
