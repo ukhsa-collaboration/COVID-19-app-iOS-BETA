@@ -51,7 +51,7 @@
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                 <state key="normal" title="Close"/>
                                                 <connections>
-                                                    <segue destination="IWe-bN-JgZ" kind="unwind" unwindAction="unwindFromLinkingIdWithUnwindSegue:" id="Zhh-Zk-59a"/>
+                                                    <segue destination="IWe-bN-JgZ" kind="unwind" identifier="UnwindFromLinkingId" unwindAction="unwindFromLinkingIdWithUnwindSegue:" id="Zhh-Zk-59a"/>
                                                 </connections>
                                             </button>
                                         </subviews>

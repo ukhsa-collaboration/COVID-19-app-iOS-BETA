@@ -31,6 +31,11 @@ class LinkingIdViewController: UIViewController, Storyboarded {
 
         linkingIdLabel.text = linkingId
     }
+    
+    override func accessibilityPerformEscape() -> Bool {
+        self.performSegue(withIdentifier: "UnwindFromLinkingId", sender: nil)
+        return true
+    }
 
     private func fetchLinkingId() {
         activityIndicator.isHidden = false

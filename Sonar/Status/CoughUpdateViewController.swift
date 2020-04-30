@@ -14,4 +14,10 @@ class CoughUpdateViewController: UIViewController, Storyboarded {
     @IBAction func close(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+    
+    
+    override func accessibilityPerformEscape() -> Bool {
+        close(self)
+        return true
+    }
 }
