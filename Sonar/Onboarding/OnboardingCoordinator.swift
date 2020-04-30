@@ -40,7 +40,13 @@ class OnboardingCoordinator: OnboardingCoordinating {
     }
     
     func determineIsOnboardingRequired(completion: @escaping (Bool) -> Void) {
-        completion(persistence.registration == nil)
+        if (persistence.partialPostcode == nil) || (authorizationManager.bluetooth == .notDetermined) {
+            completion(true)
+        } else {
+            authorizationManager.notifications { notifications in
+                completion(notifications == .notDetermined)
+            }
+        }
     }
 
     func state(completion: @escaping (State) -> Void) {

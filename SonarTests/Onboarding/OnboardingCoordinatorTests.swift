@@ -31,16 +31,53 @@ class OnboardingCoordinatorTests: TestCase {
         )
     }
     
-    func testOnboardingIsRequiredWithoutRegistration() {
+    func testOnboardingIsRequiredWhenPostCodeNotProvided() {
+        persistenceDouble.partialPostcode = nil
+        authManagerDouble.bluetooth = .allowed
+        
         var isOnboardingRequired: Bool?
         onboardingCoordinator.determineIsOnboardingRequired { isOnboardingRequired = $0 }
+        authManagerDouble.notificationsCompletion?(.allowed)
         XCTAssertEqual(isOnboardingRequired, true)
     }
 
-    func testOnboardingIsNotRequiredWhenWeHaveRegistration() {
-        persistenceDouble.registration = .fake
+    func testOnboardingIsRequiredWhenBluetoothAuthorizationNotDetermined() {
+        persistenceDouble.partialPostcode = "1234"
+        authManagerDouble.bluetooth = .notDetermined
+        
         var isOnboardingRequired: Bool?
         onboardingCoordinator.determineIsOnboardingRequired { isOnboardingRequired = $0 }
+        authManagerDouble.notificationsCompletion?(.allowed)
+        XCTAssertEqual(isOnboardingRequired, true)
+    }
+
+    func testOnboardingIsRequiredWhenNotificationAuthorizationNotDetermined() {
+        persistenceDouble.partialPostcode = "1234"
+        authManagerDouble.bluetooth = .allowed
+        
+        var isOnboardingRequired: Bool?
+        onboardingCoordinator.determineIsOnboardingRequired { isOnboardingRequired = $0 }
+        authManagerDouble.notificationsCompletion?(.notDetermined)
+        XCTAssertEqual(isOnboardingRequired, true)
+    }
+
+    func testOnboardingIsNotRequiredWhenNecessaryInformationProvided() {
+        persistenceDouble.partialPostcode = "1234"
+        authManagerDouble.bluetooth = .allowed
+        
+        var isOnboardingRequired: Bool?
+        onboardingCoordinator.determineIsOnboardingRequired { isOnboardingRequired = $0 }
+        authManagerDouble.notificationsCompletion?(.allowed)
+        XCTAssertEqual(isOnboardingRequired, false)
+    }
+
+    func testOnboardingIsNotRequiredWhenNecessaryInformationProvidedEvenIfPermissionsAreDenied() {
+        persistenceDouble.partialPostcode = "1234"
+        authManagerDouble.bluetooth = .denied
+        
+        var isOnboardingRequired: Bool?
+        onboardingCoordinator.determineIsOnboardingRequired { isOnboardingRequired = $0 }
+        authManagerDouble.notificationsCompletion?(.denied)
         XCTAssertEqual(isOnboardingRequired, false)
     }
 
