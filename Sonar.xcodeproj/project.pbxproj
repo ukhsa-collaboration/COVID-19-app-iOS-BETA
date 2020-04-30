@@ -70,6 +70,7 @@
 		219B61372447371700E2F1A6 /* UUIDExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219B61362447371700E2F1A6 /* UUIDExtensionsTests.swift */; };
 		219C7B74245AB88100952B4D /* BroadcastEncrypterProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219C7B73245AB88100952B4D /* BroadcastEncrypterProvider.swift */; };
 		219C7B76245AB8E500952B4D /* ConcreteBroadcastIdEncrypterProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219C7B75245AB8E500952B4D /* ConcreteBroadcastIdEncrypterProviderTests.swift */; };
+		219C7B78245AD4B700952B4D /* TestHelpersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219C7B77245AD4B700952B4D /* TestHelpersTests.swift */; };
 		21AF36AB241A8E50001A4910 /* BTLEListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AF36AA241A8E50001A4910 /* BTLEListener.swift */; };
 		21B3D2E3242906AE00573061 /* SecureRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B3D2E2242906AE00573061 /* SecureRequestTests.swift */; };
 		21B3D2E52429112B00573061 /* SecureRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B3D2E42429112B00573061 /* SecureRequest.swift */; };
@@ -301,6 +302,7 @@
 		219B61362447371700E2F1A6 /* UUIDExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UUIDExtensionsTests.swift; sourceTree = "<group>"; };
 		219C7B73245AB88100952B4D /* BroadcastEncrypterProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastEncrypterProvider.swift; sourceTree = "<group>"; };
 		219C7B75245AB8E500952B4D /* ConcreteBroadcastIdEncrypterProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcreteBroadcastIdEncrypterProviderTests.swift; sourceTree = "<group>"; };
+		219C7B77245AD4B700952B4D /* TestHelpersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpersTests.swift; sourceTree = "<group>"; };
 		21AF36AA241A8E50001A4910 /* BTLEListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTLEListener.swift; sourceTree = "<group>"; };
 		21B3D2E2242906AE00573061 /* SecureRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRequestTests.swift; sourceTree = "<group>"; };
 		21B3D2E42429112B00573061 /* SecureRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRequest.swift; sourceTree = "<group>"; };
@@ -665,6 +667,7 @@
 				F6CC2CAA242BCCE90079432B /* Remote Notifications */,
 				F67C5157243E7BD5008E2945 /* SelfDiagnosis */,
 				0983ACD1243EB20A00DBB336 /* Status */,
+				219C7B77245AD4B700952B4D /* TestHelpersTests.swift */,
 			);
 			path = SonarTests;
 			sourceTree = "<group>";
@@ -1276,6 +1279,7 @@
 				098ED48C242E8B290029B729 /* PersistenceDouble.swift in Sources */,
 				F61695A32458B556006AABE3 /* StatusNotificationHandlerTests.swift in Sources */,
 				092BB5AB244622200036B30E /* RootViewControllerTests.swift in Sources */,
+				219C7B78245AD4B700952B4D /* TestHelpersTests.swift in Sources */,
 				21E50511244470590065C69B /* ContactEventTests.swift in Sources */,
 				89896E622435F37300F949EA /* ProjectTests.swift in Sources */,
 				F604977524549C95002B8503 /* LinkingIdManagerTests.swift in Sources */,

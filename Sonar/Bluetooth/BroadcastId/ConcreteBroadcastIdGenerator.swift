@@ -34,8 +34,11 @@ class ConcreteBroadcastIdGenerator: BroadcastIdGenerator {
             return broadcastId
         }
         
-        let midnight = Calendar.current.startOfDay(for: Calendar.current.date(byAdding: .day, value: 1, to: date)!)
-        if let broadcastId = provider.getEncrypter()?.broadcastId(from: date, until: midnight) {
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone(identifier: "UTC")!
+        let midnightUTC = calendar.startOfDay(for: calendar.date(byAdding: .day, value: 1, to: date)!)
+
+        if let broadcastId = provider.getEncrypter()?.broadcastId(from: date, until: midnightUTC) {
             storage.save(broadcastId: broadcastId, date: date)
             return broadcastId
         } else {

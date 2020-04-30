@@ -51,7 +51,7 @@ class ConcreteBroadcastIdGeneratorTests: XCTestCase {
     func test_generates_and_caches_broadcastId_when_none_cached() {
         let today = Date()
         let todayMidday = today.midday
-        let tomorrowMidnight = today.followingMidnight
+        let tomorrowMidnightUTC = today.followingMidnightUTC
         storage = MockBroadcastRotationKeyStorage(
             stubbedKey: nil,
             stubbedBroadcastId: nil,
@@ -61,7 +61,7 @@ class ConcreteBroadcastIdGeneratorTests: XCTestCase {
         let broadcastId = generator.broadcastIdentifier(date: todayMidday)
         
         XCTAssertEqual(encrypter.startDate, todayMidday)
-        XCTAssertEqual(encrypter.endDate, tomorrowMidnight)
+        XCTAssertEqual(encrypter.endDate, tomorrowMidnightUTC)
         XCTAssertEqual(encrypter.callCount, 1)
         XCTAssertNotNil(broadcastId)
         XCTAssertEqual(storage.savedBroadcastId, broadcastId)
@@ -99,7 +99,7 @@ class ConcreteBroadcastIdGeneratorTests: XCTestCase {
 
         let broadcastId = generator.broadcastIdentifier(date: todayMidday)
         XCTAssertEqual(encrypter.startDate, todayMidday)
-        XCTAssertEqual(encrypter.endDate, today.followingMidnight)
+        XCTAssertEqual(encrypter.endDate, today.followingMidnightUTC)
         XCTAssertEqual(encrypter.callCount, 1)
         XCTAssertNotEqual(broadcastId, staleBroadcastId)
         XCTAssertEqual(storage.savedBroadcastId, broadcastId)
@@ -165,16 +165,4 @@ struct MockEncrypterProvider: BroadcastIdEncrypterProvider {
     func getEncrypter() -> BroadcastIdEncrypter? {
         return encrypter
     }
-}
-
-extension Date {
-    
-    var midday: Date {
-        return Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: self)!
-    }
-
-    var followingMidnight: Date {
-        return Calendar.current.startOfDay(for: Calendar.current.date(byAdding: .day, value: 1, to: self)!)
-    }
-
 }
