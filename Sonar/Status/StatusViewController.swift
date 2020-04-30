@@ -71,21 +71,38 @@ class StatusViewController: UIViewController, Storyboarded {
         diagnosisStatusView.layer.cornerRadius = 8
         diagnosisStatusView.layer.masksToBounds = true
         readLatestAdviceLabel.textColor = UIColor(named: "NHS Link")
-        
+
+        let readLatestAdviceText: String
         if persistence.potentiallyExposed != nil || persistence.selfDiagnosis?.symptoms.isEmpty ?? false {
-            readLatestAdviceLabel.attributedText = NSAttributedString(string: "Read what to do next".localized, attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue])
+            readLatestAdviceText = "Read what to do next"
         } else {
-            readLatestAdviceLabel.attributedText = NSAttributedString(string: "Read Latest Advice".localized, attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue])
+            readLatestAdviceText = "Read Latest Advice"
         }
-        
+        readLatestAdviceLabel.attributedText = NSAttributedString(
+            string: readLatestAdviceText.localized,
+            attributes: [
+                .underlineStyle: NSUnderlineStyle.single.rawValue,
+                .foregroundColor: UIColor(named: "NHS Link")!,
+                .font: UIFont.preferredFont(forTextStyle: .body),
+            ]
+        )
+
         medicalAdviceLabel.textColor = UIColor(named: "NHS Secondary Text")
 
         diagnosisStatusView.addGestureRecognizer(
             UITapGestureRecognizer(target: self, action: #selector(diagnosisStatusTapped))
         )
         
-        nhs111label.setAttributedTitle(NSAttributedString(string: "NHS Coronavirus".localized, attributes:
-            [.underlineStyle: NSUnderlineStyle.single.rawValue, .foregroundColor: UIColor(named: "NHS Link"), NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .body)]), for: .normal)
+        nhs111label.setAttributedTitle(
+            NSAttributedString(
+                string: "NHS Coronavirus".localized,
+                attributes: [
+                    .underlineStyle: NSUnderlineStyle.single.rawValue,
+                    .foregroundColor: UIColor(named: "NHS Link")!,
+                    .font: UIFont.preferredFont(forTextStyle: .body),
+                ]
+            ),
+            for: .normal)
 
         notRightView.layer.cornerRadius = 8
         notRightSubtitleLabel.textColor = UIColor(named: "NHS Secondary Text")
