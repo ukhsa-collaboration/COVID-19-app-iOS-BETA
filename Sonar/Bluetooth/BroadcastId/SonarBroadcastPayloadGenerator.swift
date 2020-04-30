@@ -32,12 +32,13 @@ class SonarBroadcastPayloadGenerator: BroadcastPayloadGenerator {
     }
 
     func broadcastPayload(date: Date) -> BroadcastPayload? {
-        if let (broadcastId, broadcastIdDate) = storage.readBroadcastId(), Calendar.current.isDateInToday(broadcastIdDate), let secKey = persistence.registration?.broadcastRotationKey {
-            return BroadcastPayload(cryptogram: broadcastId, secKey: secKey) // TODO: has to come from registration
-        }
-        
+        // TODO: Using the UTC calendar here to try and ensure isDateInToday() uses "today UTC" is not tested, but should be—need minute to midnight, midnight, minute past midnight tests
         var calendar = Calendar.current
         calendar.timeZone = TimeZone(identifier: "UTC")!
+        if let (broadcastId, broadcastIdDate) = storage.readBroadcastId(), calendar.isDateInToday(broadcastIdDate), let secKey = persistence.registration?.broadcastRotationKey {
+            return BroadcastPayload(cryptogram: broadcastId, secKey: secKey)
+        }
+        
         let midnightUTC = calendar.startOfDay(for: calendar.date(byAdding: .day, value: 1, to: date)!)
 
         if let broadcastId = provider.getEncrypter()?.broadcastId(from: date, until: midnightUTC) {
