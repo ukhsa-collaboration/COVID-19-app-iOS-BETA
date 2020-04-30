@@ -180,6 +180,8 @@
 		F694B1BE2459EB3800C6A5D1 /* NotificationAcknowledgerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F694B1BD2459EB3800C6A5D1 /* NotificationAcknowledgerTests.swift */; };
 		F694B1C02459EEB800C6A5D1 /* NotificationAcknowledgerDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = F694B1BF2459EEB800C6A5D1 /* NotificationAcknowledgerDouble.swift */; };
 		F694B1C2245A4A5600C6A5D1 /* ErrorLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F694B1C1245A4A5600C6A5D1 /* ErrorLabel.swift */; };
+		F694B1C4245B899C00C6A5D1 /* StatusContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F694B1C3245B899C00C6A5D1 /* StatusContent.swift */; };
+		F694B1C6245B8B9D00C6A5D1 /* statusContent.json in Resources */ = {isa = PBXBuildFile; fileRef = F694B1C5245B8B9D00C6A5D1 /* statusContent.json */; };
 		F6AB2F20243D359F00386D6B /* SubmitSymptomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */; };
 		F6CC2CA9242BC7FC0079432B /* RemoteNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CC2CA8242BC7FC0079432B /* RemoteNotificationManager.swift */; };
 		F6CC2CAC242BCD0D0079432B /* RemoteNotificationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CC2CAB242BCD0D0079432B /* RemoteNotificationManagerTests.swift */; };
@@ -439,6 +441,8 @@
 		F694B1BD2459EB3800C6A5D1 /* NotificationAcknowledgerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAcknowledgerTests.swift; sourceTree = "<group>"; };
 		F694B1BF2459EEB800C6A5D1 /* NotificationAcknowledgerDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAcknowledgerDouble.swift; sourceTree = "<group>"; };
 		F694B1C1245A4A5600C6A5D1 /* ErrorLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorLabel.swift; sourceTree = "<group>"; };
+		F694B1C3245B899C00C6A5D1 /* StatusContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusContent.swift; sourceTree = "<group>"; };
+		F694B1C5245B8B9D00C6A5D1 /* statusContent.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = statusContent.json; sourceTree = "<group>"; };
 		F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitSymptomsViewController.swift; sourceTree = "<group>"; };
 		F6CA2818242E41F700F8DC55 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F6CBA499244F6E2C00D20610 /* GoogleService-Info.production.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.production.plist"; sourceTree = "<group>"; };
@@ -601,9 +605,11 @@
 		0995ABCD243D034E0057C0D7 /* Status */ = {
 			isa = PBXGroup;
 			children = (
+				F694B1C5245B8B9D00C6A5D1 /* statusContent.json */,
 				F758B8C3242CC0EE003AE16D /* Status.storyboard */,
 				134470AF2454D614001A0AD9 /* CoughUpdateViewController.swift */,
 				09A9254A2457B2CA00C5DBC1 /* MedicalWorkerInstructionsViewController.swift */,
+				F694B1C3245B899C00C6A5D1 /* StatusContent.swift */,
 				F61695A02458B3C0006AABE3 /* StatusNotificationHandler.swift */,
 				F64D76F624577D9600B1D495 /* StatusProvider.swift */,
 				214209B52421072C00C7BFF3 /* StatusViewController.swift */,
@@ -1254,6 +1260,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F694B1C6245B8B9D00C6A5D1 /* statusContent.json in Resources */,
 				F60497792454A40B002B8503 /* LinkingId.storyboard in Resources */,
 				F66CC927244F6340001399D4 /* GoogleService-Info.plist in Resources */,
 				F758B8C4242CC0EE003AE16D /* Status.storyboard in Resources */,
@@ -1421,6 +1428,7 @@
 				F6CC2CA9242BC7FC0079432B /* RemoteNotificationManager.swift in Sources */,
 				F70CB8192450CAB700ED6E7F /* OnboardingLogoStrapline.swift in Sources */,
 				AE2A5E502423C473007A4771 /* ContactEvent.swift in Sources */,
+				F694B1C4245B899C00C6A5D1 /* StatusContent.swift in Sources */,
 				219B613524471B9800E2F1A6 /* UUIDExtensions.swift in Sources */,
 				89F06B332434AF130074C612 /* ForwardingLogHandler.swift in Sources */,
 				21B3D2E52429112B00573061 /* SecureRequest.swift in Sources */,

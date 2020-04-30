@@ -12,6 +12,7 @@ import Logging
 class StatusViewController: UIViewController, Storyboarded {
     static let storyboardName = "Status"
 
+    private let content = StatusContent.shared
     private var persistence: Persisting!
     private var registrationService: RegistrationService!
     private var notificationCenter: NotificationCenter!
@@ -135,15 +136,7 @@ class StatusViewController: UIViewController, Storyboarded {
     }
         
     @objc func diagnosisStatusTapped() {
-        let path: String
-        switch statusProvider.status {
-        case .blue:
-            path = "full-guidance-on-staying-at-home-and-away-from-others/full-guidance-on-staying-at-home-and-away-from-others"
-        case .amber, .red:
-            path = "covid-19-stay-at-home-guidance/stay-at-home-guidance-for-households-with-possible-coronavirus-covid-19-infection"
-        }
-        let url = URL(string: "https://www.gov.uk/government/publications/\(path)")!
-        UIApplication.shared.open(url)
+        UIApplication.shared.open(content[statusProvider.status].readUrl)
     }
 
     @IBAction func notRightTapped() {
@@ -178,7 +171,7 @@ class StatusViewController: UIViewController, Storyboarded {
     }
 
     @IBAction func nhs111Tapped(_ sender: UIButton) {
-        UIApplication.shared.open(URL(string: "https://111.nhs.uk/covid-19/")!)
+        UIApplication.shared.open(content[statusProvider.status].nhsCoronavirusUrl)
     }
 
     @IBAction func retryRegistrationTapped() {
