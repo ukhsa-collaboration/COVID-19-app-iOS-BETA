@@ -38,7 +38,7 @@ class ConcreteBroadcastIdGeneratorTests: XCTestCase {
     }
 
     func test_it_provides_the_encrypted_result_once_given_sonar_id_and_server_public_key() {
-        let registration = Registration(id: UUID(uuidString: "054DDC35-0287-4247-97BE-D9A3AF012E36")!, secretKey: Data(), broadcastRotationKey: knownGoodECPublicKey())
+        let registration = Registration(id: UUID(uuidString: "054DDC35-0287-4247-97BE-D9A3AF012E36")!, secretKey: Data(), broadcastRotationKey: SecKey.sampleEllipticCurveKey)
         let persistence = PersistenceDouble(registration: registration)
         let provider = ConcreteBroadcastIdEncrypterProvider(persistence: persistence)
         generator = ConcreteBroadcastIdGenerator(storage: storage, provider: provider)

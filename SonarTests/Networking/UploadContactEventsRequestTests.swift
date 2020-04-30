@@ -37,7 +37,7 @@ class UploadContactEventsRequestTests: XCTestCase {
             ContactEvent(encryptedRemoteContactId: broadcastId3, timestamp: timestamp3, rssiValues: [rssi3], rssiIntervals: [30], duration: 0)
         ]
 
-        let registration = Registration(id: anonymousId, secretKey: dummyKey, broadcastRotationKey: knownGoodECPublicKey())
+        let registration = Registration(id: anonymousId, secretKey: dummyKey, broadcastRotationKey: SecKey.sampleEllipticCurveKey)
         request = UploadContactEventsRequest(
             registration: registration,
             symptomsTimestamp: Date(),

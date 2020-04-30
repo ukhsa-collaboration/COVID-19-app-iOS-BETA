@@ -32,7 +32,7 @@ class BroadcastIdEncypterTests: XCTestCase {
         slightlyLaterDate = knownDate.addingTimeInterval(1)
         muchLaterDate = knownDate.addingTimeInterval(86400)
 
-        let serverPublicKey = knownGoodECPublicKey()
+        let serverPublicKey = SecKey.sampleEllipticCurveKey
 
         encrypter = ConcreteBroadcastIdEncrypter(key: serverPublicKey, sonarId: cannedId)
     }

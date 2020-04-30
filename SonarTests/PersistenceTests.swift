@@ -56,7 +56,7 @@ class PersistenceTests: TestCase {
 
         let id = UUID()
         let secretKey = "secret key".data(using: .utf8)!
-        let rotationKey = knownGoodECPublicKey()
+        let rotationKey = SecKey.sampleEllipticCurveKey
         let registration = Registration(id: id, secretKey: secretKey, broadcastRotationKey: rotationKey)
         persistence.registration = registration
 
@@ -71,7 +71,7 @@ class PersistenceTests: TestCase {
 
         let id = UUID()
         let secretKey = "secret key".data(using: .utf8)!
-        let registration = Registration(id: id, secretKey: secretKey, broadcastRotationKey: knownGoodECPublicKey())
+        let registration = Registration(id: id, secretKey: secretKey, broadcastRotationKey: SecKey.sampleEllipticCurveKey)
         persistence.registration = registration
 
         XCTAssertEqual(delegate.recordedRegistration, registration)
@@ -168,7 +168,7 @@ class PersistenceTests: TestCase {
         
         let id = UUID()
         let secretKey = "secret key".data(using: .utf8)!
-        persistence.registration = Registration(id: id, secretKey: secretKey, broadcastRotationKey: knownGoodECPublicKey())
+        persistence.registration = Registration(id: id, secretKey: secretKey, broadcastRotationKey: SecKey.sampleEllipticCurveKey)
         XCTAssertEqual(monitor.detectedEvents, [.registrationSucceeded])
     }
 
