@@ -87,6 +87,41 @@ class StartDateViewController: UIViewController {
         startDate = dateOptions[datePicker.selectedRow(inComponent: 0)]
     }
 
+    // MARK: - Support for Dyanmic Type
+
+    private func makeLabelForPickerRow() -> UILabel {
+        let label = UILabel()
+        label.font = datePickerRowFont
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        return label
+    }
+        
+    private lazy var datePickerRowHeight: CGFloat = {
+        return dateOptions.map(heightForRowWithDate).max()!
+    }()
+    
+    private lazy var datePickerRowFont: UIFont? = {
+        let descriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: .body)
+        guard let size = descriptor.object(forKey: .size) as? NSNumber else {
+            logger.error("Could not get size of body font")
+            return nil
+        }
+
+        return UIFont.systemFont(ofSize: CGFloat(size.doubleValue))
+
+    }()
+    
+    private func heightForRowWithDate(_ date: Date) -> CGFloat {
+        let max = CGSize(width: datePicker.bounds.size.width, height: .greatestFiniteMagnitude)
+        let label = makeLabelForPickerRow()
+        label.frame = CGRect(origin: .zero, size: max)
+        label.text = titleForPickerRowWithDate(date)
+        label.sizeToFit()
+        let spacing = CGFloat(16)
+        return label.frame.height + spacing
+    }
+
 }
 
 extension StartDateViewController: UIPickerViewDataSource {
@@ -98,7 +133,6 @@ extension StartDateViewController: UIPickerViewDataSource {
         return dateOptions.count
     }
     
-    // MARK: - Support for Dyanmic Type
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         let label = view as? UILabel ?? makeLabelForPickerRow()
@@ -108,39 +142,21 @@ extension StartDateViewController: UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-        guard let font = fontForPickerRow() else {
-            return CGFloat(32) // reasonable-looking fallback height
-        }
-        
-        let spacing = CGFloat(16)
-        return font.pointSize + spacing
-    }
-    
-    private func makeLabelForPickerRow() -> UILabel {
-        let label = UILabel()
-        label.font = fontForPickerRow()
-        label.textAlignment = .center
-        return label
-    }
-    
-    private func fontForPickerRow() -> UIFont? {
-        let descriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: .body)
-        guard let size = descriptor.object(forKey: .size) as? NSNumber else {
-            logger.error("Could not get size of body font")
-            return nil
-        }
-
-        return UIFont.systemFont(ofSize: CGFloat(size.doubleValue))
+        return datePickerRowHeight
     }
 }
 
 extension StartDateViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return dateFormatter.string(from: dateOptions[row])
+        return titleForPickerRowWithDate(dateOptions[row])
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         startDate = dateOptions[row]
+    }
+    
+    private func titleForPickerRowWithDate(_ date: Date) -> String {
+        return dateFormatter.string(from: date)
     }
 }
 
