@@ -66,8 +66,9 @@ class UpdateDiagnosisCoordinator: Coordinator {
             self.navigationController.dismiss(animated: true, completion: nil)
             
             if self.symptoms.contains(.temperature) {
-                self.persisting.selfDiagnosis = SelfDiagnosis(symptoms: self.symptoms, startDate: self.startDate)
-                self.persisting.selfDiagnosis?.expiresIn(days: 1)
+                var diagnosis = SelfDiagnosis(symptoms: self.symptoms, startDate: Date())
+                diagnosis.expiresIn(days: 1)
+                self.persisting.selfDiagnosis = diagnosis
             } else {
                 self.persisting.selfDiagnosis = nil
                 if self.symptoms.contains(.cough) {
