@@ -23,8 +23,8 @@ class LocalNotifcationScheduler: Scheduler {
         removePendingDiagnosisNotification()
         
         let content = UNMutableNotificationContent()
-        content.title = "How are you feeling today?"
-        content.body = "Open the app to update your symptoms and view the latest advice."
+        content.title = "NHS COVID-19"
+        content.body = "How are you feeling today?\n\nPlease open the app to update your symptoms and view your latest advice. Your help saves lives."
         
         let components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: expiryDate)
         let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
