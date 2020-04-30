@@ -18,6 +18,7 @@ class PostcodeViewController: UIViewController, Storyboarded {
     private var continueHandler: (() -> Void)! = nil
 
     @IBOutlet private var scrollView: UIScrollView!
+    @IBOutlet var postcodeError: UILabel!
     @IBOutlet var postcodeField: UITextField!
     @IBOutlet var continueAccessoryView: UIView!
 
@@ -38,8 +39,11 @@ class PostcodeViewController: UIViewController, Storyboarded {
         self.notificationCenter = notificationCenter
         self.continueHandler = continueHandler
     }
-    
+
+    // MARK: - View lifecycle
     override func viewDidLoad() {
+        postcodeError.isHidden = true
+
         // Hide the keyboard if the user taps anywhere else
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: postcodeField, action: #selector(resignFirstResponder)))
         
@@ -49,10 +53,11 @@ class PostcodeViewController: UIViewController, Storyboarded {
     
     @IBAction func didTapContinue() {
         guard hasValidPostcode() else {
-            showAlert()
+            showPostcodeError()
             return
         }
-        
+
+        postcodeError.isHidden = true
         persistence.partialPostcode = enteredPostcode
         continueHandler()
     }
@@ -70,14 +75,12 @@ class PostcodeViewController: UIViewController, Storyboarded {
         return PostcodeValidator.isValid(enteredPostcode)
     }
     
-    private func showAlert() {
-        let alert = UIAlertController(
-            title: nil,
-            message: "Please enter the first part of a valid postcode, e.g.: PO30, E2, M1, EH1, L36.",
-            preferredStyle: .alert
-        )
-        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-        present(alert, animated: true, completion: nil)
+    private func showPostcodeError() {
+        postcodeError.isHidden = false
+        postcodeError.textColor = UIColor(named: "NHS Error")
+
+        postcodeField.layer.borderWidth = 3
+        postcodeField.layer.borderColor = UIColor(named: "NHS Error")!.cgColor
     }
     
     @objc private func keyboardWasShown(_ notification: Notification) {
@@ -104,14 +107,9 @@ class PostcodeViewController: UIViewController, Storyboarded {
 
 extension PostcodeViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        guard hasValidPostcode() else {
-            textField.layer.borderWidth = 3
-            textField.layer.borderColor = UIColor(named: "NHS Error")!.cgColor
-            return false
-        }
-
         didTapContinue()
-        return false
+
+        return true
     }
         
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString: String) -> Bool {

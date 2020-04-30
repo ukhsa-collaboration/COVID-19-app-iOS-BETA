@@ -10,21 +10,24 @@ import XCTest
 @testable import Sonar
 
 class PostcodeViewControllerTests: TestCase {
-    
+
     func testRejectsInvalidPostcodes() {
         let persistence = PersistenceDouble()
         let vc = PostcodeViewController.instantiate()
         var continued = false
         vc.inject(persistence: persistence, notificationCenter: NotificationCenter()) { continued = true }
         parentViewControllerForTests.viewControllers = [vc]
+
         XCTAssertNotNil(vc.view)
-        
+        XCTAssertTrue(vc.postcodeError.isHidden)
+
         vc.postcodeField.text = "1"
         vc.didTapContinue()
         
         XCTAssertNil(persistence.partialPostcode)
         XCTAssertFalse(continued)
-        XCTAssertNotNil(vc.presentedViewController as? UIAlertController)
+
+        XCTAssertFalse(vc.postcodeError.isHidden)
     }
     
     func testAcceptsValidPostcodes() {
@@ -40,8 +43,7 @@ class PostcodeViewControllerTests: TestCase {
         
         XCTAssertEqual(persistence.partialPostcode, "X1")
         XCTAssertTrue(continued)
-        XCTAssertNil(vc.presentedViewController)
-
+        XCTAssertTrue(vc.postcodeError.isHidden)
     }
     
     func testRemovesTrailingNewline() {
