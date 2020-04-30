@@ -1,7 +1,7 @@
 {
-  "api_endpoint": "",
-  "sonar_header_value": "",
-  "sonar_service_uuid": "",
-  "sonar_id_characteristic_uuid": "",
-  "sonar_keepalive_characteristic_uuid": ""
+  "api_endpoint": "https://sonar.example.com",
+  "sonar_header_value": "a-header-value",
+  "sonar_service_uuid": "an-uuid",
+  "sonar_id_characteristic_uuid": "another-uuid",
+  "sonar_keepalive_characteristic_uuid": "yet-another-uuid"
 }
