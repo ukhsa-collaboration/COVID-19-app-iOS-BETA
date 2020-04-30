@@ -31,15 +31,17 @@ private extension AppInfo {
         var displayName: String
         var key: KeyPath<AppInfo, Decoded<Value>?>
         var format: (Value) -> String
+        var defaultValue: String?
 
-        init(displayName: String, key: KeyPath<AppInfo, Decoded<Value>?>, format: @escaping (Value) -> String = { "\($0)" }) {
+        init(displayName: String, key: KeyPath<AppInfo, Decoded<Value>?>, defaultValue: String? = nil, format: @escaping (Value) -> String = { "\($0)" }) {
             self.displayName = displayName
             self.key = key
+            self.defaultValue = defaultValue
             self.format = format
         }
 
         func value(in info: AppInfo) -> String? {
-            return info.value(for: key).map(format)
+            return info.value(for: key).map(format) ?? defaultValue
         }
     }
 
@@ -63,6 +65,7 @@ private extension AppInfo {
         let interestingCases: [DisplayAttributeProtocol] = [
             DisplayAttribute(displayName: "Name", key: \.bundleName),
             DisplayAttribute(displayName: "Minimum supported OS version", key: \.minimumOSVersion),
+            DisplayAttribute(displayName: "Supported interface styles", key: \.supportedInterfaceStyles, defaultValue: "All"),
             DisplayAttribute(displayName: "Supported interface orientations", key: \.supportedInterfaceOrientations) {
                 $0.displayValue
             },

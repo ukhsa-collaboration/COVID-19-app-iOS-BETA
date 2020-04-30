@@ -63,6 +63,12 @@ struct AppInfo: Decodable {
         case right = "UIInterfaceOrientationLandscapeRight"
     }
     
+    enum InterfaceStyle: String, Codable, CaseIterable {
+        case automatic = "Automatic"
+        case light = "Light"
+        case dark = "Dark"
+    }
+    
     enum DeviceFamily: Int, Codable {
         case iPhone = 1
         case iPad = 2
@@ -139,6 +145,7 @@ struct AppInfo: Decodable {
         case requiredBackgroundModes = "UIBackgroundModes"
         case supportedInterfaceOrientations = "UISupportedInterfaceOrientations"
         case supportedInterfaceOrientationsForIpad = "UISupportedInterfaceOrientations~ipad"
+        case supportedInterfaceStyles = "UIUserInterfaceStyle"
         case bluetoothAlwaysUsageDescription = "NSBluetoothAlwaysUsageDescription"
         case bluetoothPeripheralUsageDescription = "NSBluetoothPeripheralUsageDescription"
     }
@@ -173,6 +180,7 @@ struct AppInfo: Decodable {
         static let requiredDeviceCapabilities = AttributeKey(.requiredDeviceCapabilities, keyPath: \.requiredDeviceCapabilities)
         static let supportedInterfaceOrientations = AttributeKey(.supportedInterfaceOrientations, keyPath: \.supportedInterfaceOrientations)
         static let supportedInterfaceOrientationsForIpad = AttributeKey(.supportedInterfaceOrientationsForIpad, keyPath: \.supportedInterfaceOrientationsForIpad)
+        static let supportedInterfaceStyles = AttributeKey(.supportedInterfaceStyles, keyPath: \.supportedInterfaceStyles)
         static let bluetoothAlwaysUsageDescription = AttributeKey(.bluetoothAlwaysUsageDescription, keyPath: \.bluetoothAlwaysUsageDescription)
         static let bluetoothPeripheralUsageDescription = AttributeKey(.bluetoothPeripheralUsageDescription, keyPath: \.bluetoothPeripheralUsageDescription)
 
@@ -206,6 +214,7 @@ struct AppInfo: Decodable {
             requiredBackgroundModes,
             supportedInterfaceOrientations,
             supportedInterfaceOrientationsForIpad,
+            supportedInterfaceStyles,
             bluetoothAlwaysUsageDescription,
             bluetoothPeripheralUsageDescription,
         ]
@@ -268,6 +277,7 @@ struct AppInfo: Decodable {
     var requiredBackgroundModes: Decoded<Set<BackgroundModes>>?
     var supportedInterfaceOrientations: Decoded<Set<InterfaceOrientation>>?
     var supportedInterfaceOrientationsForIpad: Decoded<Set<InterfaceOrientation>>?
+    var supportedInterfaceStyles: Decoded<InterfaceStyle>?
     var bluetoothAlwaysUsageDescription: Decoded<String>?
     var bluetoothPeripheralUsageDescription: Decoded<String>?
 
