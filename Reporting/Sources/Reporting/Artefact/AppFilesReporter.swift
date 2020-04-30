@@ -257,7 +257,7 @@ extension FileReporterContext {
     }
     
     mutating func checkHasNoUnexptectedFilesLeft() -> IntegrityCheck.Result {
-        for asset in CoLocate.knownAssets {
+        for asset in Sonar.knownAssets {
             _ = check(for: asset)
         }
         

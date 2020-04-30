@@ -18,7 +18,7 @@ struct ArtefactReporter {
         let data = try Data(contentsOf: infoURL)
         let appInfo = try PropertyListDecoder().decode(AppInfo.self, from: data)
         
-        let appInfoReporter = AppInfoReporter(compilationRequirements: CoLocate.compilationRequirements)
+        let appInfoReporter = AppInfoReporter(compilationRequirements: Sonar.compilationRequirements)
         let appFilesReporter = AppFilesReporter()
         
         return Report(

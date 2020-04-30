@@ -1,6 +1,6 @@
 import Foundation
 
-struct CoLocate {
+struct Sonar {
     static let compilationRequirements: [CompilationRequirement] = [
         MinimumOSCompilationRequirement.macOS10_15_4,
         MinimumXcodeCompilationRequirement.xcode11,
