@@ -52,7 +52,7 @@ class AnswerButton: UIControl {
 
         layer.cornerRadius = 8
 
-        textLabel.font = UIFont.preferredFont(forTextStyle: .body)
+        textLabel.font = UIFont.preferredFont(forTextStyle: .headline)
         textLabel.textColor = UIColor(named: "NHS Text")!
 
         imageView.image = UIImage(named: "Controls_RadioButton_Unselected")

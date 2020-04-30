@@ -59,10 +59,12 @@ class QuestionSymptomsViewController: UIViewController, Storyboarded {
         pageLabel.accessibilityLabel = "Step \(pageNumber!) of \(pageCount!)"
         titleLabel.text = questionTitle
         detailLabel.text = questionDetail
+        detailLabel.textColor = UIColor(named: "NHS Secondary Text")
         errorLabel.text = questionError
         yesButton.text = questionYes
         noButton.text = questionNo
         questionButton.setTitle(buttonText, for: .normal)
+        pageLabel.accessibilityLabel = "Step \(pageNumber) of \(pageCount)"
         
         yesButton.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longPressedYes)))
         noButton.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longPressedNo)))
