@@ -41,6 +41,7 @@ class PostcodeViewController: UIViewController, Storyboarded {
     }
 
     // MARK: - View lifecycle
+
     override func viewDidLoad() {
         postcodeError.isHidden = true
 
@@ -50,7 +51,9 @@ class PostcodeViewController: UIViewController, Storyboarded {
         notificationCenter.addObserver(self, selector: #selector(keyboardWasShown(_:)), name: UIResponder.keyboardDidShowNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(keyboardWasHidden(_:)), name: UIResponder.keyboardDidHideNotification, object: nil)
     }
-    
+
+    // MARK: - IBActions
+
     @IBAction func didTapContinue() {
         guard hasValidPostcode() else {
             showPostcodeError()
@@ -61,7 +64,30 @@ class PostcodeViewController: UIViewController, Storyboarded {
         persistence.partialPostcode = enteredPostcode
         continueHandler()
     }
-    
+
+    @objc private func keyboardWasShown(_ notification: Notification) {
+        guard let kbFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+
+        let insets = UIEdgeInsets(top: 0, left: 0, bottom: kbFrame.size.height, right: 0)
+        scrollView.contentInset = insets
+        scrollView.scrollIndicatorInsets = insets
+
+        var visibleRegion = view.frame
+        visibleRegion.size.height -= kbFrame.height
+
+        if !visibleRegion.contains(postcodeField.frame.origin) {
+            scrollView.scrollRectToVisible(postcodeField.frame, animated: true)
+        }
+    }
+
+    @objc private func keyboardWasHidden(_ notification: Notification) {
+        let insets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        scrollView.contentInset = insets
+        scrollView.scrollIndicatorInsets = insets
+    }
+
+    // MARK: - Private
+
     private var enteredPostcode: String {
         get {
             guard let rawPostcode = postcodeField?.text else { return "" }
@@ -81,27 +107,6 @@ class PostcodeViewController: UIViewController, Storyboarded {
 
         postcodeField.layer.borderWidth = 3
         postcodeField.layer.borderColor = UIColor(named: "NHS Error")!.cgColor
-    }
-    
-    @objc private func keyboardWasShown(_ notification: Notification) {
-        guard let kbFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
-        
-        let insets = UIEdgeInsets(top: 0, left: 0, bottom: kbFrame.size.height, right: 0)
-        scrollView.contentInset = insets
-        scrollView.scrollIndicatorInsets = insets
-
-        var visibleRegion = view.frame
-        visibleRegion.size.height -= kbFrame.height
-
-        if !visibleRegion.contains(postcodeField.frame.origin) {
-            scrollView.scrollRectToVisible(postcodeField.frame, animated: true)
-        }
-    }
-    
-    @objc private func keyboardWasHidden(_ notification: Notification) {
-        let insets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        scrollView.contentInset = insets
-        scrollView.scrollIndicatorInsets = insets
     }
 }
 
