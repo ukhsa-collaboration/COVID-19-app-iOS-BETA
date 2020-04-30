@@ -1,4 +1,4 @@
-name: trigger-upload
+name: trigger-internal-upload
 
 on:
   schedule:
@@ -27,15 +27,14 @@ jobs:
           git fetch --tags
           git branch --contains tags/upload-to-internal | grep internal || echo "::set-output name=upload::true"
 
-      - name: Trigger deployment
+      - name:
         if: steps.check-upload-tag.outputs.upload == 'true'
-        env:
-          GITHUB_RESPOSITORY: ${{ github.repository }}
-          GITHUB_ACCESS_TOKEN: ${{ secrets.deployment_token }}
-          GITHUB_SHA: ${{ github.sha }}
-          DEPLOYMENT_PAYLOAD: 'This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}**.\n\nThe commit hash was: _${{ github.sha }}_.'
-        run: ./bin/create-deployment internal
-        # continue-on-error: true
+        run: |
+          git fetch origin internal
+          git checkout internal
+          git merge upload-to-internal
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          git push origin internal
 
       - name: Notify Slack on Failure
         if: failure()

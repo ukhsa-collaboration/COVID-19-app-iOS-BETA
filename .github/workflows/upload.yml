@@ -1,10 +1,10 @@
 name: upload
 
 on:
-  deployment
-  # push:
-  #   branches:
-  #     - ci
+  push:
+    branches:
+      - internal
+      - production
 
 jobs:
   bump-build-version:
@@ -17,12 +17,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Merge master into deployment branch
-        run: |
-          git fetch origin ${{ github.event.deployment.environment }}
-          git checkout ${{ github.event.deployment.environment }}
-          git merge ${{ github.sha }}
-
       - name: Bump Version
         run: ./bin/bump-build-version
 
@@ -32,7 +26,7 @@ jobs:
       - name: Push deployment Branch
         run: |
           git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-          git push origin ${{ github.event.deployment.environment }}
+          git push
 
       - name: Notify Slack on Failure
         if: failure()
@@ -75,7 +69,7 @@ jobs:
           ENVIRONMENT_JSON_PRODUCTION: ${{ secrets.environment_json_production }}
           FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.apple_password }}
           MATCH_PASSWORD: ${{ secrets.match_password }}
-        run: fastlane release sonar_env:${{ github.event.deployment.environment }}
+        run: fastlane release sonar_env:${GITHUB_REF#refs/heads/}
 
       - name: Create App Report
         run: |
