@@ -78,17 +78,30 @@ class RootViewController: UIViewController {
     
     // MARK: - Routing
     func showFirstView() {
-        if !onboardingCoordinator.isOnboardingRequired {
-            show(viewController: statusViewController)
-        } else {
-            let onboardingViewController = OnboardingViewController.instantiate()
-            let env = OnboardingEnvironment(persistence: persistence, authorizationManager: authorizationManager, remoteNotificationManager: remoteNotificationManager, notificationCenter: NotificationCenter.default)
-            
-            onboardingViewController.inject(env: env, coordinator: onboardingCoordinator, bluetoothNursery: bluetoothNursery, uiQueue: self.uiQueue) {
+        show(viewController: UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateInitialViewController()!)
+        
+        onboardingCoordinator.determineIsOnboardingRequired { onboardingIsRequired in
+            if onboardingIsRequired {
+                let onboardingViewController = OnboardingViewController.instantiate()
+                let env = OnboardingEnvironment(
+                    persistence: self.persistence,
+                    authorizationManager: self.authorizationManager,
+                    remoteNotificationManager: self.remoteNotificationManager,
+                    notificationCenter: self.notificationCenter
+                )
+                
+                onboardingViewController.inject(
+                env: env,
+                coordinator: self.onboardingCoordinator,
+                bluetoothNursery: self.bluetoothNursery,
+                uiQueue: self.uiQueue) {
+                    self.show(viewController: self.statusViewController)
+                }
+                
+                self.show(viewController: onboardingViewController)
+            } else {
                 self.show(viewController: self.statusViewController)
             }
-            
-            show(viewController: onboardingViewController)
         }
     }
     

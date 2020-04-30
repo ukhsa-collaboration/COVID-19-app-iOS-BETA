@@ -32,12 +32,16 @@ class OnboardingCoordinatorTests: TestCase {
     }
     
     func testOnboardingIsRequiredWithoutRegistration() {
-        XCTAssert(onboardingCoordinator.isOnboardingRequired)
+        var isOnboardingRequired: Bool?
+        onboardingCoordinator.determineIsOnboardingRequired { isOnboardingRequired = $0 }
+        XCTAssertEqual(isOnboardingRequired, true)
     }
 
     func testOnboardingIsNotRequiredWhenWeHaveRegistration() {
         persistenceDouble.registration = .fake
-        XCTAssertFalse(onboardingCoordinator.isOnboardingRequired)
+        var isOnboardingRequired: Bool?
+        onboardingCoordinator.determineIsOnboardingRequired { isOnboardingRequired = $0 }
+        XCTAssertEqual(isOnboardingRequired, false)
     }
 
     func testInitialState() {

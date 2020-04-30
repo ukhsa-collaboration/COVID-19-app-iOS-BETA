@@ -13,7 +13,7 @@ import Logging
 protocol OnboardingCoordinating {
     typealias State = OnboardingCoordinator.State
     
-    var isOnboardingRequired: Bool { get }
+    func determineIsOnboardingRequired(completion: @escaping (Bool) -> Void)
     func state(completion: @escaping (State) -> Void)
 }
 
@@ -39,8 +39,8 @@ class OnboardingCoordinator: OnboardingCoordinating {
         self.bluetoothNursery = bluetoothNursery
     }
     
-    var isOnboardingRequired: Bool {
-        persistence.registration == nil
+    func determineIsOnboardingRequired(completion: @escaping (Bool) -> Void) {
+        completion(persistence.registration == nil)
     }
 
     func state(completion: @escaping (State) -> Void) {

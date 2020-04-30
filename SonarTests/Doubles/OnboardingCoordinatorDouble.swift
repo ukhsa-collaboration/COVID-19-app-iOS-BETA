@@ -14,4 +14,7 @@ class OnboardingCoordinatorDouble: OnboardingCoordinating {
     func state(completion: @escaping (OnboardingCoordinator.State) -> Void) {
         stateCompletion = completion
     }
+    func determineIsOnboardingRequired(completion: @escaping (Bool) -> Void) {
+        completion(isOnboardingRequired)
+    }
 }
