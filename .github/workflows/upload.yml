@@ -7,47 +7,20 @@ on:
       - production
 
 jobs:
-  bump-build-version:
+  upload:
     runs-on:
       - self-hosted
       - macos
     steps:
       - name: Checkout Project
         uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
 
-      - name: Bump Version
-        run: ./bin/bump-build-version
-
-      - name: Commit Version Bump
-        run: ./bin/commit-version-bump
-
-      - name: Push deployment Branch
+      - name: Bump the build version
         run: |
+          ./bin/bump-build-version
+          ./bin/commit-version-bump
           git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
           git push
-
-      - name: Notify Slack on Failure
-        if: failure()
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.slack_bot_token }}
-        uses: voxmedia/github-action-slack-notify-build@v1
-        with:
-          channel_id: G011ZPSAD4J
-          status: FAILED
-          color: danger
-
-  release:
-    needs: bump-build-version
-    runs-on:
-      - self-hosted
-      - macos
-    steps:
-      - name: Checkout Project
-        uses: actions/checkout@v2
-        with:
-          ref: ${{ github.event.deployment.environment }}
 
       - name: Switch to Xcode 11
         run: sudo xcode-select -s /Applications/Xcode_11.app
