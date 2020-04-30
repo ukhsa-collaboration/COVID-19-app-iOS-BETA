@@ -18,8 +18,6 @@
 	<string>1.0.1</string>
 	<key>CFBundleVersion</key>
 	<string>133</string>
-	<key>GOOGLE_SERVICE_INFO_PLIST</key>
-	<string>$(GOOGLE_SERVICE_INFO_PLIST)</string>
 	<key>GOOGLE_ANALYTICS_IDFV_COLLECTION_ENABLED</key>
 	<false/>
 	<key>LSApplicationCategoryType</key>
@@ -55,11 +53,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>FIREBASE_ANALYTICS_COLLECTION_ENABLED</key>
-	<false/>
-	<key>FirebaseScreenReportingEnabled</key>
-	<false/>
-    <key>UIUserInterfaceStyle</key>
-    <string>Light</string>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 </dict>
 </plist>

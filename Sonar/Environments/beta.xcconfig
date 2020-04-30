@@ -1,6 +1,5 @@
 #include "Sonar/Base.xcconfig"
 
 ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.beta
-GOOGLE_SERVICE_INFO_PLIST = GoogleService-Info.beta
 PRODUCT_BUNDLE_IDENTIFIER = uk.nhs.nhsx.beta.Sonar
 SWIFT_ACTIVE_COMPILATION_CONDITIONS = INTERNAL $(inherited)
