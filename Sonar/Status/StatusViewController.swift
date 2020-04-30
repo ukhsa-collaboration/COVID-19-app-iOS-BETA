@@ -41,8 +41,9 @@ class StatusViewController: UIViewController, Storyboarded {
     @IBOutlet weak var notRightSubtitleLabel: UILabel!
     @IBOutlet weak var noSymptomsLabel: UILabel!
 
-    @IBOutlet weak var linkingIdView: UIStackView!
-    @IBOutlet weak var linkingIdButton: ButtonWithDynamicType!
+    @IBOutlet weak var redStatusView: UIStackView!
+    @IBOutlet weak var healthcareWorkersInstructionsView: UIControl!
+
     @IBOutlet weak var nhs111label: ButtonWithDynamicType!
     @IBOutlet weak var medicalAdviceLabel: UILabel!
     
@@ -98,12 +99,6 @@ class StatusViewController: UIViewController, Storyboarded {
         notificationCenter.addObserver(self, selector: #selector(showRegistrationFailedStatus), name: RegistrationFailedNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(reload), name: UIApplication.didBecomeActiveNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(reload), name: PotentiallyExposedNotification, object: nil)
-        
-        #if PILOT
-        linkingIdView.isHidden = false
-        #else
-        linkingIdView.isHidden = true
-        #endif
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -149,7 +144,7 @@ class StatusViewController: UIViewController, Storyboarded {
         showDrawer(vc)
     }
 
-    @IBAction func linkingIdButtonTapped(_ sender: ButtonWithDynamicType) {
+    @IBAction func linkingIdButtonTapped() {
         let vc = LinkingIdViewController.instantiate()
         vc.inject(persisting: persistence, linkingIdManager: linkingIdManager)
         showDrawer(vc)
@@ -184,14 +179,20 @@ class StatusViewController: UIViewController, Storyboarded {
                 diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Highlight")
                 diagnosisTitleLabel.text = "Follow the current advice to stop the spread of coronavirus".localized
                 howAreYouFeelingView.isHidden = false
+                redStatusView.isHidden = true
+                healthcareWorkersInstructionsView.isHidden = false
             case .amber:
                 diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
                 diagnosisTitleLabel.text = "You have been near someone who has coronavirus symptoms".localized
                 howAreYouFeelingView.isHidden = false
+                redStatusView.isHidden = true
+                healthcareWorkersInstructionsView.isHidden = false
             case .red:
                 diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
                 diagnosisTitleLabel.text = "Your symptoms indicate you may have coronavirus".localized
                 howAreYouFeelingView.isHidden = true
+                redStatusView.isHidden = false
+                healthcareWorkersInstructionsView.isHidden = true
         }
         
         symptomStackView.symptoms = persistence.selfDiagnosis?.symptoms
