@@ -43,6 +43,8 @@ class StatusViewController: UIViewController, Storyboarded {
     @IBOutlet weak var linkingIdView: UIStackView!
     @IBOutlet weak var linkingIdButton: ButtonWithDynamicType!
     @IBOutlet weak var nhs111label: ButtonWithDynamicType!
+    @IBOutlet weak var adviceValidityLabel: UILabel!
+    @IBOutlet weak var medicalAdviceLabel: UILabel!
     
     func inject(
         persistence: Persisting,
@@ -68,6 +70,16 @@ class StatusViewController: UIViewController, Storyboarded {
         diagnosisStatusView.layer.cornerRadius = 8
         diagnosisStatusView.layer.masksToBounds = true
         readLatestAdviceLabel.textColor = UIColor(named: "NHS Link")
+        
+        if persistence.potentiallyExposed != nil || persistence.selfDiagnosis?.symptoms.isEmpty ?? false {
+            readLatestAdviceLabel.attributedText = NSAttributedString(string: "Read what to do next", attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue])
+        } else {
+            readLatestAdviceLabel.attributedText = NSAttributedString(string: "Read Latest Advice", attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue])
+        }
+        
+        adviceValidityLabel.textColor = UIColor(named: "NHS Secondary Text")
+        medicalAdviceLabel.textColor = UIColor(named: "NHS Secondary Text")
+        
         readLatestAdviceLabel.attributedText = NSAttributedString(string: "Read Latest Advice", attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue])
         diagnosisStatusView.addGestureRecognizer(
             UITapGestureRecognizer(target: self, action: #selector(diagnosisStatusTapped))
@@ -194,7 +206,7 @@ class StatusViewController: UIViewController, Storyboarded {
                 diagnosisTitleLabel.text = "You have been near someone who has coronavirus symptoms".localized
                 howAreYouFeelingView.isHidden = false
             case .red:
-                diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Error")
+                diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
                 diagnosisTitleLabel.text = "Your symptoms indicate you may have coronavirus".localized
                 howAreYouFeelingView.isHidden = true
         }

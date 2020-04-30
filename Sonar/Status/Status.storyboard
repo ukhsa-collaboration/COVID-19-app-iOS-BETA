@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="CLu-79-FDa">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1001.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1180"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="64" translatesAutoresizingMaskIntoConstraints="NO" id="2iB-Px-aMY" customClass="LogoStrapline" customModule="Sonar" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
@@ -63,8 +63,8 @@
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Ribeye" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="prF-qe-3Zt" userLabel="Registration status text">
                                                                 <rect key="frame" x="0.0" y="0.0" width="301" height="44"/>
-                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                                <nil key="textColor"/>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                                <color key="textColor" name="NHS Text"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="999" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ki-ul-KTk" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
@@ -93,36 +93,42 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zqL-2l-Yzz">
-                                                <rect key="frame" x="0.0" y="124" width="414" height="877.5"/>
+                                                <rect key="frame" x="0.0" y="124" width="414" height="1056"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="yKo-tg-9E8">
-                                                        <rect key="frame" x="16" y="8" width="382" height="837.5"/>
+                                                        <rect key="frame" x="16" y="8" width="382" height="1016"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JWK-re-qjH">
-                                                                <rect key="frame" x="0.0" y="0.0" width="382" height="124"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="382" height="208"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uA1-0d-OYq">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="12" height="124"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="12" height="208"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="12" id="MS2-lV-12k"/>
                                                                         </constraints>
                                                                     </view>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="sLA-Af-1Gb" customClass="SymptomStackView" customModule="Sonar" customModuleProvider="target">
-                                                                        <rect key="frame" x="32" y="16" width="330" height="0.0"/>
+                                                                        <rect key="frame" x="24" y="24" width="338" height="0.0"/>
                                                                     </stackView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Read current advice" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oUM-AI-6LL">
-                                                                        <rect key="frame" x="32" y="83.5" width="330" height="20.5"/>
+                                                                        <rect key="frame" x="24" y="133.5" width="338" height="20.5"/>
                                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                                         <color key="textColor" name="NHS Text"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rpg-7v-Vhp">
-                                                                        <rect key="frame" x="32" y="30" width="330" height="33.5"/>
+                                                                        <rect key="frame" x="24" y="52" width="338" height="33.5"/>
                                                                         <accessibility key="accessibilityConfiguration">
                                                                             <accessibilityTraits key="traits" staticText="YES" header="YES"/>
                                                                         </accessibility>
                                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                                                         <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Valid" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pTu-ou-sjX">
+                                                                        <rect key="frame" x="24" y="162" width="41.5" height="18"/>
+                                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                                        <color key="textColor" name="NHS Secondary Text"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                 </subviews>
@@ -133,22 +139,25 @@
                                                                 </accessibility>
                                                                 <constraints>
                                                                     <constraint firstAttribute="trailing" secondItem="Rpg-7v-Vhp" secondAttribute="trailing" constant="20" id="1Pt-DG-JPj"/>
-                                                                    <constraint firstItem="oUM-AI-6LL" firstAttribute="leading" secondItem="uA1-0d-OYq" secondAttribute="trailing" constant="20" id="2ah-wd-rMp"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="oUM-AI-6LL" secondAttribute="bottom" constant="20" id="G5K-kc-ccM"/>
+                                                                    <constraint firstItem="oUM-AI-6LL" firstAttribute="leading" secondItem="uA1-0d-OYq" secondAttribute="trailing" constant="12" id="2ah-wd-rMp"/>
                                                                     <constraint firstItem="uA1-0d-OYq" firstAttribute="leading" secondItem="JWK-re-qjH" secondAttribute="leading" id="KQw-UZ-Vhc"/>
                                                                     <constraint firstAttribute="trailing" secondItem="sLA-Af-1Gb" secondAttribute="trailing" constant="20" id="Kfy-wu-Fap"/>
+                                                                    <constraint firstItem="pTu-ou-sjX" firstAttribute="top" secondItem="oUM-AI-6LL" secondAttribute="bottom" constant="8" id="N6h-BS-ciz"/>
                                                                     <constraint firstItem="uA1-0d-OYq" firstAttribute="top" secondItem="JWK-re-qjH" secondAttribute="top" id="Rvb-q4-vIb"/>
-                                                                    <constraint firstItem="Rpg-7v-Vhp" firstAttribute="top" secondItem="sLA-Af-1Gb" secondAttribute="bottom" constant="14" id="dt1-dU-AJC"/>
+                                                                    <constraint firstItem="pTu-ou-sjX" firstAttribute="leading" secondItem="uA1-0d-OYq" secondAttribute="trailing" constant="12" id="SXz-PC-iqr"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="pTu-ou-sjX" secondAttribute="bottom" constant="28" id="UNW-q0-m64"/>
+                                                                    <constraint firstItem="Rpg-7v-Vhp" firstAttribute="top" secondItem="sLA-Af-1Gb" secondAttribute="bottom" constant="28" id="dt1-dU-AJC"/>
                                                                     <constraint firstAttribute="trailing" secondItem="oUM-AI-6LL" secondAttribute="trailing" constant="20" id="evk-Ga-elp"/>
                                                                     <constraint firstAttribute="bottom" secondItem="uA1-0d-OYq" secondAttribute="bottom" id="ipP-KR-MZr"/>
-                                                                    <constraint firstItem="sLA-Af-1Gb" firstAttribute="top" secondItem="JWK-re-qjH" secondAttribute="top" constant="16" id="kz1-xd-mgg"/>
-                                                                    <constraint firstItem="oUM-AI-6LL" firstAttribute="top" secondItem="Rpg-7v-Vhp" secondAttribute="bottom" constant="20" id="l8M-ID-YOa"/>
-                                                                    <constraint firstItem="Rpg-7v-Vhp" firstAttribute="leading" secondItem="uA1-0d-OYq" secondAttribute="trailing" constant="20" id="oJe-uO-zP7"/>
-                                                                    <constraint firstItem="sLA-Af-1Gb" firstAttribute="leading" secondItem="uA1-0d-OYq" secondAttribute="trailing" constant="20" id="pyW-Fy-SGL"/>
+                                                                    <constraint firstItem="sLA-Af-1Gb" firstAttribute="top" secondItem="JWK-re-qjH" secondAttribute="top" constant="24" id="kz1-xd-mgg"/>
+                                                                    <constraint firstItem="oUM-AI-6LL" firstAttribute="top" secondItem="Rpg-7v-Vhp" secondAttribute="bottom" constant="48" id="l8M-ID-YOa"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="pTu-ou-sjX" secondAttribute="trailing" constant="316.5" id="np0-0Y-nzg"/>
+                                                                    <constraint firstItem="Rpg-7v-Vhp" firstAttribute="leading" secondItem="uA1-0d-OYq" secondAttribute="trailing" constant="12" id="oJe-uO-zP7"/>
+                                                                    <constraint firstItem="sLA-Af-1Gb" firstAttribute="leading" secondItem="uA1-0d-OYq" secondAttribute="trailing" constant="12" id="pyW-Fy-SGL"/>
                                                                 </constraints>
                                                             </view>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="hbY-PQ-ANb">
-                                                                <rect key="frame" x="0.0" y="156" width="382" height="364"/>
+                                                                <rect key="frame" x="0.0" y="240" width="382" height="364"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How are you feeling today?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ZI-fb-8RW">
                                                                         <rect key="frame" x="0.0" y="0.0" width="382" height="26.5"/>
@@ -163,13 +172,13 @@
                                                                         <rect key="frame" x="0.0" y="46.5" width="382" height="123"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I feel unwell" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="psh-Wd-l5I">
-                                                                                <rect key="frame" x="24" y="24" width="334" height="20.5"/>
+                                                                                <rect key="frame" x="16" y="24" width="342" height="20.5"/>
                                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                                                <color key="textColor" name="NHS Link"/>
+                                                                                <color key="textColor" name="NHS Text"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I have a high temperature or continuous cough and want to know what to do next" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xqf-9x-H9Q">
-                                                                                <rect key="frame" x="24" y="56.5" width="334" height="42.5"/>
+                                                                                <rect key="frame" x="16" y="56.5" width="342" height="42.5"/>
                                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                                 <color key="textColor" name="NHS Text"/>
                                                                                 <nil key="highlightedColor"/>
@@ -184,8 +193,8 @@
                                                                             <constraint firstItem="xqf-9x-H9Q" firstAttribute="top" secondItem="psh-Wd-l5I" secondAttribute="bottom" constant="12" id="HJx-M1-OSS"/>
                                                                             <constraint firstAttribute="bottom" secondItem="xqf-9x-H9Q" secondAttribute="bottom" constant="24" id="LYo-sc-XEJ"/>
                                                                             <constraint firstAttribute="trailing" secondItem="psh-Wd-l5I" secondAttribute="trailing" constant="24" id="QKq-uv-Mqe"/>
-                                                                            <constraint firstItem="psh-Wd-l5I" firstAttribute="leading" secondItem="9e7-f2-SFh" secondAttribute="leading" constant="24" id="aRT-cA-xkv"/>
-                                                                            <constraint firstItem="xqf-9x-H9Q" firstAttribute="leading" secondItem="9e7-f2-SFh" secondAttribute="leading" constant="24" id="eap-xL-4ad"/>
+                                                                            <constraint firstItem="psh-Wd-l5I" firstAttribute="leading" secondItem="9e7-f2-SFh" secondAttribute="leading" constant="16" id="aRT-cA-xkv"/>
+                                                                            <constraint firstItem="xqf-9x-H9Q" firstAttribute="leading" secondItem="9e7-f2-SFh" secondAttribute="leading" constant="16" id="eap-xL-4ad"/>
                                                                             <constraint firstAttribute="trailing" secondItem="xqf-9x-H9Q" secondAttribute="trailing" constant="24" id="rkd-vP-Amx"/>
                                                                             <constraint firstItem="psh-Wd-l5I" firstAttribute="top" secondItem="9e7-f2-SFh" secondAttribute="top" constant="24" id="sey-9M-eVu"/>
                                                                         </constraints>
@@ -194,13 +203,13 @@
                                                                         <rect key="frame" x="0.0" y="189.5" width="382" height="174.5"/>
                                                                         <string key="text">If you don’t have any symptoms, there’s no need to do anything right now.  Feel free to use other apps as normal and you’ll be notified if your advice changes.  If you develop symptoms, please come back to this app.</string>
                                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                                        <nil key="textColor"/>
+                                                                        <color key="textColor" name="NHS Secondary Text"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="POh-1R-IfZ" userLabel="More Information">
-                                                                <rect key="frame" x="0.0" y="552" width="382" height="285.5"/>
+                                                                <rect key="frame" x="0.0" y="636" width="382" height="380"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bs0-f4-UaY" userLabel="Divider">
                                                                         <rect key="frame" x="0.0" y="0.0" width="382" height="1"/>
@@ -210,7 +219,7 @@
                                                                         </constraints>
                                                                     </view>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ghk-8F-7gV" userLabel="NHS Coronavirus">
-                                                                        <rect key="frame" x="0.0" y="9" width="382" height="177.5"/>
+                                                                        <rect key="frame" x="0.0" y="9" width="382" height="272"/>
                                                                         <subviews>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FUZ-jg-rGq" userLabel="Spacer">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="382" height="8"/>
@@ -221,11 +230,11 @@
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you need urgent medical advice or want further information, go to" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zqt-gJ-Jrb">
                                                                                 <rect key="frame" x="0.0" y="16" width="382" height="42.5"/>
                                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                                                <color key="textColor" name="NHS Text"/>
+                                                                                <color key="textColor" name="NHS Secondary Text"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2UL-Ea-jl7" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
-                                                                                <rect key="frame" x="0.0" y="66.5" width="382" height="111"/>
+                                                                                <rect key="frame" x="0.0" y="66.5" width="382" height="205.5"/>
                                                                                 <accessibility key="accessibilityConfiguration">
                                                                                     <accessibilityTraits key="traits" link="YES"/>
                                                                                 </accessibility>
@@ -240,7 +249,7 @@
                                                                         </subviews>
                                                                     </stackView>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="MUg-vg-FPH" userLabel="For medical workers">
-                                                                        <rect key="frame" x="0.0" y="194.5" width="382" height="91"/>
+                                                                        <rect key="frame" x="0.0" y="289" width="382" height="91"/>
                                                                         <subviews>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ieh-iy-dtJ" userLabel="Divider">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="382" height="50"/>
@@ -264,7 +273,7 @@
                                                                         </subviews>
                                                                     </stackView>
                                                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="JCh-5e-c9d">
-                                                                        <rect key="frame" x="0.0" y="285.5" width="382" height="9"/>
+                                                                        <rect key="frame" x="0.0" y="380" width="382" height="9"/>
                                                                         <subviews>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E2h-fT-D6W" userLabel="Divider">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="382" height="1"/>
@@ -324,12 +333,14 @@
                     </view>
                     <navigationItem key="navigationItem" id="k8f-bF-CaC"/>
                     <connections>
+                        <outlet property="adviceValidityLabel" destination="pTu-ou-sjX" id="ItH-YW-KWr"/>
                         <outlet property="diagnosisHighlightView" destination="uA1-0d-OYq" id="g8S-eV-fpJ"/>
                         <outlet property="diagnosisStatusView" destination="JWK-re-qjH" id="byU-x3-cXA"/>
                         <outlet property="diagnosisTitleLabel" destination="Rpg-7v-Vhp" id="6bk-Da-3iT"/>
                         <outlet property="howAreYouFeelingView" destination="hbY-PQ-ANb" id="hfn-Fk-Joh"/>
                         <outlet property="linkingIdButton" destination="jZO-kd-bHg" id="r1h-Ne-ovi"/>
                         <outlet property="linkingIdView" destination="JCh-5e-c9d" id="cWU-27-kGG"/>
+                        <outlet property="medicalAdviceLabel" destination="zqt-gJ-Jrb" id="4Gi-Cg-8ot"/>
                         <outlet property="nhs111label" destination="2UL-Ea-jl7" id="L5R-JW-X5T"/>
                         <outlet property="noSymptomsLabel" destination="MHW-MT-jLf" id="8V9-Ab-x0Y"/>
                         <outlet property="notRightSubtitleLabel" destination="xqf-9x-H9Q" id="oY0-jS-FjH"/>
@@ -541,6 +552,9 @@
         </namedColor>
         <namedColor name="NHS Link">
             <color red="0.0" green="0.36862745098039218" blue="0.72156862745098038" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="NHS Secondary Text">
+            <color red="0.29803921568627451" green="0.3843137254901961" blue="0.44705882352941179" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="NHS Text">
             <color red="0.1289999932050705" green="0.16899999976158142" blue="0.19599999487400055" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
