@@ -89,8 +89,8 @@ class StatusViewController: UIViewController, Storyboarded {
             [.underlineStyle: NSUnderlineStyle.single.rawValue, .foregroundColor: UIColor(named: "NHS Link")]), for: .normal)
 
         notRightView.layer.cornerRadius = 8
-        notRightTitleLabel.textColor = UIColor(named: "NHS Link")
         notRightSubtitleLabel.textColor = UIColor(named: "NHS Secondary Text")
+        notRightTitleLabel.textColor = UIColor(named: "NHS Text")
         notRightView.layer.borderColor = UIColor(named: "NHS Highlight")!.withAlphaComponent(0.96).cgColor
         notRightView.accessibilityLabel = "\(notRightTitleLabel.text!) \(notRightSubtitleLabel.text!)"
         notRightView.addGestureRecognizer(
