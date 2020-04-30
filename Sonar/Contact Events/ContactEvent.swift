@@ -9,7 +9,7 @@ import Foundation
 
 struct ContactEvent: Equatable, Codable {
 
-    var encryptedRemoteContactId: Data? = nil
+    var encryptedRemoteContactId: Data? = nil // TODO: This isn't that now, it's a "broadcast payload" and the encrypted id is inside it
     private (set) var timestamp: Date = Date()
     private (set) var rssiValues: [Int] = []
     private (set) var rssiIntervals: [TimeInterval] = []

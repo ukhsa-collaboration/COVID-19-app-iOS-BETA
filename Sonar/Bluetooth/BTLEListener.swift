@@ -211,7 +211,7 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
         switch characteristic.value {
             
         case (let data?) where characteristic.uuid == Environment.sonarIdCharacteristicUUID:
-            if data.count == ConcreteBroadcastIdEncrypter.broadcastIdLength {
+            if data.count == BroadcastPayload.length {
                 logger.info("read identity from peripheral \(peripheral.identifierWithName): \(data)")
                 delegate?.btleListener(self, didFind: data, forPeripheral: peripheral)
             } else {

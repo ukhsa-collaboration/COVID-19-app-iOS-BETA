@@ -217,8 +217,8 @@
 		F78CEB71242B9305002254AD /* GoogleDataTransport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB70242B9305002254AD /* GoogleDataTransport.framework */; };
 		F78CEB73242B937F002254AD /* nanopb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB72242B937F002254AD /* nanopb.framework */; };
 		F7D62F2724406FC8004C32A2 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 89F06B2B2434A2C00074C612 /* Logging */; };
-		F7D62F292440D4CB004C32A2 /* ConcreteBroadcastIdGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D62F282440D4CB004C32A2 /* ConcreteBroadcastIdGeneratorTests.swift */; };
-		F7D62F2B2440D64D004C32A2 /* ConcreteBroadcastIdGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D62F2A2440D64C004C32A2 /* ConcreteBroadcastIdGenerator.swift */; };
+		F7D62F292440D4CB004C32A2 /* SonarBroadcastPayloadGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D62F282440D4CB004C32A2 /* SonarBroadcastPayloadGeneratorTests.swift */; };
+		F7D62F2B2440D64D004C32A2 /* SonarBroadcastPayloadGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D62F2A2440D64C004C32A2 /* SonarBroadcastPayloadGenerator.swift */; };
 		F7E74F8E244DFBDA00273C59 /* BroadcastRotationKeyConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E74F8D244DFBDA00273C59 /* BroadcastRotationKeyConverter.swift */; };
 		F7E74F90244DFC1400273C59 /* BroadcastRotationKeyConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E74F8F244DFC1400273C59 /* BroadcastRotationKeyConverterTests.swift */; };
 /* End PBXBuildFile section */
@@ -480,8 +480,8 @@
 		F78CEB70242B9305002254AD /* GoogleDataTransport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleDataTransport.framework; path = Frameworks/GoogleDataTransport.framework; sourceTree = "<group>"; };
 		F78CEB72242B937F002254AD /* nanopb.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = nanopb.framework; path = Frameworks/nanopb.framework; sourceTree = "<group>"; };
 		F78CEB74242BAC83002254AD /* Sonar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Sonar.entitlements; sourceTree = "<group>"; };
-		F7D62F282440D4CB004C32A2 /* ConcreteBroadcastIdGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcreteBroadcastIdGeneratorTests.swift; sourceTree = "<group>"; };
-		F7D62F2A2440D64C004C32A2 /* ConcreteBroadcastIdGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcreteBroadcastIdGenerator.swift; sourceTree = "<group>"; };
+		F7D62F282440D4CB004C32A2 /* SonarBroadcastPayloadGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SonarBroadcastPayloadGeneratorTests.swift; sourceTree = "<group>"; };
+		F7D62F2A2440D64C004C32A2 /* SonarBroadcastPayloadGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SonarBroadcastPayloadGenerator.swift; sourceTree = "<group>"; };
 		F7E74F8D244DFBDA00273C59 /* BroadcastRotationKeyConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastRotationKeyConverter.swift; sourceTree = "<group>"; };
 		F7E74F8F244DFC1400273C59 /* BroadcastRotationKeyConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastRotationKeyConverterTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1053,7 +1053,7 @@
 				219C7B7D245B0B1500952B4D /* BroadcastPayload.swift */,
 				F72EBDA1243D0892009F9328 /* SecureBroadcastRotationKeyStorage.swift */,
 				F72EBDA6243D2FD1009F9328 /* ConcreteBroadcastIdEncrypter.swift */,
-				F7D62F2A2440D64C004C32A2 /* ConcreteBroadcastIdGenerator.swift */,
+				F7D62F2A2440D64C004C32A2 /* SonarBroadcastPayloadGenerator.swift */,
 				F7E74F8D244DFBDA00273C59 /* BroadcastRotationKeyConverter.swift */,
 				219C7B73245AB88100952B4D /* BroadcastEncrypterProvider.swift */,
 			);
@@ -1065,7 +1065,7 @@
 			children = (
 				F72EBDA4243D094A009F9328 /* SecureBroadcastRotationKeyStorageTests.swift */,
 				F72EBDA8243D2FE6009F9328 /* BroadcastIdEncrypterTests.swift */,
-				F7D62F282440D4CB004C32A2 /* ConcreteBroadcastIdGeneratorTests.swift */,
+				F7D62F282440D4CB004C32A2 /* SonarBroadcastPayloadGeneratorTests.swift */,
 				F7E74F8F244DFC1400273C59 /* BroadcastRotationKeyConverterTests.swift */,
 				219C7B75245AB8E500952B4D /* ConcreteBroadcastIdEncrypterProviderTests.swift */,
 				219C7B7B245B093000952B4D /* BluetoothPayloadTests.swift */,
@@ -1350,7 +1350,7 @@
 				21C417CA242CB0A200DEF3E2 /* ConfirmRegistrationRequestTests.swift in Sources */,
 				F632792A2435323200CF7A42 /* PermissionsViewControllerTests.swift in Sources */,
 				09E6E7E62452779B0069DFA8 /* SetupCheckerTests.swift in Sources */,
-				F7D62F292440D4CB004C32A2 /* ConcreteBroadcastIdGeneratorTests.swift in Sources */,
+				F7D62F292440D4CB004C32A2 /* SonarBroadcastPayloadGeneratorTests.swift in Sources */,
 				F72EBDA5243D094A009F9328 /* SecureBroadcastRotationKeyStorageTests.swift in Sources */,
 				098ED48A242E89D80029B729 /* RegistrationServiceDouble.swift in Sources */,
 				89CCF66424571EE900AC9D91 /* SetupProblemDiagnoserTests.swift in Sources */,
@@ -1463,7 +1463,7 @@
 				F7E74F8E244DFBDA00273C59 /* BroadcastRotationKeyConverter.swift in Sources */,
 				21E5051524448D880065C69B /* PlistPersister.swift in Sources */,
 				098ED483242E746E0029B729 /* DebugViewController.swift in Sources */,
-				F7D62F2B2440D64D004C32A2 /* ConcreteBroadcastIdGenerator.swift in Sources */,
+				F7D62F2B2440D64D004C32A2 /* SonarBroadcastPayloadGenerator.swift in Sources */,
 				89F06B312434AABF0074C612 /* NoOpLogHandler.swift in Sources */,
 				F6F05A3024340E5400FF4B72 /* OnboardingViewController.swift in Sources */,
 				F652F72C244A74E900D97950 /* StartDateViewController.swift in Sources */,

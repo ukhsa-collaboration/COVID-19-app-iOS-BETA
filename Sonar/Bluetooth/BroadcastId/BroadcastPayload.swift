@@ -12,6 +12,7 @@ import Logging
 
 struct BroadcastPayload {
     
+    static let length: Int = 129
     static let ukISO3166CountryCode: UInt16 = 826
     
     let txPower: Int8 = 0

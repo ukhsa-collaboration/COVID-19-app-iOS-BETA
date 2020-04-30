@@ -15,6 +15,7 @@ protocol BroadcastIdEncrypter {
     func broadcastId(from startDate: Date, until endDate: Date) -> Data
 }
 
+// TODO: this should probably now be a "thing" class like the BroadcastPayload, rather than a "doing" class as it is now
 class ConcreteBroadcastIdEncrypter: BroadcastIdEncrypter {
 
     private let ukISO3166CountryCode: UInt16 = 826
@@ -23,8 +24,7 @@ class ConcreteBroadcastIdEncrypter: BroadcastIdEncrypter {
     let serverPublicKey: SecKey
     let sonarId: UUID
 
-    // TODO: Should this be on the protocol?
-    static var broadcastIdLength: Int = 106
+    private let broadcastIdLength: Int = 106
 
     init(key: SecKey, sonarId: UUID) {
         self.serverPublicKey = key
@@ -65,7 +65,7 @@ class ConcreteBroadcastIdEncrypter: BroadcastIdEncrypter {
         }
 
         let withoutFirstByte = result.dropFirst()
-        assert(withoutFirstByte.count == ConcreteBroadcastIdEncrypter.broadcastIdLength, "unexpected number of bytes: \(withoutFirstByte.count)")
+        assert(withoutFirstByte.count == broadcastIdLength, "unexpected number of bytes: \(withoutFirstByte.count)")
 
         return withoutFirstByte
     }

@@ -32,9 +32,9 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
     
     var peripheral: CBPeripheralManager?
     
-    let idGenerator: BroadcastIdGenerator
+    let idGenerator: BroadcastPayloadGenerator
     
-    init(idGenerator: BroadcastIdGenerator) {
+    init(idGenerator: BroadcastPayloadGenerator) {
         self.idGenerator = idGenerator
     }
 
@@ -93,7 +93,7 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
             return
         }
         
-        guard let ephemeralBroadcastId = idGenerator.broadcastIdentifier() else {
+        guard let ephemeralBroadcastId = idGenerator.broadcastPayload()?.data() else {
             assertionFailure("attempted to update identity without an identity")
             return
         }
@@ -130,7 +130,7 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
                     logger.info("    retaining restored keepalive characteristic \(characteristic)")
                     self.keepaliveCharacteristic = (characteristic as! CBMutableCharacteristic)
                 } else if characteristic.uuid == Environment.sonarIdCharacteristicUUID {
-                    logger.info("    retaining restore identity characteristic \(characteristic)")
+                    logger.info("    retaining restored identity characteristic \(characteristic)")
                     self.identityCharacteristic = (characteristic as! CBMutableCharacteristic)
                 } else {
                     logger.info("    restored characteristic \(characteristic)")
@@ -163,7 +163,7 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
             return
         }
         
-        logger.info("advertising identifier \(idGenerator.broadcastIdentifier()?.base64EncodedString() ??? "nil")")
+        logger.info("advertising identifier \(idGenerator.broadcastPayload()?.data().base64EncodedString() ??? "nil")")
 
         // Per #172564329 we don't want to expose this in release builds
         #if DEBUG
@@ -213,7 +213,7 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
             return
         }
 
-        request.value = idGenerator.broadcastIdentifier()
+        request.value = idGenerator.broadcastPayload()?.data()
         peripheral.respond(to: request, withResult: .success)
     }
 
@@ -223,7 +223,7 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
         guard identityCharacteristic != nil else { return false }
         guard keepaliveCharacteristic != nil else { return false }
 
-        guard idGenerator.broadcastIdentifier() != nil else { return false }
+        guard idGenerator.broadcastPayload() != nil else { return false }
         guard peripheral!.isAdvertising else { return false }
         guard peripheral!.state == .poweredOn else { return false }
 
