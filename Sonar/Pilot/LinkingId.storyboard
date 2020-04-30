@@ -16,55 +16,70 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="222"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="YNb-EQ-dKb">
-                                <rect key="frame" x="374" y="117" width="20" height="20"/>
-                            </activityIndicatorView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="Isf-ek-wrS">
-                                <rect key="frame" x="20" y="64" width="374" height="138"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i7g-54-jA7">
+                                <rect key="frame" x="0.0" y="44" width="414" height="178"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="App ID" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cjQ-x6-Kok">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="20.5"/>
-                                        <accessibility key="accessibilityConfiguration">
-                                            <accessibilityTraits key="traits" staticText="YES" header="YES"/>
-                                        </accessibility>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fetching App ID" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JMq-Gh-7Cj">
-                                        <rect key="frame" x="0.0" y="52.5" width="374" height="20.5"/>
-                                        <accessibility key="accessibilityConfiguration">
-                                            <accessibilityTraits key="traits" staticText="YES" updatesFrequently="YES"/>
-                                        </accessibility>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error fetching App ID" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwU-V9-8IW" customClass="ErrorLabel" customModule="Sonar" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="89" width="374" height="0.0"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ajc-5y-6oC" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="105" width="374" height="33"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                        <state key="normal" title="Close"/>
-                                        <connections>
-                                            <segue destination="IWe-bN-JgZ" kind="unwind" unwindAction="unwindFromLinkingIdWithUnwindSegue:" id="Zhh-Zk-59a"/>
-                                        </connections>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="Isf-ek-wrS">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="138"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="App ID" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cjQ-x6-Kok">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="20.5"/>
+                                                <accessibility key="accessibilityConfiguration">
+                                                    <accessibilityTraits key="traits" staticText="YES" header="YES"/>
+                                                </accessibility>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fetching App ID" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JMq-Gh-7Cj">
+                                                <rect key="frame" x="0.0" y="52.5" width="414" height="20.5"/>
+                                                <accessibility key="accessibilityConfiguration">
+                                                    <accessibilityTraits key="traits" staticText="YES" updatesFrequently="YES"/>
+                                                </accessibility>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error fetching App ID" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwU-V9-8IW" customClass="ErrorLabel" customModule="Sonar" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="89" width="414" height="0.0"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ajc-5y-6oC" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="105" width="414" height="33"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <state key="normal" title="Close"/>
+                                                <connections>
+                                                    <segue destination="IWe-bN-JgZ" kind="unwind" unwindAction="unwindFromLinkingIdWithUnwindSegue:" id="Zhh-Zk-59a"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
-                            </stackView>
+                                <constraints>
+                                    <constraint firstItem="Isf-ek-wrS" firstAttribute="width" secondItem="gwV-eb-6U9" secondAttribute="width" id="1NW-VO-Xi0"/>
+                                    <constraint firstItem="Isf-ek-wrS" firstAttribute="trailing" secondItem="eSt-n9-y1K" secondAttribute="trailing" id="GJQ-tw-X5k"/>
+                                    <constraint firstItem="Isf-ek-wrS" firstAttribute="top" secondItem="eSt-n9-y1K" secondAttribute="top" id="GWp-jP-APp"/>
+                                    <constraint firstItem="Isf-ek-wrS" firstAttribute="leading" secondItem="eSt-n9-y1K" secondAttribute="leading" id="Ow9-9M-eaX"/>
+                                    <constraint firstItem="Isf-ek-wrS" firstAttribute="bottom" secondItem="eSt-n9-y1K" secondAttribute="bottom" id="exI-YT-DYM"/>
+                                    <constraint firstItem="Isf-ek-wrS" firstAttribute="height" secondItem="gwV-eb-6U9" secondAttribute="height" priority="1" id="v2h-0a-b9t"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="eSt-n9-y1K"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="gwV-eb-6U9"/>
+                            </scrollView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="YNb-EQ-dKb">
+                                <rect key="frame" x="374" y="97" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="YNb-EQ-dKb" firstAttribute="trailing" secondItem="JMq-Gh-7Cj" secondAttribute="trailing" id="PUc-L0-qb3"/>
-                            <constraint firstItem="L7M-kP-6XK" firstAttribute="trailing" secondItem="Isf-ek-wrS" secondAttribute="trailing" constant="20" id="U4M-us-10O"/>
-                            <constraint firstItem="Isf-ek-wrS" firstAttribute="top" secondItem="L7M-kP-6XK" secondAttribute="top" constant="20" id="acu-EU-y75"/>
-                            <constraint firstItem="Isf-ek-wrS" firstAttribute="leading" secondItem="L7M-kP-6XK" secondAttribute="leading" constant="20" id="bE6-Iv-YHN"/>
-                            <constraint firstItem="YNb-EQ-dKb" firstAttribute="centerY" secondItem="JMq-Gh-7Cj" secondAttribute="centerY" id="xO0-3Y-LWF"/>
-                            <constraint firstItem="L7M-kP-6XK" firstAttribute="bottom" secondItem="Isf-ek-wrS" secondAttribute="bottom" constant="20" id="yw6-Dp-f70"/>
+                            <constraint firstItem="L7M-kP-6XK" firstAttribute="trailing" secondItem="YNb-EQ-dKb" secondAttribute="trailing" constant="20" id="6fA-R2-NeM"/>
+                            <constraint firstItem="i7g-54-jA7" firstAttribute="top" secondItem="L7M-kP-6XK" secondAttribute="top" id="TgK-FF-Hqi"/>
+                            <constraint firstItem="i7g-54-jA7" firstAttribute="leading" secondItem="L7M-kP-6XK" secondAttribute="leading" id="WY6-hZ-300"/>
+                            <constraint firstItem="i7g-54-jA7" firstAttribute="bottom" secondItem="L7M-kP-6XK" secondAttribute="bottom" id="pIh-5V-g6r"/>
+                            <constraint firstItem="i7g-54-jA7" firstAttribute="trailing" secondItem="L7M-kP-6XK" secondAttribute="trailing" id="ulE-Ur-f3L"/>
+                            <constraint firstItem="YNb-EQ-dKb" firstAttribute="centerY" secondItem="JMq-Gh-7Cj" secondAttribute="centerY" id="zZn-JS-aGu"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="L7M-kP-6XK"/>
                     </view>
