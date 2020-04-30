@@ -101,7 +101,7 @@ class StatusViewControllerTests: XCTestCase {
             notificationCenter: notificationCenter,
             statusProvider: statusProvider
         )
-        XCTAssertEqual(vc.diagnosisTitleLabel.text, "Keep following the current government advice".localized)
+        XCTAssertEqual(vc.diagnosisTitleLabel.text, "Follow the current advice to stop the spread of coronavirus".localized)
 
         statusProvider.status = .amber
         notificationCenter.post(name: PotentiallyExposedNotification, object: nil)
