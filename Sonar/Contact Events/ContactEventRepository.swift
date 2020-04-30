@@ -63,6 +63,10 @@ extension PlistPersister: ContactEventPersister where K == UUID, V == ContactEve
     }
     
     func btleListener(_ listener: BTLEListener, didFind remoteEncryptedBroadcastId: Data, forPeripheral peripheral: BTLEPeripheral) {
+        guard remoteEncryptedBroadcastId.count > 0 else {
+            return
+        }
+        
         if persister.items[peripheral.identifier] == nil {
             persister.items[peripheral.identifier] = ContactEvent()
         }

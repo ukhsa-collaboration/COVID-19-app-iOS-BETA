@@ -31,6 +31,12 @@ class PersistingContactEventRepositoryTests: XCTestCase {
         repository = PersistingContactEventRepository(persister: persister)
         repository.delegate = delegate
     }
+    
+    func testDoesNotRecordZeroLengthBroadcastId() {
+        repository.btleListener(listener, didFind: Data(), forPeripheral: peripheral1)
+        
+        XCTAssertEqual(repository.contactEvents.count, 0)
+    }
 
     func testRecordsRSSIValuesAgainstCorrectPeripheral() {
         repository.btleListener(listener, didFind: broadcastId1, forPeripheral: peripheral1)
