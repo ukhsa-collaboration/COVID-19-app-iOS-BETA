@@ -27,6 +27,38 @@ class LinkingIdManagerTests: XCTestCase {
         XCTAssertEqual(persisting.linkingId, "linking-id")
     }
 
+    func testNoRegistration() {
+        let persisting = PersistenceDouble()
+        let manager = LinkingIdManager(
+            notificationCenter: NotificationCenter(),
+            persisting: persisting,
+            session: SessionDouble()
+        )
+
+        var fetchedLinkingId: LinkingId?
+        manager.fetchLinkingId { fetchedLinkingId = $0 }
+
+        XCTAssertNil(persisting.linkingId)
+        XCTAssertNil(fetchedLinkingId)
+    }
+
+    func testExistingLinkingId() {
+        let persisting = PersistenceDouble(linkingId: "linking-id")
+        let session = SessionDouble()
+        let manager = LinkingIdManager(
+            notificationCenter: NotificationCenter(),
+            persisting: persisting,
+            session: session
+        )
+
+        var fetchedLinkingId: LinkingId?
+        manager.fetchLinkingId { fetchedLinkingId = $0 }
+
+        XCTAssertNil(session.requestSent)
+        XCTAssertEqual(persisting.linkingId, "linking-id")
+        XCTAssertEqual(fetchedLinkingId, "linking-id")
+    }
+
     func testFetchLinkingId() {
         let persisting = PersistenceDouble(registration: Registration.fake)
         let session = SessionDouble()

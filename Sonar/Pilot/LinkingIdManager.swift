@@ -30,7 +30,13 @@ class LinkingIdManager {
     }
 
     func fetchLinkingId(completion: @escaping (LinkingId?) -> Void = { _ in }) {
+        if let linkingId = persisting.linkingId {
+            completion(linkingId)
+            return
+        }
+
         guard let registration = persisting.registration else {
+            completion(nil)
             return
         }
 
