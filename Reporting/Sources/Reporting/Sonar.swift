@@ -20,10 +20,12 @@ struct Sonar {
         .storyboard("Onboarding"),
         .storyboard("SelfDiagnosis"),
         .storyboard("Status"),
+        .storyboard("LinkingId"),
         .nib("LogoStrapline"),
         .nib("OnboardingLogoStrapline"),
         .strings("Localizable"),
         .plist("GoogleService-Info"),
+        .bundle("Settings"),
     ]
     
     static let knownAssets = Self.requiredAssets + Self.acceptedUnwantedAssets

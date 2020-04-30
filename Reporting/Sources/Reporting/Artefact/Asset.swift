@@ -5,4 +5,5 @@ enum Asset {
     case nib(String)
     case strings(String)
     case plist(String)
+    case bundle(String)
 }

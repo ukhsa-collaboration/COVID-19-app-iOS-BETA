@@ -277,6 +277,8 @@ extension FileReporterContext {
             return checkForStoryboard(named: name)
         case .nib(let name):
             return checkForLocalizableFile(named: name, suffix: "nib", isFolder: true)
+        case .bundle(let name):
+            return checkForLocalizableFile(named: name, suffix: "bundle", isFolder: true)
         case .strings(let name):
             return checkForLocalizableFile(named: name, suffix: "strings")
         case .plist(let name):
