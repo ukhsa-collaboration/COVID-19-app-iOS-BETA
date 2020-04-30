@@ -97,6 +97,41 @@ extension StartDateViewController: UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return dateOptions.count
     }
+    
+    // MARK: - Support for Dyanmic Type
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        let label = view as? UILabel ?? makeLabelForPickerRow()
+        label.text = self.pickerView(pickerView, titleForRow: row, forComponent: component)
+        label.numberOfLines = 0
+        return label
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        guard let font = fontForPickerRow() else {
+            return CGFloat(32) // reasonable-looking fallback height
+        }
+        
+        let spacing = CGFloat(16)
+        return font.pointSize + spacing
+    }
+    
+    private func makeLabelForPickerRow() -> UILabel {
+        let label = UILabel()
+        label.font = fontForPickerRow()
+        label.textAlignment = .center
+        return label
+    }
+    
+    private func fontForPickerRow() -> UIFont? {
+        let descriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: .body)
+        guard let size = descriptor.object(forKey: .size) as? NSNumber else {
+            logger.error("Could not get size of body font")
+            return nil
+        }
+
+        return UIFont.systemFont(ofSize: CGFloat(size.doubleValue))
+    }
 }
 
 extension StartDateViewController: UIPickerViewDelegate {
