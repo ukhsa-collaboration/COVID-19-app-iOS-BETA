@@ -24,7 +24,7 @@ class ConcreteBroadcastIdEncrypter: BroadcastIdEncrypter {
     let serverPublicKey: SecKey
     let sonarId: UUID
 
-    private let broadcastIdLength: Int = 106
+    static let broadcastIdLength: Int = 106
 
     init(key: SecKey, sonarId: UUID) {
         self.serverPublicKey = key
@@ -65,7 +65,7 @@ class ConcreteBroadcastIdEncrypter: BroadcastIdEncrypter {
         }
 
         let withoutFirstByte = result.dropFirst()
-        assert(withoutFirstByte.count == broadcastIdLength, "unexpected number of bytes: \(withoutFirstByte.count)")
+        assert(withoutFirstByte.count == ConcreteBroadcastIdEncrypter.broadcastIdLength, "unexpected number of bytes: \(withoutFirstByte.count)")
 
         return withoutFirstByte
     }
