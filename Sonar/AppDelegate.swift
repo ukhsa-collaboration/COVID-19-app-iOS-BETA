@@ -168,6 +168,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         logger.info("Did Become Active")
 
         try? contactEventsUploader.ensureUploading()
+        linkingIdManager.fetchLinkingId()
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
