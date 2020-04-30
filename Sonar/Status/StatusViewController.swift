@@ -73,20 +73,19 @@ class StatusViewController: UIViewController, Storyboarded {
         readLatestAdviceLabel.textColor = UIColor(named: "NHS Link")
         
         if persistence.potentiallyExposed != nil || persistence.selfDiagnosis?.symptoms.isEmpty ?? false {
-            readLatestAdviceLabel.attributedText = NSAttributedString(string: "Read what to do next", attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue])
+            readLatestAdviceLabel.attributedText = NSAttributedString(string: "Read what to do next".localized, attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue])
         } else {
-            readLatestAdviceLabel.attributedText = NSAttributedString(string: "Read Latest Advice", attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue])
+            readLatestAdviceLabel.attributedText = NSAttributedString(string: "Read Latest Advice".localized, attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue])
         }
         
         adviceValidityLabel.textColor = UIColor(named: "NHS Secondary Text")
         medicalAdviceLabel.textColor = UIColor(named: "NHS Secondary Text")
-        
-        readLatestAdviceLabel.attributedText = NSAttributedString(string: "Read Latest Advice", attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue])
+
         diagnosisStatusView.addGestureRecognizer(
             UITapGestureRecognizer(target: self, action: #selector(diagnosisStatusTapped))
         )
         
-        nhs111label.setAttributedTitle(NSAttributedString(string: "NHS Coronavirus", attributes:
+        nhs111label.setAttributedTitle(NSAttributedString(string: "NHS Coronavirus".localized, attributes:
             [.underlineStyle: NSUnderlineStyle.single.rawValue, .foregroundColor: UIColor(named: "NHS Link"), NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .body)]), for: .normal)
 
         notRightView.layer.cornerRadius = 8
