@@ -25,7 +25,8 @@ class LinkingIdRequest: SecureRequest, Request {
         method = .put(data: bodyData)
 
         super.init(registration.secretKey, bodyData, [
-            "Accept": "application/json"
+            "Accept": "application/json",
+            "Content-Type": "application/json",
         ])
     }
 
