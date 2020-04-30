@@ -2,7 +2,7 @@
 //  SchedulerDouble.swift
 //  SonarTests
 //
-//  Created by NHSX.
+//  Created on 28/04/2020.
 //  Copyright © 2020 NHSX. All rights reserved.
 //
 

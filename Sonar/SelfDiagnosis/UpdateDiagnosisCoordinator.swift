@@ -2,7 +2,7 @@
 //  UpdateDiagnosisCoordinator.swift
 //  Sonar
 //
-//  Created by NHSX.
+//  Created on 24/04/2020.
 //  Copyright © 2020 NHSX. All rights reserved.
 //
 

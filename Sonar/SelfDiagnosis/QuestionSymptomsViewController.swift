@@ -2,7 +2,7 @@
 //  QuestionSymptomsViewController.swift
 //  Sonar
 //
-//  Created by NHSX.
+//  Created on 23/04/2020.
 //  Copyright © 2020 NHSX. All rights reserved.
 //
 
@@ -63,7 +63,7 @@ class QuestionSymptomsViewController: UIViewController, Storyboarded {
         errorLabel.text = questionError
         yesButton.text = questionYes
         noButton.text = questionNo
-        questionButton.setTitle(buttonText, for: .normal)        
+        questionButton.setTitle(buttonText, for: .normal)
         yesButton.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longPressedYes)))
         noButton.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longPressedNo)))
     }

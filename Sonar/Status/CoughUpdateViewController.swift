@@ -2,7 +2,7 @@
 //  CoughUpdateViewController.swift
 //  Sonar
 //
-//  Created by NHSX.
+//  Created on 25/04/2020.
 //  Copyright © 2020 NHSX. All rights reserved.
 //
 

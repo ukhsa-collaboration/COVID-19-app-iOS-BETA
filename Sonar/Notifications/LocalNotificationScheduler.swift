@@ -2,7 +2,7 @@
 //  LocalNotificationScheduler.swift
 //  Sonar
 //
-//  Created by NHSX.
+//  Created on 22/04/2020.
 //  Copyright © 2020 NHSX. All rights reserved.
 //
 
