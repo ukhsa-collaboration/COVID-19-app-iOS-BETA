@@ -97,6 +97,7 @@
 		89074B8724378A0D00D67777 /* UITestPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89074B8424378A0D00D67777 /* UITestPayload.swift */; };
 		89074B8A24378B6E00D67777 /* ScreenTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89074B8924378B6E00D67777 /* ScreenTestCase.swift */; };
 		893C0B7B243DE346000A7DB6 /* OnboardingEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893C0B7A243DE346000A7DB6 /* OnboardingEnvironment.swift */; };
+		8947F833245AD97A00C4F1BB /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8947F832245AD97A00C4F1BB /* Settings.bundle */; };
 		895D9E462437458700573D4D /* AppIcon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 895D9E452437458700573D4D /* AppIcon.xcassets */; };
 		895D9E4B24374EC900573D4D /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895D9E4A24374EC900573D4D /* Screen.swift */; };
 		895D9E4E24374EFA00573D4D /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895D9E4D24374EFA00573D4D /* AppRouter.swift */; };
@@ -331,6 +332,7 @@
 		89388B8C2435E370009D60CF /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		89388B8E2435E673009D60CF /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		893C0B7A243DE346000A7DB6 /* OnboardingEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingEnvironment.swift; sourceTree = "<group>"; };
+		8947F832245AD97A00C4F1BB /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		895D9DDE2437383300573D4D /* SonarUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SonarUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		895D9DE22437383300573D4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		895D9DE82437384C00573D4D /* CoLocateUITests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CoLocateUITests.xcconfig; sourceTree = "<group>"; };
@@ -1065,6 +1067,7 @@
 			children = (
 				F758B8BD242CB856003AE16D /* Localizable.strings */,
 				895D9E452437458700573D4D /* AppIcon.xcassets */,
+				8947F832245AD97A00C4F1BB /* Settings.bundle */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1129,6 +1132,7 @@
 				6FC63C29241641B8007C8BF3 /* Sources */,
 				6FC63C2A241641B8007C8BF3 /* Frameworks */,
 				6FC63C2B241641B8007C8BF3 /* Resources */,
+				8947F834245AE41600C4F1BB /* Embed Build info */,
 			);
 			buildRules = (
 			);
@@ -1230,6 +1234,7 @@
 				6FC63C3B241641BA007C8BF3 /* LaunchScreen.storyboard in Resources */,
 				AEC6A7BE241BD82900B0237A /* LogoStrapline.xib in Resources */,
 				A1E7A0592420028B0078174D /* NHS Colors.xcassets in Resources */,
+				8947F833245AD97A00C4F1BB /* Settings.bundle in Resources */,
 				F758B8BE242CB856003AE16D /* Localizable.strings in Resources */,
 				6FC63C38241641BA007C8BF3 /* Assets.xcassets in Resources */,
 				895D9E462437458700573D4D /* AppIcon.xcassets in Resources */,
@@ -1248,6 +1253,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8947F834245AE41600C4F1BB /* Embed Build info */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Build info";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "bash \"$PROJECT_DIR/bin/embed_build_info\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		214209BB2422276800C7BFF3 /* Sources */ = {

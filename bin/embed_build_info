@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+INFO_PLIST="$TARGET_BUILD_DIR/$INFOPLIST_PATH"
+SETTINGS_PLIST="$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/Settings.bundle/Root.plist"
+
+cd $PROJECT_DIR
+status=$(git status --porcelain 2> /dev/null)
+if [[ "$status" != "" ]]; then
+STATUS_FLAG='-M'
+else
+STATUS_FLAG=''
+fi
+COMMIT=$(git rev-parse HEAD | cut -c 1-7)
+cd -
+
+VERSION_STRING=$(/usr/libexec/PlistBuddy -c "Print CFBundleShortVersionString" "$INFO_PLIST")
+BUILD_NUMBER=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" "$INFO_PLIST")
+
+BUILD_STRING="$BUILD_NUMBER ($COMMIT$STATUS_FLAG)"
+
+# This is fragile since we’re relying on positions in the list.
+# Keeping this simple intentionally.
+/usr/libexec/PlistBuddy -c "Set :PreferenceSpecifiers:0:DefaultValue $VERSION_STRING" "$SETTINGS_PLIST"
+/usr/libexec/PlistBuddy -c "Set :PreferenceSpecifiers:1:DefaultValue $BUILD_STRING" "$SETTINGS_PLIST"
