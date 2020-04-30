@@ -18,13 +18,13 @@ protocol BroadcastIdEncrypter {
 // TODO: this should probably now be a "thing" class like the BroadcastPayload, rather than a "doing" class as it is now
 class ConcreteBroadcastIdEncrypter: BroadcastIdEncrypter {
 
+    static let broadcastIdLength: Int = 106
+    
     private let ukISO3166CountryCode: UInt16 = 826
     private let txPower: Int8 = 0
     
     let serverPublicKey: SecKey
     let sonarId: UUID
-
-    static let broadcastIdLength: Int = 106
 
     init(key: SecKey, sonarId: UUID) {
         self.serverPublicKey = key
