@@ -42,6 +42,7 @@ class StatusViewController: UIViewController, Storyboarded {
 
     @IBOutlet weak var linkingIdView: UIStackView!
     @IBOutlet weak var linkingIdButton: ButtonWithDynamicType!
+    @IBOutlet weak var nhs111label: ButtonWithDynamicType!
     
     func inject(
         persistence: Persisting,
@@ -58,7 +59,7 @@ class StatusViewController: UIViewController, Storyboarded {
         self.linkingIdManager = linkingIdManager
         self.statusProvider = statusProvider
     }
-
+        
     override func viewDidLoad() {
         super.viewDidLoad()
                 
@@ -67,9 +68,13 @@ class StatusViewController: UIViewController, Storyboarded {
         diagnosisStatusView.layer.cornerRadius = 8
         diagnosisStatusView.layer.masksToBounds = true
         readLatestAdviceLabel.textColor = UIColor(named: "NHS Link")
+        readLatestAdviceLabel.attributedText = NSAttributedString(string: "Read Latest Advice", attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue])
         diagnosisStatusView.addGestureRecognizer(
             UITapGestureRecognizer(target: self, action: #selector(diagnosisStatusTapped))
         )
+        
+        nhs111label.setAttributedTitle(NSAttributedString(string: "NHS Coronavirus", attributes:
+            [.underlineStyle: NSUnderlineStyle.single.rawValue, .foregroundColor: UIColor(named: "NHS Link")]), for: .normal)
 
         notRightView.layer.cornerRadius = 8
         notRightTitleLabel.textColor = UIColor(named: "NHS Link")
@@ -89,7 +94,7 @@ class StatusViewController: UIViewController, Storyboarded {
         notificationCenter.addObserver(self, selector: #selector(showRegistrationFailedStatus), name: RegistrationFailedNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(reload), name: UIApplication.didBecomeActiveNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(reload), name: PotentiallyExposedNotification, object: nil)
-
+        
         #if PILOT
         linkingIdView.isHidden = false
         #else
@@ -182,7 +187,7 @@ class StatusViewController: UIViewController, Storyboarded {
         switch statusProvider.status {
             case .blue:
                 diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Highlight")
-                diagnosisTitleLabel.text = "Keep following the current government advice".localized
+                diagnosisTitleLabel.text = "Follow the current advice to stop the spread of coronavirus".localized
                 howAreYouFeelingView.isHidden = false
             case .amber:
                 diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
