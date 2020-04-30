@@ -58,7 +58,7 @@ class FakeError: Error {
     }
 }
 
-
+// TODO: we probably don't need both this and sampleEllipticCurveKey
 func knownGoodECPublicKey() -> SecKey {
     let base64EncodedKey = "BDSTjw7/yauS6iyMZ9p5yl6i0n3A7qxYI/3v+6RsHt8o+UrFCyULX3fKZuA6ve+lH1CAItezr+Tk2lKsMcCbHMI="
 
@@ -72,4 +72,11 @@ func knownGoodECPublicKey() -> SecKey {
     ]
 
     return SecKeyCreateWithData(data as CFData, keyDict as CFDictionary, nil)!
+}
+
+extension SecKey {
+    static var sampleEllipticCurveKey: SecKey {
+        let data = Data.init(base64Encoded: "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEu1f68MqDXbKeTqZMTHsOGToO4rKnPClXe/kE+oWqlaWZQv4J1E98cUNdpzF9JIFRPMCNdGOvTr4UB+BhQv9GWg==")!
+        return try! BroadcastRotationKeyConverter().fromData(data)
+    }
 }

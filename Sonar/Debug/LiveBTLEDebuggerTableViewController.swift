@@ -11,7 +11,8 @@ import UIKit
 class LiveBTLEDebuggerTableViewController: UITableViewController, ContactEventRepositoryDelegate {
 
     var persistence: Persisting = (UIApplication.shared.delegate as! AppDelegate).persistence
-    var broadcastIdGenerator: BroadcastIdGenerator = ((UIApplication.shared.delegate as! AppDelegate).bluetoothNursery as! ConcreteBluetoothNursery).broadcastIdGenerator
+    
+    var broadcastIdGenerator: BroadcastIdGenerator? = ((UIApplication.shared.delegate as! AppDelegate).bluetoothNursery as! ConcreteBluetoothNursery).broadcastIdGenerator
     
     @objc var repository: PersistingContactEventRepository = (UIApplication.shared.delegate as! AppDelegate).bluetoothNursery.contactEventRepository as! PersistingContactEventRepository
     
@@ -76,8 +77,8 @@ class LiveBTLEDebuggerTableViewController: UITableViewController, ContactEventRe
             cell.gradientColorData = sonarId.data(using: .utf8)
             
         case (1, _):
-            cell.textLabel?.text = broadcastIdGenerator.broadcastIdentifier()?.base64EncodedString()
-            cell.gradientColorData = broadcastIdGenerator.broadcastIdentifier()
+            cell.textLabel?.text = broadcastIdGenerator?.broadcastIdentifier()?.base64EncodedString()
+            cell.gradientColorData = broadcastIdGenerator?.broadcastIdentifier()
 
         case (2, let row):
             cell.textLabel?.text = repository.contactEvents[row].encryptedRemoteContactId?.base64EncodedString()

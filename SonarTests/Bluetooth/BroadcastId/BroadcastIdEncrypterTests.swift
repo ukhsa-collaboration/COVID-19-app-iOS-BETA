@@ -22,7 +22,7 @@ class BroadcastIdEncypterTests: XCTestCase {
     var slightlyLaterDate: Date!
     var muchLaterDate: Date!
 
-    var encrypter: BroadcastIdEncrypter!
+    var encrypter: ConcreteBroadcastIdEncrypter!
 
     override func setUp() {
         super.setUp()
@@ -34,11 +34,11 @@ class BroadcastIdEncypterTests: XCTestCase {
 
         let serverPublicKey = knownGoodECPublicKey()
 
-        encrypter = BroadcastIdEncrypter(key: serverPublicKey, sonarId: cannedId)
+        encrypter = ConcreteBroadcastIdEncrypter(key: serverPublicKey, sonarId: cannedId)
     }
 
     func test_generates_ciphertext_that_are_the_correct_size() {
-        let encryptedId = encrypter.broadcastId(for: knownDate, until: muchLaterDate)
+        let encryptedId = encrypter.broadcastId(from: knownDate, until: muchLaterDate)
 
         // the first 64 bytes are the epheraml public key used for encryption
         // followed by 26 bytes for our ciphertext
@@ -52,8 +52,8 @@ class BroadcastIdEncypterTests: XCTestCase {
             return
         }
 
-        encrypter = BroadcastIdEncrypter(key: serverPublicKey, sonarId: cannedId)
-        let result = encrypter.broadcastId(for: knownDate, until: muchLaterDate)
+        encrypter = ConcreteBroadcastIdEncrypter(key: serverPublicKey, sonarId: cannedId)
+        let result = encrypter.broadcastId(from: knownDate, until: muchLaterDate)
 
         // first byte would be 0x04 -- indicates uncompressed point format
         // BUT  we do not transmit this, in order to save space
@@ -78,27 +78,6 @@ class BroadcastIdEncypterTests: XCTestCase {
         XCTAssertEqual(1585785600, asInt(endDate))
         XCTAssertEqual("E1D160C7-F6E8-48BC-8687-63C696D910CB", asUUIDString(uuidBytes))
         XCTAssertEqual(826, asInt(country)) // iso 3166 country code for UK
-    }
-
-    func test_generates_the_same_result_for_the_same_inputs() {
-        let first = encrypter.broadcastId(for: knownDate, until: muchLaterDate)
-        let second = encrypter.broadcastId(for: knownDate, until: muchLaterDate)
-
-        XCTAssertEqual(first, second)
-    }
-
-    func test_generates_the_same_result_for_the_same_day() {
-        let first = encrypter.broadcastId(for: knownDate, until: muchLaterDate)
-        let second = encrypter.broadcastId(for: slightlyLaterDate, until: muchLaterDate)
-
-        XCTAssertEqual(first, second)
-    }
-
-    func test_generates_a_different_id_for_different_days() throws {
-        let todaysId = encrypter.broadcastId(for: knownDate)
-        let tomorrowsId = encrypter.broadcastId(for: muchLaterDate)
-
-        XCTAssertNotEqual(todaysId, tomorrowsId)
     }
 
     //MARK: - Private

@@ -36,7 +36,7 @@ class ConcreteBluetoothNursery: BluetoothNursery, PersistenceDelegate {
 
     // The listener needs to get hold of the broadcaster, to send keepalives
     public var broadcaster: BTLEBroadcaster?
-    let broadcastIdGenerator: BroadcastIdGenerator
+    public var broadcastIdGenerator: BroadcastIdGenerator?
 
     public var listener: BTLEListener?
     public private(set) var stateObserver: BluetoothStateObserving = BluetoothStateObserver(initialState: .unknown)
@@ -49,7 +49,7 @@ class ConcreteBluetoothNursery: BluetoothNursery, PersistenceDelegate {
         self.userNotificationCenter = userNotificationCenter
         contactEventPersister = PlistPersister<UUID, ContactEvent>(fileName: "contactEvents")
         contactEventRepository = PersistingContactEventRepository(persister: contactEventPersister)
-        broadcastIdGenerator = ConcreteBroadcastIdGenerator(storage: SecureBroadcastRotationKeyStorage())
+        
 
         contactEventExpiryHandler = ContactEventExpiryHandler(notificationCenter: notificationCenter,
                                                               contactEventRepository: contactEventRepository)
@@ -60,9 +60,11 @@ class ConcreteBluetoothNursery: BluetoothNursery, PersistenceDelegate {
     // MARK: - BTLEListener
 
     func startBluetooth(registration: Registration?) {
-        broadcastIdGenerator.sonarId = registration?.id
+        broadcastIdGenerator = ConcreteBroadcastIdGenerator(
+            storage: SecureBroadcastRotationKeyStorage(),
+            provider: ConcreteBroadcastIdEncrypterProvider(persistence: persistence))
         
-        let broadcaster = ConcreteBTLEBroadcaster(idGenerator: broadcastIdGenerator)
+        let broadcaster = ConcreteBTLEBroadcaster(idGenerator: broadcastIdGenerator!)
         peripheral = CBPeripheralManager(delegate: broadcaster, queue: btleQueue, options: [
             CBPeripheralManagerOptionRestoreIdentifierKey: ConcreteBluetoothNursery.peripheralRestoreIdentifier
         ])
@@ -90,7 +92,6 @@ class ConcreteBluetoothNursery: BluetoothNursery, PersistenceDelegate {
     // MARK: - PersistenceDelegate
 
     func persistence(_ persistence: Persisting, didUpdateRegistration registration: Registration) {
-        broadcastIdGenerator.sonarId = registration.id
         broadcaster?.updateIdentity()
     }
 

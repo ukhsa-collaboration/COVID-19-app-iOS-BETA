@@ -22,7 +22,7 @@ class SecureBroadcastRotationKeyStorageTests: XCTestCase {
     }
 
     func test_saves_the_key_and_reads_it_back() throws {
-        try storage.save(publicKey: try ellipticCurveKeyForTest())
+        try storage.save(publicKey: SecKey.sampleEllipticCurveKey)
 
         let otherWrapper = SecureBroadcastRotationKeyStorage()
         let readKey = otherWrapper.read()
@@ -35,11 +35,17 @@ class SecureBroadcastRotationKeyStorageTests: XCTestCase {
 
         XCTAssertNil(readKey)
     }
+    
+    func test_saves_broadcastId() {
+        let middayToday = Date().midday
+        
+        storage.save(broadcastId: "looks like a broadcastId".data(using: .utf8)!, date: middayToday)
 
-    //MARK: - Private
+        let otherWrapper = SecureBroadcastRotationKeyStorage()
+        let (broadcastId, date) = otherWrapper.readBroadcastId()!
 
-    private func ellipticCurveKeyForTest() throws -> SecKey {
-        let data = Data.init(base64Encoded: "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEu1f68MqDXbKeTqZMTHsOGToO4rKnPClXe/kE+oWqlaWZQv4J1E98cUNdpzF9JIFRPMCNdGOvTr4UB+BhQv9GWg==")!
-        return try BroadcastRotationKeyConverter().fromData(data)
+        XCTAssertEqual(broadcastId, "looks like a broadcastId".data(using: .utf8)!)
+        XCTAssertEqual(date, middayToday)
     }
+
 }

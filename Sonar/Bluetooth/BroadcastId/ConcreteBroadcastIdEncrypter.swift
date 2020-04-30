@@ -11,36 +11,24 @@ import Security
 
 import Logging
 
-class BroadcastIdEncrypter {
+protocol BroadcastIdEncrypter {
+    func broadcastId(from startDate: Date, until endDate: Date) -> Data
+}
+
+class ConcreteBroadcastIdEncrypter: BroadcastIdEncrypter {
 
     let serverPublicKey: SecKey
     let sonarId: UUID
 
-    let oneDay: TimeInterval = 86400
-
-    static var broadcastIdLength: Int {
-        return 106
-    }
-
-    struct CachedResult {
-        let date: Date
-        let broadcastId: Data
-    }
-
-    var cached: CachedResult?
+    // TODO: Should this be on the protocol?
+    static var broadcastIdLength: Int = 106
 
     init(key: SecKey, sonarId: UUID) {
         self.serverPublicKey = key
         self.sonarId = sonarId
     }
 
-    func broadcastId(for startDate: Date = Date(), until maybeDate: Date? = nil) -> Data {
-        if sameDay(startDate, cached?.date) {
-            return cached!.broadcastId
-        }
-
-        let endDate: Date = maybeDate ?? startDate.addingTimeInterval(oneDay)
-
+    func broadcastId(from startDate: Date, until endDate: Date) -> Data {
         let firstPart = bytesFrom(startDate)
         let secondPart = bytesFrom(endDate)
         let thirdPart = bytesFromSonarId()
@@ -74,9 +62,7 @@ class BroadcastIdEncrypter {
         }
 
         let withoutFirstByte = result.dropFirst()
-        assert(withoutFirstByte.count == BroadcastIdEncrypter.broadcastIdLength, "unexpected number of bytes: \(withoutFirstByte.count)")
-
-        cached = CachedResult(date: startDate, broadcastId: withoutFirstByte)
+        assert(withoutFirstByte.count == ConcreteBroadcastIdEncrypter.broadcastIdLength, "unexpected number of bytes: \(withoutFirstByte.count)")
 
         return withoutFirstByte
     }

@@ -10,20 +10,7 @@ import XCTest
 @testable import Sonar
 
 class BluetoothNurseryTests: TestCase {
-    func testStartsBroadcastingOnceRegistrationIsPersisted() {
-        let persistence = PersistenceDouble()
-        let nursery = ConcreteBluetoothNursery(persistence: persistence,
-                                               userNotificationCenter: UserNotificationCenterDouble(),
-                                               notificationCenter: NotificationCenter())
-        
-        XCTAssertNil(nursery.broadcastIdGenerator.sonarId)
-        
-        let registration = Registration.fake
-        persistence.delegate?.persistence(persistence, didUpdateRegistration: registration)
-
-        XCTAssertEqual(nursery.broadcastIdGenerator.sonarId, registration.id)
-    }
-
+    
     func test_whenRegistrationIsSaved_theBroadcasterIsInformedToUpdate() throws {
         throw XCTSkip("This test can't be written until the nursery's functional behavior is decoupled from the creation of objects.")
     }

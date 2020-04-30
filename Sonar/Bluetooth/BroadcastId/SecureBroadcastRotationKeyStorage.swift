@@ -14,6 +14,8 @@ import Logging
 
 protocol BroadcastRotationKeyStorage {
     func save(publicKey: SecKey) throws
+    func save(broadcastId: Data, date: Date)
+    func readBroadcastId() -> (Data, Date)?
     func read() -> SecKey?
     func clear() throws
 }
@@ -21,6 +23,8 @@ protocol BroadcastRotationKeyStorage {
 struct SecureBroadcastRotationKeyStorage: BroadcastRotationKeyStorage {
 
     private let publicKeyTag = "uk.nhs.nhsx.sonar.public_key"
+    private let broadcastIdKeyTag = "uk.nhs.nhsx.sonar.broadcast_id"
+    private let broadcastIdDateKeyTag = "uk.nhs.nhsx.sonar.broadcast_id_date"
 
     func save(publicKey: SecKey) throws {
         let status = saveToKeychain(publicKey)
@@ -30,7 +34,21 @@ struct SecureBroadcastRotationKeyStorage: BroadcastRotationKeyStorage {
             throw KeychainErrors.couldNotSaveToKeychain(status)
         }
     }
-
+    
+    func save(broadcastId: Data, date: Date) {
+        // TODO: Should be in the keychain? Or isn't it important, we're broadcasting it anyway!
+        UserDefaults.standard.set(broadcastId, forKey: broadcastIdKeyTag)
+        UserDefaults.standard.set(date, forKey: broadcastIdDateKeyTag)
+    }
+    
+    func readBroadcastId() -> (Data, Date)? {
+        guard let data = UserDefaults.standard.data(forKey: broadcastIdKeyTag), let date = UserDefaults.standard.object(forKey: broadcastIdDateKeyTag) as? Date else {
+            return nil
+        }
+        
+        return (data, date)
+    }
+    
     func read() -> SecKey? {
         let query: [String: Any] = [
             kSecClass as String: kSecClassKey,

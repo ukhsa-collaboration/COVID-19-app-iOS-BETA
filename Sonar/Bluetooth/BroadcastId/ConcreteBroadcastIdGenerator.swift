@@ -10,38 +10,39 @@ import Foundation
 import Logging
 
 protocol BroadcastIdGenerator {
-    var sonarId: UUID? { get nonmutating set }
+    func broadcastIdentifier(date: Date) -> Data?
+}
 
-    func broadcastIdentifier() -> Data?
+extension BroadcastIdGenerator {
+    func broadcastIdentifier(date: Date = Date()) -> Data? {
+        return broadcastIdentifier(date: date)
+    }
 }
 
 class ConcreteBroadcastIdGenerator: BroadcastIdGenerator {
 
-    var sonarId: UUID?
-    var serverPublicKey: SecKey?
-
     let storage: BroadcastRotationKeyStorage
-    var encrypter: BroadcastIdEncrypter?
+    var provider: BroadcastIdEncrypterProvider
 
-    init(storage: BroadcastRotationKeyStorage) {
+    init(storage: BroadcastRotationKeyStorage, provider: BroadcastIdEncrypterProvider) {
         self.storage = storage
+        self.provider = provider
     }
 
-    func broadcastIdentifier() -> Data? {
-        guard let sonarId = sonarId else { return nil }
-        guard let key = storage.read() else { return nil }
-
-        return getEncrypter(key: key, sonarId: sonarId).broadcastId()
-    }
-
-    private func getEncrypter(key: SecKey, sonarId: UUID) -> BroadcastIdEncrypter {
-        if self.encrypter == nil {
-            self.encrypter = BroadcastIdEncrypter(key: key, sonarId: sonarId)
+    func broadcastIdentifier(date: Date) -> Data? {
+        if let (broadcastId, broadcastIdDate) = storage.readBroadcastId(), Calendar.current.isDateInToday(broadcastIdDate) {
+            return broadcastId
         }
-
-        return self.encrypter!
+        
+        let midnight = Calendar.current.startOfDay(for: Calendar.current.date(byAdding: .day, value: 1, to: date)!)
+        if let broadcastId = provider.getEncrypter()?.broadcastId(from: date, until: midnight) {
+            storage.save(broadcastId: broadcastId, date: date)
+            return broadcastId
+        } else {
+            return nil
+        }
     }
-    
+
 }
 
 fileprivate let logger = Logger(label: "BTLE")
