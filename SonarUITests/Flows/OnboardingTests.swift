@@ -23,7 +23,7 @@ class OnboardingTests: ScreenTestCase {
 
         // returned back to the home screen
         XCTAssert(startTitle.exists)
-        startButton.tap()
+        continueButton.tap()
 
         // partial post code screen
         XCTAssert(postcodeScreenTitle.exists)
@@ -42,8 +42,8 @@ class OnboardingTests: ScreenTestCase {
 
 private extension OnboardingTests {
     
-    var startButton: XCUIElement {
-        app.buttons["Start now"]
+    var continueButton: XCUIElement {
+        app.buttons["Continue"]
     }
     
 }
