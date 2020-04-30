@@ -44,7 +44,6 @@ class StatusViewController: UIViewController, Storyboarded {
     @IBOutlet weak var linkingIdView: UIStackView!
     @IBOutlet weak var linkingIdButton: ButtonWithDynamicType!
     @IBOutlet weak var nhs111label: ButtonWithDynamicType!
-    @IBOutlet weak var adviceValidityLabel: UILabel!
     @IBOutlet weak var medicalAdviceLabel: UILabel!
     
     func inject(
@@ -78,7 +77,6 @@ class StatusViewController: UIViewController, Storyboarded {
             readLatestAdviceLabel.attributedText = NSAttributedString(string: "Read Latest Advice".localized, attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue])
         }
         
-        adviceValidityLabel.textColor = UIColor(named: "NHS Secondary Text")
         medicalAdviceLabel.textColor = UIColor(named: "NHS Secondary Text")
 
         diagnosisStatusView.addGestureRecognizer(

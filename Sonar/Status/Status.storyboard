@@ -125,12 +125,6 @@
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Valid" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pTu-ou-sjX">
-                                                                        <rect key="frame" x="24" y="162" width="342" height="18"/>
-                                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                                                        <color key="textColor" name="NHS Secondary Text"/>
-                                                                        <nil key="highlightedColor"/>
-                                                                    </label>
                                                                 </subviews>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                 <accessibility key="accessibilityConfiguration">
@@ -142,16 +136,13 @@
                                                                     <constraint firstItem="oUM-AI-6LL" firstAttribute="leading" secondItem="uA1-0d-OYq" secondAttribute="trailing" constant="12" id="2ah-wd-rMp"/>
                                                                     <constraint firstItem="uA1-0d-OYq" firstAttribute="leading" secondItem="JWK-re-qjH" secondAttribute="leading" id="KQw-UZ-Vhc"/>
                                                                     <constraint firstAttribute="trailing" secondItem="sLA-Af-1Gb" secondAttribute="trailing" constant="20" id="Kfy-wu-Fap"/>
-                                                                    <constraint firstItem="pTu-ou-sjX" firstAttribute="top" secondItem="oUM-AI-6LL" secondAttribute="bottom" constant="8" id="N6h-BS-ciz"/>
                                                                     <constraint firstItem="uA1-0d-OYq" firstAttribute="top" secondItem="JWK-re-qjH" secondAttribute="top" id="Rvb-q4-vIb"/>
-                                                                    <constraint firstItem="pTu-ou-sjX" firstAttribute="leading" secondItem="uA1-0d-OYq" secondAttribute="trailing" constant="12" id="SXz-PC-iqr"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="pTu-ou-sjX" secondAttribute="bottom" constant="28" id="UNW-q0-m64"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="oUM-AI-6LL" secondAttribute="bottom" constant="54" id="d7i-TB-Apl"/>
                                                                     <constraint firstItem="Rpg-7v-Vhp" firstAttribute="top" secondItem="sLA-Af-1Gb" secondAttribute="bottom" constant="28" id="dt1-dU-AJC"/>
                                                                     <constraint firstAttribute="trailing" secondItem="oUM-AI-6LL" secondAttribute="trailing" constant="20" id="evk-Ga-elp"/>
                                                                     <constraint firstAttribute="bottom" secondItem="uA1-0d-OYq" secondAttribute="bottom" id="ipP-KR-MZr"/>
                                                                     <constraint firstItem="sLA-Af-1Gb" firstAttribute="top" secondItem="JWK-re-qjH" secondAttribute="top" constant="24" id="kz1-xd-mgg"/>
                                                                     <constraint firstItem="oUM-AI-6LL" firstAttribute="top" secondItem="Rpg-7v-Vhp" secondAttribute="bottom" constant="48" id="l8M-ID-YOa"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="pTu-ou-sjX" secondAttribute="trailing" constant="16" id="np0-0Y-nzg"/>
                                                                     <constraint firstItem="Rpg-7v-Vhp" firstAttribute="leading" secondItem="uA1-0d-OYq" secondAttribute="trailing" constant="12" id="oJe-uO-zP7"/>
                                                                     <constraint firstItem="sLA-Af-1Gb" firstAttribute="leading" secondItem="uA1-0d-OYq" secondAttribute="trailing" constant="12" id="pyW-Fy-SGL"/>
                                                                 </constraints>
@@ -363,7 +354,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="k8f-bF-CaC"/>
                     <connections>
-                        <outlet property="adviceValidityLabel" destination="pTu-ou-sjX" id="ItH-YW-KWr"/>
                         <outlet property="diagnosisHighlightView" destination="uA1-0d-OYq" id="g8S-eV-fpJ"/>
                         <outlet property="diagnosisStatusView" destination="JWK-re-qjH" id="byU-x3-cXA"/>
                         <outlet property="diagnosisTitleLabel" destination="Rpg-7v-Vhp" id="6bk-Da-3iT"/>
