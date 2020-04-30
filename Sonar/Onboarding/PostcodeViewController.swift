@@ -105,6 +105,8 @@ class PostcodeViewController: UIViewController, Storyboarded {
 extension PostcodeViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         guard hasValidPostcode() else {
+            textField.layer.borderWidth = 3
+            textField.layer.borderColor = UIColor(named: "NHS Error")!.cgColor
             return false
         }
 
@@ -115,6 +117,16 @@ extension PostcodeViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString: String) -> Bool {
         let existingLength = textField.text?.count ?? 0
         return existingLength - range.length + replacementString.count <= maxLength
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.layer.borderWidth = 3
+        textField.layer.borderColor = UIColor(named: "NHS Dark Blue")!.cgColor
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textField.layer.borderWidth = 1
+        textField.layer.borderColor = UIColor(named: "NHS Text")!.cgColor
     }
 }
 
