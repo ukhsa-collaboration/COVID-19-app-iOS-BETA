@@ -8,7 +8,7 @@ on:
   #     - ci
 
 jobs:
-  trigger-upload:
+  trigger-internal-upload:
     runs-on:
       - self-hosted
       - macos
@@ -30,12 +30,12 @@ jobs:
       - name:
         if: steps.check-upload-tag.outputs.upload == 'true'
         env:
-          PUSH_TOKEN: ${{ secrets.deployment_token }}
+          GITHUB_TOKEN: ${{ secrets.deployment_token }}
         run: |
           git fetch origin internal
           git checkout internal
           git merge upload-to-internal
-          git remote set-url origin https://x-access-token:${PUSH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
           git push origin internal
 
       - name: Notify Slack on Failure
