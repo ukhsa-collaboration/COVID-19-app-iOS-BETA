@@ -39,7 +39,7 @@ class ContactEventsUploaderTests: XCTestCase {
     func testUploadRequest() {
         let registration = Registration.fake
         let persisting = PersistenceDouble(
-            diagnosis: SelfDiagnosis(symptoms: [], startDate: Date()),
+            diagnosis: SelfDiagnosis(type: .initial, symptoms: [], startDate: Date()),
             registration: registration
         )
         let expectedBroadcastId = "opaque bytes that only the server can decrypt".data(using: .utf8)!
@@ -86,7 +86,7 @@ class ContactEventsUploaderTests: XCTestCase {
     func testUploadLogRequestedAndStarted() {
         let registration = Registration.fake
         let persisting = PersistenceDouble(
-            diagnosis: SelfDiagnosis(symptoms: [], startDate: Date()),
+            diagnosis: SelfDiagnosis(type: .initial, symptoms: [], startDate: Date()),
             registration: registration
         )
         let expectedBroadcastId = "opaque bytes that only the server can decrypt".data(using: .utf8)!
@@ -108,7 +108,7 @@ class ContactEventsUploaderTests: XCTestCase {
     func testCleanup() {
         let registration = Registration.fake
         let persisting = PersistenceDouble(
-            diagnosis: SelfDiagnosis(symptoms: [], startDate: Date()),
+            diagnosis: SelfDiagnosis(type: .initial, symptoms: [], startDate: Date()),
             registration: registration
         )
         let expectedBroadcastId = "opaque bytes that only the server can decrypt".data(using: .utf8)!
@@ -135,7 +135,7 @@ class ContactEventsUploaderTests: XCTestCase {
 
     func testEnsureUploadingWhenRequestedButNoRegistration() {
         let persisting = PersistenceDouble(
-            diagnosis: SelfDiagnosis(symptoms: [], startDate: Date()),
+            diagnosis: SelfDiagnosis(type: .initial, symptoms: [], startDate: Date()),
             uploadLog: [UploadLog(event: .requested)]
         )
         let contactEventRepository = ContactEventRepositoryDouble()
@@ -156,7 +156,7 @@ class ContactEventsUploaderTests: XCTestCase {
     func testEnsureUploadingWhenRequestedWithRegistration() {
         let registration = Registration.fake
         let persisting = PersistenceDouble(
-            diagnosis: SelfDiagnosis(symptoms: [], startDate: Date()),
+            diagnosis: SelfDiagnosis(type: .initial, symptoms: [], startDate: Date()),
             registration: registration,
             uploadLog: [UploadLog(date: overAnHourAgo, event: .requested)]
         )
@@ -178,7 +178,7 @@ class ContactEventsUploaderTests: XCTestCase {
     func testEnsureUploadingWhenStarted() {
         let registration = Registration.fake
         let persisting = PersistenceDouble(
-            diagnosis: SelfDiagnosis(symptoms: [], startDate: Date()),
+            diagnosis: SelfDiagnosis(type: .initial, symptoms: [], startDate: Date()),
             registration: registration,
             uploadLog: [
                 UploadLog(event: .requested),
@@ -203,7 +203,7 @@ class ContactEventsUploaderTests: XCTestCase {
     func testEnsureUploadingWhenCompleted() {
         let registration = Registration.fake
         let persisting = PersistenceDouble(
-            diagnosis: SelfDiagnosis(symptoms: [], startDate: Date()),
+            diagnosis: SelfDiagnosis(type: .initial, symptoms: [], startDate: Date()),
             registration: registration,
             uploadLog: [
                 UploadLog(event: .requested),
@@ -229,7 +229,7 @@ class ContactEventsUploaderTests: XCTestCase {
     func testEnsureUploadingWhenError() {
         let registration = Registration.fake
         let persisting = PersistenceDouble(
-            diagnosis: SelfDiagnosis(symptoms: [], startDate: Date()),
+            diagnosis: SelfDiagnosis(type: .initial, symptoms: [], startDate: Date()),
             registration: registration,
             uploadLog: [
                 UploadLog(event: .requested),
@@ -255,7 +255,7 @@ class ContactEventsUploaderTests: XCTestCase {
     func testEnsureUploadingBeforeAnHourHasPassed() {
         let registration = Registration.fake
         let persisting = PersistenceDouble(
-            diagnosis: SelfDiagnosis(symptoms: [], startDate: Date()),
+            diagnosis: SelfDiagnosis(type: .initial, symptoms: [], startDate: Date()),
             registration: registration,
             uploadLog: [
                 UploadLog(event: .requested),

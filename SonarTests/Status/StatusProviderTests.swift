@@ -38,6 +38,7 @@ class StatusProviderTests: XCTestCase {
 
     func testSelfDiagnosedWithSymptoms() {
         persisting.selfDiagnosis = SelfDiagnosis(
+            type: .initial,
             symptoms: [.cough],
             startDate: Date()
         )
@@ -62,6 +63,7 @@ class StatusProviderTests: XCTestCase {
 
         advanceCurrentDate(by: 1)
         persisting.selfDiagnosis = SelfDiagnosis(
+            type: .initial,
             symptoms: [.cough],
             startDate: Date()
         )
@@ -75,6 +77,7 @@ class StatusProviderTests: XCTestCase {
 
         advanceCurrentDate(by: 1)
         persisting.selfDiagnosis = SelfDiagnosis(
+            type: .initial,
             symptoms: [.cough],
             startDate: startDate
         )
@@ -82,6 +85,7 @@ class StatusProviderTests: XCTestCase {
 
         advanceCurrentDate(by: 1)
         persisting.selfDiagnosis = SelfDiagnosis(
+            type: .subsequent,
             symptoms: [],
             startDate: startDate
         )

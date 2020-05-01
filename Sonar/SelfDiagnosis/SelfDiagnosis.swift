@@ -8,12 +8,19 @@
 
 import Foundation
 
+enum SelfDiagnosisType: String, Codable {
+    case initial
+    case subsequent
+}
+
 struct SelfDiagnosis: Codable, Equatable {
+    let type: SelfDiagnosisType
     let symptoms: Set<Symptom>
     let startDate: Date
     var expiryDate: Date
 
-    init(symptoms: Set<Symptom>, startDate: Date, expiryDate: Date = Date()) {
+    init(type: SelfDiagnosisType, symptoms: Set<Symptom>, startDate: Date, expiryDate: Date = Date()) {
+        self.type = type
         self.symptoms = symptoms
         self.startDate = startDate
         self.expiryDate = expiryDate

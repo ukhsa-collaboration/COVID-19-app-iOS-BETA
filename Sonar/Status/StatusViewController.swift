@@ -207,13 +207,16 @@ class StatusViewController: UIViewController, Storyboarded {
                 diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
                 diagnosisTitleLabel.text = "Your symptoms indicate you may have coronavirus".localized
                 diagnosisDetailLabel.isHidden = false
-                
-                if let expiryDate = persistence.selfDiagnosis?.expiryDate {
-                    let detailFmt = "Follow this advice until %@, at which point this app will notify you to update your symptoms.".localized
-                    let dateFormatter = DateFormatter()
-                    dateFormatter.locale = localeProvider.locale
-                    dateFormatter.setLocalizedDateFormatFromTemplate("MMMMd")
-                    diagnosisDetailLabel.text = String(format: detailFmt, dateFormatter.string(from: expiryDate))
+
+                if let selfDiagnosis = persistence.selfDiagnosis {
+                    switch selfDiagnosis.type {
+                    case .initial:
+                        detailForInitialSelfDiagnosis(selfDiagnosis)
+                    case .subsequent:
+                        if selfDiagnosis.symptoms.contains(.temperature) {
+                            diagnosisDetailLabel.text = "Follow this advice until your temperature returns to normal"
+                        }
+                    }
                 } else {
                     // Can't happen, but don't show the placeholder text if it does.
                     diagnosisDetailLabel.isHidden = true
@@ -289,6 +292,14 @@ class StatusViewController: UIViewController, Storyboarded {
         registrationSpinner.stopAnimating()
         registrationSpinner.isHidden = true
         registrationStatusIcon.isHidden = false
+    }
+    
+    private func detailForInitialSelfDiagnosis(_ selfDiagnosis: SelfDiagnosis) {
+        let detailFmt = "Follow this advice until %@, at which point this app will notify you to update your symptoms.".localized
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = localeProvider.locale
+        dateFormatter.setLocalizedDateFormatFromTemplate("MMMMd")
+        diagnosisDetailLabel.text = String(format: detailFmt, dateFormatter.string(from: selfDiagnosis.expiryDate))
     }
 }
 

@@ -34,7 +34,7 @@ class PersistenceTests: TestCase {
     }
 
     func testDiagnosisIsUnknownWhenDefaultsReset() {
-        persistence.selfDiagnosis = SelfDiagnosis(symptoms: [.cough], startDate: Date())
+        persistence.selfDiagnosis = SelfDiagnosis(type: .initial, symptoms: [.cough], startDate: Date())
 
         let appDomain = Bundle.main.bundleIdentifier
         UserDefaults.standard.removePersistentDomain(forName: appDomain!)
@@ -44,7 +44,7 @@ class PersistenceTests: TestCase {
     }
 
     func testDeleteSelfDiagnosisWhenNil() {
-        persistence.selfDiagnosis = SelfDiagnosis(symptoms: [.cough], startDate: Date())
+        persistence.selfDiagnosis = SelfDiagnosis(type: .initial, symptoms: [.cough], startDate: Date())
         XCTAssertNotNil(persistence.selfDiagnosis)
 
         persistence.selfDiagnosis = nil

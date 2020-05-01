@@ -129,7 +129,7 @@ class StatusViewControllerTests: XCTestCase {
         XCTAssertTrue(vc.redStatusView.isHidden)
     }
     
-    func testShowsRedStatus() {
+    func testShowsRedStatusForInitialSelfDiagnosis() {
         let statusProvider = StatusProviderDouble.double()
         statusProvider.status = .red
         let persistence = PersistenceDouble()
@@ -137,12 +137,25 @@ class StatusViewControllerTests: XCTestCase {
         let midnightUTC = 1589414400
         let midnightLocal = midnightUTC - TimeZone.current.secondsFromGMT()
         let expiryDate = Date(timeIntervalSince1970: TimeInterval(midnightLocal))
-        persistence.selfDiagnosis = SelfDiagnosis(symptoms: Set(), startDate: Date(), expiryDate: expiryDate)
+        persistence.selfDiagnosis = SelfDiagnosis(type: .initial, symptoms: Set(), startDate: Date(), expiryDate: expiryDate)
         let vc = makeViewController(persistence: persistence, statusProvider: statusProvider)
         
         XCTAssertEqual(vc.diagnosisTitleLabel.text, "Your symptoms indicate you may have coronavirus")
         XCTAssertFalse(vc.diagnosisDetailLabel.isHidden)
         XCTAssertEqual(vc.diagnosisDetailLabel.text, "Follow this advice until 14 May, at which point this app will notify you to update your symptoms.")
+        XCTAssertFalse(vc.redStatusView.isHidden)
+    }
+
+    func testShowsRedStatusForSubsequentSelfDiagnosisWithTemperature() {
+        let statusProvider = StatusProviderDouble.double()
+        statusProvider.status = .red
+        let persistence = PersistenceDouble()
+        persistence.selfDiagnosis = SelfDiagnosis(type: .subsequent, symptoms: Set(arrayLiteral: Symptom.temperature), startDate: Date())
+        let vc = makeViewController(persistence: persistence, statusProvider: statusProvider)
+        
+        XCTAssertEqual(vc.diagnosisTitleLabel.text, "Your symptoms indicate you may have coronavirus")
+        XCTAssertFalse(vc.diagnosisDetailLabel.isHidden)
+        XCTAssertEqual(vc.diagnosisDetailLabel.text, "Follow this advice until your temperature returns to normal")
         XCTAssertFalse(vc.redStatusView.isHidden)
     }
 }

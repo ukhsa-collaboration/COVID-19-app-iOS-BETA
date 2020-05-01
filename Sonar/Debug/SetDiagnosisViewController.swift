@@ -72,6 +72,7 @@ class SetDiagnosisViewController: UITableViewController {
             if (temperatureSwitch.isOn) { symptoms.insert(.temperature) }
             if (coughSwitch.isOn) { symptoms.insert(.cough) }
             persistence.selfDiagnosis = SelfDiagnosis(
+                type: .initial,
                 symptoms: symptoms,
                 startDate: startDate ?? Date(),
                 expiryDate: recordedDate ?? Date()
