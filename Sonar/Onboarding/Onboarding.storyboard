@@ -141,7 +141,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="31h-8a-dJ8">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="603"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="650"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P9b-DU-jl5" customClass="OnboardingLogoStrapline" customModule="Sonar" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="350" height="64"/>
@@ -156,7 +156,7 @@
                                                 </connections>
                                             </button>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="7HO-8c-Q84">
-                                                <rect key="frame" x="20" y="84" width="374" height="499"/>
+                                                <rect key="frame" x="20" y="84" width="374" height="546"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How this app works" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hxN-EA-ySp">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="40.666666666666664"/>
@@ -165,51 +165,85 @@
                                                             <accessibilityTraits key="traits" staticText="YES" header="YES"/>
                                                         </accessibility>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                                        <nil key="textColor"/>
+                                                        <color key="textColor" name="NHS Text"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="61U-61-fII">
-                                                        <rect key="frame" x="0.0" y="60.666666666666643" width="374" height="218.33333333333337"/>
-                                                        <string key="text">This app will use your phone’s Bluetooth to detect if you are near someone with coronavirus symptoms. If you think you have coronavirus symptoms, you can add your symptoms on this app, so the app can let others know that you have been in contact with them and they may be at risk. Your identity will be protected, along with the identity of those you have been near to. All information is stored safely and securely on your phone.</string>
+                                                        <rect key="frame" x="0.0" y="60.66666666666665" width="374" height="86.333333333333314"/>
+                                                        <string key="text">This app gives you advice if you have been near someone who later develops coronavirus symptoms. The app uses your phone to detect other app users nearby.</string>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                        <nil key="textColor"/>
+                                                        <color key="textColor" name="NHS Text"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aa9-4N-jqJ">
+                                                        <rect key="frame" x="0.0" y="167" width="374" height="108.33333333333331"/>
+                                                        <string key="text">If you think you have coronavirus symptoms you can add them in this app. The NHS will then let others know they have been near someone who has developed symptoms. This helps protect everyone and the NHS.</string>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                        <color key="textColor" name="NHS Text"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your identity is not shared with other app users. The NHS will protect your identity. All information is stored securely." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ts1-sb-Qj5">
+                                                        <rect key="frame" x="0.0" y="295.33333333333331" width="374" height="64.333333333333314"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                        <color key="textColor" name="NHS Text"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c7o-Ne-8JZ" userLabel="Spacer">
+                                                        <rect key="frame" x="0.0" y="379.66666666666669" width="374" height="18"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="18" id="ZU2-ZV-5DS"/>
+                                                        </constraints>
+                                                    </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wkM-GZ-R6l">
-                                                        <rect key="frame" x="0.0" y="299" width="374" height="200"/>
+                                                        <rect key="frame" x="0.0" y="417.66666666666669" width="374" height="128.33333333333331"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cCX-FU-QHi">
-                                                                <rect key="frame" x="0.0" y="0.0" width="4" height="200"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="4" height="128.33333333333334"/>
                                                                 <color key="backgroundColor" name="NHS Blue"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="4" id="HGU-yb-H7V"/>
                                                                 </constraints>
                                                             </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NqF-3H-W6M" userLabel="Spacer">
+                                                                <rect key="frame" x="4" y="0.0" width="12" height="128.33333333333334"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="12" id="nsb-7d-DmS"/>
+                                                                </constraints>
+                                                            </view>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="N2u-wn-ubc">
-                                                                <rect key="frame" x="4" y="0.0" width="370" height="200"/>
+                                                                <rect key="frame" x="16" y="0.0" width="358" height="128.33333333333334"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="More information" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G93-6Z-Y0N">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="370" height="20.333333333333332"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="358" height="20.333333333333332"/>
                                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                                         <color key="textColor" name="NHS Text"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7t9-4s-vCV" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="20.333333333333321" width="370" height="119.66666666666669"/>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iNT-DY-wj8" userLabel="Spacer">
+                                                                        <rect key="frame" x="0.0" y="20.333333333333314" width="358" height="18"/>
+                                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="18" id="7Ee-el-Ayk"/>
+                                                                        </constraints>
+                                                                    </view>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7t9-4s-vCV" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="38.333333333333314" width="358" height="30"/>
                                                                         <state key="normal" title="Button"/>
                                                                         <connections>
                                                                             <action selector="tapMoreAbout:" destination="asv-dx-knf" eventType="touchUpInside" id="Rha-0o-UXG"/>
                                                                         </connections>
                                                                     </button>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wZa-Mg-Yq4" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="140" width="370" height="30"/>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wZa-Mg-Yq4" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="68.333333333333314" width="358" height="30"/>
                                                                         <state key="normal" title="Button"/>
                                                                         <connections>
                                                                             <action selector="tapPrivacy:" destination="asv-dx-knf" eventType="touchUpInside" id="wM7-Rc-ueX"/>
                                                                         </connections>
                                                                     </button>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IS8-GX-Tl4" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="170" width="370" height="30"/>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IS8-GX-Tl4" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="98.333333333333314" width="358" height="30"/>
                                                                         <state key="normal" title="Button"/>
                                                                         <connections>
                                                                             <action selector="tapTerms:" destination="asv-dx-knf" eventType="touchUpInside" id="2dY-rX-MU1"/>
@@ -258,6 +292,7 @@
                         <viewLayoutGuide key="safeArea" id="0ia-KQ-0k0"/>
                     </view>
                     <connections>
+                        <outlet property="informationTitle" destination="G93-6Z-Y0N" id="tZ7-p0-XaY"/>
                         <outlet property="moreAbout" destination="7t9-4s-vCV" id="ik6-0Z-KOW"/>
                         <outlet property="privacyPolicy" destination="wZa-Mg-Yq4" id="cad-wS-8r9"/>
                         <outlet property="termsConditions" destination="IS8-GX-Tl4" id="JfK-Oh-8Iq"/>

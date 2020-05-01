@@ -13,6 +13,7 @@ class PrivacyViewController: UIViewController, Storyboarded {
 
     private var continueHandler: (() -> Void)! = nil
 
+    @IBOutlet weak var informationTitle: UILabel!
     @IBOutlet weak var moreAbout: ButtonWithDynamicType!
     @IBOutlet weak var privacyPolicy: ButtonWithDynamicType!
     @IBOutlet weak var termsConditions: ButtonWithDynamicType!
@@ -22,7 +23,7 @@ class PrivacyViewController: UIViewController, Storyboarded {
         privacyPolicy.setAttributedTitle(NSAttributedString(string: "Privacy policy".localized, attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue, .foregroundColor: UIColor(named: "NHS Link")!]), for: .normal)
         termsConditions.setAttributedTitle(NSAttributedString(string: "Terms and conditions".localized, attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue, .foregroundColor: UIColor(named: "NHS Link")!]), for: .normal)
     }
-    
+    
     func inject(continueHandler: @escaping () -> Void) {
         self.continueHandler = continueHandler
     }
@@ -38,7 +39,6 @@ class PrivacyViewController: UIViewController, Storyboarded {
     @IBAction func tapTerms(_ sender: Any) {
         UIApplication.shared.open(URL(string: "https://covid19.nhs.uk/data-privacy/app-terms-conditions")!)
     }
-    
     
     @IBAction func didTapClose(_ sender: Any) {
         self.presentingViewController?.dismiss(animated: true)
