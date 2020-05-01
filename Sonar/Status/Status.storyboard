@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -266,7 +266,7 @@
                                                                             <constraint firstItem="Zfg-lL-ZYx" firstAttribute="leading" secondItem="Gbo-jS-eOA" secondAttribute="leading" id="zQ5-WH-6eh"/>
                                                                         </constraints>
                                                                     </view>
-                                                                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="66c-tO-6TF" userLabel="Linking Id" customClass="UIControl">
+                                                                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="66c-tO-6TF" userLabel="Linking Id" customClass="UIButton">
                                                                         <rect key="frame" x="0.0" y="111" width="382" height="68.5"/>
                                                                         <subviews>
                                                                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bxy-UB-mQx" userLabel="Background">
@@ -416,6 +416,7 @@
                         <outlet property="disclosureIndicator" destination="mvH-zV-c1r" id="Fbk-ng-Pt0"/>
                         <outlet property="healthcareWorkersInstructionsView" destination="Tgy-0K-l2M" id="Bjk-92-NTe"/>
                         <outlet property="howAreYouFeelingView" destination="hbY-PQ-ANb" id="hfn-Fk-Joh"/>
+                        <outlet property="linkingIDButton" destination="66c-tO-6TF" id="iTP-ey-a4n"/>
                         <outlet property="medicalAdviceLabel" destination="zqt-gJ-Jrb" id="4Gi-Cg-8ot"/>
                         <outlet property="nhs111label" destination="2UL-Ea-jl7" id="L5R-JW-X5T"/>
                         <outlet property="noSymptomsLabel" destination="MHW-MT-jLf" id="8V9-Ab-x0Y"/>

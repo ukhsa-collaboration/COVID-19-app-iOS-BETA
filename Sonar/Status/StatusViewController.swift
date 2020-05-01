@@ -49,6 +49,7 @@ class StatusViewController: UIViewController, Storyboarded {
     @IBOutlet weak var redStatusView: UIStackView!
     @IBOutlet weak var healthcareWorkersInstructionsView: UIControl!
 
+    @IBOutlet weak var linkingIDButton: UIButton!
     @IBOutlet weak var nhs111label: ButtonWithDynamicType!
     @IBOutlet weak var medicalAdviceLabel: UILabel!
     
@@ -117,6 +118,8 @@ class StatusViewController: UIViewController, Storyboarded {
         notificationCenter.addObserver(self, selector: #selector(showRegistrationFailedStatus), name: RegistrationFailedNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(reload), name: UIApplication.didBecomeActiveNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(reload), name: PotentiallyExposedNotification, object: nil)
+        
+        linkingIDButton.accessibilityLabel = "Show my reference code"
     }
 
     override func viewWillAppear(_ animated: Bool) {
