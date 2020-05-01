@@ -245,6 +245,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		068B8AB9245C11C0000EAB4C /* upload.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = upload.yml; sourceTree = "<group>"; };
+		068B8ABA245C11C0000EAB4C /* unit-tests.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "unit-tests.yml"; sourceTree = "<group>"; };
+		068B8ABB245C11C0000EAB4C /* clean-artifacts.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "clean-artifacts.yml"; sourceTree = "<group>"; };
+		068B8ABC245C11C0000EAB4C /* trigger-internal-upload.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "trigger-internal-upload.yml"; sourceTree = "<group>"; };
 		090B186E24354D0100870B5D /* RemoteNotificationDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteNotificationDispatcher.swift; sourceTree = "<group>"; };
 		090B1870243552C300870B5D /* UserNotificationCenterDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationCenterDouble.swift; sourceTree = "<group>"; };
 		090DEE0F244F8BF600268170 /* BluetoothPermissionDeniedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothPermissionDeniedViewController.swift; sourceTree = "<group>"; };
@@ -531,6 +535,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		068B8AB7245C11C0000EAB4C /* .github */ = {
+			isa = PBXGroup;
+			children = (
+				068B8AB8245C11C0000EAB4C /* workflows */,
+			);
+			path = .github;
+			sourceTree = "<group>";
+		};
+		068B8AB8245C11C0000EAB4C /* workflows */ = {
+			isa = PBXGroup;
+			children = (
+				068B8AB9245C11C0000EAB4C /* upload.yml */,
+				068B8ABA245C11C0000EAB4C /* unit-tests.yml */,
+				068B8ABB245C11C0000EAB4C /* clean-artifacts.yml */,
+				068B8ABC245C11C0000EAB4C /* trigger-internal-upload.yml */,
+			);
+			path = workflows;
+			sourceTree = "<group>";
+		};
 		097C94C7245B8086008A9695 /* Localization */ = {
 			isa = PBXGroup;
 			children = (
@@ -781,6 +804,7 @@
 		6FC63C24241641B8007C8BF3 = {
 			isa = PBXGroup;
 			children = (
+				068B8AB7245C11C0000EAB4C /* .github */,
 				F68B89E9243B9FDB00F369A9 /* Sonar.xcconfig */,
 				F6CA2818242E41F700F8DC55 /* README.md */,
 				F78CEB63242B809B002254AD /* Firebase */,
