@@ -141,7 +141,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="31h-8a-dJ8">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="650"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="648"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P9b-DU-jl5" customClass="OnboardingLogoStrapline" customModule="Sonar" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="350" height="64"/>
@@ -156,7 +156,7 @@
                                                 </connections>
                                             </button>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="7HO-8c-Q84">
-                                                <rect key="frame" x="20" y="84" width="374" height="546"/>
+                                                <rect key="frame" x="20" y="84" width="374" height="544"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How this app works" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hxN-EA-ySp">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="40.666666666666664"/>
@@ -189,14 +189,14 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c7o-Ne-8JZ" userLabel="Spacer">
-                                                        <rect key="frame" x="0.0" y="379.66666666666669" width="374" height="18"/>
+                                                        <rect key="frame" x="0.0" y="379.66666666666669" width="374" height="16"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="18" id="ZU2-ZV-5DS"/>
+                                                            <constraint firstAttribute="height" constant="16" id="ZU2-ZV-5DS"/>
                                                         </constraints>
                                                     </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wkM-GZ-R6l">
-                                                        <rect key="frame" x="0.0" y="417.66666666666669" width="374" height="128.33333333333331"/>
+                                                        <rect key="frame" x="0.0" y="415.66666666666669" width="374" height="128.33333333333331"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cCX-FU-QHi">
                                                                 <rect key="frame" x="0.0" y="0.0" width="4" height="128.33333333333334"/>
@@ -222,14 +222,14 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iNT-DY-wj8" userLabel="Spacer">
-                                                                        <rect key="frame" x="0.0" y="20.333333333333314" width="358" height="18"/>
+                                                                        <rect key="frame" x="0.0" y="20.333333333333314" width="358" height="16"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="height" constant="18" id="7Ee-el-Ayk"/>
+                                                                            <constraint firstAttribute="height" constant="16" id="7Ee-el-Ayk"/>
                                                                         </constraints>
                                                                     </view>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7t9-4s-vCV" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="38.333333333333314" width="358" height="30"/>
+                                                                        <rect key="frame" x="0.0" y="36.333333333333314" width="358" height="32"/>
                                                                         <state key="normal" title="Button"/>
                                                                         <connections>
                                                                             <action selector="tapMoreAbout:" destination="asv-dx-knf" eventType="touchUpInside" id="Rha-0o-UXG"/>
@@ -292,7 +292,6 @@
                         <viewLayoutGuide key="safeArea" id="0ia-KQ-0k0"/>
                     </view>
                     <connections>
-                        <outlet property="informationTitle" destination="G93-6Z-Y0N" id="tZ7-p0-XaY"/>
                         <outlet property="moreAbout" destination="7t9-4s-vCV" id="ik6-0Z-KOW"/>
                         <outlet property="privacyPolicy" destination="wZa-Mg-Yq4" id="cad-wS-8r9"/>
                         <outlet property="termsConditions" destination="IS8-GX-Tl4" id="JfK-Oh-8Iq"/>
