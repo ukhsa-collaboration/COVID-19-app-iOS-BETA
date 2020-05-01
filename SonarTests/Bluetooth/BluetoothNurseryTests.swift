@@ -20,7 +20,8 @@ class BluetoothNurseryTests: TestCase {
 
         let nursery = ConcreteBluetoothNursery(persistence: PersistenceDouble(),
                                                userNotificationCenter: UserNotificationCenterDouble(),
-                                               notificationCenter: NotificationCenter())
+                                               notificationCenter: NotificationCenter(),
+                                               monitor: AppMonitoringDouble())
 
         XCTAssertFalse(nursery.isHealthy)
 

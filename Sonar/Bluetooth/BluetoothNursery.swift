@@ -33,6 +33,7 @@ class ConcreteBluetoothNursery: BluetoothNursery, PersistenceDelegate {
     private let persistence: Persisting
     private let userNotificationCenter: UserNotificationCenter
     private let contactEventExpiryHandler: ContactEventExpiryHandler
+    private let dailyMetricsCollector: DailyMetricsCollector
 
     // The listener needs to get hold of the broadcaster, to send keepalives
     public var broadcaster: BTLEBroadcaster?
@@ -44,7 +45,12 @@ class ConcreteBluetoothNursery: BluetoothNursery, PersistenceDelegate {
     private var central: CBCentralManager?
     private var peripheral: CBPeripheralManager?
 
-    init(persistence: Persisting, userNotificationCenter: UserNotificationCenter, notificationCenter: NotificationCenter) {
+    init(
+        persistence: Persisting,
+        userNotificationCenter: UserNotificationCenter,
+        notificationCenter: NotificationCenter,
+        monitor: AppMonitoring
+    ) {
         self.persistence = persistence
         self.userNotificationCenter = userNotificationCenter
         contactEventPersister = PlistPersister<UUID, ContactEvent>(fileName: "contactEvents")
@@ -53,6 +59,12 @@ class ConcreteBluetoothNursery: BluetoothNursery, PersistenceDelegate {
 
         contactEventExpiryHandler = ContactEventExpiryHandler(notificationCenter: notificationCenter,
                                                               contactEventRepository: contactEventRepository)
+        dailyMetricsCollector = DailyMetricsCollector(
+            notificationCenter: notificationCenter,
+            contactEventRepository: contactEventRepository,
+            defaults: UserDefaults.standard,
+            monitor: monitor
+        )
 
         self.persistence.delegate = self
     }
