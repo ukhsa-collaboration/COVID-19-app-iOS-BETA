@@ -101,6 +101,8 @@ class QuestionSymptomsViewController: UIViewController, Storyboarded {
     @IBAction func buttonTapped(_ sender: Any) {
         guard let state = questionState else {
             errorLabel.isHidden = false
+            let targetRect = errorLabel.convert(errorLabel.bounds, to: scrollView)
+            scrollView.scrollRectToVisible(targetRect, animated: true)
             UIAccessibility.post(notification: .screenChanged, argument: errorLabel)
             return
         }

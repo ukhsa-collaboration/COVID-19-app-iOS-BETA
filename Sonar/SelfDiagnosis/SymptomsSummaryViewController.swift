@@ -110,7 +110,12 @@ class SymptomsSummaryViewController: UIViewController, Storyboarded {
         guard startDate != nil else {
             startDateViewController.errorView.isHidden = false
             UIAccessibility.post(notification: .screenChanged, argument: startDateViewController.errorView)
-            scrollView.scrollRectToVisible(startDateViewController.errorLabel.frame, animated: true)
+            
+            DispatchQueue.main.async {
+                let errorLabel: UILabel = self.startDateViewController.errorLabel
+                let targetRect = errorLabel.convert(errorLabel.bounds, to: self.scrollView)
+                self.scrollView.scrollRectToVisible(targetRect, animated: true)
+            }
             return
         }
 
