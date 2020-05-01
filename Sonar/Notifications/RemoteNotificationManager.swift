@@ -108,17 +108,14 @@ class ConcreteRemoteNotificationManager: NSObject, RemoteNotificationManager {
 }
 
 extension ConcreteRemoteNotificationManager: UNUserNotificationCenterDelegate {
+
+    // This only happens when we are in the foregrond
     func userNotificationCenter(
         _ center: UNUserNotificationCenter,
         willPresent notification: UNNotification,
         withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
     ) {
-        // This only happens when we are in the foregrond?
-        
         handleNotification(userInfo: notification.request.content.userInfo) {_ in }
-
-        // How to re-present notification?
-//        completionHandler([.alert, .badge, .sound])
     }
 }
 
