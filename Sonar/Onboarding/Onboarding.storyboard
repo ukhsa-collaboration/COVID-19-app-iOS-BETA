@@ -3,7 +3,7 @@
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -141,7 +141,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="31h-8a-dJ8">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="648"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="655"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P9b-DU-jl5" customClass="OnboardingLogoStrapline" customModule="Sonar" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="350" height="64"/>
@@ -156,7 +156,7 @@
                                                 </connections>
                                             </button>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="7HO-8c-Q84">
-                                                <rect key="frame" x="20" y="84" width="374" height="544"/>
+                                                <rect key="frame" x="20" y="84" width="374" height="551"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How this app works" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hxN-EA-ySp">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="40.666666666666664"/>
@@ -196,24 +196,24 @@
                                                         </constraints>
                                                     </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wkM-GZ-R6l">
-                                                        <rect key="frame" x="0.0" y="415.66666666666669" width="374" height="128.33333333333331"/>
+                                                        <rect key="frame" x="0.0" y="415.66666666666669" width="374" height="135.33333333333331"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cCX-FU-QHi">
-                                                                <rect key="frame" x="0.0" y="0.0" width="4" height="128.33333333333334"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="4" height="135.33333333333334"/>
                                                                 <color key="backgroundColor" name="NHS Blue"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="4" id="HGU-yb-H7V"/>
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NqF-3H-W6M" userLabel="Spacer">
-                                                                <rect key="frame" x="4" y="0.0" width="12" height="128.33333333333334"/>
+                                                                <rect key="frame" x="4" y="0.0" width="12" height="135.33333333333334"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="12" id="nsb-7d-DmS"/>
                                                                 </constraints>
                                                             </view>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="N2u-wn-ubc">
-                                                                <rect key="frame" x="16" y="0.0" width="358" height="128.33333333333334"/>
+                                                                <rect key="frame" x="16" y="0.0" width="358" height="135.33333333333334"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="More information" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G93-6Z-Y0N">
                                                                         <rect key="frame" x="0.0" y="0.0" width="358" height="20.333333333333332"/>
@@ -229,21 +229,24 @@
                                                                         </constraints>
                                                                     </view>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7t9-4s-vCV" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="36.333333333333314" width="358" height="32"/>
+                                                                        <rect key="frame" x="0.0" y="36.333333333333314" width="358" height="33"/>
+                                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                         <state key="normal" title="Button"/>
                                                                         <connections>
                                                                             <action selector="tapMoreAbout:" destination="asv-dx-knf" eventType="touchUpInside" id="Rha-0o-UXG"/>
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wZa-Mg-Yq4" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="68.333333333333314" width="358" height="30"/>
+                                                                        <rect key="frame" x="0.0" y="69.333333333333314" width="358" height="33"/>
+                                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                         <state key="normal" title="Button"/>
                                                                         <connections>
                                                                             <action selector="tapPrivacy:" destination="asv-dx-knf" eventType="touchUpInside" id="wM7-Rc-ueX"/>
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IS8-GX-Tl4" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="98.333333333333314" width="358" height="30"/>
+                                                                        <rect key="frame" x="0.0" y="102.33333333333331" width="358" height="33"/>
+                                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                         <state key="normal" title="Button"/>
                                                                         <connections>
                                                                             <action selector="tapTerms:" destination="asv-dx-knf" eventType="touchUpInside" id="2dY-rX-MU1"/>
@@ -894,13 +897,13 @@ To enable this app to send you notification you need to go to your Settings, tap
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="23m-Pf-Bbe" userLabel="Scroll content view">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="467.66666666666669"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uix-aC-Qvc" customClass="LogoStrapline" customModule="Sonar" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="63.666666666666664"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Why you need to turn your Bluetooth on" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8B8-An-P1B">
-                                                <rect key="frame" x="20" y="83.666666666666657" width="374" height="81.666666666666657"/>
+                                                <rect key="frame" x="20" y="434" width="374" height="81.666666666666629"/>
                                                 <accessibility key="accessibilityConfiguration">
                                                     <accessibilityTraits key="traits" staticText="YES" header="YES"/>
                                                 </accessibility>
@@ -909,7 +912,7 @@ To enable this app to send you notification you need to go to your Settings, tap
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qch-lc-oMz">
-                                                <rect key="frame" x="20" y="185.33333333333334" width="374" height="262.33333333333326"/>
+                                                <rect key="frame" x="20" y="535.66666666666663" width="374" height="262.33333333333337"/>
                                                 <string key="text">This app works only if you have your Bluetooth on at all times.
 
 NHS Coronavirus works using Bluetooth signals, to determine when you have been near someone else with this app who shows symptoms of Coronavirus. NHS Coronavirus can alert you or others that may be at risk.
