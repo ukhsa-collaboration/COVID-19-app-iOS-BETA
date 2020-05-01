@@ -78,7 +78,7 @@ extension PlistPersister: ContactEventPersister where K == UUID, V == ContactEve
         if persister.items[peripheral.identifier] == nil {
             persister.items[peripheral.identifier] = ContactEvent()
         }
-        persister.items[peripheral.identifier]?.recordRSSI(RSSI)
+        persister.items[peripheral.identifier]?.recordRSSI(Int8(RSSI))
         delegate?.repository(self, didRecordRSSI: RSSI, forPeripheral: peripheral)
     }
 

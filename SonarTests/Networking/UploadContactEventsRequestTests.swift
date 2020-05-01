@@ -22,9 +22,9 @@ class UploadContactEventsRequestTests: XCTestCase {
     let timestamp2 = Date(timeIntervalSince1970: 10)
     let timestamp3 = Date(timeIntervalSince1970: 100)
 
-    let rssi1 = -11
-    let rssi2 = -1
-    let rssi3 = -21
+    let rssi1: Int8 = -11
+    let rssi2: Int8 = -1
+    let rssi3: Int8 = -21
 
     var contactEvents: [ContactEvent]!
 
@@ -43,8 +43,6 @@ class UploadContactEventsRequestTests: XCTestCase {
             symptomsTimestamp: Date(),
             contactEvents: contactEvents
         )
-
-        super.setUp()
     }
 
     func testMethod() {
