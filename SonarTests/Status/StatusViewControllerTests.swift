@@ -14,7 +14,7 @@ class StatusViewControllerTests: XCTestCase {
     func testShowsInitialRegisteredStatus() {
         let vc = makeViewController(persistence: PersistenceDouble(registration: Registration.fake))
         
-        XCTAssertEqual(vc.registrationStatusText?.text, "Everything is working OK")
+        XCTAssertEqual(vc.registrationStatusText?.text, "The app is working properly")
         XCTAssertEqual(vc.registrationStatusIcon?.image, UIImage(named: "Registration_status_ok"))
         XCTAssertFalse(vc.registrationStatusIcon?.isHidden ?? true)
         XCTAssertTrue(vc.registrationSpinner?.isHidden ?? false)
@@ -48,7 +48,7 @@ class StatusViewControllerTests: XCTestCase {
 
         notificationCenter.post(name: RegistrationCompletedNotification, object: nil)
         
-        XCTAssertEqual(vc.registrationStatusText?.text, "Everything is working OK")
+        XCTAssertEqual(vc.registrationStatusText?.text, "The app is working properly")
         XCTAssertEqual(vc.registrationStatusIcon?.image, UIImage(named: "Registration_status_ok"))
         XCTAssertFalse(vc.registrationStatusIcon?.isHidden ?? true)
         XCTAssertTrue(vc.registrationSpinner?.isHidden ?? false)
