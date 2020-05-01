@@ -43,6 +43,16 @@ class StatusProvider {
             return .blue
         }
     }
+    
+    var amberExpiryDate: Date? {
+        switch status {
+        case .amber:
+            let calendar = Calendar.current
+            return calendar.date(byAdding: .day, value: 14, to: persisting.potentiallyExposed!)
+        default:
+            return nil
+        }
+    }
 
     private var currentDate: Date { currentDateProvider() }
 

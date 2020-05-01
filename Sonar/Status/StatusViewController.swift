@@ -199,7 +199,14 @@ class StatusViewController: UIViewController, Storyboarded {
             case .amber:
                 diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
                 diagnosisTitleLabel.text = "You have been near someone who has coronavirus symptoms".localized
-                diagnosisDetailLabel.isHidden = true
+                
+                if let expiry = statusProvider.amberExpiryDate {
+                    diagnosisDetailLabel.isHidden = false
+                    diagnosisDetailLabel.text = detailForAmberWithExpiry(expiry)
+                } else {
+                    diagnosisDetailLabel.isHidden = true
+                }
+                
                 howAreYouFeelingView.isHidden = false
                 redStatusView.isHidden = true
                 healthcareWorkersInstructionsView.isHidden = false
@@ -294,12 +301,21 @@ class StatusViewController: UIViewController, Storyboarded {
         registrationStatusIcon.isHidden = false
     }
     
+    private func detailForAmberWithExpiry(_ expiry: Date) -> String {
+        let detailFmt = "Follow this advice until %@".localized
+        return String(format: detailFmt, localizedDate(expiry))
+    }
+    
     private func detailForInitialSelfDiagnosis(_ selfDiagnosis: SelfDiagnosis) {
         let detailFmt = "Follow this advice until %@, at which point this app will notify you to update your symptoms.".localized
+        diagnosisDetailLabel.text = String(format: detailFmt, localizedDate(selfDiagnosis.expiryDate))
+    }
+    
+    private func localizedDate(_ date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = localeProvider.locale
         dateFormatter.setLocalizedDateFormatFromTemplate("MMMMd")
-        diagnosisDetailLabel.text = String(format: detailFmt, dateFormatter.string(from: selfDiagnosis.expiryDate))
+        return dateFormatter.string(from: date)
     }
 }
 

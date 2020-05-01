@@ -18,4 +18,13 @@ class StatusProviderDouble: StatusProvider {
         get { _status }
         set { _status = newValue }
     }
+    
+    override var amberExpiryDate: Date? {
+        switch _status {
+        case .amber:
+            return Date(timeIntervalSince1970: 0)
+        default:
+            return nil
+        }
+    }
 }

@@ -120,24 +120,38 @@ class StatusViewControllerTests: XCTestCase {
     }
     
     func testShowsAmberStatus() {
-        let statusProvider = StatusProviderDouble.double()
-        statusProvider.status = .amber
-        let vc = makeViewController(persistence: PersistenceDouble(), statusProvider: statusProvider)
+        let calendar = Calendar.current
+        let midnightUTC = 1589414400
+        let midnightLocal = midnightUTC - TimeZone.current.secondsFromGMT()
+        let exposureDate = Date.init(timeIntervalSince1970: TimeInterval(midnightLocal))
+        let currentDate = calendar.date(byAdding: .day, value: 10, to: exposureDate)!
         
-        XCTAssertTrue(vc.diagnosisDetailLabel.isHidden)
+        let persistence = PersistenceDouble()
+        persistence.potentiallyExposed = exposureDate
+        let statusProvider = StatusProvider(persisting: persistence, currentDateProvider: { currentDate })
+        XCTAssertEqual(statusProvider.status, .amber)
+        let vc = makeViewController(persistence: persistence, statusProvider: statusProvider)
+        
+        XCTAssertFalse(vc.diagnosisDetailLabel.isHidden)
+        XCTAssertEqual(vc.diagnosisDetailLabel.text, "Follow this advice until 28 May")
         XCTAssertEqual(vc.diagnosisTitleLabel.text, "You have been near someone who has coronavirus symptoms")
         XCTAssertTrue(vc.redStatusView.isHidden)
     }
     
     func testShowsRedStatusForInitialSelfDiagnosis() {
-        let statusProvider = StatusProviderDouble.double()
-        statusProvider.status = .red
         let persistence = PersistenceDouble()
         // Shenanigans to make the test pass in any time zone
         let midnightUTC = 1589414400
         let midnightLocal = midnightUTC - TimeZone.current.secondsFromGMT()
         let expiryDate = Date(timeIntervalSince1970: TimeInterval(midnightLocal))
-        persistence.selfDiagnosis = SelfDiagnosis(type: .initial, symptoms: Set(), startDate: Date(), expiryDate: expiryDate)
+        persistence.selfDiagnosis = SelfDiagnosis(
+            type: .initial,
+            symptoms: Set(arrayLiteral: Symptom.cough), // or temperature, or both
+            startDate: Date(),
+            expiryDate: expiryDate
+        )
+        let statusProvider = StatusProvider(persisting: persistence)
+        XCTAssertEqual(statusProvider.status, .red)
         let vc = makeViewController(persistence: persistence, statusProvider: statusProvider)
         
         XCTAssertEqual(vc.diagnosisTitleLabel.text, "Your symptoms indicate you may have coronavirus")
@@ -158,6 +172,7 @@ class StatusViewControllerTests: XCTestCase {
         XCTAssertEqual(vc.diagnosisDetailLabel.text, "Follow this advice until your temperature returns to normal")
         XCTAssertFalse(vc.redStatusView.isHidden)
     }
+    
 }
 
 fileprivate func makeViewController(
