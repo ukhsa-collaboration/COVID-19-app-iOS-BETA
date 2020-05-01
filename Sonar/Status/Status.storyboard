@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="CLu-79-FDa">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1345"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1407.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="64" translatesAutoresizingMaskIntoConstraints="NO" id="2iB-Px-aMY" customClass="LogoStrapline" customModule="Sonar" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
@@ -93,25 +93,25 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zqL-2l-Yzz">
-                                                <rect key="frame" x="0.0" y="124" width="414" height="1221"/>
+                                                <rect key="frame" x="0.0" y="124" width="414" height="1283.5"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="yKo-tg-9E8">
-                                                        <rect key="frame" x="16" y="8" width="382" height="1181"/>
+                                                        <rect key="frame" x="16" y="8" width="382" height="1243.5"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JWK-re-qjH">
-                                                                <rect key="frame" x="0.0" y="0.0" width="382" height="365.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="382" height="431.5"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uA1-0d-OYq">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="12" height="365.5"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="12" height="431.5"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="12" id="MS2-lV-12k"/>
                                                                         </constraints>
                                                                     </view>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="sLA-Af-1Gb" customClass="SymptomStackView" customModule="Sonar" customModuleProvider="target">
-                                                                        <rect key="frame" x="24" y="24" width="338" height="157.5"/>
+                                                                        <rect key="frame" x="24" y="24" width="338" height="199"/>
                                                                     </stackView>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Kcg-6z-FYa">
-                                                                        <rect key="frame" x="24" y="266.5" width="338" height="45"/>
+                                                                        <rect key="frame" x="24" y="332.5" width="338" height="45"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Read current advice" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oUM-AI-6LL">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="338" height="20.5"/>
@@ -128,7 +128,7 @@
                                                                         </subviews>
                                                                     </stackView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rpg-7v-Vhp">
-                                                                        <rect key="frame" x="24" y="209.5" width="338" height="33.5"/>
+                                                                        <rect key="frame" x="24" y="251" width="338" height="33.5"/>
                                                                         <accessibility key="accessibilityConfiguration">
                                                                             <accessibilityTraits key="traits" staticText="YES" header="YES"/>
                                                                         </accessibility>
@@ -159,7 +159,7 @@
                                                                 </constraints>
                                                             </view>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="hbY-PQ-ANb">
-                                                                <rect key="frame" x="0.0" y="397.5" width="382" height="364"/>
+                                                                <rect key="frame" x="0.0" y="463.5" width="382" height="360.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How are you feeling today?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ZI-fb-8RW">
                                                                         <rect key="frame" x="0.0" y="0.0" width="382" height="26.5"/>
@@ -215,9 +215,15 @@
                                                                             <action selector="notRightTapped" destination="HPa-EI-l5D" eventType="touchUpInside" id="iR0-1K-xgK"/>
                                                                         </connections>
                                                                     </view>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you don’t have any symptoms, there’s no need to do anything right now." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oOf-mX-ad8">
+                                                                        <rect key="frame" x="0.0" y="189.5" width="382" height="42.5"/>
+                                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                        <color key="textColor" name="NHS Secondary Text"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MHW-MT-jLf">
-                                                                        <rect key="frame" x="0.0" y="189.5" width="382" height="174.5"/>
-                                                                        <string key="text">If you don’t have any symptoms, there’s no need to do anything right now.  Feel free to use other apps as normal and you’ll be notified if your advice changes.  If you develop symptoms, please come back to this app.</string>
+                                                                        <rect key="frame" x="0.0" y="252" width="382" height="108.5"/>
+                                                                        <string key="text">Feel free to use other apps as normal and you’ll be notified if your advice changes.  If you develop symptoms, please come back to this app.</string>
                                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                         <color key="textColor" name="NHS Secondary Text"/>
                                                                         <nil key="highlightedColor"/>
@@ -225,7 +231,7 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="POh-1R-IfZ" userLabel="Red Status">
-                                                                <rect key="frame" x="0.0" y="793.5" width="382" height="179.5"/>
+                                                                <rect key="frame" x="0.0" y="856" width="382" height="179.5"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gbo-jS-eOA">
                                                                         <rect key="frame" x="0.0" y="0.0" width="382" height="103"/>
@@ -299,7 +305,7 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Ghk-8F-7gV" userLabel="NHS Coronavirus">
-                                                                <rect key="frame" x="0.0" y="1005" width="382" height="75.5"/>
+                                                                <rect key="frame" x="0.0" y="1067.5" width="382" height="75.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you need urgent medical advice or want further information, go to" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zqt-gJ-Jrb">
                                                                         <rect key="frame" x="0.0" y="0.0" width="382" height="42.5"/>
@@ -323,7 +329,7 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="Tgy-0K-l2M" userLabel="Instructions for healthcare workers" customClass="UIControl">
-                                                                <rect key="frame" x="0.0" y="1112.5" width="382" height="68.5"/>
+                                                                <rect key="frame" x="0.0" y="1175" width="382" height="68.5"/>
                                                                 <subviews>
                                                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yI5-J1-igp" userLabel="Background">
                                                                         <rect key="frame" x="-16" y="0.0" width="414" height="68.5"/>
@@ -416,6 +422,7 @@
                         <outlet property="notRightSubtitleLabel" destination="xqf-9x-H9Q" id="oY0-jS-FjH"/>
                         <outlet property="notRightTitleLabel" destination="psh-Wd-l5I" id="jbn-hg-Mpm"/>
                         <outlet property="notRightView" destination="9e7-f2-SFh" id="gbF-nE-kEl"/>
+                        <outlet property="nothingToDoLabel" destination="oOf-mX-ad8" id="cEL-Nb-mZE"/>
                         <outlet property="readLatestAdviceLabel" destination="oUM-AI-6LL" id="QL4-WU-Efr"/>
                         <outlet property="redStatusView" destination="POh-1R-IfZ" id="0U7-DA-VM7"/>
                         <outlet property="registrationRetryButton" destination="9Ki-ul-KTk" id="tUy-rx-1qN"/>

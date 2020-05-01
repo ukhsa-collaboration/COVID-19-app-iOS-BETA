@@ -42,6 +42,8 @@ class StatusViewController: UIViewController, Storyboarded {
     @IBOutlet weak var notRightView: UIView!
     @IBOutlet weak var notRightTitleLabel: UILabel!
     @IBOutlet weak var notRightSubtitleLabel: UILabel!
+    
+    @IBOutlet weak var nothingToDoLabel: UILabel!
     @IBOutlet weak var noSymptomsLabel: UILabel!
 
     @IBOutlet weak var redStatusView: UIStackView!
@@ -116,6 +118,7 @@ class StatusViewController: UIViewController, Storyboarded {
         notRightView.accessibilityLabel = "\(notRightTitleLabel.text!) \(notRightSubtitleLabel.text!)"
 
         noSymptomsLabel.textColor = UIColor(named: "NHS Secondary Text")
+        nothingToDoLabel.textColor = UIColor(named: "NHS Secondary Text")
         
         notificationCenter.addObserver(self, selector: #selector(showRegisteredStatus), name: RegistrationCompletedNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(showRegistrationFailedStatus), name: RegistrationFailedNotification, object: nil)
@@ -194,9 +197,11 @@ class StatusViewController: UIViewController, Storyboarded {
                 diagnosisTitleLabel.text = "Follow the current advice to stop the spread of coronavirus".localized
                 diagnosisDetailLabel.isHidden = true
                 howAreYouFeelingView.isHidden = false
+                nothingToDoLabel.isHidden = false
                 redStatusView.isHidden = true
                 healthcareWorkersInstructionsView.isHidden = false
             case .amber:
+                nothingToDoLabel.isHidden = true
                 diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
                 diagnosisTitleLabel.text = "You have been near someone who has coronavirus symptoms".localized
                 
