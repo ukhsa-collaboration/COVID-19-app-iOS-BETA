@@ -32,7 +32,6 @@ proximity to individuals infected with the novel coronavirus.
 
 ### Setup
 
-- `cp Sonar/Environments/Sonar.xcconfig.sample Sonar.xcconfig`
 - `./bin/make-environment < Sonar/Environments/environment.json > Sonar/Environment.swift`
 
 ### Notifications

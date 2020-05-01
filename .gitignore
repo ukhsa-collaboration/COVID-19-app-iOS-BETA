@@ -97,6 +97,8 @@ iOSInjectionProject/
 /*.xcconfig
 /Sonar/Environment.swift
 
+!/Sonar.xcconfig
+
 .envrc
 
 # ignore appcode configuration
