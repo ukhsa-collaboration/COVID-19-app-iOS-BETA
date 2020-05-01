@@ -105,8 +105,13 @@ class StatusViewController: UIViewController, Storyboarded {
         noSymptomsLabel.textColor = UIColor(named: "NHS Secondary Text")
         nothingToDoLabel.textColor = UIColor(named: "NHS Secondary Text")
 
-        readLatestAdviceLabel.accessibilityHint = "This is a link to www.gov.uk"
-        nhs111label.accessibilityHint = "This is a link to www.nhs.uk"
+        readLatestAdviceLabel.accessibilityHint = "This will show you the most up to date advice for you on the website www.gov.uk"
+        readLatestAdviceLabel.accessibilityTraits = .link
+        nhs111label.accessibilityHint = "You can find urgent medical advice and more information on the website www.nhs.uk"
+        nhs111label.accessibilityTraits = .link
+
+        healthcareWorkersInstructionsView.accessibilityLabel = "Important instructions for meidcal workers"
+        healthcareWorkersInstructionsView.accessibilityTraits = .button
         
         notificationCenter.addObserver(self, selector: #selector(showRegisteredStatus), name: RegistrationCompletedNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(showRegistrationFailedStatus), name: RegistrationFailedNotification, object: nil)
@@ -244,7 +249,6 @@ class StatusViewController: UIViewController, Storyboarded {
         }
         
         symptomStackView.symptoms = persistence.selfDiagnosis?.symptoms
-        diagnosisStatusView.accessibilityLabel = "\(diagnosisTitleLabel.text!) \(readLatestAdviceLabel.text!)"
         
         if let diagnosis = persistence.selfDiagnosis, diagnosis.hasExpired() {
             localNotificationScheduler.removePendingDiagnosisNotification()
