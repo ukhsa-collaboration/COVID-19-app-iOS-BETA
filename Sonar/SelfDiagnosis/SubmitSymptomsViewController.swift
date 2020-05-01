@@ -121,9 +121,8 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
             // Scroll it into view. But first, go async so that scrollView.contentSize will
             // be recomputed before we read it.
             DispatchQueue.main.async {
-                UIView.animate(withDuration: 0.05) {
-                    self.scrollView.contentOffset = CGPoint(x: 0, y: self.scrollView.contentSize.height - self.scrollView.frame.height)
-                }
+                let targetRect = self.errorLabel.convert(self.errorLabel.bounds, to: self.scrollView)
+                self.scrollView.scrollRectToVisible(targetRect, animated: true)
             }
             
             return false

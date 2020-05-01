@@ -129,9 +129,8 @@ extension SymptomsSummaryViewController: StartDateViewControllerDelegate {
     func startDateViewControllerDidShowDatePicker(_ vc: StartDateViewController) {
         // Scroll the date picker into view
         DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.05) {
-                self.scrollView.contentOffset = CGPoint(x: 0, y: self.scrollView.contentSize.height - self.scrollView.frame.height)
-            }
+            let targetRect = vc.datePicker.convert(vc.datePicker.bounds, to: self.scrollView)
+            self.scrollView.scrollRectToVisible(targetRect, animated: true)
         }
     }
     
