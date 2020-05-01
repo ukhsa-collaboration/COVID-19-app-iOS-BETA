@@ -20,13 +20,6 @@ protocol TrustValidating {
     func canAccept(_ trust: SecTrust?) -> Bool
 }
 
-#warning("This type should be removed after public key pinning is rolled out")
-struct DefaultTrustValidating: TrustValidating {
-    func canAccept(_ trust: SecTrust?) -> Bool {
-        true
-    }
-}
-
 class PublicKeyValidator: TrustValidating {
     
     private let trustedKeyHashes: Set<String>

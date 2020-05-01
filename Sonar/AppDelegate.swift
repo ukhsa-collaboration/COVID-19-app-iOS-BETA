@@ -20,8 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     let userNotificationCenter = UNUserNotificationCenter.current()
     let authorizationManager = AuthorizationManager()
     
-    #warning("Replace with a `PublicKeyValidator` configured from the environment.")
-    let trustValidator = DefaultTrustValidating()
+    let trustValidator = PublicKeyValidator(trustedKeyHashes: ["hETpgVvaLC0bvcGG3t0cuqiHvr4XyP2MTwCiqhgRWwU="])
     
     lazy var monitor: AppMonitoring = AppCenterMonitor.shared
     
