@@ -28,6 +28,7 @@ class RegistrationServiceTests: TestCase {
             reminderScheduler: RegistrationReminderSchedulerDouble(),
             remoteNotificationDispatcher: remoteNotificationDispatcher,
             notificationCenter: notificationCenter,
+            monitor: AppMonitoringDouble(),
             timeoutQueue: QueueDouble()
         )
     
@@ -98,6 +99,7 @@ class RegistrationServiceTests: TestCase {
             reminderScheduler: RegistrationReminderSchedulerDouble(),
             remoteNotificationDispatcher: remoteNotificationDispatcher,
             notificationCenter: notificationCenter,
+            monitor: AppMonitoringDouble(),
             timeoutQueue: QueueDouble()
         )
 
@@ -166,7 +168,8 @@ class RegistrationServiceTests: TestCase {
             persistence: persistence,
             reminderScheduler: RegistrationReminderSchedulerDouble(),
             remoteNotificationDispatcher: remoteNotificationDispatcher,
-            notificationCenter: notificationCenter, timeoutQueue: QueueDouble()
+            notificationCenter: notificationCenter,
+            monitor: AppMonitoringDouble(), timeoutQueue: QueueDouble()
         )
         let failedObserver = NotificationObserverDouble(notificationCenter: notificationCenter, notificationName: RegistrationFailedNotification)
 
@@ -193,6 +196,7 @@ class RegistrationServiceTests: TestCase {
             reminderScheduler: RegistrationReminderSchedulerDouble(),
             remoteNotificationDispatcher: remoteNotificationDispatcher,
             notificationCenter: notificationCenter,
+            monitor: AppMonitoringDouble(),
             timeoutQueue: QueueDouble()
         )
         let failedObserver = NotificationObserverDouble(notificationCenter: notificationCenter, notificationName: RegistrationFailedNotification)
@@ -228,6 +232,7 @@ class RegistrationServiceTests: TestCase {
             reminderScheduler: RegistrationReminderSchedulerDouble(),
             remoteNotificationDispatcher: remoteNotificationDispatcher,
             notificationCenter: notificationCenter,
+            monitor: AppMonitoringDouble(),
             timeoutQueue: QueueDouble()
         )
 
@@ -261,6 +266,7 @@ class RegistrationServiceTests: TestCase {
             reminderScheduler: RegistrationReminderSchedulerDouble(),
             remoteNotificationDispatcher: remoteNotificationDispatcher,
             notificationCenter: notificationCenter,
+            monitor: AppMonitoringDouble(),
             timeoutQueue: queueDouble
         )
 
@@ -286,6 +292,7 @@ class RegistrationServiceTests: TestCase {
             reminderScheduler: RegistrationReminderSchedulerDouble(),
             remoteNotificationDispatcher: remoteNotificationDispatcher,
             notificationCenter: notificationCenter,
+            monitor: AppMonitoringDouble(),
             timeoutQueue: queueDouble
         )
     
@@ -335,6 +342,7 @@ class RegistrationServiceTests: TestCase {
             reminderScheduler: RegistrationReminderSchedulerDouble(),
             remoteNotificationDispatcher: remoteNotificationDispatcher,
             notificationCenter: notificationCenter,
+            monitor: AppMonitoringDouble(),
             timeoutQueue: queueDouble
         )
 
@@ -378,6 +386,7 @@ class RegistrationServiceTests: TestCase {
             reminderScheduler: RegistrationReminderSchedulerDouble(),
             remoteNotificationDispatcher: remoteNotificationDispatcher,
             notificationCenter: notificationCenter,
+            monitor: AppMonitoringDouble(),
             timeoutQueue: queueDouble
         )
     
@@ -427,6 +436,7 @@ class RegistrationServiceTests: TestCase {
             reminderScheduler: RegistrationReminderSchedulerDouble(),
             remoteNotificationDispatcher: remoteNotificationDispatcher,
             notificationCenter: notificationCenter,
+            monitor: AppMonitoringDouble(),
             timeoutQueue: queueDouble
         )
     
@@ -473,6 +483,7 @@ class RegistrationServiceTests: TestCase {
             reminderScheduler: RegistrationReminderSchedulerDouble(),
             remoteNotificationDispatcher: remoteNotificationDispatcher,
             notificationCenter: notificationCenter,
+            monitor: AppMonitoringDouble(),
             timeoutQueue: queueDouble
         )
     
@@ -511,7 +522,7 @@ class RegistrationServiceTests: TestCase {
                 notificationCenter: NotificationCenter(),
                 userNotificationCenter: UserNotificationCenterDouble()
             ),
-            notificationCenter: NotificationCenter(),
+            notificationCenter: NotificationCenter(), monitor: AppMonitoringDouble(),
             timeoutQueue: QueueDouble()
         )
         
@@ -535,6 +546,7 @@ class RegistrationServiceTests: TestCase {
             reminderScheduler: reminderScheduler,
             remoteNotificationDispatcher: remoteNotificationDispatcher,
             notificationCenter: notificationCenter,
+            monitor: AppMonitoringDouble(),
             timeoutQueue: QueueDouble()
         )
         remoteNotificationDispatcher.pushToken = "the current push token"

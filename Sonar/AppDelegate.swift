@@ -44,6 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         reminderScheduler: ConcreteRegistrationReminderScheduler(userNotificationCenter: userNotificationCenter),
         remoteNotificationDispatcher: dispatcher,
         notificationCenter: notificationCenter,
+        monitor: monitor,
         timeoutQueue: DispatchQueue.main)
 
     lazy var persistence: Persisting = Persistence(

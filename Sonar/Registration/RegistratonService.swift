@@ -33,6 +33,7 @@ class ConcreteRegistrationService: RegistrationService {
          reminderScheduler: RegistrationReminderScheduler,
          remoteNotificationDispatcher: RemoteNotificationDispatching,
          notificationCenter: NotificationCenter,
+         monitor: AppMonitoring,
          timeoutQueue: TestableQueue
     ) {
         self.session = session
