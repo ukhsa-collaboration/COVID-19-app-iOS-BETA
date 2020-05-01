@@ -36,9 +36,11 @@ jobs:
         run: xcodebuild -showsdks
 
       - name: Setup Build Configuration
+        env:
+          GOOGLE_SERVICE_INFO_PLIST_INTERNAL: ${{ secrets.google_service_info_plist_internal }}
         run: |
           cp Sonar/Environments/Sonar.xcconfig.sample .secret/Sonar.xcconfig
-          cp Sonar/Environments/empty.plist .secret/GoogleService-Info.plist
+          echo $GOOGLE_SERVICE_INFO_PLIST_INTERNAL > .secret/GoogleService-Info.plist
           cat Sonar/Environments/environment.json | ./bin/make-environment > .secret/Environment.swift
 
       - name: Run Build
@@ -72,9 +74,11 @@ jobs:
         run: xcodebuild -scheme Sonar -showdestinations
 
       - name: Setup Build Configuration
+        env:
+          GOOGLE_SERVICE_INFO_PLIST_INTERNAL: ${{ secrets.google_service_info_plist_internal }}
         run: |
           cp Sonar/Environments/Sonar.xcconfig.sample .secret/Sonar.xcconfig
-          cp Sonar/Environments/empty.plist .secret/GoogleService-Info.plist
+          echo $GOOGLE_SERVICE_INFO_PLIST_INTERNAL > .secret/GoogleService-Info.plist
           cat Sonar/Environments/environment.json | ./bin/make-environment > .secret/Environment.swift
 
       - run: |
