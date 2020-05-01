@@ -19,7 +19,7 @@ struct AppCenterMonitor: AppMonitoring {
     private var reporter: AppCenterAnalyticsReporting?
     
     static let shared: AppCenterMonitor = {
-        guard !Environment.apiEndpoint.isEmpty else {
+        guard !Environment.appCenterKey.isEmpty else {
             return AppCenterMonitor(reporter: nil)
         }
         
