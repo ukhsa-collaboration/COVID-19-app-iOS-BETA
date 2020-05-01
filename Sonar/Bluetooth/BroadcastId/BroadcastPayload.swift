@@ -19,7 +19,7 @@ struct BroadcastPayload {
     
     let cryptogram: Data
     let secKey: SecKey
-    
+        
     func data(txDate: Date = Date()) -> Data {
         var payload = Data()
         
@@ -55,6 +55,24 @@ struct BroadcastPayload {
             CCHmacFinal(&context, ptr.baseAddress)
         }
         return hmac.subdata(in: 0..<16)
+    }
+
+}
+
+struct IncomingBroadcastPayload: Codable {
+    
+    let countryCode: UInt16
+    let cryptogram: Data
+    let txPower: Int8
+    let transmissionTime: Int32
+    let hmac: Data
+    
+    init(data: Data) {
+        self.countryCode = data.subdata(in: 0..<2).to(type: UInt16.self)!
+        self.cryptogram = data.subdata(in: 2..<108)
+        self.txPower = data.subdata(in: 108..<109).to(type: Int8.self)!
+        self.transmissionTime = data.subdata(in: 109..<113).to(type: Int32.self)!
+        self.hmac = data.subdata(in: 113..<129)
     }
 
 }
