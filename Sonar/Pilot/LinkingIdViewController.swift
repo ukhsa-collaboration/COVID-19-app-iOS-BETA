@@ -29,7 +29,7 @@ class LinkingIdViewController: UIViewController, Storyboarded {
             return
         }
 
-        linkingIdLabel.text = linkingId
+        linkingIdLabel.text = linkingId.replacingOccurrences(of: " ", with: " - ")
     }
     
     override func accessibilityPerformEscape() -> Bool {
