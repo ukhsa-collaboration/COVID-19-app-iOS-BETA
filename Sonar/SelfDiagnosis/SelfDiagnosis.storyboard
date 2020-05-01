@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -254,7 +254,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="JYQ-vC-4ZC">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="308"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="428"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jSh-67-2Za">
                                                 <rect key="frame" x="20" y="0.0" width="374" height="161.5"/>
@@ -303,19 +303,52 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="jvB-6L-aQ6" userLabel="Spacer">
-                                                <rect key="frame" x="20" y="218" width="374" height="0.0"/>
+                                                <rect key="frame" x="20" y="218" width="374" height="32"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" id="ze3-NR-aKy"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="32" id="ze3-NR-aKy"/>
                                                 </constraints>
                                             </view>
-                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirmation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ib8-Fb-gu6">
-                                                <rect key="frame" x="20" y="218" width="374" height="0.0"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                                <nil key="textColor"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please confirm that the information you have entered is accurate" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oyV-IP-GTz" customClass="ErrorLabel" customModule="Sonar" customModuleProvider="target">
+                                                <rect key="frame" x="20" y="250" width="374" height="34"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                                <color key="textColor" name="NHS Error"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sqs-rm-vna" userLabel="Spacer">
+                                                <rect key="frame" x="20" y="284" width="374" height="4"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="4" id="r5V-9a-RWe"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vf9-Ga-izy">
+                                                <rect key="frame" x="20" y="288" width="374" height="50"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I confirm that the information I have entered is accurate" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ib8-Fb-gu6">
+                                                        <rect key="frame" x="0.0" y="0.0" width="307" height="50"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="wIl-VZ-wri">
+                                                        <rect key="frame" x="323" y="9.5" width="53" height="31"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="51" id="LWB-69-1yR"/>
+                                                        </constraints>
+                                                    </switch>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="Ib8-Fb-gu6" firstAttribute="top" secondItem="Vf9-Ga-izy" secondAttribute="top" id="5fj-MV-nE3"/>
+                                                    <constraint firstItem="wIl-VZ-wri" firstAttribute="leading" secondItem="Ib8-Fb-gu6" secondAttribute="trailing" constant="16" id="Fov-L9-GZJ"/>
+                                                    <constraint firstAttribute="bottom" secondItem="Ib8-Fb-gu6" secondAttribute="bottom" id="TVJ-kK-uC2"/>
+                                                    <constraint firstAttribute="trailing" secondItem="wIl-VZ-wri" secondAttribute="trailing" id="X8G-Zz-FVk"/>
+                                                    <constraint firstItem="wIl-VZ-wri" firstAttribute="centerY" secondItem="Vf9-Ga-izy" secondAttribute="centerY" id="cXO-L0-kjh"/>
+                                                    <constraint firstItem="Ib8-Fb-gu6" firstAttribute="leading" secondItem="Vf9-Ga-izy" secondAttribute="leading" id="zSt-I5-oxg"/>
+                                                </constraints>
+                                            </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fdk-RG-sRk" userLabel="Submit View">
-                                                <rect key="frame" x="20" y="218" width="374" height="70"/>
+                                                <rect key="frame" x="20" y="338" width="374" height="70"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c5D-qw-CwQ" customClass="PrimaryButton" customModule="Sonar" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="16" width="374" height="54"/>
@@ -379,16 +412,19 @@
                     <splitViewMasterSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="confirmLabel" destination="Ib8-Fb-gu6" id="TFf-qR-BZm"/>
+                        <outlet property="confirmSwitch" destination="wIl-VZ-wri" id="YSt-lF-hU8"/>
+                        <outlet property="errorLabel" destination="oyV-IP-GTz" id="z3M-ZZ-Znu"/>
                         <outlet property="heightConstraint" destination="gnV-4u-PeW" id="8gN-oX-7xS"/>
                         <outlet property="scrollView" destination="dtX-6D-EoL" id="iu2-uv-dCB"/>
                         <outlet property="submitButton" destination="c5D-qw-CwQ" id="1T1-Tv-WD7"/>
+                        <outlet property="submitButtonWrapper" destination="Fdk-RG-sRk" id="d2t-zS-iw6"/>
                         <outlet property="thankYouLabel" destination="X7L-5P-VlC" id="hGN-zg-oGx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CWx-tx-FqG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="Zbs-mh-83R" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3465" y="173"/>
+            <point key="canvasLocation" x="3463.7681159420295" y="172.76785714285714"/>
         </scene>
         <!--Start Date View Controller-->
         <scene sceneID="aB9-Fx-OLF">

@@ -43,13 +43,17 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     @IBOutlet weak var thankYouLabel: UILabel!
     @IBOutlet weak var confirmLabel: UILabel!
+    @IBOutlet weak var submitButtonWrapper: UIView!
     @IBOutlet weak var submitButton: PrimaryButton!
-
+    @IBOutlet weak var confirmSwitch: UISwitch!
+    @IBOutlet var errorLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         thankYouLabel.text = "SUBMIT_SYMPTOMS_THANK_YOU".localized
         confirmLabel.text = "SUBMIT_SYMPTOMS_CONFIRM".localized
+        errorLabel.isHidden = true
     }
 
     private var isSubmitting = false
@@ -58,7 +62,7 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
             isSubmitting = false
         }
 
-        guard !isSubmitting else { return }
+        guard !isSubmitting, validateConfirmation() else { return }
         isSubmitting = true
 
         do {
@@ -104,6 +108,32 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         )
         alert.addAction(UIAlertAction(title: "Okay", style: .default))
         present(alert, animated: true)
+    }
+    
+    private func validateConfirmation() -> Bool {
+        if confirmSwitch.isOn {
+            return true
+        } else {
+            errorLabel.isHidden = false
+            markSwitchAsError()
+            
+            // Showing the error label will sometimes push the continue button off screen.
+            // Scroll it into view. But first, go async so that scrollView.contentSize will
+            // be recomputed before we read it.
+            DispatchQueue.main.async {
+                UIView.animate(withDuration: 0.05) {
+                    self.scrollView.contentOffset = CGPoint(x: 0, y: self.scrollView.contentSize.height - self.scrollView.frame.height)
+                }
+            }
+            
+            return false
+        }
+    }
+
+    private func markSwitchAsError() {
+        confirmSwitch.layer.borderWidth = 3
+        confirmSwitch.layer.borderColor = UIColor(named: "NHS Error")!.cgColor
+        confirmSwitch.layer.cornerRadius = 16
     }
 }
 
