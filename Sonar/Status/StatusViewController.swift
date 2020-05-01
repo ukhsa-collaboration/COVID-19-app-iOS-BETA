@@ -104,6 +104,9 @@ class StatusViewController: UIViewController, Storyboarded {
 
         noSymptomsLabel.textColor = UIColor(named: "NHS Secondary Text")
         nothingToDoLabel.textColor = UIColor(named: "NHS Secondary Text")
+
+        readLatestAdviceLabel.accessibilityHint = "This is a link to www.gov.uk"
+        nhs111label.accessibilityHint = "This is a link to www.nhs.uk"
         
         notificationCenter.addObserver(self, selector: #selector(showRegisteredStatus), name: RegistrationCompletedNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(showRegistrationFailedStatus), name: RegistrationFailedNotification, object: nil)
