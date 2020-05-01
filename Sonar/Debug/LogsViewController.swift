@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+#if DEBUG || INTERNAL
+
 class LogsViewController: UIViewController {
     
     private var observations = [NSKeyValueObservation]()
@@ -66,3 +68,5 @@ private extension NSKeyValueObservation {
     }
     
 }
+
+#endif

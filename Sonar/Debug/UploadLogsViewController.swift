@@ -8,6 +8,8 @@
 
 import UIKit
 
+#if DEBUG || INTERNAL
+
 class UploadLogsViewController: UITableViewController {
 
     let persistence = (UIApplication.shared.delegate as! AppDelegate).persistence
@@ -42,3 +44,5 @@ class UploadLogsViewController: UITableViewController {
     }
 
 }
+
+#endif

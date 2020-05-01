@@ -8,6 +8,8 @@
 
 import UIKit
 
+#if DEBUG || INTERNAL
+
 class LiveBTLEDebuggerTableViewController: UITableViewController, ContactEventRepositoryDelegate {
 
     var persistence: Persisting = (UIApplication.shared.delegate as! AppDelegate).persistence
@@ -114,3 +116,5 @@ extension Data {
         return UIColor(red: CGFloat(self[1]) / 255.0, green: CGFloat(self[2]) / 255.0, blue: CGFloat(self[3]) / 255.0, alpha: alpha)
     }
 }
+
+#endif

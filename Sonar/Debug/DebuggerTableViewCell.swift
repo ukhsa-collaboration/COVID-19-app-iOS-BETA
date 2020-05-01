@@ -8,6 +8,8 @@
 
 import UIKit
 
+#if DEBUG || INTERNAL
+
 class DebuggerTableViewCell: UITableViewCell {
 
     let gradientLayer = CAGradientLayer()
@@ -42,3 +44,5 @@ class DebuggerTableViewCell: UITableViewCell {
     }
 
 }
+
+#endif
