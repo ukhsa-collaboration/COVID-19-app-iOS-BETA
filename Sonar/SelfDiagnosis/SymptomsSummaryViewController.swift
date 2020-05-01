@@ -121,9 +121,19 @@ class SymptomsSummaryViewController: UIViewController, Storyboarded {
 // MARK: - StartDateViewControllerDelegate
 
 extension SymptomsSummaryViewController: StartDateViewControllerDelegate {
+    func startDateViewControllerDidShowDatePicker(_ vc: StartDateViewController) {
+        // Scroll the date picker into view
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.05) {
+                self.scrollView.contentOffset = CGPoint(x: 0, y: self.scrollView.contentSize.height - self.scrollView.frame.height)
+            }
+        }
+    }
+    
     func startDateViewController(_ vc: StartDateViewController, didSelectDate date: Date) {
         startDate = date
     }
+    
 }
 
 fileprivate let logger = Logger(label: "SelfDiagnosis")

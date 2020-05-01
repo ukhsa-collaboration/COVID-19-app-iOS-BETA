@@ -90,14 +90,12 @@ class QuestionSymptomsViewController: UIViewController, Storyboarded {
         yesButton.isSelected = true
         noButton.isSelected = false
         questionState = true
-        scrollView.scrollRectToVisible(questionButton.frame, animated: true)
     }
     
     @IBAction func noTapped(_ sender: Any) {
         yesButton.isSelected = false
         noButton.isSelected = true
         questionState = false
-        scrollView.scrollRectToVisible(questionButton.frame, animated: true)
     }
     
     @IBAction func buttonTapped(_ sender: Any) {

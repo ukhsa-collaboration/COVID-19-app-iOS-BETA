@@ -137,12 +137,4 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
     }
 }
 
-// MARK: - StartDateViewControllerDelegate
-
-extension SubmitSymptomsViewController: StartDateViewControllerDelegate {
-    func startDateViewController(_ vc: StartDateViewController, didSelectDate date: Date) {
-        startDate = date
-    }
-}
-
 fileprivate let logger = Logger(label: "SelfDiagnosis")
