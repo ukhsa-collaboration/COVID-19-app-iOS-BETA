@@ -14,6 +14,11 @@ class SonarBroadcastPayloadGeneratorTests: XCTestCase {
     let dateFormatter = DateFormatter()
     let sonarEpoch = "2020-04-01T00:00:00Z"
     let registration = Registration(id: UUID(uuidString: "054DDC35-0287-4247-97BE-D9A3AF012E36")!, secretKey: Data(), broadcastRotationKey: SecKey.sampleEllipticCurveKey)
+    let utcCalendar: Calendar = {
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone(identifier: "UTC")!
+        return calendar
+    }()
     
     var knownDate: Date!
     var slightlyLaterDate: Date!
@@ -47,11 +52,12 @@ class SonarBroadcastPayloadGeneratorTests: XCTestCase {
 
         XCTAssertNotNil(payload)
     }
-    
-    func xtest_generates_and_caches_broadcastId_when_none_cached() {
+
+    func test_generates_and_caches_broadcastId_when_none_cached() {
         let today = Date()
-        let todayMidday = today.midday
-        let tomorrowMidnightUTC = today.followingMidnightUTC
+        let todayMidday = utcCalendar.date(bySetting: .hour, value: 12, of: today)!
+        let tomorrowMidnightUTC = utcCalendar.startOfDay(for: utcCalendar.date(byAdding: .day, value: 1, to: today)!)
+
         storage = MockBroadcastRotationKeyStorage(
             stubbedKey: nil,
             stubbedBroadcastId: nil,
@@ -69,10 +75,10 @@ class SonarBroadcastPayloadGeneratorTests: XCTestCase {
         XCTAssertEqual(storage.savedBroadcastIdDate, todayMidday)
     }
     
-    func xtest_returns_cached_broadcastId_when_cache_is_fresh() {
+    func test_returns_cached_broadcastId_when_cache_is_fresh() {
         let freshBroadcastId = "this is a broadcastId".data(using: .utf8)
         let today = Date()
-        let todayMidday = today.midday
+        let todayMidday = utcCalendar.date(bySetting: .hour, value: 12, of: today)!
         storage = MockBroadcastRotationKeyStorage(
             stubbedKey: nil,
             stubbedBroadcastId: freshBroadcastId,
@@ -88,11 +94,11 @@ class SonarBroadcastPayloadGeneratorTests: XCTestCase {
         XCTAssertNil(storage.savedBroadcastIdDate)
     }
     
-    func xtest_caches_and_returns_new_broadcastId_when_cache_is_stale() {
+    func test_caches_and_returns_new_broadcastId_when_cache_is_stale() {
         let staleBroadcastId = "this is a broadcastId".data(using: .utf8)
         let today = Date()
-        let todayMidday = today.midday
-        let yesterdayMidday = Calendar.current.date(byAdding: .day, value: -1, to: todayMidday)
+        let todayMidday = utcCalendar.date(bySetting: .hour, value: 12, of: today)!
+        let yesterdayMidday = utcCalendar.startOfDay(for: utcCalendar.date(byAdding: .day, value: -1, to: today)!)
         storage = MockBroadcastRotationKeyStorage(
             stubbedKey: nil,
             stubbedBroadcastId: staleBroadcastId,
