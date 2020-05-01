@@ -162,6 +162,7 @@
 		F618A564245C682500D89517 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F618A561245C682500D89517 /* Environment.swift */; };
 		F618A565245C682500D89517 /* Sonar.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F618A562245C682500D89517 /* Sonar.xcconfig */; };
 		F618A566245C682500D89517 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F618A563245C682500D89517 /* GoogleService-Info.plist */; };
+		F618A568245C81E200D89517 /* empty.plist in Resources */ = {isa = PBXBuildFile; fileRef = F618A567245C81E200D89517 /* empty.plist */; };
 		F62F857F2451051C006580A8 /* ContactEventsUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62F857E2451051C006580A8 /* ContactEventsUploader.swift */; };
 		F62F858124510716006580A8 /* ContactEventsUploaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62F858024510716006580A8 /* ContactEventsUploaderTests.swift */; };
 		F62F858524510923006580A8 /* SessionDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62F858424510923006580A8 /* SessionDouble.swift */; };
@@ -431,6 +432,7 @@
 		F618A561245C682500D89517 /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		F618A562245C682500D89517 /* Sonar.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Sonar.xcconfig; sourceTree = "<group>"; };
 		F618A563245C682500D89517 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F618A567245C81E200D89517 /* empty.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = empty.plist; sourceTree = "<group>"; };
 		F62F857E2451051C006580A8 /* ContactEventsUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventsUploader.swift; sourceTree = "<group>"; };
 		F62F858024510716006580A8 /* ContactEventsUploaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventsUploaderTests.swift; sourceTree = "<group>"; };
 		F62F858424510923006580A8 /* SessionDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDouble.swift; sourceTree = "<group>"; };
@@ -1051,6 +1053,7 @@
 			children = (
 				F60497602451FA42002B8503 /* Environment.swift.erb */,
 				F6049764245215A3002B8503 /* environment.json */,
+				F618A567245C81E200D89517 /* empty.plist */,
 				F604976224521574002B8503 /* Sonar.xcconfig.sample */,
 				F68D8FE324476F0B008BAAAA /* beta.xcconfig */,
 				F68D8FE524477031008BAAAA /* internal.xcconfig */,
@@ -1327,6 +1330,7 @@
 				6FC63C3B241641BA007C8BF3 /* LaunchScreen.storyboard in Resources */,
 				AEC6A7BE241BD82900B0237A /* LogoStrapline.xib in Resources */,
 				A1E7A0592420028B0078174D /* NHS Colors.xcassets in Resources */,
+				F618A568245C81E200D89517 /* empty.plist in Resources */,
 				8947F833245AD97A00C4F1BB /* Settings.bundle in Resources */,
 				F758B8BE242CB856003AE16D /* Localizable.strings in Resources */,
 				6FC63C38241641BA007C8BF3 /* Assets.xcassets in Resources */,
