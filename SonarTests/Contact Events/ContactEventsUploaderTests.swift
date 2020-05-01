@@ -69,7 +69,7 @@ class ContactEventsUploaderTests: XCTestCase {
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601
 
-            let decoded = try? decoder.decode(UploadContactEventsRequest.JSONWrapper.self, from: data)
+            let decoded = try? decoder.decode(UploadContactEventsRequest.Wrapper.self, from: data)
 
             // Can't compare the entire contact events because the timestamp loses precision
             // when JSON encoded and decoded.
@@ -77,7 +77,7 @@ class ContactEventsUploaderTests: XCTestCase {
             XCTAssertEqual(1, decoded?.contactEvents.count)
 
             let firstEvent = decoded?.contactEvents.first
-            XCTAssertEqual(payload, firstEvent?.broadcastPayload)
+            XCTAssertEqual(payload.cryptogram, firstEvent!.encryptedRemoteContactId)
         default:
             XCTFail("Expected a patch request but got \(request.method)")
         }

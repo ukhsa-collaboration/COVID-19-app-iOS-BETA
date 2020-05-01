@@ -10,9 +10,22 @@ import Foundation
 
 class UploadContactEventsRequest: SecureRequest, Request {
 
-    struct JSONWrapper: Codable {
+    struct UploadableContactEvent: Codable {
+        let encryptedRemoteContactId: Data
+        let rssiValues: [Int8]
+        let rssiIntervals: [Int32]
+        let timestamp: Int32
+        let duration: Int
+        let txPowerInProtocol: Int8
+        let txPowerAdvertised: Int8
+        let hmacSignature: Data
+        let transmissionTime: Int32
+        let countryCode: UInt16
+    }
+    
+    struct Wrapper: Codable {
         let symptomsTimestamp: Date
-        let contactEvents: [ContactEvent]
+        let contactEvents: [UploadableContactEvent]
     }
 
     typealias ResponseType = Void
@@ -29,7 +42,24 @@ class UploadContactEventsRequest: SecureRequest, Request {
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
 
-        let requestBody = JSONWrapper(symptomsTimestamp: symptomsTimestamp, contactEvents: contactEvents)
+        let uploadableEvents = contactEvents.compactMap { (event: ContactEvent) -> UploadableContactEvent? in
+            guard let payload = event.broadcastPayload else {
+                return nil
+            }
+            return UploadableContactEvent(
+                encryptedRemoteContactId: payload.cryptogram,
+                rssiValues: event.rssiValues.map { Int8($0) },
+                rssiIntervals: event.rssiIntervals.map { Int32($0) },
+                timestamp: Int32(event.timestamp.timeIntervalSince1970),
+                duration: Int(event.duration),
+                txPowerInProtocol: payload.txPower,
+                txPowerAdvertised: 0,
+                hmacSignature: payload.hmac,
+                transmissionTime: payload.transmissionTime,
+                countryCode: payload.countryCode)
+        }
+
+        let requestBody = Wrapper(symptomsTimestamp: symptomsTimestamp, contactEvents: uploadableEvents)
         let bodyAsData = try! encoder.encode(requestBody)
         method = .patch(data: bodyAsData)
 

@@ -18,7 +18,7 @@ struct BroadcastPayload {
     let txPower: Int8 = 0
     
     let cryptogram: Data
-    let secKey: SecKey
+    let hmacKey: Data
         
     func data(txDate: Date = Date()) -> Data {
         var payload = Data()
@@ -28,22 +28,17 @@ struct BroadcastPayload {
         payload.append(txPower.data)
         payload.append(Int32(txDate.timeIntervalSince1970).data)
         
-        let signature = hmacSignature(secKey: secKey, data: payload)
+        let signature = hmacSignature(hmacKey: hmacKey, data: payload)
         payload.append(signature)
         
         return payload
     }
     
-    private func hmacSignature(secKey: SecKey, data: Data) -> Data {
-        guard let key = secKey.externalRepresentation else {
-            logger.info("couldn't extract key data from secKey")
-            return Data()
-        }
-        
+    private func hmacSignature(hmacKey: Data, data: Data) -> Data {
         var context = CCHmacContext()
         
-        key.withUnsafeBytes { ptr in
-            CCHmacInit(&context, CCHmacAlgorithm(kCCHmacAlgSHA256), ptr.baseAddress, key.count)
+        hmacKey.withUnsafeBytes { ptr in
+            CCHmacInit(&context, CCHmacAlgorithm(kCCHmacAlgSHA256), ptr.baseAddress, hmacKey.count)
         }
         
         data.withUnsafeBytes { ptr in
@@ -68,10 +63,10 @@ struct IncomingBroadcastPayload: Equatable, Codable {
     let hmac: Data
     
     init(data: Data) {
-        self.countryCode = data.subdata(in: 0..<2).to(type: UInt16.self)!
+        self.countryCode = UInt16(bigEndian: data.subdata(in: 0..<2).to(type: UInt16.self)!)
         self.cryptogram = data.subdata(in: 2..<108)
         self.txPower = data.subdata(in: 108..<109).to(type: Int8.self)!
-        self.transmissionTime = data.subdata(in: 109..<113).to(type: Int32.self)!
+        self.transmissionTime = Int32(bigEndian: data.subdata(in: 109..<113).to(type: Int32.self)!)
         self.hmac = data.subdata(in: 113..<129)
     }
 

@@ -11,7 +11,8 @@ import Logging
 
 struct Registration: Equatable {
     let id: UUID
-    let secretKey: Data
+    // TODO: This should be wrapped in a "HMACKey" value type!
+    let secretKey: Data // HMAC for HTTP headers and bluetooth payload
     let broadcastRotationKey: SecKey
 
     init(id: UUID, secretKey: Data, broadcastRotationKey: SecKey) {

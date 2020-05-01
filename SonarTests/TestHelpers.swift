@@ -76,6 +76,8 @@ extension SecKey {
 
         return SecKeyCreateWithData(data as CFData, keyDict as CFDictionary, nil)!
     }
+    
+    static var sampleHMACKey: Data = Data(base64Encoded: "LWbqBBxfV5vob3ApsPhgOI8aiFcKYP8jLQ2fKb8Y1C0=")!
 
 }
 
