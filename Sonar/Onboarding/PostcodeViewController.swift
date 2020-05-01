@@ -105,6 +105,7 @@ class PostcodeViewController: UIViewController, Storyboarded {
         postcodeError.isHidden = false
         postcodeError.textColor = UIColor(named: "NHS Error")
         postcodeError.text = "Please enter the first part of a valid postcode. For example: PO30, E2, M1, EH1, L36".localized
+        UIAccessibility.post(notification: .screenChanged, argument: postcodeError)
 
         postcodeField.layer.borderWidth = 3
         postcodeField.layer.borderColor = UIColor(named: "NHS Error")!.cgColor

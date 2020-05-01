@@ -109,6 +109,7 @@ class SymptomsSummaryViewController: UIViewController, Storyboarded {
 
         guard startDate != nil else {
             startDateViewController.errorView.isHidden = false
+            UIAccessibility.post(notification: .screenChanged, argument: startDateViewController.errorView)
             scrollView.scrollRectToVisible(startDateViewController.errorLabel.frame, animated: true)
             return
         }

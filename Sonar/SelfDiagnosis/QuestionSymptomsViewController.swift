@@ -103,6 +103,7 @@ class QuestionSymptomsViewController: UIViewController, Storyboarded {
     @IBAction func buttonTapped(_ sender: Any) {
         guard let state = questionState else {
             errorLabel.isHidden = false
+            UIAccessibility.post(notification: .screenChanged, argument: errorLabel)
             return
         }
         buttonAction(state)
