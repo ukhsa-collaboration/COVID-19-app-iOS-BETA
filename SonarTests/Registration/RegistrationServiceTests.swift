@@ -181,7 +181,7 @@ class RegistrationServiceTests: TestCase {
         session.executeCompletion!(Result<(), Error>.failure(ErrorForTest()))
 
         XCTAssertNotNil(failedObserver.lastNotification)
-        XCTAssertEqual(monitor.detectedEvents, [.registrationFailed(reason: .registrationCallFailed)])
+        XCTAssertEqual(monitor.detectedEvents, [.registrationFailed(reason: .registrationCallFailed(statusCode: nil))])
     }
     
     func testRegistration_notifiesOnSecondRequestFailure() throws {
@@ -219,7 +219,7 @@ class RegistrationServiceTests: TestCase {
         session.executeCompletion!(Result<ConfirmRegistrationResponse, Error>.failure(ErrorForTest()))
 
         XCTAssertNotNil(failedObserver.lastNotification)
-        XCTAssertEqual(monitor.detectedEvents, [.registrationFailed(reason: .activationCallFailed)])
+        XCTAssertEqual(monitor.detectedEvents, [.registrationFailed(reason: .activationCallFailed(statusCode: nil))])
     }
     
     func testRegistration_cleansUpAfterInitialRequestFailure() throws {
@@ -552,7 +552,7 @@ class RegistrationServiceTests: TestCase {
         // Review please…
         XCTAssertEqual(monitor.detectedEvents, [
             .registrationFailed(reason: .waitingForActivationNotificationTimedOut),
-            .registrationFailed(reason: .activationCallFailed)
+            .registrationFailed(reason: .activationCallFailed(statusCode: nil))
         ])
     }
     

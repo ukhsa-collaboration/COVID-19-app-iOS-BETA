@@ -105,7 +105,7 @@ class ConcreteRegistrationService: RegistrationService {
 
             case .failure(let error):
                 logger.error("Error making first registration request: \(error.localizedDescription)")
-                self.fail(withError: error, reason: .registrationCallFailed)
+                self.fail(withError: error, reason: .registrationCallFailed(statusCode: nil))
             }
         }
     }
@@ -153,7 +153,7 @@ class ConcreteRegistrationService: RegistrationService {
                 self.succeed(registration: registration)
             case .failure(let error):
                 logger.error("Error making second registration request: \(error)")
-                self.fail(withError: error, reason: .activationCallFailed)
+                self.fail(withError: error, reason: .activationCallFailed(statusCode: nil))
             }
         }
     }

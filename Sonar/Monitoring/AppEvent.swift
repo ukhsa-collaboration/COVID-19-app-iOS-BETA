@@ -9,11 +9,11 @@
 import Foundation
 
 enum AppEvent: Equatable {
-    enum RegistrationFailureReason {
+    enum RegistrationFailureReason: Equatable {
         case waitingForFCMTokenTimedOut
-        case registrationCallFailed
+        case registrationCallFailed(statusCode: Int?)
         case waitingForActivationNotificationTimedOut
-        case activationCallFailed
+        case activationCallFailed(statusCode: Int?)
     }
     case partialPostcodeProvided
     case onboardingCompleted

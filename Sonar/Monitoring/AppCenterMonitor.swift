@@ -66,7 +66,9 @@ private extension AppEvent {
             return nil
             
         case .registrationFailed(let reason):
-            return ["Reason": reason.nameForAppCenter]
+            var properties = ["Reason": reason.nameForAppCenter]
+            reason.appendProperties(to: &properties)
+            return properties
             
         case .collectedContactEvents(let yesterday, let all):
             return [
@@ -86,6 +88,20 @@ private extension AppEvent.RegistrationFailureReason {
         case .registrationCallFailed: return "Registration call failed"
         case .waitingForActivationNotificationTimedOut: return "Activation notification not received"
         case .activationCallFailed: return "Activation call failed"
+        }
+    }
+    
+    func appendProperties(to dictionary: inout [String: String]) {
+        switch self {
+        case .waitingForFCMTokenTimedOut,
+             .waitingForActivationNotificationTimedOut:
+            return
+            
+        case .registrationCallFailed(let statusCode),
+             .activationCallFailed(let statusCode):
+            if let statusCode = statusCode {
+                dictionary["Status code"] = "\(statusCode)"
+            }
         }
     }
 

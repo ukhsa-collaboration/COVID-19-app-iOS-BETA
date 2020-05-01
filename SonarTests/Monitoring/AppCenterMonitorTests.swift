@@ -41,9 +41,16 @@ class AppCenterMonitorTests: XCTestCase {
     }
     
     func testRegistrationFailure_registrationCallFailed() {
-        test(.registrationFailed(reason: .registrationCallFailed),
+        test(.registrationFailed(reason: .registrationCallFailed(statusCode: nil)),
              isTrackedWithName: "Registration failed",
              properties: ["Reason": "Registration call failed"]
+        )
+    }
+    
+    func testRegistrationFailure_registrationCallFailedWithStatusCode() {
+        test(.registrationFailed(reason: .registrationCallFailed(statusCode: 400)),
+             isTrackedWithName: "Registration failed",
+             properties: ["Reason": "Registration call failed", "Status code": "400"]
         )
     }
     
@@ -55,9 +62,16 @@ class AppCenterMonitorTests: XCTestCase {
     }
     
     func testRegistrationFailure_activationCallFailed() {
-        test(.registrationFailed(reason: .activationCallFailed),
+        test(.registrationFailed(reason: .activationCallFailed(statusCode: nil)),
              isTrackedWithName: "Registration failed",
              properties: ["Reason": "Activation call failed"]
+        )
+    }
+    
+    func testRegistrationFailure_activationCallFailedWithStatusCode() {
+        test(.registrationFailed(reason: .activationCallFailed(statusCode: 400)),
+             isTrackedWithName: "Registration failed",
+             properties: ["Reason": "Activation call failed", "Status code": "400"]
         )
     }
     
