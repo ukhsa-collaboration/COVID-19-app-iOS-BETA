@@ -37,8 +37,8 @@ jobs:
 
       - name: Setup Build Configuration
         run: |
-          cp Sonar/Environments/Sonar.xcconfig.sample Sonar.xcconfig
-          cat Sonar/Environments/environment.json | ./bin/make-environment > Sonar/Environment.swift
+          cp Sonar/Environments/Sonar.xcconfig.sample .secret/Sonar.xcconfig
+          cat Sonar/Environments/environment.json | ./bin/make-environment > .secret/Environment.swift
 
       - name: Run Build
         env:
@@ -72,8 +72,8 @@ jobs:
 
       - name: Setup Build Configuration
         run: |
-          cp Sonar/Environments/Sonar.xcconfig.sample Sonar.xcconfig
-          cat Sonar/Environments/environment.json | ./bin/make-environment > Sonar/Environment.swift
+          cp Sonar/Environments/Sonar.xcconfig.sample .secret/Sonar.xcconfig
+          cat Sonar/Environments/environment.json | ./bin/make-environment > .secret/Environment.swift
 
       - run: |
           killall "Simulator" || true
