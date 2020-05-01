@@ -21,6 +21,7 @@ struct Environment {
     static let sonarServiceUUID = CBUUID(string: "<%= sonar_service_uuid %>")
     static let sonarIdCharacteristicUUID = CBUUID(string: "<%= sonar_id_characteristic_uuid %>")
     static let keepaliveCharacteristicUUID = CBUUID(string: "<%= sonar_keepalive_characteristic_uuid %>")
+    static let appCenterKey = ""
 
     <% if defined? debug %>
     static let debug: Debug? = Debug(
