@@ -39,6 +39,7 @@ jobs:
         run: |
           cp Sonar/Environments/Sonar.xcconfig.sample .secret/Sonar.xcconfig
           cat Sonar/Environments/environment.json | ./bin/make-environment > .secret/Environment.swift
+          touch .secret/GoogleService-Info.plist
 
       - name: Run Build
         env:
@@ -74,6 +75,7 @@ jobs:
         run: |
           cp Sonar/Environments/Sonar.xcconfig.sample .secret/Sonar.xcconfig
           cat Sonar/Environments/environment.json | ./bin/make-environment > .secret/Environment.swift
+          touch .secret/GoogleService-Info.plist
 
       - run: |
           killall "Simulator" || true
