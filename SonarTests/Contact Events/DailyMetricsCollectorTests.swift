@@ -124,7 +124,6 @@ class DailyMetricsCollectorTests: XCTestCase {
         contactEventRepository.contactEvents = zip(dates, counts).lazy
             .flatMap { date, count -> Repeated<ContactEvent> in
             let event = ContactEvent(
-                encryptedRemoteContactId: Data(),
                 timestamp: date,
                 rssiValues: [],
                 rssiIntervals: [],
