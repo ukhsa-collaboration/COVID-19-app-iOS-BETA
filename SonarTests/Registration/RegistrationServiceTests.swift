@@ -181,7 +181,7 @@ class RegistrationServiceTests: TestCase {
         session.executeCompletion!(Result<(), Error>.failure(ErrorForTest()))
 
         XCTAssertNotNil(failedObserver.lastNotification)
-        XCTAssertEqual(monitor.detectedEvents, [.registrationFailed])
+        XCTAssertEqual(monitor.detectedEvents, [.registrationFailed(reason: .registrationCallFailed)])
     }
     
     func testRegistration_notifiesOnSecondRequestFailure() throws {
@@ -219,7 +219,7 @@ class RegistrationServiceTests: TestCase {
         session.executeCompletion!(Result<ConfirmRegistrationResponse, Error>.failure(ErrorForTest()))
 
         XCTAssertNotNil(failedObserver.lastNotification)
-        XCTAssertEqual(monitor.detectedEvents, [.registrationFailed])
+        XCTAssertEqual(monitor.detectedEvents, [.registrationFailed(reason: .activationCallFailed)])
     }
     
     func testRegistration_cleansUpAfterInitialRequestFailure() throws {
@@ -254,7 +254,36 @@ class RegistrationServiceTests: TestCase {
         XCTAssertNil(session.requestSent)
     }
     
-    func testRegistration_timesOutAfter20Seconds() {
+    func testRegistration_timesOutAfter20Seconds_withoutPushToken() {
+        let session = SessionDouble()
+        let persistence = PersistenceDouble()
+        let notificationCenter = NotificationCenter()
+        let monitor = AppMonitoringDouble()
+        let remoteNotificationDispatcher = RemoteNotificationDispatcher(
+            notificationCenter: notificationCenter,
+            userNotificationCenter: UserNotificationCenterDouble()
+        )
+        let queueDouble = QueueDouble()
+        let failedObserver = NotificationObserverDouble(notificationCenter: notificationCenter, notificationName: RegistrationFailedNotification)
+        let registrationService = ConcreteRegistrationService(
+            session: session,
+            persistence: persistence,
+            reminderScheduler: RegistrationReminderSchedulerDouble(),
+            remoteNotificationDispatcher: remoteNotificationDispatcher,
+            notificationCenter: notificationCenter,
+            monitor: monitor,
+            timeoutQueue: queueDouble
+        )
+
+        _ = registrationService.register()
+
+        queueDouble.scheduledBlock?()
+        
+        XCTAssertNotNil(failedObserver.lastNotification)
+        XCTAssertEqual(monitor.detectedEvents, [.registrationFailed(reason: .waitingForFCMTokenTimedOut)])
+    }
+    
+    func testRegistration_timesOutAfter20Seconds_withoutActivationPush() {
         let session = SessionDouble()
         let persistence = PersistenceDouble()
         let notificationCenter = NotificationCenter()
@@ -281,7 +310,7 @@ class RegistrationServiceTests: TestCase {
         queueDouble.scheduledBlock?()
         
         XCTAssertNotNil(failedObserver.lastNotification)
-        XCTAssertEqual(monitor.detectedEvents, [.registrationFailed])
+        XCTAssertEqual(monitor.detectedEvents, [.registrationFailed(reason: .waitingForActivationNotificationTimedOut)])
     }
     
     func testRegistration_canSucceedAfterTimeout() {
@@ -521,7 +550,10 @@ class RegistrationServiceTests: TestCase {
         #warning("This is probably not what we want.")
         // I don’t believe the issue is just for the metrics, since we’re “failing” multiple times.
         // Review please…
-        XCTAssertEqual(monitor.detectedEvents, [.registrationFailed, .registrationFailed])
+        XCTAssertEqual(monitor.detectedEvents, [
+            .registrationFailed(reason: .waitingForActivationNotificationTimedOut),
+            .registrationFailed(reason: .activationCallFailed)
+        ])
     }
     
     func testSchedulesRemindersAtStart() {

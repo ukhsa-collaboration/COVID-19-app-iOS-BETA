@@ -85,7 +85,11 @@ class ConcreteRegistrationService: RegistrationService {
             guard self.persistence.registration == nil else { return }
             
             logger.error("Registration did not complete within \(registrationTimeLimitSecs) seconds")
-            self.fail(withError: RegistrationTimeoutError())
+            let hasPushToken = self.remoteNotificationDispatcher.pushToken != nil
+            self.fail(
+                withError: RegistrationTimeoutError(),
+                reason: hasPushToken ? .waitingForActivationNotificationTimedOut : .waitingForFCMTokenTimedOut
+            )
         }
     }
     
@@ -101,7 +105,7 @@ class ConcreteRegistrationService: RegistrationService {
 
             case .failure(let error):
                 logger.error("Error making first registration request: \(error.localizedDescription)")
-                self.fail(withError: error)
+                self.fail(withError: error, reason: .registrationCallFailed)
             }
         }
     }
@@ -149,7 +153,7 @@ class ConcreteRegistrationService: RegistrationService {
                 self.succeed(registration: registration)
             case .failure(let error):
                 logger.error("Error making second registration request: \(error)")
-                self.fail(withError: error)
+                self.fail(withError: error, reason: .activationCallFailed)
             }
         }
     }
@@ -160,11 +164,11 @@ class ConcreteRegistrationService: RegistrationService {
         reminderScheduler.cancel()
     }
     
-    private func fail(withError error: Error) {
+    private func fail(withError error: Error, reason: AppEvent.RegistrationFailureReason) {
         logger.error("Registration failed: \(error)")
         self.remoteNotificationCompletionHandler?(.failed)
         notificationCenter.post(name: RegistrationFailedNotification, object: nil)
-        monitor.report(.registrationFailed)
+        monitor.report(.registrationFailed(reason: reason))
     }
 }
 

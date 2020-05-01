@@ -9,9 +9,15 @@
 import Foundation
 
 enum AppEvent: Equatable {
+    enum RegistrationFailureReason {
+        case waitingForFCMTokenTimedOut
+        case registrationCallFailed
+        case waitingForActivationNotificationTimedOut
+        case activationCallFailed
+    }
     case partialPostcodeProvided
-    case registrationSucceeded
-    case registrationFailed
     case onboardingCompleted
+    case registrationSucceeded
+    case registrationFailed(reason: RegistrationFailureReason)
     case collectedContactEvents(yesterday: Int, all: Int)
 }
