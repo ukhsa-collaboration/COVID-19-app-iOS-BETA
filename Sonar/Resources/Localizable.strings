@@ -9,7 +9,7 @@
 "POTENTIAL_STATUS_TITLE" = "NHS COVID-19";
 "POTENTIAL_STATUS_BODY" = "Your advice has changed. Please open the app to learn what to do next. Your help saves lives.";
 
-"REGISTRATION_OK" = "Everything is working OK";
+"REGISTRATION_OK" = "The app is working properly";
 "REGISTRATION_IN_PROGRESS" = "Finalising setup...";
 "REGISTRATION_FAILED" = "App setup failed";
 "RETRY" = "Retry";
