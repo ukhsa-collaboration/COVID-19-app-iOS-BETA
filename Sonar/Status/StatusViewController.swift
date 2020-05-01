@@ -79,21 +79,6 @@ class StatusViewController: UIViewController, Storyboarded {
         diagnosisStatusView.layer.masksToBounds = true
         readLatestAdviceLabel.textColor = UIColor(named: "NHS Link")
 
-        let readLatestAdviceText: String
-        if persistence.potentiallyExposed != nil || persistence.selfDiagnosis?.symptoms.isEmpty ?? false {
-            readLatestAdviceText = "Read what to do next"
-        } else {
-            readLatestAdviceText = "Read Latest Advice"
-        }
-        readLatestAdviceLabel.attributedText = NSAttributedString(
-            string: readLatestAdviceText.localized,
-            attributes: [
-                .underlineStyle: NSUnderlineStyle.single.rawValue,
-                .foregroundColor: UIColor(named: "NHS Link")!,
-                .font: UIFont.preferredFont(forTextStyle: .body),
-            ]
-        )
-
         medicalAdviceLabel.textColor = UIColor(named: "NHS Secondary Text")
 
         diagnosisStatusView.addGestureRecognizer(
@@ -129,6 +114,21 @@ class StatusViewController: UIViewController, Storyboarded {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        let readLatestAdviceText: String
+        if statusProvider.status == .blue {
+            readLatestAdviceText = "Read current advice"
+        } else {
+            readLatestAdviceText = "Read what to do next"
+        }
+        readLatestAdviceLabel.attributedText = NSAttributedString(
+            string: readLatestAdviceText.localized,
+            attributes: [
+                .underlineStyle: NSUnderlineStyle.single.rawValue,
+                .foregroundColor: UIColor(named: "NHS Link")!,
+                .font: UIFont.preferredFont(forTextStyle: .body),
+            ]
+        )
+
         if persistence.registration != nil {
             showRegisteredStatus()
         } else {
@@ -137,7 +137,7 @@ class StatusViewController: UIViewController, Storyboarded {
 
         reload()
     }
-        
+
     @objc func diagnosisStatusTapped() {
         UIApplication.shared.open(content[statusProvider.status].readUrl)
     }

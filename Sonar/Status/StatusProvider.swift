@@ -24,7 +24,6 @@ class StatusProvider {
                 return .blue
             }
 
-            // Only stay in amber for a week
             guard delta < 14 else {
                 return .blue
             }

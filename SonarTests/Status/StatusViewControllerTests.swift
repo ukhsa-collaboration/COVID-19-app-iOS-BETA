@@ -173,6 +173,35 @@ class StatusViewControllerTests: XCTestCase {
         XCTAssertFalse(vc.redStatusView.isHidden)
     }
     
+    func testReadLatestAdviceLabelWhenDefaultStatus() {
+        let statusProvider = StatusProviderDouble.double()
+        statusProvider.status = .blue
+
+        let persistence = PersistenceDouble()
+        let vc = makeViewController(persistence: persistence, statusProvider: statusProvider)
+        
+        XCTAssertEqual(vc.readLatestAdviceLabel.text, "Read current advice")
+    }
+
+    func testReadLatestAdviceLabelWhenAmberStatus() {
+        let statusProvider = StatusProviderDouble.double()
+        statusProvider.status = .amber
+
+        let persistence = PersistenceDouble()
+        let vc = makeViewController(persistence: persistence, statusProvider: statusProvider)
+
+        XCTAssertEqual(vc.readLatestAdviceLabel.text, "Read what to do next")
+    }
+    
+    func testReadLatestAdviceLabelWhenRedStatus() {
+        let statusProvider = StatusProviderDouble.double()
+        statusProvider.status = .red
+
+        let persistence = PersistenceDouble()
+        let vc = makeViewController(persistence: persistence, statusProvider: statusProvider)
+
+        XCTAssertEqual(vc.readLatestAdviceLabel.text, "Read what to do next")
+    }
 }
 
 fileprivate func makeViewController(
