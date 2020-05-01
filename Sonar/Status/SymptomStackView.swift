@@ -19,7 +19,7 @@ class SymptomStackView: UIStackView {
     
     var coughLabel: UILabel {
         let label = UILabel()
-        label.text = "Continous cough"
+        label.text = "Continuous cough"
         label.font = UIFont.preferredFont(forTextStyle: .subheadline)
         label.textColor = UIColor(named: "NHS Secondary Text")
         return label
