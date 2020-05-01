@@ -54,9 +54,9 @@ class SonarBroadcastPayloadGeneratorTests: XCTestCase {
     }
 
     func test_generates_and_caches_broadcastId_when_none_cached() {
-        let today = Date()
-        let todayMidday = utcCalendar.date(bySetting: .hour, value: 12, of: today)!
-        let tomorrowMidnightUTC = utcCalendar.startOfDay(for: utcCalendar.date(byAdding: .day, value: 1, to: today)!)
+        let today = utcCalendar.dateComponents(in: TimeZone(identifier: "UTC")!, from: Date())
+        let todayMidday = utcCalendar.date(bySetting: .hour, value: 12, of: today.date!)!
+        let tomorrowMidnightUTC = utcCalendar.startOfDay(for: utcCalendar.date(byAdding: .day, value: 1, to: today.date!)!)
 
         storage = MockBroadcastRotationKeyStorage(
             stubbedKey: nil,
