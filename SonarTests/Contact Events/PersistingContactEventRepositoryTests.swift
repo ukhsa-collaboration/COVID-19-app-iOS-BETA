@@ -15,10 +15,10 @@ class PersistingContactEventRepositoryTests: XCTestCase {
     private let peripheral2 = TestPeripheral(identifier: UUID())
     private let peripheral3 = TestPeripheral(identifier: UUID())
     
-    let broadcastId1 = Data(base64Encoded: "aGVsbG8K")!
-    let broadcastId2 = Data(base64Encoded: "Z29vZGJ5ZQo=")!
-    let broadcastId3 = Data(base64Encoded: "Z29vZGJ5dGUK")!
-    
+    let payload1 = IncomingBroadcastPayload.sample1
+    let payload2 = IncomingBroadcastPayload.sample2
+    let payload3 = IncomingBroadcastPayload.sample3
+
     var listener: BTLEListenerDouble!
     var persister: ContactEventPersisterDouble!
     var delegate: MockContactEventRepositoryDelegate!
@@ -32,43 +32,37 @@ class PersistingContactEventRepositoryTests: XCTestCase {
         repository.delegate = delegate
     }
     
-    func testDoesNotRecordZeroLengthBroadcastId() {
-        repository.btleListener(listener, didFind: Data(), forPeripheral: peripheral1)
-        
-        XCTAssertEqual(repository.contactEvents.count, 0)
-    }
-
     func testRecordsRSSIValuesAgainstCorrectPeripheral() {
-        repository.btleListener(listener, didFind: broadcastId1, forPeripheral: peripheral1)
+        repository.btleListener(listener, didFind: payload1, for: peripheral1)
 
-        repository.btleListener(listener, didReadRSSI: 21, forPeripheral: peripheral2)
-        repository.btleListener(listener, didReadRSSI: 11, forPeripheral: peripheral1)
-        repository.btleListener(listener, didFind: broadcastId2, forPeripheral: peripheral2)
-        repository.btleListener(listener, didReadRSSI: 31, forPeripheral: peripheral3)
-        repository.btleListener(listener, didReadRSSI: 22, forPeripheral: peripheral2)
-        repository.btleListener(listener, didReadRSSI: 32, forPeripheral: peripheral3)
-        repository.btleListener(listener, didReadRSSI: 23, forPeripheral: peripheral2)
-        repository.btleListener(listener, didReadRSSI: 12, forPeripheral: peripheral1)
-        repository.btleListener(listener, didReadRSSI: 13, forPeripheral: peripheral1)
-        repository.btleListener(listener, didFind: broadcastId3, forPeripheral: peripheral3)
-        repository.btleListener(listener, didReadRSSI: 33, forPeripheral: peripheral3)
+        repository.btleListener(listener, didReadRSSI: 21, for: peripheral2)
+        repository.btleListener(listener, didReadRSSI: 11, for: peripheral1)
+        repository.btleListener(listener, didFind: payload2, for: peripheral2)
+        repository.btleListener(listener, didReadRSSI: 31, for: peripheral3)
+        repository.btleListener(listener, didReadRSSI: 22, for: peripheral2)
+        repository.btleListener(listener, didReadRSSI: 32, for: peripheral3)
+        repository.btleListener(listener, didReadRSSI: 23, for: peripheral2)
+        repository.btleListener(listener, didReadRSSI: 12, for: peripheral1)
+        repository.btleListener(listener, didReadRSSI: 13, for: peripheral1)
+        repository.btleListener(listener, didFind: payload3, for: peripheral3)
+        repository.btleListener(listener, didReadRSSI: 33, for: peripheral3)
         
-        XCTAssertEqual(repository.contactEvents.first(where: { $0.encryptedRemoteContactId == broadcastId1 })?.rssiValues, [11, 12, 13])
-        XCTAssertEqual(repository.contactEvents.first(where: { $0.encryptedRemoteContactId == broadcastId2 })?.rssiValues, [21, 22, 23])
-        XCTAssertEqual(repository.contactEvents.first(where: { $0.encryptedRemoteContactId == broadcastId3 })?.rssiValues, [31, 32, 33])
+        XCTAssertEqual(repository.contactEvents.first(where: { $0.broadcastPayload == payload1 })?.rssiValues, [11, 12, 13])
+        XCTAssertEqual(repository.contactEvents.first(where: { $0.broadcastPayload == payload2 })?.rssiValues, [21, 22, 23])
+        XCTAssertEqual(repository.contactEvents.first(where: { $0.broadcastPayload == payload3 })?.rssiValues, [31, 32, 33])
         
-        XCTAssertEqual(delegate.broadcastIds[peripheral1.identifier], broadcastId1)
-        XCTAssertEqual(delegate.broadcastIds[peripheral2.identifier], broadcastId2)
-        XCTAssertEqual(delegate.broadcastIds[peripheral3.identifier], broadcastId3)
+        XCTAssertEqual(delegate.broadcastIds[peripheral1.identifier], payload1)
+        XCTAssertEqual(delegate.broadcastIds[peripheral2.identifier], payload2)
+        XCTAssertEqual(delegate.broadcastIds[peripheral3.identifier], payload3)
         XCTAssertEqual(delegate.rssiValues[peripheral1.identifier], [11, 12, 13])
         XCTAssertEqual(delegate.rssiValues[peripheral2.identifier], [21, 22, 23])
         XCTAssertEqual(delegate.rssiValues[peripheral3.identifier], [31, 32, 33])
     }
     
     func testResetResetsUnderlyingPersister() {
-        repository.btleListener(listener, didFind: broadcastId1, forPeripheral: peripheral1)
-        repository.btleListener(listener, didFind: broadcastId2, forPeripheral: peripheral2)
-        repository.btleListener(listener, didFind: broadcastId3, forPeripheral: peripheral3)
+        repository.btleListener(listener, didFind: payload1, for: peripheral1)
+        repository.btleListener(listener, didFind: payload2, for: peripheral2)
+        repository.btleListener(listener, didFind: payload3, for: peripheral3)
 
         repository.reset()
         
@@ -76,11 +70,11 @@ class PersistingContactEventRepositoryTests: XCTestCase {
     }
     
     func testUpdatesWithItemsMoreRecentThan28Days() {
-        repository.btleListener(listener, didFind: broadcastId2, forPeripheral: peripheral2)
-        repository.btleListener(listener, didFind: broadcastId3, forPeripheral: peripheral3)
+        repository.btleListener(listener, didFind: payload2, for: peripheral2)
+        repository.btleListener(listener, didFind: payload3, for: peripheral3)
         
         persister.items[peripheral1.identifier] = ContactEvent(
-            encryptedRemoteContactId: broadcastId1,
+            broadcastPayload: payload1,
             timestamp: Date(timeIntervalSinceNow: -2419300),
             rssiValues: [],
             rssiIntervals: [],
@@ -92,9 +86,9 @@ class PersistingContactEventRepositoryTests: XCTestCase {
     }
 
     func testRemoveContactEventsUntil() {
-        repository.btleListener(listener, didFind: broadcastId1, forPeripheral: peripheral1)
-        repository.btleListener(listener, didFind: broadcastId2, forPeripheral: peripheral2)
-        repository.btleListener(listener, didFind: broadcastId3, forPeripheral: peripheral3)
+        repository.btleListener(listener, didFind: payload1, for: peripheral1)
+        repository.btleListener(listener, didFind: payload2, for: peripheral2)
+        repository.btleListener(listener, didFind: payload3, for: peripheral3)
 
         guard let contactEvent = persister.items[peripheral2.identifier] else {
             XCTFail("Contact event for \(peripheral2.identifier) not found")
@@ -114,14 +108,14 @@ fileprivate struct TestPeripheral: BTLEPeripheral {
 
 class MockContactEventRepositoryDelegate: ContactEventRepositoryDelegate {
     
-    var broadcastIds: [UUID: Data] = [:]
+    var broadcastIds: [UUID: IncomingBroadcastPayload] = [:]
     var rssiValues: [UUID: [Int]] = [:]
     
-    func repository(_ repository: ContactEventRepository, didRecordBroadcastId broadcastId: Data, forPeripheral peripheral: BTLEPeripheral) {
-        broadcastIds[peripheral.identifier] = broadcastId
+    func repository(_ repository: ContactEventRepository, didRecord broadcastPayload: IncomingBroadcastPayload, for peripheral: BTLEPeripheral) {
+        broadcastIds[peripheral.identifier] = broadcastPayload
     }
     
-    func repository(_ repository: ContactEventRepository, didRecordRSSI RSSI: Int, forPeripheral peripheral: BTLEPeripheral) {
+    func repository(_ repository: ContactEventRepository, didRecordRSSI RSSI: Int, for peripheral: BTLEPeripheral) {
         if rssiValues[peripheral.identifier] == nil {
             rssiValues[peripheral.identifier] = []
         }

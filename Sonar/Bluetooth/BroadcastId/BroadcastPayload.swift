@@ -59,7 +59,7 @@ struct BroadcastPayload {
 
 }
 
-struct IncomingBroadcastPayload: Codable {
+struct IncomingBroadcastPayload: Equatable, Codable {
     
     let countryCode: UInt16
     let cryptogram: Data

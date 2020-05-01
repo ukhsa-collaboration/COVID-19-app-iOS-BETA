@@ -9,7 +9,12 @@ import Foundation
 
 struct ContactEvent: Equatable, Codable {
 
-    var encryptedRemoteContactId: Data? = nil // TODO: This isn't that now, it's a "broadcast payload" and the encrypted id is inside it
+    var encryptedRemoteContactId: Data? {
+        return broadcastPayload?.cryptogram
+    }
+    
+    var broadcastPayload: IncomingBroadcastPayload? = nil
+    
     private (set) var timestamp: Date = Date()
     private (set) var rssiValues: [Int8] = []
     private (set) var rssiIntervals: [TimeInterval] = []
@@ -22,10 +27,11 @@ struct ContactEvent: Equatable, Codable {
     }
 
     enum CodingKeys: String, CodingKey {
-        case encryptedRemoteContactId
+        case broadcastPayload
         case timestamp
         case rssiValues
         case rssiIntervals
         case duration
     }
+
 }

@@ -14,9 +14,9 @@ class UploadContactEventsRequestTests: XCTestCase {
     let anonymousId = UUID(uuidString: "E9D7F53C-DE9C-46A2-961E-8302DC39558A")!
     let dummyKey = "this-is-a-symmetric-key-trust-me".data(using: .utf8)!
 
-    let broadcastId1 = Data(base64Encoded: "62D583B3052C4CF9808C0B96080F0DB8")!
-    let broadcastId2 = Data(base64Encoded: "AA94DF1440774D6B9712D90861D8BDE7")!
-    let broadcastId3 = Data(base64Encoded: "2F13DB8A7A5E47C991D004F6AE19D869")!
+    let payload1 = IncomingBroadcastPayload.sample1
+    let payload2 = IncomingBroadcastPayload.sample2
+    let payload3 = IncomingBroadcastPayload.sample3
 
     let timestamp1 = Date(timeIntervalSince1970: 0)
     let timestamp2 = Date(timeIntervalSince1970: 10)
@@ -32,9 +32,9 @@ class UploadContactEventsRequestTests: XCTestCase {
     
     override func setUp() {
         contactEvents = [
-            ContactEvent(encryptedRemoteContactId: broadcastId1, timestamp: timestamp1, rssiValues: [rssi1], rssiIntervals: [10], duration: 0),
-            ContactEvent(encryptedRemoteContactId: broadcastId2, timestamp: timestamp2, rssiValues: [rssi2], rssiIntervals: [20], duration: 0),
-            ContactEvent(encryptedRemoteContactId: broadcastId3, timestamp: timestamp3, rssiValues: [rssi3], rssiIntervals: [30], duration: 0)
+            ContactEvent(broadcastPayload: payload1, timestamp: timestamp1, rssiValues: [rssi1], rssiIntervals: [10], duration: 0),
+            ContactEvent(broadcastPayload: payload2, timestamp: timestamp2, rssiValues: [rssi2], rssiIntervals: [20], duration: 0),
+            ContactEvent(broadcastPayload: payload3, timestamp: timestamp3, rssiValues: [rssi3], rssiIntervals: [30], duration: 0)
         ]
 
         let registration = Registration(id: anonymousId, secretKey: dummyKey, broadcastRotationKey: SecKey.sampleEllipticCurveKey)
@@ -64,15 +64,15 @@ class UploadContactEventsRequestTests: XCTestCase {
         let contactEvents = try decoder.decode(UploadContactEventsRequest.JSONWrapper.self, from: request.body!).contactEvents
 
         XCTAssertEqual(contactEvents.count, 3)
-        XCTAssertEqual(contactEvents[0].encryptedRemoteContactId, broadcastId1)
+        XCTAssertEqual(contactEvents[0].broadcastPayload, payload1)
         XCTAssertEqual(contactEvents[0].timestamp, timestamp1)
         XCTAssertEqual(contactEvents[0].rssiValues.first, rssi1)
 
-        XCTAssertEqual(contactEvents[1].encryptedRemoteContactId, broadcastId2)
+        XCTAssertEqual(contactEvents[1].broadcastPayload, payload2)
         XCTAssertEqual(contactEvents[1].timestamp, timestamp2)
         XCTAssertEqual(contactEvents[1].rssiValues.first, rssi2)
 
-        XCTAssertEqual(contactEvents[2].encryptedRemoteContactId, broadcastId3)
+        XCTAssertEqual(contactEvents[2].broadcastPayload, payload3)
         XCTAssertEqual(contactEvents[2].timestamp, timestamp3)
         XCTAssertEqual(contactEvents[2].rssiValues.first, rssi3)
     }

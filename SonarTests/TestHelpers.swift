@@ -92,3 +92,21 @@ extension Date {
     }
 
 }
+
+extension IncomingBroadcastPayload {
+    static var sample1: IncomingBroadcastPayload {
+        var data = Data(count: BroadcastPayload.length)
+        data.replaceSubrange(0..<2, with: UInt16(1).data)
+        return IncomingBroadcastPayload(data: data)
+    }
+    static var sample2: IncomingBroadcastPayload {
+        var data = Data(count: BroadcastPayload.length)
+        data.replaceSubrange(0..<2, with: UInt16(2).data)
+        return IncomingBroadcastPayload(data: data)
+    }
+    static var sample3: IncomingBroadcastPayload {
+        var data = Data(count: BroadcastPayload.length)
+        data.replaceSubrange(0..<2, with: UInt16(3).data)
+        return IncomingBroadcastPayload(data: data)
+    }
+}

@@ -42,8 +42,8 @@ class ContactEventsUploaderTests: XCTestCase {
             diagnosis: SelfDiagnosis(type: .initial, symptoms: [], startDate: Date()),
             registration: registration
         )
-        let expectedBroadcastId = "opaque bytes that only the server can decrypt".data(using: .utf8)!
-        let contactEvent = ContactEvent(encryptedRemoteContactId: expectedBroadcastId)
+        let payload = IncomingBroadcastPayload.sample1
+        let contactEvent = ContactEvent(broadcastPayload: payload)
         let contactEventRepository = ContactEventRepositoryDouble(contactEvents: [contactEvent])
         let session = SessionDouble()
 
@@ -77,7 +77,7 @@ class ContactEventsUploaderTests: XCTestCase {
             XCTAssertEqual(1, decoded?.contactEvents.count)
 
             let firstEvent = decoded?.contactEvents.first
-            XCTAssertEqual(expectedBroadcastId, firstEvent?.encryptedRemoteContactId)
+            XCTAssertEqual(payload, firstEvent?.broadcastPayload)
         default:
             XCTFail("Expected a patch request but got \(request.method)")
         }
@@ -89,8 +89,8 @@ class ContactEventsUploaderTests: XCTestCase {
             diagnosis: SelfDiagnosis(type: .initial, symptoms: [], startDate: Date()),
             registration: registration
         )
-        let expectedBroadcastId = "opaque bytes that only the server can decrypt".data(using: .utf8)!
-        let contactEvent = ContactEvent(encryptedRemoteContactId: expectedBroadcastId)
+        let payload = IncomingBroadcastPayload.sample1
+        let contactEvent = ContactEvent(broadcastPayload: payload)
         let contactEventRepository = ContactEventRepositoryDouble(contactEvents: [contactEvent])
         let session = SessionDouble()
 
@@ -111,8 +111,8 @@ class ContactEventsUploaderTests: XCTestCase {
             diagnosis: SelfDiagnosis(type: .initial, symptoms: [], startDate: Date()),
             registration: registration
         )
-        let expectedBroadcastId = "opaque bytes that only the server can decrypt".data(using: .utf8)!
-        let contactEvent = ContactEvent(encryptedRemoteContactId: expectedBroadcastId)
+        let payload = IncomingBroadcastPayload.sample1
+        let contactEvent = ContactEvent(broadcastPayload: payload)
         let contactEventRepository = ContactEventRepositoryDouble(contactEvents: [contactEvent])
         let session = SessionDouble()
 

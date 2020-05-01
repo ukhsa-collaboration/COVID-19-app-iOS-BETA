@@ -18,8 +18,8 @@ extension CBPeripheral: BTLEPeripheral {
 }
 
 protocol BTLEListenerDelegate {
-    func btleListener(_ listener: BTLEListener, didFind sonarId: Data, forPeripheral peripheral: BTLEPeripheral)
-    func btleListener(_ listener: BTLEListener, didReadRSSI RSSI: Int, forPeripheral peripheral: BTLEPeripheral)
+    func btleListener(_ listener: BTLEListener, didFind broadcastPayload: IncomingBroadcastPayload, for peripheral: BTLEPeripheral)
+    func btleListener(_ listener: BTLEListener, didReadRSSI RSSI: Int, for peripheral: BTLEPeripheral)
 }
 
 protocol BTLEListenerStateDelegate {
@@ -213,7 +213,7 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
         case (let data?) where characteristic.uuid == Environment.sonarIdCharacteristicUUID:
             if data.count == BroadcastPayload.length {
                 logger.info("read identity from peripheral \(peripheral.identifierWithName): \(data)")
-                delegate?.btleListener(self, didFind: data, forPeripheral: peripheral)
+                delegate?.btleListener(self, didFind: IncomingBroadcastPayload(data: data), for: peripheral)
             } else {
                 logger.info("no identity ready from peripheral \(peripheral.identifierWithName)")
             }
@@ -244,7 +244,7 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
         }
 
         logger.info("read RSSI for \(peripheral.identifierWithName): \(RSSI)")
-        delegate?.btleListener(self, didReadRSSI: RSSI.intValue, forPeripheral: peripheral)
+        delegate?.btleListener(self, didReadRSSI: RSSI.intValue, for: peripheral)
         readRSSIAndSendKeepalive()
     }
 

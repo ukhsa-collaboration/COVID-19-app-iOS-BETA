@@ -11,9 +11,9 @@ import Logging
 
 protocol ContactEventRepositoryDelegate {
     
-    func repository(_ repository: ContactEventRepository, didRecordBroadcastId broadcastId: Data, forPeripheral peripheral: BTLEPeripheral)
+    func repository(_ repository: ContactEventRepository, didRecord broadcastPayload: IncomingBroadcastPayload, for peripheral: BTLEPeripheral)
     
-    func repository(_ repository: ContactEventRepository, didRecordRSSI RSSI: Int, forPeripheral peripheral: BTLEPeripheral)
+    func repository(_ repository: ContactEventRepository, didRecordRSSI RSSI: Int, for peripheral: BTLEPeripheral)
 
 }
 
@@ -62,24 +62,20 @@ extension PlistPersister: ContactEventPersister where K == UUID, V == ContactEve
         remove(through: expiryDate)
     }
     
-    func btleListener(_ listener: BTLEListener, didFind remoteEncryptedBroadcastId: Data, forPeripheral peripheral: BTLEPeripheral) {
-        guard remoteEncryptedBroadcastId.count > 0 else {
-            return
-        }
-        
+    func btleListener(_ listener: BTLEListener, didFind broadcastPayload: IncomingBroadcastPayload, for peripheral: BTLEPeripheral) {
         if persister.items[peripheral.identifier] == nil {
             persister.items[peripheral.identifier] = ContactEvent()
         }
-        persister.items[peripheral.identifier]?.encryptedRemoteContactId = remoteEncryptedBroadcastId
-        delegate?.repository(self, didRecordBroadcastId: remoteEncryptedBroadcastId, forPeripheral: peripheral)
+        persister.items[peripheral.identifier]?.broadcastPayload = broadcastPayload
+        delegate?.repository(self, didRecord: broadcastPayload, for: peripheral)
     }
     
-    func btleListener(_ listener: BTLEListener, didReadRSSI RSSI: Int, forPeripheral peripheral: BTLEPeripheral) {
+    func btleListener(_ listener: BTLEListener, didReadRSSI RSSI: Int, for peripheral: BTLEPeripheral) {
         if persister.items[peripheral.identifier] == nil {
             persister.items[peripheral.identifier] = ContactEvent()
         }
         persister.items[peripheral.identifier]?.recordRSSI(Int8(RSSI))
-        delegate?.repository(self, didRecordRSSI: RSSI, forPeripheral: peripheral)
+        delegate?.repository(self, didRecordRSSI: RSSI, for: peripheral)
     }
 
 }
