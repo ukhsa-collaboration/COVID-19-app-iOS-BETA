@@ -190,11 +190,13 @@ class RemoteNotificationManagerTests: TestCase {
             dispatcher: dispatcherDouble
         )
 
+        var backgroundFetchResult: UIBackgroundFetchResult?
         ackerDouble.ackResult = true
-        notificationManager.handleNotification(userInfo: ["acknowledgmentUrl": "https://example.com/ack"]) { _ in }
+        notificationManager.handleNotification(userInfo: ["acknowledgmentUrl": "https://example.com/ack"]) { backgroundFetchResult = $0 }
 
         XCTAssertEqual(ackerDouble.userInfo?["acknowledgmentUrl"] as? String, "https://example.com/ack")
         XCTAssertFalse(dispatcherDouble.handledNotification)
+        XCTAssertEqual(backgroundFetchResult, .noData)
     }
 
 }

@@ -74,7 +74,6 @@ class ConcreteRemoteNotificationManager: NSObject, RemoteNotificationManager {
     func configure() {
         firebase.configure()
         messagingFactory().delegate = self
-        userNotificationCenter.delegate = self
     }
     
     func registerHandler(forType type: RemoteNotificationType, handler: @escaping RemoteNotificationHandler) {
@@ -86,6 +85,9 @@ class ConcreteRemoteNotificationManager: NSObject, RemoteNotificationManager {
     }
 
     func requestAuthorization(completion: @escaping (Result<Bool, Error>) -> Void) {
+        // This should probably be moved elsewhere, since this
+        // actually doesn't have anything to do with *remote*
+        // notifications.
         userNotificationCenter.requestAuthorization(
             options: [.alert, .badge, .sound]
         ) { granted, error in
@@ -103,19 +105,9 @@ class ConcreteRemoteNotificationManager: NSObject, RemoteNotificationManager {
 
         if !alreadyAcked {
             dispatcher.handleNotification(userInfo: userInfo, completionHandler: completionHandler)
+        } else {
+            completionHandler(.noData)
         }
-    }
-}
-
-extension ConcreteRemoteNotificationManager: UNUserNotificationCenterDelegate {
-
-    // This only happens when we are in the foregrond
-    func userNotificationCenter(
-        _ center: UNUserNotificationCenter,
-        willPresent notification: UNNotification,
-        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
-    ) {
-        handleNotification(userInfo: notification.request.content.userInfo) {_ in }
     }
 }
 
