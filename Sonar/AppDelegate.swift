@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     #warning("Replace with a `PublicKeyValidator` configured from the environment.")
     let trustValidator = DefaultTrustValidating()
     
-    lazy var monitor: AppMonitoring = AppCenterMonitoring()
+    lazy var monitor: AppMonitoring = AppCenterMonitor.shared
     
     lazy var urlSession: Session = URLSession(trustValidator: trustValidator)
 
