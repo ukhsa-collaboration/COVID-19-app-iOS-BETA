@@ -17,11 +17,11 @@ struct Environment {
     }
 
     static let apiEndpoint = "<%= api_endpoint %>"
+    static let appCenterKey = "<%= app_center_key %>"
     static let sonarHeaderValue = "<%= sonar_header_value %>"
     static let sonarServiceUUID = CBUUID(string: "<%= sonar_service_uuid %>")
     static let sonarIdCharacteristicUUID = CBUUID(string: "<%= sonar_id_characteristic_uuid %>")
     static let keepaliveCharacteristicUUID = CBUUID(string: "<%= sonar_keepalive_characteristic_uuid %>")
-    static let appCenterKey = ""
 
     <% if defined? debug %>
     static let debug: Debug? = Debug(

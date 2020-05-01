@@ -93,9 +93,8 @@ iOSInjectionProject/
 # Mac OS X
 .DS_Store
 
-# Don't check in configurations for any environment
-/*.xcconfig
-/Sonar/Environment.swift
+# Don't check in secrets
+/.secret
 
 !/Sonar.xcconfig
 

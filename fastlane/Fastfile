@@ -54,11 +54,13 @@ platform :ios do
     )
 
     Dir.chdir ".." do
-      File.write("Sonar.xcconfig", <<~XCCONFIG)
+      Dir.mkdir ".secret"
+
+      File.write(".secret/Sonar.xcconfig", <<~XCCONFIG)
         #include "Sonar/Environments/#{sonar_env}.xcconfig"
       XCCONFIG
-      sh "./bin/make-environment <<< $ENVIRONMENT_JSON_#{sonar_env.upcase} > Sonar/Environment.swift"
-      FileUtils.cp "Sonar/Environments/GoogleService-Info.#{sonar_env}.plist", "Sonar/GoogleService-Info.plist"
+      sh "./bin/make-environment <<< $ENVIRONMENT_JSON_#{sonar_env.upcase} > .secret/Environment.swift"
+      File.write(".secret/GoogleService-Info.plist", ENV.fetch("GOOGLE_SERVICE_INFO_PLIST_#{sonar_env.upcase}"))
     end
 
     build_app(

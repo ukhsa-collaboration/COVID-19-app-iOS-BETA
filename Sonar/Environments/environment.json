@@ -1,5 +1,6 @@
 {
   "api_endpoint": "https://sonar.example.com",
+  "app_center_key": "an-api-key",
   "sonar_header_value": "a-header-value",
   "sonar_service_uuid": "an-uuid",
   "sonar_id_characteristic_uuid": "another-uuid",

@@ -147,7 +147,6 @@
 		AEC6A7BE241BD82900B0237A /* LogoStrapline.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEC6A7BD241BD82900B0237A /* LogoStrapline.xib */; };
 		F600A60224297A8E0038DF57 /* RegistrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F600A60124297A8E0038DF57 /* RegistrationRequest.swift */; };
 		F600A60424297C010038DF57 /* RegistrationRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F600A60324297C010038DF57 /* RegistrationRequestTests.swift */; };
-		F604975F2451F9CD002B8503 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F604975E2451F9CD002B8503 /* Environment.swift */; };
 		F60497672452415F002B8503 /* ContactEventsUploaderDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60497662452415F002B8503 /* ContactEventsUploaderDouble.swift */; };
 		F604976924539093002B8503 /* UploadLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = F604976824539093002B8503 /* UploadLog.swift */; };
 		F604976B24539F6C002B8503 /* UploadLogsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F604976A24539F6C002B8503 /* UploadLogsViewController.swift */; };
@@ -160,6 +159,9 @@
 		F616959F2458A2DA006AABE3 /* AcknowledgmentRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F616959E2458A2DA006AABE3 /* AcknowledgmentRequest.swift */; };
 		F61695A12458B3C0006AABE3 /* StatusNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61695A02458B3C0006AABE3 /* StatusNotificationHandler.swift */; };
 		F61695A32458B556006AABE3 /* StatusNotificationHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61695A22458B556006AABE3 /* StatusNotificationHandlerTests.swift */; };
+		F618A564245C682500D89517 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F618A561245C682500D89517 /* Environment.swift */; };
+		F618A565245C682500D89517 /* Sonar.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F618A562245C682500D89517 /* Sonar.xcconfig */; };
+		F618A566245C682500D89517 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F618A563245C682500D89517 /* GoogleService-Info.plist */; };
 		F62F857F2451051C006580A8 /* ContactEventsUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62F857E2451051C006580A8 /* ContactEventsUploader.swift */; };
 		F62F858124510716006580A8 /* ContactEventsUploaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62F858024510716006580A8 /* ContactEventsUploaderTests.swift */; };
 		F62F858524510923006580A8 /* SessionDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62F858424510923006580A8 /* SessionDouble.swift */; };
@@ -175,7 +177,6 @@
 		F652F72C244A74E900D97950 /* StartDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652F72B244A74E900D97950 /* StartDateViewController.swift */; };
 		F652F72E244E472E00D97950 /* SymptomsPromptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652F72D244E472E00D97950 /* SymptomsPromptViewController.swift */; };
 		F652F730244E4AAD00D97950 /* DrawerPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652F72F244E4AAD00D97950 /* DrawerPresentation.swift */; };
-		F66CC927244F6340001399D4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F66CC926244F6340001399D4 /* GoogleService-Info.plist */; };
 		F673FBB42457A89E00D96C50 /* SymptomsSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F673FBB32457A89E00D96C50 /* SymptomsSummaryViewController.swift */; };
 		F67A2291242AA35C002254B6 /* SecureRegistrationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A2290242AA35B002254B6 /* SecureRegistrationStorage.swift */; };
 		F67A2293242AA370002254B6 /* SecureRegistrationStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */; };
@@ -411,7 +412,6 @@
 		AEC6A7BD241BD82900B0237A /* LogoStrapline.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogoStrapline.xib; sourceTree = "<group>"; };
 		F600A60124297A8E0038DF57 /* RegistrationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationRequest.swift; sourceTree = "<group>"; };
 		F600A60324297C010038DF57 /* RegistrationRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationRequestTests.swift; sourceTree = "<group>"; };
-		F604975E2451F9CD002B8503 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		F60497602451FA42002B8503 /* Environment.swift.erb */ = {isa = PBXFileReference; lastKnownFileType = text; path = Environment.swift.erb; sourceTree = "<group>"; };
 		F604976224521574002B8503 /* Sonar.xcconfig.sample */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Sonar.xcconfig.sample; sourceTree = "<group>"; };
 		F6049764245215A3002B8503 /* environment.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = environment.json; sourceTree = "<group>"; };
@@ -428,6 +428,9 @@
 		F616959E2458A2DA006AABE3 /* AcknowledgmentRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgmentRequest.swift; sourceTree = "<group>"; };
 		F61695A02458B3C0006AABE3 /* StatusNotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusNotificationHandler.swift; sourceTree = "<group>"; };
 		F61695A22458B556006AABE3 /* StatusNotificationHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusNotificationHandlerTests.swift; sourceTree = "<group>"; };
+		F618A561245C682500D89517 /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		F618A562245C682500D89517 /* Sonar.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Sonar.xcconfig; sourceTree = "<group>"; };
+		F618A563245C682500D89517 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F62F857E2451051C006580A8 /* ContactEventsUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventsUploader.swift; sourceTree = "<group>"; };
 		F62F858024510716006580A8 /* ContactEventsUploaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventsUploaderTests.swift; sourceTree = "<group>"; };
 		F62F858424510923006580A8 /* SessionDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDouble.swift; sourceTree = "<group>"; };
@@ -443,14 +446,11 @@
 		F652F72B244A74E900D97950 /* StartDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDateViewController.swift; sourceTree = "<group>"; };
 		F652F72D244E472E00D97950 /* SymptomsPromptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomsPromptViewController.swift; sourceTree = "<group>"; };
 		F652F72F244E4AAD00D97950 /* DrawerPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerPresentation.swift; sourceTree = "<group>"; };
-		F66CC926244F6340001399D4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		F66CC928244F63F3001399D4 /* GoogleService-Info.internal.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.internal.plist"; sourceTree = "<group>"; };
 		F673FBB32457A89E00D96C50 /* SymptomsSummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomsSummaryViewController.swift; sourceTree = "<group>"; };
 		F67A2290242AA35B002254B6 /* SecureRegistrationStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRegistrationStorage.swift; sourceTree = "<group>"; };
 		F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRegistrationStorageTests.swift; sourceTree = "<group>"; };
 		F67C5153243E4D2F008E2945 /* AnswerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerButton.swift; sourceTree = "<group>"; };
 		F67C5158243E7C1E008E2945 /* SubmitSymptomsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitSymptomsViewControllerTests.swift; sourceTree = "<group>"; };
-		F68B89E9243B9FDB00F369A9 /* Sonar.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Sonar.xcconfig; sourceTree = "<group>"; };
 		F68B89EC243CFF2600F369A9 /* SelfDiagnosis.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SelfDiagnosis.storyboard; sourceTree = "<group>"; };
 		F68BFBF6242ACD17008EE68F /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		F68D8FE324476F0B008BAAAA /* beta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = beta.xcconfig; sourceTree = "<group>"; };
@@ -465,7 +465,6 @@
 		F694B1C5245B8B9D00C6A5D1 /* statusContent.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = statusContent.json; sourceTree = "<group>"; };
 		F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitSymptomsViewController.swift; sourceTree = "<group>"; };
 		F6CA2818242E41F700F8DC55 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		F6CBA499244F6E2C00D20610 /* GoogleService-Info.production.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.production.plist"; sourceTree = "<group>"; };
 		F6CC2CA8242BC7FC0079432B /* RemoteNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteNotificationManager.swift; sourceTree = "<group>"; };
 		F6CC2CAB242BCD0D0079432B /* RemoteNotificationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteNotificationManagerTests.swift; sourceTree = "<group>"; };
 		F6EEC3B72448DD2400172820 /* SelfDiagnosis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfDiagnosis.swift; sourceTree = "<group>"; };
@@ -501,7 +500,6 @@
 		F78CEB59242B7EC0002254AD /* Protobuf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Protobuf.framework; path = Frameworks/Protobuf.framework; sourceTree = "<group>"; };
 		F78CEB64242B8137002254AD /* Firebase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Firebase.h; path = Frameworks/Firebase.framework/Headers/Firebase.h; sourceTree = SOURCE_ROOT; };
 		F78CEB66242B819E002254AD /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; name = module.modulemap; path = Frameworks/Firebase.framework/Modules/module.modulemap; sourceTree = SOURCE_ROOT; };
-		F78CEB67242B8C2B002254AD /* GoogleService-Info.beta.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.beta.plist"; sourceTree = "<group>"; };
 		F78CEB69242B8D3E002254AD /* FirebaseInstanceID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseInstanceID.framework; path = Frameworks/FirebaseInstanceID.framework; sourceTree = "<group>"; };
 		F78CEB6B242B8D84002254AD /* FirebaseInstallations.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseInstallations.framework; path = Frameworks/FirebaseInstallations.framework; sourceTree = "<group>"; };
 		F78CEB6E242B92CF002254AD /* GoogleUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleUtilities.framework; path = Frameworks/GoogleUtilities.framework; sourceTree = "<group>"; };
@@ -829,16 +827,16 @@
 		6FC63C24241641B8007C8BF3 = {
 			isa = PBXGroup;
 			children = (
-				068B8AB7245C11C0000EAB4C /* .github */,
-				F68B89E9243B9FDB00F369A9 /* Sonar.xcconfig */,
 				F6CA2818242E41F700F8DC55 /* README.md */,
+				068B8AB7245C11C0000EAB4C /* .github */,
+				F618A560245C682500D89517 /* .secret */,
+				898BA15A2435E26C00EBD35D /* Configurations */,
 				F78CEB63242B809B002254AD /* Firebase */,
 				6FC63C2F241641B8007C8BF3 /* Sonar */,
 				214209C02422276800C7BFF3 /* SonarTests */,
 				895D9DDF2437383300573D4D /* SonarUITests */,
-				898BA15A2435E26C00EBD35D /* Configurations */,
-				6FC63C2E241641B8007C8BF3 /* Products */,
 				21B3D2E62429115600573061 /* Frameworks */,
+				6FC63C2E241641B8007C8BF3 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -857,10 +855,8 @@
 			children = (
 				F78CEB74242BAC83002254AD /* Sonar.entitlements */,
 				F78CEB53242B7E18002254AD /* Sonar-Bridging-Header.h */,
-				F66CC926244F6340001399D4 /* GoogleService-Info.plist */,
 				6FC63C3C241641BA007C8BF3 /* Info.plist */,
 				6FC63C30241641B8007C8BF3 /* AppDelegate.swift */,
-				F604975E2451F9CD002B8503 /* Environment.swift */,
 				214209B9242216B700C7BFF3 /* Persistence.swift */,
 				21E5051424448D880065C69B /* PlistPersister.swift */,
 				0997D055243BDEEC0067346C /* RootViewController.swift */,
@@ -877,8 +873,8 @@
 				6FC63C39241641BA007C8BF3 /* LaunchScreen.storyboard */,
 				097C94C7245B8086008A9695 /* Localization */,
 				89F06B2D2434A5A50074C612 /* Logging */,
-				214209D3242399DD00C7BFF3 /* Networking */,
 				8983E615245867BC001F2011 /* Monitoring */,
+				214209D3242399DD00C7BFF3 /* Networking */,
 				F6CC2CA7242BC7D90079432B /* Notifications */,
 				F6F05A212433BE9600FF4B72 /* Onboarding */,
 				F604977024549B49002B8503 /* Pilot */,
@@ -1017,6 +1013,16 @@
 			path = Pilot;
 			sourceTree = "<group>";
 		};
+		F618A560245C682500D89517 /* .secret */ = {
+			isa = PBXGroup;
+			children = (
+				F618A561245C682500D89517 /* Environment.swift */,
+				F618A562245C682500D89517 /* Sonar.xcconfig */,
+				F618A563245C682500D89517 /* GoogleService-Info.plist */,
+			);
+			path = .secret;
+			sourceTree = "<group>";
+		};
 		F67C5157243E7BD5008E2945 /* SelfDiagnosis */ = {
 			isa = PBXGroup;
 			children = (
@@ -1045,9 +1051,6 @@
 			children = (
 				F60497602451FA42002B8503 /* Environment.swift.erb */,
 				F6049764245215A3002B8503 /* environment.json */,
-				F78CEB67242B8C2B002254AD /* GoogleService-Info.beta.plist */,
-				F66CC928244F63F3001399D4 /* GoogleService-Info.internal.plist */,
-				F6CBA499244F6E2C00D20610 /* GoogleService-Info.production.plist */,
 				F604976224521574002B8503 /* Sonar.xcconfig.sample */,
 				F68D8FE324476F0B008BAAAA /* beta.xcconfig */,
 				F68D8FE524477031008BAAAA /* internal.xcconfig */,
@@ -1320,7 +1323,6 @@
 			files = (
 				F694B1C6245B8B9D00C6A5D1 /* statusContent.json in Resources */,
 				F60497792454A40B002B8503 /* LinkingId.storyboard in Resources */,
-				F66CC927244F6340001399D4 /* GoogleService-Info.plist in Resources */,
 				F758B8C4242CC0EE003AE16D /* Status.storyboard in Resources */,
 				6FC63C3B241641BA007C8BF3 /* LaunchScreen.storyboard in Resources */,
 				AEC6A7BE241BD82900B0237A /* LogoStrapline.xib in Resources */,
@@ -1328,9 +1330,11 @@
 				8947F833245AD97A00C4F1BB /* Settings.bundle in Resources */,
 				F758B8BE242CB856003AE16D /* Localizable.strings in Resources */,
 				6FC63C38241641BA007C8BF3 /* Assets.xcassets in Resources */,
+				F618A566245C682500D89517 /* GoogleService-Info.plist in Resources */,
 				895D9E462437458700573D4D /* AppIcon.xcassets in Resources */,
 				F68B89ED243CFF2600F369A9 /* SelfDiagnosis.storyboard in Resources */,
 				F6F05A322434310200FF4B72 /* Onboarding.storyboard in Resources */,
+				F618A565245C682500D89517 /* Sonar.xcconfig in Resources */,
 				F70CB81B2450CFA900ED6E7F /* OnboardingLogoStrapline.xib in Resources */,
 				098ED481242E745F0029B729 /* Debug.storyboard in Resources */,
 			);
@@ -1485,6 +1489,7 @@
 				21C09A8F2437B99F00368203 /* BluetoothNursery.swift in Sources */,
 				0986EFB5244518FE008D0E1D /* ButtonWithDynamicType.swift in Sources */,
 				F64D76F724577D9600B1D495 /* StatusProvider.swift in Sources */,
+				F618A564245C682500D89517 /* Environment.swift in Sources */,
 				8983E619245867CF001F2011 /* AppMonitoring.swift in Sources */,
 				097C94C9245B8146008A9695 /* LocaleProvider.swift in Sources */,
 				F6CC2CA9242BC7FC0079432B /* RemoteNotificationManager.swift in Sources */,
@@ -1555,7 +1560,6 @@
 				89F06B312434AABF0074C612 /* NoOpLogHandler.swift in Sources */,
 				F6F05A3024340E5400FF4B72 /* OnboardingViewController.swift in Sources */,
 				F652F72C244A74E900D97950 /* StartDateViewController.swift in Sources */,
-				F604975F2451F9CD002B8503 /* Environment.swift in Sources */,
 				090DEE10244F8BF600268170 /* BluetoothPermissionDeniedViewController.swift in Sources */,
 				89074B8524378A0D00D67777 /* UITestPayload.swift in Sources */,
 				F6AB2F20243D359F00386D6B /* SubmitSymptomsViewController.swift in Sources */,
@@ -1639,14 +1643,14 @@
 		};
 		6FC63C40241641BA007C8BF3 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F68B89E9243B9FDB00F369A9 /* Sonar.xcconfig */;
+			baseConfigurationReference = F618A562245C682500D89517 /* Sonar.xcconfig */;
 			buildSettings = {
 			};
 			name = Debug;
 		};
 		6FC63C41241641BA007C8BF3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F68B89E9243B9FDB00F369A9 /* Sonar.xcconfig */;
+			baseConfigurationReference = F618A562245C682500D89517 /* Sonar.xcconfig */;
 			buildSettings = {
 			};
 			name = Release;
