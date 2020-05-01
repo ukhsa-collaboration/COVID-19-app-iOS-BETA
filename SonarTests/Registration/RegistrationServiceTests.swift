@@ -158,6 +158,7 @@ class RegistrationServiceTests: TestCase {
         let session = SessionDouble()
         let persistence = PersistenceDouble()
         let notificationCenter = NotificationCenter()
+        let monitor = AppMonitoringDouble()
         let remoteNotificationDispatcher = RemoteNotificationDispatcher(
             notificationCenter: notificationCenter,
             userNotificationCenter: UserNotificationCenterDouble()
@@ -169,7 +170,8 @@ class RegistrationServiceTests: TestCase {
             reminderScheduler: RegistrationReminderSchedulerDouble(),
             remoteNotificationDispatcher: remoteNotificationDispatcher,
             notificationCenter: notificationCenter,
-            monitor: AppMonitoringDouble(), timeoutQueue: QueueDouble()
+            monitor: monitor,
+            timeoutQueue: QueueDouble()
         )
         let failedObserver = NotificationObserverDouble(notificationCenter: notificationCenter, notificationName: RegistrationFailedNotification)
 
@@ -179,12 +181,14 @@ class RegistrationServiceTests: TestCase {
         session.executeCompletion!(Result<(), Error>.failure(ErrorForTest()))
 
         XCTAssertNotNil(failedObserver.lastNotification)
+        XCTAssertEqual(monitor.detectedEvents, [.registrationFailed])
     }
     
     func testRegistration_notifiesOnSecondRequestFailure() throws {
         let session = SessionDouble()
         let persistence = PersistenceDouble(partialPostcode: "AB90")
         let notificationCenter = NotificationCenter()
+        let monitor = AppMonitoringDouble()
         let remoteNotificationDispatcher = RemoteNotificationDispatcher(
             notificationCenter: notificationCenter,
             userNotificationCenter: UserNotificationCenterDouble()
@@ -196,7 +200,7 @@ class RegistrationServiceTests: TestCase {
             reminderScheduler: RegistrationReminderSchedulerDouble(),
             remoteNotificationDispatcher: remoteNotificationDispatcher,
             notificationCenter: notificationCenter,
-            monitor: AppMonitoringDouble(),
+            monitor: monitor,
             timeoutQueue: QueueDouble()
         )
         let failedObserver = NotificationObserverDouble(notificationCenter: notificationCenter, notificationName: RegistrationFailedNotification)
@@ -215,6 +219,7 @@ class RegistrationServiceTests: TestCase {
         session.executeCompletion!(Result<ConfirmRegistrationResponse, Error>.failure(ErrorForTest()))
 
         XCTAssertNotNil(failedObserver.lastNotification)
+        XCTAssertEqual(monitor.detectedEvents, [.registrationFailed])
     }
     
     func testRegistration_cleansUpAfterInitialRequestFailure() throws {
@@ -253,6 +258,7 @@ class RegistrationServiceTests: TestCase {
         let session = SessionDouble()
         let persistence = PersistenceDouble()
         let notificationCenter = NotificationCenter()
+        let monitor = AppMonitoringDouble()
         let remoteNotificationDispatcher = RemoteNotificationDispatcher(
             notificationCenter: notificationCenter,
             userNotificationCenter: UserNotificationCenterDouble()
@@ -266,7 +272,7 @@ class RegistrationServiceTests: TestCase {
             reminderScheduler: RegistrationReminderSchedulerDouble(),
             remoteNotificationDispatcher: remoteNotificationDispatcher,
             notificationCenter: notificationCenter,
-            monitor: AppMonitoringDouble(),
+            monitor: monitor,
             timeoutQueue: queueDouble
         )
 
@@ -275,6 +281,7 @@ class RegistrationServiceTests: TestCase {
         queueDouble.scheduledBlock?()
         
         XCTAssertNotNil(failedObserver.lastNotification)
+        XCTAssertEqual(monitor.detectedEvents, [.registrationFailed])
     }
     
     func testRegistration_canSucceedAfterTimeout() {
@@ -472,6 +479,7 @@ class RegistrationServiceTests: TestCase {
         let session = SessionDouble()
         let persistence = PersistenceDouble(partialPostcode: "AB90")
         let notificationCenter = NotificationCenter()
+        let monitor = AppMonitoringDouble()
         let remoteNotificationDispatcher = RemoteNotificationDispatcher(
             notificationCenter: notificationCenter,
             userNotificationCenter: UserNotificationCenterDouble()
@@ -483,7 +491,7 @@ class RegistrationServiceTests: TestCase {
             reminderScheduler: RegistrationReminderSchedulerDouble(),
             remoteNotificationDispatcher: remoteNotificationDispatcher,
             notificationCenter: notificationCenter,
-            monitor: AppMonitoringDouble(),
+            monitor: monitor,
             timeoutQueue: queueDouble
         )
     
@@ -509,6 +517,11 @@ class RegistrationServiceTests: TestCase {
         XCTAssertNil(completedObserver.lastNotification)
         XCTAssertNotNil(failedObserver.lastNotification)
         XCTAssertNil(persistence.registration)
+        
+        #warning("This is probably not what we want.")
+        // I don’t believe the issue is just for the metrics, since we’re “failing” multiple times.
+        // Review please…
+        XCTAssertEqual(monitor.detectedEvents, [.registrationFailed, .registrationFailed])
     }
     
     func testSchedulesRemindersAtStart() {

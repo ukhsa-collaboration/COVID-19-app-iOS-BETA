@@ -25,6 +25,7 @@ class ConcreteRegistrationService: RegistrationService {
     private let reminderScheduler: RegistrationReminderScheduler
     private let remoteNotificationDispatcher: RemoteNotificationDispatching
     private let notificationCenter: NotificationCenter
+    private let monitor: AppMonitoring
     private let timeoutQueue: TestableQueue
     private var remoteNotificationCompletionHandler: RemoteNotificationCompletionHandler?
     
@@ -42,6 +43,7 @@ class ConcreteRegistrationService: RegistrationService {
         self.reminderScheduler = reminderScheduler
         self.notificationCenter = notificationCenter
         self.remoteNotificationDispatcher = remoteNotificationDispatcher
+        self.monitor = monitor
         self.timeoutQueue = timeoutQueue
         
         // when our backend sends us the activation code in a push notification
@@ -162,6 +164,7 @@ class ConcreteRegistrationService: RegistrationService {
         logger.error("Registration failed: \(error)")
         self.remoteNotificationCompletionHandler?(.failed)
         notificationCenter.post(name: RegistrationFailedNotification, object: nil)
+        monitor.report(.registrationFailed)
     }
 }
 
