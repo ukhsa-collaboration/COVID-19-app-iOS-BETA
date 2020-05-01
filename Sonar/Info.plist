@@ -23,9 +23,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSBluetoothAlwaysUsageDescription</key>
-	<string>Bluetooth is used to determine proximity with other citizens, allowing us to detect those who have been close together</string>
+	<string>You need to turn on bluetooth so this app can understand when your phone is near another phone with this app.</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>Bluetooth is used to determine proximity with other citizens, allowing us to detect those who have been close together</string>
+	<string>You need to turn on bluetooth so this app can understand when your phone is near another phone with this app.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>bluetooth-central</string>
