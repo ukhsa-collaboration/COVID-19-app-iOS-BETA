@@ -105,7 +105,7 @@ class ConcreteRegistrationService: RegistrationService {
 
             case .failure(let error):
                 logger.error("Error making first registration request: \(error.localizedDescription)")
-                self.fail(withError: error, reason: .registrationCallFailed(statusCode: nil))
+                self.fail(withError: error, reason: .registrationCallFailed(statusCode: error.statusCode))
             }
         }
     }
@@ -153,7 +153,7 @@ class ConcreteRegistrationService: RegistrationService {
                 self.succeed(registration: registration)
             case .failure(let error):
                 logger.error("Error making second registration request: \(error)")
-                self.fail(withError: error, reason: .activationCallFailed(statusCode: nil))
+                self.fail(withError: error, reason: .activationCallFailed(statusCode: error.statusCode))
             }
         }
     }
@@ -178,3 +178,19 @@ fileprivate class RegistrationTimeoutError: Error {
 
 // MARK: - Logging
 private let logger = Logger(label: "Registration")
+
+private extension Error {
+    
+    // TODO: This is relying on untested internals of `URLSession.execute`.
+    // Make this less breakable
+    var statusCode: Int? {
+        let nsError = self as NSError
+        switch nsError.domain {
+        case "RequestErrorDomain":
+            return nsError.code
+        default:
+            return nil
+        }
+    }
+    
+}
