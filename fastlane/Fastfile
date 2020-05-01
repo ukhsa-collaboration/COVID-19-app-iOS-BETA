@@ -54,8 +54,6 @@ platform :ios do
     )
 
     Dir.chdir ".." do
-      Dir.mkdir ".secret"
-
       File.write(".secret/Sonar.xcconfig", <<~XCCONFIG)
         #include "Sonar/Environments/#{sonar_env}.xcconfig"
       XCCONFIG

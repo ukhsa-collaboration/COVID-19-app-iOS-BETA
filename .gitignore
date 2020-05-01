@@ -95,6 +95,7 @@ iOSInjectionProject/
 
 # Don't check in secrets
 /.secret
+!/.secret/.keep
 
 !/Sonar.xcconfig
 
