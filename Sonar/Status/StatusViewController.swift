@@ -114,20 +114,6 @@ class StatusViewController: UIViewController, Storyboarded {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        let readLatestAdviceText: String
-        if statusProvider.status == .blue {
-            readLatestAdviceText = "Read current advice"
-        } else {
-            readLatestAdviceText = "Read what to do next"
-        }
-        readLatestAdviceLabel.attributedText = NSAttributedString(
-            string: readLatestAdviceText.localized,
-            attributes: [
-                .underlineStyle: NSUnderlineStyle.single.rawValue,
-                .foregroundColor: UIColor(named: "NHS Link")!,
-                .font: UIFont.preferredFont(forTextStyle: .body),
-            ]
-        )
 
         if persistence.registration != nil {
             showRegisteredStatus()
@@ -190,6 +176,21 @@ class StatusViewController: UIViewController, Storyboarded {
 
     @objc func reload() {
         guard view != nil else { return }
+        
+        let readLatestAdviceText: String
+        if statusProvider.status == .blue {
+            readLatestAdviceText = "Read current advice"
+        } else {
+            readLatestAdviceText = "Read what to do next"
+        }
+        readLatestAdviceLabel.attributedText = NSAttributedString(
+            string: readLatestAdviceText.localized,
+            attributes: [
+                .underlineStyle: NSUnderlineStyle.single.rawValue,
+                .foregroundColor: UIColor(named: "NHS Link")!,
+                .font: UIFont.preferredFont(forTextStyle: .body),
+            ]
+        )
         
         switch statusProvider.status {
             case .blue:
