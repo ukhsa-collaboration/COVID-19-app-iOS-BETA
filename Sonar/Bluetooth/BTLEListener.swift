@@ -20,6 +20,7 @@ extension CBPeripheral: BTLEPeripheral {
 protocol BTLEListenerDelegate {
     func btleListener(_ listener: BTLEListener, didFind broadcastPayload: IncomingBroadcastPayload, for peripheral: BTLEPeripheral)
     func btleListener(_ listener: BTLEListener, didReadRSSI RSSI: Int, for peripheral: BTLEPeripheral)
+    func btleListener(_ listener: BTLEListener, didReadTxPower txPower: Int, for peripheral: BTLEPeripheral)
 }
 
 protocol BTLEListenerStateDelegate {
@@ -114,7 +115,12 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
     }
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        logger.info("peripheral \(peripheral.identifierWithName) discovered at RSSI = \(RSSI)")
+        if let txPower = (advertisementData[CBAdvertisementDataTxPowerLevelKey] as? NSNumber)?.intValue {
+            logger.info("peripheral \(peripheral.identifierWithName) discovered with RSSI = \(RSSI), txPower = \(txPower)")
+            delegate?.btleListener(self, didReadTxPower: txPower, for: peripheral)
+        } else {
+            logger.info("peripheral \(peripheral.identifierWithName) discovered with RSSI = \(RSSI)")            
+        }
         
         if peripherals[peripheral.identifier] == nil || peripherals[peripheral.identifier]!.state != .connected {
             peripherals[peripheral.identifier] = peripheral

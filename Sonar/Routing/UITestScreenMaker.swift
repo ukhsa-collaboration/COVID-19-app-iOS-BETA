@@ -162,6 +162,9 @@ private class NoOpContactEventRepository: ContactEventRepository {
     
     func btleListener(_ listener: BTLEListener, didReadRSSI RSSI: Int, for peripheral: BTLEPeripheral) {
     }
+    
+    func btleListener(_ listener: BTLEListener, didReadTxPower txPower: Int, for peripheral: BTLEPeripheral) {
+    }
         
     func reset() {
     }

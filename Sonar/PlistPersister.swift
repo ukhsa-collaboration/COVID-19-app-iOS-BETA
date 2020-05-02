@@ -58,7 +58,6 @@ class PlistPersister<K: Hashable & Codable, V: Codable> {
         } catch {
             logger.critical("error reading items from plist, did the format change? \(error)")
             items = [:]
-//            fatalError()
         }
     }
 
@@ -77,4 +76,4 @@ class PlistPersister<K: Hashable & Codable, V: Codable> {
 
 }
 
-private let logger = Logger(label: "PlistPersister")
+private let logger = Logger(label: "ContactEvents")

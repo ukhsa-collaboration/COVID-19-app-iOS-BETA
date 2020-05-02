@@ -70,6 +70,13 @@ extension PlistPersister: ContactEventPersister where K == UUID, V == ContactEve
         delegate?.repository(self, didRecord: broadcastPayload, for: peripheral)
     }
     
+    func btleListener(_ listener: BTLEListener, didReadTxPower txPower: Int, for peripheral: BTLEPeripheral) {
+        if persister.items[peripheral.identifier] == nil {
+            persister.items[peripheral.identifier] = ContactEvent()
+        }
+        persister.items[peripheral.identifier]?.txPower = Int8(txPower)
+    }
+    
     func btleListener(_ listener: BTLEListener, didReadRSSI RSSI: Int, for peripheral: BTLEPeripheral) {
         if persister.items[peripheral.identifier] == nil {
             persister.items[peripheral.identifier] = ContactEvent()

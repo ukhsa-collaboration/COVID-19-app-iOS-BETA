@@ -14,7 +14,8 @@ struct ContactEvent: Equatable, Codable {
     }
     
     var broadcastPayload: IncomingBroadcastPayload? = nil
-    
+
+    var txPower: Int8 = 0
     private (set) var timestamp: Date = Date()
     private (set) var rssiValues: [Int8] = []
     private (set) var rssiIntervals: [TimeInterval] = []

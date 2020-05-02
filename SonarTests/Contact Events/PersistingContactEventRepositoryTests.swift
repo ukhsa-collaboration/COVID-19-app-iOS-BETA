@@ -32,6 +32,19 @@ class PersistingContactEventRepositoryTests: XCTestCase {
         repository.delegate = delegate
     }
     
+    func testRecordsTxPowerValuesAgainstCorrectPeripheral() {
+        repository.btleListener(listener, didFind: payload1, for: peripheral1)
+        repository.btleListener(listener, didReadTxPower: 11, for: peripheral1)
+        repository.btleListener(listener, didReadTxPower: 33, for: peripheral3)
+        repository.btleListener(listener, didFind: payload2, for: peripheral2)
+        repository.btleListener(listener, didFind: payload3, for: peripheral3)
+        repository.btleListener(listener, didReadTxPower: 22, for: peripheral2)
+        
+        XCTAssertEqual(repository.contactEvents.first(where: { $0.broadcastPayload == payload1 })?.txPower, 11)
+        XCTAssertEqual(repository.contactEvents.first(where: { $0.broadcastPayload == payload2 })?.txPower, 22)
+        XCTAssertEqual(repository.contactEvents.first(where: { $0.broadcastPayload == payload3 })?.txPower, 33)
+    }
+    
     func testRecordsRSSIValuesAgainstCorrectPeripheral() {
         repository.btleListener(listener, didFind: payload1, for: peripheral1)
 

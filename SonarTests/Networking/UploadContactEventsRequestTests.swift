@@ -32,15 +32,15 @@ class UploadContactEventsRequestTests: XCTestCase {
     
     override func setUp() {
         contactEvents = [
-            ContactEvent(broadcastPayload: payload1, timestamp: timestamp1, rssiValues: [rssi1], rssiIntervals: [10], duration: 0),
-            ContactEvent(broadcastPayload: payload2, timestamp: timestamp2, rssiValues: [rssi2], rssiIntervals: [20], duration: 0),
-            ContactEvent(broadcastPayload: payload3, timestamp: timestamp3, rssiValues: [rssi3], rssiIntervals: [30], duration: 0)
+            ContactEvent(broadcastPayload: payload1, txPower: 11, timestamp: timestamp1, rssiValues: [rssi1], rssiIntervals: [10], duration: 0),
+            ContactEvent(broadcastPayload: payload2, txPower: 22, timestamp: timestamp2, rssiValues: [rssi2], rssiIntervals: [20], duration: 0),
+            ContactEvent(broadcastPayload: payload3, txPower: 33, timestamp: timestamp3, rssiValues: [rssi3], rssiIntervals: [30], duration: 0)
         ]
 
         let registration = Registration(id: sonarId, secretKey: dummyKey, broadcastRotationKey: SecKey.sampleEllipticCurveKey)
         request = UploadContactEventsRequest(
             registration: registration,
-            symptomsTimestamp: Date(),
+            symptomsTimestamp: Date(timeIntervalSince1970: 100),
             contactEvents: contactEvents
         )
     }
@@ -58,68 +58,67 @@ class UploadContactEventsRequestTests: XCTestCase {
         XCTAssertEqual(request.headers["Content-Type"], "application/json")
     }
 
-    /*
     func testBody() throws {
+        // We deliberately assert against the rendered json here as we want to be alerted if
+        // a rename changes our json keys
         let expectedBody =
 """
 {
   "contactEvents" : [
     {
-      "countryCode" : 1,
-      "duration" : 0,
-      "encryptedRemoteContactId" : "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-      "hmacSignature" : "AAAAAAAAAAAAAAAAAAAAAA==",
       "rssiIntervals" : [
         10
       ],
+      "txPowerInProtocol" : 0,
+      "hmacSignature" : "AAAAAAAAAAAAAAAAAAAAAA==",
+      "transmissionTime" : 0,
       "rssiValues" : [
         -11
       ],
-      "timestamp" : 0,
-      "transmissionTime" : 0,
-      "txPowerAdvertised" : 0,
-      "txPowerInProtocol" : 0
+      "duration" : 0,
+      "countryCode" : 1,
+      "encryptedRemoteContactId" : "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+      "txPowerAdvertised" : 11,
+      "timestamp" : 0
     },
     {
-      "countryCode" : 2,
-      "duration" : 0,
-      "encryptedRemoteContactId" : "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-      "hmacSignature" : "AAAAAAAAAAAAAAAAAAAAAA==",
       "rssiIntervals" : [
         20
       ],
+      "txPowerInProtocol" : 0,
+      "hmacSignature" : "AAAAAAAAAAAAAAAAAAAAAA==",
+      "transmissionTime" : 0,
       "rssiValues" : [
         -1
       ],
-      "timestamp" : 10,
-      "transmissionTime" : 0,
-      "txPowerAdvertised" : 0,
-      "txPowerInProtocol" : 0
+      "duration" : 0,
+      "countryCode" : 2,
+      "encryptedRemoteContactId" : "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+      "txPowerAdvertised" : 22,
+      "timestamp" : 10
     },
     {
-      "countryCode" : 3,
-      "duration" : 0,
-      "encryptedRemoteContactId" : "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-      "hmacSignature" : "AAAAAAAAAAAAAAAAAAAAAA==",
       "rssiIntervals" : [
         30
       ],
+      "txPowerInProtocol" : 0,
+      "hmacSignature" : "AAAAAAAAAAAAAAAAAAAAAA==",
+      "transmissionTime" : 0,
       "rssiValues" : [
         -21
       ],
-      "timestamp" : 100,
-      "transmissionTime" : 0,
-      "txPowerAdvertised" : 0,
-      "txPowerInProtocol" : 0
+      "duration" : 0,
+      "countryCode" : 3,
+      "encryptedRemoteContactId" : "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+      "txPowerAdvertised" : 33,
+      "timestamp" : 100
     }
   ],
-  "symptomsTimestamp" : "2020-05-01T13:33:40Z"
+  "symptomsTimestamp" : "1970-01-01T00:01:40Z"
 }
 """.removingAllWhitespacesAndNewlines
         XCTAssertEqual(String(data: request.body!, encoding: .utf8), expectedBody)
     }
-
-*/
 }
 
 extension StringProtocol where Self: RangeReplaceableCollection {
@@ -151,9 +150,3 @@ class RegistrationStorageDouble: SecureRegistrationStorage {
         return PartialRegistration(id: id, secretKey: key)
     }
 }
-
-/*
-{\"contactEvents\":[{\"rssiIntervals\":[10],\"txPowerInProtocol\":0,\"hmacSignature\":\"AAAAAAAAAAAAAAAAAAAAAA==\",\"transmissionTime\":0,\"rssiValues\":[-11],\"duration\":0,\"countryCode\":1,\"encryptedRemoteContactId\":\"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==\",\"txPowerAdvertised\":0,\"timestamp\":0},{\"rssiIntervals\":[20],\"txPowerInProtocol\":0,\"hmacSignature\":\"AAAAAAAAAAAAAAAAAAAAAA==\",\"transmissionTime\":0,\"rssiValues\":[-1],\"duration\":0,\"countryCode\":2,\"encryptedRemoteContactId\":\"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==\",\"txPowerAdvertised\":0,\"timestamp\":10},{\"rssiIntervals\":[30],\"txPowerInProtocol\":0,\"hmacSignature\":\"AAAAAAAAAAAAAAAAAAAAAA==\",\"transmissionTime\":0,\"rssiValues\":[-21],\"duration\":0,\"countryCode\":3,\"encryptedRemoteContactId\":\"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==\",\"txPowerAdvertised\":0,\"timestamp\":100}],\"symptomsTimestamp\":\"2020-05-01T16:01:39Z\"}
- 
- {\"contactEvents\":[{\"countryCode\":1,\"duration\":0,\"encryptedRemoteContactId\":\"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==\",\"hmacSignature\":\"AAAAAAAAAAAAAAAAAAAAAA==\",\"rssiIntervals\":[10],\"rssiValues\":[-11],\"timestamp\":0,\"transmissionTime\":0,\"txPowerAdvertised\":0,\"txPowerInProtocol\":0},{\"countryCode\":2,\"duration\":0,\"encryptedRemoteContactId\":\"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==\",\"hmacSignature\":\"AAAAAAAAAAAAAAAAAAAAAA==\",\"rssiIntervals\":[20],\"rssiValues\":[-1],\"timestamp\":10,\"transmissionTime\":0,\"txPowerAdvertised\":0,\"txPowerInProtocol\":0},{\"countryCode\":3,\"duration\":0,\"encryptedRemoteContactId\":\"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==\",\"hmacSignature\":\"AAAAAAAAAAAAAAAAAAAAAA==\",\"rssiIntervals\":[30],\"rssiValues\":[-21],\"timestamp\":100,\"transmissionTime\":0,\"txPowerAdvertised\":0,\"txPowerInProtocol\":0}],\"symptomsTimestamp\":\"2020-05-01T13:33:40Z\"}
- */
