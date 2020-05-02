@@ -33,12 +33,6 @@ protocol BTLEListener {
 
 class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CBPeripheralDelegate {
 
-    let logger: Logger = {
-        var logger = Logger(label: "BTLE")
-        logger.logLevel = .warning
-        return logger
-    }()
-    
     var broadcaster: BTLEBroadcaster
     var stateDelegate: BTLEListenerStateDelegate?
     var delegate: BTLEListenerDelegate?
@@ -282,4 +276,7 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
 
         return true
     }
+    
+    fileprivate let logger = Logger(label: "BTLE")
+
 }
