@@ -31,10 +31,9 @@ class LiveBTLEDebuggerTableViewController: UITableViewController, ContactEventRe
     // MARK: - ContactEventRepositoryDelegate
     
     func repository(_ repository: ContactEventRepository, didRecord broadcastPayload: IncomingBroadcastPayload, for peripheral: BTLEPeripheral) {
-//        TODO: Fixme when uploads work
-//        if let row = repository.contactEvents.firstIndex(where: { $0.encryptedRemoteContactId == broadcastId }) {
-//            tableView.reloadRows(at: [IndexPath(row: row, section: 2)], with: .fade)
-//        }
+        if let row = repository.contactEvents.firstIndex(where: { $0.encryptedRemoteContactId == broadcastPayload.cryptogram }) {
+            tableView.reloadRows(at: [IndexPath(row: row, section: 2)], with: .fade)
+        }
     }
     
     func repository(_ repository: ContactEventRepository, didRecordRSSI RSSI: Int, for peripheral: BTLEPeripheral) {
