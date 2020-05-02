@@ -98,7 +98,7 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
     }
 
     struct Error: Swift.Error {
-        var localizedDescription: String { "oh no" }
+        var localizedDescription: String { "An unexpected error occurred" }
     }
 
     private func alert(with error: Error) {
