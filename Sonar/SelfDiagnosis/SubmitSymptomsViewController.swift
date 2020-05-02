@@ -53,6 +53,7 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
 
         thankYouLabel.text = "SUBMIT_SYMPTOMS_THANK_YOU".localized
         confirmLabel.text = "SUBMIT_SYMPTOMS_CONFIRM".localized
+        confirmSwitch.accessibilityLabel = "Please toggle the switch to confirm the information you entered is accurate"
         errorLabel.isHidden = true
     }
 
@@ -114,8 +115,7 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         if confirmSwitch.isOn {
             return true
         } else {
-            errorLabel.isHidden = false
-            markSwitchAsError()
+            presentErrorToUser()
             
             // Showing the error label will sometimes push the continue button off screen.
             // Scroll it into view. But first, go async so that scrollView.contentSize will
@@ -129,7 +129,10 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         }
     }
 
-    private func markSwitchAsError() {
+    private func presentErrorToUser() {
+        errorLabel.isHidden = false
+        UIAccessibility.post(notification: .screenChanged, argument: errorLabel)
+
         confirmSwitch.layer.borderWidth = 3
         confirmSwitch.layer.borderColor = UIColor(named: "NHS Error")!.cgColor
         confirmSwitch.layer.cornerRadius = 16
