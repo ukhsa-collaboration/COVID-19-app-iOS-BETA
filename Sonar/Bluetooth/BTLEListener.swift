@@ -170,7 +170,7 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
             return
         }
 
-        logger.info("discovering charactaristics for sonarId service \(sonarIdService)")
+        logger.info("discovering characteristics for peripheral \(peripheral.identifierWithName) with sonarId service \(sonarIdService)")
         let characteristics = [
             Environment.sonarIdCharacteristicUUID,
             Environment.keepaliveCharacteristicUUID
