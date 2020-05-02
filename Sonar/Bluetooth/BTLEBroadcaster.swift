@@ -213,7 +213,14 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
             return
         }
 
-        request.value = idGenerator.broadcastPayload()?.data()
+        guard let broadcastPayload = idGenerator.broadcastPayload()?.data() else {
+            request.value = Data()
+            peripheral.respond(to: request, withResult: .success)
+            return
+        }
+        
+        logger.info("responding to read request with \(broadcastPayload)")
+        request.value = broadcastPayload
         peripheral.respond(to: request, withResult: .success)
     }
 
