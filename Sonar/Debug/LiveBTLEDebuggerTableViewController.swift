@@ -31,15 +31,12 @@ class LiveBTLEDebuggerTableViewController: UITableViewController, ContactEventRe
     // MARK: - ContactEventRepositoryDelegate
     
     func repository(_ repository: ContactEventRepository, didRecord broadcastPayload: IncomingBroadcastPayload, for peripheral: BTLEPeripheral) {
-        if let row = repository.contactEvents.firstIndex(where: { $0.encryptedRemoteContactId == broadcastPayload.cryptogram }) {
-            tableView.reloadRows(at: [IndexPath(row: row, section: 2)], with: .fade)
-        }
+        tableView.reloadData()
     }
-    
+
     func repository(_ repository: ContactEventRepository, didRecordRSSI RSSI: Int, for peripheral: BTLEPeripheral) {
         
     }
-
     
     // MARK: - Table view data source
 
