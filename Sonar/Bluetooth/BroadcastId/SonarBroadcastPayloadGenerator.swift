@@ -32,10 +32,14 @@ class SonarBroadcastPayloadGenerator: BroadcastPayloadGenerator {
     }
 
     func broadcastPayload(date: Date) -> BroadcastPayload? {
+        guard let registration = persistence.registration else { return nil }
+
+        let hmacKey = registration.secretKey
+
         // TODO: Using the UTC calendar here to try and ensure isDateInToday() uses "today UTC" is not tested, but should be—need minute to midnight, midnight, minute past midnight tests
         var calendar = Calendar.current
         calendar.timeZone = TimeZone(identifier: "UTC")!
-        if let (broadcastId, broadcastIdDate) = storage.readBroadcastId(), calendar.isDateInToday(broadcastIdDate), let hmacKey = persistence.registration?.secretKey {
+        if let (broadcastId, broadcastIdDate) = storage.readBroadcastId(), calendar.isDateInToday(broadcastIdDate) {
             return BroadcastPayload(cryptogram: broadcastId, hmacKey: hmacKey)
         }
         
@@ -43,9 +47,7 @@ class SonarBroadcastPayloadGenerator: BroadcastPayloadGenerator {
 
         if let broadcastId = provider.getEncrypter()?.broadcastId(from: date, until: midnightUTC) {
             storage.save(broadcastId: broadcastId, date: date)
-            // TODO: This force unwrap is terrible, but it's safe as we can't get here until getEncrypter()
-            // returns a value, which it will when the registration is filled out
-            return BroadcastPayload(cryptogram: broadcastId, hmacKey: persistence.registration!.secretKey)
+            return BroadcastPayload(cryptogram: broadcastId, hmacKey: hmacKey)
         } else {
             return nil
         }
