@@ -13,7 +13,7 @@ import Logging
 struct BroadcastPayload {
     
     static let length: Int = 129
-    static let ukISO3166CountryCode: UInt16 = 826
+    static let ukISO3166CountryCode: Int16 = 826
     
     let txPower: Int8 = 0
     
@@ -57,14 +57,14 @@ struct BroadcastPayload {
 
 struct IncomingBroadcastPayload: Equatable, Codable {
     
-    let countryCode: UInt16
+    let countryCode: Int16
     let cryptogram: Data
     let txPower: Int8
     let transmissionTime: Int32
     let hmac: Data
     
     init(data: Data) {
-        self.countryCode = UInt16(bigEndian: data.subdata(in: 0..<2).to(type: UInt16.self)!)
+        self.countryCode = Int16(bigEndian: data.subdata(in: 0..<2).to(type: Int16.self)!)
         self.cryptogram = data.subdata(in: 2..<108)
         self.txPower = data.subdata(in: 108..<109).to(type: Int8.self)!
         self.transmissionTime = Int32(bigEndian: data.subdata(in: 109..<113).to(type: Int32.self)!)

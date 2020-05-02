@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Logging
 
 class UploadContactEventsRequest: SecureRequest, Request {
 
@@ -20,7 +21,7 @@ class UploadContactEventsRequest: SecureRequest, Request {
         let txPowerAdvertised: Int8
         let hmacSignature: Data
         let transmissionTime: Int32
-        let countryCode: UInt16
+        let countryCode: Int16
     }
     
     struct Wrapper: Codable {
@@ -61,6 +62,8 @@ class UploadContactEventsRequest: SecureRequest, Request {
 
         let requestBody = Wrapper(symptomsTimestamp: symptomsTimestamp, contactEvents: uploadableEvents)
         let bodyAsData = try! encoder.encode(requestBody)
+        
+        logger.info("uploading contact events:\n \(String(data: bodyAsData, encoding: .utf8)!)")
         method = .patch(data: bodyAsData)
 
         super.init(key, bodyAsData, [
@@ -71,5 +74,6 @@ class UploadContactEventsRequest: SecureRequest, Request {
     
     func parse(_ data: Data) throws -> Void {
     }
-        
+ 
+    fileprivate let logger = Logger(label: "BTLE")
 }
