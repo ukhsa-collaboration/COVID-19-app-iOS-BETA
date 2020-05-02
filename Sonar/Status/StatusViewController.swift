@@ -111,7 +111,7 @@ class StatusViewController: UIViewController, Storyboarded {
         nhs111label.accessibilityHint = "You can find urgent medical advice and more information on the website www.nhs.uk"
         nhs111label.accessibilityTraits = .link
 
-        healthcareWorkersInstructionsView.accessibilityLabel = "Important instructions for meidcal workers"
+        healthcareWorkersInstructionsView.accessibilityLabel = "Important instructions for healthcare workers"
         healthcareWorkersInstructionsView.accessibilityTraits = .button
         
         notificationCenter.addObserver(self, selector: #selector(showRegisteredStatus), name: RegistrationCompletedNotification, object: nil)
