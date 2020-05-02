@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,7 +16,16 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" name="NHS Grey 5"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_logo" translatesAutoresizingMaskIntoConstraints="NO" id="Ouf-U7-Rkr">
+                                <rect key="frame" x="158" y="425" width="98.5" height="56.5"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" name="NHS Blue"/>
+                        <constraints>
+                            <constraint firstItem="Ouf-U7-Rkr" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="E2i-8d-za5"/>
+                            <constraint firstItem="Ouf-U7-Rkr" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="leo-BF-FID"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
@@ -25,8 +35,9 @@
         </scene>
     </scenes>
     <resources>
-        <namedColor name="NHS Grey 5">
-            <color red="0.94117647058823528" green="0.95686274509803926" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <image name="splash_logo" width="98.5" height="56.5"/>
+        <namedColor name="NHS Blue">
+            <color red="0.0" green="0.36862745098039218" blue="0.72156862745098038" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
