@@ -31,6 +31,7 @@ struct BroadcastPayload {
         let signature = hmacSignature(hmacKey: hmacKey, data: payload)
         payload.append(signature)
         
+        assert(payload.count == BroadcastPayload.length, "Broadcast payload should be \(BroadcastPayload.length), not \(payload.count)")
         return payload
     }
     

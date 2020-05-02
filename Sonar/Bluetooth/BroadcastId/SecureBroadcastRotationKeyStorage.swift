@@ -72,6 +72,9 @@ struct SecureBroadcastRotationKeyStorage: BroadcastRotationKeyStorage {
     }
 
     func clear() throws {
+        UserDefaults.standard.removeObject(forKey: broadcastIdKeyTag)
+        UserDefaults.standard.removeObject(forKey: broadcastIdDateKeyTag)
+        
         let query: [String: Any] = [
             kSecClass as String: kSecClassKey,
             kSecAttrApplicationTag as String : publicKeyTag,
