@@ -14,9 +14,8 @@ import CommonCrypto
 
 class BroadcastIdEncypterTests: XCTestCase {
 
-    let cannedId = UUID(uuidString: "E1D160C7-F6E8-48BC-8687-63C696D910CB")!
+    let sonarId = UUID(uuidString: "E1D160C7-F6E8-48BC-8687-63C696D910CB")!
     
-
     let sonarEpoch = "2020-04-01T00:00:00Z"
     let dateFormatter = DateFormatter()
     let ukISO3166CountryCode: UInt16 = 826
@@ -39,7 +38,7 @@ class BroadcastIdEncypterTests: XCTestCase {
         txDate = knownDate.addingTimeInterval(5 * 60)
         muchLaterDate = knownDate.addingTimeInterval(86400)
 
-        encrypter = ConcreteBroadcastIdEncrypter(key: serverPublicKey, sonarId: cannedId)
+        encrypter = ConcreteBroadcastIdEncrypter(key: serverPublicKey, sonarId: sonarId)
     }
     
     func test_generates_ciphertext_that_are_the_correct_size() {
@@ -57,7 +56,7 @@ class BroadcastIdEncypterTests: XCTestCase {
             return
         }
 
-        encrypter = ConcreteBroadcastIdEncrypter(key: serverPublicKey, sonarId: cannedId)
+        encrypter = ConcreteBroadcastIdEncrypter(key: serverPublicKey, sonarId: sonarId)
         let result = encrypter.broadcastId(from: knownDate, until: muchLaterDate)
 
         // first byte would be 0x04 -- indicates uncompressed point format
@@ -74,15 +73,15 @@ class BroadcastIdEncypterTests: XCTestCase {
                                                   nil) as Data?
         XCTAssertNotNil(clearText)
 
-        let startDate = clearText!.subdata(in: 0..<4)
-        let endDate   = clearText!.subdata(in: 4..<8)
-        let uuidBytes = clearText!.subdata(in: 8..<24)
-        let country   = clearText!.subdata(in: 24..<26)
+        let startDate   = clearText!.subdata(in: 0..<4)
+        let endDate     = clearText!.subdata(in: 4..<8)
+        let uuidBytes   = clearText!.subdata(in: 8..<24)
+        let countryCode = clearText!.subdata(in: 24..<26)
 
-        XCTAssertEqual(1585699200, asInt(startDate))
-        XCTAssertEqual(1585785600, asInt(endDate))
-        XCTAssertEqual("E1D160C7-F6E8-48BC-8687-63C696D910CB", asUUIDString(uuidBytes))
-        XCTAssertEqual(826, asInt(country)) // iso 3166 country code for UK
+        XCTAssertEqual(UInt32(1585699200).bigEndian, startDate.to(type: UInt32.self))
+        XCTAssertEqual(UInt32(1585785600).bigEndian, endDate.to(type: UInt32.self))
+        XCTAssertEqual(sonarId, UUID(data: uuidBytes))
+        XCTAssertEqual(UInt16(826).bigEndian, countryCode.to(type: UInt16.self)) // iso 3166 country code for UK
     }
 
     //MARK: - Private

@@ -19,9 +19,7 @@ protocol BroadcastIdEncrypter {
 class ConcreteBroadcastIdEncrypter: BroadcastIdEncrypter {
 
     static let broadcastIdLength: Int = 106
-    
-    private let ukISO3166CountryCode: UInt16 = 826
-    private let txPower: Int8 = 0
+    static let txPower: Int8 = 0
     
     let serverPublicKey: SecKey
     let sonarId: UUID
@@ -32,27 +30,16 @@ class ConcreteBroadcastIdEncrypter: BroadcastIdEncrypter {
     }
     
     func broadcastId(from startDate: Date, until endDate: Date) -> Data {
-        let firstPart = bytesFrom(startDate)
-        let secondPart = bytesFrom(endDate)
-        let thirdPart = bytesFromSonarId()
-        let fourthPart = bytesFromCountryCode()
-
-        assert(firstPart.count == 4)
-        assert(secondPart.count == 4)
-        assert(thirdPart.count == 16)
-        assert(fourthPart.count == 2)
-
-        var plainTextData = Data(capacity: 26)
-
-        plainTextData.append(firstPart)
-        plainTextData.append(secondPart)
-        plainTextData.append(thirdPart)
-        plainTextData.append(fourthPart)
+        var plaintext = Data(capacity: 26)
+        plaintext.append(UInt32(startDate.timeIntervalSince1970).networkByteOrderData)
+        plaintext.append(UInt32(endDate.timeIntervalSince1970).networkByteOrderData)
+        plaintext.append(sonarId.data)
+        plaintext.append(UInt16(BroadcastPayload.ukISO3166CountryCode).networkByteOrderData)
 
         var error: Unmanaged<CFError>?
         let cipherText = SecKeyCreateEncryptedData(serverPublicKey,
                                                    SecKeyAlgorithm.eciesEncryptionStandardVariableIVX963SHA256AESGCM,
-                                                   plainTextData as CFData,
+                                                   plaintext as CFData,
                                                    &error) as Data?
 
         guard error == nil else {
@@ -70,27 +57,6 @@ class ConcreteBroadcastIdEncrypter: BroadcastIdEncrypter {
         return withoutFirstByte
     }
 
-    // MARK: - Private
-    
-    func bytesFrom(_ date: Date) -> Data {
-        let interval = date.timeIntervalSince1970
-        var int = Int32(interval)
-        return Data(bytes: &int, count: MemoryLayout.size(ofValue: int))
-    }
-
-    func bytesFromSonarId() -> Data {
-        var mutableSonarUUUID = sonarId
-        return withUnsafePointer(to: &mutableSonarUUUID) {
-            Data(bytes: $0, count: MemoryLayout.size(ofValue: sonarId))
-        }
-    }
-
-    func bytesFromCountryCode() -> Data {
-        var mutableCountryCode = 826
-        return withUnsafePointer(to: &mutableCountryCode) {
-            Data(bytes: $0, count: 2)
-        }
-    }
 }
 
 //MARK: - Logging

@@ -9,7 +9,7 @@
 import Foundation
 
 extension FixedWidthInteger {
-    var data: Data {
+    var networkByteOrderData: Data {
         var mutableSelf = self.bigEndian // network byte order
         return Data(bytes: &mutableSelf, count: MemoryLayout.size(ofValue: mutableSelf))
     }

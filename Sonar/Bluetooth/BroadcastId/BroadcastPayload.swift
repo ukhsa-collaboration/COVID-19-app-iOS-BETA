@@ -23,10 +23,10 @@ struct BroadcastPayload {
     func data(txDate: Date = Date()) -> Data {
         var payload = Data()
         
-        payload.append(BroadcastPayload.ukISO3166CountryCode.data)
+        payload.append(BroadcastPayload.ukISO3166CountryCode.networkByteOrderData)
         payload.append(cryptogram)
-        payload.append(txPower.data)
-        payload.append(Int32(txDate.timeIntervalSince1970).data)
+        payload.append(txPower.networkByteOrderData)
+        payload.append(Int32(txDate.timeIntervalSince1970).networkByteOrderData)
         
         let signature = hmacSignature(hmacKey: hmacKey, data: payload)
         payload.append(signature)

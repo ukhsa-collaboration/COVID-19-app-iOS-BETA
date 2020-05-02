@@ -36,10 +36,10 @@ class BroadcastPayloadTests: XCTestCase {
         print("whole payload is \(data.subdata(in: 0..<113).base64EncodedString())")
         print("         hmac is \(data.subdata(in: 113..<129).base64EncodedString())")
         
-        XCTAssertEqual(data.subdata(in: 0..<2), BroadcastPayload.ukISO3166CountryCode.data)
+        XCTAssertEqual(data.subdata(in: 0..<2), BroadcastPayload.ukISO3166CountryCode.networkByteOrderData)
         XCTAssertEqual(data.subdata(in: 2..<108), cryptogram)
-        XCTAssertEqual(data.subdata(in: 108..<109), Int8(0).data)
-        XCTAssertEqual(data.subdata(in: 109..<113), Int32(txDate.timeIntervalSince1970).data)
+        XCTAssertEqual(data.subdata(in: 108..<109), Int8(0).networkByteOrderData)
+        XCTAssertEqual(data.subdata(in: 109..<113), Int32(txDate.timeIntervalSince1970).networkByteOrderData)
         XCTAssertEqual(data.subdata(in: 113..<129), Data(base64Encoded: "/PLmLUXPduKo9659AJqEJQ=="))
     }
     
