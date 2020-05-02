@@ -93,7 +93,7 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
             return
         }
         
-        guard let ephemeralBroadcastId = idGenerator.broadcastPayload()?.data() else {
+        guard let broadcastPayload = idGenerator.broadcastPayload()?.data() else {
             assertionFailure("attempted to update identity without an identity")
             return
         }
@@ -103,10 +103,10 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
             return
         }
         
-        self.unsentCharacteristicValue = .identity(value: ephemeralBroadcastId)
-        let success = peripheral.updateValue(ephemeralBroadcastId, for: identityCharacteristic, onSubscribedCentrals: nil)
+        self.unsentCharacteristicValue = .identity(value: broadcastPayload)
+        let success = peripheral.updateValue(broadcastPayload, for: identityCharacteristic, onSubscribedCentrals: nil)
         if success {
-            logger.info("sent identity value \(ephemeralBroadcastId)")
+            logger.info("sent identity value \(broadcastPayload)")
             self.unsentCharacteristicValue = nil
         }
     }
