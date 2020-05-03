@@ -27,7 +27,7 @@ jobs:
           git fetch --tags
           git branch --contains tags/upload-to-internal | grep internal || echo "::set-output name=upload::true"
 
-      - name:
+      - name: Merge and push to internal branch
         if: steps.check-upload-tag.outputs.upload == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.deployment_token }}
