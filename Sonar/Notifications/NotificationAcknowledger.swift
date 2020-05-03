@@ -8,6 +8,8 @@
 
 import Foundation
 
+import Logging
+
 class NotificationAcknowledger {
 
     let persisting: Persisting
@@ -25,6 +27,7 @@ class NotificationAcknowledger {
             let ackUrl = URL(string: ackString)
         else {
             // No ackUrl means there's nothing to ack
+            logger.debug("asked to ack \(String(describing: userInfo["acknowledgmentUrl"])) but it doesn't look like a valid URL")
             return false
         }
 
@@ -35,11 +38,15 @@ class NotificationAcknowledger {
         }
 
         if persisting.acknowledgmentUrls.contains(ackUrl) {
+            logger.debug("Notification was already acknowledged")
             return true
         } else {
+            logger.debug("Marking notification as acknowledged")
             persisting.acknowledgmentUrls = persisting.acknowledgmentUrls.union([ackUrl])
             return false
         }
     }
-
 }
+
+// MARK: - Logging
+private let logger = Logger(label: "Notifications")
