@@ -104,8 +104,10 @@ class ConcreteRemoteNotificationManager: NSObject, RemoteNotificationManager {
         let alreadyAcked = notificationAcknowledger.ack(userInfo: userInfo)
 
         if !alreadyAcked {
+            logger.debug("Notification not yet ack'd. Dispatching to appropriate handler ...")
             dispatcher.handleNotification(userInfo: userInfo, completionHandler: completionHandler)
         } else {
+            logger.debug("Notification was already ack'd. Calling completion handler")
             completionHandler(.noData)
         }
     }
