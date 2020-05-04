@@ -98,7 +98,7 @@ class StatusViewController: UIViewController, Storyboarded {
         readLatestAdviceLabel.accessibilityHint = "Opens in your browser".localized
         readLatestAdviceLabel.accessibilityTraits = .link
 
-        nhs111label.inject(title: "NHS Coronavirus".localized, style: .body)
+        nhs111label.inject(title: "NHS Coronavirus".localized, external: true, style: .body)
 
         healthcareWorkersInstructionsView.accessibilityLabel = "Important instructions for healthcare workers"
         healthcareWorkersInstructionsView.accessibilityTraits = .button

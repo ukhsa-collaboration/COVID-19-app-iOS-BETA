@@ -9,10 +9,10 @@
 import UIKit
 
 class LinkButton: ButtonWithDynamicType {
-    func inject(title: String, style: UIFont.TextStyle) {
+    func inject(title: String, external: Bool, style: UIFont.TextStyle) {
         accessibilityHint = "Opens in your browser".localized
-        accessibilityTraits = .link
-        
+        accessibilityTraits = external ? .link : .button
+        setTitle(title, for: .normal)
         titleLabel?.attributedText = NSAttributedString(string: title, attributes:
             [
                 .underlineStyle: NSUnderlineStyle.single.rawValue,
