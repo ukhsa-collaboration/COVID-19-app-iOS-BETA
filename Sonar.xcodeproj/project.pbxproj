@@ -135,6 +135,8 @@
 		89CCF66424571EE900AC9D91 /* SetupProblemDiagnoserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CCF66324571EE900AC9D91 /* SetupProblemDiagnoserTests.swift */; };
 		89CE566B24503E93004A74D0 /* TrustValidatingURLSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CE566A24503E93004A74D0 /* TrustValidatingURLSessionDelegate.swift */; };
 		89CE566D24504050004A74D0 /* TrustValidatingURLSessionDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CE566C24504050004A74D0 /* TrustValidatingURLSessionDelegateTests.swift */; };
+		89DF669F2460168000A55F24 /* StorageChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89DF669E2460168000A55F24 /* StorageChecker.swift */; };
+		89DF66A42460173800A55F24 /* StorageCheckerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89DF66A32460173800A55F24 /* StorageCheckerTests.swift */; };
 		89F06B2F2434A62C0074C612 /* LoggingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F06B2E2434A62C0074C612 /* LoggingManager.swift */; };
 		89F06B312434AABF0074C612 /* NoOpLogHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F06B302434AABE0074C612 /* NoOpLogHandler.swift */; };
 		89F06B332434AF130074C612 /* ForwardingLogHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F06B322434AF130074C612 /* ForwardingLogHandler.swift */; };
@@ -403,6 +405,8 @@
 		89DA61F12449A56F0079A761 /* FIRAnalyticsConnector.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FIRAnalyticsConnector.framework; path = Frameworks/FIRAnalyticsConnector.framework; sourceTree = "<group>"; };
 		89DA61F22449A56F0079A761 /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseAnalytics.framework; path = Frameworks/FirebaseAnalytics.framework; sourceTree = "<group>"; };
 		89DA61F52449A5A80079A761 /* GoogleAppMeasurement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleAppMeasurement.framework; path = Frameworks/GoogleAppMeasurement.framework; sourceTree = "<group>"; };
+		89DF669E2460168000A55F24 /* StorageChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageChecker.swift; sourceTree = "<group>"; };
+		89DF66A32460173800A55F24 /* StorageCheckerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageCheckerTests.swift; sourceTree = "<group>"; };
 		89F06B2E2434A62C0074C612 /* LoggingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingManager.swift; sourceTree = "<group>"; };
 		89F06B302434AABE0074C612 /* NoOpLogHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoOpLogHandler.swift; sourceTree = "<group>"; };
 		89F06B322434AF130074C612 /* ForwardingLogHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForwardingLogHandler.swift; sourceTree = "<group>"; };
@@ -745,6 +749,7 @@
 				F6CC2CAA242BCCE90079432B /* Remote Notifications */,
 				F67C5157243E7BD5008E2945 /* SelfDiagnosis */,
 				0983ACD1243EB20A00DBB336 /* Status */,
+				89DF66A12460171B00A55F24 /* Storage */,
 				219C7B77245AD4B700952B4D /* TestHelpersTests.swift */,
 			);
 			path = SonarTests;
@@ -891,6 +896,7 @@
 				895D9E4924374EB800573D4D /* Routing */,
 				F68B89EB243CFEEE00F369A9 /* SelfDiagnosis */,
 				0995ABCD243D034E0057C0D7 /* Status */,
+				89DF66A0246016C200A55F24 /* Storage */,
 			);
 			path = Sonar;
 			sourceTree = "<group>";
@@ -988,6 +994,22 @@
 				89CCF6602456F07400AC9D91 /* URLAuthenticationChallenge.swift */,
 			);
 			path = FakeData;
+			sourceTree = "<group>";
+		};
+		89DF66A0246016C200A55F24 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				89DF669E2460168000A55F24 /* StorageChecker.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		89DF66A12460171B00A55F24 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				89DF66A32460173800A55F24 /* StorageCheckerTests.swift */,
+			);
+			path = Storage;
 			sourceTree = "<group>";
 		};
 		89F06B2D2434A5A50074C612 /* Logging */ = {
@@ -1470,6 +1492,7 @@
 				89CE566D24504050004A74D0 /* TrustValidatingURLSessionDelegateTests.swift in Sources */,
 				0983ACCD243E566800DBB336 /* ErrorForTest.swift in Sources */,
 				09E876BC24510F2C009C2628 /* BluetoothNurseryDouble.swift in Sources */,
+				89DF66A42460173800A55F24 /* StorageCheckerTests.swift in Sources */,
 				F694B1BE2459EB3800C6A5D1 /* NotificationAcknowledgerTests.swift in Sources */,
 				F68BFBF7242ACD17008EE68F /* TestHelpers.swift in Sources */,
 			);
@@ -1501,6 +1524,7 @@
 				21C09A8D24377F5100368203 /* CoreBluetoothExtensions.swift in Sources */,
 				F72EBDA7243D2FD1009F9328 /* ConcreteBroadcastIdEncrypter.swift in Sources */,
 				F72EBD9E243C90E6009F9328 /* HumbleLocalNotificationScheduler.swift in Sources */,
+				89DF669F2460168000A55F24 /* StorageChecker.swift in Sources */,
 				217A23BE243B34E8001B8236 /* UIDevice+ModelName.swift in Sources */,
 				F604976924539093002B8503 /* UploadLog.swift in Sources */,
 				21F373FF2433844D00926FB8 /* ContactEventRepository.swift in Sources */,
