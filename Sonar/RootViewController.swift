@@ -67,6 +67,8 @@ class RootViewController: UIViewController {
         setupChecker = SetupChecker(authorizationManager: authorizationManager, bluetoothNursery: bluetoothNursery)
         
         notificationCenter.addObserver(self, selector: #selector(applicationDidBecomeActive(_:)), name: UIApplication.didBecomeActiveNotification, object: nil)
+        
+        notificationCenter.addObserver(self, selector: #selector(updateBasedOnAccessibilityDisplayChanges(_:)), name: UIContentSizeCategory.didChangeNotification, object: nil)
     }
 
     deinit {
@@ -149,6 +151,26 @@ class RootViewController: UIViewController {
     private func dismissSetupError() {
         if self.presentedSetupErorrViewController != nil {
             self.dismiss(animated: true)
+        }
+    }
+    
+    @objc private func updateBasedOnAccessibilityDisplayChanges(_ notification: Notification) {
+        uiQueue.async {
+            self.recursivelyUpdate(view: self.view)
+            
+            if let presented = self.presentedViewController {
+                self.recursivelyUpdate(view: presented.view)
+            }
+        }
+    }
+    
+    private func recursivelyUpdate(view: UIView) {
+        if let updateable = view as? UpdatesBasedOnAccessibilityDisplayChanges {
+            updateable.updateBasedOnAccessibilityDisplayChanges()
+        }
+        
+        for v in view.subviews {
+            recursivelyUpdate(view: v)
         }
     }
     

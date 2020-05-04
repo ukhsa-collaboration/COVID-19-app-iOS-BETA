@@ -193,8 +193,43 @@ class RootViewControllerTests: TestCase {
         wait(for: [expectation], timeout: 2.0)
         done = true
     }
+    
+    func testUpdatesSubviewsOnFontSizeChange() {
+        let intermediate = UIView()
+        let updates = UpdatesBasedOnAccessibilityDisplayChangesDouble()
+        intermediate.addSubview(updates)
+        rootVC.view.addSubview(intermediate)
+        
+        notificationCenter.post(name: UIContentSizeCategory.didChangeNotification, object: nil)
+         
+        XCTAssertTrue(updates.updated)
+    }
+    
+    func testUpdatesPresentedViewsOnFontSizeChange() {
+        parentViewControllerForTests.viewControllers = [rootVC]
+        
+        let intermediate = UIView()
+        let updates = UpdatesBasedOnAccessibilityDisplayChangesDouble()
+        intermediate.addSubview(updates)
+        let presented = UIViewController()
+        presented.view = UIView()
+        presented.view.addSubview(intermediate)
+        rootVC.present(presented, animated: false)
+        
+        notificationCenter.post(name: UIContentSizeCategory.didChangeNotification, object: nil)
+         
+        XCTAssertTrue(updates.updated)
+    }
 }
 
 fileprivate func makeDispatcher() -> RemoteNotificationDispatcher {
     return RemoteNotificationDispatcher(notificationCenter: NotificationCenter(), userNotificationCenter: UserNotificationCenterDouble())
+}
+
+fileprivate class UpdatesBasedOnAccessibilityDisplayChangesDouble: UIView, UpdatesBasedOnAccessibilityDisplayChanges {
+    var updated = false
+    
+    func updateBasedOnAccessibilityDisplayChanges() {
+        updated = true
+    }
 }

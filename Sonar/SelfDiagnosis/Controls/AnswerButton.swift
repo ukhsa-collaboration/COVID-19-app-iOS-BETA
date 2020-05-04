@@ -9,7 +9,7 @@
 import UIKit
 
 @IBDesignable
-class AnswerButton: UIControl {
+class AnswerButton: UIControl, UpdatesBasedOnAccessibilityDisplayChanges {
 
     @IBInspectable var text: String? {
         didSet {
@@ -20,6 +20,7 @@ class AnswerButton: UIControl {
 
     let textLabel = UILabel()
     let imageView = UIImageView()
+    private var imageWidthConstraint: NSLayoutConstraint!
 
     override var isSelected: Bool {
         didSet {
@@ -57,6 +58,12 @@ class AnswerButton: UIControl {
 
         imageView.image = UIImage(named: "Controls_RadioButton_Unselected")
         imageView.highlightedImage = UIImage(named: "Controls_RadioButton_Selected")
+        imageWidthConstraint = imageView.widthAnchor.constraint(equalToConstant: 24)
+        imageWidthConstraint.identifier = "ImageWidth"
+        NSLayoutConstraint.activate([
+             imageWidthConstraint,
+             imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor)
+        ])
 
         let stack = UIStackView(arrangedSubviews: [
             textLabel,
@@ -78,6 +85,20 @@ class AnswerButton: UIControl {
         ])
         textLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
         imageView.setContentHuggingPriority(.required, for: .horizontal)
+        
+        resizeImage()
+    }
+    
+    func updateBasedOnAccessibilityDisplayChanges() {
+        resizeImage()
+    }
+    
+    private func resizeImage() {
+        let scaleFactor = textLabel.font.pointSize / defaultFontSize
+        imageWidthConstraint.constant = defaultImageSize * scaleFactor
     }
 
 }
+
+fileprivate let defaultFontSize = CGFloat(17.0)
+fileprivate let defaultImageSize = CGFloat(24.0)
