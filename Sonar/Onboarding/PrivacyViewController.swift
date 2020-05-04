@@ -20,13 +20,15 @@ class PrivacyViewController: UIViewController, Storyboarded {
     override func viewDidLoad() {
         moreAbout.setAttributedTitle(NSAttributedString(string: "More about the app".localized, attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue, .foregroundColor: UIColor(named: "NHS Link")!]), for: .normal)
         moreAbout.accessibilityTraits = .link
-
+        moreAbout.accessibilityHint = "Opens in your browser".localized
         
         privacyPolicy.setAttributedTitle(NSAttributedString(string: "Privacy policy".localized, attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue, .foregroundColor: UIColor(named: "NHS Link")!]), for: .normal)
         privacyPolicy.accessibilityTraits = .link
+        privacyPolicy.accessibilityHint = "Opens in your browser".localized
         
         termsConditions.setAttributedTitle(NSAttributedString(string: "Terms and conditions".localized, attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue, .foregroundColor: UIColor(named: "NHS Link")!]), for: .normal)
         termsConditions.accessibilityTraits = .link
+        termsConditions.accessibilityHint = "Opens in your browser".localized
     }
     
     func inject(continueHandler: @escaping () -> Void) {

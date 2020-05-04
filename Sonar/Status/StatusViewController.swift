@@ -106,9 +106,10 @@ class StatusViewController: UIViewController, Storyboarded {
         noSymptomsLabel.textColor = UIColor(named: "NHS Secondary Text")
         nothingToDoLabel.textColor = UIColor(named: "NHS Secondary Text")
 
-        readLatestAdviceLabel.accessibilityHint = "This will show you the most up to date advice for you on the website www.gov.uk"
+        readLatestAdviceLabel.accessibilityHint = "Opens in your browser".localized
         readLatestAdviceLabel.accessibilityTraits = .link
-        nhs111label.accessibilityHint = "You can find urgent medical advice and more information on the website www.nhs.uk"
+
+        nhs111label.accessibilityHint = "Opens in your browser".localized
         nhs111label.accessibilityTraits = .link
 
         healthcareWorkersInstructionsView.accessibilityLabel = "Important instructions for healthcare workers"
