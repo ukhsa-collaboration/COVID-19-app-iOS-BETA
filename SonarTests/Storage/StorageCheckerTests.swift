@@ -34,21 +34,21 @@ class StorageCheckerTests: XCTestCase {
         let token = UUID().data
         writeToKeychain(with: token)
         
-        XCTAssertEqual(checker.state, .keyChainAndUserDefaultsNotInSync)
+        XCTAssertEqual(checker.state, .keyChainAndUserDefaultsOutOfSync)
     }
     
     func testStartsAsNotSyncedWhenOnlyUserDefaultsHasValue() throws {
         let token = UUID().data
         writeToUserDefaults(with: token)
         
-        XCTAssertEqual(checker.state, .keyChainAndUserDefaultsNotInSync)
+        XCTAssertEqual(checker.state, .keyChainAndUserDefaultsOutOfSync)
     }
     
     func testStartsAsNotSyncedWhenValuesDiffer() throws {
         writeToUserDefaults(with: UUID().data)
         writeToKeychain(with: UUID().data)
 
-        XCTAssertEqual(checker.state, .keyChainAndUserDefaultsNotInSync)
+        XCTAssertEqual(checker.state, .keyChainAndUserDefaultsOutOfSync)
     }
     
     func testMarkingAsSynced() throws {

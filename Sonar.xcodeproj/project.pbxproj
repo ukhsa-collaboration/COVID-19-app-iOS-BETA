@@ -137,6 +137,7 @@
 		89CE566D24504050004A74D0 /* TrustValidatingURLSessionDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CE566C24504050004A74D0 /* TrustValidatingURLSessionDelegateTests.swift */; };
 		89DF669F2460168000A55F24 /* StorageChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89DF669E2460168000A55F24 /* StorageChecker.swift */; };
 		89DF66A42460173800A55F24 /* StorageCheckerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89DF66A32460173800A55F24 /* StorageCheckerTests.swift */; };
+		89DF66A62460217A00A55F24 /* StorageCheckingDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89DF66A52460217A00A55F24 /* StorageCheckingDouble.swift */; };
 		89F06B2F2434A62C0074C612 /* LoggingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F06B2E2434A62C0074C612 /* LoggingManager.swift */; };
 		89F06B312434AABF0074C612 /* NoOpLogHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F06B302434AABE0074C612 /* NoOpLogHandler.swift */; };
 		89F06B332434AF130074C612 /* ForwardingLogHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F06B322434AF130074C612 /* ForwardingLogHandler.swift */; };
@@ -407,6 +408,7 @@
 		89DA61F52449A5A80079A761 /* GoogleAppMeasurement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleAppMeasurement.framework; path = Frameworks/GoogleAppMeasurement.framework; sourceTree = "<group>"; };
 		89DF669E2460168000A55F24 /* StorageChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageChecker.swift; sourceTree = "<group>"; };
 		89DF66A32460173800A55F24 /* StorageCheckerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageCheckerTests.swift; sourceTree = "<group>"; };
+		89DF66A52460217A00A55F24 /* StorageCheckingDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageCheckingDouble.swift; sourceTree = "<group>"; };
 		89F06B2E2434A62C0074C612 /* LoggingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingManager.swift; sourceTree = "<group>"; };
 		89F06B302434AABE0074C612 /* NoOpLogHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoOpLogHandler.swift; sourceTree = "<group>"; };
 		89F06B322434AF130074C612 /* ForwardingLogHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForwardingLogHandler.swift; sourceTree = "<group>"; };
@@ -649,6 +651,7 @@
 				097C94CA245B81E8008A9695 /* EnGbLocaleProviderDouble.swift */,
 				89C8B215245C5258009CCE80 /* DefaultObjectStoringDouble.swift */,
 				89C8B217245C6342009CCE80 /* AppCenterAnalyticsReportingDouble.swift */,
+				89DF66A52460217A00A55F24 /* StorageCheckingDouble.swift */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -1427,6 +1430,7 @@
 				214209CA242227B300C7BFF3 /* PersistenceTests.swift in Sources */,
 				F60497672452415F002B8503 /* ContactEventsUploaderDouble.swift in Sources */,
 				F632792124351C1900CF7A42 /* OnboardingViewControllerTests.swift in Sources */,
+				89DF66A62460217A00A55F24 /* StorageCheckingDouble.swift in Sources */,
 				89C8B216245C5258009CCE80 /* DefaultObjectStoringDouble.swift in Sources */,
 				F64D76FB2457827400B1D495 /* StatusProviderDouble.swift in Sources */,
 				095A91182434FF1500ED6369 /* ApplicationDouble.swift in Sources */,

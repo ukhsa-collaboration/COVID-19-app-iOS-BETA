@@ -30,7 +30,8 @@ class TestCase: XCTestCase {
         let persistence = Persistence(
             secureRegistrationStorage: SecureRegistrationStorage(),
             broadcastKeyStorage: SecureBroadcastRotationKeyStorage(),
-            monitor: AppMonitoringDouble()
+            monitor: AppMonitoringDouble(),
+            storageChecker: StorageCheckingDouble()
         )
         persistence.clear()
 

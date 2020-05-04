@@ -8,14 +8,19 @@
 
 import Foundation
 
-class StorageChecker {
-    
-    enum StorageState {
-        case notInitialized
-        case keyChainAndUserDefaultsNotInSync
-        case inSync
-    }
-    
+enum StorageState {
+    case notInitialized
+    case keyChainAndUserDefaultsOutOfSync
+    case inSync
+}
+
+protocol StorageChecking {
+    var state: StorageState { get }
+    func markAsSynced()
+}
+
+class StorageChecker: StorageChecking {
+        
     private let service: String
     
     init(service: String) {
@@ -31,7 +36,7 @@ class StorageChecker {
         case (let lhs, let rhs) where lhs == rhs:
             return .inSync
         default:
-            return .keyChainAndUserDefaultsNotInSync
+            return .keyChainAndUserDefaultsOutOfSync
         }
     }
     

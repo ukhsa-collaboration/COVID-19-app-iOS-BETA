@@ -22,6 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     let trustValidator = PublicKeyValidator(trustedKeyHashes: ["hETpgVvaLC0bvcGG3t0cuqiHvr4XyP2MTwCiqhgRWwU="])
     
+    let storageChecker = StorageChecker(service: "uk.nhs.nhsx.sonars.storage_marker")
+    
     lazy var monitor: AppMonitoring = AppCenterMonitor.shared
     
     lazy var urlSession: Session = URLSession(trustValidator: trustValidator)
@@ -49,7 +51,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     lazy var persistence: Persisting = Persistence(
         secureRegistrationStorage: SecureRegistrationStorage(),
         broadcastKeyStorage: SecureBroadcastRotationKeyStorage(),
-        monitor: monitor
+        monitor: monitor,
+        storageChecker: storageChecker
     )
 
     lazy var bluetoothNursery: BluetoothNursery = ConcreteBluetoothNursery(persistence: persistence, userNotificationCenter: userNotificationCenter, notificationCenter: notificationCenter, monitor: monitor)
