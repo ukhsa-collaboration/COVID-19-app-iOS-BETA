@@ -188,7 +188,7 @@ class StatusViewController: UIViewController, Storyboarded {
             attributes: [
                 .underlineStyle: NSUnderlineStyle.single.rawValue,
                 .foregroundColor: UIColor(named: "NHS Link")!,
-                .font: UIFont.preferredFont(forTextStyle: .body),
+                .font: UIFont.preferredFont(forTextStyle: .headline),
             ]
         )
         
