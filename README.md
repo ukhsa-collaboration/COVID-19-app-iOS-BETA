@@ -32,7 +32,17 @@ proximity to individuals infected with the novel coronavirus.
 
 ### Setup
 
-- `./bin/make-environment < Sonar/Environments/environment.json > Sonar/Environment.swift`
+```sh
+cp Sonar/Environments/Sonar.xcconfig.sample .secret/Sonar.xcconfig
+./bin/make-environment < Sonar/Environments/environment.json > .secret/Environment.swift
+```
+
+- Fill in the `Environment.swift` file with the appropriate values.
+- Get a copy of GoogleService-Info.plist from one of the other developers and
+  copy that into the `.secret` directory. (Check the pinned items in the Slack
+  channel.)
+- **If Xcode is open, restart Xcode.** Xcode does not handle configuration
+  files being changed out from under it gracefully.
 
 ### Notifications
 
