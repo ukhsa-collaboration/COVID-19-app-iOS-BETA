@@ -30,21 +30,19 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oRv-PB-BfB" userLabel="Registration status view">
                                                 <rect key="frame" x="0.0" y="64" width="414" height="60"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wx0-ub-S2x" userLabel="Image or spinner wrapper">
+                                                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="24" placeholderIntrinsicHeight="infinite" translatesAutoresizingMaskIntoConstraints="NO" id="wx0-ub-S2x" userLabel="Image or spinner wrapper" customClass="AutoscalingWidthView" customModule="Sonar" customModuleProvider="target">
                                                         <rect key="frame" x="20" y="0.0" width="24" height="60"/>
                                                         <subviews>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nOs-ix-jLm" userLabel="Registration status image">
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="24" placeholderIntrinsicHeight="24" translatesAutoresizingMaskIntoConstraints="NO" id="nOs-ix-jLm" userLabel="Registration status image">
                                                                 <rect key="frame" x="0.0" y="18" width="24" height="24"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="24" id="D55-u3-O6B"/>
-                                                                    <constraint firstAttribute="width" constant="24" id="dSH-eG-7UT"/>
+                                                                    <constraint firstAttribute="width" secondItem="nOs-ix-jLm" secondAttribute="height" multiplier="1:1" id="r8f-p5-hvl"/>
                                                                 </constraints>
                                                             </imageView>
                                                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="eTV-y9-NA3" userLabel="Registration spinner">
                                                                 <rect key="frame" x="0.0" y="18" width="24" height="24"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="24" id="HMc-fH-iFo"/>
-                                                                    <constraint firstAttribute="width" constant="24" id="hPI-1g-82l"/>
+                                                                    <constraint firstAttribute="width" secondItem="eTV-y9-NA3" secondAttribute="height" multiplier="1:1" id="dyB-NM-laE"/>
                                                                 </constraints>
                                                             </activityIndicatorView>
                                                         </subviews>
@@ -53,9 +51,9 @@
                                                             <constraint firstItem="nOs-ix-jLm" firstAttribute="centerY" secondItem="wx0-ub-S2x" secondAttribute="centerY" id="IFh-ML-ghS"/>
                                                             <constraint firstAttribute="trailing" secondItem="eTV-y9-NA3" secondAttribute="trailing" id="IWu-Be-lzz"/>
                                                             <constraint firstItem="nOs-ix-jLm" firstAttribute="leading" secondItem="wx0-ub-S2x" secondAttribute="leading" id="PPL-6z-cak"/>
-                                                            <constraint firstItem="eTV-y9-NA3" firstAttribute="leading" secondItem="wx0-ub-S2x" secondAttribute="leading" id="Tqp-HI-pXZ"/>
-                                                            <constraint firstAttribute="width" constant="24" id="aLr-wb-faW"/>
+                                                            <constraint firstItem="eTV-y9-NA3" firstAttribute="leading" secondItem="wx0-ub-S2x" secondAttribute="leading" id="bbK-8c-ITa"/>
                                                             <constraint firstItem="eTV-y9-NA3" firstAttribute="centerY" secondItem="wx0-ub-S2x" secondAttribute="centerY" id="imP-Uj-NbD"/>
+                                                            <constraint firstAttribute="trailing" secondItem="nOs-ix-jLm" secondAttribute="trailing" id="v0f-py-mKB"/>
                                                         </constraints>
                                                     </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="nuI-T6-qsp">
