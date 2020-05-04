@@ -29,8 +29,19 @@ class PrimaryButton: ButtonWithDynamicType {
         titleLabel?.textAlignment = .center
 
         alpha = 1.0
-        
+
+        updateForAccessibility()
+
         complainIfDisabled()
+    }
+
+    private func updateForAccessibility() {
+        if UIAccessibility.isInvertColorsEnabled {
+            layer.borderColor = UIColor.black.cgColor
+            layer.borderWidth = 3
+        } else {
+            layer.borderWidth = 0
+        }
     }
 
     private func complainIfDisabled() {
@@ -42,6 +53,13 @@ class PrimaryButton: ButtonWithDynamicType {
             logger.warning(Logger.Message(stringLiteral: msg))
             #endif
         }
+    }
+
+}
+
+extension PrimaryButton: UpdatesBasedOnAccessibilityDisplayChanges {
+    func updateBasedOnAccessibilityDisplayChanges() {
+        updateForAccessibility()
     }
 }
 

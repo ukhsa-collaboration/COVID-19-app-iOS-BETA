@@ -21,6 +21,7 @@ class PostcodeViewController: UIViewController, Storyboarded {
     @IBOutlet var postcodeError: UILabel!
     @IBOutlet var postcodeField: UITextField!
     @IBOutlet var continueAccessoryView: UIView!
+    @IBOutlet var continueButton: PrimaryButton!
 
     override var inputAccessoryView: UIView {
         return continueAccessoryView
@@ -28,10 +29,6 @@ class PostcodeViewController: UIViewController, Storyboarded {
 
     override var canBecomeFirstResponder: Bool {
         return true
-    }
-
-    deinit {
-        self.notificationCenter?.removeObserver(self)
     }
 
     func inject(persistence: Persisting, notificationCenter: NotificationCenter, continueHandler: @escaping () -> Void) {
@@ -50,6 +47,7 @@ class PostcodeViewController: UIViewController, Storyboarded {
         
         notificationCenter.addObserver(self, selector: #selector(keyboardWasShown(_:)), name: UIResponder.keyboardDidShowNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(keyboardWasHidden(_:)), name: UIResponder.keyboardDidHideNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(updateBasedOnAccessibilityDisplayChanges(_:)), name: UIAccessibility.invertColorsStatusDidChangeNotification, object: nil)
     }
 
     // MARK: - IBActions
@@ -84,6 +82,10 @@ class PostcodeViewController: UIViewController, Storyboarded {
         let insets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         scrollView.contentInset = insets
         scrollView.scrollIndicatorInsets = insets
+    }
+
+    @objc private func updateBasedOnAccessibilityDisplayChanges(_ notification: Notification) {
+        continueButton.updateBasedOnAccessibilityDisplayChanges()
     }
 
     // MARK: - Private

@@ -204,7 +204,18 @@ class RootViewControllerTests: TestCase {
          
         XCTAssertTrue(updates.updated)
     }
-    
+
+    func testUpdatesSubviewsOnInvertColorsChange() {
+        let intermediate = UIView()
+        let updates = UpdatesBasedOnAccessibilityDisplayChangesDouble()
+        intermediate.addSubview(updates)
+        rootVC.view.addSubview(intermediate)
+
+        notificationCenter.post(name: UIAccessibility.invertColorsStatusDidChangeNotification, object: nil)
+
+        XCTAssertTrue(updates.updated)
+    }
+
     func testUpdatesPresentedViewsOnFontSizeChange() {
         parentViewControllerForTests.viewControllers = [rootVC]
         
@@ -218,6 +229,26 @@ class RootViewControllerTests: TestCase {
         
         notificationCenter.post(name: UIContentSizeCategory.didChangeNotification, object: nil)
          
+        XCTAssertTrue(updates.updated)
+    }
+
+    func testUpdatesPresentedViewsInChildrenOnFontSizeChange() {
+        parentViewControllerForTests.viewControllers = [rootVC]
+        XCTAssertNotNil(rootVC.view) // Trigger showing the first view to get it out of the way
+
+        let intermediate = UIViewController()
+        rootVC.show(viewController: intermediate)
+
+        let presented = UIViewController()
+        presented.view = UIView()
+
+        let updates = UpdatesBasedOnAccessibilityDisplayChangesDouble()
+        presented.view.addSubview(updates)
+
+        intermediate.present(presented, animated: false)
+
+        notificationCenter.post(name: UIContentSizeCategory.didChangeNotification, object: nil)
+
         XCTAssertTrue(updates.updated)
     }
 }

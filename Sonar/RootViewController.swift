@@ -67,8 +67,8 @@ class RootViewController: UIViewController {
         setupChecker = SetupChecker(authorizationManager: authorizationManager, bluetoothNursery: bluetoothNursery)
         
         notificationCenter.addObserver(self, selector: #selector(applicationDidBecomeActive(_:)), name: UIApplication.didBecomeActiveNotification, object: nil)
-        
         notificationCenter.addObserver(self, selector: #selector(updateBasedOnAccessibilityDisplayChanges(_:)), name: UIContentSizeCategory.didChangeNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(updateBasedOnAccessibilityDisplayChanges(_:)), name: UIAccessibility.invertColorsStatusDidChangeNotification, object: nil)
     }
 
     deinit {
@@ -158,8 +158,8 @@ class RootViewController: UIViewController {
         uiQueue.async {
             self.recursivelyUpdate(view: self.view)
             
-            if let presented = self.presentedViewController {
-                self.recursivelyUpdate(view: presented.view)
+            for vc in self.allPresentedViewControllers(from: self) {
+                self.recursivelyUpdate(view: vc.view)
             }
         }
     }
@@ -172,6 +172,12 @@ class RootViewController: UIViewController {
         for v in view.subviews {
             recursivelyUpdate(view: v)
         }
+    }
+
+    private func allPresentedViewControllers(from vc: UIViewController) -> [UIViewController] {
+        var presentedViewControllers = vc.presentedViewController.map { [$0] } ?? []
+        presentedViewControllers.append(contentsOf: vc.children.flatMap { allPresentedViewControllers(from: $0) })
+        return presentedViewControllers
     }
     
     // MARK: - Debug view controller management
