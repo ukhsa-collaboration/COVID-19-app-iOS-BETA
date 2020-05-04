@@ -19,7 +19,7 @@ class RootViewController: UIViewController {
     private var onboardingCoordinator: OnboardingCoordinating!
     private var monitor: AppMonitoring!
     private var session: Session!
-    private var contactEventsUploader: ContactEventsUploader!
+    private var contactEventsUploader: ContactEventsUploading!
     private var uiQueue: TestableQueue! = nil
     private var setupChecker: SetupChecker!
     private weak var presentedSetupErorrViewController: UIViewController? = nil
@@ -36,7 +36,7 @@ class RootViewController: UIViewController {
         onboardingCoordinator: OnboardingCoordinating,
         monitor: AppMonitoring,
         session: Session,
-        contactEventsUploader: ContactEventsUploader,
+        contactEventsUploader: ContactEventsUploading,
         linkingIdManager: LinkingIdManager,
         statusProvider: StatusProvider,
         uiQueue: TestableQueue

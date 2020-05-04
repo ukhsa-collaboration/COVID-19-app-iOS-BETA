@@ -15,14 +15,14 @@ protocol Coordinator {
 class SelfDiagnosisCoordinator: Coordinator {
     let navigationController: UINavigationController
     let persisting: Persisting
-    let contactEventsUploader: ContactEventsUploader
+    let contactEventsUploader: ContactEventsUploading
     let statusViewController: StatusViewController
     let localNotificationScheduler: Scheduler
     
     init(
         navigationController: UINavigationController,
         persisting: Persisting,
-        contactEventsUploader: ContactEventsUploader,
+        contactEventsUploader: ContactEventsUploading,
         statusViewController: StatusViewController,
         localNotificationScheduler: Scheduler
     ) {

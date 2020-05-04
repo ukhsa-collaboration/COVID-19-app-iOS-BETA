@@ -63,7 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         bluetoothNursery: bluetoothNursery
     )
     
-    lazy var contactEventsUploader: ContactEventsUploader = ContactEventsUploader(
+    lazy var contactEventsUploader: ContactEventsUploading = ContactEventsUploader(
         persisting: persistence,
         contactEventRepository: bluetoothNursery.contactEventRepository,
         trustValidator: trustValidator,

@@ -14,14 +14,14 @@ class SymptomsSummaryViewController: UIViewController, Storyboarded {
     static let storyboardName = "SelfDiagnosis"
 
     private var persisting: Persisting!
-    private var contactEventsUploader: ContactEventsUploader!
+    private var contactEventsUploader: ContactEventsUploading!
     private var symptoms: Set<Symptom>!
     private var statusViewController: StatusViewController!
     private var localNotificationScheduler: Scheduler!
 
     func inject(
         persisting: Persisting,
-        contactEventsUploader: ContactEventsUploader,
+        contactEventsUploader: ContactEventsUploading,
         hasHighTemperature: Bool,
         hasNewCough: Bool,
         statusViewController: StatusViewController,

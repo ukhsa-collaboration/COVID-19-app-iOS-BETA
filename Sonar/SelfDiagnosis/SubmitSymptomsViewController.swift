@@ -15,7 +15,7 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
     // MARK: - Dependencies
 
     private var persisting: Persisting!
-    private var contactEventsUploader: ContactEventsUploader!
+    private var contactEventsUploader: ContactEventsUploading!
     private var symptoms: Set<Symptom>!
     private var startDate: Date!
     private var statusViewController: StatusViewController?
@@ -23,7 +23,7 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
 
     func inject(
         persisting: Persisting,
-        contactEventsUploader: ContactEventsUploader,
+        contactEventsUploader: ContactEventsUploading,
         symptoms: Set<Symptom>,
         startDate: Date,
         statusViewController: StatusViewController?,
