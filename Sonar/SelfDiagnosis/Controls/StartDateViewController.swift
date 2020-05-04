@@ -42,7 +42,7 @@ class StartDateViewController: UIViewController {
 
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var errorView: UIView!
-    @IBOutlet weak var errorLabel: UILabel!
+    @IBOutlet weak var errorLabel: AccessibleErrorLabel!
     @IBOutlet weak var button: StartDateButton!
 
     @IBOutlet var datePicker: UIPickerView!

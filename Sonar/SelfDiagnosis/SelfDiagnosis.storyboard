@@ -300,7 +300,7 @@
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="32" id="ze3-NR-aKy"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please confirm that the information you have entered is accurate" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oyV-IP-GTz" customClass="ErrorLabel" customModule="Sonar" customModuleProvider="target">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please confirm that the information you have entered is accurate" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oyV-IP-GTz" customClass="AccessibleErrorLabel" customModule="Sonar" customModuleProvider="target">
                                                 <rect key="frame" x="20" y="250" width="374" height="34"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                 <color key="textColor" name="NHS Error"/>
@@ -439,21 +439,16 @@
                                             <constraint firstItem="OFO-L9-lgU" firstAttribute="leading" secondItem="hsM-UT-gLw" secondAttribute="leading" id="xt9-h3-DEd"/>
                                         </constraints>
                                     </view>
-                                    <view hidden="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="qgQ-Wu-pAf">
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8pm-ea-3bY" customClass="AccessibleErrorLabel" customModule="Sonar" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="90.5" width="374" height="0.0"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view hidden="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="qgQ-Wu-pAf" userLabel="Error Spacer View">
                                         <rect key="frame" x="0.0" y="90.5" width="374" height="16"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8pm-ea-3bY" customClass="ErrorLabel" customModule="Sonar" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="374" height="0.0"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
                                         <constraints>
-                                            <constraint firstItem="8pm-ea-3bY" firstAttribute="leading" secondItem="qgQ-Wu-pAf" secondAttribute="leading" id="2zW-pA-vEh"/>
-                                            <constraint firstAttribute="trailing" secondItem="8pm-ea-3bY" secondAttribute="trailing" id="5qx-CX-CYl"/>
-                                            <constraint firstItem="8pm-ea-3bY" firstAttribute="top" secondItem="qgQ-Wu-pAf" secondAttribute="top" id="ivg-f0-IB1"/>
-                                            <constraint firstAttribute="bottom" secondItem="8pm-ea-3bY" secondAttribute="bottom" constant="16" id="vkh-JI-Nof"/>
+                                            <constraint firstAttribute="height" constant="16" id="NEY-Ag-aP0"/>
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="xwo-3w-4lP">
@@ -567,7 +562,7 @@
                                                     <constraint firstAttribute="height" constant="16" id="idS-Vi-N00"/>
                                                 </constraints>
                                             </view>
-                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Question Error" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y0U-Ra-w0i" customClass="ErrorLabel" customModule="Sonar" customModuleProvider="target">
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Question Error" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y0U-Ra-w0i" customClass="AccessibleErrorLabel" customModule="Sonar" customModuleProvider="target">
                                                 <rect key="frame" x="20" y="133" width="374" height="0.0"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                 <color key="textColor" name="NHS Error"/>

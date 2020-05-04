@@ -46,7 +46,7 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
     @IBOutlet weak var submitButtonWrapper: UIView!
     @IBOutlet weak var submitButton: PrimaryButton!
     @IBOutlet weak var confirmSwitch: UISwitch!
-    @IBOutlet var errorLabel: UILabel!
+    @IBOutlet var errorLabel: AccessibleErrorLabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -131,7 +131,6 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
 
     private func presentErrorToUser() {
         errorLabel.isHidden = false
-        UIAccessibility.post(notification: .screenChanged, argument: errorLabel)
 
         confirmSwitch.layer.borderWidth = 3
         confirmSwitch.layer.borderColor = UIColor(named: "NHS Error")!.cgColor
