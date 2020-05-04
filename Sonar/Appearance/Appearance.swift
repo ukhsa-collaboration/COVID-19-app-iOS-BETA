@@ -21,5 +21,10 @@ extension Appearance {
         ErrorLabel.appearance().font = UIFont.preferredFont(forTextStyle: .callout)
         ErrorLabel.appearance().adjustsFontForContentSizeCategory = true
         ErrorLabel.appearance().numberOfLines = 0
+
+        AccessibleErrorLabel.appearance().textColor = UIColor(named: "NHS Error")
+        AccessibleErrorLabel.appearance().font = UIFont.preferredFont(forTextStyle: .callout)
+        AccessibleErrorLabel.appearance().adjustsFontForContentSizeCategory = true
+        AccessibleErrorLabel.appearance().numberOfLines = 0
     }
 }

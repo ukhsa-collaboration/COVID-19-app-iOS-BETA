@@ -14,7 +14,7 @@ class QuestionSymptomsViewController: UIViewController, Storyboarded {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var pageLabel: UILabel!
     @IBOutlet weak var detailLabel: UILabel!
-    @IBOutlet weak var errorLabel: UILabel!
+    @IBOutlet weak var errorLabel: AccessibleErrorLabel!
     @IBOutlet weak var yesButton: AnswerButton!
     @IBOutlet weak var noButton: AnswerButton!
     @IBOutlet weak var questionButton: PrimaryButton!
@@ -103,7 +103,6 @@ class QuestionSymptomsViewController: UIViewController, Storyboarded {
             errorLabel.isHidden = false
             let targetRect = errorLabel.convert(errorLabel.bounds, to: scrollView)
             scrollView.scrollRectToVisible(targetRect, animated: true)
-            UIAccessibility.post(notification: .screenChanged, argument: errorLabel)
             return
         }
         buttonAction(state)

@@ -108,8 +108,13 @@ class SymptomsSummaryViewController: UIViewController, Storyboarded {
         }
 
         guard startDate != nil else {
+            // ideally we'd only hide / show one of these, not both
+            // but the error label triggers a UIAccessibility notification for voice over
+            // and the error view is used to provide a margin between elements
+            // because the error label is presented inside of a stack view
+            // TODO : remove the erroview.isHidden here if you refactor away from nested stack views
             startDateViewController.errorView.isHidden = false
-            UIAccessibility.post(notification: .screenChanged, argument: startDateViewController.errorView)
+            startDateViewController.errorLabel.isHidden = false
             
             DispatchQueue.main.async {
                 let errorLabel: UILabel = self.startDateViewController.errorLabel
