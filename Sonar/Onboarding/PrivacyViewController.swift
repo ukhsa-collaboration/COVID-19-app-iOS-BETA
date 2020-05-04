@@ -19,8 +19,8 @@ class PrivacyViewController: UIViewController, Storyboarded {
     
     override func viewDidLoad() {
         moreAbout.inject(title: "More about the app".localized)
-        privacyPolicy.inject(title: "Privacy policy".localized)
-        termsConditions.inject(title: "Terms and conditions".localized)
+        privacyPolicy.inject(title: "Privacy notice".localized)
+        termsConditions.inject(title: "Terms of use".localized)
     }
     
     func inject(continueHandler: @escaping () -> Void) {
