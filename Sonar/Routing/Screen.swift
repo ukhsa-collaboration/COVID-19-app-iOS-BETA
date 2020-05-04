@@ -12,4 +12,6 @@ enum Screen: String, Codable {
     
     // Flows
     case onboarding
+
+    case status
 }

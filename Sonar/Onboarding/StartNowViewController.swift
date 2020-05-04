@@ -15,12 +15,12 @@ class StartNowViewController: UIViewController, Storyboarded {
     private var notificationCenter: NotificationCenter! = nil
     private var continueHandler: (() -> Void)! = nil
     
-    @IBOutlet weak var howItWorks: ButtonWithDynamicType!
+    @IBOutlet weak var howItWorks: LinkButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        howItWorks.setAttributedTitle(NSAttributedString(string: "Learn more about how it works".localized, attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue, .foregroundColor: UIColor(named: "NHS Link")]), for: .normal)
+        howItWorks.inject(title: "Learn more about how it works".localized, external: false, style: .body)
     }
 
     func inject(persistence: Persisting, notificationCenter: NotificationCenter, continueHandler: @escaping () -> Void) {

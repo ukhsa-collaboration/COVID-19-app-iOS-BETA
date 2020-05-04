@@ -57,6 +57,7 @@
 		138114E42450543600BA46C7 /* SymptomStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138114E32450543600BA46C7 /* SymptomStackView.swift */; };
 		138114E62450796C00BA46C7 /* LocalNotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138114E52450796C00BA46C7 /* LocalNotificationScheduler.swift */; };
 		13F4AE882451EB330082A46D /* QuestionSymptomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F4AE872451EB330082A46D /* QuestionSymptomsViewController.swift */; };
+		13F996732460445400FD6740 /* LinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F996722460445400FD6740 /* LinkButton.swift */; };
 		2115C3E624360427009C0F5B /* DebuggerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2115C3E524360427009C0F5B /* DebuggerTableViewCell.swift */; };
 		213C806C241A56430020EFA5 /* PermissionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213C806B241A56430020EFA5 /* PermissionsViewController.swift */; };
 		214209B62421072C00C7BFF3 /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209B52421072C00C7BFF3 /* StatusViewController.swift */; };
@@ -146,6 +147,7 @@
 		A1E7A0592420028B0078174D /* NHS Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1E7A0582420028B0078174D /* NHS Colors.xcassets */; };
 		AE2A5E502423C473007A4771 /* ContactEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2A5E4F2423C473007A4771 /* ContactEvent.swift */; };
 		AE2DCAA0241920B600A940FC /* BTLEBroadcaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2DCA9F241920B600A940FC /* BTLEBroadcaster.swift */; };
+		AEAFA67924602629009AEAEB /* StatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAFA67824602629009AEAEB /* StatusTests.swift */; };
 		AEC6A7BC241BD81A00B0237A /* LogoStrapline.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC6A7BB241BD81A00B0237A /* LogoStrapline.swift */; };
 		AEC6A7BE241BD82900B0237A /* LogoStrapline.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEC6A7BD241BD82900B0237A /* LogoStrapline.xib */; };
 		F600A60224297A8E0038DF57 /* RegistrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F600A60124297A8E0038DF57 /* RegistrationRequest.swift */; };
@@ -315,6 +317,7 @@
 		138114E32450543600BA46C7 /* SymptomStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomStackView.swift; sourceTree = "<group>"; };
 		138114E52450796C00BA46C7 /* LocalNotificationScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationScheduler.swift; sourceTree = "<group>"; };
 		13F4AE872451EB330082A46D /* QuestionSymptomsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionSymptomsViewController.swift; sourceTree = "<group>"; };
+		13F996722460445400FD6740 /* LinkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkButton.swift; sourceTree = "<group>"; };
 		2115C3E524360427009C0F5B /* DebuggerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebuggerTableViewCell.swift; sourceTree = "<group>"; };
 		213C806B241A56430020EFA5 /* PermissionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsViewController.swift; sourceTree = "<group>"; };
 		214209B52421072C00C7BFF3 /* StatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
@@ -417,6 +420,7 @@
 		A1E7A0582420028B0078174D /* NHS Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "NHS Colors.xcassets"; sourceTree = "<group>"; };
 		AE2A5E4F2423C473007A4771 /* ContactEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEvent.swift; sourceTree = "<group>"; };
 		AE2DCA9F241920B600A940FC /* BTLEBroadcaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTLEBroadcaster.swift; sourceTree = "<group>"; };
+		AEAFA67824602629009AEAEB /* StatusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusTests.swift; sourceTree = "<group>"; };
 		AEC6A7BB241BD81A00B0237A /* LogoStrapline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoStrapline.swift; sourceTree = "<group>"; };
 		AEC6A7BD241BD82900B0237A /* LogoStrapline.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogoStrapline.xib; sourceTree = "<group>"; };
 		F600A60124297A8E0038DF57 /* RegistrationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationRequest.swift; sourceTree = "<group>"; };
@@ -705,6 +709,7 @@
 				F70CB81A2450CFA900ED6E7F /* OnboardingLogoStrapline.xib */,
 				21D93C2F2420C26900C1FA9B /* PrimaryButton.swift */,
 				097C93882447986B00E985CF /* TextField.swift */,
+				13F996722460445400FD6740 /* LinkButton.swift */,
 			);
 			path = Appearance;
 			sourceTree = "<group>";
@@ -940,6 +945,7 @@
 		895D9E50243750DB00573D4D /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				AEAFA67824602629009AEAEB /* StatusTests.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -1563,6 +1569,7 @@
 				13F4AE882451EB330082A46D /* QuestionSymptomsViewController.swift in Sources */,
 				F758553A24294C8D00CBE1ED /* RequestFactory.swift in Sources */,
 				F604976B24539F6C002B8503 /* UploadLogsViewController.swift in Sources */,
+				13F996732460445400FD6740 /* LinkButton.swift in Sources */,
 				21C417CC242CB15D00DEF3E2 /* ConfirmRegistrationRequest.swift in Sources */,
 				F67A2291242AA35C002254B6 /* SecureRegistrationStorage.swift in Sources */,
 				AE2DCAA0241920B600A940FC /* BTLEBroadcaster.swift in Sources */,
@@ -1627,6 +1634,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				898FE857243B4D7A00210775 /* XCUIElement.swift in Sources */,
+				AEAFA67924602629009AEAEB /* StatusTests.swift in Sources */,
 				898FE854243B42E800210775 /* OnboardingTests.swift in Sources */,
 				89074B8A24378B6E00D67777 /* ScreenTestCase.swift in Sources */,
 				89074B8724378A0D00D67777 /* UITestPayload.swift in Sources */,

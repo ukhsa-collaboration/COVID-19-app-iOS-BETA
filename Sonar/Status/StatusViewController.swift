@@ -18,7 +18,7 @@ class StatusViewController: UIViewController, Storyboarded {
     private var notificationCenter: NotificationCenter!
     private var contactEventsUploader: ContactEventsUploading!
     private var linkingIdManager: LinkingIdManaging!
-    private var statusProvider: StatusProvider!
+    private var statusProvider: StatusProviding!
     private var localeProvider: LocaleProvider!
 
     private lazy var drawerPresentationManager = DrawerPresentation()
@@ -50,7 +50,7 @@ class StatusViewController: UIViewController, Storyboarded {
     @IBOutlet weak var healthcareWorkersInstructionsView: UIControl!
 
     @IBOutlet weak var linkingIDButton: UIButton!
-    @IBOutlet weak var nhs111label: ButtonWithDynamicType!
+    @IBOutlet weak var nhs111label: LinkButton!
     @IBOutlet weak var medicalAdviceLabel: UILabel!
     
     func inject(
@@ -59,7 +59,7 @@ class StatusViewController: UIViewController, Storyboarded {
         contactEventsUploader: ContactEventsUploading,
         notificationCenter: NotificationCenter,
         linkingIdManager: LinkingIdManaging,
-        statusProvider: StatusProvider,
+        statusProvider: StatusProviding,
         localeProvider: LocaleProvider
     ) {
         self.persistence = persistence
@@ -85,17 +85,6 @@ class StatusViewController: UIViewController, Storyboarded {
         diagnosisStatusView.addGestureRecognizer(
             UITapGestureRecognizer(target: self, action: #selector(diagnosisStatusTapped))
         )
-        
-        nhs111label.setAttributedTitle(
-            NSAttributedString(
-                string: "NHS Coronavirus".localized,
-                attributes: [
-                    .underlineStyle: NSUnderlineStyle.single.rawValue,
-                    .foregroundColor: UIColor(named: "NHS Link")!,
-                    .font: UIFont.preferredFont(forTextStyle: .body),
-                ]
-            ),
-            for: .normal)
 
         notRightView.layer.cornerRadius = 8
         notRightSubtitleLabel.textColor = UIColor(named: "NHS Secondary Text")
@@ -106,10 +95,10 @@ class StatusViewController: UIViewController, Storyboarded {
         noSymptomsLabel.textColor = UIColor(named: "NHS Secondary Text")
         nothingToDoLabel.textColor = UIColor(named: "NHS Secondary Text")
 
-        readLatestAdviceLabel.accessibilityHint = "This will show you the most up to date advice for you on the website www.gov.uk"
+        readLatestAdviceLabel.accessibilityHint = "Opens in your browser".localized
         readLatestAdviceLabel.accessibilityTraits = .link
-        nhs111label.accessibilityHint = "You can find urgent medical advice and more information on the website www.nhs.uk"
-        nhs111label.accessibilityTraits = .link
+
+        nhs111label.inject(title: "NHS Coronavirus".localized, external: true, style: .body)
 
         healthcareWorkersInstructionsView.accessibilityLabel = "Important instructions for healthcare workers"
         healthcareWorkersInstructionsView.accessibilityTraits = .button
@@ -199,7 +188,7 @@ class StatusViewController: UIViewController, Storyboarded {
             attributes: [
                 .underlineStyle: NSUnderlineStyle.single.rawValue,
                 .foregroundColor: UIColor(named: "NHS Link")!,
-                .font: UIFont.preferredFont(forTextStyle: .body),
+                .font: UIFont.preferredFont(forTextStyle: .headline),
             ]
         )
         

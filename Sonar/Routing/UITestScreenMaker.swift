@@ -19,11 +19,29 @@ struct UITestScreenMaker: ScreenMaking {
             let onboardingViewController = OnboardingViewController.instantiate { viewController in
                 let env = OnboardingEnvironment(mockWithHost: viewController)
                 let bluetoothNursery = NoOpBluetoothNursery()
-                let coordinator = OnboardingCoordinator(persistence: env.persistence, authorizationManager: env.authorizationManager, bluetoothNursery: bluetoothNursery)
+                let coordinator = OnboardingCoordinator(persistence: env.persistence,
+                    authorizationManager: env.authorizationManager,
+                    bluetoothNursery: bluetoothNursery
+                )
                 viewController.inject(env: env, coordinator: coordinator, bluetoothNursery: bluetoothNursery, uiQueue: DispatchQueue.main) { }
             }
 
             return onboardingViewController
+
+        case .status:
+            let statusViewController = StatusViewController.instantiate { viewController in
+                let persistence = InMemoryPersistence();
+                viewController.inject(persistence: persistence,
+                    registrationService: MockRegistrationService(),
+                    contactEventsUploader: MockContactEventsUploading(),
+                    notificationCenter: NotificationCenter(),
+                    linkingIdManager: MockLinkingIdManager(),
+                    statusProvider: StatusProvider(persisting: persistence),
+                    localeProvider: FixedLocaleProvider()
+                )
+            }
+
+            return statusViewController
         }
     }
 }
@@ -72,6 +90,38 @@ private class InMemoryPersistence: Persisting {
         lastInstalledVersion = nil
         lastInstalledBuildNumber = nil
         acknowledgmentUrls = []
+    }
+}
+
+private class MockRegistrationService: RegistrationService {
+    var registerCalled = false
+
+    func register() {
+        registerCalled = true
+    }
+}
+
+private class MockContactEventsUploading: ContactEventsUploading {
+    var sessionDelegate: ContactEventsUploaderSessionDelegate = ContactEventsUploaderSessionDelegate(validator: MockTrustValidating())
+
+    func upload() throws {}
+    func cleanup() {}
+    func error(_ error: Swift.Error) {}
+    func ensureUploading() throws {}
+}
+
+private class MockTrustValidating: TrustValidating {
+    func canAccept(_ trust: SecTrust?) -> Bool {
+        return true
+    }
+}
+
+private class FixedLocaleProvider: LocaleProvider {
+    var locale: Locale = Locale(identifier: "en")
+}
+
+private class MockLinkingIdManager: LinkingIdManaging {
+    func fetchLinkingId(completion: @escaping (LinkingId?) -> Void) {
     }
 }
 

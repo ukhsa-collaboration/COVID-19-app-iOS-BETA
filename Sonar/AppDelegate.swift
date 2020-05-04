@@ -82,7 +82,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         session: urlSession
     )
 
-    lazy var statusProvider: StatusProvider = StatusProvider(
+    lazy var statusProvider: StatusProviding = StatusProvider(
         persisting: persistence
     )
 
