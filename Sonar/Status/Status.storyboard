@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="CLu-79-FDa">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1407.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1455"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="64" translatesAutoresizingMaskIntoConstraints="NO" id="2iB-Px-aMY" customClass="LogoStrapline" customModule="Sonar" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
@@ -93,25 +93,25 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zqL-2l-Yzz">
-                                                <rect key="frame" x="0.0" y="124" width="414" height="1283.5"/>
+                                                <rect key="frame" x="0.0" y="124" width="414" height="1331"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="yKo-tg-9E8">
-                                                        <rect key="frame" x="16" y="8" width="382" height="1243.5"/>
+                                                        <rect key="frame" x="16" y="8" width="382" height="1291"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JWK-re-qjH">
-                                                                <rect key="frame" x="0.0" y="0.0" width="382" height="431.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="382" height="469.5"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uA1-0d-OYq">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="12" height="431.5"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="12" height="469.5"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="12" id="MS2-lV-12k"/>
                                                                         </constraints>
                                                                     </view>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="sLA-Af-1Gb" customClass="SymptomStackView" customModule="Sonar" customModuleProvider="target">
-                                                                        <rect key="frame" x="24" y="24" width="338" height="199"/>
+                                                                        <rect key="frame" x="24" y="24" width="338" height="237"/>
                                                                     </stackView>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Kcg-6z-FYa">
-                                                                        <rect key="frame" x="24" y="332.5" width="338" height="45"/>
+                                                                        <rect key="frame" x="24" y="370.5" width="338" height="45"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Read current advice" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oUM-AI-6LL">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="338" height="20.5"/>
@@ -128,7 +128,7 @@
                                                                         </subviews>
                                                                     </stackView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rpg-7v-Vhp">
-                                                                        <rect key="frame" x="24" y="251" width="338" height="33.5"/>
+                                                                        <rect key="frame" x="24" y="289" width="338" height="33.5"/>
                                                                         <accessibility key="accessibilityConfiguration">
                                                                             <accessibilityTraits key="traits" staticText="YES" header="YES"/>
                                                                         </accessibility>
@@ -159,7 +159,7 @@
                                                                 </constraints>
                                                             </view>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="hbY-PQ-ANb">
-                                                                <rect key="frame" x="0.0" y="463.5" width="382" height="360.5"/>
+                                                                <rect key="frame" x="0.0" y="501.5" width="382" height="360.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How are you feeling today?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ZI-fb-8RW">
                                                                         <rect key="frame" x="0.0" y="0.0" width="382" height="26.5"/>
@@ -231,13 +231,13 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="POh-1R-IfZ" userLabel="Red Status">
-                                                                <rect key="frame" x="0.0" y="856" width="382" height="179.5"/>
+                                                                <rect key="frame" x="0.0" y="894" width="382" height="189"/>
                                                                 <subviews>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gbo-jS-eOA">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="382" height="103"/>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gbo-jS-eOA" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="382" height="112.5"/>
                                                                         <subviews>
                                                                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P4u-2I-dwE" userLabel="Background">
-                                                                                <rect key="frame" x="-16" y="0.0" width="414" height="103"/>
+                                                                                <rect key="frame" x="-16" y="0.0" width="414" height="112.5"/>
                                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                             </view>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please book a coronavirus test immediately. Write down your reference code and phone" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zfg-lL-ZYx">
@@ -246,28 +246,36 @@
                                                                                 <nil key="textColor"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0800 540 4900" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vKW-D4-bWS">
-                                                                                <rect key="frame" x="0.0" y="66.5" width="382" height="20.5"/>
-                                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                                                <nil key="textColor"/>
-                                                                                <nil key="highlightedColor"/>
-                                                                            </label>
+                                                                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9DM-3L-KWt" customClass="LinkButton" customModule="Sonar" customModuleProvider="target">
+                                                                                <rect key="frame" x="0.0" y="58.5" width="382" height="54"/>
+                                                                                <accessibility key="accessibilityConfiguration">
+                                                                                    <bool key="isElement" value="NO"/>
+                                                                                </accessibility>
+                                                                                <state key="normal" title="0800 540 4900"/>
+                                                                            </button>
                                                                         </subviews>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                        <accessibility key="accessibilityConfiguration">
+                                                                            <accessibilityTraits key="traits" button="YES"/>
+                                                                            <bool key="isElement" value="YES"/>
+                                                                        </accessibility>
                                                                         <constraints>
                                                                             <constraint firstItem="Zfg-lL-ZYx" firstAttribute="top" secondItem="Gbo-jS-eOA" secondAttribute="top" constant="16" id="1Pg-Ej-o3O"/>
-                                                                            <constraint firstItem="vKW-D4-bWS" firstAttribute="top" secondItem="Zfg-lL-ZYx" secondAttribute="bottom" constant="8" id="9pi-aX-fmU"/>
-                                                                            <constraint firstAttribute="trailing" secondItem="vKW-D4-bWS" secondAttribute="trailing" id="HSE-vU-hoj"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="9DM-3L-KWt" secondAttribute="bottom" id="6LW-2H-FRu"/>
                                                                             <constraint firstItem="P4u-2I-dwE" firstAttribute="top" secondItem="Gbo-jS-eOA" secondAttribute="top" id="T7P-BQ-VxP"/>
                                                                             <constraint firstAttribute="bottom" secondItem="P4u-2I-dwE" secondAttribute="bottom" id="Wbe-Xj-AzW"/>
-                                                                            <constraint firstItem="vKW-D4-bWS" firstAttribute="leading" secondItem="Gbo-jS-eOA" secondAttribute="leading" id="ZJc-Vs-ltI"/>
-                                                                            <constraint firstAttribute="bottom" secondItem="vKW-D4-bWS" secondAttribute="bottom" constant="16" id="pOn-Ek-HgZ"/>
+                                                                            <constraint firstItem="9DM-3L-KWt" firstAttribute="top" secondItem="Zfg-lL-ZYx" secondAttribute="bottom" id="aJy-45-AMs"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="9DM-3L-KWt" secondAttribute="trailing" id="pNl-zv-7hN"/>
                                                                             <constraint firstAttribute="trailing" secondItem="Zfg-lL-ZYx" secondAttribute="trailing" id="rpY-YN-4Ot"/>
+                                                                            <constraint firstItem="9DM-3L-KWt" firstAttribute="leading" secondItem="Gbo-jS-eOA" secondAttribute="leading" id="s3D-JL-klf"/>
                                                                             <constraint firstItem="Zfg-lL-ZYx" firstAttribute="leading" secondItem="Gbo-jS-eOA" secondAttribute="leading" id="zQ5-WH-6eh"/>
                                                                         </constraints>
+                                                                        <connections>
+                                                                            <action selector="bookTestButtonTapped" destination="HPa-EI-l5D" eventType="touchUpInside" id="b6w-UD-A0d"/>
+                                                                        </connections>
                                                                     </view>
                                                                     <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="66c-tO-6TF" userLabel="Linking Id" customClass="UIButton">
-                                                                        <rect key="frame" x="0.0" y="111" width="382" height="68.5"/>
+                                                                        <rect key="frame" x="0.0" y="120.5" width="382" height="68.5"/>
                                                                         <subviews>
                                                                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bxy-UB-mQx" userLabel="Background">
                                                                                 <rect key="frame" x="-16" y="0.0" width="414" height="68.5"/>
@@ -305,7 +313,7 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Ghk-8F-7gV" userLabel="NHS Coronavirus">
-                                                                <rect key="frame" x="0.0" y="1067.5" width="382" height="75.5"/>
+                                                                <rect key="frame" x="0.0" y="1115" width="382" height="75.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you need urgent medical advice or want further information, go to" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zqt-gJ-Jrb">
                                                                         <rect key="frame" x="0.0" y="0.0" width="382" height="42.5"/>
@@ -329,7 +337,7 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="Tgy-0K-l2M" userLabel="Instructions for healthcare workers" customClass="UIControl">
-                                                                <rect key="frame" x="0.0" y="1175" width="382" height="68.5"/>
+                                                                <rect key="frame" x="0.0" y="1222.5" width="382" height="68.5"/>
                                                                 <subviews>
                                                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yI5-J1-igp" userLabel="Background">
                                                                         <rect key="frame" x="-16" y="0.0" width="414" height="68.5"/>
@@ -409,6 +417,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="k8f-bF-CaC"/>
                     <connections>
+                        <outlet property="bookTestButton" destination="Gbo-jS-eOA" id="3hH-pA-sQB"/>
+                        <outlet property="bookTestLabel" destination="Zfg-lL-ZYx" id="dRx-3V-xj3"/>
+                        <outlet property="bookTestPhoneButton" destination="9DM-3L-KWt" id="DEJ-WA-1Xt"/>
                         <outlet property="diagnosisDetailLabel" destination="h1p-vA-xU7" id="WFZ-RF-fJn"/>
                         <outlet property="diagnosisHighlightView" destination="uA1-0d-OYq" id="g8S-eV-fpJ"/>
                         <outlet property="diagnosisStatusView" destination="JWK-re-qjH" id="byU-x3-cXA"/>
