@@ -39,6 +39,7 @@
 		09A9254B2457B2CA00C5DBC1 /* MedicalWorkerInstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A9254A2457B2CA00C5DBC1 /* MedicalWorkerInstructionsViewController.swift */; };
 		09B103622444E9110091834D /* ContactEventPersisterDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B103612444E9110091834D /* ContactEventPersisterDouble.swift */; };
 		09B103642444EAB80091834D /* ContactEventRepositoryDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B103632444EAB80091834D /* ContactEventRepositoryDouble.swift */; };
+		09B3AC812460BEA9001AF47E /* AutoscalingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B3AC802460BEA9001AF47E /* AutoscalingImageView.swift */; };
 		09C9DB3624608BA40012F80A /* AnswerButtonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C9DB3524608BA40012F80A /* AnswerButtonTests.swift */; };
 		09C9DB382460946B0012F80A /* UpdatesBasedOnAccessibilityDisplayChanges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C9DB372460946B0012F80A /* UpdatesBasedOnAccessibilityDisplayChanges.swift */; };
 		09CAA3662440F3B100CE93A6 /* PostcodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CAA3652440F3B100CE93A6 /* PostcodeViewController.swift */; };
@@ -300,6 +301,7 @@
 		09A9254A2457B2CA00C5DBC1 /* MedicalWorkerInstructionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalWorkerInstructionsViewController.swift; sourceTree = "<group>"; };
 		09B103612444E9110091834D /* ContactEventPersisterDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventPersisterDouble.swift; sourceTree = "<group>"; };
 		09B103632444EAB80091834D /* ContactEventRepositoryDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventRepositoryDouble.swift; sourceTree = "<group>"; };
+		09B3AC802460BEA9001AF47E /* AutoscalingImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoscalingImageView.swift; sourceTree = "<group>"; };
 		09C9DB3524608BA40012F80A /* AnswerButtonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerButtonTests.swift; sourceTree = "<group>"; };
 		09C9DB372460946B0012F80A /* UpdatesBasedOnAccessibilityDisplayChanges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatesBasedOnAccessibilityDisplayChanges.swift; sourceTree = "<group>"; };
 		09CAA3652440F3B100CE93A6 /* PostcodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostcodeViewController.swift; sourceTree = "<group>"; };
@@ -723,6 +725,7 @@
 				097C93882447986B00E985CF /* TextField.swift */,
 				13F996722460445400FD6740 /* LinkButton.swift */,
 				09C9DB372460946B0012F80A /* UpdatesBasedOnAccessibilityDisplayChanges.swift */,
+				09B3AC802460BEA9001AF47E /* AutoscalingImageView.swift */,
 			);
 			path = Appearance;
 			sourceTree = "<group>";
@@ -1600,6 +1603,7 @@
 				F62F857F2451051C006580A8 /* ContactEventsUploader.swift in Sources */,
 				09E6E7E4245271A00069DFA8 /* SetupChecker.swift in Sources */,
 				89F06B372434C35A0074C612 /* LoggerMetadata.swift in Sources */,
+				09B3AC812460BEA9001AF47E /* AutoscalingImageView.swift in Sources */,
 				898FE859243B4FE300210775 /* AuthorizationManaging.swift in Sources */,
 				F652F72E244E472E00D97950 /* SymptomsPromptViewController.swift in Sources */,
 				F67C5154243E4D2F008E2945 /* AnswerButton.swift in Sources */,
