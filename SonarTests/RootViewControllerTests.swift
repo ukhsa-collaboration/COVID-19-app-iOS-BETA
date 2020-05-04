@@ -231,6 +231,7 @@ class RootViewControllerTests: TestCase {
          
         XCTAssertTrue(updates.updated)
     }
+
 }
 
 fileprivate func makeDispatcher() -> RemoteNotificationDispatcher {
