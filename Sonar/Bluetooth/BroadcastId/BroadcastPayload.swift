@@ -21,6 +21,7 @@ struct BroadcastPayload {
     let hmacKey: Data
         
     func data(txDate: Date = Date()) -> Data {
+        logger.info("generating broadcast payload with txDate = \(txDate)")
         var payload = Data()
         
         payload.append(BroadcastPayload.ukISO3166CountryCode.networkByteOrderData)
