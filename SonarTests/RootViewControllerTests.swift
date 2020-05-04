@@ -232,6 +232,25 @@ class RootViewControllerTests: TestCase {
         XCTAssertTrue(updates.updated)
     }
 
+    func testUpdatesPresentedViewsInChildrenOnFontSizeChange() {
+        parentViewControllerForTests.viewControllers = [rootVC]
+        XCTAssertNotNil(rootVC.view) // Trigger showing the first view to get it out of the way
+
+        let intermediate = UIViewController()
+        rootVC.show(viewController: intermediate)
+
+        let presented = UIViewController()
+        presented.view = UIView()
+
+        let updates = UpdatesBasedOnAccessibilityDisplayChangesDouble()
+        presented.view.addSubview(updates)
+
+        intermediate.present(presented, animated: false)
+
+        notificationCenter.post(name: UIContentSizeCategory.didChangeNotification, object: nil)
+
+        XCTAssertTrue(updates.updated)
+    }
 }
 
 fileprivate func makeDispatcher() -> RemoteNotificationDispatcher {
