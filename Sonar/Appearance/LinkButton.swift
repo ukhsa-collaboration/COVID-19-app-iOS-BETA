@@ -9,7 +9,7 @@
 import UIKit
 
 class LinkButton: ButtonWithDynamicType {
-    func inject(title: String) {
+    func inject(title: String, style: UIFont.TextStyle) {
         accessibilityHint = "Opens in your browser".localized
         accessibilityTraits = .link
         
@@ -17,7 +17,7 @@ class LinkButton: ButtonWithDynamicType {
             [
                 .underlineStyle: NSUnderlineStyle.single.rawValue,
                 .foregroundColor: UIColor(named: "NHS Link")!,
-                .font: UIFont.preferredFont(forTextStyle: .body)
+                .font: UIFont.preferredFont(forTextStyle: style)
             ]
         )
     }
