@@ -47,6 +47,10 @@ class StatusViewController: UIViewController, Storyboarded {
     @IBOutlet weak var noSymptomsLabel: UILabel!
 
     @IBOutlet weak var redStatusView: UIStackView!
+    @IBOutlet weak var bookTestButton: ButtonWithDynamicType!
+    @IBOutlet weak var bookTestLabel: UILabel!
+    @IBOutlet weak var bookTestPhoneButton: LinkButton!
+
     @IBOutlet weak var healthcareWorkersInstructionsView: UIControl!
 
     @IBOutlet weak var linkingIDButton: UIButton!
@@ -100,6 +104,8 @@ class StatusViewController: UIViewController, Storyboarded {
 
         nhs111label.inject(title: "NHS Coronavirus".localized, external: true, style: .body)
 
+        bookTestButton.accessibilityLabel = "\(bookTestLabel.text!) \(bookTestPhoneButton.title(for: .normal)!)"
+
         healthcareWorkersInstructionsView.accessibilityLabel = "Important instructions for healthcare workers"
         healthcareWorkersInstructionsView.accessibilityTraits = .button
         
@@ -141,7 +147,11 @@ class StatusViewController: UIViewController, Storyboarded {
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true)
     }
-    
+
+    @IBAction func bookTestButtonTapped() {
+        UIApplication.shared.open(URL(string: "tel://448005404900")!)
+    }
+
     @IBAction func medicalWorkerButtonTapped() {
         let vc = MedicalWorkerInstructionsViewController.instantiate()
         showDrawer(vc)
