@@ -17,7 +17,7 @@ class StatusViewController: UIViewController, Storyboarded {
     private var registrationService: RegistrationService!
     private var notificationCenter: NotificationCenter!
     private var contactEventsUploader: ContactEventsUploading!
-    private var linkingIdManager: LinkingIdManager!
+    private var linkingIdManager: LinkingIdManaging!
     private var statusProvider: StatusProvider!
     private var localeProvider: LocaleProvider!
 
@@ -58,7 +58,7 @@ class StatusViewController: UIViewController, Storyboarded {
         registrationService: RegistrationService,
         contactEventsUploader: ContactEventsUploading,
         notificationCenter: NotificationCenter,
-        linkingIdManager: LinkingIdManager,
+        linkingIdManager: LinkingIdManaging,
         statusProvider: StatusProvider,
         localeProvider: LocaleProvider
     ) {

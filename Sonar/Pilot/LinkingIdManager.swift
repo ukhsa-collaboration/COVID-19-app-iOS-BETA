@@ -8,7 +8,11 @@
 
 import Foundation
 
-class LinkingIdManager {
+protocol LinkingIdManaging {
+    func fetchLinkingId(completion: ((LinkingId?) -> Void)?)
+}
+
+class LinkingIdManager: LinkingIdManaging {
     let persisting: Persisting
     let session: Session
 

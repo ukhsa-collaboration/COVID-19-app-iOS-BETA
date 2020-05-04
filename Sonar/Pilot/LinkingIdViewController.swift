@@ -12,9 +12,9 @@ class LinkingIdViewController: UIViewController, Storyboarded {
     static let storyboardName = "LinkingId"
 
     var persisting: Persisting!
-    var linkingIdManager: LinkingIdManager!
+    var linkingIdManager: LinkingIdManaging!
 
-    func inject(persisting: Persisting, linkingIdManager: LinkingIdManager) {
+    func inject(persisting: Persisting, linkingIdManager: LinkingIdManaging) {
         self.persisting = persisting
         self.linkingIdManager = linkingIdManager
     }

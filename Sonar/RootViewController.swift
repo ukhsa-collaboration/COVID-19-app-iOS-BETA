@@ -37,7 +37,7 @@ class RootViewController: UIViewController {
         monitor: AppMonitoring,
         session: Session,
         contactEventsUploader: ContactEventsUploading,
-        linkingIdManager: LinkingIdManager,
+        linkingIdManager: LinkingIdManaging,
         statusProvider: StatusProvider,
         uiQueue: TestableQueue
     ) {
