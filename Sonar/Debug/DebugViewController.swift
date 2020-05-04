@@ -96,6 +96,8 @@ class DebugViewController: UITableViewController, Storyboarded {
         case (1, 0):
             persisting.clear()
             try! SecureBroadcastRotationKeyStorage().clear()
+            contactEventPersister.reset()
+            
             show(title: "Cleared", message: "Registration and diagnosis data has been cleared. Please stop and re-start the application.")
 
         case (1, 1), (1, 2):
