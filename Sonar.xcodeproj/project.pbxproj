@@ -187,6 +187,7 @@
 		F652F72E244E472E00D97950 /* SymptomsPromptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652F72D244E472E00D97950 /* SymptomsPromptViewController.swift */; };
 		F652F730244E4AAD00D97950 /* DrawerPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652F72F244E4AAD00D97950 /* DrawerPresentation.swift */; };
 		F6548FA32460C1C7005F06FF /* UpdateDiagnosisCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6548FA22460C1C7005F06FF /* UpdateDiagnosisCoordinatorTests.swift */; };
+		F6548FA52460DB95005F06FF /* SpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6548FA42460DB95005F06FF /* SpinnerView.swift */; };
 		F673FBB42457A89E00D96C50 /* SymptomsSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F673FBB32457A89E00D96C50 /* SymptomsSummaryViewController.swift */; };
 		F67A2291242AA35C002254B6 /* SecureRegistrationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A2290242AA35B002254B6 /* SecureRegistrationStorage.swift */; };
 		F67A2293242AA370002254B6 /* SecureRegistrationStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */; };
@@ -469,6 +470,7 @@
 		F652F72D244E472E00D97950 /* SymptomsPromptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomsPromptViewController.swift; sourceTree = "<group>"; };
 		F652F72F244E4AAD00D97950 /* DrawerPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerPresentation.swift; sourceTree = "<group>"; };
 		F6548FA22460C1C7005F06FF /* UpdateDiagnosisCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateDiagnosisCoordinatorTests.swift; sourceTree = "<group>"; };
+		F6548FA42460DB95005F06FF /* SpinnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerView.swift; sourceTree = "<group>"; };
 		F673FBB32457A89E00D96C50 /* SymptomsSummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomsSummaryViewController.swift; sourceTree = "<group>"; };
 		F67A2290242AA35B002254B6 /* SecureRegistrationStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRegistrationStorage.swift; sourceTree = "<group>"; };
 		F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRegistrationStorageTests.swift; sourceTree = "<group>"; };
@@ -718,19 +720,20 @@
 			children = (
 				F7091906245DCED800F00AB8 /* AccessibleErrorLabel.swift */,
 				F613936D243FA82B003447E8 /* Appearance.swift */,
+				09B3AC802460BEA9001AF47E /* AutoscalingImageView.swift */,
+				09B3AC822460D3CF001AF47E /* AutoscalingWidthView.swift */,
 				0986EFB4244518FE008D0E1D /* ButtonWithDynamicType.swift */,
 				F652F72F244E4AAD00D97950 /* DrawerPresentation.swift */,
 				F694B1C1245A4A5600C6A5D1 /* ErrorLabel.swift */,
-				AEC6A7BB241BD81A00B0237A /* LogoStrapline.swift */,
-				AEC6A7BD241BD82900B0237A /* LogoStrapline.xib */,
-				F70CB8182450CAB700ED6E7F /* OnboardingLogoStrapline.swift */,
-				F70CB81A2450CFA900ED6E7F /* OnboardingLogoStrapline.xib */,
-				21D93C2F2420C26900C1FA9B /* PrimaryButton.swift */,
-				097C93882447986B00E985CF /* TextField.swift */,
 				13F996722460445400FD6740 /* LinkButton.swift */,
+				AEC6A7BB241BD81A00B0237A /* LogoStrapline.swift */,
+				F70CB8182450CAB700ED6E7F /* OnboardingLogoStrapline.swift */,
+				21D93C2F2420C26900C1FA9B /* PrimaryButton.swift */,
+				F6548FA42460DB95005F06FF /* SpinnerView.swift */,
+				097C93882447986B00E985CF /* TextField.swift */,
 				09C9DB372460946B0012F80A /* UpdatesBasedOnAccessibilityDisplayChanges.swift */,
-				09B3AC802460BEA9001AF47E /* AutoscalingImageView.swift */,
-				09B3AC822460D3CF001AF47E /* AutoscalingWidthView.swift */,
+				AEC6A7BD241BD82900B0237A /* LogoStrapline.xib */,
+				F70CB81A2450CFA900ED6E7F /* OnboardingLogoStrapline.xib */,
 			);
 			path = Appearance;
 			sourceTree = "<group>";
@@ -1553,6 +1556,7 @@
 				F74BAC56245B35910023FFC2 /* SelfsizingTextView.swift in Sources */,
 				219C7B74245AB88100952B4D /* BroadcastEncrypterProvider.swift in Sources */,
 				0997D056243BDEEC0067346C /* RootViewController.swift in Sources */,
+				F6548FA52460DB95005F06FF /* SpinnerView.swift in Sources */,
 				F72EBDA2243D0892009F9328 /* SecureBroadcastRotationKeyStorage.swift in Sources */,
 				F60497772454A294002B8503 /* LinkingIdViewController.swift in Sources */,
 				21AF36AB241A8E50001A4910 /* BTLEListener.swift in Sources */,

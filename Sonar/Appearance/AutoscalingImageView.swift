@@ -14,6 +14,8 @@ class AutoscalingImageView: UIImageView, UpdatesBasedOnAccessibilityDisplayChang
     private var scaleFactor: CGFloat!
     
     override func awakeFromNib() {
+        super.awakeFromNib()
+
         scaleFactor = bounds.size.width / FontScaling.bodyFontDefaultSize
         widthConstraint = widthAnchor.constraint(equalToConstant: bounds.size.width)
         let aspectRatioConstraint = NSLayoutConstraint(

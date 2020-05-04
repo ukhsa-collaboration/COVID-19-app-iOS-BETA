@@ -26,7 +26,7 @@ class StatusViewController: UIViewController, Storyboarded {
     
     @IBOutlet var registratonStatusView: UIView!
     @IBOutlet var registrationStatusIcon: UIImageView!
-    @IBOutlet var registrationSpinner: UIActivityIndicatorView!
+    @IBOutlet var registrationSpinner: SpinnerView!
     @IBOutlet var registrationStatusText: UILabel!
     @IBOutlet var registrationRetryButton: UIButton!
 
@@ -305,13 +305,11 @@ class StatusViewController: UIViewController, Storyboarded {
     }
     
     private func showSpinner() {
-        registrationSpinner.startAnimating()
         registrationSpinner.isHidden = false
         registrationStatusIcon.isHidden = true
     }
     
     private func hideSpinner() {
-        registrationSpinner.stopAnimating()
         registrationSpinner.isHidden = true
         registrationStatusIcon.isHidden = false
     }
