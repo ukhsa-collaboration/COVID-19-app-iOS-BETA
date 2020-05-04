@@ -68,11 +68,21 @@ class Persistence: Persisting {
     init(
         secureRegistrationStorage: SecureRegistrationStorage,
         broadcastKeyStorage: BroadcastRotationKeyStorage,
-        monitor: AppMonitoring
+        monitor: AppMonitoring,
+        storageChecker: StorageChecking
     ) {
         self.secureRegistrationStorage = secureRegistrationStorage
         self.broadcastKeyStorage = broadcastKeyStorage
         self.monitor = monitor
+        
+        let storageState = storageChecker.state
+        if storageState == .keyChainAndUserDefaultsOutOfSync {
+            clear()
+        }
+        
+        if storageState != .inSync {
+            storageChecker.markAsSynced()
+        }
     }
 
     var registration: Registration? {

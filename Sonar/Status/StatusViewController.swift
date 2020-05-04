@@ -16,8 +16,8 @@ class StatusViewController: UIViewController, Storyboarded {
     private var persistence: Persisting!
     private var registrationService: RegistrationService!
     private var notificationCenter: NotificationCenter!
-    private var contactEventsUploader: ContactEventsUploader!
-    private var linkingIdManager: LinkingIdManager!
+    private var contactEventsUploader: ContactEventsUploading!
+    private var linkingIdManager: LinkingIdManaging!
     private var statusProvider: StatusProvider!
     private var localeProvider: LocaleProvider!
 
@@ -56,9 +56,9 @@ class StatusViewController: UIViewController, Storyboarded {
     func inject(
         persistence: Persisting,
         registrationService: RegistrationService,
-        contactEventsUploader: ContactEventsUploader,
+        contactEventsUploader: ContactEventsUploading,
         notificationCenter: NotificationCenter,
-        linkingIdManager: LinkingIdManager,
+        linkingIdManager: LinkingIdManaging,
         statusProvider: StatusProvider,
         localeProvider: LocaleProvider
     ) {

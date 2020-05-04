@@ -19,7 +19,7 @@ class DebugViewController: UITableViewController, Storyboarded {
     private var persisting: Persisting!
     private var contactEventRepository: ContactEventRepository!
     private var contactEventPersister: ContactEventPersister!
-    private var contactEventsUploader: ContactEventsUploader!
+    private var contactEventsUploader: ContactEventsUploading!
 
     private var bluetoothNursery: ConcreteBluetoothNursery!
     var observation: NSKeyValueObservation?
@@ -36,7 +36,7 @@ class DebugViewController: UITableViewController, Storyboarded {
         bluetoothNursery: BluetoothNursery,
         contactEventRepository: ContactEventRepository,
         contactEventPersister: ContactEventPersister,
-        contactEventsUploader: ContactEventsUploader
+        contactEventsUploader: ContactEventsUploading
     ) {
         self.persisting = persisting
         self.bluetoothNursery = bluetoothNursery as? ConcreteBluetoothNursery
@@ -96,6 +96,8 @@ class DebugViewController: UITableViewController, Storyboarded {
         case (1, 0):
             persisting.clear()
             try! SecureBroadcastRotationKeyStorage().clear()
+            contactEventPersister.reset()
+            
             show(title: "Cleared", message: "Registration and diagnosis data has been cleared. Please stop and re-start the application.")
 
         case (1, 1), (1, 2):

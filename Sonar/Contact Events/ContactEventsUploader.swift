@@ -10,7 +10,16 @@ import Foundation
 
 import Logging
 
-class ContactEventsUploader {
+protocol ContactEventsUploading {
+    var sessionDelegate: ContactEventsUploaderSessionDelegate { get }
+
+    func upload() throws
+    func cleanup()
+    func error(_ error: Swift.Error)
+    func ensureUploading() throws
+}
+
+class ContactEventsUploader: ContactEventsUploading {
 
     enum Error: Swift.Error {
         case rateLimited
@@ -100,6 +109,8 @@ class ContactEventsUploader {
 
         try? upload(diagnosis, with: registration)
     }
+
+    //MARK: - Private
 
     private func upload(_ diagnosis: SelfDiagnosis, with registration: Registration) throws {
         let contactEvents = contactEventRepository.contactEvents

@@ -214,6 +214,7 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
         }
 
         guard let broadcastPayload = idGenerator.broadcastPayload()?.data() else {
+            logger.info("responding to read request with empty payload")
             request.value = Data()
             peripheral.respond(to: request, withResult: .success)
             return

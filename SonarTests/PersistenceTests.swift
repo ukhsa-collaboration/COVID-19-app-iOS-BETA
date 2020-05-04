@@ -14,6 +14,7 @@ class PersistenceTests: TestCase {
     private var secureRegistrationStorage: SecureRegistrationStorage!
     private var broadcastKeyStorage: SecureBroadcastRotationKeyStorage!
     private var monitor: AppMonitoringDouble!
+    private var storageChecker: StorageCheckingDouble!
     private var persistence: Persistence!
     
     override func setUp() {
@@ -22,10 +23,12 @@ class PersistenceTests: TestCase {
         secureRegistrationStorage = SecureRegistrationStorage()
         broadcastKeyStorage = SecureBroadcastRotationKeyStorage()
         monitor = AppMonitoringDouble()
+        storageChecker = StorageCheckingDouble()
         persistence = Persistence(
             secureRegistrationStorage: secureRegistrationStorage,
             broadcastKeyStorage: broadcastKeyStorage,
-            monitor: monitor
+            monitor: monitor,
+            storageChecker: storageChecker
         )
     }
     
@@ -88,12 +91,14 @@ class PersistenceTests: TestCase {
         let p1 = Persistence(
             secureRegistrationStorage: secureRegistrationStorage,
             broadcastKeyStorage: broadcastKeyStorage,
-            monitor: monitor
+            monitor: monitor,
+            storageChecker: StorageCheckingDouble()
         )
         let p2 = Persistence(
             secureRegistrationStorage: secureRegistrationStorage,
             broadcastKeyStorage: broadcastKeyStorage,
-            monitor: monitor
+            monitor: monitor,
+            storageChecker: StorageCheckingDouble()
         )
         
         p1.partialPostcode = nil
@@ -128,12 +133,14 @@ class PersistenceTests: TestCase {
         let p1 = Persistence(
             secureRegistrationStorage: secureRegistrationStorage,
             broadcastKeyStorage: broadcastKeyStorage,
-            monitor: monitor
+            monitor: monitor,
+            storageChecker: StorageCheckingDouble()
         )
         let p2 = Persistence(
             secureRegistrationStorage: secureRegistrationStorage,
             broadcastKeyStorage: broadcastKeyStorage,
-            monitor: monitor
+            monitor: monitor,
+            storageChecker: StorageCheckingDouble()
         )
         
         p1.lastInstalledVersion = nil
@@ -147,12 +154,14 @@ class PersistenceTests: TestCase {
         let p1 = Persistence(
             secureRegistrationStorage: secureRegistrationStorage,
             broadcastKeyStorage: broadcastKeyStorage,
-            monitor: monitor
+            monitor: monitor,
+            storageChecker: StorageCheckingDouble()
         )
         let p2 = Persistence(
             secureRegistrationStorage: secureRegistrationStorage,
             broadcastKeyStorage: broadcastKeyStorage,
-            monitor: monitor
+            monitor: monitor,
+            storageChecker: StorageCheckingDouble()
         )
         
         p1.lastInstalledBuildNumber = nil
@@ -182,6 +191,40 @@ class PersistenceTests: TestCase {
         persistence.acknowledgmentUrls = Set((0..<101).map { URL(string: "https://example.com/ack/\($0)")! })
 
         XCTAssertEqual(persistence.acknowledgmentUrls.count, 100)
+    }
+    
+    func testMarksAnUninitializedStorageAsSynchronised() {
+        storageChecker.state = .notInitialized
+        persistence.partialPostcode = "AB12"
+        recreatePersistence()
+        XCTAssertEqual(storageChecker.markAsSyncedCallbackCount, 1)
+        XCTAssertEqual(persistence.partialPostcode, "AB12")
+    }
+    
+    func testAnInSyncStorageIsNotReSynchronised() {
+        storageChecker.state = .inSync
+        persistence.partialPostcode = "AB12"
+        recreatePersistence()
+        XCTAssertEqual(storageChecker.markAsSyncedCallbackCount, 0)
+        XCTAssertEqual(persistence.partialPostcode, "AB12")
+    }
+    
+    func testAnOutOfSyncStorageIsResetAndSynchronized() {
+        storageChecker.state = .keyChainAndUserDefaultsOutOfSync
+        persistence.partialPostcode = "AB12"
+        recreatePersistence()
+        XCTAssertEqual(storageChecker.markAsSyncedCallbackCount, 1)
+        XCTAssertNil(persistence.partialPostcode)
+    }
+    
+    private func recreatePersistence() {
+        storageChecker.markAsSyncedCallbackCount = 0
+        persistence = Persistence(
+            secureRegistrationStorage: secureRegistrationStorage,
+            broadcastKeyStorage: broadcastKeyStorage,
+            monitor: monitor,
+            storageChecker: storageChecker
+        )
     }
 
 }

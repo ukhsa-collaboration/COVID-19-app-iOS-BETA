@@ -4,5 +4,10 @@
   "sonar_header_value": "a-header-value",
   "sonar_service_uuid": "an-uuid",
   "sonar_id_characteristic_uuid": "another-uuid",
-  "sonar_keepalive_characteristic_uuid": "yet-another-uuid"
+  "sonar_keepalive_characteristic_uuid": "yet-another-uuid",
+  "debug": {
+    "registration_id": "b9dc6aa7-2bcd-432c-a6b3-9a977e2b0d81",
+    "registration_secret_key": "0000",
+    "registration_broadcast_rotation_key": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEu1f68MqDXbKeTqZMTHsOGToO4rKnPClXe/kE+oWqlaWZQv4J1E98cUNdpzF9JIFRPMCNdGOvTr4UB+BhQv9GWg=="
+  }
 }
