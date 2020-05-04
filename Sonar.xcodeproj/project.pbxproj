@@ -57,6 +57,7 @@
 		138114E42450543600BA46C7 /* SymptomStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138114E32450543600BA46C7 /* SymptomStackView.swift */; };
 		138114E62450796C00BA46C7 /* LocalNotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138114E52450796C00BA46C7 /* LocalNotificationScheduler.swift */; };
 		13F4AE882451EB330082A46D /* QuestionSymptomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F4AE872451EB330082A46D /* QuestionSymptomsViewController.swift */; };
+		13F996732460445400FD6740 /* LinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F996722460445400FD6740 /* LinkButton.swift */; };
 		2115C3E624360427009C0F5B /* DebuggerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2115C3E524360427009C0F5B /* DebuggerTableViewCell.swift */; };
 		213C806C241A56430020EFA5 /* PermissionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213C806B241A56430020EFA5 /* PermissionsViewController.swift */; };
 		214209B62421072C00C7BFF3 /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209B52421072C00C7BFF3 /* StatusViewController.swift */; };
@@ -315,6 +316,7 @@
 		138114E32450543600BA46C7 /* SymptomStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomStackView.swift; sourceTree = "<group>"; };
 		138114E52450796C00BA46C7 /* LocalNotificationScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationScheduler.swift; sourceTree = "<group>"; };
 		13F4AE872451EB330082A46D /* QuestionSymptomsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionSymptomsViewController.swift; sourceTree = "<group>"; };
+		13F996722460445400FD6740 /* LinkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkButton.swift; sourceTree = "<group>"; };
 		2115C3E524360427009C0F5B /* DebuggerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebuggerTableViewCell.swift; sourceTree = "<group>"; };
 		213C806B241A56430020EFA5 /* PermissionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsViewController.swift; sourceTree = "<group>"; };
 		214209B52421072C00C7BFF3 /* StatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
@@ -705,6 +707,7 @@
 				F70CB81A2450CFA900ED6E7F /* OnboardingLogoStrapline.xib */,
 				21D93C2F2420C26900C1FA9B /* PrimaryButton.swift */,
 				097C93882447986B00E985CF /* TextField.swift */,
+				13F996722460445400FD6740 /* LinkButton.swift */,
 			);
 			path = Appearance;
 			sourceTree = "<group>";
@@ -1563,6 +1566,7 @@
 				13F4AE882451EB330082A46D /* QuestionSymptomsViewController.swift in Sources */,
 				F758553A24294C8D00CBE1ED /* RequestFactory.swift in Sources */,
 				F604976B24539F6C002B8503 /* UploadLogsViewController.swift in Sources */,
+				13F996732460445400FD6740 /* LinkButton.swift in Sources */,
 				21C417CC242CB15D00DEF3E2 /* ConfirmRegistrationRequest.swift in Sources */,
 				F67A2291242AA35C002254B6 /* SecureRegistrationStorage.swift in Sources */,
 				AE2DCAA0241920B600A940FC /* BTLEBroadcaster.swift in Sources */,

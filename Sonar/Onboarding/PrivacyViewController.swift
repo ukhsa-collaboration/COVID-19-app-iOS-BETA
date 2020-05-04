@@ -13,22 +13,14 @@ class PrivacyViewController: UIViewController, Storyboarded {
 
     private var continueHandler: (() -> Void)! = nil
 
-    @IBOutlet weak var moreAbout: ButtonWithDynamicType!
-    @IBOutlet weak var privacyPolicy: ButtonWithDynamicType!
-    @IBOutlet weak var termsConditions: ButtonWithDynamicType!
+    @IBOutlet weak var moreAbout: LinkButton!
+    @IBOutlet weak var privacyPolicy: LinkButton!
+    @IBOutlet weak var termsConditions: LinkButton!
     
     override func viewDidLoad() {
-        moreAbout.setAttributedTitle(NSAttributedString(string: "More about the app".localized, attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue, .foregroundColor: UIColor(named: "NHS Link")!]), for: .normal)
-        moreAbout.accessibilityTraits = .link
-        moreAbout.accessibilityHint = "Opens in your browser".localized
-        
-        privacyPolicy.setAttributedTitle(NSAttributedString(string: "Privacy policy".localized, attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue, .foregroundColor: UIColor(named: "NHS Link")!]), for: .normal)
-        privacyPolicy.accessibilityTraits = .link
-        privacyPolicy.accessibilityHint = "Opens in your browser".localized
-        
-        termsConditions.setAttributedTitle(NSAttributedString(string: "Terms and conditions".localized, attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue, .foregroundColor: UIColor(named: "NHS Link")!]), for: .normal)
-        termsConditions.accessibilityTraits = .link
-        termsConditions.accessibilityHint = "Opens in your browser".localized
+        moreAbout.inject(title: "More about the app".localized)
+        privacyPolicy.inject(title: "Privacy policy".localized)
+        termsConditions.inject(title: "Terms and conditions".localized)
     }
     
     func inject(continueHandler: @escaping () -> Void) {

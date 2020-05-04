@@ -50,7 +50,7 @@ class StatusViewController: UIViewController, Storyboarded {
     @IBOutlet weak var healthcareWorkersInstructionsView: UIControl!
 
     @IBOutlet weak var linkingIDButton: UIButton!
-    @IBOutlet weak var nhs111label: ButtonWithDynamicType!
+    @IBOutlet weak var nhs111label: LinkButton!
     @IBOutlet weak var medicalAdviceLabel: UILabel!
     
     func inject(
@@ -85,17 +85,6 @@ class StatusViewController: UIViewController, Storyboarded {
         diagnosisStatusView.addGestureRecognizer(
             UITapGestureRecognizer(target: self, action: #selector(diagnosisStatusTapped))
         )
-        
-        nhs111label.setAttributedTitle(
-            NSAttributedString(
-                string: "NHS Coronavirus".localized,
-                attributes: [
-                    .underlineStyle: NSUnderlineStyle.single.rawValue,
-                    .foregroundColor: UIColor(named: "NHS Link")!,
-                    .font: UIFont.preferredFont(forTextStyle: .body),
-                ]
-            ),
-            for: .normal)
 
         notRightView.layer.cornerRadius = 8
         notRightSubtitleLabel.textColor = UIColor(named: "NHS Secondary Text")
@@ -109,8 +98,7 @@ class StatusViewController: UIViewController, Storyboarded {
         readLatestAdviceLabel.accessibilityHint = "Opens in your browser".localized
         readLatestAdviceLabel.accessibilityTraits = .link
 
-        nhs111label.accessibilityHint = "Opens in your browser".localized
-        nhs111label.accessibilityTraits = .link
+        nhs111label.inject(title: "NHS Coronavirus".localized)
 
         healthcareWorkersInstructionsView.accessibilityLabel = "Important instructions for healthcare workers"
         healthcareWorkersInstructionsView.accessibilityTraits = .button

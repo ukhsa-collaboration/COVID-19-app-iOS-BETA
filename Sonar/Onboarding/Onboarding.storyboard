@@ -3,7 +3,7 @@
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -231,7 +231,7 @@
                                                                             <constraint firstAttribute="height" constant="16" id="7Ee-el-Ayk"/>
                                                                         </constraints>
                                                                     </view>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7t9-4s-vCV" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7t9-4s-vCV" customClass="LinkButton" customModule="Sonar" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="36.333333333333314" width="358" height="33"/>
                                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                         <state key="normal" title="Button"/>
@@ -239,7 +239,7 @@
                                                                             <action selector="tapMoreAbout:" destination="asv-dx-knf" eventType="touchUpInside" id="Rha-0o-UXG"/>
                                                                         </connections>
                                                                     </button>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wZa-Mg-Yq4" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wZa-Mg-Yq4" customClass="LinkButton" customModule="Sonar" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="69.333333333333314" width="358" height="33"/>
                                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                         <state key="normal" title="Button"/>
@@ -247,7 +247,7 @@
                                                                             <action selector="tapPrivacy:" destination="asv-dx-knf" eventType="touchUpInside" id="wM7-Rc-ueX"/>
                                                                         </connections>
                                                                     </button>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IS8-GX-Tl4" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IS8-GX-Tl4" customClass="LinkButton" customModule="Sonar" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="102.33333333333331" width="358" height="33"/>
                                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                         <state key="normal" title="Button"/>
