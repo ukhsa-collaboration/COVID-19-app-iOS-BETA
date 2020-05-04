@@ -22,11 +22,16 @@ class NotificationAcknowledger {
 
     // Returns if we have already ack'ed the notification
     func ack(userInfo: [AnyHashable: Any]) -> Bool {
+        guard let ackObject = userInfo["acknowledgmentUrl"] else {
+            // No ackUrl means there's nothing to ack
+            logger.debug("no acknowledgment URL")
+            return false
+        }
+
         guard
-            let ackString = userInfo["acknowledgmentUrl"] as? String,
+            let ackString = ackObject as? String,
             let ackUrl = URL(string: ackString)
         else {
-            // No ackUrl means there's nothing to ack
             logger.debug("asked to ack \(String(describing: userInfo["acknowledgmentUrl"])) but it doesn't look like a valid URL")
             return false
         }
