@@ -45,6 +45,8 @@ class StorageChecker: StorageChecking {
         writeToKeychain(with: token)
         writeToUserDefaults(with: token)
     }
+
+    //MARK: - Private
     
     private func writeToUserDefaults(with token: Data) {
         UserDefaults.standard.set(token, forKey: service)
