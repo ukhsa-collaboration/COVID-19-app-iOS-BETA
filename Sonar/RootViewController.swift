@@ -38,7 +38,7 @@ class RootViewController: UIViewController {
         session: Session,
         contactEventsUploader: ContactEventsUploading,
         linkingIdManager: LinkingIdManaging,
-        statusProvider: StatusProvider,
+        statusProvider: StatusProviding,
         uiQueue: TestableQueue
     ) {
         self.persistence = persistence

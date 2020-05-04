@@ -18,7 +18,7 @@ class StatusViewController: UIViewController, Storyboarded {
     private var notificationCenter: NotificationCenter!
     private var contactEventsUploader: ContactEventsUploading!
     private var linkingIdManager: LinkingIdManaging!
-    private var statusProvider: StatusProvider!
+    private var statusProvider: StatusProviding!
     private var localeProvider: LocaleProvider!
 
     private lazy var drawerPresentationManager = DrawerPresentation()
@@ -59,7 +59,7 @@ class StatusViewController: UIViewController, Storyboarded {
         contactEventsUploader: ContactEventsUploading,
         notificationCenter: NotificationCenter,
         linkingIdManager: LinkingIdManaging,
-        statusProvider: StatusProvider,
+        statusProvider: StatusProviding,
         localeProvider: LocaleProvider
     ) {
         self.persistence = persistence

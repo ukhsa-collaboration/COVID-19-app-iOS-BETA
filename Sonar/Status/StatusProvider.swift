@@ -12,7 +12,12 @@ enum Status: Equatable {
     case blue, amber, red
 }
 
-class StatusProvider {
+protocol StatusProviding {
+    var status: Status { get }
+    var amberExpiryDate: Date? { get }
+}
+
+class StatusProvider: StatusProviding {
 
     var status: Status {
         switch (persisting.potentiallyExposed, persisting.selfDiagnosis?.isAffected) {
