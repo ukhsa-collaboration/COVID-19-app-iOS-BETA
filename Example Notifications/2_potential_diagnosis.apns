@@ -1,10 +1,7 @@
 {
-    "Simulator Target Bundle": "uk.nhs.nhsx.sonar.internal",
-
     "aps": {
       "content-available": 1
     },
 
-    "status": "Potential",
-    "acknowledgmentUrl": "https://example.com/ack"
+    "status": "Potential"
 }
