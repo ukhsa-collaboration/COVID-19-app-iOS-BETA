@@ -31,46 +31,51 @@ class ContactEventTests: XCTestCase {
     }
     
     func testSerializesAndDeserializes() throws {
-        var originalContactEvent = ContactEvent(
+        var currentFormatContactEvent = ContactEvent(
             timestamp: Date(),
             rssiValues: [-42],
             rssiIntervals: [123],
             duration: 456.0
         )
-        originalContactEvent.broadcastPayload = IncomingBroadcastPayload.sample1
-        originalContactEvent.txPower = 123
+        currentFormatContactEvent.broadcastPayload = IncomingBroadcastPayload.sample1
+        currentFormatContactEvent.txPower = 123
 
-        let encodedAsData = try JSONEncoder().encode(originalContactEvent)
+        let encodedAsData = try JSONEncoder().encode(currentFormatContactEvent)
         let decodedContactEvent = try JSONDecoder().decode(ContactEvent.self, from: encodedAsData)
         
-        XCTAssertEqual(decodedContactEvent, originalContactEvent)
+        XCTAssertEqual(decodedContactEvent, currentFormatContactEvent)
     }
     
-    func testDecodesPreviousVersion() throws {
-        let previous = PreviousSerializationFormat(
+    func testDecodesVersion1_0_1_Build341() throws {
+        let previousFormatContactEvent = ContactEvent.PreviousSerializationFormats.Version1_0_1_Build341(
             broadcastPayload: IncomingBroadcastPayload.sample1,
             timestamp: Date(),
             rssiValues: [-42],
             rssiIntervals: [123],
             duration: 456.0
         )
-        let data = try JSONEncoder().encode(previous)
-        let decoded = try JSONDecoder().decode(ContactEvent.self, from: data)
+
+        let encodedAsData = try JSONEncoder().encode(previousFormatContactEvent)
+        let decodedContactEvent = try JSONDecoder().decode(ContactEvent.self, from: encodedAsData)
         
-        XCTAssertEqual(decoded.broadcastPayload, previous.broadcastPayload)
-        XCTAssertEqual(decoded.txPower, 0)
-        XCTAssertEqual(decoded.timestamp, previous.timestamp)
-        XCTAssertEqual(decoded.rssiValues, previous.rssiValues)
-        XCTAssertEqual(decoded.rssiIntervals, previous.rssiIntervals)
-        XCTAssertEqual(decoded.duration, previous.duration)
+        XCTAssertEqual(decodedContactEvent.broadcastPayload, previousFormatContactEvent.broadcastPayload)
+        XCTAssertEqual(decodedContactEvent.txPower, 0)
+        XCTAssertEqual(decodedContactEvent.timestamp, previousFormatContactEvent.timestamp)
+        XCTAssertEqual(decodedContactEvent.rssiValues, previousFormatContactEvent.rssiValues)
+        XCTAssertEqual(decodedContactEvent.rssiIntervals, previousFormatContactEvent.rssiIntervals)
+        XCTAssertEqual(decodedContactEvent.duration, previousFormatContactEvent.duration)
     }
+
 }
 
-// As of v1.0.1, build 341
-private struct PreviousSerializationFormat: Codable {
-    var broadcastPayload: IncomingBroadcastPayload? = nil
-    var timestamp: Date = Date()
-    var rssiValues: [Int8] = []
-    var rssiIntervals: [TimeInterval] = []
-    var duration: TimeInterval = 0
+fileprivate extension ContactEvent {
+    struct PreviousSerializationFormats {
+        struct Version1_0_1_Build341: Codable {
+            var broadcastPayload: IncomingBroadcastPayload? = nil
+            var timestamp: Date = Date()
+            var rssiValues: [Int8] = []
+            var rssiIntervals: [TimeInterval] = []
+            var duration: TimeInterval = 0
+        }
+    }
 }

@@ -45,7 +45,8 @@ struct ContactEvent: Equatable, Codable {
         rssiValues = try values.decode([Int8].self, forKey: .rssiValues)
         rssiIntervals = try values.decode([TimeInterval].self, forKey: .rssiIntervals)
         duration = try values.decode(TimeInterval.self, forKey: .duration)
-        // v1.0.1, build 341 and earlier don't serialize txPower
+
+        // v1.0.1, build 341 and earlier doesn't serialize txPower
         txPower = (try? values.decode(Int8.self, forKey: .txPower)) ?? 0
     }
 
