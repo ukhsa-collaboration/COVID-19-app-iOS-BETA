@@ -21,13 +21,17 @@ class PlistPersister<K: Hashable & Codable, V: Codable> {
     
     private let encoder: PropertyListEncoder
 
-    internal init(fileName: String) {
+    internal convenience init(fileName: String) {
         if let dirUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-            fileURL = dirUrl.appendingPathComponent(fileName + ".plist")
+            self.init(fileURL: dirUrl.appendingPathComponent(fileName + ".plist"))
         } else {
             logger.critical("couldn't open file for writing \(fileName).plist")
             fatalError()
         }
+    }
+    
+    internal init(fileURL: URL) {
+        self.fileURL = fileURL
         encoder = PropertyListEncoder()
         encoder.outputFormat = .binary
         readItems()
