@@ -31,18 +31,19 @@ class ContactEventTests: XCTestCase {
     }
     
     func testSerializesAndDeserializes() throws {
-        var toSave = ContactEvent(
+        var originalContactEvent = ContactEvent(
             timestamp: Date(),
             rssiValues: [-42],
             rssiIntervals: [123],
             duration: 456.0
         )
-        toSave.broadcastPayload = IncomingBroadcastPayload.sample1
-        toSave.txPower = 123
-        let data = try JSONEncoder().encode(toSave)
-        let decoded = try JSONDecoder().decode(ContactEvent.self, from: data)
+        originalContactEvent.broadcastPayload = IncomingBroadcastPayload.sample1
+        originalContactEvent.txPower = 123
+
+        let encodedAsData = try JSONEncoder().encode(originalContactEvent)
+        let decodedContactEvent = try JSONDecoder().decode(ContactEvent.self, from: encodedAsData)
         
-        XCTAssertEqual(decoded, toSave)
+        XCTAssertEqual(decodedContactEvent, originalContactEvent)
     }
     
     func testDecodesPreviousVersion() throws {
