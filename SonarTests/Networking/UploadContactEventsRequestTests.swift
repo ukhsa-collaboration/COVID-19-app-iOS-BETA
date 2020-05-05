@@ -125,28 +125,4 @@ extension StringProtocol where Self: RangeReplaceableCollection {
     var removingAllWhitespacesAndNewlines: Self {
         return filter { !$0.isNewline && !$0.isWhitespace }
     }
-    mutating func removeAllWhitespacesAndNewlines() {
-        removeAll { $0.isNewline || $0.isWhitespace }
-    }
-}
-
-class RegistrationStorageDouble: SecureRegistrationStorage {
-    let id: UUID?
-    let key: Data?
-
-    override init() {
-        id = nil
-        key = nil
-    }
-
-    init(id: UUID, key: Data) {
-        self.id = id
-        self.key = key
-    }
-
-    override func get() -> PartialRegistration? {
-        guard let id = id, let key = key else { return nil }
-
-        return PartialRegistration(id: id, secretKey: key)
-    }
 }
