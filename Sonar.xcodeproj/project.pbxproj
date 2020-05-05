@@ -73,6 +73,7 @@
 		214209D72423C9B600C7BFF3 /* UploadContactEventsRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209D62423C9B600C7BFF3 /* UploadContactEventsRequestTests.swift */; };
 		214209D924262B7500C7BFF3 /* SessionHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209D824262B7500C7BFF3 /* SessionHelpers.swift */; };
 		217A23BE243B34E8001B8236 /* UIDevice+ModelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217A23BD243B34E8001B8236 /* UIDevice+ModelName.swift */; };
+		219288852461B1E100691FDD /* build341_contactEvents.plist in Resources */ = {isa = PBXBuildFile; fileRef = 219288842461B1E100691FDD /* build341_contactEvents.plist */; };
 		219B613524471B9800E2F1A6 /* UUIDExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219B613424471B9800E2F1A6 /* UUIDExtensions.swift */; };
 		219B61372447371700E2F1A6 /* UUIDExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219B61362447371700E2F1A6 /* UUIDExtensionsTests.swift */; };
 		219C7B74245AB88100952B4D /* BroadcastEncrypterProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219C7B73245AB88100952B4D /* BroadcastEncrypterProvider.swift */; };
@@ -338,6 +339,7 @@
 		214209D62423C9B600C7BFF3 /* UploadContactEventsRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadContactEventsRequestTests.swift; sourceTree = "<group>"; };
 		214209D824262B7500C7BFF3 /* SessionHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionHelpers.swift; sourceTree = "<group>"; };
 		217A23BD243B34E8001B8236 /* UIDevice+ModelName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+ModelName.swift"; sourceTree = "<group>"; };
+		219288842461B1E100691FDD /* build341_contactEvents.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = build341_contactEvents.plist; sourceTree = "<group>"; };
 		219B613424471B9800E2F1A6 /* UUIDExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UUIDExtensions.swift; sourceTree = "<group>"; };
 		219B61362447371700E2F1A6 /* UUIDExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UUIDExtensionsTests.swift; sourceTree = "<group>"; };
 		219C7B73245AB88100952B4D /* BroadcastEncrypterProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastEncrypterProvider.swift; sourceTree = "<group>"; };
@@ -857,6 +859,7 @@
 		21F374002433845600926FB8 /* Contact Events */ = {
 			isa = PBXGroup;
 			children = (
+				219288842461B1E100691FDD /* build341_contactEvents.plist */,
 				21E50510244470590065C69B /* ContactEventTests.swift */,
 				F62F858024510716006580A8 /* ContactEventsUploaderTests.swift */,
 				21F37401243384D400926FB8 /* PersistingContactEventRepositoryTests.swift */,
@@ -1383,6 +1386,7 @@
 			files = (
 				896BE909244F06CB00B3687C /* www.google.com.cer in Resources */,
 				896BE90D244F06F600B3687C /* GlobalSign.cer in Resources */,
+				219288852461B1E100691FDD /* build341_contactEvents.plist in Resources */,
 				896BE90B244F06E300B3687C /* GTS CA 1O1.cer in Resources */,
 				896BE915244F391F00B3687C /* www.apple.com.cer in Resources */,
 			);

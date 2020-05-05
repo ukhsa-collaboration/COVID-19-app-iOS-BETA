@@ -112,6 +112,18 @@ class PersistingContactEventRepositoryTests: XCTestCase {
 
         XCTAssertEqual(repository.contactEvents.count, 1)
     }
+    
+    func testSerialisationFormatDoesNotChange() throws {
+        // If this test fails something happened (maybe a rename, maybe addition or deletion of a field)
+        // which changed the serialization format on disk. Since we're now live, you need to make sure
+        // a migration is added (and tested!) that can migrate from *every past serialised version* of
+        // the on-disk data to the current version.
+        
+        let fileURL = Bundle(for: type(of: self)).url(forResource: "build341_contactEvents", withExtension: "plist")!
+        let persister_build341 = PlistPersister<UUID, ContactEvent>(fileURL: fileURL)
+        
+        XCTAssertEqual(persister_build341.items.count, 2)
+    }
 
 }
 
