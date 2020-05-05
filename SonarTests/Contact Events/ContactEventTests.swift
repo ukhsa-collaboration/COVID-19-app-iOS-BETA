@@ -58,8 +58,10 @@ class ContactEventTests: XCTestCase {
         let decoded = try JSONDecoder().decode(ContactEvent.self, from: data)
         
         XCTAssertEqual(decoded.broadcastPayload, previous.broadcastPayload)
+        XCTAssertEqual(decoded.txPower, 0)
         XCTAssertEqual(decoded.timestamp, previous.timestamp)
         XCTAssertEqual(decoded.rssiValues, previous.rssiValues)
+        XCTAssertEqual(decoded.rssiIntervals, previous.rssiIntervals)
         XCTAssertEqual(decoded.duration, previous.duration)
     }
 }
