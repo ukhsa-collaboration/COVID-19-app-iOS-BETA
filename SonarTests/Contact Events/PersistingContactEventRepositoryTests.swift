@@ -15,14 +15,14 @@ class PersistingContactEventRepositoryTests: XCTestCase {
     private let peripheral2 = TestPeripheral(identifier: UUID())
     private let peripheral3 = TestPeripheral(identifier: UUID())
     
-    let payload1 = IncomingBroadcastPayload.sample1
-    let payload2 = IncomingBroadcastPayload.sample2
-    let payload3 = IncomingBroadcastPayload.sample3
+    private let payload1 = IncomingBroadcastPayload.sample1
+    private let payload2 = IncomingBroadcastPayload.sample2
+    private let payload3 = IncomingBroadcastPayload.sample3
 
-    var listener: BTLEListenerDouble!
-    var persister: ContactEventPersisterDouble!
-    var delegate: MockContactEventRepositoryDelegate!
-    var repository: PersistingContactEventRepository!
+    private var listener: BTLEListenerDouble!
+    private var persister: ContactEventPersisterDouble!
+    private var delegate: MockContactEventRepositoryDelegate!
+    private var repository: PersistingContactEventRepository!
 
     override func setUp() {
         listener = BTLEListenerDouble()
@@ -86,13 +86,8 @@ class PersistingContactEventRepositoryTests: XCTestCase {
         repository.btleListener(listener, didFind: payload2, for: peripheral2)
         repository.btleListener(listener, didFind: payload3, for: peripheral3)
         
-        persister.items[peripheral1.identifier] = ContactEvent(
-            broadcastPayload: payload1,
-            timestamp: Date(timeIntervalSinceNow: -2419300),
-            rssiValues: [],
-            rssiIntervals: [],
-            duration: 0
-        )
+        let event = ContactEvent(timestamp: Date(timeIntervalSinceNow: -2419300))
+        persister.items[peripheral1.identifier] = event
         
         repository.removeExpiredContactEvents(ttl: 2419200)
         XCTAssertEqual(repository.contactEvents.count, 2)
@@ -127,11 +122,58 @@ class PersistingContactEventRepositoryTests: XCTestCase {
 
 }
 
+// Verify that the PersistingContactEventRepository and the persistence layer work together
+// to write the correct data to disk.
+class PersistingContactEventRepositoryFocusedIntegrationTests: XCTestCase {
+    func testPersistsBroadcastPayload() {
+        let filename = "testPersistsBroadcastPayload"
+        let persister = PlistPersister<UUID, ContactEvent>(fileName: filename)
+        persister.reset()
+        XCTAssertFalse(FileManager.default.fileExists(atPath: persister.fileURL.path))
+        let repository = PersistingContactEventRepository(persister: persister)
+        
+        let payload = IncomingBroadcastPayload.sample1
+        let peripheral = TestPeripheral(identifier: UUID())
+        repository.btleListener(BTLEListenerDouble(), didFind: payload, for: peripheral)
+        
+        let reader = PlistPersister<UUID, ContactEvent>(fileName: filename)
+        XCTAssertEqual(reader.items[peripheral.identifier]?.broadcastPayload, payload)
+    }
+    
+    func testPersistsTxPower() {
+        let filename = "testPersistsTxPower"
+        let persister = PlistPersister<UUID, ContactEvent>(fileName: filename)
+        persister.reset()
+        XCTAssertFalse(FileManager.default.fileExists(atPath: persister.fileURL.path))
+        let repository = PersistingContactEventRepository(persister: persister)
+        
+        let peripheral = TestPeripheral(identifier: UUID())
+        repository.btleListener(BTLEListenerDouble(), didReadTxPower: 42, for: peripheral)
+        
+        let reader = PlistPersister<UUID, ContactEvent>(fileName: filename)
+        XCTAssertEqual(reader.items[peripheral.identifier]?.txPower, 42)
+    }
+    
+    func testPersistsRSSI() {
+        let filename = "testPersistsRSSI"
+        let persister = PlistPersister<UUID, ContactEvent>(fileName: filename)
+        persister.reset()
+        XCTAssertFalse(FileManager.default.fileExists(atPath: persister.fileURL.path))
+        let repository = PersistingContactEventRepository(persister: persister)
+        
+        let peripheral = TestPeripheral(identifier: UUID())
+        repository.btleListener(BTLEListenerDouble(), didReadRSSI: -42, for: peripheral)
+        
+        let reader = PlistPersister<UUID, ContactEvent>(fileName: filename)
+        XCTAssertEqual(reader.items[peripheral.identifier]?.rssiValues, [-42])
+    }
+}
+
 fileprivate struct TestPeripheral: BTLEPeripheral {
     let identifier: UUID
 }
 
-class MockContactEventRepositoryDelegate: ContactEventRepositoryDelegate {
+fileprivate class MockContactEventRepositoryDelegate: ContactEventRepositoryDelegate {
     
     var broadcastIds: [UUID: IncomingBroadcastPayload] = [:]
     var rssiValues: [UUID: [Int]] = [:]
