@@ -8,7 +8,7 @@ We value those who take the time and effort to report security vulnerabilities a
 # Reporting
 If you believe you have found a security vulnerability, please submit your report to us using the following link:
 
-https://hackerone.com/03351cb3-53e3-4bb8-8fcc-a226e3b528fc/embedded_submissions/new
+https://hackerone.com/nhscovid19app
 
 Submissions are anonymous unless you are signed in to your HackerOne account. 
 

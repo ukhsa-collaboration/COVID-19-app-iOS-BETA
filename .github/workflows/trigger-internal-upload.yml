@@ -19,6 +19,11 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
+      - name: Set origin
+        env:
+          GITHUB_TOKEN: ${{ secrets.deployment_token }}
+        run: git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+
       - name: Check if we have commits to upload
         id: check-upload-tag
         run: |
@@ -30,13 +35,10 @@ jobs:
 
       - name: Merge and push to internal branch
         if: steps.check-upload-tag.outputs.upload == 'true'
-        env:
-          GITHUB_TOKEN: ${{ secrets.deployment_token }}
         run: |
           git fetch origin internal
           git checkout internal
           git merge upload-to-internal
-          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
           git push origin internal
 
       - name: Notify Slack on Failure
