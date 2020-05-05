@@ -313,6 +313,120 @@ class RegistrationServiceTests: TestCase {
         XCTAssertEqual(monitor.detectedEvents, [.registrationFailed(reason: .waitingForActivationNotificationTimedOut)])
     }
     
+    // MARK: - Preventing concurrent registration attempts
+    
+    func testRegistration_isNoOpIfAlreadyRegistering() {
+        let session = SessionDouble()
+        let remoteNotificationDispatcher = RemoteNotificationDispatchingDouble()
+        remoteNotificationDispatcher.pushToken = "the current push token"
+        let registrationService = ConcreteRegistrationService(
+            session: session,
+            persistence: PersistenceDouble(partialPostcode: "AB90"),
+            reminderScheduler: RegistrationReminderSchedulerDouble(),
+            remoteNotificationDispatcher: remoteNotificationDispatcher,
+            notificationCenter: NotificationCenter(),
+            monitor: AppMonitoringDouble(),
+            timeoutQueue: QueueDouble()
+        )
+        
+        registrationService.register()
+        
+        session.requestSent = nil
+        registrationService.register()
+        XCTAssertNil(session.requestSent)
+    }
+    
+    func testRegistration_allowsRegistrationAfterFirstRequestFailure() throws {
+        let session = SessionDouble()
+        let remoteNotificationDispatcher = RemoteNotificationDispatchingDouble()
+        remoteNotificationDispatcher.pushToken = "the current push token"
+        let registrationService = ConcreteRegistrationService(
+            session: session,
+            persistence: PersistenceDouble(partialPostcode: "AB90"),
+            reminderScheduler: RegistrationReminderSchedulerDouble(),
+            remoteNotificationDispatcher: remoteNotificationDispatcher,
+            notificationCenter: NotificationCenter(),
+            monitor: AppMonitoringDouble(),
+            timeoutQueue: QueueDouble()
+        )
+        
+        registrationService.register()
+        
+        // Respond to the first request
+        let firstRequestCompletion = try XCTUnwrap(session.executeCompletion)
+        firstRequestCompletion(Result<(), Error>.failure(ErrorForTest()))
+        
+        session.requestSent = nil
+        registrationService.register()
+        XCTAssertNotNil(session.requestSent as? RegistrationRequest)
+    }
+    
+    func testRegistration_allowsRegistrationAfterSecondRequestFailure() throws {
+        let session = SessionDouble()
+        let notificationCenter = NotificationCenter()
+        let remoteNotificationDispatcher = RemoteNotificationDispatcher(
+            notificationCenter: notificationCenter,
+            userNotificationCenter: UserNotificationCenterDouble()
+        )
+        remoteNotificationDispatcher.pushToken = "the current push token"
+        let registrationService = ConcreteRegistrationService(
+            session: session,
+            persistence: PersistenceDouble(partialPostcode: "AB90"),
+            reminderScheduler: RegistrationReminderSchedulerDouble(),
+            remoteNotificationDispatcher: remoteNotificationDispatcher,
+            notificationCenter: notificationCenter,
+            monitor: AppMonitoringDouble(),
+            timeoutQueue: QueueDouble()
+        )
+        
+        registrationService.register()
+        
+        // Respond to the first request
+        let firstRequestCompletion = try XCTUnwrap(session.executeCompletion)
+        session.executeCompletion = nil
+        firstRequestCompletion(Result<(), Error>.success(()))
+        
+        // Simulate the notification containing the activationCode.
+        // This should trigger the second request.
+        let activationCode = "a3d2c477-45f5-4609-8676-c24558094600"
+        remoteNotificationDispatcher.handleNotification(userInfo: ["activationCode": activationCode]) { _ in }
+        
+        // Respond to the second request
+        let secondRequestCompletion = try XCTUnwrap(session.executeCompletion)
+        secondRequestCompletion(Result<ConfirmRegistrationResponse, Error>.failure(ErrorForTest()))
+
+        session.requestSent = nil
+        registrationService.register()
+        XCTAssertNotNil(session.requestSent as? RegistrationRequest)
+    }
+    
+    func testRegistration_allowsRegistrationAfterTimeout() throws {
+        let session = SessionDouble()
+        let remoteNotificationDispatcher = RemoteNotificationDispatchingDouble()
+        remoteNotificationDispatcher.pushToken = "the current push token"
+        let timeoutQueue = QueueDouble()
+        let registrationService = ConcreteRegistrationService(
+            session: session,
+            persistence: PersistenceDouble(partialPostcode: "AB90"),
+            reminderScheduler: RegistrationReminderSchedulerDouble(),
+            remoteNotificationDispatcher: remoteNotificationDispatcher,
+            notificationCenter: NotificationCenter(),
+            monitor: AppMonitoringDouble(),
+            timeoutQueue: timeoutQueue
+        )
+        
+        registrationService.register()
+        let timeoutCallback = try XCTUnwrap(timeoutQueue.scheduledBlock)
+        timeoutCallback()
+        
+        session.requestSent = nil
+        registrationService.register()
+        XCTAssertNotNil(session.requestSent as? RegistrationRequest)
+    }
+
+    
+    // MARK: - Late-arriving notifications
+    
     func testRegistration_canSucceedAfterTimeout() {
         let session = SessionDouble()
         let persistence = PersistenceDouble(partialPostcode: "AB90")

@@ -28,6 +28,7 @@ class ConcreteRegistrationService: RegistrationService {
     private let monitor: AppMonitoring
     private let timeoutQueue: TestableQueue
     private var remoteNotificationCompletionHandler: RemoteNotificationCompletionHandler?
+    private var isRegistering = false
     
     init(session: Session,
          persistence: Persisting,
@@ -65,6 +66,12 @@ class ConcreteRegistrationService: RegistrationService {
     }
     
     func register() -> Void {
+        guard !isRegistering else {
+            logger.warning("Tried to register when already registering")
+            return
+        }
+        
+        isRegistering = true
         reminderScheduler.schedule()
         
         if let pushToken = remoteNotificationDispatcher.pushToken {
@@ -159,12 +166,14 @@ class ConcreteRegistrationService: RegistrationService {
     }
     
     private func succeed(registration: Registration) {
+        isRegistering = false
         self.remoteNotificationCompletionHandler?(.newData)
         notificationCenter.post(name: RegistrationCompletedNotification, object: nil)
         reminderScheduler.cancel()
     }
     
     private func fail(withError error: Error, reason: AppEvent.RegistrationFailureReason) {
+        isRegistering = false
         logger.error("Registration failed: \(error)")
         self.remoteNotificationCompletionHandler?(.failed)
         notificationCenter.post(name: RegistrationFailedNotification, object: nil)

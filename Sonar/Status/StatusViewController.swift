@@ -120,10 +120,10 @@ class StatusViewController: UIViewController, Storyboarded {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-
         if persistence.registration != nil {
             showRegisteredStatus()
         } else {
+            logger.info("Attempting to register because the view will appear")
             register()
         }
 
@@ -174,6 +174,7 @@ class StatusViewController: UIViewController, Storyboarded {
     }
 
     @IBAction func retryRegistrationTapped() {
+        logger.info("Attempting to register because the user tapped the retry button")
         register()
     }
 
