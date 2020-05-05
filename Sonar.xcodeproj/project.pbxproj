@@ -39,6 +39,8 @@
 		09A9254B2457B2CA00C5DBC1 /* MedicalWorkerInstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A9254A2457B2CA00C5DBC1 /* MedicalWorkerInstructionsViewController.swift */; };
 		09B103622444E9110091834D /* ContactEventPersisterDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B103612444E9110091834D /* ContactEventPersisterDouble.swift */; };
 		09B103642444EAB80091834D /* ContactEventRepositoryDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B103632444EAB80091834D /* ContactEventRepositoryDouble.swift */; };
+		09B3AC812460BEA9001AF47E /* AutoscalingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B3AC802460BEA9001AF47E /* AutoscalingImageView.swift */; };
+		09B3AC832460D3CF001AF47E /* AutoscalingWidthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B3AC822460D3CF001AF47E /* AutoscalingWidthView.swift */; };
 		09C9DB3624608BA40012F80A /* AnswerButtonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C9DB3524608BA40012F80A /* AnswerButtonTests.swift */; };
 		09C9DB382460946B0012F80A /* UpdatesBasedOnAccessibilityDisplayChanges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C9DB372460946B0012F80A /* UpdatesBasedOnAccessibilityDisplayChanges.swift */; };
 		09CAA3662440F3B100CE93A6 /* PostcodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CAA3652440F3B100CE93A6 /* PostcodeViewController.swift */; };
@@ -184,6 +186,8 @@
 		F652F72C244A74E900D97950 /* StartDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652F72B244A74E900D97950 /* StartDateViewController.swift */; };
 		F652F72E244E472E00D97950 /* SymptomsPromptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652F72D244E472E00D97950 /* SymptomsPromptViewController.swift */; };
 		F652F730244E4AAD00D97950 /* DrawerPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652F72F244E4AAD00D97950 /* DrawerPresentation.swift */; };
+		F6548FA32460C1C7005F06FF /* UpdateDiagnosisCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6548FA22460C1C7005F06FF /* UpdateDiagnosisCoordinatorTests.swift */; };
+		F6548FA52460DB95005F06FF /* SpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6548FA42460DB95005F06FF /* SpinnerView.swift */; };
 		F673FBB42457A89E00D96C50 /* SymptomsSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F673FBB32457A89E00D96C50 /* SymptomsSummaryViewController.swift */; };
 		F67A2291242AA35C002254B6 /* SecureRegistrationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A2290242AA35B002254B6 /* SecureRegistrationStorage.swift */; };
 		F67A2293242AA370002254B6 /* SecureRegistrationStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */; };
@@ -300,6 +304,8 @@
 		09A9254A2457B2CA00C5DBC1 /* MedicalWorkerInstructionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalWorkerInstructionsViewController.swift; sourceTree = "<group>"; };
 		09B103612444E9110091834D /* ContactEventPersisterDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventPersisterDouble.swift; sourceTree = "<group>"; };
 		09B103632444EAB80091834D /* ContactEventRepositoryDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventRepositoryDouble.swift; sourceTree = "<group>"; };
+		09B3AC802460BEA9001AF47E /* AutoscalingImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoscalingImageView.swift; sourceTree = "<group>"; };
+		09B3AC822460D3CF001AF47E /* AutoscalingWidthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoscalingWidthView.swift; sourceTree = "<group>"; };
 		09C9DB3524608BA40012F80A /* AnswerButtonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerButtonTests.swift; sourceTree = "<group>"; };
 		09C9DB372460946B0012F80A /* UpdatesBasedOnAccessibilityDisplayChanges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatesBasedOnAccessibilityDisplayChanges.swift; sourceTree = "<group>"; };
 		09CAA3652440F3B100CE93A6 /* PostcodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostcodeViewController.swift; sourceTree = "<group>"; };
@@ -463,6 +469,8 @@
 		F652F72B244A74E900D97950 /* StartDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDateViewController.swift; sourceTree = "<group>"; };
 		F652F72D244E472E00D97950 /* SymptomsPromptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomsPromptViewController.swift; sourceTree = "<group>"; };
 		F652F72F244E4AAD00D97950 /* DrawerPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerPresentation.swift; sourceTree = "<group>"; };
+		F6548FA22460C1C7005F06FF /* UpdateDiagnosisCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateDiagnosisCoordinatorTests.swift; sourceTree = "<group>"; };
+		F6548FA42460DB95005F06FF /* SpinnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerView.swift; sourceTree = "<group>"; };
 		F673FBB32457A89E00D96C50 /* SymptomsSummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomsSummaryViewController.swift; sourceTree = "<group>"; };
 		F67A2290242AA35B002254B6 /* SecureRegistrationStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRegistrationStorage.swift; sourceTree = "<group>"; };
 		F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRegistrationStorageTests.swift; sourceTree = "<group>"; };
@@ -712,17 +720,20 @@
 			children = (
 				F7091906245DCED800F00AB8 /* AccessibleErrorLabel.swift */,
 				F613936D243FA82B003447E8 /* Appearance.swift */,
+				09B3AC802460BEA9001AF47E /* AutoscalingImageView.swift */,
+				09B3AC822460D3CF001AF47E /* AutoscalingWidthView.swift */,
 				0986EFB4244518FE008D0E1D /* ButtonWithDynamicType.swift */,
 				F652F72F244E4AAD00D97950 /* DrawerPresentation.swift */,
 				F694B1C1245A4A5600C6A5D1 /* ErrorLabel.swift */,
-				AEC6A7BB241BD81A00B0237A /* LogoStrapline.swift */,
-				AEC6A7BD241BD82900B0237A /* LogoStrapline.xib */,
-				F70CB8182450CAB700ED6E7F /* OnboardingLogoStrapline.swift */,
-				F70CB81A2450CFA900ED6E7F /* OnboardingLogoStrapline.xib */,
-				21D93C2F2420C26900C1FA9B /* PrimaryButton.swift */,
-				097C93882447986B00E985CF /* TextField.swift */,
 				13F996722460445400FD6740 /* LinkButton.swift */,
+				AEC6A7BB241BD81A00B0237A /* LogoStrapline.swift */,
+				F70CB8182450CAB700ED6E7F /* OnboardingLogoStrapline.swift */,
+				21D93C2F2420C26900C1FA9B /* PrimaryButton.swift */,
+				F6548FA42460DB95005F06FF /* SpinnerView.swift */,
+				097C93882447986B00E985CF /* TextField.swift */,
 				09C9DB372460946B0012F80A /* UpdatesBasedOnAccessibilityDisplayChanges.swift */,
+				AEC6A7BD241BD82900B0237A /* LogoStrapline.xib */,
+				F70CB81A2450CFA900ED6E7F /* OnboardingLogoStrapline.xib */,
 			);
 			path = Appearance;
 			sourceTree = "<group>";
@@ -1078,8 +1089,9 @@
 		F67C5157243E7BD5008E2945 /* SelfDiagnosis */ = {
 			isa = PBXGroup;
 			children = (
-				09C9DB3424608ABB0012F80A /* Controls */,
 				F67C5158243E7C1E008E2945 /* SubmitSymptomsViewControllerTests.swift */,
+				F6548FA22460C1C7005F06FF /* UpdateDiagnosisCoordinatorTests.swift */,
+				09C9DB3424608ABB0012F80A /* Controls */,
 			);
 			path = SelfDiagnosis;
 			sourceTree = "<group>";
@@ -1474,6 +1486,7 @@
 				097C94CB245B81E8008A9695 /* EnGbLocaleProviderDouble.swift in Sources */,
 				89896E622435F37300F949EA /* ProjectTests.swift in Sources */,
 				F604977524549C95002B8503 /* LinkingIdManagerTests.swift in Sources */,
+				F6548FA32460C1C7005F06FF /* UpdateDiagnosisCoordinatorTests.swift in Sources */,
 				F6F05A2A2433C6CC00FF4B72 /* AuthManagerDouble.swift in Sources */,
 				F6F05A242433BEC000FF4B72 /* OnboardingCoordinatorTests.swift in Sources */,
 				214209D924262B7500C7BFF3 /* SessionHelpers.swift in Sources */,
@@ -1543,6 +1556,7 @@
 				F74BAC56245B35910023FFC2 /* SelfsizingTextView.swift in Sources */,
 				219C7B74245AB88100952B4D /* BroadcastEncrypterProvider.swift in Sources */,
 				0997D056243BDEEC0067346C /* RootViewController.swift in Sources */,
+				F6548FA52460DB95005F06FF /* SpinnerView.swift in Sources */,
 				F72EBDA2243D0892009F9328 /* SecureBroadcastRotationKeyStorage.swift in Sources */,
 				F60497772454A294002B8503 /* LinkingIdViewController.swift in Sources */,
 				21AF36AB241A8E50001A4910 /* BTLEListener.swift in Sources */,
@@ -1589,6 +1603,7 @@
 				21C417CC242CB15D00DEF3E2 /* ConfirmRegistrationRequest.swift in Sources */,
 				F67A2291242AA35C002254B6 /* SecureRegistrationStorage.swift in Sources */,
 				AE2DCAA0241920B600A940FC /* BTLEBroadcaster.swift in Sources */,
+				09B3AC832460D3CF001AF47E /* AutoscalingWidthView.swift in Sources */,
 				895D9E4B24374EC900573D4D /* Screen.swift in Sources */,
 				219C7B7A245AE83700952B4D /* DataExtensions.swift in Sources */,
 				F652F730244E4AAD00D97950 /* DrawerPresentation.swift in Sources */,
@@ -1600,6 +1615,7 @@
 				F62F857F2451051C006580A8 /* ContactEventsUploader.swift in Sources */,
 				09E6E7E4245271A00069DFA8 /* SetupChecker.swift in Sources */,
 				89F06B372434C35A0074C612 /* LoggerMetadata.swift in Sources */,
+				09B3AC812460BEA9001AF47E /* AutoscalingImageView.swift in Sources */,
 				898FE859243B4FE300210775 /* AuthorizationManaging.swift in Sources */,
 				F652F72E244E472E00D97950 /* SymptomsPromptViewController.swift in Sources */,
 				F67C5154243E4D2F008E2945 /* AnswerButton.swift in Sources */,

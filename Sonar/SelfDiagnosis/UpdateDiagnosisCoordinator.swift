@@ -29,10 +29,13 @@ class UpdateDiagnosisCoordinator: Coordinator {
     
     func start() {
         let vc = QuestionSymptomsViewController.instantiate()
+
+        let isCheckin = persisting.selfDiagnosis.map { $0.symptoms.contains(.temperature) } ?? false
+        let questionTitle = isCheckin ? "TEMPERATURE_CHECKIN_QUESTION" : "TEMPERATURE_QUESTION"
         vc.inject(
             pageNumber: 1,
             pageCount: 2,
-            questionTitle: "TEMPERATURE_QUESTION".localized,
+            questionTitle: questionTitle.localized,
             questionDetail: "TEMPERATURE_DETAIL".localized,
             questionError: "TEMPERATURE_ERROR".localized,
             questionYes: "TEMPERATURE_YES".localized,
@@ -44,15 +47,19 @@ class UpdateDiagnosisCoordinator: Coordinator {
             }
             self.openCoughView()
         }
+
         navigationController.pushViewController(vc, animated: true)
     }
     
     func openCoughView() {
         let vc = QuestionSymptomsViewController.instantiate()
+
+        let isCheckin = persisting.selfDiagnosis.map { $0.symptoms.contains(.cough) } ?? false
+        let questionTitle = isCheckin ? "COUGH_CHECKIN_QUESTION" : "COUGH_QUESTION"
         vc.inject(
             pageNumber: 2,
             pageCount: 2,
-            questionTitle: "COUGH_QUESTION".localized,
+            questionTitle: questionTitle.localized,
             questionDetail: "COUGH_DETAIL".localized,
             questionError: "COUGH_ERROR".localized,
             questionYes: "COUGH_YES".localized,
@@ -76,6 +83,7 @@ class UpdateDiagnosisCoordinator: Coordinator {
                 }
             }
         }
+
         navigationController.pushViewController(vc, animated: true)
     }
 }

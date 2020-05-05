@@ -15,12 +15,14 @@
 "RETRY" = "Retry";
 
 "TEMPERATURE_QUESTION" = "Do you have a high temperature?";
+"TEMPERATURE_CHECKIN_QUESTION" = "Do you still have a high temperature?";
 "TEMPERATURE_ERROR" = "Select yes if you have a high temperature";
 "TEMPERATURE_DETAIL" = "You don't need a thermometer or to know a precise temperature. If you feel hot to touch on your chest or back answer 'yes'.";
 "TEMPERATURE_YES" = "Yes, I have a high temperature";
 "TEMPERATURE_NO" = "No, I do not have a high temperature";
 
 "COUGH_QUESTION" = "Do you have a new continuous cough?";
+"COUGH_CHECKIN_QUESTION" = "Do you still have a new continuous cough?";
 "COUGH_ERROR" = "Select yes if you have a new continuous cough";
 "COUGH_DETAIL" = "New: means a cough that you've not had before, or if you usually have a cough, it's got worse.\nContinuous: means coughing a lot for more than an hour, or 3 or more coughing episodes in 24 hours.";
 "COUGH_YES" = "Yes, I have a new continuous cough";
