@@ -33,7 +33,7 @@ struct UploadLog: Codable, Equatable {
 }
 
 extension UploadLog.Event: Codable {
-    enum CodingKeys: CodingKey {
+    private enum CodingKeys: CodingKey {
         case key
         case lastContactEventDate
         case error

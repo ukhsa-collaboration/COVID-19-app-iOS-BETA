@@ -55,7 +55,7 @@ struct ContactEvent: Equatable, Codable {
         duration = timestamp.timeIntervalSince(self.timestamp)
     }
 
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case broadcastPayload
         case timestamp
         case rssiValues
