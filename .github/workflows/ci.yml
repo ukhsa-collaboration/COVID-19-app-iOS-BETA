@@ -126,12 +126,12 @@ jobs:
           git tag --force upload-to-internal
           git push origin upload-to-internal
 
-  upload-to-app-store-connect:
+  upload:
     needs: test
     runs-on:
       - self-hosted
       - macos
-    if: contains(['refs/heads/internal', 'refs/heads/production'], github.ref)
+    if: "contains(fromJSON('[\"refs/heads/internal\", \"refs/heads/production\"]'), github.ref)"
     steps:
       - name: Checkout Project
         uses: actions/checkout@v2
