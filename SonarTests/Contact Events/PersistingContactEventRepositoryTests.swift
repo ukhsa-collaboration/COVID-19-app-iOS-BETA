@@ -86,9 +86,11 @@ class PersistingContactEventRepositoryTests: XCTestCase {
         repository.btleListener(listener, didFind: payload2, for: peripheral2)
         repository.btleListener(listener, didFind: payload3, for: peripheral3)
         
-        let event = ContactEvent(timestamp: Date(timeIntervalSinceNow: -2419300))
-        persister.items[peripheral1.identifier] = event
-        
+        persister.update(
+            item: ContactEvent(timestamp: Date(timeIntervalSinceNow: -2419300)),
+            key: peripheral1.identifier
+        )
+
         repository.removeExpiredContactEvents(ttl: 2419200)
         XCTAssertEqual(repository.contactEvents.count, 2)
     }

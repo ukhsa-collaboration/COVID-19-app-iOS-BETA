@@ -11,11 +11,8 @@ import Logging
 
 class PlistPersister<K: Hashable & Codable, V: Codable> {
     
-    var items: [K: V] = [:] {
-        didSet {
-            writeItems()
-        }
-    }
+    // Drive all updates through update() and replaceAll() so we can write the plist to disk
+    public private(set) var items: [K: V] = [:]
     
     internal let fileURL: URL
     
@@ -35,6 +32,16 @@ class PlistPersister<K: Hashable & Codable, V: Codable> {
         encoder = PropertyListEncoder()
         encoder.outputFormat = .binary
         readItems()
+    }
+    
+    func update(item: V, key: K) {
+        items[key] = item
+        writeItems()
+    }
+    
+    func replaceAll(with newItems: [K: V]) {
+        items = newItems
+        writeItems()
     }
     
     func reset() {

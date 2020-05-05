@@ -11,7 +11,16 @@ import Foundation
 
 class ContactEventPersisterDouble: ContactEventPersister {
     
-    var items: [UUID: ContactEvent] = [:]
+    public private(set) var items: [UUID: ContactEvent] = [:]
+    
+    func update(item: ContactEvent, key: UUID) {
+        items[key] = item
+    }
+    
+    func replaceAll(with newItems: [UUID : ContactEvent]) {
+        items = newItems
+    }
+
     
     func reset() {
         items = [:]

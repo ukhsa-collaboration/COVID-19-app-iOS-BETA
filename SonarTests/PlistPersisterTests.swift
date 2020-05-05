@@ -11,11 +11,11 @@ import XCTest
 
 class PlistPersisterTests: XCTestCase {
 
-    var persister: PlistPersister<String, Sample>!
+    private var persister: PlistPersister<String, Sample>!
     
-    var item1: Sample!
-    var item2: Sample!
-    var item3: Sample!
+    private var item1: Sample!
+    private var item2: Sample!
+    private var item3: Sample!
     
     override func setUp() {
         persister = PlistPersister<String, Sample>(fileName: "samples")
@@ -29,9 +29,9 @@ class PlistPersisterTests: XCTestCase {
     func testRecordsItems() {
         XCTAssertEqual(persister.items, [:])
 
-        persister.items["item1"] = item1
-        persister.items["item2"] = item2
-        persister.items["item3"] = item3
+        persister.update(item: item1, key: "item1")
+        persister.update(item: item2, key: "item2")
+        persister.update(item: item3, key: "item3")
 
         XCTAssertEqual(persister.items.count, 3)
         XCTAssertEqual(persister.items["item1"], item1)
@@ -42,27 +42,17 @@ class PlistPersisterTests: XCTestCase {
     func testPersistsItems() throws {
         XCTAssertFalse(FileManager.default.fileExists(atPath: persister.fileURL.path))
 
-        persister.items["item1"] = item1
-        persister.items["item2"] = item2
-        persister.items["item3"] = item3
+        persister.update(item: item1, key: "item1")
+        persister.update(item: item2, key: "item2")
+        persister.update(item: item3, key: "item3")
 
-        let attrs = try FileManager.default.attributesOfItem(atPath: persister.fileURL.path)
-        XCTAssertNotEqual(attrs[.size] as! NSNumber, 0)
-    }
-
-    func testLoadsItemsFromDiskOnInit() {
-        persister.items["item1"] = item1
-        persister.items["item2"] = item2
-        persister.items["item3"] = item3
-
-        persister = nil
-
-        persister = PlistPersister<String, Sample>(fileName: "samples")
-        XCTAssertEqual(persister.items.count, 3)
+        XCTAssertTrue(FileManager.default.fileExists(atPath: persister.fileURL.path))
+        let otherPersister = PlistPersister<String, Sample>(fileName: "samples")
+        XCTAssertEqual(otherPersister.items, ["item1": item1, "item2": item2, "item3": item3])
     }
 }
 
-struct Sample: Codable, Equatable {
+private struct Sample: Codable, Equatable {
     let name: String
     let number: Int
 }

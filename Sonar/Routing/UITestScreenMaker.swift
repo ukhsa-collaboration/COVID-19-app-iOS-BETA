@@ -230,6 +230,12 @@ private class NoOpContactEventRepository: ContactEventRepository {
 private class NoOpContactEventPersister: ContactEventPersister {
     var items: [UUID : ContactEvent] = [:]
     
+    func update(item: ContactEvent, key: UUID) {
+    }
+    
+    func replaceAll(with: [UUID : ContactEvent]) {
+    }
+
     func reset() {
     }
     
