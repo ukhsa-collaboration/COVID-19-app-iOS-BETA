@@ -1,10 +1,6 @@
-name: unit-tests
+name: ci
 
-on:
-  push:
-    branches:
-      - master
-      - ci
+on: push
 
 jobs:
   build:
@@ -129,3 +125,108 @@ jobs:
           git push origin --delete upload-to-internal || true
           git tag --force upload-to-internal
           git push origin upload-to-internal
+
+  upload-to-app-store-connect:
+    needs: test
+    runs-on:
+      - self-hosted
+      - macos
+    if: contains(['refs/heads/internal', 'refs/heads/production'], github.ref)
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@v2
+
+      - name: Bump the build version
+        run: |
+          ./bin/bump-build-version
+          ./bin/commit-version-bump
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          git push
+
+      - name: Switch to Xcode 11
+        run: sudo xcode-select -s /Applications/Xcode_11.app
+
+      - name: Install Fastlane
+        run: sudo gem install fastlane
+
+      - name: Setup Fastlane Match
+        env:
+          MATCH: ${{ secrets.match }}
+        run: ./bin/setup-match
+
+      - name: Upload to Test Flight
+        env:
+          API_ENDPOINT: ${{ secrets.api_endpoint }}
+          APPLE_USERNAME: ${{ secrets.apple_username }}
+          ENVIRONMENT_JSON_BETA: ${{ secrets.environment_json_beta }}
+          ENVIRONMENT_JSON_INTERNAL: ${{ secrets.environment_json_internal }}
+          ENVIRONMENT_JSON_PRODUCTION: ${{ secrets.environment_json_production }}
+          GOOGLE_SERVICE_INFO_PLIST_INTERNAL: ${{ secrets.google_service_info_plist_internal }}
+          GOOGLE_SERVICE_INFO_PLIST_PRODUCTION: ${{ secrets.google_service_info_plist_production }}
+          FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.apple_password }}
+          MATCH_PASSWORD: ${{ secrets.match_password }}
+        run: fastlane release sonar_env:${GITHUB_REF#refs/heads/}
+
+      - name: Upload IPA
+        uses: actions/upload-artifact@v1
+        with:
+          name: Sonar.ipa
+          path: Sonar.ipa
+
+      - name: Create App Report
+        run: |
+          cd Reporting
+          swift run Reporter ipa ../Sonar.ipa --output AppReport || true
+          cd ..
+
+      - name: Upload App Report
+        uses: actions/upload-artifact@v1
+        with:
+          name: AppReport
+          path: Reporting/AppReport
+
+      - name: Update Deployment Status on Success
+        if: success()
+        run: >
+          curl
+          --verbose
+          --url "${{ github.event.deployment.statuses_url }}"
+          --header "authorization: Bearer ${{ secrets.deployment_token }}"
+          --header "content-type: application/json"
+          --data '{"state":"success"}'
+        continue-on-error: true
+
+      - name: Update Deployment Status on Failure
+        if: failure()
+        run: >
+          curl
+          --verbose
+          --url "${{ github.event.deployment.statuses_url }}"
+          --header "authorization: Bearer ${{ secrets.deployment_token }}"
+          --header "content-type: application/json"
+          --data '{"state":"failure"}'
+        continue-on-error: true
+
+      - name: Get Build Number
+        id: get-build-number
+        run: |
+          build_number=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" "Sonar/Info.plist")
+          echo "::set-output name=build-number::$build_number"
+
+      - name: Notify Slack on Upload
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.slack_bot_token }}
+        uses: voxmedia/github-action-slack-notify-build@v1
+        with:
+          channel_id: G011ZPSAD4J
+          status: UPLOADED [(${{ steps.get-build-number.outputs.build-number }})]
+
+      - name: Notify Slack on Failure
+        if: failure()
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.slack_bot_token }}
+        uses: voxmedia/github-action-slack-notify-build@v1
+        with:
+          channel_id: G011ZPSAD4J
+          status: FAILED
+          color: danger

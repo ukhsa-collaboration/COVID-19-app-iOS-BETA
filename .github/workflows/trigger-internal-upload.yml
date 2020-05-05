@@ -19,6 +19,9 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
+      # Since this workflow needs to trigger the ci workflow,
+      # we can't use the built-in GITHUB_TOKEN, so we need to
+      # set a remote url that uses a personal access token.
       - name: Set origin
         env:
           GITHUB_TOKEN: ${{ secrets.deployment_token }}
