@@ -169,7 +169,6 @@
 		F61695A12458B3C0006AABE3 /* StatusNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61695A02458B3C0006AABE3 /* StatusNotificationHandler.swift */; };
 		F61695A32458B556006AABE3 /* StatusNotificationHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61695A22458B556006AABE3 /* StatusNotificationHandlerTests.swift */; };
 		F618A564245C682500D89517 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F618A561245C682500D89517 /* Environment.swift */; };
-		F618A565245C682500D89517 /* Sonar.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F618A562245C682500D89517 /* Sonar.xcconfig */; };
 		F618A566245C682500D89517 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F618A563245C682500D89517 /* GoogleService-Info.plist */; };
 		F62F857F2451051C006580A8 /* ContactEventsUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62F857E2451051C006580A8 /* ContactEventsUploader.swift */; };
 		F62F858124510716006580A8 /* ContactEventsUploaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62F858024510716006580A8 /* ContactEventsUploaderTests.swift */; };
@@ -193,8 +192,6 @@
 		F67A2293242AA370002254B6 /* SecureRegistrationStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */; };
 		F67C5154243E4D2F008E2945 /* AnswerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67C5153243E4D2F008E2945 /* AnswerButton.swift */; };
 		F67C5159243E7C1E008E2945 /* SubmitSymptomsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67C5158243E7C1E008E2945 /* SubmitSymptomsViewControllerTests.swift */; };
-		F680E703245F7E0800EA6135 /* 2_potential_diagnosis.apns in Resources */ = {isa = PBXBuildFile; fileRef = F680E701245F7E0800EA6135 /* 2_potential_diagnosis.apns */; };
-		F680E704245F7E0800EA6135 /* 1_activation_code.apns in Resources */ = {isa = PBXBuildFile; fileRef = F680E702245F7E0800EA6135 /* 1_activation_code.apns */; };
 		F68B89ED243CFF2600F369A9 /* SelfDiagnosis.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F68B89EC243CFF2600F369A9 /* SelfDiagnosis.storyboard */; };
 		F68BFBF7242ACD17008EE68F /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68BFBF6242ACD17008EE68F /* TestHelpers.swift */; };
 		F694B1BA2459E45100C6A5D1 /* RemoteNotificationDispatchingDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = F694B1B92459E45100C6A5D1 /* RemoteNotificationDispatchingDouble.swift */; };
@@ -1397,7 +1394,6 @@
 			files = (
 				F694B1C6245B8B9D00C6A5D1 /* statusContent.json in Resources */,
 				F60497792454A40B002B8503 /* LinkingId.storyboard in Resources */,
-				F680E704245F7E0800EA6135 /* 1_activation_code.apns in Resources */,
 				F758B8C4242CC0EE003AE16D /* Status.storyboard in Resources */,
 				6FC63C3B241641BA007C8BF3 /* LaunchScreen.storyboard in Resources */,
 				AEC6A7BE241BD82900B0237A /* LogoStrapline.xib in Resources */,
@@ -1409,8 +1405,6 @@
 				895D9E462437458700573D4D /* AppIcon.xcassets in Resources */,
 				F68B89ED243CFF2600F369A9 /* SelfDiagnosis.storyboard in Resources */,
 				F6F05A322434310200FF4B72 /* Onboarding.storyboard in Resources */,
-				F680E703245F7E0800EA6135 /* 2_potential_diagnosis.apns in Resources */,
-				F618A565245C682500D89517 /* Sonar.xcconfig in Resources */,
 				F70CB81B2450CFA900ED6E7F /* OnboardingLogoStrapline.xib in Resources */,
 				098ED481242E745F0029B729 /* Debug.storyboard in Resources */,
 			);

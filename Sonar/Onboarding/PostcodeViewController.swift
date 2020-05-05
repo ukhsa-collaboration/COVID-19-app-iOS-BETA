@@ -20,6 +20,7 @@ class PostcodeViewController: UIViewController, Storyboarded {
     @IBOutlet private var scrollView: UIScrollView!
     @IBOutlet var postcodeError: UILabel!
     @IBOutlet var postcodeField: UITextField!
+    @IBOutlet var postcodeDetail: UILabel!
     @IBOutlet var continueAccessoryView: UIView!
     @IBOutlet var continueButton: PrimaryButton!
 
@@ -41,6 +42,13 @@ class PostcodeViewController: UIViewController, Storyboarded {
 
     override func viewDidLoad() {
         postcodeError.isHidden = true
+        
+        let text = postcodeDetail.text!
+        let range = text.range(of: "not")
+        let nsrange = NSRange(range!, in: text)
+        let attrText = NSMutableAttributedString(string: text)
+        attrText.addAttribute(NSAttributedString.Key.font, value: UIFont.preferredFont(forTextStyle: .headline), range: nsrange)
+        postcodeDetail.attributedText = attrText
 
         // Hide the keyboard if the user taps anywhere else
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: postcodeField, action: #selector(resignFirstResponder)))
