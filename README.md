@@ -1,6 +1,8 @@
 # NHS COVID-19
 
 ![ci](https://github.com/nhsx/sonar-ios/workflows/ci/badge.svg)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+![Release: BETA](https://img.shields.io/badge/Release-BETA-orange)
 
 This application runs in the background and identifies other people running the
 app within the local area by using low energy bluetooth. While the app is
