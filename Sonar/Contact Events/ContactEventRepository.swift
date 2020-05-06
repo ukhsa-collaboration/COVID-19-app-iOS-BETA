@@ -26,7 +26,9 @@ protocol ContactEventRepository: BTLEListenerDelegate {
 }
 
 protocol ContactEventPersister {
-    var items: [UUID: ContactEvent] { get set }
+    var items: [UUID: ContactEvent] { get }
+    func update(item: ContactEvent, key: UUID)
+    func replaceAll(with: [UUID: ContactEvent])
     func reset()
 }
 
@@ -54,7 +56,8 @@ extension PlistPersister: ContactEventPersister where K == UUID, V == ContactEve
     func remove(through date: Date) {
         // I doubt this is atomic, but the window should be extraordinarily small
         // so I'm not too worried about dropping contact events here.
-        persister.items = persister.items.filter { _, contactEvent in contactEvent.timestamp > date }
+        let newItems = persister.items.filter { _, contactEvent in contactEvent.timestamp > date }
+        persister.replaceAll(with: newItems)
     }
     
     func removeExpiredContactEvents(ttl: Double) {
@@ -63,25 +66,22 @@ extension PlistPersister: ContactEventPersister where K == UUID, V == ContactEve
     }
     
     func btleListener(_ listener: BTLEListener, didFind broadcastPayload: IncomingBroadcastPayload, for peripheral: BTLEPeripheral) {
-        if persister.items[peripheral.identifier] == nil {
-            persister.items[peripheral.identifier] = ContactEvent()
-        }
-        persister.items[peripheral.identifier]?.broadcastPayload = broadcastPayload
+        var event = persister.items[peripheral.identifier] ?? ContactEvent()
+        event.broadcastPayload = broadcastPayload
+        persister.update(item: event, key:peripheral.identifier)
         delegate?.repository(self, didRecord: broadcastPayload, for: peripheral)
     }
     
     func btleListener(_ listener: BTLEListener, didReadTxPower txPower: Int, for peripheral: BTLEPeripheral) {
-        if persister.items[peripheral.identifier] == nil {
-            persister.items[peripheral.identifier] = ContactEvent()
-        }
-        persister.items[peripheral.identifier]?.txPower = Int8(txPower)
+        var contactEvent = persister.items[peripheral.identifier] ?? ContactEvent()
+        contactEvent.txPower = Int8(txPower)
+        persister.update(item: contactEvent, key:peripheral.identifier)
     }
     
     func btleListener(_ listener: BTLEListener, didReadRSSI RSSI: Int, for peripheral: BTLEPeripheral) {
-        if persister.items[peripheral.identifier] == nil {
-            persister.items[peripheral.identifier] = ContactEvent()
-        }
-        persister.items[peripheral.identifier]?.recordRSSI(Int8(RSSI))
+        var event = persister.items[peripheral.identifier] ?? ContactEvent()
+        event.recordRSSI(Int8(RSSI))
+        persister.update(item: event, key:peripheral.identifier)
         delegate?.repository(self, didRecordRSSI: RSSI, for: peripheral)
     }
 

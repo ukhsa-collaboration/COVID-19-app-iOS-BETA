@@ -48,7 +48,7 @@ class ConfirmRegistrationRequest: Request {
 
 struct ConfirmRegistrationResponse: Decodable {
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case id, secretKey, publicKey
     }
     
