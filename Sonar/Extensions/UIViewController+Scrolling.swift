@@ -29,6 +29,37 @@ extension UIViewController {
             scrollView.scrollRectToVisible(targetRect, animated: true)
         }
     }
+    
+    // Scrolls so that both the error label and the control will be in view if possible,
+    // otherwise scrolls the error label into view.
+    // Assumes that the error label is above the field.
+    func scroll(after prepare: @escaping () -> Void, toErrorLabel errorLabel: AccessibleErrorLabel, orControl control: UIControl) {
+        guard let scrollView = errorLabel.findAncestorScrollView() else {
+            logger.warning("Tried to scroll without a UIScrollView ancestor")
+            return
+        }
+        
+        scroll(after: prepare, to: { () -> UIView in
+            return scrollTarget(errorLabel: errorLabel, orControl: control, inScrollView: scrollView)
+        })
+    }
+}
+
+private func scrollTarget(
+    errorLabel: AccessibleErrorLabel,
+    orControl control: UIControl,
+    inScrollView scrollView: UIScrollView
+) -> UIView {
+    // Choose the field if they'll both fit, otherwise the error label.
+    let adjustedFieldFrame = control.convert(control.bounds, to: errorLabel)
+    let desiredHeight = adjustedFieldFrame.size.height + adjustedFieldFrame.origin.y
+    let availableHeight = scrollView.bounds.height - scrollView.contentInset.bottom - scrollView.contentInset.top
+    
+    if desiredHeight < availableHeight {
+        return control
+    } else {
+        return errorLabel
+    }
 }
 
 private func noOp() {

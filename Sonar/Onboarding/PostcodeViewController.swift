@@ -18,7 +18,7 @@ class PostcodeViewController: UIViewController, Storyboarded {
     private var continueHandler: (() -> Void)! = nil
 
     @IBOutlet private var scrollView: UIScrollView!
-    @IBOutlet var postcodeError: UILabel!
+    @IBOutlet var postcodeError: AccessibleErrorLabel!
     @IBOutlet var postcodeField: UITextField!
     @IBOutlet var postcodeDetail: UILabel!
     @IBOutlet var continueAccessoryView: UIView!
@@ -118,21 +118,7 @@ class PostcodeViewController: UIViewController, Storyboarded {
 
             self.postcodeError.layer.borderWidth = 3
             self.postcodeError.layer.borderColor = UIColor(named: "NHS Error")!.cgColor
-        }, to: { () -> UIView in
-            // If we just scroll the error message into view, the field will sometimes be
-            // scrolled out of view. That's usually undesirable -- we want both to be visible.
-            // But if the screen is too short to accomodate both (e.g. large fonts + landscape)
-            // then it's better to show the entire error message.
-            let adjustedFieldFrame = self.postcodeField.convert(self.postcodeField.bounds, to: self.postcodeError)
-            let desiredHeight = adjustedFieldFrame.size.height + adjustedFieldFrame.origin.y
-            let availableHeight = self.scrollView.bounds.height - self.scrollView.contentInset.bottom - self.scrollView.contentInset.top
-            
-            if desiredHeight < availableHeight {
-                return self.postcodeField
-            } else {
-                return self.postcodeError
-            }
-        })
+        }, toErrorLabel: postcodeError, orControl: postcodeField)
     }
 }
 
