@@ -2,7 +2,7 @@
 //  AutoscalingImageView.swift
 //  Sonar
 //
-//  Created by NHSX.
+//  Created by NHSX on 5/4/20.
 //  Copyright © 2020 NHSX. All rights reserved.
 //
 

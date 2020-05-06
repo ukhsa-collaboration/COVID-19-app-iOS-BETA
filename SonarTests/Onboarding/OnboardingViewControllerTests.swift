@@ -2,7 +2,7 @@
 //  OnboardingViewControllerTests.swift
 //  SonarTests
 //
-//  Created by NHSX.
+//  Created by NHSX on 4/1/20.
 //  Copyright © 2020 NHSX. All rights reserved.
 //
 
