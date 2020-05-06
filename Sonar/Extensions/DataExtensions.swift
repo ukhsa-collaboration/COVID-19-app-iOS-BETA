@@ -16,6 +16,7 @@ extension FixedWidthInteger {
 }
 
 // from https://stackoverflow.com/a/38024025/17294
+// CC BY-SA 4.0: https://creativecommons.org/licenses/by-sa/4.0/
 extension Data {
 
     init<T>(from value: T) {
