@@ -115,7 +115,7 @@ private extension ScreenTestCase {
     }
 
     var bookNowAdvice: XCUIElement {
-        app.staticTexts["Please book a coronavirus test immediately. Write down your reference code and phone"]
+        app.staticTexts["Please book a coronavirus test immediately. Write down your reference code and phone 0800 540 4900"]
     }
 
 }
