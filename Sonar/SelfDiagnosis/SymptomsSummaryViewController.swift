@@ -113,14 +113,11 @@ class SymptomsSummaryViewController: UIViewController, Storyboarded {
             // and the error view is used to provide a margin between elements
             // because the error label is presented inside of a stack view
             // TODO : remove the erroview.isHidden here if you refactor away from nested stack views
-            startDateViewController.errorView.isHidden = false
-            startDateViewController.errorLabel.isHidden = false
+            scroll(after: {
+                self.startDateViewController.errorView.isHidden = false
+                self.startDateViewController.errorLabel.isHidden = false
+            }, to: startDateViewController.errorLabel)
             
-            DispatchQueue.main.async {
-                let errorLabel: UILabel = self.startDateViewController.errorLabel
-                let targetRect = errorLabel.convert(errorLabel.bounds, to: self.scrollView)
-                self.scrollView.scrollRectToVisible(targetRect, animated: true)
-            }
             return
         }
 
@@ -131,14 +128,6 @@ class SymptomsSummaryViewController: UIViewController, Storyboarded {
 // MARK: - StartDateViewControllerDelegate
 
 extension SymptomsSummaryViewController: StartDateViewControllerDelegate {
-    func startDateViewControllerDidShowDatePicker(_ vc: StartDateViewController) {
-        // Scroll the date picker into view
-        DispatchQueue.main.async {
-            let targetRect = vc.datePicker.convert(vc.datePicker.bounds, to: self.scrollView)
-            self.scrollView.scrollRectToVisible(targetRect, animated: true)
-        }
-    }
-    
     func startDateViewController(_ vc: StartDateViewController, didSelectDate date: Date) {
         startDate = date
     }

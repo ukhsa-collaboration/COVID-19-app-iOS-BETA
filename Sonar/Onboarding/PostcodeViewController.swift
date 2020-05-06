@@ -112,11 +112,13 @@ class PostcodeViewController: UIViewController, Storyboarded {
     }
     
     private func showPostcodeError() {
-        postcodeError.isHidden = false
-        postcodeError.text = "Please enter the first part of a valid postcode. For example: PO30, E2, M1, EH1, L36".localized
+        scroll(after: {
+            self.postcodeError.isHidden = false
+            self.postcodeError.text = "Please enter the first part of a valid postcode. For example: PO30, E2, M1, EH1, L36".localized
 
-        postcodeField.layer.borderWidth = 3
-        postcodeField.layer.borderColor = UIColor(named: "NHS Error")!.cgColor
+            self.postcodeError.layer.borderWidth = 3
+            self.postcodeError.layer.borderColor = UIColor(named: "NHS Error")!.cgColor
+        }, to: postcodeField)
     }
 }
 
