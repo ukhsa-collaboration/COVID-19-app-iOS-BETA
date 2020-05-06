@@ -232,7 +232,7 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="POh-1R-IfZ" userLabel="Red Status">
                                                                 <rect key="frame" x="0.0" y="667" width="382" height="189"/>
                                                                 <subviews>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gbo-jS-eOA" customClass="UIButton">
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gbo-jS-eOA">
                                                                         <rect key="frame" x="0.0" y="0.0" width="382" height="112.5"/>
                                                                         <subviews>
                                                                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P4u-2I-dwE" userLabel="Background">
@@ -241,23 +241,27 @@
                                                                             </view>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please book a coronavirus test immediately. Write down your reference code and phone" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zfg-lL-ZYx">
                                                                                 <rect key="frame" x="0.0" y="16" width="382" height="42.5"/>
+                                                                                <accessibility key="accessibilityConfiguration" label="Please book a coronavirus test immediately. Write down your reference code and phone 0800 540 4900"/>
                                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                                 <nil key="textColor"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
-                                                                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9DM-3L-KWt" customClass="LinkButton" customModule="Sonar" customModuleProvider="target">
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9DM-3L-KWt" customClass="LinkButton" customModule="Sonar" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="58.5" width="382" height="54"/>
                                                                                 <accessibility key="accessibilityConfiguration">
-                                                                                    <bool key="isElement" value="NO"/>
+                                                                                    <accessibilityTraits key="traits" button="YES" link="YES"/>
                                                                                 </accessibility>
                                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                                                 <state key="normal" title="0800 540 4900"/>
+                                                                                <connections>
+                                                                                    <action selector="bookTestButtonTapped" destination="HPa-EI-l5D" eventType="touchUpInside" id="IiH-8R-wWX"/>
+                                                                                </connections>
                                                                             </button>
                                                                         </subviews>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                         <accessibility key="accessibilityConfiguration">
-                                                                            <accessibilityTraits key="traits" button="YES"/>
-                                                                            <bool key="isElement" value="YES"/>
+                                                                            <accessibilityTraits key="traits" notEnabled="YES"/>
+                                                                            <bool key="isElement" value="NO"/>
                                                                         </accessibility>
                                                                         <constraints>
                                                                             <constraint firstItem="Zfg-lL-ZYx" firstAttribute="top" secondItem="Gbo-jS-eOA" secondAttribute="top" constant="16" id="1Pg-Ej-o3O"/>
@@ -270,9 +274,6 @@
                                                                             <constraint firstItem="9DM-3L-KWt" firstAttribute="leading" secondItem="Gbo-jS-eOA" secondAttribute="leading" id="s3D-JL-klf"/>
                                                                             <constraint firstItem="Zfg-lL-ZYx" firstAttribute="leading" secondItem="Gbo-jS-eOA" secondAttribute="leading" id="zQ5-WH-6eh"/>
                                                                         </constraints>
-                                                                        <connections>
-                                                                            <action selector="bookTestButtonTapped" destination="HPa-EI-l5D" eventType="touchUpInside" id="b6w-UD-A0d"/>
-                                                                        </connections>
                                                                     </view>
                                                                     <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="66c-tO-6TF" userLabel="Linking Id" customClass="UIButton">
                                                                         <rect key="frame" x="0.0" y="120.5" width="382" height="68.5"/>
@@ -417,7 +418,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="k8f-bF-CaC"/>
                     <connections>
-                        <outlet property="bookTestButton" destination="Gbo-jS-eOA" id="3hH-pA-sQB"/>
                         <outlet property="bookTestLabel" destination="Zfg-lL-ZYx" id="dRx-3V-xj3"/>
                         <outlet property="bookTestPhoneButton" destination="9DM-3L-KWt" id="DEJ-WA-1Xt"/>
                         <outlet property="diagnosisDetailLabel" destination="h1p-vA-xU7" id="WFZ-RF-fJn"/>
