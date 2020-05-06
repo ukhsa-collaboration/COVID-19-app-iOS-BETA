@@ -424,6 +424,7 @@
                         <outlet property="diagnosisStatusView" destination="JWK-re-qjH" id="byU-x3-cXA"/>
                         <outlet property="diagnosisTitleLabel" destination="Rpg-7v-Vhp" id="6bk-Da-3iT"/>
                         <outlet property="disclosureIndicator" destination="mvH-zV-c1r" id="Fbk-ng-Pt0"/>
+                        <outlet property="feelUnwellView" destination="9e7-f2-SFh" id="gbF-nE-kEl"/>
                         <outlet property="healthcareWorkersInstructionsView" destination="Tgy-0K-l2M" id="Bjk-92-NTe"/>
                         <outlet property="howAreYouFeelingView" destination="hbY-PQ-ANb" id="hfn-Fk-Joh"/>
                         <outlet property="linkingIDButton" destination="66c-tO-6TF" id="iTP-ey-a4n"/>
@@ -432,7 +433,6 @@
                         <outlet property="noSymptomsLabel" destination="MHW-MT-jLf" id="8V9-Ab-x0Y"/>
                         <outlet property="notRightSubtitleLabel" destination="xqf-9x-H9Q" id="oY0-jS-FjH"/>
                         <outlet property="notRightTitleLabel" destination="psh-Wd-l5I" id="jbn-hg-Mpm"/>
-                        <outlet property="notRightView" destination="9e7-f2-SFh" id="gbF-nE-kEl"/>
                         <outlet property="nothingToDoLabel" destination="oOf-mX-ad8" id="cEL-Nb-mZE"/>
                         <outlet property="readLatestAdviceLabel" destination="oUM-AI-6LL" id="QL4-WU-Efr"/>
                         <outlet property="redStatusView" destination="POh-1R-IfZ" id="0U7-DA-VM7"/>

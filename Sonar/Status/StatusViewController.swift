@@ -39,7 +39,7 @@ class StatusViewController: UIViewController, Storyboarded {
     @IBOutlet weak var disclosureIndicator: UIImageView!
     
     @IBOutlet weak var howAreYouFeelingView: UIView!
-    @IBOutlet weak var notRightView: UIView!
+    @IBOutlet weak var feelUnwellView: UIView!
     @IBOutlet weak var notRightTitleLabel: UILabel!
     @IBOutlet weak var notRightSubtitleLabel: UILabel!
     
@@ -91,11 +91,11 @@ class StatusViewController: UIViewController, Storyboarded {
             UITapGestureRecognizer(target: self, action: #selector(diagnosisStatusTapped))
         )
 
-        notRightView.layer.cornerRadius = 8
+        feelUnwellView.layer.cornerRadius = 8
         notRightSubtitleLabel.textColor = UIColor(named: "NHS Secondary Text")
         notRightTitleLabel.textColor = UIColor(named: "NHS Text")
-        notRightView.layer.borderColor = UIColor(named: "NHS Highlight")!.withAlphaComponent(0.96).cgColor
-        notRightView.accessibilityLabel = "\(notRightTitleLabel.text!) \(notRightSubtitleLabel.text!)"
+        feelUnwellView.layer.borderColor = UIColor(named: "NHS Highlight")!.withAlphaComponent(0.96).cgColor
+        feelUnwellView.accessibilityLabel = "\(notRightTitleLabel.text!) \(notRightSubtitleLabel.text!)"
 
         noSymptomsLabel.textColor = UIColor(named: "NHS Secondary Text")
         nothingToDoLabel.textColor = UIColor(named: "NHS Secondary Text")
