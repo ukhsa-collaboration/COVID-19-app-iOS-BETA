@@ -82,6 +82,7 @@ class StatusViewController: UIViewController, Storyboarded {
 
         diagnosisStatusView.layer.cornerRadius = 8
         diagnosisStatusView.layer.masksToBounds = true
+        diagnosisHighlightView.accessibilityIgnoresInvertColors = true
         readLatestAdviceLabel.textColor = UIColor(named: "NHS Link")
 
         medicalAdviceLabel.textColor = UIColor(named: "NHS Secondary Text")
