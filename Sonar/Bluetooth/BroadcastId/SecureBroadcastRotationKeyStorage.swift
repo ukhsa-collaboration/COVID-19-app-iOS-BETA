@@ -36,7 +36,6 @@ struct SecureBroadcastRotationKeyStorage: BroadcastRotationKeyStorage {
     }
     
     func save(broadcastId: Data, date: Date) {
-        // TODO: Should be in the keychain? Or isn't it important, we're broadcasting it anyway!
         UserDefaults.standard.set(broadcastId, forKey: broadcastIdKeyTag)
         UserDefaults.standard.set(date, forKey: broadcastIdDateKeyTag)
     }
