@@ -2,7 +2,7 @@
 //  UITestResponder.swift
 //  SonarInternal
 //
-//  Created by NHSX.
+//  Created by NHSX on 03/04/2020.
 //  Copyright © 2020 NHSX. All rights reserved.
 //
 

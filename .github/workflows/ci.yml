@@ -168,6 +168,7 @@ jobs:
         run: fastlane release sonar_env:${GITHUB_REF#refs/heads/}
 
       - name: Upload IPA
+        if: always()
         uses: actions/upload-artifact@v1
         with:
           name: Sonar.ipa

@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -97,19 +97,20 @@
                                                         <rect key="frame" x="16" y="8" width="382" height="1291"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JWK-re-qjH">
-                                                                <rect key="frame" x="0.0" y="0.0" width="382" height="469.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="382" height="242.5"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uA1-0d-OYq">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="12" height="469.5"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="12" height="242.5"/>
+                                                                        <color key="backgroundColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="12" id="MS2-lV-12k"/>
                                                                         </constraints>
                                                                     </view>
-                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="sLA-Af-1Gb" customClass="SymptomStackView" customModule="Sonar" customModuleProvider="target">
-                                                                        <rect key="frame" x="24" y="24" width="338" height="237"/>
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="10" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="sLA-Af-1Gb" customClass="SymptomStackView" customModule="Sonar" customModuleProvider="target">
+                                                                        <rect key="frame" x="24" y="24" width="338" height="10"/>
                                                                     </stackView>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Kcg-6z-FYa">
-                                                                        <rect key="frame" x="24" y="370.5" width="338" height="45"/>
+                                                                        <rect key="frame" x="24" y="143.5" width="338" height="45"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Read current advice" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oUM-AI-6LL">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="338" height="20.5"/>
@@ -126,7 +127,7 @@
                                                                         </subviews>
                                                                     </stackView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rpg-7v-Vhp">
-                                                                        <rect key="frame" x="24" y="289" width="338" height="33.5"/>
+                                                                        <rect key="frame" x="24" y="62" width="338" height="33.5"/>
                                                                         <accessibility key="accessibilityConfiguration">
                                                                             <accessibilityTraits key="traits" staticText="YES" header="YES"/>
                                                                         </accessibility>
@@ -157,7 +158,7 @@
                                                                 </constraints>
                                                             </view>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="hbY-PQ-ANb">
-                                                                <rect key="frame" x="0.0" y="501.5" width="382" height="360.5"/>
+                                                                <rect key="frame" x="0.0" y="274.5" width="382" height="360.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How are you feeling today?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ZI-fb-8RW">
                                                                         <rect key="frame" x="0.0" y="0.0" width="382" height="26.5"/>
@@ -171,7 +172,7 @@
                                                                     <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="9e7-f2-SFh" customClass="UIButton">
                                                                         <rect key="frame" x="0.0" y="46.5" width="382" height="123"/>
                                                                         <subviews>
-                                                                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AH0-Tv-hhe">
+                                                                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AH0-Tv-hhe" customClass="SmartInvertBorderView" customModule="Sonar" customModuleProvider="target">
                                                                                 <rect key="frame" x="-16" y="0.0" width="414" height="123"/>
                                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                             </view>
@@ -229,9 +230,9 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="POh-1R-IfZ" userLabel="Red Status">
-                                                                <rect key="frame" x="0.0" y="894" width="382" height="189"/>
+                                                                <rect key="frame" x="0.0" y="667" width="382" height="189"/>
                                                                 <subviews>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gbo-jS-eOA" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gbo-jS-eOA">
                                                                         <rect key="frame" x="0.0" y="0.0" width="382" height="112.5"/>
                                                                         <subviews>
                                                                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P4u-2I-dwE" userLabel="Background">
@@ -240,22 +241,27 @@
                                                                             </view>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please book a coronavirus test immediately. Write down your reference code and phone" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zfg-lL-ZYx">
                                                                                 <rect key="frame" x="0.0" y="16" width="382" height="42.5"/>
+                                                                                <accessibility key="accessibilityConfiguration" label="Please book a coronavirus test immediately. Write down your reference code and phone 0800 540 4900"/>
                                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                                 <nil key="textColor"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
-                                                                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9DM-3L-KWt" customClass="LinkButton" customModule="Sonar" customModuleProvider="target">
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9DM-3L-KWt" customClass="LinkButton" customModule="Sonar" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="58.5" width="382" height="54"/>
                                                                                 <accessibility key="accessibilityConfiguration">
-                                                                                    <bool key="isElement" value="NO"/>
+                                                                                    <accessibilityTraits key="traits" button="YES" link="YES"/>
                                                                                 </accessibility>
+                                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                                                 <state key="normal" title="0800 540 4900"/>
+                                                                                <connections>
+                                                                                    <action selector="bookTestButtonTapped" destination="HPa-EI-l5D" eventType="touchUpInside" id="IiH-8R-wWX"/>
+                                                                                </connections>
                                                                             </button>
                                                                         </subviews>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                         <accessibility key="accessibilityConfiguration">
-                                                                            <accessibilityTraits key="traits" button="YES"/>
-                                                                            <bool key="isElement" value="YES"/>
+                                                                            <accessibilityTraits key="traits" notEnabled="YES"/>
+                                                                            <bool key="isElement" value="NO"/>
                                                                         </accessibility>
                                                                         <constraints>
                                                                             <constraint firstItem="Zfg-lL-ZYx" firstAttribute="top" secondItem="Gbo-jS-eOA" secondAttribute="top" constant="16" id="1Pg-Ej-o3O"/>
@@ -268,14 +274,11 @@
                                                                             <constraint firstItem="9DM-3L-KWt" firstAttribute="leading" secondItem="Gbo-jS-eOA" secondAttribute="leading" id="s3D-JL-klf"/>
                                                                             <constraint firstItem="Zfg-lL-ZYx" firstAttribute="leading" secondItem="Gbo-jS-eOA" secondAttribute="leading" id="zQ5-WH-6eh"/>
                                                                         </constraints>
-                                                                        <connections>
-                                                                            <action selector="bookTestButtonTapped" destination="HPa-EI-l5D" eventType="touchUpInside" id="b6w-UD-A0d"/>
-                                                                        </connections>
                                                                     </view>
                                                                     <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="66c-tO-6TF" userLabel="Linking Id" customClass="UIButton">
                                                                         <rect key="frame" x="0.0" y="120.5" width="382" height="68.5"/>
                                                                         <subviews>
-                                                                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bxy-UB-mQx" userLabel="Background">
+                                                                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bxy-UB-mQx" userLabel="Background" customClass="SmartInvertBorderView" customModule="Sonar" customModuleProvider="target">
                                                                                 <rect key="frame" x="-16" y="0.0" width="414" height="68.5"/>
                                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                             </view>
@@ -311,7 +314,7 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Ghk-8F-7gV" userLabel="NHS Coronavirus">
-                                                                <rect key="frame" x="0.0" y="1115" width="382" height="75.5"/>
+                                                                <rect key="frame" x="0.0" y="888" width="382" height="302.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you need urgent medical advice or want further information, go to" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zqt-gJ-Jrb">
                                                                         <rect key="frame" x="0.0" y="0.0" width="382" height="42.5"/>
@@ -320,7 +323,7 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2UL-Ea-jl7" customClass="LinkButton" customModule="Sonar" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="42.5" width="382" height="33"/>
+                                                                        <rect key="frame" x="0.0" y="42.5" width="382" height="260"/>
                                                                         <accessibility key="accessibilityConfiguration">
                                                                             <accessibilityTraits key="traits" link="YES"/>
                                                                         </accessibility>
@@ -337,7 +340,7 @@
                                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="Tgy-0K-l2M" userLabel="Instructions for healthcare workers" customClass="UIControl">
                                                                 <rect key="frame" x="0.0" y="1222.5" width="382" height="68.5"/>
                                                                 <subviews>
-                                                                    <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yI5-J1-igp" userLabel="Background">
+                                                                    <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yI5-J1-igp" userLabel="Background" customClass="SmartInvertBorderView" customModule="Sonar" customModuleProvider="target">
                                                                         <rect key="frame" x="-16" y="0.0" width="414" height="68.5"/>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                     </view>
@@ -415,7 +418,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="k8f-bF-CaC"/>
                     <connections>
-                        <outlet property="bookTestButton" destination="Gbo-jS-eOA" id="3hH-pA-sQB"/>
                         <outlet property="bookTestLabel" destination="Zfg-lL-ZYx" id="dRx-3V-xj3"/>
                         <outlet property="bookTestPhoneButton" destination="9DM-3L-KWt" id="DEJ-WA-1Xt"/>
                         <outlet property="diagnosisDetailLabel" destination="h1p-vA-xU7" id="WFZ-RF-fJn"/>
@@ -423,6 +425,7 @@
                         <outlet property="diagnosisStatusView" destination="JWK-re-qjH" id="byU-x3-cXA"/>
                         <outlet property="diagnosisTitleLabel" destination="Rpg-7v-Vhp" id="6bk-Da-3iT"/>
                         <outlet property="disclosureIndicator" destination="mvH-zV-c1r" id="Fbk-ng-Pt0"/>
+                        <outlet property="feelUnwellView" destination="9e7-f2-SFh" id="gbF-nE-kEl"/>
                         <outlet property="healthcareWorkersInstructionsView" destination="Tgy-0K-l2M" id="Bjk-92-NTe"/>
                         <outlet property="howAreYouFeelingView" destination="hbY-PQ-ANb" id="hfn-Fk-Joh"/>
                         <outlet property="linkingIDButton" destination="66c-tO-6TF" id="iTP-ey-a4n"/>
@@ -431,7 +434,6 @@
                         <outlet property="noSymptomsLabel" destination="MHW-MT-jLf" id="8V9-Ab-x0Y"/>
                         <outlet property="notRightSubtitleLabel" destination="xqf-9x-H9Q" id="oY0-jS-FjH"/>
                         <outlet property="notRightTitleLabel" destination="psh-Wd-l5I" id="jbn-hg-Mpm"/>
-                        <outlet property="notRightView" destination="9e7-f2-SFh" id="gbF-nE-kEl"/>
                         <outlet property="nothingToDoLabel" destination="oOf-mX-ad8" id="cEL-Nb-mZE"/>
                         <outlet property="readLatestAdviceLabel" destination="oUM-AI-6LL" id="QL4-WU-Efr"/>
                         <outlet property="redStatusView" destination="POh-1R-IfZ" id="0U7-DA-VM7"/>

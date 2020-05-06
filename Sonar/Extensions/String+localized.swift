@@ -2,7 +2,7 @@
 //  String+localized.swift
 //  Sonar
 //
-//  Created by NHSX.
+//  Created by NHSX on 25/03/2020.
 //  Copyright © 2020 NHSX. All rights reserved.
 //
 

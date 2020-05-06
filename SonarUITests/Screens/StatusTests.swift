@@ -2,7 +2,7 @@
 //  StatusTests.swift
 //  SonarUITests
 //
-//  Created by NHSX.
+//  Created by NHSX on 04/05/2020.
 //  Copyright © 2020 NHSX. All rights reserved.
 //
 
@@ -115,7 +115,7 @@ private extension ScreenTestCase {
     }
 
     var bookNowAdvice: XCUIElement {
-        app.staticTexts["Please book a coronavirus test immediately. Write down your reference code and phone"]
+        app.staticTexts["Please book a coronavirus test immediately. Write down your reference code and phone 0800 540 4900"]
     }
 
 }

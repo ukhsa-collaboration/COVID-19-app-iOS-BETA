@@ -2,7 +2,7 @@
 //  StatusViewController.swift
 //  Sonar
 //
-//  Created by NHSX.
+//  Created by NHSX on 17.03.20.
 //  Copyright © 2020 NHSX. All rights reserved.
 //
 
@@ -39,7 +39,7 @@ class StatusViewController: UIViewController, Storyboarded {
     @IBOutlet weak var disclosureIndicator: UIImageView!
     
     @IBOutlet weak var howAreYouFeelingView: UIView!
-    @IBOutlet weak var notRightView: UIView!
+    @IBOutlet weak var feelUnwellView: UIView!
     @IBOutlet weak var notRightTitleLabel: UILabel!
     @IBOutlet weak var notRightSubtitleLabel: UILabel!
     
@@ -47,7 +47,6 @@ class StatusViewController: UIViewController, Storyboarded {
     @IBOutlet weak var noSymptomsLabel: UILabel!
 
     @IBOutlet weak var redStatusView: UIStackView!
-    @IBOutlet weak var bookTestButton: ButtonWithDynamicType!
     @IBOutlet weak var bookTestLabel: UILabel!
     @IBOutlet weak var bookTestPhoneButton: LinkButton!
 
@@ -82,6 +81,7 @@ class StatusViewController: UIViewController, Storyboarded {
 
         diagnosisStatusView.layer.cornerRadius = 8
         diagnosisStatusView.layer.masksToBounds = true
+        diagnosisHighlightView.accessibilityIgnoresInvertColors = true
         readLatestAdviceLabel.textColor = UIColor(named: "NHS Link")
 
         medicalAdviceLabel.textColor = UIColor(named: "NHS Secondary Text")
@@ -90,11 +90,11 @@ class StatusViewController: UIViewController, Storyboarded {
             UITapGestureRecognizer(target: self, action: #selector(diagnosisStatusTapped))
         )
 
-        notRightView.layer.cornerRadius = 8
+        feelUnwellView.layer.cornerRadius = 8
         notRightSubtitleLabel.textColor = UIColor(named: "NHS Secondary Text")
         notRightTitleLabel.textColor = UIColor(named: "NHS Text")
-        notRightView.layer.borderColor = UIColor(named: "NHS Highlight")!.withAlphaComponent(0.96).cgColor
-        notRightView.accessibilityLabel = "\(notRightTitleLabel.text!) \(notRightSubtitleLabel.text!)"
+        feelUnwellView.layer.borderColor = UIColor(named: "NHS Highlight")!.withAlphaComponent(0.96).cgColor
+        feelUnwellView.accessibilityLabel = "\(notRightTitleLabel.text!) \(notRightSubtitleLabel.text!)"
 
         noSymptomsLabel.textColor = UIColor(named: "NHS Secondary Text")
         nothingToDoLabel.textColor = UIColor(named: "NHS Secondary Text")
@@ -104,7 +104,10 @@ class StatusViewController: UIViewController, Storyboarded {
 
         nhs111label.inject(title: "NHS Coronavirus".localized, external: true, style: .body)
 
-        bookTestButton.accessibilityLabel = "\(bookTestLabel.text!) \(bookTestPhoneButton.title(for: .normal)!)"
+        bookTestPhoneButton.inject(title: "0800 540 4900", external: false, style: .subheadline)
+        bookTestPhoneButton.accessibilityHint = nil
+        bookTestPhoneButton.accessibilityLabel = "Dial the NHS 0800 540 4900".localized
+        bookTestPhoneButton.accessibilityTraits = .link
 
         healthcareWorkersInstructionsView.accessibilityLabel = "Important instructions for healthcare workers"
         healthcareWorkersInstructionsView.accessibilityTraits = .button
@@ -253,7 +256,7 @@ class StatusViewController: UIViewController, Storyboarded {
         
         symptomStackView.symptoms = persistence.selfDiagnosis?.symptoms
         
-        if let diagnosis = persistence.selfDiagnosis, diagnosis.hasExpired() {
+        if let diagnosis = persistence.selfDiagnosis, diagnosis.hasExpired {
             localNotificationScheduler.removePendingDiagnosisNotification()
             let symptomsPromptViewController = SymptomsPromptViewController.instantiate()
             symptomsPromptViewController.modalPresentationStyle = .custom

@@ -2,7 +2,7 @@
 //  SecureBroadcastRotationKeyStorage.swift
 //  Sonar
 //
-//  Created by NHSX.
+//  Created by NHSX on 07/04/2020.
 //  Copyright © 2020 NHSX. All rights reserved.
 //
 
@@ -36,7 +36,6 @@ struct SecureBroadcastRotationKeyStorage: BroadcastRotationKeyStorage {
     }
     
     func save(broadcastId: Data, date: Date) {
-        // TODO: Should be in the keychain? Or isn't it important, we're broadcasting it anyway!
         UserDefaults.standard.set(broadcastId, forKey: broadcastIdKeyTag)
         UserDefaults.standard.set(date, forKey: broadcastIdDateKeyTag)
     }

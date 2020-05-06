@@ -2,7 +2,7 @@
 //  TrustValidatingURLSessionDelegateTests.swift
 //  SonarTests
 //
-//  Created by NHSX.
+//  Created by NHSX on 22/04/2020.
 //  Copyright © 2020 NHSX. All rights reserved.
 //
 

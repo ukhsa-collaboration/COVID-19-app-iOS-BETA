@@ -2,7 +2,7 @@
 //  ConfirmRegistrationRequest.swift
 //  Sonar
 //
-//  Created by NHSX.
+//  Created by NHSX on 26.03.20.
 //  Copyright © 2020 NHSX. All rights reserved.
 //
 
