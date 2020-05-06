@@ -254,7 +254,7 @@ class StatusViewController: UIViewController, Storyboarded {
         
         symptomStackView.symptoms = persistence.selfDiagnosis?.symptoms
         
-        if let diagnosis = persistence.selfDiagnosis, diagnosis.hasExpired() {
+        if let diagnosis = persistence.selfDiagnosis, diagnosis.hasExpired {
             localNotificationScheduler.removePendingDiagnosisNotification()
             let symptomsPromptViewController = SymptomsPromptViewController.instantiate()
             symptomsPromptViewController.modalPresentationStyle = .custom

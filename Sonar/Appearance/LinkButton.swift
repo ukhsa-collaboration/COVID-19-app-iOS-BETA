@@ -17,7 +17,6 @@ class LinkButton: ButtonWithDynamicType {
             accessibilityTraits = .button
         }
         
-        setTitle(title, for: .normal)
         titleLabel?.attributedText = NSAttributedString(string: title, attributes:
             [
                 .underlineStyle: NSUnderlineStyle.single.rawValue,
@@ -25,6 +24,7 @@ class LinkButton: ButtonWithDynamicType {
                 .font: UIFont.preferredFont(forTextStyle: style)
             ]
         )
+        setTitle(title, for: .normal)
     }
 }
 

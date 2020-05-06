@@ -57,6 +57,7 @@
 		134470AD2454D4DA001A0AD9 /* UpdateDiagnosisCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134470AB2454D4DA001A0AD9 /* UpdateDiagnosisCoordinator.swift */; };
 		134470AE2454D4DA001A0AD9 /* SelfDiagnosisCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134470AC2454D4DA001A0AD9 /* SelfDiagnosisCoordinator.swift */; };
 		134470B02454D614001A0AD9 /* CoughUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134470AF2454D614001A0AD9 /* CoughUpdateViewController.swift */; };
+		136001DC2462EE1C001EFE2A /* SelfDiagnosisTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136001DB2462EE1C001EFE2A /* SelfDiagnosisTests.swift */; };
 		1376776F2458488900197F8E /* SchedulerDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1376776E2458488900197F8E /* SchedulerDouble.swift */; };
 		138114E42450543600BA46C7 /* SymptomStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138114E32450543600BA46C7 /* SymptomStackView.swift */; };
 		138114E62450796C00BA46C7 /* LocalNotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138114E52450796C00BA46C7 /* LocalNotificationScheduler.swift */; };
@@ -321,6 +322,7 @@
 		134470AC2454D4DA001A0AD9 /* SelfDiagnosisCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfDiagnosisCoordinator.swift; sourceTree = "<group>"; };
 		134470AF2454D614001A0AD9 /* CoughUpdateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoughUpdateViewController.swift; sourceTree = "<group>"; };
 		1347DAF02450915500F2F776 /* LocalNotificationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationTests.swift; sourceTree = "<group>"; };
+		136001DB2462EE1C001EFE2A /* SelfDiagnosisTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfDiagnosisTests.swift; sourceTree = "<group>"; };
 		1376776E2458488900197F8E /* SchedulerDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulerDouble.swift; sourceTree = "<group>"; };
 		138114E32450543600BA46C7 /* SymptomStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomStackView.swift; sourceTree = "<group>"; };
 		138114E52450796C00BA46C7 /* LocalNotificationScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationScheduler.swift; sourceTree = "<group>"; };
@@ -1092,6 +1094,7 @@
 				F67C5158243E7C1E008E2945 /* SubmitSymptomsViewControllerTests.swift */,
 				F6548FA22460C1C7005F06FF /* UpdateDiagnosisCoordinatorTests.swift */,
 				09C9DB3424608ABB0012F80A /* Controls */,
+				136001DB2462EE1C001EFE2A /* SelfDiagnosisTests.swift */,
 			);
 			path = SelfDiagnosis;
 			sourceTree = "<group>";
@@ -1109,8 +1112,8 @@
 			isa = PBXGroup;
 			children = (
 				F68B89EC243CFF2600F369A9 /* SelfDiagnosis.storyboard */,
-				13F4AE872451EB330082A46D /* QuestionSymptomsViewController.swift */,
 				F6EEC3B72448DD2400172820 /* SelfDiagnosis.swift */,
+				13F4AE872451EB330082A46D /* QuestionSymptomsViewController.swift */,
 				134470AC2454D4DA001A0AD9 /* SelfDiagnosisCoordinator.swift */,
 				F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */,
 				F673FBB32457A89E00D96C50 /* SymptomsSummaryViewController.swift */,
@@ -1513,6 +1516,7 @@
 				090B1871243552C300870B5D /* UserNotificationCenterDouble.swift in Sources */,
 				21C417CA242CB0A200DEF3E2 /* ConfirmRegistrationRequestTests.swift in Sources */,
 				F632792A2435323200CF7A42 /* PermissionsViewControllerTests.swift in Sources */,
+				136001DC2462EE1C001EFE2A /* SelfDiagnosisTests.swift in Sources */,
 				09E6E7E62452779B0069DFA8 /* SetupCheckerTests.swift in Sources */,
 				F7D62F292440D4CB004C32A2 /* SonarBroadcastPayloadGeneratorTests.swift in Sources */,
 				F72EBDA5243D094A009F9328 /* SecureBroadcastRotationKeyStorageTests.swift in Sources */,
