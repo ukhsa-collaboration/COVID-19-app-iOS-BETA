@@ -214,12 +214,25 @@ jobs:
           build_number=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" "Sonar/Info.plist")
           echo "::set-output name=build-number::$build_number"
 
+      - name: Mark stories delivered in PivotalTracker
+        env:
+          PIVOTAL_TRACKER_API_TOKEN: ${{ secrets.pivotal_tracker_api_token }}
+          PROJECT_ID: ${{ secrets.pivotal_tracker_project_id }}
+        run: |
+          bin/deliver-pivotal-tracker-stories
+
+          # move the tag ahead
+          git push origin --delete last-commit-to-run-on-ci || true
+          git tag --force last-commit-to-run-on-ci
+          git push origin last-commit-to-run-on-ci
+
+
       - name: Notify Slack on Upload
         env:
           SLACK_BOT_TOKEN: ${{ secrets.slack_bot_token }}
         uses: voxmedia/github-action-slack-notify-build@v1
         with:
-          channel_id: G011ZPSAD4J
+          channel_id: G012ZPSAD4J
           status: UPLOADED [(${{ steps.get-build-number.outputs.build-number }})]
 
       - name: Notify Slack on Failure
@@ -231,3 +244,5 @@ jobs:
           channel_id: G011ZPSAD4J
           status: FAILED
           color: danger
+
+
