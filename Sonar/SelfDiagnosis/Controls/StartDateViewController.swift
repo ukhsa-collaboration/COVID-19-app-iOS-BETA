@@ -11,7 +11,6 @@ import UIKit
 import Logging
 
 protocol StartDateViewControllerDelegate: class {
-    func startDateViewControllerDidShowDatePicker(_ vc: StartDateViewController)
     func startDateViewController(_ vc: StartDateViewController, didSelectDate date: Date)
 }
 
@@ -84,12 +83,17 @@ class StartDateViewController: UIViewController {
     }
 
     @IBAction func buttonTapped(_ sender: StartDateButton) {
-        self.datePicker.isHidden = !self.datePicker.isHidden
         startDate = dateOptions[datePicker.selectedRow(inComponent: 0)]
-        self.delegate?.startDateViewControllerDidShowDatePicker(self)
+        showPicker()
     }
 
     // MARK: - Support for Dyanmic Type
+    
+    private func showPicker() {
+        scroll(after: {
+            self.datePicker.isHidden = !self.datePicker.isHidden
+        }, to: self.datePicker)
+    }
 
     private func makeLabelForPickerRow() -> UILabel {
         let label = UILabel()
