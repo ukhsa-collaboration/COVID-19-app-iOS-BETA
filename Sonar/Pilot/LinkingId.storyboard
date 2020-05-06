@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2DV-fd-FjU">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Linking Id View Controller-->
+        <scene sceneID="Qru-fo-gMt">
+            <objects>
+                <viewController storyboardIdentifier="LinkingIdViewController" id="2DV-fd-FjU" customClass="LinkingIdViewController" customModule="Sonar" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1xp-lJ-Mpr">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="222"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i7g-54-jA7">
+                                <rect key="frame" x="0.0" y="44" width="414" height="178"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="Isf-ek-wrS">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="170"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reference code" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cjQ-x6-Kok">
+                                                <rect key="frame" x="16" y="16" width="382" height="20.5"/>
+                                                <accessibility key="accessibilityConfiguration">
+                                                    <accessibilityTraits key="traits" staticText="YES" header="YES"/>
+                                                </accessibility>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fetching reference code" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JMq-Gh-7Cj">
+                                                <rect key="frame" x="16" y="68.5" width="382" height="20.5"/>
+                                                <accessibility key="accessibilityConfiguration">
+                                                    <accessibilityTraits key="traits" staticText="YES" updatesFrequently="YES"/>
+                                                </accessibility>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error fetching App ID" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwU-V9-8IW" customClass="ErrorLabel" customModule="Sonar" customModuleProvider="target">
+                                                <rect key="frame" x="16" y="105" width="382" height="0.0"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ajc-5y-6oC" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
+                                                <rect key="frame" x="16" y="121" width="382" height="33"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <state key="normal" title="Close"/>
+                                                <connections>
+                                                    <segue destination="IWe-bN-JgZ" kind="unwind" identifier="UnwindFromLinkingId" unwindAction="unwindFromLinkingIdWithUnwindSegue:" id="Zhh-Zk-59a"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <directionalEdgeInsets key="directionalLayoutMargins" top="16" leading="16" bottom="16" trailing="16"/>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="Isf-ek-wrS" firstAttribute="width" secondItem="gwV-eb-6U9" secondAttribute="width" id="1NW-VO-Xi0"/>
+                                    <constraint firstItem="Isf-ek-wrS" firstAttribute="trailing" secondItem="eSt-n9-y1K" secondAttribute="trailing" id="GJQ-tw-X5k"/>
+                                    <constraint firstItem="Isf-ek-wrS" firstAttribute="top" secondItem="eSt-n9-y1K" secondAttribute="top" id="GWp-jP-APp"/>
+                                    <constraint firstItem="Isf-ek-wrS" firstAttribute="leading" secondItem="eSt-n9-y1K" secondAttribute="leading" id="Ow9-9M-eaX"/>
+                                    <constraint firstItem="Isf-ek-wrS" firstAttribute="bottom" secondItem="eSt-n9-y1K" secondAttribute="bottom" id="exI-YT-DYM"/>
+                                    <constraint firstItem="Isf-ek-wrS" firstAttribute="height" secondItem="gwV-eb-6U9" secondAttribute="height" priority="1" id="v2h-0a-b9t"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="eSt-n9-y1K"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="gwV-eb-6U9"/>
+                            </scrollView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="YNb-EQ-dKb">
+                                <rect key="frame" x="374" y="113" width="20" height="20"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="L7M-kP-6XK" firstAttribute="trailing" secondItem="YNb-EQ-dKb" secondAttribute="trailing" constant="20" id="6fA-R2-NeM"/>
+                            <constraint firstItem="i7g-54-jA7" firstAttribute="top" secondItem="L7M-kP-6XK" secondAttribute="top" id="TgK-FF-Hqi"/>
+                            <constraint firstItem="i7g-54-jA7" firstAttribute="leading" secondItem="L7M-kP-6XK" secondAttribute="leading" id="WY6-hZ-300"/>
+                            <constraint firstItem="i7g-54-jA7" firstAttribute="bottom" secondItem="L7M-kP-6XK" secondAttribute="bottom" id="pIh-5V-g6r"/>
+                            <constraint firstItem="i7g-54-jA7" firstAttribute="trailing" secondItem="L7M-kP-6XK" secondAttribute="trailing" id="ulE-Ur-f3L"/>
+                            <constraint firstItem="YNb-EQ-dKb" firstAttribute="centerY" secondItem="JMq-Gh-7Cj" secondAttribute="centerY" id="zZn-JS-aGu"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="L7M-kP-6XK"/>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="414" height="222"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="YNb-EQ-dKb" id="61Q-CF-I1q"/>
+                        <outlet property="errorLabel" destination="hwU-V9-8IW" id="sbD-2I-Hqk"/>
+                        <outlet property="linkingIdLabel" destination="JMq-Gh-7Cj" id="P0q-oa-XaA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3rx-BK-2al" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="IWe-bN-JgZ" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="156.52173913043478" y="97.767857142857139"/>
+        </scene>
+    </scenes>
+</document>

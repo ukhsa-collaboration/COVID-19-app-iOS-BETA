@@ -1,0 +1,74 @@
+# vim: ft=ruby:
+
+require "fileutils"
+
+default_platform(:ios)
+
+platform :ios do
+  # This was a bear to get working and I'm not entirely convinced that we
+  # won't need this command again in the future, so I'm leaving this command
+  # here for posterity.
+  #
+  #   security set-key-partition-list -S apple-tool:,apple: -s -k "" \
+  #     ~/Library/Keychains/fastlane_tmp_keychain-db
+
+  module Sonar
+    Config = Struct.new(:bundle_id, :apple_id, keyword_init: true)
+
+    CONFIGS = {
+      beta: Config.new(
+        bundle_id: "uk.nhs.nhsx.beta.Sonar",
+        apple_id: 1504244021,
+      ),
+      internal: Config.new(
+        bundle_id: "uk.nhs.nhsx.sonar.internal",
+        apple_id: 1507438009,
+      ),
+      production: Config.new(
+        bundle_id: "uk.nhs.nhsx.sonar",
+        apple_id: 1507396059,
+      ),
+    }
+  end
+
+  desc "Cut a release for Test Flight"
+  lane :release do |options|
+    sonar_env = options.fetch(:sonar_env).to_sym
+    sonar_config = Sonar::CONFIGS.fetch(sonar_env)
+
+    setup_ci()
+
+    sync_code_signing(
+      type: "appstore",
+      readonly: true,
+      app_identifier: sonar_config.bundle_id,
+      git_url: "./ci/match",
+    )
+
+    update_code_signing_settings(
+      use_automatic_signing: false,
+      path: "./Sonar.xcodeproj",
+      targets: ["Sonar"],
+      code_sign_identity: "iPhone Distribution",
+      profile_name: "match AppStore #{sonar_config.bundle_id}",
+    )
+
+    Dir.chdir ".." do
+      File.write(".secret/Sonar.xcconfig", <<~XCCONFIG)
+        #include "Sonar/Environments/#{sonar_env}.xcconfig"
+      XCCONFIG
+      sh "./bin/make-environment <<< $ENVIRONMENT_JSON_#{sonar_env.upcase} > .secret/Environment.swift"
+      File.write(".secret/GoogleService-Info.plist", ENV.fetch("GOOGLE_SERVICE_INFO_PLIST_#{sonar_env.upcase}"))
+    end
+
+    build_app(
+      scheme: "Sonar",
+    )
+
+    upload_to_testflight(
+      username: ENV.fetch("APPLE_USERNAME"),
+      apple_id: sonar_config.apple_id.to_s,
+      skip_waiting_for_build_processing: true,
+    )
+  end
+end

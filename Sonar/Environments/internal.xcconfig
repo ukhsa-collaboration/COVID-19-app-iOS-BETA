@@ -1,0 +1,5 @@
+#include "Sonar/Base.xcconfig"
+
+ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.internal
+PRODUCT_BUNDLE_IDENTIFIER = uk.nhs.nhsx.sonar.internal
+SWIFT_ACTIVE_COMPILATION_CONDITIONS = INTERNAL PILOT $(inherited)

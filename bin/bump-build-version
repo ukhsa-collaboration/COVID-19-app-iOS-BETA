@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+PLIST=Sonar/Info.plist
+
+current_version=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" "$PLIST")
+next_version="$((current_version + 1))"
+plutil -replace CFBundleVersion -string "$next_version" "$PLIST"

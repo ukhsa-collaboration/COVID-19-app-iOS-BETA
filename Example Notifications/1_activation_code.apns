@@ -1,0 +1,9 @@
+{
+    "Simulator Target Bundle": "uk.nhs.nhsx.beta.Sonar",
+
+    "activationCode": "335fc471-9443-49c8-a8ad-44b9c4758313",
+
+    "aps": {
+      "content-available": 1
+    }
+}

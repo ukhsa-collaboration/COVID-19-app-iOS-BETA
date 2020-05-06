@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+require "erb"
+require "json"
+
+template = ERB.new(File.read("Sonar/Environments/Environment.swift.erb"))
+json = JSON.parse(ARGF.read)
+
+puts template.result_with_hash(json)

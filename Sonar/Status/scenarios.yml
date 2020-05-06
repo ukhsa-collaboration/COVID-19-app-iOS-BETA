@@ -1,0 +1,201 @@
+# https://www.gov.uk/government/publications/covid-19-stay-at-home-guidance/stay-at-home-guidance-for-households-with-possible-coronavirus-covid-19-infection#main-messages
+#
+# if you live alone and you have symptoms of coronavirus illness (COVID-19),
+# however mild, stay at home for 7 days from when your symptoms started. (The
+# ending isolation section below has more information) after 7 days, if you do
+# not have a high temperature, you do not need to continue to self-isolate. If
+# you still have a high temperature, keep self-isolating until your temperature
+# returns to normal. You do not need to self-isolate if you just have a cough
+# after 7 days, as a cough can last for several weeks after the infection has
+# gone 
+
+# Simple cases
+
+## Default to blue
+- timeline:
+    2020-04-24:
+      - status: blue
+
+## Potentially exposed
+- timeline:
+    2020-04-24:
+      - status: blue
+      - status-notification: potential
+      - status: amber
+    2020-04-25:
+      - status: amber
+
+## Self-diagnosis should be red
+- timeline:
+    2020-04-24:
+      - status: blue
+      - self-diagnosis:
+          symptoms: [temperature, cough]
+          start-date: 2020-04-24
+      - status: red
+    2020-04-25:
+      - status: red
+
+## Potentially exposed lasts 14 days
+# Note that this is from reception, not from when the contact event occurred.
+- timeline:
+    2020-04-01:
+      - status: blue
+      - status-notification: potential
+      - status: amber
+    2020-04-02:
+      - status: amber
+    2020-04-14:
+      - status: amber
+    2020-04-15:
+      - status: blue
+
+## Red has precedence over amber
+- timeline:
+    2020-04-01:
+      - status-notification: potential
+    2020-04-02:
+      - status: amber
+    2020-04-04:
+      - self-diagnosis:
+          symptoms: [temperature, cough]
+          start-date: 2020-04-04
+    2020-04-05:
+      - status: red
+    2020-04-11:
+      - self-diagnosis:
+          symptoms: []
+      # does not go back to amber from red
+      - status: blue
+    2020-04-12:
+      - status: blue
+
+- timeline:
+    2020-04-01:
+      - self-diagnosis:
+          symptoms: [temperature, cough]
+          start-date: 2020-04-01
+    2020-04-02:
+      - status: red
+    2020-04-04:
+      - status-notification: potential
+    2020-04-05:
+      - status: red
+    2020-04-08:
+      - self-diagnosis:
+          symptoms: []
+      # does not go back to amber from red
+      - status: blue
+    2020-04-09:
+      - status: blue
+
+## Temperature checkin
+- timeline:
+    2020-04-01:
+      - self-diagnosis:
+          symptoms: [temperature]
+          start-date: 2020-04-01
+    2020-04-02:
+      - status: red
+    2020-04-08:
+      - status: red
+      - checkin: true
+      - self-diagnosis:
+          symptoms: [temperature]
+    2020-04-09:
+      - status: red
+      - checkin: true
+      - self-diagnosis:
+          symptoms: [temperature]
+    2020-04-10:
+      - status: red
+      - checkin: true
+      - self-diagnosis:
+          symptoms: [temperature]
+    2020-04-11:
+      - status: red
+      - checkin: true
+      - self-diagnosis:
+          symptoms: []
+      - status: blue
+    2020-04-12:
+      - status: blue
+      - checkin: false
+
+## Temperature -> Cough checkin
+- timeline:
+    2020-04-01:
+      - self-diagnosis:
+          symptoms: [temperature]
+          start-date: 2020-04-01
+    2020-04-02:
+      - status: red
+    2020-04-08:
+      - status: red
+      - checkin: true
+      - self-diagnosis:
+          symptoms: [temperature]
+    2020-04-09:
+      - status: red
+      - checkin: true
+      - self-diagnosis:
+          symptoms: [cough]
+      - status: blue
+    2020-04-10:
+      - status: blue
+
+## Temperature has precedence over cough
+- timeline:
+    2020-04-01:
+      - self-diagnosis:
+          symptoms: [temperature, cough]
+          start-date: 2020-04-01
+    2020-04-02:
+      - status: red
+    2020-04-08:
+      - status: red
+      - checkin: true
+      - self-diagnosis:
+          symptoms: [temperature, cough]
+    2020-04-09:
+      - status: red
+      - checkin: true
+      - self-diagnosis:
+          symptoms: [temperature, cough]
+    2020-04-10:
+      - status: red
+      - checkin: true
+      - self-diagnosis:
+          symptoms: [temperature, cough]
+    2020-04-11:
+      - status: red
+      - checkin: true
+      - self-diagnosis:
+          symptoms: []
+      - status: blue
+    2020-04-12:
+      - status: blue
+      - checkin: false
+
+## Checkin starts from the start date, not the recorded date
+- timeline:
+    2020-04-03:
+      - self-diagnosis:
+          symptoms: [temperature]
+          start-date: 2020-04-01
+    2020-04-04:
+      - status: red
+    2020-04-08:
+      - status: red
+      - checkin: true
+      - self-diagnosis:
+          symptoms: [temperature]
+    2020-04-09:
+      - status: red
+      - checkin: true
+      - self-diagnosis:
+          symptoms: []
+      - status: blue
+    2020-04-10:
+      - status: blue
+      - checkin: false

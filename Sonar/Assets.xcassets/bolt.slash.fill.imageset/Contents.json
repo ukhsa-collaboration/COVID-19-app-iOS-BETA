@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "Capture d’écran 2020-04-26 à 00.25.13.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

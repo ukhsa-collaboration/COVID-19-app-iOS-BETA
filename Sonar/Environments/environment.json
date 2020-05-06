@@ -1,0 +1,13 @@
+{
+  "api_endpoint": "https://sonar.example.com",
+  "app_center_key": "an-api-key",
+  "sonar_header_value": "a-header-value",
+  "sonar_service_uuid": "an-uuid",
+  "sonar_id_characteristic_uuid": "another-uuid",
+  "sonar_keepalive_characteristic_uuid": "yet-another-uuid",
+  "debug": {
+    "registration_id": "an-uuid",
+    "registration_secret_key": "a-base46-secret-key",
+    "registration_broadcast_rotation_key": "a-base64-broadcast-rotation-key"
+  }
+}

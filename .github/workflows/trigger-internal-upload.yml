@@ -1,0 +1,55 @@
+name: trigger-internal-upload
+
+on:
+  schedule:
+    - cron: '0 */2 * * *'
+  # push:
+  #   branches:
+  #     - ci
+
+jobs:
+  trigger-internal-upload:
+    runs-on:
+      - self-hosted
+      - macos
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      # Since this workflow needs to trigger the ci workflow,
+      # we can't use the built-in GITHUB_TOKEN, so we need to
+      # set a remote url that uses a personal access token.
+      - name: Set origin
+        env:
+          GITHUB_TOKEN: ${{ secrets.deployment_token }}
+        run: git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+
+      - name: Check if we have commits to upload
+        id: check-upload-tag
+        run: |
+          git fetch origin internal
+          git checkout internal
+          git tag -d upload-to-internal || true
+          git fetch --tags
+          git branch --contains tags/upload-to-internal | grep internal || echo "::set-output name=upload::true"
+
+      - name: Merge and push to internal branch
+        if: steps.check-upload-tag.outputs.upload == 'true'
+        run: |
+          git fetch origin internal
+          git checkout internal
+          git merge upload-to-internal
+          git push origin internal
+
+      - name: Notify Slack on Failure
+        if: failure()
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.slack_bot_token }}
+        uses: voxmedia/github-action-slack-notify-build@v1
+        with:
+          channel_id: G011ZPSAD4J
+          status: FAILED
+          color: danger
