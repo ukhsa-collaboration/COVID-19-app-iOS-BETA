@@ -38,17 +38,6 @@
                BlueprintName = "SonarTests"
                ReferencedContainer = "container:Sonar.xcodeproj">
             </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "SonarBroadcastPayloadGeneratorTests/test_caches_and_returns_new_broadcastId_when_cache_is_stale()">
-               </Test>
-               <Test
-                  Identifier = "SonarBroadcastPayloadGeneratorTests/test_generates_and_caches_broadcastId_when_none_cached()">
-               </Test>
-               <Test
-                  Identifier = "SonarBroadcastPayloadGeneratorTests/test_returns_cached_broadcastId_when_cache_is_fresh()">
-               </Test>
-            </SkippedTests>
          </TestableReference>
          <TestableReference
             skipped = "NO">
