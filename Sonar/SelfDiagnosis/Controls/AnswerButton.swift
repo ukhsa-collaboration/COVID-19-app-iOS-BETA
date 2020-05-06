@@ -86,16 +86,26 @@ class AnswerButton: UIControl, UpdatesBasedOnAccessibilityDisplayChanges {
         textLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
         imageView.setContentHuggingPriority(.required, for: .horizontal)
         
-        resizeImage()
+        updateBasedOnAccessibilityDisplayChanges()
     }
     
     func updateBasedOnAccessibilityDisplayChanges() {
         resizeImage()
+        updateBorder()
     }
     
     private func resizeImage() {
         let scaleFactor = textLabel.font.pointSize / defaultFontSize
         imageWidthConstraint.constant = defaultImageSize * scaleFactor
+    }
+
+    private func updateBorder() {
+        if UIAccessibility.isInvertColorsEnabled {
+            layer.borderColor = UIColor.black.cgColor
+            layer.borderWidth = 3
+        } else {
+            layer.borderWidth = 0
+        }
     }
 
 }

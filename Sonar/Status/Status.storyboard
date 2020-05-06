@@ -97,19 +97,20 @@
                                                         <rect key="frame" x="16" y="8" width="382" height="1291"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JWK-re-qjH">
-                                                                <rect key="frame" x="0.0" y="0.0" width="382" height="232.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="382" height="242.5"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uA1-0d-OYq">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="12" height="232.5"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="12" height="242.5"/>
+                                                                        <color key="backgroundColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="12" id="MS2-lV-12k"/>
                                                                         </constraints>
                                                                     </view>
-                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="sLA-Af-1Gb" customClass="SymptomStackView" customModule="Sonar" customModuleProvider="target">
-                                                                        <rect key="frame" x="24" y="24" width="338" height="0.0"/>
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="10" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="sLA-Af-1Gb" customClass="SymptomStackView" customModule="Sonar" customModuleProvider="target">
+                                                                        <rect key="frame" x="24" y="24" width="338" height="10"/>
                                                                     </stackView>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Kcg-6z-FYa">
-                                                                        <rect key="frame" x="24" y="133.5" width="338" height="45"/>
+                                                                        <rect key="frame" x="24" y="143.5" width="338" height="45"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Read current advice" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oUM-AI-6LL">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="338" height="20.5"/>
@@ -126,7 +127,7 @@
                                                                         </subviews>
                                                                     </stackView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rpg-7v-Vhp">
-                                                                        <rect key="frame" x="24" y="52" width="338" height="33.5"/>
+                                                                        <rect key="frame" x="24" y="62" width="338" height="33.5"/>
                                                                         <accessibility key="accessibilityConfiguration">
                                                                             <accessibilityTraits key="traits" staticText="YES" header="YES"/>
                                                                         </accessibility>
@@ -157,7 +158,7 @@
                                                                 </constraints>
                                                             </view>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="hbY-PQ-ANb">
-                                                                <rect key="frame" x="0.0" y="264.5" width="382" height="360.5"/>
+                                                                <rect key="frame" x="0.0" y="274.5" width="382" height="360.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How are you feeling today?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ZI-fb-8RW">
                                                                         <rect key="frame" x="0.0" y="0.0" width="382" height="26.5"/>
@@ -171,7 +172,7 @@
                                                                     <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="9e7-f2-SFh" customClass="UIButton">
                                                                         <rect key="frame" x="0.0" y="46.5" width="382" height="123"/>
                                                                         <subviews>
-                                                                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AH0-Tv-hhe">
+                                                                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AH0-Tv-hhe" customClass="SmartInvertBorderView" customModule="Sonar" customModuleProvider="target">
                                                                                 <rect key="frame" x="-16" y="0.0" width="414" height="123"/>
                                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                             </view>
@@ -229,12 +230,12 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="POh-1R-IfZ" userLabel="Red Status">
-                                                                <rect key="frame" x="0.0" y="657" width="382" height="189"/>
+                                                                <rect key="frame" x="0.0" y="667" width="382" height="189"/>
                                                                 <subviews>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gbo-jS-eOA" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gbo-jS-eOA" customClass="UIButton">
                                                                         <rect key="frame" x="0.0" y="0.0" width="382" height="112.5"/>
                                                                         <subviews>
-                                                                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P4u-2I-dwE" userLabel="Background">
+                                                                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P4u-2I-dwE" userLabel="Background" customClass="SmartInvertBorderView" customModule="Sonar" customModuleProvider="target">
                                                                                 <rect key="frame" x="-16" y="0.0" width="414" height="112.5"/>
                                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                             </view>
@@ -276,7 +277,7 @@
                                                                     <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="66c-tO-6TF" userLabel="Linking Id" customClass="UIButton">
                                                                         <rect key="frame" x="0.0" y="120.5" width="382" height="68.5"/>
                                                                         <subviews>
-                                                                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bxy-UB-mQx" userLabel="Background">
+                                                                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bxy-UB-mQx" userLabel="Background" customClass="SmartInvertBorderView" customModule="Sonar" customModuleProvider="target">
                                                                                 <rect key="frame" x="-16" y="0.0" width="414" height="68.5"/>
                                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                             </view>
@@ -312,7 +313,7 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Ghk-8F-7gV" userLabel="NHS Coronavirus">
-                                                                <rect key="frame" x="0.0" y="878" width="382" height="312.5"/>
+                                                                <rect key="frame" x="0.0" y="888" width="382" height="302.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you need urgent medical advice or want further information, go to" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zqt-gJ-Jrb">
                                                                         <rect key="frame" x="0.0" y="0.0" width="382" height="42.5"/>
@@ -321,7 +322,7 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2UL-Ea-jl7" customClass="LinkButton" customModule="Sonar" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="42.5" width="382" height="270"/>
+                                                                        <rect key="frame" x="0.0" y="42.5" width="382" height="260"/>
                                                                         <accessibility key="accessibilityConfiguration">
                                                                             <accessibilityTraits key="traits" link="YES"/>
                                                                         </accessibility>
