@@ -47,7 +47,6 @@ class StatusViewController: UIViewController, Storyboarded {
     @IBOutlet weak var noSymptomsLabel: UILabel!
 
     @IBOutlet weak var redStatusView: UIStackView!
-    @IBOutlet weak var bookTestButton: ButtonWithDynamicType!
     @IBOutlet weak var bookTestLabel: UILabel!
     @IBOutlet weak var bookTestPhoneButton: LinkButton!
 
@@ -105,7 +104,10 @@ class StatusViewController: UIViewController, Storyboarded {
 
         nhs111label.inject(title: "NHS Coronavirus".localized, external: true, style: .body)
 
-        bookTestButton.accessibilityLabel = "\(bookTestLabel.text!) \(bookTestPhoneButton.title(for: .normal)!)"
+        bookTestPhoneButton.inject(title: "0800 540 4900", external: false, style: .subheadline)
+        bookTestPhoneButton.accessibilityHint = nil
+        bookTestPhoneButton.accessibilityLabel = "Dial the NHS 0800 540 4900".localized
+        bookTestPhoneButton.accessibilityTraits = .link
 
         healthcareWorkersInstructionsView.accessibilityLabel = "Important instructions for healthcare workers"
         healthcareWorkersInstructionsView.accessibilityTraits = .button
