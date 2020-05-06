@@ -10,7 +10,7 @@ import UIKit
 
 #if DEBUG || INTERNAL
 
-class DebuggerTableViewCell: UITableViewCell {
+final class DebuggerTableViewCell: UITableViewCell {
 
     let gradientLayer = CAGradientLayer()
 
@@ -26,6 +26,8 @@ class DebuggerTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
+        textLabel?.numberOfLines = 1
+
         gradientLayer.startPoint = CGPoint(x: 0, y: 0)
         gradientLayer.endPoint = CGPoint(x: 1, y: 0)
         contentView.layer.insertSublayer(gradientLayer, at: 0)
@@ -36,13 +38,23 @@ class DebuggerTableViewCell: UITableViewCell {
                 
         gradientLayer.frame = bounds
     }
+}
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+fileprivate extension Data {
+    func asCGColor(alpha: CGFloat) -> CGColor {
+        let secondByte = self[1]
+        let thirdByte = self[2]
+        let fourthByte = self[3]
 
-        // Configure the view for the selected state
+        let color = UIColor(
+            red: CGFloat(secondByte) / 255.0,
+            green: CGFloat(thirdByte) / 255.0,
+            blue: CGFloat(fourthByte) / 255.0,
+            alpha: alpha
+        )
+
+        return color.cgColor
     }
-
 }
 
 #endif
