@@ -235,7 +235,7 @@
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gbo-jS-eOA" customClass="UIButton">
                                                                         <rect key="frame" x="0.0" y="0.0" width="382" height="112.5"/>
                                                                         <subviews>
-                                                                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P4u-2I-dwE" userLabel="Background" customClass="SmartInvertBorderView" customModule="Sonar" customModuleProvider="target">
+                                                                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P4u-2I-dwE" userLabel="Background">
                                                                                 <rect key="frame" x="-16" y="0.0" width="414" height="112.5"/>
                                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                             </view>
@@ -339,7 +339,7 @@
                                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="Tgy-0K-l2M" userLabel="Instructions for healthcare workers" customClass="UIControl">
                                                                 <rect key="frame" x="0.0" y="1222.5" width="382" height="68.5"/>
                                                                 <subviews>
-                                                                    <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yI5-J1-igp" userLabel="Background">
+                                                                    <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yI5-J1-igp" userLabel="Background" customClass="SmartInvertBorderView" customModule="Sonar" customModuleProvider="target">
                                                                         <rect key="frame" x="-16" y="0.0" width="414" height="68.5"/>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                     </view>
