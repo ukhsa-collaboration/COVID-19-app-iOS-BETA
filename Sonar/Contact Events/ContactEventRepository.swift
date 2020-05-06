@@ -2,7 +2,7 @@
 //  ContactEventRepository.swift
 //  Sonar
 //
-//  Created by NHSX.
+//  Created by NHSX on 31.03.20.
 //  Copyright © 2020 NHSX. All rights reserved.
 //
 
@@ -68,20 +68,20 @@ extension PlistPersister: ContactEventPersister where K == UUID, V == ContactEve
     func btleListener(_ listener: BTLEListener, didFind broadcastPayload: IncomingBroadcastPayload, for peripheral: BTLEPeripheral) {
         var event = persister.items[peripheral.identifier] ?? ContactEvent()
         event.broadcastPayload = broadcastPayload
-        persister.update(item: event, key:peripheral.identifier)
+        persister.update(item: event, key: peripheral.identifier)
         delegate?.repository(self, didRecord: broadcastPayload, for: peripheral)
     }
     
     func btleListener(_ listener: BTLEListener, didReadTxPower txPower: Int, for peripheral: BTLEPeripheral) {
         var contactEvent = persister.items[peripheral.identifier] ?? ContactEvent()
         contactEvent.txPower = Int8(txPower)
-        persister.update(item: contactEvent, key:peripheral.identifier)
+        persister.update(item: contactEvent, key: peripheral.identifier)
     }
     
     func btleListener(_ listener: BTLEListener, didReadRSSI RSSI: Int, for peripheral: BTLEPeripheral) {
         var event = persister.items[peripheral.identifier] ?? ContactEvent()
         event.recordRSSI(Int8(RSSI))
-        persister.update(item: event, key:peripheral.identifier)
+        persister.update(item: event, key: peripheral.identifier)
         delegate?.repository(self, didRecordRSSI: RSSI, for: peripheral)
     }
 

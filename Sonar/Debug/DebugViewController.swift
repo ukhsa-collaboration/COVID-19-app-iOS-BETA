@@ -2,7 +2,7 @@
 //  DebugViewController.swift
 //  Sonar
 //
-//  Created by NHSX.
+//  Created by NHSX on 3/27/20.
 //  Copyright © 2020 NHSX. All rights reserved.
 //
 
@@ -112,27 +112,15 @@ class DebugViewController: UITableViewController, Storyboarded {
             
 
         case (2, 0):
-            let uuid = UUID()
-            // TODO: Fixme when uploads work
-//            contactEventPersister.items[uuid] = ContactEvent(encryptedRemoteContactId: uuid.data, timestamp: Date(), rssiValues: [], rssiIntervals: [], duration: 1)
-            show(title: "Conatact", message: "Dummy contact event recorded.")
-            
-        case (2, 1):
-            let uuid = UUID()
-            // TODO: Fixme when uploads work
-//            contactEventPersister.items[uuid] = ContactEvent(encryptedRemoteContactId: uuid.data, timestamp: Date(timeIntervalSinceNow: -2592000), rssiValues: [], rssiIntervals: [], duration: 1)
-            show(title: "Expired Conatact", message: "Expired Dummy contact event recorded.")
-            
-        case (2, 2):
             contactEventRepository.reset()
             show(title: "Cleared", message: "All contact events cleared.")
             
-        case (2, 3):
+        case (2, 1):
             let notificationCenter = NotificationCenter.default
             notificationCenter.post(name: UIApplication.significantTimeChangeNotification, object: nil)
             show(title: "Cleared", message: "All expired contact events cleared.")
             
-        case (2, 4):
+        case (2, 2):
             try! contactEventsUploader.upload()
             show(title: "Upload Initiated", message: "Contact events uploading.")
 

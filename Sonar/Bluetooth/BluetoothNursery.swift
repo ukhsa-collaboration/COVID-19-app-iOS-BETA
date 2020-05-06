@@ -2,7 +2,7 @@
 //  BluetoothNursery.swift
 //  Sonar
 //
-//  Created by NHSX.
+//  Created by NHSX on 03.04.20.
 //  Copyright © 2020 NHSX. All rights reserved.
 //
 

@@ -2,7 +2,7 @@
 //  DebuggerTableViewCell.swift
 //  Sonar
 //
-//  Created by NHSX.
+//  Created by NHSX on 02.04.20.
 //  Copyright © 2020 NHSX. All rights reserved.
 //
 
@@ -27,6 +27,7 @@ final class DebuggerTableViewCell: UITableViewCell {
         super.awakeFromNib()
 
         textLabel?.numberOfLines = 1
+        detailTextLabel?.numberOfLines = 1
 
         gradientLayer.startPoint = CGPoint(x: 0, y: 0)
         gradientLayer.endPoint = CGPoint(x: 1, y: 0)
@@ -40,21 +41,19 @@ final class DebuggerTableViewCell: UITableViewCell {
     }
 }
 
-fileprivate extension Data {
+extension Data {
+    
     func asCGColor(alpha: CGFloat) -> CGColor {
-        let secondByte = self[1]
-        let thirdByte = self[2]
-        let fourthByte = self[3]
-
-        let color = UIColor(
-            red: CGFloat(secondByte) / 255.0,
-            green: CGFloat(thirdByte) / 255.0,
-            blue: CGFloat(fourthByte) / 255.0,
-            alpha: alpha
-        )
-
-        return color.cgColor
+        return asUIColor(alpha: alpha).cgColor
     }
+
+    func asUIColor(alpha: CGFloat) -> UIColor {
+        guard self.count >= 3 else {
+            return UIColor.white
+        }
+        return UIColor(red: CGFloat(self[0]) / 255.0, green: CGFloat(self[1]) / 255.0, blue: CGFloat(self[2]) / 255.0, alpha: alpha)
+    }
+
 }
 
 #endif

@@ -2,7 +2,7 @@
 //  ConcreteBroadcastIdGenerator.swift
 //  Sonar
 //
-//  Created by NHSX.
+//  Created by NHSX on 10/04/2020.
 //  Copyright © 2020 NHSX. All rights reserved.
 //
 
@@ -36,7 +36,6 @@ class SonarBroadcastPayloadGenerator: BroadcastPayloadGenerator {
 
         let hmacKey = registration.secretKey
 
-        // TODO: Using the UTC calendar here to try and ensure isDateInToday() uses "today UTC" is not tested, but should be—need minute to midnight, midnight, minute past midnight tests
         var calendar = Calendar.current
         calendar.timeZone = TimeZone(identifier: "UTC")!
         if let (broadcastId, broadcastIdDate) = storage.readBroadcastId(), calendar.isDateInToday(broadcastIdDate) {

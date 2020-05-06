@@ -2,7 +2,7 @@
 //  LinkButton.swift
 //  Sonar
 //
-//  Created by NHSX.
+//  Created by NHSX on 04/05/2020.
 //  Copyright © 2020 NHSX. All rights reserved.
 //
 
@@ -17,7 +17,6 @@ class LinkButton: ButtonWithDynamicType {
             accessibilityTraits = .button
         }
         
-        setTitle(title, for: .normal)
         titleLabel?.attributedText = NSAttributedString(string: title, attributes:
             [
                 .underlineStyle: NSUnderlineStyle.single.rawValue,
@@ -25,6 +24,7 @@ class LinkButton: ButtonWithDynamicType {
                 .font: UIFont.preferredFont(forTextStyle: style)
             ]
         )
+        setTitle(title, for: .normal)
     }
 }
 

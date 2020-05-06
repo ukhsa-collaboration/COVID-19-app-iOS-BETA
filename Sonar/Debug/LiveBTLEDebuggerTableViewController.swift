@@ -2,7 +2,7 @@
 //  LiveBluetoothDebuggerTableViewController.swift
 //  Sonar
 //
-//  Created by NHSX.
+//  Created by NHSX on 01.04.20.
 //  Copyright © 2020 NHSX. All rights reserved.
 //
 
@@ -10,24 +10,41 @@ import UIKit
 
 #if DEBUG || INTERNAL
 
-final class LiveBTLEDebuggerTableViewController: UITableViewController {
+final class LiveBTLEDebuggerTableViewController: UITableViewController, ContactEventRepositoryDelegate {
 
     var persistence: Persisting = (UIApplication.shared.delegate as! AppDelegate).persistence
     
     var broadcastIdGenerator: BroadcastPayloadGenerator? = ((UIApplication.shared.delegate as! AppDelegate).bluetoothNursery as! ConcreteBluetoothNursery).broadcastIdGenerator
     
-    @objc var repository: PersistingContactEventRepository = (UIApplication.shared.delegate as! AppDelegate).bluetoothNursery.contactEventRepository as! PersistingContactEventRepository
+    var repository: PersistingContactEventRepository = (UIApplication.shared.delegate as! AppDelegate).bluetoothNursery.contactEventRepository as! PersistingContactEventRepository
+    
+    var items: [ContactEvent] = []
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        items = repository.contactEvents.sorted(by: { $0.timestamp < $1.timestamp })
         repository.delegate = self
     }
+    
+    // MARK: - ContactEventRepositoryDelegate
+    
+    func repository(_ repository: ContactEventRepository, didRecord broadcastPayload: IncomingBroadcastPayload, for peripheral: BTLEPeripheral) {
+        
+        items = repository.contactEvents.sorted(by: { $0.timestamp < $1.timestamp })
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
 
-}
+    func repository(_ repository: ContactEventRepository, didRecordRSSI RSSI: Int, for peripheral: BTLEPeripheral) {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
 
-// MARK: - UITableViewDataSource
-extension LiveBTLEDebuggerTableViewController {
+    // MARK: - UITableViewDataSource
+
     private enum Sections: Int, CaseIterable {
         case mySonarId
         case myEncryptedBroadcastId
@@ -42,8 +59,8 @@ extension LiveBTLEDebuggerTableViewController {
         switch section {
 
         case Sections.mySonarId.rawValue: return "My Sonar ID"
-        case Sections.myEncryptedBroadcastId.rawValue: return "My Encrypted Broadcast ID"
-        case Sections.visibleDevices.rawValue: return "Visible Devices"
+        case Sections.myEncryptedBroadcastId.rawValue: return "My Broadcast ID"
+        case Sections.visibleDevices.rawValue: return "Contact Events"
         default: preconditionFailure("No section \(section)")
 
         }
@@ -69,17 +86,19 @@ extension LiveBTLEDebuggerTableViewController {
         switch (indexPath.section, indexPath.row) {
 
         case (Sections.mySonarId.rawValue, _):
-            let sonarId = persistence.registration?.id.uuidString ?? "<not yet registered>"
+            let sonarId = persistence.registration?.id.uuidString ?? "Not registered"
             cell.textLabel?.text = sonarId
-            cell.gradientColorData = sonarId.data(using: .utf8)
+            cell.detailTextLabel?.text = nil
+            cell.gradientColorData = Data()
             
         case (Sections.myEncryptedBroadcastId.rawValue, _):
             cell.textLabel?.text = broadcastIdGenerator?.broadcastPayload()?.cryptogram.base64EncodedString()
+            cell.detailTextLabel?.text = nil
             cell.gradientColorData = broadcastIdGenerator?.broadcastPayload()?.cryptogram
 
-            // TODO: This is going to be broken until we chase the BroadcastPayload back up through
         case (Sections.visibleDevices.rawValue, let row):
             cell.textLabel?.text = repository.contactEvents[row].encryptedRemoteContactId?.base64EncodedString()
+            cell.detailTextLabel?.text = repository.contactEvents[row].rssiValues.suffix(16).map({"\($0)"}).joined(separator: ", ")
             cell.gradientColorData = repository.contactEvents[row].encryptedRemoteContactId
             
         default:
@@ -90,21 +109,6 @@ extension LiveBTLEDebuggerTableViewController {
         return cell
     }
 
-}
-
-// MARK: - ContactEventRepositoryDelegate
-extension LiveBTLEDebuggerTableViewController: ContactEventRepositoryDelegate {
-
-    func repository(_ repository: ContactEventRepository, didRecord broadcastPayload: IncomingBroadcastPayload, for peripheral: BTLEPeripheral) {
-        tableView.reloadData()
-    }
-
-    // TODO: [dlb] Can we delete this method if it is not being used? Or should this also reload the table view?
-    func repository(_ repository: ContactEventRepository, didRecordRSSI RSSI: Int, for peripheral: BTLEPeripheral) {
-
-    }
-
-    // TODO: [dlb] If we need the above 'didRecordRSSI:' method, should we also have a method for when the TxPower is read?
 }
 
 #endif
