@@ -69,11 +69,22 @@ There are currently a couple ways to do development with remote notificcations:
   - `BUNDLEID`
   - `DEVICETOKEN` - retrieved from the console when running the application.
 
+### CI
+
 ## Releases
 
-Builds are automatically generated from CI. Each two hours, we merge any
-changes from `master` into `internal`, bump the version, and cut a build that
-gets uploaded to Test Flight.
+Code is truth. See the [GitHub Actions configuration](.github/workflows) for
+the current behavior of the system. (And please update this documentation if
+it's wrong!)
 
-Please do not merge the `internal` branch or `ci` branch into master.
+### CD
 
+All pushes get built (for both simulator and device) and tested. The
+`TestResult.xcresult` file is archived for future reference. Successful pushes
+on `master` get promoted to `internal`. Every hour, if the tip of `internal`
+hasn't been deployed, we bump the build number and trigger a deployment from
+that branch.
+
+### Production
+
+TBD
