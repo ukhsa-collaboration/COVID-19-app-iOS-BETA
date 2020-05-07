@@ -32,7 +32,13 @@ struct SelfDiagnosis: Codable, Equatable {
     }
     
     func expiresIn(days: Int) -> Date {
-        Calendar.current.nextDate(
+        return expiresIn(days: days, timeZone: TimeZone.autoupdatingCurrent)
+    }
+    
+    func expiresIn(days: Int, timeZone: TimeZone) -> Date {
+        var calendar = Calendar.current
+        calendar.timeZone = timeZone
+        return calendar.nextDate(
             after: Date(timeInterval: Double((days - 1) * 24 * 60 * 60), since: startDate),
             matching: DateComponents(hour: 7),
             matchingPolicy: .strict
@@ -42,9 +48,13 @@ struct SelfDiagnosis: Codable, Equatable {
 
 extension SelfDiagnosis {
     init(type: SelfDiagnosisType, symptoms: Set<Symptom>, startDate: Date, daysToLive: Int) {
+        self.init(type: type, symptoms: symptoms, startDate: startDate, daysToLive: daysToLive, timeZone: TimeZone.autoupdatingCurrent)
+    }
+    
+    init(type: SelfDiagnosisType, symptoms: Set<Symptom>, startDate: Date, daysToLive: Int, timeZone: TimeZone) {
         self.type = type
         self.symptoms = symptoms
         self.startDate = startDate
-        self.expiryDate = expiresIn(days: daysToLive)
+        self.expiryDate = expiresIn(days: daysToLive, timeZone: timeZone)
     }
 }

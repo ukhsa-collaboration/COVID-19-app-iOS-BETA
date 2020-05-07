@@ -113,15 +113,9 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         if confirmSwitch.isOn {
             return true
         } else {
-            presentErrorToUser()
-            
-            // Showing the error label will sometimes push the continue button off screen.
-            // Scroll it into view. But first, go async so that scrollView.contentSize will
-            // be recomputed before we read it.
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                let targetRect = self.errorLabel.convert(self.errorLabel.bounds, to: self.scrollView)
-                self.scrollView.scrollRectToVisible(targetRect, animated: true)
-            }
+            scroll(after: {
+                self.presentErrorToUser()
+            }, toErrorLabel: errorLabel, orControl: confirmSwitch)
             
             return false
         }

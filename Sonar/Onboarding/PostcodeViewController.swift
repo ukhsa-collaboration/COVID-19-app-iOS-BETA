@@ -18,7 +18,7 @@ class PostcodeViewController: UIViewController, Storyboarded {
     private var continueHandler: (() -> Void)! = nil
 
     @IBOutlet private var scrollView: UIScrollView!
-    @IBOutlet var postcodeError: UILabel!
+    @IBOutlet var postcodeError: AccessibleErrorLabel!
     @IBOutlet var postcodeField: UITextField!
     @IBOutlet var postcodeDetail: UILabel!
     @IBOutlet var continueAccessoryView: UIView!
@@ -118,7 +118,7 @@ class PostcodeViewController: UIViewController, Storyboarded {
 
             self.postcodeError.layer.borderWidth = 3
             self.postcodeError.layer.borderColor = UIColor(named: "NHS Error")!.cgColor
-        }, to: postcodeField)
+        }, toErrorLabel: postcodeError, orControl: postcodeField)
     }
 }
 
