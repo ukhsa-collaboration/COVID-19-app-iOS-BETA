@@ -4,7 +4,7 @@ set -euo pipefail
 
 DATA=$(cat <<EOF
 {
-  "ref":"${GITHUB_SHA}",
+  "ref":"${DEPLOYMENT_SHA}",
   "required_contexts": [],
   "payload":"${DEPLOYMENT_PAYLOAD:-}",
   "environment":"${1}"
@@ -16,6 +16,6 @@ curl \
   --verbose \
   --location \
   --url https://api.github.com/repos/$GITHUB_REPOSITORY/deployments \
-  --header "authorization: Bearer $GITHUB_ACCESS_TOKEN" \
+  --header "authorization: Bearer $DEPLOYMENT_TOKEN" \
   --header "content-type: application/json" \
   --data "$DATA"

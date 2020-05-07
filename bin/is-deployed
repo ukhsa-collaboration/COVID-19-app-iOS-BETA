@@ -6,7 +6,7 @@ require "net/http"
 environment = ARGV.fetch(0)
 
 github_repository = ENV.fetch("GITHUB_REPOSITORY")
-github_access_token = ENV.fetch("GITHUB_ACCESS_TOKEN")
+github_token = ENV.fetch("GITHUB_TOKEN")
 
 sha = `git rev-parse HEAD`
 
