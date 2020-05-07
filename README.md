@@ -57,7 +57,7 @@ There are currently a couple ways to do development with remote notificcations:
 
 - `./bin/pu.sh` is a script forked from [pu.sh](https://github.com/tsif/pu.sh).
   There are instructions there for obtaining credentials from an Apple
-  Developer account. However, we are out of available APNs keys, so you'll need
+  Developer account. However, we are out of available APN keys, so you'll need
   to obtain that from another developer. Run the script with the path to one of
   the example notifications to send a remote notification through Apple:
   `./bin/pu.sh "Example Notifications/2_potential_diagnosis.apns`. You will
