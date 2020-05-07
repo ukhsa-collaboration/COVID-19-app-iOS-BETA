@@ -11,7 +11,7 @@ broadcast the same unique identifier.
 
 ## How it works
 
-Our unique identifier is also known as our sevice characteristic. In the
+Our unique identifier is also known as our service characteristic. In the
 bluetooth spec, devices can broadcast the availability of services. Each
 service can have multiple characteristics. We use a characteristic to uniquely
 identify our service and distinguish from all other sorts of bluetooth devices.
