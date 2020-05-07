@@ -1,0 +1,25 @@
+#!/usr/bin/env ruby
+
+require "json"
+require "net/http"
+
+environment = ARGV.fetch(0)
+
+github_repository = ENV.fetch("GITHUB_REPOSITORY")
+github_access_token = ENV.fetch("GITHUB_ACCESS_TOKEN")
+
+sha = `git rev-parse HEAD`
+
+uri = URI("https://api.github.com/repos/#{github_repository}/deployments?environment=#{environment}&sha=#{sha}")
+headers = {
+	"Authorization" => "Bearer #{github_access_token}",
+	"Content-Type" => "application/json",
+}
+
+Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
+	resp = http.get(uri, headers)
+	fail unless Net::HTTPOK === resp
+
+	json =JSON.parse(resp.body)
+	exit json.empty? ? 1 : 0
+end
