@@ -92,6 +92,7 @@ jobs:
           git push origin --delete last-commit-to-run-on-ci || true
           git tag --force last-commit-to-run-on-ci
           git push origin last-commit-to-run-on-ci
+        continue-on-error: true
 
       - name: Notify Slack on Upload
         env:
