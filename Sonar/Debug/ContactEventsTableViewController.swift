@@ -78,9 +78,9 @@ final class ContactEventsTableViewController: UITableViewController, ContactEven
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
-            withIdentifier: String(describing: DebuggerTableViewCell.self),
+            withIdentifier: String(describing: GradientBackgroundTableViewCell.self),
             for: indexPath
-        ) as! DebuggerTableViewCell
+        ) as! GradientBackgroundTableViewCell
         cell.textLabel?.backgroundColor = .clear
         cell.detailTextLabel?.backgroundColor = .clear
         

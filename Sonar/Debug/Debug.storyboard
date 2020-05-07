@@ -598,16 +598,16 @@
             </objects>
             <point key="canvasLocation" x="-1462" y="1158"/>
         </scene>
-        <!--LiveBTLE Debugger Table View Controller-->
+        <!--Contact Events Table View Controller-->
         <scene sceneID="IcR-O2-mxp">
             <objects>
-                <tableViewController id="DR4-RC-K5h" customClass="LiveBTLEDebuggerTableViewController" customModule="Sonar" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="DR4-RC-K5h" customClass="ContactEventsTableViewController" customModule="Sonar" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="R9p-cY-aVn">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="DebuggerTableViewCell" textLabel="bef-nX-4eg" detailTextLabel="ubW-2M-a4F" style="IBUITableViewCellStyleSubtitle" id="DE8-Vp-hNc" customClass="DebuggerTableViewCell" customModule="Sonar" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="GradientBackgroundTableViewCell" textLabel="bef-nX-4eg" detailTextLabel="ubW-2M-a4F" style="IBUITableViewCellStyleSubtitle" id="DE8-Vp-hNc" customClass="GradientBackgroundTableViewCell" customModule="Sonar" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="55.5" width="414" height="55.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DE8-Vp-hNc" id="r6y-b2-LI3">
