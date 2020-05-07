@@ -18,20 +18,19 @@ final class LiveBTLEDebuggerTableViewController: UITableViewController, ContactE
     
     var repository: PersistingContactEventRepository = (UIApplication.shared.delegate as! AppDelegate).bluetoothNursery.contactEventRepository as! PersistingContactEventRepository
     
-    var items: [ContactEvent] = []
+    var items: [ContactEvent] {
+        repository.contactEvents.sorted(by: { $0.timestamp < $1.timestamp })
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        items = repository.contactEvents.sorted(by: { $0.timestamp < $1.timestamp })
         repository.delegate = self
     }
     
     // MARK: - ContactEventRepositoryDelegate
     
     func repository(_ repository: ContactEventRepository, didRecord broadcastPayload: IncomingBroadcastPayload, for peripheral: BTLEPeripheral) {
-        
-        items = repository.contactEvents.sorted(by: { $0.timestamp < $1.timestamp })
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
@@ -82,21 +81,26 @@ final class LiveBTLEDebuggerTableViewController: UITableViewController, ContactE
             withIdentifier: String(describing: DebuggerTableViewCell.self),
             for: indexPath
         ) as! DebuggerTableViewCell
-
+        cell.textLabel?.backgroundColor = .clear
+        cell.detailTextLabel?.backgroundColor = .clear
+        
         switch (indexPath.section, indexPath.row) {
 
         case (Sections.mySonarId.rawValue, _):
+            
             let sonarId = persistence.registration?.id.uuidString ?? "Not registered"
             cell.textLabel?.text = sonarId
             cell.detailTextLabel?.text = nil
             cell.gradientColorData = Data()
             
         case (Sections.myEncryptedBroadcastId.rawValue, _):
+            cell.accessoryType = .none
             cell.textLabel?.text = broadcastIdGenerator?.broadcastPayload()?.cryptogram.base64EncodedString()
             cell.detailTextLabel?.text = nil
             cell.gradientColorData = broadcastIdGenerator?.broadcastPayload()?.cryptogram
 
         case (Sections.visibleDevices.rawValue, let row):
+            cell.accessoryType = .disclosureIndicator
             cell.textLabel?.text = repository.contactEvents[row].encryptedRemoteContactId?.base64EncodedString()
             cell.detailTextLabel?.text = repository.contactEvents[row].rssiValues.suffix(16).map({"\($0)"}).joined(separator: ", ")
             cell.gradientColorData = repository.contactEvents[row].encryptedRemoteContactId
@@ -107,6 +111,18 @@ final class LiveBTLEDebuggerTableViewController: UITableViewController, ContactE
         }
 
         return cell
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+            
+        case "contactEventDetail":
+            let indexPath = tableView.indexPath(for: sender as! UITableViewCell)!
+            (segue.destination as! ContactEventDetailTableViewController).contactEvent = items[indexPath.row]
+
+        default:
+            break
+        }
     }
 
 }

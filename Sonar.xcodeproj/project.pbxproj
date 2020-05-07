@@ -78,6 +78,7 @@
 		214209D924262B7500C7BFF3 /* SessionHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209D824262B7500C7BFF3 /* SessionHelpers.swift */; };
 		217A23BE243B34E8001B8236 /* UIDevice+ModelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217A23BD243B34E8001B8236 /* UIDevice+ModelName.swift */; };
 		219288852461B1E100691FDD /* build341_contactEvents.plist in Resources */ = {isa = PBXBuildFile; fileRef = 219288842461B1E100691FDD /* build341_contactEvents.plist */; };
+		2192888724640B5600691FDD /* ContactEventDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2192888624640B5600691FDD /* ContactEventDetailTableViewController.swift */; };
 		219B613524471B9800E2F1A6 /* UUIDExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219B613424471B9800E2F1A6 /* UUIDExtensions.swift */; };
 		219B61372447371700E2F1A6 /* UUIDExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219B61362447371700E2F1A6 /* UUIDExtensionsTests.swift */; };
 		219C7B74245AB88100952B4D /* BroadcastEncrypterProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219C7B73245AB88100952B4D /* BroadcastEncrypterProvider.swift */; };
@@ -349,6 +350,7 @@
 		214209D824262B7500C7BFF3 /* SessionHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionHelpers.swift; sourceTree = "<group>"; };
 		217A23BD243B34E8001B8236 /* UIDevice+ModelName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+ModelName.swift"; sourceTree = "<group>"; };
 		219288842461B1E100691FDD /* build341_contactEvents.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = build341_contactEvents.plist; sourceTree = "<group>"; };
+		2192888624640B5600691FDD /* ContactEventDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventDetailTableViewController.swift; sourceTree = "<group>"; };
 		219B613424471B9800E2F1A6 /* UUIDExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UUIDExtensions.swift; sourceTree = "<group>"; };
 		219B61362447371700E2F1A6 /* UUIDExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UUIDExtensionsTests.swift; sourceTree = "<group>"; };
 		219C7B73245AB88100952B4D /* BroadcastEncrypterProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastEncrypterProvider.swift; sourceTree = "<group>"; };
@@ -652,6 +654,7 @@
 				89BC79EA2434E047002050F8 /* LogsViewController.swift */,
 				F652F7232449138900D97950 /* SetDiagnosisViewController.swift */,
 				F604976A24539F6C002B8503 /* UploadLogsViewController.swift */,
+				2192888624640B5600691FDD /* ContactEventDetailTableViewController.swift */,
 			);
 			path = Debug;
 			sourceTree = "<group>";
@@ -1575,6 +1578,7 @@
 				89F06B352434AF9D0074C612 /* LogEvent.swift in Sources */,
 				F652F7242449138900D97950 /* SetDiagnosisViewController.swift in Sources */,
 				F694B1BC2459E9F000C6A5D1 /* NotificationAcknowledger.swift in Sources */,
+				2192888724640B5600691FDD /* ContactEventDetailTableViewController.swift in Sources */,
 				F613936E243FA82B003447E8 /* Appearance.swift in Sources */,
 				F6F05A342434344200FF4B72 /* StartNowViewController.swift in Sources */,
 				F74BAC56245B35910023FFC2 /* SelfsizingTextView.swift in Sources */,
