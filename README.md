@@ -48,7 +48,7 @@ cp Sonar/Environments/Sonar.xcconfig.sample .secret/Sonar.xcconfig
 
 ### Notifications
 
-The app currently relies on *remote* (as opposed to *push*) notifications,
+The app currently relies on **remote** (as opposed to **push**) notifications,
 which we unfortunately have not been able to trigger on the Simulator. Push
 notifications (in the form of `.apns` files) can be dragged onto a Simulator
 window or passed into `simctl`, but remote notifications are only delivered on
@@ -71,9 +71,9 @@ There are currently a couple ways to do development with remote notificcations:
 
 ## Releases
 
-Code is truth. See the [GitHub Actions configuration](.github/workflows) for
-the current behavior of the system. (And please update this documentation if
-it's wrong!)
+**Code is truth.** See the [GitHub Actions configuration](.github/workflows)
+for the current behavior of the system. (And please update this documentation
+if it's wrong!)
 
 ### CD
 
@@ -88,12 +88,12 @@ will cut a release build and upload it to Apple.
 Create a branch that's named `vMAJOR.MINOR.VERSION`. This will trigger a
 deployment and cut a release build for the production app.
 
-*It's on you to provide a valid build version and number.* Since we're pushing
-two+ apps (internal and production) from the same source, we don't want to try
-and automatically figure it out for production builds. Ideally, the builds will
-just match up 1:1, but we want to support making a hotfix from a production cut
-possible (though dealing with build numbers will still probably be a hassle,
-it's easier for a human to deal with than a computer.)
+**It's on you to provide a valid build version and number.** Since we're
+pushing two+ apps (internal and production) from the same source, we don't want
+to try and automatically figure it out for production builds. Ideally, the
+builds will just match up 1:1, but we want to support making a hotfix from a
+production cut possible (though dealing with build numbers will still probably
+be a hassle, it's easier for a human to deal with than a computer.)
 
 ### Setup/Configuration
 
