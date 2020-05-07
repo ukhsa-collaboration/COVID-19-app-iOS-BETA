@@ -65,7 +65,7 @@ jobs:
     if: always()
     steps:
       - name: Notify Slack on failure
-        if: failure()
+        if: contains(needs.*.result, 'failure')
         env:
           SLACK_BOT_TOKEN: ${{ secrets.slack_bot_token }}
         uses: voxmedia/github-action-slack-notify-build@v1
