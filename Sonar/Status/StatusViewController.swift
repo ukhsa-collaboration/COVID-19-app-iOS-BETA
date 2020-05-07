@@ -210,7 +210,8 @@ class StatusViewController: UIViewController, Storyboarded {
             case .blue:
                 diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Highlight")
                 diagnosisTitleLabel.text = "Follow the current advice to stop the spread of coronavirus".localized
-                diagnosisDetailLabel.isHidden = true
+                diagnosisDetailLabel.isHidden = false
+                diagnosisDetailLabel.text = detailForBlue()
                 howAreYouFeelingView.isHidden = false
                 nothingToDoLabel.isHidden = false
                 redStatusView.isHidden = true
@@ -326,6 +327,11 @@ class StatusViewController: UIViewController, Storyboarded {
     private func detailForInitialSelfDiagnosis(_ selfDiagnosis: SelfDiagnosis) {
         let detailFmt = "Follow this advice until %@, at which point this app will notify you to update your symptoms.".localized
         diagnosisDetailLabel.text = String(format: detailFmt, localizedDate(selfDiagnosis.expiryDate))
+    }
+    
+    private func detailForBlue() -> String {
+        let detailFmt = "Valid as of %@".localized
+        return String(format: detailFmt, localizedDate(Date()))
     }
     
     private func localizedDate(_ date: Date) -> String {

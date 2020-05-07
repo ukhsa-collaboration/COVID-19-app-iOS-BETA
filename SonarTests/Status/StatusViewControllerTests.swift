@@ -110,11 +110,16 @@ class StatusViewControllerTests: XCTestCase {
     }
     
     func testShowsBlueStatus() {
-        let statusProvider = StatusProviderDouble.double()
-        statusProvider.status = .blue
+        let midnightUTC = 1589414400
+        let midnightLocal = midnightUTC - TimeZone.current.secondsFromGMT()
+        let currentDate = Date.init(timeIntervalSince1970: TimeInterval(midnightLocal))
+        
+        let persistence = PersistenceDouble()
+        let statusProvider = StatusProvider(persisting: persistence, currentDateProvider: { currentDate })
         let vc = makeViewController(persistence: PersistenceDouble(), statusProvider: statusProvider)
         
-        XCTAssertTrue(vc.diagnosisDetailLabel.isHidden)
+        XCTAssertFalse(vc.diagnosisDetailLabel.isHidden)
+        XCTAssertEqual(vc.diagnosisDetailLabel.text, "Valid as of 7 May")
         XCTAssertEqual(vc.diagnosisTitleLabel.text, "Follow the current advice to stop the spread of coronavirus")
         XCTAssertTrue(vc.redStatusView.isHidden)
     }
