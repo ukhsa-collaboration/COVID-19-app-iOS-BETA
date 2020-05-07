@@ -1,6 +1,9 @@
 name: ci
 
-on: push
+on:
+  push:
+    branches-ignore:
+      - ci
 
 jobs:
   build:
