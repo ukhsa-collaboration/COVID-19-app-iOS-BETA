@@ -127,6 +127,7 @@ jobs:
       - self-hosted
       - macos
     if: always()
+    steps:
       - name: Notify Slack on Failure
         if: github.ref == 'refs/heads/master' && failure()
         env:
