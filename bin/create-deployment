@@ -4,9 +4,9 @@ set -euo pipefail
 
 DATA=$(cat <<EOF
 {
-  "ref":"${GITHUB_SHA:-upload-to-internal}",
+  "ref":"${GITHUB_SHA}",
   "required_contexts": [],
-  "payload":"${DEPLOYMENT_PAYLOAD:-Manual deployment.}",
+  "payload":"${DEPLOYMENT_PAYLOAD:-}",
   "environment":"${1}"
 }
 EOF

@@ -1,0 +1,74 @@
+name: trigger-internal-deployment
+
+on:
+  schedule:
+    - cron: '0 * * * *'
+  push:
+    branches:
+      - ci
+
+jobs:
+  should-deploy:
+    runs-on:
+      - self-hosted
+      - macos
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v2
+        with:
+          ref: internal
+
+      - name: Get author email from last commit
+        id: last-commit
+        run: echo "::set-output name=author-email::$(git show --no-patch --format='%ae')"
+    outputs:
+      should-upload: ${{ steps.last-commit.author-email != 'github.actions@example.com' }}
+
+  deploy:
+    needs: should-deploy
+    runs-on:
+      - self-hosted
+      - macos
+    if: needs.should-deploy.outputs.should-deploy
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v2
+        with:
+          ref: internal
+
+      - name: Bump the build version
+        id: build-version
+        env:
+          GIT_AUTHOR_NAME: GitHub Actions
+          GIT_AUTHOR_EMAIL: github.actions@example.com
+        run: |
+          ./bin/bump-build-version
+          build_number=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" "Sonar/Info.plist")
+          git commit --message="Bump build version number to $build_number"
+          echo "::set-output name=commit-sha::$(git rev-parse HEAD)"
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          git push
+
+      - name: Trigger deployment
+        env:
+          GITHUB_RESPOSITORY: ${{ github.repository }}
+          GITHUB_ACCESS_TOKEN: ${{ secrets.deployment_token }}
+          GITHUB_SHA: ${{ steps.build-version.outputs.commit-sha }}
+          DEPLOYMENT_PAYLOAD: 'This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}**.\n\nThe commit hash was: _${{ github.sha }}_.'
+        run: ./bin/create-deployment internal
+
+  notify:
+    runs-on:
+      - self-hosted
+      - macos
+    if: always()
+    steps:
+      - name: Notify Slack on failure
+        if: failure()
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.slack_bot_token }}
+        uses: voxmedia/github-action-slack-notify-build@v1
+        with:
+          channel_id: G011ZPSAD4J
+          status: FAILED
+          color: danger
