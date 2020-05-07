@@ -18,11 +18,13 @@ jobs:
         with:
           ref: internal
 
-      - name: Get author email from last commit
-        id: last-commit
-        run: echo "::set-output name=author-email::$(git show --no-patch --format='%ae')"
+      - name: Check if deployed
+        id: is-deployed
+        env:
+          GITHUB_ACCESS_TOKEN: ${{ github.token }}
+        run: echo "::set-output name=exit-code::$(./bin/is-deployed internal; echo $?)"
     outputs:
-      should-upload: ${{ steps.last-commit.author-email != 'github.actions@example.com' }}
+      should-upload: ${{ steps.is-deployed.outputs.exit-code == '1' }}
 
   deploy:
     needs: should-deploy
