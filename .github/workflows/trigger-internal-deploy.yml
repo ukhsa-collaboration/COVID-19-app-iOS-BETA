@@ -3,9 +3,9 @@ name: trigger-internal-deployment
 on:
   schedule:
     - cron: '0 * * * *'
-  push:
-    branches:
-      - ci
+  # push:
+  #   branches:
+  #     - ci
 
 jobs:
   should-deploy:
