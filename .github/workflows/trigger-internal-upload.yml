@@ -9,6 +9,7 @@ on:
 
 jobs:
   trigger-internal-upload:
+    if: false
     runs-on:
       - self-hosted
       - macos
