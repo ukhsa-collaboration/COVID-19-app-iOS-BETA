@@ -56,11 +56,12 @@ class UpdateDiagnosisCoordinator: Coordinator {
 
         let isCheckin = persisting.selfDiagnosis.map { $0.symptoms.contains(.cough) } ?? false
         let questionTitle = isCheckin ? "COUGH_CHECKIN_QUESTION" : "COUGH_QUESTION"
+        let coughNewDetail = isCheckin ?  "" : "COUGH_NEW_DETAIL".localized
         vc.inject(
             pageNumber: 2,
             pageCount: 2,
             questionTitle: questionTitle.localized,
-            questionDetail: "COUGH_DETAIL".localized,
+            questionDetail: coughNewDetail + "COUGH_CONTINUOUS_DETAIL".localized,
             questionError: "COUGH_ERROR".localized,
             questionYes: "COUGH_YES".localized,
             questionNo: "COUGH_NO".localized,
@@ -73,9 +74,7 @@ class UpdateDiagnosisCoordinator: Coordinator {
             self.navigationController.dismiss(animated: true, completion: nil)
             
             if self.symptoms.contains(.temperature) {
-                var diagnosis = SelfDiagnosis(type: .subsequent, symptoms: self.symptoms, startDate: Date())
-                diagnosis.expiresIn(days: 1)
-                self.persisting.selfDiagnosis = diagnosis
+                self.persisting.selfDiagnosis = SelfDiagnosis(type: .subsequent, symptoms: self.symptoms, startDate: Date(), daysToLive: 1)
             } else {
                 self.persisting.selfDiagnosis = nil
                 if self.symptoms.contains(.cough) {

@@ -60,7 +60,7 @@ class SelfDiagnosisCoordinator: Coordinator {
             pageNumber: 2,
             pageCount: 3,
             questionTitle: "COUGH_QUESTION".localized,
-            questionDetail: "COUGH_DETAIL".localized,
+            questionDetail: "COUGH_NEW_DETAIL".localized + "COUGH_CONTINUOUS_DETAIL".localized,
             questionError: "COUGH_ERROR".localized,
             questionYes: "COUGH_YES".localized,
             questionNo: "COUGH_NO".localized,
