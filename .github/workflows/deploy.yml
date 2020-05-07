@@ -54,26 +54,15 @@ jobs:
           name: AppReport
           path: Reporting/AppReport
 
-      - name: Update Deployment Status on Success
-        if: success()
+      - name: Update Deployment Status
+        if: always()
         run: >
           curl
           --verbose
           --url "${{ github.event.deployment.statuses_url }}"
           --header "authorization: Bearer ${{ secrets.deployment_token }}"
           --header "content-type: application/json"
-          --data '{"state":"success"}'
-        continue-on-error: true
-
-      - name: Update Deployment Status on Failure
-        if: failure()
-        run: >
-          curl
-          --verbose
-          --url "${{ github.event.deployment.statuses_url }}"
-          --header "authorization: Bearer ${{ secrets.deployment_token }}"
-          --header "content-type: application/json"
-          --data '{"state":"failure"}'
+          --data '{"state":"${{ job.status }}"}'
         continue-on-error: true
 
       - name: Get Build Number
