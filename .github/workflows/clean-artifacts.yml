@@ -16,3 +16,4 @@ jobs:
         with:
           age: 7 days
           skip-tags: false
+        continue-on-error: true

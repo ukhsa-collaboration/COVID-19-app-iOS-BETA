@@ -7,7 +7,8 @@
 # you still have a high temperature, keep self-isolating until your temperature
 # returns to normal. You do not need to self-isolate if you just have a cough
 # after 7 days, as a cough can last for several weeks after the infection has
-# gone 
+# gone
+
 
 # Simple cases
 
@@ -199,3 +200,25 @@
     2020-04-10:
       - status: blue
       - checkin: false
+
+## Potential exposure during cough checkin
+- timeline:
+    2020-04-01:
+      - self-diagnosis:
+          symptoms: [temperature]
+          start-date: 2020-04-01
+    2020-04-02:
+      - status: red
+    2020-04-08:
+      - status: red
+      - checkin: true
+      - self-diagnosis:
+          symptoms: [cough]
+      - status: blue
+    2020-04-09:
+      - checkin: true
+      - self-diagnosis:
+          symptoms: [cough]
+      - status: blue
+      - status-notification: potential
+      - status: ??? # What should happen here?
