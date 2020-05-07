@@ -49,7 +49,8 @@ class ConcreteRegistrationService: RegistrationService {
         
         // when our backend sends us the activation code in a push notification
         // we will want to make a second request to complete the registration process
-        remoteNotificationDispatcher.registerHandler(forType: .registrationActivationCode) { userInfo, completion in
+        remoteNotificationDispatcher.registerHandler(forType: .registrationActivationCode) { [weak self] userInfo, completion in
+            guard let self = self else { return }
             guard persistence.registration == nil else {
                 logger.warning("Ignoring a registration activation code notification because we are already registered.")
                 return
@@ -103,7 +104,8 @@ class ConcreteRegistrationService: RegistrationService {
     private func requestRegistration(_ pushToken: String) {
         let request = RequestFactory.registrationRequest(pushToken: pushToken)
 
-        session.execute(request, queue: .main) { result in
+        session.execute(request, queue: .main) { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(_):
                 logger.debug("First registration request succeeded")
@@ -131,7 +133,8 @@ class ConcreteRegistrationService: RegistrationService {
                                                                 pushToken: pushToken,
                                                                 postalCode: partialPostalCode)
         
-        session.execute(request, queue: .main) { result in
+        session.execute(request, queue: .main) { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let response):
                 logger.debug("Second registration request succeeded")
