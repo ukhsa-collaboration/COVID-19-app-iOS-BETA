@@ -17,7 +17,7 @@ service can have multiple characteristics. We use a characteristic to uniquely
 identify our service and distinguish from all other sorts of Bluetooth devices.
 
 For every device we find with a matching characteristic, we record an
-identifier for the device we saw, the timestamp, and the rssi of the Bluetooth
+identifier for the device we saw, the timestamp, and the RSSI of the Bluetooth
 signal, which will allow a team later on to determine who was in close
 proximity to individuals infected with the novel coronavirus.
 
