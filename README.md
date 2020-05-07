@@ -85,8 +85,9 @@ will cut a release build and upload it to Apple.
 
 ### Production
 
-Create a branch that's named `vMAJOR.MINOR.VERSION`. This will trigger a
-deployment and cut a release build for the production app.
+Trigger a production deployment using `./bin/create-deployment production`.
+You'll need to provide a `DEPLOYMENT_SHA` and a `DEPLOYMENT_TOKEN`. (This might
+change to a branch/tag in the near future, TBD.)
 
 **It's on you to provide a valid build version and number.** Since we're
 pushing two+ apps (internal and production) from the same source, we don't want
