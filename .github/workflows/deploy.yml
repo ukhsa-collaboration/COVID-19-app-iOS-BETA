@@ -36,6 +36,15 @@ jobs:
           MATCH_PASSWORD: ${{ secrets.match_password }}
         run: fastlane release sonar_env:${{ github.event.deployment.environment }}
 
+      - name: Tag Production Commit
+        if: github.event.deployment.environment == 'production'
+        run: |
+          version_number=$(/usr/libexec/PlistBuddy -c "Print CFBundleShortVersionString" "Sonar/Info.plist")
+          build_number=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" "Sonar/Info.plist")
+          tag="v${version_number}-${build_number}"
+          git tag ${tag}
+          git push ${tag}
+
       - name: Upload IPA
         if: always() # If the fastlane release fails, we can upload it manually
         uses: actions/upload-artifact@v1
@@ -54,26 +63,15 @@ jobs:
           name: AppReport
           path: Reporting/AppReport
 
-      - name: Update Deployment Status on Success
-        if: success()
+      - name: Update Deployment Status
+        if: always()
         run: >
           curl
           --verbose
           --url "${{ github.event.deployment.statuses_url }}"
           --header "authorization: Bearer ${{ secrets.deployment_token }}"
           --header "content-type: application/json"
-          --data '{"state":"success"}'
-        continue-on-error: true
-
-      - name: Update Deployment Status on Failure
-        if: failure()
-        run: >
-          curl
-          --verbose
-          --url "${{ github.event.deployment.statuses_url }}"
-          --header "authorization: Bearer ${{ secrets.deployment_token }}"
-          --header "content-type: application/json"
-          --data '{"state":"failure"}'
+          --data '{"state":"${{ job.status }}"}'
         continue-on-error: true
 
       - name: Get Build Number

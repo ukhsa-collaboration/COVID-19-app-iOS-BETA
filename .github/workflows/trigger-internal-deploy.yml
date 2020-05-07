@@ -12,6 +12,8 @@ jobs:
     runs-on:
       - self-hosted
       - macos
+    outputs:
+      should-deploy: ${{ steps.is-deployed.outputs.exit-code == '1' }}
     steps:
       - name: Checkout project
         uses: actions/checkout@v2
@@ -23,8 +25,6 @@ jobs:
         env:
           GITHUB_ACCESS_TOKEN: ${{ github.token }}
         run: echo "::set-output name=exit-code::$(./bin/is-deployed internal; echo $?)"
-    outputs:
-      should-upload: ${{ steps.is-deployed.outputs.exit-code == '1' }}
 
   deploy:
     needs: should-deploy
@@ -45,6 +45,7 @@ jobs:
           GIT_AUTHOR_EMAIL: github.actions@example.com
         run: |
           ./bin/bump-build-version
+          git add Sonar/Info.plist
           build_number=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" "Sonar/Info.plist")
           git commit --message="Bump build version number to $build_number"
           echo "::set-output name=commit-sha::$(git rev-parse HEAD)"
@@ -60,6 +61,7 @@ jobs:
         run: ./bin/create-deployment internal
 
   notify:
+    needs: [should-deploy, deploy]
     runs-on:
       - self-hosted
       - macos
