@@ -41,16 +41,6 @@ jobs:
           SDK: ${{ matrix.run-config['sdk'] }}
         run: xcodebuild -scheme Sonar -configuration release -sdk ${SDK} CODE_SIGNING_ALLOWED=NO
 
-      - name: Notify Slack on Failure
-        if: github.ref == 'refs/heads/master' && failure()
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.slack_bot_token }}
-        uses: voxmedia/github-action-slack-notify-build@v1
-        with:
-          channel_id: G011ZPSAD4J
-          status: FAILED
-          color: danger
-
   test:
     needs: build
     runs-on:
@@ -97,16 +87,6 @@ jobs:
           name: TestResults.xcresult
           path: TestResults.xcresult
 
-      - name: Notify Slack on Failure
-        if: github.ref == 'refs/heads/master' && failure()
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.slack_bot_token }}
-        uses: voxmedia/github-action-slack-notify-build@v1
-        with:
-          channel_id: G011ZPSAD4J
-          status: FAILED
-          color: danger
-
   merge-to-internal:
     needs: test
     runs-on:
@@ -137,4 +117,20 @@ jobs:
           git checkout internal
           git merge master
           git push origin internal
+
+  notify:
+    needs: [build, test, merge-to-internal]
+    runs-on:
+      - self-hosted
+      - macos
+    if: always()
+      - name: Notify Slack on Failure
+        if: github.ref == 'refs/heads/master' && failure()
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.slack_bot_token }}
+        uses: voxmedia/github-action-slack-notify-build@v1
+        with:
+          channel_id: G011ZPSAD4J
+          status: FAILED
+          color: danger
 
