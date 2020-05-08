@@ -85,7 +85,7 @@ jobs:
           PIVOTAL_TRACKER_API_TOKEN: ${{ secrets.pivotal_tracker_api_token }}
           PROJECT_ID: ${{ secrets.pivotal_tracker_project_id }}
         run: |
-          git fetch origin
+          git fetch --tags
           bin/deliver-pivotal-tracker-stories
 
           # move the tag ahead
