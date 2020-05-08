@@ -39,6 +39,11 @@ class PlistPersister<K: Hashable & Codable, V: Codable> {
         writeItems()
     }
     
+    func remove(key: K) {
+        items[key] = nil
+        writeItems()
+    }
+    
     func replaceAll(with newItems: [K: V]) {
         items = newItems
         writeItems()

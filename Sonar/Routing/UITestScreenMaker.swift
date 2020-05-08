@@ -233,6 +233,9 @@ private class NoOpContactEventPersister: ContactEventPersister {
     func update(item: ContactEvent, key: UUID) {
     }
     
+    func remove(key: UUID) {
+    }
+    
     func replaceAll(with: [UUID : ContactEvent]) {
     }
 

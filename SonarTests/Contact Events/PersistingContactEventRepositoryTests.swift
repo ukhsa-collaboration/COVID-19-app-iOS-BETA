@@ -72,6 +72,26 @@ class PersistingContactEventRepositoryTests: XCTestCase {
         XCTAssertEqual(delegate.rssiValues[peripheral3.identifier], [31, 32, 33])
     }
     
+    func testNewPeripheralWithSameBroadcastIdRecordsValuesAgainstExistingContactEvent() throws {
+        throw XCTSkip("Getting this working requires merging the rssiValues/rssiIntervals lists of two contact events; this requires turning durations into timestamps for both lists, but we might as well store timestamps as our intervals are 32 bits anyway. But this requires a serialisation format change, and we want to do more than just change this field as the outgoing JSON and the whole cryptogram will probably change a bunch too. It would be good to do it all at once.")
+        
+        repository.btleListener(listener, didReadTxPower: 1, for: peripheral1)
+        repository.btleListener(listener, didFind: payload1, for: peripheral1)
+        repository.btleListener(listener, didReadRSSI: 11, for: peripheral1)
+        repository.btleListener(listener, didReadRSSI: 12, for: peripheral1)
+        repository.btleListener(listener, didReadRSSI: 22, for: peripheral2)
+        repository.btleListener(listener, didReadTxPower: 2, for: peripheral2)
+        repository.btleListener(listener, didFind: payload1, for: peripheral2)
+        repository.btleListener(listener, didReadRSSI: 23, for: peripheral2)
+        repository.btleListener(listener, didReadRSSI: 24, for: peripheral2)
+        
+        XCTAssertEqual(repository.contactEvents.count, 1)
+        let contactEvent = repository.contactEvents.first(where: { $0.broadcastPayload == payload1 })
+        XCTAssertEqual(contactEvent?.broadcastPayload, payload1)
+        XCTAssertEqual(contactEvent?.txPower, 2)
+        XCTAssertEqual(contactEvent?.rssiValues, [11, 12, 22, 23, 24])
+    }
+    
     func testResetResetsUnderlyingPersister() {
         repository.btleListener(listener, didFind: payload1, for: peripheral1)
         repository.btleListener(listener, didFind: payload2, for: peripheral2)
