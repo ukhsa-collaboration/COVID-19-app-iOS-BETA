@@ -126,7 +126,7 @@ class DailyMetricsCollectorTests: XCTestCase {
             let event = ContactEvent(
                 timestamp: date,
                 rssiValues: [],
-                rssiIntervals: [],
+                rssiTimestamps: [],
                 duration: 0
             )
             return repeatElement(event, count: count)

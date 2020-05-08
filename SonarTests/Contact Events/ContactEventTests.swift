@@ -16,7 +16,7 @@ class ContactEventTests: XCTestCase {
     let time2 = Date(timeIntervalSince1970: 210)
     let time3 = Date(timeIntervalSince1970: 333)
 
-    func testAddingRSSIValuesSetsIntervalsAndDuration() {
+    func testAddingRSSIValuesSetsTimestampsAndDuration() {
         var contactEvent = ContactEvent(timestamp: time0)
         contactEvent.recordRSSI(42, timestamp: time1)
         contactEvent.recordRSSI(17, timestamp: time2)
@@ -24,17 +24,17 @@ class ContactEventTests: XCTestCase {
         
         XCTAssertEqual(contactEvent.duration, 333)
         
-        XCTAssertEqual(contactEvent.rssiIntervals.count, 3)
-        XCTAssertEqual(contactEvent.rssiIntervals[0], 101)
-        XCTAssertEqual(contactEvent.rssiIntervals[1], 109)
-        XCTAssertEqual(contactEvent.rssiIntervals[2], 123)
+        XCTAssertEqual(contactEvent.rssiTimestamps.count, 3)
+        XCTAssertEqual(contactEvent.rssiTimestamps[0], time1)
+        XCTAssertEqual(contactEvent.rssiTimestamps[1], time2)
+        XCTAssertEqual(contactEvent.rssiTimestamps[2], time3)
     }
     
     func testSerializesAndDeserializes() throws {
         var currentFormatContactEvent = ContactEvent(
             timestamp: Date(),
             rssiValues: [-42],
-            rssiIntervals: [123],
+            rssiTimestamps: [time1],
             duration: 456.0
         )
         currentFormatContactEvent.broadcastPayload = IncomingBroadcastPayload.sample1
@@ -62,7 +62,7 @@ class ContactEventTests: XCTestCase {
         XCTAssertEqual(decodedContactEvent.txPower, 0)
         XCTAssertEqual(decodedContactEvent.timestamp, previousFormatContactEvent.timestamp)
         XCTAssertEqual(decodedContactEvent.rssiValues, previousFormatContactEvent.rssiValues)
-        XCTAssertEqual(decodedContactEvent.rssiIntervals, previousFormatContactEvent.rssiIntervals)
+        XCTAssertEqual(decodedContactEvent.rssiTimestamps.first, previousFormatContactEvent.timestamp +  previousFormatContactEvent.rssiIntervals.first!)
         XCTAssertEqual(decodedContactEvent.duration, previousFormatContactEvent.duration)
     }
 

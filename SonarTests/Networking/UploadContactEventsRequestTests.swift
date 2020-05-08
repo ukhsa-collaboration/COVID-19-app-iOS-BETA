@@ -25,16 +25,28 @@ class UploadContactEventsRequestTests: XCTestCase {
     let rssi1: Int8 = -11
     let rssi2: Int8 = -1
     let rssi3: Int8 = -21
+    
+    let rssiValues1: [Int8] = [-11, -12, -13]
+    let rssiValues2: [Int8] = [-21, -22, -23]
+    let rssiValues3: [Int8] = [-31, -32, -33]
+    
+    var rssiTimestamps1: [Date]!
+    var rssiTimestamps2: [Date]!
+    var rssiTimestamps3: [Date]!
 
     var contactEvents: [ContactEvent]!
 
     var request: UploadContactEventsRequest!
     
     override func setUp() {
+        rssiTimestamps1 = [timestamp1 + 11, timestamp1 + 12, timestamp1 + 14]
+        rssiTimestamps2 = [timestamp2 + 12, timestamp2 + 14, timestamp2 + 17]
+        rssiTimestamps3 = [timestamp3 + 13, timestamp3 + 16, timestamp3 + 20]
+
         contactEvents = [
-            ContactEvent(broadcastPayload: payload1, txPower: 11, timestamp: timestamp1, rssiValues: [rssi1], rssiIntervals: [10], duration: 0),
-            ContactEvent(broadcastPayload: payload2, txPower: 22, timestamp: timestamp2, rssiValues: [rssi2], rssiIntervals: [20], duration: 0),
-            ContactEvent(broadcastPayload: payload3, txPower: 33, timestamp: timestamp3, rssiValues: [rssi3], rssiIntervals: [30], duration: 0)
+            ContactEvent(broadcastPayload: payload1, txPower: 11, timestamp: timestamp1, rssiValues: rssiValues1, rssiTimestamps: rssiTimestamps1, duration: 0),
+            ContactEvent(broadcastPayload: payload2, txPower: 22, timestamp: timestamp2, rssiValues: rssiValues2, rssiTimestamps: rssiTimestamps2, duration: 0),
+            ContactEvent(broadcastPayload: payload3, txPower: 33, timestamp: timestamp3, rssiValues: rssiValues3, rssiTimestamps: rssiTimestamps3, duration: 0)
         ]
 
         let registration = Registration(id: sonarId, secretKey: dummyKey, broadcastRotationKey: SecKey.sampleEllipticCurveKey)
@@ -67,13 +79,13 @@ class UploadContactEventsRequestTests: XCTestCase {
   "contactEvents" : [
     {
       "rssiIntervals" : [
-        10
+        11, 1, 2
       ],
       "txPowerInProtocol" : 0,
       "hmacSignature" : "AAAAAAAAAAAAAAAAAAAAAA==",
       "transmissionTime" : 0,
       "rssiValues" : [
-        -11
+        -11, -12, -13
       ],
       "duration" : 0,
       "countryCode" : 1,
@@ -83,13 +95,13 @@ class UploadContactEventsRequestTests: XCTestCase {
     },
     {
       "rssiIntervals" : [
-        20
+        12, 2, 3
       ],
       "txPowerInProtocol" : 0,
       "hmacSignature" : "AAAAAAAAAAAAAAAAAAAAAA==",
       "transmissionTime" : 0,
       "rssiValues" : [
-        -1
+        -21, -22, -23
       ],
       "duration" : 0,
       "countryCode" : 2,
@@ -99,13 +111,13 @@ class UploadContactEventsRequestTests: XCTestCase {
     },
     {
       "rssiIntervals" : [
-        30
+        13, 3, 4
       ],
       "txPowerInProtocol" : 0,
       "hmacSignature" : "AAAAAAAAAAAAAAAAAAAAAA==",
       "transmissionTime" : 0,
       "rssiValues" : [
-        -21
+        -31, -32, -33
       ],
       "duration" : 0,
       "countryCode" : 3,
