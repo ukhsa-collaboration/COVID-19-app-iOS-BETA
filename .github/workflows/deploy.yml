@@ -99,7 +99,7 @@ jobs:
           SLACK_BOT_TOKEN: ${{ secrets.slack_bot_token }}
         uses: voxmedia/github-action-slack-notify-build@v1
         with:
-          channel_id: G012ZPSAD4J
+          channel_id: G011ZPSAD4J
           status: UPLOADED [(${{ steps.get-build-number.outputs.build-number }})]
 
       - name: Notify Slack on Failure
