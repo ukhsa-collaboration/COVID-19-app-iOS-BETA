@@ -24,6 +24,8 @@ class LinkingIdViewController: UIViewController, Storyboarded {
     @IBOutlet weak var errorLabel: UILabel!
 
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         guard let linkingId = persisting.linkingId else {
             fetchLinkingId()
             return

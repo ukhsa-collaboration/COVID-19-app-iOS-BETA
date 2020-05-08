@@ -26,6 +26,8 @@ class OnboardingViewController: UINavigationController, Storyboarded {
     }
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         if #available(iOS 13.0, *) {
             // Disallow pulling to dismiss the card modal
             isModalInPresentation = true

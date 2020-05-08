@@ -46,6 +46,8 @@ class DebugViewController: UITableViewController, Storyboarded {
     }
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         potentiallyExposedSwitch.isOn = persisting.potentiallyExposed != nil
 
         let build = Bundle.main.infoDictionary?["CFBundleVersion"] ?? "unknown"
@@ -253,7 +255,9 @@ class DebugViewController: UITableViewController, Storyboarded {
     }
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        guard keyPath == #keyPath(UIView.bounds) else { return }
+        guard keyPath == #keyPath(UIView.bounds) else {
+            return super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
+        }
 
         fillLayer.path = computeProperCGPath()
     }

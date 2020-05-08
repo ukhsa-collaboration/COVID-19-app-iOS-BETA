@@ -18,6 +18,8 @@ class PrivacyViewController: UIViewController, Storyboarded {
     @IBOutlet weak var termsConditions: LinkButton!
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         moreAbout.inject(title: "More about the app".localized, external: true, style: .body)
         privacyPolicy.inject(title: "Privacy notice".localized, external: true, style: .body)
         termsConditions.inject(title: "Terms of use".localized, external: true, style: .body)

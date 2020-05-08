@@ -41,6 +41,8 @@ class PostcodeViewController: UIViewController, Storyboarded {
     // MARK: - View lifecycle
 
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         postcodeError.isHidden = true
         
         let text = postcodeDetail.text!

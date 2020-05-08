@@ -36,6 +36,8 @@ class LogoStrapline: UIView {
     }
 
     override func layoutSubviews() {
+        super.layoutSubviews()
+        
         accessibilityElement.accessibilityFrame = UIAccessibility.convertToScreenCoordinates(
             logoImageView.frame.union(titleLabel.frame),
             in: self

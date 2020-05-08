@@ -44,6 +44,8 @@ class SetDiagnosisViewController: UITableViewController {
     }
 
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         updateLabel.textColor = UIColor(named: "NHS Blue")
         clearLabel.textColor = UIColor(named: "NHS Error")
 
