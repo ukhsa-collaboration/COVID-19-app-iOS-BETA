@@ -43,7 +43,6 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     @IBOutlet weak var thankYouLabel: UILabel!
     @IBOutlet weak var confirmLabel: UILabel!
-    @IBOutlet weak var submitButtonWrapper: UIView!
     @IBOutlet weak var submitButton: PrimaryButton!
     @IBOutlet weak var confirmSwitch: UISwitch!
     @IBOutlet var errorLabel: AccessibleErrorLabel!
