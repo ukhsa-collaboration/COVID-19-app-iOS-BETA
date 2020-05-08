@@ -41,7 +41,7 @@ cp Sonar/Environments/Sonar.xcconfig.sample .secret/Sonar.xcconfig
 
 - Fill in the `Environment.swift` file with the appropriate values from another
   developer.
-- Get a copy of GoogleService-Info.plis (from [Firebase](https://firebase.google.com/docs/ios/setup)) and
+- Get a copy of GoogleService-Info.plist (from [Firebase](https://firebase.google.com/docs/ios/setup)) and
   copy that into the `.secret` directory.
 - **If Xcode is open, restart Xcode.** Xcode does not handle configuration
   files being changed out from under it gracefully.
