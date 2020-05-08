@@ -63,6 +63,13 @@ jobs:
           name: AppReport
           path: Reporting/AppReport
 
+      # Job status is capitalized and deployment status is not, so we have this
+      # hack to lowercase the status
+      - name: Get Job Status
+        id: job-status
+        if: always()
+        run: echo "::set-output name=status::$(echo ${{ job.status }} | tr '[:upper:]' '[:lower:]')"
+
       - name: Update Deployment Status
         if: always()
         run: >
@@ -71,7 +78,7 @@ jobs:
           --url "${{ github.event.deployment.statuses_url }}"
           --header "authorization: Bearer ${{ secrets.deployment_token }}"
           --header "content-type: application/json"
-          --data '{"state":"${{ job.status }}"}'
+          --data '{"state":"${{ steps.job-status.outputs.deployment-status }}"}'
         continue-on-error: true
 
       - name: Get Build Number
