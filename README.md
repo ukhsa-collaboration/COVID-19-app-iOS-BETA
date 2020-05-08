@@ -3,6 +3,8 @@
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 ![Release: BETA](https://img.shields.io/badge/Release-BETA-orange)
 
+[iOS App Matrix chatroom](https://matrix.to/#/!SaXQZLJDFTmEcgQUgU:matrix.org?via=matrix.org)
+
 This application runs in the background and identifies other people running the
 app within the local area by using low energy bluetooth. While the app is
 running permanently in the background, it periodically broadcasts and listens
