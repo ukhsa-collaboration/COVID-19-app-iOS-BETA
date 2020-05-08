@@ -47,10 +47,22 @@ class UploadContactEventsRequest: SecureRequest, Request {
             guard let payload = event.broadcastPayload else {
                 return nil
             }
+            
+            var rssiIntervals: [Int32] = []
+            for (idx, timestamp) in event.rssiTimestamps.enumerated() {
+                var interval: TimeInterval = 0.0
+                if idx == 0 {
+                    interval = timestamp.timeIntervalSince(event.timestamp)
+                } else {
+                    interval = timestamp.timeIntervalSince(event.rssiTimestamps[idx - 1])
+                }
+                rssiIntervals.append(Int32(interval))
+            }
+            
             return UploadableContactEvent(
                 encryptedRemoteContactId: payload.cryptogram,
                 rssiValues: event.rssiValues.map { Int8($0) },
-                rssiIntervals: event.rssiIntervals.map { Int32($0) },
+                rssiIntervals: rssiIntervals,
                 timestamp: Int32(event.timestamp.timeIntervalSince1970),
                 duration: Int(event.duration),
                 txPowerInProtocol: payload.txPower,

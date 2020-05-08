@@ -28,6 +28,7 @@ protocol ContactEventRepository: BTLEListenerDelegate {
 protocol ContactEventPersister {
     var items: [UUID: ContactEvent] { get }
     func update(item: ContactEvent, key: UUID)
+    func remove(key: UUID)
     func replaceAll(with: [UUID: ContactEvent])
     func reset()
 }
@@ -66,6 +67,23 @@ extension PlistPersister: ContactEventPersister where K == UUID, V == ContactEve
     }
     
     func btleListener(_ listener: BTLEListener, didFind broadcastPayload: IncomingBroadcastPayload, for peripheral: BTLEPeripheral) {
+        if let existingIdentifier = persister.items.keys.first(where: { identifier in
+            return identifier != peripheral.identifier
+                && persister.items[identifier]?.broadcastPayload?.cryptogram == broadcastPayload.cryptogram
+        }), var existingItem = persister.items[existingIdentifier] {
+
+            if let newItem = persister.items[peripheral.identifier] {
+                existingItem.merge(newItem)
+            }
+            persister.update(item: existingItem, key: peripheral.identifier)
+            persister.remove(key: existingIdentifier)
+        }
+        
+        if let contactEvent = persister.items[peripheral.identifier], let payload = contactEvent.broadcastPayload,  payload.cryptogram != broadcastPayload.cryptogram {
+            persister.update(item: contactEvent, key: UUID())
+            persister.remove(key: peripheral.identifier)
+        }
+
         var event = persister.items[peripheral.identifier] ?? ContactEvent()
         event.broadcastPayload = broadcastPayload
         persister.update(item: event, key: peripheral.identifier)

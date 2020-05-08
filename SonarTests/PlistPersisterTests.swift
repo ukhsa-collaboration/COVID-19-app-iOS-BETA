@@ -38,6 +38,18 @@ class PlistPersisterTests: XCTestCase {
         XCTAssertEqual(persister.items["item2"], item2)
         XCTAssertEqual(persister.items["item3"], item3)
     }
+    
+    func testRemoveKey() {
+        XCTAssertEqual(persister.items, [:])
+
+        persister.update(item: item1, key: "item1")
+        persister.update(item: item2, key: "item2")
+        persister.update(item: item3, key: "item3")
+
+        persister.remove(key: "item2")
+        
+        XCTAssertEqual(persister.items.count, 2)
+    }
 
     func testPersistsItems() throws {
         XCTAssertFalse(FileManager.default.fileExists(atPath: persister.fileURL.path))

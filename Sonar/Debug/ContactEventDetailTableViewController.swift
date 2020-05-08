@@ -98,7 +98,7 @@ class ContactEventDetailTableViewController: UITableViewController {
             cell.textLabel?.text = "Self-reported: \(contactEvent.broadcastPayload?.txPower ??? "--")"
             
         case (.rssi, let row):
-            cell.textLabel?.text = String(format: "%d (%.2f)", contactEvent.rssiValues[row], contactEvent.rssiIntervals[row])
+            cell.textLabel?.text = "\(contactEvent.rssiValues[row])"//", \(contactEvent.rssiTimetamps[row])")
             
         default: fatalError("missing case")
         }

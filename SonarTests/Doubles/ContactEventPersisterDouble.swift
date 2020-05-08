@@ -17,6 +17,10 @@ class ContactEventPersisterDouble: ContactEventPersister {
         items[key] = item
     }
     
+    func remove(key: UUID) {
+        items[key] = nil
+    }
+    
     func replaceAll(with newItems: [UUID : ContactEvent]) {
         items = newItems
     }
