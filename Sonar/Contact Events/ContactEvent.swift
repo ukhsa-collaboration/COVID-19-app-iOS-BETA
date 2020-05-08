@@ -73,6 +73,16 @@ struct ContactEvent: Equatable, Codable {
         duration = timestamp.timeIntervalSince(self.timestamp)
     }
 
+    mutating func merge(_ contactEvent: ContactEvent) {
+        let merged = zip(
+            rssiTimestamps + contactEvent.rssiTimestamps,
+            rssiValues + contactEvent.rssiValues
+        ).sorted(by: { $0.0 < $1.0 } )
+        rssiTimestamps = merged.map({ $0.0 })
+        rssiValues = merged.map({ $0.1 })
+        txPower = contactEvent.txPower
+    }
+    
     private enum CodingKeys: String, CodingKey {
         case broadcastPayload
         case timestamp

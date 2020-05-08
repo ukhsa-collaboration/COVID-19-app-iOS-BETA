@@ -67,14 +67,23 @@ extension PlistPersister: ContactEventPersister where K == UUID, V == ContactEve
     }
     
     func btleListener(_ listener: BTLEListener, didFind broadcastPayload: IncomingBroadcastPayload, for peripheral: BTLEPeripheral) {
-//        if let existingIdentifier = persister.items.keys.first(where: { identifier in
-//            return identifier != peripheral.identifier && persister.items[identifier]?.broadcastPayload?.cryptogram == broadcastPayload.cryptogram
-//        }), let existingItem = persister.items[existingIdentifier] {
-//            let newItem = persister.items[peripheral.identifier]
-//            // TODO: need to merge existing rssiValues/rssiIntervals, which needs the "intervals" to be timestamps
-//            persister.update(item: existingItem, key: peripheral.identifier)
-//            persister.remove(key: existingIdentifier)
-//        }
+        if let existingIdentifier = persister.items.keys.first(where: { identifier in
+            return identifier != peripheral.identifier
+                && persister.items[identifier]?.broadcastPayload?.cryptogram == broadcastPayload.cryptogram
+        }), var existingItem = persister.items[existingIdentifier] {
+
+            if let newItem = persister.items[peripheral.identifier] {
+                existingItem.merge(newItem)
+            }
+            persister.update(item: existingItem, key: peripheral.identifier)
+            persister.remove(key: existingIdentifier)
+        }
+        
+        if let contactEvent = persister.items[peripheral.identifier], let payload = contactEvent.broadcastPayload,  payload.cryptogram != broadcastPayload.cryptogram {
+            persister.update(item: contactEvent, key: UUID())
+            persister.remove(key: peripheral.identifier)
+        }
+
         var event = persister.items[peripheral.identifier] ?? ContactEvent()
         event.broadcastPayload = broadcastPayload
         persister.update(item: event, key: peripheral.identifier)

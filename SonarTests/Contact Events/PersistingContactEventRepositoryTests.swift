@@ -47,7 +47,6 @@ class PersistingContactEventRepositoryTests: XCTestCase {
     
     func testRecordsRSSIValuesAgainstCorrectPeripheral() {
         repository.btleListener(listener, didFind: payload1, for: peripheral1)
-
         repository.btleListener(listener, didReadRSSI: 21, for: peripheral2)
         repository.btleListener(listener, didReadRSSI: 11, for: peripheral1)
         repository.btleListener(listener, didFind: payload2, for: peripheral2)
@@ -73,8 +72,6 @@ class PersistingContactEventRepositoryTests: XCTestCase {
     }
     
     func testNewPeripheralWithSameBroadcastIdRecordsValuesAgainstExistingContactEvent() throws {
-        throw XCTSkip("Getting this working requires merging the rssiValues/rssiIntervals lists of two contact events; this requires turning durations into timestamps for both lists, but we might as well store timestamps as our intervals are 32 bits anyway. But this requires a serialisation format change, and we want to do more than just change this field as the outgoing JSON and the whole cryptogram will probably change a bunch too. It would be good to do it all at once.")
-        
         repository.btleListener(listener, didReadTxPower: 1, for: peripheral1)
         repository.btleListener(listener, didFind: payload1, for: peripheral1)
         repository.btleListener(listener, didReadRSSI: 11, for: peripheral1)
@@ -90,6 +87,23 @@ class PersistingContactEventRepositoryTests: XCTestCase {
         XCTAssertEqual(contactEvent?.broadcastPayload, payload1)
         XCTAssertEqual(contactEvent?.txPower, 2)
         XCTAssertEqual(contactEvent?.rssiValues, [11, 12, 22, 23, 24])
+    }
+    
+    func testNewBroadcastIdForSamePeripheralCreatesNewContactEvent() throws {
+        repository.btleListener(listener, didFind: payload1, for: peripheral1)
+        repository.btleListener(listener, didReadRSSI: 11, for: peripheral1)
+        repository.btleListener(listener, didReadRSSI: 22, for: peripheral1)
+        repository.btleListener(listener, didFind: payload2, for: peripheral1)
+        repository.btleListener(listener, didReadRSSI: 33, for: peripheral1)
+        repository.btleListener(listener, didReadRSSI: 44, for: peripheral1)
+        
+        XCTAssertEqual(repository.contactEvents.count, 2)
+        
+        let contactEvent1 = repository.contactEvents.first(where: { $0.broadcastPayload == payload1 })
+        XCTAssertEqual(contactEvent1?.rssiValues, [11, 22])
+        
+        let contactEvent2 = repository.contactEvents.first(where: { $0.broadcastPayload == payload2 })
+        XCTAssertEqual(contactEvent2?.rssiValues, [33, 44])
     }
     
     func testResetResetsUnderlyingPersister() {
@@ -129,17 +143,28 @@ class PersistingContactEventRepositoryTests: XCTestCase {
 
         XCTAssertEqual(repository.contactEvents.count, 1)
     }
-    
-    func testSerialisationFormatDoesNotChange() throws {
-        // If this test fails something happened (maybe a rename, maybe addition or deletion of a field)
-        // which changed the serialization format on disk. Since we're now live, you need to make sure
-        // a migration is added (and tested!) that can migrate from *every past serialised version* of
-        // the on-disk data to the current version.
+
+    // If any of these tests fail something happened (maybe a rename, maybe addition or deletion of
+    // a field) which changed the serialization format on disk. Since we're now live, you need to make
+    // sure a migration is added (and tested!) that can migrate from *every past serialised version* of
+    // the on-disk data to the current version.
+
+    func testSerialisedDataIsReadable_V1_0_1_build_341() throws {
         
         let fileURL = Bundle(for: type(of: self)).url(forResource: "build341_contactEvents", withExtension: "plist")!
         let persister_build341 = PlistPersister<UUID, ContactEvent>(fileURL: fileURL)
         
         XCTAssertEqual(persister_build341.items.count, 2)
+    }
+
+    func testSerialisedDataIsReadable_V1_0_2_build_356() throws {
+        throw XCTSkip("TODO: add this soon")
+        XCTFail("Add test with sample of file from build 356")
+    }
+
+    func testSerialisedDataIsReadable_current() throws {
+        throw XCTSkip("TODO: add this soon")
+        XCTFail("Add test with sample of file from head after 356")
     }
 
 }
