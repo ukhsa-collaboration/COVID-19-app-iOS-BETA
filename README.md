@@ -53,7 +53,7 @@ notifications (in the form of `.apns` files) can be dragged onto a Simulator
 window or passed into `simctl`, but remote notifications are only delivered on
 devices.
 
-There are currently a couple ways to do development with remote notificcations:
+There are currently a couple ways to do development with remote notifications:
 
 - `./bin/pu.sh` is a script forked from [pu.sh](https://github.com/tsif/pu.sh).
   There are instructions there for obtaining credentials from an Apple
