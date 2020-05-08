@@ -24,7 +24,10 @@ jobs:
         id: is-deployed
         env:
           GITHUB_TOKEN: ${{ github.token }}
-        run: echo "::set-output name=exit-code::$(./bin/is-deployed internal; echo $?)"
+        run: echo "::set-output name=exit-code::$(./bin/is-deployed internal > /dev/null; echo $?)"
+
+      - run: echo ${{ steps.is-deployed.outputs.exit-code }}
+        continue-on-error: true
 
   deploy:
     needs: should-deploy
