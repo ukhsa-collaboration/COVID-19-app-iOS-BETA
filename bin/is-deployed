@@ -11,6 +11,7 @@ github_token = ENV.fetch("GITHUB_TOKEN")
 sha = `git rev-parse HEAD`
 
 uri = URI("https://api.github.com/repos/#{github_repository}/deployments?environment=#{environment}&sha=#{sha}")
+p uri
 headers = {
 	"Authorization" => "Bearer #{github_token}",
 	"Content-Type" => "application/json",
