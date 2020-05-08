@@ -27,8 +27,8 @@ struct SelfDiagnosis: Codable, Equatable {
         !symptoms.isEmpty
     }
     
-    var hasExpired: Bool {
-        return Date() > expiryDate
+    func hasExpired(today: @autoclosure (() -> Date) = Date()) -> Bool {
+        return today() > expiryDate
     }
     
     func expiresIn(days: Int) -> Date {

@@ -27,9 +27,6 @@ jobs:
         run: |
           echo "::set-output name=exit-code::$(./bin/is-deployed internal > /dev/null; echo $?)"
 
-      - run: echo ${{ steps.is-deployed.outputs.exit-code }}
-        continue-on-error: true
-
   deploy:
     needs: should-deploy
     runs-on:
@@ -37,6 +34,9 @@ jobs:
       - macos
     if: needs.should-deploy.outputs.should-deploy
     steps:
+      - run: echo ${{ needs.should-deploy.outputs.should-deploy }}
+        continue-on-error: true
+
       - name: Checkout project
         uses: actions/checkout@v2
         with:
