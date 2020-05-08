@@ -25,7 +25,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
-          ./bin/is-deployed internal
           echo "::set-output name=exit-code::$(./bin/is-deployed internal > /dev/null; echo $?)"
 
       - run: echo ${{ steps.is-deployed.outputs.exit-code }}
