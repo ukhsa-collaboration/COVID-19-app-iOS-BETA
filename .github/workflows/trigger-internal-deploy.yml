@@ -32,7 +32,7 @@ jobs:
     runs-on:
       - self-hosted
       - macos
-    if: needs.should-deploy.outputs.should-deploy
+    if: needs.should-deploy.outputs.should-deploy == 'true'
     steps:
       - run: echo ${{ needs.should-deploy.outputs.should-deploy }}
         continue-on-error: true
