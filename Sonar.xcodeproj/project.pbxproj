@@ -427,7 +427,6 @@
 		89CE566A24503E93004A74D0 /* TrustValidatingURLSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustValidatingURLSessionDelegate.swift; sourceTree = "<group>"; };
 		89CE566C24504050004A74D0 /* TrustValidatingURLSessionDelegateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustValidatingURLSessionDelegateTests.swift; sourceTree = "<group>"; };
 		89DA61F12449A56F0079A761 /* FIRAnalyticsConnector.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FIRAnalyticsConnector.framework; path = Frameworks/FIRAnalyticsConnector.framework; sourceTree = "<group>"; };
-		89DA61F22449A56F0079A761 /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseAnalytics.framework; path = Frameworks/FirebaseAnalytics.framework; sourceTree = "<group>"; };
 		89DA61F52449A5A80079A761 /* GoogleAppMeasurement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleAppMeasurement.framework; path = Frameworks/GoogleAppMeasurement.framework; sourceTree = "<group>"; };
 		89DF669E2460168000A55F24 /* StorageChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageChecker.swift; sourceTree = "<group>"; };
 		89DF66A32460173800A55F24 /* StorageCheckerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageCheckerTests.swift; sourceTree = "<group>"; };
@@ -863,7 +862,6 @@
 				89C8B20C245C377F009CCE80 /* AppCenterAnalytics.framework */,
 				89DA61F52449A5A80079A761 /* GoogleAppMeasurement.framework */,
 				89DA61F12449A56F0079A761 /* FIRAnalyticsConnector.framework */,
-				89DA61F22449A56F0079A761 /* FirebaseAnalytics.framework */,
 				F78CEB72242B937F002254AD /* nanopb.framework */,
 				F78CEB70242B9305002254AD /* GoogleDataTransport.framework */,
 				F78CEB6E242B92CF002254AD /* GoogleUtilities.framework */,
