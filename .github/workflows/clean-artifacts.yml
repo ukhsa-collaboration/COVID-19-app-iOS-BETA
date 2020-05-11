@@ -15,5 +15,5 @@ jobs:
         uses: c-hive/gha-remove-artifacts@24dc233
         with:
           age: 7 days
-          skip-tags: false
+          skip-tags: true
         continue-on-error: true
