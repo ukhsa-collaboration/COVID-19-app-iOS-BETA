@@ -68,7 +68,7 @@ jobs:
       - name: Get Job Status
         id: job-status
         if: always()
-        run: echo "::set-output name=status::$(echo ${{ job.status }} | tr '[:upper:]' '[:lower:]')"
+        run: echo "::set-output name=deployment-status::$(echo ${{ job.status }} | tr '[:upper:]' '[:lower:]')"
 
       - name: Update Deployment Status
         if: always()
@@ -104,7 +104,7 @@ jobs:
       - name: Notify Slack on Upload
         env:
           SLACK_BOT_TOKEN: ${{ secrets.slack_bot_token }}
-        uses: voxmedia/github-action-slack-notify-build@v1
+        uses: voxmedia/github-action-slack-notify-build@5125947
         with:
           channel_id: G011ZPSAD4J
           status: UPLOADED [(${{ steps.get-build-number.outputs.build-number }})]
@@ -113,7 +113,7 @@ jobs:
         if: failure()
         env:
           SLACK_BOT_TOKEN: ${{ secrets.slack_bot_token }}
-        uses: voxmedia/github-action-slack-notify-build@v1
+        uses: voxmedia/github-action-slack-notify-build@5125947
         with:
           channel_id: G011ZPSAD4J
           status: FAILED
