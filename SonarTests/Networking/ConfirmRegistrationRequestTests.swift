@@ -13,7 +13,7 @@ class ConfirmRegistrationRequestTests: XCTestCase {
     
     let activationCode = "an activation code"
     let serverGeneratedId = UUID()
-    let symmetricKey = Data(base64Encoded: "3bLIKs9B9UqVfqGatyJbiRGNW8zTBr2tgxYJh/el7pc=")!
+    let symmetricKey = HMACKey(data: Data(base64Encoded: "3bLIKs9B9UqVfqGatyJbiRGNW8zTBr2tgxYJh/el7pc=")!)
     let serverPublicKey = Data(base64Encoded: "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEu1f68MqDXbKeTqZMTHsOGToO4rKnPClXe/kE+oWqlaWZQv4J1E98cUNdpzF9JIFRPMCNdGOvTr4UB+BhQv9GWg==")!
 
     let pushToken: String = "someBase64StringWeGotFromFirebase=="
