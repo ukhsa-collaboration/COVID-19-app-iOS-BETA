@@ -9,17 +9,22 @@
 import Foundation
 import Logging
 
+struct HMACKey: Equatable, Codable {
+    let data: Data
+}
+
 struct Registration: Equatable {
+    
     let id: UUID
-    // TODO: This should be wrapped in a "HMACKey" value type!
-    let secretKey: Data // HMAC for HTTP headers and bluetooth payload
+    let secretKey: HMACKey
     let broadcastRotationKey: SecKey
 
-    init(id: UUID, secretKey: Data, broadcastRotationKey: SecKey) {
+    init(id: UUID, secretKey: HMACKey, broadcastRotationKey: SecKey) {
         self.id = id
         self.secretKey = secretKey
         self.broadcastRotationKey = broadcastRotationKey
     }
+
 }
 
 protocol Persisting {

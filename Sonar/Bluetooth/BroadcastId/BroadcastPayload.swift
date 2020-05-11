@@ -18,7 +18,7 @@ struct BroadcastPayload {
     let txPower: Int8 = 0
     
     let cryptogram: Data
-    let hmacKey: Data
+    let hmacKey: HMACKey
         
     func data(txDate: Date = Date()) -> Data {
         logger.info("generating broadcast payload with txDate = \(txDate)")
@@ -36,11 +36,11 @@ struct BroadcastPayload {
         return payload
     }
     
-    private func hmacSignature(hmacKey: Data, data: Data) -> Data {
+    private func hmacSignature(hmacKey: HMACKey, data: Data) -> Data {
         var context = CCHmacContext()
         
-        hmacKey.withUnsafeBytes { ptr in
-            CCHmacInit(&context, CCHmacAlgorithm(kCCHmacAlgSHA256), ptr.baseAddress, hmacKey.count)
+        hmacKey.data.withUnsafeBytes { ptr in
+            CCHmacInit(&context, CCHmacAlgorithm(kCCHmacAlgSHA256), ptr.baseAddress, hmacKey.data.count)
         }
         
         data.withUnsafeBytes { ptr in

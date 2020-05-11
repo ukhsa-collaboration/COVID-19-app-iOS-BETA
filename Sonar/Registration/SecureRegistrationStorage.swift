@@ -12,9 +12,9 @@ import Logging
 
 struct PartialRegistration: Codable, Equatable {
     let id: UUID
-    let secretKey: Data
+    let secretKey: HMACKey
 
-    init(id: UUID, secretKey: Data) {
+    init(id: UUID, secretKey: HMACKey) {
         self.id = id
         self.secretKey = secretKey
     }
@@ -53,7 +53,7 @@ class SecureRegistrationStorage {
                 return nil
         }
 
-        return PartialRegistration(id: id, secretKey: data)
+        return PartialRegistration(id: id, secretKey: HMACKey(data: data))
     }
 
     func set(registration: PartialRegistration) throws {
@@ -63,7 +63,7 @@ class SecureRegistrationStorage {
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: secService,
             kSecAttrAccount as String: registration.id.uuidString,
-            kSecValueData as String: registration.secretKey,
+            kSecValueData as String: registration.secretKey.data,
             kSecAttrAccessible as String: kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly,
         ]
         let status = SecItemAdd(query as CFDictionary, nil)

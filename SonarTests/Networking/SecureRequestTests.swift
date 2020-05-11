@@ -14,9 +14,9 @@ class SecureRequestTests: XCTestCase {
     var request: SampleSecureRequest!
     
     override func setUp() {
-        let keyData = Data(base64Encoded: "Gqacz+VE6uuZy1uc4oTG/A+LAS291mXN+J5opDSNYys=")!
+        let key = HMACKey(data: Data(base64Encoded: "Gqacz+VE6uuZy1uc4oTG/A+LAS291mXN+J5opDSNYys=")!)
 
-        request = SampleSecureRequest(key: keyData, text: "Hello, nurse!", date: Date(timeIntervalSince1970: 1))
+        request = SampleSecureRequest(key: key, text: "Hello, nurse!", date: Date(timeIntervalSince1970: 1))
         super.setUp()
     }
 
@@ -51,7 +51,7 @@ class SampleSecureRequest: SecureRequest, Request {
     let method: HTTPMethod
     let urlable: Urlable
     
-    init(key: Data, text: String, date: Date = Date()) {
+    init(key: HMACKey, text: String, date: Date = Date()) {
         let data = text.data(using: .utf8)!
         method = HTTPMethod.post(data: data)
         urlable = .path("/api/sample")

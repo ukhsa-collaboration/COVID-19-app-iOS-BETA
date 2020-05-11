@@ -13,7 +13,7 @@ class SonarBroadcastPayloadGeneratorTests: XCTestCase {
 
     let dateFormatter = DateFormatter()
     let sonarEpoch = "2020-04-01T00:00:00Z"
-    let registration = Registration(id: UUID(uuidString: "054DDC35-0287-4247-97BE-D9A3AF012E36")!, secretKey: Data(), broadcastRotationKey: SecKey.sampleEllipticCurveKey)
+    let registration = Registration(id: UUID(uuidString: "054DDC35-0287-4247-97BE-D9A3AF012E36")!, secretKey: SecKey.sampleHMACKey, broadcastRotationKey: SecKey.sampleEllipticCurveKey)
     let utcCalendar: Calendar = {
         var calendar = Calendar.current
         calendar.timeZone = TimeZone(identifier: "UTC")!

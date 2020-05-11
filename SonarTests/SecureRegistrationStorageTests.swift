@@ -13,7 +13,7 @@ import XCTest
 class SecureRegistrationStorageTests: TestCase {
 
     let id = UUID(uuidString: "1c8d305e-db93-4ba0-81f4-94c33fd35c7c")!
-    let secretKey = "Ik6M9N2CqLv3BDT6lKlhR9X+cLf1MCyuU3ExnrUBlY4=".data(using: .utf8)!
+    let secretKey = SecKey.sampleHMACKey
 
     func testRoundTrip() throws {
         let storage = SecureRegistrationStorage()
