@@ -72,7 +72,7 @@ class ConcreteBluetoothNursery: BluetoothNursery, PersistenceDelegate {
     // MARK: - BTLEListener
 
     func startBluetooth(registration: Registration?) {
-        logger.info("Starting the bluetooth nursery with sonar id \(String(describing: registration?.id))")
+        logger.info("Starting the bluetooth nursery with sonar id \(registration == nil ? "not set" : "set"))")
 
         broadcastIdGenerator = SonarBroadcastPayloadGenerator(
             storage: SecureBroadcastRotationKeyStorage(),
@@ -107,7 +107,7 @@ class ConcreteBluetoothNursery: BluetoothNursery, PersistenceDelegate {
     // MARK: - PersistenceDelegate
 
     func persistence(_ persistence: Persisting, didUpdateRegistration registration: Registration) {
-        logger.info("saved registration with sonar id \(registration.id). will now update the broadcast id.")
+        logger.info("saved registration, updating broadcastId")
 
         broadcaster?.updateIdentity()
     }
