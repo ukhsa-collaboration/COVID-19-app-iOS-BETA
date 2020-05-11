@@ -217,6 +217,12 @@ class PersistenceTests: TestCase {
         XCTAssertNil(persistence.partialPostcode)
     }
     
+    func testDeletesLinkingId() {
+        UserDefaults.standard.set("the linking ID", forKey: "linkingId")
+        recreatePersistence()
+        XCTAssertNil(UserDefaults.standard.string(forKey: "linkingId"))
+    }
+    
     private func recreatePersistence() {
         storageChecker.markAsSyncedCallbackCount = 0
         persistence = Persistence(
@@ -229,7 +235,7 @@ class PersistenceTests: TestCase {
 
 }
 
-class PersistenceDelegateDouble: NSObject, PersistenceDelegate {
+private class PersistenceDelegateDouble: NSObject, PersistenceDelegate {
     var recordedRegistration: Registration?
     func persistence(_ persistence: Persisting, didUpdateRegistration registration: Registration) {
         recordedRegistration = registration

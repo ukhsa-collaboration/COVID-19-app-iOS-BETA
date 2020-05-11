@@ -28,7 +28,6 @@ protocol Persisting {
     var partialPostcode: String? { get nonmutating set }
     var bluetoothPermissionRequested: Bool { get nonmutating set }
     var uploadLog: [UploadLog] { get nonmutating set }
-    var linkingId: LinkingId? { get nonmutating set }
     var lastInstalledVersion: String? { get nonmutating set }
     var lastInstalledBuildNumber: String? { get nonmutating set }
     var acknowledgmentUrls: Set<URL> { get nonmutating set }
@@ -48,7 +47,7 @@ class Persistence: Persisting {
         case partialPostcode
         case bluetoothPermissionRequested
         case uploadLog
-        case linkingId
+        case linkingId // Should be used only to delete old data
         case lastInstalledBuildNumber
         case lastInstalledVersion
         case acknowledgmentUrls
@@ -80,6 +79,10 @@ class Persistence: Persisting {
         if storageState != .inSync {
             storageChecker.markAsSynced()
         }
+        
+        // We used to store the user's linking ID, but now we don't.
+        // Since it's potentially sensitive, delete it.
+        UserDefaults.standard.removeObject(forKey: Keys.linkingId.rawValue)
     }
 
     var registration: Registration? {
@@ -177,11 +180,6 @@ class Persistence: Persisting {
         set { UserDefaults.standard.set(newValue, forKey: Keys.bluetoothPermissionRequested.rawValue) }
     }
 
-    var linkingId: LinkingId? {
-        get { UserDefaults.standard.string(forKey: Keys.linkingId.rawValue) }
-        set { UserDefaults.standard.set(newValue, forKey: Keys.linkingId.rawValue) }
-    }
-    
     var lastInstalledVersion: String? {
         get { UserDefaults.standard.string(forKey: Keys.lastInstalledVersion.rawValue) }
         set { UserDefaults.standard.set(newValue, forKey: Keys.lastInstalledVersion.rawValue) }
