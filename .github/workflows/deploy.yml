@@ -68,7 +68,7 @@ jobs:
       - name: Get Job Status
         id: job-status
         if: always()
-        run: echo "::set-output name=status::$(echo ${{ job.status }} | tr '[:upper:]' '[:lower:]')"
+        run: echo "::set-output name=deployment-status::$(echo ${{ job.status }} | tr '[:upper:]' '[:lower:]')"
 
       - name: Update Deployment Status
         if: always()
