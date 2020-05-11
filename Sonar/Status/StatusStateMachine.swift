@@ -10,8 +10,8 @@ import Foundation
 
 enum StatusState: Equatable {
     case ok // default state, previously "blue"
-    case symptomatic(hasTemperature: Bool, hasCough: Bool, startDate: Date) // previously "red" state
-    case checkin(hasTemperature: Bool, hasCough: Bool, checkinDate: Date)
+    case symptomatic(symptoms: Set<Symptom>, expires: Date) // previously "red" state
+    case checkin(symptoms: Set<Symptom>, at: Date)
     case exposed(on: Date) // previously "amber" state
 }
 
