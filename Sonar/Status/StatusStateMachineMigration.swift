@@ -42,7 +42,7 @@ class StatusStateMachineMigration {
                 return .ok
             }
 
-            if currentDate > diagnosis.expiryDate {
+            if currentDate > diagnosis.expiryDate || diagnosis.type == .subsequent {
                 let startOfDay = Calendar.current.startOfDay(for: currentDate)
                 let checkinDate = Calendar.current.nextDate(
                     after: startOfDay,

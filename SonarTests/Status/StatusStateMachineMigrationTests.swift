@@ -71,7 +71,16 @@ class StatusStateMachineMigrationTests: XCTestCase {
             ),
             potentiallyExposedOn: nil
         )
+        XCTAssertEqual(state, .ok)
 
+        state = migration.migrate(
+            diagnosis: SelfDiagnosis(
+                type: .initial,
+                symptoms: [],
+                startDate: dateSentinel
+            ),
+            potentiallyExposedOn: dateSentinel
+        )
         XCTAssertEqual(state, .ok)
 
         state = migration.migrate(
@@ -84,7 +93,6 @@ class StatusStateMachineMigrationTests: XCTestCase {
         )
 
         XCTAssertEqual(state, .ok)
-
         state = migration.migrate(
             diagnosis: SelfDiagnosis(
                 type: .subsequent,
@@ -149,6 +157,42 @@ class StatusStateMachineMigrationTests: XCTestCase {
         )
 
         XCTAssertEqual(state, .symptomatic(symptoms: [.temperature], expires: diagnosis.expiryDate))
+    }
+
+    func testSubsequentSymptomaticPreExpiry() {
+        let expiryDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 2, hour: 7))!
+        let diagnosis = SelfDiagnosis(
+            type: .subsequent,
+            symptoms: [.temperature],
+            startDate: dateSentinel,
+            expiryDate: expiryDate
+        )
+
+        currentDate = Calendar.current.date(byAdding: .second, value: -1, to: diagnosis.expiryDate)!
+        let state = migration.migrate(
+            diagnosis: diagnosis,
+            potentiallyExposedOn: nil
+        )
+
+        XCTAssertEqual(state, .checkin(symptoms: [.temperature], at: diagnosis.expiryDate))
+    }
+
+    func testSubsequentSymptomaticPostExpiry() {
+        let expiryDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 2, hour: 7))!
+        let diagnosis = SelfDiagnosis(
+            type: .subsequent,
+            symptoms: [.temperature],
+            startDate: dateSentinel,
+            expiryDate: expiryDate
+        )
+
+        currentDate = Calendar.current.date(byAdding: .second, value: 1, to: diagnosis.expiryDate)!
+        let state = migration.migrate(
+            diagnosis: diagnosis,
+            potentiallyExposedOn: nil
+        )
+
+        XCTAssertEqual(state, .checkin(symptoms: [.temperature], at: diagnosis.expiryDate))
     }
 
 }
