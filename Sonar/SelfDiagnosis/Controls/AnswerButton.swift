@@ -26,12 +26,13 @@ class AnswerButton: UIControl, UpdatesBasedOnAccessibilityDisplayChanges {
         didSet {
             if isSelected {
                 accessibilityTraits.insert(.selected)
+                layer.borderColor = UIColor(named: "NHS Highlight")!.cgColor
+                layer.borderWidth = 3
             } else {
                 accessibilityTraits.remove(.selected)
+                updateBorder()
             }
 
-            layer.borderWidth = isSelected ? 2 : 0
-            layer.borderColor = UIColor(named: "NHS Highlight")!.cgColor
             imageView.isHighlighted = isSelected
         }
     }
