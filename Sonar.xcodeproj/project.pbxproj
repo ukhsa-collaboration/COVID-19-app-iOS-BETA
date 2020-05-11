@@ -963,7 +963,7 @@
 				214209D3242399DD00C7BFF3 /* Networking */,
 				F6CC2CA7242BC7D90079432B /* Notifications */,
 				F6F05A212433BE9600FF4B72 /* Onboarding */,
-				F604977024549B49002B8503 /* Pilot */,
+				F604977024549B49002B8503 /* LinkingID */,
 				F758B8D0242CC661003AE16D /* Registration */,
 				F758B8BC242CB83B003AE16D /* Resources */,
 				895D9E4924374EB800573D4D /* Routing */,
@@ -1098,7 +1098,7 @@
 			path = Logging;
 			sourceTree = "<group>";
 		};
-		F604977024549B49002B8503 /* Pilot */ = {
+		F604977024549B49002B8503 /* LinkingID */ = {
 			isa = PBXGroup;
 			children = (
 				F60497782454A40B002B8503 /* LinkingId.storyboard */,
@@ -1107,7 +1107,7 @@
 				F60497762454A294002B8503 /* LinkingIdViewController.swift */,
 				0982F47D246A1AC000E57EE5 /* LinkingIdNavigationController.swift */,
 			);
-			path = Pilot;
+			path = LinkingID;
 			sourceTree = "<group>";
 		};
 		F604977324549C84002B8503 /* Pilot */ = {
