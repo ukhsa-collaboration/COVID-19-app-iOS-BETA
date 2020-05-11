@@ -10,6 +10,8 @@ import UIKit
 
 @IBDesignable
 class AnswerButton: UIControl, UpdatesBasedOnAccessibilityDisplayChanges {
+    
+    let notificationCenter = NotificationCenter.default
 
     @IBInspectable var text: String? {
         didSet {
@@ -42,6 +44,9 @@ class AnswerButton: UIControl, UpdatesBasedOnAccessibilityDisplayChanges {
     }
 
     override func awakeFromNib() {
+        
+        notificationCenter.addObserver(self, selector: #selector(updateBasedOnAccessibilityDisplayChanges), name: UIApplication.didBecomeActiveNotification, object: nil)
+        
         accessibilityTraits = [.button]
         isAccessibilityElement = true
         if #available(iOS 13.0, *) {
@@ -90,7 +95,7 @@ class AnswerButton: UIControl, UpdatesBasedOnAccessibilityDisplayChanges {
         updateBasedOnAccessibilityDisplayChanges()
     }
     
-    func updateBasedOnAccessibilityDisplayChanges() {
+    @objc func updateBasedOnAccessibilityDisplayChanges() {
         resizeImage()
         updateBorder()
     }
@@ -101,6 +106,9 @@ class AnswerButton: UIControl, UpdatesBasedOnAccessibilityDisplayChanges {
     }
 
     private func updateBorder() {
+        if isSelected {
+            return
+        }
         if UIAccessibility.isInvertColorsEnabled {
             layer.borderColor = UIColor.black.cgColor
             layer.borderWidth = 3
