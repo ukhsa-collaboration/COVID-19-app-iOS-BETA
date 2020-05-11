@@ -1,14 +1,14 @@
 # Introduction
-NHSX leads the digital transformation of health and social care in England, and owns the [NHS COVID-19 App](https://covid19.nhs.uk). We run a vulnerability disclosure programme specifically for the app and its supporting infrastructure.
+NHSX leads the digital transformation of health and social care in England, and has developed the [NHS COVID-19 App](https://covid19.nhs.uk). We are running a vulnerability disclosure programme specifically for the app and its supporting infrastructure.
 
-This vulnerability disclosure policy applies to any vulnerabilities you are considering reporting to us regarding the NHS COVID-19 App. We recommend reading this vulnerability disclosure policy in full before you report a vulnerability and always act in compliance with it.
+We recommend reading this vulnerability disclosure policy in full before you report a vulnerability, and always acting in compliance with it.
 
-We value those who take the time and effort to report security vulnerabilities according to this policy. However, we do not offer monetary rewards for vulnerability disclosures. 
+We are grateful to those who take the time and effort to report security vulnerabilities to us, in line with this policy. However, we are not offering monetary rewards for vulnerability disclosures. 
 
 # Reporting
 If you believe you have found a security vulnerability, please submit your report to us using the following link:
 
-https://hackerone.com/nhscovid19app
+https://hackerone.com/03351cb3-53e3-4bb8-8fcc-a226e3b528fc/embedded_submissions/new
 
 Submissions are anonymous unless you are signed in to your HackerOne account. 
 
@@ -59,13 +59,12 @@ You must:
 * Securely delete all data retrieved as soon as it is no longer required or within one month of the vulnerability being resolved, whichever occurs first (or as otherwise required by data protection law). 
 
 # Scope
-* iOS app
-* Android app
+* [iOS app](https://apps.apple.com/us/app/nhs-covid-19/id1507396059)
+* [Android app](https://play.google.com/apps/testing/uk.nhs.nhsx.colocate)
 * App infrastructure
-* Website infrastructure
+* Website infrastructure [https://covid19.nhs.uk/](https://covid19.nhs.uk/)
 
 # Legalities 
 This policy is designed to be compatible with common vulnerability disclosure good practice. It does not give you permission to act in any manner that is inconsistent with the law, or which might cause NHSX or partner organisations to be in breach of any legal obligations.
 
 NHSX will not seek prosecution of any security researcher who has acted in good faith and in accordance with this disclosure policy.
-
