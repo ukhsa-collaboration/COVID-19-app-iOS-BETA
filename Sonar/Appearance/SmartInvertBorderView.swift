@@ -9,15 +9,18 @@
 import UIKit
 
 class SmartInvertBorderView: UIView {
+    
+    let notificationCenter = NotificationCenter.default
+
     override func awakeFromNib() {
         super.awakeFromNib()
-
+        notificationCenter.addObserver(self, selector: #selector(updateBasedOnAccessibilityDisplayChanges), name: UIApplication.didBecomeActiveNotification, object: nil)
         updateBasedOnAccessibilityDisplayChanges()
     }
 }
 
 extension SmartInvertBorderView: UpdatesBasedOnAccessibilityDisplayChanges {
-    func updateBasedOnAccessibilityDisplayChanges() {
+    @objc func updateBasedOnAccessibilityDisplayChanges() {
         if UIAccessibility.isInvertColorsEnabled {
             layer.borderColor = UIColor.black.cgColor
             layer.borderWidth = 3
