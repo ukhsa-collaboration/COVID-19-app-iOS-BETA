@@ -47,7 +47,7 @@ class SubmitSymptomsViewControllerTests: TestCase {
 
     func testSubmitTappedWithConfirmationSwitchOn() throws {
         makeSubject(
-            registration: Registration(id: UUID(uuidString: "FA817D5C-C615-4ABE-83B5-ABDEE8FAB8A6")!, secretKey: Data(), broadcastRotationKey: SecKey.sampleEllipticCurveKey),
+            registration: Registration(id: UUID(uuidString: "FA817D5C-C615-4ABE-83B5-ABDEE8FAB8A6")!, secretKey: SecKey.sampleHMACKey, broadcastRotationKey: SecKey.sampleEllipticCurveKey),
             symptoms: [.temperature],
             startDate: Date()
         )

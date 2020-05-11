@@ -16,12 +16,12 @@ class SecureRequest {
     
     var headers: [String : String]
     
-    init(_ key: Data, _ data: Data, _ headers: [String: String], _ timestamp: Date = Date()) {
+    init(_ key: HMACKey, _ data: Data, _ headers: [String: String], _ timestamp: Date = Date()) {
         let timestampString = ISO8601DateFormatter().string(from: timestamp)
         var hmacContext = CCHmacContext()
 
-        key.withUnsafeBytes { keyPtr -> Void in
-            CCHmacInit(&hmacContext, CCHmacAlgorithm(kCCHmacAlgSHA256), keyPtr.baseAddress, key.count)
+        key.data.withUnsafeBytes { keyPtr -> Void in
+            CCHmacInit(&hmacContext, CCHmacAlgorithm(kCCHmacAlgSHA256), keyPtr.baseAddress, key.data.count)
         }
         
         let tsData = timestampString.data(using: .utf8)!

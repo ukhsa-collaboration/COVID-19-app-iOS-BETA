@@ -19,7 +19,7 @@ protocol BroadcastRotationKeyStorage {
     func read() -> SecKey?
     func clear() throws
 }
-
+        
 struct SecureBroadcastRotationKeyStorage: BroadcastRotationKeyStorage {
 
     private let publicKeyTag = "uk.nhs.nhsx.sonar.public_key"

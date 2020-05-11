@@ -49,7 +49,7 @@ extension DispatchQueue {
 
 extension Registration {
     static var fake: Self {
-        Registration(id: UUID(), secretKey: Data(), broadcastRotationKey: SecKey.sampleEllipticCurveKey)
+        Registration(id: UUID(), secretKey: SecKey.sampleHMACKey, broadcastRotationKey: SecKey.sampleEllipticCurveKey)
     }
 }
 
@@ -78,7 +78,7 @@ extension SecKey {
         return SecKeyCreateWithData(data as CFData, keyDict as CFDictionary, nil)!
     }
     
-    static var sampleHMACKey: Data = Data(base64Encoded: "LWbqBBxfV5vob3ApsPhgOI8aiFcKYP8jLQ2fKb8Y1C0=")!
+    static var sampleHMACKey: HMACKey = HMACKey(data: Data(base64Encoded: "LWbqBBxfV5vob3ApsPhgOI8aiFcKYP8jLQ2fKb8Y1C0=")!)
 
 }
 

@@ -58,7 +58,7 @@ class PersistenceTests: TestCase {
         XCTAssertNil(persistence.registration)
 
         let id = UUID()
-        let secretKey = "secret key".data(using: .utf8)!
+        let secretKey = SecKey.sampleHMACKey
         let rotationKey = SecKey.sampleEllipticCurveKey
         let registration = Registration(id: id, secretKey: secretKey, broadcastRotationKey: rotationKey)
         persistence.registration = registration
@@ -73,7 +73,7 @@ class PersistenceTests: TestCase {
         persistence.delegate = delegate
 
         let id = UUID()
-        let secretKey = "secret key".data(using: .utf8)!
+        let secretKey = SecKey.sampleHMACKey
         let registration = Registration(id: id, secretKey: secretKey, broadcastRotationKey: SecKey.sampleEllipticCurveKey)
         persistence.registration = registration
 
@@ -81,7 +81,7 @@ class PersistenceTests: TestCase {
     }
     
     func testRegistrationReturnsNilIfNoBroadcastKey() throws {
-        try secureRegistrationStorage.set(registration: PartialRegistration(id: UUID(), secretKey: Data()))
+        try secureRegistrationStorage.set(registration: PartialRegistration(id: UUID(), secretKey: SecKey.sampleHMACKey))
         try broadcastKeyStorage.clear()
         
         XCTAssertNil(persistence.registration)
@@ -176,7 +176,7 @@ class PersistenceTests: TestCase {
         XCTAssertEqual(monitor.detectedEvents, [])
         
         let id = UUID()
-        let secretKey = "secret key".data(using: .utf8)!
+        let secretKey = SecKey.sampleHMACKey
         persistence.registration = Registration(id: id, secretKey: secretKey, broadcastRotationKey: SecKey.sampleEllipticCurveKey)
         XCTAssertEqual(monitor.detectedEvents, [.registrationSucceeded])
     }

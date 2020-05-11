@@ -12,7 +12,7 @@ import XCTest
 class RegistrationServiceTests: TestCase {
 
     let id = UUID()
-    let secretKey = "a secret key".data(using: .utf8)!
+    let secretKey = SecKey.sampleHMACKey
 
     func testRegistration_withPreExistingPushToken() throws {
         let session = SessionDouble()

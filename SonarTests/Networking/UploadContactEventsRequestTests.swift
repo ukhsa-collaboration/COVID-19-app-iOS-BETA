@@ -12,7 +12,7 @@ import XCTest
 class UploadContactEventsRequestTests: XCTestCase {
 
     let sonarId = UUID(uuidString: "E9D7F53C-DE9C-46A2-961E-8302DC39558A")!
-    let dummyKey = "this-is-a-symmetric-key-trust-me".data(using: .utf8)!
+    let dummyKey = SecKey.sampleHMACKey
 
     let payload1 = IncomingBroadcastPayload.sample1
     let payload2 = IncomingBroadcastPayload.sample2
