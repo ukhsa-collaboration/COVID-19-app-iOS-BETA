@@ -31,6 +31,7 @@ protocol Persisting {
     var lastInstalledVersion: String? { get nonmutating set }
     var lastInstalledBuildNumber: String? { get nonmutating set }
     var acknowledgmentUrls: Set<URL> { get nonmutating set }
+    var statusState: StatusState { get nonmutating set }
 
     func clear()
 }
@@ -51,6 +52,7 @@ class Persistence: Persisting {
         case lastInstalledBuildNumber
         case lastInstalledVersion
         case acknowledgmentUrls
+        case statusState
     }
     
     private let encoder = JSONEncoder()
@@ -208,6 +210,28 @@ class Persistence: Persisting {
             }
 
             UserDefaults.standard.set(data, forKey: Keys.acknowledgmentUrls.rawValue)
+        }
+    }
+
+    var statusState: StatusState {
+        get {
+            guard
+                let data = UserDefaults.standard.data(forKey: Keys.statusState.rawValue),
+                let decoded = try? decoder.decode(StatusState.self, from: data)
+            else {
+                let migration = StatusStateMigration()
+                return migration.migrate(diagnosis: selfDiagnosis, potentiallyExposedOn: potentiallyExposed)
+            }
+
+            return decoded
+        }
+        set {
+            guard let data = try? encoder.encode(newValue) else {
+                logger.critical("Unable to encode the status state")
+                return
+            }
+
+            UserDefaults.standard.set(data, forKey: Keys.statusState.rawValue)
         }
     }
     

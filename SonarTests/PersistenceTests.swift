@@ -222,6 +222,22 @@ class PersistenceTests: TestCase {
         recreatePersistence()
         XCTAssertNil(UserDefaults.standard.string(forKey: "linkingId"))
     }
+
+    func testStatusState() {
+        persistence.statusState = .ok
+        XCTAssertEqual(persistence.statusState, .ok)
+    }
+
+    func testStatusStateMigration() {
+        XCTAssertEqual(persistence.statusState, .ok)
+
+        let expiryDate = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
+        let diagnosis = SelfDiagnosis(type: .initial, symptoms: [.cough], startDate: Date(), expiryDate: expiryDate)
+        persistence.selfDiagnosis = diagnosis
+        persistence.potentiallyExposed = Date()
+
+        XCTAssertEqual(persistence.statusState, .symptomatic(symptoms: [.cough], expires: diagnosis.expiryDate))
+    }
     
     private func recreatePersistence() {
         storageChecker.markAsSyncedCallbackCount = 0
