@@ -214,6 +214,8 @@
 		F6DA0A362469D95F001F0B48 /* StatusStateMachineMigrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DA0A352469D95F001F0B48 /* StatusStateMachineMigrationTests.swift */; };
 		F6DA0A382469DCBA001F0B48 /* StatusStateMachineMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DA0A372469DCBA001F0B48 /* StatusStateMachineMigration.swift */; };
 		F6DA0A3A2469DCF7001F0B48 /* StatusStateMachineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DA0A392469DCF7001F0B48 /* StatusStateMachineTests.swift */; };
+		F6DA0A3C246A0FAA001F0B48 /* StatusState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DA0A3B246A0FAA001F0B48 /* StatusState.swift */; };
+		F6DA0A3E246A123B001F0B48 /* StatusStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DA0A3D246A123B001F0B48 /* StatusStateTests.swift */; };
 		F6EE8363246306490076AF97 /* SmartInvertBorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EE8362246306490076AF97 /* SmartInvertBorderView.swift */; };
 		F6EEC3B82448DD2400172820 /* SelfDiagnosis.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EEC3B72448DD2400172820 /* SelfDiagnosis.swift */; };
 		F6F05A242433BEC000FF4B72 /* OnboardingCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F05A232433BEC000FF4B72 /* OnboardingCoordinatorTests.swift */; };
@@ -511,6 +513,8 @@
 		F6DA0A352469D95F001F0B48 /* StatusStateMachineMigrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusStateMachineMigrationTests.swift; sourceTree = "<group>"; };
 		F6DA0A372469DCBA001F0B48 /* StatusStateMachineMigration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusStateMachineMigration.swift; sourceTree = "<group>"; };
 		F6DA0A392469DCF7001F0B48 /* StatusStateMachineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusStateMachineTests.swift; sourceTree = "<group>"; };
+		F6DA0A3B246A0FAA001F0B48 /* StatusState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusState.swift; sourceTree = "<group>"; };
+		F6DA0A3D246A123B001F0B48 /* StatusStateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusStateTests.swift; sourceTree = "<group>"; };
 		F6EE8362246306490076AF97 /* SmartInvertBorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartInvertBorderView.swift; sourceTree = "<group>"; };
 		F6EEC3B72448DD2400172820 /* SelfDiagnosis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfDiagnosis.swift; sourceTree = "<group>"; };
 		F6F05A232433BEC000FF4B72 /* OnboardingCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinatorTests.swift; sourceTree = "<group>"; };
@@ -639,6 +643,7 @@
 				F64D76F824577DA700B1D495 /* StatusProviderTests.swift */,
 				F6DA0A352469D95F001F0B48 /* StatusStateMachineMigrationTests.swift */,
 				F6DA0A392469DCF7001F0B48 /* StatusStateMachineTests.swift */,
+				F6DA0A3D246A123B001F0B48 /* StatusStateTests.swift */,
 				0983ACD2243EB22200DBB336 /* StatusViewControllerTests.swift */,
 			);
 			path = Status;
@@ -711,6 +716,7 @@
 				F694B1C3245B899C00C6A5D1 /* StatusContent.swift */,
 				F61695A02458B3C0006AABE3 /* StatusNotificationHandler.swift */,
 				F64D76F624577D9600B1D495 /* StatusProvider.swift */,
+				F6DA0A3B246A0FAA001F0B48 /* StatusState.swift */,
 				F6DA0A332469D6BA001F0B48 /* StatusStateMachine.swift */,
 				F6DA0A372469DCBA001F0B48 /* StatusStateMachineMigration.swift */,
 				214209B52421072C00C7BFF3 /* StatusViewController.swift */,
@@ -1509,6 +1515,7 @@
 				F64D76F924577DA700B1D495 /* StatusProviderTests.swift in Sources */,
 				F62F858524510923006580A8 /* SessionDouble.swift in Sources */,
 				F694B1BA2459E45100C6A5D1 /* RemoteNotificationDispatchingDouble.swift in Sources */,
+				F6DA0A3E246A123B001F0B48 /* StatusStateTests.swift in Sources */,
 				0991B8B2244FB03E0076C58B /* BluetoothPermissionDeniedViewControllerTests.swift in Sources */,
 				09A925452453807000C5DBC1 /* RegistrationReminderSchedulerTests.swift in Sources */,
 				F6DA0A362469D95F001F0B48 /* StatusStateMachineMigrationTests.swift in Sources */,
@@ -1603,6 +1610,7 @@
 				21C09A8D24377F5100368203 /* CoreBluetoothExtensions.swift in Sources */,
 				F72EBDA7243D2FD1009F9328 /* ConcreteBroadcastIdEncrypter.swift in Sources */,
 				F72EBD9E243C90E6009F9328 /* HumbleLocalNotificationScheduler.swift in Sources */,
+				F6DA0A3C246A0FAA001F0B48 /* StatusState.swift in Sources */,
 				89DF669F2460168000A55F24 /* StorageChecker.swift in Sources */,
 				217A23BE243B34E8001B8236 /* UIDevice+ModelName.swift in Sources */,
 				F604976924539093002B8503 /* UploadLog.swift in Sources */,
