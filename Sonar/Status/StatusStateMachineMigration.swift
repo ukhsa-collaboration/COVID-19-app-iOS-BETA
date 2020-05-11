@@ -43,13 +43,10 @@ class StatusStateMachineMigration {
             }
 
             if currentDate > diagnosis.expiryDate || diagnosis.type == .subsequent {
-                let startOfDay = Calendar.current.startOfDay(for: currentDate)
-                let checkinDate = Calendar.current.nextDate(
-                    after: startOfDay,
-                    matching: DateComponents(hour: 7),
-                    matchingPolicy: .nextTime
-                )!
-                return .checkin(symptoms: diagnosis.symptoms, at: checkinDate)
+                return .checkin(
+                    symptoms: diagnosis.symptoms,
+                    at: diagnosis.expiryDate
+                )
             } else {
                 return .symptomatic(
                     symptoms: diagnosis.symptoms,
@@ -67,6 +64,5 @@ class StatusStateMachineMigration {
         )
         return dateComponents.day
     }
-
 
 }

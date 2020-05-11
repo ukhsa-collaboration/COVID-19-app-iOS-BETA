@@ -44,7 +44,7 @@ class StatusStateMachineMigrationTests: XCTestCase {
         )
         XCTAssertEqual(state, .exposed(on: dateSentinel))
 
-        // 04.14
+        // 2020.04.14
         currentDate = Calendar.current.date(byAdding: .day, value: 13, to: dateSentinel)!
         state = migration.migrate(
             diagnosis: nil,
@@ -52,7 +52,7 @@ class StatusStateMachineMigrationTests: XCTestCase {
         )
         XCTAssertEqual(state, .exposed(on: dateSentinel))
 
-        // 04.15
+        // 2020.04.15
         currentDate = Calendar.current.date(byAdding: .day, value: 14, to: dateSentinel)!
         state = migration.migrate(
             diagnosis: nil,
@@ -93,6 +93,7 @@ class StatusStateMachineMigrationTests: XCTestCase {
         )
 
         XCTAssertEqual(state, .ok)
+
         state = migration.migrate(
             diagnosis: SelfDiagnosis(
                 type: .subsequent,
@@ -105,13 +106,13 @@ class StatusStateMachineMigrationTests: XCTestCase {
         XCTAssertEqual(state, .ok)
     }
 
-    func testOnlySymptomaticUnexpired() {
+    func testSymptomaticUnexpiredAndNotPotentiallyExposed() {
         let expiryDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 2, hour: 7))!
         let diagnosis = SelfDiagnosis(
             type: .initial,
             symptoms: [.temperature],
-            startDate: dateSentinel, // 04.01
-            expiryDate:expiryDate    // 04.02
+            startDate: dateSentinel, // 2020.04.01
+            expiryDate:expiryDate    // 2020.04.02
         )
 
         currentDate = Calendar.current.date(byAdding: .second, value: -1, to: diagnosis.expiryDate)!
@@ -123,13 +124,13 @@ class StatusStateMachineMigrationTests: XCTestCase {
         XCTAssertEqual(state, .symptomatic(symptoms: [.temperature], expires: diagnosis.expiryDate))
     }
 
-    func testOnlySymptomaticInitialExpired() {
+    func testSymptomaticInitialExpiredAndNotPotentiallyExposed() {
         let expiryDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 2, hour: 7))!
         let diagnosis = SelfDiagnosis(
             type: .initial,
             symptoms: [.temperature],
-            startDate: dateSentinel, // 04.01
-            expiryDate:expiryDate    // 04.02
+            startDate: dateSentinel, // 2020.04.01
+            expiryDate: expiryDate   // 2020.04.02
         )
 
         currentDate = Calendar.current.date(byAdding: .second, value: 1, to: diagnosis.expiryDate)!
@@ -138,9 +139,8 @@ class StatusStateMachineMigrationTests: XCTestCase {
             potentiallyExposedOn: nil
         )
 
-        // 04.02
-        let checkinDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 2, hour: 7))!
-        XCTAssertEqual(state, .checkin(symptoms: [.temperature], at: checkinDate))
+        // 2020.04.02
+        XCTAssertEqual(state, .checkin(symptoms: [.temperature], at: expiryDate))
     }
 
     func testInitialSymptomaticTakesPrecedenceOverExposed() {
