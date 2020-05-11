@@ -88,7 +88,7 @@ final class ContactEventsTableViewController: UITableViewController, ContactEven
 
         case (Sections.mySonarId.rawValue, _):
             
-            let sonarId = persistence.registration?.id.uuidString ?? "Not registered"
+            let sonarId = persistence.registration?.sonarId.uuidString ?? "Not registered"
             cell.textLabel?.text = sonarId
             cell.detailTextLabel?.text = nil
             cell.gradientColorData = Data()

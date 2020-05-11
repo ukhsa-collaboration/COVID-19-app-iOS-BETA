@@ -57,13 +57,13 @@ class PersistenceTests: TestCase {
     func testRegistrationIsStored() {
         XCTAssertNil(persistence.registration)
 
-        let id = UUID()
+        let sonarId = UUID()
         let secretKey = SecKey.sampleHMACKey
         let rotationKey = SecKey.sampleEllipticCurveKey
-        let registration = Registration(id: id, secretKey: secretKey, broadcastRotationKey: rotationKey)
+        let registration = Registration(sonarId: sonarId, secretKey: secretKey, broadcastRotationKey: rotationKey)
         persistence.registration = registration
 
-        XCTAssertEqual(secureRegistrationStorage.get(), PartialRegistration(id: id, secretKey: secretKey))
+        XCTAssertEqual(secureRegistrationStorage.get(), PartialRegistration(sonarId: sonarId, secretKey: secretKey))
         XCTAssertEqual(broadcastKeyStorage.read(), rotationKey)
         XCTAssertEqual(persistence.registration, registration)
     }
@@ -74,14 +74,14 @@ class PersistenceTests: TestCase {
 
         let id = UUID()
         let secretKey = SecKey.sampleHMACKey
-        let registration = Registration(id: id, secretKey: secretKey, broadcastRotationKey: SecKey.sampleEllipticCurveKey)
+        let registration = Registration(sonarId: id, secretKey: secretKey, broadcastRotationKey: SecKey.sampleEllipticCurveKey)
         persistence.registration = registration
 
         XCTAssertEqual(delegate.recordedRegistration, registration)
     }
     
     func testRegistrationReturnsNilIfNoBroadcastKey() throws {
-        try secureRegistrationStorage.set(registration: PartialRegistration(id: UUID(), secretKey: SecKey.sampleHMACKey))
+        try secureRegistrationStorage.set(registration: PartialRegistration(sonarId: UUID(), secretKey: SecKey.sampleHMACKey))
         try broadcastKeyStorage.clear()
         
         XCTAssertNil(persistence.registration)
@@ -177,7 +177,7 @@ class PersistenceTests: TestCase {
         
         let id = UUID()
         let secretKey = SecKey.sampleHMACKey
-        persistence.registration = Registration(id: id, secretKey: secretKey, broadcastRotationKey: SecKey.sampleEllipticCurveKey)
+        persistence.registration = Registration(sonarId: id, secretKey: secretKey, broadcastRotationKey: SecKey.sampleEllipticCurveKey)
         XCTAssertEqual(monitor.detectedEvents, [.registrationSucceeded])
     }
 

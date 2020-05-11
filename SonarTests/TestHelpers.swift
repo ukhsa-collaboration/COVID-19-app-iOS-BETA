@@ -49,7 +49,7 @@ extension DispatchQueue {
 
 extension Registration {
     static var fake: Self {
-        Registration(id: UUID(), secretKey: SecKey.sampleHMACKey, broadcastRotationKey: SecKey.sampleEllipticCurveKey)
+        Registration(sonarId: UUID(), secretKey: SecKey.sampleHMACKey, broadcastRotationKey: SecKey.sampleEllipticCurveKey)
     }
 }
 

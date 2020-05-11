@@ -49,7 +49,7 @@ class UploadContactEventsRequestTests: XCTestCase {
             ContactEvent(broadcastPayload: payload3, txPower: 33, timestamp: timestamp3, rssiValues: rssiValues3, rssiTimestamps: rssiTimestamps3, duration: 0)
         ]
 
-        let registration = Registration(id: sonarId, secretKey: dummyKey, broadcastRotationKey: SecKey.sampleEllipticCurveKey)
+        let registration = Registration(sonarId: sonarId, secretKey: dummyKey, broadcastRotationKey: SecKey.sampleEllipticCurveKey)
         request = UploadContactEventsRequest(
             registration: registration,
             symptomsTimestamp: Date(timeIntervalSince1970: 100),

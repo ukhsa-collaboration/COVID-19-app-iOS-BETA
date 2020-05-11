@@ -12,7 +12,7 @@ import XCTest
 
 class SecureRegistrationStorageTests: TestCase {
 
-    let id = UUID(uuidString: "1c8d305e-db93-4ba0-81f4-94c33fd35c7c")!
+    let sonarId = UUID(uuidString: "1c8d305e-db93-4ba0-81f4-94c33fd35c7c")!
     let secretKey = SecKey.sampleHMACKey
 
     func testRoundTrip() throws {
@@ -20,24 +20,24 @@ class SecureRegistrationStorageTests: TestCase {
 
         XCTAssertNil(storage.get())
 
-        try storage.set(registration: PartialRegistration(id: id, secretKey: secretKey))
+        try storage.set(registration: PartialRegistration(sonarId: sonarId, secretKey: secretKey))
 
         let registration = storage.get()
-        XCTAssertEqual(registration?.id, id)
+        XCTAssertEqual(registration?.sonarId, sonarId)
         XCTAssertEqual(registration?.secretKey, secretKey)
     }
 
     func testOverwritesExistingRegistration() throws {
         // Add a registration
         let storage = SecureRegistrationStorage()
-        try storage.set(registration: PartialRegistration(id: UUID(), secretKey: secretKey))
+        try storage.set(registration: PartialRegistration(sonarId: UUID(), secretKey: secretKey))
 
         // Add another registration
-        try storage.set(registration: PartialRegistration(id: id, secretKey: secretKey))
+        try storage.set(registration: PartialRegistration(sonarId: sonarId, secretKey: secretKey))
 
         // We should have the new registration
         let registration = storage.get()
-        XCTAssertEqual(registration?.id, id)
+        XCTAssertEqual(registration?.sonarId, sonarId)
         XCTAssertEqual(registration?.secretKey, secretKey)
     }
 
@@ -52,7 +52,7 @@ class SecureRegistrationStorageTests: TestCase {
 
         // Set a registration
         let storage = SecureRegistrationStorage()
-        try storage.set(registration: PartialRegistration(id: UUID(), secretKey: secretKey))
+        try storage.set(registration: PartialRegistration(sonarId: UUID(), secretKey: secretKey))
 
         // The original generic password should still be there
         let getQuery: [String: Any] = [

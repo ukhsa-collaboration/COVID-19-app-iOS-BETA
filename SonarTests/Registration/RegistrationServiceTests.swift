@@ -11,7 +11,7 @@ import XCTest
 
 class RegistrationServiceTests: TestCase {
 
-    let id = UUID()
+    let sonarId = UUID()
     let secretKey = SecKey.sampleHMACKey
 
     func testRegistration_withPreExistingPushToken() throws {
@@ -66,7 +66,7 @@ class RegistrationServiceTests: TestCase {
         
         // Respond to the second request
         let confirmationResponse = ConfirmRegistrationResponse(
-            id: id,
+            sonarId: sonarId,
             secretKey: secretKey,
             serverPublicKey: knownGoodRotationKeyData()
         )
@@ -76,7 +76,7 @@ class RegistrationServiceTests: TestCase {
 
         let storedRegistration = persistence.registration
         XCTAssertNotNil(storedRegistration)
-        XCTAssertEqual(id, storedRegistration?.id)
+        XCTAssertEqual(sonarId, storedRegistration?.sonarId)
         XCTAssertEqual(secretKey, storedRegistration?.secretKey)
         let expectedRotationKey = try BroadcastRotationKeyConverter().fromData(knownGoodRotationKeyData())
         XCTAssertEqual(expectedRotationKey, storedRegistration?.broadcastRotationKey)
@@ -138,14 +138,14 @@ class RegistrationServiceTests: TestCase {
         XCTAssertNil(completedObserver.lastNotification)
 
         // Respond to the second request
-        let confirmationResponse = ConfirmRegistrationResponse(id: id, secretKey: secretKey, serverPublicKey: knownGoodRotationKeyData())
+        let confirmationResponse = ConfirmRegistrationResponse(sonarId: sonarId, secretKey: secretKey, serverPublicKey: knownGoodRotationKeyData())
         session.executeCompletion!(Result<ConfirmRegistrationResponse, Error>.success(confirmationResponse))
 
         XCTAssertNotNil(completedObserver.lastNotification)
 
         let storedRegistration = persistence.registration
         XCTAssertNotNil(storedRegistration)
-        XCTAssertEqual(id, storedRegistration?.id)
+        XCTAssertEqual(sonarId, storedRegistration?.sonarId)
         XCTAssertEqual(secretKey, storedRegistration?.secretKey)
         let expectedRotationKey = try BroadcastRotationKeyConverter().fromData(knownGoodRotationKeyData())
         XCTAssertEqual(expectedRotationKey, storedRegistration?.broadcastRotationKey)
@@ -464,7 +464,7 @@ class RegistrationServiceTests: TestCase {
         remoteNotificationDispatcher.handleNotification(userInfo: ["activationCode": "arbitrary"]) { _ in }
                         
         // Respond to the second request
-        let confirmationResponse = ConfirmRegistrationResponse(id: id, secretKey: secretKey, serverPublicKey: knownGoodRotationKeyData())
+        let confirmationResponse = ConfirmRegistrationResponse(sonarId: sonarId, secretKey: secretKey, serverPublicKey: knownGoodRotationKeyData())
         session.executeCompletion!(Result<ConfirmRegistrationResponse, Error>.success(confirmationResponse))
         
         XCTAssertNotNil(completedObserver.lastNotification)
@@ -510,7 +510,7 @@ class RegistrationServiceTests: TestCase {
         remoteNotificationDispatcher.handleNotification(userInfo: ["activationCode": "arbitrary"]) { _ in }
 
         // Respond to the second request
-        let confirmationResponse = ConfirmRegistrationResponse(id: id, secretKey: secretKey, serverPublicKey: knownGoodRotationKeyData())
+        let confirmationResponse = ConfirmRegistrationResponse(sonarId: sonarId, secretKey: secretKey, serverPublicKey: knownGoodRotationKeyData())
         session.executeCompletion!(Result<ConfirmRegistrationResponse, Error>.success(confirmationResponse))
 
         // More than 20 seconds has elapsed, and we show a failure
@@ -556,19 +556,19 @@ class RegistrationServiceTests: TestCase {
         // Respond to the second request twice
         // This can happen if registration timed out and the user retried, but both attempts eventually succeeded.
         let id1 = UUID()
-        let confirmationResponse1 = ConfirmRegistrationResponse(id: id1, secretKey: secretKey, serverPublicKey: knownGoodRotationKeyData())
+        let confirmationResponse1 = ConfirmRegistrationResponse(sonarId: id1, secretKey: secretKey, serverPublicKey: knownGoodRotationKeyData())
         session.executeCompletion!(Result<ConfirmRegistrationResponse, Error>.success(confirmationResponse1))
         XCTAssertNotNil(completedObserver.lastNotification)
         completedObserver.lastNotification = nil
         failedObserver.lastNotification = nil
         let id2 = UUID()
-        let confirmationResponse2 = ConfirmRegistrationResponse(id: id2, secretKey: secretKey, serverPublicKey: Data())
+        let confirmationResponse2 = ConfirmRegistrationResponse(sonarId: id2, secretKey: secretKey, serverPublicKey: Data())
         session.executeCompletion!(Result<ConfirmRegistrationResponse, Error>.success(confirmationResponse2))
         
         XCTAssertNil(completedObserver.lastNotification)
         XCTAssertNil(failedObserver.lastNotification)
         XCTAssertNotNil(persistence.registration)
-        XCTAssertEqual(persistence.registration?.id, id1)
+        XCTAssertEqual(persistence.registration?.sonarId, id1)
     }
 
     func testRegistration_ignoresSecondAccessTokenAfterSuccess() {
@@ -603,7 +603,7 @@ class RegistrationServiceTests: TestCase {
         remoteNotificationDispatcher.handleNotification(userInfo: ["activationCode": "arbitrary"]) { _ in }
                         
         // Respond to the second request
-        let confirmationResponse = ConfirmRegistrationResponse(id: UUID(), secretKey: secretKey, serverPublicKey: knownGoodRotationKeyData())
+        let confirmationResponse = ConfirmRegistrationResponse(sonarId: UUID(), secretKey: secretKey, serverPublicKey: knownGoodRotationKeyData())
         session.executeCompletion!(Result<ConfirmRegistrationResponse, Error>.success(confirmationResponse))
         XCTAssertNotNil(completedObserver.lastNotification)
         
@@ -719,7 +719,7 @@ class RegistrationServiceTests: TestCase {
         // This should trigger the second request.
         remoteNotificationDispatcher.handleNotification(userInfo: ["activationCode": "arbitrary"]) { _ in }
                         
-        let confirmationResponse = ConfirmRegistrationResponse(id: UUID(), secretKey: secretKey, serverPublicKey: knownGoodRotationKeyData())
+        let confirmationResponse = ConfirmRegistrationResponse(sonarId: UUID(), secretKey: secretKey, serverPublicKey: knownGoodRotationKeyData())
         session.executeCompletion!(Result<ConfirmRegistrationResponse, Error>.success(confirmationResponse))
         
         XCTAssertTrue(reminderScheduler.cancelCalled)

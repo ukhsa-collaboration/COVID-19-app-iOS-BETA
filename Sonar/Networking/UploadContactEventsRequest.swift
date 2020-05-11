@@ -37,7 +37,7 @@ class UploadContactEventsRequest: SecureRequest, Request {
 
     init(registration: Registration, symptomsTimestamp: Date, contactEvents: [ContactEvent]) {
         let key = registration.secretKey
-        let sonarId = registration.id
+        let sonarId = registration.sonarId
         urlable = .path("/api/residents/\(sonarId.uuidString)")
 
         let encoder = JSONEncoder()
