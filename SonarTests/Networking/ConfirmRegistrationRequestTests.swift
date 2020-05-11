@@ -14,7 +14,7 @@ class ConfirmRegistrationRequestTests: XCTestCase {
     let activationCode = "an activation code"
     let serverGeneratedId = UUID()
     let symmetricKey = Data(base64Encoded: "3bLIKs9B9UqVfqGatyJbiRGNW8zTBr2tgxYJh/el7pc=")!
-    let serverPublicKey = Data(base64Encoded: "Y2FzaCBydWxlcyBldmVyeXRoaW5nIGFyb3VuZCBtZQo=")!
+    let serverPublicKey = Data(base64Encoded: "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEu1f68MqDXbKeTqZMTHsOGToO4rKnPClXe/kE+oWqlaWZQv4J1E98cUNdpzF9JIFRPMCNdGOvTr4UB+BhQv9GWg==")!
 
     let pushToken: String = "someBase64StringWeGotFromFirebase=="
     let deviceModel: String = "iDevice 42,17"
@@ -58,7 +58,7 @@ class ConfirmRegistrationRequestTests: XCTestCase {
         let responseData =
         """
         {
-            "id": "\(serverGeneratedId.uuidString)", "secretKey": "3bLIKs9B9UqVfqGatyJbiRGNW8zTBr2tgxYJh/el7pc=", "publicKey": "Y2FzaCBydWxlcyBldmVyeXRoaW5nIGFyb3VuZCBtZQo="
+            "id": "\(serverGeneratedId.uuidString)", "secretKey": "3bLIKs9B9UqVfqGatyJbiRGNW8zTBr2tgxYJh/el7pc=", "publicKey": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEu1f68MqDXbKeTqZMTHsOGToO4rKnPClXe/kE+oWqlaWZQv4J1E98cUNdpzF9JIFRPMCNdGOvTr4UB+BhQv9GWg=="
         }
         """.data(using: .utf8)!
         let response = try? request.parse(responseData)
@@ -72,7 +72,7 @@ class ConfirmRegistrationRequestTests: XCTestCase {
         let responseData =
         """
         {
-            "id": "uuid-blabalabla", "secretKey": "3bLIKs9B9UqVfqGatyJbiRGNW8zTBr2tgxYJh/el7pc=", "publicKey": "Y2FzaCBydWxlcyBldmVyeXRoaW5nIGFyb3VuZCBtZQo="
+            "id": "uuid-blabalabla", "secretKey": "3bLIKs9B9UqVfqGatyJbiRGNW8zTBr2tgxYJh/el7pc=", "publicKey": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEu1f68MqDXbKeTqZMTHsOGToO4rKnPClXe/kE+oWqlaWZQv4J1E98cUNdpzF9JIFRPMCNdGOvTr4UB+BhQv9GWg=="
         }
         """.data(using: .utf8)!
 
@@ -83,7 +83,7 @@ class ConfirmRegistrationRequestTests: XCTestCase {
         let responseData =
         """
         {
-            "id": "\(serverGeneratedId.uuidString)", "secretKey": "random non-base64 nonsense", "publicKey": "Y2FzaCBydWxlcyBldmVyeXRoaW5nIGFyb3VuZCBtZQo="
+            "id": "\(serverGeneratedId.uuidString)", "secretKey": "random non-base64 nonsense", "publicKey": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEu1f68MqDXbKeTqZMTHsOGToO4rKnPClXe/kE+oWqlaWZQv4J1E98cUNdpzF9JIFRPMCNdGOvTr4UB+BhQv9GWg=="
         }
         """.data(using: .utf8)!
 
