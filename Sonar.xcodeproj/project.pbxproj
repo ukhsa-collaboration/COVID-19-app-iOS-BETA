@@ -210,6 +210,10 @@
 		F6AB2F20243D359F00386D6B /* SubmitSymptomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */; };
 		F6CC2CA9242BC7FC0079432B /* RemoteNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CC2CA8242BC7FC0079432B /* RemoteNotificationManager.swift */; };
 		F6CC2CAC242BCD0D0079432B /* RemoteNotificationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CC2CAB242BCD0D0079432B /* RemoteNotificationManagerTests.swift */; };
+		F6DA0A342469D6BA001F0B48 /* StatusStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DA0A332469D6BA001F0B48 /* StatusStateMachine.swift */; };
+		F6DA0A362469D95F001F0B48 /* StatusStateMachineMigrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DA0A352469D95F001F0B48 /* StatusStateMachineMigrationTests.swift */; };
+		F6DA0A382469DCBA001F0B48 /* StatusStateMachineMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DA0A372469DCBA001F0B48 /* StatusStateMachineMigration.swift */; };
+		F6DA0A3A2469DCF7001F0B48 /* StatusStateMachineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DA0A392469DCF7001F0B48 /* StatusStateMachineTests.swift */; };
 		F6EE8363246306490076AF97 /* SmartInvertBorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EE8362246306490076AF97 /* SmartInvertBorderView.swift */; };
 		F6EEC3B82448DD2400172820 /* SelfDiagnosis.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EEC3B72448DD2400172820 /* SelfDiagnosis.swift */; };
 		F6F05A242433BEC000FF4B72 /* OnboardingCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F05A232433BEC000FF4B72 /* OnboardingCoordinatorTests.swift */; };
@@ -503,6 +507,10 @@
 		F6CA2818242E41F700F8DC55 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F6CC2CA8242BC7FC0079432B /* RemoteNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteNotificationManager.swift; sourceTree = "<group>"; };
 		F6CC2CAB242BCD0D0079432B /* RemoteNotificationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteNotificationManagerTests.swift; sourceTree = "<group>"; };
+		F6DA0A332469D6BA001F0B48 /* StatusStateMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusStateMachine.swift; sourceTree = "<group>"; };
+		F6DA0A352469D95F001F0B48 /* StatusStateMachineMigrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusStateMachineMigrationTests.swift; sourceTree = "<group>"; };
+		F6DA0A372469DCBA001F0B48 /* StatusStateMachineMigration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusStateMachineMigration.swift; sourceTree = "<group>"; };
+		F6DA0A392469DCF7001F0B48 /* StatusStateMachineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusStateMachineTests.swift; sourceTree = "<group>"; };
 		F6EE8362246306490076AF97 /* SmartInvertBorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartInvertBorderView.swift; sourceTree = "<group>"; };
 		F6EEC3B72448DD2400172820 /* SelfDiagnosis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfDiagnosis.swift; sourceTree = "<group>"; };
 		F6F05A232433BEC000FF4B72 /* OnboardingCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinatorTests.swift; sourceTree = "<group>"; };
@@ -627,9 +635,11 @@
 		0983ACD1243EB20A00DBB336 /* Status */ = {
 			isa = PBXGroup;
 			children = (
-				F64D76F824577DA700B1D495 /* StatusProviderTests.swift */,
-				0983ACD2243EB22200DBB336 /* StatusViewControllerTests.swift */,
 				F61695A22458B556006AABE3 /* StatusNotificationHandlerTests.swift */,
+				F64D76F824577DA700B1D495 /* StatusProviderTests.swift */,
+				F6DA0A352469D95F001F0B48 /* StatusStateMachineMigrationTests.swift */,
+				F6DA0A392469DCF7001F0B48 /* StatusStateMachineTests.swift */,
+				0983ACD2243EB22200DBB336 /* StatusViewControllerTests.swift */,
 			);
 			path = Status;
 			sourceTree = "<group>";
@@ -701,6 +711,8 @@
 				F694B1C3245B899C00C6A5D1 /* StatusContent.swift */,
 				F61695A02458B3C0006AABE3 /* StatusNotificationHandler.swift */,
 				F64D76F624577D9600B1D495 /* StatusProvider.swift */,
+				F6DA0A332469D6BA001F0B48 /* StatusStateMachine.swift */,
+				F6DA0A372469DCBA001F0B48 /* StatusStateMachineMigration.swift */,
 				214209B52421072C00C7BFF3 /* StatusViewController.swift */,
 				F652F72D244E472E00D97950 /* SymptomsPromptViewController.swift */,
 				138114E32450543600BA46C7 /* SymptomStackView.swift */,
@@ -1499,6 +1511,7 @@
 				F694B1BA2459E45100C6A5D1 /* RemoteNotificationDispatchingDouble.swift in Sources */,
 				0991B8B2244FB03E0076C58B /* BluetoothPermissionDeniedViewControllerTests.swift in Sources */,
 				09A925452453807000C5DBC1 /* RegistrationReminderSchedulerTests.swift in Sources */,
+				F6DA0A362469D95F001F0B48 /* StatusStateMachineMigrationTests.swift in Sources */,
 				09B103622444E9110091834D /* ContactEventPersisterDouble.swift in Sources */,
 				098ED48C242E8B290029B729 /* PersistenceDouble.swift in Sources */,
 				F61695A32458B556006AABE3 /* StatusNotificationHandlerTests.swift in Sources */,
@@ -1551,6 +1564,7 @@
 				09CAA36A2440FC4500CE93A6 /* PostcodeViewControllerTests.swift in Sources */,
 				F67C5159243E7C1E008E2945 /* SubmitSymptomsViewControllerTests.swift in Sources */,
 				F72EBD4F24361E99009F9328 /* URLSessionTests.swift in Sources */,
+				F6DA0A3A2469DCF7001F0B48 /* StatusStateMachineTests.swift in Sources */,
 				89CE566D24504050004A74D0 /* TrustValidatingURLSessionDelegateTests.swift in Sources */,
 				0983ACCD243E566800DBB336 /* ErrorForTest.swift in Sources */,
 				09E876BC24510F2C009C2628 /* BluetoothNurseryDouble.swift in Sources */,
@@ -1610,6 +1624,7 @@
 				097C93892447986B00E985CF /* TextField.swift in Sources */,
 				090B186F24354D0100870B5D /* RemoteNotificationDispatcher.swift in Sources */,
 				138114E42450543600BA46C7 /* SymptomStackView.swift in Sources */,
+				F6DA0A342469D6BA001F0B48 /* StatusStateMachine.swift in Sources */,
 				895D9E4E24374EFA00573D4D /* AppRouter.swift in Sources */,
 				F758B8C0242CB98C003AE16D /* UIViewController+Storyboarded.swift in Sources */,
 				2115C3E624360427009C0F5B /* GradientBackgroundTableViewCell.swift in Sources */,
@@ -1683,6 +1698,7 @@
 				AEC6A7BC241BD81A00B0237A /* LogoStrapline.swift in Sources */,
 				214209D52423C83C00C7BFF3 /* UploadContactEventsRequest.swift in Sources */,
 				214209D0242396DA00C7BFF3 /* Session.swift in Sources */,
+				F6DA0A382469DCBA001F0B48 /* StatusStateMachineMigration.swift in Sources */,
 				0991B8B92450B8360076C58B /* NotificationPermissionDeniedViewController.swift in Sources */,
 				F6F05A262433C09200FF4B72 /* OnboardingCoordinator.swift in Sources */,
 				F604977224549B7B002B8503 /* LinkingIdManager.swift in Sources */,
