@@ -18,7 +18,6 @@ class PersistenceDouble: Persisting {
     var partialPostcode: String?
     var bluetoothPermissionRequested: Bool
     var uploadLog: [UploadLog]
-    var linkingId: LinkingId?
     var lastInstalledVersion: String?
     var lastInstalledBuildNumber: String?
     var acknowledgmentUrls: Set<URL>
@@ -42,7 +41,6 @@ class PersistenceDouble: Persisting {
         self.potentiallyExposed = potentiallyExposed
         self.bluetoothPermissionRequested = bluetoothPermissionRequested
         self.uploadLog = uploadLog
-        self.linkingId = linkingId
         self.lastInstalledVersion = lastInstalledVersion
         self.lastInstalledBuildNumber = lastInstalledBuildNumber
         self.acknowledgmentUrls = acknowledgmentUrls
@@ -55,7 +53,6 @@ class PersistenceDouble: Persisting {
         potentiallyExposed = nil
         bluetoothPermissionRequested = false
         uploadLog = []
-        linkingId = nil
         lastInstalledVersion = nil
         lastInstalledBuildNumber = nil
         acknowledgmentUrls = []

@@ -77,7 +77,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     lazy var linkingIdManager: LinkingIdManaging = LinkingIdManager(
-        notificationCenter: notificationCenter,
         persisting: persistence,
         session: urlSession
     )

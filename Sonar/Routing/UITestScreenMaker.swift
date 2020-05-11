@@ -75,7 +75,6 @@ private class InMemoryPersistence: Persisting {
     var partialPostcode: String? = nil
     var bluetoothPermissionRequested: Bool = false
     var uploadLog: [UploadLog] = []
-    var linkingId: LinkingId?
     var lastInstalledVersion: String?
     var lastInstalledBuildNumber: String?
     var acknowledgmentUrls: Set<URL> = []
@@ -86,7 +85,6 @@ private class InMemoryPersistence: Persisting {
         selfDiagnosis = nil
         partialPostcode = nil
         uploadLog = []
-        linkingId = nil
         lastInstalledVersion = nil
         lastInstalledBuildNumber = nil
         acknowledgmentUrls = []
