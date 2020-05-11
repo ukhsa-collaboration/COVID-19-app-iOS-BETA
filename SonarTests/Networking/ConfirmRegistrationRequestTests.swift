@@ -63,7 +63,7 @@ class ConfirmRegistrationRequestTests: XCTestCase {
         """.data(using: .utf8)!
         let response = try? request.parse(responseData)
 
-        XCTAssertEqual(response?.id, serverGeneratedId)
+        XCTAssertEqual(response?.sonarId, serverGeneratedId)
         XCTAssertEqual(response?.secretKey, symmetricKey)
         XCTAssertEqual(response?.serverPublicKey, serverPublicKey)
     }

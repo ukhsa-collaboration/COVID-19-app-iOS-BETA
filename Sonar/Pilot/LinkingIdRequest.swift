@@ -19,7 +19,7 @@ class LinkingIdRequest: SecureRequest, Request {
     let decoder = JSONDecoder()
 
     init(registration: Registration) {
-        urlable = .path("/api/residents/\(registration.id.uuidString)/linking-id")
+        urlable = .path("/api/residents/\(registration.sonarId.uuidString)/linking-id")
 
         let bodyData = "{}".data(using: .utf8)!
         method = .put(data: bodyData)

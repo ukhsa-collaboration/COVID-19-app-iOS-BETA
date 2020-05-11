@@ -52,14 +52,14 @@ struct ConfirmRegistrationResponse: Decodable {
         case id, secretKey, publicKey
     }
     
-    let id: UUID
+    let sonarId: UUID
     let secretKey: HMACKey
     let serverPublicKey: Data
 
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
 
-        let id = try values.decode(UUID.self, forKey: .id)
+        let sonarId = try values.decode(UUID.self, forKey: .id)
 
         let base64SymmetricKey = try values.decode(String.self, forKey: .secretKey)
         guard let secretKeyData = Data(base64Encoded: base64SymmetricKey) else {
@@ -71,11 +71,11 @@ struct ConfirmRegistrationResponse: Decodable {
             throw DecodingError.dataCorruptedError(forKey: .publicKey, in: values, debugDescription: "Invalid base64 value")
         }
         
-        self.init(id: id, secretKey: HMACKey(data: secretKeyData), serverPublicKey: serverPublicKey)
+        self.init(sonarId: sonarId, secretKey: HMACKey(data: secretKeyData), serverPublicKey: serverPublicKey)
     }
     
-    init(id: UUID, secretKey: HMACKey, serverPublicKey: Data) {
-        self.id = id
+    init(sonarId: UUID, secretKey: HMACKey, serverPublicKey: Data) {
+        self.sonarId = sonarId
         self.secretKey = secretKey
         self.serverPublicKey = serverPublicKey
     }

@@ -11,13 +11,8 @@ import Security
 import Logging
 
 struct PartialRegistration: Codable, Equatable {
-    let id: UUID
+    let sonarId: UUID
     let secretKey: HMACKey
-
-    init(id: UUID, secretKey: HMACKey) {
-        self.id = id
-        self.secretKey = secretKey
-    }
 }
 
 class SecureRegistrationStorage {
@@ -53,7 +48,7 @@ class SecureRegistrationStorage {
                 return nil
         }
 
-        return PartialRegistration(id: id, secretKey: HMACKey(data: data))
+        return PartialRegistration(sonarId: id, secretKey: HMACKey(data: data))
     }
 
     func set(registration: PartialRegistration) throws {
@@ -62,7 +57,7 @@ class SecureRegistrationStorage {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: secService,
-            kSecAttrAccount as String: registration.id.uuidString,
+            kSecAttrAccount as String: registration.sonarId.uuidString,
             kSecValueData as String: registration.secretKey.data,
             kSecAttrAccessible as String: kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly,
         ]

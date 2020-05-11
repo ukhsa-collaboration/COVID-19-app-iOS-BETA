@@ -19,7 +19,7 @@ class ConcreteBroadcastIdEncrypterProviderTests: XCTestCase {
     }
     
     func testReturnsRealEncrypterWhenSonarIdAndSecKeyPresent() {
-        let registration = Registration(id: UUID(), secretKey: SecKey.sampleHMACKey, broadcastRotationKey: SecKey.sampleEllipticCurveKey)
+        let registration = Registration(sonarId: UUID(), secretKey: SecKey.sampleHMACKey, broadcastRotationKey: SecKey.sampleEllipticCurveKey)
         let persistence = PersistenceDouble(registration: registration)
         let provider = ConcreteBroadcastIdEncrypterProvider(persistence: persistence)
         

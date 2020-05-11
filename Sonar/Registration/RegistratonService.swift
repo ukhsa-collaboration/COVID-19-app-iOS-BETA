@@ -151,7 +151,7 @@ class ConcreteRegistrationService: RegistrationService {
                 }
                 
                 let registration = Registration(
-                    id: response.id,
+                    sonarId: response.sonarId,
                     secretKey: response.secretKey,
                     broadcastRotationKey: broadcastRotationKey
                 )

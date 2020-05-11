@@ -14,17 +14,9 @@ struct HMACKey: Equatable, Codable {
 }
 
 struct Registration: Equatable {
-    
-    let id: UUID
+    let sonarId: UUID
     let secretKey: HMACKey
     let broadcastRotationKey: SecKey
-
-    init(id: UUID, secretKey: HMACKey, broadcastRotationKey: SecKey) {
-        self.id = id
-        self.secretKey = secretKey
-        self.broadcastRotationKey = broadcastRotationKey
-    }
-
 }
 
 protocol Persisting {
@@ -98,7 +90,7 @@ class Persistence: Persisting {
                 return nil
             }
                         
-            return Registration(id: partial.id, secretKey: partial.secretKey, broadcastRotationKey: broadcastRotationKey)
+            return Registration(sonarId: partial.sonarId, secretKey: partial.secretKey, broadcastRotationKey: broadcastRotationKey)
         }
         
         set {
@@ -107,7 +99,7 @@ class Persistence: Persisting {
                 return
             }
 
-            let partial = PartialRegistration(id: registration.id, secretKey: registration.secretKey)
+            let partial = PartialRegistration(sonarId: registration.sonarId, secretKey: registration.secretKey)
             try! secureRegistrationStorage.set(registration: partial)
             try! broadcastKeyStorage.save(publicKey: registration.broadcastRotationKey)
 

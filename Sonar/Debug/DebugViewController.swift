@@ -130,7 +130,7 @@ class DebugViewController: UITableViewController, Storyboarded {
                     throw NSError()
                 }
                 let delay = 15
-                let request = TestPushRequest(key: registration.secretKey, sonarId: registration.id, delay: delay)
+                let request = TestPushRequest(key: registration.secretKey, sonarId: registration.sonarId, delay: delay)
                 URLSession.shared.execute(request, queue: .main) { result in
                     switch result {
                     case .success:
@@ -150,11 +150,11 @@ class DebugViewController: UITableViewController, Storyboarded {
                 return
             }
 
-            let id = debugInfo.registrationId
+            let sonarId = debugInfo.registrationId
             let secretKey = debugInfo.registrationSecretKey
             let broadcastKeyS = debugInfo.registrationBroadcastRotationKey
             let broadcastKey = try! BroadcastRotationKeyConverter().fromData(Data(base64Encoded: broadcastKeyS)!)
-            persisting.registration = Registration(id: UUID(uuidString: id)!, secretKey: HMACKey(data: secretKey.data(using: .utf8)!), broadcastRotationKey: broadcastKey)
+            persisting.registration = Registration(sonarId: UUID(uuidString: sonarId)!, secretKey: HMACKey(data: secretKey.data(using: .utf8)!), broadcastRotationKey: broadcastKey)
 
             #else
 
