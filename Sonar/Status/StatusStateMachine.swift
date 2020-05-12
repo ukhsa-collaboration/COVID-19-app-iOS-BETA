@@ -33,14 +33,24 @@ class StatusStateMachine {
         }
 
         switch state {
-        case .ok, .exposed:
+        case .ok(let ok):
             let startOfStartDate = Calendar.current.startOfDay(for: startDate)
             let expiryDate = Calendar.current.nextDate(
                 after: Calendar.current.date(byAdding: .day, value: 7, to: startOfStartDate)!,
                 matching: DateComponents(hour: 7),
                 matchingPolicy: .nextTime
             )!
-            state = .symptomatic(StatusState.Symptomatic(symptoms: symptoms, expiryDate: expiryDate))
+            let symptomatic = StatusState.Symptomatic(symptoms: symptoms, expiryDate: expiryDate)
+            transition(from: ok, to: symptomatic)
+        case .exposed(let exposed):
+            let startOfStartDate = Calendar.current.startOfDay(for: startDate)
+            let expiryDate = Calendar.current.nextDate(
+                after: Calendar.current.date(byAdding: .day, value: 7, to: startOfStartDate)!,
+                matching: DateComponents(hour: 7),
+                matchingPolicy: .nextTime
+            )!
+            let symptomatic = StatusState.Symptomatic(symptoms: symptoms, expiryDate: expiryDate)
+            transition(from: exposed, to: symptomatic)
         case .symptomatic, .checkin:
             assertionFailure("Self-diagnosing is only allowed from ok/exposed")
         }
@@ -54,15 +64,7 @@ class StatusStateMachine {
             guard dateProvider() >= symptomatic.expiryDate else { return }
             state = .checkin(StatusState.Checkin(symptoms: symptomatic.symptoms, checkinDate: symptomatic.expiryDate))
         case .exposed(let exposed):
-            let fourteenDaysLater = Calendar.current.nextDate(
-                after: Calendar.current.date(byAdding: .day, value: 13, to: exposed.exposureDate)!,
-                matching: DateComponents(hour: 7),
-                matchingPolicy: .nextTime
-            )!
-
-            guard dateProvider() >= fourteenDaysLater else { return }
-
-            state = .ok(StatusState.Ok())
+            transition(from: exposed, to: StatusState.Ok())
         }
     }
 
@@ -83,24 +85,65 @@ class StatusStateMachine {
                     matching: DateComponents(hour: 7),
                     matchingPolicy: .nextTime
                 )!
-                state = .checkin(StatusState.Checkin(symptoms: symptoms, checkinDate: nextCheckin))
+                transition(
+                    from: checkin,
+                    to: StatusState.Checkin(symptoms: symptoms, checkinDate: nextCheckin)
+                )
             } else {
-                state = .ok(StatusState.Ok())
+                transition(from: checkin, to: StatusState.Ok())
             }
         }
     }
 
     func exposed() {
         switch state {
-        case .ok:
-            let date = dateProvider()
-            state = .exposed(StatusState.Exposed(exposureDate: date))
+        case .ok(let ok):
+            transition(from: ok, to: StatusState.Exposed(exposureDate: dateProvider()))
         case .exposed:
             assertionFailure("The server should never send us another exposure notification if we're already exposed")
             break // ignore repeated exposures
         case .symptomatic, .checkin:
             break // don't care about exposures if we're already symptomatic
         }
+    }
+
+    // MARK: - Transitions
+
+    private func transition(from ok: StatusState.Ok, to symptomatic: StatusState.Symptomatic) {
+        state = .symptomatic(symptomatic)
+    }
+
+    private func transition(from exposed: StatusState.Exposed, to symptomatic: StatusState.Symptomatic) {
+        state = .symptomatic(symptomatic)
+    }
+
+    private func transition(from exposed: StatusState.Exposed, to ok: StatusState.Ok) {
+        let fourteenDaysLater = Calendar.current.nextDate(
+            after: Calendar.current.date(byAdding: .day, value: 13, to: exposed.exposureDate)!,
+            matching: DateComponents(hour: 7),
+            matchingPolicy: .nextTime
+        )!
+
+        guard dateProvider() >= fourteenDaysLater else { return }
+
+        state = .ok(ok)
+    }
+
+    private func transition(from previous: StatusState.Checkin, to next: StatusState.Checkin) {
+        guard next.symptoms.contains(.temperature) else {
+            assertionFailure("Can only transistion from checkin to another checkin if you have a temperature")
+            return
+        }
+
+        state = .checkin(next)
+    }
+
+    private func transition(from checkin: StatusState.Checkin, to ok: StatusState.Ok) {
+        state = .ok(ok)
+    }
+
+    private func transition(from ok: StatusState.Ok, to exposed: StatusState.Exposed) {
+        state = .exposed(exposed)
     }
 
 }
