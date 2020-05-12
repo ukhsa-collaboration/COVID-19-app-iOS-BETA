@@ -20,7 +20,7 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="134"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="Isf-ek-wrS">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="170"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="105"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reference code" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cjQ-x6-Kok">
                                                 <rect key="frame" x="16" y="16" width="382" height="20.5"/>
@@ -41,19 +41,11 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error fetching App ID" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwU-V9-8IW" customClass="ErrorLabel" customModule="Sonar" customModuleProvider="target">
-                                                <rect key="frame" x="16" y="105" width="382" height="0.0"/>
+                                                <rect key="frame" x="16" y="89" width="382" height="0.0"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ajc-5y-6oC" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
-                                                <rect key="frame" x="16" y="121" width="382" height="33"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                <state key="normal" title="Close"/>
-                                                <connections>
-                                                    <segue destination="IWe-bN-JgZ" kind="unwind" identifier="UnwindFromLinkingId" unwindAction="unwindFromLinkingIdWithUnwindSegue:" id="Zhh-Zk-59a"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <directionalEdgeInsets key="directionalLayoutMargins" top="16" leading="16" bottom="16" trailing="16"/>
                                     </stackView>
@@ -70,7 +62,7 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="gwV-eb-6U9"/>
                             </scrollView>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="YNb-EQ-dKb">
-                                <rect key="frame" x="374" y="157" width="20" height="20"/>
+                                <rect key="frame" x="374" y="127" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -84,7 +76,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="L7M-kP-6XK"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Testing information" id="K44-qv-yGH"/>
+                    <navigationItem key="navigationItem" title="Testing information" id="K44-qv-yGH">
+                        <barButtonItem key="rightBarButtonItem" title="Close" id="FMq-gx-xYa">
+                            <connections>
+                                <segue destination="IWe-bN-JgZ" kind="unwind" unwindAction="unwindFromLinkingIdWithUnwindSegue:" id="WuZ-oS-lhY"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="414" height="222"/>
                     <connections>
