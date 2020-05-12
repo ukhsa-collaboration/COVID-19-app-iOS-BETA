@@ -5,8 +5,8 @@ set -e
 # collect commits that have been changed
 commits=$(git rev-list last-commit-to-run-on-ci..HEAD)
 
-# gather the stories that need to be updated                 #find [#story_ids]   #capture id from backets          #remove whitespace
-story_ids=$(echo $commits | xargs git log --format=%B -n 1 | grep "\[#"           | sed 's/\[#\([0-9]*\)\]/\1/'     | sed -e 's/^[ \t]*//')
+# gather the stories that need to be updated                 #find [#story_ids]            #capture id from backets          #remove whitespace
+story_ids=$(echo $commits | xargs git log --format=%B -n 1 | grep "\[Finishes #"           | sed 's/\[#\([0-9]*\)\]/\1/'     | sed -e 's/^[ \t]*//')
 
 # get the current testflight build
 PLIST=Sonar/Info.plist
