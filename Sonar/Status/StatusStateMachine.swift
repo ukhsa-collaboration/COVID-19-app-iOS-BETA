@@ -34,22 +34,10 @@ class StatusStateMachine {
 
         switch state {
         case .ok(let ok):
-            let startOfStartDate = Calendar.current.startOfDay(for: startDate)
-            let expiryDate = Calendar.current.nextDate(
-                after: Calendar.current.date(byAdding: .day, value: 7, to: startOfStartDate)!,
-                matching: DateComponents(hour: 7),
-                matchingPolicy: .nextTime
-            )!
-            let symptomatic = StatusState.Symptomatic(symptoms: symptoms, expiryDate: expiryDate)
+            let symptomatic = StatusState.Symptomatic(symptoms: symptoms, startDate: startDate)
             transition(from: ok, to: symptomatic)
         case .exposed(let exposed):
-            let startOfStartDate = Calendar.current.startOfDay(for: startDate)
-            let expiryDate = Calendar.current.nextDate(
-                after: Calendar.current.date(byAdding: .day, value: 7, to: startOfStartDate)!,
-                matching: DateComponents(hour: 7),
-                matchingPolicy: .nextTime
-            )!
-            let symptomatic = StatusState.Symptomatic(symptoms: symptoms, expiryDate: expiryDate)
+            let symptomatic = StatusState.Symptomatic(symptoms: symptoms, startDate: startDate)
             transition(from: exposed, to: symptomatic)
         case .symptomatic, .checkin:
             assertionFailure("Self-diagnosing is only allowed from ok/exposed")

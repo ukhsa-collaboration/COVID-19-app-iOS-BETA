@@ -53,7 +53,7 @@ class StatusStateMigration {
                 return .symptomatic(
                     StatusState.Symptomatic(
                         symptoms: diagnosis.symptoms,
-                        expiryDate: diagnosis.expiryDate
+                        startDate: diagnosis.startDate
                     )
                 )
             }
