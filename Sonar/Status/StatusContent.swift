@@ -20,12 +20,12 @@ struct StatusContent: Decodable {
     let amber: StatusLinks
     let red: StatusLinks
 
-    subscript(status: Status) -> StatusLinks {
+    subscript(statusState: StatusState) -> StatusLinks {
         get {
-            switch status {
-            case .blue: return blue
-            case .amber: return amber
-            case .red: return red
+            switch statusState {
+            case .ok: return blue
+            case .symptomatic, .checkin: return amber
+            case .exposed: return red
             }
         }
     }

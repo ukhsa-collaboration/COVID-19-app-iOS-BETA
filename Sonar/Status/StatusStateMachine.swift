@@ -10,7 +10,16 @@ import Foundation
 
 import Logging
 
-class StatusStateMachine {
+protocol StatusStateMachining {
+    var state: StatusState { get }
+
+    func selfDiagnose(symptoms: Set<Symptom>, startDate: Date) throws
+    func tick()
+    func checkin(symptoms: Set<Symptom>)
+    func exposed()
+}
+
+class StatusStateMachine: StatusStateMachining {
 
     static let StatusStateChangedNotification = NSNotification.Name("StatusStateChangedNotification")
 

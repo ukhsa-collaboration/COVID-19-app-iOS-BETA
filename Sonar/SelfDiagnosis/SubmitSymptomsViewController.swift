@@ -19,6 +19,7 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
     private var symptoms: Set<Symptom>!
     private var startDate: Date!
     private var statusViewController: StatusViewController?
+    private var statusStateMachine: StatusStateMachining!
     private var localNotificationScheduler: Scheduler!
 
     func inject(
@@ -27,6 +28,7 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         symptoms: Set<Symptom>,
         startDate: Date,
         statusViewController: StatusViewController?,
+        statusStateMachine: StatusStateMachining,
         localNotificationScheduler: Scheduler
     ) {
         self.persisting = persisting
@@ -34,6 +36,7 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         self.statusViewController = statusViewController
         self.symptoms = symptoms
         self.startDate = startDate
+        self.statusStateMachine = statusStateMachine
         self.localNotificationScheduler = localNotificationScheduler
     }
 
@@ -66,29 +69,16 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         isSubmitting = true
 
         do {
+            // TODO: Don't assume we're being presented
             navigationController?.dismiss(animated: true, completion: nil)
-            
-            let hasCough = symptoms.contains(.cough)
-            var selfDiagnosis = SelfDiagnosis(type: .initial, symptoms: symptoms, startDate: startDate, daysToLive: 7)
-                    
-            if symptoms.contains(.temperature) || (hasCough && !selfDiagnosis.hasExpired()) {
-                if selfDiagnosis.hasExpired() {
-                    selfDiagnosis = SelfDiagnosis(type: .subsequent, symptoms: symptoms, startDate: Date(), daysToLive: 1)
-                }
 
-                persisting.selfDiagnosis = selfDiagnosis
-
-                // This needs to go after persisting the self-diagnosis
-                try contactEventsUploader.upload(from: startDate)
-
-                localNotificationScheduler.scheduleDiagnosisNotification(expiryDate: selfDiagnosis.expiryDate)
-            } else {
-                if hasCough {
-                    statusViewController?.updatePrompt()
-                }
-                persisting.selfDiagnosis = nil
+            switch statusStateMachine.state {
+            case .ok, .exposed:
+                try statusStateMachine.selfDiagnose(symptoms: symptoms, startDate: startDate)
+            case .symptomatic, .checkin:
+                assertionFailure("We should only be able to submit symptoms from ok/exposed")
+                return
             }
-            
         } catch {
             alert(with: Error())
         }

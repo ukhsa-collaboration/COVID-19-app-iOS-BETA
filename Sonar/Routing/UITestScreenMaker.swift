@@ -36,7 +36,12 @@ struct UITestScreenMaker: ScreenMaking {
                     contactEventsUploader: MockContactEventsUploading(),
                     notificationCenter: NotificationCenter(),
                     linkingIdManager: MockLinkingIdManager(),
-                    statusProvider: StatusProvider(persisting: persistence),
+                    statusStateMachine: StatusStateMachine(
+                        persisting: persistence,
+                        contactEventsUploader: MockContactEventsUploading(),
+                        notificationCenter: NotificationCenter(),
+                        userNotificationCenter: UNUserNotificationCenter.current()
+                    ),
                     localeProvider: FixedLocaleProvider()
                 )
             }
