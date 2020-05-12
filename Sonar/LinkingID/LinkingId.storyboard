@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="0ke-6m-Ube">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,26 +14,67 @@
             <objects>
                 <viewController storyboardIdentifier="LinkingIdViewController" id="2DV-fd-FjU" customClass="LinkingIdViewController" customModule="Sonar" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1xp-lJ-Mpr">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="222"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i7g-54-jA7">
-                                <rect key="frame" x="0.0" y="88" width="414" height="134"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="Isf-ek-wrS">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="105"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="945.5"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reference code" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cjQ-x6-Kok">
-                                                <rect key="frame" x="16" y="16" width="382" height="20.5"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Linking_ID" translatesAutoresizingMaskIntoConstraints="NO" id="4UQ-u7-iXf">
+                                                <rect key="frame" x="16" y="16" width="343" height="218"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Link your test to this app" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hHD-HJ-i75">
+                                                <rect key="frame" x="16" y="266" width="343" height="82"/>
                                                 <accessibility key="accessibilityConfiguration">
                                                     <accessibilityTraits key="traits" staticText="YES" header="YES"/>
                                                 </accessibility>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yI8-lD-3fQ">
+                                                <rect key="frame" x="16" y="380" width="343" height="174.5"/>
+                                                <string key="text">If you get a test you need to enter an app reference code as part of the test registration, so that this app can receive your test restults. You can always find the latest code here, it should be unique for every test you take and you shouldn’t share it with anybody else.
+</string>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7ta-ca-F7E" userLabel="Reference code wrapper">
+                                                <rect key="frame" x="16" y="586.5" width="343" height="128"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your app reference code" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mRf-SJ-wXr">
+                                                        <rect key="frame" x="16" y="8" width="311" height="20.5"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reference code" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cjQ-x6-Kok">
+                                                        <rect key="frame" x="16" y="36.5" width="311" height="83.5"/>
+                                                        <accessibility key="accessibilityConfiguration">
+                                                            <accessibilityTraits key="traits" staticText="YES" header="YES"/>
+                                                        </accessibility>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" name="NHS Grey 4"/>
+                                                <constraints>
+                                                    <constraint firstItem="cjQ-x6-Kok" firstAttribute="leading" secondItem="7ta-ca-F7E" secondAttribute="leading" constant="16" id="1bY-kq-V0S"/>
+                                                    <constraint firstAttribute="trailing" secondItem="mRf-SJ-wXr" secondAttribute="trailing" constant="16" id="2jG-fh-1Zy"/>
+                                                    <constraint firstAttribute="bottom" secondItem="cjQ-x6-Kok" secondAttribute="bottom" constant="8" id="Ivn-r1-IR3"/>
+                                                    <constraint firstItem="mRf-SJ-wXr" firstAttribute="leading" secondItem="7ta-ca-F7E" secondAttribute="leading" constant="16" id="N5U-lp-FhN"/>
+                                                    <constraint firstItem="cjQ-x6-Kok" firstAttribute="top" secondItem="mRf-SJ-wXr" secondAttribute="bottom" constant="8" id="T1s-01-24Y"/>
+                                                    <constraint firstItem="mRf-SJ-wXr" firstAttribute="top" secondItem="7ta-ca-F7E" secondAttribute="top" constant="8" id="cXM-57-3de"/>
+                                                    <constraint firstAttribute="trailing" secondItem="cjQ-x6-Kok" secondAttribute="trailing" constant="16" id="h6F-DN-I7P"/>
+                                                </constraints>
+                                            </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fetching reference code" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JMq-Gh-7Cj">
-                                                <rect key="frame" x="16" y="68.5" width="382" height="20.5"/>
+                                                <rect key="frame" x="16" y="746.5" width="343" height="20.5"/>
                                                 <accessibility key="accessibilityConfiguration">
                                                     <accessibilityTraits key="traits" staticText="YES" updatesFrequently="YES"/>
                                                 </accessibility>
@@ -41,7 +83,15 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error fetching App ID" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwU-V9-8IW" customClass="ErrorLabel" customModule="Sonar" customModuleProvider="target">
-                                                <rect key="frame" x="16" y="89" width="382" height="0.0"/>
+                                                <rect key="frame" x="16" y="783" width="343" height="0.0"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xpe-BP-5fJ">
+                                                <rect key="frame" x="16" y="799" width="343" height="130.5"/>
+                                                <string key="text">By having accurate data the app can improve notifications for people you have been in contact with and let them know that their risk of having coronavirus is either lower or higher. 
+</string>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -62,7 +112,7 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="gwV-eb-6U9"/>
                             </scrollView>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="YNb-EQ-dKb">
-                                <rect key="frame" x="374" y="127" width="20" height="20"/>
+                                <rect key="frame" x="335" y="468.5" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -84,7 +134,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="414" height="222"/>
                     <connections>
                         <outlet property="activityIndicator" destination="YNb-EQ-dKb" id="61Q-CF-I1q"/>
                         <outlet property="errorLabel" destination="hwU-V9-8IW" id="sbD-2I-Hqk"/>
@@ -102,7 +151,7 @@
                 <navigationController title="LinkingIdNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" id="0ke-6m-Ube" customClass="LinkingIdNavigationController" customModule="Sonar" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="dMJ-KS-bmp">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -118,4 +167,10 @@
             <point key="canvasLocation" x="155.07246376811597" y="97.767857142857139"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Linking_ID" width="326" height="218"/>
+        <namedColor name="NHS Grey 4">
+            <color red="0.84705882352941175" green="0.8666666666666667" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>
