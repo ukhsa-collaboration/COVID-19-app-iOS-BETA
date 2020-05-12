@@ -161,12 +161,9 @@ class StatusViewController: UIViewController, Storyboarded {
     }
 
     @IBAction func linkingIdButtonTapped() {
-        let linkingIdVc = LinkingIdViewController.instantiate()
-        linkingIdVc.inject(persisting: persistence, linkingIdManager: linkingIdManager)
-        let navigationController = UINavigationController()
-        navigationController.modalPresentationStyle = .fullScreen
-        navigationController.viewControllers = [linkingIdVc]
-        present(navigationController, animated: true)
+        let vc = LinkingIdViewController.instantiate()
+        vc.inject(persisting: persistence, linkingIdManager: linkingIdManager)
+        showDrawer(vc)
     }
 
     private func showDrawer(_ vc: UIViewController) {

@@ -18,10 +18,10 @@ class PersistenceDouble: Persisting {
     var partialPostcode: String?
     var bluetoothPermissionRequested: Bool
     var uploadLog: [UploadLog]
+    var linkingId: LinkingId?
     var lastInstalledVersion: String?
     var lastInstalledBuildNumber: String?
     var acknowledgmentUrls: Set<URL>
-    var statusState: StatusState
 
     init(
         potentiallyExposed: Date? = nil,
@@ -33,8 +33,7 @@ class PersistenceDouble: Persisting {
         linkingId: LinkingId? = nil,
         lastInstalledVersion: String? = nil,
         lastInstalledBuildNumber: String? = nil,
-        acknowledgmentUrls: Set<URL> = [],
-        statusState: StatusState = .ok(StatusState.Ok())
+        acknowledgmentUrls: Set<URL> = []
     ) {
         self.registration = registration
         self.potentiallyExposed = potentiallyExposed
@@ -43,10 +42,10 @@ class PersistenceDouble: Persisting {
         self.potentiallyExposed = potentiallyExposed
         self.bluetoothPermissionRequested = bluetoothPermissionRequested
         self.uploadLog = uploadLog
+        self.linkingId = linkingId
         self.lastInstalledVersion = lastInstalledVersion
         self.lastInstalledBuildNumber = lastInstalledBuildNumber
         self.acknowledgmentUrls = acknowledgmentUrls
-        self.statusState = statusState
     }
 
     func clear() {
@@ -56,9 +55,9 @@ class PersistenceDouble: Persisting {
         potentiallyExposed = nil
         bluetoothPermissionRequested = false
         uploadLog = []
+        linkingId = nil
         lastInstalledVersion = nil
         lastInstalledBuildNumber = nil
         acknowledgmentUrls = []
-        statusState = .ok(StatusState.Ok())
     }
 }

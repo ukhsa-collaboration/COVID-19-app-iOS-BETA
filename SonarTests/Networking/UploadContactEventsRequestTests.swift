@@ -45,7 +45,7 @@ class UploadContactEventsRequestTests: XCTestCase {
 
         contactEvents = [
             ContactEvent(broadcastPayload: payload1, txPower: 11, timestamp: timestamp1, rssiValues: rssiValues1, rssiTimestamps: rssiTimestamps1, duration: 0),
-            ContactEvent(broadcastPayload: payload2 /* txPower deliberately omitted */, timestamp: timestamp2, rssiValues: rssiValues2, rssiTimestamps: rssiTimestamps2, duration: 0),
+            ContactEvent(broadcastPayload: payload2, txPower: 22, timestamp: timestamp2, rssiValues: rssiValues2, rssiTimestamps: rssiTimestamps2, duration: 0),
             ContactEvent(broadcastPayload: payload3, txPower: 33, timestamp: timestamp3, rssiValues: rssiValues3, rssiTimestamps: rssiTimestamps3, duration: 0)
         ]
 
@@ -106,7 +106,7 @@ class UploadContactEventsRequestTests: XCTestCase {
       "duration" : 0,
       "countryCode" : 2,
       "encryptedRemoteContactId" : "AAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-      "txPowerAdvertised" : -128,
+      "txPowerAdvertised" : 22,
       "timestamp" : 10
     },
     {

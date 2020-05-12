@@ -12,8 +12,8 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: Remove old artifacts
-        uses: c-hive/gha-remove-artifacts@24dc233 # v1.2.0
+        uses: c-hive/gha-remove-artifacts@v1
         with:
           age: 7 days
-          skip-tags: true
+          skip-tags: false
         continue-on-error: true

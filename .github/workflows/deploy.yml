@@ -10,7 +10,7 @@ jobs:
       - macos
     steps:
       - name: Checkout Project
-        uses: actions/checkout@01aeccc # v2.1.0
+        uses: actions/checkout@v2
 
       - name: Switch to Xcode 11
         run: sudo xcode-select -s /Applications/Xcode_11.app
@@ -47,7 +47,7 @@ jobs:
 
       - name: Upload IPA
         if: always() # If the fastlane release fails, we can upload it manually
-        uses: actions/upload-artifact@e7eefc4 # v2
+        uses: actions/upload-artifact@v1
         with:
           name: Sonar.ipa
           path: Sonar.ipa
@@ -58,7 +58,7 @@ jobs:
         continue-on-error: true
 
       - name: Upload App Report
-        uses: actions/upload-artifact@e7eefc4 # v2
+        uses: actions/upload-artifact@v1
         with:
           name: AppReport
           path: Reporting/AppReport
@@ -68,7 +68,7 @@ jobs:
       - name: Get Job Status
         id: job-status
         if: always()
-        run: echo "::set-output name=deployment-status::$(echo ${{ job.status }} | tr '[:upper:]' '[:lower:]')"
+        run: echo "::set-output name=status::$(echo ${{ job.status }} | tr '[:upper:]' '[:lower:]')"
 
       - name: Update Deployment Status
         if: always()
@@ -104,7 +104,7 @@ jobs:
       - name: Notify Slack on Upload
         env:
           SLACK_BOT_TOKEN: ${{ secrets.slack_bot_token }}
-        uses: voxmedia/github-action-slack-notify-build@5125947 # v1.1.1
+        uses: voxmedia/github-action-slack-notify-build@v1
         with:
           channel_id: G011ZPSAD4J
           status: UPLOADED [(${{ steps.get-build-number.outputs.build-number }})]
@@ -113,7 +113,7 @@ jobs:
         if: failure()
         env:
           SLACK_BOT_TOKEN: ${{ secrets.slack_bot_token }}
-        uses: voxmedia/github-action-slack-notify-build@5125947 # v1.1.1
+        uses: voxmedia/github-action-slack-notify-build@v1
         with:
           channel_id: G011ZPSAD4J
           status: FAILED

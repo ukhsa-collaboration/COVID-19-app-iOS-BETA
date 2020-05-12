@@ -38,7 +38,7 @@ class SonarBroadcastPayloadGenerator: BroadcastPayloadGenerator {
 
         var calendar = Calendar.current
         calendar.timeZone = TimeZone(identifier: "UTC")!
-        if let (broadcastId, broadcastIdDate) = storage.readBroadcastId(), calendar.isDate(broadcastIdDate, inSameDayAs: date) {
+        if let (broadcastId, broadcastIdDate) = storage.readBroadcastId(), calendar.isDateInToday(broadcastIdDate) {
             return BroadcastPayload(cryptogram: broadcastId, hmacKey: hmacKey)
         }
         

@@ -230,7 +230,7 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="POh-1R-IfZ" userLabel="Red Status">
-                                                                <rect key="frame" x="0.0" y="667" width="382" height="112.5"/>
+                                                                <rect key="frame" x="0.0" y="667" width="382" height="189"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gbo-jS-eOA">
                                                                         <rect key="frame" x="0.0" y="0.0" width="382" height="112.5"/>
@@ -275,10 +275,46 @@
                                                                             <constraint firstItem="Zfg-lL-ZYx" firstAttribute="leading" secondItem="Gbo-jS-eOA" secondAttribute="leading" id="zQ5-WH-6eh"/>
                                                                         </constraints>
                                                                     </view>
+                                                                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="66c-tO-6TF" userLabel="Linking Id" customClass="UIButton">
+                                                                        <rect key="frame" x="0.0" y="120.5" width="382" height="68.5"/>
+                                                                        <subviews>
+                                                                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bxy-UB-mQx" userLabel="Background" customClass="SmartInvertBorderView" customModule="Sonar" customModuleProvider="target">
+                                                                                <rect key="frame" x="-16" y="0.0" width="414" height="68.5"/>
+                                                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                            </view>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show my reference code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="83N-ku-1gM">
+                                                                                <rect key="frame" x="0.0" y="24" width="358" height="20.5"/>
+                                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                                <color key="textColor" name="NHS Text"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Disclosure_Indicator" translatesAutoresizingMaskIntoConstraints="NO" id="Cgp-WI-L6F" customClass="AutoscalingImageView" customModule="Sonar" customModuleProvider="target">
+                                                                                <rect key="frame" x="358" y="22.5" width="24" height="24"/>
+                                                                            </imageView>
+                                                                        </subviews>
+                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                        <accessibility key="accessibilityConfiguration">
+                                                                            <accessibilityTraits key="traits" button="YES"/>
+                                                                            <bool key="isElement" value="YES"/>
+                                                                        </accessibility>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="bottom" secondItem="bxy-UB-mQx" secondAttribute="bottom" id="Amf-m2-B3T"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="83N-ku-1gM" secondAttribute="trailing" constant="24" id="HJk-dx-Ukc"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="83N-ku-1gM" secondAttribute="bottom" constant="24" id="Hqo-wF-p3N"/>
+                                                                            <constraint firstItem="Cgp-WI-L6F" firstAttribute="centerY" secondItem="83N-ku-1gM" secondAttribute="centerY" id="J2j-dC-KS7"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="Cgp-WI-L6F" secondAttribute="trailing" id="LU4-WQ-rfl"/>
+                                                                            <constraint firstItem="83N-ku-1gM" firstAttribute="top" secondItem="66c-tO-6TF" secondAttribute="top" constant="24" id="XZ5-Ul-w4B"/>
+                                                                            <constraint firstItem="83N-ku-1gM" firstAttribute="leading" secondItem="66c-tO-6TF" secondAttribute="leading" id="gvb-7h-hmg"/>
+                                                                            <constraint firstItem="bxy-UB-mQx" firstAttribute="top" secondItem="66c-tO-6TF" secondAttribute="top" id="rL5-Wj-Prj"/>
+                                                                        </constraints>
+                                                                        <connections>
+                                                                            <action selector="linkingIdButtonTapped" destination="HPa-EI-l5D" eventType="touchUpInside" id="cDV-HO-xiD"/>
+                                                                        </connections>
+                                                                    </view>
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Ghk-8F-7gV" userLabel="NHS Coronavirus">
-                                                                <rect key="frame" x="0.0" y="811.5" width="382" height="278.5"/>
+                                                                <rect key="frame" x="0.0" y="888" width="382" height="302.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you need urgent medical advice or want further information, go to" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zqt-gJ-Jrb">
                                                                         <rect key="frame" x="0.0" y="0.0" width="382" height="42.5"/>
@@ -287,7 +323,7 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2UL-Ea-jl7" customClass="LinkButton" customModule="Sonar" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="42.5" width="382" height="236"/>
+                                                                        <rect key="frame" x="0.0" y="42.5" width="382" height="260"/>
                                                                         <accessibility key="accessibilityConfiguration">
                                                                             <accessibilityTraits key="traits" link="YES"/>
                                                                         </accessibility>
@@ -302,7 +338,7 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="Tgy-0K-l2M" userLabel="Instructions for healthcare workers" customClass="UIControl">
-                                                                <rect key="frame" x="0.0" y="1122" width="382" height="68.5"/>
+                                                                <rect key="frame" x="0.0" y="1222.5" width="382" height="68.5"/>
                                                                 <subviews>
                                                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yI5-J1-igp" userLabel="Background" customClass="SmartInvertBorderView" customModule="Sonar" customModuleProvider="target">
                                                                         <rect key="frame" x="-16" y="0.0" width="414" height="68.5"/>
@@ -337,42 +373,6 @@
                                                                     <action selector="medicalWorkerButtonTapped" destination="HPa-EI-l5D" eventType="touchUpInside" id="hdT-nM-cTC"/>
                                                                 </connections>
                                                             </view>
-                                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="66c-tO-6TF" userLabel="Linking Id" customClass="UIButton">
-                                                                <rect key="frame" x="0.0" y="1222.5" width="382" height="68.5"/>
-                                                                <subviews>
-                                                                    <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bxy-UB-mQx" userLabel="Background" customClass="SmartInvertBorderView" customModule="Sonar" customModuleProvider="target">
-                                                                        <rect key="frame" x="-16" y="0.0" width="414" height="68.5"/>
-                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                                                    </view>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Testing Information" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="83N-ku-1gM">
-                                                                        <rect key="frame" x="0.0" y="24" width="358" height="20.5"/>
-                                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                                        <color key="textColor" name="NHS Text"/>
-                                                                        <nil key="highlightedColor"/>
-                                                                    </label>
-                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Disclosure_Indicator" translatesAutoresizingMaskIntoConstraints="NO" id="Cgp-WI-L6F" customClass="AutoscalingImageView" customModule="Sonar" customModuleProvider="target">
-                                                                        <rect key="frame" x="358" y="22.5" width="24" height="24"/>
-                                                                    </imageView>
-                                                                </subviews>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                                                <accessibility key="accessibilityConfiguration">
-                                                                    <accessibilityTraits key="traits" button="YES"/>
-                                                                    <bool key="isElement" value="YES"/>
-                                                                </accessibility>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="bottom" secondItem="bxy-UB-mQx" secondAttribute="bottom" id="Amf-m2-B3T"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="83N-ku-1gM" secondAttribute="trailing" constant="24" id="HJk-dx-Ukc"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="83N-ku-1gM" secondAttribute="bottom" constant="24" id="Hqo-wF-p3N"/>
-                                                                    <constraint firstItem="Cgp-WI-L6F" firstAttribute="centerY" secondItem="83N-ku-1gM" secondAttribute="centerY" id="J2j-dC-KS7"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="Cgp-WI-L6F" secondAttribute="trailing" id="LU4-WQ-rfl"/>
-                                                                    <constraint firstItem="83N-ku-1gM" firstAttribute="top" secondItem="66c-tO-6TF" secondAttribute="top" constant="24" id="XZ5-Ul-w4B"/>
-                                                                    <constraint firstItem="83N-ku-1gM" firstAttribute="leading" secondItem="66c-tO-6TF" secondAttribute="leading" id="gvb-7h-hmg"/>
-                                                                    <constraint firstItem="bxy-UB-mQx" firstAttribute="top" secondItem="66c-tO-6TF" secondAttribute="top" id="rL5-Wj-Prj"/>
-                                                                </constraints>
-                                                                <connections>
-                                                                    <action selector="linkingIdButtonTapped" destination="HPa-EI-l5D" eventType="touchUpInside" id="cDV-HO-xiD"/>
-                                                                </connections>
-                                                            </view>
                                                         </subviews>
                                                     </stackView>
                                                 </subviews>
@@ -383,12 +383,12 @@
                                                     <constraint firstAttribute="bottom" secondItem="yKo-tg-9E8" secondAttribute="bottom" constant="32" id="DJA-Yz-SQZ"/>
                                                     <constraint firstAttribute="trailing" secondItem="AH0-Tv-hhe" secondAttribute="trailing" id="DNp-5D-HZc"/>
                                                     <constraint firstItem="yKo-tg-9E8" firstAttribute="top" secondItem="zqL-2l-Yzz" secondAttribute="top" constant="8" id="GEj-9T-4TP"/>
-                                                    <constraint firstItem="bxy-UB-mQx" firstAttribute="leading" secondItem="zqL-2l-Yzz" secondAttribute="leading" id="KQK-Wv-mI8"/>
                                                     <constraint firstAttribute="trailing" secondItem="P4u-2I-dwE" secondAttribute="trailing" id="N9g-ye-vGe"/>
+                                                    <constraint firstAttribute="trailing" secondItem="bxy-UB-mQx" secondAttribute="trailing" id="QaS-ld-20G"/>
                                                     <constraint firstAttribute="trailing" secondItem="yI5-J1-igp" secondAttribute="trailing" id="euL-iV-tP5"/>
                                                     <constraint firstItem="P4u-2I-dwE" firstAttribute="leading" secondItem="zqL-2l-Yzz" secondAttribute="leading" id="kJp-PA-rvw"/>
+                                                    <constraint firstItem="bxy-UB-mQx" firstAttribute="leading" secondItem="zqL-2l-Yzz" secondAttribute="leading" id="nIv-TC-bBX"/>
                                                     <constraint firstItem="yKo-tg-9E8" firstAttribute="leading" secondItem="zqL-2l-Yzz" secondAttribute="leading" constant="16" id="r7b-oc-zOt"/>
-                                                    <constraint firstAttribute="trailing" secondItem="bxy-UB-mQx" secondAttribute="trailing" id="t4Y-sb-glZ"/>
                                                     <constraint firstAttribute="trailing" secondItem="yKo-tg-9E8" secondAttribute="trailing" constant="16" id="w9D-UP-WLE"/>
                                                 </constraints>
                                             </view>
@@ -411,7 +411,6 @@
                         <constraints>
                             <constraint firstItem="eJi-tL-WhS" firstAttribute="trailing" secondItem="KDy-H3-Z6H" secondAttribute="trailing" id="9iA-EN-4Kq"/>
                             <constraint firstItem="eJi-tL-WhS" firstAttribute="leading" secondItem="KDy-H3-Z6H" secondAttribute="leading" id="cRc-4f-5nL"/>
-                            <constraint firstItem="yI5-J1-igp" firstAttribute="leading" secondItem="KDy-H3-Z6H" secondAttribute="leading" id="daA-6y-8IT"/>
                             <constraint firstItem="KDy-H3-Z6H" firstAttribute="top" secondItem="eJi-tL-WhS" secondAttribute="top" id="kpA-z1-Cwp"/>
                             <constraint firstItem="eJi-tL-WhS" firstAttribute="bottom" secondItem="KDy-H3-Z6H" secondAttribute="bottom" id="p2K-16-TtV"/>
                         </constraints>

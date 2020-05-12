@@ -70,7 +70,7 @@ class QuestionSymptomsViewController: UIViewController, Storyboarded {
     
     @objc func longPressedYes(sender: UILongPressGestureRecognizer) {
         if sender.state != UIGestureRecognizer.State.ended {
-            yesButton.layer.borderWidth = 3
+            yesButton.layer.borderWidth = 2
             yesButton.layer.borderColor = UIColor(named: "NHS Highlight")!.withAlphaComponent(0.96).cgColor
         } else {
             yesTapped(self)
@@ -79,7 +79,7 @@ class QuestionSymptomsViewController: UIViewController, Storyboarded {
     
     @objc func longPressedNo(sender: UILongPressGestureRecognizer) {
         if sender.state != UIGestureRecognizer.State.ended {
-            noButton.layer.borderWidth = 3
+            noButton.layer.borderWidth = 2
             noButton.layer.borderColor = UIColor(named: "NHS Highlight")!.withAlphaComponent(0.96).cgColor
         } else {
             noTapped(self)

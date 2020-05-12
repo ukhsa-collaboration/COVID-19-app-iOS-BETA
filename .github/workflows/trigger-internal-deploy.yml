@@ -16,7 +16,7 @@ jobs:
       should-deploy: ${{ steps.is-deployed.outputs.exit-code == '1' }}
     steps:
       - name: Checkout project
-        uses: actions/checkout@01aeccc # v2.1.0
+        uses: actions/checkout@v2
         with:
           ref: internal
 
@@ -38,7 +38,7 @@ jobs:
         continue-on-error: true
 
       - name: Checkout project
-        uses: actions/checkout@01aeccc # v2.1.0
+        uses: actions/checkout@v2
         with:
           ref: internal
 
@@ -74,7 +74,7 @@ jobs:
         if: contains(needs.*.result, 'failure')
         env:
           SLACK_BOT_TOKEN: ${{ secrets.slack_bot_token }}
-        uses: voxmedia/github-action-slack-notify-build@5125947 # v1.1.1
+        uses: voxmedia/github-action-slack-notify-build@v1
         with:
           channel_id: G011ZPSAD4J
           status: FAILED
