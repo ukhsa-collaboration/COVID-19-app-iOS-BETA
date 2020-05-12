@@ -96,6 +96,7 @@ class StatusStateMachine {
             let date = dateProvider()
             state = .exposed(StatusState.Exposed(exposureDate: date))
         case .exposed:
+            assertionFailure("The server should never send us another exposure notification if we're already exposed")
             break // ignore repeated exposures
         case .symptomatic, .checkin:
             break // don't care about exposures if we're already symptomatic

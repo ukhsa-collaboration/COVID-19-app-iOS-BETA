@@ -132,16 +132,6 @@ class StatusStateMachineTests: XCTestCase {
         XCTAssertEqual(machine.state, .checkin(StatusState.Checkin(symptoms: [.temperature], checkinDate: nextCheckin)))
     }
 
-    func testIgnoreExposedWhenAlreadyExposed() {
-        let exposureDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 1))!
-        persisting.statusState = .exposed(StatusState.Exposed(exposureDate: exposureDate))
-
-        currentDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 2))!
-        machine.exposed()
-
-        XCTAssertEqual(machine.state, .exposed(StatusState.Exposed(exposureDate: exposureDate)))
-    }
-
     func testIgnoreExposedWhenSymptomatic() {
         let expiryDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 1))!
         persisting.statusState = .symptomatic(StatusState.Symptomatic(symptoms: [.cough], expiryDate: expiryDate))
