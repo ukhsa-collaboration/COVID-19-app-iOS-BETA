@@ -10,19 +10,31 @@ import Foundation
 
 class StatusStateMachine {
 
+    static let StatusStateChangedNotification = NSNotification.Name("StatusStateChangedNotification")
+
     private let persisting: Persisting
+    private let notificationCenter: NotificationCenter
     private let dateProvider: () -> Date
 
     private(set) var state: StatusState {
         get { persisting.statusState }
-        set { persisting.statusState = newValue }
+        set {
+            persisting.statusState = newValue
+
+            notificationCenter.post(
+                name: StatusStateMachine.StatusStateChangedNotification,
+                object: self
+            )
+        }
     }
 
     init(
         persisting: Persisting,
+        notificationCenter: NotificationCenter,
         dateProvider: @autoclosure @escaping () -> Date = Date()
     ) {
         self.persisting = persisting
+        self.notificationCenter = notificationCenter
         self.dateProvider = dateProvider
     }
 

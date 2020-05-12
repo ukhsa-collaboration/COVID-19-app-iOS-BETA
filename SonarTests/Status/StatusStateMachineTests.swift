@@ -13,18 +13,37 @@ class StatusStateMachineTests: XCTestCase {
 
     var machine: StatusStateMachine!
     var persisting: PersistenceDouble!
+    var notificationCenter: NotificationCenter!
     var currentDate: Date!
 
     override func setUp() {
         persisting = PersistenceDouble()
+        notificationCenter = NotificationCenter()
         machine = StatusStateMachine(
             persisting: persisting,
+            notificationCenter: notificationCenter,
             dateProvider: self.currentDate
         )
     }
 
     func testDefaultIsOk() {
         XCTAssertEqual(machine.state, .ok(StatusState.Ok()))
+    }
+
+    func testPostNotificationOnStatusChange() {
+        var notificationPosted = false
+        notificationCenter.addObserver(
+            forName: StatusStateMachine.StatusStateChangedNotification,
+            object: nil,
+            queue: nil
+        ) { _ in
+            notificationPosted = true
+        }
+
+        currentDate = Date()
+        machine.exposed()
+
+        XCTAssertTrue(notificationPosted)
     }
 
     func testOkToSymptomatic() {
