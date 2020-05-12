@@ -20,6 +20,7 @@
 		097C93892447986B00E985CF /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097C93882447986B00E985CF /* TextField.swift */; };
 		097C94C9245B8146008A9695 /* LocaleProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097C94C8245B8146008A9695 /* LocaleProvider.swift */; };
 		097C94CB245B81E8008A9695 /* EnGbLocaleProviderDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097C94CA245B81E8008A9695 /* EnGbLocaleProviderDouble.swift */; };
+		0982F47E246A1AC000E57EE5 /* LinkingIdNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0982F47D246A1AC000E57EE5 /* LinkingIdNavigationController.swift */; };
 		0983ACCD243E566800DBB336 /* ErrorForTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983ACCC243E566800DBB336 /* ErrorForTest.swift */; };
 		0983ACCF243E6D3800DBB336 /* NotificationObserverDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983ACCE243E6D3800DBB336 /* NotificationObserverDouble.swift */; };
 		0983ACD3243EB22200DBB336 /* StatusViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983ACD2243EB22200DBB336 /* StatusViewControllerTests.swift */; };
@@ -295,6 +296,7 @@
 		097C93882447986B00E985CF /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		097C94C8245B8146008A9695 /* LocaleProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocaleProvider.swift; sourceTree = "<group>"; };
 		097C94CA245B81E8008A9695 /* EnGbLocaleProviderDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnGbLocaleProviderDouble.swift; sourceTree = "<group>"; };
+		0982F47D246A1AC000E57EE5 /* LinkingIdNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkingIdNavigationController.swift; sourceTree = "<group>"; };
 		0983ACCC243E566800DBB336 /* ErrorForTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorForTest.swift; sourceTree = "<group>"; };
 		0983ACCE243E6D3800DBB336 /* NotificationObserverDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationObserverDouble.swift; sourceTree = "<group>"; };
 		0983ACD2243EB22200DBB336 /* StatusViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewControllerTests.swift; sourceTree = "<group>"; };
@@ -961,7 +963,7 @@
 				214209D3242399DD00C7BFF3 /* Networking */,
 				F6CC2CA7242BC7D90079432B /* Notifications */,
 				F6F05A212433BE9600FF4B72 /* Onboarding */,
-				F604977024549B49002B8503 /* Pilot */,
+				F604977024549B49002B8503 /* LinkingID */,
 				F758B8D0242CC661003AE16D /* Registration */,
 				F758B8BC242CB83B003AE16D /* Resources */,
 				895D9E4924374EB800573D4D /* Routing */,
@@ -1096,15 +1098,16 @@
 			path = Logging;
 			sourceTree = "<group>";
 		};
-		F604977024549B49002B8503 /* Pilot */ = {
+		F604977024549B49002B8503 /* LinkingID */ = {
 			isa = PBXGroup;
 			children = (
 				F60497782454A40B002B8503 /* LinkingId.storyboard */,
 				F604977124549B7B002B8503 /* LinkingIdManager.swift */,
 				F604976E24549729002B8503 /* LinkingIdRequest.swift */,
 				F60497762454A294002B8503 /* LinkingIdViewController.swift */,
+				0982F47D246A1AC000E57EE5 /* LinkingIdNavigationController.swift */,
 			);
-			path = Pilot;
+			path = LinkingID;
 			sourceTree = "<group>";
 		};
 		F604977324549C84002B8503 /* Pilot */ = {
@@ -1669,6 +1672,7 @@
 				898FE859243B4FE300210775 /* AuthorizationManaging.swift in Sources */,
 				F652F72E244E472E00D97950 /* SymptomsPromptViewController.swift in Sources */,
 				F67C5154243E4D2F008E2945 /* AnswerButton.swift in Sources */,
+				0982F47E246A1AC000E57EE5 /* LinkingIdNavigationController.swift in Sources */,
 				F6EEC3B82448DD2400172820 /* SelfDiagnosis.swift in Sources */,
 				0964B37D246328A20022EF97 /* UIView+Scrolling.swift in Sources */,
 				6FC63C31241641B8007C8BF3 /* AppDelegate.swift in Sources */,
