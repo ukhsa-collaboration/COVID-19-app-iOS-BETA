@@ -40,7 +40,7 @@ class StatusStateMachine {
                 matching: DateComponents(hour: 7),
                 matchingPolicy: .nextTime
             )!
-            state = .symptomatic(symptoms: symptoms, expires: expiryDate)
+            state = .symptomatic(StatusState.Symptomatic(symptoms: symptoms, expiryDate: expiryDate))
         case .symptomatic, .checkin:
             assertionFailure("Self-diagnosing is only allowed from ok/exposed")
         }
@@ -50,12 +50,12 @@ class StatusStateMachine {
         switch state {
         case .ok, .checkin:
             break // Don't need to do anything
-        case .symptomatic(let symptoms, let expiry):
-            guard dateProvider() >= expiry else { return }
-            state = .checkin(symptoms: symptoms, at: expiry)
-        case .exposed(let exposureDate):
+        case .symptomatic(let symptomatic):
+            guard dateProvider() >= symptomatic.expiryDate else { return }
+            state = .checkin(StatusState.Checkin(symptoms: symptomatic.symptoms, checkinDate: symptomatic.expiryDate))
+        case .exposed(let exposed):
             let fourteenDaysLater = Calendar.current.nextDate(
-                after: Calendar.current.date(byAdding: .day, value: 13, to: exposureDate)!,
+                after: Calendar.current.date(byAdding: .day, value: 13, to: exposed.exposureDate)!,
                 matching: DateComponents(hour: 7),
                 matchingPolicy: .nextTime
             )!
@@ -70,8 +70,8 @@ class StatusStateMachine {
         switch state {
         case .ok, .symptomatic, .exposed:
             assertionFailure("Checking in is only allowed from checkin")
-        case .checkin(_, let date):
-            guard dateProvider() >= date else {
+        case .checkin(let checkin):
+            guard dateProvider() >= checkin.checkinDate else {
                 assertionFailure("Checking in is only allowed after the checkin date")
                 return
             }
@@ -83,7 +83,7 @@ class StatusStateMachine {
                     matching: DateComponents(hour: 7),
                     matchingPolicy: .nextTime
                 )!
-                state = .checkin(symptoms: symptoms, at: nextCheckin)
+                state = .checkin(StatusState.Checkin(symptoms: symptoms, checkinDate: nextCheckin))
             } else {
                 state = .ok
             }
@@ -94,8 +94,9 @@ class StatusStateMachine {
         switch state {
         case .ok:
             let date = dateProvider()
-            state = .exposed(on: date)
+            state = .exposed(StatusState.Exposed(exposureDate: date))
         case .exposed:
+            assertionFailure("The server should never send us another exposure notification if we're already exposed")
             break // ignore repeated exposures
         case .symptomatic, .checkin:
             break // don't care about exposures if we're already symptomatic
