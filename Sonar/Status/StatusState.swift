@@ -13,7 +13,17 @@ enum StatusState: Equatable {
 
     struct Symptomatic: Codable, Equatable {
         let symptoms: Set<Symptom>
-        let expiryDate: Date
+        let startDate: Date
+
+        var expiryDate: Date {
+            let startOfStartDate = Calendar.current.startOfDay(for: startDate)
+            let expiryDate = Calendar.current.nextDate(
+                after: Calendar.current.date(byAdding: .day, value: 7, to: startOfStartDate)!,
+                matching: DateComponents(hour: 7),
+                matchingPolicy: .nextTime
+            )!
+            return expiryDate
+        }
     }
 
     struct Checkin: Codable, Equatable {

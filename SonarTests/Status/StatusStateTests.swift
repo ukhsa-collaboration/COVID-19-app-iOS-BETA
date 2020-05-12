@@ -24,8 +24,8 @@ class StatusStateTests: XCTestCase {
     }
 
     func testCodableSymptomatic() throws {
-        let expiryDate = Date()
-        let statusState: StatusState = .symptomatic(StatusState.Symptomatic(symptoms: [.temperature], expiryDate: expiryDate))
+        let startDate = Date()
+        let statusState: StatusState = .symptomatic(StatusState.Symptomatic(symptoms: [.temperature], startDate: startDate))
 
         let encoded = try encoder.encode(statusState)
         let decoded = try decoder.decode(StatusState.self, from: encoded)
@@ -52,5 +52,25 @@ class StatusStateTests: XCTestCase {
 
          XCTAssertEqual(decoded, statusState)
      }
+
+    func testSymptomaticExpiryBeforeSeven() {
+        let startDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 1, hour: 6))!
+        let symptomatic = StatusState.Symptomatic(symptoms: [.cough], startDate: startDate)
+
+        XCTAssertEqual(
+            symptomatic.expiryDate,
+            Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 8, hour: 7))!
+        )
+    }
+
+    func testSymptomaticExpiryAfterSeven() {
+        let startDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 1, hour: 8))!
+        let symptomatic = StatusState.Symptomatic(symptoms: [.cough], startDate: startDate)
+
+        XCTAssertEqual(
+            symptomatic.expiryDate,
+            Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 8, hour: 7))!
+        )
+    }
 
 }

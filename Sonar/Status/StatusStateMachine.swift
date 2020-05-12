@@ -34,22 +34,10 @@ class StatusStateMachine {
 
         switch state {
         case .ok(let ok):
-            let startOfStartDate = Calendar.current.startOfDay(for: startDate)
-            let expiryDate = Calendar.current.nextDate(
-                after: Calendar.current.date(byAdding: .day, value: 7, to: startOfStartDate)!,
-                matching: DateComponents(hour: 7),
-                matchingPolicy: .nextTime
-            )!
-            let symptomatic = StatusState.Symptomatic(symptoms: symptoms, expiryDate: expiryDate)
+            let symptomatic = StatusState.Symptomatic(symptoms: symptoms, startDate: startDate)
             transition(from: ok, to: symptomatic)
         case .exposed(let exposed):
-            let startOfStartDate = Calendar.current.startOfDay(for: startDate)
-            let expiryDate = Calendar.current.nextDate(
-                after: Calendar.current.date(byAdding: .day, value: 7, to: startOfStartDate)!,
-                matching: DateComponents(hour: 7),
-                matchingPolicy: .nextTime
-            )!
-            let symptomatic = StatusState.Symptomatic(symptoms: symptoms, expiryDate: expiryDate)
+            let symptomatic = StatusState.Symptomatic(symptoms: symptoms, startDate: startDate)
             transition(from: exposed, to: symptomatic)
         case .symptomatic, .checkin:
             assertionFailure("Self-diagnosing is only allowed from ok/exposed")
@@ -64,6 +52,14 @@ class StatusStateMachine {
             guard dateProvider() >= symptomatic.expiryDate else { return }
             state = .checkin(StatusState.Checkin(symptoms: symptomatic.symptoms, checkinDate: symptomatic.expiryDate))
         case .exposed(let exposed):
+            let fourteenDaysLater = Calendar.current.nextDate(
+                after: Calendar.current.date(byAdding: .day, value: 13, to: exposed.exposureDate)!,
+                matching: DateComponents(hour: 7),
+                matchingPolicy: .nextTime
+            )!
+
+            guard dateProvider() >= fourteenDaysLater else { return }
+
             transition(from: exposed, to: StatusState.Ok())
         }
     }
@@ -118,23 +114,10 @@ class StatusStateMachine {
     }
 
     private func transition(from exposed: StatusState.Exposed, to ok: StatusState.Ok) {
-        let fourteenDaysLater = Calendar.current.nextDate(
-            after: Calendar.current.date(byAdding: .day, value: 13, to: exposed.exposureDate)!,
-            matching: DateComponents(hour: 7),
-            matchingPolicy: .nextTime
-        )!
-
-        guard dateProvider() >= fourteenDaysLater else { return }
-
         state = .ok(ok)
     }
 
     private func transition(from previous: StatusState.Checkin, to next: StatusState.Checkin) {
-        guard next.symptoms.contains(.temperature) else {
-            assertionFailure("Can only transistion from checkin to another checkin if you have a temperature")
-            return
-        }
-
         state = .checkin(next)
     }
 

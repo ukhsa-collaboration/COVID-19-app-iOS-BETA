@@ -27,38 +27,30 @@ class StatusStateMachineTests: XCTestCase {
         XCTAssertEqual(machine.state, .ok(StatusState.Ok()))
     }
 
-    func testOkToSymptomaticBeforeSeven() {
-        let date = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 1, hour: 6))!
-        machine.selfDiagnose(symptoms: [.cough], startDate: date)
+    func testOkToSymptomatic() {
+        let startDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 1, hour: 6))!
+        machine.selfDiagnose(symptoms: [.cough], startDate: startDate)
 
-        let expires = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 8, hour: 7))!
-        XCTAssertEqual(machine.state, .symptomatic(StatusState.Symptomatic(symptoms: [.cough], expiryDate: expires)))
-    }
-
-    func testOkToSymptomaticAfterSeven() {
-        let date = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 1, hour: 8))!
-        machine.selfDiagnose(symptoms: [.cough], startDate: date)
-
-        let expires = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 8, hour: 7))!
-        XCTAssertEqual(machine.state, .symptomatic(StatusState.Symptomatic(symptoms: [.cough], expiryDate: expires)))
+        XCTAssertEqual(machine.state, .symptomatic(StatusState.Symptomatic(symptoms: [.cough], startDate: startDate)))
     }
 
     func testTickFromSymptomaticToCheckin() {
-        let expiry = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 1, hour: 7))!
-        persisting.statusState = .symptomatic(StatusState.Symptomatic(symptoms: [.cough], expiryDate: expiry))
+        let startDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 1, hour: 7))!
+        let symptomatic = StatusState.Symptomatic(symptoms: [.cough], startDate: startDate)
+        persisting.statusState = .symptomatic(symptomatic)
 
-        currentDate = Calendar.current.date(byAdding: .hour, value: -1, to: expiry)!
+        currentDate = Calendar.current.date(byAdding: .hour, value: -1, to: symptomatic.expiryDate)!
         machine.tick()
         XCTAssertTrue(machine.state.isSymptomatic)
 
-        currentDate = Calendar.current.date(byAdding: .hour, value: 1, to: expiry)!
+        currentDate = Calendar.current.date(byAdding: .hour, value: 1, to: symptomatic.expiryDate)!
         machine.tick()
         guard case .checkin(let checkin) = machine.state else {
             XCTFail()
             return
         }
 
-        XCTAssertEqual(checkin.checkinDate, expiry)
+        XCTAssertEqual(checkin.checkinDate, symptomatic.expiryDate)
     }
 
     func testTickWhenExposedBeforeSeven() {
@@ -133,13 +125,13 @@ class StatusStateMachineTests: XCTestCase {
     }
 
     func testIgnoreExposedWhenSymptomatic() {
-        let expiryDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 1))!
-        persisting.statusState = .symptomatic(StatusState.Symptomatic(symptoms: [.cough], expiryDate: expiryDate))
+        let startDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 1))!
+        persisting.statusState = .symptomatic(StatusState.Symptomatic(symptoms: [.cough], startDate: startDate))
 
         currentDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 2))!
         machine.exposed()
 
-        XCTAssertEqual(machine.state, .symptomatic(StatusState.Symptomatic(symptoms: [.cough], expiryDate: expiryDate)))
+        XCTAssertEqual(machine.state, .symptomatic(StatusState.Symptomatic(symptoms: [.cough], startDate: startDate)))
     }
 
     func testIgnoreExposedWhenCheckingIn() {
