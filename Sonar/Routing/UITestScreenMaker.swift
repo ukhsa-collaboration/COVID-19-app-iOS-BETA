@@ -78,6 +78,7 @@ private class InMemoryPersistence: Persisting {
     var lastInstalledVersion: String?
     var lastInstalledBuildNumber: String?
     var acknowledgmentUrls: Set<URL> = []
+    var statusState: StatusState = .ok
 
     func clear() {
         registration = nil
@@ -88,6 +89,7 @@ private class InMemoryPersistence: Persisting {
         lastInstalledVersion = nil
         lastInstalledBuildNumber = nil
         acknowledgmentUrls = []
+        statusState = .ok
     }
 }
 

@@ -1,5 +1,5 @@
 //
-//  StatusStateMachineMigrationTests.swift
+//  StatusStateMigrationTests.swift
 //  SonarTests
 //
 //  Created by NHSX.
@@ -9,9 +9,9 @@
 import XCTest
 @testable import Sonar
 
-class StatusStateMachineMigrationTests: XCTestCase {
+class StatusStateMigrationTests: XCTestCase {
 
-    var migration: StatusStateMachineMigration!
+    var migration: StatusStateMigration!
 
     var dateSentinel: Date!
     var currentDate: Date!
@@ -22,7 +22,7 @@ class StatusStateMachineMigrationTests: XCTestCase {
 
         dateProvider = { self.currentDate }
 
-        migration = StatusStateMachineMigration(dateProvider: dateProvider)
+        migration = StatusStateMigration(dateProvider: dateProvider)
 
         dateSentinel = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 1))!
         currentDate = dateSentinel

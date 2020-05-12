@@ -14,6 +14,22 @@ enum StatusState: Equatable {
     case checkin(symptoms: Set<Symptom>, at: Date)
     case exposed(on: Date) // previously "amber" state
 
+    var isSymptomatic: Bool {
+        if case .symptomatic = self {
+            return true
+        } else {
+            return false
+        }
+    }
+
+    var isExposed: Bool {
+        if case .exposed = self {
+            return true
+        } else {
+            return false
+        }
+    }
+
     enum CodingKeys: String, CodingKey {
         case type
         case symptoms

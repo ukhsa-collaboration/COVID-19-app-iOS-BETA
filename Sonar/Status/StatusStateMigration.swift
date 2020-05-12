@@ -1,5 +1,5 @@
 //
-//  StatusStateMachineMigration.swift
+//  StatusStateMigration.swift
 //  Sonar
 //
 //  Created by NHSX.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class StatusStateMachineMigration {
+class StatusStateMigration {
 
     private let dateProvider: () -> Date
 
