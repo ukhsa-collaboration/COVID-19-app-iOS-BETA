@@ -33,6 +33,14 @@ enum StatusState: Equatable {
 
     struct Exposed: Codable, Equatable {
         let exposureDate: Date
+
+        var expiryDate: Date {
+            Calendar.current.nextDate(
+                after: Calendar.current.date(byAdding: .day, value: 13, to: exposureDate)!,
+                matching: DateComponents(hour: 7),
+                matchingPolicy: .nextTime
+            )!
+        }
     }
 
     case ok(Ok)                   // default state, previously "blue"

@@ -50,15 +50,10 @@ class StatusStateMachine {
             break // Don't need to do anything
         case .symptomatic(let symptomatic):
             guard dateProvider() >= symptomatic.expiryDate else { return }
+
             state = .checkin(StatusState.Checkin(symptoms: symptomatic.symptoms, checkinDate: symptomatic.expiryDate))
         case .exposed(let exposed):
-            let fourteenDaysLater = Calendar.current.nextDate(
-                after: Calendar.current.date(byAdding: .day, value: 13, to: exposed.exposureDate)!,
-                matching: DateComponents(hour: 7),
-                matchingPolicy: .nextTime
-            )!
-
-            guard dateProvider() >= fourteenDaysLater else { return }
+            guard dateProvider() >= exposed.expiryDate else { return }
 
             transition(from: exposed, to: StatusState.Ok())
         }
