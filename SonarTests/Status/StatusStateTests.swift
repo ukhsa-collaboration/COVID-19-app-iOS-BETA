@@ -73,4 +73,14 @@ class StatusStateTests: XCTestCase {
         )
     }
 
+    func testExposedExpiresAfterFourteenDays() {
+        let exposureDate = Calendar.current.date(from: DateComponents(year: 2020, month: 5, day: 14, hour: 7))!
+        let exposed = StatusState.Exposed(exposureDate: exposureDate)
+
+        XCTAssertEqual(
+            exposed.expiryDate,
+            Calendar.current.date(from: DateComponents(year: 2020, month: 5, day: 28, hour: 7))!
+        )
+    }
+
 }
