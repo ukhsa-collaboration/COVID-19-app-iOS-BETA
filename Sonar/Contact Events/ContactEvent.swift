@@ -26,7 +26,7 @@ struct ContactEvent: Equatable, Codable {
     
     init(
         broadcastPayload: IncomingBroadcastPayload? = nil,
-        txPower: Int8 = 0,
+        txPower: Int8 = Int8.min,
         timestamp: Date = Date(),
         rssiValues: [Int8] = [],
         rssiTimestamps: [Date] = [],
