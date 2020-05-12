@@ -36,7 +36,7 @@ class StatusStateMigration {
                 return .ok
             }
 
-            return .exposed(on: date)
+            return .exposed(StatusState.Exposed(exposureDate: date))
         case (.some(let diagnosis), _):
             guard !diagnosis.symptoms.isEmpty else {
                 return .ok
@@ -44,13 +44,17 @@ class StatusStateMigration {
 
             if currentDate > diagnosis.expiryDate || diagnosis.type == .subsequent {
                 return .checkin(
-                    symptoms: diagnosis.symptoms,
-                    at: diagnosis.expiryDate
+                    StatusState.Checkin(
+                        symptoms: diagnosis.symptoms,
+                        checkinDate: diagnosis.expiryDate
+                    )
                 )
             } else {
                 return .symptomatic(
-                    symptoms: diagnosis.symptoms,
-                    expires: diagnosis.expiryDate
+                    StatusState.Symptomatic(
+                        symptoms: diagnosis.symptoms,
+                        expiryDate: diagnosis.expiryDate
+                    )
                 )
             }
         }

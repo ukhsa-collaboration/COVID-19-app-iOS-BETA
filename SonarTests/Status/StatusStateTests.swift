@@ -25,7 +25,7 @@ class StatusStateTests: XCTestCase {
 
     func testCodableSymptomatic() throws {
         let expiryDate = Date()
-        let statusState: StatusState = .symptomatic(symptoms: [.temperature], expires: expiryDate)
+        let statusState: StatusState = .symptomatic(StatusState.Symptomatic(symptoms: [.temperature], expiryDate: expiryDate))
 
         let encoded = try encoder.encode(statusState)
         let decoded = try decoder.decode(StatusState.self, from: encoded)
@@ -35,7 +35,7 @@ class StatusStateTests: XCTestCase {
 
     func testCodableCheckin() throws {
         let checkinDate = Date()
-        let statusState: StatusState = .checkin(symptoms: [.cough], at: checkinDate)
+        let statusState: StatusState = .checkin(StatusState.Checkin(symptoms: [.cough], checkinDate: checkinDate))
 
         let encoded = try encoder.encode(statusState)
         let decoded = try decoder.decode(StatusState.self, from: encoded)
@@ -44,8 +44,8 @@ class StatusStateTests: XCTestCase {
     }
 
     func testCodableExposed() throws {
-         let exposedDate = Date()
-         let statusState: StatusState = .exposed(on: exposedDate)
+         let exposureDate = Date()
+         let statusState: StatusState = .exposed(StatusState.Exposed(exposureDate: exposureDate))
 
          let encoded = try encoder.encode(statusState)
          let decoded = try decoder.decode(StatusState.self, from: encoded)

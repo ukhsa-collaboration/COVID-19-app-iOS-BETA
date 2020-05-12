@@ -9,10 +9,24 @@
 import Foundation
 
 enum StatusState: Equatable {
+    struct Symptomatic: Equatable {
+        let symptoms: Set<Symptom>
+        let expiryDate: Date
+    }
+
+    struct Checkin: Equatable {
+        let symptoms: Set<Symptom>
+        let checkinDate: Date
+    }
+
+    struct Exposed: Equatable {
+        let exposureDate: Date
+    }
+
     case ok // default state, previously "blue"
-    case symptomatic(symptoms: Set<Symptom>, expires: Date) // previously "red" state
-    case checkin(symptoms: Set<Symptom>, at: Date)
-    case exposed(on: Date) // previously "amber" state
+    case symptomatic(Symptomatic) // previously "red" state
+    case checkin(Checkin)
+    case exposed(Exposed) // previously "amber" state
 
     var isSymptomatic: Bool {
         if case .symptomatic = self {
@@ -44,17 +58,17 @@ extension StatusState: Encodable {
         switch self {
         case .ok:
             try container.encode("ok", forKey: .type)
-        case .symptomatic(let symptoms, let date):
+        case .symptomatic(let symptomatic):
             try container.encode("symptomatic", forKey: .type)
-            try container.encode(symptoms, forKey: .symptoms)
-            try container.encode(date, forKey: .date)
-        case .checkin(let symptoms, let date):
+            try container.encode(symptomatic.symptoms, forKey: .symptoms)
+            try container.encode(symptomatic.expiryDate, forKey: .date)
+        case .checkin(let checkin):
             try container.encode("checkin", forKey: .type)
-            try container.encode(symptoms, forKey: .symptoms)
-            try container.encode(date, forKey: .date)
-        case .exposed(let date):
+            try container.encode(checkin.symptoms, forKey: .symptoms)
+            try container.encode(checkin.checkinDate, forKey: .date)
+        case .exposed(let exposed):
             try container.encode("exposed", forKey: .type)
-            try container.encode(date, forKey: .date)
+            try container.encode(exposed.exposureDate, forKey: .date)
         }
     }
 }
@@ -74,14 +88,14 @@ extension StatusState: Decodable {
         case "symptomatic":
             let symptoms = try values.decode(Set<Symptom>.self, forKey: .symptoms)
             let date = try values.decode(Date.self, forKey: .date)
-            self = .symptomatic(symptoms: symptoms, expires: date)
+            self = .symptomatic(Symptomatic(symptoms: symptoms, expiryDate: date))
         case "checkin":
             let symptoms = try values.decode(Set<Symptom>.self, forKey: .symptoms)
             let date = try values.decode(Date.self, forKey: .date)
-            self = .checkin(symptoms: symptoms, at: date)
+            self = .checkin(Checkin(symptoms: symptoms, checkinDate: date))
         case "exposed":
             let date = try values.decode(Date.self, forKey: .date)
-            self = .exposed(on: date)
+            self = .exposed(Exposed(exposureDate: date))
         default:
             throw Error.decodingError("Unrecognized type: \(type)")
         }

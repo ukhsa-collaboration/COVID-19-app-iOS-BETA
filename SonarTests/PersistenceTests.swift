@@ -236,7 +236,7 @@ class PersistenceTests: TestCase {
         persistence.selfDiagnosis = diagnosis
         persistence.potentiallyExposed = Date()
 
-        XCTAssertEqual(persistence.statusState, .symptomatic(symptoms: [.cough], expires: diagnosis.expiryDate))
+        XCTAssertEqual(persistence.statusState, .symptomatic(StatusState.Symptomatic(symptoms: [.cough], expiryDate: diagnosis.expiryDate)))
     }
     
     private func recreatePersistence() {
