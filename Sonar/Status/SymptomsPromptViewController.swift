@@ -12,18 +12,15 @@ class SymptomsPromptViewController: UIViewController, Storyboarded {
     static var storyboardName = "Status"
 
     var checkin: StatusState.Checkin!
-    var persistence: Persisting!
     var statusViewController: StatusViewController!
     var statusStateMachine: StatusStateMachining!
 
     func inject(
         checkin: StatusState.Checkin!,
-        persistence: Persisting,
         statusViewController: StatusViewController,
         statusStateMachine: StatusStateMachining
     ) {
         self.checkin = checkin
-        self.persistence = persistence
         self.statusViewController = statusViewController
         self.statusStateMachine = statusStateMachine
     }
@@ -33,7 +30,6 @@ class SymptomsPromptViewController: UIViewController, Storyboarded {
         let coordinator = UpdateDiagnosisCoordinator(
             navigationController: navigationController,
             checkin: checkin,
-            persisting: persistence,
             statusViewController: statusViewController,
             statusStateMachine: statusStateMachine
         )

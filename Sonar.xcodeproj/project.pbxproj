@@ -62,9 +62,7 @@
 		134470AE2454D4DA001A0AD9 /* SelfDiagnosisCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134470AC2454D4DA001A0AD9 /* SelfDiagnosisCoordinator.swift */; };
 		134470B02454D614001A0AD9 /* CoughUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134470AF2454D614001A0AD9 /* CoughUpdateViewController.swift */; };
 		136001DC2462EE1C001EFE2A /* SelfDiagnosisTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136001DB2462EE1C001EFE2A /* SelfDiagnosisTests.swift */; };
-		1376776F2458488900197F8E /* SchedulerDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1376776E2458488900197F8E /* SchedulerDouble.swift */; };
 		138114E42450543600BA46C7 /* SymptomStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138114E32450543600BA46C7 /* SymptomStackView.swift */; };
-		138114E62450796C00BA46C7 /* LocalNotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138114E52450796C00BA46C7 /* LocalNotificationScheduler.swift */; };
 		13F4AE882451EB330082A46D /* QuestionSymptomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F4AE872451EB330082A46D /* QuestionSymptomsViewController.swift */; };
 		13F996732460445400FD6740 /* LinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F996722460445400FD6740 /* LinkButton.swift */; };
 		2115C3E624360427009C0F5B /* GradientBackgroundTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2115C3E524360427009C0F5B /* GradientBackgroundTableViewCell.swift */; };
@@ -187,7 +185,6 @@
 		F63279252435203600CF7A42 /* DispatchQueue+Testable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63279242435203600CF7A42 /* DispatchQueue+Testable.swift */; };
 		F63279272435219A00CF7A42 /* QueueDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63279262435219A00CF7A42 /* QueueDouble.swift */; };
 		F632792A2435323200CF7A42 /* PermissionsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63279292435323200CF7A42 /* PermissionsViewControllerTests.swift */; };
-		F652F7242449138900D97950 /* SetDiagnosisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652F7232449138900D97950 /* SetDiagnosisViewController.swift */; };
 		F652F72C244A74E900D97950 /* StartDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652F72B244A74E900D97950 /* StartDateViewController.swift */; };
 		F652F72E244E472E00D97950 /* SymptomsPromptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652F72D244E472E00D97950 /* SymptomsPromptViewController.swift */; };
 		F652F730244E4AAD00D97950 /* DrawerPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652F72F244E4AAD00D97950 /* DrawerPresentation.swift */; };
@@ -339,9 +336,7 @@
 		134470AF2454D614001A0AD9 /* CoughUpdateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoughUpdateViewController.swift; sourceTree = "<group>"; };
 		1347DAF02450915500F2F776 /* LocalNotificationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationTests.swift; sourceTree = "<group>"; };
 		136001DB2462EE1C001EFE2A /* SelfDiagnosisTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfDiagnosisTests.swift; sourceTree = "<group>"; };
-		1376776E2458488900197F8E /* SchedulerDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulerDouble.swift; sourceTree = "<group>"; };
 		138114E32450543600BA46C7 /* SymptomStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomStackView.swift; sourceTree = "<group>"; };
-		138114E52450796C00BA46C7 /* LocalNotificationScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationScheduler.swift; sourceTree = "<group>"; };
 		13F4AE872451EB330082A46D /* QuestionSymptomsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionSymptomsViewController.swift; sourceTree = "<group>"; };
 		13F996722460445400FD6740 /* LinkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkButton.swift; sourceTree = "<group>"; };
 		2115C3E524360427009C0F5B /* GradientBackgroundTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackgroundTableViewCell.swift; sourceTree = "<group>"; };
@@ -481,7 +476,6 @@
 		F63279242435203600CF7A42 /* DispatchQueue+Testable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Testable.swift"; sourceTree = "<group>"; };
 		F63279262435219A00CF7A42 /* QueueDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueDouble.swift; sourceTree = "<group>"; };
 		F63279292435323200CF7A42 /* PermissionsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsViewControllerTests.swift; sourceTree = "<group>"; };
-		F652F7232449138900D97950 /* SetDiagnosisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDiagnosisViewController.swift; sourceTree = "<group>"; };
 		F652F72B244A74E900D97950 /* StartDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDateViewController.swift; sourceTree = "<group>"; };
 		F652F72D244E472E00D97950 /* SymptomsPromptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomsPromptViewController.swift; sourceTree = "<group>"; };
 		F652F72F244E4AAD00D97950 /* DrawerPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerPresentation.swift; sourceTree = "<group>"; };
@@ -666,7 +660,6 @@
 				098ED480242E745F0029B729 /* Debug.storyboard */,
 				098ED482242E746E0029B729 /* DebugViewController.swift */,
 				89BC79EA2434E047002050F8 /* LogsViewController.swift */,
-				F652F7232449138900D97950 /* SetDiagnosisViewController.swift */,
 				F604976A24539F6C002B8503 /* UploadLogsViewController.swift */,
 				2115C3E524360427009C0F5B /* GradientBackgroundTableViewCell.swift */,
 				21F374032434C4BF00926FB8 /* ContactEventsTableViewController.swift */,
@@ -695,7 +688,6 @@
 				F63279262435219A00CF7A42 /* QueueDouble.swift */,
 				098ED489242E89D80029B729 /* RegistrationServiceDouble.swift */,
 				F694B1B92459E45100C6A5D1 /* RemoteNotificationDispatchingDouble.swift */,
-				1376776E2458488900197F8E /* SchedulerDouble.swift */,
 				F62F858424510923006580A8 /* SessionDouble.swift */,
 				89CCF65E2456EF7000AC9D91 /* TrustValidatingDouble.swift */,
 				090B1870243552C300870B5D /* UserNotificationCenterDouble.swift */,
@@ -1178,7 +1170,6 @@
 		F6CC2CA7242BC7D90079432B /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
-				138114E52450796C00BA46C7 /* LocalNotificationScheduler.swift */,
 				F6CC2CA8242BC7FC0079432B /* RemoteNotificationManager.swift */,
 				090B186E24354D0100870B5D /* RemoteNotificationDispatcher.swift */,
 				F72EBD9D243C90E6009F9328 /* HumbleLocalNotificationScheduler.swift */,
@@ -1550,7 +1541,6 @@
 				F67A2293242AA370002254B6 /* SecureRegistrationStorageTests.swift in Sources */,
 				0964B380246329680022EF97 /* UIView_ScrollingTests.swift in Sources */,
 				214209D72423C9B600C7BFF3 /* UploadContactEventsRequestTests.swift in Sources */,
-				1376776F2458488900197F8E /* SchedulerDouble.swift in Sources */,
 				F72EBDA9243D2FE6009F9328 /* BroadcastIdEncrypterTests.swift in Sources */,
 				89C8B214245C5106009CCE80 /* DailyMetricsCollectorTests.swift in Sources */,
 				F694B1C02459EEB800C6A5D1 /* NotificationAcknowledgerDouble.swift in Sources */,
@@ -1597,7 +1587,6 @@
 				09A9254B2457B2CA00C5DBC1 /* MedicalWorkerInstructionsViewController.swift in Sources */,
 				F6F05A282433C55300FF4B72 /* AuthorizationManager.swift in Sources */,
 				89F06B352434AF9D0074C612 /* LogEvent.swift in Sources */,
-				F652F7242449138900D97950 /* SetDiagnosisViewController.swift in Sources */,
 				F694B1BC2459E9F000C6A5D1 /* NotificationAcknowledger.swift in Sources */,
 				2192888724640B5600691FDD /* ContactEventDetailTableViewController.swift in Sources */,
 				F613936E243FA82B003447E8 /* Appearance.swift in Sources */,
@@ -1689,7 +1678,6 @@
 				89F06B2F2434A62C0074C612 /* LoggingManager.swift in Sources */,
 				09CAA3662440F3B100CE93A6 /* PostcodeViewController.swift in Sources */,
 				F61695A12458B3C0006AABE3 /* StatusNotificationHandler.swift in Sources */,
-				138114E62450796C00BA46C7 /* LocalNotificationScheduler.swift in Sources */,
 				131AB05C2449D85B002136CA /* ContactEventExpiryHandler.swift in Sources */,
 				09A9254324536FD300C5DBC1 /* RegistrationReminderScheduler.swift in Sources */,
 				F694B1C2245A4A5600C6A5D1 /* ErrorLabel.swift in Sources */,

@@ -204,7 +204,6 @@ fileprivate func makeViewController(
     vc.inject(
         persistence: persistence,
         registrationService: registrationService,
-        contactEventsUploader: ContactEventsUploaderDouble(),
         notificationCenter: notificationCenter,
         linkingIdManager: LinkingIdManagerDouble.make(),
         statusStateMachine: statusStateMachine,

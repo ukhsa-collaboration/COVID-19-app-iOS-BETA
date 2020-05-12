@@ -10,7 +10,9 @@ import XCTest
 @testable import Sonar
 
 class PersistenceTests: TestCase {
-    
+
+    let encoder = JSONEncoder()
+
     private var secureRegistrationStorage: SecureRegistrationStorage!
     private var broadcastKeyStorage: SecureBroadcastRotationKeyStorage!
     private var monitor: AppMonitoringDouble!
@@ -30,28 +32,6 @@ class PersistenceTests: TestCase {
             monitor: monitor,
             storageChecker: storageChecker
         )
-    }
-    
-    func testDiagnosisRawValueZeroIsUnknown() {
-        XCTAssertNil(persistence.selfDiagnosis)
-    }
-
-    func testDiagnosisIsUnknownWhenDefaultsReset() {
-        persistence.selfDiagnosis = SelfDiagnosis(type: .initial, symptoms: [.cough], startDate: Date())
-
-        let appDomain = Bundle.main.bundleIdentifier
-        UserDefaults.standard.removePersistentDomain(forName: appDomain!)
-
-        let diagnosis = persistence.selfDiagnosis
-        XCTAssertNil(diagnosis)
-    }
-
-    func testDeleteSelfDiagnosisWhenNil() {
-        persistence.selfDiagnosis = SelfDiagnosis(type: .initial, symptoms: [.cough], startDate: Date())
-        XCTAssertNotNil(persistence.selfDiagnosis)
-
-        persistence.selfDiagnosis = nil
-        XCTAssertNil(persistence.selfDiagnosis)
     }
     
     func testRegistrationIsStored() {
@@ -228,15 +208,20 @@ class PersistenceTests: TestCase {
         XCTAssertEqual(persistence.statusState, .ok(StatusState.Ok()))
     }
 
-    func testStatusStateMigration() {
-        XCTAssertEqual(persistence.statusState, .ok(StatusState.Ok()))
-
+    func testStatusStateMigration() throws {
         let expiryDate = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
         let diagnosis = SelfDiagnosis(type: .initial, symptoms: [.cough], startDate: Date(), expiryDate: expiryDate)
-        persistence.selfDiagnosis = diagnosis
-        persistence.potentiallyExposed = Date()
+        let encoded = try encoder.encode(diagnosis)
+        UserDefaults.standard.set(encoded, forKey: "selfDiagnosis")
 
-        XCTAssertEqual(persistence.statusState, .symptomatic(StatusState.Symptomatic(symptoms: [.cough], startDate: diagnosis.startDate)))
+        UserDefaults.standard.set(Date(), forKey: "potentiallyExposed")
+
+        XCTAssertEqual(
+            persistence.statusState,
+            .symptomatic(StatusState.Symptomatic(symptoms: [.cough], startDate: diagnosis.startDate))
+        )
+        XCTAssertNil(UserDefaults.standard.object(forKey: "selfDiagnosis"))
+        XCTAssertNil(UserDefaults.standard.object(forKey: "potentiallyExposed"))
     }
     
     private func recreatePersistence() {

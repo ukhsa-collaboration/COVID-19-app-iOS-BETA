@@ -23,8 +23,6 @@ protocol Persisting {
     var delegate: PersistenceDelegate? { get nonmutating set }
 
     var registration: Registration? { get nonmutating set }
-    var potentiallyExposed: Date? { get nonmutating set }
-    var selfDiagnosis: SelfDiagnosis? { get nonmutating set }
     var partialPostcode: String? { get nonmutating set }
     var bluetoothPermissionRequested: Bool { get nonmutating set }
     var uploadLog: [UploadLog] { get nonmutating set }
@@ -43,8 +41,6 @@ protocol PersistenceDelegate: class {
 class Persistence: Persisting {
 
     enum Keys: String, CaseIterable {
-        case potentiallyExposed
-        case selfDiagnosis
         case partialPostcode
         case bluetoothPermissionRequested
         case uploadLog
@@ -113,39 +109,6 @@ class Persistence: Persisting {
         }
     }
 
-    var potentiallyExposed: Date? {
-        get {
-            UserDefaults.standard.object(forKey: Keys.potentiallyExposed.rawValue) as? Date
-        }
-        set { UserDefaults.standard.set(newValue, forKey: Keys.potentiallyExposed.rawValue) }
-    }
-
-    var selfDiagnosis: SelfDiagnosis? {
-        get {
-            guard
-                let data = UserDefaults.standard.data(forKey: Keys.selfDiagnosis.rawValue),
-                let decoded = try? decoder.decode(SelfDiagnosis.self, from: data)
-            else {
-                return nil
-            }
-
-            return decoded
-        }
-        set {
-            guard let newValue = newValue else {
-                UserDefaults.standard.removeObject(forKey: Keys.selfDiagnosis.rawValue)
-                return
-            }
-
-            guard let data = try? encoder.encode(newValue) else {
-                logger.critical("Unable to encode a self-diagnosis")
-                return
-            }
-
-            UserDefaults.standard.set(data, forKey: Keys.selfDiagnosis.rawValue)
-        }
-    }
-    
     var partialPostcode: String? {
         get { UserDefaults.standard.string(forKey: Keys.partialPostcode.rawValue) }
         set {
@@ -220,7 +183,21 @@ class Persistence: Persisting {
                 let decoded = try? decoder.decode(StatusState.self, from: data)
             else {
                 let migration = StatusStateMigration()
-                return migration.migrate(diagnosis: selfDiagnosis, potentiallyExposedOn: potentiallyExposed)
+
+                let selfDiagnosis = UserDefaults.standard.data(forKey: "selfDiagnosis").flatMap {
+                    try? decoder.decode(SelfDiagnosis.self, from: $0)
+                }
+
+                let potentiallyExposedOn = UserDefaults.standard.object(forKey: "potentiallyExposed") as? Date
+
+                let migratedStatusState = migration.migrate(diagnosis: selfDiagnosis, potentiallyExposedOn: potentiallyExposedOn)
+
+                // Finish the migration by saving the status state and removing the old data
+                self.statusState = migratedStatusState
+                UserDefaults.standard.removeObject(forKey: "selfDiagnosis")
+                UserDefaults.standard.removeObject(forKey: "potentiallyExposed")
+
+                return migratedStatusState
             }
 
             return decoded

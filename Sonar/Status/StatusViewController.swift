@@ -16,14 +16,12 @@ class StatusViewController: UIViewController, Storyboarded {
     private var persistence: Persisting!
     private var registrationService: RegistrationService!
     private var notificationCenter: NotificationCenter!
-    private var contactEventsUploader: ContactEventsUploading!
     private var linkingIdManager: LinkingIdManaging!
     private var statusStateMachine: StatusStateMachining!
     private var localeProvider: LocaleProvider!
     private var dateProvider: (() -> Date)!
 
     private lazy var drawerPresentationManager = DrawerPresentation()
-    private let localNotificationScheduler = LocalNotifcationScheduler(userNotificationCenter: UNUserNotificationCenter.current())
     
     @IBOutlet var registratonStatusView: UIView!
     @IBOutlet var registrationStatusIcon: UIImageView!
@@ -60,7 +58,6 @@ class StatusViewController: UIViewController, Storyboarded {
     func inject(
         persistence: Persisting,
         registrationService: RegistrationService,
-        contactEventsUploader: ContactEventsUploading,
         notificationCenter: NotificationCenter,
         linkingIdManager: LinkingIdManaging,
         statusStateMachine: StatusStateMachining,
@@ -69,7 +66,6 @@ class StatusViewController: UIViewController, Storyboarded {
     ) {
         self.persistence = persistence
         self.registrationService = registrationService
-        self.contactEventsUploader = contactEventsUploader
         self.notificationCenter = notificationCenter
         self.linkingIdManager = linkingIdManager
         self.statusStateMachine = statusStateMachine
@@ -144,11 +140,7 @@ class StatusViewController: UIViewController, Storyboarded {
         let navigationController = UINavigationController()
         let coordinator = SelfDiagnosisCoordinator(
             navigationController: navigationController,
-            persisting: persistence,
-            contactEventsUploader: contactEventsUploader,
-            statusViewController: self,
-            statusStateMachine: statusStateMachine,
-            localNotificationScheduler: localNotificationScheduler
+            statusStateMachine: statusStateMachine
         )
         coordinator.start()
         navigationController.modalPresentationStyle = .fullScreen
@@ -254,7 +246,6 @@ class StatusViewController: UIViewController, Storyboarded {
                 symptomsPromptViewController.transitioningDelegate = drawerPresentationManager
                 symptomsPromptViewController.inject(
                     checkin: checkin,
-                    persistence: persistence,
                     statusViewController: self,
                     statusStateMachine: statusStateMachine
                 )

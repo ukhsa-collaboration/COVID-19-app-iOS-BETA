@@ -12,16 +12,12 @@ import XCTest
 class SubmitSymptomsViewControllerTests: TestCase {
 
     var vc: SubmitSymptomsViewController!
-    var persistence: PersistenceDouble!
     var statusStateMachine: StatusStateMachiningDouble!
-    var schedulerDouble: SchedulerDouble!
 
     override func setUp() {
         super.setUp()
 
-        persistence = PersistenceDouble()
         statusStateMachine = StatusStateMachiningDouble()
-        schedulerDouble = SchedulerDouble()
     }
     
     func testSubmitTappedWithConfirmationSwitchOff() throws {
@@ -117,13 +113,9 @@ class SubmitSymptomsViewControllerTests: TestCase {
     ) {
         vc = SubmitSymptomsViewController.instantiate()
         vc.inject(
-            persisting: persistence,
-            contactEventsUploader: ContactEventsUploaderDouble(),
             symptoms: symptoms,
             startDate: startDate,
-            statusViewController: nil,
-            statusStateMachine: statusStateMachine,
-            localNotificationScheduler: schedulerDouble
+            statusStateMachine: statusStateMachine
         )
         XCTAssertNotNil(vc.view)
     }

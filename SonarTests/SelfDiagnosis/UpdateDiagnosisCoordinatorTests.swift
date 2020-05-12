@@ -14,12 +14,10 @@ class UpdateDiagnosisCoordinatorTests: XCTestCase {
     var coordinator: UpdateDiagnosisCoordinator!
 
     var navController: UINavigationController!
-    var persisting: PersistenceDouble!
     var statusViewController: StatusViewController!
 
     override func setUp() {
         navController = UINavigationController()
-        persisting = PersistenceDouble()
         statusViewController = StatusViewController()
     }
 
@@ -63,7 +61,6 @@ class UpdateDiagnosisCoordinatorTests: XCTestCase {
         return UpdateDiagnosisCoordinator(
             navigationController: navController,
             checkin: checkin,
-            persisting: persisting,
             statusViewController: statusViewController,
             statusStateMachine: StatusStateMachiningDouble()
         )

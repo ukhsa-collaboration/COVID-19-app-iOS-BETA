@@ -11,24 +11,19 @@ import UIKit
 class UpdateDiagnosisCoordinator: Coordinator {
     let navigationController: UINavigationController
     let checkin: StatusState.Checkin
-    let persisting: Persisting
     let statusViewController: StatusViewController
     var statusStateMachine: StatusStateMachining
-    let startDate: Date
     
     init(
         navigationController: UINavigationController,
         checkin: StatusState.Checkin,
-        persisting: Persisting,
         statusViewController: StatusViewController,
         statusStateMachine: StatusStateMachining
     ) {
         self.navigationController = navigationController
         self.checkin = checkin
-        self.persisting = persisting
         self.statusViewController = statusViewController
         self.statusStateMachine = statusStateMachine
-        startDate = persisting.selfDiagnosis?.startDate ?? Date()
     }
     
     var symptoms = Set<Symptom>()

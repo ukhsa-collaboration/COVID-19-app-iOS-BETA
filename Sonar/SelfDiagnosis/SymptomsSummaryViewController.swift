@@ -13,27 +13,15 @@ import Logging
 class SymptomsSummaryViewController: UIViewController, Storyboarded {
     static let storyboardName = "SelfDiagnosis"
 
-    private var persisting: Persisting!
-    private var contactEventsUploader: ContactEventsUploading!
     private var symptoms: Set<Symptom>!
-    private var statusViewController: StatusViewController!
     private var statusStateMachine: StatusStateMachining!
-    private var localNotificationScheduler: Scheduler!
 
     func inject(
-        persisting: Persisting,
-        contactEventsUploader: ContactEventsUploading,
         hasHighTemperature: Bool,
         hasNewCough: Bool,
-        statusViewController: StatusViewController,
-        statusStateMachine: StatusStateMachining,
-        localNotificationScheduler: Scheduler
+        statusStateMachine: StatusStateMachining
     ) {
-        self.persisting = persisting
-        self.contactEventsUploader = contactEventsUploader
-        self.statusViewController = statusViewController
         self.statusStateMachine = statusStateMachine
-        self.localNotificationScheduler = localNotificationScheduler
 
         symptoms = Set()
         if hasHighTemperature {
@@ -71,13 +59,9 @@ class SymptomsSummaryViewController: UIViewController, Storyboarded {
             guard let startDate = startDate else { return }
 
             vc.inject(
-                persisting: persisting,
-                contactEventsUploader: contactEventsUploader,
                 symptoms: symptoms,
                 startDate: startDate,
-                statusViewController: statusViewController,
-                statusStateMachine: statusStateMachine,
-                localNotificationScheduler: localNotificationScheduler
+                statusStateMachine: statusStateMachine
             )
         default:
             break

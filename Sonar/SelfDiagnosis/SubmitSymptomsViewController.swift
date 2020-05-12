@@ -14,30 +14,18 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
 
     // MARK: - Dependencies
 
-    private var persisting: Persisting!
-    private var contactEventsUploader: ContactEventsUploading!
     private var symptoms: Set<Symptom>!
     private var startDate: Date!
-    private var statusViewController: StatusViewController?
     private var statusStateMachine: StatusStateMachining!
-    private var localNotificationScheduler: Scheduler!
 
     func inject(
-        persisting: Persisting,
-        contactEventsUploader: ContactEventsUploading,
         symptoms: Set<Symptom>,
         startDate: Date,
-        statusViewController: StatusViewController?,
-        statusStateMachine: StatusStateMachining,
-        localNotificationScheduler: Scheduler
+        statusStateMachine: StatusStateMachining
     ) {
-        self.persisting = persisting
-        self.contactEventsUploader = contactEventsUploader
-        self.statusViewController = statusViewController
         self.symptoms = symptoms
         self.startDate = startDate
         self.statusStateMachine = statusStateMachine
-        self.localNotificationScheduler = localNotificationScheduler
     }
 
     // MARK: - UIKit
