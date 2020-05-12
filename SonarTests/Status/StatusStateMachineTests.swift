@@ -24,7 +24,7 @@ class StatusStateMachineTests: XCTestCase {
     }
 
     func testDefaultIsOk() {
-        XCTAssertEqual(machine.state, .ok)
+        XCTAssertEqual(machine.state, .ok(StatusState.Ok()))
     }
 
     func testOkToSymptomaticBeforeSeven() {
@@ -72,7 +72,7 @@ class StatusStateMachineTests: XCTestCase {
 
         currentDate = Calendar.current.date(byAdding: .day, value: 1, to: expiry)!
         machine.tick()
-        XCTAssertEqual(machine.state, .ok)
+        XCTAssertEqual(machine.state, .ok(StatusState.Ok()))
     }
 
     func testTickWhenExposedAfterSeven() {
@@ -86,7 +86,7 @@ class StatusStateMachineTests: XCTestCase {
 
         currentDate = Calendar.current.date(byAdding: .day, value: 1, to: expiry)!
         machine.tick()
-        XCTAssertEqual(machine.state, .ok)
+        XCTAssertEqual(machine.state, .ok(StatusState.Ok()))
     }
 
     func testCheckinOnlyCough() {
@@ -95,7 +95,7 @@ class StatusStateMachineTests: XCTestCase {
 
         currentDate = Calendar.current.date(byAdding: .hour, value: 1, to: checkinAt)!
         machine.checkin(symptoms: [.cough])
-        XCTAssertEqual(machine.state, .ok)
+        XCTAssertEqual(machine.state, .ok(StatusState.Ok()))
     }
 
     func testCheckinOnlyTemperature() {

@@ -24,22 +24,22 @@ class StatusStateMigration {
     ) -> StatusState {
         switch (diagnosis, potentiallyExposedOn) {
         case (.none, .none):
-            return .ok
+            return .ok(StatusState.Ok())
         case (.none, .some(let date)):
             // This should never happen, but date types, right?
             guard let delta = daysSince(date) else {
-                return .ok
+                return .ok(StatusState.Ok())
             }
 
             // If it's been 14 days, you're ok again
             guard delta < 14 else {
-                return .ok
+                return .ok(StatusState.Ok())
             }
 
             return .exposed(StatusState.Exposed(exposureDate: date))
         case (.some(let diagnosis), _):
             guard !diagnosis.symptoms.isEmpty else {
-                return .ok
+                return .ok(StatusState.Ok())
             }
 
             if currentDate > diagnosis.expiryDate || diagnosis.type == .subsequent {
