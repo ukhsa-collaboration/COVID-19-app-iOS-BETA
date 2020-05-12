@@ -11,8 +11,6 @@ import XCTest
 
 class SonarBroadcastPayloadGeneratorTests: XCTestCase {
 
-    let dateFormatter = DateFormatter()
-    let sonarEpoch = "2020-04-01T00:00:00Z"
     let registration = Registration(sonarId: UUID(uuidString: "054DDC35-0287-4247-97BE-D9A3AF012E36")!, secretKey: SecKey.sampleHMACKey, broadcastRotationKey: SecKey.sampleEllipticCurveKey)
     let utcCalendar: Calendar = {
         var calendar = Calendar.current
@@ -20,15 +18,32 @@ class SonarBroadcastPayloadGeneratorTests: XCTestCase {
         return calendar
     }()
     
-    var knownDate: Date!
-    var slightlyLaterDate: Date!
-    var muchLaterDate: Date!
+    var generator: SonarBroadcastPayloadGenerator!
+    var encrypter: MockEncrypter!
+    var storage: MockBroadcastRotationKeyStorage!
     
-    private var generator: SonarBroadcastPayloadGenerator!
-    private var encrypter: MockEncrypter!
-    private var storage: MockBroadcastRotationKeyStorage!
+    var now: Date!
+    var todayMidday: Date!
+    var yesterdayMidday: Date!
+    var tomorrowMidnightUTC: Date!
+    var todayAlmostMidnightUTC: Date!
 
     override func setUp() {
+        now = Date()
+        todayMidday = utcCalendar.date(bySettingHour: 12, minute: 0, second: 0, of: now)!
+        yesterdayMidday = utcCalendar.startOfDay(for: utcCalendar.date(byAdding: .day, value: -1, to: todayMidday)!)
+        tomorrowMidnightUTC = utcCalendar.startOfDay(for: utcCalendar.date(byAdding: .day, value: 1, to: now)!)
+        todayAlmostMidnightUTC = utcCalendar.date(byAdding: .second, value: -1, to: tomorrowMidnightUTC)
+        
+//        You can test this by setting the TZ variable in the Xcode scheme "Run" configuration to a zone which
+//        is a different day to where you're running ("Pacific/Auckland" is useful, but you've got to be actually
+//        running it in the afternoon if you're in a central European/UTC timezone to expose the bug we
+//        originally had)
+//        print("I think now is       \(now!) with zone \(Calendar.current.timeZone)")
+//        print("todayMidday:         \(todayMidday!)")
+//        print("yesterdayMidday:     \(yesterdayMidday!)")
+//        print("tomorrowMidnightUTC: \(tomorrowMidnightUTC!)")
+
         storage = MockBroadcastRotationKeyStorage(stubbedKey: nil)
         encrypter = MockEncrypter()
     }
@@ -54,12 +69,6 @@ class SonarBroadcastPayloadGeneratorTests: XCTestCase {
     }
 
     func test_generates_and_caches_broadcastId_when_none_cached() throws {
-        throw XCTSkip("Only works in specific TZs - need to pin the date.")
-
-        let today = utcCalendar.dateComponents(in: TimeZone(identifier: "UTC")!, from: Date())
-        let todayMidday = utcCalendar.date(bySetting: .hour, value: 12, of: today.date!)!
-        let tomorrowMidnightUTC = utcCalendar.startOfDay(for: utcCalendar.date(byAdding: .day, value: 1, to: today.date!)!)
-
         storage = MockBroadcastRotationKeyStorage(
             stubbedKey: nil,
             stubbedBroadcastId: nil,
@@ -78,11 +87,8 @@ class SonarBroadcastPayloadGeneratorTests: XCTestCase {
     }
     
     func test_returns_cached_broadcastId_when_cache_is_fresh() throws {
-        throw XCTSkip("Only works in specific TZs - need to pin the date.")
-
         let freshBroadcastId = "this is a broadcastId".data(using: .utf8)
-        let today = Date()
-        let todayMidday = utcCalendar.date(bySetting: .hour, value: 12, of: today)!
+
         storage = MockBroadcastRotationKeyStorage(
             stubbedKey: nil,
             stubbedBroadcastId: freshBroadcastId,
@@ -99,12 +105,8 @@ class SonarBroadcastPayloadGeneratorTests: XCTestCase {
     }
     
     func test_caches_and_returns_new_broadcastId_when_cache_is_stale() throws {
-        throw XCTSkip("Only works in specific TZs - need to pin the date.")
-
         let staleBroadcastId = "this is a broadcastId".data(using: .utf8)
-        let today = Date()
-        let todayMidday = utcCalendar.date(bySetting: .hour, value: 12, of: today)!
-        let yesterdayMidday = utcCalendar.startOfDay(for: utcCalendar.date(byAdding: .day, value: -1, to: today)!)
+
         storage = MockBroadcastRotationKeyStorage(
             stubbedKey: nil,
             stubbedBroadcastId: staleBroadcastId,
@@ -115,16 +117,16 @@ class SonarBroadcastPayloadGeneratorTests: XCTestCase {
         let payload = generator.broadcastPayload(date: todayMidday)
         
         XCTAssertEqual(encrypter.startDate, todayMidday)
-        XCTAssertEqual(encrypter.endDate, today.followingMidnightUTC)
+        XCTAssertEqual(encrypter.endDate, now.followingMidnightUTC)
         XCTAssertEqual(encrypter.callCount, 1)
         XCTAssertNotEqual(payload?.cryptogram, staleBroadcastId)
         XCTAssertEqual(storage.savedBroadcastId, MockEncrypter.broadcastId)
         XCTAssertEqual(storage.savedBroadcastIdDate, todayMidday)
     }
-
+    
 }
 
-fileprivate class MockBroadcastRotationKeyStorage: BroadcastRotationKeyStorage {
+class MockBroadcastRotationKeyStorage: BroadcastRotationKeyStorage {
     
     var stubbedKey: SecKey?
     var stubbedBroadcastId: Data?
