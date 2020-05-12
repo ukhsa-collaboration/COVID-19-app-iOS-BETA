@@ -62,7 +62,7 @@ class StatusStateMachine {
 
             guard dateProvider() >= fourteenDaysLater else { return }
 
-            state = .ok
+            state = .ok(StatusState.Ok())
         }
     }
 
@@ -85,7 +85,7 @@ class StatusStateMachine {
                 )!
                 state = .checkin(StatusState.Checkin(symptoms: symptoms, checkinDate: nextCheckin))
             } else {
-                state = .ok
+                state = .ok(StatusState.Ok())
             }
         }
     }

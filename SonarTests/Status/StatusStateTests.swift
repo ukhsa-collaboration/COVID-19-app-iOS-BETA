@@ -15,7 +15,7 @@ class StatusStateTests: XCTestCase {
     let decoder = JSONDecoder()
 
     func testCodableOk() throws {
-        let statusState: StatusState = .ok
+        let statusState: StatusState = .ok(StatusState.Ok())
 
         let encoded = try encoder.encode(statusState)
         let decoded = try decoder.decode(StatusState.self, from: encoded)

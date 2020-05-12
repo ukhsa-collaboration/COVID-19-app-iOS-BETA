@@ -34,7 +34,7 @@ class StatusStateMigrationTests: XCTestCase {
             potentiallyExposedOn: nil
         )
 
-        XCTAssertEqual(state, .ok)
+        XCTAssertEqual(state, .ok(StatusState.Ok()))
     }
 
     func testOnlyExposed() {
@@ -58,7 +58,7 @@ class StatusStateMigrationTests: XCTestCase {
             diagnosis: nil,
             potentiallyExposedOn: dateSentinel
         )
-        XCTAssertEqual(state, .ok)
+        XCTAssertEqual(state, .ok(StatusState.Ok()))
     }
 
     // These should be impossible states to be in
@@ -71,7 +71,7 @@ class StatusStateMigrationTests: XCTestCase {
             ),
             potentiallyExposedOn: nil
         )
-        XCTAssertEqual(state, .ok)
+        XCTAssertEqual(state, .ok(StatusState.Ok()))
 
         state = migration.migrate(
             diagnosis: SelfDiagnosis(
@@ -81,7 +81,7 @@ class StatusStateMigrationTests: XCTestCase {
             ),
             potentiallyExposedOn: dateSentinel
         )
-        XCTAssertEqual(state, .ok)
+        XCTAssertEqual(state, .ok(StatusState.Ok()))
 
         state = migration.migrate(
             diagnosis: SelfDiagnosis(
@@ -92,7 +92,7 @@ class StatusStateMigrationTests: XCTestCase {
             potentiallyExposedOn: nil
         )
 
-        XCTAssertEqual(state, .ok)
+        XCTAssertEqual(state, .ok(StatusState.Ok()))
 
         state = migration.migrate(
             diagnosis: SelfDiagnosis(
@@ -103,7 +103,7 @@ class StatusStateMigrationTests: XCTestCase {
             potentiallyExposedOn: dateSentinel
         )
 
-        XCTAssertEqual(state, .ok)
+        XCTAssertEqual(state, .ok(StatusState.Ok()))
     }
 
     func testSymptomaticUnexpiredAndNotPotentiallyExposed() {

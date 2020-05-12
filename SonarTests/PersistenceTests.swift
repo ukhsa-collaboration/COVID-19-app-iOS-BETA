@@ -224,12 +224,12 @@ class PersistenceTests: TestCase {
     }
 
     func testStatusState() {
-        persistence.statusState = .ok
-        XCTAssertEqual(persistence.statusState, .ok)
+        persistence.statusState = .ok(StatusState.Ok())
+        XCTAssertEqual(persistence.statusState, .ok(StatusState.Ok()))
     }
 
     func testStatusStateMigration() {
-        XCTAssertEqual(persistence.statusState, .ok)
+        XCTAssertEqual(persistence.statusState, .ok(StatusState.Ok()))
 
         let expiryDate = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
         let diagnosis = SelfDiagnosis(type: .initial, symptoms: [.cough], startDate: Date(), expiryDate: expiryDate)

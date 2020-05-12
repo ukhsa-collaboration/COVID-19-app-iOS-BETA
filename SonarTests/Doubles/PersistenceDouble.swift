@@ -34,7 +34,7 @@ class PersistenceDouble: Persisting {
         lastInstalledVersion: String? = nil,
         lastInstalledBuildNumber: String? = nil,
         acknowledgmentUrls: Set<URL> = [],
-        statusState: StatusState = .ok
+        statusState: StatusState = .ok(StatusState.Ok())
     ) {
         self.registration = registration
         self.potentiallyExposed = potentiallyExposed
@@ -59,6 +59,6 @@ class PersistenceDouble: Persisting {
         lastInstalledVersion = nil
         lastInstalledBuildNumber = nil
         acknowledgmentUrls = []
-        statusState = .ok
+        statusState = .ok(StatusState.Ok())
     }
 }

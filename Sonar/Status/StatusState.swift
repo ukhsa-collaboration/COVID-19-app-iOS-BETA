@@ -9,6 +9,8 @@
 import Foundation
 
 enum StatusState: Equatable {
+    struct Ok: Codable, Equatable {}
+
     struct Symptomatic: Codable, Equatable {
         let symptoms: Set<Symptom>
         let expiryDate: Date
@@ -23,10 +25,10 @@ enum StatusState: Equatable {
         let exposureDate: Date
     }
 
-    case ok // default state, previously "blue"
+    case ok(Ok)                   // default state, previously "blue"
     case symptomatic(Symptomatic) // previously "red" state
     case checkin(Checkin)
-    case exposed(Exposed) // previously "amber" state
+    case exposed(Exposed)         // previously "amber" state
 
     var isSymptomatic: Bool {
         if case .symptomatic = self {
@@ -83,7 +85,7 @@ extension StatusState: Decodable {
         let type = try values.decode(String.self, forKey: .type)
         switch type {
         case "ok":
-            self = .ok
+            self = .ok(StatusState.Ok())
         case "symptomatic":
             let symptomatic = try values.decode(Symptomatic.self, forKey: .symptomatic)
             self = .symptomatic(symptomatic)
