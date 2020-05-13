@@ -5,8 +5,15 @@ set -e
 # collect commits that have been changed
 commits=$(git rev-list last-commit-to-run-on-ci..HEAD)
 
-# gather the stories that need to be updated                 #find [#story_ids]            #capture id from backets          #remove whitespace
-story_ids=$(echo $commits | xargs git log --format=%B -n 1 | grep "\[Finishes #"           | sed 's/\[Finishes #\([0-9]*\)\]/\1/'     | sed -e 's/^[ \t]*//')
+find_finished_stories() {
+  echo "$commits" \
+    | xargs git log --format=%B -n 1 \
+    | grep "\[Finishes #" \
+    | sed 's/\[Finishes #\([0-9]*\)\]/\1/' \
+    | sed -e 's/^[ \t]*//'
+}
+
+story_ids=$(find_finished_stories)
 
 echo "Running with these commits : $commits -- and these story ids : $story_ids"
 
