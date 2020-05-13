@@ -14,6 +14,9 @@ class StatusStateMachine {
 
     static let StatusStateChangedNotification = NSNotification.Name("StatusStateChangedNotification")
 
+    private let logger = Logger(label: "StatusStateMachine")
+    private let checkinNotificationIdentifier = "Diagnosis"
+
     private let persisting: Persisting
     private var contactEventsUploader: ContactEventsUploading
     private let notificationCenter: NotificationCenter
@@ -82,6 +85,8 @@ class StatusStateMachine {
     }
 
     func checkin(symptoms: Set<Symptom>) {
+        userNotificationCenter.removePendingNotificationRequests(withIdentifiers: [checkinNotificationIdentifier])
+
         switch state {
         case .ok, .symptomatic, .exposed:
             assertionFailure("Checking in is only allowed from checkin")
@@ -155,7 +160,7 @@ class StatusStateMachine {
     private func add(notificationRequest: UNNotificationRequest) {
         userNotificationCenter.add(notificationRequest) { error in
             guard error != nil else {
-                logger.critical("Unable to add local notification: \(String(describing: error))")
+                self.logger.critical("Unable to add local notification: \(String(describing: error))")
                 return
             }
         }
@@ -169,7 +174,7 @@ class StatusStateMachine {
         let components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
         let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
         let request = UNNotificationRequest(
-            identifier: "Diagnosis", // for legacy reasons
+            identifier: checkinNotificationIdentifier,
             content: content,
             trigger: trigger
         )
@@ -187,5 +192,3 @@ class StatusStateMachine {
     }()
 
 }
-
-fileprivate let logger = Logger(label: "StatusStateMachine")

@@ -150,6 +150,7 @@ class StatusStateMachineTests: XCTestCase {
         machine.checkin(symptoms: [.cough])
         XCTAssertEqual(machine.state, .ok(StatusState.Ok()))
 
+        XCTAssertEqual(userNotificationCenter.removedIdentifiers, ["Diagnosis"])
         XCTAssertNil(userNotificationCenter.request)
     }
 
@@ -163,6 +164,7 @@ class StatusStateMachineTests: XCTestCase {
         let nextCheckin = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 2, hour: 7))!
         XCTAssertEqual(machine.state, .checkin(StatusState.Checkin(symptoms: [.temperature], checkinDate: nextCheckin)))
 
+        XCTAssertEqual(userNotificationCenter.removedIdentifiers, ["Diagnosis"])
         let request = try XCTUnwrap(userNotificationCenter.request)
         XCTAssertEqual(request.identifier, "Diagnosis")
     }
@@ -177,6 +179,7 @@ class StatusStateMachineTests: XCTestCase {
         let nextCheckin = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 2, hour: 7))!
         XCTAssertEqual(machine.state, .checkin(StatusState.Checkin(symptoms: [.cough, .temperature], checkinDate: nextCheckin)))
 
+        XCTAssertEqual(userNotificationCenter.removedIdentifiers, ["Diagnosis"])
         let request = try XCTUnwrap(userNotificationCenter.request)
         XCTAssertEqual(request.identifier, "Diagnosis")
     }
@@ -192,6 +195,7 @@ class StatusStateMachineTests: XCTestCase {
         let nextCheckin = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 5, hour: 7))!
         XCTAssertEqual(machine.state, .checkin(StatusState.Checkin(symptoms: [.temperature], checkinDate: nextCheckin)))
 
+        XCTAssertEqual(userNotificationCenter.removedIdentifiers, ["Diagnosis"])
         let request = try XCTUnwrap(userNotificationCenter.request)
         XCTAssertEqual(request.identifier, "Diagnosis")
     }
