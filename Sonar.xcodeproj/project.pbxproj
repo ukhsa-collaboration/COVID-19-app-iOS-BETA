@@ -76,6 +76,8 @@
 		214209D52423C83C00C7BFF3 /* UploadContactEventsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209D42423C83C00C7BFF3 /* UploadContactEventsRequest.swift */; };
 		214209D72423C9B600C7BFF3 /* UploadContactEventsRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209D62423C9B600C7BFF3 /* UploadContactEventsRequestTests.swift */; };
 		214209D924262B7500C7BFF3 /* SessionHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209D824262B7500C7BFF3 /* SessionHelpers.swift */; };
+		214CD370246B306D00B24886 /* BroadcastPayloadRotationTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214CD36F246B306D00B24886 /* BroadcastPayloadRotationTimer.swift */; };
+		214CD372246B347200B24886 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214CD371246B347200B24886 /* DateExtensions.swift */; };
 		217A23BE243B34E8001B8236 /* UIDevice+ModelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217A23BD243B34E8001B8236 /* UIDevice+ModelName.swift */; };
 		219288852461B1E100691FDD /* build341_contactEvents.plist in Resources */ = {isa = PBXBuildFile; fileRef = 219288842461B1E100691FDD /* build341_contactEvents.plist */; };
 		2192888724640B5600691FDD /* ContactEventDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2192888624640B5600691FDD /* ContactEventDetailTableViewController.swift */; };
@@ -83,7 +85,7 @@
 		219B61372447371700E2F1A6 /* UUIDExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219B61362447371700E2F1A6 /* UUIDExtensionsTests.swift */; };
 		219C7B74245AB88100952B4D /* BroadcastEncrypterProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219C7B73245AB88100952B4D /* BroadcastEncrypterProvider.swift */; };
 		219C7B76245AB8E500952B4D /* ConcreteBroadcastIdEncrypterProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219C7B75245AB8E500952B4D /* ConcreteBroadcastIdEncrypterProviderTests.swift */; };
-		219C7B78245AD4B700952B4D /* TestHelpersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219C7B77245AD4B700952B4D /* TestHelpersTests.swift */; };
+		219C7B78245AD4B700952B4D /* DateExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219C7B77245AD4B700952B4D /* DateExtensionTests.swift */; };
 		219C7B7A245AE83700952B4D /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219C7B79245AE83700952B4D /* DataExtensions.swift */; };
 		219C7B7C245B093000952B4D /* BluetoothPayloadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219C7B7B245B093000952B4D /* BluetoothPayloadTests.swift */; };
 		219C7B7F245B0BBB00952B4D /* BroadcastPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219C7B7D245B0B1500952B4D /* BroadcastPayload.swift */; };
@@ -348,6 +350,8 @@
 		214209D42423C83C00C7BFF3 /* UploadContactEventsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadContactEventsRequest.swift; sourceTree = "<group>"; };
 		214209D62423C9B600C7BFF3 /* UploadContactEventsRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadContactEventsRequestTests.swift; sourceTree = "<group>"; };
 		214209D824262B7500C7BFF3 /* SessionHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionHelpers.swift; sourceTree = "<group>"; };
+		214CD36F246B306D00B24886 /* BroadcastPayloadRotationTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastPayloadRotationTimer.swift; sourceTree = "<group>"; };
+		214CD371246B347200B24886 /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 		217A23BD243B34E8001B8236 /* UIDevice+ModelName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+ModelName.swift"; sourceTree = "<group>"; };
 		219288842461B1E100691FDD /* build341_contactEvents.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = build341_contactEvents.plist; sourceTree = "<group>"; };
 		2192888624640B5600691FDD /* ContactEventDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventDetailTableViewController.swift; sourceTree = "<group>"; };
@@ -355,7 +359,7 @@
 		219B61362447371700E2F1A6 /* UUIDExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UUIDExtensionsTests.swift; sourceTree = "<group>"; };
 		219C7B73245AB88100952B4D /* BroadcastEncrypterProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastEncrypterProvider.swift; sourceTree = "<group>"; };
 		219C7B75245AB8E500952B4D /* ConcreteBroadcastIdEncrypterProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcreteBroadcastIdEncrypterProviderTests.swift; sourceTree = "<group>"; };
-		219C7B77245AD4B700952B4D /* TestHelpersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpersTests.swift; sourceTree = "<group>"; };
+		219C7B77245AD4B700952B4D /* DateExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensionTests.swift; sourceTree = "<group>"; };
 		219C7B79245AE83700952B4D /* DataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtensions.swift; sourceTree = "<group>"; };
 		219C7B7B245B093000952B4D /* BluetoothPayloadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothPayloadTests.swift; sourceTree = "<group>"; };
 		219C7B7D245B0B1500952B4D /* BroadcastPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastPayload.swift; sourceTree = "<group>"; };
@@ -612,6 +616,7 @@
 			isa = PBXGroup;
 			children = (
 				0964B37F246329680022EF97 /* UIView_ScrollingTests.swift */,
+				219C7B77245AD4B700952B4D /* DateExtensionTests.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -768,6 +773,7 @@
 				21C09A8E2437B99F00368203 /* BluetoothNursery.swift */,
 				F72EBD96243C8490009F9328 /* BluetoothStateUserNotifier.swift */,
 				09D027CB24521542006EE07E /* BluetoothStateObserver.swift */,
+				214CD36F246B306D00B24886 /* BroadcastPayloadRotationTimer.swift */,
 			);
 			path = Bluetooth;
 			sourceTree = "<group>";
@@ -803,7 +809,6 @@
 				F67C5157243E7BD5008E2945 /* SelfDiagnosis */,
 				0983ACD1243EB20A00DBB336 /* Status */,
 				89DF66A12460171B00A55F24 /* Storage */,
-				219C7B77245AD4B700952B4D /* TestHelpersTests.swift */,
 			);
 			path = SonarTests;
 			sourceTree = "<group>";
@@ -1282,6 +1287,7 @@
 				219B613424471B9800E2F1A6 /* UUIDExtensions.swift */,
 				21B71F772451788800D0DED7 /* OptionalCoalescingString.swift */,
 				219C7B79245AE83700952B4D /* DataExtensions.swift */,
+				214CD371246B347200B24886 /* DateExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1503,7 +1509,7 @@
 				098ED48C242E8B290029B729 /* PersistenceDouble.swift in Sources */,
 				F61695A32458B556006AABE3 /* StatusNotificationHandlerTests.swift in Sources */,
 				092BB5AB244622200036B30E /* RootViewControllerTests.swift in Sources */,
-				219C7B78245AD4B700952B4D /* TestHelpersTests.swift in Sources */,
+				219C7B78245AD4B700952B4D /* DateExtensionTests.swift in Sources */,
 				21E50511244470590065C69B /* ContactEventTests.swift in Sources */,
 				097C94CB245B81E8008A9695 /* EnGbLocaleProviderDouble.swift in Sources */,
 				89896E622435F37300F949EA /* ProjectTests.swift in Sources */,
@@ -1592,6 +1598,7 @@
 				89DF669F2460168000A55F24 /* StorageChecker.swift in Sources */,
 				217A23BE243B34E8001B8236 /* UIDevice+ModelName.swift in Sources */,
 				F604976924539093002B8503 /* UploadLog.swift in Sources */,
+				214CD372246B347200B24886 /* DateExtensions.swift in Sources */,
 				21F373FF2433844D00926FB8 /* ContactEventRepository.swift in Sources */,
 				219C7B7F245B0BBB00952B4D /* BroadcastPayload.swift in Sources */,
 				21C09A8F2437B99F00368203 /* BluetoothNursery.swift in Sources */,
@@ -1605,6 +1612,7 @@
 				AE2A5E502423C473007A4771 /* ContactEvent.swift in Sources */,
 				F694B1C4245B899C00C6A5D1 /* StatusContent.swift in Sources */,
 				219B613524471B9800E2F1A6 /* UUIDExtensions.swift in Sources */,
+				214CD370246B306D00B24886 /* BroadcastPayloadRotationTimer.swift in Sources */,
 				89F06B332434AF130074C612 /* ForwardingLogHandler.swift in Sources */,
 				21B3D2E52429112B00573061 /* SecureRequest.swift in Sources */,
 				097C93892447986B00E985CF /* TextField.swift in Sources */,

@@ -271,7 +271,7 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
         keepaliveTimer?.setEventHandler {
             self.broadcaster.sendKeepalive(value: value)
         }
-        keepaliveTimer?.schedule(deadline: DispatchTime.now() + keepaliveInterval)
+        keepaliveTimer?.schedule(deadline: .now() + keepaliveInterval)
         keepaliveTimer?.resume()
     }
 

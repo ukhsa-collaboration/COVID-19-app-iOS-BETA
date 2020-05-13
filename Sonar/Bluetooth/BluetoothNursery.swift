@@ -44,7 +44,9 @@ class ConcreteBluetoothNursery: BluetoothNursery, PersistenceDelegate {
 
     private var central: CBCentralManager?
     private var peripheral: CBPeripheralManager?
-
+    
+    private var broadcastPayloadRotationTimer: BroadcastPayloadRotationTimer?
+    
     init(
         persistence: Persisting,
         userNotificationCenter: UserNotificationCenter,
@@ -100,6 +102,9 @@ class ConcreteBluetoothNursery: BluetoothNursery, PersistenceDelegate {
         )
         
         self.listener = listener
+        
+        broadcastPayloadRotationTimer = BroadcastPayloadRotationTimer(broadcaster: broadcaster, queue: btleQueue)
+        broadcastPayloadRotationTimer?.scheduleNextMidnightUTC()
     }
     
     var hasStarted: Bool { return self.listener != nil }

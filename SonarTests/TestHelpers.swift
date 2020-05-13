@@ -82,20 +82,6 @@ extension SecKey {
 
 }
 
-extension Date {
-    
-    var midday: Date {
-        return Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: self)!
-    }
-
-    var followingMidnightUTC: Date {
-        var calendar = Calendar(identifier: .gregorian)
-        calendar.timeZone = TimeZone(identifier: "UTC")!
-        return calendar.startOfDay(for: calendar.date(byAdding: .day, value: 1, to: self)!)
-    }
-
-}
-
 extension IncomingBroadcastPayload {
     
     static var sample1: IncomingBroadcastPayload {
