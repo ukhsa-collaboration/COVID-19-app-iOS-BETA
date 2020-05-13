@@ -37,12 +37,13 @@ class StatusStateMachineTests: XCTestCase {
         XCTAssertEqual(machine.state, .ok(StatusState.Ok()))
     }
 
-    func testPostNotificationOnExposed() {
+    func testPostExposureNotificationOnExposed() throws {
         currentDate = Date()
 
         machine.exposed()
 
-        XCTAssertNotNil(userNotificationCenter.request)
+        let request = try XCTUnwrap(userNotificationCenter.request)
+        XCTAssertEqual(request.content.title, "POTENTIAL_STATUS_TITLE".localized)
     }
 
     func testPostNotificationOnStatusChange() throws {
@@ -73,6 +74,9 @@ class StatusStateMachineTests: XCTestCase {
 
         XCTAssertEqual(machine.state, .symptomatic(StatusState.Symptomatic(symptoms: [.cough], startDate: startDate)))
         XCTAssertTrue(contactEventsUploader.uploadCalled)
+
+        let request = try XCTUnwrap(userNotificationCenter.request)
+        XCTAssertEqual(request.identifier, "Diagnosis")
     }
 
     func testExposedToSymptomatic() throws {
@@ -83,9 +87,12 @@ class StatusStateMachineTests: XCTestCase {
 
         XCTAssertEqual(machine.state, .symptomatic(StatusState.Symptomatic(symptoms: [.cough], startDate: startDate)))
         XCTAssertTrue(contactEventsUploader.uploadCalled)
+
+        let request = try XCTUnwrap(userNotificationCenter.request)
+        XCTAssertEqual(request.identifier, "Diagnosis")
     }
 
-    func testTickFromSymptomaticToCheckin() {
+    func testTickFromSymptomaticToCheckin() throws {
         let startDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 1, hour: 7))!
         let symptomatic = StatusState.Symptomatic(symptoms: [.cough], startDate: startDate)
         persisting.statusState = .symptomatic(symptomatic)
@@ -102,6 +109,9 @@ class StatusStateMachineTests: XCTestCase {
         }
 
         XCTAssertEqual(checkin.checkinDate, symptomatic.expiryDate)
+
+        // There's already a notification scheduled for the symptomatic expiry date
+        XCTAssertNil(userNotificationCenter.request)
     }
 
     func testTickWhenExposedBeforeSeven() {
@@ -139,9 +149,11 @@ class StatusStateMachineTests: XCTestCase {
         currentDate = Calendar.current.date(byAdding: .hour, value: 1, to: checkinAt)!
         machine.checkin(symptoms: [.cough])
         XCTAssertEqual(machine.state, .ok(StatusState.Ok()))
+
+        XCTAssertNil(userNotificationCenter.request)
     }
 
-    func testCheckinOnlyTemperature() {
+    func testCheckinOnlyTemperature() throws {
         let checkinAt = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 1, hour: 7))!
         persisting.statusState = .checkin(StatusState.Checkin(symptoms: [.cough], checkinDate: checkinAt))
 
@@ -150,9 +162,12 @@ class StatusStateMachineTests: XCTestCase {
 
         let nextCheckin = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 2, hour: 7))!
         XCTAssertEqual(machine.state, .checkin(StatusState.Checkin(symptoms: [.temperature], checkinDate: nextCheckin)))
+
+        let request = try XCTUnwrap(userNotificationCenter.request)
+        XCTAssertEqual(request.identifier, "Diagnosis")
     }
 
-    func testCheckinBothCoughAndTemperature() {
+    func testCheckinBothCoughAndTemperature() throws {
         let checkinAt = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 1, hour: 7))!
         persisting.statusState = .checkin(StatusState.Checkin(symptoms: [.cough], checkinDate: checkinAt))
 
@@ -161,9 +176,12 @@ class StatusStateMachineTests: XCTestCase {
 
         let nextCheckin = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 2, hour: 7))!
         XCTAssertEqual(machine.state, .checkin(StatusState.Checkin(symptoms: [.cough, .temperature], checkinDate: nextCheckin)))
+
+        let request = try XCTUnwrap(userNotificationCenter.request)
+        XCTAssertEqual(request.identifier, "Diagnosis")
     }
 
-    func testCheckinWithTemperatureAfterMultipleDays() {
+    func testCheckinWithTemperatureAfterMultipleDays() throws {
         let checkinAt = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 1, hour: 7))!
         persisting.statusState = .checkin(StatusState.Checkin(symptoms: [.cough], checkinDate: checkinAt))
 
@@ -173,6 +191,9 @@ class StatusStateMachineTests: XCTestCase {
 
         let nextCheckin = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 5, hour: 7))!
         XCTAssertEqual(machine.state, .checkin(StatusState.Checkin(symptoms: [.temperature], checkinDate: nextCheckin)))
+
+        let request = try XCTUnwrap(userNotificationCenter.request)
+        XCTAssertEqual(request.identifier, "Diagnosis")
     }
 
     func testIgnoreExposedWhenSymptomatic() {
