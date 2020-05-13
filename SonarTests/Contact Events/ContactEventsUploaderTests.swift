@@ -51,6 +51,8 @@ class ContactEventsUploaderTests: XCTestCase {
             makeSession: { _, _ in session }
         )
 
+        // Arbitrary date since we're round-tripping through JSON and lose precision
+        // that we use later for equality.
         let startDate = Calendar.current.date(from: DateComponents(month: 4, day: 1))!
         try uploader.upload(from: startDate)
 
@@ -264,14 +266,16 @@ class ContactEventsUploaderTests: XCTestCase {
         XCTAssertNil(session.uploadRequest)
     }
 
-    // If we have a completed error but no request, this can happen in prior versions
-    // of the code which did not store the start date with the request. In this case,
+    // A request must have happened in the past since we have a completed event with
+    // an attached error, but there is no log of the initial request because it was
+    // created when we did not attach the start date to the request event. In this case,
     // we mark the upload as completed since we don't have the original start date.
     func testEnsureUploadingWithoutRequested() {
         let registration = Registration.fake
         let persisting = PersistenceDouble(
             registration: registration,
             uploadLog: [
+                UploadLog(date: overAnHourAgo, event: .requested(startDate: nil)),
                 UploadLog(date: overAnHourAgo, event: .completed(error: "oh no")),
             ]
         )
@@ -289,7 +293,9 @@ class ContactEventsUploaderTests: XCTestCase {
         try? uploader.ensureUploading()
 
         XCTAssertNotNil(contactEventRepository.removedThroughDate)
-        XCTAssertEqual(persisting.uploadLog.map { $0.event }, [.completed(error: "oh no"), .completed(error: nil)])
+        XCTAssertEqual(persisting.uploadLog.map { $0.event }, [
+            .requested(startDate: nil), .completed(error: "oh no"), .completed(error: nil)]
+        )
         XCTAssertNil(session.uploadRequest)
     }
 
