@@ -8,12 +8,15 @@
 
 import Foundation
 
+import Logging
+
 class StatusStateMachine {
 
     static let StatusStateChangedNotification = NSNotification.Name("StatusStateChangedNotification")
 
     private let persisting: Persisting
     private let notificationCenter: NotificationCenter
+    private let userNotificationCenter: UserNotificationCenter
     private let dateProvider: () -> Date
 
     private(set) var state: StatusState {
@@ -31,10 +34,12 @@ class StatusStateMachine {
     init(
         persisting: Persisting,
         notificationCenter: NotificationCenter,
+        userNotificationCenter: UserNotificationCenter,
         dateProvider: @autoclosure @escaping () -> Date = Date()
     ) {
         self.persisting = persisting
         self.notificationCenter = notificationCenter
+        self.userNotificationCenter = userNotificationCenter
         self.dateProvider = dateProvider
     }
 
@@ -133,7 +138,22 @@ class StatusStateMachine {
     }
 
     private func transition(from ok: StatusState.Ok, to exposed: StatusState.Exposed) {
+        // Hm, should this live here or somewhere else?
+        let content = UNMutableNotificationContent()
+        content.title = "POTENTIAL_STATUS_TITLE".localized
+        content.body = "POTENTIAL_STATUS_BODY".localized
+
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
+        userNotificationCenter.add(request) { error in
+            guard error != nil else {
+                logger.critical("Unable to add local notification: \(String(describing: error))")
+                return
+            }
+        }
+
         state = .exposed(exposed)
     }
 
 }
+
+fileprivate let logger = Logger(label: "StatusStateMachine")
