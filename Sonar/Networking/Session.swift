@@ -9,6 +9,23 @@
 import Foundation
 
 enum HTTPMethod: Equatable {
+    var body: Data? {
+        switch self {
+        case .get: return nil
+        case .post(let data), .patch(let data): return data
+        case .put(let data): return data
+        }
+    }
+    
+    var name: String {
+        switch self {
+        case .get: return "GET"
+        case .post: return "POST"
+        case .put: return "PUT"
+        case .patch: return "PATCH"
+        }
+    }
+    
     case get
     case post(data: Data)
     case patch(data: Data)
@@ -37,16 +54,17 @@ extension Request {
 
     var baseURL: URL { URL(string: Environment.apiEndpoint)! }
     var sonarHeaderValue: String { Environment.sonarHeaderValue }
-
-    func urlRequest() -> URLRequest {
-        let url: URL
+    
+    var url: URL {
         switch urlable {
         case .path(let p):
-            url = URL(string: p, relativeTo: baseURL)!
+            return URL(string: p, relativeTo: baseURL)!
         case .url(let u):
-            url = u
+            return u
         }
+    }
 
+    func urlRequest() -> URLRequest {
         var urlRequest = URLRequest(url: url)
 
         urlRequest.allHTTPHeaderFields = headers
@@ -74,6 +92,32 @@ extension Request {
         return urlRequest
     }
 
+    #if DEBUG
+    // Note: NSString is load-bearing here. Using it instead of String prevents lldb from
+    // backslash-escaping single quotes in a way that changes the meaning of the command.
+    func toCurlCommand() -> NSString {
+        func escapeSingleQuotes(_ s: String) -> String {
+            return s.replacingOccurrences(of: "'", with: "\\'")
+        }
+        
+        let actualRequest = urlRequest()
+        let headerArgs = actualRequest.allHTTPHeaderFields!.map { kv in
+            let (k, v) = kv
+            return "--header '\(escapeSingleQuotes(k)): \(escapeSingleQuotes(v))'"
+        }.joined(separator: " ")
+        
+        let bodyArgs: String
+        switch method {
+        case .get:
+            bodyArgs = ""
+        default:
+            bodyArgs = "--data '\(escapeSingleQuotes(String(data: method.body!, encoding: .utf8)!))'"
+        }
+
+        
+        return NSString(string: "curl -v \(headerArgs) --request \(method.name) \(bodyArgs) \(actualRequest.url!.absoluteString)")
+    }
+    #endif
 }
 
 protocol Session {
