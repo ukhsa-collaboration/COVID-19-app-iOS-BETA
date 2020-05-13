@@ -3,6 +3,8 @@ name: trigger-internal-deploy
 on:
   schedule:
     - cron: '0 * * * *'
+  repository_dispatch:
+    types: [deploy-internal]
   # push:
   #   branches:
   #     - ci
