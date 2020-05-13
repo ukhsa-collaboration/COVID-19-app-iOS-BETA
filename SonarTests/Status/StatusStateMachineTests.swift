@@ -14,14 +14,18 @@ class StatusStateMachineTests: XCTestCase {
     var machine: StatusStateMachine!
     var persisting: PersistenceDouble!
     var notificationCenter: NotificationCenter!
+    var userNotificationCenter: UserNotificationCenterDouble!
     var currentDate: Date!
 
     override func setUp() {
         persisting = PersistenceDouble()
         notificationCenter = NotificationCenter()
+        userNotificationCenter = UserNotificationCenterDouble()
+
         machine = StatusStateMachine(
             persisting: persisting,
             notificationCenter: notificationCenter,
+            userNotificationCenter: userNotificationCenter,
             dateProvider: self.currentDate
         )
     }
@@ -30,7 +34,17 @@ class StatusStateMachineTests: XCTestCase {
         XCTAssertEqual(machine.state, .ok(StatusState.Ok()))
     }
 
+    func testPostNotificationOnExposed() {
+        currentDate = Date()
+
+        machine.exposed()
+
+        XCTAssertNotNil(userNotificationCenter.request)
+    }
+
     func testPostNotificationOnStatusChange() {
+        currentDate = Date()
+
         var notificationPosted = false
         notificationCenter.addObserver(
             forName: StatusStateMachine.StatusStateChangedNotification,
@@ -40,9 +54,11 @@ class StatusStateMachineTests: XCTestCase {
             notificationPosted = true
         }
 
-        currentDate = Date()
         machine.exposed()
+        XCTAssertTrue(notificationPosted)
 
+        notificationPosted = false
+        machine.selfDiagnose(symptoms: [.cough], startDate: currentDate)
         XCTAssertTrue(notificationPosted)
     }
 
