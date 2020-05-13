@@ -30,18 +30,16 @@ class ContactEventsUploaderTests: XCTestCase {
             makeSession: { _, _ in session }
         )
 
-        try? uploader.upload()
+        let startDate = Date()
+        try uploader.upload(from: startDate)
 
-        XCTAssertEqual(persisting.uploadLog.map { $0.event }, [.requested])
+        XCTAssertEqual(persisting.uploadLog.map { $0.event }, [.requested(startDate: startDate)])
         XCTAssertNil(session.uploadRequest)
     }
 
-    func testUploadRequest() {
+    func testUploadRequest() throws {
         let registration = Registration.fake
-        let persisting = PersistenceDouble(
-            diagnosis: SelfDiagnosis(type: .initial, symptoms: [], startDate: Date()),
-            registration: registration
-        )
+        let persisting = PersistenceDouble(registration: registration)
         let payload = IncomingBroadcastPayload.sample1
         let contactEvent = ContactEvent(broadcastPayload: payload)
         let contactEventRepository = ContactEventRepositoryDouble(contactEvents: [contactEvent])
@@ -53,42 +51,35 @@ class ContactEventsUploaderTests: XCTestCase {
             makeSession: { _, _ in session }
         )
 
-        try? uploader.upload()
+        let startDate = Calendar.current.date(from: DateComponents(month: 4, day: 1))!
+        try uploader.upload(from: startDate)
 
-        guard
-            let request = session.uploadRequest as? UploadContactEventsRequest
-        else {
-            XCTFail("Expected a PatchContactEventsRequest but got \(String(describing: session.requestSent))")
-            return
-        }
+        let request = try XCTUnwrap(session.uploadRequest as? UploadContactEventsRequest)
 
         XCTAssertEqual(request.urlable, .path("/api/residents/\(registration.sonarId.uuidString)"))
 
-        switch request.method {
-        case .patch(let data):
+        if case .patch(let data) = request.method {
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601
 
-            let decoded = try? decoder.decode(UploadContactEventsRequest.Wrapper.self, from: data)
+            let decoded = try decoder.decode(UploadContactEventsRequest.Wrapper.self, from: data)
+
+            XCTAssertEqual(decoded.symptomsTimestamp, startDate)
 
             // Can't compare the entire contact events because the timestamp loses precision
             // when JSON encoded and decoded.
+            XCTAssertEqual(1, decoded.contactEvents.count)
 
-            XCTAssertEqual(1, decoded?.contactEvents.count)
-
-            let firstEvent = decoded?.contactEvents.first
+            let firstEvent = decoded.contactEvents.first
             XCTAssertEqual(payload.cryptogram, firstEvent!.encryptedRemoteContactId)
-        default:
+        } else {
             XCTFail("Expected a patch request but got \(request.method)")
         }
     }
 
-    func testUploadLogRequestedAndStarted() {
+    func testUploadLogRequestedAndStarted() throws {
         let registration = Registration.fake
-        let persisting = PersistenceDouble(
-            diagnosis: SelfDiagnosis(type: .initial, symptoms: [], startDate: Date()),
-            registration: registration
-        )
+        let persisting = PersistenceDouble(registration: registration)
         let payload = IncomingBroadcastPayload.sample1
         let contactEvent = ContactEvent(broadcastPayload: payload)
         let contactEventRepository = ContactEventRepositoryDouble(contactEvents: [contactEvent])
@@ -100,17 +91,15 @@ class ContactEventsUploaderTests: XCTestCase {
             makeSession: { _, _ in session }
         )
 
-        try? uploader.upload()
+        let startDate = Date()
+        try uploader.upload(from: startDate)
 
         XCTAssertEqual(persisting.uploadLog.map { $0.event.key }, ["requested", "started"])
     }
 
-    func testCleanup() {
+    func testCleanup() throws {
         let registration = Registration.fake
-        let persisting = PersistenceDouble(
-            diagnosis: SelfDiagnosis(type: .initial, symptoms: [], startDate: Date()),
-            registration: registration
-        )
+        let persisting = PersistenceDouble(registration: registration)
         let payload = IncomingBroadcastPayload.sample1
         let contactEvent = ContactEvent(broadcastPayload: payload)
         let contactEventRepository = ContactEventRepositoryDouble(contactEvents: [contactEvent])
@@ -122,7 +111,7 @@ class ContactEventsUploaderTests: XCTestCase {
             makeSession: { _, _ in session }
         )
 
-        try? uploader.upload()
+        try uploader.upload(from: Date())
         uploader.cleanup()
 
         XCTAssertEqual(contactEventRepository.removedThroughDate, contactEvent.timestamp)
@@ -134,9 +123,11 @@ class ContactEventsUploaderTests: XCTestCase {
     }
 
     func testEnsureUploadingWhenRequestedButNoRegistration() {
+        let startDate = Date()
         let persisting = PersistenceDouble(
-            diagnosis: SelfDiagnosis(type: .initial, symptoms: [], startDate: Date()),
-            uploadLog: [UploadLog(event: .requested)]
+            uploadLog: [
+                UploadLog(event: .requested(startDate: startDate)),
+            ]
         )
         let contactEventRepository = ContactEventRepositoryDouble()
         let session = SessionDouble()
@@ -149,16 +140,17 @@ class ContactEventsUploaderTests: XCTestCase {
 
         try? uploader.ensureUploading()
 
-        XCTAssertEqual(persisting.uploadLog.map { $0.event }, [.requested])
+        XCTAssertEqual(persisting.uploadLog.map { $0.event }, [.requested(startDate: startDate)])
         XCTAssertNil(session.uploadRequest)
     }
 
     func testEnsureUploadingWhenRequestedWithRegistration() {
         let registration = Registration.fake
         let persisting = PersistenceDouble(
-            diagnosis: SelfDiagnosis(type: .initial, symptoms: [], startDate: Date()),
             registration: registration,
-            uploadLog: [UploadLog(date: overAnHourAgo, event: .requested)]
+            uploadLog: [
+                UploadLog(date: overAnHourAgo, event: .requested(startDate: Date())),
+            ]
         )
         let contactEventRepository = ContactEventRepositoryDouble()
         let session = SessionDouble()
@@ -178,10 +170,9 @@ class ContactEventsUploaderTests: XCTestCase {
     func testEnsureUploadingWhenStarted() {
         let registration = Registration.fake
         let persisting = PersistenceDouble(
-            diagnosis: SelfDiagnosis(type: .initial, symptoms: [], startDate: Date()),
             registration: registration,
             uploadLog: [
-                UploadLog(event: .requested),
+                UploadLog(event: .requested(startDate: Date())),
                 UploadLog(event: .started(lastContactEventDate: Date())),
             ]
         )
@@ -203,10 +194,9 @@ class ContactEventsUploaderTests: XCTestCase {
     func testEnsureUploadingWhenCompleted() {
         let registration = Registration.fake
         let persisting = PersistenceDouble(
-            diagnosis: SelfDiagnosis(type: .initial, symptoms: [], startDate: Date()),
             registration: registration,
             uploadLog: [
-                UploadLog(event: .requested),
+                UploadLog(event: .requested(startDate: Date())),
                 UploadLog(event: .started(lastContactEventDate: Date())),
                 UploadLog(event: .completed(error: nil)),
             ]
@@ -229,10 +219,9 @@ class ContactEventsUploaderTests: XCTestCase {
     func testEnsureUploadingWhenError() {
         let registration = Registration.fake
         let persisting = PersistenceDouble(
-            diagnosis: SelfDiagnosis(type: .initial, symptoms: [], startDate: Date()),
             registration: registration,
             uploadLog: [
-                UploadLog(event: .requested),
+                UploadLog(event: .requested(startDate: Date())),
                 UploadLog(event: .started(lastContactEventDate: Date())),
                 UploadLog(date: overAnHourAgo, event: .completed(error: "oh no")),
             ]
@@ -255,10 +244,9 @@ class ContactEventsUploaderTests: XCTestCase {
     func testEnsureUploadingBeforeAnHourHasPassed() {
         let registration = Registration.fake
         let persisting = PersistenceDouble(
-            diagnosis: SelfDiagnosis(type: .initial, symptoms: [], startDate: Date()),
             registration: registration,
             uploadLog: [
-                UploadLog(event: .requested),
+                UploadLog(event: .requested(startDate: Date())),
             ]
         )
         let contactEventRepository = ContactEventRepositoryDouble()
@@ -275,6 +263,36 @@ class ContactEventsUploaderTests: XCTestCase {
         XCTAssertEqual(persisting.uploadLog.map { $0.event.key }, ["requested"])
         XCTAssertNil(session.uploadRequest)
     }
+
+    // If we have a completed error but no request, this can happen in prior versions
+    // of the code which did not store the start date with the request. In this case,
+    // we mark the upload as completed since we don't have the original start date.
+    func testEnsureUploadingWithoutRequested() {
+        let registration = Registration.fake
+        let persisting = PersistenceDouble(
+            registration: registration,
+            uploadLog: [
+                UploadLog(date: overAnHourAgo, event: .completed(error: "oh no")),
+            ]
+        )
+        let payload = IncomingBroadcastPayload.sample1
+        let contactEvent = ContactEvent(broadcastPayload: payload)
+        let contactEventRepository = ContactEventRepositoryDouble(contactEvents: [contactEvent])
+        let session = SessionDouble()
+
+        let uploader = ContactEventsUploader(
+            persisting: persisting,
+            contactEventRepository: contactEventRepository,
+            makeSession: { _, _ in session }
+        )
+
+        try? uploader.ensureUploading()
+
+        XCTAssertNotNil(contactEventRepository.removedThroughDate)
+        XCTAssertEqual(persisting.uploadLog.map { $0.event }, [.completed(error: "oh no"), .completed(error: nil)])
+        XCTAssertNil(session.uploadRequest)
+    }
+
 
 }
 

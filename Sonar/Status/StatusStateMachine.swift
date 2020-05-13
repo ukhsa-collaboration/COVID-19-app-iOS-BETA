@@ -14,6 +14,9 @@ class StatusStateMachine {
 
     static let StatusStateChangedNotification = NSNotification.Name("StatusStateChangedNotification")
 
+    private let logger = Logger(label: "StatusStateMachine")
+    private let checkinNotificationIdentifier = "Diagnosis"
+
     private let persisting: Persisting
     private var contactEventsUploader: ContactEventsUploading
     private let notificationCenter: NotificationCenter
@@ -55,11 +58,11 @@ class StatusStateMachine {
         switch state {
         case .ok(let ok):
             let symptomatic = StatusState.Symptomatic(symptoms: symptoms, startDate: startDate)
-            try contactEventsUploader.upload()
+            try contactEventsUploader.upload(from: startDate)
             transition(from: ok, to: symptomatic)
         case .exposed(let exposed):
             let symptomatic = StatusState.Symptomatic(symptoms: symptoms, startDate: startDate)
-            try contactEventsUploader.upload()
+            try contactEventsUploader.upload(from: startDate)
             transition(from: exposed, to: symptomatic)
         case .symptomatic, .checkin:
             assertionFailure("Self-diagnosing is only allowed from ok/exposed")
@@ -82,6 +85,8 @@ class StatusStateMachine {
     }
 
     func checkin(symptoms: Set<Symptom>) {
+        userNotificationCenter.removePendingNotificationRequests(withIdentifiers: [checkinNotificationIdentifier])
+
         switch state {
         case .ok, .symptomatic, .exposed:
             assertionFailure("Checking in is only allowed from checkin")
@@ -123,10 +128,12 @@ class StatusStateMachine {
     // MARK: - Transitions
 
     private func transition(from ok: StatusState.Ok, to symptomatic: StatusState.Symptomatic) {
+        add(notificationRequest: checkinNotificationRequest(at: symptomatic.expiryDate))
         state = .symptomatic(symptomatic)
     }
 
     private func transition(from exposed: StatusState.Exposed, to symptomatic: StatusState.Symptomatic) {
+        add(notificationRequest: checkinNotificationRequest(at: symptomatic.expiryDate))
         state = .symptomatic(symptomatic)
     }
 
@@ -135,6 +142,7 @@ class StatusStateMachine {
     }
 
     private func transition(from previous: StatusState.Checkin, to next: StatusState.Checkin) {
+        add(notificationRequest: checkinNotificationRequest(at: next.checkinDate))
         state = .checkin(next)
     }
 
@@ -143,22 +151,44 @@ class StatusStateMachine {
     }
 
     private func transition(from ok: StatusState.Ok, to exposed: StatusState.Exposed) {
-        // Hm, should this live here or somewhere else?
+        add(notificationRequest: exposedNotificationRequest)
+        state = .exposed(exposed)
+    }
+
+    // MARK: - User Notifications
+
+    private func add(notificationRequest: UNNotificationRequest) {
+        userNotificationCenter.add(notificationRequest) { error in
+            guard error != nil else {
+                self.logger.critical("Unable to add local notification: \(String(describing: error))")
+                return
+            }
+        }
+    }
+
+    private func checkinNotificationRequest(at date: Date) -> UNNotificationRequest {
+        let content = UNMutableNotificationContent()
+        content.title = "NHS COVID-19"
+        content.body = "How are you feeling today?\n\nPlease open the app to update your symptoms and view your latest advice. Your help saves lives."
+
+        let components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
+        let request = UNNotificationRequest(
+            identifier: checkinNotificationIdentifier,
+            content: content,
+            trigger: trigger
+        )
+
+        return request
+    }
+
+    private lazy var exposedNotificationRequest: UNNotificationRequest = {
         let content = UNMutableNotificationContent()
         content.title = "POTENTIAL_STATUS_TITLE".localized
         content.body = "POTENTIAL_STATUS_BODY".localized
 
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
-        userNotificationCenter.add(request) { error in
-            guard error != nil else {
-                logger.critical("Unable to add local notification: \(String(describing: error))")
-                return
-            }
-        }
-
-        state = .exposed(exposed)
-    }
+        return request
+    }()
 
 }
-
-fileprivate let logger = Logger(label: "StatusStateMachine")

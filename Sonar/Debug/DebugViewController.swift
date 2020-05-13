@@ -121,7 +121,8 @@ class DebugViewController: UITableViewController, Storyboarded {
             show(title: "Cleared", message: "All expired contact events cleared.")
             
         case (2, 2):
-            try! contactEventsUploader.upload()
+            let startDate = Calendar.current.date(byAdding: .month, value: -1, to: Date())!
+            try! contactEventsUploader.upload(from: startDate)
             show(title: "Upload Initiated", message: "Contact events uploading.")
 
         case (3, 0):

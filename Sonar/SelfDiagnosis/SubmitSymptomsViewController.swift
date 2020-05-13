@@ -79,7 +79,7 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
                 persisting.selfDiagnosis = selfDiagnosis
 
                 // This needs to go after persisting the self-diagnosis
-                try contactEventsUploader.upload()
+                try contactEventsUploader.upload(from: startDate)
 
                 localNotificationScheduler.scheduleDiagnosisNotification(expiryDate: selfDiagnosis.expiryDate)
             } else {
