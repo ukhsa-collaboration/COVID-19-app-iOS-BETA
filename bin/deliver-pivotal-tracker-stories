@@ -6,7 +6,9 @@ set -e
 commits=$(git rev-list last-commit-to-run-on-ci..HEAD)
 
 # gather the stories that need to be updated                 #find [#story_ids]            #capture id from backets          #remove whitespace
-story_ids=$(echo $commits | xargs git log --format=%B -n 1 | grep "\[Finishes #"           | sed 's/\[#\([0-9]*\)\]/\1/'     | sed -e 's/^[ \t]*//')
+story_ids=$(echo $commits | xargs git log --format=%B -n 1 | grep "\[Finishes #"           | sed 's/\[Finishes #\([0-9]*\)\]/\1/'     | sed -e 's/^[ \t]*//')
+
+echo "Running with these commits : $commits -- and these story ids : $story_ids"
 
 # get the current testflight build
 PLIST=Sonar/Info.plist
@@ -19,5 +21,5 @@ do
   URL="https://www.pivotaltracker.com/services/v5/projects/$PROJECT_ID/stories/$STORY_ID/comments"
 
   curl -X POST -H "X-TrackerToken: $PIVOTAL_TRACKER_API_TOKEN" -H "Content-Type: application/json" -d "$POST_BODY" "$URL" --fail
-done 
+done
 
