@@ -28,10 +28,10 @@ protocol Persisting {
     var partialPostcode: String? { get nonmutating set }
     var bluetoothPermissionRequested: Bool { get nonmutating set }
     var uploadLog: [UploadLog] { get nonmutating set }
-    var linkingId: LinkingId? { get nonmutating set }
     var lastInstalledVersion: String? { get nonmutating set }
     var lastInstalledBuildNumber: String? { get nonmutating set }
     var acknowledgmentUrls: Set<URL> { get nonmutating set }
+    var statusState: StatusState { get nonmutating set }
 
     func clear()
 }
@@ -48,10 +48,11 @@ class Persistence: Persisting {
         case partialPostcode
         case bluetoothPermissionRequested
         case uploadLog
-        case linkingId
+        case linkingId // Should be used only to delete old data
         case lastInstalledBuildNumber
         case lastInstalledVersion
         case acknowledgmentUrls
+        case statusState
     }
     
     private let encoder = JSONEncoder()
@@ -80,6 +81,10 @@ class Persistence: Persisting {
         if storageState != .inSync {
             storageChecker.markAsSynced()
         }
+        
+        // We used to store the user's linking ID, but now we don't.
+        // Since it's potentially sensitive, delete it.
+        UserDefaults.standard.removeObject(forKey: Keys.linkingId.rawValue)
     }
 
     var registration: Registration? {
@@ -177,11 +182,6 @@ class Persistence: Persisting {
         set { UserDefaults.standard.set(newValue, forKey: Keys.bluetoothPermissionRequested.rawValue) }
     }
 
-    var linkingId: LinkingId? {
-        get { UserDefaults.standard.string(forKey: Keys.linkingId.rawValue) }
-        set { UserDefaults.standard.set(newValue, forKey: Keys.linkingId.rawValue) }
-    }
-    
     var lastInstalledVersion: String? {
         get { UserDefaults.standard.string(forKey: Keys.lastInstalledVersion.rawValue) }
         set { UserDefaults.standard.set(newValue, forKey: Keys.lastInstalledVersion.rawValue) }
@@ -210,6 +210,28 @@ class Persistence: Persisting {
             }
 
             UserDefaults.standard.set(data, forKey: Keys.acknowledgmentUrls.rawValue)
+        }
+    }
+
+    var statusState: StatusState {
+        get {
+            guard
+                let data = UserDefaults.standard.data(forKey: Keys.statusState.rawValue),
+                let decoded = try? decoder.decode(StatusState.self, from: data)
+            else {
+                let migration = StatusStateMigration()
+                return migration.migrate(diagnosis: selfDiagnosis, potentiallyExposedOn: potentiallyExposed)
+            }
+
+            return decoded
+        }
+        set {
+            guard let data = try? encoder.encode(newValue) else {
+                logger.critical("Unable to encode the status state")
+                return
+            }
+
+            UserDefaults.standard.set(data, forKey: Keys.statusState.rawValue)
         }
     }
     
