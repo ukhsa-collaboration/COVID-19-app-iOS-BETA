@@ -11,7 +11,9 @@ import Logging
 
 //@IBDesignable
 class PrimaryButton: ButtonWithDynamicType {
-
+    
+    let notificationCenter = NotificationCenter.default
+    
     override var isEnabled: Bool {
         didSet {
             complainIfDisabled()
@@ -20,6 +22,8 @@ class PrimaryButton: ButtonWithDynamicType {
 
     override func setUp() {
         super.setUp()
+        
+        notificationCenter.addObserver(self, selector: #selector(updateForAccessibility), name: UIApplication.didBecomeActiveNotification, object: nil)
         
         layer.cornerRadius = 8
         clipsToBounds = true
@@ -35,7 +39,7 @@ class PrimaryButton: ButtonWithDynamicType {
         complainIfDisabled()
     }
 
-    private func updateForAccessibility() {
+    @objc private func updateForAccessibility() {
         if UIAccessibility.isInvertColorsEnabled {
             layer.borderColor = UIColor.black.cgColor
             layer.borderWidth = 3
