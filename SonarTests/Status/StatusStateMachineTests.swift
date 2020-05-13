@@ -13,17 +13,20 @@ class StatusStateMachineTests: XCTestCase {
 
     var machine: StatusStateMachine!
     var persisting: PersistenceDouble!
+    var contactEventsUploader: ContactEventsUploaderDouble!
     var notificationCenter: NotificationCenter!
     var userNotificationCenter: UserNotificationCenterDouble!
     var currentDate: Date!
 
     override func setUp() {
         persisting = PersistenceDouble()
+        contactEventsUploader = ContactEventsUploaderDouble()
         notificationCenter = NotificationCenter()
         userNotificationCenter = UserNotificationCenterDouble()
 
         machine = StatusStateMachine(
             persisting: persisting,
+            contactEventsUploader: contactEventsUploader,
             notificationCenter: notificationCenter,
             userNotificationCenter: userNotificationCenter,
             dateProvider: self.currentDate
@@ -42,7 +45,7 @@ class StatusStateMachineTests: XCTestCase {
         XCTAssertNotNil(userNotificationCenter.request)
     }
 
-    func testPostNotificationOnStatusChange() {
+    func testPostNotificationOnStatusChange() throws {
         currentDate = Date()
 
         var notificationPosted = false
@@ -58,15 +61,28 @@ class StatusStateMachineTests: XCTestCase {
         XCTAssertTrue(notificationPosted)
 
         notificationPosted = false
-        machine.selfDiagnose(symptoms: [.cough], startDate: currentDate)
+        try machine.selfDiagnose(symptoms: [.cough], startDate: currentDate)
         XCTAssertTrue(notificationPosted)
     }
 
-    func testOkToSymptomatic() {
+    func testOkToSymptomatic() throws {
+        persisting.statusState = .ok(StatusState.Ok())
+
         let startDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 1, hour: 6))!
-        machine.selfDiagnose(symptoms: [.cough], startDate: startDate)
+        try machine.selfDiagnose(symptoms: [.cough], startDate: startDate)
 
         XCTAssertEqual(machine.state, .symptomatic(StatusState.Symptomatic(symptoms: [.cough], startDate: startDate)))
+        XCTAssertTrue(contactEventsUploader.uploadCalled)
+    }
+
+    func testExposedToSymptomatic() throws {
+        persisting.statusState = .exposed(StatusState.Exposed(exposureDate: Date()))
+
+        let startDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 1, hour: 6))!
+        try machine.selfDiagnose(symptoms: [.cough], startDate: startDate)
+
+        XCTAssertEqual(machine.state, .symptomatic(StatusState.Symptomatic(symptoms: [.cough], startDate: startDate)))
+        XCTAssertTrue(contactEventsUploader.uploadCalled)
     }
 
     func testTickFromSymptomaticToCheckin() {
