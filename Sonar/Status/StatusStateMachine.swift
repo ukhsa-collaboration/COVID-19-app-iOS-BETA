@@ -15,6 +15,7 @@ class StatusStateMachine {
     static let StatusStateChangedNotification = NSNotification.Name("StatusStateChangedNotification")
 
     private let persisting: Persisting
+    private var contactEventsUploader: ContactEventsUploading
     private let notificationCenter: NotificationCenter
     private let userNotificationCenter: UserNotificationCenter
     private let dateProvider: () -> Date
@@ -33,17 +34,19 @@ class StatusStateMachine {
 
     init(
         persisting: Persisting,
+        contactEventsUploader: ContactEventsUploading,
         notificationCenter: NotificationCenter,
         userNotificationCenter: UserNotificationCenter,
         dateProvider: @autoclosure @escaping () -> Date = Date()
     ) {
         self.persisting = persisting
+        self.contactEventsUploader = contactEventsUploader
         self.notificationCenter = notificationCenter
         self.userNotificationCenter = userNotificationCenter
         self.dateProvider = dateProvider
     }
 
-    func selfDiagnose(symptoms: Set<Symptom>, startDate: Date) {
+    func selfDiagnose(symptoms: Set<Symptom>, startDate: Date) throws {
         guard !symptoms.isEmpty else {
             assertionFailure("Self-diagnosing with no symptoms is not allowed")
             return
@@ -52,9 +55,11 @@ class StatusStateMachine {
         switch state {
         case .ok(let ok):
             let symptomatic = StatusState.Symptomatic(symptoms: symptoms, startDate: startDate)
+            try contactEventsUploader.upload()
             transition(from: ok, to: symptomatic)
         case .exposed(let exposed):
             let symptomatic = StatusState.Symptomatic(symptoms: symptoms, startDate: startDate)
+            try contactEventsUploader.upload()
             transition(from: exposed, to: symptomatic)
         case .symptomatic, .checkin:
             assertionFailure("Self-diagnosing is only allowed from ok/exposed")
