@@ -217,6 +217,28 @@ class PersistenceTests: TestCase {
         XCTAssertNil(persistence.partialPostcode)
     }
     
+    func testDeletesLinkingId() {
+        UserDefaults.standard.set("the linking ID", forKey: "linkingId")
+        recreatePersistence()
+        XCTAssertNil(UserDefaults.standard.string(forKey: "linkingId"))
+    }
+
+    func testStatusState() {
+        persistence.statusState = .ok(StatusState.Ok())
+        XCTAssertEqual(persistence.statusState, .ok(StatusState.Ok()))
+    }
+
+    func testStatusStateMigration() {
+        XCTAssertEqual(persistence.statusState, .ok(StatusState.Ok()))
+
+        let expiryDate = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
+        let diagnosis = SelfDiagnosis(type: .initial, symptoms: [.cough], startDate: Date(), expiryDate: expiryDate)
+        persistence.selfDiagnosis = diagnosis
+        persistence.potentiallyExposed = Date()
+
+        XCTAssertEqual(persistence.statusState, .symptomatic(StatusState.Symptomatic(symptoms: [.cough], startDate: diagnosis.startDate)))
+    }
+    
     private func recreatePersistence() {
         storageChecker.markAsSyncedCallbackCount = 0
         persistence = Persistence(
@@ -229,7 +251,7 @@ class PersistenceTests: TestCase {
 
 }
 
-class PersistenceDelegateDouble: NSObject, PersistenceDelegate {
+private class PersistenceDelegateDouble: NSObject, PersistenceDelegate {
     var recordedRegistration: Registration?
     func persistence(_ persistence: Persisting, didUpdateRegistration registration: Registration) {
         recordedRegistration = registration

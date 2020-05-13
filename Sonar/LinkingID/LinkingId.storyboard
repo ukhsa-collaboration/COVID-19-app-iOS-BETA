@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Linking Id View Controller-->
+        <!--Testing information-->
         <scene sceneID="Qru-fo-gMt">
             <objects>
                 <viewController storyboardIdentifier="LinkingIdViewController" id="2DV-fd-FjU" customClass="LinkingIdViewController" customModule="Sonar" customModuleProvider="target" sceneMemberID="viewController">
@@ -96,14 +96,6 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ajc-5y-6oC" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
-                                                <rect key="frame" x="16" y="121" width="382" height="33"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                <state key="normal" title="Close"/>
-                                                <connections>
-                                                    <segue destination="IWe-bN-JgZ" kind="unwind" identifier="UnwindFromLinkingId" unwindAction="unwindFromLinkingIdWithUnwindSegue:" id="Zhh-Zk-59a"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <directionalEdgeInsets key="directionalLayoutMargins" top="16" leading="16" bottom="16" trailing="16"/>
                                     </stackView>
@@ -134,6 +126,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="L7M-kP-6XK"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Testing information" id="K44-qv-yGH">
+                        <barButtonItem key="rightBarButtonItem" title="Close" id="FMq-gx-xYa">
+                            <connections>
+                                <segue destination="IWe-bN-JgZ" kind="unwind" unwindAction="unwindFromLinkingIdWithUnwindSegue:" id="WuZ-oS-lhY"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="activityIndicator" destination="YNb-EQ-dKb" id="61Q-CF-I1q"/>
