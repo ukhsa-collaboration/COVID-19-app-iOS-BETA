@@ -111,7 +111,7 @@ private extension ScreenTestCase {
     }
 
     var selfDiagnosedAdvice: XCUIElement {
-        app.staticTexts["Your symptoms indicate you may have coronavirus"]
+        app.staticTexts["Your symptoms indicate you may have coronavirus. Please self-isolate and apply for a test."]
     }
 
     var bookNowAdvice: XCUIElement {

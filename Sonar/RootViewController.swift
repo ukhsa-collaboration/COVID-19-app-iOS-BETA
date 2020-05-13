@@ -40,7 +40,8 @@ class RootViewController: UIViewController {
         contactEventsUploader: ContactEventsUploading,
         linkingIdManager: LinkingIdManaging,
         statusStateMachine: StatusStateMachining,
-        uiQueue: TestableQueue
+        uiQueue: TestableQueue,
+        userStatusProvider: UserStatusProvider
     ) {
         self.persistence = persistence
         self.authorizationManager = authorizationManager
@@ -54,15 +55,15 @@ class RootViewController: UIViewController {
         self.contactEventsUploader = contactEventsUploader
         self.statusStateMachine = statusStateMachine
         self.uiQueue = uiQueue
-
+        
         statusViewController = StatusViewController.instantiate()
         statusViewController.inject(
-            persistence: persistence,
-            registrationService: registrationService,
-            notificationCenter: notificationCenter,
-            linkingIdManager: linkingIdManager,
             statusStateMachine: statusStateMachine,
-            localeProvider: AutoupdatingCurrentLocaleProvider()
+            userStatusProvider: userStatusProvider,
+            persistence: persistence,
+            linkingIdManager: linkingIdManager,
+            registrationService: registrationService,
+            notificationCenter: notificationCenter
         )
         
         setupChecker = SetupChecker(authorizationManager: authorizationManager, bluetoothNursery: bluetoothNursery)
@@ -87,6 +88,9 @@ class RootViewController: UIViewController {
     func showFirstView() {
         show(viewController: UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateInitialViewController()!)
         
+        let navigationController = UINavigationController()
+        navigationController.pushViewController(self.statusViewController, animated: false)
+
         onboardingCoordinator.determineIsOnboardingRequired { onboardingIsRequired in
             self.uiQueue.async {
                 if onboardingIsRequired {
@@ -106,12 +110,12 @@ class RootViewController: UIViewController {
                     ) { [weak self] in
                         guard let self = self else { return }
                         self.monitor.report(.onboardingCompleted)
-                        self.show(viewController: self.statusViewController)
+                        self.show(viewController: navigationController)
                     }
                     
                     self.show(viewController: onboardingViewController)
                 } else {
-                    self.show(viewController: self.statusViewController)
+                    self.show(viewController: navigationController)
                 }
             }
         }

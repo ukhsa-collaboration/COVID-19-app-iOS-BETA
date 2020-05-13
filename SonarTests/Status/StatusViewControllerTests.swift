@@ -18,7 +18,7 @@ class StatusViewControllerTests: XCTestCase {
         XCTAssertEqual(vc.registrationStatusIcon?.image, UIImage(named: "Registration_status_ok"))
         XCTAssertFalse(vc.registrationStatusIcon?.isHidden ?? true)
         XCTAssertTrue(vc.registrationSpinner?.isHidden ?? false)
-        XCTAssertNil(vc.registratonStatusView?.backgroundColor)
+        XCTAssertNil(vc.registrationStatusView?.backgroundColor)
         XCTAssertEqual(vc.registrationStatusText?.textColor, UIColor(named: "NHS Text"))
         XCTAssertTrue(vc.registrationRetryButton?.isHidden ?? false)
     }
@@ -29,7 +29,7 @@ class StatusViewControllerTests: XCTestCase {
         XCTAssertEqual(vc.registrationStatusText?.text, "Finalising setup...")
         XCTAssertTrue(vc.registrationStatusIcon?.isHidden ?? false)
         XCTAssertFalse(vc.registrationSpinner?.isHidden ?? true)
-        XCTAssertNil(vc.registratonStatusView?.backgroundColor)
+        XCTAssertNil(vc.registrationStatusView?.backgroundColor)
         XCTAssertEqual(vc.registrationStatusText?.textColor, UIColor(named: "NHS Text"))
         XCTAssertTrue(vc.registrationRetryButton?.isHidden ?? false)
     }
@@ -52,7 +52,7 @@ class StatusViewControllerTests: XCTestCase {
         XCTAssertEqual(vc.registrationStatusIcon?.image, UIImage(named: "Registration_status_ok"))
         XCTAssertFalse(vc.registrationStatusIcon?.isHidden ?? true)
         XCTAssertTrue(vc.registrationSpinner?.isHidden ?? false)
-        XCTAssertNil(vc.registratonStatusView?.backgroundColor)
+        XCTAssertNil(vc.registrationStatusView?.backgroundColor)
         XCTAssertEqual(vc.registrationStatusText?.textColor, UIColor(named: "NHS Text"))
         XCTAssertTrue(vc.registrationRetryButton?.isHidden ?? false)
     }
@@ -68,7 +68,7 @@ class StatusViewControllerTests: XCTestCase {
         XCTAssertEqual(vc.registrationStatusIcon?.image, UIImage(named: "Registration_status_failure"))
         XCTAssertFalse(vc.registrationStatusIcon?.isHidden ?? true)
         XCTAssertTrue(vc.registrationSpinner?.isHidden ?? false)
-        XCTAssertEqual(vc.registratonStatusView?.backgroundColor, UIColor(named: "Error Grey"))
+        XCTAssertEqual(vc.registrationStatusView?.backgroundColor, UIColor(named: "Error Grey"))
         XCTAssertEqual(vc.registrationStatusText?.textColor, UIColor.white)
         XCTAssertFalse(vc.registrationRetryButton?.isHidden ?? true)
     }
@@ -88,7 +88,7 @@ class StatusViewControllerTests: XCTestCase {
         XCTAssertEqual(vc.registrationStatusText?.text, "Finalising setup...")
         XCTAssertTrue(vc.registrationStatusIcon?.isHidden ?? false)
         XCTAssertFalse(vc.registrationSpinner?.isHidden ?? true)
-        XCTAssertNil(vc.registratonStatusView?.backgroundColor)
+        XCTAssertNil(vc.registrationStatusView?.backgroundColor)
         XCTAssertEqual(vc.registrationStatusText?.textColor, UIColor(named: "NHS Text"))
         XCTAssertTrue(vc.registrationRetryButton?.isHidden ?? false)
     }
@@ -121,7 +121,6 @@ class StatusViewControllerTests: XCTestCase {
         XCTAssertFalse(vc.diagnosisDetailLabel.isHidden)
         XCTAssertEqual(vc.diagnosisDetailLabel.text, "Valid as of 7 May")
         XCTAssertEqual(vc.diagnosisTitleLabel.text, "Follow the current advice to stop the spread of coronavirus")
-        XCTAssertTrue(vc.redStatusView.isHidden)
     }
     
     func testShowsAmberStatus() throws {
@@ -143,7 +142,6 @@ class StatusViewControllerTests: XCTestCase {
         XCTAssertEqual(vc.diagnosisDetailLabel.text, "Follow this advice until 28 May")
 
         XCTAssertEqual(vc.diagnosisTitleLabel.text, "You have been near someone who has coronavirus symptoms")
-        XCTAssertTrue(vc.redStatusView.isHidden)
     }
     
     func testShowsRedStatusForInitialSelfDiagnosis() {
@@ -156,10 +154,9 @@ class StatusViewControllerTests: XCTestCase {
         )
         let vc = makeViewController(statusStateMachine: statusStateMachine)
         
-        XCTAssertEqual(vc.diagnosisTitleLabel.text, "Your symptoms indicate you may have coronavirus")
+        XCTAssertEqual(vc.diagnosisTitleLabel.text, "Your symptoms indicate you may have coronavirus. Please self-isolate and apply for a test.")
         XCTAssertFalse(vc.diagnosisDetailLabel.isHidden)
-        XCTAssertEqual(vc.diagnosisDetailLabel.text, "Follow this advice until 14 May, at which point this app will notify you to update your symptoms.")
-        XCTAssertFalse(vc.redStatusView.isHidden)
+        XCTAssertEqual(vc.diagnosisDetailLabel.text, "On 14 May this app will notify you to update your symptoms. Please read your full advice below.")
     }
 
     func testShowsRedStatusForCheckin() {
@@ -168,31 +165,9 @@ class StatusViewControllerTests: XCTestCase {
         )
         let vc = makeViewController(statusStateMachine: statusStateMachine)
         
-        XCTAssertEqual(vc.diagnosisTitleLabel.text, "Your symptoms indicate you may have coronavirus")
+        XCTAssertEqual(vc.diagnosisTitleLabel.text, "Your symptoms indicate you may have coronavirus. Please self-isolate and apply for a test.")
         XCTAssertFalse(vc.diagnosisDetailLabel.isHidden)
-        XCTAssertEqual(vc.diagnosisDetailLabel.text, "Follow this advice until your temperature returns to normal")
-        XCTAssertFalse(vc.redStatusView.isHidden)
-    }
-    
-    func testReadLatestAdviceLabelWhenDefaultStatus() {
-        let statusStateMachine = StatusStateMachiningDouble(state: .ok(StatusState.Ok()))
-        let vc = makeViewController(statusStateMachine: statusStateMachine)
-        
-        XCTAssertEqual(vc.readLatestAdviceLabel.text, "Read current advice")
-    }
-
-    func testReadLatestAdviceLabelWhenAmberStatus() {
-        let statusStateMachine = StatusStateMachiningDouble(state: .exposed(StatusState.Exposed(exposureDate: Date())))
-        let vc = makeViewController(statusStateMachine: statusStateMachine)
-
-        XCTAssertEqual(vc.readLatestAdviceLabel.text, "Read what to do next")
-    }
-    
-    func testReadLatestAdviceLabelWhenRedStatus() {
-        let statusStateMachine = StatusStateMachiningDouble(state: .symptomatic(StatusState.Symptomatic(symptoms: [.cough], startDate: Date())))
-        let vc = makeViewController(statusStateMachine: statusStateMachine)
-
-        XCTAssertEqual(vc.readLatestAdviceLabel.text, "Read what to do next")
+        XCTAssertEqual(vc.diagnosisDetailLabel.text, "Follow this advice until your temperature returns to normal.")
     }
 }
 
@@ -204,12 +179,12 @@ fileprivate func makeViewController(
 ) -> StatusViewController {
     let vc = StatusViewController.instantiate()
     vc.inject(
-        persistence: persistence,
-        registrationService: registrationService,
-        notificationCenter: notificationCenter,
-        linkingIdManager: LinkingIdManagerDouble(),
         statusStateMachine: statusStateMachine,
-        localeProvider: EnGbLocaleProviderDouble()
+        userStatusProvider: UserStatusProvider(localeProvider: EnGbLocaleProviderDouble()),
+        persistence: persistence,
+        linkingIdManager: LinkingIdManagerDouble(),
+        registrationService: registrationService,
+        notificationCenter: notificationCenter
     )
     XCTAssertNotNil(vc.view)
     vc.viewWillAppear(false)

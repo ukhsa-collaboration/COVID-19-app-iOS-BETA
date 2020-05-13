@@ -118,6 +118,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         Appearance.setup()
         
         writeBuildInfo()
+        
+        let userStatusProvider = UserStatusProvider(localeProvider: AutoupdatingCurrentLocaleProvider())
 
         let rootVC = RootViewController()
         rootVC.inject(
@@ -133,7 +135,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             contactEventsUploader: contactEventsUploader,
             linkingIdManager: linkingIdManager,
             statusStateMachine: statusStateMachine,
-            uiQueue: DispatchQueue.main
+            uiQueue: DispatchQueue.main,
+            userStatusProvider: userStatusProvider
         )
         
         window = UIWindow(frame: UIScreen.main.bounds)

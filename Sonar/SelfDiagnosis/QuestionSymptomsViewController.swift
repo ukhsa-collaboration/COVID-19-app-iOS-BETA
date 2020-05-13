@@ -108,4 +108,7 @@ class QuestionSymptomsViewController: UIViewController, Storyboarded {
         buttonAction(state)
     }
     
+    @IBAction func cancelTapped(_ sender: Any) {
+        navigationController?.popToRootViewController(animated: true)
+    }
 }

@@ -45,7 +45,8 @@ class RootViewControllerTests: TestCase {
             contactEventsUploader: ContactEventsUploaderDouble(),
             linkingIdManager: LinkingIdManagerDouble(),
             statusStateMachine: StatusStateMachiningDouble(),
-            uiQueue: QueueDouble()
+            uiQueue: QueueDouble(),
+            userStatusProvider: UserStatusProvider(localeProvider: EnGbLocaleProviderDouble())
         )
     }
     
@@ -63,7 +64,9 @@ class RootViewControllerTests: TestCase {
         XCTAssertNotNil(rootVC.view)
         
         XCTAssertEqual(rootVC.children.count, 1)
-        XCTAssertNotNil(rootVC.children.first as? StatusViewController)
+        let navController = rootVC.children.first as! UINavigationController
+        XCTAssertEqual(navController.children.count, 1)
+        XCTAssertNotNil(navController.children[0] as? StatusViewController)
         XCTAssertTrue(monitor.detectedEvents.isEmpty)
     }
     
@@ -75,7 +78,9 @@ class RootViewControllerTests: TestCase {
         onboardingCoordinator.stateCompletion?(.done)
 
         XCTAssertEqual(rootVC.children.count, 1)
-        XCTAssertNotNil(rootVC.children.first as? StatusViewController)
+        let navController = rootVC.children.first as! UINavigationController
+        XCTAssertEqual(navController.children.count, 1)
+        XCTAssertNotNil(navController.children[0] as? StatusViewController)
         XCTAssertEqual(monitor.detectedEvents, [.onboardingCompleted])
     }
     

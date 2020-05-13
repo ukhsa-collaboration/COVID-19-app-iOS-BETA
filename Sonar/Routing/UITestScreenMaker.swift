@@ -31,21 +31,23 @@ struct UITestScreenMaker: ScreenMaking {
         case .status:
             let statusViewController = StatusViewController.instantiate { viewController in
                 let persistence = InMemoryPersistence();
-                viewController.inject(persistence: persistence,
-                    registrationService: MockRegistrationService(),
-                    notificationCenter: NotificationCenter(),
-                    linkingIdManager: MockLinkingIdManager(),
-                    statusStateMachine: StatusStateMachine(
-                        persisting: persistence,
-                        contactEventsUploader: MockContactEventsUploading(),
-                        notificationCenter: NotificationCenter(),
-                        userNotificationCenter: UNUserNotificationCenter.current()
-                    ),
-                    localeProvider: FixedLocaleProvider()
+                let userStatusProvider = UserStatusProvider(localeProvider: FixedLocaleProvider())
+                viewController.inject(statusStateMachine: StatusStateMachine(
+                                    persisting: persistence,
+                                    contactEventsUploader: MockContactEventsUploading(),
+                                    notificationCenter: NotificationCenter(),
+                                    userNotificationCenter: UNUserNotificationCenter.current()
+                ),
+                                      userStatusProvider: userStatusProvider,
+                                      persistence: persistence,
+                                      linkingIdManager: MockLinkingIdManager(),
+                                      registrationService: MockRegistrationService(),
+                                      notificationCenter: NotificationCenter()
                 )
             }
-
-            return statusViewController
+            let navigationController = UINavigationController()
+            navigationController.pushViewController(statusViewController, animated: false)
+            return navigationController
         }
     }
 }
