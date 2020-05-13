@@ -18,7 +18,12 @@ struct UploadLog: Codable, Equatable {
     }
 
     enum Event: Equatable {
-        case requested(startDate: Date)
+        // This startDate is optional because we didn't use to
+        // store this with the request. Unfortunately, it's non-
+        // trivial to strip this out as part of JSON decoding,
+        // so we're left with this as a vestigal annoyance.
+        case requested(startDate: Date?)
+
         case started(lastContactEventDate: Date)
         case completed(error: String?)
 
@@ -44,7 +49,7 @@ extension UploadLog.Event: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         switch try container.decode(String.self, forKey: .key) {
         case "requested":
-            let startDate = try container.decode(Date.self, forKey: .startDate)
+            let startDate = try container.decode(Date?.self, forKey: .startDate)
             self = .requested(startDate: startDate)
         case "started":
             let lastContactEventDate = try container.decode(Date.self, forKey: .lastContactEventDate)
