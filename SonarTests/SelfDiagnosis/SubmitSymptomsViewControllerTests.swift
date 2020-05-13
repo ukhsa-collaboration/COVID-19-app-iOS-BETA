@@ -25,10 +25,11 @@ class SubmitSymptomsViewControllerTests: TestCase {
     }
     
     func testSubmitTappedWithConfirmationSwitchOff() throws {
+        let startDate = Date()
         makeSubject(
             registration: Registration.fake,
             symptoms: [.temperature],
-            startDate: Date()
+            startDate: startDate
         )
 
         let unwinder = SelfDiagnosisUnwinder()
@@ -40,16 +41,17 @@ class SubmitSymptomsViewControllerTests: TestCase {
         let button = PrimaryButton()
         vc.submitTapped(button)
 
-        XCTAssertFalse(contactEventsUploader.uploadCalled)
+        XCTAssertNil(contactEventsUploader.uploadStartDate)
         XCTAssertFalse(vc.errorLabel.isHidden)
         XCTAssertEqual(vc.confirmSwitch.layer.borderColor, UIColor(named: "NHS Error")!.cgColor)
     }
 
     func testSubmitTappedWithConfirmationSwitchOn() throws {
+        let startDate = Date()
         makeSubject(
             registration: Registration(sonarId: UUID(uuidString: "FA817D5C-C615-4ABE-83B5-ABDEE8FAB8A6")!, secretKey: SecKey.sampleHMACKey, broadcastRotationKey: SecKey.sampleEllipticCurveKey),
             symptoms: [.temperature],
-            startDate: Date()
+            startDate: startDate
         )
 
         let unwinder = SelfDiagnosisUnwinder()
@@ -60,7 +62,7 @@ class SubmitSymptomsViewControllerTests: TestCase {
         let button = PrimaryButton()
         vc.submitTapped(button)
 
-        XCTAssertTrue(contactEventsUploader.uploadCalled)
+        XCTAssertEqual(contactEventsUploader.uploadStartDate, startDate)
         XCTAssertTrue(vc.errorLabel.isHidden)
     }
     
@@ -74,37 +76,40 @@ class SubmitSymptomsViewControllerTests: TestCase {
         vc.submitTapped(PrimaryButton())
 
         XCTAssertNil(persistence.selfDiagnosis)
-        XCTAssertFalse(contactEventsUploader.uploadCalled)
+        XCTAssertNil(contactEventsUploader.uploadStartDate)
     }
 
     func testPersistsDiagnosisAndSubmitsIfOnlyTemperature() {
-        makeSubject(symptoms: [.temperature])
+        let startDate = Date()
+        makeSubject(symptoms: [.temperature], startDate: startDate)
 
         vc.confirmSwitch.isOn = true
         vc.submitTapped(PrimaryButton())
 
         XCTAssertEqual(persistence.selfDiagnosis?.symptoms, [.temperature])
-        XCTAssertTrue(contactEventsUploader.uploadCalled)
+        XCTAssertEqual(contactEventsUploader.uploadStartDate, startDate)
     }
 
     func testPersistsDiagnosisAndSubmitsIfOnlyCough() {
-        makeSubject(symptoms: [.cough])
+        let startDate = Date()
+        makeSubject(symptoms: [.cough], startDate: startDate)
 
         vc.confirmSwitch.isOn = true
         vc.submitTapped(PrimaryButton())
 
         XCTAssertEqual(persistence.selfDiagnosis?.symptoms, [.cough])
-        XCTAssertTrue(contactEventsUploader.uploadCalled)
+        XCTAssertEqual(contactEventsUploader.uploadStartDate, startDate)
     }
 
     func testPersistsDiagnosisAndSubmitsIfBoth() {
-        makeSubject(symptoms: [.temperature, .cough])
+        let startDate = Date()
+        makeSubject(symptoms: [.temperature, .cough], startDate: startDate)
 
         vc.confirmSwitch.isOn = true
         vc.submitTapped(PrimaryButton())
 
         XCTAssertEqual(persistence.selfDiagnosis?.symptoms, [.temperature, .cough])
-        XCTAssertTrue(contactEventsUploader.uploadCalled)
+        XCTAssertEqual(contactEventsUploader.uploadStartDate, startDate)
     }
 
     func testPersistsStartDate() {

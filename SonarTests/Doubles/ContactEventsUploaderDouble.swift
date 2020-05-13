@@ -18,8 +18,8 @@ class ContactEventsUploaderDouble: ContactEventsUploader {
         )
     }
 
-    var uploadCalled = false
-    override func upload() throws {
-        uploadCalled = true
+    var uploadStartDate: Date?
+    override func upload(from startDate: Date) throws {
+        uploadStartDate = startDate
     }
 }

@@ -73,7 +73,7 @@ class StatusStateMachineTests: XCTestCase {
         try machine.selfDiagnose(symptoms: [.cough], startDate: startDate)
 
         XCTAssertEqual(machine.state, .symptomatic(StatusState.Symptomatic(symptoms: [.cough], startDate: startDate)))
-        XCTAssertTrue(contactEventsUploader.uploadCalled)
+        XCTAssertEqual(contactEventsUploader.uploadStartDate, startDate)
 
         let request = try XCTUnwrap(userNotificationCenter.request)
         XCTAssertEqual(request.identifier, "Diagnosis")
@@ -86,7 +86,7 @@ class StatusStateMachineTests: XCTestCase {
         try machine.selfDiagnose(symptoms: [.cough], startDate: startDate)
 
         XCTAssertEqual(machine.state, .symptomatic(StatusState.Symptomatic(symptoms: [.cough], startDate: startDate)))
-        XCTAssertTrue(contactEventsUploader.uploadCalled)
+        XCTAssertEqual(contactEventsUploader.uploadStartDate, startDate)
 
         let request = try XCTUnwrap(userNotificationCenter.request)
         XCTAssertEqual(request.identifier, "Diagnosis")

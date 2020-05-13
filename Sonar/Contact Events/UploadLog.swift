@@ -18,7 +18,7 @@ struct UploadLog: Codable, Equatable {
     }
 
     enum Event: Equatable {
-        case requested
+        case requested(startDate: Date)
         case started(lastContactEventDate: Date)
         case completed(error: String?)
 
@@ -35,6 +35,7 @@ struct UploadLog: Codable, Equatable {
 extension UploadLog.Event: Codable {
     private enum CodingKeys: CodingKey {
         case key
+        case startDate
         case lastContactEventDate
         case error
     }
@@ -43,10 +44,11 @@ extension UploadLog.Event: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         switch try container.decode(String.self, forKey: .key) {
         case "requested":
-            self = .requested
+            let startDate = try container.decode(Date.self, forKey: .startDate)
+            self = .requested(startDate: startDate)
         case "started":
-            let date = try container.decode(Date.self, forKey: .lastContactEventDate)
-            self = .started(lastContactEventDate: date)
+            let lastContactEventDate = try container.decode(Date.self, forKey: .lastContactEventDate)
+            self = .started(lastContactEventDate: lastContactEventDate)
         case "completed":
             let error = try container.decode(String?.self, forKey: .error)
             self = .completed(error: error)
@@ -59,10 +61,10 @@ extension UploadLog.Event: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(key, forKey: .key)
         switch self {
-        case .requested:
-            break
-        case .started(let date):
-            try container.encode(date, forKey: .lastContactEventDate)
+        case .requested(let startDate):
+            try container.encode(startDate, forKey: .startDate)
+        case .started(let lastContactEventDate):
+            try container.encode(lastContactEventDate, forKey: .lastContactEventDate)
         case .completed(let error):
             try container.encode(error, forKey: .error)
         }

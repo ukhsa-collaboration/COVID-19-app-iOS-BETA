@@ -13,7 +13,7 @@ import Logging
 protocol ContactEventsUploading {
     var sessionDelegate: ContactEventsUploaderSessionDelegate { get }
 
-    func upload() throws
+    func upload(from startDate: Date) throws
     func cleanup()
     func error(_ error: Swift.Error)
     func ensureUploading() throws
@@ -55,15 +55,14 @@ class ContactEventsUploader: ContactEventsUploading {
         sessionDelegate.contactEventsUploader = self
     }
 
-    func upload() throws {
-        persisting.uploadLog = persisting.uploadLog + [UploadLog(event: .requested)]
+    func upload(from startDate: Date) throws {
+        persisting.uploadLog = persisting.uploadLog + [UploadLog(event: .requested(startDate: startDate))]
 
         guard
-            let diagnosis = persisting.selfDiagnosis, // we should always have one of these, but...
             let registration = persisting.registration
             else { return }
 
-        try upload(diagnosis, with: registration)
+        try upload(from: startDate, with: registration)
     }
 
     func cleanup() {
@@ -87,10 +86,9 @@ class ContactEventsUploader: ContactEventsUploading {
     // aren't currently uploading, and it's been an hour since the last attempt.
     func ensureUploading() throws {
         guard
-            let diagnosis = persisting.selfDiagnosis, // we should always have one of these, but...
             let registration = persisting.registration,
             let lastUploadLog = persisting.uploadLog.last
-            else { return }
+        else { return }
 
         let needsUpload: Bool
         switch lastUploadLog.event {
@@ -104,22 +102,34 @@ class ContactEventsUploader: ContactEventsUploading {
 
         let oneHour: TimeInterval = 60 * 60
         let hasBeenAnHour = (Date().timeIntervalSince(lastUploadLog.date)) > oneHour
-
         guard needsUpload && hasBeenAnHour else { return }
 
-        try? upload(diagnosis, with: registration)
+        guard let startDate = persisting.uploadLog.compactMap({ log -> Date? in
+            guard case .requested(let startDate) = log.event else {
+                return nil
+            }
+
+            return startDate
+        }).last else {
+            cleanup()
+            return
+        }
+
+        try? upload(from: startDate, with: registration)
     }
 
     //MARK: - Private
 
-    private func upload(_ diagnosis: SelfDiagnosis, with registration: Registration) throws {
+    private func upload(from startDate: Date, with registration: Registration) throws {
         let contactEvents = contactEventRepository.contactEvents
         let lastDate = contactEvents.map { $0.timestamp }.max() ?? Date() // conservatively default to the current time
-        persisting.uploadLog = persisting.uploadLog + [UploadLog(event: .started(lastContactEventDate: lastDate))]
+        persisting.uploadLog = persisting.uploadLog + [
+            UploadLog(event: .started(lastContactEventDate: lastDate))
+        ]
 
         let request = UploadContactEventsRequest(
             registration: registration,
-            symptomsTimestamp: diagnosis.startDate,
+            symptomsTimestamp: startDate,
             contactEvents: contactEvents
         )
 
