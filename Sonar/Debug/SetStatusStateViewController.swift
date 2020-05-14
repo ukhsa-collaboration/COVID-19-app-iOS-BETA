@@ -33,31 +33,33 @@ class SetStatusStateViewController: UIViewController {
 
     private var temperature: Bool? {
         didSet {
-            switch (temperature, cough) {
-            case (.none, _):
+            guard let temperature = temperature else {
                 temperatureStackView.isHidden = true
                 return
-            case (.some(false), .some(false)):
+            }
+
+            temperatureStackView.isHidden = false
+            temperatureSwitch.isOn = temperature
+
+            if cough == .some(false), !temperature {
                 self.temperature = true
-                return
-            case (.some(let temperature), _):
-                temperatureStackView.isHidden = false
-                temperatureSwitch.isOn = temperature
+                temperatureSwitch.isOn = true
             }
         }
     }
     private var cough: Bool? {
         didSet {
-            switch (temperature, cough) {
-            case (_, .none):
+            guard let cough = cough else {
                 coughStackView.isHidden = true
                 return
-            case (.some(false), .some(false)):
+            }
+
+            coughStackView.isHidden = false
+            coughSwitch.isOn = cough
+
+            if temperature == .some(false), !cough {
                 self.cough = true
-                return
-            case (_, .some(let cough)):
-                coughStackView.isHidden = false
-                coughSwitch.isOn = cough
+                coughSwitch.isOn = true
             }
         }
     }
