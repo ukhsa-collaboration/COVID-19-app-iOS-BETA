@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LinkingIdNavigationController: UINavigationController, Storyboarded {
+class TestingInfoNavigationController: UINavigationController, Storyboarded {
     static let storyboardName = "LinkingId"
 
     var persisting: Persisting!
@@ -20,7 +20,7 @@ class LinkingIdNavigationController: UINavigationController, Storyboarded {
     }
     
     override func viewDidLoad() {
-        let linkingIdVc = viewControllers.first as! LinkingIdViewController
+        let linkingIdVc = viewControllers.first as! TestingInfoViewController
         linkingIdVc.inject(persisting: persisting, linkingIdManager: linkingIdManager)
     }
 }

@@ -633,7 +633,7 @@
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                 <state key="normal" title="Close"/>
                                                 <connections>
-                                                    <segue destination="hPn-91-Mmf" kind="unwind" identifier="UnwindFromMedicalWorkerInstructions" unwindAction="unwindFromLinkingIdWithUnwindSegue:" id="Qhj-Zi-qQM"/>
+                                                    <segue destination="hPn-91-Mmf" kind="unwind" identifier="UnwindFromMedicalWorkerInstructions" unwindAction="unwindFromTestingInfoWithUnwindSegue:" id="Qhj-Zi-qQM"/>
                                                 </connections>
                                             </button>
                                         </subviews>

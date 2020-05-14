@@ -157,7 +157,7 @@ class StatusViewController: UIViewController, Storyboarded {
     }
 
     @IBAction func linkingIdButtonTapped() {
-        let linkingIdVc = LinkingIdViewController.instantiate()
+        let linkingIdVc = TestingInfoViewController.instantiate()
         linkingIdVc.inject(persisting: persistence, linkingIdManager: linkingIdManager)
         let navigationController = UINavigationController()
         navigationController.modalPresentationStyle = .fullScreen
@@ -184,7 +184,7 @@ class StatusViewController: UIViewController, Storyboarded {
         reload()
     }
 
-    @IBAction func unwindFromLinkingId(unwindSegue: UIStoryboardSegue) {
+    @IBAction func unwindFromTestingInfo(unwindSegue: UIStoryboardSegue) {
     }
 
     fileprivate func presentPrompt(for checkin: StatusState.Checkin) {

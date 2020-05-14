@@ -20,7 +20,7 @@
 		097C93892447986B00E985CF /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097C93882447986B00E985CF /* TextField.swift */; };
 		097C94C9245B8146008A9695 /* LocaleProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097C94C8245B8146008A9695 /* LocaleProvider.swift */; };
 		097C94CB245B81E8008A9695 /* EnGbLocaleProviderDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097C94CA245B81E8008A9695 /* EnGbLocaleProviderDouble.swift */; };
-		0982F47E246A1AC000E57EE5 /* LinkingIdNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0982F47D246A1AC000E57EE5 /* LinkingIdNavigationController.swift */; };
+		0982F47E246A1AC000E57EE5 /* TestingInfoNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0982F47D246A1AC000E57EE5 /* TestingInfoNavigationController.swift */; };
 		0983ACCD243E566800DBB336 /* ErrorForTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983ACCC243E566800DBB336 /* ErrorForTest.swift */; };
 		0983ACCF243E6D3800DBB336 /* NotificationObserverDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983ACCE243E6D3800DBB336 /* NotificationObserverDouble.swift */; };
 		0983ACD3243EB22200DBB336 /* StatusViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983ACD2243EB22200DBB336 /* StatusViewControllerTests.swift */; };
@@ -167,8 +167,8 @@
 		F604976F24549729002B8503 /* LinkingIdRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F604976E24549729002B8503 /* LinkingIdRequest.swift */; };
 		F604977224549B7B002B8503 /* LinkingIdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F604977124549B7B002B8503 /* LinkingIdManager.swift */; };
 		F604977524549C95002B8503 /* LinkingIdManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F604977424549C95002B8503 /* LinkingIdManagerTests.swift */; };
-		F60497772454A294002B8503 /* LinkingIdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60497762454A294002B8503 /* LinkingIdViewController.swift */; };
-		F60497792454A40B002B8503 /* LinkingId.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F60497782454A40B002B8503 /* LinkingId.storyboard */; };
+		F60497772454A294002B8503 /* TestingInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60497762454A294002B8503 /* TestingInfoViewController.swift */; };
+		F60497792454A40B002B8503 /* TestingInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F60497782454A40B002B8503 /* TestingInfo.storyboard */; };
 		F613936E243FA82B003447E8 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = F613936D243FA82B003447E8 /* Appearance.swift */; };
 		F616959F2458A2DA006AABE3 /* AcknowledgmentRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F616959E2458A2DA006AABE3 /* AcknowledgmentRequest.swift */; };
 		F61695A12458B3C0006AABE3 /* StatusNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61695A02458B3C0006AABE3 /* StatusNotificationHandler.swift */; };
@@ -292,7 +292,7 @@
 		097C93882447986B00E985CF /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		097C94C8245B8146008A9695 /* LocaleProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocaleProvider.swift; sourceTree = "<group>"; };
 		097C94CA245B81E8008A9695 /* EnGbLocaleProviderDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnGbLocaleProviderDouble.swift; sourceTree = "<group>"; };
-		0982F47D246A1AC000E57EE5 /* LinkingIdNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkingIdNavigationController.swift; sourceTree = "<group>"; };
+		0982F47D246A1AC000E57EE5 /* TestingInfoNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingInfoNavigationController.swift; sourceTree = "<group>"; };
 		0983ACCC243E566800DBB336 /* ErrorForTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorForTest.swift; sourceTree = "<group>"; };
 		0983ACCE243E6D3800DBB336 /* NotificationObserverDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationObserverDouble.swift; sourceTree = "<group>"; };
 		0983ACD2243EB22200DBB336 /* StatusViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewControllerTests.swift; sourceTree = "<group>"; };
@@ -456,8 +456,8 @@
 		F604976E24549729002B8503 /* LinkingIdRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkingIdRequest.swift; sourceTree = "<group>"; };
 		F604977124549B7B002B8503 /* LinkingIdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkingIdManager.swift; sourceTree = "<group>"; };
 		F604977424549C95002B8503 /* LinkingIdManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkingIdManagerTests.swift; sourceTree = "<group>"; };
-		F60497762454A294002B8503 /* LinkingIdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkingIdViewController.swift; sourceTree = "<group>"; };
-		F60497782454A40B002B8503 /* LinkingId.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LinkingId.storyboard; sourceTree = "<group>"; };
+		F60497762454A294002B8503 /* TestingInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingInfoViewController.swift; sourceTree = "<group>"; };
+		F60497782454A40B002B8503 /* TestingInfo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TestingInfo.storyboard; sourceTree = "<group>"; };
 		F613936D243FA82B003447E8 /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		F616959E2458A2DA006AABE3 /* AcknowledgmentRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgmentRequest.swift; sourceTree = "<group>"; };
 		F61695A02458B3C0006AABE3 /* StatusNotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusNotificationHandler.swift; sourceTree = "<group>"; };
@@ -953,7 +953,7 @@
 				214209D3242399DD00C7BFF3 /* Networking */,
 				F6CC2CA7242BC7D90079432B /* Notifications */,
 				F6F05A212433BE9600FF4B72 /* Onboarding */,
-				F604977024549B49002B8503 /* LinkingID */,
+				F604977024549B49002B8503 /* Testing */,
 				F758B8D0242CC661003AE16D /* Registration */,
 				F758B8BC242CB83B003AE16D /* Resources */,
 				895D9E4924374EB800573D4D /* Routing */,
@@ -1088,16 +1088,16 @@
 			path = Logging;
 			sourceTree = "<group>";
 		};
-		F604977024549B49002B8503 /* LinkingID */ = {
+		F604977024549B49002B8503 /* Testing */ = {
 			isa = PBXGroup;
 			children = (
-				F60497782454A40B002B8503 /* LinkingId.storyboard */,
+				F60497782454A40B002B8503 /* TestingInfo.storyboard */,
 				F604977124549B7B002B8503 /* LinkingIdManager.swift */,
 				F604976E24549729002B8503 /* LinkingIdRequest.swift */,
-				F60497762454A294002B8503 /* LinkingIdViewController.swift */,
-				0982F47D246A1AC000E57EE5 /* LinkingIdNavigationController.swift */,
+				F60497762454A294002B8503 /* TestingInfoViewController.swift */,
+				0982F47D246A1AC000E57EE5 /* TestingInfoNavigationController.swift */,
 			);
-			path = LinkingID;
+			path = Testing;
 			sourceTree = "<group>";
 		};
 		F604977324549C84002B8503 /* Pilot */ = {
@@ -1430,7 +1430,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F694B1C6245B8B9D00C6A5D1 /* statusContent.json in Resources */,
-				F60497792454A40B002B8503 /* LinkingId.storyboard in Resources */,
+				F60497792454A40B002B8503 /* TestingInfo.storyboard in Resources */,
 				F758B8C4242CC0EE003AE16D /* Status.storyboard in Resources */,
 				6FC63C3B241641BA007C8BF3 /* LaunchScreen.storyboard in Resources */,
 				AEC6A7BE241BD82900B0237A /* LogoStrapline.xib in Resources */,
@@ -1593,7 +1593,7 @@
 				0997D056243BDEEC0067346C /* RootViewController.swift in Sources */,
 				F6548FA52460DB95005F06FF /* SpinnerView.swift in Sources */,
 				F72EBDA2243D0892009F9328 /* SecureBroadcastRotationKeyStorage.swift in Sources */,
-				F60497772454A294002B8503 /* LinkingIdViewController.swift in Sources */,
+				F60497772454A294002B8503 /* TestingInfoViewController.swift in Sources */,
 				21AF36AB241A8E50001A4910 /* BTLEListener.swift in Sources */,
 				21C09A8D24377F5100368203 /* CoreBluetoothExtensions.swift in Sources */,
 				F72EBDA7243D2FD1009F9328 /* ConcreteBroadcastIdEncrypter.swift in Sources */,
@@ -1658,7 +1658,7 @@
 				898FE859243B4FE300210775 /* AuthorizationManaging.swift in Sources */,
 				F652F72E244E472E00D97950 /* SymptomsPromptViewController.swift in Sources */,
 				F67C5154243E4D2F008E2945 /* AnswerButton.swift in Sources */,
-				0982F47E246A1AC000E57EE5 /* LinkingIdNavigationController.swift in Sources */,
+				0982F47E246A1AC000E57EE5 /* TestingInfoNavigationController.swift in Sources */,
 				F6EEC3B82448DD2400172820 /* SelfDiagnosis.swift in Sources */,
 				0964B37D246328A20022EF97 /* UIView+Scrolling.swift in Sources */,
 				6FC63C31241641B8007C8BF3 /* AppDelegate.swift in Sources */,
