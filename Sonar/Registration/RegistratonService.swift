@@ -88,8 +88,7 @@ class ConcreteRegistrationService: RegistrationService {
         }
         
         self.timeoutQueue.asyncAfter(deadline: .now() + registrationTimeLimitSecs) { [weak self] in
-            guard let self = self else { return }
-            guard self.persistence.registration == nil else { return }
+            guard let self = self, self.persistence.registration == nil, self.isRegistering else { return }
             
             logger.error("Registration did not complete within \(registrationTimeLimitSecs) seconds")
             let hasPushToken = self.remoteNotificationDispatcher.pushToken != nil
