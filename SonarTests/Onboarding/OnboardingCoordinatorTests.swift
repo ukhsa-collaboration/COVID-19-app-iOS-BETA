@@ -160,7 +160,7 @@ class OnboardingCoordinatorTests: TestCase {
         XCTAssertEqual(state, .done)
     }
     
-    func testNotificationsDenied() {
+    func testNotificationsDeniedStillMovesToDoneState() {
         persistenceDouble.partialPostcode = "1234"
         authManagerDouble.bluetooth = .allowed
 
@@ -170,7 +170,7 @@ class OnboardingCoordinatorTests: TestCase {
         onboardingCoordinator.state { state = $0 }
         bluetoothNursery.stateObserver.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
         authManagerDouble.notificationsCompletion?(.denied)
-        XCTAssertEqual(state, .notificationsDenied)
+        XCTAssertEqual(state, .done)
     }
 
     func testDone() {

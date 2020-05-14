@@ -135,8 +135,7 @@ class RootViewController: UIViewController {
                     let vc = BluetoothPermissionDeniedViewController.instantiate()
                     self.showSetupError(viewController: vc)
                 case .notificationPermissions:
-                    let vc = NotificationPermissionDeniedViewController.instantiate()
-                    self.showSetupError(viewController: vc)
+                    break
                 }
             }
         }
