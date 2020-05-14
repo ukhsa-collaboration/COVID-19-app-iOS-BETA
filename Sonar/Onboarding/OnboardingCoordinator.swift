@@ -21,7 +21,7 @@ class OnboardingCoordinator: OnboardingCoordinating {
     private typealias BluetoothCompletion = (State?) -> Void
 
     enum State: Equatable {
-        case initial, partialPostcode, permissions, bluetoothDenied, bluetoothOff, notificationsDenied, done
+        case initial, partialPostcode, permissions, bluetoothDenied, bluetoothOff, done
     }
 
     private let persistence: Persisting
