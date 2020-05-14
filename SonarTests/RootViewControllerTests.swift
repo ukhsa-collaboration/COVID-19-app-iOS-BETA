@@ -43,7 +43,7 @@ class RootViewControllerTests: TestCase {
             monitor: monitor,
             session: SessionDouble(),
             contactEventsUploader: ContactEventsUploaderDouble(),
-            linkingIdManager: LinkingIdManagerDouble.make(),
+            linkingIdManager: LinkingIdManagerDouble(),
             statusStateMachine: StatusStateMachiningDouble(),
             uiQueue: QueueDouble()
         )

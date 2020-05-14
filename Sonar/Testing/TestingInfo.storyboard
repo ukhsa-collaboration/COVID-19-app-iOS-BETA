@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Isf-ek-wrS">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1107"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1086.5"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Linking_ID" translatesAutoresizingMaskIntoConstraints="NO" id="4UQ-u7-iXf">
                                                 <rect key="frame" x="16" y="16" width="343" height="184"/>
@@ -111,70 +111,21 @@
                                                     <constraint firstAttribute="height" constant="10" id="kCO-DI-nqy"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7ta-ca-F7E" userLabel="Reference code wrapper">
+                                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jsk-yP-uwf">
                                                 <rect key="frame" x="16" y="638" width="343" height="128"/>
-                                                <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZQf-ku-HGa" userLabel="Highlight">
-                                                        <rect key="frame" x="0.0" y="0.0" width="4" height="128"/>
-                                                        <color key="backgroundColor" name="NHS Blue"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="4" id="lwE-Va-sqO"/>
-                                                        </constraints>
-                                                    </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your app reference code" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mRf-SJ-wXr">
-                                                        <rect key="frame" x="16" y="8" width="311" height="20.5"/>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reference code" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cjQ-x6-Kok">
-                                                        <rect key="frame" x="16" y="36.5" width="311" height="83.5"/>
-                                                        <accessibility key="accessibilityConfiguration">
-                                                            <accessibilityTraits key="traits" staticText="YES" header="YES"/>
-                                                        </accessibility>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                                <color key="backgroundColor" name="NHS Grey 4"/>
-                                                <constraints>
-                                                    <constraint firstItem="cjQ-x6-Kok" firstAttribute="leading" secondItem="7ta-ca-F7E" secondAttribute="leading" constant="16" id="1bY-kq-V0S"/>
-                                                    <constraint firstAttribute="trailing" secondItem="mRf-SJ-wXr" secondAttribute="trailing" constant="16" id="2jG-fh-1Zy"/>
-                                                    <constraint firstAttribute="bottom" secondItem="ZQf-ku-HGa" secondAttribute="bottom" id="3in-pQ-M3L"/>
-                                                    <constraint firstItem="ZQf-ku-HGa" firstAttribute="top" secondItem="7ta-ca-F7E" secondAttribute="top" id="F44-3N-see"/>
-                                                    <constraint firstAttribute="bottom" secondItem="cjQ-x6-Kok" secondAttribute="bottom" constant="8" id="Ivn-r1-IR3"/>
-                                                    <constraint firstItem="mRf-SJ-wXr" firstAttribute="leading" secondItem="7ta-ca-F7E" secondAttribute="leading" constant="16" id="N5U-lp-FhN"/>
-                                                    <constraint firstItem="cjQ-x6-Kok" firstAttribute="top" secondItem="mRf-SJ-wXr" secondAttribute="bottom" constant="8" id="T1s-01-24Y"/>
-                                                    <constraint firstItem="ZQf-ku-HGa" firstAttribute="leading" secondItem="7ta-ca-F7E" secondAttribute="leading" id="c5e-MK-3Qu"/>
-                                                    <constraint firstItem="mRf-SJ-wXr" firstAttribute="top" secondItem="7ta-ca-F7E" secondAttribute="top" constant="8" id="cXM-57-3de"/>
-                                                    <constraint firstAttribute="trailing" secondItem="cjQ-x6-Kok" secondAttribute="trailing" constant="16" id="h6F-DN-I7P"/>
-                                                </constraints>
-                                            </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fetching reference code" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JMq-Gh-7Cj">
-                                                <rect key="frame" x="16" y="766" width="343" height="20.5"/>
-                                                <accessibility key="accessibilityConfiguration">
-                                                    <accessibilityTraits key="traits" staticText="YES" updatesFrequently="YES"/>
-                                                </accessibility>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error fetching App ID" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwU-V9-8IW" customClass="ErrorLabel" customModule="Sonar" customModuleProvider="target">
-                                                <rect key="frame" x="16" y="786.5" width="343" height="0.0"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                                <connections>
+                                                    <segue destination="Ndp-0u-sId" kind="embed" id="2XV-Hu-2Lz"/>
+                                                </connections>
+                                            </containerView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eGh-jY-LsA" userLabel="Spacer">
-                                                <rect key="frame" x="16" y="786.5" width="343" height="20"/>
+                                                <rect key="frame" x="16" y="766" width="343" height="20"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="eaU-Co-0JF"/>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xpe-BP-5fJ">
-                                                <rect key="frame" x="16" y="806.5" width="343" height="284.5"/>
+                                                <rect key="frame" x="16" y="786" width="343" height="284.5"/>
                                                 <string key="text">If you get a test you need to enter an app reference code as part of the test registration. 
 By having accurate data the app can improve notifications for people you have been in contact with and let them know their risk of having coronavirus is either lower or higher.
 
@@ -198,18 +149,13 @@ You can always find the latest code here, it should be unique for every test you
                                 <viewLayoutGuide key="contentLayoutGuide" id="eSt-n9-y1K"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="gwV-eb-6U9"/>
                             </scrollView>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="YNb-EQ-dKb">
-                                <rect key="frame" x="335" y="293.5" width="20" height="20"/>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="L7M-kP-6XK" firstAttribute="trailing" secondItem="YNb-EQ-dKb" secondAttribute="trailing" constant="20" id="6fA-R2-NeM"/>
                             <constraint firstItem="i7g-54-jA7" firstAttribute="top" secondItem="L7M-kP-6XK" secondAttribute="top" id="TgK-FF-Hqi"/>
                             <constraint firstItem="i7g-54-jA7" firstAttribute="leading" secondItem="L7M-kP-6XK" secondAttribute="leading" id="WY6-hZ-300"/>
                             <constraint firstItem="i7g-54-jA7" firstAttribute="bottom" secondItem="L7M-kP-6XK" secondAttribute="bottom" id="pIh-5V-g6r"/>
                             <constraint firstItem="i7g-54-jA7" firstAttribute="trailing" secondItem="L7M-kP-6XK" secondAttribute="trailing" id="ulE-Ur-f3L"/>
-                            <constraint firstItem="YNb-EQ-dKb" firstAttribute="centerY" secondItem="JMq-Gh-7Cj" secondAttribute="centerY" id="zZn-JS-aGu"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="L7M-kP-6XK"/>
                     </view>
@@ -221,21 +167,135 @@ You can always find the latest code here, it should be unique for every test you
                         </barButtonItem>
                     </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <connections>
-                        <outlet property="activityIndicator" destination="YNb-EQ-dKb" id="61Q-CF-I1q"/>
-                        <outlet property="errorLabel" destination="hwU-V9-8IW" id="sbD-2I-Hqk"/>
-                        <outlet property="linkingIdLabel" destination="JMq-Gh-7Cj" id="P0q-oa-XaA"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3rx-BK-2al" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="IWe-bN-JgZ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1065.217391304348" y="97.767857142857139"/>
         </scene>
+        <!--Linking Id View Controller-->
+        <scene sceneID="MXc-QY-DAA">
+            <objects>
+                <viewController storyboardIdentifier="LinkingIdViewController" id="Ndp-0u-sId" customClass="LinkingIdViewController" customModule="Sonar" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lMa-Lg-Zo1">
+                        <rect key="frame" x="0.0" y="0.0" width="343" height="236"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="9ux-G2-41M" userLabel="Outside Stack View">
+                                <rect key="frame" x="0.0" y="0.0" width="343" height="236"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hQW-du-1mg" userLabel="Fetching wrapper">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="50"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="tHb-7A-KJM" userLabel="Fetching Stack View">
+                                                <rect key="frame" x="16" y="0.0" width="311" height="50"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fetching reference code" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c4D-2N-Mpo">
+                                                        <rect key="frame" x="0.0" y="15" width="291" height="20.5"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="999" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="YNb-EQ-dKb">
+                                                        <rect key="frame" x="291" y="15" width="20" height="20"/>
+                                                    </activityIndicatorView>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstItem="tHb-7A-KJM" firstAttribute="top" secondItem="hQW-du-1mg" secondAttribute="top" id="GkD-mZ-bKE"/>
+                                            <constraint firstAttribute="trailing" secondItem="tHb-7A-KJM" secondAttribute="trailing" constant="16" id="JAz-Bo-uIn"/>
+                                            <constraint firstAttribute="bottom" secondItem="tHb-7A-KJM" secondAttribute="bottom" id="VmY-Ow-waF"/>
+                                            <constraint firstItem="tHb-7A-KJM" firstAttribute="leading" secondItem="hQW-du-1mg" secondAttribute="leading" constant="16" id="u8d-gt-gqa"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ue3-ad-pzT" userLabel="Error wrapper">
+                                        <rect key="frame" x="0.0" y="50" width="343" height="100.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error fetching reference code" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwU-V9-8IW" customClass="ErrorLabel" customModule="Sonar" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="343" height="100.5"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstItem="hwU-V9-8IW" firstAttribute="leading" secondItem="Ue3-ad-pzT" secondAttribute="leading" id="8qi-4G-dOC"/>
+                                            <constraint firstAttribute="trailing" secondItem="hwU-V9-8IW" secondAttribute="trailing" id="9uj-Gs-uV2"/>
+                                            <constraint firstItem="hwU-V9-8IW" firstAttribute="top" secondItem="Ue3-ad-pzT" secondAttribute="top" id="j0f-Ns-vcW"/>
+                                            <constraint firstAttribute="bottom" secondItem="hwU-V9-8IW" secondAttribute="bottom" id="r2Q-UA-4t9"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qfh-90-gug" userLabel="Reference code wrapper">
+                                        <rect key="frame" x="0.0" y="150.5" width="343" height="85.5"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L1P-JU-QWm" userLabel="Highlight">
+                                                <rect key="frame" x="0.0" y="0.0" width="4" height="85.5"/>
+                                                <color key="backgroundColor" name="NHS Blue"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="4" id="YyX-89-PC5"/>
+                                                </constraints>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your app reference code" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l4k-AZ-2tC">
+                                                <rect key="frame" x="16" y="8" width="311" height="20.5"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reference code" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tct-bE-7Hd">
+                                                <rect key="frame" x="16" y="36.5" width="311" height="41"/>
+                                                <accessibility key="accessibilityConfiguration">
+                                                    <accessibilityTraits key="traits" staticText="YES" header="YES"/>
+                                                </accessibility>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" name="NHS Grey 4"/>
+                                        <constraints>
+                                            <constraint firstItem="l4k-AZ-2tC" firstAttribute="leading" secondItem="qfh-90-gug" secondAttribute="leading" constant="16" id="07H-br-OkM"/>
+                                            <constraint firstAttribute="trailing" secondItem="tct-bE-7Hd" secondAttribute="trailing" constant="16" id="4gg-5n-NbT"/>
+                                            <constraint firstItem="tct-bE-7Hd" firstAttribute="leading" secondItem="qfh-90-gug" secondAttribute="leading" constant="16" id="PZz-ox-uIQ"/>
+                                            <constraint firstItem="L1P-JU-QWm" firstAttribute="top" secondItem="qfh-90-gug" secondAttribute="top" id="Q97-kV-iyn"/>
+                                            <constraint firstItem="l4k-AZ-2tC" firstAttribute="top" secondItem="qfh-90-gug" secondAttribute="top" constant="8" id="SGB-ij-Mdf"/>
+                                            <constraint firstAttribute="trailing" secondItem="l4k-AZ-2tC" secondAttribute="trailing" constant="16" id="WgY-AG-3Qs"/>
+                                            <constraint firstAttribute="bottom" secondItem="L1P-JU-QWm" secondAttribute="bottom" id="aAd-lq-W5D"/>
+                                            <constraint firstItem="L1P-JU-QWm" firstAttribute="leading" secondItem="qfh-90-gug" secondAttribute="leading" id="kjR-Kh-lfn"/>
+                                            <constraint firstItem="tct-bE-7Hd" firstAttribute="top" secondItem="l4k-AZ-2tC" secondAttribute="bottom" constant="8" id="xYR-pu-xY6"/>
+                                            <constraint firstAttribute="bottom" secondItem="tct-bE-7Hd" secondAttribute="bottom" constant="8" id="yID-4X-4Pk"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="9ux-G2-41M" firstAttribute="leading" secondItem="lMa-Lg-Zo1" secondAttribute="leading" id="c0D-Bx-I5b"/>
+                            <constraint firstItem="9ux-G2-41M" firstAttribute="top" secondItem="lMa-Lg-Zo1" secondAttribute="top" id="dos-wV-DDb"/>
+                            <constraint firstAttribute="trailing" secondItem="9ux-G2-41M" secondAttribute="trailing" id="eSV-NB-nj4"/>
+                            <constraint firstAttribute="bottom" secondItem="9ux-G2-41M" secondAttribute="bottom" id="iEd-pK-P7h"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="BBp-M1-aed"/>
+                    </view>
+                    <size key="freeformSize" width="343" height="236"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="YNb-EQ-dKb" id="05B-5i-tlK"/>
+                        <outlet property="errorWrapper" destination="Ue3-ad-pzT" id="zUE-nK-WfI"/>
+                        <outlet property="fetchingWrapper" destination="hQW-du-1mg" id="ga7-ad-QHh"/>
+                        <outlet property="referenceCodeLabel" destination="tct-bE-7Hd" id="wYf-eT-sAG"/>
+                        <outlet property="referenceCodeWrapper" destination="qfh-90-gug" id="3xo-J8-a0g"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hOb-7N-h4Z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1064.8" y="644.97751124437787"/>
+        </scene>
         <!--TestingInfoNavigationController-->
         <scene sceneID="TrZ-k5-Qlx">
             <objects>
-                <navigationController title="LinkingIdNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" id="0ke-6m-Ube" userLabel="TestingInfoNavigationController" customClass="TestingInfoNavigationController" customModule="Sonar" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController title="LinkingIdNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" id="0ke-6m-Ube" userLabel="TestingInfoNavigationController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="dMJ-KS-bmp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>

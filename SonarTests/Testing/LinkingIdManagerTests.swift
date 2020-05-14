@@ -55,18 +55,3 @@ class LinkingIdManagerTests: XCTestCase {
     }
 
 }
-
-class LinkingIdManagerDouble: LinkingIdManager {
-    static func make(
-        notificationCenter: NotificationCenter = NotificationCenter(),
-        persisting: Persisting = PersistenceDouble(),
-        session: Session = SessionDouble()
-    ) -> LinkingIdManager {
-        return LinkingIdManager(persisting: persisting, session: session)
-    }
-
-    var fetchCompletion: ((LinkingId?) -> Void)?
-    override func fetchLinkingId(completion: @escaping (LinkingId?) -> Void = { _ in }) {
-        fetchCompletion = completion
-    }
-}
