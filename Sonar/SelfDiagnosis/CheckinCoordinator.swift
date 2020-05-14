@@ -1,5 +1,5 @@
 //
-//  UpdateDiagnosisCoordinator.swift
+//  CheckinCoordinator.swift
 //  Sonar
 //
 //  Created by NHSX on 24/04/2020.
@@ -8,22 +8,19 @@
 
 import UIKit
 
-class UpdateDiagnosisCoordinator: Coordinator {
+class CheckinCoordinator: Coordinator {
     let navigationController: UINavigationController
     let checkin: StatusState.Checkin
-    let statusViewController: StatusViewController
-    var statusStateMachine: StatusStateMachining
+    let completion: (Set<Symptom>) -> Void
     
     init(
         navigationController: UINavigationController,
         checkin: StatusState.Checkin,
-        statusViewController: StatusViewController,
-        statusStateMachine: StatusStateMachining
+        completion: @escaping (Set<Symptom>) -> Void
     ) {
         self.navigationController = navigationController
         self.checkin = checkin
-        self.statusViewController = statusViewController
-        self.statusStateMachine = statusStateMachine
+        self.completion = completion
     }
     
     var symptoms = Set<Symptom>()
@@ -74,14 +71,8 @@ class UpdateDiagnosisCoordinator: Coordinator {
             if hasNewCough {
                 self.symptoms.insert(.cough)
             }
-            
-            self.navigationController.dismiss(animated: true, completion: nil)
 
-            self.statusStateMachine.checkin(symptoms: self.symptoms)
-
-            if case .ok = self.statusStateMachine.state {
-                self.statusViewController.updatePrompt()
-            }
+            self.completion(self.symptoms)
         }
 
         navigationController.pushViewController(vc, animated: true)

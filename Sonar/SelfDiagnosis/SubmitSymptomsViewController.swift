@@ -57,9 +57,6 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         isSubmitting = true
 
         do {
-            // TODO: Don't assume we're being presented
-            navigationController?.dismiss(animated: true, completion: nil)
-
             switch statusStateMachine.state {
             case .ok, .exposed:
                 try statusStateMachine.selfDiagnose(symptoms: symptoms, startDate: startDate)
@@ -67,6 +64,8 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
                 assertionFailure("We should only be able to submit symptoms from ok/exposed")
                 return
             }
+
+            performSegue(withIdentifier: "unwindFromSelfDiagnosis", sender: self)
         } catch {
             alert(with: Error())
         }

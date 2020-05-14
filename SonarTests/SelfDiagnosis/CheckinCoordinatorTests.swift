@@ -1,5 +1,5 @@
 //
-//  UpdateDiagnosisCoordinatorTests.swift
+//  CheckinCoordinatorTests.swift
 //  SonarTests
 //
 //  Created by NHSX on 5/4/20.
@@ -9,16 +9,14 @@
 import XCTest
 @testable import Sonar
 
-class UpdateDiagnosisCoordinatorTests: XCTestCase {
+class CheckinCoordinatorTests: XCTestCase {
 
-    var coordinator: UpdateDiagnosisCoordinator!
+    var coordinator: CheckinCoordinator!
 
     var navController: UINavigationController!
-    var statusViewController: StatusViewController!
 
     override func setUp() {
         navController = UINavigationController()
-        statusViewController = StatusViewController()
     }
 
     func testNoTemperatureQuestion() throws {
@@ -57,13 +55,12 @@ class UpdateDiagnosisCoordinatorTests: XCTestCase {
         XCTAssertEqual(vc.questionTitle, "COUGH_CHECKIN_QUESTION".localized)
     }
 
-    private func make(checkin: StatusState.Checkin) -> UpdateDiagnosisCoordinator {
-        return UpdateDiagnosisCoordinator(
+    private func make(checkin: StatusState.Checkin) -> CheckinCoordinator {
+        return CheckinCoordinator(
             navigationController: navController,
-            checkin: checkin,
-            statusViewController: statusViewController,
-            statusStateMachine: StatusStateMachiningDouble()
-        )
+            checkin: checkin
+        ) { _ in
+        }
     }
 
 }

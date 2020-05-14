@@ -187,6 +187,36 @@ class StatusViewController: UIViewController, Storyboarded {
     @IBAction func unwindFromLinkingId(unwindSegue: UIStoryboardSegue) {
     }
 
+    fileprivate func presentPrompt(for checkin: StatusState.Checkin) {
+        let symptomsPromptViewController = SymptomsPromptViewController.instantiate()
+        symptomsPromptViewController.modalPresentationStyle = .custom
+        symptomsPromptViewController.transitioningDelegate = drawerPresentationManager
+        symptomsPromptViewController.inject { needsCheckin in
+            self.dismiss(animated: true)
+
+            if needsCheckin {
+                let navigationController = UINavigationController()
+                let coordinator = CheckinCoordinator(
+                    navigationController: navigationController,
+                    checkin: checkin
+                ) { symptoms in
+                    self.dismiss(animated: true)
+
+                    self.statusStateMachine.checkin(symptoms: symptoms)
+                    if case .ok = self.statusStateMachine.state {
+                        self.presentCoughUpdate()
+                    }
+                }
+                coordinator.start()
+                navigationController.modalPresentationStyle = .fullScreen
+                self.present(navigationController, animated: true)
+            } else {
+                self.statusStateMachine.checkin(symptoms: [])
+            }
+        }
+        present(symptomsPromptViewController, animated: true)
+    }
+
     @objc func reload() {
         guard view != nil else { return }
 
@@ -241,15 +271,7 @@ class StatusViewController: UIViewController, Storyboarded {
             updateForRedStatus(detail: detail)
 
             if dateProvider() >= checkin.checkinDate {
-                let symptomsPromptViewController = SymptomsPromptViewController.instantiate()
-                symptomsPromptViewController.modalPresentationStyle = .custom
-                symptomsPromptViewController.transitioningDelegate = drawerPresentationManager
-                symptomsPromptViewController.inject(
-                    checkin: checkin,
-                    statusViewController: self,
-                    statusStateMachine: statusStateMachine
-                )
-                present(symptomsPromptViewController, animated: true)
+                presentPrompt(for: checkin)
             }
         }
     }
@@ -266,7 +288,7 @@ class StatusViewController: UIViewController, Storyboarded {
         healthcareWorkersInstructionsView.isHidden = true
     }
     
-    func updatePrompt() {
+    private func presentCoughUpdate() {
         let coughUpdateViewController = CoughUpdateViewController.instantiate()
         coughUpdateViewController.modalPresentationStyle = .custom
         coughUpdateViewController.transitioningDelegate = drawerPresentationManager
