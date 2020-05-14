@@ -8,18 +8,20 @@
 
 import UIKit
 
-class SetStatusStateViewController: UIViewController {
+class SetStatusStateViewController: UITableViewController {
+
+    @IBOutlet var statusStateCell: UITableViewCell!
+    @IBOutlet var temperatureCell: UITableViewCell!
+    @IBOutlet var coughCell: UITableViewCell!
+    @IBOutlet var dateCell: UITableViewCell!
+    @IBOutlet var datePickerCell: UITableViewCell!
 
     @IBOutlet weak var statusStateSegmentedControl: UISegmentedControl!
-    @IBOutlet weak var temperatureStackView: UIStackView!
     @IBOutlet weak var temperatureSwitch: UISwitch!
-    @IBOutlet weak var coughStackView: UIStackView!
     @IBOutlet weak var coughSwitch: UISwitch!
-    @IBOutlet weak var dateStackView: UIStackView!
-    @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var dateButton: UIButton!
+    @IBOutlet weak var dateTitleLabel: UILabel!
+    @IBOutlet weak var dateDetailLabel: UILabel!
     @IBOutlet weak var datePicker: UIDatePicker!
-    @IBOutlet weak var setStatusStateButton: UIButton!
 
     var persistence: Persisting!
     var statusStateMachine: StatusStateMachining!
@@ -34,11 +36,11 @@ class SetStatusStateViewController: UIViewController {
     private var temperature: Bool? {
         didSet {
             guard let temperature = temperature else {
-                temperatureStackView.isHidden = true
+                showCell[temperatureCell] = false
                 return
             }
 
-            temperatureStackView.isHidden = false
+            showCell[temperatureCell] = true
             temperatureSwitch.isOn = temperature
 
             if cough == .some(false), !temperature {
@@ -47,14 +49,15 @@ class SetStatusStateViewController: UIViewController {
             }
         }
     }
+
     private var cough: Bool? {
         didSet {
             guard let cough = cough else {
-                coughStackView.isHidden = true
+                showCell[coughCell] = false
                 return
             }
 
-            coughStackView.isHidden = false
+            showCell[coughCell] = true
             coughSwitch.isOn = cough
 
             if temperature == .some(false), !cough {
@@ -63,30 +66,83 @@ class SetStatusStateViewController: UIViewController {
             }
         }
     }
+
     private var symptoms: Set<Symptom> {
         var set: Set<Symptom> = []
         if let temperature = temperature, temperature { set.insert(.temperature) }
         if let cough = cough, cough { set.insert(.cough) }
         return set
     }
+
     private var date: Date? {
         didSet {
             guard let date = date else {
-                dateStackView.isHidden = true
+                showCell[dateCell] = false
                 return
             }
 
-            dateStackView.isHidden = false
-            dateButton.setTitle(dateFormatter.string(from: date), for: .normal)
+            showCell[dateCell] = true
+            dateDetailLabel.text = dateFormatter.string(from: date)
         }
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    private var cells: [UITableViewCell] {
+        [statusStateCell, temperatureCell, coughCell, dateCell, datePickerCell].filter { showCell[$0] ?? false }
+    }
+    private var showCell: [UITableViewCell: Bool] = [:] {
+        didSet {
+            tableView.reloadData()
+        }
+    }
 
-        switch statusStateMachine.state {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        showCell[statusStateCell] = true
+        show(statusState: statusStateMachine.state)
+    }
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return cells.count
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return cells[indexPath.row]
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+
+        if tableView.cellForRow(at: indexPath) == dateCell {
+            showCell[datePickerCell] = showCell[datePickerCell].map { !$0 } ?? true
+        }
+    }
+
+    @IBAction func statusStateChanged(_ sender: UISegmentedControl) {
+        let statusState: StatusState
+        switch sender.selectedSegmentIndex {
+        case 0:
+            statusState = .ok(StatusState.Ok())
+        case 1:
+            statusState = .symptomatic(StatusState.Symptomatic(symptoms: [.temperature, .cough], startDate: Date()))
+        case 2:
+            statusState = .checkin(StatusState.Checkin(symptoms: [.temperature, .cough], checkinDate: Date()))
+        case 3:
+            statusState = .exposed(StatusState.Exposed(exposureDate: Date()))
+        default:
+            fatalError()
+        }
+
+        show(statusState: statusState)
+    }
+
+    private func show(statusState: StatusState) {
+        switch statusState {
         case .ok:
             statusStateSegmentedControl.selectedSegmentIndex = 0
+            temperature = nil
+            cough = nil
+            date = nil
         case .symptomatic(let symptomatic):
             statusStateSegmentedControl.selectedSegmentIndex = 1
             temperature = symptomatic.symptoms.contains(.temperature)
@@ -99,39 +155,9 @@ class SetStatusStateViewController: UIViewController {
             date = checkin.checkinDate
         case .exposed(let exposed):
             statusStateSegmentedControl.selectedSegmentIndex = 3
+            temperature = nil
+            cough = nil
             date = exposed.exposureDate
-        }
-
-        statusStateChanged(statusStateSegmentedControl)
-    }
-
-    @IBAction func statusStateChanged(_ sender: UISegmentedControl) {
-        temperature = nil
-        cough = nil
-        date = nil
-        datePicker.isHidden = true
-
-        switch sender.selectedSegmentIndex {
-        case 0:
-            setStatusStateButton.setTitle("Set Ok", for: .normal)
-        case 1:
-            temperature = true
-            cough = true
-            dateLabel.text = "Start Date"
-            date = Date()
-            setStatusStateButton.setTitle("Set Symptomatic", for: .normal)
-        case 2:
-            temperature = true
-            cough = true
-            dateLabel.text = "Checkin Date"
-            date = Date()
-            setStatusStateButton.setTitle("Set Checkin", for: .normal)
-        case 3:
-            date = Date()
-            dateLabel.text = "Exposure Date"
-            setStatusStateButton.setTitle("Set Exposed", for: .normal)
-        default:
-            fatalError()
         }
     }
 
@@ -143,18 +169,11 @@ class SetStatusStateViewController: UIViewController {
         cough = sender.isOn
     }
 
-    @IBAction func dateButtonPressed(_ sender: UIButton) {
-        datePicker.isHidden = false
-        if let date = date {
-            datePicker.date = date
-        }
-    }
-
     @IBAction func datePickerChanged(_ sender: UIDatePicker) {
         date = sender.date
     }
 
-    @IBAction func setStatusStateButtonTapped(_ sender: UIButton) {
+    @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
         let statusState: StatusState
         switch statusStateSegmentedControl.selectedSegmentIndex {
         case 0:
