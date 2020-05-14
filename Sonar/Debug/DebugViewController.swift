@@ -125,6 +125,12 @@ class DebugViewController: UITableViewController, Storyboarded {
             show(title: "Upload Initiated", message: "Contact events uploading.")
 
         case (3, 0):
+            performSegue(withIdentifier: "unwindFromDebugViewController", sender: self)
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5)) {
+                self.statusStateMachine.exposed()
+            }
+
+        case (3, 1):
             do {
                 guard let registration = persisting.registration else {
                     throw NSError()
