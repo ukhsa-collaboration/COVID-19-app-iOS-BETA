@@ -202,6 +202,7 @@
 		F694B1C2245A4A5600C6A5D1 /* ErrorLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F694B1C1245A4A5600C6A5D1 /* ErrorLabel.swift */; };
 		F694B1C4245B899C00C6A5D1 /* StatusContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F694B1C3245B899C00C6A5D1 /* StatusContent.swift */; };
 		F694B1C6245B8B9D00C6A5D1 /* statusContent.json in Resources */ = {isa = PBXBuildFile; fileRef = F694B1C5245B8B9D00C6A5D1 /* statusContent.json */; };
+		F697806A246DA9EF002CC50B /* SetStatusStateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6978069246DA9EF002CC50B /* SetStatusStateViewController.swift */; };
 		F6AB2F20243D359F00386D6B /* SubmitSymptomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */; };
 		F6CC2CA9242BC7FC0079432B /* RemoteNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CC2CA8242BC7FC0079432B /* RemoteNotificationManager.swift */; };
 		F6CC2CAC242BCD0D0079432B /* RemoteNotificationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CC2CAB242BCD0D0079432B /* RemoteNotificationManagerTests.swift */; };
@@ -496,6 +497,7 @@
 		F694B1C1245A4A5600C6A5D1 /* ErrorLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorLabel.swift; sourceTree = "<group>"; };
 		F694B1C3245B899C00C6A5D1 /* StatusContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusContent.swift; sourceTree = "<group>"; };
 		F694B1C5245B8B9D00C6A5D1 /* statusContent.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = statusContent.json; sourceTree = "<group>"; };
+		F6978069246DA9EF002CC50B /* SetStatusStateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetStatusStateViewController.swift; sourceTree = "<group>"; };
 		F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitSymptomsViewController.swift; sourceTree = "<group>"; };
 		F6CA2818242E41F700F8DC55 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F6CC2CA8242BC7FC0079432B /* RemoteNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteNotificationManager.swift; sourceTree = "<group>"; };
@@ -660,6 +662,7 @@
 				2115C3E524360427009C0F5B /* GradientBackgroundTableViewCell.swift */,
 				21F374032434C4BF00926FB8 /* ContactEventsTableViewController.swift */,
 				2192888624640B5600691FDD /* ContactEventDetailTableViewController.swift */,
+				F6978069246DA9EF002CC50B /* SetStatusStateViewController.swift */,
 			);
 			path = Debug;
 			sourceTree = "<group>";
@@ -1581,6 +1584,7 @@
 				F6F05A282433C55300FF4B72 /* AuthorizationManager.swift in Sources */,
 				89F06B352434AF9D0074C612 /* LogEvent.swift in Sources */,
 				F694B1BC2459E9F000C6A5D1 /* NotificationAcknowledger.swift in Sources */,
+				F697806A246DA9EF002CC50B /* SetStatusStateViewController.swift in Sources */,
 				2192888724640B5600691FDD /* ContactEventDetailTableViewController.swift in Sources */,
 				F613936E243FA82B003447E8 /* Appearance.swift in Sources */,
 				F6F05A342434344200FF4B72 /* StartNowViewController.swift in Sources */,

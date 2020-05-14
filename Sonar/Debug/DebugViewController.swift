@@ -19,6 +19,7 @@ class DebugViewController: UITableViewController, Storyboarded {
     private var contactEventRepository: ContactEventRepository!
     private var contactEventPersister: ContactEventPersister!
     private var contactEventsUploader: ContactEventsUploading!
+    private var statusStateMachine: StatusStateMachining!
 
     private var bluetoothNursery: ConcreteBluetoothNursery!
     var observation: NSKeyValueObservation?
@@ -35,13 +36,15 @@ class DebugViewController: UITableViewController, Storyboarded {
         bluetoothNursery: BluetoothNursery,
         contactEventRepository: ContactEventRepository,
         contactEventPersister: ContactEventPersister,
-        contactEventsUploader: ContactEventsUploading
+        contactEventsUploader: ContactEventsUploading,
+        statusStateMachine: StatusStateMachining
     ) {
         self.persisting = persisting
         self.bluetoothNursery = bluetoothNursery as? ConcreteBluetoothNursery
         self.contactEventRepository = contactEventRepository
         self.contactEventPersister = contactEventPersister
         self.contactEventsUploader = contactEventsUploader
+        self.statusStateMachine = statusStateMachine
     }
     
     override func viewDidLoad() {
@@ -98,7 +101,7 @@ class DebugViewController: UITableViewController, Storyboarded {
             show(title: "Cleared", message: "Registration and diagnosis data has been cleared. Please stop and re-start the application.")
 
         case (1, 1):
-            break
+            performSegue(withIdentifier: "presentSetStatusState", sender: self)
 
         case (1, 2):
             persisting.acknowledgmentUrls = []
@@ -106,7 +109,6 @@ class DebugViewController: UITableViewController, Storyboarded {
 
         case (1, 3):
             kill(getpid(), SIGINT)
-            
 
         case (2, 0):
             contactEventRepository.reset()
@@ -187,6 +189,22 @@ class DebugViewController: UITableViewController, Storyboarded {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.destination {
+        case let nav as UINavigationController:
+            switch nav.topViewController {
+            case let vc as SetStatusStateViewController:
+                vc.persistence = persisting
+                vc.statusStateMachine = statusStateMachine
+            default:
+                break
+            }
+        default:
+            break
+        }
+    }
+
+    @IBAction func unwindFromSetStatusState(unwindSegue: UIStoryboardSegue) {
+
     }
 
     // MARK: - Bluetooth status animation

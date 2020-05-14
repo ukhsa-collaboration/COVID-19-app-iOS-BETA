@@ -22,6 +22,7 @@ class RootViewController: UIViewController {
     private var contactEventsUploader: ContactEventsUploading!
     private var uiQueue: TestableQueue! = nil
     private var setupChecker: SetupChecker!
+    private var statusStateMachine: StatusStateMachining!
     private weak var presentedSetupErorrViewController: UIViewController? = nil
 
     private var statusViewController: StatusViewController!
@@ -51,6 +52,7 @@ class RootViewController: UIViewController {
         self.monitor = monitor
         self.session = session
         self.contactEventsUploader = contactEventsUploader
+        self.statusStateMachine = statusStateMachine
         self.uiQueue = uiQueue
 
         statusViewController = StatusViewController.instantiate()
@@ -212,11 +214,14 @@ class RootViewController: UIViewController {
             let navVC = tabBarVC.viewControllers?.first as? UINavigationController,
             let debugVC = navVC.viewControllers.first as? DebugViewController else { return }
         
-        debugVC.inject(persisting: persistence,
-                       bluetoothNursery: bluetoothNursery,
-                       contactEventRepository: bluetoothNursery.contactEventRepository,
-                       contactEventPersister: bluetoothNursery.contactEventPersister,
-                       contactEventsUploader: contactEventsUploader)
+        debugVC.inject(
+            persisting: persistence,
+            bluetoothNursery: bluetoothNursery,
+            contactEventRepository: bluetoothNursery.contactEventRepository,
+            contactEventPersister: bluetoothNursery.contactEventPersister,
+            contactEventsUploader: contactEventsUploader,
+            statusStateMachine: statusStateMachine
+        )
         
         present(tabBarVC, animated: true)
     }
