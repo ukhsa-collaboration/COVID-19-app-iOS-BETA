@@ -17,9 +17,11 @@ class StatusViewController: UIViewController, Storyboarded {
     @IBOutlet weak var registrationStatusIcon: UIImageView!
     @IBOutlet weak var registrationSpinner: SpinnerView!
     @IBOutlet weak var registrationStatusView: UIView!
+    
+    @IBOutlet weak var notificationsStatusView: UIView!
 
-    @IBOutlet weak var diagnosisTitleLabel: UILabel!
     @IBOutlet weak var diagnosisHighlightView: UIView!
+    @IBOutlet weak var diagnosisTitleLabel: UILabel!
     @IBOutlet weak var diagnosisDetailLabel: UILabel!
 
     @IBOutlet weak var feelUnwellButton: UIButton!
@@ -53,6 +55,9 @@ class StatusViewController: UIViewController, Storyboarded {
 
         let logo = UIImageView(image: UIImage(named: "NHS_Logo"))
         logo.contentMode = .scaleAspectFit
+        diagnosisHighlightView.accessibilityIgnoresInvertColors = true
+        
+        notificationsStatusView.isHidden = true
 
         let title = UILabel()
         title.text = "COVID-19"
