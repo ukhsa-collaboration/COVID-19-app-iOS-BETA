@@ -14,11 +14,9 @@ class CheckinCoordinatorTests: XCTestCase {
     var coordinator: CheckinCoordinator!
 
     var navController: UINavigationController!
-    var statusViewController: StatusViewController!
 
     override func setUp() {
         navController = UINavigationController()
-        statusViewController = StatusViewController()
     }
 
     func testNoTemperatureQuestion() throws {
@@ -60,10 +58,9 @@ class CheckinCoordinatorTests: XCTestCase {
     private func make(checkin: StatusState.Checkin) -> CheckinCoordinator {
         return CheckinCoordinator(
             navigationController: navController,
-            checkin: checkin,
-            statusViewController: statusViewController,
-            statusStateMachine: StatusStateMachiningDouble()
-        )
+            checkin: checkin
+        ) { _ in
+        }
     }
 
 }

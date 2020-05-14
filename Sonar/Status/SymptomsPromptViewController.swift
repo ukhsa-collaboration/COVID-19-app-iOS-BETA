@@ -11,36 +11,19 @@ import UIKit
 class SymptomsPromptViewController: UIViewController, Storyboarded {
     static var storyboardName = "Status"
 
-    var checkin: StatusState.Checkin!
-    var statusViewController: StatusViewController!
-    var statusStateMachine: StatusStateMachining!
+    var completion: ((_ needsCheckin: Bool) -> Void)!
 
     func inject(
-        checkin: StatusState.Checkin!,
-        statusViewController: StatusViewController,
-        statusStateMachine: StatusStateMachining
+        completion: @escaping (_ needsCheckin: Bool) -> Void
     ) {
-        self.checkin = checkin
-        self.statusViewController = statusViewController
-        self.statusStateMachine = statusStateMachine
+        self.completion = completion
     }
     
     @IBAction func updateSymptoms(_ sender: Any) {
-        let navigationController = UINavigationController()
-        let coordinator = CheckinCoordinator(
-            navigationController: navigationController,
-            checkin: checkin,
-            statusViewController: statusViewController,
-            statusStateMachine: statusStateMachine
-        )
-        coordinator.start()
-        navigationController.modalPresentationStyle = .fullScreen
-        dismiss(animated: true, completion: nil)
-        statusViewController.present(navigationController, animated: true)
+        completion(true)
     }
     
     @IBAction func noSymptoms(_ sender: Any) {
-        statusStateMachine.checkin(symptoms: [])
-        dismiss(animated: true, completion: nil)
+        completion(false)
     }
 }
