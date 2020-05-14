@@ -203,7 +203,8 @@ class StatusViewController: UIViewController, Storyboarded {
                     self.dismiss(animated: true)
 
                     self.statusStateMachine.checkin(symptoms: symptoms)
-                    if case .ok = self.statusStateMachine.state {
+
+                    if symptoms.contains(.cough), case .ok = self.statusStateMachine.state {
                         self.presentCoughUpdate()
                     }
                 }
