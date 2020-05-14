@@ -8,8 +8,8 @@
 
 import UIKit
 
-class LinkingIdViewController: UIViewController, Storyboarded {
-    static let storyboardName = "LinkingId"
+class TestingInfoViewController: UIViewController, Storyboarded {
+    static let storyboardName = "TestingInfo"
 
     var persisting: Persisting!
     var linkingIdManager: LinkingIdManaging!
@@ -28,7 +28,7 @@ class LinkingIdViewController: UIViewController, Storyboarded {
     }
     
     override func accessibilityPerformEscape() -> Bool {
-        self.performSegue(withIdentifier: "UnwindFromLinkingId", sender: nil)
+        self.performSegue(withIdentifier: "UnwindFromTestingInfo", sender: nil)
         return true
     }
 
