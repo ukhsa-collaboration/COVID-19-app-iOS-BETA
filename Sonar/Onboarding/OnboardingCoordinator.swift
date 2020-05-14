@@ -71,9 +71,7 @@ class OnboardingCoordinator: OnboardingCoordinating {
                     switch (notificationStatus) {
                     case .notDetermined:
                         completion(.permissions)
-                    case .denied:
-                        completion(.notificationsDenied)
-                    case .allowed:
+                    case .denied, .allowed:
                         completion(.done)
                     }
                 }
