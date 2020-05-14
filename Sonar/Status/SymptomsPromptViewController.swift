@@ -10,20 +10,28 @@ import UIKit
 
 class SymptomsPromptViewController: UIViewController, Storyboarded {
     static var storyboardName = "Status"
-    var persistence: Persisting!
+
+    var checkin: StatusState.Checkin!
     var statusViewController: StatusViewController!
-        
-    func inject(persistence: Persisting, statusViewController: StatusViewController) {
-        self.persistence = persistence
+    var statusStateMachine: StatusStateMachining!
+
+    func inject(
+        checkin: StatusState.Checkin!,
+        statusViewController: StatusViewController,
+        statusStateMachine: StatusStateMachining
+    ) {
+        self.checkin = checkin
         self.statusViewController = statusViewController
+        self.statusStateMachine = statusStateMachine
     }
     
     @IBAction func updateSymptoms(_ sender: Any) {
         let navigationController = UINavigationController()
         let coordinator = UpdateDiagnosisCoordinator(
             navigationController: navigationController,
-            persisting: persistence,
-            statusViewController: statusViewController
+            checkin: checkin,
+            statusViewController: statusViewController,
+            statusStateMachine: statusStateMachine
         )
         coordinator.start()
         navigationController.modalPresentationStyle = .fullScreen
@@ -32,8 +40,7 @@ class SymptomsPromptViewController: UIViewController, Storyboarded {
     }
     
     @IBAction func noSymptoms(_ sender: Any) {
-        persistence.selfDiagnosis = nil
-        statusViewController.reload()
+        statusStateMachine.checkin(symptoms: [])
         dismiss(animated: true, completion: nil)
     }
 }

@@ -14,22 +14,16 @@ class UpdateDiagnosisCoordinatorTests: XCTestCase {
     var coordinator: UpdateDiagnosisCoordinator!
 
     var navController: UINavigationController!
-    var persisting: PersistenceDouble!
     var statusViewController: StatusViewController!
 
     override func setUp() {
         navController = UINavigationController()
-        persisting = PersistenceDouble()
         statusViewController = StatusViewController()
-
-        coordinator = UpdateDiagnosisCoordinator(
-            navigationController: navController,
-            persisting: persisting,
-            statusViewController: statusViewController
-        )
     }
 
     func testNoTemperatureQuestion() throws {
+        coordinator = make(checkin: StatusState.Checkin(symptoms: [.cough], checkinDate: Date()))
+
         coordinator.start()
         let vc = try XCTUnwrap(navController.topViewController as? QuestionSymptomsViewController)
 
@@ -37,7 +31,7 @@ class UpdateDiagnosisCoordinatorTests: XCTestCase {
     }
 
     func testExistingTemperatureQuestion() throws {
-        persisting.selfDiagnosis = SelfDiagnosis(type: .subsequent, symptoms: [.temperature], startDate: Date())
+        coordinator = make(checkin: StatusState.Checkin(symptoms: [.temperature], checkinDate: Date()))
 
         coordinator.start()
         let vc = try XCTUnwrap(navController.topViewController as? QuestionSymptomsViewController)
@@ -46,7 +40,7 @@ class UpdateDiagnosisCoordinatorTests: XCTestCase {
     }
 
     func testNoCoughQuestion() throws {
-        persisting.selfDiagnosis = SelfDiagnosis(type: .subsequent, symptoms: [.temperature], startDate: Date())
+        coordinator = make(checkin: StatusState.Checkin(symptoms: [.temperature], checkinDate: Date()))
 
         coordinator.openCoughView()
         let vc = try XCTUnwrap(navController.topViewController as? QuestionSymptomsViewController)
@@ -55,12 +49,21 @@ class UpdateDiagnosisCoordinatorTests: XCTestCase {
     }
 
     func testExistingCoughQuestion() throws {
-        persisting.selfDiagnosis = SelfDiagnosis(type: .initial, symptoms: [.cough], startDate: Date())
+        coordinator = make(checkin: StatusState.Checkin(symptoms: [.cough], checkinDate: Date()))
 
         coordinator.openCoughView()
         let vc = try XCTUnwrap(navController.topViewController as? QuestionSymptomsViewController)
 
         XCTAssertEqual(vc.questionTitle, "COUGH_CHECKIN_QUESTION".localized)
+    }
+
+    private func make(checkin: StatusState.Checkin) -> UpdateDiagnosisCoordinator {
+        return UpdateDiagnosisCoordinator(
+            navigationController: navController,
+            checkin: checkin,
+            statusViewController: statusViewController,
+            statusStateMachine: StatusStateMachiningDouble()
+        )
     }
 
 }

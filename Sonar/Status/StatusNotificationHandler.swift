@@ -10,8 +10,6 @@ import Foundation
 
 import Logging
 
-let PotentiallyExposedNotification = NSNotification.Name("PotentiallyExposedNotification")
-
 // This naming is somewhat confusing, since in this application,
 // "status" means blue/amber/red, but the backend sends us a
 // notification with {"status": "Potential"} to alert us about a
@@ -22,21 +20,10 @@ class StatusNotificationHandler {
 
     let logger = Logger(label: "StatusNotificationHandler")
 
-    let persisting: Persisting
-    let userNotificationCenter: UserNotificationCenter
-    let notificationCenter: NotificationCenter
-    let currentDateProvider: () -> Date
+    let statusStateMachine: StatusStateMachining
 
-    init(
-        persisting: Persisting,
-        userNotificationCenter: UserNotificationCenter,
-        notificationCenter: NotificationCenter,
-        currentDateProvider: @escaping () -> Date = { Date() }
-    ) {
-        self.persisting = persisting
-        self.userNotificationCenter = userNotificationCenter
-        self.notificationCenter = notificationCenter
-        self.currentDateProvider = currentDateProvider
+    init(statusStateMachine: StatusStateMachining) {
+        self.statusStateMachine = statusStateMachine
     }
 
     func handle(userInfo: [AnyHashable: Any], completion: @escaping RemoteNotificationCompletionHandler) {
@@ -49,25 +36,8 @@ class StatusNotificationHandler {
             return
         }
 
-        persisting.potentiallyExposed = currentDateProvider()
-        sendUserNotification()
-        notificationCenter.post(name: PotentiallyExposedNotification, object: self)
+        statusStateMachine.exposed()
         completion(.newData)
-    }
-
-    private func sendUserNotification() {
-        let content = UNMutableNotificationContent()
-        content.title = "POTENTIAL_STATUS_TITLE".localized
-        content.body = "POTENTIAL_STATUS_BODY".localized
-
-        let uuidString = UUID().uuidString
-        let request = UNNotificationRequest(identifier: uuidString, content: content, trigger: nil)
-
-        userNotificationCenter.add(request) { error in
-            if error != nil {
-                self.logger.critical("Unable to add local notification: \(String(describing: error))")
-            }
-        }
     }
 
 }

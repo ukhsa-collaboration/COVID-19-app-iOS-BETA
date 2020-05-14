@@ -10,32 +10,34 @@ import UIKit
 
 class UpdateDiagnosisCoordinator: Coordinator {
     let navigationController: UINavigationController
-    let persisting: Persisting
+    let checkin: StatusState.Checkin
     let statusViewController: StatusViewController
-    let startDate: Date
+    var statusStateMachine: StatusStateMachining
     
     init(
         navigationController: UINavigationController,
-        persisting: Persisting,
-        statusViewController: StatusViewController
+        checkin: StatusState.Checkin,
+        statusViewController: StatusViewController,
+        statusStateMachine: StatusStateMachining
     ) {
         self.navigationController = navigationController
-        self.persisting = persisting
+        self.checkin = checkin
         self.statusViewController = statusViewController
-        startDate = persisting.selfDiagnosis?.startDate ?? Date()
+        self.statusStateMachine = statusStateMachine
     }
     
     var symptoms = Set<Symptom>()
     
     func start() {
-        let vc = QuestionSymptomsViewController.instantiate()
+        let title = checkin.symptoms.contains(.temperature)
+            ? "TEMPERATURE_CHECKIN_QUESTION"
+            : "TEMPERATURE_QUESTION"
 
-        let isCheckin = persisting.selfDiagnosis.map { $0.symptoms.contains(.temperature) } ?? false
-        let questionTitle = isCheckin ? "TEMPERATURE_CHECKIN_QUESTION" : "TEMPERATURE_QUESTION"
+        let vc = QuestionSymptomsViewController.instantiate()
         vc.inject(
             pageNumber: 1,
             pageCount: 2,
-            questionTitle: questionTitle.localized,
+            questionTitle: title.localized,
             questionDetail: "TEMPERATURE_DETAIL".localized,
             questionError: "TEMPERATURE_ERROR".localized,
             questionYes: "TEMPERATURE_YES".localized,
@@ -52,16 +54,18 @@ class UpdateDiagnosisCoordinator: Coordinator {
     }
     
     func openCoughView() {
-        let vc = QuestionSymptomsViewController.instantiate()
+        let (title, details) = {
+            checkin.symptoms.contains(.cough)
+            ? ("COUGH_CHECKIN_QUESTION", ["COUGH_CONTINUOUS_DETAIL"])
+            : ("COUGH_QUESTION", ["COUGH_NEW_DETAIL", "COUGH_CONTINUOUS_DETAIL"])
+        }()
 
-        let isCheckin = persisting.selfDiagnosis.map { $0.symptoms.contains(.cough) } ?? false
-        let questionTitle = isCheckin ? "COUGH_CHECKIN_QUESTION" : "COUGH_QUESTION"
-        let coughNewDetail = isCheckin ?  "" : "COUGH_NEW_DETAIL".localized
+        let vc = QuestionSymptomsViewController.instantiate()
         vc.inject(
             pageNumber: 2,
             pageCount: 2,
-            questionTitle: questionTitle.localized,
-            questionDetail: coughNewDetail + "COUGH_CONTINUOUS_DETAIL".localized,
+            questionTitle: title.localized,
+            questionDetail: details.map { $0.localized }.joined(separator: ""),
             questionError: "COUGH_ERROR".localized,
             questionYes: "COUGH_YES".localized,
             questionNo: "COUGH_NO".localized,
@@ -72,14 +76,11 @@ class UpdateDiagnosisCoordinator: Coordinator {
             }
             
             self.navigationController.dismiss(animated: true, completion: nil)
-            
-            if self.symptoms.contains(.temperature) {
-                self.persisting.selfDiagnosis = SelfDiagnosis(type: .subsequent, symptoms: self.symptoms, startDate: Date(), daysToLive: 1)
-            } else {
-                self.persisting.selfDiagnosis = nil
-                if self.symptoms.contains(.cough) {
-                    self.statusViewController.updatePrompt()
-                }
+
+            self.statusStateMachine.checkin(symptoms: self.symptoms)
+
+            if case .ok = self.statusStateMachine.state {
+                self.statusViewController.updatePrompt()
             }
         }
 

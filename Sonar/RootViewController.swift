@@ -38,7 +38,7 @@ class RootViewController: UIViewController {
         session: Session,
         contactEventsUploader: ContactEventsUploading,
         linkingIdManager: LinkingIdManaging,
-        statusProvider: StatusProviding,
+        statusStateMachine: StatusStateMachining,
         uiQueue: TestableQueue
     ) {
         self.persistence = persistence
@@ -57,10 +57,9 @@ class RootViewController: UIViewController {
         statusViewController.inject(
             persistence: persistence,
             registrationService: registrationService,
-            contactEventsUploader: contactEventsUploader,
             notificationCenter: notificationCenter,
             linkingIdManager: linkingIdManager,
-            statusProvider: statusProvider,
+            statusStateMachine: statusStateMachine,
             localeProvider: AutoupdatingCurrentLocaleProvider()
         )
         

@@ -33,10 +33,14 @@ struct UITestScreenMaker: ScreenMaking {
                 let persistence = InMemoryPersistence();
                 viewController.inject(persistence: persistence,
                     registrationService: MockRegistrationService(),
-                    contactEventsUploader: MockContactEventsUploading(),
                     notificationCenter: NotificationCenter(),
                     linkingIdManager: MockLinkingIdManager(),
-                    statusProvider: StatusProvider(persisting: persistence),
+                    statusStateMachine: StatusStateMachine(
+                        persisting: persistence,
+                        contactEventsUploader: MockContactEventsUploading(),
+                        notificationCenter: NotificationCenter(),
+                        userNotificationCenter: UNUserNotificationCenter.current()
+                    ),
                     localeProvider: FixedLocaleProvider()
                 )
             }
@@ -71,7 +75,6 @@ private class InMemoryPersistence: Persisting {
 
     var registration: Registration? = nil
     var potentiallyExposed: Date?
-    var selfDiagnosis: SelfDiagnosis? = nil
     var partialPostcode: String? = nil
     var bluetoothPermissionRequested: Bool = false
     var uploadLog: [UploadLog] = []
@@ -83,7 +86,6 @@ private class InMemoryPersistence: Persisting {
     func clear() {
         registration = nil
         potentiallyExposed = nil
-        selfDiagnosis = nil
         partialPostcode = nil
         uploadLog = []
         lastInstalledVersion = nil

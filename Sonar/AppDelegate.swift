@@ -81,19 +81,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         session: urlSession
     )
 
-    lazy var statusProvider: StatusProviding = StatusProvider(
-        persisting: persistence
-    )
-
     lazy var statusNotificationHandler: StatusNotificationHandler = StatusNotificationHandler(
-        persisting: persistence,
-        userNotificationCenter: userNotificationCenter,
-        notificationCenter: notificationCenter
+        statusStateMachine: statusStateMachine
     )
 
     lazy var notificationAcknowledger: NotificationAcknowledger = NotificationAcknowledger(
         persisting: persistence,
         session: urlSession
+    )
+
+    lazy var statusStateMachine: StatusStateMachining = StatusStateMachine(
+        persisting: persistence,
+        contactEventsUploader: contactEventsUploader,
+        notificationCenter: notificationCenter,
+        userNotificationCenter: userNotificationCenter
     )
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -131,7 +132,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             session: urlSession,
             contactEventsUploader: contactEventsUploader,
             linkingIdManager: linkingIdManager,
-            statusProvider: statusProvider,
+            statusStateMachine: statusStateMachine,
             uiQueue: DispatchQueue.main
         )
         

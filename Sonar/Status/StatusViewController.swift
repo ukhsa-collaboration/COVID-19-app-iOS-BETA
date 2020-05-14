@@ -16,13 +16,12 @@ class StatusViewController: UIViewController, Storyboarded {
     private var persistence: Persisting!
     private var registrationService: RegistrationService!
     private var notificationCenter: NotificationCenter!
-    private var contactEventsUploader: ContactEventsUploading!
     private var linkingIdManager: LinkingIdManaging!
-    private var statusProvider: StatusProviding!
+    private var statusStateMachine: StatusStateMachining!
     private var localeProvider: LocaleProvider!
+    private var dateProvider: (() -> Date)!
 
     private lazy var drawerPresentationManager = DrawerPresentation()
-    private let localNotificationScheduler = LocalNotifcationScheduler(userNotificationCenter: UNUserNotificationCenter.current())
     
     @IBOutlet var registratonStatusView: UIView!
     @IBOutlet var registrationStatusIcon: UIImageView!
@@ -59,19 +58,19 @@ class StatusViewController: UIViewController, Storyboarded {
     func inject(
         persistence: Persisting,
         registrationService: RegistrationService,
-        contactEventsUploader: ContactEventsUploading,
         notificationCenter: NotificationCenter,
         linkingIdManager: LinkingIdManaging,
-        statusProvider: StatusProviding,
-        localeProvider: LocaleProvider
+        statusStateMachine: StatusStateMachining,
+        localeProvider: LocaleProvider,
+        dateProvider: @autoclosure @escaping () -> Date = Date()
     ) {
         self.persistence = persistence
         self.registrationService = registrationService
-        self.contactEventsUploader = contactEventsUploader
         self.notificationCenter = notificationCenter
         self.linkingIdManager = linkingIdManager
-        self.statusProvider = statusProvider
+        self.statusStateMachine = statusStateMachine
         self.localeProvider = localeProvider
+        self.dateProvider = dateProvider
     }
         
     override func viewDidLoad() {
@@ -115,7 +114,7 @@ class StatusViewController: UIViewController, Storyboarded {
         notificationCenter.addObserver(self, selector: #selector(showRegisteredStatus), name: RegistrationCompletedNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(showRegistrationFailedStatus), name: RegistrationFailedNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(reload), name: UIApplication.didBecomeActiveNotification, object: nil)
-        notificationCenter.addObserver(self, selector: #selector(reload), name: PotentiallyExposedNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(reload), name: StatusStateMachine.StatusStateChangedNotification, object: nil)
         
         linkingIDButton.accessibilityLabel = "Show my reference code"
     }
@@ -134,17 +133,14 @@ class StatusViewController: UIViewController, Storyboarded {
     }
 
     @objc func diagnosisStatusTapped() {
-        UIApplication.shared.open(content[statusProvider.status].readUrl)
+        UIApplication.shared.open(content[statusStateMachine.state].readUrl)
     }
 
     @IBAction func notRightTapped() {
         let navigationController = UINavigationController()
         let coordinator = SelfDiagnosisCoordinator(
             navigationController: navigationController,
-            persisting: persistence,
-            contactEventsUploader: contactEventsUploader,
-            statusViewController: self,
-            localNotificationScheduler: localNotificationScheduler
+            statusStateMachine: statusStateMachine
         )
         coordinator.start()
         navigationController.modalPresentationStyle = .fullScreen
@@ -176,7 +172,7 @@ class StatusViewController: UIViewController, Storyboarded {
     }
 
     @IBAction func nhs111Tapped(_ sender: UIButton) {
-        UIApplication.shared.open(content[statusProvider.status].nhsCoronavirusUrl)
+        UIApplication.shared.open(content[statusStateMachine.state].nhsCoronavirusUrl)
     }
 
     @IBAction func retryRegistrationTapped() {
@@ -193,9 +189,11 @@ class StatusViewController: UIViewController, Storyboarded {
 
     @objc func reload() {
         guard view != nil else { return }
+
+        statusStateMachine.tick()
         
         let readLatestAdviceText: String
-        if statusProvider.status == .blue {
+        if case .ok = statusStateMachine.state {
             readLatestAdviceText = "Read current advice"
         } else {
             readLatestAdviceText = "Read what to do next"
@@ -208,66 +206,64 @@ class StatusViewController: UIViewController, Storyboarded {
                 .font: UIFont.preferredFont(forTextStyle: .headline),
             ]
         )
-        
-        switch statusProvider.status {
-            case .blue:
-                diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Highlight")
-                diagnosisTitleLabel.text = "Follow the current advice to stop the spread of coronavirus".localized
-                diagnosisDetailLabel.isHidden = false
-                diagnosisDetailLabel.text = detailForBlue()
-                howAreYouFeelingView.isHidden = false
-                nothingToDoLabel.isHidden = false
-                redStatusView.isHidden = true
-                healthcareWorkersInstructionsView.isHidden = false
-            case .amber:
-                nothingToDoLabel.isHidden = true
-                diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
-                diagnosisTitleLabel.text = "You have been near someone who has coronavirus symptoms".localized
-                
-                if let expiry = statusProvider.amberExpiryDate {
-                    diagnosisDetailLabel.isHidden = false
-                    diagnosisDetailLabel.text = detailForAmberWithExpiry(expiry)
-                } else {
-                    diagnosisDetailLabel.isHidden = true
-                }
-                
-                howAreYouFeelingView.isHidden = false
-                redStatusView.isHidden = true
-                healthcareWorkersInstructionsView.isHidden = false
-            case .red:
-                diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
-                diagnosisTitleLabel.text = "Your symptoms indicate you may have coronavirus".localized
-                diagnosisDetailLabel.isHidden = false
 
-                if let selfDiagnosis = persistence.selfDiagnosis {
-                    switch selfDiagnosis.type {
-                    case .initial:
-                        detailForInitialSelfDiagnosis(selfDiagnosis)
-                    case .subsequent:
-                        if selfDiagnosis.symptoms.contains(.temperature) {
-                            diagnosisDetailLabel.text = "Follow this advice until your temperature returns to normal"
-                        }
-                    }
-                } else {
-                    // Can't happen, but don't show the placeholder text if it does.
-                    diagnosisDetailLabel.isHidden = true
-                }
-                
-                howAreYouFeelingView.isHidden = true
-                redStatusView.isHidden = false
-                healthcareWorkersInstructionsView.isHidden = true
-        }
+        symptomStackView.symptoms = []
         
-        symptomStackView.symptoms = persistence.selfDiagnosis?.symptoms
-        
-        if let diagnosis = persistence.selfDiagnosis, diagnosis.hasExpired() {
-            localNotificationScheduler.removePendingDiagnosisNotification()
-            let symptomsPromptViewController = SymptomsPromptViewController.instantiate()
-            symptomsPromptViewController.modalPresentationStyle = .custom
-            symptomsPromptViewController.transitioningDelegate = drawerPresentationManager
-            symptomsPromptViewController.inject(persistence: persistence, statusViewController: self)
-            present(symptomsPromptViewController, animated: true)
+        switch statusStateMachine.state {
+        case .ok:
+            diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Highlight")
+            diagnosisTitleLabel.text = "Follow the current advice to stop the spread of coronavirus".localized
+            diagnosisDetailLabel.isHidden = false
+            diagnosisDetailLabel.text = detailForBlue()
+            howAreYouFeelingView.isHidden = false
+            nothingToDoLabel.isHidden = false
+            redStatusView.isHidden = true
+            healthcareWorkersInstructionsView.isHidden = false
+        case .exposed(let exposed):
+            nothingToDoLabel.isHidden = true
+            diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
+            diagnosisTitleLabel.text = "You have been near someone who has coronavirus symptoms".localized
+
+            diagnosisDetailLabel.isHidden = false
+            diagnosisDetailLabel.text = detailForAmberWithExpiry(exposed.expiryDate)
+
+            howAreYouFeelingView.isHidden = false
+            redStatusView.isHidden = true
+            healthcareWorkersInstructionsView.isHidden = false
+        case .symptomatic(let symptomatic):
+            symptomStackView.symptoms = symptomatic.symptoms
+            let detailFmt = "Follow this advice until %@, at which point this app will notify you to update your symptoms.".localized
+            let detail = String(format: detailFmt, localizedDate(symptomatic.expiryDate))
+            updateForRedStatus(detail: detail)
+        case .checkin(let checkin):
+            symptomStackView.symptoms = checkin.symptoms
+            let detail = checkin.symptoms.contains(.temperature) ? "Follow this advice until your temperature returns to normal" : nil
+            updateForRedStatus(detail: detail)
+
+            if dateProvider() >= checkin.checkinDate {
+                let symptomsPromptViewController = SymptomsPromptViewController.instantiate()
+                symptomsPromptViewController.modalPresentationStyle = .custom
+                symptomsPromptViewController.transitioningDelegate = drawerPresentationManager
+                symptomsPromptViewController.inject(
+                    checkin: checkin,
+                    statusViewController: self,
+                    statusStateMachine: statusStateMachine
+                )
+                present(symptomsPromptViewController, animated: true)
+            }
         }
+    }
+
+    func updateForRedStatus(detail: String?) {
+        diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
+        diagnosisTitleLabel.text = "Your symptoms indicate you may have coronavirus".localized
+
+        diagnosisDetailLabel.isHidden = detail == nil
+        diagnosisDetailLabel.text = detail
+
+        howAreYouFeelingView.isHidden = true
+        redStatusView.isHidden = false
+        healthcareWorkersInstructionsView.isHidden = true
     }
     
     func updatePrompt() {
@@ -326,12 +322,7 @@ class StatusViewController: UIViewController, Storyboarded {
         let detailFmt = "Follow this advice until %@".localized
         return String(format: detailFmt, localizedDate(expiry))
     }
-    
-    private func detailForInitialSelfDiagnosis(_ selfDiagnosis: SelfDiagnosis) {
-        let detailFmt = "Follow this advice until %@, at which point this app will notify you to update your symptoms.".localized
-        diagnosisDetailLabel.text = String(format: detailFmt, localizedDate(selfDiagnosis.expiryDate))
-    }
-    
+
     private func detailForBlue() -> String {
         let detailFmt = "Valid as of %@".localized
         return String(format: detailFmt, localizedDate(Date()))

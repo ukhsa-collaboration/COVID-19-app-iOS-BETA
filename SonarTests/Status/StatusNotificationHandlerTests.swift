@@ -12,28 +12,11 @@ import XCTest
 class StatusNotificationHandlerTests: XCTestCase {
 
     var handler: StatusNotificationHandler!
-    var persisting: PersistenceDouble!
-    var userNotificationCenter: UserNotificationCenterDouble!
-    var currentDate: Date!
-
-    var receivedNotification: Bool!
+    var statusStateMachine: StatusStateMachiningDouble!
 
     override func setUp() {
-        persisting = PersistenceDouble()
-        userNotificationCenter = UserNotificationCenterDouble()
-        let notificationCenter = NotificationCenter()
-        currentDate = Date()
-        handler = StatusNotificationHandler(
-            persisting: persisting,
-            userNotificationCenter: userNotificationCenter,
-            notificationCenter: notificationCenter,
-            currentDateProvider: { self.currentDate }
-        )
-
-        receivedNotification = false
-        notificationCenter.addObserver(forName: PotentiallyExposedNotification, object: nil, queue: nil) { _ in
-            self.receivedNotification = true
-        }
+        statusStateMachine = StatusStateMachiningDouble()
+        handler = StatusNotificationHandler(statusStateMachine: statusStateMachine)
     }
 
     func testNotPotential() {
@@ -50,9 +33,7 @@ class StatusNotificationHandlerTests: XCTestCase {
         handler.handle(userInfo: ["status": "foo"]) { fetchResult = $0 }
         XCTAssertEqual(fetchResult, .noData)
 
-        XCTAssertNil(persisting.potentiallyExposed)
-        XCTAssertNil(userNotificationCenter.request)
-        XCTAssertFalse(receivedNotification)
+        XCTAssertFalse(statusStateMachine.exposedCalled)
     }
 
     func testPotentialStatus() {
@@ -60,9 +41,8 @@ class StatusNotificationHandlerTests: XCTestCase {
 
         handler.handle(userInfo: ["status": "Potential"]) { fetchResult = $0 }
 
-        XCTAssertEqual(persisting.potentiallyExposed, currentDate)
-        XCTAssertNotNil(userNotificationCenter.request)
-        XCTAssertTrue(receivedNotification)
+        XCTAssertTrue(statusStateMachine.exposedCalled)
+
         XCTAssertEqual(fetchResult, .newData)
     }
 

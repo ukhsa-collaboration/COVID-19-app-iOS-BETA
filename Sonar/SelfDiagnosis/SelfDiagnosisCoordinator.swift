@@ -14,23 +14,14 @@ protocol Coordinator {
 
 class SelfDiagnosisCoordinator: Coordinator {
     let navigationController: UINavigationController
-    let persisting: Persisting
-    let contactEventsUploader: ContactEventsUploading
-    let statusViewController: StatusViewController
-    let localNotificationScheduler: Scheduler
-    
+    let statusStateMachine: StatusStateMachining
+
     init(
         navigationController: UINavigationController,
-        persisting: Persisting,
-        contactEventsUploader: ContactEventsUploading,
-        statusViewController: StatusViewController,
-        localNotificationScheduler: Scheduler
+        statusStateMachine: StatusStateMachining
     ) {
         self.navigationController = navigationController
-        self.persisting = persisting
-        self.contactEventsUploader = contactEventsUploader
-        self.statusViewController = statusViewController
-        self.localNotificationScheduler = localNotificationScheduler
+        self.statusStateMachine = statusStateMachine
     }
     
     var hasHighTemperature: Bool!
@@ -75,12 +66,9 @@ class SelfDiagnosisCoordinator: Coordinator {
     func openSubmissionView() {
         let vc = SymptomsSummaryViewController.instantiate()
         vc.inject(
-            persisting: persisting,
-            contactEventsUploader: contactEventsUploader,
             hasHighTemperature: hasHighTemperature,
             hasNewCough: hasNewCough,
-            statusViewController: statusViewController,
-            localNotificationScheduler: localNotificationScheduler
+            statusStateMachine: statusStateMachine
         )
         navigationController.pushViewController(vc, animated: true)
     }

@@ -14,8 +14,7 @@ class DebugViewController: UITableViewController, Storyboarded {
     static let storyboardName = "Debug"
 
     @IBOutlet weak var versionBuildLabel: UILabel!
-    @IBOutlet weak var potentiallyExposedSwitch: UISwitch!
-    
+
     private var persisting: Persisting!
     private var contactEventRepository: ContactEventRepository!
     private var contactEventPersister: ContactEventPersister!
@@ -46,8 +45,6 @@ class DebugViewController: UITableViewController, Storyboarded {
     }
     
     override func viewDidLoad() {
-        potentiallyExposedSwitch.isOn = persisting.potentiallyExposed != nil
-
         let build = Bundle.main.infoDictionary?["CFBundleVersion"] ?? "unknown"
         let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] ?? "unknown"
         versionBuildLabel.text = "Version \(version) (build \(build))"
@@ -100,14 +97,14 @@ class DebugViewController: UITableViewController, Storyboarded {
             
             show(title: "Cleared", message: "Registration and diagnosis data has been cleared. Please stop and re-start the application.")
 
-        case (1, 1), (1, 2):
+        case (1, 1):
             break
 
-        case (1, 3):
+        case (1, 2):
             persisting.acknowledgmentUrls = []
             show(title: "Cleared", message: "Notification ACKs cleared")
 
-        case (1, 4):
+        case (1, 3):
             kill(getpid(), SIGINT)
             
 
@@ -188,21 +185,8 @@ class DebugViewController: UITableViewController, Storyboarded {
         alertController.addAction(UIAlertAction(title: "Ok", style: .default))
         present(alertController, animated: true, completion: completion)
     }
-
-    @IBAction func potentiallyExposedChanged(_ sender: UISwitch) {
-        persisting.potentiallyExposed = sender.isOn ? Date() : nil
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.destination {
-        case let vc as SetDiagnosisViewController:
-            vc.inject(persistence: persisting)
-        default:
-            break
-        }
-    }
-
-    @IBAction func unwindFromSetDiagnosis(unwindSegue: UIStoryboardSegue) {
     }
 
     // MARK: - Bluetooth status animation
