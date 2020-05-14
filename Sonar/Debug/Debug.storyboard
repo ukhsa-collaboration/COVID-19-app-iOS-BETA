@@ -36,7 +36,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <label key="tableFooterView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="u9d-KW-xk7">
-                            <rect key="frame" x="0.0" y="977.5" width="414" height="44"/>
+                            <rect key="frame" x="0.0" y="1021" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                             <nil key="textColor"/>
@@ -258,7 +258,24 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Send potentially infected notification" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Zws-mz-Nxx">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Simulate exposure notification in 5 seconds" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Zws-mz-Nxx">
+                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="zUF-fR-q2g" style="IBUITableViewCellStyleDefault" id="YV6-e2-yXz">
+                                        <rect key="frame" x="0.0" y="704.5" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YV6-e2-yXz" id="sGS-6N-dhe">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Request exposure notification" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zUF-fR-q2g">
                                                     <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -273,7 +290,7 @@
                             <tableViewSection headerTitle="Registration" id="pud-EL-3cT" userLabel="Registration">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="odY-Zt-J3Q" style="IBUITableViewCellStyleDefault" id="lsl-tc-3kU">
-                                        <rect key="frame" x="0.0" y="760.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="804" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lsl-tc-3kU" id="Kr6-Ye-37c">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -294,7 +311,7 @@
                             <tableViewSection headerTitle="Export" id="F8h-te-Opp">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="Lnb-MQ-aea" style="IBUITableViewCellStyleDefault" id="7JQ-wi-OVF">
-                                        <rect key="frame" x="0.0" y="860" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="903.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7JQ-wi-OVF" id="74r-s9-pg1">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -324,7 +341,7 @@
                     <navigationItem key="navigationItem" id="9rc-6N-rB7">
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="mrw-vW-hi6">
                             <connections>
-                                <segue destination="FeH-ld-Ids" kind="unwind" unwindAction="unwindFromDebugViewControllerWithUnwindSegue:" id="pVH-Yq-o5V"/>
+                                <segue destination="FeH-ld-Ids" kind="unwind" identifier="unwindFromDebugViewController" unwindAction="unwindFromDebugViewControllerWithUnwindSegue:" id="pVH-Yq-o5V"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
