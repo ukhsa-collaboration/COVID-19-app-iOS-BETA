@@ -27,7 +27,7 @@ class SymptomsPromptViewController: UIViewController, Storyboarded {
     
     @IBAction func updateSymptoms(_ sender: Any) {
         let navigationController = UINavigationController()
-        let coordinator = UpdateDiagnosisCoordinator(
+        let coordinator = CheckinCoordinator(
             navigationController: navigationController,
             checkin: checkin,
             statusViewController: statusViewController,

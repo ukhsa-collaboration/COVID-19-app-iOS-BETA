@@ -1,5 +1,5 @@
 //
-//  UpdateDiagnosisCoordinator.swift
+//  CheckinCoordinator.swift
 //  Sonar
 //
 //  Created by NHSX on 24/04/2020.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UpdateDiagnosisCoordinator: Coordinator {
+class CheckinCoordinator: Coordinator {
     let navigationController: UINavigationController
     let checkin: StatusState.Checkin
     let statusViewController: StatusViewController
