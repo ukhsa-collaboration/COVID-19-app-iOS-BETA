@@ -207,7 +207,7 @@ fileprivate func makeViewController(
         persistence: persistence,
         registrationService: registrationService,
         notificationCenter: notificationCenter,
-        linkingIdManager: LinkingIdManagerDouble.make(),
+        linkingIdManager: LinkingIdManagerDouble(),
         statusStateMachine: statusStateMachine,
         localeProvider: EnGbLocaleProviderDouble()
     )

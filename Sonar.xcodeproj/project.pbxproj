@@ -20,7 +20,9 @@
 		097C93892447986B00E985CF /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097C93882447986B00E985CF /* TextField.swift */; };
 		097C94C9245B8146008A9695 /* LocaleProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097C94C8245B8146008A9695 /* LocaleProvider.swift */; };
 		097C94CB245B81E8008A9695 /* EnGbLocaleProviderDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097C94CA245B81E8008A9695 /* EnGbLocaleProviderDouble.swift */; };
-		0982F47E246A1AC000E57EE5 /* TestingInfoNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0982F47D246A1AC000E57EE5 /* TestingInfoNavigationController.swift */; };
+		0982F484246DE4B400E57EE5 /* LinkingIdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0982F483246DE4B400E57EE5 /* LinkingIdViewController.swift */; };
+		0982F486246DF05C00E57EE5 /* LinkingIdViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0982F485246DF05C00E57EE5 /* LinkingIdViewControllerTests.swift */; };
+		0982F488246DF80400E57EE5 /* LinkingIdManagerDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0982F487246DF80400E57EE5 /* LinkingIdManagerDouble.swift */; };
 		0983ACCD243E566800DBB336 /* ErrorForTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983ACCC243E566800DBB336 /* ErrorForTest.swift */; };
 		0983ACCF243E6D3800DBB336 /* NotificationObserverDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983ACCE243E6D3800DBB336 /* NotificationObserverDouble.swift */; };
 		0983ACD3243EB22200DBB336 /* StatusViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983ACD2243EB22200DBB336 /* StatusViewControllerTests.swift */; };
@@ -292,7 +294,9 @@
 		097C93882447986B00E985CF /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		097C94C8245B8146008A9695 /* LocaleProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocaleProvider.swift; sourceTree = "<group>"; };
 		097C94CA245B81E8008A9695 /* EnGbLocaleProviderDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnGbLocaleProviderDouble.swift; sourceTree = "<group>"; };
-		0982F47D246A1AC000E57EE5 /* TestingInfoNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingInfoNavigationController.swift; sourceTree = "<group>"; };
+		0982F483246DE4B400E57EE5 /* LinkingIdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkingIdViewController.swift; sourceTree = "<group>"; };
+		0982F485246DF05C00E57EE5 /* LinkingIdViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkingIdViewControllerTests.swift; sourceTree = "<group>"; };
+		0982F487246DF80400E57EE5 /* LinkingIdManagerDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkingIdManagerDouble.swift; sourceTree = "<group>"; };
 		0983ACCC243E566800DBB336 /* ErrorForTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorForTest.swift; sourceTree = "<group>"; };
 		0983ACCE243E6D3800DBB336 /* NotificationObserverDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationObserverDouble.swift; sourceTree = "<group>"; };
 		0983ACD2243EB22200DBB336 /* StatusViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewControllerTests.swift; sourceTree = "<group>"; };
@@ -695,6 +699,7 @@
 				89C8B217245C6342009CCE80 /* AppCenterAnalyticsReportingDouble.swift */,
 				89DF66A52460217A00A55F24 /* StorageCheckingDouble.swift */,
 				F6E2E596246B287B009D80DF /* StatusStateMachiningDouble.swift */,
+				0982F487246DF80400E57EE5 /* LinkingIdManagerDouble.swift */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -808,7 +813,7 @@
 				214209DA242630CF00C7BFF3 /* Networking */,
 				89C8B219245C63B2009CCE80 /* Monitoring */,
 				F6F05A222433BEAC00FF4B72 /* Onboarding */,
-				F604977324549C84002B8503 /* Pilot */,
+				F604977324549C84002B8503 /* Testing */,
 				098ED479242D7E340029B729 /* Registration */,
 				F6CC2CAA242BCCE90079432B /* Remote Notifications */,
 				F67C5157243E7BD5008E2945 /* SelfDiagnosis */,
@@ -1095,17 +1100,18 @@
 				F604977124549B7B002B8503 /* LinkingIdManager.swift */,
 				F604976E24549729002B8503 /* LinkingIdRequest.swift */,
 				F60497762454A294002B8503 /* TestingInfoViewController.swift */,
-				0982F47D246A1AC000E57EE5 /* TestingInfoNavigationController.swift */,
+				0982F483246DE4B400E57EE5 /* LinkingIdViewController.swift */,
 			);
 			path = Testing;
 			sourceTree = "<group>";
 		};
-		F604977324549C84002B8503 /* Pilot */ = {
+		F604977324549C84002B8503 /* Testing */ = {
 			isa = PBXGroup;
 			children = (
 				F604977424549C95002B8503 /* LinkingIdManagerTests.swift */,
+				0982F485246DF05C00E57EE5 /* LinkingIdViewControllerTests.swift */,
 			);
-			path = Pilot;
+			path = Testing;
 			sourceTree = "<group>";
 		};
 		F618A560245C682500D89517 /* .secret */ = {
@@ -1519,6 +1525,7 @@
 				F6548FA32460C1C7005F06FF /* CheckinCoordinatorTests.swift in Sources */,
 				F6F05A2A2433C6CC00FF4B72 /* AuthManagerDouble.swift in Sources */,
 				F6E2E597246B287B009D80DF /* StatusStateMachiningDouble.swift in Sources */,
+				0982F488246DF80400E57EE5 /* LinkingIdManagerDouble.swift in Sources */,
 				F6F05A242433BEC000FF4B72 /* OnboardingCoordinatorTests.swift in Sources */,
 				214209D924262B7500C7BFF3 /* SessionHelpers.swift in Sources */,
 				0983ACD3243EB22200DBB336 /* StatusViewControllerTests.swift in Sources */,
@@ -1547,6 +1554,7 @@
 				21C417CA242CB0A200DEF3E2 /* ConfirmRegistrationRequestTests.swift in Sources */,
 				F632792A2435323200CF7A42 /* PermissionsViewControllerTests.swift in Sources */,
 				136001DC2462EE1C001EFE2A /* SelfDiagnosisTests.swift in Sources */,
+				0982F486246DF05C00E57EE5 /* LinkingIdViewControllerTests.swift in Sources */,
 				09E6E7E62452779B0069DFA8 /* SetupCheckerTests.swift in Sources */,
 				F7D62F292440D4CB004C32A2 /* SonarBroadcastPayloadGeneratorTests.swift in Sources */,
 				F72EBDA5243D094A009F9328 /* SecureBroadcastRotationKeyStorageTests.swift in Sources */,
@@ -1658,7 +1666,6 @@
 				898FE859243B4FE300210775 /* AuthorizationManaging.swift in Sources */,
 				F652F72E244E472E00D97950 /* SymptomsPromptViewController.swift in Sources */,
 				F67C5154243E4D2F008E2945 /* AnswerButton.swift in Sources */,
-				0982F47E246A1AC000E57EE5 /* TestingInfoNavigationController.swift in Sources */,
 				F6EEC3B82448DD2400172820 /* SelfDiagnosis.swift in Sources */,
 				0964B37D246328A20022EF97 /* UIView+Scrolling.swift in Sources */,
 				6FC63C31241641B8007C8BF3 /* AppDelegate.swift in Sources */,
@@ -1673,6 +1680,7 @@
 				214209BA242216B700C7BFF3 /* Persistence.swift in Sources */,
 				213C806C241A56430020EFA5 /* PermissionsViewController.swift in Sources */,
 				89F06B2F2434A62C0074C612 /* LoggingManager.swift in Sources */,
+				0982F484246DE4B400E57EE5 /* LinkingIdViewController.swift in Sources */,
 				09CAA3662440F3B100CE93A6 /* PostcodeViewController.swift in Sources */,
 				F61695A12458B3C0006AABE3 /* StatusNotificationHandler.swift in Sources */,
 				131AB05C2449D85B002136CA /* ContactEventExpiryHandler.swift in Sources */,

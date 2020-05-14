@@ -158,7 +158,7 @@ class StatusViewController: UIViewController, Storyboarded {
 
     @IBAction func linkingIdButtonTapped() {
         let linkingIdVc = TestingInfoViewController.instantiate()
-        linkingIdVc.inject(persisting: persistence, linkingIdManager: linkingIdManager)
+        linkingIdVc.inject(linkingIdManager: linkingIdManager, uiQueue: DispatchQueue.main)
         let navigationController = UINavigationController()
         navigationController.modalPresentationStyle = .fullScreen
         navigationController.viewControllers = [linkingIdVc]
