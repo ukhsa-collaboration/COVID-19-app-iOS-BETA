@@ -656,13 +656,13 @@
 			isa = PBXGroup;
 			children = (
 				098ED480242E745F0029B729 /* Debug.storyboard */,
-				098ED482242E746E0029B729 /* DebugViewController.swift */,
-				89BC79EA2434E047002050F8 /* LogsViewController.swift */,
-				F604976A24539F6C002B8503 /* UploadLogsViewController.swift */,
-				2115C3E524360427009C0F5B /* GradientBackgroundTableViewCell.swift */,
-				21F374032434C4BF00926FB8 /* ContactEventsTableViewController.swift */,
 				2192888624640B5600691FDD /* ContactEventDetailTableViewController.swift */,
+				21F374032434C4BF00926FB8 /* ContactEventsTableViewController.swift */,
+				098ED482242E746E0029B729 /* DebugViewController.swift */,
+				2115C3E524360427009C0F5B /* GradientBackgroundTableViewCell.swift */,
+				89BC79EA2434E047002050F8 /* LogsViewController.swift */,
 				F6978069246DA9EF002CC50B /* SetStatusStateViewController.swift */,
+				F604976A24539F6C002B8503 /* UploadLogsViewController.swift */,
 			);
 			path = Debug;
 			sourceTree = "<group>";
