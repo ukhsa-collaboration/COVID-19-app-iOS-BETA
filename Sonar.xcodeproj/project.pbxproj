@@ -207,6 +207,8 @@
 		F694B1C6245B8B9D00C6A5D1 /* statusContent.json in Resources */ = {isa = PBXBuildFile; fileRef = F694B1C5245B8B9D00C6A5D1 /* statusContent.json */; };
 		F697806A246DA9EF002CC50B /* SetStatusStateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6978069246DA9EF002CC50B /* SetStatusStateViewController.swift */; };
 		F6AB2F20243D359F00386D6B /* SubmitSymptomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */; };
+		F6BBE13C246F46B4005757BB /* ApplyForTest.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6BBE13B246F46B4005757BB /* ApplyForTest.storyboard */; };
+		F6BBE13E246F46EE005757BB /* ApplyForTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BBE13D246F46EE005757BB /* ApplyForTestViewController.swift */; };
 		F6CC2CA9242BC7FC0079432B /* RemoteNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CC2CA8242BC7FC0079432B /* RemoteNotificationManager.swift */; };
 		F6CC2CAC242BCD0D0079432B /* RemoteNotificationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CC2CAB242BCD0D0079432B /* RemoteNotificationManagerTests.swift */; };
 		F6DA0A342469D6BA001F0B48 /* StatusStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DA0A332469D6BA001F0B48 /* StatusStateMachine.swift */; };
@@ -505,6 +507,8 @@
 		F694B1C5245B8B9D00C6A5D1 /* statusContent.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = statusContent.json; sourceTree = "<group>"; };
 		F6978069246DA9EF002CC50B /* SetStatusStateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetStatusStateViewController.swift; sourceTree = "<group>"; };
 		F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitSymptomsViewController.swift; sourceTree = "<group>"; };
+		F6BBE13B246F46B4005757BB /* ApplyForTest.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ApplyForTest.storyboard; sourceTree = "<group>"; };
+		F6BBE13D246F46EE005757BB /* ApplyForTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyForTestViewController.swift; sourceTree = "<group>"; };
 		F6CA2818242E41F700F8DC55 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F6CC2CA8242BC7FC0079432B /* RemoteNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteNotificationManager.swift; sourceTree = "<group>"; };
 		F6CC2CAB242BCD0D0079432B /* RemoteNotificationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteNotificationManagerTests.swift; sourceTree = "<group>"; };
@@ -710,7 +714,10 @@
 			isa = PBXGroup;
 			children = (
 				F694B1C5245B8B9D00C6A5D1 /* statusContent.json */,
+				F6BBE13B246F46B4005757BB /* ApplyForTest.storyboard */,
 				F758B8C3242CC0EE003AE16D /* Status.storyboard */,
+				13473A1A246AFF0C00800CEA /* AdviceViewController.swift */,
+				F6BBE13D246F46EE005757BB /* ApplyForTestViewController.swift */,
 				134470AF2454D614001A0AD9 /* CoughUpdateViewController.swift */,
 				09A9254A2457B2CA00C5DBC1 /* MedicalWorkerInstructionsViewController.swift */,
 				F694B1C3245B899C00C6A5D1 /* StatusContent.swift */,
@@ -718,12 +725,11 @@
 				F6DA0A3B246A0FAA001F0B48 /* StatusState.swift */,
 				F6DA0A332469D6BA001F0B48 /* StatusStateMachine.swift */,
 				F6DA0A372469DCBA001F0B48 /* StatusStateMigration.swift */,
+				13473A1C246C0F2C00800CEA /* StatusViewController.swift */,
 				F652F72D244E472E00D97950 /* SymptomsPromptViewController.swift */,
 				138114E32450543600BA46C7 /* SymptomStackView.swift */,
-				F604976C2453ADF4002B8503 /* scenarios.yml */,
-				13473A1A246AFF0C00800CEA /* AdviceViewController.swift */,
-				13473A1C246C0F2C00800CEA /* StatusViewController.swift */,
 				13473A1E246D543F00800CEA /* UserStatusProvider.swift */,
+				F604976C2453ADF4002B8503 /* scenarios.yml */,
 			);
 			path = Status;
 			sourceTree = "<group>";
@@ -1449,6 +1455,7 @@
 				6FC63C38241641BA007C8BF3 /* Assets.xcassets in Resources */,
 				F618A566245C682500D89517 /* GoogleService-Info.plist in Resources */,
 				895D9E462437458700573D4D /* AppIcon.xcassets in Resources */,
+				F6BBE13C246F46B4005757BB /* ApplyForTest.storyboard in Resources */,
 				F68B89ED243CFF2600F369A9 /* SelfDiagnosis.storyboard in Resources */,
 				F6F05A322434310200FF4B72 /* Onboarding.storyboard in Resources */,
 				F70CB81B2450CFA900ED6E7F /* OnboardingLogoStrapline.xib in Resources */,
@@ -1614,6 +1621,7 @@
 				F6DA0A3C246A0FAA001F0B48 /* StatusState.swift in Sources */,
 				89DF669F2460168000A55F24 /* StorageChecker.swift in Sources */,
 				217A23BE243B34E8001B8236 /* UIDevice+ModelName.swift in Sources */,
+				F6BBE13E246F46EE005757BB /* ApplyForTestViewController.swift in Sources */,
 				F604976924539093002B8503 /* UploadLog.swift in Sources */,
 				214CD372246B347200B24886 /* DateExtensions.swift in Sources */,
 				21F373FF2433844D00926FB8 /* ContactEventRepository.swift in Sources */,

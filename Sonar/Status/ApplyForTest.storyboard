@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eEu-YT-bAG">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Apply for a coronavirus test-->
+        <scene sceneID="htj-3w-VDf">
+            <objects>
+                <viewController title="Apply for a coronavirus test" id="eEu-YT-bAG" customClass="ApplyForTestViewController" customModule="Sonar" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="a3V-XW-Vqe">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MA9-dr-o4r">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="SBt-Is-PrC">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4NM-mG-SCj">
+                                                <rect key="frame" x="16" y="16" width="382" height="197"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" image="Test_Tubes" translatesAutoresizingMaskIntoConstraints="NO" id="qLg-b1-5lw">
+                                                        <rect key="frame" x="123.5" y="32" width="135" height="133"/>
+                                                    </imageView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="qLg-b1-5lw" secondAttribute="bottom" constant="32" id="2A7-Lr-HHa"/>
+                                                    <constraint firstItem="qLg-b1-5lw" firstAttribute="centerX" secondItem="4NM-mG-SCj" secondAttribute="centerX" id="3JX-GV-FS0"/>
+                                                    <constraint firstItem="qLg-b1-5lw" firstAttribute="centerY" secondItem="4NM-mG-SCj" secondAttribute="centerY" id="C9F-Oi-0ks"/>
+                                                    <constraint firstItem="qLg-b1-5lw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="4NM-mG-SCj" secondAttribute="leading" constant="16" id="HeE-mb-pbs"/>
+                                                    <constraint firstItem="qLg-b1-5lw" firstAttribute="top" secondItem="4NM-mG-SCj" secondAttribute="top" constant="32" id="niu-h4-LaR"/>
+                                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="qLg-b1-5lw" secondAttribute="trailing" constant="16" id="zDa-6G-hfs"/>
+                                                </constraints>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Apply for a coronavirus test" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h2Y-Vk-qDf">
+                                                <rect key="frame" x="16" y="229" width="382" height="33.5"/>
+                                                <accessibility key="accessibilityConfiguration">
+                                                    <accessibilityTraits key="traits" staticText="YES" header="YES"/>
+                                                </accessibility>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                <color key="textColor" name="NHS Text"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hUD-0m-zir">
+                                                <rect key="frame" x="16" y="278.5" width="382" height="86.5"/>
+                                                <string key="text">You can now apply for a coronavirus test for you and other people in your household. This test will tell you whether you currently have coronavirus or not.</string>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <color key="textColor" name="NHS Text"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qGy-2f-yY4" customClass="UIButton">
+                                                <rect key="frame" x="16" y="381" width="382" height="50"/>
+                                                <subviews>
+                                                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1FS-hw-I9O" customClass="LinkButton" customModule="Sonar" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="210" height="50"/>
+                                                        <accessibility key="accessibilityConfiguration">
+                                                            <accessibilityTraits key="traits" link="YES"/>
+                                                        </accessibility>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                        <state key="normal" title="Apply for a coronavirus test">
+                                                            <color key="titleColor" name="NHS Link"/>
+                                                        </state>
+                                                    </button>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="External_Link" translatesAutoresizingMaskIntoConstraints="NO" id="7Wy-sa-3D6">
+                                                        <rect key="frame" x="220" y="18" width="18.5" height="13.5"/>
+                                                    </imageView>
+                                                </subviews>
+                                                <accessibility key="accessibilityConfiguration" label="Apply for a coronavirus test">
+                                                    <accessibilityTraits key="traits" link="YES"/>
+                                                    <bool key="isElement" value="YES"/>
+                                                </accessibility>
+                                                <constraints>
+                                                    <constraint firstItem="7Wy-sa-3D6" firstAttribute="centerY" secondItem="qGy-2f-yY4" secondAttribute="centerY" id="QeL-sf-sts"/>
+                                                    <constraint firstItem="1FS-hw-I9O" firstAttribute="leading" secondItem="qGy-2f-yY4" secondAttribute="leading" id="X6v-V0-f9x"/>
+                                                    <constraint firstItem="1FS-hw-I9O" firstAttribute="top" secondItem="qGy-2f-yY4" secondAttribute="top" id="Ybm-Z5-Wcg"/>
+                                                    <constraint firstAttribute="bottom" secondItem="1FS-hw-I9O" secondAttribute="bottom" id="dlG-xa-KF4"/>
+                                                    <constraint firstItem="7Wy-sa-3D6" firstAttribute="leading" secondItem="1FS-hw-I9O" secondAttribute="trailing" constant="10" id="iTa-gE-Ohr"/>
+                                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="7Wy-sa-3D6" secondAttribute="trailing" id="kig-Xf-0dm"/>
+                                                </constraints>
+                                                <connections>
+                                                    <action selector="applyForTestTapped:" destination="eEu-YT-bAG" eventType="touchUpInside" id="s1S-nC-YVL"/>
+                                                </connections>
+                                            </view>
+                                            <view contentMode="scaleToFill" verticalHuggingPriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="dif-o7-21U">
+                                                <rect key="frame" x="16" y="447" width="382" height="355"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" id="1xq-Hb-IeR"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <directionalEdgeInsets key="directionalLayoutMargins" top="16" leading="16" bottom="16" trailing="16"/>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="ZL3-9H-u5Y" firstAttribute="leading" secondItem="SBt-Is-PrC" secondAttribute="leading" id="4yJ-z8-cis"/>
+                                    <constraint firstAttribute="height" secondItem="SBt-Is-PrC" secondAttribute="height" placeholder="YES" id="Rx7-ib-urk"/>
+                                    <constraint firstItem="SBt-Is-PrC" firstAttribute="width" secondItem="xwb-o3-SkT" secondAttribute="width" id="SPd-MB-AgZ"/>
+                                    <constraint firstItem="SBt-Is-PrC" firstAttribute="bottom" secondItem="ZL3-9H-u5Y" secondAttribute="bottom" id="Vjj-db-nvx"/>
+                                    <constraint firstItem="SBt-Is-PrC" firstAttribute="trailing" secondItem="ZL3-9H-u5Y" secondAttribute="trailing" id="dwY-A9-Wwv"/>
+                                    <constraint firstItem="ZL3-9H-u5Y" firstAttribute="top" secondItem="SBt-Is-PrC" secondAttribute="top" id="wN3-Ld-4er"/>
+                                    <constraint firstItem="SBt-Is-PrC" firstAttribute="height" relation="greaterThanOrEqual" secondItem="MA9-dr-o4r" secondAttribute="height" id="wSV-vY-rSw"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="ZL3-9H-u5Y"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="xwb-o3-SkT"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" name="NHS Grey 5"/>
+                        <constraints>
+                            <constraint firstItem="MA9-dr-o4r" firstAttribute="leading" secondItem="HBC-hk-frn" secondAttribute="leading" id="7Xa-7L-A0S"/>
+                            <constraint firstItem="MA9-dr-o4r" firstAttribute="top" secondItem="HBC-hk-frn" secondAttribute="top" id="DsI-QB-Qi8"/>
+                            <constraint firstItem="HBC-hk-frn" firstAttribute="trailing" secondItem="MA9-dr-o4r" secondAttribute="trailing" id="VIs-jb-3qv"/>
+                            <constraint firstItem="HBC-hk-frn" firstAttribute="bottom" secondItem="MA9-dr-o4r" secondAttribute="bottom" id="s5W-W9-v4D"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="HBC-hk-frn"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AjV-a4-yTk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5102.898550724638" y="515.625"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="External_Link" width="19" height="14"/>
+        <image name="Test_Tubes" width="135" height="133"/>
+        <namedColor name="NHS Grey 5">
+            <color red="0.94117647058823528" green="0.95686274509803926" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="NHS Link">
+            <color red="0.0" green="0.36862745098039218" blue="0.72156862745098038" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="NHS Text">
+            <color red="0.1289999932050705" green="0.16899999976158142" blue="0.19599999487400055" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
