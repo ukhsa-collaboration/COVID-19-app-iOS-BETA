@@ -49,7 +49,7 @@ class StatusStateMachine: StatusStateMachining {
         contactEventsUploader: ContactEventsUploading,
         notificationCenter: NotificationCenter,
         userNotificationCenter: UserNotificationCenter,
-        dateProvider: @autoclosure @escaping () -> Date = Date()
+        dateProvider: @escaping () -> Date = { Date() }
     ) {
         self.persisting = persisting
         self.contactEventsUploader = contactEventsUploader

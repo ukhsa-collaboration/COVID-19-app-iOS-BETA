@@ -29,7 +29,7 @@ class StatusStateMachineTests: XCTestCase {
             contactEventsUploader: contactEventsUploader,
             notificationCenter: notificationCenter,
             userNotificationCenter: userNotificationCenter,
-            dateProvider: self.currentDate
+            dateProvider: { self.currentDate }
         )
     }
 
