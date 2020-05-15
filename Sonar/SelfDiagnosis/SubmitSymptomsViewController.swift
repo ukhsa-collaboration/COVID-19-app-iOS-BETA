@@ -17,15 +17,18 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
     private var symptoms: Set<Symptom>!
     private var startDate: Date!
     private var statusStateMachine: StatusStateMachining!
+    private var completion: ((Set<Symptom>) -> Void)!
 
     func inject(
         symptoms: Set<Symptom>,
         startDate: Date,
-        statusStateMachine: StatusStateMachining
+        statusStateMachine: StatusStateMachining,
+        completion: @escaping (Set<Symptom>) -> Void
     ) {
         self.symptoms = symptoms
         self.startDate = startDate
         self.statusStateMachine = statusStateMachine
+        self.completion = completion
     }
 
     // MARK: - UIKit
@@ -48,7 +51,7 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
     }
 
     @IBAction func cancelTapped(_ sender: Any) {
-        navigationController?.popToRootViewController(animated: true)
+        completion([])
     }
 
     private var isSubmitting = false
@@ -69,7 +72,7 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
                 return
             }
 
-            navigationController?.popToRootViewController(animated: true)
+            completion(symptoms)
         } catch {
             alert(with: Error())
         }

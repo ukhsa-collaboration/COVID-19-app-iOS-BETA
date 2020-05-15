@@ -152,7 +152,14 @@ class StatusViewController: UIViewController, Storyboarded {
         let coordinator = SelfDiagnosisCoordinator(
             navigationController: navigationController!,
             statusStateMachine: statusStateMachine
-        )
+        ) { symptoms in
+            self.navigationController?.popToViewController(self, animated: true)
+
+            if symptoms.contains(.cough), case .ok = self.statusStateMachine.state {
+                self.presentCoughUpdate()
+            }
+        }
+
         coordinator.start()
     }
 

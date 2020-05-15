@@ -15,13 +15,16 @@ class SymptomsSummaryViewController: UIViewController, Storyboarded {
 
     private var symptoms: Set<Symptom>!
     private var statusStateMachine: StatusStateMachining!
+    private var completion: ((Set<Symptom>) -> Void)!
 
     func inject(
         hasHighTemperature: Bool,
         hasNewCough: Bool,
-        statusStateMachine: StatusStateMachining
+        statusStateMachine: StatusStateMachining,
+        completion: @escaping (Set<Symptom>) -> Void
     ) {
         self.statusStateMachine = statusStateMachine
+        self.completion = completion
 
         symptoms = Set()
         if hasHighTemperature {
@@ -61,7 +64,8 @@ class SymptomsSummaryViewController: UIViewController, Storyboarded {
             vc.inject(
                 symptoms: symptoms,
                 startDate: startDate,
-                statusStateMachine: statusStateMachine
+                statusStateMachine: statusStateMachine,
+                completion: completion
             )
         default:
             break
@@ -69,7 +73,7 @@ class SymptomsSummaryViewController: UIViewController, Storyboarded {
     }
 
     @IBAction func cancelTapped(_ sender: Any) {
-        navigationController?.popToRootViewController(animated: true)
+        completion([])
     }
     
     override func viewDidLoad() {
@@ -96,7 +100,7 @@ class SymptomsSummaryViewController: UIViewController, Storyboarded {
 
     @IBAction func buttonTapped(_ sender: PrimaryButton) {
         if symptoms.isEmpty {
-            navigationController?.popToRootViewController(animated: true)
+            completion(symptoms)
             return
         }
 

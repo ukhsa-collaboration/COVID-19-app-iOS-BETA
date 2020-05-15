@@ -15,13 +15,16 @@ protocol Coordinator {
 class SelfDiagnosisCoordinator: Coordinator {
     let navigationController: UINavigationController
     let statusStateMachine: StatusStateMachining
+    let completion: (Set<Symptom>) -> Void
 
     init(
         navigationController: UINavigationController,
-        statusStateMachine: StatusStateMachining
+        statusStateMachine: StatusStateMachining,
+        completion: @escaping (Set<Symptom>) -> Void
     ) {
         self.navigationController = navigationController
         self.statusStateMachine = statusStateMachine
+        self.completion = completion
     }
     
     var hasHighTemperature: Bool!
@@ -68,7 +71,8 @@ class SelfDiagnosisCoordinator: Coordinator {
         vc.inject(
             hasHighTemperature: hasHighTemperature,
             hasNewCough: hasNewCough,
-            statusStateMachine: statusStateMachine
+            statusStateMachine: statusStateMachine,
+            completion: completion
         )
         navigationController.pushViewController(vc, animated: true)
     }
