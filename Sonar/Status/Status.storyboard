@@ -21,43 +21,45 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="2RR-xS-nFD">
-                                        <rect key="frame" x="16" y="0.0" width="382" height="818"/>
+                                        <rect key="frame" x="16" y="0.0" width="382" height="387"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" image="News_Covid" translatesAutoresizingMaskIntoConstraints="NO" id="m6w-sJ-IdX">
                                                 <rect key="frame" x="0.0" y="0.0" width="382" height="218"/>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Advice Header" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Xu-Df-kMX">
-                                                <rect key="frame" x="0.0" y="234" width="382" height="20.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Read and follow advice specific to your situation" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Xu-Df-kMX">
+                                                <rect key="frame" x="0.0" y="234" width="382" height="67.5"/>
+                                                <accessibility key="accessibilityConfiguration">
+                                                    <accessibilityTraits key="traits" staticText="YES" header="YES"/>
+                                                </accessibility>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                <color key="textColor" name="NHS Text"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Advice Detail" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bmj-47-Dky">
+                                                <rect key="frame" x="0.0" y="317.5" width="382" height="20.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                 <color key="textColor" name="NHS Text"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Advice Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bmj-47-Dky">
-                                                <rect key="frame" x="0.0" y="270.5" width="382" height="20.5"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6cm-V2-gaO" customClass="LinkButton" customModule="Sonar" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="354" width="382" height="33"/>
+                                                <accessibility key="accessibilityConfiguration">
+                                                    <accessibilityTraits key="traits" link="YES"/>
+                                                </accessibility>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                <color key="textColor" name="NHS Text"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="100" verticalHuggingPriority="750" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6cm-V2-gaO" customClass="LinkButton" customModule="Sonar" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="307" width="382" height="33"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                <state key="normal" title="Button">
+                                                <state key="normal" title="Link">
                                                     <color key="titleColor" name="NHS Link"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="linkTap:" destination="6kA-Fm-rsu" eventType="touchUpInside" id="4rc-BS-nIw"/>
                                                 </connections>
                                             </button>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="njF-pd-XYI" userLabel="Spacer">
-                                                <rect key="frame" x="0.0" y="356" width="382" height="462"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </view>
                                         </subviews>
                                     </stackView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="2RR-xS-nFD" firstAttribute="bottom" secondItem="XLb-R8-lOK" secondAttribute="bottom" id="JM3-Xi-3np"/>
-                                    <constraint firstItem="2RR-xS-nFD" firstAttribute="height" secondItem="T2z-6R-C4k" secondAttribute="height" id="Kxk-SM-wEW"/>
+                                    <constraint firstItem="2RR-xS-nFD" firstAttribute="height" secondItem="T2z-6R-C4k" secondAttribute="height" priority="1" id="Kxk-SM-wEW"/>
                                     <constraint firstItem="XLb-R8-lOK" firstAttribute="leading" secondItem="2RR-xS-nFD" secondAttribute="leading" constant="-16" id="QH2-SB-jXw"/>
                                     <constraint firstItem="2RR-xS-nFD" firstAttribute="trailing" secondItem="XLb-R8-lOK" secondAttribute="trailing" id="cVy-rP-F1a"/>
                                     <constraint firstItem="2RR-xS-nFD" firstAttribute="width" secondItem="T2z-6R-C4k" secondAttribute="width" constant="-32" id="kjx-QP-TUv"/>
@@ -317,7 +319,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="NyJ-yi-J4V">
-                                        <rect key="frame" x="16" y="0.0" width="382" height="754"/>
+                                        <rect key="frame" x="16" y="0.0" width="382" height="687"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oRv-PB-BfB" userLabel="Registration status view">
                                                 <rect key="frame" x="0.0" y="0.0" width="382" height="60"/>
@@ -586,10 +588,6 @@
                                                 <connections>
                                                     <action selector="testingInfoTapped:" destination="D27-h6-ECy" eventType="touchUpInside" id="nOL-EN-deI"/>
                                                 </connections>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hjn-0a-hW8" userLabel="Spacer">
-                                                <rect key="frame" x="0.0" y="703" width="382" height="51"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" name="NHS Grey 5"/>
