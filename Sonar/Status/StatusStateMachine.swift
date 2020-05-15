@@ -70,24 +70,24 @@ class StatusStateMachine: StatusStateMachining {
         self.userNotificationCenter = userNotificationCenter
         self.dateProvider = dateProvider
     }
-    
+
     func selfDiagnose(symptoms: Set<Symptom>, startDate: Date) throws {
         guard !symptoms.isEmpty else {
             assertionFailure("Self-diagnosing with no symptoms is not allowed")
             return
         }
-        
+
         switch state {
         case .ok(let ok):
             let symptomatic = StatusState.Symptomatic(symptoms: symptoms, startDate: startDate)
             try contactEventsUploader.upload(from: startDate)
-            
+
             if dateProvider() < symptomatic.expiryDate {
                 transition(from: ok, to: symptomatic)
             } else { // expired
                 if symptoms.contains(.temperature) {
                     transition(from: ok, to: symptomatic)
-                    
+
                     // go straight into checkin
                     guard let checkinDate = nextCheckinDate else { return }
                     let checkin = StatusState.Checkin(symptoms: symptomatic.symptoms, checkinDate: checkinDate)
