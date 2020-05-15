@@ -53,6 +53,24 @@ class ContactEventTests: XCTestCase {
         XCTAssertEqual(contactEvent1.txPower, 17)
     }
     
+    func testMergeRetainsValidTxPowerIfEitherContactEventIsMissingTxPower() {
+        var contactEvent1 = ContactEvent(timestamp: time0)
+        contactEvent1.txPower = 42
+        let contactEvent2 = ContactEvent(timestamp: time1)
+        
+        contactEvent1.merge(contactEvent2)
+        
+        XCTAssertEqual(contactEvent1.txPower, 42)
+        
+        var contactEvent3 = ContactEvent(timestamp: time3)
+        var contactEvent4 = ContactEvent(timestamp: time4)
+        contactEvent4.txPower = 42
+        
+        contactEvent3.merge(contactEvent4)
+        
+        XCTAssertEqual(contactEvent3.txPower, 42)
+    }
+    
     func testSerializesAndDeserializes() throws {
         var currentFormatContactEvent = ContactEvent(
             timestamp: Date(),

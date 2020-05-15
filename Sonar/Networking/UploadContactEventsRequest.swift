@@ -66,7 +66,7 @@ class UploadContactEventsRequest: SecureRequest, Request {
                 timestamp: Int32(event.timestamp.timeIntervalSince1970),
                 duration: Int(event.duration),
                 txPowerInProtocol: payload.txPower,
-                txPowerAdvertised: event.txPower,
+                txPowerAdvertised: event.txPower ?? Int8.min,
                 hmacSignature: payload.hmac,
                 transmissionTime: payload.transmissionTime,
                 countryCode: payload.countryCode)

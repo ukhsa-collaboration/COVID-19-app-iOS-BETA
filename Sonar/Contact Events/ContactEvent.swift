@@ -15,7 +15,7 @@ struct ContactEvent: Equatable, Codable {
     
     var broadcastPayload: IncomingBroadcastPayload?
 
-    var txPower: Int8
+    var txPower: Int8?
     private (set) var timestamp: Date
     private (set) var rssiValues: [Int8]
     private (set) var rssiTimestamps: [Date]
@@ -26,7 +26,7 @@ struct ContactEvent: Equatable, Codable {
     
     init(
         broadcastPayload: IncomingBroadcastPayload? = nil,
-        txPower: Int8 = Int8.min,
+        txPower: Int8? = nil,
         timestamp: Date = Date(),
         rssiValues: [Int8] = [],
         rssiTimestamps: [Date] = [],
@@ -80,7 +80,7 @@ struct ContactEvent: Equatable, Codable {
         ).sorted(by: { $0.0 < $1.0 } )
         rssiTimestamps = merged.map({ $0.0 })
         rssiValues = merged.map({ $0.1 })
-        txPower = contactEvent.txPower
+        txPower = contactEvent.txPower ?? txPower
     }
     
     private enum CodingKeys: String, CodingKey {
