@@ -36,7 +36,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <label key="tableFooterView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="u9d-KW-xk7">
-                            <rect key="frame" x="0.0" y="1000" width="414" height="44"/>
+                            <rect key="frame" x="0.0" y="1021" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                             <nil key="textColor"/>
@@ -351,7 +351,7 @@
                         <outlet property="broadcasterStatus" destination="qJp-aI-4Td" id="qww-Od-SGO"/>
                         <outlet property="listenerStatus" destination="i2m-Kl-aIW" id="Ffl-eb-OB3"/>
                         <outlet property="versionBuildLabel" destination="u9d-KW-xk7" id="hpS-fN-Piy"/>
-                        <segue destination="Al2-ax-dFZ" kind="presentation" identifier="presentSetStatusState" id="ZfZ-cf-6Lp"/>
+                        <segue destination="hhR-Gg-VxX" kind="show" identifier="showSetStatusState" id="coz-XP-bHp"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rGx-hb-5hq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -606,30 +606,12 @@
             </objects>
             <point key="canvasLocation" x="-349" y="1158"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="3ti-tB-bir">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Al2-ax-dFZ" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="qsC-ya-i7q">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="hhR-Gg-VxX" kind="relationship" relationship="rootViewController" id="vDH-1D-4sD"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="UVC-Ah-ll5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1462.3188405797102" y="1157.8125"/>
-        </scene>
         <!--Set Status State View Controller-->
         <scene sceneID="WSf-v2-VIe">
             <objects>
                 <tableViewController id="hhR-Gg-VxX" customClass="SetStatusStateViewController" customModule="Sonar" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="ifI-Jg-IZX">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections/>
@@ -807,7 +789,7 @@
                 </tableViewCell>
                 <exit id="zlN-Z8-Jtr" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-1462" y="1902"/>
+            <point key="canvasLocation" x="-1462" y="1158"/>
         </scene>
     </scenes>
     <resources>

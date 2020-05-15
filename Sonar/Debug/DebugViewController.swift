@@ -101,7 +101,7 @@ class DebugViewController: UITableViewController, Storyboarded {
             show(title: "Cleared", message: "Registration and diagnosis data has been cleared. Please stop and re-start the application.")
 
         case (1, 1):
-            performSegue(withIdentifier: "presentSetStatusState", sender: self)
+            performSegue(withIdentifier: "showSetStatusState", sender: self)
 
         case (1, 2):
             persisting.acknowledgmentUrls = []
@@ -196,21 +196,15 @@ class DebugViewController: UITableViewController, Storyboarded {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.destination {
-        case let nav as UINavigationController:
-            switch nav.topViewController {
-            case let vc as SetStatusStateViewController:
-                vc.persistence = persisting
-                vc.statusStateMachine = statusStateMachine
-            default:
-                break
-            }
+        case let vc as SetStatusStateViewController:
+            vc.persistence = persisting
+            vc.statusStateMachine = statusStateMachine
         default:
             break
         }
     }
 
     @IBAction func unwindFromSetStatusState(unwindSegue: UIStoryboardSegue) {
-
     }
 
     // MARK: - Bluetooth status animation
