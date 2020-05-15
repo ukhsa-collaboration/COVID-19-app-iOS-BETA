@@ -678,7 +678,10 @@
 				09B103612444E9110091834D /* ContactEventPersisterDouble.swift */,
 				09B103632444EAB80091834D /* ContactEventRepositoryDouble.swift */,
 				F60497662452415F002B8503 /* ContactEventsUploaderDouble.swift */,
+				89C8B215245C5258009CCE80 /* DefaultObjectStoringDouble.swift */,
+				097C94CA245B81E8008A9695 /* EnGbLocaleProviderDouble.swift */,
 				0983ACCC243E566800DBB336 /* ErrorForTest.swift */,
+				0982F487246DF80400E57EE5 /* LinkingIdManagerDouble.swift */,
 				F694B1BF2459EEB800C6A5D1 /* NotificationAcknowledgerDouble.swift */,
 				0983ACCE243E6D3800DBB336 /* NotificationObserverDouble.swift */,
 				F632792224351C8400CF7A42 /* OnboardingCoordinatorDouble.swift */,
@@ -688,13 +691,10 @@
 				098ED489242E89D80029B729 /* RegistrationServiceDouble.swift */,
 				F694B1B92459E45100C6A5D1 /* RemoteNotificationDispatchingDouble.swift */,
 				F62F858424510923006580A8 /* SessionDouble.swift */,
+				F6E2E596246B287B009D80DF /* StatusStateMachiningDouble.swift */,
+				89DF66A52460217A00A55F24 /* StorageCheckingDouble.swift */,
 				89CCF65E2456EF7000AC9D91 /* TrustValidatingDouble.swift */,
 				090B1870243552C300870B5D /* UserNotificationCenterDouble.swift */,
-				097C94CA245B81E8008A9695 /* EnGbLocaleProviderDouble.swift */,
-				89C8B215245C5258009CCE80 /* DefaultObjectStoringDouble.swift */,
-				89DF66A52460217A00A55F24 /* StorageCheckingDouble.swift */,
-				F6E2E596246B287B009D80DF /* StatusStateMachiningDouble.swift */,
-				0982F487246DF80400E57EE5 /* LinkingIdManagerDouble.swift */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
