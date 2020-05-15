@@ -13,6 +13,7 @@ class SubmitSymptomsViewControllerTests: TestCase {
 
     var vc: SubmitSymptomsViewController!
     var statusStateMachine: StatusStateMachiningDouble!
+    var completionSymptoms: Set<Symptom>?
 
     override func setUp() {
         super.setUp()
@@ -116,7 +117,7 @@ class SubmitSymptomsViewControllerTests: TestCase {
             symptoms: symptoms,
             startDate: startDate,
             statusStateMachine: statusStateMachine
-        )
+        ) { self.completionSymptoms = $0 }
         XCTAssertNotNil(vc.view)
     }
 

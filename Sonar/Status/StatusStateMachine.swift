@@ -44,6 +44,19 @@ class StatusStateMachine: StatusStateMachining {
         }
     }
 
+    private var nextCheckinDate: Date? {
+        let startOfDay = Calendar.current.startOfDay(for: dateProvider())
+        guard let afterDay = Calendar.current.date(byAdding: .day, value: 1, to: startOfDay) else {
+            return nil
+        }
+
+        return Calendar.current.nextDate(
+            after: afterDay,
+            matching: DateComponents(hour: 7),
+            matchingPolicy: .nextTime
+        )
+    }
+
     init(
         persisting: Persisting,
         contactEventsUploader: ContactEventsUploading,
@@ -57,18 +70,32 @@ class StatusStateMachine: StatusStateMachining {
         self.userNotificationCenter = userNotificationCenter
         self.dateProvider = dateProvider
     }
-
+    
     func selfDiagnose(symptoms: Set<Symptom>, startDate: Date) throws {
         guard !symptoms.isEmpty else {
             assertionFailure("Self-diagnosing with no symptoms is not allowed")
             return
         }
-
+        
         switch state {
         case .ok(let ok):
             let symptomatic = StatusState.Symptomatic(symptoms: symptoms, startDate: startDate)
             try contactEventsUploader.upload(from: startDate)
-            transition(from: ok, to: symptomatic)
+            
+            if dateProvider() < symptomatic.expiryDate {
+                transition(from: ok, to: symptomatic)
+            } else { // expired
+                if symptoms.contains(.temperature) {
+                    transition(from: ok, to: symptomatic)
+                    
+                    // go straight into checkin
+                    guard let checkinDate = nextCheckinDate else { return }
+                    let checkin = StatusState.Checkin(symptoms: symptomatic.symptoms, checkinDate: checkinDate)
+                    transition(from: symptomatic, to: checkin)
+                } else {
+                    // don't do anything if we only have a cough
+                }
+            }
         case .exposed(let exposed):
             let symptomatic = StatusState.Symptomatic(symptoms: symptoms, startDate: startDate)
             try contactEventsUploader.upload(from: startDate)
@@ -85,7 +112,8 @@ class StatusStateMachine: StatusStateMachining {
         case .symptomatic(let symptomatic):
             guard dateProvider() >= symptomatic.expiryDate else { return }
 
-            state = .checkin(StatusState.Checkin(symptoms: symptomatic.symptoms, checkinDate: symptomatic.expiryDate))
+            let checkin = StatusState.Checkin(symptoms: symptomatic.symptoms, checkinDate: symptomatic.expiryDate)
+            transition(from: symptomatic, to: checkin)
         case .exposed(let exposed):
             guard dateProvider() >= exposed.expiryDate else { return }
 
@@ -99,6 +127,7 @@ class StatusStateMachine: StatusStateMachining {
         switch state {
         case .ok, .symptomatic, .exposed:
             assertionFailure("Checking in is only allowed from checkin")
+            return
         case .checkin(let checkin):
             guard dateProvider() >= checkin.checkinDate else {
                 assertionFailure("Checking in is only allowed after the checkin date")
@@ -106,15 +135,11 @@ class StatusStateMachine: StatusStateMachining {
             }
 
             if symptoms.contains(.temperature) {
-                let startOfDay = Calendar.current.startOfDay(for: dateProvider())
-                let nextCheckin = Calendar.current.nextDate(
-                    after: Calendar.current.date(byAdding: .day, value: 1, to: startOfDay)!,
-                    matching: DateComponents(hour: 7),
-                    matchingPolicy: .nextTime
-                )!
+                guard let checkinDate = nextCheckinDate else { return }
+
                 transition(
                     from: checkin,
-                    to: StatusState.Checkin(symptoms: symptoms, checkinDate: nextCheckin)
+                    to: StatusState.Checkin(symptoms: symptoms, checkinDate: checkinDate)
                 )
             } else {
                 transition(from: checkin, to: StatusState.Ok())
@@ -139,6 +164,11 @@ class StatusStateMachine: StatusStateMachining {
     private func transition(from ok: StatusState.Ok, to symptomatic: StatusState.Symptomatic) {
         add(notificationRequest: checkinNotificationRequest(at: symptomatic.expiryDate))
         state = .symptomatic(symptomatic)
+    }
+
+    private func transition(from symptomatic: StatusState.Symptomatic, to checkin: StatusState.Checkin) {
+        add(notificationRequest: checkinNotificationRequest(at: checkin.checkinDate))
+        state = .checkin(checkin)
     }
 
     private func transition(from exposed: StatusState.Exposed, to symptomatic: StatusState.Symptomatic) {
