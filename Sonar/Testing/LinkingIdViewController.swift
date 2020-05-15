@@ -51,4 +51,19 @@ class LinkingIdViewController: UIViewController, Storyboarded {
             }
         }
     }
+
+    @IBAction func copyTapped(_ sender: ButtonWithDynamicType) {
+        UIPasteboard.general.string = referenceCodeLabel.text
+
+        // This is an arbitrary dev animation to fade the
+        // reference code view so the user knows we actually
+        // did something when they tap "copy".
+        UIView.animate(withDuration: 0.2, animations: {
+            self.referenceCodeWrapper.alpha = 0.5
+        }, completion: { _ in
+            UIView.animate(withDuration: 0.2, animations: {
+                self.referenceCodeWrapper.alpha = 1
+            })
+        })
+    }
 }
