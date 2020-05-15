@@ -69,7 +69,7 @@
                                                         </state>
                                                     </button>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="External_Link" translatesAutoresizingMaskIntoConstraints="NO" id="7Wy-sa-3D6">
-                                                        <rect key="frame" x="220" y="18" width="18.5" height="13.5"/>
+                                                        <rect key="frame" x="220" y="18" width="19" height="14"/>
                                                     </imageView>
                                                 </subviews>
                                                 <accessibility key="accessibilityConfiguration" label="Apply for a coronavirus test">

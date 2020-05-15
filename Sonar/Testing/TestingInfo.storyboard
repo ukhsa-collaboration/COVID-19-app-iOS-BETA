@@ -184,26 +184,26 @@ You can always find the latest code here, it should be unique for every test you
                                 <rect key="frame" x="0.0" y="0.0" width="343" height="236"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hQW-du-1mg" userLabel="Fetching wrapper">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="128"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="98"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="tHb-7A-KJM" userLabel="Fetching Stack View">
-                                                <rect key="frame" x="16" y="0.0" width="311" height="128"/>
+                                                <rect key="frame" x="16" y="0.0" width="311" height="98"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="751" ambiguous="YES" text="Fetching reference code" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c4D-2N-Mpo">
-                                                        <rect key="frame" x="0.0" y="52" width="186.5" height="24"/>
+                                                        <rect key="frame" x="0.0" y="37" width="186.5" height="24"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M8S-Ea-Jaa" userLabel="Spacer that helps limit the spinner's size">
-                                                        <rect key="frame" x="186.5" y="0.0" width="100.5" height="128"/>
+                                                        <rect key="frame" x="186.5" y="0.0" width="100.5" height="98"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="8" id="lVS-Rg-wVS"/>
                                                         </constraints>
                                                     </view>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="24" placeholderIntrinsicHeight="infinite" image="Spinner" translatesAutoresizingMaskIntoConstraints="NO" id="0ca-Zm-xYY" customClass="SpinnerView" customModule="Sonar" customModuleProvider="target">
-                                                        <rect key="frame" x="287" y="52" width="24" height="24"/>
+                                                        <rect key="frame" x="287" y="37" width="24" height="24"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="24" id="Zij-6q-HzM"/>
                                                             <constraint firstAttribute="width" secondItem="0ca-Zm-xYY" secondAttribute="height" multiplier="1:1" id="kld-OR-uqZ"/>
@@ -224,10 +224,10 @@ You can always find the latest code here, it should be unique for every test you
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ue3-ad-pzT" userLabel="Error wrapper">
-                                        <rect key="frame" x="0.0" y="128" width="343" height="22.5"/>
+                                        <rect key="frame" x="0.0" y="98" width="343" height="20.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error fetching reference code" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwU-V9-8IW" customClass="ErrorLabel" customModule="Sonar" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="343" height="22.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -241,44 +241,67 @@ You can always find the latest code here, it should be unique for every test you
                                             <constraint firstAttribute="bottom" secondItem="hwU-V9-8IW" secondAttribute="bottom" id="r2Q-UA-4t9"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qfh-90-gug" userLabel="Reference code wrapper">
-                                        <rect key="frame" x="0.0" y="150.5" width="343" height="85.5"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TJa-nt-Qbb" userLabel="Reference code wrapper">
+                                        <rect key="frame" x="0.0" y="118.5" width="343" height="117.5"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L1P-JU-QWm" userLabel="Highlight">
-                                                <rect key="frame" x="0.0" y="0.0" width="4" height="85.5"/>
-                                                <color key="backgroundColor" name="NHS Blue"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="4" id="YyX-89-PC5"/>
-                                                </constraints>
-                                            </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your app reference code" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l4k-AZ-2tC">
-                                                <rect key="frame" x="16" y="8" width="311" height="20.5"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reference code" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tct-bE-7Hd">
-                                                <rect key="frame" x="16" y="36.5" width="311" height="41"/>
-                                                <accessibility key="accessibilityConfiguration">
-                                                    <accessibilityTraits key="traits" staticText="YES" header="YES"/>
-                                                </accessibility>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Iqw-1K-vMf">
+                                                <rect key="frame" x="0.0" y="0.0" width="327" height="117.5"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L1P-JU-QWm" userLabel="Highlight">
+                                                        <rect key="frame" x="0.0" y="0.0" width="4" height="117.5"/>
+                                                        <color key="backgroundColor" name="NHS Blue"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="4" id="YyX-89-PC5"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="svn-zl-ppS">
+                                                        <rect key="frame" x="20" y="0.0" width="240" height="117.5"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zXF-a4-F3H" userLabel="Spacer">
+                                                                <rect key="frame" x="0.0" y="0.0" width="240" height="16"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="16" id="Dcj-vn-cKA"/>
+                                                                </constraints>
+                                                            </view>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your app reference code" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l4k-AZ-2tC">
+                                                                <rect key="frame" x="0.0" y="24" width="240" height="20.5"/>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reference code" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tct-bE-7Hd">
+                                                                <rect key="frame" x="0.0" y="52.5" width="240" height="41"/>
+                                                                <accessibility key="accessibilityConfiguration">
+                                                                    <accessibilityTraits key="traits" staticText="YES" header="YES"/>
+                                                                </accessibility>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J54-gi-6DL" userLabel="Spacer">
+                                                                <rect key="frame" x="0.0" y="101.5" width="240" height="16"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="16" id="8dP-Ds-2zB"/>
+                                                                </constraints>
+                                                            </view>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iYR-1G-XgC" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
+                                                        <rect key="frame" x="276" y="0.0" width="51" height="117.5"/>
+                                                        <state key="normal" title="Copy"/>
+                                                        <connections>
+                                                            <action selector="copyTapped:" destination="Ndp-0u-sId" eventType="touchUpInside" id="HFa-N0-ieh"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
                                         <color key="backgroundColor" name="NHS Grey 4"/>
                                         <constraints>
-                                            <constraint firstItem="l4k-AZ-2tC" firstAttribute="leading" secondItem="qfh-90-gug" secondAttribute="leading" constant="16" id="07H-br-OkM"/>
-                                            <constraint firstAttribute="trailing" secondItem="tct-bE-7Hd" secondAttribute="trailing" constant="16" id="4gg-5n-NbT"/>
-                                            <constraint firstItem="tct-bE-7Hd" firstAttribute="leading" secondItem="qfh-90-gug" secondAttribute="leading" constant="16" id="PZz-ox-uIQ"/>
-                                            <constraint firstItem="L1P-JU-QWm" firstAttribute="top" secondItem="qfh-90-gug" secondAttribute="top" id="Q97-kV-iyn"/>
-                                            <constraint firstItem="l4k-AZ-2tC" firstAttribute="top" secondItem="qfh-90-gug" secondAttribute="top" constant="8" id="SGB-ij-Mdf"/>
-                                            <constraint firstAttribute="trailing" secondItem="l4k-AZ-2tC" secondAttribute="trailing" constant="16" id="WgY-AG-3Qs"/>
-                                            <constraint firstAttribute="bottom" secondItem="L1P-JU-QWm" secondAttribute="bottom" id="aAd-lq-W5D"/>
-                                            <constraint firstItem="L1P-JU-QWm" firstAttribute="leading" secondItem="qfh-90-gug" secondAttribute="leading" id="kjR-Kh-lfn"/>
-                                            <constraint firstItem="tct-bE-7Hd" firstAttribute="top" secondItem="l4k-AZ-2tC" secondAttribute="bottom" constant="8" id="xYR-pu-xY6"/>
-                                            <constraint firstAttribute="bottom" secondItem="tct-bE-7Hd" secondAttribute="bottom" constant="8" id="yID-4X-4Pk"/>
+                                            <constraint firstItem="Iqw-1K-vMf" firstAttribute="top" secondItem="TJa-nt-Qbb" secondAttribute="top" id="N4w-MK-6Hu"/>
+                                            <constraint firstAttribute="bottom" secondItem="Iqw-1K-vMf" secondAttribute="bottom" id="PTj-wb-SKW"/>
+                                            <constraint firstItem="Iqw-1K-vMf" firstAttribute="leading" secondItem="TJa-nt-Qbb" secondAttribute="leading" id="VHz-Ip-JOU"/>
+                                            <constraint firstAttribute="trailing" secondItem="Iqw-1K-vMf" secondAttribute="trailing" constant="16" id="v6a-Oe-TiT"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -298,7 +321,7 @@ You can always find the latest code here, it should be unique for every test you
                         <outlet property="errorWrapper" destination="Ue3-ad-pzT" id="zUE-nK-WfI"/>
                         <outlet property="fetchingWrapper" destination="hQW-du-1mg" id="ga7-ad-QHh"/>
                         <outlet property="referenceCodeLabel" destination="tct-bE-7Hd" id="wYf-eT-sAG"/>
-                        <outlet property="referenceCodeWrapper" destination="qfh-90-gug" id="3xo-J8-a0g"/>
+                        <outlet property="referenceCodeWrapper" destination="TJa-nt-Qbb" id="Kza-tW-0JR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hOb-7N-h4Z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
