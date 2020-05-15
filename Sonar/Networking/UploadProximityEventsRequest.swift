@@ -1,5 +1,5 @@
 //
-//  PatchContactEventsRequest.swift
+//  UploadProximityEventsRequest.swift
 //  Sonar
 //
 //  Created by NHSX on 19.03.20.
@@ -9,7 +9,7 @@
 import Foundation
 import Logging
 
-class UploadContactEventsRequest: SecureRequest, Request {
+class UploadProximityEventsRequest: SecureRequest, Request {
 
     struct UploadableContactEvent: Codable {
         let encryptedRemoteContactId: Data
@@ -25,6 +25,7 @@ class UploadContactEventsRequest: SecureRequest, Request {
     }
     
     struct Wrapper: Codable {
+        let sonarId: UUID
         let symptomsTimestamp: Date
         let contactEvents: [UploadableContactEvent]
     }
@@ -33,12 +34,11 @@ class UploadContactEventsRequest: SecureRequest, Request {
     
     let method: HTTPMethod
     
-    let urlable: Urlable
+    let urlable = Urlable.path("/api/proximity-events/upload")
 
     init(registration: Registration, symptomsTimestamp: Date, contactEvents: [ContactEvent]) {
         let key = registration.secretKey
         let sonarId = registration.sonarId
-        urlable = .path("/api/residents/\(sonarId.uuidString)")
 
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
@@ -72,7 +72,11 @@ class UploadContactEventsRequest: SecureRequest, Request {
                 countryCode: payload.countryCode)
         }
 
-        let requestBody = Wrapper(symptomsTimestamp: symptomsTimestamp, contactEvents: uploadableEvents)
+        let requestBody = Wrapper(
+            sonarId: sonarId,
+            symptomsTimestamp: symptomsTimestamp,
+            contactEvents: uploadableEvents
+        )
         let bodyAsData = try! encoder.encode(requestBody)
         
         logger.info("uploading contact events:\n \(String(data: bodyAsData, encoding: .utf8)!)")

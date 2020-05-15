@@ -56,15 +56,15 @@ class ContactEventsUploaderTests: XCTestCase {
         let startDate = Calendar.current.date(from: DateComponents(month: 4, day: 1))!
         try uploader.upload(from: startDate)
 
-        let request = try XCTUnwrap(session.uploadRequest as? UploadContactEventsRequest)
+        let request = try XCTUnwrap(session.uploadRequest as? UploadProximityEventsRequest)
 
-        XCTAssertEqual(request.urlable, .path("/api/residents/\(registration.sonarId.uuidString)"))
+        XCTAssertEqual(request.urlable, .path("/api/proximity-events/upload"))
 
         if case .patch(let data) = request.method {
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601
 
-            let decoded = try decoder.decode(UploadContactEventsRequest.Wrapper.self, from: data)
+            let decoded = try decoder.decode(UploadProximityEventsRequest.Wrapper.self, from: data)
 
             XCTAssertEqual(decoded.symptomsTimestamp, startDate)
 

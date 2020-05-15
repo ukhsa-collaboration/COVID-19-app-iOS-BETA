@@ -13,18 +13,22 @@ typealias LinkingId = String
 class LinkingIdRequest: SecureRequest, Request {
     typealias ResponseType = LinkingId
 
-    let method: HTTPMethod
-    let urlable: Urlable
+    struct Body: Codable {
+        let sonarId: UUID
+    }
 
+    let method: HTTPMethod
+    let urlable = Urlable.path("/api/app-instances/linking-id")
+
+    let encoder = JSONEncoder()
     let decoder = JSONDecoder()
 
     init(registration: Registration) {
-        urlable = .path("/api/residents/\(registration.sonarId.uuidString)/linking-id")
+        let body = Body(sonarId: registration.sonarId)
+        let data = try! encoder.encode(body)
+        method = .put(data: data)
 
-        let bodyData = "{}".data(using: .utf8)!
-        method = .put(data: bodyData)
-
-        super.init(registration.secretKey, bodyData, [
+        super.init(registration.secretKey, data, [
             "Accept": "application/json",
             "Content-Type": "application/json",
         ])

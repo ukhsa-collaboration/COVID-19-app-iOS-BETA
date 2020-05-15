@@ -127,7 +127,7 @@ class ContactEventsUploader: ContactEventsUploading {
             UploadLog(event: .started(lastContactEventDate: lastDate))
         ]
 
-        let request = UploadContactEventsRequest(
+        let request = UploadProximityEventsRequest(
             registration: registration,
             symptomsTimestamp: startDate,
             contactEvents: contactEvents
