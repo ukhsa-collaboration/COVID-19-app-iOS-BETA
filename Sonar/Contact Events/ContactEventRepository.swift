@@ -81,7 +81,10 @@ extension PlistPersister: ContactEventPersister where K == UUID, V == ContactEve
         
         if let contactEvent = persister.items[peripheral.identifier], let payload = contactEvent.broadcastPayload,  payload.cryptogram != broadcastPayload.cryptogram {
             persister.update(item: contactEvent, key: UUID())
-            persister.remove(key: peripheral.identifier)
+            
+            var newContactEvent = ContactEvent()
+            newContactEvent.txPower = contactEvent.txPower
+            persister.update(item: newContactEvent, key: peripheral.identifier)
         }
 
         var event = persister.items[peripheral.identifier] ?? ContactEvent()

@@ -90,6 +90,7 @@ class PersistingContactEventRepositoryTests: XCTestCase {
     }
     
     func testNewBroadcastIdForSamePeripheralCreatesNewContactEvent() throws {
+        repository.btleListener(listener, didReadTxPower: 42, for: peripheral1)
         repository.btleListener(listener, didFind: payload1, for: peripheral1)
         repository.btleListener(listener, didReadRSSI: 11, for: peripheral1)
         repository.btleListener(listener, didReadRSSI: 22, for: peripheral1)
@@ -100,9 +101,11 @@ class PersistingContactEventRepositoryTests: XCTestCase {
         XCTAssertEqual(repository.contactEvents.count, 2)
         
         let contactEvent1 = repository.contactEvents.first(where: { $0.broadcastPayload == payload1 })
+        XCTAssertEqual(contactEvent1?.txPower, 42)
         XCTAssertEqual(contactEvent1?.rssiValues, [11, 22])
         
         let contactEvent2 = repository.contactEvents.first(where: { $0.broadcastPayload == payload2 })
+        XCTAssertEqual(contactEvent2?.txPower, 42)
         XCTAssertEqual(contactEvent2?.rssiValues, [33, 44])
     }
     
