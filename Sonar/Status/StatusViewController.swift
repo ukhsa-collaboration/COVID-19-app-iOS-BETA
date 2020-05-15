@@ -12,15 +12,18 @@ import Logging
 class StatusViewController: UIViewController, Storyboarded {
     static let storyboardName = "Status"
 
-    @IBOutlet weak var diagnosisTitleLabel: UILabel!
-    @IBOutlet weak var diagnosisHighlightView: UIView!
-    @IBOutlet weak var diagnosisDetailLabel: UILabel!
     @IBOutlet weak var registrationRetryButton: ButtonWithDynamicType!
     @IBOutlet weak var registrationStatusText: UILabel!
     @IBOutlet weak var registrationStatusIcon: UIImageView!
     @IBOutlet weak var registrationSpinner: SpinnerView!
     @IBOutlet weak var registrationStatusView: UIView!
+
+    @IBOutlet weak var diagnosisTitleLabel: UILabel!
+    @IBOutlet weak var diagnosisHighlightView: UIView!
+    @IBOutlet weak var diagnosisDetailLabel: UILabel!
+
     @IBOutlet weak var feelUnwellButton: UIButton!
+    @IBOutlet weak var applyForTestButton: UIButton!
     @IBOutlet weak var stepsDetailLabel: UILabel!
 
     private let content = StatusContent.shared
@@ -67,7 +70,6 @@ class StatusViewController: UIViewController, Storyboarded {
         notificationCenter.addObserver(self, selector: #selector(reload), name: StatusStateMachine.StatusStateChangedNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(showRegisteredStatus), name: RegistrationCompletedNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(showRegistrationFailedStatus), name: RegistrationFailedNotification, object: nil)
-
     }
 
     private func showSpinner() {
@@ -163,6 +165,10 @@ class StatusViewController: UIViewController, Storyboarded {
         coordinator.start()
     }
 
+    @IBAction func applyForTestTapped(_ sender: UIButton) {
+        performSegue(withIdentifier: "showApplyForTest", sender: self)
+    }
+
     fileprivate func presentPrompt(for checkin: StatusState.Checkin) {
         let symptomsPromptViewController = SymptomsPromptViewController.instantiate()
         symptomsPromptViewController.modalPresentationStyle = .custom
@@ -202,6 +208,7 @@ class StatusViewController: UIViewController, Storyboarded {
             diagnosisTitleLabel.text = "Follow the current advice to stop the spread of coronavirus"
             diagnosisDetailLabel.isHidden = true
             feelUnwellButton.isHidden = false
+            applyForTestButton.isHidden = true
             stepsDetailLabel.isHidden = false
             stepsDetailLabel.text = "If you don’t have any symptoms, there’s no need to do anything right now. If you develop symptoms, please come back to this app."
 
@@ -211,6 +218,7 @@ class StatusViewController: UIViewController, Storyboarded {
             diagnosisDetailLabel.text = "Mantain social distancing and wash your hands frequently. Read advice for you below."
             diagnosisDetailLabel.isHidden = false
             feelUnwellButton.isHidden = false
+            applyForTestButton.isHidden = true
             stepsDetailLabel.isHidden = false
             stepsDetailLabel.text = "If you develop symptoms, please come back to this app."
 
@@ -220,6 +228,7 @@ class StatusViewController: UIViewController, Storyboarded {
             diagnosisDetailLabel.isHidden = false
             diagnosisDetailLabel.text = userStatusProvider.detailForSymptomatic(symptomatic.expiryDate)
             feelUnwellButton.isHidden = true
+            applyForTestButton.isHidden = false
             stepsDetailLabel.isHidden = false
             stepsDetailLabel.text = "Please book a coronavirus test immediately. Write down your reference code and phone 0800 540 4900"
 
@@ -229,6 +238,7 @@ class StatusViewController: UIViewController, Storyboarded {
             diagnosisDetailLabel.isHidden = false
             diagnosisDetailLabel.text = "Follow this advice until your temperature returns to normal."
             feelUnwellButton.isHidden = true
+            applyForTestButton.isHidden = false
             stepsDetailLabel.isHidden = false
             stepsDetailLabel.text = "Please book a coronavirus test immediately. Write down your reference code and phone 0800 540 4900"
 
