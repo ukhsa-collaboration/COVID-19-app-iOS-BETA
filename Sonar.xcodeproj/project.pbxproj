@@ -205,6 +205,8 @@
 		F6AB2F20243D359F00386D6B /* SubmitSymptomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */; };
 		F6BBE13C246F46B4005757BB /* ApplyForTest.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6BBE13B246F46B4005757BB /* ApplyForTest.storyboard */; };
 		F6BBE13E246F46EE005757BB /* ApplyForTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BBE13D246F46EE005757BB /* ApplyForTestViewController.swift */; };
+		F6BBE141246F584F005757BB /* WorkplaceGuidance.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6BBE140246F584F005757BB /* WorkplaceGuidance.storyboard */; };
+		F6BBE143246F5870005757BB /* WorkplaceGuidanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BBE142246F5870005757BB /* WorkplaceGuidanceViewController.swift */; };
 		F6CC2CA9242BC7FC0079432B /* RemoteNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CC2CA8242BC7FC0079432B /* RemoteNotificationManager.swift */; };
 		F6CC2CAC242BCD0D0079432B /* RemoteNotificationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CC2CAB242BCD0D0079432B /* RemoteNotificationManagerTests.swift */; };
 		F6DA0A342469D6BA001F0B48 /* StatusStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DA0A332469D6BA001F0B48 /* StatusStateMachine.swift */; };
@@ -501,6 +503,8 @@
 		F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitSymptomsViewController.swift; sourceTree = "<group>"; };
 		F6BBE13B246F46B4005757BB /* ApplyForTest.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ApplyForTest.storyboard; sourceTree = "<group>"; };
 		F6BBE13D246F46EE005757BB /* ApplyForTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyForTestViewController.swift; sourceTree = "<group>"; };
+		F6BBE140246F584F005757BB /* WorkplaceGuidance.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WorkplaceGuidance.storyboard; sourceTree = "<group>"; };
+		F6BBE142246F5870005757BB /* WorkplaceGuidanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkplaceGuidanceViewController.swift; sourceTree = "<group>"; };
 		F6CA2818242E41F700F8DC55 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F6CC2CA8242BC7FC0079432B /* RemoteNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteNotificationManager.swift; sourceTree = "<group>"; };
 		F6CC2CAB242BCD0D0079432B /* RemoteNotificationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteNotificationManagerTests.swift; sourceTree = "<group>"; };
@@ -678,7 +682,10 @@
 				09B103612444E9110091834D /* ContactEventPersisterDouble.swift */,
 				09B103632444EAB80091834D /* ContactEventRepositoryDouble.swift */,
 				F60497662452415F002B8503 /* ContactEventsUploaderDouble.swift */,
+				89C8B215245C5258009CCE80 /* DefaultObjectStoringDouble.swift */,
+				097C94CA245B81E8008A9695 /* EnGbLocaleProviderDouble.swift */,
 				0983ACCC243E566800DBB336 /* ErrorForTest.swift */,
+				0982F487246DF80400E57EE5 /* LinkingIdManagerDouble.swift */,
 				F694B1BF2459EEB800C6A5D1 /* NotificationAcknowledgerDouble.swift */,
 				0983ACCE243E6D3800DBB336 /* NotificationObserverDouble.swift */,
 				F632792224351C8400CF7A42 /* OnboardingCoordinatorDouble.swift */,
@@ -688,13 +695,10 @@
 				098ED489242E89D80029B729 /* RegistrationServiceDouble.swift */,
 				F694B1B92459E45100C6A5D1 /* RemoteNotificationDispatchingDouble.swift */,
 				F62F858424510923006580A8 /* SessionDouble.swift */,
+				F6E2E596246B287B009D80DF /* StatusStateMachiningDouble.swift */,
+				89DF66A52460217A00A55F24 /* StorageCheckingDouble.swift */,
 				89CCF65E2456EF7000AC9D91 /* TrustValidatingDouble.swift */,
 				090B1870243552C300870B5D /* UserNotificationCenterDouble.swift */,
-				097C94CA245B81E8008A9695 /* EnGbLocaleProviderDouble.swift */,
-				89C8B215245C5258009CCE80 /* DefaultObjectStoringDouble.swift */,
-				89DF66A52460217A00A55F24 /* StorageCheckingDouble.swift */,
-				F6E2E596246B287B009D80DF /* StatusStateMachiningDouble.swift */,
-				0982F487246DF80400E57EE5 /* LinkingIdManagerDouble.swift */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -705,6 +709,7 @@
 				F694B1C5245B8B9D00C6A5D1 /* statusContent.json */,
 				F6BBE13B246F46B4005757BB /* ApplyForTest.storyboard */,
 				F758B8C3242CC0EE003AE16D /* Status.storyboard */,
+				F6BBE140246F584F005757BB /* WorkplaceGuidance.storyboard */,
 				13473A1A246AFF0C00800CEA /* AdviceViewController.swift */,
 				F6BBE13D246F46EE005757BB /* ApplyForTestViewController.swift */,
 				134470AF2454D614001A0AD9 /* CoughUpdateViewController.swift */,
@@ -718,6 +723,7 @@
 				F652F72D244E472E00D97950 /* SymptomsPromptViewController.swift */,
 				138114E32450543600BA46C7 /* SymptomStackView.swift */,
 				13473A1E246D543F00800CEA /* UserStatusProvider.swift */,
+				F6BBE142246F5870005757BB /* WorkplaceGuidanceViewController.swift */,
 				F604976C2453ADF4002B8503 /* scenarios.yml */,
 			);
 			path = Status;
@@ -1435,6 +1441,7 @@
 				895D9E462437458700573D4D /* AppIcon.xcassets in Resources */,
 				F6BBE13C246F46B4005757BB /* ApplyForTest.storyboard in Resources */,
 				F68B89ED243CFF2600F369A9 /* SelfDiagnosis.storyboard in Resources */,
+				F6BBE141246F584F005757BB /* WorkplaceGuidance.storyboard in Resources */,
 				F6F05A322434310200FF4B72 /* Onboarding.storyboard in Resources */,
 				F70CB81B2450CFA900ED6E7F /* OnboardingLogoStrapline.xib in Resources */,
 				098ED481242E745F0029B729 /* Debug.storyboard in Resources */,
@@ -1670,6 +1677,7 @@
 				89F06B2F2434A62C0074C612 /* LoggingManager.swift in Sources */,
 				0982F484246DE4B400E57EE5 /* LinkingIdViewController.swift in Sources */,
 				09CAA3662440F3B100CE93A6 /* PostcodeViewController.swift in Sources */,
+				F6BBE143246F5870005757BB /* WorkplaceGuidanceViewController.swift in Sources */,
 				F61695A12458B3C0006AABE3 /* StatusNotificationHandler.swift in Sources */,
 				131AB05C2449D85B002136CA /* ContactEventExpiryHandler.swift in Sources */,
 				09A9254324536FD300C5DBC1 /* RegistrationReminderScheduler.swift in Sources */,

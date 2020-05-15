@@ -138,12 +138,6 @@ class StatusViewController: UIViewController, Storyboarded {
         register()
     }
 
-    @IBAction func testingInfoTapped(_ sender: Any) {
-        let linkingIdVc = TestingInfoViewController.instantiate()
-        linkingIdVc.inject(linkingIdManager: linkingIdManager, uiQueue: DispatchQueue.main)
-        navigationController?.pushViewController(linkingIdVc, animated: true)
-    }
-
     @IBAction func adviceTapped(_ sender: Any) {
         let adviceVc = AdviceViewController.instantiate()
         adviceVc.inject(linkDestination: content[statusStateMachine.state].readUrl)
@@ -167,6 +161,16 @@ class StatusViewController: UIViewController, Storyboarded {
 
     @IBAction func applyForTestTapped(_ sender: UIButton) {
         performSegue(withIdentifier: "showApplyForTest", sender: self)
+    }
+
+    @IBAction func testingInfoTapped(_ sender: Any) {
+        let linkingIdVc = TestingInfoViewController.instantiate()
+        linkingIdVc.inject(linkingIdManager: linkingIdManager, uiQueue: DispatchQueue.main)
+        navigationController?.pushViewController(linkingIdVc, animated: true)
+    }
+
+    @IBAction func workplaceGuidanceTapped(_ sender: UIButton) {
+        performSegue(withIdentifier: "showWorkplaceGuidance", sender: self)
     }
 
     fileprivate func presentPrompt(for checkin: StatusState.Checkin) {

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Cxd-nu-aIB">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Guidance for your workplace-->
+        <scene sceneID="pfk-n4-Fwt">
+            <objects>
+                <viewController title="Guidance for your workplace" id="Cxd-nu-aIB" customClass="WorkplaceGuidanceViewController" customModule="Sonar" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="IBF-0a-rAL">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sWX-ZB-iez">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Vtn-PD-dui">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sp6-2d-58K">
+                                                <rect key="frame" x="16" y="16" width="382" height="193"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" image="Workplace_Guidance" translatesAutoresizingMaskIntoConstraints="NO" id="pDT-OE-fSU">
+                                                        <rect key="frame" x="143" y="32" width="96" height="129"/>
+                                                    </imageView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="pDT-OE-fSU" firstAttribute="centerX" secondItem="Sp6-2d-58K" secondAttribute="centerX" id="4vO-Mc-QKh"/>
+                                                    <constraint firstItem="pDT-OE-fSU" firstAttribute="centerY" secondItem="Sp6-2d-58K" secondAttribute="centerY" id="IiE-Bl-dx3"/>
+                                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="pDT-OE-fSU" secondAttribute="trailing" constant="16" id="aRb-PG-GR6"/>
+                                                    <constraint firstAttribute="bottom" secondItem="pDT-OE-fSU" secondAttribute="bottom" constant="32" id="hgD-Xu-7KH"/>
+                                                    <constraint firstItem="pDT-OE-fSU" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Sp6-2d-58K" secondAttribute="leading" constant="16" id="oHD-0p-xtC"/>
+                                                    <constraint firstItem="pDT-OE-fSU" firstAttribute="top" secondItem="Sp6-2d-58K" secondAttribute="top" constant="32" id="p0s-Lf-r1a"/>
+                                                </constraints>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Read the latest guidance  for your workplace" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mWu-JE-ech">
+                                                <rect key="frame" x="16" y="225" width="382" height="67.5"/>
+                                                <accessibility key="accessibilityConfiguration">
+                                                    <accessibilityTraits key="traits" staticText="YES" header="YES"/>
+                                                </accessibility>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                <color key="textColor" name="NHS Text"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The guidance on GOV.UK is up to date and specific to the industry you work in." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HgM-ak-jqr">
+                                                <rect key="frame" x="16" y="308.5" width="382" height="42.5"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <color key="textColor" name="NHS Text"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UPr-e3-mFQ" customClass="UIButton">
+                                                <rect key="frame" x="16" y="367" width="382" height="33"/>
+                                                <subviews>
+                                                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="weN-qK-FzE" customClass="LinkButton" customModule="Sonar" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="269" height="33"/>
+                                                        <accessibility key="accessibilityConfiguration">
+                                                            <accessibilityTraits key="traits" link="YES"/>
+                                                        </accessibility>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                        <state key="normal" title="Latest guidance for your workplace">
+                                                            <color key="titleColor" name="NHS Link"/>
+                                                        </state>
+                                                    </button>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="External_Link" translatesAutoresizingMaskIntoConstraints="NO" id="o42-mY-9mu">
+                                                        <rect key="frame" x="279" y="9.5" width="19" height="14"/>
+                                                    </imageView>
+                                                </subviews>
+                                                <accessibility key="accessibilityConfiguration" label="Apply for a coronavirus test">
+                                                    <accessibilityTraits key="traits" link="YES"/>
+                                                    <bool key="isElement" value="YES"/>
+                                                </accessibility>
+                                                <constraints>
+                                                    <constraint firstItem="weN-qK-FzE" firstAttribute="leading" secondItem="UPr-e3-mFQ" secondAttribute="leading" id="FoA-Qd-Fg9"/>
+                                                    <constraint firstItem="weN-qK-FzE" firstAttribute="top" secondItem="UPr-e3-mFQ" secondAttribute="top" id="IRI-Zm-K79"/>
+                                                    <constraint firstItem="o42-mY-9mu" firstAttribute="leading" secondItem="weN-qK-FzE" secondAttribute="trailing" constant="10" id="MPg-Vz-nAw"/>
+                                                    <constraint firstItem="o42-mY-9mu" firstAttribute="centerY" secondItem="UPr-e3-mFQ" secondAttribute="centerY" id="PED-Ya-nzo"/>
+                                                    <constraint firstAttribute="bottom" secondItem="weN-qK-FzE" secondAttribute="bottom" id="R7H-ed-sI3"/>
+                                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="o42-mY-9mu" secondAttribute="trailing" id="uOw-6P-4dS"/>
+                                                </constraints>
+                                                <connections>
+                                                    <action selector="linkTapped:" destination="Cxd-nu-aIB" eventType="touchUpInside" id="6n9-7V-g67"/>
+                                                </connections>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="If you are a health and care worker:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CV4-EZ-rT8">
+                                                <rect key="frame" x="16" y="416" width="382" height="20.5"/>
+                                                <accessibility key="accessibilityConfiguration">
+                                                    <accessibilityTraits key="traits" staticText="YES" header="YES"/>
+                                                </accessibility>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                <color key="textColor" name="NHS Text"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hP6-Fa-tlC">
+                                                <rect key="frame" x="16" y="452.5" width="382" height="108.5"/>
+                                                <string key="text">Turn off your Bluetooth when you put on your personal protective equipment provided for you by your employer. Your interactions at work should not be captured when you are wearing personal protective equipment.</string>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <color key="textColor" name="NHS Text"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" verticalHuggingPriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="h7k-ak-hoQ">
+                                                <rect key="frame" x="16" y="577" width="382" height="225"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" id="AK7-HK-ZXa"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <directionalEdgeInsets key="directionalLayoutMargins" top="16" leading="16" bottom="16" trailing="16"/>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="Vtn-PD-dui" firstAttribute="bottom" secondItem="SAp-9n-SOW" secondAttribute="bottom" id="Bd8-8d-eZT"/>
+                                    <constraint firstItem="Vtn-PD-dui" firstAttribute="height" relation="greaterThanOrEqual" secondItem="sWX-ZB-iez" secondAttribute="height" id="GGj-2p-SVB"/>
+                                    <constraint firstItem="Vtn-PD-dui" firstAttribute="trailing" secondItem="SAp-9n-SOW" secondAttribute="trailing" id="VJO-s4-IKw"/>
+                                    <constraint firstAttribute="height" secondItem="Vtn-PD-dui" secondAttribute="height" placeholder="YES" id="aej-dd-7ze"/>
+                                    <constraint firstItem="SAp-9n-SOW" firstAttribute="top" secondItem="Vtn-PD-dui" secondAttribute="top" id="bRb-GS-9cx"/>
+                                    <constraint firstItem="SAp-9n-SOW" firstAttribute="leading" secondItem="Vtn-PD-dui" secondAttribute="leading" id="jms-Qv-cRY"/>
+                                    <constraint firstItem="Vtn-PD-dui" firstAttribute="width" secondItem="33j-Te-g4B" secondAttribute="width" id="rUq-Wd-2vl"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="SAp-9n-SOW"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="33j-Te-g4B"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" name="NHS Grey 5"/>
+                        <constraints>
+                            <constraint firstItem="j9T-J8-QFJ" firstAttribute="trailing" secondItem="sWX-ZB-iez" secondAttribute="trailing" id="CaX-Y7-XAb"/>
+                            <constraint firstItem="sWX-ZB-iez" firstAttribute="top" secondItem="j9T-J8-QFJ" secondAttribute="top" id="S5O-ax-eB1"/>
+                            <constraint firstItem="sWX-ZB-iez" firstAttribute="leading" secondItem="j9T-J8-QFJ" secondAttribute="leading" id="bte-ke-115"/>
+                            <constraint firstItem="j9T-J8-QFJ" firstAttribute="bottom" secondItem="sWX-ZB-iez" secondAttribute="bottom" id="fyA-bW-2b6"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="j9T-J8-QFJ"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Vf-2o-sXg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5102.898550724638" y="515.625"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="External_Link" width="19" height="14"/>
+        <image name="Workplace_Guidance" width="96" height="130"/>
+        <namedColor name="NHS Grey 5">
+            <color red="0.94117647058823528" green="0.95686274509803926" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="NHS Link">
+            <color red="0.0" green="0.36862745098039218" blue="0.72156862745098038" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="NHS Text">
+            <color red="0.1289999932050705" green="0.16899999976158142" blue="0.19599999487400055" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
