@@ -23,7 +23,7 @@ class PlistPersister<K: Hashable & Codable, V: Codable> {
             self.init(fileURL: dirUrl.appendingPathComponent(fileName + ".plist"))
         } else {
             logger.critical("couldn't open file for writing \(fileName).plist")
-            fatalError()
+            preconditionFailure("PlistPersister couldn't open file '\(fileName).plist'")
         }
     }
     
@@ -57,7 +57,7 @@ class PlistPersister<K: Hashable & Codable, V: Codable> {
             // ignore this, job already done
         } catch {
             logger.critical("error removing file at '\(fileURL)': \(error)")
-            fatalError()
+            assertionFailure("PlistPersister failed to remove '\(fileURL)': \(error)")
         }
     }
 
@@ -86,7 +86,7 @@ class PlistPersister<K: Hashable & Codable, V: Codable> {
             try data.write(to: fileURL, options: [.completeFileProtectionUntilFirstUserAuthentication])
         } catch {
             logger.critical("error writing items to disk: \(error)")
-            fatalError()
+            assertionFailure("PlistPersister failed writing items to disk: \(error)")
         }
     }
 
