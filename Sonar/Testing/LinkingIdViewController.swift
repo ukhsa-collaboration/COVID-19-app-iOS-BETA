@@ -2,7 +2,7 @@
 //  LinkingIdViewController.swift
 //  Sonar
 //
-//  Created by NHSX.
+//  Created by NHSX on 5/14/20.
 //  Copyright © 2020 NHSX. All rights reserved.
 //
 
