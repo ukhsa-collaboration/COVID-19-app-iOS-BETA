@@ -174,7 +174,17 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sxz-xU-5fy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5104" y="941"/>
+            <point key="canvasLocation" x="4933" y="986"/>
+        </scene>
+        <!--WorkplaceGuidance-->
+        <scene sceneID="IQK-qK-7ni">
+            <objects>
+                <viewControllerPlaceholder storyboardName="WorkplaceGuidance" id="237-sh-LFD" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="rto-AX-oQk"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0v7-n4-ESX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5367" y="941"/>
         </scene>
         <!--Cough Update View Controller-->
         <scene sceneID="phA-bo-rj4">
@@ -329,10 +339,10 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="NyJ-yi-J4V">
-                                        <rect key="frame" x="16" y="0.0" width="382" height="781"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="887"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oRv-PB-BfB" userLabel="Registration status view">
-                                                <rect key="frame" x="0.0" y="0.0" width="382" height="60"/>
+                                                <rect key="frame" x="16" y="0.0" width="382" height="60"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fmA-xg-Fvk">
                                                         <rect key="frame" x="-16" y="0.0" width="414" height="60"/>
@@ -401,7 +411,7 @@
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="6d3-41-7Jl">
-                                                <rect key="frame" x="0.0" y="76" width="382" height="57"/>
+                                                <rect key="frame" x="16" y="76" width="382" height="57"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="nkr-z0-0aM">
                                                         <rect key="frame" x="0.0" y="0.0" width="16" height="57"/>
@@ -432,14 +442,14 @@
                                                 </subviews>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uvp-0u-U16" userLabel="Spacer">
-                                                <rect key="frame" x="0.0" y="149" width="382" height="16"/>
+                                                <rect key="frame" x="16" y="149" width="382" height="16"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="16" id="3qa-DQ-IqR"/>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NEXT STEPS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="efO-TR-8NP">
-                                                <rect key="frame" x="0.0" y="181" width="382" height="20.5"/>
+                                                <rect key="frame" x="16" y="181" width="382" height="20.5"/>
                                                 <accessibility key="accessibilityConfiguration">
                                                     <accessibilityTraits key="traits" staticText="YES" header="YES"/>
                                                 </accessibility>
@@ -448,7 +458,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="cW9-YI-r7x" userLabel="Current Advice Button" customClass="UIButton">
-                                                <rect key="frame" x="0.0" y="217.5" width="382" height="78"/>
+                                                <rect key="frame" x="16" y="217.5" width="382" height="78"/>
                                                 <subviews>
                                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Tz-It-GOM" customClass="SmartInvertBorderView" customModule="Sonar" customModuleProvider="target">
                                                         <rect key="frame" x="-16" y="0.0" width="414" height="78"/>
@@ -487,7 +497,7 @@
                                                 </connections>
                                             </view>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="tNB-vS-CxQ" customClass="UIButton">
-                                                <rect key="frame" x="0.0" y="311.5" width="382" height="136.5"/>
+                                                <rect key="frame" x="16" y="311.5" width="382" height="136.5"/>
                                                 <subviews>
                                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ewe-Ed-vUJ" customClass="SmartInvertBorderView" customModule="Sonar" customModuleProvider="target">
                                                         <rect key="frame" x="-16" y="0.0" width="414" height="136.5"/>
@@ -537,7 +547,7 @@
                                                 </connections>
                                             </view>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="p6j-FG-xJ1" userLabel="Apply for Test Button" customClass="UIButton">
-                                                <rect key="frame" x="0.0" y="464" width="382" height="78"/>
+                                                <rect key="frame" x="16" y="464" width="382" height="78"/>
                                                 <subviews>
                                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wpR-Ie-pa7" customClass="SmartInvertBorderView" customModule="Sonar" customModuleProvider="target">
                                                         <rect key="frame" x="-16" y="0.0" width="414" height="78"/>
@@ -572,25 +582,25 @@
                                                     <constraint firstItem="xAA-pu-pLZ" firstAttribute="leading" secondItem="p6j-FG-xJ1" secondAttribute="leading" id="twH-Vh-ZFt"/>
                                                 </constraints>
                                                 <connections>
-                                                    <action selector="applyForTestTapped:" destination="D27-h6-ECy" eventType="touchUpInside" id="arM-Rd-ZzL"/>
+                                                    <action selector="applyForTestTapped:" destination="D27-h6-ECy" eventType="touchUpInside" id="hAp-w6-Tl5"/>
                                                 </connections>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QzR-8B-SLv">
-                                                <rect key="frame" x="0.0" y="558" width="382" height="64.5"/>
+                                                <rect key="frame" x="16" y="558" width="382" height="64.5"/>
                                                 <string key="text">If you don’t have any symptoms, there’s no need to do anything right now. If you develop symptoms, please come back to this app.</string>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                 <color key="textColor" name="NHS Secondary Text"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P7T-lY-jSw" userLabel="Spacer">
-                                                <rect key="frame" x="0.0" y="638.5" width="382" height="16"/>
+                                                <rect key="frame" x="16" y="638.5" width="382" height="16"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="16" id="pE4-bs-sjb"/>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MORE OPTIONS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KGX-pq-vZ2">
-                                                <rect key="frame" x="0.0" y="670.5" width="382" height="20.5"/>
+                                                <rect key="frame" x="16" y="670.5" width="382" height="20.5"/>
                                                 <accessibility key="accessibilityConfiguration">
                                                     <accessibilityTraits key="traits" staticText="YES" header="YES"/>
                                                 </accessibility>
@@ -598,8 +608,8 @@
                                                 <color key="textColor" name="NHS Secondary Text"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="cRg-G6-BLy" customClass="UIButton">
-                                                <rect key="frame" x="0.0" y="707" width="382" height="74"/>
+                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="cRg-G6-BLy" userLabel="Testing Info Button" customClass="UIButton">
+                                                <rect key="frame" x="16" y="707" width="382" height="74"/>
                                                 <subviews>
                                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AtM-2O-5EE" customClass="SmartInvertBorderView" customModule="Sonar" customModuleProvider="target">
                                                         <rect key="frame" x="-16" y="0.0" width="414" height="74"/>
@@ -637,13 +647,53 @@
                                                     <action selector="testingInfoTapped:" destination="D27-h6-ECy" eventType="touchUpInside" id="nOL-EN-deI"/>
                                                 </connections>
                                             </view>
+                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="sEj-8e-DCP" userLabel="Workplace Guidance Button" customClass="UIButton">
+                                                <rect key="frame" x="16" y="797" width="382" height="74"/>
+                                                <subviews>
+                                                    <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VSR-Rc-FVv" customClass="SmartInvertBorderView" customModule="Sonar" customModuleProvider="target">
+                                                        <rect key="frame" x="-16" y="0.0" width="414" height="74"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    </view>
+                                                    <stackView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uw7-PY-aUM">
+                                                        <rect key="frame" x="0.0" y="25" width="382" height="24"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Guidance for your workplace" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ll-9f-kjH">
+                                                                <rect key="frame" x="0.0" y="0.0" width="358" height="24"/>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                                <color key="textColor" name="NHS Text"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="1000" verticalHuggingPriority="251" image="Disclosure_Indicator" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bdu-D8-QWB">
+                                                                <rect key="frame" x="358" y="0.0" width="24" height="24"/>
+                                                            </imageView>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <accessibility key="accessibilityConfiguration" label="Guidance for your workplace">
+                                                    <accessibilityTraits key="traits" button="YES"/>
+                                                    <bool key="isElement" value="YES"/>
+                                                </accessibility>
+                                                <constraints>
+                                                    <constraint firstItem="uw7-PY-aUM" firstAttribute="top" secondItem="sEj-8e-DCP" secondAttribute="top" constant="25" id="3vL-fe-a0o"/>
+                                                    <constraint firstAttribute="bottom" secondItem="VSR-Rc-FVv" secondAttribute="bottom" id="6L5-3E-coi"/>
+                                                    <constraint firstItem="VSR-Rc-FVv" firstAttribute="top" secondItem="sEj-8e-DCP" secondAttribute="top" id="Q6b-FF-deI"/>
+                                                    <constraint firstItem="uw7-PY-aUM" firstAttribute="leading" secondItem="sEj-8e-DCP" secondAttribute="leading" id="TXA-VD-sCb"/>
+                                                    <constraint firstAttribute="trailing" secondItem="uw7-PY-aUM" secondAttribute="trailing" id="ooh-fg-wo8"/>
+                                                    <constraint firstAttribute="bottom" secondItem="uw7-PY-aUM" secondAttribute="bottom" constant="25" id="q2r-mO-Sk1"/>
+                                                </constraints>
+                                                <connections>
+                                                    <action selector="workplaceGuidanceTapped:" destination="D27-h6-ECy" eventType="touchUpInside" id="xW6-Ya-fYv"/>
+                                                </connections>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" name="NHS Grey 5"/>
+                                        <directionalEdgeInsets key="directionalLayoutMargins" top="0.0" leading="16" bottom="16" trailing="16"/>
                                     </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="NyJ-yi-J4V" firstAttribute="leading" secondItem="58x-a4-hkJ" secondAttribute="leading" constant="16" id="arO-Dx-Aah"/>
-                                    <constraint firstItem="NyJ-yi-J4V" firstAttribute="width" secondItem="z4W-Pc-FJ0" secondAttribute="width" constant="-32" id="f8W-li-Sqq"/>
+                                    <constraint firstItem="NyJ-yi-J4V" firstAttribute="leading" secondItem="58x-a4-hkJ" secondAttribute="leading" id="arO-Dx-Aah"/>
+                                    <constraint firstItem="NyJ-yi-J4V" firstAttribute="width" secondItem="z4W-Pc-FJ0" secondAttribute="width" id="f8W-li-Sqq"/>
                                     <constraint firstItem="NyJ-yi-J4V" firstAttribute="trailing" secondItem="58x-a4-hkJ" secondAttribute="trailing" id="gCi-1m-hjM"/>
                                     <constraint firstItem="NyJ-yi-J4V" firstAttribute="top" secondItem="58x-a4-hkJ" secondAttribute="top" id="kk7-94-okD"/>
                                     <constraint firstItem="NyJ-yi-J4V" firstAttribute="bottom" secondItem="58x-a4-hkJ" secondAttribute="bottom" id="nSU-Ez-XOC"/>
@@ -661,10 +711,12 @@
                             <constraint firstItem="AtM-2O-5EE" firstAttribute="leading" secondItem="eZX-0D-0Ns" secondAttribute="leading" id="BJR-HL-pzf"/>
                             <constraint firstItem="eZX-0D-0Ns" firstAttribute="trailing" secondItem="fmA-xg-Fvk" secondAttribute="trailing" id="D9t-SQ-Qpi"/>
                             <constraint firstItem="wpR-Ie-pa7" firstAttribute="leading" secondItem="eZX-0D-0Ns" secondAttribute="leading" id="FLa-KI-LCp"/>
+                            <constraint firstItem="VSR-Rc-FVv" firstAttribute="leading" secondItem="eZX-0D-0Ns" secondAttribute="leading" id="Nre-0X-1jt"/>
                             <constraint firstItem="eZX-0D-0Ns" firstAttribute="bottom" secondItem="cpM-8b-HyA" secondAttribute="bottom" id="OPi-wb-h33"/>
                             <constraint firstItem="eZX-0D-0Ns" firstAttribute="trailing" secondItem="wpR-Ie-pa7" secondAttribute="trailing" id="Pyq-F4-cwD"/>
                             <constraint firstItem="fmA-xg-Fvk" firstAttribute="leading" secondItem="eZX-0D-0Ns" secondAttribute="leading" id="THE-LE-Mnv"/>
                             <constraint firstItem="cpM-8b-HyA" firstAttribute="top" secondItem="eZX-0D-0Ns" secondAttribute="top" id="Tpf-NK-dsx"/>
+                            <constraint firstItem="eZX-0D-0Ns" firstAttribute="trailing" secondItem="VSR-Rc-FVv" secondAttribute="trailing" id="Z4Q-GM-CZY"/>
                             <constraint firstItem="cpM-8b-HyA" firstAttribute="leading" secondItem="eZX-0D-0Ns" secondAttribute="leading" id="cA7-Be-ZCG"/>
                             <constraint firstItem="eZX-0D-0Ns" firstAttribute="trailing" secondItem="Ewe-Ed-vUJ" secondAttribute="trailing" id="eSg-lW-txf"/>
                             <constraint firstItem="6Tz-It-GOM" firstAttribute="leading" secondItem="eZX-0D-0Ns" secondAttribute="leading" id="rQI-55-qs2"/>
@@ -685,6 +737,7 @@
                         <outlet property="registrationStatusView" destination="fmA-xg-Fvk" id="xFD-Fd-an2"/>
                         <outlet property="stepsDetailLabel" destination="QzR-8B-SLv" id="OvV-th-O7v"/>
                         <segue destination="K9E-G6-YEs" kind="show" identifier="showApplyForTest" id="Skw-Ky-N3M"/>
+                        <segue destination="237-sh-LFD" kind="show" identifier="showWorkplaceGuidance" id="kW0-A3-I04"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QkS-TV-URb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
