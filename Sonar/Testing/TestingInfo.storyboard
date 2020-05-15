@@ -184,21 +184,35 @@ You can always find the latest code here, it should be unique for every test you
                                 <rect key="frame" x="0.0" y="0.0" width="343" height="236"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hQW-du-1mg" userLabel="Fetching wrapper">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="128"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="tHb-7A-KJM" userLabel="Fetching Stack View">
-                                                <rect key="frame" x="16" y="0.0" width="311" height="50"/>
+                                                <rect key="frame" x="16" y="0.0" width="311" height="128"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fetching reference code" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c4D-2N-Mpo">
-                                                        <rect key="frame" x="0.0" y="15" width="291" height="20.5"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="751" ambiguous="YES" text="Fetching reference code" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c4D-2N-Mpo">
+                                                        <rect key="frame" x="0.0" y="52" width="186.5" height="24"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="999" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="YNb-EQ-dKb">
-                                                        <rect key="frame" x="291" y="15" width="20" height="20"/>
-                                                    </activityIndicatorView>
+                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M8S-Ea-Jaa" userLabel="Spacer that helps limit the spinner's size">
+                                                        <rect key="frame" x="186.5" y="0.0" width="100.5" height="128"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="8" id="lVS-Rg-wVS"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="24" placeholderIntrinsicHeight="infinite" image="Spinner" translatesAutoresizingMaskIntoConstraints="NO" id="0ca-Zm-xYY" customClass="SpinnerView" customModule="Sonar" customModuleProvider="target">
+                                                        <rect key="frame" x="287" y="52" width="24" height="24"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="24" id="Zij-6q-HzM"/>
+                                                            <constraint firstAttribute="width" secondItem="0ca-Zm-xYY" secondAttribute="height" multiplier="1:1" id="kld-OR-uqZ"/>
+                                                        </constraints>
+                                                    </imageView>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="0ca-Zm-xYY" firstAttribute="height" relation="lessThanOrEqual" secondItem="c4D-2N-Mpo" secondAttribute="height" id="hu5-dz-Du8"/>
+                                                </constraints>
                                             </stackView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -210,10 +224,10 @@ You can always find the latest code here, it should be unique for every test you
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ue3-ad-pzT" userLabel="Error wrapper">
-                                        <rect key="frame" x="0.0" y="50" width="343" height="100.5"/>
+                                        <rect key="frame" x="0.0" y="128" width="343" height="22.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error fetching reference code" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwU-V9-8IW" customClass="ErrorLabel" customModule="Sonar" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="343" height="100.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="343" height="22.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -281,7 +295,6 @@ You can always find the latest code here, it should be unique for every test you
                     </view>
                     <size key="freeformSize" width="343" height="236"/>
                     <connections>
-                        <outlet property="activityIndicator" destination="YNb-EQ-dKb" id="05B-5i-tlK"/>
                         <outlet property="errorWrapper" destination="Ue3-ad-pzT" id="zUE-nK-WfI"/>
                         <outlet property="fetchingWrapper" destination="hQW-du-1mg" id="ga7-ad-QHh"/>
                         <outlet property="referenceCodeLabel" destination="tct-bE-7Hd" id="wYf-eT-sAG"/>
@@ -316,6 +329,7 @@ You can always find the latest code here, it should be unique for every test you
     </scenes>
     <resources>
         <image name="Linking_ID" width="184.5" height="184"/>
+        <image name="Spinner" width="24" height="24"/>
         <namedColor name="NHS Blue">
             <color red="0.0" green="0.36862745098039218" blue="0.72156862745098038" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
