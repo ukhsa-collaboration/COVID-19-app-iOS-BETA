@@ -68,6 +68,10 @@ class SymptomsSummaryViewController: UIViewController, Storyboarded {
         }
     }
 
+    @IBAction func cancelTapped(_ sender: Any) {
+        navigationController?.popToRootViewController(animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -92,7 +96,7 @@ class SymptomsSummaryViewController: UIViewController, Storyboarded {
 
     @IBAction func buttonTapped(_ sender: PrimaryButton) {
         if symptoms.isEmpty {
-            performSegue(withIdentifier: "unwindFromSelfDiagnosis", sender: self)
+            navigationController?.popToRootViewController(animated: true)
             return
         }
 

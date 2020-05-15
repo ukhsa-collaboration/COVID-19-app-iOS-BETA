@@ -49,7 +49,7 @@ class CheckinCoordinator: Coordinator {
 
         navigationController.pushViewController(vc, animated: true)
     }
-    
+
     func openCoughView() {
         let (title, details) = {
             checkin.symptoms.contains(.cough)

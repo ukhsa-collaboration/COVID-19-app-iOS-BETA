@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -210,7 +210,7 @@
                     <navigationItem key="navigationItem" title="Add my symptoms" id="fhp-Za-bUG">
                         <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="gne-Ik-Kaf">
                             <connections>
-                                <segue destination="hC6-GD-FFV" kind="unwind" identifier="unwindFromSelfDiagnosis" unwindAction="unwindFromSelfDiagnosisWithUnwindSegue:" id="JrQ-CV-d99"/>
+                                <action selector="cancelTapped:" destination="ofL-pj-tC8" id="12d-Mb-kct"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -230,7 +230,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ISX-4O-Rgm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <exit id="hC6-GD-FFV" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2686.9565217391305" y="172.76785714285714"/>
         </scene>
@@ -368,9 +367,7 @@
                                 <rect key="frame" x="20" y="812" width="374" height="30"/>
                                 <state key="normal" title="Submit"/>
                                 <connections>
-                                    <action selector="submitTapped:" destination="Zbs-mh-83R" eventType="touchUpInside" id="16k-sT-tX2"/>
-                                    <action selector="submitTapped:" destination="hC6-GD-FFV" eventType="touchUpInside" id="cM1-ng-Vmg"/>
-                                    <action selector="submitTapped:" destination="JNI-bm-phl" eventType="touchUpInside" id="v39-wM-A1v"/>
+                                    <action selector="submitTapped:" destination="JNI-bm-phl" eventType="touchUpInside" id="nbL-1D-rbC"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -389,7 +386,7 @@
                     <navigationItem key="navigationItem" title="Add my symptoms" id="cA5-ND-Bwb">
                         <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="Ynz-wt-BRE">
                             <connections>
-                                <segue destination="Zbs-mh-83R" kind="unwind" identifier="unwindFromSelfDiagnosis" unwindAction="unwindFromSelfDiagnosisWithUnwindSegue:" id="HEP-vQ-j94"/>
+                                <action selector="cancelTapped:" destination="JNI-bm-phl" id="nht-TN-53S"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -405,7 +402,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CWx-tx-FqG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <exit id="Zbs-mh-83R" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3463.7681159420295" y="172.76785714285714"/>
         </scene>
@@ -645,7 +641,7 @@
                     <navigationItem key="navigationItem" title="Add my symptoms" id="b3B-gw-1zt">
                         <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="Zxz-Y5-fAr">
                             <connections>
-                                <segue destination="kb7-dX-YXW" kind="unwind" unwindAction="unwindFromSelfDiagnosisWithUnwindSegue:" id="BxB-OK-ebi"/>
+                                <action selector="cancelTapped:" destination="iIR-bG-zmI" id="Fb2-cr-yyh"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -660,7 +656,6 @@
                         <outlet property="yesButton" destination="BVo-HW-oXC" id="ug9-Ud-L8Y"/>
                     </connections>
                 </viewController>
-                <exit id="kb7-dX-YXW" userLabel="Exit" sceneMemberID="exit"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h36-Rg-que" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1887" y="173"/>

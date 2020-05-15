@@ -47,6 +47,10 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         errorLabel.isHidden = true
     }
 
+    @IBAction func cancelTapped(_ sender: Any) {
+        navigationController?.popToRootViewController(animated: true)
+    }
+
     private var isSubmitting = false
     @IBAction func submitTapped(_ sender: PrimaryButton) {
         defer {
@@ -65,7 +69,7 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
                 return
             }
 
-            performSegue(withIdentifier: "unwindFromSelfDiagnosis", sender: self)
+            navigationController?.popToRootViewController(animated: true)
         } catch {
             alert(with: Error())
         }
