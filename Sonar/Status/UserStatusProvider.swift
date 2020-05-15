@@ -13,16 +13,16 @@ class UserStatusProvider {
     init(localeProvider: LocaleProvider) {
         self.localeProvider = localeProvider
     }
-    
-    private func localizedDate(_ date: Date) -> String {
+
+    private func localizedDate(_ date: Date, _ template: String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = localeProvider.locale
-        dateFormatter.setLocalizedDateFormatFromTemplate("MMMMd")
+        dateFormatter.setLocalizedDateFormatFromTemplate(template)
         return dateFormatter.string(from: date)
     }
     
     func detailForSymptomatic(_ expiryDate: Date) -> String {
         let detailFmt = "On %@ this app will notify you to update your symptoms. Please read your full advice below.".localized
-        return String(format: detailFmt, localizedDate(expiryDate))
+        return String(format: detailFmt, localizedDate(expiryDate, "MMMMd"))
     }
 }

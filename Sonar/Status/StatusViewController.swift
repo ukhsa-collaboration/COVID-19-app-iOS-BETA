@@ -143,7 +143,9 @@ class StatusViewController: UIViewController, Storyboarded {
     }
 
     @IBAction func adviceTapped(_ sender: Any) {
-        UIApplication.shared.open(content[statusStateMachine.state].readUrl)
+        let adviceVc = AdviceViewController.instantiate()
+        adviceVc.inject(linkDestination: content[statusStateMachine.state].readUrl)
+        navigationController?.pushViewController(adviceVc, animated: true)
     }
 
     @IBAction func feelUnwellTapped(_ sender: Any) {
