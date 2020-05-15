@@ -128,20 +128,15 @@ private class HandlerDictionary {
     }
     
     private func complainAboutMissingHandler(type: RemoteNotificationType) {
-        #if DEBUG
-        fatalError("Remote notification HandlerDictionary: no handler for notification type \(type)")
-        #else
         logger.warning("Remote notification HandlerDictionary: no handler for notification type \(type)")
-        #endif
+        assertionFailure("Remote notification HandlerDictionary: no handler for notification type \(type)")
     }
     
     private func complainAboutHandlerReplacement(type: RemoteNotificationType) {
-        #if DEBUG
-        fatalError("Remote notification HandlerDictionary: attempted to replace handler for \(type)")
-        #else
         logger.warning("Remote notification HandlerDictionary replacing existing handler for \(type)")
-        #endif
+        assertionFailure("Remote notification HandlerDictionary: attempted to replace handler for \(type)")
     }
+
 }
 
 private let logger = Logger(label: "Notifications")

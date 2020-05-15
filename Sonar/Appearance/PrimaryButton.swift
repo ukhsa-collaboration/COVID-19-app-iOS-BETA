@@ -50,12 +50,7 @@ class PrimaryButton: ButtonWithDynamicType {
 
     private func complainIfDisabled() {
         if !isEnabled {
-            let msg = "PrimaryButton cannot be disabled. Show an alert instead."
-            #if DEBUG
-            fatalError(msg)
-            #else
-            logger.warning(Logger.Message(stringLiteral: msg))
-            #endif
+            assertionFailure("PrimaryButton cannot be disabled. Show an alert instead.")
         }
     }
 

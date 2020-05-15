@@ -129,7 +129,7 @@ class PermissionsViewController: UIViewController, Storyboarded {
                 case .failure(let error):
                     // We have no idea what would cause an error here.
                     logger.critical("Error requesting notification permissions: \(error)")
-                    fatalError()
+                    assertionFailure("Error requesting notification permissions: \(error)")
                 }
             }
         }

@@ -44,11 +44,11 @@ class ConcreteBroadcastIdEncrypter: BroadcastIdEncrypter {
 
         guard error == nil else {
             logger.critical("error when encrypting broadcast id \(String(describing: error))")
-            fatalError()
+            fatalError("\(self) error when encrypting broadcast id \(String(describing: error))")
         }
         guard let result = cipherText else {
             logger.critical("expected non nil ciphertext")
-            fatalError()
+            fatalError("\(self) expected non nil ciphertext")
         }
 
         let withoutFirstByte = result.dropFirst()
