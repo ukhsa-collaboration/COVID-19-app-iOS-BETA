@@ -10,24 +10,36 @@ import UIKit
 
 #if DEBUG
 
-enum UITestResponder {
-    
-    static func makeWindowForTesting() -> UIWindow? {
+struct UITestResponder {
+    private let uiTestScreenMaker = UITestScreenMaker()
+    private var payload: UITestPayload
+
+    init?() {
         guard
             let string = ProcessInfo.processInfo.environment[UITestPayload.environmentVariableName],
             let data = Data(base64Encoded: string),
             let payload = try? JSONDecoder().decode(UITestPayload.self, from: data)
             else { return nil }
-        
+
+        self.payload = payload
+    }
+
+    func makeWindowForTesting() -> UIWindow {
         UIView.setAnimationsEnabled(false)
         
         let window = UIWindow(frame: UIScreen.main.bounds)
-        let router = AppRouter(window: window, screenMaker: UITestScreenMaker())
-        router.route(to: payload.screen)
+        window.rootViewController = uiTestScreenMaker.makeViewController(for: payload.screen)
         window.makeKeyAndVisible()
         return window
     }
-    
+
+    func resetTime() {
+        uiTestScreenMaker.resetTime()
+    }
+
+    func advanceTime(_ timeInterval: TimeInterval) {
+        uiTestScreenMaker.advanceTime(timeInterval)
+    }
 }
 
 #endif

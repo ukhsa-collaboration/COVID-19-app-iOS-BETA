@@ -16,6 +16,10 @@ import Logging
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     var window: UIWindow?
 
+    #if DEBUG
+    let uiTestResponder = UITestResponder()
+    #endif
+
     let notificationCenter = NotificationCenter.default
     let userNotificationCenter = UNUserNotificationCenter.current()
     let authorizationManager = AuthorizationManager()
@@ -99,8 +103,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         #if DEBUG
-        if let window = UITestResponder.makeWindowForTesting() {
-            self.window = window
+        if let uiTestResponder = uiTestResponder {
+            uiTestResponder.resetTime()
+            self.window = uiTestResponder.makeWindowForTesting()
             return true
         }
         #endif
@@ -179,6 +184,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func applicationDidEnterBackground(_ application: UIApplication) {
         logger.info("Did Enter Background")
+
+        #if DEBUG
+        let SECONDS_IN_DAY = 60 * 60 * 24
+        uiTestResponder?.advanceTime(TimeInterval(8 * SECONDS_IN_DAY))
+        #endif
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {

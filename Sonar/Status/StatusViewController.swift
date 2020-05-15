@@ -33,7 +33,7 @@ class StatusViewController: UIViewController, Storyboarded {
     var linkingIdManager: LinkingIdManaging!
     var registrationService: RegistrationService!
     var notificationCenter: NotificationCenter!
-    func inject(statusStateMachine: StatusStateMachining, userStatusProvider: UserStatusProvider, persistence: Persisting, linkingIdManager: LinkingIdManaging, registrationService: RegistrationService, dateProvider: @autoclosure @escaping () -> Date = Date(), notificationCenter: NotificationCenter
+    func inject(statusStateMachine: StatusStateMachining, userStatusProvider: UserStatusProvider, persistence: Persisting, linkingIdManager: LinkingIdManaging, registrationService: RegistrationService, dateProvider: @escaping () -> Date = { Date() }, notificationCenter: NotificationCenter
 ) {
         self.linkingIdManager = linkingIdManager
         self.statusStateMachine = statusStateMachine

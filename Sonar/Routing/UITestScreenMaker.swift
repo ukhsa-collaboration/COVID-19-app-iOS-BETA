@@ -11,38 +11,80 @@
 import UIKit
 import CoreBluetooth
 
-struct UITestScreenMaker: ScreenMaking {
-    
+class UITestScreenMaker {
+    private let persistence = InMemoryPersistence()
+    private let bluetoothNursery = NoOpBluetoothNursery()
+    private let userStatusProvider = UserStatusProvider(localeProvider: FixedLocaleProvider())
+    private let authorizationManager = EphemeralAuthorizationManager()
+    private let notificationCenter = NotificationCenter.default
+    private let userNotificationCenter = UNUserNotificationCenter.current()
+    private let contactEventsUploader = MockContactEventsUploading()
+    private let linkingIdManager = MockLinkingIdManager()
+    private let registrationService = MockRegistrationService()
+
+    private var mockedDate = Date()
+    private lazy var dateProvider = { self.mockedDate }
+
+    private lazy var dispatcher = RemoteNotificationDispatcher(
+        notificationCenter: notificationCenter,
+        userNotificationCenter: userNotificationCenter
+    )
+    private lazy var onboardingCoordinator = OnboardingCoordinator(
+        persistence: persistence,
+        authorizationManager: authorizationManager,
+        bluetoothNursery: bluetoothNursery
+    )
+    private lazy var statusStateMachine = StatusStateMachine(
+        persisting: persistence,
+        contactEventsUploader: contactEventsUploader,
+        notificationCenter: notificationCenter,
+        userNotificationCenter: userNotificationCenter,
+        dateProvider: self.dateProvider
+    )
+
+    func resetTime() {
+        mockedDate = Date()
+    }
+
+    func advanceTime(_ timeInterval: TimeInterval) {
+        mockedDate = Date(timeInterval: timeInterval, since: mockedDate)
+    }
+
     func makeViewController(for screen: Screen) -> UIViewController {
         switch screen {
         case .onboarding:
             let onboardingViewController = OnboardingViewController.instantiate { viewController in
-                let env = OnboardingEnvironment(mockWithHost: viewController)
-                let bluetoothNursery = NoOpBluetoothNursery()
-                let coordinator = OnboardingCoordinator(persistence: env.persistence,
-                    authorizationManager: env.authorizationManager,
-                    bluetoothNursery: bluetoothNursery
+                let remoteNotificationManager = EphemeralRemoteNotificationManager(
+                    host: viewController,
+                    authorizationManager: authorizationManager,
+                    dispatcher: dispatcher
                 )
-                viewController.inject(env: env, coordinator: coordinator, bluetoothNursery: bluetoothNursery, uiQueue: DispatchQueue.main) { }
+                let env = OnboardingEnvironment(
+                    persistence: persistence,
+                    authorizationManager: authorizationManager,
+                    remoteNotificationManager: remoteNotificationManager,
+                    notificationCenter: notificationCenter
+                )
+                viewController.inject(
+                    env: env,
+                    coordinator: onboardingCoordinator,
+                    bluetoothNursery: bluetoothNursery,
+                    uiQueue: DispatchQueue.main
+                ) { }
             }
 
             return onboardingViewController
 
         case .status:
             let statusViewController = StatusViewController.instantiate { viewController in
-                let persistence = InMemoryPersistence();
-                let userStatusProvider = UserStatusProvider(localeProvider: FixedLocaleProvider())
-                viewController.inject(statusStateMachine: StatusStateMachine(
-                                    persisting: persistence,
-                                    contactEventsUploader: MockContactEventsUploading(),
-                                    notificationCenter: NotificationCenter(),
-                                    userNotificationCenter: UNUserNotificationCenter.current()
-                ),
-                                      userStatusProvider: userStatusProvider,
-                                      persistence: persistence,
-                                      linkingIdManager: MockLinkingIdManager(),
-                                      registrationService: MockRegistrationService(),
-                                      notificationCenter: NotificationCenter()
+                viewController.inject(
+                    statusStateMachine: statusStateMachine,
+                    userStatusProvider: userStatusProvider,
+                    persistence: persistence,
+                    linkingIdManager: linkingIdManager,
+                    registrationService: registrationService,
+                    dateProvider: self.dateProvider,
+                    notificationCenter: notificationCenter
                 )
             }
             let navigationController = UINavigationController()
@@ -50,26 +92,6 @@ struct UITestScreenMaker: ScreenMaking {
             return navigationController
         }
     }
-}
-
-private extension OnboardingEnvironment {
-    
-    convenience init(mockWithHost host: UIViewController) {
-        // TODO: Fix initial state of mocks.
-        // Currently it’s set so that onboarding is “done” as soon as we allow data sharing – so we can have a minimal
-        // UI test.
-        let authorizationManager = EphemeralAuthorizationManager()
-        let notificationCenter = NotificationCenter()
-        let dispatcher = RemoteNotificationDispatcher(notificationCenter: notificationCenter, userNotificationCenter: UNUserNotificationCenter.current())
-        
-        self.init(
-            persistence: InMemoryPersistence(),
-            authorizationManager: authorizationManager,
-            remoteNotificationManager: EphemeralRemoteNotificationManager(host: host, authorizationManager: authorizationManager, dispatcher: dispatcher),
-            notificationCenter: notificationCenter
-        )
-    }
-    
 }
 
 private class InMemoryPersistence: Persisting {

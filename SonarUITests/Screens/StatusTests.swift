@@ -36,6 +36,45 @@ class StatusTests: ScreenTestCase {
         // Self diagnosed advice screen
         XCTAssert(selfDiagnosedAdvice.exists)
         XCTAssert(bookNowAdvice.exists)
+
+        eightDaysLater()
+
+        XCTAssert(questionnairePopup.exists)
+        questionnaireUpdateButton.tap()
+        cancelButton.tap()
+
+        // questionnaire reappears if the user cancels
+        XCTAssert(questionnairePopup.exists)
+        questionnaireUpdateButton.tap()
+
+        // if the user still has symptoms...
+        highTemperatureOption.tap();
+        continueButton.tap();
+        continuousCoughOption.tap();
+        submitButton.tap();
+
+        // they are told to continue isolating
+        XCTAssert(selfDiagnosedAdvice.exists)
+
+        eightDaysLater()
+
+        XCTAssert(questionnairePopup.exists)
+        questionnaireUpdateButton.tap()
+
+        // if the user only has a cough...
+        noHighTemperatureOption.tap();
+        continueButton.tap();
+        continuousCoughOption.tap();
+        submitButton.tap();
+
+        // ...they are told to return to "current advice"...
+        XCTAssert(coughAdvice.exists)
+        closeButton.tap();
+
+        eightDaysLater()
+
+        // ...and are not reminded again
+        XCTAssertFalse(questionnairePopup.exists)
     }
 
     func testSelfDiagnosisNegativeFlow() {
@@ -61,6 +100,16 @@ class StatusTests: ScreenTestCase {
 }
 
 private extension ScreenTestCase {
+    func eightDaysLater() {
+        // close app
+        XCUIDevice.shared.press(.home)
+
+        // open app 8 days later
+        // (test harness ensures that 8 days pass whenever we close the app)
+
+        XCUIApplication().activate()
+        usleep(500000) // wait for app opening animation
+    }
 
     var blueAdvice: XCUIElement {
         app.staticTexts["Follow the current advice to stop the spread of coronavirus"]
@@ -116,6 +165,26 @@ private extension ScreenTestCase {
 
     var bookNowAdvice: XCUIElement {
         app.staticTexts["Please book a coronavirus test immediately. Write down your reference code and phone 0800 540 4900"]
+    }
+
+    var questionnairePopup: XCUIElement {
+        app.staticTexts["How are you feeling today?"]
+    }
+
+    var questionnaireUpdateButton: XCUIElement {
+        app.buttons["Update my symptoms"]
+    }
+
+    var cancelButton: XCUIElement {
+        app.buttons["Cancel"]
+    }
+
+    var coughAdvice: XCUIElement {
+        app.staticTexts["Although you still have a continuous cough, you can now follow the current advice."]
+    }
+
+    var closeButton: XCUIElement {
+        app.buttons["Close"]
     }
 
 }

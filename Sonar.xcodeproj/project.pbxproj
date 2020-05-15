@@ -119,7 +119,6 @@
 		8947F833245AD97A00C4F1BB /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8947F832245AD97A00C4F1BB /* Settings.bundle */; };
 		895D9E462437458700573D4D /* AppIcon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 895D9E452437458700573D4D /* AppIcon.xcassets */; };
 		895D9E4B24374EC900573D4D /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895D9E4A24374EC900573D4D /* Screen.swift */; };
-		895D9E4E24374EFA00573D4D /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895D9E4D24374EFA00573D4D /* AppRouter.swift */; };
 		89618584245871B400F1E2DD /* AppMonitorDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896F8E0E24586D9C00E2CB15 /* AppMonitorDouble.swift */; };
 		896BE909244F06CB00B3687C /* www.google.com.cer in Resources */ = {isa = PBXBuildFile; fileRef = 896BE908244F06CB00B3687C /* www.google.com.cer */; };
 		896BE90B244F06E300B3687C /* GTS CA 1O1.cer in Resources */ = {isa = PBXBuildFile; fileRef = 896BE90A244F06E300B3687C /* GTS CA 1O1.cer */; };
@@ -403,7 +402,6 @@
 		895D9DE82437384C00573D4D /* CoLocateUITests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CoLocateUITests.xcconfig; sourceTree = "<group>"; };
 		895D9E452437458700573D4D /* AppIcon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppIcon.xcassets; sourceTree = "<group>"; };
 		895D9E4A24374EC900573D4D /* Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
-		895D9E4D24374EFA00573D4D /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		896BE908244F06CB00B3687C /* www.google.com.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = www.google.com.cer; sourceTree = "<group>"; };
 		896BE90A244F06E300B3687C /* GTS CA 1O1.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GTS CA 1O1.cer"; sourceTree = "<group>"; };
 		896BE90C244F06F600B3687C /* GlobalSign.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = GlobalSign.cer; sourceTree = "<group>"; };
@@ -1000,7 +998,6 @@
 			isa = PBXGroup;
 			children = (
 				895D9E4A24374EC900573D4D /* Screen.swift */,
-				895D9E4D24374EFA00573D4D /* AppRouter.swift */,
 				891E16A3243782D000281821 /* UITestResponder.swift */,
 				89074B8424378A0D00D67777 /* UITestPayload.swift */,
 				898FE85F243B5AF700210775 /* UITestScreenMaker.swift */,
@@ -1638,7 +1635,6 @@
 				090B186F24354D0100870B5D /* RemoteNotificationDispatcher.swift in Sources */,
 				138114E42450543600BA46C7 /* SymptomStackView.swift in Sources */,
 				F6DA0A342469D6BA001F0B48 /* StatusStateMachine.swift in Sources */,
-				895D9E4E24374EFA00573D4D /* AppRouter.swift in Sources */,
 				F758B8C0242CB98C003AE16D /* UIViewController+Storyboarded.swift in Sources */,
 				2115C3E624360427009C0F5B /* GradientBackgroundTableViewCell.swift in Sources */,
 				89BC79EB2434E047002050F8 /* LogsViewController.swift in Sources */,
