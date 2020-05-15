@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     let storageChecker = StorageChecker(service: "uk.nhs.nhsx.sonars.storage_marker")
     
-    lazy var monitor: AppMonitoring = AppCenterMonitor.shared
+    lazy var monitor: AppMonitoring = NoOpAppMonitoring()
     
     lazy var urlSession: Session = URLSession(trustValidator: trustValidator)
 

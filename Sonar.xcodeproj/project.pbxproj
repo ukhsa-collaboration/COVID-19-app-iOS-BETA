@@ -135,14 +135,10 @@
 		898FE859243B4FE300210775 /* AuthorizationManaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898FE858243B4FE300210775 /* AuthorizationManaging.swift */; };
 		898FE860243B5AF700210775 /* UITestScreenMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898FE85F243B5AF700210775 /* UITestScreenMaker.swift */; };
 		89BC79EB2434E047002050F8 /* LogsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BC79EA2434E047002050F8 /* LogsViewController.swift */; };
-		89C8B20D245C377F009CCE80 /* AppCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89C8B20B245C377F009CCE80 /* AppCenter.framework */; };
-		89C8B20E245C377F009CCE80 /* AppCenterAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89C8B20C245C377F009CCE80 /* AppCenterAnalytics.framework */; };
 		89C8B210245C37BF009CCE80 /* AppCenterMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C8B20F245C37BF009CCE80 /* AppCenterMonitor.swift */; };
 		89C8B212245C5093009CCE80 /* DailyMetricsCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C8B211245C5093009CCE80 /* DailyMetricsCollector.swift */; };
 		89C8B214245C5106009CCE80 /* DailyMetricsCollectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C8B213245C5106009CCE80 /* DailyMetricsCollectorTests.swift */; };
 		89C8B216245C5258009CCE80 /* DefaultObjectStoringDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C8B215245C5258009CCE80 /* DefaultObjectStoringDouble.swift */; };
-		89C8B218245C6342009CCE80 /* AppCenterAnalyticsReportingDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C8B217245C6342009CCE80 /* AppCenterAnalyticsReportingDouble.swift */; };
-		89C8B21B245C63C0009CCE80 /* AppCenterMonitorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C8B21A245C63C0009CCE80 /* AppCenterMonitorTests.swift */; };
 		89CCF65F2456EF7000AC9D91 /* TrustValidatingDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CCF65E2456EF7000AC9D91 /* TrustValidatingDouble.swift */; };
 		89CCF6612456F07400AC9D91 /* URLAuthenticationChallenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CCF6602456F07400AC9D91 /* URLAuthenticationChallenge.swift */; };
 		89CCF66424571EE900AC9D91 /* SetupProblemDiagnoserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CCF66324571EE900AC9D91 /* SetupProblemDiagnoserTests.swift */; };
@@ -423,14 +419,10 @@
 		898FE858243B4FE300210775 /* AuthorizationManaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationManaging.swift; sourceTree = "<group>"; };
 		898FE85F243B5AF700210775 /* UITestScreenMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestScreenMaker.swift; sourceTree = "<group>"; };
 		89BC79EA2434E047002050F8 /* LogsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogsViewController.swift; sourceTree = "<group>"; };
-		89C8B20B245C377F009CCE80 /* AppCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppCenter.framework; path = Frameworks/AppCenter.framework; sourceTree = "<group>"; };
-		89C8B20C245C377F009CCE80 /* AppCenterAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppCenterAnalytics.framework; path = Frameworks/AppCenterAnalytics.framework; sourceTree = "<group>"; };
 		89C8B20F245C37BF009CCE80 /* AppCenterMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCenterMonitor.swift; sourceTree = "<group>"; };
 		89C8B211245C5093009CCE80 /* DailyMetricsCollector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyMetricsCollector.swift; sourceTree = "<group>"; };
 		89C8B213245C5106009CCE80 /* DailyMetricsCollectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyMetricsCollectorTests.swift; sourceTree = "<group>"; };
 		89C8B215245C5258009CCE80 /* DefaultObjectStoringDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultObjectStoringDouble.swift; sourceTree = "<group>"; };
-		89C8B217245C6342009CCE80 /* AppCenterAnalyticsReportingDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCenterAnalyticsReportingDouble.swift; sourceTree = "<group>"; };
-		89C8B21A245C63C0009CCE80 /* AppCenterMonitorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCenterMonitorTests.swift; sourceTree = "<group>"; };
 		89CCF65E2456EF7000AC9D91 /* TrustValidatingDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustValidatingDouble.swift; sourceTree = "<group>"; };
 		89CCF6602456F07400AC9D91 /* URLAuthenticationChallenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLAuthenticationChallenge.swift; sourceTree = "<group>"; };
 		89CCF66324571EE900AC9D91 /* SetupProblemDiagnoserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupProblemDiagnoserTests.swift; sourceTree = "<group>"; };
@@ -587,8 +579,6 @@
 				F7D62F2724406FC8004C32A2 /* Logging in Frameworks */,
 				F78CEB5A242B7EC0002254AD /* FirebaseMessaging.framework in Frameworks */,
 				21B3D2E82429115600573061 /* CoreBluetooth.framework in Frameworks */,
-				89C8B20D245C377F009CCE80 /* AppCenter.framework in Frameworks */,
-				89C8B20E245C377F009CCE80 /* AppCenterAnalytics.framework in Frameworks */,
 				F78CEB6F242B92CF002254AD /* GoogleUtilities.framework in Frameworks */,
 				F78CEB73242B937F002254AD /* nanopb.framework in Frameworks */,
 				F78CEB5E242B7EC0002254AD /* Protobuf.framework in Frameworks */,
@@ -702,7 +692,6 @@
 				090B1870243552C300870B5D /* UserNotificationCenterDouble.swift */,
 				097C94CA245B81E8008A9695 /* EnGbLocaleProviderDouble.swift */,
 				89C8B215245C5258009CCE80 /* DefaultObjectStoringDouble.swift */,
-				89C8B217245C6342009CCE80 /* AppCenterAnalyticsReportingDouble.swift */,
 				89DF66A52460217A00A55F24 /* StorageCheckingDouble.swift */,
 				F6E2E596246B287B009D80DF /* StatusStateMachiningDouble.swift */,
 				0982F487246DF80400E57EE5 /* LinkingIdManagerDouble.swift */,
@@ -821,7 +810,6 @@
 				89CCF6622456F07900AC9D91 /* FakeData */,
 				098ED486242E89760029B729 /* Doubles */,
 				214209DA242630CF00C7BFF3 /* Networking */,
-				89C8B219245C63B2009CCE80 /* Monitoring */,
 				F6F05A222433BEAC00FF4B72 /* Onboarding */,
 				F604977324549C84002B8503 /* Testing */,
 				098ED479242D7E340029B729 /* Registration */,
@@ -883,8 +871,6 @@
 		21B3D2E62429115600573061 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				89C8B20B245C377F009CCE80 /* AppCenter.framework */,
-				89C8B20C245C377F009CCE80 /* AppCenterAnalytics.framework */,
 				89DA61F52449A5A80079A761 /* GoogleAppMeasurement.framework */,
 				89DA61F12449A56F0079A761 /* FIRAnalyticsConnector.framework */,
 				F78CEB72242B937F002254AD /* nanopb.framework */,
@@ -1056,14 +1042,6 @@
 				898FE853243B42E700210775 /* OnboardingTests.swift */,
 			);
 			path = Flows;
-			sourceTree = "<group>";
-		};
-		89C8B219245C63B2009CCE80 /* Monitoring */ = {
-			isa = PBXGroup;
-			children = (
-				89C8B21A245C63C0009CCE80 /* AppCenterMonitorTests.swift */,
-			);
-			path = Monitoring;
 			sourceTree = "<group>";
 		};
 		89CCF6622456F07900AC9D91 /* FakeData */ = {
@@ -1500,7 +1478,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				098ED47C242D801C0029B729 /* RegistrationServiceTests.swift in Sources */,
-				89C8B218245C6342009CCE80 /* AppCenterAnalyticsReportingDouble.swift in Sources */,
 				09D027CE2452157D006EE07E /* BluetoothStateObserverTests.swift in Sources */,
 				21B3D2E3242906AE00573061 /* SecureRequestTests.swift in Sources */,
 				F7E74F90244DFC1400273C59 /* BroadcastRotationKeyConverterTests.swift in Sources */,
@@ -1514,7 +1491,6 @@
 				095A91182434FF1500ED6369 /* ApplicationDouble.swift in Sources */,
 				89CCF6612456F07400AC9D91 /* URLAuthenticationChallenge.swift in Sources */,
 				09D91A7924522133004825A5 /* BTLEListenerDouble.swift in Sources */,
-				89C8B21B245C63C0009CCE80 /* AppCenterMonitorTests.swift in Sources */,
 				F632792324351C8400CF7A42 /* OnboardingCoordinatorDouble.swift in Sources */,
 				21F37402243384D400926FB8 /* PersistingContactEventRepositoryTests.swift in Sources */,
 				F62F858524510923006580A8 /* SessionDouble.swift in Sources */,
