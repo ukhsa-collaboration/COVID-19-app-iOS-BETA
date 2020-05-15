@@ -1,5 +1,5 @@
 //
-//  PatchContactIdentifierRequest.swift
+//  UploadProximityEventsRequestTests.swift
 //  SonarTests
 //
 //  Created by NHSX on 19.03.20.
@@ -9,7 +9,7 @@
 import XCTest
 @testable import Sonar
 
-class UploadContactEventsRequestTests: XCTestCase {
+class UploadProximityEventsRequestTests: XCTestCase {
 
     let sonarId = UUID(uuidString: "E9D7F53C-DE9C-46A2-961E-8302DC39558A")!
     let dummyKey = SecKey.sampleHMACKey
@@ -36,7 +36,7 @@ class UploadContactEventsRequestTests: XCTestCase {
 
     var contactEvents: [ContactEvent]!
 
-    var request: UploadContactEventsRequest!
+    var request: UploadProximityEventsRequest!
     
     override func setUp() {
         rssiTimestamps1 = [timestamp1 + 11, timestamp1 + 12, timestamp1 + 14]
@@ -50,7 +50,7 @@ class UploadContactEventsRequestTests: XCTestCase {
         ]
 
         let registration = Registration(sonarId: sonarId, secretKey: dummyKey, broadcastRotationKey: SecKey.sampleEllipticCurveKey)
-        request = UploadContactEventsRequest(
+        request = UploadProximityEventsRequest(
             registration: registration,
             symptomsTimestamp: Date(timeIntervalSince1970: 100),
             contactEvents: contactEvents
@@ -62,7 +62,7 @@ class UploadContactEventsRequestTests: XCTestCase {
     }
 
     func testPath() {
-        XCTAssertEqual(request.urlable, .path("/api/residents/\(sonarId.uuidString)"))
+        XCTAssertEqual(request.urlable, .path("/api/proximity-events/upload"))
     }
     
     func testHeaders() {
@@ -76,6 +76,7 @@ class UploadContactEventsRequestTests: XCTestCase {
         let expectedBody =
 """
 {
+  "sonarId" : "\(sonarId)",
   "contactEvents" : [
     {
       "rssiIntervals" : [
