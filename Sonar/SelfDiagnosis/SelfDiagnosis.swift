@@ -47,14 +47,14 @@ struct SelfDiagnosis: Codable, Equatable {
 }
 
 extension SelfDiagnosis {
-    init(type: SelfDiagnosisType, symptoms: Set<Symptom>, startDate: Date, daysToLive: Int) {
-        self.init(type: type, symptoms: symptoms, startDate: startDate, daysToLive: daysToLive, timeZone: TimeZone.autoupdatingCurrent)
+    init(type: SelfDiagnosisType, symptoms: Set<Symptom>, startDate: Date, expiryDays: Int) {
+        self.init(type: type, symptoms: symptoms, startDate: startDate, expiryDays: expiryDays, timeZone: TimeZone.autoupdatingCurrent)
     }
     
-    init(type: SelfDiagnosisType, symptoms: Set<Symptom>, startDate: Date, daysToLive: Int, timeZone: TimeZone) {
+    init(type: SelfDiagnosisType, symptoms: Set<Symptom>, startDate: Date, expiryDays: Int, timeZone: TimeZone) {
         self.type = type
         self.symptoms = symptoms
         self.startDate = startDate
-        self.expiryDate = expiresIn(days: daysToLive, timeZone: timeZone)
+        self.expiryDate = expiresIn(days: expiryDays, timeZone: timeZone)
     }
 }

@@ -14,7 +14,7 @@ class SelfDiagnosisTests: XCTestCase {
         let timeZone = try XCTUnwrap(TimeZone(secondsFromGMT: 60 * 60))
         let startDate = Date(timeIntervalSince1970: 0)
         let expectedDate = Calendar.current.date(byAdding: .hour, value: 6, to: startDate)
-        let selfDiagnosis = SelfDiagnosis(type: .initial, symptoms: Set<Symptom>(), startDate: startDate, daysToLive: 1, timeZone: timeZone)
+        let selfDiagnosis = SelfDiagnosis(type: .initial, symptoms: Set<Symptom>(), startDate: startDate, expiryDays: 1, timeZone: timeZone)
         XCTAssertEqual(selfDiagnosis.expiryDate, expectedDate)
     }
     
@@ -22,7 +22,7 @@ class SelfDiagnosisTests: XCTestCase {
         let timeZone = try XCTUnwrap(TimeZone(secondsFromGMT: 60 * 60))
         let startDate = Date(timeIntervalSince1970: 7 * 60 * 60)
         let expectedDate = Calendar.current.date(byAdding: .hour, value: 23, to: startDate)
-        let selfDiagnosis = SelfDiagnosis(type: .initial, symptoms: Set<Symptom>(), startDate: startDate, daysToLive: 1, timeZone: timeZone)
+        let selfDiagnosis = SelfDiagnosis(type: .initial, symptoms: Set<Symptom>(), startDate: startDate, expiryDays: 1, timeZone: timeZone)
         XCTAssertEqual(selfDiagnosis.expiryDate, expectedDate)
     }
     
