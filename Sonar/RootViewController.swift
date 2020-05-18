@@ -138,7 +138,7 @@ class RootViewController: UIViewController {
             self.uiQueue.sync {
                 self.dismissSetupError()
                 
-                self.statusViewController?.notificationsStatusView?.isHidden = (problem != .notificationPermissions)
+                self.statusViewController.hideNotificationStatusView = (problem != .notificationPermissions)
                 
                 guard let problem = problem else { return }
                 

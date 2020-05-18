@@ -459,6 +459,9 @@
                                                     <constraint firstAttribute="trailing" secondItem="o57-iY-zoI" secondAttribute="trailing" constant="12" id="xw2-w8-cux"/>
                                                     <constraint firstAttribute="trailing" secondItem="fBV-SW-opU" secondAttribute="trailing" constant="24" id="zIz-OA-smj"/>
                                                 </constraints>
+                                                <connections>
+                                                    <action selector="notificationsStatusViewTapped:" destination="D27-h6-ECy" eventType="touchUpInside" id="MD5-m8-F7A"/>
+                                                </connections>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="6d3-41-7Jl">
                                                 <rect key="frame" x="16" y="259" width="382" height="57"/>

@@ -28,6 +28,12 @@ class StatusViewController: UIViewController, Storyboarded {
     @IBOutlet weak var applyForTestButton: UIButton!
     @IBOutlet weak var stepsDetailLabel: UILabel!
 
+    var hideNotificationStatusView = true {
+        didSet {
+            notificationsStatusView?.isHidden = hideNotificationStatusView
+        }
+    }
+    
     private let content = StatusContent.shared
     private lazy var drawerPresentationManager = DrawerPresentation()
     private var dateProvider: (() -> Date)!
@@ -57,7 +63,7 @@ class StatusViewController: UIViewController, Storyboarded {
         logo.contentMode = .scaleAspectFit
         diagnosisHighlightView.accessibilityIgnoresInvertColors = true
         
-        notificationsStatusView.isHidden = true
+        notificationsStatusView.isHidden = hideNotificationStatusView
 
         let title = UILabel()
         title.text = "COVID-19"
@@ -206,6 +212,10 @@ class StatusViewController: UIViewController, Storyboarded {
         present(symptomsPromptViewController, animated: true)
     }
 
+    @IBAction func notificationsStatusViewTapped(_ sender: Any) {
+        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:])
+    }
+    
     @objc func reload() {
         guard view != nil else { return }
 
