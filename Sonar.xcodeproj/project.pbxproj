@@ -161,6 +161,7 @@
 		AE2A5E502423C473007A4771 /* ContactEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2A5E4F2423C473007A4771 /* ContactEvent.swift */; };
 		AE2DCAA0241920B600A940FC /* BTLEBroadcaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2DCA9F241920B600A940FC /* BTLEBroadcaster.swift */; };
 		AEAFA67924602629009AEAEB /* StatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAFA67824602629009AEAEB /* StatusTests.swift */; };
+		DDD5BDC52473EA1200329720 /* NotificationStatusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5BDC42473EA1200329720 /* NotificationStatusButton.swift */; };
 		F600A60224297A8E0038DF57 /* RegistrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F600A60124297A8E0038DF57 /* RegistrationRequest.swift */; };
 		F600A60424297C010038DF57 /* RegistrationRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F600A60324297C010038DF57 /* RegistrationRequestTests.swift */; };
 		F60497672452415F002B8503 /* ContactEventsUploaderDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60497662452415F002B8503 /* ContactEventsUploaderDouble.swift */; };
@@ -452,6 +453,7 @@
 		AE2A5E4F2423C473007A4771 /* ContactEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEvent.swift; sourceTree = "<group>"; };
 		AE2DCA9F241920B600A940FC /* BTLEBroadcaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTLEBroadcaster.swift; sourceTree = "<group>"; };
 		AEAFA67824602629009AEAEB /* StatusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusTests.swift; sourceTree = "<group>"; };
+		DDD5BDC42473EA1200329720 /* NotificationStatusButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationStatusButton.swift; sourceTree = "<group>"; };
 		F600A60124297A8E0038DF57 /* RegistrationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationRequest.swift; sourceTree = "<group>"; };
 		F600A60324297C010038DF57 /* RegistrationRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationRequestTests.swift; sourceTree = "<group>"; };
 		F60497602451FA42002B8503 /* Environment.swift.erb */ = {isa = PBXFileReference; lastKnownFileType = text; path = Environment.swift.erb; sourceTree = "<group>"; };
@@ -763,6 +765,7 @@
 		214209B72422155200C7BFF3 /* Appearance */ = {
 			isa = PBXGroup;
 			children = (
+				DDD5BDC42473EA1200329720 /* NotificationStatusButton.swift */,
 				F7091906245DCED800F00AB8 /* AccessibleErrorLabel.swift */,
 				F613936D243FA82B003447E8 /* Appearance.swift */,
 				09B3AC802460BEA9001AF47E /* AutoscalingImageView.swift */,
@@ -1633,6 +1636,7 @@
 				89F06B332434AF130074C612 /* ForwardingLogHandler.swift in Sources */,
 				21B3D2E52429112B00573061 /* SecureRequest.swift in Sources */,
 				F6053A122472F7170006939E /* ContentURLs.swift in Sources */,
+				DDD5BDC52473EA1200329720 /* NotificationStatusButton.swift in Sources */,
 				097C93892447986B00E985CF /* TextField.swift in Sources */,
 				090B186F24354D0100870B5D /* RemoteNotificationDispatcher.swift in Sources */,
 				138114E42450543600BA46C7 /* SymptomStackView.swift in Sources */,
