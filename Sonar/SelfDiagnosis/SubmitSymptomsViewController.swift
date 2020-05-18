@@ -70,11 +70,11 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
             navigationController?.dismiss(animated: true, completion: nil)
             
             let hasCough = symptoms.contains(.cough)
-            var selfDiagnosis = SelfDiagnosis(type: .initial, symptoms: symptoms, startDate: startDate, daysToLive: 7)
+            var selfDiagnosis = SelfDiagnosis(type: .initial, symptoms: symptoms, startDate: startDate, expiryDays: 7)
                     
             if symptoms.contains(.temperature) || (hasCough && !selfDiagnosis.hasExpired) {
                 if selfDiagnosis.hasExpired {
-                    selfDiagnosis = SelfDiagnosis(type: .subsequent, symptoms: symptoms, startDate: Date(), daysToLive: 1)
+                    selfDiagnosis = SelfDiagnosis(type: .subsequent, symptoms: symptoms, startDate: Date(), expiryDays: 1)
                 }
 
                 persisting.selfDiagnosis = selfDiagnosis

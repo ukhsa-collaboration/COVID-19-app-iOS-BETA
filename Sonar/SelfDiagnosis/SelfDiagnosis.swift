@@ -41,10 +41,10 @@ struct SelfDiagnosis: Codable, Equatable {
 }
 
 extension SelfDiagnosis {
-    init(type: SelfDiagnosisType, symptoms: Set<Symptom>, startDate: Date, daysToLive: Int) {
+    init(type: SelfDiagnosisType, symptoms: Set<Symptom>, startDate: Date, expiryDays: Int) {
         self.type = type
         self.symptoms = symptoms
         self.startDate = startDate
-        self.expiryDate = expiresIn(days: daysToLive)
+        self.expiryDate = expiresIn(days: expiryDays)
     }
 }
