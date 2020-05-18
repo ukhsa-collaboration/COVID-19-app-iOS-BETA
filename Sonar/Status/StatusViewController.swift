@@ -25,6 +25,9 @@ class StatusViewController: UIViewController, Storyboarded {
     @IBOutlet weak var diagnosisDetailLabel: UILabel!
 
     @IBOutlet weak var feelUnwellButton: UIButton!
+    @IBOutlet weak var feelUnwellTitleLabel: UILabel!
+    @IBOutlet weak var feelUnwellBodyLabel: UILabel!
+
     @IBOutlet weak var applyForTestButton: UIButton!
     @IBOutlet weak var stepsDetailLabel: UILabel!
 
@@ -61,6 +64,10 @@ class StatusViewController: UIViewController, Storyboarded {
     override func viewDidLoad() {
         diagnosisHighlightView.layer.cornerRadius = 8
         registrationRetryButton.setTitle("RETRY".localized, for: .normal)
+
+        feelUnwellButton.accessibilityLabel = [
+            feelUnwellTitleLabel.text, feelUnwellBodyLabel.text
+        ].compactMap { $0 }.joined(separator: ". ")
 
         let logo = UIImageView(image: UIImage(named: "NHS_Logo"))
         logo.contentMode = .scaleAspectFit
