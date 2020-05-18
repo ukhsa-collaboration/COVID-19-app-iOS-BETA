@@ -23,6 +23,7 @@ class RootViewController: UIViewController {
     private var uiQueue: TestableQueue! = nil
     private var setupChecker: SetupChecker!
     private var statusStateMachine: StatusStateMachining!
+    private var urlOpener: TestableUrlOpener!
     private weak var presentedSetupErorrViewController: UIViewController? = nil
 
     private var statusViewController: StatusViewController!
@@ -41,7 +42,8 @@ class RootViewController: UIViewController {
         linkingIdManager: LinkingIdManaging,
         statusStateMachine: StatusStateMachining,
         uiQueue: TestableQueue,
-        userStatusProvider: UserStatusProvider
+        userStatusProvider: UserStatusProvider,
+        urlOpener: TestableUrlOpener
     ) {
         self.persistence = persistence
         self.authorizationManager = authorizationManager
@@ -63,7 +65,8 @@ class RootViewController: UIViewController {
             persistence: persistence,
             linkingIdManager: linkingIdManager,
             registrationService: registrationService,
-            notificationCenter: notificationCenter
+            notificationCenter: notificationCenter,
+            urlOpener: urlOpener
         )
         
         setupChecker = SetupChecker(authorizationManager: authorizationManager, bluetoothNursery: bluetoothNursery)

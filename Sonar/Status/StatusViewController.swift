@@ -38,13 +38,15 @@ class StatusViewController: UIViewController, Storyboarded {
     private lazy var drawerPresentationManager = DrawerPresentation()
     private var dateProvider: (() -> Date)!
     
-    var userStatusProvider: UserStatusProvider!
-    var persistence: Persisting!
-    var statusStateMachine: StatusStateMachining!
-    var linkingIdManager: LinkingIdManaging!
-    var registrationService: RegistrationService!
-    var notificationCenter: NotificationCenter!
-    func inject(statusStateMachine: StatusStateMachining, userStatusProvider: UserStatusProvider, persistence: Persisting, linkingIdManager: LinkingIdManaging, registrationService: RegistrationService, dateProvider: @escaping () -> Date = { Date() }, notificationCenter: NotificationCenter
+    private var userStatusProvider: UserStatusProvider!
+    private var persistence: Persisting!
+    private var statusStateMachine: StatusStateMachining!
+    private var linkingIdManager: LinkingIdManaging!
+    private var registrationService: RegistrationService!
+    private var notificationCenter: NotificationCenter!
+    private var urlOpener: TestableUrlOpener!
+    
+    func inject(statusStateMachine: StatusStateMachining, userStatusProvider: UserStatusProvider, persistence: Persisting, linkingIdManager: LinkingIdManaging, registrationService: RegistrationService, dateProvider: @escaping () -> Date = { Date() }, notificationCenter: NotificationCenter, urlOpener: TestableUrlOpener
 ) {
         self.linkingIdManager = linkingIdManager
         self.statusStateMachine = statusStateMachine
@@ -53,6 +55,7 @@ class StatusViewController: UIViewController, Storyboarded {
         self.registrationService = registrationService
         self.dateProvider = dateProvider
         self.notificationCenter = notificationCenter
+        self.urlOpener = urlOpener
     }
 
     override func viewDidLoad() {
@@ -85,7 +88,7 @@ class StatusViewController: UIViewController, Storyboarded {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? ApplyForTestViewController {
-            vc.inject(linkingIdManager: linkingIdManager, uiQueue: DispatchQueue.main)
+            vc.inject(linkingIdManager: linkingIdManager, uiQueue: DispatchQueue.main, urlOpener: urlOpener)
         }
     }
 

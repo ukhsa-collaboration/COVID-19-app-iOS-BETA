@@ -84,7 +84,8 @@ class UITestScreenMaker {
                     linkingIdManager: linkingIdManager,
                     registrationService: registrationService,
                     dateProvider: self.dateProvider,
-                    notificationCenter: notificationCenter
+                    notificationCenter: notificationCenter,
+                    urlOpener: UIApplication.shared
                 )
             }
             let navigationController = UINavigationController()

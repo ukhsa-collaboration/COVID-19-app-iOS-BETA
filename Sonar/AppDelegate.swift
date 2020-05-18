@@ -141,7 +141,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             linkingIdManager: linkingIdManager,
             statusStateMachine: statusStateMachine,
             uiQueue: DispatchQueue.main,
-            userStatusProvider: userStatusProvider
+            userStatusProvider: userStatusProvider,
+            urlOpener: application
         )
         
         window = UIWindow(frame: UIScreen.main.bounds)

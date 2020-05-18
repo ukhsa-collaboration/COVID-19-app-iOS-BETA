@@ -12,7 +12,7 @@
         <!--Apply for a coronavirus test-->
         <scene sceneID="htj-3w-VDf">
             <objects>
-                <viewController title="Apply for a coronavirus test" id="eEu-YT-bAG" customClass="ApplyForTestViewController" customModule="Sonar" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ApplyForTestViewController" title="Apply for a coronavirus test" id="eEu-YT-bAG" customClass="ApplyForTestViewController" customModule="Sonar" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="a3V-XW-Vqe">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -98,7 +98,7 @@
                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="7Wy-sa-3D6" secondAttribute="trailing" id="kig-Xf-0dm"/>
                                                 </constraints>
                                                 <connections>
-                                                    <action selector="applyForTestTapped:" destination="eEu-YT-bAG" eventType="touchUpInside" id="s1S-nC-YVL"/>
+                                                    <action selector="applyForTestTapped" destination="eEu-YT-bAG" eventType="touchUpInside" id="jrF-vy-zJL"/>
                                                 </connections>
                                             </view>
                                             <view contentMode="scaleToFill" verticalHuggingPriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="dif-o7-21U">
