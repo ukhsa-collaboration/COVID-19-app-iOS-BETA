@@ -29,10 +29,6 @@ struct ContentURLs {
         currentStatusURLs(for: statusState).currentAdvice
     }
 
-    func nhsCoronavirus(for statusState: StatusState) -> URL {
-        currentStatusURLs(for: statusState).nhsCoronavirus
-    }
-
     private func currentStatusURLs(for statusState: StatusState) -> StatusURLs {
         switch statusState {
         case .ok: return status.ok
@@ -80,18 +76,15 @@ struct StatusesURLs: Decodable {
 
 struct StatusURLs: Decodable {
     let currentAdvice: URL
-    let nhsCoronavirus: URL
 
     enum CodingKeys: CodingKey {
         case currentAdvice
-        case nhsCoronavirus
     }
 
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
 
         currentAdvice = try values.decodeURL(forKey: .currentAdvice)
-        nhsCoronavirus = try values.decodeURL(forKey: .nhsCoronavirus)
     }
 }
 
