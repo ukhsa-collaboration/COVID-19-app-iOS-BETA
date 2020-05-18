@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1cY-Ra-QEB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1cY-Ra-QEB">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -135,6 +135,9 @@
                                             </view>
                                             <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TV5-Xb-NKH" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
                                                 <rect key="frame" x="296" y="63.5" width="38" height="32"/>
+                                                <accessibility key="accessibilityConfiguration">
+                                                    <bool key="isElement" value="NO"/>
+                                                </accessibility>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                 <state key="normal" title="Copy"/>
                                             </button>
@@ -143,12 +146,18 @@
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Your app reference code" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jv7-ab-7Y5" userLabel="Reference Label">
                                                         <rect key="frame" x="0.0" y="0.0" width="260" height="20.5"/>
+                                                        <accessibility key="accessibilityConfiguration">
+                                                            <bool key="isElement" value="NO"/>
+                                                        </accessibility>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="0000-0000" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lN1-AR-0MP" userLabel="Reference Code">
                                                         <rect key="frame" x="0.0" y="36.5" width="260" height="41"/>
+                                                        <accessibility key="accessibilityConfiguration">
+                                                            <bool key="isElement" value="NO"/>
+                                                        </accessibility>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -165,6 +174,10 @@
                                                 </constraints>
                                             </view>
                                         </subviews>
+                                        <accessibility key="accessibilityConfiguration" hint="Tap to copy the reference code">
+                                            <accessibilityTraits key="traits" button="YES"/>
+                                            <bool key="isElement" value="YES"/>
+                                        </accessibility>
                                         <constraints>
                                             <constraint firstItem="Y95-qT-spE" firstAttribute="centerY" secondItem="pUX-5H-FhL" secondAttribute="centerY" id="3iB-y0-n41"/>
                                             <constraint firstItem="Y95-qT-spE" firstAttribute="top" relation="greaterThanOrEqual" secondItem="pUX-5H-FhL" secondAttribute="top" constant="16" id="9Kq-o2-4v8"/>
