@@ -9,11 +9,11 @@
 import XCTest
 @testable import Sonar
 
-class LinkingIdViewControllerTests: XCTestCase {
+class ReferenceCodeViewControllerTests: XCTestCase {
 
     func testFetches() {
         let mgr = LinkingIdManagerDouble()
-        let vc = LinkingIdViewController.instantiate()
+        let vc = ReferenceCodeViewController.instantiate()
         vc.inject(linkingIdManager: mgr, uiQueue: QueueDouble())
         XCTAssertNotNil(vc.view)
         
@@ -25,7 +25,7 @@ class LinkingIdViewControllerTests: XCTestCase {
     
     func testHandlesSuccess() throws {
         let mgr = LinkingIdManagerDouble()
-        let vc = LinkingIdViewController.instantiate()
+        let vc = ReferenceCodeViewController.instantiate()
         vc.inject(linkingIdManager: mgr, uiQueue: QueueDouble())
         XCTAssertNotNil(vc.view)
 
@@ -40,7 +40,7 @@ class LinkingIdViewControllerTests: XCTestCase {
     
     func testHandlesFailure() throws {
         let mgr = LinkingIdManagerDouble()
-        let vc = LinkingIdViewController.instantiate()
+        let vc = ReferenceCodeViewController.instantiate()
         vc.inject(linkingIdManager: mgr, uiQueue: QueueDouble())
         XCTAssertNotNil(vc.view)
 
