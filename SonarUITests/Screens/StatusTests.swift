@@ -79,11 +79,11 @@ private extension ScreenTestCase {
     }
 
     var continuousCoughOption: XCUIElement {
-        app.buttons["Yes, I have a new continuous cough"]
+        app.buttons["Yes, I have at least one of these symptoms"]
     }
 
     var noContinuousCoughOption: XCUIElement {
-        app.buttons["No, I do not have a new continuous cough"]
+        app.buttons["No, I do not have either of these symptoms"]
     }
 
     var continueButton: XCUIElement {

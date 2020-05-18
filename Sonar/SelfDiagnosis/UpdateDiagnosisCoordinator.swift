@@ -60,7 +60,7 @@ class UpdateDiagnosisCoordinator: Coordinator {
             pageNumber: 2,
             pageCount: 2,
             questionTitle: questionTitle.localized,
-            questionDetail: "COUGH_DETAIL".localized,
+            questionDetail: isCheckin ? "COUGH_CHECKIN_DETAIL".localized : "COUGH_DETAIL".localized,
             questionError: "COUGH_ERROR".localized,
             questionYes: "COUGH_YES".localized,
             questionNo: "COUGH_NO".localized,
