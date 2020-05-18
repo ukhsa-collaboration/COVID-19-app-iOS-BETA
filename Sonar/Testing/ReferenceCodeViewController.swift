@@ -1,5 +1,5 @@
 //
-//  LinkingIdViewController.swift
+//  ReferenceCodeViewController.swift
 //  Sonar
 //
 //  Created by NHSX on 5/14/20.
@@ -14,14 +14,13 @@ private enum State {
     case succeeded(linkingId: String)
 }
 
-class LinkingIdViewController: UIViewController, Storyboarded {
-    static var storyboardName = "TestingInfo"
+class ReferenceCodeViewController: UIViewController, Storyboarded {
+    static var storyboardName = "ReferenceCode"
 
     @IBOutlet var fetchingWrapper: UIView!
     @IBOutlet var errorWrapper: UIView!
     @IBOutlet var referenceCodeWrapper: UIView!
     @IBOutlet var referenceCodeLabel: UILabel!
-    @IBOutlet var activityIndicator: UIActivityIndicatorView!
     private var linkingIdManager: LinkingIdManaging!
     private var uiQueue: TestableQueue!
     
@@ -52,7 +51,7 @@ class LinkingIdViewController: UIViewController, Storyboarded {
         }
     }
 
-    @IBAction func copyTapped(_ sender: ButtonWithDynamicType) {
+    @IBAction func copyTapped() {
         UIPasteboard.general.string = referenceCodeLabel.text
 
         // This is an arbitrary dev animation to fade the

@@ -20,8 +20,8 @@
 		097C93892447986B00E985CF /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097C93882447986B00E985CF /* TextField.swift */; };
 		097C94C9245B8146008A9695 /* LocaleProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097C94C8245B8146008A9695 /* LocaleProvider.swift */; };
 		097C94CB245B81E8008A9695 /* EnGbLocaleProviderDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097C94CA245B81E8008A9695 /* EnGbLocaleProviderDouble.swift */; };
-		0982F484246DE4B400E57EE5 /* LinkingIdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0982F483246DE4B400E57EE5 /* LinkingIdViewController.swift */; };
-		0982F486246DF05C00E57EE5 /* LinkingIdViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0982F485246DF05C00E57EE5 /* LinkingIdViewControllerTests.swift */; };
+		0982F484246DE4B400E57EE5 /* ReferenceCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0982F483246DE4B400E57EE5 /* ReferenceCodeViewController.swift */; };
+		0982F486246DF05C00E57EE5 /* ReferenceCodeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0982F485246DF05C00E57EE5 /* ReferenceCodeViewControllerTests.swift */; };
 		0982F488246DF80400E57EE5 /* LinkingIdManagerDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0982F487246DF80400E57EE5 /* LinkingIdManagerDouble.swift */; };
 		0983ACCD243E566800DBB336 /* ErrorForTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983ACCC243E566800DBB336 /* ErrorForTest.swift */; };
 		0983ACCF243E6D3800DBB336 /* NotificationObserverDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983ACCE243E6D3800DBB336 /* NotificationObserverDouble.swift */; };
@@ -153,6 +153,7 @@
 		89F06B352434AF9D0074C612 /* LogEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F06B342434AF9D0074C612 /* LogEvent.swift */; };
 		89F06B372434C35A0074C612 /* LoggerMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F06B362434C35A0074C612 /* LoggerMetadata.swift */; };
 		A1E7A0592420028B0078174D /* NHS Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1E7A0582420028B0078174D /* NHS Colors.xcassets */; };
+		AE29892C24729AD8004C4097 /* ReferenceCode.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE29892B24729AD8004C4097 /* ReferenceCode.storyboard */; };
 		AE2A5E502423C473007A4771 /* ContactEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2A5E4F2423C473007A4771 /* ContactEvent.swift */; };
 		AE2DCAA0241920B600A940FC /* BTLEBroadcaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2DCA9F241920B600A940FC /* BTLEBroadcaster.swift */; };
 		AEAFA67924602629009AEAEB /* StatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAFA67824602629009AEAEB /* StatusTests.swift */; };
@@ -295,8 +296,8 @@
 		097C93882447986B00E985CF /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		097C94C8245B8146008A9695 /* LocaleProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocaleProvider.swift; sourceTree = "<group>"; };
 		097C94CA245B81E8008A9695 /* EnGbLocaleProviderDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnGbLocaleProviderDouble.swift; sourceTree = "<group>"; };
-		0982F483246DE4B400E57EE5 /* LinkingIdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkingIdViewController.swift; sourceTree = "<group>"; };
-		0982F485246DF05C00E57EE5 /* LinkingIdViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkingIdViewControllerTests.swift; sourceTree = "<group>"; };
+		0982F483246DE4B400E57EE5 /* ReferenceCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceCodeViewController.swift; sourceTree = "<group>"; };
+		0982F485246DF05C00E57EE5 /* ReferenceCodeViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceCodeViewControllerTests.swift; sourceTree = "<group>"; };
 		0982F487246DF80400E57EE5 /* LinkingIdManagerDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkingIdManagerDouble.swift; sourceTree = "<group>"; };
 		0983ACCC243E566800DBB336 /* ErrorForTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorForTest.swift; sourceTree = "<group>"; };
 		0983ACCE243E6D3800DBB336 /* NotificationObserverDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationObserverDouble.swift; sourceTree = "<group>"; };
@@ -441,6 +442,7 @@
 		89F06B342434AF9D0074C612 /* LogEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogEvent.swift; sourceTree = "<group>"; };
 		89F06B362434C35A0074C612 /* LoggerMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerMetadata.swift; sourceTree = "<group>"; };
 		A1E7A0582420028B0078174D /* NHS Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "NHS Colors.xcassets"; sourceTree = "<group>"; };
+		AE29892B24729AD8004C4097 /* ReferenceCode.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ReferenceCode.storyboard; sourceTree = "<group>"; };
 		AE2A5E4F2423C473007A4771 /* ContactEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEvent.swift; sourceTree = "<group>"; };
 		AE2DCA9F241920B600A940FC /* BTLEBroadcaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTLEBroadcaster.swift; sourceTree = "<group>"; };
 		AEAFA67824602629009AEAEB /* StatusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusTests.swift; sourceTree = "<group>"; };
@@ -1093,7 +1095,8 @@
 				F604977124549B7B002B8503 /* LinkingIdManager.swift */,
 				F604976E24549729002B8503 /* LinkingIdRequest.swift */,
 				F60497762454A294002B8503 /* TestingInfoViewController.swift */,
-				0982F483246DE4B400E57EE5 /* LinkingIdViewController.swift */,
+				0982F483246DE4B400E57EE5 /* ReferenceCodeViewController.swift */,
+				AE29892B24729AD8004C4097 /* ReferenceCode.storyboard */,
 			);
 			path = Testing;
 			sourceTree = "<group>";
@@ -1102,7 +1105,7 @@
 			isa = PBXGroup;
 			children = (
 				F604977424549C95002B8503 /* LinkingIdManagerTests.swift */,
-				0982F485246DF05C00E57EE5 /* LinkingIdViewControllerTests.swift */,
+				0982F485246DF05C00E57EE5 /* ReferenceCodeViewControllerTests.swift */,
 			);
 			path = Testing;
 			sourceTree = "<group>";
@@ -1433,6 +1436,7 @@
 				F758B8C4242CC0EE003AE16D /* Status.storyboard in Resources */,
 				6FC63C3B241641BA007C8BF3 /* LaunchScreen.storyboard in Resources */,
 				AEC6A7BE241BD82900B0237A /* LogoStrapline.xib in Resources */,
+				AE29892C24729AD8004C4097 /* ReferenceCode.storyboard in Resources */,
 				A1E7A0592420028B0078174D /* NHS Colors.xcassets in Resources */,
 				8947F833245AD97A00C4F1BB /* Settings.bundle in Resources */,
 				F758B8BE242CB856003AE16D /* Localizable.strings in Resources */,
@@ -1547,7 +1551,7 @@
 				21C417CA242CB0A200DEF3E2 /* ConfirmRegistrationRequestTests.swift in Sources */,
 				F632792A2435323200CF7A42 /* PermissionsViewControllerTests.swift in Sources */,
 				136001DC2462EE1C001EFE2A /* SelfDiagnosisTests.swift in Sources */,
-				0982F486246DF05C00E57EE5 /* LinkingIdViewControllerTests.swift in Sources */,
+				0982F486246DF05C00E57EE5 /* ReferenceCodeViewControllerTests.swift in Sources */,
 				09E6E7E62452779B0069DFA8 /* SetupCheckerTests.swift in Sources */,
 				F7D62F292440D4CB004C32A2 /* SonarBroadcastPayloadGeneratorTests.swift in Sources */,
 				F72EBDA5243D094A009F9328 /* SecureBroadcastRotationKeyStorageTests.swift in Sources */,
@@ -1675,7 +1679,7 @@
 				214209BA242216B700C7BFF3 /* Persistence.swift in Sources */,
 				213C806C241A56430020EFA5 /* PermissionsViewController.swift in Sources */,
 				89F06B2F2434A62C0074C612 /* LoggingManager.swift in Sources */,
-				0982F484246DE4B400E57EE5 /* LinkingIdViewController.swift in Sources */,
+				0982F484246DE4B400E57EE5 /* ReferenceCodeViewController.swift in Sources */,
 				09CAA3662440F3B100CE93A6 /* PostcodeViewController.swift in Sources */,
 				F6BBE143246F5870005757BB /* WorkplaceGuidanceViewController.swift in Sources */,
 				F61695A12458B3C0006AABE3 /* StatusNotificationHandler.swift in Sources */,

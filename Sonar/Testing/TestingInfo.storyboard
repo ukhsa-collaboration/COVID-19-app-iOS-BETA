@@ -3,7 +3,7 @@
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -114,7 +114,7 @@
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jsk-yP-uwf">
                                                 <rect key="frame" x="16" y="638" width="343" height="128"/>
                                                 <connections>
-                                                    <segue destination="Ndp-0u-sId" kind="embed" id="2XV-Hu-2Lz"/>
+                                                    <segue destination="BWE-n5-Shn" kind="embed" id="0oK-RF-jVR"/>
                                                 </connections>
                                             </containerView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eGh-jY-LsA" userLabel="Spacer">
@@ -150,7 +150,7 @@ You can always find the latest code here, it should be unique for every test you
                                 <viewLayoutGuide key="frameLayoutGuide" id="gwV-eb-6U9"/>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" name="NHS Grey 5"/>
                         <constraints>
                             <constraint firstItem="i7g-54-jA7" firstAttribute="top" secondItem="L7M-kP-6XK" secondAttribute="top" id="TgK-FF-Hqi"/>
                             <constraint firstItem="i7g-54-jA7" firstAttribute="leading" secondItem="L7M-kP-6XK" secondAttribute="leading" id="WY6-hZ-300"/>
@@ -159,174 +159,20 @@ You can always find the latest code here, it should be unique for every test you
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="L7M-kP-6XK"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Testing information" id="K44-qv-yGH">
-                        <barButtonItem key="rightBarButtonItem" title="Close" id="FMq-gx-xYa">
-                            <connections>
-                                <segue destination="IWe-bN-JgZ" kind="unwind" unwindAction="unwindFromTestingInfoWithUnwindSegue:" id="WuZ-oS-lhY"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Testing information" id="K44-qv-yGH"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3rx-BK-2al" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <exit id="IWe-bN-JgZ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1065.217391304348" y="97.767857142857139"/>
         </scene>
-        <!--Linking Id View Controller-->
-        <scene sceneID="MXc-QY-DAA">
+        <!--ReferenceCode-->
+        <scene sceneID="dkg-3R-ouZ">
             <objects>
-                <viewController storyboardIdentifier="LinkingIdViewController" id="Ndp-0u-sId" customClass="LinkingIdViewController" customModule="Sonar" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lMa-Lg-Zo1">
-                        <rect key="frame" x="0.0" y="0.0" width="343" height="236"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="9ux-G2-41M" userLabel="Outside Stack View">
-                                <rect key="frame" x="0.0" y="0.0" width="343" height="236"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hQW-du-1mg" userLabel="Fetching wrapper">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="98"/>
-                                        <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="tHb-7A-KJM" userLabel="Fetching Stack View">
-                                                <rect key="frame" x="16" y="0.0" width="311" height="98"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="751" ambiguous="YES" text="Fetching reference code" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c4D-2N-Mpo">
-                                                        <rect key="frame" x="0.0" y="37" width="186.5" height="24"/>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M8S-Ea-Jaa" userLabel="Spacer that helps limit the spinner's size">
-                                                        <rect key="frame" x="186.5" y="0.0" width="100.5" height="98"/>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="8" id="lVS-Rg-wVS"/>
-                                                        </constraints>
-                                                    </view>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="24" placeholderIntrinsicHeight="infinite" image="Spinner" translatesAutoresizingMaskIntoConstraints="NO" id="0ca-Zm-xYY" customClass="SpinnerView" customModule="Sonar" customModuleProvider="target">
-                                                        <rect key="frame" x="287" y="37" width="24" height="24"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="24" id="Zij-6q-HzM"/>
-                                                            <constraint firstAttribute="width" secondItem="0ca-Zm-xYY" secondAttribute="height" multiplier="1:1" id="kld-OR-uqZ"/>
-                                                        </constraints>
-                                                    </imageView>
-                                                </subviews>
-                                                <constraints>
-                                                    <constraint firstItem="0ca-Zm-xYY" firstAttribute="height" relation="lessThanOrEqual" secondItem="c4D-2N-Mpo" secondAttribute="height" id="hu5-dz-Du8"/>
-                                                </constraints>
-                                            </stackView>
-                                        </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                        <constraints>
-                                            <constraint firstItem="tHb-7A-KJM" firstAttribute="top" secondItem="hQW-du-1mg" secondAttribute="top" id="GkD-mZ-bKE"/>
-                                            <constraint firstAttribute="trailing" secondItem="tHb-7A-KJM" secondAttribute="trailing" constant="16" id="JAz-Bo-uIn"/>
-                                            <constraint firstAttribute="bottom" secondItem="tHb-7A-KJM" secondAttribute="bottom" id="VmY-Ow-waF"/>
-                                            <constraint firstItem="tHb-7A-KJM" firstAttribute="leading" secondItem="hQW-du-1mg" secondAttribute="leading" constant="16" id="u8d-gt-gqa"/>
-                                        </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ue3-ad-pzT" userLabel="Error wrapper">
-                                        <rect key="frame" x="0.0" y="98" width="343" height="20.5"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error fetching reference code" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwU-V9-8IW" customClass="ErrorLabel" customModule="Sonar" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                        <constraints>
-                                            <constraint firstItem="hwU-V9-8IW" firstAttribute="leading" secondItem="Ue3-ad-pzT" secondAttribute="leading" id="8qi-4G-dOC"/>
-                                            <constraint firstAttribute="trailing" secondItem="hwU-V9-8IW" secondAttribute="trailing" id="9uj-Gs-uV2"/>
-                                            <constraint firstItem="hwU-V9-8IW" firstAttribute="top" secondItem="Ue3-ad-pzT" secondAttribute="top" id="j0f-Ns-vcW"/>
-                                            <constraint firstAttribute="bottom" secondItem="hwU-V9-8IW" secondAttribute="bottom" id="r2Q-UA-4t9"/>
-                                        </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TJa-nt-Qbb" userLabel="Reference code wrapper">
-                                        <rect key="frame" x="0.0" y="118.5" width="343" height="117.5"/>
-                                        <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Iqw-1K-vMf">
-                                                <rect key="frame" x="0.0" y="0.0" width="327" height="117.5"/>
-                                                <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L1P-JU-QWm" userLabel="Highlight">
-                                                        <rect key="frame" x="0.0" y="0.0" width="4" height="117.5"/>
-                                                        <color key="backgroundColor" name="NHS Blue"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="4" id="YyX-89-PC5"/>
-                                                        </constraints>
-                                                    </view>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="svn-zl-ppS">
-                                                        <rect key="frame" x="20" y="0.0" width="240" height="117.5"/>
-                                                        <subviews>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zXF-a4-F3H" userLabel="Spacer">
-                                                                <rect key="frame" x="0.0" y="0.0" width="240" height="16"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="16" id="Dcj-vn-cKA"/>
-                                                                </constraints>
-                                                            </view>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your app reference code" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l4k-AZ-2tC">
-                                                                <rect key="frame" x="0.0" y="24" width="240" height="20.5"/>
-                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                                <nil key="textColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reference code" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tct-bE-7Hd">
-                                                                <rect key="frame" x="0.0" y="52.5" width="240" height="41"/>
-                                                                <accessibility key="accessibilityConfiguration">
-                                                                    <accessibilityTraits key="traits" staticText="YES" header="YES"/>
-                                                                </accessibility>
-                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                                                <nil key="textColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J54-gi-6DL" userLabel="Spacer">
-                                                                <rect key="frame" x="0.0" y="101.5" width="240" height="16"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="16" id="8dP-Ds-2zB"/>
-                                                                </constraints>
-                                                            </view>
-                                                        </subviews>
-                                                    </stackView>
-                                                    <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iYR-1G-XgC" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
-                                                        <rect key="frame" x="276" y="0.0" width="51" height="117.5"/>
-                                                        <state key="normal" title="Copy"/>
-                                                        <connections>
-                                                            <action selector="copyTapped:" destination="Ndp-0u-sId" eventType="touchUpInside" id="HFa-N0-ieh"/>
-                                                        </connections>
-                                                    </button>
-                                                </subviews>
-                                            </stackView>
-                                        </subviews>
-                                        <color key="backgroundColor" name="NHS Grey 4"/>
-                                        <constraints>
-                                            <constraint firstItem="Iqw-1K-vMf" firstAttribute="top" secondItem="TJa-nt-Qbb" secondAttribute="top" id="N4w-MK-6Hu"/>
-                                            <constraint firstAttribute="bottom" secondItem="Iqw-1K-vMf" secondAttribute="bottom" id="PTj-wb-SKW"/>
-                                            <constraint firstItem="Iqw-1K-vMf" firstAttribute="leading" secondItem="TJa-nt-Qbb" secondAttribute="leading" id="VHz-Ip-JOU"/>
-                                            <constraint firstAttribute="trailing" secondItem="Iqw-1K-vMf" secondAttribute="trailing" constant="16" id="v6a-Oe-TiT"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                            </stackView>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="9ux-G2-41M" firstAttribute="leading" secondItem="lMa-Lg-Zo1" secondAttribute="leading" id="c0D-Bx-I5b"/>
-                            <constraint firstItem="9ux-G2-41M" firstAttribute="top" secondItem="lMa-Lg-Zo1" secondAttribute="top" id="dos-wV-DDb"/>
-                            <constraint firstAttribute="trailing" secondItem="9ux-G2-41M" secondAttribute="trailing" id="eSV-NB-nj4"/>
-                            <constraint firstAttribute="bottom" secondItem="9ux-G2-41M" secondAttribute="bottom" id="iEd-pK-P7h"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="BBp-M1-aed"/>
-                    </view>
-                    <size key="freeformSize" width="343" height="236"/>
-                    <connections>
-                        <outlet property="errorWrapper" destination="Ue3-ad-pzT" id="zUE-nK-WfI"/>
-                        <outlet property="fetchingWrapper" destination="hQW-du-1mg" id="ga7-ad-QHh"/>
-                        <outlet property="referenceCodeLabel" destination="tct-bE-7Hd" id="wYf-eT-sAG"/>
-                        <outlet property="referenceCodeWrapper" destination="TJa-nt-Qbb" id="Kza-tW-0JR"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hOb-7N-h4Z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="ReferenceCode" id="BWE-n5-Shn" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P0s-Ze-hWc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1064.8" y="644.97751124437787"/>
+            <point key="canvasLocation" x="1065" y="524"/>
         </scene>
         <!--TestingInfoNavigationController-->
         <scene sceneID="TrZ-k5-Qlx">
@@ -352,12 +198,8 @@ You can always find the latest code here, it should be unique for every test you
     </scenes>
     <resources>
         <image name="Linking_ID" width="184.5" height="184"/>
-        <image name="Spinner" width="24" height="24"/>
-        <namedColor name="NHS Blue">
-            <color red="0.0" green="0.36862745098039218" blue="0.72156862745098038" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="NHS Grey 4">
-            <color red="0.84705882352941175" green="0.8666666666666667" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="NHS Grey 5">
+            <color red="0.94117647058823528" green="0.95686274509803926" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
