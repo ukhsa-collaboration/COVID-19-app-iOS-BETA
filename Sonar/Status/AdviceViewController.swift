@@ -10,7 +10,6 @@ import UIKit
 
 class AdviceViewController: UIViewController, Storyboarded {
     static let storyboardName = "Status"
-    private let content = StatusContent.shared
 
     @IBOutlet weak var header: UILabel!
     @IBOutlet weak var detail: UILabel!

@@ -23,8 +23,7 @@ class WorkplaceGuidanceViewController: UIViewController {
     }
 
     @IBAction func linkTapped(_ sender: UIButton) {
-        let url = URL(string: "https://www.gov.uk/guidance/working-safely-during-coronavirus-covid-19")!
-        UIApplication.shared.open(url)
+        UIApplication.shared.open(ContentURLs.shared.workplaceGuidance)
     }
 
 }

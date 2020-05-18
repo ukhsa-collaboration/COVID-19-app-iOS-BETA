@@ -37,8 +37,7 @@ class ApplyForTestViewController: UIViewController {
     }
 
     @IBAction func applyForTestTapped(_ sender: UIButton) {
-        let url = URL(string: "https://self-referral.test-for-coronavirus.service.gov.uk/cta-start?ctaToken=token-value")!
-        UIApplication.shared.open(url)
+        UIApplication.shared.open(ContentURLs.shared.applyForTest)
     }
 
 }
