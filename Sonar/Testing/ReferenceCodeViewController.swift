@@ -40,6 +40,8 @@ class ReferenceCodeViewController: UIViewController, Storyboarded {
                 self.fetchingWrapper.isHidden = true
 
                 if let linkingId = linkingId {
+                    let referenceCode = linkingId.replacingOccurrences(of: "", with: " ")
+                    self.referenceCodeWrapper.accessibilityLabel = "Your app reference code is \(referenceCode)"
                     self.referenceCodeWrapper.isHidden = false
                     self.referenceCodeLabel.text = linkingId
                 } else {
