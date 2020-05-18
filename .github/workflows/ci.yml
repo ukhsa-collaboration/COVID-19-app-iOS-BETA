@@ -49,6 +49,11 @@ jobs:
     runs-on:
       - self-hosted
       - macos
+    strategy:
+      matrix:
+        run-config:
+          - { os: "13.4" }
+          - { os: "12.4" }
     steps:
       - name: Checkout Project
         uses: actions/checkout@01aeccc # v2.1.0
@@ -79,7 +84,7 @@ jobs:
           xcodebuild
           -scheme Sonar
           test
-          -destination "platform=iOS Simulator,OS=13.4,name=iPhone 11"
+          -destination "platform=iOS Simulator,OS=${{ matrix.run-config['os'] }},name=iPhone 11"
           -showBuildTimingSummary
           -allowProvisioningUpdates
           -resultBundlePath TestResults.xcresult
