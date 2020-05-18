@@ -23,6 +23,16 @@ class StatusViewControllerTests: XCTestCase {
         XCTAssertTrue(vc.registrationRetryButton?.isHidden ?? false)
     }
     
+    func testUnhidingNotificationStatusViewBeforeViewDidLoadShowsNotificationStatusView() {
+        let vc = makeViewController(persistence: PersistenceDouble(registration: Registration.fake), loadView: false)
+        vc.hideNotificationStatusView = false
+        
+        XCTAssertNotNil(vc.view)
+        vc.viewWillAppear(false)
+        
+        XCTAssertFalse(vc.notificationsStatusView.isHidden)
+    }
+    
     func testShowsInitialInProgressStatus() {
         let vc = makeViewController(persistence: PersistenceDouble(registration: nil))
         
@@ -175,7 +185,8 @@ fileprivate func makeViewController(
     persistence: Persisting = PersistenceDouble(),
     registrationService: RegistrationService = RegistrationServiceDouble(),
     notificationCenter: NotificationCenter = NotificationCenter(),
-    statusStateMachine: StatusStateMachining = StatusStateMachiningDouble()
+    statusStateMachine: StatusStateMachining = StatusStateMachiningDouble(),
+    loadView: Bool = true
 ) -> StatusViewController {
     let vc = StatusViewController.instantiate()
     vc.inject(
@@ -186,7 +197,9 @@ fileprivate func makeViewController(
         registrationService: registrationService,
         notificationCenter: notificationCenter
     )
-    XCTAssertNotNil(vc.view)
-    vc.viewWillAppear(false)
+    if loadView {
+        XCTAssertNotNil(vc.view)
+        vc.viewWillAppear(false)
+    }
     return vc
 }

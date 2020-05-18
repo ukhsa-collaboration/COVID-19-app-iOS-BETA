@@ -111,11 +111,13 @@ class RootViewController: UIViewController {
                         guard let self = self else { return }
                         self.monitor.report(.onboardingCompleted)
                         self.show(viewController: navigationController)
+                        self.checkSetup()
                     }
                     
                     self.show(viewController: onboardingViewController)
                 } else {
                     self.show(viewController: navigationController)
+                    self.checkSetup()
                 }
             }
         }
@@ -128,9 +130,16 @@ class RootViewController: UIViewController {
             return
         }
         
+        checkSetup()
+    }
+        
+    private func checkSetup() {
         setupChecker.check { problem in
             self.uiQueue.sync {
                 self.dismissSetupError()
+                
+                self.statusViewController.hideNotificationStatusView = (problem != .notificationPermissions)
+                
                 guard let problem = problem else { return }
                 
                 switch problem {

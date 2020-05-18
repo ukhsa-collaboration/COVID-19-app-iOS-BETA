@@ -110,6 +110,60 @@ class RootViewControllerTests: TestCase {
         XCTAssertNotNil(rootVC.presentedViewController as? BluetoothPermissionDeniedViewController)
     }
     
+    func testPermissionDeniedBannerIsHiddenByDefault() throws {
+        onboardingCoordinator.isOnboardingRequired = false
+        XCTAssertNotNil(rootVC.view) // trigger viewDidLoad before we call show
+        
+        let navigationController = try XCTUnwrap(rootVC.children.first as? UINavigationController)
+        let statusViewController = try XCTUnwrap(navigationController.topViewController as? StatusViewController)
+        
+        XCTAssertNotNil(statusViewController.view) // trigger viewDidLoad before checking notificationsStatusView
+        XCTAssert(statusViewController.notificationsStatusView!.isHidden)
+    }
+    
+    func testBecomeActiveShowsPermissionDeniedBannerWhenNoNotificationPermission() throws {
+        onboardingCoordinator.isOnboardingRequired = false
+        persistence.registration = .fake
+        authorizationManager.bluetooth = .allowed
+        bluetoothNursery.stateObserver = BluetoothStateObserver(initialState: .poweredOn)
+
+        XCTAssertNotNil(rootVC.view) // trigger viewDidLoad before we call show
+        
+        let navigationController = try XCTUnwrap(rootVC.children.first as? UINavigationController)
+        let statusViewController = try XCTUnwrap(navigationController.topViewController as? StatusViewController)
+
+        XCTAssertNotNil(statusViewController.view) // trigger viewDidLoad before checking notificationsStatusView
+
+        notificationCenter.post(name: UIApplication.didBecomeActiveNotification, object: nil)
+        authorizationManager.notificationsCompletion?(.denied)
+        
+        XCTAssertFalse(statusViewController.notificationsStatusView!.isHidden)
+    }
+
+    func testBecomeActiveHidesNotificationPermissionDeniedBannerIfPermissionNowGranted() throws {
+        onboardingCoordinator.isOnboardingRequired = false
+        persistence.registration = .fake
+        authorizationManager.bluetooth = .allowed
+        bluetoothNursery.stateObserver = BluetoothStateObserver(initialState: .poweredOn)
+
+        XCTAssertNotNil(rootVC.view) // trigger viewDidLoad before we call show
+        
+        let navigationController = try XCTUnwrap(rootVC.children.first as? UINavigationController)
+        let statusViewController = try XCTUnwrap(navigationController.topViewController as? StatusViewController)
+        
+        XCTAssertNotNil(statusViewController.view) // trigger viewDidLoad before checking notificationsStatusView
+        
+        notificationCenter.post(name: UIApplication.didBecomeActiveNotification, object: nil)
+        authorizationManager.notificationsCompletion?(.denied)
+
+        XCTAssertFalse(statusViewController.notificationsStatusView!.isHidden)
+
+        notificationCenter.post(name: UIApplication.didBecomeActiveNotification, object: nil)
+        authorizationManager.notificationsCompletion?(.allowed)
+
+        XCTAssertTrue(statusViewController.notificationsStatusView!.isHidden)
+    }
+
     func testBecomesActiveShowsBluetoothOffWhenBluetoothOff() {
         onboardingCoordinator.isOnboardingRequired = false
         bluetoothNursery.startBluetooth(registration: nil)
