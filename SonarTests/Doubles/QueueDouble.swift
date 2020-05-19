@@ -11,8 +11,10 @@ import Foundation
 
 class QueueDouble: TestableQueue {
     var scheduledBlock: (() -> Void)?
+    var deadline: DispatchTime?
     
     func asyncAfter(deadline: DispatchTime, execute: @escaping @convention(block) () -> Void) {
+        self.deadline = deadline
         scheduledBlock = execute
     }
 
