@@ -12,7 +12,7 @@ enum StatusState: Equatable {
     struct Ok: Codable, Equatable {}
 
     struct Symptomatic: Codable, Equatable {
-        let symptoms: Set<Symptom>
+        let symptoms: Symptoms
         let startDate: Date
 
         var expiryDate: Date {
@@ -27,7 +27,7 @@ enum StatusState: Equatable {
     }
 
     struct Checkin: Codable, Equatable {
-        let symptoms: Set<Symptom>
+        let symptoms: Symptoms
         let checkinDate: Date
     }
 

@@ -15,19 +15,19 @@ protocol Coordinator {
 class SelfDiagnosisCoordinator: Coordinator {
     let navigationController: UINavigationController
     let statusStateMachine: StatusStateMachining
-    let completion: (Set<Symptom>) -> Void
+    let completion: (Symptoms) -> Void
 
     init(
         navigationController: UINavigationController,
         statusStateMachine: StatusStateMachining,
-        completion: @escaping (Set<Symptom>) -> Void
+        completion: @escaping (Symptoms) -> Void
     ) {
         self.navigationController = navigationController
         self.statusStateMachine = statusStateMachine
         self.completion = completion
     }
     
-    var symptoms = Set<Symptom>()
+    var symptoms = Symptoms()
 
     static let pageCount = 6
     

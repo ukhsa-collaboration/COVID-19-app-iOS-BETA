@@ -13,16 +13,16 @@ import Logging
 class SymptomsSummaryViewController: UIViewController, Storyboarded {
     static let storyboardName = "SelfDiagnosis"
 
-    private var symptoms: Set<Symptom>!
+    private var symptoms: Symptoms!
     private var statusStateMachine: StatusStateMachining!
-    private var completion: ((Set<Symptom>) -> Void)!
+    private var completion: ((Symptoms) -> Void)!
     private var pageNumber: Int!
 
     func inject(
         pageNumber: Int,
-        symptoms: Set<Symptom>,
+        symptoms: Symptoms,
         statusStateMachine: StatusStateMachining,
-        completion: @escaping (Set<Symptom>) -> Void
+        completion: @escaping (Symptoms) -> Void
     ) {
         self.statusStateMachine = statusStateMachine
         self.completion = completion

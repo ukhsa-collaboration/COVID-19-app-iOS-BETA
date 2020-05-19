@@ -13,7 +13,7 @@ class SubmitSymptomsViewControllerTests: TestCase {
 
     var vc: SubmitSymptomsViewController!
     var statusStateMachine: StatusStateMachiningDouble!
-    var completionSymptoms: Set<Symptom>?
+    var completionSymptoms: Symptoms?
 
     override func setUp() {
         super.setUp()
@@ -109,7 +109,7 @@ class SubmitSymptomsViewControllerTests: TestCase {
     }
 
     private func makeSubject(
-        symptoms: Set<Symptom> = [],
+        symptoms: Symptoms = [],
         startDate: Date = Date()
     ) {
         vc = SubmitSymptomsViewController.instantiate()

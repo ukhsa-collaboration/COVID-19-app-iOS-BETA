@@ -67,11 +67,11 @@ class SetStatusStateViewController: UITableViewController {
         }
     }
 
-    private var symptoms: Set<Symptom> {
-        var set: Set<Symptom> = []
-        if let temperature = temperature, temperature { set.insert(.temperature) }
-        if let cough = cough, cough { set.insert(.cough) }
-        return set
+    private var symptoms: Symptoms {
+        var symptoms: Symptoms = []
+        if let temperature = temperature, temperature { symptoms.insert(.temperature) }
+        if let cough = cough, cough { symptoms.insert(.cough) }
+        return symptoms
     }
 
     private var date: Date? {

@@ -13,9 +13,9 @@ import Logging
 protocol StatusStateMachining {
     var state: StatusState { get }
 
-    func selfDiagnose(symptoms: Set<Symptom>, startDate: Date) throws
+    func selfDiagnose(symptoms: Symptoms, startDate: Date) throws
     func tick()
-    func checkin(symptoms: Set<Symptom>)
+    func checkin(symptoms: Symptoms)
     func exposed()
 }
 
@@ -71,7 +71,7 @@ class StatusStateMachine: StatusStateMachining {
         self.dateProvider = dateProvider
     }
 
-    func selfDiagnose(symptoms: Set<Symptom>, startDate: Date) throws {
+    func selfDiagnose(symptoms: Symptoms, startDate: Date) throws {
         guard !symptoms.isEmpty else {
             assertionFailure("Self-diagnosing with no symptoms is not allowed")
             return
@@ -121,7 +121,7 @@ class StatusStateMachine: StatusStateMachining {
         }
     }
 
-    func checkin(symptoms: Set<Symptom>) {
+    func checkin(symptoms: Symptoms) {
         userNotificationCenter.removePendingNotificationRequests(withIdentifiers: [checkinNotificationIdentifier])
 
         switch state {

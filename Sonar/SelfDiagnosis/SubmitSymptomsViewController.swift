@@ -14,16 +14,16 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
 
     // MARK: - Dependencies
 
-    private var symptoms: Set<Symptom>!
+    private var symptoms: Symptoms!
     private var startDate: Date!
     private var statusStateMachine: StatusStateMachining!
-    private var completion: ((Set<Symptom>) -> Void)!
+    private var completion: ((Symptoms) -> Void)!
 
     func inject(
-        symptoms: Set<Symptom>,
+        symptoms: Symptoms,
         startDate: Date,
         statusStateMachine: StatusStateMachining,
-        completion: @escaping (Set<Symptom>) -> Void
+        completion: @escaping (Symptoms) -> Void
     ) {
         self.symptoms = symptoms
         self.startDate = startDate

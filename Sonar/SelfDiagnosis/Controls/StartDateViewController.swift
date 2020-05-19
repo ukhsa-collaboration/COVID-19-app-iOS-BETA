@@ -16,10 +16,10 @@ protocol StartDateViewControllerDelegate: class {
 
 class StartDateViewController: UIViewController {
 
-    private var symptoms: Set<Symptom>!
+    private var symptoms: Symptoms!
     weak var delegate: StartDateViewControllerDelegate?
 
-    func inject(symptoms: Set<Symptom>, delegate: StartDateViewControllerDelegate) {
+    func inject(symptoms: Symptoms, delegate: StartDateViewControllerDelegate) {
         self.symptoms = symptoms
         self.delegate = delegate
     }
