@@ -226,7 +226,6 @@
 		F6DA0A3E246A123B001F0B48 /* StatusStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DA0A3D246A123B001F0B48 /* StatusStateTests.swift */; };
 		F6E2E597246B287B009D80DF /* StatusStateMachiningDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E2E596246B287B009D80DF /* StatusStateMachiningDouble.swift */; };
 		F6EE8363246306490076AF97 /* SmartInvertBorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EE8362246306490076AF97 /* SmartInvertBorderView.swift */; };
-		F6EEC3B82448DD2400172820 /* SelfDiagnosis.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EEC3B72448DD2400172820 /* SelfDiagnosis.swift */; };
 		F6F05A242433BEC000FF4B72 /* OnboardingCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F05A232433BEC000FF4B72 /* OnboardingCoordinatorTests.swift */; };
 		F6F05A262433C09200FF4B72 /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F05A252433C09200FF4B72 /* OnboardingCoordinator.swift */; };
 		F6F05A282433C55300FF4B72 /* AuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F05A272433C55300FF4B72 /* AuthorizationManager.swift */; };
@@ -534,7 +533,6 @@
 		F6DA0A3D246A123B001F0B48 /* StatusStateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusStateTests.swift; sourceTree = "<group>"; };
 		F6E2E596246B287B009D80DF /* StatusStateMachiningDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusStateMachiningDouble.swift; sourceTree = "<group>"; };
 		F6EE8362246306490076AF97 /* SmartInvertBorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartInvertBorderView.swift; sourceTree = "<group>"; };
-		F6EEC3B72448DD2400172820 /* SelfDiagnosis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfDiagnosis.swift; sourceTree = "<group>"; };
 		F6F05A232433BEC000FF4B72 /* OnboardingCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinatorTests.swift; sourceTree = "<group>"; };
 		F6F05A252433C09200FF4B72 /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
 		F6F05A272433C55300FF4B72 /* AuthorizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationManager.swift; sourceTree = "<group>"; };
@@ -1169,7 +1167,6 @@
 				F68B89EC243CFF2600F369A9 /* SelfDiagnosis.storyboard */,
 				134470AB2454D4DA001A0AD9 /* CheckinCoordinator.swift */,
 				13F4AE872451EB330082A46D /* QuestionSymptomsViewController.swift */,
-				F6EEC3B72448DD2400172820 /* SelfDiagnosis.swift */,
 				134470AC2454D4DA001A0AD9 /* SelfDiagnosisCoordinator.swift */,
 				F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */,
 				F6334E462474559000421B4C /* Symptoms.swift */,
@@ -1696,7 +1693,6 @@
 				898FE859243B4FE300210775 /* AuthorizationManaging.swift in Sources */,
 				F652F72E244E472E00D97950 /* SymptomsPromptViewController.swift in Sources */,
 				F67C5154243E4D2F008E2945 /* AnswerButton.swift in Sources */,
-				F6EEC3B82448DD2400172820 /* SelfDiagnosis.swift in Sources */,
 				0964B37D246328A20022EF97 /* UIView+Scrolling.swift in Sources */,
 				6FC63C31241641B8007C8BF3 /* AppDelegate.swift in Sources */,
 				F600A60224297A8E0038DF57 /* RegistrationRequest.swift in Sources */,
