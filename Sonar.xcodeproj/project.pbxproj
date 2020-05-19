@@ -11,6 +11,7 @@
 		090B1871243552C300870B5D /* UserNotificationCenterDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090B1870243552C300870B5D /* UserNotificationCenterDouble.swift */; };
 		090DEE10244F8BF600268170 /* BluetoothPermissionDeniedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090DEE0F244F8BF600268170 /* BluetoothPermissionDeniedViewController.swift */; };
 		092BB5AB244622200036B30E /* RootViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092BB5AA244622200036B30E /* RootViewControllerTests.swift */; };
+		0937F78F247461D40010FB3B /* ReferenceCodeContainerViewControllerBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0937F78E247461D40010FB3B /* ReferenceCodeContainerViewControllerBase.swift */; };
 		0938D9062474473E006FAADF /* ApplyForTestContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0938D9052474473E006FAADF /* ApplyForTestContainerViewController.swift */; };
 		0938D9092474484B006FAADF /* ApplyForTestContainerViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0938D9082474484B006FAADF /* ApplyForTestContainerViewControllerTests.swift */; };
 		095A91182434FF1500ED6369 /* ApplicationDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095A91172434FF1500ED6369 /* ApplicationDouble.swift */; };
@@ -295,6 +296,7 @@
 		090B1870243552C300870B5D /* UserNotificationCenterDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationCenterDouble.swift; sourceTree = "<group>"; };
 		090DEE0F244F8BF600268170 /* BluetoothPermissionDeniedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothPermissionDeniedViewController.swift; sourceTree = "<group>"; };
 		092BB5AA244622200036B30E /* RootViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewControllerTests.swift; sourceTree = "<group>"; };
+		0937F78E247461D40010FB3B /* ReferenceCodeContainerViewControllerBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceCodeContainerViewControllerBase.swift; sourceTree = "<group>"; };
 		0938D9052474473E006FAADF /* ApplyForTestContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyForTestContainerViewController.swift; sourceTree = "<group>"; };
 		0938D9082474484B006FAADF /* ApplyForTestContainerViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyForTestContainerViewControllerTests.swift; sourceTree = "<group>"; };
 		095A91172434FF1500ED6369 /* ApplicationDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationDouble.swift; sourceTree = "<group>"; };
@@ -1119,6 +1121,7 @@
 				AE29892B24729AD8004C4097 /* ReferenceCode.storyboard */,
 				097F054624733FC200E633C8 /* ReferenceCodeLoadingViewController.swift */,
 				09CDA11724734FB100C8684D /* ReferenceCodeViewController.swift */,
+				0937F78E247461D40010FB3B /* ReferenceCodeContainerViewControllerBase.swift */,
 			);
 			path = Testing;
 			sourceTree = "<group>";
@@ -1622,6 +1625,7 @@
 				F697806A246DA9EF002CC50B /* SetStatusStateViewController.swift in Sources */,
 				2192888724640B5600691FDD /* ContactEventDetailTableViewController.swift in Sources */,
 				F613936E243FA82B003447E8 /* Appearance.swift in Sources */,
+				0937F78F247461D40010FB3B /* ReferenceCodeContainerViewControllerBase.swift in Sources */,
 				F6F05A342434344200FF4B72 /* StartNowViewController.swift in Sources */,
 				F74BAC56245B35910023FFC2 /* SelfsizingTextView.swift in Sources */,
 				219C7B74245AB88100952B4D /* BroadcastEncrypterProvider.swift in Sources */,

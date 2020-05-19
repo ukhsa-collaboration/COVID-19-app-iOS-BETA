@@ -8,46 +8,19 @@
 
 import UIKit
 
-class ApplyForTestContainerViewController: UIViewController, Storyboarded {
+class ApplyForTestContainerViewController: ReferenceCodeContainerViewControllerBase, Storyboarded {
     static let storyboardName = "ApplyForTest"
-
-    private var linkingIdManager: LinkingIdManaging!
-    private var uiQueue: TestableQueue!
-    private var urlOpener: TestableUrlOpener!
-    private var started = false
     
+    private var urlOpener: TestableUrlOpener!
+
     func inject(linkingIdManager: LinkingIdManaging, uiQueue: TestableQueue, urlOpener: TestableUrlOpener) {
-        self.linkingIdManager = linkingIdManager
-        self.uiQueue = uiQueue
+        inject(linkingIdManager: linkingIdManager, uiQueue: uiQueue)
         self.urlOpener = urlOpener
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        guard !started else { return }
-
-        show(viewController: ReferenceCodeLoadingViewController.instantiate())
-
-        linkingIdManager.fetchLinkingId { linkingId in
-            self.uiQueue.async {
-                let applyVc = ApplyForTestViewController.instantiate()
-                applyVc.inject(urlOpener: self.urlOpener, referenceCode: linkingId)
-                self.show(viewController: applyVc)
-
-                UIAccessibility.post(notification: .layoutChanged, argument: self.view)
-            }
-        }
+    override func instantiatePostLoadViewController(referenceCode: String?) -> UIViewController {
+        let applyVc = ApplyForTestViewController.instantiate()
+        applyVc.inject(urlOpener: self.urlOpener, referenceCode: referenceCode)
+        return applyVc
     }
-    
-    func show(viewController newChild: UIViewController) {
-        children.first?.willMove(toParent: nil)
-        children.first?.viewIfLoaded?.removeFromSuperview()
-        children.first?.removeFromParent()
-        addChild(newChild)
-        
-        newChild.view.frame = view.bounds
-        view.addSubview(newChild.view)
-        newChild.didMove(toParent: self)
-    }
-
 }
