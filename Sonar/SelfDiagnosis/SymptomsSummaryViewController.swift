@@ -16,23 +16,18 @@ class SymptomsSummaryViewController: UIViewController, Storyboarded {
     private var symptoms: Set<Symptom>!
     private var statusStateMachine: StatusStateMachining!
     private var completion: ((Set<Symptom>) -> Void)!
+    private var pageNumber: Int?
 
     func inject(
-        hasHighTemperature: Bool,
-        hasNewCough: Bool,
+        pageNumber: Int,
+        symptoms: Set<Symptom>,
         statusStateMachine: StatusStateMachining,
         completion: @escaping (Set<Symptom>) -> Void
     ) {
         self.statusStateMachine = statusStateMachine
         self.completion = completion
-
-        symptoms = Set()
-        if hasHighTemperature {
-            symptoms.insert(.temperature)
-        }
-        if hasNewCough {
-            symptoms.insert(.cough)
-        }
+        self.symptoms = symptoms
+        self.pageNumber = pageNumber
     }
 
     // MARK: - UIKit
@@ -41,15 +36,14 @@ class SymptomsSummaryViewController: UIViewController, Storyboarded {
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     @IBOutlet weak var haveSymptomsView: UIStackView!
     @IBOutlet weak var checkAnswersLabel: UILabel!
-    @IBOutlet weak var temperatureCheckLabel: UILabel!
-    @IBOutlet weak var coughCheckLabel: UILabel!
-    @IBOutlet weak var thankYouLabel: UILabel!
     @IBOutlet weak var noSymptomsView: UIStackView!
     @IBOutlet weak var noSymptomsLabel: UILabel!
     @IBOutlet weak var noSymptomsInfoLabel: UILabel!
     @IBOutlet weak var noSymptomsInfoButton: UIButton!
     @IBOutlet weak var button: PrimaryButton!
-
+    @IBOutlet weak var pageNumberLabel: UILabel!
+    @IBOutlet weak var checkAnswersStackView: UIStackView!
+    
     var startDateViewController: StartDateViewController!
     private var startDate: Date?
 
@@ -81,8 +75,6 @@ class SymptomsSummaryViewController: UIViewController, Storyboarded {
 
         haveSymptomsView.isHidden = symptoms.isEmpty
         checkAnswersLabel.text = "SYMPTOMS_SUMMARY_CHECK_ANSWERS".localized
-        temperatureCheckLabel.text = "SYMPTOMS_SUMMARY_\(symptoms.contains(.temperature) ? "HAVE" : "NO")_TEMPERATURE".localized
-        coughCheckLabel.text = "SYMPTOMS_SUMMARY_\(symptoms.contains(.cough) ? "HAVE" : "NO")_COUGH".localized
 
         noSymptomsView.isHidden = !symptoms.isEmpty
         noSymptomsLabel.text = "SYMPTOMS_SUMMARY_NO_SYMPTOMS".localized
@@ -92,6 +84,41 @@ class SymptomsSummaryViewController: UIViewController, Storyboarded {
 
         let buttonTitle = symptoms.isEmpty ? "SYMPTOMS_SUMMARY_DONE" : "SYMPTOMS_SUMMARY_CONTINUE"
         button.setTitle(buttonTitle.localized, for: .normal)
+    
+        // This assumes this is the last page of the questionnaire
+        pageNumber.map { pageNumberLabel.text = "\($0)/\($0)"  }
+        
+        let symptomTexts = [
+            "SYMPTOMS_SUMMARY_\(symptoms.contains(.temperature) ? "HAVE" : "NO")_TEMPERATURE".localized,
+            "SYMPTOMS_SUMMARY_\(symptoms.contains(.cough) ? "HAVE" : "NO")_COUGH".localized,
+            "SYMPTOMS_SUMMARY_\(symptoms.contains(.smellLoss) ? "HAVE" : "NO")_SMELL_LOSS".localized,
+            "SYMPTOMS_SUMMARY_\(symptoms.contains(.fever) ? "HAVE" : "NO")_FEVER".localized,
+            "SYMPTOMS_SUMMARY_\(symptoms.contains(.nausea) ? "HAVE" : "NO")_NAUSEA".localized,
+        ]
+        
+        symptomTexts.forEach { symptomText in
+            let divider = UIView()
+            divider.backgroundColor = UIColor(named: "NHS Grey 3")
+            checkAnswersStackView.addArrangedSubview(divider)
+            
+            let label = UILabel()
+            label.text = symptomText
+            label.sizeToFit()
+            label.translatesAutoresizingMaskIntoConstraints = false
+
+            let view = UIView()
+            view.addSubview(label)
+            
+            checkAnswersStackView.addArrangedSubview(view)
+            
+            NSLayoutConstraint.activate([
+                divider.heightAnchor.constraint(equalToConstant: 1),
+                label.topAnchor.constraint(equalTo: view.topAnchor, constant: 10),
+                label.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10),
+                view.bottomAnchor.constraint(equalTo: label.bottomAnchor, constant: 10),
+                view.rightAnchor.constraint(equalTo: label.rightAnchor, constant: 10)
+            ])
+        }
     }
 
     @IBAction func noSymptomsInfoTapped(_ sender: ButtonWithDynamicType) {

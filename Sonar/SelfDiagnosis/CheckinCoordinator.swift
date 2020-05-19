@@ -51,10 +51,10 @@ class CheckinCoordinator: Coordinator {
     }
 
     func openCoughView() {
-        let (title, details) = {
+        let (title, detail) = {
             checkin.symptoms.contains(.cough)
-            ? ("COUGH_CHECKIN_QUESTION", ["COUGH_CONTINUOUS_DETAIL"])
-            : ("COUGH_QUESTION", ["COUGH_NEW_DETAIL", "COUGH_CONTINUOUS_DETAIL"])
+            ? ("COUGH_CHECKIN_QUESTION", "COUGH_CHECKIN_DETAIL")
+            : ("COUGH_QUESTION", "COUGH_DETAIL")
         }()
 
         let vc = QuestionSymptomsViewController.instantiate()
@@ -62,7 +62,7 @@ class CheckinCoordinator: Coordinator {
             pageNumber: 2,
             pageCount: 2,
             questionTitle: title.localized,
-            questionDetail: details.map { $0.localized }.joined(separator: ""),
+            questionDetail: detail.localized,
             questionError: "COUGH_ERROR".localized,
             questionYes: "COUGH_YES".localized,
             questionNo: "COUGH_NO".localized,

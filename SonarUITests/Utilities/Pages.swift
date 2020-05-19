@@ -18,8 +18,8 @@ extension PageChainable {
     }
 
     @discardableResult
-    func assert(expression: (Self) -> Bool) -> Self {
-        XCTAssert(expression(self))
+    func assert(file: StaticString = #file, line: UInt = #line, expression: (Self) -> Bool) -> Self {
+        XCTAssert(expression(self), file: file, line: line)
         return self
     }
 
@@ -93,6 +93,39 @@ class SymptomsCoughPage : Page {
 
     func tapNoCoughOption() -> Self { return tapButton("No, I do not have a new continuous cough") }
 
+    func tapContinue() -> SymptomsSmellPage {
+        app.buttons["Continue"].tap()
+        return SymptomsSmellPage(app)
+    }
+}
+
+class SymptomsSmellPage : Page {
+    func tapSmellLossOption() -> Self { return tapButton("Yes, I have lost my sense of smell") }
+
+    func tapNoSmellLossOption() -> Self { return tapButton("No, I have not lost my sense of smell") }
+
+    func tapContinue() -> SymptomsFeverPage {
+        app.buttons["Continue"].tap()
+        return SymptomsFeverPage(app)
+    }
+}
+
+class SymptomsFeverPage : Page {
+    func tapHaveSymptomsOption() -> Self { return tapButton("Yes, I have at least one of these symptoms") }
+
+    func tapNoSymptomsOption() -> Self { return tapButton("No, I do not have any of these symptoms") }
+
+    func tapContinue() -> SymptomsNauseaPage {
+        app.buttons["Continue"].tap()
+        return SymptomsNauseaPage(app)
+    }
+}
+
+class SymptomsNauseaPage : Page {
+    func tapHaveSymptomsOption() -> Self { return tapButton("Yes, I have at least one of these symptoms") }
+
+    func tapNoSymptomsOption() -> Self { return tapButton("No, I do not have any of these symptoms") }
+
     func tapContinue() -> SymptomsAdvicePage {
         app.buttons["Continue"].tap()
         return SymptomsAdvicePage(app)
@@ -102,6 +135,14 @@ class SymptomsCoughPage : Page {
 class SymptomsAdvicePage : Page {
     var hasNoSymptoms: Bool {
         app.staticTexts["You do not appear to have coronavirus symptoms"].exists
+    }
+    
+    var hasHighTemperature: Bool {
+        app.staticTexts["I have a high temperature"].exists
+    }
+    
+    var hasNausea: Bool {
+        app.staticTexts["I have at least one of these symptoms: diarrhoea, nausea, vomiting or loss of appetite"].exists
     }
 
     func tapDone() -> StatusOkPage {

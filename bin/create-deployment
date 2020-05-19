@@ -7,7 +7,8 @@ DATA=$(cat <<EOF
   "ref":"${DEPLOYMENT_SHA}",
   "required_contexts": [],
   "payload":"${DEPLOYMENT_PAYLOAD:-}",
-  "environment":"${1}"
+  "environment":"${1}",
+  "auto_merge": false
 }
 EOF
 )

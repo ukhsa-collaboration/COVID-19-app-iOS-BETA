@@ -64,18 +64,7 @@ class StartDateViewController: UIViewController {
 
         view.translatesAutoresizingMaskIntoConstraints = false
 
-        let question: String
-        if symptoms.count > 1 {
-            question = "SYMPTOMS_START_QUESTION"
-        } else if symptoms == [.temperature] {
-            question = "TEMPERATURE_START_QUESTION"
-        } else if symptoms == [.cough] {
-            question = "COUGH_START_QUESTION"
-        } else {
-            logger.critical("Unknown symptoms: \(String(describing: symptoms))")
-            question = "SYMPTOMS_START_QUESTION"
-        }
-        label.text = question.localized
+        label.text = "SYMPTOMS_START_QUESTION".localized
 
         errorLabel.text = "SELECT_START_DATE_ERROR".localized
 
