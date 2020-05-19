@@ -258,7 +258,7 @@ class StatusViewController: UIViewController, Storyboarded {
         let title = "NOTIFICATIONS_DISABLED_ALERT_TITLE".localized
         let message = "NOTIFICATIONS_DISABLED_ALERT_MESSAGE".localized
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let alertAction = UIAlertAction(title: "Ok", style: .default)
+        let alertAction = UIAlertAction(title: "NOTIFICATIONS_DISABLED_ALERT_OK".localized, style: .default)
         alertController.addAction(alertAction)
         
         present(alertController, animated: true, completion: nil)

@@ -54,3 +54,4 @@
 "DISABLE_NOTIFICATIONS_STATUS_VIEW" = "No thanks";
 "NOTIFICATIONS_DISABLED_ALERT_TITLE" = "Notifications disabled";
 "NOTIFICATIONS_DISABLED_ALERT_MESSAGE" = "You can enable notifications by going to the Settings app and searching for NHS COVID-19";
+"NOTIFICATIONS_DISABLED_ALERT_OK" = "Ok";
