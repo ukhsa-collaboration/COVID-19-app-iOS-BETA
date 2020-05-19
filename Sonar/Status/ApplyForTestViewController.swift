@@ -8,14 +8,18 @@
 
 import UIKit
 
-class ApplyForTestViewController: UIViewController {
+class ApplyForTestViewController: UIViewController, Storyboarded {
+    static let storyboardName = "ApplyForTest"
     
     private var linkingIdManager: LinkingIdManaging!
     private var uiQueue: TestableQueue!
+    private var urlOpener: TestableUrlOpener!
+    private var refCodeVC: ReferenceCodeViewController!
 
-    func inject(linkingIdManager: LinkingIdManaging, uiQueue: TestableQueue) {
+    func inject(linkingIdManager: LinkingIdManaging, uiQueue: TestableQueue, urlOpener: TestableUrlOpener) {
         self.linkingIdManager = linkingIdManager
         self.uiQueue = uiQueue
+        self.urlOpener = urlOpener
     }
 
     override func viewDidLoad() {
@@ -33,11 +37,13 @@ class ApplyForTestViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? ReferenceCodeViewController {
             vc.inject(linkingIdManager: linkingIdManager, uiQueue: uiQueue)
+            self.refCodeVC = vc
         }
     }
 
-    @IBAction func applyForTestTapped(_ sender: UIButton) {
-        UIApplication.shared.open(ContentURLs.shared.applyForTest)
+    @IBAction func applyForTestTapped() {
+        let url = ContentURLs.shared.applyForTest(referenceCode: refCodeVC.refCodeIfLoaded)
+        urlOpener.open(url)
     }
 
 }

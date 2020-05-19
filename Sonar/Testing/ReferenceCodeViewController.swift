@@ -16,6 +16,8 @@ private enum State {
 
 class ReferenceCodeViewController: UIViewController, Storyboarded {
     static var storyboardName = "ReferenceCode"
+    
+    public private(set) var refCodeIfLoaded: String?
 
     @IBOutlet var fetchingWrapper: UIView!
     @IBOutlet var errorWrapper: UIView!
@@ -36,6 +38,8 @@ class ReferenceCodeViewController: UIViewController, Storyboarded {
         referenceCodeWrapper.isHidden = true
         
         self.linkingIdManager.fetchLinkingId { linkingId in
+            self.refCodeIfLoaded = linkingId
+            
             self.uiQueue.async {
                 self.fetchingWrapper.isHidden = true
 

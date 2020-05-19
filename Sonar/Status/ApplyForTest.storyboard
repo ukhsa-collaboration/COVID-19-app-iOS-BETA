@@ -12,7 +12,7 @@
         <!--Apply for a coronavirus test-->
         <scene sceneID="htj-3w-VDf">
             <objects>
-                <viewController title="Apply for a coronavirus test" id="eEu-YT-bAG" customClass="ApplyForTestViewController" customModule="Sonar" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ApplyForTestViewController" title="Apply for a coronavirus test" id="eEu-YT-bAG" customClass="ApplyForTestViewController" customModule="Sonar" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="a3V-XW-Vqe">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -82,7 +82,7 @@
                                                         </state>
                                                     </button>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="External_Link" translatesAutoresizingMaskIntoConstraints="NO" id="7Wy-sa-3D6">
-                                                        <rect key="frame" x="220" y="9.5" width="19" height="14"/>
+                                                        <rect key="frame" x="220" y="9.5" width="18.5" height="13.5"/>
                                                     </imageView>
                                                 </subviews>
                                                 <accessibility key="accessibilityConfiguration" label="Apply for a coronavirus test">
@@ -98,7 +98,7 @@
                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="7Wy-sa-3D6" secondAttribute="trailing" id="kig-Xf-0dm"/>
                                                 </constraints>
                                                 <connections>
-                                                    <action selector="applyForTestTapped:" destination="eEu-YT-bAG" eventType="touchUpInside" id="s1S-nC-YVL"/>
+                                                    <action selector="applyForTestTapped" destination="eEu-YT-bAG" eventType="touchUpInside" id="jrF-vy-zJL"/>
                                                 </connections>
                                             </view>
                                             <view contentMode="scaleToFill" verticalHuggingPriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="dif-o7-21U">
@@ -147,20 +147,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IJi-hV-UXW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5722" y="582"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="PdF-qs-aBA">
-            <objects>
-                <viewController id="Pvo-en-IKQ" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="aMM-9T-Yym">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="P1g-Jf-mbj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="5101" y="903"/>
         </scene>
     </scenes>
     <resources>

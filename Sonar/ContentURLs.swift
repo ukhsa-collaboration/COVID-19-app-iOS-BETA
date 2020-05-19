@@ -20,13 +20,20 @@ struct ContentURLs {
     let privacyAndData: URL
     let ourPolicies: URL
     let nhs111Coronavirus: URL
-    let applyForTest: URL
     let statusInfo: URL
     let workplaceGuidance: URL
     private let status: StatusesURLs
+    private let applyForTestBase: URL
 
     func currentAdvice(for statusState: StatusState) -> URL {
         currentStatusURLs(for: statusState).currentAdvice
+    }
+    
+    func applyForTest(referenceCode: String?) -> URL {
+        guard let referenceCode = referenceCode else { return applyForTestBase }
+        var components = URLComponents(url: applyForTestBase, resolvingAgainstBaseURL: false)!
+        components.queryItems?.append(URLQueryItem(name: "refcode", value: referenceCode))
+        return components.url!
     }
 
     private func currentStatusURLs(for statusState: StatusState) -> StatusURLs {
@@ -60,7 +67,7 @@ extension ContentURLs: Decodable {
         privacyAndData = try values.decodeURL(forKey: .privacyAndData)
         ourPolicies = try values.decodeURL(forKey: .ourPolicies)
         nhs111Coronavirus = try values.decodeURL(forKey: .nhs111Coronavirus)
-        applyForTest = try values.decodeURL(forKey: .applyForTest)
+        applyForTestBase = try values.decodeURL(forKey: .applyForTest)
         statusInfo = try values.decodeURL(forKey: .statusInfo)
         workplaceGuidance = try values.decodeURL(forKey: .workplaceGuidance)
 

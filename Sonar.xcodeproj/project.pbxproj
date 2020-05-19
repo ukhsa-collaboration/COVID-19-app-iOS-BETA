@@ -20,6 +20,10 @@
 		097C93892447986B00E985CF /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097C93882447986B00E985CF /* TextField.swift */; };
 		097C94C9245B8146008A9695 /* LocaleProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097C94C8245B8146008A9695 /* LocaleProvider.swift */; };
 		097C94CB245B81E8008A9695 /* EnGbLocaleProviderDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097C94CA245B81E8008A9695 /* EnGbLocaleProviderDouble.swift */; };
+		097F053F24730A1200E633C8 /* ContentURLsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097F053E24730A1200E633C8 /* ContentURLsTests.swift */; };
+		097F05412473145300E633C8 /* TestableUrlOpener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097F05402473145300E633C8 /* TestableUrlOpener.swift */; };
+		097F054324732A3E00E633C8 /* ApplyForTestViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097F054224732A3E00E633C8 /* ApplyForTestViewControllerTests.swift */; };
+		097F054524732A9C00E633C8 /* UrlOpenerDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097F054424732A9C00E633C8 /* UrlOpenerDouble.swift */; };
 		0982F484246DE4B400E57EE5 /* ReferenceCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0982F483246DE4B400E57EE5 /* ReferenceCodeViewController.swift */; };
 		0982F486246DF05C00E57EE5 /* ReferenceCodeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0982F485246DF05C00E57EE5 /* ReferenceCodeViewControllerTests.swift */; };
 		0982F488246DF80400E57EE5 /* LinkingIdManagerDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0982F487246DF80400E57EE5 /* LinkingIdManagerDouble.swift */; };
@@ -157,8 +161,6 @@
 		AE2A5E502423C473007A4771 /* ContactEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2A5E4F2423C473007A4771 /* ContactEvent.swift */; };
 		AE2DCAA0241920B600A940FC /* BTLEBroadcaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2DCA9F241920B600A940FC /* BTLEBroadcaster.swift */; };
 		AEAFA67924602629009AEAEB /* StatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAFA67824602629009AEAEB /* StatusTests.swift */; };
-		AEC6A7BC241BD81A00B0237A /* LogoStrapline.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC6A7BB241BD81A00B0237A /* LogoStrapline.swift */; };
-		AEC6A7BE241BD82900B0237A /* LogoStrapline.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEC6A7BD241BD82900B0237A /* LogoStrapline.xib */; };
 		F600A60224297A8E0038DF57 /* RegistrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F600A60124297A8E0038DF57 /* RegistrationRequest.swift */; };
 		F600A60424297C010038DF57 /* RegistrationRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F600A60324297C010038DF57 /* RegistrationRequestTests.swift */; };
 		F60497672452415F002B8503 /* ContactEventsUploaderDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60497662452415F002B8503 /* ContactEventsUploaderDouble.swift */; };
@@ -296,6 +298,10 @@
 		097C93882447986B00E985CF /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		097C94C8245B8146008A9695 /* LocaleProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocaleProvider.swift; sourceTree = "<group>"; };
 		097C94CA245B81E8008A9695 /* EnGbLocaleProviderDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnGbLocaleProviderDouble.swift; sourceTree = "<group>"; };
+		097F053E24730A1200E633C8 /* ContentURLsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentURLsTests.swift; sourceTree = "<group>"; };
+		097F05402473145300E633C8 /* TestableUrlOpener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestableUrlOpener.swift; sourceTree = "<group>"; };
+		097F054224732A3E00E633C8 /* ApplyForTestViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyForTestViewControllerTests.swift; sourceTree = "<group>"; };
+		097F054424732A9C00E633C8 /* UrlOpenerDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlOpenerDouble.swift; sourceTree = "<group>"; };
 		0982F483246DE4B400E57EE5 /* ReferenceCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceCodeViewController.swift; sourceTree = "<group>"; };
 		0982F485246DF05C00E57EE5 /* ReferenceCodeViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceCodeViewControllerTests.swift; sourceTree = "<group>"; };
 		0982F487246DF80400E57EE5 /* LinkingIdManagerDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkingIdManagerDouble.swift; sourceTree = "<group>"; };
@@ -446,8 +452,6 @@
 		AE2A5E4F2423C473007A4771 /* ContactEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEvent.swift; sourceTree = "<group>"; };
 		AE2DCA9F241920B600A940FC /* BTLEBroadcaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTLEBroadcaster.swift; sourceTree = "<group>"; };
 		AEAFA67824602629009AEAEB /* StatusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusTests.swift; sourceTree = "<group>"; };
-		AEC6A7BB241BD81A00B0237A /* LogoStrapline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoStrapline.swift; sourceTree = "<group>"; };
-		AEC6A7BD241BD82900B0237A /* LogoStrapline.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogoStrapline.xib; sourceTree = "<group>"; };
 		F600A60124297A8E0038DF57 /* RegistrationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationRequest.swift; sourceTree = "<group>"; };
 		F600A60324297C010038DF57 /* RegistrationRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationRequestTests.swift; sourceTree = "<group>"; };
 		F60497602451FA42002B8503 /* Environment.swift.erb */ = {isa = PBXFileReference; lastKnownFileType = text; path = Environment.swift.erb; sourceTree = "<group>"; };
@@ -645,6 +649,7 @@
 				F6DA0A352469D95F001F0B48 /* StatusStateMigrationTests.swift */,
 				F6DA0A3D246A123B001F0B48 /* StatusStateTests.swift */,
 				0983ACD2243EB22200DBB336 /* StatusViewControllerTests.swift */,
+				097F054224732A3E00E633C8 /* ApplyForTestViewControllerTests.swift */,
 			);
 			path = Status;
 			sourceTree = "<group>";
@@ -701,6 +706,7 @@
 				89DF66A52460217A00A55F24 /* StorageCheckingDouble.swift */,
 				89CCF65E2456EF7000AC9D91 /* TrustValidatingDouble.swift */,
 				090B1870243552C300870B5D /* UserNotificationCenterDouble.swift */,
+				097F054424732A9C00E633C8 /* UrlOpenerDouble.swift */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -765,14 +771,12 @@
 				F652F72F244E4AAD00D97950 /* DrawerPresentation.swift */,
 				F694B1C1245A4A5600C6A5D1 /* ErrorLabel.swift */,
 				13F996722460445400FD6740 /* LinkButton.swift */,
-				AEC6A7BB241BD81A00B0237A /* LogoStrapline.swift */,
 				F70CB8182450CAB700ED6E7F /* OnboardingLogoStrapline.swift */,
 				21D93C2F2420C26900C1FA9B /* PrimaryButton.swift */,
 				F6EE8362246306490076AF97 /* SmartInvertBorderView.swift */,
 				F6548FA42460DB95005F06FF /* SpinnerView.swift */,
 				097C93882447986B00E985CF /* TextField.swift */,
 				09C9DB372460946B0012F80A /* UpdatesBasedOnAccessibilityDisplayChanges.swift */,
-				AEC6A7BD241BD82900B0237A /* LogoStrapline.xib */,
 				F70CB81A2450CFA900ED6E7F /* OnboardingLogoStrapline.xib */,
 			);
 			path = Appearance;
@@ -823,6 +827,7 @@
 				F67C5157243E7BD5008E2945 /* SelfDiagnosis */,
 				0983ACD1243EB20A00DBB336 /* Status */,
 				89DF66A12460171B00A55F24 /* Storage */,
+				097F053E24730A1200E633C8 /* ContentURLsTests.swift */,
 			);
 			path = SonarTests;
 			sourceTree = "<group>";
@@ -969,6 +974,7 @@
 				F68B89EB243CFEEE00F369A9 /* SelfDiagnosis */,
 				0995ABCD243D034E0057C0D7 /* Status */,
 				89DF66A0246016C200A55F24 /* Storage */,
+				097F05402473145300E633C8 /* TestableUrlOpener.swift */,
 			);
 			path = Sonar;
 			sourceTree = "<group>";
@@ -1434,7 +1440,6 @@
 				F60497792454A40B002B8503 /* TestingInfo.storyboard in Resources */,
 				F758B8C4242CC0EE003AE16D /* Status.storyboard in Resources */,
 				6FC63C3B241641BA007C8BF3 /* LaunchScreen.storyboard in Resources */,
-				AEC6A7BE241BD82900B0237A /* LogoStrapline.xib in Resources */,
 				AE29892C24729AD8004C4097 /* ReferenceCode.storyboard in Resources */,
 				A1E7A0592420028B0078174D /* NHS Colors.xcassets in Resources */,
 				8947F833245AD97A00C4F1BB /* Settings.bundle in Resources */,
@@ -1522,11 +1527,13 @@
 				F6548FA32460C1C7005F06FF /* CheckinCoordinatorTests.swift in Sources */,
 				F6F05A2A2433C6CC00FF4B72 /* AuthManagerDouble.swift in Sources */,
 				F6E2E597246B287B009D80DF /* StatusStateMachiningDouble.swift in Sources */,
+				097F054524732A9C00E633C8 /* UrlOpenerDouble.swift in Sources */,
 				0982F488246DF80400E57EE5 /* LinkingIdManagerDouble.swift in Sources */,
 				F6F05A242433BEC000FF4B72 /* OnboardingCoordinatorTests.swift in Sources */,
 				214209D924262B7500C7BFF3 /* SessionHelpers.swift in Sources */,
 				0983ACD3243EB22200DBB336 /* StatusViewControllerTests.swift in Sources */,
 				219C7B7C245B093000952B4D /* BluetoothPayloadTests.swift in Sources */,
+				097F054324732A3E00E633C8 /* ApplyForTestViewControllerTests.swift in Sources */,
 				896BE912244F11D100B3687C /* PublicKeyValidatorTests.swift in Sources */,
 				F62F858124510716006580A8 /* ContactEventsUploaderTests.swift in Sources */,
 				89CCF65F2456EF7000AC9D91 /* TrustValidatingDouble.swift in Sources */,
@@ -1566,6 +1573,7 @@
 				F6DA0A3A2469DCF7001F0B48 /* StatusStateMachineTests.swift in Sources */,
 				89CE566D24504050004A74D0 /* TrustValidatingURLSessionDelegateTests.swift in Sources */,
 				0983ACCD243E566800DBB336 /* ErrorForTest.swift in Sources */,
+				097F053F24730A1200E633C8 /* ContentURLsTests.swift in Sources */,
 				09E876BC24510F2C009C2628 /* BluetoothNurseryDouble.swift in Sources */,
 				89DF66A42460173800A55F24 /* StorageCheckerTests.swift in Sources */,
 				F694B1BE2459EB3800C6A5D1 /* NotificationAcknowledgerTests.swift in Sources */,
@@ -1655,6 +1663,7 @@
 				134470B02454D614001A0AD9 /* CoughUpdateViewController.swift in Sources */,
 				0979FB792458ADF000EB01A8 /* PostcodeValidator.swift in Sources */,
 				134470AE2454D4DA001A0AD9 /* SelfDiagnosisCoordinator.swift in Sources */,
+				097F05412473145300E633C8 /* TestableUrlOpener.swift in Sources */,
 				0984E0BD2451014E009C6374 /* BluetoothOffViewController.swift in Sources */,
 				F62F857F2451051C006580A8 /* ContactEventsUploader.swift in Sources */,
 				09E6E7E4245271A00069DFA8 /* SetupChecker.swift in Sources */,
@@ -1699,7 +1708,6 @@
 				F7091907245DCED800F00AB8 /* AccessibleErrorLabel.swift in Sources */,
 				89CE566B24503E93004A74D0 /* TrustValidatingURLSessionDelegate.swift in Sources */,
 				21F374042434C4BF00926FB8 /* ContactEventsTableViewController.swift in Sources */,
-				AEC6A7BC241BD81A00B0237A /* LogoStrapline.swift in Sources */,
 				214209D52423C83C00C7BFF3 /* UploadProximityEventsRequest.swift in Sources */,
 				214209D0242396DA00C7BFF3 /* Session.swift in Sources */,
 				F6DA0A382469DCBA001F0B48 /* StatusStateMigration.swift in Sources */,

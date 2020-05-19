@@ -46,7 +46,8 @@ class RootViewControllerTests: TestCase {
             linkingIdManager: LinkingIdManagerDouble(),
             statusStateMachine: StatusStateMachiningDouble(),
             uiQueue: QueueDouble(),
-            userStatusProvider: UserStatusProvider(localeProvider: EnGbLocaleProviderDouble())
+            userStatusProvider: UserStatusProvider(localeProvider: EnGbLocaleProviderDouble()),
+            urlOpener: UIApplication.shared
         )
     }
     
