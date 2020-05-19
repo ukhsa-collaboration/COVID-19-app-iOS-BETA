@@ -64,7 +64,6 @@
 		13473A1B246AFF0C00800CEA /* AdviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13473A1A246AFF0C00800CEA /* AdviceViewController.swift */; };
 		13473A1D246C0F2C00800CEA /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13473A1C246C0F2C00800CEA /* StatusViewController.swift */; };
 		13473A1F246D543F00800CEA /* UserStatusProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13473A1E246D543F00800CEA /* UserStatusProvider.swift */; };
-		136001DC2462EE1C001EFE2A /* SelfDiagnosisTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136001DB2462EE1C001EFE2A /* SelfDiagnosisTests.swift */; };
 		138114E42450543600BA46C7 /* SymptomStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138114E32450543600BA46C7 /* SymptomStackView.swift */; };
 		13F4AE882451EB330082A46D /* QuestionSymptomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F4AE872451EB330082A46D /* QuestionSymptomsViewController.swift */; };
 		13F996732460445400FD6740 /* LinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F996722460445400FD6740 /* LinkButton.swift */; };
@@ -154,6 +153,7 @@
 		89F06B372434C35A0074C612 /* LoggerMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F06B362434C35A0074C612 /* LoggerMetadata.swift */; };
 		A1E7A0592420028B0078174D /* NHS Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1E7A0582420028B0078174D /* NHS Colors.xcassets */; };
 		AE29892C24729AD8004C4097 /* ReferenceCode.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE29892B24729AD8004C4097 /* ReferenceCode.storyboard */; };
+		AE29892E2472E600004C4097 /* Pages.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE29892D2472E600004C4097 /* Pages.swift */; };
 		AE2A5E502423C473007A4771 /* ContactEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2A5E4F2423C473007A4771 /* ContactEvent.swift */; };
 		AE2DCAA0241920B600A940FC /* BTLEBroadcaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2DCA9F241920B600A940FC /* BTLEBroadcaster.swift */; };
 		AEAFA67924602629009AEAEB /* StatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAFA67824602629009AEAEB /* StatusTests.swift */; };
@@ -341,7 +341,6 @@
 		13473A1C246C0F2C00800CEA /* StatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
 		13473A1E246D543F00800CEA /* UserStatusProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatusProvider.swift; sourceTree = "<group>"; };
 		1347DAF02450915500F2F776 /* LocalNotificationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationTests.swift; sourceTree = "<group>"; };
-		136001DB2462EE1C001EFE2A /* SelfDiagnosisTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfDiagnosisTests.swift; sourceTree = "<group>"; };
 		138114E32450543600BA46C7 /* SymptomStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomStackView.swift; sourceTree = "<group>"; };
 		13F4AE872451EB330082A46D /* QuestionSymptomsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionSymptomsViewController.swift; sourceTree = "<group>"; };
 		13F996722460445400FD6740 /* LinkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkButton.swift; sourceTree = "<group>"; };
@@ -443,6 +442,7 @@
 		89F06B362434C35A0074C612 /* LoggerMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerMetadata.swift; sourceTree = "<group>"; };
 		A1E7A0582420028B0078174D /* NHS Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "NHS Colors.xcassets"; sourceTree = "<group>"; };
 		AE29892B24729AD8004C4097 /* ReferenceCode.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ReferenceCode.storyboard; sourceTree = "<group>"; };
+		AE29892D2472E600004C4097 /* Pages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pages.swift; sourceTree = "<group>"; };
 		AE2A5E4F2423C473007A4771 /* ContactEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEvent.swift; sourceTree = "<group>"; };
 		AE2DCA9F241920B600A940FC /* BTLEBroadcaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTLEBroadcaster.swift; sourceTree = "<group>"; };
 		AEAFA67824602629009AEAEB /* StatusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusTests.swift; sourceTree = "<group>"; };
@@ -978,6 +978,7 @@
 			children = (
 				898FE856243B4D7A00210775 /* XCUIElement.swift */,
 				89074B8924378B6E00D67777 /* ScreenTestCase.swift */,
+				AE29892D2472E600004C4097 /* Pages.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1124,7 +1125,6 @@
 			isa = PBXGroup;
 			children = (
 				F6548FA22460C1C7005F06FF /* CheckinCoordinatorTests.swift */,
-				136001DB2462EE1C001EFE2A /* SelfDiagnosisTests.swift */,
 				F67C5158243E7C1E008E2945 /* SubmitSymptomsViewControllerTests.swift */,
 				09C9DB3424608ABB0012F80A /* Controls */,
 			);
@@ -1550,7 +1550,6 @@
 				090B1871243552C300870B5D /* UserNotificationCenterDouble.swift in Sources */,
 				21C417CA242CB0A200DEF3E2 /* ConfirmRegistrationRequestTests.swift in Sources */,
 				F632792A2435323200CF7A42 /* PermissionsViewControllerTests.swift in Sources */,
-				136001DC2462EE1C001EFE2A /* SelfDiagnosisTests.swift in Sources */,
 				0982F486246DF05C00E57EE5 /* ReferenceCodeViewControllerTests.swift in Sources */,
 				09E6E7E62452779B0069DFA8 /* SetupCheckerTests.swift in Sources */,
 				F7D62F292440D4CB004C32A2 /* SonarBroadcastPayloadGeneratorTests.swift in Sources */,
@@ -1717,6 +1716,7 @@
 				AEAFA67924602629009AEAEB /* StatusTests.swift in Sources */,
 				898FE854243B42E800210775 /* OnboardingTests.swift in Sources */,
 				89074B8A24378B6E00D67777 /* ScreenTestCase.swift in Sources */,
+				AE29892E2472E600004C4097 /* Pages.swift in Sources */,
 				89074B8724378A0D00D67777 /* UITestPayload.swift in Sources */,
 				89074B822437882100D67777 /* Screen.swift in Sources */,
 			);
