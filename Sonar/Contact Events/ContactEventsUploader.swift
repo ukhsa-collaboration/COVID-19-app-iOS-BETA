@@ -13,7 +13,7 @@ import Logging
 protocol ContactEventsUploading {
     var sessionDelegate: ContactEventsUploaderSessionDelegate { get }
 
-    func upload(from startDate: Date) throws
+    func upload(from startDate: Date, with symptoms: Symptoms) throws
     func cleanup()
     func error(_ error: Swift.Error)
     func ensureUploading() throws
@@ -55,14 +55,15 @@ class ContactEventsUploader: ContactEventsUploading {
         sessionDelegate.contactEventsUploader = self
     }
 
-    func upload(from startDate: Date) throws {
-        persisting.uploadLog = persisting.uploadLog + [UploadLog(event: .requested(startDate: startDate))]
+    func upload(from startDate: Date, with symptoms: Symptoms) throws {
+        let requested = UploadLog.Requested(startDate: startDate, symptoms: symptoms)
+        persisting.uploadLog = persisting.uploadLog + [UploadLog(event: .requested(requested))]
 
         guard
             let registration = persisting.registration
             else { return }
 
-        try upload(from: startDate, with: registration)
+        try upload(requested, with: registration)
     }
 
     func cleanup() {
@@ -104,23 +105,25 @@ class ContactEventsUploader: ContactEventsUploading {
         let hasBeenAnHour = (Date().timeIntervalSince(lastUploadLog.date)) > oneHour
         guard needsUpload && hasBeenAnHour else { return }
 
-        guard let startDate = persisting.uploadLog.compactMap({ log -> Date? in
-            guard case .requested(let startDate) = log.event else {
-                return nil
-            }
+        guard
+            let requested = persisting.uploadLog.compactMap({ log -> UploadLog.Requested? in
+                guard case .requested(let requested) = log.event else {
+                    return nil
+                }
 
-            return startDate
-        }).last else {
+                return requested
+            }).last
+        else {
             cleanup()
             return
         }
 
-        try? upload(from: startDate, with: registration)
+        try? upload(requested, with: registration)
     }
 
     //MARK: - Private
 
-    private func upload(from startDate: Date, with registration: Registration) throws {
+    private func upload(_ requested: UploadLog.Requested, with registration: Registration) throws {
         let contactEvents = contactEventRepository.contactEvents
         let lastDate = contactEvents.map { $0.timestamp }.max() ?? Date() // conservatively default to the current time
         persisting.uploadLog = persisting.uploadLog + [
@@ -129,7 +132,8 @@ class ContactEventsUploader: ContactEventsUploading {
 
         let request = UploadProximityEventsRequest(
             registration: registration,
-            symptomsTimestamp: startDate,
+            symptoms: requested.symptoms,
+            symptomsTimestamp: requested.startDate,
             contactEvents: contactEvents
         )
 

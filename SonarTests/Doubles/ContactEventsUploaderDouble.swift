@@ -19,7 +19,9 @@ class ContactEventsUploaderDouble: ContactEventsUploader {
     }
 
     var uploadStartDate: Date?
-    override func upload(from startDate: Date) throws {
+    var uploadSymptoms: Symptoms?
+    override func upload(from startDate: Date, with symptoms: Symptoms) throws {
         uploadStartDate = startDate
+        uploadSymptoms = symptoms
     }
 }

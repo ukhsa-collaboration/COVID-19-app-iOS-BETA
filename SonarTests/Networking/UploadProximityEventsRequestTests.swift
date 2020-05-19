@@ -52,6 +52,7 @@ class UploadProximityEventsRequestTests: XCTestCase {
         let registration = Registration(sonarId: sonarId, secretKey: dummyKey, broadcastRotationKey: SecKey.sampleEllipticCurveKey)
         request = UploadProximityEventsRequest(
             registration: registration,
+            symptoms: [.temperature],
             symptomsTimestamp: Date(timeIntervalSince1970: 100),
             contactEvents: contactEvents
         )
@@ -76,6 +77,7 @@ class UploadProximityEventsRequestTests: XCTestCase {
         let expectedBody =
 """
 {
+  "symptoms" : ["temperature"],
   "sonarId" : "\(sonarId)",
   "contactEvents" : [
     {

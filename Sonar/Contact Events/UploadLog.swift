@@ -18,11 +18,11 @@ struct UploadLog: Codable, Equatable {
     }
 
     enum Event: Equatable {
-        // This startDate is optional because we didn't use to
-        // store this with the request. Unfortunately, it's non-
-        // trivial to strip this out as part of JSON decoding,
-        // so we're left with this as a vestigal annoyance.
-        case requested(startDate: Date?)
+        // This startDate and symptoms are optional because we didn't
+        // use to store this with the request. Unfortunately, it' non-
+        // trivial to strip this out as part of JSON decoding, so we're
+        // left with this as a vestigal annoyance.
+        case requested(Requested?)
 
         case started(lastContactEventDate: Date)
         case completed(error: String?)
@@ -35,12 +35,18 @@ struct UploadLog: Codable, Equatable {
             }
         }
     }
+
+    struct Requested: Equatable {
+        let startDate: Date
+        let symptoms: Symptoms
+    }
 }
 
 extension UploadLog.Event: Codable {
     private enum CodingKeys: CodingKey {
         case key
         case startDate
+        case symptoms
         case lastContactEventDate
         case error
     }
@@ -49,8 +55,14 @@ extension UploadLog.Event: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         switch try container.decode(String.self, forKey: .key) {
         case "requested":
-            let startDate = try container.decode(Date?.self, forKey: .startDate)
-            self = .requested(startDate: startDate)
+            var requested: UploadLog.Requested? = nil
+            if
+                let startDate = try container.decode(Date?.self, forKey: .startDate),
+                let symptoms = try container.decode(Symptoms?.self, forKey: .symptoms)
+            {
+                requested = UploadLog.Requested(startDate: startDate, symptoms: symptoms)
+            }
+            self = .requested(requested)
         case "started":
             let lastContactEventDate = try container.decode(Date.self, forKey: .lastContactEventDate)
             self = .started(lastContactEventDate: lastContactEventDate)
@@ -66,8 +78,9 @@ extension UploadLog.Event: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(key, forKey: .key)
         switch self {
-        case .requested(let startDate):
-            try container.encode(startDate, forKey: .startDate)
+        case .requested(let requested):
+            try container.encode(requested?.startDate, forKey: .startDate)
+            try container.encode(requested?.symptoms, forKey: .symptoms)
         case .started(let lastContactEventDate):
             try container.encode(lastContactEventDate, forKey: .lastContactEventDate)
         case .completed(let error):

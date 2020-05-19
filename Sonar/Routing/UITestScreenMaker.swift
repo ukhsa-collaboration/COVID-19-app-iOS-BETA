@@ -133,7 +133,7 @@ private class MockRegistrationService: RegistrationService {
 private class MockContactEventsUploading: ContactEventsUploading {
     var sessionDelegate: ContactEventsUploaderSessionDelegate = ContactEventsUploaderSessionDelegate(validator: MockTrustValidating())
 
-    func upload(from startDate: Date) throws {}
+    func upload(from startDate: Date, with symptoms: Symptoms) throws {}
     func cleanup() {}
     func error(_ error: Swift.Error) {}
     func ensureUploading() throws {}

@@ -121,7 +121,7 @@ class DebugViewController: UITableViewController, Storyboarded {
             
         case (2, 2):
             let startDate = Calendar.current.date(byAdding: .month, value: -1, to: Date())!
-            try! contactEventsUploader.upload(from: startDate)
+            try! contactEventsUploader.upload(from: startDate, with: [.temperature])
             show(title: "Upload Initiated", message: "Contact events uploading.")
 
         case (3, 0):
