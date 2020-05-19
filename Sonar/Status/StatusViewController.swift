@@ -36,10 +36,10 @@ class StatusViewController: UIViewController, Storyboarded {
     @IBOutlet weak var applyForTestButton: UIButton!
     @IBOutlet weak var stepsDetailLabel: UILabel!
 
-    var hideNotificationStatusView = true {
+    var bluetoothDisabled = true {
         didSet {
-            notificationsStatusView?.isHidden = hideNotificationStatusView
-            setupStackViewSpacing(notificationStatusViewHidden: hideNotificationStatusView)
+            setupBannerAppearance(bluetoothDisabled: bluetoothDisabled,
+                                  bannerDisabled: persistence.disabledNotificationsStatusView)
         }
     }
     
@@ -79,9 +79,9 @@ class StatusViewController: UIViewController, Storyboarded {
         logo.contentMode = .scaleAspectFit
         diagnosisHighlightView.accessibilityIgnoresInvertColors = true
         
-        notificationsStatusView.isHidden = hideNotificationStatusView
-        setupStackViewSpacing(notificationStatusViewHidden: notificationsStatusView.isHidden)
-        
+        setupBannerAppearance(bluetoothDisabled: bluetoothDisabled,
+                              bannerDisabled: persistence.disabledNotificationsStatusView)
+                
         goToSettingsButton.titleLabel?.text = "GO_TO_SETTINGS".localized
         disableNotificationStatusViewButton.titleLabel?.text = "DISABLE_NOTIFICATIONS_STATUS_VIEW".localized
 
@@ -109,9 +109,13 @@ class StatusViewController: UIViewController, Storyboarded {
         }
     }
 
-    private func setupStackViewSpacing(notificationStatusViewHidden: Bool) {
+    private func setupBannerAppearance(bluetoothDisabled: Bool, bannerDisabled: Bool) {
         guard isViewLoaded else { return }
-        let spacing = notificationStatusViewHidden ? UIStackView.spacingUseDefault : 0
+        let hideBanner = bluetoothDisabled || bannerDisabled
+        
+        notificationsStatusView?.isHidden = hideBanner
+        
+        let spacing = hideBanner ? UIStackView.spacingUseDefault : 0
         contentStackView.setCustomSpacing(spacing, after: registrationStatusViewContainer)
    }
 
@@ -243,13 +247,14 @@ class StatusViewController: UIViewController, Storyboarded {
         present(symptomsPromptViewController, animated: true)
     }
 
-    @IBAction func goToSettingsTapped(_ sender: Any) {
+    @IBAction func goToSettingsTapped() {
         UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:])
     }
     
-    @IBAction func disableNotificationsTapped(_ sender: Any) {
-        hideNotificationStatusView = true
+    @IBAction func disableNotificationsTapped() {
         persistence.disabledNotificationsStatusView = true
+        setupBannerAppearance(bluetoothDisabled: bluetoothDisabled,
+                              bannerDisabled: persistence.disabledNotificationsStatusView)
 
         let title = "NOTIFICATIONS_DISABLED_ALERT_TITLE".localized
         let message = "NOTIFICATIONS_DISABLED_ALERT_MESSAGE".localized

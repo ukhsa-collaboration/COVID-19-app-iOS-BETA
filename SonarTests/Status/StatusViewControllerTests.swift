@@ -25,12 +25,33 @@ class StatusViewControllerTests: XCTestCase {
     
     func testUnhidingNotificationStatusViewBeforeViewDidLoadShowsNotificationStatusView() {
         let vc = makeViewController(persistence: PersistenceDouble(registration: Registration.fake), loadView: false)
-        vc.hideNotificationStatusView = false
+        vc.bluetoothDisabled = false
         
         XCTAssertNotNil(vc.view)
         vc.viewWillAppear(false)
         
         XCTAssertFalse(vc.notificationsStatusView.isHidden)
+    }
+    
+    func testDisablingNotificationsStatusView() {
+        let persistance = PersistenceDouble(registration: Registration.fake)
+        let vc = makeViewController(persistence: persistance)
+
+        vc.bluetoothDisabled = false
+        XCTAssertFalse(vc.notificationsStatusView.isHidden)
+
+        vc.disableNotificationsTapped()
+        
+        XCTAssert(vc.notificationsStatusView.isHidden)
+        XCTAssert(persistance.disabledNotificationsStatusView)
+    }
+    
+    func testPredisabledNotificationsStatusView() {
+        let persistance = PersistenceDouble(registration: Registration.fake)
+        persistance.disabledNotificationsStatusView = true
+        
+        let vc = makeViewController(persistence: persistance)
+        XCTAssert(vc.notificationsStatusView.isHidden)
     }
     
     func testShowsInitialInProgressStatus() {
