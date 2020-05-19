@@ -104,7 +104,7 @@ class StatusViewController: UIViewController, Storyboarded {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? ApplyForTestViewController {
+        if let vc = segue.destination as? ApplyForTestContainerViewController {
             vc.inject(linkingIdManager: linkingIdManager, uiQueue: DispatchQueue.main, urlOpener: urlOpener)
         }
     }

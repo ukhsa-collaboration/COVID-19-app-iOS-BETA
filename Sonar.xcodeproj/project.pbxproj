@@ -11,6 +11,8 @@
 		090B1871243552C300870B5D /* UserNotificationCenterDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090B1870243552C300870B5D /* UserNotificationCenterDouble.swift */; };
 		090DEE10244F8BF600268170 /* BluetoothPermissionDeniedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090DEE0F244F8BF600268170 /* BluetoothPermissionDeniedViewController.swift */; };
 		092BB5AB244622200036B30E /* RootViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092BB5AA244622200036B30E /* RootViewControllerTests.swift */; };
+		0938D9062474473E006FAADF /* ApplyForTestContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0938D9052474473E006FAADF /* ApplyForTestContainerViewController.swift */; };
+		0938D9092474484B006FAADF /* ApplyForTestContainerViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0938D9082474484B006FAADF /* ApplyForTestContainerViewControllerTests.swift */; };
 		095A91182434FF1500ED6369 /* ApplicationDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095A91172434FF1500ED6369 /* ApplicationDouble.swift */; };
 		0964B37B24631B1B0022EF97 /* UIViewController+Scrolling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0964B37A24631B1B0022EF97 /* UIViewController+Scrolling.swift */; };
 		0964B37D246328A20022EF97 /* UIView+Scrolling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0964B37C246328A20022EF97 /* UIView+Scrolling.swift */; };
@@ -22,13 +24,10 @@
 		097C94CB245B81E8008A9695 /* EnGbLocaleProviderDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097C94CA245B81E8008A9695 /* EnGbLocaleProviderDouble.swift */; };
 		097F053F24730A1200E633C8 /* ContentURLsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097F053E24730A1200E633C8 /* ContentURLsTests.swift */; };
 		097F05412473145300E633C8 /* TestableUrlOpener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097F05402473145300E633C8 /* TestableUrlOpener.swift */; };
-		097F054324732A3E00E633C8 /* ApplyForTestViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097F054224732A3E00E633C8 /* ApplyForTestViewControllerTests.swift */; };
 		097F054524732A9C00E633C8 /* UrlOpenerDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097F054424732A9C00E633C8 /* UrlOpenerDouble.swift */; };
 		097F054724733FC200E633C8 /* ReferenceCodeLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097F054624733FC200E633C8 /* ReferenceCodeLoadingViewController.swift */; };
 		097F05492473445A00E633C8 /* TestingInfoContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097F05482473445A00E633C8 /* TestingInfoContainerViewController.swift */; };
 		097F054B2473457000E633C8 /* TestingInfoContainerViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097F054A2473457000E633C8 /* TestingInfoContainerViewControllerTests.swift */; };
-		0982F484246DE4B400E57EE5 /* OldReferenceCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0982F483246DE4B400E57EE5 /* OldReferenceCodeViewController.swift */; };
-		0982F486246DF05C00E57EE5 /* OldReferenceCodeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0982F485246DF05C00E57EE5 /* OldReferenceCodeViewControllerTests.swift */; };
 		0982F488246DF80400E57EE5 /* LinkingIdManagerDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0982F487246DF80400E57EE5 /* LinkingIdManagerDouble.swift */; };
 		0983ACCD243E566800DBB336 /* ErrorForTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983ACCC243E566800DBB336 /* ErrorForTest.swift */; };
 		0983ACCF243E6D3800DBB336 /* NotificationObserverDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983ACCE243E6D3800DBB336 /* NotificationObserverDouble.swift */; };
@@ -58,7 +57,6 @@
 		09CAA36A2440FC4500CE93A6 /* PostcodeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CAA3692440FC4500CE93A6 /* PostcodeViewControllerTests.swift */; };
 		09CDA11824734FB100C8684D /* ReferenceCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CDA11724734FB100C8684D /* ReferenceCodeViewController.swift */; };
 		09CDA11A2473525000C8684D /* ReferenceCodeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CDA1192473525000C8684D /* ReferenceCodeViewControllerTests.swift */; };
-		09CDA11C247352F800C8684D /* OldReferenceCode.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09CDA11B247352F800C8684D /* OldReferenceCode.storyboard */; };
 		09D027CC24521542006EE07E /* BluetoothStateObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D027CB24521542006EE07E /* BluetoothStateObserver.swift */; };
 		09D027CE2452157D006EE07E /* BluetoothStateObserverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D027CD2452157D006EE07E /* BluetoothStateObserverTests.swift */; };
 		09D91A7724521C5C004825A5 /* BluetoothNurseryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D91A7624521C5C004825A5 /* BluetoothNurseryTests.swift */; };
@@ -296,6 +294,8 @@
 		090B1870243552C300870B5D /* UserNotificationCenterDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationCenterDouble.swift; sourceTree = "<group>"; };
 		090DEE0F244F8BF600268170 /* BluetoothPermissionDeniedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothPermissionDeniedViewController.swift; sourceTree = "<group>"; };
 		092BB5AA244622200036B30E /* RootViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewControllerTests.swift; sourceTree = "<group>"; };
+		0938D9052474473E006FAADF /* ApplyForTestContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyForTestContainerViewController.swift; sourceTree = "<group>"; };
+		0938D9082474484B006FAADF /* ApplyForTestContainerViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyForTestContainerViewControllerTests.swift; sourceTree = "<group>"; };
 		095A91172434FF1500ED6369 /* ApplicationDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationDouble.swift; sourceTree = "<group>"; };
 		0964B37A24631B1B0022EF97 /* UIViewController+Scrolling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Scrolling.swift"; sourceTree = "<group>"; };
 		0964B37C246328A20022EF97 /* UIView+Scrolling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Scrolling.swift"; sourceTree = "<group>"; };
@@ -307,13 +307,10 @@
 		097C94CA245B81E8008A9695 /* EnGbLocaleProviderDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnGbLocaleProviderDouble.swift; sourceTree = "<group>"; };
 		097F053E24730A1200E633C8 /* ContentURLsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentURLsTests.swift; sourceTree = "<group>"; };
 		097F05402473145300E633C8 /* TestableUrlOpener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestableUrlOpener.swift; sourceTree = "<group>"; };
-		097F054224732A3E00E633C8 /* ApplyForTestViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyForTestViewControllerTests.swift; sourceTree = "<group>"; };
 		097F054424732A9C00E633C8 /* UrlOpenerDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlOpenerDouble.swift; sourceTree = "<group>"; };
 		097F054624733FC200E633C8 /* ReferenceCodeLoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceCodeLoadingViewController.swift; sourceTree = "<group>"; };
 		097F05482473445A00E633C8 /* TestingInfoContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingInfoContainerViewController.swift; sourceTree = "<group>"; };
 		097F054A2473457000E633C8 /* TestingInfoContainerViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingInfoContainerViewControllerTests.swift; sourceTree = "<group>"; };
-		0982F483246DE4B400E57EE5 /* OldReferenceCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldReferenceCodeViewController.swift; sourceTree = "<group>"; };
-		0982F485246DF05C00E57EE5 /* OldReferenceCodeViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldReferenceCodeViewControllerTests.swift; sourceTree = "<group>"; };
 		0982F487246DF80400E57EE5 /* LinkingIdManagerDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkingIdManagerDouble.swift; sourceTree = "<group>"; };
 		0983ACCC243E566800DBB336 /* ErrorForTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorForTest.swift; sourceTree = "<group>"; };
 		0983ACCE243E6D3800DBB336 /* NotificationObserverDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationObserverDouble.swift; sourceTree = "<group>"; };
@@ -343,7 +340,6 @@
 		09CAA3692440FC4500CE93A6 /* PostcodeViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostcodeViewControllerTests.swift; sourceTree = "<group>"; };
 		09CDA11724734FB100C8684D /* ReferenceCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceCodeViewController.swift; sourceTree = "<group>"; };
 		09CDA1192473525000C8684D /* ReferenceCodeViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReferenceCodeViewControllerTests.swift; sourceTree = "<group>"; };
-		09CDA11B247352F800C8684D /* OldReferenceCode.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = OldReferenceCode.storyboard; sourceTree = "<group>"; };
 		09D027CB24521542006EE07E /* BluetoothStateObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothStateObserver.swift; sourceTree = "<group>"; };
 		09D027CD2452157D006EE07E /* BluetoothStateObserverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothStateObserverTests.swift; sourceTree = "<group>"; };
 		09D91A7624521C5C004825A5 /* BluetoothNurseryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothNurseryTests.swift; sourceTree = "<group>"; };
@@ -638,6 +634,24 @@
 			path = workflows;
 			sourceTree = "<group>";
 		};
+		0938D90424744612006FAADF /* ApplyForTest */ = {
+			isa = PBXGroup;
+			children = (
+				F6BBE13B246F46B4005757BB /* ApplyForTest.storyboard */,
+				F6BBE13D246F46EE005757BB /* ApplyForTestViewController.swift */,
+				0938D9052474473E006FAADF /* ApplyForTestContainerViewController.swift */,
+			);
+			path = ApplyForTest;
+			sourceTree = "<group>";
+		};
+		0938D907247447A4006FAADF /* ApplyForTest */ = {
+			isa = PBXGroup;
+			children = (
+				0938D9082474484B006FAADF /* ApplyForTestContainerViewControllerTests.swift */,
+			);
+			path = ApplyForTest;
+			sourceTree = "<group>";
+		};
 		0964B37E2463293D0022EF97 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -658,12 +672,12 @@
 		0983ACD1243EB20A00DBB336 /* Status */ = {
 			isa = PBXGroup;
 			children = (
+				0938D907247447A4006FAADF /* ApplyForTest */,
 				F61695A22458B556006AABE3 /* StatusNotificationHandlerTests.swift */,
 				F6DA0A392469DCF7001F0B48 /* StatusStateMachineTests.swift */,
 				F6DA0A352469D95F001F0B48 /* StatusStateMigrationTests.swift */,
 				F6DA0A3D246A123B001F0B48 /* StatusStateTests.swift */,
 				0983ACD2243EB22200DBB336 /* StatusViewControllerTests.swift */,
-				097F054224732A3E00E633C8 /* ApplyForTestViewControllerTests.swift */,
 			);
 			path = Status;
 			sourceTree = "<group>";
@@ -728,11 +742,10 @@
 		0995ABCD243D034E0057C0D7 /* Status */ = {
 			isa = PBXGroup;
 			children = (
-				F6BBE13B246F46B4005757BB /* ApplyForTest.storyboard */,
+				0938D90424744612006FAADF /* ApplyForTest */,
 				F758B8C3242CC0EE003AE16D /* Status.storyboard */,
 				F6BBE140246F584F005757BB /* WorkplaceGuidance.storyboard */,
 				13473A1A246AFF0C00800CEA /* AdviceViewController.swift */,
-				F6BBE13D246F46EE005757BB /* ApplyForTestViewController.swift */,
 				134470AF2454D614001A0AD9 /* CoughUpdateViewController.swift */,
 				09A9254A2457B2CA00C5DBC1 /* MedicalWorkerInstructionsViewController.swift */,
 				F61695A02458B3C0006AABE3 /* StatusNotificationHandler.swift */,
@@ -1113,13 +1126,11 @@
 		F604977024549B49002B8503 /* Testing */ = {
 			isa = PBXGroup;
 			children = (
-				09CDA11B247352F800C8684D /* OldReferenceCode.storyboard */,
 				F60497782454A40B002B8503 /* TestingInfo.storyboard */,
 				097F05482473445A00E633C8 /* TestingInfoContainerViewController.swift */,
 				F604977124549B7B002B8503 /* LinkingIdManager.swift */,
 				F604976E24549729002B8503 /* LinkingIdRequest.swift */,
 				F60497762454A294002B8503 /* TestingInfoViewController.swift */,
-				0982F483246DE4B400E57EE5 /* OldReferenceCodeViewController.swift */,
 				AE29892B24729AD8004C4097 /* ReferenceCode.storyboard */,
 				097F054624733FC200E633C8 /* ReferenceCodeLoadingViewController.swift */,
 				09CDA11724734FB100C8684D /* ReferenceCodeViewController.swift */,
@@ -1132,7 +1143,6 @@
 			children = (
 				09CDA1192473525000C8684D /* ReferenceCodeViewControllerTests.swift */,
 				F604977424549C95002B8503 /* LinkingIdManagerTests.swift */,
-				0982F485246DF05C00E57EE5 /* OldReferenceCodeViewControllerTests.swift */,
 				097F054A2473457000E633C8 /* TestingInfoContainerViewControllerTests.swift */,
 			);
 			path = Testing;
@@ -1463,7 +1473,6 @@
 				6FC63C3B241641BA007C8BF3 /* LaunchScreen.storyboard in Resources */,
 				AE29892C24729AD8004C4097 /* ReferenceCode.storyboard in Resources */,
 				A1E7A0592420028B0078174D /* NHS Colors.xcassets in Resources */,
-				09CDA11C247352F800C8684D /* OldReferenceCode.storyboard in Resources */,
 				8947F833245AD97A00C4F1BB /* Settings.bundle in Resources */,
 				F758B8BE242CB856003AE16D /* Localizable.strings in Resources */,
 				6FC63C38241641BA007C8BF3 /* Assets.xcassets in Resources */,
@@ -1557,7 +1566,6 @@
 				214209D924262B7500C7BFF3 /* SessionHelpers.swift in Sources */,
 				0983ACD3243EB22200DBB336 /* StatusViewControllerTests.swift in Sources */,
 				219C7B7C245B093000952B4D /* BluetoothPayloadTests.swift in Sources */,
-				097F054324732A3E00E633C8 /* ApplyForTestViewControllerTests.swift in Sources */,
 				896BE912244F11D100B3687C /* PublicKeyValidatorTests.swift in Sources */,
 				F62F858124510716006580A8 /* ContactEventsUploaderTests.swift in Sources */,
 				89CCF65F2456EF7000AC9D91 /* TrustValidatingDouble.swift in Sources */,
@@ -1581,7 +1589,6 @@
 				090B1871243552C300870B5D /* UserNotificationCenterDouble.swift in Sources */,
 				21C417CA242CB0A200DEF3E2 /* ConfirmRegistrationRequestTests.swift in Sources */,
 				F632792A2435323200CF7A42 /* PermissionsViewControllerTests.swift in Sources */,
-				0982F486246DF05C00E57EE5 /* OldReferenceCodeViewControllerTests.swift in Sources */,
 				09E6E7E62452779B0069DFA8 /* SetupCheckerTests.swift in Sources */,
 				F7D62F292440D4CB004C32A2 /* SonarBroadcastPayloadGeneratorTests.swift in Sources */,
 				F72EBDA5243D094A009F9328 /* SecureBroadcastRotationKeyStorageTests.swift in Sources */,
@@ -1590,6 +1597,7 @@
 				89CCF66424571EE900AC9D91 /* SetupProblemDiagnoserTests.swift in Sources */,
 				F63279272435219A00CF7A42 /* QueueDouble.swift in Sources */,
 				F6CC2CAC242BCD0D0079432B /* RemoteNotificationManagerTests.swift in Sources */,
+				0938D9092474484B006FAADF /* ApplyForTestContainerViewControllerTests.swift in Sources */,
 				0979FB782458ADE800EB01A8 /* PostcodeValidatorTests.swift in Sources */,
 				09CAA36A2440FC4500CE93A6 /* PostcodeViewControllerTests.swift in Sources */,
 				F67C5159243E7C1E008E2945 /* SubmitSymptomsViewControllerTests.swift in Sources */,
@@ -1637,6 +1645,7 @@
 				21C09A8D24377F5100368203 /* CoreBluetoothExtensions.swift in Sources */,
 				F72EBDA7243D2FD1009F9328 /* ConcreteBroadcastIdEncrypter.swift in Sources */,
 				F72EBD9E243C90E6009F9328 /* HumbleLocalNotificationScheduler.swift in Sources */,
+				0938D9062474473E006FAADF /* ApplyForTestContainerViewController.swift in Sources */,
 				F6DA0A3C246A0FAA001F0B48 /* StatusState.swift in Sources */,
 				89DF669F2460168000A55F24 /* StorageChecker.swift in Sources */,
 				217A23BE243B34E8001B8236 /* UIDevice+ModelName.swift in Sources */,
@@ -1714,7 +1723,6 @@
 				214209BA242216B700C7BFF3 /* Persistence.swift in Sources */,
 				213C806C241A56430020EFA5 /* PermissionsViewController.swift in Sources */,
 				89F06B2F2434A62C0074C612 /* LoggingManager.swift in Sources */,
-				0982F484246DE4B400E57EE5 /* OldReferenceCodeViewController.swift in Sources */,
 				09CAA3662440F3B100CE93A6 /* PostcodeViewController.swift in Sources */,
 				F6BBE143246F5870005757BB /* WorkplaceGuidanceViewController.swift in Sources */,
 				F61695A12458B3C0006AABE3 /* StatusNotificationHandler.swift in Sources */,

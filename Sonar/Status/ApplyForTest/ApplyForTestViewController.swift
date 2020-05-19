@@ -11,15 +11,12 @@ import UIKit
 class ApplyForTestViewController: UIViewController, Storyboarded {
     static let storyboardName = "ApplyForTest"
     
-    private var linkingIdManager: LinkingIdManaging!
-    private var uiQueue: TestableQueue!
+    private var referenceCode: String?
     private var urlOpener: TestableUrlOpener!
-    private var refCodeVC: OldReferenceCodeViewController!
 
-    func inject(linkingIdManager: LinkingIdManaging, uiQueue: TestableQueue, urlOpener: TestableUrlOpener) {
-        self.linkingIdManager = linkingIdManager
-        self.uiQueue = uiQueue
+    func inject(urlOpener: TestableUrlOpener, referenceCode: String?) {
         self.urlOpener = urlOpener
+        self.referenceCode = referenceCode
     }
 
     override func viewDidLoad() {
@@ -35,14 +32,13 @@ class ApplyForTestViewController: UIViewController, Storyboarded {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? OldReferenceCodeViewController {
-            vc.inject(linkingIdManager: linkingIdManager, uiQueue: uiQueue)
-            self.refCodeVC = vc
+        if let vc = segue.destination as? ReferenceCodeViewController {
+            vc.inject(referenceCode: referenceCode)
         }
     }
 
     @IBAction func applyForTestTapped() {
-        let url = ContentURLs.shared.applyForTest(referenceCode: refCodeVC.refCodeIfLoaded)
+        let url = ContentURLs.shared.applyForTest(referenceCode: referenceCode)
         urlOpener.open(url)
     }
 
