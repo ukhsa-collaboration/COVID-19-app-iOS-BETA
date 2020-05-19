@@ -193,6 +193,7 @@
 		F63279272435219A00CF7A42 /* QueueDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63279262435219A00CF7A42 /* QueueDouble.swift */; };
 		F632792A2435323200CF7A42 /* PermissionsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63279292435323200CF7A42 /* PermissionsViewControllerTests.swift */; };
 		F6334E472474559000421B4C /* Symptoms.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6334E462474559000421B4C /* Symptoms.swift */; };
+		F6334E492474595500421B4C /* SymptomsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6334E482474595500421B4C /* SymptomsTests.swift */; };
 		F652F72C244A74E900D97950 /* StartDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652F72B244A74E900D97950 /* StartDateViewController.swift */; };
 		F652F72E244E472E00D97950 /* SymptomsPromptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652F72D244E472E00D97950 /* SymptomsPromptViewController.swift */; };
 		F652F730244E4AAD00D97950 /* DrawerPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652F72F244E4AAD00D97950 /* DrawerPresentation.swift */; };
@@ -494,6 +495,7 @@
 		F63279262435219A00CF7A42 /* QueueDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueDouble.swift; sourceTree = "<group>"; };
 		F63279292435323200CF7A42 /* PermissionsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsViewControllerTests.swift; sourceTree = "<group>"; };
 		F6334E462474559000421B4C /* Symptoms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Symptoms.swift; sourceTree = "<group>"; };
+		F6334E482474595500421B4C /* SymptomsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomsTests.swift; sourceTree = "<group>"; };
 		F652F72B244A74E900D97950 /* StartDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDateViewController.swift; sourceTree = "<group>"; };
 		F652F72D244E472E00D97950 /* SymptomsPromptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomsPromptViewController.swift; sourceTree = "<group>"; };
 		F652F72F244E4AAD00D97950 /* DrawerPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerPresentation.swift; sourceTree = "<group>"; };
@@ -1148,6 +1150,7 @@
 				F6548FA22460C1C7005F06FF /* CheckinCoordinatorTests.swift */,
 				F67C5158243E7C1E008E2945 /* SubmitSymptomsViewControllerTests.swift */,
 				09C9DB3424608ABB0012F80A /* Controls */,
+				F6334E482474595500421B4C /* SymptomsTests.swift */,
 			);
 			path = SelfDiagnosis;
 			sourceTree = "<group>";
@@ -1537,6 +1540,7 @@
 				09CDA11A2473525000C8684D /* ReferenceCodeViewControllerTests.swift in Sources */,
 				219C7B78245AD4B700952B4D /* DateExtensionTests.swift in Sources */,
 				21E50511244470590065C69B /* ContactEventTests.swift in Sources */,
+				F6334E492474595500421B4C /* SymptomsTests.swift in Sources */,
 				097C94CB245B81E8008A9695 /* EnGbLocaleProviderDouble.swift in Sources */,
 				097F054B2473457000E633C8 /* TestingInfoContainerViewControllerTests.swift in Sources */,
 				89896E622435F37300F949EA /* ProjectTests.swift in Sources */,
