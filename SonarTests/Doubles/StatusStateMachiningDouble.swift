@@ -20,8 +20,8 @@ class StatusStateMachiningDouble: StatusStateMachining {
         exposedCalled = true
     }
 
-    var selfDiagnosisCalled: (symptoms: Set<Symptom>, startDate: Date)?
-    func selfDiagnose(symptoms: Set<Symptom>, startDate: Date) throws {
+    var selfDiagnosisCalled: (symptoms: Symptoms, startDate: Date)?
+    func selfDiagnose(symptoms: Symptoms, startDate: Date) throws {
         selfDiagnosisCalled = (symptoms: symptoms, startDate: startDate)
     }
 
@@ -30,8 +30,8 @@ class StatusStateMachiningDouble: StatusStateMachining {
         tickCalled = true
     }
 
-    var checkinSymptoms: Set<Symptom>?
-    func checkin(symptoms: Set<Symptom>) {
+    var checkinSymptoms: Symptoms?
+    func checkin(symptoms: Symptoms) {
         checkinSymptoms = symptoms
     }
 

@@ -192,6 +192,8 @@
 		F63279252435203600CF7A42 /* DispatchQueue+Testable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63279242435203600CF7A42 /* DispatchQueue+Testable.swift */; };
 		F63279272435219A00CF7A42 /* QueueDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63279262435219A00CF7A42 /* QueueDouble.swift */; };
 		F632792A2435323200CF7A42 /* PermissionsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63279292435323200CF7A42 /* PermissionsViewControllerTests.swift */; };
+		F6334E472474559000421B4C /* Symptoms.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6334E462474559000421B4C /* Symptoms.swift */; };
+		F6334E492474595500421B4C /* SymptomsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6334E482474595500421B4C /* SymptomsTests.swift */; };
 		F652F72C244A74E900D97950 /* StartDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652F72B244A74E900D97950 /* StartDateViewController.swift */; };
 		F652F72E244E472E00D97950 /* SymptomsPromptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652F72D244E472E00D97950 /* SymptomsPromptViewController.swift */; };
 		F652F730244E4AAD00D97950 /* DrawerPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652F72F244E4AAD00D97950 /* DrawerPresentation.swift */; };
@@ -225,7 +227,6 @@
 		F6DA0A3E246A123B001F0B48 /* StatusStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DA0A3D246A123B001F0B48 /* StatusStateTests.swift */; };
 		F6E2E597246B287B009D80DF /* StatusStateMachiningDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E2E596246B287B009D80DF /* StatusStateMachiningDouble.swift */; };
 		F6EE8363246306490076AF97 /* SmartInvertBorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EE8362246306490076AF97 /* SmartInvertBorderView.swift */; };
-		F6EEC3B82448DD2400172820 /* SelfDiagnosis.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EEC3B72448DD2400172820 /* SelfDiagnosis.swift */; };
 		F6F05A242433BEC000FF4B72 /* OnboardingCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F05A232433BEC000FF4B72 /* OnboardingCoordinatorTests.swift */; };
 		F6F05A262433C09200FF4B72 /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F05A252433C09200FF4B72 /* OnboardingCoordinator.swift */; };
 		F6F05A282433C55300FF4B72 /* AuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F05A272433C55300FF4B72 /* AuthorizationManager.swift */; };
@@ -493,6 +494,8 @@
 		F63279242435203600CF7A42 /* DispatchQueue+Testable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Testable.swift"; sourceTree = "<group>"; };
 		F63279262435219A00CF7A42 /* QueueDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueDouble.swift; sourceTree = "<group>"; };
 		F63279292435323200CF7A42 /* PermissionsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsViewControllerTests.swift; sourceTree = "<group>"; };
+		F6334E462474559000421B4C /* Symptoms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Symptoms.swift; sourceTree = "<group>"; };
+		F6334E482474595500421B4C /* SymptomsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomsTests.swift; sourceTree = "<group>"; };
 		F652F72B244A74E900D97950 /* StartDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDateViewController.swift; sourceTree = "<group>"; };
 		F652F72D244E472E00D97950 /* SymptomsPromptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomsPromptViewController.swift; sourceTree = "<group>"; };
 		F652F72F244E4AAD00D97950 /* DrawerPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerPresentation.swift; sourceTree = "<group>"; };
@@ -532,7 +535,6 @@
 		F6DA0A3D246A123B001F0B48 /* StatusStateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusStateTests.swift; sourceTree = "<group>"; };
 		F6E2E596246B287B009D80DF /* StatusStateMachiningDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusStateMachiningDouble.swift; sourceTree = "<group>"; };
 		F6EE8362246306490076AF97 /* SmartInvertBorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartInvertBorderView.swift; sourceTree = "<group>"; };
-		F6EEC3B72448DD2400172820 /* SelfDiagnosis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfDiagnosis.swift; sourceTree = "<group>"; };
 		F6F05A232433BEC000FF4B72 /* OnboardingCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinatorTests.swift; sourceTree = "<group>"; };
 		F6F05A252433C09200FF4B72 /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
 		F6F05A272433C55300FF4B72 /* AuthorizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationManager.swift; sourceTree = "<group>"; };
@@ -634,24 +636,6 @@
 			path = workflows;
 			sourceTree = "<group>";
 		};
-		0938D90424744612006FAADF /* ApplyForTest */ = {
-			isa = PBXGroup;
-			children = (
-				F6BBE13B246F46B4005757BB /* ApplyForTest.storyboard */,
-				F6BBE13D246F46EE005757BB /* ApplyForTestViewController.swift */,
-				0938D9052474473E006FAADF /* ApplyForTestContainerViewController.swift */,
-			);
-			path = ApplyForTest;
-			sourceTree = "<group>";
-		};
-		0938D907247447A4006FAADF /* ApplyForTest */ = {
-			isa = PBXGroup;
-			children = (
-				0938D9082474484B006FAADF /* ApplyForTestContainerViewControllerTests.swift */,
-			);
-			path = ApplyForTest;
-			sourceTree = "<group>";
-		};
 		0964B37E2463293D0022EF97 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -672,7 +656,6 @@
 		0983ACD1243EB20A00DBB336 /* Status */ = {
 			isa = PBXGroup;
 			children = (
-				0938D907247447A4006FAADF /* ApplyForTest */,
 				F61695A22458B556006AABE3 /* StatusNotificationHandlerTests.swift */,
 				F6DA0A392469DCF7001F0B48 /* StatusStateMachineTests.swift */,
 				F6DA0A352469D95F001F0B48 /* StatusStateMigrationTests.swift */,
@@ -742,7 +725,6 @@
 		0995ABCD243D034E0057C0D7 /* Status */ = {
 			isa = PBXGroup;
 			children = (
-				0938D90424744612006FAADF /* ApplyForTest */,
 				F758B8C3242CC0EE003AE16D /* Status.storyboard */,
 				F6BBE140246F584F005757BB /* WorkplaceGuidance.storyboard */,
 				13473A1A246AFF0C00800CEA /* AdviceViewController.swift */,
@@ -1126,6 +1108,9 @@
 		F604977024549B49002B8503 /* Testing */ = {
 			isa = PBXGroup;
 			children = (
+				F6BBE13B246F46B4005757BB /* ApplyForTest.storyboard */,
+				F6BBE13D246F46EE005757BB /* ApplyForTestViewController.swift */,
+				0938D9052474473E006FAADF /* ApplyForTestContainerViewController.swift */,
 				F60497782454A40B002B8503 /* TestingInfo.storyboard */,
 				097F05482473445A00E633C8 /* TestingInfoContainerViewController.swift */,
 				F604977124549B7B002B8503 /* LinkingIdManager.swift */,
@@ -1141,6 +1126,7 @@
 		F604977324549C84002B8503 /* Testing */ = {
 			isa = PBXGroup;
 			children = (
+				0938D9082474484B006FAADF /* ApplyForTestContainerViewControllerTests.swift */,
 				09CDA1192473525000C8684D /* ReferenceCodeViewControllerTests.swift */,
 				F604977424549C95002B8503 /* LinkingIdManagerTests.swift */,
 				097F054A2473457000E633C8 /* TestingInfoContainerViewControllerTests.swift */,
@@ -1164,6 +1150,7 @@
 				F6548FA22460C1C7005F06FF /* CheckinCoordinatorTests.swift */,
 				F67C5158243E7C1E008E2945 /* SubmitSymptomsViewControllerTests.swift */,
 				09C9DB3424608ABB0012F80A /* Controls */,
+				F6334E482474595500421B4C /* SymptomsTests.swift */,
 			);
 			path = SelfDiagnosis;
 			sourceTree = "<group>";
@@ -1183,9 +1170,9 @@
 				F68B89EC243CFF2600F369A9 /* SelfDiagnosis.storyboard */,
 				134470AB2454D4DA001A0AD9 /* CheckinCoordinator.swift */,
 				13F4AE872451EB330082A46D /* QuestionSymptomsViewController.swift */,
-				F6EEC3B72448DD2400172820 /* SelfDiagnosis.swift */,
 				134470AC2454D4DA001A0AD9 /* SelfDiagnosisCoordinator.swift */,
 				F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */,
+				F6334E462474559000421B4C /* Symptoms.swift */,
 				F673FBB32457A89E00D96C50 /* SymptomsSummaryViewController.swift */,
 				13F4AE862451EACD0082A46D /* Controls */,
 			);
@@ -1553,6 +1540,7 @@
 				09CDA11A2473525000C8684D /* ReferenceCodeViewControllerTests.swift in Sources */,
 				219C7B78245AD4B700952B4D /* DateExtensionTests.swift in Sources */,
 				21E50511244470590065C69B /* ContactEventTests.swift in Sources */,
+				F6334E492474595500421B4C /* SymptomsTests.swift in Sources */,
 				097C94CB245B81E8008A9695 /* EnGbLocaleProviderDouble.swift in Sources */,
 				097F054B2473457000E633C8 /* TestingInfoContainerViewControllerTests.swift in Sources */,
 				89896E622435F37300F949EA /* ProjectTests.swift in Sources */,
@@ -1628,6 +1616,7 @@
 				F6EE8363246306490076AF97 /* SmartInvertBorderView.swift in Sources */,
 				09A9254B2457B2CA00C5DBC1 /* MedicalWorkerInstructionsViewController.swift in Sources */,
 				F6F05A282433C55300FF4B72 /* AuthorizationManager.swift in Sources */,
+				F6334E472474559000421B4C /* Symptoms.swift in Sources */,
 				89F06B352434AF9D0074C612 /* LogEvent.swift in Sources */,
 				F694B1BC2459E9F000C6A5D1 /* NotificationAcknowledger.swift in Sources */,
 				F697806A246DA9EF002CC50B /* SetStatusStateViewController.swift in Sources */,
@@ -1708,7 +1697,6 @@
 				898FE859243B4FE300210775 /* AuthorizationManaging.swift in Sources */,
 				F652F72E244E472E00D97950 /* SymptomsPromptViewController.swift in Sources */,
 				F67C5154243E4D2F008E2945 /* AnswerButton.swift in Sources */,
-				F6EEC3B82448DD2400172820 /* SelfDiagnosis.swift in Sources */,
 				0964B37D246328A20022EF97 /* UIView+Scrolling.swift in Sources */,
 				6FC63C31241641B8007C8BF3 /* AppDelegate.swift in Sources */,
 				F600A60224297A8E0038DF57 /* RegistrationRequest.swift in Sources */,

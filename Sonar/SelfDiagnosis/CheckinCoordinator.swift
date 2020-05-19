@@ -11,19 +11,19 @@ import UIKit
 class CheckinCoordinator: Coordinator {
     let navigationController: UINavigationController
     let checkin: StatusState.Checkin
-    let completion: (Set<Symptom>) -> Void
+    let completion: (Symptoms) -> Void
     
     init(
         navigationController: UINavigationController,
         checkin: StatusState.Checkin,
-        completion: @escaping (Set<Symptom>) -> Void
+        completion: @escaping (Symptoms) -> Void
     ) {
         self.navigationController = navigationController
         self.checkin = checkin
         self.completion = completion
     }
     
-    var symptoms = Set<Symptom>()
+    var symptoms: Symptoms = []
     
     func start() {
         let title = checkin.symptoms.contains(.temperature)

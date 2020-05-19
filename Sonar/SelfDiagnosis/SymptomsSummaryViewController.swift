@@ -13,16 +13,16 @@ import Logging
 class SymptomsSummaryViewController: UIViewController, Storyboarded {
     static let storyboardName = "SelfDiagnosis"
 
-    private var symptoms: Set<Symptom>!
+    private var symptoms: Symptoms!
     private var statusStateMachine: StatusStateMachining!
-    private var completion: ((Set<Symptom>) -> Void)!
-    private var pageNumber: Int?
+    private var completion: ((Symptoms) -> Void)!
+    private var pageNumber: Int!
 
     func inject(
         pageNumber: Int,
-        symptoms: Set<Symptom>,
+        symptoms: Symptoms,
         statusStateMachine: StatusStateMachining,
-        completion: @escaping (Set<Symptom>) -> Void
+        completion: @escaping (Symptoms) -> Void
     ) {
         self.statusStateMachine = statusStateMachine
         self.completion = completion
@@ -73,21 +73,22 @@ class SymptomsSummaryViewController: UIViewController, Storyboarded {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        haveSymptomsView.isHidden = symptoms.isEmpty
+        haveSymptomsView.isHidden = !symptoms.hasCoronavirusSymptoms
         checkAnswersLabel.text = "SYMPTOMS_SUMMARY_CHECK_ANSWERS".localized
 
-        noSymptomsView.isHidden = !symptoms.isEmpty
+        noSymptomsView.isHidden = symptoms.hasCoronavirusSymptoms
         noSymptomsLabel.text = "SYMPTOMS_SUMMARY_NO_SYMPTOMS".localized
         noSymptomsInfoLabel.text = "SYMPTOMS_SUMMARY_NO_SYMPTOMS_INFO".localized
         noSymptomsInfoButton.setTitle("SYMPTOMS_SUMMARY_NO_SYMPTOMS_NHS_111".localized, for: .normal)
         noSymptomsInfoButton.contentHorizontalAlignment = .leading
 
-        let buttonTitle = symptoms.isEmpty ? "SYMPTOMS_SUMMARY_DONE" : "SYMPTOMS_SUMMARY_CONTINUE"
+        let buttonTitle = symptoms.hasCoronavirusSymptoms ? "SYMPTOMS_SUMMARY_CONTINUE" : "SYMPTOMS_SUMMARY_DONE"
         button.setTitle(buttonTitle.localized, for: .normal)
     
         // This assumes this is the last page of the questionnaire
-        pageNumber.map { pageNumberLabel.text = "\($0)/\($0)"  }
-        
+        pageNumberLabel.text = "\(pageNumber!)/\(pageNumber!)"
+        pageNumberLabel.accessibilityLabel = "Step \(pageNumber!) of \(pageNumber!)"
+
         let symptomTexts = [
             "SYMPTOMS_SUMMARY_\(symptoms.contains(.temperature) ? "HAVE" : "NO")_TEMPERATURE".localized,
             "SYMPTOMS_SUMMARY_\(symptoms.contains(.cough) ? "HAVE" : "NO")_COUGH".localized,
@@ -126,7 +127,7 @@ class SymptomsSummaryViewController: UIViewController, Storyboarded {
     }
 
     @IBAction func buttonTapped(_ sender: PrimaryButton) {
-        if symptoms.isEmpty {
+        if !symptoms.hasCoronavirusSymptoms {
             completion(symptoms)
             return
         }

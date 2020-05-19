@@ -15,19 +15,19 @@ protocol Coordinator {
 class SelfDiagnosisCoordinator: Coordinator {
     let navigationController: UINavigationController
     let statusStateMachine: StatusStateMachining
-    let completion: (Set<Symptom>) -> Void
+    let completion: (Symptoms) -> Void
 
     init(
         navigationController: UINavigationController,
         statusStateMachine: StatusStateMachining,
-        completion: @escaping (Set<Symptom>) -> Void
+        completion: @escaping (Symptoms) -> Void
     ) {
         self.navigationController = navigationController
         self.statusStateMachine = statusStateMachine
         self.completion = completion
     }
     
-    var symptoms = Set<Symptom>()
+    var symptoms = Symptoms()
 
     static let pageCount = 6
     
@@ -51,35 +51,35 @@ class SelfDiagnosisCoordinator: Coordinator {
     
     func start() {
         openQuestionVC(localizedTextPrefix: "TEMPERATURE", pageNumber: 1) { hasHighTemperature in
-            if hasHighTemperature { self.symptoms.insert(.temperature) }
+            self.updateSymptoms(with: .temperature, if: hasHighTemperature)
             self.openCoughView()
         }
     }
     
     func openCoughView() {
         openQuestionVC(localizedTextPrefix: "COUGH", pageNumber: 2) { hasNewCough in
-            if hasNewCough { self.symptoms.insert(.cough) }
+            self.updateSymptoms(with: .cough, if: hasNewCough)
             self.openSmellView()
         }
     }
     
     func openSmellView() {
         openQuestionVC(localizedTextPrefix: "SMELL", pageNumber: 3) { hasSmellLoss in
-            if hasSmellLoss { self.symptoms.insert(.smellLoss) }
+            self.updateSymptoms(with: .smellLoss, if: hasSmellLoss)
             self.openFeverView()
         }
     }
     
     func openFeverView() {
         openQuestionVC(localizedTextPrefix: "FEVER", pageNumber: 4) { hasFever in
-            if hasFever { self.symptoms.insert(.fever) }
+            self.updateSymptoms(with: .fever, if: hasFever)
             self.openNauseaView()
         }
     }
     
     func openNauseaView() {
         openQuestionVC(localizedTextPrefix: "NAUSEA", pageNumber: 5) { hasNausea in
-            if hasNausea { self.symptoms.insert(.nausea) }
+            self.updateSymptoms(with: .nausea, if: hasNausea)
             self.openSubmissionView()
         }
     }
@@ -93,5 +93,13 @@ class SelfDiagnosisCoordinator: Coordinator {
             completion: completion
         )
         navigationController.pushViewController(vc, animated: true)
+    }
+
+    private func updateSymptoms(with symptom: Symptom, if hasSymptom: Bool) {
+        if hasSymptom {
+            symptoms.insert(symptom)
+        } else {
+            symptoms.remove(symptom)
+        }
     }
 }

@@ -8,6 +8,19 @@
 
 import Foundation
 
+enum SelfDiagnosisType: String, Codable {
+    case initial
+    case subsequent
+}
+
+// This class continues to exist to allow migrating old data but is otherwise unused
+struct SelfDiagnosis: Codable, Equatable {
+    let type: SelfDiagnosisType
+    let symptoms: Set<Symptom>
+    let startDate: Date
+    var expiryDate: Date = Date()
+}
+
 class StatusStateMigration {
 
     private let dateProvider: () -> Date
@@ -45,14 +58,14 @@ class StatusStateMigration {
             if currentDate > diagnosis.expiryDate || diagnosis.type == .subsequent {
                 return .checkin(
                     StatusState.Checkin(
-                        symptoms: diagnosis.symptoms,
+                        symptoms: Symptoms(diagnosis.symptoms),
                         checkinDate: diagnosis.expiryDate
                     )
                 )
             } else {
                 return .symptomatic(
                     StatusState.Symptomatic(
-                        symptoms: diagnosis.symptoms,
+                        symptoms: Symptoms(diagnosis.symptoms),
                         startDate: diagnosis.startDate
                     )
                 )
