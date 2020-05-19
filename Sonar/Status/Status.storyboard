@@ -417,10 +417,10 @@
                                                         <rect key="frame" x="-16" y="0.0" width="414" height="187"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="pd0-cH-tPQ">
-                                                                <rect key="frame" x="17" y="137" width="380" height="30"/>
+                                                                <rect key="frame" x="16" y="137" width="382" height="30"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Av1-6z-e44" customClass="NotificationStatusButton" customModule="Sonar" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="128.5" height="30"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="129" height="30"/>
                                                                         <color key="backgroundColor" name="NHS Secondary Button"/>
                                                                         <state key="normal" title="No thanks"/>
                                                                         <connections>
@@ -428,7 +428,7 @@
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b34-L2-7Cv" customClass="NotificationStatusButton" customModule="Sonar" customModuleProvider="target">
-                                                                        <rect key="frame" x="138.5" y="0.0" width="241.5" height="30"/>
+                                                                        <rect key="frame" x="139" y="0.0" width="243" height="30"/>
                                                                         <color key="backgroundColor" name="NHS Button"/>
                                                                         <state key="normal" title="Yes, go to settings"/>
                                                                         <connections>
@@ -440,28 +440,28 @@
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                         <constraints>
-                                                            <constraint firstItem="pd0-cH-tPQ" firstAttribute="leading" secondItem="505-qb-uvu" secondAttribute="leading" constant="17" id="4Ft-Oy-AJd"/>
+                                                            <constraint firstItem="pd0-cH-tPQ" firstAttribute="leading" secondItem="505-qb-uvu" secondAttribute="leading" constant="16" id="4Ft-Oy-AJd"/>
                                                             <constraint firstAttribute="bottom" secondItem="pd0-cH-tPQ" secondAttribute="bottom" constant="20" id="Hmf-sK-ckJ"/>
-                                                            <constraint firstAttribute="trailing" secondItem="pd0-cH-tPQ" secondAttribute="trailing" constant="17" id="hhe-rR-u8A"/>
+                                                            <constraint firstAttribute="trailing" secondItem="pd0-cH-tPQ" secondAttribute="trailing" constant="16" id="hhe-rR-u8A"/>
                                                         </constraints>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Enable notifications" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zeo-Ra-cKf">
-                                                        <rect key="frame" x="43" y="24" width="315" height="20.5"/>
+                                                        <rect key="frame" x="42" y="24" width="282.5" height="20.5"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                         <color key="textColor" name="NHS Text"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bell ringing" translatesAutoresizingMaskIntoConstraints="NO" id="o57-iY-zoI" customClass="AutoscalingImageView" customModule="Sonar" customModuleProvider="target">
-                                                        <rect key="frame" x="339" y="24.5" width="26" height="20"/>
+                                                        <rect key="frame" x="340.5" y="24" width="25.5" height="20.5"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To receive notifications to say if you've been near someone with COVID-19 symptoms, allow notifications in your Settings." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBV-SW-opU">
-                                                        <rect key="frame" x="17" y="56.5" width="348" height="64.5"/>
+                                                        <rect key="frame" x="16" y="56.5" width="350" height="64.5"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                         <color key="textColor" name="NHS Text"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Notice badge" translatesAutoresizingMaskIntoConstraints="NO" id="1ZI-Zq-fF0" customClass="AutoscalingImageView" customModule="Sonar" customModuleProvider="target">
-                                                        <rect key="frame" x="17" y="27.5" width="14" height="14"/>
+                                                        <rect key="frame" x="16" y="27.5" width="14" height="14"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -470,19 +470,19 @@
                                                     <bool key="isElement" value="NO"/>
                                                 </accessibility>
                                                 <constraints>
-                                                    <constraint firstItem="fBV-SW-opU" firstAttribute="leading" secondItem="3ne-ot-IQ6" secondAttribute="leading" constant="17" id="DMf-Pg-0gS"/>
+                                                    <constraint firstItem="fBV-SW-opU" firstAttribute="leading" secondItem="3ne-ot-IQ6" secondAttribute="leading" constant="16" id="DMf-Pg-0gS"/>
                                                     <constraint firstItem="Zeo-Ra-cKf" firstAttribute="leading" secondItem="1ZI-Zq-fF0" secondAttribute="trailing" constant="12" id="Dlt-1P-aeI"/>
                                                     <constraint firstItem="o57-iY-zoI" firstAttribute="centerY" secondItem="Zeo-Ra-cKf" secondAttribute="centerY" id="FzE-S7-jf1"/>
+                                                    <constraint firstItem="o57-iY-zoI" firstAttribute="leading" secondItem="Zeo-Ra-cKf" secondAttribute="trailing" constant="16" id="G6b-E1-RmW"/>
                                                     <constraint firstItem="505-qb-uvu" firstAttribute="top" secondItem="3ne-ot-IQ6" secondAttribute="top" id="Nx5-RN-HgN"/>
                                                     <constraint firstItem="1ZI-Zq-fF0" firstAttribute="centerY" secondItem="Zeo-Ra-cKf" secondAttribute="centerY" id="U9s-bH-Sfq"/>
-                                                    <constraint firstItem="1ZI-Zq-fF0" firstAttribute="leading" secondItem="3ne-ot-IQ6" secondAttribute="leading" constant="17" id="WlX-JP-eEO"/>
+                                                    <constraint firstItem="1ZI-Zq-fF0" firstAttribute="leading" secondItem="3ne-ot-IQ6" secondAttribute="leading" constant="16" id="WlX-JP-eEO"/>
                                                     <constraint firstItem="Zeo-Ra-cKf" firstAttribute="top" secondItem="3ne-ot-IQ6" secondAttribute="top" constant="24" id="Z5j-jF-ZS3"/>
                                                     <constraint firstItem="pd0-cH-tPQ" firstAttribute="top" secondItem="fBV-SW-opU" secondAttribute="bottom" constant="16" id="iKU-TB-QEU"/>
                                                     <constraint firstItem="fBV-SW-opU" firstAttribute="top" secondItem="Zeo-Ra-cKf" secondAttribute="bottom" constant="12" id="qNA-XN-ayS"/>
-                                                    <constraint firstAttribute="trailing" secondItem="Zeo-Ra-cKf" secondAttribute="trailing" constant="24" id="sZQ-5N-XCX"/>
                                                     <constraint firstAttribute="bottom" secondItem="505-qb-uvu" secondAttribute="bottom" id="u38-j9-ULl"/>
-                                                    <constraint firstAttribute="trailing" secondItem="o57-iY-zoI" secondAttribute="trailing" constant="17" id="xw2-w8-cux"/>
-                                                    <constraint firstAttribute="trailing" secondItem="fBV-SW-opU" secondAttribute="trailing" constant="17" id="zIz-OA-smj"/>
+                                                    <constraint firstAttribute="trailing" secondItem="o57-iY-zoI" secondAttribute="trailing" constant="16" id="xw2-w8-cux"/>
+                                                    <constraint firstAttribute="trailing" secondItem="fBV-SW-opU" secondAttribute="trailing" constant="16" id="zIz-OA-smj"/>
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="6d3-41-7Jl">
