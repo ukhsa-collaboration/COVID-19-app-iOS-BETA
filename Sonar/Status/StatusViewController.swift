@@ -19,9 +19,12 @@ class StatusViewController: UIViewController, Storyboarded {
     @IBOutlet weak private var disableNotificationStatusViewButton: NotificationStatusButton!
     @IBOutlet weak private var goToSettingsButton: NotificationStatusButton!
     
+    @IBOutlet weak var diagnosisStackView: UIStackView!
     @IBOutlet weak var diagnosisHighlightView: UIView!
     @IBOutlet weak var diagnosisTitleLabel: UILabel!
     @IBOutlet weak var diagnosisDetailLabel: UILabel!
+
+    @IBOutlet weak var nextStepsDetailView: UIView!
 
     @IBOutlet weak var feelUnwellButton: UIButton!
     @IBOutlet weak var feelUnwellTitleLabel: UILabel!
@@ -29,6 +32,8 @@ class StatusViewController: UIViewController, Storyboarded {
 
     @IBOutlet weak var applyForTestButton: UIButton!
     @IBOutlet weak var stepsDetailLabel: UILabel!
+
+    @IBOutlet weak var nhsServicesStackView: UIStackView!
 
     var hasNotificationProblem = false {
         didSet {
@@ -62,33 +67,37 @@ class StatusViewController: UIViewController, Storyboarded {
     }
 
     override func viewDidLoad() {
+        navigationItem.titleView = {
+            let logo = UIImageView(image: UIImage(named: "NHS_Logo"))
+            logo.contentMode = .scaleAspectFit
+
+            let title = UILabel()
+            title.text = "COVID-19"
+            title.textColor = UIColor(named: "NHS Blue")
+            title.accessibilityLabel = "NHS Covid 19"
+
+            return UIStackView(arrangedSubviews: [logo, title])
+        }()
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Info"), style: .plain, target: self, action: #selector(infoTapped))
+
         diagnosisHighlightView.layer.cornerRadius = 8
-
-        feelUnwellButton.accessibilityLabel = [
-            feelUnwellTitleLabel.text, feelUnwellBodyLabel.text
-        ].compactMap { $0 }.joined(separator: ". ")
-
-        let logo = UIImageView(image: UIImage(named: "NHS_Logo"))
-        logo.contentMode = .scaleAspectFit
         diagnosisHighlightView.accessibilityIgnoresInvertColors = true
-        
+
         setupBannerAppearance(hasNotificationProblem: hasNotificationProblem,
                               bannerDisabled: persistence.disabledNotificationsStatusView)
                 
         goToSettingsButton.titleLabel?.text = "GO_TO_SETTINGS".localized
         disableNotificationStatusViewButton.titleLabel?.text = "DISABLE_NOTIFICATIONS_STATUS_VIEW".localized
 
-        let title = UILabel()
-        title.text = "COVID-19"
-        title.textColor = UIColor(named: "NHS Blue")
-        title.accessibilityLabel = "NHS Covid 19"
+        feelUnwellButton.accessibilityLabel = [
+            feelUnwellTitleLabel.text, feelUnwellBodyLabel.text
+        ].compactMap { $0 }.joined(separator: ". ")
 
-        let stack = UIStackView()
-        stack.addArrangedSubview(logo)
-        stack.addArrangedSubview(title)
-
-        navigationItem.titleView = stack
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Info"), style: .plain, target: self, action: #selector(infoTapped))
+        diagnosisStackView.isLayoutMarginsRelativeArrangement = true
+        contentStackView.setCustomSpacing(32, after: diagnosisStackView)
+        contentStackView.setCustomSpacing(32, after: nextStepsDetailView)
+        nhsServicesStackView.isLayoutMarginsRelativeArrangement = true
 
         notificationCenter.addObserver(self, selector: #selector(reload), name: UIApplication.didBecomeActiveNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(reload), name: StatusStateMachine.StatusStateChangedNotification, object: nil)

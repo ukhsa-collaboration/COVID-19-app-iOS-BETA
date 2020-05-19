@@ -260,7 +260,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="NyJ-yi-J4V">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1232.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1300.5"/>
                                         <subviews>
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4tb-5a-Uxm">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="128"/>
@@ -268,83 +268,96 @@
                                                     <segue destination="lQF-lU-fYL" kind="embed" id="HTK-eb-BWk"/>
                                                 </connections>
                                             </containerView>
-                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="3ne-ot-IQ6" userLabel="Notification status view">
-                                                <rect key="frame" x="0.0" y="144" width="414" height="187"/>
+                                            <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gGD-ZU-CRl" userLabel="Notification Problem View">
+                                                <rect key="frame" x="0.0" y="144" width="414" height="227"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="505-qb-uvu" customClass="SmartInvertBorderView" customModule="Sonar" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="187"/>
+                                                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="3ne-ot-IQ6" userLabel="Notification status view">
+                                                        <rect key="frame" x="16" y="8" width="382" height="211"/>
                                                         <subviews>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="pd0-cH-tPQ">
-                                                                <rect key="frame" x="16" y="137" width="382" height="30"/>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="505-qb-uvu" customClass="SmartInvertBorderView" customModule="Sonar" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="382" height="211"/>
                                                                 <subviews>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Av1-6z-e44" customClass="NotificationStatusButton" customModule="Sonar" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="129" height="30"/>
-                                                                        <color key="backgroundColor" name="NHS Secondary Button"/>
-                                                                        <state key="normal" title="No thanks"/>
-                                                                        <connections>
-                                                                            <action selector="disableNotificationsTapped" destination="D27-h6-ECy" eventType="touchUpInside" id="4eZ-TE-fSP"/>
-                                                                        </connections>
-                                                                    </button>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b34-L2-7Cv" customClass="NotificationStatusButton" customModule="Sonar" customModuleProvider="target">
-                                                                        <rect key="frame" x="139" y="0.0" width="243" height="30"/>
-                                                                        <color key="backgroundColor" name="NHS Button"/>
-                                                                        <state key="normal" title="Yes, go to settings"/>
-                                                                        <connections>
-                                                                            <action selector="goToSettingsTapped" destination="D27-h6-ECy" eventType="touchUpInside" id="gmt-Yr-8eO"/>
-                                                                        </connections>
-                                                                    </button>
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="pd0-cH-tPQ">
+                                                                        <rect key="frame" x="16" y="137" width="350" height="54"/>
+                                                                        <subviews>
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Av1-6z-e44" customClass="NotificationStatusButton" customModule="Sonar" customModuleProvider="target">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="118.5" height="54"/>
+                                                                                <color key="backgroundColor" name="NHS Secondary Button"/>
+                                                                                <state key="normal" title="No thanks"/>
+                                                                                <connections>
+                                                                                    <action selector="disableNotificationsTapped" destination="D27-h6-ECy" eventType="touchUpInside" id="4eZ-TE-fSP"/>
+                                                                                </connections>
+                                                                            </button>
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b34-L2-7Cv" customClass="NotificationStatusButton" customModule="Sonar" customModuleProvider="target">
+                                                                                <rect key="frame" x="128.5" y="0.0" width="221.5" height="54"/>
+                                                                                <color key="backgroundColor" name="NHS Button"/>
+                                                                                <state key="normal" title="Yes, go to settings"/>
+                                                                                <connections>
+                                                                                    <action selector="goToSettingsTapped" destination="D27-h6-ECy" eventType="touchUpInside" id="gmt-Yr-8eO"/>
+                                                                                </connections>
+                                                                            </button>
+                                                                        </subviews>
+                                                                    </stackView>
                                                                 </subviews>
-                                                            </stackView>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="bottom" secondItem="pd0-cH-tPQ" secondAttribute="bottom" constant="20" id="Hmf-sK-ckJ"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="pd0-cH-tPQ" secondAttribute="trailing" constant="16" id="SG7-l4-Ieg"/>
+                                                                    <constraint firstItem="pd0-cH-tPQ" firstAttribute="leading" secondItem="505-qb-uvu" secondAttribute="leading" constant="16" id="hBN-l9-Pba"/>
+                                                                </constraints>
+                                                            </view>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Notice badge" translatesAutoresizingMaskIntoConstraints="NO" id="1ZI-Zq-fF0" customClass="AutoscalingImageView" customModule="Sonar" customModuleProvider="target">
+                                                                <rect key="frame" x="16" y="27.5" width="14" height="14"/>
+                                                            </imageView>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Enable notifications" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zeo-Ra-cKf">
+                                                                <rect key="frame" x="42" y="24" width="282.5" height="20.5"/>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                                <color key="textColor" name="NHS Text"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bell ringing" translatesAutoresizingMaskIntoConstraints="NO" id="o57-iY-zoI" customClass="AutoscalingImageView" customModule="Sonar" customModuleProvider="target">
+                                                                <rect key="frame" x="340.5" y="24" width="25.5" height="20.5"/>
+                                                            </imageView>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To receive notifications to say if you've been near someone with COVID-19 symptoms, allow notifications in your Settings." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBV-SW-opU">
+                                                                <rect key="frame" x="16" y="56.5" width="350" height="64.5"/>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                <color key="textColor" name="NHS Text"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <accessibility key="accessibilityConfiguration">
+                                                            <accessibilityTraits key="traits" button="YES"/>
+                                                            <bool key="isElement" value="NO"/>
+                                                        </accessibility>
                                                         <constraints>
-                                                            <constraint firstItem="pd0-cH-tPQ" firstAttribute="leading" secondItem="505-qb-uvu" secondAttribute="leading" constant="16" id="4Ft-Oy-AJd"/>
-                                                            <constraint firstAttribute="bottom" secondItem="pd0-cH-tPQ" secondAttribute="bottom" constant="20" id="Hmf-sK-ckJ"/>
-                                                            <constraint firstAttribute="trailing" secondItem="pd0-cH-tPQ" secondAttribute="trailing" constant="16" id="hhe-rR-u8A"/>
+                                                            <constraint firstItem="fBV-SW-opU" firstAttribute="leading" secondItem="3ne-ot-IQ6" secondAttribute="leading" constant="16" id="DMf-Pg-0gS"/>
+                                                            <constraint firstItem="Zeo-Ra-cKf" firstAttribute="leading" secondItem="1ZI-Zq-fF0" secondAttribute="trailing" constant="12" id="Dlt-1P-aeI"/>
+                                                            <constraint firstItem="o57-iY-zoI" firstAttribute="centerY" secondItem="Zeo-Ra-cKf" secondAttribute="centerY" id="FzE-S7-jf1"/>
+                                                            <constraint firstItem="o57-iY-zoI" firstAttribute="leading" secondItem="Zeo-Ra-cKf" secondAttribute="trailing" constant="16" id="G6b-E1-RmW"/>
+                                                            <constraint firstItem="505-qb-uvu" firstAttribute="top" secondItem="3ne-ot-IQ6" secondAttribute="top" id="Nx5-RN-HgN"/>
+                                                            <constraint firstAttribute="trailing" secondItem="505-qb-uvu" secondAttribute="trailing" id="P8i-Ce-8SC"/>
+                                                            <constraint firstItem="1ZI-Zq-fF0" firstAttribute="centerY" secondItem="Zeo-Ra-cKf" secondAttribute="centerY" id="U9s-bH-Sfq"/>
+                                                            <constraint firstItem="1ZI-Zq-fF0" firstAttribute="leading" secondItem="3ne-ot-IQ6" secondAttribute="leading" constant="16" id="WlX-JP-eEO"/>
+                                                            <constraint firstItem="Zeo-Ra-cKf" firstAttribute="top" secondItem="3ne-ot-IQ6" secondAttribute="top" constant="24" id="Z5j-jF-ZS3"/>
+                                                            <constraint firstItem="pd0-cH-tPQ" firstAttribute="top" secondItem="fBV-SW-opU" secondAttribute="bottom" constant="16" id="iKU-TB-QEU"/>
+                                                            <constraint firstItem="505-qb-uvu" firstAttribute="leading" secondItem="3ne-ot-IQ6" secondAttribute="leading" id="jIT-wv-x5Y"/>
+                                                            <constraint firstItem="fBV-SW-opU" firstAttribute="top" secondItem="Zeo-Ra-cKf" secondAttribute="bottom" constant="12" id="qNA-XN-ayS"/>
+                                                            <constraint firstAttribute="bottom" secondItem="505-qb-uvu" secondAttribute="bottom" id="u38-j9-ULl"/>
+                                                            <constraint firstAttribute="trailing" secondItem="o57-iY-zoI" secondAttribute="trailing" constant="16" id="xw2-w8-cux"/>
+                                                            <constraint firstAttribute="trailing" secondItem="fBV-SW-opU" secondAttribute="trailing" constant="16" id="zIz-OA-smj"/>
                                                         </constraints>
                                                     </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Enable notifications" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zeo-Ra-cKf">
-                                                        <rect key="frame" x="42" y="24" width="314.5" height="20.5"/>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                        <color key="textColor" name="NHS Text"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bell ringing" translatesAutoresizingMaskIntoConstraints="NO" id="o57-iY-zoI" customClass="AutoscalingImageView" customModule="Sonar" customModuleProvider="target">
-                                                        <rect key="frame" x="372.5" y="24" width="25.5" height="20.5"/>
-                                                    </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To receive notifications to say if you've been near someone with COVID-19 symptoms, allow notifications in your Settings." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBV-SW-opU">
-                                                        <rect key="frame" x="16" y="56.5" width="382" height="64.5"/>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                        <color key="textColor" name="NHS Text"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Notice badge" translatesAutoresizingMaskIntoConstraints="NO" id="1ZI-Zq-fF0" customClass="AutoscalingImageView" customModule="Sonar" customModuleProvider="target">
-                                                        <rect key="frame" x="16" y="27.5" width="14" height="14"/>
-                                                    </imageView>
                                                 </subviews>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                                <accessibility key="accessibilityConfiguration">
-                                                    <accessibilityTraits key="traits" button="YES"/>
-                                                    <bool key="isElement" value="NO"/>
-                                                </accessibility>
                                                 <constraints>
-                                                    <constraint firstItem="fBV-SW-opU" firstAttribute="leading" secondItem="3ne-ot-IQ6" secondAttribute="leading" constant="16" id="DMf-Pg-0gS"/>
-                                                    <constraint firstItem="Zeo-Ra-cKf" firstAttribute="leading" secondItem="1ZI-Zq-fF0" secondAttribute="trailing" constant="12" id="Dlt-1P-aeI"/>
-                                                    <constraint firstItem="o57-iY-zoI" firstAttribute="centerY" secondItem="Zeo-Ra-cKf" secondAttribute="centerY" id="FzE-S7-jf1"/>
-                                                    <constraint firstItem="o57-iY-zoI" firstAttribute="leading" secondItem="Zeo-Ra-cKf" secondAttribute="trailing" constant="16" id="G6b-E1-RmW"/>
-                                                    <constraint firstItem="505-qb-uvu" firstAttribute="top" secondItem="3ne-ot-IQ6" secondAttribute="top" id="Nx5-RN-HgN"/>
-                                                    <constraint firstItem="1ZI-Zq-fF0" firstAttribute="centerY" secondItem="Zeo-Ra-cKf" secondAttribute="centerY" id="U9s-bH-Sfq"/>
-                                                    <constraint firstItem="1ZI-Zq-fF0" firstAttribute="leading" secondItem="3ne-ot-IQ6" secondAttribute="leading" constant="16" id="WlX-JP-eEO"/>
-                                                    <constraint firstItem="Zeo-Ra-cKf" firstAttribute="top" secondItem="3ne-ot-IQ6" secondAttribute="top" constant="24" id="Z5j-jF-ZS3"/>
-                                                    <constraint firstItem="pd0-cH-tPQ" firstAttribute="top" secondItem="fBV-SW-opU" secondAttribute="bottom" constant="16" id="iKU-TB-QEU"/>
-                                                    <constraint firstItem="fBV-SW-opU" firstAttribute="top" secondItem="Zeo-Ra-cKf" secondAttribute="bottom" constant="12" id="qNA-XN-ayS"/>
-                                                    <constraint firstAttribute="bottom" secondItem="505-qb-uvu" secondAttribute="bottom" id="u38-j9-ULl"/>
-                                                    <constraint firstAttribute="trailing" secondItem="o57-iY-zoI" secondAttribute="trailing" constant="16" id="xw2-w8-cux"/>
-                                                    <constraint firstAttribute="trailing" secondItem="fBV-SW-opU" secondAttribute="trailing" constant="16" id="zIz-OA-smj"/>
+                                                    <constraint firstAttribute="trailingMargin" secondItem="3ne-ot-IQ6" secondAttribute="trailing" id="IgK-SV-6Xc"/>
+                                                    <constraint firstAttribute="bottomMargin" secondItem="3ne-ot-IQ6" secondAttribute="bottom" id="T8d-iZ-zyT"/>
+                                                    <constraint firstItem="3ne-ot-IQ6" firstAttribute="leading" secondItem="gGD-ZU-CRl" secondAttribute="leadingMargin" id="anA-Ho-Ssg"/>
+                                                    <constraint firstItem="3ne-ot-IQ6" firstAttribute="top" secondItem="gGD-ZU-CRl" secondAttribute="topMargin" id="xZ8-UJ-jEN"/>
                                                 </constraints>
                                             </view>
-                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="6d3-41-7Jl">
-                                                <rect key="frame" x="0.0" y="347" width="414" height="57"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="6d3-41-7Jl">
+                                                <rect key="frame" x="0.0" y="387" width="414" height="57"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="nkr-z0-0aM">
                                                         <rect key="frame" x="0.0" y="0.0" width="16" height="57"/>
@@ -374,37 +387,41 @@
                                                     </stackView>
                                                 </subviews>
                                             </stackView>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uvp-0u-U16" userLabel="Spacer">
-                                                <rect key="frame" x="0.0" y="420" width="414" height="16"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iME-1d-lwf" userLabel="Next Steps Header View">
+                                                <rect key="frame" x="0.0" y="460" width="414" height="60.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NEXT STEPS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="efO-TR-8NP">
+                                                        <rect key="frame" x="16" y="8" width="382" height="44.5"/>
+                                                        <accessibility key="accessibilityConfiguration">
+                                                            <accessibilityTraits key="traits" staticText="YES" header="YES"/>
+                                                        </accessibility>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                        <color key="textColor" name="NHS Secondary Text"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="16" id="3qa-DQ-IqR"/>
+                                                    <constraint firstItem="efO-TR-8NP" firstAttribute="leading" secondItem="iME-1d-lwf" secondAttribute="leadingMargin" id="6Wv-Ne-dKp"/>
+                                                    <constraint firstAttribute="trailingMargin" secondItem="efO-TR-8NP" secondAttribute="trailing" id="BqE-1f-x8Z"/>
+                                                    <constraint firstAttribute="bottom" secondItem="efO-TR-8NP" secondAttribute="bottom" constant="8" id="EX9-fn-9vA"/>
+                                                    <constraint firstItem="efO-TR-8NP" firstAttribute="top" secondItem="iME-1d-lwf" secondAttribute="top" constant="8" id="bKI-Y4-vfQ"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NEXT STEPS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="efO-TR-8NP">
-                                                <rect key="frame" x="0.0" y="452" width="414" height="20.5"/>
-                                                <accessibility key="accessibilityConfiguration">
-                                                    <accessibilityTraits key="traits" staticText="YES" header="YES"/>
-                                                </accessibility>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                <color key="textColor" name="NHS Secondary Text"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="cW9-YI-r7x" userLabel="Current Advice Button" customClass="UIButton">
-                                                <rect key="frame" x="0.0" y="488.5" width="414" height="78"/>
+                                                <rect key="frame" x="0.0" y="536.5" width="414" height="78"/>
                                                 <subviews>
                                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Tz-It-GOM" customClass="SmartInvertBorderView" customModule="Sonar" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="78"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                     </view>
                                                     <stackView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="FqU-Xo-2ZO">
-                                                        <rect key="frame" x="0.0" y="25" width="414" height="28"/>
+                                                        <rect key="frame" x="16" y="25" width="382" height="28"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="1000" image="Arrow_Highlight" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B2X-z9-va1">
                                                                 <rect key="frame" x="0.0" y="0.0" width="28" height="28"/>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Read current advice for you" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="paU-Ho-Wex">
-                                                                <rect key="frame" x="44" y="0.0" width="370" height="28"/>
+                                                                <rect key="frame" x="44" y="0.0" width="338" height="28"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                                 <color key="textColor" name="NHS Text"/>
                                                                 <nil key="highlightedColor"/>
@@ -418,35 +435,38 @@
                                                     <bool key="isElement" value="YES"/>
                                                 </accessibility>
                                                 <constraints>
+                                                    <constraint firstAttribute="trailingMargin" secondItem="FqU-Xo-2ZO" secondAttribute="trailing" id="2X0-aR-IKO"/>
+                                                    <constraint firstItem="6Tz-It-GOM" firstAttribute="leading" secondItem="cW9-YI-r7x" secondAttribute="leading" id="CVj-HV-79u"/>
                                                     <constraint firstAttribute="bottom" secondItem="6Tz-It-GOM" secondAttribute="bottom" id="Ch8-jL-cQE"/>
                                                     <constraint firstItem="6Tz-It-GOM" firstAttribute="top" secondItem="cW9-YI-r7x" secondAttribute="top" id="QSH-LD-R6R"/>
-                                                    <constraint firstAttribute="trailing" secondItem="FqU-Xo-2ZO" secondAttribute="trailing" id="RG6-IC-F6X"/>
-                                                    <constraint firstItem="FqU-Xo-2ZO" firstAttribute="top" secondItem="cW9-YI-r7x" secondAttribute="top" constant="25" id="VPc-SP-J9i"/>
-                                                    <constraint firstAttribute="bottom" secondItem="FqU-Xo-2ZO" secondAttribute="bottom" constant="25" id="XVc-9y-yoa"/>
-                                                    <constraint firstItem="FqU-Xo-2ZO" firstAttribute="leading" secondItem="cW9-YI-r7x" secondAttribute="leading" id="pSb-eX-qRh"/>
+                                                    <constraint firstItem="FqU-Xo-2ZO" firstAttribute="leading" secondItem="cW9-YI-r7x" secondAttribute="leadingMargin" id="RlD-yX-OCO"/>
+                                                    <constraint firstAttribute="trailing" secondItem="6Tz-It-GOM" secondAttribute="trailing" id="cvY-Fb-Qbw"/>
+                                                    <constraint firstAttribute="bottomMargin" secondItem="FqU-Xo-2ZO" secondAttribute="bottom" id="pgf-cm-s18"/>
+                                                    <constraint firstItem="FqU-Xo-2ZO" firstAttribute="top" secondItem="cW9-YI-r7x" secondAttribute="topMargin" id="sm3-JY-qg5"/>
                                                 </constraints>
+                                                <directionalEdgeInsets key="directionalLayoutMargins" top="25" leading="16" bottom="25" trailing="16"/>
                                                 <connections>
                                                     <action selector="adviceTapped:" destination="D27-h6-ECy" eventType="touchUpInside" id="qRR-8x-8g6"/>
                                                 </connections>
                                             </view>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="tNB-vS-CxQ" customClass="UIButton">
-                                                <rect key="frame" x="0.0" y="582.5" width="414" height="136.5"/>
+                                                <rect key="frame" x="0.0" y="630.5" width="414" height="136.5"/>
                                                 <subviews>
                                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ewe-Ed-vUJ" customClass="SmartInvertBorderView" customModule="Sonar" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="136.5"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                     </view>
                                                     <stackView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Jcp-zU-h8K">
-                                                        <rect key="frame" x="0.0" y="25" width="414" height="86.5"/>
+                                                        <rect key="frame" x="16" y="25" width="382" height="86.5"/>
                                                         <subviews>
                                                             <stackView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="cP0-Vu-fvz">
-                                                                <rect key="frame" x="0.0" y="0.0" width="414" height="28"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="382" height="28"/>
                                                                 <subviews>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="1000" image="Arrow_Highlight" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f9d-FF-h7x">
                                                                         <rect key="frame" x="0.0" y="0.0" width="28" height="28"/>
                                                                     </imageView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="I feel unwell" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VcU-hA-iRR">
-                                                                        <rect key="frame" x="44" y="0.0" width="370" height="28"/>
+                                                                        <rect key="frame" x="44" y="0.0" width="338" height="28"/>
                                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                                         <color key="textColor" name="NHS Text"/>
                                                                         <nil key="highlightedColor"/>
@@ -454,7 +474,7 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I might have symptoms of coronavirus and want to know what to do next" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jWp-NV-gXb">
-                                                                <rect key="frame" x="0.0" y="44" width="414" height="42.5"/>
+                                                                <rect key="frame" x="0.0" y="44" width="382" height="42.5"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                 <color key="textColor" name="NHS Secondary Text"/>
                                                                 <nil key="highlightedColor"/>
@@ -468,32 +488,35 @@
                                                     <bool key="isElement" value="YES"/>
                                                 </accessibility>
                                                 <constraints>
-                                                    <constraint firstItem="Jcp-zU-h8K" firstAttribute="top" secondItem="tNB-vS-CxQ" secondAttribute="top" constant="25" id="KQa-eH-lYO"/>
+                                                    <constraint firstAttribute="bottomMargin" secondItem="Jcp-zU-h8K" secondAttribute="bottom" id="3I3-ht-Pbu"/>
+                                                    <constraint firstAttribute="trailingMargin" secondItem="Jcp-zU-h8K" secondAttribute="trailing" id="HcW-Bl-nFT"/>
+                                                    <constraint firstItem="Jcp-zU-h8K" firstAttribute="leading" secondItem="tNB-vS-CxQ" secondAttribute="leadingMargin" id="PSw-3h-TNv"/>
+                                                    <constraint firstItem="Jcp-zU-h8K" firstAttribute="top" secondItem="tNB-vS-CxQ" secondAttribute="topMargin" id="WGT-gO-6P4"/>
                                                     <constraint firstAttribute="bottom" secondItem="Ewe-Ed-vUJ" secondAttribute="bottom" id="Ysg-mt-neg"/>
-                                                    <constraint firstAttribute="bottom" secondItem="Jcp-zU-h8K" secondAttribute="bottom" constant="25" id="dJR-WN-qyN"/>
-                                                    <constraint firstItem="Jcp-zU-h8K" firstAttribute="leading" secondItem="tNB-vS-CxQ" secondAttribute="leading" id="e9v-vz-0R6"/>
-                                                    <constraint firstAttribute="trailing" secondItem="Jcp-zU-h8K" secondAttribute="trailing" id="oJ6-yc-ush"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Ewe-Ed-vUJ" secondAttribute="trailing" id="d4A-8R-WGo"/>
+                                                    <constraint firstItem="Ewe-Ed-vUJ" firstAttribute="leading" secondItem="tNB-vS-CxQ" secondAttribute="leading" id="hW9-g4-dzn"/>
                                                     <constraint firstItem="Ewe-Ed-vUJ" firstAttribute="top" secondItem="tNB-vS-CxQ" secondAttribute="top" id="oXr-Fk-n8N"/>
                                                 </constraints>
+                                                <directionalEdgeInsets key="directionalLayoutMargins" top="25" leading="16" bottom="25" trailing="16"/>
                                                 <connections>
                                                     <action selector="feelUnwellTapped:" destination="D27-h6-ECy" eventType="touchUpInside" id="xqM-Ml-lWu"/>
                                                 </connections>
                                             </view>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="p6j-FG-xJ1" userLabel="Apply for Test Button" customClass="UIButton">
-                                                <rect key="frame" x="0.0" y="735" width="414" height="78"/>
+                                                <rect key="frame" x="0.0" y="783" width="414" height="50"/>
                                                 <subviews>
                                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wpR-Ie-pa7" customClass="SmartInvertBorderView" customModule="Sonar" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="78"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                     </view>
                                                     <stackView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="xAA-pu-pLZ">
-                                                        <rect key="frame" x="0.0" y="25" width="414" height="28"/>
+                                                        <rect key="frame" x="8" y="8" width="398" height="34"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="1000" image="Arrow_Highlight" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HGF-Qa-ug3">
-                                                                <rect key="frame" x="0.0" y="0.0" width="28" height="28"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="28" height="34"/>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Apply for a coronavirus test now" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I34-X7-CYS">
-                                                                <rect key="frame" x="44" y="0.0" width="370" height="28"/>
+                                                                <rect key="frame" x="44" y="0.0" width="354" height="34"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                                 <color key="textColor" name="NHS Text"/>
                                                                 <nil key="highlightedColor"/>
@@ -508,57 +531,74 @@
                                                 </accessibility>
                                                 <constraints>
                                                     <constraint firstAttribute="bottom" secondItem="wpR-Ie-pa7" secondAttribute="bottom" id="1fS-sV-YaI"/>
-                                                    <constraint firstItem="xAA-pu-pLZ" firstAttribute="top" secondItem="p6j-FG-xJ1" secondAttribute="top" constant="25" id="4jo-WI-IYt"/>
-                                                    <constraint firstAttribute="bottom" secondItem="xAA-pu-pLZ" secondAttribute="bottom" constant="25" id="JLa-J0-9jw"/>
-                                                    <constraint firstAttribute="trailing" secondItem="xAA-pu-pLZ" secondAttribute="trailing" id="N4s-mp-G4P"/>
+                                                    <constraint firstAttribute="bottomMargin" secondItem="xAA-pu-pLZ" secondAttribute="bottom" id="8QV-Nw-FaR"/>
+                                                    <constraint firstItem="xAA-pu-pLZ" firstAttribute="leading" secondItem="p6j-FG-xJ1" secondAttribute="leadingMargin" id="FI9-Fl-jXj"/>
+                                                    <constraint firstItem="xAA-pu-pLZ" firstAttribute="top" secondItem="p6j-FG-xJ1" secondAttribute="topMargin" id="Jnk-eW-63E"/>
+                                                    <constraint firstItem="wpR-Ie-pa7" firstAttribute="leading" secondItem="p6j-FG-xJ1" secondAttribute="leading" id="VLe-ap-XgA"/>
                                                     <constraint firstItem="wpR-Ie-pa7" firstAttribute="top" secondItem="p6j-FG-xJ1" secondAttribute="top" id="WhV-Ib-1jZ"/>
-                                                    <constraint firstItem="xAA-pu-pLZ" firstAttribute="leading" secondItem="p6j-FG-xJ1" secondAttribute="leading" id="twH-Vh-ZFt"/>
+                                                    <constraint firstAttribute="trailingMargin" secondItem="xAA-pu-pLZ" secondAttribute="trailing" id="hiV-FA-iiV"/>
+                                                    <constraint firstAttribute="trailing" secondItem="wpR-Ie-pa7" secondAttribute="trailing" id="u8r-fB-yoY"/>
                                                 </constraints>
                                                 <connections>
                                                     <action selector="applyForTestTapped:" destination="D27-h6-ECy" eventType="touchUpInside" id="hAp-w6-Tl5"/>
                                                 </connections>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QzR-8B-SLv">
-                                                <rect key="frame" x="0.0" y="829" width="414" height="64.5"/>
-                                                <string key="text">If you don’t have any symptoms, there’s no need to do anything right now. If you develop symptoms, please come back to this app.</string>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                <color key="textColor" name="NHS Secondary Text"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P7T-lY-jSw" userLabel="Spacer">
-                                                <rect key="frame" x="0.0" y="909.5" width="414" height="16"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iOb-hN-v3u" userLabel="Steps Detail View">
+                                                <rect key="frame" x="0.0" y="849" width="414" height="104.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QzR-8B-SLv">
+                                                        <rect key="frame" x="16" y="8" width="382" height="88.5"/>
+                                                        <string key="text">If you don’t have any symptoms, there’s no need to do anything right now. If you develop symptoms, please come back to this app.</string>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                        <color key="textColor" name="NHS Secondary Text"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="16" id="pE4-bs-sjb"/>
+                                                    <constraint firstItem="QzR-8B-SLv" firstAttribute="leading" secondItem="iOb-hN-v3u" secondAttribute="leadingMargin" id="1cQ-y4-GOu"/>
+                                                    <constraint firstAttribute="bottomMargin" secondItem="QzR-8B-SLv" secondAttribute="bottom" id="4tz-HW-H6S"/>
+                                                    <constraint firstAttribute="trailingMargin" secondItem="QzR-8B-SLv" secondAttribute="trailing" id="IMu-r6-Lld"/>
+                                                    <constraint firstItem="QzR-8B-SLv" firstAttribute="top" secondItem="iOb-hN-v3u" secondAttribute="topMargin" id="fzg-8Z-CaT"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MORE OPTIONS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KGX-pq-vZ2">
-                                                <rect key="frame" x="0.0" y="941.5" width="414" height="20.5"/>
-                                                <accessibility key="accessibilityConfiguration">
-                                                    <accessibilityTraits key="traits" staticText="YES" header="YES"/>
-                                                </accessibility>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                <color key="textColor" name="NHS Secondary Text"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="cRg-G6-BLy" userLabel="Testing Info Button" customClass="UIButton">
-                                                <rect key="frame" x="0.0" y="978" width="414" height="74"/>
+                                            <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="taj-kb-GTf" userLabel="More Options Header View">
+                                                <rect key="frame" x="0.0" y="969.5" width="414" height="60.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MORE OPTIONS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KGX-pq-vZ2">
+                                                        <rect key="frame" x="16" y="8" width="382" height="44.5"/>
+                                                        <accessibility key="accessibilityConfiguration">
+                                                            <accessibilityTraits key="traits" staticText="YES" header="YES"/>
+                                                        </accessibility>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                        <color key="textColor" name="NHS Secondary Text"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="KGX-pq-vZ2" firstAttribute="top" secondItem="taj-kb-GTf" secondAttribute="topMargin" id="ASy-s0-pwy"/>
+                                                    <constraint firstAttribute="trailingMargin" secondItem="KGX-pq-vZ2" secondAttribute="trailing" id="Pa0-AE-3un"/>
+                                                    <constraint firstItem="KGX-pq-vZ2" firstAttribute="leading" secondItem="taj-kb-GTf" secondAttribute="leadingMargin" id="iOE-NW-XgR"/>
+                                                    <constraint firstAttribute="bottomMargin" secondItem="KGX-pq-vZ2" secondAttribute="bottom" id="rcC-HH-IHf"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="50" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cRg-G6-BLy" userLabel="Testing Info Button" customClass="UIButton">
+                                                <rect key="frame" x="0.0" y="1046" width="414" height="74"/>
                                                 <subviews>
                                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AtM-2O-5EE" customClass="SmartInvertBorderView" customModule="Sonar" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="74"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                     </view>
                                                     <stackView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0ln-li-Pd1">
-                                                        <rect key="frame" x="0.0" y="25" width="414" height="24"/>
+                                                        <rect key="frame" x="16" y="25" width="382" height="24"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Information about testing" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pgu-cH-Zha">
-                                                                <rect key="frame" x="0.0" y="0.0" width="390" height="24"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="358" height="24"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                                 <color key="textColor" name="NHS Text"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="1000" verticalHuggingPriority="251" image="Disclosure_Indicator" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Yq-cg-BHc">
-                                                                <rect key="frame" x="390" y="0.0" width="24" height="24"/>
+                                                                <rect key="frame" x="358" y="0.0" width="24" height="24"/>
                                                             </imageView>
                                                         </subviews>
                                                     </stackView>
@@ -569,35 +609,38 @@
                                                     <bool key="isElement" value="YES"/>
                                                 </accessibility>
                                                 <constraints>
-                                                    <constraint firstAttribute="bottom" secondItem="0ln-li-Pd1" secondAttribute="bottom" constant="25" id="1lc-8W-3BS"/>
-                                                    <constraint firstItem="0ln-li-Pd1" firstAttribute="top" secondItem="cRg-G6-BLy" secondAttribute="top" constant="25" id="8GB-HH-sW7"/>
-                                                    <constraint firstItem="0ln-li-Pd1" firstAttribute="leading" secondItem="cRg-G6-BLy" secondAttribute="leading" id="Clj-EB-yPT"/>
+                                                    <constraint firstItem="0ln-li-Pd1" firstAttribute="top" secondItem="cRg-G6-BLy" secondAttribute="topMargin" id="2ef-lW-7oY"/>
+                                                    <constraint firstItem="AtM-2O-5EE" firstAttribute="leading" secondItem="cRg-G6-BLy" secondAttribute="leading" id="CZT-yx-UDy"/>
+                                                    <constraint firstAttribute="bottomMargin" secondItem="0ln-li-Pd1" secondAttribute="bottom" id="GGO-k1-jgB"/>
                                                     <constraint firstItem="AtM-2O-5EE" firstAttribute="top" secondItem="cRg-G6-BLy" secondAttribute="top" id="MMH-Zk-WSf"/>
-                                                    <constraint firstAttribute="trailing" secondItem="0ln-li-Pd1" secondAttribute="trailing" id="dlE-1u-uX6"/>
+                                                    <constraint firstAttribute="trailingMargin" secondItem="0ln-li-Pd1" secondAttribute="trailing" id="Zt4-gr-aFM"/>
+                                                    <constraint firstItem="0ln-li-Pd1" firstAttribute="leading" secondItem="cRg-G6-BLy" secondAttribute="leadingMargin" id="gbM-5t-VPT"/>
                                                     <constraint firstAttribute="bottom" secondItem="AtM-2O-5EE" secondAttribute="bottom" id="gkr-6d-IHc"/>
+                                                    <constraint firstAttribute="trailing" secondItem="AtM-2O-5EE" secondAttribute="trailing" id="tc4-rc-ZS6"/>
                                                 </constraints>
+                                                <directionalEdgeInsets key="directionalLayoutMargins" top="25" leading="8" bottom="25" trailing="8"/>
                                                 <connections>
                                                     <action selector="testingInfoTapped:" destination="D27-h6-ECy" eventType="touchUpInside" id="nOL-EN-deI"/>
                                                 </connections>
                                             </view>
-                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="sEj-8e-DCP" userLabel="Workplace Guidance Button" customClass="UIButton">
-                                                <rect key="frame" x="0.0" y="1068" width="414" height="74"/>
+                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="50" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sEj-8e-DCP" userLabel="Workplace Guidance Button" customClass="UIButton">
+                                                <rect key="frame" x="0.0" y="1136" width="414" height="74"/>
                                                 <subviews>
                                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VSR-Rc-FVv" customClass="SmartInvertBorderView" customModule="Sonar" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="74"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                     </view>
                                                     <stackView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uw7-PY-aUM">
-                                                        <rect key="frame" x="0.0" y="25" width="414" height="24"/>
+                                                        <rect key="frame" x="16" y="25" width="382" height="24"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Guidance for your workplace" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ll-9f-kjH">
-                                                                <rect key="frame" x="0.0" y="0.0" width="390" height="24"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="358" height="24"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                                 <color key="textColor" name="NHS Text"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="1000" verticalHuggingPriority="251" image="Disclosure_Indicator" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bdu-D8-QWB">
-                                                                <rect key="frame" x="390" y="0.0" width="24" height="24"/>
+                                                                <rect key="frame" x="358" y="0.0" width="24" height="24"/>
                                                             </imageView>
                                                         </subviews>
                                                     </stackView>
@@ -608,19 +651,22 @@
                                                     <bool key="isElement" value="YES"/>
                                                 </accessibility>
                                                 <constraints>
-                                                    <constraint firstItem="uw7-PY-aUM" firstAttribute="top" secondItem="sEj-8e-DCP" secondAttribute="top" constant="25" id="3vL-fe-a0o"/>
                                                     <constraint firstAttribute="bottom" secondItem="VSR-Rc-FVv" secondAttribute="bottom" id="6L5-3E-coi"/>
+                                                    <constraint firstItem="uw7-PY-aUM" firstAttribute="leading" secondItem="sEj-8e-DCP" secondAttribute="leadingMargin" id="A6X-3G-hgM"/>
+                                                    <constraint firstAttribute="trailingMargin" secondItem="uw7-PY-aUM" secondAttribute="trailing" id="Bc1-YY-lvI"/>
                                                     <constraint firstItem="VSR-Rc-FVv" firstAttribute="top" secondItem="sEj-8e-DCP" secondAttribute="top" id="Q6b-FF-deI"/>
-                                                    <constraint firstItem="uw7-PY-aUM" firstAttribute="leading" secondItem="sEj-8e-DCP" secondAttribute="leading" id="TXA-VD-sCb"/>
-                                                    <constraint firstAttribute="trailing" secondItem="uw7-PY-aUM" secondAttribute="trailing" id="ooh-fg-wo8"/>
-                                                    <constraint firstAttribute="bottom" secondItem="uw7-PY-aUM" secondAttribute="bottom" constant="25" id="q2r-mO-Sk1"/>
+                                                    <constraint firstItem="VSR-Rc-FVv" firstAttribute="leading" secondItem="sEj-8e-DCP" secondAttribute="leading" id="QJF-qv-RKg"/>
+                                                    <constraint firstAttribute="trailing" secondItem="VSR-Rc-FVv" secondAttribute="trailing" id="XNl-VU-Klf"/>
+                                                    <constraint firstItem="uw7-PY-aUM" firstAttribute="top" secondItem="sEj-8e-DCP" secondAttribute="topMargin" id="na1-9c-Y9s"/>
+                                                    <constraint firstAttribute="bottomMargin" secondItem="uw7-PY-aUM" secondAttribute="bottom" id="yxU-yg-6Zr"/>
                                                 </constraints>
+                                                <directionalEdgeInsets key="directionalLayoutMargins" top="25" leading="8" bottom="25" trailing="8"/>
                                                 <connections>
                                                     <action selector="workplaceGuidanceTapped:" destination="D27-h6-ECy" eventType="touchUpInside" id="xW6-Ya-fYv"/>
                                                 </connections>
                                             </view>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="7lY-C0-zBm">
-                                                <rect key="frame" x="0.0" y="1158" width="414" height="74.5"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="7lY-C0-zBm">
+                                                <rect key="frame" x="0.0" y="1226" width="414" height="74.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NHS services for your part of the country" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jc7-io-bAH">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="20.5"/>
@@ -668,10 +714,6 @@
                                             </stackView>
                                         </subviews>
                                         <color key="backgroundColor" name="NHS Grey 5"/>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="505-qb-uvu" secondAttribute="trailing" id="PSg-M9-IFZ"/>
-                                            <constraint firstItem="505-qb-uvu" firstAttribute="leading" secondItem="NyJ-yi-J4V" secondAttribute="leading" id="vV2-J6-Ixi"/>
-                                        </constraints>
                                     </stackView>
                                 </subviews>
                                 <constraints>
@@ -689,20 +731,10 @@
                         </subviews>
                         <color key="backgroundColor" name="NHS Grey 5"/>
                         <constraints>
-                            <constraint firstItem="eZX-0D-0Ns" firstAttribute="trailing" secondItem="AtM-2O-5EE" secondAttribute="trailing" id="1WK-u6-2Wn"/>
                             <constraint firstItem="eZX-0D-0Ns" firstAttribute="trailing" secondItem="cpM-8b-HyA" secondAttribute="trailing" id="65T-D0-JGe"/>
-                            <constraint firstItem="Ewe-Ed-vUJ" firstAttribute="leading" secondItem="eZX-0D-0Ns" secondAttribute="leading" id="7ZF-Ob-CMp"/>
-                            <constraint firstItem="AtM-2O-5EE" firstAttribute="leading" secondItem="eZX-0D-0Ns" secondAttribute="leading" id="BJR-HL-pzf"/>
-                            <constraint firstItem="wpR-Ie-pa7" firstAttribute="leading" secondItem="eZX-0D-0Ns" secondAttribute="leading" id="FLa-KI-LCp"/>
-                            <constraint firstItem="VSR-Rc-FVv" firstAttribute="leading" secondItem="eZX-0D-0Ns" secondAttribute="leading" id="Nre-0X-1jt"/>
                             <constraint firstAttribute="bottom" secondItem="cpM-8b-HyA" secondAttribute="bottom" id="OPi-wb-h33"/>
-                            <constraint firstItem="eZX-0D-0Ns" firstAttribute="trailing" secondItem="wpR-Ie-pa7" secondAttribute="trailing" id="Pyq-F4-cwD"/>
                             <constraint firstItem="cpM-8b-HyA" firstAttribute="top" secondItem="eZX-0D-0Ns" secondAttribute="top" id="Tpf-NK-dsx"/>
-                            <constraint firstItem="eZX-0D-0Ns" firstAttribute="trailing" secondItem="VSR-Rc-FVv" secondAttribute="trailing" id="Z4Q-GM-CZY"/>
                             <constraint firstItem="cpM-8b-HyA" firstAttribute="leading" secondItem="eZX-0D-0Ns" secondAttribute="leading" id="cA7-Be-ZCG"/>
-                            <constraint firstItem="eZX-0D-0Ns" firstAttribute="trailing" secondItem="Ewe-Ed-vUJ" secondAttribute="trailing" id="eSg-lW-txf"/>
-                            <constraint firstItem="6Tz-It-GOM" firstAttribute="leading" secondItem="eZX-0D-0Ns" secondAttribute="leading" id="rQI-55-qs2"/>
-                            <constraint firstItem="eZX-0D-0Ns" firstAttribute="trailing" secondItem="6Tz-It-GOM" secondAttribute="trailing" id="zKg-hp-av1"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="eZX-0D-0Ns"/>
                     </view>
@@ -711,13 +743,16 @@
                         <outlet property="contentStackView" destination="NyJ-yi-J4V" id="j9B-h8-9VV"/>
                         <outlet property="diagnosisDetailLabel" destination="ZHf-uh-yP6" id="xUV-Bz-VHM"/>
                         <outlet property="diagnosisHighlightView" destination="nkr-z0-0aM" id="Vnq-tm-d4H"/>
+                        <outlet property="diagnosisStackView" destination="6d3-41-7Jl" id="NNf-bp-gNo"/>
                         <outlet property="diagnosisTitleLabel" destination="vQi-jU-57K" id="19r-dS-uab"/>
                         <outlet property="disableNotificationStatusViewButton" destination="Av1-6z-e44" id="598-DA-5Bd"/>
                         <outlet property="feelUnwellBodyLabel" destination="jWp-NV-gXb" id="wgs-6P-6Qo"/>
                         <outlet property="feelUnwellButton" destination="tNB-vS-CxQ" id="yA8-hu-4Gu"/>
                         <outlet property="feelUnwellTitleLabel" destination="VcU-hA-iRR" id="Z3Z-2W-BHz"/>
                         <outlet property="goToSettingsButton" destination="b34-L2-7Cv" id="qy2-GT-r9O"/>
-                        <outlet property="notificationsStatusView" destination="3ne-ot-IQ6" id="dzc-kn-qq4"/>
+                        <outlet property="nextStepsDetailView" destination="iOb-hN-v3u" id="KFd-a1-V58"/>
+                        <outlet property="nhsServicesStackView" destination="7lY-C0-zBm" id="leN-8R-AhH"/>
+                        <outlet property="notificationsStatusView" destination="gGD-ZU-CRl" id="0lB-tc-HhF"/>
                         <outlet property="registrationStatusViewContainer" destination="4tb-5a-Uxm" id="2xQ-AG-bOB"/>
                         <outlet property="stepsDetailLabel" destination="QzR-8B-SLv" id="OvV-th-O7v"/>
                         <segue destination="K9E-G6-YEs" kind="show" identifier="showApplyForTest" id="Skw-Ky-N3M"/>
