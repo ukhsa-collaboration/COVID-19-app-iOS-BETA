@@ -17,6 +17,7 @@ class TestingInfoContainerViewControllerTests: XCTestCase {
         vc.inject(linkingIdManager: linkingIdMgr, uiQueue: QueueDouble())
         
         XCTAssertNotNil(vc.view)
+        vc.viewDidAppear(false)
         
         XCTAssertNotNil(linkingIdMgr.fetchCompletion)
         XCTAssertEqual(vc.children.count, 1)
@@ -29,6 +30,7 @@ class TestingInfoContainerViewControllerTests: XCTestCase {
         vc.inject(linkingIdManager: linkingIdMgr, uiQueue: QueueDouble())
         
         XCTAssertNotNil(vc.view)
+        vc.viewDidAppear(false)
         linkingIdMgr.fetchCompletion?("1234-abcd")
         
         XCTAssertNotNil(linkingIdMgr.fetchCompletion)
@@ -46,6 +48,7 @@ class TestingInfoContainerViewControllerTests: XCTestCase {
         vc.inject(linkingIdManager: linkingIdMgr, uiQueue: QueueDouble())
         
         XCTAssertNotNil(vc.view)
+        vc.viewDidAppear(false)
         linkingIdMgr.fetchCompletion?(nil)
         
         XCTAssertNotNil(linkingIdMgr.fetchCompletion)
