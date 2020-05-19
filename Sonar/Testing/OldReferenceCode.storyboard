@@ -9,87 +9,75 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Reference Code Loading View Controller-->
-        <scene sceneID="1mr-eH-YD3">
-            <objects>
-                <viewController storyboardIdentifier="ReferenceCodeLoadingViewController" id="AMM-hO-iXS" customClass="ReferenceCodeLoadingViewController" customModule="Sonar" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Mrj-rW-vGM">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o73-rb-ktx" userLabel="Fetching wrapper">
-                                <rect key="frame" x="16" y="60" width="382" height="51.5"/>
-                                <subviews>
-                                    <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Lk-9m-lto" userLabel="Colour Indicator">
-                                        <rect key="frame" x="0.0" y="0.0" width="4" height="51.5"/>
-                                        <color key="backgroundColor" name="NHS Grey 1"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="4" id="3Ia-RA-TNC"/>
-                                        </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eXc-Or-HcK">
-                                        <rect key="frame" x="20" y="16" width="306" height="19.5"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Fetching reference code" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fWb-11-JfO" userLabel="Loading Label">
-                                                <rect key="frame" x="0.0" y="0.0" width="306" height="19.5"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstItem="fWb-11-JfO" firstAttribute="leading" secondItem="eXc-Or-HcK" secondAttribute="leading" id="0dY-Pn-Jwu"/>
-                                            <constraint firstAttribute="bottom" secondItem="fWb-11-JfO" secondAttribute="bottom" id="QHA-XH-Bcu"/>
-                                            <constraint firstItem="fWb-11-JfO" firstAttribute="top" secondItem="eXc-Or-HcK" secondAttribute="top" id="TE3-DB-D8t"/>
-                                            <constraint firstAttribute="trailing" secondItem="fWb-11-JfO" secondAttribute="trailing" id="z0H-T4-dlc"/>
-                                        </constraints>
-                                    </view>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="24" placeholderIntrinsicHeight="infinite" image="Spinner" translatesAutoresizingMaskIntoConstraints="NO" id="kAi-6G-INm" customClass="SpinnerView" customModule="Sonar" customModuleProvider="target">
-                                        <rect key="frame" x="342" y="14" width="24" height="24"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="24" id="532-2H-dOy"/>
-                                            <constraint firstAttribute="width" secondItem="kAi-6G-INm" secondAttribute="height" multiplier="1:1" id="exH-oc-rIJ"/>
-                                        </constraints>
-                                    </imageView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="4Lk-9m-lto" secondAttribute="bottom" id="Q6m-Yi-waC"/>
-                                    <constraint firstItem="4Lk-9m-lto" firstAttribute="top" secondItem="o73-rb-ktx" secondAttribute="top" id="Qgd-1e-0ht"/>
-                                    <constraint firstItem="kAi-6G-INm" firstAttribute="leading" secondItem="eXc-Or-HcK" secondAttribute="trailing" constant="16" id="RsM-4i-ntW"/>
-                                    <constraint firstItem="kAi-6G-INm" firstAttribute="centerY" secondItem="o73-rb-ktx" secondAttribute="centerY" id="Y4n-h0-MT6"/>
-                                    <constraint firstAttribute="bottom" secondItem="eXc-Or-HcK" secondAttribute="bottom" constant="16" id="Y5W-an-jOQ"/>
-                                    <constraint firstItem="eXc-Or-HcK" firstAttribute="leading" secondItem="4Lk-9m-lto" secondAttribute="trailing" constant="16" id="fzG-2n-gWb"/>
-                                    <constraint firstItem="4Lk-9m-lto" firstAttribute="leading" secondItem="o73-rb-ktx" secondAttribute="leading" id="j4O-RM-dxr"/>
-                                    <constraint firstAttribute="trailing" secondItem="kAi-6G-INm" secondAttribute="trailing" constant="16" id="kDk-co-kRt"/>
-                                    <constraint firstItem="eXc-Or-HcK" firstAttribute="top" secondItem="o73-rb-ktx" secondAttribute="top" constant="16" id="vFr-AL-uIX"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="lM9-07-Wic" firstAttribute="trailing" secondItem="o73-rb-ktx" secondAttribute="trailing" constant="16" id="IXh-YX-fEL"/>
-                            <constraint firstItem="o73-rb-ktx" firstAttribute="leading" secondItem="lM9-07-Wic" secondAttribute="leading" constant="16" id="qNw-9M-yX5"/>
-                            <constraint firstItem="o73-rb-ktx" firstAttribute="top" secondItem="lM9-07-Wic" secondAttribute="top" constant="16" id="we7-W4-Kei"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="lM9-07-Wic"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Tj2-7J-glT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-723" y="65"/>
-        </scene>
-        <!--Reference Code View Controller-->
+        <!--Old Reference Code View Controller-->
         <scene sceneID="g8j-db-Uy8">
             <objects>
-                <viewController storyboardIdentifier="ReferenceCodeViewController" id="1cY-Ra-QEB" customClass="ReferenceCodeViewController" customModule="Sonar" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vaq-mo-tAH">
+                <viewController storyboardIdentifier="OldReferenceCodeViewController" id="1cY-Ra-QEB" customClass="OldReferenceCodeViewController" customModule="Sonar" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vaq-mo-tAH">
                         <rect key="frame" x="0.0" y="0.0" width="350" height="400"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="QV6-CT-bQD">
-                                <rect key="frame" x="0.0" y="0.0" width="350" height="400"/>
+                                <rect key="frame" x="0.0" y="44" width="350" height="356"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2f9-eA-cnj">
+                                        <rect key="frame" x="0.0" y="0.0" width="350" height="88"/>
+                                        <subviews>
+                                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="caP-wa-rqR" userLabel="Colour Indicator">
+                                                <rect key="frame" x="0.0" y="0.0" width="4" height="88"/>
+                                                <color key="backgroundColor" name="NHS Grey 1"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="4" id="K4o-hw-gAN"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nIT-oA-Dv1">
+                                                <rect key="frame" x="20" y="16" width="274" height="56"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Your app reference code" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G67-M0-FmS" userLabel="Reference Label">
+                                                        <rect key="frame" x="0.0" y="0.0" width="274" height="20.5"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Fetching reference code" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5N6-y3-uPa" userLabel="Loading Label">
+                                                        <rect key="frame" x="0.0" y="36.5" width="274" height="19.5"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="5N6-y3-uPa" firstAttribute="leading" secondItem="nIT-oA-Dv1" secondAttribute="leading" id="Cgb-5l-a9M"/>
+                                                    <constraint firstAttribute="bottom" secondItem="5N6-y3-uPa" secondAttribute="bottom" id="U4i-gI-7Lv"/>
+                                                    <constraint firstAttribute="trailing" secondItem="G67-M0-FmS" secondAttribute="trailing" id="c5T-TU-QDr"/>
+                                                    <constraint firstItem="G67-M0-FmS" firstAttribute="leading" secondItem="nIT-oA-Dv1" secondAttribute="leading" id="dgk-br-ci1"/>
+                                                    <constraint firstItem="G67-M0-FmS" firstAttribute="top" secondItem="nIT-oA-Dv1" secondAttribute="top" id="fqe-DH-ieP"/>
+                                                    <constraint firstItem="5N6-y3-uPa" firstAttribute="top" secondItem="G67-M0-FmS" secondAttribute="bottom" constant="16" id="h0x-gi-t4l"/>
+                                                    <constraint firstAttribute="trailing" secondItem="5N6-y3-uPa" secondAttribute="trailing" id="iRl-hH-WWK"/>
+                                                </constraints>
+                                            </view>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="24" placeholderIntrinsicHeight="infinite" image="Spinner" translatesAutoresizingMaskIntoConstraints="NO" id="ojm-Pc-BWm" customClass="SpinnerView" customModule="Sonar" customModuleProvider="target">
+                                                <rect key="frame" x="310" y="32" width="24" height="24"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="ojm-Pc-BWm" secondAttribute="height" multiplier="1:1" id="tM9-4O-GPJ"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="24" id="yMY-7E-FZz"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="ojm-Pc-BWm" secondAttribute="trailing" constant="16" id="aEl-iu-A9V"/>
+                                            <constraint firstItem="nIT-oA-Dv1" firstAttribute="top" secondItem="2f9-eA-cnj" secondAttribute="top" constant="16" id="bap-Dd-lEw"/>
+                                            <constraint firstItem="caP-wa-rqR" firstAttribute="leading" secondItem="2f9-eA-cnj" secondAttribute="leading" id="cHn-Ad-BLY"/>
+                                            <constraint firstAttribute="bottom" secondItem="nIT-oA-Dv1" secondAttribute="bottom" constant="16" id="cXe-e7-VtK"/>
+                                            <constraint firstAttribute="bottom" secondItem="caP-wa-rqR" secondAttribute="bottom" id="fEs-SP-CMv"/>
+                                            <constraint firstItem="ojm-Pc-BWm" firstAttribute="centerY" secondItem="2f9-eA-cnj" secondAttribute="centerY" id="jVa-k8-3jN"/>
+                                            <constraint firstItem="ojm-Pc-BWm" firstAttribute="leading" secondItem="nIT-oA-Dv1" secondAttribute="trailing" constant="16" id="m9q-nr-miN"/>
+                                            <constraint firstItem="caP-wa-rqR" firstAttribute="top" secondItem="2f9-eA-cnj" secondAttribute="top" id="nXk-2W-H9m"/>
+                                            <constraint firstItem="nIT-oA-Dv1" firstAttribute="leading" secondItem="caP-wa-rqR" secondAttribute="trailing" constant="16" id="xO2-Kp-5s9"/>
+                                        </constraints>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8DU-FX-l1Y">
-                                        <rect key="frame" x="0.0" y="0.0" width="350" height="109"/>
+                                        <rect key="frame" x="0.0" y="88" width="350" height="109"/>
                                         <subviews>
                                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PEL-4u-hWs" userLabel="Colour Indicator">
                                                 <rect key="frame" x="0.0" y="0.0" width="4" height="109"/>
@@ -136,17 +124,17 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pUX-5H-FhL" customClass="UIControl">
-                                        <rect key="frame" x="0.0" y="109" width="350" height="291"/>
+                                        <rect key="frame" x="0.0" y="197" width="350" height="159"/>
                                         <subviews>
                                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VkE-2j-Mv3" userLabel="Colour Indicator">
-                                                <rect key="frame" x="0.0" y="0.0" width="4" height="291"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="4" height="159"/>
                                                 <color key="backgroundColor" name="NHS Blue"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="4" id="KMJ-Mq-VNO"/>
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TV5-Xb-NKH" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
-                                                <rect key="frame" x="296" y="129.5" width="38" height="32"/>
+                                                <rect key="frame" x="296" y="63.5" width="38" height="32"/>
                                                 <accessibility key="accessibilityConfiguration">
                                                     <bool key="isElement" value="NO"/>
                                                 </accessibility>
@@ -154,7 +142,7 @@
                                                 <state key="normal" title="Copy"/>
                                             </button>
                                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y95-qT-spE">
-                                                <rect key="frame" x="20" y="107" width="260" height="77.5"/>
+                                                <rect key="frame" x="20" y="41" width="260" height="77.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Your app reference code" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jv7-ab-7Y5" userLabel="Reference Label">
                                                         <rect key="frame" x="0.0" y="0.0" width="260" height="20.5"/>
@@ -211,15 +199,17 @@
                         </subviews>
                         <color key="backgroundColor" name="NHS Grey 4"/>
                         <constraints>
-                            <constraint firstItem="QV6-CT-bQD" firstAttribute="top" secondItem="vaq-mo-tAH" secondAttribute="top" id="Vkz-ZJ-btU"/>
-                            <constraint firstAttribute="bottom" secondItem="QV6-CT-bQD" secondAttribute="bottom" id="fFs-0r-EtS"/>
-                            <constraint firstAttribute="trailing" secondItem="QV6-CT-bQD" secondAttribute="trailing" id="fe0-1p-cx8"/>
-                            <constraint firstItem="QV6-CT-bQD" firstAttribute="leading" secondItem="vaq-mo-tAH" secondAttribute="leading" id="reQ-uH-SIf"/>
+                            <constraint firstItem="Dvv-8e-o1p" firstAttribute="bottom" secondItem="QV6-CT-bQD" secondAttribute="bottom" id="96d-B9-eym"/>
+                            <constraint firstItem="Dvv-8e-o1p" firstAttribute="trailing" secondItem="QV6-CT-bQD" secondAttribute="trailing" id="N28-Sc-VbA"/>
+                            <constraint firstItem="Dvv-8e-o1p" firstAttribute="top" secondItem="QV6-CT-bQD" secondAttribute="top" id="Y0u-Ve-o7K"/>
+                            <constraint firstItem="Dvv-8e-o1p" firstAttribute="leading" secondItem="QV6-CT-bQD" secondAttribute="leading" id="mBX-2O-n6p"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="Dvv-8e-o1p"/>
                     </view>
                     <size key="freeformSize" width="350" height="400"/>
                     <connections>
                         <outlet property="errorWrapper" destination="8DU-FX-l1Y" id="uSk-6C-qbE"/>
+                        <outlet property="fetchingWrapper" destination="2f9-eA-cnj" id="aLX-4U-4fs"/>
                         <outlet property="referenceCodeLabel" destination="lN1-AR-0MP" id="cLy-dQ-8zb"/>
                         <outlet property="referenceCodeWrapper" destination="pUX-5H-FhL" id="AGx-SR-h5f"/>
                     </connections>

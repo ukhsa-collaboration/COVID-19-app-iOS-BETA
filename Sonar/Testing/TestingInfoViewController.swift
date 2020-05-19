@@ -10,23 +10,16 @@ import UIKit
 
 class TestingInfoViewController: UIViewController, Storyboarded {
     static let storyboardName = "TestingInfo"
+    
+    private var referenceCode: String?
 
-    var linkingIdManager: LinkingIdManaging!
-    var uiQueue: TestableQueue!
-
-    func inject(linkingIdManager: LinkingIdManaging, uiQueue: TestableQueue) {
-        self.linkingIdManager = linkingIdManager
-        self.uiQueue = uiQueue
+    func inject(referenceCode: String?) {
+        self.referenceCode = referenceCode
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? ReferenceCodeViewController {
-            vc.inject(linkingIdManager: linkingIdManager, uiQueue: uiQueue)
+            vc.inject(referenceCode: referenceCode)
         }
-    }
-    
-    override func accessibilityPerformEscape() -> Bool {
-        self.performSegue(withIdentifier: "UnwindFromTestingInfo", sender: nil)
-        return true
     }
 }

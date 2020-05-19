@@ -209,7 +209,7 @@ class StatusViewController: UIViewController, Storyboarded {
     }
 
     @IBAction func testingInfoTapped(_ sender: Any) {
-        let linkingIdVc = TestingInfoViewController.instantiate()
+        let linkingIdVc = TestingInfoContainerViewController.instantiate()
         linkingIdVc.inject(linkingIdManager: linkingIdManager, uiQueue: DispatchQueue.main)
         navigationController?.pushViewController(linkingIdVc, animated: true)
     }
