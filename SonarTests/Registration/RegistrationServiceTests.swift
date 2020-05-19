@@ -22,14 +22,11 @@ class RegistrationServiceTests: TestCase {
             notificationCenter: notificationCenter,
             userNotificationCenter: UserNotificationCenterDouble()
         )
-        let registrationService = ConcreteRegistrationService(
+        let registrationService = makeRegistrationService(
             session: session,
             persistence: persistence,
-            reminderScheduler: RegistrationReminderSchedulerDouble(),
             remoteNotificationDispatcher: remoteNotificationDispatcher,
-            notificationCenter: notificationCenter,
-            monitor: AppMonitoringDouble(),
-            timeoutQueue: QueueDouble()
+            notificationCenter: notificationCenter
         )
     
         remoteNotificationDispatcher.pushToken = "the current push token"
@@ -93,14 +90,11 @@ class RegistrationServiceTests: TestCase {
             notificationCenter: notificationCenter,
             userNotificationCenter: UserNotificationCenterDouble()
         )
-        let registrationService = ConcreteRegistrationService(
+        let registrationService = makeRegistrationService(
             session: session,
             persistence: persistence,
-            reminderScheduler: RegistrationReminderSchedulerDouble(),
             remoteNotificationDispatcher: remoteNotificationDispatcher,
-            notificationCenter: notificationCenter,
-            monitor: AppMonitoringDouble(),
-            timeoutQueue: QueueDouble()
+            notificationCenter: notificationCenter
         )
 
         let completedObserver = NotificationObserverDouble(notificationCenter: notificationCenter, notificationName: RegistrationCompletedNotification)
@@ -164,14 +158,12 @@ class RegistrationServiceTests: TestCase {
             userNotificationCenter: UserNotificationCenterDouble()
         )
         remoteNotificationDispatcher.pushToken = "the current push token"
-        let registrationService = ConcreteRegistrationService(
+        let registrationService = makeRegistrationService(
             session: session,
             persistence: persistence,
-            reminderScheduler: RegistrationReminderSchedulerDouble(),
             remoteNotificationDispatcher: remoteNotificationDispatcher,
             notificationCenter: notificationCenter,
-            monitor: monitor,
-            timeoutQueue: QueueDouble()
+            monitor: monitor
         )
         let failedObserver = NotificationObserverDouble(notificationCenter: notificationCenter, notificationName: RegistrationFailedNotification)
 
@@ -194,14 +186,12 @@ class RegistrationServiceTests: TestCase {
             userNotificationCenter: UserNotificationCenterDouble()
         )
         remoteNotificationDispatcher.pushToken = "the current push token"
-        let registrationService = ConcreteRegistrationService(
+        let registrationService = makeRegistrationService(
             session: session,
             persistence: persistence,
-            reminderScheduler: RegistrationReminderSchedulerDouble(),
             remoteNotificationDispatcher: remoteNotificationDispatcher,
             notificationCenter: notificationCenter,
-            monitor: monitor,
-            timeoutQueue: QueueDouble()
+            monitor: monitor
         )
         let failedObserver = NotificationObserverDouble(notificationCenter: notificationCenter, notificationName: RegistrationFailedNotification)
 
@@ -231,14 +221,11 @@ class RegistrationServiceTests: TestCase {
             userNotificationCenter: UserNotificationCenterDouble()
         )
         remoteNotificationDispatcher.pushToken = "the current push token"
-        let registrationService = ConcreteRegistrationService(
+        let registrationService = makeRegistrationService(
             session: session,
             persistence: persistence,
-            reminderScheduler: RegistrationReminderSchedulerDouble(),
             remoteNotificationDispatcher: remoteNotificationDispatcher,
-            notificationCenter: notificationCenter,
-            monitor: AppMonitoringDouble(),
-            timeoutQueue: QueueDouble()
+            notificationCenter: notificationCenter
         )
 
         _ = registrationService.register()
@@ -265,10 +252,9 @@ class RegistrationServiceTests: TestCase {
         )
         let queueDouble = QueueDouble()
         let failedObserver = NotificationObserverDouble(notificationCenter: notificationCenter, notificationName: RegistrationFailedNotification)
-        let registrationService = ConcreteRegistrationService(
+        let registrationService = makeRegistrationService(
             session: session,
             persistence: persistence,
-            reminderScheduler: RegistrationReminderSchedulerDouble(),
             remoteNotificationDispatcher: remoteNotificationDispatcher,
             notificationCenter: notificationCenter,
             monitor: monitor,
@@ -295,10 +281,9 @@ class RegistrationServiceTests: TestCase {
         remoteNotificationDispatcher.pushToken = "the current push token"
         let queueDouble = QueueDouble()
         let failedObserver = NotificationObserverDouble(notificationCenter: notificationCenter, notificationName: RegistrationFailedNotification)
-        let registrationService = ConcreteRegistrationService(
+        let registrationService = makeRegistrationService(
             session: session,
             persistence: persistence,
-            reminderScheduler: RegistrationReminderSchedulerDouble(),
             remoteNotificationDispatcher: remoteNotificationDispatcher,
             notificationCenter: notificationCenter,
             monitor: monitor,
@@ -319,14 +304,10 @@ class RegistrationServiceTests: TestCase {
         let session = SessionDouble()
         let remoteNotificationDispatcher = RemoteNotificationDispatchingDouble()
         remoteNotificationDispatcher.pushToken = "the current push token"
-        let registrationService = ConcreteRegistrationService(
+        let registrationService = makeRegistrationService(
             session: session,
             persistence: PersistenceDouble(partialPostcode: "AB90"),
-            reminderScheduler: RegistrationReminderSchedulerDouble(),
-            remoteNotificationDispatcher: remoteNotificationDispatcher,
-            notificationCenter: NotificationCenter(),
-            monitor: AppMonitoringDouble(),
-            timeoutQueue: QueueDouble()
+            remoteNotificationDispatcher: remoteNotificationDispatcher
         )
         
         registrationService.register()
@@ -340,14 +321,10 @@ class RegistrationServiceTests: TestCase {
         let session = SessionDouble()
         let remoteNotificationDispatcher = RemoteNotificationDispatchingDouble()
         remoteNotificationDispatcher.pushToken = "the current push token"
-        let registrationService = ConcreteRegistrationService(
+        let registrationService = makeRegistrationService(
             session: session,
             persistence: PersistenceDouble(partialPostcode: "AB90"),
-            reminderScheduler: RegistrationReminderSchedulerDouble(),
-            remoteNotificationDispatcher: remoteNotificationDispatcher,
-            notificationCenter: NotificationCenter(),
-            monitor: AppMonitoringDouble(),
-            timeoutQueue: QueueDouble()
+            remoteNotificationDispatcher: remoteNotificationDispatcher
         )
         
         registrationService.register()
@@ -369,14 +346,11 @@ class RegistrationServiceTests: TestCase {
             userNotificationCenter: UserNotificationCenterDouble()
         )
         remoteNotificationDispatcher.pushToken = "the current push token"
-        let registrationService = ConcreteRegistrationService(
+        let registrationService = makeRegistrationService(
             session: session,
             persistence: PersistenceDouble(partialPostcode: "AB90"),
-            reminderScheduler: RegistrationReminderSchedulerDouble(),
             remoteNotificationDispatcher: remoteNotificationDispatcher,
-            notificationCenter: notificationCenter,
-            monitor: AppMonitoringDouble(),
-            timeoutQueue: QueueDouble()
+            notificationCenter: notificationCenter
         )
         
         registrationService.register()
@@ -405,13 +379,10 @@ class RegistrationServiceTests: TestCase {
         let remoteNotificationDispatcher = RemoteNotificationDispatchingDouble()
         remoteNotificationDispatcher.pushToken = "the current push token"
         let timeoutQueue = QueueDouble()
-        let registrationService = ConcreteRegistrationService(
+        let registrationService = makeRegistrationService(
             session: session,
             persistence: PersistenceDouble(partialPostcode: "AB90"),
-            reminderScheduler: RegistrationReminderSchedulerDouble(),
             remoteNotificationDispatcher: remoteNotificationDispatcher,
-            notificationCenter: NotificationCenter(),
-            monitor: AppMonitoringDouble(),
             timeoutQueue: timeoutQueue
         )
         
@@ -436,13 +407,11 @@ class RegistrationServiceTests: TestCase {
             userNotificationCenter: UserNotificationCenterDouble()
         )
         let queueDouble = QueueDouble()
-        let registrationService = ConcreteRegistrationService(
+        let registrationService = makeRegistrationService(
             session: session,
             persistence: persistence,
-            reminderScheduler: RegistrationReminderSchedulerDouble(),
             remoteNotificationDispatcher: remoteNotificationDispatcher,
             notificationCenter: notificationCenter,
-            monitor: AppMonitoringDouble(),
             timeoutQueue: queueDouble
         )
     
@@ -486,13 +455,11 @@ class RegistrationServiceTests: TestCase {
             userNotificationCenter: UserNotificationCenterDouble()
         )
         let queueDouble = QueueDouble()
-        let registrationService = ConcreteRegistrationService(
+        let registrationService = makeRegistrationService(
             session: session,
             persistence: persistence,
-            reminderScheduler: RegistrationReminderSchedulerDouble(),
             remoteNotificationDispatcher: remoteNotificationDispatcher,
             notificationCenter: notificationCenter,
-            monitor: AppMonitoringDouble(),
             timeoutQueue: queueDouble
         )
 
@@ -530,13 +497,11 @@ class RegistrationServiceTests: TestCase {
             userNotificationCenter: UserNotificationCenterDouble()
         )
         let queueDouble = QueueDouble()
-        let registrationService = ConcreteRegistrationService(
+        let registrationService = makeRegistrationService(
             session: session,
             persistence: persistence,
-            reminderScheduler: RegistrationReminderSchedulerDouble(),
             remoteNotificationDispatcher: remoteNotificationDispatcher,
             notificationCenter: notificationCenter,
-            monitor: AppMonitoringDouble(),
             timeoutQueue: queueDouble
         )
     
@@ -580,13 +545,11 @@ class RegistrationServiceTests: TestCase {
             userNotificationCenter: UserNotificationCenterDouble()
         )
         let queueDouble = QueueDouble()
-        let registrationService = ConcreteRegistrationService(
+        let registrationService = makeRegistrationService(
             session: session,
             persistence: persistence,
-            reminderScheduler: RegistrationReminderSchedulerDouble(),
             remoteNotificationDispatcher: remoteNotificationDispatcher,
             notificationCenter: notificationCenter,
-            monitor: AppMonitoringDouble(),
             timeoutQueue: queueDouble
         )
     
@@ -628,10 +591,9 @@ class RegistrationServiceTests: TestCase {
             userNotificationCenter: UserNotificationCenterDouble()
         )
         let queueDouble = QueueDouble()
-        let registrationService = ConcreteRegistrationService(
+        let registrationService = makeRegistrationService(
             session: session,
             persistence: persistence,
-            reminderScheduler: RegistrationReminderSchedulerDouble(),
             remoteNotificationDispatcher: remoteNotificationDispatcher,
             notificationCenter: notificationCenter,
             monitor: monitor,
@@ -673,16 +635,12 @@ class RegistrationServiceTests: TestCase {
     func testSchedulesRemindersAtStart() {
         let reminderScheduler = RegistrationReminderSchedulerDouble()
         
-        let registrationService = ConcreteRegistrationService(
-            session: SessionDouble(),
-            persistence: PersistenceDouble(),
+        let registrationService = makeRegistrationService(
             reminderScheduler: reminderScheduler,
             remoteNotificationDispatcher: RemoteNotificationDispatcher(
                 notificationCenter: NotificationCenter(),
                 userNotificationCenter: UserNotificationCenterDouble()
-            ),
-            notificationCenter: NotificationCenter(), monitor: AppMonitoringDouble(),
-            timeoutQueue: QueueDouble()
+            )
         )
         
         registrationService.register()
@@ -699,14 +657,12 @@ class RegistrationServiceTests: TestCase {
             notificationCenter: notificationCenter,
             userNotificationCenter: UserNotificationCenterDouble()
         )
-        let registrationService = ConcreteRegistrationService(
+        let registrationService = makeRegistrationService(
             session: session,
             persistence: persistence,
             reminderScheduler: reminderScheduler,
             remoteNotificationDispatcher: remoteNotificationDispatcher,
-            notificationCenter: notificationCenter,
-            monitor: AppMonitoringDouble(),
-            timeoutQueue: QueueDouble()
+            notificationCenter: notificationCenter
         )
         remoteNotificationDispatcher.pushToken = "the current push token"
         
@@ -729,6 +685,26 @@ class RegistrationServiceTests: TestCase {
         let data = Data(base64Encoded: "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEu1f68MqDXbKeTqZMTHsOGToO4rKnPClXe/kE+oWqlaWZQv4J1E98cUNdpzF9JIFRPMCNdGOvTr4UB+BhQv9GWg==")!
         return data
     }
+}
+
+private func makeRegistrationService(
+    session: Session = SessionDouble(),
+    persistence: Persisting = PersistenceDouble(),
+    reminderScheduler: RegistrationReminderScheduler = RegistrationReminderSchedulerDouble(),
+    remoteNotificationDispatcher: RemoteNotificationDispatching,
+    notificationCenter: NotificationCenter = NotificationCenter(),
+    monitor: AppMonitoring = AppMonitoringDouble(),
+    timeoutQueue: TestableQueue = QueueDouble()
+) -> ConcreteRegistrationService {
+    return ConcreteRegistrationService(
+        session: session,
+        persistence: persistence,
+        reminderScheduler: reminderScheduler,
+        remoteNotificationDispatcher: remoteNotificationDispatcher,
+        notificationCenter: notificationCenter,
+        monitor: monitor,
+        timeoutQueue: timeoutQueue
+    )
 }
 
 private struct ExpectedRegistrationRequestBody: Codable {
