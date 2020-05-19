@@ -30,6 +30,10 @@ struct Symptoms: Equatable {
     mutating func insert(_ symptom: Symptom) {
         symptoms.insert(symptom)
     }
+
+    mutating func remove(_ symptom: Symptom) {
+        symptoms.remove(symptom)
+    }
 }
 
 extension Symptoms: ExpressibleByArrayLiteral {
