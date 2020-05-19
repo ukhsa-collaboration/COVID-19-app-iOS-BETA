@@ -16,7 +16,7 @@ class SymptomsSummaryViewController: UIViewController, Storyboarded {
     private var symptoms: Set<Symptom>!
     private var statusStateMachine: StatusStateMachining!
     private var completion: ((Set<Symptom>) -> Void)!
-    private var pageNumber: Int?
+    private var pageNumber: Int!
 
     func inject(
         pageNumber: Int,
@@ -86,8 +86,9 @@ class SymptomsSummaryViewController: UIViewController, Storyboarded {
         button.setTitle(buttonTitle.localized, for: .normal)
     
         // This assumes this is the last page of the questionnaire
-        pageNumber.map { pageNumberLabel.text = "\($0)/\($0)"  }
-        
+        pageNumberLabel.text = "\(pageNumber!)/\(pageNumber!)"
+        pageNumberLabel.accessibilityLabel = "Step \(pageNumber!) of \(pageNumber!)"
+
         let symptomTexts = [
             "SYMPTOMS_SUMMARY_\(symptoms.contains(.temperature) ? "HAVE" : "NO")_TEMPERATURE".localized,
             "SYMPTOMS_SUMMARY_\(symptoms.contains(.cough) ? "HAVE" : "NO")_COUGH".localized,
