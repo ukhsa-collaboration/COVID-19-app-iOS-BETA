@@ -78,8 +78,9 @@ jobs:
           cat Sonar/Environments/environment.json | ./bin/make-environment > .secret/Environment.swift
 
       - run: |
-          killall "Simulator" || true
+          killall "Simulator"
           xcrun simctl erase all
+        continue-on-error: true
 
       - run: |
           rm -rf TestResults.xcresult
