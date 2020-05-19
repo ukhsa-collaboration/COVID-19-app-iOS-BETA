@@ -13,10 +13,6 @@ enum SelfDiagnosisType: String, Codable {
     case subsequent
 }
 
-enum Symptom: String, Codable {
-    case temperature, cough, smellLoss, fever, nausea
-}
-
 // This class continues to exist to allow migrating old data but is otherwise unused
 // see StatusStateMigration.swift
 struct SelfDiagnosis: Codable, Equatable {
