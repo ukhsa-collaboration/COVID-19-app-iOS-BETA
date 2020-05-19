@@ -263,7 +263,11 @@ class StatusViewController: UIViewController, Storyboarded {
         
         present(alertController, animated: true, completion: nil)
     }
-    
+
+    @IBAction func nhsCoronavirusTapped(_ sender: UIButton) {
+        UIApplication.shared.open(ContentURLs.shared.regionalServices)
+    }
+
     @objc func reload() {
         guard view != nil else { return }
 

@@ -22,6 +22,7 @@ struct ContentURLs {
     let nhs111Coronavirus: URL
     let statusInfo: URL
     let workplaceGuidance: URL
+    let regionalServices: URL
     private let status: StatusesURLs
     private let applyForTestBase: URL
 
@@ -52,11 +53,11 @@ extension ContentURLs: Decodable {
         case privacyAndData
         case ourPolicies
         case nhs111Coronavirus
-        case nhsCoronavirus
         case applyForTest
-        case status
         case statusInfo
         case workplaceGuidance
+        case regionalServices
+        case status
     }
 
     init(from decoder: Decoder) throws {
@@ -70,6 +71,7 @@ extension ContentURLs: Decodable {
         applyForTestBase = try values.decodeURL(forKey: .applyForTest)
         statusInfo = try values.decodeURL(forKey: .statusInfo)
         workplaceGuidance = try values.decodeURL(forKey: .workplaceGuidance)
+        regionalServices = try values.decodeURL(forKey: .regionalServices)
 
         status = try values.decode(StatusesURLs.self, forKey: .status)
     }
