@@ -43,8 +43,7 @@ class LogoStrapline: UIView {
     }
 
     @IBAction func infoTapped(_ sender: UIButton) {
-        let url = URL(string: "https://covid19.nhs.uk/?utm_source=nhscovid19ios&utm_medium=mobileapp&utm_campaign=nhscovid19app&utm_content=statuspage")!
-        UIApplication.shared.open(url)
+        UIApplication.shared.open(ContentURLs.shared.info)
     }
 
     func commonInit() {

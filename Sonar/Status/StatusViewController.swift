@@ -34,7 +34,7 @@ class StatusViewController: UIViewController, Storyboarded {
         }
     }
     
-    private let content = StatusContent.shared
+    private let content = ContentURLs.shared
     private lazy var drawerPresentationManager = DrawerPresentation()
     private var dateProvider: (() -> Date)!
     
@@ -146,8 +146,7 @@ class StatusViewController: UIViewController, Storyboarded {
     }
 
     @objc func infoTapped() {
-        let url = URL(string: "https://covid19.nhs.uk/?utm_source=nhscovid19ios&utm_medium=mobileapp&utm_campaign=nhscovid19app&utm_content=statuspage")!
-        UIApplication.shared.open(url)
+        UIApplication.shared.open(ContentURLs.shared.statusInfo)
     }
 
     @IBAction func retryRegistrationTapped() {
@@ -157,7 +156,7 @@ class StatusViewController: UIViewController, Storyboarded {
 
     @IBAction func adviceTapped(_ sender: Any) {
         let adviceVc = AdviceViewController.instantiate()
-        adviceVc.inject(linkDestination: content[statusStateMachine.state].readUrl)
+        adviceVc.inject(linkDestination: content.currentAdvice(for: statusStateMachine.state))
         navigationController?.pushViewController(adviceVc, animated: true)
     }
 

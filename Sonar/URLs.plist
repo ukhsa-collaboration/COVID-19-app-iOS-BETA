@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>info</key>
+	<string>https://covid19.nhs.uk/?utm_source=nhscovid19ios&amp;utm_medium=mobileapp&amp;utm_campaign=nhscovid19app&amp;utm_content=statuspage</string>
+	<key>moreAbout</key>
+	<string>https://covid19.nhs.uk</string>
+	<key>privacyAndData</key>
+	<string>https://covid19.nhs.uk/privacy-and-data.html</string>
+	<key>ourPolicies</key>
+	<string>https://covid19.nhs.uk/our-policies.html</string>
+	<key>nhs111Coronavirus</key>
+	<string>https://111.nhs.uk/covid-19/</string>
+	<key>applyForTest</key>
+	<string>https://self-referral.test-for-coronavirus.service.gov.uk/cta-start?ctaToken=token-value</string>
+	<key>statusInfo</key>
+	<string>https://covid19.nhs.uk/?utm_source=nhscovid19ios&amp;utm_medium=mobileapp&amp;utm_campaign=nhscovid19app&amp;utm_content=statuspage</string>
+	<key>workplaceGuidance</key>
+	<string>https://www.gov.uk/guidance/working-safely-during-coronavirus-covid-19</string>
+	<key>status</key>
+	<dict>
+		<key>ok</key>
+		<dict>
+			<key>currentAdvice</key>
+			<string>https://faq.covid19.nhs.uk/article/KA-01062/en-us</string>
+		</dict>
+		<key>exposed</key>
+		<dict>
+			<key>currentAdvice</key>
+			<string>https://www.gov.uk/coronavirus?utm_source=nhscovid19ios&amp;utm_medium=mobileapp&amp;utm_campaign=nhscovid19app&amp;utm_content=notified</string>
+		</dict>
+		<key>symptomatic</key>
+		<dict>
+			<key>currentAdvice</key>
+			<string>https://www.gov.uk/government/publications/covid-19-stay-at-home-guidance/stay-at-home-guidance-for-households-with-possible-coronavirus-covid-19-infection?utm_source=nhscovid19ios&amp;utm_medium=mobileapp&amp;utm_campaign=nhscovid19app&amp;utm_content=symptoms#main-messages</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

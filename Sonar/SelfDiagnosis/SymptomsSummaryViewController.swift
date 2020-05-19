@@ -95,7 +95,7 @@ class SymptomsSummaryViewController: UIViewController, Storyboarded {
     }
 
     @IBAction func noSymptomsInfoTapped(_ sender: ButtonWithDynamicType) {
-        UIApplication.shared.open(URL(string: "https://111.nhs.uk/covid-19/")!)
+        UIApplication.shared.open(ContentURLs.shared.nhs111Coronavirus)
     }
 
     @IBAction func buttonTapped(_ sender: PrimaryButton) {

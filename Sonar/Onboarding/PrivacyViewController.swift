@@ -28,15 +28,15 @@ class PrivacyViewController: UIViewController, Storyboarded {
     }
     
     @IBAction func tapMoreAbout(_ sender: Any) {
-        UIApplication.shared.open(URL(string: "https://covid19.nhs.uk")!)
+        UIApplication.shared.open(ContentURLs.shared.moreAbout)
     }
     
     @IBAction func tapPrivacy(_ sender: Any) {
-        UIApplication.shared.open(URL(string: "https://covid19.nhs.uk/privacy-and-data.html")!)
+        UIApplication.shared.open(ContentURLs.shared.privacyAndData)
     }
     
     @IBAction func tapTerms(_ sender: Any) {
-        UIApplication.shared.open(URL(string: "https://covid19.nhs.uk/our-policies.html")!)
+        UIApplication.shared.open(ContentURLs.shared.ourPolicies)
     }
     
     @IBAction func didTapClose(_ sender: Any) {
