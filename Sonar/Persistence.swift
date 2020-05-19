@@ -28,6 +28,7 @@ protocol Persisting {
     var uploadLog: [UploadLog] { get nonmutating set }
     var lastInstalledVersion: String? { get nonmutating set }
     var lastInstalledBuildNumber: String? { get nonmutating set }
+    var disabledNotificationsStatusView: Bool { get nonmutating set }
     var acknowledgmentUrls: Set<URL> { get nonmutating set }
     var statusState: StatusState { get nonmutating set }
 
@@ -49,6 +50,7 @@ class Persistence: Persisting {
         case lastInstalledVersion
         case acknowledgmentUrls
         case statusState
+        case disabledNotificationsStatusView
     }
     
     private let encoder = JSONEncoder()
@@ -153,6 +155,11 @@ class Persistence: Persisting {
     var lastInstalledBuildNumber: String? {
         get { UserDefaults.standard.string(forKey: Keys.lastInstalledBuildNumber.rawValue) }
         set { UserDefaults.standard.set(newValue, forKey: Keys.lastInstalledBuildNumber.rawValue) }
+    }
+    
+    var disabledNotificationsStatusView: Bool {
+        get { UserDefaults.standard.bool(forKey: Keys.disabledNotificationsStatusView.rawValue) }
+        set { UserDefaults.standard.set(newValue, forKey: Keys.disabledNotificationsStatusView.rawValue) }
     }
 
     var acknowledgmentUrls: Set<URL> {

@@ -12,6 +12,9 @@ import Logging
 class StatusViewController: UIViewController, Storyboarded {
     static let storyboardName = "Status"
 
+    @IBOutlet weak var contentStackView: UIStackView!
+    
+    @IBOutlet weak var registrationStatusViewContainer: UIView!
     @IBOutlet weak var registrationRetryButton: ButtonWithDynamicType!
     @IBOutlet weak var registrationStatusText: UILabel!
     @IBOutlet weak var registrationStatusIcon: UIImageView!
@@ -19,18 +22,24 @@ class StatusViewController: UIViewController, Storyboarded {
     @IBOutlet weak var registrationStatusView: UIView!
     
     @IBOutlet weak var notificationsStatusView: UIView!
-
+    @IBOutlet weak private var disableNotificationStatusViewButton: NotificationStatusButton!
+    @IBOutlet weak private var goToSettingsButton: NotificationStatusButton!
+    
     @IBOutlet weak var diagnosisHighlightView: UIView!
     @IBOutlet weak var diagnosisTitleLabel: UILabel!
     @IBOutlet weak var diagnosisDetailLabel: UILabel!
 
     @IBOutlet weak var feelUnwellButton: UIButton!
+    @IBOutlet weak var feelUnwellTitleLabel: UILabel!
+    @IBOutlet weak var feelUnwellBodyLabel: UILabel!
+
     @IBOutlet weak var applyForTestButton: UIButton!
     @IBOutlet weak var stepsDetailLabel: UILabel!
 
-    var hideNotificationStatusView = true {
+    var hasNotificationProblem = false {
         didSet {
-            notificationsStatusView?.isHidden = hideNotificationStatusView
+            setupBannerAppearance(hasNotificationProblem: hasNotificationProblem,
+                                  bannerDisabled: persistence.disabledNotificationsStatusView)
         }
     }
     
@@ -62,11 +71,19 @@ class StatusViewController: UIViewController, Storyboarded {
         diagnosisHighlightView.layer.cornerRadius = 8
         registrationRetryButton.setTitle("RETRY".localized, for: .normal)
 
+        feelUnwellButton.accessibilityLabel = [
+            feelUnwellTitleLabel.text, feelUnwellBodyLabel.text
+        ].compactMap { $0 }.joined(separator: ". ")
+
         let logo = UIImageView(image: UIImage(named: "NHS_Logo"))
         logo.contentMode = .scaleAspectFit
         diagnosisHighlightView.accessibilityIgnoresInvertColors = true
         
-        notificationsStatusView.isHidden = hideNotificationStatusView
+        setupBannerAppearance(hasNotificationProblem: hasNotificationProblem,
+                              bannerDisabled: persistence.disabledNotificationsStatusView)
+                
+        goToSettingsButton.titleLabel?.text = "GO_TO_SETTINGS".localized
+        disableNotificationStatusViewButton.titleLabel?.text = "DISABLE_NOTIFICATIONS_STATUS_VIEW".localized
 
         let title = UILabel()
         title.text = "COVID-19"
@@ -91,6 +108,15 @@ class StatusViewController: UIViewController, Storyboarded {
             vc.inject(linkingIdManager: linkingIdManager, uiQueue: DispatchQueue.main, urlOpener: urlOpener)
         }
     }
+    private func setupBannerAppearance(hasNotificationProblem: Bool, bannerDisabled: Bool) {
+        guard isViewLoaded else { return }
+        let hideBanner = !hasNotificationProblem || bannerDisabled
+        
+        notificationsStatusView?.isHidden = hideBanner
+        
+        let spacing = hideBanner ? UIStackView.spacingUseDefault : 0
+        contentStackView.setCustomSpacing(spacing, after: registrationStatusViewContainer)
+   }
 
     private func showSpinner() {
         registrationSpinner.isHidden = false
@@ -220,8 +246,22 @@ class StatusViewController: UIViewController, Storyboarded {
         present(symptomsPromptViewController, animated: true)
     }
 
-    @IBAction func notificationsStatusViewTapped(_ sender: Any) {
+    @IBAction func goToSettingsTapped() {
         UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:])
+    }
+    
+    @IBAction func disableNotificationsTapped() {
+        persistence.disabledNotificationsStatusView = true
+        setupBannerAppearance(hasNotificationProblem: hasNotificationProblem,
+                              bannerDisabled: persistence.disabledNotificationsStatusView)
+
+        let title = "NOTIFICATIONS_DISABLED_ALERT_TITLE".localized
+        let message = "NOTIFICATIONS_DISABLED_ALERT_MESSAGE".localized
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "NOTIFICATIONS_DISABLED_ALERT_OK".localized, style: .default)
+        alertController.addAction(alertAction)
+        
+        present(alertController, animated: true, completion: nil)
     }
     
     @objc func reload() {

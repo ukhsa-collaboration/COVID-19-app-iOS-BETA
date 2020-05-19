@@ -235,7 +235,7 @@ class RootViewControllerTests: TestCase {
         }
         
         pollPresentedVC()
-        wait(for: [expectation], timeout: 2.0)
+        wait(for: [expectation], timeout: 5.0)
         done = true
     }
     

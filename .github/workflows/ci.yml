@@ -49,6 +49,11 @@ jobs:
     runs-on:
       - self-hosted
       - macos
+    strategy:
+      matrix:
+        run-config:
+          - { os: "13.4", name: "iPhone 11" }
+          - { os: "12.4", name: "iPhone SE" }
     steps:
       - name: Checkout Project
         uses: actions/checkout@01aeccc # v2.1.0
@@ -68,8 +73,9 @@ jobs:
           cat Sonar/Environments/environment.json | ./bin/make-environment > .secret/Environment.swift
 
       - run: |
-          killall "Simulator" || true
+          killall "Simulator"
           xcrun simctl erase all
+        continue-on-error: true
 
       - run: |
           rm -rf TestResults.xcresult
@@ -79,7 +85,7 @@ jobs:
           xcodebuild
           -scheme Sonar
           test
-          -destination "platform=iOS Simulator,OS=13.4,name=iPhone 11"
+          -destination "platform=iOS Simulator,OS=${{ matrix.run-config['os'] }},name=${{ matrix.run-config['name'] }}"
           -showBuildTimingSummary
           -allowProvisioningUpdates
           -resultBundlePath TestResults.xcresult

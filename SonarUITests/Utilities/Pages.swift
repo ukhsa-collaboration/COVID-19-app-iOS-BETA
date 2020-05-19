@@ -62,7 +62,7 @@ class StatusOkPage : StatusPage {
     }
 
     func tapFeelUnwell() -> SymptomsTemperaturePage {
-        app.staticTexts["I feel unwell"].tap()
+        app.buttons.element(matching: NSPredicate(format: "label BEGINSWITH %@", "I feel unwell")).tap()
         return SymptomsTemperaturePage(app)
     }
 }
