@@ -179,6 +179,7 @@
 		F60497792454A40B002B8503 /* TestingInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F60497782454A40B002B8503 /* TestingInfo.storyboard */; };
 		F6053A102472F69D0006939E /* URLs.plist in Resources */ = {isa = PBXBuildFile; fileRef = F6053A0F2472F69D0006939E /* URLs.plist */; };
 		F6053A122472F7170006939E /* ContentURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6053A112472F7170006939E /* ContentURLs.swift */; };
+		F6099A7A2474976400758D3E /* Advice.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6099A792474976400758D3E /* Advice.storyboard */; };
 		F613936E243FA82B003447E8 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = F613936D243FA82B003447E8 /* Appearance.swift */; };
 		F616959F2458A2DA006AABE3 /* AcknowledgmentRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F616959E2458A2DA006AABE3 /* AcknowledgmentRequest.swift */; };
 		F61695A12458B3C0006AABE3 /* StatusNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61695A02458B3C0006AABE3 /* StatusNotificationHandler.swift */; };
@@ -195,6 +196,9 @@
 		F632792A2435323200CF7A42 /* PermissionsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63279292435323200CF7A42 /* PermissionsViewControllerTests.swift */; };
 		F6334E472474559000421B4C /* Symptoms.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6334E462474559000421B4C /* Symptoms.swift */; };
 		F6334E492474595500421B4C /* SymptomsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6334E482474595500421B4C /* SymptomsTests.swift */; };
+		F6334E4B24747DC300421B4C /* RegistrationStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6334E4A24747DC300421B4C /* RegistrationStatusViewController.swift */; };
+		F6334E4D24748B3000421B4C /* RegistrationStatus.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6334E4C24748B3000421B4C /* RegistrationStatus.storyboard */; };
+		F6334E4F24748C3400421B4C /* RegistrationStatusViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6334E4E24748C3400421B4C /* RegistrationStatusViewControllerTests.swift */; };
 		F652F72C244A74E900D97950 /* StartDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652F72B244A74E900D97950 /* StartDateViewController.swift */; };
 		F652F72E244E472E00D97950 /* SymptomsPromptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652F72D244E472E00D97950 /* SymptomsPromptViewController.swift */; };
 		F652F730244E4AAD00D97950 /* DrawerPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652F72F244E4AAD00D97950 /* DrawerPresentation.swift */; };
@@ -481,6 +485,7 @@
 		F60497782454A40B002B8503 /* TestingInfo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TestingInfo.storyboard; sourceTree = "<group>"; };
 		F6053A0F2472F69D0006939E /* URLs.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = URLs.plist; sourceTree = "<group>"; };
 		F6053A112472F7170006939E /* ContentURLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentURLs.swift; sourceTree = "<group>"; };
+		F6099A792474976400758D3E /* Advice.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Advice.storyboard; sourceTree = "<group>"; };
 		F613936D243FA82B003447E8 /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		F616959E2458A2DA006AABE3 /* AcknowledgmentRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgmentRequest.swift; sourceTree = "<group>"; };
 		F61695A02458B3C0006AABE3 /* StatusNotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusNotificationHandler.swift; sourceTree = "<group>"; };
@@ -498,6 +503,9 @@
 		F63279292435323200CF7A42 /* PermissionsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsViewControllerTests.swift; sourceTree = "<group>"; };
 		F6334E462474559000421B4C /* Symptoms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Symptoms.swift; sourceTree = "<group>"; };
 		F6334E482474595500421B4C /* SymptomsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomsTests.swift; sourceTree = "<group>"; };
+		F6334E4A24747DC300421B4C /* RegistrationStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationStatusViewController.swift; sourceTree = "<group>"; };
+		F6334E4C24748B3000421B4C /* RegistrationStatus.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RegistrationStatus.storyboard; sourceTree = "<group>"; };
+		F6334E4E24748C3400421B4C /* RegistrationStatusViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationStatusViewControllerTests.swift; sourceTree = "<group>"; };
 		F652F72B244A74E900D97950 /* StartDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDateViewController.swift; sourceTree = "<group>"; };
 		F652F72D244E472E00D97950 /* SymptomsPromptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomsPromptViewController.swift; sourceTree = "<group>"; };
 		F652F72F244E4AAD00D97950 /* DrawerPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerPresentation.swift; sourceTree = "<group>"; };
@@ -658,6 +666,7 @@
 		0983ACD1243EB20A00DBB336 /* Status */ = {
 			isa = PBXGroup;
 			children = (
+				F6334E4E24748C3400421B4C /* RegistrationStatusViewControllerTests.swift */,
 				F61695A22458B556006AABE3 /* StatusNotificationHandlerTests.swift */,
 				F6DA0A392469DCF7001F0B48 /* StatusStateMachineTests.swift */,
 				F6DA0A352469D95F001F0B48 /* StatusStateMigrationTests.swift */,
@@ -727,11 +736,14 @@
 		0995ABCD243D034E0057C0D7 /* Status */ = {
 			isa = PBXGroup;
 			children = (
+				F6099A792474976400758D3E /* Advice.storyboard */,
+				F6334E4C24748B3000421B4C /* RegistrationStatus.storyboard */,
 				F758B8C3242CC0EE003AE16D /* Status.storyboard */,
 				F6BBE140246F584F005757BB /* WorkplaceGuidance.storyboard */,
 				13473A1A246AFF0C00800CEA /* AdviceViewController.swift */,
 				134470AF2454D614001A0AD9 /* CoughUpdateViewController.swift */,
 				09A9254A2457B2CA00C5DBC1 /* MedicalWorkerInstructionsViewController.swift */,
+				F6334E4A24747DC300421B4C /* RegistrationStatusViewController.swift */,
 				F61695A02458B3C0006AABE3 /* StatusNotificationHandler.swift */,
 				F6DA0A3B246A0FAA001F0B48 /* StatusState.swift */,
 				F6DA0A332469D6BA001F0B48 /* StatusStateMachine.swift */,
@@ -1469,12 +1481,14 @@
 				F618A566245C682500D89517 /* GoogleService-Info.plist in Resources */,
 				895D9E462437458700573D4D /* AppIcon.xcassets in Resources */,
 				F6BBE13C246F46B4005757BB /* ApplyForTest.storyboard in Resources */,
+				F6334E4D24748B3000421B4C /* RegistrationStatus.storyboard in Resources */,
 				F68B89ED243CFF2600F369A9 /* SelfDiagnosis.storyboard in Resources */,
 				F6BBE141246F584F005757BB /* WorkplaceGuidance.storyboard in Resources */,
 				F6F05A322434310200FF4B72 /* Onboarding.storyboard in Resources */,
 				F70CB81B2450CFA900ED6E7F /* OnboardingLogoStrapline.xib in Resources */,
 				098ED481242E745F0029B729 /* Debug.storyboard in Resources */,
 				F6053A102472F69D0006939E /* URLs.plist in Resources */,
+				F6099A7A2474976400758D3E /* Advice.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1561,6 +1575,7 @@
 				F62F858124510716006580A8 /* ContactEventsUploaderTests.swift in Sources */,
 				89CCF65F2456EF7000AC9D91 /* TrustValidatingDouble.swift in Sources */,
 				F600A60424297C010038DF57 /* RegistrationRequestTests.swift in Sources */,
+				F6334E4F24748C3400421B4C /* RegistrationStatusViewControllerTests.swift in Sources */,
 				8976B15D2451B62100154ADF /* RequestTests.swift in Sources */,
 				21E5051324448AE30065C69B /* PlistPersisterTests.swift in Sources */,
 				098ED488242E89930029B729 /* PushNotificationManagerDouble.swift in Sources */,
@@ -1718,6 +1733,7 @@
 				09CAA3662440F3B100CE93A6 /* PostcodeViewController.swift in Sources */,
 				F6BBE143246F5870005757BB /* WorkplaceGuidanceViewController.swift in Sources */,
 				F61695A12458B3C0006AABE3 /* StatusNotificationHandler.swift in Sources */,
+				F6334E4B24747DC300421B4C /* RegistrationStatusViewController.swift in Sources */,
 				131AB05C2449D85B002136CA /* ContactEventExpiryHandler.swift in Sources */,
 				09A9254324536FD300C5DBC1 /* RegistrationReminderScheduler.swift in Sources */,
 				F694B1C2245A4A5600C6A5D1 /* ErrorLabel.swift in Sources */,

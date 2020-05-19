@@ -9,7 +9,7 @@
 import UIKit
 
 class AdviceViewController: UIViewController, Storyboarded {
-    static let storyboardName = "Status"
+    static let storyboardName = "Advice"
 
     @IBOutlet weak var header: UILabel!
     @IBOutlet weak var detail: UILabel!

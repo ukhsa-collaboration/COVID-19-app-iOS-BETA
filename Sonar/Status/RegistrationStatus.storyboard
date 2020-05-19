@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7gr-jF-1is">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Registration Status View Controller-->
+        <scene sceneID="UxY-1E-upF">
+            <objects>
+                <viewController storyboardIdentifier="RegistrationStatusViewController" id="7gr-jF-1is" customClass="RegistrationStatusViewController" customModule="Sonar" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" id="gL4-1V-afz">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yi3-JS-1pV" userLabel="Registration status view">
+                                <rect key="frame" x="20" y="0.0" width="374" height="200"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="24" placeholderIntrinsicHeight="infinite" translatesAutoresizingMaskIntoConstraints="NO" id="gqD-Jt-5OE" userLabel="Image or spinner wrapper" customClass="AutoscalingWidthView" customModule="Sonar" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="24" height="200"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="24" placeholderIntrinsicHeight="24" translatesAutoresizingMaskIntoConstraints="NO" id="eE6-Bm-OMe" userLabel="Registration status image">
+                                                <rect key="frame" x="0.0" y="88" width="24" height="24"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="eE6-Bm-OMe" secondAttribute="height" multiplier="1:1" id="Ay8-cl-yyd"/>
+                                                </constraints>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="24" placeholderIntrinsicHeight="24" image="Spinner" translatesAutoresizingMaskIntoConstraints="NO" id="aTS-ux-URe" userLabel="Spinner" customClass="SpinnerView" customModule="Sonar" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="88" width="24" height="24"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="aTS-ux-URe" secondAttribute="height" multiplier="1:1" id="tki-AS-5OE"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="eE6-Bm-OMe" secondAttribute="trailing" id="LDS-qv-CIM"/>
+                                            <constraint firstItem="aTS-ux-URe" firstAttribute="leading" secondItem="gqD-Jt-5OE" secondAttribute="leading" id="Lfw-q6-CY0"/>
+                                            <constraint firstAttribute="trailing" secondItem="aTS-ux-URe" secondAttribute="trailing" id="a0Y-jE-uO3"/>
+                                            <constraint firstItem="eE6-Bm-OMe" firstAttribute="centerY" secondItem="gqD-Jt-5OE" secondAttribute="centerY" id="aQh-uV-FXj"/>
+                                            <constraint firstItem="aTS-ux-URe" firstAttribute="centerY" secondItem="gqD-Jt-5OE" secondAttribute="centerY" id="feP-Mh-MMJ"/>
+                                            <constraint firstItem="eE6-Bm-OMe" firstAttribute="leading" secondItem="gqD-Jt-5OE" secondAttribute="leading" id="jQW-Od-HIN"/>
+                                        </constraints>
+                                    </view>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3dI-qd-26l">
+                                        <rect key="frame" x="32" y="8" width="322" height="184"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="App working?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6R0-Od-XVE" userLabel="Registration status text">
+                                                <rect key="frame" x="0.0" y="0.0" width="262" height="184"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                <color key="textColor" name="NHS Text"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="999" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hWh-Zr-odi" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
+                                                <rect key="frame" x="270" y="0.0" width="52" height="184"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <state key="normal" title="RETRY">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="retryRegistrationTapped" destination="7gr-jF-1is" eventType="touchUpInside" id="wNB-Hc-TrR"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="3dI-qd-26l" firstAttribute="leading" secondItem="gqD-Jt-5OE" secondAttribute="trailing" constant="8" id="3xa-18-8Mn"/>
+                                    <constraint firstAttribute="bottom" secondItem="3dI-qd-26l" secondAttribute="bottom" constant="8" id="MvB-jb-FgG"/>
+                                    <constraint firstItem="gqD-Jt-5OE" firstAttribute="top" secondItem="Yi3-JS-1pV" secondAttribute="top" id="Ngx-07-Db6"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="PLr-vN-Cd2"/>
+                                    <constraint firstItem="3dI-qd-26l" firstAttribute="top" secondItem="Yi3-JS-1pV" secondAttribute="top" constant="8" id="YbB-2s-wce"/>
+                                    <constraint firstAttribute="bottom" secondItem="gqD-Jt-5OE" secondAttribute="bottom" id="a4e-OR-jCB"/>
+                                    <constraint firstAttribute="trailing" secondItem="3dI-qd-26l" secondAttribute="trailing" constant="20" id="vpm-BE-jKv"/>
+                                    <constraint firstItem="gqD-Jt-5OE" firstAttribute="leading" secondItem="Yi3-JS-1pV" secondAttribute="leading" id="zMM-3S-9Yh"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Yi3-JS-1pV" secondAttribute="bottom" id="4vN-cz-cWF"/>
+                            <constraint firstItem="Yi3-JS-1pV" firstAttribute="leading" secondItem="gL4-1V-afz" secondAttribute="leadingMargin" id="Z5U-Om-P70"/>
+                            <constraint firstItem="Yi3-JS-1pV" firstAttribute="top" secondItem="gL4-1V-afz" secondAttribute="top" id="byb-ev-zW1"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Yi3-JS-1pV" secondAttribute="trailing" id="oCk-ty-84y"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="414" height="200"/>
+                    <connections>
+                        <outlet property="registrationRetryButton" destination="hWh-Zr-odi" id="xbb-T1-DdP"/>
+                        <outlet property="registrationSpinner" destination="aTS-ux-URe" id="2zF-Ek-8eU"/>
+                        <outlet property="registrationStatusIcon" destination="eE6-Bm-OMe" id="Oua-FK-e2l"/>
+                        <outlet property="registrationStatusText" destination="6R0-Od-XVE" id="yEF-CM-Wxr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="O6j-ur-pQJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6087" y="365"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Spinner" width="24" height="24"/>
+        <namedColor name="NHS Text">
+            <color red="0.1289999932050705" green="0.16899999976158142" blue="0.19599999487400055" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

@@ -15,19 +15,16 @@ class StatusViewController: UIViewController, Storyboarded {
     @IBOutlet weak var contentStackView: UIStackView!
     
     @IBOutlet weak var registrationStatusViewContainer: UIView!
-    @IBOutlet weak var registrationRetryButton: ButtonWithDynamicType!
-    @IBOutlet weak var registrationStatusText: UILabel!
-    @IBOutlet weak var registrationStatusIcon: UIImageView!
-    @IBOutlet weak var registrationSpinner: SpinnerView!
-    @IBOutlet weak var registrationStatusView: UIView!
-    
     @IBOutlet weak var notificationsStatusView: UIView!
     @IBOutlet weak private var disableNotificationStatusViewButton: NotificationStatusButton!
     @IBOutlet weak private var goToSettingsButton: NotificationStatusButton!
     
+    @IBOutlet weak var diagnosisStackView: UIStackView!
     @IBOutlet weak var diagnosisHighlightView: UIView!
     @IBOutlet weak var diagnosisTitleLabel: UILabel!
     @IBOutlet weak var diagnosisDetailLabel: UILabel!
+
+    @IBOutlet weak var nextStepsDetailView: UIView!
 
     @IBOutlet weak var feelUnwellButton: UIButton!
     @IBOutlet weak var feelUnwellTitleLabel: UILabel!
@@ -35,6 +32,8 @@ class StatusViewController: UIViewController, Storyboarded {
 
     @IBOutlet weak var applyForTestButton: UIButton!
     @IBOutlet weak var stepsDetailLabel: UILabel!
+
+    @IBOutlet weak var nhsServicesStackView: UIStackView!
 
     var hasNotificationProblem = false {
         didSet {
@@ -68,44 +67,50 @@ class StatusViewController: UIViewController, Storyboarded {
     }
 
     override func viewDidLoad() {
+        navigationItem.titleView = {
+            let logo = UIImageView(image: UIImage(named: "NHS_Logo"))
+            logo.contentMode = .scaleAspectFit
+
+            let title = UILabel()
+            title.text = "COVID-19"
+            title.textColor = UIColor(named: "NHS Blue")
+            title.accessibilityLabel = "NHS Covid 19"
+
+            return UIStackView(arrangedSubviews: [logo, title])
+        }()
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Info"), style: .plain, target: self, action: #selector(infoTapped))
+
         diagnosisHighlightView.layer.cornerRadius = 8
-        registrationRetryButton.setTitle("RETRY".localized, for: .normal)
-
-        feelUnwellButton.accessibilityLabel = [
-            feelUnwellTitleLabel.text, feelUnwellBodyLabel.text
-        ].compactMap { $0 }.joined(separator: ". ")
-
-        let logo = UIImageView(image: UIImage(named: "NHS_Logo"))
-        logo.contentMode = .scaleAspectFit
         diagnosisHighlightView.accessibilityIgnoresInvertColors = true
-        
+
         setupBannerAppearance(hasNotificationProblem: hasNotificationProblem,
                               bannerDisabled: persistence.disabledNotificationsStatusView)
                 
         goToSettingsButton.titleLabel?.text = "GO_TO_SETTINGS".localized
         disableNotificationStatusViewButton.titleLabel?.text = "DISABLE_NOTIFICATIONS_STATUS_VIEW".localized
 
-        let title = UILabel()
-        title.text = "COVID-19"
-        title.textColor = UIColor(named: "NHS Blue")
-        title.accessibilityLabel = "NHS Covid 19"
+        feelUnwellButton.accessibilityLabel = [
+            feelUnwellTitleLabel.text, feelUnwellBodyLabel.text
+        ].compactMap { $0 }.joined(separator: ". ")
 
-        let stack = UIStackView()
-        stack.addArrangedSubview(logo)
-        stack.addArrangedSubview(title)
+        diagnosisStackView.isLayoutMarginsRelativeArrangement = true
+        contentStackView.setCustomSpacing(32, after: diagnosisStackView)
+        contentStackView.setCustomSpacing(32, after: nextStepsDetailView)
+        nhsServicesStackView.isLayoutMarginsRelativeArrangement = true
 
-        navigationItem.titleView = stack
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Info"), style: .plain, target: self, action: #selector(infoTapped))
-        
         notificationCenter.addObserver(self, selector: #selector(reload), name: UIApplication.didBecomeActiveNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(reload), name: StatusStateMachine.StatusStateChangedNotification, object: nil)
-        notificationCenter.addObserver(self, selector: #selector(showRegisteredStatus), name: RegistrationCompletedNotification, object: nil)
-        notificationCenter.addObserver(self, selector: #selector(showRegistrationFailedStatus), name: RegistrationFailedNotification, object: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? ApplyForTestContainerViewController {
+        switch segue.destination {
+        case let vc as RegistrationStatusViewController:
+            vc.inject(persistence: persistence, registrationService: registrationService, notificationCenter: notificationCenter)
+        case let vc as ApplyForTestContainerViewController:
             vc.inject(linkingIdManager: linkingIdManager, uiQueue: DispatchQueue.main, urlOpener: urlOpener)
+        default:
+            break
         }
     }
     private func setupBannerAppearance(hasNotificationProblem: Bool, bannerDisabled: Bool) {
@@ -118,69 +123,12 @@ class StatusViewController: UIViewController, Storyboarded {
         contentStackView.setCustomSpacing(spacing, after: registrationStatusViewContainer)
    }
 
-    private func showSpinner() {
-        registrationSpinner.isHidden = false
-        registrationStatusIcon.isHidden = true
-    }
-
-    private func hideSpinner() {
-        registrationSpinner.isHidden = true
-        registrationStatusIcon.isHidden = false
-    }
-
-    private func register() {
-        showRegisteringStatus()
-        registrationService.register()
-    }
-
-    private func showRegisteringStatus() {
-        registrationStatusText.text = "REGISTRATION_IN_PROGRESS".localized
-        showSpinner()
-        registrationStatusText.textColor = UIColor(named: "NHS Text")
-        registrationStatusView.backgroundColor = nil
-        registrationRetryButton.isHidden = true
-    }
-
-    @objc private func showRegisteredStatus() {
-        registrationStatusText.text = "REGISTRATION_OK".localized
-        registrationStatusIcon.image = UIImage(named: "Registration_status_ok")
-        hideSpinner()
-        registrationStatusText.textColor = UIColor(named: "NHS Text")
-        registrationStatusView.backgroundColor = nil
-        registrationRetryButton.isHidden = true
-
-        UIAccessibility.post(notification: .layoutChanged, argument: registrationStatusView)
-    }
-
-    @objc private func showRegistrationFailedStatus() {
-        registrationStatusText.text = "REGISTRATION_FAILED".localized
-        registrationStatusIcon.image = UIImage(named: "Registration_status_failure")
-        hideSpinner()
-        registrationStatusText.textColor = UIColor.white
-        registrationStatusView.backgroundColor = UIColor(named: "Error Grey")
-        registrationRetryButton.isHidden = false
-
-        UIAccessibility.post(notification: .layoutChanged, argument: registrationStatusView)
-    }
-
     override func viewWillAppear(_ animated: Bool) {
-        if persistence.registration != nil {
-            showRegisteredStatus()
-        } else {
-            logger.info("Attempting to register because the view will appear")
-            register()
-        }
-
         reload()
     }
 
     @objc func infoTapped() {
         UIApplication.shared.open(ContentURLs.shared.statusInfo)
-    }
-
-    @IBAction func retryRegistrationTapped() {
-        logger.info("Attempting to register because the user tapped the retry button")
-        register()
     }
 
     @IBAction func adviceTapped(_ sender: Any) {

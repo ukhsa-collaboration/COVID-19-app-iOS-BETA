@@ -91,6 +91,7 @@ jobs:
           -resultBundlePath TestResults.xcresult
 
       - name: Upload Test Results
+        if: always()
         uses: actions/upload-artifact@e7eefc4 # v2
         with:
           name: TestResults.xcresult
