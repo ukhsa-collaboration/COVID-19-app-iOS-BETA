@@ -67,7 +67,7 @@ private extension ScreenTestCase {
     }
 
     var feelUnwellButton: XCUIElement {
-        app.staticTexts["I feel unwell"]
+        app.buttons.element(matching: NSPredicate(format: "label BEGINSWITH %@", "I feel unwell"))
     }
 
     var highTemperatureOption: XCUIElement {
