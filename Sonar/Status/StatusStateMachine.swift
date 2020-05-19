@@ -72,7 +72,7 @@ class StatusStateMachine: StatusStateMachining {
     }
 
     func selfDiagnose(symptoms: Symptoms, startDate: Date) throws {
-        guard !symptoms.isEmpty else {
+        guard symptoms.hasCoronavirusSymptoms else {
             assertionFailure("Self-diagnosing with no symptoms is not allowed")
             return
         }

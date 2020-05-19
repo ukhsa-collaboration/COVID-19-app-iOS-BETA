@@ -179,12 +179,12 @@ class SetStatusStateViewController: UITableViewController {
         case 0:
             statusState = .ok(StatusState.Ok())
         case 1:
-            guard !symptoms.isEmpty else {
+            guard symptoms.hasCoronavirusSymptoms else {
                 fatalError()
             }
             statusState = .symptomatic(StatusState.Symptomatic(symptoms: symptoms, startDate: date!))
         case 2:
-            guard !symptoms.isEmpty else {
+            guard symptoms.hasCoronavirusSymptoms else {
                 fatalError()
             }
             statusState = .checkin(StatusState.Checkin(symptoms: symptoms, checkinDate: date!))

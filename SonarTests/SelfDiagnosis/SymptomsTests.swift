@@ -32,5 +32,4 @@ class SymptomsTests: XCTestCase {
         XCTAssertEqual(decoded, symptoms)
     }
 
-
 }

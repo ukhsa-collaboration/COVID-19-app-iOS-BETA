@@ -15,7 +15,9 @@ enum Symptom: String, Codable {
 struct Symptoms: Equatable {
     private var symptoms: Set<Symptom>
 
-    var isEmpty: Bool { symptoms.isEmpty }
+    var hasCoronavirusSymptoms: Bool {
+        !symptoms.intersection([.temperature, .cough, .smellLoss]).isEmpty
+    }
 
     init(_ symptoms: Set<Symptom>) {
         self.symptoms = symptoms
