@@ -162,7 +162,7 @@ class RootViewControllerTests: TestCase {
         notificationCenter.post(name: UIApplication.didBecomeActiveNotification, object: nil)
         authorizationManager.notificationsCompletion?(.allowed)
 
-        XCTAssertFalse(statusViewController.notificationsStatusView!.isHidden)
+        XCTAssertTrue(statusViewController.notificationsStatusView!.isHidden)
     }
 
     func testBecomesActiveShowsBluetoothOffWhenBluetoothOff() {

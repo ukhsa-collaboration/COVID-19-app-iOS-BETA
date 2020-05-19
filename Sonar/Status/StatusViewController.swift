@@ -36,9 +36,9 @@ class StatusViewController: UIViewController, Storyboarded {
     @IBOutlet weak var applyForTestButton: UIButton!
     @IBOutlet weak var stepsDetailLabel: UILabel!
 
-    var bluetoothDisabled = true {
+    var hasNotificationProblem = false {
         didSet {
-            setupBannerAppearance(bluetoothDisabled: bluetoothDisabled,
+            setupBannerAppearance(hasNotificationProblem: hasNotificationProblem,
                                   bannerDisabled: persistence.disabledNotificationsStatusView)
         }
     }
@@ -79,7 +79,7 @@ class StatusViewController: UIViewController, Storyboarded {
         logo.contentMode = .scaleAspectFit
         diagnosisHighlightView.accessibilityIgnoresInvertColors = true
         
-        setupBannerAppearance(bluetoothDisabled: bluetoothDisabled,
+        setupBannerAppearance(hasNotificationProblem: hasNotificationProblem,
                               bannerDisabled: persistence.disabledNotificationsStatusView)
                 
         goToSettingsButton.titleLabel?.text = "GO_TO_SETTINGS".localized
@@ -108,10 +108,9 @@ class StatusViewController: UIViewController, Storyboarded {
             vc.inject(linkingIdManager: linkingIdManager, uiQueue: DispatchQueue.main, urlOpener: urlOpener)
         }
     }
-
-    private func setupBannerAppearance(bluetoothDisabled: Bool, bannerDisabled: Bool) {
+    private func setupBannerAppearance(hasNotificationProblem: Bool, bannerDisabled: Bool) {
         guard isViewLoaded else { return }
-        let hideBanner = bluetoothDisabled || bannerDisabled
+        let hideBanner = !hasNotificationProblem || bannerDisabled
         
         notificationsStatusView?.isHidden = hideBanner
         
@@ -253,7 +252,7 @@ class StatusViewController: UIViewController, Storyboarded {
     
     @IBAction func disableNotificationsTapped() {
         persistence.disabledNotificationsStatusView = true
-        setupBannerAppearance(bluetoothDisabled: bluetoothDisabled,
+        setupBannerAppearance(hasNotificationProblem: hasNotificationProblem,
                               bannerDisabled: persistence.disabledNotificationsStatusView)
 
         let title = "NOTIFICATIONS_DISABLED_ALERT_TITLE".localized

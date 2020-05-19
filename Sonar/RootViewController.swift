@@ -141,10 +141,7 @@ class RootViewController: UIViewController {
             self.uiQueue.sync {
                 self.dismissSetupError()
                 
-                let bluetoothProblem = [SetupProblem.bluetoothOff,
-                                        SetupProblem.bluetoothPermissions].contains(problem)
-                
-                self.statusViewController.bluetoothDisabled = bluetoothProblem
+                self.statusViewController.hasNotificationProblem = (problem == .notificationPermissions)
                 
                 guard let problem = problem else { return }
                 
