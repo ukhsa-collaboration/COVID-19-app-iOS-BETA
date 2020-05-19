@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -339,7 +339,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="NyJ-yi-J4V">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1090"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1180.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oRv-PB-BfB" userLabel="Registration status view">
                                                 <rect key="frame" x="16" y="0.0" width="382" height="60"/>
@@ -446,13 +446,13 @@
                                                         </constraints>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Enable notifications" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zeo-Ra-cKf">
-                                                        <rect key="frame" x="42" y="24" width="282.5" height="20.5"/>
+                                                        <rect key="frame" x="42" y="24" width="282" height="20.5"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                         <color key="textColor" name="NHS Text"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bell ringing" translatesAutoresizingMaskIntoConstraints="NO" id="o57-iY-zoI" customClass="AutoscalingImageView" customModule="Sonar" customModuleProvider="target">
-                                                        <rect key="frame" x="340.5" y="24" width="25.5" height="20.5"/>
+                                                        <rect key="frame" x="340" y="24.5" width="26" height="20"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To receive notifications to say if you've been near someone with COVID-19 symptoms, allow notifications in your Settings." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBV-SW-opU">
                                                         <rect key="frame" x="16" y="56.5" width="350" height="64.5"/>
@@ -761,6 +761,53 @@
                                                     <action selector="workplaceGuidanceTapped:" destination="D27-h6-ECy" eventType="touchUpInside" id="xW6-Ya-fYv"/>
                                                 </connections>
                                             </view>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="7lY-C0-zBm">
+                                                <rect key="frame" x="16" y="1090" width="382" height="74.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NHS services for your part of the country" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jc7-io-bAH">
+                                                        <rect key="frame" x="0.0" y="0.0" width="382" height="20.5"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                        <color key="textColor" name="NHS Secondary Text"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3uN-IG-YmW" customClass="UIButton">
+                                                        <rect key="frame" x="0.0" y="24.5" width="382" height="50"/>
+                                                        <subviews>
+                                                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oAn-lI-jIA" customClass="LinkButton" customModule="Sonar" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="132" height="50"/>
+                                                                <accessibility key="accessibilityConfiguration">
+                                                                    <accessibilityTraits key="traits" link="YES"/>
+                                                                </accessibility>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                <state key="normal" title="NHS Coronavirus">
+                                                                    <color key="titleColor" name="NHS Link"/>
+                                                                </state>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isExternal" value="YES"/>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </button>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="External_Link" translatesAutoresizingMaskIntoConstraints="NO" id="cjZ-Qt-idg">
+                                                                <rect key="frame" x="142" y="18" width="19" height="14"/>
+                                                            </imageView>
+                                                        </subviews>
+                                                        <accessibility key="accessibilityConfiguration" label="Apply for a coronavirus test">
+                                                            <accessibilityTraits key="traits" link="YES"/>
+                                                            <bool key="isElement" value="YES"/>
+                                                        </accessibility>
+                                                        <constraints>
+                                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cjZ-Qt-idg" secondAttribute="trailing" id="0nh-bd-b6m"/>
+                                                            <constraint firstItem="oAn-lI-jIA" firstAttribute="top" secondItem="3uN-IG-YmW" secondAttribute="top" id="EuD-Zx-cCC"/>
+                                                            <constraint firstItem="cjZ-Qt-idg" firstAttribute="leading" secondItem="oAn-lI-jIA" secondAttribute="trailing" constant="10" id="KPQ-Qh-KwO"/>
+                                                            <constraint firstItem="oAn-lI-jIA" firstAttribute="leading" secondItem="3uN-IG-YmW" secondAttribute="leading" id="lVi-Yw-Rcv"/>
+                                                            <constraint firstAttribute="bottom" secondItem="oAn-lI-jIA" secondAttribute="bottom" id="tbL-dx-neZ"/>
+                                                            <constraint firstItem="cjZ-Qt-idg" firstAttribute="centerY" secondItem="3uN-IG-YmW" secondAttribute="centerY" id="vJ5-jy-1eD"/>
+                                                        </constraints>
+                                                        <connections>
+                                                            <action selector="nhsCoronavirusTapped:" destination="D27-h6-ECy" eventType="touchUpInside" id="jZO-ti-P8V"/>
+                                                        </connections>
+                                                    </view>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
                                         <color key="backgroundColor" name="NHS Grey 5"/>
                                         <constraints>
@@ -828,13 +875,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QkS-TV-URb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4339" y="516"/>
+            <point key="canvasLocation" x="4337.68115942029" y="515.625"/>
         </scene>
     </scenes>
     <resources>
         <image name="Arrow_Highlight" width="28" height="28"/>
         <image name="Bell ringing" width="26" height="20"/>
         <image name="Disclosure_Indicator" width="24" height="24"/>
+        <image name="External_Link" width="19" height="14"/>
         <image name="News_Covid" width="326" height="218"/>
         <image name="Notice badge" width="14" height="14"/>
         <image name="Spinner" width="24" height="24"/>
