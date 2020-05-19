@@ -179,6 +179,7 @@
 		F60497792454A40B002B8503 /* TestingInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F60497782454A40B002B8503 /* TestingInfo.storyboard */; };
 		F6053A102472F69D0006939E /* URLs.plist in Resources */ = {isa = PBXBuildFile; fileRef = F6053A0F2472F69D0006939E /* URLs.plist */; };
 		F6053A122472F7170006939E /* ContentURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6053A112472F7170006939E /* ContentURLs.swift */; };
+		F6099A7A2474976400758D3E /* Advice.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6099A792474976400758D3E /* Advice.storyboard */; };
 		F613936E243FA82B003447E8 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = F613936D243FA82B003447E8 /* Appearance.swift */; };
 		F616959F2458A2DA006AABE3 /* AcknowledgmentRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F616959E2458A2DA006AABE3 /* AcknowledgmentRequest.swift */; };
 		F61695A12458B3C0006AABE3 /* StatusNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61695A02458B3C0006AABE3 /* StatusNotificationHandler.swift */; };
@@ -484,6 +485,7 @@
 		F60497782454A40B002B8503 /* TestingInfo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TestingInfo.storyboard; sourceTree = "<group>"; };
 		F6053A0F2472F69D0006939E /* URLs.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = URLs.plist; sourceTree = "<group>"; };
 		F6053A112472F7170006939E /* ContentURLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentURLs.swift; sourceTree = "<group>"; };
+		F6099A792474976400758D3E /* Advice.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Advice.storyboard; sourceTree = "<group>"; };
 		F613936D243FA82B003447E8 /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		F616959E2458A2DA006AABE3 /* AcknowledgmentRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgmentRequest.swift; sourceTree = "<group>"; };
 		F61695A02458B3C0006AABE3 /* StatusNotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusNotificationHandler.swift; sourceTree = "<group>"; };
@@ -734,6 +736,7 @@
 		0995ABCD243D034E0057C0D7 /* Status */ = {
 			isa = PBXGroup;
 			children = (
+				F6099A792474976400758D3E /* Advice.storyboard */,
 				F6334E4C24748B3000421B4C /* RegistrationStatus.storyboard */,
 				F758B8C3242CC0EE003AE16D /* Status.storyboard */,
 				F6BBE140246F584F005757BB /* WorkplaceGuidance.storyboard */,
@@ -1485,6 +1488,7 @@
 				F70CB81B2450CFA900ED6E7F /* OnboardingLogoStrapline.xib in Resources */,
 				098ED481242E745F0029B729 /* Debug.storyboard in Resources */,
 				F6053A102472F69D0006939E /* URLs.plist in Resources */,
+				F6099A7A2474976400758D3E /* Advice.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

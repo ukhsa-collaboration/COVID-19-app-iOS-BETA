@@ -9,85 +9,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Advice View Controller-->
-        <scene sceneID="4ev-B6-My9">
-            <objects>
-                <viewController storyboardIdentifier="AdviceViewController" id="6kA-Fm-rsu" customClass="AdviceViewController" customModule="Sonar" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="shz-SK-4cO">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FEp-Jd-juz">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="2RR-xS-nFD">
-                                        <rect key="frame" x="16" y="0.0" width="382" height="387"/>
-                                        <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" image="News_Covid" translatesAutoresizingMaskIntoConstraints="NO" id="m6w-sJ-IdX">
-                                                <rect key="frame" x="0.0" y="0.0" width="382" height="218"/>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Read and follow advice specific to your situation" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Xu-Df-kMX">
-                                                <rect key="frame" x="0.0" y="234" width="382" height="67.5"/>
-                                                <accessibility key="accessibilityConfiguration">
-                                                    <accessibilityTraits key="traits" staticText="YES" header="YES"/>
-                                                </accessibility>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                                <color key="textColor" name="NHS Text"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Advice Detail" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bmj-47-Dky">
-                                                <rect key="frame" x="0.0" y="317.5" width="382" height="20.5"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                <color key="textColor" name="NHS Text"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6cm-V2-gaO" customClass="LinkButton" customModule="Sonar" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="354" width="382" height="33"/>
-                                                <accessibility key="accessibilityConfiguration">
-                                                    <accessibilityTraits key="traits" link="YES"/>
-                                                </accessibility>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                <state key="normal" title="Link">
-                                                    <color key="titleColor" name="NHS Link"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="linkTap:" destination="6kA-Fm-rsu" eventType="touchUpInside" id="4rc-BS-nIw"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="2RR-xS-nFD" firstAttribute="bottom" secondItem="XLb-R8-lOK" secondAttribute="bottom" id="JM3-Xi-3np"/>
-                                    <constraint firstItem="2RR-xS-nFD" firstAttribute="height" secondItem="T2z-6R-C4k" secondAttribute="height" priority="1" id="Kxk-SM-wEW"/>
-                                    <constraint firstItem="XLb-R8-lOK" firstAttribute="leading" secondItem="2RR-xS-nFD" secondAttribute="leading" constant="-16" id="QH2-SB-jXw"/>
-                                    <constraint firstItem="2RR-xS-nFD" firstAttribute="trailing" secondItem="XLb-R8-lOK" secondAttribute="trailing" id="cVy-rP-F1a"/>
-                                    <constraint firstItem="2RR-xS-nFD" firstAttribute="width" secondItem="T2z-6R-C4k" secondAttribute="width" constant="-32" id="kjx-QP-TUv"/>
-                                    <constraint firstItem="XLb-R8-lOK" firstAttribute="top" secondItem="2RR-xS-nFD" secondAttribute="top" id="whL-wE-NMa"/>
-                                </constraints>
-                                <viewLayoutGuide key="contentLayoutGuide" id="XLb-R8-lOK"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="T2z-6R-C4k"/>
-                            </scrollView>
-                        </subviews>
-                        <color key="backgroundColor" name="NHS Grey 5"/>
-                        <constraints>
-                            <constraint firstItem="7rV-J3-HmH" firstAttribute="bottom" secondItem="FEp-Jd-juz" secondAttribute="bottom" id="SX4-fm-WnS"/>
-                            <constraint firstItem="FEp-Jd-juz" firstAttribute="leading" secondItem="7rV-J3-HmH" secondAttribute="leading" id="ahh-Ln-j85"/>
-                            <constraint firstItem="FEp-Jd-juz" firstAttribute="top" secondItem="7rV-J3-HmH" secondAttribute="top" id="fF4-KJ-XN3"/>
-                            <constraint firstItem="7rV-J3-HmH" firstAttribute="trailing" secondItem="FEp-Jd-juz" secondAttribute="trailing" id="v2y-HX-sbv"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="7rV-J3-HmH"/>
-                    </view>
-                    <connections>
-                        <outlet property="detail" destination="Bmj-47-Dky" id="uFn-aP-lBH"/>
-                        <outlet property="header" destination="4Xu-Df-kMX" id="x5x-3L-vs1"/>
-                        <outlet property="link" destination="6cm-V2-gaO" id="UeA-Kf-XPk"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="R1J-su-dXD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="5104" y="516"/>
-        </scene>
         <!--Symptoms Prompt View Controller-->
         <scene sceneID="B7j-z4-vGV">
             <objects>
@@ -813,7 +734,7 @@
                 <viewControllerPlaceholder storyboardName="RegistrationStatus" id="lQF-lU-fYL" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zRg-rj-rxT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5709" y="844"/>
+            <point key="canvasLocation" x="5088" y="233"/>
         </scene>
     </scenes>
     <resources>
@@ -821,7 +742,6 @@
         <image name="Bell ringing" width="26" height="20"/>
         <image name="Disclosure_Indicator" width="24" height="24"/>
         <image name="External_Link" width="19" height="14"/>
-        <image name="News_Covid" width="326" height="218"/>
         <image name="Notice badge" width="14" height="14"/>
         <namedColor name="NHS Button">
             <color red="0.0" green="0.49803921568627452" blue="0.23137254901960785" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
