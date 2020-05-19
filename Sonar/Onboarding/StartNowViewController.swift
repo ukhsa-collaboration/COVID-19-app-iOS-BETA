@@ -20,7 +20,7 @@ class StartNowViewController: UIViewController, Storyboarded {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        howItWorks.inject(title: "Learn more about how it works".localized, external: false, style: .body)
+        howItWorks.inject(title: "Learn more about how it works".localized, isExternal: false, style: .body)
     }
 
     func inject(persistence: Persisting, notificationCenter: NotificationCenter, continueHandler: @escaping () -> Void) {

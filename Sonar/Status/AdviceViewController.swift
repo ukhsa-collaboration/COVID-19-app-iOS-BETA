@@ -25,7 +25,7 @@ class AdviceViewController: UIViewController, Storyboarded {
     }
     
     override func viewDidLoad() {
-        link.inject(title: "Read specific advice on GOV.UK", external: true, style: .headline)
+        link.inject(title: "Read specific advice on GOV.UK", isExternal: true, style: .headline)
         
         let title = UILabel()
         title.text = "Read current advice"
