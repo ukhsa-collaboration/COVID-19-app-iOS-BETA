@@ -44,7 +44,6 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
     private let keepaliveInterval: TimeInterval = 8.0
     
     private var lastKeepaliveDate: Date = Date.distantPast
-    private var keepaliveValue: UInt8 = 0
     private var keepaliveTimer: DispatchSourceTimer?
     private let dateFormatter = ISO8601DateFormatter()
     private let queue: DispatchQueue
@@ -265,8 +264,8 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
         
         logger.info("scheduling keepalive")
         lastKeepaliveDate = Date()
-        keepaliveValue = keepaliveValue &+ 1 // note "&+" overflowing add operator, this is required
-        let value = Data(bytes: &self.keepaliveValue, count: MemoryLayout.size(ofValue: self.keepaliveValue))
+        var keepaliveValue = UInt8.random(in: .min ... .max)
+        let value = Data(bytes: &keepaliveValue, count: MemoryLayout.size(ofValue: keepaliveValue))
         keepaliveTimer = DispatchSource.makeTimerSource(queue: queue)
         keepaliveTimer?.setEventHandler {
             self.broadcaster.sendKeepalive(value: value)
