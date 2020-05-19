@@ -16,7 +16,7 @@ protocol RegistrationService {
 let RegistrationCompletedNotification = Notification.Name("RegistrationCompletedNotification")
 let RegistrationFailedNotification = Notification.Name("RegistrationFailedNotification")
 
-fileprivate let registrationTimeLimitSecs = 20.0
+fileprivate let delayBeforeAllowingRetrySecs = 60.0 * 60.0
 
 
 class ConcreteRegistrationService: RegistrationService {
@@ -29,7 +29,7 @@ class ConcreteRegistrationService: RegistrationService {
     private let timeoutQueue: TestableQueue
     private var remoteNotificationCompletionHandler: RemoteNotificationCompletionHandler?
     private var isRegistering = false
-    
+
     init(session: Session,
          persistence: Persisting,
          reminderScheduler: RegistrationReminderScheduler,
@@ -87,10 +87,10 @@ class ConcreteRegistrationService: RegistrationService {
             }
         }
         
-        self.timeoutQueue.asyncAfter(deadline: .now() + registrationTimeLimitSecs) { [weak self] in
+        self.timeoutQueue.asyncAfter(deadline: .now() + delayBeforeAllowingRetrySecs) { [weak self] in
             guard let self = self, self.persistence.registration == nil, self.isRegistering else { return }
             
-            logger.error("Registration did not complete within \(registrationTimeLimitSecs) seconds")
+            logger.error("Registration did not complete within \(delayBeforeAllowingRetrySecs) seconds")
             let hasPushToken = self.remoteNotificationDispatcher.pushToken != nil
             self.fail(
                 withError: RegistrationTimeoutError(),
@@ -172,16 +172,30 @@ class ConcreteRegistrationService: RegistrationService {
     }
     
     private func fail(withError error: Error, reason: AppEvent.RegistrationFailureReason) {
-        isRegistering = false
         logger.error("Registration failed: \(error)")
-        self.remoteNotificationCompletionHandler?(.failed)
-        notificationCenter.post(name: RegistrationFailedNotification, object: nil)
         monitor.report(.registrationFailed(reason: reason))
+        self.remoteNotificationCompletionHandler?(.failed)
+
+        if reason == .waitingForActivationNotificationTimedOut || reason == .waitingForFCMTokenTimedOut {
+            // Report the failure right away since there's already been a long delay.
+            reportFailureAndAllowRetry()
+        } else {
+            // As a rate-limiting mechanism, don't report the failure to the rest of the application right away.
+            timeoutQueue.asyncAfter(deadline: .now() + delayBeforeAllowingRetrySecs) {
+                self.reportFailureAndAllowRetry()
+            }
+        }
+    }
+    
+    private func reportFailureAndAllowRetry() {
+        self.isRegistering = false
+        self.notificationCenter.post(name: RegistrationFailedNotification, object: nil)
+
     }
 }
 
 fileprivate class RegistrationTimeoutError: Error {
-    let errorDescription = "Registration did not complete within \(registrationTimeLimitSecs) seconds."
+    let errorDescription = "Registration did not complete within \(delayBeforeAllowingRetrySecs) seconds."
 }
 
 // MARK: - Logging

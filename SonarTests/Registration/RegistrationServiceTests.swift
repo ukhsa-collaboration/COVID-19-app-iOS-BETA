@@ -148,7 +148,7 @@ class RegistrationServiceTests: TestCase {
         XCTAssertTrue(remoteNotificatonCallbackCalled)
     }
     
-    func testRegistration_notifiesOnInitialRequestFailure() throws {
+    func testRegistration_notifiesOnInitialRequestFailureAfterHourDelay() throws {
         let session = SessionDouble()
         let persistence = PersistenceDouble()
         let notificationCenter = NotificationCenter()
@@ -157,26 +157,36 @@ class RegistrationServiceTests: TestCase {
             notificationCenter: notificationCenter,
             userNotificationCenter: UserNotificationCenterDouble()
         )
+        let timeoutQueue = QueueDouble()
         remoteNotificationDispatcher.pushToken = "the current push token"
         let registrationService = makeRegistrationService(
             session: session,
             persistence: persistence,
             remoteNotificationDispatcher: remoteNotificationDispatcher,
             notificationCenter: notificationCenter,
-            monitor: monitor
+            monitor: monitor,
+            timeoutQueue: timeoutQueue
         )
         let failedObserver = NotificationObserverDouble(notificationCenter: notificationCenter, notificationName: RegistrationFailedNotification)
 
         _ = registrationService.register()
         
         session.requestSent = nil
+        let expectedDeadline = DispatchTime.now() + secondsDelayAfterFailure
         session.executeCompletion!(Result<(), Error>.failure(ErrorForTest()))
 
-        XCTAssertNotNil(failedObserver.lastNotification)
+        // The failure should be recorded immediately but not reported to the rest of the application
+        // until the delay elapses.
         XCTAssertEqual(monitor.detectedEvents, [.registrationFailed(reason: .registrationCallFailed(statusCode: nil))])
+        XCTAssertNil(failedObserver.lastNotification)
+
+        XCTAssertGreaterThanOrEqual(try XCTUnwrap(timeoutQueue.deadline), expectedDeadline)
+        (try XCTUnwrap(timeoutQueue.scheduledBlock))()
+        
+        XCTAssertNotNil(failedObserver.lastNotification)
     }
     
-    func testRegistration_notifiesOnSecondRequestFailure() throws {
+    func testRegistration_notifiesOnSecondRequestFailureAfterHourDelay() throws {
         let session = SessionDouble()
         let persistence = PersistenceDouble(partialPostcode: "AB90")
         let notificationCenter = NotificationCenter()
@@ -185,13 +195,15 @@ class RegistrationServiceTests: TestCase {
             notificationCenter: notificationCenter,
             userNotificationCenter: UserNotificationCenterDouble()
         )
+        let timeoutQueue = QueueDouble()
         remoteNotificationDispatcher.pushToken = "the current push token"
         let registrationService = makeRegistrationService(
             session: session,
             persistence: persistence,
             remoteNotificationDispatcher: remoteNotificationDispatcher,
             notificationCenter: notificationCenter,
-            monitor: monitor
+            monitor: monitor,
+            timeoutQueue: timeoutQueue
         )
         let failedObserver = NotificationObserverDouble(notificationCenter: notificationCenter, notificationName: RegistrationFailedNotification)
 
@@ -205,11 +217,20 @@ class RegistrationServiceTests: TestCase {
         let activationCode = "a3d2c477-45f5-4609-8676-c24558094600"
         remoteNotificationDispatcher.handleNotification(userInfo: ["activationCode": activationCode]) { _ in }
 
+        let expectedDeadline = DispatchTime.now() + secondsDelayAfterFailure
         // Respond to the second request
         session.executeCompletion!(Result<ConfirmRegistrationResponse, Error>.failure(ErrorForTest()))
 
-        XCTAssertNotNil(failedObserver.lastNotification)
+        // The failure should be recorded immediately but not reported to the rest of the application
+        // until the delay elapses.
         XCTAssertEqual(monitor.detectedEvents, [.registrationFailed(reason: .activationCallFailed(statusCode: nil))])
+        XCTAssertNil(failedObserver.lastNotification)
+
+
+        XCTAssertGreaterThanOrEqual(try XCTUnwrap(timeoutQueue.deadline), expectedDeadline)
+        (try XCTUnwrap(timeoutQueue.scheduledBlock))()
+        
+        XCTAssertNotNil(failedObserver.lastNotification)
     }
     
     func testRegistration_cleansUpAfterInitialRequestFailure() throws {
@@ -241,7 +262,7 @@ class RegistrationServiceTests: TestCase {
         XCTAssertNil(session.requestSent)
     }
     
-    func testRegistration_timesOutAfter20Seconds_withoutPushToken() {
+    func testRegistration_timesOutAfterOneHour_withoutPushToken() throws {
         let session = SessionDouble()
         let persistence = PersistenceDouble()
         let notificationCenter = NotificationCenter()
@@ -250,7 +271,7 @@ class RegistrationServiceTests: TestCase {
             notificationCenter: notificationCenter,
             userNotificationCenter: UserNotificationCenterDouble()
         )
-        let queueDouble = QueueDouble()
+        let timeoutQueue = QueueDouble()
         let failedObserver = NotificationObserverDouble(notificationCenter: notificationCenter, notificationName: RegistrationFailedNotification)
         let registrationService = makeRegistrationService(
             session: session,
@@ -258,18 +279,20 @@ class RegistrationServiceTests: TestCase {
             remoteNotificationDispatcher: remoteNotificationDispatcher,
             notificationCenter: notificationCenter,
             monitor: monitor,
-            timeoutQueue: queueDouble
+            timeoutQueue: timeoutQueue
         )
 
+        let expectedDeadline = DispatchTime.now() + secondsDelayAfterFailure
         _ = registrationService.register()
 
-        queueDouble.scheduledBlock?()
+        XCTAssertGreaterThanOrEqual(try XCTUnwrap(timeoutQueue.deadline), expectedDeadline)
+        (try XCTUnwrap(timeoutQueue.scheduledBlock))()
         
         XCTAssertNotNil(failedObserver.lastNotification)
         XCTAssertEqual(monitor.detectedEvents, [.registrationFailed(reason: .waitingForFCMTokenTimedOut)])
     }
     
-    func testRegistration_timesOutAfter20Seconds_withoutActivationPush() {
+    func testRegistration_timesOutAfterOneHour_withoutActivationPush() throws {
         let session = SessionDouble()
         let persistence = PersistenceDouble()
         let notificationCenter = NotificationCenter()
@@ -279,7 +302,7 @@ class RegistrationServiceTests: TestCase {
             userNotificationCenter: UserNotificationCenterDouble()
         )
         remoteNotificationDispatcher.pushToken = "the current push token"
-        let queueDouble = QueueDouble()
+        let timeoutQueue = QueueDouble()
         let failedObserver = NotificationObserverDouble(notificationCenter: notificationCenter, notificationName: RegistrationFailedNotification)
         let registrationService = makeRegistrationService(
             session: session,
@@ -287,13 +310,15 @@ class RegistrationServiceTests: TestCase {
             remoteNotificationDispatcher: remoteNotificationDispatcher,
             notificationCenter: notificationCenter,
             monitor: monitor,
-            timeoutQueue: queueDouble
+            timeoutQueue: timeoutQueue
         )
 
+        let expectedDeadline = DispatchTime.now() + secondsDelayAfterFailure
         _ = registrationService.register()
 
-        queueDouble.scheduledBlock?()
-        
+        XCTAssertGreaterThanOrEqual(try XCTUnwrap(timeoutQueue.deadline), expectedDeadline)
+        (try XCTUnwrap(timeoutQueue.scheduledBlock))()
+
         XCTAssertNotNil(failedObserver.lastNotification)
         XCTAssertEqual(monitor.detectedEvents, [.registrationFailed(reason: .waitingForActivationNotificationTimedOut)])
     }
@@ -317,14 +342,16 @@ class RegistrationServiceTests: TestCase {
         XCTAssertNil(session.requestSent)
     }
     
-    func testRegistration_allowsRegistrationAfterFirstRequestFailure() throws {
+    func testRegistration_allowsRegistrationAfterDelayWhenFirstRequestFails() throws {
         let session = SessionDouble()
         let remoteNotificationDispatcher = RemoteNotificationDispatchingDouble()
+        let timeoutQueue = QueueDouble()
         remoteNotificationDispatcher.pushToken = "the current push token"
         let registrationService = makeRegistrationService(
             session: session,
             persistence: PersistenceDouble(partialPostcode: "AB90"),
-            remoteNotificationDispatcher: remoteNotificationDispatcher
+            remoteNotificationDispatcher: remoteNotificationDispatcher,
+            timeoutQueue: timeoutQueue
         )
         
         registrationService.register()
@@ -333,12 +360,19 @@ class RegistrationServiceTests: TestCase {
         let firstRequestCompletion = try XCTUnwrap(session.executeCompletion)
         firstRequestCompletion(Result<(), Error>.failure(ErrorForTest()))
         
+        // Nothing should happen if we try to re-register right away
+        session.requestSent = nil
+        registrationService.register()
+        XCTAssertNil(session.requestSent as? RegistrationRequest)
+
+        // But doing it after the delay should work
+        (try XCTUnwrap(timeoutQueue.scheduledBlock))()
         session.requestSent = nil
         registrationService.register()
         XCTAssertNotNil(session.requestSent as? RegistrationRequest)
     }
     
-    func testRegistration_allowsRegistrationAfterSecondRequestFailure() throws {
+    func testRegistration_allowsRegistrationAfterDelayWhenSecondRequestFails() throws {
         let session = SessionDouble()
         let notificationCenter = NotificationCenter()
         let remoteNotificationDispatcher = RemoteNotificationDispatcher(
@@ -346,11 +380,13 @@ class RegistrationServiceTests: TestCase {
             userNotificationCenter: UserNotificationCenterDouble()
         )
         remoteNotificationDispatcher.pushToken = "the current push token"
+        let timeoutQueue = QueueDouble()
         let registrationService = makeRegistrationService(
             session: session,
             persistence: PersistenceDouble(partialPostcode: "AB90"),
             remoteNotificationDispatcher: remoteNotificationDispatcher,
-            notificationCenter: notificationCenter
+            notificationCenter: notificationCenter,
+            timeoutQueue: timeoutQueue
         )
         
         registrationService.register()
@@ -369,6 +405,13 @@ class RegistrationServiceTests: TestCase {
         let secondRequestCompletion = try XCTUnwrap(session.executeCompletion)
         secondRequestCompletion(Result<ConfirmRegistrationResponse, Error>.failure(ErrorForTest()))
 
+        // Nothing should happen if we try to re-register right away
+        session.requestSent = nil
+        registrationService.register()
+        XCTAssertNil(session.requestSent as? RegistrationRequest)
+
+        // But doing it after the delay should work
+        (try XCTUnwrap(timeoutQueue.scheduledBlock))()
         session.requestSent = nil
         registrationService.register()
         XCTAssertNotNil(session.requestSent as? RegistrationRequest)
@@ -581,7 +624,7 @@ class RegistrationServiceTests: TestCase {
     }
     
     
-    func testRegistration_canFailAfterTimeout() {
+    func testRegistration_canFailAfterTimeout() throws {
         let session = SessionDouble()
         let persistence = PersistenceDouble(partialPostcode: "AB90")
         let notificationCenter = NotificationCenter()
@@ -609,7 +652,8 @@ class RegistrationServiceTests: TestCase {
         // Respond to the first request
         session.executeCompletion!(Result<(), Error>.success(()))
                 
-        queueDouble.scheduledBlock?()
+        (try XCTUnwrap(queueDouble.scheduledBlock))()
+        queueDouble.scheduledBlock = nil
         failedObserver.lastNotification = nil
         
         // Simulate the notification containing the activationCode.
@@ -618,6 +662,7 @@ class RegistrationServiceTests: TestCase {
                         
         // Respond to the second request
         session.executeCompletion!(Result<ConfirmRegistrationResponse, Error>.failure(ErrorForTest()))
+        (try XCTUnwrap(queueDouble.scheduledBlock))()
         
         XCTAssertNil(completedObserver.lastNotification)
         XCTAssertNotNil(failedObserver.lastNotification)
@@ -729,3 +774,5 @@ private class RegistrationReminderSchedulerDouble: RegistrationReminderScheduler
         cancelCalled = true
     }
 }
+
+private let secondsDelayAfterFailure: Double = 60 * 60
