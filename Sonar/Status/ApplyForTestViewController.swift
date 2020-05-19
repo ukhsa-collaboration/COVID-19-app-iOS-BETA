@@ -9,6 +9,14 @@
 import UIKit
 
 class ApplyForTestViewController: UIViewController {
+    
+    private var linkingIdManager: LinkingIdManaging!
+    private var uiQueue: TestableQueue!
+
+    func inject(linkingIdManager: LinkingIdManaging, uiQueue: TestableQueue) {
+        self.linkingIdManager = linkingIdManager
+        self.uiQueue = uiQueue
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +28,12 @@ class ApplyForTestViewController: UIViewController {
             title.font = UIFont.preferredFont(forTextStyle: .headline)
             return title
         }()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? ReferenceCodeViewController {
+            vc.inject(linkingIdManager: linkingIdManager, uiQueue: uiQueue)
+        }
     }
 
     @IBAction func applyForTestTapped(_ sender: UIButton) {

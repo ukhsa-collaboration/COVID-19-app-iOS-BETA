@@ -82,6 +82,12 @@ class StatusViewController: UIViewController, Storyboarded {
         notificationCenter.addObserver(self, selector: #selector(showRegisteredStatus), name: RegistrationCompletedNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(showRegistrationFailedStatus), name: RegistrationFailedNotification, object: nil)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? ApplyForTestViewController {
+            vc.inject(linkingIdManager: linkingIdManager, uiQueue: DispatchQueue.main)
+        }
+    }
 
     private func showSpinner() {
         registrationSpinner.isHidden = false
