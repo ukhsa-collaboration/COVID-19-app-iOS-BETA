@@ -14,17 +14,24 @@ class StatusTests: ScreenTestCase {
 
     func testSelfDiagnosisPositiveFlow() {
         StatusOkPage(app)
-            .assert { $0.hasStatusOkHeading }
+            .assert { $0.hasStatusOkHeading } 
             .tapFeelUnwell()
 
             .tapTemperatureOption().tapContinue()
             .tapCoughOption().tapContinue()
+            .tapSmellLossOption().tapContinue()
+            .tapHaveSymptomsOption().tapContinue()
+            .tapHaveSymptomsOption().tapContinue()
+            
+            .assert { $0.hasHighTemperature }
+            .assert { $0.hasNausea }
+            
             .tapStartDateButton().tapContinue()
             .tapAccurateConfirmationToggle().tapSubmit()
 
             .assert { $0.hasStatusSymptomaticHeading }
             .assert { $0.hasBookNowAdvice }
-
+            
             // waits for 7 days then starts asking user for updates
             .eightDaysLater()
 
@@ -79,7 +86,10 @@ class StatusTests: ScreenTestCase {
 
             .tapNoTemperatureOption().tapContinue()
             .tapNoCoughOption().tapContinue()
-
+            .tapNoSmellLossOption().tapContinue()
+            .tapNoSymptomsOption().tapContinue()
+            .tapNoSymptomsOption().tapContinue()
+            
             .assert { $0.hasNoSymptoms }
             .tapDone()
 

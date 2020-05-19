@@ -14,7 +14,7 @@ enum SelfDiagnosisType: String, Codable {
 }
 
 enum Symptom: String, Codable {
-    case temperature, cough
+    case temperature, cough, smellLoss, fever, nausea
 }
 
 // This class continues to exist to allow migrating old data but is otherwise unused

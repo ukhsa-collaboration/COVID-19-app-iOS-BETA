@@ -21,12 +21,12 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="748"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="9Z6-MF-rO6">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="470.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="411.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gMM-dc-Uol">
                                                 <rect key="frame" x="20" y="32" width="374" height="56"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3/3" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ul2-la-I2I">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6/6" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ul2-la-I2I">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="48"/>
                                                         <accessibility key="accessibilityConfiguration" label="Step 3 of 3"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
@@ -42,79 +42,29 @@
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="a7J-v6-xJ8" userLabel="Have Symptoms">
-                                                <rect key="frame" x="20" y="88" width="374" height="362.5"/>
+                                                <rect key="frame" x="20" y="88" width="374" height="303.5"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="QuK-po-wsJ" userLabel="Check Answers">
-                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="195.5"/>
-                                                        <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Check Answers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jvy-F9-A5d">
-                                                                <rect key="frame" x="0.0" y="0.0" width="374" height="26.5"/>
-                                                                <accessibility key="accessibilityConfiguration">
-                                                                    <accessibilityTraits key="traits" staticText="YES" header="YES"/>
-                                                                </accessibility>
-                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                                                <nil key="textColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xLI-Cr-swh" userLabel="Divider">
-                                                                <rect key="frame" x="0.0" y="35.5" width="374" height="1"/>
-                                                                <color key="backgroundColor" name="NHS Grey 3"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="1" id="YeX-La-VO6"/>
-                                                                </constraints>
-                                                            </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7JD-9d-p2P" userLabel="Temperature">
-                                                                <rect key="frame" x="0.0" y="45.5" width="374" height="60.5"/>
-                                                                <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temperature Check" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7JD-I1-TlC">
-                                                                        <rect key="frame" x="10" y="0.0" width="364" height="60.5"/>
-                                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                                        <color key="textColor" name="NHS Text"/>
-                                                                        <nil key="highlightedColor"/>
-                                                                    </label>
-                                                                </subviews>
-                                                                <constraints>
-                                                                    <constraint firstItem="7JD-I1-TlC" firstAttribute="leading" secondItem="7JD-9d-p2P" secondAttribute="leading" constant="10" id="QCU-PM-nRD"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="7JD-I1-TlC" secondAttribute="bottom" id="X7c-W1-6OI"/>
-                                                                    <constraint firstItem="7JD-I1-TlC" firstAttribute="top" secondItem="7JD-9d-p2P" secondAttribute="top" id="khz-KD-4hI"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="7JD-I1-TlC" secondAttribute="trailing" id="u4n-4X-p09"/>
-                                                                </constraints>
-                                                            </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wET-sX-mxG" userLabel="Divider">
-                                                                <rect key="frame" x="0.0" y="115" width="374" height="1"/>
-                                                                <color key="backgroundColor" name="NHS Grey 3"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="1" id="1dP-eg-obE"/>
-                                                                </constraints>
-                                                            </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2ln-hd-haj" userLabel="Cough">
-                                                                <rect key="frame" x="0.0" y="125" width="374" height="60.5"/>
-                                                                <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cough Check" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mxl-Q4-5aR">
-                                                                        <rect key="frame" x="10" y="0.0" width="364" height="60.5"/>
-                                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                                        <color key="textColor" name="NHS Text"/>
-                                                                        <nil key="highlightedColor"/>
-                                                                    </label>
-                                                                </subviews>
-                                                                <constraints>
-                                                                    <constraint firstItem="mxl-Q4-5aR" firstAttribute="leading" secondItem="2ln-hd-haj" secondAttribute="leading" constant="10" id="42x-Ba-2MV"/>
-                                                                    <constraint firstItem="mxl-Q4-5aR" firstAttribute="top" secondItem="2ln-hd-haj" secondAttribute="top" id="7nD-z7-wvL"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="mxl-Q4-5aR" secondAttribute="trailing" id="GNe-DM-jvt"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="mxl-Q4-5aR" secondAttribute="bottom" id="efK-nr-2Ov"/>
-                                                                </constraints>
-                                                            </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kA0-EY-u1m" userLabel="Divider">
-                                                                <rect key="frame" x="0.0" y="194.5" width="374" height="1"/>
-                                                                <color key="backgroundColor" name="NHS Grey 3"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="1" id="vJv-eO-CaF"/>
-                                                                </constraints>
-                                                            </view>
-                                                        </subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Check Answers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jvy-F9-A5d">
+                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="26.5"/>
+                                                        <accessibility key="accessibilityConfiguration">
+                                                            <accessibilityTraits key="traits" staticText="YES" header="YES"/>
+                                                        </accessibility>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FHe-nR-Lca" userLabel="Spacer">
+                                                        <rect key="frame" x="0.0" y="26.5" width="374" height="10"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="10" id="pnr-n5-60M"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="100" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="QuK-po-wsJ" userLabel="Check Answers">
+                                                        <rect key="frame" x="0.0" y="36.5" width="374" height="100"/>
                                                     </stackView>
                                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="frM-yB-tE8" userLabel="Start Date">
-                                                        <rect key="frame" x="0.0" y="195.5" width="374" height="167"/>
+                                                        <rect key="frame" x="0.0" y="136.5" width="374" height="167"/>
                                                         <connections>
                                                             <segue destination="yb6-3i-qfY" kind="embed" id="FMc-f5-BLe"/>
                                                         </connections>
@@ -122,7 +72,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="rUe-5Z-tIj" userLabel="No Symptoms">
-                                                <rect key="frame" x="20" y="450.5" width="374" height="32"/>
+                                                <rect key="frame" x="20" y="391.5" width="374" height="32"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qC7-mn-mwr">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="0.0"/>
@@ -159,7 +109,7 @@
                                                 </subviews>
                                             </stackView>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="Rpb-L4-N7R" userLabel="Spacer">
-                                                <rect key="frame" x="20" y="450.5" width="374" height="0.0"/>
+                                                <rect key="frame" x="20" y="391.5" width="374" height="0.0"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" id="VWa-Af-DLc"/>
                                                 </constraints>
@@ -217,15 +167,15 @@
                     <connections>
                         <outlet property="button" destination="JYn-nS-TUw" id="Uzf-bE-oAb"/>
                         <outlet property="checkAnswersLabel" destination="Jvy-F9-A5d" id="T9S-51-VZE"/>
-                        <outlet property="coughCheckLabel" destination="mxl-Q4-5aR" id="lVR-eV-VSf"/>
+                        <outlet property="checkAnswersStackView" destination="QuK-po-wsJ" id="Vym-BB-4iv"/>
                         <outlet property="haveSymptomsView" destination="a7J-v6-xJ8" id="HUs-o8-K1K"/>
                         <outlet property="heightConstraint" destination="iw0-QM-AIq" id="Twc-xH-plE"/>
                         <outlet property="noSymptomsInfoButton" destination="8i4-HF-QBb" id="tyG-LS-y92"/>
                         <outlet property="noSymptomsInfoLabel" destination="bbU-Do-7R9" id="1Rx-dP-qR9"/>
                         <outlet property="noSymptomsLabel" destination="qC7-mn-mwr" id="U1b-z8-aSp"/>
                         <outlet property="noSymptomsView" destination="rUe-5Z-tIj" id="R59-4B-9bL"/>
+                        <outlet property="pageNumberLabel" destination="Ul2-la-I2I" id="ixY-av-U9d"/>
                         <outlet property="scrollView" destination="xUD-zY-9kW" id="ucw-sm-n5X"/>
-                        <outlet property="temperatureCheckLabel" destination="7JD-I1-TlC" id="dLG-2j-zdv"/>
                         <segue destination="JNI-bm-phl" kind="show" identifier="showSubmitSymptoms" id="P65-cw-F5s"/>
                     </connections>
                 </viewController>

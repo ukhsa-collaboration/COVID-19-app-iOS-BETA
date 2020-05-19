@@ -27,50 +27,68 @@ class SelfDiagnosisCoordinator: Coordinator {
         self.completion = completion
     }
     
-    var hasHighTemperature: Bool!
-    var hasNewCough: Bool!
+    var symptoms = Set<Symptom>()
+
+    static let pageCount = 6
     
-    func start() {
+    func openQuestionVC(localizedTextPrefix: String,
+                          pageNumber: Int,
+                          buttonAction: @escaping (Bool) -> Void) {
         let vc = QuestionSymptomsViewController.instantiate()
         vc.inject(
-            pageNumber: 1,
-            pageCount: 3,
-            questionTitle: "TEMPERATURE_QUESTION".localized,
-            questionDetail: "TEMPERATURE_DETAIL".localized,
-            questionError: "TEMPERATURE_ERROR".localized,
-            questionYes: "TEMPERATURE_YES".localized,
-            questionNo: "TEMPERATURE_NO".localized,
-            buttonText: "Continue"
-        ) { hasHighTemperature in
-            self.hasHighTemperature = hasHighTemperature
+            pageNumber: pageNumber,
+            pageCount: Self.pageCount,
+            questionTitle: "\(localizedTextPrefix)_QUESTION".localized,
+            questionDetail: "\(localizedTextPrefix)_DETAIL".localized,
+            questionError: "\(localizedTextPrefix)_ERROR".localized,
+            questionYes: "\(localizedTextPrefix)_YES".localized,
+            questionNo: "\(localizedTextPrefix)_NO".localized,
+            buttonText: "Continue",
+            buttonAction: buttonAction
+        )
+        navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func start() {
+        openQuestionVC(localizedTextPrefix: "TEMPERATURE", pageNumber: 1) { hasHighTemperature in
+            if hasHighTemperature { self.symptoms.insert(.temperature) }
             self.openCoughView()
         }
-        navigationController.pushViewController(vc, animated: true)
     }
     
     func openCoughView() {
-        let vc = QuestionSymptomsViewController.instantiate()
-        vc.inject(
-            pageNumber: 2,
-            pageCount: 3,
-            questionTitle: "COUGH_QUESTION".localized,
-            questionDetail: "COUGH_NEW_DETAIL".localized + "COUGH_CONTINUOUS_DETAIL".localized,
-            questionError: "COUGH_ERROR".localized,
-            questionYes: "COUGH_YES".localized,
-            questionNo: "COUGH_NO".localized,
-            buttonText: "Continue"
-        ) { hasNewCough in
-            self.hasNewCough = hasNewCough
-            self.openSubmissionView()
+        openQuestionVC(localizedTextPrefix: "COUGH", pageNumber: 2) { hasNewCough in
+            if hasNewCough { self.symptoms.insert(.cough) }
+            self.openSmellView()
         }
-        navigationController.pushViewController(vc, animated: true)
     }
     
+    func openSmellView() {
+        openQuestionVC(localizedTextPrefix: "SMELL", pageNumber: 3) { hasSmellLoss in
+            if hasSmellLoss { self.symptoms.insert(.smellLoss) }
+            self.openFeverView()
+        }
+    }
+    
+    func openFeverView() {
+        openQuestionVC(localizedTextPrefix: "FEVER", pageNumber: 4) { hasFever in
+            if hasFever { self.symptoms.insert(.fever) }
+            self.openNauseaView()
+        }
+    }
+    
+    func openNauseaView() {
+        openQuestionVC(localizedTextPrefix: "NAUSEA", pageNumber: 5) { hasNausea in
+            if hasNausea { self.symptoms.insert(.nausea) }
+            self.openSubmissionView()
+        }
+    }
+
     func openSubmissionView() {
         let vc = SymptomsSummaryViewController.instantiate()
         vc.inject(
-            hasHighTemperature: hasHighTemperature,
-            hasNewCough: hasNewCough,
+            pageNumber: 6,
+            symptoms: symptoms,
             statusStateMachine: statusStateMachine,
             completion: completion
         )
