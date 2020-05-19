@@ -1,0 +1,83 @@
+name: trigger-internal-deploy
+
+on:
+  schedule:
+    - cron: '0 * * * *'
+  repository_dispatch:
+    types: [deploy-internal]
+  # push:
+  #   branches:
+  #     - ci
+
+jobs:
+  should-deploy:
+    runs-on:
+      - self-hosted
+      - macos
+    outputs:
+      should-deploy: ${{ steps.is-deployed.outputs.exit-code == '1' }}
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@01aeccc # v2.1.0
+        with:
+          ref: internal
+
+      - name: Check if deployed
+        id: is-deployed
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          echo "::set-output name=exit-code::$(./bin/is-deployed internal > /dev/null; echo $?)"
+
+  deploy:
+    needs: should-deploy
+    runs-on:
+      - self-hosted
+      - macos
+    if: needs.should-deploy.outputs.should-deploy == 'true'
+    steps:
+      - run: echo ${{ needs.should-deploy.outputs.should-deploy }}
+        continue-on-error: true
+
+      - name: Checkout project
+        uses: actions/checkout@01aeccc # v2.1.0
+        with:
+          ref: internal
+
+      - name: Bump the build version
+        id: bump-build-version
+        env:
+          GIT_AUTHOR_NAME: GitHub Actions
+          GIT_AUTHOR_EMAIL: github.actions@example.com
+        run: |
+          ./bin/bump-build-version
+          git add Sonar/Info.plist
+          build_number=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" "Sonar/Info.plist")
+          git commit --message="Bump build version number to $build_number"
+          echo "::set-output name=commit-sha::$(git rev-parse HEAD)"
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          git push
+
+      - name: Trigger deployment
+        env:
+          DEPLOYMENT_TOKEN: ${{ secrets.deployment_token }}
+          DEPLOYMENT_SHA: ${{ steps.bump-build-version.outputs.commit-sha }}
+          DEPLOYMENT_PAYLOAD: 'This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}**.\n\nThe commit hash was: _${{ steps.build-version.outputs.commit-sha }}_.'
+        run: ./bin/create-deployment internal
+
+  notify:
+    needs: [should-deploy, deploy]
+    runs-on:
+      - self-hosted
+      - macos
+    if: always()
+    steps:
+      - name: Notify Slack on failure
+        if: contains(needs.*.result, 'failure')
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.slack_bot_token }}
+        uses: voxmedia/github-action-slack-notify-build@5125947 # v1.1.1
+        with:
+          channel_id: G011ZPSAD4J
+          status: FAILED
+          color: danger

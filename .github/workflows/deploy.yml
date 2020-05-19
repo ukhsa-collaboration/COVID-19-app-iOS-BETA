@@ -1,0 +1,121 @@
+name: deploy
+
+on:
+  deployment
+
+jobs:
+  upload:
+    runs-on:
+      - self-hosted
+      - macos
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@01aeccc # v2.1.0
+
+      - name: Switch to Xcode 11
+        run: sudo xcode-select -s /Applications/Xcode_11.app
+
+      - name: Install Fastlane
+        run: sudo gem install fastlane
+
+      - name: Setup Fastlane Match
+        env:
+          MATCH: ${{ secrets.match }}
+        run: ./bin/setup-match
+
+      - name: Upload to Test Flight
+        env:
+          API_ENDPOINT: ${{ secrets.api_endpoint }}
+          APPLE_USERNAME: ${{ secrets.apple_username }}
+          ENVIRONMENT_JSON_BETA: ${{ secrets.environment_json_beta }}
+          ENVIRONMENT_JSON_INTERNAL: ${{ secrets.environment_json_internal }}
+          ENVIRONMENT_JSON_PRODUCTION: ${{ secrets.environment_json_production }}
+          GOOGLE_SERVICE_INFO_PLIST_INTERNAL: ${{ secrets.google_service_info_plist_internal }}
+          GOOGLE_SERVICE_INFO_PLIST_PRODUCTION: ${{ secrets.google_service_info_plist_production }}
+          FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.apple_password }}
+          MATCH_PASSWORD: ${{ secrets.match_password }}
+        run: fastlane release sonar_env:${{ github.event.deployment.environment }}
+
+      - name: Tag Production Commit
+        if: github.event.deployment.environment == 'production'
+        run: |
+          version_number=$(/usr/libexec/PlistBuddy -c "Print CFBundleShortVersionString" "Sonar/Info.plist")
+          build_number=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" "Sonar/Info.plist")
+          tag="v${version_number}-${build_number}"
+          git tag ${tag}
+          git push ${tag}
+
+      - name: Upload IPA
+        if: always() # If the fastlane release fails, we can upload it manually
+        uses: actions/upload-artifact@e7eefc4 # v2
+        with:
+          name: Sonar.ipa
+          path: Sonar.ipa
+
+      - name: Create App Report
+        working-directory: Reporting
+        run: swift run Reporter ipa ../Sonar.ipa --output AppReport
+        continue-on-error: true
+
+      - name: Upload App Report
+        uses: actions/upload-artifact@e7eefc4 # v2
+        with:
+          name: AppReport
+          path: Reporting/AppReport
+
+      # Job status is capitalized and deployment status is not, so we have this
+      # hack to lowercase the status
+      - name: Get Job Status
+        id: job-status
+        if: always()
+        run: echo "::set-output name=deployment-status::$(echo ${{ job.status }} | tr '[:upper:]' '[:lower:]')"
+
+      - name: Update Deployment Status
+        if: always()
+        run: >
+          curl
+          --verbose
+          --url "${{ github.event.deployment.statuses_url }}"
+          --header "authorization: Bearer ${{ secrets.deployment_token }}"
+          --header "content-type: application/json"
+          --data '{"state":"${{ steps.job-status.outputs.deployment-status }}"}'
+        continue-on-error: true
+
+      - name: Get Build Number
+        id: get-build-number
+        run: |
+          build_number=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" "Sonar/Info.plist")
+          echo "::set-output name=build-number::$build_number"
+
+      - name: Mark stories delivered in PivotalTracker
+        env:
+          PIVOTAL_TRACKER_API_TOKEN: ${{ secrets.pivotal_tracker_api_token }}
+          PROJECT_ID: ${{ secrets.pivotal_tracker_project_id }}
+        run: |
+          git fetch --tags
+          bin/deliver-pivotal-tracker-stories
+
+          # move the tag ahead
+          git push origin --delete last-commit-to-run-on-ci || true
+          git tag --force last-commit-to-run-on-ci
+          git push origin last-commit-to-run-on-ci
+        continue-on-error: true
+
+      - name: Notify Slack on Upload
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.slack_bot_token }}
+        uses: voxmedia/github-action-slack-notify-build@5125947 # v1.1.1
+        with:
+          channel_id: G011ZPSAD4J
+          status: UPLOADED [(${{ steps.get-build-number.outputs.build-number }})]
+
+      - name: Notify Slack on Failure
+        if: failure()
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.slack_bot_token }}
+        uses: voxmedia/github-action-slack-notify-build@5125947 # v1.1.1
+        with:
+          channel_id: G011ZPSAD4J
+          status: FAILED
+          color: danger
+

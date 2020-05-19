@@ -1,6 +1,9 @@
 name: ci
 
-on: push
+on:
+  push:
+    branches-ignore:
+      - ci
 
 jobs:
   build:
@@ -13,11 +16,8 @@ jobs:
           - { sdk: "iphoneos13.4" }
           - { sdk: "iphonesimulator13.4" }
     steps:
-      - name: Set initial git configuration
-        run: git config --global user.email "sonarpivotaldevices@gmail.com" && git config --global user.name "Sonar CI"
-
       - name: Checkout Project
-        uses: actions/checkout@v2
+        uses: actions/checkout@01aeccc # v2.1.0
 
       - name: Switch to Xcode 11
         run: sudo xcode-select -s /Applications/Xcode_11.app
@@ -44,24 +44,19 @@ jobs:
           SDK: ${{ matrix.run-config['sdk'] }}
         run: xcodebuild -scheme Sonar -configuration release -sdk ${SDK} CODE_SIGNING_ALLOWED=NO
 
-      - name: Notify Slack on Failure
-        if: github.ref == 'refs/heads/master' && failure()
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.slack_bot_token }}
-        uses: voxmedia/github-action-slack-notify-build@v1
-        with:
-          channel_id: G011ZPSAD4J
-          status: FAILED
-          color: danger
-
   test:
     needs: build
     runs-on:
       - self-hosted
       - macos
+    strategy:
+      matrix:
+        run-config:
+          - { os: "13.4", name: "iPhone 11" }
+          - { os: "12.4", name: "iPhone SE" }
     steps:
       - name: Checkout Project
-        uses: actions/checkout@v2
+        uses: actions/checkout@01aeccc # v2.1.0
 
       - name: Switch to Xcode 11
         run: sudo xcode-select -s /Applications/Xcode_11.app
@@ -90,28 +85,18 @@ jobs:
           xcodebuild
           -scheme Sonar
           test
-          -destination "platform=iOS Simulator,OS=13.4,name=iPhone 11"
+          -destination "platform=iOS Simulator,OS=${{ matrix.run-config['os'] }},name=${{ matrix.run-config['name'] }}"
           -showBuildTimingSummary
           -allowProvisioningUpdates
           -resultBundlePath TestResults.xcresult
 
       - name: Upload Test Results
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@e7eefc4 # v2
         with:
           name: TestResults.xcresult
           path: TestResults.xcresult
 
-      - name: Notify Slack on Failure
-        if: github.ref == 'refs/heads/master' && failure()
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.slack_bot_token }}
-        uses: voxmedia/github-action-slack-notify-build@v1
-        with:
-          channel_id: G011ZPSAD4J
-          status: FAILED
-          color: danger
-
-  update-upload-tag:
+  merge-to-internal:
     needs: test
     runs-on:
       - self-hosted
@@ -119,116 +104,43 @@ jobs:
     if: github.ref == 'refs/heads/master'
     steps:
       - name: Checkout Project
-        uses: actions/checkout@v2
+        uses: actions/checkout@01aeccc # v2.1.0
+        with:
+          fetch-depth: 0
+          persist-credentials: false
 
-      - name: Set upload tag
+      # Since this workflow needs to trigger the ci workflow,
+      # we can't use the built-in GITHUB_TOKEN, so we need to
+      # set a remote url that uses a personal access token.
+      - name: Set origin
+        env:
+          GITHUB_TOKEN: ${{ secrets.deployment_token }}
+        run: git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+
+      - name: Merge and push to internal branch
+        env:
+          GIT_AUTHOR_NAME: GitHub Actions
+          GIT_AUTHOR_EMAIL: github.actions@example.com
         run: |
-          git push origin --delete upload-to-internal || true
-          git tag --force upload-to-internal
-          git push origin upload-to-internal
+          git fetch origin internal
+          git checkout internal
+          git merge master
+          git push origin internal
 
-  upload:
-    needs: test
+  notify:
+    needs: [build, test, merge-to-internal]
     runs-on:
       - self-hosted
       - macos
-    if: "contains(fromJSON('[\"refs/heads/internal\", \"refs/heads/production\"]'), github.ref)"
+    if: always()
     steps:
-      - name: Checkout Project
-        uses: actions/checkout@v2
-
-      - name: Bump the build version
-        run: |
-          ./bin/bump-build-version
-          ./bin/commit-version-bump
-          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-          git push
-
-      - name: Switch to Xcode 11
-        run: sudo xcode-select -s /Applications/Xcode_11.app
-
-      - name: Install Fastlane
-        run: sudo gem install fastlane
-
-      - name: Setup Fastlane Match
-        env:
-          MATCH: ${{ secrets.match }}
-        run: ./bin/setup-match
-
-      - name: Upload to Test Flight
-        env:
-          API_ENDPOINT: ${{ secrets.api_endpoint }}
-          APPLE_USERNAME: ${{ secrets.apple_username }}
-          ENVIRONMENT_JSON_BETA: ${{ secrets.environment_json_beta }}
-          ENVIRONMENT_JSON_INTERNAL: ${{ secrets.environment_json_internal }}
-          ENVIRONMENT_JSON_PRODUCTION: ${{ secrets.environment_json_production }}
-          GOOGLE_SERVICE_INFO_PLIST_INTERNAL: ${{ secrets.google_service_info_plist_internal }}
-          GOOGLE_SERVICE_INFO_PLIST_PRODUCTION: ${{ secrets.google_service_info_plist_production }}
-          FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.apple_password }}
-          MATCH_PASSWORD: ${{ secrets.match_password }}
-        run: fastlane release sonar_env:${GITHUB_REF#refs/heads/}
-
-      - name: Upload IPA
-        if: always()
-        uses: actions/upload-artifact@v1
-        with:
-          name: Sonar.ipa
-          path: Sonar.ipa
-
-      - name: Create App Report
-        run: |
-          cd Reporting
-          swift run Reporter ipa ../Sonar.ipa --output AppReport || true
-          cd ..
-
-      - name: Upload App Report
-        uses: actions/upload-artifact@v1
-        with:
-          name: AppReport
-          path: Reporting/AppReport
-
-      - name: Update Deployment Status on Success
-        if: success()
-        run: >
-          curl
-          --verbose
-          --url "${{ github.event.deployment.statuses_url }}"
-          --header "authorization: Bearer ${{ secrets.deployment_token }}"
-          --header "content-type: application/json"
-          --data '{"state":"success"}'
-        continue-on-error: true
-
-      - name: Update Deployment Status on Failure
-        if: failure()
-        run: >
-          curl
-          --verbose
-          --url "${{ github.event.deployment.statuses_url }}"
-          --header "authorization: Bearer ${{ secrets.deployment_token }}"
-          --header "content-type: application/json"
-          --data '{"state":"failure"}'
-        continue-on-error: true
-
-      - name: Get Build Number
-        id: get-build-number
-        run: |
-          build_number=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" "Sonar/Info.plist")
-          echo "::set-output name=build-number::$build_number"
-
-      - name: Notify Slack on Upload
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.slack_bot_token }}
-        uses: voxmedia/github-action-slack-notify-build@v1
-        with:
-          channel_id: G011ZPSAD4J
-          status: UPLOADED [(${{ steps.get-build-number.outputs.build-number }})]
-
       - name: Notify Slack on Failure
-        if: failure()
+        if: github.ref == 'refs/heads/master' && contains(needs.*.result, 'failure')
         env:
           SLACK_BOT_TOKEN: ${{ secrets.slack_bot_token }}
-        uses: voxmedia/github-action-slack-notify-build@v1
+        uses: voxmedia/github-action-slack-notify-build@5125947 # v1.1.1
         with:
           channel_id: G011ZPSAD4J
           status: FAILED
           color: danger
+
