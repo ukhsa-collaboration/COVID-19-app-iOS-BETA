@@ -3,7 +3,7 @@
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i7g-54-jA7">
-                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Isf-ek-wrS">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="1086.5"/>
@@ -164,7 +164,7 @@ You can always find the latest code here, it should be unique for every test you
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3rx-BK-2al" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1065.217391304348" y="97.767857142857139"/>
+            <point key="canvasLocation" x="1698" y="98"/>
         </scene>
         <!--ReferenceCode-->
         <scene sceneID="dkg-3R-ouZ">
@@ -172,7 +172,7 @@ You can always find the latest code here, it should be unique for every test you
                 <viewControllerPlaceholder storyboardName="ReferenceCode" id="BWE-n5-Shn" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P0s-Ze-hWc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1065" y="524"/>
+            <point key="canvasLocation" x="1674" y="531"/>
         </scene>
         <!--TestingInfoNavigationController-->
         <scene sceneID="TrZ-k5-Qlx">
@@ -188,12 +188,28 @@ You can always find the latest code here, it should be unique for every test you
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>
-                        <segue destination="2DV-fd-FjU" kind="relationship" relationship="rootViewController" id="7L7-gU-zBH"/>
+                        <segue destination="h5j-bl-SGk" kind="relationship" relationship="rootViewController" id="NYG-0p-hzz"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yyc-vw-wMk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="155.07246376811597" y="97.767857142857139"/>
+        </scene>
+        <!--Testing info container-->
+        <scene sceneID="K5a-ex-4Q3">
+            <objects>
+                <viewController storyboardIdentifier="TestingInfoContainerViewController" id="h5j-bl-SGk" userLabel="Testing info container" customClass="TestingInfoContainerViewController" customModule="Sonar" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="tiL-CQ-V4M">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="1j6-1z-CzU"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Testing information" id="wNg-Vf-FCC"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MKy-r9-nFZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="956" y="98"/>
         </scene>
     </scenes>
     <resources>

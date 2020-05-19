@@ -242,10 +242,7 @@ class RootViewController: UIViewController {
         present(tabBarVC, animated: true)
     }
     #endif
-}
 
- 
-extension RootViewController {
     func show(viewController newChild: UIViewController) {
         children.first?.willMove(toParent: nil)
         children.first?.viewIfLoaded?.removeFromSuperview()

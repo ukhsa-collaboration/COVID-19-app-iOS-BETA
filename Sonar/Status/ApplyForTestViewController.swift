@@ -14,7 +14,7 @@ class ApplyForTestViewController: UIViewController, Storyboarded {
     private var linkingIdManager: LinkingIdManaging!
     private var uiQueue: TestableQueue!
     private var urlOpener: TestableUrlOpener!
-    private var refCodeVC: ReferenceCodeViewController!
+    private var refCodeVC: OldReferenceCodeViewController!
 
     func inject(linkingIdManager: LinkingIdManaging, uiQueue: TestableQueue, urlOpener: TestableUrlOpener) {
         self.linkingIdManager = linkingIdManager
@@ -35,7 +35,7 @@ class ApplyForTestViewController: UIViewController, Storyboarded {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? ReferenceCodeViewController {
+        if let vc = segue.destination as? OldReferenceCodeViewController {
             vc.inject(linkingIdManager: linkingIdManager, uiQueue: uiQueue)
             self.refCodeVC = vc
         }

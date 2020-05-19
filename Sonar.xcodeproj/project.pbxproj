@@ -24,8 +24,11 @@
 		097F05412473145300E633C8 /* TestableUrlOpener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097F05402473145300E633C8 /* TestableUrlOpener.swift */; };
 		097F054324732A3E00E633C8 /* ApplyForTestViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097F054224732A3E00E633C8 /* ApplyForTestViewControllerTests.swift */; };
 		097F054524732A9C00E633C8 /* UrlOpenerDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097F054424732A9C00E633C8 /* UrlOpenerDouble.swift */; };
-		0982F484246DE4B400E57EE5 /* ReferenceCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0982F483246DE4B400E57EE5 /* ReferenceCodeViewController.swift */; };
-		0982F486246DF05C00E57EE5 /* ReferenceCodeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0982F485246DF05C00E57EE5 /* ReferenceCodeViewControllerTests.swift */; };
+		097F054724733FC200E633C8 /* ReferenceCodeLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097F054624733FC200E633C8 /* ReferenceCodeLoadingViewController.swift */; };
+		097F05492473445A00E633C8 /* TestingInfoContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097F05482473445A00E633C8 /* TestingInfoContainerViewController.swift */; };
+		097F054B2473457000E633C8 /* TestingInfoContainerViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097F054A2473457000E633C8 /* TestingInfoContainerViewControllerTests.swift */; };
+		0982F484246DE4B400E57EE5 /* OldReferenceCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0982F483246DE4B400E57EE5 /* OldReferenceCodeViewController.swift */; };
+		0982F486246DF05C00E57EE5 /* OldReferenceCodeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0982F485246DF05C00E57EE5 /* OldReferenceCodeViewControllerTests.swift */; };
 		0982F488246DF80400E57EE5 /* LinkingIdManagerDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0982F487246DF80400E57EE5 /* LinkingIdManagerDouble.swift */; };
 		0983ACCD243E566800DBB336 /* ErrorForTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983ACCC243E566800DBB336 /* ErrorForTest.swift */; };
 		0983ACCF243E6D3800DBB336 /* NotificationObserverDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983ACCE243E6D3800DBB336 /* NotificationObserverDouble.swift */; };
@@ -53,6 +56,9 @@
 		09C9DB382460946B0012F80A /* UpdatesBasedOnAccessibilityDisplayChanges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C9DB372460946B0012F80A /* UpdatesBasedOnAccessibilityDisplayChanges.swift */; };
 		09CAA3662440F3B100CE93A6 /* PostcodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CAA3652440F3B100CE93A6 /* PostcodeViewController.swift */; };
 		09CAA36A2440FC4500CE93A6 /* PostcodeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CAA3692440FC4500CE93A6 /* PostcodeViewControllerTests.swift */; };
+		09CDA11824734FB100C8684D /* ReferenceCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CDA11724734FB100C8684D /* ReferenceCodeViewController.swift */; };
+		09CDA11A2473525000C8684D /* ReferenceCodeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CDA1192473525000C8684D /* ReferenceCodeViewControllerTests.swift */; };
+		09CDA11C247352F800C8684D /* OldReferenceCode.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09CDA11B247352F800C8684D /* OldReferenceCode.storyboard */; };
 		09D027CC24521542006EE07E /* BluetoothStateObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D027CB24521542006EE07E /* BluetoothStateObserver.swift */; };
 		09D027CE2452157D006EE07E /* BluetoothStateObserverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D027CD2452157D006EE07E /* BluetoothStateObserverTests.swift */; };
 		09D91A7724521C5C004825A5 /* BluetoothNurseryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D91A7624521C5C004825A5 /* BluetoothNurseryTests.swift */; };
@@ -303,8 +309,11 @@
 		097F05402473145300E633C8 /* TestableUrlOpener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestableUrlOpener.swift; sourceTree = "<group>"; };
 		097F054224732A3E00E633C8 /* ApplyForTestViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyForTestViewControllerTests.swift; sourceTree = "<group>"; };
 		097F054424732A9C00E633C8 /* UrlOpenerDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlOpenerDouble.swift; sourceTree = "<group>"; };
-		0982F483246DE4B400E57EE5 /* ReferenceCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceCodeViewController.swift; sourceTree = "<group>"; };
-		0982F485246DF05C00E57EE5 /* ReferenceCodeViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceCodeViewControllerTests.swift; sourceTree = "<group>"; };
+		097F054624733FC200E633C8 /* ReferenceCodeLoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceCodeLoadingViewController.swift; sourceTree = "<group>"; };
+		097F05482473445A00E633C8 /* TestingInfoContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingInfoContainerViewController.swift; sourceTree = "<group>"; };
+		097F054A2473457000E633C8 /* TestingInfoContainerViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingInfoContainerViewControllerTests.swift; sourceTree = "<group>"; };
+		0982F483246DE4B400E57EE5 /* OldReferenceCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldReferenceCodeViewController.swift; sourceTree = "<group>"; };
+		0982F485246DF05C00E57EE5 /* OldReferenceCodeViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldReferenceCodeViewControllerTests.swift; sourceTree = "<group>"; };
 		0982F487246DF80400E57EE5 /* LinkingIdManagerDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkingIdManagerDouble.swift; sourceTree = "<group>"; };
 		0983ACCC243E566800DBB336 /* ErrorForTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorForTest.swift; sourceTree = "<group>"; };
 		0983ACCE243E6D3800DBB336 /* NotificationObserverDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationObserverDouble.swift; sourceTree = "<group>"; };
@@ -332,6 +341,9 @@
 		09C9DB372460946B0012F80A /* UpdatesBasedOnAccessibilityDisplayChanges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatesBasedOnAccessibilityDisplayChanges.swift; sourceTree = "<group>"; };
 		09CAA3652440F3B100CE93A6 /* PostcodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostcodeViewController.swift; sourceTree = "<group>"; };
 		09CAA3692440FC4500CE93A6 /* PostcodeViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostcodeViewControllerTests.swift; sourceTree = "<group>"; };
+		09CDA11724734FB100C8684D /* ReferenceCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceCodeViewController.swift; sourceTree = "<group>"; };
+		09CDA1192473525000C8684D /* ReferenceCodeViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReferenceCodeViewControllerTests.swift; sourceTree = "<group>"; };
+		09CDA11B247352F800C8684D /* OldReferenceCode.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = OldReferenceCode.storyboard; sourceTree = "<group>"; };
 		09D027CB24521542006EE07E /* BluetoothStateObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothStateObserver.swift; sourceTree = "<group>"; };
 		09D027CD2452157D006EE07E /* BluetoothStateObserverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothStateObserverTests.swift; sourceTree = "<group>"; };
 		09D91A7624521C5C004825A5 /* BluetoothNurseryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothNurseryTests.swift; sourceTree = "<group>"; };
@@ -1101,12 +1113,16 @@
 		F604977024549B49002B8503 /* Testing */ = {
 			isa = PBXGroup;
 			children = (
+				09CDA11B247352F800C8684D /* OldReferenceCode.storyboard */,
 				F60497782454A40B002B8503 /* TestingInfo.storyboard */,
+				097F05482473445A00E633C8 /* TestingInfoContainerViewController.swift */,
 				F604977124549B7B002B8503 /* LinkingIdManager.swift */,
 				F604976E24549729002B8503 /* LinkingIdRequest.swift */,
 				F60497762454A294002B8503 /* TestingInfoViewController.swift */,
-				0982F483246DE4B400E57EE5 /* ReferenceCodeViewController.swift */,
+				0982F483246DE4B400E57EE5 /* OldReferenceCodeViewController.swift */,
 				AE29892B24729AD8004C4097 /* ReferenceCode.storyboard */,
+				097F054624733FC200E633C8 /* ReferenceCodeLoadingViewController.swift */,
+				09CDA11724734FB100C8684D /* ReferenceCodeViewController.swift */,
 			);
 			path = Testing;
 			sourceTree = "<group>";
@@ -1114,8 +1130,10 @@
 		F604977324549C84002B8503 /* Testing */ = {
 			isa = PBXGroup;
 			children = (
+				09CDA1192473525000C8684D /* ReferenceCodeViewControllerTests.swift */,
 				F604977424549C95002B8503 /* LinkingIdManagerTests.swift */,
-				0982F485246DF05C00E57EE5 /* ReferenceCodeViewControllerTests.swift */,
+				0982F485246DF05C00E57EE5 /* OldReferenceCodeViewControllerTests.swift */,
+				097F054A2473457000E633C8 /* TestingInfoContainerViewControllerTests.swift */,
 			);
 			path = Testing;
 			sourceTree = "<group>";
@@ -1445,6 +1463,7 @@
 				6FC63C3B241641BA007C8BF3 /* LaunchScreen.storyboard in Resources */,
 				AE29892C24729AD8004C4097 /* ReferenceCode.storyboard in Resources */,
 				A1E7A0592420028B0078174D /* NHS Colors.xcassets in Resources */,
+				09CDA11C247352F800C8684D /* OldReferenceCode.storyboard in Resources */,
 				8947F833245AD97A00C4F1BB /* Settings.bundle in Resources */,
 				F758B8BE242CB856003AE16D /* Localizable.strings in Resources */,
 				6FC63C38241641BA007C8BF3 /* Assets.xcassets in Resources */,
@@ -1522,9 +1541,11 @@
 				098ED48C242E8B290029B729 /* PersistenceDouble.swift in Sources */,
 				F61695A32458B556006AABE3 /* StatusNotificationHandlerTests.swift in Sources */,
 				092BB5AB244622200036B30E /* RootViewControllerTests.swift in Sources */,
+				09CDA11A2473525000C8684D /* ReferenceCodeViewControllerTests.swift in Sources */,
 				219C7B78245AD4B700952B4D /* DateExtensionTests.swift in Sources */,
 				21E50511244470590065C69B /* ContactEventTests.swift in Sources */,
 				097C94CB245B81E8008A9695 /* EnGbLocaleProviderDouble.swift in Sources */,
+				097F054B2473457000E633C8 /* TestingInfoContainerViewControllerTests.swift in Sources */,
 				89896E622435F37300F949EA /* ProjectTests.swift in Sources */,
 				F604977524549C95002B8503 /* LinkingIdManagerTests.swift in Sources */,
 				F6548FA32460C1C7005F06FF /* CheckinCoordinatorTests.swift in Sources */,
@@ -1560,7 +1581,7 @@
 				090B1871243552C300870B5D /* UserNotificationCenterDouble.swift in Sources */,
 				21C417CA242CB0A200DEF3E2 /* ConfirmRegistrationRequestTests.swift in Sources */,
 				F632792A2435323200CF7A42 /* PermissionsViewControllerTests.swift in Sources */,
-				0982F486246DF05C00E57EE5 /* ReferenceCodeViewControllerTests.swift in Sources */,
+				0982F486246DF05C00E57EE5 /* OldReferenceCodeViewControllerTests.swift in Sources */,
 				09E6E7E62452779B0069DFA8 /* SetupCheckerTests.swift in Sources */,
 				F7D62F292440D4CB004C32A2 /* SonarBroadcastPayloadGeneratorTests.swift in Sources */,
 				F72EBDA5243D094A009F9328 /* SecureBroadcastRotationKeyStorageTests.swift in Sources */,
@@ -1611,6 +1632,7 @@
 				F6548FA52460DB95005F06FF /* SpinnerView.swift in Sources */,
 				F72EBDA2243D0892009F9328 /* SecureBroadcastRotationKeyStorage.swift in Sources */,
 				F60497772454A294002B8503 /* TestingInfoViewController.swift in Sources */,
+				09CDA11824734FB100C8684D /* ReferenceCodeViewController.swift in Sources */,
 				21AF36AB241A8E50001A4910 /* BTLEListener.swift in Sources */,
 				21C09A8D24377F5100368203 /* CoreBluetoothExtensions.swift in Sources */,
 				F72EBDA7243D2FD1009F9328 /* ConcreteBroadcastIdEncrypter.swift in Sources */,
@@ -1686,12 +1708,13 @@
 				89074B83243788AE00D67777 /* UITestResponder.swift in Sources */,
 				21B71F782451788800D0DED7 /* OptionalCoalescingString.swift in Sources */,
 				F63279252435203600CF7A42 /* DispatchQueue+Testable.swift in Sources */,
+				097F05492473445A00E633C8 /* TestingInfoContainerViewController.swift in Sources */,
 				893C0B7B243DE346000A7DB6 /* OnboardingEnvironment.swift in Sources */,
 				898FE860243B5AF700210775 /* UITestScreenMaker.swift in Sources */,
 				214209BA242216B700C7BFF3 /* Persistence.swift in Sources */,
 				213C806C241A56430020EFA5 /* PermissionsViewController.swift in Sources */,
 				89F06B2F2434A62C0074C612 /* LoggingManager.swift in Sources */,
-				0982F484246DE4B400E57EE5 /* ReferenceCodeViewController.swift in Sources */,
+				0982F484246DE4B400E57EE5 /* OldReferenceCodeViewController.swift in Sources */,
 				09CAA3662440F3B100CE93A6 /* PostcodeViewController.swift in Sources */,
 				F6BBE143246F5870005757BB /* WorkplaceGuidanceViewController.swift in Sources */,
 				F61695A12458B3C0006AABE3 /* StatusNotificationHandler.swift in Sources */,
@@ -1717,6 +1740,7 @@
 				F6DA0A382469DCBA001F0B48 /* StatusStateMigration.swift in Sources */,
 				F6F05A262433C09200FF4B72 /* OnboardingCoordinator.swift in Sources */,
 				F604977224549B7B002B8503 /* LinkingIdManager.swift in Sources */,
+				097F054724733FC200E633C8 /* ReferenceCodeLoadingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
