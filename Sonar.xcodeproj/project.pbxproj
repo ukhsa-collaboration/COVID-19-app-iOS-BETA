@@ -634,24 +634,6 @@
 			path = workflows;
 			sourceTree = "<group>";
 		};
-		0938D90424744612006FAADF /* ApplyForTest */ = {
-			isa = PBXGroup;
-			children = (
-				F6BBE13B246F46B4005757BB /* ApplyForTest.storyboard */,
-				F6BBE13D246F46EE005757BB /* ApplyForTestViewController.swift */,
-				0938D9052474473E006FAADF /* ApplyForTestContainerViewController.swift */,
-			);
-			path = ApplyForTest;
-			sourceTree = "<group>";
-		};
-		0938D907247447A4006FAADF /* ApplyForTest */ = {
-			isa = PBXGroup;
-			children = (
-				0938D9082474484B006FAADF /* ApplyForTestContainerViewControllerTests.swift */,
-			);
-			path = ApplyForTest;
-			sourceTree = "<group>";
-		};
 		0964B37E2463293D0022EF97 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -672,7 +654,6 @@
 		0983ACD1243EB20A00DBB336 /* Status */ = {
 			isa = PBXGroup;
 			children = (
-				0938D907247447A4006FAADF /* ApplyForTest */,
 				F61695A22458B556006AABE3 /* StatusNotificationHandlerTests.swift */,
 				F6DA0A392469DCF7001F0B48 /* StatusStateMachineTests.swift */,
 				F6DA0A352469D95F001F0B48 /* StatusStateMigrationTests.swift */,
@@ -742,7 +723,6 @@
 		0995ABCD243D034E0057C0D7 /* Status */ = {
 			isa = PBXGroup;
 			children = (
-				0938D90424744612006FAADF /* ApplyForTest */,
 				F758B8C3242CC0EE003AE16D /* Status.storyboard */,
 				F6BBE140246F584F005757BB /* WorkplaceGuidance.storyboard */,
 				13473A1A246AFF0C00800CEA /* AdviceViewController.swift */,
@@ -1126,6 +1106,9 @@
 		F604977024549B49002B8503 /* Testing */ = {
 			isa = PBXGroup;
 			children = (
+				F6BBE13B246F46B4005757BB /* ApplyForTest.storyboard */,
+				F6BBE13D246F46EE005757BB /* ApplyForTestViewController.swift */,
+				0938D9052474473E006FAADF /* ApplyForTestContainerViewController.swift */,
 				F60497782454A40B002B8503 /* TestingInfo.storyboard */,
 				097F05482473445A00E633C8 /* TestingInfoContainerViewController.swift */,
 				F604977124549B7B002B8503 /* LinkingIdManager.swift */,
@@ -1141,6 +1124,7 @@
 		F604977324549C84002B8503 /* Testing */ = {
 			isa = PBXGroup;
 			children = (
+				0938D9082474484B006FAADF /* ApplyForTestContainerViewControllerTests.swift */,
 				09CDA1192473525000C8684D /* ReferenceCodeViewControllerTests.swift */,
 				F604977424549C95002B8503 /* LinkingIdManagerTests.swift */,
 				097F054A2473457000E633C8 /* TestingInfoContainerViewControllerTests.swift */,
