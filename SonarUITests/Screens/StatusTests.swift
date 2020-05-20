@@ -19,7 +19,7 @@ class StatusTests: ScreenTestCase {
 
             .tapTemperatureOption().tapContinue()
             .tapCoughOption().tapContinue()
-            .tapSmellLossOption().tapContinue()
+            .tapAnosmiaOption().tapContinue()
             .tapHaveSymptomsOption().tapContinue()
             .tapHaveSymptomsOption().tapContinue()
             
@@ -86,7 +86,7 @@ class StatusTests: ScreenTestCase {
 
             .tapNoTemperatureOption().tapContinue()
             .tapNoCoughOption().tapContinue()
-            .tapNoSmellLossOption().tapContinue()
+            .tapNoAnosmiaOption().tapContinue()
             .tapNoSymptomsOption().tapContinue()
             .tapNoSymptomsOption().tapContinue()
             
