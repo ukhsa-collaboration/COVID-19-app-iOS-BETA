@@ -19,10 +19,10 @@ class UserNotificationCenterDouble: UserNotificationCenter {
         self.requestAuthCompletionHandler = completionHandler
     }
 
-    var request: UNNotificationRequest?
+    var requests: [UNNotificationRequest] = []
     var addCompletionHandler: ((Error?) -> Void)?
     func add(_ request: UNNotificationRequest, withCompletionHandler completionHandler: ((Error?) -> Void)?) {
-        self.request = request
+        self.requests.append(request)
         self.addCompletionHandler = completionHandler
     }
 

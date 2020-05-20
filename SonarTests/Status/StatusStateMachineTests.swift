@@ -41,7 +41,7 @@ class StatusStateMachineTests: XCTestCase {
     func testPostExposureNotificationOnExposed() throws {
         machine.exposed()
 
-        let request = try XCTUnwrap(userNotificationCenter.request)
+        let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.content.title, "POTENTIAL_STATUS_TITLE".localized)
     }
 
@@ -74,7 +74,7 @@ class StatusStateMachineTests: XCTestCase {
 
         XCTAssertEqual(contactEventsUploader.uploadStartDate, startDate)
 
-        let request = try XCTUnwrap(userNotificationCenter.request)
+        let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.identifier, "Diagnosis")
     }
 
@@ -90,7 +90,7 @@ class StatusStateMachineTests: XCTestCase {
 
         XCTAssertEqual(contactEventsUploader.uploadStartDate, startDate)
 
-        let request = try XCTUnwrap(userNotificationCenter.request)
+        let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.identifier, "Diagnosis")
     }
 
@@ -105,7 +105,7 @@ class StatusStateMachineTests: XCTestCase {
 
         XCTAssertEqual(contactEventsUploader.uploadStartDate, startDate)
 
-        XCTAssertNil(userNotificationCenter.request)
+        XCTAssertNil(userNotificationCenter.requests.first)
     }
 
     func testExposedToSymptomatic() throws {
@@ -117,7 +117,7 @@ class StatusStateMachineTests: XCTestCase {
         XCTAssertEqual(machine.state, .symptomatic(StatusState.Symptomatic(symptoms: [.cough], startDate: startDate)))
         XCTAssertEqual(contactEventsUploader.uploadStartDate, startDate)
 
-        let request = try XCTUnwrap(userNotificationCenter.request)
+        let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.identifier, "Diagnosis")
     }
 
@@ -139,7 +139,7 @@ class StatusStateMachineTests: XCTestCase {
 
         XCTAssertEqual(checkin.checkinDate, symptomatic.expiryDate)
 
-        let request = try XCTUnwrap(userNotificationCenter.request)
+        let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.identifier, "Diagnosis")
     }
 
@@ -180,7 +180,7 @@ class StatusStateMachineTests: XCTestCase {
         XCTAssertEqual(machine.state, .ok(StatusState.Ok()))
 
         XCTAssertEqual(userNotificationCenter.removedIdentifiers, ["Diagnosis"])
-        XCTAssertNil(userNotificationCenter.request)
+        XCTAssertNil(userNotificationCenter.requests.first)
     }
 
     func testCheckinOnlyTemperature() throws {
@@ -194,7 +194,7 @@ class StatusStateMachineTests: XCTestCase {
         XCTAssertEqual(machine.state, .checkin(StatusState.Checkin(symptoms: [.temperature], checkinDate: nextCheckin)))
 
         XCTAssertEqual(userNotificationCenter.removedIdentifiers, ["Diagnosis"])
-        let request = try XCTUnwrap(userNotificationCenter.request)
+        let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.identifier, "Diagnosis")
     }
 
@@ -209,7 +209,7 @@ class StatusStateMachineTests: XCTestCase {
         XCTAssertEqual(machine.state, .checkin(StatusState.Checkin(symptoms: [.cough, .temperature], checkinDate: nextCheckin)))
 
         XCTAssertEqual(userNotificationCenter.removedIdentifiers, ["Diagnosis"])
-        let request = try XCTUnwrap(userNotificationCenter.request)
+        let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.identifier, "Diagnosis")
     }
 
@@ -225,7 +225,7 @@ class StatusStateMachineTests: XCTestCase {
         XCTAssertEqual(machine.state, .checkin(StatusState.Checkin(symptoms: [.temperature], checkinDate: nextCheckin)))
 
         XCTAssertEqual(userNotificationCenter.removedIdentifiers, ["Diagnosis"])
-        let request = try XCTUnwrap(userNotificationCenter.request)
+        let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.identifier, "Diagnosis")
     }
 

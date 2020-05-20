@@ -158,7 +158,7 @@ class RemoteNotificationManagerTests: TestCase {
 
         notificationManager.handleNotification(userInfo: [:]) {_ in }
 
-        XCTAssertNil(notificationCenterDouble.request)
+        XCTAssertNil(notificationCenterDouble.requests.first)
     }
 
     func testAcknowledgingANewNotification() throws {
