@@ -70,7 +70,7 @@ final class ContactEventsTableViewController: UITableViewController, ContactEven
 
         case Sections.mySonarId.rawValue: return 1
         case Sections.myEncryptedBroadcastId.rawValue: return 1
-        case Sections.visibleDevices.rawValue: return repository.contactEvents.count
+        case Sections.visibleDevices.rawValue: return items.count
         default: preconditionFailure("No section \(section)")
 
         }
@@ -101,9 +101,9 @@ final class ContactEventsTableViewController: UITableViewController, ContactEven
 
         case (Sections.visibleDevices.rawValue, let row):
             cell.accessoryType = .disclosureIndicator
-            cell.textLabel?.text = repository.contactEvents[row].encryptedRemoteContactId?.base64EncodedString()
-            cell.detailTextLabel?.text = repository.contactEvents[row].rssiValues.suffix(16).map({"\($0)"}).joined(separator: ", ")
-            cell.gradientColorData = repository.contactEvents[row].encryptedRemoteContactId
+            cell.textLabel?.text = items[row].encryptedRemoteContactId?.base64EncodedString()
+            cell.detailTextLabel?.text = items[row].rssiValues.suffix(16).map({"\($0)"}).joined(separator: ", ")
+            cell.gradientColorData = items[row].encryptedRemoteContactId
             
         default:
             preconditionFailure("No cell at indexPath \(indexPath)")
