@@ -62,24 +62,23 @@ class ContactEventsUploaderTests: XCTestCase {
 
         XCTAssertEqual(request.urlable, .path("/api/proximity-events/upload"))
 
-        if case .patch(let data) = request.method {
-            let decoder = JSONDecoder()
-            decoder.dateDecodingStrategy = .iso8601
+        XCTAssertTrue(request.isMethodPATCH)
+        
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        
+        let data = try XCTUnwrap(request.body)
+        let decoded = try decoder.decode(UploadProximityEventsRequest.Wrapper.self, from: data)
 
-            let decoded = try decoder.decode(UploadProximityEventsRequest.Wrapper.self, from: data)
+        XCTAssertEqual(Set(decoded.symptoms), Set(["TEMPERATURE", "NAUSEA"]))
+        XCTAssertEqual(decoded.symptomsTimestamp, startDate)
 
-            XCTAssertEqual(Set(decoded.symptoms), Set(["TEMPERATURE", "NAUSEA"]))
-            XCTAssertEqual(decoded.symptomsTimestamp, startDate)
+        // Can't compare the entire contact events because the timestamp loses precision
+        // when JSON encoded and decoded.
+        XCTAssertEqual(1, decoded.contactEvents.count)
 
-            // Can't compare the entire contact events because the timestamp loses precision
-            // when JSON encoded and decoded.
-            XCTAssertEqual(1, decoded.contactEvents.count)
-
-            let firstEvent = decoded.contactEvents.first
-            XCTAssertEqual(payload.cryptogram, firstEvent!.encryptedRemoteContactId)
-        } else {
-            XCTFail("Expected a patch request but got \(request.method)")
-        }
+        let firstEvent = decoded.contactEvents.first
+        XCTAssertEqual(payload.cryptogram, firstEvent!.encryptedRemoteContactId)
     }
 
     func testUploadLogRequestedAndStarted() throws {
