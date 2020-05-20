@@ -11,12 +11,14 @@ import UIKit
 class SetStatusStateViewController: UITableViewController {
 
     @IBOutlet var statusStateCell: UITableViewCell!
+    @IBOutlet var statePickerCell: UITableViewCell!
     @IBOutlet var temperatureCell: UITableViewCell!
     @IBOutlet var coughCell: UITableViewCell!
     @IBOutlet var dateCell: UITableViewCell!
     @IBOutlet var datePickerCell: UITableViewCell!
 
-    @IBOutlet weak var statusStateSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var statusPicker: UIPickerView!
     @IBOutlet weak var temperatureSwitch: UISwitch!
     @IBOutlet weak var coughSwitch: UISwitch!
     @IBOutlet weak var dateTitleLabel: UILabel!
@@ -87,7 +89,7 @@ class SetStatusStateViewController: UITableViewController {
     }
 
     private var cells: [UITableViewCell] {
-        [statusStateCell, temperatureCell, coughCell, dateCell, datePickerCell].filter { showCell[$0] ?? false }
+        [statusStateCell, statePickerCell, temperatureCell, coughCell, dateCell, datePickerCell].filter { showCell[$0] ?? false }
     }
     private var showCell: [UITableViewCell: Bool] = [:] {
         didSet {
@@ -113,55 +115,40 @@ class SetStatusStateViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
-        if tableView.cellForRow(at: indexPath) == dateCell {
+        switch tableView.cellForRow(at: indexPath) {
+        case dateCell:
             showCell[datePickerCell] = showCell[datePickerCell].map { !$0 } ?? true
-        }
-    }
-
-    @IBAction func statusStateChanged(_ sender: UISegmentedControl) {
-        let statusState: StatusState
-        switch sender.selectedSegmentIndex {
-        case 0:
-            statusState = .ok(StatusState.Ok())
-        case 1:
-            statusState = .symptomatic(StatusState.Symptomatic(symptoms: [.temperature, .cough], startDate: Date()))
-        case 2:
-            statusState = .checkin(StatusState.Checkin(symptoms: [.temperature, .cough], checkinDate: Date()))
-        case 3:
-            statusState = .exposed(StatusState.Exposed(exposureDate: Date()))
-        case 4:
-            statusState = .unexposed(StatusState.Unexposed())
+        case statusStateCell:
+            showCell[statePickerCell] = showCell[statePickerCell].map { !$0 } ?? true
         default:
-            fatalError()
+            break
         }
-
-        show(statusState: statusState)
     }
 
     private func show(statusState: StatusState) {
         switch statusState {
         case .ok:
-            statusStateSegmentedControl.selectedSegmentIndex = 0
+            statusLabel.text = "ok"
             temperature = nil
             cough = nil
             date = nil
         case .symptomatic(let symptomatic):
-            statusStateSegmentedControl.selectedSegmentIndex = 1
+            statusLabel.text = "symptomatic"
             temperature = symptomatic.symptoms.contains(.temperature)
             cough = symptomatic.symptoms.contains(.cough)
             date = symptomatic.startDate
         case .checkin(let checkin):
-            statusStateSegmentedControl.selectedSegmentIndex = 2
+            statusLabel.text = "checkin"
             temperature = checkin.symptoms.contains(.temperature)
             cough = checkin.symptoms.contains(.cough)
             date = checkin.checkinDate
         case .exposed(let exposed):
-            statusStateSegmentedControl.selectedSegmentIndex = 3
+            statusLabel.text = "exposed"
             temperature = nil
             cough = nil
             date = exposed.exposureDate
         case .unexposed:
-            statusStateSegmentedControl.selectedSegmentIndex = 4
+            statusLabel.text = "unexposed"
             temperature = nil
             cough = nil
             date = nil
@@ -182,7 +169,7 @@ class SetStatusStateViewController: UITableViewController {
 
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
         let statusState: StatusState
-        switch statusStateSegmentedControl.selectedSegmentIndex {
+        switch statusPicker.selectedRow(inComponent: 0) {
         case 0:
             statusState = .ok(StatusState.Ok())
         case 1:
@@ -197,6 +184,8 @@ class SetStatusStateViewController: UITableViewController {
             statusState = .checkin(StatusState.Checkin(symptoms: symptoms, checkinDate: date!))
         case 3:
             statusState = .exposed(StatusState.Exposed(exposureDate: date!))
+        case 4:
+            statusState = .unexposed(StatusState.Unexposed())
         default:
             fatalError()
         }
@@ -205,4 +194,40 @@ class SetStatusStateViewController: UITableViewController {
         performSegue(withIdentifier: "unwindFromSetStatusState", sender: self)
     }
 
+}
+
+extension SetStatusStateViewController: UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return 5
+    }
+
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return ["ok", "symptomatic", "checkin", "exposed", "unexposed"][row]
+    }
+}
+
+extension SetStatusStateViewController: UIPickerViewDelegate {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        let statusState: StatusState
+        switch row {
+        case 0:
+            statusState = .ok(StatusState.Ok())
+        case 1:
+            statusState = .symptomatic(StatusState.Symptomatic(symptoms: [.temperature, .cough], startDate: Date()))
+        case 2:
+            statusState = .checkin(StatusState.Checkin(symptoms: [.temperature, .cough], checkinDate: Date()))
+        case 3:
+            statusState = .exposed(StatusState.Exposed(exposureDate: Date()))
+        case 4:
+            statusState = .unexposed(StatusState.Unexposed())
+        default:
+            fatalError()
+        }
+
+        show(statusState: statusState)
+    }
 }

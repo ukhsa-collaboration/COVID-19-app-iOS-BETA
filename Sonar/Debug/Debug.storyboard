@@ -640,39 +640,59 @@
                         <outlet property="datePicker" destination="gqH-or-fVs" id="U09-2B-qeg"/>
                         <outlet property="datePickerCell" destination="ghk-1l-nld" id="CXk-EH-mzT"/>
                         <outlet property="dateTitleLabel" destination="ibf-3U-rKz" id="Lba-uG-qdo"/>
+                        <outlet property="statePickerCell" destination="NmZ-eG-xZA" id="JCp-ls-mUt"/>
+                        <outlet property="statusLabel" destination="rCA-4T-KCE" id="ICg-V2-MsW"/>
+                        <outlet property="statusPicker" destination="2uj-XP-Il4" id="7n4-WA-H9l"/>
                         <outlet property="statusStateCell" destination="oCV-pN-EYk" id="cLb-De-Qm5"/>
-                        <outlet property="statusStateSegmentedControl" destination="a0t-aE-9I2" id="AF0-Xp-QcU"/>
                         <outlet property="temperatureCell" destination="Uj8-mq-v1X" id="wWw-qJ-fSe"/>
                         <outlet property="temperatureSwitch" destination="7tN-Pw-w2A" id="gIx-gm-cMt"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OSi-G9-tSY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="statusStateCell" id="oCV-pN-EYk">
+                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="statusStateCell" textLabel="Asw-w4-xie" detailTextLabel="rCA-4T-KCE" style="IBUITableViewCellStyleValue1" id="oCV-pN-EYk">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="53.5"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oCV-pN-EYk" id="Gax-pV-6Px">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="53.5"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="a0t-aE-9I2">
-                                <rect key="frame" x="20" y="11" width="374" height="32.5"/>
-                                <segments>
-                                    <segment title="Ok"/>
-                                    <segment title="Symptomatic"/>
-                                    <segment title="Checkin"/>
-                                    <segment title="Exposed"/>
-                                    <segment title="Unexposed"/>
-                                </segments>
+                            <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Asw-w4-xie">
+                                <rect key="frame" x="20" y="17" width="49.5" height="20.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rCA-4T-KCE">
+                                <rect key="frame" x="350" y="17" width="44" height="20.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </tableViewCellContentView>
+                </tableViewCell>
+                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="NmZ-eG-xZA" userLabel="statePickerCell">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
+                    <autoresizingMask key="autoresizingMask"/>
+                    <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NmZ-eG-xZA" id="qjI-2R-quX">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2uj-XP-Il4">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
                                 <connections>
-                                    <action selector="statusStateChanged:" destination="hhR-Gg-VxX" eventType="valueChanged" id="iSL-eE-nof"/>
+                                    <outlet property="dataSource" destination="hhR-Gg-VxX" id="4OH-Cd-IrP"/>
+                                    <outlet property="delegate" destination="hhR-Gg-VxX" id="SDG-t6-3mA"/>
                                 </connections>
-                            </segmentedControl>
+                            </pickerView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="a0t-aE-9I2" firstAttribute="leading" secondItem="Gax-pV-6Px" secondAttribute="leadingMargin" id="Snx-wn-ZzJ"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="a0t-aE-9I2" secondAttribute="trailing" id="dEA-oa-26z"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="a0t-aE-9I2" secondAttribute="bottom" id="j8f-Ox-QP3"/>
-                            <constraint firstItem="a0t-aE-9I2" firstAttribute="top" secondItem="Gax-pV-6Px" secondAttribute="topMargin" id="q5J-ee-OV2"/>
+                            <constraint firstAttribute="bottom" secondItem="2uj-XP-Il4" secondAttribute="bottom" id="DAK-At-aKj"/>
+                            <constraint firstAttribute="trailing" secondItem="2uj-XP-Il4" secondAttribute="trailing" id="fIc-v5-SYe"/>
+                            <constraint firstItem="2uj-XP-Il4" firstAttribute="top" secondItem="qjI-2R-quX" secondAttribute="top" id="lbn-Hu-kPD"/>
+                            <constraint firstItem="2uj-XP-Il4" firstAttribute="leading" secondItem="qjI-2R-quX" secondAttribute="leading" id="m4F-Pn-ykL"/>
                         </constraints>
                     </tableViewCellContentView>
                 </tableViewCell>
