@@ -260,7 +260,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="NyJ-yi-J4V">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1406.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1450.5"/>
                                         <subviews>
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4tb-5a-Uxm">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="128"/>
@@ -310,13 +310,13 @@
                                                                 <rect key="frame" x="16" y="27.5" width="14" height="14"/>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Enable notifications" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zeo-Ra-cKf">
-                                                                <rect key="frame" x="42" y="24" width="282.5" height="20.5"/>
+                                                                <rect key="frame" x="42" y="24" width="282" height="20.5"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                                 <color key="textColor" name="NHS Text"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bell ringing" translatesAutoresizingMaskIntoConstraints="NO" id="o57-iY-zoI" customClass="AutoscalingImageView" customModule="Sonar" customModuleProvider="target">
-                                                                <rect key="frame" x="340.5" y="24" width="25.5" height="20.5"/>
+                                                                <rect key="frame" x="340" y="24.5" width="26" height="20"/>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To receive notifications to say if you've been near someone with COVID-19 symptoms, allow notifications in your Settings." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBV-SW-opU">
                                                                 <rect key="frame" x="16" y="56.5" width="350" height="64.5"/>
@@ -667,16 +667,16 @@
                                                 </connections>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="7lY-C0-zBm">
-                                                <rect key="frame" x="0.0" y="1254" width="414" height="152.5"/>
+                                                <rect key="frame" x="0.0" y="1254" width="414" height="196.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NHS services for your part of the country" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jc7-io-bAH">
-                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="20.5"/>
+                                                        <rect key="frame" x="16" y="8" width="382" height="20.5"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                         <color key="textColor" name="NHS Secondary Text"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E9P-0P-SKf" customClass="LinkButton" customModule="Sonar" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="24.5" width="414" height="128"/>
+                                                        <rect key="frame" x="16" y="36.5" width="382" height="128"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="string" keyPath="title" value="NHS Coronavirus"/>
@@ -731,6 +731,7 @@
                         <outlet property="stepsDetailLabel" destination="QzR-8B-SLv" id="OvV-th-O7v"/>
                         <segue destination="K9E-G6-YEs" kind="show" identifier="showApplyForTest" id="Skw-Ky-N3M"/>
                         <segue destination="237-sh-LFD" kind="show" identifier="showWorkplaceGuidance" id="kW0-A3-I04"/>
+                        <segue destination="LT8-6k-cZ2" kind="custom" identifier="presentUnexposed" customClass="DrawerSegue" customModule="Sonar" customModuleProvider="target" id="kqd-cx-WmS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QkS-TV-URb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -744,6 +745,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zRg-rj-rxT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5088" y="233"/>
+        </scene>
+        <!--Unexposed-->
+        <scene sceneID="8Nc-ZH-0SK">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Unexposed" id="LT8-6k-cZ2" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H85-nm-XtB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5088" y="346"/>
         </scene>
     </scenes>
     <resources>

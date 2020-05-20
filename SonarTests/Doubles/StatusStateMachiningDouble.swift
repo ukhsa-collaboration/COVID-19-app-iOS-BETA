@@ -38,4 +38,7 @@ class StatusStateMachiningDouble: StatusStateMachining {
     func unexposed() {
     }
 
+    func ok() {
+    }
+
 }

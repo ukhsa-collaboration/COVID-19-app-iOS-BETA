@@ -9,6 +9,19 @@
 import UIKit
 import Logging
 
+class DrawerSegue: UIStoryboardSegue {
+    private var retainedSelf: DrawerSegue? = nil
+
+    let drawerPresentation = DrawerPresentation()
+
+    override func perform() {
+        retainedSelf = self
+        destination.modalPresentationStyle = .custom
+        destination.transitioningDelegate = drawerPresentation
+        source.present(destination, animated: true, completion: nil)
+    }
+}
+
 class DrawerPresentation: NSObject, UIViewControllerTransitioningDelegate {
     public func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
         return DrawerPresentationController(presentedViewController: presented, presenting: presenting)
