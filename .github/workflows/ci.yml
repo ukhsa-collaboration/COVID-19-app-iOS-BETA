@@ -80,9 +80,10 @@ jobs:
 
       - name: Setup simulator test device
         id: devicesetup
+        env:
+          DEVICE_NAME: ${{ matrix.run-config['name'] }}
+          DEVICE_OS: ${{ matrix.run-config['os'] }}
         run: |
-          DEVICE_NAME="${{ matrix.run-config['name'] }}"
-          DEVICE_OS="${{ matrix.run-config['os'] }}"
           DEVICE_ID=$(xcrun simctl create test-device-${DEVICE_NAME/ /-}-$DEVICE_OS "$DEVICE_NAME" "com.apple.CoreSimulator.SimRuntime.iOS-$DEVICE_OS")
           echo "::set-output name=deviceid::$DEVICE_ID"
 
