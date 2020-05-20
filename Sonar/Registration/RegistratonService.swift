@@ -47,6 +47,10 @@ class ConcreteRegistrationService: RegistrationService {
         self.monitor = monitor
         self.timeoutQueue = timeoutQueue
         
+        if persistence.registration != nil {
+            storePushTokenForExistingRegistration()
+        }
+        
         // when our backend sends us the activation code in a push notification
         // we will want to make a second request to complete the registration process
         remoteNotificationDispatcher.registerHandler(forType: .registrationActivationCode) { userInfo, completion in
@@ -96,6 +100,22 @@ class ConcreteRegistrationService: RegistrationService {
                 withError: RegistrationTimeoutError(),
                 reason: hasPushToken ? .waitingForActivationNotificationTimedOut : .waitingForFCMTokenTimedOut
             )
+        }
+    }
+    
+    private func storePushTokenForExistingRegistration() {
+        precondition(persistence.registration != nil)
+        
+        // This codepath is for backwards compatibility. Only run if we have not stored a token already.
+        guard persistence.registeredPushToken == nil else { return }
+        
+        if let pushToken = remoteNotificationDispatcher.pushToken {
+            persistence.registeredPushToken = pushToken
+        } else {
+            notificationCenter.addObserver(forName: PushTokenReceivedNotification, object: nil, queue: nil) { notification in
+                guard let pushToken = notification.object as? String else { return }
+                self.persistence.registeredPushToken = pushToken
+            }
         }
     }
     

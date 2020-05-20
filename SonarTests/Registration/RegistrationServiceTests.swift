@@ -151,6 +151,113 @@ class RegistrationServiceTests: TestCase {
         XCTAssertTrue(remoteNotificatonCallbackCalled)
     }
     
+    func testRegistration_immediatelyPersistsPushTokenIfAlreadyRegisteredAndPreexistingToken() throws {
+        let session = SessionDouble()
+        let persistence = PersistenceDouble(partialPostcode: "AB90")
+        persistence.registration = .fake
+        let notificationCenter = NotificationCenter()
+        let remoteNotificationDispatcher = RemoteNotificationDispatcher(
+            notificationCenter: notificationCenter,
+            userNotificationCenter: UserNotificationCenterDouble()
+        )
+        
+        remoteNotificationDispatcher.pushToken = "the current push token"
+        
+        let registrationService = makeRegistrationService(
+            session: session,
+            persistence: persistence,
+            remoteNotificationDispatcher: remoteNotificationDispatcher,
+            notificationCenter: notificationCenter
+        )
+    
+        
+        withExtendedLifetime(registrationService) {
+            XCTAssertNotNil(registrationService)
+        }
+        
+        XCTAssertEqual(persistence.registeredPushToken, "the current push token")
+    }
+    
+    func testRegistration_immediatelyPersistsPushTokenIfAlreadyRegisteredAndNewToken() throws {
+        let session = SessionDouble()
+        let persistence = PersistenceDouble(partialPostcode: "AB90")
+        persistence.registration = .fake
+        let notificationCenter = NotificationCenter()
+        let remoteNotificationDispatcher = RemoteNotificationDispatcher(
+            notificationCenter: notificationCenter,
+            userNotificationCenter: UserNotificationCenterDouble()
+        )
+        let registrationService = makeRegistrationService(
+            session: session,
+            persistence: persistence,
+            remoteNotificationDispatcher: remoteNotificationDispatcher,
+            notificationCenter: notificationCenter
+        )
+    
+        remoteNotificationDispatcher.receiveRegistrationToken(fcmToken: "the current push token")
+        
+        withExtendedLifetime(registrationService) {
+            XCTAssertNotNil(registrationService)
+        }
+        
+        XCTAssertEqual(persistence.registeredPushToken, "the current push token")
+    }
+    
+    func testRegistration_doesNotOverridePersistedPushTokenIfAlreadyRegisteredAndPreexistingToken() throws {
+        let session = SessionDouble()
+        let persistence = PersistenceDouble(partialPostcode: "AB90")
+        persistence.registration = .fake
+        let notificationCenter = NotificationCenter()
+        let remoteNotificationDispatcher = RemoteNotificationDispatcher(
+            notificationCenter: notificationCenter,
+            userNotificationCenter: UserNotificationCenterDouble()
+        )
+        
+        persistence.registeredPushToken = "old token"
+        remoteNotificationDispatcher.pushToken = "the current push token"
+        
+        let registrationService = makeRegistrationService(
+            session: session,
+            persistence: persistence,
+            remoteNotificationDispatcher: remoteNotificationDispatcher,
+            notificationCenter: notificationCenter
+        )
+    
+        
+        withExtendedLifetime(registrationService) {
+            XCTAssertNotNil(registrationService)
+        }
+        
+        XCTAssertEqual(persistence.registeredPushToken, "old token")
+    }
+    
+    func testRegistration_doesNotOverridePersistedPushTokenIfAlreadyRegisteredAndNewToken() throws {
+        let session = SessionDouble()
+        let persistence = PersistenceDouble(partialPostcode: "AB90")
+        persistence.registration = .fake
+        let notificationCenter = NotificationCenter()
+        let remoteNotificationDispatcher = RemoteNotificationDispatcher(
+            notificationCenter: notificationCenter,
+            userNotificationCenter: UserNotificationCenterDouble()
+        )
+        persistence.registeredPushToken = "old token"
+        
+        let registrationService = makeRegistrationService(
+            session: session,
+            persistence: persistence,
+            remoteNotificationDispatcher: remoteNotificationDispatcher,
+            notificationCenter: notificationCenter
+        )
+    
+        remoteNotificationDispatcher.receiveRegistrationToken(fcmToken: "the current push token")
+        
+        withExtendedLifetime(registrationService) {
+            XCTAssertNotNil(registrationService)
+        }
+        
+        XCTAssertEqual(persistence.registeredPushToken, "old token")
+    }
+    
     func testRegistration_notifiesOnInitialRequestFailureAfterHourDelay() throws {
         let session = SessionDouble()
         let persistence = PersistenceDouble()
