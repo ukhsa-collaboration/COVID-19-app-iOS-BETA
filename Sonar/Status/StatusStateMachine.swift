@@ -198,9 +198,8 @@ class StatusStateMachine: StatusStateMachining {
 
     private func add(notificationRequest: UNNotificationRequest) {
         userNotificationCenter.add(notificationRequest) { error in
-            guard error != nil else {
+            if error != nil {
                 self.logger.critical("Unable to add local notification: \(String(describing: error))")
-                return
             }
         }
     }
