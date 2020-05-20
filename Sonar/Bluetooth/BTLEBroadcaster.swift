@@ -241,6 +241,10 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
 
 fileprivate let logger: Logger = {
     var logger = Logger(label: "BTLE")
+    #if BLE_LOGLEVEL_NODEBUG
     logger.logLevel = .notice
+    #else
+    logger.logLevel = .debug
+    #endif
     return logger
 }()

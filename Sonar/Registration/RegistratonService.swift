@@ -29,7 +29,13 @@ class ConcreteRegistrationService: RegistrationService {
     private let timeoutQueue: TestableQueue
     private var remoteNotificationCompletionHandler: RemoteNotificationCompletionHandler?
     private var isRegistering = false
-
+    
+    #warning("[#172921243] Remove and replace with correct logic.")
+    // Putting this here in an “obviously wrong way” so we can test that we trigger the upload of new registration token
+    // at the right times, without enforcing a design on how the actual call happens.
+    // Remove this as we complete the feature
+    var putNewRegistrationToken: (String, @escaping () -> Void) -> Void = { _, _ in }
+    
     init(session: Session,
          persistence: Persisting,
          reminderScheduler: RegistrationReminderScheduler,
@@ -106,15 +112,28 @@ class ConcreteRegistrationService: RegistrationService {
     private func storePushTokenForExistingRegistration() {
         precondition(persistence.registration != nil)
         
-        // This codepath is for backwards compatibility. Only run if we have not stored a token already.
-        guard persistence.registeredPushToken == nil else { return }
-        
         if let pushToken = remoteNotificationDispatcher.pushToken {
-            persistence.registeredPushToken = pushToken
+            didReceivePushTokenWhenAlreadyRegistered(pushToken)
         } else {
             notificationCenter.addObserver(forName: PushTokenReceivedNotification, object: nil, queue: nil) { notification in
                 guard let pushToken = notification.object as? String else { return }
-                self.persistence.registeredPushToken = pushToken
+                self.didReceivePushTokenWhenAlreadyRegistered(pushToken)
+            }
+        }
+    }
+    
+    private func didReceivePushTokenWhenAlreadyRegistered(_ token: String) {
+        precondition(persistence.registration != nil)
+        
+        let existingToken = persistence.registeredPushToken
+        switch existingToken {
+        case .none:
+            persistence.registeredPushToken = token
+        case .some(token):
+            break
+        case .some(_):
+            putNewRegistrationToken(token) {
+                self.persistence.registeredPushToken = token
             }
         }
     }
