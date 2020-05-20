@@ -249,4 +249,34 @@ class StatusStateMachineTests: XCTestCase {
         XCTAssertEqual(machine.state, .checkin(StatusState.Checkin(symptoms: [.temperature], checkinDate: checkinDate)))
     }
 
+    func testExposedFromOk() throws {
+        persisting.statusState = .ok(StatusState.Ok())
+
+        machine.exposed()
+
+        let request = try XCTUnwrap(userNotificationCenter.requests.first)
+        XCTAssertEqual(request.content.title, "POTENTIAL_STATUS_TITLE".localized)
+
+        var maybeExposed: StatusState.Exposed?
+        if case .exposed(let e) = machine.state {
+            maybeExposed = e
+        }
+        XCTAssertNotNil(maybeExposed)
+    }
+
+    func testExposedAgainAfterUnexposed() throws {
+        persisting.statusState = .unexposed(StatusState.Unexposed())
+
+        machine.exposed()
+
+        let request = try XCTUnwrap(userNotificationCenter.requests.first)
+        XCTAssertEqual(request.content.title, "POTENTIAL_STATUS_TITLE".localized)
+
+        var maybeExposed: StatusState.Exposed?
+        if case .exposed(let e) = machine.state {
+            maybeExposed = e
+        }
+        XCTAssertNotNil(maybeExposed)
+    }
+
 }

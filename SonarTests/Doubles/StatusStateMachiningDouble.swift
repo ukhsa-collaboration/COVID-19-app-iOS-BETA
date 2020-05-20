@@ -35,4 +35,7 @@ class StatusStateMachiningDouble: StatusStateMachining {
         checkinSymptoms = symptoms
     }
 
+    func unexposed() {
+    }
+
 }

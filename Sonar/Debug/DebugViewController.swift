@@ -130,6 +130,12 @@ class DebugViewController: UITableViewController, Storyboarded {
                 self.statusStateMachine.exposed()
             }
 
+        case (3, 1):
+            performSegue(withIdentifier: "unwindFromDebugViewController", sender: self)
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5)) {
+                self.statusStateMachine.unexposed()
+            }
+
         case (4, 0):
             #if DEBUG
             guard let debugInfo = Environment.debug else {

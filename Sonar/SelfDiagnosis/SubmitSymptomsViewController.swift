@@ -67,7 +67,7 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
             switch statusStateMachine.state {
             case .ok, .exposed:
                 try statusStateMachine.selfDiagnose(symptoms: symptoms, startDate: startDate)
-            case .symptomatic, .checkin:
+            case .symptomatic, .checkin, .unexposed:
                 assertionFailure("We should only be able to submit symptoms from ok/exposed")
                 return
             }

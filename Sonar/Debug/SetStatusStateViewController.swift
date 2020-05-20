@@ -129,6 +129,8 @@ class SetStatusStateViewController: UITableViewController {
             statusState = .checkin(StatusState.Checkin(symptoms: [.temperature, .cough], checkinDate: Date()))
         case 3:
             statusState = .exposed(StatusState.Exposed(exposureDate: Date()))
+        case 4:
+            statusState = .unexposed(StatusState.Unexposed())
         default:
             fatalError()
         }
@@ -158,6 +160,11 @@ class SetStatusStateViewController: UITableViewController {
             temperature = nil
             cough = nil
             date = exposed.exposureDate
+        case .unexposed:
+            statusStateSegmentedControl.selectedSegmentIndex = 4
+            temperature = nil
+            cough = nil
+            date = nil
         }
     }
 

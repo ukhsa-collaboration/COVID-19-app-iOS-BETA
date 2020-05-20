@@ -220,7 +220,7 @@ class StatusViewController: UIViewController, Storyboarded {
         statusStateMachine.tick()
 
         switch statusStateMachine.state {
-        case .ok:
+        case .ok, .unexposed:
             diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Blue")
             diagnosisTitleLabel.text = "Follow the current advice to stop the spread of coronavirus"
             diagnosisDetailLabel.isHidden = true
