@@ -74,7 +74,7 @@ Loss of appetite: means not feeling hungry.
 "SYMPTOMS_SUMMARY_HAVE_NAUSEA" = "I have at least one of these symptoms: diarrhoea, nausea, vomiting or loss of appetite";
 
 "SELECT_START_DATE" = "Select start date";
-"SELECT_START_DATE_ERROR" = "Select a start date";
+"SYMPTOMS_START_ERROR" = "Select the date you first started showing these symptoms";
 "SYMPTOMS_START_QUESTION" = "When did you first start showing any of these symptoms?";
 
 "SYMPTOMS_SUMMARY_NO_SYMPTOMS" = "You do not appear to have coronavirus symptoms";

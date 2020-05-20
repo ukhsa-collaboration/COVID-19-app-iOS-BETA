@@ -66,7 +66,7 @@ class StartDateViewController: UIViewController {
 
         label.text = "SYMPTOMS_START_QUESTION".localized
 
-        errorLabel.text = "SELECT_START_DATE_ERROR".localized
+        errorLabel.text = "SYMPTOMS_START_ERROR".localized
 
         button.text = "SELECT_START_DATE".localized
     }
