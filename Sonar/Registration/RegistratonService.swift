@@ -26,7 +26,7 @@ class ConcreteRegistrationService: RegistrationService {
     private let remoteNotificationDispatcher: RemoteNotificationDispatching
     private let notificationCenter: NotificationCenter
     private let monitor: AppMonitoring
-    private let timeoutQueue: TestableQueue
+    private let timer: BackgroundableTimer
     private var remoteNotificationCompletionHandler: RemoteNotificationCompletionHandler?
     private var isRegistering = false
     
@@ -51,7 +51,7 @@ class ConcreteRegistrationService: RegistrationService {
         self.notificationCenter = notificationCenter
         self.remoteNotificationDispatcher = remoteNotificationDispatcher
         self.monitor = monitor
-        self.timeoutQueue = timeoutQueue
+        self.timer = BackgroundableTimer(notificationCenter: notificationCenter, queue: timeoutQueue)
         
         if persistence.registration != nil {
             storePushTokenForExistingRegistration()
@@ -97,9 +97,9 @@ class ConcreteRegistrationService: RegistrationService {
             }
         }
         
-        self.timeoutQueue.asyncAfter(deadline: .now() + delayBeforeAllowingRetrySecs) { [weak self] in
+        timer.schedule(deadline: .now() + delayBeforeAllowingRetrySecs) { [weak self] in
             guard let self = self, self.persistence.registration == nil, self.isRegistering else { return }
-            
+
             logger.error("Registration did not complete within \(delayBeforeAllowingRetrySecs) seconds")
             let hasPushToken = self.remoteNotificationDispatcher.pushToken != nil
             self.fail(
@@ -223,7 +223,8 @@ class ConcreteRegistrationService: RegistrationService {
             reportFailureAndAllowRetry()
         } else {
             // As a rate-limiting mechanism, don't report the failure to the rest of the application right away.
-            timeoutQueue.asyncAfter(deadline: .now() + delayBeforeAllowingRetrySecs) {
+            timer.schedule(deadline: .now() + delayBeforeAllowingRetrySecs) {
+                logger.error("Reporting failure after delay")
                 self.reportFailureAndAllowRetry()
             }
         }

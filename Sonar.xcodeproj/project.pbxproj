@@ -15,6 +15,8 @@
 		0937F78F247461D40010FB3B /* ReferenceCodeContainerViewControllerBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0937F78E247461D40010FB3B /* ReferenceCodeContainerViewControllerBase.swift */; };
 		0938D9062474473E006FAADF /* ApplyForTestContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0938D9052474473E006FAADF /* ApplyForTestContainerViewController.swift */; };
 		0938D9092474484B006FAADF /* ApplyForTestContainerViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0938D9082474484B006FAADF /* ApplyForTestContainerViewControllerTests.swift */; };
+		095283A6247597DA00CDEE55 /* BackgroundableTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095283A5247597DA00CDEE55 /* BackgroundableTimer.swift */; };
+		095283A82475990B00CDEE55 /* BackgroundableTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095283A72475990B00CDEE55 /* BackgroundableTimerTests.swift */; };
 		095A91182434FF1500ED6369 /* ApplicationDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095A91172434FF1500ED6369 /* ApplicationDouble.swift */; };
 		0964B37B24631B1B0022EF97 /* UIViewController+Scrolling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0964B37A24631B1B0022EF97 /* UIViewController+Scrolling.swift */; };
 		0964B37D246328A20022EF97 /* UIView+Scrolling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0964B37C246328A20022EF97 /* UIView+Scrolling.swift */; };
@@ -305,6 +307,8 @@
 		0937F78E247461D40010FB3B /* ReferenceCodeContainerViewControllerBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceCodeContainerViewControllerBase.swift; sourceTree = "<group>"; };
 		0938D9052474473E006FAADF /* ApplyForTestContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyForTestContainerViewController.swift; sourceTree = "<group>"; };
 		0938D9082474484B006FAADF /* ApplyForTestContainerViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyForTestContainerViewControllerTests.swift; sourceTree = "<group>"; };
+		095283A5247597DA00CDEE55 /* BackgroundableTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundableTimer.swift; sourceTree = "<group>"; };
+		095283A72475990B00CDEE55 /* BackgroundableTimerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundableTimerTests.swift; sourceTree = "<group>"; };
 		095A91172434FF1500ED6369 /* ApplicationDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationDouble.swift; sourceTree = "<group>"; };
 		0964B37A24631B1B0022EF97 /* UIViewController+Scrolling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Scrolling.swift"; sourceTree = "<group>"; };
 		0964B37C246328A20022EF97 /* UIView+Scrolling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Scrolling.swift"; sourceTree = "<group>"; };
@@ -683,6 +687,7 @@
 			children = (
 				098ED47A242D7E460029B729 /* RegistrationServiceTests.swift */,
 				09A925442453807000C5DBC1 /* RegistrationReminderSchedulerTests.swift */,
+				095283A72475990B00CDEE55 /* BackgroundableTimerTests.swift */,
 			);
 			path = Registration;
 			sourceTree = "<group>";
@@ -1318,6 +1323,7 @@
 				F67A2290242AA35B002254B6 /* SecureRegistrationStorage.swift */,
 				098ED477242D7D050029B729 /* RegistratonService.swift */,
 				09A9254224536FD300C5DBC1 /* RegistrationReminderScheduler.swift */,
+				095283A5247597DA00CDEE55 /* BackgroundableTimer.swift */,
 			);
 			path = Registration;
 			sourceTree = "<group>";
@@ -1580,6 +1586,7 @@
 				89CCF65F2456EF7000AC9D91 /* TrustValidatingDouble.swift in Sources */,
 				F600A60424297C010038DF57 /* RegistrationRequestTests.swift in Sources */,
 				F6334E4F24748C3400421B4C /* RegistrationStatusViewControllerTests.swift in Sources */,
+				095283A82475990B00CDEE55 /* BackgroundableTimerTests.swift in Sources */,
 				8976B15D2451B62100154ADF /* RequestTests.swift in Sources */,
 				21E5051324448AE30065C69B /* PlistPersisterTests.swift in Sources */,
 				098ED488242E89930029B729 /* PushNotificationManagerDouble.swift in Sources */,
@@ -1632,6 +1639,7 @@
 				09D027CC24521542006EE07E /* BluetoothStateObserver.swift in Sources */,
 				F673FBB42457A89E00D96C50 /* SymptomsSummaryViewController.swift in Sources */,
 				21D93C302420C26900C1FA9B /* PrimaryButton.swift in Sources */,
+				095283A6247597DA00CDEE55 /* BackgroundableTimer.swift in Sources */,
 				F78CEB47242B7752002254AD /* String+localized.swift in Sources */,
 				13473A1F246D543F00800CEA /* UserStatusProvider.swift in Sources */,
 				F6F05A36243436D200FF4B72 /* PrivacyViewController.swift in Sources */,
