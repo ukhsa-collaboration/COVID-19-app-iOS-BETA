@@ -35,6 +35,8 @@ jobs:
       - self-hosted
       - macos
     if: needs.should-deploy.outputs.should-deploy == 'true'
+    outputs:
+      commit-sha: ${{ steps.bump-build-version.outputs.commit-sha }}
     steps:
       - name: Checkout project
         uses: actions/checkout@01aeccc # v2.1.0
@@ -77,7 +79,7 @@ jobs:
       - name: Trigger deployment
         env:
           DEPLOYMENT_TOKEN: ${{ secrets.deployment_token }}
-          DEPLOYMENT_SHA: ${{ steps.bump-build-version.outputs.commit-sha }}
+          DEPLOYMENT_SHA: ${{ needs.bump-build-number.outputs.commit-sha }}
           DEPLOYMENT_PAYLOAD: 'This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}**.\n\nThe commit hash was: _${{ steps.build-version.outputs.commit-sha }}_.'
         run: ./bin/create-deployment ${{ matrix.run-config['env'] }}
 
