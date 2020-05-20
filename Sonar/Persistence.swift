@@ -51,6 +51,7 @@ class Persistence: Persisting {
         case acknowledgmentUrls
         case statusState
         case disabledNotificationsStatusView
+        case registeredPushToken
     }
     
     private let encoder = JSONEncoder()
@@ -155,6 +156,11 @@ class Persistence: Persisting {
     var lastInstalledBuildNumber: String? {
         get { UserDefaults.standard.string(forKey: Keys.lastInstalledBuildNumber.rawValue) }
         set { UserDefaults.standard.set(newValue, forKey: Keys.lastInstalledBuildNumber.rawValue) }
+    }
+    
+    var registeredPushToken: String? {
+        get { UserDefaults.standard.string(forKey: Keys.registeredPushToken.rawValue) }
+        set { UserDefaults.standard.set(newValue, forKey: Keys.registeredPushToken.rawValue) }
     }
     
     var disabledNotificationsStatusView: Bool {
