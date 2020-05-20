@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+DATA=$(cat <<EOF
+{
+  "event_type":"trigger-deploys"
+}
+EOF
+)
+
+curl \
+  --verbose \
+  --location \
+  --url https://api.github.com/repos/$GITHUB_REPOSITORY/dispatches \
+  --header "authorization: Bearer $DEPLOYMENT_TOKEN" \
+  --header "content-type: application/json" \
+  --data "$DATA"
