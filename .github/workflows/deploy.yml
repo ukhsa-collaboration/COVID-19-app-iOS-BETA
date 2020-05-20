@@ -30,7 +30,7 @@ jobs:
           ENVIRONMENT_JSON_BETA: ${{ secrets.environment_json_beta }}
           ENVIRONMENT_JSON_INTERNAL: ${{ secrets.environment_json_internal }}
           ENVIRONMENT_JSON_PRODUCTION: ${{ secrets.environment_json_production }}
-          GOOGLE_SERVICE_INFO_PLIST_BETA: ${{ secrets.google_service_info_plist_internal }}
+          GOOGLE_SERVICE_INFO_PLIST_BETA: ${{ secrets.google_service_info_plist_beta }}
           GOOGLE_SERVICE_INFO_PLIST_INTERNAL: ${{ secrets.google_service_info_plist_internal }}
           GOOGLE_SERVICE_INFO_PLIST_PRODUCTION: ${{ secrets.google_service_info_plist_production }}
           FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.apple_password }}
