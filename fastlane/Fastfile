@@ -17,7 +17,7 @@ platform :ios do
 
     CONFIGS = {
       beta: Config.new(
-        bundle_id: "uk.nhs.nhsx.beta.Sonar",
+        bundle_id: "uk.nhs.nhsx.beta.CoLocate",
         apple_id: 1504244021,
       ),
       internal: Config.new(
