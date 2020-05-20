@@ -77,7 +77,7 @@ class ConcreteRegistrationService: RegistrationService {
     
     func register() -> Void {
         guard !isRegistering else {
-            logger.warning("Tried to register when already registering")
+            logger.debug("Tried to register when already registering")
             return
         }
         
