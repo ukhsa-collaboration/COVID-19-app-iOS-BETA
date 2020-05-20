@@ -105,6 +105,7 @@ private class InMemoryPersistence: Persisting {
     var uploadLog: [UploadLog] = []
     var lastInstalledVersion: String?
     var lastInstalledBuildNumber: String?
+    var registeredPushToken: String?
     var disabledNotificationsStatusView: Bool = false
     var acknowledgmentUrls: Set<URL> = []
     var statusState: StatusState = .ok(StatusState.Ok())

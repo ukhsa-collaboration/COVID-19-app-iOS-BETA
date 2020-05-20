@@ -28,6 +28,7 @@ protocol Persisting {
     var uploadLog: [UploadLog] { get nonmutating set }
     var lastInstalledVersion: String? { get nonmutating set }
     var lastInstalledBuildNumber: String? { get nonmutating set }
+    var registeredPushToken: String? { get nonmutating set }
     var disabledNotificationsStatusView: Bool { get nonmutating set }
     var acknowledgmentUrls: Set<URL> { get nonmutating set }
     var statusState: StatusState { get nonmutating set }

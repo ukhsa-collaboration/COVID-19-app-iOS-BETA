@@ -155,6 +155,7 @@ class ConcreteRegistrationService: RegistrationService {
                     broadcastRotationKey: broadcastRotationKey
                 )
                 self.persistence.registration = registration
+                self.persistence.registeredPushToken = pushToken
 
                 self.succeed(registration: registration)
             case .failure(let error):

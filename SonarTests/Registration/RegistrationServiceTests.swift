@@ -60,6 +60,7 @@ class RegistrationServiceTests: TestCase {
         XCTAssertEqual(confirmRegistrationPayload.postalCode, "AB90")
         
         XCTAssertNil(completedObserver.lastNotification)
+        XCTAssertNil(persistence.registeredPushToken) // Should not persist this until registration completes
         
         // Respond to the second request
         let confirmationResponse = ConfirmRegistrationResponse(
@@ -75,6 +76,7 @@ class RegistrationServiceTests: TestCase {
         XCTAssertNotNil(storedRegistration)
         XCTAssertEqual(sonarId, storedRegistration?.sonarId)
         XCTAssertEqual(secretKey, storedRegistration?.secretKey)
+        XCTAssertEqual("the current push token", persistence.registeredPushToken)
         let expectedRotationKey = try BroadcastRotationKeyConverter().fromData(knownGoodRotationKeyData())
         XCTAssertEqual(expectedRotationKey, storedRegistration?.broadcastRotationKey)
 
@@ -141,6 +143,7 @@ class RegistrationServiceTests: TestCase {
         XCTAssertNotNil(storedRegistration)
         XCTAssertEqual(sonarId, storedRegistration?.sonarId)
         XCTAssertEqual(secretKey, storedRegistration?.secretKey)
+        XCTAssertEqual("a push token", persistence.registeredPushToken)
         let expectedRotationKey = try BroadcastRotationKeyConverter().fromData(knownGoodRotationKeyData())
         XCTAssertEqual(expectedRotationKey, storedRegistration?.broadcastRotationKey)
 
