@@ -108,4 +108,14 @@ iOSInjectionProject/
 node_modules
 package-lock.json
 
+# Local setup files
 .git-authors
+.tool-versions
+
+#ignore tmp output
+/tmp/
+
+# Pact setup folders
+SonarPactTests/Setup/vendor/
+SonarPactTests/**/*.log
+Pacts/

@@ -90,10 +90,14 @@ jobs:
       - name: Boot simulator test device
         run: xcrun simctl bootstatus ${{ steps.devicesetup.outputs.deviceid }} -b
 
-      - run: |
-          rm -rf TestResults.xcresult
+      - name: Set up pact
+        run: bin/pact/setup
 
-      - name: Run Test
+      - run: |
+          [[ -d TestResults.xcresult ]] && rm -rf TestResults.xcresult || true
+          [[ -d PactTestResults.xcresult ]] && rm -rf PactTestResults.xcresult || true
+
+      - name: Run Tests
         run: >
           xcodebuild
           -scheme Sonar
@@ -103,6 +107,17 @@ jobs:
           -allowProvisioningUpdates
           -resultBundlePath TestResults.xcresult
 
+      - name: Run Pact Tests
+        run: >
+          xcodebuild
+          -scheme 'Sonar Pact Tests'
+          -target SonarPactTests
+          test
+          -destination "id=${{ steps.devicesetup.outputs.deviceid }}"
+          -showBuildTimingSummary
+          -allowProvisioningUpdates
+          -resultBundlePath PactTestResults.xcresult
+
       - name: Shutdown and erase simulator test device
         if: always()
         run: |
@@ -110,12 +125,44 @@ jobs:
           xcrun simctl erase ${{ steps.devicesetup.outputs.deviceid }}
           xcrun simctl delete ${{ steps.devicesetup.outputs.deviceid }}
 
+      - name: Upload Pacts
+        uses: actions/upload-artifact@e7eefc4 # v2
+        with:
+          name: pacts-${{ github.sha }}
+          path: Pacts
+
+      - name: Upload Pact Test Results
+        if: always()
+        uses: actions/upload-artifact@e7eefc4 # v2
+        with:
+          name: PactTestResults.xcresult
+          path: PactTestResults.xcresult
+
       - name: Upload Test Results
         if: always()
         uses: actions/upload-artifact@e7eefc4 # v2
         with:
           name: TestResults.xcresult
           path: TestResults.xcresult
+
+  upload-pacts-to-broker:
+    needs: test
+    runs-on:
+      - macos
+      - self-hosted
+    steps:
+      - name: Download Pacts
+        uses: actions/download-artifact@v2
+        with:
+          name: pacts-${{ github.sha }}
+          path: Pacts
+      - name: Upload Pacts to Pact Broker
+        continue-on-error: true
+        run: >
+          pact-broker publish Pacts --consumer-app-version=$(echo ${{ github.sha }} | cut -c-7)
+        env:
+          PACT_BROKER_BASE_URL: https://sonar-pact-broker-app.apps.nonprod.aws.cp.data.england.nhs.uk
+
 
   merge-to-internal:
     needs: test

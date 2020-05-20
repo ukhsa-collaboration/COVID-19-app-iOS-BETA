@@ -46,6 +46,38 @@ cp Sonar/Environments/Sonar.xcconfig.sample .secret/Sonar.xcconfig
 - **If Xcode is open, restart Xcode.** Xcode does not handle configuration
   files being changed out from under it gracefully.
 
+### Setup for Pact Testing
+Run `bin/setup-pact` to install all necessary libraries, and install Sonar CA and trust it on all 
+running Simulator devices.
+
+You can then proceed as indicated in the README of the [Swift Pact Consumer library](https://github.com/DiUS/pact-consumer-swift)
+to create pact tests. A mock service will be spun up for you before tests on `https://localhost:1234`
+using a build step before action, and torn down afterwards.
+
+If you get an SSL or ATS error when running the tests, re-run `bin/setup-pact` to ensure that all 
+devices have the Sonar CA setup correctly.
+
+#### Pact Setup Context
+Contract testing requires a mock server to be running that we can verify contracts against.
+This is done by `pact-mock-service` which is installed as a Ruby library (gem). Once the 
+contract is defined, it is then uploaded to the pact broker, which is done via `pact-broker`,
+also installed as a Ruby gem.
+
+In order to satisfy App Transport Security (ATS) requirements, the setup involves a certificate 
+for localhost that is issued by a Certificate Authority (CA) created for this project, Sonar CA.
+This is necessary since self-signed certificates are not accepted by ATS.
+
+The certificate has a TTL of 2 years. When it expires, you will need to create a new Sonar CA,
+export the keys and generate a new certificate since we won't be including the CA private key here.
+This is to avoid any devices being used for testing accidentally becoming vulnerable to MitM.
+
+The setup then installs the certificates in the simulator's SQLite trust store database using 
+the [ADVTrustStore](https://github.com/ADVTOOLS/ADVTrustStore) library. It has been vendored and 
+modified in order to not require user input so we're able to run it in CI.
+
+We're then using the UI testing framework, specifically TrustSonarCARootCertTest to trust the 
+Sonar CA root certificate on all booted simulator devices.
+
 ### Notifications
 
 The app currently relies on **remote** (as opposed to **push**) notifications,
