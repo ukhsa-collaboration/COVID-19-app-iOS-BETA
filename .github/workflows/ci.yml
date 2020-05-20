@@ -52,8 +52,8 @@ jobs:
     strategy:
       matrix:
         run-config:
-          - { os: "13.4", name: "iPhone 11" }
-          - { os: "12.4", name: "iPhone SE" }
+          - { os: "13-4", name: "iPhone 11" }
+          - { os: "12-4", name: "iPhone SE" }
     steps:
       - name: Checkout Project
         uses: actions/checkout@01aeccc # v2.1.0
