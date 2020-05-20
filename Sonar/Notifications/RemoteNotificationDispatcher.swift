@@ -86,6 +86,7 @@ class RemoteNotificationDispatcher: RemoteNotificationDispatching {
     }
     
     func receiveRegistrationToken(fcmToken: String) {
+        UserDefaults.standard.set(fcmToken, forKey: "fcmToken")
         pushToken = fcmToken
         notificationCenter.post(name: PushTokenReceivedNotification, object: fcmToken, userInfo: nil)
     }

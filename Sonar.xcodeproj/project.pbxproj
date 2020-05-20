@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		08D77F2624753AA200EAEBD5 /* RemoteNotificationDispatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D77F2524753AA200EAEBD5 /* RemoteNotificationDispatcherTests.swift */; };
 		090B186F24354D0100870B5D /* RemoteNotificationDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090B186E24354D0100870B5D /* RemoteNotificationDispatcher.swift */; };
 		090B1871243552C300870B5D /* UserNotificationCenterDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090B1870243552C300870B5D /* UserNotificationCenterDouble.swift */; };
 		090DEE10244F8BF600268170 /* BluetoothPermissionDeniedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090DEE0F244F8BF600268170 /* BluetoothPermissionDeniedViewController.swift */; };
@@ -296,6 +297,7 @@
 		068B8ABA245C11C0000EAB4C /* unit-tests.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "unit-tests.yml"; sourceTree = "<group>"; };
 		068B8ABB245C11C0000EAB4C /* clean-artifacts.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "clean-artifacts.yml"; sourceTree = "<group>"; };
 		068B8ABC245C11C0000EAB4C /* trigger-internal-upload.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "trigger-internal-upload.yml"; sourceTree = "<group>"; };
+		08D77F2524753AA200EAEBD5 /* RemoteNotificationDispatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteNotificationDispatcherTests.swift; sourceTree = "<group>"; };
 		090B186E24354D0100870B5D /* RemoteNotificationDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteNotificationDispatcher.swift; sourceTree = "<group>"; };
 		090B1870243552C300870B5D /* UserNotificationCenterDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationCenterDouble.swift; sourceTree = "<group>"; };
 		090DEE0F244F8BF600268170 /* BluetoothPermissionDeniedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothPermissionDeniedViewController.swift; sourceTree = "<group>"; };
@@ -1223,6 +1225,7 @@
 			children = (
 				F6CC2CAB242BCD0D0079432B /* RemoteNotificationManagerTests.swift */,
 				F694B1BD2459EB3800C6A5D1 /* NotificationAcknowledgerTests.swift */,
+				08D77F2524753AA200EAEBD5 /* RemoteNotificationDispatcherTests.swift */,
 			);
 			path = "Remote Notifications";
 			sourceTree = "<group>";
@@ -1571,6 +1574,7 @@
 				214209D924262B7500C7BFF3 /* SessionHelpers.swift in Sources */,
 				0983ACD3243EB22200DBB336 /* StatusViewControllerTests.swift in Sources */,
 				219C7B7C245B093000952B4D /* BluetoothPayloadTests.swift in Sources */,
+				08D77F2624753AA200EAEBD5 /* RemoteNotificationDispatcherTests.swift in Sources */,
 				896BE912244F11D100B3687C /* PublicKeyValidatorTests.swift in Sources */,
 				F62F858124510716006580A8 /* ContactEventsUploaderTests.swift in Sources */,
 				89CCF65F2456EF7000AC9D91 /* TrustValidatingDouble.swift in Sources */,
