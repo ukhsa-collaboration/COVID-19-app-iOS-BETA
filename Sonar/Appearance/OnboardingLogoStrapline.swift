@@ -54,11 +54,6 @@ class OnboardingLogoStrapline: UIView {
             view.trailingAnchor.constraint(equalTo: trailingAnchor),
             view.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
-
-        let element = UIAccessibilityElement(accessibilityContainer: self)
-        element.accessibilityLabel = "NHS COVID-19"
-        element.accessibilityFrameInContainerSpace = frame
-        accessibilityElements = [element]
     }
 
     func loadViewFromNib() -> UIView? {
