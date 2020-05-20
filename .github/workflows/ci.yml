@@ -78,6 +78,9 @@ jobs:
           xcrun simctl erase all
           xcrun simctl delete all
 
+      - name: Boot simulator test device
+        run: xcrun simctl bootstatus ${{ steps.devicesetup.outputs.deviceid }} -b
+
       - name: Setup simulator test device
         id: devicesetup
         run: |
