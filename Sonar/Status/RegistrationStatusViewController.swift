@@ -17,7 +17,6 @@ class RegistrationStatusViewController: UIViewController, Storyboarded {
     @IBOutlet weak var registrationStatusText: UILabel!
     @IBOutlet weak var registrationStatusIcon: UIImageView!
     @IBOutlet weak var registrationSpinner: SpinnerView!
-//    @IBOutlet weak var registrationStatusView: UIView!
 
     private var persistence: Persisting!
     private var registrationService: RegistrationService!
