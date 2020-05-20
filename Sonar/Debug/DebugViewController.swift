@@ -130,25 +130,6 @@ class DebugViewController: UITableViewController, Storyboarded {
                 self.statusStateMachine.exposed()
             }
 
-        case (3, 1):
-            do {
-                guard let registration = persisting.registration else {
-                    throw NSError()
-                }
-                let delay = 15
-                let request = TestPushRequest(key: registration.secretKey, sonarId: registration.sonarId, delay: delay)
-                URLSession.shared.execute(request, queue: .main) { result in
-                    switch result {
-                    case .success:
-                        self.show(title: "Push scheduled", message: "Scheduled push with \(delay) second delay")
-                    case .failure(let error):
-                        self.show(title: "Failed", message: "Failed scheduling push: \(error)")
-                    }
-                }
-            } catch {
-                show(title: "Failed", message: "Couldn't get sonarId, has this device completed registration?")
-            }
-
         case (4, 0):
             #if DEBUG
             guard let debugInfo = Environment.debug else {
@@ -282,28 +263,6 @@ class DebugViewController: UITableViewController, Storyboarded {
         path.usesEvenOddFillRule = true
 
         return path.cgPath
-    }
-}
-
-// MARK: - Testing push notifications
-
-class TestPushRequest: SecureRequest, Request {
-    
-    typealias ResponseType = Void
-                    
-    let method: HTTPMethod
-    
-    let urlable: Urlable
-    
-    init(key: HMACKey, sonarId: UUID, delay: Int = 0) {
-        let data = Data()
-        method = .post(data: data)
-        urlable = .path("/api/debug/notification/residents/\(sonarId.uuidString)?delay=\(delay)")
-        
-        super.init(key, data, [:])
-    }
-    
-    func parse(_ data: Data) throws -> Void {
     }
 }
 
