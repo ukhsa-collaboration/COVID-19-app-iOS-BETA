@@ -11,16 +11,9 @@ import UIKit
 class ApplyForTestContainerViewController: ReferenceCodeContainerViewControllerBase, Storyboarded {
     static let storyboardName = "ApplyForTest"
     
-    private var urlOpener: TestableUrlOpener!
-
-    func inject(linkingIdManager: LinkingIdManaging, uiQueue: TestableQueue, urlOpener: TestableUrlOpener) {
-        inject(linkingIdManager: linkingIdManager, uiQueue: uiQueue)
-        self.urlOpener = urlOpener
-    }
-
     override func instantiatePostLoadViewController(referenceCode: String?) -> UIViewController {
         let applyVc = ApplyForTestViewController.instantiate()
-        applyVc.inject(urlOpener: self.urlOpener, referenceCode: referenceCode)
+        applyVc.inject(referenceCode: referenceCode)
         return applyVc
     }
 }

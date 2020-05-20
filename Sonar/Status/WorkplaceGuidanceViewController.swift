@@ -10,8 +10,12 @@ import UIKit
 
 class WorkplaceGuidanceViewController: UIViewController {
 
-    @IBAction func linkTapped(_ sender: UIButton) {
-        UIApplication.shared.open(ContentURLs.shared.workplaceGuidance)
+    @IBOutlet weak var linkButton: LinkButton!
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        linkButton.url = ContentURLs.shared.workplaceGuidance
     }
 
 }

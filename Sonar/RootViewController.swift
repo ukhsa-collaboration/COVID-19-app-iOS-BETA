@@ -65,8 +65,7 @@ class RootViewController: UIViewController {
             persistence: persistence,
             linkingIdManager: linkingIdManager,
             registrationService: registrationService,
-            notificationCenter: notificationCenter,
-            urlOpener: urlOpener
+            notificationCenter: notificationCenter
         )
         
         setupChecker = SetupChecker(authorizationManager: authorizationManager, bluetoothNursery: bluetoothNursery)

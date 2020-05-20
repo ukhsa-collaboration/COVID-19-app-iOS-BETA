@@ -136,8 +136,7 @@ fileprivate func makeViewController(
         persistence: persistence,
         linkingIdManager: LinkingIdManagerDouble(),
         registrationService: registrationService,
-        notificationCenter: notificationCenter,
-        urlOpener: UIApplication.shared
+        notificationCenter: notificationCenter
     )
     if loadView {
         XCTAssertNotNil(vc.view)

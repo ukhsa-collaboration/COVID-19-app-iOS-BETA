@@ -15,18 +15,13 @@ class AdviceViewController: UIViewController, Storyboarded {
     @IBOutlet weak var detail: UILabel!
     @IBOutlet weak var link: LinkButton!
     
-    var linkDestination: URL!
     func inject(linkDestination: URL) {
-        self.linkDestination = linkDestination
-    }
-    
-    @IBAction func linkTap(_ sender: Any) {
-        UIApplication.shared.open(linkDestination)
+        link.url = linkDestination
     }
     
     override func viewDidLoad() {
-        link.inject(title: "Read specific advice on GOV.UK", style: .headline)
-        
+        link.textStyle = .headline
+
         detail.text = "The advice below is up to date and specific to your situation. Please follow this advice."
     }
 }

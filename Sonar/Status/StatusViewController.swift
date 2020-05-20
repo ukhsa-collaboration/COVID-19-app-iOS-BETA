@@ -34,6 +34,7 @@ class StatusViewController: UIViewController, Storyboarded {
     @IBOutlet weak var stepsDetailLabel: UILabel!
 
     @IBOutlet weak var nhsServicesStackView: UIStackView!
+    @IBOutlet weak var nhsCoronavirusLinkButton: LinkButton!
 
     var hasNotificationProblem = false {
         didSet {
@@ -54,8 +55,8 @@ class StatusViewController: UIViewController, Storyboarded {
     private var notificationCenter: NotificationCenter!
     private var urlOpener: TestableUrlOpener!
     
-    func inject(statusStateMachine: StatusStateMachining, userStatusProvider: UserStatusProvider, persistence: Persisting, linkingIdManager: LinkingIdManaging, registrationService: RegistrationService, dateProvider: @escaping () -> Date = { Date() }, notificationCenter: NotificationCenter, urlOpener: TestableUrlOpener
-) {
+    func inject(statusStateMachine: StatusStateMachining, userStatusProvider: UserStatusProvider, persistence: Persisting, linkingIdManager: LinkingIdManaging, registrationService: RegistrationService, dateProvider: @escaping () -> Date = { Date() }, notificationCenter: NotificationCenter
+    ) {
         self.linkingIdManager = linkingIdManager
         self.statusStateMachine = statusStateMachine
         self.userStatusProvider = userStatusProvider
@@ -63,7 +64,6 @@ class StatusViewController: UIViewController, Storyboarded {
         self.registrationService = registrationService
         self.dateProvider = dateProvider
         self.notificationCenter = notificationCenter
-        self.urlOpener = urlOpener
     }
 
     override func viewDidLoad() {
@@ -99,6 +99,8 @@ class StatusViewController: UIViewController, Storyboarded {
         contentStackView.setCustomSpacing(32, after: nextStepsDetailView)
         nhsServicesStackView.isLayoutMarginsRelativeArrangement = true
 
+        nhsCoronavirusLinkButton.url = ContentURLs.shared.regionalServices
+
         notificationCenter.addObserver(self, selector: #selector(reload), name: UIApplication.didBecomeActiveNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(reload), name: StatusStateMachine.StatusStateChangedNotification, object: nil)
     }
@@ -108,7 +110,7 @@ class StatusViewController: UIViewController, Storyboarded {
         case let vc as RegistrationStatusViewController:
             vc.inject(persistence: persistence, registrationService: registrationService, notificationCenter: notificationCenter)
         case let vc as ApplyForTestContainerViewController:
-            vc.inject(linkingIdManager: linkingIdManager, uiQueue: DispatchQueue.main, urlOpener: urlOpener)
+            vc.inject(linkingIdManager: linkingIdManager, uiQueue: DispatchQueue.main)
         default:
             break
         }
@@ -210,10 +212,6 @@ class StatusViewController: UIViewController, Storyboarded {
         alertController.addAction(alertAction)
         
         present(alertController, animated: true, completion: nil)
-    }
-
-    @IBAction func nhsCoronavirusTapped(_ sender: UIButton) {
-        UIApplication.shared.open(ContentURLs.shared.regionalServices)
     }
 
     @objc func reload() {
