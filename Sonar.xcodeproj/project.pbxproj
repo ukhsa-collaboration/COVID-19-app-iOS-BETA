@@ -218,7 +218,6 @@
 		F694B1BC2459E9F000C6A5D1 /* NotificationAcknowledger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F694B1BB2459E9F000C6A5D1 /* NotificationAcknowledger.swift */; };
 		F694B1BE2459EB3800C6A5D1 /* NotificationAcknowledgerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F694B1BD2459EB3800C6A5D1 /* NotificationAcknowledgerTests.swift */; };
 		F694B1C02459EEB800C6A5D1 /* NotificationAcknowledgerDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = F694B1BF2459EEB800C6A5D1 /* NotificationAcknowledgerDouble.swift */; };
-		F694B1C2245A4A5600C6A5D1 /* ErrorLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F694B1C1245A4A5600C6A5D1 /* ErrorLabel.swift */; };
 		F697806A246DA9EF002CC50B /* SetStatusStateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6978069246DA9EF002CC50B /* SetStatusStateViewController.swift */; };
 		F6AB2F20243D359F00386D6B /* SubmitSymptomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */; };
 		F6BBE13C246F46B4005757BB /* ApplyForTest.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6BBE13B246F46B4005757BB /* ApplyForTest.storyboard */; };
@@ -533,7 +532,6 @@
 		F694B1BB2459E9F000C6A5D1 /* NotificationAcknowledger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAcknowledger.swift; sourceTree = "<group>"; };
 		F694B1BD2459EB3800C6A5D1 /* NotificationAcknowledgerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAcknowledgerTests.swift; sourceTree = "<group>"; };
 		F694B1BF2459EEB800C6A5D1 /* NotificationAcknowledgerDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAcknowledgerDouble.swift; sourceTree = "<group>"; };
-		F694B1C1245A4A5600C6A5D1 /* ErrorLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorLabel.swift; sourceTree = "<group>"; };
 		F6978069246DA9EF002CC50B /* SetStatusStateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetStatusStateViewController.swift; sourceTree = "<group>"; };
 		F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitSymptomsViewController.swift; sourceTree = "<group>"; };
 		F6BBE13B246F46B4005757BB /* ApplyForTest.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ApplyForTest.storyboard; sourceTree = "<group>"; };
@@ -800,7 +798,6 @@
 				09B3AC822460D3CF001AF47E /* AutoscalingWidthView.swift */,
 				0986EFB4244518FE008D0E1D /* ButtonWithDynamicType.swift */,
 				F652F72F244E4AAD00D97950 /* DrawerPresentation.swift */,
-				F694B1C1245A4A5600C6A5D1 /* ErrorLabel.swift */,
 				13F996722460445400FD6740 /* LinkButton.swift */,
 				F70CB8182450CAB700ED6E7F /* OnboardingLogoStrapline.swift */,
 				21D93C2F2420C26900C1FA9B /* PrimaryButton.swift */,
@@ -1748,7 +1745,6 @@
 				F6334E4B24747DC300421B4C /* RegistrationStatusViewController.swift in Sources */,
 				131AB05C2449D85B002136CA /* ContactEventExpiryHandler.swift in Sources */,
 				09A9254324536FD300C5DBC1 /* RegistrationReminderScheduler.swift in Sources */,
-				F694B1C2245A4A5600C6A5D1 /* ErrorLabel.swift in Sources */,
 				F604976F24549729002B8503 /* LinkingIdRequest.swift in Sources */,
 				F7E74F8E244DFBDA00273C59 /* BroadcastRotationKeyConverter.swift in Sources */,
 				21E5051524448D880065C69B /* PlistPersister.swift in Sources */,

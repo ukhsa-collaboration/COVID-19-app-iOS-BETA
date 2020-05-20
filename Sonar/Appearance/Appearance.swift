@@ -20,16 +20,6 @@ extension Appearance {
         UILabel.appearance().adjustsFontForContentSizeCategory = true
         UILabel.appearance().numberOfLines = 0
 
-        ErrorLabel.appearance().textColor = UIColor(named: "NHS Error")
-        ErrorLabel.appearance().font = UIFont.preferredFont(forTextStyle: .callout)
-        ErrorLabel.appearance().adjustsFontForContentSizeCategory = true
-        ErrorLabel.appearance().numberOfLines = 0
-
-        AccessibleErrorLabel.appearance().textColor = UIColor(named: "NHS Error")
-        AccessibleErrorLabel.appearance().font = UIFont.preferredFont(forTextStyle: .callout)
-        AccessibleErrorLabel.appearance().adjustsFontForContentSizeCategory = true
-        AccessibleErrorLabel.appearance().numberOfLines = 0
-
         UILabel.appearance(whenContainedInInstancesOf: [LinkButton.self]).textColor = UIColor(named: "NHS Link")
     }
 }

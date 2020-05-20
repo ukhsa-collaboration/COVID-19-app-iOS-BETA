@@ -9,6 +9,13 @@
 import UIKit
 
 class AccessibleErrorLabel : UILabel {
+    override func awakeFromNib() {
+        textColor = UIColor(named: "NHS Error")
+        font = UIFont.preferredFont(forTextStyle: .callout)
+        adjustsFontSizeToFitWidth = true
+        numberOfLines = 0
+    }
+    
     override var isHidden: Bool {
         didSet {
             guard isHidden == false else { return }
