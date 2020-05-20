@@ -103,7 +103,7 @@ jobs:
           -resultBundlePath TestResults.xcresult
 
       - name: Shutdown and erase simulator test device
-        if: ${{ always() }}
+        if: always()
         run: |
           xcrun simctl shutdown ${{ steps.devicesetup.outputs.deviceid }}
           xcrun simctl erase ${{ steps.devicesetup.outputs.deviceid }}
