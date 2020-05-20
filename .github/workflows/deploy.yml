@@ -43,7 +43,7 @@ jobs:
           build_number=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" "Sonar/Info.plist")
           tag="v${version_number}-${build_number}"
           git tag ${tag}
-          git push ${tag}
+          git push --tags
 
       - name: Upload IPA
         if: always() # If the fastlane release fails, we can upload it manually
