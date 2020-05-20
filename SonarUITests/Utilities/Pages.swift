@@ -93,24 +93,24 @@ class SymptomsCoughPage : Page {
 
     func tapNoCoughOption() -> Self { return tapButton("No, I do not have a new continuous cough") }
 
-    func tapContinue() -> SymptomsSmellPage {
+    func tapContinue() -> SymptomsAnosmiaPage {
         app.buttons["Continue"].tap()
-        return SymptomsSmellPage(app)
+        return SymptomsAnosmiaPage(app)
     }
 }
 
-class SymptomsSmellPage : Page {
-    func tapSmellLossOption() -> Self { return tapButton("Yes, I have lost my sense of smell") }
+class SymptomsAnosmiaPage : Page {
+    func tapAnosmiaOption() -> Self { return tapButton("Yes, I have lost my sense of smell") }
 
-    func tapNoSmellLossOption() -> Self { return tapButton("No, I have not lost my sense of smell") }
+    func tapNoAnosmiaOption() -> Self { return tapButton("No, I have not lost my sense of smell") }
 
-    func tapContinue() -> SymptomsFeverPage {
+    func tapContinue() -> SymptomsSneezePage {
         app.buttons["Continue"].tap()
-        return SymptomsFeverPage(app)
+        return SymptomsSneezePage(app)
     }
 }
 
-class SymptomsFeverPage : Page {
+class SymptomsSneezePage : Page {
     func tapHaveSymptomsOption() -> Self { return tapButton("Yes, I have at least one of these symptoms") }
 
     func tapNoSymptomsOption() -> Self { return tapButton("No, I do not have any of these symptoms") }

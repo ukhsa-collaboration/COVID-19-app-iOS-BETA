@@ -59,20 +59,20 @@ class SelfDiagnosisCoordinator: Coordinator {
     func openCoughView() {
         openQuestionVC(localizedTextPrefix: "COUGH", pageNumber: 2) { hasNewCough in
             self.updateSymptoms(with: .cough, if: hasNewCough)
-            self.openSmellView()
+            self.openAnosmiaView()
         }
     }
     
-    func openSmellView() {
-        openQuestionVC(localizedTextPrefix: "SMELL", pageNumber: 3) { hasSmellLoss in
-            self.updateSymptoms(with: .smellLoss, if: hasSmellLoss)
-            self.openFeverView()
+    func openAnosmiaView() {
+        openQuestionVC(localizedTextPrefix: "ANOSMIA", pageNumber: 3) { hasAnosmia in
+            self.updateSymptoms(with: .anosmia, if: hasAnosmia)
+            self.openSneezeView()
         }
     }
     
-    func openFeverView() {
-        openQuestionVC(localizedTextPrefix: "FEVER", pageNumber: 4) { hasFever in
-            self.updateSymptoms(with: .fever, if: hasFever)
+    func openSneezeView() {
+        openQuestionVC(localizedTextPrefix: "SNEEZE", pageNumber: 4) { hasSneeze in
+            self.updateSymptoms(with: .sneeze, if: hasSneeze)
             self.openNauseaView()
         }
     }

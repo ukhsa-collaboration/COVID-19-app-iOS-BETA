@@ -92,8 +92,8 @@ class SymptomsSummaryViewController: UIViewController, Storyboarded {
         let symptomTexts = [
             "SYMPTOMS_SUMMARY_\(symptoms.contains(.temperature) ? "HAVE" : "NO")_TEMPERATURE".localized,
             "SYMPTOMS_SUMMARY_\(symptoms.contains(.cough) ? "HAVE" : "NO")_COUGH".localized,
-            "SYMPTOMS_SUMMARY_\(symptoms.contains(.smellLoss) ? "HAVE" : "NO")_SMELL_LOSS".localized,
-            "SYMPTOMS_SUMMARY_\(symptoms.contains(.fever) ? "HAVE" : "NO")_FEVER".localized,
+            "SYMPTOMS_SUMMARY_\(symptoms.contains(.anosmia) ? "HAVE" : "NO")_ANOSMIA".localized,
+            "SYMPTOMS_SUMMARY_\(symptoms.contains(.sneeze) ? "HAVE" : "NO")_SNEEZE".localized,
             "SYMPTOMS_SUMMARY_\(symptoms.contains(.nausea) ? "HAVE" : "NO")_NAUSEA".localized,
         ]
         

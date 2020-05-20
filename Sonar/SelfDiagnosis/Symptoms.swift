@@ -9,15 +9,15 @@
 import Foundation
 
 enum Symptom: String, Codable {
-    case temperature, cough, smellLoss, fever, nausea
+    case temperature, cough, anosmia, sneeze, nausea
 }
 
 struct Symptoms: Equatable {
     private var symptoms: Set<Symptom>
 
     var hasCoronavirusSymptoms: Bool {
-        let gateOne = !symptoms.intersection([.temperature, .cough, .smellLoss]).isEmpty
-        let gateTwo = symptoms.contains(.fever) && symptoms.contains(.nausea)
+        let gateOne = !symptoms.intersection([.temperature, .cough, .anosmia]).isEmpty
+        let gateTwo = symptoms.contains(.sneeze) && symptoms.contains(.nausea)
         return gateOne || gateTwo
     }
 

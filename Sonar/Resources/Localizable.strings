@@ -32,22 +32,22 @@ Continuous: means coughing a lot for more than an hour, or 3 or more coughing ep
 "COUGH_YES" = "Yes, I have a new continuous cough";
 "COUGH_NO" = "No, I do not have a new continuous cough";
 
-"SMELL_QUESTION" = "Have you recently lost your sense of smell?";
-"SMELL_DETAIL" = "This means you’ve noticed you can’t smell anything within the last few days.";
-"SMELL_YES" = "Yes, I have lost my sense of smell";
-"SMELL_NO" = "No, I have not lost my sense of smell";
-"SMELL_ERROR" = "Select yes if you recently lost your sense of smell";
+"ANOSMIA_QUESTION" = "Have you recently lost your sense of smell?";
+"ANOSMIA_DETAIL" = "This means you’ve noticed you can’t smell anything within the last few days.";
+"ANOSMIA_YES" = "Yes, I have lost my sense of smell";
+"ANOSMIA_NO" = "No, I have not lost my sense of smell";
+"ANOSMIA_ERROR" = "Select yes if you recently lost your sense of smell";
 
-"FEVER_QUESTION" = "Do you have a runny nose, feel feverish or suffer from sneezing?";
-"FEVER_DETAIL" = "
+"SNEEZE_QUESTION" = "Do you have a runny nose, feel feverish or suffer from sneezing?";
+"SNEEZE_DETAIL" = "
 Runny nose: more nasal drainage than usual.
 
 Feeling feverish: means you can feel very hot but the thermometer does not show this rise in temperature.
 
 Sneezing: means you are sneezing more than usual, not caused by a known allergy.";
-"FEVER_YES" = "Yes, I have at least one of these symptoms";
-"FEVER_NO" = "No, I do not have any of these symptoms";
-"FEVER_ERROR" = "Select yes if you have a runny nose, feel feverish or suffer from sneezing";
+"SNEEZE_YES" = "Yes, I have at least one of these symptoms";
+"SNEEZE_NO" = "No, I do not have any of these symptoms";
+"SNEEZE_ERROR" = "Select yes if you have a runny nose, feel feverish or suffer from sneezing";
 
 "NAUSEA_QUESTION" = "Do you have diarrhoea, nausea, vomiting or a loss of appetite?";
 "NAUSEA_DETAIL" = "
@@ -66,10 +66,10 @@ Loss of appetite: means not feeling hungry.
 "SYMPTOMS_SUMMARY_NO_TEMPERATURE" = "I do not have a high temperature";
 "SYMPTOMS_SUMMARY_HAVE_COUGH" = "I have a new continuous cough";
 "SYMPTOMS_SUMMARY_NO_COUGH" = "I do not have a new continuous cough";
-"SYMPTOMS_SUMMARY_NO_SMELL_LOSS" = "I have not recently lost my sense of smell";
-"SYMPTOMS_SUMMARY_HAVE_SMELL_LOSS" = "I have recently lost my sense of smell";
-"SYMPTOMS_SUMMARY_NO_FEVER" = "I do not have at least one of these symptoms: a runny nose, feeling feverish or sneezing";
-"SYMPTOMS_SUMMARY_HAVE_FEVER" = "I have at least one of these symptoms: a runny nose, feeling feverish or sneezing";
+"SYMPTOMS_SUMMARY_NO_ANOSMIA" = "I have not recently lost my sense of smell";
+"SYMPTOMS_SUMMARY_HAVE_ANOSMIA" = "I have recently lost my sense of smell";
+"SYMPTOMS_SUMMARY_NO_SNEEZE" = "I do not have at least one of these symptoms: a runny nose, feeling feverish or sneezing";
+"SYMPTOMS_SUMMARY_HAVE_SNEEZE" = "I have at least one of these symptoms: a runny nose, feeling feverish or sneezing";
 "SYMPTOMS_SUMMARY_NO_NAUSEA" = "I do not have at least one of these symptoms: diarrhoea, nausea, vomiting or loss of appetite";
 "SYMPTOMS_SUMMARY_HAVE_NAUSEA" = "I have at least one of these symptoms: diarrhoea, nausea, vomiting or loss of appetite";
 
