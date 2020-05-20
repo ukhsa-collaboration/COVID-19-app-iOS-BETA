@@ -19,6 +19,7 @@ class PersistenceDouble: Persisting {
     var uploadLog: [UploadLog]
     var lastInstalledVersion: String?
     var lastInstalledBuildNumber: String?
+    var registeredPushToken: String?
     var disabledNotificationsStatusView: Bool
     var acknowledgmentUrls: Set<URL>
     var statusState: StatusState
@@ -32,6 +33,7 @@ class PersistenceDouble: Persisting {
         linkingId: LinkingId? = nil,
         lastInstalledVersion: String? = nil,
         lastInstalledBuildNumber: String? = nil,
+        registeredPushToken: String? = nil,
         disabledNotificationsStatusView: Bool = false,
         acknowledgmentUrls: Set<URL> = [],
         statusState: StatusState = .ok(StatusState.Ok())
@@ -44,6 +46,7 @@ class PersistenceDouble: Persisting {
         self.uploadLog = uploadLog
         self.lastInstalledVersion = lastInstalledVersion
         self.lastInstalledBuildNumber = lastInstalledBuildNumber
+        self.registeredPushToken = registeredPushToken
         self.disabledNotificationsStatusView = disabledNotificationsStatusView
         self.acknowledgmentUrls = acknowledgmentUrls
         self.statusState = statusState
@@ -57,6 +60,7 @@ class PersistenceDouble: Persisting {
         uploadLog = []
         lastInstalledVersion = nil
         lastInstalledBuildNumber = nil
+        registeredPushToken = nil
         acknowledgmentUrls = []
         statusState = .ok(StatusState.Ok())
     }

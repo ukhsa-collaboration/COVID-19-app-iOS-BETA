@@ -130,6 +130,20 @@ class PersistenceTests: TestCase {
         XCTAssertEqual(p2.lastInstalledVersion, "1.2.3")
     }
     
+    func testStoringRegisteredPushToken() {
+        let token = UUID().uuidString
+        
+        persistence.registeredPushToken = token
+        XCTAssertEqual(UserDefaults.standard.string(forKey: "registeredPushToken"), token)
+    }
+    
+    func testReadingRegisteredPushToken() {
+        let token = UUID().uuidString
+        
+        UserDefaults.standard.set(token, forKey: "registeredPushToken")
+        XCTAssertEqual(persistence.registeredPushToken, token)
+    }
+    
     func testLastInstalledBuildNumberIsPersisted() {
         let p1 = Persistence(
             secureRegistrationStorage: secureRegistrationStorage,
