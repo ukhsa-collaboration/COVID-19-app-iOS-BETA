@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Apply For Test Container View Controller-->
+        <!--Apply for a coronavirus test-->
         <scene sceneID="eY6-U2-wkW">
             <objects>
                 <viewController storyboardIdentifier="ApplyForTestContainerViewController" id="mYd-uC-KRq" customClass="ApplyForTestContainerViewController" customModule="Sonar" customModuleProvider="target" sceneMemberID="viewController">
@@ -19,10 +19,11 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="im1-77-Dq7"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Apply for a coronavirus test" id="JXc-E8-Ajb"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zve-34-uT1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3500" y="72"/>
+            <point key="canvasLocation" x="4259" y="516"/>
         </scene>
         <!--Apply for a coronavirus test-->
         <scene sceneID="htj-3w-VDf">
@@ -100,7 +101,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </button>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="External_Link" translatesAutoresizingMaskIntoConstraints="NO" id="7Wy-sa-3D6">
-                                                        <rect key="frame" x="220" y="9.5" width="19" height="14"/>
+                                                        <rect key="frame" x="220" y="9.5" width="18.5" height="13.5"/>
                                                     </imageView>
                                                 </subviews>
                                                 <accessibility key="accessibilityConfiguration" label="Apply for a coronavirus test">
@@ -152,6 +153,7 @@
                         <viewLayoutGuide key="safeArea" id="HBC-hk-frn"/>
                     </view>
                 </viewController>
+                <navigationItem title="Apply for a coronavirus test" id="xTo-tT-i24"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AjV-a4-yTk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5102.898550724638" y="515.625"/>
