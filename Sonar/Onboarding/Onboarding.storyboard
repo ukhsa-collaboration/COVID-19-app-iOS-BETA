@@ -45,7 +45,7 @@
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="0Kn-59-wim">
-                                                <rect key="frame" x="20" y="84" width="374" height="464.66666666666669"/>
+                                                <rect key="frame" x="20" y="84.000000000000028" width="374" height="464.66666666666669"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Onboarding_protect" translatesAutoresizingMaskIntoConstraints="NO" id="uKt-CY-SHo">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="184.66666666666666"/>
@@ -137,10 +137,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TUo-oc-PGD">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TUo-oc-PGD">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="31h-8a-dJ8">
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="31h-8a-dJ8">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="624"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P9b-DU-jl5" customClass="OnboardingLogoStrapline" customModule="Sonar" customModuleProvider="target">
@@ -158,8 +158,8 @@
                                                     <action selector="didTapClose:" destination="asv-dx-knf" eventType="touchUpInside" id="nW6-3W-rtl"/>
                                                 </connections>
                                             </button>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="7HO-8c-Q84">
-                                                <rect key="frame" x="20" y="53" width="374" height="551"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="7HO-8c-Q84">
+                                                <rect key="frame" x="20" y="53" width="374" height="880"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How this app works" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hxN-EA-ySp">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="40.666666666666664"/>
@@ -198,25 +198,25 @@
                                                             <constraint firstAttribute="height" constant="16" id="ZU2-ZV-5DS"/>
                                                         </constraints>
                                                     </view>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wkM-GZ-R6l">
-                                                        <rect key="frame" x="0.0" y="415.66666666666669" width="374" height="135.33333333333331"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wkM-GZ-R6l">
+                                                        <rect key="frame" x="0.0" y="415.66666666666674" width="374" height="464.33333333333326"/>
                                                         <subviews>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cCX-FU-QHi">
-                                                                <rect key="frame" x="0.0" y="0.0" width="4" height="135.33333333333334"/>
+                                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cCX-FU-QHi">
+                                                                <rect key="frame" x="0.0" y="0.0" width="4" height="464.33333333333331"/>
                                                                 <color key="backgroundColor" name="NHS Blue"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="4" id="HGU-yb-H7V"/>
                                                                 </constraints>
                                                             </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NqF-3H-W6M" userLabel="Spacer">
-                                                                <rect key="frame" x="4" y="0.0" width="12" height="135.33333333333334"/>
+                                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NqF-3H-W6M" userLabel="Spacer">
+                                                                <rect key="frame" x="4" y="0.0" width="12" height="464.33333333333331"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="12" id="nsb-7d-DmS"/>
                                                                 </constraints>
                                                             </view>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="N2u-wn-ubc">
-                                                                <rect key="frame" x="16" y="0.0" width="358" height="135.33333333333334"/>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="N2u-wn-ubc">
+                                                                <rect key="frame" x="16" y="0.0" width="358" height="464.33333333333331"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="More information" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G93-6Z-Y0N">
                                                                         <rect key="frame" x="0.0" y="0.0" width="358" height="20.333333333333332"/>
@@ -224,37 +224,27 @@
                                                                         <color key="textColor" name="NHS Text"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iNT-DY-wj8" userLabel="Spacer">
-                                                                        <rect key="frame" x="0.0" y="20.333333333333314" width="358" height="16"/>
-                                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="height" constant="16" id="7Ee-el-Ayk"/>
-                                                                        </constraints>
+                                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gQd-o4-fOZ" userLabel="More About" customClass="LinkButton" customModule="Sonar" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="40.333333333333314" width="358" height="128"/>
+                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="string" keyPath="title" value="More about the app"/>
+                                                                        </userDefinedRuntimeAttributes>
                                                                     </view>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7t9-4s-vCV" customClass="LinkButton" customModule="Sonar" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="36.333333333333314" width="358" height="33"/>
-                                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                                        <state key="normal" title="More about the app"/>
-                                                                        <connections>
-                                                                            <action selector="tapMoreAbout:" destination="asv-dx-knf" eventType="touchUpInside" id="Rha-0o-UXG"/>
-                                                                        </connections>
-                                                                    </button>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wZa-Mg-Yq4" customClass="LinkButton" customModule="Sonar" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="69.333333333333314" width="358" height="33"/>
-                                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                                        <state key="normal" title="Privacy notice"/>
-                                                                        <connections>
-                                                                            <action selector="tapPrivacy:" destination="asv-dx-knf" eventType="touchUpInside" id="wM7-Rc-ueX"/>
-                                                                        </connections>
-                                                                    </button>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IS8-GX-Tl4" customClass="LinkButton" customModule="Sonar" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="102.33333333333331" width="358" height="33"/>
-                                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                                        <state key="normal" title="Terms of use"/>
-                                                                        <connections>
-                                                                            <action selector="tapTerms:" destination="asv-dx-knf" eventType="touchUpInside" id="2dY-rX-MU1"/>
-                                                                        </connections>
-                                                                    </button>
+                                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lWb-bV-hQp" userLabel="Privacy Policy" customClass="LinkButton" customModule="Sonar" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="188.33333333333331" width="358" height="128"/>
+                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="string" keyPath="title" value="Privacy notice"/>
+                                                                        </userDefinedRuntimeAttributes>
+                                                                    </view>
+                                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xg0-Zu-Rpr" userLabel="Terms and Conditions" customClass="LinkButton" customModule="Sonar" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="336.33333333333331" width="358" height="128"/>
+                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="string" keyPath="title" value="Terms of use"/>
+                                                                        </userDefinedRuntimeAttributes>
+                                                                    </view>
                                                                 </subviews>
                                                             </stackView>
                                                         </subviews>
@@ -298,9 +288,9 @@
                         <viewLayoutGuide key="safeArea" id="0ia-KQ-0k0"/>
                     </view>
                     <connections>
-                        <outlet property="moreAbout" destination="7t9-4s-vCV" id="DVY-ZO-qEj"/>
-                        <outlet property="privacyPolicy" destination="wZa-Mg-Yq4" id="cad-wS-8r9"/>
-                        <outlet property="termsConditions" destination="IS8-GX-Tl4" id="JfK-Oh-8Iq"/>
+                        <outlet property="moreAbout" destination="gQd-o4-fOZ" id="lEs-xB-0aJ"/>
+                        <outlet property="privacyPolicy" destination="lWb-bV-hQp" id="L2t-o8-a0W"/>
+                        <outlet property="termsConditions" destination="xg0-Zu-Rpr" id="XMw-zd-4kA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LmF-ZM-p1m" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -744,7 +734,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pSJ-Zi-FRG">
-                                                <rect key="frame" x="20" y="226.66666666666671" width="374" height="240.33333333333329"/>
+                                                <rect key="frame" x="20" y="226.66666666666674" width="374" height="240.33333333333326"/>
                                                 <string key="text">This app uses battery-saving Bluetooth Low Energy to determine when it is near another phone with this app installed. For this app to work, Bluetooth needs to be kept on at all times.
 
 This app cannot track your location and your privacy remains protected.

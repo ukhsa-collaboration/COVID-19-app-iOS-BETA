@@ -14,7 +14,7 @@ class ApplyForTestContainerViewControllerTests: XCTestCase {
     func testLoadsLinkingId() throws {
         let linkingIdMgr = LinkingIdManagerDouble()
         let vc = ApplyForTestContainerViewController.instantiate()
-        vc.inject(linkingIdManager: linkingIdMgr, uiQueue: QueueDouble(), urlOpener: UrlOpenerDouble())
+        vc.inject(linkingIdManager: linkingIdMgr, uiQueue: QueueDouble())
         
         XCTAssertNotNil(vc.view)
         vc.viewDidAppear(false)
@@ -26,9 +26,8 @@ class ApplyForTestContainerViewControllerTests: XCTestCase {
 
     func testShowsTestingInfoOnSuccess() throws {
         let linkingIdMgr = LinkingIdManagerDouble()
-        let opener = UrlOpenerDouble()
         let vc = ApplyForTestContainerViewController.instantiate()
-        vc.inject(linkingIdManager: linkingIdMgr, uiQueue: QueueDouble(), urlOpener: opener)
+        vc.inject(linkingIdManager: linkingIdMgr, uiQueue: QueueDouble())
         
         XCTAssertNotNil(vc.view)
         vc.viewDidAppear(false)
@@ -41,17 +40,13 @@ class ApplyForTestContainerViewControllerTests: XCTestCase {
         XCTAssertFalse(refCodeVc.referenceCodeWrapper.isHidden)
         XCTAssertTrue(refCodeVc.errorWrapper.isHidden)
         XCTAssertEqual(refCodeVc.referenceCodeLabel.text, "1234-abcd")
-        
-        applyVc.applyForTestTapped()
-        
-        XCTAssertEqual(opener.urls, [ContentURLs.shared.applyForTest(referenceCode: "1234-abcd")])
+        XCTAssertEqual(applyVc.applyLinkButton.url, ContentURLs.shared.applyForTest(referenceCode: "1234-abcd"))
     }
     
     func testShowsTestingInfoOnFailure() throws {
         let linkingIdMgr = LinkingIdManagerDouble()
-        let opener = UrlOpenerDouble()
         let vc = ApplyForTestContainerViewController.instantiate()
-        vc.inject(linkingIdManager: linkingIdMgr, uiQueue: QueueDouble(), urlOpener: opener)
+        vc.inject(linkingIdManager: linkingIdMgr, uiQueue: QueueDouble())
 
         XCTAssertNotNil(vc.view)
         vc.viewDidAppear(false)
@@ -63,10 +58,7 @@ class ApplyForTestContainerViewControllerTests: XCTestCase {
         let refCodeVc = try XCTUnwrap(applyVc.children.first as? ReferenceCodeViewController)
         XCTAssertTrue(refCodeVc.referenceCodeWrapper.isHidden)
         XCTAssertFalse(refCodeVc.errorWrapper.isHidden)
-        
-        applyVc.applyForTestTapped()
-        
-        XCTAssertEqual(opener.urls, [ContentURLs.shared.applyForTest(referenceCode: nil)])
+        XCTAssertEqual(applyVc.applyLinkButton.url, ContentURLs.shared.applyForTest(referenceCode: nil))
     }
 
 }

@@ -16,29 +16,17 @@ class PrivacyViewController: UIViewController, Storyboarded {
     @IBOutlet weak var moreAbout: LinkButton!
     @IBOutlet weak var privacyPolicy: LinkButton!
     @IBOutlet weak var termsConditions: LinkButton!
-    
-    override func viewDidLoad() {
-        moreAbout.inject(title: "More about the app".localized)
-        privacyPolicy.inject(title: "Privacy notice".localized)
-        termsConditions.inject(title: "Terms of use".localized)
-    }
-    
+
     func inject(continueHandler: @escaping () -> Void) {
         self.continueHandler = continueHandler
     }
-    
-    @IBAction func tapMoreAbout(_ sender: Any) {
-        UIApplication.shared.open(ContentURLs.shared.moreAbout)
+
+    override func viewDidLoad() {
+        moreAbout.url = ContentURLs.shared.moreAbout
+        privacyPolicy.url = ContentURLs.shared.privacyAndData
+        termsConditions.url = ContentURLs.shared.ourPolicies
     }
-    
-    @IBAction func tapPrivacy(_ sender: Any) {
-        UIApplication.shared.open(ContentURLs.shared.privacyAndData)
-    }
-    
-    @IBAction func tapTerms(_ sender: Any) {
-        UIApplication.shared.open(ContentURLs.shared.ourPolicies)
-    }
-    
+
     @IBAction func didTapClose(_ sender: Any) {
         self.presentingViewController?.dismiss(animated: true)
     }

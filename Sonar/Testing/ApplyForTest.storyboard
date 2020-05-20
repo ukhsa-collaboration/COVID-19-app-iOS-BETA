@@ -79,52 +79,17 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <containerView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="382" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="DK8-cn-uDB" userLabel="Linking ID view">
-                                                <rect key="frame" x="16" y="461.5" width="382" height="128"/>
+                                                <rect key="frame" x="16" y="461.5" width="382" height="274.5"/>
                                                 <connections>
                                                     <segue destination="z30-wj-buI" kind="embed" id="CA5-fu-JcA"/>
                                                 </connections>
                                             </containerView>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qGy-2f-yY4" customClass="UIButton">
-                                                <rect key="frame" x="16" y="605.5" width="382" height="33"/>
-                                                <subviews>
-                                                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1FS-hw-I9O" customClass="LinkButton" customModule="Sonar" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="210" height="33"/>
-                                                        <accessibility key="accessibilityConfiguration">
-                                                            <accessibilityTraits key="traits" link="YES"/>
-                                                        </accessibility>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                        <state key="normal" title="Apply for a coronavirus test">
-                                                            <color key="titleColor" name="NHS Link"/>
-                                                        </state>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isExternal" value="YES"/>
-                                                        </userDefinedRuntimeAttributes>
-                                                    </button>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="External_Link" translatesAutoresizingMaskIntoConstraints="NO" id="7Wy-sa-3D6">
-                                                        <rect key="frame" x="220" y="9.5" width="18.5" height="13.5"/>
-                                                    </imageView>
-                                                </subviews>
-                                                <accessibility key="accessibilityConfiguration" label="Apply for a coronavirus test">
-                                                    <accessibilityTraits key="traits" link="YES"/>
-                                                    <bool key="isElement" value="YES"/>
-                                                </accessibility>
-                                                <constraints>
-                                                    <constraint firstItem="7Wy-sa-3D6" firstAttribute="centerY" secondItem="qGy-2f-yY4" secondAttribute="centerY" id="QeL-sf-sts"/>
-                                                    <constraint firstItem="1FS-hw-I9O" firstAttribute="leading" secondItem="qGy-2f-yY4" secondAttribute="leading" id="X6v-V0-f9x"/>
-                                                    <constraint firstItem="1FS-hw-I9O" firstAttribute="top" secondItem="qGy-2f-yY4" secondAttribute="top" id="Ybm-Z5-Wcg"/>
-                                                    <constraint firstAttribute="bottom" secondItem="1FS-hw-I9O" secondAttribute="bottom" id="dlG-xa-KF4"/>
-                                                    <constraint firstItem="7Wy-sa-3D6" firstAttribute="leading" secondItem="1FS-hw-I9O" secondAttribute="trailing" constant="10" id="iTa-gE-Ohr"/>
-                                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="7Wy-sa-3D6" secondAttribute="trailing" id="kig-Xf-0dm"/>
-                                                </constraints>
-                                                <connections>
-                                                    <action selector="applyForTestTapped" destination="eEu-YT-bAG" eventType="touchUpInside" id="jrF-vy-zJL"/>
-                                                </connections>
-                                            </view>
-                                            <view contentMode="scaleToFill" verticalHuggingPriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="dif-o7-21U">
-                                                <rect key="frame" x="16" y="654.5" width="382" height="147.5"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" id="1xq-Hb-IeR"/>
-                                                </constraints>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uoW-0A-mqN" customClass="LinkButton" customModule="Sonar" customModuleProvider="target">
+                                                <rect key="frame" x="16" y="752" width="382" height="50"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="Apply for a coronavirus test"/>
+                                                </userDefinedRuntimeAttributes>
                                             </view>
                                         </subviews>
                                         <directionalEdgeInsets key="directionalLayoutMargins" top="16" leading="16" bottom="16" trailing="16"/>
@@ -152,6 +117,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="HBC-hk-frn"/>
                     </view>
+                    <connections>
+                        <outlet property="applyLinkButton" destination="uoW-0A-mqN" id="VCr-Jd-NW6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AjV-a4-yTk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -167,13 +135,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="External_Link" width="19" height="14"/>
         <image name="Test_Tubes" width="135" height="133"/>
         <namedColor name="NHS Grey 5">
             <color red="0.94117647058823528" green="0.95686274509803926" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="NHS Link">
-            <color red="0.0" green="0.36862745098039218" blue="0.72156862745098038" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="NHS Text">
             <color red="0.1289999932050705" green="0.16899999976158142" blue="0.19599999487400055" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

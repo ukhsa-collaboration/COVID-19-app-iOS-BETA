@@ -29,5 +29,7 @@ extension Appearance {
         AccessibleErrorLabel.appearance().font = UIFont.preferredFont(forTextStyle: .callout)
         AccessibleErrorLabel.appearance().adjustsFontForContentSizeCategory = true
         AccessibleErrorLabel.appearance().numberOfLines = 0
+
+        UILabel.appearance(whenContainedInInstancesOf: [LinkButton.self]).textColor = UIColor(named: "NHS Link")
     }
 }
