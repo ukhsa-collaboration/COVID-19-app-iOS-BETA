@@ -72,23 +72,38 @@ jobs:
           echo $GOOGLE_SERVICE_INFO_PLIST_INTERNAL > .secret/GoogleService-Info.plist
           cat Sonar/Environments/environment.json | ./bin/make-environment > .secret/Environment.swift
 
-      - run: |
-          killall "Simulator"
+      - name: Delete leftover simulator devices
+        run: |
+          xcrun simctl shutdown all
           xcrun simctl erase all
-        continue-on-error: true
+          xcrun simctl delete all
+      - name: Setup simulator test device
+        id: devicesetup
+        run: |
+          DEVICE_NAME="${{ matrix.run-config['name'] }}"
+          DEVICE_OS="${{ matrix.run-config['os'] }}"
+          DEVICE_ID=$(xcrun simctl create test-device-${DEVICE_NAME/ /-}-$DEVICE_OS "$DEVICE_NAME" "com.apple.CoreSimulator.SimRuntime.iOS-$DEVICE_OS")
+          echo "::set-output name=deviceid::$DEVICE_ID"
+      - name: Boot simulator test device
+        run: xcrun simctl bootstatus ${{ steps.devicesetup.outputs.deviceid }} -b
 
       - run: |
           rm -rf TestResults.xcresult
-
       - name: Run Test
         run: >
           xcodebuild
           -scheme Sonar
           test
-          -destination "platform=iOS Simulator,OS=${{ matrix.run-config['os'] }},name=${{ matrix.run-config['name'] }}"
+          -destination "id=${{ steps.devicesetup.outputs.deviceid }}"
           -showBuildTimingSummary
           -allowProvisioningUpdates
           -resultBundlePath TestResults.xcresult
+      - name: Shutdown and erase simulator test device
+        if: always()
+        run: |
+          xcrun simctl shutdown ${{ steps.devicesetup.outputs.deviceid }}
+          xcrun simctl erase ${{ steps.devicesetup.outputs.deviceid }}
+          xcrun simctl delete ${{ steps.devicesetup.outputs.deviceid }}
 
       - name: Upload Test Results
         uses: actions/upload-artifact@e7eefc4 # v2
