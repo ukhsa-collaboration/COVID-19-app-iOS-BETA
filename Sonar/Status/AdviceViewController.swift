@@ -25,13 +25,7 @@ class AdviceViewController: UIViewController, Storyboarded {
     }
     
     override func viewDidLoad() {
-        link.inject(title: "Read specific advice on GOV.UK", isExternal: true, style: .headline)
-        
-        let title = UILabel()
-        title.text = "Read current advice"
-        title.textColor = UIColor(named: "NHS Blue")
-        title.font = UIFont.preferredFont(forTextStyle: .headline)
-        navigationItem.titleView = title
+        link.inject(title: "Read specific advice on GOV.UK", style: .headline)
         
         detail.text = "The advice below is up to date and specific to your situation. Please follow this advice."
     }

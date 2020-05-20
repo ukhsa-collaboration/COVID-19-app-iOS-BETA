@@ -15,12 +15,12 @@ class StartNowViewController: UIViewController, Storyboarded {
     private var notificationCenter: NotificationCenter! = nil
     private var continueHandler: (() -> Void)! = nil
     
-    @IBOutlet weak var howItWorks: LinkButton!
+    @IBOutlet weak var howItWorks: ButtonWithDynamicType!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        howItWorks.inject(title: "Learn more about how it works".localized, isExternal: false, style: .body)
+        howItWorks.setTitle("Learn more about how it works".localized, for: .normal)
     }
 
     func inject(persistence: Persisting, notificationCenter: NotificationCenter, continueHandler: @escaping () -> Void) {

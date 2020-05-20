@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Advice View Controller-->
+        <!--Read current advice-->
         <scene sceneID="Hlx-PQ-RBQ">
             <objects>
-                <viewController storyboardIdentifier="AdviceViewController" id="cHn-d6-img" customClass="AdviceViewController" customModule="Sonar" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AdviceViewController" title="Read current advice" id="cHn-d6-img" customClass="AdviceViewController" customModule="Sonar" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sC8-Dz-RHG">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

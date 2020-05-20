@@ -19,18 +19,6 @@ class ApplyForTestViewController: UIViewController, Storyboarded {
         self.referenceCode = referenceCode
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        navigationItem.titleView = {
-            let title = UILabel()
-            title.text = "Apply for a coronavirus test"
-            title.textColor = UIColor(named: "NHS Blue")
-            title.font = UIFont.preferredFont(forTextStyle: .headline)
-            return title
-        }()
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? ReferenceCodeViewController {
             vc.inject(referenceCode: referenceCode)
