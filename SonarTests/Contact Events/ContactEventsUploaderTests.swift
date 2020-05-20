@@ -31,9 +31,11 @@ class ContactEventsUploaderTests: XCTestCase {
         )
 
         let startDate = Date()
-        try uploader.upload(from: startDate)
+        let symptoms: Symptoms = [.temperature]
+        try uploader.upload(from: startDate, with: symptoms)
 
-        XCTAssertEqual(persisting.uploadLog.map { $0.event }, [.requested(startDate: startDate)])
+        let requested = UploadLog.Requested(startDate: startDate, symptoms: symptoms)
+        XCTAssertEqual(persisting.uploadLog.map { $0.event }, [.requested(requested)])
         XCTAssertNil(session.uploadRequest)
     }
 
@@ -54,7 +56,8 @@ class ContactEventsUploaderTests: XCTestCase {
         // Arbitrary date since we're round-tripping through JSON and lose precision
         // that we use later for equality.
         let startDate = Calendar.current.date(from: DateComponents(month: 4, day: 1))!
-        try uploader.upload(from: startDate)
+        let symptoms: Symptoms = [.temperature]
+        try uploader.upload(from: startDate, with: symptoms)
 
         let request = try XCTUnwrap(session.uploadRequest as? UploadProximityEventsRequest)
 
@@ -66,6 +69,7 @@ class ContactEventsUploaderTests: XCTestCase {
 
             let decoded = try decoder.decode(UploadProximityEventsRequest.Wrapper.self, from: data)
 
+            XCTAssertEqual(decoded.symptoms, symptoms)
             XCTAssertEqual(decoded.symptomsTimestamp, startDate)
 
             // Can't compare the entire contact events because the timestamp loses precision
@@ -94,7 +98,7 @@ class ContactEventsUploaderTests: XCTestCase {
         )
 
         let startDate = Date()
-        try uploader.upload(from: startDate)
+        try uploader.upload(from: startDate, with: [.temperature])
 
         XCTAssertEqual(persisting.uploadLog.map { $0.event.key }, ["requested", "started"])
     }
@@ -113,7 +117,7 @@ class ContactEventsUploaderTests: XCTestCase {
             makeSession: { _, _ in session }
         )
 
-        try uploader.upload(from: Date())
+        try uploader.upload(from: Date(), with: [.temperature])
         uploader.cleanup()
 
         XCTAssertEqual(contactEventRepository.removedThroughDate, contactEvent.timestamp)
@@ -126,9 +130,10 @@ class ContactEventsUploaderTests: XCTestCase {
 
     func testEnsureUploadingWhenRequestedButNoRegistration() {
         let startDate = Date()
+        let requested = UploadLog.Requested(startDate: startDate, symptoms: [.temperature])
         let persisting = PersistenceDouble(
             uploadLog: [
-                UploadLog(event: .requested(startDate: startDate)),
+                UploadLog(event: .requested(requested)),
             ]
         )
         let contactEventRepository = ContactEventRepositoryDouble()
@@ -142,16 +147,17 @@ class ContactEventsUploaderTests: XCTestCase {
 
         try? uploader.ensureUploading()
 
-        XCTAssertEqual(persisting.uploadLog.map { $0.event }, [.requested(startDate: startDate)])
+        XCTAssertEqual(persisting.uploadLog.map { $0.event }, [.requested(requested)])
         XCTAssertNil(session.uploadRequest)
     }
 
     func testEnsureUploadingWhenRequestedWithRegistration() {
         let registration = Registration.fake
+        let requested = UploadLog.Requested(startDate: Date(), symptoms: [.temperature])
         let persisting = PersistenceDouble(
             registration: registration,
             uploadLog: [
-                UploadLog(date: overAnHourAgo, event: .requested(startDate: Date())),
+                UploadLog(date: overAnHourAgo, event: .requested(requested)),
             ]
         )
         let contactEventRepository = ContactEventRepositoryDouble()
@@ -171,10 +177,11 @@ class ContactEventsUploaderTests: XCTestCase {
 
     func testEnsureUploadingWhenStarted() {
         let registration = Registration.fake
+        let requested = UploadLog.Requested(startDate: Date(), symptoms: [.temperature])
         let persisting = PersistenceDouble(
             registration: registration,
             uploadLog: [
-                UploadLog(event: .requested(startDate: Date())),
+                UploadLog(event: .requested(requested)),
                 UploadLog(event: .started(lastContactEventDate: Date())),
             ]
         )
@@ -195,10 +202,11 @@ class ContactEventsUploaderTests: XCTestCase {
 
     func testEnsureUploadingWhenCompleted() {
         let registration = Registration.fake
+        let requested = UploadLog.Requested(startDate: Date(), symptoms: [.temperature])
         let persisting = PersistenceDouble(
             registration: registration,
             uploadLog: [
-                UploadLog(event: .requested(startDate: Date())),
+                UploadLog(event: .requested(requested)),
                 UploadLog(event: .started(lastContactEventDate: Date())),
                 UploadLog(event: .completed(error: nil)),
             ]
@@ -220,10 +228,11 @@ class ContactEventsUploaderTests: XCTestCase {
 
     func testEnsureUploadingWhenError() {
         let registration = Registration.fake
+        let requested = UploadLog.Requested(startDate: Date(), symptoms: [.temperature])
         let persisting = PersistenceDouble(
             registration: registration,
             uploadLog: [
-                UploadLog(event: .requested(startDate: Date())),
+                UploadLog(event: .requested(requested)),
                 UploadLog(event: .started(lastContactEventDate: Date())),
                 UploadLog(date: overAnHourAgo, event: .completed(error: "oh no")),
             ]
@@ -245,10 +254,11 @@ class ContactEventsUploaderTests: XCTestCase {
 
     func testEnsureUploadingBeforeAnHourHasPassed() {
         let registration = Registration.fake
+        let requested = UploadLog.Requested(startDate: Date(), symptoms: [.temperature])
         let persisting = PersistenceDouble(
             registration: registration,
             uploadLog: [
-                UploadLog(event: .requested(startDate: Date())),
+                UploadLog(event: .requested(requested)),
             ]
         )
         let contactEventRepository = ContactEventRepositoryDouble()
@@ -275,7 +285,7 @@ class ContactEventsUploaderTests: XCTestCase {
         let persisting = PersistenceDouble(
             registration: registration,
             uploadLog: [
-                UploadLog(date: overAnHourAgo, event: .requested(startDate: nil)),
+                UploadLog(date: overAnHourAgo, event: .requested(nil)),
                 UploadLog(date: overAnHourAgo, event: .completed(error: "oh no")),
             ]
         )
@@ -294,7 +304,7 @@ class ContactEventsUploaderTests: XCTestCase {
 
         XCTAssertNotNil(contactEventRepository.removedThroughDate)
         XCTAssertEqual(persisting.uploadLog.map { $0.event }, [
-            .requested(startDate: nil), .completed(error: "oh no"), .completed(error: nil)]
+            .requested(nil), .completed(error: "oh no"), .completed(error: nil)]
         )
         XCTAssertNil(session.uploadRequest)
     }

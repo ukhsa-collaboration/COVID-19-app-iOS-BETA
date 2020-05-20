@@ -26,6 +26,7 @@ class UploadProximityEventsRequest: SecureRequest, Request {
     
     struct Wrapper: Codable {
         let sonarId: UUID
+        let symptoms: Symptoms
         let symptomsTimestamp: Date
         let contactEvents: [UploadableContactEvent]
     }
@@ -36,7 +37,7 @@ class UploadProximityEventsRequest: SecureRequest, Request {
     
     let urlable = Urlable.path("/api/proximity-events/upload")
 
-    init(registration: Registration, symptomsTimestamp: Date, contactEvents: [ContactEvent]) {
+    init(registration: Registration, symptoms: Symptoms, symptomsTimestamp: Date, contactEvents: [ContactEvent]) {
         let key = registration.secretKey
         let sonarId = registration.sonarId
 
@@ -74,6 +75,7 @@ class UploadProximityEventsRequest: SecureRequest, Request {
 
         let requestBody = Wrapper(
             sonarId: sonarId,
+            symptoms: symptoms,
             symptomsTimestamp: symptomsTimestamp,
             contactEvents: uploadableEvents
         )

@@ -16,7 +16,9 @@ struct Symptoms: Equatable {
     private var symptoms: Set<Symptom>
 
     var hasCoronavirusSymptoms: Bool {
-        !symptoms.intersection([.temperature, .cough, .smellLoss]).isEmpty
+        let gateOne = !symptoms.intersection([.temperature, .cough, .smellLoss]).isEmpty
+        let gateTwo = symptoms.contains(.fever) && symptoms.contains(.nausea)
+        return gateOne || gateTwo
     }
 
     init(_ symptoms: Set<Symptom>) {

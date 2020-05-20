@@ -80,7 +80,7 @@ class StatusStateMachine: StatusStateMachining {
         switch state {
         case .ok(let ok):
             let symptomatic = StatusState.Symptomatic(symptoms: symptoms, startDate: startDate)
-            try contactEventsUploader.upload(from: startDate)
+            try contactEventsUploader.upload(from: startDate, with: symptoms)
 
             if dateProvider() < symptomatic.expiryDate {
                 transition(from: ok, to: symptomatic)
@@ -98,7 +98,7 @@ class StatusStateMachine: StatusStateMachining {
             }
         case .exposed(let exposed):
             let symptomatic = StatusState.Symptomatic(symptoms: symptoms, startDate: startDate)
-            try contactEventsUploader.upload(from: startDate)
+            try contactEventsUploader.upload(from: startDate, with: symptoms)
             transition(from: exposed, to: symptomatic)
         case .symptomatic, .checkin:
             assertionFailure("Self-diagnosing is only allowed from ok/exposed")
