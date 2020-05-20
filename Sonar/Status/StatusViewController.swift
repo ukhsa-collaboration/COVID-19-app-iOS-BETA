@@ -168,6 +168,10 @@ class StatusViewController: UIViewController, Storyboarded {
         performSegue(withIdentifier: "showWorkplaceGuidance", sender: self)
     }
 
+    @IBAction func unwindFromUnexposed(unwindSegue: UIStoryboardSegue) {
+        statusStateMachine.ok()
+    }
+
     fileprivate func presentPrompt(for checkin: StatusState.Checkin) {
         let symptomsPromptViewController = SymptomsPromptViewController.instantiate()
         symptomsPromptViewController.modalPresentationStyle = .custom
@@ -228,6 +232,10 @@ class StatusViewController: UIViewController, Storyboarded {
             applyForTestButton.isHidden = true
             stepsDetailLabel.isHidden = false
             stepsDetailLabel.text = "If you don’t have any symptoms, there’s no need to do anything right now. If you develop symptoms, please come back to this app."
+
+            if case .unexposed = statusStateMachine.state {
+                performSegue(withIdentifier: "presentUnexposed", sender: self)
+            }
 
         case .exposed:
             diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")

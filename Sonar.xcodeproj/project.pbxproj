@@ -207,6 +207,8 @@
 		F652F730244E4AAD00D97950 /* DrawerPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652F72F244E4AAD00D97950 /* DrawerPresentation.swift */; };
 		F6548FA32460C1C7005F06FF /* CheckinCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6548FA22460C1C7005F06FF /* CheckinCoordinatorTests.swift */; };
 		F6548FA52460DB95005F06FF /* SpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6548FA42460DB95005F06FF /* SpinnerView.swift */; };
+		F65A0A3F2475EAC700F7A627 /* Unexposed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F65A0A3E2475EAC700F7A627 /* Unexposed.storyboard */; };
+		F65A0A412475EB0400F7A627 /* UnexposedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65A0A402475EB0400F7A627 /* UnexposedViewController.swift */; };
 		F673FBB42457A89E00D96C50 /* SymptomsSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F673FBB32457A89E00D96C50 /* SymptomsSummaryViewController.swift */; };
 		F67A2291242AA35C002254B6 /* SecureRegistrationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A2290242AA35B002254B6 /* SecureRegistrationStorage.swift */; };
 		F67A2293242AA370002254B6 /* SecureRegistrationStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */; };
@@ -516,6 +518,8 @@
 		F652F72F244E4AAD00D97950 /* DrawerPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerPresentation.swift; sourceTree = "<group>"; };
 		F6548FA22460C1C7005F06FF /* CheckinCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinCoordinatorTests.swift; sourceTree = "<group>"; };
 		F6548FA42460DB95005F06FF /* SpinnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerView.swift; sourceTree = "<group>"; };
+		F65A0A3E2475EAC700F7A627 /* Unexposed.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Unexposed.storyboard; sourceTree = "<group>"; };
+		F65A0A402475EB0400F7A627 /* UnexposedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnexposedViewController.swift; sourceTree = "<group>"; };
 		F673FBB32457A89E00D96C50 /* SymptomsSummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomsSummaryViewController.swift; sourceTree = "<group>"; };
 		F67A2290242AA35B002254B6 /* SecureRegistrationStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRegistrationStorage.swift; sourceTree = "<group>"; };
 		F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRegistrationStorageTests.swift; sourceTree = "<group>"; };
@@ -744,6 +748,7 @@
 				F6099A792474976400758D3E /* Advice.storyboard */,
 				F6334E4C24748B3000421B4C /* RegistrationStatus.storyboard */,
 				F758B8C3242CC0EE003AE16D /* Status.storyboard */,
+				F65A0A3E2475EAC700F7A627 /* Unexposed.storyboard */,
 				F6BBE140246F584F005757BB /* WorkplaceGuidance.storyboard */,
 				13473A1A246AFF0C00800CEA /* AdviceViewController.swift */,
 				134470AF2454D614001A0AD9 /* CoughUpdateViewController.swift */,
@@ -756,6 +761,7 @@
 				13473A1C246C0F2C00800CEA /* StatusViewController.swift */,
 				F652F72D244E472E00D97950 /* SymptomsPromptViewController.swift */,
 				138114E32450543600BA46C7 /* SymptomStackView.swift */,
+				F65A0A402475EB0400F7A627 /* UnexposedViewController.swift */,
 				13473A1E246D543F00800CEA /* UserStatusProvider.swift */,
 				F6BBE142246F5870005757BB /* WorkplaceGuidanceViewController.swift */,
 				F604976C2453ADF4002B8503 /* scenarios.yml */,
@@ -1486,6 +1492,7 @@
 				6FC63C38241641BA007C8BF3 /* Assets.xcassets in Resources */,
 				F618A566245C682500D89517 /* GoogleService-Info.plist in Resources */,
 				895D9E462437458700573D4D /* AppIcon.xcassets in Resources */,
+				F65A0A3F2475EAC700F7A627 /* Unexposed.storyboard in Resources */,
 				F6BBE13C246F46B4005757BB /* ApplyForTest.storyboard in Resources */,
 				F6334E4D24748B3000421B4C /* RegistrationStatus.storyboard in Resources */,
 				F68B89ED243CFF2600F369A9 /* SelfDiagnosis.storyboard in Resources */,
@@ -1729,6 +1736,7 @@
 				6FC63C31241641B8007C8BF3 /* AppDelegate.swift in Sources */,
 				F600A60224297A8E0038DF57 /* RegistrationRequest.swift in Sources */,
 				F616959F2458A2DA006AABE3 /* AcknowledgmentRequest.swift in Sources */,
+				F65A0A412475EB0400F7A627 /* UnexposedViewController.swift in Sources */,
 				214209D2242399CF00C7BFF3 /* URLSession.swift in Sources */,
 				89074B83243788AE00D67777 /* UITestResponder.swift in Sources */,
 				21B71F782451788800D0DED7 /* OptionalCoalescingString.swift in Sources */,
