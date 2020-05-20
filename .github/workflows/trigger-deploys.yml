@@ -56,7 +56,9 @@ jobs:
           git push
 
   deploy:
-    needs: bump-build-number
+    needs:
+      - should-deploy
+      - bump-build-number
     runs-on:
       - self-hosted
       - macos
