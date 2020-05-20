@@ -29,21 +29,13 @@ jobs:
         run: |
           echo "::set-output name=exit-code::$(./bin/is-deployed internal > /dev/null; echo $?)"
 
-  deploy:
+  bump-build-number:
     needs: should-deploy
     runs-on:
       - self-hosted
       - macos
-    strategy:
-      matrix:
-        run-config:
-          - { env: internal }
-          # - { env: beta }
     if: needs.should-deploy.outputs.should-deploy == 'true'
     steps:
-      - run: echo ${{ needs.should-deploy.outputs.should-deploy }}
-        continue-on-error: true
-
       - name: Checkout project
         uses: actions/checkout@01aeccc # v2.1.0
         with:
@@ -62,6 +54,23 @@ jobs:
           echo "::set-output name=commit-sha::$(git rev-parse HEAD)"
           git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
           git push
+
+  deploy:
+    needs: bump-build-number
+    runs-on:
+      - self-hosted
+      - macos
+    strategy:
+      matrix:
+        run-config:
+          - { env: internal }
+          - { env: beta }
+    if: needs.should-deploy.outputs.should-deploy == 'true'
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@01aeccc # v2.1.0
+        with:
+          ref: internal
 
       - name: Trigger deployment
         env:
