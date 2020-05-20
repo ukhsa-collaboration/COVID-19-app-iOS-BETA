@@ -6,6 +6,7 @@
 //  Copyright © 2020 NHSX. All rights reserved.
 //
 
+import UIKit
 import QuartzCore
 
 class SpinnerView: AutoscalingImageView {
@@ -29,4 +30,13 @@ class SpinnerView: AutoscalingImageView {
         return rotation
     }()
 
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: nil) { _ in
+            if !self.isHidden {
+                self.layer.add(self.rotation, forKey: "rotationAnimation")
+            }
+        }
+    }
 }
