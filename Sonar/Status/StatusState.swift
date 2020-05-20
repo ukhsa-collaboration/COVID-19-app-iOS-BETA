@@ -43,10 +43,13 @@ enum StatusState: Equatable {
         }
     }
 
+    struct Unexposed: Codable, Equatable {}
+
     case ok(Ok)                   // default state, previously "blue"
     case symptomatic(Symptomatic) // previously "red" state
     case checkin(Checkin)
     case exposed(Exposed)         // previously "amber" state
+    case unexposed(Unexposed)
 
     var isSymptomatic: Bool {
         if case .symptomatic = self {
@@ -88,6 +91,8 @@ extension StatusState: Encodable {
         case .exposed(let exposed):
             try container.encode("exposed", forKey: .type)
             try container.encode(exposed, forKey: .exposed)
+        case .unexposed:
+            try container.encode("unexposed", forKey: .type)
         }
     }
 }
@@ -113,6 +118,8 @@ extension StatusState: Decodable {
         case "exposed":
             let exposed = try values.decode(Exposed.self, forKey: .exposed)
             self = .exposed(exposed)
+        case "unexposed":
+            self = .unexposed(StatusState.Unexposed())
         default:
             throw Error.decodingError("Unrecognized type: \(type)")
         }

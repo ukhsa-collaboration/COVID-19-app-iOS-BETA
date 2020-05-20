@@ -100,14 +100,14 @@ class StatusStateMachine: StatusStateMachining {
             let symptomatic = StatusState.Symptomatic(symptoms: symptoms, startDate: startDate)
             try contactEventsUploader.upload(from: startDate, with: symptoms)
             transition(from: exposed, to: symptomatic)
-        case .symptomatic, .checkin:
+        case .symptomatic, .checkin, .unexposed:
             assertionFailure("Self-diagnosing is only allowed from ok/exposed")
         }
     }
 
     func tick() {
         switch state {
-        case .ok, .checkin:
+        case .ok, .checkin, .unexposed:
             break // Don't need to do anything
         case .symptomatic(let symptomatic):
             guard dateProvider() >= symptomatic.expiryDate else { return }
@@ -125,7 +125,7 @@ class StatusStateMachine: StatusStateMachining {
         userNotificationCenter.removePendingNotificationRequests(withIdentifiers: [checkinNotificationIdentifier])
 
         switch state {
-        case .ok, .symptomatic, .exposed:
+        case .ok, .symptomatic, .exposed, .unexposed:
             assertionFailure("Checking in is only allowed from checkin")
             return
         case .checkin(let checkin):
@@ -151,12 +151,24 @@ class StatusStateMachine: StatusStateMachining {
         switch state {
         case .ok(let ok):
             transition(from: ok, to: StatusState.Exposed(exposureDate: dateProvider()))
+        case .unexposed(let unexposed):
+            transition(from: unexposed, to: StatusState.Exposed(exposureDate: dateProvider()))
         case .exposed:
             assertionFailure("The server should never send us another exposure notification if we're already exposed")
             break // ignore repeated exposures
         case .symptomatic, .checkin:
             break // don't care about exposures if we're already symptomatic
         }
+    }
+
+    func unexposed() {
+        switch state {
+        case .exposed(let exposed):
+            transition(from: exposed, to: StatusState.Unexposed())
+        case .ok, .symptomatic, .checkin, .unexposed:
+            break // no-op
+        }
+
     }
 
     // MARK: - Transitions
@@ -192,6 +204,15 @@ class StatusStateMachine: StatusStateMachining {
     private func transition(from ok: StatusState.Ok, to exposed: StatusState.Exposed) {
         add(notificationRequest: exposedNotificationRequest)
         state = .exposed(exposed)
+    }
+
+    private func transition(from unexposed: StatusState.Unexposed, to exposed: StatusState.Exposed) {
+        add(notificationRequest: exposedNotificationRequest)
+        state = .exposed(exposed)
+    }
+
+    private func transition(from exposed: StatusState.Exposed, to unexposed: StatusState.Unexposed) {
+        state = .unexposed(unexposed)
     }
 
     // MARK: - User Notifications

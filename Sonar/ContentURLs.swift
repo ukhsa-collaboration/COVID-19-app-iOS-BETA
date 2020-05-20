@@ -39,7 +39,7 @@ struct ContentURLs {
 
     private func currentStatusURLs(for statusState: StatusState) -> StatusURLs {
         switch statusState {
-        case .ok: return status.ok
+        case .ok, .unexposed: return status.ok
         case .symptomatic, .checkin: return status.symptomatic
         case .exposed: return status.exposed
         }
