@@ -56,8 +56,7 @@ class ContactEventsUploaderTests: XCTestCase {
         // Arbitrary date since we're round-tripping through JSON and lose precision
         // that we use later for equality.
         let startDate = Calendar.current.date(from: DateComponents(month: 4, day: 1))!
-        let symptoms: Symptoms = [.temperature]
-        try uploader.upload(from: startDate, with: symptoms)
+        try uploader.upload(from: startDate, with: [.temperature, .nausea])
 
         let request = try XCTUnwrap(session.uploadRequest as? UploadProximityEventsRequest)
 
@@ -69,7 +68,7 @@ class ContactEventsUploaderTests: XCTestCase {
 
             let decoded = try decoder.decode(UploadProximityEventsRequest.Wrapper.self, from: data)
 
-            XCTAssertEqual(decoded.symptoms, symptoms)
+            XCTAssertEqual(Set(decoded.symptoms), Set(["TEMPERATURE", "NAUSEA"]))
             XCTAssertEqual(decoded.symptomsTimestamp, startDate)
 
             // Can't compare the entire contact events because the timestamp loses precision

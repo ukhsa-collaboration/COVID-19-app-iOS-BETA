@@ -26,7 +26,7 @@ class UploadProximityEventsRequest: SecureRequest, Request {
     
     struct Wrapper: Codable {
         let sonarId: UUID
-        let symptoms: Symptoms
+        let symptoms: [String]
         let symptomsTimestamp: Date
         let contactEvents: [UploadableContactEvent]
     }
@@ -75,7 +75,7 @@ class UploadProximityEventsRequest: SecureRequest, Request {
 
         let requestBody = Wrapper(
             sonarId: sonarId,
-            symptoms: symptoms,
+            symptoms: symptoms.getSymptoms().map { $0.rawValue.uppercased() },
             symptomsTimestamp: symptomsTimestamp,
             contactEvents: uploadableEvents
         )
