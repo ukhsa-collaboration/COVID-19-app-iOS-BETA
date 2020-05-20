@@ -78,9 +78,6 @@ jobs:
           xcrun simctl erase all
           xcrun simctl delete all
 
-      - name: Boot simulator test device
-        run: xcrun simctl bootstatus ${{ steps.devicesetup.outputs.deviceid }} -b
-
       - name: Setup simulator test device
         id: devicesetup
         run: |
@@ -88,6 +85,9 @@ jobs:
           DEVICE_OS="${{ matrix.run-config['os'] }}"
           DEVICE_ID=$(xcrun simctl create test-device-${DEVICE_NAME/ /-}-$DEVICE_OS "$DEVICE_NAME" "com.apple.CoreSimulator.SimRuntime.iOS-$DEVICE_OS")
           echo "::set-output name=deviceid::$DEVICE_ID"
+
+      - name: Boot simulator test device
+        run: xcrun simctl bootstatus ${{ steps.devicesetup.outputs.deviceid }} -b
 
       - run: |
           rm -rf TestResults.xcresult
