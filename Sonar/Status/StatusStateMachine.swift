@@ -26,6 +26,8 @@ class StatusStateMachine: StatusStateMachining {
 
     private let logger = Logger(label: "StatusStateMachine")
     private let checkinNotificationIdentifier = "Diagnosis"
+    private let exposedNotificationIdentifier = "exposedNotificationIdentifier"
+    private let adviceChangedNotificationIdentifier = "adviceChangedNotificationIdentifier"
 
     private let persisting: Persisting
     private var contactEventsUploader: ContactEventsUploading
@@ -207,16 +209,17 @@ class StatusStateMachine: StatusStateMachining {
     }
 
     private func transition(from ok: StatusState.Ok, to exposed: StatusState.Exposed) {
-        add(notificationRequest: exposedNotificationRequest)
+        add(notificationRequest: adviceChangedNotificationRequest)
         state = .exposed(exposed)
     }
 
     private func transition(from unexposed: StatusState.Unexposed, to exposed: StatusState.Exposed) {
-        add(notificationRequest: exposedNotificationRequest)
+        add(notificationRequest: adviceChangedNotificationRequest)
         state = .exposed(exposed)
     }
 
     private func transition(from exposed: StatusState.Exposed, to unexposed: StatusState.Unexposed) {
+        add(notificationRequest: adviceChangedNotificationRequest)
         state = .unexposed(unexposed)
     }
 
@@ -250,13 +253,12 @@ class StatusStateMachine: StatusStateMachining {
         return request
     }
 
-    private lazy var exposedNotificationRequest: UNNotificationRequest = {
+    private lazy var adviceChangedNotificationRequest: UNNotificationRequest = {
         let content = UNMutableNotificationContent()
-        content.title = "POTENTIAL_STATUS_TITLE".localized
-        content.body = "POTENTIAL_STATUS_BODY".localized
+        content.title = "ADVICE_CHANGED_NOTIFICATION_TITLE".localized
+        content.body = "ADVICE_CHANGED_NOTIFICATION_BODY".localized
 
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
-        return request
+        return UNNotificationRequest(identifier: adviceChangedNotificationIdentifier, content: content, trigger: nil)
     }()
 
 }

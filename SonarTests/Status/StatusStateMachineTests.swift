@@ -42,7 +42,7 @@ class StatusStateMachineTests: XCTestCase {
         machine.exposed()
 
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
-        XCTAssertEqual(request.content.title, "POTENTIAL_STATUS_TITLE".localized)
+        XCTAssertEqual(request.identifier, "adviceChangedNotificationIdentifier")
     }
 
     func testPostNotificationOnStatusChange() throws {
@@ -254,14 +254,7 @@ class StatusStateMachineTests: XCTestCase {
 
         machine.exposed()
 
-        let request = try XCTUnwrap(userNotificationCenter.requests.first)
-        XCTAssertEqual(request.content.title, "POTENTIAL_STATUS_TITLE".localized)
-
-        var maybeExposed: StatusState.Exposed?
-        if case .exposed(let e) = machine.state {
-            maybeExposed = e
-        }
-        XCTAssertNotNil(maybeExposed)
+        XCTAssertEqual(machine.state, .exposed(StatusState.Exposed(exposureDate: currentDate)))
     }
 
     func testExposedAgainAfterUnexposed() throws {
@@ -269,14 +262,18 @@ class StatusStateMachineTests: XCTestCase {
 
         machine.exposed()
 
-        let request = try XCTUnwrap(userNotificationCenter.requests.first)
-        XCTAssertEqual(request.content.title, "POTENTIAL_STATUS_TITLE".localized)
+        XCTAssertEqual(machine.state, .exposed(StatusState.Exposed(exposureDate: currentDate)))
+    }
 
-        var maybeExposed: StatusState.Exposed?
-        if case .exposed(let e) = machine.state {
-            maybeExposed = e
-        }
-        XCTAssertNotNil(maybeExposed)
+    func testUnexposedAfterExposed() throws {
+        persisting.statusState = .exposed(StatusState.Exposed(exposureDate: Date()))
+
+        machine.unexposed()
+
+        XCTAssertEqual(machine.state, .unexposed(StatusState.Unexposed()))
+
+        let request = try XCTUnwrap(userNotificationCenter.requests.first)
+        XCTAssertEqual(request.identifier, "adviceChangedNotificationIdentifier")
     }
 
 }
