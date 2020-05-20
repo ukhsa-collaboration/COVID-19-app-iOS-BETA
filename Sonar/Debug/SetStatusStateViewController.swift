@@ -146,12 +146,17 @@ class SetStatusStateViewController: UITableViewController {
             statusLabel.text = "exposed"
             temperature = nil
             cough = nil
-            date = exposed.exposureDate
+            date = exposed.startDate
         case .unexposed:
             statusLabel.text = "unexposed"
             temperature = nil
             cough = nil
             date = nil
+        case .positiveTestResult(let positiveTestResult):
+            statusLabel.text = "positive test result"
+            temperature = positiveTestResult.symptoms.contains(.temperature)
+            cough = positiveTestResult.symptoms.contains(.cough)
+            date = positiveTestResult.startDate
         }
     }
 
@@ -183,9 +188,11 @@ class SetStatusStateViewController: UITableViewController {
             }
             statusState = .checkin(StatusState.Checkin(symptoms: symptoms, checkinDate: date!))
         case 3:
-            statusState = .exposed(StatusState.Exposed(exposureDate: date!))
+            statusState = .exposed(StatusState.Exposed(startDate: date!))
         case 4:
             statusState = .unexposed(StatusState.Unexposed())
+        case 5:
+            statusState = .positiveTestResult(StatusState.PositiveTestResult(symptoms: symptoms, startDate: date!))
         default:
             fatalError()
         }
@@ -202,11 +209,11 @@ extension SetStatusStateViewController: UIPickerViewDataSource {
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 5
+        return 6
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return ["ok", "symptomatic", "checkin", "exposed", "unexposed"][row]
+        return ["ok", "symptomatic", "checkin", "exposed", "unexposed", "positive test result"][row]
     }
 }
 
@@ -221,9 +228,11 @@ extension SetStatusStateViewController: UIPickerViewDelegate {
         case 2:
             statusState = .checkin(StatusState.Checkin(symptoms: [.temperature, .cough], checkinDate: Date()))
         case 3:
-            statusState = .exposed(StatusState.Exposed(exposureDate: Date()))
+            statusState = .exposed(StatusState.Exposed(startDate: Date()))
         case 4:
             statusState = .unexposed(StatusState.Unexposed())
+        case 5:
+            statusState = .positiveTestResult(StatusState.PositiveTestResult(symptoms: [.temperature, .cough], startDate: Date()))
         default:
             fatalError()
         }

@@ -95,6 +95,8 @@ class RemoteNotificationDispatcher: RemoteNotificationDispatching {
             return .registrationActivationCode
         } else if userInfo["status"] as? String != nil {
             return .status
+        } else if userInfo["result"] as? String != nil {
+            return .testResult
         } else {
             return nil
         }

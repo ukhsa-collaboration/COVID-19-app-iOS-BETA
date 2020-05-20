@@ -53,7 +53,7 @@ class StatusViewControllerTests: XCTestCase {
         )
         XCTAssertEqual(vc.diagnosisTitleLabel.text, "Follow the current advice to stop the spread of coronavirus".localized)
 
-        statusStateMachine.state = .exposed(StatusState.Exposed(exposureDate: Date()))
+        statusStateMachine.state = .exposed(StatusState.Exposed(startDate: Date()))
         notificationCenter.post(name: StatusStateMachine.StatusStateChangedNotification, object: nil)
 
         XCTAssertEqual(vc.diagnosisTitleLabel.text, "You have been near someone who has coronavirus symptoms".localized)
@@ -80,11 +80,11 @@ class StatusViewControllerTests: XCTestCase {
         // Since we inject in a GB locale but calculate expiry using the current calendar,
         // we do these shenanigans to get a suitable date to result in 28 May being the
         // expiry in GB time.
-        let exposureDate = Calendar.current
+        let startDate = Calendar.current
             .date(from: DateComponents(month: 5, day: 14))!
             .addingTimeInterval(TimeInterval(-TimeZone.current.secondsFromGMT()))
 
-        let statusStateMachine = StatusStateMachiningDouble(state: .exposed(StatusState.Exposed(exposureDate: exposureDate)))
+        let statusStateMachine = StatusStateMachiningDouble(state: .exposed(StatusState.Exposed(startDate: startDate)))
         let vc = makeViewController(statusStateMachine: statusStateMachine)
 
         XCTAssertFalse(vc.diagnosisDetailLabel.isHidden)

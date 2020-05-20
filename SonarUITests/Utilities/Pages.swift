@@ -77,6 +77,12 @@ class StatusSymptomaticPage : StatusPage {
     }
 }
 
+class PositiveTestStatusPage : StatusPage {
+    var hasPositiveTestHeading: Bool {
+        app.staticTexts["Your test result indicates  you  have coronavirus. Please isolate yourself and your household."].exists
+    }
+}
+
 class SymptomsTemperaturePage : Page {
     func tapTemperatureOption() -> Self { return tapButton("Yes, I have a high temperature") }
 

@@ -14,4 +14,6 @@ enum Screen: String, Codable {
     case onboarding
 
     case status
+    
+    case positiveTestStatus
 }

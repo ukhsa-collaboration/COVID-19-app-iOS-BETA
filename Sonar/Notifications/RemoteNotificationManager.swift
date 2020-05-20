@@ -19,6 +19,7 @@ let PushTokenReceivedNotification = NSNotification.Name("PushTokenReceivedNotifi
 enum RemoteNotificationType {
     case registrationActivationCode
     case status
+    case testResult
 }
 
 // Actual push/remote notifications are done via callback becasue we (or rather, AppDelegate)

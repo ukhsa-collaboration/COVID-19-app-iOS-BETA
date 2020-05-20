@@ -52,8 +52,7 @@ class DrawerPresentationController: UIPresentationController {
             if let scrollView = presentedView.subviews.first as? UIScrollView {
                 // We need to find the "real" child of the scroll view, but the scroll view's subviews also
                 // include scroll indicators whihc we can't detect without using private APIs. So for now we
-                // assume that the single "real" child of a scroll view is a UIStackView, because that's the
-                // case in the one scrolling drawer we currently have (MedicalWorkerInstructionsViewController).
+                // assume that the single "real" child of a scroll view is a UIStackView.
                 if let realChild = scrollView.subviews.first(where: {$0.isKind(of: UIStackView.self)}) {
                     return realChild
                 } else {

@@ -1,8 +1,8 @@
 //
-//  StatusNotificationHandler.swift
+//  TestResultNotificationHandler.swift
 //  Sonar
 //
-//  Created by NHSX on 4/28/20.
+//  Created by NHSX on 21/05/2020
 //  Copyright © 2020 NHSX. All rights reserved.
 //
 
@@ -10,14 +10,10 @@ import Foundation
 
 import Logging
 
-// This naming is somewhat confusing, since in this application,
-// "status" means blue/amber/red, but the backend sends us a
-// notification with {"status": "Potential"} to alert us about a
-// potential exposure. This class handles the notification and
-// is where we convert from the server's terminology to ours.
-
-class StatusNotificationHandler {
-
+class TestResultNotificationHandler {
+    
+    struct UserInfoDecodingError: Error {}
+    
     let logger = Logger(label: "StatusNotificationHandler")
 
     let statusStateMachine: StatusStateMachining
@@ -25,19 +21,23 @@ class StatusNotificationHandler {
     init(statusStateMachine: StatusStateMachining) {
         self.statusStateMachine = statusStateMachine
     }
-
+    
     func handle(userInfo: [AnyHashable: Any], completion: @escaping RemoteNotificationCompletionHandler) {
-        guard
-            let status = userInfo["status"] as? String,
-            status == "Potential"
-        else {
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: userInfo, options: .prettyPrinted)
+            
+            if let testResult = try? JSONDecoder().decode(TestResult.self, from: jsonData) {
+                statusStateMachine.received(testResult.result)
+            } else {
+                throw UserInfoDecodingError()
+            }
+            
+            completion(.newData)
+        } catch {
             logger.warning("Received unexpected status from remote notification: '\(String(describing: userInfo["status"]))'")
             completion(.noData)
             return
         }
-
-        statusStateMachine.exposed()
-        completion(.newData)
     }
 
 }

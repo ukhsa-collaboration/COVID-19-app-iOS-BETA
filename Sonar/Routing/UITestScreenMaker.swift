@@ -74,23 +74,30 @@ class UITestScreenMaker {
             }
 
             return onboardingViewController
-
+        case .positiveTestStatus:
+            let positiveTestResult = StatusState.PositiveTestResult(symptoms: [], startDate: self.dateProvider())
+            persistence.statusState = .positiveTestResult(positiveTestResult)
+            return createNavigationController()
         case .status:
-            let statusViewController = StatusViewController.instantiate { viewController in
-                viewController.inject(
-                    statusStateMachine: statusStateMachine,
-                    userStatusProvider: userStatusProvider,
-                    persistence: persistence,
-                    linkingIdManager: linkingIdManager,
-                    registrationService: registrationService,
-                    dateProvider: self.dateProvider,
-                    notificationCenter: notificationCenter
-                )
-            }
-            let navigationController = UINavigationController()
-            navigationController.pushViewController(statusViewController, animated: false)
-            return navigationController
+            return createNavigationController()
         }
+    }
+    
+    func createNavigationController() -> UINavigationController {
+        let statusViewController = StatusViewController.instantiate { viewController in
+            viewController.inject(
+                statusStateMachine: statusStateMachine,
+                userStatusProvider: userStatusProvider,
+                persistence: persistence,
+                linkingIdManager: linkingIdManager,
+                registrationService: registrationService,
+                dateProvider: self.dateProvider,
+                notificationCenter: notificationCenter
+            )
+        }
+        let navigationController = UINavigationController()
+        navigationController.pushViewController(statusViewController, animated: false)
+        return navigationController
     }
 }
 

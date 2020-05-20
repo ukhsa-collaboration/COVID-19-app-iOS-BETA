@@ -9,28 +9,30 @@
 import XCTest
 @testable import Sonar
 
-class StatusNotificationHandlerTests: XCTestCase {
+class StateNotificationHandlerTests: XCTestCase {
 
-    var handler: StatusNotificationHandler!
+    var exposureNotificationHandler: ExposedNotificationHandler!
+    var testResultNotificationHandler: TestResultNotificationHandler!
     var statusStateMachine: StatusStateMachiningDouble!
 
     override func setUp() {
         statusStateMachine = StatusStateMachiningDouble()
-        handler = StatusNotificationHandler(statusStateMachine: statusStateMachine)
+        exposureNotificationHandler = ExposedNotificationHandler(statusStateMachine: statusStateMachine)
+        testResultNotificationHandler = TestResultNotificationHandler(statusStateMachine: statusStateMachine)
     }
 
     func testNotPotential() {
         var fetchResult: UIBackgroundFetchResult?
 
-        handler.handle(userInfo: [:]) { fetchResult = $0 }
+        exposureNotificationHandler.handle(userInfo: [:]) { fetchResult = $0 }
         XCTAssertEqual(fetchResult, .noData)
         fetchResult = nil
 
-        handler.handle(userInfo: ["status": 10]) { fetchResult = $0 }
+        exposureNotificationHandler.handle(userInfo: ["status": 10]) { fetchResult = $0 }
         XCTAssertEqual(fetchResult, .noData)
         fetchResult = nil
 
-        handler.handle(userInfo: ["status": "foo"]) { fetchResult = $0 }
+        exposureNotificationHandler.handle(userInfo: ["status": "foo"]) { fetchResult = $0 }
         XCTAssertEqual(fetchResult, .noData)
 
         XCTAssertFalse(statusStateMachine.exposedCalled)
@@ -39,11 +41,20 @@ class StatusNotificationHandlerTests: XCTestCase {
     func testPotentialStatus() {
         var fetchResult: UIBackgroundFetchResult?
 
-        handler.handle(userInfo: ["status": "Potential"]) { fetchResult = $0 }
+        exposureNotificationHandler.handle(userInfo: ["status": "Potential"]) { fetchResult = $0 }
 
         XCTAssertTrue(statusStateMachine.exposedCalled)
 
         XCTAssertEqual(fetchResult, .newData)
     }
 
+    func testPositiveResult() {
+        var fetchResult: UIBackgroundFetchResult?
+
+        testResultNotificationHandler.handle(userInfo: ["result": "POSITIVE"]) { fetchResult = $0 }
+        
+        XCTAssertTrue(statusStateMachine.receivedTestResult)
+
+        XCTAssertEqual(fetchResult, .newData)
+    }
 }

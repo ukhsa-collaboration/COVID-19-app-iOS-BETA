@@ -42,7 +42,7 @@ class StatusStateMigrationTests: XCTestCase {
             diagnosis: nil,
             potentiallyExposedOn: dateSentinel
         )
-        XCTAssertEqual(state, .exposed(StatusState.Exposed(exposureDate: dateSentinel)))
+        XCTAssertEqual(state, .exposed(StatusState.Exposed(startDate: dateSentinel)))
 
         // 2020.04.14
         currentDate = Calendar.current.date(byAdding: .day, value: 13, to: dateSentinel)!
@@ -50,7 +50,7 @@ class StatusStateMigrationTests: XCTestCase {
             diagnosis: nil,
             potentiallyExposedOn: dateSentinel
         )
-        XCTAssertEqual(state, .exposed(StatusState.Exposed(exposureDate: dateSentinel)))
+        XCTAssertEqual(state, .exposed(StatusState.Exposed(startDate: dateSentinel)))
 
         // 2020.04.15
         currentDate = Calendar.current.date(byAdding: .day, value: 14, to: dateSentinel)!

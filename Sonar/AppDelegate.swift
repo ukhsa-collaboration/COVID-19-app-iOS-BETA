@@ -85,7 +85,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         session: urlSession
     )
 
-    lazy var statusNotificationHandler: StatusNotificationHandler = StatusNotificationHandler(
+    lazy var exposedNotificationHandler: ExposedNotificationHandler = ExposedNotificationHandler(
+        statusStateMachine: statusStateMachine
+    )
+    
+    lazy var testResultNotificationHandler: TestResultNotificationHandler = TestResultNotificationHandler(
         statusStateMachine: statusStateMachine
     )
 
@@ -117,7 +121,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
         remoteNotificationManager.configure()
         dispatcher.registerHandler(forType: .status) { userInfo, completion in
-            self.statusNotificationHandler.handle(userInfo: userInfo, completion: completion)
+            self.exposedNotificationHandler.handle(userInfo: userInfo, completion: completion)
+        }
+        dispatcher.registerHandler(forType: .testResult) { userInfo, completion in
+            self.testResultNotificationHandler.handle(userInfo: userInfo, completion: completion)
         }
 
         Appearance.setup()

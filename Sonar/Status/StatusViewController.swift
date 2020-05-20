@@ -102,7 +102,20 @@ class StatusViewController: UIViewController, Storyboarded {
         nhsCoronavirusLinkButton.url = ContentURLs.shared.regionalServices
 
         notificationCenter.addObserver(self, selector: #selector(reload), name: UIApplication.didBecomeActiveNotification, object: nil)
-        notificationCenter.addObserver(self, selector: #selector(reload), name: StatusStateMachine.StatusStateChangedNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(stateChanged(_:)), name: StatusStateMachine.StatusStateChangedNotification, object: nil)
+    }
+    
+    @objc func stateChanged(_ statusStateMachineNotification: NSNotification) {
+        defer { reload() } // Always reload when the statusStateMachine's state changes
+        
+        guard let statusStateMachine = statusStateMachineNotification.object as? StatusStateMachine else { return }
+        switch statusStateMachine.state {
+        case .positiveTestResult:
+            presentTestResultUpdate(result: .positive)
+        default:
+            break
+        }
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -251,7 +264,7 @@ class StatusViewController: UIViewController, Storyboarded {
             diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
             diagnosisTitleLabel.text = "Your symptoms indicate you may have coronavirus. Please self-isolate and apply for a test."
             diagnosisDetailLabel.isHidden = false
-            diagnosisDetailLabel.text = userStatusProvider.detailForSymptomatic(symptomatic.expiryDate)
+            diagnosisDetailLabel.text = userStatusProvider.detailWithExpiryDate(symptomatic.expiryDate)
             feelUnwellButton.isHidden = true
             applyForTestButton.isHidden = false
             stepsDetailLabel.isHidden = false
@@ -270,14 +283,33 @@ class StatusViewController: UIViewController, Storyboarded {
             if dateProvider() >= checkin.checkinDate {
                 presentPrompt(for: checkin)
             }
+            
+        case .positiveTestResult(let positiveTestResult):
+            diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
+            diagnosisTitleLabel.text = "Your test result indicates  you  have coronavirus. Please isolate yourself and your household."
+            diagnosisDetailLabel.isHidden = false
+            diagnosisDetailLabel.text = userStatusProvider.detailWithExpiryDate(positiveTestResult.expiryDate)
+            feelUnwellButton.isHidden = true
+            applyForTestButton.isHidden = true
+            nextStepsDetailView.isHidden = true
         }
+        
     }
 
     private func presentCoughUpdate() {
-        let coughUpdateViewController = CoughUpdateViewController.instantiate()
-        coughUpdateViewController.modalPresentationStyle = .custom
-        coughUpdateViewController.transitioningDelegate = drawerPresentationManager
-        navigationController?.visibleViewController!.present(coughUpdateViewController, animated: true)
+        presentDrawer(drawVC: CoughUpdateViewController.instantiate())
+    }
+    
+    private func presentTestResultUpdate(result: TestResult.Result) {
+        let testUpdateViewController = TestUpdateViewController.instantiate()
+        testUpdateViewController.inject(headerText: result.headerText, detailText: result.detailText)
+        presentDrawer(drawVC: testUpdateViewController)
+    }
+    
+    private func presentDrawer(drawVC: UIViewController) {
+        drawVC.modalPresentationStyle = .custom
+        drawVC.transitioningDelegate = drawerPresentationManager
+        navigationController?.visibleViewController!.present(drawVC, animated: true)
     }
 }
 

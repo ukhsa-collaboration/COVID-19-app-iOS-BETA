@@ -19,10 +19,10 @@ protocol StatusStateMachining {
     func exposed()
     func unexposed()
     func ok()
+    func received(_ result: TestResult.Result)
 }
 
 class StatusStateMachine: StatusStateMachining {
-
     static let StatusStateChangedNotification = NSNotification.Name("StatusStateChangedNotification")
 
     private let logger = Logger(label: "StatusStateMachine")
@@ -104,7 +104,7 @@ class StatusStateMachine: StatusStateMachining {
             let symptomatic = StatusState.Symptomatic(symptoms: symptoms, startDate: startDate)
             try contactEventsUploader.upload(from: startDate, with: symptoms)
             transition(from: exposed, to: symptomatic)
-        case .symptomatic, .checkin, .unexposed:
+        case .symptomatic, .checkin, .unexposed, .positiveTestResult:
             assertionFailure("Self-diagnosing is only allowed from ok/exposed")
         }
     }
@@ -122,6 +122,11 @@ class StatusStateMachine: StatusStateMachining {
             guard dateProvider() >= exposed.expiryDate else { return }
 
             transition(from: exposed, to: StatusState.Ok())
+        case .positiveTestResult(let positiveTestResult):
+            guard dateProvider() >= positiveTestResult.expiryDate else { return }
+            
+            let checkin = StatusState.Checkin(symptoms: positiveTestResult.symptoms, checkinDate: positiveTestResult.expiryDate)
+            transition(from: positiveTestResult, to: checkin)
         }
     }
 
@@ -129,7 +134,7 @@ class StatusStateMachine: StatusStateMachining {
         userNotificationCenter.removePendingNotificationRequests(withIdentifiers: [checkinNotificationIdentifier])
 
         switch state {
-        case .ok, .symptomatic, .exposed, .unexposed:
+        case .ok, .symptomatic, .exposed, .unexposed, .positiveTestResult:
             assertionFailure("Checking in is only allowed from checkin")
             return
         case .checkin(let checkin):
@@ -154,13 +159,13 @@ class StatusStateMachine: StatusStateMachining {
     func exposed() {
         switch state {
         case .ok(let ok):
-            transition(from: ok, to: StatusState.Exposed(exposureDate: dateProvider()))
+            transition(from: ok, to: StatusState.Exposed(startDate: dateProvider()))
         case .unexposed(let unexposed):
-            transition(from: unexposed, to: StatusState.Exposed(exposureDate: dateProvider()))
+            transition(from: unexposed, to: StatusState.Exposed(startDate: dateProvider()))
         case .exposed:
             assertionFailure("The server should never send us another exposure notification if we're already exposed")
             break // ignore repeated exposures
-        case .symptomatic, .checkin:
+        case .symptomatic, .checkin, .positiveTestResult:
             break // don't care about exposures if we're already symptomatic
         }
     }
@@ -169,7 +174,7 @@ class StatusStateMachine: StatusStateMachining {
         switch state {
         case .exposed(let exposed):
             transition(from: exposed, to: StatusState.Unexposed())
-        case .ok, .symptomatic, .checkin, .unexposed:
+        case .ok, .symptomatic, .checkin, .unexposed, .positiveTestResult:
             break // no-op
         }
     }
@@ -183,6 +188,18 @@ class StatusStateMachine: StatusStateMachining {
         transition(from: unexposed, to: StatusState.Ok())
     }
 
+    func received(_ result: TestResult.Result) {
+        add(notificationRequest: testResultNotification)
+        switch (result, state) {
+        case (.positive, .symptomatic(let symptomatic)):
+            transition(to: StatusState.PositiveTestResult(symptoms: symptomatic.symptoms, startDate: symptomatic.startDate))
+        default:
+            let message = "\(result): Not handled yet"
+            assertionFailure(message)
+            self.logger.error("\(message)")
+        }
+    }
+    
     // MARK: - Transitions
 
     private func transition(from ok: StatusState.Ok, to symptomatic: StatusState.Symptomatic) {
@@ -217,6 +234,15 @@ class StatusStateMachine: StatusStateMachining {
         add(notificationRequest: adviceChangedNotificationRequest)
         state = .exposed(exposed)
     }
+    
+    private func transition(from positiveTestResult: StatusState.PositiveTestResult, to checkin: StatusState.Checkin) {
+        state = .checkin(checkin)
+    }
+    
+    private func transition(to positiveTestResult: StatusState.PositiveTestResult) {
+        add(notificationRequest: testResultNotification)
+        state = .positiveTestResult(positiveTestResult)
+    }
 
     private func transition(from unexposed: StatusState.Unexposed, to exposed: StatusState.Exposed) {
         add(notificationRequest: adviceChangedNotificationRequest)
@@ -236,7 +262,7 @@ class StatusStateMachine: StatusStateMachining {
 
     private func add(notificationRequest: UNNotificationRequest) {
         userNotificationCenter.add(notificationRequest) { error in
-            if error != nil {
+            if let error = error {
                 self.logger.critical("Unable to add local notification: \(String(describing: error))")
             }
         }
@@ -264,6 +290,15 @@ class StatusStateMachine: StatusStateMachining {
         content.body = "ADVICE_CHANGED_NOTIFICATION_BODY".localized
 
         return UNNotificationRequest(identifier: adviceChangedNotificationIdentifier, content: content, trigger: nil)
+    }()
+    
+    private lazy var testResultNotification: UNNotificationRequest = {
+        let content = UNMutableNotificationContent()
+        content.title = "TEST_RESULT_TITLE".localized
+        content.body = "TEST_RESULT_BODY".localized
+
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
+        return request
     }()
 
 }

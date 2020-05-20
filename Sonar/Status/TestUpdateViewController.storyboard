@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Test Update View Controller-->
+        <scene sceneID="4Fg-fZ-jab">
+            <objects>
+                <viewController storyboardIdentifier="TestUpdateViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Usf-OH-hM9" customClass="TestUpdateViewController" customModule="Sonar" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="oZ5-bF-sz0">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="400"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NdS-Ir-lwG">
+                                <rect key="frame" x="0.0" y="44" width="414" height="356"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="pg1-Bd-mmX">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="234"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your test result indicates that you have coronavirus" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z4d-Td-TgN">
+                                                <rect key="frame" x="16" y="42" width="382" height="42.5"/>
+                                                <accessibility key="accessibilityConfiguration">
+                                                    <accessibilityTraits key="traits" staticText="YES" header="YES"/>
+                                                </accessibility>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thank you for getting tested. Your advice has been updated." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OXR-SF-E5K">
+                                                <rect key="frame" x="16" y="100.5" width="382" height="42.5"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <color key="textColor" name="NHS Text"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cfe-8T-jbW" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
+                                                <rect key="frame" x="16" y="159" width="382" height="33"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <state key="normal" title="Close"/>
+                                                <connections>
+                                                    <action selector="close:" destination="Usf-OH-hM9" eventType="touchUpInside" id="xXA-id-ihj"/>
+                                                    <segue destination="vMb-Lq-kBc" kind="unwind" unwindAction="unwindFromSymptomsPromptWithUnwindSegue:" id="ueX-tY-6pK"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <directionalEdgeInsets key="directionalLayoutMargins" top="42" leading="16" bottom="42" trailing="16"/>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="Uri-ur-FaV" firstAttribute="top" secondItem="pg1-Bd-mmX" secondAttribute="top" id="9B6-bL-QiN"/>
+                                    <constraint firstItem="pg1-Bd-mmX" firstAttribute="bottom" secondItem="Uri-ur-FaV" secondAttribute="bottom" id="Akw-Az-kRY"/>
+                                    <constraint firstItem="pg1-Bd-mmX" firstAttribute="height" secondItem="Yr2-oh-HkQ" secondAttribute="height" priority="1" id="YqV-vj-KR0"/>
+                                    <constraint firstItem="pg1-Bd-mmX" firstAttribute="width" secondItem="Yr2-oh-HkQ" secondAttribute="width" id="YxM-yX-pd1"/>
+                                    <constraint firstItem="pg1-Bd-mmX" firstAttribute="trailing" secondItem="Uri-ur-FaV" secondAttribute="trailing" id="ewi-ef-h1z"/>
+                                    <constraint firstItem="Uri-ur-FaV" firstAttribute="leading" secondItem="pg1-Bd-mmX" secondAttribute="leading" id="xWo-iJ-KSb"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="Uri-ur-FaV"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="Yr2-oh-HkQ"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="RTy-DK-hBP" firstAttribute="bottom" secondItem="NdS-Ir-lwG" secondAttribute="bottom" id="01d-mn-qGO"/>
+                            <constraint firstItem="NdS-Ir-lwG" firstAttribute="top" secondItem="RTy-DK-hBP" secondAttribute="top" id="acj-wV-t0I"/>
+                            <constraint firstItem="NdS-Ir-lwG" firstAttribute="leading" secondItem="RTy-DK-hBP" secondAttribute="leading" id="elk-ej-cGq"/>
+                            <constraint firstItem="RTy-DK-hBP" firstAttribute="trailing" secondItem="NdS-Ir-lwG" secondAttribute="trailing" id="exH-DD-tQM"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="RTy-DK-hBP"/>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="414" height="400"/>
+                    <connections>
+                        <outlet property="detail" destination="OXR-SF-E5K" id="aGF-3G-gi2"/>
+                        <outlet property="header" destination="z4d-Td-TgN" id="QZS-4C-b1G"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F4x-TO-dqk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="vMb-Lq-kBc" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="4338" y="1440"/>
+        </scene>
+    </scenes>
+    <resources>
+        <namedColor name="NHS Text">
+            <color red="0.1289999932050705" green="0.16899999976158142" blue="0.19599999487400055" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

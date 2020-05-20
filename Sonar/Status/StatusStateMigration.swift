@@ -49,7 +49,7 @@ class StatusStateMigration {
                 return .ok(StatusState.Ok())
             }
 
-            return .exposed(StatusState.Exposed(exposureDate: date))
+            return .exposed(StatusState.Exposed(startDate: date))
         case (.some(let diagnosis), _):
             guard !diagnosis.symptoms.isEmpty else {
                 return .ok(StatusState.Ok())
