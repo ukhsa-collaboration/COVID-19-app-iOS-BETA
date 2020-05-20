@@ -17,6 +17,7 @@ protocol StatusStateMachining {
     func tick()
     func checkin(symptoms: Symptoms)
     func exposed()
+    func unexposed()
 }
 
 class StatusStateMachine: StatusStateMachining {
@@ -107,7 +108,7 @@ class StatusStateMachine: StatusStateMachining {
 
     func tick() {
         switch state {
-        case .ok, .checkin, .unexposed:
+        case .ok, .checkin:
             break // Don't need to do anything
         case .symptomatic(let symptomatic):
             guard dateProvider() >= symptomatic.expiryDate else { return }
@@ -118,6 +119,10 @@ class StatusStateMachine: StatusStateMachining {
             guard dateProvider() >= exposed.expiryDate else { return }
 
             transition(from: exposed, to: StatusState.Ok())
+
+        // This state is temporary until more features come in
+        case .unexposed(let unexposed):
+            transition(from: unexposed, to: StatusState.Ok())
         }
     }
 
@@ -213,6 +218,10 @@ class StatusStateMachine: StatusStateMachining {
 
     private func transition(from exposed: StatusState.Exposed, to unexposed: StatusState.Unexposed) {
         state = .unexposed(unexposed)
+    }
+
+    private func transition(from unexposed: StatusState.Unexposed, to ok: StatusState.Ok) {
+        state = .ok(ok)
     }
 
     // MARK: - User Notifications
