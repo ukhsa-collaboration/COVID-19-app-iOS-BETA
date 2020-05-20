@@ -1,10 +1,10 @@
-name: trigger-internal-deploy
+name: trigger-deploys
 
 on:
   schedule:
     - cron: '0 * * * *'
   repository_dispatch:
-    types: [deploy-internal]
+    types: [trigger-deploys]
   # push:
   #   branches:
   #     - ci
@@ -34,6 +34,11 @@ jobs:
     runs-on:
       - self-hosted
       - macos
+    strategy:
+      matrix:
+        run-config:
+          - { env: internal }
+          - { env: beta }
     if: needs.should-deploy.outputs.should-deploy == 'true'
     steps:
       - run: echo ${{ needs.should-deploy.outputs.should-deploy }}
@@ -63,7 +68,7 @@ jobs:
           DEPLOYMENT_TOKEN: ${{ secrets.deployment_token }}
           DEPLOYMENT_SHA: ${{ steps.bump-build-version.outputs.commit-sha }}
           DEPLOYMENT_PAYLOAD: 'This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}**.\n\nThe commit hash was: _${{ steps.build-version.outputs.commit-sha }}_.'
-        run: ./bin/create-deployment internal
+        run: ./bin/create-deployment ${{ matrix.run-config['env'] }}
 
   notify:
     needs: [should-deploy, deploy]
