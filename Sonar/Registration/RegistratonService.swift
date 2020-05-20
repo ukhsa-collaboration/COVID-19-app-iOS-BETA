@@ -128,6 +128,8 @@ class ConcreteRegistrationService: RegistrationService {
         let existingToken = persistence.registeredPushToken
         switch existingToken {
         case .none:
+            // This is a “legacy” scenario where we had not stored the push token when registration was completed.
+            // Given the low probability of this token changing, just store the token and continue.
             persistence.registeredPushToken = token
         case .some(token):
             break
