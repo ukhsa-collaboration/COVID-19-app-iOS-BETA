@@ -239,4 +239,8 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
     }
 }
 
-fileprivate let logger = Logger(label: "BTLE")
+fileprivate let logger: Logger = {
+    var logger = Logger(label: "BTLE")
+    logger.logLevel = .notice
+    return logger
+}()

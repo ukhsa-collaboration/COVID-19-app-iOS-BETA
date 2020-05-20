@@ -282,6 +282,10 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
         return true
     }
     
-    fileprivate let logger = Logger(label: "BTLE")
+    fileprivate let logger: Logger = {
+        var logger = Logger(label: "BTLE")
+        logger.logLevel = .notice
+        return logger
+    }()
 
 }
