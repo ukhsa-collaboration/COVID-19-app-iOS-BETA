@@ -153,7 +153,6 @@
                         <viewLayoutGuide key="safeArea" id="HBC-hk-frn"/>
                     </view>
                 </viewController>
-                <navigationItem title="Apply for a coronavirus test" id="xTo-tT-i24"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AjV-a4-yTk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5102.898550724638" y="515.625"/>
