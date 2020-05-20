@@ -38,7 +38,7 @@ jobs:
       matrix:
         run-config:
           - { env: internal }
-          - { env: beta }
+          # - { env: beta }
     if: needs.should-deploy.outputs.should-deploy == 'true'
     steps:
       - run: echo ${{ needs.should-deploy.outputs.should-deploy }}
