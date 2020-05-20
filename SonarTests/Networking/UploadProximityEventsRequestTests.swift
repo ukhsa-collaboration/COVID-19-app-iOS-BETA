@@ -77,7 +77,7 @@ class UploadProximityEventsRequestTests: XCTestCase {
         let expectedBody =
 """
 {
-  "symptoms" : ["temperature"],
+  "symptoms" : ["TEMPERATURE"],
   "sonarId" : "\(sonarId)",
   "contactEvents" : [
     {

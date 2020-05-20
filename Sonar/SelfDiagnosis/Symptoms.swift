@@ -25,6 +25,10 @@ struct Symptoms: Equatable {
         self.symptoms = symptoms
     }
 
+    func getSymptoms() -> Set<Symptom> {
+        return symptoms
+    }
+
     func contains(_ symptom: Symptom) -> Bool {
         return symptoms.contains(symptom)
     }
