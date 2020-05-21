@@ -120,3 +120,17 @@ jobs:
           status: FAILED
           color: danger
 
+  tag-as-supported:
+    runs-on:
+    - self-hosted
+    - macos
+
+    needs: publish
+    container: pactfoundation/pact-cli
+
+    steps:
+    - name: Tag published version as supported in pact broker
+      run: pact-broker create-version-tag --tag supported --pacticipant 'Android App' --version "$(echo ${{ github.sha }} | cut -d-7)"
+      env:
+        PACT_BROKER_BASE_URL: https://sonar-pact-broker-app.apps.nonprod.aws.cp.data.england.nhs.uk
+

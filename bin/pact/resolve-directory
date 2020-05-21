@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+resolve-directory()
+{
+  cd "$1" 2> /dev/null || return $?
+  echo "`pwd -P`"
+}

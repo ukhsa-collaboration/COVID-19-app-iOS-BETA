@@ -169,6 +169,18 @@
 		AE2A5E502423C473007A4771 /* ContactEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2A5E4F2423C473007A4771 /* ContactEvent.swift */; };
 		AE2DCAA0241920B600A940FC /* BTLEBroadcaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2DCA9F241920B600A940FC /* BTLEBroadcaster.swift */; };
 		AEAFA67924602629009AEAEB /* StatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAFA67824602629009AEAEB /* StatusTests.swift */; };
+		B70190202475136800075C80 /* RegistrationAPIPactTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B701901F2475136800075C80 /* RegistrationAPIPactTests.swift */; };
+		B71ECC1C2474C81100DD6EFC /* ProximityAPIPactTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71ECC1B2474C81100DD6EFC /* ProximityAPIPactTests.swift */; };
+		B7363DDE2468B5AB00193E04 /* PactConsumerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B7363DDD2468B5AB00193E04 /* PactConsumerSwift */; };
+		B79A2E832476013900E8C21E /* environment.json in Resources */ = {isa = PBXBuildFile; fileRef = B79A2E742476013800E8C21E /* environment.json */; };
+		B79A2E842476013900E8C21E /* localhost.crt in Resources */ = {isa = PBXBuildFile; fileRef = B79A2E762476013800E8C21E /* localhost.crt */; };
+		B79A2E852476013900E8C21E /* localhost.key in Resources */ = {isa = PBXBuildFile; fileRef = B79A2E772476013800E8C21E /* localhost.key */; };
+		B79A2E862476013900E8C21E /* sonar.ca.pem in Resources */ = {isa = PBXBuildFile; fileRef = B79A2E782476013800E8C21E /* sonar.ca.pem */; };
+		B79A2E882476013900E8C21E /* IOSTrustStore Structure.pdf in Resources */ = {isa = PBXBuildFile; fileRef = B79A2E7C2476013800E8C21E /* IOSTrustStore Structure.pdf */; };
+		B79A2E892476013900E8C21E /* iosCertTrustManager.py in Resources */ = {isa = PBXBuildFile; fileRef = B79A2E7D2476013800E8C21E /* iosCertTrustManager.py */; };
+		B79A2E8A2476013900E8C21E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = B79A2E7E2476013800E8C21E /* README.md */; };
+		B7F21883247201E2007343FA /* TrustSonarCARootCertTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B727953F246E750B0087DEC6 /* TrustSonarCARootCertTest.swift */; };
+		B7F21885247226EB007343FA /* MatcherExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F21884247226EB007343FA /* MatcherExtensions.swift */; };
 		DDD5BDC52473EA1200329720 /* NotificationStatusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5BDC42473EA1200329720 /* NotificationStatusButton.swift */; };
 		F600A60224297A8E0038DF57 /* RegistrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F600A60124297A8E0038DF57 /* RegistrationRequest.swift */; };
 		F600A60424297C010038DF57 /* RegistrationRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F600A60324297C010038DF57 /* RegistrationRequestTests.swift */; };
@@ -292,6 +304,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 6FC63C2C241641B8007C8BF3;
 			remoteInfo = CoLocate;
+		};
+		B7363DD82468B35700193E04 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6FC63C25241641B8007C8BF3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6FC63C2C241641B8007C8BF3;
+			remoteInfo = Sonar;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -475,6 +494,20 @@
 		AE2A5E4F2423C473007A4771 /* ContactEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEvent.swift; sourceTree = "<group>"; };
 		AE2DCA9F241920B600A940FC /* BTLEBroadcaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTLEBroadcaster.swift; sourceTree = "<group>"; };
 		AEAFA67824602629009AEAEB /* StatusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusTests.swift; sourceTree = "<group>"; };
+		B701901F2475136800075C80 /* RegistrationAPIPactTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationAPIPactTests.swift; sourceTree = "<group>"; };
+		B71ECC1B2474C81100DD6EFC /* ProximityAPIPactTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProximityAPIPactTests.swift; sourceTree = "<group>"; };
+		B727953F246E750B0087DEC6 /* TrustSonarCARootCertTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustSonarCARootCertTest.swift; sourceTree = "<group>"; };
+		B7363DD32468B35700193E04 /* SonarPactTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SonarPactTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B7363DD72468B35700193E04 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B74661212468C8D800443637 /* SonarPactTestsConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = SonarPactTestsConfig.xcconfig; sourceTree = "<group>"; };
+		B79A2E742476013800E8C21E /* environment.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = environment.json; sourceTree = "<group>"; };
+		B79A2E762476013800E8C21E /* localhost.crt */ = {isa = PBXFileReference; lastKnownFileType = file; path = localhost.crt; sourceTree = "<group>"; };
+		B79A2E772476013800E8C21E /* localhost.key */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = localhost.key; sourceTree = "<group>"; };
+		B79A2E782476013800E8C21E /* sonar.ca.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sonar.ca.pem; sourceTree = "<group>"; };
+		B79A2E7C2476013800E8C21E /* IOSTrustStore Structure.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "IOSTrustStore Structure.pdf"; sourceTree = "<group>"; };
+		B79A2E7D2476013800E8C21E /* iosCertTrustManager.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = iosCertTrustManager.py; sourceTree = "<group>"; };
+		B79A2E7E2476013800E8C21E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		B7F21884247226EB007343FA /* MatcherExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatcherExtensions.swift; sourceTree = "<group>"; };
 		DDD5BDC42473EA1200329720 /* NotificationStatusButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationStatusButton.swift; sourceTree = "<group>"; };
 		F600A60124297A8E0038DF57 /* RegistrationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationRequest.swift; sourceTree = "<group>"; };
 		F600A60324297C010038DF57 /* RegistrationRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationRequestTests.swift; sourceTree = "<group>"; };
@@ -629,6 +662,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B7363DD02468B35700193E04 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B7363DDE2468B5AB00193E04 /* PactConsumerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -957,6 +998,7 @@
 				6FC63C2F241641B8007C8BF3 /* Sonar */,
 				214209C02422276800C7BFF3 /* SonarTests */,
 				895D9DDF2437383300573D4D /* SonarUITests */,
+				B7363DD42468B35700193E04 /* SonarPactTests */,
 				21B3D2E62429115600573061 /* Frameworks */,
 				6FC63C2E241641B8007C8BF3 /* Products */,
 			);
@@ -968,6 +1010,7 @@
 				6FC63C2D241641B8007C8BF3 /* Sonar.app */,
 				214209BF2422276800C7BFF3 /* SonarTests.xctest */,
 				895D9DDE2437383300573D4D /* SonarUITests.xctest */,
+				B7363DD32468B35700193E04 /* SonarPactTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1088,6 +1131,7 @@
 		898FE855243B42F400210775 /* Flows */ = {
 			isa = PBXGroup;
 			children = (
+				B727953F246E750B0087DEC6 /* TrustSonarCARootCertTest.swift */,
 				898FE853243B42E700210775 /* OnboardingTests.swift */,
 			);
 			path = Flows;
@@ -1127,6 +1171,73 @@
 				89F06B362434C35A0074C612 /* LoggerMetadata.swift */,
 			);
 			path = Logging;
+			sourceTree = "<group>";
+		};
+		B7363DD42468B35700193E04 /* SonarPactTests */ = {
+			isa = PBXGroup;
+			children = (
+				B79A2E752476013800E8C21E /* Certificates */,
+				B79A2E732476013800E8C21E /* Environment */,
+				B79A2E792476013800E8C21E /* Setup */,
+				B701901F2475136800075C80 /* RegistrationAPIPactTests.swift */,
+				B71ECC1B2474C81100DD6EFC /* ProximityAPIPactTests.swift */,
+				B7F21884247226EB007343FA /* MatcherExtensions.swift */,
+				B7363DD72468B35700193E04 /* Info.plist */,
+				B74661212468C8D800443637 /* SonarPactTestsConfig.xcconfig */,
+			);
+			path = SonarPactTests;
+			sourceTree = "<group>";
+		};
+		B79A2E732476013800E8C21E /* Environment */ = {
+			isa = PBXGroup;
+			children = (
+				B79A2E742476013800E8C21E /* environment.json */,
+			);
+			path = Environment;
+			sourceTree = "<group>";
+		};
+		B79A2E752476013800E8C21E /* Certificates */ = {
+			isa = PBXGroup;
+			children = (
+				B79A2E762476013800E8C21E /* localhost.crt */,
+				B79A2E772476013800E8C21E /* localhost.key */,
+				B79A2E782476013800E8C21E /* sonar.ca.pem */,
+			);
+			path = Certificates;
+			sourceTree = "<group>";
+		};
+		B79A2E792476013800E8C21E /* Setup */ = {
+			isa = PBXGroup;
+			children = (
+				B79A2E7B2476013800E8C21E /* ADVTrustStore */,
+				B79A2E812476013800E8C21E /* tmp */,
+			);
+			path = Setup;
+			sourceTree = "<group>";
+		};
+		B79A2E7B2476013800E8C21E /* ADVTrustStore */ = {
+			isa = PBXGroup;
+			children = (
+				B79A2E7C2476013800E8C21E /* IOSTrustStore Structure.pdf */,
+				B79A2E7D2476013800E8C21E /* iosCertTrustManager.py */,
+				B79A2E7E2476013800E8C21E /* README.md */,
+			);
+			path = ADVTrustStore;
+			sourceTree = "<group>";
+		};
+		B79A2E812476013800E8C21E /* tmp */ = {
+			isa = PBXGroup;
+			children = (
+				B79A2E822476013800E8C21E /* pids */,
+			);
+			path = tmp;
+			sourceTree = "<group>";
+		};
+		B79A2E822476013800E8C21E /* pids */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = pids;
 			sourceTree = "<group>";
 		};
 		F604977024549B49002B8503 /* Testing */ = {
@@ -1417,6 +1528,27 @@
 			productReference = 895D9DDE2437383300573D4D /* SonarUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		B7363DD22468B35700193E04 /* SonarPactTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B7363DDA2468B35800193E04 /* Build configuration list for PBXNativeTarget "SonarPactTests" */;
+			buildPhases = (
+				B7363DCF2468B35700193E04 /* Sources */,
+				B7363DD02468B35700193E04 /* Frameworks */,
+				B7363DD12468B35700193E04 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B7363DD92468B35700193E04 /* PBXTargetDependency */,
+			);
+			name = SonarPactTests;
+			packageProductDependencies = (
+				B7363DDD2468B5AB00193E04 /* PactConsumerSwift */,
+			);
+			productName = SonarPactTests;
+			productReference = B7363DD32468B35700193E04 /* SonarPactTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1440,6 +1572,11 @@
 						CreatedOnToolsVersion = 11.4;
 						TestTargetID = 6FC63C2C241641B8007C8BF3;
 					};
+					B7363DD22468B35700193E04 = {
+						CreatedOnToolsVersion = 11.4.1;
+						LastSwiftMigration = 1140;
+						TestTargetID = 6FC63C2C241641B8007C8BF3;
+					};
 				};
 			};
 			buildConfigurationList = 6FC63C28241641B8007C8BF3 /* Build configuration list for PBXProject "Sonar" */;
@@ -1453,6 +1590,7 @@
 			mainGroup = 6FC63C24241641B8007C8BF3;
 			packageReferences = (
 				89F06B2A2434A2C00074C612 /* XCRemoteSwiftPackageReference "swift-log" */,
+				B7363DCA2465461100193E04 /* XCRemoteSwiftPackageReference "pact-consumer-swift" */,
 			);
 			productRefGroup = 6FC63C2E241641B8007C8BF3 /* Products */;
 			projectDirPath = "";
@@ -1461,6 +1599,7 @@
 				6FC63C2C241641B8007C8BF3 /* Sonar */,
 				214209BE2422276800C7BFF3 /* SonarTests */,
 				895D9DDD2437383300573D4D /* SonarUITests */,
+				B7363DD22468B35700193E04 /* SonarPactTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1509,6 +1648,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B7363DD12468B35700193E04 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B79A2E832476013900E8C21E /* environment.json in Resources */,
+				B79A2E862476013900E8C21E /* sonar.ca.pem in Resources */,
+				B79A2E882476013900E8C21E /* IOSTrustStore Structure.pdf in Resources */,
+				B79A2E892476013900E8C21E /* iosCertTrustManager.py in Resources */,
+				B79A2E852476013900E8C21E /* localhost.key in Resources */,
+				B79A2E842476013900E8C21E /* localhost.crt in Resources */,
+				B79A2E8A2476013900E8C21E /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1783,10 +1936,21 @@
 				898FE857243B4D7A00210775 /* XCUIElement.swift in Sources */,
 				AEAFA67924602629009AEAEB /* StatusTests.swift in Sources */,
 				898FE854243B42E800210775 /* OnboardingTests.swift in Sources */,
+				B7F21883247201E2007343FA /* TrustSonarCARootCertTest.swift in Sources */,
 				89074B8A24378B6E00D67777 /* ScreenTestCase.swift in Sources */,
 				AE29892E2472E600004C4097 /* Pages.swift in Sources */,
 				89074B8724378A0D00D67777 /* UITestPayload.swift in Sources */,
 				89074B822437882100D67777 /* Screen.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B7363DCF2468B35700193E04 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B71ECC1C2474C81100DD6EFC /* ProximityAPIPactTests.swift in Sources */,
+				B70190202475136800075C80 /* RegistrationAPIPactTests.swift in Sources */,
+				B7F21885247226EB007343FA /* MatcherExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1802,6 +1966,11 @@
 			isa = PBXTargetDependency;
 			target = 6FC63C2C241641B8007C8BF3 /* Sonar */;
 			targetProxy = 895D9DE32437383300573D4D /* PBXContainerItemProxy */;
+		};
+		B7363DD92468B35700193E04 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6FC63C2C241641B8007C8BF3 /* Sonar */;
+			targetProxy = B7363DD82468B35700193E04 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1873,6 +2042,20 @@
 			};
 			name = Release;
 		};
+		B7363DDB2468B35800193E04 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B74661212468C8D800443637 /* SonarPactTestsConfig.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		B7363DDC2468B35800193E04 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B74661212468C8D800443637 /* SonarPactTestsConfig.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1912,6 +2095,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		B7363DDA2468B35800193E04 /* Build configuration list for PBXNativeTarget "SonarPactTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B7363DDB2468B35800193E04 /* Debug */,
+				B7363DDC2468B35800193E04 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
@@ -1923,6 +2115,14 @@
 				minimumVersion = 1.2.0;
 			};
 		};
+		B7363DCA2465461100193E04 /* XCRemoteSwiftPackageReference "pact-consumer-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/DiUS/pact-consumer-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.8.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1930,6 +2130,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 89F06B2A2434A2C00074C612 /* XCRemoteSwiftPackageReference "swift-log" */;
 			productName = Logging;
+		};
+		B7363DDD2468B5AB00193E04 /* PactConsumerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B7363DCA2465461100193E04 /* XCRemoteSwiftPackageReference "pact-consumer-swift" */;
+			productName = PactConsumerSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

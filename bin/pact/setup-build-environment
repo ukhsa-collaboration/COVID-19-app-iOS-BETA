@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+set -eo pipefail
+
+SRCROOT=${SRCROOT:-"$(dirname "$0")/../.."}
+PACT_SETUP_LOG="$SRCROOT/SonarPactTests/Setup/build-environment-setup.log"
+echo $XCTestConfigurationFilePath > "$PACT_SETUP_LOG"
+
+check_for_failure() {
+  if [[ $? != 0 ]]; then
+    echo "######################## PACT TEST SETUP FAILED ########################"
+    echo
+    cat "$PACT_SETUP_LOG"
+    echo
+    echo "Reinstantiating environment file..."
+    ENVIRONMENT_FILE_PATH="${SRCROOT}/.secret/Environment.swift"
+    if [[ -f "$ENVIRONMENT_FILE_PATH.backup" ]]; then
+      mv "$ENVIRONMENT_FILE_PATH.backup" \
+	"$ENVIRONMENT_FILE_PATH" >> "$PACT_SETUP_LOG" 2>&1
+    else
+      echo "No backup file detected at $ENVIRONMENT_FILE_PATH.backup..."
+    fi
+    echo "Done."
+    echo
+    echo "######################## PACT TEST SETUP FAILED ########################"
+  fi
+}
+
+trap "check_for_failure" EXIT
+
+echo "Rewriting environment file for pact testing..."
+ENVIRONMENT_FILE_PATH="${SRCROOT}/.secret/Environment.swift"
+if [[ -f "$ENVIRONMENT_FILE_PATH" ]]; then
+  mv "$ENVIRONMENT_FILE_PATH" "$ENVIRONMENT_FILE_PATH.backup" >> "$PACT_SETUP_LOG" 2>&1
+else
+  echo "You do not seem to have an environment file setup at \
+  $ENVIRONMENT_FILE_PATH, skipping backup..." >> "$PACT_SETUP_LOG" 2>&1
+fi
+
+cat "${SRCROOT}/SonarPactTests/Environment/environment.json" \
+  | "${SRCROOT}/bin/make-environment" \
+  > "$ENVIRONMENT_FILE_PATH"

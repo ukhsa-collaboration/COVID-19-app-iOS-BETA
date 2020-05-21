@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+
+set -eo pipefail
+
+ROOT_DIR="$(dirname "$0")/../.."
+pushd "$ROOT_DIR" > /dev/null
+
+INSTALL_LOG="$ROOT_DIR/SonarPactTests/Setup/install.log"
+touch "$INSTALL_LOG"
+
+check_for_failure() {
+  if [[ $? != 0 ]]; then
+    echo
+    echo "Something seems to have gone wrong, here are the log contents:"
+    cat "$INSTALL_LOG"
+  fi
+}
+
+trap "check_for_failure" EXIT
+
+if [[ -t 1 ]] && [[ -z "$(xcode-select --print-path | grep -E "/[^/.]+.app/")" ]]; then
+  echo "You currently have no XCode version selected for developer tools."
+  echo "Resetting to the default XCode version..."
+  echo "You may be asked for your password:"
+  sudo xcode-select --reset > $INSTALL_LOG 2>&1
+  echo "Done"
+fi
+
+if [[ -z "$(command -v pact-mock-service)" ]]; then
+  [[ -t 1 ]] && echo "You may be asked for your password:"
+  echo "Installing pact mock service..."
+  sudo gem install --no-doc pact-mock_service > $INSTALL_LOG 2>&1
+  echo "Done"
+  echo
+fi
+
+if [[ -z "$(command -v pact-broker)" ]]; then
+  [[ -t 1 ]] && echo "You may be asked for your password:"
+  echo "Installing pact broker client..."
+  sudo gem install --no-doc pact_broker-client > $INSTALL_LOG 2>&1
+  echo "Done"
+  echo
+fi
+
+echo "Installing Sonar CA as root CA in simulators..."
+python2 "./SonarPactTests/Setup/ADVTrustStore/iosCertTrustManager.py" --add \
+  "./SonarPactTests/Certificates/sonar.ca.pem"
+echo "Done"
+echo
+
+echo "Trusting Sonar CA on all booted simulator devices..."
+IDENTIFY_ACTIVE_DEVICES_RUBY_SCRIPT=$(cat <<RUBY
+  JSON.parse(ARGF.read)["devices"].flat_map { |runtime, devices|
+    devices.select { |device| device["state"] == "Booted" }.map { |device| device["udid"] }
+  }.each(&method(:puts))
+RUBY)
+
+ALL_ACTIVE_DEVICES=$(xcrun simctl list -j | ruby -rjson -e "$IDENTIFY_ACTIVE_DEVICES_RUBY_SCRIPT")
+for DEVICE in $ALL_ACTIVE_DEVICES
+do
+  echo -n "Trusting Sonar CA on device $DEVICE... "
+  OTHER_SWIFT_FLAGS='-D PACT_SETUP' xcodebuild -scheme 'Sonar Pact Tests' -target SonarUITests test -destination "id=$DEVICE"\
+		-showBuildTimingSummary -allowProvisioningUpdates -only-testing "SonarUITests/TrustSonarCARootCertTest" > "$INSTALL_LOG" 2>&1
+  echo "Done"
+done
+echo "Done"
+echo
+
+popd > /dev/null
+

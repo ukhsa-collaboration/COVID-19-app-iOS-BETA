@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+set -eo pipefail
+
+SRCROOT=${SRCROOT:-"$(dirname "$0")/../.."}
+PACT_SETUP_LOG="$SRCROOT/SonarPactTests/Setup/mock-server.log"
+
+check_for_failure() {
+	if [[ $? != 0 ]]; then
+		echo "######################## PACT TEST TEARDOWN FAILED ########################"
+		echo
+		cat "$PACT_SETUP_LOG"
+		echo
+		echo "######################## PACT TEST TEARDOWN FAILED ########################"
+	fi
+}
+
+trap "check_for_failure" EXIT
+
+if [[ -z "$(command -v pact-mock-service)" ]]; then
+	echo "You do not have pact mock service installed. Please run bin/setup-pact." >> $PACT_SETUP_LOG
+	exit 1
+fi
+
+echo "Stopping pact mock service..."
+pact-mock-service stop >> "$PACT_SETUP_LOG" 2>&1
+echo "Done."

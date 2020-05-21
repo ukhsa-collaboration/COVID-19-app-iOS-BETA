@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+set -eo pipefail
+
+SRCROOT=${SRCROOT:-"$(dirname "$0")/../.."}
+PACT_SETUP_LOG="$SRCROOT/SonarPactTests/Setup/mock-server.log"
+env > "$PACT_SETUP_LOG"
+
+check_for_failure() {
+  if [[ $? != 0 ]]; then
+    echo "######################## PACT TEST SETUP FAILED ########################"
+    echo
+    cat "$PACT_SETUP_LOG"
+    echo
+    echo
+    echo "######################## PACT TEST SETUP FAILED ########################"
+  fi
+}
+
+trap "check_for_failure" EXIT
+
+if [[ -z "$(command -v "pact-mock-service")" ]]; then
+  echo "You do not have pact mock service installed. Please run bin/setup-pact." >> $PACT_SETUP_LOG
+  exit 1
+fi
+
+echo
+echo "Starting pact mock service..."
+CERTIFICATES_DIRECTORY="${SRCROOT}/SonarPactTests/Certificates"
+PACTS_DIRECTORY="${SRCROOT}/Pacts"
+pact-mock-service start \
+  --pact-specification-version 2.0.0 \
+  --log "${SRCROOT}/SonarPactTests/mock-server-run.log" \
+  --pact-dir "$PACTS_DIRECTORY" \
+  -p 1234 \
+  --ssl \
+  --sslkey "$CERTIFICATES_DIRECTORY/localhost.key" \
+  --sslcert "$CERTIFICATES_DIRECTORY/localhost.crt" \
+  >> "$PACT_SETUP_LOG" 2>&1
+
+echo "Done."
+
