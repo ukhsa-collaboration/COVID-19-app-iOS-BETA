@@ -146,7 +146,7 @@ class StatusViewController: UIViewController, Storyboarded {
         UIApplication.shared.open(ContentURLs.shared.statusInfo)
     }
 
-    @IBAction func adviceTapped(_ sender: Any) {
+    @IBAction func adviceTapped() {
         let adviceVc = AdviceViewController.instantiate()
         adviceVc.inject(linkDestination: content.currentAdvice(for: statusStateMachine.state))
         navigationController?.pushViewController(adviceVc, animated: true)

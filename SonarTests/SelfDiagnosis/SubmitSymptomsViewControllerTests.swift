@@ -18,7 +18,7 @@ class SubmitSymptomsViewControllerTests: TestCase {
     override func setUp() {
         super.setUp()
 
-        statusStateMachine = StatusStateMachiningDouble()
+        statusStateMachine = StatusStateMachiningDouble(state: .ok(StatusState.Ok()))
     }
     
     func testSubmitTappedWithConfirmationSwitchOff() throws {

@@ -46,7 +46,7 @@ class StatusViewControllerTests: XCTestCase {
     
     func testReloadsOnPotentiallyExposedNotification() {
         let notificationCenter = NotificationCenter()
-        let statusStateMachine = StatusStateMachiningDouble()
+        let statusStateMachine = StatusStateMachiningDouble(state: .ok(StatusState.Ok()))
         let vc = makeViewController(
             notificationCenter: notificationCenter,
             statusStateMachine: statusStateMachine
@@ -59,14 +59,14 @@ class StatusViewControllerTests: XCTestCase {
         XCTAssertEqual(vc.diagnosisTitleLabel.text, "You have been near someone who has coronavirus symptoms".localized)
     }
     
-    func testShowsBlueStatus() throws {
+    func testShowsOkStatus() throws {
         throw XCTSkip("TODO: make this work for all time zones and on CI")
 
 //        let midnightUTC = 1589414400
 //        let midnightLocal = midnightUTC - TimeZone.current.secondsFromGMT()
 //        let currentDate = Date.init(timeIntervalSince1970: TimeInterval(midnightLocal))
         
-        let statusStateMachine = StatusStateMachiningDouble()
+        let statusStateMachine = StatusStateMachiningDouble(state: .ok(StatusState.Ok()))
         let vc = makeViewController(persistence: PersistenceDouble(), statusStateMachine: statusStateMachine)
         
         XCTAssertFalse(vc.diagnosisDetailLabel.isHidden)
@@ -74,7 +74,7 @@ class StatusViewControllerTests: XCTestCase {
         XCTAssertEqual(vc.diagnosisTitleLabel.text, "Follow the current advice to stop the spread of coronavirus")
     }
     
-    func testShowsAmberStatus() throws {
+    func testShowsExposedStatus() throws {
         throw XCTSkip("TODO: make this work for all time zones and on CI")
 
         // Since we inject in a GB locale but calculate expiry using the current calendar,
@@ -95,7 +95,7 @@ class StatusViewControllerTests: XCTestCase {
         XCTAssertEqual(vc.diagnosisTitleLabel.text, "You have been near someone who has coronavirus symptoms")
     }
     
-    func testShowsRedStatusForInitialSelfDiagnosis() {
+    func testShowsSymptomaticStatusForInitialSelfDiagnosis() {
         let startDate = Calendar.current.date(from: DateComponents(month: 5, day: 7))!
         let statusStateMachine = StatusStateMachiningDouble(
             state: .symptomatic(StatusState.Symptomatic(
@@ -110,7 +110,7 @@ class StatusViewControllerTests: XCTestCase {
         XCTAssertEqual(vc.diagnosisDetailLabel.text, "On 14 May this app will notify you to update your symptoms. Please read your full advice below.")
     }
 
-    func testShowsRedStatusForCheckin() {
+    func testShowsSymptomaticStatusForCheckin() {
         let statusStateMachine = StatusStateMachiningDouble(
             state: .checkin(StatusState.Checkin(symptoms: [.temperature], checkinDate: Date()))
         )
@@ -120,13 +120,58 @@ class StatusViewControllerTests: XCTestCase {
         XCTAssertFalse(vc.diagnosisDetailLabel.isHidden)
         XCTAssertEqual(vc.diagnosisDetailLabel.text, "Follow this advice until your temperature returns to normal.")
     }
+    
+    func testShowsCorrectAdviceInOkStatus() throws {
+        let vc = makeViewController(
+            persistence: PersistenceDouble(),
+            statusStateMachine: StatusStateMachiningDouble(state: .ok(StatusState.Ok()))
+        )
+        let navigationController = SynchronousNavigationControllerDouble()
+        navigationController.viewControllers = [vc]
+        
+        vc.adviceTapped()
+        
+        let adviceVc = try XCTUnwrap(vc.navigationController?.viewControllers.last as? AdviceViewController)
+        XCTAssertNotNil(adviceVc.view)
+        XCTAssertEqual(adviceVc.link.url, URL(string: "https://faq.covid19.nhs.uk/article/KA-01062/en-us"))
+    }
+    
+    func testShowsCorrectAdviceInExposedStatus() throws {
+        let vc = makeViewController(
+            persistence: PersistenceDouble(),
+            statusStateMachine: StatusStateMachiningDouble(state: .exposed(StatusState.Exposed(startDate: Date())))
+        )
+        let navigationController = SynchronousNavigationControllerDouble()
+        navigationController.viewControllers = [vc]
+        
+        vc.adviceTapped()
+        
+        let adviceVc = try XCTUnwrap(vc.navigationController?.viewControllers.last as? AdviceViewController)
+        XCTAssertNotNil(adviceVc.view)
+        XCTAssertEqual(adviceVc.link.url, URL(string: "https://www.gov.uk/coronavirus?utm_source=nhscovid19ios&utm_medium=mobileapp&utm_campaign=nhscovid19app&utm_content=notified"))
+    }
+    
+    func testShowsCorrectAdviceInSymptomaticStatus() throws {
+        let vc = makeViewController(
+            persistence: PersistenceDouble(),
+            statusStateMachine: StatusStateMachiningDouble(state: .symptomatic(StatusState.Symptomatic(symptoms: [], startDate: Date())))
+        )
+        let navigationController = SynchronousNavigationControllerDouble()
+        navigationController.viewControllers = [vc]
+        
+        vc.adviceTapped()
+        
+        let adviceVc = try XCTUnwrap(vc.navigationController?.viewControllers.last as? AdviceViewController)
+        XCTAssertNotNil(adviceVc.view)
+        XCTAssertEqual(adviceVc.link.url, URL(string: "https://www.gov.uk/government/publications/covid-19-stay-at-home-guidance/stay-at-home-guidance-for-households-with-possible-coronavirus-covid-19-infection?utm_source=nhscovid19ios&utm_medium=mobileapp&utm_campaign=nhscovid19app&utm_content=symptoms#main-messages"))
+    }
 }
 
 fileprivate func makeViewController(
     persistence: Persisting = PersistenceDouble(),
     registrationService: RegistrationService = RegistrationServiceDouble(),
     notificationCenter: NotificationCenter = NotificationCenter(),
-    statusStateMachine: StatusStateMachining = StatusStateMachiningDouble(),
+    statusStateMachine: StatusStateMachining = StatusStateMachiningDouble(state: .ok(StatusState.Ok())),
     loadView: Bool = true
 ) -> StatusViewController {
     let vc = StatusViewController.instantiate()
@@ -143,4 +188,10 @@ fileprivate func makeViewController(
         vc.viewWillAppear(false)
     }
     return vc
+}
+
+fileprivate class SynchronousNavigationControllerDouble: UINavigationController {
+    override func pushViewController(_ viewController: UIViewController, animated: Bool) {
+        viewControllers.append(viewController)
+    }
 }
