@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -527,8 +527,7 @@
                                                     <accessibilityTraits key="traits" button="YES"/>
                                                 </accessibility>
                                                 <connections>
-                                                    <action selector="yesTapped:" destination="iIR-bG-zmI" eventType="valueChanged" id="QhR-rN-O0c"/>
-                                                    <action selector="yesTapped:" destination="iIR-bG-zmI" eventType="touchUpInside" id="ZSz-eA-9Ys"/>
+                                                    <action selector="yesTapped" destination="iIR-bG-zmI" eventType="touchUpInside" id="ReF-bD-F2d"/>
                                                 </connections>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2oA-jL-11T" userLabel="Spacer">
@@ -544,8 +543,7 @@
                                                     <accessibilityTraits key="traits" button="YES"/>
                                                 </accessibility>
                                                 <connections>
-                                                    <action selector="noTapped:" destination="iIR-bG-zmI" eventType="touchUpInside" id="JNa-SE-MOa"/>
-                                                    <action selector="noTapped:" destination="iIR-bG-zmI" eventType="valueChanged" id="jfX-xi-qKa"/>
+                                                    <action selector="noTapped" destination="iIR-bG-zmI" eventType="touchUpInside" id="51Z-W1-Ifi"/>
                                                 </connections>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hSh-i0-ULA" userLabel="Spacer">
@@ -572,7 +570,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N2a-2g-6VM" userLabel="Button" customClass="PrimaryButton" customModule="Sonar" customModuleProvider="target">
                                 <rect key="frame" x="20" y="812" width="374" height="30"/>
                                 <connections>
-                                    <action selector="buttonTapped:" destination="iIR-bG-zmI" eventType="touchUpInside" id="0h0-B2-qbg"/>
+                                    <action selector="buttonTapped" destination="iIR-bG-zmI" eventType="touchUpInside" id="Vco-5f-qZ4"/>
                                 </connections>
                             </button>
                         </subviews>

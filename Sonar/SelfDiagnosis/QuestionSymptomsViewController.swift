@@ -73,7 +73,7 @@ class QuestionSymptomsViewController: UIViewController, Storyboarded {
             yesButton.layer.borderWidth = 3
             yesButton.layer.borderColor = UIColor(named: "NHS Highlight")!.withAlphaComponent(0.96).cgColor
         } else {
-            yesTapped(self)
+            yesTapped()
         }
     }
     
@@ -82,23 +82,23 @@ class QuestionSymptomsViewController: UIViewController, Storyboarded {
             noButton.layer.borderWidth = 3
             noButton.layer.borderColor = UIColor(named: "NHS Highlight")!.withAlphaComponent(0.96).cgColor
         } else {
-            noTapped(self)
+            noTapped()
         }
     }
     
-    @IBAction func yesTapped(_ sender: Any) {
+    @IBAction func yesTapped() {
         yesButton.isSelected = true
         noButton.isSelected = false
         questionState = true
     }
     
-    @IBAction func noTapped(_ sender: Any) {
+    @IBAction func noTapped() {
         yesButton.isSelected = false
         noButton.isSelected = true
         questionState = false
     }
     
-    @IBAction func buttonTapped(_ sender: Any) {
+    @IBAction func buttonTapped() {
         guard let state = questionState else {
             scroll(after: {
                 self.errorLabel.isHidden = false
