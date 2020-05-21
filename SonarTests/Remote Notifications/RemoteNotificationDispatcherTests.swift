@@ -15,15 +15,4 @@ class RemoteNotificationDispatcherTests: XCTestCase {
     override func setUp() {
     }
 
-    func testFcmTokenExistsInUserDefaultsOnReceiveRegistrationToken() {
-        let expected = UUID().uuidString
-        let sut = RemoteNotificationDispatcher(notificationCenter: NotificationCenter(), userNotificationCenter: UserNotificationCenterDouble())
-        
-        sut.receiveRegistrationToken(fcmToken: expected)
-        
-        let result = UserDefaults.standard.string(forKey: "fcmToken")
-        
-        XCTAssertEqual(result, expected)
-    }
-
 }
