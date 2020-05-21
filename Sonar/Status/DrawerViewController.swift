@@ -33,4 +33,10 @@ class DrawerViewController: UIViewController, Storyboarded {
         header.text = headerText
         detail.text = detailText
     }
+
+    override func accessibilityPerformEscape() -> Bool {
+        performSegue(withIdentifier: "unwindFromDrawer", sender: self)
+        return true
+    }
+
 }
