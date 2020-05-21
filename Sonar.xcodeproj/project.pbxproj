@@ -19,6 +19,7 @@
 		0938D9092474484B006FAADF /* ApplyForTestContainerViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0938D9082474484B006FAADF /* ApplyForTestContainerViewControllerTests.swift */; };
 		095283A6247597DA00CDEE55 /* BackgroundableTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095283A5247597DA00CDEE55 /* BackgroundableTimer.swift */; };
 		095283A82475990B00CDEE55 /* BackgroundableTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095283A72475990B00CDEE55 /* BackgroundableTimerTests.swift */; };
+		095283AA2476FF2800CDEE55 /* SynchronousNavigationControllerDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095283A92476FF2800CDEE55 /* SynchronousNavigationControllerDouble.swift */; };
 		095A91182434FF1500ED6369 /* ApplicationDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095A91172434FF1500ED6369 /* ApplicationDouble.swift */; };
 		0964B37B24631B1B0022EF97 /* UIViewController+Scrolling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0964B37A24631B1B0022EF97 /* UIViewController+Scrolling.swift */; };
 		0964B37D246328A20022EF97 /* UIView+Scrolling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0964B37C246328A20022EF97 /* UIView+Scrolling.swift */; };
@@ -334,6 +335,7 @@
 		0938D9082474484B006FAADF /* ApplyForTestContainerViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyForTestContainerViewControllerTests.swift; sourceTree = "<group>"; };
 		095283A5247597DA00CDEE55 /* BackgroundableTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundableTimer.swift; sourceTree = "<group>"; };
 		095283A72475990B00CDEE55 /* BackgroundableTimerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundableTimerTests.swift; sourceTree = "<group>"; };
+		095283A92476FF2800CDEE55 /* SynchronousNavigationControllerDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronousNavigationControllerDouble.swift; sourceTree = "<group>"; };
 		095A91172434FF1500ED6369 /* ApplicationDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationDouble.swift; sourceTree = "<group>"; };
 		0964B37A24631B1B0022EF97 /* UIViewController+Scrolling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Scrolling.swift"; sourceTree = "<group>"; };
 		0964B37C246328A20022EF97 /* UIView+Scrolling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Scrolling.swift"; sourceTree = "<group>"; };
@@ -788,6 +790,7 @@
 				89CCF65E2456EF7000AC9D91 /* TrustValidatingDouble.swift */,
 				090B1870243552C300870B5D /* UserNotificationCenterDouble.swift */,
 				097F054424732A9C00E633C8 /* UrlOpenerDouble.swift */,
+				095283A92476FF2800CDEE55 /* SynchronousNavigationControllerDouble.swift */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -1712,6 +1715,7 @@
 				21B71F7A24519B2000D0DED7 /* AppDelegateTest.swift in Sources */,
 				214209CA242227B300C7BFF3 /* PersistenceTests.swift in Sources */,
 				F60497672452415F002B8503 /* ContactEventsUploaderDouble.swift in Sources */,
+				095283AA2476FF2800CDEE55 /* SynchronousNavigationControllerDouble.swift in Sources */,
 				F632792124351C1900CF7A42 /* OnboardingViewControllerTests.swift in Sources */,
 				89DF66A62460217A00A55F24 /* StorageCheckingDouble.swift in Sources */,
 				89C8B216245C5258009CCE80 /* DefaultObjectStoringDouble.swift in Sources */,

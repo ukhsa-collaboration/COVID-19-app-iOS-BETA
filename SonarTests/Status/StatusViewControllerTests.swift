@@ -187,9 +187,3 @@ fileprivate func makeViewController(
     }
     return vc
 }
-
-fileprivate class SynchronousNavigationControllerDouble: UINavigationController {
-    override func pushViewController(_ viewController: UIViewController, animated: Bool) {
-        viewControllers.append(viewController)
-    }
-}
