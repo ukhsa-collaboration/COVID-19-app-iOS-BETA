@@ -90,12 +90,9 @@ class StatusStateMachine: StatusStateMachining {
                 transition(from: ok, to: symptomatic)
             } else { // expired
                 if symptoms.contains(.temperature) {
-                    transition(from: ok, to: symptomatic)
-
-                    // go straight into checkin
                     guard let checkinDate = nextCheckinDate else { return }
                     let checkin = StatusState.Checkin(symptoms: symptomatic.symptoms, checkinDate: checkinDate)
-                    transition(from: symptomatic, to: checkin)
+                    transition(from: ok, to: checkin)
                 } else {
                     // don't do anything if we only have a cough
                 }
@@ -190,11 +187,19 @@ class StatusStateMachine: StatusStateMachining {
 
     func received(_ result: TestResult.Result) {
         add(notificationRequest: testResultNotification)
-        switch (result, state) {
-        case (.positive, .symptomatic(let symptomatic)):
-            transition(to: StatusState.PositiveTestResult(symptoms: symptomatic.symptoms, startDate: symptomatic.startDate))
-        default:
+
+        guard result == .positive else {
             let message = "\(result): Not handled yet"
+            assertionFailure(message)
+            self.logger.error("\(message)")
+            return
+        }
+
+        switch state {
+        case .symptomatic(let symptomatic):
+            transition(to: StatusState.PositiveTestResult(symptoms: symptomatic.symptoms, startDate: symptomatic.startDate))
+        case .ok, .checkin, .exposed, .unexposed, .positiveTestResult:
+            let message = "\(result) from \(state): Not handled yet"
             assertionFailure(message)
             self.logger.error("\(message)")
         }
@@ -208,6 +213,11 @@ class StatusStateMachine: StatusStateMachining {
     }
 
     private func transition(from symptomatic: StatusState.Symptomatic, to checkin: StatusState.Checkin) {
+        add(notificationRequest: checkinNotificationRequest(at: checkin.checkinDate))
+        state = .checkin(checkin)
+    }
+
+    private func transition(from ok: StatusState.Ok, to checkin: StatusState.Checkin) {
         add(notificationRequest: checkinNotificationRequest(at: checkin.checkinDate))
         state = .checkin(checkin)
     }

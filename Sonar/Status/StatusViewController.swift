@@ -115,7 +115,6 @@ class StatusViewController: UIViewController, Storyboarded {
         default:
             break
         }
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -124,10 +123,17 @@ class StatusViewController: UIViewController, Storyboarded {
             vc.inject(persistence: persistence, registrationService: registrationService, notificationCenter: notificationCenter)
         case let vc as ApplyForTestContainerViewController:
             vc.inject(linkingIdManager: linkingIdManager, uiQueue: DispatchQueue.main)
+        case let vc as DrawerViewController:
+            guard let config = sender as? DrawerViewController.Config else {
+                assertionFailure("DrawerViewControllers need configuration")
+                return
+            }
+            vc.inject(config: config)
         default:
             break
         }
     }
+
     private func setupBannerAppearance(hasNotificationProblem: Bool, bannerDisabled: Bool) {
         guard isViewLoaded else { return }
         let hideBanner = !hasNotificationProblem || bannerDisabled
@@ -183,6 +189,9 @@ class StatusViewController: UIViewController, Storyboarded {
 
     @IBAction func unwindFromUnexposed(unwindSegue: UIStoryboardSegue) {
         statusStateMachine.ok()
+    }
+
+    @IBAction func unwindFromDrawer(unwindSegue: UIStoryboardSegue) {
     }
 
     fileprivate func presentPrompt(for checkin: StatusState.Checkin) {
@@ -247,7 +256,11 @@ class StatusViewController: UIViewController, Storyboarded {
             stepsDetailLabel.text = "If you don’t have any symptoms, there’s no need to do anything right now. If you develop symptoms, please come back to this app."
 
             if case .unexposed = statusStateMachine.state {
-                performSegue(withIdentifier: "presentUnexposed", sender: self)
+                let config = DrawerViewController.Config(
+                    header: "UNEXPOSED_DRAWER_HEADER".localized,
+                    detail: "UNEXPOSED_DRAWER_DETAIL".localized
+                )
+                performSegue(withIdentifier: "presentDrawer", sender: config)
             }
 
         case .exposed:
@@ -297,13 +310,18 @@ class StatusViewController: UIViewController, Storyboarded {
     }
 
     private func presentCoughUpdate() {
-        presentDrawer(drawVC: CoughUpdateViewController.instantiate())
+        let config = DrawerViewController.Config(
+            header: "COUGH_UPDATE_HEADER".localized,
+            detail: "COUGH_UPDATE_DETAIL".localized
+        )
+        performSegue(withIdentifier: "presentDrawer", sender: config)
     }
     
     private func presentTestResultUpdate(result: TestResult.Result) {
-        let testUpdateViewController = TestUpdateViewController.instantiate()
-        testUpdateViewController.inject(headerText: result.headerText, detailText: result.detailText)
-        presentDrawer(drawVC: testUpdateViewController)
+        guard let header = result.headerText else { return }
+        let detail = result.detailText
+        let config = DrawerViewController.Config(header: header, detail: detail)
+        performSegue(withIdentifier: "presentDrawer", sender: config)
     }
     
     private func presentDrawer(drawVC: UIViewController) {

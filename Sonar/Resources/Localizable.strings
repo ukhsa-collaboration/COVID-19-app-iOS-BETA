@@ -98,3 +98,8 @@ Loss of appetite: means not feeling hungry.
 "TEST_UPDATE_DRAW_POSITIVE_HEADER" = "Your test result indicates that you have coronavirus";
 "TEST_UPDATE_DRAW_DETAIL" = "Thank you for getting tested. Your advice has been updated. You have received an email with more information.";
 
+"UNEXPOSED_DRAWER_HEADER" = "Your advice has changed";
+"UNEXPOSED_DRAWER_DETAIL" = "The person you had been near to with coronavirus symptoms has tested negative for the virus. Your advice has been updated.";
+
+"COUGH_UPDATE_HEADER" = "Thank you for updating your symptoms";
+"COUGH_UPDATE_DETAIL" = "Although you still have a continuous cough, you can now follow the current advice.";
