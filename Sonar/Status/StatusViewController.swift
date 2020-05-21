@@ -115,7 +115,6 @@ class StatusViewController: UIViewController, Storyboarded {
         default:
             break
         }
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -124,10 +123,14 @@ class StatusViewController: UIViewController, Storyboarded {
             vc.inject(persistence: persistence, registrationService: registrationService, notificationCenter: notificationCenter)
         case let vc as ApplyForTestContainerViewController:
             vc.inject(linkingIdManager: linkingIdManager, uiQueue: DispatchQueue.main)
+        case let vc as DrawerViewController:
+            guard let config = sender as? DrawerViewController.Config else { return }
+            vc.inject(config: config)
         default:
             break
         }
     }
+
     private func setupBannerAppearance(hasNotificationProblem: Bool, bannerDisabled: Bool) {
         guard isViewLoaded else { return }
         let hideBanner = !hasNotificationProblem || bannerDisabled
@@ -183,6 +186,9 @@ class StatusViewController: UIViewController, Storyboarded {
 
     @IBAction func unwindFromUnexposed(unwindSegue: UIStoryboardSegue) {
         statusStateMachine.ok()
+    }
+
+    @IBAction func unwindFromDrawer(unwindSegue: UIStoryboardSegue) {
     }
 
     fileprivate func presentPrompt(for checkin: StatusState.Checkin) {
@@ -301,9 +307,10 @@ class StatusViewController: UIViewController, Storyboarded {
     }
     
     private func presentTestResultUpdate(result: TestResult.Result) {
-        let testUpdateViewController = DrawerViewController.instantiate()
-        testUpdateViewController.inject(headerText: result.headerText, detailText: result.detailText)
-        presentDrawer(drawVC: testUpdateViewController)
+        guard let header = result.headerText else { return }
+        let detail = result.detailText
+        let config = DrawerViewController.Config(header: header, detail: detail)
+        performSegue(withIdentifier: "presentDrawer", sender: config)
     }
     
     private func presentDrawer(drawVC: UIViewController) {

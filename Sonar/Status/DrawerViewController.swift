@@ -9,16 +9,13 @@
 import UIKit
 
 class DrawerViewController: UIViewController, Storyboarded {
-    static var storyboardName = "Drawer"
-    
-    @IBAction func close(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+
+    struct Config {
+        let header: String
+        let detail: String
     }
 
-    override func accessibilityPerformEscape() -> Bool {
-        close(self)
-        return true
-    }
+    static var storyboardName = "Drawer"
     
     private var headerText: String?
     private var detailText: String?
@@ -26,9 +23,9 @@ class DrawerViewController: UIViewController, Storyboarded {
     @IBOutlet private weak var header: UILabel!
     @IBOutlet private weak var detail: UILabel!
     
-    func inject(headerText: String?, detailText: String) {
-        self.headerText = headerText
-        self.detailText = detailText
+    func inject(config: Config) {
+        self.headerText = config.header
+        self.detailText = config.detail
     }
     
     override func viewDidLoad() {
