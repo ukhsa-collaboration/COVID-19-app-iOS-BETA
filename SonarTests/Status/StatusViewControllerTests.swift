@@ -60,37 +60,20 @@ class StatusViewControllerTests: XCTestCase {
     }
     
     func testShowsOkStatus() throws {
-        throw XCTSkip("TODO: make this work for all time zones and on CI")
-
-//        let midnightUTC = 1589414400
-//        let midnightLocal = midnightUTC - TimeZone.current.secondsFromGMT()
-//        let currentDate = Date.init(timeIntervalSince1970: TimeInterval(midnightLocal))
-        
         let statusStateMachine = StatusStateMachiningDouble(state: .ok(StatusState.Ok()))
         let vc = makeViewController(persistence: PersistenceDouble(), statusStateMachine: statusStateMachine)
         
-        XCTAssertFalse(vc.diagnosisDetailLabel.isHidden)
-        XCTAssertEqual(vc.diagnosisDetailLabel.text, "Valid as of 7 May")
+        XCTAssertTrue(vc.diagnosisDetailLabel.isHidden)
         XCTAssertEqual(vc.diagnosisTitleLabel.text, "Follow the current advice to stop the spread of coronavirus")
     }
     
     func testShowsExposedStatus() throws {
-        throw XCTSkip("TODO: make this work for all time zones and on CI")
-
-        // Since we inject in a GB locale but calculate expiry using the current calendar,
-        // we do these shenanigans to get a suitable date to result in 28 May being the
-        // expiry in GB time.
-        let startDate = Calendar.current
-            .date(from: DateComponents(month: 5, day: 14))!
-            .addingTimeInterval(TimeInterval(-TimeZone.current.secondsFromGMT()))
-
-        let statusStateMachine = StatusStateMachiningDouble(state: .exposed(StatusState.Exposed(startDate: startDate)))
+        let statusStateMachine = StatusStateMachiningDouble(state: .exposed(StatusState.Exposed(startDate: Date())))
         let vc = makeViewController(statusStateMachine: statusStateMachine)
 
         XCTAssertFalse(vc.diagnosisDetailLabel.isHidden)
 
-        //
-        XCTAssertEqual(vc.diagnosisDetailLabel.text, "Follow this advice until 28 May")
+        XCTAssertEqual(vc.diagnosisDetailLabel.text, "Mantain social distancing and wash your hands frequently. Read advice for you below.")
 
         XCTAssertEqual(vc.diagnosisTitleLabel.text, "You have been near someone who has coronavirus symptoms")
     }
