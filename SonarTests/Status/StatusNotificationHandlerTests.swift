@@ -16,7 +16,7 @@ class StateNotificationHandlerTests: XCTestCase {
     var statusStateMachine: StatusStateMachiningDouble!
 
     override func setUp() {
-        statusStateMachine = StatusStateMachiningDouble()
+        statusStateMachine = StatusStateMachiningDouble(state: .ok(StatusState.Ok()))
         exposureNotificationHandler = ExposedNotificationHandler(statusStateMachine: statusStateMachine)
         testResultNotificationHandler = TestResultNotificationHandler(statusStateMachine: statusStateMachine)
     }

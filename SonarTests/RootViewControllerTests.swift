@@ -44,7 +44,7 @@ class RootViewControllerTests: TestCase {
             session: SessionDouble(),
             contactEventsUploader: ContactEventsUploaderDouble(),
             linkingIdManager: LinkingIdManagerDouble(),
-            statusStateMachine: StatusStateMachiningDouble(),
+            statusStateMachine: StatusStateMachiningDouble(state: .ok(StatusState.Ok())),
             uiQueue: QueueDouble(),
             userStatusProvider: UserStatusProvider(localeProvider: EnGbLocaleProviderDouble()),
             urlOpener: UIApplication.shared

@@ -11,7 +11,7 @@
 class StatusStateMachiningDouble: StatusStateMachining {
     var state: StatusState
 
-    init(state: StatusState = .ok(StatusState.Ok())) {
+    init(state: StatusState) {
         self.state = state
     }
 

@@ -446,7 +446,7 @@
                                                 </constraints>
                                                 <directionalEdgeInsets key="directionalLayoutMargins" top="25" leading="16" bottom="25" trailing="16"/>
                                                 <connections>
-                                                    <action selector="adviceTapped:" destination="D27-h6-ECy" eventType="touchUpInside" id="qRR-8x-8g6"/>
+                                                    <action selector="adviceTapped" destination="D27-h6-ECy" eventType="touchUpInside" id="xIf-uo-XgR"/>
                                                 </connections>
                                             </view>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="tNB-vS-CxQ" customClass="UIButton">
