@@ -111,26 +111,32 @@ There are currently a couple ways to do development with remote notifications:
 for the current behavior of the system. (And please update this documentation
 if it's wrong!)
 
-### CD
+### Continuous Delivery
 
-All pushes get built (for both simulator and device) and tested. The
-`TestResult.xcresult` file is archived for future reference. Successful pushes
-on `master` get promoted to `internal`. Every hour, if the tip of `internal`
-hasn't been deployed, we bump the build number and trigger a deployment, which
-will cut a release build and upload it to Apple.
+All pushes get built (for both simulator and device) and tested (on iOS 12 and
+13). The `TestResult.xcresult` file is archived for future reference.
+Successful pushes on `master` get promoted to `internal`. Every hour, if the
+tip of `internal` hasn't been deployed, we bump the build number and trigger a
+deployment to the internal and beta apps, which will cut a release build and
+upload it to Apple.
 
-### Production
+Once the builds are uploaded, they go through App Store processing. Once that
+finishes, there are some **manual steps** that need to be done by someone with
+App Manager+ permissions in App Store Connect in order to release the build to
+testers:
 
-To trigger a release manually:
+1. Add Export Compliance Information to the build
+  - This will release the build to App Store Connect Users
+2. Add the build to the appropriate test groups
 
-Bump the build number (`CFBundleVersion`) in `Sonar/Info.plist` and commit + push this change.
+### Deploying to Production
 
-Set the following environment variables:
+To trigger a release manually, set the following environment variables:
 
 ```shell
 DEPLOYMENT_TOKEN="" # obtain one from here: https://github.com/settings/tokens
 GITHUB_REPOSITORY="nhsx/<repository-name-here>"
-DEPLOYMENT_SHA="<sha of commit you just created>"
+DEPLOYMENT_SHA="<sha of commit you want to release>"
 ```
 
 Run the following command:
@@ -138,13 +144,6 @@ Run the following command:
 ```shell
 ./bin/create-deployment <beta/internal/production>
 ```
-
-**It's on you to provide a valid build version and number.** Since we're
-pushing two+ apps (internal and production) from the same source, we don't want
-to try and automatically figure it out for production builds. Ideally, the
-builds will just match up 1:1, but we want to support making a hotfix from a
-production cut possible (though dealing with build numbers will still probably
-be a hassle, it's easier for a human to deal with than a computer.)
 
 ### Setup/Configuration
 
