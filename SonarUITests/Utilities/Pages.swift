@@ -8,222 +8,231 @@
 
 import XCTest
 
-protocol PageChainable { }
-
-extension PageChainable {
-    @discardableResult
-    func then(block: (Self) -> Void) -> Self {
-        block(self)
-        return self
-    }
-
-    @discardableResult
-    func assert(file: StaticString = #file, line: UInt = #line, expression: (Self) -> Bool) -> Self {
-        XCTAssert(expression(self), file: file, line: line)
-        return self
-    }
-
-    func eightDaysLater() -> Self {
-        // close app
-        XCUIDevice.shared.press(.home)
-
-        // open app 8 days later
-        // (test harness ensures that 8 days pass whenever we close the app)
-
-        XCUIApplication().activate()
-        usleep(500000) // wait for app opening animation
-        return self
-    }
-}
-
-class Page : PageChainable {
+class Page {
     let app: XCUIApplication
 
     init(_ app: XCUIApplication) {
         self.app = app
     }
+}
 
-    @discardableResult
-    func tapButton(_ label: String) -> Self {
-        app.buttons[label].tap()
-        return self
+
+class StatusOkPage : Page {
+    var title: XCUIElement {
+        app.staticTexts["Follow the current advice to stop the spread of coronavirus"]
+    }
+    
+    var feelUnwellButton: XCUIElement {
+        app.buttons.element(matching: NSPredicate(format: "label BEGINSWITH %@", "I feel unwell"))
     }
 }
 
-class StatusPage : Page {
-    var checkinQuestionnairePopup: CheckinQuestionnairePopup {
-        CheckinQuestionnairePopup(app)
+class StatusSymptomaticPage : Page {
+    var title: XCUIElement {
+        app.staticTexts["Your symptoms indicate you may have coronavirus. Please self-isolate and apply for a test."]
+    }
+    
+    var bookNowAdvice: XCUIElement {
+        app.staticTexts["Please book a coronavirus test immediately. Write down your reference code and phone 0800 540 4900"]
     }
 }
 
-class StatusOkPage : StatusPage {
-    var hasStatusOkHeading: Bool {
-        app.staticTexts["Follow the current advice to stop the spread of coronavirus"].exists
-    }
-
-    func tapFeelUnwell() -> SymptomsTemperaturePage {
-        app.buttons.element(matching: NSPredicate(format: "label BEGINSWITH %@", "I feel unwell")).tap()
-        return SymptomsTemperaturePage(app)
-    }
-}
-
-class StatusSymptomaticPage : StatusPage {
-    var hasStatusSymptomaticHeading: Bool {
-        app.staticTexts["Your symptoms indicate you may have coronavirus. Please self-isolate and apply for a test."].exists
-    }
-
-    var hasBookNowAdvice: Bool {
-        app.staticTexts["Please book a coronavirus test immediately. Write down your reference code and phone 0800 540 4900"].exists
-    }
-}
-
-class PositiveTestStatusPage : StatusPage {
+class PositiveTestStatusPage : Page {
     var hasPositiveTestHeading: Bool {
         app.staticTexts["Your test result indicates  you  have coronavirus. Please isolate yourself and your household."].exists
     }
 }
 
 class SymptomsTemperaturePage : Page {
-    func tapTemperatureOption() -> Self { return tapButton("Yes, I have a high temperature") }
-
-    func tapNoTemperatureOption() -> Self { return tapButton("No, I do not have a high temperature") }
-
-    func tapContinue() -> SymptomsCoughPage {
-        tapButton("Continue")
-        return SymptomsCoughPage(app)
+    var title: XCUIElement {
+        app.staticTexts["Do you have a high temperature (fever)?"]
+    }
+    
+    var temperatureOption: XCUIElement {
+        app.buttons["Yes, I have a high temperature"]
+    }
+    
+    var noTemperatureOption: XCUIElement {
+        app.buttons["No, I do not have a high temperature"]
+    }
+    
+    var continueButton: XCUIElement {
+        app.buttons["Continue"]
     }
 }
 
 class SymptomsCoughPage : Page {
-    func tapCoughOption() -> Self { return tapButton("Yes, I have a new continuous cough") }
+    var title: XCUIElement {
+        app.staticTexts["Do you have a new continuous cough?"]
+    }
+    
+    var coughOption: XCUIElement {
+        app.buttons["Yes, I have a new continuous cough"]
+    }
 
-    func tapNoCoughOption() -> Self { return tapButton("No, I do not have a new continuous cough") }
+    var noCoughOption: XCUIElement {
+        app.buttons["No, I do not have a new continuous cough"]
+    }
 
-    func tapContinue() -> SymptomsAnosmiaPage {
-        app.buttons["Continue"].tap()
-        return SymptomsAnosmiaPage(app)
+    var continueButton: XCUIElement {
+        app.buttons["Continue"]
     }
 }
 
 class SymptomsAnosmiaPage : Page {
-    func tapAnosmiaOption() -> Self { return tapButton("Yes, I have lost my sense of smell") }
-
-    func tapNoAnosmiaOption() -> Self { return tapButton("No, I have not lost my sense of smell") }
-
-    func tapContinue() -> SymptomsSneezePage {
-        app.buttons["Continue"].tap()
-        return SymptomsSneezePage(app)
+    var title: XCUIElement {
+        app.staticTexts["Have you recently lost your sense of smell?"]
+    }
+    
+    var anosmiaOption: XCUIElement {
+        app.buttons["Yes, I have lost my sense of smell"]
+    }
+    
+    var noAnosmiaOption: XCUIElement {
+        app.buttons["No, I have not lost my sense of smell"]
+    }
+    
+    var continueButton: XCUIElement {
+        app.buttons["Continue"]
     }
 }
 
 class SymptomsSneezePage : Page {
-    func tapHaveSymptomsOption() -> Self { return tapButton("Yes, I have at least one of these symptoms") }
-
-    func tapNoSymptomsOption() -> Self { return tapButton("No, I do not have any of these symptoms") }
-
-    func tapContinue() -> SymptomsNauseaPage {
-        app.buttons["Continue"].tap()
-        return SymptomsNauseaPage(app)
+    var title: XCUIElement {
+        app.staticTexts["Do you have a runny nose, feel feverish or suffer from sneezing?"]
+    }
+    
+    var haveSymptomsOption: XCUIElement {
+        app.buttons["Yes, I have at least one of these symptoms"]
+    }
+    
+    var noSymptomsOption: XCUIElement {
+        app.buttons["No, I do not have any of these symptoms"]
+    }
+    
+    var continueButton: XCUIElement {
+        app.buttons["Continue"]
     }
 }
 
 class SymptomsNauseaPage : Page {
-    func tapHaveSymptomsOption() -> Self { return tapButton("Yes, I have at least one of these symptoms") }
-
-    func tapNoSymptomsOption() -> Self { return tapButton("No, I do not have any of these symptoms") }
-
-    func tapContinue() -> SymptomsAdvicePage {
-        app.buttons["Continue"].tap()
-        return SymptomsAdvicePage(app)
+    var title: XCUIElement {
+        app.staticTexts["Do you have diarrhoea, nausea, vomiting or a loss of appetite?"]
+    }
+    
+    var haveSymptomsOption: XCUIElement {
+        app.buttons["Yes, I have at least one of these symptoms"]
+    }
+    
+    var noSymptomsOption: XCUIElement {
+        app.buttons["No, I do not have any of these symptoms"]
+    }
+    
+    var continueButton: XCUIElement {
+        app.buttons["Continue"]
     }
 }
 
-class SymptomsAdvicePage : Page {
-    var hasNoSymptoms: Bool {
-        app.staticTexts["You do not appear to have coronavirus symptoms"].exists
+class SymptomsSummaryPage : Page {
+    var sypmtomaticTitle: XCUIElement {
+        app.staticTexts["Check your answers"]
     }
     
-    var hasHighTemperature: Bool {
-        app.staticTexts["I have a high temperature"].exists
+    var asypmtomaticTitle: XCUIElement {
+        app.staticTexts["You do not appear to have coronavirus symptoms"]
     }
     
-    var hasNausea: Bool {
-        app.staticTexts["I have at least one of these symptoms: diarrhoea, nausea, vomiting or loss of appetite"].exists
+    var highTemperature: XCUIElement {
+        app.staticTexts["I have a high temperature"]
+    }
+    
+    var nausea: XCUIElement {
+        app.staticTexts["I have at least one of these symptoms: diarrhoea, nausea, vomiting or loss of appetite"]
     }
 
-    func tapDone() -> StatusOkPage {
-        tapButton("Done")
-        return StatusOkPage(app)
+    var doneButton: XCUIElement {
+        app.buttons["Done"]
+    }
+    
+    var startDateButton: XCUIElement {
+        app.buttons["Select start date"]
     }
 
-    func tapStartDateButton() -> Self { return tapButton("Select start date") }
-
-    func tapContinue() -> SymptomsSubmitPage {
-        app.buttons["Continue"].tap()
-        return SymptomsSubmitPage(app)
+    var continueButton: XCUIElement {
+        app.buttons["Continue"]
     }
 }
 
 class SymptomsSubmitPage : Page {
-    func tapAccurateConfirmationToggle() -> Self {
-        app.switches["Please toggle the switch to confirm the information you entered is accurate"].tap()
-        return self
+    var title: XCUIElement {
+        app.staticTexts["This app currently only works on the Isle of Wight"]
     }
-
-    func tapSubmit() -> StatusSymptomaticPage {
-        tapButton("Submit")
-        return StatusSymptomaticPage(app)
+    
+    var accurateConfirmationToggle: XCUIElement {
+        app.switches["Please toggle the switch to confirm the information you entered is accurate"]
+    }
+    
+    var submitButton: XCUIElement {
+        app.buttons["Submit"]
     }
 }
 
 class CheckinQuestionnairePopup : Page {
-    var isShowingCheckinPrompt: Bool {
-        app.staticTexts["How are you feeling today?"].exists
+    var title: XCUIElement {
+        app.staticTexts["How are you feeling today?"]
     }
-
-    func tapUpdateSymptoms() -> CheckinTemperaturePage {
-        tapButton("Update my symptoms")
-        return CheckinTemperaturePage(app)
-    }
-}
-
-class CheckinPage : Page {
-    func tapCancel() -> CheckinQuestionnairePopup {
-        tapButton("Cancel")
-        return CheckinQuestionnairePopup(app)
+    
+    var updateSymptomsButton: XCUIElement {
+        app.buttons["Update my symptoms"]
     }
 }
 
-class CheckinTemperaturePage : CheckinPage {
-    func tapTemperatureOption() -> Self { return tapButton("Yes, I have a high temperature") }
+class CheckinTemperaturePage : Page {
+    var title: XCUIElement {
+        app.staticTexts["Do you still have a high temperature?"]
+    }
+    
+    var cancelButton: XCUIElement {
+        app.buttons["Cancel"]
+    }
+    
+    var continueButton: XCUIElement {
+        app.buttons["Continue"]
+    }
+    
+    var temperatureOption: XCUIElement {
+        app.buttons["Yes, I have a high temperature"]
+    }
 
-    func tapNoTemperatureOption() -> Self { return tapButton("No, I do not have a high temperature") }
-
-    func tapContinue() -> CheckinCoughPage {
-        tapButton("Continue")
-        return CheckinCoughPage(app)
+    var noTemperatureOption: XCUIElement {
+        app.buttons["No, I do not have a high temperature"]
     }
 }
 
-class CheckinCoughPage : CheckinPage {
-    func tapCoughOption() -> Self { return tapButton("Yes, I have a new continuous cough") }
-
-    func tapNoCoughOption() -> Self { return tapButton("No, I do not have a new continuous cough") }
-
-    func tapSubmit() -> CheckinAdvicePage {
-        tapButton("Submit")
-        return CheckinAdvicePage(app)
+class CheckinCoughPage : Page {
+    var title: XCUIElement {
+        app.staticTexts["Do you still have a continuous cough?"]
+    }
+    
+    var coughOption: XCUIElement {
+        app.buttons["Yes, I have a new continuous cough"]
+    }
+    
+    var noCoughOption: XCUIElement {
+        app.buttons["No, I do not have a new continuous cough"]
+    }
+    
+    var submitButton: XCUIElement {
+        app.buttons["Submit"]
     }
 }
 
-class CheckinAdvicePage : CheckinPage {
-    func expectNoAdvicePopup() -> StatusSymptomaticPage {
-        return StatusSymptomaticPage(app)
+class CheckinAdvicePage : Page {
+    var stillHaveCough: XCUIElement {
+        app.staticTexts["Although you still have a continuous cough, you can now follow the current advice."]
     }
-
-    func checkAndDismissCoughAdvice() -> StatusOkPage {
-        XCTAssert(app.staticTexts["Although you still have a continuous cough, you can now follow the current advice."].exists)
-        tapButton("Close")
-        return StatusOkPage(app)
+    
+    var closeButton: XCUIElement {
+        app.buttons["Close"]
     }
 }
