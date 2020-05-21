@@ -30,12 +30,12 @@
 		<key>exposed</key>
 		<dict>
 			<key>currentAdvice</key>
-			<string>https://www.gov.uk/coronavirus?utm_source=nhscovid19ios&amp;utm_medium=mobileapp&amp;utm_campaign=nhscovid19app&amp;utm_content=notified</string>
+			<string>https://faq.covid19.nhs.uk/article/KA-01063/en-us</string>
 		</dict>
 		<key>symptomatic</key>
 		<dict>
 			<key>currentAdvice</key>
-			<string>https://www.gov.uk/government/publications/covid-19-stay-at-home-guidance/stay-at-home-guidance-for-households-with-possible-coronavirus-covid-19-infection?utm_source=nhscovid19ios&amp;utm_medium=mobileapp&amp;utm_campaign=nhscovid19app&amp;utm_content=symptoms#main-messages</string>
+			<string>https://faq.covid19.nhs.uk/article/KA-01078/en-us</string>
 		</dict>
 		<key>positiveTestResult</key>
 		<dict>

@@ -148,7 +148,7 @@ class StatusViewControllerTests: XCTestCase {
         
         let adviceVc = try XCTUnwrap(vc.navigationController?.viewControllers.last as? AdviceViewController)
         XCTAssertNotNil(adviceVc.view)
-        XCTAssertEqual(adviceVc.link.url, URL(string: "https://www.gov.uk/coronavirus?utm_source=nhscovid19ios&utm_medium=mobileapp&utm_campaign=nhscovid19app&utm_content=notified"))
+        XCTAssertEqual(adviceVc.link.url, URL(string: "https://faq.covid19.nhs.uk/article/KA-01063/en-us"))
     }
     
     func testShowsCorrectAdviceInSymptomaticStatus() throws {
@@ -163,7 +163,22 @@ class StatusViewControllerTests: XCTestCase {
         
         let adviceVc = try XCTUnwrap(vc.navigationController?.viewControllers.last as? AdviceViewController)
         XCTAssertNotNil(adviceVc.view)
-        XCTAssertEqual(adviceVc.link.url, URL(string: "https://www.gov.uk/government/publications/covid-19-stay-at-home-guidance/stay-at-home-guidance-for-households-with-possible-coronavirus-covid-19-infection?utm_source=nhscovid19ios&utm_medium=mobileapp&utm_campaign=nhscovid19app&utm_content=symptoms#main-messages"))
+        XCTAssertEqual(adviceVc.link.url, URL(string: "https://faq.covid19.nhs.uk/article/KA-01078/en-us"))
+    }
+    
+    func testShowsCorrectAdviceInPositiveTestStatus() throws {
+        let vc = makeViewController(
+            persistence: PersistenceDouble(),
+            statusStateMachine: StatusStateMachiningDouble(state: .positiveTestResult(StatusState.PositiveTestResult(symptoms: [], startDate: Date())))
+        )
+        let navigationController = SynchronousNavigationControllerDouble()
+        navigationController.viewControllers = [vc]
+        
+        vc.adviceTapped()
+        
+        let adviceVc = try XCTUnwrap(vc.navigationController?.viewControllers.last as? AdviceViewController)
+        XCTAssertNotNil(adviceVc.view)
+        XCTAssertEqual(adviceVc.link.url, URL(string: "https://faq.covid19.nhs.uk/article/KA-01064/en-us"))
     }
 }
 
