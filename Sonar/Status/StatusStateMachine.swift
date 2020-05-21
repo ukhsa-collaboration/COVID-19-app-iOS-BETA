@@ -90,12 +90,9 @@ class StatusStateMachine: StatusStateMachining {
                 transition(from: ok, to: symptomatic)
             } else { // expired
                 if symptoms.contains(.temperature) {
-                    transition(from: ok, to: symptomatic)
-
-                    // go straight into checkin
                     guard let checkinDate = nextCheckinDate else { return }
                     let checkin = StatusState.Checkin(symptoms: symptomatic.symptoms, checkinDate: checkinDate)
-                    transition(from: symptomatic, to: checkin)
+                    transition(from: ok, to: checkin)
                 } else {
                     // don't do anything if we only have a cough
                 }
@@ -216,6 +213,11 @@ class StatusStateMachine: StatusStateMachining {
     }
 
     private func transition(from symptomatic: StatusState.Symptomatic, to checkin: StatusState.Checkin) {
+        add(notificationRequest: checkinNotificationRequest(at: checkin.checkinDate))
+        state = .checkin(checkin)
+    }
+
+    private func transition(from ok: StatusState.Ok, to checkin: StatusState.Checkin) {
         add(notificationRequest: checkinNotificationRequest(at: checkin.checkinDate))
         state = .checkin(checkin)
     }
