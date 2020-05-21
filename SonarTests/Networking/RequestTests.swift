@@ -26,6 +26,13 @@ class RequestTests: XCTestCase {
         XCTAssertEqual(headers["X-Sonar-Foundation"], "sonar-header-value")
     }
 
+    func testSonarAppVersionHeaderIsSetToCurrentBuildNumber() throws {
+        let urlRequest = request.urlRequest()
+        let headers = try XCTUnwrap(urlRequest.allHTTPHeaderFields)
+        XCTAssertTrue(headers["X-Sonar-App-Version"] != nil, "build should be present")
+        XCTAssertTrue(Int(headers["X-Sonar-App-Version"]!) != nil, "build should be a valid number")
+    }
+
     func testSonarFoundationHeaderValueOverridesValuesManuallySet() throws {
         request.headers["X-Sonar-Foundation"] = "other-value"
         let urlRequest = request.urlRequest()

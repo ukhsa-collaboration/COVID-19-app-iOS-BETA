@@ -69,6 +69,9 @@ extension Request {
 
         urlRequest.allHTTPHeaderFields = headers
         urlRequest.setValue(sonarHeaderValue, forHTTPHeaderField: "X-Sonar-Foundation")
+        if let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
+            urlRequest.setValue(build, forHTTPHeaderField: "X-Sonar-App-Version")
+        }
 
         switch method {
         case .get:
