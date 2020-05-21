@@ -33,7 +33,12 @@ struct ContentURLs {
     func applyForTest(referenceCode: String?) -> URL {
         guard let referenceCode = referenceCode else { return applyForTestBase }
         var components = URLComponents(url: applyForTestBase, resolvingAgainstBaseURL: false)!
-        components.queryItems?.append(URLQueryItem(name: "refcode", value: referenceCode))
+        
+        if components.queryItems == nil /* ugh why? */ {
+            components.queryItems = []
+        }
+        
+        components.queryItems?.append(URLQueryItem(name: "ctaToken", value: referenceCode))
         return components.url!
     }
 
