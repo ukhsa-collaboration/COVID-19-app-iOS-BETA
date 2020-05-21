@@ -124,7 +124,10 @@ class StatusViewController: UIViewController, Storyboarded {
         case let vc as ApplyForTestContainerViewController:
             vc.inject(linkingIdManager: linkingIdManager, uiQueue: DispatchQueue.main)
         case let vc as DrawerViewController:
-            guard let config = sender as? DrawerViewController.Config else { return }
+            guard let config = sender as? DrawerViewController.Config else {
+                assertionFailure("DrawerViewControllers need configuration")
+                return
+            }
             vc.inject(config: config)
         default:
             break
@@ -253,7 +256,11 @@ class StatusViewController: UIViewController, Storyboarded {
             stepsDetailLabel.text = "If you don’t have any symptoms, there’s no need to do anything right now. If you develop symptoms, please come back to this app."
 
             if case .unexposed = statusStateMachine.state {
-                performSegue(withIdentifier: "presentUnexposed", sender: self)
+                let config = DrawerViewController.Config(
+                    header: "UNEXPOSED_DRAWER_HEADER".localized,
+                    detail: "UNEXPOSED_DRAWER_DETAIL".localized
+                )
+                performSegue(withIdentifier: "presentDrawer", sender: config)
             }
 
         case .exposed:
