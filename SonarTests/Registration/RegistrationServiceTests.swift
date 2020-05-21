@@ -277,24 +277,17 @@ class RegistrationServiceTests: TestCase {
             notificationCenter: notificationCenter
         )
         
-        var success = {}
-        var callbackCount = 0
-        var putToken: String?
-        registrationService.putNewRegistrationToken = {
-            putToken = $0
-            success = $1
-            callbackCount += 1
-        }
-
         remoteNotificationDispatcher.receiveRegistrationToken(fcmToken: "new token")
         
-        XCTAssertEqual(callbackCount, 1)
+        let request = try XCTUnwrap(session.requestSent as? UpdatePushNotificationTokenRequest)
+        let requestBody = try XCTUnwrap(request.method.body)
+        let putToken = try JSONDecoder().decode([String: String].self, from: requestBody)["pushNotificationToken"]
         XCTAssertEqual(putToken, "new token")
 
         // Do not save the token until we succeed
         XCTAssertEqual(persistence.registeredPushToken, "old token")
         
-        success()
+        session.executeCompletion?(Result<(), Error>.success(()))
         XCTAssertEqual(persistence.registeredPushToken, "new token")
         
         withExtendedLifetime(registrationService) {
@@ -322,18 +315,14 @@ class RegistrationServiceTests: TestCase {
             notificationCenter: notificationCenter
         )
         
-        var callbackCount = 0
-        registrationService.putNewRegistrationToken = { _, _ in
-            callbackCount += 1
-        }
+        XCTAssertNil(session.requestSent)
+                
+        XCTAssertEqual(persistence.registeredPushToken, "the current push token")
         
         withExtendedLifetime(registrationService) {
             XCTAssertNotNil(registrationService)
         }
         
-        XCTAssertEqual(callbackCount, 0)
-        
-        XCTAssertEqual(persistence.registeredPushToken, "the current push token")
     }
     
     func testRegistration_notifiesOnInitialRequestFailureAfterHourDelay() throws {

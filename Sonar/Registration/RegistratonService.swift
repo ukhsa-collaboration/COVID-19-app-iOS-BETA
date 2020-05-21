@@ -30,12 +30,6 @@ class ConcreteRegistrationService: RegistrationService {
     private var remoteNotificationCompletionHandler: RemoteNotificationCompletionHandler?
     private var isRegistering = false
     
-    #warning("[#172921243] Remove and replace with correct logic.")
-    // Putting this here in an “obviously wrong way” so we can test that we trigger the upload of new registration token
-    // at the right times, without enforcing a design on how the actual call happens.
-    // Remove this as we complete the feature
-    var putNewRegistrationToken: (String, @escaping () -> Void) -> Void = { _, _ in }
-    
     init(session: Session,
          persistence: Persisting,
          reminderScheduler: RegistrationReminderScheduler,
@@ -122,20 +116,23 @@ class ConcreteRegistrationService: RegistrationService {
         }
     }
     
-    private func didReceivePushTokenWhenAlreadyRegistered(_ token: String) {
-        precondition(persistence.registration != nil)
+    private func didReceivePushTokenWhenAlreadyRegistered(_ newToken: String) {
+        guard let registration = persistence.registration else {
+            preconditionFailure("Expected to already be registered")
+        }
         
         let existingToken = persistence.registeredPushToken
         switch existingToken {
         case .none:
             // This is a “legacy” scenario where we had not stored the push token when registration was completed.
             // Given the low probability of this token changing, just store the token and continue.
-            persistence.registeredPushToken = token
-        case .some(token):
+            persistence.registeredPushToken = newToken
+        case .some(newToken):
             break
         case .some(_):
-            putNewRegistrationToken(token) {
-                self.persistence.registeredPushToken = token
+            let request = UpdatePushNotificationTokenRequest(registration: registration, token: newToken)
+            session.execute(request) { _ in
+                self.persistence.registeredPushToken = newToken
             }
         }
     }
