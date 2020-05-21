@@ -15,6 +15,7 @@ extension Appearance {
             NSAttributedString.Key.foregroundColor: UIColor(named: "NHS Blue")!,
             NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .headline),
         ]
+        UINavigationBar.appearance().tintColor = UIColor(named: "NHS Blue")!
 
         UILabel.appearance().textColor = UIColor(named: "NHS Text")
         UILabel.appearance().adjustsFontForContentSizeCategory = true
