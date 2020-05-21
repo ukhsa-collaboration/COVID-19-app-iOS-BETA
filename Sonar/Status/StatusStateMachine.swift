@@ -190,11 +190,19 @@ class StatusStateMachine: StatusStateMachining {
 
     func received(_ result: TestResult.Result) {
         add(notificationRequest: testResultNotification)
-        switch (result, state) {
-        case (.positive, .symptomatic(let symptomatic)):
-            transition(to: StatusState.PositiveTestResult(symptoms: symptomatic.symptoms, startDate: symptomatic.startDate))
-        default:
+
+        guard result == .positive else {
             let message = "\(result): Not handled yet"
+            assertionFailure(message)
+            self.logger.error("\(message)")
+            return
+        }
+
+        switch state {
+        case .symptomatic(let symptomatic):
+            transition(to: StatusState.PositiveTestResult(symptoms: symptomatic.symptoms, startDate: symptomatic.startDate))
+        case .ok, .checkin, .exposed, .unexposed, .positiveTestResult:
+            let message = "\(result) from \(state): Not handled yet"
             assertionFailure(message)
             self.logger.error("\(message)")
         }
