@@ -21,13 +21,12 @@ class ContentURLsTests: XCTestCase {
             return a.name < b.name
         }
         XCTAssertEqual(queryItems, [
-            URLQueryItem(name: "ctaToken", value: "token-value"),
-            URLQueryItem(name: "refcode", value: "1234-abcd"),
+            URLQueryItem(name: "ctaToken", value: "1234-abcd"),
         ])
     }
     
     func testApplyForTest_withoutCode() throws {
         let url = ContentURLs.shared.applyForTest(referenceCode: nil)
-        XCTAssertEqual(url, URL(string: "https://self-referral.test-for-coronavirus.service.gov.uk/cta-start?ctaToken=token-value"))
+        XCTAssertEqual(url, URL(string: "https://self-referral.test-for-coronavirus.service.gov.uk/cta-start"))
     }
 }
