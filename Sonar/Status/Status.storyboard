@@ -107,77 +107,6 @@
             </objects>
             <point key="canvasLocation" x="5367" y="941"/>
         </scene>
-        <!--Cough Update View Controller-->
-        <scene sceneID="phA-bo-rj4">
-            <objects>
-                <viewController storyboardIdentifier="CoughUpdateViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="L7z-Q1-VRt" customClass="CoughUpdateViewController" customModule="Sonar" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="X7Y-0c-00A">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="400"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nL0-QM-9JV">
-                                <rect key="frame" x="0.0" y="44" width="414" height="356"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="T2s-X7-1BR">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="212"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thank you for updating your symptoms" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CAf-0O-pMe">
-                                                <rect key="frame" x="16" y="42" width="382" height="20.5"/>
-                                                <accessibility key="accessibilityConfiguration">
-                                                    <accessibilityTraits key="traits" staticText="YES" header="YES"/>
-                                                </accessibility>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Although you still have a continuous cough, you can now follow the current advice." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Db-bg-Jpu">
-                                                <rect key="frame" x="16" y="78.5" width="382" height="42.5"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                <color key="textColor" name="NHS Text"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ola-d2-WjC" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
-                                                <rect key="frame" x="16" y="137" width="382" height="33"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                <state key="normal" title="Close"/>
-                                                <connections>
-                                                    <action selector="close:" destination="L7z-Q1-VRt" eventType="touchUpInside" id="hTu-fn-xzX"/>
-                                                    <segue destination="0wP-wo-daI" kind="unwind" unwindAction="unwindFromSymptomsPromptWithUnwindSegue:" id="oXg-gU-AEA"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <directionalEdgeInsets key="directionalLayoutMargins" top="42" leading="16" bottom="42" trailing="16"/>
-                                    </stackView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="YZL-eS-USt" firstAttribute="leading" secondItem="T2s-X7-1BR" secondAttribute="leading" id="8AC-b1-5Au"/>
-                                    <constraint firstItem="T2s-X7-1BR" firstAttribute="trailing" secondItem="YZL-eS-USt" secondAttribute="trailing" id="B0N-Sf-do4"/>
-                                    <constraint firstItem="YZL-eS-USt" firstAttribute="top" secondItem="T2s-X7-1BR" secondAttribute="top" id="bTL-09-sXC"/>
-                                    <constraint firstItem="T2s-X7-1BR" firstAttribute="width" secondItem="zbr-7X-lzx" secondAttribute="width" id="iAt-1I-SR6"/>
-                                    <constraint firstItem="T2s-X7-1BR" firstAttribute="bottom" secondItem="YZL-eS-USt" secondAttribute="bottom" id="jKv-Ky-hG9"/>
-                                    <constraint firstItem="T2s-X7-1BR" firstAttribute="height" secondItem="zbr-7X-lzx" secondAttribute="height" priority="1" id="zba-6B-tjL"/>
-                                </constraints>
-                                <viewLayoutGuide key="contentLayoutGuide" id="YZL-eS-USt"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="zbr-7X-lzx"/>
-                            </scrollView>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="hxv-h0-rad" firstAttribute="bottom" secondItem="nL0-QM-9JV" secondAttribute="bottom" id="1fE-wp-Khp"/>
-                            <constraint firstItem="nL0-QM-9JV" firstAttribute="top" secondItem="hxv-h0-rad" secondAttribute="top" id="9HL-5D-My1"/>
-                            <constraint firstItem="nL0-QM-9JV" firstAttribute="leading" secondItem="hxv-h0-rad" secondAttribute="leading" id="n4W-dH-uxw"/>
-                            <constraint firstItem="hxv-h0-rad" firstAttribute="trailing" secondItem="nL0-QM-9JV" secondAttribute="trailing" id="rPO-3f-Anh"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="hxv-h0-rad"/>
-                    </view>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="414" height="400"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Zb1-r0-Xrg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <exit id="0wP-wo-daI" userLabel="Exit" sceneMemberID="exit"/>
-            </objects>
-            <point key="canvasLocation" x="4338" y="1440"/>
-        </scene>
         <!--Medical Worker Instructions View Controller-->
         <scene sceneID="XM5-3o-A6b">
             <objects>
@@ -310,13 +239,13 @@
                                                                 <rect key="frame" x="16" y="27.5" width="14" height="14"/>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Enable notifications" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zeo-Ra-cKf">
-                                                                <rect key="frame" x="42" y="24" width="282" height="20.5"/>
+                                                                <rect key="frame" x="42" y="24" width="282.5" height="20.5"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                                 <color key="textColor" name="NHS Text"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bell ringing" translatesAutoresizingMaskIntoConstraints="NO" id="o57-iY-zoI" customClass="AutoscalingImageView" customModule="Sonar" customModuleProvider="target">
-                                                                <rect key="frame" x="340" y="24.5" width="26" height="20"/>
+                                                                <rect key="frame" x="340.5" y="24" width="25.5" height="20.5"/>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To receive notifications to say if you've been near someone with COVID-19 symptoms, allow notifications in your Settings." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBV-SW-opU">
                                                                 <rect key="frame" x="16" y="56.5" width="350" height="64.5"/>

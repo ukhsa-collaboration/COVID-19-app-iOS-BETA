@@ -73,7 +73,6 @@
 		131AB05E2449D894002136CA /* ContactEventExpiryHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131AB05D2449D894002136CA /* ContactEventExpiryHandlerTests.swift */; };
 		134470AD2454D4DA001A0AD9 /* CheckinCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134470AB2454D4DA001A0AD9 /* CheckinCoordinator.swift */; };
 		134470AE2454D4DA001A0AD9 /* SelfDiagnosisCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134470AC2454D4DA001A0AD9 /* SelfDiagnosisCoordinator.swift */; };
-		134470B02454D614001A0AD9 /* CoughUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134470AF2454D614001A0AD9 /* CoughUpdateViewController.swift */; };
 		13473A1B246AFF0C00800CEA /* AdviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13473A1A246AFF0C00800CEA /* AdviceViewController.swift */; };
 		13473A1D246C0F2C00800CEA /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13473A1C246C0F2C00800CEA /* StatusViewController.swift */; };
 		13473A1F246D543F00800CEA /* UserStatusProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13473A1E246D543F00800CEA /* UserStatusProvider.swift */; };
@@ -388,7 +387,6 @@
 		131AB05D2449D894002136CA /* ContactEventExpiryHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventExpiryHandlerTests.swift; sourceTree = "<group>"; };
 		134470AB2454D4DA001A0AD9 /* CheckinCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckinCoordinator.swift; sourceTree = "<group>"; };
 		134470AC2454D4DA001A0AD9 /* SelfDiagnosisCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfDiagnosisCoordinator.swift; sourceTree = "<group>"; };
-		134470AF2454D614001A0AD9 /* CoughUpdateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoughUpdateViewController.swift; sourceTree = "<group>"; };
 		13473A1A246AFF0C00800CEA /* AdviceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdviceViewController.swift; sourceTree = "<group>"; };
 		13473A1C246C0F2C00800CEA /* StatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
 		13473A1E246D543F00800CEA /* UserStatusProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatusProvider.swift; sourceTree = "<group>"; };
@@ -800,7 +798,6 @@
 				F758B8C3242CC0EE003AE16D /* Status.storyboard */,
 				F6BBE140246F584F005757BB /* WorkplaceGuidance.storyboard */,
 				13473A1A246AFF0C00800CEA /* AdviceViewController.swift */,
-				134470AF2454D614001A0AD9 /* CoughUpdateViewController.swift */,
 				DD3FCF3F2476E913008B0237 /* DrawerViewController.swift */,
 				DD3FCF3A2476E8C3008B0237 /* ExposedNotificationHandler.swift */,
 				F6334E4A24747DC300421B4C /* RegistrationStatusViewController.swift */,
@@ -1883,7 +1880,6 @@
 				F652F730244E4AAD00D97950 /* DrawerPresentation.swift in Sources */,
 				098ED478242D7D050029B729 /* RegistratonService.swift in Sources */,
 				DD3FCF3C2476E8C3008B0237 /* ExposedNotificationHandler.swift in Sources */,
-				134470B02454D614001A0AD9 /* CoughUpdateViewController.swift in Sources */,
 				0979FB792458ADF000EB01A8 /* PostcodeValidator.swift in Sources */,
 				134470AE2454D4DA001A0AD9 /* SelfDiagnosisCoordinator.swift in Sources */,
 				097F05412473145300E633C8 /* TestableUrlOpener.swift in Sources */,

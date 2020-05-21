@@ -310,7 +310,11 @@ class StatusViewController: UIViewController, Storyboarded {
     }
 
     private func presentCoughUpdate() {
-        presentDrawer(drawVC: CoughUpdateViewController.instantiate())
+        let config = DrawerViewController.Config(
+            header: "COUGH_UPDATE_HEADER".localized,
+            detail: "COUGH_UPDATE_DETAIL".localized
+        )
+        performSegue(withIdentifier: "presentDrawer", sender: config)
     }
     
     private func presentTestResultUpdate(result: TestResult.Result) {
