@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		08D77F2624753AA200EAEBD5 /* RemoteNotificationDispatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D77F2524753AA200EAEBD5 /* RemoteNotificationDispatcherTests.swift */; };
+		08D77F2824767C6C00EAEBD5 /* UpdatePushNotificationTokenRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D77F2724767C6C00EAEBD5 /* UpdatePushNotificationTokenRequestTests.swift */; };
+		08D77F2A24767DBB00EAEBD5 /* UpdatePushNotificationTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D77F2924767DBB00EAEBD5 /* UpdatePushNotificationTokenRequest.swift */; };
 		090B186F24354D0100870B5D /* RemoteNotificationDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090B186E24354D0100870B5D /* RemoteNotificationDispatcher.swift */; };
 		090B1871243552C300870B5D /* UserNotificationCenterDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090B1870243552C300870B5D /* UserNotificationCenterDouble.swift */; };
 		090DEE10244F8BF600268170 /* BluetoothPermissionDeniedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090DEE0F244F8BF600268170 /* BluetoothPermissionDeniedViewController.swift */; };
@@ -320,6 +322,8 @@
 		068B8ABB245C11C0000EAB4C /* clean-artifacts.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "clean-artifacts.yml"; sourceTree = "<group>"; };
 		068B8ABC245C11C0000EAB4C /* trigger-internal-upload.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "trigger-internal-upload.yml"; sourceTree = "<group>"; };
 		08D77F2524753AA200EAEBD5 /* RemoteNotificationDispatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteNotificationDispatcherTests.swift; sourceTree = "<group>"; };
+		08D77F2724767C6C00EAEBD5 /* UpdatePushNotificationTokenRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePushNotificationTokenRequestTests.swift; sourceTree = "<group>"; };
+		08D77F2924767DBB00EAEBD5 /* UpdatePushNotificationTokenRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePushNotificationTokenRequest.swift; sourceTree = "<group>"; };
 		090B186E24354D0100870B5D /* RemoteNotificationDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteNotificationDispatcher.swift; sourceTree = "<group>"; };
 		090B1870243552C300870B5D /* UserNotificationCenterDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationCenterDouble.swift; sourceTree = "<group>"; };
 		090DEE0F244F8BF600268170 /* BluetoothPermissionDeniedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothPermissionDeniedViewController.swift; sourceTree = "<group>"; };
@@ -731,6 +735,8 @@
 				098ED47A242D7E460029B729 /* RegistrationServiceTests.swift */,
 				09A925442453807000C5DBC1 /* RegistrationReminderSchedulerTests.swift */,
 				095283A72475990B00CDEE55 /* BackgroundableTimerTests.swift */,
+				08D77F2724767C6C00EAEBD5 /* UpdatePushNotificationTokenRequestTests.swift */,
+				08D77F2924767DBB00EAEBD5 /* UpdatePushNotificationTokenRequest.swift */,
 			);
 			path = Registration;
 			sourceTree = "<group>";
@@ -1729,6 +1735,7 @@
 				89896E622435F37300F949EA /* ProjectTests.swift in Sources */,
 				F604977524549C95002B8503 /* LinkingIdManagerTests.swift in Sources */,
 				F6548FA32460C1C7005F06FF /* CheckinCoordinatorTests.swift in Sources */,
+				08D77F2824767C6C00EAEBD5 /* UpdatePushNotificationTokenRequestTests.swift in Sources */,
 				F6F05A2A2433C6CC00FF4B72 /* AuthManagerDouble.swift in Sources */,
 				F6E2E597246B287B009D80DF /* StatusStateMachiningDouble.swift in Sources */,
 				097F054524732A9C00E633C8 /* UrlOpenerDouble.swift in Sources */,
@@ -1918,6 +1925,7 @@
 				89074B8524378A0D00D67777 /* UITestPayload.swift in Sources */,
 				F6AB2F20243D359F00386D6B /* SubmitSymptomsViewController.swift in Sources */,
 				F7091907245DCED800F00AB8 /* AccessibleErrorLabel.swift in Sources */,
+				08D77F2A24767DBB00EAEBD5 /* UpdatePushNotificationTokenRequest.swift in Sources */,
 				89CE566B24503E93004A74D0 /* TrustValidatingURLSessionDelegate.swift in Sources */,
 				21F374042434C4BF00926FB8 /* ContactEventsTableViewController.swift in Sources */,
 				214209D52423C83C00C7BFF3 /* UploadProximityEventsRequest.swift in Sources */,
