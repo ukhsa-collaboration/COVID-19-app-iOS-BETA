@@ -47,14 +47,14 @@ cp Sonar/Environments/Sonar.xcconfig.sample .secret/Sonar.xcconfig
   files being changed out from under it gracefully.
 
 ### Setup for Pact Testing
-Run `bin/setup-pact` to install all necessary libraries, and install Sonar CA and trust it on all 
+Run `bin/pact/setup` to install all necessary libraries, and install Sonar CA and trust it on all 
 running Simulator devices.
 
 You can then proceed as indicated in the README of the [Swift Pact Consumer library](https://github.com/DiUS/pact-consumer-swift)
 to create pact tests. A mock service will be spun up for you before tests on `https://localhost:1234`
 using a build step before action, and torn down afterwards.
 
-If you get an SSL or ATS error when running the tests, re-run `bin/setup-pact` to ensure that all 
+If you get an SSL or ATS error when running the tests, re-run `bin/pact/setup` to ensure that all 
 devices have the Sonar CA setup correctly.
 
 #### Pact Setup Context
@@ -77,6 +77,10 @@ modified in order to not require user input so we're able to run it in CI.
 
 We're then using the UI testing framework, specifically TrustSonarCARootCertTest to trust the 
 Sonar CA root certificate on all booted simulator devices.
+
+Pact tests are in a separate scheme since we do need to inject `https://localhost:1234` as the API
+endpoint. This is done via script in pre-action (`bin/pact/setup-build-environment`). We want 
+to avoid rewriting the file for other debug builds such as the ones you push to your phone.
 
 ### Notifications
 
