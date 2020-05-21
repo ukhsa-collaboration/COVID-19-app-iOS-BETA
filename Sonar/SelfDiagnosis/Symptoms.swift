@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum Symptom: String, Codable {
+enum Symptom: String, CaseIterable, Codable {
     case temperature, cough, anosmia, sneeze, nausea
 }
 
