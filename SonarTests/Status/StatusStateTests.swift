@@ -44,8 +44,8 @@ class StatusStateTests: XCTestCase {
     }
 
     func testCodableExposed() throws {
-         let exposureDate = Date()
-         let statusState: StatusState = .exposed(StatusState.Exposed(exposureDate: exposureDate))
+         let startDate = Date()
+         let statusState: StatusState = .exposed(StatusState.Exposed(startDate: startDate))
 
          let encoded = try encoder.encode(statusState)
          let decoded = try decoder.decode(StatusState.self, from: encoded)
@@ -83,12 +83,22 @@ class StatusStateTests: XCTestCase {
     }
 
     func testExposedExpiresAfterFourteenDays() {
-        let exposureDate = Calendar.current.date(from: DateComponents(year: 2020, month: 5, day: 14, hour: 7))!
-        let exposed = StatusState.Exposed(exposureDate: exposureDate)
+        let startDate = Calendar.current.date(from: DateComponents(year: 2020, month: 5, day: 14, hour: 7))!
+        let exposed = StatusState.Exposed(startDate: startDate)
 
         XCTAssertEqual(
             exposed.expiryDate,
             Calendar.current.date(from: DateComponents(year: 2020, month: 5, day: 28, hour: 7))!
+        )
+    }
+    
+    func testPositiveTestResultChecksInAfterSevenDays() {
+        let startDate = Calendar.current.date(from: DateComponents(year: 2020, month: 5, day: 14, hour: 7))!
+        let positiveTestResult = StatusState.PositiveTestResult(symptoms: [], startDate: startDate)
+
+        XCTAssertEqual(
+            positiveTestResult.expiryDate,
+            Calendar.current.date(from: DateComponents(year: 2020, month: 5, day: 21, hour: 7))!
         )
     }
 

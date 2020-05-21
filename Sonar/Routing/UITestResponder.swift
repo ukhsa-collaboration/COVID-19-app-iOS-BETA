@@ -32,7 +32,7 @@ struct UITestResponder {
         window.makeKeyAndVisible()
         return window
     }
-
+    
     func resetTime() {
         uiTestScreenMaker.resetTime()
     }

@@ -44,6 +44,14 @@ class StatusStateMachineTests: XCTestCase {
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.identifier, "adviceChangedNotificationIdentifier")
     }
+    
+    func testPostPositiveTestResultNotificationOnReceived() throws {
+        persisting.statusState = .symptomatic(StatusState.Symptomatic(symptoms: [], startDate: currentDate))
+        machine.received(.positive)
+
+        let request = try XCTUnwrap(userNotificationCenter.requests.first)
+        XCTAssertEqual(request.content.title, "TEST_RESULT_TITLE".localized)
+    }
 
     func testPostNotificationOnStatusChange() throws {
         var notificationPosted = false
@@ -109,7 +117,7 @@ class StatusStateMachineTests: XCTestCase {
     }
 
     func testExposedToSymptomatic() throws {
-        persisting.statusState = .exposed(StatusState.Exposed(exposureDate: Date()))
+        persisting.statusState = .exposed(StatusState.Exposed(startDate: Date()))
 
         let startDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 1, hour: 6))!
         try machine.selfDiagnose(symptoms: [.cough], startDate: startDate)
@@ -144,9 +152,9 @@ class StatusStateMachineTests: XCTestCase {
     }
 
     func testTickWhenExposedBeforeSeven() {
-        let exposureDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 1, hour: 6))!
+        let startDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 1, hour: 6))!
         let expiry = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 14, hour: 7))!
-        persisting.statusState = .exposed(StatusState.Exposed(exposureDate: exposureDate))
+        persisting.statusState = .exposed(StatusState.Exposed(startDate: startDate))
 
         currentDate = Calendar.current.date(byAdding: .hour, value: -1, to: expiry)!
         machine.tick()
@@ -158,9 +166,9 @@ class StatusStateMachineTests: XCTestCase {
     }
 
     func testTickWhenExposedAfterSeven() {
-        let exposureDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 1, hour: 8))!
+        let startDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 1, hour: 8))!
         let expiry = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 15, hour: 7))!
-        persisting.statusState = .exposed(StatusState.Exposed(exposureDate: exposureDate))
+        persisting.statusState = .exposed(StatusState.Exposed(startDate: startDate))
 
         currentDate = Calendar.current.date(byAdding: .hour, value: -1, to: expiry)!
         machine.tick()
@@ -254,7 +262,7 @@ class StatusStateMachineTests: XCTestCase {
 
         machine.exposed()
 
-        XCTAssertEqual(machine.state, .exposed(StatusState.Exposed(exposureDate: currentDate)))
+        XCTAssertEqual(machine.state, .exposed(StatusState.Exposed(startDate: currentDate)))
     }
 
     func testExposedAgainAfterUnexposed() throws {
@@ -262,11 +270,11 @@ class StatusStateMachineTests: XCTestCase {
 
         machine.exposed()
 
-        XCTAssertEqual(machine.state, .exposed(StatusState.Exposed(exposureDate: currentDate)))
+        XCTAssertEqual(machine.state, .exposed(StatusState.Exposed(startDate: currentDate)))
     }
 
     func testUnexposedAfterExposed() throws {
-        persisting.statusState = .exposed(StatusState.Exposed(exposureDate: Date()))
+        persisting.statusState = .exposed(StatusState.Exposed(startDate: Date()))
 
         machine.unexposed()
 
@@ -275,5 +283,4 @@ class StatusStateMachineTests: XCTestCase {
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.identifier, "adviceChangedNotificationIdentifier")
     }
-
 }

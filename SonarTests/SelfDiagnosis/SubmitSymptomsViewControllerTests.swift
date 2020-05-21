@@ -94,7 +94,7 @@ class SubmitSymptomsViewControllerTests: TestCase {
     }
 
     func testSelfDiagnosesWhenExposed() throws {
-        statusStateMachine.state = .exposed(StatusState.Exposed(exposureDate: Date()))
+        statusStateMachine.state = .exposed(StatusState.Exposed(startDate: Date()))
 
         let date = Date()
         makeSubject(symptoms: [.temperature], startDate: date)

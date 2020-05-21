@@ -47,6 +47,7 @@ struct ContentURLs {
         case .ok, .unexposed: return status.ok
         case .symptomatic, .checkin: return status.symptomatic
         case .exposed: return status.exposed
+        case .positiveTestResult: return status.positiveTestResult
         }
     }
 }
@@ -86,6 +87,7 @@ struct StatusesURLs: Decodable {
     let ok: StatusURLs
     let exposed: StatusURLs
     let symptomatic: StatusURLs
+    let positiveTestResult: StatusURLs
 }
 
 struct StatusURLs: Decodable {
