@@ -201,6 +201,7 @@
 		F6053A122472F7170006939E /* ContentURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6053A112472F7170006939E /* ContentURLs.swift */; };
 		F6099A7A2474976400758D3E /* Advice.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6099A792474976400758D3E /* Advice.storyboard */; };
 		F613936E243FA82B003447E8 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = F613936D243FA82B003447E8 /* Appearance.swift */; };
+		F6141BA124773158002EC49E /* SetStatusState.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6141BA024773158002EC49E /* SetStatusState.storyboard */; };
 		F616959F2458A2DA006AABE3 /* AcknowledgmentRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F616959E2458A2DA006AABE3 /* AcknowledgmentRequest.swift */; };
 		F61695A32458B556006AABE3 /* StatusNotificationHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61695A22458B556006AABE3 /* StatusNotificationHandlerTests.swift */; };
 		F618A564245C682500D89517 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F618A561245C682500D89517 /* Environment.swift */; };
@@ -534,6 +535,7 @@
 		F6053A112472F7170006939E /* ContentURLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentURLs.swift; sourceTree = "<group>"; };
 		F6099A792474976400758D3E /* Advice.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Advice.storyboard; sourceTree = "<group>"; };
 		F613936D243FA82B003447E8 /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
+		F6141BA024773158002EC49E /* SetStatusState.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SetStatusState.storyboard; sourceTree = "<group>"; };
 		F616959E2458A2DA006AABE3 /* AcknowledgmentRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgmentRequest.swift; sourceTree = "<group>"; };
 		F61695A22458B556006AABE3 /* StatusNotificationHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusNotificationHandlerTests.swift; sourceTree = "<group>"; };
 		F618A561245C682500D89517 /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
@@ -745,6 +747,7 @@
 			isa = PBXGroup;
 			children = (
 				098ED480242E745F0029B729 /* Debug.storyboard */,
+				F6141BA024773158002EC49E /* SetStatusState.storyboard */,
 				2192888624640B5600691FDD /* ContactEventDetailTableViewController.swift */,
 				21F374032434C4BF00926FB8 /* ContactEventsTableViewController.swift */,
 				098ED482242E746E0029B729 /* DebugViewController.swift */,
@@ -1644,6 +1647,7 @@
 				F6F05A322434310200FF4B72 /* Onboarding.storyboard in Resources */,
 				F70CB81B2450CFA900ED6E7F /* OnboardingLogoStrapline.xib in Resources */,
 				098ED481242E745F0029B729 /* Debug.storyboard in Resources */,
+				F6141BA124773158002EC49E /* SetStatusState.storyboard in Resources */,
 				DD3FCF422476E914008B0237 /* Drawer.storyboard in Resources */,
 				F6053A102472F69D0006939E /* URLs.plist in Resources */,
 				F6099A7A2474976400758D3E /* Advice.storyboard in Resources */,

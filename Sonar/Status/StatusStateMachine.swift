@@ -48,8 +48,10 @@ class StatusStateMachine: StatusStateMachining {
         }
     }
 
+    private var currentDate: Date { dateProvider() }
+
     private var nextCheckinDate: Date? {
-        let startOfDay = Calendar.current.startOfDay(for: dateProvider())
+        let startOfDay = Calendar.current.startOfDay(for: currentDate)
         guard let afterDay = Calendar.current.date(byAdding: .day, value: 1, to: startOfDay) else {
             return nil
         }
@@ -86,7 +88,7 @@ class StatusStateMachine: StatusStateMachining {
             let symptomatic = StatusState.Symptomatic(symptoms: symptoms, startDate: startDate)
             try contactEventsUploader.upload(from: startDate, with: symptoms)
 
-            if dateProvider() < symptomatic.expiryDate {
+            if currentDate < symptomatic.expiryDate {
                 transition(from: ok, to: symptomatic)
             } else { // expired
                 if symptoms.contains(.temperature) {
@@ -111,17 +113,17 @@ class StatusStateMachine: StatusStateMachining {
         case .ok, .checkin, .unexposed:
             break // Don't need to do anything
         case .symptomatic(let symptomatic):
-            guard dateProvider() >= symptomatic.expiryDate else { return }
+            guard currentDate >= symptomatic.expiryDate else { return }
 
             let checkin = StatusState.Checkin(symptoms: symptomatic.symptoms, checkinDate: symptomatic.expiryDate)
             transition(from: symptomatic, to: checkin)
         case .exposed(let exposed):
-            guard dateProvider() >= exposed.expiryDate else { return }
+            guard currentDate >= exposed.expiryDate else { return }
 
             transition(from: exposed, to: StatusState.Ok())
         case .positiveTestResult(let positiveTestResult):
-            guard dateProvider() >= positiveTestResult.expiryDate else { return }
-            
+            guard currentDate >= positiveTestResult.expiryDate else { return }
+
             let checkin = StatusState.Checkin(symptoms: positiveTestResult.symptoms, checkinDate: positiveTestResult.expiryDate)
             transition(from: positiveTestResult, to: checkin)
         }
@@ -135,7 +137,7 @@ class StatusStateMachine: StatusStateMachining {
             assertionFailure("Checking in is only allowed from checkin")
             return
         case .checkin(let checkin):
-            guard dateProvider() >= checkin.checkinDate else {
+            guard currentDate >= checkin.checkinDate else {
                 assertionFailure("Checking in is only allowed after the checkin date")
                 return
             }
@@ -156,9 +158,9 @@ class StatusStateMachine: StatusStateMachining {
     func exposed() {
         switch state {
         case .ok(let ok):
-            transition(from: ok, to: StatusState.Exposed(startDate: dateProvider()))
+            transition(from: ok, to: StatusState.Exposed(startDate: currentDate))
         case .unexposed(let unexposed):
-            transition(from: unexposed, to: StatusState.Exposed(startDate: dateProvider()))
+            transition(from: unexposed, to: StatusState.Exposed(startDate: currentDate))
         case .exposed:
             assertionFailure("The server should never send us another exposure notification if we're already exposed")
             break // ignore repeated exposures
@@ -196,9 +198,11 @@ class StatusStateMachine: StatusStateMachining {
         }
 
         switch state {
+        case .ok, .exposed:
+            transition(to: StatusState.PositiveTestResult(symptoms: nil, startDate: currentDate))
         case .symptomatic(let symptomatic):
             transition(to: StatusState.PositiveTestResult(symptoms: symptomatic.symptoms, startDate: symptomatic.startDate))
-        case .ok, .checkin, .exposed, .unexposed, .positiveTestResult:
+        case .checkin, .unexposed, .positiveTestResult:
             let message = "\(result) from \(state): Not handled yet"
             assertionFailure(message)
             self.logger.error("\(message)")
