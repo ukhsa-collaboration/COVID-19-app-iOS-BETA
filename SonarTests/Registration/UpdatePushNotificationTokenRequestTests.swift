@@ -37,5 +37,9 @@ class UpdatePushNotificationTokenRequestTests: XCTestCase {
         XCTAssertEqual(decodedBody.sonarId, registration.sonarId.uuidString)
         XCTAssertEqual(sut.method.name, "PUT")
     }
+    
+    func testURLPath() {
+        XCTAssertEqual(sut.urlable, .path("/api/registration/push-notification-token"))
+    }
 
 }
