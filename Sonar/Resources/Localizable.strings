@@ -24,8 +24,8 @@
 "COUGH_QUESTION" = "Do you have a new continuous cough or loss of smell?";
 "COUGH_CHECKIN_QUESTION" = "Do you still have a continuous cough or loss of smell?";
 "COUGH_ERROR" = "Select yes if you have at least one of these symptoms";
-"COUGH_DETAIL" = "New: means a cough that you've not had before, or if you usually have a cough, it's got worse.\n\nContinuous: means coughing a lot for more than an hour, or 3 or more coughing episodes in 24 hours.\n\nLoss of smell: means you’ve noticed you can’t smell anything within the last few days, or your have experienced a change in your sense of smell.";
-"COUGH_CHECKIN_DETAIL" = "Continuous: means coughing a lot for more than an hour, or 3 or more coughing episodes in 24 hours.\n\nLoss of smell: means you’ve noticed you can’t smell anything within the last few days, or your have experienced a change in your sense of smell.";
+"COUGH_DETAIL" = "New: means a cough that you've not had before, or if you usually have a cough, it's got worse.\n\nContinuous: means coughing a lot for more than an hour, or 3 or more coughing episodes in 24 hours.\n\nLoss of smell: means you’ve noticed you can’t smell anything within the last few days, or you have experienced a change in your sense of smell.";
+"COUGH_CHECKIN_DETAIL" = "Continuous: means coughing a lot for more than an hour, or 3 or more coughing episodes in 24 hours.\n\nLoss of smell: means you’ve noticed you can’t smell anything within the last few days, or you have experienced a change in your sense of smell.";
 "COUGH_YES" = "Yes, I have at least one of these symptoms";
 "COUGH_NO" = "No, I do not have either of these symptoms";
 
