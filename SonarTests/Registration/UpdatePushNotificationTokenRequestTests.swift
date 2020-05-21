@@ -25,10 +25,6 @@ class UpdatePushNotificationTokenRequestTests: XCTestCase {
         sut = UpdatePushNotificationTokenRequest(registration: registration, token: token)
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
     func testRequestBody() throws {
         
         struct Body: Codable, Equatable {
