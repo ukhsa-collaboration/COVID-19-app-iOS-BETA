@@ -121,9 +121,23 @@ will cut a release build and upload it to Apple.
 
 ### Production
 
-Trigger a production deployment using `./bin/create-deployment production`.
-You'll need to provide a `DEPLOYMENT_SHA` and a `DEPLOYMENT_TOKEN`. (This might
-change to a branch/tag in the near future, TBD.)
+To trigger a release manually:
+
+Bump the build number (`CFBundleVersion`) in `Sonar/Info.plist` and commit + push this change.
+
+Set the following environment variables:
+
+```shell
+DEPLOYMENT_TOKEN="" # obtain one from here: https://github.com/settings/tokens
+GITHUB_REPOSITORY="nhsx/<repository-name-here>"
+DEPLOYMENT_SHA="<sha of commit you just created>"
+```
+
+Run the following command:
+
+```shell
+./bin/create-deployment <beta/internal/production>
+```
 
 **It's on you to provide a valid build version and number.** Since we're
 pushing two+ apps (internal and production) from the same source, we don't want
