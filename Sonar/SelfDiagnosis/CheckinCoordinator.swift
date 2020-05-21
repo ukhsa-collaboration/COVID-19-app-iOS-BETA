@@ -22,11 +22,11 @@ class CheckinCoordinator: Coordinator {
         self.checkin = checkin
         self.completion = completion
     }
-    
+
     var symptoms: Symptoms = []
-    
+
     func start() {
-        let title = checkin.symptoms.contains(.temperature)
+        let title = (checkin.symptoms ?? []).contains(.temperature)
             ? "TEMPERATURE_CHECKIN_QUESTION"
             : "TEMPERATURE_QUESTION"
 
@@ -52,9 +52,9 @@ class CheckinCoordinator: Coordinator {
 
     func openCoughView() {
         let (title, detail) = {
-            checkin.symptoms.contains(.cough)
-            ? ("COUGH_CHECKIN_QUESTION", "COUGH_CHECKIN_DETAIL")
-            : ("COUGH_QUESTION", "COUGH_DETAIL")
+            (checkin.symptoms ?? []).contains(.cough)
+                ? ("COUGH_CHECKIN_QUESTION", "COUGH_CHECKIN_DETAIL")
+                : ("COUGH_QUESTION", "COUGH_DETAIL")
         }()
 
         let vc = QuestionSymptomsViewController.instantiate()

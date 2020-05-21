@@ -142,8 +142,8 @@ class SetStatusStateViewController: UITableViewController {
         case .checkin(let checkin):
             statusLabel.text = "checkin"
             statusPicker.selectRow(2, inComponent: 0, animated: false)
-            temperature = checkin.symptoms.contains(.temperature)
-            cough = checkin.symptoms.contains(.cough)
+            temperature = checkin.symptoms.map { $0.contains(.temperature) } ?? false
+            cough = checkin.symptoms.map { $0.contains(.cough) } ?? false
             date = checkin.checkinDate
         case .exposed(let exposed):
             statusLabel.text = "exposed"
@@ -160,8 +160,8 @@ class SetStatusStateViewController: UITableViewController {
         case .positiveTestResult(let positiveTestResult):
             statusLabel.text = "positive test result"
             statusPicker.selectRow(5, inComponent: 0, animated: false)
-            temperature = positiveTestResult.symptoms.contains(.temperature)
-            cough = positiveTestResult.symptoms.contains(.cough)
+            temperature = positiveTestResult.symptoms.map { $0.contains(.temperature) } ?? false
+            cough = positiveTestResult.symptoms.map { $0.contains(.cough) } ?? false
             date = positiveTestResult.startDate
         }
     }

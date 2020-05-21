@@ -37,7 +37,10 @@ enum StatusState: Equatable {
     }
 
     struct Checkin: Codable, Equatable {
-        let symptoms: Symptoms
+        // We can get into the checkin state without knowing
+        // initial symptoms from getting a positive test result.
+        let symptoms: Symptoms?
+
         let checkinDate: Date
     }
 
@@ -47,7 +50,11 @@ enum StatusState: Equatable {
     }
     
     struct PositiveTestResult: Codable, Equatable, Expirable {
-        let symptoms: Symptoms
+        // Optional since we might not have asked the
+        // user for their symptoms before they have a
+        // positive test result.
+        let symptoms: Symptoms?
+
         let startDate: Date
         let duration = 7
     }
