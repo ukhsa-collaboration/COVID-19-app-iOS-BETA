@@ -17,12 +17,14 @@ class UpdatePushNotificationTokenRequestTests: XCTestCase {
     
     var token: String!
     var registration: Registration!
+    var timestamp: Date!
     var sut: UpdatePushNotificationTokenRequest!
 
     override func setUpWithError() throws {
         token = UUID().uuidString
         registration = Registration.fake
-        sut = UpdatePushNotificationTokenRequest(registration: registration, token: token)
+        timestamp = Date()
+        sut = UpdatePushNotificationTokenRequest(registration: registration, token: token, timestamp: timestamp)
     }
 
     func testRequestBody() throws {
@@ -46,7 +48,6 @@ class UpdatePushNotificationTokenRequestTests: XCTestCase {
         let key = registration.secretKey
         
         func secureRequestImplementation() throws -> (timestamp: String, authCode: Data) {
-            let timestamp = Date()
             let timestampString = ISO8601DateFormatter().string(from: timestamp)
             var hmacContext = CCHmacContext()
 
