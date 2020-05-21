@@ -85,5 +85,58 @@ class RegistrationAPIPactTests: XCTestCase {
             }
         }
     }
+    
+    func testPushNotificationTokenUpdatePact() {
+        let registration = Registration.fake
+        let token = UUID().uuidString
+        
+        registrationAPIMockService
+            .given("an existing registration")
+            .uponReceiving("an updated push token")
+            .withRequest(method: .PUT, path: "/api/registration/push-notification-token", body: [
+                "sonarId": Matcher.uuid(registration.sonarId.uuidString),
+                "pushNotificationToken": Matcher.term(matcher: ".{15,240}", generate: token)
+            ])
+            .willRespondWith(status: 204, headers: [String: Any](), body: [])
+
+        registrationAPIMockService.run(timeout: 60) { (testComplete) -> Void in
+            let request = UpdatePushNotificationTokenRequest(registration: registration, token: token)
+
+            let urlSession: Session = URLSession(configuration: .default)
+
+            urlSession.execute(request, queue: .main) { result in
+                testComplete()
+            }
+        }
+    }
     #endif
+}
+
+private extension Registration {
+    static var fake: Self {
+        Registration(sonarId: UUID(), secretKey: SecKey.sampleHMACKey, broadcastRotationKey: SecKey.sampleEllipticCurveKey)
+    }
+}
+
+private extension SecKey {
+    static var sampleEllipticCurveKey: SecKey {
+        let data = Data.init(base64Encoded: "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEu1f68MqDXbKeTqZMTHsOGToO4rKnPClXe/kE+oWqlaWZQv4J1E98cUNdpzF9JIFRPMCNdGOvTr4UB+BhQv9GWg==")!
+        return try! BroadcastRotationKeyConverter().fromData(data)
+    }
+    
+    static var knownGoodECPublicKey: SecKey {
+        let data = Data(base64Encoded: "BDSTjw7/yauS6iyMZ9p5yl6i0n3A7qxYI/3v+6RsHt8o+UrFCyULX3fKZuA6ve+lH1CAItezr+Tk2lKsMcCbHMI=")!
+
+        let keyDict: [NSObject: NSObject] = [
+           kSecAttrKeyType: kSecAttrKeyTypeECSECPrimeRandom,
+           kSecAttrKeyClass: kSecAttrKeyClassPublic,
+           kSecAttrKeySizeInBits: NSNumber(value: 256),
+           kSecReturnPersistentRef: true as NSObject
+        ]
+
+        return SecKeyCreateWithData(data as CFData, keyDict as CFDictionary, nil)!
+    }
+    
+    static var sampleHMACKey: HMACKey = HMACKey(data: Data(base64Encoded: "LWbqBBxfV5vob3ApsPhgOI8aiFcKYP8jLQ2fKb8Y1C0=")!)
+
 }
