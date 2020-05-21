@@ -16,10 +16,19 @@ class UpdatePushNotificationTokenRequest: SecureRequest, Request {
 
     func parse(_ data: Data) throws -> Void {}
 
-    init(registration: Registration, token: String) {
+    init(
+        registration: Registration,
+        token: String,
+        timestamp: Date = Date()
+    ) {
         let data = try! JSONEncoder().encode(["pushNotificationToken": token, "sonarId": registration.sonarId.uuidString])
         method = .put(data: data)
         urlable = .path("/api/registration/push-notification-token")
-        super.init(registration.secretKey, data, ["Content-Type": "application/json"])
+        super.init(
+            registration.secretKey,
+            data,
+            ["Content-Type": "application/json"],
+            timestamp
+        )
     }
 }
