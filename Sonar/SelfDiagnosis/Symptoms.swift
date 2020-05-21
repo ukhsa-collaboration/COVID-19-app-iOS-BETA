@@ -22,6 +22,10 @@ struct Symptoms: Equatable {
     init(_ symptoms: Set<Symptom>) {
         self.symptoms = symptoms
     }
+    
+    func any() -> Bool {
+        return !symptoms.isEmpty
+    }
 
     func getSymptoms() -> Set<Symptom> {
         return symptoms

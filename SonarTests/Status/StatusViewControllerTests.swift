@@ -9,7 +9,7 @@
 import XCTest
 @testable import Sonar
 
-class StatusViewControllerTests: XCTestCase {
+class StatusViewControllerTests: TestCase {
 
     func testUnhidingNotificationStatusViewBeforeViewDidLoadShowsNotificationStatusView() {
         let vc = makeViewController(persistence: PersistenceDouble(registration: Registration.fake), loadView: false)
@@ -163,27 +163,132 @@ class StatusViewControllerTests: XCTestCase {
         XCTAssertNotNil(adviceVc.view)
         XCTAssertEqual(adviceVc.link.url, URL(string: "https://faq.covid19.nhs.uk/article/KA-01064/en-us"))
     }
+    
+    func testShowsDrawerAfterCheckinIfCoughButNoTemperature() throws {
+        try PresentationSpy.withSpy {
+            let persistence = PersistenceDouble(statusState: .checkin(StatusState.Checkin(symptoms: [], checkinDate: Date())))
+            let statusStateMachine = StatusStateMachine(persisting: persistence, contactEventsUploader: ContactEventsUploaderDouble(), notificationCenter: NotificationCenter(), userNotificationCenter: UserNotificationCenterDouble())
+            let drawerPresenter = DrawerPresenterDouble()
+            let vc = makeViewController(
+                persistence: persistence,
+                statusStateMachine: statusStateMachine,
+                loadView: true,
+                makePresentSynchronous: true,
+                drawerPresenter: drawerPresenter
+            )
+        
+            let promptVc = try XCTUnwrap(PresentationSpy.presented(by: vc) as? SymptomsPromptViewController)
+            promptVc.updateSymptoms()
+            try respondToSymptomQuestion(vc: vc, expectedTitle: "TEMPERATURE_QUESTION", response: false)
+            try respondToSymptomQuestion(vc: vc, expectedTitle: "COUGH_QUESTION", response: true)
+            try respondToSymptomQuestion(vc: vc, expectedTitle: "ANOSMIA_QUESTION", response: false)
+            
+            XCTAssertNotNil(drawerPresenter.presented as? DrawerViewController)
+        }
+    }
+
+    
+    func testShowsDrawerAfterCheckinIfAnosmiaButNoTemperature() throws {
+        try PresentationSpy.withSpy {
+            let persistence = PersistenceDouble(statusState: .checkin(StatusState.Checkin(symptoms: [], checkinDate: Date())))
+            let statusStateMachine = StatusStateMachine(persisting: persistence, contactEventsUploader: ContactEventsUploaderDouble(), notificationCenter: NotificationCenter(), userNotificationCenter: UserNotificationCenterDouble())
+            let drawerPresenter = DrawerPresenterDouble()
+            let vc = makeViewController(
+                persistence: persistence,
+                statusStateMachine: statusStateMachine,
+                loadView: true,
+                makePresentSynchronous: true,
+                drawerPresenter: drawerPresenter
+            )
+
+            let promptVc = try XCTUnwrap(PresentationSpy.presented(by: vc) as? SymptomsPromptViewController)
+            promptVc.updateSymptoms()
+            try respondToSymptomQuestion(vc: vc, expectedTitle: "TEMPERATURE_QUESTION", response: false)
+            try respondToSymptomQuestion(vc: vc, expectedTitle: "COUGH_QUESTION", response: false)
+            try respondToSymptomQuestion(vc: vc, expectedTitle: "ANOSMIA_QUESTION", response: true)
+            
+            XCTAssertNotNil(drawerPresenter.presented as? DrawerViewController)
+        }
+    }
+    
+    func testDoesNotShowsDrawerAfterCheckinIfTemperature() throws{
+        try PresentationSpy.withSpy {
+            let persistence = PersistenceDouble(statusState: .checkin(StatusState.Checkin(symptoms: [], checkinDate: Date())))
+            let statusStateMachine = StatusStateMachine(persisting: persistence, contactEventsUploader: ContactEventsUploaderDouble(), notificationCenter: NotificationCenter(), userNotificationCenter: UserNotificationCenterDouble())
+            let drawerPresenter = DrawerPresenterDouble()
+            let vc = makeViewController(
+                persistence: persistence,
+                statusStateMachine: statusStateMachine,
+                loadView: true,
+                makePresentSynchronous: true,
+                drawerPresenter: drawerPresenter
+            )
+
+            let promptVc = try XCTUnwrap(PresentationSpy.presented(by: vc) as? SymptomsPromptViewController)
+            promptVc.updateSymptoms()
+            try respondToSymptomQuestion(vc: vc, expectedTitle: "TEMPERATURE_QUESTION", response: true)
+            try respondToSymptomQuestion(vc: vc, expectedTitle: "COUGH_QUESTION", response: false)
+            try respondToSymptomQuestion(vc: vc, expectedTitle: "ANOSMIA_QUESTION", response: false)
+            
+            XCTAssertNil(drawerPresenter.presented)
+        }
+    }
+    
+    private func respondToSymptomQuestion(
+        vc: StatusViewController,
+        expectedTitle: String,
+        response: Bool,
+        file: StaticString = #file,
+        line: UInt = #line
+    ) throws {
+        let promptVc = try XCTUnwrap(vc.navigationController?.topViewController as? QuestionSymptomsViewController, file: file, line: line)
+        XCTAssertEqual(promptVc.titleLabel.text, expectedTitle.localized, file: file, line: line)
+        
+        if response {
+            promptVc.yesTapped()
+        } else {
+            promptVc.noTapped()
+        }
+        
+        promptVc.continueTapped()
+    }
+
+    
+    private func makeViewController(
+        persistence: Persisting = PersistenceDouble(),
+        registrationService: RegistrationService = RegistrationServiceDouble(),
+        notificationCenter: NotificationCenter = NotificationCenter(),
+        statusStateMachine: StatusStateMachining = StatusStateMachiningDouble(state: .ok(StatusState.Ok())),
+        loadView: Bool = true,
+        makePresentSynchronous: Bool = false,
+        drawerPresenter: DrawerPresenter = DrawerPresenterDouble()
+    ) -> StatusViewController {
+        let vc = StatusViewController.instantiate()
+        vc.inject(
+            statusStateMachine: statusStateMachine,
+            userStatusProvider: UserStatusProvider(localeProvider: EnGbLocaleProviderDouble()),
+            persistence: persistence,
+            linkingIdManager: LinkingIdManagerDouble(),
+            registrationService: registrationService,
+            notificationCenter: notificationCenter,
+            drawerPresenter: drawerPresenter
+        )
+        
+        vc.animateTransitions = !makePresentSynchronous
+        
+        if loadView {
+            parentViewControllerForTests.pushViewController(vc, animated: false)
+            XCTAssertNotNil(vc.view)
+            vc.viewDidAppear(false)
+        }
+        return vc
+    }
 }
 
-fileprivate func makeViewController(
-    persistence: Persisting = PersistenceDouble(),
-    registrationService: RegistrationService = RegistrationServiceDouble(),
-    notificationCenter: NotificationCenter = NotificationCenter(),
-    statusStateMachine: StatusStateMachining = StatusStateMachiningDouble(state: .ok(StatusState.Ok())),
-    loadView: Bool = true
-) -> StatusViewController {
-    let vc = StatusViewController.instantiate()
-    vc.inject(
-        statusStateMachine: statusStateMachine,
-        userStatusProvider: UserStatusProvider(localeProvider: EnGbLocaleProviderDouble()),
-        persistence: persistence,
-        linkingIdManager: LinkingIdManagerDouble(),
-        registrationService: registrationService,
-        notificationCenter: notificationCenter
-    )
-    if loadView {
-        XCTAssertNotNil(vc.view)
-        vc.viewDidAppear(false)
+private class DrawerPresenterDouble: DrawerPresenter {
+    var presented: UIViewController?
+    
+    func present(drawer: UIViewController, inNavigationController: UINavigationController, usingTransitioningDelegate: UIViewControllerTransitioningDelegate) {
+        presented = drawer
     }
-    return vc
 }

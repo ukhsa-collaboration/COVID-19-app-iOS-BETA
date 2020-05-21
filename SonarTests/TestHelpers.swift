@@ -20,7 +20,7 @@ func inWindowHierarchy(viewController: UIViewController, closure: (() -> Void)) 
 }
 
 class TestCase: XCTestCase {
-    let parentViewControllerForTests = UINavigationController()
+    let parentViewControllerForTests = SynchronousNavigationControllerDouble()
 
     override func setUp() {
         super.setUp()

@@ -10,6 +10,11 @@ import UIKit
 
 class SynchronousNavigationControllerDouble: UINavigationController {
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
-        viewControllers.append(viewController)
+        super.pushViewController(viewController, animated: false)
+//        viewControllers.append(viewController)
     }
+    
+//    override var topViewController: UIViewController? {
+//        viewControllers.last
+//    }
 }

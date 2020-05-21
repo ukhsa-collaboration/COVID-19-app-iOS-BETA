@@ -72,11 +72,17 @@ class StatusTests: ScreenTestCase {
         // if the user still has symptoms...
         XCTAssertTrue(checkinPopup.title.exists)
         checkinPopup.updateSymptomsButton.tap()
+        XCTAssertTrue(checkinTemperaturePage.title.exists)
         checkinTemperaturePage.temperatureOption.tap()
         checkinTemperaturePage.continueButton.tap()
         let checkinCoughPage = CheckinCoughPage(app)
+        XCTAssertTrue(checkinCoughPage.title.exists)
         checkinCoughPage.coughOption.tap()
-        checkinCoughPage.submitButton.tap()
+        checkinCoughPage.continueButton.tap()
+        let checkinAnosmiaPage = CheckinAnosmiaPage(app)
+        XCTAssertTrue(checkinAnosmiaPage.title.exists)
+        checkinAnosmiaPage.haveSymptomsOption.tap()
+        checkinAnosmiaPage.continueButton.tap()
 
         // they are told to continue isolating
         XCTAssertTrue(symptomaticPage.title.exists)
@@ -95,11 +101,14 @@ class StatusTests: ScreenTestCase {
         checkinTemperaturePage.continueButton.tap()
         XCTAssertTrue(checkinCoughPage.title.exists)
         checkinCoughPage.coughOption.tap()
-        checkinCoughPage.submitButton.tap()
+        checkinCoughPage.continueButton.tap()
+        XCTAssertTrue(checkinAnosmiaPage.title.exists)
+        checkinAnosmiaPage.noSymptomsOption.tap()
+        checkinAnosmiaPage.continueButton.tap()
         
         // ...they are told to return to "current advice"...
         let checkinAdvicePage = CheckinAdvicePage(app)
-        XCTAssertTrue(checkinAdvicePage.stillHaveCough.exists)
+        XCTAssertTrue(checkinAdvicePage.stillHaveSymptomsButDontIsolate.exists)
         checkinAdvicePage.closeButton.tap()
         XCTAssertTrue(statusOkPage.title.exists)
 
