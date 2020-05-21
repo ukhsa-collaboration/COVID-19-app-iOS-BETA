@@ -20,7 +20,7 @@ class UpdatePushNotificationTokenRequest: SecureRequest, Request {
 
     init(registration: Registration, token: String) {
         try! method = .put(data: JSONEncoder().encode(["pushNotificationToken": token, "sonarId": registration.sonarId.uuidString]))
-        urlable = .path("")
+        urlable = .path("/api/registration/push-notification-token")
         super.init(HMACKey(data: Data()), Data(), [:])
     }
 }
