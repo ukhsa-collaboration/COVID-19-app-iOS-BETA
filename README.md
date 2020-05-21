@@ -129,6 +129,19 @@ testers:
   - This will release the build to App Store Connect Users
 2. Add the build to the appropriate test groups
 
+### Branches and Versions and Build Numbers, Oh My!
+
+The release process caters for our normal use case, since with trunk-based
+development and continuous delivery, we can select a specific commit to promote
+as a production release.
+
+However, this optimization means that the process for creating a release that
+is not based off trunk (`internal` for releases, as `master` is trunk for
+development) requires more manual intervention. For example, cutting a hotfix
+release from a previous release commit will generally require a branch with the
+necessary changes and a manual build number bump. The release process then
+continues as normal, by deploying from the commit to a specified environment.
+
 ### Deploying to Production
 
 To trigger a release manually, set the following environment variables:
