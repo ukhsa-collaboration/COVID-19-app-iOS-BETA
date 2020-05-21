@@ -1,5 +1,5 @@
 //
-//  TestUpdateViewController.swift
+//  DrawerViewController.swift
 //  Sonar
 //
 //  Created by NHSX on 20/05/2020
@@ -8,10 +8,8 @@
 
 import UIKit
 
-
-
-class TestUpdateViewController: UIViewController, Storyboarded {
-    static var storyboardName = "TestUpdateViewController"
+class DrawerViewController: UIViewController, Storyboarded {
+    static var storyboardName = "Drawer"
     
     @IBAction func close(_ sender: Any) {
         dismiss(animated: true, completion: nil)

@@ -185,8 +185,8 @@
 		DD3FCF3B2476E8C3008B0237 /* TestResultNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3FCF392476E8C3008B0237 /* TestResultNotificationHandler.swift */; };
 		DD3FCF3C2476E8C3008B0237 /* ExposedNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3FCF3A2476E8C3008B0237 /* ExposedNotificationHandler.swift */; };
 		DD3FCF3E2476E8DC008B0237 /* TestResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3FCF3D2476E8DC008B0237 /* TestResult.swift */; };
-		DD3FCF412476E914008B0237 /* TestUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3FCF3F2476E913008B0237 /* TestUpdateViewController.swift */; };
-		DD3FCF422476E914008B0237 /* TestUpdateViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD3FCF402476E913008B0237 /* TestUpdateViewController.storyboard */; };
+		DD3FCF412476E914008B0237 /* DrawerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3FCF3F2476E913008B0237 /* DrawerViewController.swift */; };
+		DD3FCF422476E914008B0237 /* Drawer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD3FCF402476E913008B0237 /* Drawer.storyboard */; };
 		DDD5BDC52473EA1200329720 /* NotificationStatusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5BDC42473EA1200329720 /* NotificationStatusButton.swift */; };
 		F600A60224297A8E0038DF57 /* RegistrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F600A60124297A8E0038DF57 /* RegistrationRequest.swift */; };
 		F600A60424297C010038DF57 /* RegistrationRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F600A60324297C010038DF57 /* RegistrationRequestTests.swift */; };
@@ -517,8 +517,8 @@
 		DD3FCF392476E8C3008B0237 /* TestResultNotificationHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestResultNotificationHandler.swift; sourceTree = "<group>"; };
 		DD3FCF3A2476E8C3008B0237 /* ExposedNotificationHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExposedNotificationHandler.swift; sourceTree = "<group>"; };
 		DD3FCF3D2476E8DC008B0237 /* TestResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestResult.swift; sourceTree = "<group>"; };
-		DD3FCF3F2476E913008B0237 /* TestUpdateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUpdateViewController.swift; sourceTree = "<group>"; };
-		DD3FCF402476E913008B0237 /* TestUpdateViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TestUpdateViewController.storyboard; sourceTree = "<group>"; };
+		DD3FCF3F2476E913008B0237 /* DrawerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerViewController.swift; sourceTree = "<group>"; };
+		DD3FCF402476E913008B0237 /* Drawer.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Drawer.storyboard; sourceTree = "<group>"; };
 		DDD5BDC42473EA1200329720 /* NotificationStatusButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationStatusButton.swift; sourceTree = "<group>"; };
 		F600A60124297A8E0038DF57 /* RegistrationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationRequest.swift; sourceTree = "<group>"; };
 		F600A60324297C010038DF57 /* RegistrationRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationRequestTests.swift; sourceTree = "<group>"; };
@@ -799,12 +799,15 @@
 			isa = PBXGroup;
 			children = (
 				F6099A792474976400758D3E /* Advice.storyboard */,
+				DD3FCF402476E913008B0237 /* Drawer.storyboard */,
 				F6334E4C24748B3000421B4C /* RegistrationStatus.storyboard */,
 				F758B8C3242CC0EE003AE16D /* Status.storyboard */,
 				F65A0A3E2475EAC700F7A627 /* Unexposed.storyboard */,
 				F6BBE140246F584F005757BB /* WorkplaceGuidance.storyboard */,
 				13473A1A246AFF0C00800CEA /* AdviceViewController.swift */,
 				134470AF2454D614001A0AD9 /* CoughUpdateViewController.swift */,
+				DD3FCF3F2476E913008B0237 /* DrawerViewController.swift */,
+				DD3FCF3A2476E8C3008B0237 /* ExposedNotificationHandler.swift */,
 				F6334E4A24747DC300421B4C /* RegistrationStatusViewController.swift */,
 				F6DA0A3B246A0FAA001F0B48 /* StatusState.swift */,
 				F6DA0A332469D6BA001F0B48 /* StatusStateMachine.swift */,
@@ -812,15 +815,12 @@
 				13473A1C246C0F2C00800CEA /* StatusViewController.swift */,
 				F652F72D244E472E00D97950 /* SymptomsPromptViewController.swift */,
 				138114E32450543600BA46C7 /* SymptomStackView.swift */,
+				DD3FCF3D2476E8DC008B0237 /* TestResult.swift */,
+				DD3FCF392476E8C3008B0237 /* TestResultNotificationHandler.swift */,
 				F65A0A402475EB0400F7A627 /* UnexposedViewController.swift */,
 				13473A1E246D543F00800CEA /* UserStatusProvider.swift */,
 				F6BBE142246F5870005757BB /* WorkplaceGuidanceViewController.swift */,
 				F604976C2453ADF4002B8503 /* scenarios.yml */,
-				DD3FCF3A2476E8C3008B0237 /* ExposedNotificationHandler.swift */,
-				DD3FCF392476E8C3008B0237 /* TestResultNotificationHandler.swift */,
-				DD3FCF3D2476E8DC008B0237 /* TestResult.swift */,
-				DD3FCF402476E913008B0237 /* TestUpdateViewController.storyboard */,
-				DD3FCF3F2476E913008B0237 /* TestUpdateViewController.swift */,
 			);
 			path = Status;
 			sourceTree = "<group>";
@@ -1654,7 +1654,7 @@
 				F6F05A322434310200FF4B72 /* Onboarding.storyboard in Resources */,
 				F70CB81B2450CFA900ED6E7F /* OnboardingLogoStrapline.xib in Resources */,
 				098ED481242E745F0029B729 /* Debug.storyboard in Resources */,
-				DD3FCF422476E914008B0237 /* TestUpdateViewController.storyboard in Resources */,
+				DD3FCF422476E914008B0237 /* Drawer.storyboard in Resources */,
 				F6053A102472F69D0006939E /* URLs.plist in Resources */,
 				F6099A7A2474976400758D3E /* Advice.storyboard in Resources */,
 			);
@@ -1915,7 +1915,7 @@
 				F63279252435203600CF7A42 /* DispatchQueue+Testable.swift in Sources */,
 				097F05492473445A00E633C8 /* TestingInfoContainerViewController.swift in Sources */,
 				893C0B7B243DE346000A7DB6 /* OnboardingEnvironment.swift in Sources */,
-				DD3FCF412476E914008B0237 /* TestUpdateViewController.swift in Sources */,
+				DD3FCF412476E914008B0237 /* DrawerViewController.swift in Sources */,
 				898FE860243B5AF700210775 /* UITestScreenMaker.swift in Sources */,
 				214209BA242216B700C7BFF3 /* Persistence.swift in Sources */,
 				213C806C241A56430020EFA5 /* PermissionsViewController.swift in Sources */,

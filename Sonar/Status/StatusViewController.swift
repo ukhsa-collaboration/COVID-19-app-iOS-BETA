@@ -301,7 +301,7 @@ class StatusViewController: UIViewController, Storyboarded {
     }
     
     private func presentTestResultUpdate(result: TestResult.Result) {
-        let testUpdateViewController = TestUpdateViewController.instantiate()
+        let testUpdateViewController = DrawerViewController.instantiate()
         testUpdateViewController.inject(headerText: result.headerText, detailText: result.detailText)
         presentDrawer(drawVC: testUpdateViewController)
     }

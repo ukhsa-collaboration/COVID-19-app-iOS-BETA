@@ -129,31 +129,37 @@ class SetStatusStateViewController: UITableViewController {
         switch statusState {
         case .ok:
             statusLabel.text = "ok"
+            statusPicker.selectRow(0, inComponent: 0, animated: false)
             temperature = nil
             cough = nil
             date = nil
         case .symptomatic(let symptomatic):
             statusLabel.text = "symptomatic"
+            statusPicker.selectRow(1, inComponent: 0, animated: false)
             temperature = symptomatic.symptoms.contains(.temperature)
             cough = symptomatic.symptoms.contains(.cough)
             date = symptomatic.startDate
         case .checkin(let checkin):
             statusLabel.text = "checkin"
+            statusPicker.selectRow(2, inComponent: 0, animated: false)
             temperature = checkin.symptoms.contains(.temperature)
             cough = checkin.symptoms.contains(.cough)
             date = checkin.checkinDate
         case .exposed(let exposed):
             statusLabel.text = "exposed"
+            statusPicker.selectRow(3, inComponent: 0, animated: false)
             temperature = nil
             cough = nil
             date = exposed.startDate
         case .unexposed:
             statusLabel.text = "unexposed"
+            statusPicker.selectRow(4, inComponent: 0, animated: false)
             temperature = nil
             cough = nil
             date = nil
         case .positiveTestResult(let positiveTestResult):
             statusLabel.text = "positive test result"
+            statusPicker.selectRow(5, inComponent: 0, animated: false)
             temperature = positiveTestResult.symptoms.contains(.temperature)
             cough = positiveTestResult.symptoms.contains(.cough)
             date = positiveTestResult.startDate
