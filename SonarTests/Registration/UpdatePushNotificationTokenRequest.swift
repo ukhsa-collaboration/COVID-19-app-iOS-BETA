@@ -9,18 +9,17 @@
 import Foundation
 
 class UpdatePushNotificationTokenRequest: SecureRequest, Request {
-    var method: HTTPMethod
-    var urlable: Urlable
-    
-    func parse(_ data: Data) throws -> Void {
-        
-    }
-    
     typealias ResponseType = Void
 
+    var method: HTTPMethod
+    var urlable: Urlable
+
+    func parse(_ data: Data) throws -> Void {}
+
     init(registration: Registration, token: String) {
-        try! method = .put(data: JSONEncoder().encode(["pushNotificationToken": token, "sonarId": registration.sonarId.uuidString]))
+        let data = try! JSONEncoder().encode(["pushNotificationToken": token, "sonarId": registration.sonarId.uuidString])
+        method = .put(data: data)
         urlable = .path("/api/registration/push-notification-token")
-        super.init(HMACKey(data: Data()), Data(), [:])
+        super.init(registration.secretKey, data, ["Content-Type": "application/json"])
     }
 }
