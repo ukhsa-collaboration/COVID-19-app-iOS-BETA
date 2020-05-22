@@ -27,10 +27,14 @@ extension Expirable {
     }
 }
 
+protocol SymptomProvider {
+    var symptoms: Symptoms { get }
+}
+
 enum StatusState: Equatable {
     struct Ok: Codable, Equatable {}
 
-    struct Symptomatic: Codable, Equatable, Expirable {
+    struct Symptomatic: Codable, Equatable, Expirable, SymptomProvider {
         let symptoms: Symptoms
         let startDate: Date
         let duration = 7
@@ -60,6 +64,12 @@ enum StatusState: Equatable {
     }
 
     struct Unexposed: Codable, Equatable {}
+    
+    struct UnclearTestResult: Codable, Equatable, Expirable, SymptomProvider {
+        let symptoms: Symptoms
+        let duration: Int = 7
+        let startDate: Date
+    }
 
     case ok(Ok)                   // default state, previously "blue"
     case symptomatic(Symptomatic) // previously "red" state
@@ -67,6 +77,7 @@ enum StatusState: Equatable {
     case exposed(Exposed)         // previously "amber" state
     case unexposed(Unexposed)
     case positiveTestResult(PositiveTestResult)
+    case unclearTestResult(UnclearTestResult)
 
     var isSymptomatic: Bool {
         if case .symptomatic = self {
@@ -90,6 +101,7 @@ enum StatusState: Equatable {
         case checkin
         case exposed
         case positiveTestResult
+        case unclearTestResult
     }
 }
 
@@ -114,6 +126,9 @@ extension StatusState: Encodable {
         case .positiveTestResult(let positiveTestResult):
             try container.encode("positiveTestResult", forKey: .type)
             try container.encode(positiveTestResult, forKey: .positiveTestResult)
+        case .unclearTestResult(let unclearTestResult):
+            try container.encode("unclearTestResult", forKey: .type)
+            try container.encode(unclearTestResult, forKey: .unclearTestResult)
         }
     }
 }
@@ -144,6 +159,9 @@ extension StatusState: Decodable {
         case "positiveTestResult":
             let positiveTestResult = try values.decode(PositiveTestResult.self, forKey: .positiveTestResult)
             self = .positiveTestResult(positiveTestResult)
+        case "unclearTestResult":
+            let unclearTestResult = try values.decode(UnclearTestResult.self, forKey: .unclearTestResult)
+            self = .unclearTestResult(unclearTestResult)
         default:
             throw Error.decodingError("Unrecognized type: \(type)")
         }

@@ -287,15 +287,12 @@ class StatusViewController: UIViewController, Storyboarded {
             stepsDetailLabel.text = "If you develop symptoms, please come back to this app."
 
         case .symptomatic(let symptomatic):
-            diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
-            diagnosisTitleLabel.text = "Your symptoms indicate you may have coronavirus. Please self-isolate and apply for a test."
-            diagnosisDetailLabel.isHidden = false
-            diagnosisDetailLabel.text = userStatusProvider.detailWithExpiryDate(symptomatic.expiryDate)
-            feelUnwellButton.isHidden = true
-            applyForTestButton.isHidden = false
-            stepsDetailLabel.isHidden = false
-            stepsDetailLabel.text = "Please book a coronavirus test immediately. Write down your reference code and phone 0800 540 4900"
-
+            detailForSymptomatic(state: symptomatic)
+            
+        case .unclearTestResult(let unclearTestResult):
+            // Use symptomatic detail as it's the same visually
+            detailForSymptomatic(state: unclearTestResult)
+        
         case .checkin(let checkin):
             diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
             diagnosisTitleLabel.text = "Your symptoms indicate you may have coronavirus. Please self-isolate and apply for a test."
@@ -320,6 +317,18 @@ class StatusViewController: UIViewController, Storyboarded {
             nextStepsDetailView.isHidden = true
         }
         
+    }
+    
+    func detailForSymptomatic(state: Expirable) {
+        diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
+        diagnosisTitleLabel.text = "Your symptoms indicate you may have coronavirus. Please self-isolate and apply for a test."
+        diagnosisDetailLabel.isHidden = false
+        diagnosisDetailLabel.text = userStatusProvider.detailWithExpiryDate(state.expiryDate)
+        feelUnwellButton.isHidden = true
+        applyForTestButton.isHidden = false
+        stepsDetailLabel.isHidden = false
+        stepsDetailLabel.text = "Please book a coronavirus test immediately. Write down your reference code and phone 0800 540 4900"
+
     }
 
     private func presentCoughUpdate() {
