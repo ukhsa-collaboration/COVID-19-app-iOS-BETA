@@ -5,7 +5,7 @@ set -eo pipefail
 ROOT_DIR="$(dirname "$0")/../.."
 pushd "$ROOT_DIR" > /dev/null
 
-INSTALL_LOG="$ROOT_DIR/SonarPactTests/Setup/install.log"
+INSTALL_LOG="./SonarPactTests/Setup/install.log"
 touch "$INSTALL_LOG"
 
 check_for_failure() {
