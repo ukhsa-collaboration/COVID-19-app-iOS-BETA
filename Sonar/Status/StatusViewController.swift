@@ -292,7 +292,8 @@ class StatusViewController: UIViewController, Storyboarded {
         case .unclearTestResult(let unclearTestResult):
             // Use symptomatic detail as it's the same visually
             detailForSymptomatic(state: unclearTestResult)
-        
+            presentTestResultUpdate(result: .unclear)
+
         case .checkin(let checkin):
             diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
             diagnosisTitleLabel.text = "Your symptoms indicate you may have coronavirus. Please self-isolate and apply for a test."
@@ -340,17 +341,12 @@ class StatusViewController: UIViewController, Storyboarded {
     }
     
     private func presentTestResultUpdate(result: TestResult.Result) {
-        guard let header = result.headerText else { return }
+        let header = result.headerText
         let detail = result.detailText
         let config = DrawerViewController.Config(header: header, detail: detail)
         performSegue(withIdentifier: "presentDrawer", sender: config)
     }
-    
-    private func presentDrawer(drawVC: UIViewController) {
-        drawVC.modalPresentationStyle = .custom
-        drawVC.transitioningDelegate = drawerPresentationManager
-        navigationController?.visibleViewController!.present(drawVC, animated: true)
-    }
+
 }
 
 private let logger = Logger(label: "StatusViewController")

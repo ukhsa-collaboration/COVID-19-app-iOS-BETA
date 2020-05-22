@@ -19,21 +19,12 @@ extension TestResult {
     enum Result: String, Codable {
         case positive = "POSITIVE"
         case negative = "NEGATIVE"
-        case invalid = "INVALID"
+        case unclear = "INVALID" // Backend calls this invalid
     }
 }
 
 extension TestResult.Result {
-    var headerText: String? {
-        switch self {
-        case .positive:
-            return "TEST_UPDATE_DRAW_POSITIVE_HEADER".localized
-        default:
-            assertionFailure("Header text not defined for \(self)")
-            return nil
-        }
-    }
-    
-    var detailText: String { "TEST_UPDATE_DRAW_DETAIL".localized }
+    var headerText: String { "TEST_UPDATE_DRAW_\(rawValue)_HEADER".localized }
+    var detailText: String { "TEST_UPDATE_DRAW_\(rawValue)_DETAIL".localized }
 }
 
