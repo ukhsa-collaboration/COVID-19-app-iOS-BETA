@@ -10,6 +10,7 @@
 		08D77F2624753AA200EAEBD5 /* RemoteNotificationDispatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D77F2524753AA200EAEBD5 /* RemoteNotificationDispatcherTests.swift */; };
 		08D77F2824767C6C00EAEBD5 /* UpdatePushNotificationTokenRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D77F2724767C6C00EAEBD5 /* UpdatePushNotificationTokenRequestTests.swift */; };
 		08D77F2A24767DBB00EAEBD5 /* UpdatePushNotificationTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D77F2924767DBB00EAEBD5 /* UpdatePushNotificationTokenRequest.swift */; };
+		08D77F2C2477999100EAEBD5 /* LinkingIdRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D77F2B2477999000EAEBD5 /* LinkingIdRequestTests.swift */; };
 		090B186F24354D0100870B5D /* RemoteNotificationDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090B186E24354D0100870B5D /* RemoteNotificationDispatcher.swift */; };
 		090B1871243552C300870B5D /* UserNotificationCenterDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090B1870243552C300870B5D /* UserNotificationCenterDouble.swift */; };
 		090DEE10244F8BF600268170 /* BluetoothPermissionDeniedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090DEE0F244F8BF600268170 /* BluetoothPermissionDeniedViewController.swift */; };
@@ -326,6 +327,7 @@
 		08D77F2524753AA200EAEBD5 /* RemoteNotificationDispatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteNotificationDispatcherTests.swift; sourceTree = "<group>"; };
 		08D77F2724767C6C00EAEBD5 /* UpdatePushNotificationTokenRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePushNotificationTokenRequestTests.swift; sourceTree = "<group>"; };
 		08D77F2924767DBB00EAEBD5 /* UpdatePushNotificationTokenRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePushNotificationTokenRequest.swift; sourceTree = "<group>"; };
+		08D77F2B2477999000EAEBD5 /* LinkingIdRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkingIdRequestTests.swift; sourceTree = "<group>"; };
 		090B186E24354D0100870B5D /* RemoteNotificationDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteNotificationDispatcher.swift; sourceTree = "<group>"; };
 		090B1870243552C300870B5D /* UserNotificationCenterDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationCenterDouble.swift; sourceTree = "<group>"; };
 		090DEE0F244F8BF600268170 /* BluetoothPermissionDeniedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothPermissionDeniedViewController.swift; sourceTree = "<group>"; };
@@ -1254,6 +1256,7 @@
 				09CDA1192473525000C8684D /* ReferenceCodeViewControllerTests.swift */,
 				F604977424549C95002B8503 /* LinkingIdManagerTests.swift */,
 				097F054A2473457000E633C8 /* TestingInfoContainerViewControllerTests.swift */,
+				08D77F2B2477999000EAEBD5 /* LinkingIdRequestTests.swift */,
 			);
 			path = Testing;
 			sourceTree = "<group>";
@@ -1773,6 +1776,7 @@
 				89DF66A42460173800A55F24 /* StorageCheckerTests.swift in Sources */,
 				F694B1BE2459EB3800C6A5D1 /* NotificationAcknowledgerTests.swift in Sources */,
 				F68BFBF7242ACD17008EE68F /* TestHelpers.swift in Sources */,
+				08D77F2C2477999100EAEBD5 /* LinkingIdRequestTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
