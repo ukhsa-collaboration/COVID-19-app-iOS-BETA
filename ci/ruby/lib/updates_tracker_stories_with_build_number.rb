@@ -5,6 +5,7 @@ require 'open3'
 TRACKER_API = 'https://www.pivotaltracker.com/services/v5'
 
 module UpdatesTrackerStoriesWithBuildNumber
+
   module_function def update_stories_with_build_number(
     build_number:,
     tracker_token:,
@@ -45,35 +46,35 @@ module UpdatesTrackerStoriesWithBuildNumber
     raise "Command failed: \n\n#{err}" if status.exitstatus !=0
     out.split(/\n+/)
   end
+
+  class Tracker
+    BASE_URL = 'https://www.pivotaltracker.com/services/v5'
+
+    def initialize(token)
+      @token = token
+    end
+
+    def comment(story_id, text)
+      project_id = story(story_id).fetch('project_id')
+      uri = URI("#{TRACKER_API}/projects/#{project_id}/stories/#{story_id}/comments")
+      body = JSON.dump({ text: text })
+      Net::HTTP.post(uri, body, headers({ 'Content-Type' => 'application/json' }))
+    end
+
+    private
+
+    def story(id)
+      uri = URI("#{BASE_URL}/stories/#{id}")
+      json = uri.open(headers).read
+      JSON.parse(json)
+    end
+
+    def headers(headers={})
+      {
+        'Accept' => 'application/json',
+        'X-TrackerToken' => @token,
+      }.merge(headers)
+    end
+  end
+
 end
-
-class Tracker
-  BASE_URL = 'https://www.pivotaltracker.com/services/v5'
-
-  def initialize(token)
-    @token = token
-  end
-
-  def comment(story_id, text)
-    project_id = story(story_id).fetch('project_id')
-    uri = URI("#{TRACKER_API}/projects/#{project_id}/stories/#{story_id}/comments")
-    body = JSON.dump({ text: text })
-    Net::HTTP.post(uri, body, headers({ 'Content-Type' => 'application/json' }))
-  end
-
-  private
-
-  def story(id)
-    uri = URI("#{BASE_URL}/stories/#{id}")
-    json = uri.open(headers).read
-    JSON.parse(json)
-  end
-
-  def headers(headers={})
-    {
-      'Accept' => 'application/json',
-      'X-TrackerToken' => @token,
-    }.merge(headers)
-  end
-end
-
