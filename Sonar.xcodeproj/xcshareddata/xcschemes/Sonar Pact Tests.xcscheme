@@ -56,20 +56,6 @@
                ReferencedContainer = "container:Sonar.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "895D9DDD2437383300573D4D"
-               BuildableName = "SonarUITests.xctest"
-               BlueprintName = "SonarUITests"
-               ReferencedContainer = "container:Sonar.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -116,8 +102,7 @@
       </PostActions>
       <Testables>
          <TestableReference
-            skipped = "NO"
-            testExecutionOrdering = "random">
+            skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B7363DD22468B35700193E04"
@@ -129,27 +114,6 @@
                identifier = "London, England"
                referenceType = "1">
             </LocationScenarioReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "895D9DDD2437383300573D4D"
-               BuildableName = "SonarUITests.xctest"
-               BlueprintName = "SonarUITests"
-               ReferencedContainer = "container:Sonar.xcodeproj">
-            </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "OnboardingTests">
-               </Test>
-               <Test
-                  Identifier = "ScreenTestCase">
-               </Test>
-               <Test
-                  Identifier = "StatusTests">
-               </Test>
-            </SkippedTests>
          </TestableReference>
       </Testables>
    </TestAction>

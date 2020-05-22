@@ -19,11 +19,12 @@ class RegistrationAPIPactTests: XCTestCase {
         registrationAPIMockService = MockService(
             provider: "Registration API",
             consumer: "iOS App",
-            pactVerificationService: PactVerificationService(
-                url: "https://localhost",
-                port: 1234
-            )
+            pactVerificationService: PactMockServiceHelper.createVerificationService()
         )
+    }
+    
+    override class func tearDown() {
+        PactMockServiceHelper.clearSession()
     }
     
     
@@ -88,7 +89,7 @@ class RegistrationAPIPactTests: XCTestCase {
     
     func testPushNotificationTokenUpdatePact() {
         let token = UUID().uuidString
-        let request = UpdatePushNotificationTokenRequest(           registration: Registration(
+        let request = UpdatePushNotificationTokenRequest(registration: Registration(
             sonarId: ProviderKnownDetails.userId,
             secretKey: ProviderKnownDetails.secretKey,
             broadcastRotationKey: ProviderKnownDetails.broadcastKey
