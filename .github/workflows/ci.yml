@@ -148,8 +148,11 @@ jobs:
   upload-pacts-to-broker:
     needs: test
     runs-on:
-      - macos
+      - linux
       - self-hosted
+      - aws
+
+    container: pactfoundation/pact-cli
     steps:
       - name: Download Pacts
         uses: actions/download-artifact@v2
