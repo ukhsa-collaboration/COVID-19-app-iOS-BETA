@@ -29,8 +29,9 @@ class RequestTests: XCTestCase {
     func testSonarAppVersionHeaderIsSetToCurrentBuildNumber() throws {
         let urlRequest = request.urlRequest()
         let headers = try XCTUnwrap(urlRequest.allHTTPHeaderFields)
-        XCTAssertTrue(headers["X-Sonar-App-Version"] != nil, "build should be present")
-        XCTAssertTrue(Int(headers["X-Sonar-App-Version"]!) != nil, "build should be a valid number")
+        let buildVersion = try XCTUnwrap(headers["X-Sonar-App-Version"])
+        let hasExpectedForm = buildVersion.range(of: #"^\d+ \([\w-]+\)$"#, options: .regularExpression, range: nil, locale: nil) != nil // e.g. "23 (37bac42-M)"
+        XCTAssertTrue(hasExpectedForm, "build should have the correct form.")
     }
 
     func testSonarFoundationHeaderValueOverridesValuesManuallySet() throws {

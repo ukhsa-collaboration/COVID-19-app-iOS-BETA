@@ -69,7 +69,7 @@ extension Request {
 
         urlRequest.allHTTPHeaderFields = headers
         urlRequest.setValue(sonarHeaderValue, forHTTPHeaderField: "X-Sonar-Foundation")
-        if let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
+        if let build = Bundle.appBuildNumber {
             urlRequest.setValue(build, forHTTPHeaderField: "X-Sonar-App-Version")
         }
 
@@ -138,4 +138,62 @@ extension Session {
         execute(request, queue: delegateQueue, completion: completion)
     }
 
+}
+
+private extension Bundle {
+    
+    static let appBuildNumber: String? = {
+        guard
+            let url = Bundle.main.url(forResource: "Settings.bundle/Root", withExtension: "plist"),
+            let data = try? Data(contentsOf: url),
+            let settings = try? PropertyListDecoder().decode(StringSettings.self, from: data),
+            let buildNumber = settings.specifiers["app_build_constant"]
+            else {
+                return nil
+        }
+        return buildNumber
+    }()
+    
+}
+
+private struct StringSettings: Decodable {
+    private enum CodingKeys: String, CodingKey {
+        case specifiers = "PreferenceSpecifiers"
+    }
+    
+    private struct Specifier: Decodable {
+        
+        enum CodingKeys: String, CodingKey {
+            case key = "Key"
+            case defaultValue = "DefaultValue"
+        }
+        
+        var key: String
+        var defaultValue: String?
+    }
+    
+    var specifiers: [String: String]
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let specifiers = try container.decode([Specifier].self, forKey: .specifiers)
+        print(specifiers.compactMap { specifier -> (String, String)? in
+            guard let value = specifier.defaultValue else { return nil }
+            return (specifier.key, value)
+        })
+        self.specifiers = try Dictionary(
+            specifiers.compactMap { specifier in
+                guard let value = specifier.defaultValue else { return nil }
+                return (specifier.key, value)
+            },
+            uniquingKeysWith: { _, _ in
+                throw DecodingError.dataCorruptedError(
+                    forKey: .specifiers,
+                    in: container,
+                    debugDescription: "Default keys must be unique."
+                )
+            }
+        )
+    }
+    
 }
