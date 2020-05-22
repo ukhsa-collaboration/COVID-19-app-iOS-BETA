@@ -12,6 +12,8 @@ module UpdatesTrackerStoriesWithBuildNumber
     message_template: 'This story was included in build %<build_number>s',
     git_dir: Dir.pwd
   )
+    tracker = Tracker.new(tracker_token)
+
     rev_list(git_dir, commits)
       .map { |commit_id|
         match = commit_message(git_dir, commit_id).match(/\[[Ff]inishes #(\d+)\]/)
@@ -22,7 +24,7 @@ module UpdatesTrackerStoriesWithBuildNumber
       .each do |story_id|
         create_story_comment(
           tracker_token: tracker_token,
-          project_id: get_story(story_id: story_id, tracker_token: tracker_token).fetch('project_id'),
+          project_id: tracker.story(story_id).fetch('project_id'),
           story_id: story_id,
           text: message_template % { :build_number => build_number }
         )
@@ -48,18 +50,6 @@ module UpdatesTrackerStoriesWithBuildNumber
     )
   end
 
-  private def get_story(
-    story_id:,
-    tracker_token:
-  )
-    JSON.parse(
-      URI("#{TRACKER_API}/stories/#{story_id}").open({
-        'Accept' => 'application/json',
-        'X-TrackerToken' => tracker_token
-      }).read
-    )
-  end
-
   private def commit_message(git_dir, commit_id)
     out, err, status = Open3.capture3(*%W(
       git -C #{git_dir} log
@@ -79,3 +69,27 @@ module UpdatesTrackerStoriesWithBuildNumber
     out.split(/\n+/)
   end
 end
+
+class Tracker
+  BASE_URL = 'https://www.pivotaltracker.com/services/v5'
+
+  def initialize(token)
+    @token = token
+  end
+
+  def story(id)
+    uri = URI("#{BASE_URL}/stories/#{id}")
+    json = uri.open(headers).read
+    JSON.parse(json)
+  end
+
+  private
+
+  def headers(headers={})
+    {
+      'Accept' => 'application/json',
+      'X-TrackerToken' => @token,
+    }.merge(headers)
+  end
+end
+
