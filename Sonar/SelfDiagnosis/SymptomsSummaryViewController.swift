@@ -106,6 +106,7 @@ class SymptomsSummaryViewController: UIViewController, Storyboarded {
             label.text = symptomText
             label.sizeToFit()
             label.translatesAutoresizingMaskIntoConstraints = false
+            label.font = UIFont.preferredFont(forTextStyle: .body)
 
             let view = UIView()
             view.addSubview(label)
