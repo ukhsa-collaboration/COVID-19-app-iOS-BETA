@@ -109,10 +109,7 @@ class RegistrationAPIPactTests: XCTestCase {
                             ),
                             "Sonar-Message-Signature": Matcher.somethingLike(signature)
                          ],
-                         body: [
-                            "sonarId": Matcher.uuid(ProviderKnownDetails.userId.uuidString),
-                            "pushNotificationToken": Matcher.term(matcher: ".{15,240}", generate: token)
-                         ])
+                         body: body)
             .willRespondWith(status: 204)
         
         registrationAPIMockService.run(timeout: 60) { (testComplete) -> Void in
