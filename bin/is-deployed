@@ -18,8 +18,11 @@ headers = {
 
 Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
 	resp = http.get(uri, headers)
-	fail unless Net::HTTPOK === resp
+	unless Net::HTTPOK === resp
+		$stderr.puts resp
+		exit 0
+	end
 
-	json =JSON.parse(resp.body)
+	json = JSON.parse(resp.body)
 	exit json.empty? ? 1 : 0
 end
