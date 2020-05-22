@@ -15,36 +15,25 @@ module UpdatesTrackerStoriesWithBuildNumber
   )
     tracker = Tracker.new(tracker_token)
 
-    rev_list(git_dir, commits)
-      .map { |commit_id|
-        match = commit_message(git_dir, commit_id).match(/\[[Ff]inishes #(\d+)\]/)
-        match ? Integer(match[1]) : nil
-      }
-      .compact
+    story_ids = git_logs(git_dir, commits)
+      .scan(/\[Finishes #(\d+)\]/i)
+      .map {|m| m[0] }
       .uniq
-      .each do |story_id|
-        text = message_template % { build_number: build_number }
-        tracker.comment(story_id, text)
-      end
+
+    story_ids.each do |story_id|
+      text = message_template % { build_number: build_number }
+      tracker.comment(story_id, text)
+    end
   end
 
-  private def commit_message(git_dir, commit_id)
+  private
+
+  def git_logs(git_dir, rev_list)
     out, err, status = Open3.capture3(*%W(
-      git -C #{git_dir} log
-      --format='%B'
-      --max-count=1
-      #{commit_id}
+      git -C #{git_dir} log --format='%B' #{rev_list}
     ))
     raise "Command failed: \n\n#{err}" if status.exitstatus !=0
     out
-  end
-
-  private def rev_list(git_dir, commits_spec)
-    out, err, status = Open3.capture3(*%W(
-      git -C #{git_dir} rev-list #{commits_spec}
-    ))
-    raise "Command failed: \n\n#{err}" if status.exitstatus !=0
-    out.split(/\n+/)
   end
 
   class Tracker
