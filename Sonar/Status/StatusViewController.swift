@@ -157,7 +157,9 @@ class StatusViewController: UIViewController, Storyboarded {
         contentStackView.setCustomSpacing(spacing, after: registrationStatusViewContainer)
    }
 
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
         reload()
     }
 
