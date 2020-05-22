@@ -196,13 +196,24 @@ class StatusStateMachine: StatusStateMachining {
     func received(_ result: TestResult.Result) {
         add(notificationRequest: testResultNotification)
 
-        guard result == .positive else {
+        let unhandledResult = {
             let message = "\(result): Not handled yet"
             assertionFailure(message)
             self.logger.error("\(message)")
             return
         }
 
+        switch result {
+        case .positive:
+            receivedPositiveTestResult()
+        case .unclear:
+            receivedUnclearTestResult()
+        case .negative:
+            unhandledResult()
+        }
+    }
+    
+    func receivedPositiveTestResult() {
         switch state {
         case .ok, .exposed:
             transition(to: StatusState.PositiveTestResult(symptoms: nil, startDate: currentDate))
@@ -211,10 +222,18 @@ class StatusStateMachine: StatusStateMachining {
         case .unclearTestResult(let unclearTestResult):
             transition(to: StatusState.PositiveTestResult(symptoms: unclearTestResult.symptoms, startDate: unclearTestResult.startDate))
         case .checkin, .unexposed, .positiveTestResult:
-            let message = "\(result) from \(state): Not handled yet"
+            let message = "Received positive test result, in a state where it is not expected"
             assertionFailure(message)
             self.logger.error("\(message)")
         }
+    }
+    
+    func receivedUnclearTestResult() {
+        guard let symptoms = state.symptoms else {
+            transition(to: StatusState.UnclearTestResult(symptoms: [], startDate: currentDate))
+            return
+        }
+        transition(to: StatusState.UnclearTestResult(symptoms: symptoms, startDate: currentDate))
     }
     
     // MARK: - Transitions
@@ -278,6 +297,11 @@ class StatusStateMachine: StatusStateMachining {
 
     private func transition(from unexposed: StatusState.Unexposed, to ok: StatusState.Ok) {
         state = .ok(ok)
+    }
+    
+    private func transition(to unlearTestResult: StatusState.UnclearTestResult) {
+        add(notificationRequest: testResultNotification)
+        state = .unclearTestResult(unlearTestResult)
     }
 
     // MARK: - User Notifications

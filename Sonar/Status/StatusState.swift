@@ -105,6 +105,23 @@ enum StatusState: Equatable {
     }
 }
 
+extension StatusState {
+    var symptoms: Symptoms? {
+        switch self {
+        case .ok, .exposed, .unexposed:
+            return nil
+        case .symptomatic(let state):
+            return state.symptoms
+        case .checkin(let state):
+            return state.symptoms
+        case .positiveTestResult(let state):
+            return state.symptoms
+        case .unclearTestResult(let state):
+            return state.symptoms
+        }
+    }
+}
+
 extension StatusState: Encodable {
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
