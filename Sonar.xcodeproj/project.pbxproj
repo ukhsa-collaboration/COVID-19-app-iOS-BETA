@@ -171,16 +171,13 @@
 		AE2DCAA0241920B600A940FC /* BTLEBroadcaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2DCA9F241920B600A940FC /* BTLEBroadcaster.swift */; };
 		AEAFA67924602629009AEAEB /* StatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAFA67824602629009AEAEB /* StatusTests.swift */; };
 		B70190202475136800075C80 /* RegistrationAPIPactTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B701901F2475136800075C80 /* RegistrationAPIPactTests.swift */; };
+		B701DC4C247759AC00727126 /* sonar.ca.cer in Resources */ = {isa = PBXBuildFile; fileRef = B701DC4B247759AC00727126 /* sonar.ca.cer */; };
 		B71ECC1C2474C81100DD6EFC /* ProximityAPIPactTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71ECC1B2474C81100DD6EFC /* ProximityAPIPactTests.swift */; };
 		B7363DDE2468B5AB00193E04 /* PactConsumerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B7363DDD2468B5AB00193E04 /* PactConsumerSwift */; };
 		B79A2E832476013900E8C21E /* environment.json in Resources */ = {isa = PBXBuildFile; fileRef = B79A2E742476013800E8C21E /* environment.json */; };
 		B79A2E842476013900E8C21E /* localhost.crt in Resources */ = {isa = PBXBuildFile; fileRef = B79A2E762476013800E8C21E /* localhost.crt */; };
 		B79A2E852476013900E8C21E /* localhost.key in Resources */ = {isa = PBXBuildFile; fileRef = B79A2E772476013800E8C21E /* localhost.key */; };
 		B79A2E862476013900E8C21E /* sonar.ca.pem in Resources */ = {isa = PBXBuildFile; fileRef = B79A2E782476013800E8C21E /* sonar.ca.pem */; };
-		B79A2E882476013900E8C21E /* IOSTrustStore Structure.pdf in Resources */ = {isa = PBXBuildFile; fileRef = B79A2E7C2476013800E8C21E /* IOSTrustStore Structure.pdf */; };
-		B79A2E892476013900E8C21E /* iosCertTrustManager.py in Resources */ = {isa = PBXBuildFile; fileRef = B79A2E7D2476013800E8C21E /* iosCertTrustManager.py */; };
-		B79A2E8A2476013900E8C21E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = B79A2E7E2476013800E8C21E /* README.md */; };
-		B7F21883247201E2007343FA /* TrustSonarCARootCertTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B727953F246E750B0087DEC6 /* TrustSonarCARootCertTest.swift */; };
 		B7F21885247226EB007343FA /* MatcherExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F21884247226EB007343FA /* MatcherExtensions.swift */; };
 		DD3FCF3B2476E8C3008B0237 /* TestResultNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3FCF392476E8C3008B0237 /* TestResultNotificationHandler.swift */; };
 		DD3FCF3C2476E8C3008B0237 /* ExposedNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3FCF3A2476E8C3008B0237 /* ExposedNotificationHandler.swift */; };
@@ -500,8 +497,8 @@
 		AE2DCA9F241920B600A940FC /* BTLEBroadcaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTLEBroadcaster.swift; sourceTree = "<group>"; };
 		AEAFA67824602629009AEAEB /* StatusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusTests.swift; sourceTree = "<group>"; };
 		B701901F2475136800075C80 /* RegistrationAPIPactTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationAPIPactTests.swift; sourceTree = "<group>"; };
+		B701DC4B247759AC00727126 /* sonar.ca.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = sonar.ca.cer; sourceTree = "<group>"; };
 		B71ECC1B2474C81100DD6EFC /* ProximityAPIPactTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProximityAPIPactTests.swift; sourceTree = "<group>"; };
-		B727953F246E750B0087DEC6 /* TrustSonarCARootCertTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustSonarCARootCertTest.swift; sourceTree = "<group>"; };
 		B7363DD32468B35700193E04 /* SonarPactTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SonarPactTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7363DD72468B35700193E04 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B74661212468C8D800443637 /* SonarPactTestsConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = SonarPactTestsConfig.xcconfig; sourceTree = "<group>"; };
@@ -509,9 +506,6 @@
 		B79A2E762476013800E8C21E /* localhost.crt */ = {isa = PBXFileReference; lastKnownFileType = file; path = localhost.crt; sourceTree = "<group>"; };
 		B79A2E772476013800E8C21E /* localhost.key */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = localhost.key; sourceTree = "<group>"; };
 		B79A2E782476013800E8C21E /* sonar.ca.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sonar.ca.pem; sourceTree = "<group>"; };
-		B79A2E7C2476013800E8C21E /* IOSTrustStore Structure.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "IOSTrustStore Structure.pdf"; sourceTree = "<group>"; };
-		B79A2E7D2476013800E8C21E /* iosCertTrustManager.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = iosCertTrustManager.py; sourceTree = "<group>"; };
-		B79A2E7E2476013800E8C21E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		B7F21884247226EB007343FA /* MatcherExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatcherExtensions.swift; sourceTree = "<group>"; };
 		DD3FCF392476E8C3008B0237 /* TestResultNotificationHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestResultNotificationHandler.swift; sourceTree = "<group>"; };
 		DD3FCF3A2476E8C3008B0237 /* ExposedNotificationHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExposedNotificationHandler.swift; sourceTree = "<group>"; };
@@ -1143,7 +1137,6 @@
 		898FE855243B42F400210775 /* Flows */ = {
 			isa = PBXGroup;
 			children = (
-				B727953F246E750B0087DEC6 /* TrustSonarCARootCertTest.swift */,
 				898FE853243B42E700210775 /* OnboardingTests.swift */,
 			);
 			path = Flows;
@@ -1211,6 +1204,7 @@
 		B79A2E752476013800E8C21E /* Certificates */ = {
 			isa = PBXGroup;
 			children = (
+				B701DC4B247759AC00727126 /* sonar.ca.cer */,
 				B79A2E762476013800E8C21E /* localhost.crt */,
 				B79A2E772476013800E8C21E /* localhost.key */,
 				B79A2E782476013800E8C21E /* sonar.ca.pem */,
@@ -1221,35 +1215,8 @@
 		B79A2E792476013800E8C21E /* Setup */ = {
 			isa = PBXGroup;
 			children = (
-				B79A2E7B2476013800E8C21E /* ADVTrustStore */,
-				B79A2E812476013800E8C21E /* tmp */,
 			);
 			path = Setup;
-			sourceTree = "<group>";
-		};
-		B79A2E7B2476013800E8C21E /* ADVTrustStore */ = {
-			isa = PBXGroup;
-			children = (
-				B79A2E7C2476013800E8C21E /* IOSTrustStore Structure.pdf */,
-				B79A2E7D2476013800E8C21E /* iosCertTrustManager.py */,
-				B79A2E7E2476013800E8C21E /* README.md */,
-			);
-			path = ADVTrustStore;
-			sourceTree = "<group>";
-		};
-		B79A2E812476013800E8C21E /* tmp */ = {
-			isa = PBXGroup;
-			children = (
-				B79A2E822476013800E8C21E /* pids */,
-			);
-			path = tmp;
-			sourceTree = "<group>";
-		};
-		B79A2E822476013800E8C21E /* pids */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = pids;
 			sourceTree = "<group>";
 		};
 		F604977024549B49002B8503 /* Testing */ = {
@@ -1669,12 +1636,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B79A2E832476013900E8C21E /* environment.json in Resources */,
+				B701DC4C247759AC00727126 /* sonar.ca.cer in Resources */,
 				B79A2E862476013900E8C21E /* sonar.ca.pem in Resources */,
-				B79A2E882476013900E8C21E /* IOSTrustStore Structure.pdf in Resources */,
-				B79A2E892476013900E8C21E /* iosCertTrustManager.py in Resources */,
 				B79A2E852476013900E8C21E /* localhost.key in Resources */,
 				B79A2E842476013900E8C21E /* localhost.crt in Resources */,
-				B79A2E8A2476013900E8C21E /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1952,7 +1917,6 @@
 				898FE857243B4D7A00210775 /* XCUIElement.swift in Sources */,
 				AEAFA67924602629009AEAEB /* StatusTests.swift in Sources */,
 				898FE854243B42E800210775 /* OnboardingTests.swift in Sources */,
-				B7F21883247201E2007343FA /* TrustSonarCARootCertTest.swift in Sources */,
 				89074B8A24378B6E00D67777 /* ScreenTestCase.swift in Sources */,
 				AE29892E2472E600004C4097 /* Pages.swift in Sources */,
 				89074B8724378A0D00D67777 /* UITestPayload.swift in Sources */,
