@@ -22,32 +22,9 @@ module UpdatesTrackerStoriesWithBuildNumber
       .compact
       .uniq
       .each do |story_id|
-        create_story_comment(
-          tracker_token: tracker_token,
-          project_id: tracker.story(story_id).fetch('project_id'),
-          story_id: story_id,
-          text: message_template % { :build_number => build_number }
-        )
+        text = message_template % { build_number: build_number }
+        tracker.comment(story_id, text)
       end
-  end
-
-  private def create_story_comment(
-    tracker_token:,
-    project_id:,
-    story_id:,
-    text:
-  )
-    Net::HTTP.post(
-      URI("#{TRACKER_API}/projects/#{project_id}/stories/#{story_id}/comments"),
-      {
-        :text => text
-      }.to_json,
-      {
-        'Accept' => 'application/json',
-        'Content-Type' => 'application/json',
-        'X-TrackerToken' => tracker_token
-      }
-    )
   end
 
   private def commit_message(git_dir, commit_id)
@@ -77,13 +54,20 @@ class Tracker
     @token = token
   end
 
+  def comment(story_id, text)
+    project_id = story(story_id).fetch('project_id')
+    uri = URI("#{TRACKER_API}/projects/#{project_id}/stories/#{story_id}/comments")
+    body = JSON.dump({ text: text })
+    Net::HTTP.post(uri, body, headers({ 'Content-Type' => 'application/json' }))
+  end
+
+  private
+
   def story(id)
     uri = URI("#{BASE_URL}/stories/#{id}")
     json = uri.open(headers).read
     JSON.parse(json)
   end
-
-  private
 
   def headers(headers={})
     {
