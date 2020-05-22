@@ -10,7 +10,7 @@ import Foundation
 import Logging
 
 class UploadProximityEventsRequest: SecureRequest, Request {
-
+    
     struct UploadableContactEvent: Codable {
         let encryptedRemoteContactId: Data
         let rssiValues: [Int8]
@@ -81,7 +81,8 @@ class UploadProximityEventsRequest: SecureRequest, Request {
         )
         let bodyAsData = try! encoder.encode(requestBody)
         
-        logger.info("uploading contact events:\n \(String(data: bodyAsData, encoding: .utf8)!)")
+        let byteCount = ByteCountFormatter.string(fromByteCount: Int64(bodyAsData.count), countStyle: .binary)
+        logger.info("uploading \(byteCount) of contact events")
         method = .patch(data: bodyAsData)
 
         super.init(key, bodyAsData, [

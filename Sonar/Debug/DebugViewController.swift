@@ -120,6 +120,10 @@ class DebugViewController: UITableViewController, Storyboarded {
             show(title: "Cleared", message: "All expired contact events cleared.")
             
         case (2, 2):
+            let generator = DummyContactEventGenerator(delegate: contactEventRepository)
+            generator.generate(eventCount: 10, rssiCount: 100)
+            
+        case (2, 3):
             let startDate = Calendar.current.date(byAdding: .month, value: -1, to: Date())!
             try! contactEventsUploader.upload(from: startDate, with: [.temperature])
             show(title: "Upload Initiated", message: "Contact events uploading.")
