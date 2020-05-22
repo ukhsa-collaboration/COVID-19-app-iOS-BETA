@@ -177,10 +177,7 @@ private struct StringSettings: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let specifiers = try container.decode([Specifier].self, forKey: .specifiers)
-        print(specifiers.compactMap { specifier -> (String, String)? in
-            guard let value = specifier.defaultValue else { return nil }
-            return (specifier.key, value)
-        })
+        
         self.specifiers = try Dictionary(
             specifiers.compactMap { specifier in
                 guard let value = specifier.defaultValue else { return nil }
