@@ -200,10 +200,6 @@ class StatusViewController: UIViewController, Storyboarded {
         performSegue(withIdentifier: "showWorkplaceGuidance", sender: self)
     }
 
-    @IBAction func unwindFromUnexposed(unwindSegue: UIStoryboardSegue) {
-        statusStateMachine.ok()
-    }
-
     @IBAction func unwindFromDrawer(unwindSegue: UIStoryboardSegue) {
     }
 
@@ -272,7 +268,7 @@ class StatusViewController: UIViewController, Storyboarded {
                 let config = DrawerViewController.Config(
                     header: "UNEXPOSED_DRAWER_HEADER".localized,
                     detail: "UNEXPOSED_DRAWER_DETAIL".localized
-                )
+                ) { self.statusStateMachine.ok() }
                 performSegue(withIdentifier: "presentDrawer", sender: config)
             }
 
