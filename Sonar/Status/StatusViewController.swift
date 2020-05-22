@@ -67,6 +67,10 @@ class StatusViewController: UIViewController, Storyboarded {
     }
 
     override func viewDidLoad() {
+        // Pre-iOS 13, we can’t customise large content.
+        // Set the title, so the OS has _something_ to show.
+        navigationItem.title = "NHS COVID-19"
+        
         navigationItem.titleView = {
             let logo = UIImageView(image: UIImage(named: "NHS_Logo"))
             logo.contentMode = .scaleAspectFit
@@ -74,11 +78,20 @@ class StatusViewController: UIViewController, Storyboarded {
             let title = UILabel()
             title.text = "COVID-19"
             title.textColor = UIColor(named: "NHS Blue")
-            title.accessibilityLabel = "NHS Covid 19"
 
-            return UIStackView(arrangedSubviews: [logo, title])
+            let stack = UIStackView(arrangedSubviews: [logo, title])
+            stack.accessibilityLabel = "NHS Covid 19"
+
+            if #available(iOS 13.0, *) {
+                stack.showsLargeContentViewer = true
+                stack.largeContentImage = UIImage(named: "NHS-Logo-Template")
+                stack.largeContentTitle = "COVID-19"
+                stack.addInteraction(UILargeContentViewerInteraction())
+            }
+
+            return stack
         }()
-
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Info"), style: .plain, target: self, action: #selector(infoTapped))
 
         diagnosisHighlightView.layer.cornerRadius = 8
