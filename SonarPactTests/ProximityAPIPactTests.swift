@@ -46,7 +46,7 @@ class ProximityAPIPactTests: XCTestCase {
         )
         
         let body = try! JSONSerialization.jsonObject(with: request.urlRequest().httpBody!, options: [])
-        let signature = createSignatureForBodyWithNewlinesAndSpaces(ProviderKnownDetails.secretKey, body, ProviderKnownDetails.timestamp)
+        let signature = HMACHelper.createSignatureForBodyWithNewlinesAndSpaces(ProviderKnownDetails.secretKey, body, ProviderKnownDetails.timestamp)
         
         proximityAPIMockService
             .given("time is known and the user uploading is registered")
@@ -86,7 +86,7 @@ class ProximityAPIPactTests: XCTestCase {
         )
         
         let body = try! JSONSerialization.jsonObject(with: request.urlRequest().httpBody!, options: [])
-        let signature = createSignatureForBodyWithNewlinesAndSpaces(ProviderKnownDetails.secretKey, body, ProviderKnownDetails.timestamp)
+        let signature = HMACHelper.createSignatureForBodyWithNewlinesAndSpaces(ProviderKnownDetails.secretKey, body, ProviderKnownDetails.timestamp)
         
         proximityAPIMockService
             .given("time is known and the user requesting the id is registered")
@@ -121,54 +121,6 @@ class ProximityAPIPactTests: XCTestCase {
         }
     }
     #endif
-    
-    // Pact uses JSONSerialization to send the request, which adds newlines and spaces.
-    // This means the signature is invalid since JsonEncoder does not add newlines and spaces.
-    // So we'll need to regenerate the signature here.
-    func createSignatureForBodyWithNewlinesAndSpaces(_ key: HMACKey, _ body: Any, _ timestamp: String) -> String {
-        let data = try! JSONSerialization.data(
-            withJSONObject: body,
-            options: []
-        )
-        
-        var hmacContext = CCHmacContext()
-        
-        key.data.withUnsafeBytes { keyPtr -> Void in
-            CCHmacInit(&hmacContext, CCHmacAlgorithm(kCCHmacAlgSHA256), keyPtr.baseAddress, key.data.count)
-        }
-        
-        let tsData = timestamp.data(using: .utf8)!
-        tsData.withUnsafeBytes { (tsPtr: UnsafeRawBufferPointer) -> Void in
-            CCHmacUpdate(&hmacContext, tsPtr.baseAddress, tsData.count)
-        }
-        
-        data.withUnsafeBytes { (dataPtr: UnsafeRawBufferPointer) -> Void in
-            CCHmacUpdate(&hmacContext, dataPtr.baseAddress, data.count)
-        }
-        
-        var authenticationCode = Data(count: Int(CC_SHA256_DIGEST_LENGTH))
-        authenticationCode.withUnsafeMutableBytes { (digestPtr: UnsafeMutableRawBufferPointer) -> Void in
-            CCHmacFinal(&hmacContext, digestPtr.baseAddress)
-        }
-        
-        return authenticationCode.base64EncodedString(options: [])
-    }
-}
-
-class ProviderKnownDetails {
-    static let timestamp = "2020-12-12T12:12:12Z"
-    
-    static let date: Date = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
-        return formatter.date(from: timestamp)!
-    }()
-    
-    static let secretKey = HMACKey(data: Data(base64Encoded: "OuO0LzMf+b7Cw4IYAFRH+5QLCUwGTTX+X9E8bRdqAD4=")!)
-    
-    static let userId = UUID(uuidString: "4BAE40D4-8119-4905-B9E2-5B4ED5DBBADD")!
-    
-    static let broadcastKey = try! BroadcastRotationKeyConverter().fromData(Data(base64Encoded: "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEu1f68MqDXbKeTqZMTHsOGToO4rKnPClXe/kE+oWqlaWZQv4J1E98cUNdpzF9JIFRPMCNdGOvTr4UB+BhQv9GWg==")!)
 }
 
 extension ContactEvent {

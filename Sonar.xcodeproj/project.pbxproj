@@ -172,6 +172,8 @@
 		AEAFA67924602629009AEAEB /* StatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAFA67824602629009AEAEB /* StatusTests.swift */; };
 		B70190202475136800075C80 /* RegistrationAPIPactTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B701901F2475136800075C80 /* RegistrationAPIPactTests.swift */; };
 		B701DC4C247759AC00727126 /* sonar.ca.cer in Resources */ = {isa = PBXBuildFile; fileRef = B701DC4B247759AC00727126 /* sonar.ca.cer */; };
+		B701DC4E247784B300727126 /* ProviderKnownDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = B701DC4D247784B300727126 /* ProviderKnownDetails.swift */; };
+		B701DC502477887900727126 /* HMACHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B701DC4F2477887900727126 /* HMACHelper.swift */; };
 		B71ECC1C2474C81100DD6EFC /* ProximityAPIPactTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71ECC1B2474C81100DD6EFC /* ProximityAPIPactTests.swift */; };
 		B7363DDE2468B5AB00193E04 /* PactConsumerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B7363DDD2468B5AB00193E04 /* PactConsumerSwift */; };
 		B79A2E832476013900E8C21E /* environment.json in Resources */ = {isa = PBXBuildFile; fileRef = B79A2E742476013800E8C21E /* environment.json */; };
@@ -498,6 +500,8 @@
 		AEAFA67824602629009AEAEB /* StatusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusTests.swift; sourceTree = "<group>"; };
 		B701901F2475136800075C80 /* RegistrationAPIPactTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationAPIPactTests.swift; sourceTree = "<group>"; };
 		B701DC4B247759AC00727126 /* sonar.ca.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = sonar.ca.cer; sourceTree = "<group>"; };
+		B701DC4D247784B300727126 /* ProviderKnownDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderKnownDetails.swift; sourceTree = "<group>"; };
+		B701DC4F2477887900727126 /* HMACHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMACHelper.swift; sourceTree = "<group>"; };
 		B71ECC1B2474C81100DD6EFC /* ProximityAPIPactTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProximityAPIPactTests.swift; sourceTree = "<group>"; };
 		B7363DD32468B35700193E04 /* SonarPactTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SonarPactTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7363DD72468B35700193E04 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1189,6 +1193,8 @@
 				B7F21884247226EB007343FA /* MatcherExtensions.swift */,
 				B7363DD72468B35700193E04 /* Info.plist */,
 				B74661212468C8D800443637 /* SonarPactTestsConfig.xcconfig */,
+				B701DC4D247784B300727126 /* ProviderKnownDetails.swift */,
+				B701DC4F2477887900727126 /* HMACHelper.swift */,
 			);
 			path = SonarPactTests;
 			sourceTree = "<group>";
@@ -1928,9 +1934,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B701DC502477887900727126 /* HMACHelper.swift in Sources */,
 				B71ECC1C2474C81100DD6EFC /* ProximityAPIPactTests.swift in Sources */,
 				B70190202475136800075C80 /* RegistrationAPIPactTests.swift in Sources */,
 				B7F21885247226EB007343FA /* MatcherExtensions.swift in Sources */,
+				B701DC4E247784B300727126 /* ProviderKnownDetails.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
