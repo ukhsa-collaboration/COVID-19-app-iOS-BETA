@@ -73,4 +73,12 @@ class LinkingIdRequestTests: XCTestCase {
         XCTAssertEqual(sut.headers[timestampHeader], duplicatedTestImplementation.timestamp)
         XCTAssertEqual(sut.headers[signatureHeader], duplicatedTestImplementation.authCode.base64EncodedString())
     }
+    
+    func testParse() throws {
+        let expected = UUID().uuidString
+        let data = try? XCTUnwrap(JSONEncoder().encode(["linkingId": expected]))
+        let actual = try? sut.parse(XCTUnwrap(data))
+        
+        XCTAssertEqual(expected, actual)
+    }
 }
