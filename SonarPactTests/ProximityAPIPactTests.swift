@@ -22,11 +22,12 @@ class ProximityAPIPactTests: XCTestCase {
         proximityAPIMockService = MockService(
             provider: "Proximity API",
             consumer: "iOS App",
-            pactVerificationService: PactVerificationService(
-                url: "https://localhost",
-                port: 1234
-            )
+            pactVerificationService: PactMockServiceHelper.createVerificationService()
         )
+    }
+    
+    override class func tearDown() {
+        PactMockServiceHelper.clearSession()
     }
     
     #if targetEnvironment(simulator)
