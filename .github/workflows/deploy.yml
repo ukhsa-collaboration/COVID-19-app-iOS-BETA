@@ -38,10 +38,12 @@ jobs:
         run: fastlane release sonar_env:${{ github.event.deployment.environment }}
 
       - name: Tag Commit
+        id: tag-commit
         run: |
           version_number=$(/usr/libexec/PlistBuddy -c "Print CFBundleShortVersionString" "Sonar/Info.plist")
           build_number=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" "Sonar/Info.plist")
           tag="${{ github.event.deployment.environment }}-v${version_number}-${build_number}"
+          echo "::set-output name=tag-name::${tag}"
           git tag ${tag}
           git push origin ${tag}
 
@@ -49,7 +51,7 @@ jobs:
         if: always() # If the fastlane release fails, we can upload it manually
         uses: actions/upload-artifact@e7eefc4 # v2
         with:
-          name: Sonar.ipa
+          name: Sonar-${{ steps.tag-commit.outputs.tag-name }}.ipa
           path: Sonar.ipa
 
       - name: Create App Report
