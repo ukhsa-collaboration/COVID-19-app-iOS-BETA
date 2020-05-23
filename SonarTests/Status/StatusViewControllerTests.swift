@@ -183,7 +183,7 @@ fileprivate func makeViewController(
     )
     if loadView {
         XCTAssertNotNil(vc.view)
-        vc.viewWillAppear(false)
+        vc.viewDidAppear(false)
     }
     return vc
 }
