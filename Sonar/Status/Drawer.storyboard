@@ -43,7 +43,7 @@
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                 <state key="normal" title="Close"/>
                                                 <connections>
-                                                    <segue destination="vMb-Lq-kBc" kind="unwind" identifier="unwindFromDrawer" unwindAction="unwindFromDrawerWithUnwindSegue:" id="edd-Gp-eeE"/>
+                                                    <action selector="closeTapped" destination="Usf-OH-hM9" eventType="touchUpInside" id="aIT-aE-kP1"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -76,6 +76,7 @@
                     <connections>
                         <outlet property="detail" destination="OXR-SF-E5K" id="aGF-3G-gi2"/>
                         <outlet property="header" destination="z4d-Td-TgN" id="QZS-4C-b1G"/>
+                        <segue destination="vMb-Lq-kBc" kind="unwind" identifier="unwindFromDrawer" unwindAction="unwindFromDrawerWithUnwindSegue:" id="Qfn-eu-3FQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F4x-TO-dqk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

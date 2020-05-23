@@ -6,7 +6,7 @@
 //  Copyright © 2020 NHSX. All rights reserved.
 //
 
-import Foundation
+import XCTest
 
 class PositiveTestStatusTests: ScreenTestCase {
 
@@ -14,29 +14,14 @@ class PositiveTestStatusTests: ScreenTestCase {
 
     func testPositiveTestResultFlow() {
 
-        PositiveTestStatusPage(app)
-            .assert { $0.hasPositiveTestHeading }
-            .eightDaysLater()
-
-            .checkinQuestionnairePopup
-            .assert { $0.isShowingCheckinPrompt }
-            .tapUpdateSymptoms()
-
-            // if the user only has a cough...
-            .tapNoTemperatureOption().tapContinue()
-            .tapCoughOption().tapSubmit()
-
-            // ...they are told to return to "current advice"...
-            .checkAndDismissCoughAdvice()
-            .assert { $0.hasStatusOkHeading }
-
-            // and are not immediately told to check in again
-            .assert { !$0.checkinQuestionnairePopup.isShowingCheckinPrompt }
-
-            .eightDaysLater()
-            
-            // ...and are not reminded again
-            .checkinQuestionnairePopup
-            .assert { !$0.isShowingCheckinPrompt }
+        // Ensure the positive test status page has the correct heading
+        let positiveTestStatusPage = PositiveTestStatusPage(app)
+        XCTAssertTrue(positiveTestStatusPage.hasPositiveTestHeading)
+        
+        eightDaysLater()
+        
+        // Ensure the positive test status shows the checkin popup after 7 days
+        let checkinPopup = CheckinQuestionnairePopup(app)
+        XCTAssertTrue(checkinPopup.title.exists)
     }
 }

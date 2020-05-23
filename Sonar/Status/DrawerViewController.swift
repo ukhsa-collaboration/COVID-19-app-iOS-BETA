@@ -13,12 +13,24 @@ class DrawerViewController: UIViewController, Storyboarded {
     struct Config {
         let header: String
         let detail: String
+        let completion: () -> Void
+
+        init(
+            header: String,
+            detail: String,
+            completion: @escaping () -> Void = {}
+        ) {
+            self.header = header
+            self.detail = detail
+            self.completion = completion
+        }
     }
 
     static var storyboardName = "Drawer"
     
     private var headerText: String?
     private var detailText: String?
+    private var completion: (() -> Void)!
 
     @IBOutlet private weak var header: UILabel!
     @IBOutlet private weak var detail: UILabel!
@@ -26,6 +38,7 @@ class DrawerViewController: UIViewController, Storyboarded {
     func inject(config: Config) {
         self.headerText = config.header
         self.detailText = config.detail
+        self.completion = config.completion
     }
     
     override func viewDidLoad() {
@@ -34,8 +47,13 @@ class DrawerViewController: UIViewController, Storyboarded {
         detail.text = detailText
     }
 
-    override func accessibilityPerformEscape() -> Bool {
+    @IBAction func closeTapped() {
         performSegue(withIdentifier: "unwindFromDrawer", sender: self)
+        completion?()
+    }
+
+    override func accessibilityPerformEscape() -> Bool {
+        closeTapped()
         return true
     }
 

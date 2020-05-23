@@ -43,6 +43,16 @@ class PositiveTestStatusPage : Page {
     }
 }
 
+class UnclearTestStatusPage : Page {
+    var heading: XCUIElement {
+        app.staticTexts["Your symptoms indicate you may have coronavirus. Please self-isolate and apply for a test."]
+    }
+    
+    var drawerTitle: XCUIElement {
+        app.staticTexts["Your test result was unclear"]
+    }
+}
+
 class SymptomsTemperaturePage : Page {
     var title: XCUIElement {
         app.staticTexts["Do you have a high temperature (fever)?"]

@@ -1,13 +1,13 @@
-require_relative 'test_helper'
-
-require 'webmock/test_unit'
 require 'tmpdir'
+
+require 'minitest/autorun'
+require 'webmock/minitest'
 
 require 'updates_tracker_stories_with_build_number'
 
 WebMock.disable_net_connect!
 
-class TestUpdatesTrackerStoryWithBuildNumber < Test::Unit::TestCase
+class TestUpdatesTrackerStoryWithBuildNumber < MiniTest::Test
   include WebMock::Matchers
   include UpdatesTrackerStoriesWithBuildNumber
 

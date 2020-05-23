@@ -157,7 +157,9 @@ class StatusViewController: UIViewController, Storyboarded {
         contentStackView.setCustomSpacing(spacing, after: registrationStatusViewContainer)
    }
 
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
         reload()
     }
 
@@ -198,10 +200,6 @@ class StatusViewController: UIViewController, Storyboarded {
 
     @IBAction func workplaceGuidanceTapped(_ sender: UIButton) {
         performSegue(withIdentifier: "showWorkplaceGuidance", sender: self)
-    }
-
-    @IBAction func unwindFromUnexposed(unwindSegue: UIStoryboardSegue) {
-        statusStateMachine.ok()
     }
 
     @IBAction func unwindFromDrawer(unwindSegue: UIStoryboardSegue) {
@@ -272,7 +270,7 @@ class StatusViewController: UIViewController, Storyboarded {
                 let config = DrawerViewController.Config(
                     header: "UNEXPOSED_DRAWER_HEADER".localized,
                     detail: "UNEXPOSED_DRAWER_DETAIL".localized
-                )
+                ) { self.statusStateMachine.ok() }
                 performSegue(withIdentifier: "presentDrawer", sender: config)
             }
 
@@ -287,14 +285,12 @@ class StatusViewController: UIViewController, Storyboarded {
             stepsDetailLabel.text = "If you develop symptoms, please come back to this app."
 
         case .symptomatic(let symptomatic):
-            diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
-            diagnosisTitleLabel.text = "Your symptoms indicate you may have coronavirus. Please self-isolate and apply for a test."
-            diagnosisDetailLabel.isHidden = false
-            diagnosisDetailLabel.text = userStatusProvider.detailWithExpiryDate(symptomatic.expiryDate)
-            feelUnwellButton.isHidden = true
-            applyForTestButton.isHidden = false
-            stepsDetailLabel.isHidden = false
-            stepsDetailLabel.text = "Please book a coronavirus test immediately. Write down your reference code and phone 0800 540 4900"
+            detailForSymptomatic(state: symptomatic)
+            
+        case .unclearTestResult(let unclearTestResult):
+            // Use symptomatic detail as it's the same visually
+            detailForSymptomatic(state: unclearTestResult)
+            presentTestResultUpdate(result: .unclear)
 
         case .checkin(let checkin):
             diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
@@ -321,6 +317,18 @@ class StatusViewController: UIViewController, Storyboarded {
         }
         
     }
+    
+    func detailForSymptomatic(state: Expirable) {
+        diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
+        diagnosisTitleLabel.text = "Your symptoms indicate you may have coronavirus. Please self-isolate and apply for a test."
+        diagnosisDetailLabel.isHidden = false
+        diagnosisDetailLabel.text = userStatusProvider.detailWithExpiryDate(state.expiryDate)
+        feelUnwellButton.isHidden = true
+        applyForTestButton.isHidden = false
+        stepsDetailLabel.isHidden = false
+        stepsDetailLabel.text = "Please book a coronavirus test immediately. Write down your reference code and phone 0800 540 4900"
+
+    }
 
     private func presentCoughUpdate() {
         let config = DrawerViewController.Config(
@@ -331,17 +339,12 @@ class StatusViewController: UIViewController, Storyboarded {
     }
     
     private func presentTestResultUpdate(result: TestResult.Result) {
-        guard let header = result.headerText else { return }
+        let header = result.headerText
         let detail = result.detailText
         let config = DrawerViewController.Config(header: header, detail: detail)
         performSegue(withIdentifier: "presentDrawer", sender: config)
     }
-    
-    private func presentDrawer(drawVC: UIViewController) {
-        drawVC.modalPresentationStyle = .custom
-        drawVC.transitioningDelegate = drawerPresentationManager
-        navigationController?.visibleViewController!.present(drawVC, animated: true)
-    }
+
 }
 
 private let logger = Logger(label: "StatusViewController")

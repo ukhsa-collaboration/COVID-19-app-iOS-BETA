@@ -1,32 +1,15 @@
-#!/usr/bin/env bash
+#!/usr/bin/env ruby
 
-set -e
+$LOAD_PATH.unshift(File.expand_path("../ci/ruby/lib", __dir__))
+require "updates_tracker_stories_with_build_number"
+include UpdatesTrackerStoriesWithBuildNumber
 
-# collect commits that have been changed
-commits=$(git rev-list last-commit-to-run-on-ci..HEAD)
+rev_list = ARGV.shift
 
-find_finished_stories() {
-  echo "$commits" \
-    | xargs git log --format=%B -n 1 \
-    | grep "\[Finishes #" \
-    | sed 's/\[Finishes #\([0-9]*\)\]/\1/' \
-    | sed -e 's/^[ \t]*//'
-}
-
-story_ids=$(find_finished_stories)
-
-echo "Running with these commits : $commits -- and these story ids : $story_ids"
-
-# get the current testflight build
-PLIST=Sonar/Info.plist
-current_version=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" "$PLIST")
-
-# iterate over stories and comment on each one
-for STORY_ID in $story_ids
-do
-  POST_BODY="{\"text\": \"This was delivered in TestFlight build $current_version\"}"
-  URL="https://www.pivotaltracker.com/services/v5/projects/$PROJECT_ID/stories/$STORY_ID/comments"
-
-  curl -X POST -H "X-TrackerToken: $PIVOTAL_TRACKER_API_TOKEN" -H "Content-Type: application/json" -d "$POST_BODY" "$URL" --fail
-done
-
+update_stories_with_build_number(
+  build_number: ENV.fetch("BUILD"),
+  tracker_token: ENV.fetch("PIVOTAL_TRACKER_API_TOKEN"),
+  commits: rev_list
+  message_template: 'This story was included in build %<build_number>',
+  git_dir: File.expand_path("..", __dir__)),
+)

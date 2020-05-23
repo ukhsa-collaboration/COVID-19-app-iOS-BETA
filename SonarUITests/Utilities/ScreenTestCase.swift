@@ -27,5 +27,15 @@ class ScreenTestCase: XCTestCase {
         app.launchEnvironment[UITestPayload.environmentVariableName] = try! JSONEncoder().encode(payload).base64EncodedString()
         app.launch()
     }
+    
+    func eightDaysLater() {
+        // close app
+        XCUIDevice.shared.press(.home)
 
+        // open app 8 days later
+        // (test harness ensures that 8 days pass whenever we close the app)
+
+        XCUIApplication().activate()
+        usleep(500000) // wait for app opening animation
+    }
 }

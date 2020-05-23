@@ -192,29 +192,30 @@ class Persistence: Persisting {
 
     var statusState: StatusState {
         get {
-            guard
-                let data = UserDefaults.standard.data(forKey: Keys.statusState.rawValue),
-                let decoded = try? decoder.decode(StatusState.self, from: data)
-            else {
-                let migration = StatusStateMigration()
+            let data = UserDefaults.standard.data(forKey: Keys.statusState.rawValue)
+            do {
+                let decoded = try data.map { try decoder.decode(StatusState.self, from: $0) }
+                if let decoded = decoded { return decoded }
+            } catch {
+                logger.warning("Unable to decode status state. This could be intentional, resulting in migration, or developer error, when accidently omitting decoding code for this state in StatusState")
+            }
+                
+            let migration = StatusStateMigration()
 
-                let selfDiagnosis = UserDefaults.standard.data(forKey: "selfDiagnosis").flatMap {
-                    try? decoder.decode(SelfDiagnosis.self, from: $0)
-                }
-
-                let potentiallyExposedOn = UserDefaults.standard.object(forKey: "potentiallyExposed") as? Date
-
-                let migratedStatusState = migration.migrate(diagnosis: selfDiagnosis, potentiallyExposedOn: potentiallyExposedOn)
-
-                // Finish the migration by saving the status state and removing the old data
-                self.statusState = migratedStatusState
-                UserDefaults.standard.removeObject(forKey: "selfDiagnosis")
-                UserDefaults.standard.removeObject(forKey: "potentiallyExposed")
-
-                return migratedStatusState
+            let selfDiagnosis = UserDefaults.standard.data(forKey: "selfDiagnosis").flatMap {
+                try? decoder.decode(SelfDiagnosis.self, from: $0)
             }
 
-            return decoded
+            let potentiallyExposedOn = UserDefaults.standard.object(forKey: "potentiallyExposed") as? Date
+
+            let migratedStatusState = migration.migrate(diagnosis: selfDiagnosis, potentiallyExposedOn: potentiallyExposedOn)
+
+            // Finish the migration by saving the status state and removing the old data
+            self.statusState = migratedStatusState
+            UserDefaults.standard.removeObject(forKey: "selfDiagnosis")
+            UserDefaults.standard.removeObject(forKey: "potentiallyExposed")
+
+            return migratedStatusState
         }
         set {
             guard let data = try? encoder.encode(newValue) else {

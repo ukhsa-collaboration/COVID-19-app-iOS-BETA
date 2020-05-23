@@ -74,11 +74,18 @@ class UITestScreenMaker {
             }
 
             return onboardingViewController
+            
         case .positiveTestStatus:
             let positiveTestResult = StatusState.PositiveTestResult(symptoms: [], startDate: self.dateProvider())
             persistence.statusState = .positiveTestResult(positiveTestResult)
             return createNavigationController()
+            
         case .status:
+            return createNavigationController()
+            
+        case .unclearTestStatus:
+            let unclearTestResult = StatusState.UnclearTestResult(symptoms: [], startDate: self.dateProvider())
+            persistence.statusState = .unclearTestResult(unclearTestResult)
             return createNavigationController()
         }
     }
