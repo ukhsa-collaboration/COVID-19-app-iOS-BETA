@@ -9,7 +9,8 @@ jobs:
   publish:
     runs-on:
       - self-hosted
-      - macos
+      - linux
+      - aws
 
     steps:
       - name: Remove support tag in pact broker
