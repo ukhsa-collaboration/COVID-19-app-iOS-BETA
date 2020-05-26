@@ -15,12 +15,18 @@ class StartNowViewController: UIViewController, Storyboarded {
     private var notificationCenter: NotificationCenter! = nil
     private var continueHandler: (() -> Void)! = nil
     
-    @IBOutlet weak var howItWorks: ButtonWithDynamicType!
+    @IBOutlet var numberLabels: [UILabel]!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        howItWorks.setTitle("Learn more about how it works".localized, for: .normal)
+        
+        numberLabels.forEach { numberLabel in
+            if let numberView = numberLabel.superview {
+                numberView.layer.cornerRadius = numberView.frame.width / 2
+                numberView.layer.masksToBounds = true
+            }
+            numberLabel.textColor = UIColor(named: "NHS White")
+        }
     }
 
     func inject(persistence: Persisting, notificationCenter: NotificationCenter, continueHandler: @escaping () -> Void) {
