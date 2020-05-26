@@ -28,34 +28,45 @@ class TestResultNotificationHandler {
     }
     
     func handle(userInfo: [AnyHashable: Any], completion: @escaping RemoteNotificationCompletionHandler) {
+        let testResult: TestResult
+        
         do {
-            let jsonData = try JSONSerialization.data(withJSONObject: userInfo, options: .prettyPrinted)
-            
-            let decoder = JSONDecoder()
-            decoder.dateDecodingStrategy = .iso8601
-            
-            if let testResult = try? decoder.decode(TestResult.self, from: jsonData) {
-                statusStateMachine.received(testResult)
-            } else {
-                throw UserInfoDecodingError()
-            }
-            
-            let scheduler = HumbleLocalNotificationScheduler(userNotificationCenter: userNotificationCenter)
-            scheduler.scheduleLocalNotification(
-                title: nil,
-                body:
-                "Your test result has arrived. Please open the app to learn what to do next. You have been sent an email with more information",
-                interval: 10,
-                identifier: "testResult.arrived",
-                repeats: false
-            )
-            
-            completion(.newData)
+            try testResult = getTestResult(fromUserInfo: userInfo)
         } catch {
             logger.error("Unable to process test result notification: '\(String(describing: userInfo))'")
             completion(.noData)
             return
         }
+        
+        statusStateMachine.received(testResult)
+        scheduleNotification()
+        completion(.newData)
+    }
+    
+    private func scheduleNotification() {
+        let scheduler = HumbleLocalNotificationScheduler(userNotificationCenter: userNotificationCenter)
+        scheduler.scheduleLocalNotification(
+            title: nil,
+            body:
+            "Your test result has arrived. Please open the app to learn what to do next. You have been sent an email with more information",
+            interval: 10,
+            identifier: "testResult.arrived",
+            repeats: false
+        )
+    }
+    
+    private func getTestResult(fromUserInfo userInfo: [AnyHashable: Any]) throws -> TestResult {
+        let jsonData = try JSONSerialization.data(withJSONObject: userInfo, options: .prettyPrinted)
+        
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        
+        if let testResult = try? decoder.decode(TestResult.self, from: jsonData) {
+            return testResult
+        } else {
+            throw UserInfoDecodingError()
+        }
+
     }
 
 }
