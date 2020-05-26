@@ -17,9 +17,14 @@ class TestResultNotificationHandler {
     let logger = Logger(label: "StatusNotificationHandler")
 
     let statusStateMachine: StatusStateMachining
+    let userNotificationCenter: UserNotificationCenter
 
-    init(statusStateMachine: StatusStateMachining) {
+    init(
+        statusStateMachine: StatusStateMachining,
+        userNotificationCenter: UserNotificationCenter
+    ) {
         self.statusStateMachine = statusStateMachine
+        self.userNotificationCenter = userNotificationCenter
     }
     
     func handle(userInfo: [AnyHashable: Any], completion: @escaping RemoteNotificationCompletionHandler) {
@@ -35,9 +40,19 @@ class TestResultNotificationHandler {
                 throw UserInfoDecodingError()
             }
             
+            let scheduler = HumbleLocalNotificationScheduler(userNotificationCenter: userNotificationCenter)
+            scheduler.scheduleLocalNotification(
+                title: nil,
+                body:
+                "Your test result has arrived. Please open the app to learn what to do next. You have been sent an email with more information",
+                interval: 10,
+                identifier: "testResult.arrived",
+                repeats: false
+            )
+            
             completion(.newData)
         } catch {
-            logger.error("Received unexpected status from remote notification: '\(String(describing: userInfo["status"]))'")
+            logger.error("Unable to process test result notification: '\(String(describing: userInfo))'")
             completion(.noData)
             return
         }
