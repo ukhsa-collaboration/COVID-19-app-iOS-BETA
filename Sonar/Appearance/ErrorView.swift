@@ -17,19 +17,27 @@ class ErrorView: IBView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        commonInit()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
         commonInit()
     }
     
     private func commonInit() {
         title.text = "There is a problem"
+        title.textColor = UIColor(named: "NHS Error")
+
         errorMessage.text = "Something is incorrect"
-        
+        errorMessage.textColor = UIColor(named: "NHS Error")
+
         layer.borderWidth = 3
         layer.borderColor = colour.cgColor
+
+        backgroundColor = .clear
     }
 }

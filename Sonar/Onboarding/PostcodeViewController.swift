@@ -115,9 +115,6 @@ class PostcodeViewController: UIViewController, Storyboarded {
         scroll(toErrorLabel: errorView.errorMessage, orControl: postcodeField){
             self.errorView.isHidden = false
             self.errorView.errorMessage.text = "Please enter the first part of a valid postcode. For example: PO30, E2, M1, EH1, L36".localized
-            let colour = UIColor(named: "NHS Error")!
-            self.errorView.errorMessage.textColor = colour
-            self.errorView.title.textColor = colour
         }
     }
 }
