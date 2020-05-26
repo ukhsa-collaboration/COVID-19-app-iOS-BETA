@@ -42,8 +42,22 @@ class StatusStateMachine: StatusStateMachining {
         get { persisting.statusState }
         set {
             guard persisting.statusState != newValue else { return }
-            
+
+            let oldValue = state
             persisting.statusState = newValue
+
+            switch (oldValue, newValue) {
+            case (_, .symptomatic(let symptomatic)):
+                add(notificationRequest: checkinNotificationRequest(at: symptomatic.expiryDate))
+            case (_, .checkin(let checkin)):
+                add(notificationRequest: checkinNotificationRequest(at: checkin.checkinDate))
+            case (_, .exposed), (_, .unexposed):
+                add(notificationRequest: adviceChangedNotificationRequest)
+            case (_, .positiveTestResult), (_, .negativeTestResult), (_, .unclearTestResult):
+                add(notificationRequest: testResultNotification)
+            default:
+                break
+            }
 
             notificationCenter.post(
                 name: StatusStateMachine.StatusStateChangedNotification,
@@ -92,25 +106,25 @@ class StatusStateMachine: StatusStateMachining {
         }
 
         switch state {
-        case .ok(let ok):
+        case .ok:
             let symptomatic = StatusState.Symptomatic(symptoms: symptoms, startDate: startDate)
             try contactEventsUploader.upload(from: startDate, with: symptoms)
 
             if currentDate < symptomatic.expiryDate {
-                transition(from: ok, to: symptomatic)
+                state = .symptomatic(symptomatic)
             } else { // expired
                 if symptoms.contains(.temperature) {
                     guard let checkinDate = nextCheckinDate else { return }
                     let checkin = StatusState.Checkin(symptoms: symptomatic.symptoms, checkinDate: checkinDate)
-                    transition(from: ok, to: checkin)
+                    state = .checkin(checkin)
                 } else {
                     // don't do anything if we only have a cough
                 }
             }
-        case .exposed(let exposed):
+        case .exposed:
             let symptomatic = StatusState.Symptomatic(symptoms: symptoms, startDate: startDate)
             try contactEventsUploader.upload(from: startDate, with: symptoms)
-            transition(from: exposed, to: symptomatic)
+            state = .symptomatic(symptomatic)
         case .symptomatic, .checkin, .unexposed, .positiveTestResult, .unclearTestResult, .negativeTestResult:
             assertionFailure("Self-diagnosing is only allowed from ok/exposed")
         }
@@ -124,21 +138,21 @@ class StatusStateMachine: StatusStateMachining {
             guard currentDate >= unclear.expiryDate else { return }
 
             let checkin = StatusState.Checkin(symptoms: unclear.symptoms, checkinDate: unclear.expiryDate)
-            transition(from: unclear, to: checkin)
+            state = .checkin(checkin)
         case .symptomatic(let symptomatic):
             guard currentDate >= symptomatic.expiryDate else { return }
 
             let checkin = StatusState.Checkin(symptoms: symptomatic.symptoms, checkinDate: symptomatic.expiryDate)
-            transition(from: symptomatic, to: checkin)
+            state = .checkin(checkin)
         case .exposed(let exposed):
             guard currentDate >= exposed.expiryDate else { return }
 
-            transition(from: exposed, to: StatusState.Ok())
+            state = .ok(StatusState.Ok())
         case .positiveTestResult(let positiveTestResult):
             guard currentDate >= positiveTestResult.expiryDate else { return }
 
             let checkin = StatusState.Checkin(symptoms: positiveTestResult.symptoms, checkinDate: positiveTestResult.expiryDate)
-            transition(from: positiveTestResult, to: checkin)
+            state = .checkin(checkin)
         }
     }
 
@@ -158,22 +172,21 @@ class StatusStateMachine: StatusStateMachining {
             if symptoms.contains(.temperature) {
                 guard let checkinDate = nextCheckinDate else { return }
 
-                transition(
-                    from: checkin,
-                    to: StatusState.Checkin(symptoms: symptoms, checkinDate: checkinDate)
-                )
+                let nextCheckin = StatusState.Checkin(symptoms: symptoms, checkinDate: checkinDate)
+                state = .checkin(nextCheckin)
             } else {
-                transition(from: checkin, to: StatusState.Ok())
+                state = .ok(StatusState.Ok())
             }
         }
     }
 
     func exposed() {
         switch state.resolved() {
-        case .ok(let ok):
-            transition(from: ok, to: StatusState.Exposed(startDate: currentDate))
-        case .unexposed(let unexposed):
-            transition(from: unexposed, to: StatusState.Exposed(startDate: currentDate))
+        case .ok:
+            let exposed = StatusState.Exposed(startDate: currentDate)
+            state = .exposed(exposed)
+        case .unexposed:
+            state = .exposed(StatusState.Exposed(startDate: currentDate))
         case .exposed:
             assertionFailure("The server should never send us another exposure notification if we're already exposed")
             break // ignore repeated exposures
@@ -187,8 +200,8 @@ class StatusStateMachine: StatusStateMachining {
 
     func unexposed() {
         switch state.resolved() {
-        case .exposed(let exposed):
-            transition(from: exposed, to: StatusState.Unexposed())
+        case .exposed:
+            state = .unexposed(StatusState.Unexposed())
         case .ok, .symptomatic, .checkin, .unexposed, .positiveTestResult, .unclearTestResult:
             break // no-op
         case .negativeTestResult:
@@ -198,12 +211,12 @@ class StatusStateMachine: StatusStateMachining {
     }
 
     func ok() {
-        guard case .unexposed(let unexposed) = state else {
+        guard case .unexposed = state else {
             assertionFailure("This transition is only for going to ok from unexposed")
             return
         }
 
-        transition(from: unexposed, to: StatusState.Ok())
+        state = .ok(StatusState.Ok())
     }
 
     func received(_ testResult: TestResult) {
@@ -220,11 +233,14 @@ class StatusStateMachine: StatusStateMachining {
     func receivedPositiveTestResult() {
         switch state {
         case .ok, .exposed, .negativeTestResult:
-            transition(to: StatusState.PositiveTestResult(symptoms: nil, startDate: currentDate))
+            let positive = StatusState.PositiveTestResult(symptoms: nil, startDate: currentDate)
+            state = .positiveTestResult(positive)
         case .symptomatic(let symptomatic):
-            transition(to: StatusState.PositiveTestResult(symptoms: symptomatic.symptoms, startDate: symptomatic.startDate))
+            let positive = StatusState.PositiveTestResult(symptoms: symptomatic.symptoms, startDate: symptomatic.startDate)
+            state = .positiveTestResult(positive)
         case .unclearTestResult(let unclearTestResult):
-            transition(to: StatusState.PositiveTestResult(symptoms: unclearTestResult.symptoms, startDate: unclearTestResult.startDate))
+            let positive = StatusState.PositiveTestResult(symptoms: unclearTestResult.symptoms, startDate: unclearTestResult.startDate)
+            state = .positiveTestResult(positive)
         case .checkin, .unexposed, .positiveTestResult:
             let message = "Received positive test result, in a state where it is not expected"
             assertionFailure(message)
@@ -233,101 +249,26 @@ class StatusStateMachine: StatusStateMachining {
     }
     
     func receivedNegativeTestResult(testTimestamp: Date) {
-        
         switch state.resolved() {
         case .symptomatic(let symptomatic) where symptomatic.startDate > testTimestamp:
-            transition(to: StatusState.NegativeTestResult(symptoms: symptomatic.symptoms),
-                       nextState: .symptomatic(symptomatic))
+            state = .negativeTestResult(
+                StatusState.NegativeTestResult(symptoms: symptomatic.symptoms),
+                nextState: .symptomatic(symptomatic)
+            )
         default:
-            transition(to: StatusState.NegativeTestResult(symptoms: []),
-                       nextState: .ok(StatusState.Ok()))
+            state = .negativeTestResult(
+                StatusState.NegativeTestResult(symptoms: []),
+                nextState: .ok(StatusState.Ok())
+            )
         }
     }
     
     func receivedUnclearTestResult() {
         guard let symptoms = state.symptoms else {
-            transition(to: StatusState.UnclearTestResult(symptoms: [], startDate: currentDate))
+            state = .unclearTestResult(StatusState.UnclearTestResult(symptoms: [], startDate: currentDate))
             return
         }
-        transition(to: StatusState.UnclearTestResult(symptoms: symptoms, startDate: currentDate))
-    }
-    
-    // MARK: - Transitions
-
-    private func transition(from ok: StatusState.Ok, to symptomatic: StatusState.Symptomatic) {
-        add(notificationRequest: checkinNotificationRequest(at: symptomatic.expiryDate))
-        state = .symptomatic(symptomatic)
-    }
-
-    private func transition(from: StatusState.Symptomatic, to checkin: StatusState.Checkin) {
-        add(notificationRequest: checkinNotificationRequest(at: checkin.checkinDate))
-        state = .checkin(checkin)
-    }
-
-    private func transition(from: StatusState.UnclearTestResult, to checkin: StatusState.Checkin) {
-        add(notificationRequest: checkinNotificationRequest(at: checkin.checkinDate))
-        state = .checkin(checkin)
-    }
-
-    private func transition(from ok: StatusState.Ok, to checkin: StatusState.Checkin) {
-        add(notificationRequest: checkinNotificationRequest(at: checkin.checkinDate))
-        state = .checkin(checkin)
-    }
-
-    private func transition(from exposed: StatusState.Exposed, to symptomatic: StatusState.Symptomatic) {
-        add(notificationRequest: checkinNotificationRequest(at: symptomatic.expiryDate))
-        state = .symptomatic(symptomatic)
-    }
-
-    private func transition(from exposed: StatusState.Exposed, to ok: StatusState.Ok) {
-        state = .ok(ok)
-    }
-
-    private func transition(from previous: StatusState.Checkin, to next: StatusState.Checkin) {
-        add(notificationRequest: checkinNotificationRequest(at: next.checkinDate))
-        state = .checkin(next)
-    }
-
-    private func transition(from checkin: StatusState.Checkin, to ok: StatusState.Ok) {
-        state = .ok(ok)
-    }
-
-    private func transition(from ok: StatusState.Ok, to exposed: StatusState.Exposed) {
-        add(notificationRequest: adviceChangedNotificationRequest)
-        state = .exposed(exposed)
-    }
-    
-    private func transition(from positiveTestResult: StatusState.PositiveTestResult, to checkin: StatusState.Checkin) {
-        state = .checkin(checkin)
-    }
-    
-    private func transition(to positiveTestResult: StatusState.PositiveTestResult) {
-        add(notificationRequest: testResultNotification)
-        state = .positiveTestResult(positiveTestResult)
-    }
-    
-    private func transition(to negativeTestResult: StatusState.NegativeTestResult, nextState: StatusState) {
-        add(notificationRequest: testResultNotification)
-        state = .negativeTestResult(negativeTestResult, nextState: nextState)
-    }
-
-    private func transition(from unexposed: StatusState.Unexposed, to exposed: StatusState.Exposed) {
-        add(notificationRequest: adviceChangedNotificationRequest)
-        state = .exposed(exposed)
-    }
-
-    private func transition(from exposed: StatusState.Exposed, to unexposed: StatusState.Unexposed) {
-        add(notificationRequest: adviceChangedNotificationRequest)
-        state = .unexposed(unexposed)
-    }
-
-    private func transition(from unexposed: StatusState.Unexposed, to ok: StatusState.Ok) {
-        state = .ok(ok)
-    }
-    
-    private func transition(to unlearTestResult: StatusState.UnclearTestResult) {
-        add(notificationRequest: testResultNotification)
-        state = .unclearTestResult(unlearTestResult)
+        state = .unclearTestResult(StatusState.UnclearTestResult(symptoms: symptoms, startDate: currentDate))
     }
 
     // MARK: - User Notifications
