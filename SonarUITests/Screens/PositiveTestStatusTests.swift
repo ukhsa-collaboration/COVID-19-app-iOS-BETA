@@ -18,6 +18,8 @@ class PositiveTestStatusTests: ScreenTestCase {
         let positiveTestStatusPage = PositiveTestStatusPage(app)
         XCTAssertTrue(positiveTestStatusPage.hasPositiveTestHeading)
         
+        positiveTestStatusPage.drawerDismissButton.tap()
+        
         eightDaysLater()
         
         // Ensure the positive test status shows the checkin popup after 7 days
