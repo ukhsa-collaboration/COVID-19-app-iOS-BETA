@@ -115,19 +115,7 @@ class StatusViewController: UIViewController, Storyboarded {
         nhsCoronavirusLinkButton.url = ContentURLs.shared.regionalServices
 
         notificationCenter.addObserver(self, selector: #selector(reload), name: UIApplication.didBecomeActiveNotification, object: nil)
-        notificationCenter.addObserver(self, selector: #selector(stateChanged(_:)), name: StatusStateMachine.StatusStateChangedNotification, object: nil)
-    }
-    
-    @objc func stateChanged(_ statusStateMachineNotification: NSNotification) {
-        defer { reload() } // Always reload when the statusStateMachine's state changes
-        
-        guard let statusStateMachine = statusStateMachineNotification.object as? StatusStateMachine else { return }
-        switch statusStateMachine.state {
-        case .positiveTestResult:
-            presentTestResultUpdate(result: .positive)
-        default:
-            break
-        }
+        notificationCenter.addObserver(self, selector: #selector(reload), name: StatusStateMachine.StatusStateChangedNotification, object: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -257,7 +245,7 @@ class StatusViewController: UIViewController, Storyboarded {
         statusStateMachine.tick()
 
         switch statusStateMachine.state {
-        case .ok, .unexposed:
+        case .ok, .unexposed, .negativeTestResult:
             diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Blue")
             diagnosisTitleLabel.text = "Follow the current advice to stop the spread of coronavirus"
             diagnosisDetailLabel.isHidden = true
@@ -272,6 +260,10 @@ class StatusViewController: UIViewController, Storyboarded {
                     detail: "UNEXPOSED_DRAWER_DETAIL".localized
                 ) { self.statusStateMachine.ok() }
                 performSegue(withIdentifier: "presentDrawer", sender: config)
+            }
+            
+            if case .negativeTestResult = statusStateMachine.state {
+                presentTestResultUpdate(result: .negative)
             }
 
         case .exposed:
@@ -314,6 +306,8 @@ class StatusViewController: UIViewController, Storyboarded {
             feelUnwellButton.isHidden = true
             applyForTestButton.isHidden = true
             nextStepsDetailView.isHidden = true
+            
+            presentTestResultUpdate(result: .positive)
         }
         
     }
@@ -341,7 +335,10 @@ class StatusViewController: UIViewController, Storyboarded {
     private func presentTestResultUpdate(result: TestResult.Result) {
         let header = result.headerText
         let detail = result.detailText
-        let config = DrawerViewController.Config(header: header, detail: detail)
+        let config = DrawerViewController.Config(header: header, detail: detail) { [weak self] in
+            self?.statusStateMachine.clearInterstitialState()
+        }
+        
         performSegue(withIdentifier: "presentDrawer", sender: config)
     }
 

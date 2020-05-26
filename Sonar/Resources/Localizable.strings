@@ -101,6 +101,9 @@ Loss of appetite: means not feeling hungry.
 "TEST_UPDATE_DRAW_INVALID_HEADER" = "Your test result was unclear";
 "TEST_UPDATE_DRAW_INVALID_DETAIL" = "Thank you for getting tested. However, due to the unclear test result your advice has not been changed. Please apply for a test again. You have received an email with more information.";
 
+"TEST_UPDATE_DRAW_NEGATIVE_HEADER" = "Your test result indicates that you don’t have coronavirus";
+"TEST_UPDATE_DRAW_NEGATIVE_DETAIL" = "Thank you for getting tested. View your current advice based on your results. You have received an email with more information.";
+
 "UNEXPOSED_DRAWER_HEADER" = "Your advice has changed";
 "UNEXPOSED_DRAWER_DETAIL" = "The person you had been near to with coronavirus symptoms has tested negative for the virus. Your advice has been updated.";
 

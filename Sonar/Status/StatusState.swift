@@ -31,7 +31,7 @@ protocol SymptomProvider {
     var symptoms: Symptoms { get }
 }
 
-enum StatusState: Equatable {
+indirect enum StatusState: Equatable {
     struct Ok: Codable, Equatable {}
 
     struct Symptomatic: Codable, Equatable, Expirable, SymptomProvider {
@@ -70,6 +70,12 @@ enum StatusState: Equatable {
         let duration: Int = 7
         let startDate: Date
     }
+    
+    struct NegativeTestResult: Codable, Equatable, Expirable, SymptomProvider {
+        let symptoms: Symptoms
+        let duration: Int = 7
+        let startDate: Date
+    }
 
     case ok(Ok)                   // default state, previously "blue"
     case symptomatic(Symptomatic) // previously "red" state
@@ -78,6 +84,19 @@ enum StatusState: Equatable {
     case unexposed(Unexposed)
     case positiveTestResult(PositiveTestResult)
     case unclearTestResult(UnclearTestResult)
+    case negativeTestResult(NegativeTestResult, nextState: StatusState)
+    
+    /// Returns the ultimate state after an interstitial state has completed
+    func resolved() -> StatusState {
+        switch self {
+        case .negativeTestResult(_, let nextState):
+            return nextState
+        case .unclearTestResult(let state):
+            return .symptomatic(Symptomatic(symptoms: state.symptoms, startDate: state.startDate))
+        default:
+            return self
+        }
+    }
 
     var isSymptomatic: Bool {
         if case .symptomatic = self {
@@ -97,11 +116,14 @@ enum StatusState: Equatable {
 
     enum CodingKeys: String, CodingKey {
         case type
+        case nextState
+        
         case symptomatic
         case checkin
         case exposed
         case positiveTestResult
         case unclearTestResult
+        case negativeTestResult
     }
 }
 
@@ -117,6 +139,8 @@ extension StatusState {
         case .positiveTestResult(let state):
             return state.symptoms
         case .unclearTestResult(let state):
+            return state.symptoms
+        case .negativeTestResult(let state, _):
             return state.symptoms
         }
     }
@@ -146,6 +170,10 @@ extension StatusState: Encodable {
         case .unclearTestResult(let unclearTestResult):
             try container.encode("unclearTestResult", forKey: .type)
             try container.encode(unclearTestResult, forKey: .unclearTestResult)
+        case .negativeTestResult(let negativeTestResult, let nextState):
+            try container.encode("negativeTestResult", forKey: .type)
+            try container.encode(negativeTestResult, forKey: .negativeTestResult)
+            try container.encode(nextState, forKey: .nextState)
         }
     }
 }
@@ -179,6 +207,10 @@ extension StatusState: Decodable {
         case "unclearTestResult":
             let unclearTestResult = try values.decode(UnclearTestResult.self, forKey: .unclearTestResult)
             self = .unclearTestResult(unclearTestResult)
+        case "negativeTestResult":
+            let negativeTestResult = try values.decode(NegativeTestResult.self, forKey: .negativeTestResult)
+            let nextState = try values.decode(StatusState.self, forKey: .nextState)
+            self = .negativeTestResult(negativeTestResult, nextState: nextState)
         default:
             throw Error.decodingError("Unrecognized type: \(type)")
         }
