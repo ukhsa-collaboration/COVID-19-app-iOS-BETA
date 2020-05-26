@@ -140,9 +140,9 @@ class SymptomsSummaryViewController: UIViewController, Storyboarded {
             // and the error view is used to provide a margin between elements
             // because the error label is presented inside of a stack view
             // TODO : remove the erroview.isHidden here if you refactor away from nested stack views
-            scroll(to: startDateViewController.errorLabel) {
+            scroll(to: startDateViewController.errorView.errorMessage) {
+                self.startDateViewController.errorSpacerView.isHidden = false
                 self.startDateViewController.errorView.isHidden = false
-                self.startDateViewController.errorLabel.isHidden = false
             }
             
             return

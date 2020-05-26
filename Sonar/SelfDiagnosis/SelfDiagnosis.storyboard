@@ -383,20 +383,18 @@
                                             <constraint firstItem="OFO-L9-lgU" firstAttribute="leading" secondItem="hsM-UT-gLw" secondAttribute="leading" id="xt9-h3-DEd"/>
                                         </constraints>
                                     </view>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8pm-ea-3bY" customClass="AccessibleErrorLabel" customModule="Sonar" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="90.5" width="374" height="0.0"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GD7-27-gTN" customClass="ErrorView" customModule="Sonar" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="90.5" width="374" height="41.5"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    </view>
                                     <view hidden="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="qgQ-Wu-pAf" userLabel="Error Spacer View">
-                                        <rect key="frame" x="0.0" y="90.5" width="374" height="16"/>
+                                        <rect key="frame" x="0.0" y="132" width="374" height="16"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="16" id="NEY-Ag-aP0"/>
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="xwo-3w-4lP">
-                                        <rect key="frame" x="0.0" y="90.5" width="374" height="76.5"/>
+                                        <rect key="frame" x="0.0" y="132" width="374" height="35"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ebv-sD-es8">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="1"/>
@@ -406,7 +404,7 @@
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JUs-Gg-aFs" customClass="StartDateButton" customModule="Sonar" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="1" width="374" height="74.5"/>
+                                                <rect key="frame" x="0.0" y="1" width="374" height="33"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                 <state key="normal" title="Button"/>
                                                 <connections>
@@ -414,7 +412,7 @@
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XT4-9B-WJW">
-                                                <rect key="frame" x="0.0" y="75.5" width="374" height="1"/>
+                                                <rect key="frame" x="0.0" y="34" width="374" height="1"/>
                                                 <color key="backgroundColor" systemColor="systemGray3Color" red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="Rom-hc-LVJ"/>
@@ -444,14 +442,14 @@
                     <connections>
                         <outlet property="button" destination="JUs-Gg-aFs" id="BAa-NK-olq"/>
                         <outlet property="datePicker" destination="ioO-ps-knc" id="6M7-sc-XVZ"/>
-                        <outlet property="errorLabel" destination="8pm-ea-3bY" id="HA4-bD-OCu"/>
-                        <outlet property="errorView" destination="qgQ-Wu-pAf" id="GrM-bL-KFG"/>
+                        <outlet property="errorSpacerView" destination="qgQ-Wu-pAf" id="AfP-ns-ocr"/>
+                        <outlet property="errorView" destination="GD7-27-gTN" id="BcT-Zo-nnm"/>
                         <outlet property="label" destination="OFO-L9-lgU" id="rT5-CT-mfN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xbd-dm-1fB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2686.9565217391305" y="639.50892857142856"/>
+            <point key="canvasLocation" x="2686.9565217391305" y="639.17410714285711"/>
         </scene>
         <!--Question-->
         <scene sceneID="jG4-oM-M9U">
