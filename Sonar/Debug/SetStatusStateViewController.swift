@@ -166,14 +166,14 @@ class SetStatusStateViewController: UITableViewController {
         case .unclearTestResult(let unclearTestResult):
             statusLabel.text = "unclear test result"
             statusPicker.selectRow(6, inComponent: 0, animated: false)
-            temperature = unclearTestResult.symptoms.contains(.temperature)
-            cough = unclearTestResult.symptoms.contains(.cough)
+            temperature = unclearTestResult.symptoms.map { $0.contains(.temperature) } ?? false
+            cough = unclearTestResult.symptoms.map { $0.contains(.cough) } ?? false
             date = unclearTestResult.startDate
         case .negativeTestResult(let negativeTestResult, _):
             statusLabel.text = "negative test result"
             statusPicker.selectRow(7, inComponent: 0, animated: false)
-            temperature = negativeTestResult.symptoms.contains(.temperature)
-            cough = negativeTestResult.symptoms.contains(.cough)
+            temperature = negativeTestResult.symptoms.map { $0.contains(.temperature) } ?? false
+            cough = negativeTestResult.symptoms.map { $0.contains(.cough) } ?? false
             date = nil
         }
     }
