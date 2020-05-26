@@ -19,7 +19,11 @@ class StartNowViewController: UIViewController, Storyboarded {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        resize()
+        notificationCenter.addObserver(self, selector: #selector(resize), name: UIApplication.didBecomeActiveNotification, object: nil)
+    }
+    
+    @objc func resize() {
         numberLabels.forEach { numberLabel in
             if let numberView = numberLabel.superview {
                 numberView.layer.cornerRadius = numberView.frame.width / 2
