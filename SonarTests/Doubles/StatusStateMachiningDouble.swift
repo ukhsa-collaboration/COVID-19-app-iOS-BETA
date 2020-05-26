@@ -40,10 +40,10 @@ class StatusStateMachiningDouble: StatusStateMachining {
 
     func ok() {
     }
-    
-    var receivedTestResult: TestResult.ResultType?
-    func received(_ result: TestResult.ResultType) {
-        receivedTestResult = result
+
+    var receivedTestResult: TestResult?
+    func received(_ testResult: TestResult) {
+        receivedTestResult = testResult
     }
     
     func clearInterstitialState() {

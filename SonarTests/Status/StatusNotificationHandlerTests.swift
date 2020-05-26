@@ -61,7 +61,8 @@ class StateNotificationHandlerTests: XCTestCase {
         
         resultEncodings.forEach {
             testResultNotificationHandler.handle(userInfo: ["result": $0.encoded, "testTimestamp": testTimestamp]) { fetchResult = $0 }
-            XCTAssertEqual(statusStateMachine.receivedTestResult, $0.decoded)
+            let testResult = TestResult(result: $0.decoded, testTimestamp: date, type: nil, acknowledgementUrl: nil)
+            XCTAssertEqual(statusStateMachine.receivedTestResult, testResult)
             XCTAssertEqual(fetchResult, .newData)
         }
     }

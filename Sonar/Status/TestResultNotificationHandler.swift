@@ -30,7 +30,7 @@ class TestResultNotificationHandler {
             decoder.dateDecodingStrategy = .iso8601
             
             if let testResult = try? decoder.decode(TestResult.self, from: jsonData) {
-                statusStateMachine.received(testResult.result)
+                statusStateMachine.received(testResult)
             } else {
                 throw UserInfoDecodingError()
             }

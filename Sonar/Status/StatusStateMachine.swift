@@ -19,7 +19,7 @@ protocol StatusStateMachining {
     func exposed()
     func unexposed()
     func ok()
-    func received(_ result: TestResult.ResultType)
+    func received(_ testResult: TestResult)
     
     func clearInterstitialState()
 }
@@ -205,17 +205,17 @@ class StatusStateMachine: StatusStateMachining {
         transition(from: unexposed, to: StatusState.Ok())
     }
 
-    func received(_ result: TestResult.ResultType) {
+    func received(_ testResult: TestResult) {
         add(notificationRequest: testResultNotification)
 
         let unhandledResult = {
-            let message = "\(result): Not handled yet"
+            let message = "\(testResult): Not handled yet"
             assertionFailure(message)
             self.logger.error("\(message)")
             return
         }
 
-        switch result {
+        switch testResult.result {
         case .positive:
             receivedPositiveTestResult()
         case .unclear:
