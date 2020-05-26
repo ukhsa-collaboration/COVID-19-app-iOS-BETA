@@ -37,7 +37,7 @@ class TestResultNotificationHandler {
             
             completion(.newData)
         } catch {
-            logger.warning("Received unexpected status from remote notification: '\(String(describing: userInfo["status"]))'")
+            logger.error("Received unexpected status from remote notification: '\(String(describing: userInfo["status"]))'")
             completion(.noData)
             return
         }
