@@ -8,9 +8,9 @@
 
 import Foundation
 
-struct TestResult: Codable {
-    let testTimestamp: String?
+struct TestResult: Codable, Equatable {
     let result: ResultType
+    let testTimestamp: Date
     let type: String?
     let acknowledgementUrl: String?
 }

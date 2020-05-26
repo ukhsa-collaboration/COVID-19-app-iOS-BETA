@@ -48,13 +48,21 @@ class StateNotificationHandlerTests: XCTestCase {
         XCTAssertEqual(fetchResult, .newData)
     }
 
-    func testPositiveResult() {
+    func testTestResult() {
         var fetchResult: UIBackgroundFetchResult?
 
-        testResultNotificationHandler.handle(userInfo: ["result": "POSITIVE"]) { fetchResult = $0 }
+        let date = Date(timeIntervalSinceReferenceDate: TimeInterval(Int(4999)))
+        let testTimestamp = ISO8601DateFormatter().string(from: date)
         
-        XCTAssertTrue(statusStateMachine.receivedTestResult)
-
-        XCTAssertEqual(fetchResult, .newData)
+        typealias ResultEncoding = (encoded: String, decoded: TestResult.ResultType)
+        let resultEncodings: [ResultEncoding] = [("INVALID", .unclear),
+                                                 ("POSITIVE", .positive),
+                                                 ("NEGATIVE", .negative)]
+        
+        resultEncodings.forEach {
+            testResultNotificationHandler.handle(userInfo: ["result": $0.encoded, "testTimestamp": testTimestamp]) { fetchResult = $0 }
+            XCTAssertEqual(statusStateMachine.receivedTestResult, $0.decoded)
+            XCTAssertEqual(fetchResult, .newData)
+        }
     }
 }
