@@ -47,7 +47,11 @@ class StatusStateMachineTests: XCTestCase {
     
     func testPostPositiveTestResultNotificationOnReceived() throws {
         persisting.statusState = .symptomatic(StatusState.Symptomatic(symptoms: [], startDate: currentDate))
-        machine.received(.positive)
+        let positiveTestResult = TestResult(result: .positive,
+                                            testTimestamp: Date(),
+                                            type: nil,
+                                            acknowledgementUrl: nil)
+        machine.received(positiveTestResult)
 
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.content.title, "TEST_RESULT_TITLE".localized)

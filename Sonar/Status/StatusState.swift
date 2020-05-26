@@ -71,10 +71,8 @@ indirect enum StatusState: Equatable {
         let startDate: Date
     }
     
-    struct NegativeTestResult: Codable, Equatable, Expirable, SymptomProvider {
+    struct NegativeTestResult: Codable, Equatable, SymptomProvider {
         let symptoms: Symptoms
-        let duration: Int = 7
-        let startDate: Date
     }
 
     case ok(Ok)                   // default state, previously "blue"

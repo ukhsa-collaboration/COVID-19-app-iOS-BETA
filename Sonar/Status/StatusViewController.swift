@@ -332,7 +332,7 @@ class StatusViewController: UIViewController, Storyboarded {
         performSegue(withIdentifier: "presentDrawer", sender: config)
     }
     
-    private func presentTestResultUpdate(result: TestResult.Result) {
+    private func presentTestResultUpdate(result: TestResult.ResultType) {
         let header = result.headerText
         let detail = result.detailText
         let config = DrawerViewController.Config(header: header, detail: detail) { [weak self] in

@@ -26,8 +26,11 @@ class TestResultNotificationHandler {
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: userInfo, options: .prettyPrinted)
             
-            if let testResult = try? JSONDecoder().decode(TestResult.self, from: jsonData) {
-                statusStateMachine.received(testResult.result)
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .iso8601
+            
+            if let testResult = try? decoder.decode(TestResult.self, from: jsonData) {
+                statusStateMachine.received(testResult)
             } else {
                 throw UserInfoDecodingError()
             }
