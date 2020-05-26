@@ -145,6 +145,7 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
         case (let error as CBATTError) where error.code == .unlikelyError:
             logger.info("peripheral \(peripheral.identifierWithName) error: \(error)")
             peripherals.removeValue(forKey: peripheral.identifier)
+            central.cancelPeripheralConnection(peripheral)
             
         case (let error?):
             logger.info("peripheral \(peripheral.identifierWithName) error: \(error)")
