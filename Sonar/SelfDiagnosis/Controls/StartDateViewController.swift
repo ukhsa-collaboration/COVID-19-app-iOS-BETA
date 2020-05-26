@@ -79,9 +79,9 @@ class StartDateViewController: UIViewController {
     // MARK: - Support for Dyanmic Type
     
     private func showPicker() {
-        scroll(after: {
+        scroll(to: self.datePicker) {
             self.datePicker.isHidden = !self.datePicker.isHidden
-        }, to: self.datePicker)
+        }
     }
 
     private func makeLabelForPickerRow() -> UILabel {

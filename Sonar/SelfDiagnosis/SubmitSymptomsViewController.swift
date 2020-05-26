@@ -98,9 +98,9 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         if confirmSwitch.isOn {
             return true
         } else {
-            scroll(after: {
+            scroll(toErrorLabel: errorLabel, orControl: confirmSwitch) {
                 self.presentErrorToUser()
-            }, toErrorLabel: errorLabel, orControl: confirmSwitch)
+            }
             
             return false
         }

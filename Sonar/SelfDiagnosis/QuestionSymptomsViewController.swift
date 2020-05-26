@@ -100,9 +100,9 @@ class QuestionSymptomsViewController: UIViewController, Storyboarded {
     
     @IBAction func continueTapped() {
         guard let state = questionState else {
-            scroll(after: {
+            scroll(to: errorLabel) {
                 self.errorLabel.isHidden = false
-            }, to: errorLabel)
+            }
             return
         }
         buttonAction(state)
