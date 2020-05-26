@@ -169,6 +169,12 @@ class SetStatusStateViewController: UITableViewController {
             temperature = unclearTestResult.symptoms.contains(.temperature)
             cough = unclearTestResult.symptoms.contains(.cough)
             date = unclearTestResult.startDate
+        case .negativeTestResult(let negativeTestResult, _):
+            statusLabel.text = "negative test result"
+            statusPicker.selectRow(7, inComponent: 0, animated: false)
+            temperature = negativeTestResult.symptoms.contains(.temperature)
+            cough = negativeTestResult.symptoms.contains(.cough)
+            date = negativeTestResult.startDate
         }
     }
 
@@ -207,6 +213,9 @@ class SetStatusStateViewController: UITableViewController {
             statusState = .positiveTestResult(StatusState.PositiveTestResult(symptoms: symptoms, startDate: date!))
         case 6:
             statusState = .unclearTestResult(StatusState.UnclearTestResult(symptoms: symptoms, startDate: date!))
+        case 7:
+            statusState = .negativeTestResult(StatusState.NegativeTestResult(symptoms: symptoms, startDate: date!),
+                                                                             nextState: .ok(StatusState.Ok()))
         default:
             fatalError()
         }
@@ -223,11 +232,11 @@ extension SetStatusStateViewController: UIPickerViewDataSource {
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 7
+        return 8
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return ["ok", "symptomatic", "checkin", "exposed", "unexposed", "positive test result", "unclear test result"][row]
+        return ["ok", "symptomatic", "checkin", "exposed", "unexposed", "positive test result", "unclear test result", "negative test result"][row]
     }
 }
 
@@ -249,6 +258,9 @@ extension SetStatusStateViewController: UIPickerViewDelegate {
             statusState = .positiveTestResult(StatusState.PositiveTestResult(symptoms: [.temperature, .cough], startDate: Date()))
         case 6:
             statusState = .unclearTestResult(StatusState.UnclearTestResult(symptoms: [.temperature, .cough], startDate: Date()))
+        case 7:
+            statusState = .negativeTestResult(StatusState.NegativeTestResult(symptoms: [.temperature, .cough], startDate: Date()),
+                                              nextState: .ok(StatusState.Ok()))
         default:
             fatalError()
         }

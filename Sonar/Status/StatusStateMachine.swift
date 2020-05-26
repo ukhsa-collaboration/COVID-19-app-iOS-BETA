@@ -20,6 +20,8 @@ protocol StatusStateMachining {
     func unexposed()
     func ok()
     func received(_ result: TestResult.Result)
+    
+    func clearInterstitialState()
 }
 
 class StatusStateMachine: StatusStateMachining {
@@ -39,6 +41,8 @@ class StatusStateMachine: StatusStateMachining {
     private(set) var state: StatusState {
         get { persisting.statusState }
         set {
+            guard persisting.statusState != newValue else { return }
+            
             persisting.statusState = newValue
 
             notificationCenter.post(
@@ -76,6 +80,10 @@ class StatusStateMachine: StatusStateMachining {
         self.userNotificationCenter = userNotificationCenter
         self.dateProvider = dateProvider
     }
+    
+    func clearInterstitialState() {
+        state = state.resolved()
+    }
 
     func selfDiagnose(symptoms: Symptoms, startDate: Date) throws {
         guard symptoms.hasCoronavirusSymptoms else {
@@ -103,7 +111,7 @@ class StatusStateMachine: StatusStateMachining {
             let symptomatic = StatusState.Symptomatic(symptoms: symptoms, startDate: startDate)
             try contactEventsUploader.upload(from: startDate, with: symptoms)
             transition(from: exposed, to: symptomatic)
-        case .symptomatic, .checkin, .unexposed, .positiveTestResult, .unclearTestResult:
+        case .symptomatic, .checkin, .unexposed, .positiveTestResult, .unclearTestResult, .negativeTestResult:
             assertionFailure("Self-diagnosing is only allowed from ok/exposed")
         }
     }
@@ -117,7 +125,7 @@ class StatusStateMachine: StatusStateMachining {
 
     func tick() {
         switch state {
-        case .ok, .checkin, .unexposed:
+        case .ok, .checkin, .unexposed, .negativeTestResult:
             break // Don't need to do anything
         case .unclearTestResult(let unclearTestResult):
             symptomaticUpdate(state: unclearTestResult)
@@ -139,7 +147,7 @@ class StatusStateMachine: StatusStateMachining {
         userNotificationCenter.removePendingNotificationRequests(withIdentifiers: [checkinNotificationIdentifier])
 
         switch state {
-        case .ok, .symptomatic, .exposed, .unexposed, .positiveTestResult, .unclearTestResult:
+        case .ok, .symptomatic, .exposed, .unexposed, .positiveTestResult, .unclearTestResult, .negativeTestResult:
             assertionFailure("Checking in is only allowed from checkin")
             return
         case .checkin(let checkin):
@@ -162,7 +170,7 @@ class StatusStateMachine: StatusStateMachining {
     }
 
     func exposed() {
-        switch state {
+        switch state.resolved() {
         case .ok(let ok):
             transition(from: ok, to: StatusState.Exposed(startDate: currentDate))
         case .unexposed(let unexposed):
@@ -172,15 +180,19 @@ class StatusStateMachine: StatusStateMachining {
             break // ignore repeated exposures
         case .symptomatic, .checkin, .positiveTestResult, .unclearTestResult:
             break // don't care about exposures if we're already symptomatic
+        case .negativeTestResult:
+            preconditionFailure("Status state's resolve method should not return an interstitial state")
         }
     }
 
     func unexposed() {
-        switch state {
+        switch state.resolved() {
         case .exposed(let exposed):
             transition(from: exposed, to: StatusState.Unexposed())
         case .ok, .symptomatic, .checkin, .unexposed, .positiveTestResult, .unclearTestResult:
             break // no-op
+        case .negativeTestResult:
+            preconditionFailure("Status state's resolve method should not return an interstitial state")
         }
     }
 
@@ -215,7 +227,7 @@ class StatusStateMachine: StatusStateMachining {
     
     func receivedPositiveTestResult() {
         switch state {
-        case .ok, .exposed:
+        case .ok, .exposed, .negativeTestResult:
             transition(to: StatusState.PositiveTestResult(symptoms: nil, startDate: currentDate))
         case .symptomatic(let symptomatic):
             transition(to: StatusState.PositiveTestResult(symptoms: symptomatic.symptoms, startDate: symptomatic.startDate))

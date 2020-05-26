@@ -41,6 +41,10 @@ class PositiveTestStatusPage : Page {
     var hasPositiveTestHeading: Bool {
         app.staticTexts["Your test result indicates  you  have coronavirus. Please isolate yourself and your household."].exists
     }
+    
+    var drawerDismissButton: XCUIElement {
+        app.buttons["Close"]
+    }
 }
 
 class UnclearTestStatusPage : Page {

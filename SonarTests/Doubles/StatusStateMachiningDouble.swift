@@ -45,4 +45,8 @@ class StatusStateMachiningDouble: StatusStateMachining {
     func received(_ result: TestResult.Result) {
         receivedTestResult = true
     }
+    
+    func clearInterstitialState() {
+        state = state.resolved()
+    }
 }
