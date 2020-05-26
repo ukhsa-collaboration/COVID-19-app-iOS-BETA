@@ -94,7 +94,7 @@ jobs:
         run: |
           git fetch --tags
           last_uploaded=`git tag --list | grep internal | grep -v ${{ steps.tag-commit.outputs.tag }} | tail -n 1`
-          bin/update-backlog ${last_uploaded}..${{ steps.tag-commit.outputs.tag }}
+          ./bin/update-backlog ${last_uploaded}..${{ steps.tag-commit.outputs.tag }}
         continue-on-error: true
 
       - name: Notify Slack on Upload
