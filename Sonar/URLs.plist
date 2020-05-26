@@ -17,7 +17,7 @@
 	<key>statusInfo</key>
 	<string>https://covid19.nhs.uk/?utm_source=nhscovid19ios&amp;utm_medium=mobileapp&amp;utm_campaign=nhscovid19app&amp;utm_content=statuspage</string>
 	<key>workplaceGuidance</key>
-	<string>https://www.gov.uk/guidance/working-safely-during-coronavirus-covid-19</string>
+	<string>https://faq.covid19.nhs.uk/article/KA-01072/en-us</string>
 	<key>regionalServices</key>
 	<string>https://faq.covid19.nhs.uk/article/KA-01065/en-us</string>
 	<key>status</key>
