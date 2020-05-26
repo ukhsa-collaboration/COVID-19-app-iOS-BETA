@@ -116,21 +116,20 @@ class StatusStateMachine: StatusStateMachining {
         }
     }
     
-    func symptomaticUpdate(state: Expirable & SymptomProvider) {
-        guard currentDate >= state.expiryDate else { return }
-
-        let checkin = StatusState.Checkin(symptoms: state.symptoms, checkinDate: state.expiryDate)
-        transition(to: checkin)
-    }
-
     func tick() {
         switch state {
         case .ok, .checkin, .unexposed, .negativeTestResult:
             break // Don't need to do anything
-        case .unclearTestResult(let unclearTestResult):
-            symptomaticUpdate(state: unclearTestResult)
+        case .unclearTestResult(let unclear):
+            guard currentDate >= unclear.expiryDate else { return }
+
+            let checkin = StatusState.Checkin(symptoms: unclear.symptoms, checkinDate: unclear.expiryDate)
+            transition(from: unclear, to: checkin)
         case .symptomatic(let symptomatic):
-            symptomaticUpdate(state: symptomatic)
+            guard currentDate >= symptomatic.expiryDate else { return }
+
+            let checkin = StatusState.Checkin(symptoms: symptomatic.symptoms, checkinDate: symptomatic.expiryDate)
+            transition(from: symptomatic, to: checkin)
         case .exposed(let exposed):
             guard currentDate >= exposed.expiryDate else { return }
 
@@ -260,7 +259,12 @@ class StatusStateMachine: StatusStateMachining {
         state = .symptomatic(symptomatic)
     }
 
-    private func transition(to checkin: StatusState.Checkin) {
+    private func transition(from: StatusState.Symptomatic, to checkin: StatusState.Checkin) {
+        add(notificationRequest: checkinNotificationRequest(at: checkin.checkinDate))
+        state = .checkin(checkin)
+    }
+
+    private func transition(from: StatusState.UnclearTestResult, to checkin: StatusState.Checkin) {
         add(notificationRequest: checkinNotificationRequest(at: checkin.checkinDate))
         state = .checkin(checkin)
     }

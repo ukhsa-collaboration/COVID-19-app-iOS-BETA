@@ -27,14 +27,10 @@ extension Expirable {
     }
 }
 
-protocol SymptomProvider {
-    var symptoms: Symptoms { get }
-}
-
 indirect enum StatusState: Equatable {
     struct Ok: Codable, Equatable {}
 
-    struct Symptomatic: Codable, Equatable, Expirable, SymptomProvider {
+    struct Symptomatic: Codable, Equatable, Expirable {
         let symptoms: Symptoms
         let startDate: Date
         let duration = 7
@@ -65,14 +61,14 @@ indirect enum StatusState: Equatable {
 
     struct Unexposed: Codable, Equatable {}
     
-    struct UnclearTestResult: Codable, Equatable, Expirable, SymptomProvider {
-        let symptoms: Symptoms
+    struct UnclearTestResult: Codable, Equatable, Expirable {
+        let symptoms: Symptoms?
         let duration: Int = 7
         let startDate: Date
     }
     
-    struct NegativeTestResult: Codable, Equatable, SymptomProvider {
-        let symptoms: Symptoms
+    struct NegativeTestResult: Codable, Equatable {
+        let symptoms: Symptoms?
     }
 
     case ok(Ok)                   // default state, previously "blue"
@@ -89,8 +85,12 @@ indirect enum StatusState: Equatable {
         switch self {
         case .negativeTestResult(_, let nextState):
             return nextState
-        case .unclearTestResult(let state):
-            return .symptomatic(Symptomatic(symptoms: state.symptoms, startDate: state.startDate))
+        case .unclearTestResult(let unclear):
+            guard let symptoms = unclear.symptoms else {
+                assertionFailure("What do we do here?")
+                return self
+            }
+            return .symptomatic(Symptomatic(symptoms: symptoms, startDate: unclear.startDate))
         default:
             return self
         }
