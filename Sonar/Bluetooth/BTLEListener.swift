@@ -104,6 +104,10 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
             // Reconnect to all the peripherals we found in willRestoreState (assume calling connect is idempotent)
             for peripheral in peripherals.values {
                 central.connect(peripheral)
+                if peripheral.state == .connected {
+                    logger.info("reading rssi for .connected peripheral \(peripheral.identifierWithName)")
+                    peripheral.readRSSI()
+                }
             }
             
             central.scanForPeripherals(withServices: [Environment.sonarServiceUUID])
@@ -133,6 +137,23 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
         peripheral.delegate = self
         peripheral.readRSSI()
         peripheral.discoverServices([Environment.sonarServiceUUID])
+    }
+    
+    func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
+        switch error {
+            
+        case (let error as CBATTError) where error.code == .unlikelyError:
+            logger.info("peripheral \(peripheral.identifierWithName) error: \(error)")
+            peripherals.removeValue(forKey: peripheral.identifier)
+            
+        case (let error?):
+            logger.info("peripheral \(peripheral.identifierWithName) error: \(error)")
+            central.connect(peripheral)
+            
+        default:
+            logger.info("peripheral \(peripheral.identifierWithName)")
+            central.connect(peripheral)
+        }
     }
 
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
@@ -257,8 +278,9 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
             return
         }
 
-        logger.info("reading RSSI for \(peripherals.values.count) \(peripherals.values.count == 1 ? "peripheral" : "peripherals")")
-        for peripheral in peripherals.values {
+        let connectedPeripherals = peripherals.values.filter({ $0.state == .connected })
+        logger.info("reading RSSI for \(connectedPeripherals.count) \(connectedPeripherals.count == 1 ? "peripheral" : "peripherals") (skipping \(peripherals.values.count - connectedPeripherals.count) not in .connected state)")
+        for peripheral in connectedPeripherals {
             peripheral.readRSSI()
         }
         
