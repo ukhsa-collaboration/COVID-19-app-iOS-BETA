@@ -463,7 +463,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="748"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="wj1-jq-pcQ">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="411"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="453"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="1/3" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CqV-Ri-Loc">
                                                 <rect key="frame" x="20" y="32" width="374" height="18"/>
@@ -504,17 +504,17 @@
                                                     <constraint firstAttribute="height" constant="16" id="idS-Vi-N00"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hoy-8k-xBR" customClass="ErrorView" customModule="Sonar" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hoy-8k-xBR" customClass="ErrorView" customModule="Sonar" customModuleProvider="target">
                                                 <rect key="frame" x="20" y="133" width="374" height="50"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dAf-A1-YUu" userLabel="Spacer">
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dAf-A1-YUu" userLabel="Spacer">
                                                 <rect key="frame" x="20" y="183" width="374" height="12"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="12" id="cHH-p9-leq"/>
+                                                    <constraint firstAttribute="height" constant="16" id="cHH-p9-leq"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="BVo-HW-oXC" customClass="AnswerButton" customModule="Sonar" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" ambiguous="YES" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="BVo-HW-oXC" customClass="AnswerButton" customModule="Sonar" customModuleProvider="target">
                                                 <rect key="frame" x="20" y="195" width="374" height="100"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <accessibility key="accessibilityConfiguration">
@@ -524,13 +524,13 @@
                                                     <action selector="yesTapped" destination="iIR-bG-zmI" eventType="touchUpInside" id="ReF-bD-F2d"/>
                                                 </connections>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2oA-jL-11T" userLabel="Spacer">
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2oA-jL-11T" userLabel="Spacer">
                                                 <rect key="frame" x="20" y="295" width="374" height="8"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="8" id="KFg-Xd-rLp"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="zLw-1O-QuZ" customClass="AnswerButton" customModule="Sonar" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" ambiguous="YES" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="zLw-1O-QuZ" customClass="AnswerButton" customModule="Sonar" customModuleProvider="target">
                                                 <rect key="frame" x="20" y="303" width="374" height="100"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <accessibility key="accessibilityConfiguration">
@@ -540,8 +540,8 @@
                                                     <action selector="noTapped" destination="iIR-bG-zmI" eventType="touchUpInside" id="51Z-W1-Ifi"/>
                                                 </connections>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hSh-i0-ULA" userLabel="Spacer">
-                                                <rect key="frame" x="20" y="403" width="374" height="8"/>
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hSh-i0-ULA" userLabel="Spacer">
+                                                <rect key="frame" x="20" y="403" width="374" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="8" id="6z7-lP-mav"/>
                                                 </constraints>
