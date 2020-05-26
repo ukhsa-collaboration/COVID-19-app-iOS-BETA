@@ -28,14 +28,14 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.25" translatesAutoresizingMaskIntoConstraints="NO" id="zKm-HG-m2h" customClass="AccessibleErrorLabel" customModule="Sonar" customModuleProvider="target">
-                    <rect key="frame" x="20" y="43.5" width="374" height="135.5"/>
+                    <rect key="frame" x="20" y="43.5" width="374" height="140.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" name="NHS Error"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="zKm-HG-m2h" secondAttribute="bottom" constant="20" id="8cd-k0-shr"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="zKm-HG-m2h" secondAttribute="bottom" constant="15" id="8cd-k0-shr"/>
                 <constraint firstItem="zKm-HG-m2h" firstAttribute="top" secondItem="tCB-pJ-NPp" secondAttribute="bottom" constant="8" id="Pl2-FA-ine"/>
                 <constraint firstItem="zKm-HG-m2h" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="Tzw-eJ-X0J"/>
                 <constraint firstItem="tCB-pJ-NPp" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="fTT-kj-Hcs"/>

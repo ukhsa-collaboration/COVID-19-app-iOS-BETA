@@ -209,7 +209,7 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" name="NHS Grey 4"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="QV6-CT-bQD" firstAttribute="top" secondItem="vaq-mo-tAH" secondAttribute="top" id="Vkz-ZJ-btU"/>
                             <constraint firstAttribute="bottom" secondItem="QV6-CT-bQD" secondAttribute="bottom" id="fFs-0r-EtS"/>
@@ -240,9 +240,6 @@
         </namedColor>
         <namedColor name="NHS Grey 1">
             <color red="0.29803921568627451" green="0.3843137254901961" blue="0.44705882352941179" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="NHS Grey 4">
-            <color red="0.84705882352941175" green="0.8666666666666667" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
