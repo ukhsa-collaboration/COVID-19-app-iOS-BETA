@@ -42,8 +42,22 @@ class StatusStateMachine: StatusStateMachining {
         get { persisting.statusState }
         set {
             guard persisting.statusState != newValue else { return }
-            
+
+            let oldValue = state
             persisting.statusState = newValue
+
+            switch (oldValue, newValue) {
+            case (_, .symptomatic(let symptomatic)):
+                add(notificationRequest: checkinNotificationRequest(at: symptomatic.expiryDate))
+            case (_, .checkin(let checkin)):
+                add(notificationRequest: checkinNotificationRequest(at: checkin.checkinDate))
+            case (_, .exposed), (_, .unexposed):
+                add(notificationRequest: adviceChangedNotificationRequest)
+            case (_, .positiveTestResult), (_, .negativeTestResult), (_, .unclearTestResult):
+                add(notificationRequest: testResultNotification)
+            default:
+                break
+            }
 
             notificationCenter.post(
                 name: StatusStateMachine.StatusStateChangedNotification,
@@ -255,27 +269,22 @@ class StatusStateMachine: StatusStateMachining {
     // MARK: - Transitions
 
     private func transition(from ok: StatusState.Ok, to symptomatic: StatusState.Symptomatic) {
-        add(notificationRequest: checkinNotificationRequest(at: symptomatic.expiryDate))
         state = .symptomatic(symptomatic)
     }
 
     private func transition(from: StatusState.Symptomatic, to checkin: StatusState.Checkin) {
-        add(notificationRequest: checkinNotificationRequest(at: checkin.checkinDate))
         state = .checkin(checkin)
     }
 
     private func transition(from: StatusState.UnclearTestResult, to checkin: StatusState.Checkin) {
-        add(notificationRequest: checkinNotificationRequest(at: checkin.checkinDate))
         state = .checkin(checkin)
     }
 
     private func transition(from ok: StatusState.Ok, to checkin: StatusState.Checkin) {
-        add(notificationRequest: checkinNotificationRequest(at: checkin.checkinDate))
         state = .checkin(checkin)
     }
 
     private func transition(from exposed: StatusState.Exposed, to symptomatic: StatusState.Symptomatic) {
-        add(notificationRequest: checkinNotificationRequest(at: symptomatic.expiryDate))
         state = .symptomatic(symptomatic)
     }
 
@@ -284,7 +293,6 @@ class StatusStateMachine: StatusStateMachining {
     }
 
     private func transition(from previous: StatusState.Checkin, to next: StatusState.Checkin) {
-        add(notificationRequest: checkinNotificationRequest(at: next.checkinDate))
         state = .checkin(next)
     }
 
@@ -293,7 +301,6 @@ class StatusStateMachine: StatusStateMachining {
     }
 
     private func transition(from ok: StatusState.Ok, to exposed: StatusState.Exposed) {
-        add(notificationRequest: adviceChangedNotificationRequest)
         state = .exposed(exposed)
     }
     
@@ -302,22 +309,18 @@ class StatusStateMachine: StatusStateMachining {
     }
     
     private func transition(to positiveTestResult: StatusState.PositiveTestResult) {
-        add(notificationRequest: testResultNotification)
         state = .positiveTestResult(positiveTestResult)
     }
     
     private func transition(to negativeTestResult: StatusState.NegativeTestResult, nextState: StatusState) {
-        add(notificationRequest: testResultNotification)
         state = .negativeTestResult(negativeTestResult, nextState: nextState)
     }
 
     private func transition(from unexposed: StatusState.Unexposed, to exposed: StatusState.Exposed) {
-        add(notificationRequest: adviceChangedNotificationRequest)
         state = .exposed(exposed)
     }
 
     private func transition(from exposed: StatusState.Exposed, to unexposed: StatusState.Unexposed) {
-        add(notificationRequest: adviceChangedNotificationRequest)
         state = .unexposed(unexposed)
     }
 
@@ -325,9 +328,8 @@ class StatusStateMachine: StatusStateMachining {
         state = .ok(ok)
     }
     
-    private func transition(to unlearTestResult: StatusState.UnclearTestResult) {
-        add(notificationRequest: testResultNotification)
-        state = .unclearTestResult(unlearTestResult)
+    private func transition(to unclearTestResult: StatusState.UnclearTestResult) {
+        state = .unclearTestResult(unclearTestResult)
     }
 
     // MARK: - User Notifications
