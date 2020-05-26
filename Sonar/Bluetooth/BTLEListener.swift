@@ -279,9 +279,12 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
             return
         }
 
-        let connectedPeripherals = peripherals.values.filter({ $0.state == .connected })
-        logger.info("reading RSSI for \(connectedPeripherals.count) \(connectedPeripherals.count == 1 ? "peripheral" : "peripherals") (skipping \(peripherals.values.count - connectedPeripherals.count) not in .connected state)")
-        for peripheral in connectedPeripherals {
+        for peripheral in peripherals.values {
+            guard peripheral.state == .connected else {
+                logger.info("skipping RSSI for \(peripheral.identifierWithName) as it is in state \(peripheral.state)")
+                continue
+            }
+            logger.info(" reading RSSI for \(peripheral.identifierWithName)")
             peripheral.readRSSI()
         }
         
