@@ -30,8 +30,6 @@ class StartDateViewController: UIViewController {
                 return
             }
 
-            errorSpacerView.isHidden = true
-
             button.text = dateFormatter.string(from: date)
             delegate?.startDateViewController(self, didSelectDate: date)
         }
@@ -40,7 +38,6 @@ class StartDateViewController: UIViewController {
     private let logger = Logger(label: String(describing: self))
 
     @IBOutlet weak var label: UILabel!
-    @IBOutlet weak var errorSpacerView: UIView!
     @IBOutlet weak var errorView: ErrorView!
     @IBOutlet weak var button: StartDateButton!
 
