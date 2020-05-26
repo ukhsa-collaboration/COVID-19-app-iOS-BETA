@@ -43,17 +43,16 @@ class StatusStateMachine: StatusStateMachining {
         set {
             guard persisting.statusState != newValue else { return }
 
-            let oldValue = state
             persisting.statusState = newValue
 
-            switch (oldValue, newValue) {
-            case (_, .symptomatic(let symptomatic)):
+            switch newValue {
+            case .symptomatic(let symptomatic):
                 add(notificationRequest: checkinNotificationRequest(at: symptomatic.expiryDate))
-            case (_, .checkin(let checkin)):
+            case .checkin(let checkin):
                 add(notificationRequest: checkinNotificationRequest(at: checkin.checkinDate))
-            case (_, .exposed), (_, .unexposed):
+            case .exposed, .unexposed:
                 add(notificationRequest: adviceChangedNotificationRequest)
-            case (_, .positiveTestResult), (_, .negativeTestResult), (_, .unclearTestResult):
+            case .positiveTestResult, .negativeTestResult, .unclearTestResult:
                 add(notificationRequest: testResultNotification)
             default:
                 break
@@ -264,11 +263,7 @@ class StatusStateMachine: StatusStateMachining {
     }
     
     func receivedUnclearTestResult() {
-        guard let symptoms = state.symptoms else {
-            state = .unclearTestResult(StatusState.UnclearTestResult(symptoms: [], startDate: currentDate))
-            return
-        }
-        state = .unclearTestResult(StatusState.UnclearTestResult(symptoms: symptoms, startDate: currentDate))
+        state = .unclearTestResult(StatusState.UnclearTestResult(symptoms: state.symptoms, startDate: currentDate))
     }
 
     // MARK: - User Notifications
