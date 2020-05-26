@@ -206,22 +206,13 @@ class StatusStateMachine: StatusStateMachining {
     }
 
     func received(_ testResult: TestResult) {
-        add(notificationRequest: testResultNotification)
-
-        let unhandledResult = {
-            let message = "\(testResult): Not handled yet"
-            assertionFailure(message)
-            self.logger.error("\(message)")
-            return
-        }
-
         switch testResult.result {
         case .positive:
             receivedPositiveTestResult()
         case .unclear:
             receivedUnclearTestResult()
         case .negative:
-            unhandledResult()
+            receivedNegativeTestResult(testTimestamp: testResult.testTimestamp)
         }
     }
     
@@ -237,6 +228,18 @@ class StatusStateMachine: StatusStateMachining {
             let message = "Received positive test result, in a state where it is not expected"
             assertionFailure(message)
             self.logger.error("\(message)")
+        }
+    }
+    
+    func receivedNegativeTestResult(testTimestamp: Date) {
+        
+        switch state.resolved() {
+        case .symptomatic(let symptomatic) where symptomatic.startDate > testTimestamp:
+            transition(to: StatusState.NegativeTestResult(symptoms: symptomatic.symptoms),
+                       nextState: .symptomatic(symptomatic))
+        default:
+            transition(to: StatusState.NegativeTestResult(symptoms: []),
+                       nextState: .ok(StatusState.Ok()))
         }
     }
     
@@ -295,6 +298,11 @@ class StatusStateMachine: StatusStateMachining {
     private func transition(to positiveTestResult: StatusState.PositiveTestResult) {
         add(notificationRequest: testResultNotification)
         state = .positiveTestResult(positiveTestResult)
+    }
+    
+    private func transition(to negativeTestResult: StatusState.NegativeTestResult, nextState: StatusState) {
+        add(notificationRequest: testResultNotification)
+        state = .negativeTestResult(negativeTestResult, nextState: nextState)
     }
 
     private func transition(from unexposed: StatusState.Unexposed, to exposed: StatusState.Exposed) {
