@@ -463,7 +463,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="748"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="wj1-jq-pcQ">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="403"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="411"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="1/3" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CqV-Ri-Loc">
                                                 <rect key="frame" x="20" y="32" width="374" height="18"/>
@@ -504,20 +504,18 @@
                                                     <constraint firstAttribute="height" constant="16" id="idS-Vi-N00"/>
                                                 </constraints>
                                             </view>
-                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Question Error" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y0U-Ra-w0i" customClass="AccessibleErrorLabel" customModule="Sonar" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="133" width="374" height="0.0"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
-                                                <color key="textColor" name="NHS Error"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hoy-8k-xBR" customClass="ErrorView" customModule="Sonar" customModuleProvider="target">
+                                                <rect key="frame" x="20" y="133" width="374" height="50"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dAf-A1-YUu" userLabel="Spacer">
-                                                <rect key="frame" x="20" y="133" width="374" height="12"/>
+                                                <rect key="frame" x="20" y="183" width="374" height="12"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="12" id="cHH-p9-leq"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="BVo-HW-oXC" customClass="AnswerButton" customModule="Sonar" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="145" width="374" height="100"/>
+                                                <rect key="frame" x="20" y="195" width="374" height="100"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <accessibility key="accessibilityConfiguration">
                                                     <accessibilityTraits key="traits" button="YES"/>
@@ -527,13 +525,13 @@
                                                 </connections>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2oA-jL-11T" userLabel="Spacer">
-                                                <rect key="frame" x="20" y="245" width="374" height="8"/>
+                                                <rect key="frame" x="20" y="295" width="374" height="8"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="8" id="KFg-Xd-rLp"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="zLw-1O-QuZ" customClass="AnswerButton" customModule="Sonar" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="253" width="374" height="100"/>
+                                                <rect key="frame" x="20" y="303" width="374" height="100"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <accessibility key="accessibilityConfiguration">
                                                     <accessibilityTraits key="traits" button="YES"/>
@@ -543,7 +541,7 @@
                                                 </connections>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hSh-i0-ULA" userLabel="Spacer">
-                                                <rect key="frame" x="20" y="353" width="374" height="50"/>
+                                                <rect key="frame" x="20" y="403" width="374" height="8"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="8" id="6z7-lP-mav"/>
                                                 </constraints>
@@ -591,7 +589,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="detailLabel" destination="yT8-pl-UAz" id="3Tv-wd-9K0"/>
-                        <outlet property="errorLabel" destination="Y0U-Ra-w0i" id="MeS-aa-avS"/>
+                        <outlet property="errorView" destination="Hoy-8k-xBR" id="Pg1-AT-o6o"/>
                         <outlet property="noButton" destination="zLw-1O-QuZ" id="Rbb-0Q-0PA"/>
                         <outlet property="pageLabel" destination="CqV-Ri-Loc" id="mZZ-yP-iwx"/>
                         <outlet property="questionButton" destination="N2a-2g-6VM" id="QKX-nN-vk4"/>
@@ -602,13 +600,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h36-Rg-que" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1887" y="173"/>
+            <point key="canvasLocation" x="1886.9565217391305" y="172.76785714285714"/>
         </scene>
     </scenes>
     <resources>
-        <namedColor name="NHS Error">
-            <color red="0.83529411764705885" green="0.15686274509803921" blue="0.10588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="NHS Grey 3">
             <color red="0.68235294117647061" green="0.71764705882352942" blue="0.74117647058823533" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
