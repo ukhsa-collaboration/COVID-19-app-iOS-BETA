@@ -181,7 +181,8 @@ class StatusStateMachine: StatusStateMachining {
         case .symptomatic, .checkin, .positiveTestResult, .unclearTestResult:
             break // don't care about exposures if we're already symptomatic
         case .negativeTestResult:
-            preconditionFailure("Status state's resolve method should not return an interstitial state")
+            assertionFailure("Status state's resolve method should not return an interstitial state")
+            break
         }
     }
 
@@ -192,7 +193,8 @@ class StatusStateMachine: StatusStateMachining {
         case .ok, .symptomatic, .checkin, .unexposed, .positiveTestResult, .unclearTestResult:
             break // no-op
         case .negativeTestResult:
-            preconditionFailure("Status state's resolve method should not return an interstitial state")
+            assertionFailure("Status state's resolve method should not return an interstitial state")
+            break
         }
     }
 
