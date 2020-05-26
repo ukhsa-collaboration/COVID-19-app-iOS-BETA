@@ -51,11 +51,11 @@ private extension OnboardingTests {
 private extension OnboardingTests {
 
     var startTitle: XCUIElement {
-        app.staticTexts["Help the NHS stop the spread of coronavirus in the UK"]
+        app.staticTexts["This NHS app does three things for you:"]
     }
 
     var learnMore: XCUIElement {
-        app.buttons["Learn more about how it works"]
+        app.buttons["Learn more about how the app works"]
     }
     
     var privacyScreenTitle: XCUIElement {
