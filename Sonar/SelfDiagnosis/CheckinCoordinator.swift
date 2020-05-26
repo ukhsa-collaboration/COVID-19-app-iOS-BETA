@@ -26,14 +26,14 @@ class CheckinCoordinator: Coordinator {
     var symptoms: Symptoms = []
 
     func start() {
-        let title = (checkin.symptoms ?? []).contains(.temperature)
+        let title = hadSymptom(.temperature)
             ? "TEMPERATURE_CHECKIN_QUESTION"
             : "TEMPERATURE_QUESTION"
 
         let vc = QuestionSymptomsViewController.instantiate()
         vc.inject(
             pageNumber: 1,
-            pageCount: 2,
+            pageCount: 3,
             questionTitle: title.localized,
             questionDetail: "TEMPERATURE_DETAIL".localized,
             questionError: "TEMPERATURE_ERROR".localized,
@@ -52,7 +52,7 @@ class CheckinCoordinator: Coordinator {
 
     func openCoughView() {
         let (title, detail) = {
-            (checkin.symptoms ?? []).contains(.cough)
+            hadSymptom(.cough)
                 ? ("COUGH_CHECKIN_QUESTION", "COUGH_CHECKIN_DETAIL")
                 : ("COUGH_QUESTION", "COUGH_DETAIL")
         }()
@@ -60,21 +60,50 @@ class CheckinCoordinator: Coordinator {
         let vc = QuestionSymptomsViewController.instantiate()
         vc.inject(
             pageNumber: 2,
-            pageCount: 2,
+            pageCount: 3,
             questionTitle: title.localized,
             questionDetail: detail.localized,
             questionError: "COUGH_ERROR".localized,
             questionYes: "COUGH_YES".localized,
             questionNo: "COUGH_NO".localized,
-            buttonText: "Submit"
+            buttonText: "Continue"
         ) { hasNewCough in
             if hasNewCough {
                 self.symptoms.insert(.cough)
+            }
+
+            self.openAnosmiaView()
+        }
+
+        navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func openAnosmiaView() {
+        let title = hadSymptom(.anosmia)
+            ? "ANOSMIA_CHECKIN_QUESTION"
+            : "ANOSMIA_QUESTION"
+        let vc = QuestionSymptomsViewController.instantiate()
+        vc.inject(
+            pageNumber: 3,
+            pageCount: 3,
+            questionTitle: title.localized,
+            questionDetail: "ANOSMIA_DETAIL".localized,
+            questionError: "ANOSMIA_ERROR".localized,
+            questionYes: "ANOSMIA_YES".localized,
+            questionNo: "ANOSMIA_NO".localized,
+            buttonText: "Submit"
+        ) { hasAnosmia in
+            if hasAnosmia {
+                self.symptoms.insert(.anosmia)
             }
 
             self.completion(self.symptoms)
         }
 
         navigationController.pushViewController(vc, animated: true)
+    }
+    
+    private func hadSymptom(_ symptom: Symptom) -> Bool {
+        return (checkin.symptoms ?? []).contains(symptom)
     }
 }

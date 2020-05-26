@@ -35,6 +35,8 @@ class StatusViewController: UIViewController, Storyboarded {
 
     @IBOutlet weak var nhsServicesStackView: UIStackView!
     @IBOutlet weak var nhsCoronavirusLinkButton: LinkButton!
+    
+    var animateTransitions = true
 
     var hasNotificationProblem = false {
         didSet {
@@ -54,8 +56,17 @@ class StatusViewController: UIViewController, Storyboarded {
     private var registrationService: RegistrationService!
     private var notificationCenter: NotificationCenter!
     private var urlOpener: TestableUrlOpener!
+    private var drawerPresenter: DrawerPresenter!
     
-    func inject(statusStateMachine: StatusStateMachining, userStatusProvider: UserStatusProvider, persistence: Persisting, linkingIdManager: LinkingIdManaging, registrationService: RegistrationService, dateProvider: @escaping () -> Date = { Date() }, notificationCenter: NotificationCenter
+    func inject(
+        statusStateMachine: StatusStateMachining,
+        userStatusProvider: UserStatusProvider,
+        persistence: Persisting,
+        linkingIdManager: LinkingIdManaging,
+        registrationService: RegistrationService,
+        dateProvider: @escaping () -> Date = { Date() },
+        notificationCenter: NotificationCenter,
+        drawerPresenter: DrawerPresenter = ConcreteDrawerPresenter()
     ) {
         self.linkingIdManager = linkingIdManager
         self.statusStateMachine = statusStateMachine
@@ -64,6 +75,7 @@ class StatusViewController: UIViewController, Storyboarded {
         self.registrationService = registrationService
         self.dateProvider = dateProvider
         self.notificationCenter = notificationCenter
+        self.drawerPresenter = drawerPresenter
     }
 
     override func viewDidLoad() {
@@ -150,6 +162,10 @@ class StatusViewController: UIViewController, Storyboarded {
 
         reload()
     }
+    
+    override func present(_ viewControllerToPresent: UIViewController, animated: Bool, completion: (() -> Void)? = nil) {
+        super.present(viewControllerToPresent, animated: animated && animateTransitions, completion: completion)
+    }
 
     @objc func infoTapped() {
         UIApplication.shared.open(ContentURLs.shared.statusInfo)
@@ -158,7 +174,7 @@ class StatusViewController: UIViewController, Storyboarded {
     @IBAction func adviceTapped() {
         let adviceVc = AdviceViewController.instantiate()
         adviceVc.inject(linkDestination: content.currentAdvice(for: statusStateMachine.state))
-        navigationController?.pushViewController(adviceVc, animated: true)
+        navigationController?.pushViewController(adviceVc, animated: animateTransitions)
     }
 
     @IBAction func feelUnwellTapped(_ sender: Any) {
@@ -166,10 +182,10 @@ class StatusViewController: UIViewController, Storyboarded {
             navigationController: navigationController!,
             statusStateMachine: statusStateMachine
         ) { symptoms in
-            self.navigationController?.popToViewController(self, animated: true)
+            self.navigationController?.popToViewController(self, animated: self.animateTransitions)
 
             if symptoms.contains(.cough), case .ok = self.statusStateMachine.state {
-                self.presentCoughUpdate()
+                self.presentHaveSymptomsButDontIsolateUpdate()
             }
         }
 
@@ -183,7 +199,7 @@ class StatusViewController: UIViewController, Storyboarded {
     @IBAction func testingInfoTapped(_ sender: Any) {
         let linkingIdVc = TestingInfoContainerViewController.instantiate()
         linkingIdVc.inject(linkingIdManager: linkingIdManager, uiQueue: DispatchQueue.main)
-        navigationController?.pushViewController(linkingIdVc, animated: true)
+        navigationController?.pushViewController(linkingIdVc, animated: animateTransitions)
     }
 
     @IBAction func workplaceGuidanceTapped(_ sender: UIButton) {
@@ -195,10 +211,14 @@ class StatusViewController: UIViewController, Storyboarded {
 
     fileprivate func presentPrompt(for checkin: StatusState.Checkin) {
         let symptomsPromptViewController = SymptomsPromptViewController.instantiate()
-        symptomsPromptViewController.modalPresentationStyle = .custom
-        symptomsPromptViewController.transitioningDelegate = drawerPresentationManager
+        
+        if animateTransitions {
+            symptomsPromptViewController.modalPresentationStyle = .custom
+            symptomsPromptViewController.transitioningDelegate = drawerPresentationManager
+        }
+        
         symptomsPromptViewController.inject { needsCheckin in
-            self.dismiss(animated: true)
+            self.dismiss(animated: self.animateTransitions)
 
             if needsCheckin {
                 let coordinator = CheckinCoordinator(
@@ -207,10 +227,10 @@ class StatusViewController: UIViewController, Storyboarded {
                 ) { symptoms in
                     self.statusStateMachine.checkin(symptoms: symptoms)
                         
-                    self.navigationController!.popToRootViewController(animated: true)
+                    self.navigationController!.popToRootViewController(animated: self.animateTransitions)
 
-                    if symptoms.contains(.cough), case .ok = self.statusStateMachine.state {
-                        self.presentCoughUpdate()
+                    if symptoms.any(), case .ok = self.statusStateMachine.state {
+                        self.presentHaveSymptomsButDontIsolateUpdate()
                     }
                 }
                 coordinator.start()
@@ -218,7 +238,7 @@ class StatusViewController: UIViewController, Storyboarded {
                 self.statusStateMachine.checkin(symptoms: [])
             }
         }
-        present(symptomsPromptViewController, animated: true)
+        present(symptomsPromptViewController, animated: animateTransitions)
     }
 
     @IBAction func goToSettingsTapped() {
@@ -236,7 +256,7 @@ class StatusViewController: UIViewController, Storyboarded {
         let alertAction = UIAlertAction(title: "NOTIFICATIONS_DISABLED_ALERT_OK".localized, style: .default)
         alertController.addAction(alertAction)
         
-        present(alertController, animated: true, completion: nil)
+        present(alertController, animated: animateTransitions, completion: nil)
     }
 
     @objc func reload() {
@@ -324,12 +344,14 @@ class StatusViewController: UIViewController, Storyboarded {
 
     }
 
-    private func presentCoughUpdate() {
+    private func presentHaveSymptomsButDontIsolateUpdate() {
         let config = DrawerViewController.Config(
-            header: "COUGH_UPDATE_HEADER".localized,
-            detail: "COUGH_UPDATE_DETAIL".localized
+            header: "HAVE_SYMPTOMS_BUT_DONT_ISOLATE_DRAWER_HEADER".localized,
+            detail: "HAVE_SYMPTOMS_BUT_DONT_ISOLATE_DRAWER_DETAIL".localized
         )
-        performSegue(withIdentifier: "presentDrawer", sender: config)
+        let drawer = DrawerViewController.instantiate()
+        drawer.inject(config: config)
+        presentDrawer(drawVC: drawer)
     }
     
     private func presentTestResultUpdate(result: TestResult.ResultType) {
@@ -341,7 +363,35 @@ class StatusViewController: UIViewController, Storyboarded {
         
         performSegue(withIdentifier: "presentDrawer", sender: config)
     }
+        
+    private func presentDrawer(drawVC: UIViewController) {
+        self.drawerPresenter.present(
+            drawer: drawVC,
+            inNavigationController: navigationController!,
+            usingTransitioningDelegate: drawerPresentationManager
+        )
+    }
+}
 
+protocol DrawerPresenter {
+    func present(
+        drawer: UIViewController,
+        inNavigationController: UINavigationController,
+        usingTransitioningDelegate: UIViewControllerTransitioningDelegate
+    )
+}
+
+class ConcreteDrawerPresenter: DrawerPresenter {
+    func present(
+        drawer: UIViewController,
+        inNavigationController navigationController: UINavigationController,
+        usingTransitioningDelegate delegate: UIViewControllerTransitioningDelegate
+    ) {
+        drawer.modalPresentationStyle = .custom
+        drawer.transitioningDelegate = delegate
+        
+        navigationController.visibleViewController!.present(drawer, animated: true)
+    }
 }
 
 private let logger = Logger(label: "StatusViewController")

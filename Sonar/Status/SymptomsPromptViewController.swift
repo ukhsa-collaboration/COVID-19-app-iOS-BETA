@@ -19,11 +19,11 @@ class SymptomsPromptViewController: UIViewController, Storyboarded {
         self.completion = completion
     }
     
-    @IBAction func updateSymptoms(_ sender: Any) {
+    @IBAction func updateSymptoms() {
         completion(true)
     }
     
-    @IBAction func noSymptoms(_ sender: Any) {
+    @IBAction func noSymptoms() {
         completion(false)
     }
 }

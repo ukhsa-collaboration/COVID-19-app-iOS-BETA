@@ -18,6 +18,7 @@
 		0937F78F247461D40010FB3B /* ReferenceCodeContainerViewControllerBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0937F78E247461D40010FB3B /* ReferenceCodeContainerViewControllerBase.swift */; };
 		0938D9062474473E006FAADF /* ApplyForTestContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0938D9052474473E006FAADF /* ApplyForTestContainerViewController.swift */; };
 		0938D9092474484B006FAADF /* ApplyForTestContainerViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0938D9082474484B006FAADF /* ApplyForTestContainerViewControllerTests.swift */; };
+		094D561D247D8005007BC772 /* PresentationSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094D561C247D8005007BC772 /* PresentationSpy.swift */; };
 		095283A6247597DA00CDEE55 /* BackgroundableTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095283A5247597DA00CDEE55 /* BackgroundableTimer.swift */; };
 		095283A82475990B00CDEE55 /* BackgroundableTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095283A72475990B00CDEE55 /* BackgroundableTimerTests.swift */; };
 		095283AA2476FF2800CDEE55 /* SynchronousNavigationControllerDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095283A92476FF2800CDEE55 /* SynchronousNavigationControllerDouble.swift */; };
@@ -339,6 +340,7 @@
 		0937F78E247461D40010FB3B /* ReferenceCodeContainerViewControllerBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceCodeContainerViewControllerBase.swift; sourceTree = "<group>"; };
 		0938D9052474473E006FAADF /* ApplyForTestContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyForTestContainerViewController.swift; sourceTree = "<group>"; };
 		0938D9082474484B006FAADF /* ApplyForTestContainerViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyForTestContainerViewControllerTests.swift; sourceTree = "<group>"; };
+		094D561C247D8005007BC772 /* PresentationSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationSpy.swift; sourceTree = "<group>"; };
 		095283A5247597DA00CDEE55 /* BackgroundableTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundableTimer.swift; sourceTree = "<group>"; };
 		095283A72475990B00CDEE55 /* BackgroundableTimerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundableTimerTests.swift; sourceTree = "<group>"; };
 		095283A92476FF2800CDEE55 /* SynchronousNavigationControllerDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronousNavigationControllerDouble.swift; sourceTree = "<group>"; };
@@ -926,6 +928,7 @@
 				0983ACD1243EB20A00DBB336 /* Status */,
 				89DF66A12460171B00A55F24 /* Storage */,
 				097F053E24730A1200E633C8 /* ContentURLsTests.swift */,
+				094D561C247D8005007BC772 /* PresentationSpy.swift */,
 			);
 			path = SonarTests;
 			sourceTree = "<group>";
@@ -1731,6 +1734,7 @@
 				097C94CB245B81E8008A9695 /* EnGbLocaleProviderDouble.swift in Sources */,
 				097F054B2473457000E633C8 /* TestingInfoContainerViewControllerTests.swift in Sources */,
 				89896E622435F37300F949EA /* ProjectTests.swift in Sources */,
+				094D561D247D8005007BC772 /* PresentationSpy.swift in Sources */,
 				F604977524549C95002B8503 /* LinkingIdManagerTests.swift in Sources */,
 				F6548FA32460C1C7005F06FF /* CheckinCoordinatorTests.swift in Sources */,
 				08D77F2824767C6C00EAEBD5 /* UpdatePushNotificationTokenRequestTests.swift in Sources */,

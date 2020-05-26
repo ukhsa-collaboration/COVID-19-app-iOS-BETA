@@ -31,14 +31,20 @@ class CheckinCoordinatorTests: XCTestCase {
         XCTAssertEqual(tempVc.questionTitle, "TEMPERATURE_QUESTION".localized)
         
         tempVc.yesTapped()
-        tempVc.buttonTapped()
+        tempVc.continueTapped()
         let coughVc = try XCTUnwrap(navController.topViewController as? QuestionSymptomsViewController)
         XCTAssertNotNil(coughVc.view)
         XCTAssertEqual(coughVc.questionTitle, "COUGH_QUESTION".localized)
 
         coughVc.yesTapped()
-        coughVc.buttonTapped()
-        XCTAssertEqual(resultingSymptoms, Symptoms([.temperature, .cough]))
+        coughVc.continueTapped()
+        let anosmiaVc = try XCTUnwrap(navController.topViewController as? QuestionSymptomsViewController)
+        XCTAssertNotNil(anosmiaVc.view)
+        XCTAssertEqual(anosmiaVc.questionTitle, "ANOSMIA_QUESTION".localized)
+        
+        anosmiaVc.yesTapped()
+        anosmiaVc.continueTapped()
+        XCTAssertEqual(resultingSymptoms, Symptoms([.temperature, .cough, .anosmia]))
     }
 
     func testNoTemperatureQuestion() throws {
@@ -75,6 +81,15 @@ class CheckinCoordinatorTests: XCTestCase {
         let vc = try XCTUnwrap(navController.topViewController as? QuestionSymptomsViewController)
 
         XCTAssertEqual(vc.questionTitle, "COUGH_CHECKIN_QUESTION".localized)
+    }
+    
+    func testAnosmiaQuestion() throws {
+        coordinator = make(checkin: StatusState.Checkin(symptoms: [], checkinDate: Date()))
+
+        coordinator.openAnosmiaView()
+        let vc = try XCTUnwrap(navController.topViewController as? QuestionSymptomsViewController)
+
+        XCTAssertEqual(vc.questionTitle, "ANOSMIA_QUESTION".localized)
     }
 
     private func make(

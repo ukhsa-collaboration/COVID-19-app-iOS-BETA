@@ -42,7 +42,7 @@
                                                 <rect key="frame" x="16" y="137" width="382" height="30"/>
                                                 <state key="normal" title="Update my symptoms"/>
                                                 <connections>
-                                                    <action selector="updateSymptoms:" destination="eQJ-qc-4st" eventType="touchUpInside" id="5R1-cU-1Cg"/>
+                                                    <action selector="updateSymptoms" destination="eQJ-qc-4st" eventType="touchUpInside" id="58C-Dw-RE5"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jXP-zf-i4X" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
@@ -50,7 +50,7 @@
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                 <state key="normal" title="I no longer have symptoms"/>
                                                 <connections>
-                                                    <action selector="noSymptoms:" destination="eQJ-qc-4st" eventType="touchUpInside" id="6Ly-uP-Itc"/>
+                                                    <action selector="noSymptoms" destination="eQJ-qc-4st" eventType="touchUpInside" id="ST1-gy-Dn3"/>
                                                     <segue destination="xm7-8R-BXr" kind="unwind" unwindAction="unwindFromSymptomsPromptWithUnwindSegue:" id="bKz-7L-gfZ"/>
                                                 </connections>
                                             </button>

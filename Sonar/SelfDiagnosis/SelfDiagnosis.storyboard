@@ -567,10 +567,10 @@
                                 <viewLayoutGuide key="contentLayoutGuide" id="E59-DU-XDW"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="iFz-7g-QPe"/>
                             </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N2a-2g-6VM" userLabel="Button" customClass="PrimaryButton" customModule="Sonar" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N2a-2g-6VM" userLabel="Continue Button" customClass="PrimaryButton" customModule="Sonar" customModuleProvider="target">
                                 <rect key="frame" x="20" y="812" width="374" height="30"/>
                                 <connections>
-                                    <action selector="buttonTapped" destination="iIR-bG-zmI" eventType="touchUpInside" id="Vco-5f-qZ4"/>
+                                    <action selector="continueTapped" destination="iIR-bG-zmI" eventType="touchUpInside" id="qfI-j1-rEC"/>
                                 </connections>
                             </button>
                         </subviews>

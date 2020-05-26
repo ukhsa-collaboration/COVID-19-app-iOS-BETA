@@ -95,15 +95,15 @@ class SymptomsCoughPage : Page {
 
 class SymptomsAnosmiaPage : Page {
     var title: XCUIElement {
-        app.staticTexts["Have you recently lost your sense of smell?"]
+        app.staticTexts["Have you had a loss or change to your sense of smell or taste?"]
     }
     
     var anosmiaOption: XCUIElement {
-        app.buttons["Yes, I have lost my sense of smell"]
+        app.buttons["Yes, I have a loss or change to my sense of smell or taste"]
     }
     
     var noAnosmiaOption: XCUIElement {
-        app.buttons["No, I have not lost my sense of smell"]
+        app.buttons["No, I don’t have a loss or change to my sense of smell or taste"]
     }
     
     var continueButton: XCUIElement {
@@ -236,14 +236,32 @@ class CheckinCoughPage : Page {
         app.buttons["No, I do not have a new continuous cough"]
     }
     
-    var submitButton: XCUIElement {
+    var continueButton: XCUIElement {
+        app.buttons["Continue"]
+    }
+}
+
+class CheckinAnosmiaPage: Page {
+    var title: XCUIElement {
+        app.staticTexts["Do you still have a loss or change to your sense of smell or taste?"]
+    }
+    
+    var haveSymptomsOption: XCUIElement {
+        app.buttons["Yes, I have a loss or change to my sense of smell or taste"]
+    }
+    
+    var noSymptomsOption: XCUIElement {
+        app.buttons["No, I don’t have a loss or change to my sense of smell or taste"]
+    }
+    
+    var continueButton: XCUIElement {
         app.buttons["Submit"]
     }
 }
 
 class CheckinAdvicePage : Page {
-    var stillHaveCough: XCUIElement {
-        app.staticTexts["Although you still have a continuous cough, you can now follow the current advice."]
+    var stillHaveSymptomsButDontIsolate: XCUIElement {
+        app.staticTexts["Although you still have some symptoms you can now stop self-isolating and follow the current advice for the general public."]
     }
     
     var closeButton: XCUIElement {
