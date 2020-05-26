@@ -90,7 +90,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     )
     
     lazy var testResultNotificationHandler: TestResultNotificationHandler = TestResultNotificationHandler(
-        statusStateMachine: statusStateMachine
+        statusStateMachine: statusStateMachine,
+        userNotificationCenter: userNotificationCenter
     )
 
     lazy var notificationAcknowledger: NotificationAcknowledger = NotificationAcknowledger(
