@@ -104,6 +104,10 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
             // Reconnect to all the peripherals we found in willRestoreState (assume calling connect is idempotent)
             for peripheral in peripherals.values {
                 central.connect(peripheral)
+                if peripheral.state == .connected {
+                    logger.info("reading rssi for .connected peripheral \(peripheral.identifierWithName)")
+                    peripheral.readRSSI()
+                }
             }
             
             central.scanForPeripherals(withServices: [Environment.sonarServiceUUID])
@@ -133,6 +137,24 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
         peripheral.delegate = self
         peripheral.readRSSI()
         peripheral.discoverServices([Environment.sonarServiceUUID])
+    }
+    
+    func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
+        switch error {
+            
+        case (let error as CBATTError) where error.code == .unlikelyError:
+            logger.info("peripheral \(peripheral.identifierWithName) error: \(error)")
+            peripherals.removeValue(forKey: peripheral.identifier)
+            central.cancelPeripheralConnection(peripheral)
+            
+        case (let error?):
+            logger.info("peripheral \(peripheral.identifierWithName) error: \(error)")
+            central.connect(peripheral)
+            
+        default:
+            logger.info("peripheral \(peripheral.identifierWithName)")
+            central.connect(peripheral)
+        }
     }
 
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
@@ -257,8 +279,12 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
             return
         }
 
-        logger.info("reading RSSI for \(peripherals.values.count) \(peripherals.values.count == 1 ? "peripheral" : "peripherals")")
         for peripheral in peripherals.values {
+            guard peripheral.state == .connected else {
+                logger.info("skipping RSSI for \(peripheral.identifierWithName) as it is in state \(peripheral.state)")
+                continue
+            }
+            logger.info(" reading RSSI for \(peripheral.identifierWithName)")
             peripheral.readRSSI()
         }
         
