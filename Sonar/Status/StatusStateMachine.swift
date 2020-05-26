@@ -19,7 +19,7 @@ protocol StatusStateMachining {
     func exposed()
     func unexposed()
     func ok()
-    func received(_ result: TestResult.Result)
+    func received(_ result: TestResult.ResultType)
     
     func clearInterstitialState()
 }
@@ -205,7 +205,7 @@ class StatusStateMachine: StatusStateMachining {
         transition(from: unexposed, to: StatusState.Ok())
     }
 
-    func received(_ result: TestResult.Result) {
+    func received(_ result: TestResult.ResultType) {
         add(notificationRequest: testResultNotification)
 
         let unhandledResult = {

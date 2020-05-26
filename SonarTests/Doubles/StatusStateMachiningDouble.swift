@@ -42,7 +42,7 @@ class StatusStateMachiningDouble: StatusStateMachining {
     }
 
     var receivedTestResult = false
-    func received(_ result: TestResult.Result) {
+    func received(_ result: TestResult.ResultType) {
         receivedTestResult = true
     }
     

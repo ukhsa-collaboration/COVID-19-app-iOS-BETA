@@ -9,21 +9,21 @@
 import Foundation
 
 struct TestResult: Codable {
-    let result: Result
     let testTimestamp: String?
+    let result: ResultType
     let type: String?
     let acknowledgementUrl: String?
 }
 
 extension TestResult {
-    enum Result: String, Codable {
+    enum ResultType: String, Codable {
         case positive = "POSITIVE"
         case negative = "NEGATIVE"
         case unclear = "INVALID" // Backend calls this invalid
     }
 }
 
-extension TestResult.Result {
+extension TestResult.ResultType {
     var headerText: String { "TEST_UPDATE_DRAW_\(rawValue)_HEADER".localized }
     var detailText: String { "TEST_UPDATE_DRAW_\(rawValue)_DETAIL".localized }
 }
