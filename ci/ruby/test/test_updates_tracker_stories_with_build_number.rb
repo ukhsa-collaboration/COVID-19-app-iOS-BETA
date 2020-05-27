@@ -3,21 +3,16 @@ require 'tmpdir'
 require 'minitest/autorun'
 require 'webmock/minitest'
 
+require 'test_support/git_test_support'
+
 require 'updates_tracker_stories_with_build_number'
 
 WebMock.disable_net_connect!
 
 class TestUpdatesTrackerStoryWithBuildNumber < MiniTest::Test
+  include GitTestSupport
   include WebMock::Matchers
   include UpdatesTrackerStoriesWithBuildNumber
-
-  private def git_empty_commit(message)
-    system(
-      'git', '-C', tmpdir, 'commit',
-      '--allow-empty',
-      '--message', message
-    )
-  end
 
   attr_accessor :tracker_token
   attr_accessor :build_number
@@ -36,7 +31,8 @@ class TestUpdatesTrackerStoryWithBuildNumber < MiniTest::Test
       'Accept-Encoding' => /.*/,
     }
 
-    system('git', 'init', tmpdir)
+    git_init(tmpdir)
+
     git_empty_commit('first commit')
 
     stub_request(:any, %r{https://www.pivotaltracker.com.*})
