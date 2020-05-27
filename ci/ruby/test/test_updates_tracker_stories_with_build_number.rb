@@ -1,9 +1,9 @@
 require 'tmpdir'
 
 require 'minitest/autorun'
-require 'webmock/minitest'
 
 require 'test_support/git_test_support'
+require 'test_support/tracker_webmock_support'
 
 require 'updates_tracker_stories_with_build_number'
 
@@ -11,7 +11,7 @@ WebMock.disable_net_connect!
 
 class TestUpdatesTrackerStoryWithBuildNumber < MiniTest::Test
   include GitTestSupport
-  include WebMock::Matchers
+  include TrackerWebmockSupport
   include UpdatesTrackerStoriesWithBuildNumber
 
   attr_accessor :tracker_token
@@ -287,98 +287,6 @@ class TestUpdatesTrackerStoryWithBuildNumber < MiniTest::Test
       story_id: story_2_id,
       message: "This was delivered in TestFlight build #{build_number}",
       times: 1
-    )
-  end
-
-  private def assert_create_story_comment_requested(
-    project_id:,
-    story_id:,
-    message:,
-    times: 1
-  )
-    assert_requested(
-      :post,
-      "#{TRACKER_API}/projects/#{project_id}/stories/#{story_id}/comments",
-      headers: stub_headers,
-      body: {
-        :text => message
-      }.to_json,
-      times: times
-    )
-  end
-
-  private def assert_get_story_request(
-    story_id:,
-    times: 1
-  )
-    assert_requested(
-      :get,
-      "#{TRACKER_API}/stories/#{story_id}",
-      headers: stub_headers
-    )
-  end
-
-  private def assert_create_story_comment_not_requested(story_id:)
-    assert_not_requested(
-      :post,
-      %r{#{TRACKER_API}/projects/\d+/stories/#{story_id}/comments},
-      headers: stub_headers
-    )
-  end
-
-  private def _stub_me_request
-    stub_request(
-      :get,
-      "#{TRACKER_API}/me"
-    ).with(
-      headers: stub_headers
-    )
-  end
-
-  private def stub_me_request_200
-    _stub_me_request.to_return(
-      status: 200,
-    )
-  end
-
-  private def stub_me_request_401
-    _stub_me_request.to_return(
-      status: 401,
-    )
-  end
-
-  private def stub_get_story_request(
-    project_id:,
-    story_id:
-  )
-    _stub_get_story_request(story_id).to_return(
-      status: 200,
-      body: { :project_id => project_id }.to_json
-    )
-  end
-
-  private def stub_get_story_request_404(
-    story_id:
-  )
-    _stub_get_story_request(story_id).to_return(
-      status: 404,
-    )
-  end
-
-  private def stub_get_story_request_403(
-    story_id:
-  )
-    _stub_get_story_request(story_id).to_return(
-      status: 403,
-    )
-  end
-
-  private def _stub_get_story_request(story_id)
-    stub_request(
-      :get,
-      "#{TRACKER_API}/stories/#{story_id}"
-    ).with(
-      headers: stub_headers
     )
   end
 
