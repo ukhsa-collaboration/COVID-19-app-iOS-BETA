@@ -57,6 +57,7 @@ class StatusViewController: UIViewController, Storyboarded {
     private var notificationCenter: NotificationCenter!
     private var urlOpener: TestableUrlOpener!
     private var drawerPresenter: DrawerPresenter!
+    private var localeProvider: LocaleProvider!
     
     func inject(
         statusStateMachine: StatusStateMachining,
@@ -66,7 +67,8 @@ class StatusViewController: UIViewController, Storyboarded {
         registrationService: RegistrationService,
         dateProvider: @escaping () -> Date = { Date() },
         notificationCenter: NotificationCenter,
-        drawerPresenter: DrawerPresenter = ConcreteDrawerPresenter()
+        drawerPresenter: DrawerPresenter = ConcreteDrawerPresenter(),
+        localeProvider: LocaleProvider
     ) {
         self.linkingIdManager = linkingIdManager
         self.statusStateMachine = statusStateMachine
@@ -76,6 +78,7 @@ class StatusViewController: UIViewController, Storyboarded {
         self.dateProvider = dateProvider
         self.notificationCenter = notificationCenter
         self.drawerPresenter = drawerPresenter
+        self.localeProvider = localeProvider
     }
 
     override func viewDidLoad() {
@@ -173,7 +176,7 @@ class StatusViewController: UIViewController, Storyboarded {
 
     @IBAction func adviceTapped() {
         let adviceVc = AdviceViewController.instantiate()
-        adviceVc.inject(linkDestination: content.currentAdvice(for: statusStateMachine.state))
+        adviceVc.inject(state: statusStateMachine.state, localeProvider: localeProvider)
         navigationController?.pushViewController(adviceVc, animated: animateTransitions)
     }
 

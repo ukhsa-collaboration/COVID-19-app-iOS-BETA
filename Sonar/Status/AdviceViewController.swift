@@ -14,16 +14,31 @@ class AdviceViewController: UIViewController, Storyboarded {
     @IBOutlet weak var header: UILabel!
     @IBOutlet weak var detail: UILabel!
     @IBOutlet weak var link: LinkButton!
-    private var url: URL!
+    private var state: StatusState!
+    private var localeProvider: LocaleProvider!
     
-    func inject(linkDestination: URL) {
-        url = linkDestination
+    func inject(state: StatusState, localeProvider: LocaleProvider) {
+        self.state = state
+        self.localeProvider = localeProvider
     }
     
     override func viewDidLoad() {
         link.textStyle = .headline
-        link.url = url
+        link.url = ContentURLs.shared.currentAdvice(for: state)
 
-        detail.text = "The advice below is up to date and specific to your situation. Please follow this advice."
+        switch state {
+        case .exposed(let stateDetail):
+            detail.text = "The advice below is up-to-date and specific to your situation. Follow this advice until \(localizedDate(stateDetail.expiryDate, "d MMMM y"))."
+        default:
+            detail.text = "The advice below is up-to-date and specific to your situation. Please follow this advice."
+        }
+    }
+    
+    private func localizedDate(_ date: Date, _ template: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = localeProvider.locale
+        dateFormatter.dateStyle = .none
+        dateFormatter.setLocalizedDateFormatFromTemplate(template)
+        return dateFormatter.string(from: date)
     }
 }

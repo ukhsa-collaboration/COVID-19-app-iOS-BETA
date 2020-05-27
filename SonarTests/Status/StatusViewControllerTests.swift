@@ -117,12 +117,14 @@ class StatusViewControllerTests: TestCase {
         let adviceVc = try XCTUnwrap(vc.navigationController?.viewControllers.last as? AdviceViewController)
         XCTAssertNotNil(adviceVc.view)
         XCTAssertEqual(adviceVc.link.url, URL(string: "https://faq.covid19.nhs.uk/article/KA-01062/en-us"))
+        XCTAssertEqual(adviceVc.detail.text, "The advice below is up-to-date and specific to your situation. Please follow this advice.")
     }
     
     func testShowsCorrectAdviceInExposedStatus() throws {
+        let exposureDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 30))!
         let vc = makeViewController(
             persistence: PersistenceDouble(),
-            statusStateMachine: StatusStateMachiningDouble(state: .exposed(StatusState.Exposed(startDate: Date())))
+            statusStateMachine: StatusStateMachiningDouble(state: .exposed(StatusState.Exposed(startDate: exposureDate)))
         )
         let navigationController = SynchronousNavigationControllerDouble()
         navigationController.viewControllers = [vc]
@@ -132,6 +134,7 @@ class StatusViewControllerTests: TestCase {
         let adviceVc = try XCTUnwrap(vc.navigationController?.viewControllers.last as? AdviceViewController)
         XCTAssertNotNil(adviceVc.view)
         XCTAssertEqual(adviceVc.link.url, URL(string: "https://faq.covid19.nhs.uk/article/KA-01063/en-us"))
+        XCTAssertEqual(adviceVc.detail.text, "The advice below is up-to-date and specific to your situation. Follow this advice until 14 May 2020.")
     }
     
     func testShowsCorrectAdviceInSymptomaticStatus() throws {
@@ -147,6 +150,7 @@ class StatusViewControllerTests: TestCase {
         let adviceVc = try XCTUnwrap(vc.navigationController?.viewControllers.last as? AdviceViewController)
         XCTAssertNotNil(adviceVc.view)
         XCTAssertEqual(adviceVc.link.url, URL(string: "https://faq.covid19.nhs.uk/article/KA-01078/en-us"))
+        XCTAssertEqual(adviceVc.detail.text, "The advice below is up-to-date and specific to your situation. Please follow this advice.")
     }
     
     func testShowsCorrectAdviceInPositiveTestStatus() throws {
@@ -162,6 +166,7 @@ class StatusViewControllerTests: TestCase {
         let adviceVc = try XCTUnwrap(vc.navigationController?.viewControllers.last as? AdviceViewController)
         XCTAssertNotNil(adviceVc.view)
         XCTAssertEqual(adviceVc.link.url, URL(string: "https://faq.covid19.nhs.uk/article/KA-01064/en-us"))
+        XCTAssertEqual(adviceVc.detail.text, "The advice below is up-to-date and specific to your situation. Please follow this advice.")
     }
     
     func testShowsDrawerAfterCheckinIfCoughButNoTemperature() throws {
@@ -271,7 +276,8 @@ class StatusViewControllerTests: TestCase {
             linkingIdManager: LinkingIdManagerDouble(),
             registrationService: registrationService,
             notificationCenter: notificationCenter,
-            drawerPresenter: drawerPresenter
+            drawerPresenter: drawerPresenter,
+            localeProvider: EnGbLocaleProviderDouble()
         )
         
         vc.animateTransitions = !makePresentSynchronous
