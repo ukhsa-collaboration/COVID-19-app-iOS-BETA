@@ -190,10 +190,6 @@ class StatusViewController: UIViewController, Storyboarded {
             statusStateMachine: statusStateMachine
         ) { symptoms in
             self.navigationController?.popToViewController(self, animated: self.animateTransitions)
-
-            if symptoms.contains(.cough), case .ok = self.statusStateMachine.state {
-                self.presentHaveSymptomsButDontIsolateUpdate()
-            }
         }
 
         coordinator.start()
@@ -263,10 +259,6 @@ class StatusViewController: UIViewController, Storyboarded {
                     self.statusStateMachine.checkin(symptoms: symptoms)
                         
                     self.navigationController!.popToRootViewController(animated: self.animateTransitions)
-
-                    if symptoms.any(), case .ok = self.statusStateMachine.state {
-                        self.presentHaveSymptomsButDontIsolateUpdate()
-                    }
                 }
                 coordinator.start()
             } else {
@@ -366,7 +358,11 @@ class StatusViewController: UIViewController, Storyboarded {
             }
             presentDrawer(with: config)
         case .symptomsButNotSymptomatic:
-            assertionFailure("TODO")
+            let config = DrawerViewController.Config(
+                header: "HAVE_SYMPTOMS_BUT_DONT_ISOLATE_DRAWER_HEADER".localized,
+                detail: "HAVE_SYMPTOMS_BUT_DONT_ISOLATE_DRAWER_DETAIL".localized
+            )
+            presentDrawer(with: config)
         case .testResult(.positive):
             assertionFailure("TODO")
         case .testResult(.negative):
@@ -397,14 +393,6 @@ class StatusViewController: UIViewController, Storyboarded {
         stepsDetailLabel.text = "If you don’t have any symptoms, there’s no need to do anything right now. If you develop symptoms, please come back to this app."
     }
 
-    private func presentHaveSymptomsButDontIsolateUpdate() {
-        let config = DrawerViewController.Config(
-            header: "HAVE_SYMPTOMS_BUT_DONT_ISOLATE_DRAWER_HEADER".localized,
-            detail: "HAVE_SYMPTOMS_BUT_DONT_ISOLATE_DRAWER_DETAIL".localized
-        )
-        presentDrawer(with: config)
-    }
-    
     private func presentTestResultUpdate(result: TestResult.ResultType) {
         let header = result.headerText
         let detail = result.detailText

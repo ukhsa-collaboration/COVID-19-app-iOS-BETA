@@ -100,6 +100,8 @@ class StatusStateMachineTests: XCTestCase {
 
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.identifier, "Diagnosis")
+
+        XCTAssertNil(drawerMailbox.receive())
     }
 
     func testSelfDiagnoseTemperatureAfterSevenDays() throws {
@@ -120,6 +122,8 @@ class StatusStateMachineTests: XCTestCase {
 
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.identifier, "Diagnosis")
+
+        XCTAssertNil(drawerMailbox.receive())
     }
 
     func testSelfDiagnoseCoughAfterSevenDaysIsOk() throws {
@@ -134,6 +138,22 @@ class StatusStateMachineTests: XCTestCase {
         XCTAssertEqual(contactEventsUploader.uploadStartDate, startDate)
 
         XCTAssertNil(userNotificationCenter.requests.first)
+        XCTAssertEqual(drawerMailbox.receive(), .symptomsButNotSymptomatic)
+    }
+
+    func testSelfDiagnoseAnosmiaAfterSevenDaysIsOk() throws {
+        currentDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 8, hour: 8))!
+        persisting.statusState = .ok(StatusState.Ok())
+
+        let startDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 1, hour: 6))!
+        try machine.selfDiagnose(symptoms: [.anosmia], startDate: startDate)
+
+        XCTAssertEqual(machine.state, .ok(StatusState.Ok()))
+
+        XCTAssertEqual(contactEventsUploader.uploadStartDate, startDate)
+
+        XCTAssertNil(userNotificationCenter.requests.first)
+        XCTAssertEqual(drawerMailbox.receive(), .symptomsButNotSymptomatic)
     }
 
     func testExposedToSymptomatic() throws {
@@ -153,6 +173,8 @@ class StatusStateMachineTests: XCTestCase {
 
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.identifier, "Diagnosis")
+
+        XCTAssertNil(drawerMailbox.receive())
     }
 
     func testExposedToSymptomaticAfterSevenDays() throws {
@@ -173,6 +195,8 @@ class StatusStateMachineTests: XCTestCase {
 
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.identifier, "Diagnosis")
+
+        XCTAssertNil(drawerMailbox.receive())
     }
 
     func testExposedToCoughAfterSevenDaysIsExposed() throws {
@@ -187,8 +211,25 @@ class StatusStateMachineTests: XCTestCase {
         XCTAssertEqual(contactEventsUploader.uploadStartDate, startDate)
 
         XCTAssertNil(userNotificationCenter.requests.first)
+
+        XCTAssertEqual(drawerMailbox.receive(), .symptomsButNotSymptomatic)
     }
 
+    func testExposedToAnosmiaAfterSevenDaysIsExposed() throws {
+        currentDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 8, hour: 8))!
+        persisting.statusState = .exposed(StatusState.Exposed(startDate: currentDate))
+
+        let startDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 1, hour: 6))!
+        try machine.selfDiagnose(symptoms: [.anosmia], startDate: startDate)
+
+        XCTAssertEqual(machine.state, .exposed(StatusState.Exposed(startDate: currentDate)))
+
+        XCTAssertEqual(contactEventsUploader.uploadStartDate, startDate)
+
+        XCTAssertNil(userNotificationCenter.requests.first)
+
+        XCTAssertEqual(drawerMailbox.receive(), .symptomsButNotSymptomatic)
+    }
 
     func testTickWhenExposedBeforeSeven() {
         let startDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 1, hour: 6))!

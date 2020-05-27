@@ -113,18 +113,14 @@ class StatusStateMachine: StatusStateMachining {
             let pastFirstCheckin = currentDate >= firstCheckin
             let hasTemperature = symptoms.contains(.temperature)
 
-            let checkinDate: Date
-            switch (pastFirstCheckin, hasTemperature) {
-            case (false, _):
-                checkinDate = firstCheckin
-            case (true, true):
-                checkinDate = StatusState.Symptomatic.nextCheckin(from: currentDate)
-            case (true, false):
-                // Don't change states if we're past the initial checkin
-                // date but don't have a temperature
+            guard !pastFirstCheckin || pastFirstCheckin && hasTemperature else {
+                // Don't change states if we're past the initial
+                // checkin date but don't have a temperature
+                drawerMailbox.post(.symptomsButNotSymptomatic)
                 return
             }
 
+            let checkinDate = pastFirstCheckin ? StatusState.Symptomatic.nextCheckin(from: currentDate) : firstCheckin
             let symptomatic = StatusState.Symptomatic(symptoms: symptoms, startDate: startDate, checkinDate: checkinDate)
             state = .symptomatic(symptomatic)
         case .symptomatic, .positiveTestResult, .unclearTestResult, .negativeTestResult:
@@ -179,6 +175,7 @@ class StatusStateMachine: StatusStateMachining {
                 let nextCheckin = StatusState.Symptomatic(symptoms: symptoms, startDate: symptomatic.startDate, checkinDate: checkinDate)
                 state = .symptomatic(nextCheckin)
             } else {
+                drawerMailbox.post(.symptomsButNotSymptomatic)
                 state = .ok(StatusState.Ok())
             }
         }
