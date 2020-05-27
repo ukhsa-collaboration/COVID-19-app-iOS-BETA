@@ -9,7 +9,7 @@
 import UIKit
 
 class SymptomsPromptViewController: UIViewController, Storyboarded {
-    static var storyboardName = "Status"
+    static var storyboardName = "QuestionnaireDrawer"
 
     var completion: ((_ needsCheckin: Bool) -> Void)!
 
