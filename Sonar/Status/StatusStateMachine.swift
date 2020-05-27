@@ -19,6 +19,7 @@ protocol StatusStateMachining {
     func exposed()
     func unexposed()
     func ok()
+    func set(state: StatusState)
     func received(_ testResult: TestResult)
     
     func clearInterstitialState()
@@ -249,17 +250,23 @@ class StatusStateMachine: StatusStateMachining {
     
     func receivedNegativeTestResult(testTimestamp: Date) {
         switch state.resolved() {
-        case .symptomatic(let symptomatic) where symptomatic.startDate > testTimestamp:
+        case .symptomatic(let symptomatic) where symptomatic.startDate < testTimestamp:
             state = .negativeTestResult(
-                StatusState.NegativeTestResult(symptoms: symptomatic.symptoms),
-                nextState: .symptomatic(symptomatic)
+                nextState: .ok(StatusState.Ok())
+            )
+        case .checkin(let checkin) where checkin.checkinDate < testTimestamp:
+            state = .negativeTestResult(
+                nextState: .ok(StatusState.Ok())
             )
         default:
             state = .negativeTestResult(
-                StatusState.NegativeTestResult(symptoms: []),
-                nextState: .ok(StatusState.Ok())
+                nextState: state
             )
         }
+    }
+    
+    func set(state: StatusState) {
+        self.state = state
     }
     
     func receivedUnclearTestResult() {

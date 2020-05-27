@@ -16,7 +16,7 @@ class Tracker
   end
 
   def comment(project_id, story_id, text)
-    uri = URI("#{TRACKER_API}/projects/#{project_id}/stories/#{story_id}/comments")
+    uri = URI("#{BASE_URL}/projects/#{project_id}/stories/#{story_id}/comments")
     body = JSON.dump({ text: text })
     Net::HTTP.post(uri, body, headers({ 'Content-Type' => 'application/json' }))
   end
@@ -31,7 +31,7 @@ class Tracker
 
   private
   def get(path)
-    uri = URI("#{TRACKER_API}#{path}")
+    uri = URI("#{BASE_URL}#{path}")
 
     req = Net::HTTP::Get.new(uri)
     headers.each do |(name, value)|

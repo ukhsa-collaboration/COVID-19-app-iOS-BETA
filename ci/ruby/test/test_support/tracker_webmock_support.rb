@@ -3,7 +3,18 @@ require 'webmock/minitest'
 module TrackerWebmockSupport
   include WebMock::Matchers
 
+  TRACKER_API = 'https://www.pivotaltracker.com/services/v5'
+  private_constant :TRACKER_API
+
   module_function
+
+  def stub_all_tracker_requests
+    stub_request(:any, %r{https://www.pivotaltracker.com.*})
+  end
+
+  def assert_no_tracker_requests
+    assert_not_requested(:any, %r{https://www.pivotaltracker.com.*})
+  end
 
   def assert_create_story_comment_requested(
     project_id:,

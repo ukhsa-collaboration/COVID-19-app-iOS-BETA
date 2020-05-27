@@ -49,4 +49,8 @@ class StatusStateMachiningDouble: StatusStateMachining {
     func clearInterstitialState() {
         state = state.resolved()
     }
+    
+    func set(state: StatusState) {
+        self.state = state
+    }
 }

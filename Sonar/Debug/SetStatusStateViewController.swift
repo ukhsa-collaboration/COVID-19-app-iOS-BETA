@@ -169,11 +169,9 @@ class SetStatusStateViewController: UITableViewController {
             temperature = unclearTestResult.symptoms.map { $0.contains(.temperature) } ?? false
             cough = unclearTestResult.symptoms.map { $0.contains(.cough) } ?? false
             date = unclearTestResult.startDate
-        case .negativeTestResult(let negativeTestResult, _):
+        case .negativeTestResult:
             statusLabel.text = "negative test result"
             statusPicker.selectRow(7, inComponent: 0, animated: false)
-            temperature = negativeTestResult.symptoms.map { $0.contains(.temperature) } ?? false
-            cough = negativeTestResult.symptoms.map { $0.contains(.cough) } ?? false
             date = nil
         }
     }
@@ -214,7 +212,7 @@ class SetStatusStateViewController: UITableViewController {
         case 6:
             statusState = .unclearTestResult(StatusState.UnclearTestResult(symptoms: symptoms, startDate: date!))
         case 7:
-            statusState = .negativeTestResult(StatusState.NegativeTestResult(symptoms: symptoms), nextState: .ok(StatusState.Ok()))
+            statusState = .negativeTestResult(nextState: persistence.statusState)
         default:
             fatalError()
         }
@@ -258,8 +256,7 @@ extension SetStatusStateViewController: UIPickerViewDelegate {
         case 6:
             statusState = .unclearTestResult(StatusState.UnclearTestResult(symptoms: [.temperature, .cough], startDate: Date()))
         case 7:
-            statusState = .negativeTestResult(StatusState.NegativeTestResult(symptoms: [.temperature, .cough]),
-                                              nextState: .ok(StatusState.Ok()))
+            statusState = .negativeTestResult(nextState: persistence.statusState)
         default:
             fatalError()
         }

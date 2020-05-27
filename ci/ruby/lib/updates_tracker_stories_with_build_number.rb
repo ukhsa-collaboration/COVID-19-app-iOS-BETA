@@ -3,8 +3,6 @@ require 'net/http'
 require 'tracker'
 require 'git'
 
-TRACKER_API = 'https://www.pivotaltracker.com/services/v5'
-
 module UpdatesTrackerStoriesWithBuildNumber
   include Git
 

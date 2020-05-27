@@ -98,7 +98,7 @@ class CheckinCoordinatorTests: XCTestCase {
     ) -> CheckinCoordinator {
         return CheckinCoordinator(
             navigationController: navController,
-            checkin: checkin,
+            previousSymptoms: checkin.symptoms ?? [],
             completion: completion
         )
     }

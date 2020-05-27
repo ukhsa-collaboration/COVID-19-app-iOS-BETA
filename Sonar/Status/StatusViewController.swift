@@ -208,6 +208,33 @@ class StatusViewController: UIViewController, Storyboarded {
 
     @IBAction func unwindFromDrawer(unwindSegue: UIStoryboardSegue) {
     }
+    
+    func presentNegativePrompt(symptoms: Symptoms) {
+        let symptomsPromptViewController = SymptomsPromptViewController.instantiate()
+        
+        if animateTransitions {
+            symptomsPromptViewController.modalPresentationStyle = .custom
+            symptomsPromptViewController.transitioningDelegate = drawerPresentationManager
+        }
+        symptomsPromptViewController.inject(headerText: "NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_HEADER".localized,
+                                            detailText: "NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_DETAIL".localized) { needsCheckin in
+            self.dismiss(animated: self.animateTransitions)
+
+            if needsCheckin {
+                CheckinCoordinator(navigationController: self.navigationController!, previousSymptoms: symptoms) { symptoms in
+                    if symptoms.contains(.temperature) {
+                        self.statusStateMachine.set(state: self.statusStateMachine.state.resolved())
+                    } else {
+                        self.statusStateMachine.set(state: .ok(StatusState.Ok()))
+                    }
+                    self.navigationController!.popToRootViewController(animated: self.animateTransitions)
+                }.start()
+            } else {
+                self.statusStateMachine.set(state: .ok(StatusState.Ok()))
+            }
+        }
+        present(symptomsPromptViewController, animated: animateTransitions)
+    }
 
     fileprivate func presentPrompt(for checkin: StatusState.Checkin) {
         let symptomsPromptViewController = SymptomsPromptViewController.instantiate()
@@ -217,13 +244,14 @@ class StatusViewController: UIViewController, Storyboarded {
             symptomsPromptViewController.transitioningDelegate = drawerPresentationManager
         }
         
-        symptomsPromptViewController.inject { needsCheckin in
+        symptomsPromptViewController.inject(headerText: "CHECKIN_QUESTIONNAIRE_OVERLAY_HEADER".localized,
+                                            detailText: "CHECKIN_QUESTIONNAIRE_OVERLAY_DETAIL".localized) { needsCheckin in
             self.dismiss(animated: self.animateTransitions)
 
             if needsCheckin {
                 let coordinator = CheckinCoordinator(
                     navigationController: self.navigationController!,
-                    checkin: checkin
+                    previousSymptoms: checkin.symptoms ?? []
                 ) { symptoms in
                     self.statusStateMachine.checkin(symptoms: symptoms)
                         
@@ -258,34 +286,37 @@ class StatusViewController: UIViewController, Storyboarded {
         
         present(alertController, animated: animateTransitions, completion: nil)
     }
-
+    
     @objc func reload() {
-        guard view != nil else { return }
-
         statusStateMachine.tick()
-
-        switch statusStateMachine.state {
-        case .ok, .unexposed, .negativeTestResult:
-            diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Blue")
-            diagnosisTitleLabel.text = "Follow the current advice to stop the spread of coronavirus"
-            diagnosisDetailLabel.isHidden = true
-            feelUnwellButton.isHidden = false
-            applyForTestButton.isHidden = true
-            stepsDetailLabel.isHidden = false
-            stepsDetailLabel.text = "If you don’t have any symptoms, there’s no need to do anything right now. If you develop symptoms, please come back to this app."
-
-            if case .unexposed = statusStateMachine.state {
-                let config = DrawerViewController.Config(
-                    header: "UNEXPOSED_DRAWER_HEADER".localized,
-                    detail: "UNEXPOSED_DRAWER_DETAIL".localized
-                ) { self.statusStateMachine.ok() }
-                performSegue(withIdentifier: "presentDrawer", sender: config)
+        setupUI(for: statusStateMachine.state)
+    }
+    
+    func setupUI(for state: StatusState) {
+        guard view != nil else { return }
+        
+        switch state {
+        case .ok:
+            detailForNeutral()
+        
+        case .unexposed:
+            detailForNeutral()
+            let config = DrawerViewController.Config(
+                header: "UNEXPOSED_DRAWER_HEADER".localized,
+                detail: "UNEXPOSED_DRAWER_DETAIL".localized
+            ) { self.statusStateMachine.ok() }
+            performSegue(withIdentifier: "presentDrawer", sender: config)
+            
+        case .negativeTestResult(let nextState):
+            if nextState != state {
+                setupUI(for: nextState)
+            }
+            if case .ok = nextState {
+                presentTestResultUpdate(result: .negative)
+            } else {
+                presentNegativePrompt(symptoms: nextState.symptoms ?? [])
             }
             
-            if case .negativeTestResult = statusStateMachine.state {
-                presentTestResultUpdate(result: .negative)
-            }
-
         case .exposed:
             diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
             diagnosisTitleLabel.text = "You have been near someone who has coronavirus symptoms"
@@ -329,7 +360,6 @@ class StatusViewController: UIViewController, Storyboarded {
             
             presentTestResultUpdate(result: .positive)
         }
-        
     }
     
     func detailForSymptomatic(state: Expirable) {
@@ -341,7 +371,16 @@ class StatusViewController: UIViewController, Storyboarded {
         applyForTestButton.isHidden = false
         stepsDetailLabel.isHidden = false
         stepsDetailLabel.text = "Please book a coronavirus test immediately. Write down your reference code and phone 0800 540 4900"
-
+    }
+    
+    func detailForNeutral() {
+        diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Blue")
+        diagnosisTitleLabel.text = "Follow the current advice to stop the spread of coronavirus"
+        diagnosisDetailLabel.isHidden = true
+        feelUnwellButton.isHidden = false
+        applyForTestButton.isHidden = true
+        stepsDetailLabel.isHidden = false
+        stepsDetailLabel.text = "If you don’t have any symptoms, there’s no need to do anything right now. If you develop symptoms, please come back to this app."
     }
 
     private func presentHaveSymptomsButDontIsolateUpdate() {

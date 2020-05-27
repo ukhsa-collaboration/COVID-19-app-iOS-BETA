@@ -67,30 +67,22 @@ extension PlistPersister: ContactEventPersister where K == UUID, V == ContactEve
     }
     
     func btleListener(_ listener: BTLEListener, didFind broadcastPayload: IncomingBroadcastPayload, for peripheral: BTLEPeripheral) {
-        if let existingIdentifier = persister.items.keys.first(where: { identifier in
-            return identifier != peripheral.identifier
-                && persister.items[identifier]?.broadcastPayload?.cryptogram == broadcastPayload.cryptogram
-        }), var existingItem = persister.items[existingIdentifier] {
-
-            if let newItem = persister.items[peripheral.identifier] {
-                existingItem.merge(newItem)
-            }
-            persister.update(item: existingItem, key: peripheral.identifier)
-            persister.remove(key: existingIdentifier)
-        }
+        createNewContactEventIfBroadcastIdentifierChanged(identifier: peripheral.identifier, broadcastPayload: broadcastPayload)
         
-        if let contactEvent = persister.items[peripheral.identifier], let payload = contactEvent.broadcastPayload,  payload.cryptogram != broadcastPayload.cryptogram {
-            persister.update(item: contactEvent, key: UUID())
-            
-            var newContactEvent = ContactEvent()
-            newContactEvent.txPower = contactEvent.txPower
-            persister.update(item: newContactEvent, key: peripheral.identifier)
-        }
-
         var event = persister.items[peripheral.identifier] ?? ContactEvent()
         event.broadcastPayload = broadcastPayload
         persister.update(item: event, key: peripheral.identifier)
         delegate?.repository(self, didRecord: broadcastPayload, for: peripheral)
+    }
+    
+    private func createNewContactEventIfBroadcastIdentifierChanged(identifier: UUID, broadcastPayload: IncomingBroadcastPayload) {
+        if let contactEvent = persister.items[identifier], let payload = contactEvent.broadcastPayload, payload.cryptogram != broadcastPayload.cryptogram {
+            persister.update(item: contactEvent, key: UUID())
+            
+            var newContactEvent = ContactEvent()
+            newContactEvent.txPower = contactEvent.txPower
+            persister.update(item: newContactEvent, key: identifier)
+        }
     }
     
     func btleListener(_ listener: BTLEListener, didReadTxPower txPower: Int, for peripheral: BTLEPeripheral) {
