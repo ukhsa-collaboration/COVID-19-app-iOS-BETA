@@ -120,3 +120,6 @@ Loss of appetite: means not feeling hungry.
 Please update your symptoms to view your latest advice";
 
 "COPIED" = "Copied";
+
+"ADVICE_VIEW_CONTROLLER_DETAIL_NO_EXPIRY" = "The advice below is up to date and specific to your situation. Please follow this advice.";
+"ADVICE_VIEW_CONTROLLER_DETAIL_WITH_EXPIRY" = "The advice below is up to date and specific to your situation. Please follow this Follow this advice until %@.";

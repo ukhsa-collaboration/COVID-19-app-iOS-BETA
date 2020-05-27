@@ -138,6 +138,23 @@ extension StatusState {
     }
 }
 
+extension StatusState {
+    var expiryDate: Date? {
+        switch self {
+        case .ok, .unexposed, .negativeTestResult, .checkin:
+            return nil
+        case .positiveTestResult(let state):
+            return state.expiryDate
+        case .unclearTestResult(let state):
+            return state.expiryDate
+        case .symptomatic(let state):
+            return state.expiryDate
+        case .exposed(let state):
+            return state.expiryDate
+        }
+    }
+}
+
 extension StatusState: Encodable {
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
