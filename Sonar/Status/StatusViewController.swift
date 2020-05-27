@@ -173,8 +173,7 @@ class StatusViewController: UIViewController, Storyboarded {
 
     @IBAction func adviceTapped() {
         let adviceVc = AdviceViewController.instantiate()
-        let expiryDate = statusStateMachine.state.expiryDate
-        adviceVc.inject(linkDestination: content.currentAdvice(for: statusStateMachine.state), expiryDate: expiryDate)
+        adviceVc.inject(linkDestination: content.currentAdvice(for: statusStateMachine.state))
         navigationController?.pushViewController(adviceVc, animated: animateTransitions)
     }
 

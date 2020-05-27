@@ -192,7 +192,6 @@
 		B79A2E852476013900E8C21E /* localhost.key in Resources */ = {isa = PBXBuildFile; fileRef = B79A2E772476013800E8C21E /* localhost.key */; };
 		B79A2E862476013900E8C21E /* sonar.ca.pem in Resources */ = {isa = PBXBuildFile; fileRef = B79A2E782476013800E8C21E /* sonar.ca.pem */; };
 		B7F21885247226EB007343FA /* MatcherExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F21884247226EB007343FA /* MatcherExtensions.swift */; };
-		DD0F2109247ED019002573B2 /* Date+localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F2108247ED018002573B2 /* Date+localized.swift */; };
 		DD311913247EC554001E9807 /* NegativeTestStatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD311912247EC553001E9807 /* NegativeTestStatusTests.swift */; };
 		DD3FCF3B2476E8C3008B0237 /* TestResultNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3FCF392476E8C3008B0237 /* TestResultNotificationHandler.swift */; };
 		DD3FCF3C2476E8C3008B0237 /* ExposedNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3FCF3A2476E8C3008B0237 /* ExposedNotificationHandler.swift */; };
@@ -537,7 +536,6 @@
 		B79A2E772476013800E8C21E /* localhost.key */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = localhost.key; sourceTree = "<group>"; };
 		B79A2E782476013800E8C21E /* sonar.ca.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sonar.ca.pem; sourceTree = "<group>"; };
 		B7F21884247226EB007343FA /* MatcherExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatcherExtensions.swift; sourceTree = "<group>"; };
-		DD0F2108247ED018002573B2 /* Date+localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+localized.swift"; sourceTree = "<group>"; };
 		DD311912247EC553001E9807 /* NegativeTestStatusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NegativeTestStatusTests.swift; sourceTree = "<group>"; };
 		DD3FCF392476E8C3008B0237 /* TestResultNotificationHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestResultNotificationHandler.swift; sourceTree = "<group>"; };
 		DD3FCF3A2476E8C3008B0237 /* ExposedNotificationHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExposedNotificationHandler.swift; sourceTree = "<group>"; };
@@ -1484,7 +1482,6 @@
 				21B71F772451788800D0DED7 /* OptionalCoalescingString.swift */,
 				219C7B79245AE83700952B4D /* DataExtensions.swift */,
 				214CD371246B347200B24886 /* DateExtensions.swift */,
-				DD0F2108247ED018002573B2 /* Date+localized.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1944,7 +1941,6 @@
 				09CAA3662440F3B100CE93A6 /* PostcodeViewController.swift in Sources */,
 				F6BBE143246F5870005757BB /* WorkplaceGuidanceViewController.swift in Sources */,
 				F6334E4B24747DC300421B4C /* RegistrationStatusViewController.swift in Sources */,
-				DD0F2109247ED019002573B2 /* Date+localized.swift in Sources */,
 				131AB05C2449D85B002136CA /* ContactEventExpiryHandler.swift in Sources */,
 				09A9254324536FD300C5DBC1 /* RegistrationReminderScheduler.swift in Sources */,
 				F604976F24549729002B8503 /* LinkingIdRequest.swift in Sources */,
