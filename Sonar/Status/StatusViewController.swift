@@ -304,7 +304,7 @@ class StatusViewController: UIViewController, Storyboarded {
         guard view != nil else { return }
         
         switch state {
-        case .ok, .unexposed:
+        case .ok:
             detailForNeutral()
 
         case .negativeTestResult(let nextState):

@@ -44,7 +44,7 @@ struct ContentURLs {
 
     private func currentStatusURLs(for statusState: StatusState) -> StatusURLs {
         switch statusState.resolved() {
-        case .ok, .unexposed: return status.ok
+        case .ok: return status.ok
         case .symptomatic, .unclearTestResult: return status.symptomatic
         case .exposed: return status.exposed
         case .positiveTestResult: return status.positiveTestResult

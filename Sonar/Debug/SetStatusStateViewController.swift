@@ -145,27 +145,21 @@ class SetStatusStateViewController: UITableViewController {
             temperature = nil
             cough = nil
             date = exposed.startDate
-        case .unexposed:
-            statusLabel.text = "unexposed"
-            statusPicker.selectRow(5, inComponent: 0, animated: false)
-            temperature = nil
-            cough = nil
-            date = nil
         case .positiveTestResult(let positiveTestResult):
             statusLabel.text = "positive test result"
-            statusPicker.selectRow(6, inComponent: 0, animated: false)
+            statusPicker.selectRow(5, inComponent: 0, animated: false)
             temperature = positiveTestResult.symptoms.map { $0.contains(.temperature) } ?? false
             cough = positiveTestResult.symptoms.map { $0.contains(.cough) } ?? false
             date = positiveTestResult.startDate
         case .unclearTestResult(let unclearTestResult):
             statusLabel.text = "unclear test result"
-            statusPicker.selectRow(7, inComponent: 0, animated: false)
+            statusPicker.selectRow(6, inComponent: 0, animated: false)
             temperature = unclearTestResult.symptoms.map { $0.contains(.temperature) } ?? false
             cough = unclearTestResult.symptoms.map { $0.contains(.cough) } ?? false
             date = unclearTestResult.startDate
         case .negativeTestResult:
             statusLabel.text = "negative test result"
-            statusPicker.selectRow(8, inComponent: 0, animated: false)
+            statusPicker.selectRow(7, inComponent: 0, animated: false)
             date = nil
         }
     }
@@ -197,12 +191,10 @@ class SetStatusStateViewController: UITableViewController {
         case 2:
             statusState = .exposed(StatusState.Exposed(startDate: date!))
         case 3:
-            statusState = .unexposed(StatusState.Unexposed())
-        case 4:
             statusState = .positiveTestResult(StatusState.PositiveTestResult(symptoms: symptoms, startDate: date!))
-        case 5:
+        case 4:
             statusState = .unclearTestResult(StatusState.UnclearTestResult(symptoms: symptoms, startDate: date!))
-        case 6:
+        case 5:
             statusState = .negativeTestResult(nextState: persistence.statusState)
         default:
             fatalError()
@@ -241,12 +233,10 @@ extension SetStatusStateViewController: UIPickerViewDelegate {
         case 2:
             statusState = .exposed(StatusState.Exposed(startDate: Date()))
         case 3:
-            statusState = .unexposed(StatusState.Unexposed())
-        case 4:
             statusState = .positiveTestResult(StatusState.PositiveTestResult(symptoms: [.temperature, .cough], startDate: Date()))
-        case 5:
+        case 4:
             statusState = .unclearTestResult(StatusState.UnclearTestResult(symptoms: [.temperature, .cough], startDate: Date()))
-        case 6:
+        case 5:
             statusState = .negativeTestResult(nextState: persistence.statusState)
         default:
             fatalError()
