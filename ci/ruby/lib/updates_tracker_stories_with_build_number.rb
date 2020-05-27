@@ -22,6 +22,8 @@ module UpdatesTrackerStoriesWithBuildNumber
       .map {|m| m[0] }
       .uniq
 
+    puts "story_ids: [#{story_ids.join(", ")}]"
+
     if !story_ids.empty?
       status, = tracker.me
       raise 'unable to authenticate with pivotal tracker' if status != :success
