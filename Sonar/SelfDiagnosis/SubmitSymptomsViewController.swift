@@ -108,7 +108,7 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
 
     private func presentErrorToUser() {
         errorView.isHidden = false
-        errorView.errorMessage.text = "Please confirm that the information you have entered is accurate".localized
+        errorView.errorMessage.text = "Select if the information you have entered is accurate".localized
         confirmSwitch.layer.cornerRadius = 16
     }
 }
