@@ -41,6 +41,9 @@ class UITestScreenMaker {
         userNotificationCenter: userNotificationCenter,
         dateProvider: self.dateProvider
     )
+    private lazy var drawerMailbox = DrawerMailbox(
+        persistence: persistence
+    )
 
     func resetTime() {
         mockedDate = Date()
@@ -106,6 +109,7 @@ class UITestScreenMaker {
                 registrationService: registrationService,
                 dateProvider: self.dateProvider,
                 notificationCenter: notificationCenter,
+                drawerMailbox: drawerMailbox,
                 localeProvider: AutoupdatingCurrentLocaleProvider()
             )
         }

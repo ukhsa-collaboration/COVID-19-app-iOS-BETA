@@ -41,7 +41,9 @@ class DrawerMailbox: DrawerMailboxing {
     }
 
     func receive() -> DrawerMessage? {
-        return messages.isEmpty ? nil : messages.removeFirst()
+        guard !messages.isEmpty else { return nil }
+
+        return messages.removeFirst()
     }
 
     func post(_ message: DrawerMessage) {

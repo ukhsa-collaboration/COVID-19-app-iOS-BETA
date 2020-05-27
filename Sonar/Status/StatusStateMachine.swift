@@ -103,29 +103,27 @@ class StatusStateMachine: StatusStateMachining {
             return
         }
 
-        #warning("TODO refactor")
         switch state {
-        case .ok:
-            let checkinDate = StatusState.Symptomatic.firstCheckin(from: startDate)
-            let symptomatic = StatusState.Symptomatic(symptoms: symptoms, startDate: startDate, checkinDate: checkinDate)
+        case .ok, .exposed:
             try contactEventsUploader.upload(from: startDate, with: symptoms)
 
-            if currentDate < symptomatic.checkinDate {
-                state = .symptomatic(symptomatic)
-            } else { // expired
-                if symptoms.contains(.temperature) {
-                    let checkinDate = StatusState.Symptomatic.nextCheckin(from: currentDate)
-                    let symptomatic = StatusState.Symptomatic(symptoms: symptoms, startDate: startDate, checkinDate: checkinDate)
-                    state = .symptomatic(symptomatic)
-                } else {
-                    // don't do anything if we only have a cough
-                }
+            let firstCheckin = StatusState.Symptomatic.firstCheckin(from: startDate)
+            let pastFirstCheckin = currentDate >= firstCheckin
+            let hasTemperature = symptoms.contains(.temperature)
+
+            let checkinDate: Date
+            switch (pastFirstCheckin, hasTemperature) {
+            case (false, _):
+                checkinDate = firstCheckin
+            case (true, true):
+                checkinDate = StatusState.Symptomatic.nextCheckin(from: currentDate)
+            case (true, false):
+                // Don't change states if we're past the initial checkin
+                // date but don't have a temperature
+                return
             }
-        case .exposed:
-            #warning("TODO should be same as ok")
-            let checkinDate = StatusState.Symptomatic.firstCheckin(from: startDate)
+
             let symptomatic = StatusState.Symptomatic(symptoms: symptoms, startDate: startDate, checkinDate: checkinDate)
-            try contactEventsUploader.upload(from: startDate, with: symptoms)
             state = .symptomatic(symptomatic)
         case .symptomatic, .unexposed, .positiveTestResult, .unclearTestResult, .negativeTestResult:
             assertionFailure("Self-diagnosing is only allowed from ok/exposed")

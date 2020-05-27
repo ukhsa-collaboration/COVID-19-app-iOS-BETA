@@ -47,7 +47,8 @@ class RootViewControllerTests: TestCase {
             statusStateMachine: StatusStateMachiningDouble(state: .ok(StatusState.Ok())),
             uiQueue: QueueDouble(),
             userStatusProvider: UserStatusProvider(localeProvider: EnGbLocaleProviderDouble()),
-            urlOpener: UIApplication.shared
+            urlOpener: UIApplication.shared,
+            drawerMailbox: DrawerMailboxingDouble()
         )
     }
     

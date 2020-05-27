@@ -106,6 +106,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         userNotificationCenter: userNotificationCenter
     )
 
+    lazy var drawerMailbox = DrawerMailbox(
+        persistence: persistence
+    )
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         #if DEBUG
         if let uiTestResponder = uiTestResponder {
@@ -150,7 +154,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             statusStateMachine: statusStateMachine,
             uiQueue: DispatchQueue.main,
             userStatusProvider: userStatusProvider,
-            urlOpener: application
+            urlOpener: application,
+            drawerMailbox: drawerMailbox
         )
         
         window = UIWindow(frame: UIScreen.main.bounds)
