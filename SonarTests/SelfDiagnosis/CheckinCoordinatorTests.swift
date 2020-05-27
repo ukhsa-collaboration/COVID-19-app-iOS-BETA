@@ -21,7 +21,7 @@ class CheckinCoordinatorTests: XCTestCase {
     
     func testScreenSequence() throws {
         var resultingSymptoms: Symptoms?
-        coordinator = make(checkin: StatusState.Checkin(symptoms: [], checkinDate: Date()), completion: { symptoms in
+        coordinator = make(symptoms: [], completion: { symptoms in
             resultingSymptoms = symptoms
         })
 
@@ -48,7 +48,7 @@ class CheckinCoordinatorTests: XCTestCase {
     }
 
     func testNoTemperatureQuestion() throws {
-        coordinator = make(checkin: StatusState.Checkin(symptoms: [.cough], checkinDate: Date()))
+        coordinator = make(symptoms: [.cough])
 
         coordinator.start()
         let vc = try XCTUnwrap(navController.topViewController as? QuestionSymptomsViewController)
@@ -57,7 +57,7 @@ class CheckinCoordinatorTests: XCTestCase {
     }
 
     func testExistingTemperatureQuestion() throws {
-        coordinator = make(checkin: StatusState.Checkin(symptoms: [.temperature], checkinDate: Date()))
+        coordinator = make(symptoms: [.temperature])
 
         coordinator.start()
         let vc = try XCTUnwrap(navController.topViewController as? QuestionSymptomsViewController)
@@ -66,7 +66,7 @@ class CheckinCoordinatorTests: XCTestCase {
     }
 
     func testNoCoughQuestion() throws {
-        coordinator = make(checkin: StatusState.Checkin(symptoms: [.temperature], checkinDate: Date()))
+        coordinator = make(symptoms: [.temperature])
 
         coordinator.openCoughView()
         let vc = try XCTUnwrap(navController.topViewController as? QuestionSymptomsViewController)
@@ -75,7 +75,7 @@ class CheckinCoordinatorTests: XCTestCase {
     }
 
     func testExistingCoughQuestion() throws {
-        coordinator = make(checkin: StatusState.Checkin(symptoms: [.cough], checkinDate: Date()))
+        coordinator = make(symptoms: [.cough])
 
         coordinator.openCoughView()
         let vc = try XCTUnwrap(navController.topViewController as? QuestionSymptomsViewController)
@@ -84,7 +84,7 @@ class CheckinCoordinatorTests: XCTestCase {
     }
     
     func testAnosmiaQuestion() throws {
-        coordinator = make(checkin: StatusState.Checkin(symptoms: [], checkinDate: Date()))
+        coordinator = make(symptoms: [])
 
         coordinator.openAnosmiaView()
         let vc = try XCTUnwrap(navController.topViewController as? QuestionSymptomsViewController)
@@ -93,12 +93,12 @@ class CheckinCoordinatorTests: XCTestCase {
     }
 
     private func make(
-        checkin: StatusState.Checkin,
+        symptoms: Symptoms?,
         completion: @escaping (Symptoms) -> Void = {_ in }
     ) -> CheckinCoordinator {
         return CheckinCoordinator(
             navigationController: navController,
-            previousSymptoms: checkin.symptoms ?? [],
+            previousSymptoms: symptoms,
             completion: completion
         )
     }

@@ -30,18 +30,25 @@ extension Expirable {
 indirect enum StatusState: Equatable {
     struct Ok: Codable, Equatable {}
 
-    struct Symptomatic: Codable, Equatable, Expirable {
-        let symptoms: Symptoms
-        let startDate: Date
-        let duration = 7
-    }
+    struct Symptomatic: Codable, Equatable {
+        static func firstCheckin(from startDate: Date) -> Date {
+            return nextCheckin(from: startDate, afterDays: 7)
+        }
 
-    struct Checkin: Codable, Equatable {
-        // We can get into the checkin state without knowing
-        // initial symptoms from getting a positive test result.
+        static func nextCheckin(from startDate: Date, afterDays days: Int = 1) -> Date {
+            let startOfStartDate = Calendar.current.startOfDay(for: startDate)
+            let expiryDate = Calendar.current.nextDate(
+                after: Calendar.current.date(byAdding: .day, value: days, to: startOfStartDate)!,
+                matching: DateComponents(hour: 7),
+                matchingPolicy: .nextTime
+            )!
+            return expiryDate
+        }
+
         let symptoms: Symptoms?
-
+        let startDate: Date
         let checkinDate: Date
+
     }
 
     struct Exposed: Codable, Equatable, Expirable {
@@ -69,7 +76,6 @@ indirect enum StatusState: Equatable {
 
     case ok(Ok)                   // default state, previously "blue"
     case symptomatic(Symptomatic) // previously "red" state
-    case checkin(Checkin)
     case exposed(Exposed)         // previously "amber" state
     case unexposed(Unexposed)
     case positiveTestResult(PositiveTestResult)
@@ -82,11 +88,8 @@ indirect enum StatusState: Equatable {
         case .negativeTestResult(let nextState):
             return nextState
         case .unclearTestResult(let unclear):
-            guard let symptoms = unclear.symptoms else {
-                assertionFailure("What do we do here?")
-                return self
-            }
-            return .symptomatic(Symptomatic(symptoms: symptoms, startDate: unclear.startDate))
+            let checkinDate = StatusState.Symptomatic.firstCheckin(from: unclear.startDate)
+            return .symptomatic(Symptomatic(symptoms: symptoms, startDate: unclear.startDate, checkinDate: checkinDate))
         default:
             return self
         }
@@ -128,8 +131,6 @@ extension StatusState {
             return nil
         case .symptomatic(let state):
             return state.symptoms
-        case .checkin(let state):
-            return state.symptoms
         case .positiveTestResult(let state):
             return state.symptoms
         case .unclearTestResult(let state):
@@ -148,9 +149,6 @@ extension StatusState: Encodable {
         case .symptomatic(let symptomatic):
             try container.encode("symptomatic", forKey: .type)
             try container.encode(symptomatic, forKey: .symptomatic)
-        case .checkin(let checkin):
-            try container.encode("checkin", forKey: .type)
-            try container.encode(checkin, forKey: .checkin)
         case .exposed(let exposed):
             try container.encode("exposed", forKey: .type)
             try container.encode(exposed, forKey: .exposed)
@@ -184,9 +182,6 @@ extension StatusState: Decodable {
         case "symptomatic":
             let symptomatic = try values.decode(Symptomatic.self, forKey: .symptomatic)
             self = .symptomatic(symptomatic)
-        case "checkin":
-            let checkin = try values.decode(Checkin.self, forKey: .checkin)
-            self = .checkin(checkin)
         case "exposed":
             let exposed = try values.decode(Exposed.self, forKey: .exposed)
             self = .exposed(exposed)

@@ -56,17 +56,20 @@ class StatusStateMigration {
             }
 
             if currentDate > diagnosis.expiryDate || diagnosis.type == .subsequent {
-                return .checkin(
-                    StatusState.Checkin(
+                return .symptomatic(
+                    StatusState.Symptomatic(
                         symptoms: Symptoms(diagnosis.symptoms),
+                        startDate: diagnosis.startDate,
                         checkinDate: diagnosis.expiryDate
                     )
                 )
             } else {
+                let checkinDate = StatusState.Symptomatic.firstCheckin(from: diagnosis.startDate)
                 return .symptomatic(
                     StatusState.Symptomatic(
                         symptoms: Symptoms(diagnosis.symptoms),
-                        startDate: diagnosis.startDate
+                        startDate: diagnosis.startDate,
+                        checkinDate: checkinDate
                     )
                 )
             }

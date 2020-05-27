@@ -89,7 +89,8 @@ class UITestScreenMaker {
             return createNavigationController()
         
         case .negativeTestSymptomatic:
-            let symptomaticState = StatusState.Symptomatic(symptoms: [], startDate: self.dateProvider())
+            let checkinDate = StatusState.Symptomatic.firstCheckin(from: dateProvider())
+            let symptomaticState = StatusState.Symptomatic(symptoms: [], startDate: self.dateProvider(), checkinDate: checkinDate)
             persistence.statusState = .negativeTestResult(nextState: .symptomatic(symptomaticState))
             return createNavigationController()
         }

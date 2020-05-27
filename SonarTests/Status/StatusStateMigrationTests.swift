@@ -112,7 +112,7 @@ class StatusStateMigrationTests: XCTestCase {
             type: .initial,
             symptoms: [.temperature],
             startDate: dateSentinel, // 2020.04.01
-            expiryDate:expiryDate    // 2020.04.02
+            expiryDate: expiryDate   // 2020.04.02
         )
 
         currentDate = Calendar.current.date(byAdding: .second, value: -1, to: diagnosis.expiryDate)!
@@ -121,7 +121,13 @@ class StatusStateMigrationTests: XCTestCase {
             potentiallyExposedOn: nil
         )
 
-        XCTAssertEqual(state, .symptomatic(StatusState.Symptomatic(symptoms: [.temperature], startDate: diagnosis.startDate)))
+        let checkinDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 8, hour: 7))!
+        let symptomatic: StatusState = .symptomatic(StatusState.Symptomatic(
+            symptoms: [.temperature],
+            startDate: diagnosis.startDate,
+            checkinDate: checkinDate
+        ))
+        XCTAssertEqual(state, symptomatic)
     }
 
     func testSymptomaticInitialExpiredAndNotPotentiallyExposed() {
@@ -140,7 +146,12 @@ class StatusStateMigrationTests: XCTestCase {
         )
 
         // 2020.04.02
-        XCTAssertEqual(state, .checkin(StatusState.Checkin(symptoms: [.temperature], checkinDate: expiryDate)))
+        let symptomatic: StatusState = .symptomatic(StatusState.Symptomatic(
+            symptoms: [.temperature],
+            startDate: diagnosis.startDate,
+            checkinDate: expiryDate
+        ))
+        XCTAssertEqual(state, symptomatic)
     }
 
     func testInitialSymptomaticTakesPrecedenceOverExposed() {
@@ -156,7 +167,13 @@ class StatusStateMigrationTests: XCTestCase {
             potentiallyExposedOn: dateSentinel
         )
 
-        XCTAssertEqual(state, .symptomatic(StatusState.Symptomatic(symptoms: [.temperature], startDate: diagnosis.startDate)))
+        let checkinDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 8, hour: 7))!
+        let symptomatic: StatusState = .symptomatic(StatusState.Symptomatic(
+            symptoms: [.temperature],
+            startDate: diagnosis.startDate,
+            checkinDate: checkinDate
+        ))
+        XCTAssertEqual(state, symptomatic)
     }
 
     func testSubsequentSymptomaticPreExpiry() {
@@ -174,7 +191,12 @@ class StatusStateMigrationTests: XCTestCase {
             potentiallyExposedOn: nil
         )
 
-        XCTAssertEqual(state, .checkin(StatusState.Checkin(symptoms: [.temperature], checkinDate: diagnosis.expiryDate)))
+        let symptomatic: StatusState = .symptomatic(StatusState.Symptomatic(
+            symptoms: [.temperature],
+            startDate: diagnosis.startDate,
+            checkinDate: diagnosis.expiryDate
+        ))
+        XCTAssertEqual(state, symptomatic)
     }
 
     func testSubsequentSymptomaticPostExpiry() {
@@ -192,7 +214,12 @@ class StatusStateMigrationTests: XCTestCase {
             potentiallyExposedOn: nil
         )
 
-        XCTAssertEqual(state, .checkin(StatusState.Checkin(symptoms: [.temperature], checkinDate: diagnosis.expiryDate)))
+        let symptomatic: StatusState = .symptomatic(StatusState.Symptomatic(
+            symptoms: [.temperature],
+            startDate: diagnosis.startDate,
+            checkinDate: diagnosis.expiryDate
+        ))
+        XCTAssertEqual(state, symptomatic)
     }
 
 }

@@ -10,12 +10,12 @@ import UIKit
 
 class CheckinCoordinator: Coordinator {
     let navigationController: UINavigationController
-    let previousSymptoms: Symptoms
+    let previousSymptoms: Symptoms?
     let completion: (Symptoms) -> Void
     
     init(
         navigationController: UINavigationController,
-        previousSymptoms: Symptoms,
+        previousSymptoms: Symptoms?,
         completion: @escaping (Symptoms) -> Void
     ) {
         self.navigationController = navigationController
@@ -104,6 +104,6 @@ class CheckinCoordinator: Coordinator {
     }
     
     private func hadSymptom(_ symptom: Symptom) -> Bool {
-        return previousSymptoms.contains(symptom)
+        return (previousSymptoms ?? []).contains(symptom)
     }
 }
