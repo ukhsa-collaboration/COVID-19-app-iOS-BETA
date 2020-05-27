@@ -66,8 +66,6 @@ indirect enum StatusState: Equatable {
         let duration = 7
     }
 
-    struct Unexposed: Codable, Equatable {}
-    
     struct UnclearTestResult: Codable, Equatable, Expirable {
         let symptoms: Symptoms?
         let duration: Int = 7
@@ -77,7 +75,6 @@ indirect enum StatusState: Equatable {
     case ok(Ok)                   // default state, previously "blue"
     case symptomatic(Symptomatic) // previously "red" state
     case exposed(Exposed)         // previously "amber" state
-    case unexposed(Unexposed)
     case positiveTestResult(PositiveTestResult)
     case unclearTestResult(UnclearTestResult)
     case negativeTestResult(nextState: StatusState)
@@ -127,7 +124,7 @@ indirect enum StatusState: Equatable {
 extension StatusState {
     var symptoms: Symptoms? {
         switch self {
-        case .ok, .exposed, .unexposed, .negativeTestResult:
+        case .ok, .exposed, .negativeTestResult:
             return nil
         case .symptomatic(let state):
             return state.symptoms
@@ -152,8 +149,6 @@ extension StatusState: Encodable {
         case .exposed(let exposed):
             try container.encode("exposed", forKey: .type)
             try container.encode(exposed, forKey: .exposed)
-        case .unexposed:
-            try container.encode("unexposed", forKey: .type)
         case .positiveTestResult(let positiveTestResult):
             try container.encode("positiveTestResult", forKey: .type)
             try container.encode(positiveTestResult, forKey: .positiveTestResult)
@@ -185,8 +180,6 @@ extension StatusState: Decodable {
         case "exposed":
             let exposed = try values.decode(Exposed.self, forKey: .exposed)
             self = .exposed(exposed)
-        case "unexposed":
-            self = .unexposed(StatusState.Unexposed())
         case "positiveTestResult":
             let positiveTestResult = try values.decode(PositiveTestResult.self, forKey: .positiveTestResult)
             self = .positiveTestResult(positiveTestResult)

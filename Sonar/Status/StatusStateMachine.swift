@@ -18,7 +18,6 @@ protocol StatusStateMachining {
     func checkin(symptoms: Symptoms)
     func exposed()
     func unexposed()
-    func ok()
     func set(state: StatusState)
     func received(_ testResult: TestResult)
     
@@ -34,7 +33,8 @@ class StatusStateMachine: StatusStateMachining {
     private let adviceChangedNotificationIdentifier = "adviceChangedNotificationIdentifier"
 
     private let persisting: Persisting
-    private var contactEventsUploader: ContactEventsUploading
+    private let contactEventsUploader: ContactEventsUploading
+    private let drawerMailbox: DrawerMailboxing
     private let notificationCenter: NotificationCenter
     private let userNotificationCenter: UserNotificationCenter
     private let dateProvider: () -> Date
@@ -49,7 +49,7 @@ class StatusStateMachine: StatusStateMachining {
             switch newValue {
             case .symptomatic(let symptomatic):
                 add(notificationRequest: checkinNotificationRequest(at: symptomatic.checkinDate))
-            case .exposed, .unexposed:
+            case .exposed:
                 add(notificationRequest: adviceChangedNotificationRequest)
             case .positiveTestResult, .negativeTestResult, .unclearTestResult:
                 add(notificationRequest: testResultNotification)
@@ -82,12 +82,14 @@ class StatusStateMachine: StatusStateMachining {
     init(
         persisting: Persisting,
         contactEventsUploader: ContactEventsUploading,
+        drawerMailbox: DrawerMailboxing,
         notificationCenter: NotificationCenter,
         userNotificationCenter: UserNotificationCenter,
         dateProvider: @escaping () -> Date = { Date() }
     ) {
         self.persisting = persisting
         self.contactEventsUploader = contactEventsUploader
+        self.drawerMailbox = drawerMailbox
         self.notificationCenter = notificationCenter
         self.userNotificationCenter = userNotificationCenter
         self.dateProvider = dateProvider
@@ -125,14 +127,14 @@ class StatusStateMachine: StatusStateMachining {
 
             let symptomatic = StatusState.Symptomatic(symptoms: symptoms, startDate: startDate, checkinDate: checkinDate)
             state = .symptomatic(symptomatic)
-        case .symptomatic, .unexposed, .positiveTestResult, .unclearTestResult, .negativeTestResult:
+        case .symptomatic, .positiveTestResult, .unclearTestResult, .negativeTestResult:
             assertionFailure("Self-diagnosing is only allowed from ok/exposed")
         }
     }
     
     func tick() {
         switch state {
-        case .ok, .symptomatic, .unexposed, .negativeTestResult:
+        case .ok, .symptomatic, .negativeTestResult:
             break // Don't need to do anything
         case .unclearTestResult(let unclear):
             guard currentDate >= unclear.expiryDate else { return }
@@ -163,7 +165,7 @@ class StatusStateMachine: StatusStateMachining {
         userNotificationCenter.removePendingNotificationRequests(withIdentifiers: [checkinNotificationIdentifier])
 
         switch state {
-        case .ok, .exposed, .unexposed, .positiveTestResult, .unclearTestResult, .negativeTestResult:
+        case .ok, .exposed, .positiveTestResult, .unclearTestResult, .negativeTestResult:
             assertionFailure("Checking in is only allowed from symptomatic")
             return
         case .symptomatic(let symptomatic):
@@ -187,8 +189,6 @@ class StatusStateMachine: StatusStateMachining {
         case .ok:
             let exposed = StatusState.Exposed(startDate: currentDate)
             state = .exposed(exposed)
-        case .unexposed:
-            state = .exposed(StatusState.Exposed(startDate: currentDate))
         case .exposed:
             assertionFailure("The server should never send us another exposure notification if we're already exposed")
             break // ignore repeated exposures
@@ -203,22 +203,15 @@ class StatusStateMachine: StatusStateMachining {
     func unexposed() {
         switch state.resolved() {
         case .exposed:
-            state = .unexposed(StatusState.Unexposed())
-        case .ok, .symptomatic, .unexposed, .positiveTestResult, .unclearTestResult:
+            add(notificationRequest: adviceChangedNotificationRequest)
+            drawerMailbox.post(.unexposed)
+            state = .ok(StatusState.Ok())
+        case .ok, .symptomatic, .positiveTestResult, .unclearTestResult:
             break // no-op
         case .negativeTestResult:
             assertionFailure("Status state's resolve method should not return an interstitial state")
             break
         }
-    }
-
-    func ok() {
-        guard case .unexposed = state else {
-            assertionFailure("This transition is only for going to ok from unexposed")
-            return
-        }
-
-        state = .ok(StatusState.Ok())
     }
 
     func received(_ testResult: TestResult) {
@@ -243,7 +236,7 @@ class StatusStateMachine: StatusStateMachining {
         case .unclearTestResult(let unclearTestResult):
             let positive = StatusState.PositiveTestResult(symptoms: unclearTestResult.symptoms, startDate: unclearTestResult.startDate)
             state = .positiveTestResult(positive)
-        case .unexposed, .positiveTestResult:
+        case .positiveTestResult:
             let message = "Received positive test result, in a state where it is not expected"
             assertionFailure(message)
             self.logger.error("\(message)")

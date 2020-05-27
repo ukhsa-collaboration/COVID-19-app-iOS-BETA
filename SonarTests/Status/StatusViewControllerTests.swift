@@ -162,7 +162,7 @@ class StatusViewControllerTests: TestCase {
     func testShowsDrawerAfterCheckinIfCoughButNoTemperature() throws {
         try PresentationSpy.withSpy {
             let persistence = PersistenceDouble(statusState: .symptomatic(StatusState.Symptomatic(symptoms: [], startDate: Date(), checkinDate: Date())))
-            let statusStateMachine = StatusStateMachine(persisting: persistence, contactEventsUploader: ContactEventsUploaderDouble(), notificationCenter: NotificationCenter(), userNotificationCenter: UserNotificationCenterDouble())
+            let statusStateMachine = StatusStateMachine(persisting: persistence, contactEventsUploader: ContactEventsUploaderDouble(), drawerMailbox: DrawerMailboxingDouble(), notificationCenter: NotificationCenter(), userNotificationCenter: UserNotificationCenterDouble())
             let drawerPresenter = DrawerPresenterDouble()
             let vc = makeViewController(
                 persistence: persistence,
@@ -178,7 +178,7 @@ class StatusViewControllerTests: TestCase {
             try respondToSymptomQuestion(vc: vc, expectedTitle: "COUGH_QUESTION", response: true)
             try respondToSymptomQuestion(vc: vc, expectedTitle: "ANOSMIA_QUESTION", response: false)
             
-            XCTAssertNotNil(drawerPresenter.presented as? DrawerViewController)
+            XCTAssertNotNil(drawerPresenter.presented)
         }
     }
 
@@ -186,7 +186,7 @@ class StatusViewControllerTests: TestCase {
     func testShowsDrawerAfterCheckinIfAnosmiaButNoTemperature() throws {
         try PresentationSpy.withSpy {
             let persistence = PersistenceDouble(statusState: .symptomatic(StatusState.Symptomatic(symptoms: [], startDate: Date(), checkinDate: Date())))
-            let statusStateMachine = StatusStateMachine(persisting: persistence, contactEventsUploader: ContactEventsUploaderDouble(), notificationCenter: NotificationCenter(), userNotificationCenter: UserNotificationCenterDouble())
+            let statusStateMachine = StatusStateMachine(persisting: persistence, contactEventsUploader: ContactEventsUploaderDouble(), drawerMailbox: DrawerMailboxingDouble(), notificationCenter: NotificationCenter(), userNotificationCenter: UserNotificationCenterDouble())
             let drawerPresenter = DrawerPresenterDouble()
             let vc = makeViewController(
                 persistence: persistence,
@@ -202,14 +202,14 @@ class StatusViewControllerTests: TestCase {
             try respondToSymptomQuestion(vc: vc, expectedTitle: "COUGH_QUESTION", response: false)
             try respondToSymptomQuestion(vc: vc, expectedTitle: "ANOSMIA_QUESTION", response: true)
             
-            XCTAssertNotNil(drawerPresenter.presented as? DrawerViewController)
+            XCTAssertNotNil(drawerPresenter.presented)
         }
     }
     
     func testDoesNotShowsDrawerAfterCheckinIfTemperature() throws{
         try PresentationSpy.withSpy {
             let persistence = PersistenceDouble(statusState: .symptomatic(StatusState.Symptomatic(symptoms: [], startDate: Date(), checkinDate: Date())))
-            let statusStateMachine = StatusStateMachine(persisting: persistence, contactEventsUploader: ContactEventsUploaderDouble(), notificationCenter: NotificationCenter(), userNotificationCenter: UserNotificationCenterDouble())
+            let statusStateMachine = StatusStateMachine(persisting: persistence, contactEventsUploader: ContactEventsUploaderDouble(), drawerMailbox: DrawerMailboxingDouble(), notificationCenter: NotificationCenter(), userNotificationCenter: UserNotificationCenterDouble())
             let drawerPresenter = DrawerPresenterDouble()
             let vc = makeViewController(
                 persistence: persistence,
@@ -227,6 +227,17 @@ class StatusViewControllerTests: TestCase {
             
             XCTAssertNil(drawerPresenter.presented)
         }
+    }
+
+    func testUnexposed() throws {
+        let presenter = DrawerPresenterDouble()
+        let mailbox = DrawerMailboxingDouble([.unexposed])
+
+        _ = makeViewController(drawerPresenter: presenter, drawerMailbox: mailbox)
+
+        let drawer = try XCTUnwrap(presenter.presented)
+        XCTAssertEqual(drawer.config.header, "UNEXPOSED_DRAWER_HEADER".localized)
+        XCTAssertTrue(mailbox.messages.isEmpty)
     }
     
     private func respondToSymptomQuestion(
@@ -283,9 +294,9 @@ class StatusViewControllerTests: TestCase {
 }
 
 private class DrawerPresenterDouble: DrawerPresenter {
-    var presented: UIViewController?
+    var presented: DrawerViewController?
     
-    func present(drawer: UIViewController, inNavigationController: UINavigationController, usingTransitioningDelegate: UIViewControllerTransitioningDelegate) {
+    func present(drawer: DrawerViewController, inNavigationController: UINavigationController, usingTransitioningDelegate: UIViewControllerTransitioningDelegate) {
         presented = drawer
     }
 }

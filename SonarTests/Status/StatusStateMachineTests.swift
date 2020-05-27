@@ -14,6 +14,7 @@ class StatusStateMachineTests: XCTestCase {
     var machine: StatusStateMachine!
     var persisting: PersistenceDouble!
     var contactEventsUploader: ContactEventsUploaderDouble!
+    var drawerMailbox: DrawerMailboxingDouble!
     var notificationCenter: NotificationCenter!
     var userNotificationCenter: UserNotificationCenterDouble!
     var currentDate: Date!
@@ -21,6 +22,7 @@ class StatusStateMachineTests: XCTestCase {
     override func setUp() {
         persisting = PersistenceDouble()
         contactEventsUploader = ContactEventsUploaderDouble()
+        drawerMailbox = DrawerMailboxingDouble()
         notificationCenter = NotificationCenter()
         userNotificationCenter = UserNotificationCenterDouble()
         currentDate = Date()
@@ -28,6 +30,7 @@ class StatusStateMachineTests: XCTestCase {
         machine = StatusStateMachine(
             persisting: persisting,
             contactEventsUploader: contactEventsUploader,
+            drawerMailbox: drawerMailbox,
             notificationCenter: notificationCenter,
             userNotificationCenter: userNotificationCenter,
             dateProvider: { self.currentDate }
@@ -352,20 +355,13 @@ class StatusStateMachineTests: XCTestCase {
         XCTAssertEqual(machine.state, .exposed(StatusState.Exposed(startDate: currentDate)))
     }
 
-    func testExposedAgainAfterUnexposed() throws {
-        persisting.statusState = .unexposed(StatusState.Unexposed())
-
-        machine.exposed()
-
-        XCTAssertEqual(machine.state, .exposed(StatusState.Exposed(startDate: currentDate)))
-    }
-
     func testUnexposedAfterExposed() throws {
         persisting.statusState = .exposed(StatusState.Exposed(startDate: Date()))
 
         machine.unexposed()
 
-        XCTAssertEqual(machine.state, .unexposed(StatusState.Unexposed()))
+        XCTAssertEqual(drawerMailbox.receive(), .unexposed)
+        XCTAssertEqual(machine.state, .ok(StatusState.Ok()))
 
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.identifier, "adviceChangedNotificationIdentifier")

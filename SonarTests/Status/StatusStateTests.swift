@@ -48,15 +48,6 @@ class StatusStateTests: XCTestCase {
          XCTAssertEqual(decoded, statusState)
      }
 
-    func testCodableUnxposed() throws {
-         let statusState: StatusState = .unexposed(StatusState.Unexposed())
-
-         let encoded = try encoder.encode(statusState)
-         let decoded = try decoder.decode(StatusState.self, from: encoded)
-
-         XCTAssertEqual(decoded, statusState)
-     }
-
     func testCheckinDateMathBeforeSeven() {
         let startDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 1, hour: 6))!
         let checkinDate = StatusState.Symptomatic.nextCheckin(from: startDate, afterDays: 7)

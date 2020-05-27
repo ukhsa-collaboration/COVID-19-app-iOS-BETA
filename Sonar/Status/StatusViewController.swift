@@ -297,6 +297,7 @@ class StatusViewController: UIViewController, Storyboarded {
     @objc func reload() {
         statusStateMachine.tick()
         setupUI(for: statusStateMachine.state)
+        showDrawer()
     }
     
     func setupUI(for state: StatusState) {
@@ -305,15 +306,7 @@ class StatusViewController: UIViewController, Storyboarded {
         switch state {
         case .ok:
             detailForNeutral()
-        
-        case .unexposed:
-            detailForNeutral()
-            let config = DrawerViewController.Config(
-                header: "UNEXPOSED_DRAWER_HEADER".localized,
-                detail: "UNEXPOSED_DRAWER_DETAIL".localized
-            ) { self.statusStateMachine.ok() }
-            performSegue(withIdentifier: "presentDrawer", sender: config)
-            
+
         case .negativeTestResult(let nextState):
             if nextState != state {
                 setupUI(for: nextState)
@@ -359,7 +352,30 @@ class StatusViewController: UIViewController, Storyboarded {
             presentTestResultUpdate(result: .positive)
         }
     }
-    
+
+    private func showDrawer() {
+        guard let message = drawerMailbox.receive() else { return }
+
+        switch message {
+        case .unexposed:
+            let config = DrawerViewController.Config(
+                header: "UNEXPOSED_DRAWER_HEADER".localized,
+                detail: "UNEXPOSED_DRAWER_DETAIL".localized
+            ) {
+                self.reload()
+            }
+            presentDrawer(with: config)
+        case .symptomsButNotSymptomatic:
+            assertionFailure("TODO")
+        case .testResult(.positive):
+            assertionFailure("TODO")
+        case .testResult(.negative):
+            assertionFailure("TODO")
+        case .testResult(.unclear):
+            assertionFailure("TODO")
+        }
+    }
+
     func detailForSelfIsolation(expiryDate: Date) {
         diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
         diagnosisTitleLabel.text = "Your symptoms indicate you may have coronavirus. Please self-isolate and apply for a test."
@@ -386,9 +402,7 @@ class StatusViewController: UIViewController, Storyboarded {
             header: "HAVE_SYMPTOMS_BUT_DONT_ISOLATE_DRAWER_HEADER".localized,
             detail: "HAVE_SYMPTOMS_BUT_DONT_ISOLATE_DRAWER_DETAIL".localized
         )
-        let drawer = DrawerViewController.instantiate()
-        drawer.inject(config: config)
-        presentDrawer(drawVC: drawer)
+        presentDrawer(with: config)
     }
     
     private func presentTestResultUpdate(result: TestResult.ResultType) {
@@ -401,9 +415,10 @@ class StatusViewController: UIViewController, Storyboarded {
         performSegue(withIdentifier: "presentDrawer", sender: config)
     }
         
-    private func presentDrawer(drawVC: UIViewController) {
-        self.drawerPresenter.present(
-            drawer: drawVC,
+    private func presentDrawer(with config: DrawerViewController.Config) {
+        let drawer = DrawerViewController.instantiate() { $0.inject(config: config) }
+        drawerPresenter.present(
+            drawer: drawer,
             inNavigationController: navigationController!,
             usingTransitioningDelegate: drawerPresentationManager
         )
@@ -412,7 +427,7 @@ class StatusViewController: UIViewController, Storyboarded {
 
 protocol DrawerPresenter {
     func present(
-        drawer: UIViewController,
+        drawer: DrawerViewController,
         inNavigationController: UINavigationController,
         usingTransitioningDelegate: UIViewControllerTransitioningDelegate
     )
@@ -420,7 +435,7 @@ protocol DrawerPresenter {
 
 class ConcreteDrawerPresenter: DrawerPresenter {
     func present(
-        drawer: UIViewController,
+        drawer: DrawerViewController,
         inNavigationController navigationController: UINavigationController,
         usingTransitioningDelegate delegate: UIViewControllerTransitioningDelegate
     ) {
