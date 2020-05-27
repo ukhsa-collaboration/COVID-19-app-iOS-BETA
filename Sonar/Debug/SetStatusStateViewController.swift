@@ -141,25 +141,25 @@ class SetStatusStateViewController: UITableViewController {
             date = symptomatic.startDate
         case .exposed(let exposed):
             statusLabel.text = "exposed"
-            statusPicker.selectRow(4, inComponent: 0, animated: false)
+            statusPicker.selectRow(2, inComponent: 0, animated: false)
             temperature = nil
             cough = nil
             date = exposed.startDate
         case .positiveTestResult(let positiveTestResult):
             statusLabel.text = "positive test result"
-            statusPicker.selectRow(5, inComponent: 0, animated: false)
+            statusPicker.selectRow(3, inComponent: 0, animated: false)
             temperature = positiveTestResult.symptoms.map { $0.contains(.temperature) } ?? false
             cough = positiveTestResult.symptoms.map { $0.contains(.cough) } ?? false
             date = positiveTestResult.startDate
         case .unclearTestResult(let unclearTestResult):
             statusLabel.text = "unclear test result"
-            statusPicker.selectRow(6, inComponent: 0, animated: false)
+            statusPicker.selectRow(4, inComponent: 0, animated: false)
             temperature = unclearTestResult.symptoms.map { $0.contains(.temperature) } ?? false
             cough = unclearTestResult.symptoms.map { $0.contains(.cough) } ?? false
             date = unclearTestResult.startDate
         case .negativeTestResult:
             statusLabel.text = "negative test result"
-            statusPicker.selectRow(7, inComponent: 0, animated: false)
+            statusPicker.selectRow(5, inComponent: 0, animated: false)
             date = nil
         }
     }
@@ -212,11 +212,11 @@ extension SetStatusStateViewController: UIPickerViewDataSource {
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 8
+        return 6
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return ["ok", "symptomatic", "checkin", "exposed", "unexposed", "positive test result", "unclear test result", "negative test result"][row]
+        return ["ok", "symptomatic", "exposed", "positive test result", "unclear test result", "negative test result"][row]
     }
 }
 
