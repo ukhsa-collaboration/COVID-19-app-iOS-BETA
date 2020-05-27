@@ -57,6 +57,7 @@ class StatusViewController: UIViewController, Storyboarded {
     private var notificationCenter: NotificationCenter!
     private var urlOpener: TestableUrlOpener!
     private var drawerPresenter: DrawerPresenter!
+    private var drawerMailbox: DrawerMailboxing!
     private var localeProvider: LocaleProvider!
     
     func inject(
@@ -68,6 +69,7 @@ class StatusViewController: UIViewController, Storyboarded {
         dateProvider: @escaping () -> Date = { Date() },
         notificationCenter: NotificationCenter,
         drawerPresenter: DrawerPresenter = ConcreteDrawerPresenter(),
+        drawerMailbox: DrawerMailboxing,
         localeProvider: LocaleProvider
     ) {
         self.linkingIdManager = linkingIdManager
@@ -78,6 +80,7 @@ class StatusViewController: UIViewController, Storyboarded {
         self.dateProvider = dateProvider
         self.notificationCenter = notificationCenter
         self.drawerPresenter = drawerPresenter
+        self.drawerMailbox = drawerMailbox
         self.localeProvider = localeProvider
     }
 

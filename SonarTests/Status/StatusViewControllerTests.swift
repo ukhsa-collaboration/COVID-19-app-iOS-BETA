@@ -248,7 +248,6 @@ class StatusViewControllerTests: TestCase {
         promptVc.continueTapped()
     }
 
-    
     private func makeViewController(
         persistence: Persisting = PersistenceDouble(),
         registrationService: RegistrationService = RegistrationServiceDouble(),
@@ -256,7 +255,8 @@ class StatusViewControllerTests: TestCase {
         statusStateMachine: StatusStateMachining = StatusStateMachiningDouble(state: .ok(StatusState.Ok())),
         loadView: Bool = true,
         makePresentSynchronous: Bool = false,
-        drawerPresenter: DrawerPresenter = DrawerPresenterDouble()
+        drawerPresenter: DrawerPresenter = DrawerPresenterDouble(),
+        drawerMailbox: DrawerMailboxing = DrawerMailboxingDouble()
     ) -> StatusViewController {
         let vc = StatusViewController.instantiate()
         vc.inject(
@@ -267,6 +267,7 @@ class StatusViewControllerTests: TestCase {
             registrationService: registrationService,
             notificationCenter: notificationCenter,
             drawerPresenter: drawerPresenter,
+            drawerMailbox: drawerMailbox,
             localeProvider: EnGbLocaleProviderDouble()
         )
         

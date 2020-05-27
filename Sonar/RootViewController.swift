@@ -43,7 +43,8 @@ class RootViewController: UIViewController {
         statusStateMachine: StatusStateMachining,
         uiQueue: TestableQueue,
         userStatusProvider: UserStatusProvider,
-        urlOpener: TestableUrlOpener
+        urlOpener: TestableUrlOpener,
+        drawerMailbox: DrawerMailboxing
     ) {
         self.persistence = persistence
         self.authorizationManager = authorizationManager
@@ -66,6 +67,7 @@ class RootViewController: UIViewController {
             linkingIdManager: linkingIdManager,
             registrationService: registrationService,
             notificationCenter: notificationCenter,
+            drawerMailbox: drawerMailbox,
             localeProvider: AutoupdatingCurrentLocaleProvider()
         )
         
