@@ -17,4 +17,4 @@ jobs:
           ref: ${{ github.event.client_payload.ref }}
 
       - name: Test docker github action
-        uses: .github/actions/update-tracker-stories
+        uses: ./.github/actions/update-tracker-stories
