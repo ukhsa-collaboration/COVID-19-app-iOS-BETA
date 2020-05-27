@@ -84,6 +84,7 @@
 		13473A1D246C0F2C00800CEA /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13473A1C246C0F2C00800CEA /* StatusViewController.swift */; };
 		13473A1F246D543F00800CEA /* UserStatusProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13473A1E246D543F00800CEA /* UserStatusProvider.swift */; };
 		1376F7D7247E628500524CEE /* QuestionnaireDrawer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1376F7D6247E628500524CEE /* QuestionnaireDrawer.storyboard */; };
+		1376F7D9247EA44E00524CEE /* 4_negative_test.apns in Resources */ = {isa = PBXBuildFile; fileRef = 1376F7D8247EA44E00524CEE /* 4_negative_test.apns */; };
 		138114E42450543600BA46C7 /* SymptomStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138114E32450543600BA46C7 /* SymptomStackView.swift */; };
 		138E50E22477C4E40027F2D3 /* 3_positive_test.apns in Resources */ = {isa = PBXBuildFile; fileRef = 138E50E12477C4E40027F2D3 /* 3_positive_test.apns */; };
 		13F4AE882451EB330082A46D /* QuestionSymptomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F4AE872451EB330082A46D /* QuestionSymptomsViewController.swift */; };
@@ -412,6 +413,7 @@
 		13473A1E246D543F00800CEA /* UserStatusProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatusProvider.swift; sourceTree = "<group>"; };
 		1347DAF02450915500F2F776 /* LocalNotificationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationTests.swift; sourceTree = "<group>"; };
 		1376F7D6247E628500524CEE /* QuestionnaireDrawer.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = QuestionnaireDrawer.storyboard; sourceTree = "<group>"; };
+		1376F7D8247EA44E00524CEE /* 4_negative_test.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = 4_negative_test.apns; sourceTree = "<group>"; };
 		138114E32450543600BA46C7 /* SymptomStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomStackView.swift; sourceTree = "<group>"; };
 		138E50E12477C4E40027F2D3 /* 3_positive_test.apns */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 3_positive_test.apns; sourceTree = "<group>"; };
 		13F4AE872451EB330082A46D /* QuestionSymptomsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionSymptomsViewController.swift; sourceTree = "<group>"; };
@@ -1317,6 +1319,7 @@
 				F680E702245F7E0800EA6135 /* 1_activation_code.apns */,
 				F680E701245F7E0800EA6135 /* 2_potential_diagnosis.apns */,
 				138E50E12477C4E40027F2D3 /* 3_positive_test.apns */,
+				1376F7D8247EA44E00524CEE /* 4_negative_test.apns */,
 			);
 			path = "Example Notifications";
 			sourceTree = "<group>";
@@ -1643,6 +1646,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F60497792454A40B002B8503 /* TestingInfo.storyboard in Resources */,
+				1376F7D9247EA44E00524CEE /* 4_negative_test.apns in Resources */,
 				F758B8C4242CC0EE003AE16D /* Status.storyboard in Resources */,
 				6FC63C3B241641BA007C8BF3 /* LaunchScreen.storyboard in Resources */,
 				AE29892C24729AD8004C4097 /* ReferenceCode.storyboard in Resources */,

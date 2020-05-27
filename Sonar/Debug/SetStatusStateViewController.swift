@@ -212,7 +212,7 @@ class SetStatusStateViewController: UITableViewController {
         case 6:
             statusState = .unclearTestResult(StatusState.UnclearTestResult(symptoms: symptoms, startDate: date!))
         case 7:
-            statusState = .negativeTestResult(nextState: .ok(StatusState.Ok()))
+            statusState = .negativeTestResult(nextState: persistence.statusState)
         default:
             fatalError()
         }
@@ -256,7 +256,7 @@ extension SetStatusStateViewController: UIPickerViewDelegate {
         case 6:
             statusState = .unclearTestResult(StatusState.UnclearTestResult(symptoms: [.temperature, .cough], startDate: Date()))
         case 7:
-            statusState = .negativeTestResult(nextState: .ok(StatusState.Ok()))
+            statusState = .negativeTestResult(nextState: persistence.statusState)
         default:
             fatalError()
         }

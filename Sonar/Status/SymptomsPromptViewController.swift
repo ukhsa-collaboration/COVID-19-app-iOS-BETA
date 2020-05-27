@@ -11,12 +11,26 @@ import UIKit
 class SymptomsPromptViewController: UIViewController, Storyboarded {
     static var storyboardName = "QuestionnaireDrawer"
 
+    @IBOutlet weak var header: UILabel!
+    @IBOutlet weak var detail: UILabel!
+    private var headerText: String?
+    private var detailText: String?
     var completion: ((_ needsCheckin: Bool) -> Void)!
 
     func inject(
+        headerText: String,
+        detailText: String,
         completion: @escaping (_ needsCheckin: Bool) -> Void
     ) {
         self.completion = completion
+        self.headerText = headerText
+        self.detailText = detailText
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        header.text = headerText
+        detail.text = detailText
     }
     
     @IBAction func updateSymptoms() {

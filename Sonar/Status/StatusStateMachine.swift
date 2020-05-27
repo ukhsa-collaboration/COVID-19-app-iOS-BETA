@@ -19,6 +19,7 @@ protocol StatusStateMachining {
     func exposed()
     func unexposed()
     func ok()
+    func set(state: StatusState)
     func received(_ testResult: TestResult)
     
     func clearInterstitialState()
@@ -262,6 +263,10 @@ class StatusStateMachine: StatusStateMachining {
                 nextState: state
             )
         }
+    }
+    
+    func set(state: StatusState) {
+        self.state = state
     }
     
     func receivedUnclearTestResult() {
