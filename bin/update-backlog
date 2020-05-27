@@ -11,5 +11,5 @@ update_stories_with_build_number(
   tracker_token: ENV.fetch("PIVOTAL_TRACKER_API_TOKEN"),
   commits: rev_list,
   message_template: 'This story was included in build %<build_number>',
-  git_dir: File.expand_path("..", __dir__)),
+  git_dir: File.expand_path("..", __dir__),
 )
