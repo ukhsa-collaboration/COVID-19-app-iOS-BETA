@@ -94,7 +94,9 @@ class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDel
         }
         
         guard let broadcastPayload = idGenerator.broadcastPayload()?.data() else {
-            assertionFailure("attempted to update identity without an identity")
+            // One way of getting to this point is when registration is nil in persistance and updateIdentity is called
+            // which may be due to a 24 hour time period passing
+            logger.warning("attempted to update identity without an identity")
             return
         }
         
