@@ -1,13 +1,9 @@
 require 'tmpdir'
 
-require 'minitest/autorun'
-
 require 'test_support/git_test_support'
 require 'test_support/tracker_webmock_support'
 
 require 'updates_tracker_stories_with_build_number'
-
-WebMock.disable_net_connect!
 
 class TestUpdatesTrackerStoryWithBuildNumber < MiniTest::Test
   include GitTestSupport
