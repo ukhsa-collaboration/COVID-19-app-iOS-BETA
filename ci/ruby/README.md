@@ -9,5 +9,5 @@ bundle install
 ## Run tests ##
 
 ```bash
-ruby test/test_all.rb -v
+rake test
 ```
