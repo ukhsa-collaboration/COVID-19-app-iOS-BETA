@@ -34,7 +34,8 @@ class StatusStateMachine: StatusStateMachining {
     private let adviceChangedNotificationIdentifier = "adviceChangedNotificationIdentifier"
 
     private let persisting: Persisting
-    private var contactEventsUploader: ContactEventsUploading
+    private let contactEventsUploader: ContactEventsUploading
+    private let drawerMailbox: DrawerMailboxing
     private let notificationCenter: NotificationCenter
     private let userNotificationCenter: UserNotificationCenter
     private let dateProvider: () -> Date
@@ -82,12 +83,14 @@ class StatusStateMachine: StatusStateMachining {
     init(
         persisting: Persisting,
         contactEventsUploader: ContactEventsUploading,
+        drawerMailbox: DrawerMailboxing,
         notificationCenter: NotificationCenter,
         userNotificationCenter: UserNotificationCenter,
         dateProvider: @escaping () -> Date = { Date() }
     ) {
         self.persisting = persisting
         self.contactEventsUploader = contactEventsUploader
+        self.drawerMailbox = drawerMailbox
         self.notificationCenter = notificationCenter
         self.userNotificationCenter = userNotificationCenter
         self.dateProvider = dateProvider
@@ -203,7 +206,9 @@ class StatusStateMachine: StatusStateMachining {
     func unexposed() {
         switch state.resolved() {
         case .exposed:
-            state = .unexposed(StatusState.Unexposed())
+            add(notificationRequest: adviceChangedNotificationRequest)
+            drawerMailbox.post(.unexposed)
+            state = .ok(StatusState.Ok())
         case .ok, .symptomatic, .unexposed, .positiveTestResult, .unclearTestResult:
             break // no-op
         case .negativeTestResult:

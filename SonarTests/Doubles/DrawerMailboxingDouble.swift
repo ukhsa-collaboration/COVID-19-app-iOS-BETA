@@ -9,7 +9,11 @@
 @testable import Sonar
 
 class DrawerMailboxingDouble: DrawerMailboxing {
-    var messages: [DrawerMessage] = []
+    var messages: [DrawerMessage]
+
+    init(_ messages: [DrawerMessage] = []) {
+        self.messages = messages
+    }
 
     func receive() -> DrawerMessage? {
         guard !messages.isEmpty else { return nil }

@@ -37,6 +37,7 @@ class UITestScreenMaker {
     private lazy var statusStateMachine = StatusStateMachine(
         persisting: persistence,
         contactEventsUploader: contactEventsUploader,
+        drawerMailbox: drawerMailbox,
         notificationCenter: notificationCenter,
         userNotificationCenter: userNotificationCenter,
         dateProvider: self.dateProvider

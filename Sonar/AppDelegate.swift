@@ -102,6 +102,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     lazy var statusStateMachine: StatusStateMachining = StatusStateMachine(
         persisting: persistence,
         contactEventsUploader: contactEventsUploader,
+        drawerMailbox: drawerMailbox,
         notificationCenter: notificationCenter,
         userNotificationCenter: userNotificationCenter
     )

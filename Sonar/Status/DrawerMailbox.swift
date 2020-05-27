@@ -17,14 +17,6 @@ enum DrawerMessage: Equatable {
     case unexposed
     case symptomsButNotSymptomatic
     case testResult(TestResult.ResultType)
-
-    var header: String {
-        fatalError()
-    }
-
-    var detail: String {
-        fatalError()
-    }
 }
 
 class DrawerMailbox: DrawerMailboxing {
