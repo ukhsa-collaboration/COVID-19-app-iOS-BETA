@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Symptoms Prompt View Controller-->
+        <scene sceneID="k6o-pf-1lc">
+            <objects>
+                <viewController storyboardIdentifier="SymptomsPromptViewController" id="AfQ-qe-1Bn" customClass="SymptomsPromptViewController" customModule="Sonar" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bh-pN-2h1">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="400"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wR5-Ez-c9R">
+                                <rect key="frame" x="0.0" y="44" width="414" height="356"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="f1F-0n-RY2">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="258"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How are you feeling today?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uSo-z3-rPr">
+                                                <rect key="frame" x="16" y="42" width="382" height="20.5"/>
+                                                <accessibility key="accessibilityConfiguration">
+                                                    <accessibilityTraits key="traits" staticText="YES" header="YES"/>
+                                                </accessibility>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please update your symptoms to view latest advice." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7bI-p4-COh">
+                                                <rect key="frame" x="16" y="78.5" width="382" height="42.5"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <color key="textColor" name="NHS Text"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bk3-3P-Vv6" customClass="PrimaryButton" customModule="Sonar" customModuleProvider="target">
+                                                <rect key="frame" x="16" y="137" width="382" height="30"/>
+                                                <state key="normal" title="Update my symptoms"/>
+                                                <connections>
+                                                    <action selector="updateSymptoms" destination="AfQ-qe-1Bn" eventType="touchUpInside" id="ACM-CW-j4L"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W0y-RQ-dw6" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
+                                                <rect key="frame" x="16" y="183" width="382" height="33"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <state key="normal" title="I no longer have symptoms"/>
+                                                <connections>
+                                                    <action selector="noSymptoms" destination="AfQ-qe-1Bn" eventType="touchUpInside" id="V0e-Vj-f31"/>
+                                                    <segue destination="nNd-Fp-7Vg" kind="unwind" unwindAction="unwindFromSymptomsPromptWithUnwindSegue:" id="hhi-tO-Ce6"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <directionalEdgeInsets key="directionalLayoutMargins" top="42" leading="16" bottom="42" trailing="16"/>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="f1F-0n-RY2" firstAttribute="width" secondItem="JSo-fF-eXn" secondAttribute="width" id="Aph-AD-DxR"/>
+                                    <constraint firstItem="f1F-0n-RY2" firstAttribute="bottom" secondItem="4hC-iy-eIb" secondAttribute="bottom" id="D0c-VW-QQH"/>
+                                    <constraint firstItem="f1F-0n-RY2" firstAttribute="trailing" secondItem="4hC-iy-eIb" secondAttribute="trailing" id="Pqg-at-O7e"/>
+                                    <constraint firstItem="4hC-iy-eIb" firstAttribute="leading" secondItem="f1F-0n-RY2" secondAttribute="leading" id="VPo-Ly-2rS"/>
+                                    <constraint firstItem="4hC-iy-eIb" firstAttribute="top" secondItem="f1F-0n-RY2" secondAttribute="top" id="eSj-j9-ALI"/>
+                                    <constraint firstItem="f1F-0n-RY2" firstAttribute="height" secondItem="JSo-fF-eXn" secondAttribute="height" priority="1" id="tdq-TH-ba6"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="4hC-iy-eIb"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="JSo-fF-eXn"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="fmA-R9-IYQ" firstAttribute="bottom" secondItem="wR5-Ez-c9R" secondAttribute="bottom" id="995-yn-5HN"/>
+                            <constraint firstItem="wR5-Ez-c9R" firstAttribute="top" secondItem="fmA-R9-IYQ" secondAttribute="top" id="GdQ-fV-ZUE"/>
+                            <constraint firstItem="fmA-R9-IYQ" firstAttribute="trailing" secondItem="wR5-Ez-c9R" secondAttribute="trailing" id="aBV-1F-O7k"/>
+                            <constraint firstItem="wR5-Ez-c9R" firstAttribute="leading" secondItem="fmA-R9-IYQ" secondAttribute="leading" id="qAi-rd-x5g"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="fmA-R9-IYQ"/>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="414" height="400"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="51Q-V0-c3B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="nNd-Fp-7Vg" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="4339" y="1093"/>
+        </scene>
+    </scenes>
+    <resources>
+        <namedColor name="NHS Text">
+            <color red="0.1289999932050705" green="0.16899999976158142" blue="0.19599999487400055" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
