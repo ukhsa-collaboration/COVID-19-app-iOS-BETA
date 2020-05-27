@@ -83,7 +83,8 @@ class StatusViewControllerTests: TestCase {
         let statusStateMachine = StatusStateMachiningDouble(
             state: .symptomatic(StatusState.Symptomatic(
                 symptoms: [.cough],
-                startDate: startDate
+                startDate: startDate,
+                checkinDate: StatusState.Symptomatic.firstCheckin(from: startDate)
             ))
         )
         let vc = makeViewController(statusStateMachine: statusStateMachine)
@@ -93,17 +94,6 @@ class StatusViewControllerTests: TestCase {
         XCTAssertEqual(vc.diagnosisDetailLabel.text, "On 14 May this app will notify you to update your symptoms. Please read your full advice below.")
     }
 
-    func testShowsSymptomaticStatusForCheckin() {
-        let statusStateMachine = StatusStateMachiningDouble(
-            state: .checkin(StatusState.Checkin(symptoms: [.temperature], checkinDate: Date()))
-        )
-        let vc = makeViewController(statusStateMachine: statusStateMachine)
-        
-        XCTAssertEqual(vc.diagnosisTitleLabel.text, "Your symptoms indicate you may have coronavirus. Please self-isolate and apply for a test.")
-        XCTAssertFalse(vc.diagnosisDetailLabel.isHidden)
-        XCTAssertEqual(vc.diagnosisDetailLabel.text, "Follow this advice until your temperature returns to normal.")
-    }
-    
     func testShowsCorrectAdviceInOkStatus() throws {
         let vc = makeViewController(
             persistence: PersistenceDouble(),
@@ -140,7 +130,7 @@ class StatusViewControllerTests: TestCase {
     func testShowsCorrectAdviceInSymptomaticStatus() throws {
         let vc = makeViewController(
             persistence: PersistenceDouble(),
-            statusStateMachine: StatusStateMachiningDouble(state: .symptomatic(StatusState.Symptomatic(symptoms: [], startDate: Date())))
+            statusStateMachine: StatusStateMachiningDouble(state: .symptomatic(StatusState.Symptomatic(symptoms: [], startDate: Date(), checkinDate: Date())))
         )
         let navigationController = SynchronousNavigationControllerDouble()
         navigationController.viewControllers = [vc]
@@ -171,7 +161,7 @@ class StatusViewControllerTests: TestCase {
     
     func testShowsDrawerAfterCheckinIfCoughButNoTemperature() throws {
         try PresentationSpy.withSpy {
-            let persistence = PersistenceDouble(statusState: .checkin(StatusState.Checkin(symptoms: [], checkinDate: Date())))
+            let persistence = PersistenceDouble(statusState: .symptomatic(StatusState.Symptomatic(symptoms: [], startDate: Date(), checkinDate: Date())))
             let statusStateMachine = StatusStateMachine(persisting: persistence, contactEventsUploader: ContactEventsUploaderDouble(), notificationCenter: NotificationCenter(), userNotificationCenter: UserNotificationCenterDouble())
             let drawerPresenter = DrawerPresenterDouble()
             let vc = makeViewController(
@@ -195,7 +185,7 @@ class StatusViewControllerTests: TestCase {
     
     func testShowsDrawerAfterCheckinIfAnosmiaButNoTemperature() throws {
         try PresentationSpy.withSpy {
-            let persistence = PersistenceDouble(statusState: .checkin(StatusState.Checkin(symptoms: [], checkinDate: Date())))
+            let persistence = PersistenceDouble(statusState: .symptomatic(StatusState.Symptomatic(symptoms: [], startDate: Date(), checkinDate: Date())))
             let statusStateMachine = StatusStateMachine(persisting: persistence, contactEventsUploader: ContactEventsUploaderDouble(), notificationCenter: NotificationCenter(), userNotificationCenter: UserNotificationCenterDouble())
             let drawerPresenter = DrawerPresenterDouble()
             let vc = makeViewController(
@@ -218,7 +208,7 @@ class StatusViewControllerTests: TestCase {
     
     func testDoesNotShowsDrawerAfterCheckinIfTemperature() throws{
         try PresentationSpy.withSpy {
-            let persistence = PersistenceDouble(statusState: .checkin(StatusState.Checkin(symptoms: [], checkinDate: Date())))
+            let persistence = PersistenceDouble(statusState: .symptomatic(StatusState.Symptomatic(symptoms: [], startDate: Date(), checkinDate: Date())))
             let statusStateMachine = StatusStateMachine(persisting: persistence, contactEventsUploader: ContactEventsUploaderDouble(), notificationCenter: NotificationCenter(), userNotificationCenter: UserNotificationCenterDouble())
             let drawerPresenter = DrawerPresenterDouble()
             let vc = makeViewController(

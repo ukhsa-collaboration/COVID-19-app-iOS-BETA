@@ -48,9 +48,7 @@ class StatusStateMachine: StatusStateMachining {
 
             switch newValue {
             case .symptomatic(let symptomatic):
-                add(notificationRequest: checkinNotificationRequest(at: symptomatic.expiryDate))
-            case .checkin(let checkin):
-                add(notificationRequest: checkinNotificationRequest(at: checkin.checkinDate))
+                add(notificationRequest: checkinNotificationRequest(at: symptomatic.checkinDate))
             case .exposed, .unexposed:
                 add(notificationRequest: adviceChangedNotificationRequest)
             case .positiveTestResult, .negativeTestResult, .unclearTestResult:
@@ -105,54 +103,61 @@ class StatusStateMachine: StatusStateMachining {
             return
         }
 
+        #warning("TODO refactor")
         switch state {
         case .ok:
-            let symptomatic = StatusState.Symptomatic(symptoms: symptoms, startDate: startDate)
+            let checkinDate = StatusState.Symptomatic.firstCheckin(from: startDate)
+            let symptomatic = StatusState.Symptomatic(symptoms: symptoms, startDate: startDate, checkinDate: checkinDate)
             try contactEventsUploader.upload(from: startDate, with: symptoms)
 
-            if currentDate < symptomatic.expiryDate {
+            if currentDate < symptomatic.checkinDate {
                 state = .symptomatic(symptomatic)
             } else { // expired
                 if symptoms.contains(.temperature) {
-                    guard let checkinDate = nextCheckinDate else { return }
-                    let checkin = StatusState.Checkin(symptoms: symptomatic.symptoms, checkinDate: checkinDate)
-                    state = .checkin(checkin)
+                    let checkinDate = StatusState.Symptomatic.nextCheckin(from: currentDate)
+                    let symptomatic = StatusState.Symptomatic(symptoms: symptoms, startDate: startDate, checkinDate: checkinDate)
+                    state = .symptomatic(symptomatic)
                 } else {
                     // don't do anything if we only have a cough
                 }
             }
         case .exposed:
-            let symptomatic = StatusState.Symptomatic(symptoms: symptoms, startDate: startDate)
+            #warning("TODO should be same as ok")
+            let checkinDate = StatusState.Symptomatic.firstCheckin(from: startDate)
+            let symptomatic = StatusState.Symptomatic(symptoms: symptoms, startDate: startDate, checkinDate: checkinDate)
             try contactEventsUploader.upload(from: startDate, with: symptoms)
             state = .symptomatic(symptomatic)
-        case .symptomatic, .checkin, .unexposed, .positiveTestResult, .unclearTestResult, .negativeTestResult:
+        case .symptomatic, .unexposed, .positiveTestResult, .unclearTestResult, .negativeTestResult:
             assertionFailure("Self-diagnosing is only allowed from ok/exposed")
         }
     }
     
     func tick() {
         switch state {
-        case .ok, .checkin, .unexposed, .negativeTestResult:
+        case .ok, .symptomatic, .unexposed, .negativeTestResult:
             break // Don't need to do anything
         case .unclearTestResult(let unclear):
             guard currentDate >= unclear.expiryDate else { return }
 
-            let checkin = StatusState.Checkin(symptoms: unclear.symptoms, checkinDate: unclear.expiryDate)
-            state = .checkin(checkin)
-        case .symptomatic(let symptomatic):
-            guard currentDate >= symptomatic.expiryDate else { return }
-
-            let checkin = StatusState.Checkin(symptoms: symptomatic.symptoms, checkinDate: symptomatic.expiryDate)
-            state = .checkin(checkin)
+            let symptomatic = StatusState.Symptomatic(
+                symptoms: unclear.symptoms,
+                startDate: unclear.startDate,
+                checkinDate: unclear.expiryDate
+            )
+            state = .symptomatic(symptomatic)
         case .exposed(let exposed):
             guard currentDate >= exposed.expiryDate else { return }
 
             state = .ok(StatusState.Ok())
-        case .positiveTestResult(let positiveTestResult):
-            guard currentDate >= positiveTestResult.expiryDate else { return }
+        case .positiveTestResult(let positive):
+            guard currentDate >= positive.expiryDate else { return }
 
-            let checkin = StatusState.Checkin(symptoms: positiveTestResult.symptoms, checkinDate: positiveTestResult.expiryDate)
-            state = .checkin(checkin)
+            let symptomatic = StatusState.Symptomatic(
+                symptoms: positive.symptoms,
+                startDate: positive.startDate,
+                checkinDate: positive.expiryDate
+            )
+            state = .symptomatic(symptomatic)
         }
     }
 
@@ -160,20 +165,19 @@ class StatusStateMachine: StatusStateMachining {
         userNotificationCenter.removePendingNotificationRequests(withIdentifiers: [checkinNotificationIdentifier])
 
         switch state {
-        case .ok, .symptomatic, .exposed, .unexposed, .positiveTestResult, .unclearTestResult, .negativeTestResult:
-            assertionFailure("Checking in is only allowed from checkin")
+        case .ok, .exposed, .unexposed, .positiveTestResult, .unclearTestResult, .negativeTestResult:
+            assertionFailure("Checking in is only allowed from symptomatic")
             return
-        case .checkin(let checkin):
-            guard currentDate >= checkin.checkinDate else {
+        case .symptomatic(let symptomatic):
+            guard currentDate >= symptomatic.checkinDate else {
                 assertionFailure("Checking in is only allowed after the checkin date")
                 return
             }
 
             if symptoms.contains(.temperature) {
-                guard let checkinDate = nextCheckinDate else { return }
-
-                let nextCheckin = StatusState.Checkin(symptoms: symptoms, checkinDate: checkinDate)
-                state = .checkin(nextCheckin)
+                let checkinDate = StatusState.Symptomatic.nextCheckin(from: currentDate)
+                let nextCheckin = StatusState.Symptomatic(symptoms: symptoms, startDate: symptomatic.startDate, checkinDate: checkinDate)
+                state = .symptomatic(nextCheckin)
             } else {
                 state = .ok(StatusState.Ok())
             }
@@ -190,7 +194,7 @@ class StatusStateMachine: StatusStateMachining {
         case .exposed:
             assertionFailure("The server should never send us another exposure notification if we're already exposed")
             break // ignore repeated exposures
-        case .symptomatic, .checkin, .positiveTestResult, .unclearTestResult:
+        case .symptomatic, .positiveTestResult, .unclearTestResult:
             break // don't care about exposures if we're already symptomatic
         case .negativeTestResult:
             assertionFailure("Status state's resolve method should not return an interstitial state")
@@ -202,7 +206,7 @@ class StatusStateMachine: StatusStateMachining {
         switch state.resolved() {
         case .exposed:
             state = .unexposed(StatusState.Unexposed())
-        case .ok, .symptomatic, .checkin, .unexposed, .positiveTestResult, .unclearTestResult:
+        case .ok, .symptomatic, .unexposed, .positiveTestResult, .unclearTestResult:
             break // no-op
         case .negativeTestResult:
             assertionFailure("Status state's resolve method should not return an interstitial state")
@@ -241,7 +245,7 @@ class StatusStateMachine: StatusStateMachining {
         case .unclearTestResult(let unclearTestResult):
             let positive = StatusState.PositiveTestResult(symptoms: unclearTestResult.symptoms, startDate: unclearTestResult.startDate)
             state = .positiveTestResult(positive)
-        case .checkin, .unexposed, .positiveTestResult:
+        case .unexposed, .positiveTestResult:
             let message = "Received positive test result, in a state where it is not expected"
             assertionFailure(message)
             self.logger.error("\(message)")
@@ -251,10 +255,6 @@ class StatusStateMachine: StatusStateMachining {
     func receivedNegativeTestResult(testTimestamp: Date) {
         switch state.resolved() {
         case .symptomatic(let symptomatic) where symptomatic.startDate < testTimestamp:
-            state = .negativeTestResult(
-                nextState: .ok(StatusState.Ok())
-            )
-        case .checkin(let checkin) where checkin.checkinDate < testTimestamp:
             state = .negativeTestResult(
                 nextState: .ok(StatusState.Ok())
             )

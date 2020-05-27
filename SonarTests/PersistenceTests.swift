@@ -230,9 +230,10 @@ class PersistenceTests: TestCase {
 
         UserDefaults.standard.set(Date(), forKey: "potentiallyExposed")
 
+        let checkinDate = Calendar.current.date(from: DateComponents(year: 2020, month: 6, day: 3, hour: 7))!
         XCTAssertEqual(
             persistence.statusState,
-            .symptomatic(StatusState.Symptomatic(symptoms: [.cough], startDate: diagnosis.startDate))
+            .symptomatic(StatusState.Symptomatic(symptoms: [.cough], startDate: diagnosis.startDate, checkinDate: checkinDate))
         )
         XCTAssertNil(UserDefaults.standard.object(forKey: "selfDiagnosis"))
         XCTAssertNil(UserDefaults.standard.object(forKey: "potentiallyExposed"))
