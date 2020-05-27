@@ -22,11 +22,19 @@ class TestUpdatesTrackerStoryWithBuildNumber < MiniTest::Test
   attr_accessor :tracker_token
   attr_accessor :build_number
   attr_accessor :tmpdir
+  attr_accessor :stub_headers
 
   def setup
     @tmpdir = Dir.mktmpdir
     @tracker_token = 'tracker_token'
     @build_number = 'some build number'
+
+    @stub_headers = {
+      'Accept' => 'application/json',
+      'X-TrackerToken' => tracker_token,
+      'User-Agent' => /.*/,
+      'Accept-Encoding' => /.*/,
+    }
 
     system('git', 'init', tmpdir)
     git_empty_commit('first commit')
@@ -208,14 +216,7 @@ class TestUpdatesTrackerStoryWithBuildNumber < MiniTest::Test
     assert_requested(
       :post,
       "#{TRACKER_API}/projects/#{project_id}/stories/#{story_id}/comments",
-      headers: {
-        'Accept' => 'application/json',
-        'Content-Type' => 'application/json',
-        'X-TrackerToken' => tracker_token,
-        'Host' => URI(TRACKER_API).host,
-        'User-Agent' => /.*/,
-        'Accept-Encoding' => /.*/,
-      },
+      headers: stub_headers,
       body: {
         :text => message
       }.to_json,
@@ -230,12 +231,7 @@ class TestUpdatesTrackerStoryWithBuildNumber < MiniTest::Test
     assert_requested(
       :get,
       "#{TRACKER_API}/stories/#{story_id}",
-      headers: {
-        'Accept' => 'application/json',
-        'X-TrackerToken' => tracker_token,
-        'User-Agent' => /.*/,
-        'Accept-Encoding' => /.*/,
-      }
+      headers: stub_headers
     )
   end
 
@@ -243,18 +239,17 @@ class TestUpdatesTrackerStoryWithBuildNumber < MiniTest::Test
     project_id:,
     story_id:
   )
+    _stub_get_story_request(story_id).to_return(
+      body: { :project_id => project_id }.to_json
+    )
+  end
+
+  private def _stub_get_story_request(story_id)
     stub_request(
       :get,
       "#{TRACKER_API}/stories/#{story_id}"
     ).with(
-      headers: {
-        'Accept' => 'application/json',
-        'X-TrackerToken' => tracker_token,
-        'User-Agent' => /.*/,
-        'Accept-Encoding' => /.*/,
-      }
-    ).to_return(
-      body: { :project_id => project_id }.to_json
+      headers: stub_headers
     )
   end
 end

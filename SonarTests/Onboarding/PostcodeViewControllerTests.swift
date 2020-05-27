@@ -19,7 +19,7 @@ class PostcodeViewControllerTests: TestCase {
         parentViewControllerForTests.viewControllers = [vc]
 
         XCTAssertNotNil(vc.view)
-        XCTAssertTrue(vc.postcodeError.isHidden)
+        XCTAssertTrue(vc.errorView.isHidden)
 
         vc.postcodeField.text = "1"
         vc.didTapContinue()
@@ -27,7 +27,7 @@ class PostcodeViewControllerTests: TestCase {
         XCTAssertNil(persistence.partialPostcode)
         XCTAssertFalse(continued)
 
-        XCTAssertFalse(vc.postcodeError.isHidden)
+        XCTAssertFalse(vc.errorView.isHidden)
     }
     
     func testAcceptsValidPostcodes() {
@@ -43,7 +43,7 @@ class PostcodeViewControllerTests: TestCase {
         
         XCTAssertEqual(persistence.partialPostcode, "X1")
         XCTAssertTrue(continued)
-        XCTAssertTrue(vc.postcodeError.isHidden)
+        XCTAssertTrue(vc.errorView.isHidden)
     }
     
     func testRemovesTrailingNewline() {

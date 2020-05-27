@@ -39,7 +39,7 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
     @IBOutlet weak var confirmLabel: UILabel!
     @IBOutlet weak var submitButton: PrimaryButton!
     @IBOutlet weak var confirmSwitch: UISwitch!
-    @IBOutlet var errorLabel: AccessibleErrorLabel!
+    @IBOutlet weak var errorView: ErrorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +47,7 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         thankYouLabel.text = "SUBMIT_SYMPTOMS_THANK_YOU".localized
         confirmLabel.text = "SUBMIT_SYMPTOMS_CONFIRM".localized
         confirmSwitch.accessibilityLabel = "Please toggle the switch to confirm the information you entered is accurate"
-        errorLabel.isHidden = true
+        errorView.isHidden = true
     }
 
     @IBAction func cancelTapped(_ sender: Any) {
@@ -98,17 +98,18 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         if confirmSwitch.isOn {
             return true
         } else {
-            scroll(after: {
+            scroll(toErrorLabel: errorView.errorMessage, orControl: confirmSwitch) {
                 self.presentErrorToUser()
-            }, toErrorLabel: errorLabel, orControl: confirmSwitch)
+            }
             
             return false
         }
     }
 
     private func presentErrorToUser() {
-        errorLabel.isHidden = false
-
+        errorView.isHidden = false
+        errorView.errorMessage.text = "Select if the information you have entered is accurate".localized
+        
         confirmSwitch.layer.borderWidth = 3
         confirmSwitch.layer.borderColor = UIColor(named: "NHS Error")!.cgColor
         confirmSwitch.layer.cornerRadius = 16

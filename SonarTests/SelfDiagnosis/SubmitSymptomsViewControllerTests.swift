@@ -31,7 +31,7 @@ class SubmitSymptomsViewControllerTests: TestCase {
         let unwinder = SelfDiagnosisUnwinder()
         parentViewControllerForTests.viewControllers = [unwinder]
         unwinder.present(vc, animated: false)
-        XCTAssertTrue(vc.errorLabel.isHidden)
+        XCTAssertTrue(vc.errorView.isHidden)
         XCTAssertFalse(vc.confirmSwitch.isOn)
         
         let button = PrimaryButton()
@@ -39,7 +39,7 @@ class SubmitSymptomsViewControllerTests: TestCase {
 
         XCTAssertNil(statusStateMachine.selfDiagnosisCalled)
         XCTAssertNil(statusStateMachine.checkinSymptoms)
-        XCTAssertFalse(vc.errorLabel.isHidden)
+        XCTAssertFalse(vc.errorView.isHidden)
         XCTAssertEqual(vc.confirmSwitch.layer.borderColor, UIColor(named: "NHS Error")!.cgColor)
     }
 
@@ -62,7 +62,7 @@ class SubmitSymptomsViewControllerTests: TestCase {
         XCTAssertEqual(symptoms, [.temperature])
         XCTAssertEqual(startDate, date)
         XCTAssertNil(statusStateMachine.checkinSymptoms)
-        XCTAssertTrue(vc.errorLabel.isHidden)
+        XCTAssertTrue(vc.errorView.isHidden)
     }
     
     func testHasNoSymptoms() {
