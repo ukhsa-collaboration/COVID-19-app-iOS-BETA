@@ -1,0 +1,20 @@
+name: docker-ci-test
+
+on:
+  repository_dispatch:
+    types: [docker-ci-test]
+
+jobs:
+  docker-ci-test:
+    runs-on:
+      - self-hosted
+      - macos
+    steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.client_payload.ref }}
+
+      - name: Test docker github action
+        uses: .github/actions/update-tracker-stories
