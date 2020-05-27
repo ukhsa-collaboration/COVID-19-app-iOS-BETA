@@ -32,6 +32,7 @@ protocol Persisting {
     var disabledNotificationsStatusView: Bool { get nonmutating set }
     var acknowledgmentUrls: Set<URL> { get nonmutating set }
     var statusState: StatusState { get nonmutating set }
+    var drawerMessages: [DrawerMessage] { get nonmutating set }
 
     func clear()
 }
@@ -53,6 +54,7 @@ class Persistence: Persisting {
         case statusState
         case disabledNotificationsStatusView
         case registeredPushToken
+        case drawerMessages
     }
     
     private let encoder = JSONEncoder()
@@ -224,6 +226,27 @@ class Persistence: Persisting {
             }
 
             UserDefaults.standard.set(data, forKey: Keys.statusState.rawValue)
+        }
+    }
+
+    var drawerMessages: [DrawerMessage] {
+        get {
+            guard
+                let data = UserDefaults.standard.data(forKey: Keys.drawerMessages.rawValue),
+                let decoded = try? decoder.decode([DrawerMessage].self, from: data)
+            else {
+                return []
+            }
+
+            return decoded
+        }
+        set {
+            guard let data = try? encoder.encode(newValue) else {
+                logger.critical("Unable to encode the drawer messages")
+                return
+            }
+
+            UserDefaults.standard.set(data, forKey: Keys.drawerMessages.rawValue)
         }
     }
     

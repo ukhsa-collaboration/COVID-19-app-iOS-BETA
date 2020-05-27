@@ -237,7 +237,15 @@ class PersistenceTests: TestCase {
         XCTAssertNil(UserDefaults.standard.object(forKey: "selfDiagnosis"))
         XCTAssertNil(UserDefaults.standard.object(forKey: "potentiallyExposed"))
     }
-    
+
+    func testDrawerMessages() {
+        persistence.drawerMessages = [.unexposed]
+        XCTAssertEqual(persistence.drawerMessages, [.unexposed])
+
+        persistence.drawerMessages.removeFirst()
+        XCTAssertTrue(persistence.drawerMessages.isEmpty)
+    }
+
     private func recreatePersistence() {
         storageChecker.markAsSyncedCallbackCount = 0
         persistence = Persistence(
