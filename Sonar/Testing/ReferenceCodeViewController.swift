@@ -14,6 +14,7 @@ class ReferenceCodeViewController: UIViewController, Storyboarded {
     @IBOutlet var errorWrapper: UIView!
     @IBOutlet var referenceCodeWrapper: UIView!
     @IBOutlet var referenceCodeLabel: UILabel!
+    @IBOutlet weak var copyButton: ButtonWithDynamicType!
 
     private var referenceCode: String?
     
@@ -23,12 +24,17 @@ class ReferenceCodeViewController: UIViewController, Storyboarded {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         view.translatesAutoresizingMaskIntoConstraints = false
         
         if let referenceCode = referenceCode {
             errorWrapper.isHidden = true
             referenceCodeWrapper.isHidden = false
             referenceCodeLabel.text = referenceCode
+
+            let pronouncableRefCode = referenceCode.map { String($0) }.joined(separator: ", ")
+            referenceCodeWrapper.accessibilityLabel = "Your app reference code is \(pronouncableRefCode)"
+            referenceCodeWrapper.accessibilityHint = "Copies the app reference code."
         } else {
             errorWrapper.isHidden = false
             referenceCodeWrapper.isHidden = true
@@ -37,17 +43,8 @@ class ReferenceCodeViewController: UIViewController, Storyboarded {
 
     @IBAction func copyTapped() {
         UIPasteboard.general.string = referenceCodeLabel.text
-
-        // This is an arbitrary dev animation to fade the
-        // reference code view so the user knows we actually
-        // did something when they tap "copy".
-        UIView.animate(withDuration: 0.2, animations: {
-            self.referenceCodeWrapper.alpha = 0.5
-        }, completion: { _ in
-            UIView.animate(withDuration: 0.2, animations: {
-                self.referenceCodeWrapper.alpha = 1
-            })
-        })
+        copyButton.setTitle("COPIED".localized, for: .normal)
+        UIAccessibility.post(notification: .layoutChanged, argument: copyButton)
     }
 
 }

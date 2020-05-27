@@ -87,6 +87,11 @@ class UITestScreenMaker {
             let unclearTestResult = StatusState.UnclearTestResult(symptoms: [], startDate: self.dateProvider())
             persistence.statusState = .unclearTestResult(unclearTestResult)
             return createNavigationController()
+        
+        case .negativeTestSymptomatic:
+            let symptomaticState = StatusState.Symptomatic(symptoms: [], startDate: self.dateProvider())
+            persistence.statusState = .negativeTestResult(nextState: .symptomatic(symptomaticState))
+            return createNavigationController()
         }
     }
     

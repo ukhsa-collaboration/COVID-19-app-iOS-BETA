@@ -57,6 +57,16 @@ class UnclearTestStatusPage : Page {
     }
 }
 
+class NegativeTestSymptomaticPage : Page {
+    var noSymptomsButton: XCUIElement {
+        app.buttons["I no longer have symptoms"]
+    }
+    
+    var hasSymptomsButton: XCUIElement {
+        app.buttons["Update my symptoms"]
+    }
+}
+
 class SymptomsTemperaturePage : Page {
     var title: XCUIElement {
         app.staticTexts["Do you have a high temperature (fever)?"]

@@ -186,7 +186,7 @@
                                                 </constraints>
                                             </view>
                                         </subviews>
-                                        <accessibility key="accessibilityConfiguration" hint="Tap to copy the reference code">
+                                        <accessibility key="accessibilityConfiguration">
                                             <accessibilityTraits key="traits" button="YES"/>
                                             <bool key="isElement" value="YES"/>
                                         </accessibility>
@@ -220,6 +220,7 @@
                     </view>
                     <size key="freeformSize" width="350" height="400"/>
                     <connections>
+                        <outlet property="copyButton" destination="TV5-Xb-NKH" id="2eo-H3-7mi"/>
                         <outlet property="errorWrapper" destination="8DU-FX-l1Y" id="uSk-6C-qbE"/>
                         <outlet property="referenceCodeLabel" destination="lN1-AR-0MP" id="cLy-dQ-8zb"/>
                         <outlet property="referenceCodeWrapper" destination="pUX-5H-FhL" id="AGx-SR-h5f"/>
