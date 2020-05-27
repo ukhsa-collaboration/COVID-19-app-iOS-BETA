@@ -2,12 +2,14 @@ require 'tmpdir'
 
 require 'test_support/git_test_support'
 require 'test_support/tracker_webmock_support'
+require 'test_support/output_capture_support'
 
 require 'updates_tracker_stories_with_build_number'
 
 class TestUpdatesTrackerStoryWithBuildNumber < MiniTest::Test
   include GitTestSupport
   include TrackerWebmockSupport
+  include OutputCaptureSupport
   include UpdatesTrackerStoriesWithBuildNumber
 
   attr_accessor :tracker_token
@@ -284,27 +286,5 @@ class TestUpdatesTrackerStoryWithBuildNumber < MiniTest::Test
       message: "This was delivered in TestFlight build #{build_number}",
       times: 1
     )
-  end
-
-  private def capture_stderr(&block)
-    original_stderr = $stderr
-    $stderr = fake = StringIO.new
-    begin
-      yield
-    ensure
-      $stderr = original_stderr
-    end
-    fake.string
-  end
-
-  private def capture_stdout(&block)
-    original_stdout = $stdout
-    $stdout = fake = StringIO.new
-    begin
-      yield
-    ensure
-      $stdout = original_stdout
-    end
-    fake.string
   end
 end
