@@ -9,7 +9,7 @@ rev_list = ARGV.shift
 update_stories_with_build_number(
   build_number: ENV.fetch("BUILD"),
   tracker_token: ENV.fetch("PIVOTAL_TRACKER_API_TOKEN"),
-  commits: rev_list
+  commits: rev_list,
   message_template: 'This story was included in build %<build_number>',
   git_dir: File.expand_path("..", __dir__)),
 )
