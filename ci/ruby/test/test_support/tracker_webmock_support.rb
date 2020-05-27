@@ -75,11 +75,16 @@ module TrackerWebmockSupport
 
   def stub_get_story_request(
     project_id:,
-    story_id:
+    story_id:,
+    name: 'A story'
   )
     _stub_get_story_request(story_id).to_return(
       status: 200,
-      body: { :project_id => project_id }.to_json
+      body: {
+        :project_id => project_id,
+        :name => name,
+        :url => "#{TRACKER_API}/story/show/#{story_id}",
+      }.to_json
     )
   end
 
