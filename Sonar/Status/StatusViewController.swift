@@ -265,27 +265,21 @@ class StatusViewController: UIViewController, Storyboarded {
         statusStateMachine.tick()
 
         switch statusStateMachine.state {
-        case .ok, .unexposed, .negativeTestResult:
-            diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Blue")
-            diagnosisTitleLabel.text = "Follow the current advice to stop the spread of coronavirus"
-            diagnosisDetailLabel.isHidden = true
-            feelUnwellButton.isHidden = false
-            applyForTestButton.isHidden = true
-            stepsDetailLabel.isHidden = false
-            stepsDetailLabel.text = "If you don’t have any symptoms, there’s no need to do anything right now. If you develop symptoms, please come back to this app."
-
-            if case .unexposed = statusStateMachine.state {
-                let config = DrawerViewController.Config(
-                    header: "UNEXPOSED_DRAWER_HEADER".localized,
-                    detail: "UNEXPOSED_DRAWER_DETAIL".localized
-                ) { self.statusStateMachine.ok() }
-                performSegue(withIdentifier: "presentDrawer", sender: config)
-            }
+        case .ok:
+            detailForNeutral()
+        
+        case .unexposed:
+            detailForNeutral()
+            let config = DrawerViewController.Config(
+                header: "UNEXPOSED_DRAWER_HEADER".localized,
+                detail: "UNEXPOSED_DRAWER_DETAIL".localized
+            ) { self.statusStateMachine.ok() }
+            performSegue(withIdentifier: "presentDrawer", sender: config)
             
-            if case .negativeTestResult = statusStateMachine.state {
-                presentTestResultUpdate(result: .negative)
-            }
-
+        case .negativeTestResult(_, nextState: let nextState):
+            detailForNeutral()
+            presentTestResultUpdate(result: .negative)
+            
         case .exposed:
             diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
             diagnosisTitleLabel.text = "You have been near someone who has coronavirus symptoms"
@@ -341,7 +335,16 @@ class StatusViewController: UIViewController, Storyboarded {
         applyForTestButton.isHidden = false
         stepsDetailLabel.isHidden = false
         stepsDetailLabel.text = "Please book a coronavirus test immediately. Write down your reference code and phone 0800 540 4900"
-
+    }
+    
+    func detailForNeutral() {
+        diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Blue")
+        diagnosisTitleLabel.text = "Follow the current advice to stop the spread of coronavirus"
+        diagnosisDetailLabel.isHidden = true
+        feelUnwellButton.isHidden = false
+        applyForTestButton.isHidden = true
+        stepsDetailLabel.isHidden = false
+        stepsDetailLabel.text = "If you don’t have any symptoms, there’s no need to do anything right now. If you develop symptoms, please come back to this app."
     }
 
     private func presentHaveSymptomsButDontIsolateUpdate() {
