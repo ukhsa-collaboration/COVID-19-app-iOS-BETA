@@ -128,6 +128,7 @@ private class InMemoryPersistence: Persisting {
     var disabledNotificationsStatusView: Bool = false
     var acknowledgmentUrls: Set<URL> = []
     var statusState: StatusState = .ok(StatusState.Ok())
+    var drawerMessages: [DrawerMessage] = []
 
     func clear() {
         registration = nil
@@ -139,6 +140,7 @@ private class InMemoryPersistence: Persisting {
         disabledNotificationsStatusView = false
         acknowledgmentUrls = []
         statusState = .ok(StatusState.Ok())
+        drawerMessages = []
     }
 }
 

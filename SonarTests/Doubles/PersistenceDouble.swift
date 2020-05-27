@@ -23,6 +23,7 @@ class PersistenceDouble: Persisting {
     var disabledNotificationsStatusView: Bool
     var acknowledgmentUrls: Set<URL>
     var statusState: StatusState
+    var drawerMessages: [DrawerMessage]
 
     init(
         potentiallyExposed: Date? = nil,
@@ -36,7 +37,8 @@ class PersistenceDouble: Persisting {
         registeredPushToken: String? = nil,
         disabledNotificationsStatusView: Bool = false,
         acknowledgmentUrls: Set<URL> = [],
-        statusState: StatusState = .ok(StatusState.Ok())
+        statusState: StatusState = .ok(StatusState.Ok()),
+        drawerMessages: [DrawerMessage] = []
     ) {
         self.registration = registration
         self.potentiallyExposed = potentiallyExposed
@@ -50,6 +52,7 @@ class PersistenceDouble: Persisting {
         self.disabledNotificationsStatusView = disabledNotificationsStatusView
         self.acknowledgmentUrls = acknowledgmentUrls
         self.statusState = statusState
+        self.drawerMessages = drawerMessages
     }
 
     func clear() {
@@ -63,5 +66,6 @@ class PersistenceDouble: Persisting {
         registeredPushToken = nil
         acknowledgmentUrls = []
         statusState = .ok(StatusState.Ok())
+        drawerMessages = []
     }
 }

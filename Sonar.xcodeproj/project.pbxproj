@@ -250,6 +250,8 @@
 		F694B1BE2459EB3800C6A5D1 /* NotificationAcknowledgerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F694B1BD2459EB3800C6A5D1 /* NotificationAcknowledgerTests.swift */; };
 		F694B1C02459EEB800C6A5D1 /* NotificationAcknowledgerDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = F694B1BF2459EEB800C6A5D1 /* NotificationAcknowledgerDouble.swift */; };
 		F697806A246DA9EF002CC50B /* SetStatusStateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6978069246DA9EF002CC50B /* SetStatusStateViewController.swift */; };
+		F6AA91EE247ED45D00D086B8 /* DrawerMailbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AA91ED247ED45D00D086B8 /* DrawerMailbox.swift */; };
+		F6AA91F0247ED65A00D086B8 /* DrawerMailboxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AA91EF247ED65A00D086B8 /* DrawerMailboxTests.swift */; };
 		F6AB2F20243D359F00386D6B /* SubmitSymptomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */; };
 		F6BBE13C246F46B4005757BB /* ApplyForTest.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6BBE13B246F46B4005757BB /* ApplyForTest.storyboard */; };
 		F6BBE13E246F46EE005757BB /* ApplyForTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BBE13D246F46EE005757BB /* ApplyForTestViewController.swift */; };
@@ -604,6 +606,8 @@
 		F694B1BD2459EB3800C6A5D1 /* NotificationAcknowledgerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAcknowledgerTests.swift; sourceTree = "<group>"; };
 		F694B1BF2459EEB800C6A5D1 /* NotificationAcknowledgerDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAcknowledgerDouble.swift; sourceTree = "<group>"; };
 		F6978069246DA9EF002CC50B /* SetStatusStateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetStatusStateViewController.swift; sourceTree = "<group>"; };
+		F6AA91ED247ED45D00D086B8 /* DrawerMailbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerMailbox.swift; sourceTree = "<group>"; };
+		F6AA91EF247ED65A00D086B8 /* DrawerMailboxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerMailboxTests.swift; sourceTree = "<group>"; };
 		F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitSymptomsViewController.swift; sourceTree = "<group>"; };
 		F6BBE13B246F46B4005757BB /* ApplyForTest.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ApplyForTest.storyboard; sourceTree = "<group>"; };
 		F6BBE13D246F46EE005757BB /* ApplyForTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyForTestViewController.swift; sourceTree = "<group>"; };
@@ -749,6 +753,7 @@
 		0983ACD1243EB20A00DBB336 /* Status */ = {
 			isa = PBXGroup;
 			children = (
+				F6AA91EF247ED65A00D086B8 /* DrawerMailboxTests.swift */,
 				F6334E4E24748C3400421B4C /* RegistrationStatusViewControllerTests.swift */,
 				F61695A22458B556006AABE3 /* StateNotificationHandlerTests.swift */,
 				F6DA0A392469DCF7001F0B48 /* StatusStateMachineTests.swift */,
@@ -828,11 +833,12 @@
 			children = (
 				F6099A792474976400758D3E /* Advice.storyboard */,
 				DD3FCF402476E913008B0237 /* Drawer.storyboard */,
-				F6334E4C24748B3000421B4C /* RegistrationStatus.storyboard */,
-				F6BBE140246F584F005757BB /* WorkplaceGuidance.storyboard */,
-				F758B8C3242CC0EE003AE16D /* Status.storyboard */,
 				1376F7D6247E628500524CEE /* QuestionnaireDrawer.storyboard */,
+				F6334E4C24748B3000421B4C /* RegistrationStatus.storyboard */,
+				F758B8C3242CC0EE003AE16D /* Status.storyboard */,
+				F6BBE140246F584F005757BB /* WorkplaceGuidance.storyboard */,
 				13473A1A246AFF0C00800CEA /* AdviceViewController.swift */,
+				F6AA91ED247ED45D00D086B8 /* DrawerMailbox.swift */,
 				DD3FCF3F2476E913008B0237 /* DrawerViewController.swift */,
 				DD3FCF3A2476E8C3008B0237 /* ExposedNotificationHandler.swift */,
 				F6334E4A24747DC300421B4C /* RegistrationStatusViewController.swift */,
@@ -1747,6 +1753,7 @@
 				0991B8B2244FB03E0076C58B /* BluetoothPermissionDeniedViewControllerTests.swift in Sources */,
 				09A925452453807000C5DBC1 /* RegistrationReminderSchedulerTests.swift in Sources */,
 				F6DA0A362469D95F001F0B48 /* StatusStateMigrationTests.swift in Sources */,
+				F6AA91F0247ED65A00D086B8 /* DrawerMailboxTests.swift in Sources */,
 				09B103622444E9110091834D /* ContactEventPersisterDouble.swift in Sources */,
 				098ED48C242E8B290029B729 /* PersistenceDouble.swift in Sources */,
 				F61695A32458B556006AABE3 /* StateNotificationHandlerTests.swift in Sources */,
@@ -1893,6 +1900,7 @@
 				896BE90F244F07FF00B3687C /* PublicKeyValidator.swift in Sources */,
 				134470AD2454D4DA001A0AD9 /* CheckinCoordinator.swift in Sources */,
 				8983E618245867CF001F2011 /* AppEvent.swift in Sources */,
+				F6AA91EE247ED45D00D086B8 /* DrawerMailbox.swift in Sources */,
 				89C8B212245C5093009CCE80 /* DailyMetricsCollector.swift in Sources */,
 				13473A1D246C0F2C00800CEA /* StatusViewController.swift in Sources */,
 				89C8B210245C37BF009CCE80 /* AppCenterMonitor.swift in Sources */,
