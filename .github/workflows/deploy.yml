@@ -97,13 +97,13 @@ jobs:
           ./bin/update-backlog ${last_uploaded}..${{ steps.tag-commit.outputs.tag }}
         continue-on-error: true
 
-      - name: Notify Slack on Upload
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.slack_bot_token }}
-        uses: voxmedia/github-action-slack-notify-build@5125947 # v1.1.1
-        with:
-          channel_id: G011ZPSAD4J
-          status: uploaded [${{ steps.tag-commit.outputs.tag }}]
+      # - name: Notify Slack on Upload
+      #   env:
+      #     SLACK_BOT_TOKEN: ${{ secrets.slack_bot_token }}
+      #   uses: voxmedia/github-action-slack-notify-build@5125947 # v1.1.1
+      #   with:
+      #     channel_id: G011ZPSAD4J
+      #     status: uploaded [${{ steps.tag-commit.outputs.tag }}]
 
       - name: Notify Slack on Failure
         if: failure()

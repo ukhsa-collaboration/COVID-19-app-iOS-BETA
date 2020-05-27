@@ -92,7 +92,7 @@ class ContactEventDetailTableViewController: UITableViewController {
             cell.textLabel?.text = "\(hmac)"
 
         case (.txPower, 0):
-            cell.textLabel?.text = "Advertisement: \(contactEvent.txPower)"
+            cell.textLabel?.text = "Advertisement: \(contactEvent.txPower ??? "--")"
             
         case (.txPower, 1):
             cell.textLabel?.text = "Self-reported: \(contactEvent.broadcastPayload?.txPower ??? "--")"
