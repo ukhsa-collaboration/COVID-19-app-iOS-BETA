@@ -104,7 +104,8 @@ class UITestScreenMaker {
                 linkingIdManager: linkingIdManager,
                 registrationService: registrationService,
                 dateProvider: self.dateProvider,
-                notificationCenter: notificationCenter
+                notificationCenter: notificationCenter,
+                localeProvider: AutoupdatingCurrentLocaleProvider()
             )
         }
         let navigationController = UINavigationController()
