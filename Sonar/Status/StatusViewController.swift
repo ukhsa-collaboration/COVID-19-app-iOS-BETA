@@ -276,7 +276,7 @@ class StatusViewController: UIViewController, Storyboarded {
             ) { self.statusStateMachine.ok() }
             performSegue(withIdentifier: "presentDrawer", sender: config)
             
-        case .negativeTestResult(_, nextState: let nextState):
+        case .negativeTestResult(nextState: _):
             detailForNeutral()
             presentTestResultUpdate(result: .negative)
             
