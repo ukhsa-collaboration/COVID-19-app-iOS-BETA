@@ -86,12 +86,12 @@ class PersistingContactEventRepositoryTests: XCTestCase {
         
         XCTAssertEqual(repository.contactEvents.count, 2)
         
-        let contactEvent1 = repository.contactEvents[0]
+        let contactEvent1 = try XCTUnwrap(repository.contactEvents.first(where: {$0.txPower == 1}))
         XCTAssertEqual(contactEvent1.broadcastPayload, payload1)
         XCTAssertEqual(contactEvent1.txPower, 1)
         XCTAssertEqual(contactEvent1.rssiValues, [11, 12, 13, 14])
         
-        let contactEvent2 = repository.contactEvents[1]
+        let contactEvent2 = try XCTUnwrap(repository.contactEvents.first(where: {$0.txPower == 2}))
         XCTAssertEqual(contactEvent2.broadcastPayload, payload1)
         XCTAssertEqual(contactEvent2.txPower, 2)
         XCTAssertEqual(contactEvent2.rssiValues, [22, 23, 24])
