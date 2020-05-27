@@ -150,6 +150,16 @@ class DebugViewController: UITableViewController, Storyboarded {
                 self.statusStateMachine.received(positiveTestResult)
             }
 
+        case (3, 3):
+            performSegue(withIdentifier: "unwindFromDebugViewController", sender: self)
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5)) {
+                let positiveTestResult = TestResult(result: .negative,
+                                                    testTimestamp: Date(),
+                                                    type: nil,
+                                                    acknowledgementUrl: nil)
+                self.statusStateMachine.received(positiveTestResult)
+            }
+
         case (4, 0):
             #if DEBUG
             guard let debugInfo = Environment.debug else {

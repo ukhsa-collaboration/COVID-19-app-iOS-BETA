@@ -108,6 +108,7 @@ class StatusViewController: UIViewController, Storyboarded {
         }()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Info"), style: .plain, target: self, action: #selector(infoTapped))
+        navigationItem.rightBarButtonItem?.accessibilityLabel = "Info"
 
         diagnosisHighlightView.layer.cornerRadius = 8
         diagnosisHighlightView.accessibilityIgnoresInvertColors = true
