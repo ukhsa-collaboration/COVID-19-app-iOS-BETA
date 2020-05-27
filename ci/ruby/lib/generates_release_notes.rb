@@ -30,18 +30,25 @@ module GeneratesReleaseNotes
     story_ids.each do |story_id|
       status, story = tracker.story(story_id)
 
-      case status
-      when :not_authorized
-        warn("not authorized to get story #{story_id}")
-        next
-      when :not_found
-        warn("could not find tracker story with id #{story_id}")
+      if status != :success
+        error_on_get_story(status, story_id)
         next
       end
 
       story_url = story.fetch('url')
       story_name = story.fetch('name')
       io.puts("  * [##{story_id}](#{story_url}) - #{story_name}")
+    end
+  end
+
+  private def error_on_get_story(status, story_id)
+    case status
+    when :not_authorized
+      warn("not authorized to get story #{story_id}")
+    when :not_found
+      warn("could not find tracker story with id #{story_id}")
+    else
+      warn("could not get story #{story_id} due to unknown error")
     end
   end
 end
