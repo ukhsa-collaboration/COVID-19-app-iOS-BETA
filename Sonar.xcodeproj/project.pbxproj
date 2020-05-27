@@ -1263,17 +1263,17 @@
 			isa = PBXGroup;
 			children = (
 				F6BBE13B246F46B4005757BB /* ApplyForTest.storyboard */,
-				F6BBE13D246F46EE005757BB /* ApplyForTestViewController.swift */,
-				0938D9052474473E006FAADF /* ApplyForTestContainerViewController.swift */,
+				AE29892B24729AD8004C4097 /* ReferenceCode.storyboard */,
 				F60497782454A40B002B8503 /* TestingInfo.storyboard */,
-				097F05482473445A00E633C8 /* TestingInfoContainerViewController.swift */,
+				0938D9052474473E006FAADF /* ApplyForTestContainerViewController.swift */,
+				F6BBE13D246F46EE005757BB /* ApplyForTestViewController.swift */,
 				F604977124549B7B002B8503 /* LinkingIdManager.swift */,
 				F604976E24549729002B8503 /* LinkingIdRequest.swift */,
-				F60497762454A294002B8503 /* TestingInfoViewController.swift */,
-				AE29892B24729AD8004C4097 /* ReferenceCode.storyboard */,
+				0937F78E247461D40010FB3B /* ReferenceCodeContainerViewControllerBase.swift */,
 				097F054624733FC200E633C8 /* ReferenceCodeLoadingViewController.swift */,
 				09CDA11724734FB100C8684D /* ReferenceCodeViewController.swift */,
-				0937F78E247461D40010FB3B /* ReferenceCodeContainerViewControllerBase.swift */,
+				097F05482473445A00E633C8 /* TestingInfoContainerViewController.swift */,
+				F60497762454A294002B8503 /* TestingInfoViewController.swift */,
 			);
 			path = Testing;
 			sourceTree = "<group>";
