@@ -28,7 +28,17 @@ module GeneratesReleaseNotes
     io.puts
 
     story_ids.each do |story_id|
-      _, story = tracker.story(story_id)
+      status, story = tracker.story(story_id)
+
+      case status
+      when :not_authorized
+        warn("not authorized to get story #{story_id}")
+        next
+      when :not_found
+        warn("could not find tracker story with id #{story_id}")
+        next
+      end
+
       story_url = story.fetch('url')
       story_name = story.fetch('name')
       io.puts("  * [##{story_id}](#{story_url}) - #{story_name}")

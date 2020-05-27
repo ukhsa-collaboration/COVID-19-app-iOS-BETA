@@ -99,6 +99,80 @@ class TestGeneratesReleaseNotes < MiniTest::Test
     EXPECTED
   end
 
+  def test_warns_for_unknown_story
+    project_id = 9876
+    story_1_id = 1234
+
+    story_2_id = 2345
+
+    git_empty_commit("[Finishes ##{story_1_id}] a commit")
+    git_empty_commit("[Finishes ##{story_2_id}] a commit")
+
+    stub_get_story_request_404(
+      story_id: story_1_id
+    )
+
+    stub_get_story_request(
+      project_id: project_id,
+      story_id: story_2_id,
+      name: "Story 2",
+    )
+
+    stderr = capture_stderr do
+      generate_release_notes(
+        io: io,
+        tracker_token: tracker_token,
+        commits: 'HEAD~2..HEAD',
+        git_dir: tmpdir
+      )
+    end
+
+    assert_equal("could not find tracker story with id 1234\n", stderr)
+
+    assert_equal(<<~EXPECTED, release_notes)
+    Changes (HEAD~2..HEAD)
+
+      * [##{story_2_id}](#{TRACKER_API}/story/show/#{story_2_id}) - Story 2
+    EXPECTED
+  end
+
+  def test_warns_when_not_authorized_to_read_story
+    project_id = 9876
+    story_1_id = 1234
+
+    story_2_id = 2345
+
+    git_empty_commit("[Finishes ##{story_1_id}] a commit")
+    git_empty_commit("[Finishes ##{story_2_id}] a commit")
+
+    stub_get_story_request_403(
+      story_id: story_1_id
+    )
+
+    stub_get_story_request(
+      project_id: project_id,
+      story_id: story_2_id,
+      name: "Story 2",
+    )
+
+    stderr = capture_stderr do
+      generate_release_notes(
+        io: io,
+        tracker_token: tracker_token,
+        commits: 'HEAD~2..HEAD',
+        git_dir: tmpdir
+      )
+    end
+
+    assert_equal("not authorized to get story 1234\n", stderr)
+
+    assert_equal(<<~EXPECTED, release_notes)
+    Changes (HEAD~2..HEAD)
+
+      * [##{story_2_id}](#{TRACKER_API}/story/show/#{story_2_id}) - Story 2
+    EXPECTED
+  end
+
   private
 
   def release_notes
