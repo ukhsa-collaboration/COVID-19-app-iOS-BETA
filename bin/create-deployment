@@ -8,7 +8,8 @@ DATA=$(cat <<EOF
   "required_contexts": [],
   "payload":"${DEPLOYMENT_PAYLOAD:-}",
   "environment":"${1}",
-  "auto_merge": false
+  "auto_merge": false,
+  "description": "${DEPLOYMENT_DESCRIPTION:-}"
 }
 EOF
 )

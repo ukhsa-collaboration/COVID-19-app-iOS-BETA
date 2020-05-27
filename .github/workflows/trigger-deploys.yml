@@ -53,6 +53,7 @@ jobs:
           git add Sonar/Info.plist
           build_number=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" "Sonar/Info.plist")
           git commit --message="Bump build version number to $build_number"
+          echo "::set-output name=build-number::$build_number"
           echo "::set-output name=commit-sha::$(git rev-parse HEAD)"
           git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
           git push
@@ -81,6 +82,7 @@ jobs:
           DEPLOYMENT_TOKEN: ${{ secrets.deployment_token }}
           DEPLOYMENT_SHA: ${{ needs.bump-build-number.outputs.commit-sha }}
           DEPLOYMENT_PAYLOAD: 'This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}**.\n\nThe commit hash was: _${{ steps.build-version.outputs.commit-sha }}_.'
+          DEPLOYMENT_DESCRIPTION: ${{ steps.bump-build-number.outputs.build-number }}
         run: ./bin/create-deployment ${{ matrix.run-config['env'] }}
 
   notify:
