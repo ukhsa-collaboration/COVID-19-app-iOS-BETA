@@ -30,8 +30,6 @@ class StartDateViewController: UIViewController {
                 return
             }
 
-            errorView.isHidden = true
-
             button.text = dateFormatter.string(from: date)
             delegate?.startDateViewController(self, didSelectDate: date)
         }
@@ -40,8 +38,7 @@ class StartDateViewController: UIViewController {
     private let logger = Logger(label: String(describing: self))
 
     @IBOutlet weak var label: UILabel!
-    @IBOutlet weak var errorView: UIView!
-    @IBOutlet weak var errorLabel: AccessibleErrorLabel!
+    @IBOutlet weak var errorView: ErrorView!
     @IBOutlet weak var button: StartDateButton!
 
     @IBOutlet var datePicker: UIPickerView!
@@ -65,8 +62,8 @@ class StartDateViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
 
         label.text = "SYMPTOMS_START_QUESTION".localized
-
-        errorLabel.text = "SYMPTOMS_START_ERROR".localized
+        errorView.isHidden = true
+        errorView.errorMessage.text = "SYMPTOMS_START_ERROR".localized
 
         button.text = "SELECT_START_DATE".localized
     }
@@ -79,9 +76,9 @@ class StartDateViewController: UIViewController {
     // MARK: - Support for Dyanmic Type
     
     private func showPicker() {
-        scroll(after: {
+        scroll(to: self.datePicker) {
             self.datePicker.isHidden = !self.datePicker.isHidden
-        }, to: self.datePicker)
+        }
     }
 
     private func makeLabelForPickerRow() -> UILabel {

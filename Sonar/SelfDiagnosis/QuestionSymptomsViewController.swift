@@ -14,7 +14,7 @@ class QuestionSymptomsViewController: UIViewController, Storyboarded {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var pageLabel: UILabel!
     @IBOutlet weak var detailLabel: UILabel!
-    @IBOutlet weak var errorLabel: AccessibleErrorLabel!
+    @IBOutlet weak var errorView: ErrorView!
     @IBOutlet weak var yesButton: AnswerButton!
     @IBOutlet weak var noButton: AnswerButton!
     @IBOutlet weak var questionButton: PrimaryButton!
@@ -60,7 +60,8 @@ class QuestionSymptomsViewController: UIViewController, Storyboarded {
         titleLabel.text = questionTitle
         detailLabel.text = questionDetail
         detailLabel.textColor = UIColor(named: "NHS Secondary Text")
-        errorLabel.text = questionError
+        errorView.isHidden = true
+        errorView.errorMessage.text = questionError
         yesButton.text = questionYes
         noButton.text = questionNo
         questionButton.setTitle(buttonText, for: .normal)
@@ -100,9 +101,9 @@ class QuestionSymptomsViewController: UIViewController, Storyboarded {
     
     @IBAction func continueTapped() {
         guard let state = questionState else {
-            scroll(after: {
-                self.errorLabel.isHidden = false
-            }, to: errorLabel)
+            scroll(to: errorView.errorMessage) {
+                self.errorView.isHidden = false
+            }
             return
         }
         buttonAction(state)

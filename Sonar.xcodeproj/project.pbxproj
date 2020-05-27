@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0805FAF0247BEEE700E3A74F /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805FAEF247BEEE700E3A74F /* ErrorView.swift */; };
+		0805FAF2247C02AB00E3A74F /* ErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0805FAF1247C02AB00E3A74F /* ErrorView.xib */; };
+		0805FAF4247C233F00E3A74F /* IBView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805FAF3247C233F00E3A74F /* IBView.swift */; };
 		08D77F2624753AA200EAEBD5 /* RemoteNotificationDispatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D77F2524753AA200EAEBD5 /* RemoteNotificationDispatcherTests.swift */; };
 		08D77F2824767C6C00EAEBD5 /* UpdatePushNotificationTokenRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D77F2724767C6C00EAEBD5 /* UpdatePushNotificationTokenRequestTests.swift */; };
 		08D77F2A24767DBB00EAEBD5 /* UpdatePushNotificationTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D77F2924767DBB00EAEBD5 /* UpdatePushNotificationTokenRequest.swift */; };
@@ -331,6 +334,9 @@
 		068B8ABA245C11C0000EAB4C /* unit-tests.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "unit-tests.yml"; sourceTree = "<group>"; };
 		068B8ABB245C11C0000EAB4C /* clean-artifacts.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "clean-artifacts.yml"; sourceTree = "<group>"; };
 		068B8ABC245C11C0000EAB4C /* trigger-internal-upload.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "trigger-internal-upload.yml"; sourceTree = "<group>"; };
+		0805FAEF247BEEE700E3A74F /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		0805FAF1247C02AB00E3A74F /* ErrorView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ErrorView.xib; sourceTree = "<group>"; };
+		0805FAF3247C233F00E3A74F /* IBView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IBView.swift; sourceTree = "<group>"; };
 		08D77F2524753AA200EAEBD5 /* RemoteNotificationDispatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteNotificationDispatcherTests.swift; sourceTree = "<group>"; };
 		08D77F2724767C6C00EAEBD5 /* UpdatePushNotificationTokenRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePushNotificationTokenRequestTests.swift; sourceTree = "<group>"; };
 		08D77F2924767DBB00EAEBD5 /* UpdatePushNotificationTokenRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePushNotificationTokenRequest.swift; sourceTree = "<group>"; };
@@ -871,6 +877,8 @@
 			children = (
 				DDD5BDC42473EA1200329720 /* NotificationStatusButton.swift */,
 				F7091906245DCED800F00AB8 /* AccessibleErrorLabel.swift */,
+				0805FAF1247C02AB00E3A74F /* ErrorView.xib */,
+				0805FAEF247BEEE700E3A74F /* ErrorView.swift */,
 				F613936D243FA82B003447E8 /* Appearance.swift */,
 				09B3AC802460BEA9001AF47E /* AutoscalingImageView.swift */,
 				09B3AC822460D3CF001AF47E /* AutoscalingWidthView.swift */,
@@ -884,6 +892,7 @@
 				097C93882447986B00E985CF /* TextField.swift */,
 				09C9DB372460946B0012F80A /* UpdatesBasedOnAccessibilityDisplayChanges.swift */,
 				F70CB81A2450CFA900ED6E7F /* OnboardingLogoStrapline.xib */,
+				0805FAF3247C233F00E3A74F /* IBView.swift */,
 			);
 			path = Appearance;
 			sourceTree = "<group>";
@@ -1646,6 +1655,7 @@
 				895D9E462437458700573D4D /* AppIcon.xcassets in Resources */,
 				F6BBE13C246F46B4005757BB /* ApplyForTest.storyboard in Resources */,
 				F6334E4D24748B3000421B4C /* RegistrationStatus.storyboard in Resources */,
+				0805FAF2247C02AB00E3A74F /* ErrorView.xib in Resources */,
 				F68B89ED243CFF2600F369A9 /* SelfDiagnosis.storyboard in Resources */,
 				F6BBE141246F584F005757BB /* WorkplaceGuidance.storyboard in Resources */,
 				F6F05A322434310200FF4B72 /* Onboarding.storyboard in Resources */,
@@ -1840,6 +1850,7 @@
 				F72EBDA7243D2FD1009F9328 /* ConcreteBroadcastIdEncrypter.swift in Sources */,
 				F72EBD9E243C90E6009F9328 /* HumbleLocalNotificationScheduler.swift in Sources */,
 				0938D9062474473E006FAADF /* ApplyForTestContainerViewController.swift in Sources */,
+				0805FAF0247BEEE700E3A74F /* ErrorView.swift in Sources */,
 				F6DA0A3C246A0FAA001F0B48 /* StatusState.swift in Sources */,
 				89DF669F2460168000A55F24 /* StorageChecker.swift in Sources */,
 				217A23BE243B34E8001B8236 /* UIDevice+ModelName.swift in Sources */,
@@ -1935,6 +1946,7 @@
 				F652F72C244A74E900D97950 /* StartDateViewController.swift in Sources */,
 				090DEE10244F8BF600268170 /* BluetoothPermissionDeniedViewController.swift in Sources */,
 				89074B8524378A0D00D67777 /* UITestPayload.swift in Sources */,
+				0805FAF4247C233F00E3A74F /* IBView.swift in Sources */,
 				F6AB2F20243D359F00386D6B /* SubmitSymptomsViewController.swift in Sources */,
 				F7091907245DCED800F00AB8 /* AccessibleErrorLabel.swift in Sources */,
 				08D77F2A24767DBB00EAEBD5 /* UpdatePushNotificationTokenRequest.swift in Sources */,

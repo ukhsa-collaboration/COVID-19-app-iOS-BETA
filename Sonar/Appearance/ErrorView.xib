@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ErrorView" customModule="Sonar" customModuleProvider="target">
+            <connections>
+                <outlet property="errorMessage" destination="zKm-HG-m2h" id="B08-wU-tG6"/>
+                <outlet property="title" destination="tCB-pJ-NPp" id="td1-Sq-rCC"/>
+                <outlet property="view" destination="iN0-l3-epB" id="P70-ah-BfW"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="199"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="tCB-pJ-NPp">
+                    <rect key="frame" x="20" y="15" width="374" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" name="NHS Error"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.25" translatesAutoresizingMaskIntoConstraints="NO" id="zKm-HG-m2h" customClass="AccessibleErrorLabel" customModule="Sonar" customModuleProvider="target">
+                    <rect key="frame" x="20" y="43.5" width="374" height="140.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" name="NHS Error"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="zKm-HG-m2h" secondAttribute="bottom" constant="15" id="8cd-k0-shr"/>
+                <constraint firstItem="zKm-HG-m2h" firstAttribute="top" secondItem="tCB-pJ-NPp" secondAttribute="bottom" constant="8" id="Pl2-FA-ine"/>
+                <constraint firstItem="zKm-HG-m2h" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="Tzw-eJ-X0J"/>
+                <constraint firstItem="tCB-pJ-NPp" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="fTT-kj-Hcs"/>
+                <constraint firstAttribute="trailing" secondItem="tCB-pJ-NPp" secondAttribute="trailing" constant="20" id="gwd-zV-V9i"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="zKm-HG-m2h" secondAttribute="trailing" constant="20" id="iGo-Bl-WTw"/>
+                <constraint firstItem="tCB-pJ-NPp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="oSg-bB-UkC"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="50.724637681159422" y="-36.495535714285715"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="NHS Error">
+            <color red="0.83529411764705885" green="0.15686274509803921" blue="0.10588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

@@ -17,8 +17,8 @@ class PostcodeViewController: UIViewController, Storyboarded {
     private var notificationCenter: NotificationCenter! = nil
     private var continueHandler: (() -> Void)! = nil
 
+    @IBOutlet weak var errorView: ErrorView!
     @IBOutlet private var scrollView: UIScrollView!
-    @IBOutlet var postcodeError: AccessibleErrorLabel!
     @IBOutlet var postcodeField: UITextField!
     @IBOutlet var postcodeDetail: UILabel!
     @IBOutlet var continueAccessoryView: UIView!
@@ -41,7 +41,7 @@ class PostcodeViewController: UIViewController, Storyboarded {
     // MARK: - View lifecycle
 
     override func viewDidLoad() {
-        postcodeError.isHidden = true
+        errorView.isHidden = true
         
         let text = postcodeDetail.text!
         let range = text.range(of: "not")
@@ -66,7 +66,7 @@ class PostcodeViewController: UIViewController, Storyboarded {
             return
         }
 
-        postcodeError.isHidden = true
+        errorView.isHidden = true
         persistence.partialPostcode = enteredPostcode
         continueHandler()
     }
@@ -112,13 +112,10 @@ class PostcodeViewController: UIViewController, Storyboarded {
     }
     
     private func showPostcodeError() {
-        scroll(after: {
-            self.postcodeError.isHidden = false
-            self.postcodeError.text = "Please enter the first part of a valid postcode. For example: PO30, E2, M1, EH1, L36".localized
-
-            self.postcodeError.layer.borderWidth = 3
-            self.postcodeError.layer.borderColor = UIColor(named: "NHS Error")!.cgColor
-        }, toErrorLabel: postcodeError, orControl: postcodeField)
+        scroll(toErrorLabel: errorView.errorMessage, orControl: postcodeField){
+            self.errorView.isHidden = false
+            self.errorView.errorMessage.text = "Please enter the first part of a valid postcode. For example: PO30, E2, M1, EH1, L36".localized
+        }
     }
 }
 
