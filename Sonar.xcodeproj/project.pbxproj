@@ -199,6 +199,7 @@
 		DD3FCF412476E914008B0237 /* DrawerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3FCF3F2476E913008B0237 /* DrawerViewController.swift */; };
 		DD3FCF422476E914008B0237 /* Drawer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD3FCF402476E913008B0237 /* Drawer.storyboard */; };
 		DD3FCF4A24780872008B0237 /* PositiveTestStatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3FCF4924780871008B0237 /* PositiveTestStatusTests.swift */; };
+		DD46B0D5247FC57400FB3B87 /* 2_exposure.apns in Resources */ = {isa = PBXBuildFile; fileRef = DD46B0D4247FC57400FB3B87 /* 2_exposure.apns */; };
 		DDD5BDC52473EA1200329720 /* NotificationStatusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5BDC42473EA1200329720 /* NotificationStatusButton.swift */; };
 		F600A60224297A8E0038DF57 /* RegistrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F600A60124297A8E0038DF57 /* RegistrationRequest.swift */; };
 		F600A60424297C010038DF57 /* RegistrationRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F600A60324297C010038DF57 /* RegistrationRequestTests.swift */; };
@@ -545,6 +546,7 @@
 		DD3FCF3F2476E913008B0237 /* DrawerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerViewController.swift; sourceTree = "<group>"; };
 		DD3FCF402476E913008B0237 /* Drawer.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Drawer.storyboard; sourceTree = "<group>"; };
 		DD3FCF4924780871008B0237 /* PositiveTestStatusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositiveTestStatusTests.swift; sourceTree = "<group>"; };
+		DD46B0D4247FC57400FB3B87 /* 2_exposure.apns */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2_exposure.apns; sourceTree = "<group>"; };
 		DDD5BDC42473EA1200329720 /* NotificationStatusButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationStatusButton.swift; sourceTree = "<group>"; };
 		F600A60124297A8E0038DF57 /* RegistrationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationRequest.swift; sourceTree = "<group>"; };
 		F600A60324297C010038DF57 /* RegistrationRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationRequestTests.swift; sourceTree = "<group>"; };
@@ -593,7 +595,6 @@
 		F67A2292242AA370002254B6 /* SecureRegistrationStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRegistrationStorageTests.swift; sourceTree = "<group>"; };
 		F67C5153243E4D2F008E2945 /* AnswerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerButton.swift; sourceTree = "<group>"; };
 		F67C5158243E7C1E008E2945 /* SubmitSymptomsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitSymptomsViewControllerTests.swift; sourceTree = "<group>"; };
-		F680E701245F7E0800EA6135 /* 2_potential_diagnosis.apns */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2_potential_diagnosis.apns; sourceTree = "<group>"; };
 		F680E702245F7E0800EA6135 /* 1_activation_code.apns */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 1_activation_code.apns; sourceTree = "<group>"; };
 		F68B89EC243CFF2600F369A9 /* SelfDiagnosis.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SelfDiagnosis.storyboard; sourceTree = "<group>"; };
 		F68BFBF6242ACD17008EE68F /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
@@ -1326,7 +1327,7 @@
 			isa = PBXGroup;
 			children = (
 				F680E702245F7E0800EA6135 /* 1_activation_code.apns */,
-				F680E701245F7E0800EA6135 /* 2_potential_diagnosis.apns */,
+				DD46B0D4247FC57400FB3B87 /* 2_exposure.apns */,
 				138E50E12477C4E40027F2D3 /* 3_positive_test.apns */,
 				1376F7D8247EA44E00524CEE /* 4_negative_test.apns */,
 			);
@@ -1661,6 +1662,7 @@
 				AE29892C24729AD8004C4097 /* ReferenceCode.storyboard in Resources */,
 				A1E7A0592420028B0078174D /* NHS Colors.xcassets in Resources */,
 				8947F833245AD97A00C4F1BB /* Settings.bundle in Resources */,
+				DD46B0D5247FC57400FB3B87 /* 2_exposure.apns in Resources */,
 				F758B8BE242CB856003AE16D /* Localizable.strings in Resources */,
 				6FC63C38241641BA007C8BF3 /* Assets.xcassets in Resources */,
 				F618A566245C682500D89517 /* GoogleService-Info.plist in Resources */,
