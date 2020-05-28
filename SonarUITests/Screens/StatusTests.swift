@@ -53,12 +53,10 @@ class StatusTests: ScreenTestCase {
         submitSymptomsPage.accurateConfirmationToggle.tap()
         submitSymptomsPage.submitButton.tap()
         
-        
         let symptomaticPage = StatusSymptomaticPage(app)
         XCTAssertTrue(symptomaticPage.title.exists)
-        XCTAssertTrue(symptomaticPage.bookNowAdvice.exists)
-        
-        
+
+
         eightDaysLater()
         let checkinPopup = CheckinQuestionnairePopup(app)
         XCTAssertTrue(checkinPopup.title.exists)

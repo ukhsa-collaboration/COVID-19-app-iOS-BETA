@@ -31,10 +31,6 @@ class StatusSymptomaticPage : Page {
     var title: XCUIElement {
         app.staticTexts["Your symptoms indicate you may have coronavirus. Please self-isolate and apply for a test."]
     }
-    
-    var bookNowAdvice: XCUIElement {
-        app.staticTexts["Please book a coronavirus test immediately. Write down your reference code and phone 0800 540 4900"]
-    }
 }
 
 class PositiveTestStatusPage : Page {

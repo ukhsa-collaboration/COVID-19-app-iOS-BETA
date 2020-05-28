@@ -271,7 +271,12 @@ class StatusViewController: UIViewController, Storyboarded {
         
         switch state {
         case .ok:
-            detailForNeutral()
+            diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Blue")
+            diagnosisTitleLabel.text = "Follow the current advice to stop the spread of coronavirus"
+            diagnosisDetailLabel.isHidden = true
+            feelUnwellButton.isHidden = false
+            applyForTestButton.isHidden = true
+            stepsDetailLabel.isHidden = false
 
         case .exposed:
             diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
@@ -281,10 +286,15 @@ class StatusViewController: UIViewController, Storyboarded {
             feelUnwellButton.isHidden = false
             applyForTestButton.isHidden = true
             stepsDetailLabel.isHidden = false
-            stepsDetailLabel.text = "If you develop symptoms, please come back to this app."
 
         case .symptomatic(let symptomatic):
-            detailForSelfIsolation(expiryDate: symptomatic.checkinDate)
+            diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
+            diagnosisTitleLabel.text = "Your symptoms indicate you may have coronavirus. Please self-isolate and apply for a test."
+            diagnosisDetailLabel.isHidden = false
+            diagnosisDetailLabel.text = detailWithExpiryDate(symptomatic.checkinDate)
+            feelUnwellButton.isHidden = true
+            applyForTestButton.isHidden = false
+            stepsDetailLabel.isHidden = false
 
             if dateProvider() >= symptomatic.checkinDate {
                 presentCheckinDrawer(
@@ -298,7 +308,7 @@ class StatusViewController: UIViewController, Storyboarded {
             diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
             diagnosisTitleLabel.text = "Your test result indicates you have coronavirus. Please isolate yourself and your household."
             diagnosisDetailLabel.isHidden = false
-            diagnosisDetailLabel.text = userStatusProvider.detailWithExpiryDate(positiveTestResult.expiryDate)
+            diagnosisDetailLabel.text = detailWithExpiryDate(positiveTestResult.expiryDate)
             feelUnwellButton.isHidden = true
             applyForTestButton.isHidden = true
             nextStepsDetailView.isHidden = true
@@ -345,27 +355,6 @@ class StatusViewController: UIViewController, Storyboarded {
         }
     }
 
-    func detailForSelfIsolation(expiryDate: Date) {
-        diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
-        diagnosisTitleLabel.text = "Your symptoms indicate you may have coronavirus. Please self-isolate and apply for a test."
-        diagnosisDetailLabel.isHidden = false
-        diagnosisDetailLabel.text = userStatusProvider.detailWithExpiryDate(expiryDate)
-        feelUnwellButton.isHidden = true
-        applyForTestButton.isHidden = false
-        stepsDetailLabel.isHidden = false
-        stepsDetailLabel.text = "Please book a coronavirus test immediately. Write down your reference code and phone 0800 540 4900"
-    }
-    
-    func detailForNeutral() {
-        diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Blue")
-        diagnosisTitleLabel.text = "Follow the current advice to stop the spread of coronavirus"
-        diagnosisDetailLabel.isHidden = true
-        feelUnwellButton.isHidden = false
-        applyForTestButton.isHidden = true
-        stepsDetailLabel.isHidden = false
-        stepsDetailLabel.text = "If you don’t have any symptoms, there’s no need to do anything right now. If you develop symptoms, please come back to this app."
-    }
-
     private func presentDrawer(header: String, detail: String) {
         let drawer = DrawerViewController.instantiate()
         drawer.inject(header: header, detail: detail) { self.showDrawer() }
@@ -375,6 +364,19 @@ class StatusViewController: UIViewController, Storyboarded {
             usingTransitioningDelegate: drawerPresentationManager
         )
     }
+
+    private func detailWithExpiryDate(_ expiryDate: Date) -> String {
+        let detailFmt = "On %@ this app will notify you to update your symptoms. Please read your full advice below.".localized
+        return String(format: detailFmt, localizedDate(expiryDate, "MMMMd"))
+    }
+
+    private func localizedDate(_ date: Date, _ template: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = localeProvider.locale
+        dateFormatter.setLocalizedDateFormatFromTemplate(template)
+        return dateFormatter.string(from: date)
+    }
+
 }
 
 protocol DrawerPresenter {
