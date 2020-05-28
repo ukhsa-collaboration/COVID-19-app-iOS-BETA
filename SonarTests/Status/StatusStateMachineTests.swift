@@ -555,86 +555,149 @@ class StatusStateMachineTests: XCTestCase {
         persisting.statusState = .ok(StatusState.Ok())
 
         let testTimestamp = Calendar.current.date(from: DateComponents(month: 5, day: 10))!
-        let positiveTestResult = TestResult(
+        let testResult = TestResult(
             result: .negative,
             testTimestamp: testTimestamp,
             type: nil,
             acknowledgementUrl: nil
         )
 
-        machine.received(positiveTestResult)
-
+        machine.received(testResult)
         XCTAssertEqual(machine.state, .ok(StatusState.Ok()))
+
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.content.title, "TEST_RESULT_TITLE".localized)
         XCTAssertEqual(drawerMailbox.receive(), .negativeTestResult(symptoms: nil))
     }
 
-    func testReceivedNegativeTestResultWhenExposed() throws {
-        persisting.statusState = .exposed(StatusState.Exposed(startDate: currentDate))
+    func testReceivedNegativeTestResultWhenExposedBefore() throws {
+        let exposedDate = Calendar.current.date(from: DateComponents(month: 5, day: 10))!
+        let testDate = Calendar.current.date(from: DateComponents(month: 5, day: 11))!
 
-        let testTimestamp = Calendar.current.date(from: DateComponents(month: 5, day: 10))!
-        let positiveTestResult = TestResult(
+        persisting.statusState = .exposed(StatusState.Exposed(startDate: exposedDate))
+        let testResult = TestResult(
             result: .negative,
-            testTimestamp: testTimestamp,
+            testTimestamp: testDate,
             type: nil,
             acknowledgementUrl: nil
         )
 
-        machine.received(positiveTestResult)
+        machine.received(testResult)
+        XCTAssertEqual(machine.state, .ok(StatusState.Ok()))
 
-        XCTAssertEqual(machine.state, .exposed(StatusState.Exposed(startDate: currentDate)))
+        let request = try XCTUnwrap(userNotificationCenter.requests.first)
+        XCTAssertEqual(request.content.title, "TEST_RESULT_TITLE".localized)
+        XCTAssertEqual(drawerMailbox.receive(), .negativeTestResult(symptoms: nil))
+    }
+
+    func testReceivedNegativeTestResultWhenExposedAfter() throws {
+        let exposedDate = Calendar.current.date(from: DateComponents(month: 5, day: 12))!
+        let testDate = Calendar.current.date(from: DateComponents(month: 5, day: 11))!
+
+        persisting.statusState = .exposed(StatusState.Exposed(startDate: exposedDate))
+        let testResult = TestResult(
+            result: .negative,
+            testTimestamp: testDate,
+            type: nil,
+            acknowledgementUrl: nil
+        )
+
+        machine.received(testResult)
+        XCTAssertEqual(machine.state, .exposed(StatusState.Exposed(startDate: exposedDate)))
+
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.content.title, "TEST_RESULT_TITLE".localized)
         XCTAssertEqual(drawerMailbox.receive(), .negativeTestResult(symptoms: nil))
     }
 
     func testReceivedNegativeTestResultWithEarlierSymptomatic() throws {
-        let startDate = Calendar.current.date(byAdding: .day, value: -1, to: currentDate)!
-        let checkinDate = Calendar.current.date(byAdding: .day, value: 1, to: currentDate)!
+        let startDate = Calendar.current.date(from: DateComponents(month: 5, day: 10))!
+        let testDate = Calendar.current.date(from: DateComponents(month: 5, day: 11))!
+
+        let checkinDate = Calendar.current.date(byAdding: .day, value: 1, to: startDate)!
         let symptomatic = StatusState.Symptomatic(
             symptoms: [.cough], startDate: startDate, checkinDate: checkinDate
         )
         persisting.statusState = .symptomatic(symptomatic)
-
-        let testTimestamp = Calendar.current.date(byAdding: .day, value: -2, to: currentDate)!
-        let positiveTestResult = TestResult(
+        let testResult = TestResult(
             result: .negative,
-            testTimestamp: testTimestamp,
+            testTimestamp: testDate,
             type: nil,
             acknowledgementUrl: nil
         )
 
-        machine.received(positiveTestResult)
-
+        machine.received(testResult)
         XCTAssertEqual(machine.state, .symptomatic(symptomatic))
+
+        let request = try XCTUnwrap(userNotificationCenter.requests.first)
+        XCTAssertEqual(request.content.title, "TEST_RESULT_TITLE".localized)
+        XCTAssertEqual(drawerMailbox.receive(), .negativeTestResult(symptoms: [.cough]))
+    }
+
+    func testReceivedNegativeTestResultWithLaterSymptomatic() throws {
+        let startDate = Calendar.current.date(from: DateComponents(month: 5, day: 12))!
+        let testDate = Calendar.current.date(from: DateComponents(month: 5, day: 11))!
+
+        let checkinDate = Calendar.current.date(byAdding: .day, value: 1, to: startDate)!
+        let symptomatic = StatusState.Symptomatic(
+            symptoms: [.cough], startDate: startDate, checkinDate: checkinDate
+        )
+        persisting.statusState = .symptomatic(symptomatic)
+        let testResult = TestResult(
+            result: .negative,
+            testTimestamp: testDate,
+            type: nil,
+            acknowledgementUrl: nil
+        )
+
+        machine.received(testResult)
+        XCTAssertEqual(machine.state, .symptomatic(symptomatic))
+
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.content.title, "TEST_RESULT_TITLE".localized)
         XCTAssertEqual(drawerMailbox.receive(), .negativeTestResult(symptoms: nil))
     }
 
-    func testReceivedNegativeTestResultWithLaterSymptomatic() throws {
-        let startDate = Calendar.current.date(byAdding: .day, value: -5, to: currentDate)!
-        let checkinDate = Calendar.current.date(byAdding: .day, value: 1, to: currentDate)!
-        let symptomatic = StatusState.Symptomatic(
-            symptoms: [.temperature], startDate: startDate, checkinDate: checkinDate
-        )
-        persisting.statusState = .symptomatic(symptomatic)
+    func testReceivedNegativeTestResultWithEarlierPositiveTest() throws {
+        let positiveDate = Calendar.current.date(from: DateComponents(month: 5, day: 10))!
+        let testDate = Calendar.current.date(from: DateComponents(month: 6, day: 10))!
 
-        let testTimestamp = Calendar.current.date(byAdding: .day, value: -2, to: currentDate)!
-        let positiveTestResult = TestResult(
+        let positive = StatusState.PositiveTestResult(symptoms: nil, startDate: positiveDate)
+        persisting.statusState = .positiveTestResult(positive)
+
+        let testResult = TestResult(
             result: .negative,
-            testTimestamp: testTimestamp,
+            testTimestamp: testDate,
             type: nil,
             acknowledgementUrl: nil
         )
+        machine.received(testResult)
+        XCTAssertEqual(machine.state, .ok(StatusState.Ok()))
 
-        machine.received(positiveTestResult)
-
-        XCTAssertEqual(machine.state, .symptomatic(symptomatic))
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.content.title, "TEST_RESULT_TITLE".localized)
-        XCTAssertEqual(drawerMailbox.receive(), .negativeTestResult(symptoms: [.temperature]))
+        XCTAssertEqual(drawerMailbox.receive(), .negativeTestResult(symptoms: nil))
+    }
+
+    func testReceivedNegativeTestResultWithLaterPositiveTest() throws {
+        let positiveDate = Calendar.current.date(from: DateComponents(month: 6, day: 10))!
+        let testDate = Calendar.current.date(from: DateComponents(month: 5, day: 10))!
+
+        let positive = StatusState.PositiveTestResult(symptoms: nil, startDate: positiveDate)
+        persisting.statusState = .positiveTestResult(positive)
+
+        let testResult = TestResult(
+            result: .negative,
+            testTimestamp: testDate,
+            type: nil,
+            acknowledgementUrl: nil
+        )
+        machine.received(testResult)
+        XCTAssertEqual(machine.state, .positiveTestResult(positive))
+
+        let request = try XCTUnwrap(userNotificationCenter.requests.first)
+        XCTAssertEqual(request.content.title, "TEST_RESULT_TITLE".localized)
+        XCTAssertEqual(drawerMailbox.receive(), .negativeTestResult(symptoms: nil))
     }
 
 }

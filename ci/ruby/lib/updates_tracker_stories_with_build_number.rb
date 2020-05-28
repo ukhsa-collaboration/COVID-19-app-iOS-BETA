@@ -16,6 +16,7 @@ module UpdatesTrackerStoriesWithBuildNumber
     tracker = Tracker.new(tracker_token)
 
     story_ids = git_logs(git_dir, commits)
+      .tap {|x| p x }
       .scan(/\[Finishes #(\d+)\]/i)
       .map {|m| m[0] }
       .uniq

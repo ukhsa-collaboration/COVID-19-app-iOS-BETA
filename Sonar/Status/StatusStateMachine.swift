@@ -194,27 +194,21 @@ class StatusStateMachine: StatusStateMachining {
 
         switch testResult.result {
         case .positive:
-            drawerMailbox.post(.positiveTestResult)
-            receivedPositiveTestResult(at: testResult.testTimestamp)
+            handlePositiveTestResult(from: testResult.testTimestamp)
         case .unclear:
             drawerMailbox.post(.unclearTestResult)
         case .negative:
-            #warning("Should this cancel out a positive test result?")
-            var symptoms: Symptoms?
-            if case .symptomatic(let symptomatic) = state, testResult.testTimestamp > symptomatic.startDate {
-                symptoms = symptomatic.symptoms
-            }
-            drawerMailbox.post(.negativeTestResult(symptoms: symptoms))
+            handleNegativeTestResult(from: testResult.testTimestamp)
         }
     }
     
-    func receivedPositiveTestResult(at date: Date) {
+    func handlePositiveTestResult(from testDate: Date) {
         switch state {
         case .ok, .exposed:
-            let positive = StatusState.PositiveTestResult(symptoms: nil, startDate: date)
+            let positive = StatusState.PositiveTestResult(symptoms: nil, startDate: testDate)
             state = .positiveTestResult(positive)
         case .symptomatic(let symptomatic):
-            let startDate = min(symptomatic.startDate, date)
+            let startDate = min(symptomatic.startDate, testDate)
             let positive = StatusState.PositiveTestResult(symptoms: symptomatic.symptoms, startDate: startDate)
             state = .positiveTestResult(positive)
         case .positiveTestResult:
@@ -222,6 +216,32 @@ class StatusStateMachine: StatusStateMachining {
             assertionFailure(message)
             self.logger.error("\(message)")
         }
+
+        drawerMailbox.post(.positiveTestResult)
+    }
+
+    func handleNegativeTestResult(from testDate: Date) {
+        var symptoms: Symptoms?
+
+        switch state {
+        case .ok:
+            break
+        case .exposed(let exposed):
+            if testDate > exposed.startDate {
+                state = .ok(StatusState.Ok())
+            }
+        case .symptomatic(let symptomatic):
+            #warning("Android goes straight to ok here, check w/PM")
+            if testDate > symptomatic.startDate {
+                symptoms = symptomatic.symptoms
+            }
+        case .positiveTestResult(let positive):
+            if testDate > positive.startDate {
+                state = .ok(StatusState.Ok())
+            }
+        }
+
+        drawerMailbox.post(.negativeTestResult(symptoms: symptoms))
     }
     
     // MARK: - User Notifications
