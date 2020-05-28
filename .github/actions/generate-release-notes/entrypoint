@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby
+#!/usr/bin/env ruby -E UTF-8:UTF-8
 
 if ARGV.length != 2
   puts "Usage: #{$PROGRAM_NAME} tracker_token revision_range"
