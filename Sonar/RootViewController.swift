@@ -42,7 +42,6 @@ class RootViewController: UIViewController {
         linkingIdManager: LinkingIdManaging,
         statusStateMachine: StatusStateMachining,
         uiQueue: TestableQueue,
-        userStatusProvider: UserStatusProvider,
         urlOpener: TestableUrlOpener,
         drawerMailbox: DrawerMailboxing
     ) {
@@ -62,7 +61,6 @@ class RootViewController: UIViewController {
         statusViewController = StatusViewController.instantiate()
         statusViewController.inject(
             statusStateMachine: statusStateMachine,
-            userStatusProvider: userStatusProvider,
             persistence: persistence,
             linkingIdManager: linkingIdManager,
             registrationService: registrationService,

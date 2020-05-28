@@ -14,7 +14,6 @@ import CoreBluetooth
 class UITestScreenMaker {
     private let persistence = InMemoryPersistence()
     private let bluetoothNursery = NoOpBluetoothNursery()
-    private let userStatusProvider = UserStatusProvider(localeProvider: FixedLocaleProvider())
     private let authorizationManager = EphemeralAuthorizationManager()
     private let notificationCenter = NotificationCenter.default
     private let userNotificationCenter = UNUserNotificationCenter.current()
@@ -103,7 +102,6 @@ class UITestScreenMaker {
         let statusViewController = StatusViewController.instantiate { viewController in
             viewController.inject(
                 statusStateMachine: statusStateMachine,
-                userStatusProvider: userStatusProvider,
                 persistence: persistence,
                 linkingIdManager: linkingIdManager,
                 registrationService: registrationService,

@@ -50,7 +50,6 @@ class StatusViewController: UIViewController, Storyboarded {
     private lazy var drawerPresentationManager = DrawerPresentation()
     private var dateProvider: (() -> Date)!
     
-    private var userStatusProvider: UserStatusProvider!
     private var persistence: Persisting!
     private var statusStateMachine: StatusStateMachining!
     private var linkingIdManager: LinkingIdManaging!
@@ -63,7 +62,6 @@ class StatusViewController: UIViewController, Storyboarded {
     
     func inject(
         statusStateMachine: StatusStateMachining,
-        userStatusProvider: UserStatusProvider,
         persistence: Persisting,
         linkingIdManager: LinkingIdManaging,
         registrationService: RegistrationService,
@@ -75,7 +73,6 @@ class StatusViewController: UIViewController, Storyboarded {
     ) {
         self.linkingIdManager = linkingIdManager
         self.statusStateMachine = statusStateMachine
-        self.userStatusProvider = userStatusProvider
         self.persistence = persistence
         self.registrationService = registrationService
         self.dateProvider = dateProvider
