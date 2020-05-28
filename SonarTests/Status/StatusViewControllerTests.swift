@@ -192,7 +192,7 @@ class StatusViewControllerTests: TestCase {
         notificationCenter.post(name: DrawerMessage.DrawerMessagePosted, object: nil)
 
         let drawer = try XCTUnwrap(presenter.presented)
-        XCTAssertEqual(drawer.config.header, "UNEXPOSED_DRAWER_HEADER".localized)
+        XCTAssertEqual(drawer.header, "UNEXPOSED_DRAWER_HEADER".localized)
         XCTAssertTrue(mailbox.messages.isEmpty)
     }
 
@@ -203,7 +203,7 @@ class StatusViewControllerTests: TestCase {
         _ = makeViewController(drawerPresenter: presenter, drawerMailbox: mailbox)
 
         let drawer = try XCTUnwrap(presenter.presented)
-        XCTAssertEqual(drawer.config.header, "UNEXPOSED_DRAWER_HEADER".localized)
+        XCTAssertEqual(drawer.header, "UNEXPOSED_DRAWER_HEADER".localized)
         XCTAssertTrue(mailbox.messages.isEmpty)
     }
 
@@ -214,7 +214,7 @@ class StatusViewControllerTests: TestCase {
         _ = makeViewController(drawerPresenter: presenter, drawerMailbox: mailbox)
 
         let drawer = try XCTUnwrap(presenter.presented)
-        XCTAssertEqual(drawer.config.header, "HAVE_SYMPTOMS_BUT_DONT_ISOLATE_DRAWER_HEADER".localized)
+        XCTAssertEqual(drawer.header, "HAVE_SYMPTOMS_BUT_DONT_ISOLATE_DRAWER_HEADER".localized)
         XCTAssertTrue(mailbox.messages.isEmpty)
     }
 
@@ -225,7 +225,7 @@ class StatusViewControllerTests: TestCase {
         _ = makeViewController(drawerPresenter: presenter, drawerMailbox: mailbox)
 
         let drawer = try XCTUnwrap(presenter.presented)
-        XCTAssertEqual(drawer.config.header, "TEST_UPDATE_DRAW_POSITIVE_HEADER".localized)
+        XCTAssertEqual(drawer.header, "TEST_UPDATE_DRAW_POSITIVE_HEADER".localized)
         XCTAssertTrue(mailbox.messages.isEmpty)
     }
 
@@ -236,7 +236,7 @@ class StatusViewControllerTests: TestCase {
         _ = makeViewController(drawerPresenter: presenter, drawerMailbox: mailbox)
 
         let drawer = try XCTUnwrap(presenter.presented)
-        XCTAssertEqual(drawer.config.header, "TEST_UPDATE_DRAW_NEGATIVE_HEADER".localized)
+        XCTAssertEqual(drawer.header, "TEST_UPDATE_DRAW_NEGATIVE_HEADER".localized)
         XCTAssertTrue(mailbox.messages.isEmpty)
     }
 
@@ -261,7 +261,7 @@ class StatusViewControllerTests: TestCase {
         _ = makeViewController(drawerPresenter: presenter, drawerMailbox: mailbox)
 
         let drawer = try XCTUnwrap(presenter.presented)
-        XCTAssertEqual(drawer.config.header, "TEST_UPDATE_DRAW_INVALID_HEADER".localized)
+        XCTAssertEqual(drawer.header, "TEST_UPDATE_DRAW_INVALID_HEADER".localized)
         XCTAssertTrue(mailbox.messages.isEmpty)
     }
     

@@ -144,12 +144,6 @@ class StatusViewController: UIViewController, Storyboarded {
             vc.inject(persistence: persistence, registrationService: registrationService, notificationCenter: notificationCenter)
         case let vc as ApplyForTestContainerViewController:
             vc.inject(linkingIdManager: linkingIdManager, uiQueue: DispatchQueue.main)
-        case let vc as DrawerViewController:
-            guard let config = sender as? DrawerViewController.Config else {
-                assertionFailure("DrawerViewControllers need configuration")
-                return
-            }
-            vc.inject(config: config)
         default:
             break
         }
@@ -309,29 +303,20 @@ class StatusViewController: UIViewController, Storyboarded {
 
         switch message {
         case .unexposed:
-            let config = DrawerViewController.Config(
+            presentDrawer(
                 header: "UNEXPOSED_DRAWER_HEADER".localized,
                 detail: "UNEXPOSED_DRAWER_DETAIL".localized
-            ) {
-                self.showDrawer()
-            }
-            presentDrawer(with: config)
+            )
         case .symptomsButNotSymptomatic:
-            let config = DrawerViewController.Config(
+            presentDrawer(
                 header: "HAVE_SYMPTOMS_BUT_DONT_ISOLATE_DRAWER_HEADER".localized,
                 detail: "HAVE_SYMPTOMS_BUT_DONT_ISOLATE_DRAWER_DETAIL".localized
-            ) {
-                self.showDrawer()
-            }
-            presentDrawer(with: config)
+            )
         case .positiveTestResult:
-            let config = DrawerViewController.Config(
+            presentDrawer(
                 header: "TEST_UPDATE_DRAW_POSITIVE_HEADER".localized,
                 detail: "TEST_UPDATE_DRAW_POSITIVE_DETAIL".localized
-            ) {
-                self.showDrawer()
-            }
-            presentDrawer(with: config)
+            )
         case .negativeTestResult(let symptoms):
             if let symptoms = symptoms {
                 presentCheckinPrompt(
@@ -340,22 +325,16 @@ class StatusViewController: UIViewController, Storyboarded {
                     detail: "NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_DETAIL".localized
                 )
             } else {
-                let config = DrawerViewController.Config(
+                presentDrawer(
                     header: "TEST_UPDATE_DRAW_NEGATIVE_HEADER".localized,
                     detail: "TEST_UPDATE_DRAW_NEGATIVE_DETAIL".localized
-                ) {
-                    self.showDrawer()
-                }
-                presentDrawer(with: config)
+                )
             }
         case .unclearTestResult:
-            let config = DrawerViewController.Config(
+            presentDrawer(
                 header: "TEST_UPDATE_DRAW_INVALID_HEADER".localized,
                 detail: "TEST_UPDATE_DRAW_INVALID_DETAIL".localized
-            ) {
-                self.showDrawer()
-            }
-            presentDrawer(with: config)
+            )
         }
     }
 
@@ -380,8 +359,9 @@ class StatusViewController: UIViewController, Storyboarded {
         stepsDetailLabel.text = "If you don’t have any symptoms, there’s no need to do anything right now. If you develop symptoms, please come back to this app."
     }
 
-    private func presentDrawer(with config: DrawerViewController.Config) {
-        let drawer = DrawerViewController.instantiate() { $0.inject(config: config) }
+    private func presentDrawer(header: String, detail: String) {
+        let drawer = DrawerViewController.instantiate()
+        drawer.inject(header: header, detail: detail) { self.showDrawer() }
         drawerPresenter.present(
             drawer: drawer,
             inNavigationController: navigationController!,
