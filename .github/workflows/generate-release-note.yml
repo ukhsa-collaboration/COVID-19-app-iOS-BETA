@@ -22,7 +22,7 @@ jobs:
         uses: ./.github/actions/generate-release-notes
         with:
           tracker_token: ${{ secrets.tracker_api_token }}
-          revision_range: ${{ github.event.client_payload }}
+          revision_range: ${{ github.event.client_payload.revision_range }}
 
       - name: Print release notes
         run: echo "${{ steps.generate_release_notes.release_notes }}"
