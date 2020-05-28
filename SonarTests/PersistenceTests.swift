@@ -223,8 +223,9 @@ class PersistenceTests: TestCase {
     }
 
     func testStatusStateMigration() throws {
-        let expiryDate = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
-        let diagnosis = SelfDiagnosis(type: .initial, symptoms: [.cough], startDate: Date(), expiryDate: expiryDate)
+        let startDate = Date()
+        let expiryDate = Calendar.current.date(byAdding: .day, value: 1, to: startDate)!
+        let diagnosis = SelfDiagnosis(type: .initial, symptoms: [.cough], startDate: startDate, expiryDate: expiryDate)
         let encoded = try encoder.encode(diagnosis)
         UserDefaults.standard.set(encoded, forKey: "selfDiagnosis")
 
