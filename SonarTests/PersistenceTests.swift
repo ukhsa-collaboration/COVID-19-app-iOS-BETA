@@ -223,8 +223,6 @@ class PersistenceTests: TestCase {
     }
 
     func testStatusStateMigration() throws {
-		throw XCTSkip("Need alpha and Steve's advice on why this is failing")
-
         let startDate = Date()
         let expiryDate = Calendar.current.date(byAdding: .day, value: 1, to: startDate)!
         let diagnosis = SelfDiagnosis(type: .initial, symptoms: [.cough], startDate: startDate, expiryDate: expiryDate)
@@ -233,7 +231,7 @@ class PersistenceTests: TestCase {
 
         UserDefaults.standard.set(Date(), forKey: "potentiallyExposed")
 
-        let checkinDate = Calendar.current.date(from: DateComponents(year: 2020, month: 6, day: 3, hour: 7))!
+        let checkinDate = StatusState.Symptomatic.firstCheckin(from: startDate)
         XCTAssertEqual(
             persistence.statusState,
             .symptomatic(StatusState.Symptomatic(symptoms: [.cough], startDate: diagnosis.startDate, checkinDate: checkinDate))
