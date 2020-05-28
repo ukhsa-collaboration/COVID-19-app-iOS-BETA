@@ -15,7 +15,7 @@ jobs:
         id: checkout
         uses: actions/checkout@v2
         with:
-          ref: ${{ github.event.client_payload.ref }}
+          fetch-depth: 0 # checkout full repo with all tags
 
       - name: Test docker github action
         uses: ./.github/actions/update-tracker-stories
