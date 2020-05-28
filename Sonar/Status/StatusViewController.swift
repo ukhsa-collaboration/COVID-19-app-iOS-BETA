@@ -135,6 +135,7 @@ class StatusViewController: UIViewController, Storyboarded {
 
         notificationCenter.addObserver(self, selector: #selector(reload), name: UIApplication.didBecomeActiveNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(reload), name: StatusStateMachine.StatusStateChangedNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(showDrawer), name: DrawerMessage.DrawerMessagePosted, object: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -303,7 +304,7 @@ class StatusViewController: UIViewController, Storyboarded {
         }
     }
 
-    private func showDrawer() {
+    @objc private func showDrawer() {
         guard let message = drawerMailbox.receive() else { return }
 
         switch message {
@@ -378,7 +379,7 @@ class StatusViewController: UIViewController, Storyboarded {
         stepsDetailLabel.isHidden = false
         stepsDetailLabel.text = "If you don’t have any symptoms, there’s no need to do anything right now. If you develop symptoms, please come back to this app."
     }
-        
+
     private func presentDrawer(with config: DrawerViewController.Config) {
         let drawer = DrawerViewController.instantiate() { $0.inject(config: config) }
         drawerPresenter.present(

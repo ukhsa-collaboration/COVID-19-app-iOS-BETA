@@ -182,6 +182,20 @@ class StatusViewControllerTests: TestCase {
         }
     }
 
+    func testListensForNewDrawerMessages() throws {
+        let notificationCenter = NotificationCenter()
+        let presenter = DrawerPresenterDouble()
+        let mailbox = DrawerMailboxingDouble()
+
+        _ = makeViewController(notificationCenter: notificationCenter, drawerPresenter: presenter, drawerMailbox: mailbox)
+        mailbox.messages.append(.unexposed)
+        notificationCenter.post(name: DrawerMessage.DrawerMessagePosted, object: nil)
+
+        let drawer = try XCTUnwrap(presenter.presented)
+        XCTAssertEqual(drawer.config.header, "UNEXPOSED_DRAWER_HEADER".localized)
+        XCTAssertTrue(mailbox.messages.isEmpty)
+    }
+
     func testUnexposed() throws {
         let presenter = DrawerPresenterDouble()
         let mailbox = DrawerMailboxingDouble([.unexposed])
