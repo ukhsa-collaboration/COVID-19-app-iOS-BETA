@@ -5,7 +5,6 @@ require "updates_tracker_stories_with_build_number"
 include UpdatesTrackerStoriesWithBuildNumber
 
 rev_list = ARGV.shift
-puts "rev list: #{rev_list}"
 
 update_stories_with_build_number(
   build_number: ENV.fetch("BUILD"),
