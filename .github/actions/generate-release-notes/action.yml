@@ -1,0 +1,19 @@
+name: Generate release notes
+description: Finds finished stories in a given revision range and generates a report in markdown
+inputs:
+  tracker_token:
+    description: Pivotal tracker token for api authentication.
+    required: true
+  revision_range:
+    description: A git revision range. See `man 7 gitrevisions`.
+    required: true
+    default: 'HEAD..HEAD' # This will produce no output
+  outputs:
+    release_notes:
+      description: 'Generated release notes'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.tracker_token }}
+    - ${{ inputs.revision_range }}

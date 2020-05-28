@@ -1,5 +1,0 @@
-name: Update tracker stories with build number
-description: Updates pivotal tracker stories with a given build number
-runs:
-  using: 'docker'
-  image: 'Dockerfile'

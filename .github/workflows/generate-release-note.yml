@@ -1,0 +1,29 @@
+name: docker-ci-test
+
+on:
+  repository_dispatch:
+    types: [generate-release-note]
+
+jobs:
+  docker-ci-test:
+    runs-on:
+      - self-hosted
+      - linux
+      - aws
+    steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # checkout full repo with all tags
+
+      - name: Generate release notes
+        id: generate_release_notes
+        uses: ./.github/actions/genrate-release-notes
+        with:
+          tracker_token: ${{ secrets.tracker_api_token }}
+          revision_range: ${{ github.event.client_payload }}
+
+      - name: Print release notes
+        run: echo "${{ steps.generate_release_notes.release_notes }}"
+
