@@ -138,8 +138,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         writeBuildInfo()
         
-        let userStatusProvider = UserStatusProvider(localeProvider: AutoupdatingCurrentLocaleProvider())
-
         let rootVC = RootViewController()
         rootVC.inject(
             persistence: persistence,
@@ -155,7 +153,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             linkingIdManager: linkingIdManager,
             statusStateMachine: statusStateMachine,
             uiQueue: DispatchQueue.main,
-            userStatusProvider: userStatusProvider,
             urlOpener: application,
             drawerMailbox: drawerMailbox
         )

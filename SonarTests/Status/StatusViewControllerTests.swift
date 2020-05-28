@@ -297,7 +297,6 @@ class StatusViewControllerTests: TestCase {
         let vc = StatusViewController.instantiate()
         vc.inject(
             statusStateMachine: statusStateMachine,
-            userStatusProvider: UserStatusProvider(localeProvider: EnGbLocaleProviderDouble()),
             persistence: persistence,
             linkingIdManager: LinkingIdManagerDouble(),
             registrationService: registrationService,

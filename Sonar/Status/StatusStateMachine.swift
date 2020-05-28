@@ -231,7 +231,6 @@ class StatusStateMachine: StatusStateMachining {
                 state = .ok(StatusState.Ok())
             }
         case .symptomatic(let symptomatic):
-            #warning("Android goes straight to ok here, check w/PM")
             if testDate > symptomatic.startDate {
                 symptoms = symptomatic.symptoms
             }
