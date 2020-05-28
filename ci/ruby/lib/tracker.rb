@@ -1,3 +1,6 @@
+require 'net/http'
+require 'json'
+
 class Tracker
   BASE_URL = 'https://www.pivotaltracker.com/services/v5'
 

@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+
+if ARGV.length != 2
+  puts "Usage: #{$PROGRAM_NAME} tracker_token revision_range"
+  exit(1)
+end
+
+tracker_token, revision_range = ARGV
+
+require 'bundler/inline'
+gemfile do
+  gem 'sonar-ci-tools', path: './ci/ruby'
+end
+puts 'Gems loaded'
+puts
+
+require 'generates_release_notes'
+include GeneratesReleaseNotes
+
+
+io = StringIO.new
+generate_release_notes(
+    io: io,
+    tracker_token: tracker_token,
+    commits: revision_range,
+)
+
+puts "::set-output name=release_notes::#{io.string.dump}"
