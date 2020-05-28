@@ -172,7 +172,7 @@ class StatusViewControllerTests: TestCase {
                 drawerPresenter: drawerPresenter
             )
 
-            let promptVc = try XCTUnwrap(PresentationSpy.presented(by: vc) as? SymptomsPromptViewController)
+            let promptVc = try XCTUnwrap(PresentationSpy.presented(by: vc) as? CheckinDrawerViewController)
             promptVc.updateSymptoms()
             try respondToSymptomQuestion(vc: vc, expectedTitle: "TEMPERATURE_QUESTION", response: true)
             try respondToSymptomQuestion(vc: vc, expectedTitle: "COUGH_QUESTION", response: false)
@@ -244,13 +244,13 @@ class StatusViewControllerTests: TestCase {
         let presenter = DrawerPresenterDouble()
         let mailbox = DrawerMailboxingDouble([.negativeTestResult(symptoms: [.temperature])])
 
-        var symptomsPrompt: SymptomsPromptViewController?
+        var checkinDrawer: CheckinDrawerViewController?
         try PresentationSpy.withSpy {
             let vc = makeViewController(drawerPresenter: presenter, drawerMailbox: mailbox)
-            symptomsPrompt = PresentationSpy.presented(by: vc) as? SymptomsPromptViewController
+            checkinDrawer = PresentationSpy.presented(by: vc) as? CheckinDrawerViewController
         }
 
-        XCTAssertNotNil(symptomsPrompt)
+        XCTAssertNotNil(checkinDrawer)
         XCTAssertTrue(mailbox.messages.isEmpty)
     }
 

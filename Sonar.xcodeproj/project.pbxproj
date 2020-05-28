@@ -83,7 +83,7 @@
 		13473A1B246AFF0C00800CEA /* AdviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13473A1A246AFF0C00800CEA /* AdviceViewController.swift */; };
 		13473A1D246C0F2C00800CEA /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13473A1C246C0F2C00800CEA /* StatusViewController.swift */; };
 		13473A1F246D543F00800CEA /* UserStatusProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13473A1E246D543F00800CEA /* UserStatusProvider.swift */; };
-		1376F7D7247E628500524CEE /* QuestionnaireDrawer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1376F7D6247E628500524CEE /* QuestionnaireDrawer.storyboard */; };
+		1376F7D7247E628500524CEE /* CheckinDrawer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1376F7D6247E628500524CEE /* CheckinDrawer.storyboard */; };
 		1376F7D9247EA44E00524CEE /* 4_negative_test.apns in Resources */ = {isa = PBXBuildFile; fileRef = 1376F7D8247EA44E00524CEE /* 4_negative_test.apns */; };
 		138114E42450543600BA46C7 /* SymptomStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138114E32450543600BA46C7 /* SymptomStackView.swift */; };
 		138E50E22477C4E40027F2D3 /* 3_positive_test.apns in Resources */ = {isa = PBXBuildFile; fileRef = 138E50E12477C4E40027F2D3 /* 3_positive_test.apns */; };
@@ -233,7 +233,7 @@
 		F6334E4D24748B3000421B4C /* RegistrationStatus.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6334E4C24748B3000421B4C /* RegistrationStatus.storyboard */; };
 		F6334E4F24748C3400421B4C /* RegistrationStatusViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6334E4E24748C3400421B4C /* RegistrationStatusViewControllerTests.swift */; };
 		F652F72C244A74E900D97950 /* StartDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652F72B244A74E900D97950 /* StartDateViewController.swift */; };
-		F652F72E244E472E00D97950 /* SymptomsPromptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652F72D244E472E00D97950 /* SymptomsPromptViewController.swift */; };
+		F652F72E244E472E00D97950 /* CheckinDrawerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652F72D244E472E00D97950 /* CheckinDrawerViewController.swift */; };
 		F652F730244E4AAD00D97950 /* DrawerPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652F72F244E4AAD00D97950 /* DrawerPresentation.swift */; };
 		F6548FA32460C1C7005F06FF /* CheckinCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6548FA22460C1C7005F06FF /* CheckinCoordinatorTests.swift */; };
 		F6548FA52460DB95005F06FF /* SpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6548FA42460DB95005F06FF /* SpinnerView.swift */; };
@@ -415,7 +415,7 @@
 		13473A1C246C0F2C00800CEA /* StatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
 		13473A1E246D543F00800CEA /* UserStatusProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatusProvider.swift; sourceTree = "<group>"; };
 		1347DAF02450915500F2F776 /* LocalNotificationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationTests.swift; sourceTree = "<group>"; };
-		1376F7D6247E628500524CEE /* QuestionnaireDrawer.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = QuestionnaireDrawer.storyboard; sourceTree = "<group>"; };
+		1376F7D6247E628500524CEE /* CheckinDrawer.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CheckinDrawer.storyboard; sourceTree = "<group>"; };
 		1376F7D8247EA44E00524CEE /* 4_negative_test.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = 4_negative_test.apns; sourceTree = "<group>"; };
 		138114E32450543600BA46C7 /* SymptomStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomStackView.swift; sourceTree = "<group>"; };
 		138E50E12477C4E40027F2D3 /* 3_positive_test.apns */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 3_positive_test.apns; sourceTree = "<group>"; };
@@ -584,7 +584,7 @@
 		F6334E4C24748B3000421B4C /* RegistrationStatus.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RegistrationStatus.storyboard; sourceTree = "<group>"; };
 		F6334E4E24748C3400421B4C /* RegistrationStatusViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationStatusViewControllerTests.swift; sourceTree = "<group>"; };
 		F652F72B244A74E900D97950 /* StartDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDateViewController.swift; sourceTree = "<group>"; };
-		F652F72D244E472E00D97950 /* SymptomsPromptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomsPromptViewController.swift; sourceTree = "<group>"; };
+		F652F72D244E472E00D97950 /* CheckinDrawerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinDrawerViewController.swift; sourceTree = "<group>"; };
 		F652F72F244E4AAD00D97950 /* DrawerPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerPresentation.swift; sourceTree = "<group>"; };
 		F6548FA22460C1C7005F06FF /* CheckinCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinCoordinatorTests.swift; sourceTree = "<group>"; };
 		F6548FA42460DB95005F06FF /* SpinnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerView.swift; sourceTree = "<group>"; };
@@ -833,12 +833,13 @@
 			isa = PBXGroup;
 			children = (
 				F6099A792474976400758D3E /* Advice.storyboard */,
+				1376F7D6247E628500524CEE /* CheckinDrawer.storyboard */,
 				DD3FCF402476E913008B0237 /* Drawer.storyboard */,
-				1376F7D6247E628500524CEE /* QuestionnaireDrawer.storyboard */,
 				F6334E4C24748B3000421B4C /* RegistrationStatus.storyboard */,
 				F758B8C3242CC0EE003AE16D /* Status.storyboard */,
 				F6BBE140246F584F005757BB /* WorkplaceGuidance.storyboard */,
 				13473A1A246AFF0C00800CEA /* AdviceViewController.swift */,
+				F652F72D244E472E00D97950 /* CheckinDrawerViewController.swift */,
 				F6AA91ED247ED45D00D086B8 /* DrawerMailbox.swift */,
 				DD3FCF3F2476E913008B0237 /* DrawerViewController.swift */,
 				DD3FCF3A2476E8C3008B0237 /* ExposedNotificationHandler.swift */,
@@ -847,7 +848,6 @@
 				F6DA0A332469D6BA001F0B48 /* StatusStateMachine.swift */,
 				F6DA0A372469DCBA001F0B48 /* StatusStateMigration.swift */,
 				13473A1C246C0F2C00800CEA /* StatusViewController.swift */,
-				F652F72D244E472E00D97950 /* SymptomsPromptViewController.swift */,
 				138114E32450543600BA46C7 /* SymptomStackView.swift */,
 				DD3FCF3D2476E8DC008B0237 /* TestResult.swift */,
 				DD3FCF392476E8C3008B0237 /* TestResultNotificationHandler.swift */,
@@ -1664,7 +1664,7 @@
 				F758B8BE242CB856003AE16D /* Localizable.strings in Resources */,
 				6FC63C38241641BA007C8BF3 /* Assets.xcassets in Resources */,
 				F618A566245C682500D89517 /* GoogleService-Info.plist in Resources */,
-				1376F7D7247E628500524CEE /* QuestionnaireDrawer.storyboard in Resources */,
+				1376F7D7247E628500524CEE /* CheckinDrawer.storyboard in Resources */,
 				895D9E462437458700573D4D /* AppIcon.xcassets in Resources */,
 				F6BBE13C246F46B4005757BB /* ApplyForTest.storyboard in Resources */,
 				F6334E4D24748B3000421B4C /* RegistrationStatus.storyboard in Resources */,
@@ -1929,7 +1929,7 @@
 				0964B37B24631B1B0022EF97 /* UIViewController+Scrolling.swift in Sources */,
 				09B3AC812460BEA9001AF47E /* AutoscalingImageView.swift in Sources */,
 				898FE859243B4FE300210775 /* AuthorizationManaging.swift in Sources */,
-				F652F72E244E472E00D97950 /* SymptomsPromptViewController.swift in Sources */,
+				F652F72E244E472E00D97950 /* CheckinDrawerViewController.swift in Sources */,
 				F67C5154243E4D2F008E2945 /* AnswerButton.swift in Sources */,
 				0964B37D246328A20022EF97 /* UIView+Scrolling.swift in Sources */,
 				6FC63C31241641B8007C8BF3 /* AppDelegate.swift in Sources */,

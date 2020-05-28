@@ -207,15 +207,15 @@ class StatusViewController: UIViewController, Storyboarded {
     @IBAction func unwindFromDrawer(unwindSegue: UIStoryboardSegue) {
     }
 
-    fileprivate func presentCheckinPrompt(for symptoms: Symptoms?, header: String, detail: String) {
-        let symptomsPromptViewController = SymptomsPromptViewController.instantiate()
+    fileprivate func presentCheckinDrawer(for symptoms: Symptoms?, header: String, detail: String) {
+        let checkinDrawer = CheckinDrawerViewController.instantiate()
         
         if animateTransitions {
-            symptomsPromptViewController.modalPresentationStyle = .custom
-            symptomsPromptViewController.transitioningDelegate = drawerPresentationManager
+            checkinDrawer.modalPresentationStyle = .custom
+            checkinDrawer.transitioningDelegate = drawerPresentationManager
         }
         
-        symptomsPromptViewController.inject(headerText: header, detailText: detail) { needsCheckin in
+        checkinDrawer.inject(headerText: header, detailText: detail) { needsCheckin in
             self.dismiss(animated: self.animateTransitions)
 
             if needsCheckin {
@@ -232,7 +232,7 @@ class StatusViewController: UIViewController, Storyboarded {
                 self.statusStateMachine.checkin(symptoms: [])
             }
         }
-        present(symptomsPromptViewController, animated: animateTransitions)
+        present(checkinDrawer, animated: animateTransitions)
     }
 
     @IBAction func goToSettingsTapped() {
@@ -280,7 +280,7 @@ class StatusViewController: UIViewController, Storyboarded {
             detailForSelfIsolation(expiryDate: symptomatic.checkinDate)
 
             if dateProvider() >= symptomatic.checkinDate {
-                presentCheckinPrompt(
+                presentCheckinDrawer(
                     for: symptomatic.symptoms,
                     header: "CHECKIN_QUESTIONNAIRE_OVERLAY_HEADER".localized,
                     detail: "CHECKIN_QUESTIONNAIRE_OVERLAY_DETAIL".localized
@@ -319,7 +319,7 @@ class StatusViewController: UIViewController, Storyboarded {
             )
         case .negativeTestResult(let symptoms):
             if let symptoms = symptoms {
-                presentCheckinPrompt(
+                presentCheckinDrawer(
                     for: symptoms,
                     header: "NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_HEADER".localized,
                     detail: "NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_DETAIL".localized

@@ -1,5 +1,5 @@
 //
-//  SymptomsPromptViewController.swift
+//  CheckinPromptViewController.swift
 //  Sonar
 //
 //  Created by NHSX on 4/20/20.
@@ -8,8 +8,8 @@
 
 import UIKit
 
-class SymptomsPromptViewController: UIViewController, Storyboarded {
-    static var storyboardName = "QuestionnaireDrawer"
+class CheckinDrawerViewController: UIViewController, Storyboarded {
+    static var storyboardName = "CheckinDrawer"
 
     @IBOutlet weak var header: UILabel!
     @IBOutlet weak var detail: UILabel!
