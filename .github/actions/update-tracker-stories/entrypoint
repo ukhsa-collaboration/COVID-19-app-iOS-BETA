@@ -1,3 +1,11 @@
 #!/usr/bin/env ruby
 
-system(*%W{git status})
+require 'bundler/inline'
+
+gemfile do
+  gem 'sonar-ci-tools', path: './ci/ruby'
+end
+
+puts 'Gems loaded'
+
+require 'generates_release_notes'

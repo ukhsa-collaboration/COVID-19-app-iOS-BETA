@@ -1,3 +1,8 @@
+PATH
+  remote: .
+  specs:
+    sonar-ci-tools (0.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -30,6 +35,7 @@ DEPENDENCIES
   minitest
   minitest-reporters
   rake
+  sonar-ci-tools!
   webmock
 
 BUNDLED WITH
