@@ -1,5 +1,5 @@
 //
-//  ApplyForTestViewController.swift
+//  BookTestViewController.swift
 //  Sonar
 //
 //  Created by NHSX.
@@ -8,10 +8,10 @@
 
 import UIKit
 
-class ApplyForTestViewController: UIViewController, Storyboarded {
-    static let storyboardName = "ApplyForTest"
+class BookTestViewController: UIViewController, Storyboarded {
+    static let storyboardName = "BookTest"
 
-    @IBOutlet weak var applyLinkButton: LinkButton!
+    @IBOutlet weak var bookTestLinkButton: LinkButton!
 
     private var referenceCode: String?
 
@@ -22,7 +22,7 @@ class ApplyForTestViewController: UIViewController, Storyboarded {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        applyLinkButton.url = ContentURLs.shared.applyForTest(referenceCode: referenceCode)
+        bookTestLinkButton.url = ContentURLs.shared.bookTest(referenceCode: referenceCode)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

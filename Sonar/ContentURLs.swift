@@ -24,15 +24,15 @@ struct ContentURLs {
     let workplaceGuidance: URL
     let regionalServices: URL
     private let status: StatusesURLs
-    private let applyForTestBase: URL
+    private let bookTestBase: URL
 
     func currentAdvice(for statusState: StatusState) -> URL {
         currentStatusURLs(for: statusState).currentAdvice
     }
     
-    func applyForTest(referenceCode: String?) -> URL {
-        guard let referenceCode = referenceCode else { return applyForTestBase }
-        var components = URLComponents(url: applyForTestBase, resolvingAgainstBaseURL: false)!
+    func bookTest(referenceCode: String?) -> URL {
+        guard let referenceCode = referenceCode else { return bookTestBase }
+        var components = URLComponents(url: bookTestBase, resolvingAgainstBaseURL: false)!
         
         if components.queryItems == nil /* ugh why? */ {
             components.queryItems = []
@@ -59,7 +59,7 @@ extension ContentURLs: Decodable {
         case privacyAndData
         case ourPolicies
         case nhs111Coronavirus
-        case applyForTest
+        case bookTest
         case statusInfo
         case workplaceGuidance
         case regionalServices
@@ -74,7 +74,7 @@ extension ContentURLs: Decodable {
         privacyAndData = try values.decodeURL(forKey: .privacyAndData)
         ourPolicies = try values.decodeURL(forKey: .ourPolicies)
         nhs111Coronavirus = try values.decodeURL(forKey: .nhs111Coronavirus)
-        applyForTestBase = try values.decodeURL(forKey: .applyForTest)
+        bookTestBase = try values.decodeURL(forKey: .bookTest)
         statusInfo = try values.decodeURL(forKey: .statusInfo)
         workplaceGuidance = try values.decodeURL(forKey: .workplaceGuidance)
         regionalServices = try values.decodeURL(forKey: .regionalServices)

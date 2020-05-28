@@ -19,8 +19,8 @@
 		090DEE10244F8BF600268170 /* BluetoothPermissionDeniedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090DEE0F244F8BF600268170 /* BluetoothPermissionDeniedViewController.swift */; };
 		092BB5AB244622200036B30E /* RootViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092BB5AA244622200036B30E /* RootViewControllerTests.swift */; };
 		0937F78F247461D40010FB3B /* ReferenceCodeContainerViewControllerBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0937F78E247461D40010FB3B /* ReferenceCodeContainerViewControllerBase.swift */; };
-		0938D9062474473E006FAADF /* ApplyForTestContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0938D9052474473E006FAADF /* ApplyForTestContainerViewController.swift */; };
-		0938D9092474484B006FAADF /* ApplyForTestContainerViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0938D9082474484B006FAADF /* ApplyForTestContainerViewControllerTests.swift */; };
+		0938D9062474473E006FAADF /* BookTestContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0938D9052474473E006FAADF /* BookTestContainerViewController.swift */; };
+		0938D9092474484B006FAADF /* BookTestContainerViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0938D9082474484B006FAADF /* BookTestContainerViewControllerTests.swift */; };
 		094D561D247D8005007BC772 /* PresentationSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094D561C247D8005007BC772 /* PresentationSpy.swift */; };
 		095283A6247597DA00CDEE55 /* BackgroundableTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095283A5247597DA00CDEE55 /* BackgroundableTimer.swift */; };
 		095283A82475990B00CDEE55 /* BackgroundableTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095283A72475990B00CDEE55 /* BackgroundableTimerTests.swift */; };
@@ -252,8 +252,8 @@
 		F6AA91F0247ED65A00D086B8 /* DrawerMailboxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AA91EF247ED65A00D086B8 /* DrawerMailboxTests.swift */; };
 		F6AA91F2247F161C00D086B8 /* DrawerMailboxingDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AA91F1247F161C00D086B8 /* DrawerMailboxingDouble.swift */; };
 		F6AB2F20243D359F00386D6B /* SubmitSymptomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */; };
-		F6BBE13C246F46B4005757BB /* ApplyForTest.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6BBE13B246F46B4005757BB /* ApplyForTest.storyboard */; };
-		F6BBE13E246F46EE005757BB /* ApplyForTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BBE13D246F46EE005757BB /* ApplyForTestViewController.swift */; };
+		F6BBE13C246F46B4005757BB /* BookTest.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6BBE13B246F46B4005757BB /* BookTest.storyboard */; };
+		F6BBE13E246F46EE005757BB /* BookTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BBE13D246F46EE005757BB /* BookTestViewController.swift */; };
 		F6BBE141246F584F005757BB /* WorkplaceGuidance.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6BBE140246F584F005757BB /* WorkplaceGuidance.storyboard */; };
 		F6BBE143246F5870005757BB /* WorkplaceGuidanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BBE142246F5870005757BB /* WorkplaceGuidanceViewController.swift */; };
 		F6CC2CA9242BC7FC0079432B /* RemoteNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CC2CA8242BC7FC0079432B /* RemoteNotificationManager.swift */; };
@@ -349,8 +349,8 @@
 		090DEE0F244F8BF600268170 /* BluetoothPermissionDeniedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothPermissionDeniedViewController.swift; sourceTree = "<group>"; };
 		092BB5AA244622200036B30E /* RootViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewControllerTests.swift; sourceTree = "<group>"; };
 		0937F78E247461D40010FB3B /* ReferenceCodeContainerViewControllerBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceCodeContainerViewControllerBase.swift; sourceTree = "<group>"; };
-		0938D9052474473E006FAADF /* ApplyForTestContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyForTestContainerViewController.swift; sourceTree = "<group>"; };
-		0938D9082474484B006FAADF /* ApplyForTestContainerViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyForTestContainerViewControllerTests.swift; sourceTree = "<group>"; };
+		0938D9052474473E006FAADF /* BookTestContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTestContainerViewController.swift; sourceTree = "<group>"; };
+		0938D9082474484B006FAADF /* BookTestContainerViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTestContainerViewControllerTests.swift; sourceTree = "<group>"; };
 		094D561C247D8005007BC772 /* PresentationSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationSpy.swift; sourceTree = "<group>"; };
 		095283A5247597DA00CDEE55 /* BackgroundableTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundableTimer.swift; sourceTree = "<group>"; };
 		095283A72475990B00CDEE55 /* BackgroundableTimerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundableTimerTests.swift; sourceTree = "<group>"; };
@@ -606,8 +606,8 @@
 		F6AA91EF247ED65A00D086B8 /* DrawerMailboxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerMailboxTests.swift; sourceTree = "<group>"; };
 		F6AA91F1247F161C00D086B8 /* DrawerMailboxingDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerMailboxingDouble.swift; sourceTree = "<group>"; };
 		F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitSymptomsViewController.swift; sourceTree = "<group>"; };
-		F6BBE13B246F46B4005757BB /* ApplyForTest.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ApplyForTest.storyboard; sourceTree = "<group>"; };
-		F6BBE13D246F46EE005757BB /* ApplyForTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyForTestViewController.swift; sourceTree = "<group>"; };
+		F6BBE13B246F46B4005757BB /* BookTest.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BookTest.storyboard; sourceTree = "<group>"; };
+		F6BBE13D246F46EE005757BB /* BookTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTestViewController.swift; sourceTree = "<group>"; };
 		F6BBE140246F584F005757BB /* WorkplaceGuidance.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WorkplaceGuidance.storyboard; sourceTree = "<group>"; };
 		F6BBE142246F5870005757BB /* WorkplaceGuidanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkplaceGuidanceViewController.swift; sourceTree = "<group>"; };
 		F6CA2818242E41F700F8DC55 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -1269,11 +1269,11 @@
 		F604977024549B49002B8503 /* Testing */ = {
 			isa = PBXGroup;
 			children = (
-				F6BBE13B246F46B4005757BB /* ApplyForTest.storyboard */,
+				F6BBE13B246F46B4005757BB /* BookTest.storyboard */,
 				AE29892B24729AD8004C4097 /* ReferenceCode.storyboard */,
 				F60497782454A40B002B8503 /* TestingInfo.storyboard */,
-				0938D9052474473E006FAADF /* ApplyForTestContainerViewController.swift */,
-				F6BBE13D246F46EE005757BB /* ApplyForTestViewController.swift */,
+				0938D9052474473E006FAADF /* BookTestContainerViewController.swift */,
+				F6BBE13D246F46EE005757BB /* BookTestViewController.swift */,
 				F604977124549B7B002B8503 /* LinkingIdManager.swift */,
 				F604976E24549729002B8503 /* LinkingIdRequest.swift */,
 				0937F78E247461D40010FB3B /* ReferenceCodeContainerViewControllerBase.swift */,
@@ -1288,11 +1288,11 @@
 		F604977324549C84002B8503 /* Testing */ = {
 			isa = PBXGroup;
 			children = (
-				0938D9082474484B006FAADF /* ApplyForTestContainerViewControllerTests.swift */,
-				09CDA1192473525000C8684D /* ReferenceCodeViewControllerTests.swift */,
+				0938D9082474484B006FAADF /* BookTestContainerViewControllerTests.swift */,
 				F604977424549C95002B8503 /* LinkingIdManagerTests.swift */,
-				097F054A2473457000E633C8 /* TestingInfoContainerViewControllerTests.swift */,
 				08D77F2B2477999000EAEBD5 /* LinkingIdRequestTests.swift */,
+				09CDA1192473525000C8684D /* ReferenceCodeViewControllerTests.swift */,
+				097F054A2473457000E633C8 /* TestingInfoContainerViewControllerTests.swift */,
 			);
 			path = Testing;
 			sourceTree = "<group>";
@@ -1662,7 +1662,7 @@
 				F618A566245C682500D89517 /* GoogleService-Info.plist in Resources */,
 				1376F7D7247E628500524CEE /* CheckinDrawer.storyboard in Resources */,
 				895D9E462437458700573D4D /* AppIcon.xcassets in Resources */,
-				F6BBE13C246F46B4005757BB /* ApplyForTest.storyboard in Resources */,
+				F6BBE13C246F46B4005757BB /* BookTest.storyboard in Resources */,
 				F6334E4D24748B3000421B4C /* RegistrationStatus.storyboard in Resources */,
 				0805FAF2247C02AB00E3A74F /* ErrorView.xib in Resources */,
 				F68B89ED243CFF2600F369A9 /* SelfDiagnosis.storyboard in Resources */,
@@ -1809,7 +1809,7 @@
 				89CCF66424571EE900AC9D91 /* SetupProblemDiagnoserTests.swift in Sources */,
 				F63279272435219A00CF7A42 /* QueueDouble.swift in Sources */,
 				F6CC2CAC242BCD0D0079432B /* RemoteNotificationManagerTests.swift in Sources */,
-				0938D9092474484B006FAADF /* ApplyForTestContainerViewControllerTests.swift in Sources */,
+				0938D9092474484B006FAADF /* BookTestContainerViewControllerTests.swift in Sources */,
 				0979FB782458ADE800EB01A8 /* PostcodeValidatorTests.swift in Sources */,
 				09CAA36A2440FC4500CE93A6 /* PostcodeViewControllerTests.swift in Sources */,
 				F67C5159243E7C1E008E2945 /* SubmitSymptomsViewControllerTests.swift in Sources */,
@@ -1859,12 +1859,12 @@
 				21C09A8D24377F5100368203 /* CoreBluetoothExtensions.swift in Sources */,
 				F72EBDA7243D2FD1009F9328 /* ConcreteBroadcastIdEncrypter.swift in Sources */,
 				F72EBD9E243C90E6009F9328 /* HumbleLocalNotificationScheduler.swift in Sources */,
-				0938D9062474473E006FAADF /* ApplyForTestContainerViewController.swift in Sources */,
+				0938D9062474473E006FAADF /* BookTestContainerViewController.swift in Sources */,
 				0805FAF0247BEEE700E3A74F /* ErrorView.swift in Sources */,
 				F6DA0A3C246A0FAA001F0B48 /* StatusState.swift in Sources */,
 				89DF669F2460168000A55F24 /* StorageChecker.swift in Sources */,
 				217A23BE243B34E8001B8236 /* UIDevice+ModelName.swift in Sources */,
-				F6BBE13E246F46EE005757BB /* ApplyForTestViewController.swift in Sources */,
+				F6BBE13E246F46EE005757BB /* BookTestViewController.swift in Sources */,
 				F604976924539093002B8503 /* UploadLog.swift in Sources */,
 				214CD372246B347200B24886 /* DateExtensions.swift in Sources */,
 				21F373FF2433844D00926FB8 /* ContactEventRepository.swift in Sources */,

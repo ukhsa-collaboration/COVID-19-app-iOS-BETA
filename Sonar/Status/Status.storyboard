@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--ApplyForTest-->
+        <!--BookTest-->
         <scene sceneID="ifu-HJ-5UJ">
             <objects>
-                <viewControllerPlaceholder storyboardName="ApplyForTest" id="K9E-G6-YEs" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="BookTest" id="K9E-G6-YEs" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="n0U-j9-HMh"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sxz-xU-5fy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -283,7 +283,7 @@
                                                     <action selector="feelUnwellTapped:" destination="D27-h6-ECy" eventType="touchUpInside" id="xqM-Ml-lWu"/>
                                                 </connections>
                                             </view>
-                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="p6j-FG-xJ1" userLabel="Apply for Test Button" customClass="UIButton">
+                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="p6j-FG-xJ1" userLabel="Book Test Button" customClass="UIButton">
                                                 <rect key="frame" x="0.0" y="759" width="414" height="78"/>
                                                 <subviews>
                                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wpR-Ie-pa7" customClass="SmartInvertBorderView" customModule="Sonar" customModuleProvider="target">
@@ -306,8 +306,8 @@
                                                     </stackView>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                                <accessibility key="accessibilityConfiguration" label="Apply for a coronavirus test now">
-                                                    <accessibilityTraits key="traits" link="YES"/>
+                                                <accessibility key="accessibilityConfiguration">
+                                                    <accessibilityTraits key="traits" button="YES"/>
                                                     <bool key="isElement" value="YES"/>
                                                 </accessibility>
                                                 <constraints>
@@ -322,7 +322,7 @@
                                                 </constraints>
                                                 <directionalEdgeInsets key="directionalLayoutMargins" top="25" leading="16" bottom="25" trailing="16"/>
                                                 <connections>
-                                                    <action selector="applyForTestTapped:" destination="D27-h6-ECy" eventType="touchUpInside" id="hAp-w6-Tl5"/>
+                                                    <action selector="bookTestTapped:" destination="D27-h6-ECy" eventType="touchUpInside" id="hAp-w6-Tl5"/>
                                                 </connections>
                                             </view>
                                             <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iOb-hN-v3u" userLabel="Steps Detail View">
@@ -495,7 +495,8 @@ If you have a medical emergency, please call 999. If you require medical help ne
                         <viewLayoutGuide key="safeArea" id="eZX-0D-0Ns"/>
                     </view>
                     <connections>
-                        <outlet property="applyForTestButton" destination="p6j-FG-xJ1" id="BIg-df-pKk"/>
+                        <outlet property="bookTestButton" destination="p6j-FG-xJ1" id="BIg-df-pKk"/>
+                        <outlet property="bookTestLabel" destination="I34-X7-CYS" id="BLM-9r-39L"/>
                         <outlet property="contentStackView" destination="NyJ-yi-J4V" id="j9B-h8-9VV"/>
                         <outlet property="diagnosisDetailLabel" destination="ZHf-uh-yP6" id="xUV-Bz-VHM"/>
                         <outlet property="diagnosisHighlightView" destination="nkr-z0-0aM" id="Vnq-tm-d4H"/>
@@ -514,7 +515,7 @@ If you have a medical emergency, please call 999. If you require medical help ne
                         <outlet property="stepsDetailLabel" destination="QzR-8B-SLv" id="OvV-th-O7v"/>
                         <outletCollection property="sectionHeaders" destination="efO-TR-8NP" collectionClass="NSMutableArray" id="Xz6-vT-zVw"/>
                         <outletCollection property="sectionHeaders" destination="KGX-pq-vZ2" collectionClass="NSMutableArray" id="EDe-zc-fSi"/>
-                        <segue destination="K9E-G6-YEs" kind="show" identifier="showApplyForTest" id="Skw-Ky-N3M"/>
+                        <segue destination="K9E-G6-YEs" kind="show" identifier="showBookTest" id="Skw-Ky-N3M"/>
                         <segue destination="237-sh-LFD" kind="show" identifier="showWorkplaceGuidance" id="kW0-A3-I04"/>
                     </connections>
                 </viewController>

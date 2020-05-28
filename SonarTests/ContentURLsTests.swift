@@ -10,8 +10,8 @@ import XCTest
 @testable import Sonar
 
 class ContentURLsTests: XCTestCase {
-    func testApplyForTest_withCode() throws {
-        let url = ContentURLs.shared.applyForTest(referenceCode: "1234-abcd")
+    func testBookTest_withCode() throws {
+        let url = ContentURLs.shared.bookTest(referenceCode: "1234-abcd")
         let components = try XCTUnwrap(URLComponents(url: url, resolvingAgainstBaseURL: false))
         XCTAssertEqual(components.scheme, "https")
         XCTAssertEqual(components.path, "/cta-start")
@@ -25,8 +25,8 @@ class ContentURLsTests: XCTestCase {
         ])
     }
     
-    func testApplyForTest_withoutCode() throws {
-        let url = ContentURLs.shared.applyForTest(referenceCode: nil)
+    func testBookTest_withoutCode() throws {
+        let url = ContentURLs.shared.bookTest(referenceCode: nil)
         XCTAssertEqual(url, URL(string: "https://self-referral.test-for-coronavirus.service.gov.uk/cta-start"))
     }
 }

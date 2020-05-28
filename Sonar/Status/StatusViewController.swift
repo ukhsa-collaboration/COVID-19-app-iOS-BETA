@@ -30,7 +30,8 @@ class StatusViewController: UIViewController, Storyboarded {
     @IBOutlet weak var feelUnwellTitleLabel: UILabel!
     @IBOutlet weak var feelUnwellBodyLabel: UILabel!
 
-    @IBOutlet weak var applyForTestButton: UIButton!
+    @IBOutlet weak var bookTestButton: UIButton!
+    @IBOutlet weak var bookTestLabel: UILabel!
     @IBOutlet weak var stepsDetailLabel: UILabel!
 
     @IBOutlet weak var nhsServicesStackView: UIStackView!
@@ -123,6 +124,7 @@ class StatusViewController: UIViewController, Storyboarded {
         feelUnwellButton.accessibilityLabel = [
             feelUnwellTitleLabel.text, feelUnwellBodyLabel.text
         ].compactMap { $0 }.joined(separator: ". ")
+        bookTestButton.accessibilityLabel = bookTestLabel.text
 
         diagnosisStackView.isLayoutMarginsRelativeArrangement = true
         contentStackView.setCustomSpacing(32, after: diagnosisStackView)
@@ -144,7 +146,7 @@ class StatusViewController: UIViewController, Storyboarded {
         switch segue.destination {
         case let vc as RegistrationStatusViewController:
             vc.inject(persistence: persistence, registrationService: registrationService, notificationCenter: notificationCenter)
-        case let vc as ApplyForTestContainerViewController:
+        case let vc as BookTestContainerViewController:
             vc.inject(linkingIdManager: linkingIdManager, uiQueue: DispatchQueue.main)
         default:
             break
@@ -193,8 +195,8 @@ class StatusViewController: UIViewController, Storyboarded {
         coordinator.start()
     }
 
-    @IBAction func applyForTestTapped(_ sender: UIButton) {
-        performSegue(withIdentifier: "showApplyForTest", sender: self)
+    @IBAction func bookTestTapped(_ sender: UIButton) {
+        performSegue(withIdentifier: "showBookTest", sender: self)
     }
 
     @IBAction func testingInfoTapped(_ sender: Any) {
@@ -272,7 +274,7 @@ class StatusViewController: UIViewController, Storyboarded {
             diagnosisTitleLabel.text = "Follow the current advice to stop the spread of coronavirus"
             diagnosisDetailLabel.isHidden = true
             feelUnwellButton.isHidden = false
-            applyForTestButton.isHidden = true
+            bookTestButton.isHidden = true
             stepsDetailLabel.isHidden = false
             stepsDetailLabel.text = getHelpText(detail: "STATUS_GET_HELP_OK".localized)
 
@@ -282,7 +284,7 @@ class StatusViewController: UIViewController, Storyboarded {
             diagnosisDetailLabel.text = "Mantain social distancing and wash your hands frequently. Read advice for you below."
             diagnosisDetailLabel.isHidden = false
             feelUnwellButton.isHidden = false
-            applyForTestButton.isHidden = true
+            bookTestButton.isHidden = true
             stepsDetailLabel.isHidden = false
             stepsDetailLabel.text = getHelpText(detail: "STATUS_GET_HELP_EXPOSED".localized)
 
@@ -292,7 +294,7 @@ class StatusViewController: UIViewController, Storyboarded {
             diagnosisDetailLabel.isHidden = false
             diagnosisDetailLabel.text = detailWithExpiryDate(symptomatic.checkinDate)
             feelUnwellButton.isHidden = true
-            applyForTestButton.isHidden = false
+            bookTestButton.isHidden = false
             stepsDetailLabel.isHidden = false
             stepsDetailLabel.text = getHelpText()
 
@@ -310,7 +312,7 @@ class StatusViewController: UIViewController, Storyboarded {
             diagnosisDetailLabel.isHidden = false
             diagnosisDetailLabel.text = detailWithExpiryDate(positiveTestResult.expiryDate)
             feelUnwellButton.isHidden = true
-            applyForTestButton.isHidden = true
+            bookTestButton.isHidden = true
             nextStepsDetailView.isHidden = true
         }
     }
