@@ -364,10 +364,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="374" height="167"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hsM-UT-gLw">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="90.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="54.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start Date Question" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OFO-L9-lgU">
-                                                <rect key="frame" x="0.0" y="48" width="374" height="26.5"/>
+                                                <rect key="frame" x="0.0" y="28" width="374" height="26.5"/>
                                                 <accessibility key="accessibilityConfiguration">
                                                     <accessibilityTraits key="traits" staticText="YES" header="YES"/>
                                                 </accessibility>
@@ -384,7 +384,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GD7-27-gTN" customClass="ErrorView" customModule="Sonar" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="106.5" width="374" height="9.5"/>
+                                        <rect key="frame" x="0.0" y="70.5" width="374" height="45.5"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="xwo-3w-4lP">
@@ -447,7 +447,7 @@
         <!--Question-->
         <scene sceneID="jG4-oM-M9U">
             <objects>
-                <viewController storyboardIdentifier="QuestionSymptomsViewController" id="iIR-bG-zmI" userLabel="Question" customClass="QuestionSymptomsViewController" customModule="Sonar" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="QuestionSymptomsViewController" title="Add my symptoms" id="iIR-bG-zmI" userLabel="Question" customClass="QuestionSymptomsViewController" customModule="Sonar" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GfZ-OT-59Z">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
