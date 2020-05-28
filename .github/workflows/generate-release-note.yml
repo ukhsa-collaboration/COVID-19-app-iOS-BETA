@@ -25,5 +25,5 @@ jobs:
           revision_range: ${{ github.event.client_payload.revision_range }}
 
       - name: Print release notes
-        run: echo "${{ steps.generate_release_notes.release_notes }}"
+        run: echo "${{ steps.generate_release_notes.outputs.release_notes }}"
 
