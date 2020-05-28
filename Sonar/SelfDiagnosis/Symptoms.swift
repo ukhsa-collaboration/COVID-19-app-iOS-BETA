@@ -19,6 +19,8 @@ struct Symptoms: Equatable {
         return !symptoms.intersection([.temperature, .cough, .anosmia]).isEmpty
     }
 
+    var isEmpty: Bool { symptoms.isEmpty }
+
     init(_ symptoms: Set<Symptom>) {
         self.symptoms = symptoms
     }

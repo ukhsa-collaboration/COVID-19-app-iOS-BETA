@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Symptoms Prompt View Controller-->
+        <!--Checkin Drawer View Controller-->
         <scene sceneID="k6o-pf-1lc">
             <objects>
-                <viewController storyboardIdentifier="SymptomsPromptViewController" id="AfQ-qe-1Bn" customClass="SymptomsPromptViewController" customModule="Sonar" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CheckinDrawerViewController" id="AfQ-qe-1Bn" customClass="CheckinDrawerViewController" customModule="Sonar" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bh-pN-2h1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="400"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -51,7 +51,6 @@
                                                 <state key="normal" title="I no longer have symptoms"/>
                                                 <connections>
                                                     <action selector="noSymptoms" destination="AfQ-qe-1Bn" eventType="touchUpInside" id="V0e-Vj-f31"/>
-                                                    <segue destination="nNd-Fp-7Vg" kind="unwind" unwindAction="unwindFromSymptomsPromptWithUnwindSegue:" id="hhi-tO-Ce6"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -87,7 +86,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="51Q-V0-c3B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <exit id="nNd-Fp-7Vg" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="4339" y="1093"/>
         </scene>

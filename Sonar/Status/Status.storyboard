@@ -512,7 +512,6 @@
                         <outlet property="stepsDetailLabel" destination="QzR-8B-SLv" id="OvV-th-O7v"/>
                         <segue destination="K9E-G6-YEs" kind="show" identifier="showApplyForTest" id="Skw-Ky-N3M"/>
                         <segue destination="237-sh-LFD" kind="show" identifier="showWorkplaceGuidance" id="kW0-A3-I04"/>
-                        <segue destination="ycO-TV-IwQ" kind="custom" identifier="presentDrawer" customClass="DrawerSegue" customModule="Sonar" customModuleProvider="target" id="8eA-90-6Tp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QkS-TV-URb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -526,14 +525,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zRg-rj-rxT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5088" y="233"/>
-        </scene>
-        <!--Drawer-->
-        <scene sceneID="dYw-h6-Abg">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Drawer" id="ycO-TV-IwQ" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="l5W-lR-yAJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="5036" y="349"/>
         </scene>
     </scenes>
     <resources>

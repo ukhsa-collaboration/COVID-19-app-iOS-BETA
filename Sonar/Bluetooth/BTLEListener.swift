@@ -183,7 +183,8 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
         
         guard let services = peripheral.services, services.count > 0 else {
             logger.info("No services discovered for peripheral \(peripheral.identifierWithName), trying again...")
-            peripheral.discoverServices([Environment.sonarServiceUUID])
+            // TODO: we need to rate-limit this, otherwise we spam the log and probably peoples' bluetoot stack
+//            peripheral.discoverServices([Environment.sonarServiceUUID])
             return
         }
         

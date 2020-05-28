@@ -74,8 +74,8 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="414" height="400"/>
                     <connections>
-                        <outlet property="detail" destination="OXR-SF-E5K" id="aGF-3G-gi2"/>
-                        <outlet property="header" destination="z4d-Td-TgN" id="QZS-4C-b1G"/>
+                        <outlet property="detailLabel" destination="OXR-SF-E5K" id="i0H-kl-d2l"/>
+                        <outlet property="headerLabel" destination="z4d-Td-TgN" id="7kc-qv-B7f"/>
                         <segue destination="vMb-Lq-kBc" kind="unwind" identifier="unwindFromDrawer" unwindAction="unwindFromDrawerWithUnwindSegue:" id="Qfn-eu-3FQ"/>
                     </connections>
                 </viewController>

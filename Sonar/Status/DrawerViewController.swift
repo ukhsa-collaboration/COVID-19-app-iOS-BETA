@@ -9,41 +9,25 @@
 import UIKit
 
 class DrawerViewController: UIViewController, Storyboarded {
-
-    struct Config {
-        let header: String
-        let detail: String
-        let completion: () -> Void
-
-        init(
-            header: String,
-            detail: String,
-            completion: @escaping () -> Void = {}
-        ) {
-            self.header = header
-            self.detail = detail
-            self.completion = completion
-        }
-    }
-
     static var storyboardName = "Drawer"
 
-    var config: Config!
-    private var headerText: String { config.header }
-    private var detailText: String { config.detail }
-    private var completion: (() -> Void) { config.completion }
+    var header: String!
+    private var detail: String!
+    private var completion: (() -> Void)!
 
-    @IBOutlet weak var header: UILabel!
-    @IBOutlet weak var detail: UILabel!
+    @IBOutlet weak var headerLabel: UILabel!
+    @IBOutlet weak var detailLabel: UILabel!
     
-    func inject(config: Config) {
-        self.config = config
+    func inject(header: String, detail: String, completion: @escaping () -> Void) {
+        self.header = header
+        self.detail = detail
+        self.completion = completion
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        header.text = headerText
-        detail.text = detailText
+        headerLabel.text = header
+        detailLabel.text = detail
     }
 
     @IBAction func closeTapped() {

@@ -16,27 +16,26 @@ class NegativeTestStatusTests: ScreenTestCase {
         // Check the correct overlay is shown
         let negativeTestStatusPage = NegativeTestSymptomaticPage(app)
         negativeTestStatusPage.noSymptomsButton.tap()
-        
-        
+
         // Check slecting no symptoms option returns to OK page
         let statusOKPage = StatusOkPage(app)
         XCTAssertTrue(statusOKPage.title.exists)
     }
-    
+
     func testHasSymptomsOnOverlayStillHasTemperature() {
         // Check the correct overlay is shown
         let negativeTestStatusPage = NegativeTestSymptomaticPage(app)
         negativeTestStatusPage.hasSymptomsButton.tap()
-        
+
         // User indicates they still have a temperature
         let checkinTemperaturePage = CheckinTemperaturePage(app)
         checkinTemperaturePage.temperatureOption.tap()
         checkinTemperaturePage.continueButton.tap()
-        
+
         let checkinCoughPage = CheckinCoughPage(app)
         checkinCoughPage.coughOption.tap()
         checkinCoughPage.continueButton.tap()
-        
+
         let checkinAnosmiaPage = CheckinAnosmiaPage(app)
         checkinAnosmiaPage.haveSymptomsOption.tap()
         checkinAnosmiaPage.continueButton.tap()
@@ -45,27 +44,32 @@ class NegativeTestStatusTests: ScreenTestCase {
         let symptomaticPage = StatusSymptomaticPage(app)
         XCTAssertTrue(symptomaticPage.title.exists)
     }
-    
+
     func testHasSymptomsOnOverlayNoTemperature() {
         // Check the correct overlay is shown
         let negativeTestStatusPage = NegativeTestSymptomaticPage(app)
         negativeTestStatusPage.hasSymptomsButton.tap()
-        
+
         // User indicates they still have a temperature
         let checkinTemperaturePage = CheckinTemperaturePage(app)
         checkinTemperaturePage.noTemperatureOption.tap()
         checkinTemperaturePage.continueButton.tap()
-        
+
         let checkinCoughPage = CheckinCoughPage(app)
         checkinCoughPage.coughOption.tap()
         checkinCoughPage.continueButton.tap()
-        
+
         let checkinAnosmiaPage = CheckinAnosmiaPage(app)
         checkinAnosmiaPage.haveSymptomsOption.tap()
         checkinAnosmiaPage.continueButton.tap()
+
+        let checkinAdvicePage = CheckinAdvicePage(app)
+        XCTAssertTrue(checkinAdvicePage.stillHaveSymptomsButDontIsolate.exists)
+        checkinAdvicePage.closeButton.tap()
 
         // Ensure we navigate back to an 'ok' state if the user does not have a temperature
         let statusOKPage = StatusOkPage(app)
         XCTAssertTrue(statusOKPage.title.exists)
     }
+
 }

@@ -64,14 +64,12 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         isSubmitting = true
 
         do {
-            switch statusStateMachine.state.resolved() {
+            switch statusStateMachine.state {
             case .ok, .exposed:
                 try statusStateMachine.selfDiagnose(symptoms: symptoms, startDate: startDate)
             case .symptomatic, .positiveTestResult:
                 assertionFailure("We should only be able to submit symptoms from ok/exposed")
                 return
-            case .negativeTestResult, .unclearTestResult:
-                preconditionFailure("Status state's resolve method should not return an interstitial state")
             }
 
             completion(symptoms)
@@ -108,7 +106,7 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
 
     private func presentErrorToUser() {
         errorView.isHidden = false
-        errorView.errorMessage.text = "Select if the information you have entered is accurate".localized
+        errorView.errorMessage.text = "SUBMIT_SYMPTOMS_CONFIRM_ERROR".localized
         
         confirmSwitch.layer.borderWidth = 3
         confirmSwitch.layer.borderColor = UIColor(named: "NHS Error")!.cgColor

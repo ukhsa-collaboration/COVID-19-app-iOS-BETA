@@ -172,7 +172,7 @@ class StatusViewControllerTests: TestCase {
                 drawerPresenter: drawerPresenter
             )
 
-            let promptVc = try XCTUnwrap(PresentationSpy.presented(by: vc) as? SymptomsPromptViewController)
+            let promptVc = try XCTUnwrap(PresentationSpy.presented(by: vc) as? CheckinDrawerViewController)
             promptVc.updateSymptoms()
             try respondToSymptomQuestion(vc: vc, expectedTitle: "TEMPERATURE_QUESTION", response: true)
             try respondToSymptomQuestion(vc: vc, expectedTitle: "COUGH_QUESTION", response: false)
@@ -182,6 +182,20 @@ class StatusViewControllerTests: TestCase {
         }
     }
 
+    func testListensForNewDrawerMessages() throws {
+        let notificationCenter = NotificationCenter()
+        let presenter = DrawerPresenterDouble()
+        let mailbox = DrawerMailboxingDouble()
+
+        _ = makeViewController(notificationCenter: notificationCenter, drawerPresenter: presenter, drawerMailbox: mailbox)
+        mailbox.messages.append(.unexposed)
+        notificationCenter.post(name: DrawerMessage.DrawerMessagePosted, object: nil)
+
+        let drawer = try XCTUnwrap(presenter.presented)
+        XCTAssertEqual(drawer.header, "UNEXPOSED_DRAWER_HEADER".localized)
+        XCTAssertTrue(mailbox.messages.isEmpty)
+    }
+
     func testUnexposed() throws {
         let presenter = DrawerPresenterDouble()
         let mailbox = DrawerMailboxingDouble([.unexposed])
@@ -189,7 +203,65 @@ class StatusViewControllerTests: TestCase {
         _ = makeViewController(drawerPresenter: presenter, drawerMailbox: mailbox)
 
         let drawer = try XCTUnwrap(presenter.presented)
-        XCTAssertEqual(drawer.config.header, "UNEXPOSED_DRAWER_HEADER".localized)
+        XCTAssertEqual(drawer.header, "UNEXPOSED_DRAWER_HEADER".localized)
+        XCTAssertTrue(mailbox.messages.isEmpty)
+    }
+
+    func testSymptomsButNotSymptomatic() throws {
+        let presenter = DrawerPresenterDouble()
+        let mailbox = DrawerMailboxingDouble([.symptomsButNotSymptomatic])
+
+        _ = makeViewController(drawerPresenter: presenter, drawerMailbox: mailbox)
+
+        let drawer = try XCTUnwrap(presenter.presented)
+        XCTAssertEqual(drawer.header, "HAVE_SYMPTOMS_BUT_DONT_ISOLATE_DRAWER_HEADER".localized)
+        XCTAssertTrue(mailbox.messages.isEmpty)
+    }
+
+    func testTestResultPositive() throws {
+        let presenter = DrawerPresenterDouble()
+        let mailbox = DrawerMailboxingDouble([.positiveTestResult])
+
+        _ = makeViewController(drawerPresenter: presenter, drawerMailbox: mailbox)
+
+        let drawer = try XCTUnwrap(presenter.presented)
+        XCTAssertEqual(drawer.header, "TEST_UPDATE_DRAW_POSITIVE_HEADER".localized)
+        XCTAssertTrue(mailbox.messages.isEmpty)
+    }
+
+    func testTestResultNegative() throws {
+        let presenter = DrawerPresenterDouble()
+        let mailbox = DrawerMailboxingDouble([.negativeTestResult(symptoms: nil)])
+
+        _ = makeViewController(drawerPresenter: presenter, drawerMailbox: mailbox)
+
+        let drawer = try XCTUnwrap(presenter.presented)
+        XCTAssertEqual(drawer.header, "TEST_UPDATE_DRAW_NEGATIVE_HEADER".localized)
+        XCTAssertTrue(mailbox.messages.isEmpty)
+    }
+
+    func testTestResultNegativeWithSymptoms() throws {
+        let presenter = DrawerPresenterDouble()
+        let mailbox = DrawerMailboxingDouble([.negativeTestResult(symptoms: [.temperature])])
+
+        var checkinDrawer: CheckinDrawerViewController?
+        try PresentationSpy.withSpy {
+            let vc = makeViewController(drawerPresenter: presenter, drawerMailbox: mailbox)
+            checkinDrawer = PresentationSpy.presented(by: vc) as? CheckinDrawerViewController
+        }
+
+        XCTAssertNotNil(checkinDrawer)
+        XCTAssertTrue(mailbox.messages.isEmpty)
+    }
+
+    func testTestResultUnclear() throws {
+        let presenter = DrawerPresenterDouble()
+        let mailbox = DrawerMailboxingDouble([.unclearTestResult])
+
+        _ = makeViewController(drawerPresenter: presenter, drawerMailbox: mailbox)
+
+        let drawer = try XCTUnwrap(presenter.presented)
+        XCTAssertEqual(drawer.header, "TEST_UPDATE_DRAW_INVALID_HEADER".localized)
         XCTAssertTrue(mailbox.messages.isEmpty)
     }
     

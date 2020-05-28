@@ -43,7 +43,8 @@ class UITestScreenMaker {
         dateProvider: self.dateProvider
     )
     private lazy var drawerMailbox = DrawerMailbox(
-        persistence: persistence
+        persistence: persistence,
+        notificationCenter: notificationCenter
     )
 
     func resetTime() {
@@ -80,22 +81,20 @@ class UITestScreenMaker {
             return onboardingViewController
             
         case .positiveTestStatus:
-            let positiveTestResult = StatusState.PositiveTestResult(symptoms: [], startDate: self.dateProvider())
-            persistence.statusState = .positiveTestResult(positiveTestResult)
+            statusStateMachine.received(TestResult(result: .positive, testTimestamp: dateProvider(), type: nil, acknowledgementUrl: nil))
             return createNavigationController()
             
         case .status:
             return createNavigationController()
             
-        case .unclearTestStatus:
-            let unclearTestResult = StatusState.UnclearTestResult(symptoms: [], startDate: self.dateProvider())
-            persistence.statusState = .unclearTestResult(unclearTestResult)
-            return createNavigationController()
-        
         case .negativeTestSymptomatic:
-            let checkinDate = StatusState.Symptomatic.firstCheckin(from: dateProvider())
-            let symptomaticState = StatusState.Symptomatic(symptoms: [], startDate: self.dateProvider(), checkinDate: checkinDate)
-            persistence.statusState = .negativeTestResult(nextState: .symptomatic(symptomaticState))
+            let startDate = Calendar.current.date(byAdding: .day, value: -3, to: dateProvider())!
+            let checkinDate = Calendar.current.date(byAdding: .day, value: -1, to: dateProvider())!
+            let symptomatic = StatusState.Symptomatic(symptoms: [], startDate: startDate, checkinDate: checkinDate)
+            persistence.statusState = .symptomatic(symptomatic)
+
+            let testTimestamp = Calendar.current.date(byAdding: .day, value: -2, to: dateProvider())!
+            statusStateMachine.received(TestResult(result: .negative, testTimestamp: testTimestamp, type: nil, acknowledgementUrl: nil))
             return createNavigationController()
         }
     }
