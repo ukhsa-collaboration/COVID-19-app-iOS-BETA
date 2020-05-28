@@ -35,6 +35,7 @@ class StatusViewController: UIViewController, Storyboarded {
 
     @IBOutlet weak var nhsServicesStackView: UIStackView!
     @IBOutlet weak var nhsCoronavirusLinkButton: LinkButton!
+    @IBOutlet var sectionHeaders: [UILabel]!
     
     var animateTransitions = true
 
@@ -113,7 +114,7 @@ class StatusViewController: UIViewController, Storyboarded {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Info"), style: .plain, target: self, action: #selector(infoTapped))
         navigationItem.rightBarButtonItem?.accessibilityLabel = "Info"
 
-        diagnosisHighlightView.layer.cornerRadius = 8
+        diagnosisHighlightView.layer.cornerRadius = diagnosisHighlightView.bounds.width / 2
         diagnosisHighlightView.accessibilityIgnoresInvertColors = true
 
         setupBannerAppearance(hasNotificationProblem: hasNotificationProblem,
@@ -133,6 +134,10 @@ class StatusViewController: UIViewController, Storyboarded {
 
         nhsCoronavirusLinkButton.url = ContentURLs.shared.regionalServices
 
+        (sectionHeaders + [stepsDetailLabel, feelUnwellBodyLabel]).forEach {
+            $0.textColor = UIColor(named: "NHS Secondary Text")
+        }
+        
         notificationCenter.addObserver(self, selector: #selector(reload), name: UIApplication.didBecomeActiveNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(reload), name: StatusStateMachine.StatusStateChangedNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(showDrawer), name: DrawerMessage.DrawerMessagePosted, object: nil)
