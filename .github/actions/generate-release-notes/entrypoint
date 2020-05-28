@@ -17,7 +17,6 @@ puts
 require 'generates_release_notes'
 include GeneratesReleaseNotes
 
-
 io = StringIO.new
 generate_release_notes(
     io: io,
@@ -25,4 +24,11 @@ generate_release_notes(
     commits: revision_range,
 )
 
-puts "::set-output name=release_notes::#{io.string.dump}"
+escaped = io.string.gsub(
+  /[\n\r%]/,
+  "\n" => '%0A',
+  '%' => '%25',
+  "\r" => '%0D'
+);
+
+puts "::set-output name=release_notes::#{escaped}"
