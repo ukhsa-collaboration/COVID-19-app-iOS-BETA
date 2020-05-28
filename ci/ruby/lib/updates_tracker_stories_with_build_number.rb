@@ -10,7 +10,7 @@ module UpdatesTrackerStoriesWithBuildNumber
     build_number:,
     tracker_token:,
     commits: 'HEAD..HEAD', # will cause rev-list to be empty
-    message_template: 'This story was included in build %<build_number>s',
+    message_template: 'This story was included in build %{build_number}',
     git_dir: Dir.pwd
   )
     tracker = Tracker.new(tracker_token)
@@ -20,8 +20,6 @@ module UpdatesTrackerStoriesWithBuildNumber
       .scan(/\[Finishes #(\d+)\]/i)
       .map {|m| m[0] }
       .uniq
-
-    puts "story_ids: [#{story_ids.join(", ")}]"
 
     if !story_ids.empty?
       status, = tracker.me
