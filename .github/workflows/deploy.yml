@@ -94,6 +94,7 @@ jobs:
           PIVOTAL_TRACKER_API_TOKEN: ${{ secrets.pivotal_tracker_api_token }}
           PROJECT_ID: ${{ secrets.pivotal_tracker_project_id }}
         run: |
+          echo $BUILD
           git fetch --tags
           last_uploaded=`git tag --list | grep internal | grep -v ${{ steps.tag-commit.outputs.tag }} | tail -n 1`
           ./bin/update-backlog ${last_uploaded}..${{ steps.tag-commit.outputs.tag }}
