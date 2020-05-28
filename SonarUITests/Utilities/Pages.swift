@@ -175,7 +175,7 @@ class SymptomsSummaryPage : Page {
 
 class SymptomsSubmitPage : Page {
     var title: XCUIElement {
-        app.staticTexts["This app currently only works on the Isle of Wight"]
+        app.staticTexts["Add my symptoms"]
     }
     
     var accurateConfirmationToggle: XCUIElement {
