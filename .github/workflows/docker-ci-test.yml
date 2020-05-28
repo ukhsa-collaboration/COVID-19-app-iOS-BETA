@@ -8,7 +8,8 @@ jobs:
   docker-ci-test:
     runs-on:
       - self-hosted
-      - macos
+      - linux
+      - aws
     steps:
       - name: Checkout
         id: checkout
