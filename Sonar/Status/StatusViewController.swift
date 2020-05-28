@@ -281,7 +281,6 @@ class StatusViewController: UIViewController, Storyboarded {
             feelUnwellButton.isHidden = false
             applyForTestButton.isHidden = true
             stepsDetailLabel.isHidden = false
-            stepsDetailLabel.text = "If you develop symptoms, please come back to this app."
 
         case .symptomatic(let symptomatic):
             detailForSelfIsolation(expiryDate: symptomatic.checkinDate)
@@ -353,7 +352,6 @@ class StatusViewController: UIViewController, Storyboarded {
         feelUnwellButton.isHidden = true
         applyForTestButton.isHidden = false
         stepsDetailLabel.isHidden = false
-        stepsDetailLabel.text = "Please book a coronavirus test immediately. Write down your reference code and phone 0800 540 4900"
     }
     
     func detailForNeutral() {
@@ -363,7 +361,6 @@ class StatusViewController: UIViewController, Storyboarded {
         feelUnwellButton.isHidden = false
         applyForTestButton.isHidden = true
         stepsDetailLabel.isHidden = false
-        stepsDetailLabel.text = "If you don’t have any symptoms, there’s no need to do anything right now. If you develop symptoms, please come back to this app."
     }
 
     private func presentDrawer(header: String, detail: String) {
