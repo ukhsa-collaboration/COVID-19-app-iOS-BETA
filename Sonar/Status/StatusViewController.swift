@@ -211,35 +211,8 @@ class StatusViewController: UIViewController, Storyboarded {
 
     @IBAction func unwindFromDrawer(unwindSegue: UIStoryboardSegue) {
     }
-    
-    func presentNegativePrompt(symptoms: Symptoms) {
-        let symptomsPromptViewController = SymptomsPromptViewController.instantiate()
-        
-        if animateTransitions {
-            symptomsPromptViewController.modalPresentationStyle = .custom
-            symptomsPromptViewController.transitioningDelegate = drawerPresentationManager
-        }
-        symptomsPromptViewController.inject(headerText: "NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_HEADER".localized,
-                                            detailText: "NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_DETAIL".localized) { needsCheckin in
-            self.dismiss(animated: self.animateTransitions)
 
-            if needsCheckin {
-                CheckinCoordinator(navigationController: self.navigationController!, previousSymptoms: symptoms) { symptoms in
-                    if symptoms.contains(.temperature) {
-                        self.statusStateMachine.set(state: self.statusStateMachine.state.resolved())
-                    } else {
-                        self.statusStateMachine.set(state: .ok(StatusState.Ok()))
-                    }
-                    self.navigationController!.popToRootViewController(animated: self.animateTransitions)
-                }.start()
-            } else {
-                self.statusStateMachine.set(state: .ok(StatusState.Ok()))
-            }
-        }
-        present(symptomsPromptViewController, animated: animateTransitions)
-    }
-
-    fileprivate func presentCheckinPrompt(for symptoms: Symptoms?) {
+    fileprivate func presentCheckinPrompt(for symptoms: Symptoms?, header: String, detail: String) {
         let symptomsPromptViewController = SymptomsPromptViewController.instantiate()
         
         if animateTransitions {
@@ -247,8 +220,7 @@ class StatusViewController: UIViewController, Storyboarded {
             symptomsPromptViewController.transitioningDelegate = drawerPresentationManager
         }
         
-        symptomsPromptViewController.inject(headerText: "CHECKIN_QUESTIONNAIRE_OVERLAY_HEADER".localized,
-                                            detailText: "CHECKIN_QUESTIONNAIRE_OVERLAY_DETAIL".localized) { needsCheckin in
+        symptomsPromptViewController.inject(headerText: header, detailText: detail) { needsCheckin in
             self.dismiss(animated: self.animateTransitions)
 
             if needsCheckin {
@@ -299,16 +271,6 @@ class StatusViewController: UIViewController, Storyboarded {
         case .ok:
             detailForNeutral()
 
-        case .negativeTestResult(let nextState):
-            if nextState != state {
-                setupUI(for: nextState)
-            }
-            if case .ok = nextState {
-                presentTestResultUpdate(result: .negative)
-            } else {
-                presentNegativePrompt(symptoms: nextState.symptoms ?? [])
-            }
-            
         case .exposed:
             diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
             diagnosisTitleLabel.text = "You have been near someone who has coronavirus symptoms"
@@ -323,25 +285,21 @@ class StatusViewController: UIViewController, Storyboarded {
             detailForSelfIsolation(expiryDate: symptomatic.checkinDate)
 
             if dateProvider() >= symptomatic.checkinDate {
-                presentCheckinPrompt(for: symptomatic.symptoms)
+                presentCheckinPrompt(
+                    for: symptomatic.symptoms,
+                    header: "CHECKIN_QUESTIONNAIRE_OVERLAY_HEADER".localized,
+                    detail: "CHECKIN_QUESTIONNAIRE_OVERLAY_DETAIL".localized
+                )
             }
-
-        case .unclearTestResult(let unclear):
-            // Use symptomatic detail as it's the same visually
-            detailForSelfIsolation(expiryDate: unclear.expiryDate)
-
-            presentTestResultUpdate(result: .unclear)
 
         case .positiveTestResult(let positiveTestResult):
             diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
-            diagnosisTitleLabel.text = "Your test result indicates  you  have coronavirus. Please isolate yourself and your household."
+            diagnosisTitleLabel.text = "Your test result indicates you have coronavirus. Please isolate yourself and your household."
             diagnosisDetailLabel.isHidden = false
             diagnosisDetailLabel.text = userStatusProvider.detailWithExpiryDate(positiveTestResult.expiryDate)
             feelUnwellButton.isHidden = true
             applyForTestButton.isHidden = true
             nextStepsDetailView.isHidden = true
-            
-            presentTestResultUpdate(result: .positive)
         }
     }
 
@@ -354,21 +312,49 @@ class StatusViewController: UIViewController, Storyboarded {
                 header: "UNEXPOSED_DRAWER_HEADER".localized,
                 detail: "UNEXPOSED_DRAWER_DETAIL".localized
             ) {
-                self.reload()
+                self.showDrawer()
             }
             presentDrawer(with: config)
         case .symptomsButNotSymptomatic:
             let config = DrawerViewController.Config(
                 header: "HAVE_SYMPTOMS_BUT_DONT_ISOLATE_DRAWER_HEADER".localized,
                 detail: "HAVE_SYMPTOMS_BUT_DONT_ISOLATE_DRAWER_DETAIL".localized
-            )
+            ) {
+                self.showDrawer()
+            }
             presentDrawer(with: config)
-        case .testResult(.positive):
-            assertionFailure("TODO")
-        case .testResult(.negative):
-            assertionFailure("TODO")
-        case .testResult(.unclear):
-            assertionFailure("TODO")
+        case .positiveTestResult:
+            let config = DrawerViewController.Config(
+                header: "TEST_UPDATE_DRAW_POSITIVE_HEADER".localized,
+                detail: "TEST_UPDATE_DRAW_POSITIVE_DETAIL".localized
+            ) {
+                self.showDrawer()
+            }
+            presentDrawer(with: config)
+        case .negativeTestResult(let symptoms):
+            if let symptoms = symptoms {
+                presentCheckinPrompt(
+                    for: symptoms,
+                    header: "NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_HEADER".localized,
+                    detail: "NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_DETAIL".localized
+                )
+            } else {
+                let config = DrawerViewController.Config(
+                    header: "TEST_UPDATE_DRAW_NEGATIVE_HEADER".localized,
+                    detail: "TEST_UPDATE_DRAW_NEGATIVE_DETAIL".localized
+                ) {
+                    self.showDrawer()
+                }
+                presentDrawer(with: config)
+            }
+        case .unclearTestResult:
+            let config = DrawerViewController.Config(
+                header: "TEST_UPDATE_DRAW_INVALID_HEADER".localized,
+                detail: "TEST_UPDATE_DRAW_INVALID_DETAIL".localized
+            ) {
+                self.showDrawer()
+            }
+            presentDrawer(with: config)
         }
     }
 
@@ -391,16 +377,6 @@ class StatusViewController: UIViewController, Storyboarded {
         applyForTestButton.isHidden = true
         stepsDetailLabel.isHidden = false
         stepsDetailLabel.text = "If you don’t have any symptoms, there’s no need to do anything right now. If you develop symptoms, please come back to this app."
-    }
-
-    private func presentTestResultUpdate(result: TestResult.ResultType) {
-        let header = result.headerText
-        let detail = result.detailText
-        let config = DrawerViewController.Config(header: header, detail: detail) { [weak self] in
-            self?.statusStateMachine.clearInterstitialState()
-        }
-        
-        performSegue(withIdentifier: "presentDrawer", sender: config)
     }
         
     private func presentDrawer(with config: DrawerViewController.Config) {

@@ -16,7 +16,9 @@ protocol DrawerMailboxing {
 enum DrawerMessage: Equatable {
     case unexposed
     case symptomsButNotSymptomatic
-    case testResult(TestResult.ResultType)
+    case positiveTestResult
+    case negativeTestResult(symptoms: Symptoms?)
+    case unclearTestResult
 }
 
 class DrawerMailbox: DrawerMailboxing {
@@ -51,7 +53,7 @@ extension DrawerMessage: Codable {
 
     enum CodingKeys: String, CodingKey {
         case type
-        case testResult
+        case symptoms
     }
 
     init(from decoder: Decoder) throws {
@@ -63,9 +65,13 @@ extension DrawerMessage: Codable {
             self = .unexposed
         case "symptomsButNotSymptomatic":
             self = .symptomsButNotSymptomatic
-        case "testResult":
-            let testResult = try values.decode(TestResult.ResultType.self, forKey: .testResult)
-            self = .testResult(testResult)
+        case "positiveTestResult":
+            self = .positiveTestResult
+        case "negativeTestResult":
+            let symptoms = try values.decode(Symptoms.self, forKey: .symptoms)
+            self = .negativeTestResult(symptoms: symptoms)
+        case "unclearTestResult":
+            self = .unclearTestResult
         default:
             throw Error.decodingError("Unrecognized type: \(type)")
         }
@@ -79,9 +85,13 @@ extension DrawerMessage: Codable {
             try container.encode("unexposed", forKey: .type)
         case .symptomsButNotSymptomatic:
             try container.encode("symptomsButNotSymptomatic", forKey: .type)
-        case .testResult(let testResult):
-            try container.encode("testResult", forKey: .type)
-            try container.encode(testResult, forKey: .testResult)
+        case .positiveTestResult:
+            try container.encode("positiveTestResult", forKey: .type)
+        case .negativeTestResult(symptoms: let symptoms):
+            try container.encode("negativeTestResult", forKey: .type)
+            try container.encode(symptoms, forKey: .symptoms)
+        case .unclearTestResult:
+            try container.encode("unclearTestResult", forKey: .type)
         }
     }
 

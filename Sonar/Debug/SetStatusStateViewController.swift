@@ -151,16 +151,6 @@ class SetStatusStateViewController: UITableViewController {
             temperature = positiveTestResult.symptoms.map { $0.contains(.temperature) } ?? false
             cough = positiveTestResult.symptoms.map { $0.contains(.cough) } ?? false
             date = positiveTestResult.startDate
-        case .unclearTestResult(let unclearTestResult):
-            statusLabel.text = "unclear test result"
-            statusPicker.selectRow(4, inComponent: 0, animated: false)
-            temperature = unclearTestResult.symptoms.map { $0.contains(.temperature) } ?? false
-            cough = unclearTestResult.symptoms.map { $0.contains(.cough) } ?? false
-            date = unclearTestResult.startDate
-        case .negativeTestResult:
-            statusLabel.text = "negative test result"
-            statusPicker.selectRow(5, inComponent: 0, animated: false)
-            date = nil
         }
     }
 
@@ -192,10 +182,6 @@ class SetStatusStateViewController: UITableViewController {
             statusState = .exposed(StatusState.Exposed(startDate: date!))
         case 3:
             statusState = .positiveTestResult(StatusState.PositiveTestResult(symptoms: symptoms, startDate: date!))
-        case 4:
-            statusState = .unclearTestResult(StatusState.UnclearTestResult(symptoms: symptoms, startDate: date!))
-        case 5:
-            statusState = .negativeTestResult(nextState: persistence.statusState)
         default:
             fatalError()
         }
@@ -216,7 +202,7 @@ extension SetStatusStateViewController: UIPickerViewDataSource {
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return ["ok", "symptomatic", "exposed", "positive test result", "unclear test result", "negative test result"][row]
+        return ["ok", "symptomatic", "exposed", "positive test result"][row]
     }
 }
 
@@ -234,10 +220,6 @@ extension SetStatusStateViewController: UIPickerViewDelegate {
             statusState = .exposed(StatusState.Exposed(startDate: Date()))
         case 3:
             statusState = .positiveTestResult(StatusState.PositiveTestResult(symptoms: [.temperature, .cough], startDate: Date()))
-        case 4:
-            statusState = .unclearTestResult(StatusState.UnclearTestResult(symptoms: [.temperature, .cough], startDate: Date()))
-        case 5:
-            statusState = .negativeTestResult(nextState: persistence.statusState)
         default:
             fatalError()
         }

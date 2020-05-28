@@ -9,6 +9,7 @@
 @testable import Sonar
 
 class StatusStateMachiningDouble: StatusStateMachining {
+
     var state: StatusState
 
     init(state: StatusState) {
@@ -45,12 +46,5 @@ class StatusStateMachiningDouble: StatusStateMachining {
     func received(_ testResult: TestResult) {
         receivedTestResult = testResult
     }
-    
-    func clearInterstitialState() {
-        state = state.resolved()
-    }
-    
-    func set(state: StatusState) {
-        self.state = state
-    }
+
 }

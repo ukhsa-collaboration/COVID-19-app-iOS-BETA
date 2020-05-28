@@ -16,9 +16,7 @@ enum Screen: String, Codable {
     case status
     
     case positiveTestStatus
-    
-    case unclearTestStatus
-    
-    /// In a symptomatic state, just received a negative test result
+
     case negativeTestSymptomatic
+    
 }

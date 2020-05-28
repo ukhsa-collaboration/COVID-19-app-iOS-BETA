@@ -64,14 +64,12 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         isSubmitting = true
 
         do {
-            switch statusStateMachine.state.resolved() {
+            switch statusStateMachine.state {
             case .ok, .exposed:
                 try statusStateMachine.selfDiagnose(symptoms: symptoms, startDate: startDate)
             case .symptomatic, .positiveTestResult:
                 assertionFailure("We should only be able to submit symptoms from ok/exposed")
                 return
-            case .negativeTestResult, .unclearTestResult:
-                preconditionFailure("Status state's resolve method should not return an interstitial state")
             }
 
             completion(symptoms)

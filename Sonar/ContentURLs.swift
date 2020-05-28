@@ -43,13 +43,11 @@ struct ContentURLs {
     }
 
     private func currentStatusURLs(for statusState: StatusState) -> StatusURLs {
-        switch statusState.resolved() {
+        switch statusState {
         case .ok: return status.ok
-        case .symptomatic, .unclearTestResult: return status.symptomatic
+        case .symptomatic: return status.symptomatic
         case .exposed: return status.exposed
         case .positiveTestResult: return status.positiveTestResult
-        case .negativeTestResult:
-            preconditionFailure("Status state's resolve method should not return an interstitial state")
         }
     }
 }

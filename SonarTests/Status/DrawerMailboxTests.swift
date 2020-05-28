@@ -27,11 +27,11 @@ class DrawerMailboxTests: XCTestCase {
 
     func testPushMessages() {
         mailbox.post(.unexposed)
-        mailbox.post(.testResult(.negative))
-        XCTAssertEqual(persistence.drawerMessages, [.unexposed, .testResult(.negative)])
+        mailbox.post(.negativeTestResult(symptoms: [.cough]))
+        XCTAssertEqual(persistence.drawerMessages, [.unexposed, .negativeTestResult(symptoms: [.cough])])
 
         XCTAssertEqual(mailbox.receive(), .unexposed)
-        XCTAssertEqual(mailbox.receive(), .testResult(.negative))
+        XCTAssertEqual(mailbox.receive(), .negativeTestResult(symptoms: [.cough]))
         XCTAssertNil(mailbox.receive())
     }
 
@@ -43,7 +43,7 @@ class DrawerMessageTests: XCTestCase {
     let decoder = JSONDecoder()
 
     func testRoundtrip() throws {
-        let message = DrawerMessage.testResult(.positive)
+        let message = DrawerMessage.negativeTestResult(symptoms: [.cough])
         let encoded = try encoder.encode(message)
         let decoded = try decoder.decode(DrawerMessage.self, from: encoded)
         XCTAssertEqual(decoded, message)
