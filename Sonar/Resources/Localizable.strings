@@ -89,6 +89,7 @@ Loss of appetite: means not feeling hungry.
 
 "SUBMIT_SYMPTOMS_THANK_YOU" = "The information you have provided will be used to help protect your community and the NHS. The NHS needs accurate data on the number of people with symptoms.\n\nTogether we can help save lives, protect the NHS, and stop the spread of coronavirus in the UK.";
 "SUBMIT_SYMPTOMS_CONFIRM" = "I confirm that the information I have entered is accurate";
+"SUBMIT_SYMPTOMS_CONFIRM_ERROR" = "Please confirm that the information you have entered is accurate";
 
 "GO_TO_SETTINGS" = "Yes, go to settings";
 "DISABLE_NOTIFICATIONS_STATUS_VIEW" = "No thanks";

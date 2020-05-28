@@ -106,7 +106,7 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
 
     private func presentErrorToUser() {
         errorView.isHidden = false
-        errorView.errorMessage.text = "Select if the information you have entered is accurate".localized
+        errorView.errorMessage.text = "SUBMIT_SYMPTOMS_CONFIRM_ERROR".localized
         
         confirmSwitch.layer.borderWidth = 3
         confirmSwitch.layer.borderColor = UIColor(named: "NHS Error")!.cgColor
