@@ -10,7 +10,7 @@
 "ADVICE_CHANGED_NOTIFICATION_BODY" = "Your advice has changed. Please open the app to learn what to do next. Your help saves lives.";
 
 "TEST_RESULT_TITLE" = "NHS COVID-19";
-"TEST_RESULT_BODY" = "Your test result has arrived. Please open the app to learn what to do next. You have received an email with more information.";
+"TEST_RESULT_BODY" = "Your test result has arrived. Please open the app to learn what to do next. You have been sent an email with more information.";
 
 "REGISTRATION_OK" = "The app is working properly";
 "REGISTRATION_IN_PROGRESS" = "Finalising setup...";
@@ -105,10 +105,10 @@ Your response to this question helps the NHS better understand coronavirus.";
 "NOTIFICATIONS_DISABLED_ALERT_OK" = "Ok";
 
 "TEST_UPDATE_DRAW_POSITIVE_HEADER" = "Your test result indicates that you have coronavirus";
-"TEST_UPDATE_DRAW_POSITIVE_DETAIL" = "Thank you for getting tested. Your advice has been updated. You have received an email with more information.";
+"TEST_UPDATE_DRAW_POSITIVE_DETAIL" = "Thank you for getting tested. Your advice has been updated. You have been sent an email with more information.";
 
 "TEST_UPDATE_DRAW_INVALID_HEADER" = "Your test result was unclear";
-"TEST_UPDATE_DRAW_INVALID_DETAIL" = "Thank you for getting tested. However, due to the unclear test result your advice has not been changed. Please book a test again. You have received an email with more information.";
+"TEST_UPDATE_DRAW_INVALID_DETAIL" = "Thank you for getting tested. However, due to the unclear test result your advice has not been changed. Please book a test again. You have been sent an email with more information.";
 
 "TEST_UPDATE_DRAW_NEGATIVE_HEADER" = "Your test result indicates that you don’t have coronavirus";
 "TEST_UPDATE_DRAW_NEGATIVE_DETAIL" = "Thank you for getting tested. You have been sent an email with more information.
