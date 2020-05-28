@@ -12,7 +12,7 @@
 	<string>https://covid19.nhs.uk/our-policies.html</string>
 	<key>nhs111Coronavirus</key>
 	<string>https://111.nhs.uk/covid-19/</string>
-	<key>applyForTest</key>
+	<key>bookTest</key>
 	<string>https://self-referral.test-for-coronavirus.service.gov.uk/cta-start</string>
 	<key>statusInfo</key>
 	<string>https://covid19.nhs.uk/?utm_source=nhscovid19ios&amp;utm_medium=mobileapp&amp;utm_campaign=nhscovid19app&amp;utm_content=statuspage</string>

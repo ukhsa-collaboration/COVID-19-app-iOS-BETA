@@ -108,7 +108,7 @@ Your response to this question helps the NHS better understand coronavirus.";
 "TEST_UPDATE_DRAW_POSITIVE_DETAIL" = "Thank you for getting tested. Your advice has been updated. You have received an email with more information.";
 
 "TEST_UPDATE_DRAW_INVALID_HEADER" = "Your test result was unclear";
-"TEST_UPDATE_DRAW_INVALID_DETAIL" = "Thank you for getting tested. However, due to the unclear test result your advice has not been changed. Please apply for a test again. You have received an email with more information.";
+"TEST_UPDATE_DRAW_INVALID_DETAIL" = "Thank you for getting tested. However, due to the unclear test result your advice has not been changed. Please book a test again. You have received an email with more information.";
 
 "TEST_UPDATE_DRAW_NEGATIVE_HEADER" = "Your test result indicates that you don’t have coronavirus";
 "TEST_UPDATE_DRAW_NEGATIVE_DETAIL" = "Thank you for getting tested. You have been sent an email with more information.

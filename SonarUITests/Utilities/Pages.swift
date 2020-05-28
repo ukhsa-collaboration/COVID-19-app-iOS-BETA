@@ -43,16 +43,6 @@ class PositiveTestStatusPage : Page {
     }
 }
 
-class UnclearTestStatusPage : Page {
-    var heading: XCUIElement {
-        app.staticTexts["Your symptoms indicate you may have coronavirus. Please self-isolate and apply for a test."]
-    }
-    
-    var drawerTitle: XCUIElement {
-        app.staticTexts["Your test result was unclear"]
-    }
-}
-
 class NegativeTestSymptomaticPage : Page {
     var noSymptomsButton: XCUIElement {
         app.buttons["I no longer have symptoms"]
