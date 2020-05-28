@@ -28,8 +28,8 @@ class DebugViewController: UITableViewController, Storyboarded {
     @IBOutlet weak var bluetoothImage: UIImageView!
     var fillLayer: CAShapeLayer!
 
-    @IBOutlet weak var broadcasterStatus: UIImageView!
-    @IBOutlet weak var listenerStatus: UIImageView!
+    @IBOutlet weak var broadcasterStatus: UILabel!
+    @IBOutlet weak var listenerStatus: UILabel!
 
     func inject(
         persisting: Persisting,
@@ -64,13 +64,11 @@ class DebugViewController: UITableViewController, Storyboarded {
         setBluetoothStatus(listenerStatus, bluetoothNursery.listener?.isHealthy() ?? false)
     }
 
-    private func setBluetoothStatus(_ imageView: UIImageView, _ isHealthy: Bool) {
-        guard #available(iOS 13.0, *) else { return }
-
+    private func setBluetoothStatus(_ statusView: UILabel, _ isHealthy: Bool) {
         if isHealthy {
-            imageView.image = UIImage(systemName: "hand.thumbsup.fill")
+			statusView.text = "up"
         } else {
-            imageView.image = UIImage(systemName: "hand.thumbsdown.fill")
+			statusView.text = "down"
         }
     }
 

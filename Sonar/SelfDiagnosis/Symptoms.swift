@@ -12,6 +12,12 @@ enum Symptom: String, CaseIterable, Codable {
     case temperature, cough, anosmia, sneeze, nausea
 }
 
+extension Symptom {
+    var localizationPrefix: String {
+        rawValue.uppercased()
+    }
+}
+
 struct Symptoms: Equatable {
     private var symptoms: Set<Symptom>
 

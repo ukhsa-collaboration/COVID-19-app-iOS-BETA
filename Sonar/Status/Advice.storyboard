@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -13,13 +12,19 @@
         <scene sceneID="Hlx-PQ-RBQ">
             <objects>
                 <viewController storyboardIdentifier="AdviceViewController" title="Read current advice" id="cHn-d6-img" customClass="AdviceViewController" customModule="Sonar" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="sC8-Dz-RHG">
+                    <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="sC8-Dz-RHG">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KFw-bB-wGv">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background_Curve" translatesAutoresizingMaskIntoConstraints="NO" id="leB-GQ-Wwh">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="211"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="211" id="iCb-c1-5ld"/>
+                                        </constraints>
+                                    </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="o5B-10-NnZ">
                                         <rect key="frame" x="16" y="0.0" width="382" height="482"/>
                                         <subviews>
@@ -54,9 +59,11 @@
                                 <constraints>
                                     <constraint firstItem="o5B-10-NnZ" firstAttribute="height" secondItem="BRb-82-0wK" secondAttribute="height" priority="1" id="1aw-PR-oIV"/>
                                     <constraint firstItem="2m0-ao-JXz" firstAttribute="top" secondItem="o5B-10-NnZ" secondAttribute="top" id="4Ht-NQ-ud9"/>
+                                    <constraint firstItem="leB-GQ-Wwh" firstAttribute="top" secondItem="2m0-ao-JXz" secondAttribute="top" id="QeE-7E-mhc"/>
                                     <constraint firstItem="o5B-10-NnZ" firstAttribute="bottom" secondItem="2m0-ao-JXz" secondAttribute="bottom" id="dOl-ma-D63"/>
                                     <constraint firstItem="2m0-ao-JXz" firstAttribute="leading" secondItem="o5B-10-NnZ" secondAttribute="leading" constant="-16" id="fwH-XQ-bhs"/>
                                     <constraint firstItem="o5B-10-NnZ" firstAttribute="trailing" secondItem="2m0-ao-JXz" secondAttribute="trailing" id="qXr-1U-whK"/>
+                                    <constraint firstItem="leB-GQ-Wwh" firstAttribute="centerX" secondItem="KFw-bB-wGv" secondAttribute="centerX" id="s2C-qy-4Nx"/>
                                     <constraint firstItem="o5B-10-NnZ" firstAttribute="width" secondItem="BRb-82-0wK" secondAttribute="width" constant="-32" id="xvT-99-wkI"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="2m0-ao-JXz"/>
@@ -65,12 +72,12 @@
                         </subviews>
                         <color key="backgroundColor" name="NHS Grey 5"/>
                         <constraints>
-                            <constraint firstItem="Wpo-Xt-eRy" firstAttribute="trailing" secondItem="KFw-bB-wGv" secondAttribute="trailing" id="6bN-fa-oLK"/>
-                            <constraint firstItem="KFw-bB-wGv" firstAttribute="leading" secondItem="Wpo-Xt-eRy" secondAttribute="leading" id="DLL-uT-6D7"/>
-                            <constraint firstItem="Wpo-Xt-eRy" firstAttribute="bottom" secondItem="KFw-bB-wGv" secondAttribute="bottom" id="J79-Ql-FYw"/>
-                            <constraint firstItem="KFw-bB-wGv" firstAttribute="top" secondItem="Wpo-Xt-eRy" secondAttribute="top" id="Rf5-li-UG9"/>
+                            <constraint firstAttribute="trailing" secondItem="KFw-bB-wGv" secondAttribute="trailing" id="6bN-fa-oLK"/>
+                            <constraint firstItem="KFw-bB-wGv" firstAttribute="leading" secondItem="sC8-Dz-RHG" secondAttribute="leading" id="DLL-uT-6D7"/>
+                            <constraint firstAttribute="bottom" secondItem="KFw-bB-wGv" secondAttribute="bottom" id="J79-Ql-FYw"/>
+                            <constraint firstItem="KFw-bB-wGv" firstAttribute="top" secondItem="sC8-Dz-RHG" secondAttribute="top" id="Rf5-li-UG9"/>
+                            <constraint firstItem="leB-GQ-Wwh" firstAttribute="width" secondItem="sC8-Dz-RHG" secondAttribute="width" id="wrJ-a3-5jc"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="Wpo-Xt-eRy"/>
                     </view>
                     <connections>
                         <outlet property="detail" destination="lGX-w9-D6b" id="a6B-F0-9BC"/>
@@ -84,6 +91,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Background_Curve" width="375" height="211"/>
         <image name="News_Covid" width="326" height="218"/>
         <namedColor name="NHS Grey 5">
             <color red="0.94117647058823528" green="0.95686274509803926" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -265,7 +265,43 @@ class CheckinAnosmiaPage: Page {
     }
     
     var continueButton: XCUIElement {
-        app.buttons["Submit"]
+        app.buttons["Continue"]
+    }
+}
+
+class CheckinSneezePage: Page {
+    var title: XCUIElement {
+        app.staticTexts["Do you still have a runny nose, feel feverish or suffer from sneezing?"]
+    }
+    
+    var haveSymptomsOption: XCUIElement {
+        app.buttons["Yes, I have at least one of these symptoms"]
+    }
+    
+    var noSymptomsOption: XCUIElement {
+        app.buttons["No, I do not have any of these symptoms"]
+    }
+    
+    var continueButton: XCUIElement {
+        app.buttons["Continue"]
+    }
+}
+
+class CheckinNauseaPage: Page {
+    var title: XCUIElement {
+        app.staticTexts["Do you still have diarrhoea, nausea, vomiting or a loss of appetite?"]
+    }
+    
+    var haveSymptomsOption: XCUIElement {
+        app.buttons["Yes, I have at least one of these symptoms"]
+    }
+    
+    var noSymptomsOption: XCUIElement {
+        app.buttons["No, I do not have any of these symptoms"]
+    }
+    
+    var continueButton: XCUIElement {
+        app.buttons["Continue"]
     }
 }
 

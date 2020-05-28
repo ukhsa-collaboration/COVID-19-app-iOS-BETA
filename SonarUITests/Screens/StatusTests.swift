@@ -9,9 +9,9 @@
 import XCTest
 
 class StatusTests: ScreenTestCase {
-
+    
     override var screen: Screen { .status }
-
+    
     func testSelfDiagnosisPositiveFlow() {
         let statusOkPage = StatusOkPage(app)
         XCTAssertTrue(statusOkPage.title.exists)
@@ -75,15 +75,27 @@ class StatusTests: ScreenTestCase {
         XCTAssertTrue(checkinTemperaturePage.title.exists)
         checkinTemperaturePage.temperatureOption.tap()
         checkinTemperaturePage.continueButton.tap()
+        
         let checkinCoughPage = CheckinCoughPage(app)
         XCTAssertTrue(checkinCoughPage.title.exists)
         checkinCoughPage.coughOption.tap()
         checkinCoughPage.continueButton.tap()
+        
         let checkinAnosmiaPage = CheckinAnosmiaPage(app)
         XCTAssertTrue(checkinAnosmiaPage.title.exists)
         checkinAnosmiaPage.haveSymptomsOption.tap()
         checkinAnosmiaPage.continueButton.tap()
-
+        
+        let checkinSneezePage = CheckinSneezePage(app)
+        XCTAssertTrue(checkinSneezePage.title.exists)
+        checkinSneezePage.haveSymptomsOption.tap()
+        checkinSneezePage.continueButton.tap()
+        
+        let checkinNauseaPage = CheckinNauseaPage(app)
+        XCTAssertTrue(checkinNauseaPage.title.exists)
+        checkinNauseaPage.haveSymptomsOption.tap()
+        checkinNauseaPage.continueButton.tap()
+        
         // they are told to continue isolating
         XCTAssertTrue(symptomaticPage.title.exists)
         
@@ -99,23 +111,34 @@ class StatusTests: ScreenTestCase {
         XCTAssertTrue(checkinTemperaturePage.title.exists)
         checkinTemperaturePage.noTemperatureOption.tap()
         checkinTemperaturePage.continueButton.tap()
+        
         XCTAssertTrue(checkinCoughPage.title.exists)
         checkinCoughPage.coughOption.tap()
         checkinCoughPage.continueButton.tap()
+        
         XCTAssertTrue(checkinAnosmiaPage.title.exists)
         checkinAnosmiaPage.noSymptomsOption.tap()
         checkinAnosmiaPage.continueButton.tap()
+        
+        XCTAssertTrue(checkinSneezePage.title.exists)
+        checkinSneezePage.haveSymptomsOption.tap()
+        checkinSneezePage.continueButton.tap()
+        
+        XCTAssertTrue(checkinNauseaPage.title.exists)
+        checkinNauseaPage.haveSymptomsOption.tap()
+        checkinNauseaPage.continueButton.tap()
+        
         
         // ...they are told to return to "current advice"...
         let checkinAdvicePage = CheckinAdvicePage(app)
         XCTAssertTrue(checkinAdvicePage.stillHaveSymptomsButDontIsolate.exists)
         checkinAdvicePage.closeButton.tap()
         XCTAssertTrue(statusOkPage.title.exists)
-
+        
         // and are not immediately told to check in again
         XCTAssertFalse(checkinPopup.title.exists)
     }
-
+    
     func testSelfDiagnosisNegativeFlow() {
         let statusOkPage = StatusOkPage(app)
         XCTAssertTrue(statusOkPage.title.exists)

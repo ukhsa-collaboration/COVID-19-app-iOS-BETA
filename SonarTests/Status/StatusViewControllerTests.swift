@@ -161,7 +161,7 @@ class StatusViewControllerTests: TestCase {
 
     func testDoesNotShowsDrawerAfterCheckinIfTemperature() throws{
         try PresentationSpy.withSpy {
-            let persistence = PersistenceDouble(statusState: .symptomatic(StatusState.Symptomatic(symptoms: [], startDate: Date(), checkinDate: Date())))
+            let persistence = PersistenceDouble(statusState: .symptomatic(StatusState.Symptomatic(symptoms: [.cough], startDate: Date(), checkinDate: Date())))
             let statusStateMachine = StatusStateMachine(persisting: persistence, contactEventsUploader: ContactEventsUploaderDouble(), drawerMailbox: DrawerMailboxingDouble(), notificationCenter: NotificationCenter(), userNotificationCenter: UserNotificationCenterDouble())
             let drawerPresenter = DrawerPresenterDouble()
             let vc = makeViewController(
@@ -175,7 +175,7 @@ class StatusViewControllerTests: TestCase {
             let promptVc = try XCTUnwrap(PresentationSpy.presented(by: vc) as? CheckinDrawerViewController)
             promptVc.updateSymptoms()
             try respondToSymptomQuestion(vc: vc, expectedTitle: "TEMPERATURE_QUESTION", response: true)
-            try respondToSymptomQuestion(vc: vc, expectedTitle: "COUGH_QUESTION", response: false)
+            try respondToSymptomQuestion(vc: vc, expectedTitle: "COUGH_CHECKIN_QUESTION", response: true)
             try respondToSymptomQuestion(vc: vc, expectedTitle: "ANOSMIA_QUESTION", response: false)
             
             XCTAssertNil(drawerPresenter.presented)

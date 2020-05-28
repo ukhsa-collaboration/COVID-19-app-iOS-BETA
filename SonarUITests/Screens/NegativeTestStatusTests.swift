@@ -39,6 +39,14 @@ class NegativeTestStatusTests: ScreenTestCase {
         let checkinAnosmiaPage = CheckinAnosmiaPage(app)
         checkinAnosmiaPage.haveSymptomsOption.tap()
         checkinAnosmiaPage.continueButton.tap()
+        
+        let checkinSneezePage = CheckinSneezePage(app)
+        checkinSneezePage.haveSymptomsOption.tap()
+        checkinSneezePage.continueButton.tap()
+        
+        let checkinNauseaPage = CheckinNauseaPage(app)
+        checkinNauseaPage.haveSymptomsOption.tap()
+        checkinNauseaPage.continueButton.tap()
 
         // Ensure we navigate back to a symptomatic state if the user still has a temperature
         let symptomaticPage = StatusSymptomaticPage(app)
@@ -62,11 +70,19 @@ class NegativeTestStatusTests: ScreenTestCase {
         let checkinAnosmiaPage = CheckinAnosmiaPage(app)
         checkinAnosmiaPage.haveSymptomsOption.tap()
         checkinAnosmiaPage.continueButton.tap()
+        
+        let checkinSneezePage = CheckinSneezePage(app)
+        checkinSneezePage.haveSymptomsOption.tap()
+        checkinSneezePage.continueButton.tap()
+        
+        let checkinNauseaPage = CheckinNauseaPage(app)
+        checkinNauseaPage.haveSymptomsOption.tap()
+        checkinNauseaPage.continueButton.tap()
 
         let checkinAdvicePage = CheckinAdvicePage(app)
         XCTAssertTrue(checkinAdvicePage.stillHaveSymptomsButDontIsolate.exists)
         checkinAdvicePage.closeButton.tap()
-
+        
         // Ensure we navigate back to an 'ok' state if the user does not have a temperature
         let statusOKPage = StatusOkPage(app)
         XCTAssertTrue(statusOKPage.title.exists)
