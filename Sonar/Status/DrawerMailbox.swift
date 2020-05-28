@@ -68,7 +68,7 @@ extension DrawerMessage: Codable {
         case "positiveTestResult":
             self = .positiveTestResult
         case "negativeTestResult":
-            let symptoms = try values.decode(Symptoms.self, forKey: .symptoms)
+            let symptoms = try values.decode(Symptoms?.self, forKey: .symptoms)
             self = .negativeTestResult(symptoms: symptoms)
         case "unclearTestResult":
             self = .unclearTestResult

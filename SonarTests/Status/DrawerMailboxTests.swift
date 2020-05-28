@@ -42,8 +42,43 @@ class DrawerMessageTests: XCTestCase {
     let encoder = JSONEncoder()
     let decoder = JSONDecoder()
 
-    func testRoundtrip() throws {
+    func testRoundtripUnexposed() throws {
+        let message = DrawerMessage.unexposed
+        let encoded = try encoder.encode(message)
+        let decoded = try decoder.decode(DrawerMessage.self, from: encoded)
+        XCTAssertEqual(decoded, message)
+    }
+
+    func testRoundtripSymptomsButNotSymptomatic() throws {
+        let message = DrawerMessage.symptomsButNotSymptomatic
+        let encoded = try encoder.encode(message)
+        let decoded = try decoder.decode(DrawerMessage.self, from: encoded)
+        XCTAssertEqual(decoded, message)
+    }
+
+    func testRoundtripPositive() throws {
+        let message = DrawerMessage.positiveTestResult
+        let encoded = try encoder.encode(message)
+        let decoded = try decoder.decode(DrawerMessage.self, from: encoded)
+        XCTAssertEqual(decoded, message)
+    }
+
+    func testRoundtripNegativeWithSymptoms() throws {
         let message = DrawerMessage.negativeTestResult(symptoms: [.cough])
+        let encoded = try encoder.encode(message)
+        let decoded = try decoder.decode(DrawerMessage.self, from: encoded)
+        XCTAssertEqual(decoded, message)
+    }
+
+    func testRoundtripNegativeWithoutSymptoms() throws {
+        let message = DrawerMessage.negativeTestResult(symptoms: nil)
+        let encoded = try encoder.encode(message)
+        let decoded = try decoder.decode(DrawerMessage.self, from: encoded)
+        XCTAssertEqual(decoded, message)
+    }
+
+    func testRoundtripUnclear() throws {
+        let message = DrawerMessage.unclearTestResult
         let encoded = try encoder.encode(message)
         let decoded = try decoder.decode(DrawerMessage.self, from: encoded)
         XCTAssertEqual(decoded, message)
