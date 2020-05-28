@@ -43,6 +43,7 @@ Continuous: means coughing a lot for more than an hour, or 3 or more coughing ep
 "ANOSMIA_ERROR" = "Select yes if you recently lost your sense of smell or taste";
 
 "SNEEZE_QUESTION" = "Do you have a runny nose, feel feverish or suffer from sneezing?";
+"SNEEZE_CHECKIN_QUESTION" = "Do you still have a runny nose, feel feverish or suffer from sneezing?";
 "SNEEZE_DETAIL" = "
 Runny nose: more nasal drainage than usual.
 
@@ -54,6 +55,7 @@ Sneezing: means you are sneezing more than usual, not caused by a known allergy.
 "SNEEZE_ERROR" = "Select yes if you have a runny nose, feel feverish or suffer from sneezing";
 
 "NAUSEA_QUESTION" = "Do you have diarrhoea, nausea, vomiting or a loss of appetite?";
+"NAUSEA_CHECKIN_QUESTION" = "Do you still have diarrhoea, nausea, vomiting or a loss of appetite?";
 "NAUSEA_DETAIL" = "
 Diarrhoea: means loose stool, poos that are watery and/or more frequent than usual.
 

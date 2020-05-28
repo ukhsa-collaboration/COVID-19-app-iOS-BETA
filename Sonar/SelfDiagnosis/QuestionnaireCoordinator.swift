@@ -1,5 +1,5 @@
 //
-//  SelfDiagnosisCoordinator.swift
+//  QuestionnaireCoordinator.swift
 //  Sonar
 //
 //  Created by NHSX on 24/04/2020.
@@ -12,18 +12,26 @@ protocol Coordinator {
     func start()
 }
 
-class SelfDiagnosisCoordinator: Coordinator {
+class QuestionnaireCoordinator: Coordinator {
     let navigationController: UINavigationController
     let statusStateMachine: StatusStateMachining
     let completion: (Symptoms) -> Void
+    let questionnaireType: QuestionnaireType
+    
+    enum QuestionnaireType {
+        case selfDiagnosis
+        case checkin
+    }
 
     init(
         navigationController: UINavigationController,
         statusStateMachine: StatusStateMachining,
+        questionnaireType: QuestionnaireType,
         completion: @escaping (Symptoms) -> Void
     ) {
         self.navigationController = navigationController
         self.statusStateMachine = statusStateMachine
+        self.questionnaireType = questionnaireType
         self.completion = completion
     }
     
@@ -31,14 +39,20 @@ class SelfDiagnosisCoordinator: Coordinator {
 
     static let pageCount = 6
     
-    func openQuestionVC(localizedTextPrefix: String,
-                          pageNumber: Int,
-                          buttonAction: @escaping (Bool) -> Void) {
+    func openQuestionVC(symptom: Symptom,
+                        pageNumber: Int,
+                        buttonAction: @escaping (Bool) -> Void) {
         let vc = QuestionSymptomsViewController.instantiate()
+        
+        let checkin = hadSymptom(symptom) ? "_CHECKIN_" : "_"
+        let localizedTextPrefix = symptom.localizationPrefix
+        let title = "\(localizedTextPrefix)\(checkin)QUESTION".localized
+        
+        
         vc.inject(
             pageNumber: pageNumber,
             pageCount: Self.pageCount,
-            questionTitle: "\(localizedTextPrefix)_QUESTION".localized,
+            questionTitle: title,
             questionDetail: "\(localizedTextPrefix)_DETAIL".localized,
             questionError: "\(localizedTextPrefix)_ERROR".localized,
             questionYes: "\(localizedTextPrefix)_YES".localized,
@@ -50,40 +64,49 @@ class SelfDiagnosisCoordinator: Coordinator {
     }
     
     func start() {
-        openQuestionVC(localizedTextPrefix: "TEMPERATURE", pageNumber: 1) { hasHighTemperature in
+        openQuestionVC(symptom: .temperature, pageNumber: 1) { hasHighTemperature in
             self.updateSymptoms(with: .temperature, if: hasHighTemperature)
             self.openCoughView()
         }
     }
     
     func openCoughView() {
-        openQuestionVC(localizedTextPrefix: "COUGH", pageNumber: 2) { hasNewCough in
+        openQuestionVC(symptom: .cough, pageNumber: 2) { hasNewCough in
             self.updateSymptoms(with: .cough, if: hasNewCough)
             self.openAnosmiaView()
         }
     }
     
     func openAnosmiaView() {
-        openQuestionVC(localizedTextPrefix: "ANOSMIA", pageNumber: 3) { hasAnosmia in
+        openQuestionVC(symptom: .anosmia, pageNumber: 3) { hasAnosmia in
             self.updateSymptoms(with: .anosmia, if: hasAnosmia)
             self.openSneezeView()
         }
     }
     
     func openSneezeView() {
-        openQuestionVC(localizedTextPrefix: "SNEEZE", pageNumber: 4) { hasSneeze in
+        openQuestionVC(symptom: .sneeze, pageNumber: 4) { hasSneeze in
             self.updateSymptoms(with: .sneeze, if: hasSneeze)
             self.openNauseaView()
         }
     }
     
     func openNauseaView() {
-        openQuestionVC(localizedTextPrefix: "NAUSEA", pageNumber: 5) { hasNausea in
+        openQuestionVC(symptom: .nausea, pageNumber: 5) { hasNausea in
             self.updateSymptoms(with: .nausea, if: hasNausea)
-            self.openSubmissionView()
+            self.finishQuestions()
         }
     }
 
+    func finishQuestions() {
+        switch questionnaireType {
+        case .selfDiagnosis:
+            openSubmissionView()
+        case .checkin:
+            completion(symptoms)
+        }
+    }
+    
     func openSubmissionView() {
         let vc = SymptomsSummaryViewController.instantiate()
         vc.inject(
@@ -101,5 +124,9 @@ class SelfDiagnosisCoordinator: Coordinator {
         } else {
             symptoms.remove(symptom)
         }
+    }
+    
+    private func hadSymptom(_ symptom: Symptom) -> Bool {
+        self.statusStateMachine.state.symptoms?.contains(symptom) ?? false
     }
 }

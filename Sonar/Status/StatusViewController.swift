@@ -185,9 +185,10 @@ class StatusViewController: UIViewController, Storyboarded {
     }
 
     @IBAction func feelUnwellTapped(_ sender: Any) {
-        let coordinator = SelfDiagnosisCoordinator(
+        let coordinator = QuestionnaireCoordinator(
             navigationController: navigationController!,
-            statusStateMachine: statusStateMachine
+            statusStateMachine: statusStateMachine,
+            questionnaireType: .selfDiagnosis
         ) { symptoms in
             self.navigationController?.popToViewController(self, animated: self.animateTransitions)
         }
@@ -224,9 +225,10 @@ class StatusViewController: UIViewController, Storyboarded {
             self.dismiss(animated: self.animateTransitions)
 
             if needsCheckin {
-                let coordinator = CheckinCoordinator(
+                let coordinator = QuestionnaireCoordinator(
                     navigationController: self.navigationController!,
-                    previousSymptoms: symptoms
+                    statusStateMachine: self.statusStateMachine,
+                    questionnaireType: .checkin
                 ) { symptoms in
                     self.statusStateMachine.checkin(symptoms: symptoms)
                         

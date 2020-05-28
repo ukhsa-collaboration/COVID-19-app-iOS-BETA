@@ -78,8 +78,7 @@
 		09E876BC24510F2C009C2628 /* BluetoothNurseryDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E876BB24510F2C009C2628 /* BluetoothNurseryDouble.swift */; };
 		131AB05C2449D85B002136CA /* ContactEventExpiryHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131AB05B2449D85B002136CA /* ContactEventExpiryHandler.swift */; };
 		131AB05E2449D894002136CA /* ContactEventExpiryHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131AB05D2449D894002136CA /* ContactEventExpiryHandlerTests.swift */; };
-		134470AD2454D4DA001A0AD9 /* CheckinCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134470AB2454D4DA001A0AD9 /* CheckinCoordinator.swift */; };
-		134470AE2454D4DA001A0AD9 /* SelfDiagnosisCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134470AC2454D4DA001A0AD9 /* SelfDiagnosisCoordinator.swift */; };
+		134470AE2454D4DA001A0AD9 /* QuestionnaireCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134470AC2454D4DA001A0AD9 /* QuestionnaireCoordinator.swift */; };
 		13473A1B246AFF0C00800CEA /* AdviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13473A1A246AFF0C00800CEA /* AdviceViewController.swift */; };
 		13473A1D246C0F2C00800CEA /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13473A1C246C0F2C00800CEA /* StatusViewController.swift */; };
 		13473A1F246D543F00800CEA /* UserStatusProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13473A1E246D543F00800CEA /* UserStatusProvider.swift */; };
@@ -410,8 +409,7 @@
 		09E876BB24510F2C009C2628 /* BluetoothNurseryDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothNurseryDouble.swift; sourceTree = "<group>"; };
 		131AB05B2449D85B002136CA /* ContactEventExpiryHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventExpiryHandler.swift; sourceTree = "<group>"; };
 		131AB05D2449D894002136CA /* ContactEventExpiryHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventExpiryHandlerTests.swift; sourceTree = "<group>"; };
-		134470AB2454D4DA001A0AD9 /* CheckinCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckinCoordinator.swift; sourceTree = "<group>"; };
-		134470AC2454D4DA001A0AD9 /* SelfDiagnosisCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfDiagnosisCoordinator.swift; sourceTree = "<group>"; };
+		134470AC2454D4DA001A0AD9 /* QuestionnaireCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionnaireCoordinator.swift; sourceTree = "<group>"; };
 		13473A1A246AFF0C00800CEA /* AdviceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdviceViewController.swift; sourceTree = "<group>"; };
 		13473A1C246C0F2C00800CEA /* StatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
 		13473A1E246D543F00800CEA /* UserStatusProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatusProvider.swift; sourceTree = "<group>"; };
@@ -1338,9 +1336,8 @@
 			isa = PBXGroup;
 			children = (
 				F68B89EC243CFF2600F369A9 /* SelfDiagnosis.storyboard */,
-				134470AB2454D4DA001A0AD9 /* CheckinCoordinator.swift */,
 				13F4AE872451EB330082A46D /* QuestionSymptomsViewController.swift */,
-				134470AC2454D4DA001A0AD9 /* SelfDiagnosisCoordinator.swift */,
+				134470AC2454D4DA001A0AD9 /* QuestionnaireCoordinator.swift */,
 				F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */,
 				F6334E462474559000421B4C /* Symptoms.swift */,
 				F673FBB32457A89E00D96C50 /* SymptomsSummaryViewController.swift */,
@@ -1901,7 +1898,6 @@
 				F72EBD97243C8490009F9328 /* BluetoothStateUserNotifier.swift in Sources */,
 				09C9DB382460946B0012F80A /* UpdatesBasedOnAccessibilityDisplayChanges.swift in Sources */,
 				896BE90F244F07FF00B3687C /* PublicKeyValidator.swift in Sources */,
-				134470AD2454D4DA001A0AD9 /* CheckinCoordinator.swift in Sources */,
 				8983E618245867CF001F2011 /* AppEvent.swift in Sources */,
 				F6AA91EE247ED45D00D086B8 /* DrawerMailbox.swift in Sources */,
 				89C8B212245C5093009CCE80 /* DailyMetricsCollector.swift in Sources */,
@@ -1922,7 +1918,7 @@
 				098ED478242D7D050029B729 /* RegistratonService.swift in Sources */,
 				DD3FCF3C2476E8C3008B0237 /* ExposedNotificationHandler.swift in Sources */,
 				0979FB792458ADF000EB01A8 /* PostcodeValidator.swift in Sources */,
-				134470AE2454D4DA001A0AD9 /* SelfDiagnosisCoordinator.swift in Sources */,
+				134470AE2454D4DA001A0AD9 /* QuestionnaireCoordinator.swift in Sources */,
 				097F05412473145300E633C8 /* TestableUrlOpener.swift in Sources */,
 				0984E0BD2451014E009C6374 /* BluetoothOffViewController.swift in Sources */,
 				F62F857F2451051C006580A8 /* ContactEventsUploader.swift in Sources */,
