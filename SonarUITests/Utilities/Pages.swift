@@ -29,7 +29,7 @@ class StatusOkPage : Page {
 
 class StatusSymptomaticPage : Page {
     var title: XCUIElement {
-        app.staticTexts["Your symptoms indicate you may have coronavirus. Please self-isolate and apply for a test."]
+        app.staticTexts["Your symptoms indicate you may have coronavirus. Please isolate yourself and your household and book a test."]
     }
 }
 

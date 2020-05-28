@@ -274,6 +274,7 @@ class StatusViewController: UIViewController, Storyboarded {
             feelUnwellButton.isHidden = false
             applyForTestButton.isHidden = true
             stepsDetailLabel.isHidden = false
+            stepsDetailLabel.text = getHelpText(detail: "STATUS_GET_HELP_OK".localized)
 
         case .exposed:
             diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
@@ -283,15 +284,17 @@ class StatusViewController: UIViewController, Storyboarded {
             feelUnwellButton.isHidden = false
             applyForTestButton.isHidden = true
             stepsDetailLabel.isHidden = false
+            stepsDetailLabel.text = getHelpText(detail: "STATUS_GET_HELP_EXPOSED".localized)
 
         case .symptomatic(let symptomatic):
             diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
-            diagnosisTitleLabel.text = "Your symptoms indicate you may have coronavirus. Please self-isolate and apply for a test."
+            diagnosisTitleLabel.text = "Your symptoms indicate you may have coronavirus. Please isolate yourself and your household and book a test."
             diagnosisDetailLabel.isHidden = false
             diagnosisDetailLabel.text = detailWithExpiryDate(symptomatic.checkinDate)
             feelUnwellButton.isHidden = true
             applyForTestButton.isHidden = false
             stepsDetailLabel.isHidden = false
+            stepsDetailLabel.text = getHelpText()
 
             if dateProvider() >= symptomatic.checkinDate {
                 presentCheckinDrawer(
@@ -372,6 +375,10 @@ class StatusViewController: UIViewController, Storyboarded {
         dateFormatter.locale = localeProvider.locale
         dateFormatter.setLocalizedDateFormatFromTemplate(template)
         return dateFormatter.string(from: date)
+    }
+
+    private func getHelpText(detail: String? = nil) -> String {
+        return [detail, "STATUS_GET_HELP".localized].compactMap { $0 }.joined(separator: "\n\n")
     }
 
 }

@@ -89,7 +89,7 @@ class StatusViewControllerTests: TestCase {
         )
         let vc = makeViewController(statusStateMachine: statusStateMachine)
         
-        XCTAssertEqual(vc.diagnosisTitleLabel.text, "Your symptoms indicate you may have coronavirus. Please self-isolate and apply for a test.")
+        XCTAssertEqual(vc.diagnosisTitleLabel.text, "Your symptoms indicate you may have coronavirus. Please isolate yourself and your household and book a test.")
         XCTAssertFalse(vc.diagnosisDetailLabel.isHidden)
         XCTAssertEqual(vc.diagnosisDetailLabel.text, "On 14 May this app will notify you to update your symptoms. Please read your full advice below.")
     }

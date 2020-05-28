@@ -130,3 +130,7 @@ Please update your symptoms to view your latest advice.";
 Please update your symptoms to view your latest advice";
 
 "COPIED" = "Copied";
+
+"STATUS_GET_HELP_OK" = "If you do not have any symptoms, there is no need to do anything right now. If you develop symptoms, please come back to this app.";
+"STATUS_GET_HELP_EXPOSED" = "If you develop symptoms, please come back to this app.";
+"STATUS_GET_HELP" = "If you have a medical emergency, please call 999. If you require medical help near you, please go to 111 online.";
