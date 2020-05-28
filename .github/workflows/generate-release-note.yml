@@ -5,7 +5,7 @@ on:
     types: [generate-release-note]
 
 jobs:
-  docker-ci-test:
+  generate-release-note:
     runs-on:
       - self-hosted
       - linux
