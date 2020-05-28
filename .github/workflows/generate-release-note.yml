@@ -1,11 +1,11 @@
-name: docker-ci-test
+name: generate-release-note
 
 on:
   repository_dispatch:
     types: [generate-release-note]
 
 jobs:
-  docker-ci-test:
+  generate-release-note:
     runs-on:
       - self-hosted
       - linux
@@ -19,7 +19,7 @@ jobs:
 
       - name: Generate release notes
         id: generate_release_notes
-        uses: ./.github/actions/genrate-release-notes
+        uses: ./.github/actions/generate-release-notes
         with:
           tracker_token: ${{ secrets.tracker_api_token }}
           revision_range: ${{ github.event.client_payload }}
