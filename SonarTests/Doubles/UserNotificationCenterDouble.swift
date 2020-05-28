@@ -29,5 +29,6 @@ class UserNotificationCenterDouble: UserNotificationCenter {
     var removedIdentifiers: [String]?
     func removePendingNotificationRequests(withIdentifiers identifiers: [String]) {
         removedIdentifiers = identifiers
+        requests = requests.filter({ !identifiers.contains($0.identifier) })
     }
 }

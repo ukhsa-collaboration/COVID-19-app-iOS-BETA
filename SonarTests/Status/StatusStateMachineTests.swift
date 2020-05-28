@@ -699,5 +699,74 @@ class StatusStateMachineTests: XCTestCase {
         XCTAssertEqual(request.content.title, "TEST_RESULT_TITLE".localized)
         XCTAssertEqual(drawerMailbox.receive(), .negativeTestResult(symptoms: nil))
     }
+    
+    func testSymptomaticToOkCancelsReminderNotification() throws {
+        let now = Date()
+        persisting.statusState = .symptomatic(StatusState.Symptomatic(symptoms: arbitraryNonEmptySymptoms, startDate: now - 200, checkinDate: now - 100))
+        
+        switch machine.state {
+        case .symptomatic(_):
+            break;
+        default:
+            XCTFail("wrong initial state")
+        }
+        machine.checkin(symptoms: [])
+        XCTAssertEqual(machine.state, .ok(StatusState.Ok()))
+        
+        XCTAssertEqual(userNotificationCenter.removedIdentifiers, ["Diagnosis"])
+    }
 
+    func testSymptomaticToPositiveCancelsReminderNotification() throws {
+        let now = Date()
+        persisting.statusState = .symptomatic(StatusState.Symptomatic(symptoms: arbitraryNonEmptySymptoms, startDate: now - 200, checkinDate: now - 100))
+        
+        switch machine.state {
+        case .symptomatic(_):
+            break;
+        default:
+            XCTFail("wrong initial state")
+        }
+
+        let testResult = TestResult(
+            result: .positive,
+            testTimestamp: now,
+            type: nil,
+            acknowledgementUrl: nil
+        )
+        machine.received(testResult)
+        switch machine.state {
+        case .positiveTestResult(_):
+            break;
+        default:
+            XCTFail("wrong end state")
+        }
+        
+        XCTAssertEqual(userNotificationCenter.removedIdentifiers, ["Diagnosis"])
+    }
+
+    func testSymptomaticToSymptomaticCancelsAndReschedulesNotification() throws {
+        let now = Date()
+        persisting.statusState = .symptomatic(StatusState.Symptomatic(symptoms: arbitraryNonEmptySymptoms, startDate: now - 200, checkinDate: now - 100))
+        
+        switch machine.state {
+        case .symptomatic(_):
+            break;
+        default:
+            XCTFail("wrong initial state")
+        }
+
+        machine.checkin(symptoms: [.temperature])
+        switch machine.state {
+        case .symptomatic(_):
+            break;
+        default:
+            XCTFail("wrong end state")
+        }
+        
+        XCTAssertEqual(userNotificationCenter.removedIdentifiers, ["Diagnosis"])
+        let request = try XCTUnwrap(userNotificationCenter.requests.first)
+        XCTAssertEqual(request.identifier, "Diagnosis")
+    }
 }
+
+private let arbitraryNonEmptySymptoms = Symptoms([.temperature])

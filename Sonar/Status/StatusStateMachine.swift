@@ -42,6 +42,7 @@ class StatusStateMachine: StatusStateMachining {
             guard persisting.statusState != newValue else { return }
 
             persisting.statusState = newValue
+            userNotificationCenter.removePendingNotificationRequests(withIdentifiers: [checkinNotificationIdentifier])
 
             switch newValue {
             case .symptomatic(let symptomatic):
@@ -140,8 +141,6 @@ class StatusStateMachine: StatusStateMachining {
     }
 
     func checkin(symptoms: Symptoms) {
-        userNotificationCenter.removePendingNotificationRequests(withIdentifiers: [checkinNotificationIdentifier])
-
         switch state {
         case .ok, .exposed, .positiveTestResult:
             assertionFailure("Checking in is only allowed from symptomatic")
