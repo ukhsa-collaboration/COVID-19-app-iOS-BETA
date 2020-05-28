@@ -13,12 +13,14 @@ class DrawerMailboxTests: XCTestCase {
 
     var mailbox: DrawerMailbox!
     var persistence: PersistenceDouble!
+    var notificationCenter: NotificationCenter!
 
     override func setUp() {
         super.setUp()
 
         persistence = PersistenceDouble()
-        mailbox = DrawerMailbox(persistence: persistence)
+        notificationCenter = NotificationCenter()
+        mailbox = DrawerMailbox(persistence: persistence, notificationCenter: notificationCenter)
     }
 
     func testNoMessages() {
@@ -33,6 +35,21 @@ class DrawerMailboxTests: XCTestCase {
         XCTAssertEqual(mailbox.receive(), .unexposed)
         XCTAssertEqual(mailbox.receive(), .negativeTestResult(symptoms: [.cough]))
         XCTAssertNil(mailbox.receive())
+    }
+
+    func testNotifyOnPosts() {
+        var notificationPosted = false
+        notificationCenter.addObserver(
+            forName: DrawerMessage.DrawerMessagePosted,
+            object: nil,
+            queue: nil
+        ) { _ in
+            notificationPosted = true
+        }
+
+        mailbox.post(.unexposed)
+
+        XCTAssertTrue(notificationPosted)
     }
 
 }

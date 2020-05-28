@@ -108,7 +108,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     )
 
     lazy var drawerMailbox = DrawerMailbox(
-        persistence: persistence
+        persistence: persistence,
+        notificationCenter: notificationCenter
     )
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {

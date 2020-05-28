@@ -14,6 +14,8 @@ protocol DrawerMailboxing {
 }
 
 enum DrawerMessage: Equatable {
+    static let DrawerMessagePosted = NSNotification.Name("DrawerMessagePosted")
+
     case unexposed
     case symptomsButNotSymptomatic
     case positiveTestResult
@@ -24,14 +26,16 @@ enum DrawerMessage: Equatable {
 class DrawerMailbox: DrawerMailboxing {
 
     let persistence: Persisting
+    let notificationCenter: NotificationCenter
 
     private var messages: [DrawerMessage] {
         get { persistence.drawerMessages }
         set { persistence.drawerMessages = newValue }
     }
 
-    init(persistence: Persisting) {
+    init(persistence: Persisting, notificationCenter: NotificationCenter) {
         self.persistence = persistence
+        self.notificationCenter = notificationCenter
     }
 
     func receive() -> DrawerMessage? {
@@ -42,6 +46,7 @@ class DrawerMailbox: DrawerMailboxing {
 
     func post(_ message: DrawerMessage) {
         messages.append(message)
+        notificationCenter.post(name: DrawerMessage.DrawerMessagePosted, object: message)
     }
 
 }

@@ -43,7 +43,8 @@ class UITestScreenMaker {
         dateProvider: self.dateProvider
     )
     private lazy var drawerMailbox = DrawerMailbox(
-        persistence: persistence
+        persistence: persistence,
+        notificationCenter: notificationCenter
     )
 
     func resetTime() {
