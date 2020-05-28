@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="0ke-6m-Ube">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="0ke-6m-Ube">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -13,13 +13,19 @@
         <scene sceneID="Qru-fo-gMt">
             <objects>
                 <viewController storyboardIdentifier="TestingInfoViewController" id="2DV-fd-FjU" customClass="TestingInfoViewController" customModule="Sonar" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="1xp-lJ-Mpr">
+                    <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="1xp-lJ-Mpr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i7g-54-jA7">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background_Curve" translatesAutoresizingMaskIntoConstraints="NO" id="VZE-q6-ZVC">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="211"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="211" id="rDS-iR-5XZ"/>
+                                        </constraints>
+                                    </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Isf-ek-wrS">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="1086.5"/>
                                         <subviews>
@@ -143,6 +149,8 @@ You can always find the latest code here, it should be unique for every test you
                                     <constraint firstItem="Isf-ek-wrS" firstAttribute="trailing" secondItem="eSt-n9-y1K" secondAttribute="trailing" id="GJQ-tw-X5k"/>
                                     <constraint firstItem="Isf-ek-wrS" firstAttribute="top" secondItem="eSt-n9-y1K" secondAttribute="top" id="GWp-jP-APp"/>
                                     <constraint firstItem="Isf-ek-wrS" firstAttribute="leading" secondItem="eSt-n9-y1K" secondAttribute="leading" id="Ow9-9M-eaX"/>
+                                    <constraint firstItem="VZE-q6-ZVC" firstAttribute="centerX" secondItem="i7g-54-jA7" secondAttribute="centerX" id="bit-Ij-kFr"/>
+                                    <constraint firstItem="VZE-q6-ZVC" firstAttribute="top" secondItem="eSt-n9-y1K" secondAttribute="top" id="ckK-os-0A3"/>
                                     <constraint firstItem="Isf-ek-wrS" firstAttribute="bottom" secondItem="eSt-n9-y1K" secondAttribute="bottom" id="exI-YT-DYM"/>
                                     <constraint firstItem="Isf-ek-wrS" firstAttribute="height" secondItem="gwV-eb-6U9" secondAttribute="height" priority="1" id="v2h-0a-b9t"/>
                                 </constraints>
@@ -152,12 +160,12 @@ You can always find the latest code here, it should be unique for every test you
                         </subviews>
                         <color key="backgroundColor" name="NHS Grey 5"/>
                         <constraints>
-                            <constraint firstItem="i7g-54-jA7" firstAttribute="top" secondItem="L7M-kP-6XK" secondAttribute="top" id="TgK-FF-Hqi"/>
-                            <constraint firstItem="i7g-54-jA7" firstAttribute="leading" secondItem="L7M-kP-6XK" secondAttribute="leading" id="WY6-hZ-300"/>
-                            <constraint firstItem="i7g-54-jA7" firstAttribute="bottom" secondItem="L7M-kP-6XK" secondAttribute="bottom" id="pIh-5V-g6r"/>
-                            <constraint firstItem="i7g-54-jA7" firstAttribute="trailing" secondItem="L7M-kP-6XK" secondAttribute="trailing" id="ulE-Ur-f3L"/>
+                            <constraint firstItem="VZE-q6-ZVC" firstAttribute="width" secondItem="1xp-lJ-Mpr" secondAttribute="width" id="Jrm-JF-h7U"/>
+                            <constraint firstItem="i7g-54-jA7" firstAttribute="top" secondItem="1xp-lJ-Mpr" secondAttribute="top" id="TgK-FF-Hqi"/>
+                            <constraint firstItem="i7g-54-jA7" firstAttribute="leading" secondItem="1xp-lJ-Mpr" secondAttribute="leading" id="WY6-hZ-300"/>
+                            <constraint firstItem="i7g-54-jA7" firstAttribute="bottom" secondItem="1xp-lJ-Mpr" secondAttribute="bottom" id="pIh-5V-g6r"/>
+                            <constraint firstItem="i7g-54-jA7" firstAttribute="trailing" secondItem="1xp-lJ-Mpr" secondAttribute="trailing" id="ulE-Ur-f3L"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="L7M-kP-6XK"/>
                     </view>
                     <navigationItem key="navigationItem" title="Testing information" id="K44-qv-yGH"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -213,6 +221,7 @@ You can always find the latest code here, it should be unique for every test you
         </scene>
     </scenes>
     <resources>
+        <image name="Background_Curve" width="375" height="211"/>
         <image name="Linking_ID" width="184.5" height="184"/>
         <namedColor name="NHS Grey 5">
             <color red="0.94117647058823528" green="0.95686274509803926" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
