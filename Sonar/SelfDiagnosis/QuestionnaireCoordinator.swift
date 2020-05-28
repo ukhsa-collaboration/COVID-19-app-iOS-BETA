@@ -37,7 +37,14 @@ class QuestionnaireCoordinator: Coordinator {
     
     var symptoms = Symptoms()
 
-    static let pageCount = 6
+    var pageCount: Int {
+        switch questionnaireType {
+        case .selfDiagnosis:
+            return 6
+        case .checkin:
+            return 5
+        }
+    }
     
     func openQuestionVC(symptom: Symptom,
                         pageNumber: Int,
@@ -51,7 +58,7 @@ class QuestionnaireCoordinator: Coordinator {
         
         vc.inject(
             pageNumber: pageNumber,
-            pageCount: Self.pageCount,
+            pageCount: pageCount,
             questionTitle: title,
             questionDetail: "\(localizedTextPrefix)_DETAIL".localized,
             questionError: "\(localizedTextPrefix)_ERROR".localized,
