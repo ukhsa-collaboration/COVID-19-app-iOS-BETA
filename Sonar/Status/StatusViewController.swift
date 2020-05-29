@@ -277,10 +277,10 @@ class StatusViewController: UIViewController, Storyboarded {
             bookTestButton.isHidden = true
             stepsDetailLabel.text = getHelpText(detail: "STATUS_GET_HELP_OK".localized)
 
-        case .exposed:
+        case .exposed(let exposed):
             diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
-            diagnosisTitleLabel.text = "You have been near someone who has coronavirus symptoms"
-            diagnosisDetailLabel.text = "Mantain social distancing and wash your hands frequently. Read advice for you below."
+            diagnosisTitleLabel.text = "You have been near someone who has tested positive for coronavirus. Please self-isolate."
+            diagnosisDetailLabel.text = "Please follow the advice below until \(localizedDate(exposed.expiryDate, "MMMMd"))"
             diagnosisDetailLabel.isHidden = false
             feelUnwellButton.isHidden = false
             bookTestButton.isHidden = true

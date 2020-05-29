@@ -18,7 +18,7 @@ class Page {
 
 class StatusExposedPage : Page {
     var title: XCUIElement {
-        app.staticTexts["You have been near someone who has coronavirus symptoms"]
+        app.staticTexts["You have been near someone who has tested positive for coronavirus. Please self-isolate."]
     }
     
     var feelUnwellButton: XCUIElement {
