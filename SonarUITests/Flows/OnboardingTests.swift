@@ -59,7 +59,7 @@ private extension OnboardingTests {
     }
     
     var privacyScreenTitle: XCUIElement {
-        app.staticTexts["How this app works"]
+        app.staticTexts["How the app works"]
     }
     
     var privacyCloseButton: XCUIElement {
