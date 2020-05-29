@@ -19,7 +19,7 @@ class PostcodeViewController: UIViewController, Storyboarded {
 
     @IBOutlet weak var errorView: ErrorView!
     @IBOutlet private var scrollView: UIScrollView!
-    @IBOutlet var postcodeField: UITextField!
+    @IBOutlet var postcodeField: TextField!
     @IBOutlet var postcodeDetail: UILabel!
     @IBOutlet var continueAccessoryView: UIView!
     @IBOutlet var continueButton: PrimaryButton!
@@ -112,10 +112,12 @@ class PostcodeViewController: UIViewController, Storyboarded {
     }
     
     private func showPostcodeError() {
-        scroll(toErrorLabel: errorView.errorMessage, orControl: postcodeField){
+        scroll(toErrorLabel: errorView.errorMessage, orControl: postcodeField) {
             self.errorView.isHidden = false
             self.errorView.errorMessage.text = "Please enter the first part of a valid postcode. For example: PO30, E2, M1, EH1, L36".localized
+            self.postcodeField.hasError = true
         }
+        
     }
 }
 
@@ -129,16 +131,6 @@ extension PostcodeViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString: String) -> Bool {
         let existingLength = textField.text?.count ?? 0
         return existingLength - range.length + replacementString.count <= maxLength
-    }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.layer.borderWidth = 3
-        textField.layer.borderColor = UIColor(named: "NHS Dark Blue")!.cgColor
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        textField.layer.borderWidth = 1
-        textField.layer.borderColor = UIColor(named: "NHS Text")!.cgColor
     }
 }
 
