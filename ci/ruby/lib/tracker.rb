@@ -27,7 +27,7 @@ class Tracker
   def deliver(project_id, story_id)
     uri = URI("#{BASE_URL}/projects/#{project_id}/stories/#{story_id}")
     body = JSON.dump({ current_state: :delivered })
-    Net::HTTP.put(uri, body, headers({ 'Content-Type' => 'application/json' }))
+    put(uri, body, headers({ 'Content-Type' => 'application/json' }))
   end
 
   def story(id)
@@ -39,6 +39,7 @@ class Tracker
   end
 
   private
+
   def get(path)
     uri = URI("#{BASE_URL}#{path}")
 
@@ -50,8 +51,28 @@ class Tracker
     Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
       resp = http.request(req)
       body = resp.read_body
-      return STATUS_TO_SYM[resp.code],
-        body.empty? ? nil : JSON.parse(body)
+      return [
+        STATUS_TO_SYM[resp.code],
+        body.empty? ? nil : JSON.parse(body),
+      ]
+    end
+  end
+
+  def put(path, body, headers)
+    uri = URI("#{BASE_URL}#{path}")
+
+    req = Net::HTTP::Put.new(uri)
+    headers.each do |(name, value)|
+      req[name] = value
+    end
+
+    Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
+      resp = http.request(req)
+      body = resp.read_body
+      return [
+        STATUS_TO_SYM[resp.code],
+        body.empty? ? nil : JSON.parse(body),
+      ]
     end
   end
 
