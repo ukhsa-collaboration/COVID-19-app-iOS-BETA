@@ -10,45 +10,34 @@ import Foundation
 
 import Logging
 
-fileprivate struct Exposed: Codable {
-    let status: Status
-    let type: String?
-    let acknowledgementUrl: String?
-}
-
-extension Exposed {
-    enum Status: String, Codable {
-        case potential = "Potential"
-    }
-}
-
 class ExposedNotificationHandler {
     
-    struct UserInfoDecodingError: Error {}
-    
-    let logger = Logger(label: "StatusNotificationHandler")
+    private let logger = Logger(label: "StatusNotificationHandler")
+    private let dateFormatter = ISO8601DateFormatter()
 
-    let statusStateMachine: StatusStateMachining
+    private let statusStateMachine: StatusStateMachining
+    private let dateProvider: () -> Date
 
-    init(statusStateMachine: StatusStateMachining) {
+    init(
+        statusStateMachine: StatusStateMachining,
+        dateProvider: @escaping () -> Date = { Date() }
+    ) {
         self.statusStateMachine = statusStateMachine
+        self.dateProvider = dateProvider
     }
     
     func handle(userInfo: [AnyHashable: Any], completion: @escaping RemoteNotificationCompletionHandler) {
-        do {
-            let jsonData = try JSONSerialization.data(withJSONObject: userInfo, options: .prettyPrinted)
-            
-            if let _ = try? JSONDecoder().decode(Exposed.self, from: jsonData) {
-                statusStateMachine.exposed()
-            } else {
-                throw UserInfoDecodingError()
-            }
-            completion(.newData)
-        } catch {
+        guard let status = userInfo["status"] as? String, status == "Potential" else {
             logger.warning("Received unexpected status from remote notification: '\(String(describing: userInfo["status"]))'")
             completion(.noData)
             return
         }
+
+        let mostRecentProximityEventDate = userInfo["mostRecentProximityEventDate"] as? String
+        let exposedDate = mostRecentProximityEventDate.flatMap({ dateFormatter.date(from: $0) })
+        statusStateMachine.exposed(on: exposedDate ?? dateProvider())
+
+        completion(.newData)
     }
 
 }

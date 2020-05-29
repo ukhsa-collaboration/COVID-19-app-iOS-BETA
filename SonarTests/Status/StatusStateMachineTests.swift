@@ -42,7 +42,7 @@ class StatusStateMachineTests: XCTestCase {
     }
 
     func testPostExposureNotificationOnExposed() throws {
-        machine.exposed()
+        machine.exposed(on: currentDate)
 
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.identifier, "adviceChangedNotificationIdentifier")
@@ -58,7 +58,7 @@ class StatusStateMachineTests: XCTestCase {
             notificationPosted = true
         }
 
-        machine.exposed()
+        machine.exposed(on: currentDate)
         XCTAssertTrue(notificationPosted)
 
         notificationPosted = false
@@ -319,7 +319,7 @@ class StatusStateMachineTests: XCTestCase {
         ))
 
         currentDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 2))!
-        machine.exposed()
+        machine.exposed(on: currentDate)
 
         XCTAssertEqual(machine.state, .symptomatic(StatusState.Symptomatic(
             symptoms: [.cough],
@@ -338,7 +338,7 @@ class StatusStateMachineTests: XCTestCase {
         ))
 
         currentDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 2))!
-        machine.exposed()
+        machine.exposed(on: currentDate)
 
         XCTAssertEqual(machine.state, .symptomatic(StatusState.Symptomatic(
             symptoms: [.temperature],
@@ -351,7 +351,7 @@ class StatusStateMachineTests: XCTestCase {
     func testExposedFromOk() throws {
         persisting.statusState = .ok(StatusState.Ok())
 
-        machine.exposed()
+        machine.exposed(on: currentDate)
 
         XCTAssertEqual(machine.state, .exposed(StatusState.Exposed(startDate: currentDate)))
     }

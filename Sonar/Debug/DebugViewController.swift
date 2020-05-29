@@ -129,7 +129,7 @@ class DebugViewController: UITableViewController, Storyboarded {
         case (3, 0):
             performSegue(withIdentifier: "unwindFromDebugViewController", sender: self)
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5)) {
-                self.statusStateMachine.exposed()
+                self.statusStateMachine.exposed(on: Date())
             }
 
         case (3, 1):
