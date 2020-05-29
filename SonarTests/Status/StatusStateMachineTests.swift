@@ -583,7 +583,7 @@ class StatusStateMachineTests: XCTestCase {
         )
 
         machine.received(testResult)
-        XCTAssertEqual(machine.state, .ok(StatusState.Ok()))
+        XCTAssertEqual(machine.state, .exposed(StatusState.Exposed(startDate: exposedDate)))
 
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.content.title, "TEST_RESULT_TITLE".localized)

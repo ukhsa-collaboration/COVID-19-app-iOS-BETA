@@ -223,12 +223,8 @@ class StatusStateMachine: StatusStateMachining {
         var symptoms: Symptoms?
 
         switch state {
-        case .ok:
+        case .ok, .exposed:
             break
-        case .exposed(let exposed):
-            if testDate > exposed.startDate {
-                state = .ok(StatusState.Ok())
-            }
         case .symptomatic(let symptomatic):
             if testDate > symptomatic.startDate {
                 symptoms = symptomatic.symptoms
