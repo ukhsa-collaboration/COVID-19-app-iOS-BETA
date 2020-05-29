@@ -302,7 +302,7 @@
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aa9-4N-jqJ">
                                                         <rect key="frame" x="0.0" y="167" width="374" height="108.33333333333331"/>
-                                                        <string key="text">If you think you have coronavirus symptoms you can add them in this app. The NHS will then let others know they have been near someone who has tested positive for coronavirus. This helps protect everyone and the NHS.</string>
+                                                        <string key="text">If you think you have coronavirus symptoms you can add them in this app. If you then test positive, the NHS will let others know they have been near someone who has tested positive for coronavirus.</string>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                         <color key="textColor" name="NHS Text"/>
                                                         <nil key="highlightedColor"/>
