@@ -122,7 +122,7 @@ Please update your symptoms to view your latest advice.";
 "HAVE_SYMPTOMS_BUT_DONT_ISOLATE_DRAWER_DETAIL" = "Although you still have some symptoms you can now stop self-isolating and follow the current advice for the general public.";
 
 "CHECKIN_QUESTIONNAIRE_OVERLAY_HEADER" = "How are you feeling today?";
-"CHECKIN_QUESTIONNAIRE_OVERLAY_DETAIL" = "Please update your symptoms to view latest advice.";
+"CHECKIN_QUESTIONNAIRE_OVERLAY_DETAIL" = "Please update your symptoms to view your latest advice.";
 
 "NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_HEADER" = "Your test result indicates that you don’t have coronavirus";
 "NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_DETAIL" = "Thank you for getting tested. You have been sent an email with more information.

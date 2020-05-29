@@ -40,6 +40,7 @@ module UpdatesTrackerStoriesWithBuildNumber
       project_id = story.fetch('project_id')
       text = message_template % { build_number: build_number }
       tracker.comment(project_id, story_id, text)
+      tracker.deliver(project_id, story_id)
     end
   end
 end
