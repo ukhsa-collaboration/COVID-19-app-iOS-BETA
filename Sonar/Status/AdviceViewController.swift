@@ -8,6 +8,23 @@
 
 import UIKit
 
+fileprivate extension StatusState {
+    var adviceUntilDate: Date? {
+        switch self {
+        case .ok:
+             return nil
+        case .exposed(let state):
+            return state.expiryDate
+        case .positiveTestResult(let state):
+            return state.expiryDate
+        case .symptomatic(let state):
+            return state.checkinDate
+        case .exposedSymptomatic(let state):
+            return state.checkinDate
+        }
+    }
+}
+
 class AdviceViewController: UIViewController, Storyboarded {
     static let storyboardName = "Advice"
 
@@ -25,11 +42,10 @@ class AdviceViewController: UIViewController, Storyboarded {
     override func viewDidLoad() {
         link.textStyle = .headline
         link.url = ContentURLs.shared.currentAdvice(for: state)
-
-        switch state {
-        case .exposed(let stateDetail):
-            detail.text = "The advice below is up-to-date and specific to your situation. Follow this advice until \(localizedDate(stateDetail.expiryDate, "d MMMM y"))."
-        default:
+        
+        if let adviceUntilDate = state.adviceUntilDate {
+            detail.text = "The advice below is up-to-date and specific to your situation. Follow this advice until \(localizedDate(adviceUntilDate, "d MMMM y"))."
+        } else {
             detail.text = "The advice below is up-to-date and specific to your situation. Please follow this advice."
         }
     }

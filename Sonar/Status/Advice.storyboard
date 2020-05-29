@@ -45,7 +45,7 @@
                                                 <rect key="frame" x="0.0" y="354" width="382" height="128"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="Read specific advice on GOV.UK"/>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="Read specific advice for you"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                         </subviews>
