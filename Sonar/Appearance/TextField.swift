@@ -13,42 +13,49 @@ import UIKit
 // colors, but layers don't appear to change their colors when the UI style
 // changes after initial rendering.
 class TextField: UITextField {
+    
+    static let darkBlue = UIColor(named: "NHS Dark Blue")!
+    static let errorRed = UIColor(named: "NHS Error")!
+    
+    var hasError: Bool = false {
+        didSet {
+            updateForCurrentUIStyle()
+        }
+    }
+        
     override init(frame: CGRect) {
         super.init(frame: frame)
-        updateForCurrentUIStyle()
+        commonInit()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        updateForCurrentUIStyle()
+        commonInit()
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
         updateForCurrentUIStyle()
     }
     
-    private func updateForCurrentUIStyle() {
+    private func commonInit() {
+        addTarget(self, action: #selector(updateForCurrentUIStyle), for: .allEditingEvents)
         layer.cornerRadius = 8
         layer.masksToBounds = true
-        layer.borderWidth = 1
-        
-        if inDarkMode() {
-            layer.borderColor = UIColor.white.cgColor
-        } else {
-            layer.borderColor = UIColor.black.cgColor
-        }
+        updateForCurrentUIStyle()
     }
     
-    private func inDarkMode() -> Bool {
-        if #available(iOS 12.0, *) {
-            switch traitCollection.userInterfaceStyle {
-            case .dark:
-                return true
-            default:
-                return false
-            }
-        } else {
-            return false
+    @objc private func updateForCurrentUIStyle() {
+        switch (isEditing, hasError) {
+        case (false, false):
+            layer.borderWidth = 1
+            layer.borderColor = UIColor.black.cgColor
+        case (true, false):
+            layer.borderWidth = 3
+            layer.borderColor = Self.darkBlue.cgColor
+        case (_, true):
+            layer.borderColor = Self.errorRed.cgColor
+            layer.borderWidth = 3
         }
     }
 }

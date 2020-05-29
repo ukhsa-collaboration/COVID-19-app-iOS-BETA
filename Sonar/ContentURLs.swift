@@ -48,6 +48,7 @@ struct ContentURLs {
         case .symptomatic: return status.symptomatic
         case .exposed: return status.exposed
         case .positiveTestResult: return status.positiveTestResult
+        case .exposedSymptomatic: return status.symptomatic
         }
     }
 }

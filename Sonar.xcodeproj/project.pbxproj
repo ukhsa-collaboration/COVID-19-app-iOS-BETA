@@ -198,6 +198,7 @@
 		DD3FCF422476E914008B0237 /* Drawer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD3FCF402476E913008B0237 /* Drawer.storyboard */; };
 		DD3FCF4A24780872008B0237 /* PositiveTestStatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3FCF4924780871008B0237 /* PositiveTestStatusTests.swift */; };
 		DD46B0D5247FC57400FB3B87 /* 2_exposure.apns in Resources */ = {isa = PBXBuildFile; fileRef = DD46B0D4247FC57400FB3B87 /* 2_exposure.apns */; };
+		DDBA4EB52481477F009DABDB /* ExposureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBA4EB42481477F009DABDB /* ExposureTests.swift */; };
 		DDD5BDC52473EA1200329720 /* NotificationStatusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5BDC42473EA1200329720 /* NotificationStatusButton.swift */; };
 		F600A60224297A8E0038DF57 /* RegistrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F600A60124297A8E0038DF57 /* RegistrationRequest.swift */; };
 		F600A60424297C010038DF57 /* RegistrationRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F600A60324297C010038DF57 /* RegistrationRequestTests.swift */; };
@@ -543,6 +544,7 @@
 		DD3FCF402476E913008B0237 /* Drawer.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Drawer.storyboard; sourceTree = "<group>"; };
 		DD3FCF4924780871008B0237 /* PositiveTestStatusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositiveTestStatusTests.swift; sourceTree = "<group>"; };
 		DD46B0D4247FC57400FB3B87 /* 2_exposure.apns */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2_exposure.apns; sourceTree = "<group>"; };
+		DDBA4EB42481477F009DABDB /* ExposureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExposureTests.swift; sourceTree = "<group>"; };
 		DDD5BDC42473EA1200329720 /* NotificationStatusButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationStatusButton.swift; sourceTree = "<group>"; };
 		F600A60124297A8E0038DF57 /* RegistrationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationRequest.swift; sourceTree = "<group>"; };
 		F600A60324297C010038DF57 /* RegistrationRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationRequestTests.swift; sourceTree = "<group>"; };
@@ -1143,6 +1145,7 @@
 				DD311912247EC553001E9807 /* NegativeTestStatusTests.swift */,
 				DD3FCF4924780871008B0237 /* PositiveTestStatusTests.swift */,
 				AEAFA67824602629009AEAEB /* StatusTests.swift */,
+				DDBA4EB42481477F009DABDB /* ExposureTests.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -1983,6 +1986,7 @@
 				AE29892E2472E600004C4097 /* Pages.swift in Sources */,
 				DD3FCF4A24780872008B0237 /* PositiveTestStatusTests.swift in Sources */,
 				89074B8724378A0D00D67777 /* UITestPayload.swift in Sources */,
+				DDBA4EB52481477F009DABDB /* ExposureTests.swift in Sources */,
 				89074B822437882100D67777 /* Screen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

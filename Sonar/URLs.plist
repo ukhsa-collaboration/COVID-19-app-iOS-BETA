@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>info</key>
-	<string>https://covid19.nhs.uk/?utm_source=nhscovid19ios&amp;utm_medium=mobileapp&amp;utm_campaign=nhscovid19app&amp;utm_content=statuspage</string>
+	<string>https://covid19.nhs.uk/</string>
 	<key>moreAbout</key>
 	<string>https://covid19.nhs.uk</string>
 	<key>privacyAndData</key>
@@ -15,7 +15,7 @@
 	<key>bookTest</key>
 	<string>https://self-referral.test-for-coronavirus.service.gov.uk/cta-start</string>
 	<key>statusInfo</key>
-	<string>https://covid19.nhs.uk/?utm_source=nhscovid19ios&amp;utm_medium=mobileapp&amp;utm_campaign=nhscovid19app&amp;utm_content=statuspage</string>
+	<string>https://covid19.nhs.uk/</string>
 	<key>workplaceGuidance</key>
 	<string>https://faq.covid19.nhs.uk/article/KA-01072/en-us</string>
 	<key>regionalServices</key>

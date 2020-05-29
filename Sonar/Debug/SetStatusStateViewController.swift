@@ -151,6 +151,12 @@ class SetStatusStateViewController: UITableViewController {
             temperature = positiveTestResult.symptoms.map { $0.contains(.temperature) } ?? false
             cough = positiveTestResult.symptoms.map { $0.contains(.cough) } ?? false
             date = positiveTestResult.startDate
+        case .exposedSymptomatic(let exposedSymptomatic):
+            statusLabel.text = "exposed symptomatic"
+            statusPicker.selectRow(4, inComponent: 0, animated: false)
+            temperature = exposedSymptomatic.symptoms.map { $0.contains(.temperature) } ?? false
+            cough = exposedSymptomatic.symptoms.map { $0.contains(.cough) } ?? false
+            date = exposedSymptomatic.startDate
         }
     }
 
@@ -182,6 +188,13 @@ class SetStatusStateViewController: UITableViewController {
             statusState = .exposed(StatusState.Exposed(startDate: date!))
         case 3:
             statusState = .positiveTestResult(StatusState.PositiveTestResult(symptoms: symptoms, startDate: date!))
+        case 4:
+            guard symptoms.hasCoronavirusSymptoms else {
+                fatalError()
+            }
+
+            let checkinDate = Calendar.current.date(byAdding: .day, value: 1, to: date!)!
+            statusState = .exposedSymptomatic(StatusState.ExposedSymptomatic(symptoms: symptoms, startDate: date!, checkinDate: checkinDate))
         default:
             fatalError()
         }
@@ -198,11 +211,11 @@ extension SetStatusStateViewController: UIPickerViewDataSource {
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 4
+        return 5
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return ["ok", "symptomatic", "exposed", "positive test result"][row]
+        return ["ok", "symptomatic", "exposed", "positive test result", "exposed symptomatic"][row]
     }
 }
 
@@ -220,6 +233,10 @@ extension SetStatusStateViewController: UIPickerViewDelegate {
             statusState = .exposed(StatusState.Exposed(startDate: Date()))
         case 3:
             statusState = .positiveTestResult(StatusState.PositiveTestResult(symptoms: [.temperature, .cough], startDate: Date()))
+        case 4:
+            let startDate = Date()
+            let checkinDate = StatusState.ExposedSymptomatic.firstCheckin(from: startDate)
+            statusState = .exposedSymptomatic(StatusState.ExposedSymptomatic(symptoms: [.temperature, .cough], startDate: startDate, checkinDate: checkinDate))
         default:
             fatalError()
         }

@@ -140,79 +140,51 @@ class StatusStateMachineTests: XCTestCase {
         XCTAssertEqual(drawerMailbox.receive(), .symptomsButNotSymptomatic)
     }
 
-    func testExposedToSymptomatic() throws {
+    func testExposedToExposedSymptomatic() throws {
+        // currentDate is the date of exposure
         currentDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 6, hour: 6))!
         persisting.statusState = .exposed(StatusState.Exposed(startDate: currentDate))
 
-        let startDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 1, hour: 6))!
-        try machine.selfDiagnose(symptoms: [.cough], startDate: startDate)
+        let selfDiagnosisDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 1, hour: 6))!
+        try machine.selfDiagnose(symptoms: [.cough], startDate: selfDiagnosisDate)
 
-        let checkinDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 8, hour: 7))!
-        XCTAssertEqual(machine.state, .symptomatic(StatusState.Symptomatic(
+        let checkinDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 20, hour: 7))!
+        XCTAssertEqual(machine.state, .exposedSymptomatic(StatusState.ExposedSymptomatic(
             symptoms: [.cough],
-            startDate: startDate,
+            startDate: currentDate,
             checkinDate: checkinDate
         )))
-        XCTAssertEqual(contactEventsUploader.uploadStartDate, startDate)
+        XCTAssertEqual(contactEventsUploader.uploadStartDate, selfDiagnosisDate)
 
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.identifier, "Diagnosis")
 
         XCTAssertNil(drawerMailbox.receive())
     }
-
-    func testExposedToSymptomaticAfterSevenDays() throws {
-        currentDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 8, hour: 8))!
-        persisting.statusState = .exposed(StatusState.Exposed(startDate: currentDate))
-
-        let startDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 1, hour: 6))!
-        try machine.selfDiagnose(symptoms: [.temperature], startDate: startDate)
-
-        let checkinDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 9, hour: 7))!
+    
+    func testExposedSymptomaticToSymptomaticAfterFourteenDays() {
+        currentDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 20, hour: 6))!
+        let exposureStartDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 6, hour: 6))!
+        
+        persisting.statusState = .exposedSymptomatic(StatusState.ExposedSymptomatic(symptoms: nil, startDate: exposureStartDate, checkinDate: currentDate))
+        machine.checkin(symptoms: [.temperature])
+        
+        let newCheckinDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 21, hour: 7))!
         XCTAssertEqual(machine.state, .symptomatic(StatusState.Symptomatic(
             symptoms: [.temperature],
-            startDate: startDate,
-            checkinDate: checkinDate
+            startDate: exposureStartDate,
+            checkinDate: newCheckinDate
         )))
-
-        XCTAssertEqual(contactEventsUploader.uploadStartDate, startDate)
-
-        let request = try XCTUnwrap(userNotificationCenter.requests.first)
-        XCTAssertEqual(request.identifier, "Diagnosis")
-
-        XCTAssertNil(drawerMailbox.receive())
     }
-
-    func testExposedToCoughAfterSevenDaysIsExposed() throws {
-        currentDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 8, hour: 8))!
-        persisting.statusState = .exposed(StatusState.Exposed(startDate: currentDate))
-
-        let startDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 1, hour: 6))!
-        try machine.selfDiagnose(symptoms: [.cough], startDate: startDate)
-
-        XCTAssertEqual(machine.state, .exposed(StatusState.Exposed(startDate: currentDate)))
-
-        XCTAssertEqual(contactEventsUploader.uploadStartDate, startDate)
-
-        XCTAssertNil(userNotificationCenter.requests.first)
-
-        XCTAssertEqual(drawerMailbox.receive(), .symptomsButNotSymptomatic)
-    }
-
-    func testExposedToAnosmiaAfterSevenDaysIsExposed() throws {
-        currentDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 8, hour: 8))!
-        persisting.statusState = .exposed(StatusState.Exposed(startDate: currentDate))
-
-        let startDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 1, hour: 6))!
-        try machine.selfDiagnose(symptoms: [.anosmia], startDate: startDate)
-
-        XCTAssertEqual(machine.state, .exposed(StatusState.Exposed(startDate: currentDate)))
-
-        XCTAssertEqual(contactEventsUploader.uploadStartDate, startDate)
-
-        XCTAssertNil(userNotificationCenter.requests.first)
-
-        XCTAssertEqual(drawerMailbox.receive(), .symptomsButNotSymptomatic)
+    
+    func testExposedSymptomaticToOkAfterFourteenDays() {
+        currentDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 20, hour: 6))!
+        let exposureStartDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 6, hour: 6))!
+        
+        persisting.statusState = .exposedSymptomatic(StatusState.ExposedSymptomatic(symptoms: nil, startDate: exposureStartDate, checkinDate: currentDate))
+        machine.checkin(symptoms: [.cough])
+        
+        XCTAssertEqual(machine.state, .ok(StatusState.Ok()))
     }
 
     func testTickWhenExposedBeforeSeven() {
@@ -583,7 +555,7 @@ class StatusStateMachineTests: XCTestCase {
         )
 
         machine.received(testResult)
-        XCTAssertEqual(machine.state, .ok(StatusState.Ok()))
+        XCTAssertEqual(machine.state, .exposed(StatusState.Exposed(startDate: exposedDate)))
 
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.content.title, "TEST_RESULT_TITLE".localized)
@@ -699,5 +671,74 @@ class StatusStateMachineTests: XCTestCase {
         XCTAssertEqual(request.content.title, "TEST_RESULT_TITLE".localized)
         XCTAssertEqual(drawerMailbox.receive(), .negativeTestResult(symptoms: nil))
     }
+    
+    func testSymptomaticToOkCancelsReminderNotification() throws {
+        let now = Date()
+        persisting.statusState = .symptomatic(StatusState.Symptomatic(symptoms: arbitraryNonEmptySymptoms, startDate: now - 200, checkinDate: now - 100))
+        
+        switch machine.state {
+        case .symptomatic(_):
+            break;
+        default:
+            XCTFail("wrong initial state")
+        }
+        machine.checkin(symptoms: [])
+        XCTAssertEqual(machine.state, .ok(StatusState.Ok()))
+        
+        XCTAssertEqual(userNotificationCenter.removedIdentifiers, ["Diagnosis"])
+    }
 
+    func testSymptomaticToPositiveCancelsReminderNotification() throws {
+        let now = Date()
+        persisting.statusState = .symptomatic(StatusState.Symptomatic(symptoms: arbitraryNonEmptySymptoms, startDate: now - 200, checkinDate: now - 100))
+        
+        switch machine.state {
+        case .symptomatic(_):
+            break;
+        default:
+            XCTFail("wrong initial state")
+        }
+
+        let testResult = TestResult(
+            result: .positive,
+            testTimestamp: now,
+            type: nil,
+            acknowledgementUrl: nil
+        )
+        machine.received(testResult)
+        switch machine.state {
+        case .positiveTestResult(_):
+            break;
+        default:
+            XCTFail("wrong end state")
+        }
+        
+        XCTAssertEqual(userNotificationCenter.removedIdentifiers, ["Diagnosis"])
+    }
+
+    func testSymptomaticToSymptomaticCancelsAndReschedulesNotification() throws {
+        let now = Date()
+        persisting.statusState = .symptomatic(StatusState.Symptomatic(symptoms: arbitraryNonEmptySymptoms, startDate: now - 200, checkinDate: now - 100))
+        
+        switch machine.state {
+        case .symptomatic(_):
+            break;
+        default:
+            XCTFail("wrong initial state")
+        }
+
+        machine.checkin(symptoms: [.temperature])
+        switch machine.state {
+        case .symptomatic(_):
+            break;
+        default:
+            XCTFail("wrong end state")
+        }
+        
+        XCTAssertEqual(userNotificationCenter.removedIdentifiers, ["Diagnosis"])
+        let request = try XCTUnwrap(userNotificationCenter.requests.first)
+        XCTAssertEqual(request.identifier, "Diagnosis")
+    }
 }
+
+private let arbitraryNonEmptySymptoms = Symptoms([.temperature])
