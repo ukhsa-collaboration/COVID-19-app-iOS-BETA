@@ -16,6 +16,22 @@ class Page {
     }
 }
 
+class StatusExposedPage : Page {
+    var title: XCUIElement {
+        app.staticTexts["You have been near someone who has coronavirus symptoms"]
+    }
+    
+    var feelUnwellButton: XCUIElement {
+        app.buttons.element(matching: NSPredicate(format: "label BEGINSWITH %@", "I feel unwell"))
+    }
+}
+
+class StatusExposedSymptomaticPage : Page {
+    var title: XCUIElement {
+        app.staticTexts["Your symptoms indicate you may have coronavirus. Please isolate yourself and your household and book a test."]
+    }
+}
+
 
 class StatusOkPage : Page {
     var title: XCUIElement {

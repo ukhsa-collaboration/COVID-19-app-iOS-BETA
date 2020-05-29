@@ -95,6 +95,10 @@ class UITestScreenMaker {
             let testTimestamp = Calendar.current.date(byAdding: .day, value: -2, to: dateProvider())!
             statusStateMachine.received(TestResult(result: .negative, testTimestamp: testTimestamp, type: nil, acknowledgementUrl: nil))
             return createNavigationController()
+        
+        case .exposedStatus:
+            persistence.statusState = .exposed(StatusState.Exposed(startDate: dateProvider()))
+            return createNavigationController()
         }
     }
     

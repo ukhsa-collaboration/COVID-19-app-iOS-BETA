@@ -289,22 +289,10 @@ class StatusViewController: UIViewController, Storyboarded {
             stepsDetailLabel.text = getHelpText(detail: "STATUS_GET_HELP_EXPOSED".localized)
 
         case .symptomatic(let symptomatic):
-            diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
-            diagnosisTitleLabel.text = "Your symptoms indicate you may have coronavirus. Please isolate yourself and your household and book a test."
-            diagnosisDetailLabel.isHidden = false
-            diagnosisDetailLabel.text = detailWithExpiryDate(symptomatic.checkinDate)
-            feelUnwellButton.isHidden = true
-            bookTestButton.isHidden = false
-            stepsDetailLabel.isHidden = false
-            stepsDetailLabel.text = getHelpText()
-
-            if dateProvider() >= symptomatic.checkinDate {
-                presentCheckinDrawer(
-                    for: symptomatic.symptoms,
-                    header: "CHECKIN_QUESTIONNAIRE_OVERLAY_HEADER".localized,
-                    detail: "CHECKIN_QUESTIONNAIRE_OVERLAY_DETAIL".localized
-                )
-            }
+            detail(for: symptomatic)
+            
+        case .exposedSymptomatic(let exposedSymptomatic):
+            detail(for: exposedSymptomatic)
 
         case .positiveTestResult(let positiveTestResult):
             diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
@@ -314,6 +302,25 @@ class StatusViewController: UIViewController, Storyboarded {
             feelUnwellButton.isHidden = true
             bookTestButton.isHidden = true
             nextStepsDetailView.isHidden = true
+        }
+    }
+    
+    func detail<T>(for state: T) where T: SymptomProvider & Checkinable {
+        diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
+        diagnosisTitleLabel.text = "Your symptoms indicate you may have coronavirus. Please isolate yourself and your household and book a test."
+        diagnosisDetailLabel.isHidden = false
+        diagnosisDetailLabel.text = detailWithExpiryDate(state.checkinDate)
+        feelUnwellButton.isHidden = true
+        bookTestButton.isHidden = false
+        stepsDetailLabel.isHidden = false
+        stepsDetailLabel.text = getHelpText()
+
+        if dateProvider() >= state.checkinDate {
+            presentCheckinDrawer(
+                for: state.symptoms,
+                header: "CHECKIN_QUESTIONNAIRE_OVERLAY_HEADER".localized,
+                detail: "CHECKIN_QUESTIONNAIRE_OVERLAY_DETAIL".localized
+            )
         }
     }
 

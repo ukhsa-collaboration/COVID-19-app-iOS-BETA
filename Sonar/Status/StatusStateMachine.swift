@@ -47,9 +47,11 @@ class StatusStateMachine: StatusStateMachining {
             switch newValue {
             case .symptomatic(let symptomatic):
                 add(notificationRequest: checkinNotificationRequest(at: symptomatic.checkinDate))
+            case .exposedSymptomatic(let exposedSymptomatic):
+                add(notificationRequest: checkinNotificationRequest(at: exposedSymptomatic.checkinDate))
             case .exposed:
                 add(notificationRequest: adviceChangedNotificationRequest)
-            default:
+            case .ok, .positiveTestResult:
                 break
             }
 
@@ -98,9 +100,27 @@ class StatusStateMachine: StatusStateMachining {
         }
 
         switch state {
-        case .ok, .exposed:
+        case .exposed(let exposed):
             try contactEventsUploader.upload(from: startDate, with: symptoms)
+            
+            let firstCheckin = StatusState.ExposedSymptomatic.firstCheckin(from: exposed.startDate)
+            let pastFirstCheckin = currentDate >= firstCheckin
+            let hasTemperature = symptoms.contains(.temperature)
 
+            guard !pastFirstCheckin || pastFirstCheckin && hasTemperature else {
+                // Don't change states if we're past the initial
+                // checkin date but don't have a temperature
+                drawerMailbox.post(.symptomsButNotSymptomatic)
+                return
+            }
+            
+            let checkinDate = pastFirstCheckin ? StatusState.ExposedSymptomatic.nextCheckin(from: currentDate) : firstCheckin
+            let exposedSymptomatic = StatusState.ExposedSymptomatic(symptoms: symptoms, startDate: exposed.startDate, checkinDate: checkinDate)
+            state = .exposedSymptomatic(exposedSymptomatic)
+            
+        case .ok:
+            try contactEventsUploader.upload(from: startDate, with: symptoms)
+            
             let firstCheckin = StatusState.Symptomatic.firstCheckin(from: startDate)
             let pastFirstCheckin = currentDate >= firstCheckin
             let hasTemperature = symptoms.contains(.temperature)
@@ -115,14 +135,15 @@ class StatusStateMachine: StatusStateMachining {
             let checkinDate = pastFirstCheckin ? StatusState.Symptomatic.nextCheckin(from: currentDate) : firstCheckin
             let symptomatic = StatusState.Symptomatic(symptoms: symptoms, startDate: startDate, checkinDate: checkinDate)
             state = .symptomatic(symptomatic)
-        case .symptomatic, .positiveTestResult:
+            
+        case .symptomatic, .positiveTestResult, .exposedSymptomatic:
             assertionFailure("Self-diagnosing is only allowed from ok/exposed")
         }
     }
     
     func tick() {
         switch state {
-        case .ok, .symptomatic:
+        case .ok, .symptomatic, .exposedSymptomatic:
             break // Don't need to do anything
         case .exposed(let exposed):
             guard currentDate >= exposed.expiryDate else { return }
@@ -145,22 +166,28 @@ class StatusStateMachine: StatusStateMachining {
         case .ok, .exposed, .positiveTestResult:
             assertionFailure("Checking in is only allowed from symptomatic")
             return
-        case .symptomatic(let symptomatic):
-            guard currentDate >= symptomatic.checkinDate else {
-                assertionFailure("Checking in is only allowed after the checkin date")
-                return
-            }
+        case .exposedSymptomatic(let state):
+            checkin(state: state, symptoms: symptoms)
+        case .symptomatic(let state):
+            checkin(state: state, symptoms: symptoms)
+        }
+    }
+    
+    func checkin<T>(state: T, symptoms: Symptoms) where T: Checkinable & SymptomProvider {
+        guard currentDate >= state.checkinDate else {
+            assertionFailure("Checking in is only allowed after the checkin date")
+            return
+        }
 
-            if symptoms.contains(.temperature) {
-                let checkinDate = StatusState.Symptomatic.nextCheckin(from: currentDate)
-                let nextCheckin = StatusState.Symptomatic(symptoms: symptoms, startDate: symptomatic.startDate, checkinDate: checkinDate)
-                state = .symptomatic(nextCheckin)
-            } else {
-                if !symptoms.isEmpty {
-                    drawerMailbox.post(.symptomsButNotSymptomatic)
-                }
-                state = .ok(StatusState.Ok())
+        if symptoms.contains(.temperature) {
+            let checkinDate = T.nextCheckin(from: currentDate)
+            let nextCheckin = StatusState.Symptomatic(symptoms: symptoms, startDate: state.startDate, checkinDate: checkinDate)
+            self.state = .symptomatic(nextCheckin)
+        } else {
+            if !symptoms.isEmpty {
+                drawerMailbox.post(.symptomsButNotSymptomatic)
             }
+            self.state = .ok(StatusState.Ok())
         }
     }
 
@@ -169,7 +196,8 @@ class StatusStateMachine: StatusStateMachining {
         case .ok:
             let exposed = StatusState.Exposed(startDate: currentDate)
             state = .exposed(exposed)
-        case .exposed:
+        case .exposed, .exposedSymptomatic:
+            #warning("Should the duration of the exposed state be reset? (14 days)")
             assertionFailure("The server should never send us another exposure notification if we're already exposed")
             break // ignore repeated exposures
         case .symptomatic, .positiveTestResult:
@@ -183,7 +211,7 @@ class StatusStateMachine: StatusStateMachining {
             add(notificationRequest: adviceChangedNotificationRequest)
             drawerMailbox.post(.unexposed)
             state = .ok(StatusState.Ok())
-        case .ok, .symptomatic, .positiveTestResult:
+        case .ok, .symptomatic, .positiveTestResult, .exposedSymptomatic:
             break // no-op
         }
     }
@@ -214,6 +242,10 @@ class StatusStateMachine: StatusStateMachining {
             let message = "Received positive test result, in a state where it is not expected"
             assertionFailure(message)
             self.logger.error("\(message)")
+        case .exposedSymptomatic(let exposedSymptomatic):
+            let startDate = min(exposedSymptomatic.startDate, testDate)
+            let positive = StatusState.PositiveTestResult(symptoms: exposedSymptomatic.symptoms, startDate: startDate)
+            state = .positiveTestResult(positive)
         }
 
         drawerMailbox.post(.positiveTestResult)
@@ -223,7 +255,7 @@ class StatusStateMachine: StatusStateMachining {
         var symptoms: Symptoms?
 
         switch state {
-        case .ok, .exposed:
+        case .ok, .exposed, .exposedSymptomatic:
             break
         case .symptomatic(let symptomatic):
             if testDate > symptomatic.startDate {

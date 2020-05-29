@@ -140,79 +140,51 @@ class StatusStateMachineTests: XCTestCase {
         XCTAssertEqual(drawerMailbox.receive(), .symptomsButNotSymptomatic)
     }
 
-    func testExposedToSymptomatic() throws {
+    func testExposedToExposedSymptomatic() throws {
+        // currentDate is the date of exposure
         currentDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 6, hour: 6))!
         persisting.statusState = .exposed(StatusState.Exposed(startDate: currentDate))
 
-        let startDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 1, hour: 6))!
-        try machine.selfDiagnose(symptoms: [.cough], startDate: startDate)
+        let selfDiagnosisDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 1, hour: 6))!
+        try machine.selfDiagnose(symptoms: [.cough], startDate: selfDiagnosisDate)
 
-        let checkinDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 8, hour: 7))!
-        XCTAssertEqual(machine.state, .symptomatic(StatusState.Symptomatic(
+        let checkinDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 20, hour: 7))!
+        XCTAssertEqual(machine.state, .exposedSymptomatic(StatusState.ExposedSymptomatic(
             symptoms: [.cough],
-            startDate: startDate,
+            startDate: currentDate,
             checkinDate: checkinDate
         )))
-        XCTAssertEqual(contactEventsUploader.uploadStartDate, startDate)
+        XCTAssertEqual(contactEventsUploader.uploadStartDate, selfDiagnosisDate)
 
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.identifier, "Diagnosis")
 
         XCTAssertNil(drawerMailbox.receive())
     }
-
-    func testExposedToSymptomaticAfterSevenDays() throws {
-        currentDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 8, hour: 8))!
-        persisting.statusState = .exposed(StatusState.Exposed(startDate: currentDate))
-
-        let startDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 1, hour: 6))!
-        try machine.selfDiagnose(symptoms: [.temperature], startDate: startDate)
-
-        let checkinDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 9, hour: 7))!
+    
+    func testExposedSymptomaticToSymptomaticAfterFourteenDays() {
+        currentDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 20, hour: 6))!
+        let exposureStartDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 6, hour: 6))!
+        
+        persisting.statusState = .exposedSymptomatic(StatusState.ExposedSymptomatic(symptoms: nil, startDate: exposureStartDate, checkinDate: currentDate))
+        machine.checkin(symptoms: [.temperature])
+        
+        let newCheckinDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 21, hour: 7))!
         XCTAssertEqual(machine.state, .symptomatic(StatusState.Symptomatic(
             symptoms: [.temperature],
-            startDate: startDate,
-            checkinDate: checkinDate
+            startDate: exposureStartDate,
+            checkinDate: newCheckinDate
         )))
-
-        XCTAssertEqual(contactEventsUploader.uploadStartDate, startDate)
-
-        let request = try XCTUnwrap(userNotificationCenter.requests.first)
-        XCTAssertEqual(request.identifier, "Diagnosis")
-
-        XCTAssertNil(drawerMailbox.receive())
     }
-
-    func testExposedToCoughAfterSevenDaysIsExposed() throws {
-        currentDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 8, hour: 8))!
-        persisting.statusState = .exposed(StatusState.Exposed(startDate: currentDate))
-
-        let startDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 1, hour: 6))!
-        try machine.selfDiagnose(symptoms: [.cough], startDate: startDate)
-
-        XCTAssertEqual(machine.state, .exposed(StatusState.Exposed(startDate: currentDate)))
-
-        XCTAssertEqual(contactEventsUploader.uploadStartDate, startDate)
-
-        XCTAssertNil(userNotificationCenter.requests.first)
-
-        XCTAssertEqual(drawerMailbox.receive(), .symptomsButNotSymptomatic)
-    }
-
-    func testExposedToAnosmiaAfterSevenDaysIsExposed() throws {
-        currentDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 8, hour: 8))!
-        persisting.statusState = .exposed(StatusState.Exposed(startDate: currentDate))
-
-        let startDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 1, hour: 6))!
-        try machine.selfDiagnose(symptoms: [.anosmia], startDate: startDate)
-
-        XCTAssertEqual(machine.state, .exposed(StatusState.Exposed(startDate: currentDate)))
-
-        XCTAssertEqual(contactEventsUploader.uploadStartDate, startDate)
-
-        XCTAssertNil(userNotificationCenter.requests.first)
-
-        XCTAssertEqual(drawerMailbox.receive(), .symptomsButNotSymptomatic)
+    
+    func testExposedSymptomaticToOkAfterFourteenDays() {
+        currentDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 20, hour: 6))!
+        let exposureStartDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 6, hour: 6))!
+        
+        persisting.statusState = .exposedSymptomatic(StatusState.ExposedSymptomatic(symptoms: nil, startDate: exposureStartDate, checkinDate: currentDate))
+        machine.checkin(symptoms: [.cough])
+        
+        XCTAssertEqual(machine.state, .ok(StatusState.Ok()))
     }
 
     func testTickWhenExposedBeforeSeven() {
