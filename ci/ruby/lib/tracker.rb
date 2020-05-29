@@ -27,7 +27,7 @@ class Tracker
   def deliver(project_id, story_id)
     uri = URI("#{BASE_URL}/projects/#{project_id}/stories/#{story_id}")
     body = JSON.dump({ current_state: :delivered })
-    Net::HTTP.post(uri, body, headers({ 'Content-Type' => 'application/json' }))
+    Net::HTTP.put(uri, body, headers({ 'Content-Type' => 'application/json' }))
   end
 
   def story(id)
