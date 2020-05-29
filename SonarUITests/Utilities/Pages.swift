@@ -190,10 +190,6 @@ class SymptomsSummaryPage : Page {
 }
 
 class SymptomsSubmitPage : Page {
-    var title: XCUIElement {
-        app.staticTexts["Add my symptoms"]
-    }
-    
     var accurateConfirmationToggle: XCUIElement {
         app.switches["Please toggle the switch to confirm the information you entered is accurate"]
     }
