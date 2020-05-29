@@ -85,7 +85,7 @@ class ExposureTests: ScreenTestCase {
         summaryPage.continueButton.tap()
         
         let submitSymptomsPage = SymptomsSubmitPage(app)
-        XCTAssertTrue(submitSymptomsPage.title.exists)
+        XCTAssertTrue(submitSymptomsPage.accurateConfirmationToggle.exists)
         submitSymptomsPage.accurateConfirmationToggle.tap()
         submitSymptomsPage.submitButton.tap()
         
