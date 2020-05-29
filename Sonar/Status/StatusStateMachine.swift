@@ -255,8 +255,10 @@ class StatusStateMachine: StatusStateMachining {
         var symptoms: Symptoms?
 
         switch state {
-        case .ok, .exposed, .exposedSymptomatic:
+        case .ok, .exposed:
             break
+        case .exposedSymptomatic(let exposedSymptomatic):
+            state = .exposed(StatusState.Exposed(startDate: exposedSymptomatic.startDate))
         case .symptomatic(let symptomatic):
             if testDate > symptomatic.startDate {
                 symptoms = symptomatic.symptoms

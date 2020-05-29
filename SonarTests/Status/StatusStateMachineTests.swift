@@ -542,6 +542,28 @@ class StatusStateMachineTests: XCTestCase {
         XCTAssertEqual(drawerMailbox.receive(), .negativeTestResult(symptoms: nil))
     }
 
+    func testReceivedNegativeTestResultWhenExposedSymptomatic() throws {
+        let exposedDate: Date = currentDate
+        persisting.statusState = .exposedSymptomatic(StatusState.ExposedSymptomatic(
+            symptoms: nil, startDate: exposedDate, checkinDate: Date()
+        ))
+
+        let testTimestamp = Calendar.current.date(from: DateComponents(month: 5, day: 10))!
+        let testResult = TestResult(
+            result: .negative,
+            testTimestamp: testTimestamp,
+            type: nil,
+            acknowledgementUrl: nil
+        )
+
+        machine.received(testResult)
+        XCTAssertEqual(machine.state, .exposed(StatusState.Exposed(startDate: exposedDate)))
+
+        let request = try XCTUnwrap(userNotificationCenter.requests.first)
+        XCTAssertEqual(request.content.title, "TEST_RESULT_TITLE".localized)
+        XCTAssertEqual(drawerMailbox.receive(), .negativeTestResult(symptoms: nil))
+    }
+
     func testReceivedNegativeTestResultWhenExposedBefore() throws {
         let exposedDate = Calendar.current.date(from: DateComponents(month: 5, day: 10))!
         let testDate = Calendar.current.date(from: DateComponents(month: 5, day: 11))!
