@@ -16,7 +16,7 @@ protocol StatusStateMachining {
     func selfDiagnose(symptoms: Symptoms, startDate: Date) throws
     func tick()
     func checkin(symptoms: Symptoms)
-    func exposed()
+    func exposed(on date: Date?)
     func unexposed()
     func received(_ testResult: TestResult)
 }
@@ -191,10 +191,10 @@ class StatusStateMachine: StatusStateMachining {
         }
     }
 
-    func exposed() {
+    func exposed(on date: Date?) {
         switch state {
         case .ok:
-            let exposed = StatusState.Exposed(startDate: currentDate)
+            let exposed = StatusState.Exposed(startDate: date ?? currentDate)
             state = .exposed(exposed)
         case .exposed, .exposedSymptomatic:
             #warning("Should the duration of the exposed state be reset? (14 days)")

@@ -12,13 +12,15 @@ class StatusStateMachiningDouble: StatusStateMachining {
 
     var state: StatusState
 
-    init(state: StatusState) {
+    init(state: StatusState = .ok(StatusState.Ok())) {
         self.state = state
     }
 
     var exposedCalled = false
-    func exposed() {
+    var exposedDate: Date?
+    func exposed(on date: Date?) {
         exposedCalled = true
+        exposedDate = date
     }
 
     var selfDiagnosisCalled: (symptoms: Symptoms, startDate: Date)?

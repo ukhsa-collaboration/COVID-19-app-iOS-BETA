@@ -1,5 +1,5 @@
 //
-//  StateNotificationHandlerTests.swift
+//  ExposedNotificationHandlerTests.swift
 //  SonarTests
 //
 //  Created by NHSX on 4/28/20.
@@ -9,13 +9,15 @@
 import XCTest
 @testable import Sonar
 
-class StateNotificationHandlerTests: XCTestCase {
+class ExposedNotificationHandlerTests: XCTestCase {
 
     var exposureNotificationHandler: ExposedNotificationHandler!
     var statusStateMachine: StatusStateMachiningDouble!
 
+    let dateFormatter = ISO8601DateFormatter()
+
     override func setUp() {
-        statusStateMachine = StatusStateMachiningDouble(state: .ok(StatusState.Ok()))
+        statusStateMachine = StatusStateMachiningDouble()
         exposureNotificationHandler = ExposedNotificationHandler(statusStateMachine: statusStateMachine)
     }
 
@@ -33,16 +35,29 @@ class StateNotificationHandlerTests: XCTestCase {
         exposureNotificationHandler.handle(userInfo: ["status": "foo"]) { fetchResult = $0 }
         XCTAssertEqual(fetchResult, .noData)
 
-        XCTAssertFalse(statusStateMachine.exposedCalled)
+        XCTAssertNil(statusStateMachine.exposedDate)
     }
 
     func testPotentialStatus() {
         var fetchResult: UIBackgroundFetchResult?
 
-        exposureNotificationHandler.handle(userInfo: ["status": "Potential"]) { fetchResult = $0 }
+        let exposedDate = "2020-01-01T00:00:00Z"
+        let userInfo = ["status": "Potential", "mostRecentProximityEventDate": exposedDate]
+        exposureNotificationHandler.handle(userInfo: userInfo) { fetchResult = $0 }
 
-        XCTAssertTrue(statusStateMachine.exposedCalled)
-
+        XCTAssertEqual(statusStateMachine.exposedDate, dateFormatter.date(from: exposedDate))
         XCTAssertEqual(fetchResult, .newData)
     }
+
+    func testPotentialStatusBackCompat() {
+        var fetchResult: UIBackgroundFetchResult?
+
+        let userInfo = ["status": "Potential"]
+        exposureNotificationHandler.handle(userInfo: userInfo) { fetchResult = $0 }
+
+        XCTAssertTrue(statusStateMachine.exposedCalled)
+        XCTAssertEqual(statusStateMachine.exposedDate, nil)
+        XCTAssertEqual(fetchResult, .newData)
+    }
+
 }

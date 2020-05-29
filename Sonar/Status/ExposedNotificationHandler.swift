@@ -12,8 +12,8 @@ import Logging
 
 fileprivate struct Exposed: Codable {
     let status: Status
-    let type: String?
     let acknowledgementUrl: String?
+    let mostRecentProximityEventDate: String?
 }
 
 extension Exposed {
@@ -27,6 +27,7 @@ class ExposedNotificationHandler {
     struct UserInfoDecodingError: Error {}
     
     let logger = Logger(label: "StatusNotificationHandler")
+    let dateFormatter = ISO8601DateFormatter()
 
     let statusStateMachine: StatusStateMachining
 
@@ -38,8 +39,11 @@ class ExposedNotificationHandler {
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: userInfo, options: .prettyPrinted)
             
-            if let _ = try? JSONDecoder().decode(Exposed.self, from: jsonData) {
-                statusStateMachine.exposed()
+            if
+                let exposed = try? JSONDecoder().decode(Exposed.self, from: jsonData)
+            {
+                let exposedDate = exposed.mostRecentProximityEventDate.flatMap({ dateFormatter.date(from: $0) })
+                statusStateMachine.exposed(on: exposedDate)
             } else {
                 throw UserInfoDecodingError()
             }
