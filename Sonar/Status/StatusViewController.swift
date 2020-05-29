@@ -275,7 +275,6 @@ class StatusViewController: UIViewController, Storyboarded {
             diagnosisDetailLabel.isHidden = true
             feelUnwellButton.isHidden = false
             bookTestButton.isHidden = true
-            stepsDetailLabel.isHidden = false
             stepsDetailLabel.text = getHelpText(detail: "STATUS_GET_HELP_OK".localized)
 
         case .exposed:
@@ -285,7 +284,6 @@ class StatusViewController: UIViewController, Storyboarded {
             diagnosisDetailLabel.isHidden = false
             feelUnwellButton.isHidden = false
             bookTestButton.isHidden = true
-            stepsDetailLabel.isHidden = false
             stepsDetailLabel.text = getHelpText(detail: "STATUS_GET_HELP_EXPOSED".localized)
 
         case .symptomatic(let symptomatic):
@@ -301,7 +299,6 @@ class StatusViewController: UIViewController, Storyboarded {
             diagnosisDetailLabel.text = detailWithExpiryDate(positiveTestResult.expiryDate)
             feelUnwellButton.isHidden = true
             bookTestButton.isHidden = true
-            nextStepsDetailView.isHidden = true
         }
     }
     
@@ -312,7 +309,6 @@ class StatusViewController: UIViewController, Storyboarded {
         diagnosisDetailLabel.text = detailWithExpiryDate(state.checkinDate)
         feelUnwellButton.isHidden = true
         bookTestButton.isHidden = false
-        stepsDetailLabel.isHidden = false
         stepsDetailLabel.text = getHelpText()
 
         if dateProvider() >= state.checkinDate {
