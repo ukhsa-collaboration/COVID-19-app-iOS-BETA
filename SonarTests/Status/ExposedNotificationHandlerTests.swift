@@ -13,12 +13,17 @@ class ExposedNotificationHandlerTests: XCTestCase {
 
     var exposureNotificationHandler: ExposedNotificationHandler!
     var statusStateMachine: StatusStateMachiningDouble!
+    var currentDate: Date!
 
     let dateFormatter = ISO8601DateFormatter()
 
     override func setUp() {
+        currentDate = Date()
         statusStateMachine = StatusStateMachiningDouble()
-        exposureNotificationHandler = ExposedNotificationHandler(statusStateMachine: statusStateMachine)
+        exposureNotificationHandler = ExposedNotificationHandler(
+            statusStateMachine: statusStateMachine,
+            dateProvider: { self.currentDate }
+        )
     }
 
     func testNotPotential() {
@@ -50,13 +55,14 @@ class ExposedNotificationHandlerTests: XCTestCase {
     }
 
     func testPotentialStatusBackCompat() {
+        currentDate = Date()
+
         var fetchResult: UIBackgroundFetchResult?
 
         let userInfo = ["status": "Potential"]
         exposureNotificationHandler.handle(userInfo: userInfo) { fetchResult = $0 }
 
-        XCTAssertTrue(statusStateMachine.exposedCalled)
-        XCTAssertEqual(statusStateMachine.exposedDate, nil)
+        XCTAssertEqual(statusStateMachine.exposedDate, currentDate)
         XCTAssertEqual(fetchResult, .newData)
     }
 

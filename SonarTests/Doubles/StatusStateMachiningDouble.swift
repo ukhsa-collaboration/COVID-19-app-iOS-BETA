@@ -16,10 +16,8 @@ class StatusStateMachiningDouble: StatusStateMachining {
         self.state = state
     }
 
-    var exposedCalled = false
     var exposedDate: Date?
-    func exposed(on date: Date?) {
-        exposedCalled = true
+    func exposed(on date: Date) {
         exposedDate = date
     }
 
