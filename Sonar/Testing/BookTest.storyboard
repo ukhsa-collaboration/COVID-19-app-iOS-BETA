@@ -72,14 +72,14 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xXc-X4-l7i">
-                                                <rect key="frame" x="16" y="381" width="382" height="64.5"/>
-                                                <string key="text">In order for this app to receive your test result, please write down this 8 digit app reference code as you will be asked for it later.</string>
+                                                <rect key="frame" x="16" y="381" width="382" height="86.5"/>
+                                                <string key="text">In order for this app to receive your test result, please write down or copy into the clipboard this 8-digit app reference code as you will be asked for it later.</string>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                 <color key="textColor" name="NHS Text"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <containerView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="382" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="DK8-cn-uDB" userLabel="Linking ID view">
-                                                <rect key="frame" x="16" y="461.5" width="382" height="274.5"/>
+                                                <rect key="frame" x="16" y="483.5" width="382" height="252.5"/>
                                                 <connections>
                                                     <segue destination="z30-wj-buI" kind="embed" id="CA5-fu-JcA"/>
                                                 </connections>

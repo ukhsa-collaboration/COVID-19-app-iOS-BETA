@@ -48,7 +48,7 @@ class TestResultNotificationHandler {
         scheduler.scheduleLocalNotification(
             title: nil,
             body:
-            "Your test result has arrived. Please open the app to learn what to do next. You have been sent an email with more information",
+            "Your test result has arrived. Please open the app to learn what to do next. You have been sent an email or text with more information",
             interval: 10,
             identifier: "testResult.arrived",
             repeats: false
