@@ -35,13 +35,13 @@ Your response to this question helps us decide whether you need to book a corona
 "COUGH_YES" = "Yes, I have a new continuous cough";
 "COUGH_NO" = "No, I do not have a new continuous cough";
 
-"ANOSMIA_QUESTION" = "Have you had a loss or change to your sense of smell or taste?";
+"ANOSMIA_QUESTION" = "Have you had a new loss or change to your sense of smell or taste?";
 "ANOSMIA_CHECKIN_QUESTION" = "Do you still have a loss or change to your sense of smell or taste?";
 "ANOSMIA_DETAIL" = "This means you have noticed you cannot smell or taste anything, or things smell or taste different to normal.
 
 Your response to this question helps us decide whether you need to book a coronavirus test.";
 "ANOSMIA_YES" = "Yes, I have a loss or change to my sense of smell or taste";
-"ANOSMIA_NO" = "No, I don’t have a loss or change to my sense of smell or taste";
+"ANOSMIA_NO" = "No, I do not have a loss or change to my sense of smell or taste";
 "ANOSMIA_ERROR" = "Select yes if you recently lost your sense of smell or taste";
 
 "SNEEZE_QUESTION" = "Do you have a runny nose, feel feverish or suffer from sneezing?";
@@ -103,6 +103,8 @@ Your response to this question helps the NHS better understand coronavirus.";
 "NOTIFICATIONS_DISABLED_ALERT_TITLE" = "Notifications disabled";
 "NOTIFICATIONS_DISABLED_ALERT_MESSAGE" = "You can enable notifications by going to the Settings app and searching for NHS COVID-19";
 "NOTIFICATIONS_DISABLED_ALERT_OK" = "Ok";
+
+"TEST_UPDATE_NOTIFICATION" = "Your test result has arrived. Please open the app to learn what to do next. You have been sent an email or text with more information.";
 
 "TEST_UPDATE_DRAW_POSITIVE_HEADER" = "Your test result indicates that you have coronavirus";
 "TEST_UPDATE_DRAW_POSITIVE_DETAIL" = "Thank you for getting tested. Your advice has been updated. You have been sent an email or text with more information.";

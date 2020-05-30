@@ -107,7 +107,7 @@ class SymptomsCoughPage : Page {
 
 class SymptomsAnosmiaPage : Page {
     var title: XCUIElement {
-        app.staticTexts["Have you had a loss or change to your sense of smell or taste?"]
+        app.staticTexts["Have you had a new loss or change to your sense of smell or taste?"]
     }
     
     var anosmiaOption: XCUIElement {
@@ -115,7 +115,7 @@ class SymptomsAnosmiaPage : Page {
     }
     
     var noAnosmiaOption: XCUIElement {
-        app.buttons["No, I don’t have a loss or change to my sense of smell or taste"]
+        app.buttons["No, I do not have a loss or change to my sense of smell or taste"]
     }
     
     var continueButton: XCUIElement {
@@ -259,7 +259,7 @@ class CheckinAnosmiaPage: Page {
     }
     
     var noSymptomsOption: XCUIElement {
-        app.buttons["No, I don’t have a loss or change to my sense of smell or taste"]
+        app.buttons["No, I do not have a loss or change to my sense of smell or taste"]
     }
     
     var continueButton: XCUIElement {
