@@ -371,7 +371,7 @@ class StatusViewController: UIViewController, Storyboarded {
     }
 
     private func detailWithExpiryDate(_ expiryDate: Date) -> String {
-        let detailFmt = "On %@ this app will notify you to update your symptoms. Please read your full advice below.".localized
+        let detailFmt = "Please isolate until %@ when this app will notify you to update your symptoms. Please read your full advice below.".localized
         return String(format: detailFmt, localizedDate(expiryDate, "MMMMd"))
     }
 

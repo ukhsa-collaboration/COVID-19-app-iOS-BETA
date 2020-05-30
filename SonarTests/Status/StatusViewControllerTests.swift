@@ -90,7 +90,7 @@ class StatusViewControllerTests: TestCase {
         
         XCTAssertEqual(vc.diagnosisTitleLabel.text, "Your symptoms indicate you may have coronavirus. Please isolate yourself and your household and book a test.")
         XCTAssertFalse(vc.diagnosisDetailLabel.isHidden)
-        XCTAssertEqual(vc.diagnosisDetailLabel.text, "On 14 May this app will notify you to update your symptoms. Please read your full advice below.")
+        XCTAssertEqual(vc.diagnosisDetailLabel.text, "Please isolate until 14 May when this app will notify you to update your symptoms. Please read your full advice below.")
     }
 
     func testShowsCorrectAdviceInOkStatus() throws {

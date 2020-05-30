@@ -105,13 +105,13 @@ Your response to this question helps the NHS better understand coronavirus.";
 "NOTIFICATIONS_DISABLED_ALERT_OK" = "Ok";
 
 "TEST_UPDATE_DRAW_POSITIVE_HEADER" = "Your test result indicates that you have coronavirus";
-"TEST_UPDATE_DRAW_POSITIVE_DETAIL" = "Thank you for getting tested. Your advice has been updated. You have been sent an email with more information.";
+"TEST_UPDATE_DRAW_POSITIVE_DETAIL" = "Thank you for getting tested. Your advice has been updated. You have been sent an email or text with more information.";
 
 "TEST_UPDATE_DRAW_INVALID_HEADER" = "Your test result was unclear";
-"TEST_UPDATE_DRAW_INVALID_DETAIL" = "Thank you for getting tested. However, due to the unclear test result your advice has not been changed. Please book another test. You have been sent an email with more information.";
+"TEST_UPDATE_DRAW_INVALID_DETAIL" = "Thank you for getting tested. However, due to the unclear test result your advice has not been changed. Please book another test. You have been sent an email or text with more information.";
 
 "TEST_UPDATE_DRAW_NEGATIVE_HEADER" = "Your test result indicates that you don’t have coronavirus";
-"TEST_UPDATE_DRAW_NEGATIVE_DETAIL" = "Thank you for getting tested. You have been sent an email with more information.
+"TEST_UPDATE_DRAW_NEGATIVE_DETAIL" = "Thank you for getting tested. You have been sent an email or text with more information.
 
 Please update your symptoms to view your latest advice.";
 
@@ -125,7 +125,7 @@ Please update your symptoms to view your latest advice.";
 "CHECKIN_QUESTIONNAIRE_OVERLAY_DETAIL" = "Please update your symptoms to view your latest advice.";
 
 "NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_HEADER" = "Your test result indicates that you don’t have coronavirus";
-"NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_DETAIL" = "Thank you for getting tested. You have been sent an email with more information.
+"NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_DETAIL" = "Thank you for getting tested. You have been sent an email or text with more information.
 
 Please update your symptoms to view your latest advice";
 
