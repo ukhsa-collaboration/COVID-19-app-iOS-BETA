@@ -9,7 +9,7 @@
 import XCTest
 @testable import Sonar
 
-class CheckinCoordinatorTests: XCTestCase {
+class QuestionnaireCoordinatorTests: XCTestCase {
     
     var coordinator: QuestionnaireCoordinator!
     

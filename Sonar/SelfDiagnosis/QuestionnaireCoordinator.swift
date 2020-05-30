@@ -8,15 +8,11 @@
 
 import UIKit
 
-protocol Coordinator {
-    func start()
-}
-
-class QuestionnaireCoordinator: Coordinator {
-    let navigationController: UINavigationController
-    let statusStateMachine: StatusStateMachining
-    let completion: (Symptoms) -> Void
-    let questionnaireType: QuestionnaireType
+class QuestionnaireCoordinator {
+    private let navigationController: UINavigationController
+    private let statusStateMachine: StatusStateMachining
+    private let completion: (Symptoms) -> Void
+    private let questionnaireType: QuestionnaireType
     
     enum QuestionnaireType {
         case selfDiagnosis
