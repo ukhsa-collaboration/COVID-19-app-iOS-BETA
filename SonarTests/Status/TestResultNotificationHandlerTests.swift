@@ -74,7 +74,7 @@ class TestResultNotificationHandlerTests: XCTestCase {
     ) throws {
         let notification = try XCTUnwrap(userNotificationCenter.requests.first, file: file, line: line)
         XCTAssertEqual(notification.identifier, "testResult.arrived", file: file, line: line)
-        XCTAssertEqual(notification.content.body, "Your test result has arrived. Please open the app to learn what to do next. You have been sent an email or text with more information", file: file, line: line)
+        XCTAssertEqual(notification.content.body, "Your test result has arrived. Please open the app to learn what to do next. You have been sent an email or text with more information.", file: file, line: line)
         let trigger = try XCTUnwrap(notification.trigger as? UNTimeIntervalNotificationTrigger, file: file, line: line)
         XCTAssertEqual(trigger.timeInterval, 10, file: file, line: line)
         XCTAssertFalse(trigger.repeats, file: file, line: line)

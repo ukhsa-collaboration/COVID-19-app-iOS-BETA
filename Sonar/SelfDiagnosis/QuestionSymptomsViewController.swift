@@ -14,6 +14,7 @@ class QuestionSymptomsViewController: UIViewController, Storyboarded {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var pageLabel: UILabel!
     @IBOutlet weak var detailLabel: UILabel!
+    @IBOutlet weak var contextLabel: UILabel!
     @IBOutlet weak var errorView: ErrorView!
     @IBOutlet weak var yesButton: AnswerButton!
     @IBOutlet weak var noButton: AnswerButton!
@@ -27,6 +28,7 @@ class QuestionSymptomsViewController: UIViewController, Storyboarded {
     var pageCount: Int!
     var questionTitle: String!
     var questionDetail: String!
+    var questionContext: String?
     var questionError: String!
     var questionYes: String!
     var questionNo: String!
@@ -37,6 +39,7 @@ class QuestionSymptomsViewController: UIViewController, Storyboarded {
         pageCount: Int,
         questionTitle: String,
         questionDetail: String,
+        questionContext: String?,
         questionError: String,
         questionYes: String,
         questionNo: String,
@@ -47,6 +50,7 @@ class QuestionSymptomsViewController: UIViewController, Storyboarded {
         self.pageCount = pageCount
         self.questionTitle = questionTitle
         self.questionDetail = questionDetail
+        self.questionContext = questionContext
         self.questionError = questionError
         self.questionYes = questionYes
         self.questionNo = questionNo
@@ -60,6 +64,9 @@ class QuestionSymptomsViewController: UIViewController, Storyboarded {
         titleLabel.text = questionTitle
         detailLabel.text = questionDetail
         detailLabel.textColor = UIColor(named: "NHS Secondary Text")
+        contextLabel.text = questionContext
+        contextLabel.isHidden = questionContext == nil
+        contextLabel.textColor = UIColor(named: "NHS Secondary Text")
         errorView.isHidden = true
         errorView.errorMessage.text = questionError
         yesButton.text = questionYes

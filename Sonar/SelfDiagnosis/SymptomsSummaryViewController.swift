@@ -45,7 +45,7 @@ class SymptomsSummaryViewController: UIViewController, Storyboarded {
     @IBOutlet weak var checkAnswersStackView: UIStackView!
     
     var startDateViewController: StartDateViewController!
-    private var startDate: Date?
+    var startDate: Date?
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.destination {

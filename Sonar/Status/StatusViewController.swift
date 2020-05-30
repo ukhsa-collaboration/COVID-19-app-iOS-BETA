@@ -280,33 +280,33 @@ class StatusViewController: UIViewController, Storyboarded {
         case .exposed(let exposed):
             diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
             diagnosisTitleLabel.text = "You have been near someone who has tested positive for coronavirus. Please self-isolate."
-            diagnosisDetailLabel.text = "Please follow the advice below until \(localizedDate(exposed.expiryDate, "MMMMd"))"
+            diagnosisDetailLabel.text = "Please isolate until \(localizedDate(exposed.expiryDate)). Please read your full advice below."
             diagnosisDetailLabel.isHidden = false
             feelUnwellButton.isHidden = false
             bookTestButton.isHidden = true
             stepsDetailLabel.text = getHelpText(detail: "STATUS_GET_HELP_EXPOSED".localized)
 
         case .symptomatic(let symptomatic):
-            detail(for: symptomatic)
+            setupDetail(for: symptomatic)
             
         case .exposedSymptomatic(let exposedSymptomatic):
-            detail(for: exposedSymptomatic)
+            setupDetail(for: exposedSymptomatic)
 
         case .positiveTestResult(let positiveTestResult):
             diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
             diagnosisTitleLabel.text = "Your test result indicates you have coronavirus. Please isolate yourself and your household."
             diagnosisDetailLabel.isHidden = false
-            diagnosisDetailLabel.text = detailWithExpiryDate(positiveTestResult.expiryDate)
+            diagnosisDetailLabel.text = pleaseIsolateText(until: positiveTestResult.expiryDate)
             feelUnwellButton.isHidden = true
             bookTestButton.isHidden = true
         }
     }
     
-    func detail<T>(for state: T) where T: SymptomProvider & Checkinable {
+    func setupDetail<T>(for state: T) where T: SymptomProvider & Checkinable {
         diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
         diagnosisTitleLabel.text = "Your symptoms indicate you may have coronavirus. Please isolate yourself and your household and book a test."
         diagnosisDetailLabel.isHidden = false
-        diagnosisDetailLabel.text = detailWithExpiryDate(state.checkinDate)
+        diagnosisDetailLabel.text = pleaseIsolateText(until: state.checkinDate)
         feelUnwellButton.isHidden = true
         bookTestButton.isHidden = false
         stepsDetailLabel.text = getHelpText()
@@ -370,12 +370,12 @@ class StatusViewController: UIViewController, Storyboarded {
         )
     }
 
-    private func detailWithExpiryDate(_ expiryDate: Date) -> String {
+    private func pleaseIsolateText(until expiryDate: Date) -> String {
         let detailFmt = "Please isolate until %@ when this app will notify you to update your symptoms. Please read your full advice below.".localized
-        return String(format: detailFmt, localizedDate(expiryDate, "MMMMd"))
+        return String(format: detailFmt, localizedDate(expiryDate))
     }
 
-    private func localizedDate(_ date: Date, _ template: String) -> String {
+    private func localizedDate(_ date: Date, _ template: String = "MMMMd") -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = localeProvider.locale
         dateFormatter.setLocalizedDateFormatFromTemplate(template)

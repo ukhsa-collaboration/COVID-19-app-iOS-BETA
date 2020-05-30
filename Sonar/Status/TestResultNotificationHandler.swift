@@ -47,8 +47,7 @@ class TestResultNotificationHandler {
         let scheduler = HumbleLocalNotificationScheduler(userNotificationCenter: userNotificationCenter)
         scheduler.scheduleLocalNotification(
             title: nil,
-            body:
-            "Your test result has arrived. Please open the app to learn what to do next. You have been sent an email or text with more information",
+            body: "TEST_UPDATE_NOTIFICATION".localized,
             interval: 10,
             identifier: "testResult.arrived",
             repeats: false

@@ -107,7 +107,7 @@ class SymptomsCoughPage : Page {
 
 class SymptomsAnosmiaPage : Page {
     var title: XCUIElement {
-        app.staticTexts["Have you had a loss or change to your sense of smell or taste?"]
+        app.staticTexts["Have you had a new loss or change to your sense of smell or taste?"]
     }
     
     var anosmiaOption: XCUIElement {
@@ -115,7 +115,7 @@ class SymptomsAnosmiaPage : Page {
     }
     
     var noAnosmiaOption: XCUIElement {
-        app.buttons["No, I don’t have a loss or change to my sense of smell or taste"]
+        app.buttons["No, I do not have a loss or change to my sense of smell or taste"]
     }
     
     var continueButton: XCUIElement {
@@ -143,7 +143,7 @@ class SymptomsSneezePage : Page {
 
 class SymptomsNauseaPage : Page {
     var title: XCUIElement {
-        app.staticTexts["Do you have diarrhoea, nausea, vomiting or a loss of appetite?"]
+        app.staticTexts["Do you have diarrhoea, nausea, vomiting or have a loss of appetite?"]
     }
     
     var haveSymptomsOption: XCUIElement {
@@ -211,7 +211,7 @@ class CheckinQuestionnairePopup : Page {
 
 class CheckinTemperaturePage : Page {
     var title: XCUIElement {
-        app.staticTexts["Do you still have a high temperature?"]
+        app.staticTexts["Do you have a high temperature (fever)?"]
     }
     
     var cancelButton: XCUIElement {
@@ -233,15 +233,15 @@ class CheckinTemperaturePage : Page {
 
 class CheckinCoughPage : Page {
     var title: XCUIElement {
-        app.staticTexts["Do you still have a continuous cough?"]
+        app.staticTexts["Do you have a continuous cough?"]
     }
     
     var coughOption: XCUIElement {
-        app.buttons["Yes, I have a new continuous cough"]
+        app.buttons["Yes, I have a continuous cough"]
     }
     
     var noCoughOption: XCUIElement {
-        app.buttons["No, I do not have a new continuous cough"]
+        app.buttons["No, I do not have a continuous cough"]
     }
     
     var continueButton: XCUIElement {
@@ -251,7 +251,7 @@ class CheckinCoughPage : Page {
 
 class CheckinAnosmiaPage: Page {
     var title: XCUIElement {
-        app.staticTexts["Do you still have a loss or change to your sense of smell or taste?"]
+        app.staticTexts["Have you had a loss or change to your sense of smell or taste?"]
     }
     
     var haveSymptomsOption: XCUIElement {
@@ -259,7 +259,7 @@ class CheckinAnosmiaPage: Page {
     }
     
     var noSymptomsOption: XCUIElement {
-        app.buttons["No, I don’t have a loss or change to my sense of smell or taste"]
+        app.buttons["No, I do not have a loss or change to my sense of smell or taste"]
     }
     
     var continueButton: XCUIElement {
@@ -269,7 +269,7 @@ class CheckinAnosmiaPage: Page {
 
 class CheckinSneezePage: Page {
     var title: XCUIElement {
-        app.staticTexts["Do you still have a runny nose, feel feverish or suffer from sneezing?"]
+        app.staticTexts["Do you have a runny nose, feel feverish or suffer from sneezing?"]
     }
     
     var haveSymptomsOption: XCUIElement {
@@ -287,7 +287,7 @@ class CheckinSneezePage: Page {
 
 class CheckinNauseaPage: Page {
     var title: XCUIElement {
-        app.staticTexts["Do you still have diarrhoea, nausea, vomiting or a loss of appetite?"]
+        app.staticTexts["Do you have diarrhoea, nausea, vomiting or have a loss of appetite?"]
     }
     
     var haveSymptomsOption: XCUIElement {

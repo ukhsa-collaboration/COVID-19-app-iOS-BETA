@@ -235,7 +235,7 @@
 		F652F72C244A74E900D97950 /* StartDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652F72B244A74E900D97950 /* StartDateViewController.swift */; };
 		F652F72E244E472E00D97950 /* CheckinDrawerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652F72D244E472E00D97950 /* CheckinDrawerViewController.swift */; };
 		F652F730244E4AAD00D97950 /* DrawerPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652F72F244E4AAD00D97950 /* DrawerPresentation.swift */; };
-		F6548FA32460C1C7005F06FF /* CheckinCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6548FA22460C1C7005F06FF /* CheckinCoordinatorTests.swift */; };
+		F6548FA32460C1C7005F06FF /* QuestionnaireCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6548FA22460C1C7005F06FF /* QuestionnaireCoordinatorTests.swift */; };
 		F6548FA52460DB95005F06FF /* SpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6548FA42460DB95005F06FF /* SpinnerView.swift */; };
 		F673FBB42457A89E00D96C50 /* SymptomsSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F673FBB32457A89E00D96C50 /* SymptomsSummaryViewController.swift */; };
 		F67A2291242AA35C002254B6 /* SecureRegistrationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A2290242AA35B002254B6 /* SecureRegistrationStorage.swift */; };
@@ -586,7 +586,7 @@
 		F652F72B244A74E900D97950 /* StartDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDateViewController.swift; sourceTree = "<group>"; };
 		F652F72D244E472E00D97950 /* CheckinDrawerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinDrawerViewController.swift; sourceTree = "<group>"; };
 		F652F72F244E4AAD00D97950 /* DrawerPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerPresentation.swift; sourceTree = "<group>"; };
-		F6548FA22460C1C7005F06FF /* CheckinCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinCoordinatorTests.swift; sourceTree = "<group>"; };
+		F6548FA22460C1C7005F06FF /* QuestionnaireCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireCoordinatorTests.swift; sourceTree = "<group>"; };
 		F6548FA42460DB95005F06FF /* SpinnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerView.swift; sourceTree = "<group>"; };
 		F673FBB32457A89E00D96C50 /* SymptomsSummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomsSummaryViewController.swift; sourceTree = "<group>"; };
 		F67A2290242AA35B002254B6 /* SecureRegistrationStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRegistrationStorage.swift; sourceTree = "<group>"; };
@@ -1313,7 +1313,7 @@
 		F67C5157243E7BD5008E2945 /* SelfDiagnosis */ = {
 			isa = PBXGroup;
 			children = (
-				F6548FA22460C1C7005F06FF /* CheckinCoordinatorTests.swift */,
+				F6548FA22460C1C7005F06FF /* QuestionnaireCoordinatorTests.swift */,
 				F67C5158243E7C1E008E2945 /* SubmitSymptomsViewControllerTests.swift */,
 				09C9DB3424608ABB0012F80A /* Controls */,
 				F6334E482474595500421B4C /* SymptomsTests.swift */,
@@ -1766,7 +1766,7 @@
 				89896E622435F37300F949EA /* ProjectTests.swift in Sources */,
 				094D561D247D8005007BC772 /* PresentationSpy.swift in Sources */,
 				F604977524549C95002B8503 /* LinkingIdManagerTests.swift in Sources */,
-				F6548FA32460C1C7005F06FF /* CheckinCoordinatorTests.swift in Sources */,
+				F6548FA32460C1C7005F06FF /* QuestionnaireCoordinatorTests.swift in Sources */,
 				08D77F2824767C6C00EAEBD5 /* UpdatePushNotificationTokenRequestTests.swift in Sources */,
 				F6F05A2A2433C6CC00FF4B72 /* AuthManagerDouble.swift in Sources */,
 				F6E2E597246B287B009D80DF /* StatusStateMachiningDouble.swift in Sources */,
