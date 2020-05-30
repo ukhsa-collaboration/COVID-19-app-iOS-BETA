@@ -47,19 +47,24 @@ class QuestionnaireCoordinator {
                         buttonAction: @escaping (Bool) -> Void) {
         let vc = QuestionSymptomsViewController.instantiate()
         
-        let checkin = hadSymptom(symptom) ? "_CHECKIN_" : "_"
+        let checkin = questionnaireType == .checkin ? "_CHECKIN_" : "_"
         let localizedTextPrefix = symptom.localizationPrefix
         let title = "\(localizedTextPrefix)\(checkin)QUESTION".localized
-        
+        let context = questionnaireType == .selfDiagnosis ? "\(localizedTextPrefix)_INITIAL_CONTEXT".localized : nil
+        let error = "\(localizedTextPrefix)\(checkin)ERROR".localized
+        let yes = "\(localizedTextPrefix)\(checkin)YES".localized
+        let no = "\(localizedTextPrefix)\(checkin)NO".localized
+
         
         vc.inject(
             pageNumber: pageNumber,
             pageCount: pageCount,
             questionTitle: title,
             questionDetail: "\(localizedTextPrefix)_DETAIL".localized,
-            questionError: "\(localizedTextPrefix)_ERROR".localized,
-            questionYes: "\(localizedTextPrefix)_YES".localized,
-            questionNo: "\(localizedTextPrefix)_NO".localized,
+            questionContext: context,
+            questionError: error,
+            questionYes: yes,
+            questionNo: no,
             buttonText: "Continue",
             buttonAction: buttonAction
         )
@@ -127,9 +132,5 @@ class QuestionnaireCoordinator {
         } else {
             symptoms.remove(symptom)
         }
-    }
-    
-    private func hadSymptom(_ symptom: Symptom) -> Bool {
-        self.statusStateMachine.state.symptoms?.contains(symptom) ?? false
     }
 }

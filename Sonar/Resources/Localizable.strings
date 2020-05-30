@@ -18,63 +18,75 @@
 "RETRY" = "Retry";
 
 "TEMPERATURE_QUESTION" = "Do you have a high temperature (fever)?";
-"TEMPERATURE_CHECKIN_QUESTION" = "Do you still have a high temperature?";
+"TEMPERATURE_CHECKIN_QUESTION" = "Do you have a high temperature (fever)?";
 "TEMPERATURE_ERROR" = "Select yes if you have a high temperature";
-"TEMPERATURE_DETAIL" = "This means that you feel hot to touch on your chest or back (you do not need to measure your temperature).
-
-Your response to this question helps us decide whether you need to book a coronavirus test.";
+"TEMPERATURE_CHECKIN_ERROR" = "Select yes if you have a high temperature";
+"TEMPERATURE_DETAIL" = "This means that you feel hot to touch on your chest or back (you do not need to measure your temperature).";
+"TEMPERATURE_INITIAL_CONTEXT" = "Your response to this question helps us decide whether you need to book a coronavirus test.";
 "TEMPERATURE_YES" = "Yes, I have a high temperature";
 "TEMPERATURE_NO" = "No, I do not have a high temperature";
+"TEMPERATURE_CHECKIN_YES" = "Yes, I have a high temperature";
+"TEMPERATURE_CHECKIN_NO" = "No, I do not have a high temperature";
 
 "COUGH_QUESTION" = "Do you have a new continuous cough?";
-"COUGH_CHECKIN_QUESTION" = "Do you still have a continuous cough?";
+"COUGH_CHECKIN_QUESTION" = "Do you have a continuous cough?";
 "COUGH_ERROR" = "Select yes if you have a new continuous cough";
-"COUGH_DETAIL" = "This means coughing a lot for more than an hour, or 3 or more coughing episodes in 24 hours (if you usually have a cough, it may be worse than usual).
-
-Your response to this question helps us decide whether you need to book a coronavirus test.";
+"COUGH_CHECKIN_ERROR" = "Select yes if you have a continuous cough";
+"COUGH_DETAIL" = "This means coughing a lot for more than an hour, or 3 or more coughing episodes in 24 hours (if you usually have a cough, it may be worse than usual).";
+"COUGH_INITIAL_CONTEXT" = "Your response to this question helps us decide whether you need to book a coronavirus test.";
 "COUGH_YES" = "Yes, I have a new continuous cough";
 "COUGH_NO" = "No, I do not have a new continuous cough";
+"COUGH_CHECKIN_YES" = "Yes, I have a continuous cough";
+"COUGH_CHECKIN_NO" = "No, I do not have a continuous cough";
 
 "ANOSMIA_QUESTION" = "Have you had a new loss or change to your sense of smell or taste?";
-"ANOSMIA_CHECKIN_QUESTION" = "Do you still have a loss or change to your sense of smell or taste?";
-"ANOSMIA_DETAIL" = "This means you have noticed you cannot smell or taste anything, or things smell or taste different to normal.
-
-Your response to this question helps us decide whether you need to book a coronavirus test.";
+"ANOSMIA_CHECKIN_QUESTION" = "Have you had a loss or change to your sense of smell or taste?";
+"ANOSMIA_DETAIL" = "This means you have noticed you cannot smell or taste anything, or things smell or taste different to normal.";
+"ANOSMIA_INITIAL_CONTEXT" = "Your response to this question helps us decide whether you need to book a coronavirus test.";
 "ANOSMIA_YES" = "Yes, I have a loss or change to my sense of smell or taste";
 "ANOSMIA_NO" = "No, I do not have a loss or change to my sense of smell or taste";
+"ANOSMIA_CHECKIN_YES" = "Yes, I have a loss or change to my sense of smell or taste";
+"ANOSMIA_CHECKIN_NO" = "No, I do not have a loss or change to my sense of smell or taste";
 "ANOSMIA_ERROR" = "Select yes if you recently lost your sense of smell or taste";
+"ANOSMIA_CHECKIN_ERROR" = "Select yes if you have lost your sense of smell or taste";
 
 "SNEEZE_QUESTION" = "Do you have a runny nose, feel feverish or suffer from sneezing?";
-"SNEEZE_CHECKIN_QUESTION" = "Do you still have a runny nose, feel feverish or suffer from sneezing?";
+"SNEEZE_CHECKIN_QUESTION" = "Do you have a runny nose, feel feverish or suffer from sneezing?";
 "SNEEZE_DETAIL" = "Runny nose: this means your nose is more runny than usual.
 
 Feeling feverish: this means you have sore or aching muscles, feel unusually tired, have a headache or are shivering or feeling warm or hot.
 
-Sneezing: this means you are sneezing more than normal, not caused by any known allergy.
-
-Your response to this question helps the NHS better understand coronavirus.";
+Sneezing: this means you are sneezing more than normal, not caused by any known allergy.";
+"SNEEZE_INITIAL_CONTEXT" = "Your response to this question helps the NHS better understand coronavirus.";
 "SNEEZE_YES" = "Yes, I have at least one of these symptoms";
 "SNEEZE_NO" = "No, I do not have any of these symptoms";
+"SNEEZE_CHECKIN_YES" = "Yes, I have at least one of these symptoms";
+"SNEEZE_CHECKIN_NO" = "No, I do not have any of these symptoms";
 "SNEEZE_ERROR" = "Select yes if you have a runny nose, feel feverish or suffer from sneezing";
+"SNEEZE_CHECKIN_ERROR" = "Select yes if you have a runny nose, feel feverish or suffer from sneezing";
 
-"NAUSEA_QUESTION" = "Do you have diarrhoea, nausea, vomiting or a loss of appetite?";
-"NAUSEA_CHECKIN_QUESTION" = "Do you still have diarrhoea, nausea, vomiting or a loss of appetite?";
+"NAUSEA_QUESTION" = "Do you have diarrhoea, nausea, vomiting or have a loss of appetite?";
+"NAUSEA_CHECKIN_QUESTION" = "Do you have diarrhoea, nausea, vomiting or have a loss of appetite?";
 "NAUSEA_DETAIL" = "Diarrhoea: this means your poo has been more runny or watery than normal.
 
 Nausea: this means you are feeling sick.
 
 Vomiting: this means you have been sick more than once.
 
-Loss of appetite: this means you are not feeling hungry, or are not eating as much as normal.
-
-Your response to this question helps the NHS better understand coronavirus.";
+Loss of appetite: this means you are not feeling hungry, or are not eating as much as normal.";
+"NAUSEA_INITIAL_CONTEXT" = "Your response to this question helps the NHS better understand coronavirus.";
 "NAUSEA_YES" = "Yes, I have at least one of these symptoms";
 "NAUSEA_NO" = "No, I do not have any of these symptoms";
+"NAUSEA_CHECKIN_YES" = "Yes, I have at least one of these symptoms";
+"NAUSEA_CHECKIN_NO" = "No, I do not have any of these symptoms";
 "NAUSEA_ERROR" = "Select yes if you have diarrhoea, nausea, vomiting or have a loss of appetite?";
+"NAUSEA_CHECKIN_ERROR" = "Select yes if you have diarrhoea, nausea, vomiting or have a loss of appetite";
 
 "SYMPTOMS_SUMMARY_CHECK_ANSWERS" = "Check your answers";
 "SYMPTOMS_SUMMARY_HAVE_TEMPERATURE" = "I have a high temperature";
 "SYMPTOMS_SUMMARY_NO_TEMPERATURE" = "I do not have a high temperature";
+"SYMPTOMS_SUMMARY_HAVE_COUGH" = "I have a new continuous cough";
+"SYMPTOMS_SUMMARY_NO_COUGH" = "I do not have a new continuous cough";
 "SYMPTOMS_SUMMARY_HAVE_COUGH" = "I have a new continuous cough";
 "SYMPTOMS_SUMMARY_NO_COUGH" = "I do not have a new continuous cough";
 "SYMPTOMS_SUMMARY_NO_ANOSMIA" = "I have not recently lost my sense of smell";

@@ -175,9 +175,9 @@ class StatusViewControllerTests: TestCase {
 
             let promptVc = try XCTUnwrap(PresentationSpy.presented(by: vc) as? CheckinDrawerViewController)
             promptVc.updateSymptoms()
-            try respondToSymptomQuestion(vc: vc, expectedTitle: "TEMPERATURE_QUESTION", response: true)
+            try respondToSymptomQuestion(vc: vc, expectedTitle: "TEMPERATURE_CHECKIN_QUESTION", response: true)
             try respondToSymptomQuestion(vc: vc, expectedTitle: "COUGH_CHECKIN_QUESTION", response: true)
-            try respondToSymptomQuestion(vc: vc, expectedTitle: "ANOSMIA_QUESTION", response: false)
+            try respondToSymptomQuestion(vc: vc, expectedTitle: "ANOSMIA_CHECKIN_QUESTION", response: false)
             
             XCTAssertNil(drawerPresenter.presented)
         }
