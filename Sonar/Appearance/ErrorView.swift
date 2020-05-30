@@ -29,4 +29,14 @@ class ErrorView: IBView {
 
         backgroundColor = .clear
     }
+    
+    override var isHidden: Bool {
+        didSet {
+            guard isHidden == false else { return }
+
+            UIAccessibility.post(notification: .screenChanged,
+                                 argument: self)
+        }
+    }
+
 }
