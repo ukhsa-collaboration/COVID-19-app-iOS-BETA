@@ -14,12 +14,15 @@ class ReferenceCodeViewController: UIViewController, Storyboarded {
     @IBOutlet var errorWrapper: UIView!
     @IBOutlet var referenceCodeWrapper: UIView!
     @IBOutlet var referenceCodeLabel: UILabel!
+    @IBOutlet weak var referenceCodeError: UILabel!
     @IBOutlet weak var copyButton: ButtonWithDynamicType!
 
     private var referenceCode: String?
+    private var error: String?
     
-    func inject(referenceCode: String?) {
+    func inject(referenceCode: String?, error: String?) {
         self.referenceCode = referenceCode
+        self.error = error
     }
     
     override func viewDidLoad() {
@@ -38,6 +41,7 @@ class ReferenceCodeViewController: UIViewController, Storyboarded {
         } else {
             errorWrapper.isHidden = false
             referenceCodeWrapper.isHidden = true
+            referenceCodeError.text = error
         }
     }
 

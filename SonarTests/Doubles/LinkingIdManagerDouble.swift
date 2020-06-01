@@ -10,8 +10,8 @@ import Foundation
 @testable import Sonar
 
 class LinkingIdManagerDouble: LinkingIdManaging {
-    var fetchCompletion: ((LinkingId?) -> Void)?
-    func fetchLinkingId(completion: @escaping (LinkingId?) -> Void = { _ in }) {
+    var fetchCompletion: ((LinkingId?, String?) -> Void)?
+    func fetchLinkingId(completion: @escaping (LinkingId?, String?) -> Void = { _, _ in }) {
         fetchCompletion = completion
     }
 }

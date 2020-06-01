@@ -14,9 +14,11 @@ class BookTestViewController: UIViewController, Storyboarded {
     @IBOutlet weak var bookTestLinkButton: LinkButton!
 
     private var referenceCode: String?
+    private var referenceError: String?
 
-    func inject(referenceCode: String?) {
+    func inject(referenceCode: String?, referenceError: String?) {
         self.referenceCode = referenceCode
+        self.referenceError = referenceError
     }
 
     override func viewDidLoad() {
@@ -27,7 +29,7 @@ class BookTestViewController: UIViewController, Storyboarded {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? ReferenceCodeViewController {
-            vc.inject(referenceCode: referenceCode)
+            vc.inject(referenceCode: referenceCode, error: referenceError)
         }
     }
 

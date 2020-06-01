@@ -11,19 +11,6 @@ import XCTest
 
 class LinkingIdManagerTests: XCTestCase {
 
-    func testNoRegistration() {
-        let persisting = PersistenceDouble()
-        let manager = LinkingIdManager(
-            persisting: persisting,
-            session: SessionDouble()
-        )
-
-        var fetchedLinkingId: LinkingId?
-        manager.fetchLinkingId { fetchedLinkingId = $0 }
-
-        XCTAssertNil(fetchedLinkingId)
-    }
-
     func testFetchLinkingId() {
         let persisting = PersistenceDouble(registration: Registration.fake)
         let session = SessionDouble()
@@ -33,10 +20,33 @@ class LinkingIdManagerTests: XCTestCase {
         )
 
         var fetchedLinkingId: LinkingId?
-        manager.fetchLinkingId { fetchedLinkingId = $0 }
+        var fetchError: String?
+        manager.fetchLinkingId {
+            fetchedLinkingId = $0
+            fetchError = $1
+        }
         session.executeCompletion?(Result<LinkingId, Error>.success("linking-id"))
 
         XCTAssertEqual(fetchedLinkingId, "linking-id")
+        XCTAssertNil(fetchError)
+    }
+
+    func testNoRegistration() {
+        let persisting = PersistenceDouble()
+        let manager = LinkingIdManager(
+            persisting: persisting,
+            session: SessionDouble()
+        )
+
+        var fetchedLinkingId: LinkingId?
+        var fetchError: String?
+        manager.fetchLinkingId {
+            fetchedLinkingId = $0
+            fetchError = $1
+        }
+
+        XCTAssertNil(fetchedLinkingId)
+        XCTAssertEqual(fetchError, "Please wait until your setup has completed to see the app reference code.")
     }
 
     func testFetchLinkingIdFailure() {
@@ -48,10 +58,15 @@ class LinkingIdManagerTests: XCTestCase {
         )
 
         var fetchedLinkingId: LinkingId?
-        manager.fetchLinkingId { fetchedLinkingId = $0 }
+        var fetchError: String?
+        manager.fetchLinkingId {
+            fetchedLinkingId = $0
+            fetchError = $1
+        }
         session.executeCompletion?(Result<LinkingId, Error>.failure(FakeError.fake))
 
         XCTAssertNil(fetchedLinkingId)
+        XCTAssertEqual(fetchError, "Please connect your phone to the internet to see the app reference code.")
     }
 
 }
