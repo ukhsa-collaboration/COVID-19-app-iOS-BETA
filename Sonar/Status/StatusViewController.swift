@@ -277,7 +277,7 @@ class StatusViewController: UIViewController, Storyboarded {
             feelUnwellButton.isHidden = false
             bookTestButton.isHidden = true
             stepsDetailLabel.isHidden = false
-            stepsDetailLabel.text = "STATUS_GET_HELP_OK".localized
+            stepsDetailLabel.text = "STATUS_GET_HELP_OK".localized + "\n"
 
         case .exposed(let exposed):
             diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
@@ -287,7 +287,7 @@ class StatusViewController: UIViewController, Storyboarded {
             feelUnwellButton.isHidden = false
             bookTestButton.isHidden = true
             stepsDetailLabel.isHidden = false
-            stepsDetailLabel.text = "STATUS_GET_HELP_EXPOSED".localized
+            stepsDetailLabel.text = "STATUS_GET_HELP_EXPOSED".localized + "\n"
 
         case .symptomatic(let symptomatic):
             setupDetail(for: symptomatic)
