@@ -145,7 +145,7 @@
                                                     <constraint firstAttribute="width" constant="4" id="KMJ-Mq-VNO"/>
                                                 </constraints>
                                             </view>
-                                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TV5-Xb-NKH" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
+                                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TV5-Xb-NKH" customClass="UnderlinedButton" customModule="Sonar" customModuleProvider="target">
                                                 <rect key="frame" x="296" y="129.5" width="38" height="32"/>
                                                 <accessibility key="accessibilityConfiguration">
                                                     <bool key="isElement" value="NO"/>

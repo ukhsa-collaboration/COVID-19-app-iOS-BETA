@@ -152,7 +152,7 @@ extension StartDateViewController: UIPickerViewDelegate {
     }
 }
 
-class StartDateButton: ButtonWithDynamicType {
+class StartDateButton: UnderlinedButton {
     override var canBecomeFirstResponder: Bool {
         true
     }

@@ -16,7 +16,7 @@ class StartNowViewController: UIViewController, Storyboarded {
     private var continueHandler: (() -> Void)! = nil
     
     @IBOutlet var numberLabels: [UILabel]!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         resize()
