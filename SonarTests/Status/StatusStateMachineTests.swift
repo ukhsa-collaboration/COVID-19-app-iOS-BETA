@@ -88,6 +88,28 @@ class StatusStateMachineTests: XCTestCase {
         XCTAssertNil(drawerMailbox.receive())
     }
 
+    func testSelfDiagnoseStraigntIntoCheckinFlow() throws {
+        currentDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 10, hour: 6))!
+        persisting.statusState = .ok(StatusState.Ok())
+
+        let startDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 1, hour: 6))!
+        try machine.selfDiagnose(symptoms: [.temperature], startDate: startDate)
+
+        let checkinDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 11, hour: 7))!
+        XCTAssertEqual(machine.state, .symptomatic(StatusState.Symptomatic(
+            symptoms: [.temperature],
+            startDate: startDate,
+            checkinDate: checkinDate
+        )))
+
+        XCTAssertEqual(contactEventsUploader.uploadStartDate, startDate)
+
+        let request = try XCTUnwrap(userNotificationCenter.requests.first)
+        XCTAssertEqual(request.identifier, "Diagnosis")
+
+        XCTAssertNil(drawerMailbox.receive())
+    }
+
     func testSelfDiagnoseTemperatureAfterSevenDays() throws {
         currentDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 8, hour: 8))!
         persisting.statusState = .ok(StatusState.Ok())
