@@ -1,15 +1,15 @@
 #!/usr/bin/env -S ruby -E UTF-8:UTF-8
 
-if ARGV.length != 2
-  puts "Usage: #{$PROGRAM_NAME} tracker_token revision_range"
+if ARGV.length != 3
+  puts "Usage: #{$PROGRAM_NAME} github_token tracker_token revision_range"
   exit(1)
 end
 
-tracker_token, revision_range = ARGV
+github_token, tracker_token, revision_range = ARGV
 
 require 'bundler/inline'
 gemfile do
-  gem 'sonar-ci-tools', path: './ci/ruby'
+  gem 'sonar-ci-tools', git: "https://#{github_token}:x-oauth-basic@github.com/nhsx/sonar-ios", glob: 'ci/ruby/sonar-ci-tools.gemspec'
 end
 puts 'Gems loaded'
 puts
