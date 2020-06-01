@@ -174,11 +174,6 @@ class StatusStateMachine: StatusStateMachining {
     }
     
     func checkin<T>(state: T, symptoms: Symptoms) where T: Checkinable & SymptomProvider {
-        guard currentDate >= state.checkinDate else {
-            assertionFailure("Checking in is only allowed after the checkin date")
-            return
-        }
-
         if symptoms.contains(.temperature) {
             let checkinDate = T.nextCheckin(from: currentDate)
             let nextCheckin = StatusState.Symptomatic(symptoms: symptoms, startDate: state.startDate, checkinDate: checkinDate)
@@ -261,6 +256,10 @@ class StatusStateMachine: StatusStateMachining {
             state = .exposed(StatusState.Exposed(startDate: exposedSymptomatic.startDate))
         case .symptomatic(let symptomatic):
             if testDate > symptomatic.startDate {
+                let checkinDate = StatusState.Symptomatic.nextCheckin(from: currentDate)
+                state = .symptomatic(StatusState.Symptomatic(
+                    symptoms: symptomatic.symptoms, startDate: symptomatic.startDate, checkinDate: checkinDate
+                ))
                 symptoms = symptomatic.symptoms
             }
         case .positiveTestResult(let positive):
