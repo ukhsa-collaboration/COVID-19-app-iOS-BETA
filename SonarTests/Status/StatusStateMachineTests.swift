@@ -309,6 +309,32 @@ class StatusStateMachineTests: XCTestCase {
         XCTAssertNil(drawerMailbox.receive())
     }
 
+    // This can happen when you get a positive test result while symptomatic
+    func testCheckinBeforeTheCheckinDate() throws {
+        let startDate = Calendar.current.date(from: DateComponents(year: 2020, month: 3, day: 31))!
+        let checkinAt = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 5, hour: 7))!
+        persisting.statusState = .symptomatic(StatusState.Symptomatic(
+            symptoms: [.cough],
+            startDate: startDate,
+            checkinDate: checkinAt
+        ))
+
+        currentDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 3))!
+        machine.checkin(symptoms: [.temperature])
+
+        let nextCheckin = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 4, hour: 7))!
+        XCTAssertEqual(machine.state, .symptomatic(StatusState.Symptomatic(
+            symptoms: [.temperature],
+            startDate: startDate,
+            checkinDate: nextCheckin
+        )))
+
+        XCTAssertEqual(userNotificationCenter.removedIdentifiers, ["Diagnosis"])
+        let request = try XCTUnwrap(userNotificationCenter.requests.first)
+        XCTAssertEqual(request.identifier, "Diagnosis")
+        XCTAssertNil(drawerMailbox.receive())
+    }
+
     func testIgnoreExposedWhenSymptomatic() {
         let startDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 1))!
         let checkinAt = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 15, hour: 7))!
@@ -616,14 +642,16 @@ class StatusStateMachineTests: XCTestCase {
     }
 
     func testReceivedNegativeTestResultWithEarlierSymptomatic() throws {
-        let startDate = Calendar.current.date(from: DateComponents(month: 5, day: 10))!
-        let testDate = Calendar.current.date(from: DateComponents(month: 5, day: 11))!
+        currentDate = Calendar.current.date(from: DateComponents(year: 2020, month: 5, day: 13))!
 
-        let checkinDate = Calendar.current.date(byAdding: .day, value: 1, to: startDate)!
+        let startDate = Calendar.current.date(from: DateComponents(year: 2020, month: 5, day: 10))!
+        let checkinDate = Calendar.current.date(from: DateComponents(year: 2020, month: 5, day: 17))!
         let symptomatic = StatusState.Symptomatic(
             symptoms: [.cough], startDate: startDate, checkinDate: checkinDate
         )
         persisting.statusState = .symptomatic(symptomatic)
+
+        let testDate = Calendar.current.date(from: DateComponents(year: 2020, month: 5, day: 11))!
         let testResult = TestResult(
             result: .negative,
             testTimestamp: testDate,
@@ -632,7 +660,10 @@ class StatusStateMachineTests: XCTestCase {
         )
 
         machine.received(testResult)
-        XCTAssertEqual(machine.state, .symptomatic(symptomatic))
+        let nextCheckinDate = Calendar.current.date(from: DateComponents(year: 2020, month: 5, day: 14, hour: 7))!
+        XCTAssertEqual(machine.state, .symptomatic(StatusState.Symptomatic(
+            symptoms: [.cough], startDate: startDate, checkinDate: nextCheckinDate
+        )))
 
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.content.title, "TEST_RESULT_TITLE".localized)
