@@ -10,7 +10,7 @@
 "ADVICE_CHANGED_NOTIFICATION_BODY" = "Your advice has changed. Please open the app to learn what to do next. Your help saves lives.";
 
 "TEST_RESULT_TITLE" = "NHS COVID-19";
-"TEST_RESULT_BODY" = "Your test result has arrived. Please open the app to learn what to do next. You have been sent an email with more information.";
+"TEST_RESULT_BODY" = "Your test result has arrived. Please open the app to learn what to do next. You have been sent an email or text with more information.";
 
 "REGISTRATION_OK" = "The app is working properly";
 "REGISTRATION_IN_PROGRESS" = "Finalising setup...";
@@ -115,8 +115,6 @@ Loss of appetite: this means you are not feeling hungry, or are not eating as mu
 "NOTIFICATIONS_DISABLED_ALERT_TITLE" = "Notifications disabled";
 "NOTIFICATIONS_DISABLED_ALERT_MESSAGE" = "You can enable notifications by going to the Settings app and searching for NHS COVID-19";
 "NOTIFICATIONS_DISABLED_ALERT_OK" = "Ok";
-
-"TEST_UPDATE_NOTIFICATION" = "Your test result has arrived. Please open the app to learn what to do next. You have been sent an email or text with more information.";
 
 "TEST_UPDATE_DRAW_POSITIVE_HEADER" = "Your test result indicates that you have coronavirus";
 "TEST_UPDATE_DRAW_POSITIVE_DETAIL" = "Thank you for getting tested. Your advice has been updated. You have been sent an email or text with more information.";

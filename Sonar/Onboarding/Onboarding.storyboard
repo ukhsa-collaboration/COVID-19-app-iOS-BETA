@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -266,11 +266,11 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="624"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P9b-DU-jl5" customClass="OnboardingLogoStrapline" customModule="Sonar" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="294" height="33"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="294" height="64"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="999" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="neR-wt-8CD" userLabel="Close" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
-                                                <rect key="frame" x="294" y="0.0" width="100" height="33"/>
+                                                <rect key="frame" x="294" y="0.0" width="100" height="64"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="5ry-Yv-rBk"/>
                                                 </constraints>
@@ -294,7 +294,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="61U-61-fII">
-                                                        <rect key="frame" x="0.0" y="60.666666666666679" width="374" height="86.333333333333314"/>
+                                                        <rect key="frame" x="0.0" y="60.66666666666665" width="374" height="86.333333333333314"/>
                                                         <string key="text">This app gives you advice if you have been near someone who tested positive for coronavirus after reporting symptoms. The app uses your phone to detect other app users nearby. </string>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                         <color key="textColor" name="NHS Text"/>
@@ -431,20 +431,20 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zm8-2K-w7w">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="658.66666666666663"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="06r-fk-m9F" customClass="OnboardingLogoStrapline" customModule="Sonar" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="06r-fk-m9F" customClass="OnboardingLogoStrapline" customModule="Sonar" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="8XB-IO-JQl">
-                                                <rect key="frame" x="20" y="64" width="374" height="594.66666666666663"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="8XB-IO-JQl">
+                                                <rect key="frame" x="20" y="64" width="374" height="594.33333333333326"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Onboarding_area" translatesAutoresizingMaskIntoConstraints="NO" id="LbX-JE-DSg">
-                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="184.66666666666666"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="184.33333333333334"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter the first part of your home postcode" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C96-Af-5wL">
-                                                        <rect key="frame" x="0.0" y="184.66666666666669" width="374" height="81.666666666666686"/>
+                                                        <rect key="frame" x="0.0" y="184.33333333333331" width="374" height="81.666666666666686"/>
                                                         <accessibility key="accessibilityConfiguration">
                                                             <accessibilityTraits key="traits" staticText="YES" header="YES"/>
                                                         </accessibility>
@@ -453,38 +453,38 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yu7-CH-o4o" userLabel="Spacer">
-                                                        <rect key="frame" x="0.0" y="266.33333333333331" width="374" height="18"/>
+                                                        <rect key="frame" x="0.0" y="265.99999999999994" width="374" height="18"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="18" id="XzH-SW-fNk"/>
                                                         </constraints>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Example: CE1B" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qox-hG-VrQ">
-                                                        <rect key="frame" x="0.0" y="284.33333333333331" width="374" height="15.666666666666686"/>
+                                                        <rect key="frame" x="0.0" y="283.99999999999994" width="374" height="15.666666666666686"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                         <color key="textColor" name="NHS Grey 1"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PNy-KF-8WF" userLabel="Spacer">
-                                                        <rect key="frame" x="0.0" y="300" width="374" height="12"/>
+                                                        <rect key="frame" x="0.0" y="299.66666666666669" width="374" height="12"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="12" id="VT8-wp-SkP"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sDt-al-8eP" customClass="ErrorView" customModule="Sonar" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="312" width="374" height="50"/>
+                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sDt-al-8eP" customClass="ErrorView" customModule="Sonar" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="311.66666666666669" width="374" height="50"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8ti-Jz-8LF" userLabel="Spacer">
-                                                        <rect key="frame" x="0.0" y="362" width="374" height="12"/>
+                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8ti-Jz-8LF" userLabel="Spacer">
+                                                        <rect key="frame" x="0.0" y="361.66666666666669" width="374" height="12"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="12" id="rkC-bx-4bc"/>
                                                         </constraints>
                                                     </view>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nUw-z7-nkS" customClass="TextField" customModule="Sonar" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="374" width="374" height="44"/>
+                                                    <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nUw-z7-nkS" customClass="TextField" customModule="Sonar" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="373.66666666666669" width="374" height="44"/>
                                                         <accessibility key="accessibilityConfiguration" label="Post code"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="49U-zv-B9p"/>
@@ -495,15 +495,15 @@
                                                             <outlet property="delegate" destination="lkE-bN-ikk" id="hoE-bE-NAc"/>
                                                         </connections>
                                                     </textField>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DeO-Am-j6z" userLabel="Spacer">
-                                                        <rect key="frame" x="0.0" y="418" width="374" height="32"/>
+                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DeO-Am-j6z" userLabel="Spacer">
+                                                        <rect key="frame" x="0.0" y="417.66666666666669" width="374" height="32"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="32" id="aiy-F5-hxM"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gEU-Vl-nzU" userLabel="Info Module">
-                                                        <rect key="frame" x="0.0" y="450.00000000000006" width="374" height="144.66666666666669"/>
+                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gEU-Vl-nzU" userLabel="Info Module">
+                                                        <rect key="frame" x="0.0" y="449.66666666666669" width="374" height="144.66666666666669"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F2u-uZ-btM" userLabel="Blue Focus">
                                                                 <rect key="frame" x="0.0" y="0.0" width="4" height="144.66666666666666"/>
@@ -522,7 +522,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j2y-6b-nX8">
-                                                                <rect key="frame" x="16" y="32.333333333333364" width="358" height="108.33333333333331"/>
+                                                                <rect key="frame" x="16" y="32.33333333333325" width="358" height="108.33333333333331"/>
                                                                 <string key="text">This information will be used to help your local NHS respond to the coronavirus in your area and to understand the spread of the disease across the UK. Your postcode will not be used to track your location.</string>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                 <nil key="textColor"/>
@@ -626,20 +626,20 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="782"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ctd-7G-OHq">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="734.66666666666663"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KNf-hn-Dy4" customClass="OnboardingLogoStrapline" customModule="Sonar" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="147.66666666666666"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="FK8-Le-0p1">
-                                                <rect key="frame" x="20" y="167.66666666666669" width="374" height="630.33333333333326"/>
+                                                <rect key="frame" x="20" y="84" width="374" height="630.66666666666663"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Onboarding_bluetooth" translatesAutoresizingMaskIntoConstraints="NO" id="od6-gM-miz">
-                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="184.33333333333334"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="184.66666666666666"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set up app permissions" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bLK-VT-lux">
-                                                        <rect key="frame" x="0.0" y="194.33333333333334" width="374" height="40.666666666666657"/>
+                                                        <rect key="frame" x="0.0" y="194.66666666666669" width="374" height="40.666666666666657"/>
                                                         <accessibility key="accessibilityConfiguration">
                                                             <accessibilityTraits key="traits" staticText="YES" header="YES"/>
                                                         </accessibility>
@@ -648,14 +648,14 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r5n-sh-REh" userLabel="Spacer">
-                                                        <rect key="frame" x="0.0" y="245.00000000000003" width="374" height="11.999999999999972"/>
+                                                        <rect key="frame" x="0.0" y="245.33333333333331" width="374" height="12"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="12" id="MKR-na-uuj"/>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5jF-gQ-kfq" userLabel="Bluetooth section">
-                                                        <rect key="frame" x="0.0" y="267" width="374" height="190.33333333333337"/>
+                                                        <rect key="frame" x="0.0" y="267.33333333333331" width="374" height="190.33333333333331"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i04-Ef-Mwj" userLabel="LeftAccent">
                                                                 <rect key="frame" x="0.0" y="0.0" width="4" height="190.33333333333334"/>
@@ -674,7 +674,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bb1-Kl-eN0">
-                                                                <rect key="frame" x="16" y="32.333333333333314" width="338" height="154"/>
+                                                                <rect key="frame" x="16" y="32.333333333333371" width="338" height="154"/>
                                                                 <string key="text">This app uses battery-saving Bluetooth Low Energy to determine when it is near another phone with this app. For this app to work, Bluetooth needs to be kept on at all times.</string>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                 <nil key="textColor"/>
@@ -699,14 +699,14 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zoy-MX-83n" userLabel="Spacer">
-                                                        <rect key="frame" x="0.0" y="467.33333333333337" width="374" height="12"/>
+                                                        <rect key="frame" x="0.0" y="467.66666666666663" width="374" height="12"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="12" id="2Bs-lx-prL"/>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M8F-wR-Ewc" userLabel="Push Notifications section">
-                                                        <rect key="frame" x="0.0" y="489.33333333333337" width="374" height="141"/>
+                                                        <rect key="frame" x="0.0" y="489.66666666666663" width="374" height="141"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lnh-Cg-nMt" userLabel="LeftAccent">
                                                                 <rect key="frame" x="0.0" y="0.0" width="4" height="141"/>
@@ -725,7 +725,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1rp-If-oz2">
-                                                                <rect key="frame" x="16" y="50.666666666666622" width="338" height="86.333333333333314"/>
+                                                                <rect key="frame" x="16" y="50.666666666666735" width="338" height="86.333333333333314"/>
                                                                 <string key="text">This app will send notifications to you if you’ve been near someone with coronavirus symptoms and will guide you on what to do next.</string>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                 <nil key="textColor"/>
@@ -833,11 +833,11 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sjj-F3-IxM" userLabel="Scroll content view">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gkH-9X-xIa" customClass="OnboardingLogoStrapline" customModule="Sonar" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gkH-9X-xIa" customClass="OnboardingLogoStrapline" customModule="Sonar" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Why you need to allow the app to use your Bluetooth" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MYG-cJ-tJp">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Why you need to allow the app to use your Bluetooth" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MYG-cJ-tJp">
                                                 <rect key="frame" x="20" y="84" width="374" height="122.66666666666669"/>
                                                 <accessibility key="accessibilityConfiguration">
                                                     <accessibilityTraits key="traits" staticText="YES" header="YES"/>
@@ -853,31 +853,44 @@
                                                     <action selector="settingsTapped:" destination="zi2-er-oJ5" eventType="touchUpInside" id="xCF-Iw-IPa"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pSJ-Zi-FRG">
-                                                <rect key="frame" x="20" y="226.66666666666674" width="374" height="240.33333333333326"/>
-                                                <string key="text">This app uses battery-saving Bluetooth Low Energy to determine when it is near another phone with this app installed. For this app to work, Bluetooth needs to be kept on at all times.
-
-This app cannot track your location and your privacy remains protected.
-
-If you have Bluetooth turned off, this app will not work. Please go to Settings and turn on Bluetooth.</string>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Qh9-C1-CGD">
+                                                <rect key="frame" x="20" y="226.66666666666669" width="374" height="237"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pSJ-Zi-FRG">
+                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="108.33333333333333"/>
+                                                        <string key="text">This app uses battery-saving Bluetooth Low Energy to determine when it is near another phone with this app installed. For this app to work, Bluetooth needs to be kept on at all times. </string>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This app cannot track your location and your privacy remains protected. " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oed-hD-b0M">
+                                                        <rect key="frame" x="0.0" y="108.33333333333331" width="374" height="64.333333333333314"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you have Bluetooth turned off, this app will not work. Please go to Settings and turn on Bluetooth." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uEv-By-LKd">
+                                                        <rect key="frame" x="0.0" y="172.66666666666663" width="374" height="64.333333333333314"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="MYG-cJ-tJp" firstAttribute="leading" secondItem="sjj-F3-IxM" secondAttribute="leading" constant="20" id="0YI-3b-N4i"/>
                                             <constraint firstItem="gkH-9X-xIa" firstAttribute="leading" secondItem="sjj-F3-IxM" secondAttribute="leading" id="5p1-Hu-zEE"/>
-                                            <constraint firstItem="pSJ-Zi-FRG" firstAttribute="top" secondItem="MYG-cJ-tJp" secondAttribute="bottom" constant="20" id="85B-S7-ojN"/>
-                                            <constraint firstItem="hBt-VR-GUU" firstAttribute="top" relation="greaterThanOrEqual" secondItem="pSJ-Zi-FRG" secondAttribute="bottom" constant="8" id="ABy-KZ-JP5"/>
-                                            <constraint firstItem="pSJ-Zi-FRG" firstAttribute="leading" secondItem="sjj-F3-IxM" secondAttribute="leading" constant="20" id="Vgc-vx-t2a"/>
-                                            <constraint firstAttribute="trailing" secondItem="pSJ-Zi-FRG" secondAttribute="trailing" constant="20" id="ZwM-Qs-JKk"/>
+                                            <constraint firstItem="Qh9-C1-CGD" firstAttribute="top" secondItem="MYG-cJ-tJp" secondAttribute="bottom" constant="20.000000000000028" id="VlF-6T-TG0"/>
+                                            <constraint firstItem="hBt-VR-GUU" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Qh9-C1-CGD" secondAttribute="bottom" constant="16" id="cEA-l8-Ud9"/>
                                             <constraint firstAttribute="trailing" secondItem="gkH-9X-xIa" secondAttribute="trailing" id="cpl-05-caS"/>
                                             <constraint firstAttribute="bottom" secondItem="hBt-VR-GUU" secondAttribute="bottom" constant="20" id="dVZ-uH-phM"/>
+                                            <constraint firstAttribute="trailing" secondItem="Qh9-C1-CGD" secondAttribute="trailing" constant="20" id="e9e-uY-Wfp"/>
                                             <constraint firstAttribute="trailing" secondItem="MYG-cJ-tJp" secondAttribute="trailing" constant="20" id="eyc-Wv-qRI"/>
                                             <constraint firstItem="gkH-9X-xIa" firstAttribute="top" secondItem="sjj-F3-IxM" secondAttribute="top" id="fcr-lS-Yrg"/>
                                             <constraint firstItem="hBt-VR-GUU" firstAttribute="leading" secondItem="sjj-F3-IxM" secondAttribute="leading" constant="20" id="mrC-zy-ySa"/>
+                                            <constraint firstItem="Qh9-C1-CGD" firstAttribute="leading" secondItem="sjj-F3-IxM" secondAttribute="leading" constant="20" id="oe1-LL-Lmc"/>
                                             <constraint firstAttribute="trailing" secondItem="hBt-VR-GUU" secondAttribute="trailing" constant="20" id="qpc-Sg-Vwb"/>
                                             <constraint firstItem="MYG-cJ-tJp" firstAttribute="top" secondItem="gkH-9X-xIa" secondAttribute="bottom" constant="20" id="rWO-Fu-yae"/>
                                         </constraints>
@@ -925,10 +938,10 @@ If you have Bluetooth turned off, this app will not work. Please go to Settings 
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uix-aC-Qvc" customClass="LogoStrapline" customModule="Sonar" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="436"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="417.33333333333331"/>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Why you need to turn your Bluetooth on" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8B8-An-P1B">
-                                                <rect key="frame" x="20" y="456" width="374" height="81.666666666666629"/>
+                                                <rect key="frame" x="20" y="437.33333333333331" width="374" height="81.666666666666686"/>
                                                 <accessibility key="accessibilityConfiguration">
                                                     <accessibilityTraits key="traits" staticText="YES" header="YES"/>
                                                 </accessibility>
@@ -936,28 +949,41 @@ If you have Bluetooth turned off, this app will not work. Please go to Settings 
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qch-lc-oMz">
-                                                <rect key="frame" x="20" y="557.66666666666663" width="374" height="240.33333333333337"/>
-                                                <string key="text">This app uses battery-saving Bluetooth Low Energy to determine when it is near another phone with this app installed. For this app to work, Bluetooth needs to be kept on at all times.
-
-This app cannot track your location and your privacy remains protected.
-
-If you have Bluetooth turned off, this app will not work. Please go to Settings and turn on Bluetooth.</string>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="GAu-hl-gm6">
+                                                <rect key="frame" x="20" y="539" width="374" height="259"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qch-lc-oMz">
+                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="108.33333333333333"/>
+                                                        <string key="text">This app uses battery-saving Bluetooth Low Energy to determine when it is near another phone with this app installed. For this app to work, Bluetooth needs to be kept on at all times. </string>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This app cannot track your location and your privacy remains protected. " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bS0-Xh-aSl">
+                                                        <rect key="frame" x="0.0" y="108.33333333333337" width="374" height="64.333333333333314"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you have Bluetooth turned off, this app will not work. Please go to Settings and turn on Bluetooth. " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pPR-Vg-fBr">
+                                                        <rect key="frame" x="0.0" y="172.66666666666663" width="374" height="86.333333333333314"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="uix-aC-Qvc" firstAttribute="leading" secondItem="23m-Pf-Bbe" secondAttribute="leading" id="Fdi-cD-dZh"/>
                                             <constraint firstAttribute="trailing" secondItem="uix-aC-Qvc" secondAttribute="trailing" id="H8d-li-XLi"/>
-                                            <constraint firstItem="Qch-lc-oMz" firstAttribute="leading" secondItem="23m-Pf-Bbe" secondAttribute="leading" constant="20" id="TKZ-HL-FfY"/>
-                                            <constraint firstItem="Qch-lc-oMz" firstAttribute="top" secondItem="8B8-An-P1B" secondAttribute="bottom" constant="20" id="Yu5-Yw-1xf"/>
-                                            <constraint firstAttribute="trailing" secondItem="Qch-lc-oMz" secondAttribute="trailing" constant="20" id="ggS-BA-Pxo"/>
+                                            <constraint firstAttribute="trailing" secondItem="GAu-hl-gm6" secondAttribute="trailing" constant="20" id="Tzl-mT-259"/>
+                                            <constraint firstItem="GAu-hl-gm6" firstAttribute="top" secondItem="8B8-An-P1B" secondAttribute="bottom" constant="19.999999999999886" id="WXl-Ct-4iO"/>
                                             <constraint firstItem="8B8-An-P1B" firstAttribute="leading" secondItem="23m-Pf-Bbe" secondAttribute="leading" constant="20" id="jse-0A-06A"/>
+                                            <constraint firstItem="GAu-hl-gm6" firstAttribute="leading" secondItem="23m-Pf-Bbe" secondAttribute="leading" constant="20" id="mcg-9K-9ew"/>
                                             <constraint firstAttribute="trailing" secondItem="8B8-An-P1B" secondAttribute="trailing" constant="20" id="nXO-bs-Tgj"/>
-                                            <constraint firstAttribute="bottom" secondItem="Qch-lc-oMz" secondAttribute="bottom" constant="20" id="oMB-vf-CGf"/>
                                             <constraint firstItem="8B8-An-P1B" firstAttribute="top" secondItem="uix-aC-Qvc" secondAttribute="bottom" constant="20" id="oac-Q2-cYc"/>
+                                            <constraint firstAttribute="bottom" secondItem="GAu-hl-gm6" secondAttribute="bottom" constant="20" id="qnQ-pA-dJR"/>
                                             <constraint firstItem="uix-aC-Qvc" firstAttribute="top" secondItem="23m-Pf-Bbe" secondAttribute="top" id="xXU-CY-gLc"/>
                                         </constraints>
                                     </view>

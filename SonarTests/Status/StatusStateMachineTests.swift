@@ -385,6 +385,7 @@ class StatusStateMachineTests: XCTestCase {
             symptoms: nil, startDate: testTimestamp)
         ))
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
+        XCTAssertEqual(request.identifier, "testResult.arrived")
         XCTAssertEqual(request.content.title, "TEST_RESULT_TITLE".localized)
         XCTAssertEqual(drawerMailbox.receive(), .positiveTestResult)
     }
@@ -406,6 +407,7 @@ class StatusStateMachineTests: XCTestCase {
             symptoms: nil, startDate: testTimestamp)
         ))
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
+        XCTAssertEqual(request.identifier, "testResult.arrived")
         XCTAssertEqual(request.content.title, "TEST_RESULT_TITLE".localized)
         XCTAssertEqual(drawerMailbox.receive(), .positiveTestResult)
     }
@@ -432,6 +434,7 @@ class StatusStateMachineTests: XCTestCase {
             symptoms: [.cough], startDate: startDate)
         ))
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
+        XCTAssertEqual(request.identifier, "testResult.arrived")
         XCTAssertEqual(request.content.title, "TEST_RESULT_TITLE".localized)
         XCTAssertEqual(drawerMailbox.receive(), .positiveTestResult)
     }
@@ -457,6 +460,7 @@ class StatusStateMachineTests: XCTestCase {
             symptoms: [.temperature], startDate: testTimestamp)
         ))
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
+        XCTAssertEqual(request.identifier, "testResult.arrived")
         XCTAssertEqual(request.content.title, "TEST_RESULT_TITLE".localized)
         XCTAssertEqual(drawerMailbox.receive(), .positiveTestResult)
     }
@@ -476,6 +480,7 @@ class StatusStateMachineTests: XCTestCase {
 
         XCTAssertEqual(machine.state, .ok(StatusState.Ok()))
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
+        XCTAssertEqual(request.identifier, "testResult.arrived")
         XCTAssertEqual(request.content.title, "TEST_RESULT_TITLE".localized)
         XCTAssertEqual(drawerMailbox.receive(), .unclearTestResult)
     }
@@ -495,6 +500,7 @@ class StatusStateMachineTests: XCTestCase {
 
         XCTAssertEqual(machine.state, .exposed(StatusState.Exposed(startDate: currentDate)))
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
+        XCTAssertEqual(request.identifier, "testResult.arrived")
         XCTAssertEqual(request.content.title, "TEST_RESULT_TITLE".localized)
         XCTAssertEqual(drawerMailbox.receive(), .unclearTestResult)
     }
@@ -519,6 +525,7 @@ class StatusStateMachineTests: XCTestCase {
 
         XCTAssertEqual(machine.state, .symptomatic(symptomatic))
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
+        XCTAssertEqual(request.identifier, "testResult.arrived")
         XCTAssertEqual(request.content.title, "TEST_RESULT_TITLE".localized)
         XCTAssertEqual(drawerMailbox.receive(), .unclearTestResult)
     }
@@ -538,6 +545,7 @@ class StatusStateMachineTests: XCTestCase {
         XCTAssertEqual(machine.state, .ok(StatusState.Ok()))
 
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
+        XCTAssertEqual(request.identifier, "testResult.arrived")
         XCTAssertEqual(request.content.title, "TEST_RESULT_TITLE".localized)
         XCTAssertEqual(drawerMailbox.receive(), .negativeTestResult(symptoms: nil))
     }
@@ -561,6 +569,7 @@ class StatusStateMachineTests: XCTestCase {
 
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.content.title, "TEST_RESULT_TITLE".localized)
+        XCTAssertEqual(request.identifier, "testResult.arrived")
         XCTAssertEqual(drawerMailbox.receive(), .negativeTestResult(symptoms: nil))
     }
 
@@ -581,6 +590,7 @@ class StatusStateMachineTests: XCTestCase {
 
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.content.title, "TEST_RESULT_TITLE".localized)
+        XCTAssertEqual(request.identifier, "testResult.arrived")
         XCTAssertEqual(drawerMailbox.receive(), .negativeTestResult(symptoms: nil))
     }
 
@@ -601,6 +611,7 @@ class StatusStateMachineTests: XCTestCase {
 
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.content.title, "TEST_RESULT_TITLE".localized)
+        XCTAssertEqual(request.identifier, "testResult.arrived")
         XCTAssertEqual(drawerMailbox.receive(), .negativeTestResult(symptoms: nil))
     }
 
@@ -625,6 +636,7 @@ class StatusStateMachineTests: XCTestCase {
 
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.content.title, "TEST_RESULT_TITLE".localized)
+        XCTAssertEqual(request.identifier, "testResult.arrived")
         XCTAssertEqual(drawerMailbox.receive(), .negativeTestResult(symptoms: [.cough]))
     }
 
@@ -649,6 +661,7 @@ class StatusStateMachineTests: XCTestCase {
 
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.content.title, "TEST_RESULT_TITLE".localized)
+        XCTAssertEqual(request.identifier, "testResult.arrived")
         XCTAssertEqual(drawerMailbox.receive(), .negativeTestResult(symptoms: nil))
     }
 
@@ -670,6 +683,7 @@ class StatusStateMachineTests: XCTestCase {
 
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.content.title, "TEST_RESULT_TITLE".localized)
+        XCTAssertEqual(request.identifier, "testResult.arrived")
         XCTAssertEqual(drawerMailbox.receive(), .negativeTestResult(symptoms: nil))
     }
 
@@ -691,6 +705,7 @@ class StatusStateMachineTests: XCTestCase {
 
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.content.title, "TEST_RESULT_TITLE".localized)
+        XCTAssertEqual(request.identifier, "testResult.arrived")
         XCTAssertEqual(drawerMailbox.receive(), .negativeTestResult(symptoms: nil))
     }
     
