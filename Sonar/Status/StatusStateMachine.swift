@@ -132,7 +132,6 @@ class StatusStateMachine: StatusStateMachining {
             guard !pastFirstCheckin || pastFirstCheckin && hasTemperature else {
                 // Don't change states if we're past the initial
                 // checkin date but don't have a temperature
-                drawerMailbox.post(.symptomsButNotSymptomatic)
                 return
             }
 
