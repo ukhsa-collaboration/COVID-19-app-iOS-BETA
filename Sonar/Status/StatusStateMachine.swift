@@ -103,7 +103,7 @@ class StatusStateMachine: StatusStateMachining {
         case .exposed(let exposed):
             try contactEventsUploader.upload(from: startDate, with: symptoms)
             
-            let firstCheckin = StatusState.ExposedSymptomatic.firstCheckin(from: exposed.startDate)
+            let firstCheckin = StatusState.ExposedSymptomatic.firstCheckin(from: startDate)
             let pastFirstCheckin = currentDate >= firstCheckin
             let hasTemperature = symptoms.contains(.temperature)
 
@@ -113,9 +113,13 @@ class StatusStateMachine: StatusStateMachining {
                 drawerMailbox.post(.symptomsButNotSymptomatic)
                 return
             }
-            
-            let checkinDate = pastFirstCheckin ? StatusState.ExposedSymptomatic.nextCheckin(from: currentDate) : firstCheckin
-            let exposedSymptomatic = StatusState.ExposedSymptomatic(symptoms: symptoms, startDate: exposed.startDate, checkinDate: checkinDate)
+
+            let checkinDate = max(firstCheckin, exposed.expiryDate)
+            let exposedSymptomatic = StatusState.ExposedSymptomatic(
+                symptoms: symptoms,
+                startDate: exposed.startDate,
+                checkinDate: checkinDate
+            )
             state = .exposedSymptomatic(exposedSymptomatic)
             
         case .ok:
