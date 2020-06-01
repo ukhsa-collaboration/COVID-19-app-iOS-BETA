@@ -452,9 +452,10 @@ class StatusStateMachineTests: XCTestCase {
         )
 
         machine.received(positiveTestResult)
-
+        
+        let endDate = StatusState.PositiveTestResult.firstCheckin(from: testTimestamp)
         XCTAssertEqual(machine.state, .positiveTestResult(StatusState.PositiveTestResult(
-            symptoms: nil, startDate: testTimestamp)
+            checkinDate: endDate, symptoms: nil, startDate: testTimestamp)
         ))
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.identifier, "testResult.arrived")
@@ -474,9 +475,9 @@ class StatusStateMachineTests: XCTestCase {
         )
 
         machine.received(positiveTestResult)
-
+        let endDate = StatusState.PositiveTestResult.firstCheckin(from: testTimestamp)
         XCTAssertEqual(machine.state, .positiveTestResult(StatusState.PositiveTestResult(
-            symptoms: nil, startDate: testTimestamp)
+            checkinDate: endDate, symptoms: nil, startDate: testTimestamp)
         ))
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.identifier, "testResult.arrived")
@@ -487,7 +488,7 @@ class StatusStateMachineTests: XCTestCase {
 
     func testReceivedPositiveTestResultWithEarlierSymptomatic() throws {
         let startDate = Calendar.current.date(byAdding: .day, value: -5, to: currentDate)!
-        let checkinDate = Calendar.current.date(byAdding: .day, value: 1, to: currentDate)!
+        let checkinDate = StatusState.Symptomatic.firstCheckin(from: startDate)
         persisting.statusState = .symptomatic(StatusState.Symptomatic(
             symptoms: [.cough], startDate: startDate, checkinDate: checkinDate
         ))
@@ -501,9 +502,8 @@ class StatusStateMachineTests: XCTestCase {
         )
 
         machine.received(positiveTestResult)
-
         XCTAssertEqual(machine.state, .positiveTestResult(StatusState.PositiveTestResult(
-            symptoms: [.cough], startDate: startDate)
+            checkinDate: checkinDate, symptoms: [.cough], startDate: testTimestamp)
         ))
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.identifier, "testResult.arrived")
@@ -513,12 +513,11 @@ class StatusStateMachineTests: XCTestCase {
 
     func testReceivedPositiveTestResultWithLaterSymptomatic() throws {
         let startDate = Calendar.current.date(byAdding: .day, value: -3, to: currentDate)!
-        let checkinDate = Calendar.current.date(byAdding: .day, value: 1, to: currentDate)!
+        let testTimestamp = Calendar.current.date(byAdding: .day, value: -5, to: currentDate)!
+        let checkinDate = StatusState.Symptomatic.firstCheckin(from: testTimestamp)
         persisting.statusState = .symptomatic(StatusState.Symptomatic(
             symptoms: [.temperature], startDate: startDate, checkinDate: checkinDate
         ))
-
-        let testTimestamp = Calendar.current.date(byAdding: .day, value: -5, to: currentDate)!
         let positiveTestResult = TestResult(
             result: .positive,
             testTimestamp: testTimestamp,
@@ -529,7 +528,7 @@ class StatusStateMachineTests: XCTestCase {
         machine.received(positiveTestResult)
 
         XCTAssertEqual(machine.state, .positiveTestResult(StatusState.PositiveTestResult(
-            symptoms: [.temperature], startDate: testTimestamp)
+            checkinDate: checkinDate, symptoms: [.temperature], startDate: testTimestamp)
         ))
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.identifier, "testResult.arrived")
@@ -745,8 +744,8 @@ class StatusStateMachineTests: XCTestCase {
     func testReceivedNegativeTestResultWithEarlierPositiveTest() throws {
         let positiveDate = Calendar.current.date(from: DateComponents(month: 5, day: 10))!
         let testDate = Calendar.current.date(from: DateComponents(month: 6, day: 10))!
-
-        let positive = StatusState.PositiveTestResult(symptoms: nil, startDate: positiveDate)
+        let endDate = StatusState.PositiveTestResult.firstCheckin(from: positiveDate)
+        let positive = StatusState.PositiveTestResult(checkinDate: endDate, symptoms: nil, startDate: positiveDate)
         persisting.statusState = .positiveTestResult(positive)
 
         let testResult = TestResult(
@@ -767,8 +766,8 @@ class StatusStateMachineTests: XCTestCase {
     func testReceivedNegativeTestResultWithLaterPositiveTest() throws {
         let positiveDate = Calendar.current.date(from: DateComponents(month: 6, day: 10))!
         let testDate = Calendar.current.date(from: DateComponents(month: 5, day: 10))!
-
-        let positive = StatusState.PositiveTestResult(symptoms: nil, startDate: positiveDate)
+        let endDate = StatusState.PositiveTestResult.firstCheckin(from: positiveDate)
+        let positive = StatusState.PositiveTestResult(checkinDate: endDate, symptoms: nil, startDate: positiveDate)
         persisting.statusState = .positiveTestResult(positive)
 
         let testResult = TestResult(

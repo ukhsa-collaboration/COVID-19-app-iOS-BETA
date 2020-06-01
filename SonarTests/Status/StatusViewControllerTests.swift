@@ -145,9 +145,10 @@ class StatusViewControllerTests: TestCase {
     
     func testShowsCorrectAdviceInPositiveTestStatus() throws {
         let startDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 30))!
+        let endDate = StatusState.PositiveTestResult.firstCheckin(from: startDate)
         let vc = makeViewController(
             persistence: PersistenceDouble(),
-            statusStateMachine: StatusStateMachiningDouble(state: .positiveTestResult(StatusState.PositiveTestResult(symptoms: [], startDate: startDate)))
+            statusStateMachine: StatusStateMachiningDouble(state: .positiveTestResult(StatusState.PositiveTestResult(checkinDate: endDate, symptoms: [], startDate: startDate)))
         )
         let navigationController = SynchronousNavigationControllerDouble()
         navigationController.viewControllers = [vc]

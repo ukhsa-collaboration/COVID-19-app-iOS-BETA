@@ -69,7 +69,13 @@ enum StatusState: Equatable {
         let duration = 14
     }
     
-    struct PositiveTestResult: Codable, Equatable, Expirable, SymptomProvider {
+    struct PositiveTestResult: Codable, Equatable, SymptomProvider, Checkinable {
+        static func firstCheckin(from startDate: Date) -> Date {
+            return nextCheckin(from: startDate, afterDays: 7)
+        }
+        
+        var checkinDate: Date
+        
         // Optional since we might not have asked the
         // user for their symptoms before they have a
         // positive test result.
@@ -122,18 +128,48 @@ enum StatusState: Equatable {
 }
 
 extension StatusState {
-    var symptoms: Symptoms? {
+    private var associatedValue: Any {
         switch self {
-        case .ok, .exposed:
-            return nil
-        case .symptomatic(let state):
-            return state.symptoms
-        case .positiveTestResult(let state):
-            return state.symptoms
+        case .ok(let state):
+            return state
+        case .exposed(let state):
+            return state
         case .exposedSymptomatic(let state):
-            return state.symptoms
+            return state
+        case .symptomatic(let state):
+            return state
+        case .positiveTestResult(let state):
+            return state
         }
     }
+    
+    var symptoms: Symptoms? {
+        (associatedValue as? SymptomProvider)?.symptoms
+    }
+    
+    
+    var startDate: Date? {
+        switch associatedValue {
+        case let expirable as Expirable:
+            return expirable.startDate
+        case let checkinable as Checkinable:
+            return checkinable.startDate
+        default:
+            return nil
+        }
+    }
+    
+    var endDate: Date? {
+        switch associatedValue {
+        case let expirable as Expirable:
+            return expirable.expiryDate
+        case let checkinable as Checkinable:
+            return checkinable.checkinDate
+        default:
+            return nil
+        }
+    }
+    
 }
 
 extension StatusState: Encodable {

@@ -299,10 +299,18 @@ class StatusViewController: UIViewController, Storyboarded {
             diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
             diagnosisTitleLabel.text = "Your test result indicates you have coronavirus. Please isolate yourself and your household."
             diagnosisDetailLabel.isHidden = false
-            diagnosisDetailLabel.text = pleaseIsolateText(until: positiveTestResult.expiryDate)
+            diagnosisDetailLabel.text = pleaseIsolateText(until: positiveTestResult.checkinDate)
             feelUnwellButton.isHidden = true
             bookTestButton.isHidden = true
             stepsDetailLabel.isHidden = true
+            
+            if dateProvider() >= positiveTestResult.checkinDate {
+                presentCheckinDrawer(
+                    for: positiveTestResult.symptoms,
+                    header: "CHECKIN_QUESTIONNAIRE_OVERLAY_HEADER".localized,
+                    detail: "CHECKIN_QUESTIONNAIRE_OVERLAY_DETAIL".localized
+                )
+            }
         }
     }
     

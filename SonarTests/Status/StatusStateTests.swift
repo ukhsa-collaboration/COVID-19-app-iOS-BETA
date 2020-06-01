@@ -80,10 +80,11 @@ class StatusStateTests: XCTestCase {
     
     func testPositiveTestResultChecksInAfterSevenDays() {
         let startDate = Calendar.current.date(from: DateComponents(year: 2020, month: 5, day: 14, hour: 7))!
-        let positiveTestResult = StatusState.PositiveTestResult(symptoms: [], startDate: startDate)
+        let endDate = StatusState.PositiveTestResult.firstCheckin(from: startDate)
+        let positiveTestResult = StatusState.PositiveTestResult(checkinDate: endDate, symptoms: [], startDate: startDate)
 
         XCTAssertEqual(
-            positiveTestResult.expiryDate,
+            positiveTestResult.checkinDate,
             Calendar.current.date(from: DateComponents(year: 2020, month: 5, day: 21, hour: 7))!
         )
     }
