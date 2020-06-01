@@ -36,6 +36,10 @@ protocol Checkinable {
 }
 
 extension Checkinable {
+    static func firstCheckin(from startDate: Date) -> Date {
+        return nextCheckin(from: startDate, afterDays: 7)
+    }
+
     static func nextCheckin(from startDate: Date, afterDays days: Int = 1) -> Date {
         let startOfStartDate = Calendar.current.startOfDay(for: startDate)
         let expiryDate = Calendar.current.nextDate(
@@ -58,10 +62,6 @@ enum StatusState: Equatable {
         let symptoms: Symptoms?
         let startDate: Date
         let checkinDate: Date
-        
-        static func firstCheckin(from startDate: Date) -> Date {
-            return nextCheckin(from: startDate, afterDays: 7)
-        }
     }
 
     struct Exposed: Codable, Equatable, Expirable {
@@ -83,10 +83,6 @@ enum StatusState: Equatable {
         let symptoms: Symptoms?
         let startDate: Date
         let checkinDate: Date
-        
-        static func firstCheckin(from startDate: Date) -> Date {
-            return nextCheckin(from: startDate, afterDays: 14)
-        }
     }
 
     case ok(Ok)                   // default state, previously "blue"
