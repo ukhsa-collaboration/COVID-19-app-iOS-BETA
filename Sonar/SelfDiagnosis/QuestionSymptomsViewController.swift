@@ -13,8 +13,7 @@ class QuestionSymptomsViewController: UIViewController, Storyboarded {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var pageLabel: UILabel!
-    @IBOutlet weak var detailLabel: UILabel!
-    @IBOutlet weak var contextLabel: UILabel!
+    @IBOutlet weak var detailStackView: UIStackView!
     @IBOutlet weak var errorView: ErrorView!
     @IBOutlet weak var yesButton: AnswerButton!
     @IBOutlet weak var noButton: AnswerButton!
@@ -62,11 +61,25 @@ class QuestionSymptomsViewController: UIViewController, Storyboarded {
         pageLabel.text = "\(pageNumber!)/\(pageCount!)"
         pageLabel.accessibilityLabel = "Step \(pageNumber!) of \(pageCount!)"
         titleLabel.text = questionTitle
-        detailLabel.text = questionDetail
-        detailLabel.textColor = UIColor(named: "NHS Secondary Text")
-        contextLabel.text = questionContext
-        contextLabel.isHidden = questionContext == nil
-        contextLabel.textColor = UIColor(named: "NHS Secondary Text")
+
+        (questionDetail
+            .split(separator: "\n")
+            .map { String($0) } + [questionContext])
+            .compactMap { $0 }
+            .enumerated()
+            .forEach { index, text in
+                let label = UILabel()
+                // Prepend newline to all but first label
+                let newLine = index != 0 ? "\n" : ""
+                label.text = "\(newLine)\(text)"
+                label.textColor = UIColor(named: "NHS Secondary Text")
+                label.sizeToFit()
+                label.translatesAutoresizingMaskIntoConstraints = false
+                label.font = UIFont.preferredFont(forTextStyle: .body)
+                label.numberOfLines = 0
+                detailStackView.addArrangedSubview(label)
+            }
+        
         errorView.isHidden = true
         errorView.errorMessage.text = questionError
         yesButton.text = questionYes
