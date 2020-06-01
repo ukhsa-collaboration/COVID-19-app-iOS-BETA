@@ -35,16 +35,28 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var thankYouLabel: UILabel!
     @IBOutlet weak var confirmLabel: UILabel!
+    @IBOutlet weak var thankYouStackView: UIStackView!
     @IBOutlet weak var submitButton: PrimaryButton!
     @IBOutlet weak var confirmSwitch: UISwitch!
     @IBOutlet weak var errorView: ErrorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+                
+        "SUBMIT_SYMPTOMS_THANK_YOU".localized
+            .split(separator: "\n")
+            .forEach {
+                let label = UILabel()
+                label.text = "\($0)\n"
+                label.textColor = UIColor(named: "NHS Text")
+                label.sizeToFit()
+                label.translatesAutoresizingMaskIntoConstraints = false
+                label.font = UIFont.preferredFont(forTextStyle: .body)
+                label.numberOfLines = 0
+                thankYouStackView.addArrangedSubview(label)
+            }
 
-        thankYouLabel.text = "SUBMIT_SYMPTOMS_THANK_YOU".localized
         confirmLabel.text = "SUBMIT_SYMPTOMS_CONFIRM".localized
         confirmSwitch.accessibilityLabel = "Please toggle the switch to confirm the information you entered is accurate"
         errorView.isHidden = true
