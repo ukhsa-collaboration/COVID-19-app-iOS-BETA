@@ -136,10 +136,8 @@ Please update your symptoms to view your latest advice.";
 "CHECKIN_QUESTIONNAIRE_OVERLAY_HEADER" = "How are you feeling today?";
 "CHECKIN_QUESTIONNAIRE_OVERLAY_DETAIL" = "Please update your symptoms to view your latest advice.";
 
-"NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_HEADER" = "Your test result indicates that you don’t have coronavirus";
-"NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_DETAIL" = "Thank you for getting tested. You have been sent an email or text with more information.
-
-Please update your symptoms to view your latest advice";
+"NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_HEADER" = "Your test result indicates that you do not have coronavirus";
+"NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_DETAIL" = "Thank you for getting tested. View your current advice based on your results. You have been sent an email with more information.";
 
 "COPIED" = "Copied";
 
