@@ -11,9 +11,9 @@ import UIKit
 class TestingInfoContainerViewController: ReferenceCodeContainerViewControllerBase, Storyboarded {
     static let storyboardName = "TestingInfo"
         
-    override func instantiatePostLoadViewController(referenceCode: String?) -> UIViewController {
+    override func instantiatePostLoadViewController(referenceCode: String?, referenceError: String?) -> UIViewController {
         let testingInfoVc = TestingInfoViewController.instantiate()
-        testingInfoVc.inject(referenceCode: referenceCode)
+        testingInfoVc.inject(referenceCode: referenceCode, referenceError: referenceError)
         return testingInfoVc
     }
     

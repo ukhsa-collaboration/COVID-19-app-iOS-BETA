@@ -179,7 +179,7 @@ private class FixedLocaleProvider: LocaleProvider {
 }
 
 private class MockLinkingIdManager: LinkingIdManaging {
-    func fetchLinkingId(completion: @escaping (LinkingId?) -> Void) {
+    func fetchLinkingId(completion: @escaping (LinkingId?, String?) -> Void) {
     }
 }
 

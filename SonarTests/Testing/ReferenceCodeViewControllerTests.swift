@@ -13,7 +13,7 @@ class ReferenceCodeViewControllerTests: XCTestCase {
 
     func testShowsReferenceCodeWhenNotNil() throws {
         let vc = ReferenceCodeViewController.instantiate()
-        vc.inject(referenceCode: "12345")
+        vc.inject(referenceCode: "12345", error: nil)
         XCTAssertNotNil(vc.view)
 
         XCTAssertTrue(vc.errorWrapper.isHidden)
@@ -23,10 +23,11 @@ class ReferenceCodeViewControllerTests: XCTestCase {
     
     func testShowsErrorWhenReferenceCodeNil() throws {
         let vc = ReferenceCodeViewController.instantiate()
-        vc.inject(referenceCode: nil)
+        vc.inject(referenceCode: nil, error: "foobar")
         XCTAssertNotNil(vc.view)
 
         XCTAssertFalse(vc.errorWrapper.isHidden)
         XCTAssertTrue(vc.referenceCodeWrapper.isHidden)
+        XCTAssertEqual(vc.referenceCodeError.text, "foobar")
     }
 }

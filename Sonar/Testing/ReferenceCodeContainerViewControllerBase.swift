@@ -24,16 +24,16 @@ class ReferenceCodeContainerViewControllerBase: UIViewController {
 
         show(viewController: ReferenceCodeLoadingViewController.instantiate())
 
-        linkingIdManager.fetchLinkingId { linkingId in
+        linkingIdManager.fetchLinkingId { linkingId, error in
             self.uiQueue.async {
-                let newChild = self.instantiatePostLoadViewController(referenceCode: linkingId)
+                let newChild = self.instantiatePostLoadViewController(referenceCode: linkingId, referenceError: error)
                 self.show(viewController: newChild)
                 UIAccessibility.post(notification: .layoutChanged, argument: self.view)
             }
         }
     }
     
-    open func instantiatePostLoadViewController(referenceCode: String?) -> UIViewController {
+    open func instantiatePostLoadViewController(referenceCode: String?, referenceError: String?) -> UIViewController {
         fatalError("Must override")
     }
     
