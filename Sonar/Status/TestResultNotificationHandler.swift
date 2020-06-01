@@ -39,19 +39,7 @@ class TestResultNotificationHandler {
         }
         
         statusStateMachine.received(testResult)
-        scheduleNotification()
         completion(.newData)
-    }
-    
-    private func scheduleNotification() {
-        let scheduler = HumbleLocalNotificationScheduler(userNotificationCenter: userNotificationCenter)
-        scheduler.scheduleLocalNotification(
-            title: nil,
-            body: "TEST_UPDATE_NOTIFICATION".localized,
-            interval: 10,
-            identifier: "testResult.arrived",
-            repeats: false
-        )
     }
     
     private func getTestResult(fromUserInfo userInfo: [AnyHashable: Any]) throws -> TestResult {

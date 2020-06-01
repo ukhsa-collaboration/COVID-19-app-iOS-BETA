@@ -311,7 +311,7 @@ class StatusStateMachine: StatusStateMachining {
         content.title = "TEST_RESULT_TITLE".localized
         content.body = "TEST_RESULT_BODY".localized
 
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
+        let request = UNNotificationRequest(identifier: "testResult.arrived", content: content, trigger: nil)
         return request
     }()
 
