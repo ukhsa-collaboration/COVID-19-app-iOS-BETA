@@ -24,7 +24,7 @@ class StatusViewController: UIViewController, Storyboarded {
     @IBOutlet weak var diagnosisTitleLabel: UILabel!
     @IBOutlet weak var diagnosisDetailLabel: UILabel!
 
-    @IBOutlet weak var nextStepsDetailView: UIView!
+    @IBOutlet weak var nextStepsDetailView: UIStackView!
 
     @IBOutlet weak var feelUnwellButton: UIButton!
     @IBOutlet weak var feelUnwellTitleLabel: UILabel!
@@ -33,7 +33,7 @@ class StatusViewController: UIViewController, Storyboarded {
     @IBOutlet weak var bookTestButton: UIButton!
     @IBOutlet weak var bookTestLabel: UILabel!
     @IBOutlet weak var stepsDetailLabel: UILabel!
-
+    @IBOutlet weak var medicalEmergencyLabel: UILabel!
     @IBOutlet weak var nhsServicesStackView: UIStackView!
     @IBOutlet weak var nhsCoronavirusLinkButton: LinkButton!
     @IBOutlet var sectionHeaders: [UILabel]!
@@ -133,9 +133,10 @@ class StatusViewController: UIViewController, Storyboarded {
 
         nhsCoronavirusLinkButton.url = ContentURLs.shared.regionalServices
 
-        (sectionHeaders + [stepsDetailLabel, feelUnwellBodyLabel]).forEach {
+        (sectionHeaders + [stepsDetailLabel, feelUnwellBodyLabel, medicalEmergencyLabel]).forEach {
             $0.textColor = UIColor(named: "NHS Secondary Text")
         }
+        medicalEmergencyLabel.text = "STATUS_GET_HELP".localized
         
         notificationCenter.addObserver(self, selector: #selector(reload), name: UIApplication.didBecomeActiveNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(reload), name: StatusStateMachine.StatusStateChangedNotification, object: nil)
@@ -275,7 +276,8 @@ class StatusViewController: UIViewController, Storyboarded {
             diagnosisDetailLabel.isHidden = true
             feelUnwellButton.isHidden = false
             bookTestButton.isHidden = true
-            stepsDetailLabel.text = getHelpText(detail: "STATUS_GET_HELP_OK".localized)
+            stepsDetailLabel.isHidden = false
+            stepsDetailLabel.text = "STATUS_GET_HELP_OK".localized
 
         case .exposed(let exposed):
             diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
@@ -284,7 +286,8 @@ class StatusViewController: UIViewController, Storyboarded {
             diagnosisDetailLabel.isHidden = false
             feelUnwellButton.isHidden = false
             bookTestButton.isHidden = true
-            stepsDetailLabel.text = getHelpText(detail: "STATUS_GET_HELP_EXPOSED".localized)
+            stepsDetailLabel.isHidden = false
+            stepsDetailLabel.text = "STATUS_GET_HELP_EXPOSED".localized
 
         case .symptomatic(let symptomatic):
             setupDetail(for: symptomatic)
@@ -299,6 +302,7 @@ class StatusViewController: UIViewController, Storyboarded {
             diagnosisDetailLabel.text = pleaseIsolateText(until: positiveTestResult.expiryDate)
             feelUnwellButton.isHidden = true
             bookTestButton.isHidden = true
+            stepsDetailLabel.isHidden = true
         }
     }
     
@@ -309,7 +313,7 @@ class StatusViewController: UIViewController, Storyboarded {
         diagnosisDetailLabel.text = pleaseIsolateText(until: state.checkinDate)
         feelUnwellButton.isHidden = true
         bookTestButton.isHidden = false
-        stepsDetailLabel.text = getHelpText()
+        stepsDetailLabel.isHidden = true
 
         if dateProvider() >= state.checkinDate {
             presentCheckinDrawer(
@@ -381,11 +385,6 @@ class StatusViewController: UIViewController, Storyboarded {
         dateFormatter.setLocalizedDateFormatFromTemplate(template)
         return dateFormatter.string(from: date)
     }
-
-    private func getHelpText(detail: String? = nil) -> String {
-        return [detail, "STATUS_GET_HELP".localized].compactMap { $0 }.joined(separator: "\n\n")
-    }
-
 }
 
 protocol DrawerPresenter {
