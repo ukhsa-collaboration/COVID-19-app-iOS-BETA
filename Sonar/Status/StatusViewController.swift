@@ -110,7 +110,7 @@ class StatusViewController: UIViewController, Storyboarded {
         }()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Info"), style: .plain, target: self, action: #selector(infoTapped))
-        navigationItem.rightBarButtonItem?.accessibilityLabel = "Info"
+        navigationItem.rightBarButtonItem?.accessibilityLabel = "Link to more information about NHS COVID-19 app"
 
         diagnosisHighlightView.layer.cornerRadius = diagnosisHighlightView.bounds.width / 2
         diagnosisHighlightView.accessibilityIgnoresInvertColors = true
