@@ -187,13 +187,14 @@ class SetStatusStateViewController: UITableViewController {
         case 2:
             statusState = .exposed(StatusState.Exposed(startDate: date!))
         case 3:
-            statusState = .positiveTestResult(StatusState.PositiveTestResult(symptoms: symptoms, startDate: date!))
+            let checkinDate = Calendar.current.date(byAdding: .day, value: 1, to: date!)!
+            statusState = .positiveTestResult(StatusState.PositiveTestResult(checkinDate: checkinDate, symptoms: symptoms, startDate: date!))
         case 4:
             guard symptoms.hasCoronavirusSymptoms else {
                 fatalError()
             }
 
-            let checkinDate = Calendar.current.date(byAdding: .day, value: 1, to: date!)!
+            let checkinDate = Calendar.current.date(byAdding: .day, value: 7, to: date!)!
             statusState = .exposedSymptomatic(StatusState.ExposedSymptomatic(symptoms: symptoms, startDate: date!, checkinDate: checkinDate))
         default:
             fatalError()
@@ -232,7 +233,9 @@ extension SetStatusStateViewController: UIPickerViewDelegate {
         case 2:
             statusState = .exposed(StatusState.Exposed(startDate: Date()))
         case 3:
-            statusState = .positiveTestResult(StatusState.PositiveTestResult(symptoms: [.temperature, .cough], startDate: Date()))
+            let startDate = Date()
+            let checkinDate = StatusState.Symptomatic.firstCheckin(from: startDate)
+            statusState = .positiveTestResult(StatusState.PositiveTestResult(checkinDate: checkinDate, symptoms: [.temperature, .cough], startDate: Date()))
         case 4:
             let startDate = Date()
             let checkinDate = StatusState.ExposedSymptomatic.firstCheckin(from: startDate)

@@ -147,32 +147,25 @@ class StatusStateMachine: StatusStateMachining {
     
     func tick() {
         switch state {
-        case .ok, .symptomatic, .exposedSymptomatic:
+        case .ok, .symptomatic, .exposedSymptomatic, .positiveTestResult:
             break // Don't need to do anything
         case .exposed(let exposed):
             guard currentDate >= exposed.expiryDate else { return }
 
             state = .ok(StatusState.Ok())
-        case .positiveTestResult(let positive):
-            guard currentDate >= positive.expiryDate else { return }
-
-            let symptomatic = StatusState.Symptomatic(
-                symptoms: positive.symptoms,
-                startDate: positive.startDate,
-                checkinDate: positive.expiryDate
-            )
-            state = .symptomatic(symptomatic)
         }
     }
 
     func checkin(symptoms: Symptoms) {
         switch state {
-        case .ok, .exposed, .positiveTestResult:
+        case .ok, .exposed:
             assertionFailure("Checking in is only allowed from symptomatic")
             return
         case .exposedSymptomatic(let state):
             checkin(state: state, symptoms: symptoms)
         case .symptomatic(let state):
+            checkin(state: state, symptoms: symptoms)
+        case .positiveTestResult(let state):
             checkin(state: state, symptoms: symptoms)
         }
     }
@@ -180,8 +173,13 @@ class StatusStateMachine: StatusStateMachining {
     func checkin<T>(state: T, symptoms: Symptoms) where T: Checkinable & SymptomProvider {
         if symptoms.contains(.temperature) {
             let checkinDate = T.nextCheckin(from: currentDate)
-            let nextCheckin = StatusState.Symptomatic(symptoms: symptoms, startDate: state.startDate, checkinDate: checkinDate)
-            self.state = .symptomatic(nextCheckin)
+            if state is StatusState.PositiveTestResult {
+                let nextCheckin = StatusState.PositiveTestResult(checkinDate: checkinDate, symptoms: symptoms, startDate: state.startDate)
+                self.state = .positiveTestResult(nextCheckin)
+            } else {
+                let nextCheckin = StatusState.Symptomatic(symptoms: symptoms, startDate: state.startDate, checkinDate: checkinDate)
+                self.state = .symptomatic(nextCheckin)
+            }
         } else {
             if !symptoms.isEmpty {
                 drawerMailbox.post(.symptomsButNotSymptomatic)
@@ -229,24 +227,18 @@ class StatusStateMachine: StatusStateMachining {
     }
     
     func handlePositiveTestResult(from testDate: Date) {
-        switch state {
-        case .ok, .exposed:
-            let positive = StatusState.PositiveTestResult(symptoms: nil, startDate: testDate)
-            state = .positiveTestResult(positive)
-        case .symptomatic(let symptomatic):
-            let startDate = min(symptomatic.startDate, testDate)
-            let positive = StatusState.PositiveTestResult(symptoms: symptomatic.symptoms, startDate: startDate)
-            state = .positiveTestResult(positive)
-        case .positiveTestResult:
-            let message = "Received positive test result, in a state where it is not expected"
-            assertionFailure(message)
-            self.logger.error("\(message)")
-        case .exposedSymptomatic(let exposedSymptomatic):
-            let startDate = min(exposedSymptomatic.startDate, testDate)
-            let positive = StatusState.PositiveTestResult(symptoms: exposedSymptomatic.symptoms, startDate: startDate)
-            state = .positiveTestResult(positive)
-        }
-
+        let startDate: Date = {
+            switch state {
+            case .ok, .exposed:
+                return testDate
+            case .symptomatic, .positiveTestResult, .exposedSymptomatic:
+                return min(testDate, state.startDate ?? testDate)
+            }
+        }()
+        
+        let checkinDate = StatusState.PositiveTestResult.firstCheckin(from: startDate)
+        let positive = StatusState.PositiveTestResult(checkinDate: checkinDate, symptoms: state.symptoms, startDate: testDate)
+        state = .positiveTestResult(positive)
         drawerMailbox.post(.positiveTestResult)
     }
 
