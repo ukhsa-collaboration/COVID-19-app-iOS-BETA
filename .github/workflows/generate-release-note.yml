@@ -21,7 +21,7 @@ jobs:
         id: generate_release_notes
         uses: ./.github/actions/generate-release-notes
         with:
-          github_token: ${{ 
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           tracker_token: ${{ secrets.tracker_api_token }}
           revision_range: ${{ github.event.client_payload.revision_range }}
 
