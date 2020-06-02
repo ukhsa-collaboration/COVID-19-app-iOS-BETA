@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -192,7 +192,7 @@
                                                             <color key="titleColor" name="NHS Link"/>
                                                         </state>
                                                         <connections>
-                                                            <segue destination="asv-dx-knf" kind="presentation" id="6ws-C1-zrY"/>
+                                                            <segue destination="asv-dx-knf" kind="show" id="6ws-C1-zrY"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -256,7 +256,7 @@
             <objects>
                 <viewController storyboardIdentifier="PrivacyViewController" id="asv-dx-knf" customClass="PrivacyViewController" customModule="Sonar" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Fjr-8t-RO6">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TUo-oc-PGD">
@@ -265,21 +265,6 @@
                                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="31h-8a-dJ8">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="624"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P9b-DU-jl5" customClass="OnboardingLogoStrapline" customModule="Sonar" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="350" height="33"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </view>
-                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="999" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="neR-wt-8CD" userLabel="Close" customClass="UnderlinedButton" customModule="Sonar" customModuleProvider="target">
-                                                <rect key="frame" x="350" y="0.0" width="44" height="33"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="5ry-Yv-rBk"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                <state key="normal" title="Close"/>
-                                                <connections>
-                                                    <action selector="didTapClose:" destination="asv-dx-knf" eventType="touchUpInside" id="nW6-3W-rtl"/>
-                                                </connections>
-                                            </button>
                                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="7HO-8c-Q84">
                                                 <rect key="frame" x="20" y="53" width="374" height="880"/>
                                                 <subviews>
@@ -294,7 +279,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="61U-61-fII">
-                                                        <rect key="frame" x="0.0" y="60.666666666666679" width="374" height="86.333333333333314"/>
+                                                        <rect key="frame" x="0.0" y="60.66666666666665" width="374" height="86.333333333333314"/>
                                                         <string key="text">This app gives you advice if you have been near someone who tested positive for coronavirus after reporting symptoms. The app uses your phone to detect other app users nearby. </string>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                         <color key="textColor" name="NHS Text"/>
@@ -379,15 +364,9 @@
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="7HO-8c-Q84" firstAttribute="leading" secondItem="31h-8a-dJ8" secondAttribute="leading" constant="20" id="4PI-pe-MnS"/>
-                                            <constraint firstItem="P9b-DU-jl5" firstAttribute="top" secondItem="31h-8a-dJ8" secondAttribute="top" id="By7-2B-AL5"/>
-                                            <constraint firstItem="neR-wt-8CD" firstAttribute="top" secondItem="31h-8a-dJ8" secondAttribute="top" id="DUo-cW-pPa"/>
-                                            <constraint firstAttribute="trailing" secondItem="neR-wt-8CD" secondAttribute="trailing" constant="20" id="DYv-Ub-EaF"/>
-                                            <constraint firstItem="neR-wt-8CD" firstAttribute="leading" secondItem="P9b-DU-jl5" secondAttribute="trailing" id="Ime-qx-zHf"/>
                                             <constraint firstAttribute="trailing" secondItem="7HO-8c-Q84" secondAttribute="trailing" constant="20" id="J0L-rs-xfK"/>
-                                            <constraint firstItem="7HO-8c-Q84" firstAttribute="top" secondItem="P9b-DU-jl5" secondAttribute="bottom" constant="20" id="MEN-J7-3bs"/>
+                                            <constraint firstItem="7HO-8c-Q84" firstAttribute="top" secondItem="31h-8a-dJ8" secondAttribute="top" id="U1o-sK-WgC"/>
                                             <constraint firstAttribute="bottom" secondItem="7HO-8c-Q84" secondAttribute="bottom" constant="20" id="dkv-Xr-svk"/>
-                                            <constraint firstItem="neR-wt-8CD" firstAttribute="centerY" secondItem="P9b-DU-jl5" secondAttribute="centerY" id="qCZ-Yf-oDH"/>
-                                            <constraint firstItem="P9b-DU-jl5" firstAttribute="leading" secondItem="31h-8a-dJ8" secondAttribute="leading" id="t8y-px-wnL"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -412,6 +391,8 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="0ia-KQ-0k0"/>
                     </view>
+                    <navigationItem key="navigationItem" id="EWZ-bF-VLb"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="moreAbout" destination="gQd-o4-fOZ" id="lEs-xB-0aJ"/>
                         <outlet property="privacyPolicy" destination="lWb-bV-hQp" id="L2t-o8-a0W"/>
