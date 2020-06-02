@@ -134,7 +134,7 @@ jobs:
           PIVOTAL_TRACKER_API_TOKEN: ${{ secrets.pivotal_tracker_api_token }}
           PROJECT_ID: ${{ secrets.pivotal_tracker_project_id }}
         run: |
-          echo $BUILD
+          git fetch --tags
 
           previous_tag=${{ needs.upload.outputs.previous-tag }}
           tag=${{ needs.upload.outputs.tag }}
