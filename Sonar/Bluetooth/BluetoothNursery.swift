@@ -79,7 +79,7 @@ class ConcreteBluetoothNursery: BluetoothNursery, PersistenceDelegate {
         broadcastIdGenerator = SonarBroadcastPayloadGenerator(
             storage: SecureBroadcastRotationKeyStorage(),
             persistence: persistence,
-            provider: ConcreteBroadcastIdEncrypterProvider(persistence: persistence))
+            encrypter: ConcreteBroadcastIdEncrypter())
         
         let broadcaster = ConcreteBTLEBroadcaster(idGenerator: broadcastIdGenerator!)
         peripheral = CBPeripheralManager(delegate: broadcaster, queue: btleQueue, options: [

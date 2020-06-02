@@ -104,8 +104,6 @@
 		2192888724640B5600691FDD /* ContactEventDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2192888624640B5600691FDD /* ContactEventDetailTableViewController.swift */; };
 		219B613524471B9800E2F1A6 /* UUIDExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219B613424471B9800E2F1A6 /* UUIDExtensions.swift */; };
 		219B61372447371700E2F1A6 /* UUIDExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219B61362447371700E2F1A6 /* UUIDExtensionsTests.swift */; };
-		219C7B74245AB88100952B4D /* BroadcastEncrypterProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219C7B73245AB88100952B4D /* BroadcastEncrypterProvider.swift */; };
-		219C7B76245AB8E500952B4D /* ConcreteBroadcastIdEncrypterProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219C7B75245AB8E500952B4D /* ConcreteBroadcastIdEncrypterProviderTests.swift */; };
 		219C7B78245AD4B700952B4D /* DateExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219C7B77245AD4B700952B4D /* DateExtensionTests.swift */; };
 		219C7B7A245AE83700952B4D /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219C7B79245AE83700952B4D /* DataExtensions.swift */; };
 		219C7B7C245B093000952B4D /* BluetoothPayloadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219C7B7B245B093000952B4D /* BluetoothPayloadTests.swift */; };
@@ -439,8 +437,6 @@
 		2192888624640B5600691FDD /* ContactEventDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventDetailTableViewController.swift; sourceTree = "<group>"; };
 		219B613424471B9800E2F1A6 /* UUIDExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UUIDExtensions.swift; sourceTree = "<group>"; };
 		219B61362447371700E2F1A6 /* UUIDExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UUIDExtensionsTests.swift; sourceTree = "<group>"; };
-		219C7B73245AB88100952B4D /* BroadcastEncrypterProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastEncrypterProvider.swift; sourceTree = "<group>"; };
-		219C7B75245AB8E500952B4D /* ConcreteBroadcastIdEncrypterProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcreteBroadcastIdEncrypterProviderTests.swift; sourceTree = "<group>"; };
 		219C7B77245AD4B700952B4D /* DateExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensionTests.swift; sourceTree = "<group>"; };
 		219C7B79245AE83700952B4D /* DataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtensions.swift; sourceTree = "<group>"; };
 		219C7B7B245B093000952B4D /* BluetoothPayloadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothPayloadTests.swift; sourceTree = "<group>"; };
@@ -1437,7 +1433,6 @@
 				F72EBDA6243D2FD1009F9328 /* ConcreteBroadcastIdEncrypter.swift */,
 				F7D62F2A2440D64C004C32A2 /* SonarBroadcastPayloadGenerator.swift */,
 				F7E74F8D244DFBDA00273C59 /* BroadcastRotationKeyConverter.swift */,
-				219C7B73245AB88100952B4D /* BroadcastEncrypterProvider.swift */,
 			);
 			path = BroadcastId;
 			sourceTree = "<group>";
@@ -1449,7 +1444,6 @@
 				F72EBDA8243D2FE6009F9328 /* BroadcastIdEncrypterTests.swift */,
 				F7D62F282440D4CB004C32A2 /* SonarBroadcastPayloadGeneratorTests.swift */,
 				F7E74F8F244DFC1400273C59 /* BroadcastRotationKeyConverterTests.swift */,
-				219C7B75245AB8E500952B4D /* ConcreteBroadcastIdEncrypterProviderTests.swift */,
 				219C7B7B245B093000952B4D /* BluetoothPayloadTests.swift */,
 			);
 			path = BroadcastId;
@@ -1791,7 +1785,6 @@
 				F6AA91F2247F161C00D086B8 /* DrawerMailboxingDouble.swift in Sources */,
 				09B103642444EAB80091834D /* ContactEventRepositoryDouble.swift in Sources */,
 				219B61372447371700E2F1A6 /* UUIDExtensionsTests.swift in Sources */,
-				219C7B76245AB8E500952B4D /* ConcreteBroadcastIdEncrypterProviderTests.swift in Sources */,
 				F67A2293242AA370002254B6 /* SecureRegistrationStorageTests.swift in Sources */,
 				0964B380246329680022EF97 /* UIView_ScrollingTests.swift in Sources */,
 				214209D72423C9B600C7BFF3 /* UploadProximityEventsRequestTests.swift in Sources */,
@@ -1852,7 +1845,6 @@
 				0937F78F247461D40010FB3B /* ReferenceCodeContainerViewControllerBase.swift in Sources */,
 				F6F05A342434344200FF4B72 /* StartNowViewController.swift in Sources */,
 				F74BAC56245B35910023FFC2 /* SelfsizingTextView.swift in Sources */,
-				219C7B74245AB88100952B4D /* BroadcastEncrypterProvider.swift in Sources */,
 				0997D056243BDEEC0067346C /* RootViewController.swift in Sources */,
 				092F5AE024859B81001A06B7 /* UnderlinedButton.swift in Sources */,
 				F6548FA52460DB95005F06FF /* SpinnerView.swift in Sources */,
