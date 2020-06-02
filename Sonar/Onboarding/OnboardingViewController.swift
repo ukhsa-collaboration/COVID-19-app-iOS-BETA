@@ -26,6 +26,8 @@ class OnboardingViewController: UINavigationController, Storyboarded {
     }
     
     override func viewDidLoad() {
+        delegate = self
+        
         if #available(iOS 13.0, *) {
             // Disallow pulling to dismiss the card modal
             isModalInPresentation = true
@@ -90,5 +92,12 @@ class OnboardingViewController: UINavigationController, Storyboarded {
         }
 
         viewControllers = [vc]
+    }
+}
+
+extension OnboardingViewController: UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        let shouldHideBar = viewController as? PrivacyViewController == nil
+        setNavigationBarHidden(shouldHideBar, animated: animated)
     }
 }
