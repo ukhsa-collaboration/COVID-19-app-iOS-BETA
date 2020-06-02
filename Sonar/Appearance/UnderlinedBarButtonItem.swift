@@ -8,7 +8,7 @@
 
 import UIKit
 
-private let navBarDefaultColor = UIColor(red: 0, green: 0.37, blue: 0.72, alpha: 1)
+let buttonDefaultColor = UIColor(red: 0, green: 0.37, blue: 0.72, alpha: 1)
 
 class UnderlinedBarButtonItem: UIBarButtonItem {
     
@@ -17,7 +17,7 @@ class UnderlinedBarButtonItem: UIBarButtonItem {
         
         setTitleTextAttributes([
             .underlineStyle: NSUnderlineStyle.single.rawValue,
-            .foregroundColor: navBarDefaultColor
+            .foregroundColor: buttonDefaultColor
         ], for: .normal)
     }
 }

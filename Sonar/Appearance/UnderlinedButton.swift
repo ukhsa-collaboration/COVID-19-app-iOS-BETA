@@ -33,9 +33,20 @@ class UnderlinedButton: UIButton {
         update()
     }
     
+    // Depending on exactly how the button is used, the title may be set by calling
+    // setTitle(for state:) or by setting the titleLabel's text directly.
+    // We need to style the text appropriately in either case.
+    
     override func setTitle(_ title: String?, for state: UIControl.State) {
         super.setTitle(title, for: state)
-        update()
+        guard let title = title, state == .normal else { return }
+        
+        accessibilityLabel = title
+        let attributedTitle = NSAttributedString(
+            string: title,
+            attributes: attributes()
+        )
+        setAttributedTitle(attributedTitle, for: .normal)
     }
 
 
@@ -45,11 +56,16 @@ class UnderlinedButton: UIButton {
         accessibilityLabel = title
         titleLabel?.attributedText = NSAttributedString(
             string: title,
-            attributes: [
-                .underlineStyle: NSUnderlineStyle.single.rawValue,
-                .font: UIFont.preferredFont(forTextStyle: textStyle)
-            ]
+            attributes: attributes()
         )
+    }
+    
+    private func attributes() -> [NSAttributedString.Key : Any] {
+        return [
+            .underlineStyle: NSUnderlineStyle.single.rawValue,
+            .foregroundColor: buttonDefaultColor,
+            .font: UIFont.preferredFont(forTextStyle: textStyle)
+        ]
     }
 
 }
