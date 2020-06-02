@@ -365,7 +365,7 @@
                                         <constraints>
                                             <constraint firstItem="7HO-8c-Q84" firstAttribute="leading" secondItem="31h-8a-dJ8" secondAttribute="leading" constant="20" id="4PI-pe-MnS"/>
                                             <constraint firstAttribute="trailing" secondItem="7HO-8c-Q84" secondAttribute="trailing" constant="20" id="J0L-rs-xfK"/>
-                                            <constraint firstItem="7HO-8c-Q84" firstAttribute="top" secondItem="31h-8a-dJ8" secondAttribute="top" id="U1o-sK-WgC"/>
+                                            <constraint firstItem="7HO-8c-Q84" firstAttribute="top" secondItem="31h-8a-dJ8" secondAttribute="top" constant="20" id="U1o-sK-WgC"/>
                                             <constraint firstAttribute="bottom" secondItem="7HO-8c-Q84" secondAttribute="bottom" constant="20" id="dkv-Xr-svk"/>
                                         </constraints>
                                     </view>
