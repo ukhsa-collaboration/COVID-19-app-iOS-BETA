@@ -158,7 +158,7 @@
                         <viewLayoutGuide key="safeArea" id="KlB-Tu-xdS"/>
                     </view>
                     <navigationItem key="navigationItem" title="Add my symptoms" id="fhp-Za-bUG">
-                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="gne-Ik-Kaf">
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="gne-Ik-Kaf" customClass="UnderlinedBarButtonItem" customModule="Sonar" customModuleProvider="target">
                             <connections>
                                 <action selector="cancelTapped:" destination="ofL-pj-tC8" id="12d-Mb-kct"/>
                             </connections>
@@ -287,7 +287,7 @@
                         <viewLayoutGuide key="safeArea" id="pif-cO-ndi"/>
                     </view>
                     <navigationItem key="navigationItem" title="Add my symptoms" id="cA5-ND-Bwb">
-                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="Ynz-wt-BRE">
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="Ynz-wt-BRE" customClass="UnderlinedBarButtonItem" customModule="Sonar" customModuleProvider="target">
                             <connections>
                                 <action selector="cancelTapped:" destination="JNI-bm-phl" id="nht-TN-53S"/>
                             </connections>
@@ -526,7 +526,7 @@
                         <viewLayoutGuide key="safeArea" id="awF-Hi-ytb"/>
                     </view>
                     <navigationItem key="navigationItem" title="Add my symptoms" id="b3B-gw-1zt">
-                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="Zxz-Y5-fAr">
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="Zxz-Y5-fAr" customClass="UnderlinedBarButtonItem" customModule="Sonar" customModuleProvider="target">
                             <connections>
                                 <action selector="cancelTapped:" destination="iIR-bG-zmI" id="Fb2-cr-yyh"/>
                             </connections>
