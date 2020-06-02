@@ -122,12 +122,6 @@ class PostcodeViewController: UIViewController, Storyboarded {
 }
 
 extension PostcodeViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        didTapContinue()
-
-        return true
-    }
-        
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString: String) -> Bool {
         let existingLength = textField.text?.count ?? 0
         return existingLength - range.length + replacementString.count <= maxLength
