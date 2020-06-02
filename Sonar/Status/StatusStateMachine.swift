@@ -100,7 +100,7 @@ class StatusStateMachine: StatusStateMachining {
         }
 
         switch state {
-        case .exposed(let exposed):
+        case .exposed:
             try contactEventsUploader.upload(from: startDate, with: symptoms)
             
             let firstCheckin = StatusState.ExposedSymptomatic.firstCheckin(from: startDate)
@@ -113,11 +113,10 @@ class StatusStateMachine: StatusStateMachining {
                 return
             }
 
-            let checkinDate = max(firstCheckin, exposed.expiryDate)
             let exposedSymptomatic = StatusState.ExposedSymptomatic(
                 symptoms: symptoms,
-                startDate: exposed.startDate,
-                checkinDate: checkinDate
+                startDate: startDate,
+                checkinDate: firstCheckin
             )
             state = .exposedSymptomatic(exposedSymptomatic)
             
