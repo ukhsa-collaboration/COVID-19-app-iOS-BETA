@@ -174,7 +174,7 @@ class StatusStateMachineTests: XCTestCase {
         let checkinDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 19, hour: 7))!
         XCTAssertEqual(machine.state, .exposedSymptomatic(StatusState.ExposedSymptomatic(
             symptoms: [.cough],
-            startDate: exposureDate,
+            startDate: selfDiagnosisDate,
             checkinDate: checkinDate
         )))
         XCTAssertEqual(contactEventsUploader.uploadStartDate, selfDiagnosisDate)
@@ -194,10 +194,10 @@ class StatusStateMachineTests: XCTestCase {
         let selfDiagnosisDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 3, hour: 6))!
         try machine.selfDiagnose(symptoms: [.temperature], startDate: selfDiagnosisDate)
 
-        let checkinDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 15, hour: 7))!
+        let checkinDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 10, hour: 7))!
         XCTAssertEqual(machine.state, .exposedSymptomatic(StatusState.ExposedSymptomatic(
             symptoms: [.temperature],
-            startDate: exposureDate,
+            startDate: selfDiagnosisDate,
             checkinDate: checkinDate
         )))
         XCTAssertEqual(contactEventsUploader.uploadStartDate, selfDiagnosisDate)

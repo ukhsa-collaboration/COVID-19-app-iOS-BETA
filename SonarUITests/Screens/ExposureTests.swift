@@ -94,13 +94,8 @@ class ExposureTests: ScreenTestCase {
         
         eightDaysLater()
         
-        // Not enough time has passed yet (needs to be > 14 days)
+        // 8 days have passed, which is greater than the 7 days since symptoms started
         let checkinPopup = CheckinQuestionnairePopup(app)
-        XCTAssertFalse(checkinPopup.title.exists)
-
-        eightDaysLater()
-        
-        // 16 days have passed, which is greater than the 14 days exposure duration
         XCTAssertTrue(checkinPopup.title.exists)
     }
 }
