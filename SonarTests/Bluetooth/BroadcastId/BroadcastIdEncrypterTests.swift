@@ -38,11 +38,11 @@ class BroadcastIdEncypterTests: XCTestCase {
         txDate = knownDate.addingTimeInterval(5 * 60)
         muchLaterDate = knownDate.addingTimeInterval(86400)
 
-        encrypter = ConcreteBroadcastIdEncrypter(key: serverPublicKey, sonarId: sonarId)
+        encrypter = ConcreteBroadcastIdEncrypter()
     }
     
     func test_generates_ciphertext_that_are_the_correct_size() {
-        let encryptedId = encrypter.broadcastId(from: knownDate, until: muchLaterDate)
+        let encryptedId = encrypter.broadcastId(secKey: serverPublicKey, sonarId: sonarId, from: knownDate, until: muchLaterDate)
 
         // the first 64 bytes are the epheraml public key used for encryption
         // followed by 26 bytes for our ciphertext
@@ -56,8 +56,8 @@ class BroadcastIdEncypterTests: XCTestCase {
             return
         }
 
-        encrypter = ConcreteBroadcastIdEncrypter(key: serverPublicKey, sonarId: sonarId)
-        let result = encrypter.broadcastId(from: knownDate, until: muchLaterDate)
+        encrypter = ConcreteBroadcastIdEncrypter()
+        let result = encrypter.broadcastId(secKey: serverPublicKey, sonarId: sonarId, from: knownDate, until: muchLaterDate)
 
         // first byte would be 0x04 -- indicates uncompressed point format
         // BUT  we do not transmit this, in order to save space

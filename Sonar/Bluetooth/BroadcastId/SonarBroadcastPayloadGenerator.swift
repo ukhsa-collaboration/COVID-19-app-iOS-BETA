@@ -23,18 +23,18 @@ class SonarBroadcastPayloadGenerator: BroadcastPayloadGenerator {
 
     let storage: BroadcastRotationKeyStorage
     let persistence: Persisting
-    let provider: BroadcastIdEncrypterProvider
+    let encrypter: BroadcastIdEncrypter
 
-    init(storage: BroadcastRotationKeyStorage, persistence: Persisting, provider: BroadcastIdEncrypterProvider) {
+    init(storage: BroadcastRotationKeyStorage, persistence: Persisting, encrypter: BroadcastIdEncrypter) {
         self.storage = storage
         self.persistence = persistence
-        self.provider = provider
+        self.encrypter = encrypter
     }
 
     func broadcastPayload(date: Date) -> BroadcastPayload? {
-        guard let registration = persistence.registration else { return nil }
-
-        let hmacKey = registration.secretKey
+        guard let hmacKey = persistence.registration?.secretKey, let secKey = persistence.registration?.broadcastRotationKey, let sonarId = persistence.registration?.sonarId else {
+            return nil
+        }
 
         var calendar = Calendar.current
         calendar.timeZone = TimeZone(identifier: "UTC")!
@@ -44,12 +44,9 @@ class SonarBroadcastPayloadGenerator: BroadcastPayloadGenerator {
         
         let midnightUTC = calendar.startOfDay(for: calendar.date(byAdding: .day, value: 1, to: date)!)
 
-        if let broadcastId = provider.getEncrypter()?.broadcastId(from: date, until: midnightUTC) {
-            storage.save(broadcastId: broadcastId, date: date)
-            return BroadcastPayload(cryptogram: broadcastId, hmacKey: hmacKey)
-        } else {
-            return nil
-        }
+        let broadcastId = encrypter.broadcastId(secKey: secKey, sonarId: sonarId, from: date, until: midnightUTC)
+        storage.save(broadcastId: broadcastId, date: date)
+        return BroadcastPayload(cryptogram: broadcastId, hmacKey: hmacKey)
     }
 
 }

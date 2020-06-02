@@ -51,11 +51,8 @@ class SonarBroadcastPayloadGeneratorTests: XCTestCase {
         encrypter = MockEncrypter()
     }
 
-    func test_returns_nil_when_provider_returns_nil() {
-        struct NilEncrypterProvider: BroadcastIdEncrypterProvider {
-            func getEncrypter() -> BroadcastIdEncrypter? { return nil }
-        }
-        generator = SonarBroadcastPayloadGenerator(storage: storage, persistence: PersistenceDouble(registration: nil), provider: NilEncrypterProvider())
+    func test_returns_nil_when_registration_is_nil() {
+        generator = SonarBroadcastPayloadGenerator(storage: storage, persistence: PersistenceDouble(registration: nil), encrypter: encrypter)
         let identifier = generator.broadcastPayload(date: Date())
 
         XCTAssertNil(identifier)
@@ -63,8 +60,7 @@ class SonarBroadcastPayloadGeneratorTests: XCTestCase {
 
     func test_it_provides_the_encrypted_result_once_given_sonar_id_and_server_public_key() {
         let persistence = PersistenceDouble(registration: registration)
-        let provider = ConcreteBroadcastIdEncrypterProvider(persistence: persistence)
-        generator = SonarBroadcastPayloadGenerator(storage: storage, persistence: persistence, provider: provider)
+        generator = SonarBroadcastPayloadGenerator(storage: storage, persistence: persistence, encrypter: encrypter)
         
         let payload = generator.broadcastPayload()
 
@@ -77,7 +73,7 @@ class SonarBroadcastPayloadGeneratorTests: XCTestCase {
             stubbedBroadcastId: nil,
             stubbedBroadcastDate: nil)
         let persistence = PersistenceDouble(registration: registration)
-        generator = SonarBroadcastPayloadGenerator(storage: storage, persistence: persistence, provider: MockEncrypterProvider(encrypter: encrypter))
+        generator = SonarBroadcastPayloadGenerator(storage: storage, persistence: persistence, encrypter: encrypter)
         
         let payload = generator.broadcastPayload(date: todayMidday)
         
@@ -105,7 +101,7 @@ class SonarBroadcastPayloadGeneratorTests: XCTestCase {
             stubbedBroadcastId: freshBroadcastId,
             stubbedBroadcastDate: broadcastIdCreationDate)
         let persistence = PersistenceDouble(registration: registration)
-        generator = SonarBroadcastPayloadGenerator(storage: storage, persistence: persistence, provider: MockEncrypterProvider(encrypter: encrypter))
+        generator = SonarBroadcastPayloadGenerator(storage: storage, persistence: persistence, encrypter: encrypter)
 
         let payload = generator.broadcastPayload(date: currentDate)
         
@@ -135,7 +131,7 @@ class SonarBroadcastPayloadGeneratorTests: XCTestCase {
             stubbedBroadcastId: staleBroadcastId,
             stubbedBroadcastDate: broadcastIdCreationDate)
         let persistence = PersistenceDouble(registration: registration)
-        generator = SonarBroadcastPayloadGenerator(storage: storage, persistence: persistence, provider: MockEncrypterProvider(encrypter: encrypter))
+        generator = SonarBroadcastPayloadGenerator(storage: storage, persistence: persistence, encrypter: encrypter)
 
         let payload = generator.broadcastPayload(date: currentDate)
         
@@ -192,19 +188,10 @@ class MockEncrypter: BroadcastIdEncrypter {
     var startDate: Date?
     var endDate: Date?
     var callCount = 0
-    func broadcastId(from startDate: Date, until endDate: Date) -> Data {
+    func broadcastId(secKey: SecKey, sonarId: UUID, from startDate: Date, until endDate: Date) -> Data {
         self.startDate = startDate
         self.endDate = endDate
         callCount += 1
         return MockEncrypter.broadcastId
-    }
-}
-
-struct MockEncrypterProvider: BroadcastIdEncrypterProvider {
-    
-    let encrypter: BroadcastIdEncrypter
-    
-    func getEncrypter() -> BroadcastIdEncrypter? {
-        return encrypter
     }
 }
