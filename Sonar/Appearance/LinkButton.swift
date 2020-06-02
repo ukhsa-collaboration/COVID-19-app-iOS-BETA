@@ -17,7 +17,7 @@ class LinkButton: UIControl {
 
     var url: URL?
 
-    var textStyle: UIFont.TextStyle = .body {
+    var textStyle: UIFont.TextStyle = .headline {
         didSet { update() }
     }
 

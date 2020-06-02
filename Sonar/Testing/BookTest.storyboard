@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -78,17 +78,24 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <containerView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="382" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="DK8-cn-uDB" userLabel="Linking ID view">
-                                                <rect key="frame" x="16" y="461.5" width="382" height="274.5"/>
+                                                <rect key="frame" x="16" y="461.5" width="382" height="128"/>
                                                 <connections>
                                                     <segue destination="z30-wj-buI" kind="embed" id="CA5-fu-JcA"/>
                                                 </connections>
                                             </containerView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uoW-0A-mqN" customClass="LinkButton" customModule="Sonar" customModuleProvider="target">
-                                                <rect key="frame" x="16" y="752" width="382" height="50"/>
+                                                <rect key="frame" x="16" y="605.5" width="382" height="50"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="title" value="Book a coronavirus test now"/>
                                                 </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QmU-bG-9qJ">
+                                                <rect key="frame" x="16" y="671.5" width="382" height="130.5"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" priority="1" id="v77-UE-Bjb"/>
+                                                </constraints>
                                             </view>
                                         </subviews>
                                         <directionalEdgeInsets key="directionalLayoutMargins" top="16" leading="16" bottom="16" trailing="16"/>

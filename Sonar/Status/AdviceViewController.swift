@@ -23,7 +23,6 @@ class AdviceViewController: UIViewController, Storyboarded {
     }
     
     override func viewDidLoad() {
-        link.textStyle = .headline
         link.url = ContentURLs.shared.currentAdvice(for: state)
         
         if let adviceUntilDate = state.endDate {
