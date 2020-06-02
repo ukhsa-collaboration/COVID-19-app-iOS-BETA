@@ -125,14 +125,15 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
             logger.info("peripheral \(peripheral.identifierWithName) discovered with RSSI = \(RSSI)")            
         }
         
-        if peripherals[peripheral.identifier] == nil || peripherals[peripheral.identifier]!.state != .connected {
-            peripherals[peripheral.identifier] = peripheral
-            central.connect(peripheral)
+        if let savedPeripheral = peripherals[peripheral.identifier] {
+            logger.info("saved peripheral \(savedPeripheral.identifierWithName) already in state \(savedPeripheral.state), calling connect again")
         }
+        peripherals[peripheral.identifier] = peripheral
+        central.connect(peripheral)        
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        logger.info("\(peripheral.identifierWithName)")
+        logger.info("peripheral \(peripheral.identifierWithName) connected")
 
         peripheral.delegate = self
         peripheral.readRSSI()
@@ -159,9 +160,9 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
 
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         if let error = error {
-            logger.info("attempting reconnection to \(peripheral.identifierWithName) after error: \(error)")
+            logger.info("attempting reconnection to peripheral \(peripheral.identifierWithName) after error: \(error)")
         } else {
-            logger.info("attempting reconnection to \(peripheral.identifierWithName)")
+            logger.info("attempting reconnection to peripheral \(peripheral.identifierWithName)")
         }
         central.connect(peripheral)
     }
@@ -169,7 +170,7 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
     // MARK: CBPeripheralDelegate
     
     func peripheral(_ peripheral: CBPeripheral, didModifyServices invalidatedServices: [CBService]) {
-        logger.info("\(peripheral.identifierWithName) invalidatedServices:")
+        logger.info("peripheral \(peripheral.identifierWithName) invalidatedServices:")
         for service in invalidatedServices {
             logger.info("\t\(service)\n")
         }
@@ -189,7 +190,7 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
         }
         
         guard let sonarIdService = services.sonarIdService() else {
-            logger.info("sonarId service not discovered for \(peripheral.identifierWithName)")
+            logger.info("sonarId service not discovered for peripheral \(peripheral.identifierWithName)")
             return
         }
 
