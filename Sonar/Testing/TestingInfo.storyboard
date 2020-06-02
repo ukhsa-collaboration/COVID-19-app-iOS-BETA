@@ -20,6 +20,9 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i7g-54-jA7">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="Background_Curve" translatesAutoresizingMaskIntoConstraints="NO" id="FFe-pr-Ymm">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="211"/>
+                                    </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Isf-ek-wrS">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="769.5"/>
                                         <subviews>
@@ -145,8 +148,11 @@
                                     <constraint firstItem="Isf-ek-wrS" firstAttribute="trailing" secondItem="eSt-n9-y1K" secondAttribute="trailing" id="GJQ-tw-X5k"/>
                                     <constraint firstItem="Isf-ek-wrS" firstAttribute="top" secondItem="eSt-n9-y1K" secondAttribute="top" id="GWp-jP-APp"/>
                                     <constraint firstItem="Isf-ek-wrS" firstAttribute="leading" secondItem="eSt-n9-y1K" secondAttribute="leading" id="Ow9-9M-eaX"/>
+                                    <constraint firstItem="eSt-n9-y1K" firstAttribute="trailing" secondItem="FFe-pr-Ymm" secondAttribute="trailing" id="TFj-l7-GPf"/>
                                     <constraint firstItem="Isf-ek-wrS" firstAttribute="bottom" secondItem="eSt-n9-y1K" secondAttribute="bottom" id="exI-YT-DYM"/>
+                                    <constraint firstItem="FFe-pr-Ymm" firstAttribute="leading" secondItem="eSt-n9-y1K" secondAttribute="leading" id="iUX-Fy-eDG"/>
                                     <constraint firstItem="Isf-ek-wrS" firstAttribute="height" secondItem="gwV-eb-6U9" secondAttribute="height" priority="1" id="v2h-0a-b9t"/>
+                                    <constraint firstItem="FFe-pr-Ymm" firstAttribute="top" secondItem="eSt-n9-y1K" secondAttribute="top" id="x8J-NA-WhS"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="eSt-n9-y1K"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="gwV-eb-6U9"/>
@@ -154,12 +160,11 @@
                         </subviews>
                         <color key="backgroundColor" name="NHS Grey 5"/>
                         <constraints>
-                            <constraint firstItem="i7g-54-jA7" firstAttribute="top" secondItem="L7M-kP-6XK" secondAttribute="top" id="TgK-FF-Hqi"/>
-                            <constraint firstItem="i7g-54-jA7" firstAttribute="leading" secondItem="L7M-kP-6XK" secondAttribute="leading" id="WY6-hZ-300"/>
-                            <constraint firstItem="i7g-54-jA7" firstAttribute="bottom" secondItem="L7M-kP-6XK" secondAttribute="bottom" id="pIh-5V-g6r"/>
-                            <constraint firstItem="i7g-54-jA7" firstAttribute="trailing" secondItem="L7M-kP-6XK" secondAttribute="trailing" id="ulE-Ur-f3L"/>
+                            <constraint firstItem="i7g-54-jA7" firstAttribute="top" secondItem="1xp-lJ-Mpr" secondAttribute="top" id="TgK-FF-Hqi"/>
+                            <constraint firstItem="i7g-54-jA7" firstAttribute="leading" secondItem="1xp-lJ-Mpr" secondAttribute="leading" id="WY6-hZ-300"/>
+                            <constraint firstItem="i7g-54-jA7" firstAttribute="bottom" secondItem="1xp-lJ-Mpr" secondAttribute="bottom" id="pIh-5V-g6r"/>
+                            <constraint firstItem="i7g-54-jA7" firstAttribute="trailing" secondItem="1xp-lJ-Mpr" secondAttribute="trailing" id="ulE-Ur-f3L"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="L7M-kP-6XK"/>
                     </view>
                     <navigationItem key="navigationItem" title="Testing information" id="K44-qv-yGH"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -215,6 +220,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Background_Curve" width="375" height="211"/>
         <image name="Linking_ID" width="184.5" height="184"/>
         <namedColor name="NHS Grey 5">
             <color red="0.94117647058823528" green="0.95686274509803926" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

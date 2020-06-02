@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -18,16 +17,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KFw-bB-wGv">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background_Curve" translatesAutoresizingMaskIntoConstraints="NO" id="ipi-2K-kkI">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="211"/>
+                                    </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="o5B-10-NnZ">
-                                        <rect key="frame" x="16" y="0.0" width="382" height="482"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="474"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" image="News_Covid" translatesAutoresizingMaskIntoConstraints="NO" id="moC-Bg-jdE">
-                                                <rect key="frame" x="0.0" y="0.0" width="382" height="218"/>
+                                                <rect key="frame" x="16" y="60" width="382" height="218"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Read and follow advice specific to your situation" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dVI-RK-RuV">
-                                                <rect key="frame" x="0.0" y="234" width="382" height="67.5"/>
+                                                <rect key="frame" x="16" y="294" width="382" height="67.5"/>
                                                 <accessibility key="accessibilityConfiguration">
                                                     <accessibilityTraits key="traits" staticText="YES" header="YES"/>
                                                 </accessibility>
@@ -36,28 +38,31 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Advice Detail" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lGX-w9-D6b">
-                                                <rect key="frame" x="0.0" y="317.5" width="382" height="20.5"/>
+                                                <rect key="frame" x="16" y="377.5" width="382" height="20.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                 <color key="textColor" name="NHS Text"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XAp-ua-6Hc" customClass="LinkButton" customModule="Sonar" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="354" width="382" height="128"/>
+                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="44" translatesAutoresizingMaskIntoConstraints="NO" id="XAp-ua-6Hc" customClass="LinkButton" customModule="Sonar" customModuleProvider="target">
+                                                <rect key="frame" x="16" y="414" width="382" height="44"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="title" value="Read specific advice for you"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                         </subviews>
+                                        <directionalEdgeInsets key="directionalLayoutMargins" top="16" leading="16" bottom="16" trailing="16"/>
                                     </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="o5B-10-NnZ" firstAttribute="height" secondItem="BRb-82-0wK" secondAttribute="height" priority="1" id="1aw-PR-oIV"/>
-                                    <constraint firstItem="2m0-ao-JXz" firstAttribute="top" secondItem="o5B-10-NnZ" secondAttribute="top" id="4Ht-NQ-ud9"/>
-                                    <constraint firstItem="o5B-10-NnZ" firstAttribute="bottom" secondItem="2m0-ao-JXz" secondAttribute="bottom" id="dOl-ma-D63"/>
-                                    <constraint firstItem="2m0-ao-JXz" firstAttribute="leading" secondItem="o5B-10-NnZ" secondAttribute="leading" constant="-16" id="fwH-XQ-bhs"/>
-                                    <constraint firstItem="o5B-10-NnZ" firstAttribute="trailing" secondItem="2m0-ao-JXz" secondAttribute="trailing" id="qXr-1U-whK"/>
-                                    <constraint firstItem="o5B-10-NnZ" firstAttribute="width" secondItem="BRb-82-0wK" secondAttribute="width" constant="-32" id="xvT-99-wkI"/>
+                                    <constraint firstItem="2m0-ao-JXz" firstAttribute="trailing" secondItem="ipi-2K-kkI" secondAttribute="trailing" id="4fT-UW-amM"/>
+                                    <constraint firstItem="o5B-10-NnZ" firstAttribute="leading" secondItem="2m0-ao-JXz" secondAttribute="leading" id="4hh-9h-wgM"/>
+                                    <constraint firstItem="o5B-10-NnZ" firstAttribute="bottom" secondItem="2m0-ao-JXz" secondAttribute="bottom" id="RCg-aj-UAe"/>
+                                    <constraint firstItem="ipi-2K-kkI" firstAttribute="top" secondItem="2m0-ao-JXz" secondAttribute="top" id="TX3-9Q-uW1"/>
+                                    <constraint firstItem="ipi-2K-kkI" firstAttribute="leading" secondItem="2m0-ao-JXz" secondAttribute="leading" id="Xho-sh-nJI"/>
+                                    <constraint firstItem="o5B-10-NnZ" firstAttribute="top" secondItem="2m0-ao-JXz" secondAttribute="top" id="f8Z-br-wM6"/>
+                                    <constraint firstItem="o5B-10-NnZ" firstAttribute="trailing" secondItem="2m0-ao-JXz" secondAttribute="trailing" id="fbX-W4-a4H"/>
+                                    <constraint firstItem="o5B-10-NnZ" firstAttribute="width" secondItem="BRb-82-0wK" secondAttribute="width" id="zOm-w6-Jwn"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="2m0-ao-JXz"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="BRb-82-0wK"/>
@@ -65,12 +70,11 @@
                         </subviews>
                         <color key="backgroundColor" name="NHS Grey 5"/>
                         <constraints>
-                            <constraint firstItem="Wpo-Xt-eRy" firstAttribute="trailing" secondItem="KFw-bB-wGv" secondAttribute="trailing" id="6bN-fa-oLK"/>
-                            <constraint firstItem="KFw-bB-wGv" firstAttribute="leading" secondItem="Wpo-Xt-eRy" secondAttribute="leading" id="DLL-uT-6D7"/>
-                            <constraint firstItem="Wpo-Xt-eRy" firstAttribute="bottom" secondItem="KFw-bB-wGv" secondAttribute="bottom" id="J79-Ql-FYw"/>
-                            <constraint firstItem="KFw-bB-wGv" firstAttribute="top" secondItem="Wpo-Xt-eRy" secondAttribute="top" id="Rf5-li-UG9"/>
+                            <constraint firstAttribute="trailing" secondItem="KFw-bB-wGv" secondAttribute="trailing" id="6bN-fa-oLK"/>
+                            <constraint firstItem="KFw-bB-wGv" firstAttribute="leading" secondItem="sC8-Dz-RHG" secondAttribute="leading" id="DLL-uT-6D7"/>
+                            <constraint firstAttribute="bottom" secondItem="KFw-bB-wGv" secondAttribute="bottom" id="J79-Ql-FYw"/>
+                            <constraint firstItem="KFw-bB-wGv" firstAttribute="top" secondItem="sC8-Dz-RHG" secondAttribute="top" id="Rf5-li-UG9"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="Wpo-Xt-eRy"/>
                     </view>
                     <connections>
                         <outlet property="detail" destination="lGX-w9-D6b" id="a6B-F0-9BC"/>
@@ -80,10 +84,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6x1-9z-tuc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5104" y="516"/>
+            <point key="canvasLocation" x="5102.898550724638" y="515.625"/>
         </scene>
     </scenes>
     <resources>
+        <image name="Background_Curve" width="375" height="211"/>
         <image name="News_Covid" width="326" height="218"/>
         <namedColor name="NHS Grey 5">
             <color red="0.94117647058823528" green="0.95686274509803926" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
