@@ -1,11 +1,3 @@
-"OK_NOW_TITLE" = "You're ok right now";
-"OK_NOW_MESSAGE" = "This is a real time status, based on who you've been in contact with.\n\nYou'll get an alert if your status changes.\n\nIt is important to tell us if you develop any new symptoms.";
-"OK_NOW_SYMPTOMS_TITLE" = "If you develop symptoms";
-"OK_NOW_SYMPTOMS_MESSAGE" = "Use our online tool to check your symptoms.";
-"OK_NOW_SYMPTOMS_BUTTON" = "Check my symptoms";
-"OK_NOW_MORE_INFO_TITLE" = "How you can protect yourself and others";
-"OK_NOW_MORE_INFO_MESSAGE" = "You can stay safe by washing your hands more regularly and avoiding large groups of people.\n\nVisit NHS 111 for more advice on protecting yourself and people you care about.\n\nThank you for helping us slow the spread of coronavirus";
-
 "ADVICE_CHANGED_NOTIFICATION_TITLE" = "NHS COVID-19";
 "ADVICE_CHANGED_NOTIFICATION_BODY" = "Your advice has changed. Please open the app to learn what to do next. Your help saves lives.";
 
