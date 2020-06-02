@@ -64,7 +64,7 @@ private extension OnboardingTests {
     }
     
     var privacyCloseButton: XCUIElement {
-        app.buttons["Close"]
+        app.buttons["Back"]
     }
 }
 
