@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mYd-uC-KRq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mYd-uC-KRq">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -34,13 +34,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MA9-dr-o4r">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background_Curve" translatesAutoresizingMaskIntoConstraints="NO" id="e3V-MW-s35">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="211"/>
+                                    </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="SBt-Is-PrC">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="709.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4NM-mG-SCj">
-                                                <rect key="frame" x="16" y="16" width="382" height="197"/>
+                                                <rect key="frame" x="16" y="60" width="382" height="197"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" image="Test_Tubes" translatesAutoresizingMaskIntoConstraints="NO" id="qLg-b1-5lw">
                                                         <rect key="frame" x="123.5" y="32" width="135" height="133"/>
@@ -56,7 +59,7 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Book a coronavirus test now" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h2Y-Vk-qDf">
-                                                <rect key="frame" x="16" y="229" width="382" height="33.5"/>
+                                                <rect key="frame" x="16" y="273" width="382" height="33.5"/>
                                                 <accessibility key="accessibilityConfiguration">
                                                     <accessibilityTraits key="traits" staticText="YES" header="YES"/>
                                                 </accessibility>
@@ -65,37 +68,30 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hUD-0m-zir">
-                                                <rect key="frame" x="16" y="278.5" width="382" height="86.5"/>
+                                                <rect key="frame" x="16" y="322.5" width="382" height="86.5"/>
                                                 <string key="text">You can now book a coronavirus test for you and other people in your household. This test will tell you whether you currently have coronavirus or not.</string>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                 <color key="textColor" name="NHS Text"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="In order for this app to receive your test result, you will be asked for this 8-digit app reference code later." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xXc-X4-l7i">
-                                                <rect key="frame" x="16" y="381" width="382" height="64.5"/>
+                                                <rect key="frame" x="16" y="425" width="382" height="64.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                 <color key="textColor" name="NHS Text"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <containerView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="382" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="DK8-cn-uDB" userLabel="Linking ID view">
-                                                <rect key="frame" x="16" y="461.5" width="382" height="128"/>
+                                            <containerView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" placeholderIntrinsicWidth="382" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="DK8-cn-uDB" userLabel="Linking ID view">
+                                                <rect key="frame" x="16" y="505.5" width="382" height="128"/>
                                                 <connections>
                                                     <segue destination="z30-wj-buI" kind="embed" id="CA5-fu-JcA"/>
                                                 </connections>
                                             </containerView>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uoW-0A-mqN" customClass="LinkButton" customModule="Sonar" customModuleProvider="target">
-                                                <rect key="frame" x="16" y="605.5" width="382" height="50"/>
+                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="44" translatesAutoresizingMaskIntoConstraints="NO" id="uoW-0A-mqN" customClass="LinkButton" customModule="Sonar" customModuleProvider="target">
+                                                <rect key="frame" x="16" y="649.5" width="382" height="44"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="title" value="Book a coronavirus test now"/>
                                                 </userDefinedRuntimeAttributes>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QmU-bG-9qJ">
-                                                <rect key="frame" x="16" y="671.5" width="382" height="130.5"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" priority="1" id="v77-UE-Bjb"/>
-                                                </constraints>
                                             </view>
                                         </subviews>
                                         <directionalEdgeInsets key="directionalLayoutMargins" top="16" leading="16" bottom="16" trailing="16"/>
@@ -103,12 +99,13 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="ZL3-9H-u5Y" firstAttribute="leading" secondItem="SBt-Is-PrC" secondAttribute="leading" id="4yJ-z8-cis"/>
-                                    <constraint firstAttribute="height" secondItem="SBt-Is-PrC" secondAttribute="height" placeholder="YES" id="Rx7-ib-urk"/>
                                     <constraint firstItem="SBt-Is-PrC" firstAttribute="width" secondItem="xwb-o3-SkT" secondAttribute="width" id="SPd-MB-AgZ"/>
                                     <constraint firstItem="SBt-Is-PrC" firstAttribute="bottom" secondItem="ZL3-9H-u5Y" secondAttribute="bottom" id="Vjj-db-nvx"/>
                                     <constraint firstItem="SBt-Is-PrC" firstAttribute="trailing" secondItem="ZL3-9H-u5Y" secondAttribute="trailing" id="dwY-A9-Wwv"/>
+                                    <constraint firstItem="e3V-MW-s35" firstAttribute="leading" secondItem="ZL3-9H-u5Y" secondAttribute="leading" id="izf-tJ-Bcs"/>
+                                    <constraint firstItem="e3V-MW-s35" firstAttribute="top" secondItem="ZL3-9H-u5Y" secondAttribute="top" id="q8J-LN-qGX"/>
+                                    <constraint firstItem="ZL3-9H-u5Y" firstAttribute="trailing" secondItem="e3V-MW-s35" secondAttribute="trailing" id="r5P-RO-kMo"/>
                                     <constraint firstItem="ZL3-9H-u5Y" firstAttribute="top" secondItem="SBt-Is-PrC" secondAttribute="top" id="wN3-Ld-4er"/>
-                                    <constraint firstItem="SBt-Is-PrC" firstAttribute="height" relation="greaterThanOrEqual" secondItem="MA9-dr-o4r" secondAttribute="height" id="wSV-vY-rSw"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="ZL3-9H-u5Y"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="xwb-o3-SkT"/>
@@ -116,12 +113,11 @@
                         </subviews>
                         <color key="backgroundColor" name="NHS Grey 5"/>
                         <constraints>
-                            <constraint firstItem="MA9-dr-o4r" firstAttribute="leading" secondItem="HBC-hk-frn" secondAttribute="leading" id="7Xa-7L-A0S"/>
-                            <constraint firstItem="MA9-dr-o4r" firstAttribute="top" secondItem="HBC-hk-frn" secondAttribute="top" id="DsI-QB-Qi8"/>
-                            <constraint firstItem="HBC-hk-frn" firstAttribute="trailing" secondItem="MA9-dr-o4r" secondAttribute="trailing" id="VIs-jb-3qv"/>
-                            <constraint firstItem="HBC-hk-frn" firstAttribute="bottom" secondItem="MA9-dr-o4r" secondAttribute="bottom" id="s5W-W9-v4D"/>
+                            <constraint firstItem="MA9-dr-o4r" firstAttribute="leading" secondItem="a3V-XW-Vqe" secondAttribute="leading" id="7Xa-7L-A0S"/>
+                            <constraint firstItem="MA9-dr-o4r" firstAttribute="top" secondItem="a3V-XW-Vqe" secondAttribute="top" id="DsI-QB-Qi8"/>
+                            <constraint firstAttribute="trailing" secondItem="MA9-dr-o4r" secondAttribute="trailing" id="VIs-jb-3qv"/>
+                            <constraint firstAttribute="bottom" secondItem="MA9-dr-o4r" secondAttribute="bottom" id="s5W-W9-v4D"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="HBC-hk-frn"/>
                     </view>
                     <connections>
                         <outlet property="bookTestLinkButton" destination="uoW-0A-mqN" id="lsN-Y7-ehv"/>
@@ -141,6 +137,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Background_Curve" width="375" height="211"/>
         <image name="Test_Tubes" width="135" height="133"/>
         <namedColor name="NHS Grey 5">
             <color red="0.94117647058823528" green="0.95686274509803926" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
