@@ -49,8 +49,9 @@ class StatusStateMachine: StatusStateMachining {
                 add(notificationRequest: checkinNotificationRequest(at: symptomatic.checkinDate))
             case .exposedSymptomatic(let exposedSymptomatic):
                 add(notificationRequest: checkinNotificationRequest(at: exposedSymptomatic.checkinDate))
-            case .exposed:
-                add(notificationRequest: adviceChangedNotificationRequest)
+            case .exposed(let exposed):
+                add(notificationRequest: adviceChangedNotificationRequest())
+                add(notificationRequest: adviceChangedNotificationRequest(at: exposed.expiryDate))
             case .ok, .positiveTestResult:
                 break
             }
@@ -149,7 +150,7 @@ class StatusStateMachine: StatusStateMachining {
             break // Don't need to do anything
         case .exposed(let exposed):
             guard currentDate >= exposed.expiryDate else { return }
-
+            drawerMailbox.post(.unexposed)
             state = .ok(StatusState.Ok())
         }
     }
@@ -203,7 +204,7 @@ class StatusStateMachine: StatusStateMachining {
     func unexposed() {
         switch state {
         case .exposed:
-            add(notificationRequest: adviceChangedNotificationRequest)
+            add(notificationRequest: adviceChangedNotificationRequest())
             drawerMailbox.post(.unexposed)
             state = .ok(StatusState.Ok())
         case .ok, .symptomatic, .positiveTestResult, .exposedSymptomatic:
@@ -291,13 +292,21 @@ class StatusStateMachine: StatusStateMachining {
         return request
     }
 
-    private lazy var adviceChangedNotificationRequest: UNNotificationRequest = {
+    private func adviceChangedNotificationRequest(at date: Date = Date()) -> UNNotificationRequest {
         let content = UNMutableNotificationContent()
         content.title = "ADVICE_CHANGED_NOTIFICATION_TITLE".localized
         content.body = "ADVICE_CHANGED_NOTIFICATION_BODY".localized
+        
+        let components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
+        let request = UNNotificationRequest(
+            identifier: adviceChangedNotificationIdentifier,
+            content: content,
+            trigger: trigger
+        )
 
-        return UNNotificationRequest(identifier: adviceChangedNotificationIdentifier, content: content, trigger: nil)
-    }()
+        return request
+    }
     
     private lazy var testResultNotification: UNNotificationRequest = {
         let content = UNMutableNotificationContent()

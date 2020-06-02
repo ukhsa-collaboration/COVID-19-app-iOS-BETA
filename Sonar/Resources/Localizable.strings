@@ -128,7 +128,7 @@ Loss of appetite: this means you are not feeling hungry, or are not eating as mu
 Please update your symptoms to view your latest advice.";
 
 "UNEXPOSED_DRAWER_HEADER" = "Your advice has changed";
-"UNEXPOSED_DRAWER_DETAIL" = "The person you had been near to with coronavirus symptoms has tested negative for the virus. Your advice has been updated.";
+"UNEXPOSED_DRAWER_DETAIL" = "You can stop self isolating and can now follow the advice for the general public. Thank you for playing your part in the fight against coronavirus.";
 
 "HAVE_SYMPTOMS_BUT_DONT_ISOLATE_DRAWER_HEADER" = "Thank you for updating your symptoms";
 "HAVE_SYMPTOMS_BUT_DONT_ISOLATE_DRAWER_DETAIL" = "Although you still have some symptoms you can now stop self-isolating and follow the current advice for the general public.";
