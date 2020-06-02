@@ -24,6 +24,7 @@ class RootViewController: UIViewController {
     private var setupChecker: SetupChecker!
     private var statusStateMachine: StatusStateMachining!
     private var urlOpener: TestableUrlOpener!
+    private var accessibilityChangeNotifier: AccessibilityChangeNotifier!
     private weak var presentedSetupErorrViewController: UIViewController? = nil
 
     private var statusViewController: StatusViewController!
@@ -72,8 +73,11 @@ class RootViewController: UIViewController {
         setupChecker = SetupChecker(authorizationManager: authorizationManager, bluetoothNursery: bluetoothNursery)
         
         notificationCenter.addObserver(self, selector: #selector(applicationDidBecomeActive(_:)), name: UIApplication.didBecomeActiveNotification, object: nil)
-        notificationCenter.addObserver(self, selector: #selector(handleAccessibiltyChangeNotification(_:)), name: UIContentSizeCategory.didChangeNotification, object: nil)
-        notificationCenter.addObserver(self, selector: #selector(handleAccessibiltyChangeNotification(_:)), name: UIAccessibility.invertColorsStatusDidChangeNotification, object: nil)
+        accessibilityChangeNotifier = AccessibilityChangeNotifier(
+            notificationCenter: notificationCenter,
+            uiQueue: uiQueue,
+            rootViewController: self
+        )
     }
 
     deinit {
@@ -127,12 +131,6 @@ class RootViewController: UIViewController {
     }
     
     @objc func applicationDidBecomeActive(_ notification: NSNotification) {
-        // In iOS 13, UIAccessibility.invertColorsStatusDidChangeNotification doesn't fire when smart invert
-        // is turned on, and the invert state can't be reliably detected until after it fires.
-        // To work around those bugs, we assume that the smart invert setting might have changed any time
-        // we come back from the background.
-        updateBasedOnAccessibilityDisplayChanges()
-
         guard children.first as? OnboardingViewController == nil else {
             // The onboarding flow has its own handling for setup problems, and if we present them from here
             // during onboarding then there will likely be two of them shown at the same time.
@@ -175,37 +173,7 @@ class RootViewController: UIViewController {
             self.dismiss(animated: true)
         }
     }
-    
-    @objc private func handleAccessibiltyChangeNotification(_ notification: Notification) {
-        updateBasedOnAccessibilityDisplayChanges()
-    }
-    
-    private func updateBasedOnAccessibilityDisplayChanges() {
-        uiQueue.async {
-            self.recursivelyUpdate(view: self.view)
-            
-            for vc in self.allPresentedViewControllers(from: self) {
-                self.recursivelyUpdate(view: vc.view)
-            }
-        }
-    }
-    
-    private func recursivelyUpdate(view: UIView) {
-        if let updateable = view as? UpdatesBasedOnAccessibilityDisplayChanges {
-            updateable.updateBasedOnAccessibilityDisplayChanges()
-        }
-        
-        for v in view.subviews {
-            recursivelyUpdate(view: v)
-        }
-    }
-
-    private func allPresentedViewControllers(from vc: UIViewController) -> [UIViewController] {
-        var presentedViewControllers = vc.presentedViewController.map { [$0] } ?? []
-        presentedViewControllers.append(contentsOf: vc.children.flatMap { allPresentedViewControllers(from: $0) })
-        return presentedViewControllers
-    }
-    
+                
     // MARK: - Debug view controller management
     
     #if DEBUG || INTERNAL

@@ -73,6 +73,7 @@
 		09CDA11A2473525000C8684D /* ReferenceCodeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CDA1192473525000C8684D /* ReferenceCodeViewControllerTests.swift */; };
 		09D027CC24521542006EE07E /* BluetoothStateObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D027CB24521542006EE07E /* BluetoothStateObserver.swift */; };
 		09D027CE2452157D006EE07E /* BluetoothStateObserverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D027CD2452157D006EE07E /* BluetoothStateObserverTests.swift */; };
+		09D8B43424871247004D225C /* AccessibilityChangeNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D8B43324871247004D225C /* AccessibilityChangeNotifier.swift */; };
 		09D91A7724521C5C004825A5 /* BluetoothNurseryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D91A7624521C5C004825A5 /* BluetoothNurseryTests.swift */; };
 		09D91A7924522133004825A5 /* BTLEListenerDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D91A7824522133004825A5 /* BTLEListenerDouble.swift */; };
 		09E6E7E4245271A00069DFA8 /* SetupChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E6E7E3245271A00069DFA8 /* SetupChecker.swift */; };
@@ -401,6 +402,7 @@
 		09CDA1192473525000C8684D /* ReferenceCodeViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReferenceCodeViewControllerTests.swift; sourceTree = "<group>"; };
 		09D027CB24521542006EE07E /* BluetoothStateObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothStateObserver.swift; sourceTree = "<group>"; };
 		09D027CD2452157D006EE07E /* BluetoothStateObserverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothStateObserverTests.swift; sourceTree = "<group>"; };
+		09D8B43324871247004D225C /* AccessibilityChangeNotifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityChangeNotifier.swift; sourceTree = "<group>"; };
 		09D91A7624521C5C004825A5 /* BluetoothNurseryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothNurseryTests.swift; sourceTree = "<group>"; };
 		09D91A7824522133004825A5 /* BTLEListenerDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTLEListenerDouble.swift; sourceTree = "<group>"; };
 		09E6E7E3245271A00069DFA8 /* SetupChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupChecker.swift; sourceTree = "<group>"; };
@@ -901,6 +903,7 @@
 				0805FAF3247C233F00E3A74F /* IBView.swift */,
 				092F5ADF24859B81001A06B7 /* UnderlinedButton.swift */,
 				092F5AE12485BFBA001A06B7 /* UnderlinedBarButtonItem.swift */,
+				09D8B43324871247004D225C /* AccessibilityChangeNotifier.swift */,
 			);
 			path = Appearance;
 			sourceTree = "<group>";
@@ -1884,6 +1887,7 @@
 				090B186F24354D0100870B5D /* RemoteNotificationDispatcher.swift in Sources */,
 				138114E42450543600BA46C7 /* SymptomStackView.swift in Sources */,
 				F6DA0A342469D6BA001F0B48 /* StatusStateMachine.swift in Sources */,
+				09D8B43424871247004D225C /* AccessibilityChangeNotifier.swift in Sources */,
 				F758B8C0242CB98C003AE16D /* UIViewController+Storyboarded.swift in Sources */,
 				2115C3E624360427009C0F5B /* GradientBackgroundTableViewCell.swift in Sources */,
 				89BC79EB2434E047002050F8 /* LogsViewController.swift in Sources */,
