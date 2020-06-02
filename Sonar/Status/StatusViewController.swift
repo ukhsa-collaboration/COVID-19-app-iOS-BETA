@@ -133,7 +133,7 @@ class StatusViewController: UIViewController, Storyboarded {
 
         nhsCoronavirusLinkButton.url = ContentURLs.shared.regionalServices
 
-        (sectionHeaders + [stepsDetailLabel, feelUnwellBodyLabel, medicalEmergencyLabel]).forEach {
+        (sectionHeaders + [stepsDetailLabel, feelUnwellBodyLabel, medicalEmergencyLabel, diagnosisDetailLabel]).forEach {
             $0.textColor = UIColor(named: "NHS Secondary Text")
         }
         medicalEmergencyLabel.text = "STATUS_GET_HELP".localized

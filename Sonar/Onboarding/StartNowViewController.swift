@@ -15,12 +15,14 @@ class StartNowViewController: UIViewController, Storyboarded {
     private var notificationCenter: NotificationCenter! = nil
     private var continueHandler: (() -> Void)! = nil
     
+    @IBOutlet weak var learnMoreButton: UnderlinedButton!
     @IBOutlet var numberLabels: [UILabel]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         resize()
         notificationCenter.addObserver(self, selector: #selector(resize), name: UIApplication.didBecomeActiveNotification, object: nil)
+        learnMoreButton.textStyle = .headline
     }
     
     @objc func resize() {

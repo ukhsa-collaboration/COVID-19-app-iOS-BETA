@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -187,7 +187,7 @@
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aeB-p4-UQk" customClass="UnderlinedButton" customModule="Sonar" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="515.33333333333337" width="374" height="33"/>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                         <state key="normal" title="Learn more about how the app works">
                                                             <color key="titleColor" name="NHS Link"/>
                                                         </state>
@@ -242,6 +242,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="0zK-Z8-XYb"/>
                     <connections>
+                        <outlet property="learnMoreButton" destination="aeB-p4-UQk" id="Frz-Rr-hqG"/>
                         <outletCollection property="numberLabels" destination="U9W-lb-F0m" collectionClass="NSMutableArray" id="bOz-d3-KTc"/>
                         <outletCollection property="numberLabels" destination="fvy-2e-cCE" collectionClass="NSMutableArray" id="gfJ-5O-llG"/>
                         <outletCollection property="numberLabels" destination="Rec-Aa-NeJ" collectionClass="NSMutableArray" id="Ks5-Ca-wwU"/>
@@ -266,16 +267,19 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="624"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P9b-DU-jl5" customClass="OnboardingLogoStrapline" customModule="Sonar" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="350" height="33"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="354" height="44"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="999" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="neR-wt-8CD" userLabel="Close" customClass="UnderlinedButton" customModule="Sonar" customModuleProvider="target">
-                                                <rect key="frame" x="350" y="0.0" width="44" height="33"/>
+                                                <rect key="frame" x="354" y="0.0" width="44" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="5ry-Yv-rBk"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="KMZ-Vs-Eub"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                <state key="normal" title="Close"/>
+                                                <state key="normal" title="Close">
+                                                    <color key="titleColor" name="NHS Blue"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="didTapClose:" destination="asv-dx-knf" eventType="touchUpInside" id="nW6-3W-rtl"/>
                                                 </connections>
@@ -381,7 +385,7 @@
                                             <constraint firstItem="7HO-8c-Q84" firstAttribute="leading" secondItem="31h-8a-dJ8" secondAttribute="leading" constant="20" id="4PI-pe-MnS"/>
                                             <constraint firstItem="P9b-DU-jl5" firstAttribute="top" secondItem="31h-8a-dJ8" secondAttribute="top" id="By7-2B-AL5"/>
                                             <constraint firstItem="neR-wt-8CD" firstAttribute="top" secondItem="31h-8a-dJ8" secondAttribute="top" id="DUo-cW-pPa"/>
-                                            <constraint firstAttribute="trailing" secondItem="neR-wt-8CD" secondAttribute="trailing" constant="20" id="DYv-Ub-EaF"/>
+                                            <constraint firstAttribute="trailing" secondItem="neR-wt-8CD" secondAttribute="trailing" constant="16" id="DYv-Ub-EaF"/>
                                             <constraint firstItem="neR-wt-8CD" firstAttribute="leading" secondItem="P9b-DU-jl5" secondAttribute="trailing" id="Ime-qx-zHf"/>
                                             <constraint firstAttribute="trailing" secondItem="7HO-8c-Q84" secondAttribute="trailing" constant="20" id="J0L-rs-xfK"/>
                                             <constraint firstItem="7HO-8c-Q84" firstAttribute="top" secondItem="P9b-DU-jl5" secondAttribute="bottom" constant="20" id="MEN-J7-3bs"/>
