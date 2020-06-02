@@ -260,6 +260,17 @@ class RootViewControllerTests: TestCase {
 
         XCTAssertTrue(updates.updated)
     }
+    
+    func testUpdatesSubviewsOnResumeFromBackground() {
+        let intermediate = UIView()
+        let updates = UpdatesBasedOnAccessibilityDisplayChangesDouble()
+        intermediate.addSubview(updates)
+        rootVC.view.addSubview(intermediate)
+
+        notificationCenter.post(name: UIApplication.didBecomeActiveNotification, object: nil)
+
+        XCTAssertTrue(updates.updated)
+    }
 
     func testUpdatesPresentedViewsOnFontSizeChange() {
         parentViewControllerForTests.viewControllers = [rootVC]

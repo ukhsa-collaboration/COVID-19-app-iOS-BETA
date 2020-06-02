@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -12,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ErrorView" customModule="Sonar" customModuleProvider="target">
             <connections>
                 <outlet property="errorMessage" destination="zKm-HG-m2h" id="B08-wU-tG6"/>
+                <outlet property="stripe" destination="SuG-bk-Hbg" id="krz-Ll-1HU"/>
                 <outlet property="title" destination="tCB-pJ-NPp" id="td1-Sq-rCC"/>
                 <outlet property="view" destination="iN0-l3-epB" id="P70-ah-BfW"/>
             </connections>
@@ -21,29 +21,38 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="199"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="tCB-pJ-NPp">
-                    <rect key="frame" x="20" y="15" width="374" height="20.5"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There is a problem" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="tCB-pJ-NPp">
+                    <rect key="frame" x="20" y="15" width="374" height="21"/>
                     <accessibility key="accessibilityConfiguration">
                         <accessibilityTraits key="traits" staticText="YES" header="YES"/>
                     </accessibility>
-                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                    <color key="textColor" name="NHS Error"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                    <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.25" translatesAutoresizingMaskIntoConstraints="NO" id="zKm-HG-m2h" customClass="AccessibleErrorLabel" customModule="Sonar" customModuleProvider="target">
-                    <rect key="frame" x="20" y="43.5" width="374" height="140.5"/>
+                    <rect key="frame" x="20" y="44" width="374" height="140"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                    <color key="textColor" name="NHS Error"/>
+                    <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SuG-bk-Hbg" userLabel="Stripe">
+                    <rect key="frame" x="0.0" y="44" width="4" height="155"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="4" id="6dw-nM-cYD"/>
+                    </constraints>
+                </view>
             </subviews>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="zKm-HG-m2h" secondAttribute="bottom" constant="15" id="8cd-k0-shr"/>
+                <constraint firstItem="SuG-bk-Hbg" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="G1o-44-zRH"/>
                 <constraint firstItem="zKm-HG-m2h" firstAttribute="top" secondItem="tCB-pJ-NPp" secondAttribute="bottom" constant="8" id="Pl2-FA-ine"/>
                 <constraint firstItem="zKm-HG-m2h" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="Tzw-eJ-X0J"/>
+                <constraint firstItem="SuG-bk-Hbg" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="eIl-2i-yvG"/>
                 <constraint firstItem="tCB-pJ-NPp" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="fTT-kj-Hcs"/>
                 <constraint firstAttribute="trailing" secondItem="tCB-pJ-NPp" secondAttribute="trailing" constant="20" id="gwd-zV-V9i"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="zKm-HG-m2h" secondAttribute="trailing" constant="20" id="iGo-Bl-WTw"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="SuG-bk-Hbg" secondAttribute="bottom" id="ifY-MA-tJr"/>
                 <constraint firstItem="tCB-pJ-NPp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="oSg-bB-UkC"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
@@ -53,9 +62,4 @@
             <point key="canvasLocation" x="50.724637681159422" y="-36.495535714285715"/>
         </view>
     </objects>
-    <resources>
-        <namedColor name="NHS Error">
-            <color red="0.83529411764705885" green="0.15686274509803921" blue="0.10588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-    </resources>
 </document>
