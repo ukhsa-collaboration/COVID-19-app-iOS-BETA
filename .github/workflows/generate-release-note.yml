@@ -17,9 +17,18 @@ jobs:
         with:
           fetch-depth: 0 # checkout full repo with all tags
 
+      - name: Checkout ci tools
+        id: checkout-ci-tools
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.DEPLOYMENT_TOKEN }}
+          repository: nhsx/sonar-ci-tools
+          path: ci-tools
+          ref: v0.1.0
+
       - name: Generate release notes
         id: generate_release_notes
-        uses: ./.github/actions/generate-release-notes
+        uses: ./ci-tools/.github/actions/generate-release-notes
         with:
           github_token: ${{ secrets.DEPLOYMENT_TOKEN }}
           tracker_token: ${{ secrets.tracker_api_token }}
@@ -27,4 +36,3 @@ jobs:
 
       - name: Print release notes
         run: echo "${{ steps.generate_release_notes.outputs.release_notes }}"
-
