@@ -121,6 +121,7 @@ jobs:
     - aws
     needs: upload
     if: github.event.deployment.environment == 'internal'
+    container: ruby:2.7
     steps:
       - name: Checkout Project
         uses: actions/checkout@01aeccc # v2.1.0
