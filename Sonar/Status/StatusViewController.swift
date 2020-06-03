@@ -360,8 +360,8 @@ class StatusViewController: UIViewController, Storyboarded {
                 )
             } else {
                 presentDrawer(
-                    header: "TEST_UPDATE_DRAW_NEGATIVE_HEADER".localized,
-                    detail: "TEST_UPDATE_DRAW_NEGATIVE_DETAIL".localized
+                    header: "NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_HEADER".localized,
+                    detail: "NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_DETAIL".localized
                 )
             }
         case .unclearTestResult:
