@@ -29,13 +29,18 @@ class BluetoothStateObserver: BluetoothStateObserving {
         lastKnownState = initialState
     }
         
-    // Callback will be called immediately with the last known state and every time the state changes in the future.
+    // Callback will be called immediately with the last known state
+    // and every time the state changes in the future, until it returns
+    // .stopObserving
     func observe(_ callback: @escaping (CBManagerState) -> Action) {
         if callback(lastKnownState) == .keepObserving {
             callbacks.append(callback)
         }
     }
     
+    // Callback will be called once the next time the state transitions to
+    // something other than .unknown. Use this to find out the current state
+    // once.
     func observeUntilKnown(_ callback: @escaping (CBManagerState) -> Void) {
         observe { state in
             if state == .unknown {
