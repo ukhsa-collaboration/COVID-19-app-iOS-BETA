@@ -781,7 +781,6 @@
 				09A925442453807000C5DBC1 /* RegistrationReminderSchedulerTests.swift */,
 				095283A72475990B00CDEE55 /* BackgroundableTimerTests.swift */,
 				08D77F2724767C6C00EAEBD5 /* UpdatePushNotificationTokenRequestTests.swift */,
-				08D77F2924767DBB00EAEBD5 /* UpdatePushNotificationTokenRequest.swift */,
 			);
 			path = Registration;
 			sourceTree = "<group>";
@@ -1481,6 +1480,7 @@
 				098ED477242D7D050029B729 /* RegistratonService.swift */,
 				09A9254224536FD300C5DBC1 /* RegistrationReminderScheduler.swift */,
 				095283A5247597DA00CDEE55 /* BackgroundableTimer.swift */,
+				08D77F2924767DBB00EAEBD5 /* UpdatePushNotificationTokenRequest.swift */,
 			);
 			path = Registration;
 			sourceTree = "<group>";
