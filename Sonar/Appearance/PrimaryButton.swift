@@ -31,6 +31,7 @@ class PrimaryButton: ButtonWithDynamicType {
         setTitleColor(.white, for: .normal)
         titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
         titleLabel?.textAlignment = .center
+        titleLabel?.lineBreakMode = .byWordWrapping
 
         alpha = 1.0
 
