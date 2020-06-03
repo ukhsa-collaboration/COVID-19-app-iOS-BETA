@@ -9,13 +9,13 @@
 import UIKit
 @testable import Sonar
 
-class BTLEListenerDouble: BTLEListener {
-    var connectedPeripheral: BTLEPeripheral?
+class ListenerDouble: Listener {
+    var connectedPeripheral: Peripheral?
 
-    func start(stateDelegate: BTLEListenerStateDelegate?, delegate: BTLEListenerDelegate?) {
+    func start(stateDelegate: ListenerStateDelegate?, delegate: ListenerDelegate?) {
     }
     
-    func connect(_ peripheral: BTLEPeripheral) {
+    func connect(_ peripheral: Peripheral) {
         self.connectedPeripheral = peripheral
     }
 

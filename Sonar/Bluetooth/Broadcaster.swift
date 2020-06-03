@@ -11,14 +11,14 @@ import CoreBluetooth
 import UIKit
 import Logging
 
-protocol BTLEBroadcaster {
+protocol Broadcaster {
     func sendKeepalive(value: Data)
     func updateIdentity()
 
     func isHealthy() -> Bool
 }
 
-class ConcreteBTLEBroadcaster: NSObject, BTLEBroadcaster, CBPeripheralManagerDelegate {
+class BTLEBroadcaster: NSObject, Broadcaster, CBPeripheralManagerDelegate {
 
     let advertismentDataLocalName = "Sonar"
 

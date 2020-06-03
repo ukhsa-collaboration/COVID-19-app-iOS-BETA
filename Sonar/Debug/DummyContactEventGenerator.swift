@@ -20,11 +20,11 @@ class DummyContactEventGenerator {
         return formatter
     }()
 
-    let listener: BTLEListener = StubListener()
+    let listener: Listener = StubListener()
     
-    let delegate: BTLEListenerDelegate
+    let delegate: ListenerDelegate
     
-    init(delegate: BTLEListenerDelegate) {
+    init(delegate: ListenerDelegate) {
         self.delegate = delegate
     }
     
@@ -34,11 +34,11 @@ class DummyContactEventGenerator {
         do {
             for _ in 0..<eventCount {
                 let eventStart = Date()
-                delegate.btleListener(listener, didFind: try broadcastPayload(), for: peripheral)
-                delegate.btleListener(listener, didReadTxPower: Int(Int8.random(in: Int8.min...Int8.max)), for: peripheral)
+                delegate.listener(listener, didFind: try broadcastPayload(), for: peripheral)
+                delegate.listener(listener, didReadTxPower: Int(Int8.random(in: Int8.min...Int8.max)), for: peripheral)
                 for _ in 0..<rssiCount {
                     autoreleasepool {
-                        delegate.btleListener(listener, didReadRSSI: Int(Int8.random(in: Int8.min...Int8.max)), for: peripheral)
+                        delegate.listener(listener, didReadRSSI: Int(Int8.random(in: Int8.min...Int8.max)), for: peripheral)
                     }
                 }
                 let duration = durationFormatter.string(from: Date().timeIntervalSince(eventStart))!
@@ -66,14 +66,14 @@ class DummyContactEventGenerator {
     
 }
 
-struct StubListener: BTLEListener {
-    func start(stateDelegate: BTLEListenerStateDelegate?, delegate: BTLEListenerDelegate?) {
+struct StubListener: Listener {
+    func start(stateDelegate: ListenerStateDelegate?, delegate: ListenerDelegate?) {
     }
     func isHealthy() -> Bool {
         return true
     }
 }
 
-struct StubPeripheral: BTLEPeripheral {
+struct StubPeripheral: Peripheral {
     let identifier = UUID()
 }

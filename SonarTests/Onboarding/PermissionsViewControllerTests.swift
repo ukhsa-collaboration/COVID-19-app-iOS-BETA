@@ -38,7 +38,7 @@ class PermissionsViewControllerTests: TestCase {
         // We skip Bluetooth on the simulator.
         #else
         authManagerDouble.bluetooth = .allowed
-        nursery.stateObserver.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
+        nursery.stateObserver.btleListener(ListenerDouble(), didUpdateState: .poweredOn)
         #endif
         
         XCTAssertFalse(continued)
@@ -72,7 +72,7 @@ class PermissionsViewControllerTests: TestCase {
         #if targetEnvironment(simulator)
         // We skip Bluetooth on the simulator.
         #else
-        nursery.stateObserver.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
+        nursery.stateObserver.btleListener(ListenerDouble(), didUpdateState: .poweredOn)
         authManagerDouble.bluetooth = .allowed
         vc.viewWillAppear(false) // called when the user returns to the app
         XCTAssertNotNil(authManagerDouble.bluetoothCompletion)
@@ -110,7 +110,7 @@ class PermissionsViewControllerTests: TestCase {
         #if targetEnvironment(simulator)
         // We skip Bluetooth on the simulator.
         #else
-        nursery.stateObserver.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
+        nursery.stateObserver.btleListener(ListenerDouble(), didUpdateState: .poweredOn)
         authManagerDouble.bluetooth = .allowed
         vc.viewWillAppear(false) // called when the user returns to the app
         XCTAssertNotNil(authManagerDouble.bluetoothCompletion)
@@ -148,7 +148,7 @@ class PermissionsViewControllerTests: TestCase {
         XCTAssertTrue(persistence.bluetoothPermissionRequested)
         
         authManagerDouble.bluetooth = .denied
-        nursery.stateObserver.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
+        nursery.stateObserver.btleListener(ListenerDouble(), didUpdateState: .poweredOn)
 
         XCTAssert(continued)
         
@@ -232,8 +232,8 @@ class PermissionsViewControllerTests: TestCase {
 
 }
 
-fileprivate struct DummyBTLEListener: BTLEListener {
-    func start(stateDelegate: BTLEListenerStateDelegate?, delegate: BTLEListenerDelegate?) { }
-    func connect(_ peripheral: BTLEPeripheral) { }
+fileprivate struct DummyBTLEListener: Listener {
+    func start(stateDelegate: ListenerStateDelegate?, delegate: ListenerDelegate?) { }
+    func connect(_ peripheral: Peripheral) { }
     func isHealthy() -> Bool { return false }
 }

@@ -35,12 +35,12 @@ class ContactEventRepositoryDouble: ContactEventRepository {
         removedThroughDate = date
     }
     
-    func btleListener(_ listener: BTLEListener, didFind broadcastPayload: IncomingBroadcastPayload, for peripheral: BTLEPeripheral) {
+    func listener(_ listener: Listener, didFind broadcastPayload: IncomingBroadcastPayload, for peripheral: Peripheral) {
     }
     
-    func btleListener(_ listener: BTLEListener, didReadRSSI RSSI: Int, for peripheral: BTLEPeripheral) {
+    func listener(_ listener: Listener, didReadRSSI RSSI: Int, for peripheral: Peripheral) {
     }
     
-    func btleListener(_ listener: BTLEListener, didReadTxPower txPower: Int, for peripheral: BTLEPeripheral) {
+    func listener(_ listener: Listener, didReadTxPower txPower: Int, for peripheral: Peripheral) {
     }
 }

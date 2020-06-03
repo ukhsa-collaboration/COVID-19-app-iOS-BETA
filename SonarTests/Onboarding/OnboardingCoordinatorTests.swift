@@ -126,7 +126,7 @@ class OnboardingCoordinatorTests: TestCase {
         onboardingCoordinator.state { state = $0 }
         XCTAssertNil(state)
         
-        bluetoothNursery.stateObserver.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOff)
+        bluetoothNursery.stateObserver.listener(ListenerDouble(), didUpdateState: .poweredOff)
         XCTAssertEqual(state, .bluetoothOff)
     }
 
@@ -138,7 +138,7 @@ class OnboardingCoordinatorTests: TestCase {
 
         var state: OnboardingCoordinator.State?
         onboardingCoordinator.state { state = $0 }
-        bluetoothNursery.stateObserver.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
+        bluetoothNursery.stateObserver.listener(ListenerDouble(), didUpdateState: .poweredOn)
         authManagerDouble.notificationsCompletion?(.notDetermined)
         
         XCTAssertEqual(state, .permissions)
@@ -154,7 +154,7 @@ class OnboardingCoordinatorTests: TestCase {
         onboardingCoordinator.state { state = $0 }
         
         XCTAssertTrue(bluetoothNursery.hasStarted)
-        bluetoothNursery.stateObserver.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
+        bluetoothNursery.stateObserver.listener(ListenerDouble(), didUpdateState: .poweredOn)
         XCTAssertNotNil(authManagerDouble.notificationsCompletion)
         authManagerDouble.notificationsCompletion?(.allowed)
         XCTAssertEqual(state, .done)
@@ -168,7 +168,7 @@ class OnboardingCoordinatorTests: TestCase {
 
         var state: OnboardingCoordinator.State?
         onboardingCoordinator.state { state = $0 }
-        bluetoothNursery.stateObserver.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
+        bluetoothNursery.stateObserver.listener(ListenerDouble(), didUpdateState: .poweredOn)
         authManagerDouble.notificationsCompletion?(.denied)
         XCTAssertEqual(state, .done)
     }
@@ -179,7 +179,7 @@ class OnboardingCoordinatorTests: TestCase {
 
         var state: OnboardingCoordinator.State?
         onboardingCoordinator.state { state = $0 }
-        bluetoothNursery.stateObserver.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
+        bluetoothNursery.stateObserver.listener(ListenerDouble(), didUpdateState: .poweredOn)
         authManagerDouble.notificationsCompletion?(.allowed)
         XCTAssertEqual(state, .done)
     }

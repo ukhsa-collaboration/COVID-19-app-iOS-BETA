@@ -257,7 +257,7 @@ private class NoOpBluetoothNursery: BluetoothNursery {
     var stateObserver: BluetoothStateObserving = BluetoothStateObserver(initialState: .poweredOn)
     var contactEventRepository: ContactEventRepository = NoOpContactEventRepository()
     var contactEventPersister: ContactEventPersister = NoOpContactEventPersister()
-    var broadcaster: BTLEBroadcaster? = NoOpBroadcaster()
+    var broadcaster: Broadcaster? = NoOpBroadcaster()
 }
 
 private class NoOpContactEventRepository: ContactEventRepository {
@@ -265,13 +265,13 @@ private class NoOpContactEventRepository: ContactEventRepository {
     
     var delegate: ContactEventRepositoryDelegate?
 
-    func btleListener(_ listener: BTLEListener, didFind broadcastPayload: IncomingBroadcastPayload, for peripheral: BTLEPeripheral) {
+    func listener(_ listener: Listener, didFind broadcastPayload: IncomingBroadcastPayload, for peripheral: Peripheral) {
     }
     
-    func btleListener(_ listener: BTLEListener, didReadRSSI RSSI: Int, for peripheral: BTLEPeripheral) {
+    func listener(_ listener: Listener, didReadRSSI RSSI: Int, for peripheral: Peripheral) {
     }
     
-    func btleListener(_ listener: BTLEListener, didReadTxPower txPower: Int, for peripheral: BTLEPeripheral) {
+    func listener(_ listener: Listener, didReadTxPower txPower: Int, for peripheral: Peripheral) {
     }
         
     func reset() {
@@ -302,7 +302,7 @@ private class NoOpContactEventPersister: ContactEventPersister {
     
 }
 
-private class NoOpBroadcaster: BTLEBroadcaster {
+private class NoOpBroadcaster: Broadcaster {
     func updateIdentity() {
     }
     
