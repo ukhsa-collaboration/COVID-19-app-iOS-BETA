@@ -8,6 +8,8 @@
 
 import UIKit
 
+#if DEBUG || INTERNAL
+
 class SetStatusStateViewController: UITableViewController {
 
     @IBOutlet var statusStateCell: UITableViewCell!
@@ -247,3 +249,5 @@ extension SetStatusStateViewController: UIPickerViewDelegate {
         show(statusState: statusState)
     }
 }
+
+#endif

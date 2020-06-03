@@ -8,6 +8,8 @@
 
 import Foundation
 
+#if DEBUG
+
 enum Screen: String, Codable {
     
     // Flows
@@ -21,3 +23,5 @@ enum Screen: String, Codable {
     
     case exposedStatus
 }
+
+#endif

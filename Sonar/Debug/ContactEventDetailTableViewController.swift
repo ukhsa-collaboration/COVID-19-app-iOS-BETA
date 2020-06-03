@@ -6,6 +6,8 @@
 //  Copyright © 2020 NHSX. All rights reserved.
 //
 
+#if DEBUG || INTERNAL
+
 import UIKit
 
 class ContactEventDetailTableViewController: UITableViewController {
@@ -107,3 +109,5 @@ class ContactEventDetailTableViewController: UITableViewController {
     }
 
 }
+
+#endif
