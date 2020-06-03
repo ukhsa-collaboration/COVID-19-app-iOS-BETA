@@ -130,6 +130,7 @@ jobs:
 
       - name: Update Backlog
         env:
+          GITHUB_TOKEN: ${{ secrets.deployment_token }}
           BUILD: ${{ needs.upload.outputs.build-number }}
           PIVOTAL_TRACKER_API_TOKEN: ${{ secrets.pivotal_tracker_api_token }}
           PROJECT_ID: ${{ secrets.pivotal_tracker_project_id }}

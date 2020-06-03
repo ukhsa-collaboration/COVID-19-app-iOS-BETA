@@ -1,6 +1,14 @@
 #!/usr/bin/env ruby
 
-$LOAD_PATH.unshift(File.expand_path("../ci/ruby/lib", __dir__))
+github_token = ENV.fetch("GITHUB_TOKEN")
+
+require 'bundler/inline'
+gemfile do
+  gem 'sonar-ci-tools', git: "https://#{github_token}:x-oauth-basic@github.com/nhsx/sonar-ci-tools"
+end
+puts 'Gems loaded'
+puts
+
 require "updates_tracker_stories_with_build_number"
 include UpdatesTrackerStoriesWithBuildNumber
 
