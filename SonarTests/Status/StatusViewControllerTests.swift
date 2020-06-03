@@ -238,7 +238,7 @@ class StatusViewControllerTests: TestCase {
         _ = makeViewController(drawerPresenter: presenter, drawerMailbox: mailbox)
 
         let drawer = try XCTUnwrap(presenter.presented)
-        XCTAssertEqual(drawer.header, "TEST_UPDATE_DRAW_NEGATIVE_HEADER".localized)
+        XCTAssertEqual(drawer.header, "NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_HEADER".localized)
         XCTAssertTrue(mailbox.messages.isEmpty)
     }
 
