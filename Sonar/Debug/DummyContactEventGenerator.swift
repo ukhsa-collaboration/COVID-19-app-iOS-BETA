@@ -6,6 +6,8 @@
 //  Copyright © 2020 NHSX. All rights reserved.
 //
 
+#if DEBUG || INTERNAL
+
 import Foundation
 import Logging
 
@@ -77,3 +79,5 @@ struct StubListener: Listener {
 struct StubPeripheral: Peripheral {
     let identifier = UUID()
 }
+
+#endif

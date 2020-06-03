@@ -21,7 +21,7 @@ struct SetupProblemDiagnoser {
         notificationAuthorization: NotificationAuthorizationStatus,
         bluetoothAuthorization: BluetoothAuthorizationStatus,
         bluetoothStatus: CBManagerState
-        ) -> SetupProblem? {
+    ) -> SetupProblem? {
         if bluetoothStatus == .poweredOff {
             return .bluetoothOff
         } else if bluetoothAuthorization == .denied {

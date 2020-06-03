@@ -6,6 +6,8 @@
 //  Copyright © 2020 NHSX. All rights reserved.
 //
 
+#if DEBUG || INTERNAL
+
 import UIKit
 
 fileprivate enum Notification {
@@ -220,3 +222,5 @@ class DatePickerCell: UITableViewCell {
     @IBOutlet weak var datePicker: UIDatePicker!
 
 }
+
+#endif

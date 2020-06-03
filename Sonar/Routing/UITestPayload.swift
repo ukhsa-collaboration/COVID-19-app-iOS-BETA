@@ -8,7 +8,11 @@
 
 import Foundation
 
+#if DEBUG
+
 struct UITestPayload: Codable {
     static let environmentVariableName = "UI_TEST_PAYLOAD"
     var screen: Screen
 }
+
+#endif
