@@ -130,38 +130,6 @@ class DebugViewController: UITableViewController, Storyboarded {
             show(title: "Upload Initiated", message: "Contact events uploading.")
 
         case (3, 0):
-            performSegue(withIdentifier: "unwindFromDebugViewController", sender: self)
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5)) {
-                self.statusStateMachine.exposed(on: Date())
-            }
-
-        case (3, 1):
-            performSegue(withIdentifier: "unwindFromDebugViewController", sender: self)
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5)) {
-                self.statusStateMachine.unexposed()
-            }
-
-        case (3, 2):
-            performSegue(withIdentifier: "unwindFromDebugViewController", sender: self)
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5)) {
-                let positiveTestResult = TestResult(result: .positive,
-                                                    testTimestamp: Date(),
-                                                    type: nil,
-                                                    acknowledgementUrl: nil)
-                self.statusStateMachine.received(positiveTestResult)
-            }
-
-        case (3, 3):
-            performSegue(withIdentifier: "unwindFromDebugViewController", sender: self)
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5)) {
-                let positiveTestResult = TestResult(result: .negative,
-                                                    testTimestamp: Date(),
-                                                    type: nil,
-                                                    acknowledgementUrl: nil)
-                self.statusStateMachine.received(positiveTestResult)
-            }
-
-        case (4, 0):
             #if DEBUG
             guard let debugInfo = Environment.debug else {
                 show(title: "Failed", message: "Could not find known good registration info. This build was not configured with this feature.")
@@ -180,7 +148,7 @@ class DebugViewController: UITableViewController, Storyboarded {
 
             #endif
 
-        case (5, 0):
+        case (4, 0):
             do {
                 let fileManager = FileManager()
                 let documentsFolder = try fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
@@ -192,7 +160,7 @@ class DebugViewController: UITableViewController, Storyboarded {
                 present(viewController, animated: true, completion: nil)
             }
 
-        case (6, 0):
+        case (5, 0):
             break
 
         default:
