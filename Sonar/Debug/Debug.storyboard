@@ -364,7 +364,7 @@
                         <outlet property="listenerStatus" destination="d0c-lU-JW4" id="HmU-o2-pec"/>
                         <outlet property="versionBuildLabel" destination="u9d-KW-xk7" id="hpS-fN-Piy"/>
                         <segue destination="425-i6-QeM" kind="show" identifier="showSetStatusState" id="aLe-M1-OJ5"/>
-                        <segue destination="70r-Vs-y2X" kind="presentation" identifier="presentSimulateNotification" id="cua-Tn-qA4"/>
+                        <segue destination="70r-Vs-y2X" kind="show" identifier="showSimulateNotification" id="cua-Tn-qA4"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rGx-hb-5hq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
