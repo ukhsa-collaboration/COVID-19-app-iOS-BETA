@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Testing information-->
+        <!--Information about testing-->
         <scene sceneID="Qru-fo-gMt">
             <objects>
                 <viewController storyboardIdentifier="TestingInfoViewController" id="2DV-fd-FjU" customClass="TestingInfoViewController" customModule="Sonar" customModuleProvider="target" sceneMemberID="viewController">
@@ -166,7 +166,7 @@
                             <constraint firstItem="i7g-54-jA7" firstAttribute="trailing" secondItem="1xp-lJ-Mpr" secondAttribute="trailing" id="ulE-Ur-f3L"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Testing information" id="K44-qv-yGH"/>
+                    <navigationItem key="navigationItem" title="Information about testing" id="K44-qv-yGH"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3rx-BK-2al" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -212,7 +212,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="1j6-1z-CzU"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Testing information" id="wNg-Vf-FCC"/>
+                    <navigationItem key="navigationItem" title="Information about testing" id="wNg-Vf-FCC"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MKy-r9-nFZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
