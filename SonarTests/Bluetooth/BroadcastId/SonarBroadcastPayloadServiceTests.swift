@@ -19,7 +19,7 @@ class SonarBroadcastPayloadServiceTests: XCTestCase {
         return calendar
     }()
     
-    var generator: SonarBroadcastPayloadService!
+    var service: SonarBroadcastPayloadService!
     var encrypter: MockEncrypter!
     var storage: MockBroadcastRotationKeyStorage!
     
@@ -52,17 +52,17 @@ class SonarBroadcastPayloadServiceTests: XCTestCase {
     }
 
     func test_returns_nil_when_registration_is_nil() {
-        generator = SonarBroadcastPayloadService(storage: storage, persistence: PersistenceDouble(registration: nil), encrypter: encrypter)
-        let identifier = generator.broadcastPayload(date: Date())
+        service = SonarBroadcastPayloadService(storage: storage, persistence: PersistenceDouble(registration: nil), encrypter: encrypter)
+        let identifier = service.broadcastPayload(date: Date())
 
         XCTAssertNil(identifier)
     }
 
     func test_it_provides_the_encrypted_result_once_given_sonar_id_and_server_public_key() {
         let persistence = PersistenceDouble(registration: registration)
-        generator = SonarBroadcastPayloadService(storage: storage, persistence: persistence, encrypter: encrypter)
+        service = SonarBroadcastPayloadService(storage: storage, persistence: persistence, encrypter: encrypter)
         
-        let payload = generator.broadcastPayload()
+        let payload = service.broadcastPayload()
 
         XCTAssertNotNil(payload)
     }
@@ -73,9 +73,9 @@ class SonarBroadcastPayloadServiceTests: XCTestCase {
             stubbedBroadcastId: nil,
             stubbedBroadcastDate: nil)
         let persistence = PersistenceDouble(registration: registration)
-        generator = SonarBroadcastPayloadService(storage: storage, persistence: persistence, encrypter: encrypter)
+        service = SonarBroadcastPayloadService(storage: storage, persistence: persistence, encrypter: encrypter)
         
-        let payload = generator.broadcastPayload(date: todayMidday)
+        let payload = service.broadcastPayload(date: todayMidday)
         
         XCTAssertEqual(encrypter.startDate, todayMidday)
         XCTAssertEqual(encrypter.endDate, tomorrowMidnightUTC)
@@ -101,9 +101,9 @@ class SonarBroadcastPayloadServiceTests: XCTestCase {
             stubbedBroadcastId: freshBroadcastId,
             stubbedBroadcastDate: broadcastIdCreationDate)
         let persistence = PersistenceDouble(registration: registration)
-        generator = SonarBroadcastPayloadService(storage: storage, persistence: persistence, encrypter: encrypter)
+        service = SonarBroadcastPayloadService(storage: storage, persistence: persistence, encrypter: encrypter)
 
-        let payload = generator.broadcastPayload(date: currentDate)
+        let payload = service.broadcastPayload(date: currentDate)
         
         XCTAssertEqual(encrypter.callCount, 0, file: file, line: line)
         XCTAssertEqual(payload?.cryptogram, freshBroadcastId, file: file, line: line)
@@ -131,9 +131,9 @@ class SonarBroadcastPayloadServiceTests: XCTestCase {
             stubbedBroadcastId: staleBroadcastId,
             stubbedBroadcastDate: broadcastIdCreationDate)
         let persistence = PersistenceDouble(registration: registration)
-        generator = SonarBroadcastPayloadService(storage: storage, persistence: persistence, encrypter: encrypter)
+        service = SonarBroadcastPayloadService(storage: storage, persistence: persistence, encrypter: encrypter)
 
-        let payload = generator.broadcastPayload(date: currentDate)
+        let payload = service.broadcastPayload(date: currentDate)
         
         XCTAssertEqual(encrypter.startDate, currentDate, file: file, line: line)
         XCTAssertEqual(encrypter.endDate, currentDate.followingMidnightUTC, file: file, line: line)

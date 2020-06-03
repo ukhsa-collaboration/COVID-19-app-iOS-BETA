@@ -37,7 +37,7 @@ class ConcreteBluetoothNursery: BluetoothNursery, PersistenceDelegate {
 
     // The listener needs to get hold of the broadcaster, to send keepalives
     public var broadcaster: Broadcaster?
-    public var broadcastIdGenerator: BroadcastPayloadGenerator?
+    public var broadcastPayloadService: BroadcastPayloadService?
 
     public var listener: Listener?
     public private(set) var stateObserver: BluetoothStateObserving = BluetoothStateObserver(initialState: .unknown)
@@ -76,12 +76,12 @@ class ConcreteBluetoothNursery: BluetoothNursery, PersistenceDelegate {
     func startBluetooth(registration: Registration?) {
         logger.info("Starting the bluetooth nursery with sonar id \(registration == nil ? "not set" : "set"))")
 
-        broadcastIdGenerator = SonarBroadcastPayloadGenerator(
+        broadcastPayloadService = SonarBroadcastPayloadService(
             storage: SecureBroadcastRotationKeyStorage(),
             persistence: persistence,
             encrypter: ConcreteBroadcastIdEncrypter())
         
-        let broadcaster = BTLEBroadcaster(idGenerator: broadcastIdGenerator!)
+        let broadcaster = BTLEBroadcaster(broadcastPayloadService: broadcastPayloadService!)
         peripheral = CBPeripheralManager(delegate: broadcaster, queue: btleQueue, options: [
             CBPeripheralManagerOptionRestoreIdentifierKey: ConcreteBluetoothNursery.peripheralRestoreIdentifier
         ])
