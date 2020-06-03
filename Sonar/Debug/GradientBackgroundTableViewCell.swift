@@ -17,8 +17,8 @@ final class GradientBackgroundTableViewCell: UITableViewCell {
     var gradientColorData: Data? {
         didSet {
             gradientLayer.colors = [
-                gradientColorData?.asCGColor(alpha: 0) as Any,
-                gradientColorData?.asCGColor(alpha: 1) as Any
+                gradientColorData?.asCGColor(alpha: 0) ?? UIColor.clear.cgColor,
+                gradientColorData?.asCGColor(alpha: 1) ?? UIColor.clear.cgColor
             ]
         }
     }
