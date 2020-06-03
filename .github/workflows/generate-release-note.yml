@@ -24,7 +24,7 @@ jobs:
           token: ${{ secrets.DEPLOYMENT_TOKEN }}
           repository: nhsx/sonar-ci-tools
           path: ci-tools
-          ref: v0.1.0
+          ref: v0.1.1
 
       - name: Generate release notes
         id: generate_release_notes
