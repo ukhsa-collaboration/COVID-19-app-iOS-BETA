@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby
+#!/usr/bin/env -S ruby -E UTF-8:UTF-8
 
 github_token = ENV.fetch("GITHUB_TOKEN")
 
