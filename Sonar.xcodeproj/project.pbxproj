@@ -247,6 +247,8 @@
 		F694B1BE2459EB3800C6A5D1 /* NotificationAcknowledgerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F694B1BD2459EB3800C6A5D1 /* NotificationAcknowledgerTests.swift */; };
 		F694B1C02459EEB800C6A5D1 /* NotificationAcknowledgerDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = F694B1BF2459EEB800C6A5D1 /* NotificationAcknowledgerDouble.swift */; };
 		F697806A246DA9EF002CC50B /* SetStatusStateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6978069246DA9EF002CC50B /* SetStatusStateViewController.swift */; };
+		F6A9B4602486F6E400D71370 /* SimulateNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A9B45F2486F6E400D71370 /* SimulateNotificationViewController.swift */; };
+		F6A9B4622486F88000D71370 /* SimulateNotification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6A9B4612486F88000D71370 /* SimulateNotification.storyboard */; };
 		F6AA91EE247ED45D00D086B8 /* DrawerMailbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AA91ED247ED45D00D086B8 /* DrawerMailbox.swift */; };
 		F6AA91F0247ED65A00D086B8 /* DrawerMailboxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AA91EF247ED65A00D086B8 /* DrawerMailboxTests.swift */; };
 		F6AA91F2247F161C00D086B8 /* DrawerMailboxingDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AA91F1247F161C00D086B8 /* DrawerMailboxingDouble.swift */; };
@@ -603,6 +605,8 @@
 		F694B1BD2459EB3800C6A5D1 /* NotificationAcknowledgerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAcknowledgerTests.swift; sourceTree = "<group>"; };
 		F694B1BF2459EEB800C6A5D1 /* NotificationAcknowledgerDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAcknowledgerDouble.swift; sourceTree = "<group>"; };
 		F6978069246DA9EF002CC50B /* SetStatusStateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetStatusStateViewController.swift; sourceTree = "<group>"; };
+		F6A9B45F2486F6E400D71370 /* SimulateNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulateNotificationViewController.swift; sourceTree = "<group>"; };
+		F6A9B4612486F88000D71370 /* SimulateNotification.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SimulateNotification.storyboard; sourceTree = "<group>"; };
 		F6AA91ED247ED45D00D086B8 /* DrawerMailbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerMailbox.swift; sourceTree = "<group>"; };
 		F6AA91EF247ED65A00D086B8 /* DrawerMailboxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerMailboxTests.swift; sourceTree = "<group>"; };
 		F6AA91F1247F161C00D086B8 /* DrawerMailboxingDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerMailboxingDouble.swift; sourceTree = "<group>"; };
@@ -780,14 +784,16 @@
 			children = (
 				098ED480242E745F0029B729 /* Debug.storyboard */,
 				F6141BA024773158002EC49E /* SetStatusState.storyboard */,
+				F6A9B4612486F88000D71370 /* SimulateNotification.storyboard */,
 				2192888624640B5600691FDD /* ContactEventDetailTableViewController.swift */,
 				21F374032434C4BF00926FB8 /* ContactEventsTableViewController.swift */,
 				098ED482242E746E0029B729 /* DebugViewController.swift */,
+				214CD37324767F3200B24886 /* DummyContactEventGenerator.swift */,
 				2115C3E524360427009C0F5B /* GradientBackgroundTableViewCell.swift */,
 				89BC79EA2434E047002050F8 /* LogsViewController.swift */,
 				F6978069246DA9EF002CC50B /* SetStatusStateViewController.swift */,
+				F6A9B45F2486F6E400D71370 /* SimulateNotificationViewController.swift */,
 				F604976A24539F6C002B8503 /* UploadLogsViewController.swift */,
-				214CD37324767F3200B24886 /* DummyContactEventGenerator.swift */,
 			);
 			path = Debug;
 			sourceTree = "<group>";
@@ -1671,6 +1677,7 @@
 				F6F05A322434310200FF4B72 /* Onboarding.storyboard in Resources */,
 				F70CB81B2450CFA900ED6E7F /* OnboardingLogoStrapline.xib in Resources */,
 				098ED481242E745F0029B729 /* Debug.storyboard in Resources */,
+				F6A9B4622486F88000D71370 /* SimulateNotification.storyboard in Resources */,
 				F6141BA124773158002EC49E /* SetStatusState.storyboard in Resources */,
 				DD3FCF422476E914008B0237 /* Drawer.storyboard in Resources */,
 				F6053A102472F69D0006939E /* URLs.plist in Resources */,
@@ -1941,6 +1948,7 @@
 				214209BA242216B700C7BFF3 /* Persistence.swift in Sources */,
 				213C806C241A56430020EFA5 /* PermissionsViewController.swift in Sources */,
 				89F06B2F2434A62C0074C612 /* LoggingManager.swift in Sources */,
+				F6A9B4602486F6E400D71370 /* SimulateNotificationViewController.swift in Sources */,
 				09CAA3662440F3B100CE93A6 /* PostcodeViewController.swift in Sources */,
 				F6BBE143246F5870005757BB /* WorkplaceGuidanceViewController.swift in Sources */,
 				092F5AE22485BFBA001A06B7 /* UnderlinedBarButtonItem.swift in Sources */,
