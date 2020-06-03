@@ -290,7 +290,6 @@
 		F72EBDA5243D094A009F9328 /* SecureBroadcastRotationKeyStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72EBDA4243D094A009F9328 /* SecureBroadcastRotationKeyStorageTests.swift */; };
 		F72EBDA7243D2FD1009F9328 /* ConcreteBroadcastIdEncrypter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72EBDA6243D2FD1009F9328 /* ConcreteBroadcastIdEncrypter.swift */; };
 		F72EBDA9243D2FE6009F9328 /* BroadcastIdEncrypterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72EBDA8243D2FE6009F9328 /* BroadcastIdEncrypterTests.swift */; };
-		F74BAC56245B35910023FFC2 /* SelfsizingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74BAC55245B35910023FFC2 /* SelfsizingTextView.swift */; };
 		F758553A24294C8D00CBE1ED /* RequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F758553924294C8C00CBE1ED /* RequestFactory.swift */; };
 		F758B8BE242CB856003AE16D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F758B8BD242CB856003AE16D /* Localizable.strings */; };
 		F758B8C0242CB98C003AE16D /* UIViewController+Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = F758B8BF242CB98C003AE16D /* UIViewController+Storyboarded.swift */; };
@@ -650,7 +649,6 @@
 		F72EBDA4243D094A009F9328 /* SecureBroadcastRotationKeyStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureBroadcastRotationKeyStorageTests.swift; sourceTree = "<group>"; };
 		F72EBDA6243D2FD1009F9328 /* ConcreteBroadcastIdEncrypter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcreteBroadcastIdEncrypter.swift; sourceTree = "<group>"; };
 		F72EBDA8243D2FE6009F9328 /* BroadcastIdEncrypterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastIdEncrypterTests.swift; sourceTree = "<group>"; };
-		F74BAC55245B35910023FFC2 /* SelfsizingTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfsizingTextView.swift; sourceTree = "<group>"; };
 		F758553924294C8C00CBE1ED /* RequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFactory.swift; sourceTree = "<group>"; };
 		F758B8BD242CB856003AE16D /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		F758B8BF242CB98C003AE16D /* UIViewController+Storyboarded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Storyboarded.swift"; sourceTree = "<group>"; };
@@ -1410,7 +1408,6 @@
 				09CAA3652440F3B100CE93A6 /* PostcodeViewController.swift */,
 				F6F05A35243436D200FF4B72 /* PrivacyViewController.swift */,
 				F6F05A332434344200FF4B72 /* StartNowViewController.swift */,
-				F74BAC55245B35910023FFC2 /* SelfsizingTextView.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -1865,7 +1862,6 @@
 				F613936E243FA82B003447E8 /* Appearance.swift in Sources */,
 				0937F78F247461D40010FB3B /* ReferenceCodeContainerViewControllerBase.swift in Sources */,
 				F6F05A342434344200FF4B72 /* StartNowViewController.swift in Sources */,
-				F74BAC56245B35910023FFC2 /* SelfsizingTextView.swift in Sources */,
 				0997D056243BDEEC0067346C /* RootViewController.swift in Sources */,
 				092F5AE024859B81001A06B7 /* UnderlinedButton.swift in Sources */,
 				F6548FA52460DB95005F06FF /* SpinnerView.swift in Sources */,
