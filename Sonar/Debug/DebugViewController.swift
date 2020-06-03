@@ -106,6 +106,9 @@ class DebugViewController: UITableViewController, Storyboarded {
             show(title: "Cleared", message: "Notification ACKs cleared")
 
         case (1, 3):
+            performSegue(withIdentifier: "presentSimulateNotification", sender: self)
+
+        case (1, 4):
             kill(getpid(), SIGINT)
 
         case (2, 0):
@@ -208,12 +211,22 @@ class DebugViewController: UITableViewController, Storyboarded {
         case let vc as SetStatusStateViewController:
             vc.persistence = persisting
             vc.statusStateMachine = statusStateMachine
+        case let nav as UINavigationController:
+            switch nav.topViewController {
+            case let vc as SimulateNotificationViewController:
+                vc.inject(statusStateMachine: statusStateMachine)
+            default:
+                break
+            }
         default:
             break
         }
     }
 
     @IBAction func unwindFromSetStatusState(unwindSegue: UIStoryboardSegue) {
+    }
+
+    @IBAction func unwindFromSimulateNotification(unwindSegue: UIStoryboardSegue) {
     }
 
     // MARK: - Bluetooth status animation
