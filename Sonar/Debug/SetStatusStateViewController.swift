@@ -9,245 +9,292 @@
 import UIKit
 
 #if DEBUG || INTERNAL
+fileprivate enum CellConfig {
+    case state(String, (String) -> Void)
+    case date(String, Date, (Date) -> Void)
+    case symptoms(Symptoms?, (Symptoms?) -> Void)
+
+    private var identifier: String {
+        switch self {
+        case .state: return "state"
+        case .date: return "date"
+        case .symptoms: return "symptoms"
+        }
+    }
+
+    func cell(for tableView: UITableView) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier)!
+        switch self {
+        case .state(let state, let didSelect):
+            let cell = cell as! StateCell
+            cell.stateLabel.text = state
+            cell.didSelect = didSelect
+        case .date(let title, let date, let didSelect):
+            let cell = cell as! StatusStateDateCell
+            cell.titleLabel.text = title
+            cell.date = date
+            cell.didSelect = didSelect
+        case .symptoms(let symptoms, let didSelect):
+            let cell = cell as! SymptomsCell
+            if let symptoms = symptoms {
+                cell.symptomsSwitch.isOn = true
+                cell.symptomViews.forEach { $0.isHidden = false }
+                for (sw, sy) in zip(cell.symptomSwitches, Symptom.allCases) {
+                    sw.isOn = symptoms.contains(sy)
+                }
+            } else {
+                cell.symptomsSwitch.isOn = false
+                cell.symptomViews.forEach { $0.isHidden = true }
+            }
+            cell.didSelect = didSelect
+        }
+        return cell
+    }
+
+}
 
 class SetStatusStateViewController: UITableViewController {
 
-    @IBOutlet var statusStateCell: UITableViewCell!
-    @IBOutlet var statePickerCell: UITableViewCell!
-    @IBOutlet var temperatureCell: UITableViewCell!
-    @IBOutlet var coughCell: UITableViewCell!
-    @IBOutlet var dateCell: UITableViewCell!
-    @IBOutlet var datePickerCell: UITableViewCell!
-
-    @IBOutlet weak var statusLabel: UILabel!
-    @IBOutlet weak var statusPicker: UIPickerView!
-    @IBOutlet weak var temperatureSwitch: UISwitch!
-    @IBOutlet weak var coughSwitch: UISwitch!
-    @IBOutlet weak var dateTitleLabel: UILabel!
-    @IBOutlet weak var dateDetailLabel: UILabel!
-    @IBOutlet weak var datePicker: UIDatePicker!
-
     var persistence: Persisting!
-    var statusStateMachine: StatusStateMachining!
 
-    private let dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        formatter.timeStyle = .short
-        return formatter
-    }()
-
-    private var temperature: Bool? {
-        didSet {
-            guard let temperature = temperature else {
-                showCell[temperatureCell] = false
-                return
-            }
-
-            showCell[temperatureCell] = true
-            temperatureSwitch.isOn = temperature
-
-            if cough == .some(false), !temperature {
-                self.temperature = true
-                temperatureSwitch.isOn = true
-            }
-        }
+    var state: StatusState! {
+        didSet { tableView.reloadData() }
     }
 
-    private var cough: Bool? {
-        didSet {
-            guard let cough = cough else {
-                showCell[coughCell] = false
-                return
-            }
-
-            showCell[coughCell] = true
-            coughSwitch.isOn = cough
-
-            if temperature == .some(false), !cough {
-                self.cough = true
-                coughSwitch.isOn = true
-            }
-        }
-    }
-
-    private var symptoms: Symptoms {
-        var symptoms: Symptoms = []
-        if let temperature = temperature, temperature { symptoms.insert(.temperature) }
-        if let cough = cough, cough { symptoms.insert(.cough) }
-        return symptoms
-    }
-
-    private var date: Date? {
-        didSet {
-            guard let date = date else {
-                showCell[dateCell] = false
-                return
-            }
-
-            showCell[dateCell] = true
-            dateDetailLabel.text = dateFormatter.string(from: date)
-        }
-    }
-
-    private var cells: [UITableViewCell] {
-        [statusStateCell, statePickerCell, temperatureCell, coughCell, dateCell, datePickerCell].filter { showCell[$0] ?? false }
-    }
-    private var showCell: [UITableViewCell: Bool] = [:] {
-        didSet {
-            tableView.reloadData()
+    fileprivate var cellConfigs: [CellConfig] {
+        switch state! {
+        case .ok:
+            return [.state("ok", setState)]
+        case .symptomatic(let symptomatic):
+            return [
+                .state("symptomatic", setState),
+                .date("Start Date", symptomatic.startDate, { date in
+                    self.state = .symptomatic(StatusState.Symptomatic(
+                        symptoms: symptomatic.symptoms,
+                        startDate: date,
+                        checkinDate: symptomatic.checkinDate
+                    ))
+                }),
+                .date("Checkin Date", symptomatic.checkinDate, { date in
+                    self.state = .symptomatic(StatusState.Symptomatic(
+                        symptoms: symptomatic.symptoms,
+                        startDate: symptomatic.startDate,
+                        checkinDate: date
+                    ))
+                }),
+                .symptoms(symptomatic.symptoms, { symptoms in
+                    self.state = .symptomatic(StatusState.Symptomatic(
+                        symptoms: symptoms,
+                        startDate: symptomatic.startDate,
+                        checkinDate: symptomatic.checkinDate
+                    ))
+                }),
+            ]
+        case .exposed(let exposed):
+            return [
+                .state("exposed", setState),
+                .date("Start Date", exposed.startDate, {
+                    self.state = .exposed(StatusState.Exposed(startDate: $0))
+                }),
+            ]
+        case .positiveTestResult(let positive):
+            return [
+                .state("positive", setState),
+                .date("Start Date", positive.startDate, { date in
+                    self.state = .positiveTestResult(StatusState.PositiveTestResult(
+                        checkinDate: positive.checkinDate,
+                        symptoms: positive.symptoms,
+                        startDate: date
+                    ))
+                }),
+                .date("Checkin Date", positive.checkinDate, { date in
+                    self.state = .positiveTestResult(StatusState.PositiveTestResult(
+                        checkinDate: date,
+                        symptoms: positive.symptoms,
+                        startDate: positive.startDate
+                    ))
+                }),
+                .symptoms(positive.symptoms, { symptoms in
+                    self.state = .positiveTestResult(StatusState.PositiveTestResult(
+                        checkinDate: positive.checkinDate,
+                        symptoms: symptoms,
+                        startDate: positive.startDate
+                    ))
+                }),
+            ]
+        case .exposedSymptomatic(let exposedSymptomatic):
+            return [
+                .state("exposed symptomatic", setState),
+                .date("Start Date", exposedSymptomatic.startDate, { date in
+                    self.state = .exposedSymptomatic(StatusState.ExposedSymptomatic(
+                        symptoms: exposedSymptomatic.symptoms,
+                        startDate: date,
+                        checkinDate: exposedSymptomatic.checkinDate
+                    ))
+                }),
+                .date("Checkin Date", exposedSymptomatic.checkinDate, { date in
+                    self.state = .exposedSymptomatic(StatusState.ExposedSymptomatic(
+                        symptoms: exposedSymptomatic.symptoms,
+                        startDate: exposedSymptomatic.startDate,
+                        checkinDate: date
+                    ))
+                }),
+                .symptoms(exposedSymptomatic.symptoms, { symptoms in
+                    self.state = .exposedSymptomatic(StatusState.ExposedSymptomatic(
+                        symptoms: symptoms,
+                        startDate: exposedSymptomatic.startDate,
+                        checkinDate: exposedSymptomatic.checkinDate
+                    ))
+                }),
+            ]
         }
     }
 
     override func viewDidLoad() {
-        super.viewDidLoad()
-
-        showCell[statusStateCell] = true
-        show(statusState: statusStateMachine.state)
+        state = persistence.statusState
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cells.count
+        return cellConfigs.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return cells[indexPath.row]
+        return cellConfigs[indexPath.row].cell(for: tableView)
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
-        switch tableView.cellForRow(at: indexPath) {
-        case dateCell:
-            showCell[datePickerCell] = showCell[datePickerCell].map { !$0 } ?? true
-        case statusStateCell:
-            showCell[statePickerCell] = showCell[statePickerCell].map { !$0 } ?? true
+        let cell = tableView.cellForRow(at: indexPath)
+        switch cell {
+        case let cell as StateCell:
+            cell.showPicker = !cell.showPicker
+            tableView.reloadData()
+        case let cell as StatusStateDateCell:
+            cell.showPicker = !cell.showPicker
+            tableView.reloadData()
         default:
             break
         }
     }
 
-    private func show(statusState: StatusState) {
-        switch statusState {
-        case .ok:
-            statusLabel.text = "ok"
-            statusPicker.selectRow(0, inComponent: 0, animated: false)
-            temperature = nil
-            cough = nil
-            date = nil
-        case .symptomatic(let symptomatic):
-            statusLabel.text = "symptomatic"
-            statusPicker.selectRow(1, inComponent: 0, animated: false)
-            temperature = symptomatic.symptoms.map { $0.contains(.temperature) } ?? false
-            cough = symptomatic.symptoms.map { $0.contains(.cough) } ?? false
-            date = symptomatic.startDate
-        case .exposed(let exposed):
-            statusLabel.text = "exposed"
-            statusPicker.selectRow(2, inComponent: 0, animated: false)
-            temperature = nil
-            cough = nil
-            date = exposed.startDate
-        case .positiveTestResult(let positiveTestResult):
-            statusLabel.text = "positive test result"
-            statusPicker.selectRow(3, inComponent: 0, animated: false)
-            temperature = positiveTestResult.symptoms.map { $0.contains(.temperature) } ?? false
-            cough = positiveTestResult.symptoms.map { $0.contains(.cough) } ?? false
-            date = positiveTestResult.startDate
-        case .exposedSymptomatic(let exposedSymptomatic):
-            statusLabel.text = "exposed symptomatic"
-            statusPicker.selectRow(4, inComponent: 0, animated: false)
-            temperature = exposedSymptomatic.symptoms.map { $0.contains(.temperature) } ?? false
-            cough = exposedSymptomatic.symptoms.map { $0.contains(.cough) } ?? false
-            date = exposedSymptomatic.startDate
-        }
-    }
-
-    @IBAction func temperatureChanged(_ sender: UISwitch) {
-        temperature = sender.isOn
-    }
-
-    @IBAction func coughChanged(_ sender: UISwitch) {
-        cough = sender.isOn
-    }
-
-    @IBAction func datePickerChanged(_ sender: UIDatePicker) {
-        date = sender.date
-    }
-
-    @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
-        let statusState: StatusState
-        switch statusPicker.selectedRow(inComponent: 0) {
-        case 0:
-            statusState = .ok(StatusState.Ok())
-        case 1:
-            guard symptoms.hasCoronavirusSymptoms else {
-                fatalError()
-            }
-
-            let checkinDate = Calendar.current.date(byAdding: .day, value: 1, to: date!)!
-            statusState = .symptomatic(StatusState.Symptomatic(symptoms: symptoms, startDate: date!, checkinDate: checkinDate))
-        case 2:
-            statusState = .exposed(StatusState.Exposed(startDate: date!))
-        case 3:
-            let checkinDate = Calendar.current.date(byAdding: .day, value: 1, to: date!)!
-            statusState = .positiveTestResult(StatusState.PositiveTestResult(checkinDate: checkinDate, symptoms: symptoms, startDate: date!))
-        case 4:
-            guard symptoms.hasCoronavirusSymptoms else {
-                fatalError()
-            }
-
-            let checkinDate = Calendar.current.date(byAdding: .day, value: 7, to: date!)!
-            statusState = .exposedSymptomatic(StatusState.ExposedSymptomatic(symptoms: symptoms, startDate: date!, checkinDate: checkinDate))
-        default:
-            fatalError()
-        }
-
-        persistence.statusState = statusState
+    @IBAction func saveTapped(_ sender: UIBarButtonItem) {
+        persistence.statusState = state
         performSegue(withIdentifier: "unwindFromSetStatusState", sender: self)
+    }
+
+    private func setState(_ state: String) {
+        switch state {
+        case "ok":
+            self.state = .ok(StatusState.Ok())
+        case "symptomatic":
+            self.state = .symptomatic(StatusState.Symptomatic(symptoms: nil, startDate: Date(), checkinDate: Date()))
+        case "exposed":
+            self.state = .exposed(StatusState.Exposed(startDate: Date()))
+        case "positive":
+            self.state = .positiveTestResult(StatusState.PositiveTestResult(checkinDate: Date(), symptoms: nil, startDate: Date()))
+        case "exposed symptomatic":
+            self.state = .exposedSymptomatic(StatusState.ExposedSymptomatic(symptoms: nil, startDate: Date(), checkinDate: Date()))
+        default:
+            assertionFailure("invalid state: \(state)")
+        }
     }
 
 }
 
-extension SetStatusStateViewController: UIPickerViewDataSource {
+class StateCell: UITableViewCell, UIPickerViewDataSource, UIPickerViewDelegate {
+
+    let states = ["ok", "symptomatic", "exposed", "positive", "exposed symptomatic"]
+
+    @IBOutlet weak var stateLabel: UILabel!
+    @IBOutlet weak var picker: UIPickerView!
+
+    var showPicker = false {
+        didSet { picker.isHidden = !showPicker }
+    }
+    var didSelect: ((String) -> Void)?
+
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 5
+        return states.count
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return ["ok", "symptomatic", "exposed", "positive test result", "exposed symptomatic"][row]
+        return states[row]
     }
+
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        didSelect?(states[row])
+    }
+
 }
 
-extension SetStatusStateViewController: UIPickerViewDelegate {
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        let statusState: StatusState
-        switch row {
-        case 0:
-            statusState = .ok(StatusState.Ok())
-        case 1:
-            let startDate = Date()
-            let checkinDate = StatusState.Symptomatic.firstCheckin(from: startDate)
-            statusState = .symptomatic(StatusState.Symptomatic(symptoms: [.temperature, .cough], startDate: startDate, checkinDate: checkinDate))
-        case 2:
-            statusState = .exposed(StatusState.Exposed(startDate: Date()))
-        case 3:
-            let startDate = Date()
-            let checkinDate = StatusState.Symptomatic.firstCheckin(from: startDate)
-            statusState = .positiveTestResult(StatusState.PositiveTestResult(checkinDate: checkinDate, symptoms: [.temperature, .cough], startDate: Date()))
-        case 4:
-            let startDate = Date()
-            let checkinDate = StatusState.ExposedSymptomatic.firstCheckin(from: startDate)
-            statusState = .exposedSymptomatic(StatusState.ExposedSymptomatic(symptoms: [.temperature, .cough], startDate: startDate, checkinDate: checkinDate))
-        default:
-            fatalError()
-        }
+class StatusStateDateCell: UITableViewCell {
 
-        show(statusState: statusState)
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var datePicker: UIDatePicker!
+
+    var showPicker = false {
+        didSet { datePicker.isHidden = !showPicker }
     }
+    var date: Date! {
+        didSet { dateLabel.text = dateFormatter.string(from: date) }
+    }
+    var didSelect: ((Date) -> Void)?
+
+    @IBAction func dateChanged(_ sender: UIDatePicker) {
+        didSelect?(sender.date)
+    }
+
+    let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .short
+        return formatter
+    }()
+
+}
+
+class SymptomsCell: UITableViewCell {
+
+    @IBOutlet weak var symptomsSwitch: UISwitch!
+
+    @IBOutlet var symptomViews: [UIStackView]!
+    @IBOutlet var symptomLabels: [UILabel]!
+    @IBOutlet var symptomSwitches: [UISwitch]!
+
+    var didSelect: ((Symptoms?) -> Void)?
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        for (l, s) in zip(symptomLabels, Symptom.allCases) {
+            l.text = s.rawValue
+        }
+    }
+
+    @IBAction func toggleSymptoms(_ sender: UISwitch) {
+        if sender.isOn {
+            didSelect?([])
+        } else {
+            didSelect?(nil)
+        }
+    }
+
+    @IBAction func toggleSymptom(_ sender: UISwitch) {
+        var symptoms: Symptoms = []
+        for (sw, sy) in zip(symptomSwitches, Symptom.allCases) {
+            if sw.isOn {
+                symptoms.insert(sy)
+            }
+        }
+        didSelect?(symptoms)
+    }
+
 }
 
 #endif

@@ -178,7 +178,6 @@ class DebugViewController: UITableViewController, Storyboarded {
         switch segue.destination {
         case let vc as SetStatusStateViewController:
             vc.persistence = persisting
-            vc.statusStateMachine = statusStateMachine
         case let vc as SimulateNotificationViewController:
             vc.inject(statusStateMachine: statusStateMachine)
         default:
