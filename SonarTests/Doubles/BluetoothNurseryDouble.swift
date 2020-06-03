@@ -12,7 +12,7 @@ import CoreBluetooth
 @testable import Sonar
 
 class BluetoothNurseryDouble: BluetoothNursery {
-    var broadcaster: BTLEBroadcasting?
+    var broadcaster: Broadcaster?
         
     var stateObserver: BluetoothStateObserving = BluetoothStateObserver(initialState: .unknown)
     var contactEventRepository: ContactEventRepository = ContactEventRepositoryDouble()

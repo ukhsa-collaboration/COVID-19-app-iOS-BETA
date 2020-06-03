@@ -39,7 +39,7 @@ class ConcreteBluetoothNursery: BluetoothNursery, PersistenceDelegate {
     public var broadcaster: Broadcaster?
     public var broadcastIdGenerator: BroadcastPayloadGenerator?
 
-    public var listener: BTLEListener?
+    public var listener: Listener?
     public private(set) var stateObserver: BluetoothStateObserving = BluetoothStateObserver(initialState: .unknown)
 
     private var central: CBCentralManager?
@@ -87,7 +87,7 @@ class ConcreteBluetoothNursery: BluetoothNursery, PersistenceDelegate {
         ])
         self.broadcaster = broadcaster
         
-        let listener = ConcreteBTLEListener(broadcaster: broadcaster, queue: btleQueue)
+        let listener = BTLEListener(broadcaster: broadcaster, queue: btleQueue)
         central = CBCentralManager(delegate: listener, queue: btleQueue, options: [
             CBCentralManagerScanOptionAllowDuplicatesKey: NSNumber(true),
             CBCentralManagerOptionRestoreIdentifierKey: ConcreteBluetoothNursery.centralRestoreIdentifier,

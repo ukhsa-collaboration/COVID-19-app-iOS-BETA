@@ -75,7 +75,7 @@
 		09D027CE2452157D006EE07E /* BluetoothStateObserverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D027CD2452157D006EE07E /* BluetoothStateObserverTests.swift */; };
 		09D8B43424871247004D225C /* AccessibilityChangeNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D8B43324871247004D225C /* AccessibilityChangeNotifier.swift */; };
 		09D91A7724521C5C004825A5 /* BluetoothNurseryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D91A7624521C5C004825A5 /* BluetoothNurseryTests.swift */; };
-		09D91A7924522133004825A5 /* BTLEListenerDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D91A7824522133004825A5 /* BTLEListenerDouble.swift */; };
+		09D91A7924522133004825A5 /* ListenerDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D91A7824522133004825A5 /* ListenerDouble.swift */; };
 		09E6E7E4245271A00069DFA8 /* SetupChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E6E7E3245271A00069DFA8 /* SetupChecker.swift */; };
 		09E6E7E62452779B0069DFA8 /* SetupCheckerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E6E7E52452779B0069DFA8 /* SetupCheckerTests.swift */; };
 		09E876BC24510F2C009C2628 /* BluetoothNurseryDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E876BB24510F2C009C2628 /* BluetoothNurseryDouble.swift */; };
@@ -109,7 +109,7 @@
 		219C7B7A245AE83700952B4D /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219C7B79245AE83700952B4D /* DataExtensions.swift */; };
 		219C7B7C245B093000952B4D /* BluetoothPayloadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219C7B7B245B093000952B4D /* BluetoothPayloadTests.swift */; };
 		219C7B7F245B0BBB00952B4D /* BroadcastPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219C7B7D245B0B1500952B4D /* BroadcastPayload.swift */; };
-		21AF36AB241A8E50001A4910 /* BTLEListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AF36AA241A8E50001A4910 /* BTLEListener.swift */; };
+		21AF36AB241A8E50001A4910 /* Listener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AF36AA241A8E50001A4910 /* Listener.swift */; };
 		21B3D2E3242906AE00573061 /* SecureRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B3D2E2242906AE00573061 /* SecureRequestTests.swift */; };
 		21B3D2E52429112B00573061 /* SecureRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B3D2E42429112B00573061 /* SecureRequest.swift */; };
 		21B3D2E82429115600573061 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21B3D2E72429115600573061 /* CoreBluetooth.framework */; };
@@ -406,7 +406,7 @@
 		09D027CD2452157D006EE07E /* BluetoothStateObserverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothStateObserverTests.swift; sourceTree = "<group>"; };
 		09D8B43324871247004D225C /* AccessibilityChangeNotifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityChangeNotifier.swift; sourceTree = "<group>"; };
 		09D91A7624521C5C004825A5 /* BluetoothNurseryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothNurseryTests.swift; sourceTree = "<group>"; };
-		09D91A7824522133004825A5 /* BTLEListenerDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTLEListenerDouble.swift; sourceTree = "<group>"; };
+		09D91A7824522133004825A5 /* ListenerDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenerDouble.swift; sourceTree = "<group>"; };
 		09E6E7E3245271A00069DFA8 /* SetupChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupChecker.swift; sourceTree = "<group>"; };
 		09E6E7E52452779B0069DFA8 /* SetupCheckerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupCheckerTests.swift; sourceTree = "<group>"; };
 		09E876BB24510F2C009C2628 /* BluetoothNurseryDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothNurseryDouble.swift; sourceTree = "<group>"; };
@@ -445,7 +445,7 @@
 		219C7B79245AE83700952B4D /* DataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtensions.swift; sourceTree = "<group>"; };
 		219C7B7B245B093000952B4D /* BluetoothPayloadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothPayloadTests.swift; sourceTree = "<group>"; };
 		219C7B7D245B0B1500952B4D /* BroadcastPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastPayload.swift; sourceTree = "<group>"; };
-		21AF36AA241A8E50001A4910 /* BTLEListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTLEListener.swift; sourceTree = "<group>"; };
+		21AF36AA241A8E50001A4910 /* Listener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listener.swift; sourceTree = "<group>"; };
 		21B3D2E2242906AE00573061 /* SecureRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRequestTests.swift; sourceTree = "<group>"; };
 		21B3D2E42429112B00573061 /* SecureRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRequest.swift; sourceTree = "<group>"; };
 		21B3D2E72429115600573061 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
@@ -805,7 +805,7 @@
 				896F8E0E24586D9C00E2CB15 /* AppMonitorDouble.swift */,
 				F6F05A292433C6CC00FF4B72 /* AuthManagerDouble.swift */,
 				09E876BB24510F2C009C2628 /* BluetoothNurseryDouble.swift */,
-				09D91A7824522133004825A5 /* BTLEListenerDouble.swift */,
+				09D91A7824522133004825A5 /* ListenerDouble.swift */,
 				09B103612444E9110091834D /* ContactEventPersisterDouble.swift */,
 				09B103632444EAB80091834D /* ContactEventRepositoryDouble.swift */,
 				F60497662452415F002B8503 /* ContactEventsUploaderDouble.swift */,
@@ -919,7 +919,7 @@
 			children = (
 				F72EBDA0243D086C009F9328 /* BroadcastId */,
 				AE2DCA9F241920B600A940FC /* Broadcaster.swift */,
-				21AF36AA241A8E50001A4910 /* BTLEListener.swift */,
+				21AF36AA241A8E50001A4910 /* Listener.swift */,
 				21C09A8C24377F5100368203 /* CoreBluetoothExtensions.swift */,
 				21C09A8E2437B99F00368203 /* BluetoothNursery.swift */,
 				F72EBD96243C8490009F9328 /* BluetoothStateUserNotifier.swift */,
@@ -1747,7 +1747,7 @@
 				89C8B216245C5258009CCE80 /* DefaultObjectStoringDouble.swift in Sources */,
 				095A91182434FF1500ED6369 /* ApplicationDouble.swift in Sources */,
 				89CCF6612456F07400AC9D91 /* URLAuthenticationChallenge.swift in Sources */,
-				09D91A7924522133004825A5 /* BTLEListenerDouble.swift in Sources */,
+				09D91A7924522133004825A5 /* ListenerDouble.swift in Sources */,
 				F632792324351C8400CF7A42 /* OnboardingCoordinatorDouble.swift in Sources */,
 				21F37402243384D400926FB8 /* PersistingContactEventRepositoryTests.swift in Sources */,
 				F62F858524510923006580A8 /* SessionDouble.swift in Sources */,
@@ -1861,7 +1861,7 @@
 				F72EBDA2243D0892009F9328 /* SecureBroadcastRotationKeyStorage.swift in Sources */,
 				F60497772454A294002B8503 /* TestingInfoViewController.swift in Sources */,
 				09CDA11824734FB100C8684D /* ReferenceCodeViewController.swift in Sources */,
-				21AF36AB241A8E50001A4910 /* BTLEListener.swift in Sources */,
+				21AF36AB241A8E50001A4910 /* Listener.swift in Sources */,
 				21C09A8D24377F5100368203 /* CoreBluetoothExtensions.swift in Sources */,
 				F72EBDA7243D2FD1009F9328 /* ConcreteBroadcastIdEncrypter.swift in Sources */,
 				F72EBD9E243C90E6009F9328 /* HumbleLocalNotificationScheduler.swift in Sources */,

@@ -19,13 +19,13 @@ class PersistingContactEventRepositoryTests: XCTestCase {
     private let payload2 = IncomingBroadcastPayload.sample2
     private let payload3 = IncomingBroadcastPayload.sample3
 
-    private var listener: BTLEListenerDouble!
+    private var listener: ListenerDouble!
     private var persister: ContactEventPersisterDouble!
     private var delegate: MockContactEventRepositoryDelegate!
     private var repository: PersistingContactEventRepository!
 
     override func setUp() {
-        listener = BTLEListenerDouble()
+        listener = ListenerDouble()
         persister = ContactEventPersisterDouble()
         delegate = MockContactEventRepositoryDelegate()
         repository = PersistingContactEventRepository(persister: persister)
@@ -33,12 +33,12 @@ class PersistingContactEventRepositoryTests: XCTestCase {
     }
     
     func testRecordsTxPowerValuesAgainstCorrectPeripheral() {
-        repository.btleListener(listener, didFind: payload1, for: peripheral1)
-        repository.btleListener(listener, didReadTxPower: 11, for: peripheral1)
-        repository.btleListener(listener, didReadTxPower: 33, for: peripheral3)
-        repository.btleListener(listener, didFind: payload2, for: peripheral2)
-        repository.btleListener(listener, didFind: payload3, for: peripheral3)
-        repository.btleListener(listener, didReadTxPower: 22, for: peripheral2)
+        repository.listener(listener, didFind: payload1, for: peripheral1)
+        repository.listener(listener, didReadTxPower: 11, for: peripheral1)
+        repository.listener(listener, didReadTxPower: 33, for: peripheral3)
+        repository.listener(listener, didFind: payload2, for: peripheral2)
+        repository.listener(listener, didFind: payload3, for: peripheral3)
+        repository.listener(listener, didReadTxPower: 22, for: peripheral2)
         
         XCTAssertEqual(repository.contactEvents.first(where: { $0.broadcastPayload == payload1 })?.txPower, 11)
         XCTAssertEqual(repository.contactEvents.first(where: { $0.broadcastPayload == payload2 })?.txPower, 22)
@@ -46,18 +46,18 @@ class PersistingContactEventRepositoryTests: XCTestCase {
     }
     
     func testRecordsRSSIValuesAgainstCorrectPeripheral() {
-        repository.btleListener(listener, didFind: payload1, for: peripheral1)
-        repository.btleListener(listener, didReadRSSI: 21, for: peripheral2)
-        repository.btleListener(listener, didReadRSSI: 11, for: peripheral1)
-        repository.btleListener(listener, didFind: payload2, for: peripheral2)
-        repository.btleListener(listener, didReadRSSI: 31, for: peripheral3)
-        repository.btleListener(listener, didReadRSSI: 22, for: peripheral2)
-        repository.btleListener(listener, didReadRSSI: 32, for: peripheral3)
-        repository.btleListener(listener, didReadRSSI: 23, for: peripheral2)
-        repository.btleListener(listener, didReadRSSI: 12, for: peripheral1)
-        repository.btleListener(listener, didReadRSSI: 13, for: peripheral1)
-        repository.btleListener(listener, didFind: payload3, for: peripheral3)
-        repository.btleListener(listener, didReadRSSI: 33, for: peripheral3)
+        repository.listener(listener, didFind: payload1, for: peripheral1)
+        repository.listener(listener, didReadRSSI: 21, for: peripheral2)
+        repository.listener(listener, didReadRSSI: 11, for: peripheral1)
+        repository.listener(listener, didFind: payload2, for: peripheral2)
+        repository.listener(listener, didReadRSSI: 31, for: peripheral3)
+        repository.listener(listener, didReadRSSI: 22, for: peripheral2)
+        repository.listener(listener, didReadRSSI: 32, for: peripheral3)
+        repository.listener(listener, didReadRSSI: 23, for: peripheral2)
+        repository.listener(listener, didReadRSSI: 12, for: peripheral1)
+        repository.listener(listener, didReadRSSI: 13, for: peripheral1)
+        repository.listener(listener, didFind: payload3, for: peripheral3)
+        repository.listener(listener, didReadRSSI: 33, for: peripheral3)
         
         XCTAssertEqual(repository.contactEvents.first(where: { $0.broadcastPayload == payload1 })?.rssiValues, [11, 12, 13])
         XCTAssertEqual(repository.contactEvents.first(where: { $0.broadcastPayload == payload2 })?.rssiValues, [21, 22, 23])
@@ -72,17 +72,17 @@ class PersistingContactEventRepositoryTests: XCTestCase {
     }
     
     func testNewPeripheralWithSameBroadcastIdRecordsValuesAgainstExistingContactEvent() throws {
-        repository.btleListener(listener, didReadTxPower: 1, for: peripheral1)
-        repository.btleListener(listener, didFind: payload1, for: peripheral1)
-        repository.btleListener(listener, didReadRSSI: 11, for: peripheral1)
-        repository.btleListener(listener, didReadRSSI: 12, for: peripheral1)
-        repository.btleListener(listener, didReadRSSI: 22, for: peripheral2)
-        repository.btleListener(listener, didReadTxPower: 2, for: peripheral2)
-        repository.btleListener(listener, didFind: payload1, for: peripheral2)
-        repository.btleListener(listener, didReadRSSI: 23, for: peripheral2)
-        repository.btleListener(listener, didReadRSSI: 13, for: peripheral1)
-        repository.btleListener(listener, didReadRSSI: 24, for: peripheral2)
-        repository.btleListener(listener, didReadRSSI: 14, for: peripheral1)
+        repository.listener(listener, didReadTxPower: 1, for: peripheral1)
+        repository.listener(listener, didFind: payload1, for: peripheral1)
+        repository.listener(listener, didReadRSSI: 11, for: peripheral1)
+        repository.listener(listener, didReadRSSI: 12, for: peripheral1)
+        repository.listener(listener, didReadRSSI: 22, for: peripheral2)
+        repository.listener(listener, didReadTxPower: 2, for: peripheral2)
+        repository.listener(listener, didFind: payload1, for: peripheral2)
+        repository.listener(listener, didReadRSSI: 23, for: peripheral2)
+        repository.listener(listener, didReadRSSI: 13, for: peripheral1)
+        repository.listener(listener, didReadRSSI: 24, for: peripheral2)
+        repository.listener(listener, didReadRSSI: 14, for: peripheral1)
         
         XCTAssertEqual(repository.contactEvents.count, 2)
         
@@ -98,13 +98,13 @@ class PersistingContactEventRepositoryTests: XCTestCase {
     }
     
     func testNewBroadcastIdForSamePeripheralCreatesNewContactEvent() throws {
-        repository.btleListener(listener, didReadTxPower: 42, for: peripheral1)
-        repository.btleListener(listener, didFind: payload1, for: peripheral1)
-        repository.btleListener(listener, didReadRSSI: 11, for: peripheral1)
-        repository.btleListener(listener, didReadRSSI: 22, for: peripheral1)
-        repository.btleListener(listener, didFind: payload2, for: peripheral1)
-        repository.btleListener(listener, didReadRSSI: 33, for: peripheral1)
-        repository.btleListener(listener, didReadRSSI: 44, for: peripheral1)
+        repository.listener(listener, didReadTxPower: 42, for: peripheral1)
+        repository.listener(listener, didFind: payload1, for: peripheral1)
+        repository.listener(listener, didReadRSSI: 11, for: peripheral1)
+        repository.listener(listener, didReadRSSI: 22, for: peripheral1)
+        repository.listener(listener, didFind: payload2, for: peripheral1)
+        repository.listener(listener, didReadRSSI: 33, for: peripheral1)
+        repository.listener(listener, didReadRSSI: 44, for: peripheral1)
         
         XCTAssertEqual(repository.contactEvents.count, 2)
         
@@ -118,9 +118,9 @@ class PersistingContactEventRepositoryTests: XCTestCase {
     }
     
     func testResetResetsUnderlyingPersister() {
-        repository.btleListener(listener, didFind: payload1, for: peripheral1)
-        repository.btleListener(listener, didFind: payload2, for: peripheral2)
-        repository.btleListener(listener, didFind: payload3, for: peripheral3)
+        repository.listener(listener, didFind: payload1, for: peripheral1)
+        repository.listener(listener, didFind: payload2, for: peripheral2)
+        repository.listener(listener, didFind: payload3, for: peripheral3)
 
         repository.reset()
         
@@ -128,8 +128,8 @@ class PersistingContactEventRepositoryTests: XCTestCase {
     }
     
     func testUpdatesWithItemsMoreRecentThan28Days() {
-        repository.btleListener(listener, didFind: payload2, for: peripheral2)
-        repository.btleListener(listener, didFind: payload3, for: peripheral3)
+        repository.listener(listener, didFind: payload2, for: peripheral2)
+        repository.listener(listener, didFind: payload3, for: peripheral3)
         
         persister.update(
             item: ContactEvent(timestamp: Date(timeIntervalSinceNow: -2419300)),
@@ -141,9 +141,9 @@ class PersistingContactEventRepositoryTests: XCTestCase {
     }
 
     func testRemoveContactEventsUntil() {
-        repository.btleListener(listener, didFind: payload1, for: peripheral1)
-        repository.btleListener(listener, didFind: payload2, for: peripheral2)
-        repository.btleListener(listener, didFind: payload3, for: peripheral3)
+        repository.listener(listener, didFind: payload1, for: peripheral1)
+        repository.listener(listener, didFind: payload2, for: peripheral2)
+        repository.listener(listener, didFind: payload3, for: peripheral3)
 
         guard let contactEvent = persister.items[peripheral2.identifier] else {
             XCTFail("Contact event for \(peripheral2.identifier) not found")
@@ -192,7 +192,7 @@ class PersistingContactEventRepositoryFocusedIntegrationTests: XCTestCase {
         
         let payload = IncomingBroadcastPayload.sample1
         let peripheral = TestPeripheral(identifier: UUID())
-        repository.btleListener(BTLEListenerDouble(), didFind: payload, for: peripheral)
+        repository.listener(ListenerDouble(), didFind: payload, for: peripheral)
         
         let reader = PlistPersister<UUID, ContactEvent>(fileName: filename)
         XCTAssertEqual(reader.items[peripheral.identifier]?.broadcastPayload, payload)
@@ -206,7 +206,7 @@ class PersistingContactEventRepositoryFocusedIntegrationTests: XCTestCase {
         let repository = PersistingContactEventRepository(persister: persister)
         
         let peripheral = TestPeripheral(identifier: UUID())
-        repository.btleListener(BTLEListenerDouble(), didReadTxPower: 42, for: peripheral)
+        repository.listener(ListenerDouble(), didReadTxPower: 42, for: peripheral)
         
         let reader = PlistPersister<UUID, ContactEvent>(fileName: filename)
         XCTAssertEqual(reader.items[peripheral.identifier]?.txPower, 42)
@@ -220,14 +220,14 @@ class PersistingContactEventRepositoryFocusedIntegrationTests: XCTestCase {
         let repository = PersistingContactEventRepository(persister: persister)
         
         let peripheral = TestPeripheral(identifier: UUID())
-        repository.btleListener(BTLEListenerDouble(), didReadRSSI: -42, for: peripheral)
+        repository.listener(ListenerDouble(), didReadRSSI: -42, for: peripheral)
         
         let reader = PlistPersister<UUID, ContactEvent>(fileName: filename)
         XCTAssertEqual(reader.items[peripheral.identifier]?.rssiValues, [-42])
     }
 }
 
-fileprivate struct TestPeripheral: BTLEPeripheral {
+fileprivate struct TestPeripheral: Peripheral {
     let identifier: UUID
 }
 
@@ -236,11 +236,11 @@ fileprivate class MockContactEventRepositoryDelegate: ContactEventRepositoryDele
     var broadcastIds: [UUID: IncomingBroadcastPayload] = [:]
     var rssiValues: [UUID: [Int]] = [:]
     
-    func repository(_ repository: ContactEventRepository, didRecord broadcastPayload: IncomingBroadcastPayload, for peripheral: BTLEPeripheral) {
+    func repository(_ repository: ContactEventRepository, didRecord broadcastPayload: IncomingBroadcastPayload, for peripheral: Peripheral) {
         broadcastIds[peripheral.identifier] = broadcastPayload
     }
     
-    func repository(_ repository: ContactEventRepository, didRecordRSSI RSSI: Int, for peripheral: BTLEPeripheral) {
+    func repository(_ repository: ContactEventRepository, didRecordRSSI RSSI: Int, for peripheral: Peripheral) {
         if rssiValues[peripheral.identifier] == nil {
             rssiValues[peripheral.identifier] = []
         }

@@ -10,33 +10,33 @@ import UIKit
 import CoreBluetooth
 import Logging
 
-protocol BTLEPeripheral {
+protocol Peripheral {
     var identifier: UUID { get }
 }
 
-extension CBPeripheral: BTLEPeripheral {
+extension CBPeripheral: Peripheral {
 }
 
-protocol BTLEListenerDelegate {
-    func btleListener(_ listener: BTLEListener, didFind broadcastPayload: IncomingBroadcastPayload, for peripheral: BTLEPeripheral)
-    func btleListener(_ listener: BTLEListener, didReadRSSI RSSI: Int, for peripheral: BTLEPeripheral)
-    func btleListener(_ listener: BTLEListener, didReadTxPower txPower: Int, for peripheral: BTLEPeripheral)
+protocol ListenerDelegate {
+    func listener(_ listener: Listener, didFind broadcastPayload: IncomingBroadcastPayload, for peripheral: Peripheral)
+    func listener(_ listener: Listener, didReadRSSI RSSI: Int, for peripheral: Peripheral)
+    func listener(_ listener: Listener, didReadTxPower txPower: Int, for peripheral: Peripheral)
 }
 
-protocol BTLEListenerStateDelegate {
-    func btleListener(_ listener: BTLEListener, didUpdateState state: CBManagerState)
+protocol ListenerStateDelegate {
+    func listener(_ listener: Listener, didUpdateState state: CBManagerState)
 }
 
-protocol BTLEListener {
-    func start(stateDelegate: BTLEListenerStateDelegate?, delegate: BTLEListenerDelegate?)
+protocol Listener {
+    func start(stateDelegate: ListenerStateDelegate?, delegate: ListenerDelegate?)
     func isHealthy() -> Bool
 }
 
-class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CBPeripheralDelegate {
+class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDelegate {
 
     var broadcaster: Broadcaster
-    var stateDelegate: BTLEListenerStateDelegate?
-    var delegate: BTLEListenerDelegate?
+    var stateDelegate: ListenerStateDelegate?
+    var delegate: ListenerDelegate?
     
     var peripherals: [UUID: CBPeripheral] = [:]
     
@@ -53,7 +53,7 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
         self.queue = queue
     }
 
-    func start(stateDelegate: BTLEListenerStateDelegate?, delegate: BTLEListenerDelegate?) {
+    func start(stateDelegate: ListenerStateDelegate?, delegate: ListenerDelegate?) {
         self.stateDelegate = stateDelegate
         self.delegate = delegate
     }
@@ -95,7 +95,7 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         logger.info("state: \(central.state)")
         
-        stateDelegate?.btleListener(self, didUpdateState: central.state)
+        stateDelegate?.listener(self, didUpdateState: central.state)
         
         switch (central.state) {
                 
@@ -120,7 +120,7 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         if let txPower = (advertisementData[CBAdvertisementDataTxPowerLevelKey] as? NSNumber)?.intValue {
             logger.info("peripheral \(peripheral.identifierWithName) discovered with RSSI = \(RSSI), txPower = \(txPower)")
-            delegate?.btleListener(self, didReadTxPower: txPower, for: peripheral)
+            delegate?.listener(self, didReadTxPower: txPower, for: peripheral)
         } else {
             logger.info("peripheral \(peripheral.identifierWithName) discovered with RSSI = \(RSSI)")            
         }
@@ -241,7 +241,7 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
         case (let data?) where characteristic.uuid == Environment.sonarIdCharacteristicUUID:
             if data.count == BroadcastPayload.length {
                 logger.info("read identity from peripheral \(peripheral.identifierWithName): \(data)")
-                delegate?.btleListener(self, didFind: IncomingBroadcastPayload(data: data), for: peripheral)
+                delegate?.listener(self, didFind: IncomingBroadcastPayload(data: data), for: peripheral)
             } else {
                 logger.info("no identity ready from peripheral \(peripheral.identifierWithName)")
             }
@@ -272,7 +272,7 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
         }
 
         logger.info("read RSSI for \(peripheral.identifierWithName): \(RSSI)")
-        delegate?.btleListener(self, didReadRSSI: RSSI.intValue, for: peripheral)
+        delegate?.listener(self, didReadRSSI: RSSI.intValue, for: peripheral)
         readRSSIAndSendKeepalive()
     }
 
