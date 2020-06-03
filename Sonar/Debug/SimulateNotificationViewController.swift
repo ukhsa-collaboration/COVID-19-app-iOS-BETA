@@ -205,7 +205,7 @@ class TypePickerCell: UITableViewCell, UIPickerViewDataSource, UIPickerViewDeleg
 
 }
 
-class DateCell: UITableViewCell {
+fileprivate class DateCell: UITableViewCell {
 
     @IBOutlet weak var dateSwitch: UISwitch!
 

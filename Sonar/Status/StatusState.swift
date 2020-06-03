@@ -28,9 +28,6 @@ extension Expirable {
 }
 
 protocol Checkinable {
-    static func firstCheckin(from startDate: Date) -> Date
-    static func nextCheckin(from startDate: Date, afterDays days: Int) -> Date
-    
     var startDate: Date { get }
     var checkinDate: Date { get }
 }
