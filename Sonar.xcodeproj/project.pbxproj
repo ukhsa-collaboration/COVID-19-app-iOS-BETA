@@ -46,7 +46,6 @@
 		0983ACCD243E566800DBB336 /* ErrorForTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983ACCC243E566800DBB336 /* ErrorForTest.swift */; };
 		0983ACCF243E6D3800DBB336 /* NotificationObserverDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983ACCE243E6D3800DBB336 /* NotificationObserverDouble.swift */; };
 		0983ACD3243EB22200DBB336 /* StatusViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983ACD2243EB22200DBB336 /* StatusViewControllerTests.swift */; };
-		0984E0BD2451014E009C6374 /* BluetoothOffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0984E0BC2451014E009C6374 /* BluetoothOffViewController.swift */; };
 		0986EFB5244518FE008D0E1D /* ButtonWithDynamicType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0986EFB4244518FE008D0E1D /* ButtonWithDynamicType.swift */; };
 		098ED478242D7D050029B729 /* RegistratonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED477242D7D050029B729 /* RegistratonService.swift */; };
 		098ED47C242D801C0029B729 /* RegistrationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED47A242D7E460029B729 /* RegistrationServiceTests.swift */; };
@@ -377,7 +376,6 @@
 		0983ACCC243E566800DBB336 /* ErrorForTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorForTest.swift; sourceTree = "<group>"; };
 		0983ACCE243E6D3800DBB336 /* NotificationObserverDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationObserverDouble.swift; sourceTree = "<group>"; };
 		0983ACD2243EB22200DBB336 /* StatusViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewControllerTests.swift; sourceTree = "<group>"; };
-		0984E0BC2451014E009C6374 /* BluetoothOffViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothOffViewController.swift; sourceTree = "<group>"; };
 		0986EFB4244518FE008D0E1D /* ButtonWithDynamicType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonWithDynamicType.swift; sourceTree = "<group>"; };
 		098ED477242D7D050029B729 /* RegistratonService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistratonService.swift; sourceTree = "<group>"; };
 		098ED47A242D7E460029B729 /* RegistrationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationServiceTests.swift; sourceTree = "<group>"; };
@@ -1394,7 +1392,6 @@
 				F6F05A312434310200FF4B72 /* Onboarding.storyboard */,
 				F6F05A272433C55300FF4B72 /* AuthorizationManager.swift */,
 				898FE858243B4FE300210775 /* AuthorizationManaging.swift */,
-				0984E0BC2451014E009C6374 /* BluetoothOffViewController.swift */,
 				090DEE0F244F8BF600268170 /* BluetoothPermissionDeniedViewController.swift */,
 				0991B8BC2450B9940076C58B /* FixPermissionsViewController.swift */,
 				F6F05A252433C09200FF4B72 /* OnboardingCoordinator.swift */,
@@ -1923,7 +1920,6 @@
 				0979FB792458ADF000EB01A8 /* PostcodeValidator.swift in Sources */,
 				134470AE2454D4DA001A0AD9 /* QuestionnaireCoordinator.swift in Sources */,
 				097F05412473145300E633C8 /* TestableUrlOpener.swift in Sources */,
-				0984E0BD2451014E009C6374 /* BluetoothOffViewController.swift in Sources */,
 				F62F857F2451051C006580A8 /* ContactEventsUploader.swift in Sources */,
 				09E6E7E4245271A00069DFA8 /* SetupChecker.swift in Sources */,
 				89F06B372434C35A0074C612 /* LoggerMetadata.swift in Sources */,
