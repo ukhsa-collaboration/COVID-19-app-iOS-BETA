@@ -9,13 +9,28 @@
 import UIKit
 
 class BluetoothPermissionDeniedViewController: FixPermissionsViewController, Storyboarded {
-    static let storyboardName = "Onboarding"
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    enum BluetoothType {
+        case denied
+        case off
     }
     
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
+    static let storyboardName = "Onboarding"
+    
+    @IBOutlet weak var header: UILabel?
+    
+    private var bluetoothType: BluetoothType = .off
+    
+    func set(bluetooth type: BluetoothType) {
+        bluetoothType = type
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        switch bluetoothType {
+        case .denied:
+            header?.text = "BLUETOOTH_DENIED_HEADER".localized
+        case .off:
+            header?.text = "BLUETOOTH_OFF_HEADER".localized
+        }
     }
 }

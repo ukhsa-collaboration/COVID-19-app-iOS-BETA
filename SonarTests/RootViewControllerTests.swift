@@ -177,7 +177,7 @@ class RootViewControllerTests: TestCase {
         notificationCenter.post(name: UIApplication.didBecomeActiveNotification, object: nil)
         authorizationManager.notificationsCompletion?(.allowed)
 
-        XCTAssertNotNil(rootVC.presentedViewController as? BluetoothOffViewController)
+        XCTAssertNotNil(rootVC.presentedViewController as? BluetoothPermissionDeniedViewController)
     }
     
     func testBecomeActiveDoesNotShowPermissionProblemsDuringOnboarding() {

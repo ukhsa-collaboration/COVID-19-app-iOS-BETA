@@ -131,3 +131,6 @@ Loss of appetite: this means you are not feeling hungry, or are not eating as mu
 "STATUS_GET_HELP_OK" = "If you do not have any symptoms, there is no need to do anything right now. If you develop symptoms, please come back to this app.";
 "STATUS_GET_HELP_EXPOSED" = "If you develop symptoms, please come back to this app.";
 "STATUS_GET_HELP" = "If you have a medical emergency, please call 999. If you require medical help near you, please go to 111 online.";
+
+"BLUETOOTH_DENIED_HEADER" = "Why you need to allow the app to use your Bluetooth";
+"BLUETOOTH_OFF_HEADER" = "Why you need to turn your Bluetooth on";
