@@ -32,10 +32,10 @@ class BTLEBroadcaster: NSObject, Broadcaster, CBPeripheralManagerDelegate {
     
     var peripheral: CBPeripheralManager?
     
-    let idGenerator: BroadcastPayloadGenerator
+    let broadcastPayloadService: BroadcastPayloadService
     
-    init(idGenerator: BroadcastPayloadGenerator) {
-        self.idGenerator = idGenerator
+    init(broadcastPayloadService: BroadcastPayloadService) {
+        self.broadcastPayloadService = broadcastPayloadService
     }
 
     private func start() {
@@ -93,7 +93,7 @@ class BTLEBroadcaster: NSObject, Broadcaster, CBPeripheralManagerDelegate {
             return
         }
         
-        guard let broadcastPayload = idGenerator.broadcastPayload()?.data() else {
+        guard let broadcastPayload = broadcastPayloadService.broadcastPayload()?.data() else {
             // One way of getting to this point is when registration is nil in persistance and updateIdentity is called
             // which may be due to a 24 hour time period passing
             logger.warning("attempted to update identity without an identity")
@@ -165,7 +165,7 @@ class BTLEBroadcaster: NSObject, Broadcaster, CBPeripheralManagerDelegate {
             return
         }
         
-        logger.info("advertising identifier \(idGenerator.broadcastPayload()?.data().base64EncodedString() ??? "nil")")
+        logger.info("advertising identifier \(broadcastPayloadService.broadcastPayload()?.data().base64EncodedString() ??? "nil")")
 
         // Per #172564329 we don't want to expose this in release builds
         #if DEBUG
@@ -215,7 +215,7 @@ class BTLEBroadcaster: NSObject, Broadcaster, CBPeripheralManagerDelegate {
             return
         }
 
-        guard let broadcastPayload = idGenerator.broadcastPayload()?.data() else {
+        guard let broadcastPayload = broadcastPayloadService.broadcastPayload()?.data() else {
             logger.info("responding to read request with empty payload")
             request.value = Data()
             peripheral.respond(to: request, withResult: .success)
@@ -233,7 +233,7 @@ class BTLEBroadcaster: NSObject, Broadcaster, CBPeripheralManagerDelegate {
         guard identityCharacteristic != nil else { return false }
         guard keepaliveCharacteristic != nil else { return false }
 
-        guard idGenerator.broadcastPayload() != nil else { return false }
+        guard broadcastPayloadService.broadcastPayload() != nil else { return false }
         guard peripheral!.isAdvertising else { return false }
         guard peripheral!.state == .poweredOn else { return false }
 

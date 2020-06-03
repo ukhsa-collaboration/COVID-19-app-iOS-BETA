@@ -14,7 +14,7 @@ final class ContactEventsTableViewController: UITableViewController, ContactEven
 
     var persistence: Persisting = (UIApplication.shared.delegate as! AppDelegate).persistence
     
-    var broadcastIdGenerator: BroadcastPayloadGenerator? = ((UIApplication.shared.delegate as! AppDelegate).bluetoothNursery as! ConcreteBluetoothNursery).broadcastIdGenerator
+    var broadcastPayloadService: BroadcastPayloadService? = ((UIApplication.shared.delegate as! AppDelegate).bluetoothNursery as! ConcreteBluetoothNursery).broadcastPayloadService
     
     var repository: PersistingContactEventRepository = (UIApplication.shared.delegate as! AppDelegate).bluetoothNursery.contactEventRepository as! PersistingContactEventRepository
     
@@ -95,9 +95,9 @@ final class ContactEventsTableViewController: UITableViewController, ContactEven
             
         case (Sections.myEncryptedBroadcastId.rawValue, _):
             cell.accessoryType = .none
-            cell.textLabel?.text = broadcastIdGenerator?.broadcastPayload()?.cryptogram.base64EncodedString()
+            cell.textLabel?.text = broadcastPayloadService?.broadcastPayload()?.cryptogram.base64EncodedString()
             cell.detailTextLabel?.text = nil
-            cell.gradientColorData = broadcastIdGenerator?.broadcastPayload()?.cryptogram
+            cell.gradientColorData = broadcastPayloadService?.broadcastPayload()?.cryptogram
 
         case (Sections.visibleDevices.rawValue, let row):
             cell.accessoryType = .disclosureIndicator

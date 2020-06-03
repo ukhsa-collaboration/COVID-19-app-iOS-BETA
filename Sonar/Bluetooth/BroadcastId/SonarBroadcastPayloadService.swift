@@ -9,17 +9,17 @@
 import Foundation
 import Logging
 
-protocol BroadcastPayloadGenerator {
+protocol BroadcastPayloadService {
     func broadcastPayload(date: Date) -> BroadcastPayload?
 }
 
-extension BroadcastPayloadGenerator {
+extension BroadcastPayloadService {
     func broadcastPayload(date: Date = Date()) -> BroadcastPayload? {
         return broadcastPayload(date: date)
     }
 }
 
-class SonarBroadcastPayloadGenerator: BroadcastPayloadGenerator {
+class SonarBroadcastPayloadService: BroadcastPayloadService {
 
     let storage: BroadcastRotationKeyStorage
     let persistence: Persisting
