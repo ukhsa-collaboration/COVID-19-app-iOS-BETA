@@ -51,7 +51,11 @@ extension Data {
         guard self.count >= 3 else {
             return UIColor.white
         }
-        return UIColor(red: CGFloat(self[0]) / 255.0, green: CGFloat(self[1]) / 255.0, blue: CGFloat(self[2]) / 255.0, alpha: alpha)
+        // These need to be copies so we don't hang on to a reference to the original data and crash later
+        let r = self[0]
+        let g = self[1]
+        let b = self[2]
+        return UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: alpha)
     }
 
 }
