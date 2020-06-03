@@ -175,7 +175,7 @@
 		AE29892C24729AD8004C4097 /* ReferenceCode.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE29892B24729AD8004C4097 /* ReferenceCode.storyboard */; };
 		AE29892E2472E600004C4097 /* Pages.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE29892D2472E600004C4097 /* Pages.swift */; };
 		AE2A5E502423C473007A4771 /* ContactEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2A5E4F2423C473007A4771 /* ContactEvent.swift */; };
-		AE2DCAA0241920B600A940FC /* BTLEBroadcaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2DCA9F241920B600A940FC /* BTLEBroadcaster.swift */; };
+		AE2DCAA0241920B600A940FC /* Broadcaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2DCA9F241920B600A940FC /* Broadcaster.swift */; };
 		AEAFA67924602629009AEAEB /* StatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAFA67824602629009AEAEB /* StatusTests.swift */; };
 		B70190202475136800075C80 /* RegistrationAPIPactTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B701901F2475136800075C80 /* RegistrationAPIPactTests.swift */; };
 		B701DC4C247759AC00727126 /* sonar.ca.cer in Resources */ = {isa = PBXBuildFile; fileRef = B701DC4B247759AC00727126 /* sonar.ca.cer */; };
@@ -521,7 +521,7 @@
 		AE29892B24729AD8004C4097 /* ReferenceCode.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ReferenceCode.storyboard; sourceTree = "<group>"; };
 		AE29892D2472E600004C4097 /* Pages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pages.swift; sourceTree = "<group>"; };
 		AE2A5E4F2423C473007A4771 /* ContactEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEvent.swift; sourceTree = "<group>"; };
-		AE2DCA9F241920B600A940FC /* BTLEBroadcaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTLEBroadcaster.swift; sourceTree = "<group>"; };
+		AE2DCA9F241920B600A940FC /* Broadcaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Broadcaster.swift; sourceTree = "<group>"; };
 		AEAFA67824602629009AEAEB /* StatusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusTests.swift; sourceTree = "<group>"; };
 		B701901F2475136800075C80 /* RegistrationAPIPactTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationAPIPactTests.swift; sourceTree = "<group>"; };
 		B701DC4B247759AC00727126 /* sonar.ca.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = sonar.ca.cer; sourceTree = "<group>"; };
@@ -918,7 +918,7 @@
 			isa = PBXGroup;
 			children = (
 				F72EBDA0243D086C009F9328 /* BroadcastId */,
-				AE2DCA9F241920B600A940FC /* BTLEBroadcaster.swift */,
+				AE2DCA9F241920B600A940FC /* Broadcaster.swift */,
 				21AF36AA241A8E50001A4910 /* BTLEListener.swift */,
 				21C09A8C24377F5100368203 /* CoreBluetoothExtensions.swift */,
 				21C09A8E2437B99F00368203 /* BluetoothNursery.swift */,
@@ -1913,7 +1913,7 @@
 				DD3FCF3E2476E8DC008B0237 /* TestResult.swift in Sources */,
 				21C417CC242CB15D00DEF3E2 /* ConfirmRegistrationRequest.swift in Sources */,
 				F67A2291242AA35C002254B6 /* SecureRegistrationStorage.swift in Sources */,
-				AE2DCAA0241920B600A940FC /* BTLEBroadcaster.swift in Sources */,
+				AE2DCAA0241920B600A940FC /* Broadcaster.swift in Sources */,
 				09B3AC832460D3CF001AF47E /* AutoscalingWidthView.swift in Sources */,
 				895D9E4B24374EC900573D4D /* Screen.swift in Sources */,
 				219C7B7A245AE83700952B4D /* DataExtensions.swift in Sources */,

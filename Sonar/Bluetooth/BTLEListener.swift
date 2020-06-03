@@ -34,7 +34,7 @@ protocol BTLEListener {
 
 class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CBPeripheralDelegate {
 
-    var broadcaster: BTLEBroadcaster
+    var broadcaster: Broadcaster
     var stateDelegate: BTLEListenerStateDelegate?
     var delegate: BTLEListenerDelegate?
     
@@ -48,7 +48,7 @@ class ConcreteBTLEListener: NSObject, BTLEListener, CBCentralManagerDelegate, CB
     private let dateFormatter = ISO8601DateFormatter()
     private let queue: DispatchQueue
     
-    init(broadcaster: BTLEBroadcaster, queue: DispatchQueue) {
+    init(broadcaster: Broadcaster, queue: DispatchQueue) {
         self.broadcaster = broadcaster
         self.queue = queue
     }

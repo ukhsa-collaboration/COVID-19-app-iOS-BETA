@@ -11,12 +11,12 @@ import Logging
 
 class BroadcastPayloadRotationTimer {
     
-    let broadcaster: BTLEBroadcaster
+    let broadcaster: Broadcaster
     let queue: DispatchQueue
     
     var timer: DispatchSourceTimer?
     
-    init(broadcaster: BTLEBroadcaster, queue: DispatchQueue) {
+    init(broadcaster: Broadcaster, queue: DispatchQueue) {
         self.broadcaster = broadcaster
         self.queue = queue
         

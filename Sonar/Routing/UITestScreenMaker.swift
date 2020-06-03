@@ -257,7 +257,7 @@ private class NoOpBluetoothNursery: BluetoothNursery {
     var stateObserver: BluetoothStateObserving = BluetoothStateObserver(initialState: .poweredOn)
     var contactEventRepository: ContactEventRepository = NoOpContactEventRepository()
     var contactEventPersister: ContactEventPersister = NoOpContactEventPersister()
-    var broadcaster: BTLEBroadcaster? = NoOpBroadcaster()
+    var broadcaster: Broadcaster? = NoOpBroadcaster()
 }
 
 private class NoOpContactEventRepository: ContactEventRepository {
@@ -302,7 +302,7 @@ private class NoOpContactEventPersister: ContactEventPersister {
     
 }
 
-private class NoOpBroadcaster: BTLEBroadcaster {
+private class NoOpBroadcaster: Broadcaster {
     func updateIdentity() {
     }
     

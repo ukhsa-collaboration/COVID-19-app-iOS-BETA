@@ -15,7 +15,7 @@ protocol BluetoothNursery {
     var contactEventRepository: ContactEventRepository { get }
     var contactEventPersister: ContactEventPersister { get }
     var stateObserver: BluetoothStateObserving { get }
-    var broadcaster: BTLEBroadcaster? { get }
+    var broadcaster: Broadcaster? { get }
 
     func startBluetooth(registration: Registration?)
     var hasStarted: Bool { get }
@@ -36,7 +36,7 @@ class ConcreteBluetoothNursery: BluetoothNursery, PersistenceDelegate {
     private let dailyMetricsCollector: DailyMetricsCollector
 
     // The listener needs to get hold of the broadcaster, to send keepalives
-    public var broadcaster: BTLEBroadcaster?
+    public var broadcaster: Broadcaster?
     public var broadcastIdGenerator: BroadcastPayloadGenerator?
 
     public var listener: BTLEListener?
@@ -81,7 +81,7 @@ class ConcreteBluetoothNursery: BluetoothNursery, PersistenceDelegate {
             persistence: persistence,
             encrypter: ConcreteBroadcastIdEncrypter())
         
-        let broadcaster = ConcreteBTLEBroadcaster(idGenerator: broadcastIdGenerator!)
+        let broadcaster = BTLEBroadcaster(idGenerator: broadcastIdGenerator!)
         peripheral = CBPeripheralManager(delegate: broadcaster, queue: btleQueue, options: [
             CBPeripheralManagerOptionRestoreIdentifierKey: ConcreteBluetoothNursery.peripheralRestoreIdentifier
         ])
