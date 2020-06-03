@@ -28,6 +28,11 @@
 		095283A82475990B00CDEE55 /* BackgroundableTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095283A72475990B00CDEE55 /* BackgroundableTimerTests.swift */; };
 		095283AA2476FF2800CDEE55 /* SynchronousNavigationControllerDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095283A92476FF2800CDEE55 /* SynchronousNavigationControllerDouble.swift */; };
 		095A91182434FF1500ED6369 /* ApplicationDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095A91172434FF1500ED6369 /* ApplicationDouble.swift */; };
+		0963C1F62488182300EF5B68 /* generate-release-note.yml in Resources */ = {isa = PBXBuildFile; fileRef = 0963C1F12488182300EF5B68 /* generate-release-note.yml */; };
+		0963C1F72488182300EF5B68 /* remove-support.yml in Resources */ = {isa = PBXBuildFile; fileRef = 0963C1F22488182300EF5B68 /* remove-support.yml */; };
+		0963C1F82488182300EF5B68 /* ci.yml in Resources */ = {isa = PBXBuildFile; fileRef = 0963C1F32488182300EF5B68 /* ci.yml */; };
+		0963C1F92488182300EF5B68 /* deploy.yml in Resources */ = {isa = PBXBuildFile; fileRef = 0963C1F42488182300EF5B68 /* deploy.yml */; };
+		0963C1FA2488182300EF5B68 /* trigger-deploys.yml in Resources */ = {isa = PBXBuildFile; fileRef = 0963C1F52488182300EF5B68 /* trigger-deploys.yml */; };
 		0964B37B24631B1B0022EF97 /* UIViewController+Scrolling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0964B37A24631B1B0022EF97 /* UIViewController+Scrolling.swift */; };
 		0964B37D246328A20022EF97 /* UIView+Scrolling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0964B37C246328A20022EF97 /* UIView+Scrolling.swift */; };
 		0964B380246329680022EF97 /* UIView_ScrollingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0964B37F246329680022EF97 /* UIView_ScrollingTests.swift */; };
@@ -333,10 +338,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		068B8AB9245C11C0000EAB4C /* upload.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = upload.yml; sourceTree = "<group>"; };
-		068B8ABA245C11C0000EAB4C /* unit-tests.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "unit-tests.yml"; sourceTree = "<group>"; };
 		068B8ABB245C11C0000EAB4C /* clean-artifacts.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "clean-artifacts.yml"; sourceTree = "<group>"; };
-		068B8ABC245C11C0000EAB4C /* trigger-internal-upload.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "trigger-internal-upload.yml"; sourceTree = "<group>"; };
 		0805FAEF247BEEE700E3A74F /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		0805FAF1247C02AB00E3A74F /* ErrorView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ErrorView.xib; sourceTree = "<group>"; };
 		0805FAF3247C233F00E3A74F /* IBView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IBView.swift; sourceTree = "<group>"; };
@@ -358,6 +360,11 @@
 		095283A72475990B00CDEE55 /* BackgroundableTimerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundableTimerTests.swift; sourceTree = "<group>"; };
 		095283A92476FF2800CDEE55 /* SynchronousNavigationControllerDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronousNavigationControllerDouble.swift; sourceTree = "<group>"; };
 		095A91172434FF1500ED6369 /* ApplicationDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationDouble.swift; sourceTree = "<group>"; };
+		0963C1F12488182300EF5B68 /* generate-release-note.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = "generate-release-note.yml"; sourceTree = "<group>"; };
+		0963C1F22488182300EF5B68 /* remove-support.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = "remove-support.yml"; sourceTree = "<group>"; };
+		0963C1F32488182300EF5B68 /* ci.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = ci.yml; sourceTree = "<group>"; };
+		0963C1F42488182300EF5B68 /* deploy.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = deploy.yml; sourceTree = "<group>"; };
+		0963C1F52488182300EF5B68 /* trigger-deploys.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = "trigger-deploys.yml"; sourceTree = "<group>"; };
 		0964B37A24631B1B0022EF97 /* UIViewController+Scrolling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Scrolling.swift"; sourceTree = "<group>"; };
 		0964B37C246328A20022EF97 /* UIView+Scrolling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Scrolling.swift"; sourceTree = "<group>"; };
 		0964B37F246329680022EF97 /* UIView_ScrollingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView_ScrollingTests.swift; sourceTree = "<group>"; };
@@ -725,10 +732,12 @@
 		068B8AB8245C11C0000EAB4C /* workflows */ = {
 			isa = PBXGroup;
 			children = (
-				068B8AB9245C11C0000EAB4C /* upload.yml */,
-				068B8ABA245C11C0000EAB4C /* unit-tests.yml */,
+				0963C1F32488182300EF5B68 /* ci.yml */,
+				0963C1F42488182300EF5B68 /* deploy.yml */,
+				0963C1F12488182300EF5B68 /* generate-release-note.yml */,
+				0963C1F22488182300EF5B68 /* remove-support.yml */,
+				0963C1F52488182300EF5B68 /* trigger-deploys.yml */,
 				068B8ABB245C11C0000EAB4C /* clean-artifacts.yml */,
-				068B8ABC245C11C0000EAB4C /* trigger-internal-upload.yml */,
 			);
 			path = workflows;
 			sourceTree = "<group>";
@@ -1655,8 +1664,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0963C1F62488182300EF5B68 /* generate-release-note.yml in Resources */,
 				F60497792454A40B002B8503 /* TestingInfo.storyboard in Resources */,
+				0963C1F72488182300EF5B68 /* remove-support.yml in Resources */,
 				F758B8C4242CC0EE003AE16D /* Status.storyboard in Resources */,
+				0963C1F82488182300EF5B68 /* ci.yml in Resources */,
 				6FC63C3B241641BA007C8BF3 /* LaunchScreen.storyboard in Resources */,
 				AE29892C24729AD8004C4097 /* ReferenceCode.storyboard in Resources */,
 				A1E7A0592420028B0078174D /* NHS Colors.xcassets in Resources */,
@@ -1666,7 +1678,9 @@
 				F618A566245C682500D89517 /* GoogleService-Info.plist in Resources */,
 				1376F7D7247E628500524CEE /* CheckinDrawer.storyboard in Resources */,
 				895D9E462437458700573D4D /* AppIcon.xcassets in Resources */,
+				0963C1FA2488182300EF5B68 /* trigger-deploys.yml in Resources */,
 				F6BBE13C246F46B4005757BB /* BookTest.storyboard in Resources */,
+				0963C1F92488182300EF5B68 /* deploy.yml in Resources */,
 				F6334E4D24748B3000421B4C /* RegistrationStatus.storyboard in Resources */,
 				0805FAF2247C02AB00E3A74F /* ErrorView.xib in Resources */,
 				F68B89ED243CFF2600F369A9 /* SelfDiagnosis.storyboard in Resources */,
