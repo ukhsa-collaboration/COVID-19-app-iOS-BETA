@@ -30,13 +30,13 @@ final class ContactEventsTableViewController: UITableViewController, ContactEven
     
     // MARK: - ContactEventRepositoryDelegate
     
-    func repository(_ repository: ContactEventRepository, didRecord broadcastPayload: IncomingBroadcastPayload, for peripheral: BTLEPeripheral) {
+    func repository(_ repository: ContactEventRepository, didRecord broadcastPayload: IncomingBroadcastPayload, for peripheral: Peripheral) {
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
     }
 
-    func repository(_ repository: ContactEventRepository, didRecordRSSI RSSI: Int, for peripheral: BTLEPeripheral) {
+    func repository(_ repository: ContactEventRepository, didRecordRSSI RSSI: Int, for peripheral: Peripheral) {
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }

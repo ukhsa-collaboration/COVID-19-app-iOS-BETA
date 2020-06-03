@@ -24,7 +24,7 @@ class BluetoothStateObserverTests: TestCase {
         XCTAssertEqual(1, timesCalled)
         XCTAssertEqual(receivedState, .unauthorized)
         
-        observer.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOff)
+        observer.listener(ListenerDouble(), didUpdateState: .poweredOff)
         XCTAssertEqual(1, timesCalled)
     }
     
@@ -39,14 +39,14 @@ class BluetoothStateObserverTests: TestCase {
         
         XCTAssertEqual(timesCalled, 0)
         
-        observer.btleListener(BTLEListenerDouble(), didUpdateState: .unknown)
+        observer.listener(ListenerDouble(), didUpdateState: .unknown)
         XCTAssertEqual(timesCalled, 0)
 
-        observer.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
+        observer.listener(ListenerDouble(), didUpdateState: .poweredOn)
         XCTAssertEqual(1, timesCalled)
         XCTAssertEqual(receivedState, .poweredOn)
         
-        observer.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOff)
+        observer.listener(ListenerDouble(), didUpdateState: .poweredOff)
         XCTAssertEqual(1, timesCalled)
     }
     
@@ -69,13 +69,13 @@ class BluetoothStateObserverTests: TestCase {
             return .keepObserving
         }
         
-        observer.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOff)
+        observer.listener(ListenerDouble(), didUpdateState: .poweredOff)
         XCTAssertEqual(receivedState, .poweredOff)
         
-        observer.btleListener(BTLEListenerDouble(), didUpdateState: .unknown)
+        observer.listener(ListenerDouble(), didUpdateState: .unknown)
         XCTAssertEqual(receivedState, .unknown)
         
-        observer.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
+        observer.listener(ListenerDouble(), didUpdateState: .poweredOn)
         XCTAssertEqual(receivedState, .poweredOn)
     }
     
@@ -92,8 +92,8 @@ class BluetoothStateObserverTests: TestCase {
             return .keepObserving
         }
         
-        observer.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOff)
-        observer.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
+        observer.listener(ListenerDouble(), didUpdateState: .poweredOff)
+        observer.listener(ListenerDouble(), didUpdateState: .poweredOn)
 
         XCTAssertEqual(removedCallCount, 1)
         XCTAssertEqual(otherCallCount, 3)

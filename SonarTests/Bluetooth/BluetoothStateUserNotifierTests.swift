@@ -22,7 +22,7 @@ class BluetoothStateUserNotifierTests: TestCase {
         let mockScheduler = MockNotificationScheduler()
         let _ = BluetoothStateUserNotifier(appStateReader: foregroundApp, bluetoothStateObserver: stateObserver, scheduler: mockScheduler)
 
-        stateObserver.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOff)
+        stateObserver.listener(ListenerDouble(), didUpdateState: .poweredOff)
 
         XCTAssertEqual(0, mockScheduler.calls.count)
     }
@@ -32,7 +32,7 @@ class BluetoothStateUserNotifierTests: TestCase {
         let mockScheduler = MockNotificationScheduler()
         let _ = BluetoothStateUserNotifier(appStateReader: backgroundApp, bluetoothStateObserver: stateObserver, scheduler: mockScheduler, uiQueue: QueueDouble())
 
-        stateObserver.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOff)
+        stateObserver.listener(ListenerDouble(), didUpdateState: .poweredOff)
 
         XCTAssertEqual(1, mockScheduler.calls.count)
         guard mockScheduler.calls.count == 1 else {
@@ -52,7 +52,7 @@ class BluetoothStateUserNotifierTests: TestCase {
         let mockScheduler = MockNotificationScheduler()
         _ = BluetoothStateUserNotifier(appStateReader: backgroundApp, bluetoothStateObserver: stateObserver, scheduler: mockScheduler)
 
-        stateObserver.btleListener(BTLEListenerDouble(), didUpdateState: .poweredOn)
+        stateObserver.listener(ListenerDouble(), didUpdateState: .poweredOn)
 
         XCTAssertEqual(0, mockScheduler.calls.count)
     }

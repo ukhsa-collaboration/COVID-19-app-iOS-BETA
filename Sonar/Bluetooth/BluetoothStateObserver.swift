@@ -9,7 +9,7 @@
 import UIKit
 import CoreBluetooth
 
-protocol BluetoothStateObserving: BTLEListenerStateDelegate {
+protocol BluetoothStateObserving: ListenerStateDelegate {
     func observe(_ callback: @escaping (CBManagerState) -> Action)
     func observeUntilKnown(_ callback: @escaping (CBManagerState) -> Void)
 }
@@ -49,7 +49,7 @@ class BluetoothStateObserver: BluetoothStateObserving {
 
     // MARK: - BTLEListenerStateDelegate
 
-    func btleListener(_ listener: BTLEListener, didUpdateState state: CBManagerState) {
+    func listener(_ listener: Listener, didUpdateState state: CBManagerState) {
         lastKnownState = state
         
         var callbacksToKeep: [(CBManagerState) -> Action] = []
