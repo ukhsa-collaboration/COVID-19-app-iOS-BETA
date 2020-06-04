@@ -49,6 +49,7 @@ class PostcodeViewController: UIViewController, Storyboarded {
         let attrText = NSMutableAttributedString(string: text)
         attrText.addAttribute(NSAttributedString.Key.font, value: UIFont.preferredFont(forTextStyle: .headline), range: nsrange)
         postcodeDetail.attributedText = attrText
+        postcodeField.enablesReturnKeyAutomatically = false
 
         // Hide the keyboard if the user taps anywhere else
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: postcodeField, action: #selector(resignFirstResponder)))
