@@ -212,7 +212,7 @@
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <accessibility key="accessibilityConfiguration" label="Read current advice for you">
-                                                    <accessibilityTraits key="traits" link="YES"/>
+                                                    <accessibilityTraits key="traits" button="YES"/>
                                                     <bool key="isElement" value="YES"/>
                                                 </accessibility>
                                                 <constraints>
@@ -340,6 +340,9 @@
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you have a medical emergency, please call 999. If you require medical help near you, please go to 111 online." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jlC-hv-zxj">
                                                                 <rect key="frame" x="0.0" y="86.5" width="382" height="80.5"/>
+                                                                <accessibility key="accessibilityConfiguration">
+                                                                    <string key="label">If you have a medical emergency, please call nine nine nine. If you require medical help near you, please go to one one one online.</string>
+                                                                </accessibility>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                 <color key="textColor" name="NHS Secondary Text"/>
                                                                 <nil key="highlightedColor"/>
