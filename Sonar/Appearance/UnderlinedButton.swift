@@ -67,5 +67,14 @@ class UnderlinedButton: UIButton {
             .font: UIFont.preferredFont(forTextStyle: textStyle)
         ]
     }
-
+    
+    override var intrinsicContentSize: CGSize {
+        titleLabel?.intrinsicContentSize ?? super.intrinsicContentSize
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        guard let titleLabel = titleLabel else { return }
+        titleLabel.preferredMaxLayoutWidth = titleLabel.frame.size.width
+    }
 }
