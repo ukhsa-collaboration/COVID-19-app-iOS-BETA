@@ -54,8 +54,8 @@ Sneezing: this means you are sneezing more than normal, not caused by any known 
 "SNEEZE_NO" = "No, I do not have any of these symptoms";
 "SNEEZE_CHECKIN_YES" = "Yes, I have at least one of these symptoms";
 "SNEEZE_CHECKIN_NO" = "No, I do not have any of these symptoms";
-"SNEEZE_ERROR" = "Select yes if you have a runny nose, feel feverish or suffer from sneezing";
-"SNEEZE_CHECKIN_ERROR" = "Select yes if you have a runny nose, feel feverish or suffer from sneezing";
+"SNEEZE_ERROR" = "Select yes if you have at least one of these symptoms";
+"SNEEZE_CHECKIN_ERROR" = "Select yes if you have at least one of these symptoms";
 
 "NAUSEA_QUESTION" = "Do you have diarrhoea, nausea, vomiting or have a loss of appetite?";
 "NAUSEA_CHECKIN_QUESTION" = "Do you have diarrhoea, nausea, vomiting or have a loss of appetite?";
@@ -71,8 +71,8 @@ Loss of appetite: this means you are not feeling hungry, or are not eating as mu
 "NAUSEA_NO" = "No, I do not have any of these symptoms";
 "NAUSEA_CHECKIN_YES" = "Yes, I have at least one of these symptoms";
 "NAUSEA_CHECKIN_NO" = "No, I do not have any of these symptoms";
-"NAUSEA_ERROR" = "Select yes if you have diarrhoea, nausea, vomiting or have a loss of appetite?";
-"NAUSEA_CHECKIN_ERROR" = "Select yes if you have diarrhoea, nausea, vomiting or have a loss of appetite";
+"NAUSEA_ERROR" = "Select yes if you have at least one of these symptoms";
+"NAUSEA_CHECKIN_ERROR" = "Select yes if you have at least one of these symptoms";
 
 "SYMPTOMS_SUMMARY_CHECK_ANSWERS" = "Check your answers";
 "SYMPTOMS_SUMMARY_HAVE_TEMPERATURE" = "I have a high temperature";
