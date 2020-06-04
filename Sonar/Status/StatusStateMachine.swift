@@ -281,28 +281,24 @@ class StatusStateMachine: StatusStateMachining {
         content.title = "NHS COVID-19"
         content.body = "How are you feeling today?\n\nPlease open the app to update your symptoms and view your latest advice. Your help saves lives."
 
-        let components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
-        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
         let request = UNNotificationRequest(
             identifier: checkinNotificationIdentifier,
             content: content,
-            trigger: trigger
+            trigger: makeNotificationTrigger(date)
         )
 
         return request
     }
 
-    private func adviceChangedNotificationRequest(at date: Date = Date()) -> UNNotificationRequest {
+    private func adviceChangedNotificationRequest(at date: Date? = nil) -> UNNotificationRequest {
         let content = UNMutableNotificationContent()
         content.title = "ADVICE_CHANGED_NOTIFICATION_TITLE".localized
         content.body = "ADVICE_CHANGED_NOTIFICATION_BODY".localized
-        
-        let components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
-        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
+
         let request = UNNotificationRequest(
             identifier: adviceChangedNotificationIdentifier,
             content: content,
-            trigger: trigger
+            trigger: makeNotificationTrigger(date)
         )
 
         return request
@@ -317,4 +313,9 @@ class StatusStateMachine: StatusStateMachining {
         return request
     }()
 
+    private func makeNotificationTrigger(_ date: Date?) -> UNNotificationTrigger? {
+        guard let date = date else { return nil }
+        let components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
+        return UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
+    }
 }
