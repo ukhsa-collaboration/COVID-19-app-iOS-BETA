@@ -143,11 +143,9 @@ class RootViewController: UIViewController {
     private func checkSetup() {
         setupChecker.check { problem in
             self.uiQueue.sync {
-                self.dismissSetupError()
-                
                 self.statusViewController.hasNotificationProblem = (problem == .notificationPermissions)
                 
-                guard let problem = problem else { return }
+                guard let problem = problem else { return self.dismissSetupError() }
                 
                 switch problem {
                 case .bluetoothOff:
@@ -166,8 +164,9 @@ class RootViewController: UIViewController {
     }
     
     private func showSetupError(viewController: UIViewController) {
-        self.presentedSetupErorrViewController = viewController
-        self.present(viewController, animated: true)
+        viewController.modalPresentationStyle = .fullScreen
+        presentedSetupErorrViewController = viewController
+        present(viewController, animated: true)
     }
     
     private func dismissSetupError() {
