@@ -126,11 +126,12 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
             logger.info("peripheral \(peripheral.identifierWithName) discovered with RSSI = \(RSSI)")            
         }
         
-        if let savedPeripheral = peripherals[peripheral.identifier] {
-            logger.info("saved peripheral \(savedPeripheral.identifierWithName) already in state \(savedPeripheral.state), calling connect again")
+        if peripherals[peripheral.identifier] == nil || peripherals[peripheral.identifier]!.state != .connected {
+            peripherals[peripheral.identifier] = peripheral
+            central.connect(peripheral)
+        } else {
+            logger.info("ignoring peripheral \(peripherals[peripheral.identifier]!) in state \(peripherals[peripheral.identifier]!.state)")
         }
-        peripherals[peripheral.identifier] = peripheral
-        central.connect(peripheral)        
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
@@ -169,11 +170,13 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
 
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         if let error = error {
-            logger.info("attempting reconnection to peripheral \(peripheral.identifierWithName) after error: \(error)")
+            logger.info("disconnected from peripheral \(peripheral.identifierWithName) after error: \(error)")
+            central.cancelPeripheralConnection(peripheral)
+            peripherals[peripheral.identifier] = nil
         } else {
-            logger.info("attempting reconnection to peripheral \(peripheral.identifierWithName)")
+            logger.info("disconnected from peripheral \(peripheral.identifierWithName)")
         }
-        central.connect(peripheral)
+//        central.connect(peripheral)
     }
     
     // MARK: CBPeripheralDelegate
