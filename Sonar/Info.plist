@@ -18,6 +18,8 @@
 	<string>2.0.0</string>
 	<key>CFBundleVersion</key>
 	<string>576</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSRequiresIPhoneOS</key>
