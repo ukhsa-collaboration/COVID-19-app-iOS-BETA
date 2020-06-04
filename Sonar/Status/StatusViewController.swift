@@ -136,7 +136,6 @@ class StatusViewController: UIViewController, Storyboarded {
         (sectionHeaders + [stepsDetailLabel, feelUnwellBodyLabel, medicalEmergencyLabel, diagnosisDetailLabel]).forEach {
             $0.textColor = UIColor(named: "NHS Secondary Text")
         }
-        medicalEmergencyLabel.text = "STATUS_GET_HELP".localized
         
         notificationCenter.addObserver(self, selector: #selector(reload), name: UIApplication.didBecomeActiveNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(reload), name: StatusStateMachine.StatusStateChangedNotification, object: nil)
