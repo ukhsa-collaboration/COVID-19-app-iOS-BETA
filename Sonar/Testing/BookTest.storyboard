@@ -114,10 +114,11 @@
                         <color key="backgroundColor" name="NHS Grey 5"/>
                         <constraints>
                             <constraint firstItem="MA9-dr-o4r" firstAttribute="leading" secondItem="a3V-XW-Vqe" secondAttribute="leading" id="7Xa-7L-A0S"/>
-                            <constraint firstItem="MA9-dr-o4r" firstAttribute="top" secondItem="a3V-XW-Vqe" secondAttribute="top" id="DsI-QB-Qi8"/>
+                            <constraint firstItem="MA9-dr-o4r" firstAttribute="top" secondItem="jPi-1I-voG" secondAttribute="top" id="DsI-QB-Qi8"/>
                             <constraint firstAttribute="trailing" secondItem="MA9-dr-o4r" secondAttribute="trailing" id="VIs-jb-3qv"/>
-                            <constraint firstAttribute="bottom" secondItem="MA9-dr-o4r" secondAttribute="bottom" id="s5W-W9-v4D"/>
+                            <constraint firstItem="jPi-1I-voG" firstAttribute="bottom" secondItem="MA9-dr-o4r" secondAttribute="bottom" id="s5W-W9-v4D"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="jPi-1I-voG"/>
                     </view>
                     <connections>
                         <outlet property="bookTestLinkButton" destination="uoW-0A-mqN" id="lsN-Y7-ehv"/>
