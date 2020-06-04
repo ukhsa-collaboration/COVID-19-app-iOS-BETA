@@ -95,17 +95,10 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8i4-HF-QBb" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
+                                                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="44" translatesAutoresizingMaskIntoConstraints="NO" id="6y0-CL-XbX" customClass="LinkButton" customModule="Sonar" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="32" width="374" height="0.0"/>
-                                                        <accessibility key="accessibilityConfiguration">
-                                                            <accessibilityTraits key="traits" link="YES"/>
-                                                        </accessibility>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <connections>
-                                                            <action selector="noSymptomsInfoTapped:" destination="ofL-pj-tC8" eventType="touchUpInside" id="qf1-pL-LdD"/>
-                                                        </connections>
-                                                    </button>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    </view>
                                                 </subviews>
                                             </stackView>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="Rpb-L4-N7R" userLabel="Spacer">
@@ -170,7 +163,7 @@
                         <outlet property="checkAnswersStackView" destination="QuK-po-wsJ" id="Vym-BB-4iv"/>
                         <outlet property="haveSymptomsView" destination="a7J-v6-xJ8" id="HUs-o8-K1K"/>
                         <outlet property="heightConstraint" destination="iw0-QM-AIq" id="Twc-xH-plE"/>
-                        <outlet property="noSymptomsInfoButton" destination="8i4-HF-QBb" id="tyG-LS-y92"/>
+                        <outlet property="noSymptomsInfoButton" destination="6y0-CL-XbX" id="xkc-4n-yza"/>
                         <outlet property="noSymptomsInfoLabel" destination="bbU-Do-7R9" id="1Rx-dP-qR9"/>
                         <outlet property="noSymptomsLabel" destination="qC7-mn-mwr" id="U1b-z8-aSp"/>
                         <outlet property="noSymptomsView" destination="rUe-5Z-tIj" id="R59-4B-9bL"/>

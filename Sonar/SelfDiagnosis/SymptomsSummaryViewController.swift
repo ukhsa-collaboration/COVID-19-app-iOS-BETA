@@ -39,7 +39,7 @@ class SymptomsSummaryViewController: UIViewController, Storyboarded {
     @IBOutlet weak var noSymptomsView: UIStackView!
     @IBOutlet weak var noSymptomsLabel: UILabel!
     @IBOutlet weak var noSymptomsInfoLabel: UILabel!
-    @IBOutlet weak var noSymptomsInfoButton: UIButton!
+    @IBOutlet weak var noSymptomsInfoButton: LinkButton!
     @IBOutlet weak var button: PrimaryButton!
     @IBOutlet weak var pageNumberLabel: UILabel!
     @IBOutlet weak var checkAnswersStackView: UIStackView!
@@ -79,7 +79,8 @@ class SymptomsSummaryViewController: UIViewController, Storyboarded {
         noSymptomsView.isHidden = symptoms.hasCoronavirusSymptoms
         noSymptomsLabel.text = "SYMPTOMS_SUMMARY_NO_SYMPTOMS".localized
         noSymptomsInfoLabel.text = "SYMPTOMS_SUMMARY_NO_SYMPTOMS_INFO".localized
-        noSymptomsInfoButton.setTitle("SYMPTOMS_SUMMARY_NO_SYMPTOMS_NHS_111".localized, for: .normal)
+        noSymptomsInfoButton.title = "SYMPTOMS_SUMMARY_NO_SYMPTOMS_NHS_111".localized
+        noSymptomsInfoButton.url = ContentURLs.shared.nhs111Coronavirus
         noSymptomsInfoButton.contentHorizontalAlignment = .leading
 
         let buttonTitle = symptoms.hasCoronavirusSymptoms ? "SYMPTOMS_SUMMARY_CONTINUE" : "SYMPTOMS_SUMMARY_DONE"
@@ -122,10 +123,6 @@ class SymptomsSummaryViewController: UIViewController, Storyboarded {
                 view.rightAnchor.constraint(equalTo: label.rightAnchor, constant: 10)
             ])
         }
-    }
-
-    @IBAction func noSymptomsInfoTapped(_ sender: ButtonWithDynamicType) {
-        UIApplication.shared.open(ContentURLs.shared.nhs111Coronavirus)
     }
 
     @IBAction func buttonTapped(_ sender: PrimaryButton) {
