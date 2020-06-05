@@ -170,13 +170,13 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
 
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         if let error = error {
-            logger.info("disconnected from peripheral \(peripheral.identifierWithName) after error: \(error)")
-            central.cancelPeripheralConnection(peripheral)
-            peripherals[peripheral.identifier] = nil
+            logger.info("attempting to reconnect to peripheral \(peripheral.identifierWithName) after error: \(error)")
         } else {
-            logger.info("disconnected from peripheral \(peripheral.identifierWithName)")
+            logger.info("attempting to reconnect to peripheral \(peripheral.identifierWithName)")
         }
-//        central.connect(peripheral)
+        // iOS devices do not start advertising after being disconnected, so in order to ensure they reconnect if/when
+        // they come back into range, we need to tell iOS to immediately reconnect
+        central.connect(peripheral)
     }
     
     // MARK: CBPeripheralDelegate
