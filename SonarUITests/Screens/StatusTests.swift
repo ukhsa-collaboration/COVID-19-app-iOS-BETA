@@ -173,4 +173,127 @@ class StatusTests: ScreenTestCase {
         
         XCTAssertTrue(statusOkPage.title.exists)
     }
+    
+    func testScrollsAdviceIntoViewFromSelfDiagnosis() {
+        let statusOkPage = StatusOkPage(app)
+        // Swipe up until advice isn't visible (we assume 5 is more than enough)
+        for _ in 0..<5 {
+            app.swipeUp()
+            if !statusOkPage.title.isHittable {
+                break
+            }
+        }
+        
+        // There might not be enough content to warrant checking we scroll advice back into view
+        if statusOkPage.title.isHittable { return }
+        XCTAssertFalse(statusOkPage.title.isHittable)
+        statusOkPage.feelUnwellButton.tap()
+        
+        let temperaturePage = SymptomsTemperaturePage(app)
+        temperaturePage.temperatureOption.tap()
+        temperaturePage.continueButton.tap()
+        
+        let coughPage = SymptomsCoughPage(app)
+        coughPage.coughOption.tap()
+        coughPage.continueButton.tap()
+        
+        let anosmiaPage = SymptomsAnosmiaPage(app)
+        anosmiaPage.anosmiaOption.tap()
+        anosmiaPage.continueButton.tap()
+        
+        let sneezePage = SymptomsSneezePage(app)
+        sneezePage.haveSymptomsOption.tap()
+        sneezePage.continueButton.tap()
+        
+        let nauseaPage = SymptomsNauseaPage(app)
+        nauseaPage.haveSymptomsOption.tap()
+        nauseaPage.continueButton.tap()
+        
+        let summaryPage = SymptomsSummaryPage(app)
+        summaryPage.startDateButton.tap()
+        summaryPage.continueButton.tap()
+        
+        let submitSymptomsPage = SymptomsSubmitPage(app)
+        submitSymptomsPage.accurateConfirmationToggle.tap()
+        submitSymptomsPage.submitButton.tap()
+        
+        let symptomaticPage = StatusSymptomaticPage(app)
+        XCTAssertTrue(symptomaticPage.title.isHittable)
+    }
+    
+    func testScrollsAdviceIntoViewFromCheckin() {
+        let statusOkPage = StatusOkPage(app)
+        statusOkPage.feelUnwellButton.tap()
+        
+        let temperaturePage = SymptomsTemperaturePage(app)
+        temperaturePage.temperatureOption.tap()
+        temperaturePage.continueButton.tap()
+        
+        let coughPage = SymptomsCoughPage(app)
+        coughPage.coughOption.tap()
+        coughPage.continueButton.tap()
+        
+        let anosmiaPage = SymptomsAnosmiaPage(app)
+        anosmiaPage.anosmiaOption.tap()
+        anosmiaPage.continueButton.tap()
+        
+        let sneezePage = SymptomsSneezePage(app)
+        sneezePage.haveSymptomsOption.tap()
+        sneezePage.continueButton.tap()
+        
+        let nauseaPage = SymptomsNauseaPage(app)
+        nauseaPage.haveSymptomsOption.tap()
+        nauseaPage.continueButton.tap()
+        
+        let summaryPage = SymptomsSummaryPage(app)
+        summaryPage.startDateButton.tap()
+        summaryPage.continueButton.tap()
+        
+        let submitSymptomsPage = SymptomsSubmitPage(app)
+        submitSymptomsPage.accurateConfirmationToggle.tap()
+        submitSymptomsPage.submitButton.tap()
+        
+        let symptomaticPage = StatusSymptomaticPage(app)
+        
+        // Swipe up until advice isn't visible (we assume 5 is more than enough)
+        for _ in 0..<5 {
+            app.swipeUp()
+            if !symptomaticPage.title.isHittable {
+               break
+            }
+        }
+        
+        // There might not be enough content to warrant checking we scroll advice back into view
+        if symptomaticPage.title.isHittable { return }
+        XCTAssertFalse(symptomaticPage.title.isHittable)
+
+        eightDaysLater()
+        let checkinPopup = CheckinQuestionnairePopup(app)
+        checkinPopup.updateSymptomsButton.tap()
+        
+        let checkinTemperaturePage = CheckinTemperaturePage(app)
+        checkinTemperaturePage.cancelButton.tap()
+        
+        checkinPopup.updateSymptomsButton.tap()
+        checkinTemperaturePage.temperatureOption.tap()
+        checkinTemperaturePage.continueButton.tap()
+        
+        let checkinCoughPage = CheckinCoughPage(app)
+        checkinCoughPage.coughOption.tap()
+        checkinCoughPage.continueButton.tap()
+        
+        let checkinAnosmiaPage = CheckinAnosmiaPage(app)
+        checkinAnosmiaPage.haveSymptomsOption.tap()
+        checkinAnosmiaPage.continueButton.tap()
+        
+        let checkinSneezePage = CheckinSneezePage(app)
+        checkinSneezePage.haveSymptomsOption.tap()
+        checkinSneezePage.continueButton.tap()
+        
+        let checkinNauseaPage = CheckinNauseaPage(app)
+        checkinNauseaPage.haveSymptomsOption.tap()
+        checkinNauseaPage.continueButton.tap()
+        
+        XCTAssertTrue(symptomaticPage.title.isHittable)
+    }
 }
