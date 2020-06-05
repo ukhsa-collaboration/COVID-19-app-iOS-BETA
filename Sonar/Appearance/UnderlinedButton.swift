@@ -9,7 +9,7 @@
 import UIKit
 
 //@IBDesignable
-class UnderlinedButton: UIButton {
+class UnderlinedButton: ButtonWithDynamicType {
 
     var textStyle: UIFont.TextStyle = .body {
         didSet { update() }
@@ -68,13 +68,4 @@ class UnderlinedButton: UIButton {
         ]
     }
     
-    override var intrinsicContentSize: CGSize {
-        titleLabel?.intrinsicContentSize ?? super.intrinsicContentSize
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        guard let titleLabel = titleLabel else { return }
-        titleLabel.preferredMaxLayoutWidth = titleLabel.frame.size.width
-    }
 }

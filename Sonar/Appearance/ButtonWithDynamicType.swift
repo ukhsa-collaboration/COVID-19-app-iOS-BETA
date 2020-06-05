@@ -10,7 +10,12 @@ import UIKit
 
 // Note: Also need to set the font to "body" (probably in Interface Builder) as well as using this class.
 class ButtonWithDynamicType: UIButton {
-    
+
+    override var intrinsicContentSize: CGSize {
+        let titleSize = titleLabel?.intrinsicContentSize ?? CGSize.zero
+        return CGSize(width: titleSize.width, height: max(titleSize.height + 16, 54))
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -28,17 +33,18 @@ class ButtonWithDynamicType: UIButton {
         
         setUp()
     }
-    
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        titleLabel?.preferredMaxLayoutWidth = titleLabel?.frame.size.width ?? 0
+        super.layoutSubviews()
+    }
+
     internal func setUp() {
         guard let titleLabel = titleLabel else { return }
-        
-        NSLayoutConstraint.activate([
-            NSLayoutConstraint(item: self, attribute: .height, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 54.0),
-            NSLayoutConstraint(item: titleLabel, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 8),
-            NSLayoutConstraint(item: self, attribute: .bottom, relatedBy: .equal, toItem: titleLabel, attribute: .bottom, multiplier: 1, constant: 8)
-        ])
         
         titleLabel.adjustsFontForContentSizeCategory = true
         titleLabel.numberOfLines = 0
     }
+
 }
