@@ -12,6 +12,7 @@ import Logging
 class StatusViewController: UIViewController, Storyboarded {
     static let storyboardName = "Status"
 
+    @IBOutlet weak var scrollView: TouchCancellingScrollView!
     @IBOutlet weak var contentStackView: UIStackView!
     
     @IBOutlet weak var registrationStatusViewContainer: UIView!
@@ -190,6 +191,7 @@ class StatusViewController: UIViewController, Storyboarded {
             questionnaireType: .selfDiagnosis
         ) { symptoms in
             self.navigationController?.popToViewController(self, animated: self.animateTransitions)
+            self.scrollView.setContentOffset(CGPoint.zero, animated: false)
         }
 
         coordinator.start()
@@ -232,6 +234,8 @@ class StatusViewController: UIViewController, Storyboarded {
                     self.statusStateMachine.checkin(symptoms: symptoms)
                         
                     self.navigationController!.popToRootViewController(animated: self.animateTransitions)
+             
+                    self.scrollView.setContentOffset(CGPoint.zero, animated: false)
                 }
                 coordinator.start()
             } else {
