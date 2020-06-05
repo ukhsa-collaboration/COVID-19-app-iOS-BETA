@@ -149,28 +149,30 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
     
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
         
-        // The errors in this list from experience seem to be unrecoverable and we should not automatically
-        // attempt to reconnect when we get them:
-        let unrecoverableErrors: [CBATTError.Code] = [
-            .unlikelyError,                 // https://www.pivotaltracker.com/story/show/172576561
-            .insufficientEncryptionKeySize  // https://www.pivotaltracker.com/story/show/173149688
-        ]
-        
-        switch error {
-            
-        case (let error as CBATTError) where unrecoverableErrors.contains(error.code):
-            logger.info("removing peripheral \(peripheral.identifierWithName) from connection list because of error: \(error)")
-            peripherals.removeValue(forKey: peripheral.identifier)
-            central.cancelPeripheralConnection(peripheral)
-            
-        case (let error?):
-            logger.info("reconnecting to peripheral \(peripheral.identifierWithName) after error: \(error)")
-            central.connect(peripheral)
-            
-        default:
-            logger.info("reconnecting to peripheral \(peripheral.identifierWithName) after unknown error")
-            central.connect(peripheral)
-        }
+            // From experience, some errors seem to be unrecoverable and we should not automatically
+            // attempt to reconnect when we get them:
+            switch error {
+                
+            // https://www.pivotaltracker.com/story/show/173149688
+            case (let error as CBError) where error.code.rawValue == 12: // CBError.Code.unknownDevice aka CBError.Code.unkownDevice
+                logger.info("removing peripheral \(peripheral.identifierWithName) from connection list because of error: \(error)")
+                peripherals.removeValue(forKey: peripheral.identifier)
+                central.cancelPeripheralConnection(peripheral)
+                
+            // https://www.pivotaltracker.com/story/show/172576561
+            case (let error as CBATTError) where error.code == CBATTError.Code.unlikelyError:
+                logger.info("removing peripheral \(peripheral.identifierWithName) from connection list because of error: \(error)")
+                peripherals.removeValue(forKey: peripheral.identifier)
+                central.cancelPeripheralConnection(peripheral)
+                
+            case (let error?):
+                logger.info("reconnecting to peripheral \(peripheral.identifierWithName) after error: \(error)")
+                central.connect(peripheral)
+                
+            default:
+                logger.info("reconnecting to peripheral \(peripheral.identifierWithName) after unknown error")
+                central.connect(peripheral)
+            }
     }
 
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
