@@ -19,7 +19,6 @@
 		090DEE10244F8BF600268170 /* BluetoothIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090DEE0F244F8BF600268170 /* BluetoothIssueViewController.swift */; };
 		092BB5AB244622200036B30E /* RootViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092BB5AA244622200036B30E /* RootViewControllerTests.swift */; };
 		092F5AE024859B81001A06B7 /* UnderlinedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092F5ADF24859B81001A06B7 /* UnderlinedButton.swift */; };
-		092F5AE22485BFBA001A06B7 /* UnderlinedBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092F5AE12485BFBA001A06B7 /* UnderlinedBarButtonItem.swift */; };
 		0937F78F247461D40010FB3B /* ReferenceCodeContainerViewControllerBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0937F78E247461D40010FB3B /* ReferenceCodeContainerViewControllerBase.swift */; };
 		0938D9062474473E006FAADF /* BookTestContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0938D9052474473E006FAADF /* BookTestContainerViewController.swift */; };
 		0938D9092474484B006FAADF /* BookTestContainerViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0938D9082474484B006FAADF /* BookTestContainerViewControllerTests.swift */; };
@@ -350,7 +349,6 @@
 		090DEE0F244F8BF600268170 /* BluetoothIssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothIssueViewController.swift; sourceTree = "<group>"; };
 		092BB5AA244622200036B30E /* RootViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewControllerTests.swift; sourceTree = "<group>"; };
 		092F5ADF24859B81001A06B7 /* UnderlinedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedButton.swift; sourceTree = "<group>"; };
-		092F5AE12485BFBA001A06B7 /* UnderlinedBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedBarButtonItem.swift; sourceTree = "<group>"; };
 		0937F78E247461D40010FB3B /* ReferenceCodeContainerViewControllerBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceCodeContainerViewControllerBase.swift; sourceTree = "<group>"; };
 		0938D9052474473E006FAADF /* BookTestContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTestContainerViewController.swift; sourceTree = "<group>"; };
 		0938D9082474484B006FAADF /* BookTestContainerViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTestContainerViewControllerTests.swift; sourceTree = "<group>"; };
@@ -912,7 +910,6 @@
 				F70CB81A2450CFA900ED6E7F /* OnboardingLogoStrapline.xib */,
 				0805FAF3247C233F00E3A74F /* IBView.swift */,
 				092F5ADF24859B81001A06B7 /* UnderlinedButton.swift */,
-				092F5AE12485BFBA001A06B7 /* UnderlinedBarButtonItem.swift */,
 				09D8B43324871247004D225C /* AccessibilityChangeNotifier.swift */,
 			);
 			path = Appearance;
@@ -1957,7 +1954,6 @@
 				F6A9B4602486F6E400D71370 /* SimulateNotificationViewController.swift in Sources */,
 				09CAA3662440F3B100CE93A6 /* PostcodeViewController.swift in Sources */,
 				F6BBE143246F5870005757BB /* WorkplaceGuidanceViewController.swift in Sources */,
-				092F5AE22485BFBA001A06B7 /* UnderlinedBarButtonItem.swift in Sources */,
 				F6334E4B24747DC300421B4C /* RegistrationStatusViewController.swift in Sources */,
 				131AB05C2449D85B002136CA /* ContactEventExpiryHandler.swift in Sources */,
 				09A9254324536FD300C5DBC1 /* RegistrationReminderScheduler.swift in Sources */,

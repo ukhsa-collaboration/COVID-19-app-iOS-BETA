@@ -63,7 +63,7 @@ class UnderlinedButton: UIButton {
     private func attributes() -> [NSAttributedString.Key : Any] {
         return [
             .underlineStyle: NSUnderlineStyle.single.rawValue,
-            .foregroundColor: buttonDefaultColor,
+            .foregroundColor: UIColor(named: "NHS Link")!,
             .font: UIFont.preferredFont(forTextStyle: textStyle)
         ]
     }

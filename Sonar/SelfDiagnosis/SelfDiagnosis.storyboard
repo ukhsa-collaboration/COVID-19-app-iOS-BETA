@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -151,7 +151,7 @@
                         <viewLayoutGuide key="safeArea" id="KlB-Tu-xdS"/>
                     </view>
                     <navigationItem key="navigationItem" title="Add my symptoms" id="fhp-Za-bUG">
-                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="gne-Ik-Kaf" customClass="UnderlinedBarButtonItem" customModule="Sonar" customModuleProvider="target">
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="gne-Ik-Kaf">
                             <connections>
                                 <action selector="cancelTapped:" destination="ofL-pj-tC8" id="12d-Mb-kct"/>
                             </connections>
@@ -280,7 +280,7 @@
                         <viewLayoutGuide key="safeArea" id="pif-cO-ndi"/>
                     </view>
                     <navigationItem key="navigationItem" title="Add my symptoms" id="cA5-ND-Bwb">
-                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="Ynz-wt-BRE" customClass="UnderlinedBarButtonItem" customModule="Sonar" customModuleProvider="target">
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="Ynz-wt-BRE">
                             <connections>
                                 <action selector="cancelTapped:" destination="JNI-bm-phl" id="nht-TN-53S"/>
                             </connections>
@@ -332,11 +332,11 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GD7-27-gTN" customClass="ErrorView" customModule="Sonar" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="70.5" width="374" height="45.5"/>
+                                        <rect key="frame" x="0.0" y="70.5" width="374" height="50"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="xwo-3w-4lP">
-                                        <rect key="frame" x="0.0" y="132" width="374" height="35"/>
+                                        <rect key="frame" x="0.0" y="136.5" width="374" height="30.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ebv-sD-es8">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="1"/>
@@ -346,7 +346,7 @@
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JUs-Gg-aFs" customClass="StartDateButton" customModule="Sonar" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="1" width="374" height="33"/>
+                                                <rect key="frame" x="0.0" y="1" width="374" height="28.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                 <state key="normal" title="Button"/>
                                                 <connections>
@@ -354,7 +354,7 @@
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XT4-9B-WJW">
-                                                <rect key="frame" x="0.0" y="34" width="374" height="1"/>
+                                                <rect key="frame" x="0.0" y="29.5" width="374" height="1"/>
                                                 <color key="backgroundColor" systemColor="systemGray3Color" red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="Rom-hc-LVJ"/>
@@ -520,7 +520,7 @@
                         <viewLayoutGuide key="safeArea" id="awF-Hi-ytb"/>
                     </view>
                     <navigationItem key="navigationItem" title="Add my symptoms" id="b3B-gw-1zt">
-                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="Zxz-Y5-fAr" customClass="UnderlinedBarButtonItem" customModule="Sonar" customModuleProvider="target">
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="Zxz-Y5-fAr">
                             <connections>
                                 <action selector="cancelTapped:" destination="iIR-bG-zmI" id="Fb2-cr-yyh"/>
                             </connections>
