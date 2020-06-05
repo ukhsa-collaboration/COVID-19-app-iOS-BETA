@@ -9,7 +9,7 @@
 import UIKit
 
 //@IBDesignable
-class UnderlinedButton: UIButton {
+class UnderlinedButton: ButtonWithDynamicType {
 
     var textStyle: UIFont.TextStyle = .body {
         didSet { update() }
