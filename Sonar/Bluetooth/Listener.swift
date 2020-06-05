@@ -126,12 +126,17 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
             logger.info("peripheral \(peripheral.identifierWithName) discovered with RSSI = \(RSSI)")            
         }
         
-        if peripherals[peripheral.identifier] == nil || peripherals[peripheral.identifier]!.state != .connected {
-            peripherals[peripheral.identifier] = peripheral
-            central.connect(peripheral)
-        } else {
-            logger.info("ignoring peripheral \(peripherals[peripheral.identifier]!) in state \(peripherals[peripheral.identifier]!.state)")
+        if let savedPeripheral = peripherals[peripheral.identifier] {
+            logger.info("saved peripheral \(savedPeripheral.identifierWithName) already in state \(savedPeripheral.state), calling connect again")
         }
+        
+        // Always connect to every advertisement we get; it doesn't (seem?) to be an issue to connect multiple times to the same device,
+        // and when we guard against doing this by ignoring peripherals we already know about (even only ones in .connected state) we
+        // end up missing (Android?) devices we've already seen before but aren't properly getting readings from. It seems the value of
+        // peripheral.state does not give us any useful indication as to whether the connection is "live" or not
+        // https://www.pivotaltracker.com/story/show/173132100
+        peripherals[peripheral.identifier] = peripheral
+        central.connect(peripheral)
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
@@ -144,39 +149,41 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
     
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
         
-        // The errors in this list from experience seem to be unrecoverable and we should not automatically
-        // attempt to reconnect when we get them:
-        let unrecoverableErrors: [CBATTError.Code] = [
-            .unlikelyError,                 // https://www.pivotaltracker.com/story/show/172576561
-            .insufficientEncryptionKeySize  // https://www.pivotaltracker.com/story/show/173149688
-        ]
-        
-        switch error {
-            
-        case (let error as CBATTError) where unrecoverableErrors.contains(error.code):
-            logger.info("removing peripheral \(peripheral.identifierWithName) from connection list because of error: \(error)")
-            peripherals.removeValue(forKey: peripheral.identifier)
-            central.cancelPeripheralConnection(peripheral)
-            
-        case (let error?):
-            logger.info("reconnecting to peripheral \(peripheral.identifierWithName) after error: \(error)")
-            central.connect(peripheral)
-            
-        default:
-            logger.info("reconnecting to peripheral \(peripheral.identifierWithName) after unknown error")
-            central.connect(peripheral)
-        }
+            // From experience, some errors seem to be unrecoverable and we should not automatically
+            // attempt to reconnect when we get them:
+            switch error {
+                
+            // https://www.pivotaltracker.com/story/show/173149688
+            case (let error as CBError) where error.code.rawValue == 12: // CBError.Code.unknownDevice aka CBError.Code.unkownDevice
+                logger.info("removing peripheral \(peripheral.identifierWithName) from connection list because of error: \(error)")
+                peripherals.removeValue(forKey: peripheral.identifier)
+                central.cancelPeripheralConnection(peripheral)
+                
+            // https://www.pivotaltracker.com/story/show/172576561
+            case (let error as CBATTError) where error.code == CBATTError.Code.unlikelyError:
+                logger.info("removing peripheral \(peripheral.identifierWithName) from connection list because of error: \(error)")
+                peripherals.removeValue(forKey: peripheral.identifier)
+                central.cancelPeripheralConnection(peripheral)
+                
+            case (let error?):
+                logger.info("reconnecting to peripheral \(peripheral.identifierWithName) after error: \(error)")
+                central.connect(peripheral)
+                
+            default:
+                logger.info("reconnecting to peripheral \(peripheral.identifierWithName) after unknown error")
+                central.connect(peripheral)
+            }
     }
 
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         if let error = error {
-            logger.info("disconnected from peripheral \(peripheral.identifierWithName) after error: \(error)")
-            central.cancelPeripheralConnection(peripheral)
-            peripherals[peripheral.identifier] = nil
+            logger.info("attempting to reconnect to peripheral \(peripheral.identifierWithName) after error: \(error)")
         } else {
-            logger.info("disconnected from peripheral \(peripheral.identifierWithName)")
+            logger.info("attempting to reconnect to peripheral \(peripheral.identifierWithName)")
         }
-//        central.connect(peripheral)
+        // iOS devices do not start advertising after being disconnected, so in order to ensure they reconnect if/when
+        // they come back into range, we need to tell iOS to immediately reconnect
+        central.connect(peripheral)
     }
     
     // MARK: CBPeripheralDelegate
