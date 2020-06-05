@@ -126,12 +126,17 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
             logger.info("peripheral \(peripheral.identifierWithName) discovered with RSSI = \(RSSI)")            
         }
         
-        if peripherals[peripheral.identifier] == nil || peripherals[peripheral.identifier]!.state != .connected {
-            peripherals[peripheral.identifier] = peripheral
-            central.connect(peripheral)
-        } else {
-            logger.info("ignoring peripheral \(peripherals[peripheral.identifier]!) in state \(peripherals[peripheral.identifier]!.state)")
+        if let savedPeripheral = peripherals[peripheral.identifier] {
+            logger.info("saved peripheral \(savedPeripheral.identifierWithName) already in state \(savedPeripheral.state), calling connect again")
         }
+        
+        // Always connect to every advertisement we get; it doesn't (seem?) to be an issue to connect multiple times to the same device,
+        // and when we guard against doing this by ignoring peripherals we already know about (even only ones in .connected state) we
+        // end up missing (Android?) devices we've already seen before but aren't properly getting readings from. It seems the value of
+        // peripheral.state does not give us any useful indication as to whether the connection is "live" or not
+        // https://www.pivotaltracker.com/story/show/173132100
+        peripherals[peripheral.identifier] = peripheral
+        central.connect(peripheral)
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
