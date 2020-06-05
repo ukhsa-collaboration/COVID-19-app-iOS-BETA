@@ -108,7 +108,7 @@ class RootViewControllerTests: TestCase {
         notificationCenter.post(name: UIApplication.didBecomeActiveNotification, object: nil)
         authorizationManager.notificationsCompletion?(.allowed)
         
-        XCTAssertNotNil(rootVC.presentedViewController as? BluetoothPermissionDeniedViewController)
+        XCTAssertNotNil(rootVC.presentedViewController as? BluetoothDeniedViewController)
     }
     
     func testPermissionDeniedBannerIsHiddenByDefault() throws {
@@ -177,7 +177,7 @@ class RootViewControllerTests: TestCase {
         notificationCenter.post(name: UIApplication.didBecomeActiveNotification, object: nil)
         authorizationManager.notificationsCompletion?(.allowed)
 
-        XCTAssertNotNil(rootVC.presentedViewController as? BluetoothPermissionDeniedViewController)
+        XCTAssertNotNil(rootVC.presentedViewController as? BluetoothOffViewController)
     }
     
     func testBecomeActiveDoesNotShowPermissionProblemsDuringOnboarding() {

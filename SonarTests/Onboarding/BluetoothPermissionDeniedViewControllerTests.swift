@@ -14,7 +14,7 @@ class BluetoothPermissionDeniedViewControllerTests: TestCase {
     func testCallsCompletionCallbackWhenAppBecomesActive() {
         let notificationCenter = NotificationCenter()
         let uiQueue = QueueDouble()
-        let vc = BluetoothPermissionDeniedViewController.instantiate()
+        let vc = BluetoothDeniedViewController.instantiate()
         var called = false
         vc.inject(notificationCenter: notificationCenter, uiQueue: uiQueue) {
             called = true
