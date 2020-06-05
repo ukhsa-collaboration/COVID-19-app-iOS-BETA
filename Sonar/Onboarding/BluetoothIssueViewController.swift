@@ -1,5 +1,5 @@
 //
-//  BluetoothPermissionDeniedViewController.swift
+//  BluetoothIssueViewController.swift
 //  Sonar
 //
 //  Created by NHSX on 4/21/20.
@@ -8,7 +8,18 @@
 
 import UIKit
 
-class BluetoothPermissionDeniedViewController: FixPermissionsViewController, Storyboarded {
+class BluetoothDeniedViewController: BluetoothIssueViewController {
+    class func instantiate() -> BluetoothDeniedViewController {
+        instantiate { $0.set(bluetooth: .denied) }
+    }
+}
+class BluetoothOffViewController: BluetoothIssueViewController {
+    class func instantiate() -> BluetoothOffViewController {
+        instantiate { $0.set(bluetooth: .off) }
+    }
+}
+
+class BluetoothIssueViewController: FixPermissionsViewController, Storyboarded {
     enum BluetoothType {
         case denied
         case off

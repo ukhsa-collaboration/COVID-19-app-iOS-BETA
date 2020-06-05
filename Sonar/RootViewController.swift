@@ -149,12 +149,10 @@ class RootViewController: UIViewController {
                 
                 switch problem {
                 case .bluetoothOff:
-                    let vc = BluetoothPermissionDeniedViewController.instantiate()
-                    vc.set(bluetooth: .off)
+                    let vc = BluetoothOffViewController.instantiate()
                     self.showSetupError(viewController: vc)
                 case .bluetoothPermissions:
-                    let vc = BluetoothPermissionDeniedViewController.instantiate()
-                    vc.set(bluetooth: .denied)
+                    let vc = BluetoothDeniedViewController.instantiate()
                     self.showSetupError(viewController: vc)
                 case .notificationPermissions:
                     break

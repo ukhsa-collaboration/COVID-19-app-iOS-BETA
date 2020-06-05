@@ -46,7 +46,7 @@ class FixPermissionsViewController: UIViewController {
         }
     }
     
-    @IBAction func settingsTapped(_ sender: UIButton) {
+    @IBAction func settingsTapped() {
         UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:])
     }
 

@@ -16,7 +16,7 @@
 		08D77F2C2477999100EAEBD5 /* LinkingIdRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D77F2B2477999000EAEBD5 /* LinkingIdRequestTests.swift */; };
 		090B186F24354D0100870B5D /* RemoteNotificationDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090B186E24354D0100870B5D /* RemoteNotificationDispatcher.swift */; };
 		090B1871243552C300870B5D /* UserNotificationCenterDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090B1870243552C300870B5D /* UserNotificationCenterDouble.swift */; };
-		090DEE10244F8BF600268170 /* BluetoothPermissionDeniedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090DEE0F244F8BF600268170 /* BluetoothPermissionDeniedViewController.swift */; };
+		090DEE10244F8BF600268170 /* BluetoothIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090DEE0F244F8BF600268170 /* BluetoothIssueViewController.swift */; };
 		092BB5AB244622200036B30E /* RootViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092BB5AA244622200036B30E /* RootViewControllerTests.swift */; };
 		092F5AE024859B81001A06B7 /* UnderlinedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092F5ADF24859B81001A06B7 /* UnderlinedButton.swift */; };
 		092F5AE22485BFBA001A06B7 /* UnderlinedBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092F5AE12485BFBA001A06B7 /* UnderlinedBarButtonItem.swift */; };
@@ -347,7 +347,7 @@
 		08D77F2B2477999000EAEBD5 /* LinkingIdRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkingIdRequestTests.swift; sourceTree = "<group>"; };
 		090B186E24354D0100870B5D /* RemoteNotificationDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteNotificationDispatcher.swift; sourceTree = "<group>"; };
 		090B1870243552C300870B5D /* UserNotificationCenterDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationCenterDouble.swift; sourceTree = "<group>"; };
-		090DEE0F244F8BF600268170 /* BluetoothPermissionDeniedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothPermissionDeniedViewController.swift; sourceTree = "<group>"; };
+		090DEE0F244F8BF600268170 /* BluetoothIssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothIssueViewController.swift; sourceTree = "<group>"; };
 		092BB5AA244622200036B30E /* RootViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewControllerTests.swift; sourceTree = "<group>"; };
 		092F5ADF24859B81001A06B7 /* UnderlinedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedButton.swift; sourceTree = "<group>"; };
 		092F5AE12485BFBA001A06B7 /* UnderlinedBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedBarButtonItem.swift; sourceTree = "<group>"; };
@@ -1398,7 +1398,7 @@
 				F6F05A312434310200FF4B72 /* Onboarding.storyboard */,
 				F6F05A272433C55300FF4B72 /* AuthorizationManager.swift */,
 				898FE858243B4FE300210775 /* AuthorizationManaging.swift */,
-				090DEE0F244F8BF600268170 /* BluetoothPermissionDeniedViewController.swift */,
+				090DEE0F244F8BF600268170 /* BluetoothIssueViewController.swift */,
 				0991B8BC2450B9940076C58B /* FixPermissionsViewController.swift */,
 				F6F05A252433C09200FF4B72 /* OnboardingCoordinator.swift */,
 				893C0B7A243DE346000A7DB6 /* OnboardingEnvironment.swift */,
@@ -1969,7 +1969,7 @@
 				89F06B312434AABF0074C612 /* NoOpLogHandler.swift in Sources */,
 				F6F05A3024340E5400FF4B72 /* OnboardingViewController.swift in Sources */,
 				F652F72C244A74E900D97950 /* StartDateViewController.swift in Sources */,
-				090DEE10244F8BF600268170 /* BluetoothPermissionDeniedViewController.swift in Sources */,
+				090DEE10244F8BF600268170 /* BluetoothIssueViewController.swift in Sources */,
 				89074B8524378A0D00D67777 /* UITestPayload.swift in Sources */,
 				0805FAF4247C233F00E3A74F /* IBView.swift in Sources */,
 				F6AB2F20243D359F00386D6B /* SubmitSymptomsViewController.swift in Sources */,
