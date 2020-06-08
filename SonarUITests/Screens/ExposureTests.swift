@@ -93,6 +93,7 @@ class ExposureTests: ScreenTestCase {
         XCTAssertTrue(statusExposedSymptomaticPage.title.exists)
         
         eightDaysLater()
+        eightDaysLater()
         
         // 8 days have passed, which is greater than the 7 days since symptoms started
         let checkinPopup = CheckinQuestionnairePopup(app)

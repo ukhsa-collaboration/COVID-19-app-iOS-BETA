@@ -101,10 +101,11 @@ class StatusStateMachine: StatusStateMachining {
         }
 
         switch state {
-        case .exposed:
+        case .exposed(let exposed):
             try contactEventsUploader.upload(from: startDate, with: symptoms)
             
-            let firstCheckin = StatusState.ExposedSymptomatic.firstCheckin(from: startDate)
+            let firstCheckin = max(StatusState.ExposedSymptomatic.firstCheckin(from: startDate), exposed.expiryDate)
+            
             let pastFirstCheckin = currentDate >= firstCheckin
             let hasTemperature = symptoms.contains(.temperature)
 
@@ -116,7 +117,7 @@ class StatusStateMachine: StatusStateMachining {
 
             let exposedSymptomatic = StatusState.ExposedSymptomatic(
                 symptoms: symptoms,
-                startDate: startDate,
+                startDate: exposed.startDate,
                 checkinDate: firstCheckin
             )
             state = .exposedSymptomatic(exposedSymptomatic)
@@ -246,7 +247,12 @@ class StatusStateMachine: StatusStateMachining {
         case .ok, .exposed, .positiveTestResult:
             break
         case .exposedSymptomatic(let exposedSymptomatic):
-            state = .exposed(StatusState.Exposed(startDate: exposedSymptomatic.startDate))
+            let exposed = StatusState.Exposed(startDate: exposedSymptomatic.startDate)
+            if exposed.expiryDate > currentDate {
+                state = .exposed(exposed)
+            } else {
+                state = .ok(StatusState.Ok())
+            }
         case .symptomatic(let symptomatic):
             if testDate > symptomatic.startDate {
                 state = .ok(StatusState.Ok())
