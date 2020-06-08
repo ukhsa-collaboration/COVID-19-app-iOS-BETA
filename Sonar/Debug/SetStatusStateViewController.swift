@@ -125,8 +125,17 @@ class SetStatusStateViewController: UITableViewController {
         case .exposedSymptomatic(let exposedSymptomatic):
             return [
                 .state("exposed symptomatic", setState),
+                .date("Exposed Start Date", exposedSymptomatic.startDate, { date in
+                    self.state = .exposedSymptomatic(StatusState.ExposedSymptomatic(
+                        exposed: StatusState.Exposed(startDate: date),
+                        symptoms: exposedSymptomatic.symptoms,
+                        startDate: exposedSymptomatic.startDate,
+                        checkinDate: exposedSymptomatic.checkinDate
+                    ))
+                }),
                 .date("Start Date", exposedSymptomatic.startDate, { date in
                     self.state = .exposedSymptomatic(StatusState.ExposedSymptomatic(
+                        exposed: exposedSymptomatic.exposed,
                         symptoms: exposedSymptomatic.symptoms,
                         startDate: date,
                         checkinDate: exposedSymptomatic.checkinDate
@@ -134,6 +143,7 @@ class SetStatusStateViewController: UITableViewController {
                 }),
                 .date("Checkin Date", exposedSymptomatic.checkinDate, { date in
                     self.state = .exposedSymptomatic(StatusState.ExposedSymptomatic(
+                        exposed: exposedSymptomatic.exposed,
                         symptoms: exposedSymptomatic.symptoms,
                         startDate: exposedSymptomatic.startDate,
                         checkinDate: date
@@ -141,6 +151,7 @@ class SetStatusStateViewController: UITableViewController {
                 }),
                 .symptoms(exposedSymptomatic.symptoms, { symptoms in
                     self.state = .exposedSymptomatic(StatusState.ExposedSymptomatic(
+                        exposed: exposedSymptomatic.exposed,
                         symptoms: symptoms,
                         startDate: exposedSymptomatic.startDate,
                         checkinDate: exposedSymptomatic.checkinDate
@@ -194,7 +205,12 @@ class SetStatusStateViewController: UITableViewController {
         case "positive":
             self.state = .positiveTestResult(StatusState.PositiveTestResult(checkinDate: Date(), symptoms: nil, startDate: Date()))
         case "exposed symptomatic":
-            self.state = .exposedSymptomatic(StatusState.ExposedSymptomatic(symptoms: nil, startDate: Date(), checkinDate: Date()))
+            self.state = .exposedSymptomatic(StatusState.ExposedSymptomatic(
+                exposed: StatusState.Exposed(startDate: Date()),
+                symptoms: nil,
+                startDate: Date(),
+                checkinDate: Date()
+            ))
         default:
             assertionFailure("invalid state: \(state)")
         }
