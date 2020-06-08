@@ -248,7 +248,7 @@ class StatusStateMachine: StatusStateMachining {
         case .ok, .exposed, .positiveTestResult:
             break
         case .exposedSymptomatic(let exposedSymptomatic):
-            let exposed = StatusState.Exposed(startDate: exposedSymptomatic.exposed.startDate)
+            let exposed = exposedSymptomatic.exposed
             if exposed.expiryDate > currentDate {
                 state = .exposed(exposed)
             } else {
