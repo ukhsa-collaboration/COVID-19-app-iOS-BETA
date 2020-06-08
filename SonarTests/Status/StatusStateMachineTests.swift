@@ -760,8 +760,10 @@ class StatusStateMachineTests: XCTestCase {
         let positiveDate = Calendar.current.date(from: DateComponents(month: 5, day: 10))!
         let testDate = Calendar.current.date(from: DateComponents(month: 6, day: 10))!
         let endDate = StatusState.PositiveTestResult.firstCheckin(from: positiveDate)
-        let positive = StatusState.PositiveTestResult(checkinDate: endDate, symptoms: nil, startDate: positiveDate)
-        persisting.statusState = .positiveTestResult(positive)
+        let positiveTestResult = StatusState.positiveTestResult(.init(checkinDate: endDate,
+                                                                      symptoms: nil,
+                                                                      startDate: positiveDate))
+        persisting.statusState = positiveTestResult
 
         let testResult = TestResult(
             result: .negative,
@@ -770,7 +772,7 @@ class StatusStateMachineTests: XCTestCase {
             acknowledgementUrl: nil
         )
         machine.received(testResult)
-        XCTAssertEqual(machine.state, .ok(StatusState.Ok()))
+        XCTAssertEqual(machine.state, positiveTestResult)
 
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.content.title, "TEST_RESULT_TITLE".localized)
