@@ -368,13 +368,17 @@ class StatusViewController: UIViewController, Storyboarded {
     }
 
     private func presentDrawer(header: String, detail: String) {
-        let drawer = DrawerViewController.instantiate()
-        drawer.inject(header: header, detail: detail) { self.showDrawer() }
-        drawerPresenter.present(
-            drawer: drawer,
-            inNavigationController: navigationController!,
-            usingTransitioningDelegate: drawerPresentationManager
-        )
+        dismiss(animated: animateTransitions) { [weak self] in
+            guard let `self` = self else { return }
+
+            let drawer = DrawerViewController.instantiate()
+            drawer.inject(header: header, detail: detail) { self.reload() }
+            self.drawerPresenter.present(
+                drawer: drawer,
+                inNavigationController: self.navigationController!,
+                usingTransitioningDelegate: self.drawerPresentationManager
+            )
+        }
     }
 
     private func pleaseIsolateText(until expiryDate: Date) -> String {

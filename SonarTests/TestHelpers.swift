@@ -37,6 +37,22 @@ class TestCase: XCTestCase {
 
         UIApplication.shared.windows.first?.rootViewController = parentViewControllerForTests
     }
+
+    func wait(for block: @escaping () -> Bool) {
+        let expectation = XCTestExpectation()
+        var done = false
+
+        func poll() {
+            if block() {
+                expectation.fulfill()
+            } else if !done {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: { poll() })
+            }
+        }
+
+        poll()
+        wait(for: [expectation], timeout: 1.0)
+    }
 }
 
 extension DispatchQueue {

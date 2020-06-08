@@ -184,6 +184,33 @@ class StatusViewControllerTests: TestCase {
         }
     }
 
+    func testReloadsAfterClosingDrawer() throws {
+        try PresentationSpy.withSpy {
+            let checkinDate = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
+            let machine = StatusStateMachiningDouble(state:
+                .positiveTestResult(StatusState.PositiveTestResult(
+                    checkinDate: checkinDate, symptoms: [.temperature], startDate: Date()
+                ))
+            )
+            let presenter = DrawerPresenterDouble()
+            let mailbox = DrawerMailboxingDouble([.positiveTestResult])
+
+            let vc = makeViewController(
+                statusStateMachine: machine,
+                makePresentSynchronous: true,
+                drawerPresenter: presenter,
+                drawerMailbox: mailbox
+            )
+
+            wait { presenter.presented != nil }
+
+            let drawer = try XCTUnwrap(presenter.presented)
+            drawer.closeTapped()
+
+            XCTAssertNotNil(PresentationSpy.presented(by: vc) as? CheckinDrawerViewController)
+        }
+    }
+
     func testListensForNewDrawerMessages() throws {
         let notificationCenter = NotificationCenter()
         let presenter = DrawerPresenterDouble()
