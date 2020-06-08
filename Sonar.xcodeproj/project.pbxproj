@@ -192,7 +192,6 @@
 		B79A2E852476013900E8C21E /* localhost.key in Resources */ = {isa = PBXBuildFile; fileRef = B79A2E772476013800E8C21E /* localhost.key */; };
 		B79A2E862476013900E8C21E /* sonar.ca.pem in Resources */ = {isa = PBXBuildFile; fileRef = B79A2E782476013800E8C21E /* sonar.ca.pem */; };
 		B7F21885247226EB007343FA /* MatcherExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F21884247226EB007343FA /* MatcherExtensions.swift */; };
-		DD311913247EC554001E9807 /* NegativeTestStatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD311912247EC553001E9807 /* NegativeTestStatusTests.swift */; };
 		DD3FCF3B2476E8C3008B0237 /* TestResultNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3FCF392476E8C3008B0237 /* TestResultNotificationHandler.swift */; };
 		DD3FCF3C2476E8C3008B0237 /* ExposedNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3FCF3A2476E8C3008B0237 /* ExposedNotificationHandler.swift */; };
 		DD3FCF3E2476E8DC008B0237 /* TestResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3FCF3D2476E8DC008B0237 /* TestResult.swift */; };
@@ -539,7 +538,6 @@
 		B79A2E772476013800E8C21E /* localhost.key */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = localhost.key; sourceTree = "<group>"; };
 		B79A2E782476013800E8C21E /* sonar.ca.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sonar.ca.pem; sourceTree = "<group>"; };
 		B7F21884247226EB007343FA /* MatcherExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatcherExtensions.swift; sourceTree = "<group>"; };
-		DD311912247EC553001E9807 /* NegativeTestStatusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NegativeTestStatusTests.swift; sourceTree = "<group>"; };
 		DD3FCF392476E8C3008B0237 /* TestResultNotificationHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestResultNotificationHandler.swift; sourceTree = "<group>"; };
 		DD3FCF3A2476E8C3008B0237 /* ExposedNotificationHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExposedNotificationHandler.swift; sourceTree = "<group>"; };
 		DD3FCF3D2476E8DC008B0237 /* TestResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestResult.swift; sourceTree = "<group>"; };
@@ -1151,7 +1149,6 @@
 		895D9E50243750DB00573D4D /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				DD311912247EC553001E9807 /* NegativeTestStatusTests.swift */,
 				DD3FCF4924780871008B0237 /* PositiveTestStatusTests.swift */,
 				AEAFA67824602629009AEAEB /* StatusTests.swift */,
 				DDBA4EB42481477F009DABDB /* ExposureTests.swift */,
@@ -1986,7 +1983,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD311913247EC554001E9807 /* NegativeTestStatusTests.swift in Sources */,
 				898FE857243B4D7A00210775 /* XCUIElement.swift in Sources */,
 				AEAFA67924602629009AEAEB /* StatusTests.swift in Sources */,
 				898FE854243B42E800210775 /* OnboardingTests.swift in Sources */,

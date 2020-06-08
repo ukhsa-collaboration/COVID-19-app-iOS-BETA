@@ -633,7 +633,7 @@ class StatusStateMachineTests: XCTestCase {
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.identifier, "testResult.arrived")
         XCTAssertEqual(request.content.title, "TEST_RESULT_TITLE".localized)
-        XCTAssertEqual(drawerMailbox.receive(), .negativeTestResult(symptoms: nil))
+        XCTAssertEqual(drawerMailbox.receive(), .negativeTestResult)
     }
 
     func testReceivedNegativeTestResultWhenExposedSymptomatic() throws {
@@ -656,7 +656,7 @@ class StatusStateMachineTests: XCTestCase {
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.content.title, "TEST_RESULT_TITLE".localized)
         XCTAssertEqual(request.identifier, "testResult.arrived")
-        XCTAssertEqual(drawerMailbox.receive(), .negativeTestResult(symptoms: nil))
+        XCTAssertEqual(drawerMailbox.receive(), .negativeTestResult)
     }
 
     func testReceivedNegativeTestResultWhenExposedBefore() throws {
@@ -677,7 +677,7 @@ class StatusStateMachineTests: XCTestCase {
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.content.title, "TEST_RESULT_TITLE".localized)
         XCTAssertEqual(request.identifier, "testResult.arrived")
-        XCTAssertEqual(drawerMailbox.receive(), .negativeTestResult(symptoms: nil))
+        XCTAssertEqual(drawerMailbox.receive(), .negativeTestResult)
     }
 
     func testReceivedNegativeTestResultWhenExposedAfter() throws {
@@ -698,7 +698,7 @@ class StatusStateMachineTests: XCTestCase {
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.content.title, "TEST_RESULT_TITLE".localized)
         XCTAssertEqual(request.identifier, "testResult.arrived")
-        XCTAssertEqual(drawerMailbox.receive(), .negativeTestResult(symptoms: nil))
+        XCTAssertEqual(drawerMailbox.receive(), .negativeTestResult)
     }
 
     func testReceivedNegativeTestResultWithEarlierSymptomatic() throws {
@@ -720,15 +720,12 @@ class StatusStateMachineTests: XCTestCase {
         )
 
         machine.received(testResult)
-        let nextCheckinDate = Calendar.current.date(from: DateComponents(year: 2020, month: 5, day: 14, hour: 7))!
-        XCTAssertEqual(machine.state, .symptomatic(StatusState.Symptomatic(
-            symptoms: [.cough], startDate: startDate, checkinDate: nextCheckinDate
-        )))
+        XCTAssertEqual(machine.state, .ok(StatusState.Ok()))
 
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.content.title, "TEST_RESULT_TITLE".localized)
         XCTAssertEqual(request.identifier, "testResult.arrived")
-        XCTAssertEqual(drawerMailbox.receive(), .negativeTestResult(symptoms: [.cough]))
+        XCTAssertEqual(drawerMailbox.receive(), .negativeTestResult)
     }
 
     func testReceivedNegativeTestResultWithLaterSymptomatic() throws {
@@ -753,7 +750,7 @@ class StatusStateMachineTests: XCTestCase {
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.content.title, "TEST_RESULT_TITLE".localized)
         XCTAssertEqual(request.identifier, "testResult.arrived")
-        XCTAssertEqual(drawerMailbox.receive(), .negativeTestResult(symptoms: nil))
+        XCTAssertEqual(drawerMailbox.receive(), .negativeTestResult)
     }
 
     func testReceivedNegativeTestResultWithEarlierPositiveTest() throws {
@@ -777,7 +774,7 @@ class StatusStateMachineTests: XCTestCase {
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.content.title, "TEST_RESULT_TITLE".localized)
         XCTAssertEqual(request.identifier, "testResult.arrived")
-        XCTAssertEqual(drawerMailbox.receive(), .negativeTestResult(symptoms: nil))
+        XCTAssertEqual(drawerMailbox.receive(), .negativeTestResult)
     }
 
     func testReceivedNegativeTestResultWithLaterPositiveTest() throws {
@@ -799,7 +796,7 @@ class StatusStateMachineTests: XCTestCase {
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.content.title, "TEST_RESULT_TITLE".localized)
         XCTAssertEqual(request.identifier, "testResult.arrived")
-        XCTAssertEqual(drawerMailbox.receive(), .negativeTestResult(symptoms: nil))
+        XCTAssertEqual(drawerMailbox.receive(), .negativeTestResult)
     }
     
     func testSymptomaticToOkCancelsReminderNotification() throws {

@@ -18,8 +18,6 @@ enum Screen: String, Codable {
     case status
     
     case positiveTestStatus
-
-    case negativeTestSymptomatic
     
     case exposedStatus
 }

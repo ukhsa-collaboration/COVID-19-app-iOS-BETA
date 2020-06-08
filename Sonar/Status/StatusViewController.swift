@@ -354,19 +354,11 @@ class StatusViewController: UIViewController, Storyboarded {
                 header: "TEST_UPDATE_DRAW_POSITIVE_HEADER".localized,
                 detail: "TEST_UPDATE_DRAW_POSITIVE_DETAIL".localized
             )
-        case .negativeTestResult(let symptoms):
-            if let symptoms = symptoms {
-                presentCheckinDrawer(
-                    for: symptoms,
-                    header: "NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_HEADER".localized,
-                    detail: "NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_DETAIL".localized
-                )
-            } else {
-                presentDrawer(
-                    header: "NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_HEADER".localized,
-                    detail: "NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_DETAIL".localized
-                )
-            }
+        case .negativeTestResult:
+            presentDrawer(
+                header: "NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_HEADER".localized,
+                detail: "NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_DETAIL".localized
+            )
         case .unclearTestResult:
             presentDrawer(
                 header: "TEST_UPDATE_DRAW_INVALID_HEADER".localized,
