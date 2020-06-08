@@ -63,7 +63,7 @@ class UnderlinedButton: ButtonWithDynamicType {
     private func attributes() -> [NSAttributedString.Key : Any] {
         return [
             .underlineStyle: NSUnderlineStyle.single.rawValue,
-            .foregroundColor: UIColor(named: "NHS Link")!,
+            .foregroundColor: UIColor.nhs.link,
             .font: UIFont.preferredFont(forTextStyle: textStyle)
         ]
     }

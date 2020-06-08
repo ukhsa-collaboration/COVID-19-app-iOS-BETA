@@ -26,7 +26,7 @@ class StartNowViewController: UIViewController, Storyboarded {
             if let numberView = numberLabel.superview {
                 numberView.layer.masksToBounds = true
             }
-            numberLabel.textColor = UIColor(named: "NHS White")
+            numberLabel.textColor = UIColor.nhs.white
         }
     }
     

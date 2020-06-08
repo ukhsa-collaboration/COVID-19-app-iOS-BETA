@@ -13,7 +13,7 @@ class SymptomStackView: UIStackView {
         let label = UILabel()
         label.text = "High temperature"
         label.font = UIFont.preferredFont(forTextStyle: .subheadline)
-        label.textColor = UIColor(named: "NHS Secondary Text")
+        label.textColor = UIColor.nhs.secondaryText
         return label
     }
     
@@ -21,7 +21,7 @@ class SymptomStackView: UIStackView {
         let label = UILabel()
         label.text = "Continuous cough"
         label.font = UIFont.preferredFont(forTextStyle: .subheadline)
-        label.textColor = UIColor(named: "NHS Secondary Text")
+        label.textColor = UIColor.nhs.secondaryText
         return label
     }
     

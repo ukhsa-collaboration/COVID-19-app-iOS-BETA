@@ -49,7 +49,7 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
             .forEach {
                 let label = UILabel()
                 label.text = "\($0)\n"
-                label.textColor = UIColor(named: "NHS Text")
+                label.textColor = UIColor.nhs.text
                 label.sizeToFit()
                 label.translatesAutoresizingMaskIntoConstraints = false
                 label.font = UIFont.preferredFont(forTextStyle: .body)
@@ -121,7 +121,7 @@ class SubmitSymptomsViewController: UIViewController, Storyboarded {
         errorView.errorMessage.text = "SUBMIT_SYMPTOMS_CONFIRM_ERROR".localized
         
         confirmSwitch.layer.borderWidth = 3
-        confirmSwitch.layer.borderColor = UIColor(named: "NHS Error")!.cgColor
+        confirmSwitch.layer.borderColor = UIColor.nhs.error!.cgColor
         confirmSwitch.layer.cornerRadius = 16
     }
 }

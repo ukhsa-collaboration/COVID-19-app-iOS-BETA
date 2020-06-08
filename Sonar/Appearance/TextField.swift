@@ -13,10 +13,6 @@ import UIKit
 // colors, but layers don't appear to change their colors when the UI style
 // changes after initial rendering.
 class TextField: UITextField {
-    
-    static let darkBlue = UIColor(named: "NHS Dark Blue")!
-    static let errorRed = UIColor(named: "NHS Error")!
-    
     var hasError: Bool = false {
         didSet {
             updateForCurrentUIStyle()
@@ -52,9 +48,9 @@ class TextField: UITextField {
             layer.borderColor = UIColor.black.cgColor
         case (true, false):
             layer.borderWidth = 3
-            layer.borderColor = Self.darkBlue.cgColor
+            layer.borderColor = UIColor.nhs.darkBlue!.cgColor
         case (_, true):
-            layer.borderColor = Self.errorRed.cgColor
+            layer.borderColor = UIColor.nhs.error!.cgColor
             layer.borderWidth = 3
         }
     }

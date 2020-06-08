@@ -72,7 +72,7 @@ class QuestionSymptomsViewController: UIViewController, Storyboarded {
                 // Prepend newline to all but first label
                 let newLine = index != 0 ? "\n" : ""
                 label.text = "\(newLine)\(text)"
-                label.textColor = UIColor(named: "NHS Secondary Text")
+                label.textColor = UIColor.nhs.secondaryText
                 label.sizeToFit()
                 label.translatesAutoresizingMaskIntoConstraints = false
                 label.font = UIFont.preferredFont(forTextStyle: .body)
@@ -92,7 +92,7 @@ class QuestionSymptomsViewController: UIViewController, Storyboarded {
     @objc func longPressedYes(sender: UILongPressGestureRecognizer) {
         if sender.state != UIGestureRecognizer.State.ended {
             yesButton.layer.borderWidth = 3
-            yesButton.layer.borderColor = UIColor(named: "NHS Highlight")!.withAlphaComponent(0.96).cgColor
+            yesButton.layer.borderColor = UIColor.nhs.highlight!.withAlphaComponent(0.96).cgColor
         } else {
             yesTapped()
         }
@@ -101,7 +101,7 @@ class QuestionSymptomsViewController: UIViewController, Storyboarded {
     @objc func longPressedNo(sender: UILongPressGestureRecognizer) {
         if sender.state != UIGestureRecognizer.State.ended {
             noButton.layer.borderWidth = 3
-            noButton.layer.borderColor = UIColor(named: "NHS Highlight")!.withAlphaComponent(0.96).cgColor
+            noButton.layer.borderColor = UIColor.nhs.highlight!.withAlphaComponent(0.96).cgColor
         } else {
             noTapped()
         }

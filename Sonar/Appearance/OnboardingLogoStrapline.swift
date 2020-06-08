@@ -45,7 +45,7 @@ class OnboardingLogoStrapline: UIView {
         }
 
         titleLabel.text = "COVID-19"
-        titleLabel.textColor = UIColor(named: "NHS Blue")
+        titleLabel.textColor = UIColor.nhs.blue
 
         addSubview(view)
         NSLayoutConstraint.activate([

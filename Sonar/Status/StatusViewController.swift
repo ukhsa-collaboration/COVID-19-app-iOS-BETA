@@ -95,7 +95,7 @@ class StatusViewController: UIViewController, Storyboarded {
 
             let title = UILabel()
             title.text = "COVID-19"
-            title.textColor = UIColor(named: "NHS Blue")
+            title.textColor = UIColor.nhs.blue
 
             let stack = UIStackView(arrangedSubviews: [logo, title])
             stack.accessibilityLabel = "NHS Covid 19"
@@ -135,7 +135,7 @@ class StatusViewController: UIViewController, Storyboarded {
         nhsCoronavirusLinkButton.url = ContentURLs.shared.regionalServices
 
         (sectionHeaders + [stepsDetailLabel, feelUnwellBodyLabel, medicalEmergencyLabel, diagnosisDetailLabel]).forEach {
-            $0.textColor = UIColor(named: "NHS Secondary Text")
+            $0.textColor = UIColor.nhs.secondaryText
         }
         
         notificationCenter.addObserver(self, selector: #selector(reload), name: UIApplication.didBecomeActiveNotification, object: nil)
@@ -274,7 +274,7 @@ class StatusViewController: UIViewController, Storyboarded {
         
         switch state {
         case .ok:
-            diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Blue")
+            diagnosisHighlightView.backgroundColor = UIColor.nhs.blue
             diagnosisTitleLabel.text = "Follow the current advice to stop the spread of coronavirus"
             diagnosisDetailLabel.isHidden = true
             feelUnwellButton.isHidden = false
@@ -283,7 +283,7 @@ class StatusViewController: UIViewController, Storyboarded {
             stepsDetailLabel.text = "STATUS_GET_HELP_OK".localized + "\n"
 
         case .exposed(let exposed):
-            diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
+            diagnosisHighlightView.backgroundColor = UIColor.nhs.warmYellow
             diagnosisTitleLabel.text = "You have been near someone who has tested positive for coronavirus. Please self-isolate."
             diagnosisDetailLabel.text = "Please isolate until \(localizedDate(exposed.expiryDate)). Please read your full advice below."
             diagnosisDetailLabel.isHidden = false
@@ -299,7 +299,7 @@ class StatusViewController: UIViewController, Storyboarded {
             setupDetail(for: exposedSymptomatic)
 
         case .positiveTestResult(let positiveTestResult):
-            diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
+            diagnosisHighlightView.backgroundColor = UIColor.nhs.warmYellow
             diagnosisTitleLabel.text = "Your test result indicates you have coronavirus. Please isolate yourself and your household."
             diagnosisDetailLabel.isHidden = false
             diagnosisDetailLabel.text = pleaseIsolateText(until: positiveTestResult.checkinDate)
@@ -318,7 +318,7 @@ class StatusViewController: UIViewController, Storyboarded {
     }
     
     func setupDetail<T>(for state: T) where T: SymptomProvider & Checkinable {
-        diagnosisHighlightView.backgroundColor = UIColor(named: "NHS Warm Yellow")
+        diagnosisHighlightView.backgroundColor = UIColor.nhs.warmYellow
         diagnosisTitleLabel.text = "Your symptoms indicate you may have coronavirus. Please isolate yourself and your household and book a test."
         diagnosisDetailLabel.isHidden = false
         diagnosisDetailLabel.text = pleaseIsolateText(until: state.checkinDate)

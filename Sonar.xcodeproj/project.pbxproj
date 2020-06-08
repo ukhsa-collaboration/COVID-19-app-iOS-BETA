@@ -198,6 +198,8 @@
 		DD3FCF412476E914008B0237 /* DrawerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3FCF3F2476E913008B0237 /* DrawerViewController.swift */; };
 		DD3FCF422476E914008B0237 /* Drawer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD3FCF402476E913008B0237 /* Drawer.storyboard */; };
 		DD3FCF4A24780872008B0237 /* PositiveTestStatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3FCF4924780871008B0237 /* PositiveTestStatusTests.swift */; };
+		DD6B15852488072E00C1DE5E /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6B15842488072E00C1DE5E /* Colors.swift */; };
+		DD6B158A248812C200C1DE5E /* ColorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6B1589248812C200C1DE5E /* ColorTest.swift */; };
 		DDBA4EB52481477F009DABDB /* ExposureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBA4EB42481477F009DABDB /* ExposureTests.swift */; };
 		DDD5BDC52473EA1200329720 /* NotificationStatusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5BDC42473EA1200329720 /* NotificationStatusButton.swift */; };
 		F600A60224297A8E0038DF57 /* RegistrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F600A60124297A8E0038DF57 /* RegistrationRequest.swift */; };
@@ -545,6 +547,8 @@
 		DD3FCF402476E913008B0237 /* Drawer.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Drawer.storyboard; sourceTree = "<group>"; };
 		DD3FCF4924780871008B0237 /* PositiveTestStatusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositiveTestStatusTests.swift; sourceTree = "<group>"; };
 		DD46B0D4247FC57400FB3B87 /* 2_exposure.apns */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2_exposure.apns; sourceTree = "<group>"; };
+		DD6B15842488072E00C1DE5E /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		DD6B1589248812C200C1DE5E /* ColorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTest.swift; sourceTree = "<group>"; };
 		DDBA4EB42481477F009DABDB /* ExposureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExposureTests.swift; sourceTree = "<group>"; };
 		DDD5BDC42473EA1200329720 /* NotificationStatusButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationStatusButton.swift; sourceTree = "<group>"; };
 		F600A60124297A8E0038DF57 /* RegistrationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationRequest.swift; sourceTree = "<group>"; };
@@ -909,6 +913,7 @@
 				0805FAF3247C233F00E3A74F /* IBView.swift */,
 				092F5ADF24859B81001A06B7 /* UnderlinedButton.swift */,
 				09D8B43324871247004D225C /* AccessibilityChangeNotifier.swift */,
+				DD6B15842488072E00C1DE5E /* Colors.swift */,
 			);
 			path = Appearance;
 			sourceTree = "<group>";
@@ -931,6 +936,7 @@
 		214209C02422276800C7BFF3 /* SonarTests */ = {
 			isa = PBXGroup;
 			children = (
+				DD6B15862488129100C1DE5E /* Appearance */,
 				214209C32422276800C7BFF3 /* Info.plist */,
 				21B71F7924519B2000D0DED7 /* AppDelegateTest.swift */,
 				131AB05D2449D894002136CA /* ContactEventExpiryHandlerTests.swift */,
@@ -1273,6 +1279,14 @@
 			children = (
 			);
 			path = Setup;
+			sourceTree = "<group>";
+		};
+		DD6B15862488129100C1DE5E /* Appearance */ = {
+			isa = PBXGroup;
+			children = (
+				DD6B1589248812C200C1DE5E /* ColorTest.swift */,
+			);
+			path = Appearance;
 			sourceTree = "<group>";
 		};
 		F604977024549B49002B8503 /* Testing */ = {
@@ -1798,6 +1812,7 @@
 				09B103642444EAB80091834D /* ContactEventRepositoryDouble.swift in Sources */,
 				219B61372447371700E2F1A6 /* UUIDExtensionsTests.swift in Sources */,
 				F67A2293242AA370002254B6 /* SecureRegistrationStorageTests.swift in Sources */,
+				DD6B158A248812C200C1DE5E /* ColorTest.swift in Sources */,
 				0964B380246329680022EF97 /* UIView_ScrollingTests.swift in Sources */,
 				214209D72423C9B600C7BFF3 /* UploadProximityEventsRequestTests.swift in Sources */,
 				F72EBDA9243D2FE6009F9328 /* BroadcastIdEncrypterTests.swift in Sources */,
@@ -1848,6 +1863,7 @@
 				F6F05A36243436D200FF4B72 /* PrivacyViewController.swift in Sources */,
 				F6EE8363246306490076AF97 /* SmartInvertBorderView.swift in Sources */,
 				F6F05A282433C55300FF4B72 /* AuthorizationManager.swift in Sources */,
+				DD6B15852488072E00C1DE5E /* Colors.swift in Sources */,
 				F6334E472474559000421B4C /* Symptoms.swift in Sources */,
 				89F06B352434AF9D0074C612 /* LogEvent.swift in Sources */,
 				F694B1BC2459E9F000C6A5D1 /* NotificationAcknowledger.swift in Sources */,
