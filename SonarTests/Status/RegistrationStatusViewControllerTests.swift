@@ -31,7 +31,7 @@ class RegistrationStatusViewControllerTests: XCTestCase {
         XCTAssertFalse(vc.registrationStatusIcon?.isHidden ?? true)
         XCTAssertTrue(vc.registrationSpinner?.isHidden ?? false)
         XCTAssertNil(vc.view?.backgroundColor)
-        XCTAssertEqual(vc.registrationStatusText?.textColor, UIColor(named: "NHS Text"))
+        XCTAssertEqual(vc.registrationStatusText?.textColor, UIColor.nhs.text)
         XCTAssertTrue(vc.registrationRetryButton?.isHidden ?? false)
     }
 
@@ -42,7 +42,7 @@ class RegistrationStatusViewControllerTests: XCTestCase {
         XCTAssertTrue(vc.registrationStatusIcon?.isHidden ?? false)
         XCTAssertFalse(vc.registrationSpinner?.isHidden ?? true)
         XCTAssertNil(vc.view?.backgroundColor)
-        XCTAssertEqual(vc.registrationStatusText?.textColor, UIColor(named: "NHS Text"))
+        XCTAssertEqual(vc.registrationStatusText?.textColor, UIColor.nhs.text)
         XCTAssertTrue(vc.registrationRetryButton?.isHidden ?? false)
     }
 
@@ -62,7 +62,7 @@ class RegistrationStatusViewControllerTests: XCTestCase {
         XCTAssertFalse(vc.registrationStatusIcon?.isHidden ?? true)
         XCTAssertTrue(vc.registrationSpinner?.isHidden ?? false)
         XCTAssertNil(vc.view?.backgroundColor)
-        XCTAssertEqual(vc.registrationStatusText?.textColor, UIColor(named: "NHS Text"))
+        XCTAssertEqual(vc.registrationStatusText?.textColor, UIColor.nhs.text)
         XCTAssertTrue(vc.registrationRetryButton?.isHidden ?? false)
     }
 
@@ -75,7 +75,7 @@ class RegistrationStatusViewControllerTests: XCTestCase {
         XCTAssertEqual(vc.registrationStatusIcon?.image, UIImage(named: "Registration_status_failure"))
         XCTAssertFalse(vc.registrationStatusIcon?.isHidden ?? true)
         XCTAssertTrue(vc.registrationSpinner?.isHidden ?? false)
-        XCTAssertEqual(vc.view?.backgroundColor, UIColor(named: "Error Grey"))
+        XCTAssertEqual(vc.view?.backgroundColor, UIColor.nhs.errorGrey)
         XCTAssertEqual(vc.registrationStatusText?.textColor, UIColor.white)
         XCTAssertFalse(vc.registrationRetryButton?.isHidden ?? true)
     }
@@ -95,7 +95,7 @@ class RegistrationStatusViewControllerTests: XCTestCase {
         XCTAssertTrue(vc.registrationStatusIcon?.isHidden ?? false)
         XCTAssertFalse(vc.registrationSpinner?.isHidden ?? true)
         XCTAssertNil(vc.view?.backgroundColor)
-        XCTAssertEqual(vc.registrationStatusText?.textColor, UIColor(named: "NHS Text"))
+        XCTAssertEqual(vc.registrationStatusText?.textColor, UIColor.nhs.text)
         XCTAssertTrue(vc.registrationRetryButton?.isHidden ?? false)
     }
 

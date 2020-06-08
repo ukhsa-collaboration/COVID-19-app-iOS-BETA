@@ -27,7 +27,7 @@ class PrimaryButton: ButtonWithDynamicType {
         
         layer.cornerRadius = 8
         clipsToBounds = true
-        backgroundColor = UIColor(named: "NHS Button")
+        backgroundColor = UIColor.nhs.button
         setTitleColor(.white, for: .normal)
         titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
         titleLabel?.textAlignment = .center

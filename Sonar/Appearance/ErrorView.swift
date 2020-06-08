@@ -15,21 +15,18 @@ private struct Colors {
     var stripe: UIColor
 }
 
-private let errorBackgroundColor = UIColor(named: "NHS Error Background")!
-private let errorColor = UIColor(named: "NHS Error")!
-
 private let normalColors = Colors(
-    background: errorBackgroundColor,
-    headerText: UIColor(named: "NHS Text")!,
-    bodyText: errorColor,
-    stripe: errorColor
+    background: UIColor.nhs.errorBackground!,
+    headerText: UIColor.nhs.text!,
+    bodyText: UIColor.nhs.error!,
+    stripe: UIColor.nhs.error!
 )
 
 private let smartInvertColors = Colors(
     background: .black,
     headerText: .white,
-    bodyText: errorBackgroundColor,
-    stripe: errorBackgroundColor
+    bodyText: UIColor.nhs.errorBackground!,
+    stripe: UIColor.nhs.errorBackground!
 )
 
 class ErrorView: IBView, UpdatesBasedOnAccessibilityDisplayChanges {

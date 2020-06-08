@@ -28,7 +28,7 @@ class AnswerButton: UIControl, UpdatesBasedOnAccessibilityDisplayChanges {
         didSet {
             if isSelected {
                 accessibilityTraits.insert(.selected)
-                layer.borderColor = UIColor(named: "NHS Highlight")!.cgColor
+                layer.borderColor = UIColor.nhs.highlight!.cgColor
                 layer.borderWidth = 3
             } else {
                 accessibilityTraits.remove(.selected)
@@ -60,7 +60,7 @@ class AnswerButton: UIControl, UpdatesBasedOnAccessibilityDisplayChanges {
         layer.cornerRadius = 8
 
         textLabel.font = UIFont.preferredFont(forTextStyle: .headline)
-        textLabel.textColor = UIColor(named: "NHS Text")!
+        textLabel.textColor = UIColor.nhs.text
 
         imageView.image = UIImage(named: "Controls_RadioButton_Unselected")
         imageView.highlightedImage = UIImage(named: "Controls_RadioButton_Selected")

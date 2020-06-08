@@ -40,7 +40,7 @@ class SubmitSymptomsViewControllerTests: TestCase {
         XCTAssertNil(statusStateMachine.selfDiagnosisCalled)
         XCTAssertNil(statusStateMachine.checkinSymptoms)
         XCTAssertFalse(vc.errorView.isHidden)
-        XCTAssertEqual(vc.confirmSwitch.layer.borderColor, UIColor(named: "NHS Error")!.cgColor)
+        XCTAssertEqual(vc.confirmSwitch.layer.borderColor, UIColor.nhs.error!.cgColor)
     }
 
     func testSubmitTappedWithConfirmationSwitchOn() throws {

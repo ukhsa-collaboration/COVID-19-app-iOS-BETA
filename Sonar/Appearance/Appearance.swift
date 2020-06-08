@@ -12,15 +12,15 @@ enum Appearance {}
 extension Appearance {
     static func setup() {
         UINavigationBar.appearance().titleTextAttributes = [
-            NSAttributedString.Key.foregroundColor: UIColor(named: "NHS Blue")!,
+            NSAttributedString.Key.foregroundColor: UIColor.nhs.blue,
             NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .headline),
         ]
-        UINavigationBar.appearance().tintColor = UIColor(named: "NHS Blue")!
+        UINavigationBar.appearance().tintColor = UIColor.nhs.blue
 
-        UILabel.appearance().textColor = UIColor(named: "NHS Text")
+        UILabel.appearance().textColor = UIColor.nhs.text
         UILabel.appearance().adjustsFontForContentSizeCategory = true
         UILabel.appearance().numberOfLines = 0
 
-        UILabel.appearance(whenContainedInInstancesOf: [LinkButton.self]).textColor = UIColor(named: "NHS Link")
+        UILabel.appearance(whenContainedInInstancesOf: [LinkButton.self]).textColor = UIColor.nhs.link
     }
 }

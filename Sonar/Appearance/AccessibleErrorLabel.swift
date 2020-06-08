@@ -10,7 +10,7 @@ import UIKit
 
 class AccessibleErrorLabel : UILabel {
     override func awakeFromNib() {
-        textColor = UIColor(named: "NHS Error")
+        textColor = UIColor.nhs.error
         font = UIFont.preferredFont(forTextStyle: .callout)
         adjustsFontSizeToFitWidth = true
         numberOfLines = 0

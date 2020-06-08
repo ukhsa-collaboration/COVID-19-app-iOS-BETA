@@ -100,7 +100,7 @@ class SymptomsSummaryViewController: UIViewController, Storyboarded {
         
         symptomTexts.forEach { symptomText in
             let divider = UIView()
-            divider.backgroundColor = UIColor(named: "NHS Grey 3")
+            divider.backgroundColor = UIColor.nhs.grey.three
             checkAnswersStackView.addArrangedSubview(divider)
             
             let label = UILabel()

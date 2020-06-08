@@ -75,7 +75,7 @@ class RegistrationStatusViewController: UIViewController, Storyboarded {
     private func showRegisteringStatus() {
         registrationStatusText.text = "REGISTRATION_IN_PROGRESS".localized
         showSpinner()
-        registrationStatusText.textColor = UIColor(named: "NHS Text")
+        registrationStatusText.textColor = UIColor.nhs.text
         view.backgroundColor = nil
         registrationRetryButton.isHidden = true
     }
@@ -84,7 +84,7 @@ class RegistrationStatusViewController: UIViewController, Storyboarded {
         registrationStatusText.text = "REGISTRATION_OK".localized
         registrationStatusIcon.image = UIImage(named: "Registration_status_ok")
         hideSpinner()
-        registrationStatusText.textColor = UIColor(named: "NHS Text")
+        registrationStatusText.textColor = UIColor.nhs.text
         view.backgroundColor = nil
         registrationRetryButton.isHidden = true
 
@@ -96,7 +96,7 @@ class RegistrationStatusViewController: UIViewController, Storyboarded {
         registrationStatusIcon.image = UIImage(named: "Registration_status_failure")
         hideSpinner()
         registrationStatusText.textColor = UIColor.white
-        view.backgroundColor = UIColor(named: "Error Grey")
+        view.backgroundColor = UIColor.nhs.errorGrey
         registrationRetryButton.isHidden = false
 
         UIAccessibility.post(notification: .layoutChanged, argument: view)
