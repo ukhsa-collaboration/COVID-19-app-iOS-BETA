@@ -42,33 +42,33 @@ extension URLSession: Session {
         let completion = { result in queue.addOperation { completion(result) } }
 
         let urlRequest = request.urlRequest()
-        
+
         let task = dataTask(with: urlRequest) { data, response, error in
-            if let error = error {
-                completion(.failure(error))
+            guard error == nil else {
+                // force-unwrap because Swift's flow-typing isn't smart enough to recognize the == nil
+                completion(.failure(error!))
+                return
             }
-            
-            let statusCode = (response as? HTTPURLResponse)?.statusCode
-            do {
-                switch (data, statusCode, error) {
-                case (let data?, let statusCode?, _) where 200..<300 ~= statusCode:
-                    let parsed = try request.parse(data)
-                    completion(.success(parsed))
 
-                case (let data?, let statusCode?, _):
-                    logger.error("Request to \(urlRequest.url?.path ?? "(unknown)") received \(statusCode). Response body: \(String(bytes: data, encoding: .utf8) ?? "<empty>")")
-                    let userInfo = [NSLocalizedDescriptionKey: "Sorry, your request at this time could not be completed. Please try again later."]
-                    throw NSError(domain: "RequestErrorDomain", code: statusCode, userInfo: userInfo)
-
-                case (_, _, let error?):
-                    throw error
-
-                default:
-                    break
-                }
-            } catch (let error) {
-                completion(.failure(error))
+            guard let httpResponse = response as? HTTPURLResponse else {
+                assertionFailure("Expected an HTTPURLResponse, got \(String(describing: response))")
+                return
             }
+
+            let statusCode = httpResponse.statusCode
+            guard 200..<300 ~= statusCode else {
+                logger.error("Request to \(urlRequest.url?.path ?? "(unknown)") received \(statusCode). Response body: \(data.flatMap { String(bytes: $0, encoding: .utf8) } ?? "<empty>")")
+                let userInfo = [NSLocalizedDescriptionKey: "Sorry, your request at this time could not be completed. Please try again later."]
+                let error = NSError(domain: "RequestErrorDomain", code: statusCode, userInfo: userInfo)
+                completion(.failure(error))
+                return
+            }
+
+            guard let data = data else {
+                assertionFailure("data shouldn't be nil if the error is nil")
+                return
+            }
+            completion(Result { try request.parse(data) })
         }
 
         task.resume()
