@@ -368,8 +368,8 @@ class StatusViewController: UIViewController, Storyboarded {
     }
 
     private func presentDrawer(header: String, detail: String) {
-        dismiss(animated: animateTransitions) { [weak self] in
-            guard let `self` = self else { return }
+//        dismiss(animated: animateTransitions) { [weak self] in
+//            guard let `self` = self else { return }
 
             let drawer = DrawerViewController.instantiate()
             drawer.inject(header: header, detail: detail) { self.reload() }
@@ -378,7 +378,7 @@ class StatusViewController: UIViewController, Storyboarded {
                 inNavigationController: self.navigationController!,
                 usingTransitioningDelegate: self.drawerPresentationManager
             )
-        }
+//        }
     }
 
     private func pleaseIsolateText(until expiryDate: Date) -> String {
