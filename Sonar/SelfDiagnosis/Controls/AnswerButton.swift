@@ -72,8 +72,8 @@ class AnswerButton: UIControl, UpdatesBasedOnAccessibilityDisplayChanges {
         ])
 
         let stack = UIStackView(arrangedSubviews: [
-            textLabel,
             imageView,
+            textLabel,
         ])
         stack.axis = .horizontal
         stack.alignment = .center
