@@ -83,6 +83,7 @@ enum StatusState: Equatable {
     }
     
     struct ExposedSymptomatic: Codable, Equatable, Checkinable, SymptomProvider {
+        let exposed: Exposed
         let symptoms: Symptoms?
         let startDate: Date
         let checkinDate: Date
