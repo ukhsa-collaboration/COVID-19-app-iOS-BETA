@@ -85,16 +85,6 @@ class UITestScreenMaker {
             
         case .status:
             return createNavigationController()
-            
-        case .negativeTestSymptomatic:
-            let startDate = Calendar.current.date(byAdding: .day, value: -3, to: dateProvider())!
-            let checkinDate = Calendar.current.date(byAdding: .day, value: -1, to: dateProvider())!
-            let symptomatic = StatusState.Symptomatic(symptoms: [], startDate: startDate, checkinDate: checkinDate)
-            persistence.statusState = .symptomatic(symptomatic)
-
-            let testTimestamp = Calendar.current.date(byAdding: .day, value: -2, to: dateProvider())!
-            statusStateMachine.received(TestResult(result: .negative, testTimestamp: testTimestamp, type: nil, acknowledgementUrl: nil))
-            return createNavigationController()
         
         case .exposedStatus:
             persistence.statusState = .exposed(StatusState.Exposed(startDate: dateProvider()))

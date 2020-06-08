@@ -233,26 +233,12 @@ class StatusViewControllerTests: TestCase {
 
     func testTestResultNegative() throws {
         let presenter = DrawerPresenterDouble()
-        let mailbox = DrawerMailboxingDouble([.negativeTestResult(symptoms: nil)])
+        let mailbox = DrawerMailboxingDouble([.negativeTestResult])
 
         _ = makeViewController(drawerPresenter: presenter, drawerMailbox: mailbox)
 
         let drawer = try XCTUnwrap(presenter.presented)
         XCTAssertEqual(drawer.header, "NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_HEADER".localized)
-        XCTAssertTrue(mailbox.messages.isEmpty)
-    }
-
-    func testTestResultNegativeWithSymptoms() throws {
-        let presenter = DrawerPresenterDouble()
-        let mailbox = DrawerMailboxingDouble([.negativeTestResult(symptoms: [.temperature])])
-
-        var checkinDrawer: CheckinDrawerViewController?
-        try PresentationSpy.withSpy {
-            let vc = makeViewController(drawerPresenter: presenter, drawerMailbox: mailbox)
-            checkinDrawer = PresentationSpy.presented(by: vc) as? CheckinDrawerViewController
-        }
-
-        XCTAssertNotNil(checkinDrawer)
         XCTAssertTrue(mailbox.messages.isEmpty)
     }
 

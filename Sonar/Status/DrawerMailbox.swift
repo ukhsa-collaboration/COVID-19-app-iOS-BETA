@@ -19,7 +19,7 @@ enum DrawerMessage: Equatable {
     case unexposed
     case symptomsButNotSymptomatic
     case positiveTestResult
-    case negativeTestResult(symptoms: Symptoms?)
+    case negativeTestResult
     case unclearTestResult
 }
 
@@ -58,7 +58,6 @@ extension DrawerMessage: Codable {
 
     enum CodingKeys: String, CodingKey {
         case type
-        case symptoms
     }
 
     init(from decoder: Decoder) throws {
@@ -73,8 +72,7 @@ extension DrawerMessage: Codable {
         case "positiveTestResult":
             self = .positiveTestResult
         case "negativeTestResult":
-            let symptoms = try values.decode(Symptoms?.self, forKey: .symptoms)
-            self = .negativeTestResult(symptoms: symptoms)
+            self = .negativeTestResult
         case "unclearTestResult":
             self = .unclearTestResult
         default:
@@ -92,9 +90,8 @@ extension DrawerMessage: Codable {
             try container.encode("symptomsButNotSymptomatic", forKey: .type)
         case .positiveTestResult:
             try container.encode("positiveTestResult", forKey: .type)
-        case .negativeTestResult(symptoms: let symptoms):
+        case .negativeTestResult:
             try container.encode("negativeTestResult", forKey: .type)
-            try container.encode(symptoms, forKey: .symptoms)
         case .unclearTestResult:
             try container.encode("unclearTestResult", forKey: .type)
         }
