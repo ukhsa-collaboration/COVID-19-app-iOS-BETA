@@ -29,5 +29,32 @@ class ColorTest: XCTestCase {
         let _ = try XCTUnwrap(UIColor.nhs.highlight)
         let _ = try XCTUnwrap(UIColor.nhs.errorGrey)
         let _ = try XCTUnwrap(UIColor.nhs.warmYellow)
+        
+        // This tests all colors in the UIColor.nhs object, even if they have not been added above
+        for color in colors(in: UIColor.nhs) {
+            let _ = try XCTUnwrap(color)
+        }
+    }
+    
+    // Get around casting Any to an optional type
+    private func dynamicCast<T>(_ value: Any, to _: T.Type) -> T? {
+        if let value = value as? T {
+            return value
+        } else {
+            return nil
+        }
+    }
+
+    private func colors(in object: Any) -> [UIColor?] {
+        let children = Mirror(reflecting: object).children
+        if children.count == 0 {
+            // Return an Optional UIColor, or nil if it is some other type
+            return [dynamicCast(object, to: UIColor?.self) ?? nil]
+        }
+        
+        // Check if any sub-objects are a UIColor
+        return children.flatMap {
+            return colors(in: $0.value)
+        }
     }
 }
