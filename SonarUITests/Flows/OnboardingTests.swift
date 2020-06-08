@@ -28,7 +28,30 @@ class OnboardingTests: ScreenTestCase {
         // partial post code screen
         XCTAssert(postcodeScreenTitle.exists)
         postcodeField.tap()
-        postcodeField.typeText("A1\n")
+        postcodeField.typeText("\n")
+        XCTAssertFalse(isKeyboardShown)
+        
+        postcodeField.tap()
+        postcodeField.typeText("C\n")
+        XCTAssertFalse(isKeyboardShown)
+        
+        postcodeField.tap()
+        postcodeField.typeText("E\n")
+        XCTAssertFalse(isKeyboardShown)
+
+        postcodeField.tap()
+        postcodeField.typeText("1\n")
+        XCTAssertFalse(isKeyboardShown)
+
+        postcodeField.tap()
+        postcodeField.typeText("B\n")
+        XCTAssertFalse(isKeyboardShown)
+
+        postcodeField.tap()
+        postcodeField.typeText("Z\n")
+        XCTAssertFalse(isKeyboardShown)
+        XCTAssertEqual(postcodeField.value as? String, "CE1B")
+        
         continueButton.tap()
         
         // Please allow us Bluetooth and Notifications screen
@@ -94,6 +117,9 @@ private extension OnboardingTests {
         app.buttons["Continue"]
     }
     
+    var isKeyboardShown: Bool {
+        app.keyboards.count > 0
+    }
 }
 
 private extension OnboardingTests {
