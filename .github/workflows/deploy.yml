@@ -134,7 +134,7 @@ jobs:
           token: ${{ secrets.deployment_token }}
           repository: nhsx/sonar-ci-tools
           path: ci-tools
-          ref: master
+          ref: v0.2.0
 
       - name: Update Backlog
         uses: ./ci-tools/.github/actions/deliver_tracker_stories_with_build
