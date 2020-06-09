@@ -485,8 +485,8 @@ class StatusStateMachineTests: XCTestCase {
 
         machine.received(positiveTestResult)
         
-        let endDate = StatusState.PositiveTestResult.firstCheckin(from: testTimestamp)
-        XCTAssertEqual(machine.state, .positiveTestResult(StatusState.PositiveTestResult(
+        let endDate = StatusState.Positive.firstCheckin(from: testTimestamp)
+        XCTAssertEqual(machine.state, .positive(StatusState.Positive(
             checkinDate: endDate, symptoms: nil, startDate: testTimestamp)
         ))
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
@@ -507,8 +507,8 @@ class StatusStateMachineTests: XCTestCase {
         )
 
         machine.received(positiveTestResult)
-        let endDate = StatusState.PositiveTestResult.firstCheckin(from: testTimestamp)
-        XCTAssertEqual(machine.state, .positiveTestResult(StatusState.PositiveTestResult(
+        let endDate = StatusState.Positive.firstCheckin(from: testTimestamp)
+        XCTAssertEqual(machine.state, .positive(StatusState.Positive(
             checkinDate: endDate, symptoms: nil, startDate: testTimestamp)
         ))
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
@@ -534,7 +534,7 @@ class StatusStateMachineTests: XCTestCase {
         )
 
         machine.received(positiveTestResult)
-        XCTAssertEqual(machine.state, .positiveTestResult(StatusState.PositiveTestResult(
+        XCTAssertEqual(machine.state, .positive(StatusState.Positive(
             checkinDate: checkinDate, symptoms: [.cough], startDate: testTimestamp)
         ))
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
@@ -559,7 +559,7 @@ class StatusStateMachineTests: XCTestCase {
 
         machine.received(positiveTestResult)
 
-        XCTAssertEqual(machine.state, .positiveTestResult(StatusState.PositiveTestResult(
+        XCTAssertEqual(machine.state, .positive(StatusState.Positive(
             checkinDate: checkinDate, symptoms: [.temperature], startDate: testTimestamp)
         ))
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
@@ -806,8 +806,8 @@ class StatusStateMachineTests: XCTestCase {
     func testReceivedNegativeTestResultWithEarlierPositiveTest() throws {
         let positiveDate = Calendar.current.date(from: DateComponents(month: 5, day: 10))!
         let testDate = Calendar.current.date(from: DateComponents(month: 6, day: 10))!
-        let endDate = StatusState.PositiveTestResult.firstCheckin(from: positiveDate)
-        let positiveTestResult = StatusState.positiveTestResult(.init(checkinDate: endDate,
+        let endDate = StatusState.Positive.firstCheckin(from: positiveDate)
+        let positiveTestResult = StatusState.positive(.init(checkinDate: endDate,
                                                                       symptoms: nil,
                                                                       startDate: positiveDate))
         persisting.statusState = positiveTestResult
@@ -830,9 +830,9 @@ class StatusStateMachineTests: XCTestCase {
     func testReceivedNegativeTestResultWithLaterPositiveTest() throws {
         let positiveDate = Calendar.current.date(from: DateComponents(month: 6, day: 10))!
         let testDate = Calendar.current.date(from: DateComponents(month: 5, day: 10))!
-        let endDate = StatusState.PositiveTestResult.firstCheckin(from: positiveDate)
-        let positive = StatusState.PositiveTestResult(checkinDate: endDate, symptoms: nil, startDate: positiveDate)
-        persisting.statusState = .positiveTestResult(positive)
+        let endDate = StatusState.Positive.firstCheckin(from: positiveDate)
+        let positive = StatusState.Positive(checkinDate: endDate, symptoms: nil, startDate: positiveDate)
+        persisting.statusState = .positive(positive)
 
         let testResult = TestResult(
             result: .negative,
@@ -841,7 +841,7 @@ class StatusStateMachineTests: XCTestCase {
             acknowledgementUrl: nil
         )
         machine.received(testResult)
-        XCTAssertEqual(machine.state, .positiveTestResult(positive))
+        XCTAssertEqual(machine.state, .positive(positive))
 
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.content.title, "TEST_RESULT_TITLE".localized)
@@ -884,7 +884,7 @@ class StatusStateMachineTests: XCTestCase {
         )
         machine.received(testResult)
         switch machine.state {
-        case .positiveTestResult(_):
+        case .positive(_):
             break;
         default:
             XCTFail("wrong end state")

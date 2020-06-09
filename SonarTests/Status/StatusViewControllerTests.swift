@@ -145,10 +145,10 @@ class StatusViewControllerTests: TestCase {
     
     func testShowsCorrectAdviceInPositiveTestStatus() throws {
         let startDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 30))!
-        let endDate = StatusState.PositiveTestResult.firstCheckin(from: startDate)
+        let endDate = StatusState.Positive.firstCheckin(from: startDate)
         let vc = makeViewController(
             persistence: PersistenceDouble(),
-            statusStateMachine: StatusStateMachiningDouble(state: .positiveTestResult(StatusState.PositiveTestResult(checkinDate: endDate, symptoms: [], startDate: startDate)))
+            statusStateMachine: StatusStateMachiningDouble(state: .positive(StatusState.Positive(checkinDate: endDate, symptoms: [], startDate: startDate)))
         )
         let navigationController = SynchronousNavigationControllerDouble()
         navigationController.viewControllers = [vc]
@@ -200,7 +200,7 @@ class StatusViewControllerTests: TestCase {
         try PresentationSpy.withSpy {
             let checkinDate = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
             let machine = StatusStateMachiningDouble(state:
-                .positiveTestResult(StatusState.PositiveTestResult(
+                .positive(StatusState.Positive(
                     checkinDate: checkinDate, symptoms: [.temperature], startDate: Date()
                 ))
             )

@@ -66,7 +66,7 @@ enum StatusState: Equatable {
         let duration = 14
     }
     
-    struct PositiveTestResult: Codable, Equatable, SymptomProvider, Checkinable {
+    struct Positive: Codable, Equatable, SymptomProvider, Checkinable {
         static func firstCheckin(from startDate: Date) -> Date {
             return nextCheckin(from: startDate, afterDays: 7)
         }
@@ -92,7 +92,7 @@ enum StatusState: Equatable {
     case ok(Ok)                   // default state, previously "blue"
     case symptomatic(Symptomatic) // previously "red" state
     case exposed(Exposed)         // previously "amber" state
-    case positiveTestResult(PositiveTestResult)
+    case positive(Positive)
     case exposedSymptomatic(ExposedSymptomatic)
 
     var isSymptomatic: Bool {
@@ -118,9 +118,7 @@ enum StatusState: Equatable {
         case symptomatic
         case checkin
         case exposed
-        case positiveTestResult
-        case unclearTestResult
-        case negativeTestResult
+        case positive
         case exposedSymptomatic
     }
 }
@@ -136,7 +134,7 @@ extension StatusState {
             return state
         case .symptomatic(let state):
             return state
-        case .positiveTestResult(let state):
+        case .positive(let state):
             return state
         }
     }
@@ -183,9 +181,9 @@ extension StatusState: Encodable {
         case .exposed(let exposed):
             try container.encode("exposed", forKey: .type)
             try container.encode(exposed, forKey: .exposed)
-        case .positiveTestResult(let positiveTestResult):
-            try container.encode("positiveTestResult", forKey: .type)
-            try container.encode(positiveTestResult, forKey: .positiveTestResult)
+        case .positive(let positive):
+            try container.encode("positive", forKey: .type)
+            try container.encode(positive, forKey: .positive)
         case .exposedSymptomatic(let exposedSymptomatic):
             try container.encode("exposedSymptomatic", forKey: .type)
             try container.encode(exposedSymptomatic, forKey: .exposedSymptomatic)
@@ -211,9 +209,9 @@ extension StatusState: Decodable {
         case "exposed":
             let exposed = try values.decode(Exposed.self, forKey: .exposed)
             self = .exposed(exposed)
-        case "positiveTestResult":
-            let positiveTestResult = try values.decode(PositiveTestResult.self, forKey: .positiveTestResult)
-            self = .positiveTestResult(positiveTestResult)
+        case "positive":
+            let positive = try values.decode(Positive.self, forKey: .positive)
+            self = .positive(positive)
         case "exposedSymptomatic":
             let exposedSymptomatic = try values.decode(ExposedSymptomatic.self, forKey: .exposedSymptomatic)
             self = .exposedSymptomatic(exposedSymptomatic)

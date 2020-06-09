@@ -52,7 +52,7 @@ class StatusStateMachine: StatusStateMachining {
             case .exposed(let exposed):
                 add(notificationRequest: adviceChangedNotificationRequest())
                 add(notificationRequest: adviceChangedNotificationRequest(at: exposed.expiryDate))
-            case .ok, .positiveTestResult:
+            case .ok, .positive:
                 break
             }
 
@@ -141,7 +141,7 @@ class StatusStateMachine: StatusStateMachining {
             let symptomatic = StatusState.Symptomatic(symptoms: symptoms, startDate: startDate, checkinDate: checkinDate)
             state = .symptomatic(symptomatic)
             
-        case .symptomatic, .positiveTestResult, .exposedSymptomatic:
+        case .symptomatic, .positive, .exposedSymptomatic:
             assertionFailure("Self-diagnosing is only allowed from ok/exposed")
         }
     }
@@ -150,7 +150,7 @@ class StatusStateMachine: StatusStateMachining {
         switch state {
         case .ok:
              break // Don't need to do anything
-        case .symptomatic, .exposedSymptomatic, .positiveTestResult:
+        case .symptomatic, .exposedSymptomatic, .positive:
             if let endDate = state.endDate, currentDate >= endDate {
                 drawerMailbox.post(.checkin)
             }
@@ -170,7 +170,7 @@ class StatusStateMachine: StatusStateMachining {
             checkin(state: state, symptoms: symptoms)
         case .symptomatic(let state):
             checkin(state: state, symptoms: symptoms)
-        case .positiveTestResult(let state):
+        case .positive(let state):
             checkin(state: state, symptoms: symptoms)
         }
     }
@@ -178,9 +178,9 @@ class StatusStateMachine: StatusStateMachining {
     func checkin<T>(state: T, symptoms: Symptoms) where T: Checkinable & SymptomProvider {
         if symptoms.contains(.temperature) {
             let checkinDate = T.nextCheckin(from: currentDate)
-            if state is StatusState.PositiveTestResult {
-                let nextCheckin = StatusState.PositiveTestResult(checkinDate: checkinDate, symptoms: symptoms, startDate: state.startDate)
-                self.state = .positiveTestResult(nextCheckin)
+            if state is StatusState.Positive {
+                let nextCheckin = StatusState.Positive(checkinDate: checkinDate, symptoms: symptoms, startDate: state.startDate)
+                self.state = .positive(nextCheckin)
             } else {
                 let nextCheckin = StatusState.Symptomatic(symptoms: symptoms, startDate: state.startDate, checkinDate: checkinDate)
                 self.state = .symptomatic(nextCheckin)
@@ -202,7 +202,7 @@ class StatusStateMachine: StatusStateMachining {
             #warning("Should the duration of the exposed state be reset? (14 days)")
             assertionFailure("The server should never send us another exposure notification if we're already exposed")
             break // ignore repeated exposures
-        case .symptomatic, .positiveTestResult:
+        case .symptomatic, .positive:
             break // don't care about exposures if we're already symptomatic
         }
     }
@@ -213,7 +213,7 @@ class StatusStateMachine: StatusStateMachining {
             add(notificationRequest: adviceChangedNotificationRequest())
             drawerMailbox.post(.unexposed)
             state = .ok(StatusState.Ok())
-        case .ok, .symptomatic, .positiveTestResult, .exposedSymptomatic:
+        case .ok, .symptomatic, .positive, .exposedSymptomatic:
             break // no-op
         }
     }
@@ -236,20 +236,20 @@ class StatusStateMachine: StatusStateMachining {
             switch state {
             case .ok, .exposed:
                 return testDate
-            case .symptomatic, .positiveTestResult, .exposedSymptomatic:
+            case .symptomatic, .positive, .exposedSymptomatic:
                 return min(testDate, state.startDate ?? testDate)
             }
         }()
         
-        let checkinDate = StatusState.PositiveTestResult.firstCheckin(from: startDate)
-        let positive = StatusState.PositiveTestResult(checkinDate: checkinDate, symptoms: state.symptoms, startDate: testDate)
-        state = .positiveTestResult(positive)
+        let checkinDate = StatusState.Positive.firstCheckin(from: startDate)
+        let positive = StatusState.Positive(checkinDate: checkinDate, symptoms: state.symptoms, startDate: testDate)
+        state = .positive(positive)
         drawerMailbox.post(.positiveTestResult)
     }
 
     func handleNegativeTestResult(from testDate: Date) {
         switch state {
-        case .ok, .exposed, .positiveTestResult:
+        case .ok, .exposed, .positive:
             break
         case .exposedSymptomatic(let exposedSymptomatic):
             if testDate > exposedSymptomatic.startDate {

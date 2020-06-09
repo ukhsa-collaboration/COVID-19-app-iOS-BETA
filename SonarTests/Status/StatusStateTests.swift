@@ -48,6 +48,30 @@ class StatusStateTests: XCTestCase {
          XCTAssertEqual(decoded, statusState)
      }
 
+    func testCodablePositive() throws {
+         let statusState: StatusState = .positive(StatusState.Positive(
+            checkinDate: Date(), symptoms: [.cough], startDate: Date()))
+
+         let encoded = try encoder.encode(statusState)
+         let decoded = try decoder.decode(StatusState.self, from: encoded)
+
+         XCTAssertEqual(decoded, statusState)
+     }
+
+    func testCodableExposedSymptomatic() throws {
+         let statusState: StatusState = .exposedSymptomatic(StatusState.ExposedSymptomatic(
+            exposed: StatusState.Exposed(startDate: Date()),
+            symptoms: [.cough],
+            startDate: Date(),
+            checkinDate: Date()
+         ))
+
+         let encoded = try encoder.encode(statusState)
+         let decoded = try decoder.decode(StatusState.self, from: encoded)
+
+         XCTAssertEqual(decoded, statusState)
+     }
+
     func testCheckinDateMathBeforeSeven() {
         let startDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 1, hour: 6))!
         let checkinDate = StatusState.Symptomatic.nextCheckin(from: startDate, afterDays: 7)
@@ -80,8 +104,8 @@ class StatusStateTests: XCTestCase {
     
     func testPositiveTestResultChecksInAfterSevenDays() {
         let startDate = Calendar.current.date(from: DateComponents(year: 2020, month: 5, day: 14, hour: 7))!
-        let endDate = StatusState.PositiveTestResult.firstCheckin(from: startDate)
-        let positiveTestResult = StatusState.PositiveTestResult(checkinDate: endDate, symptoms: [], startDate: startDate)
+        let endDate = StatusState.Positive.firstCheckin(from: startDate)
+        let positiveTestResult = StatusState.Positive(checkinDate: endDate, symptoms: [], startDate: startDate)
 
         XCTAssertEqual(
             positiveTestResult.checkinDate,
