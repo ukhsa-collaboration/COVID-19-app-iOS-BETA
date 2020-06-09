@@ -25,7 +25,7 @@ class RootViewController: UIViewController {
     private var statusStateMachine: StatusStateMachining!
     private var urlOpener: TestableUrlOpener!
     private var accessibilityChangeNotifier: AccessibilityChangeNotifier!
-    private weak var presentedSetupErorrViewController: UIViewController? = nil
+    private weak var presentedSetupErrorViewController: UIViewController? = nil
 
     private var statusViewController: StatusViewController!
 
@@ -162,14 +162,17 @@ class RootViewController: UIViewController {
     }
     
     private func showSetupError(viewController: UIViewController) {
-        viewController.modalPresentationStyle = .fullScreen
-        presentedSetupErorrViewController = viewController
-        present(viewController, animated: true)
+        if presentedSetupErrorViewController == nil {
+            viewController.modalPresentationStyle = .fullScreen
+            presentedSetupErrorViewController = viewController
+            present(viewController, animated: true)
+        }
     }
     
     private func dismissSetupError() {
-        if self.presentedSetupErorrViewController != nil {
+        if self.presentedSetupErrorViewController != nil {
             self.dismiss(animated: true)
+            presentedSetupErrorViewController = nil
         }
     }
                 
