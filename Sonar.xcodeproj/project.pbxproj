@@ -25,7 +25,7 @@
 		090DEE10244F8BF600268170 /* BluetoothIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090DEE0F244F8BF600268170 /* BluetoothIssueViewController.swift */; };
 		092BB5AB244622200036B30E /* RootViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092BB5AA244622200036B30E /* RootViewControllerTests.swift */; };
 		092F5AE024859B81001A06B7 /* UnderlinedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092F5ADF24859B81001A06B7 /* UnderlinedButton.swift */; };
-		0935CCEA248FE22D0008E868 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0935CCE9248FE22D0008E868 /* AppDelegate.swift */; };
+		0935CCEA248FE22D0008E868 /* RegistrationCanaryAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0935CCE9248FE22D0008E868 /* RegistrationCanaryAppDelegate.swift */; };
 		0935CCEE248FE22D0008E868 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0935CCED248FE22D0008E868 /* ViewController.swift */; };
 		0935CCF1248FE22D0008E868 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0935CCEF248FE22D0008E868 /* Main.storyboard */; };
 		0935CCF3248FE22E0008E868 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0935CCF2248FE22E0008E868 /* Assets.xcassets */; };
@@ -401,7 +401,7 @@
 		092BB5AA244622200036B30E /* RootViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewControllerTests.swift; sourceTree = "<group>"; };
 		092F5ADF24859B81001A06B7 /* UnderlinedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedButton.swift; sourceTree = "<group>"; };
 		0935CCE7248FE22D0008E868 /* RegistrationCanary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RegistrationCanary.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		0935CCE9248FE22D0008E868 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0935CCE9248FE22D0008E868 /* RegistrationCanaryAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationCanaryAppDelegate.swift; sourceTree = "<group>"; };
 		0935CCED248FE22D0008E868 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0935CCF0248FE22D0008E868 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0935CCF2248FE22E0008E868 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -824,7 +824,7 @@
 			isa = PBXGroup;
 			children = (
 				0935CCFB248FE3250008E868 /* RegistrationCanary.xcconfig */,
-				0935CCE9248FE22D0008E868 /* AppDelegate.swift */,
+				0935CCE9248FE22D0008E868 /* RegistrationCanaryAppDelegate.swift */,
 				0935CCED248FE22D0008E868 /* ViewController.swift */,
 				0935CCEF248FE22D0008E868 /* Main.storyboard */,
 				0935CCF2248FE22E0008E868 /* Assets.xcassets */,
@@ -1906,7 +1906,7 @@
 				0995580F248FF6AF00FE97DE /* RemoteNotificationManager.swift in Sources */,
 				099557FA248FF36300FE97DE /* NoOpRegistrationReminderScheduler.swift in Sources */,
 				09955817248FF7E600FE97DE /* URLSession.swift in Sources */,
-				0935CCEA248FE22D0008E868 /* AppDelegate.swift in Sources */,
+				0935CCEA248FE22D0008E868 /* RegistrationCanaryAppDelegate.swift in Sources */,
 				09955818248FF7F700FE97DE /* TrustValidatingURLSessionDelegate.swift in Sources */,
 				09955808248FF61C00FE97DE /* ConfirmRegistrationRequest.swift in Sources */,
 				09955810248FF6CB00FE97DE /* DispatchQueue+Testable.swift in Sources */,
