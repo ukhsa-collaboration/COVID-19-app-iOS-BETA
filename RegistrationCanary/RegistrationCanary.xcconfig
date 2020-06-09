@@ -1,4 +1,3 @@
 #include ".secret/Sonar.xcconfig"
 ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon
-PRODUCT_BUNDLE_IDENTIFIER = uk.nhs.nhsx.sonar.RegistrationCanary
 INFOPLIST_FILE = RegistrationCanary/Info.plist

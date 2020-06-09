@@ -9,28 +9,14 @@
 import Foundation
 import Logging
 
-struct HMACKey: Equatable, Codable {
-    let data: Data
-}
-
-struct Registration: Equatable {
-    let sonarId: UUID
-    let secretKey: HMACKey
-    let broadcastRotationKey: SecKey
-}
-
-protocol Persisting {
+protocol Persisting: RegistrationPersisting {
     var delegate: PersistenceDelegate? { get nonmutating set }
 
-    var registration: Registration? { get nonmutating set }
-    var partialPostcode: String? { get nonmutating set }
     var bluetoothPermissionRequested: Bool { get nonmutating set }
     var uploadLog: [UploadLog] { get nonmutating set }
     var lastInstalledVersion: String? { get nonmutating set }
     var lastInstalledBuildNumber: String? { get nonmutating set }
-    var registeredPushToken: String? { get nonmutating set }
     var disabledNotificationsStatusView: Bool { get nonmutating set }
-    var acknowledgmentUrls: Set<URL> { get nonmutating set }
     var statusState: StatusState { get nonmutating set }
     var drawerMessages: [DrawerMessage] { get nonmutating set }
 
