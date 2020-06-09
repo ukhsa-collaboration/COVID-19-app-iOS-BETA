@@ -653,7 +653,7 @@ class StatusStateMachineTests: XCTestCase {
         XCTAssertEqual(drawerMailbox.receive(), .negativeTestResult)
     }
 
-    func testReceivedNegativeTestResultWhenExposedSymptomatic() throws {
+    func testReceivedNegativeTestResultAfterExposedSymptomaticStartDate() throws {
         let exposedDate: Date = currentDate
         persisting.statusState = .exposedSymptomatic(
             StatusState.ExposedSymptomatic(
@@ -663,7 +663,8 @@ class StatusStateMachineTests: XCTestCase {
                 checkinDate: Date())
         )
 
-        let testTimestamp = Calendar.current.date(from: DateComponents(month: 5, day: 10))!
+        // test time stamp needs to be more recent than symptom start date
+        let testTimestamp = Calendar.current.date(byAdding: .day, value: 1, to: currentDate)!
         let testResult = TestResult(
             result: .negative,
             testTimestamp: testTimestamp,
@@ -673,6 +674,34 @@ class StatusStateMachineTests: XCTestCase {
 
         machine.received(testResult)
         XCTAssertEqual(machine.state, .exposed(StatusState.Exposed(startDate: exposedDate)))
+
+        let request = try XCTUnwrap(userNotificationCenter.requests.first)
+        XCTAssertEqual(request.content.title, "TEST_RESULT_TITLE".localized)
+        XCTAssertEqual(request.identifier, "testResult.arrived")
+        XCTAssertEqual(drawerMailbox.receive(), .negativeTestResult)
+    }
+    
+    func testReceivedNegativeTestResultBeforeExposedSymptomaticStartDate() throws {
+        let exposedDate: Date = currentDate
+        let exposedStatusState = StatusState.ExposedSymptomatic(
+            exposed: StatusState.Exposed(startDate: exposedDate),
+            symptoms: nil,
+            startDate: Date(),
+            checkinDate: Date()
+        )
+        persisting.statusState = .exposedSymptomatic(exposedStatusState)
+
+        // test time stamp needs to be more recent than symptom start date
+        let testTimestamp = Calendar.current.date(byAdding: .day, value: -1, to: currentDate)!
+        let testResult = TestResult(
+            result: .negative,
+            testTimestamp: testTimestamp,
+            type: nil,
+            acknowledgementUrl: nil
+        )
+
+        machine.received(testResult)
+        XCTAssertEqual(machine.state, .exposedSymptomatic(exposedStatusState))
 
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.content.title, "TEST_RESULT_TITLE".localized)
