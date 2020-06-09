@@ -14,6 +14,12 @@
 		08D77F2824767C6C00EAEBD5 /* UpdatePushNotificationTokenRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D77F2724767C6C00EAEBD5 /* UpdatePushNotificationTokenRequestTests.swift */; };
 		08D77F2A24767DBB00EAEBD5 /* UpdatePushNotificationTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D77F2924767DBB00EAEBD5 /* UpdatePushNotificationTokenRequest.swift */; };
 		08D77F2C2477999100EAEBD5 /* LinkingIdRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D77F2B2477999000EAEBD5 /* LinkingIdRequestTests.swift */; };
+		0901D74324900067008BD048 /* LoggingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F06B2E2434A62C0074C612 /* LoggingManager.swift */; };
+		0901D74424900080008BD048 /* ForwardingLogHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F06B322434AF130074C612 /* ForwardingLogHandler.swift */; };
+		0901D7452490008C008BD048 /* LogEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F06B342434AF9D0074C612 /* LogEvent.swift */; };
+		0901D74624900478008BD048 /* UIViewController+Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = F758B8BF242CB98C003AE16D /* UIViewController+Storyboarded.swift */; };
+		0901D751249007A4008BD048 /* LoggerMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F06B362434C35A0074C612 /* LoggerMetadata.swift */; };
+		0901D7732490106E008BD048 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F618A563245C682500D89517 /* GoogleService-Info.plist */; };
 		090B186F24354D0100870B5D /* RemoteNotificationDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090B186E24354D0100870B5D /* RemoteNotificationDispatcher.swift */; };
 		090B1871243552C300870B5D /* UserNotificationCenterDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090B1870243552C300870B5D /* UserNotificationCenterDouble.swift */; };
 		090DEE10244F8BF600268170 /* BluetoothIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090DEE0F244F8BF600268170 /* BluetoothIssueViewController.swift */; };
@@ -67,6 +73,44 @@
 		0990C166247DB89D007CFDFD /* TestResultNotificationHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0990C165247DB89D007CFDFD /* TestResultNotificationHandlerTests.swift */; };
 		0991B8B2244FB03E0076C58B /* BluetoothPermissionDeniedViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0991B8B1244FB03E0076C58B /* BluetoothPermissionDeniedViewControllerTests.swift */; };
 		0991B8BD2450B9940076C58B /* FixPermissionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0991B8BC2450B9940076C58B /* FixPermissionsViewController.swift */; };
+		099557F8248FF20B00FE97DE /* RegistratonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ED477242D7D050029B729 /* RegistratonService.swift */; };
+		099557FA248FF36300FE97DE /* NoOpRegistrationReminderScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099557F9248FF36300FE97DE /* NoOpRegistrationReminderScheduler.swift */; };
+		099557FC248FF38800FE97DE /* RemoteNotificationDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090B186E24354D0100870B5D /* RemoteNotificationDispatcher.swift */; };
+		099557FD248FF3B400FE97DE /* AppMonitoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8983E617245867CF001F2011 /* AppMonitoring.swift */; };
+		099557FE248FF45900FE97DE /* AppEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8983E616245867CF001F2011 /* AppEvent.swift */; };
+		099557FF248FF46A00FE97DE /* RegistrationReminderScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A9254224536FD300C5DBC1 /* RegistrationReminderScheduler.swift */; };
+		09955800248FF47200FE97DE /* PublicKeyValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896BE90E244F07FF00B3687C /* PublicKeyValidator.swift */; };
+		09955802248FF48C00FE97DE /* ConcreteRegistrationReminderScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09955801248FF48C00FE97DE /* ConcreteRegistrationReminderScheduler.swift */; };
+		09955804248FF55400FE97DE /* RegistrationPersisting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09955803248FF55400FE97DE /* RegistrationPersisting.swift */; };
+		09955805248FF5EE00FE97DE /* RequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F758553924294C8C00CBE1ED /* RequestFactory.swift */; };
+		09955806248FF60400FE97DE /* RegistrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F600A60124297A8E0038DF57 /* RegistrationRequest.swift */; };
+		09955807248FF60C00FE97DE /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209CF242396DA00C7BFF3 /* Session.swift */; };
+		09955808248FF61C00FE97DE /* ConfirmRegistrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C417CB242CB15D00DEF3E2 /* ConfirmRegistrationRequest.swift */; };
+		09955809248FF62500FE97DE /* UIDevice+ModelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217A23BD243B34E8001B8236 /* UIDevice+ModelName.swift */; };
+		0995580B248FF65600FE97DE /* InMemoryRegistrationPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0995580A248FF65600FE97DE /* InMemoryRegistrationPersistence.swift */; };
+		0995580E248FF6A600FE97DE /* BackgroundableTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095283A5247597DA00CDEE55 /* BackgroundableTimer.swift */; };
+		0995580F248FF6AF00FE97DE /* RemoteNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CC2CA8242BC7FC0079432B /* RemoteNotificationManager.swift */; };
+		09955810248FF6CB00FE97DE /* DispatchQueue+Testable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63279242435203600CF7A42 /* DispatchQueue+Testable.swift */; };
+		09955811248FF76600FE97DE /* RegistrationPersisting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09955803248FF55400FE97DE /* RegistrationPersisting.swift */; };
+		09955812248FF77B00FE97DE /* NotificationAcknowledger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F694B1BB2459E9F000C6A5D1 /* NotificationAcknowledger.swift */; };
+		09955813248FF7A900FE97DE /* AcknowledgmentRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F616959E2458A2DA006AABE3 /* AcknowledgmentRequest.swift */; };
+		09955814248FF7BC00FE97DE /* UpdatePushNotificationTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D77F2924767DBB00EAEBD5 /* UpdatePushNotificationTokenRequest.swift */; };
+		09955815248FF7CA00FE97DE /* BroadcastRotationKeyConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E74F8D244DFBDA00273C59 /* BroadcastRotationKeyConverter.swift */; };
+		09955816248FF7D200FE97DE /* SecureRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B3D2E42429112B00573061 /* SecureRequest.swift */; };
+		09955817248FF7E600FE97DE /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209D1242399CF00C7BFF3 /* URLSession.swift */; };
+		09955818248FF7F700FE97DE /* TrustValidatingURLSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CE566A24503E93004A74D0 /* TrustValidatingURLSessionDelegate.swift */; };
+		09955819248FF86300FE97DE /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F618A561245C682500D89517 /* Environment.swift */; };
+		0995581A248FF8C500FE97DE /* FirebaseMessaging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB55242B7EBF002254AD /* FirebaseMessaging.framework */; };
+		0995581C248FF8C500FE97DE /* FirebaseInstanceID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB69242B8D3E002254AD /* FirebaseInstanceID.framework */; };
+		0995581E248FF8C500FE97DE /* FirebaseInstallations.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB6B242B8D84002254AD /* FirebaseInstallations.framework */; };
+		09955820248FF8C500FE97DE /* FirebaseCoreDiagnostics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB56242B7EBF002254AD /* FirebaseCoreDiagnostics.framework */; };
+		09955822248FF8C500FE97DE /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB57242B7EBF002254AD /* FirebaseCore.framework */; };
+		09955824248FF8C500FE97DE /* Protobuf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB59242B7EC0002254AD /* Protobuf.framework */; };
+		09955826248FF8C500FE97DE /* nanopb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB72242B937F002254AD /* nanopb.framework */; };
+		09955828248FF8C500FE97DE /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB6E242B92CF002254AD /* GoogleUtilities.framework */; };
+		0995582A248FF8C500FE97DE /* GoogleDataTransport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB70242B9305002254AD /* GoogleDataTransport.framework */; };
+		0995582D248FF8ED00FE97DE /* PromisesObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB58242B7EC0002254AD /* PromisesObjC.framework */; };
+		09955830248FF8F500FE97DE /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 0995582F248FF8F500FE97DE /* Logging */; };
 		0997D056243BDEEC0067346C /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0997D055243BDEEC0067346C /* RootViewController.swift */; };
 		09A9254324536FD300C5DBC1 /* RegistrationReminderScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A9254224536FD300C5DBC1 /* RegistrationReminderScheduler.swift */; };
 		09A925452453807000C5DBC1 /* RegistrationReminderSchedulerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A925442453807000C5DBC1 /* RegistrationReminderSchedulerTests.swift */; };
@@ -406,6 +450,10 @@
 		0990C165247DB89D007CFDFD /* TestResultNotificationHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestResultNotificationHandlerTests.swift; sourceTree = "<group>"; };
 		0991B8B1244FB03E0076C58B /* BluetoothPermissionDeniedViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothPermissionDeniedViewControllerTests.swift; sourceTree = "<group>"; };
 		0991B8BC2450B9940076C58B /* FixPermissionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixPermissionsViewController.swift; sourceTree = "<group>"; };
+		099557F9248FF36300FE97DE /* NoOpRegistrationReminderScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoOpRegistrationReminderScheduler.swift; sourceTree = "<group>"; };
+		09955801248FF48C00FE97DE /* ConcreteRegistrationReminderScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcreteRegistrationReminderScheduler.swift; sourceTree = "<group>"; };
+		09955803248FF55400FE97DE /* RegistrationPersisting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationPersisting.swift; sourceTree = "<group>"; };
+		0995580A248FF65600FE97DE /* InMemoryRegistrationPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryRegistrationPersistence.swift; sourceTree = "<group>"; };
 		0997D055243BDEEC0067346C /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		09A9254224536FD300C5DBC1 /* RegistrationReminderScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationReminderScheduler.swift; sourceTree = "<group>"; };
 		09A925442453807000C5DBC1 /* RegistrationReminderSchedulerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationReminderSchedulerTests.swift; sourceTree = "<group>"; };
@@ -693,6 +741,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09955822248FF8C500FE97DE /* FirebaseCore.framework in Frameworks */,
+				09955820248FF8C500FE97DE /* FirebaseCoreDiagnostics.framework in Frameworks */,
+				0995581E248FF8C500FE97DE /* FirebaseInstallations.framework in Frameworks */,
+				0995581C248FF8C500FE97DE /* FirebaseInstanceID.framework in Frameworks */,
+				0995581A248FF8C500FE97DE /* FirebaseMessaging.framework in Frameworks */,
+				0995582A248FF8C500FE97DE /* GoogleDataTransport.framework in Frameworks */,
+				09955828248FF8C500FE97DE /* GoogleUtilities.framework in Frameworks */,
+				09955830248FF8F500FE97DE /* Logging in Frameworks */,
+				09955826248FF8C500FE97DE /* nanopb.framework in Frameworks */,
+				0995582D248FF8ED00FE97DE /* PromisesObjC.framework in Frameworks */,
+				09955824248FF8C500FE97DE /* Protobuf.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -771,6 +830,8 @@
 				0935CCF2248FE22E0008E868 /* Assets.xcassets */,
 				0935CCF4248FE22E0008E868 /* LaunchScreen.storyboard */,
 				0935CCF7248FE22E0008E868 /* Info.plist */,
+				099557F9248FF36300FE97DE /* NoOpRegistrationReminderScheduler.swift */,
+				0995580A248FF65600FE97DE /* InMemoryRegistrationPersistence.swift */,
 			);
 			path = RegistrationCanary;
 			sourceTree = "<group>";
@@ -1124,6 +1185,7 @@
 				F6053A0F2472F69D0006939E /* URLs.plist */,
 				6FC63C30241641B8007C8BF3 /* AppDelegate.swift */,
 				F6053A112472F7170006939E /* ContentURLs.swift */,
+				09955803248FF55400FE97DE /* RegistrationPersisting.swift */,
 				214209B9242216B700C7BFF3 /* Persistence.swift */,
 				21E5051424448D880065C69B /* PlistPersister.swift */,
 				0997D055243BDEEC0067346C /* RootViewController.swift */,
@@ -1523,6 +1585,7 @@
 				09A9254224536FD300C5DBC1 /* RegistrationReminderScheduler.swift */,
 				095283A5247597DA00CDEE55 /* BackgroundableTimer.swift */,
 				08D77F2924767DBB00EAEBD5 /* UpdatePushNotificationTokenRequest.swift */,
+				09955801248FF48C00FE97DE /* ConcreteRegistrationReminderScheduler.swift */,
 			);
 			path = Registration;
 			sourceTree = "<group>";
@@ -1569,6 +1632,9 @@
 			dependencies = (
 			);
 			name = RegistrationCanary;
+			packageProductDependencies = (
+				0995582F248FF8F500FE97DE /* Logging */,
+			);
 			productName = RegistrationCanary;
 			productReference = 0935CCE7248FE22D0008E868 /* RegistrationCanary.app */;
 			productType = "com.apple.product-type.application";
@@ -1717,6 +1783,7 @@
 			files = (
 				0935CCF6248FE22E0008E868 /* LaunchScreen.storyboard in Resources */,
 				0935CCF3248FE22E0008E868 /* Assets.xcassets in Resources */,
+				0901D7732490106E008BD048 /* GoogleService-Info.plist in Resources */,
 				0935CCF1248FE22D0008E868 /* Main.storyboard in Resources */,
 				0935CCFC248FE3260008E868 /* RegistrationCanary.xcconfig in Resources */,
 			);
@@ -1818,8 +1885,38 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09955811248FF76600FE97DE /* RegistrationPersisting.swift in Sources */,
+				09955806248FF60400FE97DE /* RegistrationRequest.swift in Sources */,
+				09955805248FF5EE00FE97DE /* RequestFactory.swift in Sources */,
+				0901D74424900080008BD048 /* ForwardingLogHandler.swift in Sources */,
 				0935CCEE248FE22D0008E868 /* ViewController.swift in Sources */,
+				099557FC248FF38800FE97DE /* RemoteNotificationDispatcher.swift in Sources */,
+				09955813248FF7A900FE97DE /* AcknowledgmentRequest.swift in Sources */,
+				0995580E248FF6A600FE97DE /* BackgroundableTimer.swift in Sources */,
+				099557F8248FF20B00FE97DE /* RegistratonService.swift in Sources */,
+				099557FD248FF3B400FE97DE /* AppMonitoring.swift in Sources */,
+				099557FE248FF45900FE97DE /* AppEvent.swift in Sources */,
+				09955807248FF60C00FE97DE /* Session.swift in Sources */,
+				09955815248FF7CA00FE97DE /* BroadcastRotationKeyConverter.swift in Sources */,
+				0901D7452490008C008BD048 /* LogEvent.swift in Sources */,
+				09955814248FF7BC00FE97DE /* UpdatePushNotificationTokenRequest.swift in Sources */,
+				09955812248FF77B00FE97DE /* NotificationAcknowledger.swift in Sources */,
+				0901D751249007A4008BD048 /* LoggerMetadata.swift in Sources */,
+				09955816248FF7D200FE97DE /* SecureRequest.swift in Sources */,
+				0995580F248FF6AF00FE97DE /* RemoteNotificationManager.swift in Sources */,
+				099557FA248FF36300FE97DE /* NoOpRegistrationReminderScheduler.swift in Sources */,
+				09955817248FF7E600FE97DE /* URLSession.swift in Sources */,
 				0935CCEA248FE22D0008E868 /* AppDelegate.swift in Sources */,
+				09955818248FF7F700FE97DE /* TrustValidatingURLSessionDelegate.swift in Sources */,
+				09955808248FF61C00FE97DE /* ConfirmRegistrationRequest.swift in Sources */,
+				09955810248FF6CB00FE97DE /* DispatchQueue+Testable.swift in Sources */,
+				09955819248FF86300FE97DE /* Environment.swift in Sources */,
+				0901D74624900478008BD048 /* UIViewController+Storyboarded.swift in Sources */,
+				0995580B248FF65600FE97DE /* InMemoryRegistrationPersistence.swift in Sources */,
+				099557FF248FF46A00FE97DE /* RegistrationReminderScheduler.swift in Sources */,
+				0901D74324900067008BD048 /* LoggingManager.swift in Sources */,
+				09955809248FF62500FE97DE /* UIDevice+ModelName.swift in Sources */,
+				09955800248FF47200FE97DE /* PublicKeyValidator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1950,6 +2047,7 @@
 				F613936E243FA82B003447E8 /* Appearance.swift in Sources */,
 				0937F78F247461D40010FB3B /* ReferenceCodeContainerViewControllerBase.swift in Sources */,
 				F6F05A342434344200FF4B72 /* StartNowViewController.swift in Sources */,
+				09955804248FF55400FE97DE /* RegistrationPersisting.swift in Sources */,
 				0997D056243BDEEC0067346C /* RootViewController.swift in Sources */,
 				092F5AE024859B81001A06B7 /* UnderlinedButton.swift in Sources */,
 				F6548FA52460DB95005F06FF /* SpinnerView.swift in Sources */,
@@ -2044,6 +2142,7 @@
 				89F06B2F2434A62C0074C612 /* LoggingManager.swift in Sources */,
 				F6A9B4602486F6E400D71370 /* SimulateNotificationViewController.swift in Sources */,
 				09CAA3662440F3B100CE93A6 /* PostcodeViewController.swift in Sources */,
+				09955802248FF48C00FE97DE /* ConcreteRegistrationReminderScheduler.swift in Sources */,
 				F6BBE143246F5870005757BB /* WorkplaceGuidanceViewController.swift in Sources */,
 				F6334E4B24747DC300421B4C /* RegistrationStatusViewController.swift in Sources */,
 				131AB05C2449D85B002136CA /* ContactEventExpiryHandler.swift in Sources */,
@@ -2313,6 +2412,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0995582F248FF8F500FE97DE /* Logging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 89F06B2A2434A2C00074C612 /* XCRemoteSwiftPackageReference "swift-log" */;
+			productName = Logging;
+		};
 		89F06B2B2434A2C00074C612 /* Logging */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 89F06B2A2434A2C00074C612 /* XCRemoteSwiftPackageReference "swift-log" */;

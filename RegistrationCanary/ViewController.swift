@@ -8,13 +8,64 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    }
-
-
+enum State {
+    case initial
+    case registering
+    case succeeded
+    case failed
 }
 
+class ViewController: UIViewController, Storyboarded {
+    static let storyboardName = "Main"
+
+    @IBOutlet var registrationStatusLabel: UILabel!
+    @IBOutlet var registerButton: UIButton!
+        
+    private var state: State = .initial
+    private var registrationService: RegistrationService!
+    
+    func inject(registrationService: RegistrationService) {
+        self.registrationService = registrationService
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(forName: RegistrationCompletedNotification, object: nil, queue: nil) { _ in
+            self.state = .succeeded
+            self.update()
+        }
+        
+        NotificationCenter.default.addObserver(forName: RegistrationFailedNotification, object: nil, queue: nil) { _ in
+            self.state = .failed
+            self.update()
+        }
+        
+        update()
+    }
+
+    @IBAction func register() {
+        state = .registering
+        update()
+        registrationService.register()
+    }
+    
+    private func update() {
+        let prefix = "Current/last registration:"
+        
+        switch state {
+        case .initial:
+            registrationStatusLabel.text = "\(prefix) not started"
+            registerButton.isEnabled = true
+        case .registering:
+            registrationStatusLabel.text = "\(prefix) in progress"
+            registerButton.isEnabled = false
+        case .failed:
+            registrationStatusLabel.text = "\(prefix) failed"
+            registerButton.isEnabled = true
+        case .succeeded:
+            registrationStatusLabel.text = "\(prefix) succeeded"
+            registerButton.isEnabled = true
+        }
+    }
+}

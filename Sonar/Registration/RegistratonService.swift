@@ -21,7 +21,7 @@ fileprivate let delayBeforeAllowingRetrySecs = 60.0 * 60.0
 
 class ConcreteRegistrationService: RegistrationService {
     private let session: Session
-    private let persistence: Persisting
+    private let persistence: RegistrationPersisting
     private let reminderScheduler: RegistrationReminderScheduler
     private let remoteNotificationDispatcher: RemoteNotificationDispatching
     private let notificationCenter: NotificationCenter
@@ -31,7 +31,7 @@ class ConcreteRegistrationService: RegistrationService {
     private var isRegistering = false
     
     init(session: Session,
-         persistence: Persisting,
+         persistence: RegistrationPersisting,
          reminderScheduler: RegistrationReminderScheduler,
          remoteNotificationDispatcher: RemoteNotificationDispatching,
          notificationCenter: NotificationCenter,

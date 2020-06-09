@@ -12,10 +12,10 @@ import Logging
 
 class NotificationAcknowledger {
 
-    let persisting: Persisting
+    let persisting: RegistrationPersisting
     let session: Session
 
-    init(persisting: Persisting, session: Session) {
+    init(persisting: RegistrationPersisting, session: Session) {
         self.persisting = persisting
         self.session = session
     }
