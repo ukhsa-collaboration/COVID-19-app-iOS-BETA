@@ -21,6 +21,7 @@ enum DrawerMessage: Equatable {
     case positiveTestResult
     case negativeTestResult
     case unclearTestResult
+    case checkin
 }
 
 class DrawerMailbox: DrawerMailboxing {
@@ -45,6 +46,10 @@ class DrawerMailbox: DrawerMailboxing {
     }
 
     func post(_ message: DrawerMessage) {
+        if message == .checkin {
+            messages.removeAll { $0 == .checkin }
+        }
+
         messages.append(message)
         notificationCenter.post(name: DrawerMessage.DrawerMessagePosted, object: message)
     }
@@ -75,6 +80,8 @@ extension DrawerMessage: Codable {
             self = .negativeTestResult
         case "unclearTestResult":
             self = .unclearTestResult
+        case "checkin":
+            self = .checkin
         default:
             throw Error.decodingError("Unrecognized type: \(type)")
         }
@@ -94,6 +101,8 @@ extension DrawerMessage: Codable {
             try container.encode("negativeTestResult", forKey: .type)
         case .unclearTestResult:
             try container.encode("unclearTestResult", forKey: .type)
+        case .checkin:
+            try container.encode("checkin", forKey: .type)
         }
     }
 

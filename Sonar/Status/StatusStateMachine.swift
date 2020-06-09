@@ -148,8 +148,12 @@ class StatusStateMachine: StatusStateMachining {
     
     func tick() {
         switch state {
-        case .ok, .symptomatic, .exposedSymptomatic, .positiveTestResult:
-            break // Don't need to do anything
+        case .ok:
+             break // Don't need to do anything
+        case .symptomatic, .exposedSymptomatic, .positiveTestResult:
+            if let endDate = state.endDate, currentDate >= endDate {
+                drawerMailbox.post(.checkin)
+            }
         case .exposed(let exposed):
             guard currentDate >= exposed.expiryDate else { return }
             drawerMailbox.post(.unexposed)

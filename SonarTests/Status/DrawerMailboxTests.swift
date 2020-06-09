@@ -52,6 +52,15 @@ class DrawerMailboxTests: XCTestCase {
         XCTAssertTrue(notificationPosted)
     }
 
+    func testOnlyOneCheckinAtATime() {
+        mailbox.post(.checkin)
+        mailbox.post(.checkin)
+        XCTAssertEqual(persistence.drawerMessages, [.checkin])
+
+        XCTAssertEqual(mailbox.receive(), .checkin)
+        XCTAssertNil(mailbox.receive())
+    }
+
 }
 
 class DrawerMessageTests: XCTestCase {

@@ -164,15 +164,27 @@ class StatusViewControllerTests: TestCase {
     func testDoesNotShowsDrawerAfterCheckinIfTemperature() throws{
         try PresentationSpy.withSpy {
             let persistence = PersistenceDouble(statusState: .symptomatic(StatusState.Symptomatic(symptoms: [.cough], startDate: Date(), checkinDate: Date())))
-            let statusStateMachine = StatusStateMachine(persisting: persistence, contactEventsUploader: ContactEventsUploaderDouble(), drawerMailbox: DrawerMailboxingDouble(), notificationCenter: NotificationCenter(), userNotificationCenter: UserNotificationCenterDouble())
+            
+            let drawerMailbox = DrawerMailboxingDouble()
+            let statusStateMachine = StatusStateMachine(
+                persisting: persistence,
+                contactEventsUploader: ContactEventsUploaderDouble(),
+                drawerMailbox: drawerMailbox,
+                notificationCenter: NotificationCenter(),
+                userNotificationCenter: UserNotificationCenterDouble()
+            )
+            
             let drawerPresenter = DrawerPresenterDouble()
             let vc = makeViewController(
                 persistence: persistence,
                 statusStateMachine: statusStateMachine,
                 loadView: true,
                 makePresentSynchronous: true,
-                drawerPresenter: drawerPresenter
+                drawerPresenter: drawerPresenter,
+                drawerMailbox: drawerMailbox
             )
+            
+            vc.reload()
 
             let promptVc = try XCTUnwrap(PresentationSpy.presented(by: vc) as? CheckinDrawerViewController)
             promptVc.updateSymptoms()
@@ -193,7 +205,7 @@ class StatusViewControllerTests: TestCase {
                 ))
             )
             let presenter = DrawerPresenterDouble()
-            let mailbox = DrawerMailboxingDouble([.positiveTestResult])
+            let mailbox = DrawerMailboxingDouble([.positiveTestResult, .checkin])
 
             let vc = makeViewController(
                 statusStateMachine: machine,
@@ -201,9 +213,7 @@ class StatusViewControllerTests: TestCase {
                 drawerPresenter: presenter,
                 drawerMailbox: mailbox
             )
-
-            wait { presenter.presented != nil }
-
+            
             let drawer = try XCTUnwrap(presenter.presented)
             drawer.closeTapped()
 
