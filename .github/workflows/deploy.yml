@@ -128,19 +128,20 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Checkout Sonar CI Github Repo
+        uses: actions/checkout@01aeccc #v2.1.0
+        with:
+          token: ${{ secrets.deployment_token }}
+          repository: nhsx/sonar-ci-tools
+          path: ci-tools
+          ref: master
+
       - name: Update Backlog
-        env:
-          GITHUB_TOKEN: ${{ secrets.deployment_token }}
-          BUILD: ${{ needs.upload.outputs.build-number }}
-          PIVOTAL_TRACKER_API_TOKEN: ${{ secrets.pivotal_tracker_api_token }}
-          PROJECT_ID: ${{ secrets.pivotal_tracker_project_id }}
-        run: |
-          git fetch --tags
-
-          previous_tag=${{ needs.upload.outputs.previous-tag }}
-          tag=${{ needs.upload.outputs.tag }}
-
-          ./bin/update-backlog ${previous_tag}..${tag}
+        uses: ./ci-tools/.github/actions/deliver_tracker_stories_with_build
+        with:
+          tracker_token: ${{ secrets.pivotal_tracker_api_token }}
+          revision_range: ${{ needs.upload.outputs.previous-tag }}..${{ needs.upload.outputs.tag }}
+          build_version: ${{ needs.upload.outputs.build-number }}
 
   tag-as-supported:
     runs-on:
