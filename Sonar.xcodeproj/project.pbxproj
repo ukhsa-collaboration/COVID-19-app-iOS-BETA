@@ -19,6 +19,12 @@
 		090DEE10244F8BF600268170 /* BluetoothIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090DEE0F244F8BF600268170 /* BluetoothIssueViewController.swift */; };
 		092BB5AB244622200036B30E /* RootViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092BB5AA244622200036B30E /* RootViewControllerTests.swift */; };
 		092F5AE024859B81001A06B7 /* UnderlinedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092F5ADF24859B81001A06B7 /* UnderlinedButton.swift */; };
+		0935CCEA248FE22D0008E868 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0935CCE9248FE22D0008E868 /* AppDelegate.swift */; };
+		0935CCEE248FE22D0008E868 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0935CCED248FE22D0008E868 /* ViewController.swift */; };
+		0935CCF1248FE22D0008E868 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0935CCEF248FE22D0008E868 /* Main.storyboard */; };
+		0935CCF3248FE22E0008E868 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0935CCF2248FE22E0008E868 /* Assets.xcassets */; };
+		0935CCF6248FE22E0008E868 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0935CCF4248FE22E0008E868 /* LaunchScreen.storyboard */; };
+		0935CCFC248FE3260008E868 /* RegistrationCanary.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 0935CCFB248FE3250008E868 /* RegistrationCanary.xcconfig */; };
 		0937F78F247461D40010FB3B /* ReferenceCodeContainerViewControllerBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0937F78E247461D40010FB3B /* ReferenceCodeContainerViewControllerBase.swift */; };
 		0938D9062474473E006FAADF /* BookTestContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0938D9052474473E006FAADF /* BookTestContainerViewController.swift */; };
 		0938D9092474484B006FAADF /* BookTestContainerViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0938D9082474484B006FAADF /* BookTestContainerViewControllerTests.swift */; };
@@ -350,6 +356,14 @@
 		090DEE0F244F8BF600268170 /* BluetoothIssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothIssueViewController.swift; sourceTree = "<group>"; };
 		092BB5AA244622200036B30E /* RootViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewControllerTests.swift; sourceTree = "<group>"; };
 		092F5ADF24859B81001A06B7 /* UnderlinedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedButton.swift; sourceTree = "<group>"; };
+		0935CCE7248FE22D0008E868 /* RegistrationCanary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RegistrationCanary.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0935CCE9248FE22D0008E868 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0935CCED248FE22D0008E868 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		0935CCF0248FE22D0008E868 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		0935CCF2248FE22E0008E868 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0935CCF5248FE22E0008E868 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		0935CCF7248FE22E0008E868 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0935CCFB248FE3250008E868 /* RegistrationCanary.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = RegistrationCanary.xcconfig; sourceTree = "<group>"; };
 		0937F78E247461D40010FB3B /* ReferenceCodeContainerViewControllerBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceCodeContainerViewControllerBase.swift; sourceTree = "<group>"; };
 		0938D9052474473E006FAADF /* BookTestContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTestContainerViewController.swift; sourceTree = "<group>"; };
 		0938D9082474484B006FAADF /* BookTestContainerViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTestContainerViewControllerTests.swift; sourceTree = "<group>"; };
@@ -675,6 +689,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0935CCE4248FE22D0008E868 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		214209BC2422276800C7BFF3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -738,6 +759,20 @@
 				068B8ABB245C11C0000EAB4C /* clean-artifacts.yml */,
 			);
 			path = workflows;
+			sourceTree = "<group>";
+		};
+		0935CCE8248FE22D0008E868 /* RegistrationCanary */ = {
+			isa = PBXGroup;
+			children = (
+				0935CCFB248FE3250008E868 /* RegistrationCanary.xcconfig */,
+				0935CCE9248FE22D0008E868 /* AppDelegate.swift */,
+				0935CCED248FE22D0008E868 /* ViewController.swift */,
+				0935CCEF248FE22D0008E868 /* Main.storyboard */,
+				0935CCF2248FE22E0008E868 /* Assets.xcassets */,
+				0935CCF4248FE22E0008E868 /* LaunchScreen.storyboard */,
+				0935CCF7248FE22E0008E868 /* Info.plist */,
+			);
+			path = RegistrationCanary;
 			sourceTree = "<group>";
 		};
 		0964B37E2463293D0022EF97 /* Extensions */ = {
@@ -1062,6 +1097,7 @@
 				214209C02422276800C7BFF3 /* SonarTests */,
 				895D9DDF2437383300573D4D /* SonarUITests */,
 				B7363DD42468B35700193E04 /* SonarPactTests */,
+				0935CCE8248FE22D0008E868 /* RegistrationCanary */,
 				21B3D2E62429115600573061 /* Frameworks */,
 				6FC63C2E241641B8007C8BF3 /* Products */,
 			);
@@ -1074,6 +1110,7 @@
 				214209BF2422276800C7BFF3 /* SonarTests.xctest */,
 				895D9DDE2437383300573D4D /* SonarUITests.xctest */,
 				B7363DD32468B35700193E04 /* SonarPactTests.xctest */,
+				0935CCE7248FE22D0008E868 /* RegistrationCanary.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1519,6 +1556,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		0935CCE6248FE22D0008E868 /* RegistrationCanary */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0935CCFA248FE22E0008E868 /* Build configuration list for PBXNativeTarget "RegistrationCanary" */;
+			buildPhases = (
+				0935CCE3248FE22D0008E868 /* Sources */,
+				0935CCE4248FE22D0008E868 /* Frameworks */,
+				0935CCE5248FE22D0008E868 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RegistrationCanary;
+			productName = RegistrationCanary;
+			productReference = 0935CCE7248FE22D0008E868 /* RegistrationCanary.app */;
+			productType = "com.apple.product-type.application";
+		};
 		214209BE2422276800C7BFF3 /* SonarTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 214209C62422276800C7BFF3 /* Build configuration list for PBXNativeTarget "SonarTests" */;
@@ -1607,6 +1661,9 @@
 				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = NHSX;
 				TargetAttributes = {
+					0935CCE6248FE22D0008E868 = {
+						CreatedOnToolsVersion = 11.4;
+					};
 					214209BE2422276800C7BFF3 = {
 						CreatedOnToolsVersion = 11.3.1;
 						ProvisioningStyle = Automatic;
@@ -1648,11 +1705,23 @@
 				214209BE2422276800C7BFF3 /* SonarTests */,
 				895D9DDD2437383300573D4D /* SonarUITests */,
 				B7363DD22468B35700193E04 /* SonarPactTests */,
+				0935CCE6248FE22D0008E868 /* RegistrationCanary */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		0935CCE5248FE22D0008E868 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0935CCF6248FE22E0008E868 /* LaunchScreen.storyboard in Resources */,
+				0935CCF3248FE22E0008E868 /* Assets.xcassets in Resources */,
+				0935CCF1248FE22D0008E868 /* Main.storyboard in Resources */,
+				0935CCFC248FE3260008E868 /* RegistrationCanary.xcconfig in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		214209BD2422276800C7BFF3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1745,6 +1814,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0935CCE3248FE22D0008E868 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0935CCEE248FE22D0008E868 /* ViewController.swift in Sources */,
+				0935CCEA248FE22D0008E868 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		214209BB2422276800C7BFF3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2045,6 +2123,22 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		0935CCEF248FE22D0008E868 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0935CCF0248FE22D0008E868 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		0935CCF4248FE22E0008E868 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0935CCF5248FE22E0008E868 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
 		6FC63C39241641BA007C8BF3 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -2056,6 +2150,20 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		0935CCF8248FE22E0008E868 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0935CCFB248FE3250008E868 /* RegistrationCanary.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		0935CCF9248FE22E0008E868 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0935CCFB248FE3250008E868 /* RegistrationCanary.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
 		214209C72422276800C7BFF3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 89896E5E2435EB6500F949EA /* CoLocateTests.xcconfig */;
@@ -2129,6 +2237,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0935CCFA248FE22E0008E868 /* Build configuration list for PBXNativeTarget "RegistrationCanary" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0935CCF8248FE22E0008E868 /* Debug */,
+				0935CCF9248FE22E0008E868 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		214209C62422276800C7BFF3 /* Build configuration list for PBXNativeTarget "SonarTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
