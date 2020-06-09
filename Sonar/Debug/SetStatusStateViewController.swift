@@ -97,25 +97,25 @@ class SetStatusStateViewController: UITableViewController {
                     self.state = .exposed(StatusState.Exposed(startDate: $0))
                 }),
             ]
-        case .positiveTestResult(let positive):
+        case .positive(let positive):
             return [
                 .state("positive", setState),
                 .date("Start Date", positive.startDate, { date in
-                    self.state = .positiveTestResult(StatusState.PositiveTestResult(
+                    self.state = .positive(StatusState.Positive(
                         checkinDate: positive.checkinDate,
                         symptoms: positive.symptoms,
                         startDate: date
                     ))
                 }),
                 .date("Checkin Date", positive.checkinDate, { date in
-                    self.state = .positiveTestResult(StatusState.PositiveTestResult(
+                    self.state = .positive(StatusState.Positive(
                         checkinDate: date,
                         symptoms: positive.symptoms,
                         startDate: positive.startDate
                     ))
                 }),
                 .symptoms(positive.symptoms, { symptoms in
-                    self.state = .positiveTestResult(StatusState.PositiveTestResult(
+                    self.state = .positive(StatusState.Positive(
                         checkinDate: positive.checkinDate,
                         symptoms: symptoms,
                         startDate: positive.startDate
@@ -203,7 +203,7 @@ class SetStatusStateViewController: UITableViewController {
         case "exposed":
             self.state = .exposed(StatusState.Exposed(startDate: Date()))
         case "positive":
-            self.state = .positiveTestResult(StatusState.PositiveTestResult(checkinDate: Date(), symptoms: nil, startDate: Date()))
+            self.state = .positive(StatusState.Positive(checkinDate: Date(), symptoms: nil, startDate: Date()))
         case "exposed symptomatic":
             self.state = .exposedSymptomatic(StatusState.ExposedSymptomatic(
                 exposed: StatusState.Exposed(startDate: Date()),

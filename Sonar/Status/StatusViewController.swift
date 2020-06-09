@@ -298,11 +298,11 @@ class StatusViewController: UIViewController, Storyboarded {
         case .exposedSymptomatic(let exposedSymptomatic):
             setupDetail(for: exposedSymptomatic)
 
-        case .positiveTestResult(let positiveTestResult):
+        case .positive(let positive):
             diagnosisHighlightView.backgroundColor = UIColor.nhs.warmYellow
             diagnosisTitleLabel.text = "Your test result indicates you have coronavirus. Please isolate yourself and your household."
             diagnosisDetailLabel.isHidden = false
-            diagnosisDetailLabel.text = pleaseIsolateText(until: positiveTestResult.checkinDate)
+            diagnosisDetailLabel.text = pleaseIsolateText(until: positive.checkinDate)
             feelUnwellButton.isHidden = true
             bookTestButton.isHidden = true
             stepsDetailLabel.isHidden = true

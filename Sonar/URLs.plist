@@ -37,7 +37,7 @@
 			<key>currentAdvice</key>
 			<string>https://faq.covid19.nhs.uk/article/KA-01078/en-us</string>
 		</dict>
-		<key>positiveTestResult</key>
+		<key>positive</key>
 		<dict>
 			<key>currentAdvice</key>
 			<string>https://faq.covid19.nhs.uk/article/KA-01064/en-us</string>
