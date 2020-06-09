@@ -10,7 +10,7 @@ import UIKit
 import Logging
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class RegistrationCanaryAppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     private lazy var remoteNotificationDispatcher = RemoteNotificationDispatcher(
