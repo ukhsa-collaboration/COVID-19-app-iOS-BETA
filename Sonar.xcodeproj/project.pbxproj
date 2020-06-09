@@ -2253,10 +2253,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0935CCFB248FE3250008E868 /* RegistrationCanary.xcconfig */;
 			buildSettings = {
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
 			};
 			name = Debug;
 		};
@@ -2264,10 +2260,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0935CCFB248FE3250008E868 /* RegistrationCanary.xcconfig */;
 			buildSettings = {
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
 			};
 			name = Release;
 		};
