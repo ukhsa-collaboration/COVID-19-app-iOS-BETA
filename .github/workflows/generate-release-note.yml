@@ -24,13 +24,12 @@ jobs:
           token: ${{ secrets.DEPLOYMENT_TOKEN }}
           repository: nhsx/sonar-ci-tools
           path: ci-tools
-          ref: v0.1.1
+          ref: v0.2.0
 
       - name: Generate release notes
         id: generate_release_notes
         uses: ./ci-tools/.github/actions/generate-release-notes
         with:
-          github_token: ${{ secrets.DEPLOYMENT_TOKEN }}
           tracker_token: ${{ secrets.tracker_api_token }}
           revision_range: ${{ github.event.client_payload.revision_range }}
 
