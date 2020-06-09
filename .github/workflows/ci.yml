@@ -45,6 +45,7 @@ jobs:
         run: |
           xcodebuild -scheme Sonar -configuration release -sdk ${SDK} CODE_SIGNING_ALLOWED=NO
           xcodebuild -scheme Sonar -sdk ${SDK} build-for-testing CODE_SIGNING_ALLOWED=NO
+          xcodebuild -scheme RegistrationCanary -configuration debug -sdk ${SDK} CODE_SIGNING_ALLOWED=NO
 
   test:
     needs: build
