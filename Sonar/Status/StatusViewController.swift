@@ -306,14 +306,6 @@ class StatusViewController: UIViewController, Storyboarded {
             feelUnwellButton.isHidden = true
             bookTestButton.isHidden = true
             stepsDetailLabel.isHidden = true
-            
-            if dateProvider() >= positiveTestResult.checkinDate {
-                presentCheckinDrawer(
-                    for: positiveTestResult.symptoms,
-                    header: "CHECKIN_QUESTIONNAIRE_OVERLAY_HEADER".localized,
-                    detail: "CHECKIN_QUESTIONNAIRE_OVERLAY_DETAIL".localized
-                )
-            }
         }
     }
     
@@ -325,14 +317,6 @@ class StatusViewController: UIViewController, Storyboarded {
         feelUnwellButton.isHidden = true
         bookTestButton.isHidden = false
         stepsDetailLabel.isHidden = true
-
-        if dateProvider() >= state.checkinDate {
-            presentCheckinDrawer(
-                for: state.symptoms,
-                header: "CHECKIN_QUESTIONNAIRE_OVERLAY_HEADER".localized,
-                detail: "CHECKIN_QUESTIONNAIRE_OVERLAY_DETAIL".localized
-            )
-        }
     }
 
     @objc private func showDrawer() {
@@ -363,6 +347,12 @@ class StatusViewController: UIViewController, Storyboarded {
             presentDrawer(
                 header: "TEST_UPDATE_DRAW_INVALID_HEADER".localized,
                 detail: "TEST_UPDATE_DRAW_INVALID_DETAIL".localized
+            )
+        case .checkin:
+            presentCheckinDrawer(
+                for: statusStateMachine.state.symptoms,
+                header: "CHECKIN_QUESTIONNAIRE_OVERLAY_HEADER".localized,
+                detail: "CHECKIN_QUESTIONNAIRE_OVERLAY_DETAIL".localized
             )
         }
     }
