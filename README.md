@@ -43,6 +43,12 @@ cp Sonar/Environments/Sonar.xcconfig.sample .secret/Sonar.xcconfig
   developer.
 - Get a copy of GoogleService-Info.plist from one of the other developers and
   copy that into the `.secret` directory.
+- Create `.secret/RegistrationCanaryEnvironment.swift` with the following contents:
+```
+struct RegistrationCanaryEnvironment {
+    static let apnsProxyHostname = "YOUR_HOSTNAME_OR_IP_ADDRESS"
+}
+```
 - **If Xcode is open, restart Xcode.** Xcode does not handle configuration
   files being changed out from under it gracefully.
 

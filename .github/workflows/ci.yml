@@ -38,6 +38,7 @@ jobs:
           cp Sonar/Environments/Sonar.xcconfig.sample .secret/Sonar.xcconfig
           echo $GOOGLE_SERVICE_INFO_PLIST_INTERNAL > .secret/GoogleService-Info.plist
           cat Sonar/Environments/environment.json | ./bin/make-environment > .secret/Environment.swift
+          echo 'struct RegistrationCanaryEnvironment { static let apnsProxyHostname = "not used" }' > .secret/RegistrationCanaryEnvironment.swift
 
       - name: Run Build
         env:
