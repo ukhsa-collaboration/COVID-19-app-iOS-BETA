@@ -16,9 +16,6 @@ protocol RegistrationService {
 let RegistrationCompletedNotification = Notification.Name("RegistrationCompletedNotification")
 let RegistrationFailedNotification = Notification.Name("RegistrationFailedNotification")
 
-fileprivate let delayBeforeAllowingRetrySecs = 60.0 * 60.0
-
-
 class ConcreteRegistrationService: RegistrationService {
     private let session: Session
     private let persistence: RegistrationPersisting
@@ -29,6 +26,10 @@ class ConcreteRegistrationService: RegistrationService {
     private let timer: BackgroundableTimer
     private var remoteNotificationCompletionHandler: RemoteNotificationCompletionHandler?
     private var isRegistering = false
+    
+    var delayBeforeAllowingRetrySecs = 60.0 * 60.0
+    var timeoutSecs = 60.0 * 60.0
+
     
     init(session: Session,
          persistence: RegistrationPersisting,
@@ -91,13 +92,13 @@ class ConcreteRegistrationService: RegistrationService {
             }
         }
         
-        timer.schedule(deadline: .now() + delayBeforeAllowingRetrySecs) { [weak self] in
+        timer.schedule(deadline: .now() + timeoutSecs) { [weak self] in
             guard let self = self, self.persistence.registration == nil, self.isRegistering else { return }
 
-            logger.error("Registration did not complete within \(delayBeforeAllowingRetrySecs) seconds")
+            logger.error("Registration did not complete within \(self.timeoutSecs) seconds")
             let hasPushToken = self.remoteNotificationDispatcher.pushToken != nil
             self.fail(
-                withError: RegistrationTimeoutError(),
+                withError: RegistrationTimeoutError(delaySecs: self.timeoutSecs),
                 reason: hasPushToken ? .waitingForActivationNotificationTimedOut : .waitingForFCMTokenTimedOut
             )
         }
@@ -235,7 +236,11 @@ class ConcreteRegistrationService: RegistrationService {
 }
 
 fileprivate class RegistrationTimeoutError: Error {
-    let errorDescription = "Registration did not complete within \(delayBeforeAllowingRetrySecs) seconds."
+    let errorDescription: String
+    
+    init(delaySecs: Double) {
+        errorDescription = "Registration did not complete within \(delaySecs) seconds."
+    }
 }
 
 // MARK: - Logging
