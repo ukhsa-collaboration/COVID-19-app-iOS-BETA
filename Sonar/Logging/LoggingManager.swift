@@ -137,8 +137,8 @@ private extension Logger.MetadataValue {
 private let formatter: DateFormatter = {
     let formatter = DateFormatter()
     formatter.locale = Locale(identifier: "en_UK_POSIX")
-    formatter.dateStyle = .medium
-    formatter.timeStyle = .medium
+    formatter.dateStyle = .short
+    formatter.timeStyle = .long
     return formatter
 }()
 
