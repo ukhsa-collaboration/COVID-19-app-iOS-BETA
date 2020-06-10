@@ -36,7 +36,7 @@ class LoggingManager: NSObject {
     }
     
     private func log(_ event: LogEvent) {
-        print(event.description(verbosity: .detailed))
+        print(event.description(verbosity: .standard))
         let entry = "\(event.description())\n"
         DispatchQueue.main.async {
             self.log.append(entry)
