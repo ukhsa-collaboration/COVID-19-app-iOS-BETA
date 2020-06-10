@@ -71,7 +71,28 @@ struct IncomingBroadcastPayload: Equatable, Codable {
         self.transmissionTime = Int32(bigEndian: data.subdata(in: 109..<113).to(type: Int32.self)!)
         self.hmac = data.subdata(in: 113..<129)
     }
-
 }
+
+struct PrintableBroadcastPayload: CustomStringConvertible {
+    
+    let cryptogram: Data
+    
+    init(_ data: Data) {
+        cryptogram = data.subdata(in: 2..<108)
+    }
+
+    init(_ broadcastPayload: BroadcastPayload) {
+        cryptogram = broadcastPayload.cryptogram
+    }
+    
+    var description: String {
+        #if DEBUG || INTERNAL
+        return "<cryptogram: \(cryptogram[0..<12].base64EncodedString())...>"
+        #else
+        return "<cryptogram: XXXXXXXX...>"
+        #endif
+    }
+}
+
 
 fileprivate let logger = Logger(label: "BTLE")

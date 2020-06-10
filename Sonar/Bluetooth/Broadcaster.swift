@@ -108,7 +108,7 @@ class BTLEBroadcaster: NSObject, Broadcaster, CBPeripheralManagerDelegate {
         self.unsentCharacteristicValue = .identity(value: broadcastPayload)
         let success = peripheral.updateValue(broadcastPayload, for: identityCharacteristic, onSubscribedCentrals: nil)
         if success {
-            logger.info("sent identity value \(broadcastPayload)")
+            logger.info("sent identity value \(PrintableBroadcastPayload(broadcastPayload))")
             self.unsentCharacteristicValue = nil
         }
     }
@@ -164,8 +164,12 @@ class BTLEBroadcaster: NSObject, Broadcaster, CBPeripheralManagerDelegate {
             logger.info("error: \(error!))")
             return
         }
-        
-        logger.info("advertising identifier \(broadcastPayloadService.broadcastPayload()?.data().base64EncodedString() ??? "nil")")
+
+        if let data = broadcastPayloadService.broadcastPayload()?.data() {
+            logger.info("advertising broadcast payload: \(PrintableBroadcastPayload(data))")
+        } else {
+            logger.info("advertising with no broadcast payload set")
+        }
 
         // Per #172564329 we don't want to expose this in release builds
         #if DEBUG
@@ -222,7 +226,7 @@ class BTLEBroadcaster: NSObject, Broadcaster, CBPeripheralManagerDelegate {
             return
         }
         
-        logger.info("responding to read request with \(broadcastPayload)")
+        logger.info("responding to read request with \(PrintableBroadcastPayload(broadcastPayload))")
         request.value = broadcastPayload
         peripheral.respond(to: request, withResult: .success)
     }
