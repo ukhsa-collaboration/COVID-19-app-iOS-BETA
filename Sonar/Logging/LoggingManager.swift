@@ -36,7 +36,7 @@ class LoggingManager: NSObject {
     }
     
     private func log(_ event: LogEvent) {
-        print(event.description(verbosity: .detailed))
+        print(event.description(verbosity: .standard))
         let entry = "\(event.description())\n"
         DispatchQueue.main.async {
             self.log.append(entry)
@@ -63,7 +63,7 @@ extension LogEvent {
     
     enum Verbosity {
         case standard
-        case detailed
+        case terse
     }
         
     func description(verbosity: Verbosity = .standard) -> String {
@@ -78,9 +78,9 @@ extension LogEvent {
     private func headline(verbosity: Verbosity) -> String {
         switch verbosity {
         case .standard:
-            return "\(formatter.string(from: date)) \(level): \(label) – \(message)"
-        case .detailed:
             return "\(formatter.string(from: date)) \(level): \(label) \(fileName):\(line):\(function) – \(message)"
+        case .terse:
+            return "\(formatter.string(from: date)) \(level): \(label) – \(message)"
         }
     }
     
@@ -137,7 +137,7 @@ private extension Logger.MetadataValue {
 private let formatter: DateFormatter = {
     let formatter = DateFormatter()
     formatter.locale = Locale(identifier: "en_UK_POSIX")
-    formatter.dateStyle = .none
+    formatter.dateStyle = .medium
     formatter.timeStyle = .medium
     return formatter
 }()
