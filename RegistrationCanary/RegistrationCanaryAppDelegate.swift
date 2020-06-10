@@ -39,6 +39,10 @@ class RegistrationCanaryAppDelegate: UIResponder, UIApplicationDelegate {
     )
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        #if targetEnvironment(simulator)
+        fatalError("Becuase it depends on remote notifications, RegistrationCanary can't be used in the simulator")
+        #endif
+        
         LoggingManager.bootstrap()
         logger.info("Launched")
         

@@ -16,8 +16,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RIc-c6-8W4">
-                                <rect key="frame" x="20" y="81" width="374" height="128"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="150" translatesAutoresizingMaskIntoConstraints="NO" id="RIc-c6-8W4">
+                                <rect key="frame" x="20" y="94.5" width="374" height="150"/>
                                 <connections>
                                     <segue destination="6Hs-Y6-I0g" kind="embed" identifier="EmbedRegistration" id="UfK-3w-8O3"/>
                                 </connections>
@@ -28,23 +28,36 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="APNs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xh1-bP-u3c">
-                                <rect key="frame" x="20" y="239" width="374" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="APNs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xh1-bP-u3c">
+                                <rect key="frame" x="20" y="284.5" width="374" height="21"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <containerView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QI9-XY-PsM">
-                                <rect key="frame" x="20" y="255" width="374" height="128"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="150" translatesAutoresizingMaskIntoConstraints="NO" id="QI9-XY-PsM">
+                                <rect key="frame" x="20" y="315.5" width="374" height="150"/>
                                 <connections>
                                     <segue destination="6Hs-Y6-I0g" kind="embed" identifier="EmbedAPNs" id="M24-JY-a9U"/>
                                 </connections>
                             </containerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OUm-Sp-wbD">
+                                <rect key="frame" x="20" y="495.5" width="374" height="183"/>
+                                <string key="text">Notes:
+
+* Testing too frequently will often cause APNs to throttle notifications to your device.
+
+* Before testing APNs directly, cd to the servers directory and run `node apns-canary-proxy.js`. Make sure your hostname or IP is set correctly in `RegistrationCanaryEnvironment.swift`.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="OUm-Sp-wbD" firstAttribute="top" secondItem="QI9-XY-PsM" secondAttribute="bottom" constant="30" id="1pB-oq-Eku"/>
                             <constraint firstItem="Xh1-bP-u3c" firstAttribute="top" secondItem="RIc-c6-8W4" secondAttribute="bottom" constant="40" id="3ip-iT-hJP"/>
                             <constraint firstItem="QI9-XY-PsM" firstAttribute="top" secondItem="Xh1-bP-u3c" secondAttribute="bottom" constant="10" id="5UF-XJ-akd"/>
+                            <constraint firstItem="OUm-Sp-wbD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="HwN-y7-PQy"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ezu-6K-ODx" secondAttribute="trailing" constant="20" id="JRD-yE-neY"/>
                             <constraint firstItem="QI9-XY-PsM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Joi-sB-QNz"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="QI9-XY-PsM" secondAttribute="trailing" constant="20" id="NLS-WY-Lkz"/>
@@ -52,6 +65,7 @@
                             <constraint firstItem="RIc-c6-8W4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="VtZ-lG-v8s"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Xh1-bP-u3c" secondAttribute="trailing" constant="20" id="Y4i-l4-Vah"/>
                             <constraint firstItem="ezu-6K-ODx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="iNu-1n-98K"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="OUm-Sp-wbD" secondAttribute="trailing" constant="20" id="pFd-xr-Hp3"/>
                             <constraint firstItem="ezu-6K-ODx" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="pLW-KE-5c4"/>
                             <constraint firstItem="RIc-c6-8W4" firstAttribute="top" secondItem="ezu-6K-ODx" secondAttribute="bottom" constant="10" id="t0g-uf-5fn"/>
                             <constraint firstItem="Xh1-bP-u3c" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="tjF-nw-Iyl"/>
