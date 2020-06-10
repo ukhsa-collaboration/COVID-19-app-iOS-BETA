@@ -1,0 +1,64 @@
+%{ import json }%
+%{ import string }%
+%{ from scenario import Scenario }%
+//
+//  MoreStatusStateMachineTests.swift
+//  SonarTests
+//
+//  Created by NHSX on 5/11/20.
+//  Copyright © 2020 NHSX. All rights reserved.
+//
+
+import XCTest
+@testable import Sonar
+
+class MoreStatusStateMachineTests: XCTestCase {
+
+    var machine: StatusStateMachine!
+    var persisting: PersistenceDouble!
+    var contactEventsUploader: ContactEventsUploaderDouble!
+    var drawerMailbox: DrawerMailboxingDouble!
+    var notificationCenter: NotificationCenter!
+    var userNotificationCenter: UserNotificationCenterDouble!
+    var currentDate: Date!
+
+    override func setUp() {
+        persisting = PersistenceDouble()
+        contactEventsUploader = ContactEventsUploaderDouble()
+        drawerMailbox = DrawerMailboxingDouble()
+        notificationCenter = NotificationCenter()
+        userNotificationCenter = UserNotificationCenterDouble()
+        currentDate = Date()
+
+        machine = StatusStateMachine(
+            persisting: persisting,
+            contactEventsUploader: contactEventsUploader,
+            drawerMailbox: drawerMailbox,
+            notificationCenter: notificationCenter,
+            userNotificationCenter: userNotificationCenter,
+            dateProvider: { self.currentDate }
+        )
+    }
+
+% with open(input_json) as file:
+    %{ input = json.load(file) }%
+    %{ scenarios = [Scenario.from_json(json) for json in input] }%
+    % for scenario in scenarios:
+    func test${ scenario.test_name() }() throws {
+
+        % for day in scenario.timeline:
+        currentDate = ${ day.currentDate() }
+        machine.tick()
+        % for action in day.actions:
+        (${ 'try ' if action.throws else '' }{
+            % for line in action.code.splitlines():
+            ${ line }
+            % end
+        }())
+
+        % end
+        % end
+    }
+
+    % end
+}

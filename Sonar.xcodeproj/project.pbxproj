@@ -307,6 +307,8 @@
 		F6334E4B24747DC300421B4C /* RegistrationStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6334E4A24747DC300421B4C /* RegistrationStatusViewController.swift */; };
 		F6334E4D24748B3000421B4C /* RegistrationStatus.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6334E4C24748B3000421B4C /* RegistrationStatus.storyboard */; };
 		F6334E4F24748C3400421B4C /* RegistrationStatusViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6334E4E24748C3400421B4C /* RegistrationStatusViewControllerTests.swift */; };
+		F643C2DB248FF7E60052A282 /* MoreStatusStateMachineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F643C2DA248FF7E60052A282 /* MoreStatusStateMachineTests.swift */; };
+		F643C2E12491891B0052A282 /* MoreStatusStateMachineTests.swift.gyb in Resources */ = {isa = PBXBuildFile; fileRef = F643C2E02491891A0052A282 /* MoreStatusStateMachineTests.swift.gyb */; };
 		F652F72C244A74E900D97950 /* StartDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652F72B244A74E900D97950 /* StartDateViewController.swift */; };
 		F652F72E244E472E00D97950 /* CheckinDrawerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652F72D244E472E00D97950 /* CheckinDrawerViewController.swift */; };
 		F652F730244E4AAD00D97950 /* DrawerPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652F72F244E4AAD00D97950 /* DrawerPresentation.swift */; };
@@ -330,6 +332,8 @@
 		F6AA91F0247ED65A00D086B8 /* DrawerMailboxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AA91EF247ED65A00D086B8 /* DrawerMailboxTests.swift */; };
 		F6AA91F2247F161C00D086B8 /* DrawerMailboxingDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AA91F1247F161C00D086B8 /* DrawerMailboxingDouble.swift */; };
 		F6AB2F20243D359F00386D6B /* SubmitSymptomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */; };
+		F6ACE9BB2497D6F200D32E35 /* MoreStatusStateMachineTests.json in Resources */ = {isa = PBXBuildFile; fileRef = F6ACE9BA2497D6F200D32E35 /* MoreStatusStateMachineTests.json */; };
+		F6ACE9BD2497D88600D32E35 /* scenario.py in Resources */ = {isa = PBXBuildFile; fileRef = F6ACE9BC2497D88600D32E35 /* scenario.py */; };
 		F6BBE13C246F46B4005757BB /* BookTest.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6BBE13B246F46B4005757BB /* BookTest.storyboard */; };
 		F6BBE13E246F46EE005757BB /* BookTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BBE13D246F46EE005757BB /* BookTestViewController.swift */; };
 		F6BBE141246F584F005757BB /* WorkplaceGuidance.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6BBE140246F584F005757BB /* WorkplaceGuidance.storyboard */; };
@@ -693,6 +697,8 @@
 		F6334E4A24747DC300421B4C /* RegistrationStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationStatusViewController.swift; sourceTree = "<group>"; };
 		F6334E4C24748B3000421B4C /* RegistrationStatus.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RegistrationStatus.storyboard; sourceTree = "<group>"; };
 		F6334E4E24748C3400421B4C /* RegistrationStatusViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationStatusViewControllerTests.swift; sourceTree = "<group>"; };
+		F643C2DA248FF7E60052A282 /* MoreStatusStateMachineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreStatusStateMachineTests.swift; sourceTree = "<group>"; };
+		F643C2E02491891A0052A282 /* MoreStatusStateMachineTests.swift.gyb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MoreStatusStateMachineTests.swift.gyb; sourceTree = "<group>"; };
 		F652F72B244A74E900D97950 /* StartDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDateViewController.swift; sourceTree = "<group>"; };
 		F652F72D244E472E00D97950 /* CheckinDrawerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinDrawerViewController.swift; sourceTree = "<group>"; };
 		F652F72F244E4AAD00D97950 /* DrawerPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerPresentation.swift; sourceTree = "<group>"; };
@@ -720,6 +726,8 @@
 		F6AA91EF247ED65A00D086B8 /* DrawerMailboxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerMailboxTests.swift; sourceTree = "<group>"; };
 		F6AA91F1247F161C00D086B8 /* DrawerMailboxingDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerMailboxingDouble.swift; sourceTree = "<group>"; };
 		F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitSymptomsViewController.swift; sourceTree = "<group>"; };
+		F6ACE9BA2497D6F200D32E35 /* MoreStatusStateMachineTests.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MoreStatusStateMachineTests.json; sourceTree = "<group>"; };
+		F6ACE9BC2497D88600D32E35 /* scenario.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = scenario.py; sourceTree = "<group>"; };
 		F6BBE13B246F46B4005757BB /* BookTest.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BookTest.storyboard; sourceTree = "<group>"; };
 		F6BBE13D246F46EE005757BB /* BookTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTestViewController.swift; sourceTree = "<group>"; };
 		F6BBE140246F584F005757BB /* WorkplaceGuidance.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WorkplaceGuidance.storyboard; sourceTree = "<group>"; };
@@ -905,9 +913,13 @@
 		0983ACD1243EB20A00DBB336 /* Status */ = {
 			isa = PBXGroup;
 			children = (
+				F643C2E02491891A0052A282 /* MoreStatusStateMachineTests.swift.gyb */,
+				F6ACE9BA2497D6F200D32E35 /* MoreStatusStateMachineTests.json */,
+				F6ACE9BC2497D88600D32E35 /* scenario.py */,
 				F6AA91EF247ED65A00D086B8 /* DrawerMailboxTests.swift */,
-				F6334E4E24748C3400421B4C /* RegistrationStatusViewControllerTests.swift */,
 				F61695A22458B556006AABE3 /* ExposedNotificationHandlerTests.swift */,
+				F643C2DA248FF7E60052A282 /* MoreStatusStateMachineTests.swift */,
+				F6334E4E24748C3400421B4C /* RegistrationStatusViewControllerTests.swift */,
 				F6DA0A392469DCF7001F0B48 /* StatusStateMachineTests.swift */,
 				F6DA0A352469D95F001F0B48 /* StatusStateMigrationTests.swift */,
 				F6DA0A3D246A123B001F0B48 /* StatusStateTests.swift */,
@@ -1723,6 +1735,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 214209C62422276800C7BFF3 /* Build configuration list for PBXNativeTarget "SonarTests" */;
 			buildPhases = (
+				F643C2DC248FF83E0052A282 /* Generate MoreStatusStateMachineTests */,
 				214209BB2422276800C7BFF3 /* Sources */,
 				214209BC2422276800C7BFF3 /* Frameworks */,
 				214209BD2422276800C7BFF3 /* Resources */,
@@ -1874,10 +1887,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6ACE9BB2497D6F200D32E35 /* MoreStatusStateMachineTests.json in Resources */,
+				F643C2E12491891B0052A282 /* MoreStatusStateMachineTests.swift.gyb in Resources */,
 				896BE909244F06CB00B3687C /* www.google.com.cer in Resources */,
 				896BE90D244F06F600B3687C /* GlobalSign.cer in Resources */,
 				219288852461B1E100691FDD /* build341_contactEvents.plist in Resources */,
 				896BE90B244F06E300B3687C /* GTS CA 1O1.cer in Resources */,
+				F6ACE9BD2497D88600D32E35 /* scenario.py in Resources */,
 				896BE915244F391F00B3687C /* www.apple.com.cer in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1959,6 +1975,28 @@
 			shellPath = /bin/bash;
 			shellScript = "bash \"$PROJECT_DIR/bin/embed_build_info\"\n";
 			showEnvVarsInLog = 0;
+		};
+		F643C2DC248FF83E0052A282 /* Generate MoreStatusStateMachineTests */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/SonarTests/Status/MoreStatusStateMachineTests.swift.gyb",
+				"$(SRCROOT)/SonarTests/Status/MoreStatusStateMachineTests.json",
+				"$(SRCROOT)/SonarTests/Status/scenario.py",
+			);
+			name = "Generate MoreStatusStateMachineTests";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(SRCROOT)/SonarTests/Status/MoreStatusStateMachineTests.swift",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "set -euo pipefail\n\ntemplate=$SCRIPT_INPUT_FILE_0\ninput_json=$SCRIPT_INPUT_FILE_1\noutput_file=$SCRIPT_OUTPUT_FILE_0\n\n./bin/gyb -D input_json=\"$input_json\" --line-directive \"\" -o \"$output_file\" \"$template\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2099,6 +2137,7 @@
 				0938D9092474484B006FAADF /* BookTestContainerViewControllerTests.swift in Sources */,
 				0979FB782458ADE800EB01A8 /* PostcodeValidatorTests.swift in Sources */,
 				09CAA36A2440FC4500CE93A6 /* PostcodeViewControllerTests.swift in Sources */,
+				F643C2DB248FF7E60052A282 /* MoreStatusStateMachineTests.swift in Sources */,
 				F67C5159243E7C1E008E2945 /* SubmitSymptomsViewControllerTests.swift in Sources */,
 				F72EBD4F24361E99009F9328 /* URLSessionTests.swift in Sources */,
 				F6DA0A3A2469DCF7001F0B48 /* StatusStateMachineTests.swift in Sources */,
