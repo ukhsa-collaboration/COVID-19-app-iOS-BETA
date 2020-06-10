@@ -122,7 +122,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         #endif
 
         LoggingManager.bootstrap()
-        logger.info("Launched", metadata: Logger.Metadata(launchOptions: launchOptions))
+        logger.info("Launched \(Bundle.main.versionString)", metadata: Logger.Metadata(launchOptions: launchOptions))
 
         application.registerForRemoteNotifications()
 
