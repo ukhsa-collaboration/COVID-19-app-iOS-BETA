@@ -21,6 +21,7 @@ class BluetoothNurseryDouble: BluetoothNursery {
     var createBroadcasterCalled = false
     var hasStarted = false
     var registrationPassedToStartBluetooth: Registration?
+    var listener: Listener? = ListenerDouble()
     
     func startBluetooth(registration: Registration?) {
         hasStarted = true

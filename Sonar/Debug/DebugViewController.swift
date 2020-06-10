@@ -108,6 +108,9 @@ class DebugViewController: UITableViewController, Storyboarded {
 
         case (1, 4):
             kill(getpid(), SIGINT)
+            
+        case (1, 5):
+            UIApplication.shared.perform(#selector(URLSessionTask.suspend))
 
         case (2, 0):
             contactEventRepository.reset()

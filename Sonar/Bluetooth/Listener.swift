@@ -33,6 +33,8 @@ protocol Listener {
 }
 
 class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDelegate {
+    
+    var reconnectDelay: Int = 0
 
     var broadcaster: Broadcaster
     var stateDelegate: ListenerStateDelegate?
@@ -176,14 +178,22 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
     }
 
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
+        let delay = reconnectDelay == 0 ? "immediately" : "after \(reconnectDelay)s"
         if let error = error {
-            logger.info("attempting to reconnect to peripheral \(peripheral.identifierWithName) after error: \(error)")
+            logger.info("attempting to reconnect \(delay) to peripheral \(peripheral.identifierWithName) after error: \(error)")
         } else {
-            logger.info("attempting to reconnect to peripheral \(peripheral.identifierWithName)")
+            logger.info("attempting to reconnect \(delay) to peripheral \(peripheral.identifierWithName)")
         }
         // iOS devices do not start advertising after being disconnected, so in order to ensure they reconnect if/when
         // they come back into range, we need to tell iOS to immediately reconnect
-        central.connect(peripheral)
+        
+        if reconnectDelay == 0 {
+            central.connect(peripheral)
+        } else {
+            queue.asyncAfter(deadline: .now() + .seconds(reconnectDelay)) {
+                central.connect(peripheral)
+            }
+        }
     }
     
     // MARK: CBPeripheralDelegate

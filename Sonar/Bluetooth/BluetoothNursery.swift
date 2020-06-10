@@ -16,6 +16,7 @@ protocol BluetoothNursery {
     var contactEventPersister: ContactEventPersister { get }
     var stateObserver: BluetoothStateObserving { get }
     var broadcaster: Broadcaster? { get }
+    var listener: Listener? { get }
 
     func startBluetooth(registration: Registration?)
     var hasStarted: Bool { get }
