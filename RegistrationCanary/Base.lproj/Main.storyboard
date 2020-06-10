@@ -29,13 +29,22 @@
                                     <action selector="register" destination="BYZ-38-t0r" eventType="touchUpInside" id="ygP-Vv-nwe"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="x/y attempts succeeded" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xAx-fN-PHe">
+                                <rect key="frame" x="20" y="135" width="374" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="xAx-fN-PHe" firstAttribute="top" secondItem="3ZG-7n-jue" secondAttribute="bottom" constant="10" id="6na-eW-Elp"/>
                             <constraint firstItem="wYp-bH-eAU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="G4g-ig-IY5"/>
                             <constraint firstItem="3ZG-7n-jue" firstAttribute="top" secondItem="wYp-bH-eAU" secondAttribute="bottom" constant="10" id="Gi1-eC-E6A"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="wYp-bH-eAU" secondAttribute="trailing" constant="20" id="LEB-4o-Vxt"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="3ZG-7n-jue" secondAttribute="trailing" constant="20" id="aCZ-EU-8Ln"/>
+                            <constraint firstItem="xAx-fN-PHe" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="aMS-v3-u0R"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="xAx-fN-PHe" secondAttribute="trailing" constant="20" id="fC6-rY-iuy"/>
                             <constraint firstItem="3ZG-7n-jue" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="sFc-zQ-kG2"/>
                             <constraint firstItem="wYp-bH-eAU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="y9X-Aj-ffc"/>
                         </constraints>
@@ -44,6 +53,7 @@
                     </view>
                     <connections>
                         <outlet property="registerButton" destination="3ZG-7n-jue" id="A7k-91-XtG"/>
+                        <outlet property="registrationStatsLabel" destination="xAx-fN-PHe" id="0E6-cQ-jrS"/>
                         <outlet property="registrationStatusLabel" destination="wYp-bH-eAU" id="v6I-c2-i3v"/>
                     </connections>
                 </viewController>

@@ -30,7 +30,7 @@ class RegistrationCanaryAppDelegate: UIResponder, UIApplicationDelegate {
     )
     private lazy var registrationService = ConcreteRegistrationService(
         session: urlSession,
-        persistence: InMemoryRegistrationPersistence(),
+        persistence: persistence,
         reminderScheduler: NoOpRegistrationReminderScheduler(),
         remoteNotificationDispatcher: remoteNotificationDispatcher,
         notificationCenter: NotificationCenter.default,
@@ -41,10 +41,12 @@ class RegistrationCanaryAppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         LoggingManager.bootstrap()
         logger.info("Launched")
-
+        
+        persistence.partialPostcode = "RR"
+        application.registerForRemoteNotifications()
         remoteNotificationManager.configure()
         let vc = ViewController.instantiate()
-        vc.inject(registrationService: registrationService)
+        vc.inject(registrationService: registrationService, persistence: persistence)
         window = UIWindow(frame: UIScreen.main.bounds)
         window!.rootViewController = vc
         window!.makeKeyAndVisible()
