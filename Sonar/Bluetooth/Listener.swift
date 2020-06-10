@@ -259,7 +259,7 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
             
         case (let data?) where characteristic.uuid == Environment.sonarIdCharacteristicUUID:
             if data.count == BroadcastPayload.length {
-                logger.info("read identity from peripheral \(peripheral.identifierWithName): \(data.base64EncodedString())")
+                logger.info("read identity from peripheral \(peripheral.identifierWithName): \(PrintableBroadcastPayload(data))")
                 delegate?.listener(self, didFind: IncomingBroadcastPayload(data: data), for: peripheral)
             } else {
                 logger.info("no identity ready from peripheral \(peripheral.identifierWithName)")
