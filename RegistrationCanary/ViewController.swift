@@ -8,13 +8,15 @@
 
 import UIKit
 
-enum State {
+private enum State {
     case initial
     case registering
     case succeeded
     case failed
 }
 
+private let timeoutSecs = 5 * 60.0
+    
 class ViewController: UIViewController, Storyboarded {
     static let storyboardName = "Main"
 
@@ -23,14 +25,17 @@ class ViewController: UIViewController, Storyboarded {
     @IBOutlet var registrationStatsLabel: UILabel!
     
     private var state: State = .initial
-    private var registrationService: RegistrationService!
+    private var registrationService: ConcreteRegistrationService!
     private var persistence: RegistrationPersisting!
     private var numAttempts: Int = 0
     private var numSuccesses: Int = 0
     
-    func inject(registrationService: RegistrationService, persistence: RegistrationPersisting) {
+    func inject(registrationService: ConcreteRegistrationService, persistence: RegistrationPersisting) {
         self.registrationService = registrationService
         self.persistence = persistence
+        
+        registrationService.timeoutSecs = timeoutSecs
+        registrationService.delayBeforeAllowingRetrySecs = 0
     }
     
     override func viewDidLoad() {

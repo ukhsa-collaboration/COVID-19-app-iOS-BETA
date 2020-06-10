@@ -358,6 +358,7 @@ class RegistrationServiceTests: TestCase {
         XCTAssertNil(failedObserver.lastNotification)
 
         XCTAssertGreaterThanOrEqual(try XCTUnwrap(timeoutQueue.deadline), expectedDeadline)
+        XCTAssertLessThanOrEqual(try XCTUnwrap(timeoutQueue.deadline), expectedDeadline + 1)
         (try XCTUnwrap(timeoutQueue.scheduledBlock))()
         
         XCTAssertNotNil(failedObserver.lastNotification)
@@ -463,6 +464,7 @@ class RegistrationServiceTests: TestCase {
         _ = registrationService.register()
 
         XCTAssertGreaterThanOrEqual(try XCTUnwrap(timeoutQueue.deadline), expectedDeadline)
+        XCTAssertLessThanOrEqual(try XCTUnwrap(timeoutQueue.deadline), expectedDeadline + 1)
         (try XCTUnwrap(timeoutQueue.scheduledBlock))()
         
         XCTAssertNotNil(failedObserver.lastNotification)
@@ -494,6 +496,7 @@ class RegistrationServiceTests: TestCase {
         _ = registrationService.register()
 
         XCTAssertGreaterThanOrEqual(try XCTUnwrap(timeoutQueue.deadline), expectedDeadline)
+        XCTAssertLessThanOrEqual(try XCTUnwrap(timeoutQueue.deadline), expectedDeadline + 1)
         (try XCTUnwrap(timeoutQueue.scheduledBlock))()
 
         XCTAssertNotNil(failedObserver.lastNotification)
@@ -531,6 +534,7 @@ class RegistrationServiceTests: TestCase {
             timeoutQueue: timeoutQueue
         )
         
+        let expectedDeadline = DispatchTime.now() + secondsDelayAfterFailure
         registrationService.register()
         
         // Respond to the first request
@@ -543,6 +547,8 @@ class RegistrationServiceTests: TestCase {
         XCTAssertNil(session.requestSent as? RegistrationRequest)
 
         // But doing it after the delay should work
+        XCTAssertGreaterThanOrEqual(try XCTUnwrap(timeoutQueue.deadline), expectedDeadline)
+        XCTAssertLessThanOrEqual(try XCTUnwrap(timeoutQueue.deadline), expectedDeadline + 1)
         (try XCTUnwrap(timeoutQueue.scheduledBlock))()
         session.requestSent = nil
         registrationService.register()
