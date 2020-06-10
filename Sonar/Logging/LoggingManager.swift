@@ -63,7 +63,7 @@ extension LogEvent {
     
     enum Verbosity {
         case standard
-        case detailed
+        case terse
     }
         
     func description(verbosity: Verbosity = .standard) -> String {
@@ -78,9 +78,9 @@ extension LogEvent {
     private func headline(verbosity: Verbosity) -> String {
         switch verbosity {
         case .standard:
-            return "\(formatter.string(from: date)) \(level): \(label) – \(message)"
-        case .detailed:
             return "\(formatter.string(from: date)) \(level): \(label) \(fileName):\(line):\(function) – \(message)"
+        case .terse:
+            return "\(formatter.string(from: date)) \(level): \(label) – \(message)"
         }
     }
     
