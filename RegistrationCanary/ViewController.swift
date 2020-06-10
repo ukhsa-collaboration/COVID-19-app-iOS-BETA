@@ -20,10 +20,13 @@ class ViewController: UIViewController, Storyboarded {
 
     @IBOutlet var registrationStatusLabel: UILabel!
     @IBOutlet var registerButton: UIButton!
-        
+    @IBOutlet var registrationStatsLabel: UILabel!
+    
     private var state: State = .initial
     private var registrationService: RegistrationService!
     private var persistence: RegistrationPersisting!
+    private var numAttempts: Int = 0
+    private var numSuccesses: Int = 0
     
     func inject(registrationService: RegistrationService, persistence: RegistrationPersisting) {
         self.registrationService = registrationService
@@ -34,12 +37,15 @@ class ViewController: UIViewController, Storyboarded {
         super.viewDidLoad()
         
         NotificationCenter.default.addObserver(forName: RegistrationCompletedNotification, object: nil, queue: nil) { _ in
+            self.numAttempts += 1
+            self.numSuccesses += 1
             self.persistence.registration = nil // allow retry
             self.state = .succeeded
             self.update()
         }
         
         NotificationCenter.default.addObserver(forName: RegistrationFailedNotification, object: nil, queue: nil) { _ in
+            self.numAttempts += 1
             self.state = .failed
             self.update()
         }
@@ -70,5 +76,8 @@ class ViewController: UIViewController, Storyboarded {
             registrationStatusLabel.text = "\(prefix) succeeded"
             registerButton.isEnabled = true
         }
+        
+        let pct = numAttempts == 0 ? "0.0" : String(format: "%.1f", 100 * (Double(numSuccesses) / Double(numAttempts)))
+        registrationStatsLabel.text = "\(numSuccesses)/\(numAttempts) attempts succeeded (\(pct)%)"
     }
 }
