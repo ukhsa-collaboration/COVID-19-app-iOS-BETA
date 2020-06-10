@@ -119,3 +119,6 @@ package-lock.json
 SonarPactTests/Setup/vendor/
 SonarPactTests/**/*.log
 Pacts/
+
+# Python
+*.pyc
