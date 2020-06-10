@@ -17,7 +17,7 @@ private enum State {
 
 private let timeoutSecs = 5 * 60.0
     
-class ViewController: UIViewController, Storyboarded {
+class TryableDashboardViewController: UIViewController, Storyboarded {
     static let storyboardName = "Main"
 
     @IBOutlet var registrationStatusLabel: UILabel!

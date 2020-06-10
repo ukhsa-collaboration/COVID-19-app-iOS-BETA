@@ -21,7 +21,7 @@ class RegistrationCanaryAppDelegate: UIResponder, UIApplicationDelegate {
     private let trustValidator = PublicKeyValidator(trustedKeyHashes: ["hETpgVvaLC0bvcGG3t0cuqiHvr4XyP2MTwCiqhgRWwU="])
     private lazy var urlSession = URLSession(trustValidator: trustValidator)
     private lazy var notificationAcknowledger = NotificationAcknowledger(persisting: persistence, session: urlSession)
-    private lazy var remoteNotificationManager: RemoteNotificationManager = ConcreteRemoteNotificationManager(
+    private lazy var remoteNotificationManager: RemoteNotificationManager = ApnsReportingRemoteNotificationManager(
         firebase: FirebaseApp.self,
         messagingFactory: { Messaging.messaging() },
         userNotificationCenter: UNUserNotificationCenter.current(),
@@ -45,7 +45,7 @@ class RegistrationCanaryAppDelegate: UIResponder, UIApplicationDelegate {
         persistence.partialPostcode = "RR"
         application.registerForRemoteNotifications()
         remoteNotificationManager.configure()
-        let vc = ViewController.instantiate()
+        let vc = RegistrationCanaryViewController.instantiate()
         vc.inject(registrationService: registrationService, persistence: persistence)
         window = UIWindow(frame: UIScreen.main.bounds)
         window!.rootViewController = vc
@@ -56,6 +56,7 @@ class RegistrationCanaryAppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         logger.info("Received notification", metadata: Logger.Metadata(dictionary: userInfo))
+        NotificationCenter.default.post(name: RemoteNotificationReceivedNotification, object: nil, userInfo: userInfo)
         
         remoteNotificationManager.handleNotification(userInfo: userInfo, completionHandler: { result in
              completionHandler(result)
