@@ -23,15 +23,18 @@ class ViewController: UIViewController, Storyboarded {
         
     private var state: State = .initial
     private var registrationService: RegistrationService!
+    private var persistence: RegistrationPersisting!
     
-    func inject(registrationService: RegistrationService) {
+    func inject(registrationService: RegistrationService, persistence: RegistrationPersisting) {
         self.registrationService = registrationService
+        self.persistence = persistence
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         NotificationCenter.default.addObserver(forName: RegistrationCompletedNotification, object: nil, queue: nil) { _ in
+            self.persistence.registration = nil // allow retry
             self.state = .succeeded
             self.update()
         }
