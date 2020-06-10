@@ -48,9 +48,7 @@ class DebugViewController: UITableViewController, Storyboarded {
     }
     
     override func viewDidLoad() {
-        let build = Bundle.main.infoDictionary?["CFBundleVersion"] ?? "unknown"
-        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] ?? "unknown"
-        versionBuildLabel.text = "Version \(version) (build \(build))"
+        versionBuildLabel.text = Bundle.main.versionString
 
         fillLayer = CAShapeLayer()
 
