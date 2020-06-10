@@ -15,7 +15,7 @@ class ReferenceCodeViewController: UIViewController, Storyboarded {
     @IBOutlet var referenceCodeWrapper: UIView!
     @IBOutlet var referenceCodeLabel: UILabel!
     @IBOutlet weak var referenceCodeError: UILabel!
-    @IBOutlet weak var copyButton: ButtonWithDynamicType!
+    @IBOutlet weak var copyButton: UILabel!
 
     private var referenceCode: String?
     private var error: String?
@@ -38,6 +38,12 @@ class ReferenceCodeViewController: UIViewController, Storyboarded {
             let pronouncableRefCode = referenceCode.map { String($0) }.joined(separator: ", ")
             referenceCodeWrapper.accessibilityLabel = "Your app reference code is \(pronouncableRefCode)"
             referenceCodeWrapper.accessibilityHint = "Copies the app reference code."
+            
+            copyButton.attributedText = NSAttributedString(string: "Copy", attributes: [
+                .font: UIFont.preferredFont(forTextStyle: .body),
+                .underlineStyle: NSUnderlineStyle.single.rawValue,
+            ])
+            copyButton.textColor = UIColor.nhs.blue
         } else {
             errorWrapper.isHidden = false
             referenceCodeWrapper.isHidden = true
@@ -47,7 +53,7 @@ class ReferenceCodeViewController: UIViewController, Storyboarded {
 
     @IBAction func copyTapped() {
         UIPasteboard.general.string = referenceCodeLabel.text
-        copyButton.setTitle("COPIED".localized, for: .normal)
+        copyButton.text = "COPIED".localized
         UIAccessibility.post(notification: .layoutChanged, argument: copyButton)
     }
 
