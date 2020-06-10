@@ -142,6 +142,7 @@ jobs:
           tracker_token: ${{ secrets.pivotal_tracker_api_token }}
           revision_range: ${{ needs.upload.outputs.previous-tag }}..${{ needs.upload.outputs.tag }}
           build_version: ${{ needs.upload.outputs.build-number }}
+        continue-on-error: true
 
   tag-as-supported:
     runs-on:
