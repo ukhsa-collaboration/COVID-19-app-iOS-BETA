@@ -143,6 +143,9 @@
 		13F996732460445400FD6740 /* LinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F996722460445400FD6740 /* LinkButton.swift */; };
 		2115C3E624360427009C0F5B /* GradientBackgroundTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2115C3E524360427009C0F5B /* GradientBackgroundTableViewCell.swift */; };
 		212AB3B32490E9430091D92D /* BundleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212AB3B22490E9430091D92D /* BundleExtensions.swift */; };
+		212AB3B5249115FC0091D92D /* BluetoothConfiguration.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 212AB3B4249115FC0091D92D /* BluetoothConfiguration.storyboard */; };
+		212AB3B7249116EF0091D92D /* BluetoothConfigurationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212AB3B6249116EF0091D92D /* BluetoothConfigurationTableViewController.swift */; };
+		212AB3B924911C490091D92D /* ReconnectionDelayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212AB3B824911C490091D92D /* ReconnectionDelayTableViewCell.swift */; };
 		213C806C241A56430020EFA5 /* PermissionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213C806B241A56430020EFA5 /* PermissionsViewController.swift */; };
 		214209BA242216B700C7BFF3 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209B9242216B700C7BFF3 /* Persistence.swift */; };
 		214209CA242227B300C7BFF3 /* PersistenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209C9242227B300C7BFF3 /* PersistenceTests.swift */; };
@@ -490,6 +493,9 @@
 		13F996722460445400FD6740 /* LinkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkButton.swift; sourceTree = "<group>"; };
 		2115C3E524360427009C0F5B /* GradientBackgroundTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackgroundTableViewCell.swift; sourceTree = "<group>"; };
 		212AB3B22490E9430091D92D /* BundleExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleExtensions.swift; sourceTree = "<group>"; };
+		212AB3B4249115FC0091D92D /* BluetoothConfiguration.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BluetoothConfiguration.storyboard; sourceTree = "<group>"; };
+		212AB3B6249116EF0091D92D /* BluetoothConfigurationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothConfigurationTableViewController.swift; sourceTree = "<group>"; };
+		212AB3B824911C490091D92D /* ReconnectionDelayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReconnectionDelayTableViewCell.swift; sourceTree = "<group>"; };
 		213C806B241A56430020EFA5 /* PermissionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsViewController.swift; sourceTree = "<group>"; };
 		214209B9242216B700C7BFF3 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		214209BF2422276800C7BFF3 /* SonarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SonarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -896,6 +902,9 @@
 				F6978069246DA9EF002CC50B /* SetStatusStateViewController.swift */,
 				F6A9B45F2486F6E400D71370 /* SimulateNotificationViewController.swift */,
 				F604976A24539F6C002B8503 /* UploadLogsViewController.swift */,
+				212AB3B4249115FC0091D92D /* BluetoothConfiguration.storyboard */,
+				212AB3B6249116EF0091D92D /* BluetoothConfigurationTableViewController.swift */,
+				212AB3B824911C490091D92D /* ReconnectionDelayTableViewCell.swift */,
 			);
 			path = Debug;
 			sourceTree = "<group>";
@@ -1832,6 +1841,7 @@
 				F6F05A322434310200FF4B72 /* Onboarding.storyboard in Resources */,
 				F70CB81B2450CFA900ED6E7F /* OnboardingLogoStrapline.xib in Resources */,
 				098ED481242E745F0029B729 /* Debug.storyboard in Resources */,
+				212AB3B5249115FC0091D92D /* BluetoothConfiguration.storyboard in Resources */,
 				F6A9B4622486F88000D71370 /* SimulateNotification.storyboard in Resources */,
 				F6141BA124773158002EC49E /* SetStatusState.storyboard in Resources */,
 				DD3FCF422476E914008B0237 /* Drawer.storyboard in Resources */,
@@ -2106,6 +2116,7 @@
 				F758553A24294C8D00CBE1ED /* RequestFactory.swift in Sources */,
 				F604976B24539F6C002B8503 /* UploadLogsViewController.swift in Sources */,
 				13F996732460445400FD6740 /* LinkButton.swift in Sources */,
+				212AB3B7249116EF0091D92D /* BluetoothConfigurationTableViewController.swift in Sources */,
 				DD3FCF3E2476E8DC008B0237 /* TestResult.swift in Sources */,
 				21C417CC242CB15D00DEF3E2 /* ConfirmRegistrationRequest.swift in Sources */,
 				F67A2291242AA35C002254B6 /* SecureRegistrationStorage.swift in Sources */,
@@ -2118,6 +2129,7 @@
 				DD3FCF3C2476E8C3008B0237 /* ExposedNotificationHandler.swift in Sources */,
 				0979FB792458ADF000EB01A8 /* PostcodeValidator.swift in Sources */,
 				134470AE2454D4DA001A0AD9 /* QuestionnaireCoordinator.swift in Sources */,
+				212AB3B924911C490091D92D /* ReconnectionDelayTableViewCell.swift in Sources */,
 				097F05412473145300E633C8 /* TestableUrlOpener.swift in Sources */,
 				F62F857F2451051C006580A8 /* ContactEventsUploader.swift in Sources */,
 				09E6E7E4245271A00069DFA8 /* SetupChecker.swift in Sources */,

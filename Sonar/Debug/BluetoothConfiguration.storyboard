@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="MsF-Ux-Xai">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16097"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Bluetooth Configuration Table View Controller-->
+        <scene sceneID="2pb-gk-ba0">
+            <objects>
+                <tableViewController id="MsF-Ux-Xai" customClass="BluetoothConfigurationTableViewController" customModule="Sonar" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="Ke6-sf-2cL">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ReconnectionDelayTableViewCell" id="NZN-Xy-qak" customClass="ReconnectionDelayTableViewCell" customModule="Sonar" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NZN-Xy-qak" id="hNu-XQ-LFZ">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="asx-0q-P4c">
+                                            <rect key="frame" x="20" y="11.5" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="hjR-YM-2KC">
+                                            <rect key="frame" x="300" y="6" width="94" height="32"/>
+                                            <connections>
+                                                <action selector="didChangeValue:" destination="KXO-co-4eF" eventType="valueChanged" id="5BU-WS-vF1"/>
+                                                <action selector="didChangeValue:" destination="MsF-Ux-Xai" eventType="valueChanged" id="Bsc-7v-NFZ"/>
+                                            </connections>
+                                        </stepper>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="asx-0q-P4c" firstAttribute="centerY" secondItem="hjR-YM-2KC" secondAttribute="centerY" id="NFD-OW-P2Q"/>
+                                        <constraint firstItem="asx-0q-P4c" firstAttribute="centerY" secondItem="hNu-XQ-LFZ" secondAttribute="centerY" id="YCh-f0-8eE"/>
+                                        <constraint firstItem="asx-0q-P4c" firstAttribute="leading" secondItem="hNu-XQ-LFZ" secondAttribute="leading" constant="20" symbolic="YES" id="lQC-Sd-XQZ"/>
+                                        <constraint firstAttribute="trailing" secondItem="hjR-YM-2KC" secondAttribute="trailing" constant="20" symbolic="YES" id="rPa-jx-k2u"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="reconnectionLabel" destination="asx-0q-P4c" id="4HZ-Rq-a60"/>
+                                    <outlet property="stepper" destination="hjR-YM-2KC" id="5Ws-1A-6eO"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="MsF-Ux-Xai" id="Llj-zB-qY5"/>
+                            <outlet property="delegate" destination="MsF-Ux-Xai" id="fWC-Pf-D96"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bbv-sx-nke" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="KXO-co-4eF" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="139" y="72"/>
+        </scene>
+    </scenes>
+</document>

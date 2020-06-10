@@ -248,6 +248,7 @@ private class NoOpBluetoothNursery: BluetoothNursery {
     var contactEventRepository: ContactEventRepository = NoOpContactEventRepository()
     var contactEventPersister: ContactEventPersister = NoOpContactEventPersister()
     var broadcaster: Broadcaster? = NoOpBroadcaster()
+    var listener: Listener? = nil
 }
 
 private class NoOpContactEventRepository: ContactEventRepository {
