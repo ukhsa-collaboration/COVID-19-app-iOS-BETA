@@ -11,9 +11,11 @@ import UIKit
 class AttemptableDashboardViewController: UIViewController, AttemptableDelegate {
     @IBOutlet var statusLabel: UILabel!
     @IBOutlet var button: UIButton!
+    @IBOutlet var timeoutLabel: UILabel!
     @IBOutlet var statsLabel: UILabel!
     
     private var attemptable: Attemptable!
+    private var timer: Timer!
         
     func inject(attemptable: Attemptable) {
         self.attemptable = attemptable
@@ -23,6 +25,7 @@ class AttemptableDashboardViewController: UIViewController, AttemptableDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.translatesAutoresizingMaskIntoConstraints = false
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimeout), userInfo: nil, repeats: true)
         update()
     }
 
@@ -57,5 +60,17 @@ class AttemptableDashboardViewController: UIViewController, AttemptableDelegate 
             ? "0.0"
             : String(format: "%.1f", 100 * (Double(attemptable.numSuccesses) / Double(attemptable.numAttempts)))
         statsLabel.text = "\(attemptable.numSuccesses)/\(attemptable.numAttempts) attempts succeeded (\(pct)%)"
+        updateTimeout()
+    }
+    
+    @objc private func updateTimeout() {
+        guard let deadline = attemptable.deadline, deadline > Date() else {
+            timeoutLabel.isHidden = true
+            return
+        }
+        
+        timeoutLabel.isHidden = false
+        let secs = Int(Date().distance(to: deadline))
+        timeoutLabel.text = "Timeout in: \(secs) seconds"
     }
 }

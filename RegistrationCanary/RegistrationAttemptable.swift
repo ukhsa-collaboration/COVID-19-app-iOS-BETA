@@ -13,6 +13,7 @@ class RegistrationAttemptable: Attemptable {
     var state: AttemptableState = .initial
     var numAttempts = 0
     var numSuccesses = 0
+    var deadline: Date?
 
     let timeoutSecs = 5 * 60.0
     
@@ -26,26 +27,30 @@ class RegistrationAttemptable: Attemptable {
         registrationService.timeoutSecs = timeoutSecs
         registrationService.delayBeforeAllowingRetrySecs = 0
         
-        NotificationCenter.default.addObserver(forName: RegistrationCompletedNotification, object: nil, queue: nil) { _ in
-            self.numAttempts += 1
-            self.numSuccesses += 1
-            self.persistence.registration = nil // allow retry
-            self.state = .succeeded
-            self.delegate?.attemptableDidChange(self)
-        }
-        
-        NotificationCenter.default.addObserver(forName: RegistrationFailedNotification, object: nil, queue: nil) { _ in
-            self.numAttempts += 1
-            self.state = .failed
-            self.delegate?.attemptableDidChange(self)
-        }
+        NotificationCenter.default.addObserver(self, selector: #selector(succeed), name: RegistrationCompletedNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(fail), name: RegistrationFailedNotification, object: nil)
     }
     
     func attempt() {
         state = .inProgress
+        deadline = Date().advanced(by: timeoutSecs)
         self.delegate?.attemptableDidChange(self)
         registrationService.register()
     }
     
-
+    @objc private func succeed() {
+        numAttempts += 1
+        numSuccesses += 1
+        persistence.registration = nil // allow retry
+        state = .succeeded
+        deadline = nil
+        delegate?.attemptableDidChange(self)
+    }
+    
+    @objc private func fail() {
+        numAttempts += 1
+        state = .failed
+        deadline = nil
+        delegate?.attemptableDidChange(self)
+    }
 }

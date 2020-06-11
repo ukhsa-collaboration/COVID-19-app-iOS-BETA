@@ -2291,6 +2291,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0935CCFB248FE3250008E868 /* RegistrationCanary.xcconfig */;
 			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 			};
 			name = Debug;
 		};
@@ -2298,6 +2299,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0935CCFB248FE3250008E868 /* RegistrationCanary.xcconfig */;
 			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 			};
 			name = Release;
 		};

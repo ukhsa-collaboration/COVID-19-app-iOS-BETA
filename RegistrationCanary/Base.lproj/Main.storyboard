@@ -82,8 +82,8 @@
         <scene sceneID="SfU-fy-vNb">
             <objects>
                 <viewController id="6Hs-Y6-I0g" customClass="AttemptableDashboardViewController" customModule="RegistrationCanary" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B61-92-vpj">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
+                    <view key="view" contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="125" translatesAutoresizingMaskIntoConstraints="NO" id="B61-92-vpj">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="125"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Current/last attempt:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WM8-2w-pBi">
                                 <rect key="frame" x="20" y="0.0" width="374" height="21"/>
@@ -92,14 +92,20 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aQz-68-ZvP">
-                                <rect key="frame" x="20" y="31" width="374" height="88"/>
+                                <rect key="frame" x="20" y="31" width="374" height="32"/>
                                 <state key="normal" title="Register"/>
                                 <connections>
                                     <action selector="attempt" destination="6Hs-Y6-I0g" eventType="touchUpInside" id="X2u-BU-beU"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="x/y attempts succeeded" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ok7-Kx-a18">
-                                <rect key="frame" x="20" y="129" width="374" height="21"/>
+                                <rect key="frame" x="20" y="104" width="374" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Timeout in:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UgF-bF-faq">
+                                <rect key="frame" x="20" y="73" width="374" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -107,19 +113,23 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="UgF-bF-faq" firstAttribute="top" secondItem="aQz-68-ZvP" secondAttribute="bottom" constant="10" id="5wZ-cN-Xad"/>
                             <constraint firstItem="WM8-2w-pBi" firstAttribute="top" secondItem="B61-92-vpj" secondAttribute="top" id="DzK-kj-qJe"/>
-                            <constraint firstItem="Ok7-Kx-a18" firstAttribute="top" secondItem="aQz-68-ZvP" secondAttribute="bottom" constant="10" id="Pgs-qh-I9I"/>
                             <constraint firstItem="aQz-68-ZvP" firstAttribute="top" secondItem="WM8-2w-pBi" secondAttribute="bottom" constant="10" id="ZND-J7-kF4"/>
+                            <constraint firstItem="UgF-bF-faq" firstAttribute="leading" secondItem="caE-Oj-qdu" secondAttribute="leading" constant="20" id="mvg-20-5hX"/>
                             <constraint firstAttribute="bottom" secondItem="Ok7-Kx-a18" secondAttribute="bottom" id="qBB-14-ZGP"/>
+                            <constraint firstItem="Ok7-Kx-a18" firstAttribute="top" secondItem="UgF-bF-faq" secondAttribute="bottom" constant="10" id="r7x-uT-sGd"/>
+                            <constraint firstItem="caE-Oj-qdu" firstAttribute="trailing" secondItem="UgF-bF-faq" secondAttribute="trailing" constant="20" id="scD-dd-eqm"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="caE-Oj-qdu"/>
                     </view>
                     <navigationItem key="navigationItem" id="gcc-Wb-LpX"/>
-                    <size key="freeformSize" width="414" height="150"/>
+                    <size key="freeformSize" width="414" height="125"/>
                     <connections>
                         <outlet property="button" destination="aQz-68-ZvP" id="TPd-Qr-Sbi"/>
                         <outlet property="statsLabel" destination="Ok7-Kx-a18" id="Ole-AW-c9i"/>
                         <outlet property="statusLabel" destination="WM8-2w-pBi" id="Bsu-0B-DAL"/>
+                        <outlet property="timeoutLabel" destination="UgF-bF-faq" id="9ro-QZ-wHS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MAY-Ye-UxL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
