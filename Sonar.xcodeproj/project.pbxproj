@@ -508,7 +508,7 @@
 		212AB3B4249115FC0091D92D /* BluetoothConfiguration.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BluetoothConfiguration.storyboard; sourceTree = "<group>"; };
 		212AB3B6249116EF0091D92D /* BluetoothConfigurationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothConfigurationTableViewController.swift; sourceTree = "<group>"; };
 		212AB3B824911C490091D92D /* ReconnectionDelayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReconnectionDelayTableViewCell.swift; sourceTree = "<group>"; };
-		212AB3BA24926C2E0091D92D /* remove-tag.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; name = "remove-tag.yml"; path = ".github/workflows/remove-tag.yml"; sourceTree = "<group>"; };
+		212AB3BA24926C2E0091D92D /* remove-tag.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "remove-tag.yml"; sourceTree = "<group>"; };
 		213C806B241A56430020EFA5 /* PermissionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsViewController.swift; sourceTree = "<group>"; };
 		214209B9242216B700C7BFF3 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		214209BF2422276800C7BFF3 /* SonarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SonarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -829,6 +829,7 @@
 		068B8AB8245C11C0000EAB4C /* workflows */ = {
 			isa = PBXGroup;
 			children = (
+				212AB3BA24926C2E0091D92D /* remove-tag.yml */,
 				0963C1F32488182300EF5B68 /* ci.yml */,
 				0963C1F42488182300EF5B68 /* deploy.yml */,
 				0963C1F12488182300EF5B68 /* generate-release-note.yml */,
@@ -1173,7 +1174,6 @@
 		6FC63C24241641B8007C8BF3 = {
 			isa = PBXGroup;
 			children = (
-				212AB3BA24926C2E0091D92D /* remove-tag.yml */,
 				F6CA2818242E41F700F8DC55 /* README.md */,
 				068B8AB7245C11C0000EAB4C /* .github */,
 				F618A560245C682500D89517 /* .secret */,
