@@ -46,7 +46,6 @@
 		095283AA2476FF2800CDEE55 /* SynchronousNavigationControllerDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095283A92476FF2800CDEE55 /* SynchronousNavigationControllerDouble.swift */; };
 		095A91182434FF1500ED6369 /* ApplicationDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095A91172434FF1500ED6369 /* ApplicationDouble.swift */; };
 		0963C1F62488182300EF5B68 /* generate-release-note.yml in Resources */ = {isa = PBXBuildFile; fileRef = 0963C1F12488182300EF5B68 /* generate-release-note.yml */; };
-		0963C1F72488182300EF5B68 /* remove-support.yml in Resources */ = {isa = PBXBuildFile; fileRef = 0963C1F22488182300EF5B68 /* remove-support.yml */; };
 		0963C1F82488182300EF5B68 /* ci.yml in Resources */ = {isa = PBXBuildFile; fileRef = 0963C1F32488182300EF5B68 /* ci.yml */; };
 		0963C1F92488182300EF5B68 /* deploy.yml in Resources */ = {isa = PBXBuildFile; fileRef = 0963C1F42488182300EF5B68 /* deploy.yml */; };
 		0963C1FA2488182300EF5B68 /* trigger-deploys.yml in Resources */ = {isa = PBXBuildFile; fileRef = 0963C1F52488182300EF5B68 /* trigger-deploys.yml */; };
@@ -152,6 +151,7 @@
 		212AB3B5249115FC0091D92D /* BluetoothConfiguration.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 212AB3B4249115FC0091D92D /* BluetoothConfiguration.storyboard */; };
 		212AB3B7249116EF0091D92D /* BluetoothConfigurationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212AB3B6249116EF0091D92D /* BluetoothConfigurationTableViewController.swift */; };
 		212AB3B924911C490091D92D /* ReconnectionDelayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212AB3B824911C490091D92D /* ReconnectionDelayTableViewCell.swift */; };
+		212AB3BB24926C2E0091D92D /* remove-tag.yml in Resources */ = {isa = PBXBuildFile; fileRef = 212AB3BA24926C2E0091D92D /* remove-tag.yml */; };
 		213C806C241A56430020EFA5 /* PermissionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213C806B241A56430020EFA5 /* PermissionsViewController.swift */; };
 		214209BA242216B700C7BFF3 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209B9242216B700C7BFF3 /* Persistence.swift */; };
 		214209CA242227B300C7BFF3 /* PersistenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214209C9242227B300C7BFF3 /* PersistenceTests.swift */; };
@@ -508,6 +508,7 @@
 		212AB3B4249115FC0091D92D /* BluetoothConfiguration.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BluetoothConfiguration.storyboard; sourceTree = "<group>"; };
 		212AB3B6249116EF0091D92D /* BluetoothConfigurationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothConfigurationTableViewController.swift; sourceTree = "<group>"; };
 		212AB3B824911C490091D92D /* ReconnectionDelayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReconnectionDelayTableViewCell.swift; sourceTree = "<group>"; };
+		212AB3BA24926C2E0091D92D /* remove-tag.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; name = "remove-tag.yml"; path = ".github/workflows/remove-tag.yml"; sourceTree = "<group>"; };
 		213C806B241A56430020EFA5 /* PermissionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsViewController.swift; sourceTree = "<group>"; };
 		214209B9242216B700C7BFF3 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		214209BF2422276800C7BFF3 /* SonarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SonarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1172,6 +1173,7 @@
 		6FC63C24241641B8007C8BF3 = {
 			isa = PBXGroup;
 			children = (
+				212AB3BA24926C2E0091D92D /* remove-tag.yml */,
 				F6CA2818242E41F700F8DC55 /* README.md */,
 				068B8AB7245C11C0000EAB4C /* .github */,
 				F618A560245C682500D89517 /* .secret */,
@@ -1833,8 +1835,8 @@
 			files = (
 				0963C1F62488182300EF5B68 /* generate-release-note.yml in Resources */,
 				F60497792454A40B002B8503 /* TestingInfo.storyboard in Resources */,
-				0963C1F72488182300EF5B68 /* remove-support.yml in Resources */,
 				F758B8C4242CC0EE003AE16D /* Status.storyboard in Resources */,
+				212AB3BB24926C2E0091D92D /* remove-tag.yml in Resources */,
 				0963C1F82488182300EF5B68 /* ci.yml in Resources */,
 				6FC63C3B241641BA007C8BF3 /* LaunchScreen.storyboard in Resources */,
 				AE29892C24729AD8004C4097 /* ReferenceCode.storyboard in Resources */,
