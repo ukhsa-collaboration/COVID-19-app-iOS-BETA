@@ -13,6 +13,9 @@ enum AttemptableState {
     case inProgress(deadline: Date)
     case succeeded
     case failed
+    // "errored" represents failures that indicate a problem with the canary
+    // rather than a problem with the system under test.
+    case errored(message: String)
 }
 
 
