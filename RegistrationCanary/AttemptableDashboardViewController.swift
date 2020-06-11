@@ -36,7 +36,12 @@ class AttemptableDashboardViewController: UIViewController, AttemptableDelegate 
     func attemptableDidChange(_ sender: Attemptable) {
         update()
     }
-
+    
+    var enableManualAttempt: Bool = true {
+        didSet {
+            button.isHidden = !enableManualAttempt
+        }
+    }
     
     private func update() {
         let prefix = "Current/last attempt:"

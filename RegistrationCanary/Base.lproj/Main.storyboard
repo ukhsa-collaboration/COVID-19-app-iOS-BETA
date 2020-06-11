@@ -15,32 +15,44 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="150" translatesAutoresizingMaskIntoConstraints="NO" id="RIc-c6-8W4">
-                                <rect key="frame" x="20" y="94.5" width="374" height="150"/>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L9I-QU-YI4" userLabel="automatic switch">
+                                <rect key="frame" x="345" y="64" width="51" height="31"/>
                                 <connections>
-                                    <segue destination="6Hs-Y6-I0g" kind="embed" identifier="EmbedRegistration" id="UfK-3w-8O3"/>
+                                    <action selector="automaticSwitchChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="pel-P0-2Ee"/>
                                 </connections>
-                            </containerView>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next auto retry at:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I6A-Mn-q0u">
+                                <rect key="frame" x="20" y="110" width="374" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Registration" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ezu-6K-ODx">
-                                <rect key="frame" x="20" y="64" width="374" height="20.5"/>
+                                <rect key="frame" x="20" y="151" width="374" height="20.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <containerView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="150" translatesAutoresizingMaskIntoConstraints="NO" id="RIc-c6-8W4">
+                                <rect key="frame" x="20" y="181.5" width="374" height="150"/>
+                                <connections>
+                                    <segue destination="6Hs-Y6-I0g" kind="embed" identifier="EmbedRegistration" id="UfK-3w-8O3"/>
+                                </connections>
+                            </containerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="APNs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xh1-bP-u3c">
-                                <rect key="frame" x="20" y="284.5" width="374" height="21"/>
+                                <rect key="frame" x="20" y="371.5" width="374" height="21"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <containerView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="150" translatesAutoresizingMaskIntoConstraints="NO" id="QI9-XY-PsM">
-                                <rect key="frame" x="20" y="315.5" width="374" height="150"/>
+                                <rect key="frame" x="20" y="402.5" width="374" height="150"/>
                                 <connections>
                                     <segue destination="6Hs-Y6-I0g" kind="embed" identifier="EmbedAPNs" id="M24-JY-a9U"/>
                                 </connections>
                             </containerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OUm-Sp-wbD">
-                                <rect key="frame" x="20" y="495.5" width="374" height="183"/>
+                                <rect key="frame" x="20" y="582.5" width="374" height="183"/>
                                 <string key="text">Notes:
 
 * Testing too frequently will often cause APNs to throttle notifications to your device.
@@ -50,28 +62,46 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Automatic" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K9o-T4-MKx">
+                                <rect key="frame" x="20" y="69" width="315" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="K9o-T4-MKx" firstAttribute="centerY" secondItem="L9I-QU-YI4" secondAttribute="centerY" id="0Ja-u2-8v0"/>
                             <constraint firstItem="OUm-Sp-wbD" firstAttribute="top" secondItem="QI9-XY-PsM" secondAttribute="bottom" constant="30" id="1pB-oq-Eku"/>
                             <constraint firstItem="Xh1-bP-u3c" firstAttribute="top" secondItem="RIc-c6-8W4" secondAttribute="bottom" constant="40" id="3ip-iT-hJP"/>
                             <constraint firstItem="QI9-XY-PsM" firstAttribute="top" secondItem="Xh1-bP-u3c" secondAttribute="bottom" constant="10" id="5UF-XJ-akd"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="L9I-QU-YI4" secondAttribute="trailing" constant="20" id="6lH-BP-ZmE"/>
+                            <constraint firstItem="K9o-T4-MKx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="75q-Mr-VGH"/>
                             <constraint firstItem="OUm-Sp-wbD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="HwN-y7-PQy"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ezu-6K-ODx" secondAttribute="trailing" constant="20" id="JRD-yE-neY"/>
                             <constraint firstItem="QI9-XY-PsM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Joi-sB-QNz"/>
+                            <constraint firstItem="L9I-QU-YI4" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="Kzc-YQ-gMN"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="QI9-XY-PsM" secondAttribute="trailing" constant="20" id="NLS-WY-Lkz"/>
+                            <constraint firstItem="I6A-Mn-q0u" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="P4M-W9-Y13"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="RIc-c6-8W4" secondAttribute="trailing" constant="20" id="TlS-NH-bxQ"/>
                             <constraint firstItem="RIc-c6-8W4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="VtZ-lG-v8s"/>
+                            <constraint firstItem="L9I-QU-YI4" firstAttribute="leading" secondItem="K9o-T4-MKx" secondAttribute="trailing" constant="10" id="Xeg-dk-tGi"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Xh1-bP-u3c" secondAttribute="trailing" constant="20" id="Y4i-l4-Vah"/>
                             <constraint firstItem="ezu-6K-ODx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="iNu-1n-98K"/>
+                            <constraint firstItem="I6A-Mn-q0u" firstAttribute="top" secondItem="K9o-T4-MKx" secondAttribute="bottom" constant="20" id="jme-Ws-etJ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="OUm-Sp-wbD" secondAttribute="trailing" constant="20" id="pFd-xr-Hp3"/>
-                            <constraint firstItem="ezu-6K-ODx" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="pLW-KE-5c4"/>
+                            <constraint firstItem="ezu-6K-ODx" firstAttribute="top" secondItem="I6A-Mn-q0u" secondAttribute="bottom" constant="20" id="sX8-FC-sxC"/>
                             <constraint firstItem="RIc-c6-8W4" firstAttribute="top" secondItem="ezu-6K-ODx" secondAttribute="bottom" constant="10" id="t0g-uf-5fn"/>
                             <constraint firstItem="Xh1-bP-u3c" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="tjF-nw-Iyl"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="I6A-Mn-q0u" secondAttribute="trailing" constant="20" id="zon-hG-WiX"/>
                         </constraints>
                         <edgeInsets key="layoutMargins" top="20" left="20" bottom="20" right="20"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="autoRetryLabel" destination="I6A-Mn-q0u" id="TTp-Nq-YEK"/>
+                        <outlet property="automaticSwitch" destination="L9I-QU-YI4" id="XLj-iX-cTO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -95,7 +125,7 @@
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aQz-68-ZvP">
                                         <rect key="frame" x="0.0" y="30.5" width="414" height="33.5"/>
-                                        <state key="normal" title="Register"/>
+                                        <state key="normal" title="Start"/>
                                         <connections>
                                             <action selector="attempt" destination="6Hs-Y6-I0g" eventType="touchUpInside" id="X2u-BU-beU"/>
                                         </connections>
