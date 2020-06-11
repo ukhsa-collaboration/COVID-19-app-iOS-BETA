@@ -52,6 +52,12 @@ struct RegistrationCanaryEnvironment {
 - **If Xcode is open, restart Xcode.** Xcode does not handle configuration
   files being changed out from under it gracefully.
 
+### Registration Canary
+
+The registration canary is a diagnostic tool that helps assess the health of
+both the entire registraton system and APNS. See `RegistrationCanary/README.md`
+for more information.
+
 ### Setup for Pact Testing
 Run `bin/pact/setup` to install all necessary libraries, and install Sonar CA and trust it on all 
 running Simulator devices.
