@@ -272,7 +272,11 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
                 logger.info("read identity from peripheral \(peripheral.identifierWithName): \(PrintableBroadcastPayload(data))")
                 delegate?.listener(self, didFind: IncomingBroadcastPayload(data: data), for: peripheral)
             } else {
-                logger.info("no identity ready from peripheral \(peripheral.identifierWithName)")
+                #if DEBUG || INTERNAL
+                logger.info("no identity read from peripheral \(peripheral.identifierWithName) (value = '\(data.base64EncodedString())')")
+                #else
+                logger.info("no identity read from peripheral \(peripheral.identifierWithName) (value = \(data))")
+                #endif
             }
             peripheral.readRSSI()
             
