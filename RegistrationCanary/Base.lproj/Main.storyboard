@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -85,41 +84,43 @@
                     <view key="view" contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="125" translatesAutoresizingMaskIntoConstraints="NO" id="B61-92-vpj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="125"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Current/last attempt:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WM8-2w-pBi">
-                                <rect key="frame" x="20" y="0.0" width="374" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aQz-68-ZvP">
-                                <rect key="frame" x="20" y="31" width="374" height="32"/>
-                                <state key="normal" title="Register"/>
-                                <connections>
-                                    <action selector="attempt" destination="6Hs-Y6-I0g" eventType="touchUpInside" id="X2u-BU-beU"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="x/y attempts succeeded" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ok7-Kx-a18">
-                                <rect key="frame" x="20" y="104" width="374" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Timeout in:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UgF-bF-faq">
-                                <rect key="frame" x="20" y="73" width="374" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="W6H-RQ-HHh">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="125"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current/last attempt:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WM8-2w-pBi">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aQz-68-ZvP">
+                                        <rect key="frame" x="0.0" y="30.5" width="414" height="33.5"/>
+                                        <state key="normal" title="Register"/>
+                                        <connections>
+                                            <action selector="attempt" destination="6Hs-Y6-I0g" eventType="touchUpInside" id="X2u-BU-beU"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Timeout in:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UgF-bF-faq">
+                                        <rect key="frame" x="0.0" y="74" width="414" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="x/y attempts succeeded" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ok7-Kx-a18">
+                                        <rect key="frame" x="0.0" y="104.5" width="414" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="UgF-bF-faq" firstAttribute="top" secondItem="aQz-68-ZvP" secondAttribute="bottom" constant="10" id="5wZ-cN-Xad"/>
-                            <constraint firstItem="WM8-2w-pBi" firstAttribute="top" secondItem="B61-92-vpj" secondAttribute="top" id="DzK-kj-qJe"/>
-                            <constraint firstItem="aQz-68-ZvP" firstAttribute="top" secondItem="WM8-2w-pBi" secondAttribute="bottom" constant="10" id="ZND-J7-kF4"/>
-                            <constraint firstItem="UgF-bF-faq" firstAttribute="leading" secondItem="caE-Oj-qdu" secondAttribute="leading" constant="20" id="mvg-20-5hX"/>
-                            <constraint firstAttribute="bottom" secondItem="Ok7-Kx-a18" secondAttribute="bottom" id="qBB-14-ZGP"/>
-                            <constraint firstItem="Ok7-Kx-a18" firstAttribute="top" secondItem="UgF-bF-faq" secondAttribute="bottom" constant="10" id="r7x-uT-sGd"/>
-                            <constraint firstItem="caE-Oj-qdu" firstAttribute="trailing" secondItem="UgF-bF-faq" secondAttribute="trailing" constant="20" id="scD-dd-eqm"/>
+                            <constraint firstAttribute="bottom" secondItem="W6H-RQ-HHh" secondAttribute="bottom" id="8sP-rH-L9Y"/>
+                            <constraint firstAttribute="trailing" secondItem="W6H-RQ-HHh" secondAttribute="trailing" id="L9R-B0-EEU"/>
+                            <constraint firstItem="W6H-RQ-HHh" firstAttribute="leading" secondItem="B61-92-vpj" secondAttribute="leading" id="ukh-eW-jvb"/>
+                            <constraint firstAttribute="top" secondItem="W6H-RQ-HHh" secondAttribute="top" id="xOo-Hh-KEh"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="caE-Oj-qdu"/>
                     </view>
