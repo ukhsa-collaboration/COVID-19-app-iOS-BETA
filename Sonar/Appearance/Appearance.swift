@@ -13,7 +13,6 @@ extension Appearance {
     static func setup() {
         UINavigationBar.appearance().titleTextAttributes = [
             NSAttributedString.Key.foregroundColor: UIColor.nhs.blue,
-            NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .headline),
         ]
         UINavigationBar.appearance().tintColor = UIColor.nhs.blue
 
