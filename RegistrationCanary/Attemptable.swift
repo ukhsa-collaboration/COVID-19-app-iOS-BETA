@@ -10,7 +10,7 @@ import Foundation
 
 enum AttemptableState {
     case initial
-    case inProgress
+    case inProgress(deadline: Date)
     case succeeded
     case failed
 }
@@ -21,7 +21,6 @@ protocol Attemptable {
     var state: AttemptableState { get }
     var numAttempts: Int { get }
     var numSuccesses: Int { get }
-    var deadline: Date? { get }
     
     func attempt()
 }

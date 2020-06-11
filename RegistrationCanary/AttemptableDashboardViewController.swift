@@ -64,13 +64,13 @@ class AttemptableDashboardViewController: UIViewController, AttemptableDelegate 
     }
     
     @objc private func updateTimeout() {
-        guard let deadline = attemptable.deadline, deadline > Date() else {
+        switch attemptable.state {
+        case .inProgress(let deadline):
+            timeoutLabel.isHidden = false
+            let secs = Int(Date().distance(to: deadline))
+            timeoutLabel.text = "Timeout in: \(secs) seconds"
+        default:
             timeoutLabel.isHidden = true
-            return
         }
-        
-        timeoutLabel.isHidden = false
-        let secs = Int(Date().distance(to: deadline))
-        timeoutLabel.text = "Timeout in: \(secs) seconds"
     }
 }
