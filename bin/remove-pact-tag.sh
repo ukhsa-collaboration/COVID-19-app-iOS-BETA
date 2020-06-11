@@ -4,12 +4,14 @@ set -e
 function main() {
 
 version=$1
+version=$2
 
 validate "$version" "version"
+validate "$tag" "tag"
 validate "$GITHUB_USER_TOKEN" "GITHUB_USER_TOKEN"
 
 echo ""
-echo "You are about to remove support for version '$version'"
+echo "You are about to remove pact tag '$tag' for version '$version'"
 echo ""
 read -p "Are you sure? " -n 1 -r
 echo ""
@@ -28,7 +30,7 @@ fi
 
 url="https://api.github.com/repos/nhsx/sonar-ios/dispatches"
 contentType="Content-Type: application/json"
-payload="{\"event_type\": \"remove-support\", \"client_payload\": {\"version\": \"$version\"}}"
+payload="{\"event_type\": \"remove-tag\", \"client_payload\": {\"version\": \"$version\", \"tag\": \"$tag\"}}"
 
 echo ""
 echo "Dispatching event: $payload"

@@ -1,0 +1,19 @@
+name: Remove Tag
+
+on:
+  repository_dispatch:
+    types: [remove-tag]
+
+jobs:
+
+  publish:
+    runs-on:
+      - self-hosted
+      - linux
+      - aws
+
+    steps:
+      - name: Remove tag in pact broker
+        id: removetag
+        run: curl -v -XDELETE https://sonar-pact-broker-app.apps.nonprod.aws.cp.data.england.nhs.uk/pacticipants/iOS%20App/versions/${{ github.event.client_payload.version }}/tags/${{ github.event.client_payload.tag }}
+

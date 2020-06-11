@@ -75,7 +75,7 @@ class ConcreteBluetoothNursery: BluetoothNursery, PersistenceDelegate {
     // MARK: - BTLEListener
 
     func startBluetooth(registration: Registration?) {
-        logger.info("Starting the bluetooth nursery with sonar id \(registration == nil ? "not set" : "set"))")
+        logger.info("Starting the bluetooth nursery with sonar id \(registration == nil ? "not set" : "set")")
 
         broadcastPayloadService = SonarBroadcastPayloadService(
             storage: SecureBroadcastRotationKeyStorage(),
