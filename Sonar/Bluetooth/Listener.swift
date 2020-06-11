@@ -258,6 +258,14 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
             logger.info("keepalive characteristic not discovered for peripheral \(peripheral.identifierWithName)")
         }
     }
+    
+    func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?) {
+        guard error == nil else {
+            logger.info("characteristic \(characteristic) error: \(error!)")
+            return
+        }
+        logger.info("characteristic \(characteristic)")
+    }
 
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         guard error == nil else {
@@ -307,6 +315,14 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
         logger.info("read RSSI for \(peripheral.identifierWithName): \(RSSI)")
         delegate?.listener(self, didReadRSSI: RSSI.intValue, for: peripheral)
         readRSSIAndSendKeepalive()
+    }
+    
+    func peripheralDidUpdateName(_ peripheral: CBPeripheral) {
+        logger.info("peripheral \(peripheral.identifierWithName)")
+    }
+    
+    func centralManager(_ central: CBCentralManager, connectionEventDidOccur event: CBConnectionEvent, for peripheral: CBPeripheral) {
+        logger.info("peripheral \(peripheral.identifierWithName) event: \(event)")
     }
 
     private func readRSSIAndSendKeepalive() {
