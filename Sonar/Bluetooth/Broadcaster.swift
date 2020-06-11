@@ -164,12 +164,7 @@ class BTLEBroadcaster: NSObject, Broadcaster, CBPeripheralManagerDelegate {
             logger.info("error: \(error!))")
             return
         }
-
-        if let data = broadcastPayloadService.broadcastPayload()?.data() {
-            logger.info("advertising broadcast payload: \(PrintableBroadcastPayload(data))")
-        } else {
-            logger.info("advertising with no broadcast payload set")
-        }
+        logger.info("starting advertising...")
 
         // Per #172564329 we don't want to expose this in release builds
         #if DEBUG
@@ -182,6 +177,19 @@ class BTLEBroadcaster: NSObject, Broadcaster, CBPeripheralManagerDelegate {
             CBAdvertisementDataServiceUUIDsKey: [service.uuid]
         ])
         #endif
+    }
+    
+    func peripheralManagerDidStartAdvertising(_ peripheral: CBPeripheralManager, error: Error?) {
+        guard error == nil else {
+            logger.info("error: \(error!))")
+            return
+        }
+
+        if let data = broadcastPayloadService.broadcastPayload()?.data() {
+            logger.info("advertising broadcast payload: \(PrintableBroadcastPayload(data))")
+        } else {
+            logger.info("advertising with no broadcast payload set")
+        }
     }
     
     func peripheralManagerIsReady(toUpdateSubscribers peripheral: CBPeripheralManager) {
@@ -212,7 +220,39 @@ class BTLEBroadcaster: NSObject, Broadcaster, CBPeripheralManagerDelegate {
             self.unsentCharacteristicValue = nil
         }
     }
-
+    
+    func peripheralManager(_ peripheral: CBPeripheralManager, central: CBCentral, didSubscribeTo characteristic: CBCharacteristic) {
+        switch characteristic.uuid {
+            
+        case Environment.sonarIdCharacteristicUUID:
+            logger.info("identity characteristic subscribed to by central \(central)")
+            break
+            
+        case Environment.keepaliveCharacteristicUUID:
+            logger.info("keepalive characteristic subscribed to by central \(central)")
+            break
+            
+        default:
+            logger.info("unknown characteristic \(characteristic) subscribed to by central \(central)")
+        }
+    }
+    
+    func peripheralManager(_ peripheral: CBPeripheralManager, central: CBCentral, didUnsubscribeFrom characteristic: CBCharacteristic) {
+        switch characteristic.uuid {
+            
+        case Environment.sonarIdCharacteristicUUID:
+            logger.info("identity characteristic unsubscribed by central \(central)")
+            break
+            
+        case Environment.keepaliveCharacteristicUUID:
+            logger.info("keepalive characteristic unsubscribed by central \(central)")
+            break
+            
+        default:
+            logger.info("unknown characteristic \(characteristic) unsubscribed by central \(central)")
+        }
+    }
+    
     func peripheralManager(_ peripheral: CBPeripheralManager, didReceiveRead request: CBATTRequest) {
         guard request.characteristic.uuid == Environment.sonarIdCharacteristicUUID else {
             logger.debug("received a read for unexpected characteristic \(request.characteristic.uuid.uuidString)")
@@ -230,7 +270,7 @@ class BTLEBroadcaster: NSObject, Broadcaster, CBPeripheralManagerDelegate {
         request.value = broadcastPayload
         peripheral.respond(to: request, withResult: .success)
     }
-
+    
     // MARK: - Healthcheck
     func isHealthy() -> Bool {
         guard peripheral != nil else { return false }
