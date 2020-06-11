@@ -100,7 +100,7 @@
                                             <action selector="attempt" destination="6Hs-Y6-I0g" eventType="touchUpInside" id="X2u-BU-beU"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Timeout in:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UgF-bF-faq">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Timeout in:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UgF-bF-faq">
                                         <rect key="frame" x="0.0" y="74" width="414" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
@@ -128,9 +128,9 @@
                     <size key="freeformSize" width="414" height="125"/>
                     <connections>
                         <outlet property="button" destination="aQz-68-ZvP" id="TPd-Qr-Sbi"/>
+                        <outlet property="secondaryStatusLabel" destination="UgF-bF-faq" id="9ro-QZ-wHS"/>
                         <outlet property="statsLabel" destination="Ok7-Kx-a18" id="Ole-AW-c9i"/>
                         <outlet property="statusLabel" destination="WM8-2w-pBi" id="Bsu-0B-DAL"/>
-                        <outlet property="timeoutLabel" destination="UgF-bF-faq" id="9ro-QZ-wHS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MAY-Ye-UxL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

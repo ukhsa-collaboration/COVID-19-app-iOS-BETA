@@ -44,7 +44,7 @@ class ApnsAttemptable: Attemptable {
         makeRequest()
         
         timer.schedule(deadline: .now() + timeoutSecs) {
-            if self.numSuccesses <= prevNumSuccesses {
+            if self.numSuccesses <= prevNumSuccesses && self.isInProgress() {
                 self.fail("Timeout waiting for canary notification")
             }
         }
@@ -62,7 +62,7 @@ class ApnsAttemptable: Attemptable {
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard error == nil else {
-                self.fail("Error connecting to local APNs proxy (is it running?): \(error!.localizedDescription)")
+                self.error("Error connecting to local APNs proxy (is it running?): \(error!.localizedDescription)")
                 return
             }
             
@@ -73,7 +73,7 @@ class ApnsAttemptable: Attemptable {
             logger.info("Got status code \(httpResponse.statusCode)")
             
             guard 200..<300 ~= httpResponse.statusCode else {
-                self.fail("Local APNs proxy returned status \(httpResponse.statusCode)")
+                self.error("Local APNs proxy returned status \(httpResponse.statusCode)")
                 return
             }
             
@@ -113,9 +113,24 @@ class ApnsAttemptable: Attemptable {
         callDelegate()
     }
     
+    private func error(_ msg: Logger.Message) {
+        logger.error(msg)
+        state = .errored(message: msg.description)
+        callDelegate()
+    }
+
     private func callDelegate() {
         DispatchQueue.main.async {
             self.delegate?.attemptableDidChange(self)
+        }
+    }
+    
+    private func isInProgress() -> Bool {
+        switch state {
+        case .inProgress(deadline: _):
+            return true
+        default:
+            return false
         }
     }
 }

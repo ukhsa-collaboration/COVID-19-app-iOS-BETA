@@ -10,8 +10,8 @@ import UIKit
 
 class AttemptableDashboardViewController: UIViewController, AttemptableDelegate {
     @IBOutlet var statusLabel: UILabel!
+    @IBOutlet var secondaryStatusLabel: UILabel!
     @IBOutlet var button: UIButton!
-    @IBOutlet var timeoutLabel: UILabel!
     @IBOutlet var statsLabel: UILabel!
     
     private var attemptable: Attemptable!
@@ -25,7 +25,7 @@ class AttemptableDashboardViewController: UIViewController, AttemptableDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.translatesAutoresizingMaskIntoConstraints = false
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimeout), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateSecondaryStatus), userInfo: nil, repeats: true)
         update()
     }
 
@@ -51,6 +51,9 @@ class AttemptableDashboardViewController: UIViewController, AttemptableDelegate 
         case .failed:
             statusLabel.text = "\(prefix) failed"
             button.isEnabled = true
+        case .errored(_):
+            statusLabel.text = "\(prefix) errored"
+            button.isEnabled = true
         case .succeeded:
             statusLabel.text = "\(prefix) succeeded"
             button.isEnabled = true
@@ -60,17 +63,22 @@ class AttemptableDashboardViewController: UIViewController, AttemptableDelegate 
             ? "0.0"
             : String(format: "%.1f", 100 * (Double(attemptable.numSuccesses) / Double(attemptable.numAttempts)))
         statsLabel.text = "\(attemptable.numSuccesses)/\(attemptable.numAttempts) attempts succeeded (\(pct)%)"
-        updateTimeout()
+        updateSecondaryStatus()
     }
     
-    @objc private func updateTimeout() {
+    @objc private func updateSecondaryStatus() {
         switch attemptable.state {
         case .inProgress(let deadline):
-            timeoutLabel.isHidden = false
+            secondaryStatusLabel.isHidden = false
             let secs = Int(Date().distance(to: deadline))
-            timeoutLabel.text = "Timeout in: \(secs) seconds"
+            secondaryStatusLabel.text = "Timeout in: \(secs) seconds"
+            secondaryStatusLabel.textColor = .label
+        case .errored(let message):
+            secondaryStatusLabel.isHidden = false
+            secondaryStatusLabel.text = message
+            secondaryStatusLabel.textColor = .red
         default:
-            timeoutLabel.isHidden = true
+            secondaryStatusLabel.isHidden = true
         }
     }
 }
