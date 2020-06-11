@@ -17,7 +17,6 @@ class ApnsAttemptable: Attemptable {
     var state: AttemptableState = .initial
     var numAttempts = 0
     var numSuccesses = 0
-    var deadline: Date?
     
     private var apnsToken: String?
     private let timer = BackgroundableTimer(
@@ -40,10 +39,9 @@ class ApnsAttemptable: Attemptable {
     
     func attempt() {
         let prevNumSuccesses = numSuccesses
-        state = .inProgress
+        state = .inProgress(deadline: Date().advanced(by: timeoutSecs))
         delegate?.attemptableDidChange(self)
         makeRequest()
-        deadline = Date().advanced(by: timeoutSecs)
         
         timer.schedule(deadline: .now() + timeoutSecs) {
             if self.numSuccesses <= prevNumSuccesses {
@@ -106,14 +104,12 @@ class ApnsAttemptable: Attemptable {
     private func succeed() {
         numSuccesses += 1
         state = .succeeded
-        deadline = nil
         callDelegate()
     }
     
     private func fail(_ msg: Logger.Message) {
         logger.error(msg)
         state = .failed
-        deadline = nil
         callDelegate()
     }
     
