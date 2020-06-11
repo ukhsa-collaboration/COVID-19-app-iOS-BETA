@@ -10,13 +10,15 @@ import UIKit
 import Logging
 
 let RemoteNotificationReceivedNotification = NSNotification.Name("RemoteNotificationReceivedNotification")
-let timeoutSecs = 5 * 60.0
+private let timeoutSecs = 5 * 60.0
 
 class ApnsAttemptable: Attemptable {
     var delegate: AttemptableDelegate?
     var state: AttemptableState = .initial
     var numAttempts = 0
     var numSuccesses = 0
+    var deadline: Date?
+    
     private var apnsToken: String?
     private let timer = BackgroundableTimer(
         notificationCenter: NotificationCenter.default,
@@ -41,6 +43,7 @@ class ApnsAttemptable: Attemptable {
         state = .inProgress
         delegate?.attemptableDidChange(self)
         makeRequest()
+        deadline = Date().advanced(by: timeoutSecs)
         
         timer.schedule(deadline: .now() + timeoutSecs) {
             if self.numSuccesses <= prevNumSuccesses {
@@ -97,14 +100,20 @@ class ApnsAttemptable: Attemptable {
         
         guard userInfo["canary"] as? String == "true" else { return }
         
+        succeed()
+    }
+    
+    private func succeed() {
         numSuccesses += 1
         state = .succeeded
+        deadline = nil
         callDelegate()
     }
     
     private func fail(_ msg: Logger.Message) {
         logger.error(msg)
         state = .failed
+        deadline = nil
         callDelegate()
     }
     
@@ -112,7 +121,6 @@ class ApnsAttemptable: Attemptable {
         DispatchQueue.main.async {
             self.delegate?.attemptableDidChange(self)
         }
-
     }
 }
 
