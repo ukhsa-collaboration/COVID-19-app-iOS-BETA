@@ -191,7 +191,7 @@ class StatusViewController: UIViewController, Storyboarded {
             questionnaireType: .selfDiagnosis
         ) { symptoms in
             self.navigationController?.popToViewController(self, animated: self.animateTransitions)
-            self.scrollView.setContentOffset(CGPoint.zero, animated: false)
+            self.scrollView.setContentOffset(.zero, animated: false)
         }
 
         coordinator.start()
@@ -234,12 +234,12 @@ class StatusViewController: UIViewController, Storyboarded {
                     self.statusStateMachine.checkin(symptoms: symptoms)
                         
                     self.navigationController!.popToRootViewController(animated: self.animateTransitions)
-             
-                    self.scrollView.setContentOffset(CGPoint.zero, animated: false)
+                    self.scrollView.setContentOffset(.zero, animated: false)
                 }
                 coordinator.start()
             } else {
                 self.statusStateMachine.checkin(symptoms: [])
+                self.scrollView.setContentOffset(.zero, animated: true)
             }
         }
         present(checkinDrawer, animated: animateTransitions)
@@ -358,17 +358,16 @@ class StatusViewController: UIViewController, Storyboarded {
     }
 
     private func presentDrawer(header: String, detail: String) {
-//        dismiss(animated: animateTransitions) { [weak self] in
-//            guard let `self` = self else { return }
-
-            let drawer = DrawerViewController.instantiate()
-            drawer.inject(header: header, detail: detail) { self.reload() }
-            self.drawerPresenter.present(
-                drawer: drawer,
-                inNavigationController: self.navigationController!,
-                usingTransitioningDelegate: self.drawerPresentationManager
-            )
-//        }
+        let drawer = DrawerViewController.instantiate()
+        drawer.inject(header: header, detail: detail) {
+            self.reload()
+            self.scrollView.setContentOffset(.zero, animated: true)
+        }
+        self.drawerPresenter.present(
+            drawer: drawer,
+            inNavigationController: self.navigationController!,
+            usingTransitioningDelegate: self.drawerPresentationManager
+        )
     }
 
     private func pleaseIsolateText(until expiryDate: Date) -> String {
