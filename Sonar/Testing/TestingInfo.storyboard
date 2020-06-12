@@ -170,7 +170,7 @@
                         <constraints>
                             <constraint firstItem="i7g-54-jA7" firstAttribute="top" secondItem="66z-ey-Rrc" secondAttribute="top" id="TgK-FF-Hqi"/>
                             <constraint firstItem="i7g-54-jA7" firstAttribute="leading" secondItem="1xp-lJ-Mpr" secondAttribute="leading" id="WY6-hZ-300"/>
-                            <constraint firstItem="i7g-54-jA7" firstAttribute="bottom" secondItem="66z-ey-Rrc" secondAttribute="bottom" id="pIh-5V-g6r"/>
+                            <constraint firstItem="i7g-54-jA7" firstAttribute="bottom" secondItem="1xp-lJ-Mpr" secondAttribute="bottom" id="pIh-5V-g6r"/>
                             <constraint firstItem="i7g-54-jA7" firstAttribute="trailing" secondItem="1xp-lJ-Mpr" secondAttribute="trailing" id="ulE-Ur-f3L"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="66z-ey-Rrc"/>
