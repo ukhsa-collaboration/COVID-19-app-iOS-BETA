@@ -245,12 +245,27 @@ extension BTLEListener: SonarBTCentralManagerDelegate {
         // iOS devices do not start advertising after being disconnected, so in order to ensure they reconnect if/when
         // they come back into range, we need to tell iOS to immediately reconnect
         if reconnectDelay == 0 {
-            central.connect(peripheral)
+            reconnect(central: central, peripheral: peripheral)
         } else {
             queue.asyncAfter(deadline: .now() + .seconds(reconnectDelay)) {
-                central.connect(peripheral)
+                self.reconnect(central: central, peripheral: peripheral)
             }
         }
+    }
+
+    private func reconnect(central: CBCentralManager, peripheral: CBPeripheral) {
+        if let peripheral = central.retrievePeripherals(withIdentifiers: [peripheral.identifier]).first {
+            logger.info("reconnecting to peripheral found via central.retrievePeripheral(withIdentifiers:)")
+            central.connect(peripheral)
+            return
+        }
+        if let peripheral = central.retrieveConnectedPeripherals(withServices: [Environment.sonarServiceUUID]).first(where: { $0.identifier == peripheral.identifier }) {
+            logger.info("reconnecting to peripheral found via central.retrieveConnectedPeripherals(withServices:)")
+            central.connect(peripheral)
+            return
+        }
+        logger.info("reconnecting to peripheral found via didDisconnect delegate")
+        central.connect(peripheral)
     }
 
     func centralManager(_ central: SonarBTCentralManager, connectionEventDidOccur event: SonarBTConnectionEvent, for peripheral: SonarBTPeripheral) {
