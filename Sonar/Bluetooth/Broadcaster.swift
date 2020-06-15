@@ -167,7 +167,7 @@ class BTLEBroadcaster: NSObject, Broadcaster, SonarBTPeripheralManagerDelegate {
         logger.info("starting advertising...")
 
         // Per #172564329 we don't want to expose this in release builds
-        #if DEBUG
+        #if DEBUG || INTERNAL
         peripheral.startAdvertising([
             SonarBTAdvertisementDataLocalNameKey: advertismentDataLocalName,
             SonarBTAdvertisementDataServiceUUIDsKey: [service.uuid]
