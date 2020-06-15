@@ -136,7 +136,7 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
             logger.info("peripheral \(peripheral.identifierWithName) discovered with RSSI = \(RSSI), txPower = \(txPower), advertisement data = \(advertisementData.debugDescription ??? "nil")")
             delegate?.listener(self, didReadTxPower: txPower, for: peripheral)
         } else {
-            logger.info("peripheral \(peripheral.identifierWithName) discovered with RSSI = \(RSSI), advertisement data = \(advertisementData.debugDescription ??? "nil")")            
+            logger.info("peripheral \(peripheral.identifierWithName) discovered with RSSI = \(RSSI), advertisement data = \(advertisementData.debugDescription ??? "nil")")
         }
         
         if let savedPeripheral = peripherals[peripheral.identifier] {
@@ -213,12 +213,27 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
         // iOS devices do not start advertising after being disconnected, so in order to ensure they reconnect if/when
         // they come back into range, we need to tell iOS to immediately reconnect
         if reconnectDelay == 0 {
-            central.connect(peripheral)
+            reconnect(central: central, peripheral: peripheral)
         } else {
             queue.asyncAfter(deadline: .now() + .seconds(reconnectDelay)) {
-                central.connect(peripheral)
+                self.reconnect(central: central, peripheral: peripheral)
             }
         }
+    }
+    
+    private func reconnect(central: CBCentralManager, peripheral: CBPeripheral) {
+        if let peripheral = central.retrievePeripherals(withIdentifiers: [peripheral.identifier]).first {
+            logger.info("reconnecting to peripheral found via central.retrievePeripheral(withIdentifiers:)")
+            central.connect(peripheral)
+            return
+        }
+        if let peripheral = central.retrieveConnectedPeripherals(withServices: [Environment.sonarServiceUUID]).first(where: { $0.identifier == peripheral.identifier }) {
+            logger.info("reconnecting to peripheral found via central.retrieveConnectedPeripherals(withServices:)")
+            central.connect(peripheral)
+            return
+        }
+        logger.info("reconnecting to peripheral found via didDisconnect delegate")
+        central.connect(peripheral)
     }
     
     // MARK: CBPeripheralDelegate
