@@ -14,7 +14,7 @@ class DrawerViewController: UIViewController, Storyboarded {
     var header: String!
     private var detail: String!
     private var callToAction: (title: String, action: () -> Void)?
-    private var completion: (() -> Void)!
+    private var completion: ((_ actioned: Bool) -> Void)!
 
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var detailLabel: UILabel!
@@ -24,7 +24,7 @@ class DrawerViewController: UIViewController, Storyboarded {
         header: String,
         detail: String,
         callToAction: (title: String, action: () -> Void)? = nil,
-        completion: @escaping () -> Void
+        completion: @escaping (_ actioned: Bool) -> Void
     ) {
         self.header = header
         self.detail = detail
@@ -45,16 +45,17 @@ class DrawerViewController: UIViewController, Storyboarded {
     }
 
     @IBAction func primaryButtonTapped() {
-        closeTapped()
-
         if let (_, action) = callToAction {
             action()
         }
+
+        performSegue(withIdentifier: "unwindFromDrawer", sender: self)
+        completion(true)
     }
 
     @IBAction func closeTapped() {
         performSegue(withIdentifier: "unwindFromDrawer", sender: self)
-        completion()
+        completion(false)
     }
 
     override func accessibilityPerformEscape() -> Bool {
