@@ -186,12 +186,19 @@ class StatusViewControllerTests: TestCase {
             
             vc.reload()
 
-            let promptVc = try XCTUnwrap(PresentationSpy.presented(by: vc) as? CheckinDrawerViewController)
-            promptVc.updateSymptoms()
+            let drawer = try XCTUnwrap(drawerPresenter.presented)
+
+            // Manually reset presented since UIKit doesn't do it for us in the test
+            drawerPresenter.presented = nil
+
+            let cta = try XCTUnwrap(drawer.callToAction)
+            let (_, action) = cta
+            action()
+
             try respondToSymptomQuestion(vc: vc, expectedTitle: "TEMPERATURE_CHECKIN_QUESTION", response: true)
             try respondToSymptomQuestion(vc: vc, expectedTitle: "COUGH_CHECKIN_QUESTION", response: true)
             try respondToSymptomQuestion(vc: vc, expectedTitle: "ANOSMIA_CHECKIN_QUESTION", response: false)
-            
+
             XCTAssertNil(drawerPresenter.presented)
         }
     }
@@ -207,17 +214,18 @@ class StatusViewControllerTests: TestCase {
             let presenter = DrawerPresenterDouble()
             let mailbox = DrawerMailboxingDouble([.positiveTestResult, .checkin])
 
-            let vc = makeViewController(
+            _ = makeViewController(
                 statusStateMachine: machine,
                 makePresentSynchronous: true,
                 drawerPresenter: presenter,
                 drawerMailbox: mailbox
             )
             
-            let drawer = try XCTUnwrap(presenter.presented)
+            var drawer = try XCTUnwrap(presenter.presented)
             drawer.closeTapped()
 
-            XCTAssertNotNil(PresentationSpy.presented(by: vc) as? CheckinDrawerViewController)
+            drawer = try XCTUnwrap(presenter.presented)
+            XCTAssertEqual(drawer.header, "CHECKIN_QUESTIONNAIRE_OVERLAY_HEADER".localized)
         }
     }
 
@@ -234,8 +242,6 @@ class StatusViewControllerTests: TestCase {
         )
         mailbox.messages.append(.unexposed)
         notificationCenter.post(name: DrawerMessage.DrawerMessagePosted, object: nil)
-
-        wait { presenter.presented != nil }
 
         let drawer = try XCTUnwrap(presenter.presented)
         XCTAssertEqual(drawer.header, "UNEXPOSED_DRAWER_HEADER".localized)
@@ -305,6 +311,7 @@ class StatusViewControllerTests: TestCase {
         line: UInt = #line
     ) throws {
         let promptVc = try XCTUnwrap(vc.navigationController?.topViewController as? QuestionSymptomsViewController, file: file, line: line)
+        XCTAssertNotNil(promptVc.view)
         XCTAssertEqual(promptVc.titleLabel.text, expectedTitle.localized, file: file, line: line)
         
         if response {

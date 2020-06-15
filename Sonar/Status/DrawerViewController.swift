@@ -13,23 +13,27 @@ class DrawerViewController: UIViewController, Storyboarded {
 
     var header: String!
     private var detail: String!
-    private var callToAction: (title: String, action: () -> Void)?
-    private var completion: ((_ actioned: Bool) -> Void)!
+    private var close: String!
+    var callToAction: (title: String, action: () -> Void)?
+    private var closeCompletion: (() -> Void)!
 
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var detailLabel: UILabel!
     @IBOutlet weak var primaryButton: PrimaryButton!
+    @IBOutlet weak var closeButton: ButtonWithDynamicType!
 
     func inject(
         header: String,
         detail: String,
+        close: String,
         callToAction: (title: String, action: () -> Void)? = nil,
-        completion: @escaping (_ actioned: Bool) -> Void
+        closeCompletion: @escaping () -> Void
     ) {
         self.header = header
         self.detail = detail
+        self.close = close
         self.callToAction = callToAction
-        self.completion = completion
+        self.closeCompletion = closeCompletion
     }
     
     override func viewDidLoad() {
@@ -37,6 +41,7 @@ class DrawerViewController: UIViewController, Storyboarded {
 
         headerLabel.text = header
         detailLabel.text = detail
+        closeButton.setTitle(close, for: .normal)
 
         if let (title, _) = callToAction {
             primaryButton.setTitle(title, for: .normal)
@@ -45,17 +50,17 @@ class DrawerViewController: UIViewController, Storyboarded {
     }
 
     @IBAction func primaryButtonTapped() {
+        performSegue(withIdentifier: "unwindFromDrawer", sender: self)
+
         if let (_, action) = callToAction {
             action()
         }
-
-        performSegue(withIdentifier: "unwindFromDrawer", sender: self)
-        completion(true)
     }
 
     @IBAction func closeTapped() {
         performSegue(withIdentifier: "unwindFromDrawer", sender: self)
-        completion(false)
+
+        closeCompletion()
     }
 
     override func accessibilityPerformEscape() -> Bool {

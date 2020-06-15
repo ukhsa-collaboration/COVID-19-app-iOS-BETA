@@ -319,10 +319,27 @@ class StatusViewController: UIViewController, Storyboarded {
                 detail: "TEST_UPDATE_DRAW_INVALID_DETAIL".localized
             )
         case .checkin:
-            presentCheckinDrawer(
-                for: statusStateMachine.state.symptoms,
+            presentDrawer(
                 header: "CHECKIN_QUESTIONNAIRE_OVERLAY_HEADER".localized,
-                detail: "CHECKIN_QUESTIONNAIRE_OVERLAY_DETAIL".localized
+                detail: "CHECKIN_QUESTIONNAIRE_OVERLAY_DETAIL".localized,
+                close: "CHECKIN_QUESTIONNAIRE_OVERLAY_CLOSE".localized,
+                callToAction: ("CHECKIN_QUESTIONNAIRE_OVERLAY_CTA".localized, {
+                    let coordinator = QuestionnaireCoordinator(
+                        navigationController: self.navigationController!,
+                        statusStateMachine: self.statusStateMachine,
+                        questionnaireType: .checkin
+                    ) { symptoms in
+                        self.statusStateMachine.checkin(symptoms: symptoms)
+
+                        self.navigationController!.popToRootViewController(animated: self.animateTransitions)
+                        self.scrollView.setContentOffset(.zero, animated: false)
+                    }
+                    coordinator.start()
+                }),
+                completion: {
+                    self.statusStateMachine.checkin(symptoms: [])
+                    self.scrollView.setContentOffset(.zero, animated: true)
+                }
             )
         }
     }
@@ -330,7 +347,9 @@ class StatusViewController: UIViewController, Storyboarded {
     private func presentDrawer(
         header: String,
         detail: String,
-        callToAction: (title: String, action: () -> Void)? = nil
+        close: String = "Close".localized,
+        callToAction: (title: String, action: () -> Void)? = nil,
+        completion: (() -> Void)? = nil
     ) {
 //        dismiss(animated: animateTransitions) { [weak self] in
 //            guard let `self` = self else { return }
@@ -339,45 +358,16 @@ class StatusViewController: UIViewController, Storyboarded {
             drawer.inject(
                 header: header,
                 detail: detail,
-                callToAction: callToAction
-            ) { _ in self.reload() }
+                close: close,
+                callToAction: callToAction,
+                closeCompletion: completion ?? { self.reload() }
+            )
             self.drawerPresenter.present(
                 drawer: drawer,
                 inNavigationController: self.navigationController!,
                 usingTransitioningDelegate: self.drawerPresentationManager
             )
 //        }
-    }
-
-    private func presentCheckinDrawer(for symptoms: Symptoms?, header: String, detail: String) {
-        let checkinDrawer = CheckinDrawerViewController.instantiate()
-
-        if animateTransitions {
-            checkinDrawer.modalPresentationStyle = .custom
-            checkinDrawer.transitioningDelegate = drawerPresentationManager
-        }
-
-        checkinDrawer.inject(headerText: header, detailText: detail) { needsCheckin in
-            self.dismiss(animated: self.animateTransitions)
-
-            if needsCheckin {
-                let coordinator = QuestionnaireCoordinator(
-                    navigationController: self.navigationController!,
-                    statusStateMachine: self.statusStateMachine,
-                    questionnaireType: .checkin
-                ) { symptoms in
-                    self.statusStateMachine.checkin(symptoms: symptoms)
-
-                    self.navigationController!.popToRootViewController(animated: self.animateTransitions)
-                    self.scrollView.setContentOffset(.zero, animated: false)
-                }
-                coordinator.start()
-            } else {
-                self.statusStateMachine.checkin(symptoms: [])
-                self.scrollView.setContentOffset(.zero, animated: true)
-            }
-        }
-        present(checkinDrawer, animated: animateTransitions)
     }
 
     private func showTestingInfo(scrollToTestResultMeaning: Bool = false) {
