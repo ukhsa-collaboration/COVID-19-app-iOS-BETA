@@ -212,37 +212,6 @@ class StatusViewController: UIViewController, Storyboarded {
     @IBAction func unwindFromDrawer(unwindSegue: UIStoryboardSegue) {
     }
 
-    fileprivate func presentCheckinDrawer(for symptoms: Symptoms?, header: String, detail: String) {
-        let checkinDrawer = CheckinDrawerViewController.instantiate()
-        
-        if animateTransitions {
-            checkinDrawer.modalPresentationStyle = .custom
-            checkinDrawer.transitioningDelegate = drawerPresentationManager
-        }
-        
-        checkinDrawer.inject(headerText: header, detailText: detail) { needsCheckin in
-            self.dismiss(animated: self.animateTransitions)
-
-            if needsCheckin {
-                let coordinator = QuestionnaireCoordinator(
-                    navigationController: self.navigationController!,
-                    statusStateMachine: self.statusStateMachine,
-                    questionnaireType: .checkin
-                ) { symptoms in
-                    self.statusStateMachine.checkin(symptoms: symptoms)
-                        
-                    self.navigationController!.popToRootViewController(animated: self.animateTransitions)
-                    self.scrollView.setContentOffset(.zero, animated: false)
-                }
-                coordinator.start()
-            } else {
-                self.statusStateMachine.checkin(symptoms: [])
-                self.scrollView.setContentOffset(.zero, animated: true)
-            }
-        }
-        present(checkinDrawer, animated: animateTransitions)
-    }
-
     @IBAction func goToSettingsTapped() {
         UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:])
     }
@@ -371,13 +340,44 @@ class StatusViewController: UIViewController, Storyboarded {
                 header: header,
                 detail: detail,
                 callToAction: callToAction
-            ) { self.reload() }
+            ) { _ in self.reload() }
             self.drawerPresenter.present(
                 drawer: drawer,
                 inNavigationController: self.navigationController!,
                 usingTransitioningDelegate: self.drawerPresentationManager
             )
 //        }
+    }
+
+    private func presentCheckinDrawer(for symptoms: Symptoms?, header: String, detail: String) {
+        let checkinDrawer = CheckinDrawerViewController.instantiate()
+
+        if animateTransitions {
+            checkinDrawer.modalPresentationStyle = .custom
+            checkinDrawer.transitioningDelegate = drawerPresentationManager
+        }
+
+        checkinDrawer.inject(headerText: header, detailText: detail) { needsCheckin in
+            self.dismiss(animated: self.animateTransitions)
+
+            if needsCheckin {
+                let coordinator = QuestionnaireCoordinator(
+                    navigationController: self.navigationController!,
+                    statusStateMachine: self.statusStateMachine,
+                    questionnaireType: .checkin
+                ) { symptoms in
+                    self.statusStateMachine.checkin(symptoms: symptoms)
+
+                    self.navigationController!.popToRootViewController(animated: self.animateTransitions)
+                    self.scrollView.setContentOffset(.zero, animated: false)
+                }
+                coordinator.start()
+            } else {
+                self.statusStateMachine.checkin(symptoms: [])
+                self.scrollView.setContentOffset(.zero, animated: true)
+            }
+        }
+        present(checkinDrawer, animated: animateTransitions)
     }
 
     private func showTestingInfo(scrollToTestResultMeaning: Bool = false) {
