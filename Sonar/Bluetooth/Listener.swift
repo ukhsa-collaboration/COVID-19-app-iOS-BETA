@@ -132,12 +132,11 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
     }
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        logger.info("advertisement data = \(advertisementData.debugDescription ??? "nil")")
         if let txPower = (advertisementData[CBAdvertisementDataTxPowerLevelKey] as? NSNumber)?.intValue {
-            logger.info("peripheral \(peripheral.identifierWithName) discovered with RSSI = \(RSSI), txPower = \(txPower)")
+            logger.info("peripheral \(peripheral.identifierWithName) discovered with RSSI = \(RSSI), txPower = \(txPower), advertisement data = \(advertisementData.debugDescription ??? "nil")")
             delegate?.listener(self, didReadTxPower: txPower, for: peripheral)
         } else {
-            logger.info("peripheral \(peripheral.identifierWithName) discovered with RSSI = \(RSSI)")            
+            logger.info("peripheral \(peripheral.identifierWithName) discovered with RSSI = \(RSSI), advertisement data = \(advertisementData.debugDescription ??? "nil")")            
         }
         
         if let savedPeripheral = peripherals[peripheral.identifier] {
