@@ -16,7 +16,7 @@ protocol BluetoothNursery {
     var contactEventPersister: ContactEventPersister { get }
     var stateObserver: BluetoothStateObserving { get }
     var broadcaster: Broadcaster? { get }
-    var listener: Listener? { get }
+    var listener: BTLEListener? { get }
 
     func startBluetooth(registration: Registration?)
     var hasStarted: Bool { get }
@@ -40,7 +40,7 @@ class ConcreteBluetoothNursery: BluetoothNursery, PersistenceDelegate {
     public var broadcaster: Broadcaster?
     public var broadcastPayloadService: BroadcastPayloadService?
 
-    public var listener: Listener?
+    public var listener: BTLEListener?
     public private(set) var stateObserver: BluetoothStateObserving = BluetoothStateObserver(initialState: .unknown)
 
     private var central: CBCentralManager?
@@ -88,21 +88,23 @@ class ConcreteBluetoothNursery: BluetoothNursery, PersistenceDelegate {
         ])
         self.broadcaster = broadcaster
         
-        let listener = BTLEListener(broadcaster: broadcaster, queue: btleQueue)
-        central = CBCentralManager(delegate: listener, queue: btleQueue, options: [
-            CBCentralManagerScanOptionAllowDuplicatesKey: NSNumber(true),
-            CBCentralManagerOptionRestoreIdentifierKey: ConcreteBluetoothNursery.centralRestoreIdentifier,
-            CBCentralManagerOptionShowPowerAlertKey: NSNumber(true),
+        listener = BTLEListener(broadcaster: broadcaster, queue: btleQueue)
+        central = CBCentralManager(
+            delegate: listener,
+            queue: btleQueue, options: [
+                CBCentralManagerScanOptionAllowDuplicatesKey: NSNumber(true),
+                CBCentralManagerOptionRestoreIdentifierKey: ConcreteBluetoothNursery.centralRestoreIdentifier,
+                CBCentralManagerOptionShowPowerAlertKey: NSNumber(true),
         ])
-        listener.delegate = contactEventRepository
-        listener.stateDelegate = self.stateObserver
+        listener?.delegate = contactEventRepository
+        listener?.stateDelegate = self.stateObserver
         userNotifier = BluetoothStateUserNotifier(
             appStateReader: UIApplication.shared,
             bluetoothStateObserver: self.stateObserver,
             scheduler: HumbleLocalNotificationScheduler(userNotificationCenter: userNotificationCenter)
         )
         
-        self.listener = listener
+//        self.listener = listener
         
         broadcastPayloadRotationTimer = BroadcastPayloadRotationTimer(broadcaster: broadcaster, queue: btleQueue)
         broadcastPayloadRotationTimer?.scheduleNextMidnightUTC()

@@ -49,7 +49,24 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
     private var keepaliveTimer: DispatchSourceTimer?
     private let dateFormatter = ISO8601DateFormatter()
     private let queue: DispatchQueue
-    
+
+    override init() {
+        let persistence = Persistence(
+            secureRegistrationStorage: SecureRegistrationStorage(),
+            broadcastKeyStorage: SecureBroadcastRotationKeyStorage(),
+            monitor: NoOpAppMonitoring(),
+            storageChecker: StorageChecker(service: "")
+        )
+
+        let broadcastPayloadService = SonarBroadcastPayloadService(
+            storage: SecureBroadcastRotationKeyStorage(),
+            persistence: persistence,
+            encrypter: ConcreteBroadcastIdEncrypter())
+
+        self.broadcaster = BTLEBroadcaster(broadcastPayloadService: broadcastPayloadService)
+        self.queue = DispatchQueue(label: "BTLE Queue")
+    }
+
     init(broadcaster: Broadcaster, queue: DispatchQueue) {
         self.broadcaster = broadcaster
         self.queue = queue
@@ -94,6 +111,7 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
         logger.info("central \(central.isScanning ? "is" : "is not") scanning")
     }
 
+    // dlb/br: Happy Case [HUB] - Entry Point
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         logger.info("state: \(central.state)")
         
@@ -344,8 +362,10 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
         lastKeepaliveDate = Date()
         var keepaliveValue = UInt8.random(in: .min ... .max)
         let value = Data(bytes: &keepaliveValue, count: MemoryLayout.size(ofValue: keepaliveValue))
+
+        // TODO: Execution guaranteed from this call?
         keepaliveTimer = DispatchSource.makeTimerSource(queue: queue)
-        keepaliveTimer?.setEventHandler {
+        keepaliveTimer?.setEventHandler { [unowned self] in
             self.broadcaster.sendKeepalive(value: value)
         }
         keepaliveTimer?.schedule(deadline: .now() + keepaliveInterval)

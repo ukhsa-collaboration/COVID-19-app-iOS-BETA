@@ -72,6 +72,7 @@ class BTLEBroadcaster: NSObject, Broadcaster, CBPeripheralManagerDelegate {
             return
         }
         guard let keepaliveCharacteristic = self.keepaliveCharacteristic else {
+            // TODO: Why would this be nil?
             logger.info("keepaliveCharacteristic shouldn't be nil")
             return
         }

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06DEC5052497187100A38739 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 89F06B2B2434A2C00074C612 /* Logging */; };
+		06DEC5062497187100A38739 /* PactConsumerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B7363DDD2468B5AB00193E04 /* PactConsumerSwift */; };
+		06DEC5072497187100A38739 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 0995582F248FF8F500FE97DE /* Logging */; };
+		06DEC50C249724A000A38739 /* CBPeripheral+Exploration.m in Sources */ = {isa = PBXBuildFile; fileRef = 06DEC50B2497249F00A38739 /* CBPeripheral+Exploration.m */; };
 		0805FAF0247BEEE700E3A74F /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805FAEF247BEEE700E3A74F /* ErrorView.swift */; };
 		0805FAF2247C02AB00E3A74F /* ErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0805FAF1247C02AB00E3A74F /* ErrorView.xib */; };
 		0805FAF4247C233F00E3A74F /* IBView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805FAF3247C233F00E3A74F /* IBView.swift */; };
@@ -115,7 +119,6 @@
 		09955828248FF8C500FE97DE /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB6E242B92CF002254AD /* GoogleUtilities.framework */; };
 		0995582A248FF8C500FE97DE /* GoogleDataTransport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB70242B9305002254AD /* GoogleDataTransport.framework */; };
 		0995582D248FF8ED00FE97DE /* PromisesObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB58242B7EC0002254AD /* PromisesObjC.framework */; };
-		09955830248FF8F500FE97DE /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 0995582F248FF8F500FE97DE /* Logging */; };
 		0997D056243BDEEC0067346C /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0997D055243BDEEC0067346C /* RootViewController.swift */; };
 		09A9254324536FD300C5DBC1 /* RegistrationReminderScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A9254224536FD300C5DBC1 /* RegistrationReminderScheduler.swift */; };
 		09A925452453807000C5DBC1 /* RegistrationReminderSchedulerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A925442453807000C5DBC1 /* RegistrationReminderSchedulerTests.swift */; };
@@ -240,13 +243,14 @@
 		AE2A5E502423C473007A4771 /* ContactEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2A5E4F2423C473007A4771 /* ContactEvent.swift */; };
 		AE2DCAA0241920B600A940FC /* Broadcaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2DCA9F241920B600A940FC /* Broadcaster.swift */; };
 		AEAFA67924602629009AEAEB /* StatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAFA67824602629009AEAEB /* StatusTests.swift */; };
+		B03DA1773D2F92D45CB10AAF /* StateMachineTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03DA2A5E87A7440E5EBC3B5 /* StateMachineTest.swift */; };
+		B03DA3DFE015BCDFBFC6CC95 /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03DAFA4A366AA9674E35484 /* StateMachine.swift */; };
 		B70190202475136800075C80 /* RegistrationAPIPactTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B701901F2475136800075C80 /* RegistrationAPIPactTests.swift */; };
 		B701DC4C247759AC00727126 /* sonar.ca.cer in Resources */ = {isa = PBXBuildFile; fileRef = B701DC4B247759AC00727126 /* sonar.ca.cer */; };
 		B701DC4E247784B300727126 /* ProviderKnownDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = B701DC4D247784B300727126 /* ProviderKnownDetails.swift */; };
 		B701DC502477887900727126 /* HMACHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B701DC4F2477887900727126 /* HMACHelper.swift */; };
 		B701DC5224779BFC00727126 /* PactMockServiceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B701DC5124779BFC00727126 /* PactMockServiceHelper.swift */; };
 		B71ECC1C2474C81100DD6EFC /* ProximityAPIPactTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71ECC1B2474C81100DD6EFC /* ProximityAPIPactTests.swift */; };
-		B7363DDE2468B5AB00193E04 /* PactConsumerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B7363DDD2468B5AB00193E04 /* PactConsumerSwift */; };
 		B79A2E832476013900E8C21E /* environment.json in Resources */ = {isa = PBXBuildFile; fileRef = B79A2E742476013800E8C21E /* environment.json */; };
 		B79A2E842476013900E8C21E /* localhost.crt in Resources */ = {isa = PBXBuildFile; fileRef = B79A2E762476013800E8C21E /* localhost.crt */; };
 		B79A2E852476013900E8C21E /* localhost.key in Resources */ = {isa = PBXBuildFile; fileRef = B79A2E772476013800E8C21E /* localhost.key */; };
@@ -365,7 +369,6 @@
 		F78CEB6F242B92CF002254AD /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB6E242B92CF002254AD /* GoogleUtilities.framework */; };
 		F78CEB71242B9305002254AD /* GoogleDataTransport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB70242B9305002254AD /* GoogleDataTransport.framework */; };
 		F78CEB73242B937F002254AD /* nanopb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78CEB72242B937F002254AD /* nanopb.framework */; };
-		F7D62F2724406FC8004C32A2 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 89F06B2B2434A2C00074C612 /* Logging */; };
 		F7D62F292440D4CB004C32A2 /* SonarBroadcastPayloadServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D62F282440D4CB004C32A2 /* SonarBroadcastPayloadServiceTests.swift */; };
 		F7D62F2B2440D64D004C32A2 /* SonarBroadcastPayloadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D62F2A2440D64C004C32A2 /* SonarBroadcastPayloadService.swift */; };
 		F7E74F8E244DFBDA00273C59 /* BroadcastRotationKeyConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E74F8D244DFBDA00273C59 /* BroadcastRotationKeyConverter.swift */; };
@@ -398,6 +401,9 @@
 
 /* Begin PBXFileReference section */
 		068B8ABB245C11C0000EAB4C /* clean-artifacts.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "clean-artifacts.yml"; sourceTree = "<group>"; };
+		06DEC5082497246300A38739 /* SonarTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SonarTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		06DEC50A2497249F00A38739 /* CBPeripheral+Exploration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CBPeripheral+Exploration.h"; sourceTree = "<group>"; };
+		06DEC50B2497249F00A38739 /* CBPeripheral+Exploration.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CBPeripheral+Exploration.m"; sourceTree = "<group>"; };
 		0805FAEF247BEEE700E3A74F /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		0805FAF1247C02AB00E3A74F /* ErrorView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ErrorView.xib; sourceTree = "<group>"; };
 		0805FAF3247C233F00E3A74F /* IBView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IBView.swift; sourceTree = "<group>"; };
@@ -607,6 +613,8 @@
 		AE2A5E4F2423C473007A4771 /* ContactEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEvent.swift; sourceTree = "<group>"; };
 		AE2DCA9F241920B600A940FC /* Broadcaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Broadcaster.swift; sourceTree = "<group>"; };
 		AEAFA67824602629009AEAEB /* StatusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusTests.swift; sourceTree = "<group>"; };
+		B03DA2A5E87A7440E5EBC3B5 /* StateMachineTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateMachineTest.swift; sourceTree = "<group>"; };
+		B03DAFA4A366AA9674E35484 /* StateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateMachine.swift; sourceTree = "<group>"; };
 		B701901F2475136800075C80 /* RegistrationAPIPactTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationAPIPactTests.swift; sourceTree = "<group>"; };
 		B701DC4B247759AC00727126 /* sonar.ca.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = sonar.ca.cer; sourceTree = "<group>"; };
 		B701DC4D247784B300727126 /* ProviderKnownDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderKnownDetails.swift; sourceTree = "<group>"; };
@@ -767,7 +775,7 @@
 				0995581A248FF8C500FE97DE /* FirebaseMessaging.framework in Frameworks */,
 				0995582A248FF8C500FE97DE /* GoogleDataTransport.framework in Frameworks */,
 				09955828248FF8C500FE97DE /* GoogleUtilities.framework in Frameworks */,
-				09955830248FF8F500FE97DE /* Logging in Frameworks */,
+				06DEC5072497187100A38739 /* Logging in Frameworks */,
 				09955826248FF8C500FE97DE /* nanopb.framework in Frameworks */,
 				0995582D248FF8ED00FE97DE /* PromisesObjC.framework in Frameworks */,
 				09955824248FF8C500FE97DE /* Protobuf.framework in Frameworks */,
@@ -791,7 +799,7 @@
 				F78CEB5B242B7EC0002254AD /* FirebaseCoreDiagnostics.framework in Frameworks */,
 				F78CEB6A242B8D3F002254AD /* FirebaseInstanceID.framework in Frameworks */,
 				F78CEB6C242B8D84002254AD /* FirebaseInstallations.framework in Frameworks */,
-				F7D62F2724406FC8004C32A2 /* Logging in Frameworks */,
+				06DEC5052497187100A38739 /* Logging in Frameworks */,
 				F78CEB5A242B7EC0002254AD /* FirebaseMessaging.framework in Frameworks */,
 				21B3D2E82429115600573061 /* CoreBluetooth.framework in Frameworks */,
 				F78CEB6F242B92CF002254AD /* GoogleUtilities.framework in Frameworks */,
@@ -811,7 +819,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B7363DDE2468B5AB00193E04 /* PactConsumerSwift in Frameworks */,
+				06DEC5062497187100A38739 /* PactConsumerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1362,6 +1370,18 @@
 			path = Logging;
 			sourceTree = "<group>";
 		};
+		B03DA74044385C4CC2E03130 /* StateMachine */ = {
+			isa = PBXGroup;
+			children = (
+				B03DAFA4A366AA9674E35484 /* StateMachine.swift */,
+				B03DA2A5E87A7440E5EBC3B5 /* StateMachineTest.swift */,
+				06DEC50A2497249F00A38739 /* CBPeripheral+Exploration.h */,
+				06DEC50B2497249F00A38739 /* CBPeripheral+Exploration.m */,
+				06DEC5082497246300A38739 /* SonarTests-Bridging-Header.h */,
+			);
+			path = StateMachine;
+			sourceTree = "<group>";
+		};
 		B7363DD42468B35700193E04 /* SonarPactTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -1566,6 +1586,7 @@
 				F72EBD9A243C8750009F9328 /* BluetoothStateUserNotifierTests.swift */,
 				09D027CD2452157D006EE07E /* BluetoothStateObserverTests.swift */,
 				09D91A7624521C5C004825A5 /* BluetoothNurseryTests.swift */,
+				B03DA74044385C4CC2E03130 /* StateMachine */,
 			);
 			path = Bluetooth;
 			sourceTree = "<group>";
@@ -1760,6 +1781,7 @@
 					};
 					214209BE2422276800C7BFF3 = {
 						CreatedOnToolsVersion = 11.3.1;
+						LastSwiftMigration = 1140;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 6FC63C2C241641B8007C8BF3;
 					};
@@ -1969,6 +1991,7 @@
 				F60497672452415F002B8503 /* ContactEventsUploaderDouble.swift in Sources */,
 				095283AA2476FF2800CDEE55 /* SynchronousNavigationControllerDouble.swift in Sources */,
 				F632792124351C1900CF7A42 /* OnboardingViewControllerTests.swift in Sources */,
+				06DEC50C249724A000A38739 /* CBPeripheral+Exploration.m in Sources */,
 				89DF66A62460217A00A55F24 /* StorageCheckingDouble.swift in Sources */,
 				89C8B216245C5258009CCE80 /* DefaultObjectStoringDouble.swift in Sources */,
 				095A91182434FF1500ED6369 /* ApplicationDouble.swift in Sources */,
@@ -2056,6 +2079,8 @@
 				F694B1BE2459EB3800C6A5D1 /* NotificationAcknowledgerTests.swift in Sources */,
 				F68BFBF7242ACD17008EE68F /* TestHelpers.swift in Sources */,
 				08D77F2C2477999100EAEBD5 /* LinkingIdRequestTests.swift in Sources */,
+				B03DA3DFE015BCDFBFC6CC95 /* StateMachine.swift in Sources */,
+				B03DA1773D2F92D45CB10AAF /* StateMachineTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2305,6 +2330,15 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 89896E5E2435EB6500F949EA /* CoLocateTests.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				SWIFT_OBJC_BRIDGING_HEADER = "SonarTests/Bluetooth/StateMachine/SonarTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -2312,6 +2346,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 89896E5E2435EB6500F949EA /* CoLocateTests.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				SWIFT_OBJC_BRIDGING_HEADER = "SonarTests/Bluetooth/StateMachine/SonarTests-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

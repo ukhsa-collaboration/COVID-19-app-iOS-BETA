@@ -7,19 +7,20 @@
 //
 
 import UIKit
+import CoreBluetooth
 @testable import Sonar
 
-class ListenerDouble: Listener {
+class ListenerDouble: BTLEListener {
     var connectedPeripheral: Peripheral?
 
-    func start(stateDelegate: ListenerStateDelegate?, delegate: ListenerDelegate?) {
+    override func start(stateDelegate: ListenerStateDelegate?, delegate: ListenerDelegate?) {
     }
     
     func connect(_ peripheral: Peripheral) {
         self.connectedPeripheral = peripheral
     }
 
-    func isHealthy() -> Bool {
+    override func isHealthy() -> Bool {
         return false
     }
 }
