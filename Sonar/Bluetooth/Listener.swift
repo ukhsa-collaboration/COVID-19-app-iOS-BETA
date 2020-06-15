@@ -159,12 +159,11 @@ extension BTLEListener: SonarBTCentralManagerDelegate {
     }
     
     func centralManager(_ central: SonarBTCentralManager, didDiscover peripheral: SonarBTPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        logger.info("advertisement data = \(advertisementData.debugDescription ??? "nil")")
         if let txPower = (advertisementData[SonarBTAdvertisementDataTxPowerLevelKey] as? NSNumber)?.intValue {
-            logger.info("peripheral \(peripheral.identifierWithName) discovered with RSSI = \(RSSI), txPower = \(txPower)")
+            logger.info("peripheral \(peripheral.identifierWithName) discovered with RSSI = \(RSSI), txPower = \(txPower), advertisement data = \(advertisementData.debugDescription ??? "nil")")
             delegate?.listener(self, didReadTxPower: txPower, for: peripheral)
         } else {
-            logger.info("peripheral \(peripheral.identifierWithName) discovered with RSSI = \(RSSI)")            
+            logger.info("peripheral \(peripheral.identifierWithName) discovered with RSSI = \(RSSI), advertisement data = \(advertisementData.debugDescription ??? "nil")")
         }
         
         if let savedPeripheral = peripherals[peripheral.identifier] {
