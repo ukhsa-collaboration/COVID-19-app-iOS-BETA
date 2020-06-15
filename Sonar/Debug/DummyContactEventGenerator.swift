@@ -68,7 +68,7 @@ class DummyContactEventGenerator {
     
 }
 
-struct StubListener: Listener {
+class StubListener: Listener {
     func start(stateDelegate: ListenerStateDelegate?, delegate: ListenerDelegate?) {
     }
     func isHealthy() -> Bool {

@@ -16,17 +16,17 @@ protocol Peripheral {
 extension SonarBTPeripheral: Peripheral {
 }
 
-protocol ListenerDelegate {
+protocol ListenerDelegate: class {
     func listener(_ listener: Listener, didFind broadcastPayload: IncomingBroadcastPayload, for peripheral: Peripheral)
     func listener(_ listener: Listener, didReadRSSI RSSI: Int, for peripheral: Peripheral)
     func listener(_ listener: Listener, didReadTxPower txPower: Int, for peripheral: Peripheral)
 }
 
-protocol ListenerStateDelegate {
+protocol ListenerStateDelegate: class {
     func listener(_ listener: Listener, didUpdateState state: SonarBTManagerState)
 }
 
-protocol Listener {
+protocol Listener: class {
     func start(stateDelegate: ListenerStateDelegate?, delegate: ListenerDelegate?)
     func isHealthy() -> Bool
 }
@@ -35,8 +35,8 @@ class BTLEListener: NSObject, Listener {
     var reconnectDelay: Int = 0
 
     var broadcaster: Broadcaster
-    var stateDelegate: ListenerStateDelegate?
-    var delegate: ListenerDelegate?
+    weak var stateDelegate: ListenerStateDelegate?
+    weak var delegate: ListenerDelegate?
     
     var peripherals: [UUID: SonarBTPeripheral] = [:]
     
@@ -50,7 +50,7 @@ class BTLEListener: NSObject, Listener {
     // comfortably less than the ~10s background processing time Core Bluetooth gives us when it wakes us up
     init(keepaliveInterval: TimeInterval = 8.0) {
         self.keepaliveInterval = keepaliveInterval
-        
+
         let persistence = Persistence(
             secureRegistrationStorage: SecureRegistrationStorage(),
             broadcastKeyStorage: SecureBroadcastRotationKeyStorage(),
