@@ -87,8 +87,6 @@ class RegistrationStatusViewController: UIViewController, Storyboarded {
         registrationStatusText.textColor = UIColor.nhs.text
         view.backgroundColor = nil
         registrationRetryButton.isHidden = true
-
-        UIAccessibility.post(notification: .layoutChanged, argument: view)
     }
 
     @objc private func showRegistrationFailedStatus() {
