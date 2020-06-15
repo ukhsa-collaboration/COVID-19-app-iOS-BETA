@@ -49,6 +49,38 @@
                                     <outlet property="stepper" destination="hjR-YM-2KC" id="5Ws-1A-6eO"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="SkipAndroidReconnectTableViewCell" id="gdx-eM-MFF" customClass="SkipAndroidReconnectTableViewCell" customModule="Sonar" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="99" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gdx-eM-MFF" id="NZI-1B-RK0">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3bk-gf-IYt">
+                                            <rect key="frame" x="20" y="11.5" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7sN-kw-SEa">
+                                            <rect key="frame" x="345" y="6.5" width="51" height="31"/>
+                                            <connections>
+                                                <action selector="didToggleReconnectAndroid:" destination="MsF-Ux-Xai" eventType="valueChanged" id="lUh-GF-6f2"/>
+                                            </connections>
+                                        </switch>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="3bk-gf-IYt" firstAttribute="leading" secondItem="NZI-1B-RK0" secondAttribute="leading" constant="20" symbolic="YES" id="EZA-Yc-KKE"/>
+                                        <constraint firstItem="3bk-gf-IYt" firstAttribute="centerY" secondItem="7sN-kw-SEa" secondAttribute="centerY" id="P7o-Qk-ABY"/>
+                                        <constraint firstAttribute="trailing" secondItem="7sN-kw-SEa" secondAttribute="trailing" constant="20" symbolic="YES" id="mXe-Vv-sWT"/>
+                                        <constraint firstItem="3bk-gf-IYt" firstAttribute="centerY" secondItem="NZI-1B-RK0" secondAttribute="centerY" id="rcQ-2Q-y5i"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="skipAndroid" destination="7sN-kw-SEa" id="2NH-5O-Qya"/>
+                                    <outlet property="skipAndroidLabel" destination="3bk-gf-IYt" id="ooL-Ej-MPA"/>
+                                </connections>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="MsF-Ux-Xai" id="Llj-zB-qY5"/>

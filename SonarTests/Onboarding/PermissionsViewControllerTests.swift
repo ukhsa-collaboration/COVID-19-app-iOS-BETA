@@ -232,7 +232,7 @@ class PermissionsViewControllerTests: TestCase {
 
 }
 
-fileprivate struct DummyBTLEListener: Listener {
+fileprivate class DummyBTLEListener: Listener {
     func start(stateDelegate: ListenerStateDelegate?, delegate: ListenerDelegate?) { }
     func connect(_ peripheral: Peripheral) { }
     func isHealthy() -> Bool { return false }

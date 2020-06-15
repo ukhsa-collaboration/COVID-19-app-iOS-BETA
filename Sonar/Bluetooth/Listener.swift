@@ -10,6 +10,15 @@ import UIKit
 import CoreBluetooth
 import Logging
 
+enum PeripheralManufacturer {
+    
+    init(_ manufacturerData: Any?) {
+        self = manufacturerData == nil ? .unknown : .android
+    }
+    
+    case unknown, android
+}
+
 protocol Peripheral {
     var identifier: UUID { get }
 }
@@ -17,17 +26,17 @@ protocol Peripheral {
 extension CBPeripheral: Peripheral {
 }
 
-protocol ListenerDelegate {
+protocol ListenerDelegate: class {
     func listener(_ listener: Listener, didFind broadcastPayload: IncomingBroadcastPayload, for peripheral: Peripheral)
     func listener(_ listener: Listener, didReadRSSI RSSI: Int, for peripheral: Peripheral)
     func listener(_ listener: Listener, didReadTxPower txPower: Int, for peripheral: Peripheral)
 }
 
-protocol ListenerStateDelegate {
+protocol ListenerStateDelegate: class {
     func listener(_ listener: Listener, didUpdateState state: CBManagerState)
 }
 
-protocol Listener {
+protocol Listener: class {
     func start(stateDelegate: ListenerStateDelegate?, delegate: ListenerDelegate?)
     func isHealthy() -> Bool
 }
@@ -35,11 +44,13 @@ protocol Listener {
 class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDelegate {
     
     var reconnectDelay: Int = 0
+    var skipAndroidReconnect: Bool = false
 
     var broadcaster: Broadcaster
-    var stateDelegate: ListenerStateDelegate?
-    var delegate: ListenerDelegate?
+    weak var stateDelegate: ListenerStateDelegate?
+    weak var delegate: ListenerDelegate?
     
+    var peripheralManufacturers: [UUID: PeripheralManufacturer] = [:]
     var peripherals: [UUID: CBPeripheral] = [:]
     
     // comfortably less than the ~10s background processing time Core Bluetooth gives us when it wakes us up
@@ -68,6 +79,7 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
             logger.info("restoring \(restoredPeripherals.count) \(restoredPeripherals.count == 1 ? "peripheral" : "peripherals") for central \(central)")
             for peripheral in restoredPeripherals {
                 peripherals[peripheral.identifier] = peripheral
+                peripheralManufacturers[peripheral.identifier] = .unknown
                 peripheral.delegate = self
             }
         } else {
@@ -138,6 +150,7 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
         // peripheral.state does not give us any useful indication as to whether the connection is "live" or not
         // https://www.pivotaltracker.com/story/show/173132100
         peripherals[peripheral.identifier] = peripheral
+        peripheralManufacturers[peripheral.identifier] = PeripheralManufacturer(advertisementData[CBAdvertisementDataManufacturerDataKey])
         central.connect(peripheral)
     }
     
@@ -178,15 +191,28 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
     }
 
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
+        if skipAndroidReconnect && peripheralManufacturers[peripheral.identifier] == .android {
+            if let error = error {
+                logger.info("will not reconnect to android peripheral \(peripheral.identifierWithName) after error: \(error)")
+            } else {
+                logger.info("will not reconnect to android peripheral \(peripheral.identifierWithName)")
+            }
+
+            central.cancelPeripheralConnection(peripheral)
+            peripherals.removeValue(forKey: peripheral.identifier)
+            peripheralManufacturers.removeValue(forKey: peripheral.identifier)
+            return
+        }
+        
         let delay = reconnectDelay == 0 ? "immediately" : "after \(reconnectDelay)s"
         if let error = error {
             logger.info("attempting to reconnect \(delay) to peripheral \(peripheral.identifierWithName) after error: \(error)")
         } else {
             logger.info("attempting to reconnect \(delay) to peripheral \(peripheral.identifierWithName)")
         }
+        
         // iOS devices do not start advertising after being disconnected, so in order to ensure they reconnect if/when
         // they come back into range, we need to tell iOS to immediately reconnect
-        
         if reconnectDelay == 0 {
             central.connect(peripheral)
         } else {
