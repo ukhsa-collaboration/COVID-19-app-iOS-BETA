@@ -162,71 +162,67 @@ class StatusViewControllerTests: TestCase {
     }
 
     func testDoesNotShowsDrawerAfterCheckinIfTemperature() throws{
-        try PresentationSpy.withSpy {
-            let persistence = PersistenceDouble(statusState: .symptomatic(StatusState.Symptomatic(symptoms: [.cough], startDate: Date(), checkinDate: Date())))
-            
-            let drawerMailbox = DrawerMailboxingDouble()
-            let statusStateMachine = StatusStateMachine(
-                persisting: persistence,
-                contactEventsUploader: ContactEventsUploaderDouble(),
-                drawerMailbox: drawerMailbox,
-                notificationCenter: NotificationCenter(),
-                userNotificationCenter: UserNotificationCenterDouble()
-            )
-            
-            let drawerPresenter = DrawerPresenterDouble()
-            let vc = makeViewController(
-                persistence: persistence,
-                statusStateMachine: statusStateMachine,
-                loadView: true,
-                makePresentSynchronous: true,
-                drawerPresenter: drawerPresenter,
-                drawerMailbox: drawerMailbox
-            )
-            
-            vc.reload()
+        let persistence = PersistenceDouble(statusState: .symptomatic(StatusState.Symptomatic(symptoms: [.cough], startDate: Date(), checkinDate: Date())))
 
-            let drawer = try XCTUnwrap(drawerPresenter.presented)
+        let drawerMailbox = DrawerMailboxingDouble()
+        let statusStateMachine = StatusStateMachine(
+            persisting: persistence,
+            contactEventsUploader: ContactEventsUploaderDouble(),
+            drawerMailbox: drawerMailbox,
+            notificationCenter: NotificationCenter(),
+            userNotificationCenter: UserNotificationCenterDouble()
+        )
 
-            // Manually reset presented since UIKit doesn't do it for us in the test
-            drawerPresenter.presented = nil
+        let drawerPresenter = DrawerPresenterDouble()
+        let vc = makeViewController(
+            persistence: persistence,
+            statusStateMachine: statusStateMachine,
+            loadView: true,
+            makePresentSynchronous: true,
+            drawerPresenter: drawerPresenter,
+            drawerMailbox: drawerMailbox
+        )
 
-            let cta = try XCTUnwrap(drawer.callToAction)
-            let (_, action) = cta
-            action()
+        vc.reload()
 
-            try respondToSymptomQuestion(vc: vc, expectedTitle: "TEMPERATURE_CHECKIN_QUESTION", response: true)
-            try respondToSymptomQuestion(vc: vc, expectedTitle: "COUGH_CHECKIN_QUESTION", response: true)
-            try respondToSymptomQuestion(vc: vc, expectedTitle: "ANOSMIA_CHECKIN_QUESTION", response: false)
+        let drawer = try XCTUnwrap(drawerPresenter.presented)
 
-            XCTAssertNil(drawerPresenter.presented)
-        }
+        // Manually reset presented since UIKit doesn't do it for us in the test
+        drawerPresenter.presented = nil
+
+        let cta = try XCTUnwrap(drawer.callToAction)
+        let (_, action) = cta
+        action()
+
+        try respondToSymptomQuestion(vc: vc, expectedTitle: "TEMPERATURE_CHECKIN_QUESTION", response: true)
+        try respondToSymptomQuestion(vc: vc, expectedTitle: "COUGH_CHECKIN_QUESTION", response: true)
+        try respondToSymptomQuestion(vc: vc, expectedTitle: "ANOSMIA_CHECKIN_QUESTION", response: false)
+        
+        XCTAssertNil(drawerPresenter.presented)
     }
-
+    
     func testReloadsAfterClosingDrawer() throws {
-        try PresentationSpy.withSpy {
-            let checkinDate = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
-            let machine = StatusStateMachiningDouble(state:
-                .positive(StatusState.Positive(
-                    checkinDate: checkinDate, symptoms: [.temperature], startDate: Date()
-                ))
-            )
-            let presenter = DrawerPresenterDouble()
-            let mailbox = DrawerMailboxingDouble([.positiveTestResult, .checkin])
-
-            _ = makeViewController(
-                statusStateMachine: machine,
-                makePresentSynchronous: true,
-                drawerPresenter: presenter,
-                drawerMailbox: mailbox
-            )
-            
-            var drawer = try XCTUnwrap(presenter.presented)
-            drawer.closeTapped()
-
-            drawer = try XCTUnwrap(presenter.presented)
-            XCTAssertEqual(drawer.header, "CHECKIN_QUESTIONNAIRE_OVERLAY_HEADER".localized)
-        }
+        let checkinDate = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
+        let machine = StatusStateMachiningDouble(state:
+            .positive(StatusState.Positive(
+                checkinDate: checkinDate, symptoms: [.temperature], startDate: Date()
+            ))
+        )
+        let presenter = DrawerPresenterDouble()
+        let mailbox = DrawerMailboxingDouble([.positiveTestResult, .checkin])
+        
+        _ = makeViewController(
+            statusStateMachine: machine,
+            makePresentSynchronous: true,
+            drawerPresenter: presenter,
+            drawerMailbox: mailbox
+        )
+        
+        var drawer = try XCTUnwrap(presenter.presented)
+        drawer.closeTapped()
+        
+        drawer = try XCTUnwrap(presenter.presented)
+        XCTAssertEqual(drawer.header, "CHECKIN_QUESTIONNAIRE_OVERLAY_HEADER".localized)
     }
 
     func testListensForNewDrawerMessages() throws {
