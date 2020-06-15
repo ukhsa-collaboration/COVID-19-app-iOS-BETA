@@ -44,9 +44,11 @@ class TestingInfoViewController: UIViewController, Storyboarded {
             let scrollHeight = scrollView.frame.height
             let testResultMeansHeight = scrollView.contentSize.height - testResultMeansHeader.frame.minY
             let offset = scrollHeight - testResultMeansHeight
-            UIView.animate(withDuration: 0.25) {
+            UIView.animate(withDuration: 0.25, animations: {
                 self.scrollView.contentOffset = CGPoint(x: 0, y: self.testResultMeansHeader.frame.minY - offset)
-            }
+            }, completion: { _ in
+                UIAccessibility.post(notification: .screenChanged, argument: self.testResultMeansHeader);
+            })
         }
     }
 
