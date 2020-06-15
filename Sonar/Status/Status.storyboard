@@ -416,7 +416,7 @@
                                                 </constraints>
                                                 <directionalEdgeInsets key="directionalLayoutMargins" top="25" leading="8" bottom="25" trailing="8"/>
                                                 <connections>
-                                                    <action selector="testingInfoTapped:" destination="D27-h6-ECy" eventType="touchUpInside" id="nOL-EN-deI"/>
+                                                    <action selector="testingInfoTapped" destination="D27-h6-ECy" eventType="touchUpInside" id="wHa-2M-Vc2"/>
                                                 </connections>
                                             </view>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="50" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sEj-8e-DCP" userLabel="Workplace Guidance Button" customClass="UIButton">

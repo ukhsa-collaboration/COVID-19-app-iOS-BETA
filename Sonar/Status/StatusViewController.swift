@@ -201,7 +201,7 @@ class StatusViewController: UIViewController, Storyboarded {
         performSegue(withIdentifier: "showBookTest", sender: self)
     }
 
-    @IBAction func testingInfoTapped(_ sender: Any) {
+    @IBAction func testingInfoTapped() {
         let linkingIdVc = TestingInfoContainerViewController.instantiate()
         linkingIdVc.inject(linkingIdManager: linkingIdManager, uiQueue: DispatchQueue.main)
         navigationController?.pushViewController(linkingIdVc, animated: animateTransitions)
@@ -342,7 +342,9 @@ class StatusViewController: UIViewController, Storyboarded {
             presentDrawer(
                 header: "NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_HEADER".localized,
                 detail: "NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_DETAIL".localized,
-                callToAction: ("NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_CTA".localized, {})
+                callToAction: ("NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_CTA".localized, {
+                    self.testingInfoTapped()
+                })
             )
         case .unclearTestResult:
             presentDrawer(
