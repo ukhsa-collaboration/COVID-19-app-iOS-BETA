@@ -81,6 +81,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="414" height="400"/>
                     <connections>
+                        <outlet property="closeButton" destination="Cfe-8T-jbW" id="SzN-bd-ZEj"/>
                         <outlet property="detailLabel" destination="OXR-SF-E5K" id="i0H-kl-d2l"/>
                         <outlet property="headerLabel" destination="z4d-Td-TgN" id="7kc-qv-B7f"/>
                         <outlet property="primaryButton" destination="Rgy-oU-d1D" id="Dwk-nw-n12"/>
