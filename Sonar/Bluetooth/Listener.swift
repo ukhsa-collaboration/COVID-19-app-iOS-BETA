@@ -17,17 +17,17 @@ protocol Peripheral {
 extension CBPeripheral: Peripheral {
 }
 
-protocol ListenerDelegate {
+protocol ListenerDelegate: class {
     func listener(_ listener: Listener, didFind broadcastPayload: IncomingBroadcastPayload, for peripheral: Peripheral)
     func listener(_ listener: Listener, didReadRSSI RSSI: Int, for peripheral: Peripheral)
     func listener(_ listener: Listener, didReadTxPower txPower: Int, for peripheral: Peripheral)
 }
 
-protocol ListenerStateDelegate {
+protocol ListenerStateDelegate: class {
     func listener(_ listener: Listener, didUpdateState state: CBManagerState)
 }
 
-protocol Listener {
+protocol Listener: class {
     func start(stateDelegate: ListenerStateDelegate?, delegate: ListenerDelegate?)
     func isHealthy() -> Bool
 }
@@ -37,8 +37,8 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
     var reconnectDelay: Int = 0
 
     var broadcaster: Broadcaster
-    var stateDelegate: ListenerStateDelegate?
-    var delegate: ListenerDelegate?
+    weak var stateDelegate: ListenerStateDelegate?
+    weak var delegate: ListenerDelegate?
     
     var peripherals: [UUID: CBPeripheral] = [:]
     
