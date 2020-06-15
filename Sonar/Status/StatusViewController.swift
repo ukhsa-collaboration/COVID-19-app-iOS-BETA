@@ -202,9 +202,7 @@ class StatusViewController: UIViewController, Storyboarded {
     }
 
     @IBAction func testingInfoTapped() {
-        let linkingIdVc = TestingInfoContainerViewController.instantiate()
-        linkingIdVc.inject(linkingIdManager: linkingIdManager, uiQueue: DispatchQueue.main)
-        navigationController?.pushViewController(linkingIdVc, animated: animateTransitions)
+        showTestingInfo()
     }
 
     @IBAction func workplaceGuidanceTapped(_ sender: UIButton) {
@@ -343,7 +341,7 @@ class StatusViewController: UIViewController, Storyboarded {
                 header: "NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_HEADER".localized,
                 detail: "NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_DETAIL".localized,
                 callToAction: ("NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_CTA".localized, {
-                    self.testingInfoTapped()
+                    self.showTestingInfo(scrollToTestResultMeaning: true)
                 })
             )
         case .unclearTestResult:
@@ -380,6 +378,15 @@ class StatusViewController: UIViewController, Storyboarded {
                 usingTransitioningDelegate: self.drawerPresentationManager
             )
 //        }
+    }
+
+    private func showTestingInfo(scrollToTestResultMeaning: Bool = false) {
+        let linkingIdVc = TestingInfoContainerViewController.instantiate()
+        linkingIdVc.inject(
+            linkingIdManager: linkingIdManager,
+            uiQueue: DispatchQueue.main
+        )
+        navigationController?.pushViewController(linkingIdVc, animated: animateTransitions)
     }
 
     private func pleaseIsolateText(until expiryDate: Date) -> String {

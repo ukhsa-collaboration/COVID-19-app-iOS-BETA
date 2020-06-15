@@ -218,6 +218,8 @@
                     <navigationItem key="navigationItem" title="Information about testing" id="K44-qv-yGH"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="scrollView" destination="i7g-54-jA7" id="H2G-Wi-Rn9"/>
+                        <outlet property="testResultMeansHeader" destination="fFy-No-RYp" id="wZC-JV-VfD"/>
                         <outlet property="testResultsButton" destination="UrF-gb-i3R" id="scR-x3-QAa"/>
                     </connections>
                 </viewController>
