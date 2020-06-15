@@ -12,6 +12,8 @@ class TestingInfoContainerViewController: ReferenceCodeContainerViewControllerBa
     static let storyboardName = "TestingInfo"
         
     override func instantiatePostLoadViewController(referenceCode: String?, referenceError: String?) -> UIViewController {
+        assertionFailure("Deprecated in favor of passing in a block instead")
+
         let testingInfoVc = TestingInfoViewController.instantiate()
         testingInfoVc.inject(referenceCode: referenceCode, referenceError: referenceError)
         return testingInfoVc

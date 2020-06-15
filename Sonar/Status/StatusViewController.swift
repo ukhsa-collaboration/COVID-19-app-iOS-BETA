@@ -385,7 +385,19 @@ class StatusViewController: UIViewController, Storyboarded {
         linkingIdVc.inject(
             linkingIdManager: linkingIdManager,
             uiQueue: DispatchQueue.main
-        )
+        ) { result in
+            let codeAndError: (String?, String?)
+            switch result {
+            case .success(let code):
+                codeAndError = (code, nil)
+            case .error(let error):
+                codeAndError = (nil, error)
+            }
+            let (code, error) = codeAndError
+            let testingInfoVc = TestingInfoViewController.instantiate()
+            testingInfoVc.inject(referenceCode: code, referenceError: error, scrollToTestResultMeaning: scrollToTestResultMeaning)
+            return testingInfoVc
+        }
         navigationController?.pushViewController(linkingIdVc, animated: animateTransitions)
     }
 
