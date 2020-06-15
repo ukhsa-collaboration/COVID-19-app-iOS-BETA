@@ -12,6 +12,11 @@ protocol LinkingIdManaging {
     func fetchLinkingId(completion: @escaping (LinkingId?, String?) -> Void)
 }
 
+enum LinkingIdResult {
+    case success(String)
+    case error(String)
+}
+
 class LinkingIdManager: LinkingIdManaging {
     let persisting: Persisting
     let session: Session

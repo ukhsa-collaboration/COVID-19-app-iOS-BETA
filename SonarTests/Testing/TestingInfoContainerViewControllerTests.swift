@@ -49,7 +49,7 @@ class TestingInfoContainerViewControllerTests: XCTestCase {
         
         XCTAssertNotNil(vc.view)
         vc.viewDidAppear(false)
-        linkingIdMgr.fetchCompletion?(nil, nil)
+        linkingIdMgr.fetchCompletion?(nil, "error")
         
         XCTAssertNotNil(linkingIdMgr.fetchCompletion)
         XCTAssertEqual(vc.children.count, 1)
