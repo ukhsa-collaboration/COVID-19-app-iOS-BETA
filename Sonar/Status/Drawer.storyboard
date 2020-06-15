@@ -38,6 +38,13 @@
                                                 <color key="textColor" name="NHS Text"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rgy-oU-d1D" customClass="PrimaryButton" customModule="Sonar" customModuleProvider="target">
+                                                <rect key="frame" x="16" y="107" width="382" height="0.0"/>
+                                                <state key="normal" title="Button"/>
+                                                <connections>
+                                                    <action selector="primaryButtonTapped:" destination="Usf-OH-hM9" eventType="touchUpInside" id="7Qq-z5-qmU"/>
+                                                </connections>
+                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cfe-8T-jbW" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">
                                                 <rect key="frame" x="16" y="115" width="382" height="33"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -76,6 +83,7 @@
                     <connections>
                         <outlet property="detailLabel" destination="OXR-SF-E5K" id="i0H-kl-d2l"/>
                         <outlet property="headerLabel" destination="z4d-Td-TgN" id="7kc-qv-B7f"/>
+                        <outlet property="primaryButton" destination="Rgy-oU-d1D" id="Dwk-nw-n12"/>
                         <segue destination="vMb-Lq-kBc" kind="unwind" identifier="unwindFromDrawer" unwindAction="unwindFromDrawerWithUnwindSegue:" id="Qfn-eu-3FQ"/>
                     </connections>
                 </viewController>
