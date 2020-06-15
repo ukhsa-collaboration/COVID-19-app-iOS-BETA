@@ -20,6 +20,8 @@
 	<string>https://faq.covid19.nhs.uk/article/KA-01072/en-us</string>
 	<key>regionalServices</key>
 	<string>https://faq.covid19.nhs.uk/article/KA-01065/en-us</string>
+	<key>testResults</key>
+	<string>https://faq.covid19.nhs.uk/article/KA-01088/en-us</string>
 	<key>status</key>
 	<dict>
 		<key>ok</key>
