@@ -10,7 +10,13 @@ import XCTest
 @testable import Sonar
 
 class TestingInfoContainerViewControllerTests: XCTestCase {
-    
+
+    let vcProvider: (LinkingIdResult) -> UIViewController = { result in
+        let testingInfoVc = TestingInfoViewController.instantiate()
+        testingInfoVc.inject(result: result)
+        return testingInfoVc
+    }
+
     func testLoadsLinkingId() throws {
         let linkingIdMgr = LinkingIdManagerDouble()
         let vc = TestingInfoContainerViewController.instantiate()
@@ -27,11 +33,11 @@ class TestingInfoContainerViewControllerTests: XCTestCase {
     func testShowsTestingInfoOnSuccess() throws {
         let linkingIdMgr = LinkingIdManagerDouble()
         let vc = TestingInfoContainerViewController.instantiate()
-        vc.inject(linkingIdManager: linkingIdMgr, uiQueue: QueueDouble())
+        vc.inject(linkingIdManager: linkingIdMgr, uiQueue: QueueDouble(), vcProvider: vcProvider)
         
         XCTAssertNotNil(vc.view)
         vc.viewDidAppear(false)
-        linkingIdMgr.fetchCompletion?("1234-abcd", nil)
+        linkingIdMgr.fetchCompletion?(.success("1234-abcd"))
         
         XCTAssertNotNil(linkingIdMgr.fetchCompletion)
         XCTAssertEqual(vc.children.count, 1)
@@ -45,11 +51,11 @@ class TestingInfoContainerViewControllerTests: XCTestCase {
     func testShowsTestingInfoOnFailure() throws {
         let linkingIdMgr = LinkingIdManagerDouble()
         let vc = TestingInfoContainerViewController.instantiate()
-        vc.inject(linkingIdManager: linkingIdMgr, uiQueue: QueueDouble())
+        vc.inject(linkingIdManager: linkingIdMgr, uiQueue: QueueDouble(), vcProvider: vcProvider)
         
         XCTAssertNotNil(vc.view)
         vc.viewDidAppear(false)
-        linkingIdMgr.fetchCompletion?(nil, nil)
+        linkingIdMgr.fetchCompletion?(.error("error"))
         
         XCTAssertNotNil(linkingIdMgr.fetchCompletion)
         XCTAssertEqual(vc.children.count, 1)

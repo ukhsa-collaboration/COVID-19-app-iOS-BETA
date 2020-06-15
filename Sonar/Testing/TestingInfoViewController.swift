@@ -13,14 +13,19 @@ class TestingInfoViewController: UIViewController, Storyboarded {
 
     private let contentUrls = ContentURLs.shared
     
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var testResultMeansHeader: UILabel!
     @IBOutlet weak var testResultsButton: LinkButton!
 
-    private var referenceCode: String?
-    private var referenceError: String?
+    private var result: LinkingIdResult!
+    private var scrollToTestResultMeaning: Bool!
 
-    func inject(referenceCode: String?, referenceError: String?) {
-        self.referenceCode = referenceCode
-        self.referenceError = referenceError
+    func inject(
+        result: LinkingIdResult,
+        scrollToTestResultMeaning: Bool = false
+    ) {
+        self.result = result
+        self.scrollToTestResultMeaning = scrollToTestResultMeaning
     }
 
     override func viewDidLoad() {
@@ -29,9 +34,24 @@ class TestingInfoViewController: UIViewController, Storyboarded {
         testResultsButton.url = contentUrls.testResults
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        if scrollToTestResultMeaning {
+            let scrollHeight = scrollView.frame.height
+            let testResultMeansHeight = scrollView.contentSize.height - testResultMeansHeader.frame.minY
+            let offset = scrollHeight - testResultMeansHeight
+            UIView.animate(withDuration: 0.25, animations: {
+                self.scrollView.contentOffset = CGPoint(x: 0, y: self.testResultMeansHeader.frame.minY - offset)
+            }, completion: { _ in
+                UIAccessibility.post(notification: .screenChanged, argument: self.testResultMeansHeader);
+            })
+        }
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? ReferenceCodeViewController {
-            vc.inject(referenceCode: referenceCode, error: referenceError)
+            vc.inject(result: result)
         }
     }
 }

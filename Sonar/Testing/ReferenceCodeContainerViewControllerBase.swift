@@ -11,11 +11,17 @@ import UIKit
 class ReferenceCodeContainerViewControllerBase: UIViewController {
     private var linkingIdManager: LinkingIdManaging!
     private var uiQueue: TestableQueue!
+    private var vcProvider: ((LinkingIdResult) -> UIViewController)?
     private var started = false
     
-    func inject(linkingIdManager: LinkingIdManaging, uiQueue: TestableQueue) {
+    func inject(
+        linkingIdManager: LinkingIdManaging,
+        uiQueue: TestableQueue,
+        vcProvider: ((LinkingIdResult) -> UIViewController)? = nil
+    ) {
         self.linkingIdManager = linkingIdManager
         self.uiQueue = uiQueue
+        self.vcProvider = vcProvider
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -24,16 +30,16 @@ class ReferenceCodeContainerViewControllerBase: UIViewController {
 
         show(viewController: ReferenceCodeLoadingViewController.instantiate())
 
-        linkingIdManager.fetchLinkingId { linkingId, error in
+        linkingIdManager.fetchLinkingId { result in
             self.uiQueue.async {
-                let newChild = self.instantiatePostLoadViewController(referenceCode: linkingId, referenceError: error)
+                let newChild = self.vcProvider.map { $0(result) } ?? self.instantiatePostLoadViewController(result: result)
                 self.show(viewController: newChild)
                 UIAccessibility.post(notification: .layoutChanged, argument: self.view)
             }
         }
     }
     
-    open func instantiatePostLoadViewController(referenceCode: String?, referenceError: String?) -> UIViewController {
+    open func instantiatePostLoadViewController(result: LinkingIdResult) -> UIViewController {
         fatalError("Must override")
     }
     

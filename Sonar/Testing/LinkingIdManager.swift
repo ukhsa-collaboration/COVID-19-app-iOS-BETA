@@ -9,7 +9,12 @@
 import Foundation
 
 protocol LinkingIdManaging {
-    func fetchLinkingId(completion: @escaping (LinkingId?, String?) -> Void)
+    func fetchLinkingId(completion: @escaping (LinkingIdResult) -> Void)
+}
+
+enum LinkingIdResult: Equatable {
+    case success(String)
+    case error(String)
 }
 
 class LinkingIdManager: LinkingIdManaging {
@@ -24,9 +29,9 @@ class LinkingIdManager: LinkingIdManaging {
         self.session = session
     }
 
-    func fetchLinkingId(completion: @escaping (LinkingId?, String?) -> Void) {
+    func fetchLinkingId(completion: @escaping (LinkingIdResult) -> Void) {
         guard let registration = persisting.registration else {
-            completion(nil, "Please wait until your setup has completed to see the app reference code.")
+            completion(.error("Please wait until your setup has completed to see the app reference code."))
             return
         }
 
@@ -34,9 +39,9 @@ class LinkingIdManager: LinkingIdManaging {
         session.execute(request) { result in
             switch result {
             case .success(let linkingId):
-                completion(linkingId, nil)
+                completion(.success(linkingId))
             case .failure:
-                completion(nil, "Please connect your phone to the internet to see the app reference code.")
+                completion(.error("Please connect your phone to the internet to see the app reference code."))
             }
         }
     }

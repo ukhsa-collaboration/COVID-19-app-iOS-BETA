@@ -201,10 +201,8 @@ class StatusViewController: UIViewController, Storyboarded {
         performSegue(withIdentifier: "showBookTest", sender: self)
     }
 
-    @IBAction func testingInfoTapped(_ sender: Any) {
-        let linkingIdVc = TestingInfoContainerViewController.instantiate()
-        linkingIdVc.inject(linkingIdManager: linkingIdManager, uiQueue: DispatchQueue.main)
-        navigationController?.pushViewController(linkingIdVc, animated: animateTransitions)
+    @IBAction func testingInfoTapped() {
+        showTestingInfo()
     }
 
     @IBAction func workplaceGuidanceTapped(_ sender: UIButton) {
@@ -341,7 +339,10 @@ class StatusViewController: UIViewController, Storyboarded {
         case .negativeTestResult:
             presentDrawer(
                 header: "NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_HEADER".localized,
-                detail: "NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_DETAIL".localized
+                detail: "NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_DETAIL".localized,
+                callToAction: ("NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_CTA".localized, {
+                    self.showTestingInfo(scrollToTestResultMeaning: true)
+                })
             )
         case .unclearTestResult:
             presentDrawer(
@@ -357,17 +358,39 @@ class StatusViewController: UIViewController, Storyboarded {
         }
     }
 
-    private func presentDrawer(header: String, detail: String) {
-        let drawer = DrawerViewController.instantiate()
-        drawer.inject(header: header, detail: detail) {
-            self.reload()
-            self.scrollView.setContentOffset(.zero, animated: true)
+    private func presentDrawer(
+        header: String,
+        detail: String,
+        callToAction: (title: String, action: () -> Void)? = nil
+    ) {
+//        dismiss(animated: animateTransitions) { [weak self] in
+//            guard let `self` = self else { return }
+
+            let drawer = DrawerViewController.instantiate()
+            drawer.inject(
+                header: header,
+                detail: detail,
+                callToAction: callToAction
+            ) { self.reload() }
+            self.drawerPresenter.present(
+                drawer: drawer,
+                inNavigationController: self.navigationController!,
+                usingTransitioningDelegate: self.drawerPresentationManager
+            )
+//        }
+    }
+
+    private func showTestingInfo(scrollToTestResultMeaning: Bool = false) {
+        let linkingIdVc = TestingInfoContainerViewController.instantiate()
+        linkingIdVc.inject(
+            linkingIdManager: linkingIdManager,
+            uiQueue: DispatchQueue.main
+        ) { result in
+            let testingInfoVc = TestingInfoViewController.instantiate()
+            testingInfoVc.inject(result: result, scrollToTestResultMeaning: scrollToTestResultMeaning)
+            return testingInfoVc
         }
-        self.drawerPresenter.present(
-            drawer: drawer,
-            inNavigationController: self.navigationController!,
-            usingTransitioningDelegate: self.drawerPresentationManager
-        )
+        navigationController?.pushViewController(linkingIdVc, animated: animateTransitions)
     }
 
     private func pleaseIsolateText(until expiryDate: Date) -> String {
