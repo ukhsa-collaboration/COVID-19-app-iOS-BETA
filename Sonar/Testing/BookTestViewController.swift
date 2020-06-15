@@ -13,23 +13,25 @@ class BookTestViewController: UIViewController, Storyboarded {
 
     @IBOutlet weak var bookTestLinkButton: LinkButton!
 
-    private var referenceCode: String?
-    private var referenceError: String?
+    private var result: LinkingIdResult!
 
-    func inject(referenceCode: String?, referenceError: String?) {
-        self.referenceCode = referenceCode
-        self.referenceError = referenceError
+    func inject(result: LinkingIdResult) {
+        self.result = result
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        bookTestLinkButton.url = ContentURLs.shared.bookTest(referenceCode: referenceCode)
+        var code: LinkingId?
+        if case .success(let c) = result {
+            code = c
+        }
+        bookTestLinkButton.url = ContentURLs.shared.bookTest(referenceCode: code)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? ReferenceCodeViewController {
-            vc.inject(referenceCode: referenceCode, error: referenceError)
+            vc.inject(result: result)
         }
     }
 

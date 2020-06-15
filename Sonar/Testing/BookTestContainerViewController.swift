@@ -11,9 +11,9 @@ import UIKit
 class BookTestContainerViewController: ReferenceCodeContainerViewControllerBase, Storyboarded {
     static let storyboardName = "BookTest"
     
-    override func instantiatePostLoadViewController(referenceCode: String?, referenceError: String?) -> UIViewController {
+    override func instantiatePostLoadViewController(result: LinkingIdResult) -> UIViewController {
         let vc = BookTestViewController.instantiate()
-        vc.inject(referenceCode: referenceCode, referenceError: referenceError)
+        vc.inject(result: result)
         return vc
     }
 }

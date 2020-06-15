@@ -17,34 +17,33 @@ class ReferenceCodeViewController: UIViewController, Storyboarded {
     @IBOutlet weak var referenceCodeError: UILabel!
     @IBOutlet weak var copyButton: UILabel!
 
-    private var referenceCode: String?
-    private var error: String?
-    
-    func inject(referenceCode: String?, error: String?) {
-        self.referenceCode = referenceCode
-        self.error = error
+    private var result: LinkingIdResult!
+
+    func inject(result: LinkingIdResult) {
+        self.result = result
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.translatesAutoresizingMaskIntoConstraints = false
-        
-        if let referenceCode = referenceCode {
+
+        switch result! {
+        case .success(let code):
             errorWrapper.isHidden = true
             referenceCodeWrapper.isHidden = false
-            referenceCodeLabel.text = referenceCode
+            referenceCodeLabel.text = code
 
-            let pronouncableRefCode = referenceCode.map { String($0) }.joined(separator: ", ")
+            let pronouncableRefCode = code.map { String($0) }.joined(separator: ", ")
             referenceCodeWrapper.accessibilityLabel = "Your app reference code is \(pronouncableRefCode)"
             referenceCodeWrapper.accessibilityHint = "Copies the app reference code."
-            
+
             copyButton.attributedText = NSAttributedString(string: "Copy", attributes: [
                 .font: UIFont.preferredFont(forTextStyle: .body),
                 .underlineStyle: NSUnderlineStyle.single.rawValue,
             ])
             copyButton.textColor = UIColor.nhs.blue
-        } else {
+        case .error(let error):
             errorWrapper.isHidden = false
             referenceCodeWrapper.isHidden = true
             referenceCodeError.text = error

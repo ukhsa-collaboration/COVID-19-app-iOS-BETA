@@ -30,25 +30,16 @@ class ReferenceCodeContainerViewControllerBase: UIViewController {
 
         show(viewController: ReferenceCodeLoadingViewController.instantiate())
 
-        linkingIdManager.fetchLinkingId { linkingId, error in
-            let linkingIdResult: LinkingIdResult
-            if let linkingId = linkingId {
-                linkingIdResult = .success(linkingId)
-            } else if let error = error {
-                linkingIdResult = .error(error)
-            } else {
-                assertionFailure("Expected a reference code or an error")
-                linkingIdResult = .error("No reference code returned")
-            }
+        linkingIdManager.fetchLinkingId { result in
             self.uiQueue.async {
-                let newChild = self.vcProvider.map { $0(linkingIdResult) } ?? self.instantiatePostLoadViewController(referenceCode: linkingId, referenceError: error)
+                let newChild = self.vcProvider.map { $0(result) } ?? self.instantiatePostLoadViewController(result: result)
                 self.show(viewController: newChild)
                 UIAccessibility.post(notification: .layoutChanged, argument: self.view)
             }
         }
     }
     
-    open func instantiatePostLoadViewController(referenceCode: String?, referenceError: String?) -> UIViewController {
+    open func instantiatePostLoadViewController(result: LinkingIdResult) -> UIViewController {
         fatalError("Must override")
     }
     

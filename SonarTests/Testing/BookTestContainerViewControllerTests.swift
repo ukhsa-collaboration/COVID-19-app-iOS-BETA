@@ -31,7 +31,7 @@ class BookTestContainerViewControllerTests: XCTestCase {
         
         XCTAssertNotNil(vc.view)
         vc.viewDidAppear(false)
-        linkingIdMgr.fetchCompletion?("1234-abcd", nil)
+        linkingIdMgr.fetchCompletion?(.success("1234-abcd"))
         
         XCTAssertNotNil(linkingIdMgr.fetchCompletion)
         XCTAssertEqual(vc.children.count, 1)
@@ -50,7 +50,7 @@ class BookTestContainerViewControllerTests: XCTestCase {
 
         XCTAssertNotNil(vc.view)
         vc.viewDidAppear(false)
-        linkingIdMgr.fetchCompletion?(nil, "error")
+        linkingIdMgr.fetchCompletion?(.error("error"))
         
         XCTAssertNotNil(linkingIdMgr.fetchCompletion)
         XCTAssertEqual(vc.children.count, 1)

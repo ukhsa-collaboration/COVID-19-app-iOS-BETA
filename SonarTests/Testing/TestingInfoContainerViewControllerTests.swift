@@ -12,16 +12,8 @@ import XCTest
 class TestingInfoContainerViewControllerTests: XCTestCase {
 
     let vcProvider: (LinkingIdResult) -> UIViewController = { result in
-        let codeAndError: (String?, String?)
-        switch result {
-        case .success(let code):
-            codeAndError = (code, nil)
-        case .error(let error):
-            codeAndError = (nil, error)
-        }
-        let (code, error) = codeAndError
         let testingInfoVc = TestingInfoViewController.instantiate()
-        testingInfoVc.inject(referenceCode: code, referenceError: error)
+        testingInfoVc.inject(result: result)
         return testingInfoVc
     }
 
@@ -45,7 +37,7 @@ class TestingInfoContainerViewControllerTests: XCTestCase {
         
         XCTAssertNotNil(vc.view)
         vc.viewDidAppear(false)
-        linkingIdMgr.fetchCompletion?("1234-abcd", nil)
+        linkingIdMgr.fetchCompletion?(.success("1234-abcd"))
         
         XCTAssertNotNil(linkingIdMgr.fetchCompletion)
         XCTAssertEqual(vc.children.count, 1)
@@ -63,7 +55,7 @@ class TestingInfoContainerViewControllerTests: XCTestCase {
         
         XCTAssertNotNil(vc.view)
         vc.viewDidAppear(false)
-        linkingIdMgr.fetchCompletion?(nil, "error")
+        linkingIdMgr.fetchCompletion?(.error("error"))
         
         XCTAssertNotNil(linkingIdMgr.fetchCompletion)
         XCTAssertEqual(vc.children.count, 1)
