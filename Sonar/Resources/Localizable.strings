@@ -124,7 +124,8 @@ Loss of appetite: this means you are not feeling hungry, or are not eating as mu
 "CHECKIN_QUESTIONNAIRE_OVERLAY_DETAIL" = "Please update your symptoms to view your latest advice.";
 
 "NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_HEADER" = "Your test result indicates that you do not have coronavirus";
-"NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_DETAIL" = "Thank you for getting tested. View your current advice based on your results. You have been sent an email or text with more information.";
+"NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_DETAIL" = "Thank you for getting tested. You have been sent an email or text with more information.";
+"NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_CTA" = "What your test result means";
 
 "COPIED" = "Copied";
 

@@ -341,7 +341,8 @@ class StatusViewController: UIViewController, Storyboarded {
         case .negativeTestResult:
             presentDrawer(
                 header: "NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_HEADER".localized,
-                detail: "NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_DETAIL".localized
+                detail: "NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_DETAIL".localized,
+                callToAction: ("NEGATIVE_RESULT_QUESTIONNAIRE_OVERLAY_CTA".localized, {})
             )
         case .unclearTestResult:
             presentDrawer(
@@ -357,12 +358,20 @@ class StatusViewController: UIViewController, Storyboarded {
         }
     }
 
-    private func presentDrawer(header: String, detail: String) {
+    private func presentDrawer(
+        header: String,
+        detail: String,
+        callToAction: (title: String, action: () -> Void)? = nil
+    ) {
 //        dismiss(animated: animateTransitions) { [weak self] in
 //            guard let `self` = self else { return }
 
             let drawer = DrawerViewController.instantiate()
-            drawer.inject(header: header, detail: detail) { self.reload() }
+            drawer.inject(
+                header: header,
+                detail: detail,
+                callToAction: callToAction
+            ) { self.reload() }
             self.drawerPresenter.present(
                 drawer: drawer,
                 inNavigationController: self.navigationController!,

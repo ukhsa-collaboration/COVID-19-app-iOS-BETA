@@ -42,7 +42,7 @@
                                                 <rect key="frame" x="16" y="107" width="382" height="0.0"/>
                                                 <state key="normal" title="Button"/>
                                                 <connections>
-                                                    <action selector="primaryButtonTapped:" destination="Usf-OH-hM9" eventType="touchUpInside" id="7Qq-z5-qmU"/>
+                                                    <action selector="primaryButtonTapped" destination="Usf-OH-hM9" eventType="touchUpInside" id="K7P-bC-fQ9"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cfe-8T-jbW" customClass="ButtonWithDynamicType" customModule="Sonar" customModuleProvider="target">

@@ -13,7 +13,7 @@ class DrawerViewController: UIViewController, Storyboarded {
 
     var header: String!
     private var detail: String!
-    private var callToAction: (String, () -> Void)?
+    private var callToAction: (title: String, action: () -> Void)?
     private var completion: (() -> Void)!
 
     @IBOutlet weak var headerLabel: UILabel!
@@ -23,7 +23,7 @@ class DrawerViewController: UIViewController, Storyboarded {
     func inject(
         header: String,
         detail: String,
-        callToAction: (String, () -> Void)? = nil,
+        callToAction: (title: String, action: () -> Void)? = nil,
         completion: @escaping () -> Void
     ) {
         self.header = header
