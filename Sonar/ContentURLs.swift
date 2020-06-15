@@ -23,6 +23,7 @@ struct ContentURLs {
     let statusInfo: URL
     let workplaceGuidance: URL
     let regionalServices: URL
+    let testResults: URL
     private let status: StatusesURLs
     private let bookTestBase: URL
 
@@ -64,6 +65,7 @@ extension ContentURLs: Decodable {
         case statusInfo
         case workplaceGuidance
         case regionalServices
+        case testResults
         case status
     }
 
@@ -79,7 +81,7 @@ extension ContentURLs: Decodable {
         statusInfo = try values.decodeURL(forKey: .statusInfo)
         workplaceGuidance = try values.decodeURL(forKey: .workplaceGuidance)
         regionalServices = try values.decodeURL(forKey: .regionalServices)
-
+        testResults = try values.decodeURL(forKey: .testResults)
         status = try values.decode(StatusesURLs.self, forKey: .status)
     }
 }
