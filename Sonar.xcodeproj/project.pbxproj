@@ -989,27 +989,27 @@
 		214209B72422155200C7BFF3 /* Appearance */ = {
 			isa = PBXGroup;
 			children = (
-				DDD5BDC42473EA1200329720 /* NotificationStatusButton.swift */,
+				09D8B43324871247004D225C /* AccessibilityChangeNotifier.swift */,
 				F7091906245DCED800F00AB8 /* AccessibleErrorLabel.swift */,
-				0805FAF1247C02AB00E3A74F /* ErrorView.xib */,
-				0805FAEF247BEEE700E3A74F /* ErrorView.swift */,
 				F613936D243FA82B003447E8 /* Appearance.swift */,
 				09B3AC802460BEA9001AF47E /* AutoscalingImageView.swift */,
 				09B3AC822460D3CF001AF47E /* AutoscalingWidthView.swift */,
 				0986EFB4244518FE008D0E1D /* ButtonWithDynamicType.swift */,
+				DD6B15842488072E00C1DE5E /* Colors.swift */,
 				F652F72F244E4AAD00D97950 /* DrawerPresentation.swift */,
+				0805FAEF247BEEE700E3A74F /* ErrorView.swift */,
+				0805FAF3247C233F00E3A74F /* IBView.swift */,
 				13F996722460445400FD6740 /* LinkButton.swift */,
+				DDD5BDC42473EA1200329720 /* NotificationStatusButton.swift */,
 				F70CB8182450CAB700ED6E7F /* OnboardingLogoStrapline.swift */,
 				21D93C2F2420C26900C1FA9B /* PrimaryButton.swift */,
 				F6EE8362246306490076AF97 /* SmartInvertBorderView.swift */,
 				F6548FA42460DB95005F06FF /* SpinnerView.swift */,
 				097C93882447986B00E985CF /* TextField.swift */,
-				09C9DB372460946B0012F80A /* UpdatesBasedOnAccessibilityDisplayChanges.swift */,
-				F70CB81A2450CFA900ED6E7F /* OnboardingLogoStrapline.xib */,
-				0805FAF3247C233F00E3A74F /* IBView.swift */,
 				092F5ADF24859B81001A06B7 /* UnderlinedButton.swift */,
-				09D8B43324871247004D225C /* AccessibilityChangeNotifier.swift */,
-				DD6B15842488072E00C1DE5E /* Colors.swift */,
+				09C9DB372460946B0012F80A /* UpdatesBasedOnAccessibilityDisplayChanges.swift */,
+				0805FAF1247C02AB00E3A74F /* ErrorView.xib */,
+				F70CB81A2450CFA900ED6E7F /* OnboardingLogoStrapline.xib */,
 			);
 			path = Appearance;
 			sourceTree = "<group>";
