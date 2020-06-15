@@ -19,16 +19,11 @@ class LinkingIdManagerTests: XCTestCase {
             session: session
         )
 
-        var fetchedLinkingId: LinkingId?
-        var fetchError: String?
-        manager.fetchLinkingId {
-            fetchedLinkingId = $0
-            fetchError = $1
-        }
+        var fetchedResult: LinkingIdResult?
+        manager.fetchLinkingId { fetchedResult = $0 }
         session.executeCompletion?(Result<LinkingId, Error>.success("linking-id"))
 
-        XCTAssertEqual(fetchedLinkingId, "linking-id")
-        XCTAssertNil(fetchError)
+        XCTAssertEqual(fetchedResult, .success("linking-id"))
     }
 
     func testNoRegistration() {
@@ -38,15 +33,10 @@ class LinkingIdManagerTests: XCTestCase {
             session: SessionDouble()
         )
 
-        var fetchedLinkingId: LinkingId?
-        var fetchError: String?
-        manager.fetchLinkingId {
-            fetchedLinkingId = $0
-            fetchError = $1
-        }
+        var fetchedResult: LinkingIdResult?
+        manager.fetchLinkingId { fetchedResult = $0 }
 
-        XCTAssertNil(fetchedLinkingId)
-        XCTAssertEqual(fetchError, "Please wait until your setup has completed to see the app reference code.")
+        XCTAssertEqual(fetchedResult, .error("Please wait until your setup has completed to see the app reference code."))
     }
 
     func testFetchLinkingIdFailure() {
@@ -57,16 +47,11 @@ class LinkingIdManagerTests: XCTestCase {
             session: session
         )
 
-        var fetchedLinkingId: LinkingId?
-        var fetchError: String?
-        manager.fetchLinkingId {
-            fetchedLinkingId = $0
-            fetchError = $1
-        }
+        var fetchedResult: LinkingIdResult?
+        manager.fetchLinkingId { fetchedResult = $0 }
         session.executeCompletion?(Result<LinkingId, Error>.failure(FakeError.fake))
 
-        XCTAssertNil(fetchedLinkingId)
-        XCTAssertEqual(fetchError, "Please connect your phone to the internet to see the app reference code.")
+        XCTAssertEqual(fetchedResult, .error("Please connect your phone to the internet to see the app reference code."))
     }
 
 }

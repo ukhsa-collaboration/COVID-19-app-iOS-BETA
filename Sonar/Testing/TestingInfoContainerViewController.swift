@@ -11,11 +11,11 @@ import UIKit
 class TestingInfoContainerViewController: ReferenceCodeContainerViewControllerBase, Storyboarded {
     static let storyboardName = "TestingInfo"
         
-    override func instantiatePostLoadViewController(referenceCode: String?, referenceError: String?) -> UIViewController {
+    override func instantiatePostLoadViewController(result: LinkingIdResult) -> UIViewController {
         assertionFailure("Deprecated in favor of passing in a block instead")
 
         let testingInfoVc = TestingInfoViewController.instantiate()
-        testingInfoVc.inject(referenceCode: referenceCode, referenceError: referenceError)
+        testingInfoVc.inject(result: result)
         return testingInfoVc
     }
     

@@ -17,17 +17,14 @@ class TestingInfoViewController: UIViewController, Storyboarded {
     @IBOutlet weak var testResultMeansHeader: UILabel!
     @IBOutlet weak var testResultsButton: LinkButton!
 
-    private var referenceCode: String?
-    private var referenceError: String?
+    private var result: LinkingIdResult!
     private var scrollToTestResultMeaning: Bool!
 
     func inject(
-        referenceCode: String?,
-        referenceError: String?,
+        result: LinkingIdResult,
         scrollToTestResultMeaning: Bool = false
     ) {
-        self.referenceCode = referenceCode
-        self.referenceError = referenceError
+        self.result = result
         self.scrollToTestResultMeaning = scrollToTestResultMeaning
     }
 
@@ -54,7 +51,7 @@ class TestingInfoViewController: UIViewController, Storyboarded {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? ReferenceCodeViewController {
-            vc.inject(referenceCode: referenceCode, error: referenceError)
+            vc.inject(result: result)
         }
     }
 }
