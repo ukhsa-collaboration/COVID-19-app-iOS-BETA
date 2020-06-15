@@ -226,9 +226,16 @@ class StatusViewControllerTests: TestCase {
         let presenter = DrawerPresenterDouble()
         let mailbox = DrawerMailboxingDouble()
 
-        _ = makeViewController(notificationCenter: notificationCenter, drawerPresenter: presenter, drawerMailbox: mailbox)
+        _ = makeViewController(
+            notificationCenter: notificationCenter,
+            makePresentSynchronous: true,
+            drawerPresenter: presenter,
+            drawerMailbox: mailbox
+        )
         mailbox.messages.append(.unexposed)
         notificationCenter.post(name: DrawerMessage.DrawerMessagePosted, object: nil)
+
+        wait { presenter.presented != nil }
 
         let drawer = try XCTUnwrap(presenter.presented)
         XCTAssertEqual(drawer.header, "UNEXPOSED_DRAWER_HEADER".localized)
