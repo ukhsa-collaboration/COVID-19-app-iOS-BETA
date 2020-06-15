@@ -138,6 +138,9 @@ jobs:
           path: ci-tools
           ref: v0.2.0
 
+      - name: Fetch tags
+        run: git fetch --tags
+
       - name: Update Backlog
         uses: ./ci-tools/.github/actions/deliver_tracker_stories_with_build
         with:
