@@ -34,10 +34,14 @@ class ErrorView: IBView, UpdatesBasedOnAccessibilityDisplayChanges {
     @IBOutlet weak var title: UILabel! 
     @IBOutlet weak var errorMessage: AccessibleErrorLabel!
     @IBOutlet var stripe: UIView!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+
+        isAccessibilityElement = true
+        accessibilityElements = [title!, errorMessage!]
+        accessibilityLabel = "\(title!.text!). \(errorMessage!.text!)"
+
         // We'll apply our own colors when Smart Invert is on.
         // Stop iOS from trying to do it for us.
         for view in [self, title, errorMessage, stripe] {
@@ -50,7 +54,10 @@ class ErrorView: IBView, UpdatesBasedOnAccessibilityDisplayChanges {
     override var isHidden: Bool {
         didSet {
             guard isHidden == false else { return }
-            
+
+            // Update this here since these can be dynamically set.
+            accessibilityLabel = [title?.text, errorMessage?.text].compactMap { $0 }.joined(separator: ". ")
+
             UIAccessibility.post(notification: .screenChanged,
                                  argument: self)
         }
