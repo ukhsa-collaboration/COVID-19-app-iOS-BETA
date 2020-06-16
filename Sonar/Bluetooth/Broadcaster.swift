@@ -174,7 +174,7 @@ class BTLEBroadcaster: NSObject, Broadcaster, SonarBTPeripheralManagerDelegate {
         ])
         #else
         peripheral.startAdvertising([
-            CBAdvertisementDataServiceUUIDsKey: [service.uuid]
+            SonarBTAdvertisementDataServiceUUIDsKey: [service.uuid]
         ])
         #endif
     }
