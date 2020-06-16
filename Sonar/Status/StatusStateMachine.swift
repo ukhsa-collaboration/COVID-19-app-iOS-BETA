@@ -224,10 +224,12 @@ class StatusStateMachine: StatusStateMachining {
         switch testResult.result {
         case .positive:
             handlePositiveTestResult(from: testResult.testTimestamp)
+            drawerMailbox.post(.positiveTestResult)
         case .unclear:
             drawerMailbox.post(.unclearTestResult)
         case .negative:
             handleNegativeTestResult(from: testResult.testTimestamp)
+            drawerMailbox.post(.negativeTestResult)
         }
     }
     
@@ -244,16 +246,15 @@ class StatusStateMachine: StatusStateMachining {
         let checkinDate = StatusState.Positive.firstCheckin(from: startDate)
         let positive = StatusState.Positive(checkinDate: checkinDate, symptoms: state.symptoms, startDate: testDate)
         state = .positive(positive)
-        drawerMailbox.post(.positiveTestResult)
     }
 
     func handleNegativeTestResult(from testDate: Date) {
         switch state {
         case .ok, .exposed, .positive:
-            break
+            return
         case .exposedSymptomatic(let exposedSymptomatic):
             guard testDate > exposedSymptomatic.startDate else {
-                break
+                return
             }
 
             if currentDate < exposedSymptomatic.exposed.expiryDate {
@@ -266,8 +267,6 @@ class StatusStateMachine: StatusStateMachining {
                 state = .ok(StatusState.Ok())
             }
         }
-
-        drawerMailbox.post(.negativeTestResult)
     }
     
     // MARK: - User Notifications

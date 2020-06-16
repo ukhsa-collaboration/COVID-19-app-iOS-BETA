@@ -50,11 +50,11 @@ class MoreStatusStateMachineTests: XCTestCase {
         currentDate = ${ day.currentDate() }
         machine.tick()
         % for action in day.actions:
-        (${ 'try ' if action.throws else '' }{
+        do {
             % for line in action.code.splitlines():
             ${ line }
             % end
-        }())
+        }
 
         % end
         % end
