@@ -2049,7 +2049,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /usr/bin/ruby;
-			shellScript = "output = ENV.fetch(\"SCRIPT_OUTPUT_FILE_0\")\nroot = ENV.fetch(\"SRCROOT\")\n\nscenarios = Dir[\"#{root}/SonarTests/Status/Generated/Tests/*.json\"]\n\np output\nFile.write(output, scenarios.join(\"\\n\"))\n";
+			shellScript = "output = ENV.fetch(\"SCRIPT_OUTPUT_FILE_0\")\n\nscenarios = Dir[\"SonarTests/Status/Generated/Tests/*.json\"]\n\nFile.write(output, scenarios.map {|x| \"\\$(SRCROOT)/#{x}\" }.join(\"\\n\"))\n";
 		};
 		F643C2DC248FF83E0052A282 /* Generate MoreStatusStateMachineTests */ = {
 			isa = PBXShellScriptBuildPhase;
