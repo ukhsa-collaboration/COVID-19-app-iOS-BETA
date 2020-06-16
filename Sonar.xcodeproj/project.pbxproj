@@ -10,7 +10,6 @@
 		06DEC5052497187100A38739 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 89F06B2B2434A2C00074C612 /* Logging */; };
 		06DEC5062497187100A38739 /* PactConsumerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B7363DDD2468B5AB00193E04 /* PactConsumerSwift */; };
 		06DEC5072497187100A38739 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 0995582F248FF8F500FE97DE /* Logging */; };
-		06DEC50C249724A000A38739 /* CBPeripheral+FakePeripheral.m in Sources */ = {isa = PBXBuildFile; fileRef = 06DEC50B2497249F00A38739 /* CBPeripheral+FakePeripheral.m */; };
 		0805FAF0247BEEE700E3A74F /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805FAEF247BEEE700E3A74F /* ErrorView.swift */; };
 		0805FAF2247C02AB00E3A74F /* ErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0805FAF1247C02AB00E3A74F /* ErrorView.xib */; };
 		0805FAF4247C233F00E3A74F /* IBView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805FAF3247C233F00E3A74F /* IBView.swift */; };
@@ -251,8 +250,7 @@
 		B701DC502477887900727126 /* HMACHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B701DC4F2477887900727126 /* HMACHelper.swift */; };
 		B701DC5224779BFC00727126 /* PactMockServiceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B701DC5124779BFC00727126 /* PactMockServiceHelper.swift */; };
 		B71ECC1C2474C81100DD6EFC /* ProximityAPIPactTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71ECC1B2474C81100DD6EFC /* ProximityAPIPactTests.swift */; };
-		B7557E6324985C420021D4B0 /* CBService+FakeService.m in Sources */ = {isa = PBXBuildFile; fileRef = B7557E6224985C420021D4B0 /* CBService+FakeService.m */; };
-		B7557E662498632F0021D4B0 /* CBCharacteristic+FakeCharacteristic.m in Sources */ = {isa = PBXBuildFile; fileRef = B7557E652498632F0021D4B0 /* CBCharacteristic+FakeCharacteristic.m */; };
+		B7557E6924986D490021D4B0 /* SonarBTCentralManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7557E6824986D490021D4B0 /* SonarBTCentralManager.swift */; };
 		B79A2E832476013900E8C21E /* environment.json in Resources */ = {isa = PBXBuildFile; fileRef = B79A2E742476013800E8C21E /* environment.json */; };
 		B79A2E842476013900E8C21E /* localhost.crt in Resources */ = {isa = PBXBuildFile; fileRef = B79A2E762476013800E8C21E /* localhost.crt */; };
 		B79A2E852476013900E8C21E /* localhost.key in Resources */ = {isa = PBXBuildFile; fileRef = B79A2E772476013800E8C21E /* localhost.key */; };
@@ -403,9 +401,6 @@
 
 /* Begin PBXFileReference section */
 		068B8ABB245C11C0000EAB4C /* clean-artifacts.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "clean-artifacts.yml"; sourceTree = "<group>"; };
-		06DEC5082497246300A38739 /* SonarTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SonarTests-Bridging-Header.h"; sourceTree = "<group>"; };
-		06DEC50A2497249F00A38739 /* CBPeripheral+FakePeripheral.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CBPeripheral+FakePeripheral.h"; sourceTree = "<group>"; };
-		06DEC50B2497249F00A38739 /* CBPeripheral+FakePeripheral.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CBPeripheral+FakePeripheral.m"; sourceTree = "<group>"; };
 		0805FAEF247BEEE700E3A74F /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		0805FAF1247C02AB00E3A74F /* ErrorView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ErrorView.xib; sourceTree = "<group>"; };
 		0805FAF3247C233F00E3A74F /* IBView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IBView.swift; sourceTree = "<group>"; };
@@ -626,10 +621,7 @@
 		B7363DD32468B35700193E04 /* SonarPactTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SonarPactTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7363DD72468B35700193E04 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B74661212468C8D800443637 /* SonarPactTestsConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = SonarPactTestsConfig.xcconfig; sourceTree = "<group>"; };
-		B7557E6124985C420021D4B0 /* CBService+FakeService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CBService+FakeService.h"; sourceTree = "<group>"; };
-		B7557E6224985C420021D4B0 /* CBService+FakeService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CBService+FakeService.m"; sourceTree = "<group>"; };
-		B7557E642498632F0021D4B0 /* CBCharacteristic+FakeCharacteristic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CBCharacteristic+FakeCharacteristic.h"; sourceTree = "<group>"; };
-		B7557E652498632F0021D4B0 /* CBCharacteristic+FakeCharacteristic.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CBCharacteristic+FakeCharacteristic.m"; sourceTree = "<group>"; };
+		B7557E6824986D490021D4B0 /* SonarBTCentralManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SonarBTCentralManager.swift; sourceTree = "<group>"; };
 		B79A2E742476013800E8C21E /* environment.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = environment.json; sourceTree = "<group>"; };
 		B79A2E762476013800E8C21E /* localhost.crt */ = {isa = PBXFileReference; lastKnownFileType = file; path = localhost.crt; sourceTree = "<group>"; };
 		B79A2E772476013800E8C21E /* localhost.key */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = localhost.key; sourceTree = "<group>"; };
@@ -1059,6 +1051,7 @@
 		214209B82422157300C7BFF3 /* Bluetooth */ = {
 			isa = PBXGroup;
 			children = (
+				B7557E6724986D280021D4B0 /* CoreBluetoothAdapter */,
 				F72EBDA0243D086C009F9328 /* BroadcastId */,
 				AE2DCA9F241920B600A940FC /* Broadcaster.swift */,
 				21AF36AA241A8E50001A4910 /* Listener.swift */,
@@ -1381,13 +1374,6 @@
 			children = (
 				B03DAFA4A366AA9674E35484 /* StateMachine.swift */,
 				B03DA2A5E87A7440E5EBC3B5 /* StateMachineTest.swift */,
-				06DEC50A2497249F00A38739 /* CBPeripheral+FakePeripheral.h */,
-				06DEC50B2497249F00A38739 /* CBPeripheral+FakePeripheral.m */,
-				06DEC5082497246300A38739 /* SonarTests-Bridging-Header.h */,
-				B7557E6124985C420021D4B0 /* CBService+FakeService.h */,
-				B7557E6224985C420021D4B0 /* CBService+FakeService.m */,
-				B7557E642498632F0021D4B0 /* CBCharacteristic+FakeCharacteristic.h */,
-				B7557E652498632F0021D4B0 /* CBCharacteristic+FakeCharacteristic.m */,
 			);
 			path = StateMachine;
 			sourceTree = "<group>";
@@ -1408,6 +1394,14 @@
 				B701DC5124779BFC00727126 /* PactMockServiceHelper.swift */,
 			);
 			path = SonarPactTests;
+			sourceTree = "<group>";
+		};
+		B7557E6724986D280021D4B0 /* CoreBluetoothAdapter */ = {
+			isa = PBXGroup;
+			children = (
+				B7557E6824986D490021D4B0 /* SonarBTCentralManager.swift */,
+			);
+			path = CoreBluetoothAdapter;
 			sourceTree = "<group>";
 		};
 		B79A2E732476013800E8C21E /* Environment */ = {
@@ -2001,7 +1995,6 @@
 				F60497672452415F002B8503 /* ContactEventsUploaderDouble.swift in Sources */,
 				095283AA2476FF2800CDEE55 /* SynchronousNavigationControllerDouble.swift in Sources */,
 				F632792124351C1900CF7A42 /* OnboardingViewControllerTests.swift in Sources */,
-				06DEC50C249724A000A38739 /* CBPeripheral+FakePeripheral.m in Sources */,
 				89DF66A62460217A00A55F24 /* StorageCheckingDouble.swift in Sources */,
 				89C8B216245C5258009CCE80 /* DefaultObjectStoringDouble.swift in Sources */,
 				095A91182434FF1500ED6369 /* ApplicationDouble.swift in Sources */,
@@ -2056,7 +2049,6 @@
 				219B61372447371700E2F1A6 /* UUIDExtensionsTests.swift in Sources */,
 				F67A2293242AA370002254B6 /* SecureRegistrationStorageTests.swift in Sources */,
 				DD6B158A248812C200C1DE5E /* ColorTest.swift in Sources */,
-				B7557E6324985C420021D4B0 /* CBService+FakeService.m in Sources */,
 				0964B380246329680022EF97 /* UIView_ScrollingTests.swift in Sources */,
 				214209D72423C9B600C7BFF3 /* UploadProximityEventsRequestTests.swift in Sources */,
 				F72EBDA9243D2FE6009F9328 /* BroadcastIdEncrypterTests.swift in Sources */,
@@ -2086,7 +2078,6 @@
 				0983ACCD243E566800DBB336 /* ErrorForTest.swift in Sources */,
 				097F053F24730A1200E633C8 /* ContentURLsTests.swift in Sources */,
 				09E876BC24510F2C009C2628 /* BluetoothNurseryDouble.swift in Sources */,
-				B7557E662498632F0021D4B0 /* CBCharacteristic+FakeCharacteristic.m in Sources */,
 				89DF66A42460173800A55F24 /* StorageCheckerTests.swift in Sources */,
 				F694B1BE2459EB3800C6A5D1 /* NotificationAcknowledgerTests.swift in Sources */,
 				F68BFBF7242ACD17008EE68F /* TestHelpers.swift in Sources */,
@@ -2186,6 +2177,7 @@
 				F652F730244E4AAD00D97950 /* DrawerPresentation.swift in Sources */,
 				098ED478242D7D050029B729 /* RegistratonService.swift in Sources */,
 				DD3FCF3C2476E8C3008B0237 /* ExposedNotificationHandler.swift in Sources */,
+				B7557E6924986D490021D4B0 /* SonarBTCentralManager.swift in Sources */,
 				0979FB792458ADF000EB01A8 /* PostcodeValidator.swift in Sources */,
 				134470AE2454D4DA001A0AD9 /* QuestionnaireCoordinator.swift in Sources */,
 				212AB3B924911C490091D92D /* ReconnectionDelayTableViewCell.swift in Sources */,
