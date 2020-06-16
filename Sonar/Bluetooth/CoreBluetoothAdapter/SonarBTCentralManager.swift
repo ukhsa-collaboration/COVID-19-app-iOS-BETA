@@ -9,6 +9,8 @@
 import Foundation
 import CoreBluetooth
 
+typealias SonarBTManagerState = CBManagerState
+
 class SonarBTConnectionEvent {
     private let cbConnectionEvent: CBConnectionEvent
     

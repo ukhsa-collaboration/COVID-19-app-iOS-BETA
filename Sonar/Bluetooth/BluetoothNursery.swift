@@ -44,7 +44,7 @@ class ConcreteBluetoothNursery: BluetoothNursery, PersistenceDelegate {
     public private(set) var stateObserver: BluetoothStateObserving = BluetoothStateObserver(initialState: .unknown)
 
     private var central: CBCentralManager?
-    private var peripheral: CBPeripheralManager?
+    private var peripheral: SonarBTPeripheralManager?
     
     private var broadcastPayloadRotationTimer: BroadcastPayloadRotationTimer?
     
@@ -83,8 +83,8 @@ class ConcreteBluetoothNursery: BluetoothNursery, PersistenceDelegate {
             encrypter: ConcreteBroadcastIdEncrypter())
         
         let broadcaster = BTLEBroadcaster(broadcastPayloadService: broadcastPayloadService!)
-        peripheral = CBPeripheralManager(delegate: broadcaster, queue: btleQueue, options: [
-            CBPeripheralManagerOptionRestoreIdentifierKey: ConcreteBluetoothNursery.peripheralRestoreIdentifier
+        peripheral = SonarBTPeripheralManager(delegate: broadcaster, queue: btleQueue, options: [
+            SonarBTPeripheralManagerOptionRestoreIdentifierKey: ConcreteBluetoothNursery.peripheralRestoreIdentifier
         ])
         self.broadcaster = broadcaster
         

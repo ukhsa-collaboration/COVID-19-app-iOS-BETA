@@ -9,6 +9,10 @@
 import Foundation
 import CoreBluetooth
 
+typealias SonarBTCharacteristicProperties = CBCharacteristicProperties
+typealias SonarBTUUID = CBUUID
+typealias SonarBTAttributePermissions = CBAttributePermissions
+
 class SonarBTDescriptor {
     private let cbDescriptor: CBDescriptor
     
@@ -16,23 +20,6 @@ class SonarBTDescriptor {
         self.cbDescriptor = descriptor
     }
 }
-
-class SonarBTService {
-    private let cbService: CBService
-    
-    init(_ service: CBService) {
-        self.cbService = service
-    }
-}
-
-class SonarBTCharacteristic {
-    private let cbCharacteristic: CBCharacteristic
-    
-    init(_ characteristic: CBCharacteristic) {
-        self.cbCharacteristic = characteristic
-    }
-}
-
 
 protocol SonarBTPeripheralDelegate: class {
     func peripheral(_ peripheral: SonarBTPeripheral, didDiscoverServices error: Error?)
@@ -83,5 +70,5 @@ extension SonarBTPeripheral: CBPeripheralDelegate {
     func peripheralDidUpdateName(_ peripheral: CBPeripheral) {
         delegate?.peripheralDidUpdateName(self)
     }
-
+    
 }

@@ -18,7 +18,7 @@ protocol Broadcaster {
     func isHealthy() -> Bool
 }
 
-class BTLEBroadcaster: NSObject, Broadcaster, CBPeripheralManagerDelegate {
+class BTLEBroadcaster: NSObject, Broadcaster, SonarBTPeripheralManagerDelegate {
 
     let advertismentDataLocalName = "Sonar"
 
@@ -27,10 +27,10 @@ class BTLEBroadcaster: NSObject, Broadcaster, CBPeripheralManagerDelegate {
         case identity(value: Data)
     }
     var unsentCharacteristicValue: UnsentCharacteristicValue?
-    var keepaliveCharacteristic: CBMutableCharacteristic?
-    var identityCharacteristic: CBMutableCharacteristic?
+    var keepaliveCharacteristic: SonarBTCharacteristic?
+    var identityCharacteristic: SonarBTCharacteristic?
     
-    var peripheral: CBPeripheralManager?
+    var peripheral: SonarBTPeripheralManager?
     
     let broadcastPayloadService: BroadcastPayloadService
     
@@ -48,15 +48,15 @@ class BTLEBroadcaster: NSObject, Broadcaster, CBPeripheralManagerDelegate {
             return
         }
 
-        let service = CBMutableService(type: Environment.sonarServiceUUID, primary: true)
+        let service = SonarBTService(type: Environment.sonarServiceUUID, primary: true)
 
-        identityCharacteristic = CBMutableCharacteristic(
+        identityCharacteristic = SonarBTCharacteristic(
             type: Environment.sonarIdCharacteristicUUID,
             properties: CBCharacteristicProperties([.read, .notify]),
             value: nil,
             permissions: .readable)
         
-        keepaliveCharacteristic = CBMutableCharacteristic(
+        keepaliveCharacteristic = SonarBTCharacteristic(
             type: Environment.keepaliveCharacteristicUUID,
             properties: CBCharacteristicProperties([.notify]),
             value: nil,
@@ -117,8 +117,8 @@ class BTLEBroadcaster: NSObject, Broadcaster, CBPeripheralManagerDelegate {
     
     // MARK: - CBPeripheralManagerDelegate
 
-    func peripheralManager(_ peripheral: CBPeripheralManager, willRestoreState dict: [String : Any]) {
-        guard let services = dict[CBPeripheralManagerRestoredStateServicesKey] as? [CBMutableService] else {
+    func peripheralManager(_ peripheral: SonarBTPeripheralManager, willRestoreState dict: [String : Any]) {
+        guard let services = dict[CBPeripheralManagerRestoredStateServicesKey] as? [SonarBTService] else {
             logger.info("no services restored, creating from scratch...")
             return
         }
@@ -131,10 +131,10 @@ class BTLEBroadcaster: NSObject, Broadcaster, CBPeripheralManagerDelegate {
             for characteristic in characteristics {
                 if characteristic.uuid == Environment.keepaliveCharacteristicUUID {
                     logger.info("    retaining restored keepalive characteristic \(characteristic)")
-                    self.keepaliveCharacteristic = (characteristic as! CBMutableCharacteristic)
+                    self.keepaliveCharacteristic = characteristic
                 } else if characteristic.uuid == Environment.sonarIdCharacteristicUUID {
                     logger.info("    retaining restored identity characteristic \(characteristic)")
-                    self.identityCharacteristic = (characteristic as! CBMutableCharacteristic)
+                    self.identityCharacteristic = characteristic
                 } else {
                     logger.info("    restored characteristic \(characteristic)")
                 }
@@ -146,7 +146,7 @@ class BTLEBroadcaster: NSObject, Broadcaster, CBPeripheralManagerDelegate {
         logger.info("peripheral manager \(peripheral.isAdvertising ? "is" : "is not") advertising")
     }
 
-    func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
+    func peripheralManagerDidUpdateState(_ peripheral: SonarBTPeripheralManager) {
         logger.info("state: \(peripheral.state)")
         
         switch peripheral.state {
@@ -160,7 +160,7 @@ class BTLEBroadcaster: NSObject, Broadcaster, CBPeripheralManagerDelegate {
         }
     }
     
-    func peripheralManager(_ peripheral: CBPeripheralManager, didAdd service: CBService, error: Error?) {
+    func peripheralManager(_ peripheral: SonarBTPeripheralManager, didAdd service: SonarBTService, error: Error?) {
         guard error == nil else {
             logger.info("error: \(error!))")
             return
@@ -180,7 +180,7 @@ class BTLEBroadcaster: NSObject, Broadcaster, CBPeripheralManagerDelegate {
         #endif
     }
     
-    func peripheralManagerDidStartAdvertising(_ peripheral: CBPeripheralManager, error: Error?) {
+    func peripheralManagerDidStartAdvertising(_ peripheral: SonarBTPeripheralManager, error: Error?) {
         guard error == nil else {
             logger.info("error: \(error!))")
             return
@@ -193,8 +193,8 @@ class BTLEBroadcaster: NSObject, Broadcaster, CBPeripheralManagerDelegate {
         }
     }
     
-    func peripheralManagerIsReady(toUpdateSubscribers peripheral: CBPeripheralManager) {
-        let characteristic: CBMutableCharacteristic
+    func peripheralManagerIsReady(toUpdateSubscribers peripheral: SonarBTPeripheralManager) {
+        let characteristic: SonarBTCharacteristic
         let value: Data
         
         switch unsentCharacteristicValue {
@@ -222,7 +222,7 @@ class BTLEBroadcaster: NSObject, Broadcaster, CBPeripheralManagerDelegate {
         }
     }
     
-    func peripheralManager(_ peripheral: CBPeripheralManager, central: CBCentral, didSubscribeTo characteristic: CBCharacteristic) {
+    func peripheralManager(_ peripheral: SonarBTPeripheralManager, central: SonarBTCentral, didSubscribeTo characteristic: SonarBTCharacteristic) {
         switch characteristic.uuid {
             
         case Environment.sonarIdCharacteristicUUID:
@@ -238,7 +238,7 @@ class BTLEBroadcaster: NSObject, Broadcaster, CBPeripheralManagerDelegate {
         }
     }
     
-    func peripheralManager(_ peripheral: CBPeripheralManager, central: CBCentral, didUnsubscribeFrom characteristic: CBCharacteristic) {
+    func peripheralManager(_ peripheral: SonarBTPeripheralManager, central: SonarBTCentral, didUnsubscribeFrom characteristic: SonarBTCharacteristic) {
         switch characteristic.uuid {
             
         case Environment.sonarIdCharacteristicUUID:
@@ -254,7 +254,7 @@ class BTLEBroadcaster: NSObject, Broadcaster, CBPeripheralManagerDelegate {
         }
     }
     
-    func peripheralManager(_ peripheral: CBPeripheralManager, didReceiveRead request: CBATTRequest) {
+    func peripheralManager(_ peripheral: SonarBTPeripheralManager, didReceiveRead request: SonarBTATTRequest) {
         guard request.characteristic.uuid == Environment.sonarIdCharacteristicUUID else {
             logger.debug("received a read for unexpected characteristic \(request.characteristic.uuid.uuidString)")
             return
