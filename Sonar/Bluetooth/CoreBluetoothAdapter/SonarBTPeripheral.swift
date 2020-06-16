@@ -21,7 +21,7 @@ protocol SonarBTPeripheralDelegate: class {
 
 typealias SonarBTPeripheralState = CBPeripheralState
 class SonarBTPeripheral: NSObject {
-    private let cbPeripheral: CBPeripheral
+    private let cbPeripheral: CBPeripheral?
     public weak var delegate: SonarBTPeripheralDelegate?
     
     init(_ peripheral: CBPeripheral, delegate: SonarBTPeripheralDelegate?) {
@@ -30,44 +30,50 @@ class SonarBTPeripheral: NSObject {
         super.init()
     }
     
+    init(delegate: SonarBTPeripheralDelegate?) {
+        self.cbPeripheral = nil
+        self.delegate = delegate
+        super.init()
+    }
+    
     var services: [SonarBTService]? {
-        return cbPeripheral.services?.map { cbService in SonarBTService(cbService) }
+        return unwrap.services?.map { cbService in SonarBTService(cbService) }
     }
     
     var identifier: UUID {
-        return cbPeripheral.identifier
+        return unwrap.identifier
     }
     
     var state: SonarBTPeripheralState {
-        return cbPeripheral.state
+        return unwrap.state
     }
 
     var identifierWithName: String {
-        return "\(cbPeripheral.identifier) (\(cbPeripheral.name ?? "unknown"))"
+        return "\(unwrap.identifier) (\(unwrap.name ?? "unknown"))"
     }
     
     var unwrap: CBPeripheral {
-        return cbPeripheral
+        return cbPeripheral!
     }
     
     func readRSSI() {
-        cbPeripheral.readRSSI()
+        unwrap.readRSSI()
     }
     
     func discoverServices(_ serviceUUIDs: [SonarBTUUID]?) {
-        cbPeripheral.discoverServices(serviceUUIDs)
+        unwrap.discoverServices(serviceUUIDs)
     }
     
     func discoverCharacteristics(_ characteristicUUIDs: [SonarBTUUID]?, for service: SonarBTService) {
-        cbPeripheral.discoverCharacteristics(characteristicUUIDs, for: service.unwrap)
+        unwrap.discoverCharacteristics(characteristicUUIDs, for: service.unwrap)
     }
     
     func readValue(for characteristic: SonarBTCharacteristic) {
-        cbPeripheral.readValue(for: characteristic.unwrap)
+        unwrap.readValue(for: characteristic.unwrap)
     }
     
     func setNotifyValue(_ enabled: Bool, for characteristic: SonarBTCharacteristic) {
-        cbPeripheral.setNotifyValue(enabled, for: characteristic.unwrap)
+        unwrap.setNotifyValue(enabled, for: characteristic.unwrap)
     }
 }
 
