@@ -848,6 +848,32 @@ class StatusStateMachineTests: XCTestCase {
         XCTAssertEqual(request.identifier, "testResult.arrived")
         XCTAssertEqual(drawerMailbox.receive(), .negativeTestResult)
     }
+
+    func testReceivedNegativeTestResultAfterExposedSymptomaticWouldExpire() throws {
+        let exposedDate = Calendar.current.date(from: DateComponents(month: 5, day: 1))!
+        let symptomsOnset = Calendar.current.date(from: DateComponents(month: 5, day: 10))!
+        let checkinDate = Calendar.current.date(from: DateComponents(month: 5, day: 17))!
+        let exposed = StatusState.Exposed(startDate: exposedDate)
+        let exposedSymptomatic = StatusState.ExposedSymptomatic(
+            exposed: exposed, symptoms: [.cough], startDate: symptomsOnset, checkinDate: checkinDate
+        )
+        persisting.statusState = .exposedSymptomatic(exposedSymptomatic)
+
+        let testDate = Calendar.current.date(from: DateComponents(month: 5, day: 16))!
+        let testResult = TestResult(
+            result: .negative,
+            testTimestamp: testDate,
+            type: nil,
+            acknowledgementUrl: nil
+        )
+        machine.received(testResult)
+        XCTAssertEqual(machine.state, .ok(StatusState.Ok()))
+
+        let request = try XCTUnwrap(userNotificationCenter.requests.first)
+        XCTAssertEqual(request.content.title, "TEST_RESULT_TITLE".localized)
+        XCTAssertEqual(request.identifier, "testResult.arrived")
+        XCTAssertEqual(drawerMailbox.receive(), .negativeTestResult)
+    }
     
     func testSymptomaticToOkCancelsReminderNotification() throws {
         let now = Date()

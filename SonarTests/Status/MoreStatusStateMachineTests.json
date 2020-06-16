@@ -703,10 +703,10 @@
         ]
       },
       {
-        "date": "2020-05-17",
+        "date": "2020-05-16",
         "actions": [
-          { "event": { "test_result": "negative", "test_date": "2020-05-16" } },
-          { "assert": { "status": "exposed", "end_date": "2020-05-15" } }
+          { "event": { "test_result": "negative", "test_date": "2020-05-14" } },
+          { "assert": { "status": "ok" } }
         ]
       }
     ]

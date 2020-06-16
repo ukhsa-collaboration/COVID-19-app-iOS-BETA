@@ -96,9 +96,9 @@ class StatusViewController: UIViewController, Storyboarded {
             let title = UILabel()
             title.text = "COVID-19"
             title.textColor = UIColor.nhs.blue
+            title.isAccessibilityElement = false
 
             let stack = UIStackView(arrangedSubviews: [logo, title])
-            stack.accessibilityLabel = "NHS Covid 19"
 
             if #available(iOS 13.0, *) {
                 stack.showsLargeContentViewer = true
