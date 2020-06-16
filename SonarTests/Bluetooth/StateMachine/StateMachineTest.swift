@@ -26,12 +26,13 @@ class StateMachineTest: TestCase {
         nursery.startBluetooth(registration: nil)
 
 
-        let stubCentral = StubCBCentralManager(nursery.listener!)
+        let stubCentral = HappyPathFakeCBCentralManager(nursery.listener!)
         stubCentral.setState(.poweredOn)
 
         nursery.listener?.centralManagerDidUpdateState(stubCentral)
 
-
+        // should call into the delegate.listener( didReadTxPower)
+        // should call central.connect
 
 
         // assertions
@@ -39,8 +40,7 @@ class StateMachineTest: TestCase {
     }
 }
 
-
-class StubCBCentralManager: CBCentralManager {
+class HappyPathFakeCBCentralManager: CBCentralManager {
     private var stubState: CBManagerState = .unknown
     private var listener: BTLEListener
 
@@ -60,13 +60,21 @@ class StubCBCentralManager: CBCentralManager {
     }
 
     override func scanForPeripherals(withServices serviceUUIDs: [CBUUID]?, options: [String : Any]? = nil) {
-        debugPrint("hello! \(String(describing: serviceUUIDs))")
+        debugPrint("HappyPathFakeCBCentralManager.scanForPeripherals(withServices: \(String(describing: serviceUUIDs)))")
 
         listener.centralManager(
             self,
-            didDiscover: CBPeripheral(something: 0),
+            didDiscover: CBPeripheral(name: "Some name"),
             advertisementData: [:],
             rssi: NSNumber(-47)
         )
     }
+
+    override func connect(_ peripheral: CBPeripheral, options: [String : Any]? = nil) {
+        debugPrint("HappyPathFakeCBCentralManager.connect(peripheral: \(String(describing: peripheral)), options: \(String(describing: options))")
+
+        listener.centralManager(self, didConnect: peripheral)
+    }
+
+    
 }

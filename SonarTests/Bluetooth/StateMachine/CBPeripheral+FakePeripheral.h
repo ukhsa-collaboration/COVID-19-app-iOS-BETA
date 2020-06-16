@@ -1,5 +1,5 @@
 //
-//  CBPeripheral+Exploration.h
+//  CBPeripheral+FakePeripheral.h
 //  SonarTests
 //
 //  Created by NHSX on 2020/06/15
@@ -10,9 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CBPeripheral (Exploration)
+@interface CBPeripheral (FakePeripheral)
 
-- (instancetype)initWithSomething:(int)something;
+- (instancetype)initWithName:(NSString *)name;
+- (void)readRSSI;
 
 @end
 

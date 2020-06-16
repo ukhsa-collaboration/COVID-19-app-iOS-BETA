@@ -10,7 +10,7 @@
 		06DEC5052497187100A38739 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 89F06B2B2434A2C00074C612 /* Logging */; };
 		06DEC5062497187100A38739 /* PactConsumerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B7363DDD2468B5AB00193E04 /* PactConsumerSwift */; };
 		06DEC5072497187100A38739 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 0995582F248FF8F500FE97DE /* Logging */; };
-		06DEC50C249724A000A38739 /* CBPeripheral+Exploration.m in Sources */ = {isa = PBXBuildFile; fileRef = 06DEC50B2497249F00A38739 /* CBPeripheral+Exploration.m */; };
+		06DEC50C249724A000A38739 /* CBPeripheral+FakePeripheral.m in Sources */ = {isa = PBXBuildFile; fileRef = 06DEC50B2497249F00A38739 /* CBPeripheral+FakePeripheral.m */; };
 		0805FAF0247BEEE700E3A74F /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805FAEF247BEEE700E3A74F /* ErrorView.swift */; };
 		0805FAF2247C02AB00E3A74F /* ErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0805FAF1247C02AB00E3A74F /* ErrorView.xib */; };
 		0805FAF4247C233F00E3A74F /* IBView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805FAF3247C233F00E3A74F /* IBView.swift */; };
@@ -402,8 +402,8 @@
 /* Begin PBXFileReference section */
 		068B8ABB245C11C0000EAB4C /* clean-artifacts.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "clean-artifacts.yml"; sourceTree = "<group>"; };
 		06DEC5082497246300A38739 /* SonarTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SonarTests-Bridging-Header.h"; sourceTree = "<group>"; };
-		06DEC50A2497249F00A38739 /* CBPeripheral+Exploration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CBPeripheral+Exploration.h"; sourceTree = "<group>"; };
-		06DEC50B2497249F00A38739 /* CBPeripheral+Exploration.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CBPeripheral+Exploration.m"; sourceTree = "<group>"; };
+		06DEC50A2497249F00A38739 /* CBPeripheral+FakePeripheral.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CBPeripheral+FakePeripheral.h"; sourceTree = "<group>"; };
+		06DEC50B2497249F00A38739 /* CBPeripheral+FakePeripheral.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CBPeripheral+FakePeripheral.m"; sourceTree = "<group>"; };
 		0805FAEF247BEEE700E3A74F /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		0805FAF1247C02AB00E3A74F /* ErrorView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ErrorView.xib; sourceTree = "<group>"; };
 		0805FAF3247C233F00E3A74F /* IBView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IBView.swift; sourceTree = "<group>"; };
@@ -1375,8 +1375,8 @@
 			children = (
 				B03DAFA4A366AA9674E35484 /* StateMachine.swift */,
 				B03DA2A5E87A7440E5EBC3B5 /* StateMachineTest.swift */,
-				06DEC50A2497249F00A38739 /* CBPeripheral+Exploration.h */,
-				06DEC50B2497249F00A38739 /* CBPeripheral+Exploration.m */,
+				06DEC50A2497249F00A38739 /* CBPeripheral+FakePeripheral.h */,
+				06DEC50B2497249F00A38739 /* CBPeripheral+FakePeripheral.m */,
 				06DEC5082497246300A38739 /* SonarTests-Bridging-Header.h */,
 			);
 			path = StateMachine;
@@ -1991,7 +1991,7 @@
 				F60497672452415F002B8503 /* ContactEventsUploaderDouble.swift in Sources */,
 				095283AA2476FF2800CDEE55 /* SynchronousNavigationControllerDouble.swift in Sources */,
 				F632792124351C1900CF7A42 /* OnboardingViewControllerTests.swift in Sources */,
-				06DEC50C249724A000A38739 /* CBPeripheral+Exploration.m in Sources */,
+				06DEC50C249724A000A38739 /* CBPeripheral+FakePeripheral.m in Sources */,
 				89DF66A62460217A00A55F24 /* StorageCheckingDouble.swift in Sources */,
 				89C8B216245C5258009CCE80 /* DefaultObjectStoringDouble.swift in Sources */,
 				095A91182434FF1500ED6369 /* ApplicationDouble.swift in Sources */,

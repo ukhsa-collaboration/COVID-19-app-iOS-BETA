@@ -160,9 +160,14 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+        logger.info("central.state \(central.state)")
+
         logger.info("peripheral \(peripheral.identifierWithName) connected")
 
+        logger.info("BEFORE SETTING peripheral.delegate: \(String(describing: peripheral.delegate))")
         peripheral.delegate = self
+        logger.info(" AFTER SETTING peripheral.delegate: \(String(describing: peripheral.delegate))")
+
         peripheral.readRSSI()
         peripheral.discoverServices([Environment.sonarServiceUUID])
     }
@@ -224,6 +229,8 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
     }
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
+        logger.info("periperhal \(peripheral.identifierWithName) error: \(error!)")
+
         guard error == nil else {
             logger.info("periperhal \(peripheral.identifierWithName) error: \(error!)")
             return
@@ -325,6 +332,8 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
     }
     
     func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?) {
+
+
         guard error == nil else {
             logger.info("error: \(error!)")
             return
