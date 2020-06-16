@@ -281,33 +281,6 @@
 		F61695A32458B556006AABE3 /* ExposedNotificationHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61695A22458B556006AABE3 /* ExposedNotificationHandlerTests.swift */; };
 		F618A564245C682500D89517 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F618A561245C682500D89517 /* Environment.swift */; };
 		F618A566245C682500D89517 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F618A563245C682500D89517 /* GoogleService-Info.plist */; };
-		F6201EED24997A060005EE9B /* M_ExposedThenSymptomaticWithinFirstWeekThenTestPositiveThenTestPositiveAgain.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201ED224997A050005EE9B /* M_ExposedThenSymptomaticWithinFirstWeekThenTestPositiveThenTestPositiveAgain.json */; };
-		F6201EEE24997A060005EE9B /* TestPositiveWithExpiryInThePast.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201ED324997A050005EE9B /* TestPositiveWithExpiryInThePast.json */; };
-		F6201EEF24997A060005EE9B /* L_ExposedThenSymptomaticWithinFirstWeekThenTestPositiveWithinFirst7DaysOfExposure.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201ED424997A050005EE9B /* L_ExposedThenSymptomaticWithinFirstWeekThenTestPositiveWithinFirst7DaysOfExposure.json */; };
-		F6201EF024997A060005EE9B /* A_Exposed.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201ED524997A050005EE9B /* A_Exposed.json */; };
-		F6201EF124997A060005EE9B /* ExposedThenTestPositiveThenPositiveExpiresButStillFeverThenTestNegativeAfterExposureWindowEnds.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201ED624997A050005EE9B /* ExposedThenTestPositiveThenPositiveExpiresButStillFeverThenTestNegativeAfterExposureWindowEnds.json */; };
-		F6201EF224997A060005EE9B /* E_ExposedThenTestPositiveTwiceWithinAfterWeek.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201ED724997A050005EE9B /* E_ExposedThenTestPositiveTwiceWithinAfterWeek.json */; };
-		F6201EF324997A060005EE9B /* J_ExposedThenGetTestResultsFromLongBeforeExposure.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201ED824997A050005EE9B /* J_ExposedThenGetTestResultsFromLongBeforeExposure.json */; };
-		F6201EF424997A060005EE9B /* I_ExposedThenGetTestResultsFromBeforeExposure.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201ED924997A050005EE9B /* I_ExposedThenGetTestResultsFromBeforeExposure.json */; };
-		F6201EF524997A060005EE9B /* O_ExposedThenSymptomaticWithinFirstWeekThenTestPositiveAfterSymptomExpiry.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201EDA24997A050005EE9B /* O_ExposedThenSymptomaticWithinFirstWeekThenTestPositiveAfterSymptomExpiry.json */; };
-		F6201EF624997A060005EE9B /* Q_ExposedThenSymptomaticAfterFirstWeekThenTestPositive.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201EDB24997A050005EE9B /* Q_ExposedThenSymptomaticAfterFirstWeekThenTestPositive.json */; };
-		F6201EF724997A060005EE9B /* H_TestPositiveThenExposed.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201EDC24997A050005EE9B /* H_TestPositiveThenExposed.json */; };
-		F6201EF824997A060005EE9B /* D_ExposedThenTestPositiveAfterFirstWeek.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201EDD24997A050005EE9B /* D_ExposedThenTestPositiveAfterFirstWeek.json */; };
-		F6201EF924997A060005EE9B /* R_ExposedThenSymptomaticAfterFirstWeekThenTestNegativeAfterExposureWindowEnds.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201EDE24997A050005EE9B /* R_ExposedThenSymptomaticAfterFirstWeekThenTestNegativeAfterExposureWindowEnds.json */; };
-		F6201EFA24997A060005EE9B /* ExposedThenSymptomaticAfterFirstWeekThenTestNegativeBeforeExposureWindowEnds.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201EDF24997A060005EE9B /* ExposedThenSymptomaticAfterFirstWeekThenTestNegativeBeforeExposureWindowEnds.json */; };
-		F6201EFB24997A060005EE9B /* G_ExposedThenIsolationEndsThenTestPositiveFromBeforeIsolationEnded.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201EE024997A060005EE9B /* G_ExposedThenIsolationEndsThenTestPositiveFromBeforeIsolationEnded.json */; };
-		F6201EFC24997A060005EE9B /* B_ExposedThenTestPositiveWithinFirstWeek.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201EE124997A060005EE9B /* B_ExposedThenTestPositiveWithinFirstWeek.json */; };
-		F6201EFD24997A060005EE9B /* C_ExposedThenTestPositiveTwiceWithinFirstWeek.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201EE224997A060005EE9B /* C_ExposedThenTestPositiveTwiceWithinFirstWeek.json */; };
-		F6201EFE24997A060005EE9B /* ExposedThenTestPositiveThenPositiveExpiresButStillFeverThenTestNegativeBeforeExposureWindowEnds.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201EE324997A060005EE9B /* ExposedThenTestPositiveThenPositiveExpiresButStillFeverThenTestNegativeBeforeExposureWindowEnds.json */; };
-		F6201EFF24997A060005EE9B /* ExposedThenTestNegative.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201EE424997A060005EE9B /* ExposedThenTestNegative.json */; };
-		F6201F0024997A060005EE9B /* K_ExposedThenSymptomaticWithinFirstWeek.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201EE524997A060005EE9B /* K_ExposedThenSymptomaticWithinFirstWeek.json */; };
-		F6201F0124997A060005EE9B /* S_SymptomaticThenTestNegative.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201EE624997A060005EE9B /* S_SymptomaticThenTestNegative.json */; };
-		F6201F0224997A070005EE9B /* TestPositiveThenTestNegative.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201EE724997A060005EE9B /* TestPositiveThenTestNegative.json */; };
-		F6201F0324997A070005EE9B /* F_ExposedThenIsolationEndsThenTestPositive.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201EE824997A060005EE9B /* F_ExposedThenIsolationEndsThenTestPositive.json */; };
-		F6201F0424997A070005EE9B /* P_ExposedThenSymptomaticFeverAfterFirstWeek.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201EE924997A060005EE9B /* P_ExposedThenSymptomaticFeverAfterFirstWeek.json */; };
-		F6201F0524997A070005EE9B /* DefaultToNeutral.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201EEA24997A060005EE9B /* DefaultToNeutral.json */; };
-		F6201F0624997A070005EE9B /* ExposedThenSymptomaticWithinFirstWeekThenTestNegative.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201EEB24997A060005EE9B /* ExposedThenSymptomaticWithinFirstWeekThenTestNegative.json */; };
-		F6201F0724997A070005EE9B /* N_ExposedThenSymptomaticWithinFirstWeekThenTestPositiveThenTestPositiveNearEndOfIsolation.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201EEC24997A060005EE9B /* N_ExposedThenSymptomaticWithinFirstWeekThenTestPositiveThenTestPositiveNearEndOfIsolation.json */; };
 		F62F857F2451051C006580A8 /* ContactEventsUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62F857E2451051C006580A8 /* ContactEventsUploader.swift */; };
 		F62F858124510716006580A8 /* ContactEventsUploaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62F858024510716006580A8 /* ContactEventsUploaderTests.swift */; };
 		F62F858524510923006580A8 /* SessionDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62F858424510923006580A8 /* SessionDouble.swift */; };
@@ -1926,35 +1899,8 @@
 			files = (
 				896BE909244F06CB00B3687C /* www.google.com.cer in Resources */,
 				896BE90D244F06F600B3687C /* GlobalSign.cer in Resources */,
-				F6201F0524997A070005EE9B /* DefaultToNeutral.json in Resources */,
-				F6201F0724997A070005EE9B /* N_ExposedThenSymptomaticWithinFirstWeekThenTestPositiveThenTestPositiveNearEndOfIsolation.json in Resources */,
-				F6201EFC24997A060005EE9B /* B_ExposedThenTestPositiveWithinFirstWeek.json in Resources */,
 				219288852461B1E100691FDD /* build341_contactEvents.plist in Resources */,
-				F6201EFE24997A060005EE9B /* ExposedThenTestPositiveThenPositiveExpiresButStillFeverThenTestNegativeBeforeExposureWindowEnds.json in Resources */,
-				F6201F0624997A070005EE9B /* ExposedThenSymptomaticWithinFirstWeekThenTestNegative.json in Resources */,
-				F6201EEE24997A060005EE9B /* TestPositiveWithExpiryInThePast.json in Resources */,
-				F6201EFF24997A060005EE9B /* ExposedThenTestNegative.json in Resources */,
-				F6201EF824997A060005EE9B /* D_ExposedThenTestPositiveAfterFirstWeek.json in Resources */,
-				F6201EED24997A060005EE9B /* M_ExposedThenSymptomaticWithinFirstWeekThenTestPositiveThenTestPositiveAgain.json in Resources */,
-				F6201EFD24997A060005EE9B /* C_ExposedThenTestPositiveTwiceWithinFirstWeek.json in Resources */,
-				F6201EF424997A060005EE9B /* I_ExposedThenGetTestResultsFromBeforeExposure.json in Resources */,
 				896BE90B244F06E300B3687C /* GTS CA 1O1.cer in Resources */,
-				F6201F0424997A070005EE9B /* P_ExposedThenSymptomaticFeverAfterFirstWeek.json in Resources */,
-				F6201EF724997A060005EE9B /* H_TestPositiveThenExposed.json in Resources */,
-				F6201EF924997A060005EE9B /* R_ExposedThenSymptomaticAfterFirstWeekThenTestNegativeAfterExposureWindowEnds.json in Resources */,
-				F6201EF124997A060005EE9B /* ExposedThenTestPositiveThenPositiveExpiresButStillFeverThenTestNegativeAfterExposureWindowEnds.json in Resources */,
-				F6201EF524997A060005EE9B /* O_ExposedThenSymptomaticWithinFirstWeekThenTestPositiveAfterSymptomExpiry.json in Resources */,
-				F6201F0224997A070005EE9B /* TestPositiveThenTestNegative.json in Resources */,
-				F6201F0324997A070005EE9B /* F_ExposedThenIsolationEndsThenTestPositive.json in Resources */,
-				F6201F0024997A060005EE9B /* K_ExposedThenSymptomaticWithinFirstWeek.json in Resources */,
-				F6201EF224997A060005EE9B /* E_ExposedThenTestPositiveTwiceWithinAfterWeek.json in Resources */,
-				F6201EEF24997A060005EE9B /* L_ExposedThenSymptomaticWithinFirstWeekThenTestPositiveWithinFirst7DaysOfExposure.json in Resources */,
-				F6201EFA24997A060005EE9B /* ExposedThenSymptomaticAfterFirstWeekThenTestNegativeBeforeExposureWindowEnds.json in Resources */,
-				F6201F0124997A060005EE9B /* S_SymptomaticThenTestNegative.json in Resources */,
-				F6201EFB24997A060005EE9B /* G_ExposedThenIsolationEndsThenTestPositiveFromBeforeIsolationEnded.json in Resources */,
-				F6201EF624997A060005EE9B /* Q_ExposedThenSymptomaticAfterFirstWeekThenTestPositive.json in Resources */,
-				F6201EF024997A060005EE9B /* A_Exposed.json in Resources */,
-				F6201EF324997A060005EE9B /* J_ExposedThenGetTestResultsFromLongBeforeExposure.json in Resources */,
 				896BE915244F391F00B3687C /* www.apple.com.cer in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
