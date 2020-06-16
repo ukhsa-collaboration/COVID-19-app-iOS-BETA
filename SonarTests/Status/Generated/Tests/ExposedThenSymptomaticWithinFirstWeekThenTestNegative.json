@@ -1,0 +1,23 @@
+[
+  {
+    "date": "2020-05-01",
+    "actions": [
+      { "event": { "exposure": "2020-05-01" } },
+      { "assert": { "status": "exposed", "end_date": "2020-05-15" } }
+    ]
+  },
+  {
+    "date": "2020-05-03",
+    "actions": [
+      { "event": { "self_diagnose": { "symptoms": [ "temperature" ], "start_date": "2020-05-02" } } },
+      { "assert": { "status": "exposed_symptomatic", "end_date": "2020-05-15" } }
+    ]
+  },
+  {
+    "date": "2020-05-05",
+    "actions": [
+      { "event": { "test_result": "negative", "test_date": "2020-05-04" } },
+      { "assert": { "status": "exposed", "end_date": "2020-05-15" } }
+    ]
+  }
+]

@@ -1,6 +1,7 @@
 %{ import json }%
+%{ import os }%
 %{ import string }%
-%{ from scenario import Scenario }%
+%{ from scenario import Day }%
 //
 //  MoreStatusStateMachineTests.swift
 //  SonarTests
@@ -40,13 +41,12 @@ class MoreStatusStateMachineTests: XCTestCase {
         )
     }
 
-% with open(input_json) as file:
-    %{ input = json.load(file) }%
-    %{ scenarios = [Scenario.from_json(json) for json in input] }%
-    % for scenario in scenarios:
-    func test${ scenario.test_name() }() throws {
+% for input_file in open(input_files, 'r'):
+    %{ timeline = json.load(open(input_file.rstrip(), 'r')) }%
+    %{ days = [Day.from_json(day) for day in timeline] }%
+    func test${ os.path.splitext(os.path.basename(input_file))[0] }() throws {
 
-        % for day in scenario.timeline:
+        % for day in days:
         currentDate = ${ day.currentDate() }
         machine.tick()
         % for action in day.actions:
