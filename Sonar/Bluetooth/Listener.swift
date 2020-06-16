@@ -31,8 +31,7 @@ protocol Listener {
     func isHealthy() -> Bool
 }
 
-class BTLEListener: NSObject, Listener, SonarBTCentralManagerDelegate, SonarBTPeripheralDelegate {
-    
+class BTLEListener: NSObject, Listener {
     var reconnectDelay: Int = 0
 
     var broadcaster: Broadcaster
@@ -77,9 +76,17 @@ class BTLEListener: NSObject, Listener, SonarBTCentralManagerDelegate, SonarBTPe
         self.delegate = delegate
     }
 
+    func isHealthy() -> Bool {
+        guard keepaliveTimer != nil else { return false }
+        guard stateDelegate != nil else { return false }
+        guard delegate != nil else { return false }
 
-    // MARK: SonarBTCentralManagerDelegate
-    
+        return true
+    }
+}
+
+// MARK: SonarBTCentralManagerDelegate
+extension BTLEListener: SonarBTCentralManagerDelegate {
     func centralManager(_ central: SonarBTCentralManager, willRestoreState dict: [String : Any]) {
         if let restoredPeripherals = dict[SonarBTCentralManagerRestoredStatePeripheralsKey] as? [SonarBTPeripheral] {
             logger.info("restoring \(restoredPeripherals.count) \(restoredPeripherals.count == 1 ? "peripheral" : "peripherals") for central \(central)")
@@ -218,9 +225,14 @@ class BTLEListener: NSObject, Listener, SonarBTCentralManagerDelegate, SonarBTPe
             }
         }
     }
-    
-    // MARK: SonarBTPeripheralDelegate
-    
+
+    func centralManager(_ central: SonarBTCentralManager, connectionEventDidOccur event: SonarBTConnectionEvent, for peripheral: SonarBTPeripheral) {
+        logger.info("peripheral \(peripheral.identifierWithName) event: \(event)")
+    }
+}
+
+// MARK: SonarBTPeripheralDelegate
+extension BTLEListener: SonarBTPeripheralDelegate {
     func peripheral(_ peripheral: SonarBTPeripheral, didModifyServices invalidatedServices: [SonarBTService]) {
         logger.info("peripheral \(peripheral.identifierWithName) invalidatedServices:")
         for service in invalidatedServices {
@@ -229,7 +241,6 @@ class BTLEListener: NSObject, Listener, SonarBTCentralManagerDelegate, SonarBTPe
     }
     
     func peripheral(_ peripheral: SonarBTPeripheral, didDiscoverServices error: Error?) {
-
         guard error == nil else {
             logger.info("periperhal \(peripheral.identifierWithName) error: \(error!)")
             return
@@ -331,8 +342,6 @@ class BTLEListener: NSObject, Listener, SonarBTCentralManagerDelegate, SonarBTPe
     }
     
     func peripheral(_ peripheral: SonarBTPeripheral, didReadRSSI RSSI: NSNumber, error: Error?) {
-
-
         guard error == nil else {
             logger.info("error: \(error!)")
             return
@@ -346,11 +355,9 @@ class BTLEListener: NSObject, Listener, SonarBTCentralManagerDelegate, SonarBTPe
     func peripheralDidUpdateName(_ peripheral: SonarBTPeripheral) {
         logger.info("peripheral \(peripheral.identifierWithName)")
     }
-    
-    func centralManager(_ central: SonarBTCentralManager, connectionEventDidOccur event: SonarBTConnectionEvent, for peripheral: SonarBTPeripheral) {
-        logger.info("peripheral \(peripheral.identifierWithName) event: \(event)")
-    }
+}
 
+fileprivate extension BTLEListener {
     private func readRSSIAndSendKeepalive() {
         guard Date().timeIntervalSince(lastKeepaliveDate) > keepaliveInterval else {
             logger.info("too soon, won't send keepalive (lastKeepalive = \(lastKeepaliveDate))")
@@ -365,7 +372,7 @@ class BTLEListener: NSObject, Listener, SonarBTCentralManagerDelegate, SonarBTPe
             logger.info(" reading RSSI for \(peripheral.identifierWithName)")
             peripheral.readRSSI()
         }
-        
+
         logger.info("scheduling keepalive")
         lastKeepaliveDate = Date()
         var keepaliveValue = UInt8.random(in: .min ... .max)
@@ -379,23 +386,14 @@ class BTLEListener: NSObject, Listener, SonarBTCentralManagerDelegate, SonarBTPe
         keepaliveTimer?.schedule(deadline: .now() + keepaliveInterval)
         keepaliveTimer?.resume()
     }
-
-    func isHealthy() -> Bool {
-        guard keepaliveTimer != nil else { return false }
-        guard stateDelegate != nil else { return false }
-        guard delegate != nil else { return false }
-
-        return true
-    }
-    
-    fileprivate let logger: Logger = {
-        var logger = Logger(label: "BTLE")
-        #if BLE_LOGLEVEL_NODEBUG
-        logger.logLevel = .notice
-        #else
-        logger.logLevel = .debug
-        #endif
-        return logger
-    }()
-
 }
+
+fileprivate let logger: Logger = {
+    var logger = Logger(label: "BTLE")
+    #if BLE_LOGLEVEL_NODEBUG
+    logger.logLevel = .notice
+    #else
+    logger.logLevel = .debug
+    #endif
+    return logger
+}()
