@@ -1659,30 +1659,4 @@ class MoreStatusStateMachineTests: XCTestCase {
 
     }
 
-    func testTestPositiveWithExpiryInThePast() throws {
-
-        currentDate = Calendar.current.date(from: DateComponents(year: 2020, month: 5, day: 1))!
-        machine.tick()
-        do {
-            let testDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 23))!
-            let testResult = TestResult(
-                result: .positive,
-                testTimestamp: testDate,
-                type: nil,
-                acknowledgementUrl: nil
-            )
-            self.machine.received(testResult)
-        }
-
-        do {
-            let endDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 30, hour: 7))!
-            guard case .positive(let positive) = self.machine.state else {
-                XCTFail("Expected state to be positive, got \(self.machine.state)")
-                return
-            }
-            XCTAssertEqual(positive.checkinDate, endDate)
-        }
-
-    }
-
 }
