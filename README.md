@@ -52,6 +52,12 @@ struct RegistrationCanaryEnvironment {
 - **If Xcode is open, restart Xcode.** Xcode does not handle configuration
   files being changed out from under it gracefully.
 
+### MoreStatusStateMachineTests
+
+TODO
+https://nshipster.com/swift-gyb/
+- why do blocks?
+
 ### Registration Canary
 
 The registration canary is a diagnostic tool that helps assess the health of

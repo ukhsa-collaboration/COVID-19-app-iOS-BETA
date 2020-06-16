@@ -281,6 +281,33 @@
 		F61695A32458B556006AABE3 /* ExposedNotificationHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61695A22458B556006AABE3 /* ExposedNotificationHandlerTests.swift */; };
 		F618A564245C682500D89517 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F618A561245C682500D89517 /* Environment.swift */; };
 		F618A566245C682500D89517 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F618A563245C682500D89517 /* GoogleService-Info.plist */; };
+		F6201EED24997A060005EE9B /* M_ExposedThenSymptomaticWithinFirstWeekThenTestPositiveThenTestPositiveAgain.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201ED224997A050005EE9B /* M_ExposedThenSymptomaticWithinFirstWeekThenTestPositiveThenTestPositiveAgain.json */; };
+		F6201EEE24997A060005EE9B /* TestPositiveWithExpiryInThePast.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201ED324997A050005EE9B /* TestPositiveWithExpiryInThePast.json */; };
+		F6201EEF24997A060005EE9B /* L_ExposedThenSymptomaticWithinFirstWeekThenTestPositiveWithinFirst7DaysOfExposure.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201ED424997A050005EE9B /* L_ExposedThenSymptomaticWithinFirstWeekThenTestPositiveWithinFirst7DaysOfExposure.json */; };
+		F6201EF024997A060005EE9B /* A_Exposed.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201ED524997A050005EE9B /* A_Exposed.json */; };
+		F6201EF124997A060005EE9B /* ExposedThenTestPositiveThenPositiveExpiresButStillFeverThenTestNegativeAfterExposureWindowEnds.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201ED624997A050005EE9B /* ExposedThenTestPositiveThenPositiveExpiresButStillFeverThenTestNegativeAfterExposureWindowEnds.json */; };
+		F6201EF224997A060005EE9B /* E_ExposedThenTestPositiveTwiceWithinAfterWeek.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201ED724997A050005EE9B /* E_ExposedThenTestPositiveTwiceWithinAfterWeek.json */; };
+		F6201EF324997A060005EE9B /* J_ExposedThenGetTestResultsFromLongBeforeExposure.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201ED824997A050005EE9B /* J_ExposedThenGetTestResultsFromLongBeforeExposure.json */; };
+		F6201EF424997A060005EE9B /* I_ExposedThenGetTestResultsFromBeforeExposure.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201ED924997A050005EE9B /* I_ExposedThenGetTestResultsFromBeforeExposure.json */; };
+		F6201EF524997A060005EE9B /* O_ExposedThenSymptomaticWithinFirstWeekThenTestPositiveAfterSymptomExpiry.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201EDA24997A050005EE9B /* O_ExposedThenSymptomaticWithinFirstWeekThenTestPositiveAfterSymptomExpiry.json */; };
+		F6201EF624997A060005EE9B /* Q_ExposedThenSymptomaticAfterFirstWeekThenTestPositive.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201EDB24997A050005EE9B /* Q_ExposedThenSymptomaticAfterFirstWeekThenTestPositive.json */; };
+		F6201EF724997A060005EE9B /* H_TestPositiveThenExposed.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201EDC24997A050005EE9B /* H_TestPositiveThenExposed.json */; };
+		F6201EF824997A060005EE9B /* D_ExposedThenTestPositiveAfterFirstWeek.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201EDD24997A050005EE9B /* D_ExposedThenTestPositiveAfterFirstWeek.json */; };
+		F6201EF924997A060005EE9B /* R_ExposedThenSymptomaticAfterFirstWeekThenTestNegativeAfterExposureWindowEnds.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201EDE24997A050005EE9B /* R_ExposedThenSymptomaticAfterFirstWeekThenTestNegativeAfterExposureWindowEnds.json */; };
+		F6201EFA24997A060005EE9B /* ExposedThenSymptomaticAfterFirstWeekThenTestNegativeBeforeExposureWindowEnds.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201EDF24997A060005EE9B /* ExposedThenSymptomaticAfterFirstWeekThenTestNegativeBeforeExposureWindowEnds.json */; };
+		F6201EFB24997A060005EE9B /* G_ExposedThenIsolationEndsThenTestPositiveFromBeforeIsolationEnded.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201EE024997A060005EE9B /* G_ExposedThenIsolationEndsThenTestPositiveFromBeforeIsolationEnded.json */; };
+		F6201EFC24997A060005EE9B /* B_ExposedThenTestPositiveWithinFirstWeek.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201EE124997A060005EE9B /* B_ExposedThenTestPositiveWithinFirstWeek.json */; };
+		F6201EFD24997A060005EE9B /* C_ExposedThenTestPositiveTwiceWithinFirstWeek.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201EE224997A060005EE9B /* C_ExposedThenTestPositiveTwiceWithinFirstWeek.json */; };
+		F6201EFE24997A060005EE9B /* ExposedThenTestPositiveThenPositiveExpiresButStillFeverThenTestNegativeBeforeExposureWindowEnds.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201EE324997A060005EE9B /* ExposedThenTestPositiveThenPositiveExpiresButStillFeverThenTestNegativeBeforeExposureWindowEnds.json */; };
+		F6201EFF24997A060005EE9B /* ExposedThenTestNegative.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201EE424997A060005EE9B /* ExposedThenTestNegative.json */; };
+		F6201F0024997A060005EE9B /* K_ExposedThenSymptomaticWithinFirstWeek.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201EE524997A060005EE9B /* K_ExposedThenSymptomaticWithinFirstWeek.json */; };
+		F6201F0124997A060005EE9B /* S_SymptomaticThenTestNegative.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201EE624997A060005EE9B /* S_SymptomaticThenTestNegative.json */; };
+		F6201F0224997A070005EE9B /* TestPositiveThenTestNegative.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201EE724997A060005EE9B /* TestPositiveThenTestNegative.json */; };
+		F6201F0324997A070005EE9B /* F_ExposedThenIsolationEndsThenTestPositive.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201EE824997A060005EE9B /* F_ExposedThenIsolationEndsThenTestPositive.json */; };
+		F6201F0424997A070005EE9B /* P_ExposedThenSymptomaticFeverAfterFirstWeek.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201EE924997A060005EE9B /* P_ExposedThenSymptomaticFeverAfterFirstWeek.json */; };
+		F6201F0524997A070005EE9B /* DefaultToNeutral.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201EEA24997A060005EE9B /* DefaultToNeutral.json */; };
+		F6201F0624997A070005EE9B /* ExposedThenSymptomaticWithinFirstWeekThenTestNegative.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201EEB24997A060005EE9B /* ExposedThenSymptomaticWithinFirstWeekThenTestNegative.json */; };
+		F6201F0724997A070005EE9B /* N_ExposedThenSymptomaticWithinFirstWeekThenTestPositiveThenTestPositiveNearEndOfIsolation.json in Resources */ = {isa = PBXBuildFile; fileRef = F6201EEC24997A060005EE9B /* N_ExposedThenSymptomaticWithinFirstWeekThenTestPositiveThenTestPositiveNearEndOfIsolation.json */; };
 		F62F857F2451051C006580A8 /* ContactEventsUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62F857E2451051C006580A8 /* ContactEventsUploader.swift */; };
 		F62F858124510716006580A8 /* ContactEventsUploaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62F858024510716006580A8 /* ContactEventsUploaderTests.swift */; };
 		F62F858524510923006580A8 /* SessionDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62F858424510923006580A8 /* SessionDouble.swift */; };
@@ -295,7 +322,6 @@
 		F6334E4D24748B3000421B4C /* RegistrationStatus.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6334E4C24748B3000421B4C /* RegistrationStatus.storyboard */; };
 		F6334E4F24748C3400421B4C /* RegistrationStatusViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6334E4E24748C3400421B4C /* RegistrationStatusViewControllerTests.swift */; };
 		F643C2DB248FF7E60052A282 /* MoreStatusStateMachineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F643C2DA248FF7E60052A282 /* MoreStatusStateMachineTests.swift */; };
-		F643C2E12491891B0052A282 /* MoreStatusStateMachineTests.swift.gyb in Resources */ = {isa = PBXBuildFile; fileRef = F643C2E02491891A0052A282 /* MoreStatusStateMachineTests.swift.gyb */; };
 		F652F72C244A74E900D97950 /* StartDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652F72B244A74E900D97950 /* StartDateViewController.swift */; };
 		F652F730244E4AAD00D97950 /* DrawerPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F652F72F244E4AAD00D97950 /* DrawerPresentation.swift */; };
 		F6548FA32460C1C7005F06FF /* QuestionnaireCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6548FA22460C1C7005F06FF /* QuestionnaireCoordinatorTests.swift */; };
@@ -318,8 +344,6 @@
 		F6AA91F0247ED65A00D086B8 /* DrawerMailboxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AA91EF247ED65A00D086B8 /* DrawerMailboxTests.swift */; };
 		F6AA91F2247F161C00D086B8 /* DrawerMailboxingDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AA91F1247F161C00D086B8 /* DrawerMailboxingDouble.swift */; };
 		F6AB2F20243D359F00386D6B /* SubmitSymptomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */; };
-		F6ACE9BB2497D6F200D32E35 /* MoreStatusStateMachineTests.json in Resources */ = {isa = PBXBuildFile; fileRef = F6ACE9BA2497D6F200D32E35 /* MoreStatusStateMachineTests.json */; };
-		F6ACE9BD2497D88600D32E35 /* scenario.py in Resources */ = {isa = PBXBuildFile; fileRef = F6ACE9BC2497D88600D32E35 /* scenario.py */; };
 		F6BBE13C246F46B4005757BB /* BookTest.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6BBE13B246F46B4005757BB /* BookTest.storyboard */; };
 		F6BBE13E246F46EE005757BB /* BookTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BBE13D246F46EE005757BB /* BookTestViewController.swift */; };
 		F6BBE141246F584F005757BB /* WorkplaceGuidance.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6BBE140246F584F005757BB /* WorkplaceGuidance.storyboard */; };
@@ -659,6 +683,33 @@
 		F618A561245C682500D89517 /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		F618A562245C682500D89517 /* Sonar.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Sonar.xcconfig; sourceTree = "<group>"; };
 		F618A563245C682500D89517 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F6201ED224997A050005EE9B /* M_ExposedThenSymptomaticWithinFirstWeekThenTestPositiveThenTestPositiveAgain.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = M_ExposedThenSymptomaticWithinFirstWeekThenTestPositiveThenTestPositiveAgain.json; sourceTree = "<group>"; };
+		F6201ED324997A050005EE9B /* TestPositiveWithExpiryInThePast.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TestPositiveWithExpiryInThePast.json; sourceTree = "<group>"; };
+		F6201ED424997A050005EE9B /* L_ExposedThenSymptomaticWithinFirstWeekThenTestPositiveWithinFirst7DaysOfExposure.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = L_ExposedThenSymptomaticWithinFirstWeekThenTestPositiveWithinFirst7DaysOfExposure.json; sourceTree = "<group>"; };
+		F6201ED524997A050005EE9B /* A_Exposed.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = A_Exposed.json; sourceTree = "<group>"; };
+		F6201ED624997A050005EE9B /* ExposedThenTestPositiveThenPositiveExpiresButStillFeverThenTestNegativeAfterExposureWindowEnds.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ExposedThenTestPositiveThenPositiveExpiresButStillFeverThenTestNegativeAfterExposureWindowEnds.json; sourceTree = "<group>"; };
+		F6201ED724997A050005EE9B /* E_ExposedThenTestPositiveTwiceWithinAfterWeek.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = E_ExposedThenTestPositiveTwiceWithinAfterWeek.json; sourceTree = "<group>"; };
+		F6201ED824997A050005EE9B /* J_ExposedThenGetTestResultsFromLongBeforeExposure.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = J_ExposedThenGetTestResultsFromLongBeforeExposure.json; sourceTree = "<group>"; };
+		F6201ED924997A050005EE9B /* I_ExposedThenGetTestResultsFromBeforeExposure.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = I_ExposedThenGetTestResultsFromBeforeExposure.json; sourceTree = "<group>"; };
+		F6201EDA24997A050005EE9B /* O_ExposedThenSymptomaticWithinFirstWeekThenTestPositiveAfterSymptomExpiry.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = O_ExposedThenSymptomaticWithinFirstWeekThenTestPositiveAfterSymptomExpiry.json; sourceTree = "<group>"; };
+		F6201EDB24997A050005EE9B /* Q_ExposedThenSymptomaticAfterFirstWeekThenTestPositive.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Q_ExposedThenSymptomaticAfterFirstWeekThenTestPositive.json; sourceTree = "<group>"; };
+		F6201EDC24997A050005EE9B /* H_TestPositiveThenExposed.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = H_TestPositiveThenExposed.json; sourceTree = "<group>"; };
+		F6201EDD24997A050005EE9B /* D_ExposedThenTestPositiveAfterFirstWeek.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = D_ExposedThenTestPositiveAfterFirstWeek.json; sourceTree = "<group>"; };
+		F6201EDE24997A050005EE9B /* R_ExposedThenSymptomaticAfterFirstWeekThenTestNegativeAfterExposureWindowEnds.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = R_ExposedThenSymptomaticAfterFirstWeekThenTestNegativeAfterExposureWindowEnds.json; sourceTree = "<group>"; };
+		F6201EDF24997A060005EE9B /* ExposedThenSymptomaticAfterFirstWeekThenTestNegativeBeforeExposureWindowEnds.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ExposedThenSymptomaticAfterFirstWeekThenTestNegativeBeforeExposureWindowEnds.json; sourceTree = "<group>"; };
+		F6201EE024997A060005EE9B /* G_ExposedThenIsolationEndsThenTestPositiveFromBeforeIsolationEnded.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = G_ExposedThenIsolationEndsThenTestPositiveFromBeforeIsolationEnded.json; sourceTree = "<group>"; };
+		F6201EE124997A060005EE9B /* B_ExposedThenTestPositiveWithinFirstWeek.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = B_ExposedThenTestPositiveWithinFirstWeek.json; sourceTree = "<group>"; };
+		F6201EE224997A060005EE9B /* C_ExposedThenTestPositiveTwiceWithinFirstWeek.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = C_ExposedThenTestPositiveTwiceWithinFirstWeek.json; sourceTree = "<group>"; };
+		F6201EE324997A060005EE9B /* ExposedThenTestPositiveThenPositiveExpiresButStillFeverThenTestNegativeBeforeExposureWindowEnds.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ExposedThenTestPositiveThenPositiveExpiresButStillFeverThenTestNegativeBeforeExposureWindowEnds.json; sourceTree = "<group>"; };
+		F6201EE424997A060005EE9B /* ExposedThenTestNegative.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ExposedThenTestNegative.json; sourceTree = "<group>"; };
+		F6201EE524997A060005EE9B /* K_ExposedThenSymptomaticWithinFirstWeek.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = K_ExposedThenSymptomaticWithinFirstWeek.json; sourceTree = "<group>"; };
+		F6201EE624997A060005EE9B /* S_SymptomaticThenTestNegative.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = S_SymptomaticThenTestNegative.json; sourceTree = "<group>"; };
+		F6201EE724997A060005EE9B /* TestPositiveThenTestNegative.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TestPositiveThenTestNegative.json; sourceTree = "<group>"; };
+		F6201EE824997A060005EE9B /* F_ExposedThenIsolationEndsThenTestPositive.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = F_ExposedThenIsolationEndsThenTestPositive.json; sourceTree = "<group>"; };
+		F6201EE924997A060005EE9B /* P_ExposedThenSymptomaticFeverAfterFirstWeek.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = P_ExposedThenSymptomaticFeverAfterFirstWeek.json; sourceTree = "<group>"; };
+		F6201EEA24997A060005EE9B /* DefaultToNeutral.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DefaultToNeutral.json; sourceTree = "<group>"; };
+		F6201EEB24997A060005EE9B /* ExposedThenSymptomaticWithinFirstWeekThenTestNegative.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ExposedThenSymptomaticWithinFirstWeekThenTestNegative.json; sourceTree = "<group>"; };
+		F6201EEC24997A060005EE9B /* N_ExposedThenSymptomaticWithinFirstWeekThenTestPositiveThenTestPositiveNearEndOfIsolation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = N_ExposedThenSymptomaticWithinFirstWeekThenTestPositiveThenTestPositiveNearEndOfIsolation.json; sourceTree = "<group>"; };
 		F62F857E2451051C006580A8 /* ContactEventsUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventsUploader.swift; sourceTree = "<group>"; };
 		F62F858024510716006580A8 /* ContactEventsUploaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventsUploaderTests.swift; sourceTree = "<group>"; };
 		F62F858424510923006580A8 /* SessionDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDouble.swift; sourceTree = "<group>"; };
@@ -700,7 +751,6 @@
 		F6AA91EF247ED65A00D086B8 /* DrawerMailboxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerMailboxTests.swift; sourceTree = "<group>"; };
 		F6AA91F1247F161C00D086B8 /* DrawerMailboxingDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerMailboxingDouble.swift; sourceTree = "<group>"; };
 		F6AB2F1F243D359F00386D6B /* SubmitSymptomsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitSymptomsViewController.swift; sourceTree = "<group>"; };
-		F6ACE9BA2497D6F200D32E35 /* MoreStatusStateMachineTests.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MoreStatusStateMachineTests.json; sourceTree = "<group>"; };
 		F6ACE9BC2497D88600D32E35 /* scenario.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = scenario.py; sourceTree = "<group>"; };
 		F6BBE13B246F46B4005757BB /* BookTest.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BookTest.storyboard; sourceTree = "<group>"; };
 		F6BBE13D246F46EE005757BB /* BookTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTestViewController.swift; sourceTree = "<group>"; };
@@ -1466,11 +1516,45 @@
 			isa = PBXGroup;
 			children = (
 				F643C2E02491891A0052A282 /* MoreStatusStateMachineTests.swift.gyb */,
-				F6ACE9BA2497D6F200D32E35 /* MoreStatusStateMachineTests.json */,
 				F6ACE9BC2497D88600D32E35 /* scenario.py */,
 				F643C2DA248FF7E60052A282 /* MoreStatusStateMachineTests.swift */,
+				F6201ECD24994E1F0005EE9B /* Tests */,
 			);
 			path = Generated;
+			sourceTree = "<group>";
+		};
+		F6201ECD24994E1F0005EE9B /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				F6201ED524997A050005EE9B /* A_Exposed.json */,
+				F6201EE124997A060005EE9B /* B_ExposedThenTestPositiveWithinFirstWeek.json */,
+				F6201EE224997A060005EE9B /* C_ExposedThenTestPositiveTwiceWithinFirstWeek.json */,
+				F6201EDD24997A050005EE9B /* D_ExposedThenTestPositiveAfterFirstWeek.json */,
+				F6201EEA24997A060005EE9B /* DefaultToNeutral.json */,
+				F6201ED724997A050005EE9B /* E_ExposedThenTestPositiveTwiceWithinAfterWeek.json */,
+				F6201EDF24997A060005EE9B /* ExposedThenSymptomaticAfterFirstWeekThenTestNegativeBeforeExposureWindowEnds.json */,
+				F6201EEB24997A060005EE9B /* ExposedThenSymptomaticWithinFirstWeekThenTestNegative.json */,
+				F6201EE424997A060005EE9B /* ExposedThenTestNegative.json */,
+				F6201ED624997A050005EE9B /* ExposedThenTestPositiveThenPositiveExpiresButStillFeverThenTestNegativeAfterExposureWindowEnds.json */,
+				F6201EE324997A060005EE9B /* ExposedThenTestPositiveThenPositiveExpiresButStillFeverThenTestNegativeBeforeExposureWindowEnds.json */,
+				F6201EE824997A060005EE9B /* F_ExposedThenIsolationEndsThenTestPositive.json */,
+				F6201EE024997A060005EE9B /* G_ExposedThenIsolationEndsThenTestPositiveFromBeforeIsolationEnded.json */,
+				F6201EDC24997A050005EE9B /* H_TestPositiveThenExposed.json */,
+				F6201ED924997A050005EE9B /* I_ExposedThenGetTestResultsFromBeforeExposure.json */,
+				F6201ED824997A050005EE9B /* J_ExposedThenGetTestResultsFromLongBeforeExposure.json */,
+				F6201EE524997A060005EE9B /* K_ExposedThenSymptomaticWithinFirstWeek.json */,
+				F6201ED424997A050005EE9B /* L_ExposedThenSymptomaticWithinFirstWeekThenTestPositiveWithinFirst7DaysOfExposure.json */,
+				F6201ED224997A050005EE9B /* M_ExposedThenSymptomaticWithinFirstWeekThenTestPositiveThenTestPositiveAgain.json */,
+				F6201EEC24997A060005EE9B /* N_ExposedThenSymptomaticWithinFirstWeekThenTestPositiveThenTestPositiveNearEndOfIsolation.json */,
+				F6201EDA24997A050005EE9B /* O_ExposedThenSymptomaticWithinFirstWeekThenTestPositiveAfterSymptomExpiry.json */,
+				F6201EE924997A060005EE9B /* P_ExposedThenSymptomaticFeverAfterFirstWeek.json */,
+				F6201EDB24997A050005EE9B /* Q_ExposedThenSymptomaticAfterFirstWeekThenTestPositive.json */,
+				F6201EDE24997A050005EE9B /* R_ExposedThenSymptomaticAfterFirstWeekThenTestNegativeAfterExposureWindowEnds.json */,
+				F6201EE624997A060005EE9B /* S_SymptomaticThenTestNegative.json */,
+				F6201EE724997A060005EE9B /* TestPositiveThenTestNegative.json */,
+				F6201ED324997A050005EE9B /* TestPositiveWithExpiryInThePast.json */,
+			);
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		F67C5157243E7BD5008E2945 /* SelfDiagnosis */ = {
@@ -1688,6 +1772,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 214209C62422276800C7BFF3 /* Build configuration list for PBXNativeTarget "SonarTests" */;
 			buildPhases = (
+				F6201F0824997B600005EE9B /* Generate Input File List for MoreStatusStateMachineTests */,
 				F643C2DC248FF83E0052A282 /* Generate MoreStatusStateMachineTests */,
 				214209BB2422276800C7BFF3 /* Sources */,
 				214209BC2422276800C7BFF3 /* Frameworks */,
@@ -1839,13 +1924,37 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F6ACE9BB2497D6F200D32E35 /* MoreStatusStateMachineTests.json in Resources */,
-				F643C2E12491891B0052A282 /* MoreStatusStateMachineTests.swift.gyb in Resources */,
 				896BE909244F06CB00B3687C /* www.google.com.cer in Resources */,
 				896BE90D244F06F600B3687C /* GlobalSign.cer in Resources */,
+				F6201F0524997A070005EE9B /* DefaultToNeutral.json in Resources */,
+				F6201F0724997A070005EE9B /* N_ExposedThenSymptomaticWithinFirstWeekThenTestPositiveThenTestPositiveNearEndOfIsolation.json in Resources */,
+				F6201EFC24997A060005EE9B /* B_ExposedThenTestPositiveWithinFirstWeek.json in Resources */,
 				219288852461B1E100691FDD /* build341_contactEvents.plist in Resources */,
+				F6201EFE24997A060005EE9B /* ExposedThenTestPositiveThenPositiveExpiresButStillFeverThenTestNegativeBeforeExposureWindowEnds.json in Resources */,
+				F6201F0624997A070005EE9B /* ExposedThenSymptomaticWithinFirstWeekThenTestNegative.json in Resources */,
+				F6201EEE24997A060005EE9B /* TestPositiveWithExpiryInThePast.json in Resources */,
+				F6201EFF24997A060005EE9B /* ExposedThenTestNegative.json in Resources */,
+				F6201EF824997A060005EE9B /* D_ExposedThenTestPositiveAfterFirstWeek.json in Resources */,
+				F6201EED24997A060005EE9B /* M_ExposedThenSymptomaticWithinFirstWeekThenTestPositiveThenTestPositiveAgain.json in Resources */,
+				F6201EFD24997A060005EE9B /* C_ExposedThenTestPositiveTwiceWithinFirstWeek.json in Resources */,
+				F6201EF424997A060005EE9B /* I_ExposedThenGetTestResultsFromBeforeExposure.json in Resources */,
 				896BE90B244F06E300B3687C /* GTS CA 1O1.cer in Resources */,
-				F6ACE9BD2497D88600D32E35 /* scenario.py in Resources */,
+				F6201F0424997A070005EE9B /* P_ExposedThenSymptomaticFeverAfterFirstWeek.json in Resources */,
+				F6201EF724997A060005EE9B /* H_TestPositiveThenExposed.json in Resources */,
+				F6201EF924997A060005EE9B /* R_ExposedThenSymptomaticAfterFirstWeekThenTestNegativeAfterExposureWindowEnds.json in Resources */,
+				F6201EF124997A060005EE9B /* ExposedThenTestPositiveThenPositiveExpiresButStillFeverThenTestNegativeAfterExposureWindowEnds.json in Resources */,
+				F6201EF524997A060005EE9B /* O_ExposedThenSymptomaticWithinFirstWeekThenTestPositiveAfterSymptomExpiry.json in Resources */,
+				F6201F0224997A070005EE9B /* TestPositiveThenTestNegative.json in Resources */,
+				F6201F0324997A070005EE9B /* F_ExposedThenIsolationEndsThenTestPositive.json in Resources */,
+				F6201F0024997A060005EE9B /* K_ExposedThenSymptomaticWithinFirstWeek.json in Resources */,
+				F6201EF224997A060005EE9B /* E_ExposedThenTestPositiveTwiceWithinAfterWeek.json in Resources */,
+				F6201EEF24997A060005EE9B /* L_ExposedThenSymptomaticWithinFirstWeekThenTestPositiveWithinFirst7DaysOfExposure.json in Resources */,
+				F6201EFA24997A060005EE9B /* ExposedThenSymptomaticAfterFirstWeekThenTestNegativeBeforeExposureWindowEnds.json in Resources */,
+				F6201F0124997A060005EE9B /* S_SymptomaticThenTestNegative.json in Resources */,
+				F6201EFB24997A060005EE9B /* G_ExposedThenIsolationEndsThenTestPositiveFromBeforeIsolationEnded.json in Resources */,
+				F6201EF624997A060005EE9B /* Q_ExposedThenSymptomaticAfterFirstWeekThenTestPositive.json in Resources */,
+				F6201EF024997A060005EE9B /* A_Exposed.json in Resources */,
+				F6201EF324997A060005EE9B /* J_ExposedThenGetTestResultsFromLongBeforeExposure.json in Resources */,
 				896BE915244F391F00B3687C /* www.apple.com.cer in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1927,7 +2036,7 @@
 			shellScript = "bash \"$PROJECT_DIR/bin/embed_build_info\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F643C2DC248FF83E0052A282 /* Generate MoreStatusStateMachineTests */ = {
+		F6201F0824997B600005EE9B /* Generate Input File List for MoreStatusStateMachineTests */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1935,8 +2044,27 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
+			);
+			name = "Generate Input File List for MoreStatusStateMachineTests";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(SRCROOT)/SonarTests/Status/Generated/Tests/scenarios.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /usr/bin/ruby;
+			shellScript = "output = ENV.fetch(\"SCRIPT_OUTPUT_FILE_0\")\nroot = ENV.fetch(\"SRCROOT\")\n\nscenarios = Dir[\"#{root}/SonarTests/Status/Generated/Tests/*.json\"]\n\np output\nFile.write(output, scenarios.join(\"\\n\"))\n";
+		};
+		F643C2DC248FF83E0052A282 /* Generate MoreStatusStateMachineTests */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"$(SRCROOT)/SonarTests/Status/Generated/Tests/scenarios.xcfilelist",
+			);
+			inputPaths = (
 				"$(SRCROOT)/SonarTests/Status/Generated/MoreStatusStateMachineTests.swift.gyb",
-				"$(SRCROOT)/SonarTests/Status/Generated/MoreStatusStateMachineTests.json",
 				"$(SRCROOT)/SonarTests/Status/Generated/scenario.py",
 			);
 			name = "Generate MoreStatusStateMachineTests";
@@ -1947,7 +2075,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "set -euo pipefail\n\ntemplate=$SCRIPT_INPUT_FILE_0\ninput_json=$SCRIPT_INPUT_FILE_1\noutput_file=$SCRIPT_OUTPUT_FILE_0\n\n./bin/gyb -D input_json=\"$input_json\" --line-directive \"\" -o \"$output_file\" \"$template\"\n";
+			shellScript = "set -euo pipefail\n\ntemplate=$SCRIPT_INPUT_FILE_0\ninput_files=$SCRIPT_INPUT_FILE_LIST_0\noutput_file=$SCRIPT_OUTPUT_FILE_0\n\n./bin/gyb -D input_files=\"$input_files\" --line-directive \"\" -o \"$output_file\" \"$template\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
