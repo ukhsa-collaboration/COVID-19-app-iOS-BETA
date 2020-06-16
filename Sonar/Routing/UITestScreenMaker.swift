@@ -9,7 +9,6 @@
 #if DEBUG
 
 import UIKit
-import CoreBluetooth
 
 class UITestScreenMaker {
     private let persistence = InMemoryPersistence()

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreBluetooth
 
 enum SetupProblem {
     case bluetoothOff
@@ -20,7 +19,7 @@ struct SetupProblemDiagnoser {
     func diagnose(
         notificationAuthorization: NotificationAuthorizationStatus,
         bluetoothAuthorization: BluetoothAuthorizationStatus,
-        bluetoothStatus: CBManagerState
+        bluetoothStatus: SonarBTManagerState
     ) -> SetupProblem? {
         if bluetoothStatus == .poweredOff {
             return .bluetoothOff
@@ -47,7 +46,7 @@ class SetupChecker {
     
     func check(_ callback: @escaping (SetupProblem?) -> Void) {
         var notificationStatus: NotificationAuthorizationStatus?
-        var btStatus: CBManagerState?
+        var btStatus: SonarBTManagerState?
         
         let diagnoser = SetupProblemDiagnoser()
         

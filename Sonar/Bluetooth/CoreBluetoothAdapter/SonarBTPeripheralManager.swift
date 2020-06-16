@@ -9,84 +9,6 @@
 import Foundation
 import CoreBluetooth
 
-class SonarBTCentral {
-    fileprivate let cbCentral: CBCentral
-    
-    init(_ central: CBCentral) {
-        self.cbCentral = central
-    }
-
-}
-
-
-typealias SonarBTATTError = CBATTError
-class SonarBTATTRequest {
-    fileprivate let cbATTRequest: CBATTRequest
-    
-    init(_ request: CBATTRequest) {
-        self.cbATTRequest = request
-    }
-    
-    var characteristic: SonarBTCharacteristic {
-        get {
-            return SonarBTCharacteristic(cbATTRequest.characteristic)
-        }
-    }
-    
-    var value: Data? {
-        get {
-            return cbATTRequest.value
-        }
-        
-        set {
-            cbATTRequest.value = newValue
-        }
-    }
-}
-
-class SonarBTService {
-    fileprivate let cbService: CBService
-    public var characteristics: [SonarBTCharacteristic]?
-    
-    init(_ service: CBService) {
-        self.cbService = service
-    }
-    
-    init(type UUID: SonarBTUUID, primary isPrimary: Bool) {
-        self.cbService = CBMutableService(type: UUID, primary: isPrimary)
-    }
-    
-    var uuid: SonarBTUUID {
-        get {
-            return cbService.uuid
-        }
-    }
-}
-
-
-class SonarBTCharacteristic {
-    fileprivate let cbCharacteristic: CBCharacteristic
-    
-    init(_ characteristic: CBCharacteristic) {
-        self.cbCharacteristic = characteristic
-    }
-    
-    init(type UUID: SonarBTUUID, properties: SonarBTCharacteristicProperties, value: Data?, permissions: SonarBTAttributePermissions) {
-        self.cbCharacteristic = CBMutableCharacteristic(
-            type: UUID,
-            properties: properties,
-            value: nil,
-            permissions: permissions)
-    }
-    
-    var uuid: SonarBTUUID {
-        get {
-            cbCharacteristic.uuid
-        }
-    }
-}
-
-
 protocol SonarBTPeripheralManagerDelegate: class {
     func peripheralManagerDidUpdateState(_ peripheral: SonarBTPeripheralManager)
     func peripheralManager(_ peripheral: SonarBTPeripheralManager, willRestoreState dict: [String : Any])
@@ -98,12 +20,12 @@ protocol SonarBTPeripheralManagerDelegate: class {
     func peripheralManager(_ peripheral: SonarBTPeripheralManager, didReceiveRead request: SonarBTATTRequest)
 }
 
+public let SonarBTPeripheralManagerOptionShowPowerAlertKey = CBPeripheralManagerOptionShowPowerAlertKey
+public let SonarBTPeripheralManagerOptionRestoreIdentifierKey = CBPeripheralManagerOptionRestoreIdentifierKey
+public let SonarBTPeripheralManagerRestoredStateServicesKey = CBPeripheralManagerRestoredStateServicesKey
+public let SonarBTPeripheralManagerRestoredStateAdvertisementDataKey = CBPeripheralManagerRestoredStateAdvertisementDataKey
 
-public let SonarBTPeripheralManagerOptionShowPowerAlertKey: String = CBPeripheralManagerOptionShowPowerAlertKey
-public let SonarBTPeripheralManagerOptionRestoreIdentifierKey: String = CBPeripheralManagerOptionRestoreIdentifierKey
-public let SonarBTPeripheralManagerRestoredStateServicesKey: String = CBPeripheralManagerRestoredStateServicesKey
-public let SonarBTPeripheralManagerRestoredStateAdvertisementDataKey: String = CBPeripheralManagerRestoredStateAdvertisementDataKey
-
+typealias SonarBTPeripheralManagerAuthorizationStatus = CBPeripheralManagerAuthorizationStatus
 class SonarBTPeripheralManager: NSObject {
     weak var delegate: SonarBTPeripheralManagerDelegate?
     private let cbPeripheralManager: CBPeripheralManager
@@ -116,19 +38,19 @@ class SonarBTPeripheralManager: NSObject {
     }
     
     var isAdvertising: Bool {
-        get {
-            return cbPeripheralManager.isAdvertising
-        }
+        return cbPeripheralManager.isAdvertising
     }
     
     var state: SonarBTManagerState {
-        get {
-            return cbPeripheralManager.state
-        }
+        return cbPeripheralManager.state
+    }
+    
+    class func authorizationStatus() -> SonarBTPeripheralManagerAuthorizationStatus {
+        return CBPeripheralManager.authorizationStatus()
     }
     
     func add(_ service: SonarBTService) {
-        cbPeripheralManager.add(service.cbService as! CBMutableService)
+        cbPeripheralManager.add(service.unwrapMutable)
     }
     
     func startAdvertising(_ advertisementData: [String : Any]?) {
@@ -136,11 +58,11 @@ class SonarBTPeripheralManager: NSObject {
     }
     
     func updateValue(_ value: Data, for characteristic: SonarBTCharacteristic, onSubscribedCentrals centrals: [SonarBTCentral]?) -> Bool {
-        return cbPeripheralManager.updateValue(value, for: characteristic.cbCharacteristic as! CBMutableCharacteristic, onSubscribedCentrals: centrals?.map { sonarCentral in sonarCentral.cbCentral })
+        return cbPeripheralManager.updateValue(value, for: characteristic.unwrapMutable, onSubscribedCentrals: centrals)
     }
     
     func respond(to request: SonarBTATTRequest, withResult result: SonarBTATTError.Code) {
-        cbPeripheralManager.respond(to: request.cbATTRequest, withResult: result)
+        cbPeripheralManager.respond(to: request.unwrap, withResult: result)
     }
 }
 
@@ -166,11 +88,11 @@ extension SonarBTPeripheralManager: CBPeripheralManagerDelegate {
     }
     
     func peripheralManager(_ peripheral: CBPeripheralManager, central: CBCentral, didSubscribeTo characteristic: CBCharacteristic) {
-        delegate?.peripheralManager(self, central: SonarBTCentral(central), didSubscribeTo: SonarBTCharacteristic(characteristic))
+        delegate?.peripheralManager(self, central: central, didSubscribeTo: SonarBTCharacteristic(characteristic))
     }
     
     func peripheralManager(_ peripheral: CBPeripheralManager, central: CBCentral, didUnsubscribeFrom characteristic: CBCharacteristic) {
-        delegate?.peripheralManager(self, central: SonarBTCentral(central), didUnsubscribeFrom: SonarBTCharacteristic(characteristic))
+        delegate?.peripheralManager(self, central: central, didUnsubscribeFrom: SonarBTCharacteristic(characteristic))
     }
     
     func peripheralManager(_ peripheral: CBPeripheralManager, didReceiveRead request: CBATTRequest) {

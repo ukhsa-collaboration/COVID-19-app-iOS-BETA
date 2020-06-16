@@ -7,14 +7,13 @@
 //
 
 import UIKit
-import CoreBluetooth
 import Logging
 
 protocol Peripheral {
     var identifier: UUID { get }
 }
 
-extension CBPeripheral: Peripheral {
+extension SonarBTPeripheral: Peripheral {
 }
 
 protocol ListenerDelegate {
@@ -24,7 +23,7 @@ protocol ListenerDelegate {
 }
 
 protocol ListenerStateDelegate {
-    func listener(_ listener: Listener, didUpdateState state: CBManagerState)
+    func listener(_ listener: Listener, didUpdateState state: SonarBTManagerState)
 }
 
 protocol Listener {
@@ -32,7 +31,7 @@ protocol Listener {
     func isHealthy() -> Bool
 }
 
-class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDelegate {
+class BTLEListener: NSObject, Listener, SonarBTCentralManagerDelegate, SonarBTPeripheralDelegate {
     
     var reconnectDelay: Int = 0
 
@@ -40,7 +39,7 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
     var stateDelegate: ListenerStateDelegate?
     var delegate: ListenerDelegate?
     
-    var peripherals: [UUID: CBPeripheral] = [:]
+    var peripherals: [UUID: SonarBTPeripheral] = [:]
     
     // comfortably less than the ~10s background processing time Core Bluetooth gives us when it wakes us up
     private let keepaliveInterval: TimeInterval = 8.0
@@ -79,10 +78,10 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
     }
 
 
-    // MARK: CBCentralManagerDelegate
+    // MARK: SonarBTCentralManagerDelegate
     
-    func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
-        if let restoredPeripherals = dict[CBCentralManagerRestoredStatePeripheralsKey] as? [CBPeripheral] {
+    func centralManager(_ central: SonarBTCentralManager, willRestoreState dict: [String : Any]) {
+        if let restoredPeripherals = dict[SonarBTCentralManagerRestoredStatePeripheralsKey] as? [SonarBTPeripheral] {
             logger.info("restoring \(restoredPeripherals.count) \(restoredPeripherals.count == 1 ? "peripheral" : "peripherals") for central \(central)")
             for peripheral in restoredPeripherals {
                 peripherals[peripheral.identifier] = peripheral
@@ -92,7 +91,7 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
             logger.info("no peripherals to restore for \(central)")
         }
         
-        if let restoredScanningServices = dict[CBCentralManagerRestoredStateScanServicesKey] as? [CBUUID] {
+        if let restoredScanningServices = dict[SonarBTCentralManagerRestoredStateScanServicesKey] as? [SonarBTUUID] {
             logger.info("restoring scanning for \(restoredScanningServices.count) \(restoredScanningServices.count == 1 ? "service" : "services") for central \(central)")
             for restoredScanningService in restoredScanningServices {
                 logger.info("    service \(restoredScanningService.uuidString)")
@@ -101,7 +100,7 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
             logger.info("no scanning restored for \(central)")
         }
 
-        if let scanOptions = dict[CBCentralManagerRestoredStateScanOptionsKey] as? Dictionary<String, Any> {
+        if let scanOptions = dict[SonarBTCentralManagerRestoredStateScanOptionsKey] as? Dictionary<String, Any> {
             logger.info("restoring \(scanOptions.count) \(scanOptions.count == 1 ? "scanOption" : "scanOptions") for central \(central)")
             for scanOption in scanOptions {
                 logger.info("    scanOption: \(scanOption.key), value: \(scanOption.value)")
@@ -113,7 +112,7 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
     }
 
     // dlb/br: Happy Case [HUB] - Entry Point
-    func centralManagerDidUpdateState(_ central: CBCentralManager) {
+    func centralManagerDidUpdateState(_ central: SonarBTCentralManager) {
         logger.info("state: \(central.state)")
         
         stateDelegate?.listener(self, didUpdateState: central.state)
@@ -138,9 +137,9 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
         }
     }
     
-    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
+    func centralManager(_ central: SonarBTCentralManager, didDiscover peripheral: SonarBTPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         logger.info("advertisement data = \(advertisementData.debugDescription ??? "nil")")
-        if let txPower = (advertisementData[CBAdvertisementDataTxPowerLevelKey] as? NSNumber)?.intValue {
+        if let txPower = (advertisementData[SonarBTAdvertisementDataTxPowerLevelKey] as? NSNumber)?.intValue {
             logger.info("peripheral \(peripheral.identifierWithName) discovered with RSSI = \(RSSI), txPower = \(txPower)")
             delegate?.listener(self, didReadTxPower: txPower, for: peripheral)
         } else {
@@ -160,7 +159,7 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
         central.connect(peripheral)
     }
     
-    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+    func centralManager(_ central: SonarBTCentralManager, didConnect peripheral: SonarBTPeripheral) {
         logger.info("central.state \(central.state)")
 
         logger.info("peripheral \(peripheral.identifierWithName) connected")
@@ -173,20 +172,20 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
         peripheral.discoverServices([Environment.sonarServiceUUID])
     }
     
-    func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
+    func centralManager(_ central: SonarBTCentralManager, didFailToConnect peripheral: SonarBTPeripheral, error: Error?) {
         
             // From experience, some errors seem to be unrecoverable and we should not automatically
             // attempt to reconnect when we get them:
             switch error {
                 
             // https://www.pivotaltracker.com/story/show/173149688
-            case (let error as CBError) where error.code.rawValue == 12: // CBError.Code.unknownDevice aka CBError.Code.unkownDevice
+            case (let error as SonarBTError) where error.code.rawValue == 12: // CBError.Code.unknownDevice aka CBError.Code.unkownDevice
                 logger.info("removing peripheral \(peripheral.identifierWithName) from connection list because of error: \(error)")
                 peripherals.removeValue(forKey: peripheral.identifier)
                 central.cancelPeripheralConnection(peripheral)
                 
             // https://www.pivotaltracker.com/story/show/172576561
-            case (let error as CBATTError) where error.code == CBATTError.Code.unlikelyError:
+            case (let error as SonarBTATTError) where error.code == SonarBTATTError.Code.unlikelyError:
                 logger.info("removing peripheral \(peripheral.identifierWithName) from connection list because of error: \(error)")
                 peripherals.removeValue(forKey: peripheral.identifier)
                 central.cancelPeripheralConnection(peripheral)
@@ -201,7 +200,7 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
             }
     }
 
-    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
+    func centralManager(_ central: SonarBTCentralManager, didDisconnectPeripheral peripheral: SonarBTPeripheral, error: Error?) {
         let delay = reconnectDelay == 0 ? "immediately" : "after \(reconnectDelay)s"
         if let error = error {
             logger.info("attempting to reconnect \(delay) to peripheral \(peripheral.identifierWithName) after error: \(error)")
@@ -220,16 +219,16 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
         }
     }
     
-    // MARK: CBPeripheralDelegate
+    // MARK: SonarBTPeripheralDelegate
     
-    func peripheral(_ peripheral: CBPeripheral, didModifyServices invalidatedServices: [CBService]) {
+    func peripheral(_ peripheral: SonarBTPeripheral, didModifyServices invalidatedServices: [SonarBTService]) {
         logger.info("peripheral \(peripheral.identifierWithName) invalidatedServices:")
         for service in invalidatedServices {
             logger.info("\t\(service)\n")
         }
     }
     
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
+    func peripheral(_ peripheral: SonarBTPeripheral, didDiscoverServices error: Error?) {
 
         guard error == nil else {
             logger.info("periperhal \(peripheral.identifierWithName) error: \(error!)")
@@ -256,7 +255,7 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
         peripheral.discoverCharacteristics(characteristics, for: sonarIdService)
     }
     
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
+    func peripheral(_ peripheral: SonarBTPeripheral, didDiscoverCharacteristicsFor service: SonarBTService, error: Error?) {
         guard error == nil else {
             logger.info("periperhal \(peripheral.identifierWithName) error: \(error!)")
             return
@@ -284,7 +283,7 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
         }
     }
     
-    func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?) {
+    func peripheral(_ peripheral: SonarBTPeripheral, didUpdateNotificationStateFor characteristic: SonarBTCharacteristic, error: Error?) {
         guard error == nil else {
             logger.info("characteristic \(characteristic) error: \(error!)")
             return
@@ -292,7 +291,7 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
         logger.info("characteristic \(characteristic)")
     }
 
-    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+    func peripheral(_ peripheral: SonarBTPeripheral, didUpdateValueFor characteristic: SonarBTCharacteristic, error: Error?) {
         guard error == nil else {
             logger.info("characteristic \(characteristic) error: \(error!)")
             return
@@ -331,7 +330,7 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
         }
     }
     
-    func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?) {
+    func peripheral(_ peripheral: SonarBTPeripheral, didReadRSSI RSSI: NSNumber, error: Error?) {
 
 
         guard error == nil else {
@@ -344,11 +343,11 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
         readRSSIAndSendKeepalive()
     }
     
-    func peripheralDidUpdateName(_ peripheral: CBPeripheral) {
+    func peripheralDidUpdateName(_ peripheral: SonarBTPeripheral) {
         logger.info("peripheral \(peripheral.identifierWithName)")
     }
     
-    func centralManager(_ central: CBCentralManager, connectionEventDidOccur event: CBConnectionEvent, for peripheral: CBPeripheral) {
+    func centralManager(_ central: SonarBTCentralManager, connectionEventDidOccur event: SonarBTConnectionEvent, for peripheral: SonarBTPeripheral) {
         logger.info("peripheral \(peripheral.identifierWithName) event: \(event)")
     }
 

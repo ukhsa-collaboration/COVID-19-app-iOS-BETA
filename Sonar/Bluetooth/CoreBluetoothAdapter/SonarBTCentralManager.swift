@@ -9,16 +9,6 @@
 import Foundation
 import CoreBluetooth
 
-typealias SonarBTManagerState = CBManagerState
-
-class SonarBTConnectionEvent {
-    private let cbConnectionEvent: CBConnectionEvent
-    
-    init(_ connectionEvent: CBConnectionEvent) {
-        self.cbConnectionEvent = connectionEvent
-    }
-}
-
 protocol SonarBTCentralManagerDelegate: class {
     func centralManagerDidUpdateState(_ central: SonarBTCentralManager)
     func centralManager(_ central: SonarBTCentralManager, willRestoreState dict: [String : Any])
@@ -29,6 +19,23 @@ protocol SonarBTCentralManagerDelegate: class {
     func centralManager(_ central: SonarBTCentralManager, connectionEventDidOccur event: SonarBTConnectionEvent, for peripheral: SonarBTPeripheral)
 }
 
+public let SonarBTCentralManagerOptionShowPowerAlertKey = CBCentralManagerOptionShowPowerAlertKey
+public let SonarBTCentralManagerOptionRestoreIdentifierKey = CBCentralManagerOptionRestoreIdentifierKey
+public let SonarBTCentralManagerScanOptionAllowDuplicatesKey = CBCentralManagerScanOptionAllowDuplicatesKey
+public let SonarBTCentralManagerScanOptionSolicitedServiceUUIDsKey = CBCentralManagerScanOptionSolicitedServiceUUIDsKey
+public let SonarBTConnectPeripheralOptionNotifyOnConnectionKey = CBConnectPeripheralOptionNotifyOnConnectionKey
+public let SonarBTConnectPeripheralOptionNotifyOnDisconnectionKey = CBConnectPeripheralOptionNotifyOnDisconnectionKey
+public let SonarBTConnectPeripheralOptionNotifyOnNotificationKey = CBConnectPeripheralOptionNotifyOnNotificationKey
+public let SonarBTConnectPeripheralOptionStartDelayKey = CBConnectPeripheralOptionStartDelayKey
+@available(iOS 13.0, *)
+public let SonarBTConnectPeripheralOptionEnableTransportBridgingKey = CBConnectPeripheralOptionEnableTransportBridgingKey
+@available(iOS 13.0, *)
+public let SonarBTConnectPeripheralOptionRequiresANCS = CBConnectPeripheralOptionRequiresANCS
+public let SonarBTCentralManagerRestoredStatePeripheralsKey = CBCentralManagerRestoredStatePeripheralsKey
+public let SonarBTCentralManagerRestoredStateScanServicesKey = CBCentralManagerRestoredStateScanServicesKey
+public let SonarBTCentralManagerRestoredStateScanOptionsKey = CBCentralManagerRestoredStateScanOptionsKey
+
+typealias SonarBTManagerState = CBManagerState
 class SonarBTCentralManager: NSObject {
     private let cbManager: CBCentralManager
     private weak var delegate: SonarBTCentralManagerDelegate?
@@ -40,6 +47,26 @@ class SonarBTCentralManager: NSObject {
         cbManager = CBCentralManager(delegate: nil, queue: queue, options: options)
         super.init()
         cbManager.delegate = self
+    }
+    
+    var state: SonarBTManagerState {
+        return cbManager.state
+    }
+    
+    var isScanning: Bool {
+        return cbManager.isScanning
+    }
+    
+    func cancelPeripheralConnection(_ peripheral: SonarBTPeripheral) {
+        cbManager.cancelPeripheralConnection(peripheral.unwrap)
+    }
+    
+    func scanForPeripherals(withServices serviceUUIDs: [SonarBTUUID]?, options: [String : Any]? = nil) {
+        cbManager.scanForPeripherals(withServices: serviceUUIDs, options: options)
+    }
+    
+    func connect(_ peripheral: SonarBTPeripheral, options: [String : Any]? = nil) {
+        cbManager.connect(peripheral.unwrap, options: options)
     }
 }
 
@@ -69,6 +96,6 @@ extension SonarBTCentralManager: CBCentralManagerDelegate {
     }
     
     func centralManager(_ central: CBCentralManager, connectionEventDidOccur event: CBConnectionEvent, for peripheral: CBPeripheral) {
-        delegate?.centralManager(self, connectionEventDidOccur: SonarBTConnectionEvent(event), for: SonarBTPeripheral(peripheral, delegate: peripheralDelegate))
+        delegate?.centralManager(self, connectionEventDidOccur: event, for: SonarBTPeripheral(peripheral, delegate: peripheralDelegate))
     }
 }

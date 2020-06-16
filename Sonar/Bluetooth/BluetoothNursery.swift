@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreBluetooth
 
 import Logging
 
@@ -43,7 +42,7 @@ class ConcreteBluetoothNursery: BluetoothNursery, PersistenceDelegate {
     public var listener: BTLEListener?
     public private(set) var stateObserver: BluetoothStateObserving = BluetoothStateObserver(initialState: .unknown)
 
-    private var central: CBCentralManager?
+    private var central: SonarBTCentralManager?
     private var peripheral: SonarBTPeripheralManager?
     
     private var broadcastPayloadRotationTimer: BroadcastPayloadRotationTimer?
@@ -89,12 +88,13 @@ class ConcreteBluetoothNursery: BluetoothNursery, PersistenceDelegate {
         self.broadcaster = broadcaster
         
         listener = BTLEListener(broadcaster: broadcaster, queue: btleQueue)
-        central = CBCentralManager(
+        central = SonarBTCentralManager(
             delegate: listener,
+            peripheralDelegate: listener,
             queue: btleQueue, options: [
-                CBCentralManagerScanOptionAllowDuplicatesKey: NSNumber(true),
-                CBCentralManagerOptionRestoreIdentifierKey: ConcreteBluetoothNursery.centralRestoreIdentifier,
-                CBCentralManagerOptionShowPowerAlertKey: NSNumber(true),
+                SonarBTCentralManagerScanOptionAllowDuplicatesKey: NSNumber(true),
+                SonarBTCentralManagerOptionRestoreIdentifierKey: ConcreteBluetoothNursery.centralRestoreIdentifier,
+                SonarBTCentralManagerOptionShowPowerAlertKey: NSNumber(true),
         ])
         listener?.delegate = contactEventRepository
         listener?.stateDelegate = self.stateObserver

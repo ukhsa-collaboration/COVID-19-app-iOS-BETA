@@ -8,7 +8,6 @@
 
 import XCTest
 import UIKit
-import CoreBluetooth
 
 @testable import Sonar
 

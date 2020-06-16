@@ -14,7 +14,7 @@ class BluetoothStateObserverTests: TestCase {
     
     func testObserveUntilKnown_notifiesImmediatelyIfKnown() {
         let observer = BluetoothStateObserver(initialState: .unauthorized)
-        var receivedState: CBManagerState? = nil
+        var receivedState: SonarBTManagerState? = nil
         var timesCalled = 0
         observer.observeUntilKnown { state in
             receivedState = state
@@ -30,7 +30,7 @@ class BluetoothStateObserverTests: TestCase {
     
     func testObserveUntilKnown_notifiesOfFirstKnownState() {
         let observer = BluetoothStateObserver(initialState: .unknown)
-        var receivedState: CBManagerState? = nil
+        var receivedState: SonarBTManagerState? = nil
         var timesCalled = 0
         observer.observeUntilKnown { state in
             receivedState = state
@@ -52,7 +52,7 @@ class BluetoothStateObserverTests: TestCase {
     
     func testObserve_notifiesWithCurrentState() {
         let observer = BluetoothStateObserver(initialState: .unknown)
-        var receivedState: CBManagerState? = nil
+        var receivedState: SonarBTManagerState? = nil
         observer.observe { state in
             receivedState = state
             return .keepObserving
@@ -63,7 +63,7 @@ class BluetoothStateObserverTests: TestCase {
 
     func testObserve_notifiesOnEveryChange() {
         let observer = BluetoothStateObserver(initialState: .unknown)
-        var receivedState: CBManagerState? = nil
+        var receivedState: SonarBTManagerState? = nil
         observer.observe { state in
             receivedState = state
             return .keepObserving

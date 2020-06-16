@@ -6,8 +6,6 @@
 //  Copyright © 2020 NHSX. All rights reserved.
 //
 
-import CoreBluetooth
-import Foundation
 import Logging
 
 protocol OnboardingCoordinating {

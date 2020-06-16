@@ -6,7 +6,6 @@
 //  Copyright © 2020 NHSX. All rights reserved.
 //
 
-import CoreBluetooth
 import XCTest
 @testable import Sonar
 

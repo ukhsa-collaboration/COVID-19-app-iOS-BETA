@@ -8,7 +8,6 @@
 
 import UIKit
 import Logging
-import CoreBluetooth
 
 class PermissionsViewController: UIViewController, Storyboarded {
     static let storyboardName = "Onboarding"

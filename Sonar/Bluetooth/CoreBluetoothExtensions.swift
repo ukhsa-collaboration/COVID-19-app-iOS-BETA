@@ -6,9 +6,7 @@
 //  Copyright © 2020 NHSX. All rights reserved.
 //
 
-import CoreBluetooth
-
-extension CBManagerState: CustomStringConvertible {
+extension SonarBTManagerState: CustomStringConvertible {
     
     public var description: String {
         switch self {
@@ -24,7 +22,7 @@ extension CBManagerState: CustomStringConvertible {
     
 }
 
-extension CBPeripheralState: CustomStringConvertible {
+extension SonarBTPeripheralState: CustomStringConvertible {
     
     public var description: String {
         switch self {
@@ -38,33 +36,25 @@ extension CBPeripheralState: CustomStringConvertible {
 
 }
 
-extension CBPeripheral {
+extension Sequence where Iterator.Element == SonarBTService {
     
-    public var identifierWithName: String {
-        return "\(identifier) (\(name ?? "unknown"))"
-    }
-    
-}
-
-extension Sequence where Iterator.Element == CBService {
-    
-    func sonarIdService() -> CBService? {
+    func sonarIdService() -> SonarBTService? {
         return first(where: {$0.uuid == Environment.sonarServiceUUID})
     }
     
 }
 
-extension Sequence where Iterator.Element == CBCharacteristic {
+extension Sequence where Iterator.Element == SonarBTCharacteristic {
     
-    func sonarIdCharacteristic() -> CBCharacteristic? {
+    func sonarIdCharacteristic() -> SonarBTCharacteristic? {
         return first(where: {$0.uuid == Environment.sonarIdCharacteristicUUID})
     }
 
 }
 
-extension Sequence where Iterator.Element == CBCharacteristic {
+extension Sequence where Iterator.Element == SonarBTCharacteristic {
     
-    func keepaliveCharacteristic() -> CBCharacteristic? {
+    func keepaliveCharacteristic() -> SonarBTCharacteristic? {
         return first(where: {$0.uuid == Environment.keepaliveCharacteristicUUID})
     }
 

@@ -6,7 +6,6 @@
 //  Copyright © 2020 NHSX. All rights reserved.
 //
 
-import CoreBluetooth
 import Foundation
 
 class AuthorizationManager: AuthorizationManaging {
@@ -19,7 +18,7 @@ class AuthorizationManager: AuthorizationManaging {
     ) {
         Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) { timer in
             if #available(iOS 13.1, *) {
-                switch CBManager.authorization {
+                switch SonarBTManager.authorization {
                 case .notDetermined:
                     return
                     
@@ -32,7 +31,7 @@ class AuthorizationManager: AuthorizationManaging {
                     timer.invalidate()
                 }
             } else {
-                switch CBPeripheralManager.authorizationStatus() {
+                switch SonarBTPeripheralManager.authorizationStatus() {
                     
                 case .notDetermined:
                     return
@@ -51,7 +50,7 @@ class AuthorizationManager: AuthorizationManaging {
     
     var bluetooth: BluetoothAuthorizationStatus {
         if #available(iOS 13.1, *) {
-            switch CBManager.authorization {
+            switch SonarBTManager.authorization {
             case .notDetermined:
                 return .notDetermined
             case .restricted:
@@ -64,7 +63,7 @@ class AuthorizationManager: AuthorizationManaging {
                 fatalError()
             }
         } else {
-            switch CBPeripheralManager.authorizationStatus() {
+            switch SonarBTPeripheralManager.authorizationStatus() {
             case .notDetermined:
                 return .notDetermined
             case .restricted:

@@ -9,36 +9,65 @@
 import Foundation
 import CoreBluetooth
 
-typealias SonarBTCharacteristicProperties = CBCharacteristicProperties
-typealias SonarBTUUID = CBUUID
-typealias SonarBTAttributePermissions = CBAttributePermissions
-
-class SonarBTDescriptor {
-    private let cbDescriptor: CBDescriptor
-    
-    init(_ descriptor: CBDescriptor) {
-        self.cbDescriptor = descriptor
-    }
-}
-
 protocol SonarBTPeripheralDelegate: class {
     func peripheral(_ peripheral: SonarBTPeripheral, didDiscoverServices error: Error?)
     func peripheral(_ peripheral: SonarBTPeripheral, didModifyServices invalidatedServices: [SonarBTService])
     func peripheral(_ peripheral: SonarBTPeripheral, didReadRSSI RSSI: NSNumber, error: Error?)
     func peripheral(_ peripheral: SonarBTPeripheral, didUpdateNotificationStateFor characteristic: SonarBTCharacteristic, error: Error?)
-    func peripheral(_ peripheral: SonarBTPeripheral, didUpdateValueFor descriptor: SonarBTDescriptor, error: Error?)
+    func peripheral(_ peripheral: SonarBTPeripheral, didUpdateValueFor characteristic: SonarBTCharacteristic, error: Error?)
     func peripheral(_ peripheral: SonarBTPeripheral, didDiscoverCharacteristicsFor service: SonarBTService, error: Error?)
     func peripheralDidUpdateName(_ peripheral: SonarBTPeripheral)
 }
 
+typealias SonarBTPeripheralState = CBPeripheralState
 class SonarBTPeripheral: NSObject {
     private let cbPeripheral: CBPeripheral
-    private weak var delegate: SonarBTPeripheralDelegate?
+    public weak var delegate: SonarBTPeripheralDelegate?
     
     init(_ peripheral: CBPeripheral, delegate: SonarBTPeripheralDelegate?) {
         self.cbPeripheral = peripheral
         self.delegate = delegate
         super.init()
+    }
+    
+    var services: [SonarBTService]? {
+        return cbPeripheral.services?.map { cbService in SonarBTService(cbService) }
+    }
+    
+    var identifier: UUID {
+        return cbPeripheral.identifier
+    }
+    
+    var state: SonarBTPeripheralState {
+        return cbPeripheral.state
+    }
+
+    var identifierWithName: String {
+        return "\(cbPeripheral.identifier) (\(cbPeripheral.name ?? "unknown"))"
+    }
+    
+    var unwrap: CBPeripheral {
+        return cbPeripheral
+    }
+    
+    func readRSSI() {
+        cbPeripheral.readRSSI()
+    }
+    
+    func discoverServices(_ serviceUUIDs: [SonarBTUUID]?) {
+        cbPeripheral.discoverServices(serviceUUIDs)
+    }
+    
+    func discoverCharacteristics(_ characteristicUUIDs: [SonarBTUUID]?, for service: SonarBTService) {
+        cbPeripheral.discoverCharacteristics(characteristicUUIDs, for: service.unwrap)
+    }
+    
+    func readValue(for characteristic: SonarBTCharacteristic) {
+        cbPeripheral.readValue(for: characteristic.unwrap)
+    }
+    
+    func setNotifyValue(_ enabled: Bool, for characteristic: SonarBTCharacteristic) {
+        cbPeripheral.setNotifyValue(enabled, for: characteristic.unwrap)
     }
 }
 
@@ -55,8 +84,8 @@ extension SonarBTPeripheral: CBPeripheralDelegate {
         delegate?.peripheral(self, didReadRSSI: RSSI, error: error)
     }
     
-    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor descriptor: CBDescriptor, error: Error?) {
-        delegate?.peripheral(self, didUpdateValueFor: SonarBTDescriptor(descriptor), error: error)
+    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+        delegate?.peripheral(self, didUpdateValueFor: SonarBTCharacteristic(characteristic), error: error)
     }
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {

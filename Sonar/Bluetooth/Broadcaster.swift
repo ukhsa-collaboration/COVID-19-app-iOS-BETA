@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import CoreBluetooth
 import UIKit
 import Logging
 
@@ -52,13 +51,13 @@ class BTLEBroadcaster: NSObject, Broadcaster, SonarBTPeripheralManagerDelegate {
 
         identityCharacteristic = SonarBTCharacteristic(
             type: Environment.sonarIdCharacteristicUUID,
-            properties: CBCharacteristicProperties([.read, .notify]),
+            properties: SonarBTCharacteristicProperties([.read, .notify]),
             value: nil,
             permissions: .readable)
         
         keepaliveCharacteristic = SonarBTCharacteristic(
             type: Environment.keepaliveCharacteristicUUID,
-            properties: CBCharacteristicProperties([.notify]),
+            properties: SonarBTCharacteristicProperties([.notify]),
             value: nil,
             permissions: .readable)
 
@@ -118,7 +117,7 @@ class BTLEBroadcaster: NSObject, Broadcaster, SonarBTPeripheralManagerDelegate {
     // MARK: - CBPeripheralManagerDelegate
 
     func peripheralManager(_ peripheral: SonarBTPeripheralManager, willRestoreState dict: [String : Any]) {
-        guard let services = dict[CBPeripheralManagerRestoredStateServicesKey] as? [SonarBTService] else {
+        guard let services = dict[SonarBTPeripheralManagerRestoredStateServicesKey] as? [SonarBTService] else {
             logger.info("no services restored, creating from scratch...")
             return
         }
@@ -140,7 +139,7 @@ class BTLEBroadcaster: NSObject, Broadcaster, SonarBTPeripheralManagerDelegate {
                 }
             }
         }
-        if let advertismentData = dict[CBPeripheralManagerRestoredStateAdvertisementDataKey] as? [String: Any] {
+        if let advertismentData = dict[SonarBTPeripheralManagerRestoredStateAdvertisementDataKey] as? [String: Any] {
             logger.info("restored advertisementData \(advertismentData)")
         }
         logger.info("peripheral manager \(peripheral.isAdvertising ? "is" : "is not") advertising")
@@ -170,8 +169,8 @@ class BTLEBroadcaster: NSObject, Broadcaster, SonarBTPeripheralManagerDelegate {
         // Per #172564329 we don't want to expose this in release builds
         #if DEBUG
         peripheral.startAdvertising([
-            CBAdvertisementDataLocalNameKey: advertismentDataLocalName,
-            CBAdvertisementDataServiceUUIDsKey: [service.uuid]
+            SonarBTAdvertisementDataLocalNameKey: advertismentDataLocalName,
+            SonarBTAdvertisementDataServiceUUIDsKey: [service.uuid]
         ])
         #else
         peripheral.startAdvertising([

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreBluetooth
 
 class BluetoothStateUserNotifier {
     

@@ -8,7 +8,6 @@
 
 import XCTest
 @testable import Sonar
-import CoreBluetooth
 
 class UUIDExtensionsTests: XCTestCase {
 
@@ -22,7 +21,7 @@ class UUIDExtensionsTests: XCTestCase {
         data = Data(base64Encoded: base64String)!
         uuid = UUID(uuidString: uuidString)!
         
-        print("uuid as base64 = \(CBUUID(string: uuidString).data.base64EncodedString())")
+        print("uuid as base64 = \(SonarBTUUID(string: uuidString).data.base64EncodedString())")
     }
 
     func testDataFromUUID() throws {

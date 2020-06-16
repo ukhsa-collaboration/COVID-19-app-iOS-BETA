@@ -7,11 +7,10 @@
 //
 
 import UIKit
-import CoreBluetooth
 
 protocol BluetoothStateObserving: ListenerStateDelegate {
-    func observe(_ callback: @escaping (CBManagerState) -> Action)
-    func observeUntilKnown(_ callback: @escaping (CBManagerState) -> Void)
+    func observe(_ callback: @escaping (SonarBTManagerState) -> Action)
+    func observeUntilKnown(_ callback: @escaping (SonarBTManagerState) -> Void)
 }
 
 enum Action {
@@ -21,10 +20,10 @@ enum Action {
 
 class BluetoothStateObserver: BluetoothStateObserving {
     
-    private var callbacks: [(CBManagerState) -> Action]
-    private var lastKnownState: CBManagerState
+    private var callbacks: [(SonarBTManagerState) -> Action]
+    private var lastKnownState: SonarBTManagerState
     
-    init(initialState: CBManagerState) {
+    init(initialState: SonarBTManagerState) {
         callbacks = []
         lastKnownState = initialState
     }
@@ -32,7 +31,7 @@ class BluetoothStateObserver: BluetoothStateObserving {
     // Callback will be called immediately with the last known state
     // and every time the state changes in the future, until it returns
     // .stopObserving
-    func observe(_ callback: @escaping (CBManagerState) -> Action) {
+    func observe(_ callback: @escaping (SonarBTManagerState) -> Action) {
         if callback(lastKnownState) == .keepObserving {
             callbacks.append(callback)
         }
@@ -41,7 +40,7 @@ class BluetoothStateObserver: BluetoothStateObserving {
     // Callback will be called once the next time the state transitions to
     // something other than .unknown. Use this to find out the current state
     // once.
-    func observeUntilKnown(_ callback: @escaping (CBManagerState) -> Void) {
+    func observeUntilKnown(_ callback: @escaping (SonarBTManagerState) -> Void) {
         observe { state in
             if state == .unknown {
                 return .keepObserving
@@ -54,10 +53,10 @@ class BluetoothStateObserver: BluetoothStateObserving {
 
     // MARK: - BTLEListenerStateDelegate
 
-    func listener(_ listener: Listener, didUpdateState state: CBManagerState) {
+    func listener(_ listener: Listener, didUpdateState state: SonarBTManagerState) {
         lastKnownState = state
         
-        var callbacksToKeep: [(CBManagerState) -> Action] = []
+        var callbacksToKeep: [(SonarBTManagerState) -> Action] = []
         
         for entry in callbacks {
             if entry(lastKnownState) == .keepObserving {

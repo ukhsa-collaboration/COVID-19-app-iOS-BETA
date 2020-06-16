@@ -1,7 +1,6 @@
 //import Foundation
 //
 //import XCTest
-//import CoreBluetooth
 //
 //@testable import Sonar
 //
@@ -76,5 +75,5 @@
 //        listener.centralManager(self, didConnect: peripheral)
 //    }
 //
-//    
+//
 //}
