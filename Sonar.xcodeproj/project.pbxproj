@@ -251,6 +251,8 @@
 		B701DC502477887900727126 /* HMACHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B701DC4F2477887900727126 /* HMACHelper.swift */; };
 		B701DC5224779BFC00727126 /* PactMockServiceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B701DC5124779BFC00727126 /* PactMockServiceHelper.swift */; };
 		B71ECC1C2474C81100DD6EFC /* ProximityAPIPactTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71ECC1B2474C81100DD6EFC /* ProximityAPIPactTests.swift */; };
+		B7557E6324985C420021D4B0 /* CBService+FakeService.m in Sources */ = {isa = PBXBuildFile; fileRef = B7557E6224985C420021D4B0 /* CBService+FakeService.m */; };
+		B7557E662498632F0021D4B0 /* CBCharacteristic+FakeCharacteristic.m in Sources */ = {isa = PBXBuildFile; fileRef = B7557E652498632F0021D4B0 /* CBCharacteristic+FakeCharacteristic.m */; };
 		B79A2E832476013900E8C21E /* environment.json in Resources */ = {isa = PBXBuildFile; fileRef = B79A2E742476013800E8C21E /* environment.json */; };
 		B79A2E842476013900E8C21E /* localhost.crt in Resources */ = {isa = PBXBuildFile; fileRef = B79A2E762476013800E8C21E /* localhost.crt */; };
 		B79A2E852476013900E8C21E /* localhost.key in Resources */ = {isa = PBXBuildFile; fileRef = B79A2E772476013800E8C21E /* localhost.key */; };
@@ -624,6 +626,10 @@
 		B7363DD32468B35700193E04 /* SonarPactTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SonarPactTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7363DD72468B35700193E04 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B74661212468C8D800443637 /* SonarPactTestsConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = SonarPactTestsConfig.xcconfig; sourceTree = "<group>"; };
+		B7557E6124985C420021D4B0 /* CBService+FakeService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CBService+FakeService.h"; sourceTree = "<group>"; };
+		B7557E6224985C420021D4B0 /* CBService+FakeService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CBService+FakeService.m"; sourceTree = "<group>"; };
+		B7557E642498632F0021D4B0 /* CBCharacteristic+FakeCharacteristic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CBCharacteristic+FakeCharacteristic.h"; sourceTree = "<group>"; };
+		B7557E652498632F0021D4B0 /* CBCharacteristic+FakeCharacteristic.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CBCharacteristic+FakeCharacteristic.m"; sourceTree = "<group>"; };
 		B79A2E742476013800E8C21E /* environment.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = environment.json; sourceTree = "<group>"; };
 		B79A2E762476013800E8C21E /* localhost.crt */ = {isa = PBXFileReference; lastKnownFileType = file; path = localhost.crt; sourceTree = "<group>"; };
 		B79A2E772476013800E8C21E /* localhost.key */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = localhost.key; sourceTree = "<group>"; };
@@ -1378,6 +1384,10 @@
 				06DEC50A2497249F00A38739 /* CBPeripheral+FakePeripheral.h */,
 				06DEC50B2497249F00A38739 /* CBPeripheral+FakePeripheral.m */,
 				06DEC5082497246300A38739 /* SonarTests-Bridging-Header.h */,
+				B7557E6124985C420021D4B0 /* CBService+FakeService.h */,
+				B7557E6224985C420021D4B0 /* CBService+FakeService.m */,
+				B7557E642498632F0021D4B0 /* CBCharacteristic+FakeCharacteristic.h */,
+				B7557E652498632F0021D4B0 /* CBCharacteristic+FakeCharacteristic.m */,
 			);
 			path = StateMachine;
 			sourceTree = "<group>";
@@ -2046,6 +2056,7 @@
 				219B61372447371700E2F1A6 /* UUIDExtensionsTests.swift in Sources */,
 				F67A2293242AA370002254B6 /* SecureRegistrationStorageTests.swift in Sources */,
 				DD6B158A248812C200C1DE5E /* ColorTest.swift in Sources */,
+				B7557E6324985C420021D4B0 /* CBService+FakeService.m in Sources */,
 				0964B380246329680022EF97 /* UIView_ScrollingTests.swift in Sources */,
 				214209D72423C9B600C7BFF3 /* UploadProximityEventsRequestTests.swift in Sources */,
 				F72EBDA9243D2FE6009F9328 /* BroadcastIdEncrypterTests.swift in Sources */,
@@ -2075,6 +2086,7 @@
 				0983ACCD243E566800DBB336 /* ErrorForTest.swift in Sources */,
 				097F053F24730A1200E633C8 /* ContentURLsTests.swift in Sources */,
 				09E876BC24510F2C009C2628 /* BluetoothNurseryDouble.swift in Sources */,
+				B7557E662498632F0021D4B0 /* CBCharacteristic+FakeCharacteristic.m in Sources */,
 				89DF66A42460173800A55F24 /* StorageCheckerTests.swift in Sources */,
 				F694B1BE2459EB3800C6A5D1 /* NotificationAcknowledgerTests.swift in Sources */,
 				F68BFBF7242ACD17008EE68F /* TestHelpers.swift in Sources */,

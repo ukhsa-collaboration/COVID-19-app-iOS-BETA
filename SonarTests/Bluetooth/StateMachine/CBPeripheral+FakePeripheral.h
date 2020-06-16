@@ -11,9 +11,12 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CBPeripheral (FakePeripheral)
+@property (strong) CBService *fakeService;
 
 - (instancetype)initWithName:(NSString *)name;
 - (void)readRSSI;
+- (void)discoverServices:(NSArray<CBUUID *> *)serviceUUIDs;
+- (void)discoverCharacteristics:(NSArray<CBUUID *> *)characteristicUUIDs forService:(CBService *)service;
 
 @end
 

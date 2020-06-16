@@ -65,6 +65,7 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
 
         self.broadcaster = BTLEBroadcaster(broadcastPayloadService: broadcastPayloadService)
         self.queue = DispatchQueue(label: "BTLE Queue")
+        
     }
 
     init(broadcaster: Broadcaster, queue: DispatchQueue) {
@@ -229,7 +230,6 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
     }
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
-        logger.info("periperhal \(peripheral.identifierWithName) error: \(error!)")
 
         guard error == nil else {
             logger.info("periperhal \(peripheral.identifierWithName) error: \(error!)")
