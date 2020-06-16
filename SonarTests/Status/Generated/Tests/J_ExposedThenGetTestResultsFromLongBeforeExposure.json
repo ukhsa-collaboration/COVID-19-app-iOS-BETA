@@ -1,0 +1,16 @@
+[
+  {
+    "date": "2020-05-01",
+    "actions": [
+      { "event": { "exposure": "2020-05-01" } },
+      { "assert": { "status": "exposed", "end_date": "2020-05-15" } }
+    ]
+  },
+  {
+    "date": "2020-05-02",
+    "actions": [
+      { "event": { "test_result": "positive", "test_date": "2020-04-22" } },
+      { "assert": { "status": "positive", "end_date": "2020-04-29" } }
+    ]
+  }
+]

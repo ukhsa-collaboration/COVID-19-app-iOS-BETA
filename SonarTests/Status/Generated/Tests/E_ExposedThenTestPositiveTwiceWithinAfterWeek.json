@@ -1,0 +1,33 @@
+[
+  {
+    "date": "2020-05-02",
+    "actions": [
+      { "event": { "exposure": "2020-05-01" } },
+      { "assert": { "status": "exposed", "end_date": "2020-05-15" } }
+    ]
+  },
+  {
+    "date": "2020-05-11",
+    "actions": [
+      { "event": { "test_result": "positive", "test_date": "2020-05-10" } },
+      { "assert": { "status": "positive", "end_date": "2020-05-17" } },
+      { "assert": { "drawer": "positiveTestResult" } }
+    ]
+  },
+  {
+    "date": "2020-05-13",
+    "actions": [
+      { "event": { "test_result": "positive", "test_date": "2020-05-12" } },
+      { "assert": { "status": "positive", "end_date": "2020-05-17" } },
+      { "assert": { "drawer": "positiveTestResult" } }
+    ]
+  },
+  {
+    "date": "2020-05-17",
+    "actions": [
+      { "assert": { "status": "positive", "end_date": "2020-05-17" } },
+      { "event": { "checkin": [ "cough" ] } },
+      { "assert": { "status": "ok" } }
+    ]
+  }
+]

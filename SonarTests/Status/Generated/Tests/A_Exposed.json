@@ -1,0 +1,24 @@
+[
+  {
+    "date": "2020-05-02",
+    "actions": [
+      { "event": { "exposure": "2020-05-01" } },
+      { "assert": { "status": "exposed", "end_date": "2020-05-15" } },
+      { "assert": { "drawer": null } },
+      { "assert": { "notification": "adviceChangedNotificationIdentifier" } }
+    ]
+  },
+  {
+    "date": "2020-05-15",
+    "actions": [
+      { "assert": { "status": "exposed", "end_date": "2020-05-15" } }
+    ]
+  },
+  {
+    "date": "2020-05-16",
+    "actions": [
+      { "assert": { "status": "ok" } },
+      { "assert": { "drawer": "unexposed" } }
+    ]
+  }
+]

@@ -1,0 +1,16 @@
+[
+  {
+    "date": "2020-05-02",
+    "actions": [
+      { "event": { "self_diagnose": { "symptoms": [ "temperature" ], "start_date": "2020-05-01" } } },
+      { "assert": { "status": "symptomatic", "end_date": "2020-05-08" } }
+    ]
+  },
+  {
+    "date": "2020-05-04",
+    "actions": [
+      { "event": { "test_result": "negative", "test_date": "2020-05-03" } },
+      { "assert": { "status": "ok" } }
+    ]
+  }
+]
