@@ -252,8 +252,14 @@ class StatusStateMachine: StatusStateMachining {
         case .ok, .exposed, .positive:
             break
         case .exposedSymptomatic(let exposedSymptomatic):
-            if testDate > exposedSymptomatic.startDate {
+            guard testDate > exposedSymptomatic.startDate else {
+                break
+            }
+
+            if currentDate < exposedSymptomatic.exposed.expiryDate {
                 state = .exposed(exposedSymptomatic.exposed)
+            } else {
+                state = .ok(StatusState.Ok())
             }
         case .symptomatic(let symptomatic):
             if testDate > symptomatic.startDate {
