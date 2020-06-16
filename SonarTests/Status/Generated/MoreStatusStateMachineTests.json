@@ -755,5 +755,17 @@
         ]
       }
     ]
+  },
+  {
+    "scenario": "test positive with expiry in the past",
+    "timeline": [
+        {
+          "date": "2020-05-01",
+          "actions": [
+            { "event": { "test_result": "positive", "test_date": "2020-04-23" } },
+            { "assert": { "status": "positive", "end_date": "2020-04-30" } }
+          ]
+        }
+    ]
   }
 ]
