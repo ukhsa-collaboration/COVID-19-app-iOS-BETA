@@ -909,18 +909,15 @@
 		0983ACD1243EB20A00DBB336 /* Status */ = {
 			isa = PBXGroup;
 			children = (
-				F643C2E02491891A0052A282 /* MoreStatusStateMachineTests.swift.gyb */,
-				F6ACE9BA2497D6F200D32E35 /* MoreStatusStateMachineTests.json */,
-				F6ACE9BC2497D88600D32E35 /* scenario.py */,
 				F6AA91EF247ED65A00D086B8 /* DrawerMailboxTests.swift */,
 				F61695A22458B556006AABE3 /* ExposedNotificationHandlerTests.swift */,
-				F643C2DA248FF7E60052A282 /* MoreStatusStateMachineTests.swift */,
 				F6334E4E24748C3400421B4C /* RegistrationStatusViewControllerTests.swift */,
 				F6DA0A392469DCF7001F0B48 /* StatusStateMachineTests.swift */,
 				F6DA0A352469D95F001F0B48 /* StatusStateMigrationTests.swift */,
 				F6DA0A3D246A123B001F0B48 /* StatusStateTests.swift */,
 				0983ACD2243EB22200DBB336 /* StatusViewControllerTests.swift */,
 				0990C165247DB89D007CFDFD /* TestResultNotificationHandlerTests.swift */,
+				F6201ECC24994D4A0005EE9B /* Generated */,
 			);
 			path = Status;
 			sourceTree = "<group>";
@@ -1513,6 +1510,17 @@
 			path = .secret;
 			sourceTree = "<group>";
 		};
+		F6201ECC24994D4A0005EE9B /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				F643C2E02491891A0052A282 /* MoreStatusStateMachineTests.swift.gyb */,
+				F6ACE9BA2497D6F200D32E35 /* MoreStatusStateMachineTests.json */,
+				F6ACE9BC2497D88600D32E35 /* scenario.py */,
+				F643C2DA248FF7E60052A282 /* MoreStatusStateMachineTests.swift */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
 		F67C5157243E7BD5008E2945 /* SelfDiagnosis */ = {
 			isa = PBXGroup;
 			children = (
@@ -1977,15 +1985,15 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/SonarTests/Status/MoreStatusStateMachineTests.swift.gyb",
-				"$(SRCROOT)/SonarTests/Status/MoreStatusStateMachineTests.json",
-				"$(SRCROOT)/SonarTests/Status/scenario.py",
+				"$(SRCROOT)/SonarTests/Status/Generated/MoreStatusStateMachineTests.swift.gyb",
+				"$(SRCROOT)/SonarTests/Status/Generated/MoreStatusStateMachineTests.json",
+				"$(SRCROOT)/SonarTests/Status/Generated/scenario.py",
 			);
 			name = "Generate MoreStatusStateMachineTests";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(SRCROOT)/SonarTests/Status/MoreStatusStateMachineTests.swift",
+				"$(SRCROOT)/SonarTests/Status/Generated/MoreStatusStateMachineTests.swift",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
