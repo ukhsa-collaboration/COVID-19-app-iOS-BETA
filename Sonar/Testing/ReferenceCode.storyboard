@@ -140,11 +140,11 @@
                                             <stackView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="hR5-ca-5PW">
                                                 <rect key="frame" x="4" y="0.0" width="346" height="268"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="1000" axis="vertical" distribution="fillProportionally" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="WeQ-jo-Ot7">
+                                                    <stackView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="1000" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="WeQ-jo-Ot7">
                                                         <rect key="frame" x="16" y="16" width="188" height="236"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Your app reference code" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jv7-ab-7Y5" userLabel="Reference Label">
-                                                                <rect key="frame" x="0.0" y="0.0" width="188" height="62.5"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="252" horizontalCompressionResistancePriority="1000" text="Your app reference code" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jv7-ab-7Y5" userLabel="Reference Label">
+                                                                <rect key="frame" x="0.0" y="0.0" width="188" height="20.5"/>
                                                                 <accessibility key="accessibilityConfiguration">
                                                                     <bool key="isElement" value="NO"/>
                                                                 </accessibility>
@@ -153,7 +153,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="0000-0000" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lN1-AR-0MP" userLabel="Reference Code">
-                                                                <rect key="frame" x="0.0" y="78.5" width="188" height="157.5"/>
+                                                                <rect key="frame" x="0.0" y="36.5" width="188" height="199.5"/>
                                                                 <accessibility key="accessibilityConfiguration">
                                                                     <bool key="isElement" value="NO"/>
                                                                 </accessibility>
