@@ -10,7 +10,7 @@ import Foundation
 import CoreBluetooth
 
 class SonarBTService {
-    private let cbService: CBService
+    private let cbService: CBService!
     public var characteristics: [SonarBTCharacteristic]? {
         get {
             return cbService.characteristics?.map { cbCharateristic in SonarBTCharacteristic(cbCharateristic) }

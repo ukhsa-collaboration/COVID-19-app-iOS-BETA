@@ -47,14 +47,22 @@ class ConcreteBluetoothNursery: BluetoothNursery, PersistenceDelegate {
     
     private var broadcastPayloadRotationTimer: BroadcastPayloadRotationTimer?
     
+    private let peripheralManagerFactory: (() -> SonarBTPeripheralManager)?
+    private let centralManagerFactory: ((_ listener: BTLEListener) -> SonarBTCentralManager)?
+    
     init(
         persistence: Persisting,
         userNotificationCenter: UserNotificationCenter,
         notificationCenter: NotificationCenter,
-        monitor: AppMonitoring
+        monitor: AppMonitoring,
+        peripheralManagerFactory: (() -> SonarBTPeripheralManager)? = nil,
+        centralManagerFactory: ((_ listener: BTLEListener) -> SonarBTCentralManager)? = nil
     ) {
         self.persistence = persistence
         self.userNotificationCenter = userNotificationCenter
+        self.peripheralManagerFactory = peripheralManagerFactory
+        self.centralManagerFactory = centralManagerFactory
+        
         contactEventPersister = PlistPersister<UUID, ContactEvent>(fileName: "contactEvents")
         contactEventRepository = PersistingContactEventRepository(persister: contactEventPersister)
         
@@ -82,20 +90,29 @@ class ConcreteBluetoothNursery: BluetoothNursery, PersistenceDelegate {
             encrypter: ConcreteBroadcastIdEncrypter())
         
         let broadcaster = BTLEBroadcaster(broadcastPayloadService: broadcastPayloadService!)
-        peripheral = SonarBTPeripheralManager(delegate: broadcaster, queue: btleQueue, options: [
-            SonarBTPeripheralManagerOptionRestoreIdentifierKey: ConcreteBluetoothNursery.peripheralRestoreIdentifier
-        ])
+        if let peripheralManagerFactory = peripheralManagerFactory {
+            peripheral = peripheralManagerFactory()
+        } else {
+            peripheral = SonarBTPeripheralManager(delegate: broadcaster, queue: btleQueue, options: [
+                SonarBTPeripheralManagerOptionRestoreIdentifierKey: ConcreteBluetoothNursery.peripheralRestoreIdentifier
+            ])
+        }
         self.broadcaster = broadcaster
         
         listener = BTLEListener(broadcaster: broadcaster, queue: btleQueue)
-        central = SonarBTCentralManager(
-            delegate: listener,
-            peripheralDelegate: listener,
-            queue: btleQueue, options: [
-                SonarBTCentralManagerScanOptionAllowDuplicatesKey: NSNumber(true),
-                SonarBTCentralManagerOptionRestoreIdentifierKey: ConcreteBluetoothNursery.centralRestoreIdentifier,
-                SonarBTCentralManagerOptionShowPowerAlertKey: NSNumber(true),
-        ])
+        
+        if let centralManagerFactory = centralManagerFactory {
+            central = centralManagerFactory(listener!)
+        } else {
+            central = SonarBTCentralManager(
+                delegate: listener,
+                peripheralDelegate: listener,
+                queue: btleQueue, options: [
+                    SonarBTCentralManagerScanOptionAllowDuplicatesKey: NSNumber(true),
+                    SonarBTCentralManagerOptionRestoreIdentifierKey: ConcreteBluetoothNursery.centralRestoreIdentifier,
+                    SonarBTCentralManagerOptionShowPowerAlertKey: NSNumber(true),
+            ])
+        }
         listener?.delegate = contactEventRepository
         listener?.stateDelegate = self.stateObserver
         userNotifier = BluetoothStateUserNotifier(
