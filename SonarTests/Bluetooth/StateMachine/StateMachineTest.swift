@@ -7,12 +7,7 @@ import XCTest
 class StateMachineTest: TestCase {
 
     func test_happyPath() throws {
-        let persistence = Persistence(
-            secureRegistrationStorage: SecureRegistrationStorage(),
-            broadcastKeyStorage: SecureBroadcastRotationKeyStorage(),
-            monitor: NoOpAppMonitoring(),
-            storageChecker: StorageChecker(service: "")
-        )
+        let persistence = PersistenceDouble()
 
         let nursery = ConcreteBluetoothNursery(
             persistence: persistence,
@@ -27,7 +22,7 @@ class StateMachineTest: TestCase {
             }
         )
 
-
+        nursery.contactEventRepository.reset()
         nursery.startBluetooth(registration: nil)
 
 
@@ -38,10 +33,9 @@ class StateMachineTest: TestCase {
 
         // should call into the delegate.listener( didReadTxPower)
         // should call central.connect
-
-        debugPrint("")
         // assertions
-        // have some readings on disk or persistence object with expected ID and RSSI values
+        XCTAssertEqual(nursery.contactEventRepository.contactEvents.count, 1)
+        XCTAssertEqual(nursery.contactEventRepository.contactEvents.first!.rssiValues, [-56])
     }
 }
 
