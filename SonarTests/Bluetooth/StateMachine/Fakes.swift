@@ -1,46 +1,14 @@
+//
+//  Fakes.swift
+//  SonarTests
+//
+//  Created by NHSX on 17/6/20
+//  Copyright © 2020 NHSX. All rights reserved.
+//
+
 import Foundation
 
-import XCTest
-
 @testable import Sonar
-
-class StateMachineTest: TestCase {
-
-    func test_happyPath() throws {
-        let persistence = PersistenceDouble()
-
-        let peripheralManager = FakePeripheralManager()
-        peripheralManager.setState(.poweredOn)
-        
-        let nursery = ConcreteBluetoothNursery(
-            persistence: persistence,
-            userNotificationCenter: UNUserNotificationCenter.current(),
-            notificationCenter: NotificationCenter.default,
-            monitor: NoOpAppMonitoring(),
-            peripheralManagerFactory: {
-                return peripheralManager
-            },
-            centralManagerFactory: { listener in
-                return FakeBTCentralManager(listener)
-            }
-        )
-
-        nursery.contactEventRepository.reset()
-        nursery.startBluetooth(registration: nil)
-
-        let stubCentral = FakeBTCentralManager(nursery.listener!)
-        stubCentral.setState(.poweredOn)
-
-        nursery.listener?.centralManagerDidUpdateState(stubCentral)
-        nursery.broadcaster?.peripheralManagerDidUpdateState(peripheralManager)
-
-        // should call into the delegate.listener( didReadTxPower)
-        // should call central.connect
-        // assertions
-        XCTAssertEqual(nursery.contactEventRepository.contactEvents.count, 1)
-        XCTAssertEqual(nursery.contactEventRepository.contactEvents.first!.rssiValues, [-56])
-    }
-}
 
 class FakeBTCharacteristic: SonarBTCharacteristic {
     private let id: SonarBTUUID
@@ -156,14 +124,13 @@ class FakePeripheralManager: SonarBTPeripheralManager {
 
 class FakeBTCentralManager: SonarBTCentralManager {
     private var stubState: SonarBTManagerState = .unknown
-    private var listener: BTLEListener
+    public var listener: BTLEListener!
 
     func setState(_ desiredState: SonarBTManagerState) {
         stubState = desiredState
     }
 
-    init(_ listener: BTLEListener) {
-        self.listener = listener
+    init() {
         super.init(delegate: nil, peripheralDelegate: nil, queue: nil, options: nil)
     }
 
