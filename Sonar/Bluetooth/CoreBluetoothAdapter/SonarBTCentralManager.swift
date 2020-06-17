@@ -76,7 +76,11 @@ extension SonarBTCentralManager: CBCentralManagerDelegate {
     }
     
     func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
-        delegate?.centralManager(self, willRestoreState: dict)
+        var adaptedDict = dict
+        if let peripherals = dict[CBCentralManagerRestoredStatePeripheralsKey] as? [CBPeripheral] {
+            adaptedDict.updateValue(peripherals.map { peripheral in SonarBTPeripheral(peripheral, delegate: peripheralDelegate) }, forKey: CBCentralManagerRestoredStatePeripheralsKey)
+        }
+        delegate?.centralManager(self, willRestoreState: adaptedDict)
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {

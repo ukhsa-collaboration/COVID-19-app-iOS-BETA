@@ -72,7 +72,12 @@ extension SonarBTPeripheralManager: CBPeripheralManagerDelegate {
     }
     
     func peripheralManager(_ peripheral: CBPeripheralManager, willRestoreState dict: [String : Any]) {
-        delegate?.peripheralManager(self, willRestoreState: dict)
+        var adaptedDict = dict
+        if let services = dict[CBPeripheralManagerRestoredStateServicesKey] as? [CBMutableService] {
+            adaptedDict.updateValue(services.map { service in SonarBTService(service) }, forKey: CBPeripheralManagerRestoredStateServicesKey)
+        }
+        
+        delegate?.peripheralManager(self, willRestoreState: adaptedDict)
     }
     
     func peripheralManager(_ peripheral: CBPeripheralManager, didAdd service: CBService, error: Error?) {

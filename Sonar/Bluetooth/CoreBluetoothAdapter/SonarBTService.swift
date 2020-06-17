@@ -11,7 +11,14 @@ import CoreBluetooth
 
 class SonarBTService {
     private let cbService: CBService
-    public var characteristics: [SonarBTCharacteristic]?
+    public var characteristics: [SonarBTCharacteristic]? {
+        get {
+            return cbService.characteristics?.map { cbCharateristic in SonarBTCharacteristic(cbCharateristic) }
+        }
+        set {
+            unwrapMutable.characteristics = newValue?.map { characteristic in characteristic.unwrapMutable }
+        }
+    }
     
     init(_ service: CBService) {
         self.cbService = service
