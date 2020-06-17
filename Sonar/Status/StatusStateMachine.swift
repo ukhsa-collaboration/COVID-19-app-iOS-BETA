@@ -232,18 +232,22 @@ class StatusStateMachine: StatusStateMachining {
     }
     
     func handlePositiveTestResult(from testDate: Date) {
-        let startDate: Date = {
-            switch state {
-            case .ok, .exposed:
-                return testDate
-            case .symptomatic, .positive, .exposedSymptomatic:
-                return min(testDate, state.startDate ?? testDate)
-            }
-        }()
+        let startDate: Date
+        var checkinDate: Date
+
+        switch state {
+        case .ok, .exposed:
+            startDate = testDate
+            checkinDate = StatusState.Positive.firstCheckin(from: startDate)
+        case .symptomatic, .exposedSymptomatic, .positive:
+            startDate = state.startDate! // These states should always have a start date
+            checkinDate = StatusState.Positive.firstCheckin(from: startDate)
+        }
         
-        let checkinDate = StatusState.Positive.firstCheckin(from: startDate)
-        let positive = StatusState.Positive(checkinDate: checkinDate, symptoms: state.symptoms, startDate: testDate)
-        state = .positive(positive)
+        // If checkinDate is in the past, use today
+        checkinDate = max(checkinDate, StatusState.Positive.nextCheckin(from: currentDate, afterDays: 0))
+        
+        state = .positive(.init(checkinDate: checkinDate, symptoms: state.symptoms, startDate: startDate))
         drawerMailbox.post(.positiveTestResult)
     }
 
