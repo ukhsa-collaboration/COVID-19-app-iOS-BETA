@@ -85,9 +85,12 @@ class StatusViewController: UIViewController, Storyboarded {
     }
 
     override func viewDidLoad() {
-        // Pre-iOS 13, we can’t customise large content.
-        // Set the title, so the OS has _something_ to show.
-        navigationItem.title = "NHS COVID-19"
+        if #available(iOS 13.0, *) {
+        } else {
+            // Pre-iOS 13, we can’t customise large content.
+            // Set the title, so the OS has _something_ to show.
+            navigationItem.title = "NHS COVID-19"
+        }
         
         navigationItem.titleView = {
             let logo = UIImageView(image: UIImage(named: "NHS_Logo"))
@@ -101,6 +104,9 @@ class StatusViewController: UIViewController, Storyboarded {
             let stack = UIStackView(arrangedSubviews: [logo, title])
 
             if #available(iOS 13.0, *) {
+                stack.isAccessibilityElement = true
+                stack.accessibilityLabel = "NHS COVID-19"
+
                 stack.showsLargeContentViewer = true
                 stack.largeContentImage = UIImage(named: "NHS-Logo-Template")
                 stack.largeContentTitle = "COVID-19"
