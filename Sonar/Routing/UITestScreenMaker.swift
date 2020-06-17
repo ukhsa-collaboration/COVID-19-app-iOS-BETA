@@ -246,7 +246,7 @@ private class NoOpBluetoothNursery: BluetoothNursery {
     var stateObserver: BluetoothStateObserving = BluetoothStateObserver(initialState: .poweredOn)
     var contactEventRepository: ContactEventRepository = NoOpContactEventRepository()
     var contactEventPersister: ContactEventPersister = NoOpContactEventPersister()
-    var broadcaster: Broadcaster? = NoOpBroadcaster()
+    var broadcaster: BTLEBroadcaster? = nil
     var listener: BTLEListener? = nil
 }
 

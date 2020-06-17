@@ -14,7 +14,7 @@ protocol BluetoothNursery {
     var contactEventRepository: ContactEventRepository { get }
     var contactEventPersister: ContactEventPersister { get }
     var stateObserver: BluetoothStateObserving { get }
-    var broadcaster: Broadcaster? { get }
+    var broadcaster: BTLEBroadcaster? { get }
     var listener: BTLEListener? { get }
 
     func startBluetooth(registration: Registration?)
@@ -36,7 +36,7 @@ class ConcreteBluetoothNursery: BluetoothNursery, PersistenceDelegate {
     private let dailyMetricsCollector: DailyMetricsCollector
 
     // The listener needs to get hold of the broadcaster, to send keepalives
-    public var broadcaster: Broadcaster?
+    public var broadcaster: BTLEBroadcaster?
     public var broadcastPayloadService: BroadcastPayloadService?
 
     public var listener: BTLEListener?
@@ -120,9 +120,7 @@ class ConcreteBluetoothNursery: BluetoothNursery, PersistenceDelegate {
             bluetoothStateObserver: self.stateObserver,
             scheduler: HumbleLocalNotificationScheduler(userNotificationCenter: userNotificationCenter)
         )
-        
-//        self.listener = listener
-        
+                
         broadcastPayloadRotationTimer = BroadcastPayloadRotationTimer(broadcaster: broadcaster, queue: btleQueue)
         broadcastPayloadRotationTimer?.scheduleNextMidnightUTC()
     }

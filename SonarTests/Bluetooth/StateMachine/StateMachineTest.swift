@@ -9,13 +9,16 @@ class StateMachineTest: TestCase {
     func test_happyPath() throws {
         let persistence = PersistenceDouble()
 
+        let peripheralManager = FakePeripheralManager()
+        peripheralManager.setState(.poweredOn)
+        
         let nursery = ConcreteBluetoothNursery(
             persistence: persistence,
             userNotificationCenter: UNUserNotificationCenter.current(),
             notificationCenter: NotificationCenter.default,
             monitor: NoOpAppMonitoring(),
             peripheralManagerFactory: {
-                return FakePeripheralManager()
+                return peripheralManager
             },
             centralManagerFactory: { listener in
                 return FakeBTCentralManager(listener)
@@ -25,11 +28,11 @@ class StateMachineTest: TestCase {
         nursery.contactEventRepository.reset()
         nursery.startBluetooth(registration: nil)
 
-
         let stubCentral = FakeBTCentralManager(nursery.listener!)
         stubCentral.setState(.poweredOn)
 
         nursery.listener?.centralManagerDidUpdateState(stubCentral)
+        nursery.broadcaster?.peripheralManagerDidUpdateState(peripheralManager)
 
         // should call into the delegate.listener( didReadTxPower)
         // should call central.connect
@@ -145,6 +148,10 @@ class FakePeripheralManager: SonarBTPeripheralManager {
     override var state: SonarBTManagerState {
         return stubState
     }
+    
+    override func updateValue(_ value: Data, for characteristic: SonarBTCharacteristic, onSubscribedCentrals centrals: [SonarBTCentral]?) -> Bool {
+        return true
+    }
 }
 
 class FakeBTCentralManager: SonarBTCentralManager {
@@ -165,8 +172,6 @@ class FakeBTCentralManager: SonarBTCentralManager {
     }
 
     override func scanForPeripherals(withServices serviceUUIDs: [SonarBTUUID]?, options: [String : Any]? = nil) {
-        debugPrint("HappyPathFakeCBCentralManager.scanForPeripherals(withServices: \(String(describing: serviceUUIDs)))")
-
         listener.centralManager(
             self,
             didDiscover: FakeBTPeripheral(delegate: listener),
@@ -176,8 +181,6 @@ class FakeBTCentralManager: SonarBTCentralManager {
     }
 
     override func connect(_ peripheral: SonarBTPeripheral, options: [String : Any]? = nil) {
-        debugPrint("HappyPathFakeCBCentralManager.connect(peripheral: \(String(describing: peripheral)), options: \(String(describing: options))")
-
         listener.centralManager(self, didConnect: peripheral)
     }
 

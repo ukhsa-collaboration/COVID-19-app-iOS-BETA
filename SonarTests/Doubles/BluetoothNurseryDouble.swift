@@ -11,7 +11,7 @@ import UIKit
 @testable import Sonar
 
 class BluetoothNurseryDouble: BluetoothNursery {
-    var broadcaster: Broadcaster?
+    var broadcaster: BTLEBroadcaster?
         
     var stateObserver: BluetoothStateObserving = BluetoothStateObserver(initialState: .unknown)
     var contactEventRepository: ContactEventRepository = ContactEventRepositoryDouble()
