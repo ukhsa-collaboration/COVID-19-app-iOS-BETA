@@ -24,6 +24,10 @@ class SonarBTPeripheral: NSObject {
     private var cbPeripheral: CBPeripheral!
     public weak var delegate: SonarBTPeripheralDelegate?
     
+    class func wrapperFor(_ peripheral: CBPeripheral, delegate: SonarBTPeripheralDelegate?) -> SonarBTPeripheral {
+        return peripheral.delegate as? SonarBTPeripheral ?? SonarBTPeripheral(peripheral, delegate: delegate)
+    }
+    
     init(_ peripheral: CBPeripheral, delegate: SonarBTPeripheralDelegate?) {
         self.cbPeripheral = peripheral
         self.delegate = delegate

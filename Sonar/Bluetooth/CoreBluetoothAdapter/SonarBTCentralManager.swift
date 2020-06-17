@@ -78,28 +78,28 @@ extension SonarBTCentralManager: CBCentralManagerDelegate {
     func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
         var adaptedDict = dict
         if let peripherals = dict[CBCentralManagerRestoredStatePeripheralsKey] as? [CBPeripheral] {
-            adaptedDict.updateValue(peripherals.map { peripheral in SonarBTPeripheral(peripheral, delegate: peripheralDelegate) }, forKey: CBCentralManagerRestoredStatePeripheralsKey)
+            adaptedDict.updateValue(peripherals.map { peripheral in SonarBTPeripheral.wrapperFor(peripheral, delegate: peripheralDelegate) }, forKey: CBCentralManagerRestoredStatePeripheralsKey)
         }
         delegate?.centralManager(self, willRestoreState: adaptedDict)
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        delegate?.centralManager(self, didConnect: SonarBTPeripheral(peripheral, delegate: peripheralDelegate))
+        delegate?.centralManager(self, didConnect: SonarBTPeripheral.wrapperFor(peripheral, delegate: peripheralDelegate))
     }
 
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
-        delegate?.centralManager(self, didFailToConnect: SonarBTPeripheral(peripheral, delegate: peripheralDelegate), error: error)
+        delegate?.centralManager(self, didFailToConnect: SonarBTPeripheral.wrapperFor(peripheral, delegate: peripheralDelegate), error: error)
     }
     
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-        delegate?.centralManager(self, didDisconnectPeripheral: SonarBTPeripheral(peripheral, delegate: peripheralDelegate), error: error)
+        delegate?.centralManager(self, didDisconnectPeripheral: SonarBTPeripheral.wrapperFor(peripheral, delegate: peripheralDelegate), error: error)
     }
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        delegate?.centralManager(self, didDiscover: SonarBTPeripheral(peripheral, delegate: peripheralDelegate), advertisementData: advertisementData, rssi: RSSI)
+        delegate?.centralManager(self, didDiscover: SonarBTPeripheral.wrapperFor(peripheral, delegate: peripheralDelegate), advertisementData: advertisementData, rssi: RSSI)
     }
     
     func centralManager(_ central: CBCentralManager, connectionEventDidOccur event: CBConnectionEvent, for peripheral: CBPeripheral) {
-        delegate?.centralManager(self, connectionEventDidOccur: event, for: SonarBTPeripheral(peripheral, delegate: peripheralDelegate))
+        delegate?.centralManager(self, connectionEventDidOccur: event, for: SonarBTPeripheral.wrapperFor(peripheral, delegate: peripheralDelegate))
     }
 }
