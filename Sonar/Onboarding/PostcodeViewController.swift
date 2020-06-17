@@ -42,7 +42,8 @@ class PostcodeViewController: UIViewController, Storyboarded {
 
     override func viewDidLoad() {
         errorView.isHidden = true
-        
+        errorView.errorMessage.text = "Please enter the first part of a valid postcode. For example: PO30, E2, M1, EH1, L36".localized
+
         let text = postcodeDetail.text!
         let range = text.range(of: "not")
         let nsrange = NSRange(range!, in: text)
@@ -52,7 +53,7 @@ class PostcodeViewController: UIViewController, Storyboarded {
         postcodeField.enablesReturnKeyAutomatically = false
 
         // Hide the keyboard if the user taps anywhere else
-        self.view.addGestureRecognizer(UITapGestureRecognizer(target: postcodeField, action: #selector(resignFirstResponder)))
+        view.addGestureRecognizer(UITapGestureRecognizer(target: postcodeField, action: #selector(resignFirstResponder)))
         
         notificationCenter.addObserver(self, selector: #selector(keyboardWasShown(_:)), name: UIResponder.keyboardDidShowNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(keyboardWasHidden(_:)), name: UIResponder.keyboardDidHideNotification, object: nil)
@@ -115,10 +116,8 @@ class PostcodeViewController: UIViewController, Storyboarded {
     private func showPostcodeError() {
         scroll(toErrorLabel: errorView.errorMessage, orControl: postcodeField) {
             self.errorView.isHidden = false
-            self.errorView.errorMessage.text = "Please enter the first part of a valid postcode. For example: PO30, E2, M1, EH1, L36".localized
             self.postcodeField.hasError = true
         }
-        
     }
 }
 
