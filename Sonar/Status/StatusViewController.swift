@@ -344,31 +344,27 @@ class StatusViewController: UIViewController, Storyboarded {
         }
     }
 
-    private func presentDrawer(
-        header: String,
-        detail: String,
-        close: String = "Close".localized,
-        callToAction: (title: String, action: () -> Void)? = nil,
-        completion: (() -> Void)? = nil
-    ) {
-//        dismiss(animated: animateTransitions) { [weak self] in
-//            guard let `self` = self else { return }
-
-            let drawer = DrawerViewController.instantiate()
-            drawer.inject(
-                header: header,
-                detail: detail,
-                close: close,
-                callToAction: callToAction,
-                closeCompletion: completion ?? { self.reload() }
-            )
-            self.drawerPresenter.present(
-                drawer: drawer,
-                inNavigationController: self.navigationController!,
-                usingTransitioningDelegate: self.drawerPresentationManager
-            )
-//        }
-    }
+	private func presentDrawer(
+		header: String,
+		detail: String,
+		close: String = "Close".localized,
+		callToAction: (title: String, action: () -> Void)? = nil,
+		completion: (() -> Void)? = nil
+	) {
+		let drawer = DrawerViewController.instantiate()
+		drawer.inject(
+			header: header,
+			detail: detail,
+			close: close,
+			callToAction: callToAction,
+			closeCompletion: completion ?? { self.reload() }
+		)
+		self.drawerPresenter.present(
+			drawer: drawer,
+			inNavigationController: self.navigationController!,
+			usingTransitioningDelegate: self.drawerPresentationManager
+		)
+	}
 
     private func showTestingInfo(scrollToTestResultMeaning: Bool = false) {
         let linkingIdVc = TestingInfoContainerViewController.instantiate()
