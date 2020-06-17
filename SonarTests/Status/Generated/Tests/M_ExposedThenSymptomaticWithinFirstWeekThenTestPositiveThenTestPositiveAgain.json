@@ -24,7 +24,7 @@
     "date": "2020-05-10",
     "actions": [
       { "event": { "test_result": "positive", "test_date": "2020-05-09" } },
-      { "assert": { "status": "positive", "end_date": "2020-05-11" } }
+      { "assert": { "status": "positive", "end_date": "2020-05-10" } }
     ]
   },
   {

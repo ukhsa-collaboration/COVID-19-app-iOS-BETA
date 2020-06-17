@@ -475,6 +475,7 @@ class StatusStateMachineTests: XCTestCase {
     func testReceivedPositiveTestResultFromOk() throws {
         persisting.statusState = .ok(StatusState.Ok())
 
+        currentDate = Calendar.current.date(from: DateComponents(month: 5, day: 6))!
         let testTimestamp = Calendar.current.date(from: DateComponents(month: 5, day: 10))!
         let positiveTestResult = TestResult(
             result: .positive,
@@ -498,6 +499,7 @@ class StatusStateMachineTests: XCTestCase {
     func testReceivedPositiveTestResultFromExposed() throws {
         persisting.statusState = .exposed(StatusState.Exposed(startDate: currentDate))
 
+        currentDate = Calendar.current.date(from: DateComponents(month: 5, day: 6))!
         let testTimestamp = Calendar.current.date(from: DateComponents(month: 5, day: 10))!
         let positiveTestResult = TestResult(
             result: .positive,
@@ -535,7 +537,7 @@ class StatusStateMachineTests: XCTestCase {
 
         machine.received(positiveTestResult)
         XCTAssertEqual(machine.state, .positive(StatusState.Positive(
-            checkinDate: checkinDate, symptoms: [.cough], startDate: testTimestamp)
+            checkinDate: checkinDate, symptoms: [.cough], startDate: startDate)
         ))
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.identifier, "testResult.arrived")
@@ -546,7 +548,7 @@ class StatusStateMachineTests: XCTestCase {
     func testReceivedPositiveTestResultWithLaterSymptomatic() throws {
         let startDate = Calendar.current.date(byAdding: .day, value: -3, to: currentDate)!
         let testTimestamp = Calendar.current.date(byAdding: .day, value: -5, to: currentDate)!
-        let checkinDate = StatusState.Symptomatic.firstCheckin(from: testTimestamp)
+        let checkinDate = StatusState.Symptomatic.firstCheckin(from: startDate)
         persisting.statusState = .symptomatic(StatusState.Symptomatic(
             symptoms: [.temperature], startDate: startDate, checkinDate: checkinDate
         ))
@@ -560,7 +562,7 @@ class StatusStateMachineTests: XCTestCase {
         machine.received(positiveTestResult)
 
         XCTAssertEqual(machine.state, .positive(StatusState.Positive(
-            checkinDate: checkinDate, symptoms: [.temperature], startDate: testTimestamp)
+            checkinDate: checkinDate, symptoms: [.temperature], startDate: startDate)
         ))
         let request = try XCTUnwrap(userNotificationCenter.requests.first)
         XCTAssertEqual(request.identifier, "testResult.arrived")

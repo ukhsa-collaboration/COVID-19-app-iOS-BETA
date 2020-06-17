@@ -1022,7 +1022,7 @@ class MoreStatusStateMachineTests: XCTestCase {
         }
 
         do {
-            let endDate = Calendar.current.date(from: DateComponents(year: 2020, month: 5, day: 9, hour: 7))!
+            let endDate = Calendar.current.date(from: DateComponents(year: 2020, month: 5, day: 11, hour: 7))!
             guard case .positive(let positive) = self.machine.state else {
                 XCTFail("Expected state to be positive, got \(self.machine.state)")
                 return
@@ -1230,7 +1230,7 @@ class MoreStatusStateMachineTests: XCTestCase {
         }
 
         do {
-            let endDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 30, hour: 7))!
+            let endDate = Calendar.current.date(from: DateComponents(year: 2020, month: 5, day: 1, hour: 7))!
             guard case .positive(let positive) = self.machine.state else {
                 XCTFail("Expected state to be positive, got \(self.machine.state)")
                 return
@@ -1608,7 +1608,7 @@ class MoreStatusStateMachineTests: XCTestCase {
         }
 
         do {
-            let endDate = Calendar.current.date(from: DateComponents(year: 2020, month: 5, day: 11, hour: 7))!
+            let endDate = Calendar.current.date(from: DateComponents(year: 2020, month: 5, day: 10, hour: 7))!
             guard case .positive(let positive) = self.machine.state else {
                 XCTFail("Expected state to be positive, got \(self.machine.state)")
                 return
@@ -1675,7 +1675,7 @@ class MoreStatusStateMachineTests: XCTestCase {
         }
 
         do {
-            let endDate = Calendar.current.date(from: DateComponents(year: 2020, month: 4, day: 29, hour: 7))!
+            let endDate = Calendar.current.date(from: DateComponents(year: 2020, month: 5, day: 2, hour: 7))!
             guard case .positive(let positive) = self.machine.state else {
                 XCTFail("Expected state to be positive, got \(self.machine.state)")
                 return
