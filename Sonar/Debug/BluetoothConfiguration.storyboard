@@ -16,15 +16,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ReconnectionDelayTableViewCell" id="NZN-Xy-qak" customClass="ReconnectionDelayTableViewCell" customModule="Sonar" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="StepperTableViewCell" id="NZN-Xy-qak" customClass="StepperTableViewCell" customModule="Sonar" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NZN-Xy-qak" id="hNu-XQ-LFZ">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="asx-0q-P4c">
-                                            <rect key="frame" x="20" y="11.5" width="42" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="asx-0q-P4c">
+                                            <rect key="frame" x="20" y="11.5" width="272" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -38,6 +38,7 @@
                                         </stepper>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="hjR-YM-2KC" firstAttribute="leading" secondItem="asx-0q-P4c" secondAttribute="trailing" constant="8" symbolic="YES" id="6Qo-rA-WMT"/>
                                         <constraint firstItem="asx-0q-P4c" firstAttribute="centerY" secondItem="hjR-YM-2KC" secondAttribute="centerY" id="NFD-OW-P2Q"/>
                                         <constraint firstItem="asx-0q-P4c" firstAttribute="centerY" secondItem="hNu-XQ-LFZ" secondAttribute="centerY" id="YCh-f0-8eE"/>
                                         <constraint firstItem="asx-0q-P4c" firstAttribute="leading" secondItem="hNu-XQ-LFZ" secondAttribute="leading" constant="20" symbolic="YES" id="lQC-Sd-XQZ"/>
@@ -45,8 +46,8 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="reconnectionLabel" destination="asx-0q-P4c" id="4HZ-Rq-a60"/>
-                                    <outlet property="stepper" destination="hjR-YM-2KC" id="5Ws-1A-6eO"/>
+                                    <outlet property="stepper" destination="hjR-YM-2KC" id="TGG-ho-hPr"/>
+                                    <outlet property="stepperLabel" destination="asx-0q-P4c" id="ocZ-PX-CnQ"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

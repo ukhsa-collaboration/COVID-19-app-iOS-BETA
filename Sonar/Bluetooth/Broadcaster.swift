@@ -14,6 +14,7 @@ import Logging
 protocol Broadcaster {
     func sendKeepalive(value: Data)
     func updateIdentity()
+    func restartAdvertising()
 
     func isHealthy() -> Bool
 }
@@ -21,6 +22,8 @@ protocol Broadcaster {
 class BTLEBroadcaster: NSObject, Broadcaster, CBPeripheralManagerDelegate {
 
     let advertismentDataLocalName = "Sonar"
+    var isAdvertisingObserver: NSKeyValueObservation?
+    var startingAdvertising: Bool = false
 
     enum UnsentCharacteristicValue {
         case keepalive(value: Data)
@@ -164,31 +167,20 @@ class BTLEBroadcaster: NSObject, Broadcaster, CBPeripheralManagerDelegate {
             logger.info("error: \(error!))")
             return
         }
-        logger.info("starting advertising...")
-
-        // Per #172564329 we don't want to expose this in release builds
-        #if DEBUG || INTERNAL
-        peripheral.startAdvertising([
-            CBAdvertisementDataLocalNameKey: advertismentDataLocalName,
-            CBAdvertisementDataServiceUUIDsKey: [service.uuid]
-        ])
-        #else
-        peripheral.startAdvertising([
-            CBAdvertisementDataServiceUUIDsKey: [service.uuid]
-        ])
-        #endif
+        restartAdvertising()
     }
     
     func peripheralManagerDidStartAdvertising(_ peripheral: CBPeripheralManager, error: Error?) {
+        startingAdvertising = false
         guard error == nil else {
             logger.info("error: \(error!))")
             return
         }
-
+        
         if let data = broadcastPayloadService.broadcastPayload()?.data() {
-            logger.info("advertising broadcast payload: \(PrintableBroadcastPayload(data))")
+            logger.info("started advertising broadcast payload: \(PrintableBroadcastPayload(data))")
         } else {
-            logger.info("advertising with no broadcast payload set")
+            logger.info("started advertising with no broadcast payload set")
         }
     }
     
@@ -269,6 +261,48 @@ class BTLEBroadcaster: NSObject, Broadcaster, CBPeripheralManagerDelegate {
         logger.info("responding to read request with \(PrintableBroadcastPayload(broadcastPayload))")
         request.value = broadcastPayload
         peripheral.respond(to: request, withResult: .success)
+    }
+    
+    func restartAdvertising() {
+        guard let peripheral = self.peripheral else {
+            logger.info("peripheral manager not set")
+            return
+        }
+        
+        if peripheral.isAdvertising {
+            logger.info("already advertising, stopping first...")
+            isAdvertisingObserver = peripheral.observe(\.isAdvertising) { object, change in
+                self.startAdvertising()
+            }
+            peripheral.stopAdvertising()
+        } else {
+            logger.info("not advertising")
+            startAdvertising()
+        }
+    }
+    
+    private func startAdvertising() {
+        guard let peripheral = self.peripheral else {
+            logger.info("peripheral manager not set")
+            return
+        }
+        guard !startingAdvertising else {
+            logger.info("already starting advertising...")
+            return
+        }
+        startingAdvertising = true
+        logger.info("starting advertising...")
+        // Per #172564329 we don't want to expose this in release builds
+        #if DEBUG || INTERNAL
+        peripheral.startAdvertising([
+            CBAdvertisementDataLocalNameKey: advertismentDataLocalName,
+            CBAdvertisementDataServiceUUIDsKey: [Environment.sonarServiceUUID]
+        ])
+        #else
+        peripheral.startAdvertising([
+            CBAdvertisementDataServiceUUIDsKey: [service.uuid]
+        ])
+        #endif
     }
     
     // MARK: - Healthcheck

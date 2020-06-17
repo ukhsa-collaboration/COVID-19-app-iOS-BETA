@@ -34,8 +34,6 @@ protocol Listener: class {
 
 class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDelegate {
     
-    var reconnectDelay: Int = 0
-
     var broadcaster: Broadcaster
     weak var stateDelegate: ListenerStateDelegate?
     weak var delegate: ListenerDelegate?
@@ -44,8 +42,11 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
     
     // comfortably less than the ~10s background processing time Core Bluetooth gives us when it wakes us up
     private let keepaliveInterval: TimeInterval = 8.0
-    
     private var lastKeepaliveDate: Date = Date.distantPast
+    
+    var restartAdvertisingInterval: TimeInterval = 0.0
+    private var lastRestartAdvertisingDate: Date = Date.distantPast
+    
     private var keepaliveTimer: DispatchSourceTimer?
     private let dateFormatter = ISO8601DateFormatter()
     private let queue: DispatchQueue
@@ -302,7 +303,7 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
             
             let keepaliveValue = data.withUnsafeBytes { $0.load(as: UInt8.self) }
             logger.info("read keepalive value from peripheral \(peripheral.identifierWithName): \(keepaliveValue)")
-            readRSSIAndSendKeepalive()
+            didWakeOnBluetoothEvent()
             
         case .none:
             logger.info("characteristic \(characteristic) has no data")
@@ -320,7 +321,7 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
 
         logger.info("read RSSI for \(peripheral.identifierWithName): \(RSSI)")
         delegate?.listener(self, didReadRSSI: RSSI.intValue, for: peripheral)
-        readRSSIAndSendKeepalive()
+        didWakeOnBluetoothEvent()
     }
     
     func peripheralDidUpdateName(_ peripheral: CBPeripheral) {
@@ -330,7 +331,28 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
     func centralManager(_ central: CBCentralManager, connectionEventDidOccur event: CBConnectionEvent, for peripheral: CBPeripheral) {
         logger.info("peripheral \(peripheral.identifierWithName) event: \(event)")
     }
+    
+    // This is spelled like a delegate callback because I want it to be one eventually—*what* we do on receiving
+    // a keepalive should be outside the remit of the Listener
+    private func didWakeOnBluetoothEvent() {
+        restartAdvertising()
+        readRSSIAndSendKeepalive()
+    }
+    
+    private func restartAdvertising() {
+        guard restartAdvertisingInterval > 0 else {
+            return
+        }
+        guard Date().timeIntervalSince(lastRestartAdvertisingDate) > restartAdvertisingInterval else {
+            logger.info("too soon, won't restart advertising (lastRestartAdvertisingDate = \(lastRestartAdvertisingDate))")
+            return
+        }
 
+        logger.info("restarting advertising...")
+        lastRestartAdvertisingDate = Date()
+        broadcaster.restartAdvertising()
+    }
+    
     private func readRSSIAndSendKeepalive() {
         guard Date().timeIntervalSince(lastKeepaliveDate) > keepaliveInterval else {
             logger.info("too soon, won't send keepalive (lastKeepalive = \(lastKeepaliveDate))")
@@ -358,7 +380,7 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
         keepaliveTimer?.schedule(deadline: .now() + keepaliveInterval)
         keepaliveTimer?.resume()
     }
-
+    
     func isHealthy() -> Bool {
         guard keepaliveTimer != nil else { return false }
         guard stateDelegate != nil else { return false }

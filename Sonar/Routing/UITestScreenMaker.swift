@@ -300,6 +300,8 @@ private class NoOpBroadcaster: Broadcaster {
     func sendKeepalive(value: Data) {
     }
 
+    func restartAdvertising() {
+    }
     func isHealthy() -> Bool {
         return false
     }
