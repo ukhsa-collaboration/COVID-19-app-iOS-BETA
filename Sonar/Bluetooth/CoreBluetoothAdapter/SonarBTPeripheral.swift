@@ -21,19 +21,14 @@ protocol SonarBTPeripheralDelegate: class {
 
 typealias SonarBTPeripheralState = CBPeripheralState
 class SonarBTPeripheral: NSObject {
-    private let cbPeripheral: CBPeripheral?
+    private var cbPeripheral: CBPeripheral!
     public weak var delegate: SonarBTPeripheralDelegate?
     
     init(_ peripheral: CBPeripheral, delegate: SonarBTPeripheralDelegate?) {
         self.cbPeripheral = peripheral
         self.delegate = delegate
         super.init()
-    }
-    
-    init(delegate: SonarBTPeripheralDelegate?) {
-        self.cbPeripheral = nil
-        self.delegate = delegate
-        super.init()
+        cbPeripheral.delegate = self
     }
     
     var services: [SonarBTService]? {
@@ -53,7 +48,7 @@ class SonarBTPeripheral: NSObject {
     }
     
     var unwrap: CBPeripheral {
-        return cbPeripheral!
+        return cbPeripheral
     }
     
     func readRSSI() {

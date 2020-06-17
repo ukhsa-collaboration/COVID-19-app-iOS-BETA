@@ -28,13 +28,13 @@ public let SonarBTPeripheralManagerRestoredStateAdvertisementDataKey = CBPeriphe
 typealias SonarBTPeripheralManagerAuthorizationStatus = CBPeripheralManagerAuthorizationStatus
 class SonarBTPeripheralManager: NSObject {
     weak var delegate: SonarBTPeripheralManagerDelegate?
-    private let cbPeripheralManager: CBPeripheralManager
+    private var cbPeripheralManager: CBPeripheralManager!
     
     init(delegate: SonarBTPeripheralManagerDelegate?, queue: DispatchQueue?, options: [String : Any]? = nil) {
         self.delegate = delegate
-        self.cbPeripheralManager = CBPeripheralManager(delegate: nil, queue: queue, options: options)
         super.init()
-        cbPeripheralManager.delegate = self
+        
+        self.cbPeripheralManager = CBPeripheralManager(delegate: self, queue: queue)
     }
     
     var isAdvertising: Bool {

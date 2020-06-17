@@ -40,9 +40,6 @@ class StateMachineTest: TestCase {
 }
 
 class FakeBTPeripheral: SonarBTPeripheral {
-    init() {
-        super.init(delegate: nil)
-    }
 }
 
 class FakeBTCentralManager: SonarBTCentralManager {
@@ -69,7 +66,7 @@ class FakeBTCentralManager: SonarBTCentralManager {
 
         listener.centralManager(
             self,
-            didDiscover: FakeBTPeripheral(),
+            didDiscover: FakeBTPeripheral(delegate: nil),
             advertisementData: [:],
             rssi: NSNumber(-47)
         )
