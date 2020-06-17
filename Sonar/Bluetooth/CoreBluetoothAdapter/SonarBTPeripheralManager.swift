@@ -72,12 +72,7 @@ extension SonarBTPeripheralManager: CBPeripheralManagerDelegate {
     }
     
     func peripheralManager(_ peripheral: CBPeripheralManager, willRestoreState dict: [String : Any]) {
-        var adaptedDict = dict
-        if let services = dict[CBPeripheralManagerRestoredStateServicesKey] as? [CBMutableService] {
-            adaptedDict.updateValue(services.map { service in SonarBTService(service) }, forKey: CBPeripheralManagerRestoredStateServicesKey)
-        }
-        
-        delegate?.peripheralManager(self, willRestoreState: adaptedDict)
+        delegate?.peripheralManager(self, willRestoreState: wrapState(dict))
     }
     
     func peripheralManager(_ peripheral: CBPeripheralManager, didAdd service: CBService, error: Error?) {
@@ -102,5 +97,19 @@ extension SonarBTPeripheralManager: CBPeripheralManagerDelegate {
     
     func peripheralManager(_ peripheral: CBPeripheralManager, didReceiveRead request: CBATTRequest) {
         delegate?.peripheralManager(self, didReceiveRead: SonarBTATTRequest(request))
+    }
+    
+    private func wrapState(_ dict: [String : Any]) -> [String : Any] {
+        return dict.reduce([:]) { (partialResult: [String: Any], tuple: (key: String, value: Any)) in
+            var result = partialResult
+            switch (tuple.value) {
+            case let services as [CBMutableService]: result[tuple.key] = services.map { service in SonarBTService(service) }
+            case let services as [CBService]: result[tuple.key] = services.map { service in SonarBTService(service) }
+            case let characteristics as [CBCharacteristic]: result[tuple.key] = characteristics.map { characteristic in SonarBTCharacteristic(characteristic) }
+            default:
+                result[tuple.key] = tuple.value
+            }
+            return result
+        }
     }
 }

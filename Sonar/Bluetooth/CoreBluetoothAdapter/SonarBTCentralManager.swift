@@ -40,7 +40,7 @@ class SonarBTCentralManager: NSObject {
     private var cbManager: CBCentralManager!
     private weak var delegate: SonarBTCentralManagerDelegate?
     private weak var peripheralDelegate: SonarBTPeripheralDelegate?
-
+    
     public init(delegate: SonarBTCentralManagerDelegate?, peripheralDelegate: SonarBTPeripheralDelegate?, queue: DispatchQueue?, options: [String : Any]? = nil) {
         self.delegate = delegate
         self.peripheralDelegate = peripheralDelegate
@@ -76,17 +76,13 @@ extension SonarBTCentralManager: CBCentralManagerDelegate {
     }
     
     func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
-        var adaptedDict = dict
-        if let peripherals = dict[CBCentralManagerRestoredStatePeripheralsKey] as? [CBPeripheral] {
-            adaptedDict.updateValue(peripherals.map { peripheral in SonarBTPeripheral.wrapperFor(peripheral, delegate: peripheralDelegate) }, forKey: CBCentralManagerRestoredStatePeripheralsKey)
-        }
-        delegate?.centralManager(self, willRestoreState: adaptedDict)
+        delegate?.centralManager(self, willRestoreState: wrapState(dict))
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         delegate?.centralManager(self, didConnect: SonarBTPeripheral.wrapperFor(peripheral, delegate: peripheralDelegate))
     }
-
+    
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
         delegate?.centralManager(self, didFailToConnect: SonarBTPeripheral.wrapperFor(peripheral, delegate: peripheralDelegate), error: error)
     }
@@ -102,4 +98,22 @@ extension SonarBTCentralManager: CBCentralManagerDelegate {
     func centralManager(_ central: CBCentralManager, connectionEventDidOccur event: CBConnectionEvent, for peripheral: CBPeripheral) {
         delegate?.centralManager(self, connectionEventDidOccur: event, for: SonarBTPeripheral.wrapperFor(peripheral, delegate: peripheralDelegate))
     }
+    
+    private func wrapState(_ dict: [String : Any]) -> [String : Any] {
+        return dict.reduce([:]) { (partialResult: [String: Any], tuple: (key: String, value: Any)) in
+            var result = partialResult
+            switch (tuple.value) {
+            case let peripherals as [CBPeripheral]: result[tuple.key] = peripherals.map { peripheral in                 SonarBTPeripheral.wrapperFor(peripheral, delegate: peripheralDelegate)
+                }
+            case let services as [CBMutableService]: result[tuple.key] = services.map { service in SonarBTService(service) }
+            case let services as [CBService]: result[tuple.key] = services.map { service in SonarBTService(service) }
+            case let characteristics as [CBCharacteristic]: result[tuple.key] = characteristics.map { characteristic in SonarBTCharacteristic(characteristic) }
+            default:
+                result[tuple.key] = tuple.value
+            }
+            return result
+        }
+    }
 }
+
+
