@@ -17,11 +17,6 @@ class BluetoothConfigurationTableViewController: UITableViewController {
         tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
     }
     
-    @IBAction func didToggleReconnectAndroid(_ sender: UISwitch) {
-        listener.skipAndroidReconnect = sender.isOn
-        tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .none)
-    }
-    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -29,7 +24,7 @@ class BluetoothConfigurationTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -40,12 +35,6 @@ class BluetoothConfigurationTableViewController: UITableViewController {
 
             cell.stepper.value = Double(listener.reconnectDelay)
             cell.reconnectionLabel?.text = "Reconnection delay (\(Int(cell.stepper.value))s)"
-            return cell
-
-        case (1, _):
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: SkipAndroidReconnectTableViewCell.self), for: indexPath) as! SkipAndroidReconnectTableViewCell
-            cell.skipAndroid.isOn = listener.skipAndroidReconnect
-            cell.skipAndroidLabel.text = "Skip Android auto-reconnect"
             return cell
             
         default:
