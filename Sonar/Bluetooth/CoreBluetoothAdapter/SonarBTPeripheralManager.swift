@@ -34,7 +34,7 @@ class SonarBTPeripheralManager: NSObject {
         self.delegate = delegate
         super.init()
         
-        self.cbPeripheralManager = CBPeripheralManager(delegate: self, queue: queue)
+        self.cbPeripheralManager = CBPeripheralManager(delegate: self, queue: queue, options: options)
     }
     
     var isAdvertising: Bool {
