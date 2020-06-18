@@ -13,7 +13,7 @@ class BluetoothConfigurationTableViewController: UITableViewController {
     lazy var listener: BTLEListener = (UIApplication.shared.delegate as! AppDelegate).bluetoothNursery.listener as! BTLEListener
     
     @IBAction func didChangeValue(_ sender: UIStepper) {
-        listener.reconnectDelay = Int(sender.value)
+        listener.restartAdvertisingInterval = sender.value
         tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
     }
     
@@ -31,10 +31,10 @@ class BluetoothConfigurationTableViewController: UITableViewController {
         
         switch (indexPath.row, indexPath.section) {
         case (0, _):
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ReconnectionDelayTableViewCell.self), for: indexPath) as! ReconnectionDelayTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: StepperTableViewCell.self), for: indexPath) as! StepperTableViewCell
 
-            cell.stepper.value = Double(listener.reconnectDelay)
-            cell.reconnectionLabel?.text = "Reconnection delay (\(Int(cell.stepper.value))s)"
+            cell.stepper.value = listener.restartAdvertisingInterval
+            cell.stepperLabel?.text = "Restart advertising (\(Int(cell.stepper.value))s)"
             return cell
             
         default:

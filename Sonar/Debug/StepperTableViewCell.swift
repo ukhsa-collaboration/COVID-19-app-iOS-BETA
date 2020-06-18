@@ -1,5 +1,5 @@
 //
-//  ReconnectionDelayTableViewCell.swift
+//  StepperTableViewCell.swift
 //  Sonar
 //
 //  Created by NHSX on 10.06.20
@@ -8,9 +8,9 @@
 
 import UIKit
 
-class ReconnectionDelayTableViewCell: UITableViewCell {
+class StepperTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var reconnectionLabel: UILabel!
+    @IBOutlet weak var stepperLabel: UILabel!
     @IBOutlet weak var stepper: UIStepper!
     
     override func awakeFromNib() {
