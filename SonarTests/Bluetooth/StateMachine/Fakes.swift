@@ -26,6 +26,15 @@ class FakeBTCharacteristic: SonarBTCharacteristic {
         FakeBTCharacteristic(uuid: Environment.keepaliveCharacteristicUUID)
     }
     
+    override var value: Data? {
+        if Environment.sonarIdCharacteristicUUID == uuid {
+            return Data(count: BroadcastPayload.length)
+        } else {
+            var keepaliveValue = UInt8.random(in: .min ... .max)
+            return Data(bytes: &keepaliveValue, count: MemoryLayout.size(ofValue: keepaliveValue))
+        }
+    }
+    
     override var uuid: SonarBTUUID {
         return id
     }
@@ -58,10 +67,15 @@ class FakeBTService: SonarBTService {
 class FakeBTPeripheral: SonarBTPeripheral {
     private let id: UUID
     private let name: String?
+    private var rssiWillReadValues: [Int] = [-56]
+    private var readRSSICallCount = 0
     
-    override init(delegate: SonarBTPeripheralDelegate?) {
+    init(delegate: SonarBTPeripheralDelegate?, rssiWillReadValues: [Int]?) {
         self.id = UUID()
         self.name = "Fake Peripheral"
+        if let values = rssiWillReadValues {
+            self.rssiWillReadValues = values
+        }
         super.init(delegate: delegate)
     }
     
@@ -78,7 +92,8 @@ class FakeBTPeripheral: SonarBTPeripheral {
     }
     
     override func readRSSI() {
-        delegate?.peripheral(self, didReadRSSI: NSNumber(-56), error: nil)
+        delegate?.peripheral(self, didReadRSSI: NSNumber(value: rssiWillReadValues[readRSSICallCount]), error: nil)
+        readRSSICallCount += 1
     }
     
     override func discoverServices(_ serviceUUIDs: [SonarBTUUID]?) {
@@ -97,13 +112,20 @@ class FakeBTPeripheral: SonarBTPeripheral {
         delegate?.peripheral(self, didUpdateNotificationStateFor: characteristic, error: nil)
     }
     
+    private var _stateValue: SonarBTPeripheralState = .connecting
     override var state: SonarBTPeripheralState {
-        return .connecting
+        get {
+            return _stateValue
+        }
+        set {
+            _stateValue = newValue
+        }
     }
 }
 
-class FakePeripheralManager: SonarBTPeripheralManager {
+class FakeBTPeripheralManager: SonarBTPeripheralManager {
     private var stubState: SonarBTManagerState = .unknown
+    private var connectedPeripherals: [FakeBTPeripheral] = []
 
     init() {
         super.init(delegate: nil, queue: nil, options: nil)
@@ -113,24 +135,38 @@ class FakePeripheralManager: SonarBTPeripheralManager {
         stubState = desiredState
     }
     
+    func addToConnectedPeripherals(_ peripheral: FakeBTPeripheral) {
+        connectedPeripherals.append(peripheral)
+    }
+    
     override var state: SonarBTManagerState {
         return stubState
     }
     
     override func updateValue(_ value: Data, for characteristic: SonarBTCharacteristic, onSubscribedCentrals centrals: [SonarBTCentral]?) -> Bool {
+        var fakeCharacteristic = FakeBTCharacteristic.keepaliveCharacteristic
+        if characteristic.uuid == Environment.sonarIdCharacteristicUUID {
+            fakeCharacteristic = FakeBTCharacteristic.sonarIdCharacteristic
+        }
+        connectedPeripherals.forEach { peripheral in
+            peripheral.delegate?.peripheral(peripheral, didUpdateValueFor: fakeCharacteristic, error: nil)
+        }
         return true
     }
 }
 
 class FakeBTCentralManager: SonarBTCentralManager {
+    private let fakePeripheralManager: FakeBTPeripheralManager
     private var stubState: SonarBTManagerState = .unknown
     public var listener: BTLEListener!
+    private var connectedPeripheralsRSSIReadings: [Int]?
 
     func setState(_ desiredState: SonarBTManagerState) {
         stubState = desiredState
     }
 
-    init() {
+    init(fakePeripheralManager: FakeBTPeripheralManager) {
+        self.fakePeripheralManager = fakePeripheralManager
         super.init(delegate: nil, peripheralDelegate: nil, queue: nil, options: nil)
     }
 
@@ -138,10 +174,16 @@ class FakeBTCentralManager: SonarBTCentralManager {
         return stubState
     }
 
+    func connectedPeripheralsWillSendRSSIs(_ rssiValues: [Int]) {
+        connectedPeripheralsRSSIReadings = rssiValues
+    }
+    
     override func scanForPeripherals(withServices serviceUUIDs: [SonarBTUUID]?, options: [String : Any]? = nil) {
+        let peripheral = FakeBTPeripheral(delegate: listener, rssiWillReadValues: connectedPeripheralsRSSIReadings)
+        fakePeripheralManager.addToConnectedPeripherals(peripheral)
         listener.centralManager(
             self,
-            didDiscover: FakeBTPeripheral(delegate: listener),
+            didDiscover: peripheral,
             advertisementData: [:],
             rssi: NSNumber(-47)
         )

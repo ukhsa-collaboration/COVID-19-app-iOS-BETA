@@ -49,6 +49,7 @@ class ConcreteBluetoothNursery: BluetoothNursery, PersistenceDelegate {
     
     private let peripheralManagerFactory: (() -> SonarBTPeripheralManager)?
     private let centralManagerFactory: ((_ listener: BTLEListener) -> SonarBTCentralManager)?
+    private let keepaliveInterval: TimeInterval
     
     init(
         persistence: Persisting,
@@ -56,12 +57,14 @@ class ConcreteBluetoothNursery: BluetoothNursery, PersistenceDelegate {
         notificationCenter: NotificationCenter,
         monitor: AppMonitoring,
         peripheralManagerFactory: (() -> SonarBTPeripheralManager)? = nil,
-        centralManagerFactory: ((_ listener: BTLEListener) -> SonarBTCentralManager)? = nil
+        centralManagerFactory: ((_ listener: BTLEListener) -> SonarBTCentralManager)? = nil,
+        keepaliveInterval: TimeInterval = 8.0
     ) {
         self.persistence = persistence
         self.userNotificationCenter = userNotificationCenter
         self.peripheralManagerFactory = peripheralManagerFactory
         self.centralManagerFactory = centralManagerFactory
+        self.keepaliveInterval = keepaliveInterval
         
         contactEventPersister = PlistPersister<UUID, ContactEvent>(fileName: "contactEvents")
         contactEventRepository = PersistingContactEventRepository(persister: contactEventPersister)
@@ -99,7 +102,7 @@ class ConcreteBluetoothNursery: BluetoothNursery, PersistenceDelegate {
         }
         self.broadcaster = broadcaster
         
-        listener = BTLEListener(broadcaster: broadcaster, queue: btleQueue)
+        listener = BTLEListener(broadcaster: broadcaster, queue: btleQueue, keepaliveInterval: keepaliveInterval)
         
         if let centralManagerFactory = centralManagerFactory {
             central = centralManagerFactory(listener!)

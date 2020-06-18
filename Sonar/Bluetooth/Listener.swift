@@ -40,15 +40,17 @@ class BTLEListener: NSObject, Listener {
     
     var peripherals: [UUID: SonarBTPeripheral] = [:]
     
-    // comfortably less than the ~10s background processing time Core Bluetooth gives us when it wakes us up
-    private let keepaliveInterval: TimeInterval = 8.0
+    private let keepaliveInterval: TimeInterval
     
     private var lastKeepaliveDate: Date = Date.distantPast
     private var keepaliveTimer: DispatchSourceTimer?
     private let dateFormatter = ISO8601DateFormatter()
     private let queue: DispatchQueue
 
-    override init() {
+    // comfortably less than the ~10s background processing time Core Bluetooth gives us when it wakes us up
+    init(keepaliveInterval: TimeInterval = 8.0) {
+        self.keepaliveInterval = keepaliveInterval
+        
         let persistence = Persistence(
             secureRegistrationStorage: SecureRegistrationStorage(),
             broadcastKeyStorage: SecureBroadcastRotationKeyStorage(),
@@ -63,12 +65,12 @@ class BTLEListener: NSObject, Listener {
 
         self.broadcaster = BTLEBroadcaster(broadcastPayloadService: broadcastPayloadService)
         self.queue = DispatchQueue(label: "BTLE Queue")
-        
     }
 
-    init(broadcaster: Broadcaster, queue: DispatchQueue) {
+    init(broadcaster: Broadcaster, queue: DispatchQueue, keepaliveInterval: TimeInterval = 8.0) {
         self.broadcaster = broadcaster
         self.queue = queue
+        self.keepaliveInterval = keepaliveInterval
     }
 
     func start(stateDelegate: ListenerStateDelegate?, delegate: ListenerDelegate?) {
