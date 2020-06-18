@@ -38,8 +38,8 @@ public let SonarBTCentralManagerRestoredStateScanOptionsKey = CBCentralManagerRe
 typealias SonarBTManagerState = CBManagerState
 class SonarBTCentralManager: NSObject {
     private var cbManager: CBCentralManager!
-    private weak var delegate: SonarBTCentralManagerDelegate?
-    private weak var peripheralDelegate: SonarBTPeripheralDelegate?
+    weak var delegate: SonarBTCentralManagerDelegate?
+    weak var peripheralDelegate: SonarBTPeripheralDelegate?
     
     public init(delegate: SonarBTCentralManagerDelegate?, peripheralDelegate: SonarBTPeripheralDelegate?, queue: DispatchQueue?, options: [String : Any]? = nil) {
         self.delegate = delegate

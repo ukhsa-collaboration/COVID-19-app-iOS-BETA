@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		06DEC5052497187100A38739 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 89F06B2B2434A2C00074C612 /* Logging */; };
-		06DEC5062497187100A38739 /* PactConsumerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B7363DDD2468B5AB00193E04 /* PactConsumerSwift */; };
-		06DEC5072497187100A38739 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 0995582F248FF8F500FE97DE /* Logging */; };
 		0805FAF0247BEEE700E3A74F /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805FAEF247BEEE700E3A74F /* ErrorView.swift */; };
 		0805FAF2247C02AB00E3A74F /* ErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0805FAF1247C02AB00E3A74F /* ErrorView.xib */; };
 		0805FAF4247C233F00E3A74F /* IBView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805FAF3247C233F00E3A74F /* IBView.swift */; };
@@ -190,6 +187,8 @@
 		21F373FF2433844D00926FB8 /* ContactEventRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F373FE2433844D00926FB8 /* ContactEventRepository.swift */; };
 		21F37402243384D400926FB8 /* PersistingContactEventRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F37401243384D400926FB8 /* PersistingContactEventRepositoryTests.swift */; };
 		21F374042434C4BF00926FB8 /* ContactEventsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F374032434C4BF00926FB8 /* ContactEventsTableViewController.swift */; };
+		65BDEA3681A8228CDC04F50B /* Fakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65BDE095892073F3573F040B /* Fakes.swift */; };
+		65BDEFE9C354D8D0BB2D268C /* BluetoothTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65BDE473966A6FB9088CD94B /* BluetoothTests.swift */; };
 		6FC63C31241641B8007C8BF3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC63C30241641B8007C8BF3 /* AppDelegate.swift */; };
 		6FC63C38241641BA007C8BF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FC63C37241641BA007C8BF3 /* Assets.xcassets */; };
 		6FC63C3B241641BA007C8BF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FC63C39241641BA007C8BF3 /* LaunchScreen.storyboard */; };
@@ -241,8 +240,6 @@
 		AE2A5E502423C473007A4771 /* ContactEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2A5E4F2423C473007A4771 /* ContactEvent.swift */; };
 		AE2DCAA0241920B600A940FC /* Broadcaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2DCA9F241920B600A940FC /* Broadcaster.swift */; };
 		AEAFA67924602629009AEAEB /* StatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAFA67824602629009AEAEB /* StatusTests.swift */; };
-		B03DA1773D2F92D45CB10AAF /* BluetoothTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03DA2A5E87A7440E5EBC3B5 /* BluetoothTests.swift */; };
-		B03DA3DFE015BCDFBFC6CC95 /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03DAFA4A366AA9674E35484 /* StateMachine.swift */; };
 		B70190202475136800075C80 /* RegistrationAPIPactTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B701901F2475136800075C80 /* RegistrationAPIPactTests.swift */; };
 		B701DC4C247759AC00727126 /* sonar.ca.cer in Resources */ = {isa = PBXBuildFile; fileRef = B701DC4B247759AC00727126 /* sonar.ca.cer */; };
 		B701DC4E247784B300727126 /* ProviderKnownDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = B701DC4D247784B300727126 /* ProviderKnownDetails.swift */; };
@@ -257,7 +254,6 @@
 		B7557E732498B2D50021D4B0 /* SonarBTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7557E722498B2D50021D4B0 /* SonarBTService.swift */; };
 		B7557E752498B3430021D4B0 /* SonarBTCharacteristic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7557E742498B3430021D4B0 /* SonarBTCharacteristic.swift */; };
 		B7557E772498B4E20021D4B0 /* AdvertisementDataConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7557E762498B4E20021D4B0 /* AdvertisementDataConstants.swift */; };
-		B7557E792499EE990021D4B0 /* Fakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7557E782499EE990021D4B0 /* Fakes.swift */; };
 		B79A2E832476013900E8C21E /* environment.json in Resources */ = {isa = PBXBuildFile; fileRef = B79A2E742476013800E8C21E /* environment.json */; };
 		B79A2E842476013900E8C21E /* localhost.crt in Resources */ = {isa = PBXBuildFile; fileRef = B79A2E762476013800E8C21E /* localhost.crt */; };
 		B79A2E852476013900E8C21E /* localhost.key in Resources */ = {isa = PBXBuildFile; fileRef = B79A2E772476013800E8C21E /* localhost.key */; };
@@ -557,6 +553,8 @@
 		21F373FE2433844D00926FB8 /* ContactEventRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactEventRepository.swift; sourceTree = "<group>"; };
 		21F37401243384D400926FB8 /* PersistingContactEventRepositoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistingContactEventRepositoryTests.swift; sourceTree = "<group>"; };
 		21F374032434C4BF00926FB8 /* ContactEventsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEventsTableViewController.swift; sourceTree = "<group>"; };
+		65BDE095892073F3573F040B /* Fakes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Fakes.swift; path = StateMachine/Fakes.swift; sourceTree = "<group>"; };
+		65BDE473966A6FB9088CD94B /* BluetoothTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BluetoothTests.swift; path = StateMachine/BluetoothTests.swift; sourceTree = "<group>"; };
 		6FC63C2D241641B8007C8BF3 /* Sonar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sonar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FC63C30241641B8007C8BF3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6FC63C37241641BA007C8BF3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -616,8 +614,6 @@
 		AE2A5E4F2423C473007A4771 /* ContactEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEvent.swift; sourceTree = "<group>"; };
 		AE2DCA9F241920B600A940FC /* Broadcaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Broadcaster.swift; sourceTree = "<group>"; };
 		AEAFA67824602629009AEAEB /* StatusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusTests.swift; sourceTree = "<group>"; };
-		B03DA2A5E87A7440E5EBC3B5 /* BluetoothTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothTests.swift; sourceTree = "<group>"; };
-		B03DAFA4A366AA9674E35484 /* StateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateMachine.swift; sourceTree = "<group>"; };
 		B701901F2475136800075C80 /* RegistrationAPIPactTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationAPIPactTests.swift; sourceTree = "<group>"; };
 		B701DC4B247759AC00727126 /* sonar.ca.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = sonar.ca.cer; sourceTree = "<group>"; };
 		B701DC4D247784B300727126 /* ProviderKnownDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderKnownDetails.swift; sourceTree = "<group>"; };
@@ -635,7 +631,6 @@
 		B7557E722498B2D50021D4B0 /* SonarBTService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SonarBTService.swift; sourceTree = "<group>"; };
 		B7557E742498B3430021D4B0 /* SonarBTCharacteristic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SonarBTCharacteristic.swift; sourceTree = "<group>"; };
 		B7557E762498B4E20021D4B0 /* AdvertisementDataConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisementDataConstants.swift; sourceTree = "<group>"; };
-		B7557E782499EE990021D4B0 /* Fakes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fakes.swift; sourceTree = "<group>"; };
 		B79A2E742476013800E8C21E /* environment.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = environment.json; sourceTree = "<group>"; };
 		B79A2E762476013800E8C21E /* localhost.crt */ = {isa = PBXFileReference; lastKnownFileType = file; path = localhost.crt; sourceTree = "<group>"; };
 		B79A2E772476013800E8C21E /* localhost.key */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = localhost.key; sourceTree = "<group>"; };
@@ -816,7 +811,6 @@
 				0995581A248FF8C500FE97DE /* FirebaseMessaging.framework in Frameworks */,
 				0995582A248FF8C500FE97DE /* GoogleDataTransport.framework in Frameworks */,
 				09955828248FF8C500FE97DE /* GoogleUtilities.framework in Frameworks */,
-				06DEC5072497187100A38739 /* Logging in Frameworks */,
 				09955826248FF8C500FE97DE /* nanopb.framework in Frameworks */,
 				0995582D248FF8ED00FE97DE /* PromisesObjC.framework in Frameworks */,
 				09955824248FF8C500FE97DE /* Protobuf.framework in Frameworks */,
@@ -840,7 +834,6 @@
 				F78CEB5B242B7EC0002254AD /* FirebaseCoreDiagnostics.framework in Frameworks */,
 				F78CEB6A242B8D3F002254AD /* FirebaseInstanceID.framework in Frameworks */,
 				F78CEB6C242B8D84002254AD /* FirebaseInstallations.framework in Frameworks */,
-				06DEC5052497187100A38739 /* Logging in Frameworks */,
 				F78CEB5A242B7EC0002254AD /* FirebaseMessaging.framework in Frameworks */,
 				21B3D2E82429115600573061 /* CoreBluetooth.framework in Frameworks */,
 				F78CEB6F242B92CF002254AD /* GoogleUtilities.framework in Frameworks */,
@@ -860,7 +853,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				06DEC5062497187100A38739 /* PactConsumerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1411,16 +1403,6 @@
 			path = Logging;
 			sourceTree = "<group>";
 		};
-		B03DA74044385C4CC2E03130 /* StateMachine */ = {
-			isa = PBXGroup;
-			children = (
-				B03DAFA4A366AA9674E35484 /* StateMachine.swift */,
-				B03DA2A5E87A7440E5EBC3B5 /* BluetoothTests.swift */,
-				B7557E782499EE990021D4B0 /* Fakes.swift */,
-			);
-			path = StateMachine;
-			sourceTree = "<group>";
-		};
 		B7363DD42468B35700193E04 /* SonarPactTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -1685,7 +1667,8 @@
 				F72EBD9A243C8750009F9328 /* BluetoothStateUserNotifierTests.swift */,
 				09D027CD2452157D006EE07E /* BluetoothStateObserverTests.swift */,
 				09D91A7624521C5C004825A5 /* BluetoothNurseryTests.swift */,
-				B03DA74044385C4CC2E03130 /* StateMachine */,
+				65BDE473966A6FB9088CD94B /* BluetoothTests.swift */,
+				65BDE095892073F3573F040B /* Fakes.swift */,
 			);
 			path = Bluetooth;
 			sourceTree = "<group>";
@@ -1781,7 +1764,7 @@
 			);
 			name = RegistrationCanary;
 			packageProductDependencies = (
-				0995582F248FF8F500FE97DE /* Logging */,
+				0995582F248FF8F500FE97DE /* XCSwiftPackageProductDependency */,
 			);
 			productName = RegistrationCanary;
 			productReference = 0935CCE7248FE22D0008E868 /* RegistrationCanary.app */;
@@ -1822,7 +1805,7 @@
 			);
 			name = Sonar;
 			packageProductDependencies = (
-				89F06B2B2434A2C00074C612 /* Logging */,
+				89F06B2B2434A2C00074C612 /* XCSwiftPackageProductDependency */,
 			);
 			productName = CoLocate;
 			productReference = 6FC63C2D241641B8007C8BF3 /* Sonar.app */;
@@ -1861,7 +1844,7 @@
 			);
 			name = SonarPactTests;
 			packageProductDependencies = (
-				B7363DDD2468B5AB00193E04 /* PactConsumerSwift */,
+				B7363DDD2468B5AB00193E04 /* XCSwiftPackageProductDependency */,
 			);
 			productName = SonarPactTests;
 			productReference = B7363DD32468B35700193E04 /* SonarPactTests.xctest */;
@@ -1911,8 +1894,8 @@
 			);
 			mainGroup = 6FC63C24241641B8007C8BF3;
 			packageReferences = (
-				89F06B2A2434A2C00074C612 /* XCRemoteSwiftPackageReference "swift-log" */,
-				B7363DCA2465461100193E04 /* XCRemoteSwiftPackageReference "pact-consumer-swift" */,
+				89F06B2A2434A2C00074C612 /* XCRemoteSwiftPackageReference */,
+				B7363DCA2465461100193E04 /* XCRemoteSwiftPackageReference */,
 			);
 			productRefGroup = 6FC63C2E241641B8007C8BF3 /* Products */;
 			projectDirPath = "";
@@ -2198,7 +2181,6 @@
 				21C417CA242CB0A200DEF3E2 /* ConfirmRegistrationRequestTests.swift in Sources */,
 				F632792A2435323200CF7A42 /* PermissionsViewControllerTests.swift in Sources */,
 				09E6E7E62452779B0069DFA8 /* SetupCheckerTests.swift in Sources */,
-				B7557E792499EE990021D4B0 /* Fakes.swift in Sources */,
 				F7D62F292440D4CB004C32A2 /* SonarBroadcastPayloadServiceTests.swift in Sources */,
 				F72EBDA5243D094A009F9328 /* SecureBroadcastRotationKeyStorageTests.swift in Sources */,
 				09C9DB3624608BA40012F80A /* AnswerButtonTests.swift in Sources */,
@@ -2221,8 +2203,8 @@
 				F694B1BE2459EB3800C6A5D1 /* NotificationAcknowledgerTests.swift in Sources */,
 				F68BFBF7242ACD17008EE68F /* TestHelpers.swift in Sources */,
 				08D77F2C2477999100EAEBD5 /* LinkingIdRequestTests.swift in Sources */,
-				B03DA3DFE015BCDFBFC6CC95 /* StateMachine.swift in Sources */,
-				B03DA1773D2F92D45CB10AAF /* BluetoothTests.swift in Sources */,
+				65BDEFE9C354D8D0BB2D268C /* BluetoothTests.swift in Sources */,
+				65BDEA3681A8228CDC04F50B /* Fakes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2605,7 +2587,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		89F06B2A2434A2C00074C612 /* XCRemoteSwiftPackageReference "swift-log" */ = {
+		89F06B2A2434A2C00074C612 /* XCRemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-log.git";
 			requirement = {
@@ -2613,7 +2595,7 @@
 				minimumVersion = 1.2.0;
 			};
 		};
-		B7363DCA2465461100193E04 /* XCRemoteSwiftPackageReference "pact-consumer-swift" */ = {
+		B7363DCA2465461100193E04 /* XCRemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/DiUS/pact-consumer-swift";
 			requirement = {
@@ -2624,19 +2606,19 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		0995582F248FF8F500FE97DE /* Logging */ = {
+		0995582F248FF8F500FE97DE /* XCSwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 89F06B2A2434A2C00074C612 /* XCRemoteSwiftPackageReference "swift-log" */;
+			package = 89F06B2A2434A2C00074C612 /* XCRemoteSwiftPackageReference */;
 			productName = Logging;
 		};
-		89F06B2B2434A2C00074C612 /* Logging */ = {
+		89F06B2B2434A2C00074C612 /* XCSwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 89F06B2A2434A2C00074C612 /* XCRemoteSwiftPackageReference "swift-log" */;
+			package = 89F06B2A2434A2C00074C612 /* XCRemoteSwiftPackageReference */;
 			productName = Logging;
 		};
-		B7363DDD2468B5AB00193E04 /* PactConsumerSwift */ = {
+		B7363DDD2468B5AB00193E04 /* XCSwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = B7363DCA2465461100193E04 /* XCRemoteSwiftPackageReference "pact-consumer-swift" */;
+			package = B7363DCA2465461100193E04 /* XCRemoteSwiftPackageReference */;
 			productName = PactConsumerSwift;
 		};
 /* End XCSwiftPackageProductDependency section */

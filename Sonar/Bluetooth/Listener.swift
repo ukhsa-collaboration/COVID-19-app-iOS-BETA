@@ -228,19 +228,19 @@ extension BTLEListener: SonarBTCentralManagerDelegate {
         peripherals.removeValue(forKey: peripheral.identifier)
     }
 
-    private func reconnect(central: CBCentralManager, peripheral: CBPeripheral) {
-        if let peripheral = central.retrievePeripherals(withIdentifiers: [peripheral.identifier]).first {
-            logger.info("reconnecting to peripheral found via central.retrievePeripheral(withIdentifiers:)")
-            central.connect(peripheral)
-            return
-        }
-        if let peripheral = central.retrieveConnectedPeripherals(withServices: [Environment.sonarServiceUUID]).first(where: { $0.identifier == peripheral.identifier }) {
-            logger.info("reconnecting to peripheral found via central.retrieveConnectedPeripherals(withServices:)")
-            central.connect(peripheral)
-            return
-        }
-        logger.info("reconnecting to peripheral found via didDisconnect delegate")
-        central.connect(peripheral)
+    private func reconnect(central: SonarBTCentralManager, peripheral: SonarBTPeripheral) {
+//        if let peripheral = central.retrievePeripherals(withIdentifiers: [peripheral.identifier]).first {
+//            logger.info("reconnecting to peripheral found via central.retrievePeripheral(withIdentifiers:)")
+//            central.connect(peripheral)
+//            return
+//        }
+//        if let peripheral = central.retrieveConnectedPeripherals(withServices: [Environment.sonarServiceUUID]).first(where: { $0.identifier == peripheral.identifier }) {
+//            logger.info("reconnecting to peripheral found via central.retrieveConnectedPeripherals(withServices:)")
+//            central.connect(peripheral)
+//            return
+//        }
+//        logger.info("reconnecting to peripheral found via didDisconnect delegate")
+//        central.connect(peripheral)
     }
 
     func centralManager(_ central: SonarBTCentralManager, connectionEventDidOccur event: SonarBTConnectionEvent, for peripheral: SonarBTPeripheral) {
