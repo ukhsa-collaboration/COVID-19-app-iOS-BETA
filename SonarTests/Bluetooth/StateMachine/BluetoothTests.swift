@@ -165,7 +165,7 @@ class BTBroadcaster: SonarBTLivenessDelegate {
         var keepaliveValue = UInt8.random(in: .min ... .max)
         let value = Data(bytes: &keepaliveValue, count: MemoryLayout.size(ofValue: keepaliveValue))
         
-        peripheralManager.updateValue(value, for: self.keepaliveCharacteristic, onSubscribedCentrals: nil)
+        _ = peripheralManager.updateValue(value, for: self.keepaliveCharacteristic, onSubscribedCentrals: nil)
         keepaliveLastBroadcastedAt = Date()
     }
 }
@@ -305,19 +305,20 @@ extension BTReader: SonarBTPeripheralDelegate {
 
 class SequenceBuilder {
     private let broadcaster: BTBroadcaster
-    private let peripheralManager: FakeBTPeripheralManager
     private let scanner: BTScanner
-    private let centralManager: FakeBTCentralManager
     private let contactEventsStorage: ContactEventsStorage
     
+    private let fakePeripheralManager: FakeBTPeripheralManager
+    private let fakeCentralManager: FakeBTCentralManager
+
     class var aSequence: SequenceBuilder {
-        let peripheralManager = FakeBTPeripheralManager()
-        let broadcaster = BTBroadcaster(peripheralManager: peripheralManager)
+        let fakePeripheralManager = FakeBTPeripheralManager()
+        let broadcaster = BTBroadcaster(peripheralManager: fakePeripheralManager)
         
         let reader = BTReader()
         
-        let centralManager = FakeBTCentralManager(fakePeripheralManager: peripheralManager)
-        let scanner = BTScanner(centralManager: centralManager, peripheralDelegate: reader)
+        let fakeCentralManager = FakeBTCentralManager(fakePeripheralManager: fakePeripheralManager)
+        let scanner = BTScanner(centralManager: fakeCentralManager, peripheralDelegate: reader)
         
         let contactEventPersister = PlistPersister<UUID, ContactEvent>(fileName: "contactEvents")
         let contactEventRepository = PersistingContactEventRepository(persister: contactEventPersister)
@@ -330,13 +331,13 @@ class SequenceBuilder {
         scanner.delegate = contactEventsStorage
         scanner.livenessDelegate = broadcaster
         
-        let coordinator = BluetoothCoordinator(broadcaster: broadcaster, scanner: scanner, readerDelegate: contactEventsStorage)
+        _ = BluetoothCoordinator(broadcaster: broadcaster, scanner: scanner, readerDelegate: contactEventsStorage)
         
         return SequenceBuilder(
             broadcaster: broadcaster,
-            peripheralManager: peripheralManager,
+            peripheralManager: fakePeripheralManager,
             scanner: scanner,
-            centralManager: centralManager,
+            centralManager: fakeCentralManager,
             contactEventsStorage: contactEventsStorage
         )
     }
@@ -349,26 +350,26 @@ class SequenceBuilder {
         contactEventsStorage: ContactEventsStorage
     ) {
         self.broadcaster = broadcaster
-        self.peripheralManager = peripheralManager
+        self.fakePeripheralManager = peripheralManager
         self.scanner = scanner
-        self.centralManager = centralManager
+        self.fakeCentralManager = centralManager
         self.contactEventsStorage = contactEventsStorage
     }
 
     func powerOn() -> SequenceBuilder {
-        centralManager.setState(.poweredOn)
-        peripheralManager.setState(.poweredOn)
+        fakeCentralManager.setState(.poweredOn)
+        fakePeripheralManager.setState(.poweredOn)
         return self
     }
 
     func readsRSSIValues(_ rssiValues: Int...) -> SequenceBuilder {
-        centralManager.connectedPeripheralsWillSendRSSIs(rssiValues)
+        fakeCentralManager.connectedPeripheralsWillSendRSSIs(rssiValues)
         return self
     }
 
     func verify(_ verificationClosure: (_ contactEventsStorage: ContactEventsStorage) -> Void) {
-        scanner.centralManagerDidUpdateState(centralManager)
-        broadcaster.peripheralManagerDidUpdateState(peripheralManager)
+        scanner.centralManagerDidUpdateState(fakeCentralManager)
+        broadcaster.peripheralManagerDidUpdateState(fakePeripheralManager)
 
         verificationClosure(contactEventsStorage)
     }
