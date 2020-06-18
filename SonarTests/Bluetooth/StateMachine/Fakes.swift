@@ -10,6 +10,22 @@ import Foundation
 
 @testable import Sonar
 
+class DelayedExecutor {
+    private let executionQueue = DispatchQueue(label: "Execution Queue \(UUID())")
+    private var timers: [DispatchSourceTimer] = []
+
+    func executeWithin(interval: TimeInterval, _ handler: @escaping () -> Void) {
+        let timer = DispatchSource.makeTimerSource(queue: executionQueue)
+        timers.append(timer)
+        timer.setEventHandler { [unowned self] in
+            handler()
+            self.timers.removeAll { t in t.hash == timer.hash }
+        }
+        timer.schedule(deadline: .now() + interval)
+        timer.resume()
+    }
+}
+
 class FakeBTCharacteristic: SonarBTCharacteristic {
     private let id: SonarBTUUID
     
@@ -26,13 +42,10 @@ class FakeBTCharacteristic: SonarBTCharacteristic {
         FakeBTCharacteristic(uuid: Environment.keepaliveCharacteristicUUID)
     }
     
+    private var _value: Data?
     override var value: Data? {
-        if Environment.sonarIdCharacteristicUUID == uuid {
-            return Data(count: BroadcastPayload.length)
-        } else {
-            var keepaliveValue = UInt8.random(in: .min ... .max)
-            return Data(bytes: &keepaliveValue, count: MemoryLayout.size(ofValue: keepaliveValue))
-        }
+        get { _value }
+        set { _value = newValue }
     }
     
     override var uuid: SonarBTUUID {
@@ -52,11 +65,10 @@ class FakeBTService: SonarBTService {
         self.init(uuid: Environment.sonarServiceUUID)
     }
     
+    private var _characteristics: [SonarBTCharacteristic]? = nil
     override var characteristics: [SonarBTCharacteristic]? {
-        get {
-            return [FakeBTCharacteristic.sonarIdCharacteristic, FakeBTCharacteristic.keepaliveCharacteristic]
-        }
-        set {}
+        get { _characteristics }
+        set { _characteristics = newValue }
     }
     
     override var uuid: SonarBTUUID {
@@ -67,22 +79,27 @@ class FakeBTService: SonarBTService {
 class FakeBTPeripheral: SonarBTPeripheral {
     private let id: UUID
     private let name: String?
-    private var rssiWillReadValues: [Int] = [-56]
     private var readRSSICallCount = 0
+    private let delayedExecutor: DelayedExecutor = DelayedExecutor()
+
+    var rssiWillReadValues: [Int] = [-56]
+    var sonarIdWillReadPayload: Data! = nil
     
-    init(delegate: SonarBTPeripheralDelegate?, rssiWillReadValues: [Int]?) {
-        self.id = UUID()
+    var keepaliveNotificationIsOn = false
+    var sonarIdNotificationIsOn = false
+    
+    init(id: SonarBTUUID, delegate: SonarBTPeripheralDelegate?) {
+        self.id = UUID(uuidString: id.uuidString)!
         self.name = "Fake Peripheral"
-        if let values = rssiWillReadValues {
-            self.rssiWillReadValues = values
-        }
         super.init(delegate: delegate)
     }
     
+    private var _services: [SonarBTService]? = nil
     override var services: [SonarBTService]? {
-        return [FakeBTService()]
+        get { _services }
+        set { _services = newValue }
     }
-
+    
     override var identifier: UUID {
         return self.id
     }
@@ -99,38 +116,56 @@ class FakeBTPeripheral: SonarBTPeripheral {
     }
     
     override func discoverServices(_ serviceUUIDs: [SonarBTUUID]?) {
-        delegate?.peripheral(self, didDiscoverServices: nil)
+        services = [FakeBTService()]
+        delayedExecutor.executeWithin(interval: 0.2) { [unowned self] in
+            self.delegate?.peripheral(self, didDiscoverServices: nil)
+        }
     }
     
     override func discoverCharacteristics(_ characteristicUUIDs: [SonarBTUUID]?, for service: SonarBTService) {
-        delegate?.peripheral(self, didDiscoverCharacteristicsFor: FakeBTService(), error: nil)
+        services!.forEach { service in
+            service.characteristics = [FakeBTCharacteristic.sonarIdCharacteristic, FakeBTCharacteristic.keepaliveCharacteristic] }
+        delayedExecutor.executeWithin(interval: 0.2) { [unowned self] in
+            self.delegate?.peripheral(self, didDiscoverCharacteristicsFor: self.services!.first!, error: nil)
+        }
     }
     
     override func readValue(for characteristic: SonarBTCharacteristic) {
-        delegate?.peripheral(self, didUpdateValueFor: characteristic, error: nil)
+        let fakeCharacteristic = characteristic as! FakeBTCharacteristic
+        delayedExecutor.executeWithin(interval: 0.2) { [unowned self] in
+            if (fakeCharacteristic.isSonarID) {
+                fakeCharacteristic.value = self.sonarIdWillReadPayload
+                self.delegate?.peripheral(self, didUpdateValueFor: fakeCharacteristic, error: nil)
+            } else if (fakeCharacteristic.isSonarKeepalive) {
+                fakeCharacteristic.value = randomKeepalive()
+                self.delegate?.peripheral(self, didUpdateValueFor: fakeCharacteristic, error: nil)
+            } else {
+                self.delegate?.peripheral(self, didUpdateValueFor: fakeCharacteristic, error: nil)
+            }
+        }
     }
     
     override func setNotifyValue(_ enabled: Bool, for characteristic: SonarBTCharacteristic) {
-        delegate?.peripheral(self, didUpdateNotificationStateFor: characteristic, error: nil)
+        keepaliveNotificationIsOn = characteristic.isSonarKeepalive
+        sonarIdNotificationIsOn = characteristic.isSonarID
+        
+        delayedExecutor.executeWithin(interval: 0.2) { [unowned self] in
+            self.delegate?.peripheral(self, didUpdateNotificationStateFor: characteristic, error: nil)
+        }
     }
     
-    private var _stateValue: SonarBTPeripheralState = .connecting
+    private var _state: SonarBTPeripheralState = .connecting
     override var state: SonarBTPeripheralState {
-        get {
-            return _stateValue
-        }
-        set {
-            _stateValue = newValue
-        }
+        get { _state }
+        set { _state = newValue }
     }
 }
 
 class FakeBTPeripheralManager: SonarBTPeripheralManager {
     private var stubState: SonarBTManagerState = .unknown
     private var connectedPeripherals: [FakeBTPeripheral] = []
-    private var peripheralQueue: DispatchQueue = DispatchQueue(label: "Peripheral Queue")
-    private var peripheralTimer: DispatchSourceTimer!
-
+    private let delayedExecutor: DelayedExecutor = DelayedExecutor()
+    
     init() {
         super.init(delegate: nil, queue: nil, options: nil)
     }
@@ -148,68 +183,108 @@ class FakeBTPeripheralManager: SonarBTPeripheralManager {
     }
     
     override func updateValue(_ value: Data, for characteristic: SonarBTCharacteristic, onSubscribedCentrals centrals: [SonarBTCentral]?) -> Bool {
-        if characteristic.uuid == Environment.keepaliveCharacteristicUUID {
+        if characteristic.isSonarKeepalive {
             simulateReceivingKeepaliveFromOtherDevice()
         }
-
+        
         return true
     }
     
     private func simulateReceivingKeepaliveFromOtherDevice() {
         let fakeCharacteristic = FakeBTCharacteristic.keepaliveCharacteristic
         
-        peripheralTimer = DispatchSource.makeTimerSource(queue: peripheralQueue)
-        peripheralTimer.setEventHandler { [unowned self] in
-            self.connectedPeripherals.forEach { peripheral in
-                peripheral.delegate?.peripheral(peripheral, didUpdateValueFor: fakeCharacteristic, error: nil)
+        delayedExecutor.executeWithin(interval: 0.2) { [unowned self] in
+            self.connectedPeripherals
+                .filter { peripheral in peripheral.keepaliveNotificationIsOn }
+                .forEach { peripheral in
+                    fakeCharacteristic.value = randomKeepalive()
+                    peripheral.delegate?.peripheral(peripheral, didUpdateValueFor: fakeCharacteristic, error: nil)
             }
         }
-        peripheralTimer.schedule(deadline: .now() + 0.2)
-        peripheralTimer.resume()
     }
 }
 
 class FakeBTCentralManager: SonarBTCentralManager {
+    struct Connection {
+        var txPower: Int = 0
+        var rssiValues: [Int] = []
+        var payload: Data! = nil
+    }
+    
     private let fakePeripheralManager: FakeBTPeripheralManager
     
     private var stubState: SonarBTManagerState = .unknown
-    private var connectedPeripheralsRSSIReadings: [Int]?
+    private var stubConnections: [SonarBTUUID: Connection] = [:]
+    private let delayedExecutor: DelayedExecutor = DelayedExecutor()
 
     func setState(_ desiredState: SonarBTManagerState) {
         stubState = desiredState
     }
-
+    
     init(fakePeripheralManager: FakeBTPeripheralManager) {
         self.fakePeripheralManager = fakePeripheralManager
         super.init(delegate: nil, peripheralDelegate: nil, queue: nil, options: nil)
     }
-
+    
     override var state: SonarBTManagerState {
         return stubState
     }
-
-    func connectedPeripheralsWillSendRSSIs(_ rssiValues: [Int]) {
-        connectedPeripheralsRSSIReadings = rssiValues
+    
+    func willDiscoverPeripheral(_ peripheralId: SonarBTUUID, withTxPower txPower: Int) {
+        if let _ = stubConnections[peripheralId] {
+            stubConnections[peripheralId]!.txPower = txPower
+        } else {
+            stubConnections[peripheralId] = Connection(txPower: txPower, rssiValues: [], payload: nil)
+        }
+    }
+    
+    func willReadRSSIs(_ rssiValues: [Int], fromPeripheral peripheralId: SonarBTUUID) {
+        if let _ = stubConnections[peripheralId] {
+            stubConnections[peripheralId]!.rssiValues = rssiValues
+        } else {
+            stubConnections[peripheralId] = Connection(txPower: 0, rssiValues: rssiValues, payload: nil)
+        }
+    }
+    
+    func willReadCryptogramPayload(_ payload: Data, fromPeripheral peripheralId: SonarBTUUID) {
+        if let _ = stubConnections[peripheralId] {
+            stubConnections[peripheralId]!.payload = payload
+        } else {
+            stubConnections[peripheralId] = Connection(txPower: 0, rssiValues: [], payload: payload)
+        }
     }
     
     override func scanForPeripherals(withServices serviceUUIDs: [SonarBTUUID]?, options: [String : Any]? = nil) {
-        let firstRSSIReading = connectedPeripheralsRSSIReadings?.first ?? -47
-        var nextRSSIReadings: [Int] = []
-        if let connectedPeripheralsRSSIReadings = connectedPeripheralsRSSIReadings {
-            nextRSSIReadings = Array(connectedPeripheralsRSSIReadings[1..<connectedPeripheralsRSSIReadings.count])
+        for (peripheralId, connection) in stubConnections {
+            let firstRSSIReading = connection.rssiValues.first ?? -47
+            let nextRSSIReadings: [Int] = Array(connection.rssiValues[1..<connection.rssiValues.count])
+            let peripheral = FakeBTPeripheral(id: peripheralId, delegate: peripheralDelegate)
+            peripheral.rssiWillReadValues = nextRSSIReadings
+            peripheral.sonarIdWillReadPayload = connection.payload
+            
+            fakePeripheralManager.addToConnectedPeripherals(peripheral)
+            delayedExecutor.executeWithin(interval: 0.2) { [unowned self] in
+                self.delegate?.centralManager(
+                    self,
+                    didDiscover: peripheral,
+                    advertisementData: [
+                        SonarBTAdvertisementDataTxPowerLevelKey: NSNumber(integerLiteral: connection.txPower)
+                    ],
+                    rssi: NSNumber(value: firstRSSIReading)
+                )
+            }
         }
-        let peripheral = FakeBTPeripheral(delegate: peripheralDelegate, rssiWillReadValues: nextRSSIReadings)
-        fakePeripheralManager.addToConnectedPeripherals(peripheral)
-        delegate?.centralManager(
-            self,
-            didDiscover: peripheral,
-            advertisementData: [:],
-            rssi: NSNumber(value: firstRSSIReading)
-        )
     }
-
+    
     override func connect(_ peripheral: SonarBTPeripheral, options: [String : Any]? = nil) {
-        delegate?.centralManager(self, didConnect: peripheral)
+        delayedExecutor.executeWithin(interval: 0.2) { [unowned self] in
+            self.delegate?.centralManager(self, didConnect: peripheral)
+        }
     }
+    
+}
 
+fileprivate func randomKeepalive() -> Data {
+    var keepaliveValue = UInt8.random(in: .min ... .max)
+    return Data(bytes: &keepaliveValue, count: MemoryLayout.size(ofValue: keepaliveValue))
 }

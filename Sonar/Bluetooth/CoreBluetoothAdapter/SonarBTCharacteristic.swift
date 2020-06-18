@@ -25,6 +25,26 @@ class SonarBTCharacteristic {
             permissions: permissions)
     }
     
+    var name: String {
+        switch cbCharacteristic.uuid {
+        case Environment.keepaliveCharacteristicUUID: return "Keepalive"
+        case Environment.sonarIdCharacteristicUUID: return "SonarID"
+        default: return "Unknown \(cbCharacteristic.uuid.uuidString)"
+        }
+    }
+    
+    var isSonarCharacteristic: Bool {
+        return isSonarKeepalive || isSonarID
+    }
+    
+    var isSonarKeepalive: Bool {
+        return cbCharacteristic.uuid == Environment.keepaliveCharacteristicUUID
+    }
+    
+    var isSonarID: Bool {
+        return cbCharacteristic.uuid == Environment.sonarIdCharacteristicUUID
+    }
+    
     var uuid: SonarBTUUID {
         return cbCharacteristic.uuid
     }

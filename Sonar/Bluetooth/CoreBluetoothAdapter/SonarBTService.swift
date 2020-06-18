@@ -20,6 +20,10 @@ class SonarBTService {
         }
     }
     
+    var sonarCharacteristics: [SonarBTCharacteristic]? {
+        return characteristics?.filter { characteristic in characteristic.isSonarCharacteristic }
+    }
+    
     init(_ service: CBService) {
         self.cbService = service
     }
@@ -30,6 +34,13 @@ class SonarBTService {
     
     var uuid: SonarBTUUID {
         return cbService.uuid
+    }
+    
+    var name: String {
+        switch cbService.uuid {
+        case Environment.sonarServiceUUID: return "Sonar Service"
+        default: return "Unknown Service"
+        }
     }
     
     var unwrap: CBService {

@@ -9,14 +9,6 @@
 import UIKit
 import Logging
 
-enum PeripheralManufacturer {
-    
-    init(_ manufacturerData: Any?) {
-        self = manufacturerData == nil ? .unknown : .android
-    }
-    
-    case unknown, android
-}
 
 protocol Peripheral {
     var identifier: UUID { get }
