@@ -314,9 +314,21 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
     }
     
     func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?) {
-        guard error == nil else {
-            logger.info("peripheral \(peripheral.identifierWithName) error: \(error!)")
+        switch error {
+
+        // We add this case because we saw it in practice at least once, without seeing a didDisconnect callback first.
+        // If CoreBluetooth says we're not connected I guess we're not connected so we should give up
+        case (let error as CBError) where error.code == CBError.Code.notConnected:
+            logger.info("removing peripheral \(peripheral.identifierWithName) from connection list because of error: \(error)")
+            peripherals.removeValue(forKey: peripheral.identifier)
             return
+            
+        case (let error?):
+            logger.info("peripheral \(peripheral.identifierWithName) error: \(error)")
+            
+        default:
+            break
+
         }
 
         logger.info("read RSSI for \(peripheral.identifierWithName): \(RSSI)")
