@@ -268,15 +268,15 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
     
     func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?) {
         guard error == nil else {
-            logger.info("characteristic \(characteristic) error: \(error!)")
+            logger.info("peripheral \(peripheral.identifierWithName) characteristic \(characteristic) error: \(error!)")
             return
         }
-        logger.info("characteristic \(characteristic)")
+        logger.info("peripheral \(peripheral.identifierWithName) characteristic \(characteristic)")
     }
 
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         guard error == nil else {
-            logger.info("characteristic \(characteristic) error: \(error!)")
+            logger.info("peripheral \(peripheral.identifierWithName) characteristic \(characteristic) error: \(error!)")
             return
         }
 
@@ -315,7 +315,7 @@ class BTLEListener: NSObject, Listener, CBCentralManagerDelegate, CBPeripheralDe
     
     func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?) {
         guard error == nil else {
-            logger.info("error: \(error!)")
+            logger.info("peripheral \(peripheral.identifierWithName) error: \(error!)")
             return
         }
 
