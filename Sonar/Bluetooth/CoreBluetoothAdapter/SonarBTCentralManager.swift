@@ -19,21 +19,21 @@ protocol SonarBTCentralManagerDelegate: class {
     func centralManager(_ central: SonarBTCentralManager, connectionEventDidOccur event: SonarBTConnectionEvent, for peripheral: SonarBTPeripheral)
 }
 
-public let SonarBTCentralManagerOptionShowPowerAlertKey = CBCentralManagerOptionShowPowerAlertKey
-public let SonarBTCentralManagerOptionRestoreIdentifierKey = CBCentralManagerOptionRestoreIdentifierKey
-public let SonarBTCentralManagerScanOptionAllowDuplicatesKey = CBCentralManagerScanOptionAllowDuplicatesKey
-public let SonarBTCentralManagerScanOptionSolicitedServiceUUIDsKey = CBCentralManagerScanOptionSolicitedServiceUUIDsKey
-public let SonarBTConnectPeripheralOptionNotifyOnConnectionKey = CBConnectPeripheralOptionNotifyOnConnectionKey
-public let SonarBTConnectPeripheralOptionNotifyOnDisconnectionKey = CBConnectPeripheralOptionNotifyOnDisconnectionKey
-public let SonarBTConnectPeripheralOptionNotifyOnNotificationKey = CBConnectPeripheralOptionNotifyOnNotificationKey
-public let SonarBTConnectPeripheralOptionStartDelayKey = CBConnectPeripheralOptionStartDelayKey
+let SonarBTCentralManagerOptionShowPowerAlertKey = CBCentralManagerOptionShowPowerAlertKey
+let SonarBTCentralManagerOptionRestoreIdentifierKey = CBCentralManagerOptionRestoreIdentifierKey
+let SonarBTCentralManagerScanOptionAllowDuplicatesKey = CBCentralManagerScanOptionAllowDuplicatesKey
+let SonarBTCentralManagerScanOptionSolicitedServiceUUIDsKey = CBCentralManagerScanOptionSolicitedServiceUUIDsKey
+let SonarBTConnectPeripheralOptionNotifyOnConnectionKey = CBConnectPeripheralOptionNotifyOnConnectionKey
+let SonarBTConnectPeripheralOptionNotifyOnDisconnectionKey = CBConnectPeripheralOptionNotifyOnDisconnectionKey
+let SonarBTConnectPeripheralOptionNotifyOnNotificationKey = CBConnectPeripheralOptionNotifyOnNotificationKey
+let SonarBTConnectPeripheralOptionStartDelayKey = CBConnectPeripheralOptionStartDelayKey
 @available(iOS 13.0, *)
-public let SonarBTConnectPeripheralOptionEnableTransportBridgingKey = CBConnectPeripheralOptionEnableTransportBridgingKey
+let SonarBTConnectPeripheralOptionEnableTransportBridgingKey = CBConnectPeripheralOptionEnableTransportBridgingKey
 @available(iOS 13.0, *)
-public let SonarBTConnectPeripheralOptionRequiresANCS = CBConnectPeripheralOptionRequiresANCS
-public let SonarBTCentralManagerRestoredStatePeripheralsKey = CBCentralManagerRestoredStatePeripheralsKey
-public let SonarBTCentralManagerRestoredStateScanServicesKey = CBCentralManagerRestoredStateScanServicesKey
-public let SonarBTCentralManagerRestoredStateScanOptionsKey = CBCentralManagerRestoredStateScanOptionsKey
+let SonarBTConnectPeripheralOptionRequiresANCS = CBConnectPeripheralOptionRequiresANCS
+let SonarBTCentralManagerRestoredStatePeripheralsKey = CBCentralManagerRestoredStatePeripheralsKey
+let SonarBTCentralManagerRestoredStateScanServicesKey = CBCentralManagerRestoredStateScanServicesKey
+let SonarBTCentralManagerRestoredStateScanOptionsKey = CBCentralManagerRestoredStateScanOptionsKey
 
 typealias SonarBTManagerState = CBManagerState
 class SonarBTCentralManager: NSObject {
@@ -41,7 +41,7 @@ class SonarBTCentralManager: NSObject {
     weak var delegate: SonarBTCentralManagerDelegate?
     weak var peripheralDelegate: SonarBTPeripheralDelegate?
     
-    public init(delegate: SonarBTCentralManagerDelegate?, peripheralDelegate: SonarBTPeripheralDelegate?, queue: DispatchQueue?, options: [String : Any]? = nil) {
+    init(delegate: SonarBTCentralManagerDelegate?, peripheralDelegate: SonarBTPeripheralDelegate?, queue: DispatchQueue?, options: [String : Any]? = nil) {
         self.delegate = delegate
         self.peripheralDelegate = peripheralDelegate
         super.init()

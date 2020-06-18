@@ -20,14 +20,14 @@ protocol SonarBTPeripheralManagerDelegate: class {
     func peripheralManager(_ peripheral: SonarBTPeripheralManager, didReceiveRead request: SonarBTATTRequest)
 }
 
-public let SonarBTPeripheralManagerOptionShowPowerAlertKey = CBPeripheralManagerOptionShowPowerAlertKey
-public let SonarBTPeripheralManagerOptionRestoreIdentifierKey = CBPeripheralManagerOptionRestoreIdentifierKey
-public let SonarBTPeripheralManagerRestoredStateServicesKey = CBPeripheralManagerRestoredStateServicesKey
-public let SonarBTPeripheralManagerRestoredStateAdvertisementDataKey = CBPeripheralManagerRestoredStateAdvertisementDataKey
+let SonarBTPeripheralManagerOptionShowPowerAlertKey = CBPeripheralManagerOptionShowPowerAlertKey
+let SonarBTPeripheralManagerOptionRestoreIdentifierKey = CBPeripheralManagerOptionRestoreIdentifierKey
+let SonarBTPeripheralManagerRestoredStateServicesKey = CBPeripheralManagerRestoredStateServicesKey
+let SonarBTPeripheralManagerRestoredStateAdvertisementDataKey = CBPeripheralManagerRestoredStateAdvertisementDataKey
 
 typealias SonarBTPeripheralManagerAuthorizationStatus = CBPeripheralManagerAuthorizationStatus
 class SonarBTPeripheralManager: NSObject {
-    public weak var delegate: SonarBTPeripheralManagerDelegate?
+    weak var delegate: SonarBTPeripheralManagerDelegate?
     private var cbPeripheralManager: CBPeripheralManager!
     
     init(delegate: SonarBTPeripheralManagerDelegate?, queue: DispatchQueue?, options: [String : Any]? = nil) {

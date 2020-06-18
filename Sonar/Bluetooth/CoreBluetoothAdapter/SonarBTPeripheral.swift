@@ -22,7 +22,7 @@ protocol SonarBTPeripheralDelegate: class {
 typealias SonarBTPeripheralState = CBPeripheralState
 class SonarBTPeripheral: NSObject {
     private var cbPeripheral: CBPeripheral!
-    public weak var delegate: SonarBTPeripheralDelegate?
+    weak var delegate: SonarBTPeripheralDelegate?
     
     class func wrapperFor(_ peripheral: CBPeripheral, delegate: SonarBTPeripheralDelegate?) -> SonarBTPeripheral {
         return peripheral.delegate as? SonarBTPeripheral ?? SonarBTPeripheral(peripheral, delegate: delegate)

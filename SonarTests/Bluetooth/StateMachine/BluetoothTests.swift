@@ -332,28 +332,40 @@ class SequenceBuilder {
         
         let coordinator = BluetoothCoordinator(broadcaster: broadcaster, scanner: scanner, readerDelegate: contactEventsStorage)
         
-        return SequenceBuilder(broadcaster: broadcaster, peripheralManager: peripheralManager, scanner: scanner, centralManager: centralManager, contactEventsStorage: contactEventsStorage)
+        return SequenceBuilder(
+            broadcaster: broadcaster,
+            peripheralManager: peripheralManager,
+            scanner: scanner,
+            centralManager: centralManager,
+            contactEventsStorage: contactEventsStorage
+        )
     }
-    
-    init(broadcaster: BTBroadcaster, peripheralManager: FakeBTPeripheralManager, scanner: BTScanner, centralManager: FakeBTCentralManager, contactEventsStorage: ContactEventsStorage) {
+
+    private init(
+        broadcaster: BTBroadcaster,
+        peripheralManager: FakeBTPeripheralManager,
+        scanner: BTScanner,
+        centralManager: FakeBTCentralManager,
+        contactEventsStorage: ContactEventsStorage
+    ) {
         self.broadcaster = broadcaster
         self.peripheralManager = peripheralManager
         self.scanner = scanner
         self.centralManager = centralManager
         self.contactEventsStorage = contactEventsStorage
     }
-    
-    func readsRSSIValues(_ rssiValues: Int...) -> SequenceBuilder {
-        centralManager.connectedPeripheralsWillSendRSSIs(rssiValues)
-        return self
-    }
-    
+
     func powerOn() -> SequenceBuilder {
         centralManager.setState(.poweredOn)
         peripheralManager.setState(.poweredOn)
         return self
     }
-    
+
+    func readsRSSIValues(_ rssiValues: Int...) -> SequenceBuilder {
+        centralManager.connectedPeripheralsWillSendRSSIs(rssiValues)
+        return self
+    }
+
     func verify(_ verificationClosure: (_ contactEventsStorage: ContactEventsStorage) -> Void) {
         scanner.centralManagerDidUpdateState(centralManager)
         broadcaster.peripheralManagerDidUpdateState(peripheralManager)
