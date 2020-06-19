@@ -51,7 +51,6 @@ jobs:
   test:
     needs: build
     runs-on:
-      - self-hosted
       - macos
     strategy:
       matrix:
