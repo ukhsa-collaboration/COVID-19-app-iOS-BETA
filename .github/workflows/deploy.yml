@@ -6,7 +6,6 @@ on:
 jobs:
   upload:
     runs-on:
-      - self-hosted
       - macos
     outputs:
       build-number: ${{ steps.tag-commit.outputs.build }}
@@ -119,7 +118,6 @@ jobs:
   update-backlog:
     runs-on:
     - linux
-    - self-hosted
     - aws
     needs: upload
     if: github.event.deployment.environment == 'internal'
@@ -151,7 +149,6 @@ jobs:
   tag-as-supported:
     runs-on:
     - linux
-    - self-hosted
     - aws
 
     needs: upload

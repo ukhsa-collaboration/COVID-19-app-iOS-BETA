@@ -7,7 +7,6 @@ on:
 jobs:
   clean-artifacts:
     runs-on:
-      - self-hosted
       - macos
     timeout-minutes: 10
     steps:

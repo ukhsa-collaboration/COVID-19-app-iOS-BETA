@@ -8,7 +8,6 @@ on:
 jobs:
   build:
     runs-on:
-      - self-hosted
       - macos
     strategy:
       matrix:
@@ -152,7 +151,6 @@ jobs:
     needs: test
     runs-on:
       - linux
-      - self-hosted
       - aws
 
     container: pactfoundation/pact-cli
@@ -173,7 +171,6 @@ jobs:
   merge-to-internal:
     needs: test
     runs-on:
-      - self-hosted
       - macos
     if: github.ref == 'refs/heads/master'
     steps:
@@ -204,7 +201,6 @@ jobs:
   notify:
     needs: [build, test, merge-to-internal]
     runs-on:
-      - self-hosted
       - macos
     if: always()
     steps:
