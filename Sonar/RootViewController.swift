@@ -39,8 +39,17 @@ class RootViewController: UIViewController {
         return stack
     }
     
-    let stackView: UIStackView = {
-        let stackView = UIStackView()
+    lazy var stackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [
+            logoStrapline,
+            screenImage,
+            titleLabel,
+            trialOverText,
+            iFeelUnwellButton,
+            howToUninstallButton,
+            aboutTheAppButton
+        ])
+        
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.layoutMargins = UIEdgeInsets(top: 8, left: 20, bottom: 20, right: 20)
@@ -64,6 +73,12 @@ class RootViewController: UIViewController {
     let titleLabel: UILabel = UILabel(textStyle: .largeTitle, text: "This app is no longer in use")
     
     let trialOverText = UILabel(textStyle: .body, text: "The Isle of Wight trial is now complete and the app is no longer operational. Please uninstall the app. Thank you for participating in the trial and playing a vital role in supporting the NHS.")
+    
+    let iFeelUnwellButton = LinkButton(title: "I feel unwell")
+    
+    let howToUninstallButton = LinkButton(title: "How to uninstall the app")
+    
+    let aboutTheAppButton = LinkButton(title: "About the app")
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,11 +87,6 @@ class RootViewController: UIViewController {
         
         let safeArea = view.safeAreaLayoutGuide
         let contentLayoutGuide = scrollView.contentLayoutGuide
-        
-        stackView.addArrangedSubview(logoStrapline)
-        stackView.addArrangedSubview(screenImage)
-        stackView.addArrangedSubview(titleLabel)
-        stackView.addArrangedSubview(trialOverText)
 
         scrollView.addSubview(stackView)
         view.addSubview(scrollView)
@@ -104,5 +114,6 @@ extension UILabel {
         font = UIFont.preferredFont(forTextStyle: textStyle)
         textColor = UIColor.nhs.text
         numberOfLines = 0
+        adjustsFontForContentSizeCategory = true
     }
 }
