@@ -1,9 +1,0 @@
-PRODUCT_BUNDLE_IDENTIFIER = uk.nhs.nhsx.SonarTests
-INFOPLIST_FILE = SonarTests/Info.plist
-
-CODE_SIGN_STYLE = Automatic
-
-BUNDLE_LOADER = $(TEST_HOST)
-PRODUCT_NAME = $(TARGET_NAME)
-LD_RUNPATH_SEARCH_PATHS = $(inherited) @executable_path/Frameworks @loader_path/Frameworks
-TEST_HOST = $(BUILT_PRODUCTS_DIR)/Sonar.app/Sonar

@@ -15,7 +15,7 @@
                   <BuildableReference
                      BuildableIdentifier = "primary"
                      BlueprintIdentifier = "B7363DD22468B35700193E04"
-                     BuildableName = "SonarPactTests.xctest"
+                     BuildableName = ".xctest"
                      BlueprintName = "SonarPactTests"
                      ReferencedContainer = "container:Sonar.xcodeproj">
                   </BuildableReference>
@@ -33,7 +33,7 @@
                   <BuildableReference
                      BuildableIdentifier = "primary"
                      BlueprintIdentifier = "B7363DD22468B35700193E04"
-                     BuildableName = "SonarPactTests.xctest"
+                     BuildableName = ".xctest"
                      BlueprintName = "SonarPactTests"
                      ReferencedContainer = "container:Sonar.xcodeproj">
                   </BuildableReference>
@@ -74,7 +74,7 @@
                   <BuildableReference
                      BuildableIdentifier = "primary"
                      BlueprintIdentifier = "B7363DD22468B35700193E04"
-                     BuildableName = "SonarPactTests.xctest"
+                     BuildableName = ".xctest"
                      BlueprintName = "SonarPactTests"
                      ReferencedContainer = "container:Sonar.xcodeproj">
                   </BuildableReference>
@@ -92,7 +92,7 @@
                   <BuildableReference
                      BuildableIdentifier = "primary"
                      BlueprintIdentifier = "B7363DD22468B35700193E04"
-                     BuildableName = "SonarPactTests.xctest"
+                     BuildableName = ".xctest"
                      BlueprintName = "SonarPactTests"
                      ReferencedContainer = "container:Sonar.xcodeproj">
                   </BuildableReference>
@@ -106,7 +106,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B7363DD22468B35700193E04"
-               BuildableName = "SonarPactTests.xctest"
+               BuildableName = ".xctest"
                BlueprintName = "SonarPactTests"
                ReferencedContainer = "container:Sonar.xcodeproj">
             </BuildableReference>

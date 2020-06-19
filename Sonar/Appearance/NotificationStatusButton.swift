@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Logging
 
 //@IBDesignable
 class NotificationStatusButton: ButtonWithDynamicType {

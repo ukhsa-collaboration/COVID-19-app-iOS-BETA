@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Logging
 
 //@IBDesignable
 class PrimaryButton: ButtonWithDynamicType {
@@ -62,5 +61,3 @@ extension PrimaryButton: UpdatesBasedOnAccessibilityDisplayChanges {
         updateForAccessibility()
     }
 }
-
-private let logger = Logger(label: "PrimaryButton")

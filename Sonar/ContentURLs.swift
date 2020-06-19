@@ -27,10 +27,6 @@ struct ContentURLs {
     private let status: StatusesURLs
     private let bookTestBase: URL
 
-    func currentAdvice(for statusState: StatusState) -> URL {
-        currentStatusURLs(for: statusState).currentAdvice
-    }
-    
     func bookTest(referenceCode: String?) -> URL {
         guard let referenceCode = referenceCode else { return bookTestBase }
         var components = URLComponents(url: bookTestBase, resolvingAgainstBaseURL: false)!
@@ -41,16 +37,6 @@ struct ContentURLs {
         
         components.queryItems?.append(URLQueryItem(name: "ctaToken", value: referenceCode))
         return components.url!
-    }
-
-    private func currentStatusURLs(for statusState: StatusState) -> StatusURLs {
-        switch statusState {
-        case .ok: return status.ok
-        case .symptomatic: return status.symptomatic
-        case .exposed: return status.exposed
-        case .positive: return status.positive
-        case .exposedSymptomatic: return status.exposedSymptomatic
-        }
     }
 }
 

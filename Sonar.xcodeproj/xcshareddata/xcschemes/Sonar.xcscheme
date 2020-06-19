@@ -43,7 +43,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "214209BE2422276800C7BFF3"
-               BuildableName = "SonarTests.xctest"
+               BuildableName = ".xctest"
                BlueprintName = "SonarTests"
                ReferencedContainer = "container:Sonar.xcodeproj">
             </BuildableReference>
@@ -53,7 +53,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "895D9DDD2437383300573D4D"
-               BuildableName = "SonarUITests.xctest"
+               BuildableName = ".xctest"
                BlueprintName = "SonarUITests"
                ReferencedContainer = "container:Sonar.xcodeproj">
             </BuildableReference>

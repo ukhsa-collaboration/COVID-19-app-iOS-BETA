@@ -45,7 +45,7 @@ class LinkButton: UIControl {
     private func setUp() {
         isAccessibilityElement = true
         accessibilityTraits = .link
-        accessibilityHint = "Opens in your browser".localized
+        accessibilityHint = "Opens in your browser"
         externalLinkImageView.adjustsImageSizeForAccessibilityContentSizeCategory = true
 
         backgroundColor = .clear
