@@ -70,7 +70,7 @@ class RootViewController: UIViewController {
         return screenImage
     }()
     
-    let titleLabel: UILabel = UILabel(textStyle: .largeTitle, text: "This app is no longer in use")
+    let titleLabel: UILabel = UILabel(accessibilityTraits: .header, textStyle: .largeTitle, text: "This app is no longer in use")
     
     let trialOverText = UILabel(textStyle: .body, text: "The Isle of Wight trial is now complete and the app is no longer operational. Please uninstall the app. Thank you for participating in the trial and playing a vital role in supporting the NHS.")
     
@@ -123,7 +123,7 @@ class RootViewController: UIViewController {
 }
 
 extension UILabel {
-    convenience init(textStyle: UIFont.TextStyle, text: String) {
+    convenience init(accessibilityTraits: UIAccessibilityTraits = [], textStyle: UIFont.TextStyle, text: String) {
         self.init()
         translatesAutoresizingMaskIntoConstraints = false
         self.text = text
@@ -131,5 +131,6 @@ extension UILabel {
         textColor = UIColor.nhs.text
         numberOfLines = 0
         adjustsFontForContentSizeCategory = true
+        self.accessibilityTraits = accessibilityTraits
     }
 }
