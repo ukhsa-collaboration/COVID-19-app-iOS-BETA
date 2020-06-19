@@ -14,10 +14,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let rootVC = UIViewController()
+        let rootViewController = RootViewController()
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = rootVC
+        window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()
         return true
     }

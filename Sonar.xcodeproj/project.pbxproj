@@ -37,6 +37,7 @@
 		DD521EBB249CD69A00F058DA /* UpdatesBasedOnAccessibilityDisplayChanges.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD521EA6249CD69900F058DA /* UpdatesBasedOnAccessibilityDisplayChanges.swift */; };
 		DD521EBC249CD69A00F058DA /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD521EA7249CD69900F058DA /* Appearance.swift */; };
 		DD521EBD249CD69A00F058DA /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD521EA8249CD69900F058DA /* ErrorView.swift */; };
+		DD521EBF249CE8A400F058DA /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD521EBE249CE8A400F058DA /* RootViewController.swift */; };
 		F6053A102472F69D0006939E /* URLs.plist in Resources */ = {isa = PBXBuildFile; fileRef = F6053A0F2472F69D0006939E /* URLs.plist */; };
 		F6053A122472F7170006939E /* ContentURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6053A112472F7170006939E /* ContentURLs.swift */; };
 		F618A564245C682500D89517 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F618A561245C682500D89517 /* Environment.swift */; };
@@ -84,6 +85,7 @@
 		DD521EA6249CD69900F058DA /* UpdatesBasedOnAccessibilityDisplayChanges.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdatesBasedOnAccessibilityDisplayChanges.swift; sourceTree = "<group>"; };
 		DD521EA7249CD69900F058DA /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		DD521EA8249CD69900F058DA /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		DD521EBE249CE8A400F058DA /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		F60497602451FA42002B8503 /* Environment.swift.erb */ = {isa = PBXFileReference; lastKnownFileType = text; path = Environment.swift.erb; sourceTree = "<group>"; };
 		F604976224521574002B8503 /* Sonar.xcconfig.sample */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Sonar.xcconfig.sample; sourceTree = "<group>"; };
 		F6049764245215A3002B8503 /* environment.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = environment.json; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 				6FC63C3C241641BA007C8BF3 /* Info.plist */,
 				F6053A0F2472F69D0006939E /* URLs.plist */,
 				6FC63C30241641B8007C8BF3 /* AppDelegate.swift */,
+				DD521EBE249CE8A400F058DA /* RootViewController.swift */,
 				F6053A112472F7170006939E /* ContentURLs.swift */,
 				6FC63C37241641BA007C8BF3 /* Assets.xcassets */,
 				A1E7A0582420028B0078174D /* NHS Colors.xcassets */,
@@ -372,6 +375,7 @@
 				DD521EBB249CD69A00F058DA /* UpdatesBasedOnAccessibilityDisplayChanges.swift in Sources */,
 				DD521EAB249CD69900F058DA /* AutoscalingWidthView.swift in Sources */,
 				DD521EB9249CD69A00F058DA /* Colors.swift in Sources */,
+				DD521EBF249CE8A400F058DA /* RootViewController.swift in Sources */,
 				DD521EBC249CD69A00F058DA /* Appearance.swift in Sources */,
 				DD521EAF249CD69900F058DA /* LinkButton.swift in Sources */,
 				DD521EB2249CD69900F058DA /* OnboardingLogoStrapline.swift in Sources */,
