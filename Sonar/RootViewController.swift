@@ -2,234 +2,135 @@
 //  RootViewController.swift
 //  Sonar
 //
-//  Created by NHSX on 4/6/20.
+//  Created by NHSX on 19/06/2020
 //  Copyright © 2020 NHSX. All rights reserved.
 //
 
 import UIKit
 
 class RootViewController: UIViewController {
-
-    private var persistence: Persisting! = nil
-    private var authorizationManager: AuthorizationManaging! = nil
-    private var remoteNotificationManager: RemoteNotificationManager! = nil
-    private var notificationCenter: NotificationCenter! = nil
-    private var registrationService: RegistrationService! = nil
-    private var bluetoothNursery: BluetoothNursery!
-    private var onboardingCoordinator: OnboardingCoordinating!
-    private var monitor: AppMonitoring!
-    private var session: Session!
-    private var contactEventsUploader: ContactEventsUploading!
-    private var uiQueue: TestableQueue! = nil
-    private var setupChecker: SetupChecker!
-    private var statusStateMachine: StatusStateMachining!
-    private var urlOpener: TestableUrlOpener!
-    private var accessibilityChangeNotifier: AccessibilityChangeNotifier!
-    private weak var presentedSetupErrorViewController: UIViewController? = nil
-
-    private var statusViewController: StatusViewController!
-
-    func inject(
-        persistence: Persisting,
-        authorizationManager: AuthorizationManaging,
-        remoteNotificationManager: RemoteNotificationManager,
-        notificationCenter: NotificationCenter,
-        registrationService: RegistrationService,
-        bluetoothNursery: BluetoothNursery,
-        onboardingCoordinator: OnboardingCoordinating,
-        monitor: AppMonitoring,
-        session: Session,
-        contactEventsUploader: ContactEventsUploading,
-        linkingIdManager: LinkingIdManaging,
-        statusStateMachine: StatusStateMachining,
-        uiQueue: TestableQueue,
-        urlOpener: TestableUrlOpener,
-        drawerMailbox: DrawerMailboxing
-    ) {
-        self.persistence = persistence
-        self.authorizationManager = authorizationManager
-        self.remoteNotificationManager = remoteNotificationManager
-        self.notificationCenter = notificationCenter
-        self.registrationService = registrationService
-        self.bluetoothNursery = bluetoothNursery
-        self.onboardingCoordinator = onboardingCoordinator
-        self.monitor = monitor
-        self.session = session
-        self.contactEventsUploader = contactEventsUploader
-        self.statusStateMachine = statusStateMachine
-        self.uiQueue = uiQueue
+    var logoStrapline: UIView {
+        let logoView = UIImageView(image: UIImage(named: "NHS_Logo"))
+        logoView.contentMode = .scaleAspectFit
         
-        statusViewController = StatusViewController.instantiate()
-        statusViewController.inject(
-            statusStateMachine: statusStateMachine,
-            persistence: persistence,
-            linkingIdManager: linkingIdManager,
-            registrationService: registrationService,
-            notificationCenter: notificationCenter,
-            drawerMailbox: drawerMailbox,
-            localeProvider: AutoupdatingCurrentLocaleProvider()
-        )
+        let label = UILabel()
+        label.adjustsFontForContentSizeCategory = false
+        label.font = UIFont.boldSystemFont(ofSize: 17.0)
+        label.text = "COVID-19"
+        label.textColor = UIColor.nhs.blue
         
-        setupChecker = SetupChecker(authorizationManager: authorizationManager, bluetoothNursery: bluetoothNursery)
+        // Hack to left-align the content of the stackview.
+        let spacerView = UIView()
+        spacerView.setContentHuggingPriority(.defaultLow, for: .horizontal)
         
-        notificationCenter.addObserver(self, selector: #selector(applicationDidBecomeActive(_:)), name: UIApplication.didBecomeActiveNotification, object: nil)
-        accessibilityChangeNotifier = AccessibilityChangeNotifier(
-            notificationCenter: notificationCenter,
-            uiQueue: uiQueue,
-            rootViewController: self
-        )
-    }
-
-    deinit {
-        notificationCenter.removeObserver(self)
-        remoteNotificationManager.dispatcher.removeHandler(forType: .status)
+        let stack = UIStackView(arrangedSubviews: [logoView, label, spacerView])
+        stack.alignment = .center
+        stack.distribution = .fill
+        stack.spacing = 16
+        stack.accessibilityLabel = label.text
+        
+        if #available(iOS 13.0, *) {
+            stack.showsLargeContentViewer = true
+            stack.largeContentImage = UIImage(named: "NHS-Logo-Template")
+            stack.largeContentTitle = "COVID-19"
+            stack.addInteraction(UILargeContentViewerInteraction())
+        }
+        
+        return stack
     }
     
+    lazy var stackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [
+            logoStrapline,
+            screenImage,
+            titleLabel,
+            trialOverText,
+            iFeelUnwellButton,
+            howToUninstallButton,
+            aboutTheAppButton
+        ])
+        
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.spacing = 20
+        return stackView
+    }()
+    
+    let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
+    
+    let screenImage: UIImageView = {
+        let screenImage = UIImageView(image: UIImage(named: "Onboarding_protect"))
+        screenImage.contentMode = .scaleAspectFit
+        return screenImage
+    }()
+    
+    let titleLabel: UILabel = UILabel(accessibilityTraits: .header, textStyle: .largeTitle, text: "This app is no longer in use")
+    
+    let trialOverText = UILabel(textStyle: .body, text: "The Isle of Wight trial is now complete and the app is no longer operational. Please uninstall the app. Thank you for participating in the trial and playing a vital role in supporting the NHS.")
+    
+    let iFeelUnwellButton = LinkButton(title: "I feel unwell")
+    
+    let howToUninstallButton = LinkButton(title: "How to uninstall the app")
+    
+    let aboutTheAppButton = LinkButton(title: "About the app")
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.backgroundColor = UIColor.nhs.grey.five
+        
+        let safeArea = view.safeAreaLayoutGuide
+        let contentLayoutGuide = scrollView.contentLayoutGuide
 
-        showFirstView()
+        scrollView.addSubview(stackView)
+        view.addSubview(scrollView)
+        
+        NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: safeArea.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            stackView.topAnchor.constraint(equalTo: contentLayoutGuide.topAnchor),
+            stackView.leadingAnchor.constraint(equalTo: contentLayoutGuide.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: contentLayoutGuide.trailingAnchor),
+            stackView.bottomAnchor.constraint(equalTo: contentLayoutGuide.bottomAnchor),
+            stackView.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor)
+        ])
+        
+        iFeelUnwellButton.addTarget(self, action: #selector(iFeelUnwellButtonTapped), for: .touchUpInside)
+        howToUninstallButton.addTarget(self, action: #selector(howToUninstallButtonTapped), for: .touchUpInside)
+        aboutTheAppButton.addTarget(self, action: #selector(aboutTheAppButtonTapped), for: .touchUpInside)
     }
     
-    // MARK: - Routing
-    func showFirstView() {
-        show(viewController: UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateInitialViewController()!)
-        
-        let navigationController = UINavigationController()
-        navigationController.pushViewController(self.statusViewController, animated: false)
-
-        onboardingCoordinator.determineIsOnboardingRequired { onboardingIsRequired in
-            self.uiQueue.async {
-                if onboardingIsRequired {
-                    let onboardingViewController = OnboardingViewController.instantiate()
-                    let env = OnboardingEnvironment(
-                        persistence: self.persistence,
-                        authorizationManager: self.authorizationManager,
-                        remoteNotificationManager: self.remoteNotificationManager,
-                        notificationCenter: self.notificationCenter
-                    )
-                    
-                    onboardingViewController.inject(
-                        env: env,
-                        coordinator: self.onboardingCoordinator,
-                        bluetoothNursery: self.bluetoothNursery,
-                        uiQueue: self.uiQueue
-                    ) { [weak self] in
-                        guard let self = self else { return }
-                        self.monitor.report(.onboardingCompleted)
-                        self.show(viewController: navigationController)
-                        self.checkSetup()
-                    }
-                    
-                    self.show(viewController: onboardingViewController)
-                } else {
-                    self.show(viewController: navigationController)
-                    self.checkSetup()
-                }
-            }
-        }
+    @objc private func iFeelUnwellButtonTapped() {
+        URL(string: "https://faq.covid19.nhs.uk/article/KA-01078/en-us").map { UIApplication.shared.open($0) }
     }
     
-    @objc func applicationDidBecomeActive(_ notification: NSNotification) {
-        guard children.first as? OnboardingViewController == nil else {
-            // The onboarding flow has its own handling for setup problems, and if we present them from here
-            // during onboarding then there will likely be two of them shown at the same time.
-            return
-        }
-        
-        checkSetup()
-    }
-        
-    private func checkSetup() {
-        setupChecker.check { problem in
-            self.uiQueue.sync {
-                self.statusViewController.hasNotificationProblem = (problem == .notificationPermissions)
-                
-                guard let problem = problem else { return self.dismissSetupError() }
-                
-                switch problem {
-                case .bluetoothOff:
-                    let vc = BluetoothOffViewController.instantiate()
-                    self.showSetupError(viewController: vc)
-                case .bluetoothPermissions:
-                    let vc = BluetoothDeniedViewController.instantiate()
-                    self.showSetupError(viewController: vc)
-                case .notificationPermissions:
-                    break
-                }
-            }
-        }
+    @objc private func howToUninstallButtonTapped() {
+        URL(string: "https://faq.covid19.nhs.uk/article/KA-01098/en-us").map { UIApplication.shared.open($0) }
     }
     
-    private func showSetupError(viewController: UIViewController) {
-        if presentedSetupErrorViewController == nil {
-            viewController.modalPresentationStyle = .fullScreen
-            presentedSetupErrorViewController = viewController
-            present(viewController, animated: true)
-        }
+    @objc private func aboutTheAppButtonTapped() {
+        URL(string: "https://faq.covid19.nhs.uk/article/KA-01097/en-us").map { UIApplication.shared.open($0) }
     }
-    
-    private func dismissSetupError() {
-        if self.presentedSetupErrorViewController != nil {
-            self.dismiss(animated: true)
-            presentedSetupErrorViewController = nil
-        }
-    }
-                
-    // MARK: - Debug view controller management
-    
-    #if DEBUG || INTERNAL
-    var previouslyPresentedViewController: UIViewController?
+}
 
-    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-        guard type(of: presentedViewController) != DebugViewController.self else { return }
-        
-        if let vc = presentedViewController {
-            previouslyPresentedViewController = vc
-            dismiss(animated: true)
-        }
-
-        if motion == UIEvent.EventSubtype.motionShake {
-            showDebugView()
-        }
-    }
-
-    @IBAction func unwindFromDebugViewController(unwindSegue: UIStoryboardSegue) {
-        dismiss(animated: true)
-
-        statusViewController.reload()
-
-        if let vc = previouslyPresentedViewController {
-            present(vc, animated: true)
-        }
-    }
-
-    private func showDebugView() {
-        let storyboard = UIStoryboard(name: "Debug", bundle: Bundle(for: Self.self))
-        guard let tabBarVC = storyboard.instantiateInitialViewController() as? UITabBarController,
-            let navVC = tabBarVC.viewControllers?.first as? UINavigationController,
-            let debugVC = navVC.viewControllers.first as? DebugViewController else { return }
-        
-        debugVC.inject(
-            persisting: persistence,
-            bluetoothNursery: bluetoothNursery,
-            contactEventRepository: bluetoothNursery.contactEventRepository,
-            contactEventPersister: bluetoothNursery.contactEventPersister,
-            contactEventsUploader: contactEventsUploader,
-            statusStateMachine: statusStateMachine
-        )
-        
-        present(tabBarVC, animated: true)
-    }
-    #endif
-
-    func show(viewController newChild: UIViewController) {
-        children.first?.willMove(toParent: nil)
-        children.first?.viewIfLoaded?.removeFromSuperview()
-        children.first?.removeFromParent()
-        addChild(newChild)
-        newChild.view.frame = view.bounds
-        view.addSubview(newChild.view)
-        newChild.didMove(toParent: self)
+extension UILabel {
+    convenience init(accessibilityTraits: UIAccessibilityTraits = [], textStyle: UIFont.TextStyle, text: String) {
+        self.init()
+        translatesAutoresizingMaskIntoConstraints = false
+        self.text = text
+        font = UIFont.preferredFont(forTextStyle: textStyle)
+        textColor = UIColor.nhs.text
+        numberOfLines = 0
+        adjustsFontForContentSizeCategory = true
+        self.accessibilityTraits = accessibilityTraits
     }
 }
