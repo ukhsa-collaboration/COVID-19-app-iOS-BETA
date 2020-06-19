@@ -12,7 +12,6 @@ on:
 jobs:
   should-deploy:
     runs-on:
-      - self-hosted
       - macos
     outputs:
       should-deploy: ${{ steps.is-deployed.outputs.exit-code == '1' }}
@@ -32,7 +31,6 @@ jobs:
   bump-build-number:
     needs: should-deploy
     runs-on:
-      - self-hosted
       - macos
     if: needs.should-deploy.outputs.should-deploy == 'true'
     outputs:
@@ -63,7 +61,6 @@ jobs:
       - should-deploy
       - bump-build-number
     runs-on:
-      - self-hosted
       - macos
     strategy:
       matrix:
@@ -88,7 +85,6 @@ jobs:
   notify:
     needs: [should-deploy, deploy]
     runs-on:
-      - self-hosted
       - macos
     if: always()
     steps:

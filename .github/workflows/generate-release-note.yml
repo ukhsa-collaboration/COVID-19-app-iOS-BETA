@@ -7,7 +7,6 @@ on:
 jobs:
   generate-release-note:
     runs-on:
-      - self-hosted
       - linux
       - aws
     steps:
