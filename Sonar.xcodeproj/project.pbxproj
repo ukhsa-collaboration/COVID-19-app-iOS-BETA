@@ -18,24 +18,7 @@
 		8947F833245AD97A00C4F1BB /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8947F832245AD97A00C4F1BB /* Settings.bundle */; };
 		895D9E462437458700573D4D /* AppIcon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 895D9E452437458700573D4D /* AppIcon.xcassets */; };
 		A1E7A0592420028B0078174D /* NHS Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1E7A0582420028B0078174D /* NHS Colors.xcassets */; };
-		DD521EA9249CD69900F058DA /* NotificationStatusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD521E94249CD69900F058DA /* NotificationStatusButton.swift */; };
-		DD521EAA249CD69900F058DA /* OnboardingLogoStrapline.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD521E95249CD69900F058DA /* OnboardingLogoStrapline.xib */; };
-		DD521EAB249CD69900F058DA /* AutoscalingWidthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD521E96249CD69900F058DA /* AutoscalingWidthView.swift */; };
-		DD521EAD249CD69900F058DA /* AutoscalingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD521E98249CD69900F058DA /* AutoscalingImageView.swift */; };
-		DD521EAE249CD69900F058DA /* SpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD521E99249CD69900F058DA /* SpinnerView.swift */; };
-		DD521EB0249CD69900F058DA /* IBView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD521E9B249CD69900F058DA /* IBView.swift */; };
-		DD521EB1249CD69900F058DA /* ButtonWithDynamicType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD521E9C249CD69900F058DA /* ButtonWithDynamicType.swift */; };
-		DD521EB2249CD69900F058DA /* OnboardingLogoStrapline.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD521E9D249CD69900F058DA /* OnboardingLogoStrapline.swift */; };
-		DD521EB3249CD69900F058DA /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD521E9E249CD69900F058DA /* TextField.swift */; };
-		DD521EB4249CD69900F058DA /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD521E9F249CD69900F058DA /* PrimaryButton.swift */; };
-		DD521EB5249CD69A00F058DA /* ErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD521EA0249CD69900F058DA /* ErrorView.xib */; };
-		DD521EB7249CD69A00F058DA /* SmartInvertBorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD521EA2249CD69900F058DA /* SmartInvertBorderView.swift */; };
-		DD521EB8249CD69A00F058DA /* AccessibleErrorLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD521EA3249CD69900F058DA /* AccessibleErrorLabel.swift */; };
 		DD521EB9249CD69A00F058DA /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD521EA4249CD69900F058DA /* Colors.swift */; };
-		DD521EBA249CD69A00F058DA /* UnderlinedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD521EA5249CD69900F058DA /* UnderlinedButton.swift */; };
-		DD521EBB249CD69A00F058DA /* UpdatesBasedOnAccessibilityDisplayChanges.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD521EA6249CD69900F058DA /* UpdatesBasedOnAccessibilityDisplayChanges.swift */; };
-		DD521EBC249CD69A00F058DA /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD521EA7249CD69900F058DA /* Appearance.swift */; };
-		DD521EBD249CD69A00F058DA /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD521EA8249CD69900F058DA /* ErrorView.swift */; };
 		DD521EBF249CE8A400F058DA /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD521EBE249CE8A400F058DA /* RootViewController.swift */; };
 		DD521EC3249CF66600F058DA /* LinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD521EC2249CF66600F058DA /* LinkButton.swift */; };
 		F6053A102472F69D0006939E /* URLs.plist in Resources */ = {isa = PBXBuildFile; fileRef = F6053A0F2472F69D0006939E /* URLs.plist */; };
@@ -65,24 +48,7 @@
 		89896E5F2435F15C00F949EA /* Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Base.xcconfig; sourceTree = "<group>"; };
 		898BA15B2435E28E00EBD35D /* Project.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Project.xcconfig; sourceTree = "<group>"; };
 		A1E7A0582420028B0078174D /* NHS Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "NHS Colors.xcassets"; sourceTree = "<group>"; };
-		DD521E94249CD69900F058DA /* NotificationStatusButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationStatusButton.swift; sourceTree = "<group>"; };
-		DD521E95249CD69900F058DA /* OnboardingLogoStrapline.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OnboardingLogoStrapline.xib; sourceTree = "<group>"; };
-		DD521E96249CD69900F058DA /* AutoscalingWidthView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoscalingWidthView.swift; sourceTree = "<group>"; };
-		DD521E98249CD69900F058DA /* AutoscalingImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoscalingImageView.swift; sourceTree = "<group>"; };
-		DD521E99249CD69900F058DA /* SpinnerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpinnerView.swift; sourceTree = "<group>"; };
-		DD521E9B249CD69900F058DA /* IBView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IBView.swift; sourceTree = "<group>"; };
-		DD521E9C249CD69900F058DA /* ButtonWithDynamicType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonWithDynamicType.swift; sourceTree = "<group>"; };
-		DD521E9D249CD69900F058DA /* OnboardingLogoStrapline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingLogoStrapline.swift; sourceTree = "<group>"; };
-		DD521E9E249CD69900F058DA /* TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
-		DD521E9F249CD69900F058DA /* PrimaryButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
-		DD521EA0249CD69900F058DA /* ErrorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ErrorView.xib; sourceTree = "<group>"; };
-		DD521EA2249CD69900F058DA /* SmartInvertBorderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmartInvertBorderView.swift; sourceTree = "<group>"; };
-		DD521EA3249CD69900F058DA /* AccessibleErrorLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessibleErrorLabel.swift; sourceTree = "<group>"; };
 		DD521EA4249CD69900F058DA /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
-		DD521EA5249CD69900F058DA /* UnderlinedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnderlinedButton.swift; sourceTree = "<group>"; };
-		DD521EA6249CD69900F058DA /* UpdatesBasedOnAccessibilityDisplayChanges.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdatesBasedOnAccessibilityDisplayChanges.swift; sourceTree = "<group>"; };
-		DD521EA7249CD69900F058DA /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
-		DD521EA8249CD69900F058DA /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		DD521EBE249CE8A400F058DA /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		DD521EC2249CF66600F058DA /* LinkButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkButton.swift; sourceTree = "<group>"; };
 		F60497602451FA42002B8503 /* Environment.swift.erb */ = {isa = PBXFileReference; lastKnownFileType = text; path = Environment.swift.erb; sourceTree = "<group>"; };
@@ -186,24 +152,7 @@
 		DD521E93249CD69900F058DA /* Appearance */ = {
 			isa = PBXGroup;
 			children = (
-				DD521E94249CD69900F058DA /* NotificationStatusButton.swift */,
-				DD521E95249CD69900F058DA /* OnboardingLogoStrapline.xib */,
-				DD521E96249CD69900F058DA /* AutoscalingWidthView.swift */,
-				DD521E98249CD69900F058DA /* AutoscalingImageView.swift */,
-				DD521E99249CD69900F058DA /* SpinnerView.swift */,
-				DD521E9B249CD69900F058DA /* IBView.swift */,
-				DD521E9C249CD69900F058DA /* ButtonWithDynamicType.swift */,
-				DD521E9D249CD69900F058DA /* OnboardingLogoStrapline.swift */,
-				DD521E9E249CD69900F058DA /* TextField.swift */,
-				DD521E9F249CD69900F058DA /* PrimaryButton.swift */,
-				DD521EA0249CD69900F058DA /* ErrorView.xib */,
-				DD521EA2249CD69900F058DA /* SmartInvertBorderView.swift */,
-				DD521EA3249CD69900F058DA /* AccessibleErrorLabel.swift */,
 				DD521EA4249CD69900F058DA /* Colors.swift */,
-				DD521EA5249CD69900F058DA /* UnderlinedButton.swift */,
-				DD521EA6249CD69900F058DA /* UpdatesBasedOnAccessibilityDisplayChanges.swift */,
-				DD521EA7249CD69900F058DA /* Appearance.swift */,
-				DD521EA8249CD69900F058DA /* ErrorView.swift */,
 			);
 			path = Appearance;
 			sourceTree = "<group>";
@@ -317,11 +266,9 @@
 				F758B8BE242CB856003AE16D /* Localizable.strings in Resources */,
 				6FC63C38241641BA007C8BF3 /* Assets.xcassets in Resources */,
 				F618A566245C682500D89517 /* GoogleService-Info.plist in Resources */,
-				DD521EAA249CD69900F058DA /* OnboardingLogoStrapline.xib in Resources */,
 				895D9E462437458700573D4D /* AppIcon.xcassets in Resources */,
 				0963C1FA2488182300EF5B68 /* trigger-deploys.yml in Resources */,
 				0963C1F92488182300EF5B68 /* deploy.yml in Resources */,
-				DD521EB5249CD69A00F058DA /* ErrorView.xib in Resources */,
 				F6053A102472F69D0006939E /* URLs.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -355,26 +302,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD521EAE249CD69900F058DA /* SpinnerView.swift in Sources */,
-				DD521EA9249CD69900F058DA /* NotificationStatusButton.swift in Sources */,
-				DD521EBA249CD69A00F058DA /* UnderlinedButton.swift in Sources */,
-				DD521EBD249CD69A00F058DA /* ErrorView.swift in Sources */,
 				F618A564245C682500D89517 /* Environment.swift in Sources */,
-				DD521EB7249CD69A00F058DA /* SmartInvertBorderView.swift in Sources */,
-				DD521EB0249CD69900F058DA /* IBView.swift in Sources */,
-				DD521EB1249CD69900F058DA /* ButtonWithDynamicType.swift in Sources */,
 				DD521EC3249CF66600F058DA /* LinkButton.swift in Sources */,
-				DD521EB3249CD69900F058DA /* TextField.swift in Sources */,
-				DD521EB4249CD69900F058DA /* PrimaryButton.swift in Sources */,
-				DD521EB8249CD69A00F058DA /* AccessibleErrorLabel.swift in Sources */,
-				DD521EAD249CD69900F058DA /* AutoscalingImageView.swift in Sources */,
 				6FC63C31241641B8007C8BF3 /* AppDelegate.swift in Sources */,
-				DD521EBB249CD69A00F058DA /* UpdatesBasedOnAccessibilityDisplayChanges.swift in Sources */,
-				DD521EAB249CD69900F058DA /* AutoscalingWidthView.swift in Sources */,
 				DD521EB9249CD69A00F058DA /* Colors.swift in Sources */,
 				DD521EBF249CE8A400F058DA /* RootViewController.swift in Sources */,
-				DD521EBC249CD69A00F058DA /* Appearance.swift in Sources */,
-				DD521EB2249CD69900F058DA /* OnboardingLogoStrapline.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
