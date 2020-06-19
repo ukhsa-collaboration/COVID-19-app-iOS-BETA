@@ -103,6 +103,22 @@ class RootViewController: UIViewController {
             stackView.bottomAnchor.constraint(equalTo: contentLayoutGuide.bottomAnchor),
             stackView.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor)
         ])
+        
+        iFeelUnwellButton.addTarget(self, action: #selector(iFeelUnwellButtonTapped), for: .touchUpInside)
+        howToUninstallButton.addTarget(self, action: #selector(howToUninstallButtonTapped), for: .touchUpInside)
+        aboutTheAppButton.addTarget(self, action: #selector(aboutTheAppButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc private func iFeelUnwellButtonTapped() {
+        URL(string: "https://faq.covid19.nhs.uk/article/KA-01078/en-us").map { UIApplication.shared.open($0) }
+    }
+    
+    @objc private func howToUninstallButtonTapped() {
+        URL(string: "https://faq.covid19.nhs.uk/article/KA-01098/en-us").map { UIApplication.shared.open($0) }
+    }
+    
+    @objc private func aboutTheAppButtonTapped() {
+        URL(string: "https://faq.covid19.nhs.uk/article/KA-01097/en-us").map { UIApplication.shared.open($0) }
     }
 }
 
