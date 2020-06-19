@@ -46,7 +46,7 @@ jobs:
           xcodebuild -scheme Sonar -sdk ${SDK} build-for-testing CODE_SIGNING_ALLOWED=NO
 
   merge-to-internal:
-    needs: test
+    needs: build
     runs-on:
       - macos
     if: github.ref == 'refs/heads/master'
@@ -74,20 +74,4 @@ jobs:
           git checkout internal
           git merge master
           git push origin internal
-
-  notify:
-    needs: [build, test, merge-to-internal]
-    runs-on:
-      - macos
-    if: always()
-    steps:
-      - name: Notify Slack on Failure
-        if: github.ref == 'refs/heads/master' && contains(needs.*.result, 'failure')
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.slack_bot_token }}
-        uses: voxmedia/github-action-slack-notify-build@5125947 # v1.1.1
-        with:
-          channel_id: G011ZPSAD4J
-          status: FAILED
-          color: danger
 
