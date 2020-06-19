@@ -21,7 +21,6 @@
 		DD521EB9249CD69A00F058DA /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD521EA4249CD69900F058DA /* Colors.swift */; };
 		DD521EBF249CE8A400F058DA /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD521EBE249CE8A400F058DA /* RootViewController.swift */; };
 		DD521EC3249CF66600F058DA /* LinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD521EC2249CF66600F058DA /* LinkButton.swift */; };
-		F6053A102472F69D0006939E /* URLs.plist in Resources */ = {isa = PBXBuildFile; fileRef = F6053A0F2472F69D0006939E /* URLs.plist */; };
 		F618A564245C682500D89517 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F618A561245C682500D89517 /* Environment.swift */; };
 		F618A566245C682500D89517 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F618A563245C682500D89517 /* GoogleService-Info.plist */; };
 		F758B8BE242CB856003AE16D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F758B8BD242CB856003AE16D /* Localizable.strings */; };
@@ -54,7 +53,6 @@
 		F60497602451FA42002B8503 /* Environment.swift.erb */ = {isa = PBXFileReference; lastKnownFileType = text; path = Environment.swift.erb; sourceTree = "<group>"; };
 		F604976224521574002B8503 /* Sonar.xcconfig.sample */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Sonar.xcconfig.sample; sourceTree = "<group>"; };
 		F6049764245215A3002B8503 /* environment.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = environment.json; sourceTree = "<group>"; };
-		F6053A0F2472F69D0006939E /* URLs.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = URLs.plist; sourceTree = "<group>"; };
 		F618A561245C682500D89517 /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		F618A562245C682500D89517 /* Sonar.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Sonar.xcconfig; sourceTree = "<group>"; };
 		F618A563245C682500D89517 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -125,7 +123,6 @@
 				DD521E93249CD69900F058DA /* Appearance */,
 				F78CEB74242BAC83002254AD /* Sonar.entitlements */,
 				6FC63C3C241641BA007C8BF3 /* Info.plist */,
-				F6053A0F2472F69D0006939E /* URLs.plist */,
 				6FC63C30241641B8007C8BF3 /* AppDelegate.swift */,
 				DD521EBE249CE8A400F058DA /* RootViewController.swift */,
 				DD521EC2249CF66600F058DA /* LinkButton.swift */,
@@ -269,7 +266,6 @@
 				895D9E462437458700573D4D /* AppIcon.xcassets in Resources */,
 				0963C1FA2488182300EF5B68 /* trigger-deploys.yml in Resources */,
 				0963C1F92488182300EF5B68 /* deploy.yml in Resources */,
-				F6053A102472F69D0006939E /* URLs.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
