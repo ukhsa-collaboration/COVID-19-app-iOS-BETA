@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0935CCE6248FE22D0008E868"
-               BuildableName = "RegistrationCanary.app"
+               BuildableName = ".app"
                BlueprintName = "RegistrationCanary"
                ReferencedContainer = "container:Sonar.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0935CCE6248FE22D0008E868"
-            BuildableName = "RegistrationCanary.app"
+            BuildableName = ".app"
             BlueprintName = "RegistrationCanary"
             ReferencedContainer = "container:Sonar.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0935CCE6248FE22D0008E868"
-            BuildableName = "RegistrationCanary.app"
+            BuildableName = ".app"
             BlueprintName = "RegistrationCanary"
             ReferencedContainer = "container:Sonar.xcodeproj">
          </BuildableReference>
