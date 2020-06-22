@@ -12,8 +12,8 @@ jobs:
     strategy:
       matrix:
         run-config:
-          - { sdk: "iphoneos13.4" }
-          - { sdk: "iphonesimulator13.4" }
+          - { sdk: "iphoneos" }
+          - { sdk: "iphonesimulator" }
     steps:
       - name: Checkout Project
         uses: actions/checkout@01aeccc # v2.1.0
