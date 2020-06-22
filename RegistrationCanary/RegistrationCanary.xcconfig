@@ -1,4 +1,0 @@
-#include ".secret/Sonar.xcconfig"
-ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon
-INFOPLIST_FILE = RegistrationCanary/Info.plist
-IPHONEOS_DEPLOYMENT_TARGET = 13.0
