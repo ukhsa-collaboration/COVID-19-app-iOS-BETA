@@ -1,7 +1,6 @@
 //
 // Copyright © 2020 NHSX. All rights reserved.
 //
-
 import UIKit
 
 public class LinkButton: UIControl {
