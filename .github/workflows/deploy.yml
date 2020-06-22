@@ -6,7 +6,7 @@ on:
 jobs:
   upload:
     runs-on:
-      - macos
+      - macos-10.15
     outputs:
       build-number: ${{ steps.tag-commit.outputs.build }}
       tag: ${{ steps.tag-commit.outputs.tag }}

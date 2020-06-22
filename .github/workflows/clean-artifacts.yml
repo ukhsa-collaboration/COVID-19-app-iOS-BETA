@@ -7,7 +7,7 @@ on:
 jobs:
   clean-artifacts:
     runs-on:
-      - macos
+      - macos-10.15
     timeout-minutes: 10
     steps:
       - name: Remove old artifacts

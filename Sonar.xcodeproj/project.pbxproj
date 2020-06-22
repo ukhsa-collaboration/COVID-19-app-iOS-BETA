@@ -41,14 +41,11 @@
 		068B8ABB245C11C0000EAB4C /* clean-artifacts.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "clean-artifacts.yml"; sourceTree = "<group>"; };
 		09285F9B24918885005B2A1C /* RegistrationCanaryEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationCanaryEnvironment.swift; sourceTree = "<group>"; };
 		0963C1F12488182300EF5B68 /* generate-release-note.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = "generate-release-note.yml"; sourceTree = "<group>"; };
-		0963C1F22488182300EF5B68 /* remove-support.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = "remove-support.yml"; sourceTree = "<group>"; };
 		0963C1F32488182300EF5B68 /* ci.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = ci.yml; sourceTree = "<group>"; };
 		0963C1F42488182300EF5B68 /* deploy.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = deploy.yml; sourceTree = "<group>"; };
 		0963C1F52488182300EF5B68 /* trigger-deploys.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = "trigger-deploys.yml"; sourceTree = "<group>"; };
 		0997D055243BDEEC0067346C /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
-		1376F7D8247EA44E00524CEE /* 4_negative_test.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = 4_negative_test.apns; sourceTree = "<group>"; };
 		1377C70424A0BC3D00261001 /* LinkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkButton.swift; sourceTree = "<group>"; };
-		138E50E12477C4E40027F2D3 /* 3_positive_test.apns */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 3_positive_test.apns; sourceTree = "<group>"; };
 		212AB3BA24926C2E0091D92D /* remove-tag.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "remove-tag.yml"; sourceTree = "<group>"; };
 		6FC63C2D241641B8007C8BF3 /* Sonar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sonar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FC63C30241641B8007C8BF3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -62,7 +59,6 @@
 		89896E5F2435F15C00F949EA /* Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Base.xcconfig; sourceTree = "<group>"; };
 		898BA15B2435E28E00EBD35D /* Project.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Project.xcconfig; sourceTree = "<group>"; };
 		A1E7A0582420028B0078174D /* NHS Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "NHS Colors.xcassets"; sourceTree = "<group>"; };
-		DD46B0D4247FC57400FB3B87 /* 2_exposure.apns */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2_exposure.apns; sourceTree = "<group>"; };
 		DD6B15842488072E00C1DE5E /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		F60497602451FA42002B8503 /* Environment.swift.erb */ = {isa = PBXFileReference; lastKnownFileType = text; path = Environment.swift.erb; sourceTree = "<group>"; };
 		F604976224521574002B8503 /* Sonar.xcconfig.sample */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Sonar.xcconfig.sample; sourceTree = "<group>"; };
@@ -70,7 +66,6 @@
 		F618A561245C682500D89517 /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		F618A562245C682500D89517 /* Sonar.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Sonar.xcconfig; sourceTree = "<group>"; };
 		F618A563245C682500D89517 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		F680E702245F7E0800EA6135 /* 1_activation_code.apns */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 1_activation_code.apns; sourceTree = "<group>"; };
 		F68D8FE324476F0B008BAAAA /* beta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = beta.xcconfig; sourceTree = "<group>"; };
 		F68D8FE424477031008BAAAA /* production.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = production.xcconfig; sourceTree = "<group>"; };
 		F68D8FE524477031008BAAAA /* internal.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = internal.xcconfig; sourceTree = "<group>"; };
@@ -129,7 +124,6 @@
 				0963C1F32488182300EF5B68 /* ci.yml */,
 				0963C1F42488182300EF5B68 /* deploy.yml */,
 				0963C1F12488182300EF5B68 /* generate-release-note.yml */,
-				0963C1F22488182300EF5B68 /* remove-support.yml */,
 				0963C1F52488182300EF5B68 /* trigger-deploys.yml */,
 				068B8ABB245C11C0000EAB4C /* clean-artifacts.yml */,
 			);
@@ -168,7 +162,6 @@
 				068B8AB7245C11C0000EAB4C /* .github */,
 				F618A560245C682500D89517 /* .secret */,
 				898BA15A2435E26C00EBD35D /* Configurations */,
-				F680E700245F7E0800EA6135 /* Example Notifications */,
 				F78CEB63242B809B002254AD /* Firebase */,
 				6FC63C2F241641B8007C8BF3 /* Sonar */,
 				21B3D2E62429115600573061 /* Frameworks */,
@@ -223,17 +216,6 @@
 				09285F9B24918885005B2A1C /* RegistrationCanaryEnvironment.swift */,
 			);
 			path = .secret;
-			sourceTree = "<group>";
-		};
-		F680E700245F7E0800EA6135 /* Example Notifications */ = {
-			isa = PBXGroup;
-			children = (
-				F680E702245F7E0800EA6135 /* 1_activation_code.apns */,
-				DD46B0D4247FC57400FB3B87 /* 2_exposure.apns */,
-				138E50E12477C4E40027F2D3 /* 3_positive_test.apns */,
-				1376F7D8247EA44E00524CEE /* 4_negative_test.apns */,
-			);
-			path = "Example Notifications";
 			sourceTree = "<group>";
 		};
 		F68D8FD424476846008BAAAA /* Environments */ = {
