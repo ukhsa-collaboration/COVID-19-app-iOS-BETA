@@ -81,19 +81,3 @@ jobs:
           DEPLOYMENT_PAYLOAD: 'This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}**.\n\nThe commit hash was: _${{ steps.build-version.outputs.commit-sha }}_.'
           DEPLOYMENT_DESCRIPTION: ${{ steps.bump-build-number.outputs.build-number }}
         run: ./bin/create-deployment ${{ matrix.run-config['env'] }}
-
-  notify:
-    needs: [should-deploy, deploy]
-    runs-on:
-      - macos-10.15
-    if: always()
-    steps:
-      - name: Notify Slack on failure
-        if: contains(needs.*.result, 'failure')
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.slack_bot_token }}
-        uses: voxmedia/github-action-slack-notify-build@5125947 # v1.1.1
-        with:
-          channel_id: G011ZPSAD4J
-          status: FAILED
-          color: danger
