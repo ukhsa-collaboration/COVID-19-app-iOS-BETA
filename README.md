@@ -1,6 +1,5 @@
 # NHS COVID-19
 
-![ci](https://github.com/nhsx/sonar-ios/workflows/ci/badge.svg)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 ![Release: BETA](https://img.shields.io/badge/Release-BETA-orange)
 
